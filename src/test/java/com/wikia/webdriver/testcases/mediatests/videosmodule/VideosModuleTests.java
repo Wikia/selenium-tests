@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mediatests.videosmodule;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -15,6 +16,8 @@ public class VideosModuleTests extends NewTestTemplate {
    * Checks if the Videos Module shows up on pages it should, specifically Article and File pages
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
+  @RelatedIssue(issueID = "QAART-722", comment = "won't work on some pages "
+          + ", will pass after few reruns")
   public void VideosModuleTest_001() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -57,6 +60,8 @@ public class VideosModuleTests extends NewTestTemplate {
    * Checks if the Videos Module is not showing any duplicate videos
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_004", "Media"})
+  @RelatedIssue(issueID = "QAART-722", comment = "won't work on some pages "
+          + ", will pass after few reruns")
   public void VideosModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
