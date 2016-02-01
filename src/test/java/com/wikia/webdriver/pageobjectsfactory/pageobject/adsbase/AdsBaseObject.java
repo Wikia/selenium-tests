@@ -346,15 +346,15 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or Turtle
    * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    * @param slotName the name of the slot an ad is going to be inserted into
-   * @param src the source of an ad, for example gpt or remnant
+   * @param src the source of an ad, for example gpt, remnant or empty
    */
   public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String src) {
     String iframeId;
 
-    if(src.equals("")) {
-      iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + src + "/" + slotName + "_0";
-    } else {
+    if(src.isEmpty()) {
       iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + slotName + "_0";
+    } else {
+      iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + src + "/" + slotName + "_0";
     }
 
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
