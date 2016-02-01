@@ -7,7 +7,6 @@
         <classes>
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
-            <class name="com.wikia.webdriver.testcases.admindashboardtests.EditingLocalCssTests"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparisonMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresentMobile"/>
@@ -49,7 +48,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestFloorAdhesion"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestIVWAnalyticsProvider"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsLoggedInUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestOoyalaAds"/>
@@ -78,7 +77,7 @@
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedOutUser"/>
-            <class name="com.wikia.webdriver.testcases.discussions.Loading"/>
+            <class name="com.wikia.webdriver.testcases.discussions.Layout"/>
             <class name="com.wikia.webdriver.testcases.discussions.Navigating"/>
             <class name="com.wikia.webdriver.testcases.discussions.Sharing"/>
             <class name="com.wikia.webdriver.testcases.discussions.Sorting"/>
@@ -176,8 +175,6 @@
             <class name="com.wikia.webdriver.testcases.signuptests.SignUpTests"/>
             <class name="com.wikia.webdriver.testcases.social_buttons_tests.SocialButtonsTests"/>
             <class name="com.wikia.webdriver.testcases.social.MercuryAssetCheck"/>
-            <class name="com.wikia.webdriver.testcases.specialpagestests.CssChromeTests_TwoDrivers"/>
-            <class name="com.wikia.webdriver.testcases.specialpagestests.CssChromeTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditAccountTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.EditingPreferencesTests"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.FilePageTests"/>

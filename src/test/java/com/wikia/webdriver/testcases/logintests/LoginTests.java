@@ -101,7 +101,7 @@ public class LoginTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject(driver).open();
     Helios.deleteAllTokens(User.USER_12);
 
-    driver.navigate().refresh();
+    article.refreshPageAddingCacheBuster();
     Assertion.assertTrue(article.getGlobalNavigation().isUserLoggedOut());
   }
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -10,8 +11,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"Discussions", "Loading"})
-public class Loading extends NewTestTemplate {
+@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Test(groups="discussions")
+public class Layout extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -20,21 +22,21 @@ public class Loading extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = {"Loading_001"})
+  @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = {"Loading_002"})
+  @Test(groups = "discussions-anonUserOnMobileCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = {"Loading_003"})
+  @Test(groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanViewMorePosts() {
@@ -45,21 +47,21 @@ public class Loading extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = {"Loading_004"})
+  @Test(groups = "discussions-anonUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = {"Loading_005"})
+  @Test(groups = "discussions-anonUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = {"Loading_006"})
+  @Test(groups = "discussions-anonUserOnDesktopCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanViewMorePosts() {
@@ -70,14 +72,14 @@ public class Loading extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = {"Loading_007"})
+  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = {"Loading_008"})
+  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanSeePostsList() {
@@ -89,14 +91,14 @@ public class Loading extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = {"Loading_009"})
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = {"Loading_010"})
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {

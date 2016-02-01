@@ -25,13 +25,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigat
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContributionsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCuratedContentPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
@@ -55,7 +50,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
@@ -99,16 +93,10 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement modalUserNameInput;
   @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
-  @FindBy(css = "#AccountNavigation .subnav")
-  protected WebElement userMenuDropdown;
   @FindBy(css = "#userForceLoginModal")
   protected WebElement logInModal;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
-  @FindBy(css = ".msg")
-  protected WebElement userMessage;
-  @FindBy(css = "#mw-content-text .source-css")
-  protected WebElement cssSource;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
   protected WebElement cssEditSummary;
   @FindBy(css = "ul#pagehistory > li:first-child .minoredit")
@@ -150,18 +138,10 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
-  @FindBy(css = "input#wpConfirmB")
-  private WebElement deleteConfirmationButton;
   @FindBy(css = ".banner-notification div.msg a")
   private WebElement undeleteLink;
   @FindBy(css = ".banner-notification")
   private WebElement flashMessage;
-  @FindBy(css = "input#mw-undelete-submit")
-  private WebElement restoreButton;
-  @FindBy(css = "input#wpReason")
-  private WebElement deleteCommentReasonField;
-  @FindBy(css = "div.permissions-errors")
-  private WebElement premissionErrorMessage;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".avatar-container")
@@ -170,7 +150,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-  private String globalNavigationAvatarPlaceholder = ".avatar-container.logged-avatar-placeholder";
   private GlobalNavigationPageObject globalNavigation;
 
   public WikiBasePageObject(WebDriver driver) {
@@ -204,12 +183,6 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("openSpecialUnusedFilesPage", URLsContent.SPECIAL_UNUSED_FILES
         + " opened", true);
     return new SpecialUnusedFilesPageObject(driver);
-  }
-
-  public FeaturedVideoAdminPageObject openVideoPageAdminObject(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_VIDEO_PAGE_ADMIN);
-    PageObjectLogging.log("openVideoPageAdminObject", wikiURL + " opened", true);
-    return new FeaturedVideoAdminPageObject(driver);
   }
 
   public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
@@ -322,21 +295,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialNewFilesPageObject(driver);
   }
 
-  public SpecialAdminDashboardPageObject openSpecialAdminDashboard(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_ADMIN_DASHBOARD);
-    return new SpecialAdminDashboardPageObject(driver);
-  }
-
-  public SpecialCssPageObject openSpecialCss(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CSS);
-    return new SpecialCssPageObject(driver);
-  }
-
-  public SpecialCuratedContentPageObject openSpecialCuratedContent(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CURATED_CONTENT);
-    return new SpecialCuratedContentPageObject(driver);
-  }
-
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UPLOAD);
     return new SpecialUploadPageObject(driver);
@@ -405,11 +363,6 @@ public class WikiBasePageObject extends BasePageObject {
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
     return new CreateNewWikiPageObjectStep1(driver);
-  }
-
-  public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_WIKI_FACTORY, true);
-    return new SpecialFactoryPageObject(driver);
   }
 
   public void openSpecialWatchListPage(String wikiURL) {
@@ -544,32 +497,12 @@ public class WikiBasePageObject extends BasePageObject {
     verifyUserLoggedIn(user.getUserName());
   }
 
-  protected void clickArticleDeleteConfirmationButton() {
-    wait.forElementVisible(deleteConfirmationButton);
-    wait.forElementVisible(deleteCommentReasonField);
-    deleteCommentReasonField.clear();
-    deleteCommentReasonField.sendKeys("QAReason");
-    deleteConfirmationButton.click();
-  }
-
   public DeletePageObject deletePage() {
     String url =
         urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_DELETE);
     getUrl(url);
     PageObjectLogging.log("deletePage", "delete page opened", true);
     return new DeletePageObject(driver);
-  }
-
-  public void verifyEditButtonNotPresent() {
-    waitForElementNotVisibleByElement(editButton);
-    PageObjectLogging.log("verifyEditButtonNotPresent", "edit button is not present", true);
-  }
-
-  protected void clickRestoreArticleButton() {
-    wait.forElementVisible(restoreButton);
-    scrollAndClick(restoreButton);
-    wait.forElementVisible(userMessage);
-    PageObjectLogging.log("clickUndeleteArticle", "undelete article button clicked", true, driver);
   }
 
   public SpecialRestorePageObject undeleteByFlashMessage() {
@@ -604,12 +537,6 @@ public class WikiBasePageObject extends BasePageObject {
   public ArticlePageObject openMainPage(String wikiURL) {
     getUrl(wikiURL);
     return new ArticlePageObject(driver);
-  }
-
-  public void verifyPermissionsErrorsPresent() {
-    wait.forElementVisible(premissionErrorMessage);
-    PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected", true,
-        driver);
   }
 
   public void verifyUrl(String url) {
@@ -658,14 +585,6 @@ public class WikiBasePageObject extends BasePageObject {
         true);
 
     return newPassword;
-  }
-
-  public String getWikiaCssContent() {
-    wait.forElementVisible(cssSource);
-    String source = cssSource.getText();
-    PageObjectLogging
-        .log("cssSource", "the following text was get from Wikia.css: " + source, true);
-    return source;
   }
 
   public String getFirstCssRevision() {
@@ -730,8 +649,7 @@ public class WikiBasePageObject extends BasePageObject {
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);
     } else {
-      driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), "cb="
-          + DateTime.now().getMillis()));
+      refreshPageAddingCacheBuster();
     }
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
@@ -952,6 +870,14 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
   }
 
+  /**
+   * Refresh Wiki page, busting the cache( by adding cb=currentTimestamp )
+   */
+  public void refreshPageAddingCacheBuster(){
+    driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
+                                                 "cb=" + DateTime.now().getMillis()));
+  }
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
@@ -959,5 +885,4 @@ public class WikiBasePageObject extends BasePageObject {
   public enum HubName {
     VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
   }
-
 }

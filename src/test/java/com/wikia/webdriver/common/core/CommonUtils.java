@@ -14,8 +14,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -29,14 +27,6 @@ public class CommonUtils {
 
   private CommonUtils() {
 
-  }
-
-  /**
-   * appends given text to specified file
-   */
-  public static void setClipboardContents(String content) {
-    StringSelection ss = new StringSelection(content);
-    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
   }
 
   public static void appendTextToFile(String filePath, String textToWrite) {

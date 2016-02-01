@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = {"globalnavigationbar", "Navigating"})
+@Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
 public class Navigating extends NewTestTemplate {
 
   private final String EN_COMMUNITY = "muppet";
