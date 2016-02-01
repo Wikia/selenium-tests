@@ -349,7 +349,14 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src the source of an ad, for example gpt or remnant
    */
   public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String src) {
-    String iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + src + "/" + slotName + "_0";
+    String iframeId;
+
+    if(src.equals("")) {
+      iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + src + "/" + slotName + "_0";
+    } else {
+      iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + slotName + "_0";
+    }
+
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
