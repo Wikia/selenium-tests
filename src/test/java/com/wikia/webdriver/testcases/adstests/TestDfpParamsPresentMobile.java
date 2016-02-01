@@ -61,7 +61,7 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
       dataProvider = "dfpEvolveParamsMercury",
       groups = {"Ads", "AdsEvolveMercury"}
   )
-  public void dfpEvolveParamsPresentOasis(String wikiName,
+  public void dfpEvolveParamsPresentMercury(String wikiName,
                                           String article,
                                           Integer dfpClientId,
                                           String adUnit,
