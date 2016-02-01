@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
@@ -132,17 +131,6 @@ public class UrlBuilder {
     return wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
   }
 
-  /**
-   * Return url path i.e. from mlp.wikia.com/wiki/Main_Page returns /wiki/Main_Page
-   * 
-   * @param driver WebDriver
-   * @return String
-   */
-  public String getUrlPath(WebDriver driver) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return js.executeScript("return location.pathname").toString();
-  }
-
   private Boolean isMercuryBrowser() {
     return browser != null && Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser);
   }
@@ -162,5 +150,15 @@ public class UrlBuilder {
     }
 
     return "http://" + overwrittenPrefix + overwrittenWikiName + suffix + "/";
+  }
+
+  public static String getHostForWiki() {
+    String environment = Configuration.getEnv();
+    String wikiName = Configuration.getWikiName();
+
+    environment = environment.equals("prod") ? "" : environment + ".";
+    wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
+
+    return "http://" + environment + wikiName + "wikia.com";
   }
 }
