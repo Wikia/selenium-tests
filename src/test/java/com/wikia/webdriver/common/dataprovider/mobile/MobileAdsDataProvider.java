@@ -336,7 +336,7 @@ public class MobileAdsDataProvider {
                 "adtest",
                 "SyntheticTests/DfpParams",
                 4403,
-                "ev/wikia_intl/ros/MOBILE_TOP_LEADERBOARD",
+                "ev/wikia_intl/ros",
                 "MOBILE_TOP_LEADERBOARD",
                 Arrays.asList(
                     "\"s0\":\"life\"",

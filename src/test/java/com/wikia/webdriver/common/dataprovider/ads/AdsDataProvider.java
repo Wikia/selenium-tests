@@ -564,7 +564,7 @@ public class AdsDataProvider {
             "adtest",
             "SyntheticTests/DfpParams",
             4403,
-            "ev/wikia_intl/ros/TOP_LEADERBOARD",
+            "ev/wikia_intl/ros",
             "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
