@@ -36,6 +36,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
+  private static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -334,8 +335,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    */
   public void verifyGptIframe(String adUnit, String slotName, String src) {
-    Integer wikiaDfpClientId = 5441;
-    verifyGptIframe(wikiaDfpClientId, adUnit, slotName, src);
+    verifyGptIframe(WIKIA_DFP_CLIENT_ID, adUnit, slotName, src);
   }
 
   /**
@@ -344,8 +344,8 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or Turtle
    * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
    */
-  public void verifyGptIframe(Integer dfpClientId, String adUnit, String slotName, String src) {
-    String iframeId = "google_ads_iframe_/" + dfpClientId.toString() + "/" + adUnit + "/" + src + "/" + slotName + "_0";
+  public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String src) {
+    String iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + src + "/" + slotName + "_0";
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
