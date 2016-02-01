@@ -55,10 +55,6 @@ public class UrlBuilder {
     return getUrlForPath(Configuration.getWikiName(), wikiPath);
   }
 
-  public String getUrlForPathWithoutWiki(String wikiName, String wikiPath) {
-    return getUrlForWiki(wikiName) + wikiPath;
-  }
-
   public String getUrlForPage(WebDriver driver, String pageName) {
     try {
       URL url = new URL(driver.getCurrentUrl());
