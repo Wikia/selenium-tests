@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -21,7 +22,9 @@ public class ArticleCommentsTests extends NewTestTemplate {
   @Test(groups = {"ArticleComments_001", "Smoke2"})
   @Execute(asUser = User.USER)
   public void ArticleComments_001_editComment() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -38,7 +41,9 @@ public class ArticleCommentsTests extends NewTestTemplate {
   @Test(groups = {"ArticleComments_002"})
   @Execute(asUser = User.USER)
   public void ArticleComments_002_replyComment() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String comment = PageContent.COMMENT_TEXT +  DateTime.now().getMillis();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -55,7 +60,9 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleComments_003"})
   public void ArticleComments_003_anonReplyComment() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -73,7 +80,9 @@ public class ArticleCommentsTests extends NewTestTemplate {
   @Test(groups = {"ArticleComments_004"})
   @Execute(asUser = User.STAFF)
   public void ArticleComments_004_deleteComment() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
