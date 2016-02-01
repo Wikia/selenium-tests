@@ -16,8 +16,8 @@ public class VideosModuleTests extends NewTestTemplate {
    * Checks if the Videos Module shows up on pages it should, specifically Article and File pages
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
-  @RelatedIssue(issueID = "QAART-722", comment = "won't work on some pages "
-          + ", will pass after few reruns")
+  @RelatedIssue(issueID = "MAIN-6332", comment = "test manually. Test manually as test is being updated "
+                                                 + "see ticket for details.")
   public void VideosModuleTest_001() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -34,6 +34,8 @@ public class VideosModuleTests extends NewTestTemplate {
    * File pages. This is just a smoke test to make sure nothing is seriously wrong.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_002", "Media"})
+  @RelatedIssue(issueID = "MAIN-6332", comment = "test manually. Test manually as test is being updated "
+                                                 + "see ticket for details.")
   public void VideosModuleTest_002() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -49,6 +51,8 @@ public class VideosModuleTests extends NewTestTemplate {
    * between 3 and 5.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_003", "Media"})
+  @RelatedIssue(issueID = "MAIN-6332", comment = "test manually. Test manually as test is being updated "
+                                                 + "see ticket for details.")
   public void VideosModuleTest_003() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
@@ -60,8 +64,8 @@ public class VideosModuleTests extends NewTestTemplate {
    * Checks if the Videos Module is not showing any duplicate videos
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_004", "Media"})
-  @RelatedIssue(issueID = "QAART-722", comment = "won't work on some pages "
-          + ", will pass after few reruns")
+  @RelatedIssue(issueID = "MAIN-6332", comment = "test manually. Test manually as test is being updated "
+                                                 + "see ticket for details.")
   public void VideosModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
