@@ -17,7 +17,7 @@ public class Navigate {
     String host = UrlBuilder.getHostForWiki();
     String cacheBuster = "?cb=" + DateTime.now().getMillis();
 
-    driver.get(host + pageName + cacheBuster);
+    driver.get("http://" + host + pageName + cacheBuster);
 
     return this;
   }
@@ -27,7 +27,7 @@ public class Navigate {
     String cacheBuster = "?cb=" + DateTime.now().getMillis();
     reference = "#" + reference;
 
-    driver.get(host + pageName + cacheBuster + reference);
+    driver.get("http://" + host + pageName + cacheBuster + reference);
 
     return this;
   }

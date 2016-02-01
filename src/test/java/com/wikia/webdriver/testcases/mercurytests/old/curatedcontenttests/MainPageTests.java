@@ -8,12 +8,13 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.Loading;
-import com.wikia.webdriver.elements.mercury.old.MercuryAlertComponentObject;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
+import com.wikia.webdriver.elements.mercury.old.MercuryAlertComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 
@@ -73,7 +74,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).waitForFooterToBeVisible();
 
-    boolean result = driver.getCurrentUrl().contains(urlBuilder.getUrlForPage(driver, ROOT_PATH));
+    boolean result = driver.getCurrentUrl().contains(UrlBuilder.getUrlForPage(ROOT_PATH));
     PageObjectLogging.log(
         "Current URL",
         "is set on " + ROOT_PATH,
