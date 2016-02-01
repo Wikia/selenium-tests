@@ -329,6 +329,37 @@ public class MobileAdsDataProvider {
     };
   }
 
+    @DataProvider
+    public static Object[][] dfpEvolveParamsMercury() {
+        return new Object[][]{
+            {
+                "adtest",
+                "SyntheticTests/DfpParams",
+                4403,
+                "ev/wikia_intl/ros/MOBILE_TOP_LEADERBOARD",
+                "MOBILE_TOP_LEADERBOARD",
+                Arrays.asList(
+                    "\"s0\":\"life\"",
+                    "\"s0v\":\"lifestyle\"",
+                    "\"s1\":\"_adtest\"",
+                    "\"s2\":\"article\"",
+                    "\"dmn\":\"wikiacom\"",
+                    "\"hostpre\":\"",
+                    "\"skin\":\"mercury\"",
+                    "\"wpage\":\"synthetictests/dfpparams\"",
+                    "\"ref\":\"direct\"",
+                    "\"lang\":\"en\"",
+                    "\"esrb\":\"teen\""
+                ),
+                Arrays.asList(
+                    "\"sect\":\"ros\"",
+                    "\"pos\":\"a\"",
+                    "\"site\":\"wikia_intl\""
+                )
+            }
+        };
+    }
+
   @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{
