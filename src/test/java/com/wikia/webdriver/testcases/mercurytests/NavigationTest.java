@@ -30,8 +30,8 @@ public class NavigationTest extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }
 
-  @Test(groups = "mercury-navigating-001")
-  public void navigating_001_openNavigateClose() {
+  @Test(groups = "mercury-navigation-001")
+  public void navigation_001_openNavigateClose() {
     init();
 
     topBar.openNavigation();
@@ -40,8 +40,8 @@ public class NavigationTest extends NewTestTemplate {
     topBar.closeNavigation();
   }
 
-  @Test(groups = "mercury-navigating-002")
-  public void navigating_002_searchValidSuggestionAndOpenIt() {
+  @Test(groups = "mercury-navigation-002")
+  public void navigation_002_searchValidSuggestionAndOpenIt() {
     init();
 
     topBar.openNavigation();
@@ -50,8 +50,8 @@ public class NavigationTest extends NewTestTemplate {
     navigation.selectSearchSuggestion(1);
   }
 
-  @Test(groups = "mercury-navigating-003")
-  public void navigating_003_searchInvalidSuggestionAndCloseSearchView() {
+  @Test(groups = "mercury-navigation-003")
+  public void navigation_003_searchInvalidSuggestionAndCloseSearchView() {
     init();
 
     topBar.openNavigation();
@@ -61,8 +61,8 @@ public class NavigationTest extends NewTestTemplate {
     navigation.cancelSearch();
   }
 
-  @Test(groups = "mercury-navigating-004")
-  public void navigating_004_navigateToPageUsingLocalNav() {
+  @Test(groups = "mercury-navigation-004")
+  public void navigation_004_navigateToPageUsingLocalNav() {
     init();
 
     topBar.openNavigation();
