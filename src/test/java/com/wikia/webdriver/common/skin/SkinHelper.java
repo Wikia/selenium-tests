@@ -10,8 +10,12 @@ public class SkinHelper extends WikiBasePageObject {
 
   @FindBy(css = "body.skin-oasis")
   private WebElement oasisClassInBody;
+
   @FindBy(css = "body.ember-application")
   private WebElement mercuryClassInBody;
+
+  @FindBy(css = "body.wkMobile")
+  private WebElement wikiaMobileClassInBody;
 
   public SkinHelper(WebDriver driver) {
     super(driver);
@@ -23,6 +27,8 @@ public class SkinHelper extends WikiBasePageObject {
         return wait.forElementInViewPort(oasisClassInBody);
       case MERCURY:
         return wait.forElementInViewPort(mercuryClassInBody);
+      case WIKIAMOBILE:
+        return wait.forElementInViewPort(wikiaMobileClassInBody);
       default:
         return false;
     }
