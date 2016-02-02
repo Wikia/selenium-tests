@@ -451,11 +451,13 @@ public class AdsBaseObject extends WikiBasePageObject {
   public boolean checkSlotOnPageLoaded(String slotName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
+      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+        tryTriggerFloatingMedrec();
+      }
+
       String slotSelector = AdsContent.getSlotSelector(slotName);
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        tryTriggerFloatingMedrec(slot);
-      }
+
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 1;
     } finally {
@@ -572,14 +574,15 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void tryTriggerFloatingMedrec(final WebElement slot) {
+  private void tryTriggerFloatingMedrec() {
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions.execute(
               " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-          return slot.getAttribute("style").contains("visibility: visible;");
+          String floatingMedrecCssSelector = AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC);
+          return driver.findElements(By.cssSelector(floatingMedrecCssSelector)).size() > 0;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
