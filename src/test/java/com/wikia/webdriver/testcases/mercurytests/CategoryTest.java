@@ -16,19 +16,18 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryTest extends NewTestTemplate {
 
-  private Navigate navigate;
   private Category category;
 
   private void init() {
-    this.navigate = new Navigate(driver);
     this.category = new Category(driver);
+
+    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "mercury-category-001")
   public void category_001_openNavigate() {
     init();
 
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
     category.toggle();
     category.openLink(0);
   }
