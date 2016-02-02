@@ -17,7 +17,6 @@ import com.wikia.webdriver.elements.mercury.old.MercuryFooterComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.ArticleNavigationComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.OasisFooterComponentObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -30,6 +29,7 @@ public class RedirectionTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void redirectFromFullSiteToOasis() {
+    init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     new MercuryFooterComponentObject(driver).clickFullSiteLink();
@@ -38,8 +38,7 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
   }
 
-  @BeforeMethod
-  private void beforeMethod() {
+  private void init() {
     this.navigate = new Navigate(driver);
   }
 
@@ -67,6 +66,7 @@ public class RedirectionTests extends NewTestTemplate {
 
   @Test(groups = "MercuryRedirectionTest_004")
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
+    init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     new MercuryFooterComponentObject(driver).clickFullSiteLink();
