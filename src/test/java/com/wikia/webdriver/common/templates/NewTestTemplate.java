@@ -112,7 +112,9 @@ public class NewTestTemplate extends NewTestTemplateCore {
     startBrowser();
     setWindowSize();
 
+    if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
       loadFirstPage();
+    }
 
     // Reset unstable page load strategy to default 'false' value
     NewDriverProvider.setUnstablePageLoadStrategy(false);
