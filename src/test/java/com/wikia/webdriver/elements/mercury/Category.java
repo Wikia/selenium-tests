@@ -15,10 +15,10 @@ import java.util.List;
 
 public class Category {
 
-  @FindBy(xpath = "//nav[contains(@class, \"collapsible-menu\")]/div[contains(., \"Categories\")]")
+  @FindBy(css = ".article-footer .collapsible-menu div")
   private WebElement categoryMenu;
 
-  @FindBy(xpath = "//nav[contains(@class, \"collapsible-menu\")]/div[contains(., \"Categories\")]/..//li")
+  @FindBy(css = ".article-footer .collapsible-menu li")
   private List<WebElement> categoryList;
 
   private WebDriver driver;
