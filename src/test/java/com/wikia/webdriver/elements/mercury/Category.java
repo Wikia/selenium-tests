@@ -40,7 +40,7 @@ public class Category {
     return this;
   }
 
-  public Category openLink(int index) {
+  public Category openCategoryPage(int index) {
     WebElement link = categoryList.get(index);
 
     PageObjectLogging.logInfo("Open category link no.: " + index);

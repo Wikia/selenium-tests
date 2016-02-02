@@ -29,6 +29,6 @@ public class CategoryTest extends NewTestTemplate {
     init();
 
     category.toggle();
-    category.openLink(0);
+    category.openCategoryPage(0);
   }
 }
