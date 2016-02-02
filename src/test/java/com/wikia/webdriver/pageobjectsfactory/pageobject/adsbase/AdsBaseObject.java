@@ -349,15 +349,14 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param slotName    the name of the slot an ad is going to be inserted into
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
-  public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String src) {
-    String iframeId;
-
-    if (src.isEmpty()) {
-      iframeId = "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + slotName + "_0";
-    } else {
-      iframeId =
-          "google_ads_iframe_/" + dfpClientId + "/" + adUnit + "/" + src + "/" + slotName + "_0";
-    }
+  public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
+    String iframeId = Joiner.on("/").skipNulls().join(
+        "google_ads_iframe_",
+        String.valueOf(dfpClientId),
+        adUnit,
+        src.length > 0 ? src[0] : null,
+        slotName + "_0"
+    );
 
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
