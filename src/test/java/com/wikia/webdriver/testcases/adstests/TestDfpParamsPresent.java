@@ -70,7 +70,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
                                     List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(dfpClientId, adUnit, slot, "");
+    ads.verifyGptIframe(dfpClientId, adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 }
