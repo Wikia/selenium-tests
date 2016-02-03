@@ -30,8 +30,8 @@ public class NavigationTest extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }
 
-  @Test(groups = "mercury-navigation-001")
-  public void navigation_001_openNavigateClose() {
+  @Test(groups = "navigation-openAndCloseNavigationAndItsSubmenu")
+  public void openAndCloseNavigationAndItsSubmenu() {
     init();
 
     topBar.openNavigation();
@@ -40,8 +40,8 @@ public class NavigationTest extends NewTestTemplate {
     topBar.closeNavigation();
   }
 
-  @Test(groups = "mercury-navigation-002")
-  public void navigation_002_searchValidSuggestionAndOpenIt() {
+  @Test(groups = "navigation-validSearchPhraseTriggersSuggestionThatCanBeOpened")
+  public void validSearchPhraseTriggersSuggestionThatCanBeOpened() {
     init();
 
     topBar.openNavigation();
@@ -50,8 +50,8 @@ public class NavigationTest extends NewTestTemplate {
     navigation.selectSearchSuggestion(1);
   }
 
-  @Test(groups = "mercury-navigation-003")
-  public void navigation_003_searchInvalidSuggestionAndCloseSearchView() {
+  @Test(groups = "navigation-invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled")
+  public void invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled() {
     init();
 
     topBar.openNavigation();
@@ -61,8 +61,8 @@ public class NavigationTest extends NewTestTemplate {
     navigation.cancelSearch();
   }
 
-  @Test(groups = "mercury-navigation-004")
-  public void navigation_004_navigateToPageUsingLocalNav() {
+  @Test(groups = "navigation-navigateToPageUsingLocalNavigation")
+  public void navigateToPageUsingLocalNavigation() {
     init();
 
     topBar.openNavigation();
