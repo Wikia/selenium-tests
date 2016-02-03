@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -26,6 +27,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FilterBoxMapTests_002", "FilterBoxMapTests", "InteractiveMaps"})
+  @RelatedIssue(issueID = "QAART-726", comment = "please track the issue status")
   @Execute(asUser = User.USER)
   public void FilterBoxMapTests_002_VerifyClickOnUncheckedCategory() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -41,6 +43,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FilterBoxMapTests_003", "FilterBoxMapTests", "InteractiveMaps"})
+  @RelatedIssue(issueID = "QAART-726", comment = "please track the issue status")
   @Execute(asUser = User.USER)
   public void FilterBoxMapTests_003_VerifyClickAllCategoriesUncheckCategories() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
