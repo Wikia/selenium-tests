@@ -31,7 +31,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury-navigation-001")
-  public void navigation_001_openNavigateClose() {
+  public void openAndCloseNavigationAndItsSubmenu() {
     init();
 
     topBar.openNavigation();
@@ -41,7 +41,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury-navigation-002")
-  public void navigation_002_searchValidSuggestionAndOpenIt() {
+  public void validSearchPhraseTriggersSuggestionThatCanBeOpened() {
     init();
 
     topBar.openNavigation();
@@ -51,7 +51,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury-navigation-003")
-  public void navigation_003_searchInvalidSuggestionAndCloseSearchView() {
+  public void invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled() {
     init();
 
     topBar.openNavigation();
@@ -62,7 +62,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury-navigation-004")
-  public void navigation_004_navigateToPageUsingLocalNav() {
+  public void navigateToPageUsingLocalNavigation() {
     init();
 
     topBar.openNavigation();
