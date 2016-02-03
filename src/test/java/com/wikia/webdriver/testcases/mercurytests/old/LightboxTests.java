@@ -85,7 +85,7 @@ public class LightboxTests extends NewTestTemplate {
 
   @Test(groups = "MercuryLightboxTest_002")
   @InBrowser(browser = Browser.CHROME_ANDROID)
-  public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
+  public void tapOnImageEdgeChangesImageAndSwipeOnImageChangesImage() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 

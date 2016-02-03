@@ -235,7 +235,7 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject isHeroImageCentered() {
+  public PortableInfoboxObject isImageCentered() {
     Assertion.assertEquals(images.get(0).getCssValue("vertical-align"), "middle");
     PageObjectLogging.log("Hero image", "is centered", true);
 

@@ -119,7 +119,7 @@ public class ArticlePageTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryArticleTest_003")
-  public void MercuryArticleTest_003_SingleLinkedImageRedirect() {
+  public void clickOnLinkedImageAndVerifyUrlChanged() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.LINKED_IMAGES);

@@ -235,7 +235,8 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCommentsTest_005")
-  public void MercuryCommentsTest_005_Images_Videos() {
+  public void openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink
+      () {
     init();
 
     comments.clickCommentsHeader();

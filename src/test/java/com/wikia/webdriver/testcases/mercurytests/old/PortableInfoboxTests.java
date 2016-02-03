@@ -117,13 +117,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_005")
-  public void MercuryPortableInfoboxTest_005_SmallImages() {
+  public void smallImageIsCentredAndHasTitleAbove() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_2);
 
     infobox
         .isTitleAboveImageVisible()
-        .isHeroImageCentered();
+        .isImageCentered();
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_006")
