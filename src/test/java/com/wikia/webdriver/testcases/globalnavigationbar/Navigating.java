@@ -49,14 +49,4 @@ public class Navigating extends NewTestTemplate {
     PageObjectLogging.log("CHECK URL", "Expected: " + FANDOM_URL,
             new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(FANDOM_URL)));
   }
-
-  @Test(groups = {"clickOnHubsLinkOpensExpectedHub"},
-          enabled = false)
-  public void clickOnHubsLinkOpensExpectedHub() {
-    GlobalNavigationPageObject globalNav = new HomePageObject(driver).getGlobalNavigation();
-
-    for (GlobalNavigationPageObject.Hub hubName : GlobalNavigationPageObject.Hub.values()) {
-      globalNav.openHub(hubName);
-    }
-  }
 }
