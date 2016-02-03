@@ -60,6 +60,15 @@ public class PostsListPage extends WikiBasePageObject {
   @FindBy(css = ".share-feature")
   private List<WebElement> shareFeature;
 
+  @FindBy(css = ".discussion-app-join-text")
+  private WebElement appPromotionText;
+
+  @FindBy(css = ".apple-store-logo")
+  private WebElement appleAppLink;
+
+  @FindBy(css = ".google-play-logo")
+  private WebElement googlePlayAppLink;
+
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_FORUM_ID = "203236";
 
@@ -195,5 +204,25 @@ public class PostsListPage extends WikiBasePageObject {
       classes[i] = icon.getAttribute("class").split(" ")[0];
     }
     return classes;
+  }
+
+  public boolean isAppleLinkDisplayed() {
+    return appleAppLink.isDisplayed();
+  }
+
+  public boolean isGooglePlayLinkDisplayed() {
+    return googlePlayAppLink.isDisplayed();
+  }
+
+  public String isPromotionAppTextDisplayed() {
+    return appPromotionText.getText();
+  }
+
+  public void clickAppleLinkInAppPromotion() {
+    appleAppLink.click();
+  }
+
+  public void clickGooglePlayLinkInAppPromotion() {
+    googlePlayAppLink.click();
   }
 }

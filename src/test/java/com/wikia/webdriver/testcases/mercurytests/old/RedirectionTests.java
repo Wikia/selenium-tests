@@ -5,18 +5,18 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.MercuryFooterComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.ArticleNavigationComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.article.OasisFooterComponentObject;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -26,35 +26,31 @@ import org.testng.annotations.Test;
 )
 public class RedirectionTests extends NewTestTemplate {
 
-  private static final String ARTICLE_NAME = MercurySubpages.MAIN_PAGE;
-  private static final String QUERY_STRING = "noads=1";
-  private String url;
-  private String expectedUrl;
+  private Navigate navigate;
 
-  @BeforeMethod(alwaysRun = true)
-  public void prepareURL() {
-    String articleUrl = urlBuilder.getWebUrlForPath(Configuration.getWikiName(), ARTICLE_NAME);
-    url = urlBuilder.appendQueryStringToURL(articleUrl, QUERY_STRING);
+  private void redirectFromFullSiteToOasis() {
+    init();
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
-    String expectedArticleUrl = urlBuilder.getUrlForPath(Configuration.getWikiName(), ARTICLE_NAME);
-    expectedUrl = urlBuilder.appendQueryStringToURL(expectedArticleUrl, QUERY_STRING);
+    new MercuryFooterComponentObject(driver).clickFullSiteLink();
+    new ArticleNavigationComponentObject(driver).clickRandomArticle();
+
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
+  }
+
+  private void init() {
+    this.navigate = new Navigate(driver);
   }
 
   @Test(groups = "MercuryRedirectionTest_001")
   public void MercuryRedirectionTest_001_RedirectFromWWW() {
-    driver.get(url);
-    Assertion.assertUrlEqualToCurrentUrl(driver, expectedUrl);
-  }
+    String navigateUrl = UrlBuilder.getUrlForPageWithWWW(MercurySubpages.MAIN_PAGE);
+    String expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.MAIN_PAGE);
 
-  private void redirectFromFullSiteToOasis() {
-    ArticleNavigationComponentObject navigation = new ArticleNavigationComponentObject(driver);
-    SkinHelper helper = new SkinHelper(driver);
+    driver.get("http://" + navigateUrl);
 
-    driver.get(url);
-    new MercuryFooterComponentObject(driver).clickFullSiteLink();
-    navigation.clickRandomArticle();
-
-    Assertion.assertTrue(helper.isSkin(Skin.OASIS));
+    String currentUrl = driver.getCurrentUrl();
+    Assertion.assertTrue(currentUrl.contains(expectedUrl) && !currentUrl.contains("www."));
   }
 
   @Test(groups = "MercuryRedirectionTest_002")
@@ -69,15 +65,13 @@ public class RedirectionTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryRedirectionTest_004")
-  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
-    OasisFooterComponentObject oasisFooter = new OasisFooterComponentObject(driver);
-    SkinHelper helper = new SkinHelper(driver);
+    init();
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
-    driver.get(url);
     new MercuryFooterComponentObject(driver).clickFullSiteLink();
-    oasisFooter.clickMobileSiteLink();
+    new OasisFooterComponentObject(driver).clickMobileSiteLink();
 
-    Assertion.assertTrue(helper.isSkin(Skin.MERCURY));
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
   }
 }

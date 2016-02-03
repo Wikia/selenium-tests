@@ -558,6 +558,35 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] dfpEvolveParamsOasis() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/DfpParams",
+            4403,
+            "ev/wikia_intl/ros",
+            "TOP_LEADERBOARD",
+            Arrays.asList(
+                "\"s0\":\"life\"",
+                "\"s1\":\"_adtest\"",
+                "\"s2\":\"article\"",
+                "\"dmn\":\"wikiacom\"",
+                "\"hostpre\":\"",
+                "\"wpage\":\"synthetictests/dfpparams\"",
+                "\"ref\":\"direct\"",
+                "\"lang\":\"en\"",
+                "\"esrb\":\"teen\""
+            ),
+            Arrays.asList(
+                "\"sect\":\"ros\"",
+                "\"pos\":\"a\"",
+                "\"site\":\"wikia_intl\""
+            )
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsGptPageParamOasis() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
