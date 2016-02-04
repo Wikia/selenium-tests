@@ -40,9 +40,7 @@ public class FollowVideosTests extends NewTestTemplate {
   @Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})
   @Execute(asUser = User.USER)
   public void FollowVideo_003_verify() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
-    follow.verifyFollowedImageVideo(videoName);
+    new SpecialFollowPageObject(driver).open().verifyFollowedImageVideo(videoName);
   }
 
 }

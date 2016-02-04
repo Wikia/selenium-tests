@@ -622,8 +622,11 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertTrue(categoryVisible, "category " + category + " not present");
   }
 
-  public WatchPageObject unfollowArticle(String wikiURL) {
-    String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
+  public WatchPageObject unfollowArticle() {
+    String
+        url =
+        urlBuilder
+            .appendQueryStringToURL(urlBuilder.getUrlForWiki(), "title=" + articleTitle.getText());
     url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
     return new WatchPageObject(driver);

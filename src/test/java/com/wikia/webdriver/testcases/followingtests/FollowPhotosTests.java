@@ -42,8 +42,6 @@ public class FollowPhotosTests extends NewTestTemplate {
   @RelatedIssue(issueID = "QAART-711", comment = "Test manually")
   @Execute(asUser = User.USER)
   public void FollowPhoto_003_verify() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
-    follow.verifyFollowedImageVideo(imageName);
+        new SpecialFollowPageObject(driver).open().verifyFollowedImageVideo(imageName);
   }
 }
