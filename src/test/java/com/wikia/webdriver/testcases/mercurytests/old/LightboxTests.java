@@ -48,7 +48,7 @@ public class LightboxTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.GALLERY);
   }
 
-  @Test(groups = "lightbox-canBeOpenedAndClosed")
+  @Test(groups = "mercury-lightbox-canBeOpenedAndClosed")
   public void canBeOpenedAndClosed() {
     init();
     gallery.clickGalleryImage(0);
@@ -83,7 +83,7 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "lightbox-tapOnImageEdgeChangesImageAndSwipeOnImageChangesImage")
+  @Test(groups = "mercury-lightbox-tapOnImageEdgeChangesImageAndSwipeOnImageChangesImage")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void tapOnImageEdgeChangesImageAndSwipeOnImageChangesImage() {
     init();
@@ -181,7 +181,7 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "lightbox-zoomInAndZoomOutByGestureAndZoomByDoubleTap")
+  @Test(groups = "mercury-lightbox-zoomInAndZoomOutByGestureAndZoomByDoubleTap")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void zoomInAndZoomOutByGestureAndZoomByDoubleTap() {
     init();
@@ -263,7 +263,7 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "lightbox-headerAndFooterDisappearsAndAppearsOnImageClick")
+  @Test(groups = "mercury-lightbox-headerAndFooterDisappearsAndAppearsOnImageClick")
   public void headerAndFooterDisappearsAndAppearsOnImageClick() {
     init();
     gallery.clickGalleryImage(0);
@@ -283,7 +283,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "HG-730")
-  @Test(groups = "lightbox-closesOnBackButtonClick", enabled = false)
+  @Test(groups = "mercury-lightbox-closesOnBackButtonClick", enabled = false)
   public void closesOnBackButtonClick() {
     init();
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
@@ -315,7 +315,7 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "lightbox-moveGestureCanBePerformedOnZoomedImage")
+  @Test(groups = "mercury-lightbox-moveGestureCanBePerformedOnZoomedImage")
   @InBrowser(browser = Browser.CHROME_ANDROID)
   public void moveGestureCanBePerformedOnZoomedImage() {
     init();
