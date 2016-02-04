@@ -16,6 +16,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebook
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
