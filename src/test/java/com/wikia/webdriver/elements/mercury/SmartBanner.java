@@ -16,7 +16,7 @@ public class SmartBanner {
   @FindBy(css = ".sb-close")
   private WebElement closeButton;
 
-  private By smartBannerComponent = By.cssSelector(".smart-banner");
+  private By smartBannerComponent = By.cssSelector(".smart-banner-android");
 
   private Wait wait;
   private JavascriptActions jsActions;

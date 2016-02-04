@@ -57,6 +57,27 @@ public class Navigating extends NewTestTemplate {
     clickUsernameLoadsUserPage();
   }
 
+  @Test(groups = {"Navigating_005"})
+  @Execute(onWikia = "fallout")
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanSeeAppPromotion() {
+    discussionsAppPromotionUnitPresentOnPage();
+  }
+
+  @Test(groups = {"Navigating_006"})
+  @Execute(onWikia = "fallout")
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
+    appleLinkRedirectsProperly();
+  }
+
+  @Test(groups = {"Navigating_007"})
+  @Execute(onWikia = "fallout")
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanClickGooglePlayLinkAppPromotion() {
+    googlePlayLinkRedirectsProperly();
+  }
+
   /**
    * TESTING METHODS SECTION
    */
@@ -82,5 +103,29 @@ public class Navigating extends NewTestTemplate {
             driver.getCurrentUrl().contains(
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
+
+  public void discussionsAppPromotionUnitPresentOnPage() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    Assertion.assertTrue(postsList.isAppleLinkDisplayed());
+    Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
+    Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
+  }
+
+  public void appleLinkRedirectsProperly() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickAppleLinkInAppPromotion();
+    String newWindow = driver.getWindowHandles().toArray()[1].toString();
+    driver.switchTo().window(newWindow);
+    Assertion.assertTrue(driver.getTitle().contains("Wikia Fan App for: Fallout"));
+  }
+
+  public void googlePlayLinkRedirectsProperly() {
+    PostsListPage postsList = new PostsListPage(driver).open();
+    postsList.clickGooglePlayLinkInAppPromotion();
+    String newWindow = driver.getWindowHandles().toArray()[1].toString();
+    driver.switchTo().window(newWindow);
+    Assertion.assertTrue(driver.getTitle().contains("Wikia: Fallout"));
+  }
+
 }
 

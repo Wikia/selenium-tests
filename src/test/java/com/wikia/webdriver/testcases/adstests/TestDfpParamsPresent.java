@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.geoedge.CountryCode;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -32,7 +35,6 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
-
   }
 
   @Test(
@@ -49,6 +51,26 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");
+    ads.verifyGptParams(slot, pageParams, slotParams);
+  }
+
+  @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
+  @UseUnstablePageLoadStrategy
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "dfpEvolveParamsOasis",
+      groups = {"Ads", "AdsEvolveOasis"}
+  )
+  public void dfpEvolveParamsPresentOasis(String wikiName,
+                                    String article,
+                                    Integer dfpClientId,
+                                    String adUnit,
+                                    String slot,
+                                    List<String> pageParams,
+                                    List<String> slotParams) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    ads.verifyGptIframe(dfpClientId, adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 }

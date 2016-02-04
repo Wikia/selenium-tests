@@ -1,14 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
+import com.wikia.webdriver.common.contentpatterns.ApiActions;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AuthModal {
+public class AuthModal extends WikiBasePageObject {
 
   @FindBy(css = ".auth.desktop.signin-page")
   private WebElement authModal;
@@ -20,10 +24,13 @@ public class AuthModal {
   private WebElement signInButton;
   @FindBy(css = ".auth-modal iframe")
   private WebElement iFrame;
+  @FindBy(css = ".forgotten-password")
+  private WebElement forgottenPasswordLink;
 
   private WebDriver webDriver;
 
   public AuthModal(WebDriver webDriver){
+    super(webDriver);
     this.webDriver = webDriver;
 
     PageFactory.initElements(webDriver, this);
@@ -56,4 +63,10 @@ public class AuthModal {
   public void login(User user){
     login(user.getUserName(), user.getPassword());
   }
+
+  public void clickForgotPasswordLink(){
+    switchToFrame();
+    forgottenPasswordLink.click();
+  }
+
 }
