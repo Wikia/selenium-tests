@@ -80,6 +80,7 @@ public class FacebookTests extends NewTestTemplate {
 
   @Test
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "QAART-727", comment = "Test unstable, test manually or locally")
   public void connectUsingUserPreferences() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
