@@ -123,7 +123,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     infobox
         .isTitleAboveImageVisible()
-        .isImageCentered();
+        .isHeroImageCentered();
   }
 
   @Test(groups = "MercuryPortableInfoboxTest_006")
