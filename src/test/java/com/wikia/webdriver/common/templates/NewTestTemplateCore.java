@@ -5,12 +5,13 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import net.lightbody.bmp.proxy.ProxyServer;
@@ -62,9 +63,10 @@ public class NewTestTemplateCore {
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
   }
 
-  protected void startBrowser() {
-    driver = registerDriverListener(
-        NewDriverProvider.getDriverInstanceForBrowser(Configuration.getBrowser()));
+  protected WebDriver startBrowser() {
+    driver = registerDriverListener(DriverProvider.getDriverInstanceForBrowser());
+
+    return driver;
   }
 
   protected void setWindowSize() {
@@ -78,11 +80,6 @@ public class NewTestTemplateCore {
         driver.manage().window().maximize();
       }
     }
-  }
-
-  protected WebDriver startCustomBrowser(String browserName) {
-    driver = registerDriverListener(NewDriverProvider.getDriverInstanceForBrowser(browserName));
-    return driver;
   }
 
   protected WebDriver registerDriverListener(WebDriver driver) {
@@ -104,9 +101,9 @@ public class NewTestTemplateCore {
 
   protected void stopBrowser() {
     /*
-     * if (NewDriverProvider.getMobileDriver() != null &&
-     * NewDriverProvider.getMobileDriver().getSessionId() != null) {
-     * NewDriverProvider.getMobileDriver().quit(); }
+     * if (DriverProvider.getMobileDriver() != null &&
+     * DriverProvider.getMobileDriver().getSessionId() != null) {
+     * DriverProvider.getMobileDriver().quit(); }
      */
     if (driver != null) {
       try {
@@ -132,16 +129,12 @@ public class NewTestTemplateCore {
   }
 
   protected void setDriverCapabilities(DesiredCapabilities caps) {
-    NewDriverProvider.setDriverCapabilities(caps);
+    BrowserAbstract.setDriverCapabilities(caps);
   }
 
   protected void setWindowSize(int width, int height, WebDriver desiredDriver) {
     Dimension dimension = new Dimension(width, height);
     desiredDriver.manage().window().setSize(dimension);
-  }
-
-  protected void setBrowserUserAgent(String userAgent) {
-    NewDriverProvider.setBrowserUserAgent(Configuration.getBrowser(), userAgent);
   }
 
   protected void runProxyServerIfNeeded(Method method) {

@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.driverprovider.mobileprovider;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -23,7 +23,7 @@ public class MobileDriverProvider {
     WebDriver driver = null;
 
     if (Browser.CHROME_MOBILE_MERCURY.equals(browser)) {
-      return NewDriverProvider.getDriverInstanceForBrowser(browser);
+      return DriverProvider.getDriverInstanceForBrowser();
     }
 
     switch (platform.toUpperCase()) {

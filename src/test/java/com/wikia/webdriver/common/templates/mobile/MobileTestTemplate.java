@@ -4,12 +4,15 @@ import com.wikia.webdriver.common.driverprovider.mobileprovider.MobileDriverProv
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 
 public class MobileTestTemplate extends NewTestTemplate {
 
   @Override
-  public void startBrowser() {
+  public WebDriver startBrowser() {
     driver = registerDriverListener(new MobileDriverProvider().getDriverInstance());
+
+    return driver;
   }
 
   @Override

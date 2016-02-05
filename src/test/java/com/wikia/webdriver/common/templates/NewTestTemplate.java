@@ -3,10 +3,9 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.UserAgent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.drivers.Browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -101,12 +100,9 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     runProxyServerIfNeeded(method);
-    if (method.isAnnotationPresent(UserAgent.class)) {
-      setBrowserUserAgent(method.getAnnotation(UserAgent.class).userAgent());
-    }
 
     if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
-      NewDriverProvider.setUnstablePageLoadStrategy(true);
+      FirefoxBrowser.setUnstablePageLoadStrategy(true);
     }
 
     startBrowser();
@@ -117,7 +113,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     // Reset unstable page load strategy to default 'false' value
-    NewDriverProvider.setUnstablePageLoadStrategy(false);
+    FirefoxBrowser.setUnstablePageLoadStrategy(false);
   }
 
   @AfterMethod(alwaysRun = true)

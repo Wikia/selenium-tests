@@ -1,7 +1,8 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.core.drivers.Browsers.ChromeBrowser;
+import com.wikia.webdriver.common.core.drivers.Browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.io.FileUtils;
@@ -25,9 +26,9 @@ public class ExtHelper {
     try {
 
       if ("FF".equalsIgnoreCase(browser)) {
-        NewDriverProvider.getFirefoxProfile().addExtension(findExtension(name, "xpi"));
+        FirefoxBrowser.getProfile().addExtension(findExtension(name, "xpi"));
       } else if (browser.contains("CHROME")) {
-        NewDriverProvider.getChromeOptions().addExtensions(findExtension(name, "crx"));
+        ChromeBrowser.getChromeOptions().addExtensions(findExtension(name, "crx"));
       } else {
         throw new WebDriverException(
             String.format("'%s' browser doesn't support adding of extensions", browser));

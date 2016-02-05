@@ -15,7 +15,7 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.apache.commons.codec.binary.Base64;
@@ -147,7 +147,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                      + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(NewDriverProvider.getWebDriver());
+    logJSError(DriverProvider.getWebDriver());
   }
 
   public static void logError(String command, Exception exception) {
@@ -359,9 +359,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestFailure(ITestResult result) {
-    driver = NewDriverProvider.getWebDriver();
+    driver = DriverProvider.getWebDriver();
     if (driver == null) {
-      driver = NewDriverProvider.getWebDriver();
+      driver = DriverProvider.getWebDriver();
     }
 
     imageCounter += 1;

@@ -38,9 +38,9 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
       }
     }
 
-    driverOne = startCustomBrowser(Configuration.getBrowser());
+    driverOne = startBrowser();
     loadFirstPage(driverOne);
-    driverTwo = startCustomBrowser(Configuration.getBrowser());
+    driverTwo = startBrowser();
     loadFirstPage(driverTwo);
     this.driver = driverOne;
   }

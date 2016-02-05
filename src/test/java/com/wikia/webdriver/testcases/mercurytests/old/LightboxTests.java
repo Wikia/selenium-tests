@@ -7,12 +7,12 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
 import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -286,7 +286,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "MercuryLightboxTest_005", enabled = false)
   public void MercuryLightboxTest_005_BackButtonCloseLightbox() {
     init();
-    AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
+    AndroidDriver mobileDriver = AndroidBrowser.getMobileDriver();
 
     String oldUrl = driver.getCurrentUrl();
     gallery.clickGalleryImage(0);
