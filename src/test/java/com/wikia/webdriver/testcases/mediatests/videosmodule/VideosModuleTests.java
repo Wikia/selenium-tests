@@ -1,30 +1,34 @@
 package com.wikia.webdriver.testcases.mediatests.videosmodule;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
 import org.testng.annotations.Test;
 
 public class VideosModuleTests extends NewTestTemplate {
 
-  /**
-   * Checks if the Videos Module shows up on pages it should, specifically Article and File pages
-   */
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
-  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated "
-                                                 + "see ticket for details.")
-  public void VideosModuleTest_001() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated see ticket for details.")
+  @Execute(onWikia = "sktest123")
+  public void visitorCanSeeVideosModuleOnArticleAndFilePages() {
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticlePageObject(driver).open();
     videosModule.verifyVideosModuleShowing();
-    base.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
+
+    new FilePagePageObject(driver).open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
     videosModule.verifyVideosModuleShowing();
   }
 
@@ -34,15 +38,15 @@ public class VideosModuleTests extends NewTestTemplate {
    * File pages. This is just a smoke test to make sure nothing is seriously wrong.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_002", "Media"})
-  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated "
-                                                 + "see ticket for details.")
+  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated see ticket for details.")
+  @Execute(onWikia = "sktest123")
   public void VideosModuleTest_002() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    base.openWikiPage(wikiURL);
+
+    new MainPage(driver).open();
     videosModule.verifyVideosModuleNotShowing();
-    base.openSpecialWikiActivity();
+
+    new SpecialWikiActivityPageObject(driver).open();
     videosModule.verifyVideosModuleNotShowing();
   }
 

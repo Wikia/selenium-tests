@@ -35,8 +35,10 @@ public class WikiActivityTests extends NewTestTemplate {
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
-    wikiActivity.verifyRecentEdition(articleName, credentials.userName);
+
+    new SpecialWikiActivityPageObject(driver)
+        .open()
+        .verifyRecentEdition(articleName, credentials.userName);
   }
 
   /**
@@ -54,8 +56,10 @@ public class WikiActivityTests extends NewTestTemplate {
     String articleName = article.getArticleName();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
-    wikiActivity.verifyRecentNewPage(articleName, credentials.userName);
+
+    new SpecialWikiActivityPageObject(driver)
+        .open()
+        .verifyRecentNewPage(articleName, credentials.userName);
   }
 
   /**
@@ -75,8 +79,10 @@ public class WikiActivityTests extends NewTestTemplate {
     BlogPageObject blogPage = visualEditMode.submitBlog();
     blogPage.verifyBlogTitle(blogTitle);
     blogPage.verifyContent(blogContent);
-    SpecialWikiActivityPageObject wikiActivity = blogPage.openSpecialWikiActivity();
-    wikiActivity.verifyRecentNewBlogPage(blogContent, blogTitle, credentials.userName);
+
+    new SpecialWikiActivityPageObject(driver)
+        .open()
+        .verifyRecentNewBlogPage(blogContent, blogTitle, credentials.userName);
   }
 
   /**
@@ -92,7 +98,9 @@ public class WikiActivityTests extends NewTestTemplate {
     article.addCategory(categoryName);
     article.submitCategory();
     article.verifyCategoryPresent(categoryName);
-    SpecialWikiActivityPageObject wikiActivity = article.openSpecialWikiActivity();
-    wikiActivity.verifyRecentNewCategorization(articleName, credentials.userName);
+
+    new SpecialWikiActivityPageObject(driver)
+        .open()
+        .verifyRecentNewCategorization(articleName, credentials.userName);
   }
 }

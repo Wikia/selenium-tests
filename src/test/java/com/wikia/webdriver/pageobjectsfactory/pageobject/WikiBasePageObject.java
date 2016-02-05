@@ -304,12 +304,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialCreatePage(driver);
   }
 
-  public SpecialWikiActivityPageObject openSpecialWikiActivity() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
-        + URLsContent.SPECIAL_WIKI_ACTIVITY);
-    return new SpecialWikiActivityPageObject(driver);
-  }
-
   public ForumPageObject openForumMainPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
     PageObjectLogging.log("openForumPage", "forum page opened", true);
@@ -341,22 +335,6 @@ public class WikiBasePageObject extends BasePageObject {
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
     return new InteractiveMapPageObject(driver);
-  }
-
-  public FilePagePageObject openFilePage(String wikiURL, String fileName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName);
-    return new FilePagePageObject(driver);
-  }
-
-  public FilePagePageObject openFilePage(String wikiURL, String fileName, boolean noRedirect) {
-    String url = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
-    if (noRedirect) {
-      String parameter = "redirect=no";
-      url = urlBuilder.appendQueryStringToURL(url, parameter);
-    }
-    getUrl(url);
-
-    return new FilePagePageObject(driver);
   }
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
