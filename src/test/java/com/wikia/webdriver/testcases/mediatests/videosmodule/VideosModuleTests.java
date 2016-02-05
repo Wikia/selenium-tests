@@ -1,14 +1,12 @@
 package com.wikia.webdriver.testcases.mediatests.videosmodule;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
@@ -16,11 +14,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.testng.annotations.Test;
 
+@Execute(onWikia = "sktest123")
 public class VideosModuleTests extends NewTestTemplate {
 
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
   @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated see ticket for details.")
-  @Execute(onWikia = "sktest123")
   public void visitorCanSeeVideosModuleOnArticleAndFilePages() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -39,7 +37,6 @@ public class VideosModuleTests extends NewTestTemplate {
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_002", "Media"})
   @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated see ticket for details.")
-  @Execute(onWikia = "sktest123")
   public void VideosModuleTest_002() {
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 
@@ -58,10 +55,10 @@ public class VideosModuleTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated "
                                                  + "see ticket for details.")
   public void VideosModuleTest_003() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    videosModule.verifyDisplayCount();
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    new ArticlePageObject(driver).open();
+    new VideosModuleComponentObject(driver).verifyDisplayCount();
   }
 
   /**
@@ -71,9 +68,9 @@ public class VideosModuleTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated "
                                                  + "see ticket for details.")
   public void VideosModuleTest_004() {
-    wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
-    VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    videosModule.verifyNoDuplicates();
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    new ArticlePageObject(driver).open();
+    new VideosModuleComponentObject(driver).verifyNoDuplicates();
   }
 }
