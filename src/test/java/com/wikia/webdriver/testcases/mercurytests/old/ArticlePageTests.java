@@ -44,7 +44,7 @@ public class ArticlePageTests extends NewTestTemplate {
     this.loading = new Loading(driver);
   }
 
-  @Test(groups = "article-verifyWikiaLogoAndSearchButtonAndTopContributorsAndFooter")
+  @Test(groups = "mercury-article-verifyWikiaLogoAndSearchButtonAndTopContributorsAndFooter")
   public void verifyWikiaLogoAndSearchButtonAndTopContributorsSectionAndFooterElements() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -101,7 +101,7 @@ public class ArticlePageTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "article-tapingOnContributorRedirectsToUserPage")
+  @Test(groups = "mercury-article-tapingOnContributorRedirectsToUserPage")
   public void tapingOnContributorRedirectsToUserPage() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -118,7 +118,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "article-clickOnLinkedImageChangesTheUrl")
+  @Test(groups = "mercury-article-clickOnLinkedImageChangesTheUrl")
   public void clickOnLinkedImageChangesTheUrl() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -137,7 +137,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "article-categoryListExpandsOnCategoryButtonClick")
+  @Test(groups = "mercury-article-categoryListExpandsOnCategoryButtonClick")
   public void categoryListExpandsOnCategoryButtonClick() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
@@ -176,7 +176,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "article-articleWithColonAndQuestionMarkOpens")
+  @Test(groups = "mercury-article-articleWithColonAndQuestionMarkOpens")
   public void articleWithColonAndQuestionMarkOpens() {
     init();
     ArticlePageObject article = new ArticlePageObject(driver);

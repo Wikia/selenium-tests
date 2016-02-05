@@ -40,7 +40,7 @@ public class CommentsTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.COMMENTS);
   }
 
-  @Test(groups = "comments-containsAvatarAndUsernameAndTimestampAndContent")
+  @Test(groups = "mercury-comments-containsAvatarAndUsernameAndTimestampAndContent")
   @RelatedIssue(issueID = "XW-654")
   public void containsAvatarAndUsernameAndTimestampAndContent() {
     init();
@@ -111,7 +111,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "comments-containsCounterAndNextButtonAndPreviousButton")
+  @Test(groups = "mercury-comments-containsCounterAndNextButtonAndPreviousButton")
   public void containsCounterAndNextButtonAndPreviousButton() {
     init();
 
@@ -174,7 +174,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "comments-repliesCounterShowsTheSameNumberInHeaderAndList")
+  @Test(groups = "mercury-comments-repliesCounterShowsTheSameNumberInHeaderAndList")
   public void repliesCounterShowsTheSameNumberInHeaderAndList() {
     init();
 
@@ -215,7 +215,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "comments-tapOnUserRedirectToUserPage")
+  @Test(groups = "mercury-comments-tapOnUserRedirectToUserPage")
   public void tapOnUserRedirectToUserPage() {
     init();
 
@@ -234,7 +234,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "comments-openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink")
+  @Test(groups = "mercury-comments-openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink")
   public void openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink
       () {
     init();

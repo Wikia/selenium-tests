@@ -30,7 +30,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     this.navigate = new Navigate(driver);
   }
 
-  @Test(groups = "infobox-verifyElementsBeforeAndAfterExpanding")
+  @Test(groups = "mercury-infobox-verifyElementsBeforeAndAfterExpanding")
   public void verifyElementsBeforeAndAfterExpanding() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
@@ -59,7 +59,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .areOrderedListAndDataValuesMarginEqual();
   }
 
-  @Test(groups = "infobox-expandAndCollapseByButtonClickAndTap")
+  @Test(groups = "mercury-infobox-expandAndCollapseByButtonClickAndTap")
   public void expandAndCollapseByButtonClickAndTap() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
@@ -80,7 +80,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxCollapsed();
   }
 
-  @Test(groups = "infobox-clickOnExternalLinkRedirectsToTheLinkUrl")
+  @Test(groups = "mercury-infobox-clickOnExternalLinkRedirectsToTheLinkUrl")
   public void clickOnExternalLinkRedirectsToTheLinkUrl() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
@@ -97,7 +97,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
 
-  @Test(groups = "infobox-imageTitleIsVisibleAndVideoClickOpensLightbox")
+  @Test(groups = "mercury-infobox-imageTitleIsVisibleAndVideoClickOpensLightbox")
   public void imageTitleIsVisibleAndVideoClickOpensLightbox() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
@@ -116,7 +116,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened();
   }
 
-  @Test(groups = "infobox-smallImageIsCentredAndHasTitleAbove")
+  @Test(groups = "mercury-infobox-smallImageIsCentredAndHasTitleAbove")
   public void smallImageIsCentredAndHasTitleAbove() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_2);
@@ -126,7 +126,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isHeroImageCentered();
   }
 
-  @Test(groups = "infobox-clickOnMainImageAndViewMoreInGallery")
+  @Test(groups = "mercury-infobox-clickOnMainImageAndViewMoreInGallery")
   public void clickOnMainImageAndViewMoreInGallery() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_3);
@@ -145,7 +145,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxExpanded();
   }
 
-  @Test(groups = "infobox-isHeroImageSquare")
+  @Test(groups = "mercury-infobox-isHeroImageSquare")
   public void isSquaredImageDisplayedAsHeroImage() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
@@ -153,7 +153,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isHeroImageSquare();
   }
 
-  @Test(groups = "infobox-isRectangleImageDisplaedAsHeroImage")
+  @Test(groups = "mercury-infobox-isRectangleImageDisplaedAsHeroImage")
   public void isRectangleImageDisplaedAsHeroImage() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_4);
@@ -161,7 +161,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isNotHeroImageSquare();
   }
 
-  @Test(groups = "infobox-isImageCollectionVisibleAndNextImageWorks")
+  @Test(groups = "mercury-infobox-isImageCollectionVisibleAndNextImageWorks")
   public void isImageCollectionVisibleAndNextImageWorks() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_5);
@@ -173,7 +173,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isImageInCollectionVisible();
   }
 
-  @Test(groups = "infobox-headerIsNotVisibleInArticleTOC")
+  @Test(groups = "mercury-infobox-headerIsNotVisibleInArticleTOC")
   public void headerIsNotVisibleInArticleTOC() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_2);
