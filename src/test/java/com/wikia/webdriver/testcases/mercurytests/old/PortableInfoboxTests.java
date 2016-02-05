@@ -30,8 +30,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     this.navigate = new Navigate(driver);
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_001")
-  public void MercuryPortableInfoboxTest_001_ElementsVisibility() {
+  @Test(groups = "infobox-verifyElementsBeforeAndAfterExpanding")
+  public void verifyElementsBeforeAndAfterExpanding() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
@@ -59,8 +59,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .areOrderedListAndDataValuesMarginEqual();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_002")
-  public void MercuryPortableInfoboxTest_002_CollapsingMethods() {
+  @Test(groups = "infobox-expandAndCollapseByButtonClickAndTap")
+  public void expandAndCollapseByButtonClickAndTap() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
@@ -80,8 +80,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxCollapsed();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_003")
-  public void MercuryPortableInfoboxTest_003_ExternalLinkRedirection() {
+  @Test(groups = "infobox-clickOnExternalLinkRedirectsToTheLinkUrl")
+  public void clickOnExternalLinkRedirectsToTheLinkUrl() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
@@ -97,8 +97,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_004")
-  public void MercuryPortableInfoboxTest_004_ImageAndVideoOpensInLightbox() {
+  @Test(groups = "infobox-imageTitleIsVisibleAndVideoClickOpensLightbox")
+  public void imageTitleIsVisibleAndVideoClickOpensLightbox() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
@@ -116,7 +116,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_005")
+  @Test(groups = "infobox-smallImageIsCentredAndHasTitleAbove")
   public void smallImageIsCentredAndHasTitleAbove() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_2);
@@ -126,8 +126,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isHeroImageCentered();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_006")
-  public void MercuryPortableInfoboxTest_006_DifferentClickTargets() {
+  @Test(groups = "infobox-clickOnMainImageAndViewMoreInGallery")
+  public void clickOnMainImageAndViewMoreInGallery() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_3);
 
@@ -145,24 +145,24 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxExpanded();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_007")
-  public void MercuryPortableInfoboxTest_007_HeroImageTall() {
+  @Test(groups = "infobox-isHeroImageSquare")
+  public void isSquaredImageDisplayedAsHeroImage() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
     infobox.isHeroImageSquare();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_008")
-  public void MercuryPortableInfoboxTest_008_HeroImageWide() {
+  @Test(groups = "infobox-isRectangleImageDisplaedAsHeroImage")
+  public void isRectangleImageDisplaedAsHeroImage() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_4);
 
     infobox.isNotHeroImageSquare();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_009")
-  public void MercuryPortableInfoboxTest_009_ImageCollection() {
+  @Test(groups = "infobox-isImageCollectionVisibleAndNextImageWorks")
+  public void isImageCollectionVisibleAndNextImageWorks() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_5);
 
@@ -173,8 +173,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isImageInCollectionVisible();
   }
 
-  @Test(groups = "MercuryPortableInfoboxTest_010")
-  public void MercuryPortableInfoboxTest_010_HeadersInTOC() {
+  @Test(groups = "infobox-headerIsNotVisibleInArticleTOC")
+  public void headerIsNotVisibleInArticleTOC() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_2);
 

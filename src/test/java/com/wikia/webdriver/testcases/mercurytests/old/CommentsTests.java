@@ -40,9 +40,9 @@ public class CommentsTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.COMMENTS);
   }
 
-  @Test(groups = "MercuryCommentsTest_001")
+  @Test(groups = "comments-containsAvatarAndUsernameAndTimestampAndContent")
   @RelatedIssue(issueID = "XW-654")
-  public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
+  public void containsAvatarAndUsernameAndTimestampAndContent() {
     init();
 
     Assertion.assertTrue(
@@ -111,8 +111,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_002")
-  public void MercuryCommentsTest_002_CommentsCounter_NextButton_PreviousButton() {
+  @Test(groups = "comments-containsCounterAndNextButtonAndPreviousButton")
+  public void containsCounterAndNextButtonAndPreviousButton() {
     init();
 
     comments.clickCommentsHeader();
@@ -174,8 +174,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_003")
-  public void MercuryCommentsTest_003_RepliesListCounter() {
+  @Test(groups = "comments-repliesCounterShowsTheSameNumberInHeaderAndList")
+  public void repliesCounterShowsTheSameNumberInHeaderAndList() {
     init();
 
     comments.clickCommentsHeader();
@@ -215,8 +215,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_004")
-  public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
+  @Test(groups = "comments-tapOnUserRedirectToUserPage")
+  public void tapOnUserRedirectToUserPage() {
     init();
 
     comments.clickCommentsHeader();
@@ -234,7 +234,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_005")
+  @Test(groups = "comments-openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink")
   public void openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink
       () {
     init();

@@ -44,8 +44,8 @@ public class ArticlePageTests extends NewTestTemplate {
     this.loading = new Loading(driver);
   }
 
-  @Test(groups = "MercuryArticleTest_001")
-  public void MercuryArticleTest_001_Logo_Search_TopContributors_FooterElements() {
+  @Test(groups = "article-verifyWikiaLogoAndSearchButtonAndTopContributorsAndFooter")
+  public void verifyWikiaLogoAndSearchButtonAndTopContributorsSectionAndFooterElements() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
@@ -101,8 +101,8 @@ public class ArticlePageTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "MercuryArticleTest_002")
-  public void MercuryArticleTest_002_TapContributorRedirectToUserPage() {
+  @Test(groups = "article-tapingOnContributorRedirectsToUserPage")
+  public void tapingOnContributorRedirectsToUserPage() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
@@ -118,8 +118,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryArticleTest_003")
-  public void clickOnLinkedImageAndVerifyUrlChanged() {
+  @Test(groups = "article-clickOnLinkedImageChangesTheUrl")
+  public void clickOnLinkedImageChangesTheUrl() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.LINKED_IMAGES);
@@ -137,8 +137,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryArticleTest_004")
-  public void MercuryArticleTest_004_CategoryListCollapsed_CategoryListExpanded() {
+  @Test(groups = "article-categoryListExpandsOnCategoryButtonClick")
+  public void categoryListExpandsOnCategoryButtonClick() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
@@ -176,8 +176,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryArticleTest_005")
-  public void MercuryArticleTest_005_NavigateToArticleWithColonAndQuestionMark() {
+  @Test(groups = "article-articleWithColonAndQuestionMarkOpens")
+  public void articleWithColonAndQuestionMarkOpens() {
     init();
     ArticlePageObject article = new ArticlePageObject(driver);
 
