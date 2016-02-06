@@ -47,6 +47,10 @@ public class NewTestTemplate extends NewTestTemplateCore {
       setTestProperty("browserSize", method.getAnnotation(InBrowser.class).browserSize());
       setTestProperty("emulator", method.getAnnotation(InBrowser.class).emulator());
     }
+
+    if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)){
+      setTestProperty("unstablePageLoadStrategy", "true");
+    }
   }
 
   /**
@@ -100,20 +104,12 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     runProxyServerIfNeeded(method);
-
-    if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
-      FirefoxBrowser.setUnstablePageLoadStrategy(true);
-    }
-
     startBrowser();
     setWindowSize();
 
     if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
       loadFirstPage();
     }
-
-    // Reset unstable page load strategy to default 'false' value
-    FirefoxBrowser.setUnstablePageLoadStrategy(false);
   }
 
   @AfterMethod(alwaysRun = true)

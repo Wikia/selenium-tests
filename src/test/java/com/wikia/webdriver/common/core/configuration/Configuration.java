@@ -132,6 +132,10 @@ public class Configuration {
     return getProp("emulator");
   }
 
+  public static String getPageLoadStrategy(){
+    return getProp("unstablePageLoadStrategy");
+  }
+
   public static Credentials getCredentials() {
     return new Credentials();
   }

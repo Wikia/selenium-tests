@@ -17,11 +17,6 @@ import java.util.logging.Level;
 public class FirefoxBrowser extends BrowserAbstract {
 
   private static FirefoxProfile firefoxProfile;
-  private static boolean unstablePageLoadStrategy = false;
-
-  public static void setUnstablePageLoadStrategy(boolean value) {
-    unstablePageLoadStrategy = value;
-  }
 
   @Override
   public EventFiringWebDriver getInstance() {
@@ -64,7 +59,7 @@ public class FirefoxBrowser extends BrowserAbstract {
         new FirefoxProfile(
             new File(ClassLoader.getSystemResource("FirefoxProfiles/Default").getPath()));
 
-    if (unstablePageLoadStrategy) {
+    if ("true".equals(Configuration.getPageLoadStrategy())) {
       firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
     }
 
