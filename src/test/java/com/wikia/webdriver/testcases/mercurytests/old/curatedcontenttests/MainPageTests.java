@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 
 @InBrowser(
     emulator = Emulator.GOOGLE_NEXUS_5,
-    browser = Browser.CHROME
+    browser = BrowserType.CHROME
 )
 public class MainPageTests extends NewTestTemplate {
 

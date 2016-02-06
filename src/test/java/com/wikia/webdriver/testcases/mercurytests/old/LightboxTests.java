@@ -7,9 +7,9 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
 import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
-import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
@@ -27,7 +27,7 @@ import java.io.File;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
-    browser = Browser.CHROME,
+    browser = BrowserType.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class LightboxTests extends NewTestTemplate {
@@ -84,7 +84,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_002")
-  @InBrowser(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = BrowserType.ANDROID)
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -182,7 +182,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_003")
-  @InBrowser(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = BrowserType.ANDROID)
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -316,7 +316,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_006")
-  @InBrowser(browser = Browser.CHROME_ANDROID)
+  @InBrowser(browser = BrowserType.ANDROID)
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);

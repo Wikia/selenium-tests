@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.Browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -30,7 +29,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     if (declaringClass.isAnnotationPresent(InBrowser.class)) {
-      setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser().getName());
       setTestProperty("browserSize", declaringClass.getAnnotation(InBrowser.class).browserSize());
       setTestProperty("emulator", declaringClass.getAnnotation(InBrowser.class).emulator());
     }
@@ -43,7 +42,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     if (method.isAnnotationPresent(InBrowser.class)) {
-      setTestProperty("browser", method.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browser", method.getAnnotation(InBrowser.class).browser().getName());
       setTestProperty("browserSize", method.getAnnotation(InBrowser.class).browserSize());
       setTestProperty("emulator", method.getAnnotation(InBrowser.class).emulator());
     }

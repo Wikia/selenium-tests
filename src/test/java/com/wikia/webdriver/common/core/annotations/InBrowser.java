@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.annotations;
 
+import com.wikia.webdriver.common.core.drivers.BrowserType;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,7 +13,7 @@ public @interface InBrowser {
 
   String browserSize() default "";
 
-  String browser() default "";
+  BrowserType browser() default BrowserType.DEFAULT;
 
   String emulator() default "";
 }

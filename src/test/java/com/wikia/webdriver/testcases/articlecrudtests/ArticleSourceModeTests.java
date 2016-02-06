@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -291,7 +291,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @CreationTicket(ticketID = "CONCF-626")
   @Test(groups = {"RTE_extended_4", "RTE_extended_020"})
   @RelatedIssue(issueID = "MAIN-6037", comment = "Product needs the fix. Check the status of the attached ticket and react")
-  @InBrowser(browser = Browser.FIREFOX)
+  @InBrowser(browser = BrowserType.FIREFOX)
   public void RTE_020_YoutubeTag_Preview() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject(driver).open(articleName);

@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.CuratedContent;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
     asUser = User.STAFF
 )
 @InBrowser(
-    browser = Browser.CHROME,
+    browser = BrowserType.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class EditorTests extends NewTestTemplate {
