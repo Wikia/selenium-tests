@@ -147,7 +147,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                      + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(DriverProvider.getWebDriver());
+    logJSError(DriverProvider.getBrowserDriver());
   }
 
   public static void logError(String command, Exception exception) {
@@ -359,9 +359,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestFailure(ITestResult result) {
-    driver = DriverProvider.getWebDriver();
+    driver = DriverProvider.getBrowserDriver();
     if (driver == null) {
-      driver = DriverProvider.getWebDriver();
+      driver = DriverProvider.getBrowserDriver();
     }
 
     imageCounter += 1;

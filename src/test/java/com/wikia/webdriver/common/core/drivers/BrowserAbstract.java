@@ -12,10 +12,9 @@ public abstract class BrowserAbstract {
 
   protected static DesiredCapabilities caps = new DesiredCapabilities();
 
-
   public abstract EventFiringWebDriver getInstance();
 
-  protected static void setBrowserLogging(Level logLevel) {
+  protected void setBrowserLogging(Level logLevel) {
     LoggingPreferences loggingprefs = new LoggingPreferences();
     loggingprefs.enable(LogType.BROWSER, logLevel);
     caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);

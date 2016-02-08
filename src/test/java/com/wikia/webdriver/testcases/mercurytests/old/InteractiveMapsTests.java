@@ -92,7 +92,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_002")
-  @InBrowser(browser = BrowserType.ANDROID)
+  @InBrowser(browser = BrowserType.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -219,7 +219,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_003")
-  @InBrowser(browser = BrowserType.ANDROID)
+  @InBrowser(browser = BrowserType.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);

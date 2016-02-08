@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.WebDriver;
@@ -38,9 +39,9 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
       }
     }
 
-    driverOne = startBrowser();
+    driverOne = DriverProvider.getBrowserDriver(0);
     loadFirstPage(driverOne);
-    driverTwo = startBrowser();
+    driverTwo = DriverProvider.getBrowserDriver(1);
     loadFirstPage(driverTwo);
     this.driver = driverOne;
   }

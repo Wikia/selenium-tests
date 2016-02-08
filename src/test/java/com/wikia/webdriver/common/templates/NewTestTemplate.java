@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -103,7 +104,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     runProxyServerIfNeeded(method);
-    startBrowser();
+    driver = DriverProvider.getBrowserDriver(0);
     setWindowSize();
 
     if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
@@ -116,6 +117,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (isProxyServerRunning) {
       networkTrafficInterceptor.stop();
     }
-    stopBrowser();
+    DriverProvider.close();
   }
 }

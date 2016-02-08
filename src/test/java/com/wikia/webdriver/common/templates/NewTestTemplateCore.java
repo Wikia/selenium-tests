@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import net.lightbody.bmp.proxy.ProxyServer;
@@ -19,7 +18,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
@@ -63,12 +61,6 @@ public class NewTestTemplateCore {
     wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
   }
 
-  protected WebDriver startBrowser() {
-    driver = registerDriverListener(DriverProvider.getDriverInstanceForBrowser());
-
-    return driver;
-  }
-
   protected void setWindowSize() {
     Dimension browserSize = Configuration.getBrowserSize();
     String browser = Configuration.getBrowser();
@@ -82,11 +74,6 @@ public class NewTestTemplateCore {
     }
   }
 
-  protected WebDriver registerDriverListener(WebDriver driver) {
-    ((EventFiringWebDriver) driver).register(new PageObjectLogging());
-    return driver;
-  }
-
   protected void loadFirstPage() {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
@@ -97,20 +84,6 @@ public class NewTestTemplateCore {
 
   protected void logOutCustomDriver(WebDriver customDriver) {
     customDriver.get(wikiURL + URLsContent.LOGOUT);
-  }
-
-  protected void stopBrowser() {
-    /*
-     * if (DriverProvider.getMobileDriver() != null &&
-     * DriverProvider.getMobileDriver().getSessionId() != null) {
-     * DriverProvider.getMobileDriver().quit(); }
-     */
-    if (driver != null) {
-      try {
-        driver.quit();
-      } catch (Error e) {
-      }
-    }
   }
 
   protected void stopCustomBrowser(WebDriver customDriver) {

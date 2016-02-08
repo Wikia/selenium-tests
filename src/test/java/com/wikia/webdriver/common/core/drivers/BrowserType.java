@@ -15,7 +15,7 @@ public enum BrowserType{
   CHROME_MOBILE(ChromeBrowser.class, "CHROMEMOBILEMERCURY"),
   HTMLUNIT(HtmlUnitBrowser.class, "HTMLUNIT"),
   GHOST(GhostBrowser.class, "GHOST"),
-  ANDROID(AndroidBrowser.class, "ANDROID"),
+  CHROME_ANDROID(AndroidBrowser.class, "ANDROID"),
   DEFAULT(DefaultBrowser.class, "");
 
   private Class<? extends BrowserAbstract> browser;

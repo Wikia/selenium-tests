@@ -84,7 +84,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_002")
-  @InBrowser(browser = BrowserType.ANDROID)
+  @InBrowser(browser = BrowserType.CHROME_ANDROID)
   public void MercuryLightboxTest_002_TapOnEdgesChangeImages_SwipeChangeImages() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -182,7 +182,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_003")
-  @InBrowser(browser = BrowserType.ANDROID)
+  @InBrowser(browser = BrowserType.CHROME_ANDROID)
   public void MercuryLightboxTest_003_ZoomByGesture_ZoomByDoubleTap() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -316,7 +316,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLightboxTest_006")
-  @InBrowser(browser = BrowserType.ANDROID)
+  @InBrowser(browser = BrowserType.CHROME_ANDROID)
   public void MercuryLightboxTest_006_MovingOnZoomedImage() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
