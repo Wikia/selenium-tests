@@ -32,7 +32,7 @@ public class NavigationBar extends WikiBasePageObject {
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
   public NavigationBar(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void triggerSuggestions(String query) {

@@ -20,7 +20,7 @@ public class DabbletComPageObject extends BasePageObject {
   private String outUrl = "http://dabblet.com/";
 
   public DabbletComPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void openOutPage() {

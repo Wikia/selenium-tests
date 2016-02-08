@@ -306,7 +306,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       if (user != null && user != User.ANONYMOUS) {
         // log in, make sure user is logged in and flow is on the requested url
-        new WikiBasePageObject(driver).loginAs(user);
+        new WikiBasePageObject().loginAs(user);
       }
     }
 

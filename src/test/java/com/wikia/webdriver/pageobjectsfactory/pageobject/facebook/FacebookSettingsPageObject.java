@@ -27,7 +27,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private WebElement fbLogOut;
 
   public FacebookSettingsPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public FacebookSettingsPageObject open() {

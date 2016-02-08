@@ -55,7 +55,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   private By recaptchaErrorMsgBy = By.cssSelector(".captcha .error-msg");
 
   public SignUpPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private static String md5(InputStream is) {

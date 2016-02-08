@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.drivers.Browsers;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.drivers.BrowserType;
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class DefaultBrowser extends BrowserAbstract {
 
   @Override
-  public EventFiringWebDriver getInstance() {
-    return BrowserType.lookup(Configuration.getBrowser()).getInstance();
+  public WikiaWebDriver setInstance(){
+    return BrowserType.lookup(Configuration.getBrowser()).setInstance();
   }
 }

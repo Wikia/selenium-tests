@@ -17,7 +17,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
   protected WebElement error;
 
   protected WidgetPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   protected abstract String getTagName();

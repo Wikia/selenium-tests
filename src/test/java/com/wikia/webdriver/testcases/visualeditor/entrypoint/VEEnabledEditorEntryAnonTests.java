@@ -19,7 +19,7 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
   @Test(

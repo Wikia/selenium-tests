@@ -46,7 +46,7 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights002"}, dependsOnMethods = {"staffCanBlockUser"})
   public void blockedUserShouldSeeMessageOnArticleEdit() {
     VisualEditModePageObject edit =
-        new WikiBasePageObject(driver).goToArticleDefaultContentEditPage(wikiURL,
+        new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
             PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
 
     edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
@@ -129,7 +129,7 @@ public class UserAndRights extends NewTestTemplate {
 
   @Test(groups = {"usersAndRights005"}, dependsOnMethods = {"staffCanUnblockUser"})
   public void unblockedUserCanEditUser() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
     String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit =

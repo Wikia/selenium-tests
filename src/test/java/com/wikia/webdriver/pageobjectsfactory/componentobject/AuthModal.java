@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -26,8 +27,8 @@ public class AuthModal extends WikiBasePageObject {
 
   private WebDriver webDriver;
 
-  public AuthModal(WebDriver webDriver){
-    super(webDriver);
+  public AuthModal(WikiaWebDriver webDriver){
+    super();
     this.webDriver = webDriver;
 
     PageFactory.initElements(webDriver, this);

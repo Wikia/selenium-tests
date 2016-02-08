@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.drivers.Browsers;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -11,7 +12,7 @@ import java.io.File;
 public class GhostBrowser extends BrowserAbstract {
 
   @Override
-  public EventFiringWebDriver getInstance() {
+  public  WikiaWebDriver setInstance(){
     String phantomJSBinaryName;
     String OSName = System.getProperty("os.name").toUpperCase();
 
@@ -27,6 +28,6 @@ public class GhostBrowser extends BrowserAbstract {
                          phantomJSBinary.getAbsolutePath());
     }
 
-    return new EventFiringWebDriver(new PhantomJSDriver(caps));
+    return new WikiaWebDriver(new PhantomJSDriver(caps));
   }
 }

@@ -37,7 +37,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private By avatarImage = By.cssSelector("img.avatar");
 
   public UserProfilePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clickOnBlogTab() {

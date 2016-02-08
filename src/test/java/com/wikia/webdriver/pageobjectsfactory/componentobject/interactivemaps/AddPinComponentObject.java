@@ -39,7 +39,7 @@ public class AddPinComponentObject extends BasePageObject {
   private WebElement errorField;
 
   public AddPinComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clearPinName() {

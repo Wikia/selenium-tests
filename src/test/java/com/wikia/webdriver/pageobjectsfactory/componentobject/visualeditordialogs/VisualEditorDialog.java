@@ -18,7 +18,7 @@ public class VisualEditorDialog extends WikiBasePageObject {
   private WebElement closeButton;
 
   public VisualEditorDialog(WebDriver driver) {
-    super(driver);
+    super();
     waitForDialogVisible();
   }
 

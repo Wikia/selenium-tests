@@ -36,7 +36,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   @Test(groups = {"VetModalCaption", "VetModalCaption_001", "Media"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_001_captionOnPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -62,7 +62,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
                   "Media"}, dependsOnGroups = "VetModalCaption_001")
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPage(wikiURL, articleTitleCaption);
@@ -74,7 +74,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   @Test(groups = {"VetModalCaption", "VetModalCaption_005", "Media"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_005_videoNameNotEditable() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     articleTitleNotEditable = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =

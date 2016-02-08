@@ -149,9 +149,8 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationBar;
   private GlobalNavigationPageObject globalNavigation;
 
-  public WikiBasePageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
+  public WikiBasePageObject() {
+    super();
   }
 
   public AuthModal getAuthModal() {
@@ -211,7 +210,7 @@ public class WikiBasePageObject extends BasePageObject {
   public HomePageObject openCorporateHomePage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL);
     PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
-    return new HomePageObject(driver);
+    return new HomePageObject();
   }
 
   public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {

@@ -170,7 +170,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
   public ArticlePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

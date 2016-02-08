@@ -16,7 +16,7 @@ public class SpecialPageObject extends WikiBasePageObject {
   private static final String HEADER_TEXT_SELECTOR = "//h1[contains(text(), '%s')]";
 
   public SpecialPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifySpecialPage() {

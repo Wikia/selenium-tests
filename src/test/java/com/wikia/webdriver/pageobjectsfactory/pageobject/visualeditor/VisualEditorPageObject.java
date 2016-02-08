@@ -417,7 +417,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     //wait for highlight
     wait.forElementVisible(focusedHighlight);
     //TODO check if any future webdriver upgrade would resolve having to use separate logic
-    if (Browser.CHROME.equalsIgnoreCase(Configuration.getBrowser())) {
+    if (driver.isChrome()) {
       Actions actions2 = new Actions(driver);
       actions2.sendKeys(Keys.DELETE).build().perform();
     } else {

@@ -30,12 +30,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   private String pageName;
 
   public WikiArticlePageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
   public WikiArticlePageObject(WebDriver driver, String pageName) {
-    super(driver);
+    super();
     this.pageName = pageName;
   }
 

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.drivers;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
 import com.wikia.webdriver.common.core.drivers.Browsers.ChromeBrowser;
 import com.wikia.webdriver.common.core.drivers.Browsers.DefaultBrowser;
@@ -30,9 +31,18 @@ public enum BrowserType{
     return name;
   }
 
-  public EventFiringWebDriver getInstance() {
+  public WikiaWebDriver getInstance() {
     try {
       return browser.newInstance().getInstance();
+    } catch (InstantiationException | IllegalAccessException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public WikiaWebDriver setInstance() {
+    try {
+      return browser.newInstance().setInstance();
     } catch (InstantiationException | IllegalAccessException e) {
       e.printStackTrace();
     }

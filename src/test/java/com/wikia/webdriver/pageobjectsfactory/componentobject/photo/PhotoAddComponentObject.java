@@ -33,7 +33,7 @@ public class PhotoAddComponentObject extends BasePageObject {
   private String photoName;
 
   public PhotoAddComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyAddPhotoModal() {

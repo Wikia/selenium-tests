@@ -18,7 +18,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_AND_RTE_DISABLED_WIKI);
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
   @Test(

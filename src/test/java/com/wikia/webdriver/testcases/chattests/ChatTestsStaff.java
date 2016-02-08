@@ -16,7 +16,7 @@ public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
   private Credentials credentials = Configuration.getCredentials();
 
   private ChatPageObject openChatForUser(WebDriver driver, String userName, String password) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(userName, password, wikiURL);
     return base.openChat(wikiURL);
   }

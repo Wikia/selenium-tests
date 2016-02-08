@@ -76,22 +76,22 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement middlePrefooter;
 
   public AdsBaseObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public AdsBaseObject(WebDriver driver, String page) {
-    super(driver);
+    super();
     getUrl(page, true);
   }
 
   public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
-    super(driver);
+    super();
     driver.manage().window().setSize(resolution);
     getUrl(testedPage, true);
   }
 
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
-    super(driver);
+    super();
     driver.manage().window().setSize(resolution);
   }
 

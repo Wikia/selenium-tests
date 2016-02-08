@@ -42,7 +42,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
   }
 

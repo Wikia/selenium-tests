@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.drivers.Browsers;
 
 import com.wikia.webdriver.common.core.ExtHelper;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.helpers.Browser;
@@ -20,7 +21,7 @@ public class ChromeBrowser extends BrowserAbstract {
   private static ChromeOptions chromeOptions = new ChromeOptions();
 
   @Override
-  public EventFiringWebDriver getInstance() {
+  public WikiaWebDriver setInstance() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
     String emulator = Configuration.getEmulator();
@@ -75,7 +76,7 @@ public class ChromeBrowser extends BrowserAbstract {
 
     ExtHelper.addExtensions(Configuration.getExtensions());
 
-    return new EventFiringWebDriver(new ChromeDriver(caps));
+    return new WikiaWebDriver(new ChromeDriver(caps));
   }
 
   public static ChromeOptions getChromeOptions() {

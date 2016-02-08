@@ -18,7 +18,7 @@ public class TemplatePageObject extends WikiBasePageObject{
     protected WebElement editUsingClassicEditor;
 
     public TemplatePageObject(WebDriver driver) {
-        super(driver);
+        super();
     }
 
     public SourceEditModePageObject clickCreate() {

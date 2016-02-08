@@ -23,7 +23,7 @@ public class PhotoOptionsComponentObject extends BasePageObject {
   private WebElement selectAnotherPhotoButton;
 
   public PhotoOptionsComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     // TODO Auto-generated constructor stub
   }
 

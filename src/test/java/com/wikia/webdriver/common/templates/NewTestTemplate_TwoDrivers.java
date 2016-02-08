@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.templates;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -16,8 +17,8 @@ import java.lang.reflect.Method;
 
 public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
 
-  protected WebDriver driverOne;
-  protected WebDriver driverTwo;
+  protected WikiaWebDriver driverOne;
+  protected WikiaWebDriver driverTwo;
 
   @Override
   @BeforeMethod(alwaysRun = true)

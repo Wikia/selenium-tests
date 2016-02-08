@@ -71,7 +71,7 @@ public class WikiActivityTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     UserProfilePageObject userProfile =
-        new WikiBasePageObject(driver).openProfilePage(credentials.userName, wikiURL);
+        new WikiBasePageObject().openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);

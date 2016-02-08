@@ -72,7 +72,7 @@ public class ChatPageObject extends WikiBasePageObject {
       "//span[@class='splotch' and contains(text(), '%s')]";
 
   public ChatPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyChatPage() {

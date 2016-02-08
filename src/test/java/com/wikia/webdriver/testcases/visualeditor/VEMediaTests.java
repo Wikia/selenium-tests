@@ -230,7 +230,7 @@ public class VEMediaTests extends NewTestTemplate {
   public void delete_Image() {
     // Excluding FF on running this VE-1370
     if (!"ff".equalsIgnoreCase(Configuration.getBrowser())) {
-      WikiBasePageObject base = new WikiBasePageObject(driver);
+      WikiBasePageObject base = new WikiBasePageObject();
       base.logOut(wikiURL);
       base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
       FilePagePageObject filePage = new FilePagePageObject(driver).open(testFullFileName);

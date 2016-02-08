@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.core.drivers.Browsers;
 
 import com.wikia.webdriver.common.core.ExtHelper;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -19,7 +20,7 @@ public class FirefoxBrowser extends BrowserAbstract {
   private static FirefoxProfile firefoxProfile;
 
   @Override
-  public EventFiringWebDriver getInstance() {
+  public WikiaWebDriver setInstance(){
     // Windows 8 requires to set webdriver.firefox.bin system variable
     // to path where executive file of FF is placed
     if ("WINDOWS 8".equalsIgnoreCase(System.getProperty("os.name"))) {
@@ -74,7 +75,7 @@ public class FirefoxBrowser extends BrowserAbstract {
 
     ExtHelper.addExtensions(Configuration.getExtensions());
 
-    return new EventFiringWebDriver(new FirefoxDriver(caps));
+    return new WikiaWebDriver(new FirefoxDriver(caps));
   }
 
   public static FirefoxProfile getProfile(){

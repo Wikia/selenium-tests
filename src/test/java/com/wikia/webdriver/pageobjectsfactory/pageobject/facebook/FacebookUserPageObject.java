@@ -14,7 +14,7 @@ public class FacebookUserPageObject extends WikiBasePageObject {
   private WebElement pageLogo;
 
   public FacebookUserPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyPageLogo() {

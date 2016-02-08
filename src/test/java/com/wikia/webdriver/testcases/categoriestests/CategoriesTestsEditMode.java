@@ -21,7 +21,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   @RelatedIssue(issueID = "CE-3160", comment = "Test manually: Test may fail until the ticket is fixed as" +
           " notification is obscuring the feature being tested")
   public void CategoriesTestsArticleEdit_001_anonEdit() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();
@@ -51,7 +51,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticleEdit_003", "CategoriesTestsArticleEditMode"})
   public void CategoriesTestsArticleEdit_003_anonSuggestions() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
     visual.typeCategoryName(PageContent.CATEGORY_NAME_PREFIX);

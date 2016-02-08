@@ -33,7 +33,7 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   WebElement errorMessage;
 
   public CreateNewWikiLogInSignUpPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void typeInUserName(String userName) {

@@ -17,7 +17,7 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
   protected WebElement oasisSkinClass;
 
   public BaseMonoBookPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

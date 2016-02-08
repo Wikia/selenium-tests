@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.driverprovider;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -13,20 +14,16 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverProvider {
 
-  private static List<WebDriver> drivers = new ArrayList<>();
+  private static List<WikiaWebDriver> drivers = new ArrayList<>();
 
   private DriverProvider() {
   }
 
   private static void newInstance() {
-    EventFiringWebDriver webDriver = BrowserType.lookup(Configuration.getBrowser()).getInstance();
-    webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-    webDriver.register(new PageObjectLogging());
-
-    drivers.add(webDriver);
+    drivers.add(BrowserType.lookup(Configuration.getBrowser()).getInstance());
   }
 
-  public static WebDriver getBrowserDriver(int index) {
+  public static WikiaWebDriver getBrowserDriver(int index) {
     for (; drivers.size() <= index; ) {
       newInstance();
     }
@@ -34,7 +31,7 @@ public class DriverProvider {
     return drivers.get(index);
   }
 
-  public static WebDriver getBrowserDriver() {
+  public static WikiaWebDriver getBrowserDriver() {
     return getBrowserDriver(0);
   }
 

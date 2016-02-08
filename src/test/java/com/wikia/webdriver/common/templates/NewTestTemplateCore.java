@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
@@ -29,7 +30,7 @@ import java.lang.reflect.Method;
             com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
-  protected WebDriver driver;
+  protected WikiaWebDriver driver;
   protected UrlBuilder urlBuilder;
   protected String wikiURL;
   protected String wikiCorporateURL;
@@ -78,7 +79,7 @@ public class NewTestTemplateCore {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
 
-  protected void loadFirstPage(WebDriver driver) {
+  protected void loadFirstPage(WikiaWebDriver driver) {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
 

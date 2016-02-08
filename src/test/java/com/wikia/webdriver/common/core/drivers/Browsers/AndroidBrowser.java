@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.drivers.Browsers;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -16,7 +17,7 @@ public class AndroidBrowser extends BrowserAbstract {
   private static AndroidDriver mobileDriver;
 
   @Override
-  public EventFiringWebDriver getInstance() {
+  public WikiaWebDriver setInstance(){
     DesiredCapabilities destCaps = new DesiredCapabilities();
     destCaps.setCapability("deviceName", Configuration.getDeviceName());
     URL url = null;
@@ -27,7 +28,7 @@ public class AndroidBrowser extends BrowserAbstract {
     }
     mobileDriver = new AndroidDriver(url, destCaps);
 
-    return new EventFiringWebDriver(mobileDriver);
+    return new WikiaWebDriver(mobileDriver);
   }
 
   public static AndroidDriver getMobileDriver() {

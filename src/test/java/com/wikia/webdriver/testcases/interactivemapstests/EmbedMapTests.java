@@ -25,7 +25,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void EmbedMapTests_001_EmbedMapInWikiaPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -57,7 +57,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"EmbedMapTests_003", "EmbedMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void EmbedMapTests_003_VerifyEmbedMapCodeButton() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -76,7 +76,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void EmbedMapTests_004_VerifyEmbedMapOutsideWikia() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -95,7 +95,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"EmbedMapTests_005", "EmbedMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void EmbedMapTests_005_VerifyEmbedMapContributeModals() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
@@ -110,7 +110,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"EmbedMapTests_006", "EmbedMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void EmbedMapTests_006_VerifyEmbeddedMapAddPinType() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     ArticlePageObject article = new ArticlePageObject(driver);
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();

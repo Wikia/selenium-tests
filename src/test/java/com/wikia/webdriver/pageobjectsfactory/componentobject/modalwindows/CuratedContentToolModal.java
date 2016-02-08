@@ -14,7 +14,7 @@ public class CuratedContentToolModal extends WikiBasePageObject {
   protected WebElement curatedContentToolModal;
 
   public CuratedContentToolModal(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isModalVisible() {

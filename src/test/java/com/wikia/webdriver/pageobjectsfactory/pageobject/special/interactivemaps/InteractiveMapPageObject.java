@@ -101,7 +101,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
   public InteractiveMapPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public enum embedMapDialogButtons {

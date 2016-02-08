@@ -43,7 +43,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   private String videoName;
 
   public VetAddVideoComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

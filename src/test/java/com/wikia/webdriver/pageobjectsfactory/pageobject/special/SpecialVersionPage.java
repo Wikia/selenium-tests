@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class SpecialVersionPage extends WikiBasePageObject {
 
   public SpecialVersionPage(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SpecialVersionPage open() {

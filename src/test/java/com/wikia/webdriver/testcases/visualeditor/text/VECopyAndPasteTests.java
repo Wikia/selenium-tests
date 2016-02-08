@@ -17,7 +17,7 @@ public class VECopyAndPasteTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setupd() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
   @Test(

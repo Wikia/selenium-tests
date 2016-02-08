@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -34,9 +33,8 @@ public class HomePageObject extends WikiBasePageObject {
 
   private String languageDropdownString = "nav.wikia-menu-button";
 
-  public HomePageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
+  public HomePageObject() {
+    super();
   }
 
   public HomePageObject open() {
@@ -125,7 +123,7 @@ public class HomePageObject extends WikiBasePageObject {
     PageObjectLogging.log("selectLanguage",
                           "language number " + Integer.toString(index) + " selected",
                           true);
-    return new HomePageObject(driver);
+    return new HomePageObject();
   }
 
   public void verifyLanguageButton() {

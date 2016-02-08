@@ -23,7 +23,7 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     base.loginAs(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 

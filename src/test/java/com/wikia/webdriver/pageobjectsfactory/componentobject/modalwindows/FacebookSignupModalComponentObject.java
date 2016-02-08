@@ -37,7 +37,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement emailCheckbox;
 
   public FacebookSignupModalComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void acceptWikiaAppPolicy() {

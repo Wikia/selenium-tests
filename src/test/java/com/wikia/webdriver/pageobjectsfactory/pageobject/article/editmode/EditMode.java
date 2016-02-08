@@ -42,7 +42,7 @@ public class EditMode extends WikiBasePageObject {
   private By submitButtonBy = By.cssSelector("#wpSave");
 
   public EditMode(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void submit() {

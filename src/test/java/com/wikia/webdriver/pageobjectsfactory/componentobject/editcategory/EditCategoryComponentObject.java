@@ -19,7 +19,7 @@ public class EditCategoryComponentObject extends BasePageObject {
   private WebElement saveButton;
 
   public EditCategoryComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public ArticlePageObject editCategoryName(String newCategoryName) {

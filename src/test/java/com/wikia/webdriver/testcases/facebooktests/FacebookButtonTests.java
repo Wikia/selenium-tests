@@ -31,21 +31,21 @@ public class FacebookButtonTests extends NewTestTemplate {
 
   @Test(groups = {"FBButton_002", "FacebookButton"})
   public void FBButton_002_SignUpButton_Visible() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUpPage = base.openSpecialSignUpPage(wikiURL);
     signUpPage.verifyFBButtonVisible();
   }
 
   @Test(groups = {"FBButton_003", "FacebookButton"})
   public void FBButton_003_LoginButton_Visible() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
     login.verifyFBButtonVisible();
   }
 
   @Test(groups = {"FBButton_004", "FacebookButton"})
   public void FBButton_004_ForcedLoginButton_Visible() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
     specialPage.addPhoto();
@@ -56,7 +56,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = {"FBButton_005", "FacebookButton"})
   @Execute(asUser = User.USER)
   public void FBButton_005_PrefsButton_Visible() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(tabNames.FACEBOOK);
     prefsPage.verifyFBButtonVisible();

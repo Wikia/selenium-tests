@@ -17,7 +17,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_001_VerifyUncheckedSingleCategory() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -31,7 +31,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_002_VerifyClickOnUncheckedCategory() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -47,7 +47,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_003_VerifyClickAllCategoriesUncheckCategories() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -62,7 +62,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_004_VerifyClickAllCategoriesCheckAllPinTypes() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =

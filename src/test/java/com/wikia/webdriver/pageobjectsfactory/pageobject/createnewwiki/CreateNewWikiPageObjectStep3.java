@@ -24,7 +24,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
   private WebElement submitButton;
 
   public CreateNewWikiPageObjectStep3(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

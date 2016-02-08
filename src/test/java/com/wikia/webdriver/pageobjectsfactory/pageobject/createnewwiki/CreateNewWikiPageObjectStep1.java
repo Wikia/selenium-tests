@@ -36,7 +36,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private String wikiNameString;
 
   public CreateNewWikiPageObjectStep1(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**
