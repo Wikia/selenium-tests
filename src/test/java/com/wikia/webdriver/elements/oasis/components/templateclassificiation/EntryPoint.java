@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.oasis.templateclassificiation;
+package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;

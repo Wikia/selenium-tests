@@ -1,10 +1,12 @@
-package com.wikia.webdriver.elements.oasis.templateclassificiation;
+package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -23,9 +25,11 @@ public class TemplateModal {
   private WebElement typeInputQuote;
 
   private Wait wait;
+  private Actions actions;
 
   public TemplateModal(WebDriver driver) {
     this.wait = new Wait(driver);
+    this.actions = new Actions(driver);
 
     PageFactory.initElements(driver, this);
   }
@@ -71,6 +75,15 @@ public class TemplateModal {
     } else {
       selectQuoteTemplate();
     }
+
+    return this;
+  }
+
+  public TemplateModal clickEnter() {
+    wait.forElementClickable(saveButton);
+    actions.sendKeys(Keys.ENTER).perform();
+
+    PageObjectLogging.logInfo("Template type was saved");
 
     return this;
   }

@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.oasis.templateclassificiation.EntryPoint;
-import com.wikia.webdriver.elements.oasis.templateclassificiation.TemplateModal;
+import com.wikia.webdriver.elements.oasis.components.templateclassificiation.EntryPoint;
+import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateModal;
 
 import org.testng.annotations.Test;
 
@@ -23,7 +23,7 @@ public class Editing extends NewTestTemplate {
   }
 
   @Test()
-  public void Editing_1_open_and_close() {
+  public void openAndClose() {
     init();
 
     navigate.toPage("/wiki/Template:T");
@@ -33,13 +33,23 @@ public class Editing extends NewTestTemplate {
   }
 
   @Test()
-  public void Editing_2_open_choose_save() {
+  public void openChooseSave() {
     init();
 
     navigate.toPage("/wiki/Template:T");
     entryPoint.openTemplateClassificationModal();
     templateModal.selectTemplateType(entryPoint.getTemplateName());
     templateModal.saveTemplateType();
+    entryPoint.checkTemplateType();
+  }
+
+  @Test()
+  public void actionEdit() {
+    init();
+
+    navigate.toPage_1("/wiki/Template:AutoTest1?action=edit");
+    templateModal.selectInfoboxTemplate();
+    templateModal.clickEnter();
     entryPoint.checkTemplateType();
   }
 }

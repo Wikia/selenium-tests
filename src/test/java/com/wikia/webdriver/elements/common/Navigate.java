@@ -44,4 +44,18 @@ public class Navigate {
 
     return this;
   }
+
+  public Navigate toPage_1(String pageName) {
+    try {
+      URL url = new URL(driver.getCurrentUrl());
+      String host = url.getHost();
+//      String cacheBuster = "?cb=" + DateTime.now().getMillis();
+
+      driver.get("http://" + host + pageName);
+    } catch (MalformedURLException e) {
+      PageObjectLogging.logInfo("Url malformed");
+    }
+
+    return this;
+  }
 }

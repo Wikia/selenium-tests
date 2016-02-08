@@ -97,6 +97,8 @@
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Layout"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Searching"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Navigating"/>
+            <class name="com.wikia.webdriver.testcases.globalshortcuts.Editing"/>
+            <class name="com.wikia.webdriver.testcases.globalshortcuts.Navigating"/>
             <class name="com.wikia.webdriver.testcases.heromoduletests.HeroModuleTests"/>
             <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
