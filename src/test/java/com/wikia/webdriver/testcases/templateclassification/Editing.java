@@ -47,7 +47,7 @@ public class Editing extends NewTestTemplate {
   public void actionEdit() {
     init();
 
-    navigate.toPage_1("/wiki/Template:AutoTest1?action=edit");
+    navigate.toPage("/wiki/Template:AutoTest1", new String[]{"action=edit"});
     templateModal.selectInfoboxTemplate();
     templateModal.clickEnter();
     entryPoint.checkTemplateType();

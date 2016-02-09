@@ -45,13 +45,17 @@ public class Navigate {
     return this;
   }
 
-  public Navigate toPage_1(String pageName) {
+  public Navigate toPage(String pageName, String[] queryParams) {
     try {
       URL url = new URL(driver.getCurrentUrl());
       String host = url.getHost();
-//      String cacheBuster = "?cb=" + DateTime.now().getMillis();
+      String query = "?cb=" + DateTime.now().getMillis();
 
-      driver.get("http://" + host + pageName);
+      for (String queryParam : queryParams) {
+        query = query + "&" + queryParam;
+      }
+
+      driver.get("http://" + host + pageName + query);
     } catch (MalformedURLException e) {
       PageObjectLogging.logInfo("Url malformed");
     }
