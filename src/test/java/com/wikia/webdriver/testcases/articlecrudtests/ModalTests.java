@@ -22,7 +22,7 @@ public class ModalTests extends NewTestTemplate {
   public void ModalTests_verifyScrollbarAppears(Dimension dimension) {
     String errorMessage = "can not scroll window";
 
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
     // resize window

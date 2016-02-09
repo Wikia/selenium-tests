@@ -34,8 +34,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.clickUploadButton();
     filesPage.verifyFileUploaded(fileName);
 
-    FilePagePageObject file =
-        new SpecialNewFilesPageObject(driver).openFilePage(wikiURL, fileName, true);
+    FilePagePageObject file = new FilePagePageObject(driver).open(fileName, true);
     imageURL = file.getImageUrl();
     imageThumbnailURL = file.getImageThumbnailUrl();
     file.verifyURLStatus(200, imageURL);
@@ -77,13 +76,13 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.clickUploadButton();
     filesPage.verifyFileUploaded(fileName);
 
-    FilePagePageObject file = filesPage.openFilePage(wikiURL, fileName, true);
+    FilePagePageObject file = new FilePagePageObject(driver).open(fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = filesPage.openFilePage(wikiURL, imageNewName, true);
+    file = new FilePagePageObject(driver).open(fileName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
     file.verifyNotificationMessage();

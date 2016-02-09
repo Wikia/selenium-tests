@@ -233,7 +233,7 @@ public class VEMediaTests extends NewTestTemplate {
       WikiBasePageObject base = new WikiBasePageObject(driver);
       base.logOut(wikiURL);
       base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-      FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
+      FilePagePageObject filePage = new FilePagePageObject(driver).open(testFullFileName);
       filePage.verifyImageLicense(testImageLicense);
       filePage.selectHistoryTab();
       filePage.verifyArticleNameInWgPageName(URLsContent.FILE_NAMESPACE + testFullFileName);

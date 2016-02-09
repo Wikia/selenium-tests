@@ -15,8 +15,9 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
   @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
   public void CategoriesTestsArticle_001_anon() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();

@@ -175,13 +175,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     return new FilePagePageObject(driver);
   }
 
-  public FilePagePageObject openRandomImage() {
-    driver.get(
-        getRandomImageUrl()
-    );
-    return new FilePagePageObject(driver);
-  }
-
   public WatchPageObject unfollowImage(String wikiURL, String imageName) {
     String url = urlBuilder.appendQueryStringToURL(
         wikiURL +

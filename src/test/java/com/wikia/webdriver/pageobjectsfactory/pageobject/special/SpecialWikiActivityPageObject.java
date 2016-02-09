@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -21,6 +23,13 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   public SpecialWikiActivityPageObject(WebDriver driver) {
     super(driver);
+  }
+
+  public SpecialWikiActivityPageObject open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
+           + URLsContent.SPECIAL_WIKI_ACTIVITY);
+
+    return this;
   }
 
   /**

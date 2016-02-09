@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -78,11 +79,12 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_005")
+  @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject(driver).open();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();

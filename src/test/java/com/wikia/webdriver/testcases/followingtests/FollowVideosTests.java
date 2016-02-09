@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.followingtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -32,17 +29,12 @@ public class FollowVideosTests extends NewTestTemplate {
   @Test(groups = "FollowVideo", dependsOnMethods = {"FollowVideo_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowVideo_002_follow() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    FilePagePageObject file = base.openFilePage(wikiURL, videoName);
-    file.follow();
+    new FilePagePageObject(driver).open(videoName).follow();
   }
 
   @Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})
   @Execute(asUser = User.USER)
   public void FollowVideo_003_verify() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
-    follow.verifyFollowedImageVideo(videoName);
+    new SpecialFollowPageObject(driver).open().verifyFollowedImageVideo(videoName);
   }
-
 }
