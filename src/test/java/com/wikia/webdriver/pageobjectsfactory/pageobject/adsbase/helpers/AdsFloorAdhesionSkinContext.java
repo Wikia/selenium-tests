@@ -1,10 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
-
-import com.sun.jnlp.ApiDialog;
 
 public class AdsFloorAdhesionSkinContext {
 
