@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,86 +14,102 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ActionExplorerModal {
 
-  @FindBy(css = ".autocomplete-suggestions")
-  private WebElement actionExplorer;
-
   @FindBy(css = ".label-in-suggestions")
-  private WebElement keyboardShortcutShortcut;
+  private WebElement searchSuggestions;
 
   @FindBy(css = "#global_shortcuts_search_field")
   private WebElement searchField;
 
-  @FindBy(xpath = "/html/body/div[6]/div/section/div[2]/div/div[17]/span[1]")
-  private WebElement chosenShortcut;
+  @FindBy(css = ".global-shortcuts-search div[data-index='16']")
+  private WebElement specialAllPagesLink;
+
+  @FindBy(css = ".autocomplete-suggestions")
+  private WebElement autocompleteSuggestions;
+
+  private By actionExplorerModalSelector = By.cssSelector(".global-shortcuts-search");
+  private By keyboardShortcutsModalSelector = By.cssSelector(".global-shortcuts-help");
 
   private Wait wait;
   private Actions actions;
   private JavascriptActions jsActions;
+  private WebDriver driver;
 
   public ActionExplorerModal(WebDriver driver) {
     this.wait = new Wait(driver);
     this.actions = new Actions(driver);
     this.jsActions = new JavascriptActions(driver);
+    this.driver = driver;
 
     PageFactory.initElements(driver, this);
   }
 
-  public ActionExplorerModal openActionExplorerWithShortcut() {
+  public ActionExplorerModal useShortcut(String shortcut) {
+    switch (shortcut) {
+      case ".":
+        triggerDotShortcut();
+        break;
+      case "ESC":
+        triggerEscapeShortcut();
+        break;
+    }
+
+    return this;
+  }
+
+  private ActionExplorerModal triggerDotShortcut() {
     actions.sendKeys(".").perform();
 
+    wait.forElementVisible(actionExplorerModalSelector);
     PageObjectLogging.logInfo("Action Explorer modal was opened by . button");
 
     return this;
   }
 
-  public ActionExplorerModal closeActionExplorerModal() {
-    wait.forElementVisible(actionExplorer);
+  private ActionExplorerModal triggerEscapeShortcut() {
     actions.sendKeys(Keys.ESCAPE).perform();
 
+    wait.forElementNotVisible(actionExplorerModalSelector);
     PageObjectLogging.logInfo("Action explorer was closed by esc button");
 
     return this;
   }
 
-  public ActionExplorerModal checkVisibility() {
-    wait.forElementVisible(actionExplorer);
-    actionExplorer.isDisplayed();
-
-    PageObjectLogging.logInfo("Action explorer visible");
+  public ActionExplorerModal searchFor(String searchQuery) {
+    wait.forElementClickable(searchField);
+    actions.sendKeys(searchQuery).perform();
+    PageObjectLogging.logInfo("Typed in search box: " + searchQuery);
 
     return this;
   }
 
-  public ActionExplorerModal chooseWrittenShortcut() {
-    wait.forElementVisible(searchField);
-    actions.sendKeys("Keyboard").perform();
+  public ActionExplorerModal selectKeyboardShortcutsFromSearchSuggestions() {
+    wait.forElementClickable(searchSuggestions);
+    PageObjectLogging.logInfo("Select: " + searchSuggestions.getText());
 
-    PageObjectLogging.logInfo("Keyboard was written in search box");
-
-    wait.forElementVisible(keyboardShortcutShortcut);
     actions.sendKeys(Keys.ENTER).perform();
 
-    PageObjectLogging.logInfo("It was clicked on keyboard shortcuts help");
+    wait.forElementVisible(keyboardShortcutsModalSelector);
+    PageObjectLogging.logInfo("Keyboard shortcuts modal was opened");
 
     return this;
   }
 
-  public ActionExplorerModal scrollDown() {
-    wait.forElementVisible(actionExplorer);
-    jsActions.mouseOver(actionExplorer);
-    jsActions.scrollToElement(chosenShortcut);
+  public ActionExplorerModal scrollToAllPagesLink() {
+    WebElement searchModal = driver.findElement(actionExplorerModalSelector);
+    wait.forElementClickable(searchModal);
 
-    PageObjectLogging.logInfo("Scrolled down");
-
-    return this;
-    }
-
-  public ActionExplorerModal clickchosenShortcut() {
-    wait.forElementClickable(chosenShortcut);
-    chosenShortcut.click();
-
-    PageObjectLogging.logInfo("Redirection to chosen Special Page");
+    jsActions.scrollToElementInModal(autocompleteSuggestions, specialAllPagesLink);
+    PageObjectLogging.logInfo("Scrolled to all pages link");
 
     return this;
-    }
+  }
+
+  public ActionExplorerModal openAllPagesLink() {
+    wait.forElementClickable(specialAllPagesLink);
+    specialAllPagesLink.click();
+
+    PageObjectLogging.logInfo("Special all pages was opened");
+
+    return this;
+  }
 }

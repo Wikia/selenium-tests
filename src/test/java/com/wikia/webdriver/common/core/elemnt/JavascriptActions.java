@@ -106,6 +106,16 @@ public class JavascriptActions {
     }
   }
 
+  public void scrollToElementInModal(WebElement modal, WebElement element) {
+    int elementOffsetTop = Integer.parseInt(
+        js.executeScript("return Math.round($(arguments[0]).offset().top)", element).toString());
+    int modalOffsetTop = Integer.parseInt(
+        js.executeScript("return Math.round($(arguments[0]).offset().top)", modal).toString());
+    int scrollTop = elementOffsetTop - modalOffsetTop;
+
+    js.executeScript("$(arguments[0]).scrollTop(arguments[1])", modal, scrollTop);
+  }
+
   public void scrollElementIntoViewPort(WebElement element){
     if (!isElementInViewPort(element)) {
       scrollToElement(element);
