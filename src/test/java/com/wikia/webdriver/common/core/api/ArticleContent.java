@@ -13,9 +13,6 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Created by Ludwik on 2015-08-05.
- */
 public class ArticleContent extends ApiCall {
 
   private static String secret;

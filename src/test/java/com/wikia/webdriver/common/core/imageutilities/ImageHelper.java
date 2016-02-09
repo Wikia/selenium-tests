@@ -2,9 +2,6 @@ package com.wikia.webdriver.common.core.imageutilities;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by Ludwik Kazmierczak
- */
 public class ImageHelper {
 
   private static final String START_TOKEN = "Wikia-Visualization-Main%2C";

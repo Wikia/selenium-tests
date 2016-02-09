@@ -13,9 +13,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * Created by RodriGomez on 02/04/15.
- */
 public class ModularMainPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".hero-image")

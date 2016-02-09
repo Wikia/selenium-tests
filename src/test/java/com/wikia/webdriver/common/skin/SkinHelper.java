@@ -1,17 +1,21 @@
 package com.wikia.webdriver.common.skin;
 
-import com.wikia.webdriver.elements.mercury.old.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SkinHelper extends BasePageObject{
+public class SkinHelper extends WikiBasePageObject {
 
   @FindBy(css = "body.skin-oasis")
   private WebElement oasisClassInBody;
+
   @FindBy(css = "body.ember-application")
   private WebElement mercuryClassInBody;
+
+  @FindBy(css = "body.wkMobile")
+  private WebElement wikiaMobileClassInBody;
 
   public SkinHelper(WebDriver driver) {
     super(driver);
@@ -23,6 +27,8 @@ public class SkinHelper extends BasePageObject{
         return wait.forElementInViewPort(oasisClassInBody);
       case MERCURY:
         return wait.forElementInViewPort(mercuryClassInBody);
+      case WIKIAMOBILE:
+        return wait.forElementInViewPort(wikiaMobileClassInBody);
       default:
         return false;
     }

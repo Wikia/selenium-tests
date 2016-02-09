@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.old;
 
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,8 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class InteractiveMapsComponentObject extends BasePageObject {
+public class InteractiveMapsComponentObject {
 
   @FindBy(css = ".current")
   private WebElement mapFrame;
@@ -37,10 +39,15 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   private WebElement mapThumbnail;
 
   private JavascriptExecutor jsexec;
+  private Wait wait;
+  private WebDriver driver;
 
   public InteractiveMapsComponentObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
     this.jsexec = (JavascriptExecutor) driver;
+
+    PageFactory.initElements(driver, this);
   }
 
   public void clickMapThumbnail() {
@@ -90,11 +97,13 @@ public class InteractiveMapsComponentObject extends BasePageObject {
       PageObjectLogging.log("Map modal not visible", e, true);
       return false;
     }
+
     return true;
   }
 
   public boolean isTextInMapTitleHeader() {
     wait.forElementVisible(mapTitle);
+
     return !mapTitle.getText().isEmpty();
   }
 
@@ -103,7 +112,9 @@ public class InteractiveMapsComponentObject extends BasePageObject {
   }
 
   public boolean isPinPopUp() {
-    return isElementOnPage(poiPopUp);
+    wait.forElementVisible(poiPopUp);
+
+    return true;
   }
 
   public boolean isZoomInButtonEnabled() throws WebDriverException {

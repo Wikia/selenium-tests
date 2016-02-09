@@ -2,19 +2,18 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-/**
- * @ownshership: Content West-Wing
- */
-public class PortableInfoboxObject extends BasePageObject {
+public class PortableInfoboxObject {
 
   @FindBy(css = "body")
   private WebElement bodyElement;
@@ -65,8 +64,14 @@ public class PortableInfoboxObject extends BasePageObject {
 
   private By imageInTitleSelector = By.cssSelector(".pi-title img");
 
+  private Wait wait;
+  private WebDriver driver;
+
   public PortableInfoboxObject(WebDriver driver) {
-    super(driver);
+    this.wait = new Wait(driver);
+    this.driver = driver;
+
+    PageFactory.initElements(driver, this);
   }
 
   public String getExternalLinkName(int index) {
@@ -89,7 +94,6 @@ public class PortableInfoboxObject extends BasePageObject {
     return headers.get(index).getText();
   }
 
-  // TODO: This is not real tap, replace with DeviceTouchActions class methods
   public PortableInfoboxObject tapInfoboxContent() {
     Assertion.assertFalse(dataLabels.isEmpty());
     dataLabels.get(0).click();
@@ -150,7 +154,6 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject isMainImageVisible() {
     wait.forElementVisible(mainImage);
-    Assertion.assertEquals(isElementOnPage(mainImage), true);
     PageObjectLogging.log("Main image", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
@@ -164,7 +167,6 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject isTitleOverImageVisible() {
     wait.forElementVisible(title);
-    Assertion.assertEquals(isElementOnPage(title), true);
     PageObjectLogging.log("Title over image", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
@@ -172,7 +174,6 @@ public class PortableInfoboxObject extends BasePageObject {
 
   public PortableInfoboxObject isTitleAboveImageVisible() {
     wait.forElementVisible(titleSmallImage);
-    Assertion.assertEquals(isElementOnPage(titleSmallImage), true);
     PageObjectLogging.log("Title above image", MercuryMessages.VISIBLE_MSG, true);
 
     return this;
@@ -186,7 +187,7 @@ public class PortableInfoboxObject extends BasePageObject {
   }
 
   public PortableInfoboxObject isInfoboxCollapsed() {
-    Assertion.assertEquals(isElementOnPage(infoboxIsCollapsed), true);
+    wait.forElementVisible(infoboxIsCollapsed);
     PageObjectLogging.log("Infobox", MercuryMessages.COLLAPSED_MSG, true);
 
     return this;

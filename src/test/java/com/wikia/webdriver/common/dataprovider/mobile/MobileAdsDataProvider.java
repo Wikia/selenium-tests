@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.dataprovider.mobile;
 import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MobileAdsDataProvider {
 
@@ -75,6 +76,7 @@ public class MobileAdsDataProvider {
         {
             "yugioh",
             "Dark_Magician",
+            null,
             "wka.ent/_yugioh//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -112,6 +114,7 @@ public class MobileAdsDataProvider {
         {
             "fallout",
             "Fallout",
+            null,
             "wka.gaming/_fallout//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -152,6 +155,7 @@ public class MobileAdsDataProvider {
         {
             "runescape",
             "Grew",
+            null,
             "wka.gaming/_runescape//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -189,6 +193,7 @@ public class MobileAdsDataProvider {
         {
             "lego",
             "LEGO_Wiki",
+            null,
             "wka.life/_lego//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -224,6 +229,7 @@ public class MobileAdsDataProvider {
         {
             "civilization",
             "Category:Browse",
+            null,
             "wka.gaming/_civilization//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -259,6 +265,7 @@ public class MobileAdsDataProvider {
         {
             "starcraft",
             "StarCraft_Wiki",
+            null,
             "wka.gaming/_starcraft//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -298,6 +305,7 @@ public class MobileAdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
+            null,
             "wka.ent/_overlordmaruyama//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -325,9 +333,51 @@ public class MobileAdsDataProvider {
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
             )
+        },
+        {
+            "adtest",
+            "SyntheticTests/RubiconFastlane",
+            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "wka.life/_adtest//article",
+            "MOBILE_TOP_LEADERBOARD",
+            Collections.emptyList(),
+            Arrays.asList(
+                "\"rpfl_7450\":[\"15_tier2000\",\"43_tier2000\"]"
+            )
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] dfpEvolveParamsMercury() {
+        return new Object[][]{
+            {
+                "adtest",
+                "SyntheticTests/DfpParams",
+                4403,
+                "ev/wikia_intl/ros",
+                "MOBILE_TOP_LEADERBOARD",
+                Arrays.asList(
+                    "\"s0\":\"life\"",
+                    "\"s0v\":\"lifestyle\"",
+                    "\"s1\":\"_adtest\"",
+                    "\"s2\":\"article\"",
+                    "\"dmn\":\"wikiacom\"",
+                    "\"hostpre\":\"",
+                    "\"skin\":\"mercury\"",
+                    "\"wpage\":\"synthetictests/dfpparams\"",
+                    "\"ref\":\"direct\"",
+                    "\"lang\":\"en\"",
+                    "\"esrb\":\"teen\""
+                ),
+                Arrays.asList(
+                    "\"sect\":\"ros\"",
+                    "\"pos\":\"a\"",
+                    "\"site\":\"wikia_intl\""
+                )
+            }
+        };
+    }
 
   @DataProvider
   public static Object[][] disableGptMercury() {

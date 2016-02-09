@@ -1,21 +1,19 @@
 package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.concurrent.TimeUnit;
 
-public class LoginPageObject extends WikiBasePageObject {
+public class LoginPageObject {
 
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
@@ -36,8 +34,16 @@ public class LoginPageObject extends WikiBasePageObject {
   @FindBy(css = ".sign-in")
   private WebElement signInButton;
 
+  private WebDriver driver;
+  private Wait wait;
+  private UrlBuilder urlBuilder;
+
   public LoginPageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.urlBuilder = new UrlBuilder();
+    this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public LoginPageObject get() {
@@ -84,29 +90,6 @@ public class LoginPageObject extends WikiBasePageObject {
 
   public boolean isSubmitButtonDisabled() {
     return "true".equals(submitButton.getAttribute("disabled"));
-  }
-
-  /**
-   * Check if button is disabled for the @duration
-   *
-   * @param duration in seconds
-   */
-  public boolean isSubmitButtonDisabled(int duration) {
-    changeImplicitWait((duration * 1000) / 4, TimeUnit.MILLISECONDS);
-    try {
-      new WebDriverWait(driver, duration, (duration * 1000) / 2)
-          .until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver input) {
-              return !isSubmitButtonDisabled();
-            }
-          });
-      return false;
-    } catch (TimeoutException e) {
-      return true;
-    } finally {
-      restoreDeaultImplicitWait();
-    }
   }
 
   public Boolean isPasswordTogglerDisabled() {

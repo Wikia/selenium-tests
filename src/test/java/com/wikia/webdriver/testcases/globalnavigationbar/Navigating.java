@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = {"globalnavigationbar", "Navigating"})
+@Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
 public class Navigating extends NewTestTemplate {
 
   private final String EN_COMMUNITY = "muppet";
@@ -48,15 +48,5 @@ public class Navigating extends NewTestTemplate {
 
     PageObjectLogging.log("CHECK URL", "Expected: " + FANDOM_URL,
             new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(FANDOM_URL)));
-  }
-
-  @Test(groups = {"clickOnHubsLinkOpensExpectedHub"},
-          enabled = false)
-  public void clickOnHubsLinkOpensExpectedHub() {
-    GlobalNavigationPageObject globalNav = new HomePageObject(driver).getGlobalNavigation();
-
-    for (GlobalNavigationPageObject.Hub hubName : GlobalNavigationPageObject.Hub.values()) {
-      globalNav.openHub(hubName);
-    }
   }
 }

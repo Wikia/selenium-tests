@@ -4,13 +4,9 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by Ludwik on 2015-07-22.
- */
 public class Typing {
 
   private Typing() {
-
   }
 
   /**

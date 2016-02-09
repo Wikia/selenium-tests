@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,10 +10,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class TableOfContentPageObject extends BasePageObject {
+public class TableOfContentPageObject {
 
   @FindBy(css = "nav.table-of-contents")
   private WebElement tocAll;
@@ -29,8 +31,14 @@ public class TableOfContentPageObject extends BasePageObject {
 
   private String section_selector = "section.article-body h2[section=\"__index__\"]";
 
+  private WebDriver driver;
+  private Wait wait;
+
   public TableOfContentPageObject(WebDriver driver) {
-    super(driver);
+    this.driver = driver;
+    this.wait = new Wait(driver);
+
+    PageFactory.initElements(driver, this);
   }
 
   public boolean isTOCDisplayed() {

@@ -1,12 +1,9 @@
 package com.wikia.webdriver.elements.common;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Navigate {
 
@@ -17,30 +14,20 @@ public class Navigate {
   }
 
   public Navigate toPage(String pageName) {
-    try {
-      URL url = new URL(driver.getCurrentUrl());
-      String host = url.getHost();
-      String cacheBuster = "?cb=" + DateTime.now().getMillis();
+    String host = UrlBuilder.getHostForWiki();
+    String cacheBuster = "?cb=" + DateTime.now().getMillis();
 
-      driver.get("http://" + host + pageName + cacheBuster);
-    } catch (MalformedURLException e) {
-      PageObjectLogging.logInfo("Url malformed");
-    }
+    driver.get("http://" + host + pageName + cacheBuster);
 
     return this;
   }
 
   public Navigate toPage(String pageName, String reference) {
-    try {
-      URL url = new URL(driver.getCurrentUrl());
-      String host = url.getHost();
-      String cacheBuster = "?cb=" + DateTime.now().getMillis();
-      reference = "#" + reference;
+    String host = UrlBuilder.getHostForWiki();
+    String cacheBuster = "?cb=" + DateTime.now().getMillis();
+    reference = "#" + reference;
 
-      driver.get("http://" + host + pageName + cacheBuster + reference);
-    } catch (MalformedURLException e) {
-      PageObjectLogging.logInfo("Url malformed");
-    }
+    driver.get("http://" + host + pageName + cacheBuster + reference);
 
     return this;
   }

@@ -36,6 +36,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
+  private static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -331,10 +332,32 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Test whether the correct GPT ad unit is called
    *
-   * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName the name of the slot an ad is going to be inserted into
+   * @param src      the source of an ad, for example gpt or remnant
    */
   public void verifyGptIframe(String adUnit, String slotName, String src) {
-    String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + src + "/" + slotName + "_0";
+    verifyGptIframe(WIKIA_DFP_CLIENT_ID, adUnit, slotName, src);
+  }
+
+  /**
+   * Test whether the correct GPT ad unit is called
+   *
+   * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or
+   *                    Turtle
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName    the name of the slot an ad is going to be inserted into
+   * @param src         the source of an ad, for example gpt, remnant or empty
+   */
+  public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
+    String iframeId = Joiner.on("/").skipNulls().join(
+        "google_ads_iframe_",
+        String.valueOf(dfpClientId),
+        adUnit,
+        src.length > 0 ? src[0] : null,
+        slotName + "_0"
+    );
+
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
@@ -451,11 +474,13 @@ public class AdsBaseObject extends WikiBasePageObject {
   public boolean checkSlotOnPageLoaded(String slotName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
+      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+        tryTriggerFloatingMedrec();
+      }
+
       String slotSelector = AdsContent.getSlotSelector(slotName);
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        tryTriggerFloatingMedrec(slot);
-      }
+
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 1;
     } finally {
@@ -572,14 +597,15 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void tryTriggerFloatingMedrec(final WebElement slot) {
+  private void tryTriggerFloatingMedrec() {
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions.execute(
               " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-          return slot.getAttribute("style").contains("visibility: visible;");
+          String floatingMedrecCssSelector = AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC);
+          return driver.findElements(By.cssSelector(floatingMedrecCssSelector)).size() > 0;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {

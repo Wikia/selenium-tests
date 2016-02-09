@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/**
- * Created by Ludwik on 2015-08-03.
- */
 public class Elements {
 
   public static WebElement getElementByValue(List<WebElement> elements, String attribute,

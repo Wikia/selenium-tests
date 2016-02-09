@@ -62,18 +62,10 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isWidgetVisible(int widgetIndex) {
-    boolean result;
-    if (polldaddyDivList.isEmpty()) {
-      result = false;
-    } else {
-      WebElement polldaddyWidget = polldaddyDivList.get(widgetIndex);
-      if (!isElementVisible(polldaddyWidget)) {
-        result = false;
-      } else {
-        result = isElementVisible(polldaddyWidget.findElement(polldaddyBody));
-      }
-    }
-    logVisibility(result);
-    return result;
+    WebElement polldaddyWidget = polldaddyDivList.get(widgetIndex);
+    wait.forElementVisible(polldaddyWidget);
+    wait.forElementVisible(polldaddyWidget.findElement(polldaddyBody));
+
+    return true;
   }
 }

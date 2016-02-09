@@ -15,6 +15,7 @@ public class MercuryWikis {
 
   // Other wikis
   public static final String MLP = "mlp";
+  public static final String MEDIAWIKI_119 = "mediawiki119";
 
   private MercuryWikis() {
   }

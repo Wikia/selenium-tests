@@ -2,9 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by rcunningham on 4/2/15.
- */
 public class RemoveFacebookPageObject extends FacebookMainPageObject {
 
   public RemoveFacebookPageObject(WebDriver driver) {

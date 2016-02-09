@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-@Test(groups = {"globalnavigationbar", "Layout"})
+@Test(groups = {"globalnavigationbar", "globalnavigationbarLayout"})
 public class Layout extends NewTestTemplate{
 
   private static final Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);

@@ -26,10 +26,10 @@ public class Navigation {
   @FindBy(css = ".side-nav-menu__item.menu")
   private List<WebElement> subMenuLinks;
 
-  @FindBy(css = ".local-nav-menu-2016 li.mw-content a")
+  @FindBy(css = ".local-nav-menu li.mw-content a")
   private List<WebElement> localNavPageLinks;
 
-  private By localNavMenu = By.cssSelector(".local-nav-menu-2016");
+  private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By cancelSearchButton = By.cssSelector(".side-search__cancel");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");

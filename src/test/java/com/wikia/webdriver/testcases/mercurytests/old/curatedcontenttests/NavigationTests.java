@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -46,7 +47,6 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_001")
-  @RelatedIssue(issueID = "XW-687", comment = "java.lang.IndexOutOfBoundsException: Index: 1, Size: 0")
   public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 
@@ -71,10 +71,10 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_PATH);
 
     driver.navigate().back();
-    Assertion.assertUrlEqualToCurrentUrl(driver, previousUrl);
+    Assertion.assertEquals(driver.getCurrentUrl(), previousUrl);
 
     driver.navigate().forward();
-    Assertion.assertUrlEqualToCurrentUrl(driver, nextUrl);
+    Assertion.assertEquals(driver.getCurrentUrl(), nextUrl);
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_002")
@@ -134,22 +134,22 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     init();
 
-    String expectedUrl = urlBuilder.getUrlForPage(driver, MercurySubpages.CC_CATEGORY_TEMPLATES);
+    String expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_CATEGORY_TEMPLATES);
     navigate.toPage(MercurySubpages.CC_CATEGORY_TEMPLATES);
     loading.handleAsyncPageReload();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
-    expectedUrl = urlBuilder.getUrlForPage(driver, MercurySubpages.CC_SECTION_CATEGORIES);
+    expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_SECTION_CATEGORIES);
     navigate.toPage(MercurySubpages.CC_SECTION_CATEGORIES);
     loading.handleAsyncPageReload();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
-    expectedUrl = urlBuilder.getUrlForPage(driver, MercurySubpages.CC_MAIN_PAGE);
+    expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
     navigate.toPage(MercurySubpages.CC_EMPTY_CATEGORY);
     loading.handleAsyncPageReload();
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
-    expectedUrl = urlBuilder.getUrlForPage(driver, MercurySubpages.CC_MAIN_PAGE);
+    expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
     navigate.toPage(MercurySubpages.CC_NOT_EXISTING_SECTION);
     loading.handleAsyncPageReload();
 

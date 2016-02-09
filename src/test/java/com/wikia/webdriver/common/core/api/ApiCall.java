@@ -20,9 +20,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-/**
- * Created by wikia on 2015-08-27.
- */
 public abstract class ApiCall {
 
   private static String ERROR_MESSAGE = "Problem with API call";
@@ -30,9 +27,7 @@ public abstract class ApiCall {
   protected static String URL_STRING = null;
 
   protected ApiCall() {
-
   }
-
 
   abstract protected String getURL();
 

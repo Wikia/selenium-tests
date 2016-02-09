@@ -14,12 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-
-/**
- * Created by Liz Lee on 6/4/14.
- */
-
-
 public class VideoHomePageObject extends WikiBasePageObject {
 
   @FindBy(css = ".featured-video-slider .bx-controls")

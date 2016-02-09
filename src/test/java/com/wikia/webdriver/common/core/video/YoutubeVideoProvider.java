@@ -22,9 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ludwik Kaźmierczak on 2015-02-12.
- */
 public class YoutubeVideoProvider {
 
   private static final String API_KEY = Configuration.getCredentials().youTubeApiKey;
