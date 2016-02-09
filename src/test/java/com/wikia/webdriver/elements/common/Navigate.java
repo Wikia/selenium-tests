@@ -33,19 +33,14 @@ public class Navigate {
   }
 
   public Navigate toPage(String pageName, String[] queryParams) {
-    try {
-      URL url = new URL(driver.getCurrentUrl());
-      String host = url.getHost();
-      String query = "?cb=" + DateTime.now().getMillis();
+    String host = UrlBuilder.getHostForWiki();
+    String query = "?cb=" + DateTime.now().getMillis();
 
-      for (String queryParam : queryParams) {
-        query = query + "&" + queryParam;
-      }
-
-      driver.get("http://" + host + pageName + query);
-    } catch (MalformedURLException e) {
-      PageObjectLogging.logInfo("Url malformed");
+    for (String queryParam : queryParams) {
+      query = query + "&" + queryParam;
     }
+
+    driver.get("http://" + host + pageName + query);
 
     return this;
   }

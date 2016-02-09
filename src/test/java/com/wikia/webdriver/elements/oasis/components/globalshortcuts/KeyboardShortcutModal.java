@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.globalshortcuts;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -19,10 +20,17 @@ public class KeyboardShortcutModal{
 
   private Wait wait;
   private Actions actions;
+  private WebDriver driver;
+
+  private static final String EXPECTED_URL_FOR_SEARCH =
+      "http://globalshortcuts-en.wikia.com/wiki/Special:Search?search=wikia&fulltext=Search";
+  private static final String EXPECTED_URL_FOR_INSIGHTS =
+      "http://globalshortcuts-en.wikia.com/wiki/Special:Insights";
 
   public KeyboardShortcutModal(WebDriver driver) {
     this.wait = new Wait(driver);
     this.actions = new Actions(driver);
+    this.driver = driver;
 
     PageFactory.initElements(driver, this);
   }
@@ -56,6 +64,8 @@ public class KeyboardShortcutModal{
   public KeyboardShortcutModal insightsShortcut() {
     actions.sendKeys("gi").perform();
 
+    Assertion.assertTrue(driver.getCurrentUrl().equals(EXPECTED_URL_FOR_INSIGHTS),
+                         "You were not redirected to insights list page");
     PageObjectLogging.logInfo("You were redirected to insights list page");
 
     return this;
@@ -70,16 +80,20 @@ public class KeyboardShortcutModal{
   }
 
   public KeyboardShortcutModal writeAndRedirect(){
-    actions.sendKeys("wikia").perform();
-    PageObjectLogging.logInfo("wikia was written in a search box");
+    String searchQuery = "wikia";
+
+    actions.sendKeys(searchQuery).perform();
+    PageObjectLogging.logInfo("Typed in a search box: " + searchQuery);
 
     actions.sendKeys(Keys.ENTER).perform();
-    PageObjectLogging.logInfo("You were redirected to...");
+    Assertion.assertTrue(driver.getCurrentUrl().equals(EXPECTED_URL_FOR_SEARCH),
+                         "You were not redirected anywhere");
+    PageObjectLogging.logInfo("You were redirected to the search page for the word: " + searchQuery);
 
     return this;
   }
 
-  public KeyboardShortcutModal visibilityofModal() {
+  public KeyboardShortcutModal visibilityOfModal() {
     wait.forElementClickable(keyboardShortcutModal);
     PageObjectLogging.logInfo("Keyboard shortcut modal is visible");
 
