@@ -9,14 +9,13 @@ import com.wikia.webdriver.common.driverprovider.UserAgentsRegistry;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-public class ChromeBrowser extends BrowserAbstract {
+public class ChromeMobileBrowser extends BrowserAbstract{
 
   private static ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -51,6 +50,12 @@ public class ChromeBrowser extends BrowserAbstract {
                                     .getPath())
                            .getPath());
 
+    // TODO change mobile tests to use @UserAgent annotation
+    if (Browser.CHROME_MOBILE_MERCURY.equals(Configuration.getBrowser())) {
+      chromeOptions
+          .addArguments("--user-agent=" + UserAgentsRegistry.IPHONE.getUserAgent());
+    }
+
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
       chromeOptions.addArguments("process-per-site");
@@ -70,7 +75,7 @@ public class ChromeBrowser extends BrowserAbstract {
 
     ExtHelper.addExtensions(Configuration.getExtensions());
 
-    return new WikiaWebDriver(new ChromeDriver(caps), false);
+    return new WikiaWebDriver(new ChromeDriver(caps), true);
   }
 
   public static ChromeOptions getChromeOptions() {

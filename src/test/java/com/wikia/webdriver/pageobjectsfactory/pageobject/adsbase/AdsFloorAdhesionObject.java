@@ -80,7 +80,7 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
   }
 
   public void verifyThereIsNoWikiaBar(String browser) {
-    if (Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser)) {
+    if (driver.isChromeMobile()) {
       // Mercury does not have WikiaBar
       // There should be better way to verify skin - remove it after QAART-608 is done
       PageObjectLogging.log(

@@ -28,6 +28,6 @@ public class GhostBrowser extends BrowserAbstract {
                          phantomJSBinary.getAbsolutePath());
     }
 
-    return new WikiaWebDriver(new PhantomJSDriver(caps));
+    return new WikiaWebDriver(new PhantomJSDriver(caps), false);
   }
 }

@@ -75,7 +75,7 @@ public class FirefoxBrowser extends BrowserAbstract {
 
     ExtHelper.addExtensions(Configuration.getExtensions());
 
-    return new WikiaWebDriver(new FirefoxDriver(caps));
+    return new WikiaWebDriver(new FirefoxDriver(caps), false);
   }
 
   public static FirefoxProfile getProfile(){

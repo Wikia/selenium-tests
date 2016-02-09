@@ -66,7 +66,7 @@ public class NewTestTemplateCore {
     Dimension browserSize = Configuration.getBrowserSize();
     String browser = Configuration.getBrowser();
 
-    if (!browser.contains(Browser.CHROME_ANDROID)) {
+    if (!driver.isAndroid()) {
       if (browserSize != null) {
         driver.manage().window().setSize(browserSize);
       } else {

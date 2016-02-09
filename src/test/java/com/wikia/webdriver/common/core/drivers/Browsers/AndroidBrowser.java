@@ -28,7 +28,7 @@ public class AndroidBrowser extends BrowserAbstract {
     }
     mobileDriver = new AndroidDriver(url, destCaps);
 
-    return new WikiaWebDriver(mobileDriver);
+    return new WikiaWebDriver(mobileDriver, true);
   }
 
   public static AndroidDriver getMobileDriver() {

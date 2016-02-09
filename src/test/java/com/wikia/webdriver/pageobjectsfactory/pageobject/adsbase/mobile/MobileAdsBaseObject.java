@@ -1,8 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
@@ -11,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MobileAdsBaseObject extends AdsBaseObject {
@@ -24,11 +22,11 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 
   private AdsComparison adsComparison;
 
-  public MobileAdsBaseObject(WebDriver driver, String page) {
+  public MobileAdsBaseObject(WikiaWebDriver driver, String page) {
     super(driver, page);
     adsComparison = new AdsComparison();
 
-    if (Browser.CHROME_MOBILE_MERCURY.equals(Configuration.getBrowser())) {
+    if (driver.isChromeMobile()) {
       verifyMercury();
     }
 

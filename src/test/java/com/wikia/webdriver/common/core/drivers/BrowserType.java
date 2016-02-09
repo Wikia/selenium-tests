@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.drivers;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
 import com.wikia.webdriver.common.core.drivers.Browsers.ChromeBrowser;
+import com.wikia.webdriver.common.core.drivers.Browsers.ChromeMobileBrowser;
 import com.wikia.webdriver.common.core.drivers.Browsers.DefaultBrowser;
 import com.wikia.webdriver.common.core.drivers.Browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.core.drivers.Browsers.GhostBrowser;
@@ -13,7 +14,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public enum BrowserType{
   CHROME(ChromeBrowser.class, "CHROME"),
   FIREFOX(FirefoxBrowser.class, "FF"),
-  CHROME_MOBILE(ChromeBrowser.class, "CHROMEMOBILEMERCURY"),
+  CHROME_MOBILE(ChromeMobileBrowser.class, "CHROMEMOBILEMERCURY"),
   HTMLUNIT(HtmlUnitBrowser.class, "HTMLUNIT"),
   GHOST(GhostBrowser.class, "GHOST"),
   CHROME_ANDROID(AndroidBrowser.class, "ANDROID"),

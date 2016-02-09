@@ -13,6 +13,6 @@ public class HtmlUnitBrowser extends BrowserAbstract{
 
   @Override
   public WikiaWebDriver setInstance(){
-    return new WikiaWebDriver(new HtmlUnitDriver());
+    return new WikiaWebDriver(new HtmlUnitDriver(), false);
   }
 }
