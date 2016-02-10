@@ -927,14 +927,36 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsTrackingPixelsOnConsecutivePages() {
+    return new Object[][]{
+        {
+            "adtest",
+            new String[]{
+                "Article1",
+                "Article2",
+                "Article3",
+                "Article2",
+                "Article1",
+                "Wikia Ad Testing"
+            },
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
             "adtest",
             new String[]{
                 TestAdsTrackingPixels.GA_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
                 TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
             }
         },
