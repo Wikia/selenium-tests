@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePage;
 
 import org.testng.annotations.Test;
 
@@ -132,7 +132,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests_010", "PortableInfoboxTests_3"})
   @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
-    TemplatePageObject template = new TemplatePageObject(driver);
+    TemplatePage template = new TemplatePage(driver);
     ArticlePageObject article = new ArticlePageObject(driver);
 
     String templateSyntax =
