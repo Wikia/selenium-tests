@@ -8,6 +8,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.google.common.collect.ImmutableList;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+
 public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
@@ -42,8 +44,11 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
       adsBaseObject.clickOnArticleLink(linkName);
 
-      assertTrackingPixelsSent(adsBaseObject, COMSCORE_PIXEL_URL, KRUX_PIXEL_URL,
-                               QUANTQAST_PIXEL_URL);
+      assertTrackingPixelsSent(adsBaseObject, new String[]{
+          COMSCORE_PIXEL_URL,
+          KRUX_PIXEL_URL,
+          QUANTQAST_PIXEL_URL
+      });
     }
   }
 
@@ -53,7 +58,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixels"
   )
-  public void adsTrackingPixel(String wiki, String... pixelUrls) {
+  public void adsTrackingPixel(String wiki, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
 
     String testedPage = urlBuilder.getUrlForWiki(wiki);
@@ -62,7 +67,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
-  private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String... pixelUrls) {
+  private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
       adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
     }

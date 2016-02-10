@@ -931,13 +931,17 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "adtest",
-            TestAdsTrackingPixels.KRUX_PIXEL_URL,
-            TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-            TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+            new String[]{
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+            }
         },
         {
             "lego",
-            TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            new String[]{
+                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
         }
     };
   }
