@@ -927,7 +927,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsTrackingPixels() {
+  public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
             "adtest",
@@ -939,6 +939,18 @@ public class AdsDataProvider {
         },
         {
             "lego",
+            new String[]{
+                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsNotSent() {
+    return new Object[][]{
+        {
+            "adtest",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }

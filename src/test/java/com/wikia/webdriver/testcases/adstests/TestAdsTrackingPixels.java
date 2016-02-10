@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -7,8 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import com.google.common.collect.ImmutableList;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
@@ -56,9 +55,9 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
   @Test(
       groups = {"AdsTrackingPixels"},
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsTrackingPixels"
+      dataProvider = "adsTrackingPixelsSent"
   )
-  public void adsTrackingPixel(String wiki, String[] pixelUrls) {
+  public void adsTrackingPixelSent(String wiki, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
 
     String testedPage = urlBuilder.getUrlForWiki(wiki);
@@ -67,9 +66,30 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
+  @NetworkTrafficDump
+  @Test(
+      groups = {"AdsTrackingPixels"},
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsTrackingPixelsNotSent"
+  )
+  public void adsTrackingPixelNotSent(String wiki, String[] pixelUrls) {
+    networkTrafficInterceptor.startIntercepting();
+
+    String testedPage = urlBuilder.getUrlForWiki(wiki);
+    new AdsBaseObject(driver, testedPage);
+
+    assertTrackingPixelsNotSent(pixelUrls);
+  }
+
   private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
       adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
+    }
+  }
+
+  private void assertTrackingPixelsNotSent(String[] pixelUrls) {
+    for (String pixelUrl : pixelUrls) {
+      Assertion.assertFalse(networkTrafficInterceptor.searchRequestUrlInHar(pixelUrl));
     }
   }
 }
