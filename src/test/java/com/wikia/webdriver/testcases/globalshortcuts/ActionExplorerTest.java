@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.globalshortcuts;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -22,6 +23,7 @@ public class ActionExplorerTest extends NewTestTemplate {
   }
 
   @Test(groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
+  @RelatedIssue(issueID = "CE-3356")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
     init();
 
