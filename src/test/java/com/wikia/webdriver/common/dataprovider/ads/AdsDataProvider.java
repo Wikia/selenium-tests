@@ -953,7 +953,6 @@ public class AdsDataProvider {
         {
             "adtest",
             new String[]{
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
         }
