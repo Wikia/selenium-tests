@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
 import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
@@ -921,6 +922,22 @@ public class AdsDataProvider {
             "SyntheticTests/Prefooters",
             new Dimension(1920, 1080),
             false
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixels() {
+    return new Object[][]{
+        {
+            "adtest",
+            TestAdsTrackingPixels.KRUX_PIXEL_URL,
+            TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+            TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+        },
+        {
+            "lego",
+            TestAdsTrackingPixels.NIELSEN_PIXEL_URL
         }
     };
   }
