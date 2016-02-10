@@ -21,7 +21,7 @@ public class ActionExplorerTest extends NewTestTemplate {
     new Navigate(driver).toPage("/wiki/Globalshortcuts-en_Wikia");
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
     init();
 
@@ -29,7 +29,7 @@ public class ActionExplorerTest extends NewTestTemplate {
     actionExplorerModal.useShortcut("ESC");
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch")
   public void globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch() {
     init();
 
@@ -38,7 +38,7 @@ public class ActionExplorerTest extends NewTestTemplate {
     actionExplorerModal.selectKeyboardShortcutsFromSearchSuggestions();
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions")
   public void globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions() {
     init();
 

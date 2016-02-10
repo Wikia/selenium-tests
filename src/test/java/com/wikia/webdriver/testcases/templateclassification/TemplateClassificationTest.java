@@ -22,7 +22,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
     this.templateClassification = new TemplateClassification(driver);
   }
 
-  @Test()
+  @Test(groups = "templateClassification_openAndClose")
   public void templateClassification_openAndClose() {
     init();
 
@@ -31,7 +31,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
     templateClassification.close();
   }
 
-  @Test()
+  @Test(groups = "templateClassification_changeTemplateType")
   public void templateClassification_changeTemplateType() {
     init();
 
@@ -41,7 +41,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
     templateClassification.save();
   }
 
-  @Test()
+  @Test(groups = "templateClassification_saveTemplateTypeForNewTemplate")
   public void templateClassification_saveTemplateTypeForNewTemplate() {
     init();
 

@@ -25,7 +25,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
     new Navigate(driver).toPage("/wiki/Globalshortcuts-en_Wikia");
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")
   @Execute(asUser = User.USER)
   public void globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton() {
     init();
@@ -34,7 +34,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
     keyboardShortcutsModal.clickCloseButton();
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts")
   public void globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts() {
     init();
 
@@ -42,7 +42,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
     keyboardShortcutsModal.useShortcut("ESC");
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
   public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut() {
     init();
 
@@ -50,7 +50,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
     keyboardShortcutsModal.useShortcut("gi");
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut")
   public void globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut() {
     init();
 
@@ -58,7 +58,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
     keyboardShortcutsModal.useShortcut("gs");
   }
 
-  @Test()
+  @Test(groups = "globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut")
   public void globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut() {
     init();
 
