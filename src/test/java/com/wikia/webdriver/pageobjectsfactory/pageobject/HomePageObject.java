@@ -1,26 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class HomePageObject extends WikiBasePageObject {
 
-  @FindBy(css = ".start-wikia span")
-  private WebElement startWikiButton;
   @FindBy(css = ".hub > a")
   private WebElement hubIndicator;
   @FindBy(css = ".preview-pane a.goVisit")
@@ -39,7 +35,7 @@ public class HomePageObject extends WikiBasePageObject {
   }
 
   public HomePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
+    getUrl(urlBuilder.getUrlForWiki());
     waitForPageLoad();
 
     return this;
@@ -49,8 +45,8 @@ public class HomePageObject extends WikiBasePageObject {
    * getting current slot setup on visualization component
    */
   public Map<String, Integer> getVisualizationWikisSetup() {
-    List<String> wikiList = new ArrayList<String>();
-    Map<String, Integer> visualizationSetup = new HashMap<String, Integer>();
+    List<String> wikiList = new ArrayList<>();
+    Map<String, Integer> visualizationSetup = new HashMap<>();
     for (WebElement element : visualizationWikis) {
       wikiList.add(element.getAttribute("href"));
     }
