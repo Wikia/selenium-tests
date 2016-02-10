@@ -960,6 +960,12 @@ public class AdsDataProvider {
             }
         },
         {
+            "angrybirds",
+            new String[]{
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        },
+        {
             "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
