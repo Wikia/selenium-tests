@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -41,7 +40,7 @@ public class EditMode extends WikiBasePageObject {
 
   private By submitButtonBy = By.cssSelector("#wpSave");
 
-  public EditMode(WebDriver driver) {
+  public EditMode() {
     super();
   }
 
@@ -55,7 +54,7 @@ public class EditMode extends WikiBasePageObject {
 
   public ArticlePageObject submitArticle() {
     submit();
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public PreviewEditModePageObject previewArticle() {
@@ -120,6 +119,6 @@ public class EditMode extends WikiBasePageObject {
   public VisualEditModePageObject clickVisualButton() {
     visualButton.click();
     PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 }

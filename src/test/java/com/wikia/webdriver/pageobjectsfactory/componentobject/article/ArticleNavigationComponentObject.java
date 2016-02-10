@@ -21,6 +21,6 @@ public class ArticleNavigationComponentObject extends BasePageObject {
 
   public ArticlePageObject clickRandomArticle() {
     waitAndClick(randomArticleButton);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

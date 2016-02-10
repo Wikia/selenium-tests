@@ -44,7 +44,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   private WebElement fileNameInput;
 
   public SpecialNewFilesPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void addPhoto() {

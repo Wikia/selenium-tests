@@ -16,7 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -298,7 +297,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialCreatePage openSpecialCreateBlogPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_BLOGPAGE);
-    return new SpecialCreatePage(driver);
+    return new SpecialCreatePage();
   }
 
   public ForumPageObject openForumMainPage(String wikiURL) {
@@ -367,7 +366,7 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public VisualEditorPageObject openVEModeWithMainEditButton() {
@@ -393,7 +392,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openCKModeWithSectionEditButton",
         "RTE edit button clicked at section: " + section, true, driver);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
@@ -407,13 +406,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditModePageObject navigateToArticleEditPage() {
     getUrl(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_EDIT));
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
@@ -427,7 +426,7 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder
         .appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT),
         URLsContent.USE_DEFAULT_FORMAT));
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   /**
@@ -504,7 +503,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public ArticlePageObject openMainPage(String wikiURL) {
     getUrl(wikiURL);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public void verifyUrl(String url) {

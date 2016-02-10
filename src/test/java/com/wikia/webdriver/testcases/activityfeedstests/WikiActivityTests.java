@@ -29,7 +29,7 @@ public class WikiActivityTests extends NewTestTemplate {
   public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
     String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
     ArticlePageObject article =
-        new ArticlePageObject(driver).open("NewEditionIsRecordedOnActivityModule");
+        new ArticlePageObject().open("NewEditionIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.addContent(articleContent);
@@ -47,7 +47,7 @@ public class WikiActivityTests extends NewTestTemplate {
   @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
   @Execute(asUser = User.USER)
   public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
-    SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
@@ -92,7 +92,7 @@ public class WikiActivityTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open("NewCategorizationIsRecordedOnActivityModule");
+        new ArticlePageObject().open("NewCategorizationIsRecordedOnActivityModule");
     String articleName = article.getArticleName();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);

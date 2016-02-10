@@ -100,7 +100,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
@@ -115,7 +115,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();

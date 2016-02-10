@@ -15,7 +15,7 @@ public class SpecialPagesForAnons extends NewTestTemplate {
   public void SpecialPagesForAnons_001_verifyHeaders(String specialPageName,
       String specialPageHeader) {
     String testedPage = urlBuilder.getUrlForPath(Configuration.getWikiName(), specialPageName);
-    SpecialPageObject specialPage = new SpecialPageObject(driver);
+    SpecialPageObject specialPage = new SpecialPageObject();
     specialPage.getUrl(testedPage);
     specialPage.verifyPageHeader(specialPageHeader);
   }

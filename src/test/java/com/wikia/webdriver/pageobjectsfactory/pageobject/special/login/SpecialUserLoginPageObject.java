@@ -38,7 +38,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 
   public SpecialUserLoginPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

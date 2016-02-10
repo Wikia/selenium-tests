@@ -1,20 +1,17 @@
 package com.wikia.webdriver.common.driverprovider;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.WebDriver;
+
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserType;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class DriverProvider {
 
-  private static List<WikiaWebDriver> drivers = new ArrayList<>();
+  private static final List<WikiaWebDriver> drivers = new ArrayList<>();
 
   private DriverProvider() {
   }
@@ -36,10 +33,14 @@ public class DriverProvider {
   }
 
   public static void close() {
-    for (WebDriver webDriver : drivers) {
-      if (webDriver != null) {
-        webDriver.quit();
+    try {
+      for (WebDriver webDriver : drivers) {
+        if (webDriver != null) {
+          webDriver.quit();
+        }
       }
+    }catch (Error e){
+
     }
     drivers.clear();
   }

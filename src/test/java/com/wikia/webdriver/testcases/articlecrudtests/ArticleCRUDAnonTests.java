@@ -21,7 +21,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
@@ -35,7 +35,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new ArticlePageObject(driver).navigateToArticleEditPage(wikiURL, articleTitle);
+        new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -46,7 +46,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void ArticleCRUDAnon_003_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject(driver).open("AnonAddDropdown");
+    ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown");
     VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -62,7 +62,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new ArticlePageObject(driver).navigateToArticleEditPage(wikiURL, randomArticleTitle);
+        new ArticlePageObject().navigateToArticleEditPage(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -73,7 +73,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditByURL");
+    ArticlePageObject article = new ArticlePageObject().open("AnonEditByURL");
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -84,7 +84,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).open("AnonEditDropdown");
+    ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.clickPublishButton();

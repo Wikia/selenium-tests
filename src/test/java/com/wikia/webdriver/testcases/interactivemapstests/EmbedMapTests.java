@@ -44,7 +44,7 @@ public class EmbedMapTests extends NewTestTemplate {
 
   @Test(groups = {"EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps"})
   public void EmbedMapTests_002_VerifyEmbedMapElements() {
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     embedMapDialog.verifyEmbedMapModalOpened();
@@ -96,7 +96,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void EmbedMapTests_005_VerifyEmbedMapContributeModals() {
     WikiBasePageObject base = new WikiBasePageObject();
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();
@@ -111,7 +111,7 @@ public class EmbedMapTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void EmbedMapTests_006_VerifyEmbeddedMapAddPinType() {
     WikiBasePageObject base = new WikiBasePageObject();
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();

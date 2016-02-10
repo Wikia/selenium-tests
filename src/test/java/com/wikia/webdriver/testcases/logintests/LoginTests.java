@@ -98,7 +98,7 @@ public class LoginTests extends NewTestTemplate {
   public void userWithoutAValidTokenIsForcedLogout() {
     new ArticleContent().clear();
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     Helios.deleteAllTokens(User.USER_12);
 
     article.refreshPageAddingCacheBuster();

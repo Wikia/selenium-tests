@@ -26,7 +26,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
                   "createPageEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
     ck.verifyContentLoaded();
     ck.clickPublishButton();
@@ -35,7 +35,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_002",
                   "articleEditEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_002_MainEditEntry() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(base.getNameForArticle());
+    ArticlePageObject article = new ArticlePageObject().open(base.getNameForArticle());
     VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
     ck.verifyContentLoaded();
     ck.clickPublishButton();
@@ -44,7 +44,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_003",
                   "redlinkEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_003_RedlinkEntry() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -53,7 +53,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_004",
                   "sectionEditEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_004_SectionEditEntry() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
@@ -70,7 +70,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_006",
                   "listEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_006_ListNamespace() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.LIST_PAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.LIST_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -79,7 +79,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_007",
                   "categoryEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_007_CategoryNamespace() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.CATEGORY_PAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.CATEGORY_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -88,7 +88,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_008",
                   "templateEntry"})
   public void VEDisabledEditorEntryAnonTestsTests_008_TemplateNamespace() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(URLsContent.TEMPLATE_PAGE);
+    ArticlePageObject article = new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);
     SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
     src.verifySourceOnlyMode();
   }

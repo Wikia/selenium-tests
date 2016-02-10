@@ -77,7 +77,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     scrollAndClick(createBlogPostButton);
     PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
                           true, driver);
-    return new SpecialCreatePage(driver);
+    return new SpecialCreatePage();
   }
 
   private void showAvatarControls() {

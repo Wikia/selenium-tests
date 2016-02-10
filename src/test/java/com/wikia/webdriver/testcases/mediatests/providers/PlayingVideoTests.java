@@ -23,7 +23,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     article.verifyVideo();
 
     LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
@@ -44,7 +44,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     article.verifyVideo();
 
     VideoComponentObject video = article.clickThumbnailVideoInline();

@@ -36,7 +36,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject aritclePage = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -50,7 +50,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject aritclePage = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = aritclePage.navigateToArticleEditPage();
     ck.verifyContentLoaded();
     ck.clickPublishButton();
@@ -64,7 +64,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
     prefPage.verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject aritclePage = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     SourceEditModePageObject src = aritclePage.openSrcModeWithMainEditButton();
     src.verifySourceOnlyMode();
   }

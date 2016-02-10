@@ -40,7 +40,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   public void CategoriesTestsArticleEdit_002_anonDelete() {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visual = new VisualEditModePageObject().open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();
     visual.typeCategoryName(categoryName);
     visual.submitCategory();
@@ -65,7 +65,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   public void CategoriesTestsArticleEdit_004_user() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visual = new VisualEditModePageObject().open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + visual.getTimeStamp();
     visual.typeCategoryName(categoryName);
     visual.submitCategory();
@@ -77,7 +77,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
   public void CategoriesTestsArticleEdit_005_userSuggestions() {
     new ArticleContent().push();
 
-    VisualEditModePageObject visual = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visual = new VisualEditModePageObject().open();
     visual.typeCategoryName(PageContent.CATEGORY_NAME_PREFIX);
     visual.triggerCategorySuggestions();
     String categoryName = visual.selectCategorySuggestions(1);

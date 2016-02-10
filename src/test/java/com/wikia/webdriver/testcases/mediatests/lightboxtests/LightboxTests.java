@@ -84,7 +84,7 @@ public class LightboxTests extends NewTestTemplate {
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();

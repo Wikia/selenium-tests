@@ -18,7 +18,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -90,8 +89,8 @@ public class VisualEditModePageObject extends EditMode {
       "li.category[data-name='%categoryName%'] li.removeCategory";
   private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
 
-  public VisualEditModePageObject(WebDriver driver) {
-    super(driver);
+  public VisualEditModePageObject() {
+    super();
   }
 
   public VisualEditModePageObject open() {
@@ -406,7 +405,7 @@ public class VisualEditModePageObject extends EditMode {
   public ArticlePageObject clickPublishButton() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public enum Components {
