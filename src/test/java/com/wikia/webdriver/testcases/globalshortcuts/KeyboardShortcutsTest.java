@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
-public class KeyboardShortcuts extends NewTestTemplate {
+public class KeyboardShortcutsTest extends NewTestTemplate {
 
   private KeyboardShortcutsModal keyboardShortcutsModal;
   private WikiaBar wikiaBar;

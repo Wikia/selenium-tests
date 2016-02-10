@@ -96,8 +96,8 @@
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Layout"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Searching"/>
             <class name="com.wikia.webdriver.testcases.globalnavigationbar.Navigating"/>
-            <class name="com.wikia.webdriver.testcases.globalshortcuts.ActionExplorer"/>
-            <class name="com.wikia.webdriver.testcases.globalshortcuts.KeyboardShortcuts"/>
+            <class name="com.wikia.webdriver.testcases.globalshortcuts.ActionExplorerTest"/>
+            <class name="com.wikia.webdriver.testcases.globalshortcuts.KeyboardShortcutsTest"/>
             <class name="com.wikia.webdriver.testcases.heromoduletests.HeroModuleTests"/>
             <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
@@ -183,7 +183,7 @@
             <class name="com.wikia.webdriver.testcases.specialpagestests.ThemeDesigner"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.UserAndRights"/>
             <class name="com.wikia.webdriver.testcases.specialpagestests.VideosPageTests"/>
-            <class name="com.wikia.webdriver.testcases.templateclassification.Editing"/>
+            <class name="com.wikia.webdriver.testcases.templateclassification.TemplateClassificationTest"/>
             <class name="com.wikia.webdriver.testcases.toolbartests.CustomizeToolbarTests"/>
             <class name="com.wikia.webdriver.testcases.userprofile.UserAvatar"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>

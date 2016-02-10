@@ -51,6 +51,8 @@ public class ActionExplorerModal {
       case "ESC":
         triggerEscapeShortcut();
         break;
+      default:
+        break;
     }
 
     return this;

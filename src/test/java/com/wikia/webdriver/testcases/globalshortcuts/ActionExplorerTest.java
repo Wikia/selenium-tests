@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
-public class ActionExplorer extends NewTestTemplate {
+public class ActionExplorerTest extends NewTestTemplate {
 
   private ActionExplorerModal actionExplorerModal;
 

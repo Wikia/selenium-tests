@@ -64,6 +64,8 @@ public class KeyboardShortcutsModal {
       case "gs":
         triggerGSShortcut();
         break;
+      default:
+        break;
     }
 
     return this;
