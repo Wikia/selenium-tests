@@ -100,7 +100,7 @@ public class ActionExplorerModal {
     WebElement searchModal = driver.findElement(actionExplorerModalSelector);
     wait.forElementClickable(searchModal);
 
-    jsActions.scrollToElementInModal(autocompleteSuggestions, specialAllPagesLink);
+    jsActions.scrollToElementInModal(specialAllPagesLink, autocompleteSuggestions);
     PageObjectLogging.logInfo("Scrolled to all pages link");
 
     return this;

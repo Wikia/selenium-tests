@@ -106,7 +106,7 @@ public class JavascriptActions {
     }
   }
 
-  public void scrollToElementInModal(WebElement modal, WebElement element) {
+  public void scrollToElementInModal(WebElement element, WebElement modal) {
     int elementOffsetTop = Integer.parseInt(
         js.executeScript("return Math.round($(arguments[0]).offset().top)", element).toString());
     int modalOffsetTop = Integer.parseInt(
