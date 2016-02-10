@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
-  public static final String GA_PIXEL_URL = "http://www.google-analytics.com/collect";
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
   public static final String NIELSEN_PIXEL_URL =
       "http://secure-dcr-cert.imrworldwide.com/cgi-bin/cfg?pli";
