@@ -932,6 +932,7 @@ public class AdsDataProvider {
         {
             "adtest",
             new String[]{
+                TestAdsTrackingPixels.GA_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
