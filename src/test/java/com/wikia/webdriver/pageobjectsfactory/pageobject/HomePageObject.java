@@ -36,7 +36,6 @@ public class HomePageObject extends WikiBasePageObject {
 
   public HomePageObject(WebDriver driver) {
     super(driver);
-    PageFactory.initElements(driver, this);
   }
 
   public HomePageObject open() {

@@ -29,6 +29,8 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
+import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -148,6 +150,8 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
   private GlobalNavigationPageObject globalNavigation;
+  private WikiaBar wikiaBar;
+  private KeyboardShortcutsModal keyboardShortcutsModal;
 
   public WikiBasePageObject(WebDriver driver) {
     super(driver);
@@ -806,6 +810,22 @@ public class WikiBasePageObject extends BasePageObject {
     }
 
     return globalNavigation;
+  }
+
+  public WikiaBar getWikiaBar() {
+    if (wikiaBar == null) {
+      wikiaBar = new WikiaBar(driver);
+    }
+
+    return wikiaBar;
+  }
+
+  public KeyboardShortcutsModal getKeyboardShortcuts() {
+    if (keyboardShortcutsModal == null) {
+      keyboardShortcutsModal = new KeyboardShortcutsModal(driver);
+    }
+
+    return keyboardShortcutsModal;
   }
 
   public void verifyModalFBButtonVisible() {
