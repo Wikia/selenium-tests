@@ -46,7 +46,6 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
       assertTrackingPixelsSent(adsBaseObject, new String[]{
           COMSCORE_PIXEL_URL,
-          GA_PIXEL_URL,
           KRUX_PIXEL_URL,
           QUANTQAST_PIXEL_URL
       });
