@@ -28,7 +28,6 @@ public class URLsContent {
   public static final String SPECIAL_ADMIN_DASHBOARD = "wiki/Special:AdminDashboard";
   public static final String SPECIAL_CSS = "wiki/Special:CSS";
   public static final String SPECIAL_CURATED_CONTENT = "wiki/Special:CuratedContent";
-  public static final String SPECIAL_RANDOM = "wiki/Special:Random";
   public static final String SPECIAL_FOLLOW = "wiki/Special:Following";
   public static final String SPECIAL_FORUM = "wiki/Special:Forum";
   public static final String SPECIAL_THEME_DESIGNER = "wiki/Special:ThemeDesigner";

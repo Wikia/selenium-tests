@@ -1,5 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -35,10 +53,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestoreP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
@@ -52,24 +68,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -166,9 +164,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String resetForgotPasswordTime(String userName, String apiToken) {
-    String[][] apiRequestParameters =
-        { {"action", ApiActions.API_ACTION_FORGOT_PASSWORD}, {"user", userName},
-            {"token", apiToken}, {"format", "json"},};
+    String[][] apiRequestParameters = {{"action", ApiActions.API_ACTION_FORGOT_PASSWORD},
+        {"user", userName}, {"token", apiToken}, {"format", "json"},};
     return CommonUtils.sendPost(URLsContent.API_URL, apiRequestParameters);
   }
 
@@ -179,15 +176,15 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_FILES);
-    PageObjectLogging.log("openSpecialUnusedFilesPage", URLsContent.SPECIAL_UNUSED_FILES
-        + " opened", true);
+    PageObjectLogging.log("openSpecialUnusedFilesPage",
+        URLsContent.SPECIAL_UNUSED_FILES + " opened", true);
     return new SpecialUnusedFilesPageObject(driver);
   }
 
   public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_VIDEOS);
-    PageObjectLogging.log("openSpecialUnusedVideosPage", URLsContent.SPECIAL_UNUSED_VIDEOS
-        + " opened", true);
+    PageObjectLogging.log("openSpecialUnusedVideosPage",
+        URLsContent.SPECIAL_UNUSED_VIDEOS + " opened", true);
     return new SpecialUnusedVideosPageObject(driver);
   }
 
@@ -200,8 +197,8 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialMostLinkedFilesPageObject openSpecialMostLinkedFilesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MOST_LINKED_FILES);
-    PageObjectLogging.log("openSpecialMostLinkedFilesPage", URLsContent.SPECIAL_MOST_LINKED_FILES
-        + " opened", true);
+    PageObjectLogging.log("openSpecialMostLinkedFilesPage",
+        URLsContent.SPECIAL_MOST_LINKED_FILES + " opened", true);
     return new SpecialMostLinkedFilesPageObject(driver);
   }
 
@@ -231,8 +228,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
-    getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR
-        + URLsContent.FILE_NAMESPACE + articlePage, URLsContent.ACTION_HISTORY));
+    getUrl(urlBuilder.appendQueryStringToURL(
+        wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + articlePage,
+        URLsContent.ACTION_HISTORY));
     PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
     return new HistoryPagePageObject(driver);
   }
@@ -304,12 +302,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialCreatePage(driver);
   }
 
-  public SpecialWikiActivityPageObject openSpecialWikiActivity() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
-        + URLsContent.SPECIAL_WIKI_ACTIVITY);
-    return new SpecialWikiActivityPageObject(driver);
-  }
-
   public ForumPageObject openForumMainPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
     PageObjectLogging.log("openForumPage", "forum page opened", true);
@@ -341,22 +333,6 @@ public class WikiBasePageObject extends BasePageObject {
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
     return new InteractiveMapPageObject(driver);
-  }
-
-  public FilePagePageObject openFilePage(String wikiURL, String fileName) {
-    getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName);
-    return new FilePagePageObject(driver);
-  }
-
-  public FilePagePageObject openFilePage(String wikiURL, String fileName, boolean noRedirect) {
-    String url = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
-    if (noRedirect) {
-      String parameter = "redirect=no";
-      url = urlBuilder.appendQueryStringToURL(url, parameter);
-    }
-    getUrl(url);
-
-    return new FilePagePageObject(driver);
   }
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
@@ -407,8 +383,8 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementClickable(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openVEModeWithSectionEditButton", "VE edit button clicked at section: "
-        + section, true, driver);
+    PageObjectLogging.log("openVEModeWithSectionEditButton",
+        "VE edit button clicked at section: " + section, true, driver);
     return new VisualEditorPageObject(driver);
   }
 
@@ -416,8 +392,8 @@ public class WikiBasePageObject extends BasePageObject {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
-    PageObjectLogging.log("openCKModeWithSectionEditButton", "RTE edit button clicked at section: "
-        + section, true, driver);
+    PageObjectLogging.log("openCKModeWithSectionEditButton",
+        "RTE edit button clicked at section: " + section, true, driver);
     return new VisualEditModePageObject(driver);
   }
 
@@ -447,9 +423,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new SourceEditModePageObject(driver);
   }
 
-  public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
-    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.appendQueryStringToURL(wikiURL
-        + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT), URLsContent.USE_DEFAULT_FORMAT));
+  public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL,
+      String article) {
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder
+        .appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT),
+        URLsContent.USE_DEFAULT_FORMAT));
     return new VisualEditModePageObject(driver);
   }
 
@@ -464,8 +442,8 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging
-        .log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL, true);
+    PageObjectLogging.log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL,
+        true);
     return new SpecialUserLoginPageObject(driver);
   }
 
@@ -475,8 +453,8 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      wait.forElementPresent(By.cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%",
-          userName.replace(" ", "_"))));
+      wait.forElementPresent(By
+          .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
@@ -569,9 +547,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String receiveMailWithNewPassword(String email, String password) {
-    String newPassword =
-        MailFunctions.getPasswordFromEmailContent(MailFunctions.getFirstEmailContent(email,
-            password, "Reset your Wikia password"));
+    String newPassword = MailFunctions.getPasswordFromEmailContent(
+        MailFunctions.getFirstEmailContent(email, password, "Reset your Wikia password"));
     PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
         true);
 
@@ -581,8 +558,8 @@ public class WikiBasePageObject extends BasePageObject {
   public String getFirstCssRevision() {
     wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
-    PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "
-        + summary, true);
+    PageObjectLogging.log("cssEditSummary",
+        "the following edit summaty was get from Wikia.css: " + summary, true);
     return summary;
   }
 
@@ -643,14 +620,13 @@ public class WikiBasePageObject extends BasePageObject {
       refreshPageAddingCacheBuster();
     }
     verifyUserLoggedIn(userName);
-    PageObjectLogging.log("loginCookie", "user was logged in by by helios using acces token: "
-        + token, true);
+    PageObjectLogging.log("loginCookie",
+        "user was logged in by by helios using acces token: " + token, true);
     return token;
   }
 
   public String loginAs(User user) {
-    return loginAs(user.getUserName(), user.getPassword(),
-        urlBuilder.getUrlForWiki());
+    return loginAs(user.getUserName(), user.getPassword(), urlBuilder.getUrlForWiki());
   }
 
   public void openWikiPage(String wikiURL) {
@@ -671,8 +647,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public WatchPageObject unfollowCurrentUrl() {
-    driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
-        URLsContent.ACTION_UNFOLLOW));
+    driver.get(
+        urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_UNFOLLOW));
     return new WatchPageObject(driver);
   }
 
@@ -734,9 +710,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void addVideoViaAjax(String videoURL) {
-    jsActions.execute("$.ajax('" + getWikiUrl()
-        + "wikia.php?controller=Videos&method=addVideo&format=json', {" + "data: {url: '"
-        + videoURL + "'}," + "type: 'POST' } );");
+    jsActions.execute(
+        "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
+            + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
   }
 
   public void verifyVEPublishComplete() {
@@ -801,11 +777,11 @@ public class WikiBasePageObject extends BasePageObject {
   public void resizeWindow(int width, int height) {
     try {
       driver.manage().window().setSize(new Dimension(width, height));
-      PageObjectLogging.log("ResizeWindow", "Resize window (width=" + width + ", height=" + height
-          + ")", true);
+      PageObjectLogging.log("ResizeWindow",
+          "Resize window (width=" + width + ", height=" + height + ")", true);
     } catch (WebDriverException ex) {
-      PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height="
-          + height + ")", true);
+      PageObjectLogging.log("ResizeWindow",
+          "Cannot resize window (width=" + width + ", height=" + height + ")", true);
     }
   }
 
@@ -864,9 +840,9 @@ public class WikiBasePageObject extends BasePageObject {
   /**
    * Refresh Wiki page, busting the cache( by adding cb=currentTimestamp )
    */
-  public void refreshPageAddingCacheBuster(){
+  public void refreshPageAddingCacheBuster() {
     driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(),
-                                                 "cb=" + DateTime.now().getMillis()));
+        "cb=" + DateTime.now().getMillis()));
   }
 
   public enum PositionsVideo {

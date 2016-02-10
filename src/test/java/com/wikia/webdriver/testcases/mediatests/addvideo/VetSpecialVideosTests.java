@@ -34,14 +34,14 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getWikiFileName());
 
     filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
     filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
-    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    filePage = filePage.open(video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 

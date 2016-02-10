@@ -76,23 +76,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     return edit;
   }
 
-  public WikiArticleEditMode createNewDefaultArticle() {
-    this.pageName = PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
-    return createNewArticle(this.pageName, 1);
-  }
-
-  public WikiArticlePageObject openRandomArticle() {
-    scrollAndClick(randomPageButton);
-    wait.forElementVisible(searchButton);
-    PageObjectLogging.log("openRandomArticle", "random page button clicked", true, driver);
-    return new WikiArticlePageObject(driver);
-  }
-
-  public void verifyArticleText(String content) {
-    wait.forTextInElement(articleContentBy, content);
-    PageObjectLogging.log("verifyArticleText", "article text is verified", true);
-  }
-
   /**
    * Click Edit button on a wiki article
    */

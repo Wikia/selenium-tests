@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.followingtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -33,17 +30,13 @@ public class FollowPhotosTests extends NewTestTemplate {
   @Test(groups = "FollowPhoto", dependsOnMethods = {"FollowPhoto_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowPhoto_002_follow() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    FilePagePageObject file = base.openFilePage(wikiURL, imageName);
-    file.follow();
+    new FilePagePageObject(driver).open(imageName).follow();
   }
 
   @Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})
   @RelatedIssue(issueID = "QAART-711", comment = "Test manually")
   @Execute(asUser = User.USER)
   public void FollowPhoto_003_verify() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
-    follow.verifyFollowedImageVideo(imageName);
+    new SpecialFollowPageObject(driver).open().verifyFollowedImageVideo(imageName);
   }
 }
