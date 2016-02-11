@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.template;
 
+import lombok.Getter;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +12,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 
 public class TemplatePage extends WikiBasePageObject {
+
+  @Getter(lazy = true)
+  private final TemplateClassification templateClassification = new TemplateClassification(driver);
 
   @FindBy(css = "#ca-edit")
   protected WebElement editUsingClassicEditor;
@@ -23,10 +28,6 @@ public class TemplatePage extends WikiBasePageObject {
         URLsContent.TEMPLATE_NAMESPACE, templateName));
 
     return this;
-  }
-
-  public TemplateClassification getTemplateClassification(){
-    return new TemplateClassification(driver);
   }
 
   public SourceEditModePageObject editArticleInSrcUsingDropdown() {
