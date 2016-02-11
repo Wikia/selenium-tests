@@ -15,6 +15,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
 
   @Test(groups = {"FilterBoxMapTests_001", "FilterBoxMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_001_VerifyUncheckedSingleCategory() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -27,8 +28,8 @@ public class FilterBoxMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FilterBoxMapTests_002", "FilterBoxMapTests", "InteractiveMaps"})
-  @RelatedIssue(issueID = "QAART-726", comment = "please track the issue status")
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_002_VerifyClickOnUncheckedCategory() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -43,8 +44,8 @@ public class FilterBoxMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FilterBoxMapTests_003", "FilterBoxMapTests", "InteractiveMaps"})
-  @RelatedIssue(issueID = "QAART-726", comment = "please track the issue status")
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_003_VerifyClickAllCategoriesUncheckCategories() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -59,6 +60,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
 
   @Test(groups = {"FilterBoxMapTests_004", "FilterBoxMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-140", comment = "test is unstable, check locally or test manually")
   public void FilterBoxMapTests_004_VerifyClickAllCategoriesCheckAllPinTypes() {
     WikiBasePageObject base = new WikiBasePageObject(driver);
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);

@@ -31,4 +31,17 @@ public class Navigate {
 
     return this;
   }
+
+  public Navigate toPage(String pageName, String[] queryParams) {
+    String host = UrlBuilder.getHostForWiki();
+    String query = "?cb=" + DateTime.now().getMillis();
+
+    for (String queryParam : queryParams) {
+      query = query + "&" + queryParam;
+    }
+
+    driver.get("http://" + host + pageName + query);
+
+    return this;
+  }
 }

@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -23,6 +24,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
+  @RelatedIssue(issueID = "QAART-730", comment = "Please, test manually")
   @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
     String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
@@ -34,14 +36,14 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getWikiFileName());
 
     filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
     filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
-    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    filePage = filePage.open(video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 

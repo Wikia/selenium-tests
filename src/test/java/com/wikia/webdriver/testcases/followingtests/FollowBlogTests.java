@@ -45,9 +45,7 @@ public class FollowBlogTests extends NewTestTemplate {
   @Test(groups = {"FollowBlog", "Follow"}, dependsOnMethods = {"FollowBlog_002_follow"})
   @Execute(asUser = User.USER)
   public void FollowBlog_003_verify() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
-    follow.verifyFollowedBlog(credentials.userName, blogTitle);
+    new SpecialFollowPageObject(driver).open().verifyFollowedBlog(credentials.userName, blogTitle);
   }
 
 }

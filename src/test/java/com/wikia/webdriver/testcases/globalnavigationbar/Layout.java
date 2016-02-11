@@ -29,8 +29,7 @@ public class Layout extends NewTestTemplate{
 
   @Test(groups = {"globalNavigationBarIsFixedOnScroll"})
   public void globalNavigationBarIsFixedOnScroll() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialWikiActivityPageObject wikiActivity = base.openSpecialWikiActivity();
+    SpecialWikiActivityPageObject wikiActivity = new SpecialWikiActivityPageObject(driver).open();
     wikiActivity.verifyGlobalNavigation();
     wikiActivity.scrollToFooter();
     wikiActivity.verifyGlobalNavigation();
