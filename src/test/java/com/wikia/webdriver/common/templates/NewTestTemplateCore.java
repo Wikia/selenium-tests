@@ -1,5 +1,17 @@
 package com.wikia.webdriver.common.templates;
 
+import java.io.File;
+import java.lang.reflect.Method;
+
+import net.lightbody.bmp.proxy.ProxyServer;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
@@ -9,26 +21,13 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
-import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import net.lightbody.bmp.proxy.ProxyServer;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
-import java.io.File;
-import java.lang.reflect.Method;
-
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
-            com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
+    com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
 public class NewTestTemplateCore {
 
   protected WikiaWebDriver driver;
@@ -40,7 +39,7 @@ public class NewTestTemplateCore {
   protected boolean isProxyServerRunning = false;
   private DesiredCapabilities capabilities;
 
-  protected void refreshDriver(){
+  protected void refreshDriver() {
     driver = DriverProvider.getActiveDriver();
   }
 
@@ -84,23 +83,6 @@ public class NewTestTemplateCore {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
 
-  protected void loadFirstPage(WikiaWebDriver driver) {
-    driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
-  }
-
-  protected void logOutCustomDriver(WebDriver customDriver) {
-    customDriver.get(wikiURL + URLsContent.LOGOUT);
-  }
-
-  protected void stopCustomBrowser(WebDriver customDriver) {
-    if (customDriver != null) {
-      try {
-        customDriver.quit();
-      } catch (Error e) {
-      }
-    }
-  }
-
   protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
     capabilities = new DesiredCapabilities();
     capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
@@ -109,11 +91,6 @@ public class NewTestTemplateCore {
 
   protected void setDriverCapabilities(DesiredCapabilities caps) {
     BrowserAbstract.setDriverCapabilities(caps);
-  }
-
-  protected void setWindowSize(int width, int height, WebDriver desiredDriver) {
-    Dimension dimension = new Dimension(width, height);
-    desiredDriver.manage().window().setSize(dimension);
   }
 
   protected void runProxyServerIfNeeded(Method method) {
