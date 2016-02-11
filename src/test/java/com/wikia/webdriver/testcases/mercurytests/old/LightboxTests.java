@@ -48,8 +48,8 @@ public class LightboxTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.GALLERY);
   }
 
-  @Test(groups = "mercury-lightbox-canBeOpenedAndClosed")
-  public void canBeOpenedAndClosed() {
+  @Test(groups = "mercury_lightbox_openAndClose")
+  public void mercury_lightbox_openAndClose() {
     init();
     gallery.clickGalleryImage(0);
 
@@ -83,9 +83,9 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-lightbox-tapOnImageEdgeChangesImageAndSwipeOnImageChangesImage")
+  @Test(groups = "mercury_lightbox_changeImageByTapOnEdgeAndByGesture")
   @InBrowser(browser = Browser.CHROME_ANDROID)
-  public void tapOnImageEdgeChangesImageAndSwipeOnImageChangesImage() {
+  public void mercury_lightbox_changeImageByTapOnEdgeAndByGesture() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
@@ -181,9 +181,9 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-lightbox-zoomInAndZoomOutByGestureAndZoomByDoubleTap")
+  @Test(groups = "mercury_lightbox_zoomByGestureAndByDoubleTap")
   @InBrowser(browser = Browser.CHROME_ANDROID)
-  public void zoomInAndZoomOutByGestureAndZoomByDoubleTap() {
+  public void mercury_lightbox_zoomByGestureAndByDoubleTap() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 
@@ -263,8 +263,8 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-lightbox-headerAndFooterDisappearsAndAppearsOnImageClick")
-  public void headerAndFooterDisappearsAndAppearsOnImageClick() {
+  @Test(groups = "mercury_lightbox_UIShowsAndHidesByTapOnCenter")
+  public void mercury_lightbox_UIShowsAndHidesByTapOnCenter() {
     init();
     gallery.clickGalleryImage(0);
 
@@ -283,8 +283,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "HG-730")
-  @Test(groups = "mercury-lightbox-closesOnBackButtonClick", enabled = false)
-  public void closesOnBackButtonClick() {
+  @Test(groups = "mercury_lightbox_closesOnBackButtonClick", enabled = false)
+  public void mercury_lightbox_closesOnBackButtonClick() {
     init();
     AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
 
@@ -315,9 +315,9 @@ public class LightboxTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-lightbox-moveGestureCanBePerformedOnZoomedImage")
+  @Test(groups = "mercury_lightbox_moveImageWhileZoomed")
   @InBrowser(browser = Browser.CHROME_ANDROID)
-  public void moveGestureCanBePerformedOnZoomedImage() {
+  public void mercury_lightbox_moveImageWhileZoomed() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
 

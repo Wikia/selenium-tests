@@ -40,9 +40,9 @@ public class CommentsTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.COMMENTS);
   }
 
-  @Test(groups = "mercury-comments-containsAvatarAndUsernameAndTimestampAndContent")
+  @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")
   @RelatedIssue(issueID = "XW-654")
-  public void containsAvatarAndUsernameAndTimestampAndContent() {
+  public void mercury_comments_containsAvatarUsernameTimestampAndContent() {
     init();
 
     Assertion.assertTrue(
@@ -111,8 +111,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-comments-containsCounterAndNextButtonAndPreviousButton")
-  public void containsCounterAndNextButtonAndPreviousButton() {
+  @Test(groups = "mercury_comments_containsCounterNextButtonAndPreviousButton")
+  public void mercury_comments_containsCounterNextButtonAndPreviousButton() {
     init();
 
     comments.clickCommentsHeader();
@@ -174,8 +174,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-comments-repliesCounterShowsTheSameNumberInHeaderAndList")
-  public void repliesCounterShowsTheSameNumberInHeaderAndList() {
+  @Test(groups = "mercury_comments_repliesCounterCountsCorrect")
+  public void mercury_comments_repliesCounterCountsCorrect() {
     init();
 
     comments.clickCommentsHeader();
@@ -215,8 +215,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-comments-tapOnUserRedirectToUserPage")
-  public void tapOnUserRedirectToUserPage() {
+  @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
+  public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
     init();
 
     comments.clickCommentsHeader();
@@ -234,9 +234,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-comments-openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink")
-  public void openCommentAndVerifyVideoAndVideoLinkAndImageAndImageLink
-      () {
+  @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
+  public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     init();
 
     comments.clickCommentsHeader();

@@ -2,10 +2,8 @@ package com.wikia.webdriver.testcases.mercurytests.old;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -44,8 +42,8 @@ public class ArticlePageTests extends NewTestTemplate {
     this.loading = new Loading(driver);
   }
 
-  @Test(groups = "mercury-article-verifyWikiaLogoAndSearchButtonAndTopContributorsAndFooter")
-  public void verifyWikiaLogoAndSearchButtonAndTopContributorsSectionAndFooterElements() {
+  @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
+  public void mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
@@ -101,8 +99,8 @@ public class ArticlePageTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "mercury-article-tapingOnContributorRedirectsToUserPage")
-  public void tapingOnContributorRedirectsToUserPage() {
+  @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
+  public void mercury_article_linksInTopContributorsSectionRedirectsToUserPage() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
@@ -118,8 +116,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-article-clickOnLinkedImageChangesTheUrl")
-  public void clickOnLinkedImageChangesTheUrl() {
+  @Test(groups = "mercury_article_linkedImagesRedirectToCorrespondingUrl")
+  public void mercury_article_linkedImagesRedirectToCorrespondingUrl() {
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.LINKED_IMAGES);
@@ -137,47 +135,8 @@ public class ArticlePageTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury-article-categoryListExpandsOnCategoryButtonClick")
-  public void categoryListExpandsOnCategoryButtonClick() {
-    init();
-    ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
-
-    Assertion.assertTrue(
-        articlePage.isChevronCollapsed(),
-        "Chevron isn't collapsed"
-    );
-
-    PageObjectLogging.log(
-        "Category list",
-        "is collapsed",
-        true
-    );
-
-    articlePage.clickCategoryButton();
-
-    boolean result = !articlePage.isChevronCollapsed();
-    PageObjectLogging.log(
-        "Category list",
-        "is expanded",
-        "is collapsed",
-        result
-    );
-
-    articlePage.clickOnCategoryListElement(0);
-    new Wait(driver).forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
-
-    result = articlePage.isUrlContainingCategoryPage();
-    PageObjectLogging.log(
-        "Url",
-        "match pattern /wiki/Category:",
-        "does not match pattern /wiki/Category:",
-        result
-    );
-  }
-
-  @Test(groups = "mercury-article-articleWithColonAndQuestionMarkOpens")
-  public void articleWithColonAndQuestionMarkOpens() {
+  @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark")
+  public void mercury_article_navigateToArticlesWithColonAndQuestionMark() {
     init();
     ArticlePageObject article = new ArticlePageObject(driver);
 
