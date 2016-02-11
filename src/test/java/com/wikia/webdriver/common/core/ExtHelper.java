@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.Browsers.ChromeBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.FirefoxBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.ChromeBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.io.FileUtils;

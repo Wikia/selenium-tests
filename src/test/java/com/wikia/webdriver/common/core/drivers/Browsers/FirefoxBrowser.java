@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.drivers.Browsers;
+package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
 import java.io.IOException;

@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.BrowserType;
-import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.AndroidBrowser;
 import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;

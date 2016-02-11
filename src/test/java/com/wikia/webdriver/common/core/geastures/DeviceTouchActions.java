@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.geastures;
 
-import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.AndroidBrowser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.MultiTouchAction;

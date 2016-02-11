@@ -1,11 +1,10 @@
-package com.wikia.webdriver.common.core.drivers.Browsers;
+package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
 

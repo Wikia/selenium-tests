@@ -1,15 +1,12 @@
-package com.wikia.webdriver.common.core.drivers.Browsers;
+package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
-import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.driverprovider.UserAgentsRegistry;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
 import java.util.HashMap;

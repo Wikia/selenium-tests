@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.drivers.Browsers;
+package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;

@@ -1,15 +1,13 @@
 package com.wikia.webdriver.common.core.drivers;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.drivers.Browsers.AndroidBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.ChromeBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.ChromeMobileBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.DefaultBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.FirefoxBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.GhostBrowser;
-import com.wikia.webdriver.common.core.drivers.Browsers.HtmlUnitBrowser;
-
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import com.wikia.webdriver.common.core.drivers.browsers.AndroidBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.ChromeBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.ChromeMobileBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.DefaultBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.FirefoxBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.GhostBrowser;
+import com.wikia.webdriver.common.core.drivers.browsers.HtmlUnitBrowser;
 
 public enum BrowserType{
   CHROME(ChromeBrowser.class, "CHROME"),

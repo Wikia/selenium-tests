@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.core.drivers.Browsers;
+package com.wikia.webdriver.common.core.drivers.browsers;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
