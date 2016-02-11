@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 public class BasePageObject {
 
   public final Wait wait;
-  protected WikiaWebDriver driver = DriverProvider.getBrowserDriver();
+  protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
   public Actions builder;
   protected int timeOut = 15;

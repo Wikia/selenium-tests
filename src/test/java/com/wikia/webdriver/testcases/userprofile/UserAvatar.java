@@ -51,7 +51,7 @@ public class UserAvatar extends NewTestTemplate {
   @Test(groups = "AvatarTest_002")
   @Execute(asUser = User.STAFF)
   public void clickAvatar() {
-    new SpecialVersionPage(driver).open();
+    new SpecialVersionPage().open();
 
     UserProfilePageObject profile = new UserProfilePageObject(driver).clickOnAvatar();
     profile.verifyProfilePage(credentials.userNameStaff);

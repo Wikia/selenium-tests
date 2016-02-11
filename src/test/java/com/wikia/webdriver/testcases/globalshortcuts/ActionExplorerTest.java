@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.globalshortcuts;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
@@ -11,7 +11,7 @@ import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplo
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "globalshortcuts-en")
-@InBrowser(browser = Browser.CHROME)
+@InBrowser(browser = BrowserType.CHROME)
 public class ActionExplorerTest extends NewTestTemplate {
 
   private ActionExplorerModal actionExplorerModal;

@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.drivers.BrowserType;
 public class DriverProvider {
 
   private static final List<WikiaWebDriver> drivers = new ArrayList<>();
+  private static int ACTIVE_BROWSER_INDEX = 0;
 
   private DriverProvider() {
   }
@@ -20,7 +21,7 @@ public class DriverProvider {
     drivers.add(BrowserType.lookup(Configuration.getBrowser()).getInstance());
   }
 
-  public static WikiaWebDriver getBrowserDriver(int index) {
+  private static WikiaWebDriver getBrowserDriver(int index) {
     for (; drivers.size() <= index; ) {
       newInstance();
     }
@@ -28,8 +29,17 @@ public class DriverProvider {
     return drivers.get(index);
   }
 
-  public static WikiaWebDriver getBrowserDriver() {
+  private static WikiaWebDriver getBrowserDriver() {
     return getBrowserDriver(0);
+  }
+
+  public static WikiaWebDriver getActiveDriver(){
+    return getBrowserDriver(ACTIVE_BROWSER_INDEX);
+  }
+
+  public static WikiaWebDriver switchActiveWindow(int index){
+    ACTIVE_BROWSER_INDEX = index;
+    return getActiveDriver();
   }
 
   public static void close() {
@@ -43,5 +53,6 @@ public class DriverProvider {
 
     }
     drivers.clear();
+    ACTIVE_BROWSER_INDEX=0;
   }
 }

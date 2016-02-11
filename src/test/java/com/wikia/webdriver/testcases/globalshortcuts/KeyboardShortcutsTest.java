@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.globalshortcuts;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.BrowserType;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,7 +13,7 @@ import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "globalshortcuts-en")
-@InBrowser(browser = Browser.CHROME)
+@InBrowser(browser = BrowserType.CHROME)
 public class KeyboardShortcutsTest extends NewTestTemplate {
 
   private KeyboardShortcutsModal keyboardShortcutsModal;

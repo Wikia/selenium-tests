@@ -104,7 +104,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     runProxyServerIfNeeded(method);
-    driver = DriverProvider.getBrowserDriver();
+    driver = DriverProvider.getActiveDriver();
     setWindowSize();
 
     if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {

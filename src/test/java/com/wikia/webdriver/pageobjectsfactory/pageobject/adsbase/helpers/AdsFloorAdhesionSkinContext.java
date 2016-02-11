@@ -22,7 +22,7 @@ public class AdsFloorAdhesionSkinContext {
   private String modalCloseSelector;
   private String modalSelector;
   private String slotName;
-  private WikiaWebDriver webDriver = DriverProvider.getBrowserDriver();
+  private WikiaWebDriver webDriver = DriverProvider.getActiveDriver();
 
   public AdsFloorAdhesionSkinContext(String browser) {
     creativeId = OASIS_CREATIVE_ID;

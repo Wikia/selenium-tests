@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import net.lightbody.bmp.proxy.ProxyServer;
@@ -38,6 +39,10 @@ public class NewTestTemplateCore {
   protected NetworkTrafficInterceptor networkTrafficInterceptor;
   protected boolean isProxyServerRunning = false;
   private DesiredCapabilities capabilities;
+
+  protected void refreshDriver(){
+    driver = DriverProvider.getActiveDriver();
+  }
 
   @BeforeSuite(alwaysRun = true)
   public void beforeSuite() {
