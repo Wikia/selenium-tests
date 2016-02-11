@@ -235,6 +235,9 @@ public class PortableInfoboxObject {
     return this;
   }
 
+  /**
+   * Hero image is the image that appears on the top of infobox
+   */
   public PortableInfoboxObject isHeroImageCentered() {
     Assertion.assertEquals(images.get(0).getCssValue("vertical-align"), "middle");
     PageObjectLogging.log("Hero image", "is centered", true);

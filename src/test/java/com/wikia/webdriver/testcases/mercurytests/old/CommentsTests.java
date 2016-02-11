@@ -40,9 +40,9 @@ public class CommentsTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.COMMENTS);
   }
 
-  @Test(groups = "MercuryCommentsTest_001")
+  @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")
   @RelatedIssue(issueID = "XW-654")
-  public void MercuryCommentsTest_001_CommentsList_Avatar_Username_TimeStamp_Content() {
+  public void mercury_comments_containsAvatarUsernameTimestampAndContent() {
     init();
 
     Assertion.assertTrue(
@@ -111,8 +111,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_002")
-  public void MercuryCommentsTest_002_CommentsCounter_NextButton_PreviousButton() {
+  @Test(groups = "mercury_comments_containsCounterNextButtonAndPreviousButton")
+  public void mercury_comments_containsCounterNextButtonAndPreviousButton() {
     init();
 
     comments.clickCommentsHeader();
@@ -174,8 +174,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_003")
-  public void MercuryCommentsTest_003_RepliesListCounter() {
+  @Test(groups = "mercury_comments_repliesCounterCountsCorrect")
+  public void mercury_comments_repliesCounterCountsCorrect() {
     init();
 
     comments.clickCommentsHeader();
@@ -215,8 +215,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_004")
-  public void MercuryCommentsTest_004_TapOnUserRedirectToUserPage() {
+  @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
+  public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
     init();
 
     comments.clickCommentsHeader();
@@ -234,8 +234,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "MercuryCommentsTest_005")
-  public void MercuryCommentsTest_005_Images_Videos() {
+  @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
+  public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     init();
 
     comments.clickCommentsHeader();
