@@ -24,8 +24,8 @@ public class CategoryTest extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }
 
-  @Test(groups = "mercury-category-001")
-  public void category_001_openNavigate() {
+  @Test(groups = "mercury_category_expandAndNavigateToCategoryPage")
+  public void mercury_category_expandAndNavigateToCategoryPage() {
     init();
 
     category.toggle();
