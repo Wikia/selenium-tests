@@ -112,6 +112,15 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
   }
 
+  protected void switchToWindow(int index) {
+    DriverProvider.switchActiveWindow(index);
+    refreshDriver();
+
+    String driverName = DriverProvider.getActiveDriver().equals(driver) ? "primary window" : "secondary window";
+    PageObjectLogging
+        .log("switchToWindow", "================ " + driverName + " ================", true);
+  }
+
   @AfterMethod(alwaysRun = true)
   public void stop() {
     if (isProxyServerRunning) {
