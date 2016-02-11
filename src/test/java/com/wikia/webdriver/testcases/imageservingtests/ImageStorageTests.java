@@ -82,7 +82,7 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage.rename(imageNewName, true);
     file.verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = new FilePagePageObject(driver).open(fileName, true);
+    file = new FilePagePageObject(driver).open(imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
     file.verifyNotificationMessage();
