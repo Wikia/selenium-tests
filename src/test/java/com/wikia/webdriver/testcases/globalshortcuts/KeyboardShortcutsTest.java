@@ -1,16 +1,15 @@
 package com.wikia.webdriver.testcases.globalshortcuts;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.BrowserType;
-import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
-
-import org.testng.annotations.Test;
 
 @Execute(onWikia = "globalshortcuts-en")
 @InBrowser(browser = BrowserType.CHROME)
