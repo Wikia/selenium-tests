@@ -173,7 +173,7 @@ public class Configuration {
   }
 
   public static boolean useProxy(){
-    return Boolean.valueOf(getProp("useProxy"));
+    return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode());
   }
 
   /**

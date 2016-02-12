@@ -57,7 +57,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
       setTestProperty("countryCode", method.getAnnotation(GeoEdgeBrowserMobProxy.class).country());
-      setTestProperty("useProxy", "true");
     }
 
     if (method.isAnnotationPresent(NetworkTrafficDump.class)) {

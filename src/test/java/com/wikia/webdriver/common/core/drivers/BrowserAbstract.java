@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -62,18 +61,14 @@ public abstract class BrowserAbstract {
 
   protected void setProxy() {
     if (Configuration.useProxy()) {
+      server = new NetworkTrafficInterceptor();
+      server.startSeleniumProxyServer();
       String countryCode = Configuration.getCountryCode();
       if (StringUtils.isNotBlank(countryCode)) {
         String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
-        Proxy proxy = new Proxy();
-        proxy.setHttpProxy(proxyAddress);
-        proxy.setSslProxy(proxyAddress);
-        caps.setCapability(CapabilityType.PROXY, proxy);
-      } else {
-        server = new NetworkTrafficInterceptor();
-        server.startSeleniumProxyServer();
-        caps.setCapability(CapabilityType.PROXY, server.seleniumProxy());
+        server.setProxyServer(proxyAddress);
       }
+      caps.setCapability(CapabilityType.PROXY, server.seleniumProxy());
     }
   }
 }
