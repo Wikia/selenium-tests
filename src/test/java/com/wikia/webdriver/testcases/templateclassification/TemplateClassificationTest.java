@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplateEditPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePage;
+import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
+import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 
 @Execute(asUser = User.STAFF, onWikia = "aga")
 @InBrowser(browser = Browser.CHROME)

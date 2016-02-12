@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePage;
+import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 
 import org.testng.annotations.Test;
 

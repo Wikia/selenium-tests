@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.template;
+package com.wikia.webdriver.elements.oasis.pages;
 
 import lombok.Getter;
 
