@@ -81,47 +81,4 @@ public class NewTestTemplateCore {
   protected void loadFirstPage() {
     driver.get(wikiURL + URLsContent.SPECIAL_VERSION);
   }
-
-  protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
-    capabilities = new DesiredCapabilities();
-    capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
-    return capabilities;
-  }
-
-  protected void setDriverCapabilities(DesiredCapabilities caps) {
-    BrowserAbstract.setDriverCapabilities(caps);
-  }
-
-  protected void runProxyServerIfNeeded(Method method) {
-    boolean isGeoEdgeSet = false;
-    boolean isNetworkTrafficDumpSet = false;
-    String countryCode = null;
-
-    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
-      isGeoEdgeSet = true;
-      countryCode = method.getAnnotation(GeoEdgeBrowserMobProxy.class).country();
-    }
-
-    if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
-      isNetworkTrafficDumpSet = true;
-    }
-
-    if (!isGeoEdgeSet && !isNetworkTrafficDumpSet) {
-      return;
-    }
-
-    isProxyServerRunning = true;
-    networkTrafficInterceptor = new NetworkTrafficInterceptor();
-    networkTrafficInterceptor.startSeleniumProxyServer();
-    if (isGeoEdgeSet && !countryCode.isEmpty()) {
-      setGeoEdge(countryCode);
-    }
-    capabilities = getCapsWithProxyServerSet(networkTrafficInterceptor);
-    setDriverCapabilities(capabilities);
-  }
-
-  public void setGeoEdge(String countryCode) {
-    String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
-    networkTrafficInterceptor.setProxyServer(proxyAddress);
-  }
 }

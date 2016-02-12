@@ -3,7 +3,9 @@ package com.wikia.webdriver.common.templates;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -14,6 +16,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.sql.Driver;
 
 public class NewTestTemplate extends NewTestTemplateCore {
 
@@ -50,6 +53,16 @@ public class NewTestTemplate extends NewTestTemplateCore {
 
     if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)){
       setTestProperty("unstablePageLoadStrategy", "true");
+    }
+
+    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
+      setTestProperty("countryCode", method.getAnnotation(GeoEdgeBrowserMobProxy.class).country());
+      setTestProperty("useProxy", "true");
+    }
+
+    if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
+      setTestProperty("dumpNetworkTraffic", String.valueOf(method.getAnnotation(NetworkTrafficDump.class).networkTrafficDump()));
+      setTestProperty("useProxy", "true");
     }
   }
 
@@ -103,8 +116,8 @@ public class NewTestTemplate extends NewTestTemplateCore {
           "Test can't be run on " + Configuration.getEnv() + " environment");
     }
 
-    runProxyServerIfNeeded(method);
     driver = DriverProvider.getActiveDriver();
+    networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
 
     if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {

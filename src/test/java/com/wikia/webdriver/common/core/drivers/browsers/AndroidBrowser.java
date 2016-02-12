@@ -16,7 +16,7 @@ public class AndroidBrowser extends BrowserAbstract {
   private static AndroidDriver mobileDriver;
 
   @Override
-  public WikiaWebDriver setInstance(){
+  public void setOptions(){
     DesiredCapabilities destCaps = new DesiredCapabilities();
     destCaps.setCapability("deviceName", Configuration.getDeviceName());
     URL url = null;
@@ -27,7 +27,16 @@ public class AndroidBrowser extends BrowserAbstract {
     }
     mobileDriver = new AndroidDriver(url, destCaps);
 
+  }
+
+  @Override
+  public WikiaWebDriver create() {
     return new WikiaWebDriver(mobileDriver, true);
+  }
+
+  @Override
+  public void addExtension(String extensionName) {
+
   }
 
   public static AndroidDriver getMobileDriver() {

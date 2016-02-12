@@ -44,7 +44,10 @@ public class DriverProvider {
 
   public static void close() {
     try {
-      for (WebDriver webDriver : drivers) {
+      for (WikiaWebDriver webDriver : drivers) {
+        if (webDriver.getProxy() != null){
+          webDriver.getProxy().stop();
+        }
         if (webDriver != null) {
           webDriver.quit();
         }

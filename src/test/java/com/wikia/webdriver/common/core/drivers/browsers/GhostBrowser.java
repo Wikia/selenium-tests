@@ -11,7 +11,7 @@ import java.io.File;
 public class GhostBrowser extends BrowserAbstract {
 
   @Override
-  public  WikiaWebDriver setInstance(){
+  public void setOptions(){
     String phantomJSBinaryName;
     String OSName = System.getProperty("os.name").toUpperCase();
 
@@ -26,7 +26,15 @@ public class GhostBrowser extends BrowserAbstract {
       caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
                          phantomJSBinary.getAbsolutePath());
     }
+  }
 
+  @Override
+  public WikiaWebDriver create() {
     return new WikiaWebDriver(new PhantomJSDriver(caps), false);
+  }
+
+  @Override
+  public void addExtension(String extensionName) {
+
   }
 }

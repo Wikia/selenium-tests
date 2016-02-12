@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,12 +14,25 @@ public class WikiaWebDriver extends EventFiringWebDriver {
 
   private WebDriver webDriver;
   private boolean isMobile;
+  private NetworkTrafficInterceptor proxy = null;
 
   public WikiaWebDriver(WebDriver webdriver, boolean isMobile) {
     super(webdriver);
 
     this.webDriver = webdriver;
     this.isMobile = isMobile;
+  }
+
+  public WikiaWebDriver(WebDriver webdriver, NetworkTrafficInterceptor proxy, boolean isMobile) {
+    super(webdriver);
+
+    this.webDriver = webdriver;
+    this.isMobile = isMobile;
+    this.proxy = proxy;
+  }
+
+  public NetworkTrafficInterceptor getProxy(){
+    return proxy;
   }
 
   public boolean isChrome() {

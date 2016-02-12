@@ -172,6 +172,10 @@ public class Configuration {
     return getProp("countryCode");
   }
 
+  public static boolean useProxy(){
+    return Boolean.valueOf(getProp("useProxy"));
+  }
+
   /**
    * @return null if window is supposed to be maximised, Dimension if any other size is demanded
    */

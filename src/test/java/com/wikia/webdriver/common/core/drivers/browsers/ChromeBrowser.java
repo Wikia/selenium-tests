@@ -1,24 +1,26 @@
 package com.wikia.webdriver.common.core.drivers.browsers;
 
-import com.wikia.webdriver.common.core.ExtHelper;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
+import com.wikia.webdriver.common.core.ExtHelper;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
+import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.driverprovider.UserAgentsRegistry;
 
 public class ChromeBrowser extends BrowserAbstract {
 
-  private static ChromeOptions chromeOptions = new ChromeOptions();
+  private ChromeOptions chromeOptions = new ChromeOptions();
+  private boolean useMobile = Browser.CHROME_MOBILE_MERCURY.equals(Configuration.getBrowser());
 
   @Override
-  public WikiaWebDriver setInstance() {
+  public void setOptions() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
     String emulator = Configuration.getEmulator();
@@ -44,9 +46,8 @@ public class ChromeBrowser extends BrowserAbstract {
     }
 
     System.setProperty("webdriver.chrome.driver",
-                       new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath)
-                                    .getPath())
-                           .getPath());
+        new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath).getPath())
+            .getPath());
 
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
@@ -55,22 +56,27 @@ public class ChromeBrowser extends BrowserAbstract {
       chromeOptions.addArguments("disable-notifications");
     }
 
+    // TODO change mobile tests to use @UserAgent annotation
+    if (useMobile) {
+      chromeOptions.addArguments("--user-agent=" + UserAgentsRegistry.IPHONE.getUserAgent());
+    }
+
     if (!"null".equals(emulator)) {
       Map<String, String> mobileEmulation = new HashMap<>();
       mobileEmulation.put("deviceName", emulator);
       chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
     }
-
-    caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-
-    setBrowserLogging(Level.SEVERE);
-
-    ExtHelper.addExtensions(Configuration.getExtensions());
-
-    return new WikiaWebDriver(new ChromeDriver(caps), false);
   }
 
-  public static ChromeOptions getChromeOptions() {
-    return chromeOptions;
+  @Override
+  public WikiaWebDriver create() {
+    caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+    return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
+  }
+
+  @Override
+  public void addExtension(String extensionName) {
+    chromeOptions.addExtensions(ExtHelper.findExtension(extensionName, "crx"));
   }
 }
