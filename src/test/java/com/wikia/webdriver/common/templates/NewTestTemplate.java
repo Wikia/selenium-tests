@@ -1,5 +1,11 @@
 package com.wikia.webdriver.common.templates;
 
+import java.lang.reflect.Method;
+
+import org.testng.SkipException;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -10,13 +16,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import java.lang.reflect.Method;
-import java.sql.Driver;
 
 public class NewTestTemplate extends NewTestTemplateCore {
 
