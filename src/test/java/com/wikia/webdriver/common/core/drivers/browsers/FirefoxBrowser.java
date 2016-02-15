@@ -75,7 +75,7 @@ public class FirefoxBrowser extends BrowserAbstract {
     try {
       firefoxProfile.addExtension(ExtHelper.findExtension(extensionName, "xpi"));
     } catch (IOException e) {
-      e.printStackTrace();
+      PageObjectLogging.logError("Can't initialize extensions", e);
     }
   }
 }
