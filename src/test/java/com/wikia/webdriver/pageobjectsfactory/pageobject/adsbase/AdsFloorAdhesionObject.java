@@ -1,11 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.helpers.Browser;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class AdsFloorAdhesionObject extends AdsBaseObject {
 

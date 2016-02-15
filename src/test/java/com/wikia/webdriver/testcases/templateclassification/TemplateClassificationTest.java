@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.templateclassification;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -11,7 +11,7 @@ import com.wikia.webdriver.elements.oasis.components.templateclassificiation.Tem
 import org.testng.annotations.Test;
 
 @Execute(asUser = User.STAFF, onWikia = "aga")
-@InBrowser(browser = BrowserType.CHROME)
+@InBrowser(browser = Browser.CHROME)
 public class TemplateClassificationTest extends NewTestTemplate {
 
   private Navigate navigate;

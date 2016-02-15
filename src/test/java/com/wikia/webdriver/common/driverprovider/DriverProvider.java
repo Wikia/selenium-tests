@@ -3,11 +3,9 @@ package com.wikia.webdriver.common.driverprovider;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 
 public class DriverProvider {
 
@@ -18,7 +16,7 @@ public class DriverProvider {
   }
 
   private static void newInstance() {
-    drivers.add(BrowserType.lookup(Configuration.getBrowser()).getInstance());
+    drivers.add(Browser.lookup(Configuration.getBrowser()).getInstance());
   }
 
   private static WikiaWebDriver getBrowserDriver(int index) {

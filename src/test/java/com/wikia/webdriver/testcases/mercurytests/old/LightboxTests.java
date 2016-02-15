@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.drivers.browsers.AndroidBrowser;
 import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -27,7 +27,7 @@ import java.io.File;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
-    browser = BrowserType.CHROME,
+    browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class LightboxTests extends NewTestTemplate {
@@ -84,7 +84,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_lightbox_changeImageByTapOnEdgeAndByGesture")
-  @InBrowser(browser = BrowserType.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void mercury_lightbox_changeImageByTapOnEdgeAndByGesture() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -182,7 +182,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_lightbox_zoomByGestureAndByDoubleTap")
-  @InBrowser(browser = BrowserType.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void mercury_lightbox_zoomByGestureAndByDoubleTap() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -316,7 +316,7 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_lightbox_moveImageWhileZoomed")
-  @InBrowser(browser = BrowserType.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void mercury_lightbox_moveImageWhileZoomed() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);

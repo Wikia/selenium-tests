@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mediatests.providers;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -19,7 +19,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
   @Execute(onWikia = "sktest123", disableFlash = "false")
-  @InBrowser(browser = BrowserType.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
 
@@ -40,7 +40,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
   @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
   @Execute(disableFlash = "false", onWikia = "sktest123")
-  @InBrowser(browser = BrowserType.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
 
@@ -57,7 +57,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
   @Execute(disableFlash = "false", onWikia = "sktest123")
-  @InBrowser(browser = BrowserType.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
     String providerName = "ign";

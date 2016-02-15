@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.drivers.browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.GhostBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.HtmlUnitBrowser;
 
-public enum BrowserType{
+public enum Browser {
   CHROME(ChromeBrowser.class, "CHROME"),
   FIREFOX(FirefoxBrowser.class, "FF"),
   CHROME_MOBILE(ChromeBrowser.class, "CHROMEMOBILEMERCURY"),
@@ -20,7 +20,7 @@ public enum BrowserType{
   private Class<? extends BrowserAbstract> browserClass;
   private String name;
 
-  BrowserType(Class<? extends BrowserAbstract> browserClass, String name) {
+  Browser(Class<? extends BrowserAbstract> browserClass, String name) {
     this.name = name;
     this.browserClass = browserClass;
   }
@@ -39,8 +39,8 @@ public enum BrowserType{
   }
 
 
-  public static BrowserType lookup(String browserName) {
-    for (BrowserType name : BrowserType.values()) {
+  public static Browser lookup(String browserName) {
+    for (Browser name : Browser.values()) {
       if (name.getName().equalsIgnoreCase(browserName)) {
         return name;
       }

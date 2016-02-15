@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.geastures.DeviceTouchActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -22,7 +22,7 @@ import java.io.File;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
-    browser = BrowserType.CHROME,
+    browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class InteractiveMapsTests extends NewTestTemplate {
@@ -92,7 +92,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_002")
-  @InBrowser(browser = BrowserType.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_002_ZoomByGesture_ZoomByButtons() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);
@@ -219,7 +219,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_003")
-  @InBrowser(browser = BrowserType.CHROME_ANDROID)
+  @InBrowser(browser = Browser.CHROME_ANDROID)
   public void MercuryInteractiveMapsTest_003_FilterBoxListScroll() {
     init();
     DeviceTouchActions touchAction = new DeviceTouchActions(driver);

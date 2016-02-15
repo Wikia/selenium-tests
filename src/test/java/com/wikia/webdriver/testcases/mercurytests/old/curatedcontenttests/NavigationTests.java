@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.core.url.UrlChecker;
@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_CC)
 @InBrowser(
-    browser = BrowserType.CHROME,
+    browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class NavigationTests extends NewTestTemplate {

@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.core.drivers.browsers;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
-import com.wikia.webdriver.common.core.drivers.BrowserType;
+import com.wikia.webdriver.common.core.drivers.Browser;
 
 public class DefaultBrowser extends BrowserAbstract {
 
@@ -11,7 +11,7 @@ public class DefaultBrowser extends BrowserAbstract {
 
   DefaultBrowser() {
     try {
-      browserClass = BrowserType.lookup(Configuration.getBrowser()).getBrowserClass().newInstance();
+      browserClass = Browser.lookup(Configuration.getBrowser()).getBrowserClass().newInstance();
     } catch (InstantiationException | IllegalAccessException e) {
       e.printStackTrace();
     }

@@ -11,13 +11,12 @@ import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
-import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.driverprovider.UserAgentsRegistry;
 
 public class ChromeBrowser extends BrowserAbstract {
 
   private ChromeOptions chromeOptions = new ChromeOptions();
-  private boolean useMobile = Browser.CHROME_MOBILE_MERCURY.equals(Configuration.getBrowser());
+  private boolean useMobile = "CHROMEMOBILEMERCURY".equals(Configuration.getBrowser());
 
   @Override
   public void setOptions() {
@@ -49,11 +48,12 @@ public class ChromeBrowser extends BrowserAbstract {
         new File(ClassLoader.getSystemResource("ChromeDriver" + chromeBinaryPath).getPath())
             .getPath());
 
+    chromeOptions.addArguments("start-maximized");
+    chromeOptions.addArguments("disable-notifications");
+    chromeOptions.addArguments("process-per-site");
+
     if ("true".equals(Configuration.getDisableFlash())) {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
-      chromeOptions.addArguments("process-per-site");
-      chromeOptions.addArguments("start-maximized");
-      chromeOptions.addArguments("disable-notifications");
     }
 
     // TODO change mobile tests to use @UserAgent annotation
