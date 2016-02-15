@@ -1,22 +1,27 @@
 package com.wikia.webdriver.common.core.drivers.browsers;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class AndroidBrowser extends BrowserAbstract {
 
   private static AndroidDriver mobileDriver;
 
+  public static AndroidDriver getMobileDriver() {
+    return mobileDriver;
+  }
+
   @Override
-  public void setOptions(){
+  public void setOptions() {
     DesiredCapabilities destCaps = new DesiredCapabilities();
     destCaps.setCapability("deviceName", Configuration.getDeviceName());
     URL url = null;
@@ -36,10 +41,6 @@ public class AndroidBrowser extends BrowserAbstract {
 
   @Override
   public void addExtension(String extensionName) {
-
-  }
-
-  public static AndroidDriver getMobileDriver() {
-    return mobileDriver;
+    // No extensions are applied to android
   }
 }
