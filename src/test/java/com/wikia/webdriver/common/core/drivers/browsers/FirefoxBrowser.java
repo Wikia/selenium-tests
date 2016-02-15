@@ -27,7 +27,7 @@ public class FirefoxBrowser extends BrowserAbstract {
     }
 
     // Check if user who is running tests have write access in ~/.mozilla dir and home dir
-    if ("LINUX".equals(System.getProperty("os.name").toUpperCase())) {
+    if ("LINUX".equalsIgnoreCase(System.getProperty("os.name"))) {
       File homePath = new File(System.getenv("HOME") + File.separator);
       File mozillaPath = new File(homePath + File.separator + ".mozilla");
       File tmpFile;
