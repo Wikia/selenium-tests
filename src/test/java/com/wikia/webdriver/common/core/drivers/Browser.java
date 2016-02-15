@@ -7,15 +7,13 @@ import com.wikia.webdriver.common.core.drivers.browsers.DefaultBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.FirefoxBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.GhostBrowser;
 import com.wikia.webdriver.common.core.drivers.browsers.HtmlUnitBrowser;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public enum Browser {
-  CHROME(ChromeBrowser.class, "CHROME"),
-  FIREFOX(FirefoxBrowser.class, "FF"),
-  CHROME_MOBILE(ChromeBrowser.class, "CHROMEMOBILEMERCURY"),
-  HTMLUNIT(HtmlUnitBrowser.class, "HTMLUNIT"),
-  GHOST(GhostBrowser.class, "GHOST"),
-  CHROME_ANDROID(AndroidBrowser.class, "ANDROID"),
-  DEFAULT(DefaultBrowser.class, "");
+  CHROME(ChromeBrowser.class, "CHROME"), FIREFOX(FirefoxBrowser.class, "FF"), CHROME_MOBILE(
+      ChromeBrowser.class, "CHROMEMOBILEMERCURY"), HTMLUNIT(HtmlUnitBrowser.class,
+          "HTMLUNIT"), GHOST(GhostBrowser.class, "GHOST"), CHROME_ANDROID(AndroidBrowser.class,
+              "ANDROID"), DEFAULT(DefaultBrowser.class, "");
 
   private Class<? extends BrowserAbstract> browserClass;
   private String name;
@@ -24,20 +22,6 @@ public enum Browser {
     this.name = name;
     this.browserClass = browserClass;
   }
-
-  public String getName(){
-    return name;
-  }
-
-  public WikiaWebDriver getInstance() {
-    try {
-      return browserClass.newInstance().getInstance();
-    } catch (InstantiationException | IllegalAccessException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
 
   public static Browser lookup(String browserName) {
     for (Browser name : Browser.values()) {
@@ -48,7 +32,20 @@ public enum Browser {
     return null;
   }
 
-  public Class<? extends BrowserAbstract> getBrowserClass(){
+  public String getName() {
+    return name;
+  }
+
+  public WikiaWebDriver getInstance() {
+    try {
+      return browserClass.newInstance().getInstance();
+    } catch (InstantiationException | IllegalAccessException e) {
+      PageObjectLogging.logError("Could not initialize the browser", e);
+    }
+    return null;
+  }
+
+  public Class<? extends BrowserAbstract> getBrowserClass() {
     return browserClass;
   }
 }
