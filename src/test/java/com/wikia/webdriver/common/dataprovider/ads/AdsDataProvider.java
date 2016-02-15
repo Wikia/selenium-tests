@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
 import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
@@ -921,6 +922,65 @@ public class AdsDataProvider {
             "SyntheticTests/Prefooters",
             new Dimension(1920, 1080),
             false
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsOnConsecutivePages() {
+    return new Object[][]{
+        {
+            "adtest",
+            new String[]{
+                "Article1",
+                "Article2",
+                "Article3",
+                "Article2",
+                "Article1",
+                "Wikia Ad Testing"
+            },
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsSent() {
+    return new Object[][]{
+        {
+            "adtest",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL
+            }
+        },
+        {
+            "angrybirds",
+            new String[]{
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        },
+        {
+            "lego",
+            new String[]{
+                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsNotSent() {
+    return new Object[][]{
+        {
+            "adtest",
+            new String[]{
+                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
         }
     };
   }
