@@ -1,12 +1,12 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 
 import io.appium.java_client.android.AndroidDriver;
 
@@ -31,7 +31,7 @@ public class WikiaWebDriver extends EventFiringWebDriver {
     this.proxy = proxy;
   }
 
-  public NetworkTrafficInterceptor getProxy(){
+  public NetworkTrafficInterceptor getProxy() {
     return proxy;
   }
 
@@ -53,5 +53,13 @@ public class WikiaWebDriver extends EventFiringWebDriver {
 
   public boolean isFirefox() {
     return webDriver instanceof FirefoxDriver;
+  }
+
+  @Override
+  public void quit() {
+    if (proxy != null) {
+      proxy.stop();
+    }
+    super.quit();
   }
 }

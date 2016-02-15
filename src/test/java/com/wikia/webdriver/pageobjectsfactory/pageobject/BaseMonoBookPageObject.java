@@ -4,10 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class BaseMonoBookPageObject extends WikiBasePageObject {
 
@@ -16,9 +14,8 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
   @FindBy(css = "body.oasis-oasis")
   protected WebElement oasisSkinClass;
 
-  public BaseMonoBookPageObject(WebDriver driver) {
+  public BaseMonoBookPageObject() {
     super();
-    PageFactory.initElements(driver, this);
   }
 
   public void openWikiPageWithMonobook() {

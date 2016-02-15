@@ -6,6 +6,7 @@ import java.util.List;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class DriverProvider {
 
@@ -26,10 +27,6 @@ public class DriverProvider {
     return drivers.get(index);
   }
 
-  private static WikiaWebDriver getBrowserDriver() {
-    return getBrowserDriver(0);
-  }
-
   public static WikiaWebDriver getActiveDriver() {
     return getBrowserDriver(ACTIVE_BROWSER_INDEX);
   }
@@ -43,13 +40,11 @@ public class DriverProvider {
     try {
       for (WikiaWebDriver webDriver : drivers) {
         if (webDriver != null) {
-          if (webDriver.getProxy() != null) {
-            webDriver.getProxy().stop();
-          }
           webDriver.quit();
         }
       }
     } catch (Error e) {
+      PageObjectLogging.log("Close Brwoser", e, true);
     }
     drivers.clear();
     ACTIVE_BROWSER_INDEX = 0;
