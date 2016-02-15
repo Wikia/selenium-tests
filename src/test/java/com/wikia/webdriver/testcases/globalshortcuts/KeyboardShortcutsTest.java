@@ -7,62 +7,55 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
-import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
 @Execute(onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
 public class KeyboardShortcutsTest extends NewTestTemplate {
 
-  private KeyboardShortcutsModal keyboardShortcutsModal;
-  private WikiaBar wikiaBar;
-
-  private void init() {
-    this.keyboardShortcutsModal = new KeyboardShortcutsModal(driver);
-    this.wikiaBar = new WikiaBar(driver);
-
-    new Navigate(driver).toPage("/wiki/Globalshortcuts-en_Wikia");
-  }
-
   @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")
   @Execute(asUser = User.USER)
   public void globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton() {
-    init();
-
-    wikiaBar.clickOnShortcutsLink();
-    keyboardShortcutsModal.clickCloseButton();
+    new HomePageObject(driver)
+        .open()
+        .getWikiaBar()
+        .clickOnShortcutsLink()
+        .clickCloseButton();
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts")
   public void globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts() {
-    init();
-
-    keyboardShortcutsModal.useShortcut("?");
-    keyboardShortcutsModal.useShortcut("ESC");
+    new HomePageObject(driver)
+        .open()
+        .getKeyboardShortcuts()
+        .useShortcut("?")
+        .useShortcut("ESC");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
   public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut() {
-    init();
-
-    keyboardShortcutsModal.useShortcut("?");
-    keyboardShortcutsModal.useShortcut("gi");
+    new HomePageObject(driver)
+        .open()
+        .getKeyboardShortcuts()
+        .useShortcut("?")
+        .useShortcut("gi");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut")
   public void globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut() {
-    init();
-
-    keyboardShortcutsModal.useShortcut("?");
-    keyboardShortcutsModal.useShortcut("gs");
+    new HomePageObject(driver)
+        .open()
+        .getKeyboardShortcuts()
+        .useShortcut("?")
+        .useShortcut("gs");
   }
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut")
   public void globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut() {
-    init();
-
-    keyboardShortcutsModal.useShortcut("?");
-    keyboardShortcutsModal.useShortcut(".");
+    new HomePageObject(driver)
+        .open()
+        .getKeyboardShortcuts()
+        .useShortcut("?")
+        .useShortcut(".");
   }
 }

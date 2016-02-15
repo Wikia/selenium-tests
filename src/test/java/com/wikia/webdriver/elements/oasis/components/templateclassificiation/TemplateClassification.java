@@ -1,16 +1,15 @@
 package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class TemplateClassification {
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+public class TemplateClassification extends WikiBasePageObject {
 
   @FindBy(css = ".template-classification-type-label")
   private WebElement entryPointLink;
@@ -31,12 +30,8 @@ public class TemplateClassification {
 
   private String templateName = "";
 
-  private Wait wait;
-
   public TemplateClassification(WebDriver driver) {
-    this.wait = new Wait(driver);
-
-    PageFactory.initElements(driver, this);
+    super(driver);
   }
 
   public TemplateClassification open() {
@@ -68,9 +63,9 @@ public class TemplateClassification {
     wait.forElementVisible(entryPointLink);
     String currentTemplateName = entryPointLink.getText();
     Assertion.assertFalse(currentTemplateName.equals(oldTemplateName),
-                          "Template type did not change");
-    PageObjectLogging.logInfo("Template type changed from: '" + oldTemplateName +
-                              "', to: '" + currentTemplateName + "'");
+        "Template type did not change");
+    PageObjectLogging.logInfo(
+        "Template type changed from: '" + oldTemplateName + "', to: '" + currentTemplateName + "'");
 
     return this;
   }

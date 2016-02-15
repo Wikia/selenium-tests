@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import lombok.Getter;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +29,9 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
+import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
+import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -146,7 +150,15 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-  private GlobalNavigationPageObject globalNavigation;
+
+  @Getter(lazy = true)
+  private final GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
+  @Getter(lazy = true)
+  private final WikiaBar wikiaBar = new WikiaBar(driver);
+  @Getter(lazy = true)
+  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal(driver);
+  @Getter(lazy = true)
+  private final ActionExplorerModal actionExplorer = new ActionExplorerModal(driver);
 
   public WikiBasePageObject() {
     super();
@@ -796,14 +808,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyGlobalNavigation() {
     wait.forElementVisible(globalNavigationBar);
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
-  }
-
-  public GlobalNavigationPageObject getGlobalNavigation() {
-    if (globalNavigation == null) {
-      globalNavigation = new GlobalNavigationPageObject(driver);
-    }
-
-    return globalNavigation;
   }
 
   public void verifyModalFBButtonVisible() {
