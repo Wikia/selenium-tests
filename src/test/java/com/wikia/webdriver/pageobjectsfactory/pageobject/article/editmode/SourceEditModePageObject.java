@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -398,15 +397,5 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject(driver);
-  }
-
-  public void addCategoryToSourceCode(String catName) {
-    sourceModeTextArea.sendKeys(catName);
-  }
-
-  public TemplatePageObject clickPublishButtonInTemplateNamespace() {
-    wait.forElementVisible(submitButton);
-    submitButton.click();
-    return new TemplatePageObject(driver);
   }
 }
