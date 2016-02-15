@@ -12,15 +12,14 @@ public class DriverProvider {
   private static final List<WikiaWebDriver> drivers = new ArrayList<>();
   private static int ACTIVE_BROWSER_INDEX = 0;
 
-  private DriverProvider() {
-  }
+  private DriverProvider() {}
 
   private static void newInstance() {
     drivers.add(Browser.lookup(Configuration.getBrowser()).getInstance());
   }
 
   private static WikiaWebDriver getBrowserDriver(int index) {
-    for (; drivers.size() <= index; ) {
+    for (; drivers.size() <= index;) {
       newInstance();
     }
 
@@ -31,11 +30,11 @@ public class DriverProvider {
     return getBrowserDriver(0);
   }
 
-  public static WikiaWebDriver getActiveDriver(){
+  public static WikiaWebDriver getActiveDriver() {
     return getBrowserDriver(ACTIVE_BROWSER_INDEX);
   }
 
-  public static WikiaWebDriver switchActiveWindow(int index){
+  public static WikiaWebDriver switchActiveWindow(int index) {
     ACTIVE_BROWSER_INDEX = index;
     return getActiveDriver();
   }
@@ -43,17 +42,16 @@ public class DriverProvider {
   public static void close() {
     try {
       for (WikiaWebDriver webDriver : drivers) {
-        if (webDriver.getProxy() != null){
-          webDriver.getProxy().stop();
-        }
         if (webDriver != null) {
+          if (webDriver.getProxy() != null) {
+            webDriver.getProxy().stop();
+          }
           webDriver.quit();
         }
       }
-    }catch (Error e){
-
+    } catch (Error e) {
     }
     drivers.clear();
-    ACTIVE_BROWSER_INDEX=0;
+    ACTIVE_BROWSER_INDEX = 0;
   }
 }

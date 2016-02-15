@@ -16,7 +16,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
 
   @Test(groups = "templateClassification_openAndClose")
   public void templateClassification_openAndClose() {
-    new TemplatePage(driver)
+    new TemplatePage()
         .open("T")
         .getTemplateClassification()
         .open()
@@ -25,7 +25,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
 
   @Test(groups = "templateClassification_changeTemplateType")
   public void templateClassification_changeTemplateType() {
-    new TemplatePage(driver)
+    new TemplatePage()
         .open("T")
         .getTemplateClassification()
         .open()
@@ -35,7 +35,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
 
   @Test(groups = "templateClassification_saveTemplateTypeForNewTemplate")
   public void templateClassification_saveTemplateTypeForNewTemplate() {
-    new TemplateEditPage(driver)
+    new TemplateEditPage()
         .open("AutoTest1")
         .getTemplateClassification()
         .selectTemplateType()

@@ -154,11 +154,11 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
   @Getter(lazy = true)
-  private final WikiaBar wikiaBar = new WikiaBar(driver);
+  private final WikiaBar wikiaBar = new WikiaBar();
   @Getter(lazy = true)
-  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal(driver);
+  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
   @Getter(lazy = true)
-  private final ActionExplorerModal actionExplorer = new ActionExplorerModal(driver);
+  private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
 
   public WikiBasePageObject() {
     super();

@@ -132,7 +132,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests_010", "PortableInfoboxTests_3"})
   @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
-    TemplatePage template = new TemplatePage(driver);
+    TemplatePage template = new TemplatePage();
     ArticlePageObject article = new ArticlePageObject();
 
     String templateSyntax =

@@ -16,7 +16,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
   @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")
   @Execute(asUser = User.USER)
   public void globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getWikiaBar()
         .clickOnShortcutsLink()
@@ -25,7 +25,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts")
   public void globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")
@@ -34,7 +34,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
   public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")
@@ -43,7 +43,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut")
   public void globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")
@@ -52,7 +52,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut")
   public void globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")

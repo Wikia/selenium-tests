@@ -16,7 +16,7 @@ public class ActionExplorerTest extends NewTestTemplate {
   @Test(groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
   @RelatedIssue(issueID = "CE-3356")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getActionExplorer()
         .useShortcut(".")
@@ -25,7 +25,7 @@ public class ActionExplorerTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch")
   public void globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getActionExplorer()
         .useShortcut(".")
@@ -35,7 +35,7 @@ public class ActionExplorerTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions")
   public void globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions() {
-    new HomePageObject(driver)
+    new HomePageObject()
         .open()
         .getActionExplorer()
         .useShortcut(".")

@@ -246,13 +246,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
-//    new JavascriptActions(driver).execute("window.stop()");
+    new JavascriptActions(driver).execute("window.stop()");
     StringBuilder builder = new StringBuilder();
     builder.append(
         "<tr class=\"success\"><td>Navigate to</td><td>" + "<a href='" + url + "'>" + url
         + "</a></td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
-//    logJSError(driver);
+    logJSError(driver);
   }
 
   @Override
