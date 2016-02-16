@@ -41,7 +41,7 @@ public class DriverProvider {
       if (webDriver != null) {
         try {
           webDriver.quit();
-        }catch (UnsatisfiedLinkError e){
+        }catch (UnsatisfiedLinkError | NoClassDefFoundError e){
           PageObjectLogging.log("Closing Browser", e, true);
         }
       }
