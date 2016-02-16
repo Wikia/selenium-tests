@@ -1,10 +1,12 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -13,15 +15,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialContactGeneralPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
