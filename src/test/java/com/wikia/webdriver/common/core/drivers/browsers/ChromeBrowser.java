@@ -56,7 +56,6 @@ public class ChromeBrowser extends BrowserAbstract {
       chromeOptions.addArguments("disable-bundled-ppapi-flash");
     }
 
-    // TODO change mobile tests to use @UserAgent annotation
     if (useMobile) {
       chromeOptions.addArguments("--user-agent=" + UserAgentsRegistry.IPHONE.getUserAgent());
     }
