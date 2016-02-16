@@ -21,6 +21,11 @@ public abstract class BrowserAbstract {
   protected DesiredCapabilities caps = new DesiredCapabilities();
   protected NetworkTrafficInterceptor server;
 
+  /**
+   * Get a ready to work instance for chosen browser
+   * 
+   * @return
+   */
   public WikiaWebDriver getInstance() {
     setOptions();
     setProxy();
@@ -33,8 +38,16 @@ public abstract class BrowserAbstract {
     return webdriver;
   }
 
+  /**
+   * Set Browser specific options, before creating a working instance
+   */
   public abstract void setOptions();
 
+  /**
+   * Create a working instance of a Browser
+   * 
+   * @return
+   */
   public abstract WikiaWebDriver create();
 
   protected void setBrowserLogging(Level logLevel) {
@@ -51,6 +64,11 @@ public abstract class BrowserAbstract {
     webDriver.register(new PageObjectLogging());
   }
 
+  /**
+   * Add browser extensions
+   * 
+   * @param extensionName
+   */
   public abstract void addExtension(String extensionName);
 
   protected void setExtensions() {
@@ -59,6 +77,9 @@ public abstract class BrowserAbstract {
     }
   }
 
+  /**
+   * Set Proxy instance for a Browser instance
+   */
   protected void setProxy() {
     if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
