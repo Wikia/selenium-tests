@@ -13,9 +13,9 @@ public class GhostBrowser extends BrowserAbstract {
   @Override
   public void setOptions() {
     String phantomJSBinaryName;
-    String OsName = System.getProperty("os.name").toUpperCase();
+    String osName = System.getProperty("os.name").toUpperCase();
 
-    if (OsName.contains("WINDOWS")) {
+    if (osName.contains("WINDOWS")) {
       phantomJSBinaryName = "phantomjs.exe";
 
       File phantomJSBinary =
