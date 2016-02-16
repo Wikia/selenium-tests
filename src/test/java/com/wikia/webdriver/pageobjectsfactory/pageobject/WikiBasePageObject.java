@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import lombok.Getter;
+
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -619,7 +620,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
-
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
     driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
@@ -629,14 +629,25 @@ public class WikiBasePageObject extends BasePageObject {
     } else {
       refreshPageAddingCacheBuster();
     }
+
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie",
         "user was logged in by by helios using acces token: " + token, true);
+    logMercuryUserId();
+
     return token;
   }
 
   public String loginAs(User user) {
     return loginAs(user.getUserName(), user.getPassword(), urlBuilder.getUrlForWiki());
+  }
+
+  private void logMercuryUserId() {
+    Object scriptOut = ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
+
+    if (scriptOut != null) {
+      PageObjectLogging.logInfo("Mercury userID: " + scriptOut.toString());
+    }
   }
 
   public void openWikiPage(String wikiURL) {
