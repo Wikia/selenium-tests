@@ -26,7 +26,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test()
-  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   public void remindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
@@ -127,7 +126,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   public void remindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);

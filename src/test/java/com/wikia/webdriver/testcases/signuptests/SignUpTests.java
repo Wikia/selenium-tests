@@ -98,7 +98,6 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @RelatedIssue(issueID = "QAART-703", comment = "Sign up while creating a wikia")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
@@ -159,7 +158,6 @@ public class SignUpTests extends NewTestTemplate {
    */
 
   @Test(groups = {"SignUp_007", "SignUp"})
-  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
     SignUpPageObject signUp = new WikiBasePageObject().navigateToSpecialSignUpPage(wikiURL);
