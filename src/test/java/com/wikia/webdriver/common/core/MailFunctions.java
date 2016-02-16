@@ -1,9 +1,5 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.openqa.selenium.WebDriverException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,10 +15,14 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebDriverException;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 public class MailFunctions {
 
-  private MailFunctions() {
-  }
+  private MailFunctions() {}
 
   public static String getFirstEmailContent(String userName, String password, String subject) {
     try {
@@ -134,6 +134,21 @@ public class MailFunctions {
       throw new WebDriverException("There was no match in the following content: \n" + content);
     }
 
+  }
+
+
+  /**
+   * Method generates a new "fake" email, by adding number of "+" characters before "@" symbol,
+   * this way, you can trick system that you changed email, but in fact,
+   * message will arrive to the same address
+   * @param emailAddress
+   * @return
+   */
+  public static String getEmail(String emailAddress) {
+
+    int specialsToAdd = 1 + StringUtils.countMatches(emailAddress, "+") % 3;
+    return emailAddress.replace("+", "").replace("@",
+        new String(new char[specialsToAdd]).replace("\0", "+") + "@");
   }
 
 }

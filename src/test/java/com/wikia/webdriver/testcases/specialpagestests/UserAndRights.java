@@ -56,11 +56,7 @@ public class UserAndRights extends NewTestTemplate {
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
-  @RelatedIssue(issueID = "QAART-703", comment = "Test Manually")
   public void blockedUserShouldBeAbleToChangeEmail() {
-    final String newEmailAddress = Configuration.getCredentials().emailQaart2;
-    final String oldEmailAddress = Configuration.getCredentials().email;
-
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
     editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
@@ -68,6 +64,8 @@ public class UserAndRights extends NewTestTemplate {
     editPrefPage.openEmailSection();
     MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
         Configuration.getCredentials().emailPasswordQaart2);
+
+    String newEmailAddress = MailFunctions.getEmail(editPrefPage.getEmailAdress());
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
@@ -84,34 +82,6 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress);
-
-    MailFunctions.deleteAllEmails(Configuration.getCredentials().email,
-        Configuration.getCredentials().emailPassword);
-
-    editPrefPage.changeEmail(oldEmailAddress);
-    editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
-
-    confirmPageAlmostThere =
-        new AlmostTherePageObject(driver).enterEmailChangeLink(
-            Configuration.getCredentials().email, Configuration.getCredentials().emailPassword);
-    confirmPageAlmostThere.typeInUserName(User.BLOCKED_USER.getUserName());
-    confirmPageAlmostThere.typeInPassword(User.BLOCKED_USER.getPassword());
-    confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().email,
-        Configuration.getCredentials().emailPassword);
-
-    editPrefPage.openEmailSection();
-    Assertion.assertEquals(editPrefPage.getEmailAdress(), oldEmailAddress);
-  }
-
-  @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
-  public void blockedUserShouldBeAbleToAccessSpecialContactPage() {
-    SpecialContactGeneralPage contactPage = new SpecialContactGeneralPage(driver).open();
-
-    contactPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
-    contactPage.verifyUserLoggedIn(User.BLOCKED_USER);
-
-    Assertion.assertTrue(contactPage.isLoggedInUserMessageVisible(User.BLOCKED_USER));
   }
 
   @Test(groups = {"usersAndRights004"}, dependsOnMethods = {"staffCanBlockUser"})
