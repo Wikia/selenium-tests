@@ -9,7 +9,7 @@ public class HtmlUnitBrowser extends BrowserAbstract {
 
   @Override
   public void setOptions() {
-
+    // Here you should put options to set before browser instance creation
   }
 
   @Override
@@ -19,6 +19,6 @@ public class HtmlUnitBrowser extends BrowserAbstract {
 
   @Override
   public void addExtension(String extensionName) {
-
+    // No extensions are applied to HtmlUnit browser
   }
 }

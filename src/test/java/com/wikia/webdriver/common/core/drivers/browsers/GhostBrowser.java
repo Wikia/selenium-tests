@@ -34,6 +34,6 @@ public class GhostBrowser extends BrowserAbstract {
 
   @Override
   public void addExtension(String extensionName) {
-
+    // No extensions are applied to PhantomJS browser
   }
 }
