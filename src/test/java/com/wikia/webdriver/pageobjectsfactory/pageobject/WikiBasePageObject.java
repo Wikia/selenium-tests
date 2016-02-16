@@ -1,5 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import lombok.Getter;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -53,25 +72,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import lombok.Getter;
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -155,15 +155,14 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
   @Getter(lazy = true)
-  private final WikiaBar wikiaBar = new WikiaBar(driver);
+  private final WikiaBar wikiaBar = new WikiaBar();
   @Getter(lazy = true)
-  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal(driver);
+  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
   @Getter(lazy = true)
-  private final ActionExplorerModal actionExplorer = new ActionExplorerModal(driver);
+  private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
 
-  public WikiBasePageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
+  public WikiBasePageObject() {
+    super();
   }
 
   public AuthModal getAuthModal() {
@@ -223,7 +222,7 @@ public class WikiBasePageObject extends BasePageObject {
   public HomePageObject openCorporateHomePage(String wikiCorporateURL) {
     getUrl(wikiCorporateURL);
     PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
-    return new HomePageObject(driver);
+    return new HomePageObject();
   }
 
   public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {
@@ -311,7 +310,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialCreatePage openSpecialCreateBlogPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_BLOGPAGE);
-    return new SpecialCreatePage(driver);
+    return new SpecialCreatePage();
   }
 
   public ForumPageObject openForumMainPage(String wikiURL) {
@@ -380,7 +379,7 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public VisualEditorPageObject openVEModeWithMainEditButton() {
@@ -406,7 +405,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openCKModeWithSectionEditButton",
         "RTE edit button clicked at section: " + section, true, driver);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
@@ -420,13 +419,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditModePageObject navigateToArticleEditPage() {
     getUrl(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_EDIT));
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
@@ -440,7 +439,7 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder
         .appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT),
         URLsContent.USE_DEFAULT_FORMAT));
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   /**
@@ -517,7 +516,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public ArticlePageObject openMainPage(String wikiURL) {
     getUrl(wikiURL);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public void verifyUrl(String url) {

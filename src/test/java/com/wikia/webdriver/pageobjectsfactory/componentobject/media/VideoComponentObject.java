@@ -14,12 +14,12 @@ public class VideoComponentObject extends WikiBasePageObject {
   protected Integer videoWidth;
 
   public VideoComponentObject(WebDriver driver, WebElement fileEmbed) {
-    super(driver);
+    super();
     videoEmbed = fileEmbed;
   }
 
   public VideoComponentObject(WebDriver driver, WebElement fileEmbed, Integer width) {
-    super(driver);
+    super();
     videoEmbed = fileEmbed;
     videoWidth = width;
   }

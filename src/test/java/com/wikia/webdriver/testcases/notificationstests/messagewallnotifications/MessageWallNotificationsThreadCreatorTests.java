@@ -24,7 +24,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
       }
   )
   public void threadCreatorNotification_setup_1() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName12);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -44,7 +44,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
       dependsOnMethods = "threadCreatorNotification_setup_1"
   )
   public void threadCreatorNotification_setup_2() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName12, credentials.password12, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName12);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
@@ -63,7 +63,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
  public void threadCreatorNotification_verification() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();

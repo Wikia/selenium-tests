@@ -24,7 +24,7 @@ public class FollowBlogTests extends NewTestTemplate {
   @Test(groups = "FollowBlog")
   @Execute(asUser = User.USER)
   public void FollowBlog_001_setup() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -37,7 +37,7 @@ public class FollowBlogTests extends NewTestTemplate {
   @Test(groups = "FollowBlog", dependsOnMethods = {"FollowBlog_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowBlog_002_follow() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     BlogPageObject blog = base.openBlogByName(wikiURL, blogTitle, credentials.userName);
     blog.follow();
   }

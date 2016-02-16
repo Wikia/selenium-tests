@@ -39,7 +39,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     wait.forElementInViewPort(reviewChangesButton);
     wait.forElementVisible(savePanel);
     publishButton.click();
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public void verifyRecaptchaIsVisible() {

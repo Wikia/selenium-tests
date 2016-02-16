@@ -20,7 +20,7 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
   private WebElement filtersSection;
 
   public SpecialWhatLinksHerePageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

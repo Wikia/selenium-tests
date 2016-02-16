@@ -28,7 +28,7 @@ public class PreviewEditModePageObject extends EditMode {
   String videoPostionSelector = "figure.t%position%";
 
   public PreviewEditModePageObject(WebDriver driver) {
-    super(driver);
+    super();
     wait.forElementVisible(previewModal);
   }
 

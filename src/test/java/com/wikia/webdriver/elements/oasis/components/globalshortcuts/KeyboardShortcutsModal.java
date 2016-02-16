@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.oasis.components.globalshortcuts;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -22,8 +21,8 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   private By actionExplorerModalSelector = By.cssSelector(".global-shortcuts-search");
   private Actions actions;
 
-  public KeyboardShortcutsModal(WebDriver driver) {
-    super(driver);
+  public KeyboardShortcutsModal() {
+    super();
 
     this.actions = new Actions(driver);
   }

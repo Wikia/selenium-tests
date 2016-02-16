@@ -23,7 +23,7 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     base.loginAs(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 
@@ -31,7 +31,7 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplate {
   public void VisualEditorMultiplePublish_001() {
     String targetText = PageContent.ARTICLE_TEXT;
     String articleName = base.getNameForArticle();
-    article = new ArticlePageObject(driver).open(articleName);
+    article = new ArticlePageObject().open(articleName);
     ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();

@@ -20,7 +20,7 @@ public class ConfirmationPageObject extends BasePageObject {
   private WebElement confirmationButton;
 
   public ConfirmationPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

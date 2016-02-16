@@ -29,7 +29,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
   private WebElement lastElementImageWithError;
 
   public SpecialCuratedContentPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
 

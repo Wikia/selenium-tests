@@ -31,7 +31,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   private String beforeImageName = "116x116-";
 
   public CreateACustomMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clearSearchTitle() {

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -30,8 +29,8 @@ public class HomePageObject extends WikiBasePageObject {
 
   private String languageDropdownString = "nav.wikia-menu-button";
 
-  public HomePageObject(WebDriver driver) {
-    super(driver);
+  public HomePageObject() {
+    super();
   }
 
   public HomePageObject open() {
@@ -120,7 +119,7 @@ public class HomePageObject extends WikiBasePageObject {
     PageObjectLogging.log("selectLanguage",
                           "language number " + Integer.toString(index) + " selected",
                           true);
-    return new HomePageObject(driver);
+    return new HomePageObject();
   }
 
   public void verifyLanguageButton() {

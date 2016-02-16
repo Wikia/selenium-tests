@@ -14,7 +14,7 @@ public class MainPage extends ArticlePageObject {
   protected WebElement curatedContentToolButton;
 
   public MainPage(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public MainPage open() {

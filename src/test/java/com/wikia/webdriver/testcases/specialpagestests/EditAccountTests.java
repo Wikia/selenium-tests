@@ -31,7 +31,7 @@ public class EditAccountTests extends NewTestTemplate {
 
   @Test(groups = "EditAccountTest", dependsOnMethods = "EditAccount_001_closeAccount")
   public void EditAccount_002_verifyAccountClosed() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUserLoginPageObject login = base.openSpecialUserLoginOnWiki(wikiURL);
     login.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
     login.verifyClosedAccountMessage();
@@ -50,7 +50,7 @@ public class EditAccountTests extends NewTestTemplate {
   @Test(groups = {"EditAccountTest", "EditAccountTest_001"},
       dependsOnMethods = "EditAccount_003_reopenAccount")
   public void EditAccount_004_verifyAccountReopened() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUserLoginPageObject login = base.openSpecialUserLoginOnWiki(wikiURL);
     login.loginAndVerify(credentials.userNameClosedAccount, credentials.passwordClosedAccount,
                          wikiURL);

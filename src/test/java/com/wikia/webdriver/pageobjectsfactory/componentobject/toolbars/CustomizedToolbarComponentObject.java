@@ -43,7 +43,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
 
   public CustomizedToolbarComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
 

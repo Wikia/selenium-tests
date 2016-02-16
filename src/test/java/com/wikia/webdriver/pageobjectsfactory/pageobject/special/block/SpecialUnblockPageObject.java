@@ -18,7 +18,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
   private WebElement unblockedUserHead;
 
   public SpecialUnblockPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void typeInUserName(String userName) {

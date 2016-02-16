@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.oasis.pages;
 
 import lombok.Getter;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -14,13 +13,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 public class TemplatePage extends WikiBasePageObject {
 
   @Getter(lazy = true)
-  private final TemplateClassification templateClassification = new TemplateClassification(driver);
+  private final TemplateClassification templateClassification = new TemplateClassification();
 
   @FindBy(css = "#ca-edit")
   protected WebElement editUsingClassicEditor;
 
-  public TemplatePage(WebDriver driver) {
-    super(driver);
+  public TemplatePage() {
+    super();
   }
 
   public TemplatePage open(String templateName) {
@@ -37,6 +36,6 @@ public class TemplatePage extends WikiBasePageObject {
 
   public TemplatePage openArticleByName(String wikiURL, String articleName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + articleName);
-    return new TemplatePage(driver);
+    return new TemplatePage();
   }
 }

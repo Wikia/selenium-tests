@@ -24,7 +24,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
       "CreateNewWiki_lang_001", "CNW_lang_first"})
   @Execute(asUser = User.USER)
  public void CreateNewWiki_lang_TC001(String lang) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.selectLanguage(lang);
     String wikiName = cnw1.getWikiName();

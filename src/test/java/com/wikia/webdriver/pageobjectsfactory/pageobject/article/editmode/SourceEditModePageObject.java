@@ -78,7 +78,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeTextArea;
 
   public SourceEditModePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SourceEditModePageObject focusTextArea() {
@@ -396,6 +396,6 @@ public class SourceEditModePageObject extends EditMode {
   public ArticlePageObject clickPublishButton() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

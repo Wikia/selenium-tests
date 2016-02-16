@@ -24,7 +24,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   public void ArticleComments_001_editComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -43,7 +43,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   public void ArticleComments_002_replyComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String comment = PageContent.COMMENT_TEXT +  DateTime.now().getMillis();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -62,7 +62,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   public void ArticleComments_003_anonReplyComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);
@@ -82,7 +82,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
   public void ArticleComments_004_deleteComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);

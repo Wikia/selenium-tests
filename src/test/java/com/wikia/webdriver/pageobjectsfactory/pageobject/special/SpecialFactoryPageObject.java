@@ -30,7 +30,7 @@ public class SpecialFactoryPageObject extends SpecialPageObject {
   private WebElement defaultVariableValue;
 
   public SpecialFactoryPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void clickCloseWikiButton() {

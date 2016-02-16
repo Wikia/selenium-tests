@@ -20,7 +20,7 @@ public class BlogPageObject extends ArticlePageObject {
   By thirdSpan = By.cssSelector("span:nth-child(4) a");
 
   public BlogPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public WatchPageObject unfollowBlogPage() {

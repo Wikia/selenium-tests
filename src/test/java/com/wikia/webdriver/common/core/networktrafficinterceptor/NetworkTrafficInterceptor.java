@@ -1,18 +1,19 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.proxy.ProxyServer;
-import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriverException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
+import net.lightbody.bmp.proxy.ProxyServer;
+
+import org.apache.commons.lang.RandomStringUtils;
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriverException;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class NetworkTrafficInterceptor extends ProxyServer {
 
@@ -58,8 +59,8 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
-        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry
-            .getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(),
+            entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
       }
     }
   }
@@ -94,7 +95,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
           }
 
           PageObjectLogging.log("CORRELATOR CHECK", "CORRELATOR ID: " + correlatorID,
-                                correlatorID.equals(expectedCorrelator));
+              correlatorID.equals(expectedCorrelator));
         } else {
           throw new WebDriverException("Missing correlator param in query string");
         }
@@ -105,6 +106,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
   public void setProxyServer(String ip) {
     Map<String, String> options = new HashMap<>();
     options.put("httpProxy", ip);
+    options.put("sslProxy", ip);
     setOptions(options);
   }
 

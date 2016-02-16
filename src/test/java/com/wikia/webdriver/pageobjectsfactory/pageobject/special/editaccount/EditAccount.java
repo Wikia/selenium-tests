@@ -29,7 +29,7 @@ public class EditAccount extends BasePageObject {
   private WebElement statusMessage;
 
   public EditAccount(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public EditAccount navigateToSpecialEditAccount(String communityWikiURL) {

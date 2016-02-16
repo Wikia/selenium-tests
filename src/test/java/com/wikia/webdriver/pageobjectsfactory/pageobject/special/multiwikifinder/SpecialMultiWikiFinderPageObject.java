@@ -32,7 +32,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject {
   private List<WebElement> listOfLinks;
 
   public SpecialMultiWikiFinderPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void findPageName(String pagename) {

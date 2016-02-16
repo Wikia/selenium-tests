@@ -22,7 +22,7 @@ public class BlogListPageObject extends BasePageObject {
 
 
   public BlogListPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public BlogListPageObject verifyBlogListPage(String listName) {

@@ -17,7 +17,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   @Execute(onWikia = "adtest")
   public void correlatorIDInQueryStringShouldBeTheSameOasis() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
-    new HomePageObject(driver).open();
+    new HomePageObject().open();
     networkTrafficInterceptor.logDFP(correlatorDesktop);
   }
 
@@ -26,7 +26,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   @Execute(onWikia = "adtest")
   public void correlatorIDInQueryStringShouldBeTheSameMercury() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
-    new HomePageObject(driver).open();
+    new HomePageObject().open();
     networkTrafficInterceptor.logDFP(correlatorMobile);
   }
 }

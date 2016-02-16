@@ -17,7 +17,7 @@ public class VideosPageTests extends NewTestTemplate {
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
   public void VideosPageTest_001() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
     specialVideos.verifyElementsOnPage();
   }
@@ -30,7 +30,7 @@ public class VideosPageTests extends NewTestTemplate {
    */
   @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
   public void VideosPageTest_002() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.verifyDeleteViaGlobalNotifications();
@@ -45,7 +45,7 @@ public class VideosPageTests extends NewTestTemplate {
    */
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
   public void VideosPageTest_003() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.verifyDeleteViaVideoNotPresent();

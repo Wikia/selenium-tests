@@ -132,6 +132,10 @@ public class Configuration {
     return getProp("emulator");
   }
 
+  public static String getPageLoadStrategy(){
+    return getProp("unstablePageLoadStrategy");
+  }
+
   public static Credentials getCredentials() {
     return new Credentials();
   }
@@ -166,6 +170,10 @@ public class Configuration {
 
   public static String getCountryCode() {
     return getProp("countryCode");
+  }
+
+  public static boolean useProxy(){
+    return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode());
   }
 
   /**

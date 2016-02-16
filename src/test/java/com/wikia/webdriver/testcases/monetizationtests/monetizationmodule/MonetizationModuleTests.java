@@ -148,7 +148,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
   public void MonetizationModuleTest_001() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -164,7 +164,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
   public void MonetizationModuleTest_002() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -181,7 +181,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_003() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName3, credentials.password3, wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -199,7 +199,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -218,7 +218,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_005(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -239,7 +239,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_006() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -264,7 +264,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_007() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -293,7 +293,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
                                          String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -325,7 +325,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_009(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -353,7 +353,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_010(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -381,7 +381,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_011(String countryCode, Boolean isFromsearch) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_100_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -413,7 +413,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_012(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -441,7 +441,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_013(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_700_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -466,7 +466,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_014(String testWiki, String testArticle, String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -495,7 +495,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_015(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_DE_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_DE_WIKI, TEST_DE_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -520,7 +520,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
   public void MonetizationModuleTest_016() {
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -543,7 +543,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -578,7 +578,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -606,7 +606,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_019(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -631,7 +631,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -666,7 +666,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -701,7 +701,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);

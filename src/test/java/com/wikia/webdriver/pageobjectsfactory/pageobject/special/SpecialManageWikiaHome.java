@@ -1,8 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,8 +18,8 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
   @FindBy(id = "lifestyle-amount")
   private WebElement lifestyleAmount;
 
-  public SpecialManageWikiaHome(WebDriver driver) {
-    super(driver);
+  public SpecialManageWikiaHome(WikiaWebDriver driver) {
+    super();
   }
 
   /**

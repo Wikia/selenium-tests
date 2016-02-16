@@ -1,15 +1,13 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
-import org.openqa.selenium.WebDriver;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class TemplateEditPage extends WikiBasePageObject {
 
-  public TemplateEditPage(WebDriver driver) {
-    super(driver);
+  public TemplateEditPage() {
+    super();
   }
 
   public TemplateEditPage open(String templateName) {
@@ -21,6 +19,6 @@ public class TemplateEditPage extends WikiBasePageObject {
   }
 
   public TemplateClassification getTemplateClassification() {
-    return new TemplateClassification(driver);
+    return new TemplateClassification();
   }
 }

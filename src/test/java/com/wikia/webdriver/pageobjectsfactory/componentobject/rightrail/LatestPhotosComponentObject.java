@@ -16,7 +16,7 @@ public class LatestPhotosComponentObject extends WikiBasePageObject {
   private List<WebElement> latestPhotosList;
 
   public LatestPhotosComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public LightboxComponentObject openLightboxForImage(int imageNumber) {

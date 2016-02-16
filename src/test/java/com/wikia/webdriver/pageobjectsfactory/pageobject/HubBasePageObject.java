@@ -53,7 +53,7 @@ public class HubBasePageObject extends WikiBasePageObject {
       "div.wikia-mosaic-slider-description[style*='1'] span.image-description b";
 
   public HubBasePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyMosaicSliderImages() {

@@ -18,7 +18,7 @@ public class SkinHelper extends WikiBasePageObject {
   private WebElement wikiaMobileClassInBody;
 
   public SkinHelper(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isSkin(Skin skin) {
