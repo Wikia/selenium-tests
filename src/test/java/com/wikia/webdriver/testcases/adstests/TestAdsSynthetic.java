@@ -31,7 +31,7 @@ public class TestAdsSynthetic extends TemplateNoFirstLoad {
 
     adsBaseObject
         .verifyLineItemId(slotName, lineItemId)
-        .verifySize(slotName, src, slotSize.getWidth(), slotSize.getHeight())
+        .verifyIframeSize(slotName, src, slotSize.getWidth(), slotSize.getHeight())
         .verifyAdImage(slotName, src, pathToImage);
   }
 }

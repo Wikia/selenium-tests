@@ -294,13 +294,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject verifySize(String slotName, String src, int slotWidth, int slotHeight) {
+  public AdsBaseObject verifyIframeSize(String slotName,
+                                        String src,
+                                        int slotWidth,
+                                        int slotHeight) {
     waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
-
-    PageObjectLogging.log("verifySize",
-                          slotName + " has width: " + slotWidth + ";height: " + slotHeight,
-                          true,
-                          driver);
     return this;
   }
 
@@ -475,7 +473,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        tryTriggerFloatingMedrec();
+        triggerFloatingMedrec();
       }
 
       String slotSelector = AdsContent.getSlotSelector(slotName);
@@ -597,7 +595,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void tryTriggerFloatingMedrec() {
+  public AdsBaseObject triggerFloatingMedrec() {
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
@@ -611,6 +609,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     } catch (org.openqa.selenium.TimeoutException e) {
       PageObjectLogging.logError("Floating Medrec", e);
     }
+    return this;
   }
 
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {

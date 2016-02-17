@@ -18,6 +18,6 @@ public class TestAdType extends TemplateNoFirstLoad {
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, slotName, "gpt");
-    ads.verifySize(slotName, "gpt", 0, 0);
+    ads.verifyIframeSize(slotName, "gpt", 0, 0);
   }
 }
