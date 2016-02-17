@@ -48,12 +48,14 @@ public class EditMode extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
-    wait.forElementNotPresent(submitButtonBy);
-    PageObjectLogging.log("submit", "Page submitted", true);
+    PageObjectLogging.logInfo("submit");
   }
 
   public ArticlePageObject submitArticle() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+    PageObjectLogging.logInfo("Page submitted");
+
     return new ArticlePageObject();
   }
 
