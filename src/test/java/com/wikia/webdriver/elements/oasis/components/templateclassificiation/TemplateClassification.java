@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -30,8 +29,8 @@ public class TemplateClassification extends WikiBasePageObject {
 
   private String templateName = "";
 
-  public TemplateClassification(WebDriver driver) {
-    super(driver);
+  public TemplateClassification() {
+    super();
   }
 
   public TemplateClassification open() {

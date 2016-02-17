@@ -29,7 +29,7 @@ public class VECategoryTests extends NewTestTemplate {
     categorySearchStr = "abcd";
     categoryWikiTexts = new ArrayList<>();
     categoryWikiTexts.add("[[Category:" + testCategory + "]]");
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
   //CA01

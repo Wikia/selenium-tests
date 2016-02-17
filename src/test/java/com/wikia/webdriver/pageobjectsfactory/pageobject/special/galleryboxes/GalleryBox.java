@@ -17,7 +17,7 @@ public class GalleryBox extends WikiBasePageObject {
   private List<WebElement> galleryImageBox;
 
   public GalleryBox(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public LightboxComponentObject openLightboxForGridImage(int itemNumber) {

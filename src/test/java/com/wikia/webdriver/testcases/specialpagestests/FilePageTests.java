@@ -66,7 +66,7 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage003_diffPage", "Media"})
   public void filePage003_diffPage() {
 
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     HistoryPagePageObject historyPage = base.openFileHistoryPage(URLsContent.FILENAME_001, wikiURL);
 
     DiffPagePageObject diffPage = historyPage.goToDiffPageFromHistoryPage();

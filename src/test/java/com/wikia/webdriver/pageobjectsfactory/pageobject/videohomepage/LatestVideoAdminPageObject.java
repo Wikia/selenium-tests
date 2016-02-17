@@ -14,7 +14,7 @@ public class LatestVideoAdminPageObject extends WikiBasePageObject {
   private WebElement featuredTab;
 
   public LatestVideoAdminPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

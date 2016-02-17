@@ -21,7 +21,7 @@ public class PinTypeMapTests extends NewTestTemplate {
   @Test(groups = {"PinTypeMapTests_001", "PinTypeMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinTypeMapTests_001_VerifyImageValidationInPinTypeModal() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -39,7 +39,7 @@ public class PinTypeMapTests extends NewTestTemplate {
   @Test(groups = {"PinTypeMapTests_002", "PinTypeMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinTypeMapTests_002_VerifyClickingAddAnotherPinType() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =

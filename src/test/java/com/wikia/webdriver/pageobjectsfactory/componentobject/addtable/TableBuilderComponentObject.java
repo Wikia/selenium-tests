@@ -24,7 +24,7 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
   private List<WebElement> tablePropertiesDropdownOptions;
 
   public TableBuilderComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyAddTableLightbox() {

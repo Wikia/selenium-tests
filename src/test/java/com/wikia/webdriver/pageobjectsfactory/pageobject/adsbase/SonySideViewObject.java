@@ -11,7 +11,7 @@ public class SonySideViewObject extends BasePageObject {
       "http://adtest.wikia.com/wiki/Sony/info.tvsideview.sony.net/sony-sideview.html";
 
   public SonySideViewObject(WebDriver driver) {
-    super(driver);
+    super();
     getUrl(SONY_SIDE_VIEW_URL);
   }
 

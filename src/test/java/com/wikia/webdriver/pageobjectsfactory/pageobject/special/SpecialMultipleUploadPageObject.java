@@ -30,7 +30,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
   private WebElement uploadedFilesListContener;
 
   public SpecialMultipleUploadPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

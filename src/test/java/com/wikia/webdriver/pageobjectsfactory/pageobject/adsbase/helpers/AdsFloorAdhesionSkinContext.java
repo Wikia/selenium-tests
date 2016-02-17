@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 
 public class AdsFloorAdhesionSkinContext {
 
@@ -21,6 +22,7 @@ public class AdsFloorAdhesionSkinContext {
   private String modalCloseSelector;
   private String modalSelector;
   private String slotName;
+  private WikiaWebDriver webDriver = DriverProvider.getActiveDriver();
 
   public AdsFloorAdhesionSkinContext(String browser) {
     creativeId = OASIS_CREATIVE_ID;
@@ -29,7 +31,7 @@ public class AdsFloorAdhesionSkinContext {
     modalCloseSelector = OASIS_MODAL_CLOSE_CSS;
     slotName = OASIS_SLOT_NAME;
 
-    if (Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser)) {
+    if (webDriver.isChromeMobile()) {
       creativeId = MERCURY_CREATIVE_ID;
       lineItemId = MERCURY_LINE_ITEM_ID;
       modalSelector = MERCURY_MODAL_CSS;

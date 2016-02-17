@@ -50,7 +50,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   private WebElement miniEditorWrapper;
 
   public MiniEditorComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

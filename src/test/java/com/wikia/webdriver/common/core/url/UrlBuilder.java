@@ -1,9 +1,8 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.Browser;
-
 import org.apache.commons.lang.StringUtils;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class UrlBuilder {
 
@@ -89,7 +88,7 @@ public class UrlBuilder {
       }
 
       if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV) &&
-          !Browser.CHROME_MOBILE_MERCURY.equalsIgnoreCase(browser) && wikiName.endsWith("wikia")) {
+          !"CHROMEMOBILEMERCURY".equalsIgnoreCase(browser) && wikiName.endsWith("wikia")) {
         overwrittenWikiName = "wikiaglobal";
       }
     }

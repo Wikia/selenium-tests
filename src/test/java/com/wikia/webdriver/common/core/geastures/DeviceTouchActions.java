@@ -1,6 +1,6 @@
 package com.wikia.webdriver.common.core.geastures;
 
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.core.drivers.browsers.AndroidBrowser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import io.appium.java_client.MultiTouchAction;
@@ -38,7 +38,7 @@ public class DeviceTouchActions {
 
   public DeviceTouchActions(WebDriver webDriver) {
     String methodName = "DeviceTouchActions";
-    mobileDriver = NewDriverProvider.getMobileDriver();
+    mobileDriver = AndroidBrowser.getMobileDriver();
     driver = webDriver;
     JavascriptExecutor js = (JavascriptExecutor) driver;
     addressbarWebviewHeight =

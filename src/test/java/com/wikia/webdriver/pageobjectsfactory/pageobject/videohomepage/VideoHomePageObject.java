@@ -24,7 +24,7 @@ public class VideoHomePageObject extends WikiBasePageObject {
   private List<WebElement> latestVideoRows;
 
   public VideoHomePageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

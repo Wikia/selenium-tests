@@ -19,7 +19,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
   protected WebElement addVideoModal;
 
   public AddMediaModalComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void closeAddPhotoModal() {

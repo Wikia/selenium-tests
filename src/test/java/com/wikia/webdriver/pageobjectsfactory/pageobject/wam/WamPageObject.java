@@ -50,7 +50,7 @@ public class WamPageObject extends BasePageObject {
   private WebElement monthInCalendar;
 
   public WamPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

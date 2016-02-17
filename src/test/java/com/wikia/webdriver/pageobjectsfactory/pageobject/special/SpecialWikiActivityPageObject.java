@@ -22,7 +22,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   private List<WebElement> categorizationActivitiesList;
 
   public SpecialWikiActivityPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SpecialWikiActivityPageObject open() {

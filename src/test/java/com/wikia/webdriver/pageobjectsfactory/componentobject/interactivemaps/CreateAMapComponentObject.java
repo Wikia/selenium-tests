@@ -23,7 +23,7 @@ public class CreateAMapComponentObject extends BasePageObject {
   private WebElement closeButton;
 
   public CreateAMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public CreateACustomMapComponentObject clickCustomMap() {

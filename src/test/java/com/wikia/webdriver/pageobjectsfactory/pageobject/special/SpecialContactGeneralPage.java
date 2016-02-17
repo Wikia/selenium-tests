@@ -13,7 +13,7 @@ public class SpecialContactGeneralPage extends WikiBasePageObject {
   private WebElement conatctFormMessage;
 
   public SpecialContactGeneralPage(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SpecialContactGeneralPage open() {

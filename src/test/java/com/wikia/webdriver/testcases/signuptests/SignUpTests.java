@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
@@ -33,7 +32,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_001", "SignUp"})
   public void SignUp_001_captchaNotChecked() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
@@ -46,7 +45,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_002", "SignUp"})
   public void SignUp_002_tooYoungUser() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
@@ -62,7 +61,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_003", "SignUp"})
   public void SignUp_003_existingUserName() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(credentials.userName);
     signUp.verifyUserExistsMessage();
@@ -70,7 +69,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
   public void SignUp_004_signup() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "User" + signUp.getTimeStamp();
@@ -99,7 +98,6 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @RelatedIssue(issueID = "QAART-703", comment = "Sign up while creating a wikia")
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
   public void SignUp_005_forced_signup() {
     CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
@@ -131,7 +129,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_006", "SignUp"})
   public void SignUp_006_loginNotVerifiedUser() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "User" + signUp.getTimeStamp();
@@ -160,10 +158,9 @@ public class SignUpTests extends NewTestTemplate {
    */
 
   @Test(groups = {"SignUp_007", "SignUp"})
-  @RelatedIssue(issueID = "QAART-703", comment = "Test manually")
   @Execute(onWikia = "ja.ja-test")
   public void SignUp_008_signupJapaneseUser() {
-    SignUpPageObject signUp = new WikiBasePageObject(driver).navigateToSpecialSignUpPage(wikiURL);
+    SignUpPageObject signUp = new WikiBasePageObject().navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "ユーザー" + signUp.getTimeStamp();
     String password = "パス" + signUp.getTimeStamp();

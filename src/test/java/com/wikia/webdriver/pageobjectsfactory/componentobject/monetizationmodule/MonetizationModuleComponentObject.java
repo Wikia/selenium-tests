@@ -68,7 +68,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By eCommerceSingleProductBy = By.cssSelector(".ecommerce-single-product");
 
   public MonetizationModuleComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void setCookieFromSearch() {

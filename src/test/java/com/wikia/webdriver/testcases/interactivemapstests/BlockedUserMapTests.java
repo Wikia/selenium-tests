@@ -27,7 +27,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @Test(groups = {"BlockedUserMapTests_001", "BlockedUserMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   public void BlockedUserMapTests_001_VerifyBlockedUserCannotEditPinTypes() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
@@ -45,7 +45,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"BlockedUserMapTests_002", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_002_VerifyUserCannotAddPin() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
@@ -62,7 +62,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
 
   @Test(groups = {"BlockedUserMapTests_003", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_003_VerifyUserCannotCreateRealMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
@@ -77,7 +77,7 @@ public class BlockedUserMapTests extends NewTestTemplate {
       comment = "Functionality is being depracated No need to test manually")
   @Test(groups = {"BlockedUserMapTests_004", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_004_VerifyUserCannotCreateCustomMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
@@ -97,10 +97,10 @@ public class BlockedUserMapTests extends NewTestTemplate {
 
   @Test(groups = {"BlockedUserMapTests_005", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_005_VerifyUserCannotEditPinTypesOnEmbeddedMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
@@ -112,10 +112,10 @@ public class BlockedUserMapTests extends NewTestTemplate {
 
   @Test(groups = {"BlockedUserMapTests_006", "BlockedUserMapTests", "InteractiveMaps"})
   public void BlockedUserMapTests_006_VerifyUserCannotAddPinOnEmbeddedMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
         wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();

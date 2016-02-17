@@ -61,7 +61,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests_003", "PortableInfoboxTests_3"})
   @Execute(onWikia = "mediawiki119")
   public void verifyImagesInWhatLinksHerePage() {
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     String articleName = article.open(PageContent.PORTABLE_INFOBOX_01).getArticleName();
 
     article.openSpecialWhatLinksHere(wikiURL).clickPageInputField()
@@ -87,7 +87,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     PortableInfoboxPageObject info = new PortableInfoboxPageObject(driver);
 
     theme.openSpecialDesignerPage(wikiURL).selectTheme(4);
@@ -132,8 +132,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests_010", "PortableInfoboxTests_3"})
   @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
-    TemplatePage template = new TemplatePage(driver);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    TemplatePage template = new TemplatePage();
+    ArticlePageObject article = new ArticlePageObject();
 
     String templateSyntax =
         template.openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
@@ -181,7 +181,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void insertEmptyInfoboxInVE() {
     (new ArticleContent()).clear();
 
-    new ArticlePageObject(driver).open().openVEModeWithMainEditButton().clickInsertToolButton()
+    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).clickApplyChanges()
         .isInfoboxInsertedInEditorArea();
   }
@@ -191,7 +191,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void insertInfoboxWithParametersInVE() {
     (new ArticleContent()).clear();
 
-    new ArticlePageObject(driver).open().openVEModeWithMainEditButton().clickInsertToolButton()
+    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges().isInfoboxInsertedInEditorArea();
@@ -202,7 +202,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void editInfoboxInVEbyPopup() {
     (new ArticleContent()).clear();
 
-    new ArticlePageObject(driver).open().openVEModeWithMainEditButton().clickInsertToolButton()
+    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges().isInfoboxInsertedInEditorArea().clickInfoboxPopup()
@@ -219,7 +219,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     theme.openSpecialDesignerPage(wikiURL).selectTheme(3);
     theme.submitTheme();
 
-    new ArticlePageObject(driver).open().openVEModeWithMainEditButton().clickInsertToolButton()
+    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges().isInfoboxInsertedInEditorArea();

@@ -36,7 +36,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
   private int amountPinTypeTitleInputs, amountUploadMarker, amountParentCatElements;
 
   public CreatePinTypesComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public InteractiveMapPageObject clickSave() {

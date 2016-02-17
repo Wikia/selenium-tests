@@ -21,14 +21,6 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
 
   private String countryCode = Configuration.getCountryCode();
 
-  public TestAdsMonitoringOasis() {
-    super();
-    if (countryCode != null) {
-      // We need to set the proxy in constructor
-      setProxy(countryCode);
-    }
-  }
-
   @Test(
       groups = {"AdsMonitoringOasis"},
       dataProviderClass = AdsDataProvider.class,
@@ -46,15 +38,5 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
 
     wikiPage.verifyMedrec();
     wikiPage.verifyTopLeaderboard();
-  }
-
-  private void setProxy(String countryCode) {
-    String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
-    Proxy proxy = new Proxy();
-    proxy.setHttpProxy(proxyAddress);
-    proxy.setSslProxy(proxyAddress);
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setCapability(CapabilityType.PROXY, proxy);
-    setDriverCapabilities(capabilities);
   }
 }

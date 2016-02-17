@@ -21,7 +21,7 @@ public class SliderBuilderComponentObject extends BasePageObject {
   private WebElement finishButton;
 
   public SliderBuilderComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     // TODO Auto-generated constructor stub
   }
 

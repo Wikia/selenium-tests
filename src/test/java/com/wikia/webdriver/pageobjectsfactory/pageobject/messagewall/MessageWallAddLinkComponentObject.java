@@ -21,7 +21,7 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
       By.cssSelector(".linkEditorDialog > div tr:nth-child(1) input[value = ext]");
 
   public MessageWallAddLinkComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void typeTargetAndText(String target, String text) {

@@ -23,7 +23,7 @@ public class VideosModuleTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     videosModule.verifyVideosModuleShowing();
 
     new FilePagePageObject(driver).open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
@@ -57,7 +57,7 @@ public class VideosModuleTests extends NewTestTemplate {
   public void VideosModuleTest_003() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     new VideosModuleComponentObject(driver).verifyDisplayCount();
   }
 
@@ -70,7 +70,7 @@ public class VideosModuleTests extends NewTestTemplate {
   public void VideosModuleTest_004() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     new VideosModuleComponentObject(driver).verifyNoDuplicates();
   }
 }

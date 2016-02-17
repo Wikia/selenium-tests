@@ -162,7 +162,7 @@ public class MessageWallTests extends NewTestTemplate {
    */
   @Test(groups = {"MessageWall_008", "MessageWall"})
   public void MessageWall_008_blockedUserPostsOnHisWall() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
     boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
     if (!isUserBlocked) {

@@ -51,7 +51,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
   private WebElement exploreWikiaDropdown;
 
   public DropDownComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

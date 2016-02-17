@@ -19,7 +19,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_001"})
   @Execute(asUser = User.USER)
   public void ArticleCRUDUser_001_specialPage() {
-    SpecialCreatePage specialCreatePage = new SpecialCreatePage(driver).open();
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
@@ -35,7 +35,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new VisualEditModePageObject(driver).open(articleTitle);
+        new VisualEditModePageObject().open(articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -49,7 +49,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
@@ -64,7 +64,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
-        new VisualEditModePageObject(driver).open(randomArticleTitle);
+        new VisualEditModePageObject().open(randomArticleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -77,7 +77,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     new ArticleContent().clear();
 
     String articleContent = PageContent.ARTICLE_TEXT;
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -89,7 +89,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();

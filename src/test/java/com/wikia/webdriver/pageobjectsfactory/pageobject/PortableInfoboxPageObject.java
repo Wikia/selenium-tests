@@ -80,7 +80,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> titles;
 
   public PortableInfoboxPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public String getBackgroundColor() {

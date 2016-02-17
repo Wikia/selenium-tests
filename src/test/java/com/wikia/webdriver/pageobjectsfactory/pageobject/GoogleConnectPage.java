@@ -17,7 +17,7 @@ public class GoogleConnectPage extends WikiBasePageObject {
   private WebElement signUpButton;
 
   public GoogleConnectPage(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isUserLoggedIn() {
