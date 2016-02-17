@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,13 +16,15 @@ import java.util.List;
  */
 public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
 
-  private int defaultTitleCount = 1;
+  private int DEFAULT_TITLES = 1;
   private int DEFAULT_IMAGES = 1;
   private int DEFAULT_ROWS = 2;
 
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
-  @FindBy(css = "button.sub-head--done")
+  @FindBy(css = ".portable-infobox")
+  private WebElement infoboxLayout;
+  @FindBy(css = ".sub-head .sub-head--done")
   private WebElement saveButton;
   @FindBy(css = ".edit-header--delete")
   private WebElement deleteButton;
@@ -36,6 +38,8 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   private WebElement questionMarkButton;
   @FindBy(css = ".infobox-builder-sidebar .modal-dialog")
   private WebElement helpDialog;
+  @FindBy(css = ".infobox-builder-preview")
+  private WebElement previewArea;
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
   @FindBy(css = ".infobox-builder-button")
@@ -46,6 +50,8 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   private List<WebElement> titles;
   @FindBy(css = ".portable-infobox .pi-image")
   private List<WebElement> images;
+  @FindBy(css = ".portable-infobox .pi-item")
+  private List<WebElement> component;
 
   public SpecialInfoboxBuilderPageObject(WebDriver driver) {
     super(driver);
@@ -55,6 +61,15 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     String url = urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_INFOBOX_BUILDER + templateName;
     getUrl(url);
     return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject switchToIFrame() {
+    driver.switchTo().frame(builderIFrame);
+    return this;
+  }
+
+  public String getBackgroundColor() {
+    return infoboxLayout.getCssValue("background-color");
   }
 
   public SpecialInfoboxBuilderPageObject selectTitleWithIndex(int index) {
@@ -72,11 +87,6 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   public SpecialInfoboxBuilderPageObject selectRowWithIndex(int index) {
     wait.forElementVisible(rows.get(index));
     rows.get(index).click();
-    return this;
-  }
-
-  public SpecialInfoboxBuilderPageObject switchToIFrame() {
-    driver.switchTo().frame(builderIFrame);
     return this;
   }
 
@@ -106,7 +116,18 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     return this;
   }
 
-  public SpecialInfoboxBuilderPageObject verifyBackFunctionality() {
+  public SpecialInfoboxBuilderPageObject verifyScrollbarIsVisible() {
+    Assertion.assertEquals(previewArea.getCssValue("overflow"), "auto");
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject verifyInfoboxPreviewBackgroundColor(String invocationBgcolor) {
+    String previewBackgroundColor = getBackgroundColor();
+    Assertion.assertEquals(invocationBgcolor, previewBackgroundColor);
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject verifyBackArrowFunctionality() {
     wait.forElementVisible(backArrowButton);
     backArrowButton.click();
     Assertion.assertTrue(componentsButtons.get(0).isDisplayed());
@@ -121,10 +142,10 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   }
 
   /* Verifies default rendered template structure, which should contain:
-     1 title component, 1 image component and 2 data labels components
+     1 title component, 1 image component and 2 row components
   */
   public SpecialInfoboxBuilderPageObject verifyDefaultTemplateStructure() {
-    Assertion.assertEquals(this.titles.size(), defaultTitleCount);
+    Assertion.assertEquals(this.titles.size(), DEFAULT_TITLES);
     Assertion.assertEquals(this.images.size(), DEFAULT_IMAGES);
     Assertion.assertEquals(this.rows.size(), DEFAULT_ROWS);
     return this;
@@ -187,11 +208,16 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     return this;
   }
 
+  public SpecialInfoboxBuilderPageObject scrollAndSelectLastComponent() {
+    scrollAndClick(component, component.size() - 1);
+    return this;
+  }
+
   public TemplatePage save() {
-    wait.forElementVisible(saveButton);
+    wait.forElementClickable(saveButton);
     saveButton.click();
-    wait.forElementPresent(By.className("header-title"));
-//    wait.forXMilliseconds(15000);
+//    wait.forElementPresent(By.className("header-title"));
+    wait.forXMilliseconds(35000);
     return new TemplatePage(driver);
   }
 
