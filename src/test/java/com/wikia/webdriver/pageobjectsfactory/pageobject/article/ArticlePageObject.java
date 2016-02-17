@@ -154,8 +154,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
-  @FindBy(css = ".editpage-notices")
-  private WebElement notificationForSavingAsAnon;
 
   private PortableInfoboxPageObject portableInfobox;
 
@@ -908,10 +906,5 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
     return new VisualEditModePageObject();
-  }
-
-  public void verifyVisibilityOfNotificationForAnon(){
-    wait.forElementVisible(notificationForSavingAsAnon);
-    PageObjectLogging.logInfo("Notification is visible");
   }
 }
