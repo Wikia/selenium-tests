@@ -27,7 +27,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6406", comment = "Please, test manually by clicking the delete (bin) icon")
   @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
-    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
+ //   String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
