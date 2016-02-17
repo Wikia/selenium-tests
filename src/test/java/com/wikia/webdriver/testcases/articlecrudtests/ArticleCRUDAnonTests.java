@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -30,16 +29,13 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_002"})
-  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_002_addByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
         new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
     visualEditMode.addContent(articleContent);
-    ArticlePageObject article = visualEditMode.submitArticle();
-    article.verifyVisibilityOfNotificationForAnon();
-    visualEditMode.submitArticle();
+    ArticlePageObject article = visualEditMode.submitArticleAsAnon();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
   }
@@ -59,37 +55,34 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
       groups = {"ArticleCRUDAnon_004"})
-  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_004_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
         new ArticlePageObject().navigateToArticleEditPage(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
-    ArticlePageObject article = visualEditMode.submitArticle();
+    ArticlePageObject article = visualEditMode.submitArticleAsAnon();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(randomArticleTitle);
   }
 
   @Test(groups = {"ArticleCRUDAnon_005"})
-  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_005_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open("AnonEditByURL");
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.addContent(articleContent);
-    visualEditMode.submitArticle();
+    visualEditMode.submitArticleAsAnon();
     article.verifyContent(articleContent);
   }
 
   @Test(groups = {"ArticleCRUDAnon_006"})
-  @RelatedIssue(issueID = "MAIN-6278", comment = "test manually")
   public void ArticleCRUDAnon_006_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
     visualEditMode.addContent(articleContent);
-    visualEditMode.clickPublishButton();
+    visualEditMode.submitArticleAsAnon();
     article.verifyContent(articleContent);
   }
 }

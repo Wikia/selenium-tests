@@ -37,6 +37,8 @@ public class EditMode extends WikiBasePageObject {
   private WebElement sourceButton;
   @FindBy(css = "a.cke_off.cke_button_table")
   private WebElement addTableButton;
+  @FindBy(css = ".editpage-notices")
+  private WebElement notificationForAnon;
 
   private By submitButtonBy = By.cssSelector("#wpSave");
 
@@ -48,11 +50,26 @@ public class EditMode extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
-    PageObjectLogging.logInfo("submit");
+
+    PageObjectLogging.logInfo("Submit");
   }
 
   public ArticlePageObject submitArticle() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+    PageObjectLogging.logInfo("Page submitted");
+
+    return new ArticlePageObject();
+  }
+
+  public ArticlePageObject submitArticleAsAnon() {
+    submit();
+
+    wait.forElementVisible(notificationForAnon);
+    PageObjectLogging.logInfo("Notification is visible");
+
+    wait.forElementClickable(submitButton);
+    submitButton.click();
     wait.forElementNotPresent(submitButtonBy);
     PageObjectLogging.logInfo("Page submitted");
 
@@ -68,6 +85,8 @@ public class EditMode extends WikiBasePageObject {
 
   public BlogPageObject submitBlog() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+
     return new BlogPageObject(driver);
   }
 
