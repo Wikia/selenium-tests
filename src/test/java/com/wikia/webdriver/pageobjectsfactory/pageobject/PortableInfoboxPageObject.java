@@ -30,8 +30,6 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private WebElement tabberImage;
   @FindBy(css = ".pi-image")
   private WebElement imageWrapper;
-  @FindBy(css = ".pi-title")
-  private WebElement titleWrapper;
   @FindBy(css = "body")
   private WebElement bodyElement;
   @FindBy(css = ".header-title")
@@ -78,6 +76,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   private List<WebElement> orderedElements;
   @FindBy(css = ".pi-header")
   private List<WebElement> h3Titles;
+  @FindBy(css = ".pi-title")
+  private List<WebElement> titles;
 
   public PortableInfoboxPageObject(WebDriver driver) {
     super(driver);
@@ -108,6 +108,8 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   public WebElement getGroupHeader(int index) {
     return groupHeadersWrappers.get(index);
   }
+
+  public String getTitleTextWithIndex(int index) { return titles.get(index).getText(); }
 
   public String getUrlAfterPageIsLoaded() {
     wait.forElementVisible(bodyElement);
@@ -298,7 +300,7 @@ public class PortableInfoboxPageObject extends WikiBasePageObject {
   }
 
   public PortableInfoboxPageObject verifyDivsNotAppearingInTitle() {
-    Assertion.assertNotEquals(titleWrapper.getTagName(), "div");
+    Assertion.assertNotEquals(titles.get(0).getTagName(), "div");
     return this;
   }
 

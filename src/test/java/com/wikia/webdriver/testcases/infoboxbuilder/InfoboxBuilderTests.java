@@ -28,7 +28,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests_001"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void verifyDefaultStructure() {
     init();
     builder.open("verifyDefaultStructure")
@@ -37,7 +37,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests_002"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void addingComponents() {
     init();
     builder.open("addingComponents")
@@ -48,18 +48,19 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests_003"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void savingTemplate() {
     init();
     templatePage = builder.open("savingTemplate")
         .switchToIFrame()
         .addRowComponent()
         .save();
-    //investigate why save isn't redirecting to new template page
+
+    builder.verifyCreatedTemplateName("savingTemplate", templatePage);
   }
 
   @Test(groups = {"InfoboxBuilderTests_003"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void deletingComponents() {
     init();
     builder.open("deletingComponents")
@@ -79,27 +80,20 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests_004"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void customizingComponents() {
     init();
     builder.open("customizingComponents")
         .switchToIFrame()
-        .setRowLabelWithIndex(0, "AutomatedTest");
+        .setAndVerifyRowLabelWithIndex(0, "AutomatedTest")
+        .setTitleToUseArticleName(0)
+        .save();
 
-//    templatePage = builder.open("test1234")
-//        .switchToIFrame()
-//        .setTitleToUseArticleName(0)
-//        .save();
-//
-//    String templateTitle = templatePage.getNameForArticle();
-//
-//    System.out.println(templateTitle);
-//    PortableInfoboxObject infobox = new PortableInfoboxObject(driver);
-//    System.out.println(infobox.getHeaderName(0));
+    builder.verifyTitleUsingArticleName(infobox, "customizingComponents");
   }
 
   @Test(groups = {"InfoboxBuilderTests_005"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void verifyInterfaceFunctionality() {
     init();
     builder.open("verifyInterfaceFunctionality")
@@ -146,7 +140,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   /* Verify if scrolling is enabled when Infobox's height in
   preview is greater than the preview area height. */
   @Test(groups = {"InfoboxBuilderTests_007"})
-  @Execute(onWikia = "mediawiki119")
+  @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void verifyScrolling() {
     init();
     builder.open("verifyScrolling")

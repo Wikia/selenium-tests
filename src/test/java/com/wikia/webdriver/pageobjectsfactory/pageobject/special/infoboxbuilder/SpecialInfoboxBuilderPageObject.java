@@ -3,8 +3,9 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.infoboxbuilder
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -190,6 +191,20 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     return this;
   }
 
+  public SpecialInfoboxBuilderPageObject verifyCreatedTemplateName(
+      String builderTemplate, TemplatePage createdTemplatePage) {
+    Assertion.assertEquals(builderTemplate.toLowerCase(),
+                           createdTemplatePage.getHeaderText().toLowerCase());
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject verifyTitleUsingArticleName(
+      PortableInfoboxPageObject infobox, String templateName) {
+    Assertion.assertEquals(infobox.getTitleTextWithIndex(0).toLowerCase(),
+                           templateName.toLowerCase());
+    return this;
+  }
+
   public SpecialInfoboxBuilderPageObject setTitleToUseArticleName(int index) {
     titles.get(index).click();
     wait.forElementVisible(titleCheckbox);
@@ -197,7 +212,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     return this;
   }
 
-  public SpecialInfoboxBuilderPageObject setRowLabelWithIndex(int index, String labelName) {
+  public SpecialInfoboxBuilderPageObject setAndVerifyRowLabelWithIndex(int index, String labelName) {
     wait.forElementVisible(rows.get(index));
     rows.get(index).click();
     wait.forElementVisible(rowLabelInputField);
@@ -216,8 +231,8 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();
-//    wait.forElementPresent(By.className("header-title"));
-    wait.forXMilliseconds(35000);
+    //wait until template page is loaded
+    wait.forElementVisible(driver.findElement(By.className("header-title")));
     return new TemplatePage(driver);
   }
 
