@@ -23,7 +23,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   @RelatedIssue(issueID = "CE-3160", comment = "Test manually: Test may fail until the ticket is fixed as" +
           " notification is obscuring the feature being tested")
  public void CreateNewWiki_001_loggedOutUser() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
@@ -44,7 +44,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_002"})
  public void CreateNewWiki_002_wrongPassword() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
     cnw1.verifySuccessIcon();
@@ -57,7 +57,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_003"})
   public void CreateNewWiki_003_blankPassword() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
     cnw1.verifySuccessIcon();
@@ -69,7 +69,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_004"})
   public void CreateNewWiki_004_blankUserName() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
     cnw1.verifySuccessIcon();
@@ -80,7 +80,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_005"})
  public void CreateNewWiki_005_invalidUserName() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.typeInWikiName(cnw1.getWikiName());
     cnw1.verifySuccessIcon();

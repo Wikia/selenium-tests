@@ -22,7 +22,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   private WebElement uploadFileName;
 
   public SpecialUploadPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

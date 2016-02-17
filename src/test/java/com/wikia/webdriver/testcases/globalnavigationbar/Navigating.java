@@ -27,7 +27,7 @@ public class Navigating extends NewTestTemplate {
           dataProvider = "getCentralWikiaUrlForWiki")
   public void wikiaLogoClickOpensCentralWiki(String wikiName,
                                              String expectedCentralUrl) {
-    HomePageObject homePage = new HomePageObject(driver);
+    HomePageObject homePage = new HomePageObject();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     homePage.getGlobalNavigation().clickWikiaLogo();
 
@@ -38,7 +38,7 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void fandomLogoClickOnEnCommunityOpensFandomWikia() {
-    HomePageObject homePage = new HomePageObject(driver);
+    HomePageObject homePage = new HomePageObject();
     homePage.getUrl(urlBuilder.getUrlForWiki(EN_COMMUNITY));
     GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();
 

@@ -24,7 +24,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
   private WebElement submitButton;
 
   public CreateNewWikiPageObjectStep3(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
@@ -47,6 +47,6 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
     scrollAndClick(submitButton);
     PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

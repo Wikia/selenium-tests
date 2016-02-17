@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -79,7 +78,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeTextArea;
 
   public SourceEditModePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SourceEditModePageObject focusTextArea() {
@@ -397,16 +396,6 @@ public class SourceEditModePageObject extends EditMode {
   public ArticlePageObject clickPublishButton() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    return new ArticlePageObject(driver);
-  }
-
-  public void addCategoryToSourceCode(String catName) {
-    sourceModeTextArea.sendKeys(catName);
-  }
-
-  public TemplatePageObject clickPublishButtonInTemplateNamespace() {
-    wait.forElementVisible(submitButton);
-    submitButton.click();
-    return new TemplatePageObject(driver);
+    return new ArticlePageObject();
   }
 }

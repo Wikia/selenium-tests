@@ -6,6 +6,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -23,10 +24,11 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-6430", comment = "the test should pass, the related issue is not permanent")
   public void VetArticleComments_001_Provider() {
     new ArticleContent().clear();
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
@@ -44,7 +46,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
   public void VetArticleComments_002_Library() {
     new ArticleContent().clear();
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
     VetOptionsComponentObject vetOptions =

@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,8 +36,8 @@ public class SEOUtils extends WikiBasePageObject {
   @FindBy(css = "meta[name='robots']")
   private WebElement robots;
 
-  public SEOUtils(WebDriver driver) {
-    super(driver);
+  public SEOUtils(WikiaWebDriver driver) {
+    super();
   }
 
   public String getDescription() throws WebDriverException {

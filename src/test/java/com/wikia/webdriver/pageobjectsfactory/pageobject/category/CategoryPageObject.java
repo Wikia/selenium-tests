@@ -20,7 +20,7 @@ public class CategoryPageObject extends WikiBasePageObject {
     private List<WebElement> categoryGalleryItemsName;
 
     public CategoryPageObject(WebDriver driver) {
-        super(driver);
+        super();
     }
 
     public void verifyCategoryPageTitle(String categoryLinkName) {

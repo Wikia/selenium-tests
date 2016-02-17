@@ -17,7 +17,7 @@ public class RenamePageObject extends ArticlePageObject {
   private WebElement leaveRedirectCheckbox;
 
   public RenamePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public ArticlePageObject rename(String newName) {
@@ -32,6 +32,6 @@ public class RenamePageObject extends ArticlePageObject {
     }
     scrollAndClick(submitRename);
     PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

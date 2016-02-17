@@ -24,7 +24,7 @@ public class GoSearchFeature extends IntraWiki {
                                                  + "Gonzo article and enter. If you got to "
                                                  + "Gonzo article the test passed.")
   public void AnonFromSuggestion() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
     NavigationBar navigation = new NavigationBar(driver);
     navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
@@ -36,7 +36,7 @@ public class GoSearchFeature extends IntraWiki {
   @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "UserFromSuggestion"})
   @Execute(asUser = User.USER)
   public void UserFromSuggestion() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
     NavigationBar navigation = new NavigationBar(driver);
     navigation.openWikiPage(testedWiki);
@@ -49,7 +49,7 @@ public class GoSearchFeature extends IntraWiki {
   @Test(groups = {"Search", "IntraWikiSearch", "goSearchFeature", "goSearchPreference"})
   @Execute(asUser = User.USER_GO_SEARCH_PREFERRED, onWikia = "muppet")
   public void goSearchPreference() {
-    new WikiBasePageObject(driver).openWikiPage(wikiURL);
+    new WikiBasePageObject().openWikiPage(wikiURL);
     NavigationBar navigation = new NavigationBar(driver);
     ArticlePageObject article = navigation.goSearchFor(SearchContent.SEARCH_ARTICLE);
     article.verifyArticleNameInWgPageName(SearchContent.SEARCH_ARTICLE);

@@ -57,7 +57,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement closeShareScreenButton;
 
   public LightboxComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyLightboxPopup() {

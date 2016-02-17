@@ -33,7 +33,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -169,8 +168,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
   String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
-  public ArticlePageObject(WebDriver driver) {
-    super(driver);
+  public ArticlePageObject() {
+    super();
   }
 
   /**
@@ -238,7 +237,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(addArticleInDropdown);
     CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
     articleModal.createPageWithBlankLayout(articleTitle);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
@@ -270,7 +269,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     scrollAndClick(openEditDropdown);
     wait.forElementVisible(editUsingClassicEditor);
     scrollAndClick(editUsingClassicEditor);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public MiniEditorComponentObject triggerCommentArea() {
@@ -740,7 +739,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement redLinkToClick = redLinks.get(linkNumber);
     CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
     articleModal.createPageWithBlankLayout("");
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   private VECreateArticleModalComponentObject clickVERedLink(WebElement redLink) {
@@ -906,7 +905,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     contributeDropdown.click();
     wait.forElementVisible(editArticleInDropDown);
     editArticleInDropDown.click();
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
 }

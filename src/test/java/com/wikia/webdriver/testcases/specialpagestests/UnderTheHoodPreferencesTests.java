@@ -20,7 +20,7 @@ public class UnderTheHoodPreferencesTests extends NewTestTemplate {
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void UnderTheHoodPreference_001_Use_advanced_recent_changes() {
 
-    PreferencesPageObject preferences = new WikiBasePageObject(driver)
+    PreferencesPageObject preferences = new WikiBasePageObject()
         .openSpecialPreferencesPage(wikiURL);
     preferences
         .setAdvancedRecentChangesCheckboxValueToDefaultUnchecked()

@@ -40,7 +40,7 @@ public class ForumBoardPageObject extends BasePageObject {
   MiniEditorComponentObject miniEditor;
 
   public ForumBoardPageObject(WebDriver driver) {
-    super(driver);
+    super();
     miniEditor = new MiniEditorComponentObject(driver);
     PageFactory.initElements(driver, this);
   }

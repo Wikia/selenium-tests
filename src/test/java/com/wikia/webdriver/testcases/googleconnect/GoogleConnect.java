@@ -20,6 +20,6 @@ public class GoogleConnect extends NewTestTemplate {
 
     Assertion.assertTrue(googleConnectPage.isUserLoggedIn());
 
-    new ArticlePageObject(driver).open().verifyUserLoggedIn(User.GOOGLE_CONNECTED);
+    new ArticlePageObject().open().verifyUserLoggedIn(User.GOOGLE_CONNECTED);
   }
 }

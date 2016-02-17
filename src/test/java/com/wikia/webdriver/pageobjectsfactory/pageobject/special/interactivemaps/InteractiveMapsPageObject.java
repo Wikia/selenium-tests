@@ -35,7 +35,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   private WebElement emptyStateSection;
 
   public InteractiveMapsPageObject(WebDriver driver) {
-    super(driver);
+    super();
     // TODO Auto-generated constructor stub
   }
 

@@ -24,7 +24,7 @@ public class FollowArticleTests extends NewTestTemplate {
   public void unfollowArticleIfFollowed() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT, ARTICLE_NAME);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(ARTICLE_NAME);
+    ArticlePageObject article = new ArticlePageObject().open(ARTICLE_NAME);
     WatchPageObject watch = article.unfollowArticle();
     watch.confirmWatchUnwatch();
     article.verifyPageUnfollowed();
@@ -33,7 +33,7 @@ public class FollowArticleTests extends NewTestTemplate {
   @Test(dependsOnMethods = {"unfollowArticleIfFollowed"})
   @Execute(asUser = User.USER)
   public void userCanSeeFollowedArticlesOnHisFollowingSpecialPage() {
-    new ArticlePageObject(driver).open(ARTICLE_NAME).follow();
+    new ArticlePageObject().open(ARTICLE_NAME).follow();
     new SpecialFollowPageObject(driver).open().verifyFollowedArticle(ARTICLE_NAME);
   }
 }

@@ -15,7 +15,7 @@ public class EditProfileComponentObject extends WikiBasePageObject {
   protected WebElement aboutTab;
 
   public EditProfileComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   protected void clickAvatarTab() {

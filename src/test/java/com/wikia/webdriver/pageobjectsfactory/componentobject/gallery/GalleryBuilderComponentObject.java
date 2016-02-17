@@ -38,7 +38,7 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
   public GalleryBuilderComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isFinishButtonVisibleOnPage() {

@@ -4,12 +4,14 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.http.HttpStatus;
@@ -43,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 public class BasePageObject {
 
   public final Wait wait;
-  public WebDriver driver;
+  protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
   public Actions builder;
   protected int timeOut = 15;
@@ -59,8 +61,7 @@ public class BasePageObject {
   @FindBy(css = "#ca-unwatch")
   protected WebElement followedButton;
 
-  public BasePageObject(WebDriver driver) {
-    this.driver = driver;
+  public BasePageObject() {
     this.waitFor = new WebDriverWait(driver, timeOut);
     this.builder = new Actions(driver);
     this.wait = new Wait(driver);

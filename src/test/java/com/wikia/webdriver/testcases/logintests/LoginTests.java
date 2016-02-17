@@ -32,7 +32,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_002", "Smoke5"})
   public void Login_002_dropDownUser() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openDropDown();
@@ -43,7 +43,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
   public void Login_003_authModalInGlobalNav_user() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
@@ -62,7 +62,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_005")
   public void Login_005_dropDownStaff() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
     dropDown.openDropDown();
@@ -73,7 +73,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = "Login_006")
   @Execute(onWikia = "agas")
   public void Login_006_authModalInGlobalNav_staff() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
@@ -98,7 +98,7 @@ public class LoginTests extends NewTestTemplate {
   public void userWithoutAValidTokenIsForcedLogout() {
     new ArticleContent().clear();
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     Helios.deleteAllTokens(User.USER_12);
 
     article.refreshPageAddingCacheBuster();

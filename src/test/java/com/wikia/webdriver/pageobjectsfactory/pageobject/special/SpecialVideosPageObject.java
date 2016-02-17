@@ -43,7 +43,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
 
   public SpecialVideosPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

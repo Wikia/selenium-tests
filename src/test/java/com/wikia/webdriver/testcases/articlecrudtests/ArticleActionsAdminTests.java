@@ -24,7 +24,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     String articleTitle = "DeleteUndeleArticle";
     new ArticleContent().push(PageContent.ARTICLE_TEXT, articleTitle);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleTitle);
+    ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     SpecialRestorePageObject restore = article.undeleteByFlashMessage();
@@ -41,7 +41,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
   public void moveArticle() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);

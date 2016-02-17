@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mediatests.providers;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -23,7 +23,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     article.verifyVideo();
 
     LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
@@ -44,7 +44,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     article.verifyVideo();
 
     VideoComponentObject video = article.clickThumbnailVideoInline();

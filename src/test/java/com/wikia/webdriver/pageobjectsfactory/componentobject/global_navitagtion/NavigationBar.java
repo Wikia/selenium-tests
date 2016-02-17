@@ -32,7 +32,7 @@ public class NavigationBar extends WikiBasePageObject {
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
   public NavigationBar(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void triggerSuggestions(String query) {
@@ -79,7 +79,7 @@ public class NavigationBar extends WikiBasePageObject {
       searchInput.sendKeys(Keys.ENTER);
       PageObjectLogging.log("ArrowDownToSuggestion", "arrowed down to desired suggestion"
                                                      + suggestionText + "and clicked enter", true);
-      return new ArticlePageObject(driver);
+      return new ArticlePageObject();
     } else {
       return null;
     }
@@ -112,7 +112,7 @@ public class NavigationBar extends WikiBasePageObject {
     searchInput.sendKeys(query);
     searchSubmit.click();
     PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public AuthModal clickOnSignIn(){

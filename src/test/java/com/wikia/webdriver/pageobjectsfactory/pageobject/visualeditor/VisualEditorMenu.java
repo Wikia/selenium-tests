@@ -89,7 +89,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
 
   public VisualEditorMenu(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void clickStyleItemFromDropDown(By styleBy) {

@@ -31,7 +31,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
   private List<WebElement> checkBoxes;
 
   public SpecialBlockPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

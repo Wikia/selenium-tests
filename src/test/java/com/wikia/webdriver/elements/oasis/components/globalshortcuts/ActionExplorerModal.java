@@ -1,18 +1,15 @@
 package com.wikia.webdriver.elements.oasis.components.globalshortcuts;
 
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class ActionExplorerModal {
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+public class ActionExplorerModal extends WikiBasePageObject {
 
   @FindBy(css = ".label-in-suggestions")
   private WebElement searchSuggestions;
@@ -26,21 +23,15 @@ public class ActionExplorerModal {
   @FindBy(css = ".autocomplete-suggestions")
   private WebElement autocompleteSuggestions;
 
-  private By actionExplorerModalSelector = By.cssSelector(".global-shortcuts-search");
-  private By keyboardShortcutsModalSelector = By.cssSelector(".global-shortcuts-help");
+  private final By actionExplorerModalSelector = By.cssSelector(".global-shortcuts-search");
+  private final By keyboardShortcutsModalSelector = By.cssSelector(".global-shortcuts-help");
 
-  private Wait wait;
   private Actions actions;
-  private JavascriptActions jsActions;
-  private WebDriver driver;
 
-  public ActionExplorerModal(WebDriver driver) {
-    this.wait = new Wait(driver);
+  public ActionExplorerModal() {
+    super();
+
     this.actions = new Actions(driver);
-    this.jsActions = new JavascriptActions(driver);
-    this.driver = driver;
-
-    PageFactory.initElements(driver, this);
   }
 
   public ActionExplorerModal useShortcut(String shortcut) {

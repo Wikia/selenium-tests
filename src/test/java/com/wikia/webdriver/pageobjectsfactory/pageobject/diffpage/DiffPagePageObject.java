@@ -13,7 +13,7 @@ public class DiffPagePageObject extends BasePageObject {
   private WebElement diffTable;
 
   public DiffPagePageObject(WebDriver driver) {
-    super(driver);
+    super();
     // TODO Auto-generated constructor stub
   }
 

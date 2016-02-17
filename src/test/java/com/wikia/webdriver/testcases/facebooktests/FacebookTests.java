@@ -17,8 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.RemoveFacebook
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
@@ -104,7 +102,7 @@ public class FacebookTests extends NewTestTemplate {
   public void signUpWithFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     FacebookMainPageObject fbLogin = base.openFacebookMainPage();
     FacebookUserPageObject userFB;

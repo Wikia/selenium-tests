@@ -2,8 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.Browser;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -195,7 +193,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     typeTextArea(content);
     VisualEditorSaveChangesDialog save = clickPublishButton();
     save.savePage();
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public void verifyMapPresent() {
@@ -417,7 +415,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     //wait for highlight
     wait.forElementVisible(focusedHighlight);
     //TODO check if any future webdriver upgrade would resolve having to use separate logic
-    if (Browser.CHROME.equalsIgnoreCase(Configuration.getBrowser())) {
+    if (driver.isChrome()) {
       Actions actions2 = new Actions(driver);
       actions2.sendKeys(Keys.DELETE).build().perform();
     } else {

@@ -25,7 +25,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
   private WebElement mapErrorField;
 
   public CreateRealMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public CreateAMapComponentObject clickBack() {

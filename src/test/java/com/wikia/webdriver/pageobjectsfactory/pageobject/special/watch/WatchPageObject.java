@@ -16,7 +16,7 @@ public class WatchPageObject extends BasePageObject {
   private WebElement followUnfollowConfirmation;
 
   public WatchPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void confirmWatchUnwatch() {

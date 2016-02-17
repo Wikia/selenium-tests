@@ -16,7 +16,7 @@ public class MessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
   private WebElement removeConfirmButton;
 
   public MessageWallCloseRemoveThreadPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public MessageWall closeRemoveThread(String reason) {
