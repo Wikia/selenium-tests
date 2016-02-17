@@ -30,7 +30,7 @@ public class TestAdsMonitoringOasis extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, BROWSER_DIMENSION);
 
-    if (countryCode == null) {
+    if ("null".equals(countryCode)) {
       PageObjectLogging.log("Geo (no proxy)", wikiPage.getCountry(), true);
     } else {
       Assertion.assertEquals(wikiPage.getCountry(), countryCode);
