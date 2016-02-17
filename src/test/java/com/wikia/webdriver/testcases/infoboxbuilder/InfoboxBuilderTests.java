@@ -54,6 +54,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     templatePage = builder.open("savingTemplate")
         .switchToIFrame()
         .addRowComponent()
+        .addImageComponent()
         .save();
 
     builder.verifyCreatedTemplateName("savingTemplate", templatePage);
@@ -152,6 +153,5 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .verifyScrollbarIsVisible()
         .scrollAndSelectLastComponent();
   }
-
-
+  
 }
