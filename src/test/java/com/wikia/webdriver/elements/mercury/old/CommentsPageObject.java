@@ -197,6 +197,6 @@ public class CommentsPageObject {
   }
 
   public void waitForFirstCommentToBeVisible() {
-    wait.forElementVisible(allComments.get(0), 5, 500);
+    wait.forElementVisible(allComments.get(0));
   }
 }
