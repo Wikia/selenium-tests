@@ -38,6 +38,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
         new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
     visualEditMode.addContent(articleContent);
     ArticlePageObject article = visualEditMode.submitArticle();
+    article.verifyVisibilityOfNotificationForAnon();
+    visualEditMode.submitArticle();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
   }
