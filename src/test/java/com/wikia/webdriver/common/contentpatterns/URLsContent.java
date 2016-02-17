@@ -137,6 +137,13 @@ public class URLsContent {
   // Escaped frament URL for Maps
   public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
 
+  // Recent wiki activity on mobile
+  public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
+
+  // Diff page on moblie
+  public static final String DIFF_PAGE = "diff/$number$/$number$";
+
+
   private URLsContent() {
   }
 }

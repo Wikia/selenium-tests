@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.Loading;
+import com.wikia.webdriver.elements.mercury.components.Loading;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
