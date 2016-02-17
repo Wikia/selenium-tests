@@ -17,10 +17,6 @@ import java.util.List;
  */
 public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
 
-  private int DEFAULT_TITLES = 1;
-  private int DEFAULT_IMAGES = 1;
-  private int DEFAULT_ROWS = 2;
-
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
   @FindBy(css = ".portable-infobox")
@@ -146,9 +142,9 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
      1 title component, 1 image component and 2 row components
   */
   public SpecialInfoboxBuilderPageObject verifyDefaultTemplateStructure() {
-    Assertion.assertEquals(this.titles.size(), DEFAULT_TITLES);
-    Assertion.assertEquals(this.images.size(), DEFAULT_IMAGES);
-    Assertion.assertEquals(this.rows.size(), DEFAULT_ROWS);
+    Assertion.assertEquals(this.titles.size(), 1);
+    Assertion.assertEquals(this.images.size(), 1);
+    Assertion.assertEquals(this.rows.size(), 2);
     return this;
   }
 
