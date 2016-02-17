@@ -28,7 +28,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   @RelatedIssue(issueID = "QAART-688", comment = "the deletion part can not be checked "
                                                  + "until the issue is fixed")
   public void CreateNewWiki_001_createDeleteWiki() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
@@ -47,7 +47,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER)
   public void CreateNewWiki_002_createWikiForChildren() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
@@ -67,7 +67,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
   @Execute(asUser = User.USER)
   public void CreateNewWiki_003_createWikiChangedDomain() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     wikiDomain = cnw1.getWikiName();
@@ -87,7 +87,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
   @Execute(asUser = User.USER)
   public void CreateNewWiki_004_creatWikiNameExists() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = "muppets";
     cnw1.typeInWikiName(wikiName);
@@ -97,7 +97,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
   @Execute(asUser = User.USER)
   public void CreateNewWiki_005_createWikiPolicyViolation() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = "1234";
     cnw1.typeInWikiName(wikiName);
@@ -107,7 +107,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
   @Execute(asUser = User.USER)
   public void CreateNewWiki_006_createWikiNoCategory() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     wikiDomain = cnw1.getWikiName();

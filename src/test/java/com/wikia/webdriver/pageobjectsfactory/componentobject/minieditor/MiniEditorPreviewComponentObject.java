@@ -19,7 +19,7 @@ public class MiniEditorPreviewComponentObject extends WikiBasePageObject {
   private WebElement previewModal;
 
   public MiniEditorPreviewComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

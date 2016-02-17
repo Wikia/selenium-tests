@@ -20,7 +20,7 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   private WebElement finishButton;
 
   public SlideshowBuilderComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public enum Positions {

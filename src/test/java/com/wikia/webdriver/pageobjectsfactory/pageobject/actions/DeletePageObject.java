@@ -13,13 +13,13 @@ public class DeletePageObject extends WikiBasePageObject {
   private WebElement submitButton;
 
   public DeletePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public WikiBasePageObject submitDeletion() {
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
     PageObjectLogging.log("submitDeletion", "page deleted", true);
-    return new WikiBasePageObject(driver);
+    return new WikiBasePageObject();
   }
 }

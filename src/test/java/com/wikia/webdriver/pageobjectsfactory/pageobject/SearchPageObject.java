@@ -46,7 +46,7 @@ public class SearchPageObject extends WikiBasePageObject {
   private WebElement filterEverything;
 
   public SearchPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clickNextPaginator() {

@@ -29,7 +29,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
 
 
   public WikiHistoryPageObject(WebDriver driver) {
-    super(driver);
+    super();
     this.articlename = articlename;
     PageFactory.initElements(driver, this);
   }

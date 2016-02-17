@@ -17,7 +17,7 @@ public class VERecaptchaTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setupd() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
   // Verify that second click on "Save page" button changes recaptcha.

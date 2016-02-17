@@ -30,7 +30,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     wikiTexts = new ArrayList<>();
     wikiTexts.add(WikiTextContent.PARAGRAPH_TEXT);
     wikiTexts.add(WikiTextContent.HEADING_TEXT);

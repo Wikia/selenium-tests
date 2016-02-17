@@ -26,7 +26,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   private WebElement expirationDateElement;
 
   public SpecialBlockListPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

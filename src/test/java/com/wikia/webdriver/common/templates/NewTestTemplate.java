@@ -1,20 +1,21 @@
 package com.wikia.webdriver.common.templates;
 
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.UserAgent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
-import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.lang.reflect.Method;
 
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.lang.reflect.Method;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class NewTestTemplate extends NewTestTemplateCore {
 
@@ -31,7 +32,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     if (declaringClass.isAnnotationPresent(InBrowser.class)) {
-      setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser().getName());
       setTestProperty("browserSize", declaringClass.getAnnotation(InBrowser.class).browserSize());
       setTestProperty("emulator", declaringClass.getAnnotation(InBrowser.class).emulator());
     }
@@ -44,9 +45,22 @@ public class NewTestTemplate extends NewTestTemplateCore {
     }
 
     if (method.isAnnotationPresent(InBrowser.class)) {
-      setTestProperty("browser", method.getAnnotation(InBrowser.class).browser());
+      setTestProperty("browser", method.getAnnotation(InBrowser.class).browser().getName());
       setTestProperty("browserSize", method.getAnnotation(InBrowser.class).browserSize());
       setTestProperty("emulator", method.getAnnotation(InBrowser.class).emulator());
+    }
+
+    if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)){
+      setTestProperty("unstablePageLoadStrategy", "true");
+    }
+
+    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
+      setTestProperty("countryCode", method.getAnnotation(GeoEdgeBrowserMobProxy.class).country());
+    }
+
+    if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
+      setTestProperty("dumpNetworkTraffic", String.valueOf(method.getAnnotation(NetworkTrafficDump.class).networkTrafficDump()));
+      setTestProperty("useProxy", "true");
     }
   }
 
@@ -100,24 +114,22 @@ public class NewTestTemplate extends NewTestTemplateCore {
           "Test can't be run on " + Configuration.getEnv() + " environment");
     }
 
-    runProxyServerIfNeeded(method);
-    if (method.isAnnotationPresent(UserAgent.class)) {
-      setBrowserUserAgent(method.getAnnotation(UserAgent.class).userAgent());
-    }
-
-    if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
-      NewDriverProvider.setUnstablePageLoadStrategy(true);
-    }
-
-    startBrowser();
+    driver = DriverProvider.getActiveDriver();
+    networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
 
     if (!isNonAnonUserOnDeclaringClass(declaringClass) && !isNonAnonUserOnMethod(method)) {
       loadFirstPage();
     }
+  }
 
-    // Reset unstable page load strategy to default 'false' value
-    NewDriverProvider.setUnstablePageLoadStrategy(false);
+  protected void switchToWindow(int index) {
+    DriverProvider.switchActiveWindow(index);
+    refreshDriver();
+
+    String driverName = DriverProvider.getActiveDriver().equals(driver) ? "primary window" : "secondary window";
+    PageObjectLogging
+        .log("switchToWindow", "================ " + driverName + " ================", true);
   }
 
   @AfterMethod(alwaysRun = true)
@@ -125,6 +137,6 @@ public class NewTestTemplate extends NewTestTemplateCore {
     if (isProxyServerRunning) {
       networkTrafficInterceptor.stop();
     }
-    stopBrowser();
+    DriverProvider.close();
   }
 }

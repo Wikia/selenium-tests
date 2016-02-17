@@ -22,7 +22,7 @@ public class PinMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"PinMapTests_001", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_001_VerifyPinModalContent() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -41,7 +41,7 @@ public class PinMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"PinMapTests_002", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -62,7 +62,7 @@ public class PinMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"PinMapTests_003", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_003_VerifyPinCreationErrors() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -82,11 +82,10 @@ public class PinMapTests extends NewTestTemplate {
   @RelatedIssue(issueID = " ",
       comment = "This maps test should not fail")
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"},
-      dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
+  @Test(groups = {"PinMapTests_004", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_004_VerifyPopUpAfterClickPin() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -97,11 +96,10 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(enabled = false, groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"},
-      dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
+  @Test(enabled = false, groups = {"PinMapTests_005", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_005_VerifyDeletePin() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -117,10 +115,10 @@ public class PinMapTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @Test(enabled = false, groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"PinMapTests_006", "PinMapTests", "InteractiveMaps", "PinMapTests_004"})
   @Execute(asUser = User.USER)
   public void PinMapTests_006_VerifyChangePinData() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -149,7 +147,7 @@ public class PinMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -169,7 +167,7 @@ public class PinMapTests extends NewTestTemplate {
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -189,7 +187,7 @@ public class PinMapTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
   public void PinMapTests_009_VerifyArticlePlaceholder() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =

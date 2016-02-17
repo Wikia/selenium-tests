@@ -5,10 +5,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class SpecialCreatePage extends SpecialPageObject {
 
@@ -17,9 +15,8 @@ public class SpecialCreatePage extends SpecialPageObject {
   @FindBy(css = "#HiddenFieldsDialog #ok")
   private WebElement submitTitleInput;
 
-  public SpecialCreatePage(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
+  public SpecialCreatePage() {
+    super();
   }
 
 
@@ -38,7 +35,7 @@ public class SpecialCreatePage extends SpecialPageObject {
     wait.forElementClickable(submitTitleInput);
     submitTitleInput.click();
     waitForElementNotVisibleByElement(submitTitleInput);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 
   public void addPageWithGivenTitleAndDefaultContent(String title) {

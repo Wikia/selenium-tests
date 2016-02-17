@@ -18,7 +18,7 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
   private WebElement submitRestore;
 
   public SpecialRestorePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyRestoredArticleName(String articleName) {

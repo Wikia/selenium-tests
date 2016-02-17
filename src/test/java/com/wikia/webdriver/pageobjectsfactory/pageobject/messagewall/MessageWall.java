@@ -75,7 +75,7 @@ public class MessageWall extends WikiBasePageObject {
   By replyBodyBy = By.cssSelector(".replyBody");
 
   public MessageWall(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public MessageWall open(String userName) {

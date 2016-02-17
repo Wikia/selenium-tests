@@ -39,7 +39,7 @@ public class BasicActions extends IntraWiki {
 
   @Test(groups = {"anonSearch", "Search", "Search1"})
   public void anonSearch() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
     NavigationBar navigation = new NavigationBar(driver);
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
@@ -49,7 +49,7 @@ public class BasicActions extends IntraWiki {
   @Test(groups = {"userSearch", "Search", "Search2"})
   @Execute(asUser = User.USER)
   public void userSearch() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
     NavigationBar navigation = new NavigationBar(driver);
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);

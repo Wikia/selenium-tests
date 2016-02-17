@@ -19,7 +19,7 @@ public class EditCategoryComponentObject extends BasePageObject {
   private WebElement saveButton;
 
   public EditCategoryComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public ArticlePageObject editCategoryName(String newCategoryName) {
@@ -28,6 +28,6 @@ public class EditCategoryComponentObject extends BasePageObject {
     categoryNameField.sendKeys(newCategoryName);
     saveButton.click();
     PageObjectLogging.log("editCategoryName", "category name changed to " + newCategoryName, true);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

@@ -18,7 +18,7 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
   protected List<WebElement> shareButtonLinks;
 
   public SocialButtonsComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

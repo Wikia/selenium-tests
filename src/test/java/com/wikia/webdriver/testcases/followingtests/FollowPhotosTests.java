@@ -19,7 +19,7 @@ public class FollowPhotosTests extends NewTestTemplate {
   @Test(groups = "FollowPhoto")
   @Execute(asUser = User.USER)
   public void FollowPhoto_001_setup() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject special = base.openSpecialNewFiles(wikiURL);
     imageName = special.getRandomImageName();
     WatchPageObject watch = special.unfollowImage(wikiURL, imageName);

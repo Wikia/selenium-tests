@@ -54,7 +54,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   private WebElement tabBody;
 
   public FilePagePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public FilePagePageObject open(String fileName, boolean noRedirect) {

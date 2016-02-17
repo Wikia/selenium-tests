@@ -20,7 +20,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
   private String default_lang = "en";
 
   public AlmostTherePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyAlmostTherePage() {

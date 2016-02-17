@@ -12,7 +12,7 @@ public class SpecialFBConnectPageObject extends SpecialPageObject {
   private WebElement fbConnectButton;
 
   public SpecialFBConnectPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

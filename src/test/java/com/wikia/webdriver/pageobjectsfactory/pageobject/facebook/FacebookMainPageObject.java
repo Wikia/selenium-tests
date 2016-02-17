@@ -17,7 +17,7 @@ public class FacebookMainPageObject extends WikiBasePageObject {
   private WebElement loginButton;
 
   public FacebookMainPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public FacebookUserPageObject login(String facebookEmail, String facebookPassword) {

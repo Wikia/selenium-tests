@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
   public void serachGlobalNavigationBarAsAnon(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
-    HomePageObject homePage = new HomePageObject(driver);
+    HomePageObject homePage = new HomePageObject();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     SearchPageObject search = homePage.getGlobalNavigation()
         .searchGlobally(query);
@@ -57,7 +57,7 @@ import org.testng.annotations.Test;
   public void serachGlobalNavigationBarAsLoggedIn(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
-    HomePageObject homePage = new HomePageObject(driver);
+    HomePageObject homePage = new HomePageObject();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     SearchPageObject search = homePage.getGlobalNavigation()
         .searchGlobally(query);

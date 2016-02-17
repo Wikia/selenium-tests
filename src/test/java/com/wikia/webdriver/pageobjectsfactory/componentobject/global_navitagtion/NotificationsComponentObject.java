@@ -46,7 +46,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
 
   public NotificationsComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

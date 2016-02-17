@@ -101,7 +101,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
   public InteractiveMapPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public enum embedMapDialogButtons {
@@ -456,7 +456,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.navigateToArticleEditPage(wikiURL, URLsContent.EMBEDED_MAP_ARTICLE);
     return new WikiArticleEditMode(driver);
   }

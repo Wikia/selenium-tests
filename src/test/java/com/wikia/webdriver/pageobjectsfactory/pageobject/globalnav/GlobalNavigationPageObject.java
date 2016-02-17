@@ -73,7 +73,7 @@ public class GlobalNavigationPageObject {
     }
 
     wikiaLogo.click();
-    return new HomePageObject(driver);
+    return new HomePageObject();
   }
 
   public SearchPageObject searchGlobally(String query) {

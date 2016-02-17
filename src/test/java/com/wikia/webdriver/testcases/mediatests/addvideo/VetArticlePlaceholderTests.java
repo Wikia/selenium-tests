@@ -22,7 +22,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   public void userCanAddVideoByUrlUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -35,7 +35,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
   public void userCanAddVideoFromWikiaUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
@@ -49,9 +49,9 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
     //Added cause of MAIN-6374 issue
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject
         vetAddingVideo =
         (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
@@ -70,10 +70,10 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
     //Added cause of MAIN-6374 issue
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
 
     VisualEditModePageObject visualEditMode =
-        new VisualEditModePageObject(driver).open();
+        new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddingVideo =
         (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
     VetOptionsComponentObject vetOptions =

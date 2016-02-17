@@ -26,7 +26,7 @@ public class ImageServingTests extends NewTestTemplate {
                                                  + "Track the issue status")
   @Execute(asUser = User.USER)
   public void ImageServing_001_SpecialNewFilesTest() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
     newFiles.clickOnMoreOrFewerOptions();
@@ -45,7 +45,7 @@ public class ImageServingTests extends NewTestTemplate {
       dataProvider = "getFileNames")
  @Execute(asUser = User.USER)
   public void ImageServing_002_SpecialUploadTest(String fileName) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
     upload.selectFileToUpload(PageContent.FILE);
     upload.typeFileName(fileName);
@@ -64,7 +64,7 @@ public class ImageServingTests extends NewTestTemplate {
   @Test(groups = {"ImageServing_003", "ImageServing"})
   @Execute(asUser = User.USER)
   public void ImageServing_003_SpecialMultipleUploadTest() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialMultipleUploadPageObject wikiSpecialMU = base.openSpecialMultipleUpload(wikiURL);
     wikiSpecialMU.selectFilesToUpload(PageContent.LIST_OF_FILES);
     wikiSpecialMU.typeInMultiUploadSummary(PageContent.CAPTION);

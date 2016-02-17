@@ -28,7 +28,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
   public void VetArticleComments_001_Provider() {
     new ArticleContent().clear();
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
@@ -46,7 +46,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
   public void VetArticleComments_002_Library() {
     new ArticleContent().clear();
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
     VetOptionsComponentObject vetOptions =

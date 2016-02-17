@@ -44,7 +44,7 @@ public class ModularMainPageObject extends WikiBasePageObject {
 
 
   public ModularMainPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
