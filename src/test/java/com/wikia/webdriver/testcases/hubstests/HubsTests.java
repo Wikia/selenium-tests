@@ -66,7 +66,7 @@ public class HubsTests extends NewTestTemplate {
    * click on 'Get Promoted' button verify if modal appears and if its fields/buttons are working
    * properly
    */
-  @RelatedIssue(issueID = "MAIN-6408", comment = "gameshub and movieshub now redirect to Fandom, test works only for lifestylehub")
+  @RelatedIssue(issueID = "UPS-450", comment = "gameshub and movieshub now redirect to Fandom, test works only for lifestylehub")
   @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   @Execute(asUser = User.USER_2)
