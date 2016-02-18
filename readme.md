@@ -1,7 +1,7 @@
 # Selenium Tests
 This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia App](https://github.com/Wikia/app).
 
-## Dependencies
+## Dependencies       
 
 1. Make sure you have [Java](http://www.java.com/) and [Maven](http://maven.apache.org/) installed on your system, if not follow the vendor instructions for installing them on your operating system.
 2. In order to run tests in CHROME browser make sure you have [chromedriver](http://code.google.com/p/chromedriver/downloads/list) and it is accessibile
