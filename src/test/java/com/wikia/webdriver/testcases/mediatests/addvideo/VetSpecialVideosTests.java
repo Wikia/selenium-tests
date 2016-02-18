@@ -24,7 +24,6 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
-  @RelatedIssue(issueID = "SUS-193", comment = "Please, test manually by clicking the delete (bin) icon")
   @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
