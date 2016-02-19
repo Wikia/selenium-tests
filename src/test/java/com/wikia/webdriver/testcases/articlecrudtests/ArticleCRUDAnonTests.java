@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class ArticleCRUDAnonTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDAnon_001"})
-  public void ArticleCRUDAnon_001_addBySpecialPage() {
+  public void articleCRUDAnon_addBySpecialPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -29,7 +29,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_002"})
-  public void ArticleCRUDAnon_002_addByURL() {
+  public void articleCRUDAnon_addByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
@@ -41,7 +41,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_003"})
-  public void ArticleCRUDAnon_003_addDropdown() {
+  public void articleCRUDAnon_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown");
@@ -55,7 +55,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
       groups = {"ArticleCRUDAnon_004"})
-  public void ArticleCRUDAnon_004_differentTitles(String articleTitle) {
+  public void articleCRUDAnon_differentTitles(String articleTitle) {
     String articleContent = PageContent.ARTICLE_TEXT;
     String randomArticleTitle = articleTitle + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
@@ -67,7 +67,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_005"})
-  public void ArticleCRUDAnon_005_editByURL() {
+  public void articleCRUDAnon_editByURL() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open("AnonEditByURL");
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
@@ -77,7 +77,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_006"})
-  public void ArticleCRUDAnon_006_editDropdown() {
+  public void articleCRUDAnon_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
@@ -87,7 +87,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_007"})
-  public void ArticleCRUDAnon_007_editArticleSecondTime() {
+  public void articleCRUDAnon_editArticleSecondTime() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditModePageObject visualEditMode =
