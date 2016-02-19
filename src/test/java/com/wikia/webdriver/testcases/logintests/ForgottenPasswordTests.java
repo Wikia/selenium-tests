@@ -26,6 +26,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test()
+  @RelatedIssue(issueID = "QAART-703", comment = "Please test manually ")
   public void remindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
