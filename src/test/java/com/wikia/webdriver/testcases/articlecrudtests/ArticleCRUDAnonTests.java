@@ -35,7 +35,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     VisualEditModePageObject visualEditMode =
         new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
     visualEditMode.addContent(articleContent);
-    ArticlePageObject article = visualEditMode.submitArticleAsAnon();
+    ArticlePageObject article = visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(articleTitle);
   }
@@ -61,7 +61,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     VisualEditModePageObject visualEditMode =
         new ArticlePageObject().navigateToArticleEditPage(wikiURL, randomArticleTitle);
     visualEditMode.addContent(articleContent);
-    ArticlePageObject article = visualEditMode.submitArticleAsAnon();
+    ArticlePageObject article = visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);
     article.verifyArticleTitle(randomArticleTitle);
   }
@@ -72,7 +72,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open("AnonEditByURL");
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.addContent(articleContent);
-    visualEditMode.submitArticleAsAnon();
+    visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);
   }
 
@@ -82,7 +82,21 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown");
     VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
     visualEditMode.addContent(articleContent);
-    visualEditMode.submitArticleAsAnon();
+    visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);
+  }
+
+  @Test(groups = {"ArticleCRUDAnon_007"})
+  public void ArticleCRUDAnon_007_editArticleSecondTime() {
+    String articleContent = PageContent.ARTICLE_TEXT;
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    VisualEditModePageObject visualEditMode =
+        new ArticlePageObject().navigateToArticleEditPage(wikiURL, articleTitle);
+    visualEditMode.addContent(articleContent);
+    visualEditMode.submitExpectingNotification().submitArticle();
+    String secondArticleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+    visualEditMode.navigateToArticleEditPage(wikiURL, secondArticleTitle);
+    visualEditMode.addContent(articleContent);
+    visualEditMode.submitArticle();
   }
 }

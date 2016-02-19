@@ -62,18 +62,15 @@ public class EditMode extends WikiBasePageObject {
     return new ArticlePageObject();
   }
 
-  public ArticlePageObject submitArticleAsAnon() {
+  /**
+   * Submitting an edit is expecting a notification
+   */
+  public EditMode submitExpectingNotification() {
     submit();
-
     wait.forElementVisible(notificationForAnon);
     PageObjectLogging.logInfo("Notification is visible");
 
-    wait.forElementClickable(submitButton);
-    submitButton.click();
-    wait.forElementNotPresent(submitButtonBy);
-    PageObjectLogging.logInfo("Page submitted");
-
-    return new ArticlePageObject();
+    return this;
   }
 
   public PreviewEditModePageObject previewArticle() {
