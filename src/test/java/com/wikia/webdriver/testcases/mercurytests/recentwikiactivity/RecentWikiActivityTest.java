@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test()
-  public void recentWikiActivityAsAnon_redirectionToDiffPage() {
+  public void recentWikiActivityAsAnon_redirectionToDiffPageAndGoingBack() {
     new RecentWikiActivityPage()
         .open()
         .getRecentWikiActivity()
@@ -28,11 +28,21 @@ public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test()
   @Execute(asUser = User.USER)
-  public void recentWikiActivityAsUser_redirectionToDiffPage() {
+  public void recentWikiActivityAsUser_undoWithoutSummary() {
     new RecentWikiActivityPage()
         .open()
         .getRecentWikiActivity()
         .openDiffPage()
         .submitWithoutSummary();
+  }
+
+  @Test()
+  @Execute(asUser = User.USER)
+  public void recentWikiActivityAsUser_undoWithSummary() {
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .submitWithSummary();
   }
 }

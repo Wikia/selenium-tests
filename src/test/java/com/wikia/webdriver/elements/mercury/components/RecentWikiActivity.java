@@ -62,6 +62,13 @@ public class RecentWikiActivity extends WikiBasePageObject {
     PageObjectLogging.logInfo("Undo button was clicked");
   }
 
+  private void summary(String searchQuery) {
+    wait.forElementClickable(summaryTestbox);
+    summaryTestbox.click();
+    actions.sendKeys(searchQuery).perform();
+    PageObjectLogging.logInfo("Typed in summary box: " + searchQuery);
+  }
+
   private void submitOnSummaryPage() {
     wait.forElementClickable(undoButtonOnSummaryPage);
     undoButtonOnSummaryPage.click();
@@ -75,28 +82,18 @@ public class RecentWikiActivity extends WikiBasePageObject {
   }
 
   public void submitWithoutSummary() {
+    submitOnDiffPage();
     submitOnSummaryPage();
-    submitWithoutSummary();
   }
 
-  private void summary(String searchQuery) {
-    wait.forElementClickable(summaryTestbox);
-    actions.sendKeys(searchQuery).perform();
-    PageObjectLogging.logInfo("Typed in summary box: " + searchQuery);
-  }
-
-  public void submitWithSummary() {
-    submit();
+  public RecentWikiActivity submitWithSummary() {
+    submitOnDiffPage();
     summary("For testing");
-    wait.forElementClickable(undoButtonOnSummaryPage);
-    undoButtonOnSummaryPage.click();
-    PageObjectLogging.logInfo("Undo button was clicked");
+    submitOnSummaryPage();
 
-    loading.handleAsyncPageReload();
+    PageObjectLogging.logInfo("Undo was submitted with a short summary");
 
-    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
-                         "You were not redirected to the recent wiki activity");
-    PageObjectLogging.logInfo("You were redirected to the recent wiki activity");
+    return this;
   }
 
 
