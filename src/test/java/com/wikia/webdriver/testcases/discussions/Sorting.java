@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
@@ -72,7 +73,7 @@ public class Sorting extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickTrendingLinkOnMobile().getSortButtonLabel(), "Trending");
-    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
+    new Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     Assertion.assertEquals(postsList.clickLatestLinkOnMobile().getSortButtonLabel(), "Latest");
   }
@@ -80,12 +81,12 @@ public class Sorting extends NewTestTemplate {
   public void userCanSwitchBetweenLatestAndTrendingTab() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickLatestTabOnDesktop();
-    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
+    new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
 
     postsList.clickTrendingTabOnDesktop();
-    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
+    new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }

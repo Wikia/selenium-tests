@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.elements.mercury.Navigation;
-import com.wikia.webdriver.elements.mercury.TopBar;
+import com.wikia.webdriver.elements.mercury.components.Navigation;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
