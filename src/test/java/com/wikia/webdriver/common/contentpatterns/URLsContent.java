@@ -140,9 +140,6 @@ public class URLsContent {
   // Recent wiki activity on mobile
   public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
 
-  // Diff page on moblie
-  public static final String DIFF_PAGE = "diff/$number$/$number$";
-
 
   private URLsContent() {
   }

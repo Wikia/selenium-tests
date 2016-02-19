@@ -16,18 +16,23 @@ import org.testng.annotations.Test;
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class RecentWikiActivityTest extends NewTestTemplate {
-//
-//  @Test()
-//  public void recentWikiActivity_cardWithDetailsOfEditIsOnTheList() {
-//
-//  }
 
   @Test()
-  @Execute(asUser = User.ANONYMOUS)
-  public void recentWikiActivity_redirectionToDiffPage() {
+  public void recentWikiActivityAsAnon_redirectionToDiffPage() {
     new RecentWikiActivityPage()
         .open()
         .getRecentWikiActivity()
-        .openDiffPage();
+        .openDiffPage()
+        .goBackToRWA();
+  }
+
+  @Test()
+  @Execute(asUser = User.USER)
+  public void recentWikiActivityAsUser_redirectionToDiffPage() {
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .submitWithoutSummary();
   }
 }
