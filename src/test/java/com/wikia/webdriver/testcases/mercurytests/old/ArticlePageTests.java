@@ -234,7 +234,7 @@ public class ArticlePageTests extends NewTestTemplate {
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.openSubMenu(2);
-    navigation.openPageLink(5);
+    navigation.openPageLink(6);
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -255,7 +255,7 @@ public class ArticlePageTests extends NewTestTemplate {
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.openSubMenu(2);
-    navigation.openPageLink(4);
+    navigation.openPageLink(5);
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(
