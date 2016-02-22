@@ -34,6 +34,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
+  @RelatedIssue(issueID = "MAIIN-6494", comment = "Product code defect not able to test manually")
   public void ForumThreadTests_002_removeThreadAndUndo() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
