@@ -5,9 +5,13 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+import com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -198,6 +202,17 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
       PortableInfoboxPageObject infobox, String templateName) {
     Assertion.assertEquals(infobox.getTitleTextWithIndex(0).toLowerCase(),
                            templateName.toLowerCase());
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject verifySelectedComponentBorderStyle(int index) {
+    wait.forElementVisible(component.get(index));
+    component.get(index).click();
+    String script = "return window.getComputedStyle("
+                    + "document.querySelector('.active'),':after').getPropertyValue('Border')";
+    JavascriptExecutor js = (JavascriptExecutor)driver;
+    String borderValues = (String) js.executeScript(script);
+    Assertion.assertEquals(borderValues, "2px solid rgb(26, 94, 184)");
     return this;
   }
 

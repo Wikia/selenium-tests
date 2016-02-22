@@ -115,6 +115,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxPreviewTheme() {
     init();
+
     /* select light theme */
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
     themeDesigner.submitTheme();
@@ -153,5 +154,14 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .verifyScrollbarIsVisible()
         .scrollAndSelectLastComponent();
   }
-  
+
+  @Test(groups = {"InfoboxBuilderTests_008"})
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
+  public void verifySelectedBorderStyling() {
+    init();
+    builder.open("verifySelectedBorderStyling")
+        .switchToIFrame()
+        .verifySelectedComponentBorderStyle(0);
+  }
+
 }
