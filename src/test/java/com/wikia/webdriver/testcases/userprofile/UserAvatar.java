@@ -32,7 +32,7 @@ public class UserAvatar extends NewTestTemplate {
 
   @Test(groups = "AvatarTest_001")
   @Execute(asUser = User.STAFF)
-  public void uploadAvatar() {
+  public void staffUserCanUploadAvatar() {
     UserProfilePageObject
         profile =
         new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
@@ -50,7 +50,7 @@ public class UserAvatar extends NewTestTemplate {
 
   @Test(groups = "AvatarTest_002")
   @Execute(asUser = User.STAFF)
-  public void clickAvatar() {
+  public void clickOnAvatarRedirectsStaffUserToUserPage() {
     new SpecialVersionPage().open();
 
     UserProfilePageObject profile = new UserProfilePageObject(driver).clickOnAvatar();
@@ -61,7 +61,7 @@ public class UserAvatar extends NewTestTemplate {
           "have to be clicked twice in order to delete an avata")
   @Test(groups = "AvatarTest_003", dependsOnMethods = "uploadAvatar")
   @Execute(asUser = User.STAFF)
-  public void removeAvatar() {
+  public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
     String avatarUrl = profile.getAvatarImageSrc();

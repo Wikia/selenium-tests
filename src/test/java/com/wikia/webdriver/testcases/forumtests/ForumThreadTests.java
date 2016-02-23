@@ -20,7 +20,7 @@ public class ForumThreadTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
-  public void ForumThreadTests_001_replyToThread() {
+  public void staffUserCanReplyToForumThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -34,7 +34,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
-  public void ForumThreadTests_002_removeThreadAndUndo() {
+  public void staffUserCanRemoveThreadAndUndoRemoval() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -50,7 +50,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumThreadTests_003", "ForumThreadTests", "Forum"})
-  public void ForumThreadTests_003_moveThreadToOtherBoard() {
+  public void staffUserCanMoveThreadToOtherBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -65,7 +65,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumThreadTests_004", "ForumThreadTests", "Forum"})
-  public void ForumThreadTests_004_threadHistory() {
+  public void threadHistoryPageContainsTableAndCells() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -79,7 +79,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumThreadTests_005", "ForumThreadTests", "Forum"})
-  public void ForumThreadTests_005_closeThreadAndReopen() {
+  public void staffUserCanCloseAndReopenThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();

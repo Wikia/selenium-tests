@@ -25,7 +25,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = "ForcedLogin_001_newFile")
-  public void ForcedLogin_001_newFile() {
+  public void anonCanLogInViaForcedLoginModalWhenAddingFile() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
@@ -41,7 +41,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = "ForcedLogin_001_newFile")
   @Execute(onWikia = "agas")
-  public void ForcedLogin_001_newFile_authModal() {
+  public void anonCanLogInViaAuthModalModalWhenAddingFile() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
@@ -57,7 +57,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForcedLogin_002_video", "Media"})
-  public void ForcedLogin_002_video() {
+  public void anonCanLoginViaForcedLoginModalWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
@@ -72,7 +72,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = {"ForcedLogin_002_video", "Media"})
   @Execute(onWikia = "agas")
-  public void ForcedLogin_002_video_authModal() {
+  public void anonCanLoginViaAuthModalWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
@@ -88,7 +88,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForcedLogin_003_loginRequired")
-  public void ForcedLogin_003_loginRequired() {
+  public void anonCanLoginViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginReguiredMessage();
@@ -99,7 +99,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForcedLogin_004_notLoggedIn")
-  public void ForcedLogin_004_notLoggedIn() {
+  public void anonCanLoginOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage();
     base.openSpecialWatchListPage(wikiURL);
@@ -112,7 +112,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForcedLogin_005_addMedia")
-  public void ForcedLogin_005_addMedia() {
+  public void anonCanLoginViaForcedLoginModalWhenAddingPhoto() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
@@ -127,7 +127,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   @Test(groups = "ForcedLogin_006_authModal")
   @Execute(onWikia = "agas")
-  public void ForcedLogin_006_addMedia_authModal() {
+  public void anonCanLoginViaAuthModalWhenAddingPhoto() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
