@@ -5,7 +5,6 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -24,10 +23,8 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
-  @RelatedIssue(issueID = "MAIN-6406", comment = "Please, test manually by clicking the delete (bin) icon")
   @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
-    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);

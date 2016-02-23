@@ -12,7 +12,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_001", "ArticleFeaturesCRUDAnon"})
   public void ArticleCRUDAnonymous_001_AddingImage() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickPhotoButton();
     visualEditMode.verifyModalLoginAppeared();
@@ -20,7 +20,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_002", "ArticleFeaturesCRUDAnon"})
   public void ArticleCRUDAnonymous_002_AddingGallery() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickGalleryButton();
     visualEditMode.verifyModalLoginAppeared();
@@ -28,7 +28,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_003", "ArticleFeaturesCRUDAnon"})
   public void ArticleCRUDAnonymous_003_AddingSlideshow() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSlideshowButton();
     visualEditMode.verifyModalLoginAppeared();
@@ -36,7 +36,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_004", "ArticleFeaturesCRUDAnon"})
   public void ArticleCRUDAnonymous_004_AddingSlider() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSliderButton();
     visualEditMode.verifyModalLoginAppeared();
@@ -44,7 +44,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_005", "ArticleFeaturesCRUDAnon"})
   public void ArticleCRUDAnonymous_005_AddingVideo() {
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickVideoButton();
     visualEditMode.verifyModalLoginAppeared();

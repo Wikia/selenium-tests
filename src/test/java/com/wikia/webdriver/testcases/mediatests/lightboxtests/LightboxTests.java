@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -44,7 +44,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_001")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_001_unusedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
     LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
     lightbox.verifyLightboxPopup();
@@ -53,7 +53,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_002")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_002_unusedVideos() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
     LightboxComponentObject lightbox = unusedFiles.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
@@ -62,7 +62,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_003")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_003_uncategorizedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUncategorizedFilesPageObject unusedFiles =
         base.openSpecialUncategorizedFilesPage(wikiURL);
     LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
@@ -72,7 +72,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_004")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_004_mostLinkedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
     LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
     lightbox.verifyLightboxPopup();
@@ -84,7 +84,7 @@ public class LightboxTests extends NewTestTemplate {
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
@@ -118,7 +118,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "Lightbox_006")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_006_verifyCarousel() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.clickPinButton();
@@ -130,7 +130,7 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_007")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_007_specialVideo() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
@@ -146,7 +146,7 @@ public class LightboxTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
-        new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
+        new WikiBasePageObject().openSpecialVideoPage(wikiURL);
 
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
@@ -164,7 +164,7 @@ public class LightboxTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6170", comment = "Test manually")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_009_filepage_image() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
 

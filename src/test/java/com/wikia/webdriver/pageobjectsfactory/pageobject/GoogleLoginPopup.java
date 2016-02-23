@@ -19,7 +19,7 @@ public class GoogleLoginPopup extends BasePageObject{
   private WebElement nextButton;
 
   public GoogleLoginPopup(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void SignInToGoogle(String userName, String password){

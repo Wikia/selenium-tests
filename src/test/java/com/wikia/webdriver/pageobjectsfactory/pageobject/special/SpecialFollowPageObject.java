@@ -19,7 +19,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   private List<WebElement> imagesList;
 
   public SpecialFollowPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SpecialFollowPageObject open() {

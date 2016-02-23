@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.wikiabar;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,8 +15,8 @@ public class WikiaBar extends WikiBasePageObject{
 
   private By keyboardShortcutsModalSelector = By.cssSelector(".global-shortcuts-help");
 
-  public WikiaBar(WebDriver driver) {
-   super(driver);
+  public WikiaBar() {
+   super();
   }
 
   public KeyboardShortcutsModal clickOnShortcutsLink() {
@@ -28,6 +27,6 @@ public class WikiaBar extends WikiBasePageObject{
     wait.forElementVisible(keyboardShortcutsModalSelector);
     PageObjectLogging.logInfo("Keyboard shortcuts modal was opened");
 
-    return new KeyboardShortcutsModal(driver);
+    return new KeyboardShortcutsModal();
   }
 }

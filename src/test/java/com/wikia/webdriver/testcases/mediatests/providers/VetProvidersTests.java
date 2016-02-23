@@ -22,7 +22,7 @@ public class VetProvidersTests extends NewTestTemplate {
     new ArticleContent().clear();
 
     PageObjectLogging.log("", videoUrl, true);
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(videoUrl);
     vetOptions.submit();

@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -38,24 +37,40 @@ public class EditMode extends WikiBasePageObject {
   private WebElement sourceButton;
   @FindBy(css = "a.cke_off.cke_button_table")
   private WebElement addTableButton;
+  @FindBy(css = ".editpage-notices")
+  private WebElement notificationForAnon;
 
   private By submitButtonBy = By.cssSelector("#wpSave");
 
-  public EditMode(WebDriver driver) {
-    super(driver);
+  public EditMode() {
+    super();
   }
 
   private void submit() {
     driver.switchTo().defaultContent();
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
-    wait.forElementNotPresent(submitButtonBy);
-    PageObjectLogging.log("submit", "Page submitted", true);
+
+    PageObjectLogging.logInfo("Submit");
   }
 
   public ArticlePageObject submitArticle() {
     submit();
-    return new ArticlePageObject(driver);
+    wait.forElementNotPresent(submitButtonBy);
+    PageObjectLogging.logInfo("Page submitted");
+
+    return new ArticlePageObject();
+  }
+
+  /**
+   * Submitting an edit is expecting a notification
+   */
+  public EditMode submitExpectingNotification() {
+    submit();
+    wait.forElementVisible(notificationForAnon);
+    PageObjectLogging.logInfo("Notification is visible");
+
+    return this;
   }
 
   public PreviewEditModePageObject previewArticle() {
@@ -67,6 +82,8 @@ public class EditMode extends WikiBasePageObject {
 
   public BlogPageObject submitBlog() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+
     return new BlogPageObject(driver);
   }
 
@@ -120,6 +137,6 @@ public class EditMode extends WikiBasePageObject {
   public VisualEditModePageObject clickVisualButton() {
     visualButton.click();
     PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 }

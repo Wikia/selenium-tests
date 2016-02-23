@@ -24,7 +24,7 @@ public class TemplateComponentObject extends BasePageObject {
   private WebElement mapError;
 
   public TemplateComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public CreatePinTypesComponentObject clickNext() {

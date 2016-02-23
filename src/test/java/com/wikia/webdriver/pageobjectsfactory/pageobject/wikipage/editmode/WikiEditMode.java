@@ -15,7 +15,7 @@ public class WikiEditMode extends WikiBasePageObject {
   private WebElement publishButtonGeneral;
 
   public WikiEditMode(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

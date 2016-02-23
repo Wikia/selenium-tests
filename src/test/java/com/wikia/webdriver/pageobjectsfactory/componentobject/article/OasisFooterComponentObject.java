@@ -13,7 +13,7 @@ public class OasisFooterComponentObject extends WikiBasePageObject {
   private WebElement mobileSiteLink;
 
   public OasisFooterComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public ArticlePageObject clickMobileSiteLink() {

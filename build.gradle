@@ -87,7 +87,7 @@ task getSuite << {
     def jobName = job.split(":")[0]
     def apiSuffix = "api/json?pretty=true"
 
-    def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
+    def JenkinsURL = "http://jenkins.wikia-prod:8080/"
     def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
@@ -224,7 +224,7 @@ task getSuiteForGroup << {
     def jobName = job.split(":")[0]
     def apiSuffix = "api/json?pretty=true"
 
-    def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
+    def JenkinsURL = "http://jenkins.wikia-prod:8080/"
     def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
@@ -380,7 +380,7 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.50.1'
+    def webdriverVersion = '2.51.0'
 
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"

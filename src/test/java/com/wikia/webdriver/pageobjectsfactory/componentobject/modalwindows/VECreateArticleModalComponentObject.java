@@ -20,7 +20,7 @@ public class VECreateArticleModalComponentObject extends WikiBasePageObject {
   private WebElement modal;
 
   public VECreateArticleModalComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

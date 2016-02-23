@@ -18,7 +18,7 @@ public class FollowVideosTests extends NewTestTemplate {
   @Test(groups = "FollowVideo")
   @Execute(asUser = User.USER)
   public void FollowVideo_001_setup() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject special = base.openSpecialVideoPage(wikiURL);
     WatchPageObject watch = special.unfollowVideo(wikiURL, special.getRandomVideo());
     watch.confirmWatchUnwatch();

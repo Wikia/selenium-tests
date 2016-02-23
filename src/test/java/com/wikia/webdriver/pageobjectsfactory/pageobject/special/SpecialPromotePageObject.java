@@ -42,7 +42,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 
 
   public SpecialPromotePageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

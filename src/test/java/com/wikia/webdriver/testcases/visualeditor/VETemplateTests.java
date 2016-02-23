@@ -31,7 +31,7 @@ public class VETemplateTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
   }
 

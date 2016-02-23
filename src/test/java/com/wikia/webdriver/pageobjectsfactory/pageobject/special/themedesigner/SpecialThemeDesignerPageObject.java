@@ -70,7 +70,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
 
   public SpecialThemeDesignerPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SpecialThemeDesignerPageObject openSpecialDesignerPage(String wikiURL) {

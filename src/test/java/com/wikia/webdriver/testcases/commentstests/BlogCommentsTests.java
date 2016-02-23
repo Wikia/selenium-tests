@@ -20,7 +20,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"BlogComments_001", "BlogCommentsTests"})
   public void BlogComments_001_Anon_commentReply() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -41,7 +41,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   @Test(groups = {"BlogComments_002", "BlogCommentsTests"})
   @Execute(asUser = User.USER)
   public void BlogComments_002_User_commentReply() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -63,7 +63,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   @Test(groups = {"BlogComments_003", "BlogCommentsTests"})
   @Execute(asUser = User.USER)
   public void BlogComments_003_User_editComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -82,7 +82,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"BlogComments_004", "BlogCommentsTests"})
   public void BlogComments_004_Admin_deleteComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();

@@ -24,7 +24,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
       }
   )
   public void wallOwnerReceivesNotification_setup() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName9, credentials.password9, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName10);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -44,7 +44,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
       dependsOnMethods = "wallOwnerReceivesNotification_setup"
   )
  public void wallOwnerReceivesNotification_verification() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName10, credentials.password10, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();

@@ -27,7 +27,7 @@ public class PostDetailsPage extends WikiBasePageObject{
   private static final String DEFAULT_POST_ID = "2621148372316194193";
 
   public PostDetailsPage(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public PostDetailsPage open(String wikiID) {

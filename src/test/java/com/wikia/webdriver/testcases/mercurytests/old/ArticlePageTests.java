@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.helpers.Browser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -234,7 +234,7 @@ public class ArticlePageTests extends NewTestTemplate {
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.openSubMenu(2);
-    navigation.openPageLink(5);
+    navigation.openPageLink(6);
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -255,7 +255,7 @@ public class ArticlePageTests extends NewTestTemplate {
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.openSubMenu(2);
-    navigation.openPageLink(4);
+    navigation.openPageLink(5);
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(

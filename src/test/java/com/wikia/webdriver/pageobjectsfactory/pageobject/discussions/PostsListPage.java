@@ -73,7 +73,7 @@ public class PostsListPage extends WikiBasePageObject {
   private static final String DEFAULT_FORUM_ID = "203236";
 
   public PostsListPage(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public PostsListPage open(String wikiID) {

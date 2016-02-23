@@ -17,7 +17,7 @@ public class DeleteAMapComponentObject extends BasePageObject {
   private WebElement deleteMapError;
 
   public DeleteAMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public InteractiveMapsPageObject deleteMap() {

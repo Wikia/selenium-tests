@@ -20,7 +20,7 @@ public class EditHubTests extends NewTestTemplate {
       dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   public void EditHub_001_dashboardSelectVertical(String hubDBName) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialEditHubPageObject
         pageObject =

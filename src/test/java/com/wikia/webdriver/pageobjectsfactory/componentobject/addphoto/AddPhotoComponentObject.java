@@ -27,7 +27,7 @@ public class AddPhotoComponentObject extends BasePageObject {
       .cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li");
 
   public AddPhotoComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void typeSearchQuery(String query) {

@@ -27,7 +27,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
   private WebElement addAPageButton;
 
   public CreateArticleModalComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

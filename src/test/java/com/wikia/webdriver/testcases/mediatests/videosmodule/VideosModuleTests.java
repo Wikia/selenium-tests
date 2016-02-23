@@ -18,12 +18,12 @@ import org.testng.annotations.Test;
 public class VideosModuleTests extends NewTestTemplate {
 
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
-  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated see ticket for details.")
+  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated see ticket for details.")
   public void visitorCanSeeVideosModuleOnArticleAndFilePages() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     videosModule.verifyVideosModuleShowing();
 
     new FilePagePageObject(driver).open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
@@ -36,7 +36,7 @@ public class VideosModuleTests extends NewTestTemplate {
    * File pages. This is just a smoke test to make sure nothing is seriously wrong.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_002", "Media"})
-  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated see ticket for details.")
+  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated see ticket for details.")
   public void VideosModuleTest_002() {
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 
@@ -52,12 +52,12 @@ public class VideosModuleTests extends NewTestTemplate {
    * between 3 and 5.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_003", "Media"})
-  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated "
+  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated "
                                                  + "see ticket for details.")
   public void VideosModuleTest_003() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     new VideosModuleComponentObject(driver).verifyDisplayCount();
   }
 
@@ -65,12 +65,12 @@ public class VideosModuleTests extends NewTestTemplate {
    * Checks if the Videos Module is not showing any duplicate videos
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_004", "Media"})
-  @RelatedIssue(issueID = "MAIN-6332", comment = "Test manually as test is being updated "
+  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated "
                                                  + "see ticket for details.")
   public void VideosModuleTest_004() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     new VideosModuleComponentObject(driver).verifyNoDuplicates();
   }
 }

@@ -25,7 +25,7 @@ public class HubsTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"HubsTest_001", "Hubs", "Smoke4"},
       dataProviderClass = HubsDataProvider.class, dataProvider = "provideHubDBName")
   public void HubsTest_001_verifyMosaicSliderShowsImagesOnHover(String hubDBName) {
-    HomePageObject home = new HomePageObject(driver);
+    HomePageObject home = new HomePageObject();
     HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
     hub.verifyMosaicSliderImages();
 
@@ -54,7 +54,7 @@ public class HubsTests extends NewTestTemplate {
   @Test(groups = {"HubsTest_002", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   public void HubsTest_002_verifyFromCommunityModuleHasItsElements(String hubDBName) {
-    HomePageObject home = new HomePageObject(driver);
+    HomePageObject home = new HomePageObject();
     HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
     hub.verifyFromModuleHasImages();
     hub.verifyFromModuleHasHeadline();
@@ -66,7 +66,7 @@ public class HubsTests extends NewTestTemplate {
    * click on 'Get Promoted' button verify if modal appears and if its fields/buttons are working
    * properly
    */
-  @RelatedIssue(issueID = "MAIN-6408", comment = "gameshub and movieshub now redirect to Fandom, test works only for lifestylehub")
+  @RelatedIssue(issueID = "UPS-450", comment = "gameshub and movieshub now redirect to Fandom, test works only for lifestylehub")
   @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   @Execute(asUser = User.USER_2)
@@ -99,7 +99,7 @@ public class HubsTests extends NewTestTemplate {
     SpecialManageWikiaHome manageWikia =
         new HubBasePageObject(driver).openSpecialManageWikiaHomePage(wikiCorporateURL);
     Map<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
-    HomePageObject home = new HomePageObject(driver).openCorporateHomePage(wikiCorporateURL);
+    HomePageObject home = new HomePageObject().openCorporateHomePage(wikiCorporateURL);
     Map<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
@@ -112,7 +112,7 @@ public class HubsTests extends NewTestTemplate {
    * Verify that each language drop down  goes to the correct page
    */
   public void HubsTest_005_VerifyLanguagesSelection() {
-    HomePageObject home = new HomePageObject(driver);
+    HomePageObject home = new HomePageObject();
     home.openCorporateHomePage(wikiCorporateURL);
     home.verifyLanguageDropdownURLs();
   }
@@ -124,7 +124,7 @@ public class HubsTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-6092", comment = "Product requested that this test is disabled. New" +
           "tests will be create wih MAIN-6101")
   public void HubsTest_006_VerifyLinkInWikiaBar(HubName hubName) {
-    HomePageObject home = new HomePageObject(driver);
+    HomePageObject home = new HomePageObject();
     home.logOut(wikiURL);
     home.openCorporateHomePage(wikiCorporateURL);
     HubBasePageObject hub = new HubBasePageObject(driver);

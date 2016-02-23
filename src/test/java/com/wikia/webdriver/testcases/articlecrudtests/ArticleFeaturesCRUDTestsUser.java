@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
@@ -42,7 +41,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void addGallery() {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.clearContent();
     GalleryBuilderComponentObject galleryBuiler = visualEditMode.clickGalleryButton();
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -64,7 +63,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     new ArticleContent().push("<gallery position=\"right\" columns=\"1\" spacing=\"medium\">\n"
                               + "Image010.jpg\n" + "Image009.jpg\n" + "</gallery>");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     GalleryBuilderComponentObject galleryBuiler =
         (GalleryBuilderComponentObject) visualEditMode.modifyComponent(Components.GALLERY);
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -88,7 +87,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
                               + "Image007.jpg\n"
                               + "</gallery>");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.GALLERY);
     visualEditMode.verifyComponentRemoved(Components.GALLERY);
   }
@@ -98,7 +97,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void addSlideshow() {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     SlideshowBuilderComponentObject slideshowBuilder = visualEditMode.clickSlideshowButton();
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
     slideshowAddPhoto.search("image");
@@ -118,7 +117,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
         + "Image010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\nImage006.jpg\nImage005.jpg\n"
         + "Image004.jpg\nImage003.jpg\n</gallery>");
 
-    VisualEditModePageObject visualEditor = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     SlideshowBuilderComponentObject
         slideshowBuilder =
         (SlideshowBuilderComponentObject) visualEditor.modifyComponent(
@@ -141,7 +140,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
         + "Image010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\nImage006.jpg\nImage005.jpg\n"
         + "Image004.jpg\nImage003.jpg\n</gallery>");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.SLIDESHOW);
     visualEditMode.verifyComponentRemoved(Components.SLIDESHOW);
   }
@@ -151,7 +150,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void addSlider() {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
     sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
     AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
@@ -169,7 +168,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
                               + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 
-    VisualEditModePageObject visualEditor = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     SliderBuilderComponentObject
         sliderBuilder =
         (SliderBuilderComponentObject) visualEditor.modifyComponent(
@@ -190,7 +189,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
     new ArticleContent().push("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\n"
                               + "Image009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 
-    VisualEditModePageObject visualEditor = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditor = new VisualEditModePageObject().open();
     visualEditor.removeComponent(Components.SLIDER);
     visualEditor.verifyComponentRemoved(Components.SLIDER);
   }
@@ -200,7 +199,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void addVideo() {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
         vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -217,7 +216,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
         .push(
             "[[File:Wikia University - How to Contact Wikia|thumb|right|335 px]]QAWebdriverCaption");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetOptionsComponentObject
         vetOptions =
         (VetOptionsComponentObject) visualEditMode.modifyComponent(Components.VIDEO);
@@ -234,7 +233,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
         .push(
             "[[File:Wikia University - How to Contact Wikia|thumb|right|335 px]]QAWebdriverCaption");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
 
     visualEditMode.removeComponent(Components.VIDEO);
     visualEditMode.verifyComponentRemoved(Components.VIDEO);
@@ -245,7 +244,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void modifyImage() {
     new ArticleContent().push("[[File:Image010.jpg|thumb|QAWebdriverCaption1]]");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.modifyComponent(Components.PHOTO);
     PhotoOptionsComponentObject photoOptions = new PhotoOptionsComponentObject(driver);
     photoOptions.setCaption(PageContent.CAPTION2);
@@ -259,7 +258,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void addImage() {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
     PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
     photoOptions.setCaption(PageContent.CAPTION);
@@ -273,7 +272,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void deleteImage() {
     new ArticleContent().push("[[File:Image009.jpg|thumb|QAWebdriverCaption1]]");
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.removeComponent(Components.PHOTO);
     visualEditMode.verifyComponentRemoved(Components.PHOTO);
   }
@@ -286,7 +285,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
                           Alignment alignment) {
     new ArticleContent().clear();
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
     addTable.verifyAddTableLightbox();
     addTable.typeAmountOfRows(3);
@@ -323,7 +322,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
                             + "|}", border, cellpadding, cellspacing, alignment.getAlignment(),
                             height, width));
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
 
     visualEditMode.clickPropertiesTableButton();
     TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
@@ -352,7 +351,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
                             + "|}", border, cellpadding, cellspacing, alignment.getAlignment(),
                             height, width));
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.clickDeleteTableButton();
     visualEditMode.submitArticle().verifyTableRemoved();
   }
@@ -362,9 +361,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void addingImagePlaceholder() {
     new ArticleContent().clear();
 
-    new ArticlePageObject(driver).open();
+    new ArticlePageObject().open();
     VisualEditModePageObject visualEditMode =
-        new WikiBasePageObject(driver)
+        new WikiBasePageObject()
             .goToArticleDefaultContentEditPage(wikiURL, TestContext.getCurrentMethodName());
     ArticlePageObject article = visualEditMode.submitArticle();
     PhotoAddComponentObject photoAddPhoto = article.clickAddImagePlaceholder();

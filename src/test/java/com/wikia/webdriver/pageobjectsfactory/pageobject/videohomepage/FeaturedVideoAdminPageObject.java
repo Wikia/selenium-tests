@@ -21,7 +21,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
   private WebElement saveButton;
 
   public FeaturedVideoAdminPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

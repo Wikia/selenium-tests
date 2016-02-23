@@ -17,7 +17,7 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
   private WebElement searchButton;
 
   public SpecialContributionsPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void selectContributorUserName() {

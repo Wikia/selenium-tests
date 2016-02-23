@@ -25,7 +25,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   private WebElement categoryErrorMsg;
 
   public CreateNewWikiPageObjectStep2(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

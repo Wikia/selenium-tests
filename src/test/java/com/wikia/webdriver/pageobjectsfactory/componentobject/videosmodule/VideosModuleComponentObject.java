@@ -20,7 +20,7 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
   private static final int VIDEO_COUNT_MAX = 5;
 
   public VideosModuleComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyVideosModuleShowing() {

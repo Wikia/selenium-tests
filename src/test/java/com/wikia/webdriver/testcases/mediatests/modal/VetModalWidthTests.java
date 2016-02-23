@@ -34,7 +34,7 @@ public class VetModalWidthTests extends NewTestTemplate {
   @Test(groups = {"VetModalWidth", "VetModalwidth_001", "Media"})
   @Execute(asUser = User.USER)
   public void Vet_Modal_001_widthOnPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
@@ -60,7 +60,7 @@ public class VetModalWidthTests extends NewTestTemplate {
                   "Media"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
   @Execute(asUser = User.USER)
   public void Vet_Modal_002_widthInModal() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     VisualEditModePageObject
         visualEditModePageObject =
         base.navigateToArticleEditPage(wikiURL, articleTitle);

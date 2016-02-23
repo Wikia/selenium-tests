@@ -40,7 +40,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement useAdvancedRecentChangesCheckbox;
 
   public PreferencesPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public PreferencesPageObject open(){
