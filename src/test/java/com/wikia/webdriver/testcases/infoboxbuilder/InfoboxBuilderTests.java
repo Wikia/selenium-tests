@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -10,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.infoboxbuilder.
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ownshership: Content West-Wing
@@ -84,7 +87,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void customizingComponents() {
     init();
-    builder.open("customizingComponents")
+    builder.open("customizingComponents") //checking and unchecking -> need randomized name
         .switchToIFrame()
         .setAndVerifyRowLabelWithIndex(0, "AutomatedTest")
         .setTitleToUseArticleName(0)
@@ -162,6 +165,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builder.open("verifySelectedBorderStyling")
         .switchToIFrame()
         .verifySelectedComponentBorderStyle(0);
+  }
+
+  @Test(groups = {"InfoboxBuilderTests_009"})
+  @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
+  public void verifyReordering() {
+    init();
+    builder.open("verifyReordering")
+        .switchToIFrame()
+        .dragAndDropToTheTop(3)
+        .dragAndDropToTheTop(2)
+        .dragAndDropToTheTop(1);
   }
 
 }

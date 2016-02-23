@@ -8,13 +8,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObje
 import com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ownshership: Content West-Wing
@@ -51,11 +55,11 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   private List<WebElement> titles;
   @FindBy(css = ".portable-infobox .pi-image")
   private List<WebElement> images;
-  @FindBy(css = ".portable-infobox .pi-item")
+  @FindBy(css = ".portable-infobox .sortable-item")
   private List<WebElement> component;
 
   public SpecialInfoboxBuilderPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SpecialInfoboxBuilderPageObject open(String templateName) {
@@ -107,6 +111,11 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     wait.forElementVisible(componentsButtons.get(2));
     componentsButtons.get(2).click();
     return this;
+  }
+
+  public String getComponentTextWithIndex(int index) {
+    wait.forElementVisible(component.get(index));
+    return component.get(index).getText();
   }
 
   public SpecialInfoboxBuilderPageObject deleteTitleComponentWithIndex(List<WebElement> componentsList, int index) {
@@ -212,7 +221,13 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
                     + "document.querySelector('.active'),':after').getPropertyValue('Border')";
     JavascriptExecutor js = (JavascriptExecutor)driver;
     String borderValues = (String) js.executeScript(script);
-    Assertion.assertEquals(borderValues, "2px solid rgb(26, 94, 184)");
+    Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject verifyElementWasMovedToTop(
+      String toBeMovedComponentText) {
+    Assertion.assertEquals(toBeMovedComponentText, component.get(0).getText());
     return this;
   }
 
@@ -239,12 +254,28 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     return this;
   }
 
+  public SpecialInfoboxBuilderPageObject dragAndDropToTheTop(int index) {
+    String componentToBeMovedText = component.get(index).getText();
+    Point location = component.get(component.size() - 1).getLocation();
+    Dimension size = component.get(component.size() - 1).getSize();
+    Integer targetY = location.getY() + size.getHeight();
+    new Actions(driver)
+        .clickAndHold(component.get(index))
+        .moveByOffset(0, targetY)
+        .release(component.get(index))
+        .build()
+        .perform();
+    component.get(component.size() - 1).click();
+    Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
+    return this;
+  }
+
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();
     //wait until template page is loaded
     wait.forElementVisible(driver.findElement(By.className("header-title")));
-    return new TemplatePage(driver);
+    return new TemplatePage();
   }
 
 }
