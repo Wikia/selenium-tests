@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -9,32 +8,18 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.infoboxbuilder.SpecialInfoboxBuilderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownshership: Content West-Wing
  */
 public class InfoboxBuilderTests extends NewTestTemplate {
 
-  private SpecialInfoboxBuilderPageObject builder;
-  private PortableInfoboxPageObject infobox;
-  private TemplatePage templatePage;
-  private SpecialThemeDesignerPageObject themeDesigner;
-
-  void init() {
-    builder = new SpecialInfoboxBuilderPageObject(driver);
-    infobox = new PortableInfoboxPageObject(driver);
-    themeDesigner = new SpecialThemeDesignerPageObject(driver);
-  }
-
   @Test(groups = {"InfoboxBuilderTests_001"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void verifyDefaultStructure() {
-    init();
-    builder.open("verifyDefaultStructure")
+    new SpecialInfoboxBuilderPageObject(driver)
+        .open("verifyDefaultStructure")
         .switchToIFrame()
         .verifyDefaultTemplateStructure();
   }
@@ -42,8 +27,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_002"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void addingComponents() {
-    init();
-    builder.open("addingComponents")
+    new SpecialInfoboxBuilderPageObject(driver).open("addingComponents")
         .switchToIFrame()
         .verifyRowAdded()
         .verifyTitleAdded()
@@ -53,8 +37,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_003"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void savingTemplate() {
-    init();
-    templatePage = builder.open("savingTemplate")
+    SpecialInfoboxBuilderPageObject builder = new SpecialInfoboxBuilderPageObject(driver);
+    TemplatePage templatePage = builder.open("savingTemplate")
         .switchToIFrame()
         .addRowComponent()
         .addImageComponent()
@@ -66,14 +50,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_003"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void deletingComponents() {
-    init();
-    builder.open("deletingComponents")
+    new SpecialInfoboxBuilderPageObject(driver)
+        .open("deletingComponents")
         .switchToIFrame()
+
         /* deleting default components */
         .verifyDeletingTitleWithIndex(0)
         .verifyDeletingImageWithIndex(0)
         .verifyDeletingRowWithIndex(1)
         .verifyDeletingRowWithIndex(0)
+
         /* deleting newly added components */
         .addRowComponent()
         .addImageComponent()
@@ -86,10 +72,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_004"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void customizingComponents() {
-    init();
-    builder.open("customizingComponents") //checking and unchecking -> need randomized name
+    SpecialInfoboxBuilderPageObject builder = new SpecialInfoboxBuilderPageObject(driver);
+    PortableInfoboxPageObject infobox = new PortableInfoboxPageObject(driver);
+
+    builder.open("customizingComponents")
         .switchToIFrame()
         .setAndVerifyRowLabelWithIndex(0, "AutomatedTest")
+        .setLongLabelNameAndVerifyBreakLine(1, "AutomatedTestVeryLabelName")
         .setTitleToUseArticleName(0)
         .save();
 
@@ -99,8 +88,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_005"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void verifyInterfaceFunctionality() {
-    init();
-    builder.open("verifyInterfaceFunctionality")
+    new SpecialInfoboxBuilderPageObject(driver).open("verifyInterfaceFunctionality")
         .switchToIFrame()
         .selectRowWithIndex(0)
         .verifyHelpDialog()
@@ -117,7 +105,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_006"})
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxPreviewTheme() {
-    init();
+    SpecialInfoboxBuilderPageObject builder = new SpecialInfoboxBuilderPageObject(driver);
+    SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
+    PortableInfoboxPageObject infobox = new PortableInfoboxPageObject(driver);
 
     /* select light theme */
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
@@ -147,8 +137,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests_007"})
   @Execute(asUser = User.USER, onWikia = "mediawiki119")
   public void verifyScrolling() {
-    init();
-    builder.open("verifyScrolling")
+    new SpecialInfoboxBuilderPageObject(driver).open("verifyScrolling")
         .switchToIFrame()
         .addImageComponent()
         .addImageComponent()
@@ -160,22 +149,22 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests_008"})
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
-  public void verifySelectedBorderStyling() {
-    init();
-    builder.open("verifySelectedBorderStyling")
+  public void verifyUserInteractions() {
+    new SpecialInfoboxBuilderPageObject(driver).open("verifySelectedBorderStyling")
         .switchToIFrame()
-        .verifySelectedComponentBorderStyle(0);
+        .verifySelectedComponentBorderStyle(0)
+        .verifyTooltipOnHover();
   }
 
   @Test(groups = {"InfoboxBuilderTests_009"})
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyReordering() {
-    init();
-    builder.open("verifyReordering")
+    new SpecialInfoboxBuilderPageObject(driver).open("verifyReordering")
         .switchToIFrame()
         .dragAndDropToTheTop(3)
         .dragAndDropToTheTop(2)
-        .dragAndDropToTheTop(1);
+        .dragAndDropToTheTop(1)
+        .save();
   }
 
 }

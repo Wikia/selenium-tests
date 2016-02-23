@@ -5,8 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-import com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,10 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ownshership: Content West-Wing
@@ -45,6 +40,8 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   private WebElement helpDialog;
   @FindBy(css = ".infobox-builder-preview")
   private WebElement previewArea;
+  @FindBy(css = ".on-hover-tooltip")
+  private WebElement tooltip;
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
   @FindBy(css = ".infobox-builder-button")
@@ -65,11 +62,13 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   public SpecialInfoboxBuilderPageObject open(String templateName) {
     String url = urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_INFOBOX_BUILDER + templateName;
     getUrl(url);
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject switchToIFrame() {
     driver.switchTo().frame(builderIFrame);
+
     return this;
   }
 
@@ -80,41 +79,48 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
   public SpecialInfoboxBuilderPageObject selectTitleWithIndex(int index) {
     wait.forElementVisible(titles.get(index));
     titles.get(index).click();
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject selectImageWithIndex(int index) {
     wait.forElementVisible(images.get(index));
     images.get(index).click();
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject selectRowWithIndex(int index) {
     wait.forElementVisible(rows.get(index));
     rows.get(index).click();
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject addRowComponent() {
     wait.forElementVisible(componentsButtons.get(0));
     componentsButtons.get(0).click();
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject addTitleComponent() {
     wait.forElementVisible(componentsButtons.get(1));
     componentsButtons.get(1).click();
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject addImageComponent() {
     wait.forElementVisible(componentsButtons.get(2));
     componentsButtons.get(2).click();
+
     return this;
   }
 
   public String getComponentTextWithIndex(int index) {
     wait.forElementVisible(component.get(index));
+
     return component.get(index).getText();
   }
 
@@ -123,17 +129,20 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     componentsList.get(index).click();
     wait.forElementVisible(deleteButton);
     deleteButton.click();
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject verifyScrollbarIsVisible() {
     Assertion.assertEquals(previewArea.getCssValue("overflow"), "auto");
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject verifyInfoboxPreviewBackgroundColor(String invocationBgcolor) {
     String previewBackgroundColor = getBackgroundColor();
     Assertion.assertEquals(invocationBgcolor, previewBackgroundColor);
+
     return this;
   }
 
@@ -141,6 +150,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     wait.forElementVisible(backArrowButton);
     backArrowButton.click();
     Assertion.assertTrue(componentsButtons.get(0).isDisplayed());
+
     return this;
   }
 
@@ -148,6 +158,15 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     wait.forElementVisible(questionMarkButton);
     questionMarkButton.click();
     Assertion.assertTrue(helpDialog.isDisplayed());
+
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject verifyTooltipOnHover() {
+    wait.forElementVisible(component.get(0));
+    builder.moveToElement(component.get(0)).perform();
+    Assertion.assertTrue(tooltip.isDisplayed());
+
     return this;
   }
 
@@ -158,24 +177,28 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     Assertion.assertEquals(this.titles.size(), 1);
     Assertion.assertEquals(this.images.size(), 1);
     Assertion.assertEquals(this.rows.size(), 2);
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject verifyRowAdded() {
     int dataLabelsCount = rows.size();
     Assertion.assertEquals(dataLabelsCount + 1, this.addRowComponent().rows.size());
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject verifyTitleAdded() {
     int titlesCount = titles.size();
     Assertion.assertEquals(titlesCount + 1, this.addTitleComponent().titles.size());
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject verifyImageAdded() {
     int imageCount = images.size();
     Assertion.assertEquals(imageCount + 1, this.addImageComponent().images.size());
+
     return this;
   }
 
@@ -183,6 +206,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     int titlesCount = titles.size();
     this.deleteTitleComponentWithIndex(titles, index);
     Assertion.assertEquals(titlesCount, titles.size() + 1);
+
     return this;
   }
 
@@ -190,6 +214,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     int rowsCount = rows.size();
     this.deleteTitleComponentWithIndex(rows, index);
     Assertion.assertEquals(rowsCount, rows.size() + 1);
+
     return this;
   }
 
@@ -197,6 +222,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     int imagesCount = images.size();
     this.deleteTitleComponentWithIndex(images, index);
     Assertion.assertEquals(imagesCount, images.size() + 1);
+
     return this;
   }
 
@@ -204,6 +230,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
       String builderTemplate, TemplatePage createdTemplatePage) {
     Assertion.assertEquals(builderTemplate.toLowerCase(),
                            createdTemplatePage.getHeaderText().toLowerCase());
+
     return this;
   }
 
@@ -211,6 +238,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
       PortableInfoboxPageObject infobox, String templateName) {
     Assertion.assertEquals(infobox.getTitleTextWithIndex(0).toLowerCase(),
                            templateName.toLowerCase());
+
     return this;
   }
 
@@ -222,19 +250,17 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     JavascriptExecutor js = (JavascriptExecutor)driver;
     String borderValues = (String) js.executeScript(script);
     Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
-    return this;
-  }
 
-  public SpecialInfoboxBuilderPageObject verifyElementWasMovedToTop(
-      String toBeMovedComponentText) {
-    Assertion.assertEquals(toBeMovedComponentText, component.get(0).getText());
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject setTitleToUseArticleName(int index) {
     titles.get(index).click();
     wait.forElementVisible(titleCheckbox);
-    titleCheckbox.click();
+    if (!titleCheckbox.isSelected()) {
+      titleCheckbox.click();
+    }
+
     return this;
   }
 
@@ -246,11 +272,26 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     rowLabelInputField.clear();
     rowLabelInputField.sendKeys(labelName);
     Assertion.assertEquals(rowLabels.get(index).getText(), labelName);
+
+    return this;
+  }
+
+  public SpecialInfoboxBuilderPageObject setLongLabelNameAndVerifyBreakLine(
+      int index, String labelName) {
+    wait.forElementVisible(rows.get(index));
+    rows.get(index).click();
+    wait.forElementVisible(rowLabelInputField);
+    rowLabelInputField.click();
+    rowLabelInputField.clear();
+    rowLabelInputField.sendKeys(labelName);
+    Assertion.assertEquals(rowLabels.get(index).getCssValue("word-wrap"), "break-word");
+
     return this;
   }
 
   public SpecialInfoboxBuilderPageObject scrollAndSelectLastComponent() {
     scrollAndClick(component, component.size() - 1);
+
     return this;
   }
 
@@ -267,6 +308,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
         .perform();
     component.get(component.size() - 1).click();
     Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
+
     return this;
   }
 
@@ -275,6 +317,7 @@ public class SpecialInfoboxBuilderPageObject extends SpecialPageObject {
     saveButton.click();
     //wait until template page is loaded
     wait.forElementVisible(driver.findElement(By.className("header-title")));
+
     return new TemplatePage();
   }
 
