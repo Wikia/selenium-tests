@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -34,6 +35,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
+  @RelatedIssue(issueID = "MAIIN-6494", comment = "Product code defect not able to test manually")
   public void ForumThreadTests_002_removeThreadAndUndo() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

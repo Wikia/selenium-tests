@@ -978,4 +978,52 @@ public class AdsDataProvider {
         }
     };
   }
+
+  @DataProvider
+  public static Object[][] adsFloatingMedrec() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage",
+            223909212,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600",
+            223968492,
+            300,
+            600
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper",
+            223968492,
+            300,
+            600
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers",
+            223909212,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec",
+            223909212,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600",
+            237935652,
+            160,
+            600
+        },
+    };
+  }
 }
