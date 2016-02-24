@@ -596,18 +596,34 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerFloatingMedrec() {
+    final String floatingMedrecCssSelector = AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC);
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions.execute(
               " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-          String floatingMedrecCssSelector = AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC);
           return driver.findElements(By.cssSelector(floatingMedrecCssSelector)).size() > 0;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError("Floating Medrec", e);
+      PageObjectLogging.logError("Floating medrec", e);
+    }
+    return this;
+  }
+
+  public AdsBaseObject triggerIncontentLeaderboard() {
+    final String incontentLeaderboard = AdsContent.getSlotSelector(AdsContent.INCONTENT_LEADERBOARD);
+    try {
+      new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
+        @Override
+        public Object apply(WebDriver webDriver) {
+          jsActions.execute("$('#mw-content-text h2')[1].scrollIntoView(true);");
+          return driver.findElements(By.cssSelector(incontentLeaderboard)).size() > 0;
+        }
+      });
+    } catch (org.openqa.selenium.TimeoutException e) {
+      PageObjectLogging.logError("Incontent leaderboard", e);
     }
     return this;
   }
