@@ -18,9 +18,9 @@ The following steps should get you set up for running Selenium tests locally on 
 3. Copy config_default.yml file and name it config.yml (this will be your local config)
 4. Modify credentialsPath property in config.yml to pint credentials.xml from cloned selenium-config repository
 5. In selenium-tests repository run gradle wrapper:
-
+```
     ./gradlew test -Dbrowser=<browser> -Denv=<environment> -Dgroups=<group>
-
+```
 It is also possible to run mobile tests on real devices (Currently only Android is supported). In case of running tests on real devices additional parameters are supported:
 
 1. -Dplatform - determine if IOS or ANDROID should be used
