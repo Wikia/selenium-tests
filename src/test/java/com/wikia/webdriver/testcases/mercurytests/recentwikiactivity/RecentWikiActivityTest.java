@@ -18,11 +18,29 @@ import org.testng.annotations.Test;
 public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test()
+  public void recentWikiActivity_openFromHamburgerMenu() {
+    new RecentWikiActivityPage()
+        .openFromMenu();
+  }
+
+  @Test()
   public void recentWikiActivityAsAnon_redirectionToDiffPageAndGoingBack() {
     new RecentWikiActivityPage()
         .open()
         .getRecentWikiActivity()
         .openDiffPage()
+        .undoButtonNotVisible()
+        .goBackToRWA();
+  }
+
+  @Test()
+  @Execute(asUser = User.BLOCKED_USER)
+  public void recentWikiActivityAsBlockedUser_redirectionToDiffPageAndGoingBack() {
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .undoButtonNotVisible()
         .goBackToRWA();
   }
 
@@ -33,7 +51,8 @@ public class RecentWikiActivityTest extends NewTestTemplate {
         .open()
         .getRecentWikiActivity()
         .openDiffPage()
-        .submitWithoutSummary();
+        .submitWithoutSummary()
+        .displaySuccessNotification();
   }
 
   @Test()
@@ -43,6 +62,17 @@ public class RecentWikiActivityTest extends NewTestTemplate {
         .open()
         .getRecentWikiActivity()
         .openDiffPage()
-        .submitWithSummary();
+        .submitWithSummary()
+        .displaySuccessNotification();
+  }
+
+  @Test()
+  @Execute(asUser = User.USER)
+  public void recentWikiActivityAsUse_goBackFromSummaryWithoutUndo() {
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .goBackFromSummaryPage();
   }
 }

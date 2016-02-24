@@ -16,15 +16,20 @@ public class RecentWikiActivity extends WikiBasePageObject {
   private WebElement seeDiffArrow;
   @FindBy(css = ".diff-page__undo")
   private WebElement undoButton;
+  @FindBy(css = "button.sub-head--cancel")
+  private WebElement backButton;
   @FindBy(css = ".sub-head--cancel")
   private WebElement backArrow;
   @FindBy(css = ".sub-head--done")
   private WebElement undoButtonOnSummaryPage;
   @FindBy(css = ".confirmation-message__textarea")
   private WebElement summaryTestbox;
+  @FindBy(css = ".recent-change")
+  private WebElement diff;
+  @FindBy(css = ".alert-notification.alert-box.success")
+  private WebElement successNote;
 
-  private By undoButtonBy = By.cssSelector(".diff-page_undo");
-  private By undoButtonOnSummaryPageBy = By.cssSelector(".sub-head--done");
+  private By undoButtonBy = By.cssSelector(".diff-page__undo");
 
   private Loading loading;
   private Actions actions;
@@ -34,6 +39,13 @@ public class RecentWikiActivity extends WikiBasePageObject {
 
     this.loading = new Loading(driver);
     this.actions = new Actions(driver);
+  }
+
+  public RecentWikiActivity undoButtonNotVisible() {
+    wait.forElementNotVisible(undoButtonBy);
+    PageObjectLogging.logInfo("Undo button is NOT visible");
+
+    return this;
   }
 
   public RecentWikiActivity openDiffPage() {
@@ -58,7 +70,6 @@ public class RecentWikiActivity extends WikiBasePageObject {
     PageObjectLogging.logInfo("Undo button is clickable");
 
     undoButton.click();
-    wait.forElementNotVisible(undoButtonBy);
     PageObjectLogging.logInfo("Undo button was clicked");
   }
 
@@ -81,21 +92,44 @@ public class RecentWikiActivity extends WikiBasePageObject {
     PageObjectLogging.logInfo("You were redirected to the recent wiki activity");
   }
 
-  public void submitWithoutSummary() {
+  public RecentWikiActivity displaySuccessNotification() {
+    wait.forElementVisible(successNote);
+    PageObjectLogging.logInfo("Success notification was displayed");
+
+    return this;
+  }
+
+  public RecentWikiActivity submitWithoutSummary() {
     submitOnDiffPage();
     submitOnSummaryPage();
+    PageObjectLogging.logInfo("Undo was submitted without any summary");
+
+    return this;
   }
 
   public RecentWikiActivity submitWithSummary() {
     submitOnDiffPage();
     summary("For testing");
     submitOnSummaryPage();
-
     PageObjectLogging.logInfo("Undo was submitted with a short summary");
 
     return this;
   }
 
+  public RecentWikiActivity goBackFromSummaryPage() {
+    submitOnDiffPage();
+
+    wait.forElementClickable(backButton);
+    backButton.click();
+    PageObjectLogging.logInfo("The X button on the summary page was clicked");
+
+    loading.handleAsyncPageReload();
+
+    wait.forElementVisible(diff);
+    PageObjectLogging.logInfo("You were redirected to the diff page");
+
+    return this;
+  }
 
   public RecentWikiActivity goBackToRWA() {
     wait.forElementClickable(backArrow);
