@@ -16,7 +16,7 @@ The following steps should get you set up for running Selenium tests locally on 
 1. Clone this repository to your local machine (not your devbox).
 2. Clone selenium-config repository to your local machine.
 3. Copy `config_default.yml` file and name it `config.yml` (this will be your local config)
-4. Modify `credentialsPath` property in `config.yml` to pint `credentials.xml` from cloned selenium-config repository
+4. Modify `credentialsPath` property in `config.yml` to point `credentials.xml` from cloned selenium-config repository
 5. In selenium-tests repository run gradle wrapper:
 ```
     ./gradlew test -Dbrowser=<browser> -Denv=<environment> -Dgroups=<group>
