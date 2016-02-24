@@ -74,7 +74,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
       dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "MAIN-6070")
-  public void forumNotificationsTests_004_userAVerifiesNotifications() {
+  public void userIsNotifiedWhenRegularAndStaffUsersReplyToHerDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 

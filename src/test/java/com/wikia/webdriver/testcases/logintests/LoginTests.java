@@ -25,13 +25,13 @@ public class LoginTests extends NewTestTemplate {
   String jaTestWiki = "ja.ja-test";
 
   @Test(groups = {"Login_001", "Smoke5"})
-  public void Login_001_specialPageUser() {
+  public void anonCanLoginOnUserLoginSpecialPage() {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     login.loginAndVerify(credentials.userName10, credentials.password10, wikiURL);
   }
 
   @Test(groups = {"Login_002", "Smoke5"})
-  public void Login_002_dropDownUser() {
+  public void anonCanLoginFromDropdown() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
@@ -42,7 +42,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
-  public void Login_003_authModalInGlobalNav_user() {
+  public void anonCanLoginOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
@@ -55,13 +55,13 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "Login_004")
-  public void Login_004_specialPageStaff() {
+  public void anonCanLoginAsStaffOnUserLoginSpecialPage() {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
   }
 
   @Test(groups = "Login_005")
-  public void Login_005_dropDownStaff() {
+  public void anonCanLoginAsStaffFromDropdown() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     DropDownComponentObject dropDown = new DropDownComponentObject(driver);
@@ -72,7 +72,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_006")
   @Execute(onWikia = "agas")
-  public void Login_006_authModalInGlobalNav_staff() {
+  public void anonCanLoginAsStaffOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
@@ -87,7 +87,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_007")
   @Execute(onWikia = "ja.ja-test")
-  public void Login_007_japaneseUserLogin() {
+  public void anonCanLoginAsJapaneseUserOnUserLoginSpecialPage() {
     SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
     specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2,
         wikiURL);
@@ -95,7 +95,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_008")
   @Execute(asUser = User.USER_12)
-  public void userWithoutAValidTokenIsForcedLogout() {
+  public void userWithoutAValidTokenGetsLoggedOut() {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject().open();
