@@ -634,12 +634,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] incontentBoxad() {
-    return new Object[][]{
-        {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
-  }
-
-  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
