@@ -60,7 +60,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
       },
       dependsOnMethods = "followerNotificationNewMessage_setup_2"
   )
-  public void followerNotificationNewMessage_verification() {
+  public void userIsNotifiedWhenOtherUserWritesMessageOnFollowedMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

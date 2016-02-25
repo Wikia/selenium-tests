@@ -50,7 +50,6 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndQuoteMessageWall(reply);
-    ;
     wall.submitQuote();
     wall.verifyQuote(reply);
   }
@@ -62,7 +61,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
       },
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
- public void threadCreatorNotification_verification() {
+ public void userIsNotifiedWhenOtherUserWritesResponseOnHerMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
