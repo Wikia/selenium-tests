@@ -14,18 +14,25 @@ public class RecentWikiActivity extends WikiBasePageObject {
 
   @FindBy(css = ".recent-change__see-diff")
   private WebElement seeDiffArrow;
+
   @FindBy(css = ".diff-page__undo")
   private WebElement undoButton;
+
   @FindBy(css = "button.sub-head--cancel")
   private WebElement backButton;
+
   @FindBy(css = ".sub-head--cancel")
   private WebElement backArrow;
+
   @FindBy(css = ".sub-head--done")
   private WebElement undoButtonOnSummaryPage;
+
   @FindBy(css = ".confirmation-message__textarea")
   private WebElement summaryTestbox;
+
   @FindBy(css = ".recent-change")
   private WebElement diff;
+
   @FindBy(css = ".alert-notification.alert-box.success")
   private WebElement successNote;
 
@@ -57,10 +64,6 @@ public class RecentWikiActivity extends WikiBasePageObject {
     loading.handleAsyncPageReload();
 
     PageObjectLogging.logInfo("The arrow redirecting to the diff page was clicked");
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(urlToBeRedirected),
-                         "You were not redirected to the diff page");
-    PageObjectLogging.logInfo("You were redirected to the diff page");
 
     return this;
   }
