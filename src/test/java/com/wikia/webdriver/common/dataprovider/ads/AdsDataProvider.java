@@ -1050,6 +1050,13 @@ public class AdsDataProvider {
             300,
             250
         },
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/468x60",
+            241472412,
+            468,
+            60
+        },
     };
   }
 }
