@@ -1,7 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -89,10 +87,6 @@ public class RecentWikiActivity extends WikiBasePageObject {
     PageObjectLogging.logInfo("Undo button was clicked");
 
     loading.handleAsyncPageReload();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
-                         "You were not redirected to the recent wiki activity");
-    PageObjectLogging.logInfo("You were redirected to the recent wiki activity");
   }
 
   public RecentWikiActivity displaySuccessNotification() {
@@ -141,10 +135,6 @@ public class RecentWikiActivity extends WikiBasePageObject {
     loading.handleAsyncPageReload();
 
     PageObjectLogging.logInfo("The arrow that redirect user back to RWA was clicked");
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
-                         "You were not redirected to the recent wiki activity");
-    PageObjectLogging.logInfo("You were redirected to the recent wiki activity");
 
     return this;
   }

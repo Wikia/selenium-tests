@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests.recentwikiactivity;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -8,6 +10,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.RecentWikiActivityPage;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "aga")
@@ -16,6 +20,9 @@ import org.testng.annotations.Test;
     emulator = Emulator.GOOGLE_NEXUS_5
 )
 public class RecentWikiActivityTest extends NewTestTemplate {
+
+  @FindBy(css = ".diff-page__undo")
+  private WebElement undoButton;
 
   @Test()
   public void recentWikiActivity_openFromHamburgerMenu() {
@@ -31,6 +38,9 @@ public class RecentWikiActivityTest extends NewTestTemplate {
         .openDiffPage()
         .undoButtonNotVisible()
         .goBackToRWA();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
+                         "You were not redirected to the recent wiki activity");
   }
 
   @Test()
@@ -42,6 +52,9 @@ public class RecentWikiActivityTest extends NewTestTemplate {
         .openDiffPage()
         .undoButtonNotVisible()
         .goBackToRWA();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
+                         "You were not redirected to the recent wiki activity");
   }
 
   @Test()
