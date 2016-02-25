@@ -596,36 +596,29 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerFloatingMedrec() {
-    final String floatingMedrecCssSelector = AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC);
-    try {
-      new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
-        @Override
-        public Object apply(WebDriver webDriver) {
-          jsActions.execute(
-              " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-          return driver.findElements(By.cssSelector(floatingMedrecCssSelector)).size() > 0;
-        }
-      });
-    } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError("Floating medrec", e);
-    }
+    triggerAdSlot(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC),
+                  " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
     return this;
   }
 
   public AdsBaseObject triggerIncontentLeaderboard() {
-    final String incontentLeaderboard = AdsContent.getSlotSelector(AdsContent.INCONTENT_LEADERBOARD);
+    triggerAdSlot(AdsContent.getSlotSelector(AdsContent.INCONTENT_LEADERBOARD),
+                  "$('#mw-content-text h2')[1].scrollIntoView(true);");
+    return this;
+  }
+
+  private void triggerAdSlot(final String adSlotSelector, final String javaScriptTrigger) {
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
-          jsActions.execute("$('#mw-content-text h2')[1].scrollIntoView(true);");
-          return driver.findElements(By.cssSelector(incontentLeaderboard)).size() > 0;
+          jsActions.execute(javaScriptTrigger);
+          return driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError("Incontent leaderboard", e);
+      PageObjectLogging.logError(adSlotSelector + " slot", e);
     }
-    return this;
   }
 
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
