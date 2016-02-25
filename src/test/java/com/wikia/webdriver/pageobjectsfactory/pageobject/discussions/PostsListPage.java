@@ -21,14 +21,17 @@ public class PostsListPage extends WikiBasePageObject {
   @FindBy(css = ".sort span")
   private WebElement labelInSortEntryPointMobile;
 
-  @FindBy(css = ".discussion-sort")
+  @FindBy(css = ".pop-over-container")
   private WebElement sortOptionsMobile;
 
-  @FindBy(xpath = "//li[text()='Latest']")
-  private WebElement latestLinkOnListMobile;
+  @FindBy(css = ".sort-options li:nth-child(1) label")
+  private WebElement trendingOptionInSortMenu;
 
-  @FindBy(xpath = "//li[text()='Trending']")
-  private WebElement trendingLinkOnListMobile;
+  @FindBy(css = ".sort-options li:nth-child(2) label")
+  private WebElement latestOptionInSortMenu;
+
+  @FindBy(css = ".filters-apply")
+  private WebElement applyButtonInSortMenu;
 
   @FindBy(xpath = "//li[text()='Latest']")
   private WebElement latestTabOnDesktop;
@@ -100,17 +103,21 @@ public class PostsListPage extends WikiBasePageObject {
   }
 
   public PostsListPage clickLatestLinkOnMobile() {
-    latestLinkOnListMobile.click();
+    wait.forElementClickable(latestOptionInSortMenu);
+    latestOptionInSortMenu.click();
     return this;
   }
 
-  public PostsListPage clickTrendingLinkOnMobile() {
-    trendingLinkOnListMobile.click();
+  public PostsListPage clickTrendingOptionInSortMenu() {
+    wait.forElementClickable(trendingOptionInSortMenu);
+    trendingOptionInSortMenu.click();
     return this;
   }
 
-  public String getSortButtonLabel() {
-    return labelInSortEntryPointMobile.getText();
+  public PostsListPage clickApplyButton() {
+    wait.forElementClickable(applyButtonInSortMenu);
+    applyButtonInSortMenu.click();
+    return this;
   }
 
   public PostsListPage clickLatestTabOnDesktop() {
@@ -147,11 +154,6 @@ public class PostsListPage extends WikiBasePageObject {
     avatarUsername.click();
     return this;
   }
-
-  public boolean isUserPageHeaderVisible() {
-    return userPageHeader.isDisplayed();
-  }
-
 
   public boolean isUpvoteButtonVisible(int index) {
     WebElement button = replyUpvoteButton.get(index);
@@ -225,4 +227,5 @@ public class PostsListPage extends WikiBasePageObject {
   public void clickGooglePlayLinkInAppPromotion() {
     googlePlayAppLink.click();
   }
+
 }

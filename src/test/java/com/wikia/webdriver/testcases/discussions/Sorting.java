@@ -33,7 +33,7 @@ public class Sorting extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSortPostList", enabled = false)
+  @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
   @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
@@ -71,10 +71,13 @@ public class Sorting extends NewTestTemplate {
   public void userCanSwitchBetweenLatestAndTrendingInDropdown() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickTrendingLinkOnMobile().getSortButtonLabel(), "Trending");
+    postsList.clickLatestLinkOnMobile();
+    postsList.clickApplyButton();
     new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
-    Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
-    Assertion.assertEquals(postsList.clickLatestLinkOnMobile().getSortButtonLabel(), "Latest");
+    postsList.clickSortButtonOnMobile();
+    postsList.clickTrendingOptionInSortMenu();
+    postsList.clickApplyButton();
+    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
   }
 
   public void userCanSwitchBetweenLatestAndTrendingTab() {
