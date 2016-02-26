@@ -50,7 +50,7 @@ public class RecentWikiActivityPage extends WikiBasePageObject {
   }
 
   public RecentWikiActivityPage open(){
-    editArticle("RWA Tests");
+//    editArticle("RWA" + DateTime.now().getMillis());
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.RECENT_WIKI_ACTIVITY));
 
     return this;
