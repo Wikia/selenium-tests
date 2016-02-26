@@ -16,34 +16,49 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
+
   @FindBy(css = ".sub-head .sub-head--done")
   private WebElement saveButton;
+
   @FindBy(css = ".edit-header--delete")
   private WebElement deleteButton;
+
   @FindBy(css = ".checkbox-builder")
   private WebElement titleCheckbox;
+
   @FindBy(css = "#infoboxRowLabel")
   private WebElement rowLabelInputField;
+
   @FindBy(css = ".back-arrow")
   private WebElement backArrowButton;
+
   @FindBy(css = ".infobox-builder-questionmark")
   private WebElement questionMarkButton;
+
   @FindBy(css = ".infobox-builder-sidebar .modal-dialog")
   private WebElement helpDialog;
+
   @FindBy(css = ".infobox-builder-preview")
   private WebElement previewArea;
+
   @FindBy(css = ".on-hover-tooltip")
   private WebElement tooltip;
+
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
+
   @FindBy(css = ".infobox-builder-button")
   private List<WebElement> componentsButtons;
+
   @FindBy(css = ".portable-infobox .pi-data")
   private List<WebElement> rows;
+
   @FindBy(css = ".portable-infobox .pi-title")
   private List<WebElement> titles;
+
   @FindBy(css = ".portable-infobox .pi-image")
   private List<WebElement> images;
+
   @FindBy(css = ".portable-infobox .sortable-item")
   private List<WebElement> component;
 
@@ -185,7 +200,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  /* Verifies default rendered template structure, which should contain:
+  /**
+     Verifies default rendered template structure, which should contain:
      1 title component, 1 image component and 2 row components
   */
   public InfoboxBuilderPage verifyDefaultTemplateStructure() {
@@ -202,7 +218,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     String script = "return window.getComputedStyle("
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
     JavascriptExecutor js = (JavascriptExecutor)driver;
-    String borderValues = (String) js.executeScript(script);
+    String borderValues = js.executeScript(script).toString();
     Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
 
     return this;
@@ -274,5 +290,4 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
     return new TemplatePage();
   }
-
 }
