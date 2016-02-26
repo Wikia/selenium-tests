@@ -30,7 +30,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"})
   @Execute(asUser = User.USER)
-  public void MessageWall_001_writeEdit() {
+  public void userCanCreateAndEditMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -48,7 +48,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_002", "MessageWall"})
   @Execute(asUser = User.USER)
-  public void MessageWall_002_writeRemove() {
+  public void userCanCreateAndRemoveMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -64,7 +64,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_003", "MessageWall"})
   @Execute(asUser = User.STAFF)
-  public void MessageWall_003_writeClose() {
+  public void userCanCreateAndCloseMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -83,7 +83,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_004", "MessageWall"})
   @Execute(asUser = User.STAFF)
-  public void MessageWall_004_writeQuote() {
+  public void userCanCreateAndQuoteMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -101,7 +101,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_005", "MessageWall"})
   @Execute(asUser = User.USER)
-  public void MessageWall_005_writePreview() {
+  public void userCanCreateAndPreviewMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -116,7 +116,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_006", "MessageWall"})
   @Execute(asUser = User.USER)
-  public void MessageWall_006_writeReply() {
+  public void userCanCreateAndReplyToMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -140,7 +140,7 @@ public class MessageWallTests extends NewTestTemplate {
    */
   @Test(groups = {"MessageWall_007", "MeArticleTOCTestsArticleTOCTestsssageWall"})
   @Execute(asUser = User.USER)
-  public void MessageWall_007_unclosedTagPost() {
+  public void CreatingMessageWithUnclosedTagDoesNotShowAvatar() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName11);
     wall.triggerMessageArea();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -161,7 +161,7 @@ public class MessageWallTests extends NewTestTemplate {
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
   @Test(groups = {"MessageWall_008", "MessageWall"})
-  public void MessageWall_008_blockedUserPostsOnHisWall() {
+  public void blockedUserCanCreatePostOnHerMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
     boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
