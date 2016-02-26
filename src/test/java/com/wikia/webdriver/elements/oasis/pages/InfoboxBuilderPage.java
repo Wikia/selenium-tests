@@ -91,7 +91,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public String getBackgroundColor() {
-
     return component.get(0).getCssValue("background-color");
   }
 
@@ -202,9 +201,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   /**
-     Verifies default rendered template structure, which should contain:
-     1 title component, 1 image component and 2 row components
-  */
+   *  Verifies default rendered template structure, which should contain:
+   *  1 title component, 1 image component and 2 row components
+   */
   public InfoboxBuilderPage verifyDefaultTemplateStructure() {
     Assertion.assertEquals(this.titles.size(), 1);
     Assertion.assertEquals(this.images.size(), 1);
@@ -290,6 +289,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();
+
     //wait until template page is loaded
     wait.forElementVisible(driver.findElement(By.className("header-title")));
 
