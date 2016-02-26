@@ -11,9 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import org.testng.annotations.Test;
 
-/**
- * @ownshership: Content West-Wing
- */
 public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests_001"})

@@ -12,9 +12,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
-/**
- * @ownshership: Content West-Wing
- */
 public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".InfoboxBuilder")
