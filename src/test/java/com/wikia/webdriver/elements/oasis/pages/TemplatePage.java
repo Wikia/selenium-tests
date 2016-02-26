@@ -42,7 +42,7 @@ public class TemplatePage extends WikiBasePageObject {
   }
 
   public PortableInfobox getPortableInfobox() {
+
     return portableInfobox;
   }
-
 }

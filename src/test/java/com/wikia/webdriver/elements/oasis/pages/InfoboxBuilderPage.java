@@ -79,18 +79,22 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public int countRows() {
+
     return rows.size();
   }
 
   public int countTitles() {
+
     return titles.size();
   }
 
   public int countImages() {
+
     return images.size();
   }
 
   public String getBackgroundColor() {
+
     return component.get(0).getCssValue("background-color");
   }
 
@@ -213,11 +217,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage verifySelectedComponentBorderStyle(int index) {
-    wait.forElementVisible(component.get(index));
-    component.get(index).click();
+    JavascriptExecutor js = (JavascriptExecutor)driver;
+    WebElement selectedComponent = component.get(index);
+    wait.forElementVisible(selectedComponent);
+    selectedComponent.click();
     String script = "return window.getComputedStyle("
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
-    JavascriptExecutor js = (JavascriptExecutor)driver;
     String borderValues = js.executeScript(script).toString();
     Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
 
@@ -227,6 +232,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage setTitleToUseArticleName(int index) {
     titles.get(index).click();
     wait.forElementVisible(titleCheckbox);
+
     if (!titleCheckbox.isSelected()) {
       titleCheckbox.click();
     }
@@ -270,11 +276,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     Point location = component.get(component.size() - 1).getLocation();
     Dimension size = component.get(component.size() - 1).getSize();
     Integer targetY = location.getY() + size.getHeight();
+
     new Actions(driver)
         .clickAndHold(component.get(index))
         .moveByOffset(0, targetY)
         .release(component.get(index))
         .perform();
+
     wait.forElementClickable(component.get(component.size() - 1));
     component.get(component.size() - 1).click();
     Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
