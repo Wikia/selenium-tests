@@ -24,10 +24,10 @@ public class PostsListPage extends WikiBasePageObject {
   @FindBy(css = ".pop-over-container")
   private WebElement sortOptionsMobile;
 
-  @FindBy(css = ".sort-options li:nth-child(1) label")
+  @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
   private WebElement trendingOptionInSortMenu;
 
-  @FindBy(css = ".sort-options li:nth-child(2) label")
+  @FindBy(css = "label[for='sort-button-main.sort-by-latest']")
   private WebElement latestOptionInSortMenu;
 
   @FindBy(css = ".filters-apply")
