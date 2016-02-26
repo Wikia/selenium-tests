@@ -102,6 +102,7 @@
             <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>
+            <class name="com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.BlockedUserMapTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.DeleteAndRestoreMapTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.EmbedMapTests"/>
