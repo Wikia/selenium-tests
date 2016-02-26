@@ -78,11 +78,17 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public int countRows() { return rows.size(); }
+  public int countRows() {
+    return rows.size();
+  }
 
-  public int countTitles() { return titles.size(); }
+  public int countTitles() {
+    return titles.size();
+  }
 
-  public int countImages() { return images.size(); }
+  public int countImages() {
+    return images.size();
+  }
 
   public String getBackgroundColor() {
 
