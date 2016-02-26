@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @ownshership: Content West-Wing
  */
-public class InfoboxBuilder extends SpecialPageObject {
+public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
@@ -23,7 +23,7 @@ public class InfoboxBuilder extends SpecialPageObject {
   private WebElement saveButton;
   @FindBy(css = ".edit-header--delete")
   private WebElement deleteButton;
-  @FindBy(css = ".checkbox-title .ember-checkbox")
+  @FindBy(css = ".checkbox-builder")
   private WebElement titleCheckbox;
   @FindBy(css = "#infoboxRowLabel")
   private WebElement rowLabelInputField;
@@ -50,92 +50,121 @@ public class InfoboxBuilder extends SpecialPageObject {
   @FindBy(css = ".portable-infobox .sortable-item")
   private List<WebElement> component;
 
-  public InfoboxBuilder() {
+  public InfoboxBuilderPage() {
     super();
   }
 
-  public InfoboxBuilder open(String templateName) {
-    String url = urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_INFOBOX_BUILDER + templateName;
-    getUrl(url);
+  public InfoboxBuilderPage open(String templateName) {
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_INFOBOX_BUILDER + templateName);
 
     return this;
   }
 
-  public InfoboxBuilder switchToIFrame() {
+  public InfoboxBuilderPage switchToIFrame() {
     driver.switchTo().frame(builderIFrame);
 
     return this;
+  }
+
+  public int countRows() {
+    return rows.size();
+  }
+
+  public int countTitles() {
+    return titles.size();
+  }
+
+  public int countImages() {
+    return images.size();
   }
 
   public String getBackgroundColor() {
     return component.get(0).getCssValue("background-color");
   }
 
-  public InfoboxBuilder selectTitleWithIndex(int index) {
+  public InfoboxBuilderPage selectTitleWithIndex(int index) {
     wait.forElementVisible(titles.get(index));
     titles.get(index).click();
 
     return this;
   }
 
-  public InfoboxBuilder selectImageWithIndex(int index) {
+  public InfoboxBuilderPage selectImageWithIndex(int index) {
     wait.forElementVisible(images.get(index));
     images.get(index).click();
 
     return this;
   }
 
-  public InfoboxBuilder selectRowWithIndex(int index) {
+  public InfoboxBuilderPage selectRowWithIndex(int index) {
     wait.forElementVisible(rows.get(index));
     rows.get(index).click();
 
     return this;
   }
 
-  public InfoboxBuilder addRowComponent() {
+  public InfoboxBuilderPage addRowComponent() {
     wait.forElementVisible(componentsButtons.get(0));
     componentsButtons.get(0).click();
 
     return this;
   }
 
-  public InfoboxBuilder addTitleComponent() {
+  public InfoboxBuilderPage addTitleComponent() {
     wait.forElementVisible(componentsButtons.get(1));
     componentsButtons.get(1).click();
 
     return this;
   }
 
-  public InfoboxBuilder addImageComponent() {
+  public InfoboxBuilderPage addImageComponent() {
     wait.forElementVisible(componentsButtons.get(2));
     componentsButtons.get(2).click();
 
     return this;
   }
 
-  public InfoboxBuilder deleteTitleComponentWithIndex(List<WebElement> componentsList, int index) {
-    wait.forElementVisible(componentsList.get(index));
-    componentsList.get(index).click();
+  public InfoboxBuilderPage deleteTitleComponentWithIndex(int index) {
+    wait.forElementVisible(titles.get(index));
+    titles.get(index).click();
     wait.forElementVisible(deleteButton);
     deleteButton.click();
 
     return this;
   }
 
-  public InfoboxBuilder verifyScrollbarIsVisible() {
+  public InfoboxBuilderPage deleteRowComponentWithIndex(int index) {
+    wait.forElementVisible(rows.get(index));
+    rows.get(index).click();
+    wait.forElementVisible(deleteButton);
+    deleteButton.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage deleteImageComponentWithIndex(int index) {
+    wait.forElementVisible(images.get(index));
+    images.get(index).click();
+    wait.forElementVisible(deleteButton);
+    deleteButton.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage verifyScrollbarIsVisible() {
     Assertion.assertEquals(previewArea.getCssValue("overflow"), "auto");
 
     return this;
   }
 
-  public InfoboxBuilder verifyInfoboxPreviewBackgroundColor(String invocationBgcolor) {
+  public InfoboxBuilderPage verifyInfoboxPreviewBackgroundColor(String invocationBgColor) {
     String previewBackgroundColor = getBackgroundColor();
-    Assertion.assertEquals(invocationBgcolor, previewBackgroundColor);
+    Assertion.assertEquals(invocationBgColor, previewBackgroundColor);
 
     return this;
   }
 
-  public InfoboxBuilder verifyBackArrowFunctionality() {
+  public InfoboxBuilderPage verifyBackArrowFunctionality() {
     wait.forElementVisible(backArrowButton);
     backArrowButton.click();
     Assertion.assertTrue(componentsButtons.get(0).isDisplayed());
@@ -143,7 +172,7 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder verifyHelpDialog() {
+  public InfoboxBuilderPage verifyHelpDialog() {
     wait.forElementVisible(questionMarkButton);
     questionMarkButton.click();
     Assertion.assertTrue(helpDialog.isDisplayed());
@@ -151,7 +180,7 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder verifyTooltipOnHover() {
+  public InfoboxBuilderPage verifyTooltipOnHover() {
     wait.forElementVisible(component.get(0));
     builder.moveToElement(component.get(0)).perform();
     Assertion.assertTrue(tooltip.isDisplayed());
@@ -162,7 +191,7 @@ public class InfoboxBuilder extends SpecialPageObject {
   /* Verifies default rendered template structure, which should contain:
      1 title component, 1 image component and 2 row components
   */
-  public InfoboxBuilder verifyDefaultTemplateStructure() {
+  public InfoboxBuilderPage verifyDefaultTemplateStructure() {
     Assertion.assertEquals(this.titles.size(), 1);
     Assertion.assertEquals(this.images.size(), 1);
     Assertion.assertEquals(this.rows.size(), 2);
@@ -170,64 +199,11 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder verifyRowAdded() {
-    int dataLabelsCount = rows.size();
-    Assertion.assertEquals(dataLabelsCount + 1, this.addRowComponent().rows.size());
-
-    return this;
-  }
-
-  public InfoboxBuilder verifyTitleAdded() {
-    int titlesCount = titles.size();
-    Assertion.assertEquals(titlesCount + 1, this.addTitleComponent().titles.size());
-
-    return this;
-  }
-
-  public InfoboxBuilder verifyImageAdded() {
-    int imageCount = images.size();
-    Assertion.assertEquals(imageCount + 1, this.addImageComponent().images.size());
-
-    return this;
-  }
-
-  public InfoboxBuilder verifyDeletingTitleWithIndex(int index) {
-    int titlesCount = titles.size();
-    this.deleteTitleComponentWithIndex(titles, index);
-    Assertion.assertEquals(titlesCount, titles.size() + 1);
-
-    return this;
-  }
-
-  public InfoboxBuilder verifyDeletingRowWithIndex(int index) {
-    int rowsCount = rows.size();
-    this.deleteTitleComponentWithIndex(rows, index);
-    Assertion.assertEquals(rowsCount, rows.size() + 1);
-
-    return this;
-  }
-
-  public InfoboxBuilder verifyDeletingImageWithIndex(int index) {
-    int imagesCount = images.size();
-    this.deleteTitleComponentWithIndex(images, index);
-    Assertion.assertEquals(imagesCount, images.size() + 1);
-
-    return this;
-  }
-
-  public InfoboxBuilder verifyCreatedTemplateName(
-      String builderTemplate, TemplatePage createdTemplatePage) {
-    Assertion.assertEquals(builderTemplate.toLowerCase(),
-                           createdTemplatePage.getHeaderText().toLowerCase());
-
-    return this;
-  }
-
-  public InfoboxBuilder verifySelectedComponentBorderStyle(int index) {
+  public InfoboxBuilderPage verifySelectedComponentBorderStyle(int index) {
     wait.forElementVisible(component.get(index));
     component.get(index).click();
     String script = "return window.getComputedStyle("
-                    + "document.querySelector('.active'),':after').getPropertyValue('Border')";
+                    + "document.querySelector('.active'),':before').getPropertyValue('Border')";
     JavascriptExecutor js = (JavascriptExecutor)driver;
     String borderValues = (String) js.executeScript(script);
     Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
@@ -235,7 +211,7 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder setTitleToUseArticleName(int index) {
+  public InfoboxBuilderPage setTitleToUseArticleName(int index) {
     titles.get(index).click();
     wait.forElementVisible(titleCheckbox);
     if (!titleCheckbox.isSelected()) {
@@ -245,7 +221,7 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder setAndVerifyRowLabelWithIndex(int index, String labelName) {
+  public InfoboxBuilderPage setAndVerifyRowLabelWithIndex(int index, String labelName) {
     wait.forElementVisible(rows.get(index));
     rows.get(index).click();
     wait.forElementVisible(rowLabelInputField);
@@ -257,7 +233,7 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder setLongLabelNameAndVerifyBreakLine(
+  public InfoboxBuilderPage setLongLabelNameAndVerifyBreakLine(
       int index, String labelName) {
     wait.forElementVisible(rows.get(index));
     rows.get(index).click();
@@ -270,13 +246,13 @@ public class InfoboxBuilder extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilder scrollAndSelectLastComponent() {
+  public InfoboxBuilderPage scrollAndSelectLastComponent() {
     scrollAndClick(component, component.size() - 1);
 
     return this;
   }
 
-  public InfoboxBuilder dragAndDropToTheTop(int index) {
+  public InfoboxBuilderPage dragAndDropToTheTop(int index) {
     String componentToBeMovedText = component.get(index).getText();
     Point location = component.get(component.size() - 1).getLocation();
     Dimension size = component.get(component.size() - 1).getSize();
@@ -285,7 +261,6 @@ public class InfoboxBuilder extends SpecialPageObject {
         .clickAndHold(component.get(index))
         .moveByOffset(0, targetY)
         .release(component.get(index))
-        .build()
         .perform();
     wait.forElementClickable(component.get(component.size() - 1));
     component.get(component.size() - 1).click();
