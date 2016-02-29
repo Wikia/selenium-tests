@@ -40,7 +40,7 @@ public class FacebookTests extends NewTestTemplate {
    */
   @Test
   @UseUnstablePageLoadStrategy
-  public void linkWithNewAccountNoEmailPermission() {
+  public void userCanSignupViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword());
 
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
@@ -63,7 +63,7 @@ public class FacebookTests extends NewTestTemplate {
    */
   @Test
   @UseUnstablePageLoadStrategy
-  public void linkWithExistingWikiaAccount() {
+  public void userCanLoginViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
 
@@ -82,7 +82,7 @@ public class FacebookTests extends NewTestTemplate {
   @Test
   @UseUnstablePageLoadStrategy
   @RelatedIssue(issueID = "QAART-727", comment = "Test unstable, test manually or locally")
-  public void connectUsingUserPreferences() {
+  public void userCanConnectToFacebookViaUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
 
@@ -99,7 +99,7 @@ public class FacebookTests extends NewTestTemplate {
 
   @Test
   @UseUnstablePageLoadStrategy
-  public void signUpWithFacebook() {
+  public void userCanConnectToFacebookOnUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
     WikiBasePageObject base = new WikiBasePageObject();

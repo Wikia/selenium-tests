@@ -27,7 +27,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   @Test()
   @RelatedIssue(issueID = "QAART-703", comment = "Please test manually ")
-  public void remindPasswordFromLoginDropdown() {
+  public void anonCanRemindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
@@ -54,7 +54,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   @Test()
   @Execute(onWikia = "agas")
-  public void remindPasswordFromLoginNewAuthModal() {
+  public void anonCanRemindPasswordFromAuthModal() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
@@ -81,7 +81,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  public void remindPasswordOnSpecialPage() {
+  public void anonCanRemindPasswordOnUserLoginSpecialPage() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
@@ -103,7 +103,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
 
   @Test
-  public void remindPasswordLowercaseUsernameOnSpecialPage() {
+  public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
     String userNameUC = credentials.userNameForgottenPassword3;
     String userName = userNameUC.toLowerCase();
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
@@ -127,7 +127,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test
-  public void remindPasswordWhileCreatingWiki() {
+  public void anonCanRemindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();

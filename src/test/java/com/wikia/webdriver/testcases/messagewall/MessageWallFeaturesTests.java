@@ -23,7 +23,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_001_sourceMode() {
+  public void userCanWriteMessageInSourceMode() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -37,7 +37,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_002_boldMode() {
+  public void userCanWriteMessageInBold() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -51,7 +51,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_003_italicMode() {
+  public void userCanWriteMessageInItallic() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -65,7 +65,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_004_image() {
+  public void userCanWriteMessageWithImage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
@@ -80,7 +80,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_005_internalLink() {
+  public void userCanWriteMessageWithInternalLink() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
@@ -93,7 +93,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_006_externalLink() {
+  public void userCanWriteMessageWithExternalLink() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);

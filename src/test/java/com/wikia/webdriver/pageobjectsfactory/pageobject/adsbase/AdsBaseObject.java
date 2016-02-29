@@ -57,7 +57,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   };
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-  private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
@@ -68,8 +67,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
-  @FindBy(css = INCONTENT_BOXAD_SELECTOR)
-  private WebElement incontentBoxad;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
@@ -130,10 +127,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       return;
     }
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
-  }
-
-  public void verifyIncontentBoxad() {
-    verifyAdVisibleInSlot(INCONTENT_BOXAD_SELECTOR, incontentBoxad);
   }
 
   public void verifyFliteTag(String cssFliteSelector) {
