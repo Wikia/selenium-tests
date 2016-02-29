@@ -59,7 +59,7 @@ public class RedirectionTests extends NewTestTemplate {
     redirectFromFullSiteToOasis();
   }
 
-  @Test(groups = "MercuryRedirectionTest_003")
+  @Test(groups = "MercuryRedirectionTest_003", enabled = false)
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "XW-1131")
   public void MercuryRedirectionTest_003_RedirectFromFullSiteToOasisAsLoggedInUser() {
