@@ -15,7 +15,7 @@ public class CuratedMainPagePageObject {
 
   @FindBy(css = ".mobile-top-leaderboard")
   private WebElement mobileTopLeaderboard;
-  @FindBy(css = ".article-title")
+  @FindBy(css = ".wiki-page-title")
   private WebElement articleTitle;
   @FindBy(css = ".wikia-stats-container")
   private WebElement wikiaStatsContainer;

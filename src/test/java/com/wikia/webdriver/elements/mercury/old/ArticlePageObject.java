@@ -33,7 +33,7 @@ public class ArticlePageObject {
   private WebElement categoryButton;
   @FindBy(xpath = "//nav/div[node()=\"Categories\"]/../ul/li")
   private List<WebElement> categoryList;
-  @FindBy(css = ".article-title")
+  @FindBy(css = ".wiki-page-title")
   private WebElement articleTitle;
   @FindBy(css = ".article-content a")
   private List<WebElement> anchorsInContent;
