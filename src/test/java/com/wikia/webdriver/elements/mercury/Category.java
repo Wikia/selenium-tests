@@ -3,8 +3,6 @@ package com.wikia.webdriver.elements.mercury;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.skin.Skin;
-import com.wikia.webdriver.common.skin.SkinHelper;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,10 +21,12 @@ public class Category {
 
   private WebDriver driver;
   private Wait wait;
+  private Loading loading;
 
   public Category(WebDriver driver) {
     this.driver = driver;
     this.wait = new Wait(driver);
+    this.loading = new Loading(driver);
 
     PageFactory.initElements(driver, this);
   }
@@ -46,9 +46,8 @@ public class Category {
     PageObjectLogging.logInfo("Open category link no.: " + index);
     wait.forElementClickable(link);
     link.click();
+    loading.handleAsyncPageReload();
 
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.WIKIAMOBILE),
-                         "Skin is different than Wikia Mobile");
     Assertion.assertTrue(driver.getCurrentUrl().contains("/wiki/Category:"),
                          "Url is different than /wiki/Category:");
     PageObjectLogging.logInfo("You were redirected to /wiki/Category:");
