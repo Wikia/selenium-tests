@@ -41,7 +41,7 @@ public class PortableInfoboxObject {
   private WebElement imageInTitle;
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
-  @FindBy(css = ".portable-infobox .linked-gallery button")
+  @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
   private List<WebElement> galleryButtonList;
   @FindBy(css = ".image-collection-actions .action-next")
   private WebElement nextImageArrow;
