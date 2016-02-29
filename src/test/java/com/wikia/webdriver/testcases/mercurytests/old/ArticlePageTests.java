@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests.old;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikisuaouaoeuouao
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
