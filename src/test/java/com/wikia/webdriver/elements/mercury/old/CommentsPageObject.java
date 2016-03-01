@@ -47,6 +47,7 @@ public class CommentsPageObject {
   private Wait wait;
   private WebDriver driver;
   private JavascriptActions jsActions;
+  private By.ByCssSelector commentsContainerBy = new By.ByCssSelector("ul.comments");
 
   public CommentsPageObject(WebDriver driver) {
     this.wait = new Wait(driver);
@@ -196,7 +197,7 @@ public class CommentsPageObject {
         .contains("/wiki/File:");
   }
 
-  public void waitForFirstCommentToBeVisible() {
-    wait.forElementVisible(allComments.get(0));
+  public void waitForCommentsToLoad() {
+    wait.forElementVisible(commentsContainerBy);
   }
 }
