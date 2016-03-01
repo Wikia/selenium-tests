@@ -160,6 +160,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = {"SignUp_007", "SignUp"})
   @Execute(onWikia = "ja.ja-test")
+  @RelatedIssue(issueID = "QAART-744", comment = "Mail timeout causes the test to fail. Monitor the ticket status")
   public void anonCanSignupWithUsernameContainingJapaneseSpecialCharacters() {
     SignUpPageObject signUp = new WikiBasePageObject().navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
