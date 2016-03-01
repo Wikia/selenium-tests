@@ -143,6 +143,7 @@ public class LightboxTests extends NewTestTemplate {
    */
   @Test(groups = "LightboxTest_008")
   @Execute(asUser = User.USER, disableFlash = "false")
+  @RelatedIssue(issueID = "SUS-64", comment = "Test is unstable. Should pass locally.")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
     SpecialVideosPageObject specialVideos =
