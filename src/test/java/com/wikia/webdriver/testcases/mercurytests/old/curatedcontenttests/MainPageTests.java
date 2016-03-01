@@ -8,7 +8,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -33,7 +32,7 @@ public class MainPageTests extends NewTestTemplate {
    */
   private enum PageElements {
     TOP_LEADERBOARD("Top Leaderboard AD", ".mobile-top-leaderboard"),
-    ARTICLE_TITLE("Article Title", ".article-title"),
+    ARTICLE_TITLE("Article Title", ".wiki-page-title"),
     WIKIA_STATS("Wikia Stats Container", ".wikia-stats-container"),
     FEATURED_CONTENT("Featured Content", ".featured-content"),
     CURATED_CONTENT("Curated Content", ".curated-content"),
@@ -74,7 +73,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
     new ArticlePageObject(driver).waitForFooterToBeVisible();
 
-    boolean result = driver.getCurrentUrl().contains(UrlBuilder.getUrlForPage(ROOT_PATH));
+    boolean result = driver.getCurrentUrl().contains(ROOT_PATH);
     PageObjectLogging.log(
         "Current URL",
         "is set on " + ROOT_PATH,
