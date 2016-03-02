@@ -80,7 +80,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   @RelatedIssue(issueID = "SUS-64", comment = "Make sure that anyclip video "
                                                  + "autoplays in the lightbox")
   @Execute(disableFlash = "false", onWikia = "sktest123")
-  @InBrowser(browserSize = BROWSER_SIZE)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";
