@@ -38,7 +38,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
-  @RelatedIssue(issueID = "MAIN-6038", comment = "Test manually")
+  @RelatedIssue(issueID = "SUS-64", comment = "Test manually")
   @Execute(disableFlash = "false", onWikia = "sktest123")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_002_ooyala() {
