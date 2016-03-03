@@ -11,10 +11,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import org.testng.annotations.Test;
 
+@Test(groups = "InfoboxBuilderTests")
 @Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_001"})
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
     new InfoboxBuilderPage()
@@ -23,7 +23,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .verifyDefaultTemplateStructure();
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_002"})
   @Execute(asUser = User.USER)
   public void addingComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
@@ -40,7 +39,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(imageComponents + 1, builder.countImages());
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_003"})
   @Execute(asUser = User.USER)
   public void savingTemplate() {
     TemplatePage templatePage = new InfoboxBuilderPage()
@@ -53,7 +51,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals("savingtemplate", templatePage.getHeaderText().toLowerCase());
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_004"})
   @Execute(asUser = User.USER)
   public void deletingDefaultComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
@@ -70,7 +67,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
                            builder.deleteImageComponentWithIndex(0).countImages());
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_005"})
   @Execute(asUser = User.USER)
   public void deletingAddedComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
@@ -95,7 +91,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_006"})
   @Execute(asUser = User.USER)
   public void customizingComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
@@ -116,7 +111,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(infoboxPreviewBackground, infoboxBackground);
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_007"})
   @Execute(asUser = User.USER)
   public void verifyInterfaceFunctionality() {
     new InfoboxBuilderPage().open("verifyInterfaceFunctionality")
@@ -133,7 +127,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .verifyBackArrowFunctionality();
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_008"})
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxPreviewTheme() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
@@ -165,7 +158,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   /* Verify if scrolling is enabled when Infobox's height in
   preview is greater than the preview area height. */
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_009"})
   @Execute(asUser = User.USER)
   public void verifyScrolling() {
     new InfoboxBuilderPage().open("verifyScrolling")
@@ -178,7 +170,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .scrollAndSelectLastComponent();
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_010"})
   @Execute(asUser = User.STAFF)
   public void verifyUserInteractions() {
     new InfoboxBuilderPage().open("verifySelectedBorderStyling")
@@ -187,7 +178,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .verifyTooltipOnHover();
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilderTests_011"})
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     new InfoboxBuilderPage().open("verifyReordering")
