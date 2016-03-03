@@ -21,7 +21,6 @@ import org.testng.annotations.Test;
 @Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  @Test(groups = {"PortableInfoboxTests_001", "PortableInfoboxTests_1"})
   @Execute(onWikia = "mediawiki119")
   public void verifyElementsVisibility() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
@@ -30,7 +29,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxTitlePresented().areLinksInPoemTagPresented();
   }
 
-  @Test(groups = {"PortableInfoboxTests_002", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
   public void verifyElementsRedirects() {
     PortableInfobox info = new PortableInfobox();
@@ -58,7 +56,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.compareURLAndInternalLink(internalLinkName, internalURL);
   }
 
-  @Test(groups = {"PortableInfoboxTests_003", "PortableInfoboxTests_3"})
   @Execute(onWikia = "mediawiki119")
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject();
@@ -69,21 +66,18 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyInfoboxArticleInList(articleName);
   }
 
-  @Test(groups = {"PortableInfoboxTests_004", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
   public void verifyLightboxVisibilityAfterClickingImage() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01).clickImage()
         .isLightboxPresented();
   }
 
-  @Test(groups = {"PortableInfoboxTests_005", "PortableInfoboxTests_3"})
   @Execute(onWikia = "mediawiki119")
   public void verifyVisibilityOfTabberAndItsImages() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_02).isTabberPresented()
         .isTabberImagePresented();
   }
 
-  @Test(groups = {"PortableInfoboxTests_006", "PortableInfoboxTests_1"})
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
@@ -102,7 +96,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
   }
 
-  @Test(groups = {"PortableInfoboxTests_007", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
   public void verifyOrderedAndUnorderedLists() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_02)
@@ -110,7 +103,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests_008", "PortableInfoboxTests_3"})
   @Execute(onWikia = "mediawiki119")
   public void verifyInfoboxCategoryLinks() {
     PortableInfobox info =
@@ -121,7 +113,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new CategoryPageObject(driver).verifyCategoryPageTitle(categoryLinkName);
   }
 
-  @Test(groups = {"PortableInfoboxTests_09", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
   public void verifyHorizontalGroupFontSize() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
@@ -129,7 +120,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .compareFontSizesBetweenHorizontalItemValueAndItemValue();
   }
 
-  @Test(groups = {"PortableInfoboxTests_010", "PortableInfoboxTests_3"})
   @Execute(asUser = User.USER_9, onWikia = "mediawiki119")
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePage template = new TemplatePage();
@@ -147,21 +137,18 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new PortableInfobox().isImagePresented().isInfoboxTitlePresented();
   }
 
-  @Test(groups = {"PortableInfoboxTests_011", "PortableInfoboxTests_1"})
   @Execute(onWikia = "mediawiki119")
   public void verifyNavigationElementPadding() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
         .verifyPaddingNavigationElementWithIndex(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests_012", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
   public void verifyGroupHeadersPadding() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
         .verifyGroupHeaderPaddingWithIndex(1);
   }
 
-  @Test(groups = {"PortableInfoboxTests_013", "PortableInfoboxTests_3"})
   @Execute(onWikia = "mediawiki119")
   public void verifyDivsWrappersAreNotIncluded() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
@@ -169,14 +156,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .verifyDivsNotAppearingInHeaderWithIndex(0);
   }
 
-  @Test(groups = {"PortableInfoboxTests_015", "PortableInfoboxTests_1"})
   @Execute(onWikia = "mediawiki119")
   public void verifyEmptyTagsAreNotAppearing() {
     new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
         .verifyEmptyTags();
   }
 
-  @Test(groups = {"PortableInfoboxTests_014", "PortableInfoboxTests_2"})
   @Execute(onWikia = "mediawiki119")
   public void insertEmptyInfoboxInVE() {
     (new ArticleContent()).clear();
@@ -186,7 +171,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isInfoboxInsertedInEditorArea();
   }
 
-  @Test(groups = {"PortableInfoboxTests_015", "PortableInfoboxTests_3"})
   @Execute(onWikia = "mediawiki119")
   public void insertInfoboxWithParametersInVE() {
     (new ArticleContent()).clear();
@@ -197,7 +181,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickApplyChanges().isInfoboxInsertedInEditorArea();
   }
 
-  @Test(groups = {"PortableInfoboxTests_016", "PortableInfoboxTests_1"})
   @Execute(onWikia = "mediawiki119")
   public void editInfoboxInVEbyPopup() {
     (new ArticleContent()).clear();
@@ -210,7 +193,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickApplyChanges().isInfoboxInsertedInEditorArea();
   }
 
-  @Test(groups = {"PortableInfoboxTests_017", "PortableInfoboxTests_2"})
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
     (new ArticleContent()).clear();
@@ -225,7 +207,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickApplyChanges().isInfoboxInsertedInEditorArea();
   }
 
-  @Test(groups = {"PortableInfoboxTests_018", "PortableInfoboxTests_2"})
   public void infoboxImageOnCategoryPage() {
     PortableInfobox info = new PortableInfobox();
 
@@ -241,5 +222,4 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     info.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
   }
-
 }
