@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -58,8 +59,9 @@ public class RedirectionTests extends NewTestTemplate {
     redirectFromFullSiteToOasis();
   }
 
-  @Test(groups = "MercuryRedirectionTest_003")
+  @Test(groups = "MercuryRedirectionTest_003", enabled = false)
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "XW-1131")
   public void MercuryRedirectionTest_003_RedirectFromFullSiteToOasisAsLoggedInUser() {
     redirectFromFullSiteToOasis();
   }

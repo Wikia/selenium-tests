@@ -57,7 +57,7 @@ public class CommentsTests extends NewTestTemplate {
     );
 
     comments.clickCommentsHeader();
-    comments.waitForFirstCommentToBeVisible();
+    comments.waitForCommentsToLoad();
 
     Assertion.assertFalse(
         comments.isCommentsListCollapsed(),
@@ -116,7 +116,7 @@ public class CommentsTests extends NewTestTemplate {
     init();
 
     comments.clickCommentsHeader();
-    comments.waitForFirstCommentToBeVisible();
+    comments.waitForCommentsToLoad();
     int numberOfComments = comments.getNumberOfCommentsFromHeader();
 
     Assertion.assertTrue(
@@ -179,7 +179,7 @@ public class CommentsTests extends NewTestTemplate {
     init();
 
     comments.clickCommentsHeader();
-    comments.waitForFirstCommentToBeVisible();
+    comments.waitForCommentsToLoad();
 
     Assertion.assertFalse(
         comments.isRepliesListExpanded(),
@@ -220,7 +220,7 @@ public class CommentsTests extends NewTestTemplate {
     init();
 
     comments.clickCommentsHeader();
-    comments.waitForFirstCommentToBeVisible();
+    comments.waitForCommentsToLoad();
     String username = comments.getUserUsername(0);
     comments.clickOnUsername(0);
     new Wait(driver).forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
@@ -239,7 +239,7 @@ public class CommentsTests extends NewTestTemplate {
     init();
 
     comments.clickCommentsHeader();
-    comments.waitForFirstCommentToBeVisible();
+    comments.waitForCommentsToLoad();
 
     boolean result =
         comments.isMediaThumbnailInComment(MEDIA_TYPE_VIDEO, COMMENT_NUMBER_WITH_VIDEO);
