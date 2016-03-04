@@ -41,7 +41,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_001", "Chat"})
+  @Test(groups = {"Chat_001", "Chat", "ChatTests"})
   @RelatedIssue(issueID = "MAIN-6071")
   public void Chat_001_twoUserEnterChat() {
     ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -57,7 +57,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_002", "Chat"})
+  @Test(groups = {"Chat_002", "Chat", "ChatTests"})
   public void Chat_002_dropDownMenuForRegularUser() {
     ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.verifyChatPage();
@@ -71,7 +71,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_003", "Chat"})
+  @Test(groups = {"Chat_003", "Chat", "ChatTests"})
   public void Chat_003_dropDownMenuForBlockedUser() {
     ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.verifyChatPage();
@@ -93,7 +93,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_004", "Chat"})
+  @Test(groups = {"Chat_004", "Chat", "ChatTests"})
   public void Chat_004_verifySwitchingBetweenMainAndPrivateSections() {
     ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.verifyChatPage();
@@ -119,7 +119,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_005", "Chat"})
+  @Test(groups = {"Chat_005", "Chat", "ChatTests"})
   public void Chat_005_sendPrivateMessage() {
     ChatPageObject chatUserThree = openChatForUser(userThree, userThreePassword);
     chatUserThree.verifyChatPage();
@@ -146,7 +146,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_006", "Chat"})
+  @Test(groups = {"Chat_006", "Chat", "ChatTests"})
   public void Chat_006_multipleNotifications() {
     ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
 
@@ -172,7 +172,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_007", "Chat", "Modals"})
+  @Test(groups = {"Chat_007", "Chat", "Modals", "ChatTests"})
   public void Chat_007_banUser() {
     openChatForUser(userToBeBanned, userToBeBannedPassword);
 

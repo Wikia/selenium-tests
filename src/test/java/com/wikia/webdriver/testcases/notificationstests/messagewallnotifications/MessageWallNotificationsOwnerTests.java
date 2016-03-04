@@ -20,7 +20,8 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   @Test(
       groups = {
           "MessageWallNotificationsOwnerTests_001",
-          "MessageWallNotificationsOwnerTests"
+          "MessageWallNotificationsOwnerTests",
+          "NotificationsTests"
       }
   )
   public void wallOwnerReceivesNotification_setup() {
@@ -39,7 +40,8 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   @Test(
       groups = {
           "MessageWallNotificationsOwnerTests_002",
-          "MessageWallNotificationsOwnerTests"
+          "MessageWallNotificationsOwnerTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "wallOwnerReceivesNotification_setup"
   )

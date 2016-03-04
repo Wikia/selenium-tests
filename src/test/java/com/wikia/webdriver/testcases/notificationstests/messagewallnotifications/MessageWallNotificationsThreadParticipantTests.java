@@ -29,7 +29,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsThreadParticipantTests_001",
-          "MessageWallNotificationsThreadParticipantTests"
+          "MessageWallNotificationsThreadParticipantTests",
+          "NotificationsTests"
       }
   )
   public void threadCreatorNotification_setup_1() {
@@ -48,7 +49,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsThreadParticipantTests_002",
-          "MessageWallNotificationsThreadParticipantTests"
+          "MessageWallNotificationsThreadParticipantTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "threadCreatorNotification_setup_1"
   )
@@ -66,7 +68,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsThreadParticipantTests_003",
-          "MessageWallNotificationsThreadParticipantTests"
+          "MessageWallNotificationsThreadParticipantTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
@@ -85,7 +88,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsThreadParticipantTests_004",
-          "MessageWallNotificationsThreadParticipantTests"
+          "MessageWallNotificationsThreadParticipantTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "threadCreatorNotification_setup_3"
   )

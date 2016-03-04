@@ -22,7 +22,7 @@ public class ChatTestsStaff extends NewTestTemplate {
   }
 
   @DontRun(env = {"sandbox"})
-  @Test(groups = {"ChatTestsStaff_001", "ChatStaff"})
+  @Test(groups = {"ChatTestsStaff_001", "ChatStaff", "ChatTests"})
   public void ChatTestsStaff_001_twoUserEnterChat() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
@@ -40,7 +40,7 @@ public class ChatTestsStaff extends NewTestTemplate {
   }
 
   @DontRun(env = {"sandbox"})
-  @Test(groups = {"ChatTestsStaff_002", "ChatStaff"})
+  @Test(groups = {"ChatTestsStaff_002", "ChatStaff", "ChatTests"})
   public void ChatTestsStaff_002_verifySwitchingBetweenMainAndPrivateSections() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
@@ -68,7 +68,7 @@ public class ChatTestsStaff extends NewTestTemplate {
   }
 
   @DontRun(env = {"sandbox"})
-  @Test(groups = {"ChatTestsStaff_003", "ChatStaff"})
+  @Test(groups = {"ChatTestsStaff_003", "ChatStaff", "ChatTests"})
   public void ChatTestsStaff_003_sendPrivateMessage() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
@@ -98,7 +98,7 @@ public class ChatTestsStaff extends NewTestTemplate {
   }
 
   @DontRun(env = {"prod"})
-  @Test(groups = {"ChatTestsStaff_004", "ChatStaff"})
+  @Test(groups = {"ChatTestsStaff_004", "ChatStaff", "ChatTests"})
   public void ChatTestsStaff_004_basicUserChatFails() {
     openChatForUser(credentials.userName10, credentials.password10);
     SpecialPageObject special = new SpecialPageObject();
