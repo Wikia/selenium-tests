@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"VetProvidersArticle", "Media"})
+@Test(groups = {"VetProvidersArticle", "ProviderTests", "Media"})
 public class VetProvidersTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
