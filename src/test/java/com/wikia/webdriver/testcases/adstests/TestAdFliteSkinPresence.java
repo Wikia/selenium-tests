@@ -34,17 +34,51 @@ public class TestAdFliteSkinPresence extends TemplateNoFirstLoad {
     driver.switchTo().frame("google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0");
     driver.switchTo().frame("f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed");
     driver.switchTo().frame(driver.findElement(By.className("flite-ad")));
-    WebElement element = driver.findElement(By.cssSelector("div[id*='div18']"));
+    WebElement fliteAdButton2 = driver.findElement(By.cssSelector("div[id*='div18']"));
     Actions action = new Actions(driver);
-    action.moveToElement(element).perform();
-    action.perform();
-    driver.switchTo().defaultContent();
-    driver.switchTo().defaultContent();
+    action.moveToElement(fliteAdButton2).perform();
     driver.switchTo().defaultContent();
 
     adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_2.png",
                              "src/test/resources/adsResources/flite_skin_right_2.png",
                              null,
                              null);
+
+    driver.switchTo().frame("google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0");
+    driver.switchTo().frame("f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed");
+    driver.switchTo().frame(driver.findElement(By.className("flite-ad")));
+    WebElement fliteAdButton3 = driver.findElement(By.cssSelector("div[id*='div16']"));
+    action.moveToElement(fliteAdButton3).perform();
+    driver.switchTo().defaultContent();
+
+    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_3.png",
+                             "src/test/resources/adsResources/flite_skin_right_3.png",
+                             null,
+                             null);
+
+    driver.switchTo().frame("google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0");
+    driver.switchTo().frame("f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed");
+    driver.switchTo().frame(driver.findElement(By.className("flite-ad")));
+    WebElement fliteAdButton4 = driver.findElement(By.cssSelector("div[id*='div14']"));
+    action.moveToElement(fliteAdButton4).perform();
+    driver.switchTo().defaultContent();
+
+    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_4.png",
+                             "src/test/resources/adsResources/flite_skin_right_4.png",
+                             null,
+                             null);
+
+    driver.switchTo().frame("google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0");
+    driver.switchTo().frame("f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed");
+    driver.switchTo().frame(driver.findElement(By.className("flite-ad")));
+    WebElement fliteAdButton1 = driver.findElement(By.cssSelector("button[id*='21']"));
+    action.moveToElement(fliteAdButton1).perform();
+    driver.switchTo().defaultContent();
+
+    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_1.png",
+                             "src/test/resources/adsResources/flite_skin_right_1.png",
+                             null,
+                             null);
+
   }
 }
