@@ -177,7 +177,20 @@ public class AdsDataProvider {
     };
   }
 
+
   @DataProvider
+  public static Object[][] fliteSkin() {
+    return new Object[][]{
+        {
+            "adtest", "Demo/Flite/Background_Takeover",
+            new Dimension(1200, 1000),
+        },
+        };
+  }
+
+
+
+    @DataProvider
   public static Object[][] skin() {
     return new Object[][]{
         {
