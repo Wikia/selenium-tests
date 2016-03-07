@@ -71,7 +71,7 @@ public class TestAdFliteSkinPresence extends TemplateNoFirstLoad {
     driver.switchTo().frame("google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0");
     driver.switchTo().frame("f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed");
     driver.switchTo().frame(driver.findElement(By.className("flite-ad")));
-    WebElement fliteAdButton1 = driver.findElement(By.cssSelector("button[id*='21']"));
+    WebElement fliteAdButton1 = driver.findElement(By.cssSelector("div[id*='div20']"));
     action.moveToElement(fliteAdButton1).perform();
     driver.switchTo().defaultContent();
 
