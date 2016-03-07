@@ -22,7 +22,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_001",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       }
   )
   public void followerNotificationResponse_setup_1() {
@@ -36,7 +37,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_002",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_1"
   )
@@ -56,7 +58,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_003",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_2"
   )
@@ -70,7 +73,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_004",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_3"
   )
@@ -90,7 +94,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_005",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_4"
   )
