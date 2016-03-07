@@ -28,7 +28,7 @@ public class MessageWallTests extends NewTestTemplate {
     new Actions(driver).moveByOffset(0, 0).perform();
   }
 
-  @Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"})
+  @Test(groups = {"MessageWall_001", "MessageWall", "MessageWallTests", "Smoke3"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndEditMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -46,7 +46,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageEditText(title, messageEdit, credentials.userName);
   }
 
-  @Test(groups = {"MessageWall_002", "MessageWall"})
+  @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndRemoveMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -62,7 +62,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyThreadRemoved();
   }
 
-  @Test(groups = {"MessageWall_003", "MessageWall"})
+  @Test(groups = {"MessageWall_003", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.STAFF)
   public void userCanCreateAndCloseMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
@@ -81,7 +81,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyThreadReopened();
   }
 
-  @Test(groups = {"MessageWall_004", "MessageWall"})
+  @Test(groups = {"MessageWall_004", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.STAFF)
   public void userCanCreateAndQuoteMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
@@ -99,7 +99,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyQuote(quote);
   }
 
-  @Test(groups = {"MessageWall_005", "MessageWall"})
+  @Test(groups = {"MessageWall_005", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndPreviewMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -114,7 +114,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWall_006", "MessageWall"})
+  @Test(groups = {"MessageWall_006", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndReplyToMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -160,7 +160,7 @@ public class MessageWallTests extends NewTestTemplate {
    * messageWall 3. QATestsBlockedUser should be able to post on his MessageWall 4.
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
-  @Test(groups = {"MessageWall_008", "MessageWall"})
+  @Test(groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
   public void blockedUserCanCreatePostOnHerMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
