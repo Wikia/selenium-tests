@@ -33,7 +33,7 @@ public class EditMode extends WikiBasePageObject {
   private WebElement sliderButton;
   @FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
   private WebElement visualButton;
-  @FindBy(css = "a.cke_button_ModeSource > span#cke_22_label")
+  @FindBy(css = "a.cke_button_ModeSource > span.cke_label")
   private WebElement sourceButton;
   @FindBy(css = "a.cke_off.cke_button_table")
   private WebElement addTableButton;
