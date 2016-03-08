@@ -26,8 +26,14 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".checkbox-builder")
   private WebElement titleCheckbox;
 
+  @FindBy(css = "#isCollapsible")
+  private WebElement collapsibilityCheckbox;
+
   @FindBy(css = "#infoboxRowLabel")
   private WebElement rowLabelInputField;
+
+  @FindBy(css = "#infoboxSectionHeader")
+  private WebElement sectionHeaderInputField;
 
   @FindBy(css = ".back-arrow")
   private WebElement backArrowButton;
@@ -44,6 +50,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".on-hover-tooltip")
   private WebElement tooltip;
 
+  @FindBy(css = ".infobox-builder-spinner")
+  private WebElement savingSpinner;
+
+  @FindBy(css = ".success-icon")
+  private WebElement successIcon;
+
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
 
@@ -58,6 +70,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".portable-infobox .pi-image")
   private List<WebElement> images;
+
+  @FindBy(css = ".portable-infobox .pi-header")
+  private List<WebElement> headers;
 
   @FindBy(css = ".portable-infobox .sortable-item")
   private List<WebElement> component;
@@ -90,6 +105,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return images.size();
   }
 
+  public int countHeaders() { return headers.size(); }
+
   public String getBackgroundColor() {
     return component.get(0).getCssValue("background-color");
   }
@@ -115,6 +132,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  public InfoboxBuilderPage selectHeaderWithIndex(int index) {
+    wait.forElementVisible(headers.get(index));
+    headers.get(index).click();
+
+    return this;
+  }
+
   public InfoboxBuilderPage addRowComponent() {
     wait.forElementVisible(componentsButtons.get(0));
     componentsButtons.get(0).click();
@@ -122,16 +146,23 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage addTitleComponent() {
+  public InfoboxBuilderPage addImageComponent() {
     wait.forElementVisible(componentsButtons.get(1));
     componentsButtons.get(1).click();
 
     return this;
   }
 
-  public InfoboxBuilderPage addImageComponent() {
+  public InfoboxBuilderPage addTitleComponent() {
     wait.forElementVisible(componentsButtons.get(2));
     componentsButtons.get(2).click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage addHeaderComponent() {
+    wait.forElementVisible(componentsButtons.get(3));
+    componentsButtons.get(3).click();
 
     return this;
   }
@@ -157,6 +188,15 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage deleteImageComponentWithIndex(int index) {
     wait.forElementVisible(images.get(index));
     images.get(index).click();
+    wait.forElementVisible(deleteButton);
+    deleteButton.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage deleteHeaderComponentWithIndex(int index) {
+    wait.forElementVisible(headers.get(index));
+    headers.get(index).click();
     wait.forElementVisible(deleteButton);
     deleteButton.click();
 
@@ -225,6 +265,27 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  public InfoboxBuilderPage changeHeaderCollapsibilityState(int index) {
+    JavascriptExecutor js = (JavascriptExecutor)driver;
+    headers.get(index).click();
+    wait.forElementVisible(collapsibilityCheckbox);
+    collapsibilityCheckbox.click();
+
+    String script = "return window.getComputedStyle(document"
+                    + ".querySelector('.pi-header'),':after').content";
+    String chevronContent = js.executeScript(script).toString();
+
+    if (collapsibilityCheckbox.isSelected()) {
+      Assertion.assertTrue(!chevronContent.isEmpty());
+    }
+    else
+    {
+      Assertion.assertTrue(chevronContent.isEmpty());
+    }
+
+    return this;
+  }
+
   public InfoboxBuilderPage setTitleToUseArticleName(int index) {
     titles.get(index).click();
     wait.forElementVisible(titleCheckbox);
@@ -261,6 +322,18 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  public InfoboxBuilderPage setAndVerifyHeaderNameWithIndex(int index, String labelName) {
+    wait.forElementVisible(headers.get(index));
+    headers.get(index).click();
+    wait.forElementVisible(sectionHeaderInputField);
+    sectionHeaderInputField.click();
+    sectionHeaderInputField.clear();
+    sectionHeaderInputField.sendKeys(labelName);
+    Assertion.assertEquals(headers.get(index).getText(), labelName);
+
+    return this;
+  }
+
   public InfoboxBuilderPage scrollAndSelectLastComponent() {
     scrollAndClick(component, component.size() - 1);
 
@@ -289,6 +362,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();
+
+    wait.forElementVisible(savingSpinner);
+    Assertion.assertTrue(savingSpinner.isDisplayed());
+
+//    wait.forElementVisible(successIcon);
+//    Assertion.assertTrue(successIcon.isDisplayed());
 
     //wait until template page is loaded
     wait.forElementVisible(driver.findElement(By.className("header-title")));
