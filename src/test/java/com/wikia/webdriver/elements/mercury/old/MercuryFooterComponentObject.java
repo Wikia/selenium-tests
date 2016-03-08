@@ -27,7 +27,7 @@ public class MercuryFooterComponentObject {
 
   public ArticlePageObject clickFullSiteLink() {
     js.execute("$('.recent-edit').remove()");
-    wait.forElementVisible(fullSiteLink);
+    wait.forElementClickable(fullSiteLink);
     fullSiteLink.click();
 
     return new ArticlePageObject(driver);
