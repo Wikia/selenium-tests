@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class VideoPageAdminTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest"})
+  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest", "VideosPage"})
   @Execute(asUser = User.STAFF, onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoPageAdmin_001_AddFeaturedVideo() {
     FeaturedVideoAdminPageObject featuredVideoAdminObject =

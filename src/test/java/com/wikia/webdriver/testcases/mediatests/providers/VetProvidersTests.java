@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
@@ -13,11 +14,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"VetProvidersArticle", "Media"})
+@Test(groups = {"VetProvidersArticle", "ProviderTests", "Media"})
 public class VetProvidersTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl")
+  @RelatedIssue(issueID = "SUS-170", comment = "metacafe.com provider doesn't work. Please check if test passes for other providers.")
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
     new ArticleContent().clear();
 
