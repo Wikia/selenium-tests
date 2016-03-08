@@ -23,7 +23,7 @@ public class MercuryFooterComponentObject {
   }
 
   public ArticlePageObject clickFullSiteLink() {
-    wait.forElementVisible(fullSiteLink);
+    wait.forElementClickable(fullSiteLink);
     fullSiteLink.click();
 
     return new ArticlePageObject(driver);
