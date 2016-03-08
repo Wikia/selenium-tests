@@ -6,8 +6,10 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.pages.InfoboxBuilderPage;
+import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import org.testng.annotations.Test;
 
@@ -49,7 +51,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .addRowComponent()
         .save();
 
-    Assertion.assertEquals("savingtemplate", templatePage.getHeaderText().toLowerCase());
+    Assertion.assertEquals("infoboxbuildersavingtemplate",
+                           templatePage.getHeaderText().toLowerCase());
   }
 
   @Execute(asUser = User.USER)
@@ -204,6 +207,15 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .dragAndDropToTheTop(2)
         .dragAndDropToTheTop(3)
         .dragAndDropToTheTop(1);
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyRedirectingUnsupportedInfoboxes() {
+    new InfoboxBuilderPage().open("InfoboxBuilderMultipleInfoboxes");
+    Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
+
+    new InfoboxBuilderPage().open("InfoboxBuilderUnsupportedMarkup");
+    Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
   }
 
 }

@@ -131,7 +131,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     String script = "return window.getComputedStyle("
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
     String borderValues = js.executeScript(script).toString();
-//    Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
 
     return borderValues;
   }
@@ -377,9 +376,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
     wait.forElementVisible(savingSpinner);
     Assertion.assertTrue(savingSpinner.isDisplayed());
-
-//    wait.forElementVisible(successIcon);
-//    Assertion.assertTrue(successIcon.isDisplayed());
 
     //wait until template page is loaded
     wait.forElementVisible(driver.findElement(By.className("header-title")));
