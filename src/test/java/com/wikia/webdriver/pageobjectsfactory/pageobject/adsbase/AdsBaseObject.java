@@ -589,20 +589,29 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject triggerFloatingMedrec() {
+    triggerAdSlot(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC),
+                  " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
+    return this;
+  }
+
+  public AdsBaseObject triggerIncontentLeaderboard() {
+    triggerAdSlot(AdsContent.getSlotSelector(AdsContent.INCONTENT_LEADERBOARD),
+                  "$('#mw-content-text h2')[1].scrollIntoView(true);");
+    return this;
+  }
+
+  private void triggerAdSlot(final String adSlotSelector, final String javaScriptTrigger) {
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
-          jsActions.execute(
-              " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-          String floatingMedrecCssSelector = AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC);
-          return driver.findElements(By.cssSelector(floatingMedrecCssSelector)).size() > 0;
+          jsActions.execute(javaScriptTrigger);
+          return driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError("Floating Medrec", e);
+      PageObjectLogging.logError(adSlotSelector + " slot", e);
     }
-    return this;
   }
 
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
