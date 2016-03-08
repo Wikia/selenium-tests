@@ -184,10 +184,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyUserInteractions() {
-    new InfoboxBuilderPage().open("InfoboxBuilderVerifySelectedBorderStyling")
+    InfoboxBuilderPage builder = new InfoboxBuilderPage();
+
+    builder.open("InfoboxBuilderVerifySelectedBorderStyling")
         .switchToIFrame()
-        .verifySelectedComponentBorderStyle(0)
         .verifyTooltipOnHover();
+
+    String borderStyle = builder.getBorderStyle();
+    Assertion.assertEquals(borderStyle, "1px solid rgb(26, 94, 184)");
+
+    borderStyle = builder.clickBuilderBackground().getBackgroundColor();
+    Assertion.assertNotEquals(borderStyle, "1px solid rgb(26, 94, 184)");
   }
 
   @Execute(asUser = User.STAFF)

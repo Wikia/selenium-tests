@@ -56,6 +56,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".success-icon")
   private WebElement successIcon;
 
+  @FindBy(css = ".infobox-builder-preview")
+  private WebElement builderBackground;
+
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
 
@@ -93,6 +96,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  public InfoboxBuilderPage clickBuilderBackground() {
+    builderBackground.click();
+
+    return this;
+  }
+
   public int countRows() {
     return rows.size();
   }
@@ -105,10 +114,26 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return images.size();
   }
 
-  public int countHeaders() { return headers.size(); }
+  public int countHeaders() {
+    return headers.size();
+  }
 
   public String getBackgroundColor() {
     return component.get(0).getCssValue("background-color");
+  }
+
+  public String getBorderStyle() {
+    JavascriptExecutor js = (JavascriptExecutor)driver;
+    WebElement selectedComponent = component.get(0);
+    wait.forElementVisible(selectedComponent);
+    selectedComponent.click();
+
+    String script = "return window.getComputedStyle("
+                    + "document.querySelector('.active'),':before').getPropertyValue('Border')";
+    String borderValues = js.executeScript(script).toString();
+//    Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
+
+    return borderValues;
   }
 
   public InfoboxBuilderPage selectTitleWithIndex(int index) {
@@ -248,19 +273,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     Assertion.assertEquals(this.titles.size(), 1);
     Assertion.assertEquals(this.images.size(), 1);
     Assertion.assertEquals(this.rows.size(), 2);
-
-    return this;
-  }
-
-  public InfoboxBuilderPage verifySelectedComponentBorderStyle(int index) {
-    JavascriptExecutor js = (JavascriptExecutor)driver;
-    WebElement selectedComponent = component.get(index);
-    wait.forElementVisible(selectedComponent);
-    selectedComponent.click();
-    String script = "return window.getComputedStyle("
-                    + "document.querySelector('.active'),':before').getPropertyValue('Border')";
-    String borderValues = js.executeScript(script).toString();
-    Assertion.assertEquals(borderValues, "1px solid rgb(26, 94, 184)");
 
     return this;
   }
