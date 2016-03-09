@@ -69,6 +69,13 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
+  public TemplateClassification add() {
+    wait.forElementClickable(saveButton);
+    saveButton.click();
+
+    return this;
+  }
+
   public TemplateClassification selectTemplateType() {
     if (!this.templateName.equals("Infobox")) {
       selectInfoboxTemplate();

@@ -123,6 +123,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
+  public void newTemplateCreation() {
+    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
+        .getTemplateClassification()
+        .selectTemplateType()
+        .add();
+
+    Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderDisplayed());
+  }
+
+  @Execute(asUser = User.USER)
   public void verifyComponentHelpDialog() {
     new InfoboxBuilderPage().open("InfoboxBuilderVerifyInterfaceFunctionality")
         .switchToIFrame()

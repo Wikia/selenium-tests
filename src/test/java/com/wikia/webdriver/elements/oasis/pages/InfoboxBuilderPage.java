@@ -90,6 +90,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  public boolean isInfoboxBuilderDisplayed() {
+    return builderIFrame.isDisplayed();
+  }
+
   public InfoboxBuilderPage switchToIFrame() {
     driver.switchTo().frame(builderIFrame);
 
