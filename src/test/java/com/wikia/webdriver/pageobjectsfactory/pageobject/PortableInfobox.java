@@ -114,7 +114,8 @@ public class PortableInfobox extends WikiBasePageObject {
   }
 
   public String getTitleTextWithIndex(int index) {
-    return titles.get(index).getText(); }
+    return titles.get(index).getText();
+  }
 
   public String getUrlAfterPageIsLoaded() {
     wait.forElementVisible(bodyElement);

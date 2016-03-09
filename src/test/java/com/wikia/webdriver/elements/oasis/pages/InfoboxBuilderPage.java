@@ -134,9 +134,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
     String script = "return window.getComputedStyle("
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
-    String borderValues = js.executeScript(script).toString();
 
-    return borderValues;
+    return js.executeScript(script).toString();
   }
 
   public InfoboxBuilderPage selectTitleWithIndex(int index) {
@@ -292,9 +291,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
     if (collapsibilityCheckbox.isSelected()) {
       Assertion.assertTrue(!chevronContent.isEmpty());
-    }
-    else
-    {
+    } else {
       Assertion.assertTrue(chevronContent.isEmpty());
     }
 
