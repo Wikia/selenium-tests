@@ -9,7 +9,6 @@ import com.wikia.webdriver.elements.oasis.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import org.testng.annotations.Test;
 
@@ -221,6 +220,19 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     new InfoboxBuilderPage().open("InfoboxBuilderUnsupportedMarkup");
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
+  }
+
+  @Execute(asUser = User.USER)
+  public void immutableSources() {
+    new InfoboxBuilderPage().open("InfoboxBuilderImmutableRows")
+        .switchToIFrame()
+        .setAndVerifyRowLabelWithIndex(0, "AutomatedTest")
+        .save();
+
+    String invocationLabelText = new PortableInfobox().open("InfoboxBuilderImmutableExample")
+        .getDataLabelTextWithIndex(0);
+
+    Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
 
 }
