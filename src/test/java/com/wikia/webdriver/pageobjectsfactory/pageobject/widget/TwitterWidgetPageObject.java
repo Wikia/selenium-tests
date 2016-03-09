@@ -12,7 +12,7 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   private List<WebElement> widgetWrapperList;
   @FindBy(css = ".widget-twitter iframe")
   private List<WebElement> widgetIFrameList;
-  @FindBy(css = "div.timeline")
+  @FindBy(css = "div.timeline-Widget")
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "twitter";
