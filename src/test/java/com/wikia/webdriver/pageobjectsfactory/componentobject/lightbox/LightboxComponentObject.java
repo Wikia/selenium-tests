@@ -39,7 +39,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement redditShareLink;
   @FindBy(css = "a.plusone")
   private WebElement plusoneShareLink;
-  @FindBy(css = ".media.video-media")
+  @FindBy(css = ".video-media")
   private WebElement videoContainer;
   @FindBy(css = ".LightboxHeader h1 a")
   private WebElement titleLink;
