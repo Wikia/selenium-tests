@@ -17,48 +17,70 @@ public class PortableInfoboxObject {
 
   @FindBy(css = "body")
   private WebElement bodyElement;
+
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
+
   @FindBy(css = ".pi-hero .article-image")
   private WebElement mainImage;
+
   @FindBy(css = ".portable-infobox .pi-hero-title")
   private WebElement title;
+
   @FindBy(css = ".portable-infobox .pi-title")
   private WebElement titleSmallImage;
+
   @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
+
   @FindBy(css = ".article-content .collapsed")
   private WebElement infoboxIsCollapsed;
+
   @FindBy(css = ".tabber .article-image")
   private WebElement imageInTabber;
+
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
+
   @FindBy(css = ".portable-infobox .article-video")
   private WebElement video;
+
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
+
   @FindBy(css = ".pi-title img")
   private WebElement imageInTitle;
+
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
+
   @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
   private List<WebElement> galleryButtonList;
+
   @FindBy(css = ".image-collection-actions .action-next")
   private WebElement nextImageArrow;
+
   @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
+
   @FindBy(css = ".pi-item .pi-data-label")
   private List<WebElement> dataLabels;
+
   @FindBy(css = ".pi-item .pi-data-value")
   private List<WebElement> dataValues;
+
   @FindBy(css = ".portable-infobox .reference")
   private List<WebElement> references;
+
   @FindBy(css = ".portable-infobox ul li")
   private List<WebElement> unorderedLists;
+
   @FindBy(css = ".portable-infobox ol li")
   private List<WebElement> orderedLists;
+
   @FindBy(css = ".pi-header")
   private List<WebElement> headers;
+
   @FindBy(css = ".portable-infobox .pi-image img")
   private List<WebElement> images;
 

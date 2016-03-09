@@ -268,6 +268,7 @@ public class PortableInfobox extends WikiBasePageObject {
 
   public PortableInfobox compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
     Assertion.assertStringContains(imageName, categoryImageURL);
+
     return this;
   }
 
