@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -74,7 +73,6 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @RelatedIssue(issueID = "", comment = "Tests should be enabled after Selenium update. Cannot access elements with <object> tag.")
   @Execute(onWikia = "sktest123", disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
