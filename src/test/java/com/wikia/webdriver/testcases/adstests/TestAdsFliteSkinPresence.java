@@ -24,7 +24,7 @@ public class TestAdsFliteSkinPresence extends TemplateNoFirstLoad {
       dataProvider = "fliteSkin",
       groups = "AdsFliteSkinPresenceOasis"
   )
-  public void AdsFliteSkinPresence(String wikiName,
+  public void adsFliteSkinPresence(String wikiName,
                                    String article,
                                    Dimension windowResolution,
                                    List<List<String>> skinData) throws IOException {
