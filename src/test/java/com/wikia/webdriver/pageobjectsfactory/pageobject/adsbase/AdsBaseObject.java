@@ -18,6 +18,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,7 +33,18 @@ import java.util.regex.Pattern;
 
 public class AdsBaseObject extends WikiBasePageObject {
 
+  @FindBy(css = "div[id*='div20']")
+  public WebElement fliteAdButton1;
+  @FindBy(css = "div[id*='div18']")
+  public WebElement fliteAdButton2;
+  @FindBy(css = "div[id*='div16']")
+  public WebElement fliteAdButton3;
+  @FindBy(css = "div[id*='div14']")
+  public WebElement fliteAdButton4;
   protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";
+  private static final String FLITE_SYNTHETIC_SUPERHEORES_AD_FIRST_IFRAME =  "google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0";
+  private static final String FLITE_SYNTHETIC_SUPERHEORES_AD_SECOND_IFRAME = "f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed";
+  private static final String FLITE_SYNTHETIC_SUPERHEORES_AD_THIRD_IFRAME = "flite-ad";
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
@@ -71,6 +83,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
+
+
 
   public AdsBaseObject(WebDriver driver) {
     super();
@@ -789,4 +803,18 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyMiddlePrefooterAdPresent() {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
   }
+
+
+  public void switchToFliteSyntheticSuperheroesAd(){
+    driver.switchTo().frame(FLITE_SYNTHETIC_SUPERHEORES_AD_FIRST_IFRAME);
+    driver.switchTo().frame(FLITE_SYNTHETIC_SUPERHEORES_AD_SECOND_IFRAME);
+    driver.switchTo().frame(driver.findElement(By.className(FLITE_SYNTHETIC_SUPERHEORES_AD_THIRD_IFRAME)));
+  }
+
+  public void moveMouseToFliteButton(WebElement button){
+    switchToFliteSyntheticSuperheroesAd();
+    Actions action = new Actions(driver);
+    action.moveToElement(button).perform();
+    driver.switchTo().defaultContent();  }
+
 }
