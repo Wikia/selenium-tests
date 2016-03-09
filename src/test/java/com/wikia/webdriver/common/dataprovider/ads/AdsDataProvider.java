@@ -184,13 +184,12 @@ public class AdsDataProvider {
         {
             "adtest", "Demo/Flite/Background_Takeover",
             new Dimension(1200, 1000),
-        },
+            },
         };
   }
 
 
-
-    @DataProvider
+  @DataProvider
   public static Object[][] skin() {
     return new Object[][]{
         {
