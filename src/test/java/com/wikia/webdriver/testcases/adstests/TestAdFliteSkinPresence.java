@@ -5,19 +5,12 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 public class TestAdFliteSkinPresence extends TemplateNoFirstLoad {
-
-
 
 
   @Test(
@@ -30,39 +23,37 @@ public class TestAdFliteSkinPresence extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     PageObjectLogging.log("Window resolution: ", String.valueOf(windowResolution.width), true);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, windowResolution);
-    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_1.png",
-                             "src/test/resources/adsResources/flite_skin_right_1.png",
+
+    adsBaseObject.verifySkin(AdsBaseObject.FLITE_SKIN_LEFT_1,
+                             AdsBaseObject.FLITE_SKIN_RIGHT_1,
                              null,
                              null);
+
     adsBaseObject.moveMouseToFliteButton(adsBaseObject.fliteAdButton2);
 
-
-    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_2.png",
-                             "src/test/resources/adsResources/flite_skin_right_2.png",
+    adsBaseObject.verifySkin(AdsBaseObject.FLITE_SKIN_LEFT_2,
+                             AdsBaseObject.FLITE_SKIN_RIGHT_2,
                              null,
                              null);
     adsBaseObject.moveMouseToFliteButton(adsBaseObject.fliteAdButton3);
 
-    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_3.png",
-                             "src/test/resources/adsResources/flite_skin_right_3.png",
+    adsBaseObject.verifySkin(AdsBaseObject.FLITE_SKIN_LEFT_3,
+                             AdsBaseObject.FLITE_SKIN_RIGHT_3,
                              null,
                              null);
 
     adsBaseObject.moveMouseToFliteButton(adsBaseObject.fliteAdButton4);
 
-
-    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_4.png",
-                             "src/test/resources/adsResources/flite_skin_right_4.png",
+    adsBaseObject.verifySkin(AdsBaseObject.FLITE_SKIN_LEFT_4,
+                             AdsBaseObject.FLITE_SKIN_RIGHT_4,
                              null,
                              null);
 
     adsBaseObject.moveMouseToFliteButton(adsBaseObject.fliteAdButton1);
 
-
-    adsBaseObject.verifySkin("src/test/resources/adsResources/flite_skin_left_1.png",
-                             "src/test/resources/adsResources/flite_skin_right_1.png",
+    adsBaseObject.verifySkin(AdsBaseObject.FLITE_SKIN_LEFT_1,
+                             AdsBaseObject.FLITE_SKIN_RIGHT_1,
                              null,
                              null);
-
   }
 }

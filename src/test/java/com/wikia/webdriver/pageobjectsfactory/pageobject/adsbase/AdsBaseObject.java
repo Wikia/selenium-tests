@@ -45,6 +45,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String FLITE_SYNTHETIC_SUPERHEORES_AD_FIRST_IFRAME =  "google_ads_iframe_/5441/wka.life/_adtest//article/gpt/TOP_LEADERBOARD_0";
   private static final String FLITE_SYNTHETIC_SUPERHEORES_AD_SECOND_IFRAME = "f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed";
   private static final String FLITE_SYNTHETIC_SUPERHEORES_AD_THIRD_IFRAME = "flite-ad";
+  public static final String FLITE_SKIN_LEFT_1 = "src/test/resources/adsResources/flite_skin_left_1.png";
+  public static final String FLITE_SKIN_LEFT_2 = "src/test/resources/adsResources/flite_skin_left_2.png";
+  public static final String FLITE_SKIN_LEFT_3 = "src/test/resources/adsResources/flite_skin_left_3.png";
+  public static final String FLITE_SKIN_LEFT_4 = "src/test/resources/adsResources/flite_skin_left_4.png";
+  public static final String FLITE_SKIN_RIGHT_1 = "src/test/resources/adsResources/flite_skin_right_1.png";
+  public static final String FLITE_SKIN_RIGHT_2 = "src/test/resources/adsResources/flite_skin_right_2.png";
+  public static final String FLITE_SKIN_RIGHT_3 = "src/test/resources/adsResources/flite_skin_right_3.png";
+  public static final String FLITE_SKIN_RIGHT_4 = "src/test/resources/adsResources/flite_skin_right_4.png";
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
@@ -824,6 +832,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     switchToFliteSyntheticSuperheroesAd();
     Actions action = new Actions(driver);
     action.moveToElement(button).perform();
-    driver.switchTo().defaultContent();  }
-
+    driver.switchTo().defaultContent();
+  }
 }
