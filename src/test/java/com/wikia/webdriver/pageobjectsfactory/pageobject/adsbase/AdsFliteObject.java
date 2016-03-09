@@ -29,15 +29,11 @@ public class AdsFliteObject extends AdsBaseObject {
   public void verifyFliteSkin(String left, String right, String cssButton){
     if (StringUtils.isNotEmpty(cssButton)) {
       switchToFliteSyntheticSuperheroesAd();
-      moveMouseToElement(driver.findElement(By.cssSelector(cssButton)));
+      WebElement button = driver.findElement(By.cssSelector(cssButton));
+      new Actions(driver).moveToElement(button).perform();
+      driver.switchTo().defaultContent();
     }
 
     verifySkin(left, right, null, null);
-  }
-
-  private void moveMouseToElement(WebElement button){
-    Actions action = new Actions(driver);
-    action.moveToElement(button).perform();
-    driver.switchTo().defaultContent();
   }
 }
