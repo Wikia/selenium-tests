@@ -74,7 +74,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";
