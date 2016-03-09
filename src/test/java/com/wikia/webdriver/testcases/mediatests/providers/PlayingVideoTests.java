@@ -72,7 +72,7 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoIgnEmbed();
   }
 
-  //TODO: Test disabled as Selenium doesn't allow to access elements with <object> tag. Check after Selenium update.
+  // Test disabled as Selenium doesn't allow to access elements with <object> tag. Check after Selenium update.
   @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
