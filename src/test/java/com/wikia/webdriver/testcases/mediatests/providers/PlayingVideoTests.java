@@ -72,7 +72,8 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoIgnEmbed();
   }
 
-  @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  //TODO: Test disabled as Selenium doesn't allow to access elements with <object> tag. Check after Selenium update.
+  @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
@@ -90,8 +91,6 @@ public class PlayingVideoTests extends NewTestTemplate {
     VideoComponentObject video = lightbox.getVideoPlayer();
     video.verifyVideoEmbedWidth();
     video.verifyFlashVideoObjectVisible();
-
-    //TODO: uncomment and check after Selenium update, cannot access elements with <object> tag
-    //video.verifyVideoAnyclipEmbed();
+    video.verifyVideoAnyclipEmbed();
   }
 }
