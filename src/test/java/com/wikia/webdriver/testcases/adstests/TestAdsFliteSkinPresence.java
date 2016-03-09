@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestAdsFliteSkinPresence extends TemplateNoFirstLoad {
 
-  private final String[] fliteSyntheticSuperheroesIframes = new String[]{
+  private final static String[] FLITE_SYNTHETIC_SUPERHEROES_IFRAMES = new String[]{
       "iframe[id$=TOP_LEADERBOARD_0]",
       "#f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed",
       ".flite-ad"
@@ -34,9 +34,9 @@ public class TestAdsFliteSkinPresence extends TemplateNoFirstLoad {
     AdsFliteObject adsFliteObject = new AdsFliteObject(driver,
                                                        testedPage,
                                                        windowResolution,
-                                                       fliteSyntheticSuperheroesIframes);
+                                                       FLITE_SYNTHETIC_SUPERHEROES_IFRAMES);
 
-    for (List<String> skin : skinData){
+    for (List<String> skin : skinData) {
       adsFliteObject.verifyFliteSkin(skin.get(0), skin.get(1), skin.get(2));
     }
   }

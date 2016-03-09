@@ -6,27 +6,27 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 
 public class AdsFliteObject extends AdsBaseObject {
+
   private String[] fliteSyntheticSuperheroesIframes;
 
   public AdsFliteObject(WebDriver driver,
                         String testedPage,
                         Dimension resolution,
-                        String[] fliteSyntheticSuperheroesIframes ) {
+                        String[] fliteSyntheticSuperheroesIframes) {
     super(driver, testedPage, resolution);
     this.fliteSyntheticSuperheroesIframes = fliteSyntheticSuperheroesIframes;
   }
 
-  private void switchToFliteSyntheticSuperheroesAd(){
-    for (String cssIframe : fliteSyntheticSuperheroesIframes ){
+  private void switchToFliteSyntheticSuperheroesAd() {
+    for (String cssIframe : fliteSyntheticSuperheroesIframes) {
       WebElement iframe = driver.findElement(By.cssSelector(cssIframe));
       driver.switchTo().frame(iframe);
     }
   }
 
-  public void verifyFliteSkin(String left, String right, String cssButton){
+  public void verifyFliteSkin(String left, String right, String cssButton) {
     if (StringUtils.isNotEmpty(cssButton)) {
       switchToFliteSyntheticSuperheroesAd();
       WebElement button = driver.findElement(By.cssSelector(cssButton));

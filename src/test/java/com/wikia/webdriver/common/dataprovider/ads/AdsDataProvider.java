@@ -210,7 +210,7 @@ public class AdsDataProvider {
                     "div[id*='div20']"
                 )
             )
-            },
+        },
         };
   }
 
