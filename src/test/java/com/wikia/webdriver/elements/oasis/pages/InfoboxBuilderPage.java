@@ -23,7 +23,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".edit-header--delete")
   private WebElement deleteButton;
 
-  @FindBy(css = ".checkbox-builder")
+  @FindBy(css = "#useArticleName")
   private WebElement titleCheckbox;
 
   @FindBy(css = "#isCollapsible")
@@ -349,7 +349,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage scrollAndSelectLastComponent() {
+  public InfoboxBuilderPage selectLastComponent() {
     scrollAndClick(component, component.size() - 1);
 
     return this;

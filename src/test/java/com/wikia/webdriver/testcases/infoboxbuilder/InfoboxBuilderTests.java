@@ -102,13 +102,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void customizingComponents() {
-    InfoboxBuilderPage builder = new InfoboxBuilderPage();
-
-    String infoboxPreviewBackground = builder.open("InfoboxBuilderCustomizingComponents")
-        .switchToIFrame()
-        .getBackgroundColor();
-
-    TemplatePage template = builder
+    TemplatePage template = new InfoboxBuilderPage()
         .open("InfoboxBuilderCustomizingComponents")
         .switchToIFrame()
         .changeHeaderCollapsibilityState(0)
@@ -118,8 +112,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .setTitleToUseArticleName(0)
         .save();
 
-    String infoboxBackground = template.getPortableInfobox().getBackgroundColor();
-    Assertion.assertEquals(infoboxPreviewBackground, infoboxBackground);
+    String infoboxBackground = template.getPortableInfobox().getHeaderText();
+    Assertion.assertEquals("InfoboxBuilderCustomizingComponents", infoboxBackground);
   }
 
   @Execute(asUser = User.USER)
@@ -192,7 +186,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .addImageComponent()
         .addImageComponent()
         .verifyScrollbarIsVisible()
-        .scrollAndSelectLastComponent();
+        .selectLastComponent();
   }
 
   @Execute(asUser = User.STAFF)
