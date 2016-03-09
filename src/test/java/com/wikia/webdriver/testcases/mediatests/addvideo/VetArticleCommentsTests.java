@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"VetArticleComments", "Media"})
+@Test(groups = {"VetArticleComments", "VetTests", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})

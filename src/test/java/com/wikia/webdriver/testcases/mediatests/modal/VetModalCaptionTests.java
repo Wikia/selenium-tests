@@ -33,7 +33,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   String articleTitleNotEditable;
   String caption;
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_001", "Media"})
+  @Test(groups = {"VetModalCaption", "VetModalCaption_001", "VetTests", "Media"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_001_captionOnPage() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -58,7 +58,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
     article.verifyVideoCaption(caption);
   }
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_002",
+  @Test(groups = {"VetModalCaption", "VetModalCaption_002", "VetTests",
                   "Media"}, dependsOnGroups = "VetModalCaption_001")
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
@@ -71,7 +71,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
     vetOptions.verifyCaption(caption);
   }
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_005", "Media"})
+  @Test(groups = {"VetModalCaption", "VetModalCaption_005", "VetTests", "Media"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject();

@@ -22,7 +22,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanWriteMessageInSourceMode() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -36,7 +36,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanWriteMessageInBold() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -50,7 +50,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageBoldText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SOC-2094", comment = "test should pass locally. The ticket is about instability")
   public void userCanWriteMessageInItallic() {
@@ -65,7 +65,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageItalicText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanWriteMessageWithImage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -80,7 +80,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyImageAdded(title);
   }
 
-  @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanWriteMessageWithInternalLink() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -93,7 +93,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyInternalLink(title, PageContent.REDIRECT_LINK, PageContent.TEXT_LINK, wikiURL);
   }
 
-  @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanWriteMessageWithExternalLink() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);

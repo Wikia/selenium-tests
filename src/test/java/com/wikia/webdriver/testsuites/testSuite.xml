@@ -22,6 +22,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParamOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsIncontentLeaderboardOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
