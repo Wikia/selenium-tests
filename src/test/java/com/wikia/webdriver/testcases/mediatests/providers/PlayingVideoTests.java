@@ -72,7 +72,7 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoIgnEmbed();
   }
 
-  @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
