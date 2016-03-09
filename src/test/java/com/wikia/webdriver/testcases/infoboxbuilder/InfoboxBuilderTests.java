@@ -48,6 +48,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     TemplatePage templatePage = new InfoboxBuilderPage()
         .open("InfoboxBuilderSavingTemplate")
         .switchToIFrame()
+        .deleteRowComponentWithIndex(0)
         .addRowComponent()
         .save();
 
