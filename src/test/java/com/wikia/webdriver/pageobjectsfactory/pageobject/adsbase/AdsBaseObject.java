@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 
 public class AdsBaseObject extends WikiBasePageObject {
 
+  protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
@@ -60,8 +61,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
-  protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";
-
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
@@ -73,8 +72,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
-
-
 
   public AdsBaseObject(WebDriver driver) {
     super();
@@ -802,5 +799,4 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyMiddlePrefooterAdPresent() {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
   }
-
 }
