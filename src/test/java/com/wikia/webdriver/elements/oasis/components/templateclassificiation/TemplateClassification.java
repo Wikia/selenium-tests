@@ -69,7 +69,7 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  public TemplateClassification add() {
+  public TemplateClassification clickAddButton() {
     wait.forElementClickable(saveButton);
     saveButton.click();
 

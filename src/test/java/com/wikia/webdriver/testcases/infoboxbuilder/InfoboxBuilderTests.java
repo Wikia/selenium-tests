@@ -121,7 +121,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
         .getTemplateClassification()
         .selectTemplateType()
-        .add();
+        .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderDisplayed());
   }
@@ -234,5 +234,4 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
-
 }
