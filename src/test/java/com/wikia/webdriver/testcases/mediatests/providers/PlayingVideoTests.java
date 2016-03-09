@@ -15,7 +15,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   private static final String BROWSER_SIZE = "1400x720";
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
-  @Execute(onWikia = "sktest123")
+  @Execute(onWikia = "sktest123", disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
@@ -35,7 +35,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
-  @Execute(onWikia = "sktest123")
+  @Execute(disableFlash = "false", onWikia = "sktest123")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
@@ -52,7 +52,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
-  @Execute(onWikia = "sktest123")
+  @Execute(disableFlash = "false", onWikia = "sktest123")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
@@ -73,7 +73,7 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @Execute(onWikia = "sktest123")
+  @Execute(disableFlash = "false", onWikia = "sktest123")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
