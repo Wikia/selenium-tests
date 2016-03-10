@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 public class VetArticlePlaceholderTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "VetTests", "Media"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void userCanAddVideoByUrlUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
@@ -30,7 +30,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "VetTests", "Media"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void userCanAddVideoFromWikiaUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
@@ -43,7 +43,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "VetTests", "Media"})
   @Execute(asUser = User.STAFF, onWikia = "mobileregressiontesting")
   public void userCanAddVideoByUrlUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
@@ -64,7 +64,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "VetTests", "Media"})
   @Execute(asUser = User.STAFF, onWikia = "mobileregressiontesting")
   public void userCanAddVideoFromWikiaUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);

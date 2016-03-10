@@ -1026,4 +1026,31 @@ public class AdsDataProvider {
         },
     };
   }
+
+  @DataProvider
+  public static Object[][] adsIncontentLeaderboard() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/728x90",
+            239961972,
+            728,
+            90
+        },
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/300x250",
+            239961132,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/468x60",
+            241472412,
+            468,
+            60
+        },
+    };
+  }
 }
