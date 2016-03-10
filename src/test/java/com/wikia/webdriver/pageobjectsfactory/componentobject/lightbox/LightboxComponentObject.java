@@ -65,7 +65,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
   }
 
-  public void   verifyLightboxVideo() {
+  public void verifyLightboxVideo() {
     wait.forElementVisible(videoContainer);
     PageObjectLogging.log("verifyLightboxVideo", "Lightbox video appeared", true);
   }
@@ -167,7 +167,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public FilePagePageObject clickTitle() {
-    new Actions(driver).moveToElement(lightBoxModal).perform();
+    new Actions(driver).moveToElement(titleLink).perform();
     wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
