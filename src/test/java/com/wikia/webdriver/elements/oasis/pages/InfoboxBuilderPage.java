@@ -366,8 +366,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage selectLastComponent() {
-    scrollAndClick(component, component.size() - 1);
+  public InfoboxBuilderPage moveToLastComponent() {
+    WebElement lastComponent = component.get(component.size() - 1);
+    wait.forElementVisible(lastComponent);
+    builder.moveToElement(lastComponent).perform();
 
     return this;
   }

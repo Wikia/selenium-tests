@@ -178,7 +178,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .addImageComponent()
         .addImageComponent()
         .verifyScrollbarIsVisible()
-        .selectLastComponent();
+        .moveToLastComponent();
   }
 
   @Execute(asUser = User.STAFF)
