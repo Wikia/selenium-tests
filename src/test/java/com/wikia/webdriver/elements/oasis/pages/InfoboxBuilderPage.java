@@ -128,7 +128,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forElementClickable(selectedComponent);
     selectedComponent.click();
 
-    String script = "window.getComputedStyle("
+    String script = "return window.getComputedStyle("
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
 
     return js.executeScript(script).toString();
