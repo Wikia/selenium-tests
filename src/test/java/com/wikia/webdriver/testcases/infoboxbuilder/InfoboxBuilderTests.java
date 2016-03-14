@@ -20,7 +20,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void verifyDefaultStructure() {
     new InfoboxBuilderPage()
         .open("InfoboxBuilderVerifyDefaultStructure")
-        .switchToIFrame()
         .verifyDefaultTemplateStructure();
   }
 
@@ -28,7 +27,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void addingComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
 
-    builder.open("InfoboxBuilderAddingComponents").switchToIFrame();
+    builder.open("InfoboxBuilderAddingComponents");
     int rowComponents = builder.countRows();
     int titleComponents = builder.countTitles();
     int imageComponents = builder.countImages();
@@ -46,7 +45,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void savingTemplate() {
     TemplatePage templatePage = new InfoboxBuilderPage()
         .open("InfoboxBuilderSavingTemplate")
-        .switchToIFrame()
         .deleteRowComponentWithIndex(0)
         .addRowComponent()
         .save();
@@ -58,7 +56,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void deletingDefaultComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
-    builder.open("InfoboxBuilderDeletingDefaultComponents").switchToIFrame();
+    builder.open("InfoboxBuilderDeletingDefaultComponents");
     int rowComponents = builder.countRows();
     int titleComponents = builder.countTitles();
     int imageComponents = builder.countImages();
@@ -74,7 +72,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void deletingAddedComponents() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
-    builder.open("InfoboxBuilderDeletingAddedComponents").switchToIFrame();
+    builder.open("InfoboxBuilderDeletingAddedComponents");
     int rowComponents = builder.countRows();
     int titleComponents = builder.countTitles();
     int imageComponents = builder.countImages();
@@ -104,11 +102,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void customizingComponents() {
     TemplatePage template = new InfoboxBuilderPage()
         .open("InfoboxBuilderCustomizingComponents")
-        .switchToIFrame()
         .changeHeaderCollapsibilityState(0)
-        .setAndVerifyRowLabelWithIndex(0, "AutomatedTest")
+        .setAndVerifyRowLabel(0, "AutomatedTest")
         .setLongLabelNameAndVerifyBreakLine(1, "AutomatedTestVeryLongName")
-        .setAndVerifyHeaderNameWithIndex(0, "AutomatedTestHeader")
+        .setAndVerifyHeaderName(0, "AutomatedTestHeader")
         .setTitleToUseArticleName(0)
         .save();
 
@@ -129,7 +126,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void verifyComponentHelpDialog() {
     new InfoboxBuilderPage().open("InfoboxBuilderVerifyInterfaceFunctionality")
-        .switchToIFrame()
         .selectRowWithIndex(0).verifyHelpDialog()
         .selectTitleWithIndex(0).verifyHelpDialog()
         .selectRowWithIndex(0).verifyHelpDialog()
@@ -139,7 +135,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void verifySidebarBackArrow() {
     new InfoboxBuilderPage().open("InfoboxBuilderVerifyInterfaceFunctionality")
-        .switchToIFrame()
         .selectRowWithIndex(0).verifyBackArrowFunctionality()
         .selectTitleWithIndex(0).verifyBackArrowFunctionality()
         .selectImageWithIndex(0).verifyBackArrowFunctionality()
@@ -160,7 +155,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .getBackgroundColor();
 
     builder.open("InfoboxBuilderVerifyInfoboxTheme")
-        .switchToIFrame()
         .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
 
     /* select dark theme */
@@ -171,7 +165,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .getBackgroundColor();
 
     builder.open("InfoboxBuilderVerifyInfoboxTheme")
-        .switchToIFrame()
         .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
   }
 
@@ -180,7 +173,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void verifyScrolling() {
     new InfoboxBuilderPage().open("InfoboxBuilderVerifyScrolling")
-        .switchToIFrame()
         .addImageComponent()
         .addImageComponent()
         .addImageComponent()
@@ -193,9 +185,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void verifyUserInteractions() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
 
-    builder.open("InfoboxBuilderVerifySelectedBorderStyling")
-        .switchToIFrame()
-        .verifyTooltipOnHover();
+    builder.open("InfoboxBuilderVerifySelectedBorderStyling").verifyTooltipOnHover();
 
     String borderStyle = builder.getBorderStyle();
     Assertion.assertEquals(borderStyle, "1px solid rgb(26, 94, 184)");
@@ -207,7 +197,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     new InfoboxBuilderPage().open("InfoboxBuilderVerifyReordering")
-        .switchToIFrame()
         .dragAndDropToTheTop(2)
         .dragAndDropToTheTop(3)
         .dragAndDropToTheTop(1);
@@ -215,18 +204,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyRedirectingUnsupportedInfoboxes() {
-    new InfoboxBuilderPage().open("InfoboxBuilderMultipleInfoboxes");
+    new TemplatePage().open("InfoboxBuilderMultipleInfoboxes").editArticleInSrcUsingDropdown();
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
 
-    new InfoboxBuilderPage().open("InfoboxBuilderUnsupportedMarkup");
+    new TemplatePage().open("InfoboxBuilderUnsupportedMarkup").editArticleInSrcUsingDropdown();
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
   }
 
   @Execute(asUser = User.USER)
   public void immutableSources() {
     new InfoboxBuilderPage().open("InfoboxBuilderImmutableRows")
-        .switchToIFrame()
-        .setAndVerifyRowLabelWithIndex(0, "AutomatedTest")
+        .setAndVerifyRowLabel(0, "AutomatedTest")
         .save();
 
     String invocationLabelText = new PortableInfobox().open("InfoboxBuilderImmutableExample")

@@ -86,18 +86,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage open(String templateName) {
     getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_INFOBOX_BUILDER + templateName);
+    driver.switchTo().frame(builderIFrame);
 
     return this;
   }
 
   public boolean isInfoboxBuilderDisplayed() {
     return builderIFrame.isDisplayed();
-  }
-
-  public InfoboxBuilderPage switchToIFrame() {
-    driver.switchTo().frame(builderIFrame);
-
-    return this;
   }
 
   public InfoboxBuilderPage clickBuilderBackground() {
@@ -303,7 +298,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forElementVisible(collapsibilityCheckbox);
     collapsibilityCheckbox.click();
 
-    String script = "window.getComputedStyle(document"
+    String script = "return window.getComputedStyle(document"
                     + ".querySelector('.pi-header'),':after').content";
     String chevronContent = js.executeScript(script).toString();
 
@@ -329,7 +324,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage setAndVerifyRowLabelWithIndex(int index, String labelName) {
+  public InfoboxBuilderPage setAndVerifyRowLabel(int index, String labelName) {
     WebElement selectedRow = rows.get(index);
     wait.forElementClickable(selectedRow);
     selectedRow.click();
@@ -357,7 +352,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage setAndVerifyHeaderNameWithIndex(int index, String labelName) {
+  public InfoboxBuilderPage setAndVerifyHeaderName(int index, String labelName) {
     WebElement selectedHeader = headers.get(index);
     wait.forElementClickable(selectedHeader);
     selectedHeader.click();
