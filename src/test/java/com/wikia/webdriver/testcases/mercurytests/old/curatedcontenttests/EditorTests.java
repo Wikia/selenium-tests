@@ -85,7 +85,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when run in parallel")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     init();
 
@@ -121,7 +121,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
+  @RelatedIssue(issueID = "XW-829", comment = "Unstable when run in parallel")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     init();
 
