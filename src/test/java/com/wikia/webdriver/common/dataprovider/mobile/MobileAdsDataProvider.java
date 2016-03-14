@@ -245,7 +245,7 @@ public class MobileAdsDataProvider {
                 "\"ksgmnt\":[",
                 "\"u\":\"",
                 "\"dmn\":\"",
-                "\"skin\":\"wikiamobile\"",
+                "\"skin\":\"mercury",
                 "\"lang\":\"en\"",
                 "\"wpage\":\"category:browse\"",
                 "\"ref\":\"direct\"",
