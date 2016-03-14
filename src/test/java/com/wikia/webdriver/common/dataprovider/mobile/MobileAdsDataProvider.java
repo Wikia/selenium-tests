@@ -245,7 +245,7 @@ public class MobileAdsDataProvider {
                 "\"ksgmnt\":[",
                 "\"u\":\"",
                 "\"dmn\":\"",
-                "\"skin\":\"wikiamobile\"",
+                "\"skin\":\"mercury",
                 "\"lang\":\"en\"",
                 "\"wpage\":\"category:browse\"",
                 "\"ref\":\"direct\"",
@@ -342,7 +342,8 @@ public class MobileAdsDataProvider {
             "MOBILE_TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"15_tier2000\",\"43_tier2000\"]"
+                "\"rpfl_7450\":[\"15_tier2000",
+                "\"43_tier2000"
             )
         }
     };
