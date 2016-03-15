@@ -608,7 +608,8 @@ public class AdsDataProvider {
             "TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000\",\"57_tier2000\"]"
+                "\"rpfl_7450\":[\"2_tier2000",
+                "\"57_tier2000"
             )
         }
     };
