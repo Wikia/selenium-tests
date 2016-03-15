@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestAdsFliteSkinPresence extends TemplateNoFirstLoad {
 
-  private final static String[] FLITE_SYNTHETIC_SUPERHEROES_IFRAMES = new String[]{
+  private static final String[] FLITE_SYNTHETIC_SUPERHEROES_IFRAMES = new String[]{
       "iframe[id$=TOP_LEADERBOARD_0]",
       "#f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed",
       ".flite-ad"
