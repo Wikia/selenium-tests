@@ -1,8 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.RecentWikiActivity;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -27,30 +25,7 @@ public class RecentWikiActivityPage extends WikiBasePageObject {
     this.navigation = new Navigation(driver);
   }
 
-  public RecentWikiActivityPage openFromMenu() {
-    getUrl(String.format("%s", urlBuilder.getUrlForWiki()));
-    topBar.click();
-    navigation.openSubMenu(1);
-    navigation.openSubMenu(0);
-    navigation.openPageLink(0);
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
-                         "You were not redirected to the recent wiki activity");
-
-    return this;
-  }
-
-  private void editArticle(String articleName) {
-    String text =  "Additional line";
-    ArticleContent articleContent = new ArticleContent();
-
-    articleContent.clear(articleName);
-
-    articleContent.push(text, articleName);
-  }
-
   public RecentWikiActivityPage open(){
-//    editArticle("RWA" + DateTime.now().getMillis());
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.RECENT_WIKI_ACTIVITY));
 
     return this;

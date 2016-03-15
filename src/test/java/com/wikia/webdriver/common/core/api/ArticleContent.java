@@ -53,14 +53,15 @@ public class ArticleContent extends ApiCall {
     call();
   }
 
-  public  void push(String content) {
+  public void push(String content) {
     push(content, TestContext.getCurrentMethodName());
   }
-  public  void push() {
+
+  public void push() {
     push(PageContent.ARTICLE_TEXT, TestContext.getCurrentMethodName());
   }
 
-  public  ArticleContent clear(String articleTitle) {
+  public ArticleContent clear(String articleTitle) {
     push("", articleTitle);
 
     return this;

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests.recentwikiactivity;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -30,43 +32,64 @@ public class RecentWikiActivityTest extends NewTestTemplate {
         .openSubMenu(0)
         .openSubMenu(0);
 
-
-
+    Assertion.assertTrue(driver.getCurrentUrl().contains(URLsContent.RECENT_WIKI_ACTIVITY),
+                         "You were not redirected to the recent wiki activity");
   }
 
   @Test()
   public void recentWikiActivityAsAnon_redirectionToDiffPageAndGoingBack() {
-    new ArticleContent().clear("RECENTLY CHANGED").push("ASDASDASD", "RECENTLY CHANGED");
+    new ArticleContent()
+        .clear("RECENTLY CHANGED")
+        .push("Recent wiki activity automated test", "RECENTLY CHANGED");
 
-    new RecentWikiActivityPage().open().getRecentWikiActivity().openDiffPage()
-        .undoButtonNotVisible().goBackToRWA();
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .undoButtonNotVisible()
+        .goBackToRWA();
   }
 
   @Test()
   @Execute(asUser = User.BLOCKED_USER)
   public void recentWikiActivityAsBlockedUser_redirectionToDiffPageAndGoingBack() {
-    new RecentWikiActivityPage().open().getRecentWikiActivity().openDiffPage()
-        .undoButtonNotVisible().goBackToRWA();
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .undoButtonNotVisible()
+        .goBackToRWA();
   }
 
   @Test()
   @Execute(asUser = User.USER)
   public void recentWikiActivityAsUser_undoWithoutSummary() {
-    new RecentWikiActivityPage().open().getRecentWikiActivity().openDiffPage()
-        .submitWithoutSummary().displaySuccessNotification();
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .submitWithoutSummary()
+        .displaySuccessNotification();
   }
 
   @Test()
   @Execute(asUser = User.USER)
   public void recentWikiActivityAsUser_undoWithSummary() {
-    new RecentWikiActivityPage().open().getRecentWikiActivity().openDiffPage().submitWithSummary()
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
+        .submitWithSummary()
         .displaySuccessNotification();
   }
 
   @Test()
   @Execute(asUser = User.USER)
   public void recentWikiActivityAsUse_goBackFromSummaryWithoutUndo() {
-    new RecentWikiActivityPage().open().getRecentWikiActivity().openDiffPage()
+    new RecentWikiActivityPage()
+        .open()
+        .getRecentWikiActivity()
+        .openDiffPage()
         .goBackFromSummaryPage();
   }
 }
