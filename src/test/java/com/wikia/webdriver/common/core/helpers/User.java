@@ -18,6 +18,7 @@ public enum User {
   USER_GO_SEARCH_PREFERRED("ci.user.goSearchPreferredUser.username",
                            "ci.user.goSearchPreferredUser.password"),
   BLOCKED_USER("ci.user.tooManyLoginAttempts.username", "ci.user.tooManyLoginAttempts.password"),
+  CONSTANTLY_BLOCKED_USER("ci.user.constantlyBlockedAccountUser.username", "ci.user.constantlyBlockedAccountUser.password"),
   GOOGLE_CONNECTED("ci.user.google_connected.username", "ci.user.google_connected.password");
 
   private final String userName;

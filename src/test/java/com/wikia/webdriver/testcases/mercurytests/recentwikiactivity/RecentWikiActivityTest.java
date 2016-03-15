@@ -51,7 +51,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
   }
 
   @Test()
-  @Execute(asUser = User.BLOCKED_USER)
+  @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   public void recentWikiActivityAsBlockedUser_redirectionToDiffPageAndGoingBack() {
     new RecentWikiActivityPage()
         .open()
