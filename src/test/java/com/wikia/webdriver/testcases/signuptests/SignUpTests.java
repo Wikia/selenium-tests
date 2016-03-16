@@ -99,7 +99,6 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-  @RelatedIssue(issueID = "QAART-745", comment = "Captcha is not filled by the test. Monitor ticket status")
   public void anonCanSignupWhenCreatingNewWiki() {
     CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
     createNewWiki1.disableCaptcha();

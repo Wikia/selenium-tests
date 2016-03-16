@@ -178,6 +178,43 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] fliteSkin() {
+    return new Object[][]{
+        {
+            "adtest", "Demo/Flite/Background_Takeover",
+            new Dimension(1200, 1000),
+            Arrays.asList(
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_1.png",
+                    "src/test/resources/adsResources/flite_skin_right_1.png",
+                    ""
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_2.png",
+                    "src/test/resources/adsResources/flite_skin_right_2.png",
+                    "div[id*='div18']"
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_3.png",
+                    "src/test/resources/adsResources/flite_skin_right_3.png",
+                    "div[id*='div16']"
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_4.png",
+                    "src/test/resources/adsResources/flite_skin_right_4.png",
+                    "div[id*='div14']"
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_1.png",
+                    "src/test/resources/adsResources/flite_skin_right_1.png",
+                    "div[id*='div20']"
+                )
+            )
+        },
+        };
+  }
+
+  @DataProvider
   public static Object[][] skin() {
     return new Object[][]{
         {
@@ -571,7 +608,8 @@ public class AdsDataProvider {
             "TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000\",\"57_tier2000\"]"
+                "\"rpfl_7450\":[\"2_tier2000",
+                "\"57_tier2000"
             )
         }
     };

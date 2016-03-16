@@ -4,7 +4,13 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 public class TemplateEditPage extends WikiBasePageObject {
+
+  @FindBy(css = "#editarea")
+  private WebElement editArea;
 
   public TemplateEditPage() {
     super();
@@ -20,5 +26,9 @@ public class TemplateEditPage extends WikiBasePageObject {
 
   public TemplateClassification getTemplateClassification() {
     return new TemplateClassification();
+  }
+
+  public boolean isEditAreaDisplayed() {
+    return editArea.isDisplayed();
   }
 }
