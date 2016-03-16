@@ -17,7 +17,7 @@ public class TestAdsIncontentLeaderboardOasis extends TemplateNoFirstLoad {
       dataProvider = "adsIncontentLeaderboard",
       groups = "AdsIncontentLeaderboard"
   )
-  public void adsFloatingMedrec(String wikiName,
+  public void adsIncontentLeaderboard(String wikiName,
                                 String article,
                                 int lineItemId,
                                 int slotWidth,
