@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 
 public class TestAdsIncontentLeaderboardOasis extends TemplateNoFirstLoad {
 
+  private static final String URL_PARAM_ENABLE_SITEWIDE =
+      "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]";
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsIncontentLeaderboard",
@@ -20,7 +23,10 @@ public class TestAdsIncontentLeaderboardOasis extends TemplateNoFirstLoad {
                                 int slotWidth,
                                 int slotHeight) {
 
-    new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article))
+    String url = urlBuilder.getUrlForPath(wikiName, article);
+    url = urlBuilder.appendQueryStringToURL(url, URL_PARAM_ENABLE_SITEWIDE);
+
+    new AdsBaseObject(driver, url)
         .triggerIncontentLeaderboard()
         .verifyLineItemId(AdsContent.INCONTENT_LEADERBOARD, lineItemId)
         .verifyIframeSize(AdsContent.INCONTENT_LEADERBOARD, "gpt", slotWidth, slotHeight);
