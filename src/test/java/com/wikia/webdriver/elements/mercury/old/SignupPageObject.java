@@ -35,7 +35,7 @@ public class SignupPageObject {
   private WebElement avatar;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[1]/small")
   private WebElement emailError;
-  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[2]/small[2]")
+  @FindBy(css = "#signupForm div:nth-child(2) small")
   private WebElement usernameError;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
   private WebElement passwordError;
