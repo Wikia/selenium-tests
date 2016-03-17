@@ -23,6 +23,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
@@ -78,6 +79,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
@@ -113,6 +115,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
   public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
@@ -144,6 +147,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_011", "NonSpecificMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
   public void NonSpecificMapTests_011_VerifyEscapedFragmentPageContent() {

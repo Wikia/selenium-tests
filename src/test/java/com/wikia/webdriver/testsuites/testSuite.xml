@@ -16,6 +16,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDisableGpt"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveMercury"/>
