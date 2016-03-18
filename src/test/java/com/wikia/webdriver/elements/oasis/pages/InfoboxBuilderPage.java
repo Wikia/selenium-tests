@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 import org.openqa.selenium.By;
@@ -17,10 +16,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
 
-  @FindBy(css = ".sub-head .sub-head--done")
+  @FindBy(css = ".sub-head--done")
   private WebElement saveButton;
 
-  @FindBy(css = ".edit-header--delete")
+  @FindBy(css = ".infobox-builder-sidebar-header-icon-delete")
   private WebElement deleteButton;
 
   @FindBy(css = "#useArticleName")
@@ -35,7 +34,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = "#infoboxSectionHeader")
   private WebElement sectionHeaderInputField;
 
-  @FindBy(css = ".back-arrow")
+  @FindBy(css = ".infobox-builder-sidebar-header-icon-back")
   private WebElement backArrowButton;
 
   @FindBy(css = ".infobox-builder-questionmark")
@@ -85,7 +84,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage open(String templateName) {
-    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_INFOBOX_BUILDER + templateName);
+    new TemplateEditPage().open(templateName)
+        .getTemplateClassification()
+        .selectTemplateType()
+        .clickAddButton();
+
     driver.switchTo().frame(builderIFrame);
 
     return this;
