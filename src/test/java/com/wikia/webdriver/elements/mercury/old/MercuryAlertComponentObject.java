@@ -14,6 +14,10 @@ public class MercuryAlertComponentObject {
 
   private String alertMessage;
 
+  public void setAlertMessage(AlertMessage message) {
+    this.alertMessage = message.getMessage();
+  }
+
   public enum AlertMessage {
     NOT_EXISTING_REDIRECT(
         "The link you followed is a redirect, but the page it directs to does not exist."),
