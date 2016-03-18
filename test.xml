@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><suite name="Failed suite [Failed suite [Failed suite [Wikia test suite]]]" guice-stage="DEVELOPMENT" verbose="0">
+  <listeners>
+    <listener class-name="com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter"/>
+  </listeners>
+  <test name="testing(failed)(failed)(failed)">
+    <classes>
+      <class name="com.wikia.webdriver.testcases.interactivemapstests.FilterBoxMapTests">
+        <methods>
+          <include name="FilterBoxMapTests_001_VerifyUncheckedSingleCategory"/>
+          <include name="start"/>
+          <include name="FilterBoxMapTests_003_VerifyClickAllCategoriesUncheckCategories"/>
+          <include name="initTestContext"/>
+          <include name="FilterBoxMapTests_004_VerifyClickAllCategoriesCheckAllPinTypes"/>
+          <include name="FilterBoxMapTests_002_VerifyClickOnUncheckedCategory"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.interactivemapstests.EmbedMapTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="EmbedMapTests_002_VerifyEmbedMapElements"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.hubstests.HubsTests">
+        <methods>
+          <include name="start"/>
+          <include name="HubsTest_003_VerifyArticleSuggestionWorksProperly" invocation-numbers="0 1"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests">
+        <methods>
+          <include name="beforeSuite"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedOutUser">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="CreateNewWiki_001_loggedOutUser"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.logintests.ForgottenPasswordTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="anonCanRemindPasswordFromLoginDropdown"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.interactivemapstests.NonSpecificMapTests">
+        <methods>
+          <include name="NonSpecificMapTests_011_VerifyEscapedFragmentPageContent"/>
+          <include name="NonSpecificMapTests_005_VerifyMapListElements"/>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="NonSpecificMapTests_001_ClickMapAndVerifyCorrectRedirect"/>
+          <include name="NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.specialpagestests.FilePageTests">
+        <methods>
+          <include name="start"/>
+          <include name="filePage005_deleteFromHistory"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.interactivemapstests.PinTypeMapTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="PinTypeMapTests_001_VerifyImageValidationInPinTypeModal"/>
+          <include name="PinTypeMapTests_002_VerifyClickingAddAnotherPinType"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.visualeditor.VERecaptchaTests">
+        <methods>
+          <include name="start"/>
+          <include name="setupd"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
