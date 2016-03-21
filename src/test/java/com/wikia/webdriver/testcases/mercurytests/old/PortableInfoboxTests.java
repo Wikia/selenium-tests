@@ -56,8 +56,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .areHeadersVisible()
         .areUnorderedListsVisible()
         .areOrderedListsVisible()
-        .areUnorderedListAndDataValuesMarginEqual()
-        .areOrderedListAndDataValuesMarginEqual();
+        .verifyDataValueMargin()
+        .verifyListMargin();
   }
 
   @Test(groups = "mercury_infobox_expandAndCollapseByButtonClickAndTap")

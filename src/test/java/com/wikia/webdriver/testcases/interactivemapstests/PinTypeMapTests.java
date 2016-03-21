@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -20,6 +21,7 @@ public class PinTypeMapTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"PinTypeMapTests_001", "PinTypeMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")
@@ -40,6 +42,7 @@ public class PinTypeMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"PinTypeMapTests_002", "PinTypeMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
           "monitor the issue to find out resolution")

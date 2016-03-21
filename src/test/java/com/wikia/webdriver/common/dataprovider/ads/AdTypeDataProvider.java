@@ -114,7 +114,10 @@ public class AdTypeDataProvider {
         {
             "adtest", "SyntheticTests/AdType/Collapse",
             "wka.life/_adtest//article",
-            "TOP_RIGHT_BOXAD"
+            new String[] {
+                "TOP_LEADERBOARD",
+                "TOP_RIGHT_BOXAD"
+            }
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=386164332&lineItemId=165191172
         },
     };

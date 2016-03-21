@@ -600,6 +600,35 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
+  public void verifyNoAd(final String slotSelector) {
+    if (isElementOnPage(By.cssSelector(slotSelector))) {
+      WebElement element = driver.findElement(By.cssSelector(slotSelector));
+      if (
+          element.isDisplayed()
+          && element.getSize().getHeight() > 1
+          && element.getSize().getWidth() > 1
+          ) {
+        throw new WebDriverException("Ads found on page in selector: " + slotSelector);
+      } else {
+        PageObjectLogging.log(
+            "AdsFoundButNotVisible",
+            "Ads found on page with selector: "
+            + slotSelector
+            + " but is smaller then 1x1 or hidden",
+            true
+        );
+      }
+    } else {
+      PageObjectLogging.log(
+          "AdNotFound",
+          "Ad with selector: "
+          + slotSelector
+          + " not found on page",
+          true
+      );
+    }
+  }
+
   private void triggerAdSlot(final String adSlotSelector, final String javaScriptTrigger) {
     try {
       new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
@@ -681,32 +710,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
     for (String selector : slotsSelectors) {
-      if (isElementOnPage(By.cssSelector(selector))) {
-        WebElement element = driver.findElement(By.cssSelector(selector));
-        if (
-            element.isDisplayed()
-            && element.getSize().getHeight() > 1
-            && element.getSize().getWidth() > 1
-            ) {
-          throw new WebDriverException("Ads found on page in selector: " + selector);
-        } else {
-          PageObjectLogging.log(
-              "AdsFoundButNotVisible",
-              "Ads found on page with selector: "
-              + selector
-              + " but is smaller then 1x1 or hidden",
-              true
-          );
-        }
-      } else {
-        PageObjectLogging.log(
-            "AdNotFound",
-            "Ad with selector: "
-            + selector
-            + " not found on page",
-            true
-        );
-      }
+      verifyNoAd(selector);
     }
   }
 
