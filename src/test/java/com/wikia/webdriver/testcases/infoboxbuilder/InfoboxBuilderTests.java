@@ -10,6 +10,7 @@ import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "InfoboxBuilderTests")
@@ -82,7 +83,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     /* deleting last (newly added) components */
     Assertion.assertEquals(
-        rowComponents , builder.deleteRowComponentWithIndex(builder.countRows() - 1).countRows()
+        rowComponents, builder.deleteRowComponentWithIndex(builder.countRows() - 1).countRows()
     );
     Assertion.assertEquals(
         titleComponents,
@@ -123,15 +124,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderDisplayed());
   }
 
-  //TODO: Remove? help icon is not clickable now
-//  @Execute(asUser = User.USER)
-//  public void verifyComponentHelpDialog() {
-//    new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality")
-//        .selectRowWithIndex(0).verifyHelpDialog()
-//        .selectTitleWithIndex(0).verifyHelpDialog()
-//        .selectRowWithIndex(0).verifyHelpDialog()
-//        .selectHeaderWithIndex(0).verifyHelpDialog();
-//  }
 
   @Execute(asUser = User.USER)
   public void verifySidebarBackArrow() {
