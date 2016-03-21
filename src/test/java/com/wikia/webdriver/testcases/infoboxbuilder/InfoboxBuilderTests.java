@@ -123,6 +123,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderDisplayed());
   }
 
+  //TODO: Remove? help icon is not clickable now
 //  @Execute(asUser = User.USER)
 //  public void verifyComponentHelpDialog() {
 //    new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality")
@@ -164,7 +165,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     invocationBackgroundColor = infobox.open(PageContent.PORTABLE_INFOBOX_02)
         .getBackgroundColor();
 
-    builder.openNew("InfoboxBuilderVerifyInfoboxTheme")
+    builder.openExisting("InfoboxBuilderVerifyInfoboxTheme")
         .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
   }
 
@@ -196,7 +197,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
-    new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyReordering")
+    new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering")
         .dragAndDropToTheTop(2)
         .dragAndDropToTheTop(3)
         .dragAndDropToTheTop(1);

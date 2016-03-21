@@ -129,6 +129,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public String getBackgroundColor() {
+    wait.forElementVisible(component.get(0));
     return component.get(0).getCssValue("background-color");
   }
 
@@ -305,7 +306,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     JavascriptExecutor js = (JavascriptExecutor)driver;
     headers.get(index).click();
 
-    wait.forElementVisible(collapsibilityCheckbox);
+    wait.forElementClickable(collapsibilityCheckbox);
     collapsibilityCheckbox.click();
 
     String script = "return window.getComputedStyle(document"
@@ -385,6 +386,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage dragAndDropToTheTop(int index) {
+    this.wait.forElementClickable(component.get(index));
     String componentToBeMovedText = component.get(index).getText();
     Point location = component.get(component.size() - 1).getLocation();
     Dimension size = component.get(component.size() - 1).getSize();
