@@ -83,7 +83,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     super();
   }
 
-  public InfoboxBuilderPage open(String templateName) {
+  public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
         .selectTemplateType()
@@ -91,6 +91,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
     driver.switchTo().frame(builderIFrame);
 
+    return this;
+  }
+
+  public InfoboxBuilderPage openExisting(String templateName) {
+    new TemplateEditPage().open(templateName)
+        .openCurrectArticleSourceMode();
+    driver.switchTo().frame(builderIFrame);
     return this;
   }
 
