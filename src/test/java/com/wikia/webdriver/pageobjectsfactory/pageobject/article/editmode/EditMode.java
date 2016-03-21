@@ -19,24 +19,37 @@ public class EditMode extends WikiBasePageObject {
 
   @FindBy(css = "#wpSave")
   protected WebElement submitButton;
+
   @FindBy(css = "#wpPreview")
-  private WebElement previewButton;
+  private WebElement desktopPreviewButton;
+
+  @FindBy(css = "#wpPreviewMobile")
+  private WebElement mobilePreviewButton;
+
   @FindBy(css = "a.RTEImageButton")
   private WebElement photoButton;
+
   @FindBy(css = "a.RTEVideoButton")
   private WebElement videoButton;
+
   @FindBy(css = "a.RTEGalleryButton")
   private WebElement galleryButton;
+
   @FindBy(css = "a.RTESlideshowButton")
   private WebElement slideshowButton;
+
   @FindBy(css = "a.RTESliderButton")
   private WebElement sliderButton;
+
   @FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
   private WebElement visualButton;
+
   @FindBy(css = "a.cke_button_ModeSource > span.cke_label")
   private WebElement sourceButton;
+
   @FindBy(css = "a.cke_off.cke_button_table")
   private WebElement addTableButton;
+
   @FindBy(css = ".editpage-notices")
   private WebElement notificationForAnon;
 
@@ -75,9 +88,18 @@ public class EditMode extends WikiBasePageObject {
 
   public PreviewEditModePageObject previewArticle() {
     driver.switchTo().defaultContent();
-    previewButton.click();
+    wait.forElementClickable(desktopPreviewButton);
+    desktopPreviewButton.click();
     PageObjectLogging.log("preview", "Page preview displayed", true);
     return new PreviewEditModePageObject(driver);
+  }
+
+  public MobilePreviewEditModePageObject mobilePreviewArticle() {
+    driver.switchTo().defaultContent();
+    wait.forElementClickable(mobilePreviewButton);
+    mobilePreviewButton.click();
+    PageObjectLogging.log("mobile preview", "Page mobile preview displayed", true);
+    return new MobilePreviewEditModePageObject();
   }
 
   public BlogPageObject submitBlog() {
