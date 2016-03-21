@@ -130,8 +130,7 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 
-  @Test(groups = "MercuryCuratedNavigationTest_004", invocationCount = 50)
-  @RelatedIssue(issueID = "XW-1242", comment = "Message about not existing section/category is not displayed sometimes")
+  @Test(groups = "MercuryCuratedNavigationTest_004")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     init();
 
@@ -149,7 +148,7 @@ public class NavigationTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.CC_EMPTY_CATEGORY);
     loading.handleAsyncPageReload();
     mercuryError.setAlertMessage(MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
-//    Assertion.assertTrue(mercuryError.isAlertMessageVisible());
+    Assertion.assertTrue(mercuryError.isAlertMessageVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
     expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
