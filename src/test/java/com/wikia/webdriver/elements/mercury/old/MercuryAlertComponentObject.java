@@ -8,11 +8,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MercuryAlertComponentObject {
+  private Wait wait;
+
+  private String alertMessage;
 
   @FindBy(css = ".alert-notifications .alert-box")
   protected WebElement alertBox;
 
-  private String alertMessage;
+  public MercuryAlertComponentObject(WebDriver driver, AlertMessage message) {
+    this.wait = new Wait(driver);
+    this.alertMessage = message.getMessage();
+
+    PageFactory.initElements(driver, this);
+  }
 
   public void setAlertMessage(AlertMessage message) {
     this.alertMessage = message.getMessage();
@@ -33,15 +41,6 @@ public class MercuryAlertComponentObject {
     public String getMessage() {
       return message;
     }
-  }
-
-  private Wait wait;
-
-  public MercuryAlertComponentObject(WebDriver driver, AlertMessage message) {
-    this.wait = new Wait(driver);
-    this.alertMessage = message.getMessage();
-
-    PageFactory.initElements(driver, this);
   }
 
   public boolean isAlertMessageVisible() {
