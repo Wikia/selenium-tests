@@ -3,6 +3,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -25,6 +27,9 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
 
   @FindBy(css = ".portable-infobox .pi-data")
   private WebElement infoboxData;
+
+  @FindBy(css = ".article-content p")
+  private WebElement articleContent;
 
   @FindBy(css = ".ember-container .article-body")
   private WebElement previewArticleBody;
@@ -66,6 +71,13 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   public MobilePreviewEditModePageObject infoboxTitle() {
     wait.forElementVisible(infoboxTitle);
     Assertion.assertTrue(infoboxTitle.isDisplayed());
+
+    return this;
+  }
+
+  public MobilePreviewEditModePageObject isArticleTextIsDisplayed() {
+    scrollToSelector(".article-content p");
+    Assertion.assertTrue(articleContent.isDisplayed());
 
     return this;
   }

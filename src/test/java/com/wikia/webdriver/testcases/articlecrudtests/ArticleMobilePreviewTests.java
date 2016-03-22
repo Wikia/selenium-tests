@@ -20,4 +20,11 @@ public class ArticleMobilePreviewTests extends NewTestTemplate{
         .infoboxTitle()
         .infoboxData();
   }
+
+  @Execute(asUser = User.USER)
+  public void verifyArticleTextIsDisplayed() {
+    MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
+    preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01).isArticleTextIsDisplayed();
+  }
+
 }
