@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = "ArticleMobilePreviewTests")
 @Execute(onWikia = "mediawiki119")
-public class ArticleMobilePreviewTests extends NewTestTemplate{
+public class ArticleMobilePreviewTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyInfoboxDisplayed() {
