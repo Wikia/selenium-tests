@@ -121,7 +121,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when run in parallel")
+  @RelatedIssue(issueID = "XW-829, XW-1281", comment = "Unstable when run in parallel")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     init();
 
@@ -172,7 +172,7 @@ public class EditorTests extends NewTestTemplate {
     Assertion.assertNumber(
         curatedContent.getCuratedContentItemsNumber(),
         1,
-        "New section items"
+        "If error says that 3 elements were found - it means getList API returned cached response - ticket created: XW-1281"
     );
   }
 

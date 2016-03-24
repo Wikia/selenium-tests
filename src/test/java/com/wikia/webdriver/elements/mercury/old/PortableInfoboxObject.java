@@ -337,22 +337,19 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject areUnorderedListAndDataValuesMarginEqual() {
-    Assertion.assertEquals(
-        unorderedLists.get(0).getCssValue("margin"),
-        dataValues.get(0).getCssValue("margin")
-    );
-    PageObjectLogging.log("Unordered list labels and value", "have the same margin", true);
+  public PortableInfoboxObject verifyDataValueMargin() {
+    Assertion.assertEquals(dataValues.get(0).getCssValue("margin"), "0px");
+    PageObjectLogging.log("Data values", "have correct margin", true);
 
     return this;
   }
 
-  public PortableInfoboxObject areOrderedListAndDataValuesMarginEqual() {
-    Assertion.assertEquals(
-        orderedLists.get(0).getCssValue("margin"),
-        dataValues.get(0).getCssValue("margin")
-    );
-    PageObjectLogging.log("Ordered list labels and value", "have the same margin", true);
+  public PortableInfoboxObject verifyListMargin() {
+    Assertion.assertEquals(orderedLists.get(0).getCssValue("margin"), "0px 0px 8px 10px");
+    PageObjectLogging.log("Ordered list ", "have correct margin", true);
+
+    Assertion.assertEquals(unorderedLists.get(0).getCssValue("margin"), "0px 0px 8px 10px");
+    PageObjectLogging.log("Unordered list ", "have correct margin", true);
 
     return this;
   }
