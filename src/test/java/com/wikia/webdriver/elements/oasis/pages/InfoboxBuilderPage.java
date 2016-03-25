@@ -20,8 +20,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".sub-head--done")
   private WebElement saveButton;
 
-  @FindBy(css = ".infobox-builder-sidebar-header-icon-delete")
+  @FindBy(css = ".infobox-builder-sidebar-header .infobox-builder-sidebar-header-icon-delete")
   private WebElement deleteButton;
+
+  @FindBy(css = ".pop-over-container .infobox-builder-sidebar-header-icon-delete")
+  private WebElement deletePopUp;
 
   @FindBy(css = "#useArticleName")
   private WebElement titleCheckbox;
@@ -213,53 +216,56 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage deleteTitleComponentWithIndex(int index) {
-    WebElement titleToDelete = titles.get(index);
-    wait.forElementClickable(titleToDelete);
-    titleToDelete.click();
-
-    wait.forElementClickable(deleteButton);
-    deleteButton.click();
-
+  public InfoboxBuilderPage deleteTitleUsingButton(int index) {
+    deleteItem(titles.get(index), deleteButton);
     return this;
   }
 
-  public InfoboxBuilderPage deleteRowComponentWithIndex(int index) {
-    WebElement rowToDelete = rows.get(index);
-    wait.forElementClickable(rowToDelete);
-    rowToDelete.click();
-
-    wait.forElementClickable(deleteButton);
-    deleteButton.click();
-
+  public InfoboxBuilderPage deleteRowUsingButton(int index) {
+    deleteItem(rows.get(index), deleteButton);
     return this;
   }
 
-  public InfoboxBuilderPage deleteImageComponentWithIndex(int index) {
-    WebElement imageToDelete = images.get(index);
-    wait.forElementClickable(imageToDelete);
-    imageToDelete.click();
-
-    wait.forElementClickable(deleteButton);
-    deleteButton.click();
-
+  public InfoboxBuilderPage deleteImageUsingButton(int index) {
+    deleteItem(images.get(index), deleteButton);
     return this;
   }
 
-  public InfoboxBuilderPage deleteHeaderComponentWithIndex(int index) {
-    WebElement headerToDelete = headers.get(index);
-    wait.forElementClickable(headerToDelete);
-    headerToDelete.click();
-
-    wait.forElementClickable(deleteButton);
-    deleteButton.click();
-
+  public InfoboxBuilderPage deleteHeaderUsingButton(int index) {
+    deleteItem(headers.get(index), deleteButton);
     return this;
+  }
+
+  public InfoboxBuilderPage deleteTitleUsingPopUp(int index) {
+    deleteItem(titles.get(index), deletePopUp);
+    return this;
+  }
+
+  public InfoboxBuilderPage deleteRowUsingPopUp(int index) {
+    deleteItem(rows.get(index), deletePopUp);
+    return this;
+  }
+
+  public InfoboxBuilderPage deleteImageUsingPopUp(int index) {
+    deleteItem(images.get(index), deletePopUp);
+    return this;
+  }
+
+  public InfoboxBuilderPage deleteHeaderUsingPopUp(int index) {
+    deleteItem(headers.get(index), deletePopUp);
+    return this;
+  }
+
+  private void deleteItem(WebElement item, WebElement deleteMethod) {
+    wait.forElementClickable(item);
+    item.click();
+
+    wait.forElementClickable(deleteMethod);
+    deleteMethod.click();
   }
 
   public InfoboxBuilderPage verifyScrollbarIsVisible() {
     Assertion.assertEquals(previewArea.getCssValue("overflow"), "auto");
-
     return this;
   }
 
