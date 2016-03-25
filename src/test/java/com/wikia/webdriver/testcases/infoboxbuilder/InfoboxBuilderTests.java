@@ -215,4 +215,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
+
+
+  //TODO: add cases for clicking 'yes' and 'no' buttons
+  @Execute(asUser = User.USER)
+  public void verifyGoToSourceEditorClickOnModalBackground() {
+    new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source")
+        .clickGoToSourceButton()
+        .verifyGoToSourceDialogIsPresent()
+        .clickGoToSourceModalBackground()
+        .verifyStaingInBuilder();
+  }
+
 }

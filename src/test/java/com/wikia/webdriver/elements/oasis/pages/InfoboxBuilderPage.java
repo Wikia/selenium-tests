@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -37,9 +38,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-sidebar-header-icon-back")
   private WebElement backArrowButton;
 
-  @FindBy(css = ".infobox-builder-questionmark")
-  private WebElement questionMarkButton;
-
   @FindBy(css = ".infobox-builder-sidebar .modal-dialog")
   private WebElement helpDialog;
 
@@ -57,6 +55,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".infobox-builder-preview")
   private WebElement builderBackground;
+
+  @FindBy(css = "#go-to-source")
+  private WebElement goToSourceButton;
+
+  @FindBy(css = ".infobox-builder-go-to-source-modal")
+  private WebElement goToSourceModal;
 
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
@@ -267,17 +271,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage verifyBackArrowFunctionality() {
-    wait.forElementVisible(backArrowButton);
+    wait.forElementClickable(backArrowButton);
     backArrowButton.click();
     Assertion.assertTrue(componentsButtons.get(0).isDisplayed());
-
-    return this;
-  }
-
-  public InfoboxBuilderPage verifyHelpDialog() {
-    wait.forElementVisible(questionMarkButton);
-    questionMarkButton.click();
-    Assertion.assertTrue(helpDialog.isDisplayed());
 
     return this;
   }
@@ -326,7 +322,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     WebElement selectedTitle = titles.get(index);
     wait.forElementClickable(selectedTitle);
     selectedTitle.click();
-    wait.forElementVisible(titleCheckbox);
+    wait.forElementClickable(titleCheckbox);
 
     if (!titleCheckbox.isSelected()) {
       titleCheckbox.click();
@@ -402,6 +398,30 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     component.get(component.size() - 1).click();
     Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
 
+    return this;
+  }
+
+  public InfoboxBuilderPage clickGoToSourceButton() {
+    wait.forElementClickable(goToSourceButton);
+    goToSourceButton.click();
+    return this;
+  }
+
+  public InfoboxBuilderPage verifyGoToSourceDialogIsPresent() {
+    wait.forElementVisible(goToSourceModal);
+    Assertion.assertTrue(goToSourceModal.isDisplayed());
+    return this;
+  }
+
+  public InfoboxBuilderPage clickGoToSourceModalBackground() {
+    wait.forElementClickable(goToSourceModal);
+    goToSourceModal.click();
+    return this;
+  }
+
+  public InfoboxBuilderPage verifyStaingInBuilder() {
+    wait.forElementClickable(builderBackground);
+    Assertion.assertTrue(builderBackground.isDisplayed());
     return this;
   }
 
