@@ -236,11 +236,14 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   //TODO: add cases for clicking 'yes' and 'no' buttons
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorClickOnModalBackground() {
-    new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source")
-        .clickGoToSourceButton()
-        .verifyGoToSourceDialogIsPresent()
-        .clickGoToSourceModalBackground()
-        .verifyStaingInBuilder();
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source")
+        .clickGoToSourceButton();
+
+    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+
+    builderPage.clickGoToSourceModalBackground();
+
+    Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
   }
 
   @Execute(asUser = User.USER)

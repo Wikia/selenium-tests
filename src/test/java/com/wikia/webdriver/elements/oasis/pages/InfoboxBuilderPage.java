@@ -413,10 +413,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage verifyGoToSourceDialogIsPresent() {
+  public boolean isGoToSourceDialogPresent() {
     wait.forElementVisible(goToSourceModal);
-    Assertion.assertTrue(goToSourceModal.isDisplayed());
-    return this;
+    return goToSourceModal.isDisplayed();
   }
 
   public InfoboxBuilderPage clickGoToSourceModalBackground() {
@@ -425,10 +424,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage verifyStaingInBuilder() {
+  public boolean isInfoboxBuilderOpened() {
     wait.forElementClickable(builderBackground);
-    Assertion.assertTrue(builderBackground.isDisplayed());
-    return this;
+    return builderBackground.isDisplayed();
   }
 
   public boolean isLabelInputFocused() {
