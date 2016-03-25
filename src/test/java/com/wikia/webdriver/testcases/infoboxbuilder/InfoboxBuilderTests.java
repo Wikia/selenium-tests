@@ -248,8 +248,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorNonEditedInfobox() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
-        "InfoboxBuilderSavingTemplate")
+    new InfoboxBuilderPage().openExisting("InfoboxBuilderSavingTemplate")
         .clickGoToSourceButton();
 
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());

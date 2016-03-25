@@ -1,8 +1,8 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,6 +10,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
@@ -141,7 +142,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public String getBorderStyle() {
-    JavascriptExecutor js = (JavascriptExecutor)driver;
+    JavascriptExecutor js = (JavascriptExecutor) driver;
     WebElement selectedComponent = component.get(0);
     wait.forElementClickable(selectedComponent);
     selectedComponent.click();
@@ -293,8 +294,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   /**
-   *  Verifies default rendered template structure, which should contain:
-   *  1 title component, 1 image component and 2 row components
+   * Verifies default rendered template structure, which should contain: 1 title component, 1 image
+   * component and 2 row components
    */
   public InfoboxBuilderPage verifyDefaultTemplateStructure() {
     Assertion.assertEquals(this.titles.size(), 1);
@@ -305,7 +306,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage changeHeaderCollapsibilityState(int index) {
-    JavascriptExecutor js = (JavascriptExecutor)driver;
+    JavascriptExecutor js = (JavascriptExecutor) driver;
     headers.get(index).click();
 
     wait.forElementClickable(collapsibilityCheckbox);
