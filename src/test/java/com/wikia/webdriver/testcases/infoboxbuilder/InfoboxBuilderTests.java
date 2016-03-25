@@ -247,6 +247,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
+  public void verifyGoToSourceEditorNonEditedInfobox() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
+        "InfoboxBuilderSavingTemplate")
+        .clickGoToSourceButton();
+
+    Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
+    Assertion.assertTrue(driver.getCurrentUrl().contains("InfoboxBuilderSavingTemplate"));
+  }
+
+  @Execute(asUser = User.USER)
   public void verifyIfInputFieldIsFocusedOnSelectItem() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_focus")
         .addHeaderComponent()
