@@ -28,6 +28,9 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   @FindBy(css = ".article-content p")
   private WebElement articleContent;
 
+  @FindBy(css = ".article-content .article-video")
+  private WebElement articleVideo;
+
   @FindBy(css = ".ember-container .article-body")
   private WebElement previewArticleBody;
 
@@ -68,9 +71,16 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
     return infoboxTitle.isDisplayed();
   }
 
-  public boolean isArticleTextIsDisplayed() {
+  public boolean isArticleTextDisplayed() {
     scrollToSelector(".article-content p");
 
     return articleContent.isDisplayed();
   }
+
+  public boolean isVideoDisplayed() {
+    wait.forElementVisible(articleVideo);
+
+    return articleVideo.isDisplayed();
+  }
+
 }

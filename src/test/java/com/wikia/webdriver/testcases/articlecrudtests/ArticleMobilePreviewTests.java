@@ -23,11 +23,19 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void verifyArticleTextIsDisplayed() {
+  public void isArticleTextDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
 
-    Assertion.assertTrue(preview.isArticleTextIsDisplayed());
+    Assertion.assertTrue(preview.isArticleTextDisplayed());
+  }
+
+  @Execute(asUser = User.USER)
+  public void isVideoDisplayed() {
+    MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
+    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_MOBILE);
+
+    Assertion.assertTrue(preview.isVideoDisplayed());
   }
 
 }
