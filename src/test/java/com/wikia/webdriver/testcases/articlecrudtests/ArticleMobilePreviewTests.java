@@ -17,6 +17,7 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
 
+    Assertion.assertTrue(preview.isInfoboxDisplayed());
     Assertion.assertTrue(preview.isHeroImageDisplayed());
     Assertion.assertTrue(preview.isDataComponentDisplayed());
     Assertion.assertTrue(preview.isTitleComponentDisplayed());
@@ -33,9 +34,17 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void isVideoDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
-    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_MOBILE);
+    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_VIDEO);
 
     Assertion.assertTrue(preview.isVideoDisplayed());
   }
 
+  @Execute(asUser = User.USER)
+  public void isImageWithCaptionDisplayed() {
+    MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
+    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_VIDEO);
+
+    Assertion.assertTrue(preview.isImageDisplayed());
+    Assertion.assertTrue(preview.isImageCaptionDisplayed());
+  }
 }

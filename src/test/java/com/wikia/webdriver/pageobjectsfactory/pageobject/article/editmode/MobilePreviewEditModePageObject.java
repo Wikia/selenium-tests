@@ -31,6 +31,12 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   @FindBy(css = ".article-content .article-video")
   private WebElement articleVideo;
 
+  @FindBy(css = ".article-content .article-image img")
+  private WebElement articleImage;
+
+  @FindBy(css = ".article-content .article-image figcaption")
+  private WebElement articleImageCaption;
+
   @FindBy(css = ".ember-container .article-body")
   private WebElement previewArticleBody;
 
@@ -47,7 +53,7 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
     return this;
   }
 
-  public boolean infoboxIsDisplayed() {
+  public boolean isInfoboxDisplayed() {
     wait.forElementVisible(infobox);
 
     return infobox.isDisplayed();
@@ -83,4 +89,15 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
     return articleVideo.isDisplayed();
   }
 
+  public boolean isImageDisplayed() {
+    wait.forElementVisible(articleImage);
+
+    return articleImage.isDisplayed();
+  }
+
+  public boolean isImageCaptionDisplayed() {
+    wait.forElementVisible(articleImageCaption);
+
+    return articleImageCaption.isDisplayed();
+  }
 }
