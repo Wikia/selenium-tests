@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import org.openqa.selenium.WebElement;
@@ -45,38 +44,33 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
     return this;
   }
 
-  public MobilePreviewEditModePageObject infoboxIsDisplayed() {
+  public boolean infoboxIsDisplayed() {
     wait.forElementVisible(infobox);
-    Assertion.assertTrue(infobox.isDisplayed());
 
-    return this;
+    return infobox.isDisplayed();
   }
 
-  public MobilePreviewEditModePageObject infoboxHeroImageIsDisplayed() {
+  public boolean isHeroImageDisplayed() {
     wait.forElementVisible(infoboxHeroImage);
-    Assertion.assertTrue(infoboxHeroImage.isDisplayed());
 
-    return this;
+    return infoboxHeroImage.isDisplayed();
   }
 
-  public MobilePreviewEditModePageObject infoboxData() {
+  public boolean isDataComponentDisplayed() {
     wait.forElementVisible(infoboxData);
-    Assertion.assertTrue(infoboxData.isDisplayed());
 
-    return this;
+    return infoboxData.isDisplayed();
   }
 
-  public MobilePreviewEditModePageObject infoboxTitle() {
+  public boolean isTitleComponentDisplayed() {
     wait.forElementVisible(infoboxTitle);
-    Assertion.assertTrue(infoboxTitle.isDisplayed());
 
-    return this;
+    return infoboxTitle.isDisplayed();
   }
 
-  public MobilePreviewEditModePageObject isArticleTextIsDisplayed() {
+  public boolean isArticleTextIsDisplayed() {
     scrollToSelector(".article-content p");
-    Assertion.assertTrue(articleContent.isDisplayed());
 
-    return this;
+    return articleContent.isDisplayed();
   }
 }

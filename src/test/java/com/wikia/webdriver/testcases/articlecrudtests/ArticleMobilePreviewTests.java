@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,19 +13,21 @@ import org.testng.annotations.Test;
 public class ArticleMobilePreviewTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
-  public void verifyInfoboxDisplayed() {
+  public void isInfoboxDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
-    preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01)
-        .infoboxIsDisplayed()
-        .infoboxHeroImageIsDisplayed()
-        .infoboxTitle()
-        .infoboxData();
+    preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
+
+    Assertion.assertTrue(preview.isHeroImageDisplayed());
+    Assertion.assertTrue(preview.isDataComponentDisplayed());
+    Assertion.assertTrue(preview.isTitleComponentDisplayed());
   }
 
   @Execute(asUser = User.USER)
   public void verifyArticleTextIsDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
-    preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01).isArticleTextIsDisplayed();
+    preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
+
+    Assertion.assertTrue(preview.isArticleTextIsDisplayed());
   }
 
 }
