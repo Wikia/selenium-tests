@@ -42,7 +42,7 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void isImageWithCaptionDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
-    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_VIDEO);
+    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_IMAGE);
 
     Assertion.assertTrue(preview.isImageDisplayed());
     Assertion.assertTrue(preview.isImageCaptionDisplayed());
