@@ -431,6 +431,14 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  public boolean isLabelInputFocused() {
+    return rowLabelInputField.equals(driver.switchTo().activeElement());
+  }
+
+  public boolean isHeaderInputFocused() {
+    return sectionHeaderInputField.equals(driver.switchTo().activeElement());
+  }
+
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();

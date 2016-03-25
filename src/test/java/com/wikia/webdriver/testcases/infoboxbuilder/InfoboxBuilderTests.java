@@ -243,5 +243,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .verifyStaingInBuilder();
   }
 
+  @Execute(asUser = User.USER)
+  public void verifyIfInputFieldIsFocusedOnSelectItem() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_focus")
+        .addHeaderComponent()
+        .selectRowWithIndex(0);
+
+    Assertion.assertTrue(builderPage.isLabelInputFocused());
+
+    builderPage.selectHeaderWithIndex(0);
+
+    Assertion.assertTrue(builderPage.isHeaderInputFocused());
+  }
 
 }
