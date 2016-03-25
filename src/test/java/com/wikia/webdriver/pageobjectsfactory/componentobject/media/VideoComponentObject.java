@@ -131,7 +131,6 @@ public class VideoComponentObject extends WikiBasePageObject {
       case "sevenload":
       case "gametrailers":
       case "viddler":
-      case "bliptv":
       case "twitchtv":
       case "youku":
         break;
