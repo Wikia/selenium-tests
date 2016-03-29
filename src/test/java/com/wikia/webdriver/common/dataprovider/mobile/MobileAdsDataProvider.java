@@ -372,9 +372,9 @@ public class MobileAdsDataProvider {
                     "\"esrb\":\"teen\""
                 ),
                 Arrays.asList(
-                    "\"sect\":\"ros\"",
                     "\"pos\":\"a\"",
-                    "\"site\":\"wikia_intl\""
+                    "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
+                    "\"wsrc\":\"mobile_evolve\""
                 )
             }
         };
