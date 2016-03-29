@@ -39,29 +39,16 @@ public class AuthModal extends WikiBasePageObject {
     PageFactory.initElements(webDriver, this);
   }
 
-  private void switchToFrame(){
-//    webDriver.switchTo().frame(iFrame);
-  }
-
-  private void switchBack(){
-//    webDriver.switchTo().defaultContent();
-  }
-
   public boolean isOpened(){
-    switchToFrame();
     boolean isOpenedResult = authModal.isDisplayed();
-    switchBack();
     return isOpenedResult;
   }
 
   public void login(String username, String password){
-//    new Wait(webDriver).forElementVisible(iFrame);
-    switchToFrame();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
     signInButton.click();
     this.webDriver.switchTo().window(this.mainWindowHandle);
-    switchBack();
   }
 
   public void login(User user){
@@ -69,7 +56,6 @@ public class AuthModal extends WikiBasePageObject {
   }
 
   public void clickForgotPasswordLink(){
-    switchToFrame();
     forgottenPasswordLink.click();
   }
 

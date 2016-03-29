@@ -51,7 +51,6 @@ public class LoginTests extends NewTestTemplate {
     Assert.assertTrue(authModal.isOpened());
 
     authModal.login(credentials.userName10, credentials.password10);
-    base = new WikiBasePageObject();
     base.verifyUserLoggedIn(credentials.userName10);
   }
 
