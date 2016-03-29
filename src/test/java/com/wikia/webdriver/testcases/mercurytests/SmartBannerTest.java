@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.SmartBanner;
+import com.wikia.webdriver.elements.mercury.components.SmartBanner;
 
 import org.testng.annotations.Test;
 

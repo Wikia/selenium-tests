@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
@@ -123,7 +124,7 @@ public class Layout extends NewTestTemplate {
     PostsListPage postsList = new PostsListPage(driver).open();
     int startingListLength = postsList.getPostsListLength();
     postsList.scrollToBottom(driver);
-    new com.wikia.webdriver.elements.mercury.Loading(driver).handleAsyncPageReload();
+    new Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(startingListLength < postsList.getPostsListLength());
   }
 
