@@ -2,10 +2,13 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MobilePreviewEditModePageObject extends BasePageObject {
+
+  private static final String articleContentSelector = ".article-content p";
 
   @FindBy(css = ".mobile-preview")
   private WebElement previewModal;
@@ -25,7 +28,7 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   @FindBy(css = ".portable-infobox .pi-data")
   private WebElement infoboxData;
 
-  @FindBy(css = ".article-content p")
+  @FindBy(css = articleContentSelector)
   private WebElement articleContent;
 
   @FindBy(css = ".article-content .article-video")
@@ -54,49 +57,50 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   }
 
   public boolean isInfoboxDisplayed() {
-    wait.forElementVisible(infobox);
+    wait.forElementPresent(By.cssSelector(".portable-infobox"));
 
     return infobox.isDisplayed();
   }
 
   public boolean isHeroImageDisplayed() {
-    wait.forElementVisible(infoboxHeroImage);
+    wait.forElementPresent(By.cssSelector(".portable-infobox .pi-hero"));
 
     return infoboxHeroImage.isDisplayed();
   }
 
   public boolean isDataComponentDisplayed() {
-    wait.forElementVisible(infoboxData);
+    wait.forElementPresent(By.cssSelector(".portable-infobox .pi-data"));
 
     return infoboxData.isDisplayed();
   }
 
   public boolean isTitleComponentDisplayed() {
-    wait.forElementVisible(infoboxTitle);
+    wait.forElementPresent(By.cssSelector(".portable-infobox .pi-title"));
 
     return infoboxTitle.isDisplayed();
   }
 
   public boolean isArticleTextDisplayed() {
-    scrollToSelector(".article-content p");
+    scrollToSelector(articleContentSelector);
+    wait.forElementPresent(By.cssSelector(articleContentSelector));
 
     return articleContent.isDisplayed();
   }
 
   public boolean isVideoDisplayed() {
-    wait.forElementVisible(articleVideo);
+    wait.forElementPresent(By.cssSelector(".article-content .article-video"));
 
     return articleVideo.isDisplayed();
   }
 
   public boolean isImageDisplayed() {
-    wait.forElementVisible(articleImage);
+    wait.forElementPresent(By.cssSelector(".article-content .article-image img"));
 
     return articleImage.isDisplayed();
   }
 
   public boolean isImageCaptionDisplayed() {
-    wait.forElementVisible(articleImageCaption);
+    wait.forElementPresent(By.cssSelector(".article-content .article-image figcaption"));
 
     return articleImageCaption.isDisplayed();
   }

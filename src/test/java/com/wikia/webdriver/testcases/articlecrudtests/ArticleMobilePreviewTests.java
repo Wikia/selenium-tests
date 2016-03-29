@@ -9,10 +9,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Mobile
 import org.testng.annotations.Test;
 
 @Test(groups = "ArticleMobilePreviewTests")
-@Execute(onWikia = "mediawiki119")
+@Execute(onWikia = "mediawiki119", asUser = User.USER)
 public class ArticleMobilePreviewTests extends NewTestTemplate {
 
-  @Execute(asUser = User.USER)
+  @Test(groups = {"ArticleMobilePreviewTests_001"})
   public void isInfoboxDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
@@ -23,7 +23,7 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
     Assertion.assertTrue(preview.isTitleComponentDisplayed());
   }
 
-  @Execute(asUser = User.USER)
+  @Test(groups = {"ArticleMobilePreviewTests_002"})
   public void isArticleTextDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
@@ -31,18 +31,18 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
     Assertion.assertTrue(preview.isArticleTextDisplayed());
   }
 
-  @Execute(asUser = User.USER)
+  @Test(groups = {"ArticleMobilePreviewTests_003"})
   public void isVideoDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
-    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_VIDEO);
+    preview.openMobilePreview("MobilePreviewVideoTest");
 
     Assertion.assertTrue(preview.isVideoDisplayed());
   }
 
-  @Execute(asUser = User.USER)
+  @Test(groups = {"ArticleMobilePreviewTests_004"})
   public void isImageWithCaptionDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
-    preview.openMobilePreview(PageContent.MOBILE_PREVIEW_IMAGE);
+    preview.openMobilePreview("MobilePreviewImageTest");
 
     Assertion.assertTrue(preview.isImageDisplayed());
     Assertion.assertTrue(preview.isImageCaptionDisplayed());

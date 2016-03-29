@@ -141,10 +141,6 @@ public class PageContent {
   //Customized toolbar
   public static final String FOLLOW = "follow";
 
-  //Mobile preview
-  public static final String MOBILE_PREVIEW_VIDEO = "MobilePreviewVideoTest";
-  public static final String MOBILE_PREVIEW_IMAGE = "MobilePreviewImageTest";
-
   private PageContent() {
   }
 }
