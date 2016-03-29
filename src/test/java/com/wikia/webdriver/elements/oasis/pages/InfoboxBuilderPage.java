@@ -178,7 +178,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage addRowComponent() {
-    WebElement rowComponentButton = componentsButtons.get(0);
+    WebElement rowComponentButton = componentsButtons.get(2);
     wait.forElementVisible(rowComponentButton);
     rowComponentButton.click();
 
@@ -194,7 +194,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage addTitleComponent() {
-    WebElement titleComponentButton = componentsButtons.get(2);
+    WebElement titleComponentButton = componentsButtons.get(0);
     wait.forElementVisible(titleComponentButton);
     titleComponentButton.click();
 
