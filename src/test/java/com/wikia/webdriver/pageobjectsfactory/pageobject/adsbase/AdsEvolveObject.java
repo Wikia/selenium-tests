@@ -24,7 +24,7 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR), true, DEFAULT_TIMEOUT);
+    wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR), DEFAULT_TIMEOUT);
     PageObjectLogging.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
   }
 

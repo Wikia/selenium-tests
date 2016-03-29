@@ -48,15 +48,19 @@ public class Wait {
    * Checks if the element is present in browser DOM
    */
   public WebElement forElementPresent(By by, boolean failOnTimeout) {
-    return forElementPresent(this.wait, by, failOnTimeout);
-  }
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    } catch (TimeoutException e) {
+      if (failOnTimeout) {
+        PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
+                              String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
+      }
 
-  /**
-   * Checks if the element is present in browser DOM
-   */
-  public WebElement forElementPresent(By by, boolean failOnTimeout, int timeout) {
-    WebDriverWait driverWait = new WebDriverWait(this.driver, timeout);
-    return forElementPresent(driverWait, by, failOnTimeout);
+      throw e;
+    } finally {
+      restoreDeaultImplicitWait();
+    }
   }
 
   /**
@@ -410,22 +414,6 @@ public class Wait {
       Thread.sleep(time);
     } catch (InterruptedException e) {
       PageObjectLogging.log("Wait.forXMilliseconds", e, false);
-    }
-  }
-
-  private WebElement forElementPresent(WebDriverWait wait, By by, boolean failOnTimeout) {
-    changeImplicitWait(250, TimeUnit.MILLISECONDS);
-    try {
-      return wait.until(ExpectedConditions.presenceOfElementLocated(by));
-    } catch (TimeoutException e) {
-      if (failOnTimeout) {
-        PageObjectLogging.log(ELEMENT_PRESENT_MESSAGE,
-                              String.format(ELEMENT_PRESENT_ERROR_FORMAT, by.toString()), false);
-      }
-
-      throw e;
-    } finally {
-      restoreDeaultImplicitWait();
     }
   }
 }
