@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mediawiki119", asUser = User.USER)
 public class ArticleMobilePreviewTests extends NewTestTemplate {
 
-  @Test(groups = {"ArticleMobilePreviewTests_001"})
+  @Test()
   public void isInfoboxDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
@@ -23,7 +23,7 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
     Assertion.assertTrue(preview.isTitleComponentDisplayed());
   }
 
-  @Test(groups = {"ArticleMobilePreviewTests_002"})
+  @Test()
   public void isArticleTextDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview(PageContent.PORTABLE_INFOBOX_01);
@@ -31,7 +31,7 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
     Assertion.assertTrue(preview.isArticleTextDisplayed());
   }
 
-  @Test(groups = {"ArticleMobilePreviewTests_003"})
+  @Test()
   public void isVideoDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview("MobilePreviewVideoTest");
@@ -39,7 +39,7 @@ public class ArticleMobilePreviewTests extends NewTestTemplate {
     Assertion.assertTrue(preview.isVideoDisplayed());
   }
 
-  @Test(groups = {"ArticleMobilePreviewTests_004"})
+  @Test()
   public void isImageWithCaptionDisplayed() {
     MobilePreviewEditModePageObject preview = new MobilePreviewEditModePageObject();
     preview.openMobilePreview("MobilePreviewImageTest");

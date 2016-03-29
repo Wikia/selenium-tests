@@ -8,8 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class MobilePreviewEditModePageObject extends BasePageObject {
 
-  private static final String articleContentSelector = ".article-content p";
-
   @FindBy(css = ".mobile-preview")
   private WebElement previewModal;
 
@@ -28,7 +26,7 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   @FindBy(css = ".portable-infobox .pi-data")
   private WebElement infoboxData;
 
-  @FindBy(css = articleContentSelector)
+  @FindBy(css = ".article-content p")
   private WebElement articleContent;
 
   @FindBy(css = ".article-content .article-video")
@@ -81,8 +79,8 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   }
 
   public boolean isArticleTextDisplayed() {
-    scrollToSelector(articleContentSelector);
-    wait.forElementPresent(By.cssSelector(articleContentSelector));
+    wait.forElementPresent(By.cssSelector(".article-content p"));
+    scrollToSelector(".article-content p");
 
     return articleContent.isDisplayed();
   }
