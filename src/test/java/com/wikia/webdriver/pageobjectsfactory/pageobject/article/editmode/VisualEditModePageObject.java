@@ -28,6 +28,8 @@ public class VisualEditModePageObject extends EditMode {
 
   private static final String IMAGE_COMPONENT_CSS = "img.image";
   private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
+  @FindBy(css = "#wpSave")
+  private WebElement submitButton;
   @FindBy(css = ".video-thumbnail")
   protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
