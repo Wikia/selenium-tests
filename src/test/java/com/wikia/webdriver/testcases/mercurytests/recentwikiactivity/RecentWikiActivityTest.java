@@ -16,8 +16,8 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class RecentWikiActivityTest extends NewTestTemplate {
 
-  @Test()
-  public void recentWikiActivity_anonNavigateToRWAfromMenu() {
+  @Test(groups = "mercury_recentWikiActivity_anonNavigateToRWAfromMenu")
+  public void mercury_recentWikiActivity_anonNavigateToRWAfromMenu() {
     new MainPage()
         .open()
         .getTopBar()
@@ -25,36 +25,36 @@ public class RecentWikiActivityTest extends NewTestTemplate {
         .openRecentWikiActivity();
   }
 
-  @Test()
-  public void recentWikiActivity_anonOpenDiffPageAndGoBack() {
+  @Test(groups = "mercury_recentWikiActivity_anonOpenDiffPageAndGoBack")
+  public void mercury_recentWikiActivity_anonOpenDiffPageAndGoBack() {
     this.openDiffPageAndGoBack();
   }
 
-  @Test()
+  @Test(groups = "mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack")
   @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
-  public void recentWikiActivity_blockedUserOpenDiffPageAndGoBack() {
+  public void mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack() {
     this.openDiffPageAndGoBack();
   }
 
-  @Test()
+  @Test(groups = "mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithoutSummary")
   @Execute(asUser = User.USER)
-  public void recentWikiActivityAsUser_undoWithoutSummary() {
+  public void mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithoutSummary() {
     this.openDiffPage()
         .submitWithoutSummary()
         .displaySuccessNotification();
   }
 
-  @Test()
+  @Test(groups = "mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithSummary")
   @Execute(asUser = User.USER)
-  public void recentWikiActivityAsUser_undoWithSummary() {
+  public void mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithSummary() {
     this.openDiffPage()
         .submitWithSummary()
         .displaySuccessNotification();
   }
 
-  @Test()
+  @Test(groups = "mercury_recentWikiActivity_loggedUserOpenDiffPageAndGoBackFromSummary")
   @Execute(asUser = User.USER)
-  public void recentWikiActivityAsUser_goBackFromSummaryWithoutUndo() {
+  public void mercury_recentWikiActivity_loggedUserOpenDiffPageAndGoBackFromSummary() {
     this.openDiffPage()
         .goBackFromSummaryPage();
   }
