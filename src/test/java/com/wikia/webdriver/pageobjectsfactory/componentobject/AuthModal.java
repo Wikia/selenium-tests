@@ -26,20 +26,25 @@ public class AuthModal extends WikiBasePageObject {
   private WebElement forgottenPasswordLink;
 
   private WebDriver webDriver;
+  private String mainWindowHandle;
 
   public AuthModal(WikiaWebDriver webDriver){
     super();
     this.webDriver = webDriver;
-
+    waitForNewWindow();
+    this.mainWindowHandle =  this.webDriver.getWindowHandle();
+    for(String winHandle : this.webDriver.getWindowHandles()){
+      this.webDriver.switchTo().window(winHandle);
+    }
     PageFactory.initElements(webDriver, this);
   }
 
   private void switchToFrame(){
-    webDriver.switchTo().frame(iFrame);
+//    webDriver.switchTo().frame(iFrame);
   }
 
   private void switchBack(){
-    webDriver.switchTo().defaultContent();
+//    webDriver.switchTo().defaultContent();
   }
 
   public boolean isOpened(){
@@ -50,11 +55,12 @@ public class AuthModal extends WikiBasePageObject {
   }
 
   public void login(String username, String password){
-    new Wait(webDriver).forElementVisible(iFrame);
+//    new Wait(webDriver).forElementVisible(iFrame);
     switchToFrame();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
     signInButton.click();
+    this.webDriver.switchTo().window(this.mainWindowHandle);
     switchBack();
   }
 
