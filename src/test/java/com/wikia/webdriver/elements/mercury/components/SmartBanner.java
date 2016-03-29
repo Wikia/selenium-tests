@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury;
+package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
