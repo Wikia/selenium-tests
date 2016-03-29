@@ -64,6 +64,7 @@
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleEditDropdownTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleFeaturesCRUDTestsAnon"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleFeaturesCRUDTestsUser"/>
+            <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleMobilePreviewTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleRTETest"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleSourceModeTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleTOCTests"/>
