@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -56,12 +57,14 @@ public class RecentWikiActivity extends WikiBasePageObject {
   public RecentWikiActivity openDiffPage() {
     wait.forElementClickable(seeDiffArrow);
 
-    String urlToBeRedirected = seeDiffArrow.getAttribute("href");
+    String urlPath = seeDiffArrow.getAttribute("href");
     seeDiffArrow.click();
 
     loading.handleAsyncPageReload();
 
-    PageObjectLogging.logInfo("The arrow redirecting to the diff page was clicked");
+    Assertion.assertTrue(driver.getCurrentUrl().contains(urlPath),
+                         "Url does not contain: " + urlPath);
+    PageObjectLogging.logInfo("Diff page: " + urlPath + ", was opened");
 
     return this;
   }
