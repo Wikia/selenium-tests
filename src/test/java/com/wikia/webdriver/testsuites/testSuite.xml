@@ -16,12 +16,14 @@
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDisableGpt"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParamOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsIncontentLeaderboardOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
@@ -43,11 +45,11 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFloatingMedrecOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestATF"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestFloorAdhesion"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestIncontentBoxad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestIVWAnalyticsProvider"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsLoggedInUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
@@ -102,6 +104,7 @@
             <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>
+            <class name="com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.BlockedUserMapTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.DeleteAndRestoreMapTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.EmbedMapTests"/>

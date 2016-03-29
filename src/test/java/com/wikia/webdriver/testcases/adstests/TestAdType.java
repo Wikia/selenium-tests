@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.ads.AdTypeDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -13,11 +14,15 @@ public class TestAdType extends TemplateNoFirstLoad {
       dataProvider = "collapse",
       groups = {"Ads", "TestAdTypeCollapse"}
   )
-  public void TestAdTypeCollapse(String wikiName, String article, String adUnit, String slotName) {
+  public void TestAdTypeCollapse(String wikiName, String article, String adUnit, String[] slots) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
-    ads.verifyGptIframe(adUnit, slotName, "gpt");
-    ads.verifySize(slotName, "gpt", 0, 0);
+    for (String slotName : slots) {
+      ads.verifyGptIframe(adUnit, slotName, "gpt");
+      ads.verifyIframeSize(slotName, "gpt", 0, 0);
+    }
+    final String topButtonWideSelector = AdsContent.SLOTS_SELECTORS.get(AdsContent.TOP_BUTTON_WIDE);
+    ads.verifyNoAd(topButtonWideSelector);
   }
 }

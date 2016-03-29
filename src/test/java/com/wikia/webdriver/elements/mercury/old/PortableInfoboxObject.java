@@ -17,48 +17,70 @@ public class PortableInfoboxObject {
 
   @FindBy(css = "body")
   private WebElement bodyElement;
+
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
+
   @FindBy(css = ".pi-hero .article-image")
   private WebElement mainImage;
+
   @FindBy(css = ".portable-infobox .pi-hero-title")
   private WebElement title;
+
   @FindBy(css = ".portable-infobox .pi-title")
   private WebElement titleSmallImage;
+
   @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
+
   @FindBy(css = ".article-content .collapsed")
   private WebElement infoboxIsCollapsed;
+
   @FindBy(css = ".tabber .article-image")
   private WebElement imageInTabber;
+
   @FindBy(css = ".tabber figcaption")
   private WebElement captionInTabber;
+
   @FindBy(css = ".portable-infobox .article-video")
   private WebElement video;
+
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
+
   @FindBy(css = ".pi-title img")
   private WebElement imageInTitle;
+
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
-  @FindBy(css = ".portable-infobox .linked-gallery button")
+
+  @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
   private List<WebElement> galleryButtonList;
+
   @FindBy(css = ".image-collection-actions .action-next")
   private WebElement nextImageArrow;
+
   @FindBy(css = ".portable-infobox .external")
   private List<WebElement> externalLinks;
+
   @FindBy(css = ".pi-item .pi-data-label")
   private List<WebElement> dataLabels;
+
   @FindBy(css = ".pi-item .pi-data-value")
   private List<WebElement> dataValues;
+
   @FindBy(css = ".portable-infobox .reference")
   private List<WebElement> references;
+
   @FindBy(css = ".portable-infobox ul li")
   private List<WebElement> unorderedLists;
+
   @FindBy(css = ".portable-infobox ol li")
   private List<WebElement> orderedLists;
+
   @FindBy(css = ".pi-header")
   private List<WebElement> headers;
+
   @FindBy(css = ".portable-infobox .pi-image img")
   private List<WebElement> images;
 
@@ -315,22 +337,19 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject areUnorderedListAndDataValuesMarginEqual() {
-    Assertion.assertEquals(
-        unorderedLists.get(0).getCssValue("margin"),
-        dataValues.get(0).getCssValue("margin")
-    );
-    PageObjectLogging.log("Unordered list labels and value", "have the same margin", true);
+  public PortableInfoboxObject verifyDataValueMargin() {
+    Assertion.assertEquals(dataValues.get(0).getCssValue("margin"), "0px");
+    PageObjectLogging.log("Data values", "have correct margin", true);
 
     return this;
   }
 
-  public PortableInfoboxObject areOrderedListAndDataValuesMarginEqual() {
-    Assertion.assertEquals(
-        orderedLists.get(0).getCssValue("margin"),
-        dataValues.get(0).getCssValue("margin")
-    );
-    PageObjectLogging.log("Ordered list labels and value", "have the same margin", true);
+  public PortableInfoboxObject verifyListMargin() {
+    Assertion.assertEquals(orderedLists.get(0).getCssValue("margin"), "0px 0px 8px 10px");
+    PageObjectLogging.log("Ordered list ", "have correct margin", true);
+
+    Assertion.assertEquals(unorderedLists.get(0).getCssValue("margin"), "0px 0px 8px 10px");
+    PageObjectLogging.log("Unordered list ", "have correct margin", true);
 
     return this;
   }

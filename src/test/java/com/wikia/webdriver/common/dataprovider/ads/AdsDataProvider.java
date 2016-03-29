@@ -178,6 +178,43 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] fliteSkin() {
+    return new Object[][]{
+        {
+            "adtest", "Demo/Flite/Background_Takeover",
+            new Dimension(1200, 1000),
+            Arrays.asList(
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_1.png",
+                    "src/test/resources/adsResources/flite_skin_right_1.png",
+                    ""
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_2.png",
+                    "src/test/resources/adsResources/flite_skin_right_2.png",
+                    "div[id*='div18']"
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_3.png",
+                    "src/test/resources/adsResources/flite_skin_right_3.png",
+                    "div[id*='div16']"
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_4.png",
+                    "src/test/resources/adsResources/flite_skin_right_4.png",
+                    "div[id*='div14']"
+                ),
+                Arrays.asList(
+                    "src/test/resources/adsResources/flite_skin_left_1.png",
+                    "src/test/resources/adsResources/flite_skin_right_1.png",
+                    "div[id*='div20']"
+                )
+            )
+        },
+        };
+  }
+
+  @DataProvider
   public static Object[][] skin() {
     return new Object[][]{
         {
@@ -571,7 +608,8 @@ public class AdsDataProvider {
             "TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000\",\"57_tier2000\"]"
+                "\"rpfl_7450\":[\"2_tier2000",
+                "\"57_tier2000"
             )
         }
     };
@@ -631,12 +669,6 @@ public class AdsDataProvider {
     return new Object[][]{
         {"adtest", "SyntheticTests/Amazon"},
     };
-  }
-
-  @DataProvider
-  public static Object[][] incontentBoxad() {
-    return new Object[][]{
-        {"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
   }
 
   @DataProvider
@@ -982,6 +1014,81 @@ public class AdsDataProvider {
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsFloatingMedrec() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage",
+            223909212,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600",
+            223968492,
+            300,
+            600
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper",
+            223968492,
+            300,
+            600
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers",
+            223909212,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec",
+            223909212,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600",
+            237935652,
+            160,
+            600
+        },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsIncontentLeaderboard() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/728x90",
+            239961972,
+            728,
+            90
+        },
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/300x250",
+            239961132,
+            300,
+            250
+        },
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/468x60",
+            241472412,
+            468,
+            60
+        },
     };
   }
 }

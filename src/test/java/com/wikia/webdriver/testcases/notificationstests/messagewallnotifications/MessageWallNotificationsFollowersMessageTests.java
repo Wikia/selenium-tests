@@ -21,7 +21,8 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   @Test(
       groups = {
           "MessageWallNotificationsFollowersMessageTests_001",
-          "MessageWallNotificationsFollowersMessageTests"
+          "MessageWallNotificationsFollowersMessageTests",
+          "NotificationsTests"
       }
   )
   public void followerNotificationNewMessage_setup_1() {
@@ -36,7 +37,8 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   @Test(
       groups = {
           "MessageWallNotificationsFollowersMessageTests_002",
-          "MessageWallNotificationsFollowersMessageTests"
+          "MessageWallNotificationsFollowersMessageTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationNewMessage_setup_1"
   )
@@ -56,11 +58,12 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   @Test(
       groups = {
           "MessageWallNotificationsFollowersMessageTests_003",
-          "MessageWallNotificationsFollowersMessageTests"
+          "MessageWallNotificationsFollowersMessageTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationNewMessage_setup_2"
   )
-  public void followerNotificationNewMessage_verification() {
+  public void userIsNotifiedWhenOtherUserWritesMessageOnFollowedMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName5, credentials.password5, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

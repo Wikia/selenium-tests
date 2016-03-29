@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Creat
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.VECreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfoboxPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -155,7 +155,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
 
-  private PortableInfoboxPageObject portableInfobox;
+  private PortableInfobox portableInfobox;
 
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
   private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
@@ -907,5 +907,4 @@ public class ArticlePageObject extends WikiBasePageObject {
     editArticleInDropDown.click();
     return new VisualEditModePageObject();
   }
-
 }

@@ -20,7 +20,8 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
   @Test(
       groups = {
           "MessageWallNotificationsThreadCreatorTests_001",
-          "MessageWallNotificationsThreadCreatorTests"
+          "MessageWallNotificationsThreadCreatorTests",
+          "NotificationsTests"
       }
   )
   public void threadCreatorNotification_setup_1() {
@@ -39,7 +40,8 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
   @Test(
       groups = {
           "MessageWallNotificationsThreadCreatorTests_002",
-          "MessageWallNotificationsThreadCreatorTests"
+          "MessageWallNotificationsThreadCreatorTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "threadCreatorNotification_setup_1"
   )
@@ -50,7 +52,6 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndQuoteMessageWall(reply);
-    ;
     wall.submitQuote();
     wall.verifyQuote(reply);
   }
@@ -58,11 +59,12 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
   @Test(
       groups = {
           "MessageWallNotificationsThreadCreatorTests_003",
-          "MessageWallNotificationsThreadCreatorTests"
+          "MessageWallNotificationsThreadCreatorTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
- public void threadCreatorNotification_verification() {
+ public void userIsNotifiedWhenOtherUserWritesResponseOnHerMessageWal() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName11, credentials.password11, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);

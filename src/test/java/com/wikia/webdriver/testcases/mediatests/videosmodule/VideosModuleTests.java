@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.mediatests.videosmodule;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.VideosModuleComponentObject;
@@ -11,14 +10,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
 import org.testng.annotations.Test;
 
-@Execute(onWikia = "sktest123")
+@Execute(onWikia = "de.vidauto")
 public class VideosModuleTests extends NewTestTemplate {
 
   @Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
-  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated see ticket for details.")
   public void visitorCanSeeVideosModuleOnArticleAndFilePages() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -36,7 +33,6 @@ public class VideosModuleTests extends NewTestTemplate {
    * File pages. This is just a smoke test to make sure nothing is seriously wrong.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_002", "Media"})
-  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated see ticket for details.")
   public void VideosModuleTest_002() {
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 
@@ -52,8 +48,6 @@ public class VideosModuleTests extends NewTestTemplate {
    * between 3 and 5.
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_003", "Media"})
-  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated "
-                                                 + "see ticket for details.")
   public void VideosModuleTest_003() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -65,8 +59,6 @@ public class VideosModuleTests extends NewTestTemplate {
    * Checks if the Videos Module is not showing any duplicate videos
    */
   @Test(groups = {"VideosModule", "VideosModuleTest_004", "Media"})
-  @RelatedIssue(issueID = "SUS-132", comment = "Test manually as test is being updated "
-                                                 + "see ticket for details.")
   public void VideosModuleTest_004() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 

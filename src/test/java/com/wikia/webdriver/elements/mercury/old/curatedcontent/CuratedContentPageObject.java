@@ -22,7 +22,7 @@ public class CuratedContentPageObject {
 
   @FindBy(css = ".article-wrapper")
   private WebElement articleWrapper;
-  @FindBy(css = ".article-title")
+  @FindBy(css = ".wiki-page-title")
   private WebElement sectionTitle;
   @FindBy(css = ".wiki-title a")
   private WebElement linkToMainPage;

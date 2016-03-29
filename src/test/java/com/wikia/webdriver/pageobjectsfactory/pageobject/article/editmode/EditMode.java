@@ -33,10 +33,12 @@ public class EditMode extends WikiBasePageObject {
   private WebElement sliderButton;
   @FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
   private WebElement visualButton;
-  @FindBy(css = "a.cke_button_ModeSource > span#cke_22_label")
+  @FindBy(css = "a.cke_button_ModeSource > span.cke_label")
   private WebElement sourceButton;
   @FindBy(css = "a.cke_off.cke_button_table")
   private WebElement addTableButton;
+  @FindBy(css = ".editpage-notices")
+  private WebElement notificationForAnon;
 
   private By submitButtonBy = By.cssSelector("#wpSave");
 
@@ -48,13 +50,27 @@ public class EditMode extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
-    wait.forElementNotPresent(submitButtonBy);
-    PageObjectLogging.log("submit", "Page submitted", true);
+
+    PageObjectLogging.logInfo("Submit");
   }
 
   public ArticlePageObject submitArticle() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+    PageObjectLogging.logInfo("Page submitted");
+
     return new ArticlePageObject();
+  }
+
+  /**
+   * Submitting an edit is expecting a notification
+   */
+  public EditMode submitExpectingNotification() {
+    submit();
+    wait.forElementVisible(notificationForAnon);
+    PageObjectLogging.logInfo("Notification is visible");
+
+    return this;
   }
 
   public PreviewEditModePageObject previewArticle() {
@@ -66,6 +82,8 @@ public class EditMode extends WikiBasePageObject {
 
   public BlogPageObject submitBlog() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+
     return new BlogPageObject(driver);
   }
 
