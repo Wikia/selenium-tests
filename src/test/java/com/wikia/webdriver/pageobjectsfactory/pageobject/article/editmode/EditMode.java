@@ -18,7 +18,7 @@ import org.openqa.selenium.support.FindBy;
 public class EditMode extends WikiBasePageObject {
 
   @FindBy(css = "#wpSave")
-  protected WebElement submitButton;
+  private WebElement submitButton;
 
   @FindBy(css = "#wpPreview")
   private WebElement desktopPreviewButton;
@@ -94,7 +94,7 @@ public class EditMode extends WikiBasePageObject {
     return new PreviewEditModePageObject(driver);
   }
 
-  public MobilePreviewEditModePageObject mobilePreviewArticle() {
+  public MobilePreviewEditModePageObject openMobilePreviewArticle() {
     driver.switchTo().defaultContent();
     wait.forElementClickable(mobilePreviewButton);
     mobilePreviewButton.click();
