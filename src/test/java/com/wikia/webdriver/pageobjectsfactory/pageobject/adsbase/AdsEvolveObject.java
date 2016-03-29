@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 public class AdsEvolveObject extends AdsBaseObject {
 
   private static final String EVOLVE_SELECTOR = " div[id*='wikia_gpt/4403/ev/wikia_intl']";
+  private static final int DEFAULT_TIMEOUT = 30;
 
   public AdsEvolveObject(WebDriver driver, String page) {
     // INVISIBLE_SKIN works only with big resolution.
@@ -23,7 +24,7 @@ public class AdsEvolveObject extends AdsBaseObject {
 
   public void verifyEvolveInSlot(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR));
+    wait.forElementPresent(By.cssSelector(slotSelector + EVOLVE_SELECTOR), DEFAULT_TIMEOUT);
     PageObjectLogging.log("Evolve", slotSelector + " slot has Evolve.", true, driver);
   }
 
