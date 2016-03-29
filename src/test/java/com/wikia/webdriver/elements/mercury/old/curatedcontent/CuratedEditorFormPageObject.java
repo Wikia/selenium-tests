@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.elements.mercury.Loading;
+import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.openqa.selenium.WebDriver;

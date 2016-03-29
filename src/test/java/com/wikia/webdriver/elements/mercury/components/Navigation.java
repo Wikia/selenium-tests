@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury;
+package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -28,6 +28,9 @@ public class Navigation {
 
   @FindBy(css = ".local-nav-menu li.mw-content a")
   private List<WebElement> localNavPageLinks;
+
+  @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
+  private WebElement recentWikiActivityLink;
 
   private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By cancelSearchButton = By.cssSelector(".side-search__cancel");
@@ -157,6 +160,21 @@ public class Navigation {
     openSubMenu(1);
     typeInSearch(pageName);
     selectSearchSuggestion(0);
+
+    return this;
+  }
+
+  public Navigation openRecentWikiActivity() {
+    this.openSubMenu(1);
+
+    wait.forElementClickable(recentWikiActivityLink);
+    recentWikiActivityLink.click();
+
+    loading.handleAsyncPageReload();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains("/recent-wiki-activity"),
+                         "You were not redirected to the recent wiki activity page");
+    PageObjectLogging.logInfo("You were redirected to the recent wiki activity page");
 
     return this;
   }
