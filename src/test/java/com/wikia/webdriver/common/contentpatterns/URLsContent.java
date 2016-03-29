@@ -140,7 +140,6 @@ public class URLsContent {
   // Recent wiki activity on mobile
   public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
 
-
   private URLsContent() {
   }
 }
