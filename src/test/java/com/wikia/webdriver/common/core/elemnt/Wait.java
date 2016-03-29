@@ -55,8 +55,8 @@ public class Wait {
    * Checks if the element is present in browser DOM
    */
   public WebElement forElementPresent(By by, boolean failOnTimeout, int timeout) {
-    WebDriverWait wait = new WebDriverWait(this.driver, timeout);
-    return forElementPresent(wait, by, failOnTimeout);
+    WebDriverWait driverWait = new WebDriverWait(this.driver, timeout);
+    return forElementPresent(driverWait, by, failOnTimeout);
   }
 
   /**
