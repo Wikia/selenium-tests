@@ -10,7 +10,6 @@ import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -328,5 +327,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
+  }
+
+  @Execute(asUser = User.ANONYMOUS)
+  public void verifyBuilderAuthentication() {
+    TemplateEditPage template = new TemplateEditPage().open("InfoboxBuilderAuthentication");
+
+    Assertion.assertTrue(template.isPermissionErrorDisplayed());
   }
 }
