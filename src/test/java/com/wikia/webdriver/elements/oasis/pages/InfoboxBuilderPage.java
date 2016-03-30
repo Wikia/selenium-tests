@@ -465,6 +465,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return sectionHeaderInputField.equals(driver.switchTo().activeElement());
   }
 
+  public int getInfoboxWidth() {
+    return titles.get(0).getSize().getWidth();
+  }
+
   public void hoverOverSectionChevron(int index) {
     wait.forElementVisible(sectionHeadersChevron.get(index));
     builder.moveToElement(sectionHeadersChevron.get(index)).perform();

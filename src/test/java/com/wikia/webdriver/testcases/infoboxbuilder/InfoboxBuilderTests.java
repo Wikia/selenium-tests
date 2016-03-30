@@ -17,12 +17,16 @@ import org.testng.annotations.Test;
 @Test(groups = "InfoboxBuilderTests")
 @Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
+  private static final int EUROPA_INFOBOX_WIDTH = 300;
+  private static final int DEFAULT_INFOBOX_WIDTH = 270;
 
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
-    new InfoboxBuilderPage()
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openNew("InfoboxBuilderVerifyDefaultStructure")
         .verifyDefaultTemplateStructure();
+
+    Assert.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
   }
 
   @Execute(asUser = User.USER)
@@ -310,5 +314,19 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.addHeaderComponent().changeHeaderCollapsibilityState(2);
 
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(2));
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyLoadingEuropaTheme() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_europa");
+
+    Assertion.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyLoadingDefaultTheme() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
+
+    Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
   }
 }
