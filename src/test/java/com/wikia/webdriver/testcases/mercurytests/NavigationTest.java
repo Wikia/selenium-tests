@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.Navigation;
-import com.wikia.webdriver.elements.mercury.TopBar;
+import com.wikia.webdriver.elements.mercury.components.Navigation;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 
 import org.testng.annotations.Test;
 

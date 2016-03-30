@@ -636,9 +636,10 @@ public class AdsDataProvider {
                 "\"esrb\":\"teen\""
             ),
             Arrays.asList(
-                "\"sect\":\"ros\"",
                 "\"pos\":\"a\"",
-                "\"site\":\"wikia_intl\""
+                "\"wloc\":\"top\"",
+                "\"wpos\":\"TOP_LEADERBOARD\"",
+                "\"wsrc\":\"evolve\""
             )
         }
     };
