@@ -43,7 +43,6 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
-  @RelatedIssue(issueID = "SOC-2244", comment = "No need to check manually, feature only on community wiki")
   public void anonCanLoginOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
@@ -74,7 +73,6 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_006")
   @Execute(onWikia = "agas")
-  @RelatedIssue(issueID = "SOC-2244", comment = "No need to check manually, feature only on community wiki")
   public void anonCanLoginAsStaffOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
