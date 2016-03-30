@@ -3,7 +3,7 @@ package com.wikia.webdriver.elements.oasis.pages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -13,6 +13,9 @@ public class TemplateEditPage extends WikiBasePageObject {
 
   @FindBy(css = "#editarea")
   private WebElement editArea;
+
+  @FindBy(css = "#PermissionsError")
+  private WebElement permissionsErrorNotice;
 
   public TemplateEditPage() {
     super();
@@ -39,5 +42,11 @@ public class TemplateEditPage extends WikiBasePageObject {
   public boolean isEditAreaEmpty() {
 
     return ((List<String>) jsActions.execute("$('.ace_line_group')")).isEmpty();
+  }
+
+  public boolean isPermissionErrorDisplayed() {
+    wait.forElementPresent(By.cssSelector("#PermissionsError"));
+
+    return permissionsErrorNotice.isDisplayed();
   }
 }

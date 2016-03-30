@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,7 +9,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
@@ -153,6 +151,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public String getBackgroundColor() {
     wait.forElementVisible(component.get(0));
+
     return component.get(0).getCssValue("background-color");
   }
 

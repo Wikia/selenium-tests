@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 @Test(groups = "InfoboxBuilderTests")
 @Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
-
   private static final int EUROPA_INFOBOX_WIDTH = 300;
   private static final int DEFAULT_INFOBOX_WIDTH = 270;
 
@@ -307,8 +306,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyChevronTooltip() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(
-        "InfoboxBuilderChevronPopup");
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
 
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedBelow(0));
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(1));
@@ -330,6 +328,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
+  }
+
+  @Execute(asUser = User.ANONYMOUS)
+  public void verifyBuilderAuthentication() {
+    TemplateEditPage template = new TemplateEditPage().open("InfoboxBuilderAuthentication");
+
+    Assertion.assertTrue(template.isPermissionErrorDisplayed());
   }
 
 
