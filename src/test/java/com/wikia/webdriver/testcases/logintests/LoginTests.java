@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.logintests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -42,6 +43,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = {"Login_003", "Smoke5"})
   @Execute(onWikia = "agas")
+  @RelatedIssue(issueID = "SOC-2244", comment = "Check if anon can login from global navigation")
   public void anonCanLoginOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
@@ -72,6 +74,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_006")
   @Execute(onWikia = "agas")
+  @RelatedIssue(issueID = "SOC-2244", comment = "Check if anon can login from global navigation")
   public void anonCanLoginAsStaffOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
