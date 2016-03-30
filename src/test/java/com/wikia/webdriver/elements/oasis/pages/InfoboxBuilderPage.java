@@ -456,6 +456,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return sectionHeaderInputField.equals(driver.switchTo().activeElement());
   }
 
+  public int getInfoboxWidth() {
+    return titles.get(0).getSize().getWidth();
+  }
+
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();
