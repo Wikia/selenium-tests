@@ -300,4 +300,15 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isHeaderInputFocused());
   }
 
+  @Execute(asUser = User.USER)
+  public void verifyChevronTooltip() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
+
+    Assertion.assertTrue(builderPage.isSectionTooltipDisplayedBelow(0));
+    Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(1));
+
+    builderPage.addHeaderComponent().changeHeaderCollapsibilityState(2);
+
+    Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(2));
+  }
 }

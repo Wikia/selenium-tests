@@ -72,6 +72,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".modal-dialog > div > button:nth-child(3)")
   private WebElement dropChangesButton;
 
+  @FindBy(css = ".pop-over .orient-below")
+  private WebElement sectionTooltipOrientedBelow;
+
+  @FindBy(css = ".pop-over .orient-above")
+  private WebElement sectionTooltipOrientedAbove;
+
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
 
@@ -92,6 +98,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".portable-infobox .sortable-item")
   private List<WebElement> component;
+
+  @FindBy(css = ".infobox-builder-chevron-area")
+  private List<WebElement> sectionHeadersChevron;
 
   public InfoboxBuilderPage() {
     super();
@@ -454,6 +463,25 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public boolean isHeaderInputFocused() {
     return sectionHeaderInputField.equals(driver.switchTo().activeElement());
+  }
+
+  public void hoverOverSectionChevron(int index) {
+    wait.forElementVisible(sectionHeadersChevron.get(index));
+    builder.moveToElement(sectionHeadersChevron.get(index)).perform();
+  }
+
+  public boolean isSectionTooltipDisplayedAbove(int index) {
+    hoverOverSectionChevron(index);
+    wait.forElementVisible(sectionTooltipOrientedAbove);
+
+    return sectionTooltipOrientedAbove.isDisplayed();
+  }
+
+  public boolean isSectionTooltipDisplayedBelow(int index) {
+    hoverOverSectionChevron(index);
+    wait.forElementVisible(sectionTooltipOrientedBelow);
+
+    return sectionTooltipOrientedBelow.isDisplayed();
   }
 
   public TemplatePage save() {
