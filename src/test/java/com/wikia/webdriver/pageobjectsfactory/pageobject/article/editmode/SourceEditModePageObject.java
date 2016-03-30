@@ -22,8 +22,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SourceEditModePageObject extends EditMode {
-
-
+  
+  @FindBy(css = "#wpSave")
+  private WebElement submitButton;
   @FindBy(css = "#mw-editbutton-bold")
   private WebElement bold;
   @FindBy(css = "#mw-editbutton-italic")

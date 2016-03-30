@@ -104,7 +104,7 @@ public class CommentsPageObject {
 
   public String getUsernameFromUrl() {
     return driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("/wiki/User:") + 11,
-                                            driver.getCurrentUrl().length());
+            driver.getCurrentUrl().indexOf("?"));
   }
 
   public int getNumberOfAllCommentsOnPage() {

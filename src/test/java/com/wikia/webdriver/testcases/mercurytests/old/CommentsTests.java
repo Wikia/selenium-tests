@@ -30,7 +30,7 @@ public class CommentsTests extends NewTestTemplate {
   private static final int COMMENT_NUMBER_WITH_VIDEO = 0;
   private static final int COMMENT_NUMBER_WITH_IMAGE = 1;
 
-  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
+  private static final By OASIS_BODY = By.cssSelector("body.skin-oasis");
 
   private CommentsPageObject comments;
 
@@ -223,7 +223,7 @@ public class CommentsTests extends NewTestTemplate {
     comments.waitForCommentsToLoad();
     String username = comments.getUserUsername(0);
     comments.clickOnUsername(0);
-    new Wait(driver).forElementVisible(WIKIA_MOBILE_WIKI_TITLE);
+    new Wait(driver).forElementVisible(OASIS_BODY);
 
     boolean result = username.equals(comments.getUsernameFromUrl());
     PageObjectLogging.log(
