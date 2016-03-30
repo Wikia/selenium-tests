@@ -77,6 +77,7 @@ public class URLsContent {
   public static final String DISABLE_CAPTCHA = "nocaptchatest=1";
   public static final String SOURCE_MODE = "useeditor=source";
   public static final String MOST_RECENT = "?sort=recent";
+  public static final String ACTION_RAW = "action=raw";
 
   // WAM Scores page url
   public static final String WAM_PAGE = "WAM";

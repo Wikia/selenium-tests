@@ -1,15 +1,15 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
-import lombok.Getter;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
+
+import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class TemplatePage extends WikiBasePageObject {
 
@@ -26,9 +26,19 @@ public class TemplatePage extends WikiBasePageObject {
 
   public TemplatePage open(String templateName) {
     getUrl(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(), URLsContent.WIKI_DIR,
-        URLsContent.TEMPLATE_NAMESPACE, templateName));
+                         URLsContent.TEMPLATE_NAMESPACE, templateName));
 
     return this;
+  }
+
+  public String getRawContent(String templateName) {
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(),
+                                                           URLsContent.WIKI_DIR,
+                                                           URLsContent.TEMPLATE_NAMESPACE,
+                                                           templateName),
+                                             URLsContent.ACTION_RAW));
+    wait.forElementPresent(By.cssSelector("body"));
+    return body.getText();
   }
 
   public SourceEditModePageObject editArticleInSrcUsingDropdown() {
