@@ -7,6 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class TemplateEditPage extends WikiBasePageObject {
 
   @FindBy(css = "#editarea")
@@ -18,8 +20,10 @@ public class TemplateEditPage extends WikiBasePageObject {
 
   public TemplateEditPage open(String templateName) {
     getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(),
-        URLsContent.WIKI_DIR, URLsContent.TEMPLATE_NAMESPACE, templateName),
-        URLsContent.ACTION_EDIT));
+                                                           URLsContent.WIKI_DIR,
+                                                           URLsContent.TEMPLATE_NAMESPACE,
+                                                           templateName),
+                                             URLsContent.ACTION_EDIT));
 
     return this;
   }
@@ -30,5 +34,10 @@ public class TemplateEditPage extends WikiBasePageObject {
 
   public boolean isEditAreaDisplayed() {
     return editArea.isDisplayed();
+  }
+
+  public boolean isEditAreaEmpty() {
+
+    return ((List<String>) jsActions.execute("$('.ace_line_group')")).isEmpty();
   }
 }

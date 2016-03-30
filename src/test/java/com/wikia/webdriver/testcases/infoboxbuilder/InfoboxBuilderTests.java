@@ -11,6 +11,7 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = "InfoboxBuilderTests")
@@ -232,8 +233,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
 
-
-  //TODO: add cases for clicking 'yes' and 'no' buttons
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorClickOnModalBackground() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source")
@@ -244,6 +243,39 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.clickGoToSourceModalBackground();
 
     Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyGoToSourceEditorSaveChanges() {
+    InfoboxBuilderPage builderPage =
+        new InfoboxBuilderPage().openExisting("Infobox_verify_go_to_source_save_changes")
+            .addRowComponent()
+            .deleteRowUsingButton(1)
+            .clickGoToSourceButton();
+
+    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+
+    TemplateEditPage template = builderPage.clickSaveChangesButton();
+
+    Assert.assertTrue(template.isEditAreaDisplayed());
+    Assert.assertFalse(template.isEditAreaEmpty());
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyGoToSourceEditorDropChanges() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
+        "Infobox_verify_go_to_source_drop_changes")
+        .clickGoToSourceButton();
+
+    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+
+    TemplateEditPage template = builderPage.clickDropChangesButton();
+    template.getTemplateClassification()
+        .selectInfoboxTemplate()
+        .clickAddButton();
+
+    Assertion.assertTrue(template.isEditAreaDisplayed());
+    Assertion.assertTrue(template.isEditAreaEmpty());
   }
 
   @Execute(asUser = User.USER)

@@ -66,6 +66,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-go-to-source-modal")
   private WebElement goToSourceModal;
 
+  @FindBy(css = ".modal-dialog > div > button:nth-child(2)")
+  private WebElement saveChangesButton;
+
+  @FindBy(css = ".modal-dialog > div > button:nth-child(3)")
+  private WebElement dropChangesButton;
+
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
 
@@ -423,6 +429,18 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forElementClickable(goToSourceModal);
     goToSourceModal.click();
     return this;
+  }
+
+  public TemplateEditPage clickDropChangesButton() {
+    wait.forElementClickable(dropChangesButton);
+    dropChangesButton.click();
+    return new TemplateEditPage();
+  }
+
+  public TemplateEditPage clickSaveChangesButton() {
+    wait.forElementClickable(saveChangesButton);
+    saveChangesButton.click();
+    return new TemplateEditPage();
   }
 
   public boolean isInfoboxBuilderOpened() {
