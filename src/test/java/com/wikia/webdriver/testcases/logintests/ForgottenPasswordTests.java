@@ -61,7 +61,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
-    AuthModal loginModal = new AuthModal();
+    AuthModal loginModal = new AuthModal(driver);
     loginModal.clickForgotPasswordLink();
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     login.remindPasswordNewAuth(userName, credentials.apiToken);

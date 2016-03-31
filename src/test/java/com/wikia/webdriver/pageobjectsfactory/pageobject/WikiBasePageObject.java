@@ -169,7 +169,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AuthModal getAuthModal() {
-    return new AuthModal();
+    return new AuthModal(driver);
   }
 
   public String getWikiUrl() {
