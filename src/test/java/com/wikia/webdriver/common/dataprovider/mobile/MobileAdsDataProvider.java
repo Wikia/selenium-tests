@@ -1,5 +1,10 @@
 package com.wikia.webdriver.common.dataprovider.mobile;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.url.Page;
+
+import com.google.common.collect.ImmutableMap;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
@@ -7,8 +12,8 @@ import java.util.Collections;
 
 public class MobileAdsDataProvider {
 
-    private MobileAdsDataProvider() {
-    }
+  private MobileAdsDataProvider() {
+  }
 
   @DataProvider
   public static Object[][] leaderboardAndPrefooterSlots() {
@@ -349,36 +354,36 @@ public class MobileAdsDataProvider {
     };
   }
 
-    @DataProvider
-    public static Object[][] dfpEvolveParamsMercury() {
-        return new Object[][]{
-            {
-                "adtest",
-                "SyntheticTests/DfpParams",
-                4403,
-                "ev/wikia_intl/ros",
-                "MOBILE_TOP_LEADERBOARD",
-                Arrays.asList(
-                    "\"s0\":\"life\"",
-                    "\"s0v\":\"lifestyle\"",
-                    "\"s1\":\"_adtest\"",
-                    "\"s2\":\"article\"",
-                    "\"dmn\":\"wikiacom\"",
-                    "\"hostpre\":\"",
-                    "\"skin\":\"mercury\"",
-                    "\"wpage\":\"synthetictests/dfpparams\"",
-                    "\"ref\":\"direct\"",
-                    "\"lang\":\"en\"",
-                    "\"esrb\":\"teen\""
-                ),
-                Arrays.asList(
-                    "\"pos\":\"a\"",
-                    "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
-                    "\"wsrc\":\"mobile_evolve\""
-                )
-            }
-        };
-    }
+  @DataProvider
+  public static Object[][] dfpEvolveParamsMercury() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/DfpParams",
+            4403,
+            "ev/wikia_intl/ros",
+            "MOBILE_TOP_LEADERBOARD",
+            Arrays.asList(
+                "\"s0\":\"life\"",
+                "\"s0v\":\"lifestyle\"",
+                "\"s1\":\"_adtest\"",
+                "\"s2\":\"article\"",
+                "\"dmn\":\"wikiacom\"",
+                "\"hostpre\":\"",
+                "\"skin\":\"mercury\"",
+                "\"wpage\":\"synthetictests/dfpparams\"",
+                "\"ref\":\"direct\"",
+                "\"lang\":\"en\"",
+                "\"esrb\":\"teen\""
+            ),
+            Arrays.asList(
+                "\"pos\":\"a\"",
+                "\"wpos\":\"MOBILE_TOP_LEADERBOARD\"",
+                "\"wsrc\":\"mobile_evolve\""
+            )
+        }
+    };
+  }
 
   @DataProvider
   public static Object[][] disableGptMercury() {
@@ -408,6 +413,89 @@ public class MobileAdsDataProvider {
         {"adtest", "DFP/hop", "mobile", "\"source\":\"mobile/LB\""},
         {"adtest", "DFP/hophop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
         {"adtest", "SyntheticTests/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsSlotSizeMercury() {
+    return new Object[][]{
+        {
+            new Page("adtest", "SyntheticTests/MobileLeaderboard"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotSize", new Dimension(320, 100))
+                .put("lineItemId", 136987812)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        },
+        {
+            new Page("project43", "Synthetic_Tests/Slots/Size/320x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotSize", new Dimension(320, 50))
+                .put("lineItemId", 257602332)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        },
+        {
+            new Page("project43", "Synthetic_Tests/Slots/Size/320x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
+                .put("slotSize", new Dimension(320, 50))
+                .put("lineItemId", 257602332)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        },
+        {
+            new Page("project43", "Synthetic_Tests/Slots/Size/320x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotSize", new Dimension(320, 50))
+                .put("lineItemId", 257602332)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        },
+        {
+            new Page("project43", "Synthetic_Tests/Slots/Size/300x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotSize", new Dimension(300, 50))
+                .put("lineItemId", 257597172)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        },
+        {
+            new Page("project43", "Synthetic_Tests/Slots/Size/300x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
+                .put("slotSize", new Dimension(300, 50))
+                .put("lineItemId", 257597172)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        },
+        {
+            new Page("project43", "Synthetic_Tests/Slots/Size/300x50"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                .put("slotSize", new Dimension(300, 50))
+                .put("lineItemId", 257597172)
+                .put("src", "mobile")
+                .put("jsToTriggerSlot", "")
+                .build()
+        }
     };
   }
 }

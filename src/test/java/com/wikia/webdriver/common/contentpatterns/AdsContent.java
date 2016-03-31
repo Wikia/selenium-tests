@@ -13,6 +13,11 @@ public class AdsContent {
       "window.adslots2.push([\"%slot%\"]);";
   public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
       "top.window.adDriver2ForcedStatus['%s']='success';";
+  public static final String FMR_TRIGGER =
+      "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })();";
+  public static final String INCONTENT_LEADERBOARD_TRIGGER =
+      "$('#mw-content-text h2')[1].scrollIntoView(true);";
+  public static final String SKY3_TRIGGER = "window.scrollTo(0,document.body.scrollHeight);";
 
   //SLOTS NAMES
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
