@@ -25,7 +25,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test()
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromLoginDropdown")
   @RelatedIssue(issueID = "QAART-703", comment = "Please test manually ")
   public void anonCanRemindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
@@ -52,7 +52,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     dropdown.verifyUserLoggedIn(userName);
   }
 
-  @Test()
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromAuthModal")
   @Execute(onWikia = "agas")
   public void anonCanRemindPasswordFromAuthModal() {
     String userName = credentials.userNameForgottenPassword;
@@ -80,7 +80,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(userName);
   }
 
-  @Test
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
@@ -102,7 +102,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
 
-  @Test
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
     String userNameUC = credentials.userNameForgottenPassword3;
     String userName = userNameUC.toLowerCase();
@@ -126,7 +126,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(verifyString);
   }
 
-  @Test
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordWhileCreatingWiki")
   public void anonCanRemindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
