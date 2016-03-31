@@ -57,7 +57,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForcedLogin_anonCanLogInViaForcedLoginPopupWhenAddingVideo", "Media"})
-  public void anonCanLoginViaForcedLoginPopupWhenAddingVideo() {
+  public void anonCanLogInViaForcedLoginPopupWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
@@ -70,9 +70,9 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = {"ForcedLogin_anonCanLoginViaAuthModalWhenAddingVideo", "Media"})
+  @Test(groups = {"ForcedLogin_anonCanLogInViaAuthModalWhenAddingVideo", "Media"})
   @Execute(onWikia = "agas")
-  public void anonCanLoginViaAuthModalWhenAddingVideo() {
+  public void anonCanLogInViaAuthModalWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
@@ -87,8 +87,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = "ForcedLogin_anonCanLoginViaUserLoginPage")
-  public void anonCanLoginViaUserLoginPage() {
+  @Test(groups = "ForcedLogin_anonCanLogInViaUserLoginPage")
+  public void anonCanLogInViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginReguiredMessage();
