@@ -25,37 +25,38 @@ public class AuthModal extends WikiBasePageObject {
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
 
-  private WebDriver webDriver;
+  private String mainWindowHandle;
 
-  public AuthModal(WikiaWebDriver webDriver){
-    super();
-    this.webDriver = webDriver;
+  public AuthModal(){
+    waitForNewWindow();
+    this.mainWindowHandle =  driver.getWindowHandle();
 
-    PageFactory.initElements(webDriver, this);
+    PageFactory.initElements(driver, this);
   }
 
-  private void switchToFrame(){
-    webDriver.switchTo().frame(iFrame);
+  private void switchToAuthModalHandle() {
+    for(String winHandle : driver.getWindowHandles()){
+      driver.switchTo().window(winHandle);
+    }
   }
 
-  private void switchBack(){
-    webDriver.switchTo().defaultContent();
+  private void switchToMainWindowHandle() {
+    driver.switchTo().window(this.mainWindowHandle);
   }
 
   public boolean isOpened(){
-    switchToFrame();
+    switchToAuthModalHandle();
     boolean isOpenedResult = authModal.isDisplayed();
-    switchBack();
+    switchToMainWindowHandle();
     return isOpenedResult;
   }
 
   public void login(String username, String password){
-    new Wait(webDriver).forElementVisible(iFrame);
-    switchToFrame();
+    switchToAuthModalHandle();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
     signInButton.click();
-    switchBack();
+    switchToMainWindowHandle();
   }
 
   public void login(User user){
@@ -63,8 +64,9 @@ public class AuthModal extends WikiBasePageObject {
   }
 
   public void clickForgotPasswordLink(){
-    switchToFrame();
+    switchToAuthModalHandle();
     forgottenPasswordLink.click();
+    switchToMainWindowHandle();
   }
 
 }
