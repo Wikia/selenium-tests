@@ -21,20 +21,6 @@ public class HeliosConfig {
     baseURL = XMLReader.getValue(configFile, "helios." + env + ".base_url");
   }
 
-  public static String getClientId() {
-    if (StringUtils.isBlank(clientId)) {
-      init();
-    }
-    return clientId;
-  }
-
-  public static String getClientSecret() {
-    if (StringUtils.isBlank(clientSecret)) {
-      init();
-    }
-    return clientSecret;
-  }
-
   private static String getBaseURL() {
     if (StringUtils.isBlank(baseURL)) {
       init();
