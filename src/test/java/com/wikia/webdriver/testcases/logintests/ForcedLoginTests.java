@@ -24,8 +24,8 @@ public class ForcedLoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "ForcedLogin_anonCanLogInViaForcedLoginModalWhenAddingFile")
-  public void anonCanLogInViaForcedLoginModalWhenAddingFile() {
+  @Test(groups = "ForcedLogin_anonCanLogInViaForcedLoginPopupWhenAddingFile")
+  public void anonCanLogInViaForcedLoginPopupWhenAddingFile() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
@@ -39,9 +39,9 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = "Login_anonCanLogInViaAuthModalModalWhenAddingFile")
+  @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingFile")
   @Execute(onWikia = "agas")
-  public void anonCanLogInViaAuthModalModalWhenAddingFile() {
+  public void anonCanLogInViaAuthModalWhenAddingFile() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
@@ -56,8 +56,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = {"Login_anonCanLogInViaForcedLoginModalWhenAddingVideo", "Media"})
-  public void anonCanLoginViaForcedLogInModalWhenAddingVideo() {
+  @Test(groups = {"ForcedLogin_anonCanLogInViaForcedLoginPopupWhenAddingVideo", "Media"})
+  public void anonCanLoginViaForcedLoginPopupWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
@@ -70,7 +70,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = {"Login_anonCanLoginViaAuthModalWhenAddingVideo", "Media"})
+  @Test(groups = {"ForcedLogin_anonCanLoginViaAuthModalWhenAddingVideo", "Media"})
   @Execute(onWikia = "agas")
   public void anonCanLoginViaAuthModalWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -87,7 +87,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = "Login_anonCanLoginViaUserLoginPage")
+  @Test(groups = "ForcedLogin_anonCanLoginViaUserLoginPage")
   public void anonCanLoginViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
@@ -98,7 +98,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
-  @Test(groups = "Login_anonCanLogInOnSpecialWatchListPage")
+  @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage();
@@ -111,8 +111,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
-  @Test(groups = "Login_anonCanLogInViaForcedLoginModalWhenAddingPhoto")
-  public void anonCanLogInViaForcedLoginModalWhenAddingPhoto() {
+  @Test(groups = "ForcedLogin_anonCanLogInViaForcedLoginPopupWhenAddingPhoto")
+  public void anonCanLogInViaForcedLoginPopupWhenAddingPhoto() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
@@ -125,7 +125,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     addPhoto.verifyAddPhotoModal();
   }
 
-  @Test(groups = "Login_anonCanLogInViaAuthModalWhenAddingPhoto")
+  @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingPhoto")
   @Execute(onWikia = "agas")
   public void anonCanLogInViaAuthModalWhenAddingPhoto() {
     WikiBasePageObject base = new WikiBasePageObject();
