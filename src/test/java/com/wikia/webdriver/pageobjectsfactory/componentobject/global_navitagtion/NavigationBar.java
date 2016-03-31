@@ -117,7 +117,6 @@ public class NavigationBar extends WikiBasePageObject {
 
   public AuthModal clickOnSignIn(){
     signInLink.click();
-
-    return new AuthModal(driver);
+    return new AuthModal();
   }
 }
