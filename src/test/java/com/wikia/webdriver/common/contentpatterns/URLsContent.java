@@ -56,6 +56,7 @@ public class URLsContent {
   public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "wiki/Special:Version";
   public static final String SPECIAL_INFOBOX_BUILDER = "wiki/Special:InfoboxBuilder/";
+  public static final String SPECIAL_WIKI_FEATURES = "wiki/Special:WikiFeatures/";
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
