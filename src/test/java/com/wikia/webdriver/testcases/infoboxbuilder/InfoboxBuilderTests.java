@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.infoboxbuilder.ModalDialog;
 import com.wikia.webdriver.elements.oasis.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
@@ -247,10 +248,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorClickOnModalBackground() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source")
-        .clickGoToSourceButton();
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
+        .openNew("Infobox_verify_go_to_source");
 
-    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+    ModalDialog goToSourceModalDialog = builderPage.clickGoToSourceButton();
+
+    Assertion.assertTrue(goToSourceModalDialog.isPresent());
 
     builderPage.clickGoToSourceModalBackground();
 
@@ -259,15 +262,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorSaveChanges() {
-    InfoboxBuilderPage builderPage =
-        new InfoboxBuilderPage().openExisting("Infobox_verify_go_to_source_save_changes")
-            .addRowComponent()
-            .deleteRowUsingButton(1)
-            .clickGoToSourceButton();
+    ModalDialog goToSourceModalDialog = new InfoboxBuilderPage()
+        .openExisting("Infobox_verify_go_to_source_save_changes")
+        .addRowComponent()
+        .deleteRowUsingButton(1)
+        .clickGoToSourceButton();
 
-    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+    Assertion.assertTrue(goToSourceModalDialog.isPresent());
 
-    TemplateEditPage template = builderPage.clickSaveChangesButton();
+    goToSourceModalDialog.clickSaveChangesButton();
+
+    TemplateEditPage template = new TemplateEditPage();
 
     Assert.assertTrue(template.isEditAreaDisplayed());
     Assert.assertFalse(template.isEditAreaEmpty());
@@ -275,13 +280,15 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorDropChanges() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew(
-        "Infobox_verify_go_to_source_drop_changes")
+    ModalDialog goToSourceModalDialog = new InfoboxBuilderPage()
+        .openNew("Infobox_verify_go_to_source_drop_changes")
         .clickGoToSourceButton();
 
-    Assertion.assertTrue(builderPage.isGoToSourceDialogPresent());
+    Assertion.assertTrue(goToSourceModalDialog.isPresent());
 
-    TemplateEditPage template = builderPage.clickDropChangesButton();
+    goToSourceModalDialog.clickDropChangesButton();
+
+    TemplateEditPage template = new TemplateEditPage();
     template.getTemplateClassification()
         .selectInfoboxTemplate()
         .clickAddButton();

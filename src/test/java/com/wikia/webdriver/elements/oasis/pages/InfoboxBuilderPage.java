@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.elements.oasis.components.infoboxbuilder.ModalDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.By;
@@ -64,13 +65,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   private WebElement goToSourceButton;
 
   @FindBy(css = ".infobox-builder-go-to-source-modal")
-  private WebElement goToSourceModal;
-
-  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(1)")
-  private WebElement saveChangesButton;
-
-  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(2)")
-  private WebElement dropChangesButton;
+  private WebElement goToSourceModalBackground;
 
   @FindBy(css = ".pop-over .orient-below")
   private WebElement sectionTooltipOrientedBelow;
@@ -410,33 +405,16 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage clickGoToSourceButton() {
+  public ModalDialog clickGoToSourceButton() {
     wait.forElementClickable(goToSourceButton);
     goToSourceButton.click();
-    return this;
-  }
-
-  public boolean isGoToSourceDialogPresent() {
-    wait.forElementVisible(goToSourceModal);
-    return goToSourceModal.isDisplayed();
+    return new ModalDialog();
   }
 
   public InfoboxBuilderPage clickGoToSourceModalBackground() {
-    wait.forElementClickable(goToSourceModal);
-    goToSourceModal.click();
+    wait.forElementClickable(goToSourceModalBackground);
+    goToSourceModalBackground.click();
     return this;
-  }
-
-  public TemplateEditPage clickDropChangesButton() {
-    wait.forElementClickable(dropChangesButton);
-    dropChangesButton.click();
-    return new TemplateEditPage();
-  }
-
-  public TemplateEditPage clickSaveChangesButton() {
-    wait.forElementClickable(saveChangesButton);
-    saveChangesButton.click();
-    return new TemplateEditPage();
   }
 
   public boolean isInfoboxBuilderOpened() {
