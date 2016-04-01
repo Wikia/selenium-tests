@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,15 +28,11 @@ public class ArticlePageObject {
   private List<WebElement> footerLinks;
   @FindBy(css = ".contributors > ul > li > a")
   private List<WebElement> topContributorsLinks;
-  @FindBy(xpath = "//nav/div[node()=\"Categories\"]")
-  private WebElement categoryButton;
-  @FindBy(xpath = "//nav/div[node()=\"Categories\"]/../ul/li")
-  private List<WebElement> categoryList;
   @FindBy(css = ".wiki-page-title")
   private WebElement articleTitle;
   @FindBy(css = ".article-content a")
   private List<WebElement> anchorsInContent;
-  @FindBy(css = ".mstAvaImg")
+  @FindBy(css = ".masthead-avatar")
   private WebElement userAvatar;
 
   private Wait wait;
@@ -58,11 +53,6 @@ public class ArticlePageObject {
     topContributorsLinks.get(index).click();
   }
 
-  public void clickCategoryButton() {
-    wait.forElementVisible(categoryButton);
-    categoryButton.click();
-  }
-
   public void clickOnImage(int index) {
     singleImgLink.get(index).click();
   }
@@ -70,11 +60,6 @@ public class ArticlePageObject {
   public void clickOnAnchorInContent(int index) {
     wait.forElementVisible(anchorsInContent.get(index));
     anchorsInContent.get(index).click();
-  }
-
-  public void clickOnCategoryListElement(int index) {
-    wait.forElementVisible(categoryList.get(index));
-    categoryList.get(index).click();
   }
 
   public boolean isWikiaLogoVisible() {
@@ -115,17 +100,6 @@ public class ArticlePageObject {
   public boolean isUrlContainingUserPage() {
     wait.forElementVisible(userAvatar, 5, 500);
     return driver.getCurrentUrl().contains("/wiki/User:");
-  }
-
-  public boolean isUrlContainingCategoryPage() {
-    return driver.getCurrentUrl().contains("/wiki/Category:");
-  }
-
-  public boolean isChevronCollapsed() throws WebDriverException {
-    if (categoryButton.getAttribute("class") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return categoryButton.getAttribute("class").contains("collapsed");
   }
 
   public String getArticleTitle() {
