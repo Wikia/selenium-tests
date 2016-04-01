@@ -115,6 +115,10 @@ public class PortableInfobox extends WikiBasePageObject {
     return layout.getCssValue("background-color");
   }
 
+  public String getTitleBackgroundColor(int index) {
+    return titles.get(index).getCssValue("background-color");
+  }
+
   public String getLinkRedirectTitle(WebElement element) {
     wait.forElementVisible(element);
     jsActions.scrollToElement(element);

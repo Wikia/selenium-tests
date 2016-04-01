@@ -11,7 +11,6 @@ import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -164,32 +163,27 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxPreviewTheme() {
-    //TODO: Figure out why assertion is not passing
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
     SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
-    ArticlePageObject article = new ArticlePageObject();
+    TemplatePage template = new TemplatePage();
 
     new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
 
-    /* select light theme */
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
     themeDesigner.submitTheme();
 
-    article.open(PageContent.PORTABLE_INFOBOX_01);
-    String articleBackgroundColor = article.getPageBackgroundColor();
-    String previewBackgroundColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroudColor();
+    String templateBgColor = template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
+    String previewBgColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 
-    Assertion.assertEquals(previewBackgroundColor, articleBackgroundColor);
+    Assertion.assertEquals(previewBgColor, templateBgColor);
 
-    /* select dark theme */
-    themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(3);
+    themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(2);
     themeDesigner.submitTheme();
 
-    article.open(PageContent.PORTABLE_INFOBOX_01);
-    articleBackgroundColor = article.getPageBackgroundColor();
-    previewBackgroundColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroudColor();
+    templateBgColor = template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
+    previewBgColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 
-    Assertion.assertEquals(articleBackgroundColor, previewBackgroundColor);
+    Assertion.assertEquals(templateBgColor, previewBgColor);
   }
 
   /* Verify if scrolling is enabled when Infobox's height in

@@ -152,7 +152,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return component.get(index).getCssValue("background-color");
   }
 
-  public String getPreviewBackgroudColor() {
+  public String getPreviewBackgroundColor() {
     wait.forElementVisible(previewArea);
 
     return previewArea.getCssValue("background-color");

@@ -20,6 +20,9 @@ public class TemplatePage extends WikiBasePageObject {
   @FindBy(css = "#ca-edit")
   protected WebElement editUsingClassicEditor;
 
+  @FindBy(css = "#WikiaPageBackground")
+  private WebElement pageBackgroundColor;
+
   public TemplatePage() {
     super();
   }
@@ -53,5 +56,11 @@ public class TemplatePage extends WikiBasePageObject {
 
   public PortableInfobox getPortableInfobox() {
     return portableInfobox;
+  }
+
+  public String getPageBackgroundColor() {
+    wait.forElementVisible(pageBackgroundColor);
+
+    return pageBackgroundColor.getCssValue("background-color");
   }
 }
