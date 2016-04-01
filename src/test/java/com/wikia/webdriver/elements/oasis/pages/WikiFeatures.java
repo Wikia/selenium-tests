@@ -34,7 +34,6 @@ public class WikiFeatures extends BasePageObject {
   }
 
   public boolean isEuropaInfoboxThemeEnabled() {
-    System.out.println(europaInfoboxThemeSliderText.getText());
     if (europaInfoboxThemeSliderText.getText().equalsIgnoreCase("Enabled")) {
       return true;
     } else {
