@@ -9,9 +9,10 @@ import com.wikia.webdriver.elements.oasis.components.infoboxbuilder.ModalDialog;
 import com.wikia.webdriver.elements.oasis.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
+import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -163,30 +164,32 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxPreviewTheme() {
-    //TODO: ensure that proper theme is loaded (europa theme flag)
+    //TODO: Figure out why assertion is not passing
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
     SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
-    PortableInfobox infobox = new PortableInfobox();
+    ArticlePageObject article = new ArticlePageObject();
+
+    new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
 
     /* select light theme */
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
     themeDesigner.submitTheme();
 
-    String invocationBackgroundColor = infobox.open(PageContent.PORTABLE_INFOBOX_01)
-        .getBackgroundColor();
+    article.open(PageContent.PORTABLE_INFOBOX_01);
+    String articleBackgroundColor = article.getPageBackgroundColor();
+    String previewBackgroundColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroudColor();
 
-    builder.openExisting("InfoboxBuilderVerifyInfoboxTheme")
-        .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
+    Assertion.assertEquals(previewBackgroundColor, articleBackgroundColor);
 
     /* select dark theme */
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(3);
     themeDesigner.submitTheme();
 
-    invocationBackgroundColor = infobox.open(PageContent.PORTABLE_INFOBOX_02)
-        .getBackgroundColor();
+    article.open(PageContent.PORTABLE_INFOBOX_01);
+    articleBackgroundColor = article.getPageBackgroundColor();
+    previewBackgroundColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroudColor();
 
-    builder.openExisting("InfoboxBuilderVerifyInfoboxTheme")
-        .verifyInfoboxPreviewBackgroundColor(invocationBackgroundColor);
+    Assertion.assertEquals(articleBackgroundColor, previewBackgroundColor);
   }
 
   /* Verify if scrolling is enabled when Infobox's height in
@@ -204,8 +207,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyUserInteractions() {
-    //TODO: Ensure proper theme is loaded (europa flag). test is passing but if other tests will
-    // change the flag then something may be wrong
+    new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
+
     InfoboxBuilderPage builder = new InfoboxBuilderPage()
         .openNew("InfoboxBuilderVerifySelectedBorderStyling")
         .verifyTooltipOnHover();
@@ -213,7 +216,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     String borderStyle = builder.getBorderStyle();
     Assertion.assertEquals(borderStyle, "1px solid rgb(26, 94, 184)");
 
-    borderStyle = builder.clickBuilderBackground().getBackgroundColor();
+    borderStyle = builder.clickBuilderBackground().getComponentBackgroundColor(0);
     Assertion.assertNotEquals(borderStyle, "1px solid rgb(26, 94, 184)");
   }
 
@@ -332,17 +335,19 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(2));
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.STAFF)
   public void verifyLoadingEuropaTheme() {
-    //TODO: turn on europa flag here
+    new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
+
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_europa");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.STAFF)
   public void verifyLoadingDefaultTheme() {
-    //TODO: turn off europa flag here
+    new WikiFeatures().openWikiFeatures(wikiURL).disableEuropaInfoboxTheme();
+
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
@@ -354,7 +359,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertTrue(template.isPermissionErrorDisplayed());
   }
-
 
   public void verifyOtherContentIsNotChanged() {
     final String templateName = "Infobox_other_content";

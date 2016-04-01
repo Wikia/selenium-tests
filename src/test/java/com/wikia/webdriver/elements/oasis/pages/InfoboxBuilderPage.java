@@ -146,10 +146,16 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return headers.size();
   }
 
-  public String getBackgroundColor() {
-    wait.forElementVisible(component.get(0));
+  public String getComponentBackgroundColor(int index) {
+    wait.forElementVisible(component.get(index));
 
-    return component.get(0).getCssValue("background-color");
+    return component.get(index).getCssValue("background-color");
+  }
+
+  public String getPreviewBackgroudColor() {
+    wait.forElementVisible(previewArea);
+
+    return previewArea.getCssValue("background-color");
   }
 
   public String getBorderStyle() {
@@ -278,13 +284,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage verifyScrollbarIsVisible() {
     Assertion.assertEquals(previewArea.getCssValue("overflow"), "auto");
-    return this;
-  }
-
-  public InfoboxBuilderPage verifyInfoboxPreviewBackgroundColor(String invocationBgColor) {
-    String previewBackgroundColor = getBackgroundColor();
-    Assertion.assertEquals(invocationBgColor, previewBackgroundColor);
-
     return this;
   }
 

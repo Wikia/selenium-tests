@@ -154,6 +154,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
+  @FindBy(css = "#WikiaPageBackground")
+  private WebElement pageBackgroundColor;
 
   private PortableInfobox portableInfobox;
 
@@ -203,6 +205,11 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(articleContent.getText(), content);
   }
 
+  public String getPageBackgroundColor() {
+    wait.forElementVisible(pageBackgroundColor);
+
+    return pageBackgroundColor.getCssValue("background-color");
+  }
 
   public void verifyFormattingFromVE(Formatting format, String content) {
     waitForElementNotVisibleByElement(veMode);
