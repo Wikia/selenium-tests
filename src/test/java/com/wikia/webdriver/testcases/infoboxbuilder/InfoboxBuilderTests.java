@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.infoboxbuilder.ModalDialog;
-import com.wikia.webdriver.elements.oasis.pages.InfoboxBuilderPage;
+import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
