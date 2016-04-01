@@ -336,9 +336,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage setTitleToUseArticleName(int index) {
-    WebElement selectedTitle = titles.get(index);
-    wait.forElementClickable(selectedTitle);
-    selectedTitle.click();
+    this.selectTitleWithIndex(index);
     wait.forElementClickable(titleCheckbox);
 
     if (!titleCheckbox.isSelected()) {
@@ -349,9 +347,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage setAndVerifyRowLabel(int index, String labelName) {
-    WebElement selectedRow = rows.get(index);
-    wait.forElementClickable(selectedRow);
-    selectedRow.click();
+    this.selectRowWithIndex(index);
 
     wait.forElementClickable(rowLabelInputField);
     rowLabelInputField.click();
@@ -363,9 +359,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage setLongLabelNameAndVerifyBreakLine(int index, String labelName) {
-    WebElement selectedRow = rows.get(index);
-    wait.forElementClickable(selectedRow);
-    selectedRow.click();
+    this.selectRowWithIndex(index);
 
     wait.forElementClickable(rowLabelInputField);
     rowLabelInputField.click();
@@ -377,9 +371,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage setAndVerifyHeaderName(int index, String labelName) {
-    WebElement selectedHeader = headers.get(index);
-    wait.forElementClickable(selectedHeader);
-    selectedHeader.click();
+    this.selectHeaderWithIndex(index);
 
     wait.forElementClickable(sectionHeaderInputField);
     sectionHeaderInputField.click();
