@@ -64,10 +64,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-go-to-source-modal")
   private WebElement goToSourceModal;
 
-  @FindBy(css = ".modal-dialog > div > button:nth-child(2)")
+  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(1)")
   private WebElement saveChangesButton;
 
-  @FindBy(css = ".modal-dialog > div > button:nth-child(3)")
+  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(2)")
   private WebElement dropChangesButton;
 
   @FindBy(css = ".pop-over .orient-below")

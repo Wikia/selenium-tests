@@ -249,6 +249,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
   }
 
+  //TODO: fixit, template opened in source instead of builder
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorSaveChanges() {
     InfoboxBuilderPage builderPage =
@@ -304,6 +305,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isHeaderInputFocused());
   }
 
+  //TODO: fixit, template opened in source instead of builder
   @Execute(asUser = User.USER)
   public void verifyChevronTooltip() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
@@ -316,6 +318,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(2));
   }
 
+  //TODO: fixit, template opened in source instead of builder
   @Execute(asUser = User.USER)
   public void verifyLoadingEuropaTheme() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_europa");
