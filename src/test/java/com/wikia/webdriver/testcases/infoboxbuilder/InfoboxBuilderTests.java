@@ -345,7 +345,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   public void verifyOtherContentIsNotChanged() {
     final String templateName = "Infobox_other_content";
-    final String infoboxRegexp = "<infobox[^>]*>.*</infobox>";
+    final String infoboxRegexp = "(?s)<infobox[^>]*>.*</infobox>";
     String beforePublish =
         new TemplatePage().getRawContent(templateName).replaceAll(infoboxRegexp, "");
 
