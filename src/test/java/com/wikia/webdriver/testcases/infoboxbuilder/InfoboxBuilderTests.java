@@ -17,16 +17,21 @@ import org.testng.annotations.Test;
 @Test(groups = "InfoboxBuilderTests")
 @Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
+
   private static final int EUROPA_INFOBOX_WIDTH = 300;
   private static final int DEFAULT_INFOBOX_WIDTH = 270;
 
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openNew("InfoboxBuilderVerifyDefaultStructure")
-        .verifyDefaultTemplateStructure();
+        .openNew("InfoboxBuilderVerifyDefaultStructure");
 
-    Assert.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
+    Assertion.assertEquals(builderPage.countTitles(), 1);
+    Assertion.assertEquals(builderPage.countImages(), 1);
+    Assertion.assertEquals(builderPage.countRows(), 2);
+    Assertion.assertEquals(builderPage.countHeaders(), 0);
+
+    Assertion.assertTrue(builderPage.isTitleUsingArticleName(0));
   }
 
   @Execute(asUser = User.USER)
@@ -309,7 +314,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyChevronTooltip() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
+    InfoboxBuilderPage
+        builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
 
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedBelow(0));
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(1));
@@ -346,8 +352,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void verifyOtherContentIsNotChanged() {
     final String templateName = "Infobox_other_content";
     final String infoboxRegexp = "(?s)<infobox[^>]*>.*</infobox>";
-    String beforePublish =
-        new TemplatePage().getRawContent(templateName).replaceAll(infoboxRegexp, "");
+    String beforePublish = new TemplatePage().getRawContent(templateName)
+        .replaceAll(infoboxRegexp, "");
 
     new TemplatePage().open(templateName).loginAs(User.USER);
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(templateName);

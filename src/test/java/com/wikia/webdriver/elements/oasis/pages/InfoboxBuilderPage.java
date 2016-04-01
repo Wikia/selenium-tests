@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,6 +10,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
@@ -169,7 +171,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage selectTitleWithIndex(int index) {
     WebElement selectedTitle = titles.get(index);
-    wait.forElementVisible(selectedTitle);
+    wait.forElementClickable(selectedTitle);
     selectedTitle.click();
 
     return this;
@@ -177,7 +179,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage selectImageWithIndex(int index) {
     WebElement selectedImage = images.get(index);
-    wait.forElementVisible(selectedImage);
+    wait.forElementClickable(selectedImage);
     selectedImage.click();
 
     return this;
@@ -185,7 +187,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage selectRowWithIndex(int index) {
     WebElement selectedRow = rows.get(index);
-    wait.forElementVisible(selectedRow);
+    wait.forElementClickable(selectedRow);
     selectedRow.click();
 
     return this;
@@ -201,7 +203,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage addRowComponent() {
     WebElement rowComponentButton = componentsButtons.get(2);
-    wait.forElementVisible(rowComponentButton);
+    wait.forElementClickable(rowComponentButton);
     rowComponentButton.click();
 
     return this;
@@ -209,7 +211,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage addImageComponent() {
     WebElement imageComponentButton = componentsButtons.get(1);
-    wait.forElementVisible(imageComponentButton);
+    wait.forElementClickable(imageComponentButton);
     imageComponentButton.click();
 
     return this;
@@ -217,7 +219,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage addTitleComponent() {
     WebElement titleComponentButton = componentsButtons.get(0);
-    wait.forElementVisible(titleComponentButton);
+    wait.forElementClickable(titleComponentButton);
     titleComponentButton.click();
 
     return this;
@@ -225,7 +227,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage addHeaderComponent() {
     WebElement headerComponentButton = componentsButtons.get(3);
-    wait.forElementVisible(headerComponentButton);
+    wait.forElementClickable(headerComponentButton);
     headerComponentButton.click();
 
     return this;
@@ -307,18 +309,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  /**
-   * Verifies default rendered template structure, which should contain: 1 title component, 1 image
-   * component and 2 row components
-   */
-  public InfoboxBuilderPage verifyDefaultTemplateStructure() {
-    Assertion.assertEquals(this.titles.size(), 1);
-    Assertion.assertEquals(this.images.size(), 1);
-    Assertion.assertEquals(this.rows.size(), 2);
-
-    return this;
-  }
-
   public InfoboxBuilderPage changeHeaderCollapsibilityState(int index) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     headers.get(index).click();
@@ -337,6 +327,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     }
 
     return this;
+  }
+
+  public boolean isTitleUsingArticleName(int titleIndex) {
+    this.selectTitleWithIndex(titleIndex);
+    wait.forElementClickable(titleCheckbox);
+    return titleCheckbox.isSelected();
   }
 
   public InfoboxBuilderPage setTitleToUseArticleName(int index) {
