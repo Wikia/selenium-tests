@@ -58,7 +58,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
     log(slotName, slotSize);
 
     new AdsBaseObject(driver, url, pageSize)
-        .triggerAdSlot(slotName, slotInfo.get("jsToTriggerSlot").toString())
+        .triggerAdSlot(slotName)
         .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
         .verifyIframeSize(slotName, slotInfo.get("src").toString(),
                           slotSize.getWidth(), slotSize.getHeight());

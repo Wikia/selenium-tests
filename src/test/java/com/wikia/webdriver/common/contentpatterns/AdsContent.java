@@ -7,17 +7,13 @@ public class AdsContent {
 
   //HashMap with slots selector
   public static final Map<String, String> SLOTS_SELECTORS;
+  public static final Map<String, String> SLOTS_TRIGGERS;
 
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
       "window.adslots2.push([\"%slot%\"]);";
   public static final String AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT =
       "top.window.adDriver2ForcedStatus['%s']='success';";
-  public static final String FMR_TRIGGER =
-      "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })();";
-  public static final String INCONTENT_LEADERBOARD_TRIGGER =
-      "$('#mw-content-text h2')[1].scrollIntoView(true);";
-  public static final String SKY3_TRIGGER = "window.scrollTo(0,document.body.scrollHeight);";
 
   //SLOTS NAMES
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
@@ -57,6 +53,10 @@ public class AdsContent {
     return SLOTS_SELECTORS.get(slotName);
   }
 
+  public static String getSlotTrigger(String slotName) {
+    return SLOTS_TRIGGERS.get(slotName);
+  }
+
   static {
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(HOME_TOP_LB, "#HOME_TOP_LEADERBOARD");
@@ -85,6 +85,10 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT, "#INVISIBLE_HIGH_IMPACT");
     SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
 
+    SLOTS_TRIGGERS = new HashMap<>();
+    SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })();");
+    SLOTS_TRIGGERS.put(INCONTENT_LEADERBOARD, "$('#mw-content-text h2')[1].scrollIntoView(true);");
+    SLOTS_TRIGGERS.put(LEFT_SKYSCRAPPER_3, "window.scrollTo(0,document.body.scrollHeight);");
   }
 }
 

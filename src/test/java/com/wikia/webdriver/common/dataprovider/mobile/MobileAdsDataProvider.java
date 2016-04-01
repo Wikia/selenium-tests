@@ -427,7 +427,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(320, 100))
                 .put("lineItemId", 136987812)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -438,7 +437,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -449,7 +447,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -460,7 +457,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -471,7 +467,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -482,7 +477,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -493,7 +487,6 @@ public class MobileAdsDataProvider {
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")
-                .put("jsToTriggerSlot", "")
                 .build()
         }
     };

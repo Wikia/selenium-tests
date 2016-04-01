@@ -1012,7 +1012,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(728, 90))
                 .put("lineItemId", 239961972)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.INCONTENT_LEADERBOARD_TRIGGER)
                 .build()
         },
         {
@@ -1023,7 +1022,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(468, 250))
                 .put("lineItemId", 241472412)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.INCONTENT_LEADERBOARD_TRIGGER)
                 .build()
         },
         {
@@ -1034,7 +1032,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", 239961132)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.INCONTENT_LEADERBOARD_TRIGGER)
                 .build()
         },
         {
@@ -1045,7 +1042,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", 223909212)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1056,7 +1052,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 600))
                 .put("lineItemId", 223968492)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1067,7 +1062,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 600))
                 .put("lineItemId", 223968492)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1078,7 +1072,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", 223909212)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1089,7 +1082,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 250))
                 .put("lineItemId", 223909212)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1100,7 +1092,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(160, 600))
                 .put("lineItemId", 237935652)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1111,7 +1102,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(120, 600))
                 .put("lineItemId", 257673852)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -1122,7 +1112,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(120, 600))
                 .put("lineItemId", 257673852)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.FMR_TRIGGER)
                 .build()
         },
         {
@@ -1133,7 +1122,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(120, 600))
                 .put("lineItemId", 257673852)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", AdsContent.SKY3_TRIGGER)
                 .build()
         },
         {
@@ -1144,7 +1132,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 1050))
                 .put("lineItemId", 255534972)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
         {
@@ -1155,7 +1142,6 @@ public class AdsDataProvider {
                 .put("slotSize", new Dimension(300, 1050))
                 .put("lineItemId", 255534972)
                 .put("src", "gpt")
-                .put("jsToTriggerSlot", "")
                 .build()
         },
     };

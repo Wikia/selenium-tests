@@ -468,7 +468,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC, AdsContent.FMR_TRIGGER);
+        triggerAdSlot(AdsContent.FLOATING_MEDREC);
       }
 
       String slotSelector = AdsContent.getSlotSelector(slotName);
@@ -619,13 +619,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject triggerAdSlot(final String slotName, final String javaScriptTrigger) {
+  public AdsBaseObject triggerAdSlot(final String slotName) {
+    final String adSlotSelector = AdsContent.getSlotSelector(slotName);
+    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
     if (StringUtils.isEmpty(javaScriptTrigger)) {
       return this;
     }
-
-    final String adSlotSelector = AdsContent.getSlotSelector(slotName);
 
     try {
       new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
