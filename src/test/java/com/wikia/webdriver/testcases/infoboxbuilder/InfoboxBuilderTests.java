@@ -18,16 +18,21 @@ import org.testng.annotations.Test;
 @Test(groups = "InfoboxBuilderTests")
 @Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
+
   private static final int EUROPA_INFOBOX_WIDTH = 300;
   private static final int DEFAULT_INFOBOX_WIDTH = 270;
 
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openNew("InfoboxBuilderVerifyDefaultStructure")
-        .verifyDefaultTemplateStructure();
+        .openNew("InfoboxBuilderVerifyDefaultStructure");
 
-    Assert.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
+    Assertion.assertEquals(builderPage.countTitles(), 1);
+    Assertion.assertEquals(builderPage.countImages(), 1);
+    Assertion.assertEquals(builderPage.countRows(), 2);
+    Assertion.assertEquals(builderPage.countHeaders(), 0);
+
+    Assertion.assertTrue(builderPage.isTitleUsingArticleName(0));
   }
 
   @Execute(asUser = User.USER)
@@ -158,6 +163,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxPreviewTheme() {
+    //TODO: ensure that proper theme is loaded (europa theme flag)
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
     SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
     PortableInfobox infobox = new PortableInfobox();
@@ -198,9 +204,11 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyUserInteractions() {
-    InfoboxBuilderPage builder = new InfoboxBuilderPage();
-
-    builder.openNew("InfoboxBuilderVerifySelectedBorderStyling").verifyTooltipOnHover();
+    //TODO: Ensure proper theme is loaded (europa flag). test is passing but if other tests will
+    // change the flag then something may be wrong
+    InfoboxBuilderPage builder = new InfoboxBuilderPage()
+        .openNew("InfoboxBuilderVerifySelectedBorderStyling")
+        .verifyTooltipOnHover();
 
     String borderStyle = builder.getBorderStyle();
     Assertion.assertEquals(borderStyle, "1px solid rgb(26, 94, 184)");
@@ -250,7 +258,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
   }
 
-  //TODO: fixit, template opened in source instead of builder
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorSaveChanges() {
     InfoboxBuilderPage builderPage =
@@ -306,10 +313,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isHeaderInputFocused());
   }
 
-  //TODO: fixit, template opened in source instead of builder
   @Execute(asUser = User.USER)
   public void verifyChevronTooltip() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
+    InfoboxBuilderPage
+        builderPage = new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
 
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedBelow(0));
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(1));
@@ -319,9 +326,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(2));
   }
 
-  //TODO: fixit, template opened in source instead of builder
   @Execute(asUser = User.USER)
   public void verifyLoadingEuropaTheme() {
+    //TODO: turn on europa flag here
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_europa");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
@@ -329,6 +336,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyLoadingDefaultTheme() {
+    //TODO: turn off europa flag here
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
@@ -344,9 +352,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   public void verifyOtherContentIsNotChanged() {
     final String templateName = "Infobox_other_content";
-    final String infoboxRegexp = "<infobox[^>]*>.*</infobox>";
-    String beforePublish =
-        new TemplatePage().getRawContent(templateName).replaceAll(infoboxRegexp, "");
+    final String infoboxRegexp = "(?s)<infobox[^>]*>.*</infobox>";
+    String beforePublish = new TemplatePage().getRawContent(templateName)
+        .replaceAll(infoboxRegexp, "");
 
     new TemplatePage().open(templateName).loginAs(User.USER);
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(templateName);
