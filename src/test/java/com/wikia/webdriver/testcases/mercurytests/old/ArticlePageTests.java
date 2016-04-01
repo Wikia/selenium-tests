@@ -14,7 +14,6 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -28,8 +27,6 @@ public class ArticlePageTests extends NewTestTemplate {
   private Navigation navigation;
   private Navigate navigate;
   private Loading loading;
-
-  private static final By WIKIA_MOBILE_WIKI_TITLE = By.cssSelector("#wkWrdMrk");
 
   private static final String[] FOOTER_ELEMENTS =
       {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
