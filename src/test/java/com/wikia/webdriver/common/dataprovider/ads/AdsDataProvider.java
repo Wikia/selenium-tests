@@ -1085,6 +1085,26 @@ public class AdsDataProvider {
                 .build()
         },
         {
+            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 260204412)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
+                .put("slotSize", new Dimension(300, 250))
+                .put("lineItemId", 260206692)
+                .put("src", "gpt")
+                .build()
+        },
+        {
             new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
             "",
             ImmutableMap.<String, Object>builder()
