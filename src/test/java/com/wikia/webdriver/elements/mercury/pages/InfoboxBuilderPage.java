@@ -76,6 +76,24 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".pop-over .orient-above")
   private WebElement sectionTooltipOrientedAbove;
 
+  @FindBy(css = ".modal-dialog-wrapper > div.modal-dialog")
+  private WebElement modal;
+
+  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  private WebElement firstButton;
+
+  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(2)")
+  private WebElement secondButton;
+
+  @FindBy(css = "#editTemplateTitle")
+  private WebElement editTemplateTitleInput;
+
+  @FindBy(css = ".text-field-error-message")
+  private WebElement errorMessage;
+
+  @FindBy(css = ".modal-text-area h2")
+  private WebElement modalTitle;
+
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
 
@@ -127,6 +145,41 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
     driver.switchTo().frame(builderIFrame);
     return this;
+  }
+
+  public boolean isModalPresented() {
+    wait.forElementVisible(modal);
+    return modal.isDisplayed();
+  }
+
+  public boolean isModalTitlePresent() {
+    wait.forElementVisible(modalTitle);
+    return modalTitle.isDisplayed();
+  }
+
+  public boolean isEditTemplateTitlePresent() {
+    wait.forElementVisible(editTemplateTitleInput);
+    return editTemplateTitleInput.isDisplayed();
+  }
+
+  public void insertTemplateTitle(String title) {
+    wait.forElementClickable(editTemplateTitleInput);
+    editTemplateTitleInput.sendKeys(title);
+  }
+
+  public boolean isErrorMessagePresent() {
+    wait.forElementVisible(errorMessage);
+    return errorMessage.isDisplayed();
+  }
+
+  public void clickSecondButton() {
+    wait.forElementClickable(secondButton);
+    secondButton.click();
+  }
+
+  public void clickFirstButton() {
+    wait.forElementClickable(firstButton);
+    firstButton.click();
   }
 
   public boolean isInfoboxBuilderDisplayed() {
@@ -414,10 +467,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public ModalDialog clickGoToSourceButton() {
+  public InfoboxBuilderPage clickGoToSourceButton() {
     wait.forElementClickable(goToSourceButton);
     goToSourceButton.click();
-    return new ModalDialog();
+    return this;
   }
 
   public InfoboxBuilderPage clickGoToSourceModalBackground() {

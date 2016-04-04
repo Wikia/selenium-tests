@@ -248,9 +248,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openNew("Infobox_verify_go_to_source");
 
-    ModalDialog goToSourceModalDialog = builderPage.clickGoToSourceButton();
+    builderPage.clickGoToSourceButton();
 
-    Assertion.assertTrue(goToSourceModalDialog.isPresent());
+    Assertion.assertTrue(builderPage.isModalPresented());
 
     builderPage.clickGoToSourceModalBackground();
 
@@ -259,15 +259,15 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorSaveChanges() {
-    ModalDialog goToSourceModalDialog = new InfoboxBuilderPage()
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openExisting("Infobox_verify_go_to_source_save_changes")
         .addRowComponent()
         .deleteRowUsingButton(1)
         .clickGoToSourceButton();
 
-    Assertion.assertTrue(goToSourceModalDialog.isPresent());
+    Assertion.assertTrue(builderPage.isModalPresented());
 
-    goToSourceModalDialog.clickFirstButton();
+    builderPage.clickFirstButton();
 
     TemplateEditPage template = new TemplateEditPage();
 
@@ -277,13 +277,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorDropChanges() {
-    ModalDialog goToSourceModalDialog = new InfoboxBuilderPage()
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openNew("Infobox_verify_go_to_source_drop_changes")
         .clickGoToSourceButton();
 
-    Assertion.assertTrue(goToSourceModalDialog.isPresent());
+    Assertion.assertTrue(builderPage.isModalPresented());
 
-    goToSourceModalDialog.clickSecondButton();
+    builderPage.clickSecondButton();
 
     TemplateEditPage template = new TemplateEditPage();
     template.getTemplateClassification()
@@ -375,30 +375,31 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyTemplateNameModal() {
-    new InfoboxBuilderPage()
-        .open()
-        .clickPublish();
-    ModalDialog modal = new ModalDialog();
+    InfoboxBuilderPage builder = new InfoboxBuilderPage();
 
-    Assertion.assertTrue(modal.isPresent());
-    Assertion.assertTrue(modal.isEditTemplateTitlePresent());
+    builder.open().clickPublish();
+
+    Assertion.assertTrue(builder.isModalPresented());
+    Assertion.assertTrue(builder.isEditTemplateTitlePresent());
 
   }
 
   @Execute(asUser = User.USER)
   public void verifyNamingConflictTypingNameAfterClickingPublish() {
-    new InfoboxBuilderPage()
-        .open()
+    InfoboxBuilderPage builder = new InfoboxBuilderPage();
+        builder.open()
         .clickPublish();
 
-    ModalDialog modal = new ModalDialog();
 
-    Assertion.assertTrue(modal.isPresent());
-    Assertion.assertTrue(modal.isEditTemplateTitlePresent());
+//    driver.switchTo().activeElement();
+    Assertion.assertTrue(builder.isModalPresented());
 
-    modal.insertTemplateTitle("InfoboxNamingConflict");
-    modal.clickFirstButton();
+//    Assertion.assertTrue(modal.isModalTitlePresent());
+//    Assertion.assertTrue(modal.isEditTemplateTitlePresent());
+//
+//    modal.insertTemplateTitle("InfoboxNamingConflict");
+//    modal.clickFirstButton();
 
-    Assertion.assertTrue(modal.isErrorMessagePresent());
+//    Assertion.assertTrue(modal.isErrorMessagePresent());
   }
 }
