@@ -860,28 +860,28 @@ public class AdsDataProvider {
   public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(1920, 1080),
             new Dimension(600, 590),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(1920, 1080),
             new Dimension(300, 343),
             false
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(800, 800),
             new Dimension(569, 564),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 800),
             new Dimension(300, 343),
@@ -894,28 +894,28 @@ public class AdsDataProvider {
   public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(600, 800),
             new Dimension(590, 491),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(600, 800),
             new Dimension(300, 258),
             false
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(800, 500),
             new Dimension(405, 338),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 500),
             new Dimension(300, 258),
