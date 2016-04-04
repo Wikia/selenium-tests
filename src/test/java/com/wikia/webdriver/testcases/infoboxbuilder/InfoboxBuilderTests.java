@@ -5,13 +5,13 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.ModalDialog;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -172,8 +172,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
     themeDesigner.submitTheme();
 
-    String templateBgColor = template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
-    String previewBgColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
+    String
+        templateBgColor =
+        template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
+    String
+        previewBgColor =
+        builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 
     Assertion.assertEquals(previewBgColor, templateBgColor);
 
@@ -181,7 +185,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     themeDesigner.submitTheme();
 
     templateBgColor = template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
-    previewBgColor = builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
+    previewBgColor =
+        builder.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 
     Assertion.assertEquals(templateBgColor, previewBgColor);
   }
@@ -250,7 +255,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     builderPage.clickGoToSourceButton();
 
-    Assertion.assertTrue(builderPage.isModalPresented());
+    Assertion.assertTrue(builderPage.isGoToSourceModalPresent());
 
     builderPage.clickGoToSourceModalBackground();
 
@@ -265,9 +270,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .deleteRowUsingButton(1)
         .clickGoToSourceButton();
 
-    Assertion.assertTrue(builderPage.isModalPresented());
+    Assertion.assertTrue(builderPage.isGoToSourceModalPresent());
 
-    builderPage.clickFirstButton();
+    builderPage.clickSaveChangesButton();
 
     TemplateEditPage template = new TemplateEditPage();
 
@@ -281,9 +286,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .openNew("Infobox_verify_go_to_source_drop_changes")
         .clickGoToSourceButton();
 
-    Assertion.assertTrue(builderPage.isModalPresented());
+    Assertion.assertTrue(builderPage.isGoToSourceModalPresent());
 
-    builderPage.clickSecondButton();
+    builderPage.clickDropChangesButton();
 
     TemplateEditPage template = new TemplateEditPage();
     template.getTemplateClassification()
@@ -374,32 +379,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void verifyTemplateNameModal() {
-    InfoboxBuilderPage builder = new InfoboxBuilderPage();
-
-    builder.open().clickPublish();
-
-    Assertion.assertTrue(builder.isModalPresented());
-    Assertion.assertTrue(builder.isEditTemplateTitlePresent());
-
-  }
-
-  @Execute(asUser = User.USER)
   public void verifyNamingConflictTypingNameAfterClickingPublish() {
     InfoboxBuilderPage builder = new InfoboxBuilderPage();
-        builder.open()
+    builder.open()
         .clickPublish();
 
+    Assertion.assertTrue(builder.isModalEditTitlePresent());
+    Assertion.assertTrue(builder.isEditTemplateTitleInputPresent());
 
-//    driver.switchTo().activeElement();
-    Assertion.assertTrue(builder.isModalPresented());
+    builder.insertTemplateTitle("InfoboxNamingConflict");
+    builder.clickPublishEditedTitleButton();
 
-//    Assertion.assertTrue(modal.isModalTitlePresent());
-//    Assertion.assertTrue(modal.isEditTemplateTitlePresent());
-//
-//    modal.insertTemplateTitle("InfoboxNamingConflict");
-//    modal.clickFirstButton();
-
-//    Assertion.assertTrue(modal.isErrorMessagePresent());
+    Assertion.assertTrue(builder.isErrorMessagePresent());
   }
 }

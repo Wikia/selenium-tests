@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.elements.mercury.components.ModalDialog;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
@@ -76,23 +75,26 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".pop-over .orient-above")
   private WebElement sectionTooltipOrientedAbove;
 
-  @FindBy(css = ".modal-dialog-wrapper > div.modal-dialog")
-  private WebElement modal;
+  @FindBy(css = ".infobox-builder-go-to-source-modal > div")
+  private WebElement modalGoToSource;
 
-  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(1)")
-  private WebElement firstButton;
+  @FindBy(css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  private WebElement saveChangesButton;
 
-  @FindBy(css = ".modal-dialog div.modal-bottom-row > button:nth-child(2)")
-  private WebElement secondButton;
-
-  @FindBy(css = "#editTemplateTitle")
-  private WebElement editTemplateTitleInput;
+  @FindBy(css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(2)")
+  private WebElement dropChangesButton;
 
   @FindBy(css = ".text-field-error-message")
   private WebElement errorMessage;
 
-  @FindBy(css = ".modal-text-area h2")
-  private WebElement modalTitle;
+  @FindBy(css = ".infobox-builder-edit-title-modal > div")
+  private WebElement modalEditTitle;
+
+  @FindBy(css = ".infobox-builder-edit-title-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  private WebElement publishEditedTitleButton;
+
+  @FindBy(css = "#editTemplateTitle")
+  private WebElement editTemplateTitleInput;
 
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
@@ -147,17 +149,17 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public boolean isModalPresented() {
-    wait.forElementVisible(modal);
-    return modal.isDisplayed();
+  public boolean isGoToSourceModalPresent() {
+    wait.forElementVisible(modalGoToSource);
+    return modalGoToSource.isDisplayed();
   }
 
-  public boolean isModalTitlePresent() {
-    wait.forElementVisible(modalTitle);
-    return modalTitle.isDisplayed();
+  public boolean isModalEditTitlePresent() {
+    wait.forElementVisible(modalEditTitle);
+    return modalEditTitle.isDisplayed();
   }
 
-  public boolean isEditTemplateTitlePresent() {
+  public boolean isEditTemplateTitleInputPresent() {
     wait.forElementVisible(editTemplateTitleInput);
     return editTemplateTitleInput.isDisplayed();
   }
@@ -172,14 +174,19 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return errorMessage.isDisplayed();
   }
 
-  public void clickSecondButton() {
-    wait.forElementClickable(secondButton);
-    secondButton.click();
+  public void clickDropChangesButton() {
+    wait.forElementClickable(dropChangesButton);
+    dropChangesButton.click();
   }
 
-  public void clickFirstButton() {
-    wait.forElementClickable(firstButton);
-    firstButton.click();
+  public void clickSaveChangesButton() {
+    wait.forElementClickable(saveChangesButton);
+    saveChangesButton.click();
+  }
+
+  public void clickPublishEditedTitleButton() {
+    wait.forElementClickable(publishEditedTitleButton);
+    publishEditedTitleButton.click();
   }
 
   public boolean isInfoboxBuilderDisplayed() {
