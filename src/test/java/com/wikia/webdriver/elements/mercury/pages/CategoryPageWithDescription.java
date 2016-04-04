@@ -9,8 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Objects;
-
 public class CategoryPageWithDescription extends WikiBasePageObject {
 
   private static final String DESCRIPTION_HANDLE = "description handle";
@@ -28,20 +26,34 @@ public class CategoryPageWithDescription extends WikiBasePageObject {
     super();
   }
 
-  public CategoryPageWithDescription open() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
-
-    Assertion.assertTrue(description.isDisplayed(),
-                         "There's no article container on the page.");
+  public CategoryPageWithDescription checkHasArticleContainer() {
+    Assertion.assertTrue(description.isDisplayed(), "There's no article container on the page.");
     PageObjectLogging.logInfo("Article container found: " + description);
 
+    return this;
+  }
+
+  public CategoryPageWithDescription checkHasCorrectDescriptionHandle() {
     Assertion.assertEquals(descriptionHandle.getText(), DESCRIPTION_HANDLE,
-                         "Unexpected description contents.");
+                           "Unexpected description contents.");
     PageObjectLogging.logInfo("Description handle has expected content: " + descriptionHandle);
 
-    Assertion.assertTrue(firstSectionMembers.isDisplayed(),"First section is empty.");
+    return this;
+  }
+
+  public CategoryPageWithDescription checkFirstSectionHasMembers() {
+    Assertion.assertTrue(firstSectionMembers.isDisplayed(), "First section is empty.");
     PageObjectLogging.logInfo("First section contains members: " + firstSectionMembers);
 
     return this;
+  }
+
+  public CategoryPageWithDescription open() {
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
+
+    return this
+        .checkHasArticleContainer()
+        .checkHasCorrectDescriptionHandle()
+        .checkFirstSectionHasMembers();
   }
 }

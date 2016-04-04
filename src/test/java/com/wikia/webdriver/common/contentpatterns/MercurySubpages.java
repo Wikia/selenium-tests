@@ -23,6 +23,7 @@ public class MercurySubpages {
       "/wiki/Category:Category_page_test_-_Category_with_description";
   public static final String CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS =
       "/wiki/Category:Category_page_test_-_Category_with_description_and_no_members";
+  public static final String CATEGORY_TEST_PAGE = "/wiki/Category_test_001";
 
   /**
    * Legend:

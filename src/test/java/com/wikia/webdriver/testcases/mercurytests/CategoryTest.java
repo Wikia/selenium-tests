@@ -9,6 +9,8 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Category;
+import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithDescription;
+import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithoutDescription;
 
 import org.testng.annotations.Test;
 
@@ -21,14 +23,35 @@ public class CategoryTest extends NewTestTemplate {
   private void init() {
     this.category = new Category(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_TEST_PAGE);
   }
 
-  @Test(groups = "mercury_category_expandAndNavigateToCategoryPage")
-  public void mercury_category_expandAndNavigateToCategoryPage() {
+  @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithDescription")
+  public void mercury_category_expandAndNavigateToCategoryPageWithDescription() {
     init();
+    CategoryPageWithDescription categoryPage = new CategoryPageWithDescription();
 
-    category.toggle();
-    category.openCategoryPage(0);
+    category
+        .toggle()
+        .openCategoryPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
+
+    categoryPage
+        .checkHasArticleContainer()
+        .checkHasCorrectDescriptionHandle()
+        .checkFirstSectionHasMembers();
+  }
+
+  @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithoutDescription")
+  public void mercury_category_expandAndNavigateToCategoryPageWithoutDescription() {
+    init();
+    CategoryPageWithoutDescription categoryPage = new CategoryPageWithoutDescription();
+
+    category
+        .toggle()
+        .openCategoryPage(MercurySubpages.CATEGORY_WITHOUT_DESCRIPTION);
+
+    categoryPage
+        .checkDescriptionAbsence()
+        .checkFirstSectionHasMembers();
   }
 }

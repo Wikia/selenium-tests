@@ -28,25 +28,44 @@ public class CategoryPageWithDescriptionAndNoMembers extends WikiBasePageObject 
     super();
   }
 
-  public CategoryPageWithDescriptionAndNoMembers open() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS);
-
-    Assertion.assertTrue(description.isDisplayed(),
-                         "There's no article container on the page.");
+  private CategoryPageWithDescriptionAndNoMembers checkHasArticleContainer() {
+    Assertion.assertTrue(description.isDisplayed(), "There's no article container on the page.");
     PageObjectLogging.logInfo("Article container found: " + description);
 
+    return this;
+  }
+
+  private CategoryPageWithDescriptionAndNoMembers checkHasCorrectDescriptionHandle() {
     Assertion.assertEquals(descriptionHandle.getText(), DESCRIPTION_HANDLE,
                            "Unexpected description contents.");
     PageObjectLogging.logInfo("Description handle has expected content: " + descriptionHandle);
 
+    return this;
+  }
+
+  private CategoryPageWithDescriptionAndNoMembers checkHasCorrectMessage() {
     Assertion.assertEquals(noPagesMessageContainer.getText(), NO_PAGES_MESSAGE,
                            "Info message about no pages in category is missing.");
     PageObjectLogging.logInfo("Info message about no pages in category was shown: " +
                               noPagesMessageContainer);
 
+    return this;
+  }
+
+  private CategoryPageWithDescriptionAndNoMembers checkPagesAbsence() {
     wait.forElementNotPresent(By.cssSelector(".category-sections .category-section li"));
     PageObjectLogging.logInfo("There are no pages shown in this category, which is nice.");
 
     return this;
+  }
+
+  public CategoryPageWithDescriptionAndNoMembers open() {
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS);
+
+    return this
+        .checkHasArticleContainer()
+        .checkHasCorrectDescriptionHandle()
+        .checkHasCorrectMessage()
+        .checkPagesAbsence();
   }
 }
