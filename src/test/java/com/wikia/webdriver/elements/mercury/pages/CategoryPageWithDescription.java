@@ -26,14 +26,14 @@ public class CategoryPageWithDescription extends WikiBasePageObject {
     super();
   }
 
-  public CategoryPageWithDescription checkHasArticleContainer() {
+  private CategoryPageWithDescription checkHasArticleContainer() {
     Assertion.assertTrue(description.isDisplayed(), "There's no article container on the page.");
     PageObjectLogging.logInfo("Article container found: " + description);
 
     return this;
   }
 
-  public CategoryPageWithDescription checkHasCorrectDescriptionHandle() {
+  private CategoryPageWithDescription checkHasCorrectDescriptionHandle() {
     Assertion.assertEquals(descriptionHandle.getText(), DESCRIPTION_HANDLE,
                            "Unexpected description contents.");
     PageObjectLogging.logInfo("Description handle has expected content: " + descriptionHandle);
@@ -41,19 +41,23 @@ public class CategoryPageWithDescription extends WikiBasePageObject {
     return this;
   }
 
-  public CategoryPageWithDescription checkFirstSectionHasMembers() {
+  private CategoryPageWithDescription checkFirstSectionHasMembers() {
     Assertion.assertTrue(firstSectionMembers.isDisplayed(), "First section is empty.");
     PageObjectLogging.logInfo("First section contains members: " + firstSectionMembers);
 
     return this;
   }
 
-  public CategoryPageWithDescription open() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
-
+  public CategoryPageWithDescription check () {
     return this
         .checkHasArticleContainer()
         .checkHasCorrectDescriptionHandle()
         .checkFirstSectionHasMembers();
+  }
+
+  public CategoryPageWithDescription openFromUrl() {
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
+
+    return this.check();
   }
 }

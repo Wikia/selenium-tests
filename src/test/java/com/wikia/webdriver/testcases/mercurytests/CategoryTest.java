@@ -35,10 +35,7 @@ public class CategoryTest extends NewTestTemplate {
         .toggle()
         .openCategoryPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
 
-    categoryPage
-        .checkHasArticleContainer()
-        .checkHasCorrectDescriptionHandle()
-        .checkFirstSectionHasMembers();
+    categoryPage.check();
   }
 
   @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithoutDescription")
@@ -50,8 +47,6 @@ public class CategoryTest extends NewTestTemplate {
         .toggle()
         .openCategoryPage(MercurySubpages.CATEGORY_WITHOUT_DESCRIPTION);
 
-    categoryPage
-        .checkDescriptionAbsence()
-        .checkFirstSectionHasMembers();
+    categoryPage.check();
   }
 }

@@ -59,13 +59,31 @@ public class CategoryPageWithDescriptionAndNoMembers extends WikiBasePageObject 
     return this;
   }
 
-  public CategoryPageWithDescriptionAndNoMembers open() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS);
-
+  public CategoryPageWithDescriptionAndNoMembers check() {
     return this
         .checkHasArticleContainer()
         .checkHasCorrectDescriptionHandle()
         .checkHasCorrectMessage()
         .checkPagesAbsence();
+  }
+
+  public CategoryPageWithDescriptionAndNoMembers navigateToLinkingPage() {
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_TEST_PAGE_LINK_TO_EMPTY_CATEGORY);
+
+    return this;
+  }
+
+  public CategoryPageWithDescriptionAndNoMembers openFromLinkingPage() {
+    driver.findElement(By.cssSelector(
+        "article a[href=\"" + MercurySubpages.CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS + "\"]")
+    ).click();
+
+    return this.check();
+  }
+
+  public CategoryPageWithDescriptionAndNoMembers openFromUrl() {
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS);
+
+    return this.check();
   }
 }

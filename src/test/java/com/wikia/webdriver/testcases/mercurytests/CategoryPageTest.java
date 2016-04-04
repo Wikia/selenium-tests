@@ -18,16 +18,26 @@ public class CategoryPageTest extends NewTestTemplate {
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithoutDescriptionFromUrl")
   public void mercury_category_navigateToCategoryPageWithoutDescriptionFromUrl() {
-    new CategoryPageWithoutDescription().open();
+    new CategoryPageWithoutDescription()
+        .openFromUrl();
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithDescriptionFromUrl")
   public void mercury_category_navigateToCategoryPageWithDescriptionFromUrl() {
-    new CategoryPageWithDescription().open();
+    new CategoryPageWithDescription()
+        .openFromUrl();
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromUrl")
   public void mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromUrl() {
-    new CategoryPageWithDescriptionAndNoMembers().open();
+    new CategoryPageWithDescriptionAndNoMembers()
+        .openFromUrl();
+  }
+
+  @Test(groups = "mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromLink")
+  public void mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromLink() {
+    new CategoryPageWithDescriptionAndNoMembers()
+        .navigateToLinkingPage()
+        .openFromLinkingPage();
   }
 }

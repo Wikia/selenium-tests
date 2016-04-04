@@ -19,25 +19,29 @@ public class CategoryPageWithoutDescription extends WikiBasePageObject {
     super();
   }
 
-  public CategoryPageWithoutDescription checkDescriptionAbsence() {
+  private CategoryPageWithoutDescription checkDescriptionAbsence() {
     wait.forElementNotPresent(By.cssSelector(".article-content"));
     PageObjectLogging.logInfo("There's no article container on the page, which is nice.");
 
     return this;
   }
 
-  public CategoryPageWithoutDescription checkFirstSectionHasMembers() {
+  private CategoryPageWithoutDescription checkFirstSectionHasMembers() {
     Assertion.assertTrue(firstSectionMembers.isDisplayed(), "First section is empty.");
     PageObjectLogging.logInfo("First section contains members: " + firstSectionMembers);
 
     return this;
   }
 
-  public CategoryPageWithoutDescription open() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITHOUT_DESCRIPTION);
-
+  public CategoryPageWithoutDescription check() {
     return this
         .checkDescriptionAbsence()
         .checkFirstSectionHasMembers();
+  }
+
+  public CategoryPageWithoutDescription openFromUrl() {
+    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITHOUT_DESCRIPTION);
+
+    return this.check();
   }
 }
