@@ -382,7 +382,7 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"esrb\":[\"everyone\"]",
+                "\"esrb\":\"everyone\"",
                 "\"age\":[\"teen\",\"kid\",\"18-34\"]",
                 "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
                 "\"media\":[\"tv\",\"cards\"]",
@@ -422,7 +422,7 @@ public class AdsDataProvider {
                 "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
                 "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
                 "\"pub\":[\"bethesda\",\"bethesda\"]",
-                "\"esrb\":[\"mature\"]",
+                "\"esrb\":\"mature\"",
                 "\"theme\":[\"military\",\"postapocalypse\"]"
             ),
             Arrays.asList(
@@ -457,7 +457,7 @@ public class AdsDataProvider {
                 "\"pform\":[\"pc\"]",
                 "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
             ),
             Arrays.asList(
@@ -528,7 +528,7 @@ public class AdsDataProvider {
                 "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
                 "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
                 "\"pform\":[\"pc\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -558,7 +558,7 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
@@ -650,7 +650,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
         {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
-        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
         {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
