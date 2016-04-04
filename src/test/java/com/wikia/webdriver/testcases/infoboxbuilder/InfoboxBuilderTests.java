@@ -380,9 +380,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyNamingConflictTypingNameAfterClickingPublish() {
-    InfoboxBuilderPage builder = new InfoboxBuilderPage();
-    builder.open()
-        .clickPublish();
+    InfoboxBuilderPage builder = new InfoboxBuilderPage().open();
+    builder.clickPublish();
 
     Assertion.assertTrue(builder.isModalEditTitlePresent());
     Assertion.assertTrue(builder.isEditTemplateTitleInputPresent());
