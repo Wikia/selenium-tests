@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.oasis.components.infoboxbuilder;
+package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 

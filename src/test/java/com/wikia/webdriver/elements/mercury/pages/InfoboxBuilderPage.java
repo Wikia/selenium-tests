@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.elements.oasis.components.infoboxbuilder.ModalDialog;
+import com.wikia.webdriver.elements.mercury.components.ModalDialog;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
