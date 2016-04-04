@@ -17,6 +17,12 @@ public class MercurySubpages {
   public static final String INFOBOX_3 = "/wiki/Infobox3";
   public static final String INFOBOX_4 = "/wiki/Infobox4";
   public static final String INFOBOX_5 = "/wiki/Infobox5";
+  public static final String CATEGORY_WITHOUT_DESCRIPTION =
+      "/wiki/Category:Category_page_test_-_Category_without_description";
+  public static final String CATEGORY_WITH_DESCRIPTION =
+      "/wiki/Category:Category_page_test_-_Category_with_description";
+  public static final String CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS =
+      "/wiki/Category:Category_page_test_-_Category_with_description_and_no_members";
 
   /**
    * Legend:
