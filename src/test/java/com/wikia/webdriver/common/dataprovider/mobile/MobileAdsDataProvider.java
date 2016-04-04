@@ -98,7 +98,7 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"esrb\":[\"everyone\"]",
+                "\"esrb\":\"everyone\"",
                 "\"age\":[\"teen\",\"kid\",\"18-34\"]",
                 "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
                 "\"media\":[\"tv\",\"cards\"]",
@@ -143,7 +143,7 @@ public class MobileAdsDataProvider {
                 "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
                 "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
                 "\"pub\":[\"bethesda\",\"bethesda\"]",
-                "\"esrb\":[\"mature\"]",
+                "\"esrb\":\"mature\"",
                 "\"theme\":[\"military\",\"postapocalypse\"]"
 
             ),
@@ -181,7 +181,7 @@ public class MobileAdsDataProvider {
                 "\"pform\":[\"pc\"]",
                 "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
 
             ),
@@ -219,7 +219,7 @@ public class MobileAdsDataProvider {
                 "\"pform\":[\"xboxone\",\"ps4\",\"ps3\",\"xbox360\",\"pc\"]",
                 "\"gnre\":[\"adventure\",\"3rdpersonshooter\",\"comedy\",\"casual\",\"platformer\"]",
                 "\"theme\":[\"lego\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -255,7 +255,7 @@ public class MobileAdsDataProvider {
                 "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
                 "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
                 "\"pform\":[\"pc\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -289,7 +289,7 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
