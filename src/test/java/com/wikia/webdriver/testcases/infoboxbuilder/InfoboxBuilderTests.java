@@ -267,7 +267,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertTrue(goToSourceModalDialog.isPresent());
 
-    goToSourceModalDialog.clickSaveChangesButton();
+    goToSourceModalDialog.clickFirstButton();
 
     TemplateEditPage template = new TemplateEditPage();
 
@@ -283,7 +283,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertTrue(goToSourceModalDialog.isPresent());
 
-    goToSourceModalDialog.clickDropChangesButton();
+    goToSourceModalDialog.clickSecondButton();
 
     TemplateEditPage template = new TemplateEditPage();
     template.getTemplateClassification()
@@ -371,5 +371,34 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         new TemplatePage().getRawContent(templateName).replaceAll(infoboxRegexp, "");
 
     Assert.assertEquals(beforePublish, afterPublish);
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyTemplateNameModal() {
+    new InfoboxBuilderPage()
+        .open()
+        .clickPublish();
+    ModalDialog modal = new ModalDialog();
+
+    Assertion.assertTrue(modal.isPresent());
+    Assertion.assertTrue(modal.isEditTemplateTitlePresent());
+
+  }
+
+  @Execute(asUser = User.USER)
+  public void verifyNamingConflictTypingNameAfterClickingPublish() {
+    new InfoboxBuilderPage()
+        .open()
+        .clickPublish();
+
+    ModalDialog modal = new ModalDialog();
+
+    Assertion.assertTrue(modal.isPresent());
+    Assertion.assertTrue(modal.isEditTemplateTitlePresent());
+
+    modal.insertTemplateTitle("InfoboxNamingConflict");
+    modal.clickFirstButton();
+
+    Assertion.assertTrue(modal.isErrorMessagePresent());
   }
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.mercury.components.ModalDialog;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
@@ -117,6 +118,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage openExisting(String templateName) {
     new TemplateEditPage().open(templateName)
         .openCurrectArticleSourceMode();
+    driver.switchTo().frame(builderIFrame);
+    return this;
+  }
+
+  public InfoboxBuilderPage open() {
+    new TemplateEditPage().open("temp_template");
+    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
     driver.switchTo().frame(builderIFrame);
     return this;
   }
@@ -454,6 +462,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return sectionTooltipOrientedBelow.isDisplayed();
   }
 
+  public void clickPublish() {
+    wait.forElementClickable(saveButton);
+    saveButton.click();
+  }
+
+  //TODO: extract assertions to tests and use "clickPublish" instead of this method
   public TemplatePage save() {
     wait.forElementClickable(saveButton);
     saveButton.click();
