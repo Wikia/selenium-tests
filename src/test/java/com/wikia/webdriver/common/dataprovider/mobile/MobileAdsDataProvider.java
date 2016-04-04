@@ -430,7 +430,7 @@ public class MobileAdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/320x50"),
+            new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILETOP_LB)
@@ -440,7 +440,7 @@ public class MobileAdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/320x50"),
+            new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
@@ -450,7 +450,7 @@ public class MobileAdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/320x50"),
+            new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILE_PREFOOTER)
@@ -460,7 +460,7 @@ public class MobileAdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/300x50"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILETOP_LB)
@@ -470,7 +470,7 @@ public class MobileAdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/300x50"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
@@ -480,7 +480,7 @@ public class MobileAdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/300x50"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILE_PREFOOTER)

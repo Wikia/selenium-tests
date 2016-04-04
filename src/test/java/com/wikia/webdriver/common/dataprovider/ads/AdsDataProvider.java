@@ -1095,7 +1095,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/120x600"),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
@@ -1105,7 +1105,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/120x600"),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -1115,7 +1115,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/120x600"),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
@@ -1125,7 +1125,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/300x1050"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MEDREC)
@@ -1135,7 +1135,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "Synthetic_Tests/Slots/Size/300x1050"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
