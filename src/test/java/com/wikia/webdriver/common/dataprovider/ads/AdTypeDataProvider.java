@@ -36,10 +36,10 @@ public class AdTypeDataProvider {
   public static final Object[][] asyncSuccessNoAd() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Async/Success/NoAd",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/Async/Success/NoAd",
+            "wka.life/_project43//article",
             "MOBILE_PREFOOTER"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98184132
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261075132&orderId=245575332
         },
     };
   }
@@ -48,28 +48,16 @@ public class AdTypeDataProvider {
   public static final Object[][] asyncHopWithAd() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Async/Hop/WithAd",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/Async/Hop/WithAd",
+            "wka.life/_project43//article",
             "MOBILE_PREFOOTER"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183772
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261089652&orderId=245575332
         },
     };
   }
 
   @DataProvider
-  public static final Object[][] asyncHopWithSpecialProvider() {
-    return new Object[][]{
-        {
-            "adtest", "SyntheticTests/Async/Hop/WithAd",
-            "wka.life/_adtest//article",
-            "MOBILE_TOP_LEADERBOARD"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=298558332&lineItemId=98336052
-        },
-    };
-  }
-
-  @DataProvider
-  public static final Object[][] asyncHopAndAsyncSuccess() {
+  public static final Object[][] asyncSuccessAndHop() {
     return new Object[][]{
         {
             "project43", "SyntheticTests/AdType/Async/Success,Hop",
