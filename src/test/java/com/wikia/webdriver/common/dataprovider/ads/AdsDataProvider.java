@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
@@ -1001,6 +1002,31 @@ public class AdsDataProvider {
             "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsSentCuratedMainPages() {
+    return new Object[][]{
+        {
+            MercuryWikis.MERCURY_CC,
+            "main/section/Categories",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        }, {
+            MercuryWikis.MERCURY_CC,
+            "main/category/Articles",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
             }
         }
     };
