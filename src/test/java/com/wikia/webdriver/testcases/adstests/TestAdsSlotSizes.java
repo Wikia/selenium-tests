@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
-  private static Dimension MOBILE_SIZE = new Dimension(375, 667);
+  private static Dimension MOBILE_SIZE = new Dimension(414, 736);
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
   @Test(

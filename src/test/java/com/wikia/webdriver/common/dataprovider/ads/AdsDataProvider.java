@@ -1019,7 +1019,7 @@ public class AdsDataProvider {
             "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(468, 250))
+                .put("slotSize", new Dimension(468, 60))
                 .put("lineItemId", 241472412)
                 .put("src", "gpt")
                 .build()
