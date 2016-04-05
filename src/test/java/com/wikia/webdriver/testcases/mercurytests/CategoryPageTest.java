@@ -6,9 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithDescription;
-import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithDescriptionAndNoMembers;
-import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithoutDescription;
+import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 
 import org.testng.annotations.Test;
 
@@ -16,28 +14,27 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryPageTest extends NewTestTemplate {
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithoutDescriptionFromUrl")
-  public void mercury_category_navigateToCategoryPageWithoutDescriptionFromUrl() {
-    new CategoryPageWithoutDescription()
-        .openFromUrl();
+  @Test(groups = "mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl")
+  public void mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl() {
+    new CategoryPage()
+        .navigateToPageWithoutArticleAndWithMembersFromUrl();
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithDescriptionFromUrl")
-  public void mercury_category_navigateToCategoryPageWithDescriptionFromUrl() {
-    new CategoryPageWithDescription()
-        .openFromUrl();
+  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl")
+  public void mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl() {
+    new CategoryPage()
+        .navigateToPageWithArticleAndWithMembersFromUrl();
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromUrl")
-  public void mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromUrl() {
-    new CategoryPageWithDescriptionAndNoMembers()
-        .openFromUrl();
+  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl")
+  public void mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl() {
+    new CategoryPage()
+        .navigateToPageWithArticleAndWithoutMembersFromUrl();
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromLink")
-  public void mercury_category_navigateToCategoryPageWithDescriptionAndNoMembersFromLink() {
-    new CategoryPageWithDescriptionAndNoMembers()
-        .navigateToLinkingPage()
-        .openFromLinkingPage();
+  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink")
+  public void mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink() {
+    new CategoryPage()
+        .navigateToPageWithArticleAndNoMembersFromLinkInArticle();
   }
 }

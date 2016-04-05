@@ -9,8 +9,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Category;
-import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithDescription;
-import com.wikia.webdriver.elements.mercury.pages.CategoryPageWithoutDescription;
+import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 
 import org.testng.annotations.Test;
 
@@ -23,30 +22,34 @@ public class CategoryTest extends NewTestTemplate {
   private void init() {
     this.category = new Category(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_TEST_PAGE);
+    new Navigate(driver).toPage(MercurySubpages.ARTICLE_WITH_CATEGORY_COMPONENT);
   }
 
   @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithDescription")
   public void mercury_category_expandAndNavigateToCategoryPageWithDescription() {
     init();
-    CategoryPageWithDescription categoryPage = new CategoryPageWithDescription();
+    CategoryPage categoryPage = new CategoryPage();
 
     category
         .toggle()
-        .openCategoryPage(MercurySubpages.CATEGORY_WITH_DESCRIPTION);
+        .openCategoryPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITH_MEMBERS);
 
-    categoryPage.check();
+    categoryPage
+        .articleContainerIsVisible()
+        .noMembersMessageIsVisible();
   }
 
   @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithoutDescription")
   public void mercury_category_expandAndNavigateToCategoryPageWithoutDescription() {
     init();
-    CategoryPageWithoutDescription categoryPage = new CategoryPageWithoutDescription();
+    CategoryPage categoryPage = new CategoryPage();
 
     category
         .toggle()
-        .openCategoryPage(MercurySubpages.CATEGORY_WITHOUT_DESCRIPTION);
+        .openCategoryPage(MercurySubpages.CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS);
 
-    categoryPage.check();
+    categoryPage
+        .articleContainerIsNotPresent()
+        .categorySectionsContainerIsVisible();
   }
 }

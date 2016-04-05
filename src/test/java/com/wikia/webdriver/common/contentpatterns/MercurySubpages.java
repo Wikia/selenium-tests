@@ -12,19 +12,21 @@ public class MercurySubpages {
   public static final String MAP = "/wiki/Map";
   public static final String QUESTION_MARK = "/wiki/Question?mark?question";
   public static final String COLON = "/wiki/Colon:colon:colon";
+
   public static final String INFOBOX_1 = "/wiki/Infobox1";
   public static final String INFOBOX_2 = "/wiki/Infobox2";
   public static final String INFOBOX_3 = "/wiki/Infobox3";
   public static final String INFOBOX_4 = "/wiki/Infobox4";
   public static final String INFOBOX_5 = "/wiki/Infobox5";
-  public static final String CATEGORY_WITHOUT_DESCRIPTION =
-      "/wiki/Category:Category_page_test_-_Category_without_description";
-  public static final String CATEGORY_WITH_DESCRIPTION =
+
+  public static final String CATEGORY_WITH_ARTICLE_AND_WITH_MEMBERS =
       "/wiki/Category:Category_page_test_-_Category_with_description";
-  public static final String CATEGORY_WITH_DESCRIPTION_AND_NO_MEMBERS =
+  public static final String CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS =
       "/wiki/Category:Category_page_test_-_Category_with_description_and_no_members";
-  public static final String CATEGORY_TEST_PAGE = "/wiki/Category_test_001";
-  public static final String CATEGORY_TEST_PAGE_LINK_TO_EMPTY_CATEGORY =
+  public static final String CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS =
+      "/wiki/Category:Category_page_test_-_Category_without_description";
+  public static final String ARTICLE_WITH_CATEGORY_COMPONENT = "/wiki/Category_test_001";
+  public static final String ARTICLE_WITH_LINK_CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS =
       "/wiki/Category_page_test_-_link_to_an_empty_category";
 
   /**
