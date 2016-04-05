@@ -11,11 +11,11 @@ public class AdTypeDataProvider {
   public static final Object[][] asyncSuccessWithAd() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Async/Success",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/Async/Success",
+            "wka.life/_project43//article",
             "MOBILE_PREFOOTER",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183292
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
         },
     };
   }
@@ -24,10 +24,10 @@ public class AdTypeDataProvider {
   public static final Object[][] asyncHopNoAd() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Async/Hop",
-            "wka.life/_adtest//article",
-            "MOBILE_PREFOOTER", "MOBILE_IN_CONTENT"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183652
+            "project43", "SyntheticTests/AdType/Async/Hop",
+            "wka.life/_project43//article",
+            "MOBILE_IN_CONTENT"
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
         },
     };
   }
@@ -72,13 +72,13 @@ public class AdTypeDataProvider {
   public static final Object[][] asyncHopAndAsyncSuccess() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Async/Success",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/Async/Success,Hop",
+            "wka.life/_project43//article",
             "MOBILE_PREFOOTER",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98183292
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
             "MOBILE_IN_CONTENT"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98333172
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
         },
     };
   }

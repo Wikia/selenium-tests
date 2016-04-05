@@ -34,15 +34,12 @@ public class TestAdTypeMobile extends MobileTestTemplate {
       dataProvider = "asyncHopNoAd"
   )
   public void TestAdTypeAsync_002_noAd(String wikiName, String article, String adUnit,
-                                       String slotName, String slotName2) {
+                                       String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.wait.forElementPresent(By.id(slotName));
-    ads.wait.forElementPresent(By.id(slotName2));
     ads.verifyGptIframe(adUnit, slotName, SRC);
-    ads.verifyGptIframe(adUnit, slotName2, SRC);
     ads.verifyNoAdInSlot(slotName);
-    ads.verifyNoAdInSlot(slotName2);
   }
 
   @Test(
