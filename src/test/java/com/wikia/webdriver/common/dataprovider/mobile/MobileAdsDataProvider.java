@@ -407,7 +407,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {"project43", "SyntheticTests/AdType/1xHop", "mobile", "\"source\":\"mobile/LB\""},
         {"project43", "SyntheticTests/AdType/2xHop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
-        {"adtest", "SyntheticTests/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
     };
   }
 }
