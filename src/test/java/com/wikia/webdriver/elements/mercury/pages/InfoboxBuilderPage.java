@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,7 +12,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
@@ -30,13 +28,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".pop-over-container .infobox-builder-sidebar-header-icon-delete")
   private WebElement deletePopUp;
 
-  @FindBy(css = "#useArticleName")
+  @FindBy(css = ".infobox-builder-sidebar-padding .check-box-input")
   private WebElement titleCheckbox;
 
   @FindBy(css = "#isCollapsible")
   private WebElement collapsibilityCheckbox;
 
-  @FindBy(css = "#infoboxRowLabel")
+  @FindBy(css = ".infobox-builder-sidebar-padding .text-field-input")
   private WebElement rowLabelInputField;
 
   @FindBy(css = "#infoboxSectionHeader")
