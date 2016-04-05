@@ -75,10 +75,10 @@ public class AdTypeDataProvider {
   public static final Object[][] forcedSuccessNoAd() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/AdType/ForcedSuccess",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/ForcedSuccess",
+            "wka.life/_project43//article",
             "MOBILE_PREFOOTER"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98186892
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261157332&orderId=245575332
         },
     };
   }
