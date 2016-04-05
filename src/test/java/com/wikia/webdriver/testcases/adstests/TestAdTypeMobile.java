@@ -94,7 +94,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "forcedSuccessNoAd"
   )
-  public void TestAdTypeForcedSuccess_001_noAd(String wikiName, String article, String adUnit,
+  public void adsAdTypeAsyncForcedSuccess(String wikiName, String article, String adUnit,
                                                String slotName) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -108,7 +108,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "inspectIframeImg"
   )
-  public void TestAdTypeInspectIframe_001_withAd(String wikiName, String article, String adUnit,
+  public void adsAdTypeInspectIframe(String wikiName, String article, String adUnit,
                                                  String slotName, String imgUrl) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);

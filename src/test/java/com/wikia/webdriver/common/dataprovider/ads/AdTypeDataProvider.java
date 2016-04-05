@@ -87,11 +87,11 @@ public class AdTypeDataProvider {
   public static final Object[][] inspectIframeImg() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/AdType/InspectIframe",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/InspectIframe",
+            "wka.life/_project43//article",
             "MOBILE_PREFOOTER",
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=98187732
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261158532&orderId=245575332
         },
     };
   }
@@ -100,13 +100,13 @@ public class AdTypeDataProvider {
   public static final Object[][] collapse() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/AdType/Collapse",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/AdType/Collapse",
+            "wka.life/_project43//article",
             new String[] {
                 "TOP_LEADERBOARD",
                 "TOP_RIGHT_BOXAD"
             }
-            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=386164332&lineItemId=165191172
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=261158652
         },
     };
   }
