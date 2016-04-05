@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
-  private static final String WIKI_NAME = "adtest";
-  private static final String ARTICLE_TITLE = "FLOOR_ADHESION";
+  private static final String WIKI_NAME = "project43";
+  private static final String ARTICLE_TITLE = "SyntheticTests/FloorAdhesion";
 
   @Test(
       groups = {"TestFloorAdhesion", "MercuryAds"}
