@@ -26,7 +26,7 @@ public class MercurySubpages {
   public static final String CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS =
       "/wiki/Category:Category_page_test_-_Category_without_description";
   public static final String ARTICLE_WITH_CATEGORY_COMPONENT = "/wiki/Category_test_001";
-  public static final String ARTICLE_WITH_LINK_CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS =
+  public static final String ARTICLE_WITH_LINK_TO_CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS =
       "/wiki/Category_page_test_-_link_to_an_empty_category";
 
   /**

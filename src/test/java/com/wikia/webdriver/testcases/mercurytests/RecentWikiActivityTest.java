@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests.recentwikiactivity;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;

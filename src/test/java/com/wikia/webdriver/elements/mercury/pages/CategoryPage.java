@@ -6,26 +6,23 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class CategoryPage extends WikiBasePageObject {
-
-  @FindBy(
-      css = "article a[href=\"" + MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS + "\"]"
-  )
-  private WebElement linkToCategoryWithArticleAndNoMembers;
 
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
   private By noMembersMessage = By.cssSelector(".category-page-no-members");
 
+  private Navigate navigate;
+
   public CategoryPage() {
     super();
+
+    navigate = new Navigate(driver);
   }
 
   public CategoryPage navigateToPageWithArticleAndWithMembersFromUrl() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITH_MEMBERS);
+    navigate.toPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITH_MEMBERS);
 
     articleContainerIsVisible();
     categorySectionsContainerIsVisible();
@@ -34,7 +31,7 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public CategoryPage navigateToPageWithArticleAndWithoutMembersFromUrl() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS);
+    navigate.toPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS);
 
     articleContainerIsVisible();
     noMembersMessageIsVisible();
@@ -43,20 +40,10 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public CategoryPage navigateToPageWithoutArticleAndWithMembersFromUrl() {
-    new Navigate(driver).toPage(MercurySubpages.CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS);
+    navigate.toPage(MercurySubpages.CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS);
 
     articleContainerIsNotPresent();
     categorySectionsContainerIsVisible();
-
-    return this;
-  }
-
-  public CategoryPage navigateToPageWithArticleAndNoMembersFromLinkInArticle() {
-    new Navigate(driver)
-        .toPage(MercurySubpages.ARTICLE_WITH_LINK_CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS);
-
-    wait.forElementClickable(linkToCategoryWithArticleAndNoMembers);
-    linkToCategoryWithArticleAndNoMembers.click();
 
     return this;
   }
@@ -83,7 +70,7 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public CategoryPage noMembersMessageIsVisible() {
-    wait.forElementNotPresent(noMembersMessage);
+    wait.forElementVisible(noMembersMessage);
     PageObjectLogging.logInfo("Info message about no pages in category is visible.");
 
     return this;
