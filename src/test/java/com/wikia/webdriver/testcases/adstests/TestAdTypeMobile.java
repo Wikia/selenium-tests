@@ -15,7 +15,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   private static final String SRC = "mobile";
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncSuccessWithAd"
   )
@@ -29,7 +29,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncHopNoAd"
   )
@@ -43,7 +43,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncSuccessNoAd"
   )
@@ -57,7 +57,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncHopWithAd"
   )
@@ -71,7 +71,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "asyncSuccessAndHop"
   )
@@ -90,7 +90,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "forcedSuccessNoAd"
   )
@@ -104,7 +104,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdTypeMobile", "TestAdType"},
+      groups = "AdTypeMercury",
       dataProviderClass = AdTypeDataProvider.class,
       dataProvider = "inspectIframeImg"
   )
