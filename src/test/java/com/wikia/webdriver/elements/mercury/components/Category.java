@@ -30,19 +30,19 @@ public class Category {
     PageFactory.initElements(driver, this);
   }
 
-  public Category toggle() {
+  public Category toggleMenu() {
     wait.forElementClickable(categoryMenu);
     categoryMenu.click();
 
-    PageObjectLogging.logInfo("Category was toggled");
+    PageObjectLogging.logInfo("Category component was toggled");
 
     return this;
   }
 
-  public Category openCategoryPage(String href) {
-    WebElement link = categoryList.findElement(By.cssSelector("a[href=\"" + href + "\"]"));
+  public Category openCategoryPage(String name) {
+    WebElement link = categoryList.findElement(By.cssSelector("a[title=\"" + name + "\"]"));
 
-    PageObjectLogging.logInfo("Open category link to: " + href);
+    PageObjectLogging.logInfo("Open category page named: " + name);
     wait.forElementClickable(link);
     link.click();
     loading.handleAsyncPageReload();
