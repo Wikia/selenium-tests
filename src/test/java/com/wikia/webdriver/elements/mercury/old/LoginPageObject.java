@@ -25,7 +25,7 @@ public class LoginPageObject {
   private WebElement errorMessage;
   @FindBy(css = "a.close")
   private WebElement closeButton;
-  @FindBy(css = "a.footer-callout-link")
+  @FindBy(css = "a.header-callout-link span")
   private WebElement registerNowLink;
   @FindBy(css = "header.auth-header")
   private WebElement loginHeader;
