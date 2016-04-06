@@ -15,8 +15,8 @@ public class CategoryPage extends WikiBasePageObject {
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
   private By noMembersMessage = By.cssSelector(".category-page-no-members");
-  private By loadMoreButton = By.cssSelector("category-navigation__button[data-next]");
-  private By loadPreviousButton = By.cssSelector("category-navigation__button[data-previous]");
+  private By loadMoreButton = By.cssSelector(".category-navigation__button[data-next]");
+  private By loadPreviousButton = By.cssSelector(".category-navigation__button[data-previous]");
 
   private Navigate navigate;
 
