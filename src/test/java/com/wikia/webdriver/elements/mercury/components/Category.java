@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +40,7 @@ public class Category {
     return this;
   }
 
-  public Category openCategoryPage(String name) {
+  public CategoryPage openCategoryPage(String name) {
     WebElement link = categoryList.findElement(By.cssSelector("a[title=\"" + name + "\"]"));
 
     PageObjectLogging.logInfo("Open category page named: " + name);
@@ -51,6 +52,6 @@ public class Category {
                          "Url is different than /wiki/Category:");
     PageObjectLogging.logInfo("You were redirected to /wiki/Category:");
 
-    return this;
+    return new CategoryPage();
   }
 }
