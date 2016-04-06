@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
@@ -382,7 +383,7 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"esrb\":[\"everyone\"]",
+                "\"esrb\":\"everyone\"",
                 "\"age\":[\"teen\",\"kid\",\"18-34\"]",
                 "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
                 "\"media\":[\"tv\",\"cards\"]",
@@ -422,7 +423,7 @@ public class AdsDataProvider {
                 "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
                 "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
                 "\"pub\":[\"bethesda\",\"bethesda\"]",
-                "\"esrb\":[\"mature\"]",
+                "\"esrb\":\"mature\"",
                 "\"theme\":[\"military\",\"postapocalypse\"]"
             ),
             Arrays.asList(
@@ -457,7 +458,7 @@ public class AdsDataProvider {
                 "\"pform\":[\"pc\"]",
                 "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
             ),
             Arrays.asList(
@@ -528,7 +529,7 @@ public class AdsDataProvider {
                 "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
                 "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
                 "\"pform\":[\"pc\"]",
-                "\"esrb\":[\"everyone\"]"
+                "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -558,7 +559,7 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
-                "\"esrb\":[\"teen\"]",
+                "\"esrb\":\"teen\"",
                 "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
@@ -650,7 +651,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
         {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
-        {"assassinscreed", "Tunguska", "\"esrb\":[\"mature\"]", true},
+        {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
         {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
@@ -860,28 +861,28 @@ public class AdsDataProvider {
   public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(1920, 1080),
             new Dimension(600, 590),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(1920, 1080),
             new Dimension(300, 343),
             false
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(800, 800),
             new Dimension(569, 564),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 800),
             new Dimension(300, 343),
@@ -894,28 +895,28 @@ public class AdsDataProvider {
   public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(600, 800),
             new Dimension(590, 491),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(600, 800),
             new Dimension(300, 258),
             false
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial",
             new Dimension(800, 500),
             new Dimension(405, 338),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Interstitial/NotScalable",
             new Dimension(800, 500),
             new Dimension(300, 258),
@@ -1001,6 +1002,31 @@ public class AdsDataProvider {
             "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsSentCuratedMainPages() {
+    return new Object[][]{
+        {
+            MercuryWikis.MERCURY_CC,
+            "main/section/Categories",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        }, {
+            MercuryWikis.MERCURY_CC,
+            "main/category/Articles",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
             }
         }
     };

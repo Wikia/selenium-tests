@@ -1,9 +1,11 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,20 +27,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 
 public class Helios {
 
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
-  private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
-      .setSocketTimeout(3000).build();
+  private static RequestConfig requestConfig =
+      RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(3000).build();
 
   private Helios() {
   }
@@ -66,15 +66,13 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
-                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
   }
 
   public static String getAccessToken(String userName, String password) {
 
-    String clientId = HeliosConfig.getClientId();
-    String clientSecret = HeliosConfig.getClientSecret();
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
     CloseableHttpClient httpClient = getDefaultClient();
@@ -88,8 +86,6 @@ public class Helios {
     List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
-    nvps.add(new BasicNameValuePair("client_id", clientId));
-    nvps.add(new BasicNameValuePair("client_secret", clientSecret));
     nvps.add(new BasicNameValuePair("username", userName));
     nvps.add(new BasicNameValuePair("password", password));
 
@@ -122,7 +118,7 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
-                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
     return token;
@@ -133,8 +129,7 @@ public class Helios {
     try {
       if (tokenCache.containsKey(userName)) {
 
-        String getTokenInfoURL =
-            HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
+        String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
             + String.format("?code=%s", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
         getInfo.setConfig(requestConfig);
@@ -145,7 +140,7 @@ public class Helios {
       }
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
-                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
     return "";

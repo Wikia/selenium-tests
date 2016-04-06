@@ -380,15 +380,15 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.51.0'
+    def webdriverVersion = '2.53.0'
 
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
-    testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-ie-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-safari-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-support:${webdriverVersion}"
+    testCompile "org.seleniumhq.selenium:htmlunit-driver:2.20"
     testCompile 'org.apache.httpcomponents:httpcore:4.4.1'
     testCompile 'commons-codec:commons-codec:1.10'
     testCompile 'commons-io:commons-io:2.4'
