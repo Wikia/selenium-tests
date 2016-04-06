@@ -29,16 +29,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   private WebElement deletePopUp;
 
   @FindBy(css = ".infobox-builder-sidebar-padding .check-box-input")
-  private WebElement titleCheckbox;
-
-  @FindBy(css = "#isCollapsible")
-  private WebElement collapsibilityCheckbox;
+  private WebElement sidebarCheckbox;
 
   @FindBy(css = ".infobox-builder-sidebar-padding .text-field-input")
-  private WebElement rowLabelInputField;
-
-  @FindBy(css = "#infoboxSectionHeader")
-  private WebElement sectionHeaderInputField;
+  private WebElement sidebarInputField;
 
   @FindBy(css = ".infobox-builder-sidebar-header-icon-back")
   private WebElement backArrowButton;
@@ -137,6 +131,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     new TemplateEditPage().open(templateName)
         .openCurrectArticleSourceMode();
     driver.switchTo().frame(builderIFrame);
+
     return this;
   }
 
@@ -144,21 +139,25 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     new TemplateEditPage().open("temp_template");
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
     driver.switchTo().frame(builderIFrame);
+
     return this;
   }
 
   public boolean isGoToSourceModalPresent() {
     wait.forElementVisible(modalGoToSource);
+
     return modalGoToSource.isDisplayed();
   }
 
   public boolean isModalEditTitlePresent() {
     wait.forElementVisible(modalEditTitle);
+
     return modalEditTitle.isDisplayed();
   }
 
   public boolean isEditTemplateTitleInputPresent() {
     wait.forElementVisible(editTemplateTitleInput);
+
     return editTemplateTitleInput.isDisplayed();
   }
 
@@ -169,6 +168,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public boolean isErrorMessagePresent() {
     wait.forElementVisible(errorMessage);
+
     return errorMessage.isDisplayed();
   }
 
@@ -304,41 +304,49 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage deleteTitleUsingButton(int index) {
     deleteItem(titles.get(index), deleteButton);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteRowUsingButton(int index) {
     deleteItem(rows.get(index), deleteButton);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteImageUsingButton(int index) {
     deleteItem(images.get(index), deleteButton);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteHeaderUsingButton(int index) {
     deleteItem(headers.get(index), deleteButton);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteTitleUsingPopUp(int index) {
     deleteItem(titles.get(index), deletePopUp);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteRowUsingPopUp(int index) {
     deleteItem(rows.get(index), deletePopUp);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteImageUsingPopUp(int index) {
     deleteItem(images.get(index), deletePopUp);
+
     return this;
   }
 
   public InfoboxBuilderPage deleteHeaderUsingPopUp(int index) {
     deleteItem(headers.get(index), deletePopUp);
+
     return this;
   }
 
@@ -375,14 +383,14 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     headers.get(index).click();
 
-    wait.forElementClickable(collapsibilityCheckbox);
-    collapsibilityCheckbox.click();
+    wait.forElementClickable(sidebarCheckbox);
+    sidebarCheckbox.click();
 
     String script = "return window.getComputedStyle(document"
                     + ".querySelector('.pi-header'),':after').content";
     String chevronContent = js.executeScript(script).toString();
 
-    if (collapsibilityCheckbox.isSelected()) {
+    if (sidebarCheckbox.isSelected()) {
       Assertion.assertFalse(chevronContent.isEmpty());
     } else {
       Assertion.assertTrue(chevronContent.isEmpty());
@@ -393,16 +401,17 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public boolean isTitleUsingArticleName(int titleIndex) {
     this.selectTitleWithIndex(titleIndex);
-    wait.forElementClickable(titleCheckbox);
-    return titleCheckbox.isSelected();
+    wait.forElementClickable(sidebarCheckbox);
+
+    return sidebarCheckbox.isSelected();
   }
 
   public InfoboxBuilderPage setTitleToUseArticleName(int index) {
     this.selectTitleWithIndex(index);
-    wait.forElementClickable(titleCheckbox);
+    wait.forElementClickable(sidebarCheckbox);
 
-    if (!titleCheckbox.isSelected()) {
-      titleCheckbox.click();
+    if (!sidebarCheckbox.isSelected()) {
+      sidebarCheckbox.click();
     }
 
     return this;
@@ -411,10 +420,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage setAndVerifyRowLabel(int index, String labelName) {
     this.selectRowWithIndex(index);
 
-    wait.forElementClickable(rowLabelInputField);
-    rowLabelInputField.click();
-    rowLabelInputField.clear();
-    rowLabelInputField.sendKeys(labelName);
+    wait.forElementClickable(sidebarInputField);
+    sidebarInputField.click();
+    sidebarInputField.clear();
+    sidebarInputField.sendKeys(labelName);
     Assertion.assertEquals(rowLabels.get(index).getText(), labelName);
 
     return this;
@@ -423,10 +432,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage setLongLabelNameAndVerifyBreakLine(int index, String labelName) {
     this.selectRowWithIndex(index);
 
-    wait.forElementClickable(rowLabelInputField);
-    rowLabelInputField.click();
-    rowLabelInputField.clear();
-    rowLabelInputField.sendKeys(labelName);
+    wait.forElementClickable(sidebarInputField);
+    sidebarInputField.click();
+    sidebarInputField.clear();
+    sidebarInputField.sendKeys(labelName);
     Assertion.assertEquals(rowLabels.get(index).getCssValue("word-wrap"), "break-word");
 
     return this;
@@ -435,10 +444,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage setAndVerifyHeaderName(int index, String labelName) {
     this.selectHeaderWithIndex(index);
 
-    wait.forElementClickable(sectionHeaderInputField);
-    sectionHeaderInputField.click();
-    sectionHeaderInputField.clear();
-    sectionHeaderInputField.sendKeys(labelName);
+    wait.forElementClickable(sidebarInputField);
+    sidebarInputField.click();
+    sidebarInputField.clear();
+    sidebarInputField.sendKeys(labelName);
     Assertion.assertEquals(headers.get(index).getText(), labelName);
 
     return this;
@@ -475,26 +484,29 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage clickGoToSourceButton() {
     wait.forElementClickable(goToSourceButton);
     goToSourceButton.click();
+
     return this;
   }
 
   public InfoboxBuilderPage clickGoToSourceModalBackground() {
     wait.forElementClickable(goToSourceModalBackground);
     goToSourceModalBackground.click();
+
     return this;
   }
 
   public boolean isInfoboxBuilderOpened() {
     wait.forElementClickable(builderBackground);
+
     return builderBackground.isDisplayed();
   }
 
   public boolean isLabelInputFocused() {
-    return rowLabelInputField.equals(driver.switchTo().activeElement());
+    return sidebarInputField.equals(driver.switchTo().activeElement());
   }
 
   public boolean isHeaderInputFocused() {
-    return sectionHeaderInputField.equals(driver.switchTo().activeElement());
+    return sidebarInputField.equals(driver.switchTo().activeElement());
   }
 
   public int getInfoboxWidth() {
@@ -520,22 +532,16 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return sectionTooltipOrientedBelow.isDisplayed();
   }
 
-  public void clickPublish() {
+  public InfoboxBuilderPage clickPublish() {
     wait.forElementClickable(saveButton);
     saveButton.click();
+
+    return this;
   }
 
-  //TODO: extract assertions to tests and use "clickPublish" instead of this method
-  public TemplatePage save() {
-    wait.forElementClickable(saveButton);
-    saveButton.click();
-
+  public boolean isSpinnerDisplayed() {
     wait.forElementVisible(savingSpinner);
-    Assertion.assertTrue(savingSpinner.isDisplayed());
 
-    //wait until template page is loaded
-    wait.forElementVisible(driver.findElement(By.className("header-title")));
-
-    return new TemplatePage();
+    return savingSpinner.isDisplayed();
   }
 }
