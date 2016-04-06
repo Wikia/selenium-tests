@@ -12,15 +12,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class CategoryPage extends WikiBasePageObject {
 
-  @FindBy(css = ".category-sections #C.category-section .category-navigation__button")
-  private WebElement categoryNavigationButton;
-
   @FindBy(css = ".category-sections #C.category-section li")
   private WebElement sectionBatchFirstItem;
 
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
   private By noMembersMessage = By.cssSelector(".category-page-no-members");
+  private By loadMoreButton = By.cssSelector(".next-button");
+  private By loadPreviousButton = By.cssSelector(".previous-button");
 
   private Navigate navigate;
 
@@ -57,69 +56,73 @@ public class CategoryPage extends WikiBasePageObject {
     return this;
   }
 
-  public CategoryPage articleContainerIsVisible() {
+  public CategoryPage loadMoreMembersForSection(String name) {
+    navigateThroughSection(name, loadMoreButton);
+
+    return this;
+  }
+
+  public CategoryPage loadPreviousMembersForSection(String name) {
+    navigateThroughSection(name, loadPreviousButton);
+
+    return this;
+  }
+
+  private CategoryPage articleContainerIsVisible() {
     wait.forElementVisible(article);
     PageObjectLogging.logInfo("Article container is visible.");
 
     return this;
   }
 
-  public CategoryPage articleContainerIsNotPresent() {
+  private CategoryPage articleContainerIsNotPresent() {
     wait.forElementNotPresent(article);
     PageObjectLogging.logInfo("Article container is not present in DOM, which is nice.");
 
     return this;
   }
 
-  public CategoryPage categorySectionsContainerIsVisible() {
+  private CategoryPage categorySectionsContainerIsVisible() {
     wait.forElementVisible(categorySections);
     PageObjectLogging.logInfo("Category sections container is visible.");
 
     return this;
   }
 
-  public CategoryPage noMembersMessageIsVisible() {
+  private CategoryPage noMembersMessageIsVisible() {
     wait.forElementVisible(noMembersMessage);
     PageObjectLogging.logInfo("Info message about no pages in category is visible.");
 
     return this;
   }
 
-  public CategoryPage loadMoreCategoriesForSection(String name) {
-    WebElement section = driver.findElement(By.cssSelector(".category-section#" + name.toUpperCase()));
+  private CategoryPage navigateThroughSection(String name, By buttonSelector) {
+    WebElement section = driver.findElement(
+        By.cssSelector("#" + name.toUpperCase() + ".category-section")
+    );
     wait.forElementVisible(section);
-    PageObjectLogging.logInfo("Category section: " + name.toUpperCase() + ", is visible");
+    PageObjectLogging.logInfo("Category section \"" + name.toUpperCase() + "\" is visible.");
 
-    WebElement loadMoreButton = section.findElement(By.cssSelector(".next__button"));
-    wait.forElementClickable(loadMoreButton);
-    loadMoreButton.click();
+    wait.forElementVisible(sectionBatchFirstItem);
+    String firstItemTextInFirstBatch = sectionBatchFirstItem.getText();
 
-    return this;
-  }
-
-  public CategoryPage clickLoadMoreButton() {
-    WebElement originalSectionBatchFirstItem = sectionBatchFirstItem;
-    String originalSectionBatchFirstItemText = originalSectionBatchFirstItem.getText();
-
-    wait.forElementClickable(categoryNavigationButton);
-    categoryNavigationButton.click();
+    WebElement buttonElement = section.findElement(buttonSelector);
+    wait.forElementClickable(buttonElement);
+    buttonElement.click();
 
     wait.forTextNotInElement(
-        originalSectionBatchFirstItem,
-        originalSectionBatchFirstItemText
+        sectionBatchFirstItem,
+        firstItemTextInFirstBatch
     );
+    String firstItemTextInSecondBatch = sectionBatchFirstItem.getText();
 
-    WebElement newSectionBatchFirstItem = sectionBatchFirstItem;
-    String newSectionBatchFirstItemText = newSectionBatchFirstItem.getText();
-
-    Assertion.assertNotEquals(originalSectionBatchFirstItemText, newSectionBatchFirstItemText,
-                              "Newly loaded section is actually the same as the original.");
+    Assertion.assertNotEquals(
+        firstItemTextInFirstBatch,
+        firstItemTextInSecondBatch,
+        "First element of the newly loaded section is the same as the previous one."
+    );
     PageObjectLogging.logInfo("New section was loaded correctly.");
 
-    return this;
-  }
-
-  public CategoryPage clickLoadPreviousButton() {
     return this;
   }
 }

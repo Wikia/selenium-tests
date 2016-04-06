@@ -37,18 +37,11 @@ public class CategoryPageTest extends NewTestTemplate {
         .openLinkToCategoryPage();
   }
 
-  @Test()
-  public void mercury_category_new() {
-    new CategoryPage()
-        .navigateToPageWithArticleAndWithMembersFromUrl()
-        .loadMoreCategoriesForSection("C");
-  }
-
   @Test(groups = "mercury_category_navigateThroughSection")
   public void mercury_category_navigateThroughSection() {
     new CategoryPage()
         .navigateToPageWithArticleAndWithMembersFromUrl()
-        .clickLoadMoreButton()
-        .clickLoadPreviousButton();
+        .loadMoreMembersForSection("C")
+        .loadPreviousMembersForSection("C");
   }
 }

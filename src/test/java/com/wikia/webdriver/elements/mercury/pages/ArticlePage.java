@@ -40,6 +40,6 @@ public class ArticlePage extends WikiBasePageObject {
                          "URL does not contain pattern: /wiki/Category:");
     PageObjectLogging.logInfo("URL contains pattern: /wiki/Category:");
 
-    return new CategoryPage().articleContainerIsVisible();
+    return new CategoryPage();
   }
 }
