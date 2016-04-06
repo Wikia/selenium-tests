@@ -34,6 +34,12 @@ public class TemplatePage extends WikiBasePageObject {
     return this;
   }
 
+  public boolean isTemplatePagePresent() {
+    wait.forElementVisible(pageBackgroundColor);
+
+    return pageBackgroundColor.isDisplayed();
+  }
+
   public String getRawContent(String templateName) {
     getUrl(urlBuilder.appendQueryStringToURL(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(),
                                                            URLsContent.WIKI_DIR,

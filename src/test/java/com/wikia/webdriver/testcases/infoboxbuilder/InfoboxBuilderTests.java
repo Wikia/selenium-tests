@@ -129,7 +129,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void customizingComponents() {
-   new InfoboxBuilderPage()
+    TemplatePage template = new TemplatePage();
+
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openExisting("InfoboxBuilderCustomizingComponents")
         .changeHeaderCollapsibilityState(0)
         .setAndVerifyRowLabel(0, "AutomatedTest")
@@ -137,8 +139,30 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .setAndVerifyHeaderName(0, "AutomatedTestHeader")
         .clickPublish();
 
-    String infoboxTitle = new TemplatePage().getPortableInfobox().getHeaderText();
+    Assertion.assertTrue(builderPage.isSpinnerPresent());
+
+    Assertion.assertTrue(template.isTemplatePagePresent());
+
+    String infoboxTitle = template.getPortableInfobox().getTitleTextWithIndex(0);
     Assertion.assertEquals("InfoboxBuilderCustomizingComponents", infoboxTitle);
+  }
+
+  @Execute(asUser = User.USER)
+  public void setInfoboxTitleToUseArticleName() {
+    TemplatePage template = new TemplatePage();
+
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
+        .openExisting("SetInfoboxTitleToUseArticleName")
+        .deleteTitleUsingPopUp(0)
+        .addTitleComponent()
+        .setTitleToUseArticleName(0)
+        .clickPublish();
+
+    Assertion.assertTrue(builderPage.isSpinnerPresent());
+    Assertion.assertTrue(template.isTemplatePagePresent());
+
+    String infoboxTitle = template.getPortableInfobox().getTitleTextWithIndex(0);
+    Assertion.assertEquals("SetInfoboxTitleToUseArticleName", infoboxTitle);
   }
 
   @Execute(asUser = User.USER)
