@@ -66,7 +66,9 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public CategoryPage navigateToCategoryMemberPage(String name) {
-    WebElement member = driver.findElement(By.xpath("//a[contains(text(), \"" + name + "\")]"));
+    WebElement member = driver.findElement(By.xpath(
+        String.format("//a[contains(text(), \"%s\")]", name))
+    );
     wait.forElementClickable(member);
     member.click();
 
@@ -78,9 +80,9 @@ public class CategoryPage extends WikiBasePageObject {
     String currentUrl = driver.getCurrentUrl();
     Assertion.assertTrue(
         currentUrl.contains(expectedUrl),
-        "Expected part \"" + expectedUrl + "\" was not found in \"" + currentUrl + "\"."
+        String.format("Expected part \"%s\" was not found in \"%s\".", expectedUrl, currentUrl)
     );
-    PageObjectLogging.logInfo("You were redirected to page: " + name);
+    PageObjectLogging.logInfo(String.format("You were redirected to page: \"%s\".", name));
 
     return this;
   }
@@ -115,10 +117,10 @@ public class CategoryPage extends WikiBasePageObject {
 
   private CategoryPage navigateThroughSection(String name, By buttonSelector) {
     WebElement section = driver.findElement(
-        By.cssSelector("#" + name.toUpperCase() + ".category-section")
+        By.cssSelector(String.format("#%s.category-section", name))
     );
     wait.forElementVisible(section);
-    PageObjectLogging.logInfo("Category section \"" + name.toUpperCase() + "\" is visible.");
+    PageObjectLogging.logInfo(String.format("Category section \"%s\" is visible.", name));
 
     WebElement sectionBatchFirstItem = section.findElement(By.cssSelector("li"));
     wait.forElementVisible(sectionBatchFirstItem);

@@ -41,9 +41,11 @@ public class Category {
   }
 
   public CategoryPage openCategoryPage(String name) {
-    WebElement link = categoryList.findElement(By.cssSelector("a[title=\"" + name + "\"]"));
+    WebElement link = categoryList.findElement(
+        By.cssSelector(String.format("a[title=\"%s\"]", name))
+    );
 
-    PageObjectLogging.logInfo("Open category page named: " + name);
+    PageObjectLogging.logInfo(String.format("Open category page named: \"%s\".", name));
     wait.forElementClickable(link);
     link.click();
     loading.handleAsyncPageReload();
