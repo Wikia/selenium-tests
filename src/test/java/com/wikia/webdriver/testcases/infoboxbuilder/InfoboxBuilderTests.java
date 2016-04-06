@@ -145,7 +145,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void newTemplateCreation() {
     new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
         .getTemplateClassification()
-        .selectTemplateType()
+        .changeTemplateType()
         .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());

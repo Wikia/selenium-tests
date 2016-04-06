@@ -76,7 +76,7 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  public TemplateClassification selectTemplateType() {
+  public TemplateClassification changeTemplateType() {
     if (!this.templateName.equals("Infobox")) {
       selectInfoboxTemplate();
     } else {
@@ -95,7 +95,7 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  private TemplateClassification selectQuoteTemplate() {
+  public TemplateClassification selectQuoteTemplate() {
     wait.forElementVisible(typeInputQuote);
     typeInputQuote.click();
 

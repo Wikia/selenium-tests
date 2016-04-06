@@ -3,9 +3,8 @@ package com.wikia.webdriver.elements.mercury.pages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
-import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -122,7 +121,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .selectTemplateType()
+        .changeTemplateType()
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
