@@ -25,8 +25,8 @@ public class CategoryTest extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.ARTICLE_WITH_CATEGORY_COMPONENT);
   }
 
-  @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithDescription")
-  public void mercury_category_expandAndNavigateToCategoryPageWithDescription() {
+  @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithArticle")
+  public void mercury_category_expandAndNavigateToCategoryPageWithArticle() {
     init();
     CategoryPage categoryPage = new CategoryPage();
 
@@ -39,8 +39,8 @@ public class CategoryTest extends NewTestTemplate {
         .noMembersMessageIsVisible();
   }
 
-  @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithoutDescription")
-  public void mercury_category_expandAndNavigateToCategoryPageWithoutDescription() {
+  @Test(groups = "mercury_category_expandAndNavigateToCategoryPageWithoutArticle")
+  public void mercury_category_expandAndNavigateToCategoryPageWithoutArticle() {
     init();
     CategoryPage categoryPage = new CategoryPage();
 
