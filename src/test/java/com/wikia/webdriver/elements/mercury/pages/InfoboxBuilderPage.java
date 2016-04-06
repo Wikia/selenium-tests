@@ -91,6 +91,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".portable-infobox .pi-data-label")
   private List<WebElement> rowLabels;
 
+  @FindBy(css = ".infobox-builder-buttons")
+  private WebElement componentsButtonsWrapper;
+
   @FindBy(css = ".infobox-builder-button")
   private List<WebElement> componentsButtons;
 
@@ -172,6 +175,70 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return errorMessage.isDisplayed();
   }
 
+  public boolean isInfoboxBuilderOpened() {
+    wait.forElementClickable(builderBackground);
+
+    return builderBackground.isDisplayed();
+  }
+
+  public boolean isSidebarInputFieldFocused() {
+    return sidebarInputField.equals(driver.switchTo().activeElement());
+  }
+
+  public boolean isInputFieldPresent() {
+    wait.forElementVisible(sidebarInputField);
+
+    return sidebarInputField.isDisplayed();
+  }
+
+  public boolean isInfoboxBuilderPresent() {
+    return builderIFrame.isDisplayed();
+  }
+
+  public boolean isSectionTooltipPresentAbove(int index) {
+    hoverOverSectionChevron(index);
+    wait.forElementVisible(sectionTooltipOrientedAbove);
+
+    return sectionTooltipOrientedAbove.isDisplayed();
+  }
+
+  public boolean isSectionTooltipPresentBelow(int index) {
+    hoverOverSectionChevron(index);
+    wait.forElementVisible(sectionTooltipOrientedBelow);
+
+    return sectionTooltipOrientedBelow.isDisplayed();
+  }
+
+  public boolean isSpinnerPresent() {
+    wait.forElementVisible(savingSpinner);
+
+    return savingSpinner.isDisplayed();
+  }
+
+  public boolean areAddButtonsPresent() {
+    wait.forElementVisible(componentsButtonsWrapper);
+
+    return componentsButtonsWrapper.isDisplayed();
+  }
+
+  public boolean isTitleUsingArticleName(int titleIndex) {
+    this.selectTitleWithIndex(titleIndex);
+    wait.forElementClickable(sidebarCheckbox);
+
+    return sidebarCheckbox.isSelected();
+  }
+
+  public InfoboxBuilderPage setTitleToUseArticleName(int index) {
+    this.selectTitleWithIndex(index);
+    wait.forElementClickable(sidebarCheckbox);
+
+    if (!sidebarCheckbox.isSelected()) {
+      sidebarCheckbox.click();
+    }
+
+    return this;
+  }
+
   public void clickDropChangesButton() {
     wait.forElementClickable(dropChangesButton);
     dropChangesButton.click();
@@ -187,13 +254,37 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     publishEditedTitleButton.click();
   }
 
-  public boolean isInfoboxBuilderDisplayed() {
-    return builderIFrame.isDisplayed();
-  }
-
   public InfoboxBuilderPage clickBuilderBackground() {
     wait.forElementClickable(builderBackground);
     builderBackground.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage clickBackArrow() {
+    wait.forElementClickable(backArrowButton);
+    backArrowButton.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage clickGoToSourceButton() {
+    wait.forElementClickable(goToSourceButton);
+    goToSourceButton.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage clickGoToSourceModalBackground() {
+    wait.forElementClickable(goToSourceModalBackground);
+    goToSourceModalBackground.click();
+
+    return this;
+  }
+
+  public InfoboxBuilderPage clickPublish() {
+    wait.forElementClickable(saveButton);
+    saveButton.click();
 
     return this;
   }
@@ -212,6 +303,26 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public int countHeaders() {
     return headers.size();
+  }
+
+  public InfoboxBuilderPage changeHeaderCollapsibilityState(int index) {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    headers.get(index).click();
+
+    wait.forElementClickable(sidebarCheckbox);
+    sidebarCheckbox.click();
+
+    String script = "return window.getComputedStyle(document"
+                    + ".querySelector('.pi-header'),':after').content";
+    String chevronContent = js.executeScript(script).toString();
+
+    if (sidebarCheckbox.isSelected()) {
+      Assertion.assertFalse(chevronContent.isEmpty());
+    } else {
+      Assertion.assertTrue(chevronContent.isEmpty());
+    }
+
+    return this;
   }
 
   public String getComponentBackgroundColor(int index) {
@@ -236,6 +347,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
 
     return js.executeScript(script).toString();
+  }
+
+  public int getInfoboxWidth() {
+    return titles.get(0).getSize().getWidth();
   }
 
   public InfoboxBuilderPage selectTitleWithIndex(int index) {
@@ -344,12 +459,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage deleteHeaderUsingPopUp(int index) {
-    deleteItem(headers.get(index), deletePopUp);
-
-    return this;
-  }
-
   private void deleteItem(WebElement item, WebElement deleteMethod) {
     wait.forElementClickable(item);
     item.click();
@@ -363,56 +472,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage verifyBackArrowFunctionality() {
-    wait.forElementClickable(backArrowButton);
-    backArrowButton.click();
-    Assertion.assertTrue(componentsButtons.get(0).isDisplayed());
-
-    return this;
-  }
-
   public InfoboxBuilderPage verifyTooltipOnHover() {
     wait.forElementVisible(component.get(0));
     builder.moveToElement(component.get(0)).perform();
     Assertion.assertTrue(tooltip.isDisplayed());
-
-    return this;
-  }
-
-  public InfoboxBuilderPage changeHeaderCollapsibilityState(int index) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    headers.get(index).click();
-
-    wait.forElementClickable(sidebarCheckbox);
-    sidebarCheckbox.click();
-
-    String script = "return window.getComputedStyle(document"
-                    + ".querySelector('.pi-header'),':after').content";
-    String chevronContent = js.executeScript(script).toString();
-
-    if (sidebarCheckbox.isSelected()) {
-      Assertion.assertFalse(chevronContent.isEmpty());
-    } else {
-      Assertion.assertTrue(chevronContent.isEmpty());
-    }
-
-    return this;
-  }
-
-  public boolean isTitleUsingArticleName(int titleIndex) {
-    this.selectTitleWithIndex(titleIndex);
-    wait.forElementClickable(sidebarCheckbox);
-
-    return sidebarCheckbox.isSelected();
-  }
-
-  public InfoboxBuilderPage setTitleToUseArticleName(int index) {
-    this.selectTitleWithIndex(index);
-    wait.forElementClickable(sidebarCheckbox);
-
-    if (!sidebarCheckbox.isSelected()) {
-      sidebarCheckbox.click();
-    }
 
     return this;
   }
@@ -481,67 +544,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage clickGoToSourceButton() {
-    wait.forElementClickable(goToSourceButton);
-    goToSourceButton.click();
-
-    return this;
-  }
-
-  public InfoboxBuilderPage clickGoToSourceModalBackground() {
-    wait.forElementClickable(goToSourceModalBackground);
-    goToSourceModalBackground.click();
-
-    return this;
-  }
-
-  public boolean isInfoboxBuilderOpened() {
-    wait.forElementClickable(builderBackground);
-
-    return builderBackground.isDisplayed();
-  }
-
-  public boolean isLabelInputFocused() {
-    return sidebarInputField.equals(driver.switchTo().activeElement());
-  }
-
-  public boolean isHeaderInputFocused() {
-    return sidebarInputField.equals(driver.switchTo().activeElement());
-  }
-
-  public int getInfoboxWidth() {
-    return titles.get(0).getSize().getWidth();
-  }
-
   public void hoverOverSectionChevron(int index) {
     wait.forElementVisible(sectionHeadersChevron.get(index));
     builder.moveToElement(sectionHeadersChevron.get(index)).perform();
-  }
-
-  public boolean isSectionTooltipDisplayedAbove(int index) {
-    hoverOverSectionChevron(index);
-    wait.forElementVisible(sectionTooltipOrientedAbove);
-
-    return sectionTooltipOrientedAbove.isDisplayed();
-  }
-
-  public boolean isSectionTooltipDisplayedBelow(int index) {
-    hoverOverSectionChevron(index);
-    wait.forElementVisible(sectionTooltipOrientedBelow);
-
-    return sectionTooltipOrientedBelow.isDisplayed();
-  }
-
-  public InfoboxBuilderPage clickPublish() {
-    wait.forElementClickable(saveButton);
-    saveButton.click();
-
-    return this;
-  }
-
-  public boolean isSpinnerDisplayed() {
-    wait.forElementVisible(savingSpinner);
-
-    return savingSpinner.isDisplayed();
   }
 }

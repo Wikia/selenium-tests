@@ -57,7 +57,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .deleteRowUsingButton(0)
         .addRowComponent()
         .clickPublish()
-        .isSpinnerDisplayed();
+        .isSpinnerPresent();
 
     Assertion.assertEquals("infoboxbuildersavingtemplate",
                            new TemplatePage().getHeaderText().toLowerCase());
@@ -148,16 +148,18 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .selectTemplateType()
         .clickAddButton();
 
-    Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderDisplayed());
+    Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
 
   @Execute(asUser = User.USER)
   public void verifySidebarBackArrow() {
-    new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality")
-        .selectRowWithIndex(0).verifyBackArrowFunctionality()
-        .selectTitleWithIndex(0).verifyBackArrowFunctionality()
-        .selectImageWithIndex(0).verifyBackArrowFunctionality()
-        .selectHeaderWithIndex(0).verifyBackArrowFunctionality();
+    InfoboxBuilderPage builderPage =
+        new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality");
+
+    Assertion.assertTrue(builderPage.selectRowWithIndex(0).clickBackArrow().areAddButtonsPresent());
+    Assertion.assertTrue(builderPage.selectTitleWithIndex(0).clickBackArrow().areAddButtonsPresent());
+    Assertion.assertTrue(builderPage.selectImageWithIndex(0).clickBackArrow().areAddButtonsPresent());
+    Assertion.assertTrue(builderPage.selectHeaderWithIndex(0).clickBackArrow().areAddButtonsPresent());
   }
 
   @Execute(asUser = User.STAFF)
@@ -311,11 +313,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         .addHeaderComponent()
         .selectRowWithIndex(0);
 
-    Assertion.assertTrue(builderPage.isLabelInputFocused());
+    Assertion.assertTrue(builderPage.isInputFieldPresent());
+    Assertion.assertTrue(builderPage.isSidebarInputFieldFocused());
 
     builderPage.selectHeaderWithIndex(0);
 
-    Assertion.assertTrue(builderPage.isHeaderInputFocused());
+    Assertion.assertTrue(builderPage.isInputFieldPresent());
+    Assertion.assertTrue(builderPage.isSidebarInputFieldFocused());
   }
 
   @Execute(asUser = User.USER)
@@ -323,12 +327,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     InfoboxBuilderPage builderPage =
         new InfoboxBuilderPage().openExisting("InfoboxBuilderChevronPopup");
 
-    Assertion.assertTrue(builderPage.isSectionTooltipDisplayedBelow(0));
-    Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(1));
+    Assertion.assertTrue(builderPage.isSectionTooltipPresentBelow(0));
+    Assertion.assertTrue(builderPage.isSectionTooltipPresentAbove(1));
 
     builderPage.addHeaderComponent().changeHeaderCollapsibilityState(2);
 
-    Assertion.assertTrue(builderPage.isSectionTooltipDisplayedAbove(2));
+    Assertion.assertTrue(builderPage.isSectionTooltipPresentAbove(2));
   }
 
   @Execute(asUser = User.STAFF)
