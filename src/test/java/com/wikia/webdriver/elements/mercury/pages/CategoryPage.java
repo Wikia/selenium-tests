@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -15,6 +16,12 @@ public class CategoryPage extends WikiBasePageObject {
       css = "article a[href=\"" + MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS + "\"]"
   )
   private WebElement linkToCategoryWithArticleAndNoMembers;
+
+  @FindBy(css = ".category-sections #C.category-section .category-navigation__button")
+  private WebElement categoryNavigationButton;
+
+  @FindBy(css = ".category-sections #C.category-section li")
+  private WebElement sectionBatchFirstItem;
 
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
@@ -86,6 +93,32 @@ public class CategoryPage extends WikiBasePageObject {
     wait.forElementNotPresent(noMembersMessage);
     PageObjectLogging.logInfo("Info message about no pages in category is visible.");
 
+    return this;
+  }
+
+  public CategoryPage clickLoadMoreButton() {
+    WebElement originalSectionBatchFirstItem = sectionBatchFirstItem;
+    String originalSectionBatchFirstItemText = originalSectionBatchFirstItem.getText();
+
+    wait.forElementClickable(categoryNavigationButton);
+    categoryNavigationButton.click();
+
+    wait.forTextNotInElement(
+        originalSectionBatchFirstItem,
+        originalSectionBatchFirstItemText
+    );
+
+    WebElement newSectionBatchFirstItem = sectionBatchFirstItem;
+    String newSectionBatchFirstItemText = newSectionBatchFirstItem.getText();
+
+    Assertion.assertNotEquals(originalSectionBatchFirstItemText, newSectionBatchFirstItemText,
+                              "Newly loaded section is actually the same as the original.");
+    PageObjectLogging.logInfo("New section was loaded correctly.");
+
+    return this;
+  }
+
+  public CategoryPage clickLoadPreviousButton() {
     return this;
   }
 }
