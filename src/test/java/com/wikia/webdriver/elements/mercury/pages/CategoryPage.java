@@ -4,16 +4,13 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class CategoryPage extends WikiBasePageObject {
-
-  @FindBy(css = ".category-sections #C.category-section li")
-  private WebElement sectionBatchFirstItem;
 
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
@@ -68,6 +65,26 @@ public class CategoryPage extends WikiBasePageObject {
     return this;
   }
 
+  public CategoryPage navigateToCategoryMemberPage(String name) {
+    WebElement member = driver.findElement(By.xpath("//a[contains(text(), \"" + name + "\")]"));
+    wait.forElementClickable(member);
+    member.click();
+
+    System.out.println(member);
+
+    new Loading(driver).handleAsyncPageReload();
+
+    String expectedUrl = "/wiki/" + name.replaceAll(" ", "_");
+    String currentUrl = driver.getCurrentUrl();
+    Assertion.assertTrue(
+        currentUrl.contains(expectedUrl),
+        "Expected part \"" + expectedUrl + "\" was not found in \"" + currentUrl + "\"."
+    );
+    PageObjectLogging.logInfo("You were redirected to page: " + name);
+
+    return this;
+  }
+
   private CategoryPage articleContainerIsVisible() {
     wait.forElementVisible(article);
     PageObjectLogging.logInfo("Article container is visible.");
@@ -103,6 +120,7 @@ public class CategoryPage extends WikiBasePageObject {
     wait.forElementVisible(section);
     PageObjectLogging.logInfo("Category section \"" + name.toUpperCase() + "\" is visible.");
 
+    WebElement sectionBatchFirstItem = section.findElement(By.cssSelector("li"));
     wait.forElementVisible(sectionBatchFirstItem);
     String firstItemTextInFirstBatch = sectionBatchFirstItem.getText();
 

@@ -44,4 +44,11 @@ public class CategoryPageTest extends NewTestTemplate {
         .loadMoreMembersForSection("C")
         .loadPreviousMembersForSection("C");
   }
+
+  @Test(groups = "mercury_category_navigateToCategoryMemberPage(")
+  public void mercury_category_navigateToCategoryMemberPage() {
+    new CategoryPage()
+        .navigateToPageWithArticleAndWithMembersFromUrl()
+        .navigateToCategoryMemberPage("Category test 001");
+  }
 }

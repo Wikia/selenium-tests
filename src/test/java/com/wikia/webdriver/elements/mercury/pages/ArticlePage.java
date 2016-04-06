@@ -14,7 +14,7 @@ public class ArticlePage extends WikiBasePageObject {
 
   @FindBy(css = "article a[href=\"/wiki/Category:Category_page_test"
                 + "_-_Category_with_description_and_no_members\"]")
-  private WebElement linkToCategorPage;
+  private WebElement linkToCategoryPage;
 
   private Navigate navigate;
 
@@ -31,8 +31,8 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public CategoryPage openLinkToCategoryPage() {
-    wait.forElementClickable(linkToCategorPage);
-    linkToCategorPage.click();
+    wait.forElementClickable(linkToCategoryPage);
+    linkToCategoryPage.click();
 
     new Loading(driver).handleAsyncPageReload();
 
