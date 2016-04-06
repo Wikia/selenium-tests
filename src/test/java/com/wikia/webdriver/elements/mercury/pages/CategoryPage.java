@@ -72,8 +72,6 @@ public class CategoryPage extends WikiBasePageObject {
     wait.forElementClickable(member);
     member.click();
 
-    System.out.println(member);
-
     new Loading(driver).handleAsyncPageReload();
 
     String expectedUrl = "/wiki/" + name.replaceAll(" ", "_");
@@ -129,11 +127,10 @@ public class CategoryPage extends WikiBasePageObject {
     WebElement buttonElement = section.findElement(buttonSelector);
     wait.forElementClickable(buttonElement);
     buttonElement.click();
+    waitForBatchToBeLoaded(section);
 
-    wait.forTextNotInElement(
-        sectionBatchFirstItem,
-        firstItemTextInFirstBatch
-    );
+    sectionBatchFirstItem = section.findElement(By.cssSelector("li"));
+    wait.forElementVisible(sectionBatchFirstItem);
     String firstItemTextInSecondBatch = sectionBatchFirstItem.getText();
 
     Assertion.assertNotEquals(
@@ -144,5 +141,41 @@ public class CategoryPage extends WikiBasePageObject {
     PageObjectLogging.logInfo("New section was loaded correctly.");
 
     return this;
+  }
+
+  private void waitForBatchToBeLoaded(WebElement section) {
+    int attemptLimit = 5;
+
+    PageObjectLogging.logInfo("Waiting for loading-batch to be present");
+
+    for (int i = 1; i <= attemptLimit; ++i) {
+      if (section.getAttribute("class").contains("loading-batch")) {
+        PageObjectLogging.logInfo("loading-batch class was present in attempt: " + i + " of " + attemptLimit);
+
+        break;
+      }
+
+      try {
+        Thread.sleep(200);
+      } catch (InterruptedException e) {
+        PageObjectLogging.logWarning("Couldn't sleep thread", e);
+      }
+    }
+
+    PageObjectLogging.logInfo("Waiting for loading batch to be not present");
+
+    for (int i = 1; i <= attemptLimit; ++i) {
+      if (!section.getAttribute("class").contains("loading-batch")) {
+        PageObjectLogging.logInfo("loading-batch class was not present in attempt: " + i + " of " + attemptLimit);
+
+        break;
+      }
+
+      try {
+        Thread.sleep(600);
+      } catch (InterruptedException e) {
+        PageObjectLogging.logWarning("Couldn't sleep thread", e);
+      }
+    }
   }
 }
