@@ -6,6 +6,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class CategoryPage extends WikiBasePageObject {
 
@@ -72,6 +73,18 @@ public class CategoryPage extends WikiBasePageObject {
   public CategoryPage noMembersMessageIsVisible() {
     wait.forElementVisible(noMembersMessage);
     PageObjectLogging.logInfo("Info message about no pages in category is visible.");
+
+    return this;
+  }
+
+  public CategoryPage loadMoreCategoriesForSection(String name) {
+    WebElement section = driver.findElement(By.cssSelector(".category-section#" + name.toUpperCase()));
+    wait.forElementVisible(section);
+    PageObjectLogging.logInfo("Category section: " + name.toUpperCase() + ", is visible");
+
+    WebElement loadMoreButton = section.findElement(By.cssSelector(".next__button"));
+    wait.forElementClickable(loadMoreButton);
+    loadMoreButton.click();
 
     return this;
   }

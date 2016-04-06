@@ -36,4 +36,11 @@ public class CategoryPageTest extends NewTestTemplate {
         .openPageWithLinkToCategoryPage()
         .openLinkToCategoryPage();
   }
+
+  @Test()
+  public void mercury_category_new() {
+    new CategoryPage()
+        .navigateToPageWithArticleAndWithMembersFromUrl()
+        .loadMoreCategoriesForSection("C");
+  }
 }
