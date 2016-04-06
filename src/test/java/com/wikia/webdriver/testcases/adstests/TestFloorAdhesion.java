@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
 
-  private static final String WIKI_NAME = "adtest";
-  private static final String ARTICLE_TITLE = "FLOOR_ADHESION";
+  private static final String WIKI_NAME = "project43";
+  private static final String ARTICLE_TITLE = "SyntheticTests/FloorAdhesion";
 
   @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"}
+      groups = {"AdsFloorAdhesionOasis", "AdsFloorAdhesionMercury"}
   )
   public void testFloorAdhesionPresence() {
     String browser = Configuration.getBrowser();
@@ -30,7 +30,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"}
+      groups = {"AdsFloorAdhesionOasis", "AdsFloorAdhesionMercury"}
   )
   public void testFloorAdhesionModal() {
     String browser = Configuration.getBrowser();
@@ -48,7 +48,7 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestFloorAdhesion", "MercuryAds"}
+      groups = {"AdsFloorAdhesionOasis", "AdsFloorAdhesionMercury"}
   )
   public void testFloorAdhesionCloseButton() {
     AdsFloorAdhesionObject wikiPage = new AdsFloorAdhesionObject(driver, getArticleUrl());

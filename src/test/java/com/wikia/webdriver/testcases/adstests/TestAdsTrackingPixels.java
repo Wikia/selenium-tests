@@ -72,6 +72,22 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     assertTrackingPixelsNotSent(pixelUrls);
   }
 
+  @NetworkTrafficDump
+  @Test(
+      groups = "AdsTrackingPixelsCuratedMainPage",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsTrackingPixelsSentCuratedMainPages"
+  )
+  public void adsTrackingPixelSentCuratedMainPages(String wiki, String page, String[] pixelUrls) {
+    networkTrafficInterceptor.startIntercepting();
+
+    // /main/ URLs are not in /wiki/ directory thus we can't use getUrlForPath method and simple concatenation is enough
+    String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
+
+    assertTrackingPixelsSent(adsBaseObject, pixelUrls);
+  }
+
   private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
       adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
