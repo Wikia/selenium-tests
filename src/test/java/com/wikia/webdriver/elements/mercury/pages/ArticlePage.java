@@ -30,7 +30,11 @@ public class ArticlePage extends WikiBasePageObject {
     return this;
   }
 
-  public CategoryPage openLinkToCategoryPage() {
+  /**
+   * This method expects openPageWithLinkToCategoryPage method to be executed first,
+   * but it will also work on pages with the linkToCategoryPage element.
+   */
+  public CategoryPage openCategoryPageFromLink() {
     wait.forElementClickable(linkToCategoryPage);
     linkToCategoryPage.click();
 

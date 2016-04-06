@@ -34,7 +34,7 @@ public class CategoryPageTest extends NewTestTemplate {
   public void mercury_category_navigateToCategoryPageFromLinkInArticle() {
     new ArticlePage()
         .openPageWithLinkToCategoryPage()
-        .openLinkToCategoryPage();
+        .openCategoryPageFromLink();
   }
 
   @Test(groups = "mercury_category_navigateThroughSection")
