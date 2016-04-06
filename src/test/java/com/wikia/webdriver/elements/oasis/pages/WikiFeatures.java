@@ -34,11 +34,7 @@ public class WikiFeatures extends BasePageObject {
   }
 
   public boolean isEuropaInfoboxThemeEnabled() {
-    if (europaInfoboxThemeSliderText.getText().equalsIgnoreCase("Enabled")) {
-      return true;
-    } else {
-      return false;
-    }
+    return "Enabled".equalsIgnoreCase(europaInfoboxThemeSliderText.getText());
   }
 
   public WikiFeatures enableEuropaInfoboxTheme() {
@@ -49,7 +45,7 @@ public class WikiFeatures extends BasePageObject {
   }
 
   public WikiFeatures disableEuropaInfoboxTheme() {
-    if (this.isEuropaInfoboxThemeEnabled() == true) {
+    if (this.isEuropaInfoboxThemeEnabled()) {
       wait.forElementClickable(europaInfoboxThemeSlider);
       europaInfoboxThemeSlider.click();
 
