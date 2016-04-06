@@ -6,13 +6,13 @@ import com.wikia.webdriver.common.driverprovider.DriverProvider;
 public class AdsFloorAdhesionSkinContext {
 
   private static final String OASIS_CREATIVE_ID = "66223683972";
-  private static final String OASIS_LINE_ITEM_ID = "158514252";
+  private static final String OASIS_LINE_ITEM_ID = "260166732";
   private static final String OASIS_SLOT_NAME = "INVISIBLE_SKIN";
   private static final String OASIS_MODAL_CSS = "#blackout_ext-wikia-adEngine-template-modal";
   private static final String OASIS_MODAL_CLOSE_CSS = "#ext-wikia-adEngine-template-modal .close";
 
   private static final String MERCURY_CREATIVE_ID = "66223684092";
-  private static final String MERCURY_LINE_ITEM_ID = "158514372";
+  private static final String MERCURY_LINE_ITEM_ID = "260166852";
   private static final String MERCURY_SLOT_NAME = "INVISIBLE_HIGH_IMPACT";
   private static final String MERCURY_MODAL_CSS = ".lightbox-ads";
   private static final String MERCURY_MODAL_CLOSE_CSS = ".lightbox-close-wrapper";
