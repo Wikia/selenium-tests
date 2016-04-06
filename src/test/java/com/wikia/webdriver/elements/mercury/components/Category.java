@@ -1,8 +1,10 @@
 package com.wikia.webdriver.elements.mercury.components;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +41,7 @@ public class Category {
     return this;
   }
 
-  public Category openCategoryPage(String href) {
+  private CategoryPage navigateToCategoryPage(String href) {
     WebElement link = categoryList.findElement(By.cssSelector("a[href=\"" + href + "\"]"));
 
     PageObjectLogging.logInfo("Open category link to: " + href);
@@ -51,6 +53,18 @@ public class Category {
                          "Url is different than /wiki/Category:");
     PageObjectLogging.logInfo("You were redirected to /wiki/Category:");
 
-    return this;
+    return new CategoryPage();
+  }
+
+  public CategoryPage navigateToCategoryPageWithArticleAndWithMembers() {
+    return navigateToCategoryPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITH_MEMBERS)
+        .articleContainerIsVisible()
+        .noMembersMessageIsVisible();
+  }
+
+  public CategoryPage navigateToCategoryPageWithoutArticleAndWithMembers() {
+    return navigateToCategoryPage(MercurySubpages.CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS)
+        .articleContainerIsNotPresent()
+        .categorySectionsContainerIsVisible();
   }
 }
