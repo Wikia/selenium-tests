@@ -1201,8 +1201,4 @@ public class AdsDataProvider {
         }
     };
   }
-
-
-
-
 }
