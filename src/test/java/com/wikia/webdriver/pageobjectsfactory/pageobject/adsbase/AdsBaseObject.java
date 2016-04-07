@@ -578,7 +578,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-
     try {
       waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
