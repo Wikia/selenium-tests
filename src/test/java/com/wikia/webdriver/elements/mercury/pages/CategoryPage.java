@@ -149,7 +149,7 @@ public class CategoryPage extends WikiBasePageObject {
     return this;
   }
 
-  private void waitForBatchToBeLoaded(WebElement section) {
+  private void waitForBatchToBeLoaded(final WebElement section) {
     int attemptLimit = 5;
     boolean isLoadingBatchPresent = true;
 
