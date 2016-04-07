@@ -8,7 +8,13 @@ import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.annotation.Nullable;
 
 public class CategoryPage extends WikiBasePageObject {
 
@@ -145,36 +151,37 @@ public class CategoryPage extends WikiBasePageObject {
 
   private void waitForBatchToBeLoaded(WebElement section) {
     int attemptLimit = 5;
+    boolean isLoadingBatchPresent = true;
 
     PageObjectLogging.logInfo("Waiting for loading-batch to be present");
 
-    for (int i = 1; i <= attemptLimit; ++i) {
-      if (section.getAttribute("class").contains("loading-batch")) {
-        PageObjectLogging.logInfo("loading-batch class was present in attempt: " + i + " of " + attemptLimit);
-
-        break;
-      }
-
-      try {
-        Thread.sleep(200);
-      } catch (InterruptedException e) {
-        PageObjectLogging.logWarning("Couldn't sleep thread", e);
-      }
+    try {
+      new WebDriverWait(driver, attemptLimit, 200).until(new ExpectedCondition<Boolean>() {
+        @Nullable
+        @Override
+        public Boolean apply(@Nullable WebDriver input) {
+          return section.getAttribute("class").contains("loading-batch");
+        }
+      });
+    } catch (TimeoutException e) {
+      isLoadingBatchPresent = false;
+      PageObjectLogging.logInfo("loading-batch was not present");
     }
 
-    PageObjectLogging.logInfo("Waiting for loading batch to be not present");
-
-    for (int i = 1; i <= attemptLimit; ++i) {
-      if (!section.getAttribute("class").contains("loading-batch")) {
-        PageObjectLogging.logInfo("loading-batch class was not present in attempt: " + i + " of " + attemptLimit);
-
-        break;
-      }
+    if (isLoadingBatchPresent) {
+      PageObjectLogging.logInfo("Waiting for loading batch to be not present");
 
       try {
-        Thread.sleep(600);
-      } catch (InterruptedException e) {
-        PageObjectLogging.logWarning("Couldn't sleep thread", e);
+        new WebDriverWait(driver, attemptLimit, 600).until(new ExpectedCondition<Boolean>() {
+          @Nullable
+          @Override
+          public Boolean apply(@Nullable WebDriver input) {
+            return !section.getAttribute("class").contains("loading-batch");
+          }
+        });
+      } catch (TimeoutException e) {
+        PageObjectLogging.logInfo("loading-batch is still present");
+        throw e;
       }
     }
   }
