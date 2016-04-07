@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
 
-public class TestAdsAdvertisementText extends TemplateNoFirstLoad {
+public class TestAdsAdvertisementTextOasis extends TemplateNoFirstLoad {
 
     private static final String URL_PARAM_ENABLE_SITEWIDE =
         "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]";
@@ -24,7 +24,7 @@ public class TestAdsAdvertisementText extends TemplateNoFirstLoad {
         url = urlBuilder.appendQueryStringToURL(url, URL_PARAM_ENABLE_SITEWIDE);
 
         new AdsBaseObject(driver, url)
-            .triggerIncontentLeaderboard()
+            .triggerAdSlot(AdsContent.INCONTENT_LEADERBOARD)
             .waitForCSSPseudoElementsContentToMatchValue("#"+AdsContent.INCONTENT_LEADERBOARD,
                                                          "before",
                                                          "\"advertisement\"");
