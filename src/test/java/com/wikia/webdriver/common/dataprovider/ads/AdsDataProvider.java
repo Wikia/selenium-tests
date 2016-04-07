@@ -1191,4 +1191,18 @@ public class AdsDataProvider {
         },
     };
   }
+
+  @DataProvider
+  public static Object[][] adsAdvertisementText() {
+    return new Object[][]{
+        {
+            "adtest",
+            "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
+        }
+    };
+  }
+
+
+
+
 }

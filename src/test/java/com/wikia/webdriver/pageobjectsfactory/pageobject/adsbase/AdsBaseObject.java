@@ -571,8 +571,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
+  public void waitForCSSPseudoElementsContentToMatchValue(final String cssSelector, final String elementName, final String value) {
+    String script = "window.getComputedStyle(document.querySelector('"+cssSelector+"'),':"+elementName+"').getPropertyValue('content') == '"+value+"'";
+    waitForJavaScriptTruthy(script);
+  }
+
   public void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    PageObjectLogging.log("Checking script to be truthy", script, true);
     try {
       waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
