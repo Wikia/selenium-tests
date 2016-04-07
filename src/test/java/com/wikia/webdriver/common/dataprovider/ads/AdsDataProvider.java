@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 
@@ -62,11 +63,10 @@ public class AdsDataProvider {
         {"2007.runescape", "2007scape_Wiki"},
         {"ru.warframe",
          "%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"},
-        {"gameofthrones", "Daenerys_Targaryen"},
-        {"elderscrolls", "Console_Commands_(Skyrim"},
-        //intentionally without ) sign - there is redirect on page
-        {"naruto", "Naruto_Uzumaki"},
-        {"clashofclans", "Air_Sweeper"},
+        {"gameofthrones", "Aegon_I_Targaryen"},
+        {"elderscrolls", "Nightblade_(Online)"},
+        {"starwars", "Turtle_Tanker/Legends"},
+        {"harrypotter", "Fizzing_Whizzbees"},
         {"leagueoflegends", "Ekko"},
         {"lego", "LEGO"}
     };
@@ -984,6 +984,31 @@ public class AdsDataProvider {
             "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
+            }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsTrackingPixelsSentCuratedMainPages() {
+    return new Object[][]{
+        {
+            MercuryWikis.MERCURY_CC,
+            "main/section/Categories",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
+            }
+        }, {
+            MercuryWikis.MERCURY_CC,
+            "main/category/Articles",
+            new String[]{
+                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
+                TestAdsTrackingPixels.KRUX_PIXEL_URL,
+                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
+                TestAdsTrackingPixels.GA_PIXEL_URL
             }
         }
     };
