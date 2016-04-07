@@ -578,7 +578,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-    PageObjectLogging.log("Checking script to be truthy", script, true);
+
     try {
       waitFor.until(new ExpectedCondition<Boolean>() {
         public Boolean apply(WebDriver driver) {
@@ -587,11 +587,13 @@ public class AdsBaseObject extends WikiBasePageObject {
                 .executeScript("return !!(" + script + ");");
           } catch (WebDriverException e) {
             PageObjectLogging.logError("waitForJavaScriptTruthy", e);
+            PageObjectLogging.log("Checking script to be truthy", script, false);
             return false;
           }
         }
       });
     } finally {
+      PageObjectLogging.log("Checking script to be truthy", script, true);
       restoreDeaultImplicitWait();
     }
   }
