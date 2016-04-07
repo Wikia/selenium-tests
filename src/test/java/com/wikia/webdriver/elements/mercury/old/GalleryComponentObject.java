@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GalleryComponentObject {
 
-  @FindBy(css = ".article-media-gallery img")
+  @FindBy(css = ".article-gallery img")
   private List<WebElement> galleryImagesArray;
 
   private WebDriver driver;
