@@ -61,7 +61,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
-    AuthModal loginModal = new AuthModal(driver);
+    AuthModal loginModal = new AuthModal();
     loginModal.clickForgotPasswordLink();
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     login.remindPasswordNewAuth(userName, credentials.apiToken);
@@ -127,6 +127,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordWhileCreatingWiki")
+  @RelatedIssue(issueID = "SOC-2282")
   public void anonCanRemindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);

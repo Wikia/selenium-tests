@@ -43,6 +43,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_002"})
+  @RelatedIssue(issueID = "SOC-2283")
  public void CreateNewWiki_002_wrongPassword() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -56,6 +57,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_003"})
+  @RelatedIssue(issueID = "SOC-2283")
   public void CreateNewWiki_003_blankPassword() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -68,6 +70,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_004"})
+  @RelatedIssue(issueID = "SOC-2283")
   public void CreateNewWiki_004_blankUserName() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -79,6 +82,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedOut_005"})
+  @RelatedIssue(issueID = "SOC-2283")
  public void CreateNewWiki_005_invalidUserName() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);

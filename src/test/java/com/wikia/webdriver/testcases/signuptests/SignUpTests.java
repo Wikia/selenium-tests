@@ -99,6 +99,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Signup_anonCanSignUpWhenCreatingNewWiki", "SignUp"})
+  @RelatedIssue(issueID = "SOC-2283")
   public void anonCanSignUpWhenCreatingNewWiki() {
     CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
     createNewWiki1.disableCaptcha();
