@@ -300,7 +300,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage changeHeaderCollapsibilityState(int index) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
     headers.get(index).click();
 
     wait.forElementClickable(sidebarCheckbox);
@@ -308,7 +307,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
     String script = "return window.getComputedStyle(document"
                     + ".querySelector('.pi-header'),':after').content";
-    String chevronContent = js.executeScript(script).toString();
+    String chevronContent = driver.executeScript(script).toString();
 
     if (sidebarCheckbox.isSelected()) {
       Assertion.assertFalse(chevronContent.isEmpty());
@@ -332,7 +331,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public String getBorderStyle() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
     WebElement selectedComponent = component.get(0);
     wait.forElementClickable(selectedComponent);
     selectedComponent.click();
@@ -340,7 +338,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     String script = "return window.getComputedStyle("
                     + "document.querySelector('.active'),':before').getPropertyValue('Border')";
 
-    return js.executeScript(script).toString();
+    return driver.executeScript(script).toString();
   }
 
   public int getInfoboxWidth() {
