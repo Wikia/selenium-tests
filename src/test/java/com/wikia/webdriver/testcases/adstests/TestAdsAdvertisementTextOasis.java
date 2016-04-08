@@ -28,7 +28,7 @@ public class TestAdsAdvertisementTextOasis extends TemplateNoFirstLoad {
             .triggerAdSlot(AdsContent.INCONTENT_LEADERBOARD);
 
         String slotLabel = adsBaseObject.getPseudoElementValue(
-            driver.findElement(By.id(AdsContent.INCONTENT_LEADERBOARD)),
+            driver.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.INCONTENT_LEADERBOARD))),
             "before",
             "content");
 
