@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -36,9 +35,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-sidebar-header-icon-back")
   private WebElement backArrowButton;
 
-  @FindBy(css = ".infobox-builder-sidebar .modal-dialog")
-  private WebElement helpDialog;
-
   @FindBy(css = ".infobox-builder-preview")
   private WebElement previewArea;
 
@@ -47,9 +43,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".infobox-builder-spinner")
   private WebElement savingSpinner;
-
-  @FindBy(css = ".success-icon")
-  private WebElement successIcon;
 
   @FindBy(css = ".infobox-builder-preview")
   private WebElement builderBackground;
@@ -163,9 +156,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return editTemplateTitleInput.isDisplayed();
   }
 
-  public void insertTemplateTitle(String title) {
+  public InfoboxBuilderPage insertTemplateTitle(String title) {
     wait.forElementClickable(editTemplateTitleInput);
     editTemplateTitleInput.sendKeys(title);
+
+    return this;
   }
 
   public boolean isErrorMessagePresent() {

@@ -23,8 +23,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openNew("InfoboxBuilderVerifyDefaultStructure");
+    InfoboxBuilderPage builderPage =
+        new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyDefaultStructure");
 
     Assertion.assertEquals(builderPage.countTitles(), 1);
     Assertion.assertEquals(builderPage.countImages(), 1);
@@ -36,7 +36,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void addingComponents() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("InfoboxBuilderAddingComponents");
+    InfoboxBuilderPage builderPage =
+        new InfoboxBuilderPage().openNew("InfoboxBuilderAddingComponents");
 
     int rowComponents = builderPage.countRows();
     int titleComponents = builderPage.countTitles();
@@ -111,7 +112,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     /* deleting last (newly added) components */
     Assertion.assertEquals(
-        rowComponents, builderPage.deleteRowUsingButton(builderPage.countRows() - 1).countRows()
+        rowComponents,
+        builderPage.deleteRowUsingButton(builderPage.countRows() - 1).countRows()
     );
     Assertion.assertEquals(
         titleComponents,
@@ -414,8 +416,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isModalEditTitlePresent());
     Assertion.assertTrue(builderPage.isEditTemplateTitleInputPresent());
 
-    builderPage.insertTemplateTitle("InfoboxNamingConflict");
-    builderPage.clickPublishEditedTitleButton();
+    builderPage.insertTemplateTitle("InfoboxNamingConflict").clickPublishEditedTitleButton();
 
     Assertion.assertTrue(builderPage.isErrorMessagePresent());
   }
