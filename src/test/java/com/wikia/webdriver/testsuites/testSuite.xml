@@ -11,7 +11,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresentMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestSlotsMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsSynthetic"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
@@ -23,7 +22,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParamOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsIncontentLeaderboardOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
@@ -37,6 +35,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
@@ -45,7 +44,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFloatingMedrecOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestATF"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
