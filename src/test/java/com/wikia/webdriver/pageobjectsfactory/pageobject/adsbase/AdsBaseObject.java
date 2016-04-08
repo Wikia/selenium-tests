@@ -571,11 +571,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  public void waitForCSSPseudoElementsContentToMatchValue(final String cssSelector, final String elementName, final String value) {
-    String script = "window.getComputedStyle(document.querySelector('"+cssSelector+"'),':"+elementName+"').getPropertyValue('content') == '"+value+"'";
-    waitForJavaScriptTruthy(script);
-  }
-
   public void waitForJavaScriptTruthy(final String script) {
     driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
@@ -586,13 +581,11 @@ public class AdsBaseObject extends WikiBasePageObject {
                 .executeScript("return !!(" + script + ");");
           } catch (WebDriverException e) {
             PageObjectLogging.logError("waitForJavaScriptTruthy", e);
-            PageObjectLogging.log("Checking script to be truthy", script, false);
             return false;
           }
         }
       });
     } finally {
-      PageObjectLogging.log("Checking script to be truthy", script, true);
       restoreDeaultImplicitWait();
     }
   }
