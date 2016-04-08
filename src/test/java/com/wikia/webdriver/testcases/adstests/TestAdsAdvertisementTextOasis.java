@@ -17,7 +17,7 @@ public class TestAdsAdvertisementTextOasis extends TemplateNoFirstLoad {
     @Test(
         dataProviderClass = AdsDataProvider.class,
         dataProvider = "adsAdvertisementText",
-        groups = "AdsAdvertisementText"
+        groups = "AdsAdvertisementTextOasis"
     )
     public void adsIncontentLeaderboard(String wikiName, String article) {
 
