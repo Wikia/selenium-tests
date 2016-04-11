@@ -154,7 +154,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
-
+  @FindBy(css = ".portable-infobox")
   private PortableInfobox portableInfobox;
 
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
@@ -202,7 +202,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(articleContent);
     Assertion.assertStringContains(articleContent.getText(), content);
   }
-
 
   public void verifyFormattingFromVE(Formatting format, String content) {
     waitForElementNotVisibleByElement(veMode);

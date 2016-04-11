@@ -56,6 +56,7 @@ public class URLsContent {
   public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "wiki/Special:Version";
   public static final String SPECIAL_INFOBOX_BUILDER = "wiki/Special:InfoboxBuilder/";
+  public static final String SPECIAL_WIKI_FEATURES = "wiki/Special:WikiFeatures/";
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
@@ -77,6 +78,7 @@ public class URLsContent {
   public static final String DISABLE_CAPTCHA = "nocaptchatest=1";
   public static final String SOURCE_MODE = "useeditor=source";
   public static final String MOST_RECENT = "?sort=recent";
+  public static final String ACTION_RAW = "action=raw";
 
   // WAM Scores page url
   public static final String WAM_PAGE = "WAM";
