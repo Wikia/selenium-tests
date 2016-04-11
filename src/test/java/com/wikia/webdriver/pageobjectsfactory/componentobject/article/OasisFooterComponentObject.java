@@ -17,6 +17,10 @@ public class OasisFooterComponentObject extends WikiBasePageObject {
   }
 
   public ArticlePageObject clickMobileSiteLink() {
+    /**
+     * For some reason selenium has problems with click on element below,
+     * that is why we use javascript
+     */
     js.execute("$('.global-footer a[href=\"#\"]').click()");
     return new ArticlePageObject(driver);
   }
