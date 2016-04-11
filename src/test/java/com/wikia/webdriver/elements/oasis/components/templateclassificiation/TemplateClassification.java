@@ -1,12 +1,12 @@
 package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class TemplateClassification extends WikiBasePageObject {
 
@@ -62,7 +62,7 @@ public class TemplateClassification extends WikiBasePageObject {
     wait.forElementVisible(entryPointLink);
     String currentTemplateName = entryPointLink.getText();
     Assertion.assertFalse(currentTemplateName.equals(oldTemplateName),
-        "Template type did not change");
+                          "Template type did not change");
     PageObjectLogging.logInfo(
         "Template type changed from: '" + oldTemplateName + "', to: '" + currentTemplateName + "'");
 
@@ -76,7 +76,7 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  public TemplateClassification selectTemplateType() {
+  public TemplateClassification changeTemplateType() {
     if (!this.templateName.equals("Infobox")) {
       selectInfoboxTemplate();
     } else {
@@ -86,7 +86,7 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  private TemplateClassification selectInfoboxTemplate() {
+  public TemplateClassification selectInfoboxTemplate() {
     wait.forElementVisible(typeInputInfobox);
     typeInputInfobox.click();
 
@@ -95,7 +95,7 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  private TemplateClassification selectQuoteTemplate() {
+  public TemplateClassification selectQuoteTemplate() {
     wait.forElementVisible(typeInputQuote);
     typeInputQuote.click();
 

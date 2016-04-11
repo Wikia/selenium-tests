@@ -127,6 +127,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordWhileCreatingWiki")
+  @RelatedIssue(issueID = "SOC-2282")
   public void anonCanRemindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);

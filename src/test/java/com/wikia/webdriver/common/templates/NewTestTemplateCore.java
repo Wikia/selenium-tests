@@ -1,14 +1,5 @@
 package com.wikia.webdriver.common.templates;
 
-import java.io.File;
-import java.lang.reflect.Method;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
@@ -18,6 +9,15 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
+import java.io.File;
+import java.lang.reflect.Method;
 
 @Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class,
     com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter.class})
