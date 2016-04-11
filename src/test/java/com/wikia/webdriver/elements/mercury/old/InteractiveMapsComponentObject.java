@@ -35,7 +35,7 @@ public class InteractiveMapsComponentObject {
   private WebElement poiPopUp;
   @FindBy(css = ".lightbox-content")
   private WebElement lightbox;
-  @FindBy(css = ".wikia-map > img")
+  @FindBy(css = ".article-media-map-thumbnail img")
   private WebElement mapThumbnail;
 
   private JavascriptExecutor jsexec;
