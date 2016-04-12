@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -126,7 +127,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.verifyUserLoggedIn(verifyString);
   }
 
-  @Test(groups = "ForgottenPassword_anonCanRemindPasswordWhileCreatingWiki")
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordWhileCreatingWiki", enabled = false)
   @RelatedIssue(issueID = "SOC-2282")
   public void anonCanRemindPasswordWhileCreatingWiki() {
     String userName = credentials.userNameForgottenPassword2;
@@ -136,24 +137,21 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifySuccessIcon();
-    CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
-    cnwLogin.typeInUserName(userName);
-    cnwLogin.clickForgotPassword(userName, credentials.apiToken);
-    cnwLogin.verifyMessageAboutNewPassword(credentials.userNameForgottenPassword2);
+    AuthModal loginModal = cnw1.clickNextToSignIn();
+    loginModal.clickForgotPasswordLink();
+    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    login.remindPasswordNewAuth(userName, credentials.apiToken);
+    login.verifyMessageAboutNewPassword(userName);
+    login.clickLogInLink();
     String
-        newPassword =
-        cnwLogin
-            .receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    cnwLogin.typeInPassword(newPassword);
-    CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
-    new SpecialUserLoginPageObject(driver).setNewPassword();
-    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
-    CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-    cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
-    ArticlePageObject article = cnw3.submit();
-    article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
-    article.closeNewWikiCongratulationsLightBox();
-    article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(userName);
+            newPassword =
+            login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
+    login.login(userName, newPassword);
+    newPassword = login.setNewPassword();
+    login.verifyUserLoggedIn(userName);
+
+    login.logOut(wikiURL);
+    login.openSpecialUserLogin(wikiURL);
+    login.login(userName, newPassword);
   }
 }
