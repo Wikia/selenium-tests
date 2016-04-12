@@ -169,7 +169,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AuthModal getAuthModal() {
-    return new AuthModal(driver);
+    return new AuthModal();
   }
 
   public String getWikiUrl() {
@@ -718,6 +718,13 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String getNameForArticle() {
     return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
+  }
+
+  public String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
+    return driver.executeScript(
+        "return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
+        element, pseudoElement, cssValue
+    ).toString();
   }
 
   public void openSpecialPromoteOnCurrentWiki() {

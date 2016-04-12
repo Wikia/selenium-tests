@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkin
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -36,6 +37,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
+  private static final int SLOT_TRIGGER_TIMEOUT_SEC = 10;
   private static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
   private static final String[] GPT_DATA_ATTRIBUTES = {
@@ -466,7 +468,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerFloatingMedrec();
+        triggerAdSlot(AdsContent.FLOATING_MEDREC);
       }
 
       String slotSelector = AdsContent.getSlotSelector(slotName);
@@ -588,18 +590,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject triggerFloatingMedrec() {
-    triggerAdSlot(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC),
-                  " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-    return this;
-  }
-
-  public AdsBaseObject triggerIncontentLeaderboard() {
-    triggerAdSlot(AdsContent.getSlotSelector(AdsContent.INCONTENT_LEADERBOARD),
-                  "$('#mw-content-text h2')[1].scrollIntoView(true);");
-    return this;
-  }
-
   public void verifyNoAd(final String slotSelector) {
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
@@ -629,9 +619,16 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void triggerAdSlot(final String adSlotSelector, final String javaScriptTrigger) {
+  public AdsBaseObject triggerAdSlot(final String slotName) {
+    final String adSlotSelector = AdsContent.getSlotSelector(slotName);
+    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+
+    if (StringUtils.isEmpty(javaScriptTrigger)) {
+      return this;
+    }
+
     try {
-      new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
+      new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions.execute(javaScriptTrigger);
@@ -641,6 +638,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     } catch (org.openqa.selenium.TimeoutException e) {
       PageObjectLogging.logError(adSlotSelector + " slot", e);
     }
+
+    return this;
   }
 
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
