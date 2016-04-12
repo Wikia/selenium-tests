@@ -107,12 +107,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
-//  public CreateNewWikiLogInSignUpPageObject clickNextToSignIn() {
-//    scrollAndClick(submitButton);
-//    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-//    return new CreateNewWikiLogInSignUpPageObject(driver);
-//  }
-
   public AuthModal clickNextToSignIn() {
     scrollAndClick(submitButton);
     PageObjectLogging.log("submit", "button \"Next\" clicked", true, driver);

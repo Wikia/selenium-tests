@@ -33,7 +33,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   @FindBy(css = ".login-button.big")
   private WebElement continueButtonBig;
   /*this element exists when parameter ?type=forgotPassword is added to the url*/
-  @FindBy(css = "a[href='/Special:UserLogin']")
+  @FindBy(css = "a[href='/wiki/Special:UserLogin']")
   private WebElement logInLink;
 
 

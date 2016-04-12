@@ -126,5 +126,5 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     login.login(userName, newPassword);
     login.verifyUserLoggedIn(verifyString);
   }
-  
+
 }
