@@ -720,6 +720,13 @@ public class WikiBasePageObject extends BasePageObject {
     return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
   }
 
+  public String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
+    return driver.executeScript(
+        "return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
+        element, pseudoElement, cssValue
+    ).toString();
+  }
+
   public void openSpecialPromoteOnCurrentWiki() {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String url = (String) js.executeScript("return wgServer");

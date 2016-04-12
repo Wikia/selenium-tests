@@ -1,24 +1,27 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.article;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class OasisFooterComponentObject extends WikiBasePageObject {
 
-  @FindBy(css = ".global-footer a[href='#']")
-  private WebElement mobileSiteLink;
+  private JavascriptActions js;
 
   public OasisFooterComponentObject(WebDriver driver) {
     super();
+
+    js = new JavascriptActions(driver);
   }
 
   public ArticlePageObject clickMobileSiteLink() {
-    waitAndClick(mobileSiteLink);
+    /**
+     * For some reason selenium has problems with click on element below,
+     * that is why we use javascript
+     */
+    js.execute("$('.global-footer a[href=\"#\"]').click()");
     return new ArticlePageObject(driver);
   }
 }
-
