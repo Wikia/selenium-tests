@@ -22,8 +22,9 @@ public class Navigate {
   public Navigate toPage(String pageName) {
     String host = UrlBuilder.getHostForWiki();
     String cacheBuster = pageName.equals("") || pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
+    String abGroup = pageName.equals("") || pageName.equals("/") ? "" : defaultTestingGroup;
 
-    driver.get("http://" + host + pageName + cacheBuster + defaultTestingGroup);
+    driver.get("http://" + host + pageName + cacheBuster + abGroup);
 
     return this;
   }
