@@ -13,7 +13,7 @@ public class Navigate {
    * Adding default testing group is invoked explicitly in URL is temporary change until
    * the end of experiment (19.04.2016). Experiment is described in DAT-4052.
    */
-  private String defaultTestingGroup = "AbTest.FAN_KNOWLEDGE_MERCURY_GLOBAL_NAV=DEFAULT";
+  private static final String defaultTestingGroup = "AbTest.FAN_KNOWLEDGE_MERCURY_GLOBAL_NAV=DEFAULT";
 
   public Navigate(WebDriver driver) {
     this.driver = driver;
@@ -23,7 +23,7 @@ public class Navigate {
     String host = UrlBuilder.getHostForWiki();
     String cacheBuster = pageName.equals("") || pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
 
-    driver.get("http://" + host + pageName + cacheBuster + "&" + defaultTestingGroup);
+    driver.get("http://" + host + pageName + cacheBuster + "?" + defaultTestingGroup);
 
     return this;
   }
