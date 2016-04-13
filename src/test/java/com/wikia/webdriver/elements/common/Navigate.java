@@ -13,7 +13,7 @@ public class Navigate {
    * Adding default testing group is invoked explicitly in URL is temporary change until
    * the end of experiment (19.04.2016). Experiment is described in DAT-4052.
    */
-  private static final String defaultTestingGroup = "AbTest.FAN_KNOWLEDGE_MERCURY_GLOBAL_NAV=DEFAULT";
+  private static final String defaultTestingGroup = "ABTEST.FAN_KNOWLEDGE_MERCURY_GLOBAL_NAV=DEFAULT";
 
   public Navigate(WebDriver driver) {
     this.driver = driver;
