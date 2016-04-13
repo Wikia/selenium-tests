@@ -15,6 +15,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdvertisementTextOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDisableGpt"/>
@@ -155,6 +156,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.RedirectionTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.CategoryPageTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
@@ -170,7 +172,7 @@
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
             <class name="com.wikia.webdriver.testcases.oasismainpage.CuratedContentModal"/>
             <class name="com.wikia.webdriver.testcases.portableinfoboxtests.PortableInfoboxTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.recentwikiactivity.RecentWikiActivityTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.RecentWikiActivityTest"/>
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.BasicActions"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
