@@ -10,8 +10,8 @@ public class Navigate {
   private WebDriver driver;
 
   /**
-   * Adding efault testing group is invoked explicitly in URL is temporary change until 19.04.2016.
-   * Experiment is described in DAT-4052.
+   * Adding default testing group is invoked explicitly in URL is temporary change until
+   * the end of experiment (19.04.2016). Experiment is described in DAT-4052.
    */
   private String defaultTestingGroup = "AbTest.FAN_KNOWLEDGE_MERCURY_GLOBAL_NAV=DEFAULT";
 
