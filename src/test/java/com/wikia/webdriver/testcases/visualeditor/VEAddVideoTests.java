@@ -26,8 +26,7 @@ public class VEAddVideoTests extends NewTestTemplate {
             + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog =
-        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
@@ -45,8 +44,7 @@ public class VEAddVideoTests extends NewTestTemplate {
             + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog =
-        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
@@ -64,8 +62,7 @@ public class VEAddVideoTests extends NewTestTemplate {
             + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog =
-        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
     mediaDialog = mediaDialog.searchMedia("y");
     VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
     veNew.verifyVideos(2);
@@ -84,8 +81,7 @@ public class VEAddVideoTests extends NewTestTemplate {
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog =
-        (VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
     VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();

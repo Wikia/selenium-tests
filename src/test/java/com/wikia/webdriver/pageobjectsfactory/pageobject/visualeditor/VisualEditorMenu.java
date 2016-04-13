@@ -57,6 +57,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private List<WebElement> toolListItems;
   @FindBy(css = ".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
   private WebElement enabledPublishButton;
+  @FindBy(css = ".oo-ui-icon-video")
+  private WebElement videoButton;
 
   private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
   private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
@@ -180,10 +182,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
         clickInsertItemFromDropDown(mapBy);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorAddMapDialog(driver);
-      case MEDIA:
-        clickInsertItemFromDropDown(mediaBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-        return new VisualEditorAddMediaDialog(driver);
       case REFERENCE:
         clickInsertItemFromDropDown(referenceBy);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
@@ -235,7 +233,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
   private void clickInsertItemFromDropDown(By insertBy) {
     clickItemFromDropDown(toolListDropDowns.get(this.INSERT_LIST),
-        toolListItems.get(this.INSERT_LIST), insertBy);
+                          toolListItems.get(this.INSERT_LIST), insertBy);
   }
 
   private void clickHamburgerItemFromDropDown(By insertBy) {
@@ -253,6 +251,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
     wait.forElementClickable(linkButton);
     linkButton.click();
     return new VisualEditorHyperLinkDialog(driver);
+  }
+
+  public VisualEditorAddMediaDialog clickVideoButton() {
+    wait.forElementClickable(videoButton);
+    videoButton.click();
+    return new VisualEditorAddMediaDialog(driver);
   }
 
   public void clickCodeButton() {
