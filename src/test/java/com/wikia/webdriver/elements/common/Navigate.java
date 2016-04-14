@@ -53,7 +53,7 @@ public class Navigate {
   }
 
   public Navigate toUrl(String url) {
-    driver.get("http://" + url);
+    driver.get(url);
     return this;
   }
 }

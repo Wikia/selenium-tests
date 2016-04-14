@@ -45,7 +45,7 @@ public class MercurySEODataProvider {
             }, {
                 new Page("sktest123", "/wiki/Message_Wall:Sktest"), "Message Wall:Sktest - Sktest123 Wiki - Wikia"
             }, {
-                new Page("sktest123", "/wiki/Category:Thread:2160"), "Welcome to Sktest123 Wiki! - Sktest123 Wiki - Wikia"
+                new Page("sktest123", "/wiki/Thread:2160"), "Welcome to Sktest123 Wiki! - Sktest123 Wiki - Wikia"
             }, {
                 new Page("sktest123", "/wiki/Special:Maps"), "Maps - Sktest123 Wiki - Wikia"
             }, {

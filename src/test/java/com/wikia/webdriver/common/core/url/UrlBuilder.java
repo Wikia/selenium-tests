@@ -125,6 +125,6 @@ public class UrlBuilder {
 
     environment = environment.equals("prod") ? "" : environment + ".";
 
-    return environment + wikiName + ".wikia.com" + path;
+    return "http://" + environment + wikiName + ".wikia.com" + path;
   }
 }
