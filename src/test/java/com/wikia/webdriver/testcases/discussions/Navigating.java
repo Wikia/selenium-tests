@@ -12,8 +12,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 @Test(groups = "discussions")
+@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
 public class Navigating extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -57,21 +57,21 @@ public class Navigating extends NewTestTemplate {
     clickUsernameLoadsUserPage();
   }
 
-  @Test(groups = {"Navigating_005"})
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeAppPromotion() {
     discussionsAppPromotionUnitPresentOnPage();
   }
 
-  @Test(groups = {"Navigating_006"})
+  @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
     appleLinkRedirectsProperly();
   }
 
-  @Test(groups = {"Navigating_007"})
+  @Test(groups = "discussions-anonUserOnDesktopCanClickGooglePlayLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickGooglePlayLinkAppPromotion() {
@@ -126,6 +126,4 @@ public class Navigating extends NewTestTemplate {
     driver.switchTo().window(newWindow);
     Assertion.assertTrue(driver.getTitle().contains("Wikia: Fallout"));
   }
-
 }
-

@@ -181,14 +181,6 @@ public class BasePageObject {
     element.click();
   }
 
-  public boolean verifyTitle(String title) {
-    String currentTitle = driver.getTitle();
-    if (!currentTitle.equals(title)) {
-      return false;
-    }
-    return true;
-  }
-
   public boolean isStringInURL(String givenString) {
     String currentURL = driver.getCurrentUrl();
     if (currentURL.toLowerCase().contains(givenString.toLowerCase())) {

@@ -47,8 +47,6 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyWamIndexPageFirstColumn(1, 20);
     wam.clickNextPaginator();
     wam.verifyWamIndexPageFirstColumn(21, 40);
-    wam.clickNextPaginator();
-    wam.verifyWamIndexPageFirstColumn(41, 60);
   }
 
   @Test(groups = {"WamPage004", "WamPageTests"})
