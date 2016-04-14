@@ -20,4 +20,8 @@ public class Page {
   public String getWikiPath() {
     return wikiPath;
   }
+
+  public String getUrl() {
+    return UrlBuilder.getUrl(this.wikiName, this.wikiPath);
+  }
 }
