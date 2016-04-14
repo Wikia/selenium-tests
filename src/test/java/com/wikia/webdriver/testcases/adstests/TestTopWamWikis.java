@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class TestTopWamWikis extends TemplateNoFirstLoad {
 
   Credentials credentials = Configuration.getCredentials();
-  Integer numberOfTop1kWikis = 998;
+  Integer numberOfTop1kWikis = 997;
   String extensionURL = "var=1429&searchType=bool&val=2&likeValue=true";
 
   @Test(groups = "TopWamWikisWhereIsMyExtension")
