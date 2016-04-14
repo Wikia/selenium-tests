@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Head;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -27,11 +26,11 @@ public class HTMLTitleTests extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "htmlTitleSet",
+          groups = "mercury_htmlTitleSet",
           dataProviderClass = MercurySEODataProvider.class,
           dataProvider = "htmlTitles"
   )
-  public void htmlTitleSet(Page page, String expectedTitle) {
+  public void mercury_htmlTitleSet(Page page, String expectedTitle) {
     navigate.toUrl(page.getUrl());
     String actualTitle = head.getDocumentTitle();
 
