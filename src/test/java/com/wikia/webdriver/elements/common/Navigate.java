@@ -51,4 +51,9 @@ public class Navigate {
 
     return this;
   }
+
+  public Navigate toUrl(String url) {
+    driver.get("http://" + url);
+    return this;
+  }
 }
