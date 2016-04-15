@@ -10,8 +10,14 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Head;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HTMLTitleTests extends NewTestTemplate {
@@ -126,6 +132,48 @@ public class HTMLTitleTests extends NewTestTemplate {
 
       Assertion.assertEquals(actualTitle, getFullTitle(testCase[2]));
     }
+  }
+
+  @Test(groups = "seo_guard")
+  public void seo_guard() {
+    String originalEnv = Configuration.getEnv();
+
+    try {
+      PrintWriter out = new PrintWriter("./logs/seo-guard.txt");
+
+      for (String[] testCase : testCases) {
+        navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
+        this.pushMetaTagsToFile(out);
+
+        if (!originalEnv.equals("prod")) {
+          Configuration.setTestValue("env", "prod");
+
+          navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
+          this.pushMetaTagsToFile(out);
+
+          Configuration.setTestValue("env", originalEnv);
+        }
+
+        out.print("****************************************************************************");
+        out.println("****************************************************************************\n");
+      }
+
+      out.close();
+    } catch (FileNotFoundException e) {}
+  }
+
+  private void pushMetaTagsToFile(PrintWriter file) {
+    file.println("==============================================================================");
+    file.println(driver.getCurrentUrl());
+    file.println("==============================================================================");
+    List<WebElement> metaTags =  driver.findElements(By.cssSelector("html > head meta"));
+    file.println(driver.findElement(By.cssSelector("html > head title")).getAttribute("outerHTML"));
+
+    for (WebElement metaTag : metaTags) {
+      file.println(metaTag.getAttribute("outerHTML"));
+    }
+
+    file.println("==============================================================================\n");
   }
 
   private String getFullTitle(String title) {
