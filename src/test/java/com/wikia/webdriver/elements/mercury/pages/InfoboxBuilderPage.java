@@ -25,9 +25,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".on-hover-tooltip")
   private WebElement tooltip;
 
-  @FindBy(css = ".infobox-builder-spinner")
-  private WebElement savingSpinner;
-
   @FindBy(css = ".infobox-builder-preview")
   private WebElement builderBackground;
 
@@ -166,12 +163,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forElementVisible(sectionTooltipOrientedBelow);
 
     return sectionTooltipOrientedBelow.isDisplayed();
-  }
-
-  public boolean isSpinnerPresent() {
-    wait.forElementVisible(savingSpinner);
-
-    return savingSpinner.isDisplayed();
   }
 
   public void clickDropChangesButton() {
