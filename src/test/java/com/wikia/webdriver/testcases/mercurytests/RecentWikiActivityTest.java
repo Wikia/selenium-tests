@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.RecentWikiActivity;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.pages.MainPage;
 import com.wikia.webdriver.elements.mercury.pages.RecentWikiActivityPage;
 
 import org.testng.annotations.Test;
