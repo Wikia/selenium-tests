@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,9 @@ public class Sidebar extends WikiBasePageObject {
 
   @FindBy(css = ".infobox-builder-buttons")
   private WebElement componentsButtonsWrapper;
+
+  @FindBy(css = "#go-to-source")
+  private WebElement goToSourceButton;
 
   @FindBy(css = ".infobox-builder-button")
   private List<WebElement> componentsButtons;
@@ -51,6 +55,44 @@ public class Sidebar extends WikiBasePageObject {
     if (!sidebarCheckbox.isSelected()) {
       sidebarCheckbox.click();
     }
+
+    return this;
+  }
+
+  public boolean areAddButtonsPresent() {
+    wait.forElementVisible(componentsButtonsWrapper);
+
+    return componentsButtonsWrapper.isDisplayed();
+  }
+
+  public Sidebar addRowComponent() {
+    WebElement rowComponentButton = componentsButtons.get(2);
+    wait.forElementClickable(rowComponentButton);
+    rowComponentButton.click();
+
+    return this;
+  }
+
+  public Sidebar addImageComponent() {
+    WebElement imageComponentButton = componentsButtons.get(1);
+    wait.forElementClickable(imageComponentButton);
+    imageComponentButton.click();
+
+    return this;
+  }
+
+  public Sidebar addTitleComponent() {
+    WebElement titleComponentButton = componentsButtons.get(0);
+    wait.forElementClickable(titleComponentButton);
+    titleComponentButton.click();
+
+    return this;
+  }
+
+  public Sidebar addHeaderComponent() {
+    WebElement headerComponentButton = componentsButtons.get(3);
+    wait.forElementClickable(headerComponentButton);
+    headerComponentButton.click();
 
     return this;
   }
@@ -95,43 +137,11 @@ public class Sidebar extends WikiBasePageObject {
     return this;
   }
 
-  public boolean areAddButtonsPresent() {
-    wait.forElementVisible(componentsButtonsWrapper);
+  public TemplateEditPage clickGoToSourceButton() {
+    wait.forElementClickable(goToSourceButton);
+    goToSourceButton.click();
 
-    return componentsButtonsWrapper.isDisplayed();
+    return new TemplateEditPage();
   }
-
-  public Sidebar addRowComponent() {
-    WebElement rowComponentButton = componentsButtons.get(2);
-    wait.forElementClickable(rowComponentButton);
-    rowComponentButton.click();
-
-    return this;
-  }
-
-  public Sidebar addImageComponent() {
-    WebElement imageComponentButton = componentsButtons.get(1);
-    wait.forElementClickable(imageComponentButton);
-    imageComponentButton.click();
-
-    return this;
-  }
-
-  public Sidebar addTitleComponent() {
-    WebElement titleComponentButton = componentsButtons.get(0);
-    wait.forElementClickable(titleComponentButton);
-    titleComponentButton.click();
-
-    return this;
-  }
-
-  public Sidebar addHeaderComponent() {
-    WebElement headerComponentButton = componentsButtons.get(3);
-    wait.forElementClickable(headerComponentButton);
-    headerComponentButton.click();
-
-    return this;
-  }
-
 
 }

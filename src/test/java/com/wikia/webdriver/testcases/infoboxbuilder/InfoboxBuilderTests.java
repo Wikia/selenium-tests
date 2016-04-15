@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Sidebar;
+import com.wikia.webdriver.elements.mercury.components.Subhead;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
@@ -59,13 +60,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void savingTemplate() {
+    Subhead builderSubhead = new Subhead();
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
 
     builderPage.openExisting("InfoboxBuilderSavingTemplate").selectRowWithIndex(0);
     builderSidebar.clickDeleteButton();
     builderSidebar.addRowComponent();
-    builderPage.clickPublish().isSpinnerPresent();
+    builderSubhead.clickPublish();
+
+    Assertion.assertTrue(builderPage.isSpinnerPresent());
 
     Assertion.assertEquals("infoboxbuildersavingtemplate",
                            new TemplatePage().getHeaderText().toLowerCase());
@@ -146,6 +150,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void customizingComponents() {
     TemplatePage template = new TemplatePage();
     Sidebar builderSidebar = new Sidebar();
+    Subhead builderSubhead = new Subhead();
     String labelText = "AutomatedTest";
     String labelLongText = "AutomatedTestVeryLongName";
 
@@ -164,7 +169,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(builderPage.getLabelText(1), labelLongText);
     Assertion.assertEquals(builderPage.getLabelCssValue(1, "word-wrap"), "break-word");
 
-    builderPage.clickPublish();
+    builderSubhead.clickPublish();
     Assertion.assertTrue(builderPage.isSpinnerPresent());
     Assertion.assertTrue(template.isTemplatePagePresent());
 
@@ -176,6 +181,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void setInfoboxTitleToUseArticleName() {
     TemplatePage template = new TemplatePage();
     Sidebar builderSidebar = new Sidebar();
+    Subhead builderSubhead = new Subhead();
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openExisting("SetInfoboxTitleToUseArticleName")
@@ -185,7 +191,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.selectTitleWithIndex(0);
 
     builderSidebar.setTitleToUseArticleName();
-    builderPage.clickPublish();
+    builderSubhead.clickPublish();
 
     Assertion.assertTrue(builderPage.isSpinnerPresent());
     Assertion.assertTrue(template.isTemplatePagePresent());
@@ -302,6 +308,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void immutableSources() {
     Sidebar builderSidebar = new Sidebar();
+    Subhead builderSubhead = new Subhead();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
     String labelText = "AutomatedTest";
 
@@ -309,7 +316,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     builderSidebar.typeInInputField(labelText);
     Assertion.assertEquals(builderPage.getLabelText(0), labelText);
-    builderPage.clickPublish();
+    builderSubhead.clickPublish();
 
     String invocationLabelText = new PortableInfobox().open("InfoboxBuilderImmutableExample")
         .getDataLabelTextWithIndex(0);
@@ -319,10 +326,11 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorClickOnModalBackground() {
+    Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openNew("Infobox_verify_go_to_source");
 
-    builderPage.clickGoToSourceButton();
+    builderSidebar.clickGoToSourceButton();
 
     Assertion.assertTrue(builderPage.isGoToSourceModalPresent());
 
@@ -340,8 +348,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.addRowComponent();
     builderPage.selectRowWithIndex(1);
 
-    builderSidebar.clickDeleteButton();
-    builderPage.clickGoToSourceButton();
+    builderSidebar.clickDeleteButton().clickGoToSourceButton();
 
     Assertion.assertTrue(builderPage.isGoToSourceModalPresent());
 
@@ -355,9 +362,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorDropChanges() {
+    Sidebar builderSidebar = new Sidebar();
+
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openNew("Infobox_verify_go_to_source_drop_changes")
-        .clickGoToSourceButton();
+        .openNew("Infobox_verify_go_to_source_drop_changes");
+
+    builderSidebar.clickGoToSourceButton();
 
     Assertion.assertTrue(builderPage.isGoToSourceModalPresent());
 
@@ -374,8 +384,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorNonEditedInfobox() {
-    new InfoboxBuilderPage().openExisting("InfoboxBuilderSavingTemplate")
-        .clickGoToSourceButton();
+    Sidebar builderSidebar = new Sidebar();
+
+    new InfoboxBuilderPage().openExisting("InfoboxBuilderSavingTemplate");
+    builderSidebar.clickGoToSourceButton();
 
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
     Assertion.assertTrue(driver.getCurrentUrl().contains("InfoboxBuilderSavingTemplate"));
@@ -441,8 +453,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   public void verifyOtherContentIsNotChanged() {
     Sidebar builderSidebar = new Sidebar();
+    Subhead builderSubhead = new Subhead();
     final String templateName = "Infobox_other_content";
     final String infoboxRegexp = "(?s)<infobox[^>]*>.*</infobox>";
+
     String beforePublish = new TemplatePage().getRawContent(templateName)
         .replaceAll(infoboxRegexp, "");
 
@@ -453,7 +467,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.addRowComponent();
     builderPage.selectRowWithIndex(0);
     builderSidebar.clickDeleteButton();
-    builderPage.clickPublish();
+    builderSubhead.clickPublish();
 
     builderPage.logOut();
 
@@ -465,8 +479,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void verifyNamingConflictTypingNameAfterClickingPublish() {
+    Subhead builderSubhead = new Subhead();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().open();
-    builderPage.clickPublish();
+
+    builderSubhead.clickPublish();
 
     Assertion.assertTrue(builderPage.isModalEditTitlePresent());
     Assertion.assertTrue(builderPage.isEditTemplateTitleInputPresent());

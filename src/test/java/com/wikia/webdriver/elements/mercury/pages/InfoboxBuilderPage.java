@@ -4,9 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
-import org.cyberneko.html.HTMLTagBalancer;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -19,17 +16,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".InfoboxBuilder")
   private WebElement builderIFrame;
 
-  @FindBy(css = ".sub-head--done")
-  private WebElement saveButton;
-
   @FindBy(css = ".pop-over-container .infobox-builder-sidebar-header-icon-delete")
   private WebElement deletePopUp;
 
   @FindBy(css = ".infobox-builder-preview")
   private WebElement previewArea;
-
-  @FindBy(css = ".sub-head--title")
-  private WebElement topBarTemplateTitle;
 
   @FindBy(css = ".on-hover-tooltip")
   private WebElement tooltip;
@@ -39,9 +30,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   @FindBy(css = ".infobox-builder-preview")
   private WebElement builderBackground;
-
-  @FindBy(css = "#go-to-source")
-  private WebElement goToSourceButton;
 
   @FindBy(css = ".infobox-builder-go-to-source-modal")
   private WebElement goToSourceModalBackground;
@@ -208,30 +196,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage clickGoToSourceButton() {
-    wait.forElementClickable(goToSourceButton);
-    goToSourceButton.click();
-
-    return this;
-  }
-
   public InfoboxBuilderPage clickGoToSourceModalBackground() {
     wait.forElementClickable(goToSourceModalBackground);
     goToSourceModalBackground.click();
-
-    return this;
-  }
-
-  public InfoboxBuilderPage clickPublish() {
-    wait.forElementClickable(saveButton);
-    saveButton.click();
-
-    return this;
-  }
-
-  public InfoboxBuilderPage clickTopBarTemplateTitle() {
-    wait.forElementClickable(topBarTemplateTitle);
-    topBarTemplateTitle.click();
 
     return this;
   }
@@ -393,11 +360,5 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public void hoverOverSectionChevron(int index) {
     wait.forElementVisible(sectionHeadersChevron.get(index));
     builder.moveToElement(sectionHeadersChevron.get(index)).perform();
-  }
-
-  public InfoboxBuilderPage waitUntilLayoverIsNotPresent() {
-    wait.forElementNotPresent(By.cssSelector(".modal-dialog-layover"));
-
-    return this;
   }
 }
