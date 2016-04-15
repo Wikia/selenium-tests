@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.chattests;
 import java.util.List;
 
 import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -183,5 +182,107 @@ public class ChatTests extends NewTestTemplate {
     chatUserStaff.clickOnDifferentUser(userToBeBanned);
     chatUserStaff.banUser(userToBeBanned);
     chatUserStaff.unBanUser(userToBeBanned);
+  }
+
+  @DontRun(env = {"preview", "dev", "sandbox"})
+  @Test(groups = {"Chat_008", "Chat", "Modals", "ChatTests"})
+  public void Chat_008_userBlockedCanNotCreatePrivateMessage() {
+    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
+
+    switchToWindow(0);
+    chatUserOne.clickOnDifferentUser(userFive);
+    chatUserOne.selectPrivateMessageToUser(userFive);
+    chatUserOne.blockPrivateMessageFromUser(userFive);
+
+    switchToWindow(1);
+    chatWindow.refreshPage();
+    chatUserFive.clickOnDifferentUser(userOne);
+    chatUserFive.verifyBlockedUserIsUnableWritePrivateMessage(userOne);
+  }
+
+  @DontRun(env = {"preview", "dev", "sandbox"})
+  @Test(groups = {"Chat_009", "Chat", "Modals", "ChatTests"})
+  public void Chat_009_userCanOpenMessageWall() throws InterruptedException {
+    openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
+    chatUserFive.clickOnDifferentUser(userOne);
+    chatUserFive.clickOpenUserMessageWall(userOne);
+    chatUserFive.switchToSecondTab();
+    chatWindow.refreshPage();
+    chatUserFive.verifyMessageWallOpened(userOne);
+  }
+
+  @DontRun(env = {"preview", "dev", "sandbox"})
+  @Test(groups = {"Chat_010", "Chat", "Modals", "ChatTests"})
+  public void Chat_010_userCanOpenContributions() throws InterruptedException {
+    openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
+    chatUserFive.clickOnDifferentUser(userOne);
+    chatUserFive.clickOpenUserContributions(userOne);
+    chatUserFive.switchToSecondTab();
+    chatWindow.refreshPage();
+    chatUserFive.verifyUserContributionsOpened(userOne);
+  }
+
+  @DontRun(env = {"preview", "dev", "sandbox"})
+  @Test(groups = {"Chat_011", "Chat", "Modals", "ChatTests"})
+  public void Chat_011_userCanNotBlockPrivateMessages() {
+    openChatForUser(userStaff, userStaffPassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
+    chatUserOne.verifyUserCanNotBlockPrivateMessagesFromStaff(userStaff);
+  }
+
+  @DontRun(env = {"preview", "dev", "sandbox"})
+  @Test(groups = {"Chat_012", "Chat", "Modals", "ChatTests"})
+  public void Chat_012_userCanBeKickedOutFromChat() {
+    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPageObject chatStaffUser = openChatForUser(userStaff, userStaffPassword);
+    chatStaffUser.kickUserFromChat(userOne);
+
+    switchToWindow(0);
+    chatUserOne.verifyUserIsKickedFromChat(userOne);
+  }
+
+    @DontRun(env = {"preview", "dev", "sandbox"})
+  @Test(groups = {"Chat_013", "Chat", "Modals", "ChatTests"})
+  public void Chat_013_banedUserCanNatEnterTheChat() {
+    ChatPageObject chatUserStaff = openChatForUser(userStaff, userStaffPassword);
+
+    switchToWindow(1);
+    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    ChatPageObject chatUserToBeBanned = openChatForUser(userToBeBanned, userToBeBannedPassword);
+
+    switchToWindow(0);
+    chatUserStaff.clickOnDifferentUser(userToBeBanned);
+    chatUserStaff.banUser(userToBeBanned);
+
+    switchToWindow(1);
+    chatWindow.refreshPage();
+    chatUserToBeBanned.verifyPermissionsErrorTitle();
+    chatWindow.refreshPage();
+    chatUserToBeBanned.verifyPermissionsErrorTitle();
+
+    switchToWindow(0);
+    chatUserStaff.unBanUser(userToBeBanned);
+
+    switchToWindow(1);
+    chatWindow.refreshPage();
+    chatUserToBeBanned.verifyChatPage();
   }
 }

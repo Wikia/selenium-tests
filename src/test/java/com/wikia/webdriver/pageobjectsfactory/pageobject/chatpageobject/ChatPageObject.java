@@ -33,6 +33,8 @@ public class ChatPageObject extends WikiBasePageObject {
   private WebElement userStatsMenu;
   @FindBy(css = "li.private-allow")
   private WebElement allowPrivateMassageButton;
+  @FindBy(css = "li.kick")
+  private WebElement kikUserButton;
   @FindBy(css = "li.private-block")
   private WebElement blockPrivateMassageButton;
   @FindBy(css = "h1.public.wordmark.selected")
@@ -59,6 +61,24 @@ public class ChatPageObject extends WikiBasePageObject {
   private WebElement chatLoadedIndicator;
   @FindBy(css = "#ChatHeader h1.private")
   private WebElement privateChatHeader;
+  @FindBy(css = "div.actions .admin-actions .give-chat-mod")
+  private WebElement addUserModStatusButton;
+  @FindBy(css = "div#UserStatsMenu.UserStatsMenu")
+  private WebElement userOptions;
+  @FindBy(css = "ul.admin-actions")
+  private WebElement userModOptions;
+  @FindBy(css = "li.message-wall")
+  private WebElement userMessageWallButton;
+  @FindBy(css = "textarea#WallMessageTitle.title")
+  private WebElement userPageMessageWallTab;
+  @FindBy(css = "li.contribs")
+  private WebElement userContributionsButton;
+  @FindBy(css = "table.mw-contributions-table")
+  private WebElement userPageContributionsTab;
+  @FindBy(css = "form#Write.Write.blocked")
+  private WebElement userBlockedMessageField;
+  @FindBy(css = "div.header-column.header-title")
+  private WebElement PermissionsErrorTitle;
 
   private static final String USER_UNBAN_LINK = "//a[@data-type='ban-undo' and @data-user='%s']";
   private static final String USER_UNBAN_CONFIRM_MESSAGE =
@@ -110,7 +130,13 @@ public class ChatPageObject extends WikiBasePageObject {
   public void verifyPrivateMessageHeader() {
     wait.forElementVisible(privateMessagesHeader);
     PageObjectLogging.log("verifyPrivateMessageHeader", "private message header is visible", true,
-        driver);
+            driver);
+  }
+
+  public void verifyPermissionsErrorTitle() {
+    wait.forElementVisible(PermissionsErrorTitle);
+    PageObjectLogging.log("verifyPermissionsErrorTitle", "permission error header is visible", true,
+            driver);
   }
 
   public void verifyPrivateMessageNotification() {
@@ -243,6 +269,64 @@ public class ChatPageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickBanUser", userName + " ban modal is closed", true);
   }
 
+  public void clickOpenUserMessageWall(String userName) {
+    userMessageWallButton.click();
+    PageObjectLogging.log("clickOpenUserMessageWall", "User " + userName + " Message wall button is clicked", true);
+  }
+
+  public void clickOpenUserContributions(String userName) {
+    userContributionsButton.click();
+    PageObjectLogging.log("clickOpenUserContributions", "User " + userName + " Cotributions button is clicked", true);
+  }
+
+  private void clickOnUserOptionsKikButton(String userName) {
+    kikUserButton.click();
+    PageObjectLogging.log("clickOnUserOptionsKikButton", "User " + userName + " kik user button is clicked", true);
+  }
+
+  public void switchToSecondTab(){
+    ArrayList<String> newTab = new ArrayList(driver.getWindowHandles());
+    driver.switchTo().window(newTab.get(1));
+  }
+
+  public void verifyMessageWallOpened(String userName) {
+    wait.forElementVisible(userPageMessageWallTab);
+    PageObjectLogging.log("clickOpenUserMessageWall", userName + " user page message wall tab opened", true);
+  }
+
+  public void kickUserFromChat(String userName) {
+    clickOnDifferentUser(userName);
+    clickOnUserOptionsKikButton(userName);
+    waitForElementNotVisibleByElement(userOptions);
+    PageObjectLogging.log("kickUserFromChat", userName + " kik user button has been clicked", true);
+  }
+
+  public void verifyUserContributionsOpened(String userName) {
+    wait.forElementVisible(userPageContributionsTab);
+    PageObjectLogging.log("openUserContributions", userName + " user page contributions tab opened", true);
+  }
+
+  public void verifyBlockedUserIsUnableWritePrivateMessage(String userName) {
+    clickOnDifferentUser(userName);
+    waitForElementNotVisibleByElement(privateMassageButton);
+    PageObjectLogging.log("Private messages blocked", userName + " can not write private message", true);
+  }
+
+  public void verifyStaffOptionsNotDisplayed(String userName){
+    clickOnDifferentUser(userName);
+    waitForElementNotVisibleByElement(userModOptions);
+    PageObjectLogging.log("Verifying mod options", userName + " mod options not displayed", true);
+  }
+
+  public void verifyUserCanNotBlockPrivateMessagesFromStaff(String userName){
+    clickOnDifferentUser(userName);
+    selectPrivateMessageToUser(userName);
+    openUserDropDownInPrivateMessageSection(userName);
+    waitForElementNotVisibleByElement(blockPrivateMassageButton);
+    PageObjectLogging.log("verifyUserCanNotBlockPrivateMessagesFromStaff",
+            userName + " can not block private messages from staff", true);
+  }
+
   private void verifyChatUnbanMessage(String userName) {
     wait.forElementVisible(By.xpath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName)));
   }
@@ -253,6 +337,11 @@ public class ChatPageObject extends WikiBasePageObject {
     unbanLink.click();
     verifyChatUnbanMessage(userName);
     PageObjectLogging.log("unBanUser", userName + " is no longer banned", true);
+  }
+
+  public void verifyUserIsKickedFromChat(String userName) {
+    wait.forElementVisible(userBlockedMessageField);
+    PageObjectLogging.log("verifyUserIsKickedFromChat", userName + " is kiked from the chat", true);
   }
 
   public void clickOnDifferentUser(String userName) {

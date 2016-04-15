@@ -104,4 +104,26 @@ public class ChatTestsStaff extends NewTestTemplate {
     SpecialPageObject special = new SpecialPageObject();
     special.verifyPageHeader("Permissions error");
   }
+
+  @DontRun(env = {"sandbox"})
+  @Test(groups = {"ChatTestsStaff_005", "ChatStaff", "ChatTests"})
+  public void ChatTestsStaff_005_staffOptionsNotDisplayed() {
+    openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPageObject chatUserStaff2 = openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserStaff2.verifyStaffOptionsNotDisplayed(credentials.userNameStaff);
+  }
+
+  @DontRun(env = {"sandbox"})
+  @Test(groups = {"ChatTestsStaff_006", "ChatStaff", "ChatTests"})
+  public void ChatTestsStaff_006_staffCanNotBlockPrivateMessages() {
+    openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPageObject chatUserStaff2 = openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserStaff2.verifyUserCanNotBlockPrivateMessagesFromStaff(credentials.userNameStaff);
+  }
 }
