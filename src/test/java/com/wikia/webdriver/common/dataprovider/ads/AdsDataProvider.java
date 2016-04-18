@@ -14,7 +14,7 @@ import java.util.Collections;
 
 public class AdsDataProvider {
 
-  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {yugioh
+  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
       AdsContent.TOP_LB,
       AdsContent.MEDREC,
       AdsContent.LEFT_SKYSCRAPPER_2,
