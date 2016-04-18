@@ -78,7 +78,7 @@ public class ChatPageObject extends WikiBasePageObject {
   @FindBy(css = "form#Write.Write.blocked")
   private WebElement userBlockedMessageField;
   @FindBy(css = "div.header-column.header-title")
-  private WebElement PermissionsErrorTitle;
+  private WebElement permissionsErrorTitle;
 
   private static final String USER_UNBAN_LINK = "//a[@data-type='ban-undo' and @data-user='%s']";
   private static final String USER_UNBAN_CONFIRM_MESSAGE =
@@ -133,7 +133,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyPermissionsErrorTitle() {
-    wait.forElementVisible(PermissionsErrorTitle);
+    wait.forElementVisible(permissionsErrorTitle);
     PageObjectLogging.log("verifyPermissionsErrorTitle", "permission error header is visible", true, driver);
   }
 
@@ -269,17 +269,17 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void clickOpenUserMessageWall(String userName) {
     userMessageWallButton.click();
-    PageObjectLogging.log("clickOpenUserMessageWall", "User " + userName + " Message wall button is clicked", true);
+    PageObjectLogging.log("clickOpenUserMessageWall", userName + " Message wall button is clicked", true);
   }
 
   public void clickOpenUserContributions(String userName) {
     userContributionsButton.click();
-    PageObjectLogging.log("clickOpenUserContributions", "User " + userName + " Cotributions button is clicked", true);
+    PageObjectLogging.log("clickOpenUserContributions", userName + " Cotributions button is clicked", true);
   }
 
   private void clickOnUserOptionsKikButton(String userName) {
     kickUserButton.click();
-    PageObjectLogging.log("clickOnUserOptionsKikButton", "User " + userName + " kik user button is clicked", true);
+    PageObjectLogging.log("clickOnUserOptionsKikButton", userName + " kik user button is clicked", true);
   }
 
   public void switchToSecondTab(){

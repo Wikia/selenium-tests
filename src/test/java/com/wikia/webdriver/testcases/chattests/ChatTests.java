@@ -206,7 +206,7 @@ public class ChatTests extends NewTestTemplate {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_009", "Chat", "Modals", "ChatTests"})
-  public void userCanOpenMessageWall() throws InterruptedException {
+  public void userCanOpenMessageWall() {
     openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
@@ -221,7 +221,7 @@ public class ChatTests extends NewTestTemplate {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_010", "Chat", "Modals", "ChatTests"})
-  public void userCanOpenContributions() throws InterruptedException {
+  public void userCanOpenContributions() {
     openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
