@@ -14,7 +14,7 @@ import java.util.Collections;
 
 public class AdsDataProvider {
 
-  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
+  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {yugioh
       AdsContent.TOP_LB,
       AdsContent.MEDREC,
       AdsContent.LEFT_SKYSCRAPPER_2,
@@ -364,11 +364,11 @@ public class AdsDataProvider {
             "yugioh",
             "Dark_Magician",
             null,
-            "wka.ent/_yugioh//article",
+            "wka.gaming/_yugioh//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"ent\"",
-                "\"s0v\":\"comics\"",
+                "\"s0\":\"gaming\"",
+                "\"s0v\":\"games\"",
                 "\"s0c\":[\"gaming\",\"anime\",\"videogames\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
