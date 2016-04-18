@@ -9,6 +9,9 @@ public class Subhead extends WikiBasePageObject {
   @FindBy(css = ".sub-head--done")
   private WebElement saveButton;
 
+  @FindBy(css = ".sub-head--title")
+  private WebElement subheadTitle;
+
 
   public Subhead clickPublish() {
     wait.forElementClickable(saveButton);
@@ -17,4 +20,16 @@ public class Subhead extends WikiBasePageObject {
     return this;
   }
 
+  public Subhead clickSubheadTitle() {
+    wait.forElementClickable(subheadTitle);
+    subheadTitle.click();
+
+    return this;
+  }
+
+  public String getSubheadTitle() {
+    wait.forElementVisible(subheadTitle);
+
+    return subheadTitle.getText();
+  }
 }

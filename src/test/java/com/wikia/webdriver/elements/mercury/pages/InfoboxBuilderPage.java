@@ -4,6 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -351,5 +353,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public void hoverOverSectionChevron(int index) {
     wait.forElementVisible(sectionHeadersChevron.get(index));
     builder.moveToElement(sectionHeadersChevron.get(index)).perform();
+  }
+
+  public InfoboxBuilderPage waitUntilEditTitleModalIsClosed() {
+    wait.forElementNotVisible(By.cssSelector(".infobox-builder-edit-title-modal > div"));
+
+    return this;
   }
 }
