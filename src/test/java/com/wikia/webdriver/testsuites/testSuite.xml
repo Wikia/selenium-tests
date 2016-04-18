@@ -160,6 +160,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>

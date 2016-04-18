@@ -11,7 +11,7 @@ public class Navigate {
 
   /**
    * Adding default testing group is invoked explicitly in URL is temporary change until
-   * the end of experiment (19.04.2016). Experiment is described in DAT-4052.
+   * the end of experiment (21.04.2016) described in DAT-4052.
    */
   private static final String defaultTestingGroup = "&ABTEST.FAN_KNOWLEDGE_MERCURY_GLOBAL_NAV=DEFAULT";
 
@@ -49,6 +49,11 @@ public class Navigate {
 
     driver.get("http://" + host + pageName + query + defaultTestingGroup);
 
+    return this;
+  }
+
+  public Navigate toUrl(String url) {
+    driver.get(url);
     return this;
   }
 }
