@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests.recentwikiactivity;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -6,8 +6,9 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.RecentWikiActivity;
-import com.wikia.webdriver.elements.mercury.pages.MainPage;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.RecentWikiActivityPage;
 
 import org.testng.annotations.Test;
@@ -18,11 +19,11 @@ public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test(groups = "mercury_recentWikiActivity_anonNavigateToRWAfromMenu")
   public void mercury_recentWikiActivity_anonNavigateToRWAfromMenu() {
-    new MainPage()
-        .open()
-        .getTopBar()
-        .openNavigation()
-        .openRecentWikiActivity();
+    /**
+     * Temporary change until the end of experiment (21.04.2016) described in DAT-4052.
+     */
+    new Navigate(driver).toPage("/wiki/Aga_Wikia");
+    new TopBar(driver).openNavigation().openRecentWikiActivity();
   }
 
   @Test(groups = "mercury_recentWikiActivity_anonOpenDiffPageAndGoBack")

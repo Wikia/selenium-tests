@@ -73,10 +73,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickExpandButton()
         .isInfoboxCollapsed();
 
-    // expand by tapping Infobox's content
+    // tapping on infobox content - doesn't expand infobox
     infobox
-        .tapInfoboxContent()
-        .isInfoboxExpanded()
         .tapInfoboxContent()
         .isInfoboxCollapsed();
   }
