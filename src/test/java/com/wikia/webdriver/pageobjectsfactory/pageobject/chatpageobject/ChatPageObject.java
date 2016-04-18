@@ -34,7 +34,7 @@ public class ChatPageObject extends WikiBasePageObject {
   @FindBy(css = "li.private-allow")
   private WebElement allowPrivateMassageButton;
   @FindBy(css = "li.kick")
-  private WebElement kikUserButton;
+  private WebElement kickUserButton;
   @FindBy(css = "li.private-block")
   private WebElement blockPrivateMassageButton;
   @FindBy(css = "h1.public.wordmark.selected")
@@ -129,14 +129,12 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void verifyPrivateMessageHeader() {
     wait.forElementVisible(privateMessagesHeader);
-    PageObjectLogging.log("verifyPrivateMessageHeader", "private message header is visible", true,
-            driver);
+    PageObjectLogging.log("verifyPrivateMessageHeader", "private message header is visible", true, driver);
   }
 
   public void verifyPermissionsErrorTitle() {
     wait.forElementVisible(PermissionsErrorTitle);
-    PageObjectLogging.log("verifyPermissionsErrorTitle", "permission error header is visible", true,
-            driver);
+    PageObjectLogging.log("verifyPermissionsErrorTitle", "permission error header is visible", true, driver);
   }
 
   public void verifyPrivateMessageNotification() {
@@ -165,7 +163,7 @@ public class ChatPageObject extends WikiBasePageObject {
   public void verifyMainChatIsHighlighted() {
     wait.forElementVisible(mainChatSelection);
     PageObjectLogging.log("verifyPrivateMessageIsHighlighted",
-        "private message section is highlighted", true);
+            "private message section is highlighted", true);
   }
 
   public void verifyNormalUserDropdown(String userName) {
@@ -280,13 +278,14 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   private void clickOnUserOptionsKikButton(String userName) {
-    kikUserButton.click();
+    kickUserButton.click();
     PageObjectLogging.log("clickOnUserOptionsKikButton", "User " + userName + " kik user button is clicked", true);
   }
 
   public void switchToSecondTab(){
     ArrayList<String> newTab = new ArrayList(driver.getWindowHandles());
     driver.switchTo().window(newTab.get(1));
+    PageObjectLogging.log("switchToSecondTab", userName + " has switched to the second tab", true);
   }
 
   public void verifyMessageWallOpened(String userName) {
@@ -298,7 +297,7 @@ public class ChatPageObject extends WikiBasePageObject {
     clickOnDifferentUser(userName);
     clickOnUserOptionsKikButton(userName);
     waitForElementNotVisibleByElement(userOptions);
-    PageObjectLogging.log("kickUserFromChat", userName + " kik user button has been clicked", true);
+    PageObjectLogging.log("kickUserFromChat", userName + " kick user button has been clicked", true);
   }
 
   public void verifyUserContributionsOpened(String userName) {
@@ -315,7 +314,7 @@ public class ChatPageObject extends WikiBasePageObject {
   public void verifyStaffOptionsNotDisplayed(String userName){
     clickOnDifferentUser(userName);
     waitForElementNotVisibleByElement(userModOptions);
-    PageObjectLogging.log("Verifying mod options", userName + " mod options not displayed", true);
+    PageObjectLogging.log("verifyStaffOptionsNotDisplayed", userName + " mod options not displayed", true);
   }
 
   public void verifyUserCanNotBlockPrivateMessagesFromStaff(String userName){
