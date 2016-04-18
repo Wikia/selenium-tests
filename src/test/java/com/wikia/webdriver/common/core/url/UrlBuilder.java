@@ -119,4 +119,12 @@ public class UrlBuilder {
   public static String getUrlForPage(String pageName) {
     return getHostForWiki() + pageName;
   }
+
+  public static String getUrl(String wikiName, String path) {
+    String environment = Configuration.getEnv();
+
+    environment = environment.equals("prod") ? "" : environment + ".";
+
+    return "http://" + environment + wikiName + ".wikia.com" + path;
+  }
 }

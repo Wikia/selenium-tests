@@ -38,6 +38,10 @@ public class JavascriptActions {
     js.executeScript("$(arguments[0]).focus()", element);
   }
 
+  public Object execute(String script, WebElement element) {
+    return js.executeScript(script, element);
+  }
+
   public Object execute(String script) {
     // TODO: Get rid of this wait
     try {
