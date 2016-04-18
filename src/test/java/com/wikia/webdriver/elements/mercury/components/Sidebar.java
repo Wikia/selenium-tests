@@ -27,6 +27,9 @@ public class Sidebar extends WikiBasePageObject {
   @FindBy(css = "#go-to-source")
   private WebElement goToSourceButton;
 
+  @FindBy(css = ".pi-header")
+  private WebElement infoboxHeader;
+
   @FindBy(css = ".infobox-builder-button")
   private List<WebElement> componentsButtons;
 
@@ -107,9 +110,7 @@ public class Sidebar extends WikiBasePageObject {
     wait.forElementClickable(sidebarCheckbox);
     sidebarCheckbox.click();
 
-    String script = "return window.getComputedStyle(document"
-                    + ".querySelector('.pi-header'),':after').content";
-    String chevronContent = driver.executeScript(script).toString();
+    String chevronContent = getPseudoElementValue(infoboxHeader, ":after", "content");
 
     if (sidebarCheckbox.isSelected()) {
       Assertion.assertFalse(chevronContent.isEmpty());
