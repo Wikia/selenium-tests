@@ -23,7 +23,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_001", "ChatStaff", "ChatTests"})
-  public void ChatTestsStaff_001_twoUserEnterChat() {
+  public void twoStaffUserCanEnterChat() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
     chatUserOne.verifyChatPage();
@@ -41,7 +41,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_002", "ChatStaff", "ChatTests"})
-  public void ChatTestsStaff_002_verifySwitchingBetweenMainAndPrivateSections() {
+  public void verifyStaffUsersCanSwitchBetweenMainAndPrivateSections() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
@@ -69,7 +69,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_003", "ChatStaff", "ChatTests"})
-  public void ChatTestsStaff_003_sendPrivateMessage() {
+  public void staffUserCanSendPrivateMessage() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
@@ -99,7 +99,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"prod"})
   @Test(groups = {"ChatTestsStaff_004", "ChatStaff", "ChatTests"})
-  public void ChatTestsStaff_004_basicUserChatFails() {
+  public void basicUserChatFailsOnPreviewEnvirement() {
     openChatForUser(credentials.userName10, credentials.password10);
     SpecialPageObject special = new SpecialPageObject();
     special.verifyPageHeader("Permissions error");
@@ -107,7 +107,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_005", "ChatStaff", "ChatTests"})
-  public void ChatTestsStaff_005_staffOptionsNotDisplayed() {
+  public void staffOptionsNotDisplayed() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
     switchToWindow(1);
@@ -118,7 +118,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_006", "ChatStaff", "ChatTests"})
-  public void ChatTestsStaff_006_staffCanNotBlockPrivateMessages() {
+  public void staffCanNotBlockPrivateMessages() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
     switchToWindow(1);
