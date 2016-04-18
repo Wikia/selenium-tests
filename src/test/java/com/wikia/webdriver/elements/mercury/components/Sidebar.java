@@ -111,9 +111,6 @@ public class Sidebar extends WikiBasePageObject {
     sidebarCheckbox.click();
 
     String chevronContent = getPseudoElementValue(infoboxHeader, ":after", "content");
-    String script = "return window.getComputedStyle(document"
-                    + ".querySelector('.pi-header'),':after').content";
-    String chevronContent2 = driver.executeScript(script).toString();
 
     if (sidebarCheckbox.isSelected()) {
       Assertion.assertFalse(chevronContent.isEmpty());
