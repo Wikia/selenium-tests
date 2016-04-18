@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

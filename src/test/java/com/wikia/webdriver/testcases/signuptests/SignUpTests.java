@@ -8,8 +8,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -17,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
