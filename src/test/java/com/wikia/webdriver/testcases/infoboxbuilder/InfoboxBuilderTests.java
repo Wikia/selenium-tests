@@ -492,11 +492,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isModalEditTitlePresent());
     Assertion.assertTrue(builderPage.isEditTemplateTitleInputPresent());
 
-    builderPage.insertTemplateTitle("changeTemplateNameByClickingSubhead")
+    builderPage.insertTemplateTitle("InfoboxBuilderChangeTemplateNameBySubhead")
         .clickPublishEditedTitleButton();
 
     builderPage.waitUntilEditTitleModalIsClosed();
 
-    Assertion.assertEquals(subhead.getSubheadTitle(), "Editing template: changeTemplateNameByClickingSubhead");
+    Assertion.assertEquals(subhead.getSubheadTitle(),
+                           "Editing template: InfoboxBuilderChangeTemplateNameBySubhead");
   }
 }
