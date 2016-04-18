@@ -186,7 +186,7 @@ public class ChatTests extends NewTestTemplate {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_008", "Chat", "Modals", "ChatTests"})
-  public void userBlockedCanNotCreatePrivateMessage() {
+  public void blockedUserCanNotCreatePrivateMessage() {
     ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
@@ -206,7 +206,7 @@ public class ChatTests extends NewTestTemplate {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_009", "Chat", "Modals", "ChatTests"})
-  public void userCanOpenMessageWall() {
+  public void regularUserCanOpenMessageWall() {
     openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
@@ -221,7 +221,7 @@ public class ChatTests extends NewTestTemplate {
 
   @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_010", "Chat", "Modals", "ChatTests"})
-  public void userCanOpenContributions() {
+  public void regularUserCanOpenContributions() {
     openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
@@ -261,7 +261,7 @@ public class ChatTests extends NewTestTemplate {
 
     @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_013", "Chat", "Modals", "ChatTests"})
-  public void banedUserCanNatEnterTheChat() {
+  public void bannedUserCanNatEnterTheChat() {
     ChatPageObject chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
     switchToWindow(1);

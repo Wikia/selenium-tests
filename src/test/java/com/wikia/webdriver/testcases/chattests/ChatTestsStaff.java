@@ -23,7 +23,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_001", "ChatStaff", "ChatTests"})
-  public void twoStaffUserCanEnterChat() {
+  public void twoStaffUsersCanEnterChat() {
     ChatPageObject chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
     chatUserOne.verifyChatPage();
@@ -99,7 +99,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"prod"})
   @Test(groups = {"ChatTestsStaff_004", "ChatStaff", "ChatTests"})
-  public void basicUserChatFailsOnPreviewEnvirement() {
+  public void regularUserCanNotEnterChatOnPreviewEnvironment() {
     openChatForUser(credentials.userName10, credentials.password10);
     SpecialPageObject special = new SpecialPageObject();
     special.verifyPageHeader("Permissions error");
@@ -107,7 +107,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_005", "ChatStaff", "ChatTests"})
-  public void staffOptionsNotDisplayed() {
+  public void staffOptionsAreNotDisplayedOnOtherStaffUser() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
     switchToWindow(1);
@@ -118,7 +118,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
   @DontRun(env = {"sandbox"})
   @Test(groups = {"ChatTestsStaff_006", "ChatStaff", "ChatTests"})
-  public void staffCanNotBlockPrivateMessages() {
+  public void staffUserCanNotBlockPrivateMessages() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
     switchToWindow(1);
