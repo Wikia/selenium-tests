@@ -73,7 +73,8 @@ public class PostsListPage extends WikiBasePageObject {
   private WebElement googlePlayAppLink;
 
   private static final String PATH = "d/f/%s";
-  private static final String DEFAULT_FORUM_ID = "203236";
+  // ForumID for Discussions for Fallout on Production
+  private static final String DEFAULT_FORUM_ID = "3035";
 
   public PostsListPage(WebDriver driver) {
     super();
