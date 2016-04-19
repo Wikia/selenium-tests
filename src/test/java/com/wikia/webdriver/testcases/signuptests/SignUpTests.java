@@ -8,8 +8,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiLogInSignUpPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -17,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -97,37 +94,7 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
-
-  @Test(groups = {"Signup_anonCanSignUpWhenCreatingNewWiki", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2283")
-  public void anonCanSignUpWhenCreatingNewWiki() {
-    CreateNewWikiPageObjectStep1 createNewWiki1 = new CreateNewWikiPageObjectStep1(driver).open();
-    createNewWiki1.disableCaptcha();
-    String wikiName = createNewWiki1.getWikiName();
-    createNewWiki1.typeInWikiName(wikiName);
-    createNewWiki1.verifySuccessIcon();
-    CreateNewWikiLogInSignUpPageObject cnwSignUpPage = createNewWiki1.submitToLogInSignUp();
-    SignUpPageObject signUp = cnwSignUpPage.submitSignup();
-    String userName = "User" + signUp.getTimeStamp();
-    String password = "Pass" + signUp.getTimeStamp();
-    String email = credentials.emailQaart2;
-    String emailPassword = credentials.emailPasswordQaart2;
-
-    signUp.typeEmail(email);
-    signUp.typeUserName(userName);
-    signUp.typePassword(password);
-    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
-    almostTherePage.verifyAlmostTherePage();
-    ConfirmationPageObject confirmPageAlmostThere =
-        almostTherePage.enterActivationLink(email, emailPassword, wikiCorporateURL);
-    confirmPageAlmostThere.typeInUserName(userName);
-    confirmPageAlmostThere.typeInPassword(password);
-    createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
-    createNewWiki1.verifyWikiName(wikiName);
-  }
-
+  
   @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
