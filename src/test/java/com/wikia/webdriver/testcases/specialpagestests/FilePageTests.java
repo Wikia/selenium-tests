@@ -107,7 +107,7 @@ public class FilePageTests extends NewTestTemplate {
    * Verify that a video can be deleted from the File page
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-  @RelatedIssue(issueID = "QAART-714", comment = "Edge case. If it reoccurs change the video query")
+  @RelatedIssue(issueID = "SUS-428", comment = "Product code defect. Test manually that the video can be deleted as this functionality is not currently failing")
   public void filePage005_deleteFromHistory() {
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("pokemon");

@@ -13,8 +13,6 @@ public class WikiaProperties {
    * Check if current wikia for children
    */
   public static boolean isWikiForChildren(WebDriver webDriver) {
-    Object wikiForChildren = new JavascriptActions(webDriver)
-        .execute("ads.context.targeting.wikiDirectedAtChildren");
-    return wikiForChildren != null || "true".equals(wikiForChildren.toString());
+    return "ec".equals(new JavascriptActions(webDriver).execute("ads.context.targeting.esrbRating"));
   }
 }
