@@ -259,9 +259,9 @@ public class ChatTests extends NewTestTemplate {
     chatUserOne.verifyUserIsKickedFromChat(userOne);
   }
 
-    @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev", "sandbox"})
   @Test(groups = {"Chat_013", "Chat", "Modals", "ChatTests"})
-  public void bannedUserCanNatEnterTheChat() {
+  public void bannedUserCanNotEnterTheChat() {
     ChatPageObject chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
     switchToWindow(1);

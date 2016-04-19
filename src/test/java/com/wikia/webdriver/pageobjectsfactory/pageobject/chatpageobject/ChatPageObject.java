@@ -277,7 +277,7 @@ public class ChatPageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickOpenUserContributions", userName + " Cotributions button is clicked", true);
   }
 
-  private void clickOnUserOptionsKikButton(String userName) {
+  private void clickOnUserOptionsKickButton(String userName) {
     kickUserButton.click();
     PageObjectLogging.log("clickOnUserOptionsKikButton", userName + " kik user button is clicked", true);
   }
@@ -295,7 +295,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void kickUserFromChat(String userName) {
     clickOnDifferentUser(userName);
-    clickOnUserOptionsKikButton(userName);
+    clickOnUserOptionsKickButton(userName);
     waitForElementNotVisibleByElement(userOptions);
     PageObjectLogging.log("kickUserFromChat", userName + " kick user button has been clicked", true);
   }
