@@ -1068,27 +1068,27 @@ public class AdsDataProvider {
                 .put("lineItemId", 269679732)
                 .put("src", "gpt")
                 .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 600))
+                .put("lineItemId", 270230292)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper"),
+            "",
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.FLOATING_MEDREC)
+                .put("slotSize", new Dimension(300, 600))
+                .put("lineItemId", 270230292)
+                .put("src", "gpt")
+                .build()
         }/*,
-        {
-            new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 600))
-                .put("lineItemId", 223968492)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper"),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 600))
-                .put("lineItemId", 223968492)
-                .put("src", "gpt")
-                .build()
-        },
         {
             new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
             "",
