@@ -210,12 +210,12 @@ public class ChatTests extends NewTestTemplate {
     openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
-    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    new SpecialVersionPage().open();
     ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
+    String currentTab = driver.getWindowHandle();
     chatUserFive.clickOnDifferentUser(userOne);
     chatUserFive.clickOpenUserMessageWall(userOne);
-    chatUserFive.switchToSecondTab();
-    chatWindow.refreshPage();
+    chatUserFive.switchToSecondTab(currentTab);
     chatUserFive.verifyMessageWallOpened(userOne);
   }
 
@@ -225,12 +225,12 @@ public class ChatTests extends NewTestTemplate {
     openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
-    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    new SpecialVersionPage().open();
     ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
+    String currentTab = driver.getWindowHandle();
     chatUserFive.clickOnDifferentUser(userOne);
     chatUserFive.clickOpenUserContributions(userOne);
-    chatUserFive.switchToSecondTab();
-    chatWindow.refreshPage();
+    chatUserFive.switchToSecondTab(currentTab);
     chatUserFive.verifyUserContributionsOpened(userOne);
   }
 

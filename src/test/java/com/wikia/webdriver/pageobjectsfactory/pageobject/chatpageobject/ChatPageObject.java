@@ -282,15 +282,19 @@ public class ChatPageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickOnUserOptionsKikButton", userName + " kik user button is clicked", true);
   }
 
-  public void switchToSecondTab(){
-    ArrayList<String> newTab = new ArrayList(driver.getWindowHandles());
-    driver.switchTo().window(newTab.get(1));
-    PageObjectLogging.log("switchToSecondTab", userName + " has switched to the second tab", true);
+  public void switchToSecondTab(String firstTab){
+    ArrayList<String> openTabs = new ArrayList(driver.getWindowHandles());
+    for (String window:openTabs) {
+      if (window != firstTab) {
+        driver.switchTo().window(window);
+        PageObjectLogging.log("switchToSecondTab", userName + " has switched to the second tab", true);
+      }
+    }
   }
 
   public void verifyMessageWallOpened(String userName) {
     wait.forElementVisible(userPageMessageWallTab);
-    PageObjectLogging.log("clickOpenUserMessageWall", userName + " user page message wall tab opened", true);
+    PageObjectLogging.log("verifyMessageWallOpened", userName + " user page message wall tab opened", true);
   }
 
   public void kickUserFromChat(String userName) {
