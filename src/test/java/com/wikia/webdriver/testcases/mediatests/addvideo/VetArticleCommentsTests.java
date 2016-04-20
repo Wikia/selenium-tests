@@ -25,7 +25,6 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "6", comment = "the test should pass, the related issue is not permanent")
   public void VetArticleComments_001_Provider() {
     new ArticleContent().clear();
 
