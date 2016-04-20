@@ -9,6 +9,8 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.EmbedMapComponentObject;
@@ -28,6 +30,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -156,6 +159,9 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement viewEmbedMapButton;
   @FindBy(css = ".portable-infobox")
   private PortableInfobox portableInfobox;
+
+  @Getter(lazy = true)
+  private final ArticleComment articleComment = new ArticleComment();
 
   private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
   private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
