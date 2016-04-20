@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.RecentWikiActivity;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.MainPage;
 import com.wikia.webdriver.elements.mercury.pages.RecentWikiActivityPage;
 import org.testng.annotations.Test;
@@ -17,11 +18,8 @@ public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test(groups = "mercury_recentWikiActivity_anonNavigateToRWAfromMenu")
   public void mercury_recentWikiActivity_anonNavigateToRWAfromMenu() {
-    new MainPage()
-        .open()
-        .getTopBar()
-        .openNavigation()
-        .openRecentWikiActivity();
+    new MainPage().open();
+    new TopBar(driver).openNavigation().openRecentWikiActivity();
   }
 
   @Test(groups = "mercury_recentWikiActivity_anonOpenDiffPageAndGoBack")
