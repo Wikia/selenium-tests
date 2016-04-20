@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 
