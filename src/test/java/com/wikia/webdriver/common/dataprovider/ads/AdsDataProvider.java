@@ -1088,24 +1088,24 @@ public class AdsDataProvider {
                 .put("lineItemId", 270230292)
                 .put("src", "gpt")
                 .build()
-        }/*,
+        },
         {
-            new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 223909212)
+                .put("lineItemId", 269679732)
                 .put("src", "gpt")
                 .build()
         },
         {
-            new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 223909212)
+                .put("lineItemId", 269679732)
                 .put("src", "gpt")
                 .build()
         },
@@ -1130,12 +1130,12 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("adtest", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
                 .put("slotSize", new Dimension(160, 600))
-                .put("lineItemId", 237935652)
+                .put("lineItemId", 270616092)
                 .put("src", "gpt")
                 .build()
         },
@@ -1188,7 +1188,7 @@ public class AdsDataProvider {
                 .put("lineItemId", 255534972)
                 .put("src", "gpt")
                 .build()
-        },*/
+        },
     };
   }
 
