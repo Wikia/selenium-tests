@@ -66,7 +66,6 @@ public class HubsTests extends NewTestTemplate {
    * click on 'Get Promoted' button verify if modal appears and if its fields/buttons are working
    * properly
    */
-
   @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   @Execute(asUser = User.USER_2)
