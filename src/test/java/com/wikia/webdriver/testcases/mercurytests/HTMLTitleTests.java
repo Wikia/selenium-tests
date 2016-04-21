@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -17,6 +18,8 @@ import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -140,25 +143,26 @@ public class HTMLTitleTests extends NewTestTemplate {
 
     try {
       PrintWriter out = new PrintWriter("./logs/seo-guard.txt");
+      PrintWriter out2 = new PrintWriter("./logs/seo-guard2.txt");
 
       for (String[] testCase : testCases) {
         navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
+        new Wait(driver).forElementVisible(By.cssSelector(".side-nav-toggle-2016"));
         this.pushMetaTagsToFile(out);
 
         if (!originalEnv.equals("prod")) {
           Configuration.setTestValue("env", "prod");
 
           navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
-          this.pushMetaTagsToFile(out);
+          new Wait(driver).forElementVisible(By.cssSelector(".side-nav-toggle-2016"));
+          this.pushMetaTagsToFile(out2);
 
           Configuration.setTestValue("env", originalEnv);
         }
-
-        out.print("****************************************************************************");
-        out.println("****************************************************************************\n");
       }
 
       out.close();
+      out2.close();
     } catch (FileNotFoundException e) {}
   }
 
@@ -166,11 +170,17 @@ public class HTMLTitleTests extends NewTestTemplate {
     file.println("==============================================================================");
     file.println(driver.getCurrentUrl());
     file.println("==============================================================================");
-    List<WebElement> metaTags =  driver.findElements(By.cssSelector("html > head meta"));
-    file.println(driver.findElement(By.cssSelector("html > head title")).getAttribute("outerHTML"));
+    List<WebElement> metaTags =  driver.findElements(By.cssSelector("head meta, head title, head link"));
+    ArrayList<String> headData = new ArrayList<>();
 
     for (WebElement metaTag : metaTags) {
-      file.println(metaTag.getAttribute("outerHTML"));
+      headData.add(metaTag.getAttribute("outerHTML"));
+    }
+
+    Collections.sort(headData);
+
+    for (String item : headData) {
+      file.println(item);
     }
 
     file.println("==============================================================================\n");
