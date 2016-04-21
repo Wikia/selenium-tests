@@ -10,12 +10,14 @@ import org.openqa.selenium.support.FindBy;
 public class ArticleComment extends BasePageObject {
 
   @FindBy(css = "#article-comm-submit")
-  protected WebElement commentSubmitButton;
+  private WebElement commentSubmitButton;
+  @FindBy(css = "#cke_contents_article-comm>iframe")
+  private WebElement commentVideo;
   String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
 
   public ArticleComment waitForVideo() {
-    driver.switchTo().frame(1);
+    driver.switchTo().frame(commentVideo);
     wait.forElementVisible(By.cssSelector("img"));
 
     return this;
@@ -32,8 +34,7 @@ public class ArticleComment extends BasePageObject {
 
   public boolean isVideoVisible(String videoName) {
     try {
-      WebElement
-          element =
+      WebElement element =
           driver.findElement(
               By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
       return element.isDisplayed();
