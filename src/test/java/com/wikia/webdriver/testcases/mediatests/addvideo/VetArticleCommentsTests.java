@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -24,7 +25,6 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6430", comment = "the test should pass, the related issue is not permanent")
   public void VetArticleComments_001_Provider() {
     new ArticleContent().clear();
 
@@ -37,8 +37,12 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(video.getUrl());
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
-    article.submitComment();
-    article.verifyCommentVideo(video.getTitle());
+    article
+        .getArticleComment()
+        .waitForVideo()
+        .submitComment();
+
+    Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getTitle()));
   }
 
   @Test(groups = {"VetArticleComments_002"})

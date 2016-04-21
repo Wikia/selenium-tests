@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -106,10 +106,10 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
-  public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp() {
+  public AuthModal clickNextToSignIn() {
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-    return new CreateNewWikiLogInSignUpPageObject(driver);
+    PageObjectLogging.log("submit", "button \"Next\" clicked", true, driver);
+    return new AuthModal();
   }
 
   public void verifyWikiName(String expectedWikiName) {
