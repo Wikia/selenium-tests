@@ -60,7 +60,7 @@ public class HTMLTitleTests extends NewTestTemplate {
       {
           "sktest123",
           "/wiki/Category:Premium",
-          "PremiumVideos - Sktest123 Wiki - Wikia"
+          "Category:Premium - Sktest123 Wiki - Wikia"
       },
       {
           "es.pokemon",
@@ -100,17 +100,17 @@ public class HTMLTitleTests extends NewTestTemplate {
       {
           "mediawiki119",
           "/d/f/203236/latest",
-          ""
+          "Discussions - Mediawiki 1.19 test Wiki - Wikia"
       },
       {
           "mediawiki119",
           "/d/p/2706859396041803285",
-          ""
+          "Discussions - Mediawiki 1.19 test Wiki - Wikia"
       },
       {
           "mediawiki119",
           "/d/u/27334045",
-          ""
+          "Discussions - Mediawiki 1.19 test Wiki - Wikia"
       },
       {
           "dnd4",
