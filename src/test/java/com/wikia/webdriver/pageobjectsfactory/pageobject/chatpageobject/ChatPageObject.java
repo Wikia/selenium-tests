@@ -69,11 +69,11 @@ public class ChatPageObject extends WikiBasePageObject {
   private WebElement userModOptions;
   @FindBy(css = "li.message-wall")
   private WebElement userMessageWallButton;
-  @FindBy(css = "textarea#WallMessageTitle.title")
+  @FindBy(xpath = "//li[@data-id='wall']")
   private WebElement userPageMessageWallTab;
   @FindBy(css = "li.contribs")
   private WebElement userContributionsButton;
-  @FindBy(css = "table.mw-contributions-table")
+  @FindBy(xpath = "//li[@data-id='contribs']")
   private WebElement userPageContributionsTab;
   @FindBy(css = "form#Write.Write.blocked")
   private WebElement userBlockedMessageField;
