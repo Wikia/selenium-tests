@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
@@ -21,9 +20,6 @@ public class ImageServingTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ImageServing_001", "ImageServing", "Smoke3"})
-  @RelatedIssue(issueID = "QAART-725", comment = "the issue is not a functionality failure, "
-                                                 + "but might cause test instability. "
-                                                 + "Track the issue status")
   @Execute(asUser = User.USER)
   public void ImageServing_001_SpecialNewFilesTest() {
     WikiBasePageObject base = new WikiBasePageObject();

@@ -10,7 +10,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparisonMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresentMobile"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestSlotsMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
             <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -81,7 +80,6 @@ public class FacebookTests extends NewTestTemplate {
 
   @Test
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "QAART-727", comment = "Test unstable, test manually or locally")
   public void userCanConnectToFacebookViaUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
