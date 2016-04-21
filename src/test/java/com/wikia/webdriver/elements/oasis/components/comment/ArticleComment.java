@@ -15,7 +15,6 @@ public class ArticleComment extends BasePageObject {
   private WebElement commentIFrame;
   String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
-
   public ArticleComment waitForVideo() {
     driver.switchTo().frame(commentIFrame);
     wait.forElementVisible(By.cssSelector("img"));
