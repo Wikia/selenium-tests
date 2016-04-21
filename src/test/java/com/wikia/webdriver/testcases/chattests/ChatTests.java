@@ -214,7 +214,7 @@ public class ChatTests extends NewTestTemplate {
     ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
     String currentTab = driver.getWindowHandle();
     chatUserFive.clickOnDifferentUser(userOne);
-    chatUserFive.clickOpenUserMessageWall(userOne);
+    chatUserFive.clickOpenUserMessageWall();
     chatUserFive.switchToSecondTab(currentTab);
     chatUserFive.verifyMessageWallOpened(userOne);
   }
@@ -229,7 +229,7 @@ public class ChatTests extends NewTestTemplate {
     ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
     String currentTab = driver.getWindowHandle();
     chatUserFive.clickOnDifferentUser(userOne);
-    chatUserFive.clickOpenUserContributions(userOne);
+    chatUserFive.clickOpenUserContributions();
     chatUserFive.switchToSecondTab(currentTab);
     chatUserFive.verifyUserContributionsOpened(userOne);
   }

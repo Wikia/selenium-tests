@@ -79,6 +79,8 @@ public class ChatPageObject extends WikiBasePageObject {
   private WebElement userBlockedMessageField;
   @FindBy(css = "div.header-column.header-title")
   private WebElement permissionsErrorTitle;
+  @FindBy(xpath = "//h1")
+  private WebElement userNameTitle;
 
   private static final String USER_UNBAN_LINK = "//a[@data-type='ban-undo' and @data-user='%s']";
   private static final String USER_UNBAN_CONFIRM_MESSAGE =
@@ -267,14 +269,14 @@ public class ChatPageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickBanUser", userName + " ban modal is closed", true);
   }
 
-  public void clickOpenUserMessageWall(String userName) {
+  public void clickOpenUserMessageWall() {
     userMessageWallButton.click();
-    PageObjectLogging.log("clickOpenUserMessageWall", userName + " Message wall button is clicked", true);
+    PageObjectLogging.log("clickOpenUserMessageWall", " Message wall button is clicked", true);
   }
 
-  public void clickOpenUserContributions(String userName) {
+  public void clickOpenUserContributions() {
     userContributionsButton.click();
-    PageObjectLogging.log("clickOpenUserContributions", userName + " Cotributions button is clicked", true);
+    PageObjectLogging.log("clickOpenUserContributions", " Cotributions button is clicked", true);
   }
 
   private void clickOnUserOptionsKickButton(String userName) {
@@ -294,6 +296,7 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void verifyMessageWallOpened(String userName) {
     wait.forElementVisible(userPageMessageWallTab);
+    verifyUserIsOnCorrectUserProfilePage(userName);
     PageObjectLogging.log("verifyMessageWallOpened", userName + " user page message wall tab opened", true);
   }
 
@@ -306,9 +309,16 @@ public class ChatPageObject extends WikiBasePageObject {
 
   public void verifyUserContributionsOpened(String userName) {
     wait.forElementVisible(userPageContributionsTab);
+    verifyUserIsOnCorrectUserProfilePage(userName);
     PageObjectLogging.log("openUserContributions", userName + " user page contributions tab opened", true);
   }
 
+  private void verifyUserIsOnCorrectUserProfilePage(String userName) {
+    String userNameOnUserProfilePage = userNameTitle.getText();
+    Assertion.assertEquals(userNameOnUserProfilePage, userName);
+    PageObjectLogging.log("verifyUserIsOnCorrectUserProfilePage", "User is on correct user profile page", true);
+  }
+  
   public void verifyBlockedUserIsUnableWritePrivateMessage(String userName) {
     clickOnDifferentUser(userName);
     waitForElementNotVisibleByElement(privateMassageButton);
