@@ -43,7 +43,6 @@ public class VetArticleCommentsTests extends NewTestTemplate {
         .submitComment();
 
     Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getTitle()));
-
   }
 
   @Test(groups = {"VetArticleComments_002"})
