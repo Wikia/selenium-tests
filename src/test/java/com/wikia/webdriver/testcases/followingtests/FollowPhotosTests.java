@@ -34,7 +34,6 @@ public class FollowPhotosTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})
-  @RelatedIssue(issueID = "QAART-711", comment = "Test manually")
   @Execute(asUser = User.USER)
   public void FollowPhoto_003_verify() {
     new SpecialFollowPageObject(driver).open().verifyFollowedImageVideo(imageName);
