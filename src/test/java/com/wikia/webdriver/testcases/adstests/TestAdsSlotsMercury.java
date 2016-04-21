@@ -6,12 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAd
 
 import org.testng.annotations.Test;
 
-/**
- * URL to DFP: https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=111889452
- * Test all slots on mobile skin with different combinations of slots
- */
-public class TestSlotsMobile extends MobileTestTemplate {
-
+public class TestAdsSlotsMercury extends MobileTestTemplate {
   private static final String CREATIVE_IMAGE_URL = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
   private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
   private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
@@ -19,13 +14,13 @@ public class TestSlotsMobile extends MobileTestTemplate {
   private static final String SRC = "mobile";
 
   @Test(
-      groups = {"MobileAds", "TestAdSlotsMobile_001", "TestAdSlotsMobile"},
+      groups = "AdsSlotsMercury",
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "allSlots"
   )
-  public void TestAllSlotsOnPage(String wikiName,
-                                 String article,
-                                 String adUnit) {
+  public void adsAllSlotsOnPage(String wikiName,
+                                String article,
+                                String adUnit) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
@@ -38,11 +33,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdSlotsMobile_002", "TestAdSlotsMobile"},
+      groups = "AdsSlotsMercury",
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndPrefooterSlots"
   )
-  public void TestLeaderboardAndPrefooterOnPage(String wikiName,
+  public void adsLeaderboardAndPrefooterOnPage(String wikiName,
                                                 String article,
                                                 String adUnit) {
 
@@ -56,11 +51,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "TestAdSlotsMobile_003", "TestAdSlotsMobile"},
+      groups = "AdsSlotsMercury",
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardAndInContentSlots"
   )
-  public void TestLeaderboardAndInContentOnPage(String wikiName,
+  public void adsLeaderboardAndInContentOnPage(String wikiName,
                                                 String article,
                                                 String adUnit) {
 
@@ -74,11 +69,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
   }
 
   @Test(
-      groups = {"MobileAds", "MercuryAds", "TestAdSlotsMobile_004", "TestAdSlotsMobile"},
+      groups = "AdsSlotsMercury",
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "mercuryConsecutivePageViews"
   )
-  public void TestLeaderboardAndPrefooterOnConsecutivePageViews(String wikiName,
+  public void adsLeaderboardAndPrefooterOnConsecutivePageViews(String wikiName,
                                                                 String firstArticle,
                                                                 String secondArticle,
                                                                 String thirdArticle,
