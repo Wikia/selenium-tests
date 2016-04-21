@@ -21,7 +21,7 @@ public class PortableInfoboxObject {
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  @FindBy(css = ".pi-hero .article-image")
+  @FindBy(css = ".portable-infobox-hero-image")
   private WebElement mainImage;
 
   @FindBy(css = ".portable-infobox .pi-hero-title")

@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
@@ -124,24 +123,7 @@ public class HTMLTitleTests extends NewTestTemplate {
       navigate.toUrl(new Page(testCase[0], testCase[1]).getUrl());
       String actualTitle = head.getDocumentTitle();
 
-      Assertion.assertEquals(actualTitle, getFullTitle(testCase[2]));
-    }
-  }
-
-  private String getFullTitle(String title) {
-    String env = Configuration.getEnv();
-
-    switch (env) {
-      case "prod":
-        return title;
-      case "stable":
-        return "stable-s1 - " + title;
-      case "preview":
-        return "staging-s1 - " + title;
-      case "verify":
-        return "staging-s2 - " + title;
-      default:
-        return env + " - " + title;
+      Assertion.assertEquals(actualTitle, testCase[2]);
     }
   }
 }
