@@ -1,11 +1,13 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -143,6 +145,7 @@ public class HTMLTitleTests extends NewTestTemplate {
   }
 
   @Test(groups = "seo_guard")
+  @Execute(asUser = User.USER)
   public void seo_guard() {
     String originalEnv = Configuration.getEnv();
 
