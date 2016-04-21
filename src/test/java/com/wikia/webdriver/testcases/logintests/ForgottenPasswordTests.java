@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,7 +18,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromLoginDropdown")
-  @RelatedIssue(issueID = "QAART-703", comment = "Please test manually ")
   public void anonCanRemindPasswordFromLoginDropdown() {
     String userName = credentials.userNameForgottenPassword;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
