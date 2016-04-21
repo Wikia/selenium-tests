@@ -12,12 +12,12 @@ public class ArticleComment extends BasePageObject {
   @FindBy(css = "#article-comm-submit")
   private WebElement commentSubmitButton;
   @FindBy(css = "#cke_contents_article-comm>iframe")
-  private WebElement commentVideo;
+  private WebElement commentIFrame;
   String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
 
   public ArticleComment waitForVideo() {
-    driver.switchTo().frame(commentVideo);
+    driver.switchTo().frame(commentIFrame);
     wait.forElementVisible(By.cssSelector("img"));
 
     return this;
