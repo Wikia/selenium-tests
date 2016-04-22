@@ -77,7 +77,6 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_004"})
-  @RelatedIssue(issueID = "MAIN-6073")
   public void RTE_004_ExternalLink() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
