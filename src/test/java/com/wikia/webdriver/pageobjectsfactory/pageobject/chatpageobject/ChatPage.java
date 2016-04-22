@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatPageObject extends WikiBasePageObject {
+public class ChatPage extends WikiBasePageObject {
 
   @FindBy(css = "textarea[name='message']")
   private WebElement messageWritingArea;
@@ -89,38 +89,44 @@ public class ChatPageObject extends WikiBasePageObject {
   private static final String PRIVATE_MESSAGE_USER_SELECTOR = "#priv-user-%s";
   private static final String PRIVATE_MESSAGE_SELECTED_USER_SELECTOR =
       "#priv-user-%s.User.selected";
-  private static final String MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
+  private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
   private static final String NOTIFICATION_COUNTER =
       "//span[@class='splotch' and contains(text(), '%s')]";
+  private final String USER_NAME_ON_USER_PROFILE_SCREEN = userNameTitle.getText();
+  private final String USER_MESSAGE_ON_CHAT = String.format("Hello this is test message timestamp: ") + getTimeStamp();
 
-  public ChatPageObject(WebDriver driver) {
-    super();
+  private static final int REGULAR_USER_DROBDOWN_ELEMENTS = 3;
+
+  public ChatPage open(){
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_CHAT);
+
+    return this;
   }
 
-  public void verifyChatPage() {
-    wait.forElementVisible(messageWritingArea);
-    wait.forElementVisible(chatInlineAlert);
-    wait.forElementVisible(sideBar);
-    wait.forElementVisible(userName);
-    wait.forElementVisible(userAvatar);
-    PageObjectLogging.log("verifyChatPage", "Chat page verified", true, driver);
-  }
-
-  public void verifyMessageOnChat(String message) {
-    wait.forElementVisible(By.xpath(String.format(MESSAGE_ON_CHAT, message)));
-    PageObjectLogging.log("VerifyMessageOnChatPresent", "Message: " + message
-        + " is present on chat board", true, driver);
-  }
-
-  public void verifyUserJoinToChatMessage(String userName) {
-    wait.forElementVisible(chatInlineAlertContinued);
-    if (!isElementOnPage(By.cssSelector(String.format(USER_SELECTOR, userName)))) {
-      PageObjectLogging.log("VerifyUserJoinsChat", "User: " + userName
-          + " not visible on chat's guests list", false);
-      throw new NoSuchElementException("User: " + userName + " not visible on chat's guests list");
+  public boolean isUserOnChat() {
+    try {
+      return chatInlineAlert.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
     }
-    PageObjectLogging.log("verifyUserJoinToChatMessage", userName + " has joined the chat.", true,
-        driver);
+  }
+
+  public boolean isMessageOnChat() {
+    WebElement postedMessage = (WebElement) By.xpath(String.format(PATH_MESSAGE_ON_CHAT, USER_MESSAGE_ON_CHAT));
+    try {
+      return postedMessage.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
+  }
+
+  public boolean isUserWelcomeMessageDisplayed(String userName) {
+    WebElement welcomeMessage = (WebElement) By.cssSelector(String.format(USER_SELECTOR, userName));
+    try {
+      return welcomeMessage.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
   public void verifyUserIsVisibleOnContactsList(String userName) {
@@ -129,20 +135,28 @@ public class ChatPageObject extends WikiBasePageObject {
         + " is visible on contacts list", true, driver);
   }
 
-  public void verifyPrivateMessageHeader() {
-    wait.forElementVisible(privateMessagesHeader);
-    PageObjectLogging.log("verifyPrivateMessageHeader", "private message header is visible", true, driver);
+  public boolean isPrivateMessageHeaderDispayed() {
+    try {
+      return privateMessagesHeader.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
-  public void verifyPermissionsErrorTitle() {
-    wait.forElementVisible(permissionsErrorTitle);
-    PageObjectLogging.log("verifyPermissionsErrorTitle", "permission error header is visible", true, driver);
+  public boolean isPermissionsErrorTitleDisplayed() {
+    try {
+      return permissionsErrorTitle.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
-  public void verifyPrivateMessageNotification() {
-    wait.forElementVisible(privateMessageNotification);
-    PageObjectLogging.log("verifyPrivateMessageNotification",
-        "private message notification is visible", true, driver);
+  public boolean isPrivateMessageNotificationDisplayed() {
+    try {
+      return privateMessageNotification.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
   public void verifyPrivateMessageNotification(int notificationCount) {
@@ -157,9 +171,20 @@ public class ChatPageObject extends WikiBasePageObject {
         "private message section is highlighted", true, driver);
   }
 
-  public void verifyPrivateChatTitle() {
-    wait.forElementVisible(privateChatHeader);
-    PageObjectLogging.log("verifyPrivateChatTitle", "private chat title is correct", true, driver);
+  public boolean isPrivateMessageHiglighted(String userName){
+    try {
+      return userWebElement(userName, PRIVATE_MESSAGE_SELECTED_USER_SELECTOR).isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
+  }
+
+  public boolean isPrivateChatOpen() {
+    try {
+      return privateChatHeader.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
   public void verifyMainChatIsHighlighted() {
@@ -168,18 +193,12 @@ public class ChatPageObject extends WikiBasePageObject {
             "private message section is highlighted", true);
   }
 
-  public void verifyNormalUserDropdown(String userName) {
-    // This check is needed in case some of the previous tests failed
-    // We need to do the clean up in this place - allow provided user to send private messages
-    if (checkIfPrivateMessagesNotAllowed(userName)) {
-      allowPrivateMessageFromUser(userName);
+  public boolean isRegularUserDropdownDisplayed() {
+    if(userDropDownActionsElements.size() == REGULAR_USER_DROBDOWN_ELEMENTS){
+      return true;
+    }else{
+      return false;
     }
-    Assertion.assertNumber(userDropDownActionsElements.size(), 3,
-        "Checking number of elements in the dropDown");
-    Assertion
-        .assertEquals(userDropDownActionsElements.get(0).getAttribute("class"), "message-wall");
-    Assertion.assertEquals(userDropDownActionsElements.get(1).getAttribute("class"), "contribs");
-    Assertion.assertEquals(userDropDownActionsElements.get(2).getAttribute("class"), "private");
   }
 
   public void verifyBlockingUserDropdown(String userName) {
@@ -218,12 +237,10 @@ public class ChatPageObject extends WikiBasePageObject {
     Assertion.assertEquals(adminDropDownActionsElements.get(2).getAttribute("class"), "ban");
   }
 
-  public void writeOnChat(String message) {
+  public void writeOnChat() {
     wait.forElementVisible(chatLoadedIndicator);
-    messageWritingArea.sendKeys(message);
+    messageWritingArea.sendKeys(USER_MESSAGE_ON_CHAT);
     new Actions(driver).sendKeys(messageWritingArea, Keys.ENTER).perform();
-    PageObjectLogging.log("writeOnChat", "Message: " + message + " written", true, driver);
-    verifyMessageOnChat(message);
   }
 
   public void selectPrivateMessageToUser(String userName) {
@@ -248,9 +265,7 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void clickOnUserInPrivateMessageSection(String userName) {
-    WebElement privateMessagesUserElement =
-        getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
-    privateMessagesUserElement.click();
+    userOnPrivateMessageSection(userName).click();
     PageObjectLogging.log("clickOnUserInPrivateMessageSection", "private messages user " + userName
         + " is clicked", true);
   }
@@ -279,9 +294,9 @@ public class ChatPageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickOpenUserContributions", " Cotributions button is clicked", true);
   }
 
-  private void clickOnUserOptionsKickButton(String userName) {
+  public void clickOnUserOptionsKickButton() {
     kickUserButton.click();
-    PageObjectLogging.log("clickOnUserOptionsKikButton", userName + " kik user button is clicked", true);
+    PageObjectLogging.log("clickOnUserOptionsKikButton", " kick user button is clicked", true);
   }
 
   public void switchToSecondTab(String firstTab){
@@ -289,40 +304,59 @@ public class ChatPageObject extends WikiBasePageObject {
     for (String window:openTabs) {
       if (window != firstTab) {
         driver.switchTo().window(window);
-        PageObjectLogging.log("switchToSecondTab", userName + " has switched to the second tab", true);
       }
+    }
+
+  }
+
+  public boolean isMessageWallOpened(String userName) {
+    try {
+      Assertion.assertEquals(userName, USER_NAME_ON_USER_PROFILE_SCREEN);
+      return userPageMessageWallTab.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
     }
   }
 
-  public void verifyMessageWallOpened(String userName) {
-    wait.forElementVisible(userPageMessageWallTab);
-    verifyUserIsOnCorrectUserProfilePage(userName);
-    PageObjectLogging.log("verifyMessageWallOpened", userName + " user page message wall tab opened", true);
+  public boolean isPrivateMessageHederDisplayed() {
+    try {
+      return privateMessagesHeader.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
-  public void kickUserFromChat(String userName) {
-    clickOnDifferentUser(userName);
-    clickOnUserOptionsKickButton(userName);
-    waitForElementNotVisibleByElement(userOptions);
-    PageObjectLogging.log("kickUserFromChat", userName + " kick user button has been clicked", true);
+  public boolean isContributionsPageOpened (String userName) {
+    try {
+      Assertion.assertEquals(userName, USER_NAME_ON_USER_PROFILE_SCREEN);
+      return userPageContributionsTab.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
-  public void verifyUserContributionsOpened(String userName) {
-    wait.forElementVisible(userPageContributionsTab);
-    verifyUserIsOnCorrectUserProfilePage(userName);
-    PageObjectLogging.log("openUserContributions", userName + " user page contributions tab opened", true);
+  public boolean isUserKickedFromChat() {
+    try {
+      return userBlockedMessageField.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
-  private void verifyUserIsOnCorrectUserProfilePage(String userName) {
-    String userNameOnUserProfilePage = userNameTitle.getText();
-    Assertion.assertEquals(userNameOnUserProfilePage, userName);
-    PageObjectLogging.log("verifyUserIsOnCorrectUserProfilePage", "User is on correct user profile page", true);
+  public boolean isBlockedUserAbleToWritePrivateMesage() {
+    try {
+      return privateMassageButton.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
-  
-  public void verifyBlockedUserIsUnableWritePrivateMessage(String userName) {
-    clickOnDifferentUser(userName);
-    waitForElementNotVisibleByElement(privateMassageButton);
-    PageObjectLogging.log("Private messages blocked", userName + " can not write private message", true);
+
+  public boolean isBlockPrivateMessageButtonDisplayed() {
+    try {
+      return blockPrivateMassageButton.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
   public void verifyStaffOptionsNotDisplayed(String userName){
@@ -331,30 +365,28 @@ public class ChatPageObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyStaffOptionsNotDisplayed", userName + " mod options not displayed", true);
   }
 
-  public void verifyUserCanNotBlockPrivateMessagesFromStaff(String userName){
-    clickOnDifferentUser(userName);
-    selectPrivateMessageToUser(userName);
-    openUserDropDownInPrivateMessageSection(userName);
+  public boolean verifyUserCanNotBlockPrivateMessagesFromStaff(String userName){
+
+
     waitForElementNotVisibleByElement(blockPrivateMassageButton);
     PageObjectLogging.log("verifyUserCanNotBlockPrivateMessagesFromStaff",
             userName + " can not block private messages from staff", true);
   }
 
-  private void verifyChatUnbanMessage(String userName) {
-    wait.forElementVisible(By.xpath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName)));
+  public boolean isChatUnbanMessageDispalyed() {
+    WebElement unBanMessage = (WebElement) By.xpath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName));
+    try {
+      return unBanMessage.isDisplayed();
+    }catch (ElementNotFoundException e){
+      return false;
+    }
   }
 
   public void unBanUser(String userName) {
     WebElement unbanLink = driver.findElement(By.xpath(String.format(USER_UNBAN_LINK, userName)));
     wait.forElementVisible(unbanLink);
     unbanLink.click();
-    verifyChatUnbanMessage(userName);
     PageObjectLogging.log("unBanUser", userName + " is no longer banned", true);
-  }
-
-  public void verifyUserIsKickedFromChat(String userName) {
-    wait.forElementVisible(userBlockedMessageField);
-    PageObjectLogging.log("verifyUserIsKickedFromChat", userName + " is kiked from the chat", true);
   }
 
   public void clickOnDifferentUser(String userName) {
@@ -388,12 +420,10 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void openUserDropDownInPrivateMessageSection(String userName) {
-    WebElement userOnPrivateMessagesList =
-        getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
     boolean hidden = !userStatsMenu.isDisplayed();
     int i = 0;
     while (hidden) {
-      userOnPrivateMessagesList.click();
+      userWebElement(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
       if (userStatsMenu.isDisplayed() || i >= 10) {
         hidden = false;
       }
@@ -404,6 +434,12 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void blockPrivateMessageFromUser(String userName) {
+    openUserDropDownInPrivateMessageSection(userName);
+    blockPrivateMassageButton.click();
+    waitForElementNotVisibleByElement(userStatsMenu);
+  }
+
+  public void unBlockPrivateMessageFromUser(String userName) {
     openUserDropDownInPrivateMessageSection(userName);
     blockPrivateMassageButton.click();
     waitForElementNotVisibleByElement(userStatsMenu);
@@ -441,14 +477,23 @@ public class ChatPageObject extends WikiBasePageObject {
     return isElementOnPage(allowPrivateMassageButton);
   }
 
-  private WebElement getElementForUser(String userName, String selector) {
-    String userCss = String.format(selector, userName);
+  private WebElement getElementForUser(String userName) {
+    WebElement kk = (WebElement) By.cssSelector(String.format(PRIVATE_MESSAGE_USER_SELECTOR, userName));
     wait.forElementVisible(By.cssSelector(userCss));
     return driver.findElement(By.cssSelector(userCss));
   }
 
-  public String generateMessageFromUser(String userName) {
-    return String.format("Hello this is %s timestamp: ", userName) + getTimeStamp();
+  private WebElement userWebElement(String userName, String message) {
+    WebElement userOnPrivateSection = (WebElement) By.cssSelector(String.format(message, userName));
+    return userOnPrivateSection;
+  }
+
+  public boolean isUserInPrivateSectionDisplayed(String userName) {
+    try {
+      return userWebElement(userName, PRIVATE_MESSAGE_USER_SELECTOR).isDisplayed();
+    } catch (ElementNotFoundException e) {
+      return false;
+    }
   }
 
   public List<String> sendMultipleMessagesFromUser(String userName, int messagesCount) {
@@ -462,7 +507,6 @@ public class ChatPageObject extends WikiBasePageObject {
   }
 
   public void verifyMultiplePrivateMessages(List<String> messagesReceived, String senderUser) {
-    verifyPrivateMessageHeader();
     verifyPrivateMessageNotification(messagesReceived.size());
     clickOnUserInPrivateMessageSection(senderUser);
     for (String message : messagesReceived) {
