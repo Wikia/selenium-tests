@@ -5,9 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.Sidebar;
-import com.wikia.webdriver.elements.mercury.components.Spinner;
-import com.wikia.webdriver.elements.mercury.components.Subhead;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
@@ -62,15 +59,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void savingTemplate() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
+    String templateName = "InfoboxBuilderSavingTemplate";
 
-    builderPage.openExisting("InfoboxBuilderSavingTemplate").selectRowWithIndex(0);
+    builderPage.openExisting(templateName).selectRowWithIndex(0);
     builderSidebar.clickDeleteButton();
     builderSidebar.addRowComponent();
     new Subhead().clickPublish();
 
     Assertion.assertTrue(new Spinner().isSpinnerPresent());
 
-    Assertion.assertEquals("infoboxbuildersavingtemplate",
+    Assertion.assertEquals(templateName.toLowerCase(),
                            new TemplatePage().getHeaderText().toLowerCase());
   }
 

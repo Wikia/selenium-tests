@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components;
+package com.wikia.webdriver.testcases.infoboxbuilder;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;

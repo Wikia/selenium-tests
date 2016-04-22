@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components;
+package com.wikia.webdriver.testcases.infoboxbuilder;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
@@ -40,9 +40,10 @@ public class Sidebar extends WikiBasePageObject {
   }
 
   public boolean isInputFieldPresent() {
+    wait.forXMilliseconds(5000);
     wait.forElementVisible(sidebarInputField);
 
-    return sidebarInputField.isDisplayed();
+    return true;
   }
 
   public boolean isTitleUsingArticleName() {
@@ -62,9 +63,10 @@ public class Sidebar extends WikiBasePageObject {
   }
 
   public boolean areAddButtonsPresent() {
+    wait.forXMilliseconds(5000);
     wait.forElementVisible(componentsButtonsWrapper);
 
-    return componentsButtonsWrapper.isDisplayed();
+    return true;
   }
 
   public Sidebar addRowComponent() {
