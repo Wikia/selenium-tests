@@ -20,9 +20,6 @@ public class NavigationTest extends NewTestTemplate {
   private TopBar topBar;
   private Navigation navigation;
 
-  private final static String SEARCH_PASS = "Gallery";
-  private final static String SEARCH_FAIL = "tee";
-
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
@@ -38,27 +35,6 @@ public class NavigationTest extends NewTestTemplate {
     navigation.openSubMenu(1);
     navigation.closeSubMenu();
     topBar.closeNavigation();
-  }
-
-  @Test(groups = "mercury_navigation_validSearchPhraseTriggersSuggestionThatCanBeOpened")
-  public void mercury_navigation_validSearchPhraseTriggersSuggestionThatCanBeOpened() {
-    init();
-
-    topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.typeInSearch(SEARCH_PASS);
-    navigation.selectSearchSuggestion(1);
-  }
-
-  @Test(groups = "mercury_navigation_invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled")
-  public void mercury_navigation_invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled() {
-    init();
-
-    topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.typeInSearch(SEARCH_FAIL);
-    navigation.seeNoSearchResults();
-    navigation.cancelSearch();
   }
 
   @Test(groups = "mercury_navigation_navigateToPageUsingLocalNavigation")
