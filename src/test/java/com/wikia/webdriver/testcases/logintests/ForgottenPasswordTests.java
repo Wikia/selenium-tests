@@ -72,6 +72,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
+  @RelatedIssue(issueID = "MAIN-6986", comment = "Test manually")
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
