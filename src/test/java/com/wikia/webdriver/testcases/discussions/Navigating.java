@@ -67,6 +67,7 @@ public class Navigating extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "MAIN-6970")
   public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
     appleLinkRedirectsProperly();
   }
