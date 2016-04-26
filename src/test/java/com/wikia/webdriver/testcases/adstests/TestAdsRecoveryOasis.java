@@ -26,20 +26,16 @@ public class TestAdsRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryOasis"
   )
   public void adsRecoveryOasis(Page page, Map<String, Object> slotInfo) {
-
-    adsSlotSizes(page, slotInfo);
-  }
-
-  private void adsSlotSizes(Page page, Map<String, Object> slotInfo) {
     String slotName = slotInfo.get("slotName").toString();
     String url = urlBuilder.getUrlForPage(page);
+
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, url, DESKTOP_SIZE);
 
     String slotSelector = AdsContent.getSlotSelector(slotName);
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
 
-    new AdsBaseObject(driver, url, DESKTOP_SIZE)
-        .triggerAdSlot(slotName)
+    adsBaseObject.triggerAdSlot(slotName)
         .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
-        .waitForSlotExpanded(slot);
+        .verifyExpandedAdVisibleInSlot(slotSelector, slot);
   }
 }
