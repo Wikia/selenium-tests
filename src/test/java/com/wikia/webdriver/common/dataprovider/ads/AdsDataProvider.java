@@ -1026,7 +1026,6 @@ public class AdsDataProvider {
     };
   }
 
-
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
