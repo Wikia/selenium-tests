@@ -1,17 +1,16 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import java.util.List;
-
 import com.wikia.webdriver.common.core.Assertion;
-import org.testng.annotations.Test;
 import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class ChatTests extends NewTestTemplate {
 
@@ -34,7 +33,9 @@ public class ChatTests extends NewTestTemplate {
   private String userStaff = credentials.userNameStaff;
   private String userStaffPassword = credentials.passwordStaff;
 
-  private final String CURRENT_BROWSER_TAB = driver.getWindowHandle();
+  private final String currentBrowserTab() {
+    return driver.getWindowHandle();
+  }
 
   private ChatPage openChatForUser(String userName, String password) {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -42,21 +43,7 @@ public class ChatTests extends NewTestTemplate {
     return new ChatPage().open();
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = "ChatTests")
-  @RelatedIssue(issueID = "MAIN-6071")
-  public void twoUserEnterChat() {
-    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
-
-    switchToWindow(1);
-    new SpecialVersionPage().open();
-    openChatForUser(userTwo, userTwoPassword);
-
-    switchToWindow(0);
-    Assertion.assertTrue(chatUserOne.isUserWelcomeMessageDisplayed(userTwo), "WELCOME MESSAGE IS NOT DISPLAYED");
-  }
-
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void dropDownMenuForRegularUser() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -69,7 +56,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isRegularUserDropdownDisplayed(), "REGULAR USER DROBDOWN IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void verifySwitchingBetweenMainAndPrivateSections() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -82,14 +69,15 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     Assertion.assertTrue(chatUserOne.isMessageOnChat(), "MESAGE ON CHAT IS NOT DISPLAYED");
     chatUserOne.selectPrivateMessageToUser(userTwo);
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userTwo), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
     Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
     Assertion.assertTrue(chatUserOne.isMessageOnChat(), "MESAGE ON CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
-  public void userCanSendPrivateMessage() {
+  public void userCanSendMessageOnWallAndPrivate() {
     ChatPage chatUserThree = openChatForUser(userThree, userThreePassword);
 
     switchToWindow(1);
@@ -111,7 +99,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserThree.isMessageOnChat(), "MESAGE ON PRIVATE CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void usreCanSendMultipleNotifications() {
     ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
@@ -131,10 +119,11 @@ public class ChatTests extends NewTestTemplate {
         chatUserSix.sendMultipleMessagesFromUser(userSix, NUMBER_OF_PRIVATE_MESSAGES);
 
     switchToWindow(0);
-    chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);
+    Assertion.assertTrue(chatUserFive.isPricvateNotificationCountDisplayed(messagesSent.size()),
+            "PRIVATE MESSAGES COUNTER IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void staffCanBanUser() {
     ChatPage userToBeBaned = openChatForUser(userToBeBanned, userToBeBannedPassword);
@@ -153,7 +142,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(userToBeBaned.isChatUnbanMessageDispalyed(), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void blockedUserCanNotCreatePrivateMessage() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -182,7 +171,7 @@ public class ChatTests extends NewTestTemplate {
 
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void regularUserCanOpenMessageWall() {
     openChatForUser(userOne, userOnePassword);
@@ -192,11 +181,11 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
     chatUserFive.clickOnDifferentUser(userOne);
     chatUserFive.clickOpenUserMessageWall();
-    chatUserFive.switchToSecondTab(CURRENT_BROWSER_TAB);
+    chatUserFive.switchToSecondTab(currentBrowserTab());
     Assertion.assertTrue(chatUserFive.isMessageWallOpened(userOne), "MESSAGE WALL TAB IS NOT OPENED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void regularUserCanOpenContributions() {
     openChatForUser(userOne, userOnePassword);
@@ -206,11 +195,11 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
     chatUserFive.clickOnDifferentUser(userOne);
     chatUserFive.clickOpenUserContributions();
-    chatUserFive.switchToSecondTab(CURRENT_BROWSER_TAB);
+    chatUserFive.switchToSecondTab(currentBrowserTab());
     Assertion.assertTrue(chatUserFive.isContributionsPageOpened(userOne), "CONTRIBUTION TAB IS NOT OPENED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void userCanNotBlockPrivateMessagesFromStaff() {
     openChatForUser(userStaff, userStaffPassword);
@@ -224,7 +213,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertFalse(chatUserOne.isBlockPrivateMessageButtonDisplayed(), "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void userCanBeKickedOutFromChat() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -239,7 +228,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserKickedFromChat(), "USER IS NOT KICKED FROM CHAT");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
+  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void bannedUserCanNotEnterTheChat() {
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
