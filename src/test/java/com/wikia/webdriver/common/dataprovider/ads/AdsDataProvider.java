@@ -1026,6 +1026,7 @@ public class AdsDataProvider {
     };
   }
 
+
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
@@ -1189,6 +1190,28 @@ public class AdsDataProvider {
                 .put("src", "gpt")
                 .build()
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryOasis() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/Recovery/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.TOP_LB)
+                .put("lineItemId", 272935812)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("project43", "SyntheticTests/Recovery/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MEDREC)
+                .put("lineItemId", 272935812)
+                .put("src", "gpt")
+                .build()
+        }
     };
   }
 
