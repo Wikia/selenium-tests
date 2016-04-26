@@ -1,0 +1,20 @@
+package com.wikia.webdriver.common.templates.fandom;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
+
+public class FandomTestTemplate extends CoreTestTemplate {
+
+  private String mainURL = "http://%s:%s@wikiaqa.wpengine.com";
+
+  @Override
+  protected void prepareURLs() {
+
+  }
+
+  @Override
+  protected void loadFirstPage() {
+    driver.navigate().to(String.format(mainURL, Configuration.getCredentials().httpAuthName,
+        Configuration.getCredentials().httpAuthPass));
+  }
+}
