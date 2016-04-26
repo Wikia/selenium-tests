@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.logintests;
 
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -72,6 +73,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
+  @RelatedIssue(issueID = "MAIN-6986", comment = "Test manually")
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
