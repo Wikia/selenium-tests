@@ -428,12 +428,12 @@ public class MobileAdsDataProvider {
   public static Object[][] adsSlotSizeMercury() {
     return new Object[][]{
         {
-            new Page("adtest", "SyntheticTests/MobileLeaderboard"),
+            new Page("project43", "SyntheticTests/MobileLeaderboard"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILETOP_LB)
                 .put("slotSize", new Dimension(320, 100))
-                .put("lineItemId", 136987812)
+                .put("lineItemId", 272132532)
                 .put("src", "mobile")
                 .build()
         },
