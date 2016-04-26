@@ -12,6 +12,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class TopBar extends WikiBasePageObject {
 
+  @FindBy(css = ".site-head")
+  private WebElement navBar;
+
+  @FindBy(css = ".wikia-logo")
+  private WebElement logo;
+
   @FindBy(css = ".side-nav-toggle")
   private WebElement openNavButton;
 
@@ -49,4 +55,17 @@ public class TopBar extends WikiBasePageObject {
 
     return new Navigation(driver);
   }
+
+  public boolean isNavigationBarVisible() {
+    wait.forElementVisible(navBar);
+
+    return true;
+  }
+
+  public boolean isLogoVisible() {
+    wait.forElementVisible(logo);
+
+    return true;
+  }
+
 }
