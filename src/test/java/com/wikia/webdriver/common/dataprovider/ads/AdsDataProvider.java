@@ -1196,7 +1196,7 @@ public class AdsDataProvider {
   public static Object[][] adsAdvertisementText() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
         }
     };
