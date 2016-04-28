@@ -18,9 +18,6 @@ public class Navigation {
   @FindBy(css = ".side-nav-menu__item.back")
   private WebElement backButton;
 
-  @FindBy(css = ".side-search__container input")
-  private WebElement searchInput;
-
   @FindBy(css = ".side-nav-menu__item.menu")
   private List<WebElement> subMenuLinks;
 
@@ -30,20 +27,11 @@ public class Navigation {
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
-  @FindBy(css = ".side-search__clear")
-  private WebElement clearSearchPhraseButton;
-
   private By localNavMenu = By.cssSelector(".local-nav-menu");
-  private By cancelSearchButton = By.cssSelector(".side-search__cancel");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
-  private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");
-
-  private String searchResultClass = ".side-search__results li.mw-content a";
-
   private WebDriver driver;
   private Wait wait;
   private Loading loading;
-
 
   public Navigation(WebDriver driver) {
     this.driver = driver;
@@ -61,57 +49,10 @@ public class Navigation {
     return this;
   }
 
-  public Navigation cancelSearch() {
-    PageObjectLogging.logInfo("Cancel search");
-    WebElement cancelButton = driver.findElement(cancelSearchButton);
-    wait.forElementClickable(cancelButton);
-    cancelButton.click();
-
-    PageObjectLogging.logInfo("Cancel search button is not present");
-    wait.forElementNotPresent(cancelSearchButton);
-
-    PageObjectLogging.logInfo("Local nav is present");
-    wait.forElementPresent(localNavMenu);
-
-    return this;
-  }
-
-  public Navigation seeNoSearchResults() {
-    PageObjectLogging.logInfo("Loading search results indicator is present");
-    wait.forElementPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("Loading search results indicator is not present");
-    wait.forElementNotPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("No search results are present");
-    wait.forElementNotPresent(By.cssSelector(searchResultClass));
-
-    return this;
-  }
-
   public Navigation closeSubMenu() {
     PageObjectLogging.logInfo("Close sub-menu");
     wait.forElementClickable(backButton);
     backButton.click();
-
-    return this;
-  }
-
-  public Navigation selectSearchSuggestion(int index) {
-    String oldUrl = driver.getCurrentUrl();
-
-    PageObjectLogging.logInfo("Select search suggestion no.: " + index);
-    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
-    wait.forElementClickable(searchResult);
-    searchResult.click();
-    loading.handleAsyncPageReload();
-
-    PageObjectLogging.logInfo("Navigation is closed");
-    wait.forElementNotVisible(navigationComponent);
-
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search suggestion failed");
-    PageObjectLogging.logInfo("Successfully navigated to selected search suggestion");
 
     return this;
   }
@@ -141,25 +82,6 @@ public class Navigation {
                           "Navigation to selected page failed");
     PageObjectLogging.logInfo("Successfully navigated to selected page");
 
-
-    return this;
-  }
-
-  public Navigation typeInSearch(String text) {
-    PageObjectLogging.logInfo("Local nav is not present");
-    wait.forElementClickable(searchInput);
-    searchInput.click();
-    wait.forElementNotPresent(localNavMenu);
-
-    PageObjectLogging.logInfo("Search for query: " + text);
-    searchInput.sendKeys(text);
-
-    return this;
-  }
-
-  public Navigation navigateToPage(String pageName) {
-    typeInSearch(pageName);
-    selectSearchSuggestion(0);
 
     return this;
   }

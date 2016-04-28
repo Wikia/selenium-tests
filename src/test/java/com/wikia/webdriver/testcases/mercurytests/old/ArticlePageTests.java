@@ -273,8 +273,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
 
-    topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.COLON.substring(6));
+    topBar.openSearch().navigateToPage(MercurySubpages.COLON.substring(6));
 
     result = driver.getCurrentUrl().contains(encodedColonUrl);
     PageObjectLogging.log(
@@ -292,8 +291,7 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    topBar.openNavigation();
-    navigation.navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
+    topBar.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
     PageObjectLogging.log(

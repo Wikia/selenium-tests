@@ -7,16 +7,10 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.pages.MainPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -41,18 +35,6 @@ public class NavigationTest extends NewTestTemplate {
     navigation.openSubMenu(1);
     navigation.closeSubMenu();
     topBar.closeNavigation();
-  }
-
-  @Test(groups = "mercury_navigation_navigateToPageUsingSearch")
-  public void mercury_navigation_navigateToPageUsingSearch() {
-    String searchingPhrase = "Infobox";
-    init();
-
-    topBar.openSearch();
-    navigation.typeInSearch(searchingPhrase);
-    navigation.selectSearchSuggestion(0);
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(searchingPhrase));
   }
 
   @Test(groups = "mercury_navigation_topBarIsAlwaysVisible")

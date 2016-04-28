@@ -57,8 +57,7 @@ public class TwitterTests extends NewTestTemplate {
 
     widget.create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openSearch();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -69,10 +68,8 @@ public class TwitterTests extends NewTestTemplate {
 
     widget.create(TWITTER_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(TWITTER_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openSearch();
-    navigation.navigateToPage(QUERY_1);
-    topBar.openSearch();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_1);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
