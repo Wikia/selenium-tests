@@ -97,7 +97,7 @@ public class ChatTestsStaff extends NewTestTemplate {
     chatUserOne.verifyMessageOnChat(userTwoPrivateMessage);
   }
 
-  @DontRun(env = {"prod"})
+  @DontRun(env = {"prod", "preview"})
   @Test(groups = {"ChatTestsStaff_004", "ChatStaff", "ChatTests"})
   public void ChatTestsStaff_004_basicUserChatFails() {
     openChatForUser(credentials.userName10, credentials.password10);
