@@ -22,9 +22,8 @@ public class TestAdsDisableGpt extends TemplateNoFirstLoad {
                                  String article,
                                  String instantGlobals,
                                  String slotName,
-                                 String providers,
                                  String disasterProviders) {
-    adsDisableGpt(wikiName, article, instantGlobals, slotName, providers, disasterProviders);
+    adsDisableGpt(wikiName, article, instantGlobals, slotName, disasterProviders);
   }
 
   @Test(
@@ -36,25 +35,22 @@ public class TestAdsDisableGpt extends TemplateNoFirstLoad {
                                    String article,
                                    String instantGlobals,
                                    String slotName,
-                                   String providers,
                                    String disasterProviders) {
-    adsDisableGpt(wikiName, article, instantGlobals, slotName, providers, disasterProviders);
+    adsDisableGpt(wikiName, article, instantGlobals, slotName, disasterProviders);
   }
 
   private void adsDisableGpt(String wikiName,
                              String article,
                              String instantGlobals,
                              String slotName,
-                             String providers,
                              String disasterProviders) {
 
     String url = urlBuilder.getUrlForPath(wikiName, article);
     if (StringUtils.isNotEmpty(instantGlobals)) {
       url = urlBuilder.appendQueryStringToURL(url, instantGlobals);
+      url = urlBuilder.appendQueryStringToURL(url, DISASTER_RECOVERY_URL_PARAM);
     }
     new AdsBaseObject(driver, url)
-        .verifyProvidersChain(slotName, providers)
-        .addToUrl(DISASTER_RECOVERY_URL_PARAM)
         .verifyProvidersChain(slotName, disasterProviders);
   }
 }

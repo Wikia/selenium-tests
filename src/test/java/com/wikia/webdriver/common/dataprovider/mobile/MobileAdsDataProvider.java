@@ -401,7 +401,6 @@ public class MobileAdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             "MOBILE_TOP_LEADERBOARD",
-            "DirectGptMobile; RemnantGptMobile",
             ""
         },
         {
@@ -409,7 +408,6 @@ public class MobileAdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
             "MOBILE_TOP_LEADERBOARD",
-            "DirectGptMobile; RemnantGptMobile, RubiconFastlane",
             "RubiconFastlane"
         },
     };

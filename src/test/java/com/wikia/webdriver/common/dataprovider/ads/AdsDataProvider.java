@@ -759,7 +759,6 @@ public class AdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             "TOP_LEADERBOARD",
-            "DirectGpt; RemnantGpt; Liftium",
             "Liftium"
         },
         {
@@ -767,7 +766,6 @@ public class AdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
             "TOP_LEADERBOARD",
-            "DirectGpt; RemnantGpt; RubiconFastlane",
             "RubiconFastlane"
         },
     };
