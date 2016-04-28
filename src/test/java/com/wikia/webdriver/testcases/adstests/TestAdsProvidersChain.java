@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-public class TestAdsProvidersChainOasis extends TemplateNoFirstLoad {
+public class TestAdsProvidersChain extends TemplateNoFirstLoad {
 
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
   private static final Dimension DESKTOP_SIZE = new Dimension(1900, 900);

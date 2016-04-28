@@ -35,7 +35,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
