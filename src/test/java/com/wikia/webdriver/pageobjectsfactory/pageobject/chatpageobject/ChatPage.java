@@ -91,8 +91,7 @@ public class ChatPage extends WikiBasePageObject {
   private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
   private static final String NOTIFICATION_COUNTER =
           "//span[@class='splotch' and contains(text(), '%s')]";
-  private final String USER_NAME_ON_PROFILE_SCREEN = userNameTitle.getText();
-  private final String USER_MESSAGE_ON_CHAT = String.format("Hello this is test message timestamp: ") + getTimeStamp();
+  private final String USER_MESSAGE_ON_CHAT = "Hello this is test message timestamp: " + getTimeStamp();
 
   private static final int REGULAR_USER_DROPDOWN_ELEMENTS = 3;
 
@@ -110,8 +109,8 @@ public class ChatPage extends WikiBasePageObject {
     return driver.findElement(By.cssSelector(String.format(USER_SELECTOR, userName)));
   }
 
-  private WebElement userPostedMessage() {
-    return driver.findElement(By.xpath(String.format(PATH_MESSAGE_ON_CHAT, USER_MESSAGE_ON_CHAT)));
+  private WebElement userPostedMessage(String message) {
+    return driver.findElement(By.xpath(String.format(PATH_MESSAGE_ON_CHAT, message)));
   }
 
   private WebElement userPrivateMessageNotification(int notificationCount) {
@@ -128,64 +127,81 @@ public class ChatPage extends WikiBasePageObject {
 
   public boolean isUserOnChat() {
     try {
+      wait.forElementVisible(chatInlineAlert);
       return chatInlineAlert.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
-  public boolean isMessageOnChat() {
+  public boolean isMessageOnChat(String message) {
     try {
-      return userPostedMessage().isDisplayed();
-    } catch (ElementNotFoundException e) {
+      WebElement userPostedMessage = userPostedMessage(message);
+      wait.forElementVisible(userPostedMessage);
+      return userPostedMessage.isDisplayed();
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isUserWelcomeMessageDisplayed(String userName) {
     try {
+      wait.forElementVisible(userWelcomeMessage(userName));
       return userWelcomeMessage(userName).isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isPrivateMessageHeaderDispayed() {
     try {
+      wait.forElementVisible(privateMessagesHeader);
       return privateMessagesHeader.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isPermissionsErrorTitleDisplayed() {
     try {
+      wait.forElementVisible(permissionsErrorTitle);
       return permissionsErrorTitle.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isPrivateMessageNotificationDisplayed() {
     try {
+      wait.forElementVisible(privateMessageNotification);
       return privateMessageNotification.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
-  public boolean isPricvateNotificationCountDisplayed(int notificationCount) {
+  public boolean isPrivateNotificationCountDisplayed(int notificationCount) {
     try {
+      wait.forElementVisible(userPrivateMessageNotification(notificationCount));
       return userPrivateMessageNotification(notificationCount).isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public boolean isPrivateMessageButtonDisplayed() {
+    try {
+      return privateMassageButton.isDisplayed();
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isPrivateChatOpen() {
     try {
+      wait.forElementVisible(privateChatHeader);
       return privateChatHeader.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
@@ -201,65 +217,70 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isUserInPrivateSectionDisplayed(String userName) {
     try {
       return userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isChatUnbanMessageDispalyed() {
     try {
+      wait.forElementVisible(getUserUnbanMessage());
       return getUserUnbanMessage().isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isMessageWallOpened(String userName) {
     try {
-      Assertion.assertEquals(userName, USER_NAME_ON_PROFILE_SCREEN);
+      Assertion.assertEquals(userName, userNameTitle.getText());
       return userPageMessageWallTab.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isContributionsPageOpened(String userName) {
     try {
-      Assertion.assertEquals(userName, USER_NAME_ON_PROFILE_SCREEN);
+      Assertion.assertEquals(userName, userNameTitle.getText());
       return userPageContributionsTab.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isUserKickedFromChat() {
     try {
+      wait.forElementVisible(userBlockedMessageField);
       return userBlockedMessageField.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isBlockPrivateMessageButtonDisplayed() {
     try {
+      wait.forElementVisible(blockPrivateMassageButton);
       return blockPrivateMassageButton.isDisplayed();
-    } catch (ElementNotFoundException e) {
+    } catch (Exception e) {
       return false;
     }
   }
 
   public boolean areStaffOptionsDisplayed() {
     try{
+      wait.forElementVisible(userModOptions);
       return userModOptions.isDisplayed();
-    }catch (ElementNotFoundException e) {
+    }catch (Exception e) {
       return false;
     }
   }
 
   public boolean isUnbunLinkdisplayed(String userName) {
     try{
+      wait.forElementVisible(getUserUnbanLink(userName));
       return getUserUnbanLink(userName).isDisplayed();
-    }catch (ElementNotFoundException e) {
+    }catch (Exception e) {
       return false;
     }
   }
@@ -350,6 +371,7 @@ public class ChatPage extends WikiBasePageObject {
   public void blockPrivateMessageFromUser(String userName) {
     openUserDropDownInPrivateMessageSection(userName);
     blockPrivateMassageButton.click();
+    waitForElementNotVisibleByElement(blockPrivateMassageButton);
   }
 
   public void allowPrivateMessageFromUser(String userName) {
@@ -384,18 +406,18 @@ public class ChatPage extends WikiBasePageObject {
     return isElementOnPage(allowPrivateMassageButton);
   }
 
-  public List<String> sendMultipleMessagesFromUser(String userName, int messagesCount) {
+  public List<String> sendMultipleMessagesFromUser(String message, int messagesCount) {
     List<String> messagesSent = new ArrayList<>();
     for (int i = 0; i < messagesCount; i++) {
-      writeOnChat();
-      messagesSent.add(USER_MESSAGE_ON_CHAT);
+      writeOnChat(message);
+      messagesSent.add(message);
     }
     return messagesSent;
   }
 
-  public void writeOnChat() {
+  public void writeOnChat(String message) {
     wait.forElementVisible(chatLoadedIndicator);
-    messageWritingArea.sendKeys(USER_MESSAGE_ON_CHAT);
+    messageWritingArea.sendKeys(message);
     new Actions(driver).sendKeys(messageWritingArea, Keys.ENTER).perform();
   }
 
