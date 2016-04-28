@@ -3,7 +3,6 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,11 +17,17 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".wikia-logo")
   private WebElement logo;
 
-  @FindBy(css = ".side-nav-toggle")
-  private WebElement openNavButton;
+  @FindBy(css = ".site-head-icon-nav")
+  private WebElement hamburgerIcon;
 
-  @FindBy(css = ".side-nav-menu__header a.close")
-  private WebElement closeNavButton;
+  @FindBy(css = ".site-head-icon-search")
+  private WebElement searchIcon;
+
+  @FindBy(css = ".icon-button-icon > use[*|href*='close']")
+  private WebElement closeButton;
+
+//  private WebElement closeButton =
+//      driver.findElement((By.cssSelector(".icon-button-icon > use[*|href*='close']")));
 
   private By navigationComponent = By.cssSelector(".side-nav-menu");
 
@@ -36,8 +41,8 @@ public class TopBar extends WikiBasePageObject {
 
   public Navigation openNavigation() {
     PageObjectLogging.logInfo("Open navigation");
-    wait.forElementClickable(openNavButton);
-    openNavButton.click();
+    wait.forElementClickable(hamburgerIcon);
+    hamburgerIcon.click();
 
     PageObjectLogging.logInfo("Navigation is opened");
     wait.forElementVisible(navigationComponent);
@@ -45,10 +50,21 @@ public class TopBar extends WikiBasePageObject {
     return new Navigation(driver);
   }
 
+  public Navigation openSearch() {
+    PageObjectLogging.logInfo("Open search");
+    wait.forElementClickable(searchIcon);
+    searchIcon.click();
+
+    PageObjectLogging.logInfo("Search is opened");
+    wait.forElementVisible(navigationComponent);
+
+    return new Navigation(driver);
+  }
+
   public Navigation closeNavigation() {
     PageObjectLogging.logInfo("Close navigation");
-    wait.forElementClickable(closeNavButton);
-    closeNavButton.click();
+    wait.forElementClickable(closeButton);
+    closeButton.click();
 
     PageObjectLogging.logInfo("Navigation is closed");
     wait.forElementNotVisible(navigationComponent);
