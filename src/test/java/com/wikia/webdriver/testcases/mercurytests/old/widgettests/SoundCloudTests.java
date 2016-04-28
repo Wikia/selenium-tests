@@ -56,7 +56,7 @@ public class SoundCloudTests extends NewTestTemplate {
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -68,9 +68,9 @@ public class SoundCloudTests extends NewTestTemplate {
 
     widget.create(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

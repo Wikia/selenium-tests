@@ -3,13 +3,11 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.List;
 
 public class Navigation {
@@ -157,7 +155,6 @@ public class Navigation {
   }
 
   public Navigation navigateToPage(String pageName) {
-    openSubMenu(1);
     typeInSearch(pageName);
     selectSearchSuggestion(0);
 

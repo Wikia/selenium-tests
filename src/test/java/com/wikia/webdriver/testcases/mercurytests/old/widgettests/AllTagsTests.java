@@ -90,7 +90,7 @@ public class AllTagsTests extends NewTestTemplate {
     init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
@@ -103,9 +103,9 @@ public class AllTagsTests extends NewTestTemplate {
     init();
     navigate.toPage(ARTICLE_NAME);
 
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {

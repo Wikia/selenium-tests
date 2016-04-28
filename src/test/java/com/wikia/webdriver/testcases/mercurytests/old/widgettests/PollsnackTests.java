@@ -57,7 +57,7 @@ public class PollsnackTests extends NewTestTemplate {
 
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -69,9 +69,9 @@ public class PollsnackTests extends NewTestTemplate {
 
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

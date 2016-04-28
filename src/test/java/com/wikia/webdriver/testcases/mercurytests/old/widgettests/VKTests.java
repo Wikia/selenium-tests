@@ -60,7 +60,7 @@ public class VKTests extends NewTestTemplate {
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -73,9 +73,9 @@ public class VKTests extends NewTestTemplate {
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

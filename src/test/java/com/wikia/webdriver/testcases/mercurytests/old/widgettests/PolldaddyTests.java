@@ -57,7 +57,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
     widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -69,9 +69,9 @@ public class PolldaddyTests extends NewTestTemplate {
 
     widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
+    topBar.openSearch();
     navigation.navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
