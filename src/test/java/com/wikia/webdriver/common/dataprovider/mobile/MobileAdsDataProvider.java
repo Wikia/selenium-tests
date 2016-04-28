@@ -397,8 +397,20 @@ public class MobileAdsDataProvider {
   public static Object[][] disableGptMercury() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "MOBILE_TOP_LEADERBOARD", "DirectGptMobile; RemnantGptMobile", ""
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "MOBILE_TOP_LEADERBOARD",
+            "DirectGptMobile; RemnantGptMobile",
+            ""
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "MOBILE_TOP_LEADERBOARD",
+            "DirectGptMobile; RemnantGptMobile, RubiconFastlane",
+            "RubiconFastlane"
         },
     };
   }

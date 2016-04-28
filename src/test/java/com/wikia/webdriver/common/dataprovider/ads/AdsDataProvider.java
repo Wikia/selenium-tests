@@ -737,15 +737,15 @@ public class AdsDataProvider {
   public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain",
+            "project43", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
+            "project43", "SyntheticTests/ProvidersChain",
             "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
+            "project43", "SyntheticTests/ProvidersChain",
             "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
         }
     };
@@ -755,8 +755,20 @@ public class AdsDataProvider {
   public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "TOP_LEADERBOARD",
+            "DirectGpt; RemnantGpt; Liftium",
+            "Liftium"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "TOP_LEADERBOARD",
+            "DirectGpt; RemnantGpt; RubiconFastlane",
+            "RubiconFastlane"
         },
     };
   }
