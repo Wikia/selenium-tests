@@ -41,8 +41,15 @@ public class NavigationTest extends NewTestTemplate {
   public void mercury_navigation_topBarIsAlwaysVisible() {
     init();
 
+    Assertion.assertTrue(topBar.isNavigationBarVisible());
+    Assertion.assertTrue(topBar.isLogoVisible());
+    Assertion.assertTrue(topBar.isHamburgerIconVisible());
+    Assertion.assertTrue(topBar.isSearchIconVisible());
+
     driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
     Assertion.assertTrue(topBar.isNavigationBarVisible());
     Assertion.assertTrue(topBar.isLogoVisible());
+    Assertion.assertTrue(topBar.isHamburgerIconVisible());
+    Assertion.assertTrue(topBar.isSearchIconVisible());
   }
 }

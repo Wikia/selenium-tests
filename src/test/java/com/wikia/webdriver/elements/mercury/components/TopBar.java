@@ -26,9 +26,6 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButton;
 
-//  private WebElement closeButton =
-//      driver.findElement((By.cssSelector(".icon-button-icon > use[*|href*='close']")));
-
   private By navigationComponent = By.cssSelector(".side-nav-menu");
 
   private Wait wait;
@@ -73,15 +70,58 @@ public class TopBar extends WikiBasePageObject {
   }
 
   public boolean isNavigationBarVisible() {
-    wait.forElementVisible(navBar);
-
-    return true;
+    try {
+      wait.forElementVisible(navBar);
+      PageObjectLogging.logInfo("Navigation bar is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Navigation bar is not visible");
+      return false;
+    }
   }
 
   public boolean isLogoVisible() {
-    wait.forElementVisible(logo);
-
-    return true;
+    try {
+      wait.forElementVisible(logo);
+      PageObjectLogging.logInfo("Wikia logo is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Wikia logo is not visible");
+      return false;
+    }
   }
 
+  public boolean isHamburgerIconVisible() {
+    try {
+      wait.forElementVisible(hamburgerIcon);
+      PageObjectLogging.logInfo("Hamburger icon is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Hamburger icon is not visible");
+      return false;
+    }
+  }
+
+  public boolean isSearchIconVisible() {
+    try {
+      wait.forElementVisible(searchIcon);
+      PageObjectLogging.logInfo("Search icon is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Search icon is not visible");
+      return false;
+    }
+  }
+
+  public boolean isCloseIconVisible() {
+    try {
+      wait.forElementVisible(closeButton);
+      PageObjectLogging.logInfo("Close icon is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Close icon is not visible");
+      return false;
+    }
+
+  }
 }

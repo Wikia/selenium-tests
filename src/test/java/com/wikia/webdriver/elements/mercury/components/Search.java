@@ -83,7 +83,9 @@ public class Search {
   }
 
   public Search navigateToPage(String pageName) {
+    PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
+    PageObjectLogging.logInfo("Select first search suggestion");
     selectSearchSuggestion(0);
 
     return this;
