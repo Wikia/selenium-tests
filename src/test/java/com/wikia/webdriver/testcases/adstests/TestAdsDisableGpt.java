@@ -46,9 +46,9 @@ public class TestAdsDisableGpt extends TemplateNoFirstLoad {
                              String disasterProviders) {
 
     String url = urlBuilder.getUrlForPath(wikiName, article);
+    url = urlBuilder.appendQueryStringToURL(url, DISASTER_RECOVERY_URL_PARAM);
     if (StringUtils.isNotEmpty(instantGlobals)) {
       url = urlBuilder.appendQueryStringToURL(url, instantGlobals);
-      url = urlBuilder.appendQueryStringToURL(url, DISASTER_RECOVERY_URL_PARAM);
     }
     new AdsBaseObject(driver, url)
         .verifyProvidersChain(slotName, disasterProviders);
