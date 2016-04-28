@@ -45,18 +45,18 @@ public class NavigationTest extends NewTestTemplate {
 
   @Test(groups = "mercury_navigation_navigateToPageUsingSearch")
   public void mercury_navigation_navigateToPageUsingSearch() {
-    String articleToNavigate = "Infobox";
+    String searchingPhrase = "Infobox";
     init();
 
     topBar.openSearch();
-    navigation.typeInSearch(articleToNavigate);
+    navigation.typeInSearch(searchingPhrase);
     navigation.selectSearchSuggestion(0);
 
-    Assertion.assertTrue(driver.getCurrentUrl().contains(articleToNavigate));
+    Assertion.assertTrue(driver.getCurrentUrl().contains(searchingPhrase));
   }
 
-  @Test(groups = "mercury_navigation_topbarIsAlwaysVisible")
-  public void mercury_navigation_topbarIsAlwaysVisible() {
+  @Test(groups = "mercury_navigation_topBarIsAlwaysVisible")
+  public void mercury_navigation_topBarIsAlwaysVisible() {
     init();
 
     driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");

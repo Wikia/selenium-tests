@@ -30,6 +30,9 @@ public class Navigation {
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
+  @FindBy(css = ".side-search__clear")
+  private WebElement clearSearchPhraseButton;
+
   private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By cancelSearchButton = By.cssSelector(".side-search__cancel");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
