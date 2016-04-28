@@ -737,16 +737,25 @@ public class AdsDataProvider {
   public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
-            "project43", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "TOP_LEADERBOARD",
+            "DirectGpt; RemnantGpt; Liftium"
         },
         {
-            "project43", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "TOP_LEADERBOARD",
+            "DirectGpt; RemnantGpt; RubiconFastlane"
         },
         {
-            "project43", "SyntheticTests/ProvidersChain",
-            "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "",
+            "INVISIBLE_SKIN",
+            "DirectGpt; RemnantGpt"
         }
     };
   }
