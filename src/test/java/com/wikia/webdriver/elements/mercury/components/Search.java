@@ -30,18 +30,6 @@ public class Search {
     PageFactory.initElements(driver, this);
   }
 
-  public Search cancelSearch() {
-    PageObjectLogging.logInfo("Cancel search");
-    WebElement cancelButton = driver.findElement(cancelSearchButton);
-    wait.forElementClickable(cancelButton);
-    cancelButton.click();
-
-    PageObjectLogging.logInfo("Cancel search button is not present");
-    wait.forElementNotPresent(cancelSearchButton);
-
-    return this;
-  }
-
   public Search seeNoSearchResults() {
     PageObjectLogging.logInfo("Loading search results indicator is present");
     wait.forElementPresent(loadingSearchResultsIndicator);

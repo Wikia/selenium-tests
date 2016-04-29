@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -34,22 +33,6 @@ public class NavigationTest extends NewTestTemplate {
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.closeSubMenu();
-    topBar.closeNavigation();
-  }
-
-  @Test(groups = "mercury_navigation_topBarIsAlwaysVisible")
-  public void mercury_navigation_topBarIsAlwaysVisible() {
-    init();
-
-    Assertion.assertTrue(topBar.isNavigationBarVisible());
-    Assertion.assertTrue(topBar.isLogoVisible());
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
-    Assertion.assertTrue(topBar.isSearchIconVisible());
-
-    driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
-    Assertion.assertTrue(topBar.isNavigationBarVisible());
-    Assertion.assertTrue(topBar.isLogoVisible());
-    Assertion.assertTrue(topBar.isHamburgerIconVisible());
-    Assertion.assertTrue(topBar.isSearchIconVisible());
+    topBar.clickCloseButton();
   }
 }

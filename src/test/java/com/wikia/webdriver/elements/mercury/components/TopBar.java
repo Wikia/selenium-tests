@@ -58,13 +58,10 @@ public class TopBar extends WikiBasePageObject {
     return new Search(driver);
   }
 
-  public Navigation closeNavigation() {
-    PageObjectLogging.logInfo("Close navigation");
+  public Navigation clickCloseButton() {
+    PageObjectLogging.logInfo("Click close button");
     wait.forElementClickable(closeButton);
     closeButton.click();
-
-    PageObjectLogging.logInfo("Navigation is closed");
-    wait.forElementNotVisible(navigationComponent);
 
     return new Navigation(driver);
   }
