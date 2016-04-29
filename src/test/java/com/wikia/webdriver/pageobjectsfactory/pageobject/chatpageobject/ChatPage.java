@@ -68,11 +68,11 @@ public class ChatPage extends WikiBasePageObject {
   private WebElement userModOptions;
   @FindBy(css = "li.message-wall")
   private WebElement userMessageWallButton;
-  @FindBy(xpath = "//li[@data-id='wall']")
+  @FindBy(css = "div.speech-bubble-message")
   private WebElement userPageMessageWallTab;
   @FindBy(css = "li.contribs")
   private WebElement userContributionsButton;
-  @FindBy(xpath = "//li[@data-id='contribs']")
+  @FindBy(css = "table.mw-contributions-table")
   private WebElement userPageContributionsTab;
   @FindBy(css = "form#Write.Write.blocked")
   private WebElement userBlockedMessageField;
@@ -86,12 +86,9 @@ public class ChatPage extends WikiBasePageObject {
           "//div[@class='Chat']//li[contains(text(), 'has ended the Chat ban for %s')]";
   private static final String USER_SELECTOR = "#user-%s";
   private static final String PRIVATE_MESSAGE_USER_SELECTOR = "#priv-user-%s";
-  private static final String PRIVATE_MESSAGE_SELECTED_USER_SELECTOR =
-          "#priv-user-%s.User.selected";
   private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
   private static final String NOTIFICATION_COUNTER =
           "//span[@class='splotch' and contains(text(), '%s')]";
-  private final String USER_MESSAGE_ON_CHAT = "Hello this is test message timestamp: " + getTimeStamp();
 
   private static final int REGULAR_USER_DROPDOWN_ELEMENTS = 3;
 
@@ -105,10 +102,6 @@ public class ChatPage extends WikiBasePageObject {
     return driver.findElement(By.cssSelector(String.format(message, userName)));
   }
 
-  private WebElement userWelcomeMessage(String userName) {
-    return driver.findElement(By.cssSelector(String.format(USER_SELECTOR, userName)));
-  }
-
   private WebElement userPostedMessage(String message) {
     return driver.findElement(By.xpath(String.format(PATH_MESSAGE_ON_CHAT, message)));
   }
@@ -117,7 +110,7 @@ public class ChatPage extends WikiBasePageObject {
     return driver.findElement(By.xpath(String.format(NOTIFICATION_COUNTER, notificationCount)));
   }
 
-  private WebElement getUserUnbanMessage() {
+  private WebElement getUserUnbanMessage(String userName) {
     return driver.findElement(By.xpath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName)));
   }
 
@@ -139,15 +132,6 @@ public class ChatPage extends WikiBasePageObject {
       WebElement userPostedMessage = userPostedMessage(message);
       wait.forElementVisible(userPostedMessage);
       return userPostedMessage.isDisplayed();
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  public boolean isUserWelcomeMessageDisplayed(String userName) {
-    try {
-      wait.forElementVisible(userWelcomeMessage(userName));
-      return userWelcomeMessage(userName).isDisplayed();
     } catch (Exception e) {
       return false;
     }
@@ -222,10 +206,10 @@ public class ChatPage extends WikiBasePageObject {
     }
   }
 
-  public boolean isChatUnbanMessageDispalyed() {
+  public boolean isChatUnbanMessageDispalyed(String userName ) {
     try {
-      wait.forElementVisible(getUserUnbanMessage());
-      return getUserUnbanMessage().isDisplayed();
+      wait.forElementVisible(getUserUnbanMessage(userName));
+      return getUserUnbanMessage(userName).isDisplayed();
     } catch (Exception e) {
       return false;
     }
@@ -276,21 +260,14 @@ public class ChatPage extends WikiBasePageObject {
     }
   }
 
-  public boolean isUnbunLinkdisplayed(String userName) {
-    try{
-      wait.forElementVisible(getUserUnbanLink(userName));
-      return getUserUnbanLink(userName).isDisplayed();
-    }catch (Exception e) {
-      return false;
-    }
-  }
-
   public void clickOnMainChat() {
     chatWordmarkImage.click();
     PageObjectLogging.log("clickOnMainChat", "main chat is clicked", true);
   }
 
   public void clickOnUserInPrivateMessageSection(String userName) {
+    //We need two clicks to see user options in privet section
+    userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
     userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).click();
     PageObjectLogging.log("clickOnUserInPrivateMessageSection", "private messages user " + userName
             + " is clicked", true);
@@ -342,7 +319,7 @@ public class ChatPage extends WikiBasePageObject {
   }
 
   public void unBanUser(String userName) {
-    isUnbunLinkdisplayed(userName);
+    wait.forElementVisible(getUserUnbanLink(userName));
     getUserUnbanLink(userName).click();
     PageObjectLogging.log("unBanUser", userName + " is no longer banned", true);
   }
@@ -430,6 +407,8 @@ public class ChatPage extends WikiBasePageObject {
     clickOnDifferentUser(userName);
     wait.forElementVisible(privateMassageButton);
     privateMassageButton.click();
+    wait.forElementVisible(privateMessagesHeader);
+    clickOnUserInPrivateMessageSection(userName);
     PageObjectLogging.log("selectPrivateMessageToUser", "private message selected from dropdown",
             true);
   }

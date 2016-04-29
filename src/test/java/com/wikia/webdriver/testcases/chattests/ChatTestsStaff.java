@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 import org.testng.annotations.Test;
 
@@ -57,7 +56,8 @@ public class ChatTestsStaff extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
 
     switchToWindow(1);
-    chatUserTwo.selectPrivateMessageToUser(credentials.userNameStaff2);
+    chatUserTwo.selectPrivateMessageToUser(credentials.userNameStaff);
+    Assertion.assertTrue(chatUserTwo.isPrivateMessageHeaderDispayed());
     chatUserTwo.writeOnChat(MESSAGE_ON_PRIVATE_CHAT);
 
     switchToWindow(0);
@@ -65,13 +65,6 @@ public class ChatTestsStaff extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isPrivateMessageNotificationDisplayed(), "PRIVATE MESSAGE HEDER IS DISPLAYED");
     chatUserOne.clickOnUserInPrivateMessageSection(credentials.userNameStaff2);
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
-  }
-
-  @Test(groups = {"ChatStaff", "ChatTests"})
-  public void regularUserCanNotEnterChatOnPreviewEnvironment() {
-    openChatForUser(credentials.userName10, credentials.password10);
-    SpecialPageObject special = new SpecialPageObject();
-    special.verifyPageHeader("Permissions error");
   }
 
   @Test(groups = {"ChatStaff", "ChatTests"})
@@ -84,7 +77,7 @@ public class ChatTestsStaff extends NewTestTemplate {
     chatUserStaff2.clickOnDifferentUser(credentials.userNameStaff);
     Assertion.assertFalse(chatUserStaff2.areStaffOptionsDisplayed(), "STAFF OPTIONS ARE DISPLAERD");
   }
-  
+
   @Test(groups = {"ChatStaff", "ChatTests"})
   public void staffUserCanNotBlockPrivateMessages() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
@@ -92,6 +85,9 @@ public class ChatTestsStaff extends NewTestTemplate {
     switchToWindow(1);
     new SpecialVersionPage().open();
     ChatPage chatUserStaff2 = openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserStaff2.selectPrivateMessageToUser(credentials.userNameStaff);
+    Assertion.assertTrue(chatUserStaff2.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
+    chatUserStaff2.clickOnUserInPrivateMessageSection(credentials.userNameStaff);
     Assertion.assertFalse(chatUserStaff2.isBlockPrivateMessageButtonDisplayed(), "BLOCK PRIVATE MESSAGE BUTTON IS DISPLAYED");
   }
 }

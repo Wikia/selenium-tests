@@ -116,17 +116,17 @@ public class ChatTests extends NewTestTemplate {
     chatUserSix.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserFive.isUserWelcomeMessageDisplayed(userFive), "WELCOME MESSAGE IS NOT DISPLAYED");
     Assertion.assertTrue(chatUserFive.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON PRIVATE CHAT IS NOT DISPLAYED");
 
     switchToWindow(1);
     chatUserSix.selectPrivateMessageToUser(userFive);
+    Assertion.assertTrue(chatUserSix.isUserInPrivateSectionDisplayed(userFive));
     List<String> messagesSent =
-        chatUserSix.sendMultipleMessagesFromUser(MESSAGE_ON_MAIN_CHAT, NUMBER_OF_PRIVATE_MESSAGES);
+        chatUserSix.sendMultipleMessagesFromUser(MESSAGE_ON_PRIVATE_CHAT, NUMBER_OF_PRIVATE_MESSAGES);
 
     switchToWindow(0);
     Assertion.assertTrue(chatUserFive.isPrivateNotificationCountDisplayed(messagesSent.size()),
-            "PRIVATE MESSAGES COUNTER IS NOT DISPLAYED");
+            "PRIVATE MESSAGES COUNTER IS NOT CORRECT");
   }
 
   @DontRun(env = {"preview", "dev"})
@@ -145,7 +145,7 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(1);
     chatUserStaff.unBanUser(userToBeBanned);
-    Assertion.assertTrue(userToBeBaned.isChatUnbanMessageDispalyed(), "UNBAN MESSAGE IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDispalyed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
   @DontRun(env = {"preview", "dev"})
@@ -187,6 +187,7 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     chatUserOne.clickOnDifferentUser(userFive);
     chatUserOne.selectPrivateMessageToUser(userFive);
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive));
     chatUserOne.clickOnUserInPrivateMessageSection(userFive);
     chatUserOne.blockPrivateMessageFromUser(userFive);
 
@@ -259,7 +260,7 @@ public class ChatTests extends NewTestTemplate {
 
   @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
-  public void bannedUserCanNotEnterTheChat() throws InterruptedException {
+  public void bannedUserCanNotEnterTheChat() {
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
     switchToWindow(1);
