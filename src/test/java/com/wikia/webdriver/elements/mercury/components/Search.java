@@ -14,7 +14,9 @@ public class Search {
   @FindBy(css = ".side-search__container input")
   private WebElement searchInput;
 
-  private By cancelSearchButton = By.cssSelector(".side-search__cancel");
+  @FindBy(css = ".side-search__cancel")
+  private WebElement cancelSearchButton;
+
   private String searchResultClass = ".side-search__results li.mw-content a";
   private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");
 
@@ -75,6 +77,14 @@ public class Search {
     typeInSearch(pageName);
     PageObjectLogging.logInfo("Select first search suggestion");
     selectSearchSuggestion(0);
+
+    return this;
+  }
+
+  public Search clickCancelSearchButton() {
+    PageObjectLogging.logInfo("Cancel searching phrase ");
+    wait.forElementClickable(cancelSearchButton);
+    cancelSearchButton.click();
 
     return this;
   }

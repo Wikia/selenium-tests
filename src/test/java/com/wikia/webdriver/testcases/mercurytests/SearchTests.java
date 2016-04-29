@@ -11,6 +11,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+
+import org.apache.xpath.SourceTree;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -27,16 +30,6 @@ public class SearchTests extends NewTestTemplate {
     new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }
 
-  @Test(groups = "mercury_search_iconsAreVisible")
-  public void mercury_search_iconsAreVisible() {
-    init();
-
-    Assertion.assertTrue(topBar.isSearchIconVisible());
-    topBar.openSearch();
-
-    Assertion.assertTrue(topBar.isCloseIconVisible());
-  }
-
   @Test(groups = "mercury_search_navigateToPageUsingSearch")
   public void mercury_search_navigateToPageUsingSearch() {
     String searchingPhrase = "Infobox";
@@ -47,4 +40,17 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().contains(searchingPhrase));
   }
 
+  @Test(groups = "mercury_search_cancelSearchPhrase")
+  public void mercury_search_cancelSearchPhrase() {
+    String searchingPhrase = "Infobox";
+    init();
+
+    topBar.openSearch().typeInSearch(searchingPhrase);
+//    search.clickCancelSearchButton();
+    JavascriptExecutor jse = (JavascriptExecutor)driver;
+    String script = "document.getElementsByClassName('.side-search__cancel').getText();";
+    String searchPhraseText = ((JavascriptExecutor) driver).executeScript(script).toString();
+
+    System.out.println(searchPhraseText);
+  }
 }
