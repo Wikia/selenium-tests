@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+
 import org.testng.annotations.DataProvider;
 
 public class AdTypeDataProvider {
@@ -109,6 +111,20 @@ public class AdTypeDataProvider {
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=261158652
         },
     };
+  }
+
+  @DataProvider
+  public static final Object[][] adXcollapse() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/AdXCollapse",
+            "wka.life/_project43//article",
+            new String[] {
+                AdsContent.MEDREC
+            }
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=273624492
+        },
+        };
   }
 
 }
