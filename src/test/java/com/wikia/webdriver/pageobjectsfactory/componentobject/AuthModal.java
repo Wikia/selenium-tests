@@ -1,19 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class AuthModal extends WikiBasePageObject {
 
   @FindBy(css = ".auth.desktop.signin-page")
-  private WebElement authModal;
+  private WebElement signInAuthModal;
+  @FindBy(css = ".auth.desktop.register-page")
+  private WebElement registerAuthModal;
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
   @FindBy(css = "#loginPassword")
@@ -24,6 +22,8 @@ public class AuthModal extends WikiBasePageObject {
   private WebElement iFrame;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
+  @FindBy(css = ".register-page .header-callout-link")
+  private WebElement linkToSignInForm;
 
   private String mainWindowHandle;
 
@@ -45,7 +45,7 @@ public class AuthModal extends WikiBasePageObject {
 
   public boolean isOpened(){
     switchToAuthModalHandle();
-    boolean isOpenedResult = authModal.isDisplayed();
+    boolean isOpenedResult = registerAuthModal.isDisplayed();
     switchToMainWindowHandle();
     return isOpenedResult;
   }
@@ -66,6 +66,11 @@ public class AuthModal extends WikiBasePageObject {
     switchToAuthModalHandle();
     forgottenPasswordLink.click();
     switchToMainWindowHandle();
+  }
+
+  public void clickToSignInForm(){
+    switchToAuthModalHandle();
+    linkToSignInForm.click();
   }
 
 }
