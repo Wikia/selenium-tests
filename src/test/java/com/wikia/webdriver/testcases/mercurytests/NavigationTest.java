@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -34,5 +35,42 @@ public class NavigationTest extends NewTestTemplate {
     navigation.openSubMenu(1);
     navigation.closeSubMenu();
     topBar.clickCloseButton();
+  }
+
+  @Test(groups = "mercury_navigation_resetNavigationState")
+  public void mercury_navigation_resetNavigationState() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
+    navigation.openSubMenu(1);
+    Assertion.assertTrue(navigation.isBackButtonVisible());
+    topBar.clickCloseButton();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
+  }
+
+  @Test(groups = "mercury_navigation_backButton")
+  public void mercury_navigation_backButton() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
+    navigation.openSubMenu(1);
+    Assertion.assertTrue(navigation.isBackButtonVisible());
+    navigation.clickBackButton();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
+  }
+
+  @Test(groups = "mercury_navigation_isFooterAlwaysVisible")
+  public void mercury_navigation_isFooterAlwaysVisible() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isFooterVisible());
+
+    driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
+    Assertion.assertTrue(navigation.isFooterVisible());
   }
 }

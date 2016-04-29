@@ -27,6 +27,15 @@ public class Navigation {
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
+  @FindBy(css = ".profile-link")
+  private WebElement userProfile;
+
+  @FindBy(css = ".main")
+  private WebElement navigationMainHeader;
+
+  @FindBy(css = ".side-nav-menu__footer")
+  private WebElement homeOfFandomFooter;
+
   private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
@@ -45,6 +54,14 @@ public class Navigation {
     PageObjectLogging.logInfo("Open login page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
+
+    return this;
+  }
+
+  public Navigation clickBackButton() {
+    PageObjectLogging.logInfo("Go back to previous navigation level");
+    wait.forElementClickable(backButton);
+    backButton.click();
 
     return this;
   }
@@ -99,5 +116,50 @@ public class Navigation {
     PageObjectLogging.logInfo("You were redirected to the recent wiki activity page");
 
     return this;
+  }
+
+  public boolean isUserProfileLinkVisible() {
+    try {
+      wait.forElementVisible(userProfile);
+      PageObjectLogging.logInfo("User profile link is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("User profile link is not visible");
+      return false;
+    }
+  }
+
+
+  public boolean isMainHeaderVisible() {
+    try {
+      wait.forElementVisible(navigationMainHeader);
+      PageObjectLogging.logInfo("Main header is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Main header is not visible");
+      return false;
+    }
+  }
+
+  public boolean isBackButtonVisible() {
+    try {
+      wait.forElementVisible(backButton);
+      PageObjectLogging.logInfo("Back button is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Back button is not visible");
+      return false;
+    }
+  }
+
+  public boolean isFooterVisible() {
+    try {
+      wait.forElementVisible(homeOfFandomFooter);
+      PageObjectLogging.logInfo("Footer is visible");
+      return true;
+    } catch (Exception e) {
+      PageObjectLogging.logInfo("Footer is not visible");
+      return false;
+    }
   }
 }
