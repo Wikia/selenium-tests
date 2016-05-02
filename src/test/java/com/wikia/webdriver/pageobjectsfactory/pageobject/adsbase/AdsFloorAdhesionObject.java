@@ -16,7 +16,8 @@ public class AdsFloorAdhesionObject extends AdsBaseObject {
     getUrl(testedPage, true);
   }
 
-  public void verifyFloorAdhesionPresent(String expectedSlotName, String expectedLineItemId,
+  public void verifyFloorAdhesionPresent(String expectedSlotName,
+                                         String expectedLineItemId,
                                          String expectedCreativeId) {
     verifyGptAdInSlot(expectedSlotName, expectedLineItemId, expectedCreativeId);
     wait.forElementVisible(By.cssSelector(FLOOR_ADHESION_CSS));
