@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
 
 public class FandomTestTemplate extends CoreTestTemplate {
 
-  private String mainURL = "http://%s:%s@wikiaqa.wpengine.com";
+  private String mainURL = "http://%s:%s@qa.fandom.wikia.com/";
 
   @Override
   protected void prepareURLs() {

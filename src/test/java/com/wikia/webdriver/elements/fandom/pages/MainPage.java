@@ -9,7 +9,7 @@ public class MainPage extends FandomPage<MainPage> {
 
   @Getter(lazy = true)
   private final HeroUnit heroUnit = new HeroUnit();
-  private String URL = "http://wikiaqa.wpengine.com";
+  private String URL = "http://qa.fandom.wikia.com/";
 
   @Override
   public MainPage open() {
