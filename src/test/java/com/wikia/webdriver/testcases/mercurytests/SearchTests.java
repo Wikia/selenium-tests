@@ -12,8 +12,6 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 
-import org.apache.xpath.SourceTree;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -41,16 +39,14 @@ public class SearchTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_search_cancelSearchPhrase")
-  public void mercury_search_cancelSearchPhrase() {
+  public void mercury_search_clearSearchPhrase() {
     String searchingPhrase = "Infobox";
     init();
 
-    topBar.openSearch().typeInSearch(searchingPhrase);
-//    search.clickCancelSearchButton();
-    JavascriptExecutor jse = (JavascriptExecutor)driver;
-    String script = "document.getElementsByClassName('.side-search__cancel').getText();";
-    String searchPhraseText = ((JavascriptExecutor) driver).executeScript(script).toString();
+    Search search = topBar.openSearch();
+    search.typeInSearch(searchingPhrase);
+    search.clickClearSearchButton();
 
-    System.out.println(searchPhraseText);
+    Assertion.assertEquals(search.getSearchPhrase(), "");
   }
 }

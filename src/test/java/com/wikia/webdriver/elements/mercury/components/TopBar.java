@@ -28,6 +28,9 @@ public class TopBar extends WikiBasePageObject {
 
   private By navigationComponent = By.cssSelector(".side-nav-menu");
 
+  @FindBy(css = ".local-nav-menu")
+  private WebElement navMenu;
+
   private Wait wait;
 
   public TopBar(WebDriver driver) {
@@ -42,7 +45,7 @@ public class TopBar extends WikiBasePageObject {
     hamburgerIcon.click();
 
     PageObjectLogging.logInfo("Navigation is opened");
-    wait.forElementVisible(navigationComponent);
+    wait.forElementVisible(navMenu);
 
     return new Navigation(driver);
   }

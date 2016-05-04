@@ -14,8 +14,8 @@ public class Search {
   @FindBy(css = ".side-search__container input")
   private WebElement searchInput;
 
-  @FindBy(css = ".side-search__cancel")
-  private WebElement cancelSearchButton;
+  @FindBy(css = ".side-search__clear")
+  private WebElement clearSearchButton;
 
   private String searchResultClass = ".side-search__results li.mw-content a";
   private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");
@@ -72,6 +72,10 @@ public class Search {
     return this;
   }
 
+  public String getSearchPhrase() {
+    return searchInput.getAttribute("value");
+  }
+
   public Search navigateToPage(String pageName) {
     PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
@@ -81,10 +85,10 @@ public class Search {
     return this;
   }
 
-  public Search clickCancelSearchButton() {
+  public Search clickClearSearchButton() {
     PageObjectLogging.logInfo("Cancel searching phrase ");
-    wait.forElementClickable(cancelSearchButton);
-    cancelSearchButton.click();
+    wait.forElementClickable(clearSearchButton);
+    clearSearchButton.click();
 
     return this;
   }

@@ -104,8 +104,6 @@ public class Navigation {
   }
 
   public Navigation openRecentWikiActivity() {
-    this.openSubMenu(1);
-
     wait.forElementClickable(recentWikiActivityLink);
     recentWikiActivityLink.click();
 
