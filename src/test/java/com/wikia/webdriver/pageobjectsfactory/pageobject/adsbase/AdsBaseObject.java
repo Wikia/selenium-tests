@@ -430,9 +430,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public String getCountry() {
     waitForJavaScriptTruthy("Wikia.geo");
-    return (String) ((JavascriptExecutor) driver).executeScript(
+    return driver.executeScript(
         "return Wikia.geo.getCountryCode();"
-    );
+    ).toString();
   }
 
   public AdsBaseObject addToUrl(String param) {
