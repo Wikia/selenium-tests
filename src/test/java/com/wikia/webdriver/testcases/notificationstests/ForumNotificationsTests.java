@@ -44,7 +44,6 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Test(groups = {"ForumNotificationsTests_002", "ForumNotificationsTests",
                   "NotificationsTests"},
       dependsOnMethods = {"forumNotificationsTests_001_userAStartsDiscussion"})
-  @RelatedIssue(issueID = "MAIN-6070")
   public void forumNotificationsTests_002_userBLeavesReply() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userName2, credentials.password2, wikiURL);
@@ -58,7 +57,6 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Test(groups = {"ForumNotificationsTests_003", "ForumNotificationsTests",
                   "NotificationsTests"},
       dependsOnMethods = {"forumNotificationsTests_002_userBLeavesReply"})
-  @RelatedIssue(issueID = "MAIN-6070")
   public void forumNotificationsTests_003_userCLeavesReply() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -73,7 +71,6 @@ public class ForumNotificationsTests extends NewTestTemplate {
                   "NotificationsTests"},
       dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6070")
   public void userIsNotifiedWhenRegularAndStaffUsersReplyToHerDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
