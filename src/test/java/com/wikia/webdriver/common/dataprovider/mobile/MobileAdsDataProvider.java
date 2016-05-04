@@ -19,8 +19,8 @@ public class MobileAdsDataProvider {
   public static Object[][] leaderboardAndPrefooterSlots() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+prefooter",
-            "wka.life/_adtest//article"
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard,Prefooter",
+            "wka.life/_project43//article"
         }
     };
   }
@@ -29,8 +29,8 @@ public class MobileAdsDataProvider {
   public static Object[][] leaderboardAndInContentSlots() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+in_content",
-            "wka.life/_adtest//article"
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard,Incontent",
+            "wka.life/_project43//article"
         }
     };
   }
@@ -39,8 +39,8 @@ public class MobileAdsDataProvider {
   public static Object[][] allSlots() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/leaderboard+in content+prefooter",
-            "wka.life/_adtest//article"
+            "project43", "SyntheticTests/Mercury/Slots/AllSlots",
+            "wka.life/_project43//article"
         }
     };
   }
@@ -90,12 +90,12 @@ public class MobileAdsDataProvider {
             "yugioh",
             "Dark_Magician",
             null,
-            "wka.ent/_yugioh//article",
+            "wka.gaming/_yugioh//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"ent\"",
-                "\"s0v\":\"comics\"",
-                "\"s0c\":[\"gaming\",\"anime\",\"videogames\"]",
+                "\"s0\":\"gaming\"",
+                "\"s0v\":\"games\"",
+                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -407,10 +407,10 @@ public class MobileAdsDataProvider {
   public static Object[][] mercuryConsecutivePageViews() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/Slots/MercuryOnConsecutivePageViews1",
-            "SyntheticTests/Slots/MercuryOnConsecutivePageViews2",
-            "SyntheticTests/Slots/MercuryOnConsecutivePageViews3",
-            "wka.life/_adtest//article",
+            "project43", "SyntheticTests/Mercury/Slots/ConsecutivePageViews/1",
+            "SyntheticTests/Mercury/Slots/ConsecutivePageViews/2",
+            "SyntheticTests/Mercury/Slots/ConsecutivePageViews/3",
+            "wka.life/_project43//article",
         }
     };
   }
@@ -428,12 +428,12 @@ public class MobileAdsDataProvider {
   public static Object[][] adsSlotSizeMercury() {
     return new Object[][]{
         {
-            new Page("adtest", "SyntheticTests/MobileLeaderboard"),
+            new Page("project43", "SyntheticTests/MobileLeaderboard"),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MOBILETOP_LB)
                 .put("slotSize", new Dimension(320, 100))
-                .put("lineItemId", 136987812)
+                .put("lineItemId", 272132532)
                 .put("src", "mobile")
                 .build()
         },

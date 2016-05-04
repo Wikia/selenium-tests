@@ -67,6 +67,7 @@ public class Navigating extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "MAIN-6970")
   public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
     appleLinkRedirectsProperly();
   }
@@ -105,14 +106,14 @@ public class Navigating extends NewTestTemplate {
   }
 
   public void discussionsAppPromotionUnitPresentOnPage() {
-    PostsListPage postsList = new PostsListPage(driver).open();
+    PostsListPage postsList = new PostsListPage(driver).open("3035");
     Assertion.assertTrue(postsList.isAppleLinkDisplayed());
     Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
     Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
   }
 
   public void appleLinkRedirectsProperly() {
-    PostsListPage postsList = new PostsListPage(driver).open();
+    PostsListPage postsList = new PostsListPage(driver).open("3035");
     postsList.clickAppleLinkInAppPromotion();
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
     driver.switchTo().window(newWindow);

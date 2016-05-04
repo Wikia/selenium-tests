@@ -20,7 +20,7 @@ public class MobilePreviewEditModePageObject extends BasePageObject {
   @FindBy(css = ".portable-infobox .pi-title")
   private WebElement infoboxTitle;
 
-  @FindBy(css = ".portable-infobox .pi-hero")
+  @FindBy(css = ".portable-infobox-hero-image")
   private WebElement infoboxHeroImage;
 
   @FindBy(css = ".portable-infobox .pi-data")
