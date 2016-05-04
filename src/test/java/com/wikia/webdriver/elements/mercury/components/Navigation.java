@@ -21,7 +21,7 @@ public class Navigation {
   @FindBy(css = ".side-nav-menu__item.menu")
   private List<WebElement> subMenuLinks;
 
-  @FindBy(css = ".local-nav-menu li.mw-content a")
+  @FindBy(css = "li.side-nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
@@ -104,6 +104,7 @@ public class Navigation {
   }
 
   public Navigation openRecentWikiActivity() {
+
     wait.forElementClickable(recentWikiActivityLink);
     recentWikiActivityLink.click();
 

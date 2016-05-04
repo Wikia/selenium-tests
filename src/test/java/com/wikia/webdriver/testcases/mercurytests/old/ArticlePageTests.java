@@ -229,8 +229,7 @@ public class ArticlePageTests extends NewTestTemplate {
     PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
 
     topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.openSubMenu(2);
+    navigation.openSubMenu(3);
     navigation.openPageLink(5);
 
     result = !driver.getCurrentUrl().contains(encodedColonUrl);
@@ -250,8 +249,7 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.openSubMenu(2);
+    navigation.openSubMenu(3);
     navigation.openPageLink(4);
 
     result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
