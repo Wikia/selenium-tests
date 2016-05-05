@@ -152,6 +152,8 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
+  @FindBy(css = ".site-head .site-head-icon-nav")
+  private WebElement navIconSelector;
 
   @Getter(lazy = true)
   private final GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
@@ -163,6 +165,7 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
+
 
   public WikiBasePageObject() {
     super();
@@ -468,9 +471,8 @@ public class WikiBasePageObject extends BasePageObject {
         driver.switchTo().frame("PreviewFrame");
       }
       // open nav if on mercury, required to see login data
-      WebElement icon = driver.findElement(By.cssSelector(".site-head .site-head-icon-nav"));
-      if (icon != null) {
-        icon.click();
+      if (this.navIconSelector != null) {
+        this.navIconSelector.click();
       }
 
       wait.forElementPresent(By
