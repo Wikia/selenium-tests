@@ -6,10 +6,10 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.fandom.FandomTestTemplate;
 import com.wikia.webdriver.elements.fandom.pages.MainPage;
 
-@Test(groups = {"Fandom"})
+@Test(groups = {"Fandom", "Fandom_HeroUnit"})
 public class HeroUnitTest extends FandomTestTemplate {
 
-  @Test(groups = {"HeroUnit"})
+  @Test
   public void anonCanSeeHeroUnit() {
     MainPage mainPage = new MainPage().open();
 

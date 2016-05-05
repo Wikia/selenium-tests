@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.common.core.helpers.FandomUser;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-public class LoginBox extends BasePageObject {
+public class WPLoginBox extends BasePageObject {
 
   @FindBy(css = "#user_login")
   private WebElement username;
@@ -17,7 +17,7 @@ public class LoginBox extends BasePageObject {
   @FindBy(css = "#wp-submit")
   private WebElement sumbmit;
 
-  public LoginBox login(FandomUser user) {
+  public WPLoginBox login(FandomUser user) {
     username.sendKeys(user.getUsername());
     password.sendKeys(user.getPassword());
     sumbmit.click();
