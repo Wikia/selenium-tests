@@ -404,7 +404,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject waitForPageLoaded() {
-    waitForJavaScriptTruthy("document.readyState === 'complete'");
+    jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
     return this;
   }
 
@@ -426,13 +426,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     } finally {
       restoreDeaultImplicitWait();
     }
-  }
-
-  public String getCountry() {
-    waitForJavaScriptTruthy("Wikia.geo");
-    return driver.executeScript(
-        "return Wikia.geo.getCountryCode();"
-    ).toString();
   }
 
   public AdsBaseObject addToUrl(String param) {
@@ -569,25 +562,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private WebElement getIframe(String slotName, String src) {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
-  }
-
-  public void waitForJavaScriptTruthy(final String script) {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(new ExpectedCondition<Boolean>() {
-        public Boolean apply(WebDriver driver) {
-          try {
-            return (boolean) ((JavascriptExecutor) driver)
-                .executeScript("return !!(" + script + ");");
-          } catch (WebDriverException e) {
-            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
-            return false;
-          }
-        }
-      });
-    } finally {
-      restoreDeaultImplicitWait();
-    }
   }
 
   public void verifyNoAd(final String slotSelector) {

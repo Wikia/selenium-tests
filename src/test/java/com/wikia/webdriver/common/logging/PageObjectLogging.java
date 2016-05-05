@@ -17,7 +17,6 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -311,7 +310,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         new WikiBasePageObject().loginAs(user);
       }
 
-      checkCountryCode(Configuration.getCountryCode());
+      checkCountryCode(driver, Configuration.getCountryCode());
     }
 
     logJSError(driver);
@@ -492,12 +491,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     CommonUtils.appendTextToFile(logPath, "</body></html>");
   }
 
-  private void checkCountryCode(String expectedCountryCode) {
+  private void checkCountryCode(WebDriver driver, String expectedCountryCode) {
     if (StringUtils.isBlank(expectedCountryCode)) {
       return;
     }
 
-    String actualCountryCode = new AdsBaseObject(driver).getCountry();
+    String actualCountryCode = new JavascriptActions(driver).getCountry();
 
     if (expectedCountryCode.equalsIgnoreCase(actualCountryCode)) {
       logInfo("Country code: " + actualCountryCode);
