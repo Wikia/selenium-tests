@@ -467,6 +467,12 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
+      // open nav if on mercury, required to see login data
+      WebElement icon = driver.findElement(By.cssSelector(".site-head .site-head-icon-nav"));
+      if (icon != null) {
+        icon.click();
+      }
+
       wait.forElementPresent(By
           .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
     } finally {
