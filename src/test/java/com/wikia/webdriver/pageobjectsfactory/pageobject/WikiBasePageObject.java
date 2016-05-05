@@ -166,7 +166,6 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
 
-
   public WikiBasePageObject() {
     super();
   }
