@@ -1,11 +1,14 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.dataprovider.MercuryCategoriesDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 
@@ -45,10 +48,25 @@ public class CategoryPageTest extends NewTestTemplate {
         .loadPreviousMembersForSection("C");
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryMemberPage(")
+  @Test(groups = "mercury_category_navigateToCategoryMemberPage")
   public void mercury_category_navigateToCategoryMemberPage() {
     new CategoryPage()
         .navigateToPageWithArticleAndWithMembersFromUrl()
         .navigateToCategoryMemberPage("Category test 001");
+  }
+
+  @Test(
+          groups = "mercury_category_title_present",
+          dataProvider = "getCategoriesWithTitles",
+          dataProviderClass = MercuryCategoriesDataProvider.class
+  )
+  public void mercury_category_title_present(String pageUrl, String expectedTitle) {
+    Navigate navigate = new Navigate(driver);
+    navigate.toPage(pageUrl);
+
+    CategoryPage categoryPage = new CategoryPage();
+
+    Assertion.assertEquals(categoryPage.getPageTitle(), expectedTitle);
+    Assertion.assertEquals(categoryPage.getPageSubtitle(), "Category Page");
   }
 }
