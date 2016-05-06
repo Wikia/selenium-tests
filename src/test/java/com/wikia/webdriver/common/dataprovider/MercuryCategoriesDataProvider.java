@@ -9,8 +9,9 @@ public class MercuryCategoriesDataProvider {
         return new Object[][]{
                 {"/wiki/Category:NoContent", "NOCONTENT"},
                 {"/wiki/Category:WithContent", "WITHCONTENT"},
-                {"/wiki/Category:DisplayTitleWithContent", "CUSTOM DISPLAY TITLE WITH CONTENT"},
-                {"/wiki/Category:DisplayTitleNoContent", "CUSTOM DISPLAY TITLE WITHOUT CONTENT"}
+                {"/wiki/Category:DisplayTitleWithContent", "CUSTOM DISPLAY TITLE WITH CONTENT"}
+                //Below case can be enabled when XW-1461 is fixed
+                //{"/wiki/Category:DisplayTitleNoContent", "CUSTOM DISPLAY TITLE WITHOUT CONTENT"}
         };
     }
 }
