@@ -471,11 +471,18 @@ public class WikiBasePageObject extends BasePageObject {
       }
       // open nav if on mercury, required to see login data
       if (this.navIconSelector != null) {
+        wait.forElementClickable(this.navIconSelector);
         this.navIconSelector.click();
       }
 
       wait.forElementPresent(By
           .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
+
+      // closing menu if mercury
+      if (this.navIconSelector != null) {
+        wait.forElementClickable(this.navIconSelector);
+        this.navIconSelector.click();
+      }
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
