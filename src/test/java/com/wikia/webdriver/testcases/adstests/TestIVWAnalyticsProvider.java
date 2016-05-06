@@ -50,7 +50,6 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
       networkTrafficInterceptor.startIntercepting();
       String testedPage = urlBuilder.getUrlForPath(wikiName, path);
       AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
-      Assertion.assertEquals(adsBaseObject.getCountry(), CountryCode.GERMANY);
 
       assertTrackingPixels(adsBaseObject,
                            URL_BASE_SCRIPT,

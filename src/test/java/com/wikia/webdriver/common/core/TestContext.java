@@ -29,7 +29,7 @@ public class TestContext {
     isFirstLoad = value;
   }
 
-  public static boolean isIsFirstLoad(){
+  public static boolean isFirstLoad(){
     return isFirstLoad;
   }
 }

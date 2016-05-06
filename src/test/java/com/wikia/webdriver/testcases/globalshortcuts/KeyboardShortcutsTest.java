@@ -9,12 +9,11 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 
-@Execute(onWikia = "globalshortcuts-en")
+@Execute(asUser = User.USER, onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
 public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")
-  @Execute(asUser = User.USER)
   public void globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton() {
     new HomePageObject()
         .open()

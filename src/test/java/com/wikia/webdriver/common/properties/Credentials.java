@@ -133,6 +133,9 @@ public class Credentials {
 
   public final String apiToken;
 
+  public final String httpAuthName;
+  public final String httpAuthPass;
+
   public Credentials() {
     File file = new File(Configuration.getCredentialsFilePath());
     userName = XMLReader.getValue(file, "ci.user.regular.username");
@@ -239,6 +242,9 @@ public class Credentials {
     apiToken = XMLReader.getValue(file, "ci.api.token");
 
     youTubeApiKey = XMLReader.getValue(file, "ci.api.youtube.key");
+
+    httpAuthName = XMLReader.getValue("fandom.auth.username");
+    httpAuthPass = XMLReader.getValue("fandom.auth.password");
   }
 
   public String getUserBaseOnEditorPref(EditorPref editorPref) {
