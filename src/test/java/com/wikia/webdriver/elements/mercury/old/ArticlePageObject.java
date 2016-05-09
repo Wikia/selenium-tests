@@ -14,7 +14,7 @@ public class ArticlePageObject {
 
   @FindBy(css = ".wikia-logo")
   private WebElement wikiaLogo;
-  @FindBy(css = ".nav")
+  @FindBy(css = ".site-head-icon-search")
   private WebElement searchButton;
   @FindBy(css = ".contributors")
   private WebElement topContributorsSection;

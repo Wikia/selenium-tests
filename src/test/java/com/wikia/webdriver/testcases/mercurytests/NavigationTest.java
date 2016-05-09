@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -10,7 +11,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -19,9 +19,6 @@ public class NavigationTest extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
-
-  private final static String SEARCH_PASS = "Gallery";
-  private final static String SEARCH_FAIL = "tee";
 
   private void init() {
     this.topBar = new TopBar(driver);
@@ -37,37 +34,43 @@ public class NavigationTest extends NewTestTemplate {
     topBar.openNavigation();
     navigation.openSubMenu(1);
     navigation.closeSubMenu();
-    topBar.closeNavigation();
+    topBar.clickCloseButton();
   }
 
-  @Test(groups = "mercury_navigation_validSearchPhraseTriggersSuggestionThatCanBeOpened")
-  public void mercury_navigation_validSearchPhraseTriggersSuggestionThatCanBeOpened() {
+  @Test(groups = "mercury_navigation_resetNavigationState")
+  public void mercury_navigation_resetNavigationState() {
     init();
 
     topBar.openNavigation();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
     navigation.openSubMenu(1);
-    navigation.typeInSearch(SEARCH_PASS);
-    navigation.selectSearchSuggestion(1);
+    Assertion.assertTrue(navigation.isBackButtonVisible());
+    topBar.clickCloseButton();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  @Test(groups = "mercury_navigation_invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled")
-  public void mercury_navigation_invalidSearchPhraseDoesntTriggerSuggestionAndSearchCanBeCancelled() {
+  @Test(groups = "mercury_navigation_backButton")
+  public void mercury_navigation_backButton() {
     init();
 
     topBar.openNavigation();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
     navigation.openSubMenu(1);
-    navigation.typeInSearch(SEARCH_FAIL);
-    navigation.seeNoSearchResults();
-    navigation.cancelSearch();
+    Assertion.assertTrue(navigation.isBackButtonVisible());
+    navigation.clickBackButton();
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  @Test(groups = "mercury_navigation_navigateToPageUsingLocalNavigation")
-  public void mercury_navigation_navigateToPageUsingLocalNavigation() {
+  @Test(groups = "mercury_navigation_isFooterAlwaysVisible")
+  public void mercury_navigation_isFooterAlwaysVisible() {
     init();
 
     topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.openSubMenu(0);
-    navigation.openPageLink(0);
+    Assertion.assertTrue(navigation.isFooterVisible());
+
+    driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
+    Assertion.assertTrue(navigation.isFooterVisible());
   }
 }
