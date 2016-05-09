@@ -30,7 +30,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnCorporatePages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
@@ -160,7 +159,9 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryPageTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
