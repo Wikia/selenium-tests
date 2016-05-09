@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.ModularMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
 import org.testng.annotations.Test;

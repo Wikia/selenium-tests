@@ -10,10 +10,9 @@ import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CuratedContentToolModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -186,9 +185,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         new InfoboxBuilderPage().openExisting("InfoboxBuilderVerifyInterfaceFunctionality");
 
     Assertion.assertTrue(builderPage.selectRowWithIndex(0).clickBackArrow().areAddButtonsPresent());
-    Assertion.assertTrue(builderPage.selectTitleWithIndex(0).clickBackArrow().areAddButtonsPresent());
-    Assertion.assertTrue(builderPage.selectImageWithIndex(0).clickBackArrow().areAddButtonsPresent());
-    Assertion.assertTrue(builderPage.selectHeaderWithIndex(0).clickBackArrow().areAddButtonsPresent());
+    Assertion
+        .assertTrue(builderPage.selectTitleWithIndex(0).clickBackArrow().areAddButtonsPresent());
+    Assertion
+        .assertTrue(builderPage.selectImageWithIndex(0).clickBackArrow().areAddButtonsPresent());
+    Assertion
+        .assertTrue(builderPage.selectHeaderWithIndex(0).clickBackArrow().areAddButtonsPresent());
   }
 
   @Execute(asUser = User.STAFF)
