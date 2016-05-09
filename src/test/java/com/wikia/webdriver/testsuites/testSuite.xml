@@ -30,7 +30,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnCorporatePages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
