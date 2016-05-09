@@ -38,6 +38,7 @@ public class Sorting extends NewTestTemplate {
   @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2417")
   public void anonUserOnDesktopCanSortPostList() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
