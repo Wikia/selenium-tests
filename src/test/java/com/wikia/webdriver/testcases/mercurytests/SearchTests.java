@@ -23,7 +23,7 @@ public class SearchTests extends NewTestTemplate {
 
   private void init() {
     this.topBar = new TopBar(driver);
-    this.search = new Search(driver);
+    this.search = new Search();
 
     new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
   }

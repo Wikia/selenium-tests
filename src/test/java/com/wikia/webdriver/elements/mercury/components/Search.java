@@ -22,7 +22,7 @@ public class Search extends BasePageObject {
 
   private Loading loading;
 
-  public Search(WebDriver driver) {
+  public Search() {
     this.loading = new Loading(driver);
   }
 

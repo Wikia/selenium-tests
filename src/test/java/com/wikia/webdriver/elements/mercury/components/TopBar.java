@@ -60,7 +60,7 @@ public class TopBar extends WikiBasePageObject {
     PageObjectLogging.logInfo("Search is opened");
     wait.forElementVisible(navigationComponent);
 
-    return new Search(driver);
+    return new Search();
   }
 
   public Navigation clickCloseButton() {
