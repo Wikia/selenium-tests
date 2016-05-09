@@ -3,13 +3,15 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Search {
+public class Search extends BasePageObject {
 
   @FindBy(css = ".side-search__container input")
   private WebElement searchInput;
@@ -20,16 +22,10 @@ public class Search {
   private String searchResultClass = ".side-search__results li.mw-content a";
   private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");
 
-  private WebDriver driver;
-  private Wait wait;
   private Loading loading;
 
   public Search(WebDriver driver) {
-    this.driver = driver;
-    this.wait = new Wait(driver);
     this.loading = new Loading(driver);
-
-    PageFactory.initElements(driver, this);
   }
 
   public Search seeNoSearchResults() {
