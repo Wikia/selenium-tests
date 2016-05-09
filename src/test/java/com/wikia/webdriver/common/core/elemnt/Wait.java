@@ -395,6 +395,10 @@ public class Wait {
     }
   }
 
+  public void forUrlContains(String text){
+    wait.until(ExpectedConditions.urlContains(text));
+  }
+
   private void restoreDeaultImplicitWait() {
     changeImplicitWait(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
   }

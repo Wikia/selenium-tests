@@ -60,8 +60,7 @@ public class SpotifyTests extends NewTestTemplate {
 
     widget.create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -73,10 +72,8 @@ public class SpotifyTests extends NewTestTemplate {
 
     widget.create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_1);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

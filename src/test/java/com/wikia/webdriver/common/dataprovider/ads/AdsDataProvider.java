@@ -73,23 +73,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] corporatePages() {
-    return new Object[][]{
-        {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
-        {"fr.wikia", "Wikia", "wka.wikia/_fraccueil//home", "CORP_TOP_LEADERBOARD"},
-        {"pl.wikia", "Wikia", "wka.wikia/_plcorporate//home", "CORP_TOP_LEADERBOARD"},
-        {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Mini_Book_Club", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] noAdsForUsers() {
     return new Object[][]{
         {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
@@ -383,9 +366,9 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"esrb\":\"everyone\"",
-                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                "\"media\":[\"tv\",\"cards\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"anime\",\"comic\",\"fantasy\"]",
+                "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                 "\"pform\":[\"pc\",\"psp\"]",
                 "\"sex\":[\"m\"]"
             ),
@@ -418,12 +401,12 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"18-34\",\"18-24\",\"25-34\",\"teen\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
-                "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
-                "\"pub\":[\"bethesda\",\"bethesda\"]",
+                "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+                "\"pub\":[\"bethesda\"]",
                 "\"esrb\":\"mature\"",
-                "\"theme\":[\"military\",\"postapocalypse\"]"
+                "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -452,10 +435,9 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"kids\",\"teen\",\"under18\",\"18-24\"]",
-                "\"gnre\":[\"mmo\",\"rpg\",\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"rpg\",\"mmorpg\",\"openworld\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
                 "\"pform\":[\"pc\"]",
-                "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
                 "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
@@ -487,14 +469,10 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"under18\",\"18-24\"]",
-                "\"egnre\":[\"anime\",\"fantasy\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
                 "\"media\":[\"tv\"]",
-                "\"eth\":[\"asian\"]",
-                "\"hhi\":[\"0-30\"]",
-                "\"kids\":[\"0-17\"]",
                 "\"sex\":[\"m\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fantasy\",\"cartoon\",\"comics\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"],\"theme\":[\"magic\"]",
                 "\"theme\":[\"magic\"]",
                 "\"esrb\":\"ec\""
             ),
@@ -525,9 +503,9 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
-                "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
-                "\"pform\":[\"pc\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                 "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
@@ -557,14 +535,13 @@ public class AdsDataProvider {
                 "\"ref\":\"direct\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
+                "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
-                "\"volum\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
-                "\"theme\":[\"space\",\"alien\"]"
+                "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",

@@ -22,6 +22,8 @@ public class SmartBanner {
   private JavascriptActions jsActions;
   private WebDriver driver;
 
+  private static final int SMART_BANNER_POS_Y = 50;
+
   public SmartBanner(WebDriver driver) {
     this.wait = new Wait(driver);
     this.jsActions = new JavascriptActions(driver);
@@ -50,8 +52,10 @@ public class SmartBanner {
 
     PageObjectLogging.logInfo("Smart banner position is fixed at the top");
     wait.forElementPresent(smartBannerComponent);
-    Assertion.assertTrue(driver.findElement(smartBannerComponent).getLocation().getY() == 0,
-                         "Smart banner position is not fixed at the top");
+    Assertion.assertTrue(
+        driver.findElement(smartBannerComponent).getLocation().getY() == SMART_BANNER_POS_Y,
+        "Smart banner position is not fixed at the top"
+    );
 
     return this;
   }
