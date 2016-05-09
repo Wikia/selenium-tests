@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Navigation {
 
@@ -104,7 +105,6 @@ public class Navigation {
   }
 
   public Navigation openRecentWikiActivity() {
-
     wait.forElementClickable(recentWikiActivityLink);
     recentWikiActivityLink.click();
 
@@ -119,11 +119,9 @@ public class Navigation {
 
   public boolean isUserProfileLinkVisible() {
     try {
-      wait.forElementVisible(userProfile);
-      PageObjectLogging.logInfo("User profile link is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("User profile link is not visible");
+      return userProfile.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
@@ -131,33 +129,27 @@ public class Navigation {
 
   public boolean isMainHeaderVisible() {
     try {
-      wait.forElementVisible(navigationMainHeader);
-      PageObjectLogging.logInfo("Main header is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Main header is not visible");
+      return navigationMainHeader.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
 
   public boolean isBackButtonVisible() {
     try {
-      wait.forElementVisible(backButton);
-      PageObjectLogging.logInfo("Back button is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Back button is not visible");
+      return backButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
 
   public boolean isFooterVisible() {
     try {
-      wait.forElementVisible(homeOfFandomFooter);
-      PageObjectLogging.logInfo("Footer is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Footer is not visible");
+      return homeOfFandomFooter.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }

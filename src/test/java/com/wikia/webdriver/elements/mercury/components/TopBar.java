@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.NoSuchElementException;
+
 public class TopBar extends WikiBasePageObject {
 
   @FindBy(css = ".site-head")
@@ -71,57 +73,46 @@ public class TopBar extends WikiBasePageObject {
 
   public boolean isNavigationBarVisible() {
     try {
-      wait.forElementVisible(navBar);
-      PageObjectLogging.logInfo("Navigation bar is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Navigation bar is not visible");
+      return navBar.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
 
   public boolean isLogoVisible() {
     try {
-      wait.forElementVisible(logo);
-      PageObjectLogging.logInfo("Wikia logo is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Wikia logo is not visible");
+      return logo.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
 
   public boolean isHamburgerIconVisible() {
     try {
-      wait.forElementVisible(hamburgerIcon);
-      PageObjectLogging.logInfo("Hamburger icon is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Hamburger icon is not visible");
+      return hamburgerIcon.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
 
   public boolean isSearchIconVisible() {
     try {
-      wait.forElementVisible(searchIcon);
-      PageObjectLogging.logInfo("Search icon is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Search icon is not visible");
+      return searchIcon.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
 
   public boolean isCloseIconVisible() {
     try {
-      wait.forElementVisible(closeButton);
-      PageObjectLogging.logInfo("Close icon is visible");
-      return true;
-    } catch (Exception e) {
-      PageObjectLogging.logInfo("Close icon is not visible");
+      return closeButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
-
   }
 }
