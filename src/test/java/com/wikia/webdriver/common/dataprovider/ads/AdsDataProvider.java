@@ -1004,6 +1004,16 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsDetection() {
+    return new Object[][]{
+        {
+            "project43",
+            "poznan"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {

@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -395,7 +396,30 @@ public class Wait {
     }
   }
 
-  public void forUrlContains(String text){
+  public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
+                                                final String pattern) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      wait.until(
+          new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+              HarEntry entry = trafficInterceptor.getMatchingEntryByUrlPatternFromHar(pattern);
+              return entry != null && entry.getResponse().getStatus() < 400;
+            }
+
+            @Override
+            public String toString() {
+              return "successful response matching pattern: " + pattern;
+            }
+          }
+      );
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public void forUrlContains(String text) {
     wait.until(ExpectedConditions.urlContains(text));
   }
 

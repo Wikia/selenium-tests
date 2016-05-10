@@ -55,6 +55,16 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     return false;
   }
 
+  public HarEntry getMatchingEntryByUrlPatternFromHar(String pattern) {
+    har = getHar();
+    for (HarEntry entry : har.getLog().getEntries()) {
+      if (entry.getRequest().getUrl().matches(pattern)) {
+        return entry;
+      }
+    }
+    return null;
+  }
+
   public void checkAssetsStatuses(String domain) {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
