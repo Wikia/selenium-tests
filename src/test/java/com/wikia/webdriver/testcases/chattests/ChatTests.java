@@ -47,7 +47,6 @@ public class ChatTests extends NewTestTemplate {
     return new ChatPage().open();
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void dropDownMenuForRegularUser() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -61,7 +60,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isRegularUserDropdownDisplayed(), "REGULAR USER DROBDOWN IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void verifySwitchingBetweenMainAndPrivateSections() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -80,7 +78,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void userCanSendMessageOnWallAndPrivate() {
     ChatPage chatUserThree = openChatForUser(userThree, userThreePassword);
@@ -105,7 +102,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void usreCanSendMultipleNotifications() {
     ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
@@ -129,7 +125,6 @@ public class ChatTests extends NewTestTemplate {
             "PRIVATE MESSAGES COUNTER IS NOT CORRECT");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void staffCanBanUser() {
     ChatPage userToBeBaned = openChatForUser(userToBeBanned, userToBeBannedPassword);
@@ -148,7 +143,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDispalyed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void blockedUserMessagesAreNotDisplayed() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -175,7 +169,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void blockedUserCanNotCreatePrivateMessage() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -201,7 +194,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void regularUserCanOpenMessageWall() {
     openChatForUser(userOne, userOnePassword);
@@ -215,7 +207,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserFive.isMessageWallOpened(userOne), "MESSAGE WALL TAB IS NOT OPENED");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void regularUserCanOpenContributions() {
     openChatForUser(userOne, userOnePassword);
@@ -229,7 +220,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserFive.isContributionsPageOpened(userOne), "CONTRIBUTION TAB IS NOT OPENED");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void userCanNotBlockPrivateMessagesFromStaff() {
     openChatForUser(userStaff, userStaffPassword);
@@ -243,7 +233,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertFalse(chatUserOne.isBlockPrivateMessageButtonDisplayed(), "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void userCanBeKickedOutFromChat() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -258,7 +247,6 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserKickedFromChat(), "USER IS NOT KICKED FROM CHAT");
   }
 
-  @DontRun(env = {"preview", "dev"})
   @Test(groups = "ChatTests")
   public void bannedUserCanNotEnterTheChat() {
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);

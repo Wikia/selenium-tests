@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -62,8 +61,6 @@ public class ChatPage extends WikiBasePageObject {
   private WebElement privateChatHeader;
   @FindBy(css = "div.actions .admin-actions .give-chat-mod")
   private WebElement addUserModStatusButton;
-  @FindBy(css = "div#UserStatsMenu.UserStatsMenu")
-  private WebElement userOptions;
   @FindBy(css = "ul.admin-actions")
   private WebElement userModOptions;
   @FindBy(css = "li.message-wall")
@@ -90,7 +87,7 @@ public class ChatPage extends WikiBasePageObject {
   private static final String NOTIFICATION_COUNTER =
           "//span[@class='splotch' and contains(text(), '%s')]";
 
-  private static final int REGULAR_USER_DROPDOWN_ELEMENTS = 3;
+  private static final int REGULAR_USER_DROPDOWN_ELEMENTS_COUNT = 3;
 
   public ChatPage open() {
     getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_CHAT);
@@ -121,7 +118,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isUserOnChat() {
     try {
       wait.forElementVisible(chatInlineAlert);
-      return chatInlineAlert.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -131,7 +128,7 @@ public class ChatPage extends WikiBasePageObject {
     try {
       WebElement userPostedMessage = userPostedMessage(message);
       wait.forElementVisible(userPostedMessage);
-      return userPostedMessage.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -140,7 +137,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isPrivateMessageHeaderDispayed() {
     try {
       wait.forElementVisible(privateMessagesHeader);
-      return privateMessagesHeader.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -149,7 +146,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isPermissionsErrorTitleDisplayed() {
     try {
       wait.forElementVisible(permissionsErrorTitle);
-      return permissionsErrorTitle.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -158,7 +155,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isPrivateMessageNotificationDisplayed() {
     try {
       wait.forElementVisible(privateMessageNotification);
-      return privateMessageNotification.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -167,7 +164,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isPrivateNotificationCountDisplayed(int notificationCount) {
     try {
       wait.forElementVisible(userPrivateMessageNotification(notificationCount));
-      return userPrivateMessageNotification(notificationCount).isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -184,18 +181,14 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isPrivateChatOpen() {
     try {
       wait.forElementVisible(privateChatHeader);
-      return privateChatHeader.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
   }
 
   public boolean isRegularUserDropdownDisplayed() {
-    if (userDropDownActionsElements.size() == REGULAR_USER_DROPDOWN_ELEMENTS) {
-      return true;
-    } else {
-      return false;
-    }
+    return userDropDownActionsElements.size() == REGULAR_USER_DROPDOWN_ELEMENTS_COUNT;
   }
 
   public boolean isUserInPrivateSectionDisplayed(String userName) {
@@ -209,7 +202,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isChatUnbanMessageDispalyed(String userName ) {
     try {
       wait.forElementVisible(getUserUnbanMessage(userName));
-      return getUserUnbanMessage(userName).isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -236,7 +229,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isUserKickedFromChat() {
     try {
       wait.forElementVisible(userBlockedMessageField);
-      return userBlockedMessageField.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -245,7 +238,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isBlockPrivateMessageButtonDisplayed() {
     try {
       wait.forElementVisible(blockPrivateMassageButton);
-      return blockPrivateMassageButton.isDisplayed();
+      return true;
     } catch (Exception e) {
       return false;
     }
@@ -254,7 +247,7 @@ public class ChatPage extends WikiBasePageObject {
   public boolean areStaffOptionsDisplayed() {
     try{
       wait.forElementVisible(userModOptions);
-      return userModOptions.isDisplayed();
+      return true;
     }catch (Exception e) {
       return false;
     }
