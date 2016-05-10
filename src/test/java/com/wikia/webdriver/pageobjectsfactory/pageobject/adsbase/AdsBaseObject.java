@@ -62,8 +62,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
-  private final static String LOCK_CSS_PACKAGE = "ARecoveryEngine/css/recoveryLock.scss";
-  private final static String MAIN_CSS_PACKAGE = "skins/oasis/css/oasis.scss";
+  private static final String LOCK_CSS_PACKAGE = "ARecoveryEngine/css/recoveryLock.scss";
+  private static final String MAIN_CSS_PACKAGE = "skins/oasis/css/oasis.scss";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
