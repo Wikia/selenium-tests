@@ -30,7 +30,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnCorporatePages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
@@ -42,6 +41,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTaboolaOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdXCollapse"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagOasis"/>
@@ -159,7 +159,9 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryPageTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
@@ -217,6 +219,8 @@
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
+            <class name="com.wikia.webdriver.testcases.fandom.HeroUnitTest"/>
+            <class name="com.wikia.webdriver.testcases.fandom.WPAdminPageTest"/>
         </classes>
     </test>
 </suite>

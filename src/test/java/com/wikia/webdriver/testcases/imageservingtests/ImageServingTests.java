@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
@@ -21,6 +22,7 @@ public class ImageServingTests extends NewTestTemplate {
 
   @Test(groups = {"ImageServing_001", "ImageServing", "Smoke3"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-7102", comment = "The functionality is testable manually and should pass")
   public void ImageServing_001_SpecialNewFilesTest() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
