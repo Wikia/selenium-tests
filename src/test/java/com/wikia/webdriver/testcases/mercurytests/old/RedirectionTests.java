@@ -65,7 +65,7 @@ public class RedirectionTests extends NewTestTemplate {
     redirectFromFullSiteToOasis();
   }
 
-  @Test(groups = "MercuryRedirectionTest_004")
+  @Test(groups = "MercuryRedirectionTest_004", enabled = false)
   @RelatedIssue(issueID = "XW-1287", comment = "Sometimes wikiabar is receiving the click")
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     init();
