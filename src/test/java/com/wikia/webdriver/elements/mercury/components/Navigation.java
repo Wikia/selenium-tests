@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import java.util.List;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 
 public class Navigation {
 
@@ -36,6 +36,16 @@ public class Navigation {
 
   @FindBy(css = ".side-nav-menu__footer")
   private WebElement homeOfFandomFooter;
+
+  @FindBy(css = "li.games")
+  private WebElement gamesHub;
+
+  @FindBy(css = "li.movies")
+  private WebElement moviesHub;
+
+  @FindBy(css = "li.tv")
+  private WebElement tvHub;
+
 
   private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
@@ -148,6 +158,17 @@ public class Navigation {
   public boolean isFooterVisible() {
     try {
       return homeOfFandomFooter.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean areHubLinksVisible() {
+    try {
+      return gamesHub.isDisplayed()
+          && moviesHub.isDisplayed()
+          && tvHub.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

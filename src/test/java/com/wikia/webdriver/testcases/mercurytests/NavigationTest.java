@@ -73,4 +73,23 @@ public class NavigationTest extends NewTestTemplate {
     driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
     Assertion.assertTrue(navigation.isFooterVisible());
   }
+
+  @Test(groups = "mercury_navigation_navigationOnEnglishWiki")
+  public void mercury_navigation_navigationOnEnglishWiki() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.areHubLinksVisible());
+    Assertion.assertTrue(navigation.isFooterVisible());
+  }
+
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Test(groups = "mercury_navigation_navigationOnNonEnglishWiki")
+  public void mercury_navigation_navigationOnNonEnglishWiki() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertFalse(navigation.areHubLinksVisible());
+    Assertion.assertFalse(navigation.isFooterVisible());
+  }
 }
