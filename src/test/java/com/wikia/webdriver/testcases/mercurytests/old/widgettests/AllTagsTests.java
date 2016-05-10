@@ -90,8 +90,7 @@ public class AllTagsTests extends NewTestTemplate {
     init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -103,10 +102,8 @@ public class AllTagsTests extends NewTestTemplate {
     init();
     navigate.toPage(ARTICLE_NAME);
 
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_1);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

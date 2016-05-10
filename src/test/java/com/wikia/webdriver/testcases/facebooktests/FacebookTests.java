@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -39,6 +40,7 @@ public class FacebookTests extends NewTestTemplate {
    */
   @Test
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanSignupViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword());
 
@@ -62,6 +64,7 @@ public class FacebookTests extends NewTestTemplate {
    */
   @Test
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanLoginViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
@@ -80,6 +83,7 @@ public class FacebookTests extends NewTestTemplate {
 
   @Test
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanConnectToFacebookViaUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
@@ -89,6 +93,7 @@ public class FacebookTests extends NewTestTemplate {
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
     prefsPage.connectFacebook(user.getEmail(), user.getPassword());
     prefsPage.verifyFBButtonVisible();
+
     prefsPage.logOut(wikiURL);
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     signUp.clickFacebookSignUp();
@@ -97,6 +102,7 @@ public class FacebookTests extends NewTestTemplate {
 
   @Test
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanConnectToFacebookOnUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
