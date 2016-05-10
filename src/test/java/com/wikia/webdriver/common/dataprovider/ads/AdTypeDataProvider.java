@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+
 import org.testng.annotations.DataProvider;
 
 public class AdTypeDataProvider {
@@ -13,7 +15,7 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/Async/Success",
             "wka.life/_project43//article",
-            "MOBILE_PREFOOTER",
+            AdsContent.MOBILE_PREFOOTER,
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
         },
@@ -26,7 +28,7 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/Async/Hop",
             "wka.life/_project43//article",
-            "MOBILE_IN_CONTENT"
+            AdsContent.MOBILE_AD_IN_CONTENT
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
         },
     };
@@ -38,7 +40,7 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/Async/Success/NoAd",
             "wka.life/_project43//article",
-            "MOBILE_PREFOOTER"
+            AdsContent.MOBILE_PREFOOTER
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261075132&orderId=245575332
         },
     };
@@ -50,7 +52,7 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/Async/Hop/WithAd",
             "wka.life/_project43//article",
-            "MOBILE_PREFOOTER"
+            AdsContent.MOBILE_PREFOOTER
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261089652&orderId=245575332
         },
     };
@@ -62,10 +64,10 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/Async/Success,Hop",
             "wka.life/_project43//article",
-            "MOBILE_PREFOOTER",
+            AdsContent.MOBILE_PREFOOTER,
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260851332&orderId=245575332
-            "MOBILE_IN_CONTENT"
+            AdsContent.MOBILE_AD_IN_CONTENT
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=260955852&orderId=245575332
         },
     };
@@ -77,7 +79,7 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/ForcedSuccess",
             "wka.life/_project43//article",
-            "MOBILE_PREFOOTER"
+            AdsContent.MOBILE_PREFOOTER,
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261157332&orderId=245575332
         },
     };
@@ -89,7 +91,7 @@ public class AdTypeDataProvider {
         {
             "project43", "SyntheticTests/AdType/InspectIframe",
             "wka.life/_project43//article",
-            "MOBILE_PREFOOTER",
+            AdsContent.MOBILE_PREFOOTER,
             "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=261158532&orderId=245575332
         },
@@ -103,12 +105,26 @@ public class AdTypeDataProvider {
             "project43", "SyntheticTests/AdType/Collapse",
             "wka.life/_project43//article",
             new String[] {
-                "TOP_LEADERBOARD",
-                "TOP_RIGHT_BOXAD"
+                AdsContent.TOP_LB,
+                AdsContent.MEDREC
             }
             // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=261158652
         },
     };
+  }
+
+  @DataProvider
+  public static final Object[][] adXcollapse() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/AdXCollapse",
+            "wka.life/_project43//article",
+            new String[] {
+                AdsContent.MEDREC
+            }
+            // https://www.google.com/dfp/5441#delivery/LineItemDetail/orderId=245575332&lineItemId=273624492
+        },
+        };
   }
 
 }

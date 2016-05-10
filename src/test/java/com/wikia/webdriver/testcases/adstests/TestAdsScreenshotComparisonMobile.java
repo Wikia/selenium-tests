@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -21,74 +20,73 @@ public class TestAdsScreenshotComparisonMobile extends MobileTestTemplate {
     testedPage = urlBuilder.getUrlForPath(wikiName, article);
   }
 
-  private void checkAds(String country) {
+  private void checkAds() {
     MobileAdsBaseObject mobileAdsBaseObject = new MobileAdsBaseObject(driver, testedPage);
-    Assertion.assertEquals(mobileAdsBaseObject.getCountry(), country);
     mobileAdsBaseObject.verifyMobileTopLeaderboard();
   }
 
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_GEF"})
   public void Ads_Screenshot_Mobile_GEF() {
-    checkAds(CountryCode.UNITED_STATES);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.JAPAN)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_JP"})
   public void Ads_Screenshot_Mobile_JP() {
-    checkAds(CountryCode.JAPAN);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.VENEZUELA)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_VE"})
   public void Ads_Screenshot_Mobile_VE() {
-    checkAds(CountryCode.VENEZUELA);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_AU"})
   public void Ads_Screenshot_Mobile_AU() {
-    checkAds(CountryCode.AUSTRALIA);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_NZ"})
   public void Ads_Screenshot_Mobile_NZ() {
-    checkAds(CountryCode.NEW_ZEALAND);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.GERMANY)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_DE"})
   public void Ads_Screenshot_Mobile_DE() {
-    checkAds(CountryCode.GERMANY);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.UNITED_KINGDOM)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_GB"})
   public void Ads_Screenshot_Mobile_GB() {
-    checkAds(CountryCode.UNITED_KINGDOM);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.LITHUANIA)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_LT"})
   public void Ads_Screenshot_Mobile_LT() {
-    checkAds(CountryCode.LITHUANIA);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.TAIWAN)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_TW"})
   public void Ads_Screenshot_Mobile_TW() {
-    checkAds(CountryCode.TAIWAN);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_CA"})
   public void Ads_Screenshot_Mobile_CA() {
-    checkAds(CountryCode.CANADA);
+    checkAds();
   }
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.NORWAY)
   @Test(groups = {"MobileAds", "TopLeaderboardPresenceTest_NO"})
   public void Ads_Screenshot_Mobile_NO() {
-    checkAds(CountryCode.NORWAY);
+    checkAds();
   }
 }
