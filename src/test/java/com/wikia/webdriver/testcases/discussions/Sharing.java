@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Test(groups="discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";

@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups="discussions")
 public class Layout extends NewTestTemplate {
 

@@ -24,7 +24,7 @@ public class PostDetailsPage extends WikiBasePageObject{
   private List<WebElement> socialNetworkIcon;
 
   private static final String PATH = "d/p/%s";
-  private static final String DEFAULT_POST_ID = "2621148372316194193";
+  private static final String DEFAULT_POST_ID = "2741364719297234368";
 
   public PostDetailsPage(WebDriver driver) {
     super();
