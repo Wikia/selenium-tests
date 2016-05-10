@@ -62,8 +62,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
-  private final static String MAIN_CSS_PACKAGE = "skins/oasis/css/oasis.scss";
   private final static String LOCK_CSS_PACKAGE = "ARecoveryEngine/css/recoveryLock.scss";
+  private final static String MAIN_CSS_PACKAGE = "skins/oasis/css/oasis.scss";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
@@ -794,54 +794,29 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyUnlockCSS() {
-    String unlockCssUrl = "";
     // Stylesheets with main scss package in href
     String mainCssSelector = "link[href*=\"" + MAIN_CSS_PACKAGE + "\"]";
     // Sibling to above selector which is link
     String unlockCssSelector = mainCssSelector + " + link";
 
-    try {
-      driver.findElement(By.cssSelector(mainCssSelector));
-    } catch (Exception exception) {
-      PageObjectLogging.log("UnlockCSS", "Main css file not found", false, driver);
-      return;
-    }
-
-    try {
-      WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
-      unlockCssUrl = element.getAttribute("href");
-    } catch (Exception exception) {
-      PageObjectLogging.log("UnlockCSS", "Could not find unlock css", false, driver);
-      return;
-    }
+    wait.forElementPresent(By.cssSelector(mainCssSelector));
+    WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
+    String unlockCssUrl = element.getAttribute("href");
 
     Assertion.assertStringNotContains(unlockCssUrl, "wikia.com/__are");
     verifyIfUnlockCSSIsValid(unlockCssUrl);
   }
 
   public void verifyRecoveryUnlockCSS() {
-    String unlockCssUrl = "";
     // Stylesheets with lock scss package in href
     String lockCssSelector = "link[href*=\"" + LOCK_CSS_PACKAGE + "\"]";
     // Sibling to above selector which is link and contains href in wikia.com/__are endpoint
     String unlockCssSelector = lockCssSelector + " + link[href*=\"wikia.com/__are\"]";
 
-    try {
-      driver.findElement(By.cssSelector(lockCssSelector));
-    } catch (Exception exception) {
-      PageObjectLogging.log("UnlockCSS", "Recovery is not enabled", false, driver);
-      return;
-    }
+    wait.forElementPresent(By.cssSelector(lockCssSelector));
+    WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
 
-    try {
-      WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
-      unlockCssUrl = element.getAttribute("href");
-    } catch (Exception exception) {
-      PageObjectLogging.log("UnlockCSS", "CSS is not served from __are endpoint", false, driver);
-      return;
-    }
-
-    verifyIfUnlockCSSIsValid(unlockCssUrl);
+    verifyIfUnlockCSSIsValid(element.getAttribute("href"));
   }
 
   private void verifyIfUnlockCSSIsValid(String cssUrl) {
