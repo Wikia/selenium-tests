@@ -1008,7 +1008,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "project43",
-            "poznan"
+            "arecovery"
         }
     };
   }
