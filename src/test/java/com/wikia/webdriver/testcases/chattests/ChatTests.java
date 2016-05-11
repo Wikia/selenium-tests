@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ChatTests extends NewTestTemplate {
 
-  private final String USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR = "USER IS NOT DISPLAYED IN PRIVATE SECTION";
-  private final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
-  private final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
-  private final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
+  private final static String USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR = "USER IS NOT DISPLAYED IN PRIVATE SECTION";
+  private final static String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
+  private final static String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private final static String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
