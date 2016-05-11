@@ -1183,18 +1183,18 @@ public class AdsDataProvider {
   public static Object[][] adsRecoveryOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/Recovery/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image"),
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.TOP_LB)
-                .put("lineItemId", 272935812)
+                .put("lineItemId", 277592292)
                 .put("src", "gpt")
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Recovery/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image"),
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MEDREC)
-                .put("lineItemId", 272935812)
+                .put("lineItemId", 277592292)
                 .put("src", "gpt")
                 .build()
         }
@@ -1209,7 +1209,7 @@ public class AdsDataProvider {
             false
         },
         {
-            new Page("poznan", "Poznańskie_koziołki"),
+            new Page("arecovery", "SyntheticTests/Static_image"),
             true
         }
     };
