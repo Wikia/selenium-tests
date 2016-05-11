@@ -79,6 +79,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
+  private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
@@ -467,8 +468,20 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
+      // open nav if on mercury, required to see login data
+      if (driver.findElements(MERCURY_NAV_ICON).size() > 0) {
+        wait.forElementClickable(MERCURY_NAV_ICON);
+        driver.findElement(MERCURY_NAV_ICON).click();
+      }
+
       wait.forElementPresent(By
           .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
+
+      // closing menu if mercury
+      if (driver.findElements(MERCURY_NAV_ICON).size() > 0) {
+        wait.forElementClickable(MERCURY_NAV_ICON);
+        driver.findElement(MERCURY_NAV_ICON).click();
+      }
     } finally {
       restoreDeaultImplicitWait();
       driver.switchTo().defaultContent();
