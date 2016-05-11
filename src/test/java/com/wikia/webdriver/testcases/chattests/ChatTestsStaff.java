@@ -11,8 +11,9 @@ import org.testng.annotations.Test;
 
 public class ChatTestsStaff extends NewTestTemplate {
 
-  private String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
-  private String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
+  private final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private Credentials credentials = Configuration.getCredentials();
 
@@ -34,11 +35,11 @@ public class ChatTestsStaff extends NewTestTemplate {
     chatUserTwo.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
     chatUserOne.selectPrivateMessageToUser(credentials.userNameStaff2);
     Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
-    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
   @Test(groups = {"ChatStaff", "ChatTests"})
@@ -53,15 +54,15 @@ public class ChatTestsStaff extends NewTestTemplate {
     chatUserTwo.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
 
     switchToWindow(1);
     chatUserTwo.selectPrivateMessageToUser(credentials.userNameStaff);
-    Assertion.assertTrue(chatUserTwo.isPrivateMessageHeaderDispayed());
+    Assertion.assertTrue(chatUserTwo.isPrivateMessageHeaderDisplayed());
     chatUserTwo.writeOnChat(MESSAGE_ON_PRIVATE_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserOne.isPrivateMessageHeaderDispayed(), "PRIVATE MESSAGE HEDER IS DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isPrivateMessageHeaderDisplayed(), "PRIVATE MESSAGE HEDER IS DISPLAYED");
     Assertion.assertTrue(chatUserOne.isPrivateMessageNotificationDisplayed(), "PRIVATE MESSAGE HEDER IS DISPLAYED");
     chatUserOne.clickOnUserInPrivateMessageSection(credentials.userNameStaff2);
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
