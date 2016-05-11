@@ -62,13 +62,13 @@ public class Navigating extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void backToWiki() {
+  private void backToWiki() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickBackToWikiLink();
     postsList.verifyUrl(wikiURL);
   }
 
-  public void clickAvatarLoadsUserPage() {
+  private void clickAvatarLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUserAvatar();
     Assertion.assertTrue(
@@ -76,7 +76,7 @@ public class Navigating extends NewTestTemplate {
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 
-  public void clickUsernameLoadsUserPage() {
+  private void clickUsernameLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUsernameLink();
     Assertion.assertTrue(

@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Test(groups="discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sorting extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -69,7 +69,7 @@ public class Sorting extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void userCanSwitchBetweenLatestAndTrendingInDropdown() {
+  private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     postsList.clickLatestLinkOnMobile();
@@ -82,7 +82,7 @@ public class Sorting extends NewTestTemplate {
     new Loading(driver).handleAsyncPageReload();
   }
 
-  public void userCanSwitchBetweenLatestAndTrendingTab() {
+  private void userCanSwitchBetweenLatestAndTrendingTab() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickLatestTabOnDesktop();
     new Loading(driver).handleAsyncPageReload();

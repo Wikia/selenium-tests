@@ -46,14 +46,14 @@ public class Promoting extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void discussionsAppPromotionUnitPresentOnPage() {
+  private void discussionsAppPromotionUnitPresentOnPage() {
     PostsListPage postsList = new PostsListPage(driver).open("3035");
     Assertion.assertTrue(postsList.isAppleLinkDisplayed());
     Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
     Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
   }
 
-  public void appleLinkRedirectsProperly() {
+  private void appleLinkRedirectsProperly() {
     PostsListPage postsList = new PostsListPage(driver).open("3035");
     postsList.clickAppleLinkInAppPromotion();
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
@@ -61,7 +61,7 @@ public class Promoting extends NewTestTemplate {
     Assertion.assertTrue(driver.getTitle().contains("Wikia Fan App for: Fallout"));
   }
 
-  public void googlePlayLinkRedirectsProperly() {
+  private void googlePlayLinkRedirectsProperly() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickGooglePlayLinkInAppPromotion();
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
