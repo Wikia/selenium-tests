@@ -35,7 +35,7 @@ public class Sorting extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
-  @RelatedIssue(issueID = "XW-1047")
+  @RelatedIssue(issueID = "SOC-2417")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
