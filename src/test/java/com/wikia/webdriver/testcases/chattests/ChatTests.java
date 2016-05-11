@@ -1,21 +1,24 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import java.util.List;
-
-import org.testng.annotations.Test;
-
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class ChatTests extends NewTestTemplate {
 
+  private String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
+  private String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
+
   private Credentials credentials = Configuration.getCredentials();
   private String userOne = credentials.userName10;
   private String userOnePassword = credentials.password10;
@@ -34,154 +37,238 @@ public class ChatTests extends NewTestTemplate {
   private String userStaff = credentials.userNameStaff;
   private String userStaffPassword = credentials.passwordStaff;
 
-  private ChatPageObject openChatForUser(String userName, String password) {
+  private final String currentBrowserTab() {
+    return driver.getWindowHandle();
+  }
+
+  private ChatPage openChatForUser(String userName, String password) {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(userName, password, wikiURL);
-    return base.openChat(wikiURL);
+    return new ChatPage().open();
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_001", "Chat", "ChatTests"})
-  @RelatedIssue(issueID = "MAIN-6071")
-  public void Chat_001_twoUserEnterChat() {
-    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
-    chatUserOne.verifyChatPage();
-
-    switchToWindow(1);
-    new SpecialVersionPage().open();
-    ChatPageObject chatUserTwo = openChatForUser(userTwo, userTwoPassword);
-    chatUserTwo.verifyChatPage();
-    switchToWindow(0);
-
-    chatUserOne.verifyUserJoinToChatMessage(userTwo);
-  }
-
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_002", "Chat", "ChatTests"})
-  public void Chat_002_dropDownMenuForRegularUser() {
-    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
-    chatUserOne.verifyChatPage();
+  @Test(groups = "ChatTests")
+  public void dropDownMenuForRegularUser() {
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
     openChatForUser(userTwo, userTwoPassword);
 
     switchToWindow(0);
-    chatUserOne.verifyNormalUserDropdown(userTwo);
+    chatUserOne.clickOnDifferentUser(userTwo);
+    Assertion.assertTrue(chatUserOne.isRegularUserDropdownDisplayed(), "REGULAR USER DROBDOWN IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_003", "Chat", "ChatTests"})
-  public void Chat_003_dropDownMenuForBlockedUser() {
-    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
-    chatUserOne.verifyChatPage();
+  @Test(groups = "ChatTests")
+  public void verifySwitchingBetweenMainAndPrivateSections() {
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
-    openChatForUser(userTwo, userTwoPassword);
+    ChatPage chatUserTwo = openChatForUser(userTwo, userTwoPassword);
+    chatUserTwo.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    chatUserOne.verifyChatPage();
-
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
     chatUserOne.selectPrivateMessageToUser(userTwo);
-    chatUserOne.verifyPrivateUserDropdown(userTwo);
-
-    chatUserOne.blockPrivateMessageFromUser(userTwo);
-    chatUserOne.verifyBlockingUserDropdown(userTwo);
-
-    chatUserOne.allowPrivateMessageFromUser(userTwo);
-  }
-
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_004", "Chat", "ChatTests"})
-  public void Chat_004_verifySwitchingBetweenMainAndPrivateSections() {
-    ChatPageObject chatUserOne = openChatForUser(userOne, userOnePassword);
-    chatUserOne.verifyChatPage();
-
-    switchToWindow(1);
-    new SpecialVersionPage().open();
-    ChatPageObject chatUserTwo = openChatForUser(userTwo, userTwoPassword);
-
-    String userTwoMessage = chatUserTwo.generateMessageFromUser(userTwo);
-    chatUserTwo.writeOnChat(userTwoMessage);
-
-    switchToWindow(0);
-    chatUserOne.verifyMessageOnChat(userTwoMessage);
-
-    chatUserOne.selectPrivateMessageToUser(userTwo);
-    chatUserOne.verifyPrivateMessageHeader();
-    chatUserOne.verifyPrivateMessageIsHighlighted(userTwo);
-    chatUserOne.verifyPrivateChatTitle();
-
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userTwo), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
+    Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
-    chatUserOne.verifyMainChatIsHighlighted();
-    chatUserOne.verifyMessageOnChat(userTwoMessage);
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_005", "Chat", "ChatTests"})
-  public void Chat_005_sendPrivateMessage() {
-    ChatPageObject chatUserThree = openChatForUser(userThree, userThreePassword);
-    chatUserThree.verifyChatPage();
+  @Test(groups = "ChatTests")
+  public void userCanSendMessageOnWallAndPrivate() {
+    ChatPage chatUserThree = openChatForUser(userThree, userThreePassword);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
-    ChatPageObject chatUserFour = openChatForUser(userFour, userFourPassword);
-    String userFourPublicMessage = chatUserFour.generateMessageFromUser(userFour);
-    chatUserFour.writeOnChat(userFourPublicMessage);
+    ChatPage chatUserFour = openChatForUser(userFour, userFourPassword);
+    chatUserFour.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    chatUserThree.verifyMessageOnChat(userFourPublicMessage);
+    Assertion.assertTrue(chatUserFour.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
 
     switchToWindow(1);
-    String userFourPrivateMessage = chatUserFour.generateMessageFromUser(userFour);
     chatUserFour.selectPrivateMessageToUser(userThree);
-    chatUserFour.writeOnChat(userFourPrivateMessage);
+    Assertion.assertTrue(chatUserFour.isPrivateMessageHeaderDispayed());
+    chatUserFour.writeOnChat(MESSAGE_ON_PRIVATE_CHAT);
 
     switchToWindow(0);
-    chatUserThree.verifyPrivateMessageHeader();
-    chatUserThree.verifyPrivateMessageNotification();
+    Assertion.assertTrue(chatUserThree.isPrivateMessageHeaderDispayed(), "PRIVATE MESSAGE HEDER IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserThree.isPrivateMessageNotificationDisplayed(), "PRIVATE MESSAGE NOTIFICATION ARE NOT DISPLAYED");
     chatUserThree.clickOnUserInPrivateMessageSection(userFour);
-    chatUserThree.verifyMessageOnChat(userFourPrivateMessage);
+    Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_006", "Chat", "ChatTests"})
-  public void Chat_006_multipleNotifications() {
-    ChatPageObject chatUserFive = openChatForUser(userFive, userFivePassword);
+  @Test(groups = "ChatTests")
+  public void usreCanSendMultipleNotifications() {
+    ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
-    ChatPageObject chatUserSix = openChatForUser(userSix, userSixPassword);
-
-    String publicMessageFromUserSix = chatUserSix.generateMessageFromUser(userSix);
-    chatUserSix.verifyUserIsVisibleOnContactsList(userFive);
-    chatUserSix.writeOnChat(publicMessageFromUserSix);
+    ChatPage chatUserSix = openChatForUser(userSix, userSixPassword);
+    chatUserSix.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    chatUserFive.verifyUserJoinToChatMessage(userFive);
-    chatUserFive.verifyMessageOnChat(publicMessageFromUserSix);
+    Assertion.assertTrue(chatUserFive.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON PRIVATE CHAT IS NOT DISPLAYED");
 
     switchToWindow(1);
     chatUserSix.selectPrivateMessageToUser(userFive);
+    Assertion.assertTrue(chatUserSix.isUserInPrivateSectionDisplayed(userFive));
     List<String> messagesSent =
-        chatUserSix.sendMultipleMessagesFromUser(userSix, NUMBER_OF_PRIVATE_MESSAGES);
+        chatUserSix.sendMultipleMessagesFromUser(MESSAGE_ON_PRIVATE_CHAT, NUMBER_OF_PRIVATE_MESSAGES);
 
     switchToWindow(0);
-    chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);
+    Assertion.assertTrue(chatUserFive.isPrivateNotificationCountDisplayed(messagesSent.size()),
+            "PRIVATE MESSAGES COUNTER IS NOT CORRECT");
   }
 
-  @DontRun(env = {"preview", "dev", "sandbox"})
-  @Test(groups = {"Chat_007", "Chat", "Modals", "ChatTests"})
-  public void Chat_007_banUser() {
-    openChatForUser(userToBeBanned, userToBeBannedPassword);
+  @Test(groups = "ChatTests")
+  public void staffCanBanUser() {
+    ChatPage userToBeBaned = openChatForUser(userToBeBanned, userToBeBannedPassword);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
-    ChatPageObject chatUserStaff = openChatForUser(userStaff, userStaffPassword);
-
+    ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
     chatUserStaff.clickOnDifferentUser(userToBeBanned);
     chatUserStaff.banUser(userToBeBanned);
+
+    switchToWindow(0);
+    Assertion.assertTrue(userToBeBaned.isUserKickedFromChat(), "BANED USER IS ABLE TO WRITE MESSAGE");
+
+    switchToWindow(1);
     chatUserStaff.unBanUser(userToBeBanned);
+    Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDispalyed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
+  }
+
+  @Test(groups = "ChatTests")
+  public void blockedUserMessagesAreNotDisplayed() {
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
+    chatUserFive.clickOnDifferentUser(userOne);
+    chatUserFive.selectPrivateMessageToUser(userOne);
+
+    switchToWindow(0);
+    chatUserOne.clickOnDifferentUser(userFive);
+    chatUserOne.selectPrivateMessageToUser(userFive);
+    chatUserOne.clickOnUserInPrivateMessageSection(userFive);
+    chatUserOne.blockPrivateMessageFromUser(userFive);
+
+    switchToWindow(1);
+    chatUserFive.clickOnUserInPrivateMessageSection(userOne);
+    chatUserFive.writeOnChat(MESSAGE_ON_MAIN_CHAT);
+
+    switchToWindow(0);
+    Assertion.assertFalse(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS DISPLAYED IN PRIVATE SECTION");
+    chatUserOne.allowPrivateMessageFromUser(userFive);
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
+  }
+
+  @Test(groups = "ChatTests")
+  public void blockedUserCanNotCreatePrivateMessage() {
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
+
+    switchToWindow(0);
+    chatUserOne.clickOnDifferentUser(userFive);
+    chatUserOne.selectPrivateMessageToUser(userFive);
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive));
+    chatUserOne.clickOnUserInPrivateMessageSection(userFive);
+    chatUserOne.blockPrivateMessageFromUser(userFive);
+
+    switchToWindow(1);
+    chatUserFive.refreshPage();
+    chatUserFive.clickOnDifferentUser(userOne);
+    Assertion.assertFalse(chatUserFive.isPrivateMessageButtonDisplayed(), "PRIVATE MESSAGE BUTTON IS DISPLAYED");
+
+    switchToWindow(0);
+    chatUserOne.allowPrivateMessageFromUser(userFive);
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
+  }
+
+  @Test(groups = "ChatTests")
+  public void regularUserCanOpenMessageWall() {
+    openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
+    chatUserFive.clickOnDifferentUser(userOne);
+    chatUserFive.clickOpenUserMessageWall();
+    chatUserFive.switchToSecondTab(currentBrowserTab());
+    Assertion.assertTrue(chatUserFive.isMessageWallOpened(userOne), "MESSAGE WALL TAB IS NOT OPENED");
+  }
+
+  @Test(groups = "ChatTests")
+  public void regularUserCanOpenContributions() {
+    openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
+    chatUserFive.clickOnDifferentUser(userOne);
+    chatUserFive.clickOpenUserContributions();
+    chatUserFive.switchToSecondTab(currentBrowserTab());
+    Assertion.assertTrue(chatUserFive.isContributionsPageOpened(userOne), "CONTRIBUTION TAB IS NOT OPENED");
+  }
+
+  @Test(groups = "ChatTests")
+  public void userCanNotBlockPrivateMessagesFromStaff() {
+    openChatForUser(userStaff, userStaffPassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
+    chatUserOne.clickOnDifferentUser(userStaff);
+    chatUserOne.selectPrivateMessageToUser(userStaff);
+    chatUserOne.openUserDropDownInPrivateMessageSection(userStaff);
+    Assertion.assertFalse(chatUserOne.isBlockPrivateMessageButtonDisplayed(), "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF");
+  }
+
+  @Test(groups = "ChatTests")
+  public void userCanBeKickedOutFromChat() {
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatStaffUser = openChatForUser(userStaff, userStaffPassword);
+    chatStaffUser.clickOnDifferentUser(userOne);
+    chatStaffUser.clickOnUserOptionsKickButton();
+
+    switchToWindow(0);
+    Assertion.assertTrue(chatUserOne.isUserKickedFromChat(), "USER IS NOT KICKED FROM CHAT");
+  }
+
+  @Test(groups = "ChatTests")
+  public void bannedUserCanNotEnterTheChat() {
+    ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
+
+    switchToWindow(1);
+    SpecialVersionPage chatWindow = new SpecialVersionPage().open();
+    ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned, userToBeBannedPassword);
+
+    switchToWindow(0);
+    chatUserStaff.clickOnDifferentUser(userToBeBanned);
+    chatUserStaff.banUser(userToBeBanned);
+
+    switchToWindow(1);
+    chatWindow.refreshPage();
+
+    Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
+
+    switchToWindow(0);
+    chatUserStaff.unBanUser(userToBeBanned);
+
+    switchToWindow(1);
+    chatWindow.refreshPage();
+    Assertion.assertTrue(chatUserToBeBanned.isUserOnChat(), "USER IS NOT LOGGED IN TO CHAT");
   }
 }

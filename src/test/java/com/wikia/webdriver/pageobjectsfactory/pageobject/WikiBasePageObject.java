@@ -40,7 +40,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
@@ -523,11 +523,6 @@ public class WikiBasePageObject extends BasePageObject {
   public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
     getUrl(wikiURL + URLsContent.BLOG_NAMESPACE.replace("%userName%", userName) + blogTitle);
     return new BlogPageObject(driver);
-  }
-
-  public ChatPageObject openChat(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_CHAT);
-    return new ChatPageObject(driver);
   }
 
   public ArticlePageObject openMainPage(String wikiURL) {
