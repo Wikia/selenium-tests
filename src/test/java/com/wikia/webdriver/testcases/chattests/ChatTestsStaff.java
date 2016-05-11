@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 
 public class ChatTestsStaff extends NewTestTemplate {
 
-  private final static String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
-  private final static String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
-  private final static String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
+  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
+  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private Credentials credentials = Configuration.getCredentials();
 
