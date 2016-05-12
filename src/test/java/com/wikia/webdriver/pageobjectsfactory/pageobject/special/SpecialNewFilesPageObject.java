@@ -72,7 +72,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
   public void clickOnMoreOrFewerOptions() {
     moreOrFewerOptions.click();
-    waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
+    waitForValueToBePresentInElementsCssByCss("div.options", "display", "none");
     PageObjectLogging.log(
         "ClickOnMoreOrFewerOptions",
         "Click on More or Fewer options (depends on which of those two is currently visible)",
