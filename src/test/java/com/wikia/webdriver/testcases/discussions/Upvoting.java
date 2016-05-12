@@ -116,6 +116,7 @@ public class Upvoting extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2419")
   public void loggedInUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }

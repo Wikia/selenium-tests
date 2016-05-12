@@ -49,6 +49,7 @@ public class Sorting extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSortPostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }
@@ -58,9 +59,9 @@ public class Sorting extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2286")
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
