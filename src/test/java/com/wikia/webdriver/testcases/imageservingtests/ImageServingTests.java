@@ -27,9 +27,9 @@ public class ImageServingTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
-    newFiles.clickOnMoreOrFewerOptions();
+    newFiles.clickOnMoreOptions();
     newFiles.checkIgnoreAnyWarnings();
-    newFiles.clickOnMoreOrFewerOptions();
+    newFiles.clickOnFewerOptions();
     newFiles.selectFileToUpload(PageContent.FILE);
     newFiles.clickUploadButton();
     newFiles.verifyFileUploaded(PageContent.FILE);
