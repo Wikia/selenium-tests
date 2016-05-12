@@ -6,6 +6,8 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -119,7 +121,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(chatInlineAlert);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Inline alert on chat not displayed", ex, true);
       return false;
     }
   }
@@ -129,16 +132,18 @@ public class ChatPage extends WikiBasePageObject {
       WebElement userPostedMessage = userPostedMessage(message);
       wait.forElementVisible(userPostedMessage);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Message on chat not displayed", ex, true);
       return false;
     }
   }
 
-  public boolean isPrivateMessageHeaderDispayed() {
+  public boolean isPrivateMessageHeaderDisplayed() {
     try {
       wait.forElementVisible(privateMessagesHeader);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Message header not displayed", ex, true);
       return false;
     }
   }
@@ -147,7 +152,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(permissionsErrorTitle);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Permission error title not displayed", ex, true);
       return false;
     }
   }
@@ -156,7 +162,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(privateMessageNotification);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Private message notification not displayed", ex, true);
       return false;
     }
   }
@@ -165,7 +172,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(userPrivateMessageNotification(notificationCount));
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Private messages counter not displayed", ex, true);
       return false;
     }
   }
@@ -173,7 +181,8 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isPrivateMessageButtonDisplayed() {
     try {
       return privateMassageButton.isDisplayed();
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Private message button not displayed", ex, true);
       return false;
     }
   }
@@ -182,7 +191,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(privateChatHeader);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Private chat header not displayed", ex, true);
       return false;
     }
   }
@@ -194,16 +204,18 @@ public class ChatPage extends WikiBasePageObject {
   public boolean isUserInPrivateSectionDisplayed(String userName) {
     try {
       return userOnChat(userName, PRIVATE_MESSAGE_USER_SELECTOR).isDisplayed();
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("User in private section not displayed", ex, true);
       return false;
     }
   }
 
-  public boolean isChatUnbanMessageDispalyed(String userName ) {
+  public boolean isChatUnbanMessageDisplayed(String userName) {
     try {
       wait.forElementVisible(getUserUnbanMessage(userName));
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Un-ban message not displayed", ex, true);
       return false;
     }
   }
@@ -212,7 +224,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       Assertion.assertEquals(userName, userNameTitle.getText());
       return userPageMessageWallTab.isDisplayed();
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Message Wall tab not displayed", ex, true);
       return false;
     }
   }
@@ -221,7 +234,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       Assertion.assertEquals(userName, userNameTitle.getText());
       return userPageContributionsTab.isDisplayed();
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Contribution tab is not displayed", ex, true);
       return false;
     }
   }
@@ -230,7 +244,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(userBlockedMessageField);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("User kicked message not displayed", ex, true);
       return false;
     }
   }
@@ -239,7 +254,8 @@ public class ChatPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(blockPrivateMassageButton);
       return true;
-    } catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Block private message button not displayed", ex, true);
       return false;
     }
   }
@@ -248,7 +264,8 @@ public class ChatPage extends WikiBasePageObject {
     try{
       wait.forElementVisible(userModOptions);
       return true;
-    }catch (Exception e) {
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Staff options are not displayed", ex, true);
       return false;
     }
   }
