@@ -400,14 +400,14 @@ public class MobileAdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            "MOBILE_TOP_LEADERBOARD",
+            AdsContent.MOBILETOP_LB,
             "DirectGptMobile; RemnantGptMobile"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            "MOBILE_TOP_LEADERBOARD",
+            AdsContent.MOBILETOP_LB,
             "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
         }
     };
@@ -420,14 +420,14 @@ public class MobileAdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            "MOBILE_TOP_LEADERBOARD",
+            AdsContent.MOBILETOP_LB,
             ""
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            "MOBILE_TOP_LEADERBOARD",
+            AdsContent.MOBILETOP_LB,
             "RubiconFastlane"
         },
     };

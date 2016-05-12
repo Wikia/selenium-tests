@@ -740,21 +740,21 @@ public class AdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            "TOP_LEADERBOARD",
+            AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt; Liftium"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            "TOP_LEADERBOARD",
+            AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt; RubiconFastlane"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "",
-            "INVISIBLE_SKIN",
+            AdsContent.INVISIBLE_SKIN,
             "DirectGpt; RemnantGpt"
         }
     };
@@ -767,14 +767,14 @@ public class AdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            "TOP_LEADERBOARD",
+            AdsContent.TOP_LB,
             "Liftium"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            "TOP_LEADERBOARD",
+            AdsContent.TOP_LB,
             "RubiconFastlane"
         },
     };
