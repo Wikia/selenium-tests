@@ -85,6 +85,7 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2418")
   public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
@@ -97,6 +98,7 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2420")
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
