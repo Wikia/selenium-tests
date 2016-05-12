@@ -1,10 +1,8 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
@@ -30,7 +28,6 @@ public class Promoting extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
   @Execute(onWikia = "fallout")
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "MAIN-6970")
   public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
     appleLinkRedirectsProperly();
   }
