@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups="discussions")
 public class Layout extends NewTestTemplate {
 
@@ -113,17 +113,17 @@ public class Layout extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void postDetailsListLoads() {
+  private void postDetailsListLoads() {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     Assertion.assertFalse(postDetails.isPostDetailsListEmpty());
   }
 
-  public void postsListLoads() {
+  private void postsListLoads() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertFalse(postsList.isPostListEmpty());
   }
 
-  public void userCanViewMorePosts() {
+  private void userCanViewMorePosts() {
     PostsListPage postsList = new PostsListPage(driver).open();
     int startingListLength = postsList.getPostsListLength();
     postsList.scrollToBottom(driver);

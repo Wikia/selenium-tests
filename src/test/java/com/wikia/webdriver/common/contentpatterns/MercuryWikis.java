@@ -17,6 +17,7 @@ public class MercuryWikis {
   public static final String MLP = "mlp";
   public static final String MEDIAWIKI_119 = "mediawiki119";
   public static final String DE_WIKI = "de.demercurytests";
+  public static final String DISCUSSIONS_AUTO = "dauto";
 
   private MercuryWikis() {
   }

@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Test(groups="discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -84,7 +84,7 @@ public class Sharing extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
+  private void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
     PostsListPage postList = new PostsListPage(driver).open();
     int postIndex = 0;
     postList.clickShareIcon(postIndex);
@@ -100,7 +100,7 @@ public class Sharing extends NewTestTemplate {
     }
   }
 
-  public void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
+  private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     String[] currentSocialNetworks = postDetails.getSocialNetworkIconsClasses();
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
