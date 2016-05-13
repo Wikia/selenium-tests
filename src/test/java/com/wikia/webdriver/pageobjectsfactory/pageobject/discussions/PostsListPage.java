@@ -73,7 +73,7 @@ public class PostsListPage extends WikiBasePageObject {
   private WebElement googlePlayAppLink;
 
   private static final String PATH = "d/f/%s";
-  private static final String DEFAULT_FORUM_ID = "203236";
+  private static final String DEFAULT_FORUM_ID = "1362702";
 
   public PostsListPage(WebDriver driver) {
     super();
