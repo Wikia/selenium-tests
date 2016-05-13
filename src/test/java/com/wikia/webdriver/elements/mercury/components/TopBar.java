@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.NoSuchElementException;
 
 public class TopBar extends WikiBasePageObject {
@@ -30,7 +29,7 @@ public class TopBar extends WikiBasePageObject {
 
   private By navigationComponent = By.cssSelector(".side-nav-menu");
 
-  @FindBy(css = ".local-nav-menu")
+  @FindBy(css = ".nav-menu")
   private WebElement navMenu;
 
   private Wait wait;

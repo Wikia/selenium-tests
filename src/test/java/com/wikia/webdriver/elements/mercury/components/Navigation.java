@@ -13,41 +13,33 @@ import org.openqa.selenium.NoSuchElementException;
 
 public class Navigation {
 
-  @FindBy(css = ".side-nav-menu__item.main")
+  @FindBy(css = ".wikia-nav--login")
   private WebElement signInRegisterButton;
 
-  @FindBy(css = ".side-nav-menu__item.back")
+  @FindBy(css = ".wikia-nav__back")
   private WebElement backButton;
 
-  @FindBy(css = ".side-nav-menu__item.menu")
+  @FindBy(css = ".nav-menu--local")
   private List<WebElement> subMenuLinks;
 
-  @FindBy(css = "li.side-nav-menu__item a")
+  @FindBy(css = "li.nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
-  @FindBy(css = ".profile-link")
-  private WebElement userProfile;
-
-  @FindBy(css = ".main")
+  @FindBy(css = ".wikia-nav__header")
   private WebElement navigationMainHeader;
 
-  @FindBy(css = ".side-nav-menu__footer")
-  private WebElement homeOfFandomFooter;
-
-  @FindBy(css = "li.games")
+  @FindBy(css = ".nav-menu--games")
   private WebElement gamesHub;
 
-  @FindBy(css = "li.movies")
+  @FindBy(css = ".nav-menu--movies")
   private WebElement moviesHub;
 
-  @FindBy(css = "li.tv")
+  @FindBy(css = ".nav-menu--tv")
   private WebElement tvHub;
 
-
-  private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
   private Wait wait;
@@ -127,16 +119,6 @@ public class Navigation {
     return this;
   }
 
-  public boolean isUserProfileLinkVisible() {
-    try {
-      return userProfile.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-
   public boolean isMainHeaderVisible() {
     try {
       return navigationMainHeader.isDisplayed();
@@ -149,15 +131,6 @@ public class Navigation {
   public boolean isBackButtonVisible() {
     try {
       return backButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-  public boolean isFooterVisible() {
-    try {
-      return homeOfFandomFooter.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

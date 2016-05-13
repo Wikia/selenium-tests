@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -63,24 +64,12 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  @Test(groups = "mercury_navigation_isFooterAlwaysVisible")
-  public void mercury_navigation_isFooterAlwaysVisible() {
-    init();
-
-    topBar.openNavigation();
-    Assertion.assertTrue(navigation.isFooterVisible());
-
-    driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
-    Assertion.assertTrue(navigation.isFooterVisible());
-  }
-
   @Test(groups = "mercury_navigation_navigationOnEnglishWiki")
   public void mercury_navigation_navigationOnEnglishWiki() {
     init();
 
     topBar.openNavigation();
     Assertion.assertTrue(navigation.areHubLinksVisible());
-    Assertion.assertTrue(navigation.isFooterVisible());
   }
 
   @Execute(onWikia = MercuryWikis.DE_WIKI)
@@ -90,6 +79,5 @@ public class NavigationTest extends NewTestTemplate {
 
     topBar.openNavigation();
     Assertion.assertFalse(navigation.areHubLinksVisible());
-    Assertion.assertFalse(navigation.isFooterVisible());
   }
 }
