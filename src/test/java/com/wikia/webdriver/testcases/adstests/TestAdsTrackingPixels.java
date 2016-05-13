@@ -1,10 +1,16 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.elements.mercury.components.Navigation;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
@@ -16,6 +22,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
   public static final String NIELSEN_PIXEL_URL = "http://secure-dcr.imrworldwide.com/cgi-bin/cfg?pli";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
+  public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
 
   @NetworkTrafficDump
   @Test(
@@ -86,6 +93,23 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
 
+    assertTrackingPixelsSent(adsBaseObject, pixelUrls);
+  }
+
+  @NetworkTrafficDump
+  @Test(
+          groups = "AdsTrackingPixelsAuthPage",
+          dataProviderClass = AdsDataProvider.class,
+          dataProvider = "adsTrackingPixelsSentAuthPage"
+  )
+  @InBrowser(
+          browser = Browser.CHROME,
+          emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  public void adsTrackingPixelSentAuthPage(String wiki, String page, String[] pixelUrls) {
+    networkTrafficInterceptor.startIntercepting();
+    String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
