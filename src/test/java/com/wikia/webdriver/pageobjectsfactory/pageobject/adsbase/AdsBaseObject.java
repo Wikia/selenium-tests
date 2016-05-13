@@ -62,9 +62,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
-  private static final String LOCK_CSS_PACKAGE = "ARecoveryEngine/css/recoveryLock.scss";
-  private static final String MAIN_CSS_PACKAGE = "skins/oasis/css/oasis.scss";
-
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
@@ -791,41 +788,5 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMiddlePrefooterAdPresent() {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
-  }
-
-  public void verifyUnlockCSS() {
-    // Stylesheets with main scss package in href
-    String mainCssSelector = "link[href*=\"" + MAIN_CSS_PACKAGE + "\"]";
-    // Sibling to above selector which is link
-    String unlockCssSelector = mainCssSelector + " + link";
-
-    wait.forElementPresent(By.cssSelector(mainCssSelector));
-    WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
-    String unlockCssUrl = element.getAttribute("href");
-
-    Assertion.assertStringNotContains(unlockCssUrl, "wikia.com/__are");
-    verifyIfUnlockCSSIsValid(unlockCssUrl);
-  }
-
-  public void verifyRecoveryUnlockCSS() {
-    // Stylesheets with lock scss package in href
-    String lockCssSelector = "link[href*=\"" + LOCK_CSS_PACKAGE + "\"]";
-    // Sibling to above selector which is link and contains href in wikia.com/__are endpoint
-    String unlockCssSelector = lockCssSelector + " + link[href*=\"wikia.com/__are\"]";
-
-    wait.forElementPresent(By.cssSelector(lockCssSelector));
-    WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
-
-    verifyIfUnlockCSSIsValid(element.getAttribute("href"));
-  }
-
-  private void verifyIfUnlockCSSIsValid(String cssUrl) {
-    final String articleHeaderSelector = "#WikiaArticle h2";
-    final String partOfValidCss = "#WikiaPageHeader:after{content:none;";
-
-    wait.forElementVisible(By.cssSelector(articleHeaderSelector));
-
-    getUrl(cssUrl);
-    Assertion.assertTrue(driver.getPageSource().contains(partOfValidCss), "Unlock css output");
   }
 }
