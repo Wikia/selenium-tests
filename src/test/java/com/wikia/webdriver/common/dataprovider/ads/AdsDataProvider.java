@@ -645,7 +645,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] amazonSites() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/Amazon"},
+        {"project43", "SyntheticTests/Amazon"},
     };
   }
 
