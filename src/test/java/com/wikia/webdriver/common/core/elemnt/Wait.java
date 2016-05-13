@@ -388,7 +388,7 @@ public class Wait {
             @Override
             public String toString() {
               if (entry == null) {
-                throw new WebDriverException("Request is not sent (url: " + url + ")");
+                return "sent request with url: " + url;
               }
               return "successful response (url: " + url + ", status: " +
                      entry.getResponse().getStatus() + ")";
@@ -418,7 +418,7 @@ public class Wait {
             @Override
             public String toString() {
               if (entry == null) {
-                throw new WebDriverException("Request is not sent (pattern: " + pattern + ")");
+                return "sent request matching pattern: " + pattern;
               }
               return "successful response matching pattern: " + pattern;
             }
