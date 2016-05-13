@@ -42,6 +42,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTaboolaOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdXCollapse"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteTagOasis"/>
@@ -217,6 +218,8 @@
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
+            <class name="com.wikia.webdriver.testcases.fandom.HeroUnitTest"/>
+            <class name="com.wikia.webdriver.testcases.fandom.WPAdminPageTest"/>
         </classes>
     </test>
 </suite>

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -19,6 +20,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
     Credentials credentials = Configuration.getCredentials();
 
     @Test(groups = {"CNW", "CreateNewWikiLoggedOut_001"})
+    @RelatedIssue(issueID = "QAART-771", comment = "Test manually")
     public void loggedOutUserCanCreateNewWiki() {
         WikiBasePageObject base = new WikiBasePageObject();
         CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
