@@ -377,16 +377,21 @@ public class Wait {
 
       wait.until(
           new ExpectedCondition<Boolean>() {
+            private HarEntry entry;
+
             @Override
             public Boolean apply(WebDriver webDriver) {
-              return networkTrafficInterceptor.searchRequestUrlInHar(url) &&
-                     networkTrafficInterceptor.getResponseHttpStatusCode(url) < 400;
+              entry = networkTrafficInterceptor.getEntryByUrlPart(url);
+              return entry != null && entry.getResponse().getStatus() < 400;
             }
 
             @Override
             public String toString() {
-              int responseStatus = networkTrafficInterceptor.getResponseHttpStatusCode(url);
-              return url + " has unsuccessful response status: " + responseStatus;
+              if (entry == null) {
+                throw new WebDriverException("Request is not sent (url: " + url + ")");
+              }
+              return "successful response (url: " + url + ", status: " +
+                     entry.getResponse().getStatus() + ")";
             }
           }
       );
@@ -402,14 +407,19 @@ public class Wait {
     try {
       wait.until(
           new ExpectedCondition<Boolean>() {
+            private HarEntry entry;
+
             @Override
             public Boolean apply(WebDriver webDriver) {
-              HarEntry entry = trafficInterceptor.getMatchingEntryByUrlPatternFromHar(pattern);
+              entry = trafficInterceptor.getEntryByUrlPattern(pattern);
               return entry != null && entry.getResponse().getStatus() < 400;
             }
 
             @Override
             public String toString() {
+              if (entry == null) {
+                throw new WebDriverException("Request is not sent (pattern: " + pattern + ")");
+              }
               return "successful response matching pattern: " + pattern;
             }
           }
@@ -434,7 +444,7 @@ public class Wait {
   /**
    * Wait for fixed time
    *
-   * @param time   - in milliseconds
+   * @param time - in milliseconds
    */
   public void forXMilliseconds(int time) {
     PageObjectLogging.logInfo("Wait for " + time + " ms");

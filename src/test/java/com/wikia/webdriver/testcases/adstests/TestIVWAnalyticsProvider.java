@@ -68,7 +68,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     adsBaseObject.waitForPageLoaded();
-    Assertion.assertFalse(networkTrafficInterceptor.searchRequestUrlInHar(URL_BASE_SCRIPT),
+    Assertion.assertNotNull(networkTrafficInterceptor.getEntryByUrlPart(URL_BASE_SCRIPT),
                           "Tracking should not be loaded outside DE/AT/CH country!");
   }
 
