@@ -132,6 +132,7 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_004")
+  @RelatedIssue(issueID = "XW-1458")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     init();
 
