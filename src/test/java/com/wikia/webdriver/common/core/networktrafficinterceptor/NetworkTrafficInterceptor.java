@@ -45,14 +45,24 @@ public class NetworkTrafficInterceptor extends ProxyServer {
     this.har = newHar(RandomStringUtils.random(5));
   }
 
-  public boolean searchRequestUrlInHar(String needle) {
+  public HarEntry getEntryByUrlPart(String needle) {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(needle)) {
-        return true;
+        return entry;
       }
     }
-    return false;
+    return null;
+  }
+
+  public HarEntry getEntryByUrlPattern(String pattern) {
+    har = getHar();
+    for (HarEntry entry : har.getLog().getEntries()) {
+      if (entry.getRequest().getUrl().matches(pattern)) {
+        return entry;
+      }
+    }
+    return null;
   }
 
   public void checkAssetsStatuses(String domain) {
@@ -63,15 +73,6 @@ public class NetworkTrafficInterceptor extends ProxyServer {
             entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
       }
     }
-  }
-
-  public int getResponseHttpStatusCode(String requestedUrl) {
-    for (HarEntry entry : getHar().getLog().getEntries()) {
-      if (entry.getRequest().getUrl().contains(requestedUrl)) {
-        return entry.getResponse().getStatus();
-      }
-    }
-    throw new WebDriverException(requestedUrl + " request is not sent");
   }
 
   /**
