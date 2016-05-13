@@ -387,11 +387,12 @@ public class Wait {
 
             @Override
             public String toString() {
-              if (entry == null) {
-                return "sent request with url: " + url;
-              }
-              return "successful response (url: " + url + ", status: " +
-                     entry.getResponse().getStatus() + ")";
+              return entry == null ? String.format("sent request with url: %s", url) :
+                     String.format(
+                         "successful response (url: %s, status: %d)",
+                         url,
+                         entry.getResponse().getStatus()
+                     );
             }
           }
       );
@@ -417,10 +418,8 @@ public class Wait {
 
             @Override
             public String toString() {
-              if (entry == null) {
-                return "sent request matching pattern: " + pattern;
-              }
-              return "successful response matching pattern: " + pattern;
+              return entry == null ? String.format("sent request matching pattern: %s", pattern) :
+                     String.format("successful response (pattern: %s)", pattern);
             }
           }
       );
