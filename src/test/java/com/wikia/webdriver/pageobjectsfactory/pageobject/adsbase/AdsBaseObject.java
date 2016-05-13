@@ -616,6 +616,20 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
+  public void verifyExpandedAdVisibleInSlot(String slotSelector, WebElement slot) {
+    waitForSlotExpanded(slot);
+
+    boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
+
+    extractGptInfo(slotSelector);
+
+    if (!adVisible) {
+      throw new WebDriverException("Ad is not present in " + slotSelector);
+    }
+
+    PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
+  }
+
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {
