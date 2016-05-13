@@ -5,12 +5,14 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -497,5 +499,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertEquals(subhead.getSubheadTitle(),
                            "Editing template: InfoboxBuilderChangeTemplateNameBySubhead");
+  }
+
+  @Execute(asUser = User.USER)
+  public void mercuryNavBarShouldNotBeVisible() {
+    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().open();
+
+    Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
+    Assertion.assertFalse(new TopBar(driver).isNavigationBarVisible());
   }
 }

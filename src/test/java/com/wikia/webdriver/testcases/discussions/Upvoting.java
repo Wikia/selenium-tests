@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
@@ -12,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Test(groups="discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Upvoting extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -82,6 +83,7 @@ public class Upvoting extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2419")
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
@@ -114,6 +116,7 @@ public class Upvoting extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2419")
   public void loggedInUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
@@ -122,7 +125,7 @@ public class Upvoting extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
+  private void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
     PostsListPage postList = new PostsListPage(driver).open();
     int replyIndex = 0;
     postList.isUpvoteButtonVisible(replyIndex);
@@ -137,7 +140,7 @@ public class Upvoting extends NewTestTemplate {
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
-  public void postListUpvoteButtonClickDoenstAddAnUpvote() {
+  private void postListUpvoteButtonClickDoenstAddAnUpvote() {
     PostsListPage postList = new PostsListPage(driver).open();
     int replyIndex = 0;
     postList.isUpvoteButtonVisible(replyIndex);
@@ -148,7 +151,7 @@ public class Upvoting extends NewTestTemplate {
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 
-  public void postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
+  private void postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     postDetails.isUpvoteButtonVisible();
     String firstVoteCount = postDetails.getPostDetailsVoteCount();
@@ -162,7 +165,7 @@ public class Upvoting extends NewTestTemplate {
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
-  public void firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
+  private void firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     int replyIndex = 0;
     postDetails.isReplyUpvoteButtonVisible(replyIndex);
@@ -177,7 +180,7 @@ public class Upvoting extends NewTestTemplate {
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
-  public void postDetailsUpvoteButtonClickDoenstAddAnUpvote() {
+  private void postDetailsUpvoteButtonClickDoenstAddAnUpvote() {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     postDetails.isUpvoteButtonVisible();
     String firstVoteCount = postDetails.getPostDetailsVoteCount();
@@ -187,7 +190,7 @@ public class Upvoting extends NewTestTemplate {
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 
-  public void firstReplyUpvoteButtonClickDoenstAddAnUpvote() {
+  private void firstReplyUpvoteButtonClickDoenstAddAnUpvote() {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     int replyIndex = 0;
     postDetails.isReplyUpvoteButtonVisible(replyIndex);

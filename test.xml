@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><suite name="Failed suite [Failed suite [Failed suite [Wikia test suite]]]" guice-stage="DEVELOPMENT" verbose="0">
+  <listeners>
+    <listener class-name="com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter"/>
+  </listeners>
+  <test name="testing(failed)(failed)(failed)">
+    <classes>
+      <class name="com.wikia.webdriver.testcases.commentstests.ArticleCommentsTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests">
+        <methods>
+          <include name="start"/>
+          <include name="ImageServing_001_SpecialNewFilesTest"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.visualeditor.VEAddVideoTests">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="VEAddExternalVideoTests_001_AddNonPremiumVid"/>
+          <include name="VEAddExternalVideoTests_002_AddPremiumVid"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.chattests.ChatTestsStaff">
+        <methods>
+          <include name="ChatTestsStaff_004_basicUserChatFails"/>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels">
+        <methods>
+          <include name="start"/>
+          <include name="initTestContext"/>
+          <include name="stop"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests">
+        <methods>
+          <include name="beforeSuite"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

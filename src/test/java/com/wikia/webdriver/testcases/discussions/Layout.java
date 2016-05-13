@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -12,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups="discussions")
 public class Layout extends NewTestTemplate {
 
@@ -76,6 +77,7 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2418")
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
@@ -83,6 +85,7 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2418")
   public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
@@ -95,6 +98,7 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2420")
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
@@ -102,6 +106,7 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2420")
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
@@ -110,17 +115,17 @@ public class Layout extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void postDetailsListLoads() {
+  private void postDetailsListLoads() {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     Assertion.assertFalse(postDetails.isPostDetailsListEmpty());
   }
 
-  public void postsListLoads() {
+  private void postsListLoads() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertFalse(postsList.isPostListEmpty());
   }
 
-  public void userCanViewMorePosts() {
+  private void userCanViewMorePosts() {
     PostsListPage postsList = new PostsListPage(driver).open();
     int startingListLength = postsList.getPostsListLength();
     postsList.scrollToBottom(driver);
