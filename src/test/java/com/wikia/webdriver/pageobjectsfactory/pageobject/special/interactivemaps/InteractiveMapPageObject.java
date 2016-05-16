@@ -499,7 +499,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void verifyPontoGetRequest(NetworkTrafficInterceptor networkTab) {
-    if (networkTab.searchRequestUrlInHar("maps.wikia-services.com")) {
+    if (networkTab.getEntryByUrlPart("maps.wikia-services.com") != null) {
       PageObjectLogging.log("verifyPontoGetRequest", "Ponto request came", true);
     } else {
       throw new NoSuchElementException("Request from ponto did not come");

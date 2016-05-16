@@ -66,7 +66,11 @@ public class RedirectionTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryRedirectionTest_004", enabled = false)
-  @RelatedIssue(issueID = "XW-1287", comment = "Sometimes wikiabar is receiving the click")
+  @RelatedIssue(
+      issueID = "QAART-773",
+      comment = "Wikia.isTouchScreen() returns false for mobile emulator, "
+                + "which prevents script from adding the mobile page link."
+  )
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);

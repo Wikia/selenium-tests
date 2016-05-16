@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -14,8 +13,10 @@ import java.util.List;
 
 public class ChatTests extends NewTestTemplate {
 
-  private String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
-  private String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private static final String USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR = "USER IS NOT DISPLAYED IN PRIVATE SECTION";
+  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
+  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
@@ -70,12 +71,12 @@ public class ChatTests extends NewTestTemplate {
     chatUserTwo.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
     chatUserOne.selectPrivateMessageToUser(userTwo);
-    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userTwo), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userTwo), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
     Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
-    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
   @Test(groups = "ChatTests")
@@ -88,18 +89,18 @@ public class ChatTests extends NewTestTemplate {
     chatUserFour.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserFour.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), "MESAGE ON CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserFour.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
 
     switchToWindow(1);
     chatUserFour.selectPrivateMessageToUser(userThree);
-    Assertion.assertTrue(chatUserFour.isPrivateMessageHeaderDispayed());
+    Assertion.assertTrue(chatUserFour.isPrivateMessageHeaderDisplayed());
     chatUserFour.writeOnChat(MESSAGE_ON_PRIVATE_CHAT);
 
     switchToWindow(0);
-    Assertion.assertTrue(chatUserThree.isPrivateMessageHeaderDispayed(), "PRIVATE MESSAGE HEDER IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserThree.isPrivateMessageHeaderDisplayed(), "PRIVATE MESSAGE HEDER IS NOT DISPLAYED");
     Assertion.assertTrue(chatUserThree.isPrivateMessageNotificationDisplayed(), "PRIVATE MESSAGE NOTIFICATION ARE NOT DISPLAYED");
     chatUserThree.clickOnUserInPrivateMessageSection(userFour);
-    Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
   @Test(groups = "ChatTests")
@@ -140,7 +141,7 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(1);
     chatUserStaff.unBanUser(userToBeBanned);
-    Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDispalyed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDisplayed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
   @Test(groups = "ChatTests")
@@ -166,7 +167,7 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     Assertion.assertFalse(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS DISPLAYED IN PRIVATE SECTION");
     chatUserOne.allowPrivateMessageFromUser(userFive);
-    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
   @Test(groups = "ChatTests")
@@ -191,7 +192,7 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(0);
     chatUserOne.allowPrivateMessageFromUser(userFive);
-    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS NOT DISPLAYED IN PRIVATE SECTION");
+    Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
   @Test(groups = "ChatTests")
