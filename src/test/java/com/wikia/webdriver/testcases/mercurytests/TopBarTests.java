@@ -13,6 +13,7 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.apache.xpath.SourceTree;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -60,8 +61,8 @@ public class TopBarTests extends NewTestTemplate {
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
-  @Test(groups = "mecury_topbar_switchBetweenSearchAndNavigation")
-  public void mecury_topbar_switchBetweenSearchAndNavigation() {
+  @Test(groups = "mercury_topbar_switchBetweenSearchAndNavigation")
+  public void mercury_topbar_switchBetweenSearchAndNavigation() {
     init();
 
     topBar.openSearch();
@@ -94,6 +95,6 @@ public class TopBarTests extends NewTestTemplate {
 
     Assertion.assertTrue(topBar.isLogoVisible());
     topBar.clickWikiaLogo();
-    Assertion.assertTrue(topBar.getCurrentUrl().contains("http://www.wikia.com/fandom"));
+    Assertion.assertTrue(topBar.getCurrentUrl().contains("www.wikia.com/fandom"));
   }
 }

@@ -19,7 +19,7 @@ public class Navigation {
   @FindBy(css = ".wikia-nav__back")
   private WebElement backButton;
 
-  @FindBy(css = ".nav-menu--local")
+  @FindBy(css = ".nav-menu__item.nav-menu--root")
   private List<WebElement> subMenuLinks;
 
   @FindBy(css = "li.nav-menu__item a")
