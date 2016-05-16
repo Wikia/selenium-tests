@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -29,6 +30,9 @@ public class TopBar extends WikiBasePageObject {
 
   @FindBy(css = ".nav-menu")
   private WebElement navMenu;
+
+  @FindBy(css = ".site-head-fandom-bar")
+  private WebElement fandomBar;
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
@@ -70,6 +74,13 @@ public class TopBar extends WikiBasePageObject {
     return new Navigation(driver);
   }
 
+  public void clickWikiaLogo() {
+    PageObjectLogging.logInfo("Click Wikia logo");
+    wait.forElementVisible(logo);
+    logo.click();
+  }
+
+
   public boolean isNavigationBarVisible() {
     try {
       return navBar.isDisplayed();
@@ -109,6 +120,15 @@ public class TopBar extends WikiBasePageObject {
   public boolean isCloseIconVisible() {
     try {
       return closeButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isFandomBarVisible() {
+    try {
+      return fandomBar.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

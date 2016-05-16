@@ -11,6 +11,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -69,5 +71,29 @@ public class TopBarTests extends NewTestTemplate {
     topBar.openNavigation();
     Assertion.assertTrue(topBar.isCloseIconVisible());
     Assertion.assertTrue(topBar.isSearchIconVisible());
+  }
+
+  @Test(groups = "mercury_topbar_fandomBarIsVisibleOnEnglishCommunity")
+  public void mercury_topbar_fandomBarIsVisibleOnEnglishCommunity() {
+    init();
+
+    Assertion.assertTrue(topBar.isFandomBarVisible());
+  }
+
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Test(groups = "mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity")
+  public void mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity() {
+    init();
+
+    Assertion.assertFalse(topBar.isFandomBarVisible());
+  }
+
+  @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
+  public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
+    init();
+
+    Assertion.assertTrue(topBar.isLogoVisible());
+    topBar.clickWikiaLogo();
+    Assertion.assertTrue(topBar.getCurrentUrl().contains("http://www.wikia.com/fandom"));
   }
 }
