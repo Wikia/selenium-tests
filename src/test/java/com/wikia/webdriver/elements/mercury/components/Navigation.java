@@ -40,6 +40,15 @@ public class Navigation {
   @FindBy(css = ".nav-menu--tv")
   private WebElement tvHub;
 
+  @FindBy(css = ".wikia-nav__avatar")
+  private WebElement userAvatar;
+
+  @FindBy(css = ".wikia-nav--profile-link")
+  private WebElement userProfileLink;
+
+  @FindBy(css = ".wikia-nav--logout")
+  private WebElement logoutLink;
+
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
   private Wait wait;
@@ -131,6 +140,33 @@ public class Navigation {
   public boolean isBackButtonVisible() {
     try {
       return backButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isUserAvatarVisible() {
+    try {
+      return userAvatar.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isUserProfileLinkVisible() {
+    try {
+      return userProfileLink.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isLogoutLinkVisible() {
+    try {
+      return logoutLink.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
