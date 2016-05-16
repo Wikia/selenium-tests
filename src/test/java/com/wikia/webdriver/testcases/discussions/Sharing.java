@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Test(groups="discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sharing extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -56,6 +56,7 @@ public class Sharing extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
@@ -64,17 +65,18 @@ public class Sharing extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost", enabled = false)
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }
@@ -84,7 +86,7 @@ public class Sharing extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
+  private void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
     PostsListPage postList = new PostsListPage(driver).open();
     int postIndex = 0;
     postList.clickShareIcon(postIndex);
@@ -100,7 +102,7 @@ public class Sharing extends NewTestTemplate {
     }
   }
 
-  public void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
+  private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     String[] currentSocialNetworks = postDetails.getSocialNetworkIconsClasses();
     for (int i = 0; i < expectedSocialNetworks.length; i++) {

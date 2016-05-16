@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Test(groups = "discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Navigating extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1366x768";
@@ -35,7 +35,7 @@ public class Navigating extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
+  @RelatedIssue(issueID = "SOC-2286")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
@@ -43,7 +43,7 @@ public class Navigating extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
+  @RelatedIssue(issueID = "SOC-2286")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
@@ -51,45 +51,24 @@ public class Navigating extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickUsername")
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
+  @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeAppPromotion")
-  @Execute(onWikia = "fallout")
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanSeeAppPromotion() {
-    discussionsAppPromotionUnitPresentOnPage();
-  }
-
-  @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
-  @Execute(onWikia = "fallout")
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "MAIN-6970")
-  public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
-    appleLinkRedirectsProperly();
-  }
-
-  @Test(groups = "discussions-anonUserOnDesktopCanClickGooglePlayLinkAppPromotion")
-  @Execute(onWikia = "fallout")
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanClickGooglePlayLinkAppPromotion() {
-    googlePlayLinkRedirectsProperly();
-  }
 
   /**
    * TESTING METHODS SECTION
    */
 
-  public void backToWiki() {
+  private void backToWiki() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickBackToWikiLink();
     postsList.verifyUrl(wikiURL);
   }
 
-  public void clickAvatarLoadsUserPage() {
+  private void clickAvatarLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUserAvatar();
     Assertion.assertTrue(
@@ -97,7 +76,7 @@ public class Navigating extends NewTestTemplate {
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 
-  public void clickUsernameLoadsUserPage() {
+  private void clickUsernameLoadsUserPage() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickUsernameLink();
     Assertion.assertTrue(
@@ -105,26 +84,4 @@ public class Navigating extends NewTestTemplate {
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 
-  public void discussionsAppPromotionUnitPresentOnPage() {
-    PostsListPage postsList = new PostsListPage(driver).open("3035");
-    Assertion.assertTrue(postsList.isAppleLinkDisplayed());
-    Assertion.assertTrue(postsList.isGooglePlayLinkDisplayed());
-    Assertion.assertEquals(postsList.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
-  }
-
-  public void appleLinkRedirectsProperly() {
-    PostsListPage postsList = new PostsListPage(driver).open("3035");
-    postsList.clickAppleLinkInAppPromotion();
-    String newWindow = driver.getWindowHandles().toArray()[1].toString();
-    driver.switchTo().window(newWindow);
-    Assertion.assertTrue(driver.getTitle().contains("Wikia Fan App for: Fallout"));
-  }
-
-  public void googlePlayLinkRedirectsProperly() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.clickGooglePlayLinkInAppPromotion();
-    String newWindow = driver.getWindowHandles().toArray()[1].toString();
-    driver.switchTo().window(newWindow);
-    Assertion.assertTrue(driver.getTitle().contains("Wikia: Fallout"));
-  }
-}
+ }
