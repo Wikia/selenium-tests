@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,7 @@ public class GoogleConnectPage extends WikiBasePageObject {
   }
 
   public GoogleConnectPage open() {
-    if ("dev".equals(Configuration.getEnvType())) {
+    if (Configuration.getEnvType().equals(EnvType.DEV)) {
       getUrl("https://services.wikia-dev.com/external-auth/login/google");
     } else {
       getUrl("https://services.wikia.com/external-auth/login/google");

@@ -13,7 +13,7 @@ public class HeliosConfig {
 
   private static void init() {
     File configFile = new File(Configuration.getCredentialsFilePath());
-    String env = Configuration.getEnvType();
+    String env = Configuration.getEnvType().getKey();
     baseURL = XMLReader.getValue(configFile, "helios." + env + ".base_url");
   }
 

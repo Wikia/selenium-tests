@@ -28,6 +28,7 @@ import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
@@ -631,9 +632,9 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
-    String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
+    String domain = Configuration.getEnvType().getWikiaDomain();
 
-    driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
+    driver.manage().addCookie(new Cookie("access_token", token, domain, null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);

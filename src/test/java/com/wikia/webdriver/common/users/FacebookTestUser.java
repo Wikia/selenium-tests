@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class FacebookTestUser {
-  private static final String ENV_TYPE = Configuration.getEnvType();
+  private static final String ENV_TYPE = Configuration.getEnvType().getKey();
 
   private FacebookTestUser() {
   }
