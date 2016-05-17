@@ -33,7 +33,11 @@ public class SignupTests extends NewTestTemplate {
     signUp(new CreateUser().create()).verifyAvatarAfterSignup();
   }
 
-  @Test(groups = "MercurySignupTest_002")
+
+  @Test(
+      groups = "MercurySignupTest_002", 
+      enabled = false // SER-80
+    )
   public void MercurySignupTest_002_signupErrorEmailInUse() {
     init();
     signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();
