@@ -52,7 +52,7 @@ public class SmartBanner {
 
     PageObjectLogging.logInfo("Smart banner position is fixed at the top");
     wait.forElementPresent(smartBannerComponent);
-    Assertion.assertTrue(
+    Assertion.assertFalse(
         driver.findElement(smartBannerComponent).getLocation().getY() == SMART_BANNER_POS_Y,
         "Smart banner position is not fixed at the top"
     );
