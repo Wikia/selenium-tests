@@ -1023,6 +1023,18 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsDetection() {
+    return new Object[][]{
+        {
+            "project43",
+        },
+        {
+            "arecovery"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
@@ -1185,6 +1197,42 @@ public class AdsDataProvider {
                 .put("src", "gpt")
                 .build()
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryOasis() {
+    return new Object[][]{
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.TOP_LB)
+                .put("lineItemId", 277592292)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MEDREC)
+                .put("lineItemId", 277592292)
+                .put("src", "gpt")
+                .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryUnlockCSSOasis() {
+    return new Object[][]{
+        {
+            new Page("project43", "Project43_Wikia"),
+            false
+        },
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            true
+        }
     };
   }
 

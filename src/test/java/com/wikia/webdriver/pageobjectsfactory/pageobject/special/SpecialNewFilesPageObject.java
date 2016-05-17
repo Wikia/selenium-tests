@@ -70,13 +70,23 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     fileNameInput.sendKeys(fileName);
   }
 
-  public void clickOnMoreOrFewerOptions() {
+  public void clickOnMoreOptions() {
     moreOrFewerOptions.click();
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
     PageObjectLogging.log(
-        "ClickOnMoreOrFewerOptions",
-        "Click on More or Fewer options (depends on which of those two is currently visible)",
+        "ClickOnMoreOptions",
+        "Click on More options",
         true
+    );
+  }
+
+  public void clickOnFewerOptions() {
+    moreOrFewerOptions.click();
+    waitForValueToBePresentInElementsCssByCss("div.options", "display", "none");
+    PageObjectLogging.log(
+            "ClickOnFewerOptions",
+            "Click on Fewer options",
+            true
     );
   }
 

@@ -97,7 +97,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   private void assertTrackingPixelsNotSent(String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
-      Assertion.assertFalse(networkTrafficInterceptor.searchRequestUrlInHar(pixelUrl));
+      Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(pixelUrl));
     }
   }
 }
