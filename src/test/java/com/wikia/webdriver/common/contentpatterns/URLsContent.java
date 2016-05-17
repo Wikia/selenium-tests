@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 public class URLsContent {
 
   // Common url component
-  public static final String WIKI_DIR = "wiki/";
+  public static final String WIKI_DIR = "/wiki/";
   public static final String WIKIA_DIR = "Wikia";
 
   // Special Urls - links to special pages
