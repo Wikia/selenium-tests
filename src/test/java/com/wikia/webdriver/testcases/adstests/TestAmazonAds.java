@@ -18,6 +18,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     testAmazonAd(wikiName, path, false);
   }
 
+  @NetworkTrafficDump
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "amazonSites",
@@ -27,7 +28,6 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     testAmazonAd(wikiName, path, true);
   }
 
-  @NetworkTrafficDump
   private void testAmazonAd(String wikiName, String path, boolean debugMode) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     if (debugMode) {
