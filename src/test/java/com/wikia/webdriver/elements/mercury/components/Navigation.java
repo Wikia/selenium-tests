@@ -183,4 +183,11 @@ public class Navigation {
       return false;
     }
   }
+
+  public String getNavigationHeaderText() {
+    wait.forElementVisible(navigationMainHeader);
+
+    return navigationMainHeader.getText();
+  }
+
 }

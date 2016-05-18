@@ -101,6 +101,7 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertTrue(navigation.isUserAvatarVisible());
     Assertion.assertFalse(navigation.isUserProfileLinkVisible());
     Assertion.assertFalse(navigation.isLogoutLinkVisible());
+    Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
   }
 
 }

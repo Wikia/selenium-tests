@@ -49,7 +49,7 @@ public class SmartBanner {
     PageObjectLogging.logInfo("Scroll down");
     jsActions.scrollBy(0, 100);
 
-    PageObjectLogging.logInfo("Smart banner position is fixed at the top");
+    PageObjectLogging.logInfo("Smart banner position is not fixed at the top");
     wait.forElementPresent(smartBannerComponent);
     Assertion.assertFalse(
         driver.findElement(smartBannerComponent).getLocation().getY() == SMART_BANNER_POS_Y,
