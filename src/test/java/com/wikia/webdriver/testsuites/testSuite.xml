@@ -11,9 +11,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresentMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
-            <class name="com.wikia.webdriver.testcases.adstests.Test71MediaAds"/>
-            <class name="com.wikia.webdriver.testcases.adstests.Test71MediaNoAdsForUsers"/>
-            <class name="com.wikia.webdriver.testcases.adstests.Test71MediaParams"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdDriverForcedStatus"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdvertisementTextOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFliteSkinPresence"/>
@@ -31,11 +28,10 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChainOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRecoveryOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRecoveryUnlockCSSOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>

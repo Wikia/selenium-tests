@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "fallout")
 public class Promoting extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeAppPromotion")
   @Execute(onWikia = "fallout")
