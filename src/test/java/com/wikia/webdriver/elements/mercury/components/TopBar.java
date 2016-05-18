@@ -75,7 +75,7 @@ public class TopBar extends WikiBasePageObject {
 
   public void clickWikiaLogo() {
     PageObjectLogging.logInfo("Click Wikia logo");
-    wait.forElementVisible(logo);
+    wait.forElementClickable(logo);
     logo.click();
   }
 
