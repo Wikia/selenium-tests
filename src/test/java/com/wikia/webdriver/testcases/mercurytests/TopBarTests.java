@@ -58,8 +58,8 @@ public class TopBarTests extends NewTestTemplate {
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
-  @Test(groups = "mecury_topbar_switchBetweenSearchAndNavigation")
-  public void mecury_topbar_switchBetweenSearchAndNavigation() {
+  @Test(groups = "mercury_topbar_switchBetweenSearchAndNavigation")
+  public void mercury_topbar_switchBetweenSearchAndNavigation() {
     init();
 
     topBar.openSearch();
@@ -69,5 +69,29 @@ public class TopBarTests extends NewTestTemplate {
     topBar.openNavigation();
     Assertion.assertTrue(topBar.isCloseIconVisible());
     Assertion.assertTrue(topBar.isSearchIconVisible());
+  }
+
+  @Test(groups = "mercury_topbar_fandomBarIsVisibleOnEnglishCommunity")
+  public void mercury_topbar_fandomBarIsVisibleOnEnglishCommunity() {
+    init();
+
+    Assertion.assertTrue(topBar.isFandomBarVisible());
+  }
+
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Test(groups = "mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity")
+  public void mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity() {
+    init();
+
+    Assertion.assertFalse(topBar.isFandomBarVisible());
+  }
+
+  @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
+  public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
+    init();
+
+    Assertion.assertTrue(topBar.isLogoVisible());
+    topBar.clickWikiaLogo();
+    Assertion.assertTrue(topBar.getCurrentUrl().contains("www.wikia.com/fandom"));
   }
 }
