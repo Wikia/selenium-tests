@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sorting extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
