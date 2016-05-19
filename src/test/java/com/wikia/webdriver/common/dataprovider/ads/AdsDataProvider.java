@@ -164,7 +164,7 @@ public class AdsDataProvider {
   public static Object[][] fliteSkin() {
     return new Object[][]{
         {
-            "adtest", "Demo/Flite/Background_Takeover",
+            "project43", "SyntheticTests/Flite/Background_Takeover",
             new Dimension(1200, 1000),
             Arrays.asList(
                 Arrays.asList(
