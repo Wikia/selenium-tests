@@ -13,6 +13,7 @@ public class MercurySubpages {
   public static final String MAP = "/wiki/Map";
   public static final String QUESTION_MARK = "/wiki/Question?mark?question";
   public static final String COLON = "/wiki/Colon:colon:colon";
+  public static final String NO_INFOBOX = "/wiki/Article_without_infobox";
 
   public static final String INFOBOX_1 = "/wiki/Infobox1";
   public static final String INFOBOX_2 = "/wiki/Infobox2";
