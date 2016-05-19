@@ -69,7 +69,7 @@ public class BasePageObject {
 
   //wait for comscore to load
   public void waitForPageLoad() {
-    wait.forElementPresent(By.cssSelector("[src=\"http://b.scorecardresearch.com/beacon.js\"]"));
+    wait.forElementPresent(By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
   }
 
   public static String getTimeStamp() {
