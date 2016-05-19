@@ -73,13 +73,6 @@ public class Upvoting extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanSeePostDetailsList() {
-    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
-
   @Test(groups = "discussions-loggedInUserOnMobileCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
@@ -98,13 +91,6 @@ public class Upvoting extends NewTestTemplate {
   /**
    * LOGGED IN USERS ON DESKTOP SECTION
    */
-
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeePostDetailsList() {
-    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
