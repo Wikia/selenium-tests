@@ -177,7 +177,7 @@ public class MainPageTests extends NewTestTemplate {
 
     navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
 
-    boolean result = cc.isArticleTitleVisible();
+    boolean result = cc.isRevisedArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
