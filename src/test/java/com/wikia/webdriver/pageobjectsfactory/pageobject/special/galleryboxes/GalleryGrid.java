@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-public abstract class GalleryBox extends BasePageObject {
+public class GalleryGrid extends BasePageObject {
 
   @FindBy(css = ".gallerybox a.image img:not([data-video-name=''])")
   private List<WebElement> galleryVideoBox;

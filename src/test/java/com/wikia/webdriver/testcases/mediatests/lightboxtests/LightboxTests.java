@@ -45,7 +45,7 @@ public class LightboxTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_001_unusedFiles() {
     LightboxComponentObject lightbox =
-        new SpecialUnusedFilesPage().open().openLightboxForGridImage(0);
+        new SpecialUnusedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
 
     lightbox.verifyLightboxPopup();
   }
@@ -54,7 +54,7 @@ public class LightboxTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_002_unusedVideos() {
     LightboxComponentObject lightbox =
-        new SpecialUnusedVideosPage().open().openLightboxForGridVideo(0);
+        new SpecialUnusedVideosPage().open().getGalleryGrid().openLightboxForGridVideo(0);
 
     lightbox.verifyLightboxPopup();
   }
@@ -63,7 +63,7 @@ public class LightboxTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_003_uncategorizedFiles() {
     LightboxComponentObject lightbox =
-        new SpecialUncategorizedFilesPage().open().openLightboxForGridImage(0);
+        new SpecialUncategorizedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
 
     lightbox.verifyLightboxPopup();
   }
@@ -72,7 +72,7 @@ public class LightboxTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_004_mostLinkedFiles() {
     LightboxComponentObject lightbox =
-        new SpecialMostLinkedFilesPage().open().openLightboxForGridImage(0);
+        new SpecialMostLinkedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
 
     lightbox.verifyLightboxPopup();
   }
