@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -20,12 +22,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
-
-import org.testng.annotations.Test;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPage;
 
 /**
  * 1. Open lightbox from Special:UnusedFiles page 2. Open lightbox from Special:UnusedVideos page 3.
@@ -44,37 +44,36 @@ public class LightboxTests extends NewTestTemplate {
   @Test(groups = "LightboxTest_001")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_001_unusedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
+    LightboxComponentObject lightbox =
+        new SpecialUnusedFilesPage().open().openLightboxForGridImage(0);
+
     lightbox.verifyLightboxPopup();
   }
 
   @Test(groups = "LightboxTest_002")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_002_unusedVideos() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridVideo(0);
+    LightboxComponentObject lightbox =
+        new SpecialUnusedVideosPage().open().openLightboxForGridVideo(0);
+
     lightbox.verifyLightboxPopup();
   }
 
   @Test(groups = "LightboxTest_003")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_003_uncategorizedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUncategorizedFilesPageObject unusedFiles =
-        base.openSpecialUncategorizedFilesPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
+    LightboxComponentObject lightbox =
+        new SpecialUncategorizedFilesPage().open().openLightboxForGridImage(0);
+
     lightbox.verifyLightboxPopup();
   }
 
   @Test(groups = "LightboxTest_004")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_004_mostLinkedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
+    LightboxComponentObject lightbox =
+        new SpecialMostLinkedFilesPage().open().openLightboxForGridImage(0);
+
     lightbox.verifyLightboxPopup();
   }
 
@@ -145,8 +144,7 @@ public class LightboxTests extends NewTestTemplate {
   @Execute(asUser = User.USER, disableFlash = "false")
   @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
-    SpecialVideosPageObject specialVideos =
-        new WikiBasePageObject().openSpecialVideoPage(wikiURL);
+    SpecialVideosPageObject specialVideos = new WikiBasePageObject().openSpecialVideoPage(wikiURL);
 
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();

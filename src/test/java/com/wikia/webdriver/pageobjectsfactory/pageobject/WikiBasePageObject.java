@@ -40,7 +40,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
@@ -60,10 +59,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
@@ -188,34 +184,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyModalLoginAppeared() {
     wait.forElementVisible(logInModal);
     PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
-  }
-
-  public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_FILES);
-    PageObjectLogging.log("openSpecialUnusedFilesPage",
-        URLsContent.SPECIAL_UNUSED_FILES + " opened", true);
-    return new SpecialUnusedFilesPageObject(driver);
-  }
-
-  public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_VIDEOS);
-    PageObjectLogging.log("openSpecialUnusedVideosPage",
-        URLsContent.SPECIAL_UNUSED_VIDEOS + " opened", true);
-    return new SpecialUnusedVideosPageObject(driver);
-  }
-
-  public SpecialUncategorizedFilesPageObject openSpecialUncategorizedFilesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNCATEGORIZED_FILES);
-    PageObjectLogging.log("openSpecialUncategorizedFilesPage",
-        URLsContent.SPECIAL_UNCATEGORIZED_FILES + " opened", true);
-    return new SpecialUncategorizedFilesPageObject(driver);
-  }
-
-  public SpecialMostLinkedFilesPageObject openSpecialMostLinkedFilesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_MOST_LINKED_FILES);
-    PageObjectLogging.log("openSpecialMostLinkedFilesPage",
-        URLsContent.SPECIAL_MOST_LINKED_FILES + " opened", true);
-    return new SpecialMostLinkedFilesPageObject(driver);
   }
 
   public SpecialManageWikiaHome openSpecialManageWikiaHomePage(String wikiCorpSetupURL) {
