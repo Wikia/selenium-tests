@@ -1,26 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.ElementStateHelper;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class GlobalNavigationPageObject {
+public class GlobalNavigation extends BasePageObject {
 
   @FindBy(css = ".gamestar-logo")
   private WebElement gameStarLink;
@@ -34,9 +32,6 @@ public class GlobalNavigationPageObject {
   @FindBy(css = "#searchInput")
   private WebElement searchInput;
 
-  @FindBy(css = "a[data-id='login']")
-  private WebElement loginLink;
-
   @FindBy(id = "exploreWikiaEntryPoint")
   private WebElement exploreWikiaDropdownEntryPoint;
 
@@ -49,16 +44,8 @@ public class GlobalNavigationPageObject {
   @FindBy(css = ".wikia-logo__subtitle")
   private WebElement fandomLogo;
 
-  private WebDriver driver;
-
   private DropDownComponentObject accountNavigation;
   private DropDownComponentObject exploreWikiaDropdownComponent;
-
-  public GlobalNavigationPageObject(WebDriver driver) {
-    this.driver = driver;
-
-    PageFactory.initElements(this.driver, this);
-  }
 
   public boolean isGameStarLogoDisplayed() {
     return ElementStateHelper.isElementVisible(gameStarLink, driver);
@@ -69,7 +56,7 @@ public class GlobalNavigationPageObject {
     if (!"prod".equals(environment) && !environment.contains("dev")) {
       WebDriverWait wait = new WebDriverWait(driver, 5);
       wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",
-              environment));
+          environment));
     }
 
     wikiaLogo.click();
@@ -119,12 +106,14 @@ public class GlobalNavigationPageObject {
   }
 
   public DropDownComponentObject openExploreWikiaDropdown() {
-    return getExploreWikiaDropdownComponent().openDropDownWithEntryPoint(exploreWikiaDropdownEntryPoint);
+    return getExploreWikiaDropdownComponent()
+        .openDropDownWithEntryPoint(exploreWikiaDropdownEntryPoint);
   }
 
   public List<String> getDropdownLinks() {
     List<String> linksLabels = new ArrayList<>();
-    List<WebElement> linksInDropdown = exploreWikiaDropdownComponent.getAllLinksInExploreWikiaDropdown();
+    List<WebElement> linksInDropdown =
+        exploreWikiaDropdownComponent.getAllLinksInExploreWikiaDropdown();
 
     for (WebElement link : linksInDropdown) {
       if (link.isDisplayed()) {
@@ -136,8 +125,7 @@ public class GlobalNavigationPageObject {
   }
 
   public void closeDropdown() {
-    ((JavascriptExecutor) driver)
-            .executeScript("arguments[0].classList.remove('active')", exploreWikiaDropdown);
+    driver.executeScript("arguments[0].classList.remove('active')", exploreWikiaDropdown);
   }
 
   public boolean areHubsLinksVisible() {
