@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Test(groups="discussions")
+@Test(groups = "discussions")
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sorting extends NewTestTemplate {
 
@@ -35,7 +35,7 @@ public class Sorting extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
-  @RelatedIssue(issueID = "SOC-2417")
+  @RelatedIssue(issueID = "SOC-2363")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
