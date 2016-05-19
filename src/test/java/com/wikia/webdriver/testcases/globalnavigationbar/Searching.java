@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 
 import org.testng.annotations.DataProvider;
@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
   public void serachGlobalNavigationBarAsAnon(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     SearchPageObject search = homePage.getGlobalNavigation()
         .searchGlobally(query);
@@ -57,7 +57,7 @@ import org.testng.annotations.Test;
   public void serachGlobalNavigationBarAsLoggedIn(
       String wikiName, String query, String expectedSpecialPage, String resultLang
   ) {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     SearchPageObject search = homePage.getGlobalNavigation()
         .searchGlobally(query);

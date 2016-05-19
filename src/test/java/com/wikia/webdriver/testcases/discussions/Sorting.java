@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -12,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Test(groups="discussions")
+@Test(groups = "discussions")
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sorting extends NewTestTemplate {
 
@@ -35,9 +36,9 @@ public class Sorting extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
-  @RelatedIssue(issueID = "SOC-2417")
+  @RelatedIssue(issueID = "SOC-2363")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
@@ -60,7 +61,7 @@ public class Sorting extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab", enabled = false)
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   @RelatedIssue(issueID = "SOC-2286")
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
     userCanSwitchBetweenLatestAndTrendingTab();

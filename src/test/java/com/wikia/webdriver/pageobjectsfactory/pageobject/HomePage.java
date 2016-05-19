@@ -12,9 +12,10 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-public class HomePageObject extends WikiBasePageObject {
+public class HomePage extends WikiBasePageObject {
 
   @FindBy(css = ".hub > a")
   private WebElement hubIndicator;
@@ -29,12 +30,12 @@ public class HomePageObject extends WikiBasePageObject {
 
   private String languageDropdownString = "nav.wikia-menu-button";
 
-  public HomePageObject() {
-    super();
+  public HomePage open() {
+    return open(Configuration.getWikiName());
   }
 
-  public HomePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki());
+  public HomePage open(String wikiName){
+    getUrl(urlBuilder.getUrlForWiki(wikiName));
     waitForPageLoad();
 
     return this;
@@ -102,7 +103,7 @@ public class HomePageObject extends WikiBasePageObject {
                            slotDesiredSetup.get(HubName.LIFESTYLE.toString()));
   }
 
-  public HomePageObject selectLanguage(int index) {
+  public HomePage selectLanguage(int index) {
     scrollAndClick(languageButton);
     List<WebElement> languagesList = driver.findElements(languageSelectorBy);
     String languageClass = languagesList.get(index).getAttribute("class");
@@ -119,7 +120,7 @@ public class HomePageObject extends WikiBasePageObject {
     PageObjectLogging.log("selectLanguage",
                           "language number " + Integer.toString(index) + " selected",
                           true);
-    return new HomePageObject();
+    return new HomePage();
   }
 
   public void verifyLanguageButton() {
@@ -142,7 +143,7 @@ public class HomePageObject extends WikiBasePageObject {
 
   public void verifyLanguageDropdownURLs() {
     int numOfLanguages = getNumOfLanguages();
-    HomePageObject newHome;
+    HomePage newHome;
 
     for (int i = 0; i < numOfLanguages; i++) {
       waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
