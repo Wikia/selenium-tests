@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-public class SpecialUncategorizedFilesPage extends GalleryBox {
+final public class SpecialUncategorizedFilesPage extends GalleryBox {
 
   public static final String SPECIAL_UNCATEGORIZED_FILES_PATH = "Special:UncategorizedFiles";
 
