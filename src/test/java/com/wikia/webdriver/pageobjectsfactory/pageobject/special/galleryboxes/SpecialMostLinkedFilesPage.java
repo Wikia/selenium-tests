@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-final public class SpecialMostLinkedFilesPage extends GalleryBox {
+public final class SpecialMostLinkedFilesPage extends GalleryBox {
 
   public static final String SPECIAL_MOST_LINKED_FILES_PATH = "Special:MostLinkedFiles";
 

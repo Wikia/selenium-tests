@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-final public class SpecialUnusedFilesPage extends GalleryBox {
+public final class SpecialUnusedFilesPage extends GalleryBox {
 
   private static final String SPECIAL_UNUSED_FILES_PATH = "Special:UnusedFiles";
 
