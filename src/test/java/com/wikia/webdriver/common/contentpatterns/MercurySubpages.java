@@ -8,6 +8,7 @@ public class MercurySubpages {
   public static final String LINKED_IMAGES = "/wiki/LinkedImages";
   public static final String TOC = "/wiki/TOC";
   public static final String TOC_WITHOUT_H2 = "/wiki/TOCWithoutH2";
+  public static final String TOC_WITH_PORTABLE_INFOBOX = "/wiki/TOC_with_portable_infobox";
   public static final String COMMENTS = "/wiki/Comments";
   public static final String MAP = "/wiki/Map";
   public static final String QUESTION_MARK = "/wiki/Question?mark?question";

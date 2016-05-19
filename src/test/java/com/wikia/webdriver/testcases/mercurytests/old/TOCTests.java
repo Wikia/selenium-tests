@@ -52,11 +52,11 @@ public class TOCTests extends NewTestTemplate {
         true
     );
 
-    boolean result = toc.isTOCUnderArticleName();
+    boolean result = toc.isTOCAtTheTopOfTheArticle();
     PageObjectLogging.log(
         "TOC position",
-        "is under article name",
-        "is not under article name",
+        "is under article name at the top of the article content",
+        "is not under article name at the top of the article content",
         result
     );
 
@@ -164,6 +164,20 @@ public class TOCTests extends NewTestTemplate {
         "Redirection to header from other page",
         "works",
         "does not work",
+        result
+    );
+  }
+
+  @Test(groups = "MercuryTOCTest_006")
+  public void MercuryTOCTest_006_TOCPresence_PlacedUnderInfobox() {
+    init();
+    navigate.toPage(MercurySubpages.TOC_WITH_PORTABLE_INFOBOX);
+
+    boolean result = toc.isTOCBelowFirstInfobox();
+    PageObjectLogging.log(
+        "TOC",
+        "is right below the first portable infobox",
+        "is in a wrong place, as it's not right below the first portable infobox",
         result
     );
   }
