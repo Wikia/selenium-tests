@@ -45,7 +45,6 @@ public class URLsContent {
   public static final String SPECIAL_UNBLOCK = "wiki/Special:Unblock";
   public static final String SPECIAL_BLOCK = "wiki/Special:Block";
   public static final String SPECIAL_CHAT = "wiki/Special:Chat";
-  public static final String SPECIAL_MANAGE_WIKIA_HOME = "wiki/Special:ManageWikiaHome";
   public static final String SPECIAL_EDIT_HUB = "wiki/Special:EditHub";
   public static final String SPECIAL_MAPS = "wiki/Special:Maps";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "wiki/Special:VideoPageAdmin/edit";

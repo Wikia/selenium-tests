@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.core.ElementStateHelper;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
@@ -51,7 +51,7 @@ public class GlobalNavigation extends BasePageObject {
     return ElementStateHelper.isElementVisible(gameStarLink, driver);
   }
 
-  public HomePageObject clickWikiaLogo() {
+  public HomePage clickWikiaLogo() {
     String environment = Configuration.getEnv();
     if (!"prod".equals(environment) && !environment.contains("dev")) {
       WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -60,7 +60,7 @@ public class GlobalNavigation extends BasePageObject {
     }
 
     wikiaLogo.click();
-    return new HomePageObject();
+    return new HomePage();
   }
 
   public SearchPageObject searchGlobally(String query) {

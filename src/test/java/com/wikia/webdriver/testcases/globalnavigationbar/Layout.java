@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.globalnavigationbar;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 
@@ -36,7 +36,7 @@ public class Layout extends NewTestTemplate{
 
   @Test(groups = {"dropdownContainsExpectedLinksOnResolutionChange"})
   public void dropdownContainsExpectedLinksOnResolutionChange() {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
 
@@ -53,7 +53,7 @@ public class Layout extends NewTestTemplate{
 
   @Test(groups = {"gameStarLogoIsNotPresentOn768x1024WidthResolution"})
   public void gameStarLogoIsNotPresentOn768x1024WidthResolution() {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
     homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
 
@@ -63,7 +63,7 @@ public class Layout extends NewTestTemplate{
 
   @Test(groups = {"linksArePresentOn1024x1024Resolution"})
   public void linksArePresentOn1024x1024Resolution() {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
 
@@ -87,7 +87,7 @@ public class Layout extends NewTestTemplate{
       dataProvider = "getWikisWithDisabledLocalSearch"
   )
   public void localSearchIsDisabled(String wikiName) {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     GlobalNavigation globalNav = homePage.getGlobalNavigation();
 
