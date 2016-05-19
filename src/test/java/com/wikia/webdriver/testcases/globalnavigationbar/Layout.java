@@ -37,7 +37,7 @@ public class Layout extends NewTestTemplate{
   @Test(groups = {"dropdownContainsExpectedLinksOnResolutionChange"})
   public void dropdownContainsExpectedLinksOnResolutionChange() {
     HomePageObject homePage = new HomePageObject();
-    GlobalNavigation globalNav = new GlobalNavigation(driver);
+    GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
 
     driver.manage().window().setSize(HUBS_OUTSIDE_DROPDOWN_RESOLUTION);
@@ -57,14 +57,14 @@ public class Layout extends NewTestTemplate{
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
     homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
 
-    Assertion.assertFalse((new GlobalNavigation(driver)).isGameStarLogoDisplayed(),
+    Assertion.assertFalse((new GlobalNavigation()).isGameStarLogoDisplayed(),
                           "GameStar Logo shouldn't be visible");
   }
 
   @Test(groups = {"linksArePresentOn1024x1024Resolution"})
   public void linksArePresentOn1024x1024Resolution() {
     HomePageObject homePage = new HomePageObject();
-    GlobalNavigation globalNav = new GlobalNavigation(driver);
+    GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
 
     driver.manage().window().setSize(HUBS_OUTSIDE_DROPDOWN_RESOLUTION);
