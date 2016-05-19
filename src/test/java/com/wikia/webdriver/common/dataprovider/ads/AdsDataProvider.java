@@ -258,15 +258,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] getWikisWithStandardHVC() {
-    return new Object[][]{
-        {"adtest"},
-        {"de.icarly"},
-        {"en.memory-alpha"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{
         {
@@ -728,19 +719,6 @@ public class AdsDataProvider {
         {"elderscrolls", "Skyrim"},
         {"wowwiki", "Portal:Main"},
         {"zh.pad", "Special:Video"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxRealTimeSegment() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/Krux/Page_1",
-            "glee",
-            "Rachel",
-            "o8l9bis26"
-        }
     };
   }
 
