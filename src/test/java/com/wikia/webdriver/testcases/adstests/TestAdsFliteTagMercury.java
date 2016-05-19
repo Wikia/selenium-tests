@@ -19,7 +19,7 @@ public class TestAdsFliteTagMercury extends MobileTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteTagMercury"
   )
-  @Execute(onWikia = "adtest")
+  @Execute(onWikia = "project43")
   public void adsFliteTagMercury(String article) {
     String testedPage = urlBuilder.getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
@@ -30,7 +30,7 @@ public class TestAdsFliteTagMercury extends MobileTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteTagBrokenMercury"
   )
-  @Execute(onWikia = "adtest")
+  @Execute(onWikia = "project43")
   public void adsFliteTagBrokenMercury(String article, String error) {
     String testedPage = urlBuilder.getUrlForPath(article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
