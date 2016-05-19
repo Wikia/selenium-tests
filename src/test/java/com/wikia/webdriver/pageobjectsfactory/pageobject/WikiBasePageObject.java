@@ -165,13 +165,11 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
+  @Getter(lazy = true)
+  private final AuthModal authModal = new AuthModal();
 
   public WikiBasePageObject() {
     super();
-  }
-
-  public AuthModal getAuthModal() {
-    return new AuthModal();
   }
 
   public String getWikiUrl() {
