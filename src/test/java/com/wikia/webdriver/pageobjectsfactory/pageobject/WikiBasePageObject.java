@@ -49,7 +49,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
@@ -181,18 +180,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyModalLoginAppeared() {
     wait.forElementVisible(logInModal);
     PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
-  }
-
-  public SpecialManageWikiaHome openSpecialManageWikiaHomePage(String wikiCorpSetupURL) {
-    getUrl(wikiCorpSetupURL + URLsContent.SPECIAL_MANAGE_WIKIA_HOME);
-    PageObjectLogging.log("openCorpSetupHomePage", "Special:ManageWikiaHome opened", true);
-    return new SpecialManageWikiaHome(driver);
-  }
-
-  public HomePageObject openCorporateHomePage(String wikiCorporateURL) {
-    getUrl(wikiCorporateURL);
-    PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
-    return new HomePageObject();
   }
 
   public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {
