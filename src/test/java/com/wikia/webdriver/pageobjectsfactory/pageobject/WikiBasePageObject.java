@@ -43,7 +43,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
@@ -82,8 +82,7 @@ public class WikiBasePageObject extends BasePageObject {
   private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
       + LOGGED_IN_USER_SELECTOR_OASIS + "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
   @Getter(lazy = true)
-  private final GlobalNavigationPageObject globalNavigation =
-      new GlobalNavigationPageObject(driver);
+  private final GlobalNavigation globalNavigation = new GlobalNavigation();
   @Getter(lazy = true)
   private final WikiaBar wikiaBar = new WikiaBar();
   @Getter(lazy = true)
