@@ -122,6 +122,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.INFOBOX_3);
 
     infobox
+        .clickGalleryImage(0)
+        .isLightboxOpened()
+        .closeLightbox()
         .isInfoboxCollapsed()
         .clickExpandButton()
         .clickGalleryButton(0)

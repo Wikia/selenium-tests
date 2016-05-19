@@ -58,6 +58,9 @@ public class PortableInfoboxObject {
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
 
+  @FindBy(css = ".portable-infobox .article-media-linked-gallery img")
+  private List<WebElement> galleryImageList;
+
   @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
   private List<WebElement> galleryButtonList;
 
@@ -154,6 +157,15 @@ public class PortableInfoboxObject {
 
   public PortableInfoboxObject clickVideo() {
     wait.forElementClickable(video).click();
+
+    return this;
+  }
+
+  public PortableInfoboxObject clickGalleryImage(int index) {
+    Assertion.assertFalse(galleryImageList.isEmpty());
+    wait.forElementClickable(galleryImageList.get(index));
+
+    galleryImageList.get(index).click();
 
     return this;
   }
