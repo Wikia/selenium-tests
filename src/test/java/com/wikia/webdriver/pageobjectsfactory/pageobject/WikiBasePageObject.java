@@ -59,7 +59,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
@@ -78,9 +77,21 @@ public class WikiBasePageObject extends BasePageObject {
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".wikia-nav__avatar img[alt*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
+      ".wikia-nav__avatar img[alt*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
       + LOGGED_IN_USER_SELECTOR_OASIS + "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
+  @Getter(lazy = true)
+  private final GlobalNavigationPageObject globalNavigation =
+      new GlobalNavigationPageObject(driver);
+  @Getter(lazy = true)
+  private final WikiaBar wikiaBar = new WikiaBar();
+  @Getter(lazy = true)
+  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
+  @Getter(lazy = true)
+  private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
+  @Getter(lazy = true)
+  private final TopBar topBar = new TopBar(driver);
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -150,17 +161,6 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement footer;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
-
-  @Getter(lazy = true)
-  private final GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
-  @Getter(lazy = true)
-  private final WikiaBar wikiaBar = new WikiaBar();
-  @Getter(lazy = true)
-  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
-  @Getter(lazy = true)
-  private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
-  @Getter(lazy = true)
-  private final TopBar topBar = new TopBar(driver);
 
   public WikiBasePageObject() {
     super();
@@ -623,7 +623,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   private void logMercuryUserId() {
-    Object scriptOut = ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
+    Object scriptOut =
+        ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
 
     if (scriptOut != null) {
       PageObjectLogging.logInfo("Mercury userID: " + scriptOut.toString());
@@ -698,10 +699,10 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
-    return driver.executeScript(
-        "return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
-        element, pseudoElement, cssValue
-    ).toString();
+    return driver
+        .executeScript("return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
+            element, pseudoElement, cssValue)
+        .toString();
   }
 
   public void openSpecialPromoteOnCurrentWiki() {
