@@ -942,14 +942,13 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsOnConsecutivePages() {
     return new Object[][]{
         {
-            "adtest",
+            new Page("project43", "TrackingPixels/Article1"),
             new String[]{
-                "Article1",
-                "Article2",
-                "Article3",
-                "Article2",
-                "Article1",
-                "Wikia Ad Testing"
+                "TrackingPixels/Article2",
+                "TrackingPixels/Article3",
+                "TrackingPixels/Article2",
+                "TrackingPixels/Article1",
+                "Project43 Wikia"
             },
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
@@ -963,7 +962,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -1014,7 +1013,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
