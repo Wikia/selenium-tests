@@ -91,6 +91,8 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
+  @Getter(lazy = true)
+  private final AuthModal authModal = new AuthModal();
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -163,10 +165,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public WikiBasePageObject() {
     super();
-  }
-
-  public AuthModal getAuthModal() {
-    return new AuthModal();
   }
 
   public String getWikiUrl() {
