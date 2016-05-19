@@ -46,10 +46,6 @@ public class URLsContent {
   public static final String SPECIAL_BLOCK = "wiki/Special:Block";
   public static final String SPECIAL_CHAT = "wiki/Special:Chat";
   public static final String SPECIAL_MANAGE_WIKIA_HOME = "wiki/Special:ManageWikiaHome";
-  public static final String SPECIAL_UNUSED_FILES = "wiki/Special:UnusedFiles";
-  public static final String SPECIAL_UNUSED_VIDEOS = "wiki/Special:UnusedVideos";
-  public static final String SPECIAL_UNCATEGORIZED_FILES = "wiki/Special:UncategorizedFiles";
-  public static final String SPECIAL_MOST_LINKED_FILES = "wiki/Special:MostLinkedFiles";
   public static final String SPECIAL_EDIT_HUB = "wiki/Special:EditHub";
   public static final String SPECIAL_MAPS = "wiki/Special:Maps";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "wiki/Special:VideoPageAdmin/edit";
