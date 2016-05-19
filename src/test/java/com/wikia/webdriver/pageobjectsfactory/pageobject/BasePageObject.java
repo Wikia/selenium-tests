@@ -67,8 +67,9 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
+  //wait for comscore to load
   public void waitForPageLoad() {
-    wait.forElementPresent(By.cssSelector("iframe[title='VisualDNA Analytics']"));
+    wait.forElementPresent(By.cssSelector("[src=\"http://b.scorecardresearch.com/beacon.js\"]"));
   }
 
   public static String getTimeStamp() {
