@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
@@ -16,7 +17,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Upvoting extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
@@ -50,21 +51,21 @@ public class Upvoting extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForPostDetails")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoenstAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotUpvote() {
     postListUpvoteButtonClickDoenstAddAnUpvote();
   }
@@ -72,13 +73,6 @@ public class Upvoting extends NewTestTemplate {
   /**
    * LOGGED IN USERS ON MOBILE SECTION
    */
-
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanSeePostDetailsList() {
-    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
 
   @Test(groups = "discussions-loggedInUserOnMobileCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
@@ -99,23 +93,16 @@ public class Upvoting extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
-  @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeePostDetailsList() {
-    postDetailsUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
-  }
-
   @Test(groups = "discussions-loggedInUserOnDesktopCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   @RelatedIssue(issueID = "SOC-2419")
   public void loggedInUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
