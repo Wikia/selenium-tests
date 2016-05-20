@@ -41,8 +41,6 @@ public class URLsContent {
   public static final String SPECIAL_WIKI_FACTORY = "wiki/Special:WikiFactory";
   public static final String SPECIAL_WHERE_IS_EXTENSION = "Special:WhereIsExtension";
   public static final String SPECIAL_CONTRIBUTIONS = "wiki/Special:Contributions";
-  public static final String SPECIAL_BLOCKLIST = "wiki/Special:BlockList";
-  public static final String SPECIAL_UNBLOCK = "wiki/Special:Unblock";
   public static final String SPECIAL_BLOCK = "wiki/Special:Block";
   public static final String SPECIAL_CHAT = "wiki/Special:Chat";
   public static final String SPECIAL_EDIT_HUB = "wiki/Special:EditHub";
