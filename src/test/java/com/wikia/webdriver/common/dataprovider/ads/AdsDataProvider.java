@@ -638,7 +638,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Rachel"}
+        {"glee", "Get_It_Right"}
     };
   }
 
@@ -773,7 +773,7 @@ public class AdsDataProvider {
             "adtest",
             "SyntheticTests/Krux/Page_1",
             "glee",
-            "Rachel",
+            "Get_It_Right",
             "o8l9bis26"
         }
     };
