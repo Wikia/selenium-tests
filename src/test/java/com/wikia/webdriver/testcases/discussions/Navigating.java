@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -36,7 +35,6 @@ public class Navigating extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki", enabled = false)
-  @RelatedIssue(issueID = "SOC-2286")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
@@ -44,7 +42,6 @@ public class Navigating extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar", enabled = false)
-  @RelatedIssue(issueID = "SOC-2286")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
