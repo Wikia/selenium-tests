@@ -10,14 +10,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
-  @FindBy(css = ".wikia-search__container input")
+  @FindBy(css = ".side-search__container input")
   private WebElement searchInput;
 
-  @FindBy(css = ".wikia-search__clear")
+  @FindBy(css = ".side-search__clear")
   private WebElement clearSearchButton;
 
-  private String searchResultClass = ".wikia-search__results li.mw-content a";
-  private By loadingSearchResultsIndicator = By.cssSelector(".wikia-search__results li.loading");
+  private String searchResultClass = ".side-search__results li.mw-content a";
+  private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");
 
   private Loading loading;
 

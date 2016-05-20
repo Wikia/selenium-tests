@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -77,7 +76,6 @@ public class Upvoting extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2419")
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
@@ -103,7 +101,6 @@ public class Upvoting extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2419")
   public void loggedInUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }

@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -44,7 +43,6 @@ public class Sharing extends NewTestTemplate {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
@@ -57,7 +55,6 @@ public class Sharing extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
@@ -69,7 +66,6 @@ public class Sharing extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost", enabled = false)
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
@@ -77,7 +73,6 @@ public class Sharing extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }
