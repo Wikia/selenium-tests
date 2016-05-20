@@ -28,7 +28,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   private void init() {
     this.infobox = new PortableInfoboxObject(driver);
     this.toc = new TableOfContentPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")

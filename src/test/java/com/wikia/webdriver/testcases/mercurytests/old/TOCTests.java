@@ -32,7 +32,7 @@ public class TOCTests extends NewTestTemplate {
 
   private void init() {
     this.toc = new TableOfContentPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.loading = new Loading(driver);
   }
 

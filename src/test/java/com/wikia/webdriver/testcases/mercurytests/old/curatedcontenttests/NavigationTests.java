@@ -38,7 +38,7 @@ public class NavigationTests extends NewTestTemplate {
 
   private void init() {
     this.curatedContent = new CuratedContentPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.loading = new Loading(driver);
     this.article = new ArticlePageObject(driver);
     this.mercuryError = new MercuryAlertComponentObject(

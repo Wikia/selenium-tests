@@ -21,7 +21,7 @@ public class SpotifyTests extends NewTestTemplate {
 
   private void init() {
     this.widget = new SpotifyWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "SpotifyWidgetTest_001")

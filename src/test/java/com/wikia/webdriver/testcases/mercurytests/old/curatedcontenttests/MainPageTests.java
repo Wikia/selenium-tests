@@ -57,7 +57,7 @@ public class MainPageTests extends NewTestTemplate {
   private Loading loading;
 
   private void init() {
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.cc = new CuratedMainPagePageObject(driver);
     this.curatedContent = new CuratedContentPageObject(driver);
     this.loading = new Loading(driver);
