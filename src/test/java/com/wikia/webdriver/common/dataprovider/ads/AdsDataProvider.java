@@ -38,24 +38,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] mainWikiPages() {
-    return new Object[][]{
-        {"runescape", "RuneScape_Wiki"},
-        {"yugioh", "Main_Page"},
-        {"naruto", "Narutopedia"},
-        {"leagueoflegends", "League_of_Legends_Wiki"},
-        {"es.drama", "Portada"},
-        {"de.memory-alpha", "Hauptseite"},
-        {"de.marvel-filme", "Marvel-Filme"},
-        {"de.wikia", "index.php?search=elder&fulltext=Search"},
-        {"it.squadraspecialecobra11", "Squadra_speciale_Cobra_11"},
-        {"it.onepiece", "One_Piece_Wiki_Italia"},
-        {"zh.pad", "Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
         {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
@@ -106,23 +88,6 @@ public class AdsDataProvider {
         {"es.drama", "Portada"},
         {"de.memory-alpha", "Hauptseite"},
         {"de.marvel-filme", "Marvel-Filme"},
-    };
-  }
-
-  @DataProvider
-  public static Object[][] pagesWithAIC() {
-    return new Object[][]{
-        {"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
-        {"zh.pad", "%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
-        {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
-        {"es.pokemon", "Lista_de_Pok%C3%A9mon"},
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"elderscrolls", "Skyrim"},
-        {"dragonvale", "Eggs"},
-        {"callofduty", "Mob_of_the_Dead"},
-        {"yugioh", "Lord_of_the_Tachyon_Galaxy"},
-        {"ffxiclopedia", "Category:Jobs"}
     };
   }
 
@@ -289,15 +254,6 @@ public class AdsDataProvider {
         {"sfhomeless", "Glide_Memorial_Church"},
         {"geekfeminism", "Dickwolves"},
         {"suicideprevention", "USA"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] getWikisWithStandardHVC() {
-    return new Object[][]{
-        {"adtest"},
-        {"de.icarly"},
-        {"en.memory-alpha"}
     };
   }
 
@@ -638,7 +594,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Get_It_Right"}
+        {"glee", "Rachel"}
     };
   }
 
@@ -763,19 +719,6 @@ public class AdsDataProvider {
         {"elderscrolls", "Skyrim"},
         {"wowwiki", "Portal:Main"},
         {"zh.pad", "Special:Video"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxRealTimeSegment() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/Krux/Page_1",
-            "glee",
-            "Get_It_Right",
-            "o8l9bis26"
-        }
     };
   }
 
