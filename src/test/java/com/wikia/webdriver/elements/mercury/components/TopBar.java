@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.NoSuchElementException;
 
 public class TopBar extends WikiBasePageObject {
@@ -27,13 +28,10 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButton;
 
-  @FindBy(css = ".nav-menu")
+  private By navigationComponent = By.cssSelector(".side-nav-menu");
+
+  @FindBy(css = ".local-nav-menu")
   private WebElement navMenu;
-
-  @FindBy(css = ".site-head-fandom-bar")
-  private WebElement fandomBar;
-
-  private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
   private Wait wait;
 
@@ -72,13 +70,6 @@ public class TopBar extends WikiBasePageObject {
 
     return new Navigation(driver);
   }
-
-  public void clickWikiaLogo() {
-    PageObjectLogging.logInfo("Click Wikia logo");
-    wait.forElementClickable(logo);
-    logo.click();
-  }
-
 
   public boolean isNavigationBarVisible() {
     try {
@@ -119,15 +110,6 @@ public class TopBar extends WikiBasePageObject {
   public boolean isCloseIconVisible() {
     try {
       return closeButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-  public boolean isFandomBarVisible() {
-    try {
-      return fandomBar.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
