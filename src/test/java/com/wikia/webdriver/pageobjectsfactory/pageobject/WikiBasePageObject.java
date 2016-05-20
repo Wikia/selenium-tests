@@ -411,7 +411,7 @@ public class WikiBasePageObject extends BasePageObject {
         driver.findElement(MERCURY_NAV_ICON).click();
       }
 
-      wait.forElementPresent(By
+      wait.forElementVisible(By
           .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
 
       // closing menu if mercury
