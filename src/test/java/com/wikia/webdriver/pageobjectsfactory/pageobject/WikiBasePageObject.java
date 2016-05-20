@@ -56,8 +56,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestoreP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
@@ -180,19 +178,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyModalLoginAppeared() {
     wait.forElementVisible(logInModal);
     PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
-  }
-
-  public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_BLOCKLIST);
-    PageObjectLogging.log("Special:BlockList openSpecialBlockListPage",
-        "blocked users list page opened", true);
-    return new SpecialBlockListPageObject(driver);
-  }
-
-  public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNBLOCK);
-    PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
-    return new SpecialUnblockPageObject(driver);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
