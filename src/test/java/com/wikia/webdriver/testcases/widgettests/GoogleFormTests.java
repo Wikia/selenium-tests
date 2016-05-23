@@ -21,7 +21,7 @@ public class GoogleFormTests extends NewTestTemplate {
 
   private void init() {
     this.widget = new GoogleFormWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "GoogleFormWidgetTest_001")

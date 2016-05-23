@@ -44,7 +44,7 @@ public class SEOTests extends NewTestTemplate {
   public void MercurySEOTest_001_MetaTags_CanonicalLink() {
     wikiURL = urlBuilder.getUrlForWiki("muppet");
     SEOUtils seo = new SEOUtils(driver);
-    new Navigate(driver).toPage(MercurySubpages.MLP_MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MLP_MAIN_PAGE);
 
     //TODO: Uncomment after issue is fixed - related to HG-668
     /*PageObjectLogging.log(

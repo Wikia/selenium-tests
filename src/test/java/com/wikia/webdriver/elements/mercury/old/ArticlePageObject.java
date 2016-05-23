@@ -28,9 +28,9 @@ public class ArticlePageObject {
   private List<WebElement> footerLinks;
   @FindBy(css = ".contributors > ul > li > a")
   private List<WebElement> topContributorsLinks;
-  @FindBy(css = ".wiki-page-title")
+  @FindBy(css = ".wiki-page-header__title")
   private WebElement articleTitle;
-  @FindBy(css = ".article-content a")
+  @FindBy(css = ".article-content p a")
   private List<WebElement> anchorsInContent;
   @FindBy(css = ".masthead-avatar")
   private WebElement userAvatar;

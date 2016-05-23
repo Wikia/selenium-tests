@@ -24,7 +24,7 @@ public class NavigationTest extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "mercury_navigation_openAndCloseNavigationAndItsSubMenu")

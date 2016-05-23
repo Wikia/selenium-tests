@@ -21,7 +21,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
   private void init() {
     this.widget = new PolldaddyWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "PolldaddyWidgetTest_001")
