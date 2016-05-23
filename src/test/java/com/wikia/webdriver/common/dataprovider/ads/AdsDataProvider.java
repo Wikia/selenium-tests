@@ -594,7 +594,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Rachel"}
+        {"glee", "Get_It_Right"}
     };
   }
 
