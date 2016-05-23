@@ -13,6 +13,9 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {
@@ -98,21 +101,20 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_1)
             .getHeader();
 
-    Assertion.assertEquals(
-        header.getHeroImageCssValue("background-color"),
-        "rgba(255, 255, 255, 1)",
-        String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "background-color")
-    );
-    Assertion.assertEquals(
-        header.getHeroImageCssValue("background-position"),
-        "50% 50%",
-        String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "background-position")
-    );
-    Assertion.assertEquals(
-        header.getHeroImageCssValue("background-repeat"),
-        "no-repeat",
-        String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "background-repeat")
-    );
+    Map<String, String> attributeExpectedValues = new HashMap<String, String>() {{
+      put("background-color", "rgba(255, 255, 255, 1)");
+      put("background-position", "50% 50%");
+      put("background-repeat", "no-repeat");
+    }};
+
+    for (Map.Entry<String, String> attribute: attributeExpectedValues.entrySet()) {
+      String attributeName = attribute.getKey();
+      Assertion.assertEquals(
+          header.getHeroImageCssValue(attributeName),
+          attribute.getValue(),
+          String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, attributeName)
+      );
+    }
   }
 
   @Test(groups = "mercury_header_heroImageIsSquare")
