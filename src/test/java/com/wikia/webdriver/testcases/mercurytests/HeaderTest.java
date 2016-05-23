@@ -17,15 +17,15 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {
 
-  private static final String HEADER_MSG = "Header";
-  private static final String PAGE_TITLE_MSG = "Page title";
-  private static final String HERO_IMAGE_MSG = "Hero image";
+  private static final String HEADER_MESSAGE = "Header";
+  private static final String PAGE_TITLE_MESSAGE = "Page title";
+  private static final String HERO_IMAGE_MESSAGE = "Hero image";
 
-  private static final String VISIBLE_MSG = "visible";
-  private static final String INVISIBLE_MSG = "invisible";
+  private static final String VISIBLE_MESSAGE = "visible";
+  private static final String INVISIBLE_MESSAGE = "invisible";
 
-  private static final String ELEMENT_MSG_TEMPLATE = "%s was expected to be %s.";
-  private static final String INVALID_ATTRIBUTE_MSG_TEMPLATE = "%s has invalid %s attribute.";
+  private static final String ELEMENT_EXPECTATION_MESSAGE_TEMPLATE = "%s was expected to be %s.";
+  private static final String INVALID_ATTRIBUTE_MESSAGE_TEMPLATE = "%s has invalid %s attribute.";
 
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
@@ -35,12 +35,18 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.NO_INFOBOX)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeaderVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, HEADER_MSG, VISIBLE_MSG));
-    Assertion.assertTrue(header.isPageTitleVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, PAGE_TITLE_MSG, VISIBLE_MSG));
-    Assertion.assertFalse(header.isHeroImageVisible(),
-                          String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, INVISIBLE_MSG));
+    Assertion.assertTrue(
+        header.isHeaderVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HEADER_MESSAGE, VISIBLE_MESSAGE)
+    );
+    Assertion.assertTrue(
+        header.isPageTitleVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, PAGE_TITLE_MESSAGE, VISIBLE_MESSAGE)
+    );
+    Assertion.assertFalse(
+        header.isHeroImageVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, INVISIBLE_MESSAGE)
+    );
   }
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
@@ -50,12 +56,18 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_1)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeaderVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, HEADER_MSG, VISIBLE_MSG));
-    Assertion.assertTrue(header.isPageTitleVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, PAGE_TITLE_MSG, VISIBLE_MSG));
-    Assertion.assertTrue(header.isHeroImageVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, VISIBLE_MSG));
+    Assertion.assertTrue(
+        header.isHeaderVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HEADER_MESSAGE, VISIBLE_MESSAGE)
+    );
+    Assertion.assertTrue(
+        header.isPageTitleVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, PAGE_TITLE_MESSAGE, VISIBLE_MESSAGE)
+    );
+    Assertion.assertTrue(
+        header.isHeroImageVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, VISIBLE_MESSAGE)
+    );
   }
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage")
@@ -65,12 +77,18 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_2)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeaderVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, HEADER_MSG, VISIBLE_MSG));
-    Assertion.assertTrue(header.isPageTitleVisible(),
-                         String.format(ELEMENT_MSG_TEMPLATE, PAGE_TITLE_MSG, VISIBLE_MSG));
-    Assertion.assertFalse(header.isHeroImageVisible(),
-                          String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, INVISIBLE_MSG));
+    Assertion.assertTrue(
+        header.isHeaderVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HEADER_MESSAGE, VISIBLE_MESSAGE)
+    );
+    Assertion.assertTrue(
+        header.isPageTitleVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, PAGE_TITLE_MESSAGE, VISIBLE_MESSAGE)
+    );
+    Assertion.assertFalse(
+        header.isHeroImageVisible(),
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, INVISIBLE_MESSAGE)
+    );
   }
 
   @Test(groups = "mercury_header_heroImageIsProperlyStyled")
@@ -83,17 +101,17 @@ public class HeaderTest extends NewTestTemplate {
     Assertion.assertEquals(
         header.getHeroImageCssValue("background-color"),
         "rgba(255, 255, 255, 1)",
-        String.format(INVALID_ATTRIBUTE_MSG_TEMPLATE, HERO_IMAGE_MSG, "background-color")
+        String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "background-color")
     );
     Assertion.assertEquals(
         header.getHeroImageCssValue("background-position"),
         "50% 50%",
-        String.format(INVALID_ATTRIBUTE_MSG_TEMPLATE, HERO_IMAGE_MSG, "background-position")
+        String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "background-position")
     );
     Assertion.assertEquals(
         header.getHeroImageCssValue("background-repeat"),
         "no-repeat",
-        String.format(INVALID_ATTRIBUTE_MSG_TEMPLATE, HERO_IMAGE_MSG, "background-repeat")
+        String.format(INVALID_ATTRIBUTE_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "background-repeat")
     );
   }
 
@@ -106,7 +124,7 @@ public class HeaderTest extends NewTestTemplate {
 
     Assertion.assertTrue(
         header.isHeroImageSquare(),
-        String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, "square")
+        String.format(ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "square")
     );
   }
 
@@ -119,7 +137,9 @@ public class HeaderTest extends NewTestTemplate {
 
     Assertion.assertFalse(
         header.isHeroImageSquare(),
-        String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, "rectangular (not square)")
+        String.format(
+            ELEMENT_EXPECTATION_MESSAGE_TEMPLATE, HERO_IMAGE_MESSAGE, "rectangular (not square)"
+        )
     );
   }
 }
