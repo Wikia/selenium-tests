@@ -46,7 +46,6 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6928", comment = "the related issue treates about unstable environment of this test")
   public void CreateNewWiki_002_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);

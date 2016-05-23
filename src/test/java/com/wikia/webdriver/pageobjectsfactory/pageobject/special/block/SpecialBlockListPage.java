@@ -1,20 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SpecialBlockListPageObject extends WikiBasePageObject {
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+public class SpecialBlockListPage extends WikiBasePageObject {
+
+  private static final String SPECIAL_BLOCKLIST_PATH = "Special:BlockList";
 
   @FindBy(css = "#mw-input-wpTarget")
   private WebElement userNameField;
@@ -25,16 +25,18 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   @FindBy(css = ".mw-blocklist td:nth-child(3)")
   private WebElement expirationDateElement;
 
-  public SpecialBlockListPageObject(WebDriver driver) {
-    super();
-    PageFactory.initElements(driver, this);
+  public SpecialBlockListPage open() {
+    getUrl(urlBuilder.getUrlForPath(SPECIAL_BLOCKLIST_PATH));
+    PageObjectLogging.log("Open Special Block List Page", "blocked users list page opened", true);
+
+    return this;
   }
 
   private void typeInUserName(String userName) {
     wait.forElementVisible(userNameField);
     userNameField.sendKeys(userName);
-    PageObjectLogging
-        .log("Special:BlockList typeInUserName", userName + " typed in username field", true);
+    PageObjectLogging.log("Special:BlockList typeInUserName", userName + " typed in username field",
+        true);
   }
 
   private void clickSearchButton() {
@@ -51,15 +53,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
   public void verifyUserUnblocked() {
     wait.forElementVisible(userUnblockedMessage);
     PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
-                          "verified that user is not on blocked users list", true, driver);
+        "verified that user is not on blocked users list", true, driver);
   }
 
   public void verifyUserBlocked(String userName) {
     wait.forElementVisible(
         By.cssSelector("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']"));
-    PageObjectLogging
-        .log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list",
-             true, driver);
+    PageObjectLogging.log("Special:BlockList verifyUSerUnblocked",
+        "verified that user is on blocked users list", true, driver);
   }
 
   /**
@@ -83,8 +84,8 @@ public class SpecialBlockListPageObject extends WikiBasePageObject {
     } catch (ParseException ex) {
       throw new WebDriverException("Can't parse expirationDateText: " + expirationDateText);
     }
-    PageObjectLogging
-        .log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
+    PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"),
+        true);
     return isBlocked;
   }
 }

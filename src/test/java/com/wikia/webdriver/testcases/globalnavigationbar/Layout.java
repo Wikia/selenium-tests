@@ -2,8 +2,8 @@ package com.wikia.webdriver.testcases.globalnavigationbar;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 
 import org.openqa.selenium.Dimension;
@@ -36,8 +36,8 @@ public class Layout extends NewTestTemplate{
 
   @Test(groups = {"dropdownContainsExpectedLinksOnResolutionChange"})
   public void dropdownContainsExpectedLinksOnResolutionChange() {
-    HomePageObject homePage = new HomePageObject();
-    GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
+    HomePage homePage = new HomePage();
+    GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
 
     driver.manage().window().setSize(HUBS_OUTSIDE_DROPDOWN_RESOLUTION);
@@ -53,18 +53,18 @@ public class Layout extends NewTestTemplate{
 
   @Test(groups = {"gameStarLogoIsNotPresentOn768x1024WidthResolution"})
   public void gameStarLogoIsNotPresentOn768x1024WidthResolution() {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
     homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
 
-    Assertion.assertFalse((new GlobalNavigationPageObject(driver)).isGameStarLogoDisplayed(),
+    Assertion.assertFalse((new GlobalNavigation()).isGameStarLogoDisplayed(),
                           "GameStar Logo shouldn't be visible");
   }
 
   @Test(groups = {"linksArePresentOn1024x1024Resolution"})
   public void linksArePresentOn1024x1024Resolution() {
-    HomePageObject homePage = new HomePageObject();
-    GlobalNavigationPageObject globalNav = new GlobalNavigationPageObject(driver);
+    HomePage homePage = new HomePage();
+    GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
 
     driver.manage().window().setSize(HUBS_OUTSIDE_DROPDOWN_RESOLUTION);
@@ -87,9 +87,9 @@ public class Layout extends NewTestTemplate{
       dataProvider = "getWikisWithDisabledLocalSearch"
   )
   public void localSearchIsDisabled(String wikiName) {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
-    GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();
+    GlobalNavigation globalNav = homePage.getGlobalNavigation();
 
     Assertion.assertTrue(globalNav.isLocalSearchDisabled());
   }

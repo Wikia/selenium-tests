@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.discussions;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
 
@@ -16,25 +17,29 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "fallout")
 public class Promoting extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
+
+  /**
+   * ANONS ON DESKTOP SECTION
+   */
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeAppPromotion")
   @Execute(onWikia = "fallout")
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeAppPromotion() {
     discussionsAppPromotionUnitPresentOnPage();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickAppleLinkAppPromotion")
   @Execute(onWikia = "fallout")
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAppleLinkAppPromotion() {
     appleLinkRedirectsProperly();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickGooglePlayLinkAppPromotion")
   @Execute(onWikia = "fallout")
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickGooglePlayLinkAppPromotion() {
     googlePlayLinkRedirectsProperly();
   }

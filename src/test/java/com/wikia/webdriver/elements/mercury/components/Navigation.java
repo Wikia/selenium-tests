@@ -13,42 +13,41 @@ import org.openqa.selenium.NoSuchElementException;
 
 public class Navigation {
 
-  @FindBy(css = ".wikia-nav--login")
+  @FindBy(css = ".side-nav-menu__item.main")
   private WebElement signInRegisterButton;
 
-  @FindBy(css = ".wikia-nav__back")
+  @FindBy(css = ".side-nav-menu__item.back")
   private WebElement backButton;
 
-  @FindBy(css = ".nav-menu__item.nav-menu--root")
+  @FindBy(css = ".side-nav-menu__item.menu")
   private List<WebElement> subMenuLinks;
 
-  @FindBy(css = "li.nav-menu__item a")
+  @FindBy(css = "li.side-nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
-  @FindBy(css = ".wikia-nav__header")
+  @FindBy(css = ".profile-link")
+  private WebElement userProfile;
+
+  @FindBy(css = ".main")
   private WebElement navigationMainHeader;
 
-  @FindBy(css = ".nav-menu--games")
+  @FindBy(css = ".side-nav-menu__footer")
+  private WebElement homeOfFandomFooter;
+
+  @FindBy(css = "li.games")
   private WebElement gamesHub;
 
-  @FindBy(css = ".nav-menu--movies")
+  @FindBy(css = "li.movies")
   private WebElement moviesHub;
 
-  @FindBy(css = ".nav-menu--tv")
+  @FindBy(css = "li.tv")
   private WebElement tvHub;
 
-  @FindBy(css = ".wikia-nav__avatar")
-  private WebElement userAvatar;
 
-  @FindBy(css = ".wikia-nav--profile-link")
-  private WebElement userProfileLink;
-
-  @FindBy(css = ".wikia-nav--logout")
-  private WebElement logoutLink;
-
+  private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
   private Wait wait;
@@ -128,6 +127,16 @@ public class Navigation {
     return this;
   }
 
+  public boolean isUserProfileLinkVisible() {
+    try {
+      return userProfile.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+
   public boolean isMainHeaderVisible() {
     try {
       return navigationMainHeader.isDisplayed();
@@ -146,27 +155,9 @@ public class Navigation {
     }
   }
 
-  public boolean isUserAvatarVisible() {
+  public boolean isFooterVisible() {
     try {
-      return userAvatar.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-  public boolean isUserProfileLinkVisible() {
-    try {
-      return userProfileLink.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-  public boolean isLogoutLinkVisible() {
-    try {
-      return logoutLink.isDisplayed();
+      return homeOfFandomFooter.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
@@ -183,11 +174,4 @@ public class Navigation {
       return false;
     }
   }
-
-  public String getNavigationHeaderText() {
-    wait.forElementVisible(navigationMainHeader);
-
-    return navigationMainHeader.getText();
-  }
-
 }

@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
 @Execute(asUser = User.USER, onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
@@ -15,7 +15,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")
   public void globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton() {
-    new HomePageObject()
+    new HomePage()
         .open()
         .getWikiaBar()
         .clickOnShortcutsLink()
@@ -24,7 +24,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts")
   public void globalShortcuts_keyboardShortcuts_openAndCloseModalByShortcuts() {
-    new HomePageObject()
+    new HomePage()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")
@@ -33,7 +33,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut")
   public void globalShortcuts_keyboardShortcuts_navigateToInsightsByShortcut() {
-    new HomePageObject()
+    new HomePage()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")
@@ -42,7 +42,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut")
   public void globalShortcuts_keyboardShortcuts_focusGlobalNavigationSearchByShortcut() {
-    new HomePageObject()
+    new HomePage()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")
@@ -51,7 +51,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut")
   public void globalShortcuts_keyboardShortcuts_openActionExplorerByKeyboardShortcut() {
-    new HomePageObject()
+    new HomePage()
         .open()
         .getKeyboardShortcuts()
         .useShortcut("?")

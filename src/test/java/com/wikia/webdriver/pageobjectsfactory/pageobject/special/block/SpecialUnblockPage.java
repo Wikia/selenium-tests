@@ -1,14 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SpecialUnblockPageObject extends WikiBasePageObject {
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+public class SpecialUnblockPage extends WikiBasePageObject {
+  public static final String SPECIAL_UNBLOCK_PATH = "Special:Unblock";
 
   @FindBy(css = "#mw-input-wpTarget")
   private WebElement userNameField;
@@ -17,8 +17,11 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
   @FindBy(xpath = "//h1[contains(text(), 'Unblock')]")
   private WebElement unblockedUserHead;
 
-  public SpecialUnblockPageObject(WebDriver driver) {
-    super();
+  public SpecialUnblockPage open() {
+    getUrl(urlBuilder.getUrlForPath(SPECIAL_UNBLOCK_PATH));
+    PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
+
+    return this;
   }
 
   private void typeInUserName(String userName) {
@@ -40,12 +43,10 @@ public class SpecialUnblockPageObject extends WikiBasePageObject {
 
   public void verifyUnblockMessage(String userName) {
     wait.forElementVisible(unblockedUserHead);
-    wait.forElementVisible(By.xpath(
-        "//div[@id='mw-content-text']//a[@href='/wiki/User:" + userName + "' and contains(text(), '"
-        + userName + "')]"));
-    wait.forElementVisible(By.xpath(
-        "//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
+    wait.forElementVisible(By.xpath("//div[@id='mw-content-text']//a[@href='/wiki/User:" + userName
+        + "' and contains(text(), '" + userName + "')]"));
+    wait.forElementVisible(
+        By.xpath("//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]"));
     PageObjectLogging.log("verifyUnblockMessage", "unblock user messages verified", true, driver);
   }
-
 }
