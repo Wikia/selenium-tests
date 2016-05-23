@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -12,11 +12,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Test(groups="discussions")
-@Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
+@Test(groups = "discussions")
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sorting extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
@@ -35,9 +35,8 @@ public class Sorting extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
-  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSortPostList() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
@@ -58,9 +57,8 @@ public class Sorting extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
@@ -69,7 +67,7 @@ public class Sorting extends NewTestTemplate {
    * TESTING METHODS SECTION
    */
 
-  public void userCanSwitchBetweenLatestAndTrendingInDropdown() {
+  private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
     PostsListPage postsList = new PostsListPage(driver).open();
     Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
     postsList.clickLatestLinkOnMobile();
@@ -82,7 +80,7 @@ public class Sorting extends NewTestTemplate {
     new Loading(driver).handleAsyncPageReload();
   }
 
-  public void userCanSwitchBetweenLatestAndTrendingTab() {
+  private void userCanSwitchBetweenLatestAndTrendingTab() {
     PostsListPage postsList = new PostsListPage(driver).open();
     postsList.clickLatestTabOnDesktop();
     new Loading(driver).handleAsyncPageReload();

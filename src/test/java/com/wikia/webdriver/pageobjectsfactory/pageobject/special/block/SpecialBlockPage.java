@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class SpecialBlockPageObject extends WikiBasePageObject {
+public class SpecialBlockPage extends WikiBasePageObject {
 
   @FindBy(css = "input[name='wpTarget']")
   private WebElement userNameField;
@@ -30,16 +30,16 @@ public class SpecialBlockPageObject extends WikiBasePageObject {
   @FindBy(css = ".mw-input [type='checkbox']")
   private List<WebElement> checkBoxes;
 
-  public SpecialBlockPageObject(WebDriver driver) {
+  public SpecialBlockPage(WebDriver driver) {
     super();
     PageFactory.initElements(driver, this);
   }
 
-  public SpecialBlockPageObject open(){
+  public SpecialBlockPage open(){
     return open(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
   }
 
-  public SpecialBlockPageObject open(String wikiUrl){
+  public SpecialBlockPage open(String wikiUrl){
     getUrl(wikiUrl + URLsContent.SPECIAL_BLOCK);
     PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
     wait.forElementVisible(blockButton);

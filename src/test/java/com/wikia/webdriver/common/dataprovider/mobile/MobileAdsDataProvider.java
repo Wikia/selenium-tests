@@ -112,9 +112,9 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"esrb\":\"everyone\"",
-                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                "\"media\":[\"tv\",\"cards\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"anime\",\"comic\",\"fantasy\"]",
+                "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                 "\"pform\":[\"pc\",\"psp\"]",
                 "\"sex\":[\"m\"]"
 
@@ -152,12 +152,12 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"18-34\",\"18-24\",\"25-34\",\"teen\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
-                "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
-                "\"pub\":[\"bethesda\",\"bethesda\"]",
+                "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+                "\"pub\":[\"bethesda\"]",
                 "\"esrb\":\"mature\"",
-                "\"theme\":[\"military\",\"postapocalypse\"]"
+                "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
 
             ),
             Arrays.asList(
@@ -189,10 +189,9 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"kids\",\"teen\",\"under18\",\"18-24\"]",
-                "\"gnre\":[\"mmo\",\"rpg\",\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"rpg\",\"mmorpg\",\"openworld\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
                 "\"pform\":[\"pc\"]",
-                "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
                 "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
@@ -265,9 +264,9 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
-                "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
-                "\"pform\":[\"pc\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                 "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
@@ -301,14 +300,14 @@ public class MobileAdsDataProvider {
                 "\"ref\":\"direct\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
+                "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"media\":[\"books\",\"comics\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
-                "\"volum\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
-                "\"theme\":[\"space\",\"alien\"]"
+                "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -394,11 +393,41 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] providersChainMercury() {
+    return new Object[][]{
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.MOBILETOP_LB,
+            "DirectGptMobile; RemnantGptMobile"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.MOBILETOP_LB,
+            "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "MOBILE_TOP_LEADERBOARD", "DirectGptMobile; RemnantGptMobile", ""
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.MOBILETOP_LB,
+            ""
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.MOBILETOP_LB,
+            "RubiconFastlane"
         },
     };
   }
@@ -419,8 +448,10 @@ public class MobileAdsDataProvider {
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
         {"project43", "SyntheticTests/AdType/1xHop", "mobile", "\"source\":\"mobile/LB\""},
-        {"project43", "SyntheticTests/AdType/2xHop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
-        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+        {"project43", "SyntheticTests/AdType/2xHop", "mobile_remnant",
+         "\"source\":\"mobile_remnant/LB\""},
+        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "mobile",
+         "\"test-marker\":\"42\""}
     };
   }
 
