@@ -17,6 +17,17 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {
 
+  private static final String HEADER_MSG = "Header";
+  private static final String PAGE_TITLE_MSG = "Page title";
+  private static final String HERO_IMAGE_MSG = "Hero image";
+
+  private static final String VISIBLE_MSG = "visible";
+  private static final String INVISIBLE_MSG = "invisible";
+
+  private static final String ELEMENT_MSG_TEMPLATE = "%s was expected to be %s.";
+  private static final String INVALID_ATTRIBUTE_MSG_TEMPLATE = "%s has invalid %s attribute.";
+
+
   @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
     Header header =
@@ -24,9 +35,12 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.NO_INFOBOX)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeaderVisible(), "header is visible");
-    Assertion.assertTrue(header.isPageTitleVisible(), "page title is visible");
-    Assertion.assertFalse(header.isHeroImageVisible(), "hero image is visible");
+    Assertion.assertTrue(header.isHeaderVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, HEADER_MSG, VISIBLE_MSG));
+    Assertion.assertTrue(header.isPageTitleVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, PAGE_TITLE_MSG, VISIBLE_MSG));
+    Assertion.assertFalse(header.isHeroImageVisible(),
+                          String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, INVISIBLE_MSG));
   }
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
@@ -36,9 +50,12 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_1)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeaderVisible(), "header is visible");
-    Assertion.assertTrue(header.isPageTitleVisible(), "page title is visible");
-    Assertion.assertTrue(header.isHeroImageVisible(), "hero image is visible");
+    Assertion.assertTrue(header.isHeaderVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, HEADER_MSG, VISIBLE_MSG));
+    Assertion.assertTrue(header.isPageTitleVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, PAGE_TITLE_MSG, VISIBLE_MSG));
+    Assertion.assertTrue(header.isHeroImageVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, VISIBLE_MSG));
   }
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage")
@@ -48,9 +65,12 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_2)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeaderVisible(), "header is visible");
-    Assertion.assertTrue(header.isPageTitleVisible(), "page title is visible");
-    Assertion.assertFalse(header.isHeroImageVisible(), "hero image is visible");
+    Assertion.assertTrue(header.isHeaderVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, HEADER_MSG, VISIBLE_MSG));
+    Assertion.assertTrue(header.isPageTitleVisible(),
+                         String.format(ELEMENT_MSG_TEMPLATE, PAGE_TITLE_MSG, VISIBLE_MSG));
+    Assertion.assertFalse(header.isHeroImageVisible(),
+                          String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, INVISIBLE_MSG));
   }
 
   @Test(groups = "mercury_header_heroImageIsProperlyStyled")
@@ -63,17 +83,17 @@ public class HeaderTest extends NewTestTemplate {
     Assertion.assertEquals(
         header.getHeroImageCssValue("background-color"),
         "rgba(255, 255, 255, 1)",
-        "hero image has proper background-color attribute"
+        String.format(INVALID_ATTRIBUTE_MSG_TEMPLATE, HERO_IMAGE_MSG, "background-color")
     );
     Assertion.assertEquals(
         header.getHeroImageCssValue("background-position"),
         "50% 50%",
-        "hero image has proper background-position attribute"
+        String.format(INVALID_ATTRIBUTE_MSG_TEMPLATE, HERO_IMAGE_MSG, "background-position")
     );
     Assertion.assertEquals(
         header.getHeroImageCssValue("background-repeat"),
         "no-repeat",
-        "hero image has proper background-repeat attribute"
+        String.format(INVALID_ATTRIBUTE_MSG_TEMPLATE, HERO_IMAGE_MSG, "background-repeat")
     );
   }
 
@@ -84,7 +104,10 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_1)
             .getHeader();
 
-    Assertion.assertTrue(header.isHeroImageSquare(), "hero image is square");
+    Assertion.assertTrue(
+        header.isHeroImageSquare(),
+        String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, "square")
+    );
   }
 
   @Test(groups = "mercury_header_heroImageIsRectangle")
@@ -94,6 +117,9 @@ public class HeaderTest extends NewTestTemplate {
             .open(MercurySubpages.INFOBOX_4)
             .getHeader();
 
-    Assertion.assertFalse(header.isHeroImageSquare(), "hero image is rectangular (not square)");
+    Assertion.assertFalse(
+        header.isHeroImageSquare(),
+        String.format(ELEMENT_MSG_TEMPLATE, HERO_IMAGE_MSG, "rectangular (not square)")
+    );
   }
 }
