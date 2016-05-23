@@ -2,7 +2,7 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-
+import com.wikia.webdriver.elements.mercury.components.Navigation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +34,8 @@ public class ArticlePageObject {
   private List<WebElement> anchorsInContent;
   @FindBy(css = ".masthead-avatar")
   private WebElement userAvatar;
+  @FindBy(css = ".wiki-page-error")
+  private WebElement useNavigationOrSearchLink;
 
   private Wait wait;
   private WebDriver driver;
@@ -109,5 +111,12 @@ public class ArticlePageObject {
 
   public void waitForFooterToBeVisible() {
     wait.forElementVisible(footerLogo, 10, 500);
+  }
+
+  public Navigation clickNavigationLinkOnErrorPage() {
+    wait.forElementVisible(useNavigationOrSearchLink);
+    useNavigationOrSearchLink.click();
+
+    return new Navigation(driver);
   }
 }

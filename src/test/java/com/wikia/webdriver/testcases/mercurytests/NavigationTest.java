@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import org.testng.annotations.Test;
+import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -91,5 +92,13 @@ public class NavigationTest extends NewTestTemplate {
     topBar.openNavigation();
     Assertion.assertFalse(navigation.areHubLinksVisible());
     Assertion.assertFalse(navigation.isFooterVisible());
+  }
+
+  @Test(groups = "mercury_navigation_useNavigationLinkOnErrorPage")
+  public void mercury_navigation_useNavigationLinkOnErrorPage() {
+    new Navigate().toPage(MercurySubpages.ERROR_PAGE);
+    navigation = new ArticlePageObject(driver).clickNavigationLinkOnErrorPage();
+
+    Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 }
