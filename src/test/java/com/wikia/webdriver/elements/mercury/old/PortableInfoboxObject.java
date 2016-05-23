@@ -162,19 +162,13 @@ public class PortableInfoboxObject {
   }
 
   public PortableInfoboxObject clickGalleryImage(int index) {
-    Assertion.assertFalse(galleryImageList.isEmpty());
-    wait.forElementClickable(galleryImageList.get(index));
-
-    galleryImageList.get(index).click();
+    wait.forElementClickable(galleryImageList.get(index)).click();
 
     return this;
   }
 
   public PortableInfoboxObject clickGalleryButton(int index) {
-    Assertion.assertFalse(galleryButtonList.isEmpty());
-    wait.forElementClickable(galleryButtonList.get(index));
-
-    galleryButtonList.get(index).click();
+    wait.forElementClickable(galleryButtonList.get(index)).click();
 
     return this;
   }
