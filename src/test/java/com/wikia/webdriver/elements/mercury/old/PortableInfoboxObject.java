@@ -21,18 +21,18 @@ public class PortableInfoboxObject {
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  private static final String heroImageCssSelector = ".portable-infobox-hero-image";
-  @FindBy(css = heroImageCssSelector)
+  private static final String HERO_IMAGE_CSS_SELECTOR = ".portable-infobox-hero-image";
+  @FindBy(css = HERO_IMAGE_CSS_SELECTOR)
   private WebElement heroImage;
-  private By heroImageSelector = By.cssSelector(heroImageCssSelector);
+  private By heroImageSelector = By.cssSelector(HERO_IMAGE_CSS_SELECTOR);
 
   @FindBy(css = ".portable-infobox .pi-hero-title")
   private WebElement title;
 
-  private static final String titleSmallImageCssSelector = ".portable-infobox .pi-title";
-  @FindBy(css = titleSmallImageCssSelector)
+  private static final String TITLE_SMALL_IMAGE_CSS_SELECTOR = ".portable-infobox .pi-title";
+  @FindBy(css = TITLE_SMALL_IMAGE_CSS_SELECTOR)
   private WebElement titleSmallImage;
-  private By titleSmallImageSelector = By.cssSelector(titleSmallImageCssSelector);
+  private By titleSmallImageSelector = By.cssSelector(TITLE_SMALL_IMAGE_CSS_SELECTOR);
 
   @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
