@@ -107,7 +107,7 @@ public class HeaderTest extends NewTestTemplate {
       put("background-repeat", "no-repeat");
     }};
 
-    for (Map.Entry<String, String> attribute: attributeExpectedValues.entrySet()) {
+    for (Map.Entry<String, String> attribute : attributeExpectedValues.entrySet()) {
       String attributeName = attribute.getKey();
       Assertion.assertEquals(
           header.getHeroImageCssValue(attributeName),
