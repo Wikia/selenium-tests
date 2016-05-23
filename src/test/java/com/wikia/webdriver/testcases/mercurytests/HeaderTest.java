@@ -26,7 +26,7 @@ public class HeaderTest extends NewTestTemplate {
 
     Assertion.assertTrue(header.isHeaderVisible(), "header is visible");
     Assertion.assertTrue(header.isPageTitleVisible(), "page title is visible");
-    Assertion.assertFalse(header.isHeroImageVisible(), "hero image is not visible");
+    Assertion.assertFalse(header.isHeroImageVisible(), "hero image is visible");
   }
 
   @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
@@ -50,7 +50,7 @@ public class HeaderTest extends NewTestTemplate {
 
     Assertion.assertTrue(header.isHeaderVisible(), "header is visible");
     Assertion.assertTrue(header.isPageTitleVisible(), "page title is visible");
-    Assertion.assertFalse(header.isHeroImageVisible(), "hero image is not visible");
+    Assertion.assertFalse(header.isHeroImageVisible(), "hero image is visible");
   }
 
   @Test(groups = "mercury_header_heroImageIsProperlyStyled")
