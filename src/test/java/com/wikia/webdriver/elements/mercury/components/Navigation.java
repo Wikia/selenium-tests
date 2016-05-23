@@ -31,7 +31,7 @@ public class Navigation {
   @FindBy(css = ".profile-link")
   private WebElement userProfile;
 
-  @FindBy(css = ".main")
+  @FindBy(css = ".wikia-nav__header")
   private WebElement navigationMainHeader;
 
   @FindBy(css = ".side-nav-menu__footer")
@@ -45,7 +45,6 @@ public class Navigation {
 
   @FindBy(css = "li.tv")
   private WebElement tvHub;
-
 
   private By localNavMenu = By.cssSelector(".local-nav-menu");
   private By navigationComponent = By.cssSelector(".side-nav-menu");
