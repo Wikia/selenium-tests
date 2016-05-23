@@ -500,12 +500,4 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(subhead.getSubheadTitle(),
                            "Editing template: InfoboxBuilderChangeTemplateNameBySubhead");
   }
-
-  @Execute(asUser = User.USER)
-  public void mercuryNavBarShouldNotBeVisible() {
-    InfoboxBuilderPage builderPage = new InfoboxBuilderPage().open();
-
-    Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
-    Assertion.assertFalse(new TopBar(driver).isNavigationBarVisible());
-  }
 }
