@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -52,13 +51,13 @@ public class TableOfContentPageObject {
     return true;
   }
 
-  public boolean isTOCAtTheTopOfTheArticle() throws WebDriverException {
+  public boolean isTOCAtTheTopOfTheArticle() {
     wait.forElementVisible(tocAtTheTop);
     return tocAtTheTop.isDisplayed() &&
            tocAtTheTop.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
   }
 
-  public boolean isTOCBelowFirstInfobox() throws WebDriverException {
+  public boolean isTOCBelowFirstInfobox() {
     wait.forElementVisible(tocBelowFirstInfobox);
     return tocBelowFirstInfobox.isDisplayed() &&
            tocBelowFirstInfobox.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
