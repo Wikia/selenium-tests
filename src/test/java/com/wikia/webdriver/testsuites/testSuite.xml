@@ -142,7 +142,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LoginTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.PortableInfoboxTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.old.SEOTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.AllTagsTests"/>
