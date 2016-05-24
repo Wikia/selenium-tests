@@ -157,6 +157,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.RedirectionTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryPageTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.ErrorPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
