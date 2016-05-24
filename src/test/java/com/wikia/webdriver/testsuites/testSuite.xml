@@ -157,11 +157,14 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.RedirectionTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryPageTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.CategoryTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.ErrorPageTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.HeaderTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.RecentWikiActivityTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
@@ -174,7 +177,6 @@
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsThreadParticipantTests"/>
             <class name="com.wikia.webdriver.testcases.oasismainpage.CuratedContentModal"/>
             <class name="com.wikia.webdriver.testcases.portableinfoboxtests.PortableInfoboxTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.RecentWikiActivityTest"/>
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.BasicActions"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
