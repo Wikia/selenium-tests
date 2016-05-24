@@ -44,7 +44,7 @@ public class ImageUploadTests extends NewTestTemplate {
     this.generator = new ImageGenerator();
     this.itemForm = new ItemFormPageObject(driver);
     this.upload = new UploadImageModalComponentObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "MercuryImageUploadTest_001")

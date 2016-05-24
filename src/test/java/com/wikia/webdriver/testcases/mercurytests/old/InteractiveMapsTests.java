@@ -26,7 +26,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   private void init() {
     this.maps = new InteractiveMapsComponentObject(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.MAP);
+    new Navigate().toPage(MercurySubpages.MAP);
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_001")
