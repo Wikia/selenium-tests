@@ -33,7 +33,7 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "MercuryLoginTest_001", enabled = false)
   public void MercuryLoginTest_001_validUserCanLogIn() {
-    new Navigate(driver).toPage(MercurySubpages.MAP);
+    new Navigate().toPage(MercurySubpages.MAP);
     String url = driver.getCurrentUrl();
 //    new TopBarComponentObject(driver).clickLogInIcon();
     new LoginPageObject(driver).clickOnSignInButton().logUserIn(

@@ -45,7 +45,7 @@ public class CategoryPageTest extends NewTestTemplate {
         .loadPreviousMembersForSection("C");
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryMemberPage(")
+  @Test(groups = "mercury_category_navigateToCategoryMemberPage")
   public void mercury_category_navigateToCategoryMemberPage() {
     new CategoryPage()
         .navigateToPageWithArticleAndWithMembersFromUrl()
