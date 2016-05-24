@@ -86,8 +86,10 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
-  @RelatedIssue(issueID = "MAIN-7213", comment = "the failure is caused by the environment instability. " +
-          "Please rerun test")
+  @RelatedIssue(
+          issueID = "MAIN-7213",
+          comment = "the failure is caused by the environment instability. Please rerun test"
+  )
   public void anonymousUserCanFollowDiscussionOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
