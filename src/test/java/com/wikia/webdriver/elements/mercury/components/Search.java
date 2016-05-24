@@ -2,19 +2,26 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
-  @FindBy(css = ".wikia-search__container input")
+  @FindBy(css = ".wikia-search__container input.side-search__input")
   private WebElement searchInput;
 
   @FindBy(css = ".wikia-search__clear")
   private WebElement clearSearchButton;
+
+  @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
+  private WebElement inputFieldSearchIcon;
 
   private String searchResultClass = ".wikia-search__results li.mw-content a";
   private By loadingSearchResultsIndicator = By.cssSelector(".wikia-search__results li.loading");
@@ -84,6 +91,42 @@ public class Search extends BasePageObject {
     clearSearchButton.click();
 
     return this;
+  }
+
+  public boolean isInputFieldSearchIconVisible() {
+    try {
+      wait.forElementVisible(inputFieldSearchIcon);
+      return inputFieldSearchIcon.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isClearSearchButtonVisible() {
+    try {
+      wait.forElementVisible(clearSearchButton);
+      return clearSearchButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isSearchInputFieldVisible() {
+    try {
+      wait.forElementVisible(searchInput);
+      return searchInput.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public SearchResultsPage clickEnterAndNavigateToSearchResults() {
+    new Actions(driver).sendKeys(Keys.ENTER).perform();
+
+    return new SearchResultsPage();
   }
 
 }
