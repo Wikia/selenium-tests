@@ -11,67 +11,67 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class PostsListPage extends WikiBasePageObject {
+  /*
+    @FindBy(css = ".post-detail")
+    private List<WebElement> postList;
 
-  @FindBy(css = ".post-detail")
-  private List<WebElement> postList;
+    @FindBy(css = "div.sort")
+    private WebElement sortEntryPointMobile;
 
-  @FindBy(css = "div.sort")
-  private WebElement sortEntryPointMobile;
+    @FindBy(css = ".sort span")
+    private WebElement labelInSortEntryPointMobile;
 
-  @FindBy(css = ".sort span")
-  private WebElement labelInSortEntryPointMobile;
+    @FindBy(css = ".pop-over-container")
+    private WebElement sortOptionsMobile;
 
-  @FindBy(css = ".pop-over-container")
-  private WebElement sortOptionsMobile;
+    @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
+    private WebElement trendingOptionInSortMenu;
 
-  @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
-  private WebElement trendingOptionInSortMenu;
+    @FindBy(css = "label[for='sort-button-main.sort-by-latest']")
+    private WebElement latestOptionInSortMenu;
 
-  @FindBy(css = "label[for='sort-button-main.sort-by-latest']")
-  private WebElement latestOptionInSortMenu;
+    @FindBy(css = ".filters-apply")
+    private WebElement applyButtonInSortMenu;
 
-  @FindBy(css = ".filters-apply")
-  private WebElement applyButtonInSortMenu;
+    @FindBy(xpath = "//li[text()='Latest']")
+    private WebElement latestTabOnDesktop;
 
-  @FindBy(xpath = "//li[text()='Latest']")
-  private WebElement latestTabOnDesktop;
+    @FindBy(xpath = "//li[text()='Trending']")
+    private WebElement trendingTabOnDesktop;
 
-  @FindBy(xpath = "//li[text()='Trending']")
-  private WebElement trendingTabOnDesktop;
+    @FindBy(css = ".back-button")
+    private WebElement backToWiki;
 
-  @FindBy(css = ".back-button")
-  private WebElement backToWiki;
+    @FindBy(css = ".user-avatar")
+    private WebElement avatarImage;
 
-  @FindBy(css = ".user-avatar")
-  private WebElement avatarImage;
+    @FindBy(css = ".avatar-username")
+    private WebElement avatarUsername;
 
-  @FindBy(css = ".avatar-username")
-  private WebElement avatarUsername;
+    @FindBy(css = "#WikiaUserPagesHeader")
+    private WebElement userPageHeader;
 
-  @FindBy(css = "#WikiaUserPagesHeader")
-  private WebElement userPageHeader;
+    @FindBy(css = ".icon.upvote")
+    private List<WebElement> replyUpvoteButton;
 
-  @FindBy(css = ".icon.upvote")
-  private List<WebElement> replyUpvoteButton;
+    @FindBy(css = ".upvote-area")
+    private List<WebElement> replyVoteCount;
 
-  @FindBy(css = ".upvote-area")
-  private List<WebElement> replyVoteCount;
+    @FindBy(css = ".toggle-share")
+    private List<WebElement> toggleShare;
 
-  @FindBy(css = ".toggle-share")
-  private List<WebElement> toggleShare;
+    @FindBy(css = ".share-feature")
+    private List<WebElement> shareFeature;
 
-  @FindBy(css = ".share-feature")
-  private List<WebElement> shareFeature;
+    @FindBy(css = ".discussion-app-join-text")
+    private WebElement appPromotionText;
 
-  @FindBy(css = ".discussion-app-join-text")
-  private WebElement appPromotionText;
+    @FindBy(css = ".apple-store-logo")
+    private WebElement appleAppLink;
 
-  @FindBy(css = ".apple-store-logo")
-  private WebElement appleAppLink;
-
-  @FindBy(css = ".google-play-logo")
-  private WebElement googlePlayAppLink;
-
+    @FindBy(css = ".google-play-logo")
+    private WebElement googlePlayAppLink;
+    */
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_FORUM_ID = "1362702";
 
@@ -87,7 +87,7 @@ public class PostsListPage extends WikiBasePageObject {
   public PostsListPage open() {
     return open(DEFAULT_FORUM_ID);
   }
-
+/*
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -143,7 +143,6 @@ public class PostsListPage extends WikiBasePageObject {
   public PostsListPage clickBackToWikiLink() {
     backToWiki.click();
     return this;
-  }
 
   public PostsListPage clickUserAvatar() {
     avatarImage.click();
@@ -180,7 +179,7 @@ public class PostsListPage extends WikiBasePageObject {
 
   /**
    * Wait for the noticeable time lag between vote and vote value change to pass
-   */
+
   public void waitForVoteCountChangeTimeLagToPass() {
     try {
       //This sleep was introduced because of noticeable lag between vote and vote value change
@@ -227,5 +226,5 @@ public class PostsListPage extends WikiBasePageObject {
   public void clickGooglePlayLinkInAppPromotion() {
     googlePlayAppLink.click();
   }
-
+*/
 }
