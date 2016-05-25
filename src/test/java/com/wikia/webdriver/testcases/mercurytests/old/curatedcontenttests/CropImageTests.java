@@ -47,7 +47,7 @@ public class CropImageTests extends NewTestTemplate {
     this.imageModal = new UploadImageModalComponentObject(driver);
     this.search = new SearchForImagePageObject(driver);
     this.croppingTool = new CroppingToolPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "MercuryCropImageTest_001")

@@ -1,20 +1,16 @@
 package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.joda.time.DateTime;
-import org.openqa.selenium.WebDriver;
 
-public class Navigate {
-
-  private WebDriver driver;
-
-  public Navigate(WebDriver driver) {
-    this.driver = driver;
-  }
+public class Navigate extends BasePageObject {
 
   public Navigate toPage(String pageName) {
     String host = UrlBuilder.getHostForWiki();
-    String cacheBuster = pageName.equals("") || pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
+    String cacheBuster = pageName.equals("") ||
+                         pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
 
     driver.get("http://" + host + pageName + cacheBuster);
 

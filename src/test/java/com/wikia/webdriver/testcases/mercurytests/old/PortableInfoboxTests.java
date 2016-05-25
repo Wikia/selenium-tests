@@ -28,7 +28,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   private void init() {
     this.infobox = new PortableInfoboxObject(driver);
     this.toc = new TableOfContentPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")
@@ -38,8 +38,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Before infobox expanding
     infobox
-        .isMainImageVisible()
-        .isTitleOverImageVisible()
+        .isHeroImageNotVisible()
+        .isTitleNotVisible()
         .isImageInTitleNotVisible()
         .isImageInTabberVisible()
         .isImageCaptionInTabberVisible();
@@ -104,7 +104,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Check image
     infobox
-        .clickMainImage()
+        .clickHeroImage()
         .isLightboxOpened()
         .closeLightbox()
         .isTitleOverImageVisible();
@@ -116,49 +116,19 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened();
   }
 
-  @Test(groups = "mercury_infobox_heroImageIsCentredAndHasTitleAbove")
-  public void mercury_infobox_heroImageIsCentredAndHasTitleAbove() {
-    init();
-    navigate.toPage(MercurySubpages.INFOBOX_2);
-
-    infobox
-        .isTitleAboveImageVisible()
-        .isHeroImageCentered();
-  }
-
   @Test(groups = "mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages")
   public void mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_3);
 
-    // Check click on main image
     infobox
-        .clickMainImage()
+        .clickGalleryImage(0)
         .isLightboxOpened()
         .closeLightbox()
-        .isInfoboxCollapsed();
-
-    // Check click on "View more" button in gallery in infobox
-    infobox
+        .isInfoboxCollapsed()
         .clickExpandButton()
         .clickGalleryButton(0)
         .isInfoboxExpanded();
-  }
-
-  @Test(groups = "mercury_infobox_heroImageIsSquare")
-  public void mercury_infobox_heroImageIsSquare() {
-    init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
-
-    infobox.isHeroImageSquare();
-  }
-
-  @Test(groups = "mercury_infobox_heroImageIsRectangle")
-  public void mercury_infobox_heroImageIsRectangle() {
-    init();
-    navigate.toPage(MercurySubpages.INFOBOX_4);
-
-    infobox.isNotHeroImageSquare();
   }
 
   @Test(groups = "mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks")
@@ -166,7 +136,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_5);
 
-    infobox.isImageInCollectionVisible()
+    infobox
+        .isImageInCollectionVisible()
         .clickNextImageArrow()
         .isImageInCollectionVisible()
         .clickNextImageArrow()
