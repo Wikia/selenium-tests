@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @Test(groups="discussions")
 public class Layout extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
@@ -51,21 +51,21 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanViewMorePosts() {
     userCanViewMorePosts();
   }
@@ -77,7 +77,6 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2418")
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
@@ -85,7 +84,6 @@ public class Layout extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2418")
   public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
@@ -97,16 +95,14 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2420")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2420")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }

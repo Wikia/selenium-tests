@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sharing extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1366x768";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
   private static final String[] expected_networks_for_english_language =
       new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"};
@@ -38,14 +38,13 @@ public class Sharing extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIconsInPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
-  @RelatedIssue(issueID = "XW-1047")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);}
 
@@ -56,7 +55,6 @@ public class Sharing extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2286")
   public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
@@ -67,16 +65,14 @@ public class Sharing extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost", enabled = false)
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2286")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2286")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }

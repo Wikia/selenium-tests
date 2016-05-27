@@ -11,7 +11,7 @@ public class MainPage extends WikiBasePageObject {
   public MainPage() {
     super();
 
-    navigate = new Navigate(driver);
+    navigate = new Navigate();
   }
 
   public MainPage open() {

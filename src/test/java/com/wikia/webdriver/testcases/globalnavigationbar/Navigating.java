@@ -3,8 +3,8 @@ package com.wikia.webdriver.testcases.globalnavigationbar;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,7 +27,7 @@ public class Navigating extends NewTestTemplate {
           dataProvider = "getCentralWikiaUrlForWiki")
   public void wikiaLogoClickOpensCentralWiki(String wikiName,
                                              String expectedCentralUrl) {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     homePage.getGlobalNavigation().clickWikiaLogo();
 
@@ -38,9 +38,9 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void fandomLogoClickOnEnCommunityOpensFandomWikia() {
-    HomePageObject homePage = new HomePageObject();
+    HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(EN_COMMUNITY));
-    GlobalNavigationPageObject globalNav = homePage.getGlobalNavigation();
+    GlobalNavigation globalNav = homePage.getGlobalNavigation();
 
     Assertion.assertTrue(globalNav.isFandomLogoVisible(), "Fandom logo not visible");
 

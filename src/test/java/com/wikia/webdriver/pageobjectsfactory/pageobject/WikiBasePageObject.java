@@ -40,17 +40,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigationPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
@@ -58,12 +56,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestoreP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
@@ -79,11 +71,25 @@ public class WikiBasePageObject extends BasePageObject {
   protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
+  private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR_MERCURY = ".avatar img[alt*=%userName%]";
+  private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
+      ".wikia-nav__avatar img[alt*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
       + LOGGED_IN_USER_SELECTOR_OASIS + "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
+  @Getter(lazy = true)
+  private final GlobalNavigation globalNavigation = new GlobalNavigation();
+  @Getter(lazy = true)
+  private final WikiaBar wikiaBar = new WikiaBar();
+  @Getter(lazy = true)
+  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
+  @Getter(lazy = true)
+  private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
+  @Getter(lazy = true)
+  private final TopBar topBar = new TopBar(driver);
+  @Getter(lazy = true)
+  private final AuthModal authModal = new AuthModal();
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -154,23 +160,8 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
 
-  @Getter(lazy = true)
-  private final GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
-  @Getter(lazy = true)
-  private final WikiaBar wikiaBar = new WikiaBar();
-  @Getter(lazy = true)
-  private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
-  @Getter(lazy = true)
-  private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
-  @Getter(lazy = true)
-  private final TopBar topBar = new TopBar(driver);
-
   public WikiBasePageObject() {
     super();
-  }
-
-  public AuthModal getAuthModal() {
-    return new AuthModal();
   }
 
   public String getWikiUrl() {
@@ -187,59 +178,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyModalLoginAppeared() {
     wait.forElementVisible(logInModal);
     PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
-  }
-
-  public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_FILES);
-    PageObjectLogging.log("openSpecialUnusedFilesPage",
-        URLsContent.SPECIAL_UNUSED_FILES + " opened", true);
-    return new SpecialUnusedFilesPageObject(driver);
-  }
-
-  public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNUSED_VIDEOS);
-    PageObjectLogging.log("openSpecialUnusedVideosPage",
-        URLsContent.SPECIAL_UNUSED_VIDEOS + " opened", true);
-    return new SpecialUnusedVideosPageObject(driver);
-  }
-
-  public SpecialUncategorizedFilesPageObject openSpecialUncategorizedFilesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNCATEGORIZED_FILES);
-    PageObjectLogging.log("openSpecialUncategorizedFilesPage",
-        URLsContent.SPECIAL_UNCATEGORIZED_FILES + " opened", true);
-    return new SpecialUncategorizedFilesPageObject(driver);
-  }
-
-  public SpecialMostLinkedFilesPageObject openSpecialMostLinkedFilesPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_MOST_LINKED_FILES);
-    PageObjectLogging.log("openSpecialMostLinkedFilesPage",
-        URLsContent.SPECIAL_MOST_LINKED_FILES + " opened", true);
-    return new SpecialMostLinkedFilesPageObject(driver);
-  }
-
-  public SpecialManageWikiaHome openSpecialManageWikiaHomePage(String wikiCorpSetupURL) {
-    getUrl(wikiCorpSetupURL + URLsContent.SPECIAL_MANAGE_WIKIA_HOME);
-    PageObjectLogging.log("openCorpSetupHomePage", "Special:ManageWikiaHome opened", true);
-    return new SpecialManageWikiaHome(driver);
-  }
-
-  public HomePageObject openCorporateHomePage(String wikiCorporateURL) {
-    getUrl(wikiCorporateURL);
-    PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
-    return new HomePageObject();
-  }
-
-  public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_BLOCKLIST);
-    PageObjectLogging.log("Special:BlockList openSpecialBlockListPage",
-        "blocked users list page opened", true);
-    return new SpecialBlockListPageObject(driver);
-  }
-
-  public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_UNBLOCK);
-    PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
-    return new SpecialUnblockPageObject(driver);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
@@ -469,16 +407,16 @@ public class WikiBasePageObject extends BasePageObject {
         driver.switchTo().frame("PreviewFrame");
       }
       // open nav if on mercury, required to see login data
-      if (driver.findElements(MERCURY_NAV_ICON).size() > 0) {
+      if (driver.findElements(MERCURY_SKIN).size() > 0) {
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
       }
 
-      wait.forElementPresent(By
+      wait.forElementVisible(By
           .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
 
       // closing menu if mercury
-      if (driver.findElements(MERCURY_NAV_ICON).size() > 0) {
+      if (driver.findElements(MERCURY_SKIN).size() > 0) {
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
       }
@@ -654,7 +592,8 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   private void logMercuryUserId() {
-    Object scriptOut = ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
+    Object scriptOut =
+        ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
 
     if (scriptOut != null) {
       PageObjectLogging.logInfo("Mercury userID: " + scriptOut.toString());
@@ -729,10 +668,10 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
-    return driver.executeScript(
-        "return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
-        element, pseudoElement, cssValue
-    ).toString();
+    return driver
+        .executeScript("return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
+            element, pseudoElement, cssValue)
+        .toString();
   }
 
   public void openSpecialPromoteOnCurrentWiki() {

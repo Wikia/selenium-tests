@@ -1,10 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -30,11 +32,11 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
-  public void adsTrackingPixelsOnConsecutivePages(String wiki, String[] articles, String[] urls) {
+  public void adsTrackingPixelsOnConsecutivePages(Page page, String[] articles, String[] urls) {
     // Check tracking pixels on first page view
     networkTrafficInterceptor.startIntercepting();
 
-    String testedPage = urlBuilder.getUrlForWiki(wiki);
+    String testedPage = urlBuilder.getUrlForPage(page);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
 
     assertTrackingPixelsSent(adsBaseObject, urls);
@@ -106,6 +108,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
           browser = Browser.CHROME,
           emulator = Emulator.GOOGLE_NEXUS_5
   )
+  @DontRun(env = "preview")
   public void adsTrackingPixelSentAuthPage(String wiki, String page, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
@@ -121,7 +124,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   private void assertTrackingPixelsNotSent(String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
-      Assertion.assertNotNull(networkTrafficInterceptor.getEntryByUrlPart(pixelUrl));
+      Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(pixelUrl));
     }
   }
 }

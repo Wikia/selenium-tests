@@ -15,9 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 
@@ -29,14 +29,14 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights001"})
   @Execute(asUser = User.STAFF)
   public void staffCanBlockUser() {
-    SpecialBlockPageObject block = new SpecialBlockPageObject(driver).open();
+    SpecialBlockPage block = new SpecialBlockPage(driver).open();
     block.deselectAllSelections();
     block.typeInUserName(credentials.userNameBlocked);
     block.selectExpiration("2 hours");
     block.clickBlockButton();
 
-    SpecialBlockListPageObject list =
-        new SpecialBlockListPageObject(driver).openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPage list =
+        new SpecialBlockListPage().open();
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserBlocked(credentials.userNameBlocked);
   }
@@ -85,12 +85,12 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights004"}, dependsOnMethods = {"staffCanBlockUser"})
   @Execute(asUser = User.STAFF)
   public void staffCanUnblockUser() {
-    SpecialUnblockPageObject unblock =
-        new SpecialUnblockPageObject(driver).openSpecialUnblockPage(wikiURL);
+    SpecialUnblockPage unblock =
+        new SpecialUnblockPage().open();
     unblock.unblockUser(credentials.userNameBlocked);
     unblock.verifyUnblockMessage(credentials.userNameBlocked);
 
-    SpecialBlockListPageObject list = unblock.openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPage list = new SpecialBlockListPage().open();
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserUnblocked();
   }

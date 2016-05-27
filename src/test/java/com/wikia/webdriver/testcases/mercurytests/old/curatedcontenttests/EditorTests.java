@@ -70,7 +70,7 @@ public class EditorTests extends NewTestTemplate {
     this.uploadImage = new UploadImageModalComponentObject(driver);
     this.search = new SearchForImagePageObject(driver);
     this.croppingTool = new CroppingToolPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.loading = new Loading(driver);
   }
 

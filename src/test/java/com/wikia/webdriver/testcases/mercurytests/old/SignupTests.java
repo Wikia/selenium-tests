@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 public class SignupTests extends NewTestTemplate {
 
   private void init() {
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "MercurySignupTest_001")
@@ -33,7 +33,11 @@ public class SignupTests extends NewTestTemplate {
     signUp(new CreateUser().create()).verifyAvatarAfterSignup();
   }
 
-  @Test(groups = "MercurySignupTest_002")
+
+  @Test(
+      groups = "MercurySignupTest_002", 
+      enabled = false // SER-80
+    )
   public void MercurySignupTest_002_signupErrorEmailInUse() {
     init();
     signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();

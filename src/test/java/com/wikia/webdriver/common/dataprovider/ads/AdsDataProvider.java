@@ -38,24 +38,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] mainWikiPages() {
-    return new Object[][]{
-        {"runescape", "RuneScape_Wiki"},
-        {"yugioh", "Main_Page"},
-        {"naruto", "Narutopedia"},
-        {"leagueoflegends", "League_of_Legends_Wiki"},
-        {"es.drama", "Portada"},
-        {"de.memory-alpha", "Hauptseite"},
-        {"de.marvel-filme", "Marvel-Filme"},
-        {"de.wikia", "index.php?search=elder&fulltext=Search"},
-        {"it.squadraspecialecobra11", "Squadra_speciale_Cobra_11"},
-        {"it.onepiece", "One_Piece_Wiki_Italia"},
-        {"zh.pad", "Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
         {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
@@ -110,23 +92,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] pagesWithAIC() {
-    return new Object[][]{
-        {"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
-        {"zh.pad", "%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
-        {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
-        {"es.pokemon", "Lista_de_Pok%C3%A9mon"},
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"elderscrolls", "Skyrim"},
-        {"dragonvale", "Eggs"},
-        {"callofduty", "Mob_of_the_Dead"},
-        {"yugioh", "Lord_of_the_Tachyon_Galaxy"},
-        {"ffxiclopedia", "Category:Jobs"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] hubsPages() {
     return new Object[][]{
         {"portail-modedevie", "Portail_mode_de_vie/2014-12-28"},
@@ -164,7 +129,7 @@ public class AdsDataProvider {
   public static Object[][] fliteSkin() {
     return new Object[][]{
         {
-            "adtest", "Demo/Flite/Background_Takeover",
+            "project43", "SyntheticTests/Flite/Background_Takeover",
             new Dimension(1200, 1000),
             Arrays.asList(
                 Arrays.asList(
@@ -289,15 +254,6 @@ public class AdsDataProvider {
         {"sfhomeless", "Glide_Memorial_Church"},
         {"geekfeminism", "Dickwolves"},
         {"suicideprevention", "USA"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] getWikisWithStandardHVC() {
-    return new Object[][]{
-        {"adtest"},
-        {"de.icarly"},
-        {"en.memory-alpha"}
     };
   }
 
@@ -638,14 +594,14 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Rachel"}
+        {"glee", "Get_It_Right"}
     };
   }
 
   @DataProvider
   public static Object[][] amazonSites() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/Amazon"},
+        {"project43", "SyntheticTests/Amazon"},
     };
   }
 
@@ -714,16 +670,25 @@ public class AdsDataProvider {
   public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.TOP_LB,
+            "DirectGpt; RemnantGpt; Liftium"
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.TOP_LB,
+            "DirectGpt; RemnantGpt; RubiconFastlane"
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "",
+            AdsContent.INVISIBLE_SKIN,
+            "DirectGpt; RemnantGpt"
         }
     };
   }
@@ -732,8 +697,18 @@ public class AdsDataProvider {
   public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.TOP_LB,
+            "Liftium"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.TOP_LB,
+            "RubiconFastlane"
         },
     };
   }
@@ -744,19 +719,6 @@ public class AdsDataProvider {
         {"elderscrolls", "Skyrim"},
         {"wowwiki", "Portal:Main"},
         {"zh.pad", "Special:Video"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxRealTimeSegment() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/Krux/Page_1",
-            "glee",
-            "Rachel",
-            "o8l9bis26"
-        }
     };
   }
 
@@ -811,15 +773,15 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF", 20, false},
-        {"adtest-pluto", "SyntheticTests/ATF", 20, true},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, false},
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, true},
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"project43", "SyntheticTests/ATF_DISABLE_BTF", false},
         {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
     };
   }
@@ -923,14 +885,13 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsOnConsecutivePages() {
     return new Object[][]{
         {
-            "adtest",
+            new Page("project43", "TrackingPixels/Article1"),
             new String[]{
-                "Article1",
-                "Article2",
-                "Article3",
-                "Article2",
-                "Article1",
-                "Wikia Ad Testing"
+                "TrackingPixels/Article2",
+                "TrackingPixels/Article3",
+                "TrackingPixels/Article2",
+                "TrackingPixels/Article1",
+                "Project43 Wikia"
             },
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
@@ -944,7 +905,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -1008,7 +969,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }

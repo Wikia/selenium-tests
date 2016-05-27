@@ -25,7 +25,7 @@ public class SearchTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.search = new Search();
 
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "mercury_search_navigateToPageUsingSearch")
