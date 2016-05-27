@@ -89,7 +89,7 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_005", enabled = false)
+  @Test(groups = "MercuryTwitterWidgetTest_005")
   public void MercuryTwitterWidgetTest_005_isErrorPresent() {
     init();
 

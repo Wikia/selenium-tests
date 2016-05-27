@@ -15,24 +15,21 @@ import java.util.List;
 
 public class PortableInfoboxObject {
 
+  private static final String
+      IMAGE_IN_INFOBOX = ".portable-infobox .pi-data .article-media-thumbnail-image-wrapper img";
+  private static final String TITLE_SMALL_IMAGE_CSS_SELECTOR = ".portable-infobox .pi-title";
+
   @FindBy(css = "body")
   private WebElement bodyElement;
 
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  private static final String HERO_IMAGE_CSS_SELECTOR = ".portable-infobox-hero-image";
-  @FindBy(css = HERO_IMAGE_CSS_SELECTOR)
-  private WebElement heroImage;
-  private By heroImageSelector = By.cssSelector(HERO_IMAGE_CSS_SELECTOR);
+  @FindBy(css = IMAGE_IN_INFOBOX)
+  private WebElement imageInInfobox;
 
-  @FindBy(css = ".portable-infobox .pi-hero-title")
-  private WebElement title;
-
-  private static final String TITLE_SMALL_IMAGE_CSS_SELECTOR = ".portable-infobox .pi-title";
   @FindBy(css = TITLE_SMALL_IMAGE_CSS_SELECTOR)
   private WebElement titleSmallImage;
-  private By titleSmallImageSelector = By.cssSelector(TITLE_SMALL_IMAGE_CSS_SELECTOR);
 
   @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
@@ -91,8 +88,6 @@ public class PortableInfoboxObject {
   @FindBy(css = ".portable-infobox .pi-image img")
   private List<WebElement> images;
 
-  private By imageInTitleSelector = By.cssSelector(".pi-title img");
-
   private Wait wait;
   private WebDriver driver;
 
@@ -149,8 +144,8 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject clickHeroImage() {
-    wait.forElementClickable(heroImage).click();
+  public PortableInfoboxObject clickOnImageInInfobox() {
+    wait.forElementClickable(imageInInfobox).click();
 
     return this;
   }
@@ -180,7 +175,7 @@ public class PortableInfoboxObject {
   }
 
   public PortableInfoboxObject isHeroImageNotVisible() {
-    wait.forElementNotVisible(heroImageSelector);
+    wait.forElementNotVisible(By.cssSelector(IMAGE_IN_INFOBOX));
     PageObjectLogging.log("Hero image", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
@@ -192,22 +187,15 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject isTitleOverImageVisible() {
-    wait.forElementVisible(title);
-    PageObjectLogging.log("Title over image", MercuryMessages.VISIBLE_MSG, true);
-
-    return this;
-  }
-
   public PortableInfoboxObject isImageInTitleNotVisible() {
-    wait.forElementNotVisible(imageInTitleSelector);
+    wait.forElementNotVisible(By.cssSelector(".pi-title img"));
     PageObjectLogging.log("Hero image title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
   }
 
   public PortableInfoboxObject isTitleNotVisible() {
-    wait.forElementNotVisible(titleSmallImageSelector);
+    wait.forElementNotVisible(By.cssSelector(TITLE_SMALL_IMAGE_CSS_SELECTOR));
     PageObjectLogging.log("Portable infobox title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;

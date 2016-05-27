@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -34,17 +33,13 @@ public class SignupTests extends NewTestTemplate {
   }
 
 
-  @Test(
-      groups = "MercurySignupTest_002", 
-      enabled = false // SER-80
-    )
+  @Test(groups = "MercurySignupTest_002")
   public void MercurySignupTest_002_signupErrorEmailInUse() {
     init();
     signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();
   }
 
   @Test(groups = "MercurySignupTest_003")
-  @RelatedIssue(issueID = "SOC-2162")
   public void MercurySignupTest_003_signupErrorUsernameTaken() {
     init();
     String userNameTaken = "bekcunning";

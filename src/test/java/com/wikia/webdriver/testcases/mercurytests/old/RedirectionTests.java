@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -65,12 +64,7 @@ public class RedirectionTests extends NewTestTemplate {
     redirectFromFullSiteToOasis();
   }
 
-  @Test(groups = "MercuryRedirectionTest_004", enabled = false)
-  @RelatedIssue(
-      issueID = "QAART-773",
-      comment = "Wikia.isTouchScreen() returns false for mobile emulator, "
-                + "which prevents script from adding the mobile page link."
-  )
+  @Test(groups = "MercuryRedirectionTest_004")
   public void MercuryRedirectionTest_004_RedirectFromFullSiteToMobile() {
     init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
