@@ -25,8 +25,6 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   private String searchResultClass = ".search-results__list .search-results__item";
 
-  private Loading loading;
-
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
                          URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query)));
@@ -39,7 +37,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   }
 
   public SearchResultsPage selectSearchResult(int index) {
-    this.loading = new Loading(driver);
+    Loading loading = new Loading(driver);
     String oldUrl = driver.getCurrentUrl();
 
     PageObjectLogging.logInfo("Select search result no.: " + index);
