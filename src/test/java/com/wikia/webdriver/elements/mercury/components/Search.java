@@ -23,8 +23,7 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
   private WebElement inputFieldSearchIcon;
 
-  private String searchResultClass = ".wikia-search__results li.mw-content a";
-  private By loadingSearchResultsIndicator = By.cssSelector(".wikia-search__results li.loading");
+  private String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
 
   private Loading loading;
 
@@ -32,24 +31,11 @@ public class Search extends BasePageObject {
     this.loading = new Loading(driver);
   }
 
-  public Search seeNoSearchResults() {
-    PageObjectLogging.logInfo("Loading search results indicator is present");
-    wait.forElementPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("Loading search results indicator is not present");
-    wait.forElementNotPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("No search results are present");
-    wait.forElementNotPresent(By.cssSelector(searchResultClass));
-
-    return this;
-  }
-
   public Search selectSearchSuggestion(int index) {
     String oldUrl = driver.getCurrentUrl();
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
-    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
+    WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
     searchResult.click();
     loading.handleAsyncPageReload();

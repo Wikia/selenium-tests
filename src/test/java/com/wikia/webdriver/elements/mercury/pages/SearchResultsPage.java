@@ -1,25 +1,80 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.components.Loading;
+import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchResultsPage extends WikiBasePageObject {
 
+  @Getter(lazy = true)
+  private final Search search = new Search();
+
+  private Loading loading;
+
+
   @FindBy(css = ".search-results")
   private WebElement searchResultsContainer;
 
+  @FindBy(css = ".search--no-results")
+  private WebElement noResultsContainer;
+
+  private String searchResultClass = ".search-results__list .search-results__item";
+
   public SearchResultsPage() {
     super();
+  }
+
+  public SearchResultsPage openForQuery(String query) {
+    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
+                         URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query)));
+
+    return this;
+  }
+
+  public Search typeInSearch(String text) {
+    return this.getSearch().typeInSearch(text);
+  }
+
+  public SearchResultsPage selectSearchResult(int index) {
+    this.loading = new Loading(driver);
+    String oldUrl = driver.getCurrentUrl();
+
+    PageObjectLogging.logInfo("Select search result no.: " + index);
+    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
+    wait.forElementClickable(searchResult);
+    searchResult.click();
+    loading.handleAsyncPageReload();
+
+    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
+                          "Navigation to selected search suggestion failed");
+    PageObjectLogging.logInfo("Successfully navigated to selected search result");
+
+    return this;
   }
 
   public boolean isSearchResultsPageOpen() {
     try {
       wait.forElementVisible(searchResultsContainer);
       return true;
-    } catch(NoSuchElementException e) {
+    } catch (NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  public boolean isNoResultsPagePresent() {
+    try {
+      wait.forElementVisible(noResultsContainer);
+      return true;
+    } catch (NoSuchElementException e) {
       return false;
     }
   }
