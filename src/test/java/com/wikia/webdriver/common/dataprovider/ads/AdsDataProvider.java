@@ -994,13 +994,13 @@ public class AdsDataProvider {
     @DataProvider
     public static Object[][] adsTrackingPixelsSentAuthPage() {
         return new Object[][]{
-                {
+            {
                 MercuryWikis.MERCURY_AUTOMATION_TESTING,
-                        "join",
-                        new String[]{
-                                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
-                        }
+                "join",
+                new String[]{
+                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
                 }
+            }
         };
     }
 
