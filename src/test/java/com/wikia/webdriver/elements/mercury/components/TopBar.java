@@ -39,11 +39,7 @@ public class TopBar extends BasePageObject {
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
-  private Wait wait;
-
   public TopBar(WebDriver driver) {
-    this.wait = new Wait(driver);
-
     PageFactory.initElements(driver, this);
   }
 

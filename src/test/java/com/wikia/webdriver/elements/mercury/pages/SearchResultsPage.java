@@ -14,24 +14,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchResultsPage extends WikiBasePageObject {
-
-  @Getter(lazy = true)
-  private final Search search = new Search();
-
-  private Loading loading;
-
-
   @FindBy(css = ".search-results")
   private WebElement searchResultsContainer;
 
   @FindBy(css = ".search--no-results")
   private WebElement noResultsContainer;
 
+  @Getter
+  private final Search search = new Search();
+
   private String searchResultClass = ".search-results__list .search-results__item";
 
-  public SearchResultsPage() {
-    super();
-  }
+  private Loading loading;
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
