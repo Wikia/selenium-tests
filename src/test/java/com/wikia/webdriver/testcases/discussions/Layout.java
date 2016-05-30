@@ -14,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-@Test(groups="discussions")
 public class Layout extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
@@ -88,7 +87,6 @@ public class Layout extends NewTestTemplate {
     postsListLoads();
   }
 
-
   /**
    * LOGGED IN USERS ON DESKTOP SECTION
    */
@@ -128,5 +126,4 @@ public class Layout extends NewTestTemplate {
     new Loading(driver).handleAsyncPageReload();
     Assertion.assertTrue(startingListLength < postsList.getPostsListLength());
   }
-
 }

@@ -41,7 +41,6 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")
-  @RelatedIssue(issueID = "XW-654")
   public void mercury_comments_containsAvatarUsernameTimestampAndContent() {
     init();
 
@@ -111,7 +110,8 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_comments_containsCounterNextButtonAndPreviousButton")
+  @Test(groups = "mercury_comments_containsCounterNextButtonAndPreviousButton", enabled = false)
+  @RelatedIssue(issueID = "DAT-4316")
   public void mercury_comments_containsCounterNextButtonAndPreviousButton() {
     init();
 

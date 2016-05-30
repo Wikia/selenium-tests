@@ -773,15 +773,15 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF", 20, false},
-        {"adtest-pluto", "SyntheticTests/ATF", 20, true},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, false},
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, true},
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"project43", "SyntheticTests/ATF_DISABLE_BTF", false},
         {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
     };
   }
@@ -952,6 +952,19 @@ public class AdsDataProvider {
     };
   }
 
+    @DataProvider
+    public static Object[][] adsTrackingPixelsSentAuthPage() {
+        return new Object[][]{
+            {
+                MercuryWikis.MERCURY_AUTOMATION_TESTING,
+                "join",
+                new String[]{
+                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
+                }
+            }
+        };
+    }
+
   @DataProvider
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
@@ -969,9 +982,11 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "project43",
+            false
         },
         {
-            "arecovery"
+            "arecovery",
+            true
         }
     };
   }

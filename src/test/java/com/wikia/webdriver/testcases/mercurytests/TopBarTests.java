@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import org.testng.annotations.Test;
 
@@ -18,11 +17,9 @@ import org.testng.annotations.Test;
 public class TopBarTests extends NewTestTemplate {
 
   private TopBar topBar;
-  private Navigation navigation;
 
   private void init() {
     this.topBar = new TopBar(driver);
-    this.navigation = new Navigation(driver);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
@@ -58,8 +55,8 @@ public class TopBarTests extends NewTestTemplate {
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
-  @Test(groups = "mecury_topbar_switchBetweenSearchAndNavigation")
-  public void mecury_topbar_switchBetweenSearchAndNavigation() {
+  @Test(groups = "mercury_topbar_switchBetweenSearchAndNavigation")
+  public void mercury_topbar_switchBetweenSearchAndNavigation() {
     init();
 
     topBar.openSearch();
@@ -69,5 +66,29 @@ public class TopBarTests extends NewTestTemplate {
     topBar.openNavigation();
     Assertion.assertTrue(topBar.isCloseIconVisible());
     Assertion.assertTrue(topBar.isSearchIconVisible());
+  }
+
+  @Test(groups = "mercury_topbar_fandomBarIsVisibleOnEnglishCommunity")
+  public void mercury_topbar_fandomBarIsVisibleOnEnglishCommunity() {
+    init();
+
+    Assertion.assertTrue(topBar.isFandomBarVisible());
+  }
+
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Test(groups = "mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity")
+  public void mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity() {
+    init();
+
+    Assertion.assertFalse(topBar.isFandomBarVisible());
+  }
+
+  @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
+  public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
+    init();
+
+    Assertion.assertTrue(topBar.isLogoVisible());
+    topBar.clickWikiaLogo();
+    Assertion.assertTrue(topBar.getCurrentUrl().contains("www.wikia.com/fandom"));
   }
 }
