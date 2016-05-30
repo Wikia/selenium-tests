@@ -1,4 +1,3 @@
-
 package com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
