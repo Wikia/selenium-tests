@@ -131,8 +131,7 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 
-  @Test(groups = "MercuryCuratedNavigationTest_004", enabled = false)
-  @RelatedIssue(issueID = "DAT-4292")
+  @Test(groups = "MercuryCuratedNavigationTest_004")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     init();
 
