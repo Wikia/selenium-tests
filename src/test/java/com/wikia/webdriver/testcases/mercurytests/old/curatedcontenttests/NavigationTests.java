@@ -97,7 +97,6 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")
-  @RelatedIssue(issueID = "XW-640")
   public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
     init();
 
