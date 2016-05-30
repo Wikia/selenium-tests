@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import org.testng.annotations.Test;
 
@@ -18,11 +17,9 @@ import org.testng.annotations.Test;
 public class TopBarTests extends NewTestTemplate {
 
   private TopBar topBar;
-  private Navigation navigation;
 
   private void init() {
     this.topBar = new TopBar(driver);
-    this.navigation = new Navigation(driver);
 
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
