@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -30,7 +31,8 @@ public class LoginTests extends NewTestTemplate {
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
 
-  @Test(groups = "MercuryLoginTest_001")
+  @Test(groups = "MercuryLoginTest_001", enabled = false)
+  @RelatedIssue(issueID = "SOC-2567")
   public void MercuryLoginTest_001_validUserCanLogIn() {
     new Navigate().toPage(MercurySubpages.MAP);
     String url = driver.getCurrentUrl();
