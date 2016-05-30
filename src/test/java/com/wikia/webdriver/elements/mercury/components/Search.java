@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
