@@ -37,7 +37,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Before infobox expanding
     infobox
-        .isHeroImageNotVisible()
         .isTitleNotVisible()
         .isImageInTitleNotVisible()
         .isImageInTabberVisible()

@@ -15,21 +15,14 @@ import java.util.List;
 
 public class PortableInfoboxObject {
 
-  private static final String
-      IMAGE_IN_INFOBOX = ".portable-infobox .pi-data .article-media-thumbnail-image-wrapper img";
-  private static final String TITLE_SMALL_IMAGE_CSS_SELECTOR = ".portable-infobox .pi-title";
-
   @FindBy(css = "body")
   private WebElement bodyElement;
 
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  @FindBy(css = IMAGE_IN_INFOBOX)
+  @FindBy(css = ".portable-infobox .pi-data .article-media-thumbnail-image-wrapper img")
   private WebElement imageInInfobox;
-
-  @FindBy(css = TITLE_SMALL_IMAGE_CSS_SELECTOR)
-  private WebElement titleSmallImage;
 
   @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
@@ -48,9 +41,6 @@ public class PortableInfoboxObject {
 
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
-
-  @FindBy(css = ".pi-title img")
-  private WebElement imageInTitle;
 
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
@@ -84,9 +74,6 @@ public class PortableInfoboxObject {
 
   @FindBy(css = ".pi-header")
   private List<WebElement> headers;
-
-  @FindBy(css = ".portable-infobox .pi-image img")
-  private List<WebElement> images;
 
   private Wait wait;
   private WebDriver driver;
@@ -174,13 +161,6 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject isHeroImageNotVisible() {
-    wait.forElementNotVisible(By.cssSelector(IMAGE_IN_INFOBOX));
-    PageObjectLogging.log("Hero image", MercuryMessages.INVISIBLE_MSG, true);
-
-    return this;
-  }
-
   public PortableInfoboxObject isLightboxOpened() {
     Assertion.assertTrue(new LightboxComponentObject(driver).isLightboxOpened());
 
@@ -195,7 +175,7 @@ public class PortableInfoboxObject {
   }
 
   public PortableInfoboxObject isTitleNotVisible() {
-    wait.forElementNotVisible(By.cssSelector(TITLE_SMALL_IMAGE_CSS_SELECTOR));
+    wait.forElementNotVisible(By.cssSelector(".portable-infobox .pi-title"));
     PageObjectLogging.log("Portable infobox title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
