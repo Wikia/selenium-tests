@@ -39,11 +39,7 @@ public class SearchTests extends NewTestTemplate {
   public void mercury_search_navigateToPageUsingSearchSuggestions() {
     init();
 
-    try {
-      this.topBar.openSearch().typeInSearch(SEARCH_PHRASE).selectSearchSuggestion(0);
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+    this.topBar.openSearch().typeInSearch(SEARCH_PHRASE).selectSearchSuggestion(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(SEARCH_PHRASE));
   }
@@ -52,8 +48,7 @@ public class SearchTests extends NewTestTemplate {
   public void mercury_search_navigateToPageUsingSearchResults() {
     init();
 
-    SearchResultsPage searchResults = new SearchResultsPage().openForQuery(SEARCH_PHRASE);
-    searchResults.selectSearchResult(0);
+    new SearchResultsPage().openForQuery(SEARCH_PHRASE).selectSearchResult(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(SEARCH_PHRASE));
   }
@@ -101,17 +96,17 @@ public class SearchTests extends NewTestTemplate {
   public void mercury_search_searchInputDoesNotCoverNavigation() {
     init();
 
-    SearchResultsPage searchResults = new SearchResultsPage().openForQuery(SEARCH_PHRASE);
+    new SearchResultsPage().openForQuery(SEARCH_PHRASE);
     this.topBar.openNavigation();
-    searchResults.typeInSearch(SEARCH_PHRASE);
+
+    Assertion.assertFalse(this.getSearch().isSearchInputFieldVisible());
   }
 
   @Test(groups = "mercury_search_searchNoResultsPageDisplayed")
   public void mercury_search_searchNoResultsPageDisplayed() {
     init();
 
-    SearchResultsPage
-        searchResults =
+    SearchResultsPage searchResults =
         new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
     Assertion.assertTrue(searchResults.isNoResultsPagePresent());
   }

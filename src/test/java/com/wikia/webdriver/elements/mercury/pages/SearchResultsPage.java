@@ -23,7 +23,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   @Getter
   private final Search search = new Search();
 
-  private String searchResultClass = ".search-results__list .search-results__item";
+  private static final String searchResultClass = ".search-results__list .search-results__item";
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),

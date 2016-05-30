@@ -23,7 +23,7 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
   private WebElement inputFieldSearchIcon;
 
-  private String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
+  private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
 
   private Loading loading;
 

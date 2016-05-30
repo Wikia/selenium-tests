@@ -1,14 +1,15 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.NoSuchElementException;
 
 public class TopBar extends BasePageObject {
@@ -118,8 +119,13 @@ public class TopBar extends BasePageObject {
 
   public boolean isSearchIconClickable() {
     try {
-      return searchIconClickableLink.isDisplayed();
+      searchIconClickableLink.isDisplayed();
+      wait.forElementClickable(searchIconClickableLink, 0);
+      return true;
     } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
