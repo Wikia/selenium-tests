@@ -952,6 +952,19 @@ public class AdsDataProvider {
     };
   }
 
+    @DataProvider
+    public static Object[][] adsTrackingPixelsSentAuthPage() {
+        return new Object[][]{
+            {
+                MercuryWikis.MERCURY_AUTOMATION_TESTING,
+                "join",
+                new String[]{
+                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
+                }
+            }
+        };
+    }
+
   @DataProvider
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
