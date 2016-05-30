@@ -108,7 +108,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
           browser = Browser.CHROME,
           emulator = Emulator.GOOGLE_NEXUS_5
   )
-  @DontRun(env = "preview")
+  @DontRun(env = {"preview", "sandbox"})
   public void adsTrackingPixelSentAuthPage(String wiki, String page, String[] pixelUrls) {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
