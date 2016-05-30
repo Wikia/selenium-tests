@@ -773,15 +773,15 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF", 20, false},
-        {"adtest-pluto", "SyntheticTests/ATF", 20, true},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, false},
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, true},
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"project43", "SyntheticTests/ATF_DISABLE_BTF", false},
         {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
     };
   }
