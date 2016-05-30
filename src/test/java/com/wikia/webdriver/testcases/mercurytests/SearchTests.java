@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Search;
@@ -39,8 +40,12 @@ public class SearchTests extends NewTestTemplate {
   public void mercury_search_navigateToPageUsingSearchSuggestions() {
     init();
 
-    this.topBar.openSearch().typeInSearch(SEARCH_PHRASE).selectSearchSuggestion(0);
+    Search search = this.topBar.openSearch().typeInSearch(SEARCH_PHRASE);
+    String oldUrl = driver.getCurrentUrl();
+    search.selectSearchSuggestion(0);
 
+    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
+                          "Navigation to selected search suggestion failed");
     Assertion.assertTrue(driver.getCurrentUrl().contains(SEARCH_PHRASE));
   }
 
@@ -48,8 +53,12 @@ public class SearchTests extends NewTestTemplate {
   public void mercury_search_navigateToPageUsingSearchResults() {
     init();
 
-    new SearchResultsPage().openForQuery(SEARCH_PHRASE).selectSearchResult(0);
+    SearchResultsPage searchResultsPage = new SearchResultsPage().openForQuery(SEARCH_PHRASE);
+    String oldUrl = driver.getCurrentUrl();
+    searchResultsPage.selectSearchResult(0);
 
+    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
+                          "Navigation to selected search result failed");
     Assertion.assertTrue(driver.getCurrentUrl().contains(SEARCH_PHRASE));
   }
 

@@ -38,17 +38,12 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   public SearchResultsPage selectSearchResult(int index) {
     Loading loading = new Loading(driver);
-    String oldUrl = driver.getCurrentUrl();
 
     PageObjectLogging.logInfo("Select search result no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
     wait.forElementClickable(searchResult);
     searchResult.click();
     loading.handleAsyncPageReload();
-
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search suggestion failed");
-    PageObjectLogging.logInfo("Successfully navigated to selected search result");
 
     return this;
   }

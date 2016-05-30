@@ -32,17 +32,11 @@ public class Search extends BasePageObject {
   }
 
   public Search selectSearchSuggestion(int index) {
-    String oldUrl = driver.getCurrentUrl();
-
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
     searchResult.click();
     loading.handleAsyncPageReload();
-
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search suggestion failed");
-    PageObjectLogging.logInfo("Successfully navigated to selected search suggestion");
 
     return this;
   }
