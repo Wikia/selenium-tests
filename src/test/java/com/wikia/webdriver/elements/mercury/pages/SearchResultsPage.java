@@ -16,7 +16,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-results")
   private WebElement searchResultsContainer;
 
-  @FindBy(css = ".search--no-results")
+  @FindBy(css = ".search-error-not-found")
   private WebElement noResultsContainer;
 
   @Getter
