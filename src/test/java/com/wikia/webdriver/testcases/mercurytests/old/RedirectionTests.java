@@ -32,8 +32,8 @@ public class RedirectionTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = "MercuryRedirectionTest_001_NavigateToPageWithWWWAndBeRedirectedToPageWithoutWWW")
-  public void MercuryRedirectionTest_001_NavigateToPageWithWWWAndBeRedirectedToPageWithoutWWW() {
+  @Test(groups = "mercury_redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW")
+  public void mercury_redirection_navigateToPageWithWWWAndBeRedirectedToPageWithoutWWW() {
     String navigateUrl = UrlBuilder.getUrlForPageWithWWW(MercurySubpages.MAIN_PAGE);
     String expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.MAIN_PAGE);
 
@@ -43,8 +43,8 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertTrue(currentUrl.contains(expectedUrl) && !currentUrl.contains("www."));
   }
 
-  @Test(groups = "MercuryRedirectionTest_002_RedirectFromMercuryToOasisAndStayInOasis")
-  public void MercuryRedirectionTest_002_RedirectFromMercuryToOasisAndStayInOasis() {
+  @Test(groups = "mercury_redirection_redirectFromMercuryToOasisAndStayInOasis")
+  public void mercury_redirection_redirectFromMercuryToOasisAndStayInOasis() {
     init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
@@ -54,13 +54,13 @@ public class RedirectionTests extends NewTestTemplate {
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
   }
 
-  @Test(groups = "MercuryRedirectionTest_003_RedirectFromMercuryToOasisAndThenBackToMercury", enabled = false)
+  @Test(groups = "mercury_redirection_redirectFromMercuryToOasisAndThenBackToMercury", enabled = false)
   @RelatedIssue(
       issueID = "QAART-773",
       comment = "Wikia.isTouchScreen() returns false for mobile emulator, "
                 + "which prevents script from adding the mobile page link."
   )
-  public void MercuryRedirectionTest_003_RedirectFromMercuryToOasisAndThenBackToMercury() {
+  public void mercury_redirection_redirectFromMercuryToOasisAndThenBackToMercury() {
     init();
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
