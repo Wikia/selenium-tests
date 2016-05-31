@@ -32,8 +32,9 @@ public class LoginTests extends NewTestTemplate {
       "We don't recognize these credentials. Try again or register a new account.";
 
   @Test(groups = "MercuryLoginTest_001", enabled = false)
+  @RelatedIssue(issueID = "SOC-2567")
   public void MercuryLoginTest_001_validUserCanLogIn() {
-    new Navigate(driver).toPage(MercurySubpages.MAP);
+    new Navigate().toPage(MercurySubpages.MAP);
     String url = driver.getCurrentUrl();
 //    new TopBarComponentObject(driver).clickLogInIcon();
     new LoginPageObject(driver).clickOnSignInButton().logUserIn(
@@ -93,7 +94,6 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryLoginTest_007")
-  @RelatedIssue(issueID = "SOC-2183")
   public void MercuryLoginTest_007_registerNowLinkWorks() {
     SignupPageObject registrationPage = new SignupPageObject(driver);
     registrationPage.openRegisterPage();
@@ -141,7 +141,7 @@ public class LoginTests extends NewTestTemplate {
     Assertion.assertEquals(loginPageObject.getLoginHeaderText(), expectedHeader);
   }
 
-  @Test(groups = "MercuryLoginTest_011", enabled = false)
+  @Test(groups = "MercuryLoginTest_011")
   public void MercuryLoginTest_011_japaneseUserLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userNameJapanese2,

@@ -2,18 +2,14 @@ package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MercuryAlertComponentObject {
   private Wait wait;
-
   private String alertMessage;
-
-  @FindBy(css = ".alert-notifications .alert-box")
-  protected WebElement alertBox;
+  private By alertBox = By.cssSelector(".alert-notifications .alert-box");
 
   public MercuryAlertComponentObject(WebDriver driver, AlertMessage message) {
     this.wait = new Wait(driver);

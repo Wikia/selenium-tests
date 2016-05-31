@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -24,7 +25,7 @@ public class NavigationTest extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "mercury_navigation_openAndCloseNavigationAndItsSubMenu")
@@ -63,24 +64,12 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  @Test(groups = "mercury_navigation_isFooterAlwaysVisible")
-  public void mercury_navigation_isFooterAlwaysVisible() {
-    init();
-
-    topBar.openNavigation();
-    Assertion.assertTrue(navigation.isFooterVisible());
-
-    driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
-    Assertion.assertTrue(navigation.isFooterVisible());
-  }
-
   @Test(groups = "mercury_navigation_navigationOnEnglishWiki")
   public void mercury_navigation_navigationOnEnglishWiki() {
     init();
 
     topBar.openNavigation();
     Assertion.assertTrue(navigation.areHubLinksVisible());
-    Assertion.assertTrue(navigation.isFooterVisible());
   }
 
   @Execute(onWikia = MercuryWikis.DE_WIKI)
@@ -90,6 +79,28 @@ public class NavigationTest extends NewTestTemplate {
 
     topBar.openNavigation();
     Assertion.assertFalse(navigation.areHubLinksVisible());
-    Assertion.assertFalse(navigation.isFooterVisible());
+  }
+
+  @Execute(asUser = User.USER)
+  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
+  public void mercury_navigation_navigationElementsUserLoggedIn() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isUserAvatarVisible());
+    Assertion.assertTrue(navigation.isUserProfileLinkVisible());
+    Assertion.assertTrue(navigation.isLogoutLinkVisible());
+  }
+
+  @Execute(asUser = User.ANONYMOUS)
+  @Test(groups = "mercury_navigation_navigationElementsAnonymousUser")
+  public void mercury_navigation_navigationElementsAnonymousUser() {
+    init();
+
+    topBar.openNavigation();
+    Assertion.assertTrue(navigation.isUserAvatarVisible());
+    Assertion.assertFalse(navigation.isUserProfileLinkVisible());
+    Assertion.assertFalse(navigation.isLogoutLinkVisible());
+    Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
   }
 }

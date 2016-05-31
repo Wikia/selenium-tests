@@ -127,7 +127,7 @@ public class HTMLTitleTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   private void init() {
     this.head = new Head();
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "mercury_htmlTitleSet")

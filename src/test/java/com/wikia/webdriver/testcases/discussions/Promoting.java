@@ -9,11 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership Social Wikia
- */
-
-@Test(groups = "discussions")
 @Execute(onWikia = "fallout")
 public class Promoting extends NewTestTemplate {
 
@@ -70,7 +65,4 @@ public class Promoting extends NewTestTemplate {
     driver.switchTo().window(newWindow);
     Assertion.assertTrue(driver.getTitle().contains("Wikia: Fallout"));
   }
-
-
-
 }

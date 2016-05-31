@@ -35,7 +35,7 @@ public class CategoryPage extends WikiBasePageObject {
   public CategoryPage() {
     super();
 
-    navigate = new Navigate(driver);
+    navigate = new Navigate();
   }
 
   public String getPageTitle() {

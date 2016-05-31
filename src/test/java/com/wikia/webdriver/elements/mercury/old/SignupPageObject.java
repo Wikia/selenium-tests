@@ -31,7 +31,7 @@ public class SignupPageObject {
   private WebElement signupBirthYear;
   @FindBy(css = "#signupSubmit")
   private WebElement signupSubmitButton;
-  @FindBy(css = ".avatar")
+  @FindBy(css = ".wikia-nav__avatar")
   private WebElement avatar;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[1]/small")
   private WebElement emailError;
