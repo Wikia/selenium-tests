@@ -26,9 +26,8 @@ public class MercuryFooterComponentObject {
   }
 
   public ArticlePageObject clickFullSiteLink() {
-    js.execute("$('.recent-edit').remove()");
     wait.forElementClickable(fullSiteLink);
-    fullSiteLink.click();
+    js.execute("$(\".external[href*='oasis']\").get(0).click()");
 
     return new ArticlePageObject(driver);
   }
