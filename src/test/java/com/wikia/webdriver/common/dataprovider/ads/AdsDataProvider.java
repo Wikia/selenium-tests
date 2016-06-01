@@ -546,14 +546,14 @@ public class AdsDataProvider {
   public static Object[][] dfpEvolveParamsOasis() {
     return new Object[][]{
         {
-            "project43",
+            "adtest",
             "SyntheticTests/DfpParams",
             4403,
             "ev/wikia_intl/ros",
             "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
-                "\"s1\":\"_project43\"",
+                "\"s1\":\"_adtest\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -651,7 +651,7 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] evolveTestPage() {
-    return new Object[][]{{"project43", "SyntheticTests/Evolve"}};
+    return new Object[][]{{"adtest", "SyntheticTests/Evolve"}};
   }
 
   @DataProvider
