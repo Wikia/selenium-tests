@@ -1,4 +1,3 @@
-
 package com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
@@ -8,7 +7,6 @@ import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -98,7 +96,6 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")
-  @RelatedIssue(issueID = "XW-640")
   public void MercuryCuratedNavigationTest_003_navigateThroughNamespaces() {
     init();
 
@@ -131,8 +128,7 @@ public class NavigationTests extends NewTestTemplate {
     UrlChecker.isPathContainedInCurrentUrl(driver, MercuryPaths.ROOT_ARTICLE_PATH);
   }
 
-  @Test(groups = "MercuryCuratedNavigationTest_004", enabled = false)
-  @RelatedIssue(issueID = "DAT-4292")
+  @Test(groups = "MercuryCuratedNavigationTest_004")
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     init();
 
@@ -154,10 +150,9 @@ public class NavigationTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
     expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
-    mercuryError.setAlertMessage(MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION);
     navigate.toPage(MercurySubpages.CC_NOT_EXISTING_SECTION);
     loading.handleAsyncPageReload();
-
+    mercuryError.setAlertMessage(MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION);
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
   }

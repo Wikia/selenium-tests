@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TestDfpParamsPresentMobile extends MobileTestTemplate {
 
-  private static final String LINE_ITEM_ID = "115974612";
+  private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
 
   @Test(
@@ -24,11 +24,16 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
   )
   public void dfpParamsPresentSyntheticMercury(String wikiName,
                                                String article,
+                                               String queryString,
                                                String adUnit,
                                                String slot,
                                                List<String> pageParams,
                                                List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    if (StringUtils.isNotEmpty(queryString)) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
+    }
+
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "mobile");
     ads.verifyGptParams(slot, pageParams, slotParams);
@@ -42,16 +47,11 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
   )
   public void dfpParamsPresentMercury(String wikiName,
                                       String article,
-                                      String queryString,
                                       String adUnit,
                                       String slot,
                                       List<String> pageParams,
                                       List<String> slotParams) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    if (StringUtils.isNotEmpty(queryString)) {
-      testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
-    }
-
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, slot, "mobile");
