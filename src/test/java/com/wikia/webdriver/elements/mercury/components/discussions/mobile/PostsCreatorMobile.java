@@ -3,6 +3,6 @@ package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 /**
  * @ownership Social Wikia
  */
-public class ReplyCreator {
+public class PostsCreatorMobile {
 
 }

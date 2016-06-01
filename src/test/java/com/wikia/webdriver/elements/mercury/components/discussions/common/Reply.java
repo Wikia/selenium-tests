@@ -15,14 +15,8 @@ public class Reply extends WikiBasePageObject {
   @FindBy(css = ".replies-list")
   private List<WebElement> repliesList;
 
-  @FindBy(css = "svg.upvote")
-  private WebElement upvoteButton;
-
   @FindBy(css = ".upvote-reply")
   private List<WebElement> replyUpvoteButton;
-
-  @FindBy(css = "a.upvote-area")
-  private WebElement upvoteArea;
 
   @FindBy(css = ".replies-list small")
   private List<WebElement> replyVoteCount;
@@ -34,20 +28,10 @@ public class Reply extends WikiBasePageObject {
     return repliesList.isEmpty();
   }
 
-  public boolean isUpvoteButtonVisible() {
-    wait.forElementVisible(upvoteButton);
-    return upvoteButton.isDisplayed();
-  }
-
   public boolean isReplyUpvoteButtonVisible(int index) {
     WebElement button = replyUpvoteButton.get(index);
     wait.forElementVisible(button);
     return button.isDisplayed();
-  }
-
-  public void clickPostDetailsUpvoteButton() {
-    wait.forElementClickable(upvoteButton);
-    upvoteButton.click();
   }
 
   public void clickReplyUpvoteButton(int replyIndex) {
@@ -56,19 +40,10 @@ public class Reply extends WikiBasePageObject {
     button.click();
   }
 
-  public String getPostDetailsVoteCount() {
-    wait.forElementVisible(upvoteArea);
-    return upvoteArea.getText();
-  }
-
   public String getReplyVoteCount(int index) {
     WebElement voteArea = replyVoteCount.get(index);
     wait.forElementVisible(voteArea);
     return voteArea.getText();
-  }
-
-  public void waitForPostDetailsVoteCountToChange(String voteCount) {
-    wait.forTextNotInElement(upvoteArea, voteCount);
   }
 
   public void waitForReplyVoteCountToChange(int replyIndex, String voteCount) {
@@ -86,16 +61,5 @@ public class Reply extends WikiBasePageObject {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-  }
-
-  public String[] getSocialNetworkIconsClasses() {
-    int numberOfIcons = socialNetworkIcon.size();
-    String[] classes = new String[numberOfIcons];
-    for (int i = 0; i < numberOfIcons; i++) {
-      WebElement icon = socialNetworkIcon.get(i);
-      wait.forElementVisible(icon);
-      classes[i] = icon.getAttribute("class").split(" ")[0];
-    }
-    return classes;
   }
 }

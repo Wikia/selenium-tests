@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -35,6 +36,12 @@ public class Post extends WikiBasePageObject{
 
   @FindBy(css = ".share-feature")
   private List<WebElement> shareFeature;
+
+  @FindBy(css = "a.upvote-area")
+  private WebElement upvoteArea;
+
+  @FindBy(css = "svg.upvote")
+  private WebElement upvoteButton;
 
   public boolean isPostListEmpty() {
     return postList.isEmpty();
@@ -101,6 +108,25 @@ public class Post extends WikiBasePageObject{
     button.click();
   }
 
+  public String getPostDetailsVoteCount() {
+    wait.forElementVisible(upvoteArea);
+    return upvoteArea.getText();
+  }
+
+  public void waitForPostDetailsVoteCountToChange(String voteCount) {
+    wait.forTextNotInElement(upvoteArea, voteCount);
+  }
+
+  public void clickPostDetailsUpvoteButton() {
+    wait.forElementClickable(upvoteButton);
+    upvoteButton.click();
+  }
+
+  public boolean isUpvoteButtonVisible() {
+    wait.forElementVisible(upvoteButton);
+    return upvoteButton.isDisplayed();
+  }
+
   public String[] getSocialNetworkIconClasses(int postIndex) {
     List<WebElement> icons = shareFeature.get(postIndex).findElements(By.cssSelector("a.icon"));
     int numberOfIcons = icons.size();
@@ -111,5 +137,9 @@ public class Post extends WikiBasePageObject{
       classes[i] = icon.getAttribute("class").split(" ")[0];
     }
     return classes;
+  }
+
+  public String[] getSocialNetworkIconsClasses() {
+    return getSocialNetworkIconClasses(0);
   }
 }
