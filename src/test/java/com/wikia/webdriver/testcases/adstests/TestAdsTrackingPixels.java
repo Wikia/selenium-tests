@@ -100,7 +100,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump
   @Test(
-          groups = "AdsTrackingPixels",
+          groups = "AdsTrackingPixelsAuthPage",
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsTrackingPixelsSentAuthPage"
   )
