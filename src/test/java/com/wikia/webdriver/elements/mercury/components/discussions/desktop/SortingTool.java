@@ -23,5 +23,4 @@ public class SortingTool {
     trendingTabOnDesktop.click();
     return this;
   }
-
 }

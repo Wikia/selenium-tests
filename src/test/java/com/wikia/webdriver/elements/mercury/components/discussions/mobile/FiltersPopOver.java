@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @ownership Social Wikia
  */
-public class Options extends WikiBasePageObject{
+public class FiltersPopOver extends WikiBasePageObject{
 
   @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
   private WebElement trendingOptionInSortMenu;
@@ -27,23 +27,21 @@ public class Options extends WikiBasePageObject{
     return sortOptionsMobile.isDisplayed();
   }
 
-  public Options clickLatestLinkOnMobile() {
+  public FiltersPopOver clickLatestLinkOnMobile() {
     wait.forElementClickable(latestOptionInSortMenu);
     latestOptionInSortMenu.click();
     return this;
   }
 
-  public Options clickTrendingOptionInSortMenu() {
+  public FiltersPopOver clickTrendingOptionInSortMenu() {
     wait.forElementClickable(trendingOptionInSortMenu);
     trendingOptionInSortMenu.click();
     return this;
   }
 
-  public Options clickApplyButton() {
+  public FiltersPopOver clickApplyButton() {
     wait.forElementClickable(applyButtonInSortMenu);
     applyButtonInSortMenu.click();
     return this;
   }
-
-
 }

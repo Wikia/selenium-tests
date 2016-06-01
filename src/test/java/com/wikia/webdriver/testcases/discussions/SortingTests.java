@@ -11,7 +11,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.Options;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
@@ -72,17 +73,17 @@ public class SortingTests extends NewTestTemplate {
    */
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
-    Options options = new PostsListPage().open().getOptions();
+    FiltersPopOver filtersPopOver = new PostsListPage().open().getFiltersPopOver();
     DiscussionsHeader discussionsHeader = new PostsListPage().open().getDiscussionsHeader();
-    Assertion.assertTrue(discussionsHeader.clickSortButtonOnMobile().isSortListVisibleMobile());
-
-    options.clickLatestLinkOnMobile();
-    options.clickApplyButton();
-    new Loading(driver).handleAsyncPageReload();
-
     discussionsHeader.clickSortButtonOnMobile();
-    options.clickTrendingOptionInSortMenu();
-    options.clickApplyButton();
+    Assertion.assertTrue(filtersPopOver.isSortListVisibleMobile());
+
+    filtersPopOver.clickLatestLinkOnMobile();
+    filtersPopOver.clickApplyButton();
+    new Loading(driver).handleAsyncPageReload();
+    discussionsHeader.clickSortButtonOnMobile();
+    filtersPopOver.clickTrendingOptionInSortMenu();
+    filtersPopOver.clickApplyButton();
     new Loading(driver).handleAsyncPageReload();
   }
 

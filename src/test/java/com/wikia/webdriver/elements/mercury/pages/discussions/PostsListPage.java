@@ -11,7 +11,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Posts
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.Options;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -56,7 +56,7 @@ public class PostsListPage extends WikiBasePageObject {
   private final DiscussionsHeader discussionsHeader = new DiscussionsHeader();
 
   @Getter(lazy = true)
-  private final Options options = new Options();
+  private final FiltersPopOver filtersPopOver = new FiltersPopOver();
 
   private static final String PATH = "d/f/%s";
   private static final String DEFAULT_FORUM_ID = "1362702";

@@ -21,5 +21,4 @@ public class DiscussionsHeader extends WikiBasePageObject{
     sortEntryPointMobile.click();
     return this;
   }
-
 }

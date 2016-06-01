@@ -36,6 +36,4 @@ public class Promoting {
   public void clickGooglePlayLinkInAppPromotion() {
     googlePlayAppLink.click();
   }
-
-
 }

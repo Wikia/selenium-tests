@@ -17,5 +17,4 @@ public class BackButtons extends BasePageObject{
     backToWiki.click();
     return this;
   }
-
 }
