@@ -13,8 +13,6 @@ import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 
-import lombok.Getter;
-import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -24,14 +22,14 @@ public class SearchTests extends NewTestTemplate {
 
   private TopBar topBar;
 
-  @Getter(lazy = true)
-  private final Search search = new Search();
+  private Search search;
 
   private static final String SEARCH_PHRASE = "Infobox";
   private static final String SEARCH_PHRASE_NO_RESULTS = "DubiousQueryWithNoResults";
 
   private void init() {
     this.topBar = new TopBar(driver);
+    this.search = new Search();
     new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
 
@@ -67,7 +65,7 @@ public class SearchTests extends NewTestTemplate {
 
     this.topBar.openSearch().typeInSearch(SEARCH_PHRASE).clickClearSearchButton();
 
-    Assertion.assertEquals(this.getSearch().getSearchPhrase(), "");
+    Assertion.assertEquals(this.search.getSearchPhrase(), "");
   }
 
   @Test(groups = "mercury_search_verifySearchLayout")
@@ -99,15 +97,14 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertFalse(this.topBar.isSearchIconClickable());
   }
 
-  @Test(groups = "mercury_search_searchInputDoesNotCoverNavigation",
-      expectedExceptions = WebDriverException.class)
+  @Test(groups = "mercury_search_searchInputDoesNotCoverNavigation")
   public void mercury_search_searchInputDoesNotCoverNavigation() {
     init();
 
     new SearchResultsPage().openForQuery(SEARCH_PHRASE);
     this.topBar.openNavigation();
 
-    Assertion.assertFalse(this.getSearch().isSearchInputFieldVisible());
+    Assertion.assertFalse(this.search.isSearchInputFieldEditable());
   }
 
   @Test(groups = "mercury_search_searchNoResultsPageDisplayed")
@@ -117,5 +114,40 @@ public class SearchTests extends NewTestTemplate {
     SearchResultsPage searchResults =
         new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
     Assertion.assertTrue(searchResults.isNoResultsPagePresent());
+  }
+
+  @Test(groups = "mercury_search_noSuggestionsOnSearchResultsPage")
+  public void mercury_search_noSuggestionsOnSearchResultsPage() {
+    init();
+
+    SearchResultsPage searchResults =
+        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
+    searchResults.clearSearch();
+    searchResults.typeInSearch(SEARCH_PHRASE);
+    Assertion.assertFalse(this.search.areSearchSuggestionsDisplayed());
+  }
+
+  @Test(groups = "mercury_search_focusOnTryAnotherSearchWhenNoResults")
+  public void mercury_search_focusOnTryAnotherSearchWhenNoResults() {
+    init();
+
+    SearchResultsPage searchResults =
+        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS).clickTryAnotherSearch();
+
+    Assertion.assertTrue(this.search.isInputFieldFocused());
+    Assertion.assertTrue(this.search.getSearchPhrase().isEmpty());
+  }
+
+  @Test(groups = "mercury_search_redirectToNewResultsPageFromNoResults")
+  public void mercury_search_redirectToNewResultsPageFromNoResults() {
+    init();
+
+    SearchResultsPage searchResults =
+        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS).clickTryAnotherSearch();
+
+    this.search.typeInSearch(SEARCH_PHRASE).clickEnterAndNavigateToSearchResults();
+    Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
+    Assertion.assertFalse(searchResults.isNoResultsPagePresent());
+    Assertion.assertTrue(searchResults.areResultsPresent());
   }
 }

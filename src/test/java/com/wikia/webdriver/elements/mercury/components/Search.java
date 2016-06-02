@@ -4,9 +4,13 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import io.appium.java_client.pagefactory.TimeOutDuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -22,8 +26,10 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
   private WebElement inputFieldSearchIcon;
 
+  public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
+  public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
   private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
-
+  private static final String focusedSearchInput = ".wikia-search--focused .text-field-input";
   private Loading loading;
 
   public Search() {
@@ -102,10 +108,47 @@ public class Search extends BasePageObject {
     }
   }
 
+  public boolean isSearchInputFieldEditable() {
+    try {
+      wait.forElementClickable(searchInput, 0).click();
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    } catch (WebDriverException e) {
+      // @TODO: this would be best pushed to Selenium upstream to actually throw a more specific
+      // exception
+      if (e.getMessage().contains("Element is not clickable at point")) {
+        return false;
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  public boolean areSearchSuggestionsDisplayed() {
+    try {
+      wait.forElementClickable(By.cssSelector(searchSuggestionClass), SUGGESTIONS_TIMEOUT_IN_SECONDS);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
+  public boolean isInputFieldFocused() {
+    try {
+      wait.forElementPresent(By.cssSelector(focusedSearchInput), FOCUS_TIMEOUT_IN_SECONDS);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
   public SearchResultsPage clickEnterAndNavigateToSearchResults() {
     new Actions(driver).sendKeys(Keys.ENTER).perform();
 
     return new SearchResultsPage();
   }
-
 }

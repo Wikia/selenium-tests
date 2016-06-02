@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,6 +19,9 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   @FindBy(css = ".search-error-not-found")
   private WebElement noResultsContainer;
+
+  @FindBy(css = ".search-error-not-found__action")
+  private WebElement tryAnotherSearchLink;
 
   @Getter
   private final Search search = new Search();
@@ -63,6 +67,26 @@ public class SearchResultsPage extends WikiBasePageObject {
     } catch (NoSuchElementException e) {
       return false;
     }
+  }
+
+  public boolean areResultsPresent() {
+    try {
+      wait.forElementClickable(By.cssSelector(searchResultClass), 0);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
+  public SearchResultsPage clickTryAnotherSearch() {
+    wait.forElementClickable(this.tryAnotherSearchLink).click();
+    return this;
+  }
+
+  public void clearSearch() {
+    this.getSearch().clickClearSearchButton();
   }
 
 }
