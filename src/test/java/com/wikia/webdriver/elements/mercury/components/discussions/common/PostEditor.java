@@ -1,10 +1,8 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-/**
- * @ownership Social Wikia
- */
-public class PostEditor extends WikiBasePageObject{
+
+public class PostEditor extends BasePageObject {
 
 }

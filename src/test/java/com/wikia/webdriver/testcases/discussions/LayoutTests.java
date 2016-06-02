@@ -113,11 +113,13 @@ public class LayoutTests extends NewTestTemplate {
 
   private void postDetailsListLoads() {
     Reply reply = new PostDetailsPage().open().getReply();
+
     Assertion.assertFalse(reply.isPostDetailsListEmpty());
   }
 
   private void postsListLoads() {
     Post post = new PostsListPage().open().getPost();
+
     Assertion.assertFalse(post.isPostListEmpty());
   }
 
@@ -126,6 +128,7 @@ public class LayoutTests extends NewTestTemplate {
     int startingListLength = post.getPostsListLength();
     post.scrollToBottom(driver);
     new Loading(driver).handleAsyncPageReload();
+
     Assertion.assertTrue(startingListLength < post.getPostsListLength());
   }
 }

@@ -66,12 +66,14 @@ public class NavigatingTests extends NewTestTemplate {
   private void backToWiki() {
     BackButtons backButtons = new PostsListPage().open().getBackButtons();
     backButtons.clickBackToWikiLink();
+
     Assertion.assertEquals(driver.getCurrentUrl(), wikiURL);
   }
 
   private void clickAvatarLoadsUserPage() {
     Post post = new PostsListPage().open().getPost();
     post.clickUserAvatar();
+
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
@@ -80,6 +82,7 @@ public class NavigatingTests extends NewTestTemplate {
   private void clickUsernameLoadsUserPage() {
     Post post = new PostsListPage().open().getPost();
     post.clickUsernameLink();
+
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(
                     URLsContent.USER_PROFILE.replace("%userName%", "")));

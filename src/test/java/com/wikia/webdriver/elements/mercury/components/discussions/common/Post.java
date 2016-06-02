@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,10 +10,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Social Wikia
- */
-public class Post extends WikiBasePageObject{
+
+public class Post extends BasePageObject {
 
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;

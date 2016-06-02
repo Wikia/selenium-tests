@@ -118,10 +118,13 @@ public class UpvotingTests extends NewTestTemplate {
     post.clickUpvoteButton(replyIndex);
     post.waitForVoteCountToChange(replyIndex, firstVoteCount);
     String secondVoteCount = post.getVoteCount(replyIndex);
+
     Assertion.assertNotEquals(firstVoteCount, secondVoteCount);
+
     post.clickUpvoteButton(replyIndex);
     post.waitForVoteCountToChange(replyIndex, secondVoteCount);
     String thirdVoteCount = post.getVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
@@ -133,6 +136,7 @@ public class UpvotingTests extends NewTestTemplate {
     post.clickUpvoteButton(replyIndex);
     post.waitForVoteCountChangeTimeLagToPass();
     String secondVoteCount = post.getVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 
@@ -144,10 +148,13 @@ public class UpvotingTests extends NewTestTemplate {
     reply.clickReplyUpvoteButton(replyIndex);
     reply.waitForReplyVoteCountToChange(replyIndex, firstVoteCount);
     String secondVoteCount = reply.getReplyVoteCount(replyIndex);
+
     Assertion.assertNotEquals(firstVoteCount, secondVoteCount);
+
     reply.clickReplyUpvoteButton(replyIndex);
     reply.waitForReplyVoteCountToChange(replyIndex, secondVoteCount);
     String thirdVoteCount = reply.getReplyVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
@@ -158,6 +165,7 @@ public class UpvotingTests extends NewTestTemplate {
     post.clickPostDetailsUpvoteButton();
     post.waitForVoteCountChangeTimeLagToPass();
     String secondVoteCount = post.getPostDetailsVoteCount();
+
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 
@@ -169,6 +177,7 @@ public class UpvotingTests extends NewTestTemplate {
     reply.clickReplyUpvoteButton(replyIndex);
     reply.waitForVoteCountChangeTimeLagToPass();
     String secondVoteCount = reply.getReplyVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 }

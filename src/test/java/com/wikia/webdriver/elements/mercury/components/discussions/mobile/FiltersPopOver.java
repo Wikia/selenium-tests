@@ -5,10 +5,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Social Wikia
- */
-public class FiltersPopOver extends WikiBasePageObject{
+
+public class FiltersPopOver extends WikiBasePageObject {
 
   @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
   private WebElement trendingOptionInSortMenu;

@@ -1,10 +1,8 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-/**
- * @ownership Social Wikia
- */
-public class PostsCreatorDesktop extends WikiBasePageObject{
+
+public class PostsCreatorDesktop extends BasePageObject {
 
 }

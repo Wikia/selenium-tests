@@ -1,14 +1,12 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Social Wikia
- */
-public class DiscussionsHeader extends WikiBasePageObject{
+
+public class DiscussionsHeader extends BasePageObject {
 
   @FindBy(css = "div.sort")
   private WebElement sortEntryPointMobile;

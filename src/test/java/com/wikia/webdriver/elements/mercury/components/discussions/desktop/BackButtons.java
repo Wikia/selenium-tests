@@ -5,10 +5,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Social Wikia
- */
-public class BackButtons extends BasePageObject{
+
+public class BackButtons extends BasePageObject {
 
   @FindBy(css = ".back-button")
   private WebElement backToWiki;

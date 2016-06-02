@@ -1,16 +1,14 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Social Wikia
- */
-public class Reply extends WikiBasePageObject {
+
+public class Reply extends BasePageObject {
 
   @FindBy(css = ".replies-list")
   private List<WebElement> repliesList;

@@ -75,6 +75,7 @@ public class SortingTests extends NewTestTemplate {
     FiltersPopOver filtersPopOver = new PostsListPage().open().getFiltersPopOver();
     DiscussionsHeader discussionsHeader = new PostsListPage().open().getDiscussionsHeader();
     discussionsHeader.clickSortButtonOnMobile();
+
     Assertion.assertTrue(filtersPopOver.isSortListVisibleMobile());
 
     filtersPopOver.clickLatestLinkOnMobile();

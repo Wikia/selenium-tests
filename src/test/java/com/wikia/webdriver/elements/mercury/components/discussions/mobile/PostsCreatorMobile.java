@@ -1,10 +1,8 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-/**
- * @ownership Social Wikia
- */
-public class PostsCreatorMobile extends WikiBasePageObject{
+
+public class PostsCreatorMobile extends BasePageObject {
 
 }

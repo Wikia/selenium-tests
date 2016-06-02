@@ -94,6 +94,7 @@ public class SharingTests extends NewTestTemplate {
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
+
       Assertion.assertEquals(
           currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
           "Expected network not found on its position. Note that the order of social buttons "
@@ -109,6 +110,7 @@ public class SharingTests extends NewTestTemplate {
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
+
       Assertion.assertEquals(
           currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
           "Expected network not found on its position. Note that the order of social buttons "

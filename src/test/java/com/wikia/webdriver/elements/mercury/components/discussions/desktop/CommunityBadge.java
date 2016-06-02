@@ -1,10 +1,8 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-/**
- * @ownership Social Wikia
- */
-public class CommunityBadge extends WikiBasePageObject{
+
+public class CommunityBadge extends BasePageObject {
 
 }

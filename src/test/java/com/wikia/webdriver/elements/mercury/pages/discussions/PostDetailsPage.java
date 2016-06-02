@@ -6,6 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
 
+
 public class PostDetailsPage extends WikiBasePageObject{
 
   @Getter(lazy = true)

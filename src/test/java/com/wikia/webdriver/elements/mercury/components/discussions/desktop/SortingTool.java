@@ -1,14 +1,12 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Social Wikia
- */
-public class SortingTool extends WikiBasePageObject{
+
+public class SortingTool extends BasePageObject {
 
   @FindBy(xpath = "//li[text()='Latest']")
   private WebElement latestTabOnDesktop;
