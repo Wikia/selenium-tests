@@ -1,12 +1,14 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
  * @ownership Social Wikia
  */
-public class Promoting {
+public class Promoting extends WikiBasePageObject{
 
   @FindBy(css = ".discussion-app-join-text")
   private WebElement appPromotionText;
