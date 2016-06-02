@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -38,7 +37,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Before infobox expanding
     infobox
-        .isHeroImageNotVisible()
         .isTitleNotVisible()
         .isImageInTitleNotVisible()
         .isImageInTabberVisible()
@@ -96,18 +94,16 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
 
-  @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox", enabled = false)
-  @RelatedIssue(issueID = "XW-1200", comment = "functionality is broken")
+  @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox")
   public void mercury_infobox_imagesAndVideosOpenInLightbox() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Check image
     infobox
-        .clickHeroImage()
+        .clickOnImageInInfobox()
         .isLightboxOpened()
-        .closeLightbox()
-        .isTitleOverImageVisible();
+        .closeLightbox();
 
     // Check video
     infobox
