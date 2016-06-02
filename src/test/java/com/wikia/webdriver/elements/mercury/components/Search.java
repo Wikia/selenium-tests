@@ -4,12 +4,10 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import io.appium.java_client.pagefactory.TimeOutDuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -28,22 +26,24 @@ public class Search extends BasePageObject {
 
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
+
   private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
   private static final String focusedSearchInput = ".wikia-search--focused .text-field-input";
-  private Loading loading;
 
-  public Search() {
-    this.loading = new Loading(driver);
-  }
+  public String selectSearchSuggestion(int index) {
+    Loading loading = new Loading(driver);
+    String clickedLink;
 
-  public Search selectSearchSuggestion(int index) {
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
+
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
+    clickedLink = searchResult.getAttribute("href");
+
     searchResult.click();
     loading.handleAsyncPageReload();
 
-    return this;
+    return clickedLink;
   }
 
   public Search typeInSearch(String text) {
@@ -76,6 +76,12 @@ public class Search extends BasePageObject {
     clearSearchButton.click();
 
     return this;
+  }
+
+  public SearchResultsPage clickEnterAndNavigateToSearchResults() {
+    new Actions(driver).sendKeys(Keys.ENTER).perform();
+
+    return new SearchResultsPage();
   }
 
   public boolean isInputFieldSearchIconVisible() {
@@ -128,7 +134,8 @@ public class Search extends BasePageObject {
 
   public boolean areSearchSuggestionsDisplayed() {
     try {
-      wait.forElementClickable(By.cssSelector(searchSuggestionClass), SUGGESTIONS_TIMEOUT_IN_SECONDS);
+      wait.forElementClickable(By.cssSelector(searchSuggestionClass),
+                               SUGGESTIONS_TIMEOUT_IN_SECONDS);
       return true;
     } catch (TimeoutException e) {
       return false;
@@ -146,9 +153,4 @@ public class Search extends BasePageObject {
     }
   }
 
-  public SearchResultsPage clickEnterAndNavigateToSearchResults() {
-    new Actions(driver).sendKeys(Keys.ENTER).perform();
-
-    return new SearchResultsPage();
-  }
 }

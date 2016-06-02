@@ -26,7 +26,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   @Getter
   private final Search search = new Search();
 
-  private static final String searchResultClass = ".search-results__list .search-results__item";
+  private static final String searchResultClass = ".search-results__list .wikia-card > a";
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
@@ -35,19 +35,24 @@ public class SearchResultsPage extends WikiBasePageObject {
     return this;
   }
 
-  public Search typeInSearch(String text) {
-    return this.getSearch().typeInSearch(text);
-  }
-
-  public SearchResultsPage selectSearchResult(int index) {
+  public String selectSearchResult(int index) {
     Loading loading = new Loading(driver);
+    String clickedLink;
 
     PageObjectLogging.logInfo("Select search result no.: " + index);
     WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
     wait.forElementClickable(searchResult);
+
+    clickedLink = searchResult.getAttribute("href");
+
     searchResult.click();
     loading.handleAsyncPageReload();
 
+    return clickedLink;
+  }
+
+  public SearchResultsPage clickTryAnotherSearch() {
+    wait.forElementClickable(this.tryAnotherSearchLink).click();
     return this;
   }
 
@@ -62,9 +67,11 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   public boolean isNoResultsPagePresent() {
     try {
-      wait.forElementVisible(noResultsContainer);
+      wait.forElementVisible(noResultsContainer, 0);
       return true;
     } catch (NoSuchElementException e) {
+      return false;
+    } catch (TimeoutException e) {
       return false;
     }
   }
@@ -79,14 +86,4 @@ public class SearchResultsPage extends WikiBasePageObject {
       return false;
     }
   }
-
-  public SearchResultsPage clickTryAnotherSearch() {
-    wait.forElementClickable(this.tryAnotherSearchLink).click();
-    return this;
-  }
-
-  public void clearSearch() {
-    this.getSearch().clickClearSearchButton();
-  }
-
 }

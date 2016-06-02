@@ -8,9 +8,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Search;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 
 import org.testng.annotations.Test;
@@ -20,132 +19,132 @@ import org.testng.annotations.Test;
 @Test(groups = "MercurySearch")
 public class SearchTests extends NewTestTemplate {
 
-  private TopBar topBar;
-
-  private Search search;
-
   private static final String SEARCH_PHRASE = "Infobox";
-  private static final String SEARCH_PHRASE_NO_RESULTS = "DubiousQueryWithNoResults";
-
-  private void init() {
-    this.topBar = new TopBar(driver);
-    this.search = new Search();
-    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
-  }
+  private static final String SEARCH_PHRASE_NO_RESULTS = "AComplexQueryWithNoResults";
 
   @Test(groups = "mercury_search_navigateToPageUsingSearchSuggestions")
   public void mercury_search_navigateToPageUsingSearchSuggestions() {
-    init();
+    String suggestionLink =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openSearch()
+            .typeInSearch(this.SEARCH_PHRASE)
+            .selectSearchSuggestion(0);
 
-    Search search = this.topBar.openSearch().typeInSearch(SEARCH_PHRASE);
-    String oldUrl = driver.getCurrentUrl();
-    search.selectSearchSuggestion(0);
-
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search suggestion failed");
-    Assertion.assertTrue(driver.getCurrentUrl().contains(SEARCH_PHRASE));
+    Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
   }
 
   @Test(groups = "mercury_search_navigateToPageUsingSearchResults")
   public void mercury_search_navigateToPageUsingSearchResults() {
-    init();
+    String resultLink =
+        new SearchResultsPage()
+            .openForQuery(this.SEARCH_PHRASE)
+            .selectSearchResult(0);
 
-    SearchResultsPage searchResultsPage = new SearchResultsPage().openForQuery(SEARCH_PHRASE);
-    String oldUrl = driver.getCurrentUrl();
-    searchResultsPage.selectSearchResult(0);
-
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search result failed");
-    Assertion.assertTrue(driver.getCurrentUrl().contains(SEARCH_PHRASE));
+    Assertion.assertTrue(driver.getCurrentUrl().equals(resultLink));
   }
 
   @Test(groups = "mercury_search_cancelSearchPhrase")
   public void mercury_search_clearSearchPhrase() {
-    init();
+    String currentPhrase = new ArticlePage()
+        .open(MercurySubpages.MAIN_PAGE)
+        .getTopBar()
+        .openSearch()
+        .typeInSearch(this.SEARCH_PHRASE)
+        .clickClearSearchButton()
+        .getSearchPhrase();
 
-    this.topBar.openSearch().typeInSearch(SEARCH_PHRASE).clickClearSearchButton();
-
-    Assertion.assertEquals(this.search.getSearchPhrase(), "");
+    Assertion.assertTrue(currentPhrase.isEmpty());
   }
 
   @Test(groups = "mercury_search_verifySearchLayout")
   public void mercury_search_verifySearchLayout() {
-    init();
+    Search search =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openSearch();
 
-    Search searchInstance = this.topBar.openSearch();
-
-    Assertion.assertTrue(searchInstance.isSearchInputFieldVisible());
-    Assertion.assertTrue(searchInstance.isClearSearchButtonVisible());
-    Assertion.assertTrue(searchInstance.isInputFieldSearchIconVisible());
+    Assertion.assertTrue(search.isSearchInputFieldVisible());
+    Assertion.assertTrue(search.isClearSearchButtonVisible());
+    Assertion.assertTrue(search.isInputFieldSearchIconVisible());
   }
 
   @Test(groups = "mercury_search_userIsRedirectedToSearchResultsPage")
   public void mercury_search_userIsRedirectedToSearchResultsPage() {
-    init();
-
     SearchResultsPage searchResults =
-        this.topBar.openSearch().typeInSearch(SEARCH_PHRASE)
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openSearch()
+            .typeInSearch(this.SEARCH_PHRASE)
             .clickEnterAndNavigateToSearchResults();
+
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
   }
 
   @Test(groups = "mercury_search_searchResultsPageHasNoSearchIconInTopBar")
   public void mercury_search_searchResultsPageHasNoSearchIconInTopBar() {
-    init();
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(SEARCH_PHRASE);
 
-    new SearchResultsPage().openForQuery(SEARCH_PHRASE);
-    Assertion.assertFalse(this.topBar.isSearchIconClickable());
+    Assertion.assertFalse(resultsPage.getTopBar().isSearchIconClickable());
   }
 
   @Test(groups = "mercury_search_searchInputDoesNotCoverNavigation")
   public void mercury_search_searchInputDoesNotCoverNavigation() {
-    init();
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(SEARCH_PHRASE);
 
-    new SearchResultsPage().openForQuery(SEARCH_PHRASE);
-    this.topBar.openNavigation();
+    resultsPage
+        .getTopBar()
+        .openNavigation();
 
-    Assertion.assertFalse(this.search.isSearchInputFieldEditable());
+    Assertion.assertFalse(resultsPage.getSearch().isSearchInputFieldEditable());
   }
 
   @Test(groups = "mercury_search_searchNoResultsPageDisplayed")
   public void mercury_search_searchNoResultsPageDisplayed() {
-    init();
-
     SearchResultsPage searchResults =
-        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
+        new SearchResultsPage()
+            .openForQuery(SEARCH_PHRASE_NO_RESULTS);
+
     Assertion.assertTrue(searchResults.isNoResultsPagePresent());
   }
 
   @Test(groups = "mercury_search_noSuggestionsOnSearchResultsPage")
   public void mercury_search_noSuggestionsOnSearchResultsPage() {
-    init();
-
     SearchResultsPage searchResults =
-        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS);
-    searchResults.clearSearch();
-    searchResults.typeInSearch(SEARCH_PHRASE);
-    Assertion.assertFalse(this.search.areSearchSuggestionsDisplayed());
+        new SearchResultsPage()
+            .openForQuery(SEARCH_PHRASE_NO_RESULTS);
+
+    Assertion.assertFalse(searchResults.getSearch().areSearchSuggestionsDisplayed());
   }
 
   @Test(groups = "mercury_search_focusOnTryAnotherSearchWhenNoResults")
   public void mercury_search_focusOnTryAnotherSearchWhenNoResults() {
-    init();
-
     SearchResultsPage searchResults =
-        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS).clickTryAnotherSearch();
+        new SearchResultsPage()
+            .openForQuery(SEARCH_PHRASE_NO_RESULTS)
+            .clickTryAnotherSearch();
 
-    Assertion.assertTrue(this.search.isInputFieldFocused());
-    Assertion.assertTrue(this.search.getSearchPhrase().isEmpty());
+    Assertion.assertTrue(searchResults.getSearch().isInputFieldFocused());
+    Assertion.assertTrue(searchResults.getSearch().getSearchPhrase().isEmpty());
   }
 
   @Test(groups = "mercury_search_redirectToNewResultsPageFromNoResults")
   public void mercury_search_redirectToNewResultsPageFromNoResults() {
-    init();
-
     SearchResultsPage searchResults =
-        new SearchResultsPage().openForQuery(SEARCH_PHRASE_NO_RESULTS).clickTryAnotherSearch();
+        new SearchResultsPage()
+            .openForQuery(SEARCH_PHRASE_NO_RESULTS)
+            .clickTryAnotherSearch()
+            .getSearch()
+            .typeInSearch(SEARCH_PHRASE)
+            .clickEnterAndNavigateToSearchResults();
 
-    this.search.typeInSearch(SEARCH_PHRASE).clickEnterAndNavigateToSearchResults();
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
     Assertion.assertFalse(searchResults.isNoResultsPagePresent());
     Assertion.assertTrue(searchResults.areResultsPresent());
