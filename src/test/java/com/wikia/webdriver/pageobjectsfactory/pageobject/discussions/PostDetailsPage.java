@@ -16,7 +16,7 @@ public class PostDetailsPage extends WikiBasePageObject{
   private WebElement upvoteButton;
   @FindBy(css = ".upvote-reply")
   private List<WebElement> replyUpvoteButton;
-  @FindBy(css = "a.upvote-area")
+  @FindBy(css = "li.upvote-area")
   private WebElement upvoteArea;
   @FindBy(css = ".replies-list small")
   private List<WebElement> replyVoteCount;
