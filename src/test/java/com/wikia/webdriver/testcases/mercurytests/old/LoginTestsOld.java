@@ -26,27 +26,10 @@ import org.testng.annotations.Test;
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
-public class LoginTests extends NewTestTemplate {
+public class LoginTestsOld extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
-
-  @Test(groups = "MercuryLoginTest_001", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
-  public void MercuryLoginTest_001_validUserCanLogIn() {
-    new Navigate().toPage(MercurySubpages.MAP);
-    String url = driver.getCurrentUrl();
-//    new TopBarComponentObject(driver).clickLogInIcon();
-    new LoginPageObject(driver).clickOnSignInButton().logUserIn(
-        Configuration.getCredentials().userName10,
-        Configuration.getCredentials().password10);
-
-    new ArticlePageObject(driver).waitForFooterToBeVisible();
-    boolean result = url.equals(driver.getCurrentUrl());
-    PageObjectLogging.log("url", "was redirected correctly", result);
-
-//    Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
-  }
 
   @Test(groups = "MercuryLoginTest_002")
   public void MercuryLoginTest_002_userCanNotLogInWithWrongPassword() {
