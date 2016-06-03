@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -24,7 +25,8 @@ public class UpvotingTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotVoteForPostDetails")
+  @Test(groups = "discussions-anonUserOnMobileCanNotVoteForPostDetails", enabled = false)
+  @RelatedIssue(issueID = "SOC-2596")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForPostDetails() {
@@ -49,7 +51,8 @@ public class UpvotingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForPostDetails")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForPostDetails", enabled = false)
+  @RelatedIssue(issueID = "SOC-2596")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
@@ -81,7 +84,8 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
+  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote", enabled = false)
+  @RelatedIssue(issueID = "SOC-2596")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void loggedInUserOnMobileCanUpvote() {
@@ -99,7 +103,8 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote", enabled = false)
+  @RelatedIssue(issueID = "SOC-2596")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanUpvote() {
