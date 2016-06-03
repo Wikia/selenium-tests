@@ -55,7 +55,7 @@ public class SearchTests extends NewTestTemplate {
 
   @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
-  @InBrowser(browser = Browser.CHROME, browserSize = "1920x1080")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String suggestionLink =
         new ArticlePage()
