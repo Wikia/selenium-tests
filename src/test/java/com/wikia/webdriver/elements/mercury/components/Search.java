@@ -85,33 +85,15 @@ public class Search extends BasePageObject {
   }
 
   public boolean isInputFieldSearchIconVisible() {
-    try {
-      wait.forElementVisible(inputFieldSearchIcon);
-      return inputFieldSearchIcon.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(inputFieldSearchIcon);
   }
 
   public boolean isClearSearchButtonVisible() {
-    try {
-      wait.forElementVisible(clearSearchButton);
-      return clearSearchButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(clearSearchButton);
   }
 
   public boolean isSearchInputFieldVisible() {
-    try {
-      wait.forElementVisible(searchInput);
-      return searchInput.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(searchInput);
   }
 
   public boolean isSearchInputFieldEditable() {
@@ -153,4 +135,13 @@ public class Search extends BasePageObject {
     }
   }
 
+  private boolean isElementVisible(WebElement element) {
+    try {
+      wait.forElementVisible(element);
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
 }
