@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
@@ -57,6 +58,7 @@ public class Reply extends BasePageObject {
       //This sleep was introduced because of noticeable lag between vote and vote value change
       Thread.sleep(2000);
     } catch (InterruptedException e) {
+      PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
       e.printStackTrace();
     }
   }
