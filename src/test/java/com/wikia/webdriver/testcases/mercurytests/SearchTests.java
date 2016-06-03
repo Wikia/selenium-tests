@@ -55,7 +55,7 @@ public class SearchTests extends NewTestTemplate {
 
   @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
-  @InBrowser(browser = Browser.CHROME, browserSize = "1920x1080")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     Search search =
         new ArticlePage()
@@ -64,10 +64,10 @@ public class SearchTests extends NewTestTemplate {
             .openSearch()
             .typeInSearch(this.SEARCH_PHRASE);
 
-    String suggestionText = search.getSearchSuggestionText(0);
+    String suggestionText = search.getSearchSuggestionText(0).toLowerCase();
     search.selectSearchSuggestion(0);
 
-    Assertion.assertTrue(driver.getTitle().contains(suggestionText));
+    Assertion.assertTrue(driver.getTitle().toLowerCase().contains(suggestionText));
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
   }
 
