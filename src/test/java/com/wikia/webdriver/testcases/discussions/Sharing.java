@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPa
 
 import org.testng.annotations.Test;
 
-@Test(groups="discussions")
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class Sharing extends NewTestTemplate {
 
@@ -43,6 +43,7 @@ public class Sharing extends NewTestTemplate {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
+  @RelatedIssue(issueID = "SOC-2567")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
@@ -64,6 +65,7 @@ public class Sharing extends NewTestTemplate {
    */
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost", enabled = false)
+  @RelatedIssue(issueID = "SOC-2567")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
@@ -71,12 +73,12 @@ public class Sharing extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
+  @RelatedIssue(issueID = "SOC-2567")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }
-
 
   /**
    * TESTING METHODS SECTION
@@ -87,6 +89,7 @@ public class Sharing extends NewTestTemplate {
     int postIndex = 0;
     postList.clickShareIcon(postIndex);
     String[] currentSocialNetworks = postList.getSocialNetworkIconClasses(postIndex);
+
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
@@ -101,6 +104,7 @@ public class Sharing extends NewTestTemplate {
   private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
     PostDetailsPage postDetails = new PostDetailsPage(driver).open();
     String[] currentSocialNetworks = postDetails.getSocialNetworkIconsClasses();
+
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];

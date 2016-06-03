@@ -41,7 +41,6 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")
-  @RelatedIssue(issueID = "XW-654")
   public void mercury_comments_containsAvatarUsernameTimestampAndContent() {
     init();
 
