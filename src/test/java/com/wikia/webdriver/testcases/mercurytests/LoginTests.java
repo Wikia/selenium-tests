@@ -35,7 +35,17 @@ public class LoginTests extends NewTestTemplate {
     @Test(groups = "MercuryLoginTest_001", enabled = false)
     @RelatedIssue(issueID = "SOC-2567")
     public void anonCanLogInAsRegularUser() {
-        new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getNavigation()
+            .open()
+            .clickOnSignInRegisterButton()
+            .logUserIn(
+                Configuration.getCredentials().userName10,
+                Configuration.getCredentials().password10)
+            .verifySomeExpectedBehaviour;
+
+
         new Navigate().toPage(MercurySubpages.MAP);
         String url = driver.getCurrentUrl();
         new Navigation(driver).clickOnSignInRegisterButton();
