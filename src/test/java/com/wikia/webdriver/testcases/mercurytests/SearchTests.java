@@ -30,7 +30,7 @@ public class SearchTests extends NewTestTemplate {
             .getTopBar()
             .openSearch()
             .typeInSearch(this.SEARCH_PHRASE)
-            .selectSearchSuggestion(0);
+            .clickSearchSuggestion(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
   }
@@ -40,7 +40,7 @@ public class SearchTests extends NewTestTemplate {
     String resultLink =
         new SearchResultsPage()
             .openForQuery(this.SEARCH_PHRASE)
-            .selectSearchResult(0);
+            .clickSearchResult(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(resultLink));
   }

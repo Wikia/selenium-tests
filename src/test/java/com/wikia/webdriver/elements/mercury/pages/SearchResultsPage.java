@@ -35,7 +35,7 @@ public class SearchResultsPage extends WikiBasePageObject {
     return this;
   }
 
-  public String selectSearchResult(int index) {
+  public String clickSearchResult(int index) {
     Loading loading = new Loading(driver);
     String clickedLink;
 

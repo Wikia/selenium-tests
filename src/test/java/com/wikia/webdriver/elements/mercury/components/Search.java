@@ -30,7 +30,7 @@ public class Search extends BasePageObject {
   private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
   private static final String focusedSearchInput = ".wikia-search--focused .text-field-input";
 
-  public String selectSearchSuggestion(int index) {
+  public String clickSearchSuggestion(int index) {
     Loading loading = new Loading(driver);
     String clickedLink;
 
@@ -65,7 +65,7 @@ public class Search extends BasePageObject {
     PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
     PageObjectLogging.logInfo("Select first search suggestion");
-    selectSearchSuggestion(0);
+    clickSearchSuggestion(0);
 
     return this;
   }
