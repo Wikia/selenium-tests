@@ -33,12 +33,10 @@ public class SignupTests extends NewTestTemplate {
     signUp(new CreateUser().create()).verifyAvatarAfterSignup();
   }
 
-
-  @Test(groups = "MercurySignupTest_002", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
-  public void MercurySignupTest_002_signupErrorEmailInUse() {
+  @Test(groups = "MercurySignupTest_002")
+  public void anonCanSignUpWithEmailAlreadyInUse() {
     init();
-    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();
+    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyAvatarAfterSignup();
   }
 
   @Test(groups = "MercurySignupTest_003")
