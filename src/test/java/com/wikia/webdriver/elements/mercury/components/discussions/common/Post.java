@@ -76,33 +76,41 @@ public class Post extends BasePageObject {
     return voteCountArea.getText();
   }
 
-  public void clickUpvoteButton(int postIndex) {
+  public Post clickUpvoteButton(int postIndex) {
     WebElement button = replyUpvoteButton.get(postIndex);
     wait.forElementClickable(button);
     button.click();
+
+    return this;
   }
 
-  public void waitForVoteCountToChange(int postIndex, String voteCount) {
+  public Post waitForVoteCountToChange(int postIndex, String voteCount) {
     WebElement voteArea = replyVoteCount.get(postIndex);
     wait.forTextNotInElement(voteArea, voteCount);
+
+    return this;
   }
 
   /**
    * Wait for the noticeable time lag between vote and vote value change to pass
    */
-  public void waitForVoteCountChangeTimeLagToPass() {
+  public Post waitForVoteCountChangeTimeLagToPass() {
     try {
       //This sleep was introduced because of noticeable lag between vote and vote value change
       Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+
+    return this;
   }
 
-  public void clickShareIcon(int postIndex) {
+  public Post clickShareIcon(int postIndex) {
     WebElement button = toggleShare.get(postIndex);
     wait.forElementClickable(button);
     button.click();
+
+    return this;
   }
 
   public String getPostDetailsVoteCount() {
@@ -110,13 +118,17 @@ public class Post extends BasePageObject {
     return upvoteArea.getText();
   }
 
-  public void waitForPostDetailsVoteCountToChange(String voteCount) {
+  public Post waitForPostDetailsVoteCountToChange(String voteCount) {
     wait.forTextNotInElement(upvoteArea, voteCount);
+
+    return this;
   }
 
-  public void clickPostDetailsUpvoteButton() {
+  public Post clickPostDetailsUpvoteButton() {
     wait.forElementClickable(upvoteButton);
     upvoteButton.click();
+
+    return this;
   }
 
   public boolean isUpvoteButtonVisible() {
