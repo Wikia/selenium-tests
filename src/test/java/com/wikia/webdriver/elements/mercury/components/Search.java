@@ -46,6 +46,14 @@ public class Search extends BasePageObject {
     return clickedLink;
   }
 
+  public String getSearchSuggestionText(int index) {
+    PageObjectLogging.logInfo("Select search suggestion no.: " + index);
+    WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
+    wait.forElementVisible(searchResult);
+
+    return searchResult.getText();
+  }
+
   public Search typeInSearch(String text) {
     PageObjectLogging.logInfo("Local nav is not present");
     wait.forElementClickable(searchInput);

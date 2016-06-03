@@ -57,15 +57,17 @@ public class SearchTests extends NewTestTemplate {
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
-    String suggestionLink =
+    Search search =
         new ArticlePage()
             .open("/d/")
             .getTopBar()
             .openSearch()
-            .typeInSearch(this.SEARCH_PHRASE)
-            .selectSearchSuggestion(0);
+            .typeInSearch(this.SEARCH_PHRASE);
 
-    Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
+    String suggestionText = search.getSearchSuggestionText(0).replaceAll(" ", "_");
+    search.selectSearchSuggestion(0);
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(suggestionText));
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
   }
 
