@@ -26,7 +26,7 @@ public class Post extends BasePageObject {
   @FindBy(css = ".icon.upvote")
   private List<WebElement> replyUpvoteButton;
 
-  @FindBy(css = ".upvote-area")
+  @FindBy(css = ".post-counters svg.upvote")
   private List<WebElement> replyVoteCount;
 
   @FindBy(css = ".toggle-share")
@@ -35,7 +35,7 @@ public class Post extends BasePageObject {
   @FindBy(css = ".share-feature")
   private List<WebElement> shareFeature;
 
-  @FindBy(css = "a.upvote-area")
+  @FindBy(css = "li.upvote-area")
   private WebElement upvoteArea;
 
   @FindBy(css = "svg.upvote")
