@@ -38,8 +38,8 @@ public class MainPageTests extends NewTestTemplate {
     CURATED_CONTENT("Curated Content", ".curated-content"),
     IN_CONTENT("In Content AD", ".mobile-in-content"),
     TRENDING_ARTICLES("Trending Articles", ".trending-articles"),
-    TRENDING_VIDEOS("Trending Videos", ".trending-videos"),
-    PREFOOTER("Prefooter AD", ".mobile-prefooter");
+    PREFOOTER("Prefooter AD", ".mobile-prefooter"),
+    TRENDING_VIDEOS("Trending Videos", ".trending-videos");
 
     private String name;
     private String className;
@@ -131,9 +131,9 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isTrendingVideosVisible();
+    result = cc.isTrendingArticlesVisible();
     PageObjectLogging.log(
-        PageElements.TRENDING_VIDEOS.name,
+        PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         result
@@ -147,14 +147,18 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
+    result = cc.isTrendingVideosVisible();
+    PageObjectLogging.log(
+        PageElements.TRENDING_VIDEOS.name,
+        MercuryMessages.VISIBLE_MSG,
+        MercuryMessages.INVISIBLE_MSG,
+        result
+    );
+
     int lastPosition = 0;
     String lastElement = "top";
 
     for (PageElements element : PageElements.values()) {
-      if (PageElements.TRENDING_ARTICLES.name.equals(element.name)) {
-        continue;
-      }
-
       int newPosition = cc.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
@@ -289,17 +293,17 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isTrendingVideosVisible();
+    result = !cc.isMobilePrefooterVisible();
     PageObjectLogging.log(
-        PageElements.TRENDING_VIDEOS.name,
+        PageElements.PREFOOTER.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         result
     );
 
-    result = cc.isMobilePrefooterVisible();
+    result = cc.isTrendingVideosVisible();
     PageObjectLogging.log(
-        PageElements.PREFOOTER.name,
+        PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG,
         result
@@ -433,17 +437,17 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isTrendingVideosVisible();
+    result = !cc.isMobilePrefooterVisible();
     PageObjectLogging.log(
-        PageElements.TRENDING_VIDEOS.name,
+        PageElements.PREFOOTER.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
         result
     );
 
-    result = !cc.isMobilePrefooterVisible();
+    result = !cc.isTrendingVideosVisible();
     PageObjectLogging.log(
-        PageElements.PREFOOTER.name,
+        PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
         MercuryMessages.VISIBLE_MSG,
         result
