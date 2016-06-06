@@ -59,7 +59,6 @@ public class Reply extends BasePageObject {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
       PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
-      e.printStackTrace();
     }
   }
 }
