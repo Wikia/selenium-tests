@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.login.JoinPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,12 +63,12 @@ public class Navigation {
     PageFactory.initElements(driver, this);
   }
 
-  public Navigation clickOnSignInRegisterButton() {
+  public JoinPage clickOnSignInRegisterButton() {
     PageObjectLogging.logInfo("Open login page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 
-    return this;
+    return new JoinPage();
   }
 
   public Navigation clickBackButton() {

@@ -7,6 +7,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
@@ -23,6 +24,9 @@ public class ArticlePage extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final Navigation navigation = new Navigation(driver);
+
+  @Getter(lazy = true)
+  private final TopBar topbar = new TopBar(driver);
 
   @FindBy(css = "article a[href=\"/wiki/Category:Category_page_test"
                 + "_-_Category_with_description_and_no_members\"]")

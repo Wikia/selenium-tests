@@ -20,6 +20,7 @@ import com.wikia.webdriver.elements.mercury.old.LoginPageObject;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
 
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import org.apache.xpath.operations.String;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -29,33 +30,22 @@ import org.testng.annotations.Test;
 )
 public class LoginTests extends NewTestTemplate {
 
-    private static final String ERROR_MESSAGE =
-        "We don't recognize these credentials. Try again or register a new account.";
-
     @Test(groups = "MercuryLoginTest_001")
-    @RelatedIssue(issueID = "SOC-2567")
     public void anonCanLogInAsRegularUser() {
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
-            .getNavigation()
-            .open()
+            .getTopbar()
+            .openNavigation()
             .clickOnSignInRegisterButton()
-            .logUserIn(
-                Configuration.getCredentials().userName10,
-                Configuration.getCredentials().password10)
-            .verifySomeExpectedBehaviour;
-
-
-        new Navigate().toPage(MercurySubpages.MAP);
-        String url = driver.getCurrentUrl();
-        new Navigation(driver).clickOnSignInRegisterButton();
-        new LoginPageObject(driver).clickOnSignInButton().logUserIn(
-            Configuration.getCredentials().userName10,
-            Configuration.getCredentials().password10);
-
-        new ArticlePageObject(driver).waitForFooterToBeVisible();
-        boolean result = url.equals(driver.getCurrentUrl());
-        PageObjectLogging.log("url", "was redirected correctly", result);
-
-//    Assertion.assertTrue(nav.isUserLoggedIn(Configuration.getCredentials().userName10));
+            .getJoinButtons()
+            .clickSignInButton()
+            .getJoinButtons()
+            .typeUsername(Configuration.getCredentials().userName10)
+            .typePassword(Configuration.getCredentials().password10)
+            .clickSignInButton()
+            .getTopbar()
+            .openNavigation()
+            .isUserAvatarVisible()
+        ;
     }
+}
