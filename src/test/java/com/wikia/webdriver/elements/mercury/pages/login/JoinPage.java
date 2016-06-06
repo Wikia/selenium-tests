@@ -13,5 +13,4 @@ public class JoinPage extends WikiBasePageObject {
     @Getter(lazy = true)
     private final JoinButtons joinButtons = new JoinButtons(driver);
 
-
 }

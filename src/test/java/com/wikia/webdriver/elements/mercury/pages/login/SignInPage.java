@@ -12,4 +12,5 @@ public class SignInPage extends WikiBasePageObject{
 
     @Getter(lazy = true)
     private final LoginArea joinButtons = new LoginArea(driver);
+
 }

@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests.old;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
@@ -48,4 +48,5 @@ public class LoginTests extends NewTestTemplate {
             .isUserAvatarVisible()
         ;
     }
+
 }
