@@ -1,57 +1,49 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class Search extends BasePageObject {
 
-  @FindBy(css = ".wikia-search__container input")
+  @FindBy(css = ".wikia-search__container input.side-search__input")
   private WebElement searchInput;
 
   @FindBy(css = ".wikia-search__clear")
   private WebElement clearSearchButton;
 
-  private String searchResultClass = ".wikia-search__results li.mw-content a";
-  private By loadingSearchResultsIndicator = By.cssSelector(".wikia-search__results li.loading");
+  @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
+  private WebElement inputFieldSearchIcon;
 
-  private Loading loading;
+  public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
+  public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
-  public Search() {
-    this.loading = new Loading(driver);
-  }
+  private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
+  private static final String focusedSearchInput = ".wikia-search--focused .text-field-input";
 
-  public Search seeNoSearchResults() {
-    PageObjectLogging.logInfo("Loading search results indicator is present");
-    wait.forElementPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("Loading search results indicator is not present");
-    wait.forElementNotPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("No search results are present");
-    wait.forElementNotPresent(By.cssSelector(searchResultClass));
-
-    return this;
-  }
-
-  public Search selectSearchSuggestion(int index) {
-    String oldUrl = driver.getCurrentUrl();
+  public String clickSearchSuggestion(int index) {
+    Loading loading = new Loading(driver);
+    String clickedLink;
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
-    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
+
+    WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
+    clickedLink = searchResult.getAttribute("href");
+
     searchResult.click();
     loading.handleAsyncPageReload();
 
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search suggestion failed");
-    PageObjectLogging.logInfo("Successfully navigated to selected search suggestion");
-
-    return this;
+    return clickedLink;
   }
 
   public Search typeInSearch(String text) {
@@ -73,7 +65,7 @@ public class Search extends BasePageObject {
     PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
     PageObjectLogging.logInfo("Select first search suggestion");
-    selectSearchSuggestion(0);
+    clickSearchSuggestion(0);
 
     return this;
   }
@@ -86,4 +78,70 @@ public class Search extends BasePageObject {
     return this;
   }
 
+  public SearchResultsPage clickEnterAndNavigateToSearchResults() {
+    new Actions(driver).sendKeys(Keys.ENTER).perform();
+
+    return new SearchResultsPage();
+  }
+
+  public boolean isInputFieldSearchIconVisible() {
+    return isElementVisible(inputFieldSearchIcon);
+  }
+
+  public boolean isClearSearchButtonVisible() {
+    return isElementVisible(clearSearchButton);
+  }
+
+  public boolean isSearchInputFieldVisible() {
+    return isElementVisible(searchInput);
+  }
+
+  public boolean isSearchInputFieldEditable() {
+    try {
+      wait.forElementClickable(searchInput, 0).click();
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    } catch (WebDriverException e) {
+      // @TODO: this would be best pushed to Selenium upstream to actually throw a more specific
+      // exception
+      if (e.getMessage().contains("Element is not clickable at point")) {
+        return false;
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  public boolean areSearchSuggestionsDisplayed() {
+    try {
+      wait.forElementClickable(By.cssSelector(searchSuggestionClass),
+                               SUGGESTIONS_TIMEOUT_IN_SECONDS);
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
+  public boolean isInputFieldFocused() {
+    try {
+      wait.forElementPresent(By.cssSelector(focusedSearchInput), FOCUS_TIMEOUT_IN_SECONDS);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
+  private boolean isElementVisible(WebElement element) {
+    try {
+      wait.forElementVisible(element);
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
 }

@@ -1,16 +1,18 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.NoSuchElementException;
 
-public class TopBar extends WikiBasePageObject {
+public class TopBar extends BasePageObject {
 
   @FindBy(css = ".site-head")
   private WebElement navBar;
@@ -24,6 +26,9 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".site-head-icon-search")
   private WebElement searchIcon;
 
+  @FindBy(css = ".site-head-icon-search > a.icon-button")
+  private WebElement searchIconClickableLink;
+
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButton;
 
@@ -35,11 +40,7 @@ public class TopBar extends WikiBasePageObject {
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
-  private Wait wait;
-
   public TopBar(WebDriver driver) {
-    this.wait = new Wait(driver);
-
     PageFactory.initElements(driver, this);
   }
 
@@ -111,6 +112,20 @@ public class TopBar extends WikiBasePageObject {
     try {
       return searchIcon.isDisplayed();
     } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isSearchIconClickable() {
+    try {
+      searchIconClickableLink.isDisplayed();
+      wait.forElementClickable(searchIconClickableLink, 0);
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
