@@ -85,7 +85,7 @@ public class UpvotingTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void regularUserOnMobileCanUpvote() {
+  public void registeredUserOnMobileCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
@@ -103,7 +103,7 @@ public class UpvotingTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void regularUserOnDesktopCanUpvote() {
+  public void registeredUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
