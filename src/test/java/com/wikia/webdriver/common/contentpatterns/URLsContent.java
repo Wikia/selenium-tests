@@ -136,6 +136,9 @@ public class URLsContent {
   // Recent wiki activity on mobile
   public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
 
+  // Search results page on mobile, replace %query% with searched string
+  public static final String MOBILE_SEARCH_RESULTS_PAGE = "search?query=%query%";
+
   private URLsContent() {
   }
 }
