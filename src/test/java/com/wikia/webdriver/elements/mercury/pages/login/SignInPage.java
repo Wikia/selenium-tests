@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.pages.login;
 
-import com.wikia.webdriver.elements.mercury.components.login.JoinButtons;
 import com.wikia.webdriver.elements.mercury.components.login.LoginArea;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
