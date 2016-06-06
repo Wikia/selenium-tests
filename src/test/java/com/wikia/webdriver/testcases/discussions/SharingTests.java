@@ -8,13 +8,14 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-public class Sharing extends NewTestTemplate {
+public class SharingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -85,14 +86,15 @@ public class Sharing extends NewTestTemplate {
    */
 
   private void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
-    PostsListPage postList = new PostsListPage(driver).open();
+    Post post = new PostsListPage().open().getPost();
     int postIndex = 0;
-    postList.clickShareIcon(postIndex);
-    String[] currentSocialNetworks = postList.getSocialNetworkIconClasses(postIndex);
+    post.clickShareIcon(postIndex);
+    String[] currentSocialNetworks = post.getSocialNetworkIconClasses(postIndex);
 
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
+
       Assertion.assertEquals(
           currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
           "Expected network not found on its position. Note that the order of social buttons "
@@ -102,12 +104,13 @@ public class Sharing extends NewTestTemplate {
   }
 
   private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
-    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
-    String[] currentSocialNetworks = postDetails.getSocialNetworkIconsClasses();
+    PostDetailsPage postDetails = new PostDetailsPage().open();
+    String[] currentSocialNetworks = postDetails.getPost().getSocialNetworkIconsClasses();
 
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
+
       Assertion.assertEquals(
           currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
           "Expected network not found on its position. Note that the order of social buttons "
