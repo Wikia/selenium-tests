@@ -8,13 +8,15 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-public class Layout extends NewTestTemplate {
+public class LayoutTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -68,7 +70,7 @@ public class Layout extends NewTestTemplate {
   public void anonUserOnDesktopCanViewMorePosts() {
     userCanViewMorePosts();
   }
-  
+
   /**
    * LOGGED IN USERS ON MOBILE SECTION
    */
@@ -110,20 +112,23 @@ public class Layout extends NewTestTemplate {
    */
 
   private void postDetailsListLoads() {
-    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
-    Assertion.assertFalse(postDetails.isPostDetailsListEmpty());
+    Reply reply = new PostDetailsPage().open().getReply();
+
+    Assertion.assertFalse(reply.isPostDetailsListEmpty());
   }
 
   private void postsListLoads() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    Assertion.assertFalse(postsList.isPostListEmpty());
+    Post post = new PostsListPage().open().getPost();
+
+    Assertion.assertFalse(post.isPostListEmpty());
   }
 
   private void userCanViewMorePosts() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    int startingListLength = postsList.getPostsListLength();
-    postsList.scrollToBottom(driver);
+    Post post = new PostsListPage().open().getPost();
+    int startingListLength = post.getPostsListLength();
+    post.scrollToBottom(driver);
     new Loading(driver).handleAsyncPageReload();
-    Assertion.assertTrue(startingListLength < postsList.getPostsListLength());
+
+    Assertion.assertTrue(startingListLength < post.getPostsListLength());
   }
 }
