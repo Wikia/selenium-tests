@@ -32,7 +32,7 @@ public class LoginTests extends NewTestTemplate {
     private static final String ERROR_MESSAGE =
         "We don't recognize these credentials. Try again or register a new account.";
 
-    @Test(groups = "MercuryLoginTest_001", enabled = false)
+    @Test(groups = "MercuryLoginTest_001")
     @RelatedIssue(issueID = "SOC-2567")
     public void anonCanLogInAsRegularUser() {
         new ArticlePage()

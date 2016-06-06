@@ -78,6 +78,10 @@ public class Navigation {
     return this;
   }
 
+  public Navigation open() {
+    return this;
+  }
+
   public Navigation closeSubMenu() {
     PageObjectLogging.logInfo("Close sub-menu");
     wait.forElementClickable(backButton);
