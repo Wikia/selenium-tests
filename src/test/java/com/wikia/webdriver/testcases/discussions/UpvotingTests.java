@@ -82,11 +82,10 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote", enabled = false)
-  @RelatedIssue(issueID = "SOC-2596")
+  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanUpvote() {
+  public void registeredUserOnMobileCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
@@ -101,11 +100,10 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote", enabled = false)
-  @RelatedIssue(issueID = "SOC-2596")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanUpvote() {
+  @InBrowser(browserSize = DESKTOP_RESOLUTION, browser = Browser.FIREFOX)
+  public void registeredUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
@@ -115,18 +113,18 @@ public class UpvotingTests extends NewTestTemplate {
 
   private void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
     Post post = new PostsListPage().open().getPost();
-    int replyIndex = 0;
-    post.isUpvoteButtonVisible(replyIndex);
-    String firstVoteCount = post.getVoteCount(replyIndex);
-    post.clickUpvoteButton(replyIndex);
-    post.waitForVoteCountToChange(replyIndex, firstVoteCount);
-    String secondVoteCount = post.getVoteCount(replyIndex);
+    int postIndex = 0;
+    post.isUpvoteButtonVisible(postIndex);
+    String firstVoteCount = post.getVoteCount(postIndex);
+    post.clickUpvoteButton(postIndex);
+    post.waitForVoteCountToChange(postIndex, firstVoteCount);
+    String secondVoteCount = post.getVoteCount(postIndex);
 
     Assertion.assertNotEquals(firstVoteCount, secondVoteCount);
 
-    post.clickUpvoteButton(replyIndex);
-    post.waitForVoteCountToChange(replyIndex, secondVoteCount);
-    String thirdVoteCount = post.getVoteCount(replyIndex);
+    post.clickUpvoteButton(postIndex);
+    post.waitForVoteCountToChange(postIndex, secondVoteCount);
+    String thirdVoteCount = post.getVoteCount(postIndex);
 
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }

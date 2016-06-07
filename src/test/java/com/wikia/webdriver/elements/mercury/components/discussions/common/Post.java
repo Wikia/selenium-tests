@@ -23,11 +23,11 @@ public class Post extends BasePageObject {
   @FindBy(css = ".avatar-username")
   private WebElement avatarUsername;
 
-  @FindBy(css = ".icon.upvote")
-  private List<WebElement> replyUpvoteButton;
+  @FindBy(css = "li.upvote")
+  private List<WebElement> postUpvoteButton;
 
-  @FindBy(css = ".post-counters svg.upvote")
-  private List<WebElement> replyVoteCount;
+  @FindBy(css = ".row.post-counters")
+  private List<WebElement> postVoteCount;
 
   @FindBy(css = ".toggle-share")
   private List<WebElement> toggleShare;
@@ -65,19 +65,19 @@ public class Post extends BasePageObject {
   }
 
   public boolean isUpvoteButtonVisible(int index) {
-    WebElement button = replyUpvoteButton.get(index);
+    WebElement button = postUpvoteButton.get(index);
     wait.forElementVisible(button);
     return button.isDisplayed();
   }
 
   public String getVoteCount(int index) {
-    WebElement voteCountArea = replyVoteCount.get(index);
+    WebElement voteCountArea = postVoteCount.get(index);
     wait.forElementVisible(voteCountArea);
     return voteCountArea.getText();
   }
 
   public Post clickUpvoteButton(int postIndex) {
-    WebElement button = replyUpvoteButton.get(postIndex);
+    WebElement button = postUpvoteButton.get(postIndex);
     wait.forElementClickable(button);
     button.click();
 
@@ -85,7 +85,7 @@ public class Post extends BasePageObject {
   }
 
   public Post waitForVoteCountToChange(int postIndex, String voteCount) {
-    WebElement voteArea = replyVoteCount.get(postIndex);
+    WebElement voteArea = postVoteCount.get(postIndex);
     wait.forTextNotInElement(voteArea, voteCount);
 
     return this;
