@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 public class LoginTests extends NewTestTemplate {
 
     @Test(groups = "MercuryLoginTest_001")
-    public void anonCanLogInAsRegularUser() {
+    public void anonCanLogInAsRegisteredUser() {
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
             .getTopbar()
