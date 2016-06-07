@@ -160,6 +160,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.ErrorPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.LoginTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.RecentWikiActivityTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>

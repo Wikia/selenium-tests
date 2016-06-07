@@ -25,16 +25,13 @@ public class LoginTests extends NewTestTemplate {
             .getTopbar()
             .openNavigation()
             .clickOnSignInRegisterButton()
-            .getJoinButtons()
             .clickSignInButton()
-            .getJoinButtons()
+            .getLoginArea()
             .typeUsername(Configuration.getCredentials().userName10)
             .typePassword(Configuration.getCredentials().password10)
             .clickSignInButton()
             .getTopbar()
             .openNavigation()
-            .isUserAvatarVisible()
-        ;
+            .isUserAvatarVisible();
     }
-
 }

@@ -10,6 +10,6 @@ import lombok.Getter;
 public class SignInPage extends WikiBasePageObject{
 
     @Getter(lazy = true)
-    private final LoginArea joinButtons = new LoginArea(driver);
-
+    private final LoginArea loginArea = new LoginArea(driver);
 }
+

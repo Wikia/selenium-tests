@@ -48,5 +48,4 @@ public class LoginArea {
 
         return new ArticlePage();
     }
-
 }
