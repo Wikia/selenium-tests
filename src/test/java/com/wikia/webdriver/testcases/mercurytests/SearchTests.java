@@ -32,7 +32,7 @@ public class SearchTests extends NewTestTemplate {
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar()
             .openSearch()
-            .typeInSearch(this.SEARCH_PHRASE)
+            .typeInSearch(SEARCH_PHRASE)
             .selectSearchSuggestion(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
@@ -46,7 +46,7 @@ public class SearchTests extends NewTestTemplate {
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar()
             .openSearch()
-            .typeInSearch(this.SEARCH_PHRASE)
+            .typeInSearch(SEARCH_PHRASE)
             .selectSearchSuggestion(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
@@ -62,7 +62,7 @@ public class SearchTests extends NewTestTemplate {
             .open("/d/")
             .getTopBar()
             .openSearch()
-            .typeInSearch(this.SEARCH_PHRASE)
+            .typeInSearch(SEARCH_PHRASE)
             .selectSearchSuggestion(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
@@ -74,7 +74,7 @@ public class SearchTests extends NewTestTemplate {
   public void mercury_search_navigateToPageUsingSearchResults() {
     String resultLink =
         new SearchResultsPage()
-            .openForQuery(this.SEARCH_PHRASE)
+            .openForQuery(SEARCH_PHRASE)
             .selectSearchResult(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(resultLink));
@@ -87,7 +87,7 @@ public class SearchTests extends NewTestTemplate {
         .open(MercurySubpages.MAIN_PAGE)
         .getTopBar()
         .openSearch()
-        .typeInSearch(this.SEARCH_PHRASE)
+        .typeInSearch(SEARCH_PHRASE)
         .clickClearSearchButton()
         .getSearchPhrase();
 
@@ -116,7 +116,7 @@ public class SearchTests extends NewTestTemplate {
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar()
             .openSearch()
-            .typeInSearch(this.SEARCH_PHRASE)
+            .typeInSearch(SEARCH_PHRASE)
             .clickEnterAndNavigateToSearchResults();
 
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
