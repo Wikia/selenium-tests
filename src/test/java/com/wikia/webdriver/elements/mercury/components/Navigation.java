@@ -49,6 +49,9 @@ public class Navigation {
   @FindBy(css = ".wikia-nav--logout")
   private WebElement logoutLink;
 
+  @FindBy(css = ".nav-menu__header")
+  private WebElement exploreWikiHeader;
+
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
   private Wait wait;
@@ -74,6 +77,14 @@ public class Navigation {
     PageObjectLogging.logInfo("Go back to previous navigation level");
     wait.forElementClickable(backButton);
     backButton.click();
+
+    return this;
+  }
+
+  public Navigation clickExploreWikiHeader() {
+    PageObjectLogging.logInfo("Click 'Explore Wiki' header");
+    wait.forElementClickable(exploreWikiHeader);
+    exploreWikiHeader.click();
 
     return this;
   }
@@ -167,6 +178,15 @@ public class Navigation {
   public boolean isLogoutLinkVisible() {
     try {
       return logoutLink.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isExploreWikiHeaderVisible() {
+    try {
+      return exploreWikiHeader.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

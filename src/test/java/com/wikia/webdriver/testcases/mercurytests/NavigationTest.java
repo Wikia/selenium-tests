@@ -12,6 +12,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -102,5 +104,16 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertFalse(navigation.isUserProfileLinkVisible());
     Assertion.assertFalse(navigation.isLogoutLinkVisible());
     Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
+  }
+
+  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
+  public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
+    new ArticlePage()
+        .open(MercurySubpages.INFOBOX_1)
+        .getTopBar()
+        .openNavigation()
+        .clickExploreWikiHeader();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 }
