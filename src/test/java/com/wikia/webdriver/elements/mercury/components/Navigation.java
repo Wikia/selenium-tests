@@ -82,9 +82,12 @@ public class Navigation {
   }
 
   public Navigation clickExploreWikiHeader() {
+    Loading loading = new Loading(driver);
     PageObjectLogging.logInfo("Click 'Explore Wiki' header");
     wait.forElementClickable(exploreWikiHeader);
+
     exploreWikiHeader.click();
+    loading.handleAsyncPageReload();
 
     return this;
   }

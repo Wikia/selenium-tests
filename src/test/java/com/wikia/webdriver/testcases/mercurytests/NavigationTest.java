@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
@@ -20,33 +19,35 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class NavigationTest extends NewTestTemplate {
 
-  private TopBar topBar;
-  private Navigation navigation;
-
-  private void init() {
-    this.topBar = new TopBar(driver);
-    this.navigation = new Navigation(driver);
-
-    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
-  }
-
   @Test(groups = "mercury_navigation_openAndCloseNavigationAndItsSubMenu")
   public void mercury_navigation_openAndCloseNavigationAndItsSubMenu() {
-    init();
+    TopBar topBar =
+        new ArticlePage()
+          .open(MercurySubpages.MAIN_PAGE)
+          .getTopBar();
 
-    topBar.openNavigation();
-    navigation.openSubMenu(1);
-    navigation.closeSubMenu();
+    topBar
+        .openNavigation()
+        .openSubMenu(1)
+        .closeSubMenu();
+
     topBar.clickCloseButton();
+
+    Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
   @Test(groups = "mercury_navigation_resetNavigationState")
   public void mercury_navigation_resetNavigationState() {
-    init();
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
 
-    topBar.openNavigation();
+    Navigation navigation = topBar.openNavigation();
+
     Assertion.assertTrue(navigation.isMainHeaderVisible());
     navigation.openSubMenu(1);
+
     Assertion.assertTrue(navigation.isBackButtonVisible());
     topBar.clickCloseButton();
 
@@ -56,39 +57,53 @@ public class NavigationTest extends NewTestTemplate {
 
   @Test(groups = "mercury_navigation_backButton")
   public void mercury_navigation_backButton() {
-    init();
+    Navigation navigation =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openNavigation();
 
-    topBar.openNavigation();
     Assertion.assertTrue(navigation.isMainHeaderVisible());
     navigation.openSubMenu(1);
+
     Assertion.assertTrue(navigation.isBackButtonVisible());
     navigation.clickBackButton();
+
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
   @Test(groups = "mercury_navigation_navigationOnEnglishWiki")
   public void mercury_navigation_navigationOnEnglishWiki() {
-    init();
+    Navigation navigation =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openNavigation();
 
-    topBar.openNavigation();
     Assertion.assertTrue(navigation.areHubLinksVisible());
   }
 
   @Execute(onWikia = MercuryWikis.DE_WIKI)
   @Test(groups = "mercury_navigation_navigationOnNonEnglishWiki")
   public void mercury_navigation_navigationOnNonEnglishWiki() {
-    init();
+    Navigation navigation =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openNavigation();
 
-    topBar.openNavigation();
     Assertion.assertFalse(navigation.areHubLinksVisible());
   }
 
   @Execute(asUser = User.USER)
   @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
-    init();
+    Navigation navigation =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openNavigation();
 
-    topBar.openNavigation();
     Assertion.assertTrue(navigation.isUserAvatarVisible());
     Assertion.assertTrue(navigation.isUserProfileLinkVisible());
     Assertion.assertTrue(navigation.isLogoutLinkVisible());
@@ -97,9 +112,12 @@ public class NavigationTest extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @Test(groups = "mercury_navigation_navigationElementsAnonymousUser")
   public void mercury_navigation_navigationElementsAnonymousUser() {
-    init();
+    Navigation navigation =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar()
+            .openNavigation();
 
-    topBar.openNavigation();
     Assertion.assertTrue(navigation.isUserAvatarVisible());
     Assertion.assertFalse(navigation.isUserProfileLinkVisible());
     Assertion.assertFalse(navigation.isLogoutLinkVisible());
