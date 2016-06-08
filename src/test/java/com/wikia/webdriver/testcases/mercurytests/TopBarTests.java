@@ -41,7 +41,7 @@ public class TopBarTests extends NewTestTemplate {
     TopBar topBar =
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();;
+            .getTopBar();
 
     topBar.openSearch();
     Assertion.assertTrue(topBar.isCloseIconVisible());
