@@ -100,7 +100,6 @@ public class TopBarTests extends NewTestTemplate {
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar();
 
-    Assertion.assertTrue(topBar.isLogoVisible());
     topBar.clickWikiaLogo();
 
     Assertion.assertTrue(topBar.getCurrentUrl().contains("www.wikia.com/fandom"));
