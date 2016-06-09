@@ -17,7 +17,7 @@ public class Post extends BasePageObject {
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  @FindBy(css = ".user-avatar")
+  @FindBy(css = ".post-detail figure.avatar")
   private WebElement avatarImage;
 
   @FindBy(css = ".avatar-username")

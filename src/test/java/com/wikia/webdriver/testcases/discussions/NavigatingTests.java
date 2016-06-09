@@ -44,8 +44,7 @@ public class NavigatingTests extends NewTestTemplate {
     backToWiki();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
