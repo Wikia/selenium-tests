@@ -32,7 +32,7 @@ public class SearchTests extends NewTestTemplate {
             .typeInSearch(this.SEARCH_PHRASE)
             .clickSearchSuggestion(0);
 
-    Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
+    Assertion.assertEquals(driver.getCurrentUrl(), suggestionLink);
   }
 
   @Test(groups = "mercury_search_navigateToPageUsingSearchResults")
@@ -42,7 +42,7 @@ public class SearchTests extends NewTestTemplate {
             .openForQuery(this.SEARCH_PHRASE)
             .clickSearchResult(0);
 
-    Assertion.assertTrue(driver.getCurrentUrl().equals(resultLink));
+    Assertion.assertEquals(driver.getCurrentUrl(), resultLink);
   }
 
   @Test(groups = "mercury_search_cancelSearchPhrase")
