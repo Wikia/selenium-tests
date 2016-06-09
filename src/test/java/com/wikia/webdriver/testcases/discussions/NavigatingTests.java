@@ -46,7 +46,7 @@ public class NavigatingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.MEDIAWIKI_119)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
     clickAvatarLoadsUserPage();
   }
