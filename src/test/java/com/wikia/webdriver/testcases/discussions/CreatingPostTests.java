@@ -1,14 +1,16 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
-import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
@@ -25,10 +27,10 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = MOBILE_RESOLUTION)
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
 
   public void anonUserOnMobileCanNotWriteNewPost() {
-    userMustBeLoggedInToUsePostCreator();
+    userOnMobileMustBeLoggedInToUsePostCreator();
   }
 
   /**
@@ -38,14 +40,16 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanNotWriteNewPost() {
-    ;
-  }
-/**
- * TESTING METHODS SECTION
- */
 
-  private void userMustBeLoggedInToUsePostCreator() {
+  public void anonUserOnDesktopCanNotWriteNewPost() {
+    userOnDesktopMustBeLoggedInToUsePostCreator();
+  }
+
+  /**
+   * TESTING METHODS SECTION
+   */
+
+  private void userOnMobileMustBeLoggedInToUsePostCreator() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
 
     Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
@@ -55,10 +59,22 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
 
     postsCreator.clickSignInButtonInSignInDialog();
-    JoinPageObject joinPageObject = new JoinPageObject(driver);
-    String currentMessage = joinPageObject.get().getJoinTodayText();
-    String expectedMessage = joinPageObject.get().getJoinTodayText();
-    Assertion.assertEquals(currentMessage, expectedMessage);
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
+  }
+
+  private void userOnDesktopMustBeLoggedInToUsePostCreator() {
+    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
+
+    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+
+    postsCreator.clickOkButtonInSignInDialog();
+
+    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+
+    postsCreator.clickSignInButtonInSignInDialog();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
 
 

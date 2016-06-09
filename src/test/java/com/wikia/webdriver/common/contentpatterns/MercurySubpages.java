@@ -71,6 +71,11 @@ public class MercurySubpages {
   // Articles on mlp.wikia.com
   public static final String MLP_MAIN_PAGE = "/wiki/My_Little_Pony_Friendship_is_Magic_Wiki";
 
+  // Login and SignUp pages
+  public static final String JOIN_PAGE = "/join";
+  public static final String REGISTER_PAGE = "/register";
+
   private MercurySubpages() {
   }
+
 }

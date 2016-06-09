@@ -5,15 +5,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 
 public class PostsCreatorDesktop extends BasePageObject {
 
-  @FindBy (css = ".modal-dialog")
+  @FindBy (css = ".editor-container.pinned-top .editor-wrapper")
   private WebElement postCreator;
 
-  @FindBy (css = "#ember1084 .modal-dialog")
+  @FindBy (css = ".modal-dialog-wrapper:not(.discussion-editor-dialog) .modal-dialog")
   private WebElement dialogSignIn;
 
   @FindBy (css = ".modal-dialog-content + footer > :first-child")
@@ -40,9 +38,5 @@ public class PostsCreatorDesktop extends BasePageObject {
     signInButtonInSignInDialog.click();
     return this;
   }
-
-
-
-
 
 }
