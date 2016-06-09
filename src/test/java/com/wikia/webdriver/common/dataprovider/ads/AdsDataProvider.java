@@ -272,13 +272,14 @@ public class AdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/DfpParams",
-            "wka.life/_adtest//article",
+            null,
+            "wka.life/_project43//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
-                "\"s1\":\"_adtest\"",
+                "\"s1\":\"_project43\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -292,6 +293,18 @@ public class AdsDataProvider {
                 "\"pos\":\"TOP_LEADERBOARD\"",
                 "\"src\":\"gpt\""
             )
+        },
+        {
+            "project43",
+            "SyntheticTests/RubiconFastlane",
+            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "wka.life/_project43//article",
+            "TOP_LEADERBOARD",
+            Collections.emptyList(),
+            Arrays.asList(
+                "\"rpfl_7450\":[\"2_tier2000",
+                "\"57_tier2000"
+            )
         }
     };
   }
@@ -302,7 +315,6 @@ public class AdsDataProvider {
         {
             "yugioh",
             "Dark_Magician",
-            null,
             "wka.gaming/_yugioh//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
@@ -337,7 +349,6 @@ public class AdsDataProvider {
         {
             "fallout",
             "Fallout",
-            null,
             "wka.gaming/_fallout//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
@@ -373,7 +384,6 @@ public class AdsDataProvider {
         {
             "runescape",
             "Grew",
-            null,
             "wka.gaming/_runescape//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
@@ -407,7 +417,6 @@ public class AdsDataProvider {
         {
             "avatar",
             "Avatar_Wiki",
-            null,
             "wka.life/_avatar//home",
             "HOME_TOP_LEADERBOARD",
             Arrays.asList(
@@ -441,7 +450,6 @@ public class AdsDataProvider {
         {
             "civilization",
             "Category:Browse",
-            null,
             "wka.gaming/_civilization//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
@@ -473,7 +481,6 @@ public class AdsDataProvider {
         {
             "starcraft",
             "StarCraft_Wiki",
-            null,
             "wka.gaming/_starcraft//home",
             "HOME_TOP_LEADERBOARD",
             Arrays.asList(
@@ -508,7 +515,6 @@ public class AdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            null,
             "wka.ent/_overlordmaruyama//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
@@ -531,18 +537,6 @@ public class AdsDataProvider {
                 "\"loc\":\"top\"",
                 "\"pos\":\"TOP_RIGHT_BOXAD\"",
                 "\"src\":\"gpt\""
-            )
-        },
-        {
-            "adtest",
-            "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_adtest//article",
-            "TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000",
-                "\"57_tier2000"
             )
         }
     };

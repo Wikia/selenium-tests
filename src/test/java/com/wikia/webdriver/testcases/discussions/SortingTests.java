@@ -9,12 +9,15 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-public class Sorting extends NewTestTemplate {
+public class SortingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -69,26 +72,29 @@ public class Sorting extends NewTestTemplate {
    */
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    Assertion.assertTrue(postsList.clickSortButtonOnMobile().isSortListVisibleMobile());
-    postsList.clickLatestLinkOnMobile();
-    postsList.clickApplyButton();
-    new Loading(driver).handleAsyncPageReload();
+    FiltersPopOver filtersPopOver = new PostsListPage().open().getFiltersPopOver();
+    DiscussionsHeader discussionsHeader = new PostsListPage().open().getDiscussionsHeader();
+    discussionsHeader.clickSortButtonOnMobile();
 
-    postsList.clickSortButtonOnMobile();
-    postsList.clickTrendingOptionInSortMenu();
-    postsList.clickApplyButton();
+    Assertion.assertTrue(filtersPopOver.isSortListVisibleMobile());
+
+    filtersPopOver.clickLatestLinkOnMobile();
+    filtersPopOver.clickApplyButton();
+    new Loading(driver).handleAsyncPageReload();
+    discussionsHeader.clickSortButtonOnMobile();
+    filtersPopOver.clickTrendingOptionInSortMenu();
+    filtersPopOver.clickApplyButton();
     new Loading(driver).handleAsyncPageReload();
   }
 
   private void userCanSwitchBetweenLatestAndTrendingTab() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.clickLatestTabOnDesktop();
+    SortingTool sortingTool = new PostsListPage().open().getSortingTool();
+    sortingTool.clickLatestTabOnDesktop();
     new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
 
-    postsList.clickTrendingTabOnDesktop();
+    sortingTool.clickTrendingTabOnDesktop();
     new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));

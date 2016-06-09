@@ -9,12 +9,14 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-public class Navigating extends NewTestTemplate {
+public class NavigatingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -62,22 +64,25 @@ public class Navigating extends NewTestTemplate {
    */
 
   private void backToWiki() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.clickBackToWikiLink();
-    postsList.verifyUrl(wikiURL);
+    BackButtons backButtons = new PostsListPage().open().getBackButtons();
+    backButtons.clickBackToWikiLink();
+
+    Assertion.assertEquals(driver.getCurrentUrl(), wikiURL);
   }
 
   private void clickAvatarLoadsUserPage() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.clickUserAvatar();
+    Post post = new PostsListPage().open().getPost();
+    post.clickUserAvatar();
+
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
 
   private void clickUsernameLoadsUserPage() {
-    PostsListPage postsList = new PostsListPage(driver).open();
-    postsList.clickUsernameLink();
+    Post post = new PostsListPage().open().getPost();
+    post.clickUsernameLink();
+
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
