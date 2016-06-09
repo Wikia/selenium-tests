@@ -36,8 +36,7 @@ public class NavigatingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
