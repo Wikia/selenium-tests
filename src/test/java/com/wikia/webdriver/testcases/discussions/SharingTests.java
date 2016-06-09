@@ -43,8 +43,7 @@ public class SharingTests extends NewTestTemplate {
   public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
@@ -105,7 +104,7 @@ public class SharingTests extends NewTestTemplate {
 
   private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
     PostDetailsPage postDetails = new PostDetailsPage().open();
-    String[] currentSocialNetworks = postDetails.getPost().getSocialNetworkIconsClasses();
+    String[] currentSocialNetworks = postDetails.getPost().clickShareIcon(0).getSocialNetworkIconsClasses();
 
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];

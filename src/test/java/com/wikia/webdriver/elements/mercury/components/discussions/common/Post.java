@@ -29,7 +29,7 @@ public class Post extends BasePageObject {
   @FindBy(css = ".row.post-counters")
   private List<WebElement> postVoteCount;
 
-  @FindBy(css = ".toggle-share")
+  @FindBy(css = ".toggle-share-area")
   private List<WebElement> toggleShare;
 
   @FindBy(css = ".share-feature")
