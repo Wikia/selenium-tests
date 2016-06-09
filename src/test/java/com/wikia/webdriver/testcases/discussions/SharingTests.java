@@ -45,7 +45,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);}
 
