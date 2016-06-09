@@ -65,7 +65,7 @@ public class NavigatingTests extends NewTestTemplate {
     BackButtons backButtons = new PostsListPage().open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), wikiURL);
+    Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
   }
 
   private void clickAvatarLoadsUserPage() {

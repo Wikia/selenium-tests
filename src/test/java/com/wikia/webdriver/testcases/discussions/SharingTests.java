@@ -64,17 +64,17 @@ public class SharingTests extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void registeredUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void registeredUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }
 
