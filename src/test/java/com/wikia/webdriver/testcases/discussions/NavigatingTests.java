@@ -36,8 +36,7 @@ public class NavigatingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickBackToWiki() {
@@ -66,7 +65,7 @@ public class NavigatingTests extends NewTestTemplate {
     BackButtons backButtons = new PostsListPage().open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), wikiURL);
+    Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
   }
 
   private void clickAvatarLoadsUserPage() {
