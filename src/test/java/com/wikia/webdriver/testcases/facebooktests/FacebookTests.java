@@ -21,7 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = {"Facebook"})
 public class FacebookTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -38,7 +37,7 @@ public class FacebookTests extends NewTestTemplate {
    *   <li>Verify user can login via facebook</li>
    * </ol>
    */
-  @Test
+  @Test(groups = "facebook-userCanSignupViaFacebook")
   @UseUnstablePageLoadStrategy
   @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanSignupViaFacebook() {
@@ -58,11 +57,16 @@ public class FacebookTests extends NewTestTemplate {
   }
 
   /**
-   * 1. Click facebook login in dropdown menu 2. Enter existing wikia credentials to link facebook
-   * and wikia accounts 3. login 4. Verify user can login via wikia username/pwd 5. Disconnect
-   * facebook via prefs for cleanup
+   * <ol>
+   *     <li>Click facebook login in dropdown menu</li>
+   *     <li>Enter existing wikia credentials to link facebook and wikia accounts</li>
+   *     <li>login</li>
+   *     <li>Verify user can login via wikia username/pwd</li>
+   *     <li>Disconnect
+   * facebook via prefs for cleanup</li>
+   * </ol>
    */
-  @Test
+  @Test(groups = "facebook-userCanLoginViaFacebook")
   @UseUnstablePageLoadStrategy
   @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanLoginViaFacebook() {
@@ -81,7 +85,7 @@ public class FacebookTests extends NewTestTemplate {
     dropDown.verifyUserLoggedIn(credentials.userName13);
   }
 
-  @Test
+  @Test(groups = "facebook-userCanConnectToFacebookViaUserPreferencesPage")
   @UseUnstablePageLoadStrategy
   @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanConnectToFacebookViaUserPreferencesPage() {
@@ -100,7 +104,7 @@ public class FacebookTests extends NewTestTemplate {
     prefsPage.verifyUserLoggedIn(credentials.userName);
   }
 
-  @Test
+  @Test(groups = "facebook-userCanConnectToFacebookOnUserPreferencesPage")
   @UseUnstablePageLoadStrategy
   @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
   public void userCanConnectToFacebookOnUserPreferencesPage() {
