@@ -23,9 +23,9 @@ public class CreatingReplyTests extends NewTestTemplate {
   /**
    * ANONS ON MOBILE SECTION
    */
-  @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5);
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
 
   public void anonUserOnMobileCanNotWriteNewPost() {
     userOnMobileMustBeLoggedInToUseReplyCreator();
@@ -34,7 +34,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   /**
    * ANONS ON DESKTOP SECTION
    */
-  @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
 
