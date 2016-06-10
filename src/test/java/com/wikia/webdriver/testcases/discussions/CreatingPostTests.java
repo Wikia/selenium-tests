@@ -25,7 +25,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
 
@@ -37,7 +37,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
 
