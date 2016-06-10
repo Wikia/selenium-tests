@@ -21,6 +21,7 @@ public class PostsCreatorMobile extends BasePageObject {
   private WebElement signInButtonInSignInDialog;
 
   public PostsCreatorMobile clickPostCreator() {
+    wait.forElementClickable(postCreator);
     postCreator.click();
     return this;
   }
@@ -30,11 +31,13 @@ public class PostsCreatorMobile extends BasePageObject {
   }
 
   public PostsCreatorMobile clickOkButtonInSignInDialog() {
+    wait.forElementClickable(okButtonInSignInDialog);
     okButtonInSignInDialog.click();
     return this;
   }
 
   public PostsCreatorMobile clickSignInButtonInSignInDialog() {
+    wait.forElementClickable(signInButtonInSignInDialog);
     signInButtonInSignInDialog.click();
     return this;
   }
