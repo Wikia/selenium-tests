@@ -63,7 +63,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   private void userOnMobileMustBeLoggedInToUseReplyCreator() {
     ReplyCreatorMobile replyCreator = new PostDetailsPage().open().getReplyCreatorMobile();
 
-    Assertion.assertTrue(replyCreator.isModalDialogVisible());
+    Assertion.assertTrue(replyCreator.clickReplyCreator().isModalDialogVisible());
 
     replyCreator.clickOkButtonInSignInDialog();
 
