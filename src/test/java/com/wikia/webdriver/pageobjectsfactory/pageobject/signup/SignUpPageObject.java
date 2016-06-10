@@ -142,7 +142,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    wait.forElementVisible(facebookSignUpButton);
+    wait.forElementClickable(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
     return new FacebookSignupModalComponentObject(driver);
