@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -45,8 +46,7 @@ public class SearchTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String clickedSuggestion =
-        new ArticlePage()
-            .openDiscussions()
+        new DiscussionsPage()
             .getTopBar()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
