@@ -13,6 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class Search extends BasePageObject {
 
   @FindBy(css = ".wikia-search__container input.side-search__input")

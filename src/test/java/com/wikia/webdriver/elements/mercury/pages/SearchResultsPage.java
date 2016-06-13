@@ -13,6 +13,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-results")
   private WebElement searchResultsContainer;
@@ -22,6 +24,12 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   @FindBy(css = ".search-error-not-found__action")
   private WebElement tryAnotherSearchLink;
+
+  @FindBy(css = ".wikia-button")
+  private WebElement loadMoreButton;
+
+  @FindBy(css = ".wikia-card")
+  private List<WebElement> resultCards;
 
   @Getter
   private final Search search = new Search();
@@ -85,5 +93,17 @@ public class SearchResultsPage extends WikiBasePageObject {
     } catch (TimeoutException e) {
       return false;
     }
+  }
+
+  public SearchResultsPage clickLoadMoreButton() {
+    PageObjectLogging.logInfo("Click Load More button ");
+    wait.forElementClickable(loadMoreButton);
+    loadMoreButton.click();
+
+    return this;
+  }
+
+  public int getResultCardsNumber() {
+    return resultCards.size();
   }
 }

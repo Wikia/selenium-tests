@@ -25,6 +25,8 @@ public class SearchTests extends NewTestTemplate {
 
   private static final String SEARCH_PHRASE = "Infobox";
   private static final String SEARCH_PHRASE_NO_RESULTS = "AComplexQueryWithNoResults";
+  private static final String MULTIPLE_RESULTS_SEARCH_PHRASE = "Test";
+  private static final int SEARCH_RESULTS_DEFAULT_NUMBER = 25;
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnMobile")
@@ -179,5 +181,15 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
     Assertion.assertFalse(searchResults.isNoResultsPagePresent());
     Assertion.assertTrue(searchResults.areResultsPresent());
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_defaultResultsNumber")
+  public void mercury_search_defaultResultsNumber() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
+
+    Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_DEFAULT_NUMBER);
   }
 }
