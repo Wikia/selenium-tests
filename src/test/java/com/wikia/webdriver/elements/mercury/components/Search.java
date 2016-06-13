@@ -28,22 +28,22 @@ public class Search extends BasePageObject {
   public static final int SUGGESTIONS_TIMEOUT_IN_SECONDS = 1;
 
   private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content a";
-  private static final String focusedSearchInput = ".wikia-search--focused .text-field-input";
+  private static final String focusedSearchInput = ".wikia-search--focused input";
 
   public String clickSearchSuggestion(int index) {
     Loading loading = new Loading(driver);
-    String clickedLink;
+    String clickedSuggestion;
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
 
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
-    clickedLink = searchResult.getAttribute("href");
+    clickedSuggestion = searchResult.getText();
 
     searchResult.click();
     loading.handleAsyncPageReload();
 
-    return clickedLink;
+    return clickedSuggestion;
   }
 
   public Search typeInSearch(String text) {
