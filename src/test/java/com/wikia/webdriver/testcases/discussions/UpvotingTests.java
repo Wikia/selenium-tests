@@ -8,13 +8,15 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-public class Upvoting extends NewTestTemplate {
+public class UpvotingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -27,21 +29,21 @@ public class Upvoting extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForPostDetails() {
-    postDetailsUpvoteButtonClickDoenstAddAnUpvote();
+    postDetailsUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnMobileCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotVoteForFirstReply() {
-    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
+    firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnMobileCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotUpvote() {
-    postListUpvoteButtonClickDoenstAddAnUpvote();
+    postListUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   /**
@@ -52,21 +54,21 @@ public class Upvoting extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
-    postDetailsUpvoteButtonClickDoenstAddAnUpvote();
+    postDetailsUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotVoteForFirstReply() {
-    firstReplyUpvoteButtonClickDoenstAddAnUpvote();
+    firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotUpvote() {
-    postListUpvoteButtonClickDoenstAddAnUpvote();
+    postListUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   /**
@@ -80,11 +82,10 @@ public class Upvoting extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote", enabled = false)
-  @RelatedIssue(issueID = "SOC-2596")
+  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanUpvote() {
+  public void registeredUserOnMobileCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
@@ -99,11 +100,10 @@ public class Upvoting extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote", enabled = false)
-  @RelatedIssue(issueID = "SOC-2596")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanUpvote() {
+  @InBrowser(browserSize = DESKTOP_RESOLUTION, browser = Browser.FIREFOX)
+  public void registeredUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
@@ -112,64 +112,73 @@ public class Upvoting extends NewTestTemplate {
    */
 
   private void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
-    PostsListPage postList = new PostsListPage(driver).open();
-    int replyIndex = 0;
-    postList.isUpvoteButtonVisible(replyIndex);
-    String firstVoteCount = postList.getVoteCount(replyIndex);
-    postList.clickUpvoteButton(replyIndex);
-    postList.waitForVoteCountToChange(replyIndex, firstVoteCount);
-    String secondVoteCount = postList.getVoteCount(replyIndex);
+    Post post = new PostsListPage().open().getPost();
+    int postIndex = 0;
+    post.isUpvoteButtonVisible(postIndex);
+    String firstVoteCount = post.getVoteCount(postIndex);
+    post.clickUpvoteButton(postIndex);
+    post.waitForVoteCountToChange(postIndex, firstVoteCount);
+    String secondVoteCount = post.getVoteCount(postIndex);
+
     Assertion.assertNotEquals(firstVoteCount, secondVoteCount);
-    postList.clickUpvoteButton(replyIndex);
-    postList.waitForVoteCountToChange(replyIndex, secondVoteCount);
-    String thirdVoteCount = postList.getVoteCount(replyIndex);
+
+    post.clickUpvoteButton(postIndex);
+    post.waitForVoteCountToChange(postIndex, secondVoteCount);
+    String thirdVoteCount = post.getVoteCount(postIndex);
+
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
-  private void postListUpvoteButtonClickDoenstAddAnUpvote() {
-    PostsListPage postList = new PostsListPage(driver).open();
+  private void postListUpvoteButtonClickDoesntAddAnUpvote() {
+    Post post = new PostsListPage().open().getPost();
     int replyIndex = 0;
-    postList.isUpvoteButtonVisible(replyIndex);
-    String firstVoteCount = postList.getVoteCount(replyIndex);
-    postList.clickUpvoteButton(replyIndex);
-    postList.waitForVoteCountChangeTimeLagToPass();
-    String secondVoteCount = postList.getVoteCount(replyIndex);
+    post.isUpvoteButtonVisible(replyIndex);
+    String firstVoteCount = post.getVoteCount(replyIndex);
+    post.clickUpvoteButton(replyIndex);
+    post.waitForVoteCountChangeTimeLagToPass();
+    String secondVoteCount = post.getVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 
   private void firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
-    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
+    Reply reply = new PostDetailsPage().open().getReply();
     int replyIndex = 0;
-    postDetails.isReplyUpvoteButtonVisible(replyIndex);
-    String firstVoteCount = postDetails.getReplyVoteCount(replyIndex);
-    postDetails.clickReplyUpvoteButton(replyIndex);
-    postDetails.waitForReplyVoteCountToChange(replyIndex, firstVoteCount);
-    String secondVoteCount = postDetails.getReplyVoteCount(replyIndex);
+    reply.isReplyUpvoteButtonVisible(replyIndex);
+    String firstVoteCount = reply.getReplyVoteCount(replyIndex);
+    reply.clickReplyUpvoteButton(replyIndex);
+    reply.waitForReplyVoteCountToChange(replyIndex, firstVoteCount);
+    String secondVoteCount = reply.getReplyVoteCount(replyIndex);
+
     Assertion.assertNotEquals(firstVoteCount, secondVoteCount);
-    postDetails.clickReplyUpvoteButton(replyIndex);
-    postDetails.waitForReplyVoteCountToChange(replyIndex, secondVoteCount);
-    String thirdVoteCount = postDetails.getReplyVoteCount(replyIndex);
+
+    reply.clickReplyUpvoteButton(replyIndex);
+    reply.waitForReplyVoteCountToChange(replyIndex, secondVoteCount);
+    String thirdVoteCount = reply.getReplyVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
-  private void postDetailsUpvoteButtonClickDoenstAddAnUpvote() {
-    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
-    postDetails.isUpvoteButtonVisible();
-    String firstVoteCount = postDetails.getPostDetailsVoteCount();
-    postDetails.clickPostDetailsUpvoteButton();
-    postDetails.waitForVoteCountChangeTimeLagToPass();
-    String secondVoteCount = postDetails.getPostDetailsVoteCount();
+  private void postDetailsUpvoteButtonClickDoesntAddAnUpvote() {
+    Post post = new PostDetailsPage().open().getPost();
+    post.isUpvoteButtonVisible();
+    String firstVoteCount = post.getPostDetailsVoteCount();
+    post.clickPostDetailsUpvoteButton();
+    post.waitForVoteCountChangeTimeLagToPass();
+    String secondVoteCount = post.getPostDetailsVoteCount();
+
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 
-  private void firstReplyUpvoteButtonClickDoenstAddAnUpvote() {
-    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
+  private void firstReplyUpvoteButtonClickDoesntAddAnUpvote() {
+    Reply reply = new PostDetailsPage().open().getReply();
     int replyIndex = 0;
-    postDetails.isReplyUpvoteButtonVisible(replyIndex);
-    String firstVoteCount = postDetails.getReplyVoteCount(replyIndex);
-    postDetails.clickReplyUpvoteButton(replyIndex);
-    postDetails.waitForVoteCountChangeTimeLagToPass();
-    String secondVoteCount = postDetails.getReplyVoteCount(replyIndex);
+    reply.isReplyUpvoteButtonVisible(replyIndex);
+    String firstVoteCount = reply.getReplyVoteCount(replyIndex);
+    reply.clickReplyUpvoteButton(replyIndex);
+    reply.waitForVoteCountChangeTimeLagToPass();
+    String secondVoteCount = reply.getReplyVoteCount(replyIndex);
+
     Assertion.assertEquals(firstVoteCount, secondVoteCount);
   }
 }
