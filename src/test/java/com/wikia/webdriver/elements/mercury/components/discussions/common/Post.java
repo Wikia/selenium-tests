@@ -17,7 +17,7 @@ public class Post extends BasePageObject {
   @FindBy(css = ".post-detail")
   private List<WebElement> postList;
 
-  @FindBy(css = ".user-avatar")
+  @FindBy(css = ".post-detail figure.avatar")
   private WebElement avatarImage;
 
   @FindBy(css = ".avatar-username")
@@ -29,7 +29,7 @@ public class Post extends BasePageObject {
   @FindBy(css = ".row.post-counters")
   private List<WebElement> postVoteCount;
 
-  @FindBy(css = ".toggle-share")
+  @FindBy(css = ".toggle-share-area")
   private List<WebElement> toggleShare;
 
   @FindBy(css = ".share-feature")

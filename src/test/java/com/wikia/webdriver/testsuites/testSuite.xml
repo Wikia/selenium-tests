@@ -78,6 +78,8 @@
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedOutUser"/>
+            <class name="com.wikia.webdriver.testcases.discussions.CreatingReplyTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.CreatingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.LayoutTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.NavigatingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.PromotingTests"/>
