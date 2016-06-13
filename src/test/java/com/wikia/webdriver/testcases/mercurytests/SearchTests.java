@@ -202,9 +202,11 @@ public class SearchTests extends NewTestTemplate {
 
     int defaultCardNumber = resultsPage.getResultCardsNumber();
 
+    Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
+
     resultsPage.clickLoadMoreButton();
+    int newResultsLoaded = resultsPage.getResultCardsNumber() - defaultCardNumber;
 
-
-    Assertion.assertEquals(resultsPage.getResultCardsNumber(), defaultCardNumber * 2);
+    Assertion.assertEquals(newResultsLoaded, SEARCH_RESULTS_DEFAULT_NUMBER);
   }
 }
