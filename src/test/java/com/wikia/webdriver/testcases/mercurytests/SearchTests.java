@@ -184,12 +184,27 @@ public class SearchTests extends NewTestTemplate {
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_defaultResultsNumber")
-  public void mercury_search_defaultResultsNumber() {
+  @Test(groups = "mercury_search_defaultResultsNumberOnSearchResultsPage")
+  public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
             .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
 
     Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_DEFAULT_NUMBER);
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_loadingMoreResultsOnSearchResultsPage")
+  public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
+
+    int defaultCardNumber = resultsPage.getResultCardsNumber();
+
+    resultsPage.clickLoadMoreButton();
+
+
+    Assertion.assertEquals(resultsPage.getResultCardsNumber(), defaultCardNumber * 2);
   }
 }
