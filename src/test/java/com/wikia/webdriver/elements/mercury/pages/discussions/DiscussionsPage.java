@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -25,6 +26,6 @@ public class DiscussionsPage extends WikiBasePageObject {
 
   public DiscussionsPage() {
     super();
-    getNavigate().toPage("/d/");
+    getNavigate().toPage(PageContent.DISCUSSIONS_LINK);
   }
 }

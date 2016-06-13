@@ -80,6 +80,7 @@ public class PageContent {
   public static final String REDIRECT_LINK = "Formatting";
   public static final String TEXT_LINK = "qaLink";
   public static final String REDLINK = "QAasdfasjsad123213lj";
+  public static final String DISCUSSIONS_LINK = "/d/";
 
   //forum
   public static final String FORUM_TITLE_PREFIX = "QABoardTitle ";
