@@ -108,11 +108,6 @@ public class SignupPageObject {
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
-  public void verifyEmailInUseError() {
-    wait.forElementVisible(emailError);
-    Assertion.assertEquals(emailError.getText(), "Email is already registered on Wikia");
-  }
-
   public void verifyUsernameTakenError() {
     wait.forElementVisible(usernameError);
     Assertion.assertEquals(usernameError.getText(), "Username is taken");

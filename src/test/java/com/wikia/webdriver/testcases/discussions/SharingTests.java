@@ -8,13 +8,14 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostDetailsPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-public class Sharing extends NewTestTemplate {
+public class SharingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
@@ -42,8 +43,7 @@ public class Sharing extends NewTestTemplate {
   public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
@@ -64,19 +64,17 @@ public class Sharing extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeeSocialNetworkIconsInPost() {
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void registeredUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
     toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIcons", enabled = false)
-  @RelatedIssue(issueID = "SOC-2567")
+  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserOnDesktopCanSeeSocialNetworkIcons() {
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void registeredUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
     socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
   }
 
@@ -85,14 +83,15 @@ public class Sharing extends NewTestTemplate {
    */
 
   private void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
-    PostsListPage postList = new PostsListPage(driver).open();
+    Post post = new PostsListPage().open().getPost();
     int postIndex = 0;
-    postList.clickShareIcon(postIndex);
-    String[] currentSocialNetworks = postList.getSocialNetworkIconClasses(postIndex);
+    post.clickShareIcon(postIndex);
+    String[] currentSocialNetworks = post.getSocialNetworkIconClasses(postIndex);
 
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
+
       Assertion.assertEquals(
           currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
           "Expected network not found on its position. Note that the order of social buttons "
@@ -102,12 +101,13 @@ public class Sharing extends NewTestTemplate {
   }
 
   private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
-    PostDetailsPage postDetails = new PostDetailsPage(driver).open();
-    String[] currentSocialNetworks = postDetails.getSocialNetworkIconsClasses();
+    PostDetailsPage postDetails = new PostDetailsPage().open();
+    String[] currentSocialNetworks = postDetails.getPost().clickShareIcon(0).getSocialNetworkIconsClasses();
 
     for (int i = 0; i < expectedSocialNetworks.length; i++) {
       String currentSocialNetwork = currentSocialNetworks[i];
       String expectedSocialNetwork = expectedSocialNetworks[i];
+
       Assertion.assertEquals(
           currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
           "Expected network not found on its position. Note that the order of social buttons "

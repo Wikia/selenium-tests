@@ -43,7 +43,7 @@ public class SearchTests extends NewTestTemplate {
 
   @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
+  @InBrowser(browser = Browser.CHROME, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String clickedSuggestion =
         new ArticlePage()
@@ -66,7 +66,7 @@ public class SearchTests extends NewTestTemplate {
             .openForQuery(SEARCH_PHRASE)
             .clickSearchResult(0);
 
-    Assertion.assertTrue(driver.getCurrentUrl().equals(resultLink));
+    Assertion.assertEquals(driver.getCurrentUrl(), resultLink);
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
