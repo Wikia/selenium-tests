@@ -10,9 +10,9 @@ import org.testng.annotations.Test;
 public class TestAdsDetection extends TemplateNoFirstLoad {
 
   public static final String PIXEL_PATTERN_WITH_ADBLOCK =
-      "http://www\\.fallingfalcon\\.com/bcn.*deo=1.*";
+      "http://www\\..*\\.com/bcn.*deo=1.*";
   public static final String PIXEL_PATTERN_WITHOUT_ADBLOCK =
-      "http://www\\.fallingfalcon\\.com/bcn.*deo=0.*";
+      "http://www\\..*\\.com/bcn.*deo=0.*";
 
   public static final String PIXEL_PATTERN_WITH_ADBLOCK_AND_RECOVERY =
       ".*\\.wikia\\.com/__are\\?.*deo=1.*";

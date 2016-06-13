@@ -34,7 +34,7 @@ public class SearchTests extends NewTestTemplate {
             .getTopBar()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
-            .selectSearchSuggestion(0);
+            .clickSearchSuggestion(0);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
     Assertion.assertEquals(clickedSuggestion.toLowerCase(),
@@ -51,7 +51,7 @@ public class SearchTests extends NewTestTemplate {
             .getTopBar()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
-            .selectSearchSuggestion(0);
+            .clickSearchSuggestion(0);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
     Assertion.assertEquals(clickedSuggestion.toLowerCase(),
@@ -64,7 +64,7 @@ public class SearchTests extends NewTestTemplate {
     String resultLink =
         new SearchResultsPage()
             .openForQuery(SEARCH_PHRASE)
-            .selectSearchResult(0);
+            .clickSearchResult(0);
 
     Assertion.assertTrue(driver.getCurrentUrl().equals(resultLink));
   }
