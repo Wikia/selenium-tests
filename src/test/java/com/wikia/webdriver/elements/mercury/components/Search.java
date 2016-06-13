@@ -32,18 +32,18 @@ public class Search extends BasePageObject {
 
   public String selectSearchSuggestion(int index) {
     Loading loading = new Loading(driver);
-    String clickedLink;
+    String clickedSuggestion;
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
 
     WebElement searchResult = driver.findElements(By.cssSelector(searchSuggestionClass)).get(index);
     wait.forElementClickable(searchResult);
-    clickedLink = searchResult.getAttribute("href");
+    clickedSuggestion = searchResult.getText();
 
     searchResult.click();
     loading.handleAsyncPageReload();
 
-    return clickedLink;
+    return clickedSuggestion;
   }
 
   public Search typeInSearch(String text) {

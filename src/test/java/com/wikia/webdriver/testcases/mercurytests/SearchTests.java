@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.testng.annotations.Test;
 
@@ -25,23 +26,9 @@ public class SearchTests extends NewTestTemplate {
   private static final String SEARCH_PHRASE_NO_RESULTS = "AComplexQueryWithNoResults";
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_navigateToPageUsingSearchSuggestions")
-  public void mercury_search_navigateToPageUsingSearchSuggestions() {
-    String suggestionLink =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar()
-            .openSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .selectSearchSuggestion(0);
-
-    Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
-  }
-
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnMobile")
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
-    String suggestionLink =
+    String clickedSuggestion =
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
             .getTopBar()
@@ -49,15 +36,16 @@ public class SearchTests extends NewTestTemplate {
             .typeInSearch(SEARCH_PHRASE)
             .selectSearchSuggestion(0);
 
-    Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           new ArticlePage().getHeader().getPageTitle().toLowerCase());
   }
 
   @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
-    String suggestionLink =
+    String clickedSuggestion =
         new ArticlePage()
             .open("/d/")
             .getTopBar()
@@ -65,8 +53,9 @@ public class SearchTests extends NewTestTemplate {
             .typeInSearch(SEARCH_PHRASE)
             .selectSearchSuggestion(0);
 
-    Assertion.assertTrue(driver.getCurrentUrl().equals(suggestionLink));
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
+    Assertion.assertEquals(clickedSuggestion.toLowerCase(),
+                           new ArticlePageObject().getArticleName().toLowerCase());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
