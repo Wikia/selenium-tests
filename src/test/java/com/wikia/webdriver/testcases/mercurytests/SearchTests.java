@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.testng.annotations.Test;
@@ -28,26 +29,24 @@ public class SearchTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnMobile")
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
-    String clickedSuggestion =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar()
-            .openSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .clickSearchSuggestion(0);
+    ArticlePage article = new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+    String clickedSuggestion = article.getTopBar()
+        .openSearch()
+        .typeInSearch(SEARCH_PHRASE)
+        .clickSearchSuggestion(0);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
     Assertion.assertEquals(clickedSuggestion.toLowerCase(),
-                           new ArticlePage().getHeader().getPageTitle().toLowerCase());
+                           article.getHeader().getPageTitle().toLowerCase());
   }
 
   @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
+  @InBrowser(browser = Browser.CHROME, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String clickedSuggestion =
         new ArticlePage()
-            .open("/d/")
+            .openDiscussions()
             .getTopBar()
             .openSearch()
             .typeInSearch(SEARCH_PHRASE)
