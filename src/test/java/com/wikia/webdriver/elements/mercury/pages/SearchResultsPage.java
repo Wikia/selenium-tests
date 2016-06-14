@@ -34,7 +34,8 @@ public class SearchResultsPage extends WikiBasePageObject {
   @Getter
   private final Search search = new Search();
 
-  private static final String searchResultClass = ".search-results__list .wikia-card > a";
+  private static final String SEARCH_RESULT_SELECTOR = ".search-results__list .wikia-card > a";
+  private static final String SPINNER_CLASS_SELECTOR = ".spinner";
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
@@ -48,7 +49,7 @@ public class SearchResultsPage extends WikiBasePageObject {
     String clickedLink;
 
     PageObjectLogging.logInfo("Select search result no.: " + index);
-    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
+    WebElement searchResult = driver.findElements(By.cssSelector(SEARCH_RESULT_SELECTOR)).get(index);
     wait.forElementClickable(searchResult);
 
     clickedLink = searchResult.getAttribute("href");
@@ -86,7 +87,7 @@ public class SearchResultsPage extends WikiBasePageObject {
 
   public boolean areResultsPresent() {
     try {
-      wait.forElementClickable(By.cssSelector(searchResultClass), 0);
+      wait.forElementClickable(By.cssSelector(SEARCH_RESULT_SELECTOR), 0);
       return true;
     } catch (NoSuchElementException e) {
       return false;
@@ -103,7 +104,13 @@ public class SearchResultsPage extends WikiBasePageObject {
     return this;
   }
 
+  public SearchResultsPage waitForResultsLoaded() {
+    wait.forElementNotVisible(By.cssSelector(SPINNER_CLASS_SELECTOR));
+    return this;
+  }
+
   public int getResultCardsNumber() {
+    waitForResultsLoaded();
     return resultCards.size();
   }
 }
