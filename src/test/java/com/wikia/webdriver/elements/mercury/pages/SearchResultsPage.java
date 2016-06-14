@@ -25,10 +25,10 @@ public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-error-not-found__action")
   private WebElement tryAnotherSearchLink;
 
-  @FindBy(css = ".wikia-button")
+  @FindBy(css = ".search-results__load-more-wrapper .wikia-button")
   private WebElement loadMoreButton;
 
-  @FindBy(css = ".wikia-card")
+  @FindBy(css = "search-results__list .wikia-card")
   private List<WebElement> resultCards;
 
   @Getter
