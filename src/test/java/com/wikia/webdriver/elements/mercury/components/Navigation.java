@@ -50,6 +50,9 @@ public class Navigation {
   @FindBy(css = ".wikia-nav--logout")
   private WebElement logoutLink;
 
+  @FindBy(css = ".nav-menu__header")
+  private WebElement exploreWikiHeader;
+
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
   private Wait wait;
@@ -75,6 +78,16 @@ public class Navigation {
     PageObjectLogging.logInfo("Go back to previous navigation level");
     wait.forElementClickable(backButton);
     backButton.click();
+
+    return this;
+  }
+
+  public Navigation clickExploreWikiHeader() {
+    PageObjectLogging.logInfo("Click 'Explore Wiki' header");
+    wait.forElementClickable(exploreWikiHeader);
+
+    exploreWikiHeader.click();
+    loading.handleAsyncPageReload();
 
     return this;
   }
@@ -130,55 +143,38 @@ public class Navigation {
   }
 
   public boolean isMainHeaderVisible() {
-    try {
-      return navigationMainHeader.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(navigationMainHeader);
   }
 
   public boolean isBackButtonVisible() {
-    try {
-      return backButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(backButton);
   }
 
   public boolean isUserAvatarVisible() {
-    try {
-      return userAvatar.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(userAvatar);
   }
 
   public boolean isUserProfileLinkVisible() {
-    try {
-      return userProfileLink.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(userProfileLink);
   }
 
   public boolean isLogoutLinkVisible() {
-    try {
-      return logoutLink.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(logoutLink);
+  }
+
+  public boolean isExploreWikiHeaderVisible() {
+    return isElementVisible(exploreWikiHeader);
   }
 
   public boolean areHubLinksVisible() {
+    return isElementVisible(gamesHub)
+        && isElementVisible(moviesHub)
+        && isElementVisible(tvHub);
+  }
+
+  private boolean isElementVisible(WebElement element) {
     try {
-      return gamesHub.isDisplayed()
-          && moviesHub.isDisplayed()
-          && tvHub.isDisplayed();
+      return element.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
