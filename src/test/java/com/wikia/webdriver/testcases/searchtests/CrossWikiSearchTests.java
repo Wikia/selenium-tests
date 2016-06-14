@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.searchtests;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -109,6 +110,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch_1"})
+  @RelatedIssue(issueID = "MAIN-7360", comment = "product defect")
   public void crossWikiSearch_007_specialPromoteData() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
