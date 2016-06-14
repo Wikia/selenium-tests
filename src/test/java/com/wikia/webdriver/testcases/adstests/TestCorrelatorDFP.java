@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
 import org.testng.annotations.Test;
 
@@ -17,7 +17,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   @Execute(onWikia = "adtest")
   public void correlatorIDInQueryStringShouldBeTheSameOasis() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
-    new HomePageObject().open();
+    new HomePage().open();
     networkTrafficInterceptor.logDFP(correlatorDesktop);
   }
 
@@ -26,7 +26,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   @Execute(onWikia = "adtest")
   public void correlatorIDInQueryStringShouldBeTheSameMercury() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
-    new HomePageObject().open();
+    new HomePage().open();
     networkTrafficInterceptor.logDFP(correlatorMobile);
   }
 }

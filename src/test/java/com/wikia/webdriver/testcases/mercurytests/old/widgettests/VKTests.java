@@ -38,7 +38,7 @@ public class VKTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.widget = new VKWidgetPageObject(driver);
   }
 
@@ -60,8 +60,7 @@ public class VKTests extends NewTestTemplate {
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -73,10 +72,8 @@ public class VKTests extends NewTestTemplate {
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_1);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

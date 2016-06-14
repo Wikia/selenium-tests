@@ -18,7 +18,6 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,7 +30,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.HttpURLConnection;
@@ -39,7 +37,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
@@ -70,8 +67,9 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
+  //wait for comscore to load
   public void waitForPageLoad() {
-    wait.forElementPresent(By.cssSelector("iframe[title='VisualDNA Analytics']"));
+    wait.forElementPresent(By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
   }
 
   public static String getTimeStamp() {
@@ -348,33 +346,11 @@ public class BasePageObject {
     PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
   }
 
-  public void waitForAlertAndAccept() {
-    waitFor.until(ExpectedConditions.alertIsPresent());
-    Alert alert = driver.switchTo().alert();
-    String alertText = alert.getText();
-    alert.accept();
-    PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text "
-                                                   + alertText, true);
-  }
-
   public String getRandomDigits(int length) {
     String timeStamp = getTimeStamp();
     int timeStampLenght = timeStamp.length();
     int timeStampCut = timeStampLenght - length;
     return timeStamp.substring(timeStampCut);
-  }
-
-  public String getRandomString(int length) {
-    char[] alphabet =
-        {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-         'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-         'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    Random rnd = new Random();
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0; i < length; i++) {
-      sb.append(alphabet[rnd.nextInt(alphabet.length)]);
-    }
-    return sb.toString();
   }
 
   public void openWikiPage() {

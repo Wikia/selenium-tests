@@ -58,6 +58,8 @@ public class RecentWikiActivity extends WikiBasePageObject {
     wait.forElementClickable(seeDiffArrow);
 
     String urlPath = seeDiffArrow.getAttribute("href");
+
+    wait.forElementClickable(seeDiffArrow);
     seeDiffArrow.click();
 
     loading.handleAsyncPageReload();

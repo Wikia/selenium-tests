@@ -107,7 +107,7 @@ public class FilePageTests extends NewTestTemplate {
    * Verify that a video can be deleted from the File page
    */
   @Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-  @RelatedIssue(issueID = "QAART-714", comment = "Edge case. If it reoccurs change the video query")
+  @RelatedIssue(issueID = "SUS-317", comment = "Product code defect. Test manually that the video can be deleted")
   public void filePage005_deleteFromHistory() {
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("pokemon");
@@ -133,19 +133,21 @@ public class FilePageTests extends NewTestTemplate {
     // Load the file page again, should have the same name
     filePage.open(video.getWikiFileName()).verifyEmbeddedVideoIsPresent();
 
-    // Go to the history tab and verify there are at least two videos
-    filePage.selectHistoryTab();
-    filePage.verifyVersionCountAtLeast(2);
+    //Removed following lines until SUS-317 is fixed
+    //// Go to the history tab and verify there are at least two videos
+   //filePage.selectHistoryTab();
+    //filePage.verifyVersionCountAtLeast(2);
 
-    // Delete the second version
-    DeletePageObject deletePage = filePage.deleteVersion(2);
-    deletePage.submitDeletion();
+    //// Delete the second version
+    //DeletePageObject deletePage = filePage.deleteVersion(2);
+    //deletePage.submitDeletion();
+    //Removed above lines until SUS-317is fixed
 
     // Load the file page again, should have the same name
     filePage.open(video.getWikiFileName()).verifyEmbeddedVideoIsPresent();
 
     // Delete the first version and thus the whole page
-    deletePage = filePage.deleteVersion(1);
+    DeletePageObject deletePage = filePage.deleteVersion(1);
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone

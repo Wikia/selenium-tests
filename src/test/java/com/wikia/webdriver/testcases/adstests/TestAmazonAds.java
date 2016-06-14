@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
@@ -17,6 +18,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     testAmazonAd(wikiName, path, false);
   }
 
+  @NetworkTrafficDump
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "amazonSites",
@@ -30,6 +32,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     if (debugMode) {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
+      networkTrafficInterceptor.startIntercepting();
     }
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
 
@@ -38,6 +41,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
     if (debugMode) {
       amazonAds.verifyGPTParams();
       amazonAds.verifyAdsFromAmazonPresent();
+      amazonAds.verifyResponseIsValid(networkTrafficInterceptor);
     }
   }
 

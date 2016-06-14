@@ -21,6 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -282,7 +283,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       }
 
-      if (TestContext.isIsFirstLoad() && "true".equals(Configuration.getMockAds())) {
+      if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(
             new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
                        Configuration.getWikiaDomain(), null, null));
@@ -292,7 +293,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     Method method = TestContext.getCurrentTestMethod();
     Class<?> declaringClass = method.getDeclaringClass();
 
-    if (TestContext.isIsFirstLoad()) {
+    if (TestContext.isFirstLoad()) {
       User user = null;
       TestContext.setFirstLoad(false);
 
@@ -308,6 +309,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject().loginAs(user);
       }
+
+      checkCountryCode(driver, Configuration.getCountryCode());
     }
 
     logJSError(driver);
@@ -486,5 +489,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onFinish(ITestContext context) {
     CommonUtils.appendTextToFile(logPath, "</body></html>");
+  }
+
+  private void checkCountryCode(WebDriver driver, String expectedCountryCode) {
+    if (StringUtils.isBlank(expectedCountryCode)) {
+      return;
+    }
+
+    String actualCountryCode = new JavascriptActions(driver).getCountry();
+
+    if (expectedCountryCode.equalsIgnoreCase(actualCountryCode)) {
+      logInfo("Country code: " + actualCountryCode);
+    } else {
+      logWarning("Country code",
+                 String.format("Expected: %s, Actual: %s", expectedCountryCode, actualCountryCode));
+    }
   }
 }
