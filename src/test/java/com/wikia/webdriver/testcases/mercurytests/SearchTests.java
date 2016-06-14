@@ -27,6 +27,7 @@ public class SearchTests extends NewTestTemplate {
   private static final String SEARCH_PHRASE_NO_RESULTS = "AComplexQueryWithNoResults";
   private static final String MULTIPLE_RESULTS_SEARCH_PHRASE = "Test";
   private static final String SINGLE_RESULT_SEARCH_PHRASE = "SRPWithOnlyOneSearchResult";
+  private static final String EMPTY_SEARCH_PHRASE = "";
   private static final int SEARCH_RESULTS_DEFAULT_NUMBER = 25;
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
@@ -144,6 +145,7 @@ public class SearchTests extends NewTestTemplate {
             .openForQuery(SEARCH_PHRASE_NO_RESULTS);
 
     Assertion.assertTrue(searchResults.isNoResultsPagePresent());
+    Assertion.assertFalse(searchResults.isLoadMoreButtonVisible());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
@@ -201,12 +203,12 @@ public class SearchTests extends NewTestTemplate {
         new SearchResultsPage()
             .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
 
-    int displayedCardNumber = resultsPage.getResultCardsNumber();
+    int defaultCardNumber = resultsPage.getResultCardsNumber();
 
-    Assertion.assertEquals(displayedCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
 
     resultsPage.clickLoadMoreButton();
-    int moreResultsLoaded = resultsPage.getResultCardsNumber() - displayedCardNumber;
+    int moreResultsLoaded = resultsPage.getResultCardsNumber() - defaultCardNumber;
 
     Assertion.assertEquals(moreResultsLoaded, SEARCH_RESULTS_DEFAULT_NUMBER);
   }
@@ -218,9 +220,18 @@ public class SearchTests extends NewTestTemplate {
         new SearchResultsPage()
             .openForQuery(SINGLE_RESULT_SEARCH_PHRASE);
 
-    int displayedCardNumber = resultsPage.getResultCardsNumber();
+    Assertion.assertTrue(resultsPage.getResultCardsNumber() < SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
+  }
 
-    Assertion.assertTrue(displayedCardNumber < SEARCH_RESULTS_DEFAULT_NUMBER);
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_loadMoreResultsOnSearchResultsPageNotVisible")
+  public void mercury_search_emptySearchPhrase() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(EMPTY_SEARCH_PHRASE);
+
+    Assertion.assertEquals(resultsPage.getResultCardsNumber(), 0);
     Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
   }
 }
