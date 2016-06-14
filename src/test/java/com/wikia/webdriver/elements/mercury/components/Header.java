@@ -15,6 +15,10 @@ public class Header extends BasePageObject {
   @FindBy(css = ".ember-application .wiki-page-header__title")
   private WebElement pageTitle;
 
+  public String getPageTitle() {
+    return this.pageTitle.getText();
+  }
+
   public boolean isHeaderVisible() {
     try {
       return header.isDisplayed();
