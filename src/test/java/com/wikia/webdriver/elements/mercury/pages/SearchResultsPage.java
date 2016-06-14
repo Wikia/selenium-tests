@@ -35,7 +35,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   private final Search search = new Search();
 
   private static final String SEARCH_RESULT_SELECTOR = ".search-results__list .wikia-card > a";
-  private static final String SPINNER_CLASS_SELECTOR = ".spinner";
+  private static final String SPINNER_SELECTOR = ".spinner";
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
@@ -109,7 +109,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   }
 
   public SearchResultsPage waitForResultsLoaded() {
-    wait.forElementNotVisible(By.cssSelector(SPINNER_CLASS_SELECTOR));
+    wait.forElementNotVisible(By.cssSelector(SPINNER_SELECTOR));
     return this;
   }
 
