@@ -69,6 +69,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     searchInput.clear();
     typeInSearchTextField(searchText);
     waitForElementNotVisibleByElement(queryPending);
+    wait.forElementVisible(MEDIA_RESULTS_BY);
     return new VisualEditorInsertGalleryDialog(driver);
   }
 

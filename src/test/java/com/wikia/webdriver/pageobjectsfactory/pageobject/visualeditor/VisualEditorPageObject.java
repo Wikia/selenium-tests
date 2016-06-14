@@ -34,6 +34,7 @@ import java.util.Map;
 
 public class VisualEditorPageObject extends VisualEditorMenu {
 
+  @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
   @FindBy(css = "figure.wikia-interactive-map-thumbnail")
   private WebElement mapNode;
@@ -91,7 +92,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> mediaNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
-  @FindBy(css = "figure.ve-ce-branchNode")
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -247,7 +247,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public VisualEditorMediaSettingsDialog openMediaSettings() {
     wait.forElementVisible(editArea);
     wait.forElementVisible(mediaNode);
-    wait.forElementVisible(focusedNode);
     clickContextMenu();
     return new VisualEditorMediaSettingsDialog(driver);
   }
@@ -322,7 +321,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(previewOverlay);
     wait.forElementVisible(previewVideoWrapper);
     VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
-    video.verifyVideoAutoplay(providerName, true);
     PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
   }
 

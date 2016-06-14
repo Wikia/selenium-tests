@@ -40,9 +40,7 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.typeTextArea(PageContent.ARTICLE_TEXT);
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.addExistingMedia(numOfMedias);
     ve.verifyGalleries(numOfGalleries);
@@ -68,9 +66,7 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     //verify # of cart items  = 9
     galleryDialog.addMediaToCart(initialNumOfMedia);
@@ -102,9 +98,7 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickTitleToPreview(7);
     ve.verifyPreviewImage();
@@ -121,9 +115,7 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickMetaDataToPreview(3);
     ve.verifyPreviewImage();

@@ -59,6 +59,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private WebElement enabledPublishButton;
   @FindBy(css = ".oo-ui-icon-video")
   private WebElement videoButton;
+  @FindBy(css = ".oo-ui-icon-gallery")
+  private WebElement galleryButton;
+  @FindBy(css = ".oo-ui-icon-image")
+  private WebElement imageButton;
 
   private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
   private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
@@ -75,7 +79,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By templateBy = By.cssSelector(".oo-ui-icon-template");
   private By referenceBy = By.cssSelector(".oo-ui-icon-reference");
   private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
-  private By galleryBy = By.cssSelector(".oo-ui-icon-gallery");
   private By paragraphBy = By.cssSelector(".oo-ui-tool-name-paragraph");
   private By headingBy = By.cssSelector(".oo-ui-tool-name-heading2");
   private By subHeading1By = By.cssSelector(".oo-ui-tool-name-heading3");
@@ -210,10 +213,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
         clickHamburgerItemFromDropDown(sourceEditorBy);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorSourceEditorDialog(driver);
-      case GALLERY:
-        clickInsertItemFromDropDown(galleryBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-        return new VisualEditorInsertGalleryDialog(driver);
       default:
         throw new NoSuchElementException("Non-existing dialog selected");
     }
@@ -238,7 +237,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
   private void clickHamburgerItemFromDropDown(By insertBy) {
     clickItemFromDropDown(toolListDropDowns.get(this.HAMBURGER_LIST),
-        toolListItems.get(this.HAMBURGER_LIST), insertBy);
+                          toolListItems.get(this.HAMBURGER_LIST), insertBy);
   }
 
   private void clickItemFromDropDown(WebElement list, WebElement item, By insertBy) {
@@ -256,6 +255,18 @@ public class VisualEditorMenu extends WikiBasePageObject {
   public VisualEditorAddMediaDialog clickVideoButton() {
     wait.forElementClickable(videoButton);
     videoButton.click();
+    return new VisualEditorAddMediaDialog(driver);
+  }
+
+  public VisualEditorInsertGalleryDialog clickGalleryButton() {
+    wait.forElementClickable(galleryButton);
+    galleryButton.click();
+    return new VisualEditorInsertGalleryDialog(driver);
+  }
+
+  public VisualEditorAddMediaDialog clickImageButton() {
+    wait.forElementClickable(imageButton);
+    imageButton.click();
     return new VisualEditorAddMediaDialog(driver);
   }
 
