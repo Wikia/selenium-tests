@@ -204,13 +204,15 @@ public class SearchTests extends NewTestTemplate {
             .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
 
     int defaultCardNumber = resultsPage.getResultCardsNumber();
-
+    
+    Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
     Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
 
     resultsPage.clickLoadMoreButton();
     int moreResultsLoaded = resultsPage.getResultCardsNumber() - defaultCardNumber;
 
     Assertion.assertEquals(moreResultsLoaded, SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
