@@ -28,7 +28,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-results__load-more-wrapper .wikia-button")
   private WebElement loadMoreButton;
 
-  @FindBy(css = "search-results__list .wikia-card")
+  @FindBy(css = ".search-results__list .wikia-card")
   private List<WebElement> resultCards;
 
   @Getter
