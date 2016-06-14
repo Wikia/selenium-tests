@@ -85,6 +85,10 @@ public class SearchResultsPage extends WikiBasePageObject {
     }
   }
 
+  public boolean isLoadMoreButtonVisible() {
+    return isElementVisible(loadMoreButton);
+  }
+
   public boolean areResultsPresent() {
     try {
       wait.forElementClickable(By.cssSelector(SEARCH_RESULT_SELECTOR), 0);
@@ -112,5 +116,14 @@ public class SearchResultsPage extends WikiBasePageObject {
   public int getResultCardsNumber() {
     waitForResultsLoaded();
     return resultCards.size();
+  }
+
+  private boolean isElementVisible(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
   }
 }

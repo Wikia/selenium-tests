@@ -26,6 +26,7 @@ public class SearchTests extends NewTestTemplate {
   private static final String SEARCH_PHRASE = "Infobox";
   private static final String SEARCH_PHRASE_NO_RESULTS = "AComplexQueryWithNoResults";
   private static final String MULTIPLE_RESULTS_SEARCH_PHRASE = "Test";
+  private static final String SINGLE_RESULT_SEARCH_PHRASE = "SRPWithOnlyOneSearchResult";
   private static final int SEARCH_RESULTS_DEFAULT_NUMBER = 25;
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
@@ -200,13 +201,26 @@ public class SearchTests extends NewTestTemplate {
         new SearchResultsPage()
             .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
 
-    int defaultCardNumber = resultsPage.getResultCardsNumber();
+    int displayedCardNumber = resultsPage.getResultCardsNumber();
 
-    Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertEquals(displayedCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
 
     resultsPage.clickLoadMoreButton();
-    int newResultsLoaded = resultsPage.getResultCardsNumber() - defaultCardNumber;
+    int moreResultsLoaded = resultsPage.getResultCardsNumber() - displayedCardNumber;
 
-    Assertion.assertEquals(newResultsLoaded, SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertEquals(moreResultsLoaded, SEARCH_RESULTS_DEFAULT_NUMBER);
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_loadMoreResultsOnSearchResultsPageNotVisible")
+  public void mercury_search_loadMoreResultsOnSearchResultsPageNotVisible() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(SINGLE_RESULT_SEARCH_PHRASE);
+
+    int displayedCardNumber = resultsPage.getResultCardsNumber();
+
+    Assertion.assertTrue(displayedCardNumber < SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
   }
 }
