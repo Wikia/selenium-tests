@@ -16,9 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHom
  * results from cross wiki search STAPI04: Verify that no pagination or description is displayed
  * when there are no results STAPI05: Verify that no pagination is displayed when there are results
  * but they are less than 10 STAPI06: Verify that push to top exact match is working correctly for
- * different wikis STAPI07: Verify that Special:PRomote page data is displayed in cross-wiki search
- * results STAPI08: Verify that performing a certain search will always display results in same
- * order STAPI09: Verify that searching for a query with either roman or decimal numbers will
+ * different wikis STAPI09: Verify that searching for a query with either roman or decimal numbers will
  * display expected result in first page
  */
 @Test(groups = "CrossWikiSearch")
