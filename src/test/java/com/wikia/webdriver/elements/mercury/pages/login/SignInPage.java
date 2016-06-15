@@ -30,11 +30,13 @@ public class SignInPage extends WikiBasePageObject{
 
     public String getErrorMessage() {
         wait.forElementVisible(errorMessage);
+
         return errorMessage.getText();
     }
 
     public SignInPage verifyErrorMessage(String errorMessage) {
         Assertion.assertEquals(getErrorMessage(), errorMessage);
+        
         return this;
     }
 }
