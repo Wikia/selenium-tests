@@ -18,11 +18,9 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSiz
 import org.testng.annotations.Test;
 
 public class VEVideoTests extends NewTestTemplate {
-  // AM01
-  @Test(groups = {"VEVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo",
-      "VEAddExternalVideoTests_004"})
+  @Test(groups = {"VEVideo", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
-  public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
+  public void addNonPremiumVideo() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
             + DateTime.now().getMillis());
@@ -37,10 +35,9 @@ public class VEVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  //AM02
-  @Test(groups = {"VEVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"})
+  @Test(groups = {"VEVideo", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
-  public void VEAddExternalVideoTests_002_AddPremiumVid() {
+  public void addPremiumVideo() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
             + DateTime.now().getMillis());
@@ -55,10 +52,9 @@ public class VEVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  // AM03
-  @Test(groups = {"VEVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"})
+  @Test(groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
-  public void VEAddExternalVideoTests_003_AddExistingVid() {
+  public void addExistingVideo() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
@@ -75,9 +71,9 @@ public class VEVideoTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = {"VEVideo", "VEAddExternalVideoTests_004", "VEAddExistingVideo"})
+  @Test(groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
-  public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
+  public void removeVideoFromArticle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
@@ -101,12 +97,11 @@ public class VEVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(groups = {"VEVideo", "VEVideo_001", "VEVideoPreview"})
+  @Test(groups = {"VEVideo", "VEVideoPreview"})
   @Execute(asUser = User.USER_9)
-  public void VEVideoTests_001_previewVideo() {
+  public void previewVideo() {
     String mediaTitle =
         "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
-    String providerName = "youtube";
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
@@ -116,12 +111,12 @@ public class VEVideoTests extends NewTestTemplate {
     VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
     mediaDialog = mediaDialog.searchMedia(mediaTitle);
     ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
-    ve.verifyPreviewVideoPlay(providerName);
+    ve.verifyPreviewVideo();
   }
 
-  @Test(groups = {"VEVideo", "VEVideo_002", "VEMediaResize"})
+  @Test(groups = {"VEVideo", "VEMediaResize"})
   @Execute(asUser = User.USER_9)
-  public void VEVideoTests_002_resizeVideoWithHandle() {
+  public void resizeVideoWithHandle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
@@ -139,10 +134,9 @@ public class VEVideoTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  // MS02
-  @Test(groups = {"VEVideo", "VEVideo_003", "VEMediaResize"})
+  @Test(groups = {"VEVideo", "VEMediaResize"})
   @Execute(asUser = User.USER_9)
-  public void VEVideoTests_003_resizeVideoWithSetting() {
+  public void resizeVideoWithSetting() {
     int resizeNumber = 250;
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 

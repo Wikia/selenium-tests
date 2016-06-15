@@ -20,10 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VEImageTests extends NewTestTemplate {
-  // AM05
-  @Test(groups = {"VEImageTests", "VEImageTests_001", "VEMediaPreview"})
+  @Test(groups = {"VEImageTests", "VEMediaPreview"})
   @Execute(asUser = User.USER_9)
-  public void VEImageTests_001_previewImage() {
+  public void previewImage() {
     String mediaTitle = "Thomas Wright 1792 - 1849";
 
     VisualEditorPageObject ve =
@@ -37,10 +36,9 @@ public class VEImageTests extends NewTestTemplate {
     ve.verifyPreviewImage();
   }
 
-  // MS01
-  @Test(groups = {"VEImageTests", "VEImageTests_002", "VEMediaSetting"})
+  @Test(groups = {"VEImageTests", "VEMediaSetting"})
   @Execute(asUser = User.USER_9)
-  public void VEImageTests_002_editCaption() {
+  public void editImageCaption() {
     String captionText = "test123";
 
     VisualEditorPageObject ve =
@@ -61,13 +59,10 @@ public class VEImageTests extends NewTestTemplate {
     ArticlePageObject article = save.savePage();
     article.verifyVEPublishComplete();
   }
-/*
 
-*/
-  // MS03
-  @Test(groups = {"VEImageTests", "VEImageTests_00", "VEMediaSetting"})
+  @Test(groups = {"VEImageTests", "VEMediaSetting"})
   @Execute(asUser = User.USER_9)
-  public void VEImageTests_003_changeAlignment() {
+  public void changeImageAlignment() {
     int numOfMedia = 3;
     List<String> wikiTexts = new ArrayList<String>();
     wikiTexts.add("|centre");

@@ -317,11 +317,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return veSrcDialog.clickApplyChangesButton();
   }
 
-  public void verifyPreviewVideoPlay(String providerName) {
+  public void verifyPreviewVideo() {
     wait.forElementVisible(previewOverlay);
     wait.forElementVisible(previewVideoWrapper);
-    VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
-    PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+    PageObjectLogging.log("verifyPreviewVideo", "Preview for Video loaded", true, driver);
   }
 
   public void verifyPreviewImage() {
