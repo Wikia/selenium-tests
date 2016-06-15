@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
