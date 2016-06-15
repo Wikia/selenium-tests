@@ -36,7 +36,7 @@ public class SignInPage extends WikiBasePageObject{
 
     public SignInPage verifyErrorMessage(String errorMessage) {
         Assertion.assertEquals(getErrorMessage(), errorMessage);
-        
+
         return this;
     }
 }
