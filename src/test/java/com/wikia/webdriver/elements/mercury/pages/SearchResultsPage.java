@@ -13,6 +13,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-results")
   private WebElement searchResultsContainer;
@@ -23,10 +25,17 @@ public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-error-not-found__action")
   private WebElement tryAnotherSearchLink;
 
+  @FindBy(css = ".search-results__load-more-wrapper .wikia-button")
+  private WebElement loadMoreButton;
+
+  @FindBy(css = ".search-results__list .wikia-card")
+  private List<WebElement> resultCards;
+
   @Getter
   private final Search search = new Search();
 
-  private static final String searchResultClass = ".search-results__list .wikia-card > a";
+  private static final String SEARCH_RESULT_SELECTOR = ".search-results__list .wikia-card > a";
+  private static final String SPINNER_SELECTOR = ".spinner";
 
   public SearchResultsPage openForQuery(String query) {
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
@@ -40,7 +49,7 @@ public class SearchResultsPage extends WikiBasePageObject {
     String clickedLink;
 
     PageObjectLogging.logInfo("Select search result no.: " + index);
-    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
+    WebElement searchResult = driver.findElements(By.cssSelector(SEARCH_RESULT_SELECTOR)).get(index);
     wait.forElementClickable(searchResult);
 
     clickedLink = searchResult.getAttribute("href");
@@ -76,13 +85,44 @@ public class SearchResultsPage extends WikiBasePageObject {
     }
   }
 
+  public boolean isLoadMoreButtonVisible() {
+    return isElementVisible(loadMoreButton);
+  }
+
   public boolean areResultsPresent() {
     try {
-      wait.forElementClickable(By.cssSelector(searchResultClass), 0);
+      wait.forElementClickable(By.cssSelector(SEARCH_RESULT_SELECTOR), 0);
       return true;
     } catch (NoSuchElementException e) {
       return false;
     } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
+  public SearchResultsPage clickLoadMoreButton() {
+    PageObjectLogging.logInfo("Click Load More button ");
+    wait.forElementClickable(loadMoreButton);
+    loadMoreButton.click();
+
+    return this;
+  }
+
+  public SearchResultsPage waitForResultsLoaded() {
+    wait.forElementNotVisible(By.cssSelector(SPINNER_SELECTOR));
+    return this;
+  }
+
+  public int getResultCardsNumber() {
+    waitForResultsLoaded();
+    return resultCards.size();
+  }
+
+  private boolean isElementVisible(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
