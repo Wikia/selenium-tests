@@ -20,7 +20,6 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME)
-@Test(groups = "MercurySearch")
 public class SearchTests extends NewTestTemplate {
 
   private static final String SEARCH_PHRASE = "Infobox";
