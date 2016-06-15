@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.suggestions;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -13,6 +14,7 @@ import org.testng.annotations.Test;
 public class VideoSuggestionsTests extends NewTestTemplate {
 
   @Test(groups = {"VideoSuggestions_001", "VideoSuggestions", "VetTests", "Media"})
+  @RelatedIssue(issueID = "MAIN-7370", comment = "Test manually.")
   @Execute(onWikia = "callofduty", asUser = User.USER)
   public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed() {
     ArticlePageObject article = new ArticlePageObject().open("Frank_Woods");
