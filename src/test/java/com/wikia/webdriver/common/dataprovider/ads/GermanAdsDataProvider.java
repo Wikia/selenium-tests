@@ -45,8 +45,8 @@ public class GermanAdsDataProvider {
   @DataProvider
   public static Object[][] germanArticles() {
     return new Object[][]{
-        {"de.gta", "Fahrzeuge_(V)"},
-        {"de.gameofthrones", "Staffel_4"}
+        {"de.deathnote", "Mary_Kenwood"},
+        {"de.narnia", "Sandro_Kopp"}
     };
   }
 }
