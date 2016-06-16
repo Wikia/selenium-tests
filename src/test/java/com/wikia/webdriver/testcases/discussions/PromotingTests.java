@@ -49,7 +49,7 @@ public class PromotingTests extends NewTestTemplate {
 
     Assertion.assertTrue(promoting.isAppleLinkDisplayed());
     Assertion.assertTrue(promoting.isGooglePlayLinkDisplayed());
-    Assertion.assertEquals(promoting.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
+    Assertion.assertEquals(promoting.isPromotionAppTextDisplayed(), "Take your fandom with you, download the app today!");
   }
 
   private void appleLinkRedirectsProperly() {

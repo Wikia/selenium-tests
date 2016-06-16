@@ -60,4 +60,8 @@ public class ArticlePage extends WikiBasePageObject {
 
     return this;
   }
+
+  public ArticlePage openDiscussions() {
+    return this.open("/d/");
+  }
 }
