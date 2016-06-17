@@ -7,9 +7,9 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.dataprovider.RandomDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -75,7 +75,7 @@ public class LoginTests extends NewTestTemplate {
             .clickOnSignInRegisterButton()
             .clickSignInButton()
             .getLoginArea()
-            .typeUsername(RandomDataProvider.getTimeStamp())
+            .typeUsername(String.valueOf(DateTime.now().getMillis()))
             .typePassword(Configuration.getCredentials().password10)
             .clickSignInButtonToGetError()
             .verifyErrorMessage(expectedErrorMessage);
