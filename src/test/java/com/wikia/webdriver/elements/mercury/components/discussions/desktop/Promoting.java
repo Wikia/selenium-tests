@@ -11,10 +11,10 @@ public class Promoting extends BasePageObject {
   @FindBy(css = ".discussion-app-join-text")
   private WebElement appPromotionText;
 
-  @FindBy(css = ".apple-store-logo")
+  @FindBy(css = ".apple-store-badge")
   private WebElement appleAppLink;
 
-  @FindBy(css = ".google-play-logo")
+  @FindBy(css = ".google-play-badge")
   private WebElement googlePlayAppLink;
 
   public boolean isAppleLinkDisplayed() {
