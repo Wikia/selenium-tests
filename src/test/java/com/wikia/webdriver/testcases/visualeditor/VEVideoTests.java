@@ -15,6 +15,12 @@ import org.joda.time.DateTime;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
+/**
+ * These tests are failing in FF, but was tested manually
+ * - removeVideoFromArticle
+ * - resizeVideoWithHandle
+ * - resizeVideoWithHandle
+ */
 @InBrowser(browser = Browser.CHROME)
 public class VEVideoTests extends NewTestTemplate {
   @Test(groups = {"VEVideo", "VEAddExternalVideo"})

@@ -14,6 +14,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * These tests are failing in FF, but was tested manually
+ * - VEGalleryTests_005_Remove
+ */
 @InBrowser(browser = Browser.CHROME)
 public class VEGalleryTests extends NewTestTemplate {
 

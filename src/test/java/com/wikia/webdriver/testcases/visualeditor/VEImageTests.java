@@ -20,6 +20,11 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * These tests are failing in FF, but was tested manually
+ * - changeImageAlignment
+ * - editImageCaption
+ */
 @InBrowser(browser = Browser.CHROME)
 public class VEImageTests extends NewTestTemplate {
   @Test(groups = {"VEImageTests", "VEMediaPreview"})
