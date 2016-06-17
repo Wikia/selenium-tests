@@ -18,7 +18,7 @@ import java.util.List;
 public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   @FindBy(css = ".oo-ui-textInputWidget input")
-  protected WebElement searchInput;
+  private WebElement searchInput;
   @FindBy(css = ".oo-ui-window-foot .oo-ui-labelElement-label")
   private WebElement addMediaButton;
   @FindBy(css = ".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labelElement-label")

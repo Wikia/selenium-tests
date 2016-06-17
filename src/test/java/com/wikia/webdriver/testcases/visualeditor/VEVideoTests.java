@@ -4,17 +4,13 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.Dimension;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import org.testng.annotations.Test;
 
 public class VEVideoTests extends NewTestTemplate {
@@ -23,16 +19,11 @@ public class VEVideoTests extends NewTestTemplate {
   public void addNonPremiumVideo() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
+                                                                    + DateTime.now().getMillis());
+    VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
-    VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    veNew.publish();
   }
 
   @Test(groups = {"VEVideo", "VEAddExternalVideo"})
@@ -40,16 +31,11 @@ public class VEVideoTests extends NewTestTemplate {
   public void addPremiumVideo() {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
-            + DateTime.now().getMillis());
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.PREMIUM_VIDEO_URL);
+                                                                    + DateTime.now().getMillis());
+    VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
     veNew.verifyVEToolBarPresent();
-    VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    veNew.publish();
   }
 
   @Test(groups = {"VEVideo", "VEAddExistingVideo"})
@@ -58,16 +44,12 @@ public class VEVideoTests extends NewTestTemplate {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    mediaDialog = mediaDialog.searchMedia("y");
+
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("y");
     VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
     veNew.verifyVideos(2);
     veNew.verifyVEToolBarPresent();
-    VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    veNew.publish();
   }
 
 
@@ -77,24 +59,17 @@ public class VEVideoTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.NON_PREMIUM_VIDEO_URL);
+
+    VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
-    veNew.verifyVEToolBarPresent();
-    VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    veNew.publish();
 
     ve.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.selectMediaAndDelete();
     ve.verifyNoVideo();
-    save = ve.clickPublishButton();
-    article = save.savePage();
-    article.verifyVEPublishComplete();
+    ve.publish();
   }
 
   @Test(groups = {"VEVideo", "VEVideoPreview"})
@@ -106,10 +81,7 @@ public class VEVideoTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    mediaDialog = mediaDialog.searchMedia(mediaTitle);
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(mediaTitle);
     ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
     ve.verifyPreviewVideo();
   }
@@ -120,18 +92,14 @@ public class VEVideoTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    mediaDialog = mediaDialog.searchMedia("h");
+
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
     ve = mediaDialog.addExistingMedia(1);
     ve.verifyVideos(1);
     Dimension source = ve.getVideoDimension();
     ve.randomResizeOnMedia();
     ve.verifyVideoResized(source);
-    VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    ve.publish();
   }
 
   @Test(groups = {"VEVideo", "VEMediaResize"})
@@ -142,29 +110,17 @@ public class VEVideoTests extends NewTestTemplate {
 
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickVideoButton();
-    mediaDialog = mediaDialog.searchMedia("h");
+
+    VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
     ve = mediaDialog.addExistingMedia(1);
     ve.verifyVideos(1);
     Dimension source = ve.getVideoDimension();
     ve.selectMedia();
-    VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
-    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
-    // change width of video to 250
-    mediaSettingsDialog.setCustomSize(resizeNumber, ImageSize.WIDTH);
-    mediaSettingsDialog.clickApplyChangesButton();
+    ve.resizeMedia(resizeNumber, ImageSize.WIDTH);
     ve.verifyVideoResized(source);
     source = ve.getVideoDimension();
-    mediaSettingsDialog = ve.openMediaSettings();
-    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
-    // change height of video to 250
-    mediaSettingsDialog.setCustomSize(resizeNumber, ImageSize.HEIGHT);
-    mediaSettingsDialog.clickApplyChangesButton();
+    ve.resizeMedia(resizeNumber, ImageSize.HEIGHT);
     ve.verifyVideoResized(source);
-    VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    ve.publish();
   }
 }

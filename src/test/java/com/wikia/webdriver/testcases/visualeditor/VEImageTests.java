@@ -55,9 +55,7 @@ public class VEImageTests extends NewTestTemplate {
     mediaSettingsDialog.typeCaption(captionText);
     ve = mediaSettingsDialog.clickApplyChangesButton();
     ve.verifyVideoCaption(captionText);
-    VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-    ArticlePageObject article = save.savePage();
-    article.verifyVEPublishComplete();
+    ve.publish();
   }
 
   @Test(groups = {"VEImageTests", "VEMediaSetting"})
@@ -72,26 +70,11 @@ public class VEImageTests extends NewTestTemplate {
         PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject(driver).getTimeStamp();
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, randomArticleName);
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    VisualEditorAddMediaDialog mediaDialog = ve.clickImageButton();
-    mediaDialog = mediaDialog.searchMedia("h");
+    VisualEditorAddMediaDialog mediaDialog =  ve.searchImage("h");
     ve = mediaDialog.addExistingMedia(numOfMedia);
     ve.verifyMedias(numOfMedia);
-    ve.verifyEditorSurfacePresent();
-    ve.verifyVEToolBarPresent();
-    ve.selectMediaByIndex(2);
-    VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
-    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
-    mediaSettingsDialog.clickAlignment(Alignment.LEFT);
-    ve = mediaSettingsDialog.clickApplyChangesButton();
-    ve.verifyEditorSurfacePresent();
-    ve.verifyVEToolBarPresent();
-    ve.selectMediaByIndex(0);
-    mediaSettingsDialog = ve.openMediaSettings();
-    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
-    mediaSettingsDialog.clickAlignment(Alignment.CENTER);
-    ve = mediaSettingsDialog.clickApplyChangesButton();
+    ve.alignMedia(2, Alignment.LEFT);
+    ve.alignMedia(0, Alignment.CENTER);
     ve.verifyEditorSurfacePresent();
     ve.verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();

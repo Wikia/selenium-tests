@@ -45,9 +45,7 @@ public class VEGalleryTests extends NewTestTemplate {
     ve = galleryDialog.addExistingMedia(numOfMedias);
     ve.verifyGalleries(numOfGalleries);
     ve.verifyMediasInGallery(numOfMedias);
-    VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
-    article = saveChangesDialog.savePage();
-    article.verifyVEPublishComplete();
+    ArticlePageObject article = ve.publish();
     article.logOut(wikiURL);
   }
 
@@ -132,9 +130,7 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     ve.deleteGallery(0);
     ve.verifyGalleries(0);
-    VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
-    article = saveChangesDialog.savePage();
-    article.verifyVEPublishComplete();
+    ArticlePageObject article = ve.publish();
     article.logOut(wikiURL);
   }
 }
