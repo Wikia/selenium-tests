@@ -3,11 +3,9 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertGalleryDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -45,7 +43,7 @@ public class VEGalleryTests extends NewTestTemplate {
     ve = galleryDialog.addExistingMedia(numOfMedias);
     ve.verifyGalleries(numOfGalleries);
     ve.verifyMediasInGallery(numOfMedias);
-    ArticlePageObject article = ve.publish();
+    ve.publish();
     article.logOut(wikiURL);
   }
 
@@ -130,7 +128,7 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     ve.deleteGallery(0);
     ve.verifyGalleries(0);
-    ArticlePageObject article = ve.publish();
+    ve.publish();
     article.logOut(wikiURL);
   }
 }

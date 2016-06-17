@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
@@ -520,16 +519,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     verifyVEToolBarPresent();
     verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog = clickVideoButton();
-    VisualEditorPageObject ve = mediaDialog.addMediaByURL(videoType);
-    return ve;
+    return mediaDialog.addMediaByURL(videoType);
   }
 
   public VisualEditorAddMediaDialog searchVideo(String searchInput) {
     verifyVEToolBarPresent();
     verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog = clickVideoButton();
-    mediaDialog = mediaDialog.searchMedia(searchInput);
-    return mediaDialog;
+    return mediaDialog.searchMedia(searchInput);
   }
 
   public void resizeMedia(int resizeNumber, ImageSize size) {
