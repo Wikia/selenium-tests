@@ -2,6 +2,8 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -18,6 +20,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+@InBrowser(browser = Browser.CHROME)
 public class VEImageTests extends NewTestTemplate {
   @Test(groups = {"VEImageTests", "VEMediaPreview"})
   @Execute(asUser = User.USER_9)

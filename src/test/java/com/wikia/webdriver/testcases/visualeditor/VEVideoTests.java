@@ -3,6 +3,8 @@ package com.wikia.webdriver.testcases.visualeditor;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -13,6 +15,7 @@ import org.joda.time.DateTime;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
+@InBrowser(browser = Browser.CHROME)
 public class VEVideoTests extends NewTestTemplate {
   @Test(groups = {"VEVideo", "VEAddExternalVideo"})
   @Execute(asUser = User.USER)
