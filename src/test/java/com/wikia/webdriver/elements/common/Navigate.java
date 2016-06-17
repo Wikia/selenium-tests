@@ -18,10 +18,10 @@ public class Navigate extends BasePageObject {
   public Navigate toPage(String pageName) {
     String host = UrlBuilder.getHostForWiki();
     String cacheBuster = pageName.equals("") ||
-                         pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
-    String abGroup = pageName.equals("") || pageName.equals("/") ? "" : defaultTestingGroup;
+                         pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis()
+                                                     + defaultTestingGroup;
 
-    driver.get("http://" + host + pageName + cacheBuster + abGroup);
+    driver.get("http://" + host + pageName + cacheBuster);
 
     return this;
   }
@@ -31,7 +31,7 @@ public class Navigate extends BasePageObject {
     String cacheBuster = "?cb=" + DateTime.now().getMillis();
     reference = "#" + reference;
 
-    driver.get("http://" + host + pageName + cacheBuster + reference);
+    driver.get("http://" + host + pageName + cacheBuster + reference + defaultTestingGroup);
 
     return this;
   }
