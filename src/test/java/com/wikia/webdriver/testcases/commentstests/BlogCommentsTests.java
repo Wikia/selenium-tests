@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -61,6 +62,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
 
   @Test(groups = {"BlogComments_003", "BlogCommentsTests"})
+  @RelatedIssue(issueID = "MAIN-7370", comment = "Test manually.")
   @Execute(asUser = User.USER)
   public void BlogComments_003_User_editComment() {
     WikiBasePageObject base = new WikiBasePageObject();

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -21,6 +22,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleComments_001", "Smoke2"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-7370", comment = "Test manually.")
   public void ArticleComments_001_editComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
