@@ -165,9 +165,6 @@ public abstract class CoreTestTemplate {
 
   @AfterMethod(alwaysRun = true)
   public void stop() {
-    if (networkTrafficInterceptor != null) {
-      networkTrafficInterceptor.stop();
-    }
     DriverProvider.close();
   }
 
