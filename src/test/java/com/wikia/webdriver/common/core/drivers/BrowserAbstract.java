@@ -1,9 +1,14 @@
 package com.wikia.webdriver.common.core.drivers;
 
+import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -83,13 +88,13 @@ public abstract class BrowserAbstract {
   protected void setProxy() {
     if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
-      server.startSeleniumProxyServer();
       String countryCode = Configuration.getCountryCode();
       if (StringUtils.isNotBlank(countryCode)) {
         String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
         server.setProxyServer(proxyAddress);
       }
-      caps.setCapability(CapabilityType.PROXY, server.seleniumProxy());
+
+      caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
     }
   }
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.MarionetteDriver;
 
 import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
@@ -66,6 +67,7 @@ public class FirefoxBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+    caps.setCapability("marionette", true);
 
     return new WikiaWebDriver(new FirefoxDriver(caps), server, false);
   }
