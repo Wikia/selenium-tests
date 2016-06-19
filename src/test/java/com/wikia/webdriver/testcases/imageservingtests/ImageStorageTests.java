@@ -28,7 +28,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.addPhoto();
     filesPage.selectFileToUpload(PageContent.FILE);
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
-    filesPage.clickOnMoreOrFewerOptions();
+    filesPage.clickOnMoreOptions();
     filesPage.setFileName(fileName);
     filesPage.checkIgnoreAnyWarnings();
     filesPage.clickUploadButton();
@@ -70,7 +70,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.addPhoto();
     filesPage.selectFileToUpload(PageContent.FILE);
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
-    filesPage.clickOnMoreOrFewerOptions();
+    filesPage.clickOnMoreOptions();
     filesPage.setFileName(fileName);
     filesPage.checkIgnoreAnyWarnings();
     filesPage.clickUploadButton();

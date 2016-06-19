@@ -38,24 +38,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] mainWikiPages() {
-    return new Object[][]{
-        {"runescape", "RuneScape_Wiki"},
-        {"yugioh", "Main_Page"},
-        {"naruto", "Narutopedia"},
-        {"leagueoflegends", "League_of_Legends_Wiki"},
-        {"es.drama", "Portada"},
-        {"de.memory-alpha", "Hauptseite"},
-        {"de.marvel-filme", "Marvel-Filme"},
-        {"de.wikia", "index.php?search=elder&fulltext=Search"},
-        {"it.squadraspecialecobra11", "Squadra_speciale_Cobra_11"},
-        {"it.onepiece", "One_Piece_Wiki_Italia"},
-        {"zh.pad", "Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA"},
-        {"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] popularSites() {
     return new Object[][]{
         {"zh.tos", "%E7%A5%9E%E9%AD%94%E4%B9%8B%E5%A1%94_Tower_of_Saviors_%E7%BB%B4%E5%9F%BA"},
@@ -69,23 +51,6 @@ public class AdsDataProvider {
         {"harrypotter", "Fizzing_Whizzbees"},
         {"leagueoflegends", "Ekko"},
         {"lego", "LEGO"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] corporatePages() {
-    return new Object[][]{
-        {"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
-        {"fr.wikia", "Wikia", "wka.wikia/_fraccueil//home", "CORP_TOP_LEADERBOARD"},
-        {"pl.wikia", "Wikia", "wka.wikia/_plcorporate//home", "CORP_TOP_LEADERBOARD"},
-        {"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Mini_Book_Club", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"bookshub", "Portal:YA_Society_Reads", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
-        {"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
     };
   }
 
@@ -127,23 +92,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] pagesWithAIC() {
-    return new Object[][]{
-        {"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
-        {"zh.pad", "%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
-        {"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
-        {"es.pokemon", "Lista_de_Pok%C3%A9mon"},
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"elderscrolls", "Skyrim"},
-        {"dragonvale", "Eggs"},
-        {"callofduty", "Mob_of_the_Dead"},
-        {"yugioh", "Lord_of_the_Tachyon_Galaxy"},
-        {"ffxiclopedia", "Category:Jobs"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] hubsPages() {
     return new Object[][]{
         {"portail-modedevie", "Portail_mode_de_vie/2014-12-28"},
@@ -181,7 +129,7 @@ public class AdsDataProvider {
   public static Object[][] fliteSkin() {
     return new Object[][]{
         {
-            "adtest", "Demo/Flite/Background_Takeover",
+            "project43", "SyntheticTests/Flite/Background_Takeover",
             new Dimension(1200, 1000),
             Arrays.asList(
                 Arrays.asList(
@@ -310,15 +258,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] getWikisWithStandardHVC() {
-    return new Object[][]{
-        {"adtest"},
-        {"de.icarly"},
-        {"en.memory-alpha"}
-    };
-  }
-
-  @DataProvider
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{
         {
@@ -333,13 +272,14 @@ public class AdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/DfpParams",
-            "wka.life/_adtest//article",
+            null,
+            "wka.life/_project43//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
-                "\"s1\":\"_adtest\"",
+                "\"s1\":\"_project43\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -353,6 +293,18 @@ public class AdsDataProvider {
                 "\"pos\":\"TOP_LEADERBOARD\"",
                 "\"src\":\"gpt\""
             )
+        },
+        {
+            "project43",
+            "SyntheticTests/RubiconFastlane",
+            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "wka.life/_project43//article",
+            "TOP_LEADERBOARD",
+            Collections.emptyList(),
+            Arrays.asList(
+                "\"rpfl_7450\":[\"2_tier2000",
+                "\"57_tier2000"
+            )
         }
     };
   }
@@ -363,7 +315,6 @@ public class AdsDataProvider {
         {
             "yugioh",
             "Dark_Magician",
-            null,
             "wka.gaming/_yugioh//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
@@ -383,9 +334,9 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"esrb\":\"everyone\"",
-                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                "\"media\":[\"tv\",\"cards\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"anime\",\"comic\",\"fantasy\"]",
+                "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                 "\"pform\":[\"pc\",\"psp\"]",
                 "\"sex\":[\"m\"]"
             ),
@@ -398,7 +349,6 @@ public class AdsDataProvider {
         {
             "fallout",
             "Fallout",
-            null,
             "wka.gaming/_fallout//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
@@ -418,12 +368,12 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"18-34\",\"18-24\",\"25-34\",\"teen\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
-                "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
-                "\"pub\":[\"bethesda\",\"bethesda\"]",
+                "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+                "\"pub\":[\"bethesda\"]",
                 "\"esrb\":\"mature\"",
-                "\"theme\":[\"military\",\"postapocalypse\"]"
+                "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -434,7 +384,6 @@ public class AdsDataProvider {
         {
             "runescape",
             "Grew",
-            null,
             "wka.gaming/_runescape//article",
             "TOP_LEADERBOARD",
             Arrays.asList(
@@ -452,10 +401,9 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"kids\",\"teen\",\"under18\",\"18-24\"]",
-                "\"gnre\":[\"mmo\",\"rpg\",\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"rpg\",\"mmorpg\",\"openworld\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
                 "\"pform\":[\"pc\"]",
-                "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
                 "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
@@ -469,7 +417,6 @@ public class AdsDataProvider {
         {
             "avatar",
             "Avatar_Wiki",
-            null,
             "wka.life/_avatar//home",
             "HOME_TOP_LEADERBOARD",
             Arrays.asList(
@@ -487,14 +434,10 @@ public class AdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"under18\",\"18-24\"]",
-                "\"egnre\":[\"anime\",\"fantasy\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
                 "\"media\":[\"tv\"]",
-                "\"eth\":[\"asian\"]",
-                "\"hhi\":[\"0-30\"]",
-                "\"kids\":[\"0-17\"]",
                 "\"sex\":[\"m\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fantasy\",\"cartoon\",\"comics\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"],\"theme\":[\"magic\"]",
                 "\"theme\":[\"magic\"]",
                 "\"esrb\":\"ec\""
             ),
@@ -507,7 +450,6 @@ public class AdsDataProvider {
         {
             "civilization",
             "Category:Browse",
-            null,
             "wka.gaming/_civilization//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
@@ -525,9 +467,9 @@ public class AdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
-                "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
-                "\"pform\":[\"pc\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                 "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
@@ -539,7 +481,6 @@ public class AdsDataProvider {
         {
             "starcraft",
             "StarCraft_Wiki",
-            null,
             "wka.gaming/_starcraft//home",
             "HOME_TOP_LEADERBOARD",
             Arrays.asList(
@@ -557,14 +498,13 @@ public class AdsDataProvider {
                 "\"ref\":\"direct\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
+                "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
-                "\"volum\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
-                "\"theme\":[\"space\",\"alien\"]"
+                "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
@@ -575,7 +515,6 @@ public class AdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            null,
             "wka.ent/_overlordmaruyama//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
@@ -598,18 +537,6 @@ public class AdsDataProvider {
                 "\"loc\":\"top\"",
                 "\"pos\":\"TOP_RIGHT_BOXAD\"",
                 "\"src\":\"gpt\""
-            )
-        },
-        {
-            "adtest",
-            "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_adtest//article",
-            "TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000",
-                "\"57_tier2000"
             )
         }
     };
@@ -661,14 +588,14 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Rachel"}
+        {"glee", "Get_It_Right"}
     };
   }
 
   @DataProvider
   public static Object[][] amazonSites() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/Amazon"},
+        {"project43", "SyntheticTests/Amazon"},
     };
   }
 
@@ -737,16 +664,25 @@ public class AdsDataProvider {
   public static Object[][] providersChainOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.TOP_LB,
+            "DirectGpt; RemnantGpt; Liftium"
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", 3
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.TOP_LB,
+            "DirectGpt; RemnantGpt; RubiconFastlane"
         },
         {
-            "adtest", "SyntheticTests/ProvidersChain",
-            "INVISIBLE_SKIN", "DirectGpt; RemnantGpt", 0
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "",
+            AdsContent.INVISIBLE_SKIN,
+            "DirectGpt; RemnantGpt"
         }
     };
   }
@@ -755,8 +691,18 @@ public class AdsDataProvider {
   public static Object[][] disableGptOasis() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "TOP_LEADERBOARD", "DirectGpt; RemnantGpt; Liftium", "Liftium"
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.TOP_LB,
+            "Liftium"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.TOP_LB,
+            "RubiconFastlane"
         },
     };
   }
@@ -767,19 +713,6 @@ public class AdsDataProvider {
         {"elderscrolls", "Skyrim"},
         {"wowwiki", "Portal:Main"},
         {"zh.pad", "Special:Video"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] kruxRealTimeSegment() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/Krux/Page_1",
-            "glee",
-            "Rachel",
-            "o8l9bis26"
-        }
     };
   }
 
@@ -834,15 +767,15 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF", 20, false},
-        {"adtest-pluto", "SyntheticTests/ATF", 20, true},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, false},
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, true},
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"adtest", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"project43", "SyntheticTests/ATF_DISABLE_BTF", false},
         {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
     };
   }
@@ -946,14 +879,13 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsOnConsecutivePages() {
     return new Object[][]{
         {
-            "adtest",
+            new Page("project43", "TrackingPixels/Article1"),
             new String[]{
-                "Article1",
-                "Article2",
-                "Article3",
-                "Article2",
-                "Article1",
-                "Wikia Ad Testing"
+                "TrackingPixels/Article2",
+                "TrackingPixels/Article3",
+                "TrackingPixels/Article2",
+                "TrackingPixels/Article1",
+                "Project43 Wikia"
             },
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
@@ -967,7 +899,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -981,7 +913,7 @@ public class AdsDataProvider {
             }
         },
         {
-            "lego",
+            "divergent",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -1014,14 +946,41 @@ public class AdsDataProvider {
     };
   }
 
+    @DataProvider
+    public static Object[][] adsTrackingPixelsSentAuthPage() {
+        return new Object[][]{
+            {
+                MercuryWikis.MERCURY_AUTOMATION_TESTING,
+                "join",
+                new String[]{
+                    TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
+                }
+            }
+        };
+    }
+
   @DataProvider
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsDetection() {
+    return new Object[][]{
+        {
+            "project43",
+            false
+        },
+        {
+            "arecovery",
+            true
         }
     };
   }
@@ -1189,6 +1148,42 @@ public class AdsDataProvider {
                 .put("src", "gpt")
                 .build()
         },
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryOasis() {
+    return new Object[][]{
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.TOP_LB)
+                .put("lineItemId", 277592292)
+                .put("src", "gpt")
+                .build()
+        },
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            ImmutableMap.<String, Object>builder()
+                .put("slotName", AdsContent.MEDREC)
+                .put("lineItemId", 277592292)
+                .put("src", "gpt")
+                .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryUnlockCSSOasis() {
+    return new Object[][]{
+        {
+            new Page("project43", "Project43_Wikia"),
+            false
+        },
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            true
+        }
     };
   }
 

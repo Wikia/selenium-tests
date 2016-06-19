@@ -3,46 +3,60 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
+import com.wikia.webdriver.elements.mercury.pages.login.JoinPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.List;
+import org.openqa.selenium.NoSuchElementException;
 
 public class Navigation {
 
-  @FindBy(css = ".side-nav-menu__item.main")
+  @FindBy(css = ".wikia-nav--login")
   private WebElement signInRegisterButton;
 
-  @FindBy(css = ".side-nav-menu__item.back")
+  @FindBy(css = ".wikia-nav__back")
   private WebElement backButton;
 
-  @FindBy(css = ".side-search__container input")
-  private WebElement searchInput;
-
-  @FindBy(css = ".side-nav-menu__item.menu")
+  @FindBy(css = ".nav-menu__item.nav-menu--root")
   private List<WebElement> subMenuLinks;
 
-  @FindBy(css = ".local-nav-menu li.mw-content a")
+  @FindBy(css = "li.nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
-  private By localNavMenu = By.cssSelector(".local-nav-menu");
-  private By cancelSearchButton = By.cssSelector(".side-search__cancel");
+  @FindBy(css = ".wikia-nav__header")
+  private WebElement navigationMainHeader;
+
+  @FindBy(css = ".nav-menu--games")
+  private WebElement gamesHub;
+
+  @FindBy(css = ".nav-menu--movies")
+  private WebElement moviesHub;
+
+  @FindBy(css = ".nav-menu--tv")
+  private WebElement tvHub;
+
+  @FindBy(css = ".wikia-nav__avatar")
+  private WebElement userAvatar;
+
+  @FindBy(css = ".wikia-nav--profile-link")
+  private WebElement userProfileLink;
+
+  @FindBy(css = ".wikia-nav--logout")
+  private WebElement logoutLink;
+
+  @FindBy(css = ".nav-menu__header")
+  private WebElement exploreWikiHeader;
+
   private By navigationComponent = By.cssSelector(".side-nav-menu");
-  private By loadingSearchResultsIndicator = By.cssSelector(".side-search__results li.loading");
-
-  private String searchResultClass = ".side-search__results li.mw-content a";
-
   private WebDriver driver;
   private Wait wait;
   private Loading loading;
-
 
   public Navigation(WebDriver driver) {
     this.driver = driver;
@@ -52,38 +66,28 @@ public class Navigation {
     PageFactory.initElements(driver, this);
   }
 
-  public Navigation clickOnSignInRegisterButton() {
+  public JoinPage clickOnSignInRegisterButton() {
     PageObjectLogging.logInfo("Open login page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 
-    return this;
+    return new JoinPage(driver);
   }
 
-  public Navigation cancelSearch() {
-    PageObjectLogging.logInfo("Cancel search");
-    WebElement cancelButton = driver.findElement(cancelSearchButton);
-    wait.forElementClickable(cancelButton);
-    cancelButton.click();
-
-    PageObjectLogging.logInfo("Cancel search button is not present");
-    wait.forElementNotPresent(cancelSearchButton);
-
-    PageObjectLogging.logInfo("Local nav is present");
-    wait.forElementPresent(localNavMenu);
+  public Navigation clickBackButton() {
+    PageObjectLogging.logInfo("Go back to previous navigation level");
+    wait.forElementClickable(backButton);
+    backButton.click();
 
     return this;
   }
 
-  public Navigation seeNoSearchResults() {
-    PageObjectLogging.logInfo("Loading search results indicator is present");
-    wait.forElementPresent(loadingSearchResultsIndicator);
+  public Navigation clickExploreWikiHeader() {
+    PageObjectLogging.logInfo("Click 'Explore Wiki' header");
+    wait.forElementClickable(exploreWikiHeader);
 
-    PageObjectLogging.logInfo("Loading search results indicator is not present");
-    wait.forElementNotPresent(loadingSearchResultsIndicator);
-
-    PageObjectLogging.logInfo("No search results are present");
-    wait.forElementNotPresent(By.cssSelector(searchResultClass));
+    exploreWikiHeader.click();
+    loading.handleAsyncPageReload();
 
     return this;
   }
@@ -92,25 +96,6 @@ public class Navigation {
     PageObjectLogging.logInfo("Close sub-menu");
     wait.forElementClickable(backButton);
     backButton.click();
-
-    return this;
-  }
-
-  public Navigation selectSearchSuggestion(int index) {
-    String oldUrl = driver.getCurrentUrl();
-
-    PageObjectLogging.logInfo("Select search suggestion no.: " + index);
-    WebElement searchResult = driver.findElements(By.cssSelector(searchResultClass)).get(index);
-    wait.forElementClickable(searchResult);
-    searchResult.click();
-    loading.handleAsyncPageReload();
-
-    PageObjectLogging.logInfo("Navigation is closed");
-    wait.forElementNotVisible(navigationComponent);
-
-    Assertion.assertFalse(oldUrl.equalsIgnoreCase(driver.getCurrentUrl()),
-                          "Navigation to selected search suggestion failed");
-    PageObjectLogging.logInfo("Successfully navigated to selected search suggestion");
 
     return this;
   }
@@ -144,29 +129,7 @@ public class Navigation {
     return this;
   }
 
-  public Navigation typeInSearch(String text) {
-    PageObjectLogging.logInfo("Local nav is not present");
-    wait.forElementClickable(searchInput);
-    searchInput.click();
-    wait.forElementNotPresent(localNavMenu);
-
-    PageObjectLogging.logInfo("Search for query: " + text);
-    searchInput.sendKeys(text);
-
-    return this;
-  }
-
-  public Navigation navigateToPage(String pageName) {
-    openSubMenu(1);
-    typeInSearch(pageName);
-    selectSearchSuggestion(0);
-
-    return this;
-  }
-
   public Navigation openRecentWikiActivity() {
-    this.openSubMenu(1);
-
     wait.forElementClickable(recentWikiActivityLink);
     recentWikiActivityLink.click();
 
@@ -178,4 +141,50 @@ public class Navigation {
 
     return this;
   }
+
+  public boolean isMainHeaderVisible() {
+    return isElementVisible(navigationMainHeader);
+  }
+
+  public boolean isBackButtonVisible() {
+    return isElementVisible(backButton);
+  }
+
+  public boolean isUserAvatarVisible() {
+    return isElementVisible(userAvatar);
+  }
+
+  public boolean isUserProfileLinkVisible() {
+    return isElementVisible(userProfileLink);
+  }
+
+  public boolean isLogoutLinkVisible() {
+    return isElementVisible(logoutLink);
+  }
+
+  public boolean isExploreWikiHeaderVisible() {
+    return isElementVisible(exploreWikiHeader);
+  }
+
+  public boolean areHubLinksVisible() {
+    return isElementVisible(gamesHub)
+        && isElementVisible(moviesHub)
+        && isElementVisible(tvHub);
+  }
+
+  private boolean isElementVisible(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public String getNavigationHeaderText() {
+    wait.forElementVisible(navigationMainHeader);
+
+    return navigationMainHeader.getText();
+  }
+
 }

@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,7 +11,6 @@ import com.wikia.webdriver.common.users.CreateUser;
 import com.wikia.webdriver.common.users.TestUser;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -24,7 +22,7 @@ import org.testng.annotations.Test;
 public class SignupTests extends NewTestTemplate {
 
   private void init() {
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "MercurySignupTest_001")
@@ -34,13 +32,12 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercurySignupTest_002")
-  public void MercurySignupTest_002_signupErrorEmailInUse() {
+  public void anonCanSignUpWithEmailAlreadyInUse() {
     init();
-    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyEmailInUseError();
+    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyAvatarAfterSignup();
   }
 
   @Test(groups = "MercurySignupTest_003")
-  @RelatedIssue(issueID = "SOC-2162")
   public void MercurySignupTest_003_signupErrorUsernameTaken() {
     init();
     String userNameTaken = "bekcunning";
