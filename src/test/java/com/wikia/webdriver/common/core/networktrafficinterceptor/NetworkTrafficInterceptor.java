@@ -1,22 +1,17 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
 import java.net.InetSocketAddress;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.netty.handler.codec.http.HttpRequest;
-import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
+import net.lightbody.bmp.proxy.CaptureType;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.littleshoot.proxy.ChainedProxy;
-import org.littleshoot.proxy.ChainedProxyManager;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriverException;
 
@@ -103,6 +98,8 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
     setChainedProxy(new InetSocketAddress(ip.split(":")[0], 8888));
     setTrustAllServers(true);
     setMitmDisabled(true);
+    setRequestTimeout(90, TimeUnit.SECONDS);
+    enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
   }
 
   @Override
