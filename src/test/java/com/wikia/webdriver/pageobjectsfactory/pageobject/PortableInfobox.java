@@ -35,9 +35,6 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
 
-  @FindBy(css = ".pi-image")
-  private WebElement imageWrapper;
-
   @FindBy(css = "body")
   private WebElement bodyElement;
 
@@ -55,6 +52,9 @@ public class PortableInfobox extends BasePageObject {
 
   @FindBy(css = ".pi-navigation")
   private WebElement navigation;
+
+  @FindBy(css = ".pi-image")
+  private List<WebElement> imagesWrappers;
 
   @FindBy(css = "h3.pi-data-label.pi-secondary-font")
   private List<WebElement> horizontalItemLabels;
@@ -327,49 +327,32 @@ public class PortableInfobox extends BasePageObject {
     return isElementVisible(referenceElements);
   }
 
-  public PortableInfobox verifyPadding(WebElement element) {
-    Assertion.assertEquals(
-        element.getCssValue("padding-left"),
-        element.getCssValue("padding-right")
-    );
-
-    return this;
+  public boolean isNavigationPaddingLeftAndRightEqual(int index) {
+    String left = getNavigationElements(index).getCssValue("padding-left");
+    String right = getNavigationElements(index).getCssValue("padding-right");
+    return left.equalsIgnoreCase(right);
   }
 
-  public PortableInfobox verifyPaddingNavigationElementWithIndex(int index) {
-    verifyPadding(getNavigationElements(index));
-
-    return this;
+  public boolean isHeaderPaddingLeftAndRightEqual(int index) {
+    String left = getGroupHeader(index).getCssValue("padding-left");
+    String right = getGroupHeader(index).getCssValue("padding-right");
+    return left.equalsIgnoreCase(right);
   }
 
-  public PortableInfobox verifyDivsNotAppearingInImage() {
-    Assertion.assertNotEquals(imageWrapper.getTagName(), "div");
-
-    return this;
+  public boolean imageContainsDiv(int index) {
+    return imagesWrappers.get(index).getTagName().contains("div");
   }
 
-  public PortableInfobox verifyDivsNotAppearingInTitle() {
-    Assertion.assertNotEquals(titles.get(0).getTagName(), "div");
-
-    return this;
+  public boolean titleContainsDiv(int index) {
+    return titles.get(index).getTagName().contains("div");
   }
 
-  public PortableInfobox verifyDivsNotAppearingInHeaderWithIndex(int index) {
-    Assertion.assertNotEquals(groupHeadersWrappers.get(index).getTagName(), "div");
-
-    return this;
+  public boolean headerContainsDiv(int index) {
+    return groupHeadersWrappers.get(index).getTagName().contains("div");
   }
 
-  public PortableInfobox verifyEmptyTags() {
-    Assertion.assertStringContains(layout.getText(), "Default");
-
-    return this;
-  }
-
-  public PortableInfobox verifyGroupHeaderPaddingWithIndex(int index) {
-    verifyPadding(getGroupHeader(index));
-
-    return this;
+  public boolean infoboxContainsEmptyTag() {
+    return layout.getText().contains("Default");
   }
 
 }

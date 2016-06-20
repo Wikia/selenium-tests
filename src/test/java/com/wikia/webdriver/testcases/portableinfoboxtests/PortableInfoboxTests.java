@@ -193,8 +193,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
 
     String templateSyntax =
-        template.openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
-            .editArticleInSrcUsingDropdown().copyContent();
+        template
+            .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
+            .editArticleInSrcUsingDropdown()
+            .copyContent();
 
     (new ArticleContent()).clear();
 
@@ -216,7 +218,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox.verifyPaddingNavigationElementWithIndex(1);
+    Assertion.assertTrue(infobox.isNavigationPaddingLeftAndRightEqual(1));
   }
 
   public void verifyGroupHeadersPadding() {
@@ -225,7 +227,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox.verifyGroupHeaderPaddingWithIndex(1);
+    Assertion.assertTrue(infobox.isHeaderPaddingLeftAndRightEqual(1));
   }
 
   public void verifyDivsWrappersAreNotIncluded() {
@@ -234,10 +236,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox
-        .verifyDivsNotAppearingInImage()
-        .verifyDivsNotAppearingInTitle()
-        .verifyDivsNotAppearingInHeaderWithIndex(0);
+    Assertion.assertFalse(infobox.imageContainsDiv(0));
+    Assertion.assertFalse(infobox.headerContainsDiv(0));
+    Assertion.assertFalse(infobox.titleContainsDiv(0));
   }
 
   public void verifyEmptyTagsAreNotAppearing() {
@@ -246,7 +247,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox.verifyEmptyTags();
+    Assertion.assertTrue(infobox.infoboxContainsEmptyTag());
   }
 
   public void insertEmptyInfoboxInVE() {
