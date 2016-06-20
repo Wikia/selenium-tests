@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
-public class PortableInfobox extends WikiBasePageObject {
+public class PortableInfobox extends BasePageObject {
 
   @FindBy(css = ".pi-image")
   private WebElement image;
@@ -75,7 +75,7 @@ public class PortableInfobox extends WikiBasePageObject {
   private List<WebElement> categories;
 
   @FindBy(css = ".pi-navigation a[href*='redlink']")
-  private List<WebElement> redlLinks;
+  private List<WebElement> redLinks;
 
   @FindBy(css = ".pi-item .external")
   private List<WebElement> externalLinks;
