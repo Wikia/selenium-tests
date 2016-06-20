@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 /**
  * Set of Test Cases found on:
- * https://one.wikia-inc.com/wiki/Portable_Infoboxes_Test_Plan
+ * https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
  */
 @Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
