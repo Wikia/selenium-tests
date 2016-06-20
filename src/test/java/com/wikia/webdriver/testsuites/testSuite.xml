@@ -206,10 +206,10 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VECopyAndPasteTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VisualEditorEditingTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEAddMapTests"/>
-            <class name="com.wikia.webdriver.testcases.visualeditor.VEAddVideoTests"/>
+            <class name="com.wikia.webdriver.testcases.visualeditor.VEVideoTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VECategoryTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
-            <class name="com.wikia.webdriver.testcases.visualeditor.VEMediaTests"/>
+            <class name="com.wikia.webdriver.testcases.visualeditor.VEImageTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VERecaptchaTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VETemplateTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
