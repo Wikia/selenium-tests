@@ -398,5 +398,4 @@ public class PortableInfobox extends WikiBasePageObject {
 
     return this;
   }
-
 }
