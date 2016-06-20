@@ -3,8 +3,11 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.List;
@@ -57,7 +60,7 @@ public class PortableInfobox extends BasePageObject {
   private WebElement horizontalItemValue;
 
   @FindBy(css = ".pi-navigation")
-  private WebElement poemTag;
+  private WebElement navigation;
 
   @FindBy(css = ".poem")
   private List<WebElement> internalLinksInsidePoemTag;
@@ -276,11 +279,17 @@ public class PortableInfobox extends BasePageObject {
     return this;
   }
 
-  public PortableInfobox isImagePresented() {
-    wait.forElementVisible(image);
-    Assertion.assertEquals(isElementOnPage(image), true);
+  private boolean isElementVisible(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
 
-    return this;
+  public boolean isImageVisible() {
+    return isElementVisible(image);
   }
 
   public PortableInfobox isTabberPresented() {
@@ -297,11 +306,8 @@ public class PortableInfobox extends BasePageObject {
     return this;
   }
 
-  public PortableInfobox isInfoboxTitlePresented() {
-    wait.forElementVisible(title);
-    Assertion.assertEquals(isElementOnPage(title), true);
-
-    return this;
+  public boolean isInfoboxTitlePresented() {
+    return isElementVisible(title);
   }
 
   public PortableInfobox isLightboxPresented() {
@@ -311,47 +317,45 @@ public class PortableInfobox extends BasePageObject {
     return this;
   }
 
-  public PortableInfobox areLinksInPoemTagPresented() {
-    wait.forElementVisible(poemTag);
-    Assertion.assertFalse(internalLinksInsidePoemTag.isEmpty());
-    Assertion.assertFalse(externalLinksInsidePoemTag.isEmpty());
-
-    return this;
+  public boolean isInfoboxNavigationElementVisible() {
+    return isElementVisible(navigation);
   }
 
-  public PortableInfobox areQuotationMarksPresented() {
+  public int getInternalNavigationLinksNumber() {
+    return internalLinksInsidePoemTag.size();
+  }
+
+  public int getExternalNavigationLinksNumber() {
+    return externalLinksInsidePoemTag.size();
+  }
+
+  public boolean areQuotationMarksPresented() {
     wait.forElementVisible(h3Elements);
-    Assertion.assertStringContains("\"URL\"", h3Elements.getText());
 
-    return this;
+    return h3Elements.getText().contains("\"URL\"");
   }
 
-  public PortableInfobox areBoldElementsMoreThanOne() {
-    Assertion.assertFalse(boldElements.isEmpty());
+  public int getBoldElementsNumber() {
 
-    return this;
+    return boldElements.size();
   }
 
-  public PortableInfobox areItalicElementsMoreThanOne() {
-    Assertion.assertFalse(italicElements.isEmpty());
+  public int getItalicElementsNumber() {
 
-    return this;
+    return italicElements.size();
   }
 
-  public PortableInfobox areHeadersMoreThanOne() {
-    Assertion.assertFalse(h3Titles.isEmpty());
+  public int getHeadersNumber() {
 
-    return this;
+    return h3Titles.size();
   }
 
   public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
     Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
 
-  public PortableInfobox verifyReferencesPresence() {
-    wait.forElementVisible(referenceElements);
-
-    return this;
+  public boolean isReferenceElementVisible() {
+    return isElementVisible(referenceElements);
   }
 
   public PortableInfobox verifyPadding(WebElement element) {

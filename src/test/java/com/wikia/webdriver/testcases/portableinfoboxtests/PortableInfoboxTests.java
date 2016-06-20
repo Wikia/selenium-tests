@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
@@ -30,14 +31,26 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox.areBoldElementsMoreThanOne()
-        .areItalicElementsMoreThanOne()
-        .areHeadersMoreThanOne()
-        .areQuotationMarksPresented()
-        .verifyReferencesPresence()
-        .isImagePresented()
-        .isInfoboxTitlePresented()
-        .areLinksInPoemTagPresented();
+    Assertion.assertTrue(infobox.getHeadersNumber() > 0 );
+    Assertion.assertTrue(infobox.isImageVisible());
+    Assertion.assertTrue(infobox.isInfoboxTitlePresented());
+    Assertion.assertTrue(infobox.getBoldElementsNumber() > 0 );
+    Assertion.assertTrue(infobox.getItalicElementsNumber() > 0 );
+    Assertion.assertTrue(infobox.areQuotationMarksPresented());
+    Assertion.assertTrue(infobox.isReferenceElementVisible());
+
+  }
+
+  @Execute(onWikia = "mediawiki119")
+  public void infoboxNavigationElements() {
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    Assertion.assertTrue(infobox.isInfoboxNavigationElementVisible());
+    Assertion.assertTrue(infobox.getInternalNavigationLinksNumber() > 0);
+    Assertion.assertTrue(infobox.getExternalNavigationLinksNumber() > 0);
   }
 
   @Execute(onWikia = "mediawiki119")
@@ -164,6 +177,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePage template = new TemplatePage();
     ArticlePageObject article = new ArticlePageObject();
+    PortableInfobox infobox = new PortableInfobox();
 
     String templateSyntax =
         template.openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
@@ -179,7 +193,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .addContentInSourceMode(templateSyntax)
         .submitArticle();
 
-    new PortableInfobox().isImagePresented().isInfoboxTitlePresented();
+    Assertion.assertTrue(infobox.isImageVisible());
+    Assertion.assertTrue(infobox.isInfoboxTitlePresented());
   }
 
   @Execute(onWikia = "mediawiki119")
