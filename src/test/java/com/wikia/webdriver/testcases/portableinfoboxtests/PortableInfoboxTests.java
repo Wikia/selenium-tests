@@ -19,18 +19,18 @@ import org.testng.annotations.Test;
  * Set of Test Cases found on:
  * https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
  */
+
 @Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  @Execute(onWikia = "mediawiki119", asUser = User.USER)
+  @Execute(onWikia = "mediawiki119")
   public void verifyElementsVisibility() {
-    PortableInfobox info = new PortableInfobox();
+    PortableInfobox infobox = new PortableInfobox();
 
-    info.open(PageContent.PORTABLE_INFOBOX_01);
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
 
-    new ArticlePurger().purgeArticleAsLoggedUser();
-
-    info.areBoldElementsMoreThanOne()
+    infobox.areBoldElementsMoreThanOne()
         .areItalicElementsMoreThanOne()
         .areHeadersMoreThanOne()
         .areQuotationMarksPresented()
@@ -42,91 +42,120 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Execute(onWikia = "mediawiki119")
   public void verifyElementsRedirects() {
-    PortableInfobox info = new PortableInfobox();
+    PortableInfobox infobox = new PortableInfobox();
 
-    info.open(PageContent.PORTABLE_INFOBOX_01).clickRedLinkWithIndex(0).verifyCreateNewArticleModal();
+    infobox.open(PageContent.PORTABLE_INFOBOX_01).clickRedLinkWithIndex(0).verifyCreateNewArticleModal();
+    new ArticlePurger().purgeArticleAsAnon();
 
-    String externalLinkName = info
+    String externalLinkName = infobox
         .open(PageContent.PORTABLE_INFOBOX_01)
         .getExternalLinkRedirectTitleWithIndex(0);
 
-    String externalUrl = info
+    String externalUrl = infobox
         .clickExternalLinkWithIndex(0)
         .getUrlAfterPageIsLoaded();
 
-    info.compareURLAndExternalLink(externalLinkName, externalUrl);
+    infobox.compareURLAndExternalLink(externalLinkName, externalUrl);
 
-    String internalLinkName = info
+    String internalLinkName = infobox
         .open(PageContent.PORTABLE_INFOBOX_01)
         .getInternalLinkRedirectTitleWithIndex(3);
 
-    String internalURL = info
+    String internalURL = infobox
         .clickInternalLinkWithIndex(3)
         .getUrlAfterPageIsLoaded();
 
-    info.compareURLAndInternalLink(internalLinkName, internalURL);
+    infobox.compareURLAndInternalLink(internalLinkName, internalURL);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject();
-    String articleName = article.open(PageContent.PORTABLE_INFOBOX_01).getArticleName();
 
-    article.openSpecialWhatLinksHere(wikiURL).clickPageInputField()
+    article.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    String articleName = article.getArticleName();
+
+    article
+        .openSpecialWhatLinksHere(wikiURL).clickPageInputField()
         .typeInfoboxImageName(PageContent.FILE_IMAGE_NAME).clickShowbutton()
         .verifyInfoboxArticleInList(articleName);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyLightboxVisibilityAfterClickingImage() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01).clickImage()
-        .isLightboxPresented();
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox.clickImage().isLightboxPresented();
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyVisibilityOfTabberAndItsImages() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_02).isTabberPresented()
-        .isTabberImagePresented();
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_02);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox.isTabberPresented().isTabberImagePresented();
   }
 
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     ArticlePageObject article = new ArticlePageObject();
-    PortableInfobox info = new PortableInfobox();
+    PortableInfobox infobox = new PortableInfobox();
 
     theme.openSpecialDesignerPage(wikiURL).selectTheme(4);
     theme.submitTheme();
 
-    String oldBackground = info.open(PageContent.PORTABLE_INFOBOX_01).getBackgroundColor();
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsLoggedUser();
+
+    String oldBackground = infobox.getBackgroundColor();
 
     theme.openSpecialDesignerPage(wikiURL).selectTheme(1);
     theme.submitTheme();
 
     article.open(PageContent.PORTABLE_INFOBOX_01);
-    info.verifyChangedBackground(oldBackground, info.getBackgroundColor());
+    infobox.verifyChangedBackground(oldBackground, infobox.getBackgroundColor());
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyOrderedAndUnorderedLists() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_02)
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_02);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox
         .compareFontSizesBetweenItemValueAndOrderedListItemWithIndex(1)
         .compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(1);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyInfoboxCategoryLinks() {
-    PortableInfobox info =
+    PortableInfobox infobox =
         new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01);
 
-    String categoryLinkName = info.getCategoryLinkName();
-    info.clickCategoryLink();
+    new ArticlePurger().purgeArticleAsAnon();
+
+    String categoryLinkName = infobox.getCategoryLinkName();
+    infobox.clickCategoryLink();
     new CategoryPageObject(driver).verifyCategoryPageTitle(categoryLinkName);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyHorizontalGroupFontSize() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox
         .compareFontSizesBetweenHorizontalItemLabelAndItemLabel()
         .compareFontSizesBetweenHorizontalItemValueAndItemValue();
   }
@@ -142,7 +171,12 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     (new ArticleContent()).clear();
 
-    article.open().openCurrectArticleSourceMode().addContentInSourceMode(templateSyntax)
+    article.open();
+    new ArticlePurger().purgeArticleAsLoggedUser();
+
+    article
+        .openCurrectArticleSourceMode()
+        .addContentInSourceMode(templateSyntax)
         .submitArticle();
 
     new PortableInfobox().isImagePresented().isInfoboxTitlePresented();
@@ -150,87 +184,141 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Execute(onWikia = "mediawiki119")
   public void verifyNavigationElementPadding() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
-        .verifyPaddingNavigationElementWithIndex(1);
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox.verifyPaddingNavigationElementWithIndex(1);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyGroupHeadersPadding() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
-        .verifyGroupHeaderPaddingWithIndex(1);
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox.verifyGroupHeaderPaddingWithIndex(1);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyDivsWrappersAreNotIncluded() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
-        .verifyDivsNotAppearingInImage().verifyDivsNotAppearingInTitle()
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox
+        .verifyDivsNotAppearingInImage()
+        .verifyDivsNotAppearingInTitle()
         .verifyDivsNotAppearingInHeaderWithIndex(0);
   }
 
   @Execute(onWikia = "mediawiki119")
   public void verifyEmptyTagsAreNotAppearing() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS)
-        .verifyEmptyTags();
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    infobox.verifyEmptyTags();
   }
 
   @Execute(onWikia = "mediawiki119")
   public void insertEmptyInfoboxInVE() {
+    ArticlePageObject article = new ArticlePageObject();
+
     (new ArticleContent()).clear();
 
-    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).clickApplyChanges()
+    article.open();
+    new ArticlePurger().purgeArticleAsAnon();
+
+    article.openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2).clickApplyChanges()
         .isInfoboxInsertedInEditorArea();
   }
 
   @Execute(onWikia = "mediawiki119")
   public void insertInfoboxWithParametersInVE() {
+    ArticlePageObject article = new ArticlePageObject();
+
     (new ArticleContent()).clear();
 
-    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
+    article.open();
+    new ArticlePurger().purgeArticleAsAnon();
+
+    article
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges().isInfoboxInsertedInEditorArea();
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
   }
 
   @Execute(onWikia = "mediawiki119")
   public void editInfoboxInVEbyPopup() {
+    ArticlePageObject article = new ArticlePageObject();
     (new ArticleContent()).clear();
 
-    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
+    article.open();
+    new ArticlePurger().purgeArticleAsAnon();
+
+    article
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges().isInfoboxInsertedInEditorArea().clickInfoboxPopup()
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea()
+        .clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges().isInfoboxInsertedInEditorArea();
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
   }
 
   @Execute(asUser = User.STAFF, onWikia = "mediawiki119")
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
+    ArticlePageObject article = new ArticlePageObject();
     (new ArticleContent()).clear();
 
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     theme.openSpecialDesignerPage(wikiURL).selectTheme(3);
     theme.submitTheme();
 
-    new ArticlePageObject().open().openVEModeWithMainEditButton().clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
+    article.open();
+    new ArticlePurger().purgeArticleAsLoggedUser();
+
+    article
+        .open()
+        .openVEModeWithMainEditButton()
+        .clickInsertToolButton()
+        .clickInsertInfoboxFromInsertToolMenu()
+        .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges().isInfoboxInsertedInEditorArea();
+        .clickApplyChanges()
+        .isInfoboxInsertedInEditorArea();
   }
 
   public void infoboxImageOnCategoryPage() {
-    PortableInfobox info = new PortableInfobox();
+    PortableInfobox infobox = new PortableInfobox();
 
-    String imageName = info
-        .open(PageContent.PORTABLE_INFOBOX_02)
-        .getDataImageName();
+    infobox.open(PageContent.PORTABLE_INFOBOX_02);
+    new ArticlePurger().purgeArticleAsAnon();
 
-    CategoryPageObject categoryPage = info.clickCategoryWithIndex(0);
+    String imageName = infobox.getDataImageName();
+
+    CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
 
     String categoryImageURL = categoryPage.getPageImageURL(
         categoryPage.getArticleIndexInGalleryByName(PageContent.PORTABLE_INFOBOX_02)
     );
 
-    info.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
+    infobox.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
   }
 }
