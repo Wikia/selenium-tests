@@ -13,6 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.testng.annotations.Test;
 
@@ -258,11 +259,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    article.openVEModeWithMainEditButton()
+    VisualEditorPageObject visualEditor = article
+        .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2).clickApplyChanges()
-        .isInfoboxInsertedInEditorArea();
+        .selectInfoboxTemplate(2)
+        .clickApplyChanges();
+
+    Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
   public void insertInfoboxWithParametersInVE() {
@@ -273,14 +277,15 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    article
+    VisualEditorPageObject visualEditor = article
         .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges()
-        .isInfoboxInsertedInEditorArea();
+        .clickApplyChanges();
+
+    Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
   public void editInfoboxInVEbyPopup() {
@@ -290,18 +295,22 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    article
+    VisualEditorPageObject visualEditor = article
         .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges()
-        .isInfoboxInsertedInEditorArea()
+        .clickApplyChanges();
+
+    Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
+
+    visualEditor
         .clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges()
-        .isInfoboxInsertedInEditorArea();
+        .clickApplyChanges();
+
+    Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
   @Execute(asUser = User.STAFF)
@@ -316,31 +325,34 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    article
+    VisualEditorPageObject visualEditor = article
         .open()
         .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
         .selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges()
-        .isInfoboxInsertedInEditorArea();
+        .clickApplyChanges();
+
+    Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
+  @Execute(asUser = User.USER)
   public void infoboxImageOnCategoryPage() {
     PortableInfobox infobox = new PortableInfobox();
 
     infobox.open(PageContent.PORTABLE_INFOBOX_02);
-    new ArticlePurger().purgeArticleAsAnon();
+    new ArticlePurger().purgeArticleAsLoggedUser();
 
     String imageName = infobox.getDataImageName();
 
     CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
+    new ArticlePurger().purgeArticleAsLoggedUser();
 
     String categoryImageURL = categoryPage.getPageImageURL(
         categoryPage.getArticleIndexInGalleryByName(PageContent.PORTABLE_INFOBOX_02)
     );
 
-    infobox.compareInfoboxAndCategoryPageImages(categoryImageURL, imageName);
+    Assertion.assertTrue(categoryImageURL.contains(imageName));
   }
 }

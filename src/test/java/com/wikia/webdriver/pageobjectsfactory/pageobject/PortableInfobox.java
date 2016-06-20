@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -116,10 +115,6 @@ public class PortableInfobox extends BasePageObject {
 
   public String getBackgroundColor() {
     return layout.getCssValue("background-color");
-  }
-
-  public String getTitleBackgroundColor(int index) {
-    return titles.get(index).getCssValue("background-color");
   }
 
   public String getLinkRedirectTitle(WebElement element) {
@@ -250,12 +245,6 @@ public class PortableInfobox extends BasePageObject {
 
   public String getUnorderedElementFontSize(int index) {
     return unorderedElements.get(index).getCssValue("font-size");
-  }
-
-  public PortableInfobox compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
-    Assertion.assertStringContains(imageName, categoryImageURL);
-
-    return this;
   }
 
   private boolean isElementVisible(WebElement element) {
