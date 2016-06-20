@@ -2,14 +2,17 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
@@ -34,6 +37,7 @@ import java.util.Map;
 
 public class VisualEditorPageObject extends VisualEditorMenu {
 
+  @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
   @FindBy(css = "figure.wikia-interactive-map-thumbnail")
   private WebElement mapNode;
@@ -91,7 +95,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> mediaNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
-  @FindBy(css = "figure.ve-ce-branchNode")
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -191,9 +194,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public ArticlePageObject clickVEEditAndPublish(String content) {
     typeTextArea(content);
-    VisualEditorSaveChangesDialog save = clickPublishButton();
-    save.savePage();
+    publish();
     return new ArticlePageObject();
+  }
+
+  public ArticlePageObject publish() {
+    verifyVEToolBarPresent();
+    VisualEditorSaveChangesDialog save = clickPublishButton();
+    ArticlePageObject article = save.savePage();
+    article.verifyVEPublishComplete();
+    return article;
   }
 
   public void verifyMapPresent() {
@@ -247,7 +257,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public VisualEditorMediaSettingsDialog openMediaSettings() {
     wait.forElementVisible(editArea);
     wait.forElementVisible(mediaNode);
-    wait.forElementVisible(focusedNode);
     clickContextMenu();
     return new VisualEditorMediaSettingsDialog(driver);
   }
@@ -318,12 +327,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return veSrcDialog.clickApplyChangesButton();
   }
 
-  public void verifyPreviewVideoPlay(String providerName) {
+  public void verifyPreviewVideo() {
     wait.forElementVisible(previewOverlay);
     wait.forElementVisible(previewVideoWrapper);
-    VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
-    video.verifyVideoAutoplay(providerName, true);
-    PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+    PageObjectLogging.log("verifyPreviewVideo", "Preview for Video loaded", true, driver);
   }
 
   public void verifyPreviewImage() {
@@ -506,6 +513,45 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(infoboxPopup);
     infoboxPopup.click();
     return this;
+  }
+
+  public VisualEditorPageObject addVideoToContent(String videoType) {
+    verifyVEToolBarPresent();
+    verifyEditorSurfacePresent();
+    VisualEditorAddMediaDialog mediaDialog = clickVideoButton();
+    return mediaDialog.addMediaByURL(videoType);
+  }
+
+  public VisualEditorAddMediaDialog searchVideo(String searchInput) {
+    verifyVEToolBarPresent();
+    verifyEditorSurfacePresent();
+    VisualEditorAddMediaDialog mediaDialog = clickVideoButton();
+    return mediaDialog.searchMedia(searchInput);
+  }
+
+  public void resizeMedia(int resizeNumber, ImageSize size) {
+    VisualEditorMediaSettingsDialog mediaSettingsDialog = openMediaSettings();
+    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
+    mediaSettingsDialog.setCustomSize(resizeNumber, size);
+    mediaSettingsDialog.clickApplyChangesButton();
+  }
+
+  public void alignMedia(int mediaIndex, Alignment direction) {
+    verifyEditorSurfacePresent();
+    verifyVEToolBarPresent();
+    selectMediaByIndex(mediaIndex);
+    VisualEditorMediaSettingsDialog mediaSettingsDialog = openMediaSettings();
+    mediaSettingsDialog.selectSettings(Setting.ADVANCED);
+    mediaSettingsDialog.clickAlignment(direction);
+    mediaSettingsDialog.clickApplyChangesButton();
+  }
+
+  public VisualEditorAddMediaDialog searchImage(String searchInput) {
+    verifyVEToolBarPresent();
+    verifyEditorSurfacePresent();
+    VisualEditorAddMediaDialog mediaDialog = clickImageButton();
+    mediaDialog = mediaDialog.searchMedia(searchInput);
+    return mediaDialog;
   }
 
 }
