@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +8,6 @@ import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.proxy.CaptureType;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Proxy;

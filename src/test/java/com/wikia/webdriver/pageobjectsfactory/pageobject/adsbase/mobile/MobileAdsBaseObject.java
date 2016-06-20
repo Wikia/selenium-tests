@@ -37,7 +37,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     // Only works for WikiaMobile
     hideElementIfPresent(SMART_BANNER_SELECTOR);
 
-    wait.forElementVisible(presentLeaderboard, 45);
+    wait.forElementVisible(presentLeaderboard);
     if (isElementOnPage(By.cssSelector(INTERSTITIAL_AD_OPENED_SELECTOR))) {
       PageObjectLogging.logWarning("Special ad", "Interstitial ad detected");
       extractGptInfo(presentHighImpactSlotSelector);
