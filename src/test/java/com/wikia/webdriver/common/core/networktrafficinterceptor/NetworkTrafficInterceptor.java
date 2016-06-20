@@ -96,10 +96,6 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
   public void setProxyServer(String ip) {
     setChainedProxy(new InetSocketAddress(ip.split(":")[0], 8888));
-    setTrustAllServers(true);
-    setMitmDisabled(true);
-    setRequestTimeout(90, TimeUnit.SECONDS);
-    enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
   }
 
   @Override
