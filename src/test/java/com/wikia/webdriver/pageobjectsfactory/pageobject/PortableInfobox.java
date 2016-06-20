@@ -53,14 +53,14 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = ".pi-data-value .newcategory")
   private WebElement categoryLinkInInfobox;
 
-  @FindBy(css = "h3.pi-data-label.pi-secondary-font")
-  private WebElement horizontalItemLabel;
-
-  @FindBy(css = "div.pi-data-value")
-  private WebElement horizontalItemValue;
-
   @FindBy(css = ".pi-navigation")
   private WebElement navigation;
+
+  @FindBy(css = "h3.pi-data-label.pi-secondary-font")
+  private List<WebElement> horizontalItemLabels;
+
+  @FindBy(css = "div.pi-data-value")
+  private List<WebElement> horizontalItemValues;
 
   @FindBy(css = ".poem")
   private List<WebElement> internalLinksInsidePoemTag;
@@ -136,11 +136,11 @@ public class PortableInfobox extends BasePageObject {
     return selectedLabel.getText();
   }
 
-  public String getExternalLinkRedirectTitleWithIndex(int index) {
+  public String getExternalLinkRedirectTitle(int index) {
     return getLinkRedirectTitle(externalLinks.get(index));
   }
 
-  public String getInternalLinkRedirectTitleWithIndex(int index) {
+  public String getInternalLinkRedirectTitle(int index) {
     return getLinkRedirectTitle(internalLinks.get(index));
   }
 
@@ -228,49 +228,28 @@ public class PortableInfobox extends BasePageObject {
     return this;
   }
 
-  public PortableInfobox compareURLAndExternalLink(String externalLinkName,
-                                                   String externalNavigatedURL) {
-    Assertion.assertEquals(externalLinkName, externalNavigatedURL);
-
-    return this;
+  public String getHorizontalItemLabelFontSize(int index) {
+    return horizontalItemLabels.get(index).getCssValue("font-size");
   }
 
-  public void compareURLAndInternalLink(String internalLinkName, String internalNavigatedURL) {
-    Assertion.assertEquals(internalLinkName, internalNavigatedURL);
+  public String getHorizontalItemValuesFontSize(int index) {
+    return horizontalItemValues.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizes(WebElement firstElement,
-                                          WebElement secondElement) {
-    Assertion.assertEquals(
-        firstElement.getCssValue("font-size"),
-        secondElement.getCssValue("font-size")
-    );
-
-    return this;
+  public String getItemValuesFontSize(int index) {
+    return itemValues.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenHorizontalItemLabelAndItemLabel() {
-    compareFontSizes(horizontalItemLabel, itemLabels.get(0));
-
-    return this;
+  public String getItemLabelsFontSize(int index) {
+    return itemLabels.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenHorizontalItemValueAndItemValue() {
-    compareFontSizes(horizontalItemValue, itemValues.get(0));
-
-    return this;
+  public String getOrderedElementFontSize(int index) {
+    return orderedElements.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenItemValueAndOrderedListItemWithIndex(int index) {
-    compareFontSizes(itemValues.get(0), orderedElements.get(index));
-
-    return this;
-  }
-
-  public PortableInfobox compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(int index) {
-    compareFontSizes(itemValues.get(0), unorderedElements.get(index));
-
-    return this;
+  public String getUnorderedElementFontSize(int index) {
+    return unorderedElements.get(index).getCssValue("font-size");
   }
 
   public PortableInfobox compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
@@ -292,29 +271,23 @@ public class PortableInfobox extends BasePageObject {
     return isElementVisible(image);
   }
 
-  public PortableInfobox isTabberPresented() {
+  public PortableInfobox isTabberVisible() {
     wait.forElementVisible(tabber);
     Assertion.assertEquals(isElementOnPage(tabber), true);
 
     return this;
   }
 
-  public PortableInfobox isTabberImagePresented() {
-    wait.forElementVisible(tabberImage);
-    Assertion.assertEquals(isElementOnPage(tabberImage), true);
-
-    return this;
+  public boolean isTabberImageVisible() {
+    return isElementVisible(tabberImage);
   }
 
-  public boolean isInfoboxTitlePresented() {
+  public boolean isInfoboxTitleVisible() {
     return isElementVisible(title);
   }
 
-  public PortableInfobox isLightboxPresented() {
-    wait.forElementVisible(lightbox);
-    Assertion.assertEquals(isElementOnPage(lightbox), true);
-
-    return this;
+  public boolean isLightboxVisible() {
+    return isElementVisible(lightbox);
   }
 
   public boolean isInfoboxNavigationElementVisible() {
@@ -348,10 +321,6 @@ public class PortableInfobox extends BasePageObject {
   public int getHeadersNumber() {
 
     return h3Titles.size();
-  }
-
-  public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
-    Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
   }
 
   public boolean isReferenceElementVisible() {

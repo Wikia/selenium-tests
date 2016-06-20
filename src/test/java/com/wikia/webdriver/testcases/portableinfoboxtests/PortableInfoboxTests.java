@@ -33,7 +33,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(infobox.getHeadersNumber() > 0 );
     Assertion.assertTrue(infobox.isImageVisible());
-    Assertion.assertTrue(infobox.isInfoboxTitlePresented());
+    Assertion.assertTrue(infobox.isInfoboxTitleVisible());
     Assertion.assertTrue(infobox.getBoldElementsNumber() > 0 );
     Assertion.assertTrue(infobox.getItalicElementsNumber() > 0 );
     Assertion.assertTrue(infobox.areQuotationMarksPresented());
@@ -41,7 +41,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   }
 
-  public void infoboxNavigationElements() {
+  public void infoboxInfoboxNavigationElements() {
     PortableInfobox infobox = new PortableInfobox();
 
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
@@ -52,31 +52,47 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.getExternalNavigationLinksNumber() > 0);
   }
 
-  public void verifyElementsRedirects() {
+  public void verifyRedlinksRedirecting() {
     PortableInfobox infobox = new PortableInfobox();
 
-    infobox.open(PageContent.PORTABLE_INFOBOX_01).clickRedLinkWithIndex(0).verifyCreateNewArticleModal();
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    String externalLinkName = infobox
-        .open(PageContent.PORTABLE_INFOBOX_01)
-        .getExternalLinkRedirectTitleWithIndex(0);
+    Assertion.assertTrue(infobox.clickRedLinkWithIndex(0).isCreateNewArticleModalVisible());
+  }
 
-    String externalUrl = infobox
-        .clickExternalLinkWithIndex(0)
-        .getUrlAfterPageIsLoaded();
+  public void verifyInternalLinksRedirecting() {
+    PortableInfobox infobox = new PortableInfobox();
 
-    infobox.compareURLAndExternalLink(externalLinkName, externalUrl);
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
 
     String internalLinkName = infobox
         .open(PageContent.PORTABLE_INFOBOX_01)
-        .getInternalLinkRedirectTitleWithIndex(3);
+        .getInternalLinkRedirectTitle(3);
 
     String internalURL = infobox
         .clickInternalLinkWithIndex(3)
         .getUrlAfterPageIsLoaded();
 
-    infobox.compareURLAndInternalLink(internalLinkName, internalURL);
+    Assertion.assertEquals(internalLinkName, internalURL);
+  }
+
+  public void verifyExternalLinksRedirecting() {
+    PortableInfobox infobox = new PortableInfobox();
+
+    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    new ArticlePurger().purgeArticleAsAnon();
+
+    String externalLinkName = infobox
+        .open(PageContent.PORTABLE_INFOBOX_01)
+        .getExternalLinkRedirectTitle(0);
+
+    String externalUrl = infobox
+        .clickExternalLinkWithIndex(0)
+        .getUrlAfterPageIsLoaded();
+
+    Assertion.assertEquals(externalLinkName, externalUrl);
   }
 
   public void verifyImagesInWhatLinksHerePage() {
@@ -87,10 +103,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String articleName = article.getArticleName();
 
-    article
-        .openSpecialWhatLinksHere(wikiURL).clickPageInputField()
-        .typeInfoboxImageName(PageContent.FILE_IMAGE_NAME).clickShowbutton()
-        .verifyInfoboxArticleInList(articleName);
+    String whatLinkHereResult = article
+        .openSpecialWhatLinksHere(wikiURL)
+        .clickPageInputField()
+        .typeInfoboxImageName(PageContent.FILE_IMAGE_NAME)
+        .clickShowButton()
+        .getWhatLinksHereArticleName(0);
+
+    Assertion.assertTrue(whatLinkHereResult.contains(articleName));
   }
 
   public void verifyLightboxVisibilityAfterClickingImage() {
@@ -99,7 +119,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox.clickImage().isLightboxPresented();
+    Assertion.assertTrue(infobox.clickImage().isLightboxVisible());;
   }
 
   public void verifyVisibilityOfTabberAndItsImages() {
@@ -108,7 +128,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_02);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox.isTabberPresented().isTabberImagePresented();
+    Assertion.assertTrue(infobox.isTabberVisible().isTabberImageVisible());
   }
 
   @Execute(asUser = User.STAFF)
@@ -129,18 +149,18 @@ public class PortableInfoboxTests extends NewTestTemplate {
     theme.submitTheme();
 
     article.open(PageContent.PORTABLE_INFOBOX_01);
-    infobox.verifyChangedBackground(oldBackground, infobox.getBackgroundColor());
+    Assertion.assertEquals(oldBackground, infobox.getBackgroundColor());
   }
 
-  public void verifyOrderedAndUnorderedLists() {
+  public void verifyOrderedAndUnorderedListFontSizes() {
     PortableInfobox infobox = new PortableInfobox();
 
     infobox.open(PageContent.PORTABLE_INFOBOX_02);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox
-        .compareFontSizesBetweenItemValueAndOrderedListItemWithIndex(1)
-        .compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(1);
+    Assertion.assertEquals(infobox.getItemValuesFontSize(1), infobox.getOrderedElementFontSize(1));
+    Assertion.assertEquals(infobox.getItemValuesFontSize(1),
+                           infobox.getUnorderedElementFontSize(1));
   }
 
   public void verifyInfoboxCategoryLinks() {
@@ -160,9 +180,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    infobox
-        .compareFontSizesBetweenHorizontalItemLabelAndItemLabel()
-        .compareFontSizesBetweenHorizontalItemValueAndItemValue();
+    Assertion.assertEquals(infobox.getItemLabelsFontSize(0),
+                           infobox.getHorizontalItemLabelFontSize(0));
+    Assertion.assertEquals(infobox.getItemValuesFontSize(0),
+                           infobox.getHorizontalItemValuesFontSize(0));
   }
 
   @Execute(asUser = User.USER_9)
@@ -186,7 +207,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .submitArticle();
 
     Assertion.assertTrue(infobox.isImageVisible());
-    Assertion.assertTrue(infobox.isInfoboxTitlePresented());
+    Assertion.assertTrue(infobox.isInfoboxTitleVisible());
   }
 
   public void verifyNavigationElementPadding() {
