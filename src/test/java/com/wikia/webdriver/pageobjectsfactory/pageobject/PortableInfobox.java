@@ -343,5 +343,4 @@ public class PortableInfobox extends BasePageObject {
   public boolean infoboxContainsEmptyTag() {
     return layout.getText().contains("Default");
   }
-
 }
