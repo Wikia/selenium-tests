@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -24,6 +25,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-7391")
   public void SpecialVideos_001_Provider() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
 
