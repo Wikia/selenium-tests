@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.portableinfoboxtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
@@ -21,12 +22,22 @@ import org.testng.annotations.Test;
 @Test(groups = "PortableInfoboxTests")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  @Execute(onWikia = "mediawiki119")
+  @Execute(onWikia = "mediawiki119", asUser = User.USER)
   public void verifyElementsVisibility() {
-    new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01)
-        .areBoldElementsMoreThanOne().areItalicElementsMoreThanOne().areHeadersMoreThanOne()
-        .areQuotationMarksPresented().verifyReferencesPresence().isImagePresented()
-        .isInfoboxTitlePresented().areLinksInPoemTagPresented();
+    PortableInfobox info = new PortableInfobox();
+
+    info.open(PageContent.PORTABLE_INFOBOX_01);
+
+    new ArticlePurger().purgeArticleAsLoggedUser();
+
+    info.areBoldElementsMoreThanOne()
+        .areItalicElementsMoreThanOne()
+        .areHeadersMoreThanOne()
+        .areQuotationMarksPresented()
+        .verifyReferencesPresence()
+        .isImagePresented()
+        .isInfoboxTitlePresented()
+        .areLinksInPoemTagPresented();
   }
 
   @Execute(onWikia = "mediawiki119")
