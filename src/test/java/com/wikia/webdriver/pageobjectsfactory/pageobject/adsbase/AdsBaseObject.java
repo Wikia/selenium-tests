@@ -63,10 +63,13 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+  protected String presentFandomLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
+  @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
+  protected WebElement presentFandomLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
@@ -130,6 +133,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
+
+  public void verifyFandomTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomLeaderboardSelector, presentFandomLeaderboard);
+  }
+
 
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));

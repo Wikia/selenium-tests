@@ -1196,4 +1196,12 @@ public class AdsDataProvider {
         }
     };
   }
+
+  @DataProvider
+  public static Object[][] fandomAdsPage() {
+    return new Object[][]{
+        {"young-fans-guide-cinema-part-3"}
+    };
+  }
+
 }
