@@ -174,7 +174,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyFandomDesktopArticleBottomLeaderboard() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
         presentFandomDesktopArticleBottomLeaderboardSelector)));
-
     verifyAdVisibleInSlot(presentFandomDesktopArticleBottomLeaderboardSelector,
                           presentFandomDesktopArticleBottomLeaderboard);
   }
@@ -199,7 +198,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyFandomHubBottomLeaderboard() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
         presentFandomHubBottomLeaderboardSelector)));
-
     verifyAdVisibleInSlot(presentFandomHubBottomLeaderboardSelector,
                           presentFandomHubBottomLeaderboard);
   }
