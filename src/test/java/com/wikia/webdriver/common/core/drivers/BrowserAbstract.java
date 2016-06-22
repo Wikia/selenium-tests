@@ -3,6 +3,8 @@ package com.wikia.webdriver.common.core.drivers;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import net.lightbody.bmp.proxy.CaptureType;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
@@ -83,13 +85,16 @@ public abstract class BrowserAbstract {
   protected void setProxy() {
     if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
-      server.startSeleniumProxyServer();
       String countryCode = Configuration.getCountryCode();
+      server.setTrustAllServers(true);
+      server.setMitmDisabled(true);
+      server.setRequestTimeout(90, TimeUnit.SECONDS);
+      server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
       if (StringUtils.isNotBlank(countryCode)) {
-        String proxyAddress = GeoEdgeProxy.getProxyAddress(countryCode);
-        server.setProxyServer(proxyAddress);
+        server.setProxyServer(GeoEdgeProxy.getProxyAddress(countryCode));
       }
-      caps.setCapability(CapabilityType.PROXY, server.seleniumProxy());
+
+      caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
     }
   }
 }

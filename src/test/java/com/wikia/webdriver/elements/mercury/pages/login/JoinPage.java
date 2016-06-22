@@ -13,21 +13,18 @@ public class JoinPage extends WikiBasePageObject {
     @FindBy(css = ".footer-callout-emphasis")
     private WebElement SignInButton;
 
-    private WebDriver driver;
     private Wait wait;
 
     public JoinPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new Wait(driver);
-
         PageFactory.initElements(driver, this);
+        this.wait = new Wait(driver);
     }
 
     public SignInPage clickSignInButton() {
         wait.forElementClickable(SignInButton);
         SignInButton.click();
 
-        return new SignInPage();
+        return new SignInPage(driver);
     }
 }
 
