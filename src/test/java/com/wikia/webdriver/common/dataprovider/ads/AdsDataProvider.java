@@ -1204,4 +1204,11 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] fandomAdsHub() {
+    return new Object[][]{
+        {"games"}
+    };
+  }
+
 }

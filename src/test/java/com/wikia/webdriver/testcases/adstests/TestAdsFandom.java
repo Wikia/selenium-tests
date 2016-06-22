@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,11 +19,11 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       dataProvider = "fandomAdsPage",
       groups = "AdsDesktopPresenceFandom"
   )
-  public void adsFandomDesktopAds(String article) throws IOException {
+  public void adsFandomDesktopArticleAds(String article) throws IOException {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
 
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    ((JavascriptExecutor) driver).executeScript(
+    driver.executeScript(
         "    (function () {\n"
         + "    var s = document.createElement('script');\n"
         + "    s.type = 'text/javascript';\n"
@@ -35,10 +34,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
         + "    })();"
     );
 
-
-    wikiPage.verifyFandomDesktopTopLeaderboard();
+    wikiPage.verifyFandomDesktopArticleTopLeaderboard();
     wikiPage.verifyFandomTopBoxad();
-    wikiPage.verifyFandomDesktopBottomLeaderboard();
+    wikiPage.verifyFandomDesktopArticleBottomLeaderboard();
 
   }
 
@@ -51,11 +49,11 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       dataProvider = "fandomAdsPage",
       groups = "AdsMobilePresenceFandom"
   )
-  public void adsFandomMobileAds(String article) throws IOException {
+  public void adsFandomMobileArticleAds(String article) throws IOException {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
 
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    ((JavascriptExecutor) driver).executeScript(
+    driver.executeScript(
         "    (function () {\n"
         + "    var s = document.createElement('script');\n"
         + "    s.type = 'text/javascript';\n"
@@ -66,10 +64,65 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
         + "    })();"
     );
 
+    wikiPage.verifyFandomMobileArticleTopLeaderboard();
+    wikiPage.verifyFandomMobileArticleBottomLeaderboard();
 
-    wikiPage.verifyFandomMobileTopLeaderboard();
-    wikiPage.verifyFandomMobileBottomLeaderboard();
+  }
 
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "fandomAdsHub",
+      groups = "AdsDesktopPresenceHubFandom"
+  )
+  public void adsFandomDesktopHubAds(String article) throws IOException {
+    String testedPage = urlBuilder.getUrlForFandomHub(article);
+
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    driver.executeScript(
+        "    (function () {\n"
+        + "    var s = document.createElement('script');\n"
+        + "    s.type = 'text/javascript';\n"
+        + "    s.async = true;\n"
+        + "    s.src = 'https://code.jquery.com/jquery-2.2.4.min.js';\n"
+        + "    var x = document.getElementsByTagName('script')[0];\n"
+        + "    x.parentNode.insertBefore(s, x);\n"
+        + "    })();"
+    );
+
+    wikiPage.verifyFandomHubTopLeaderboard();
+    wikiPage.verifyFandomTopBoxad();
+    wikiPage.verifyFandomHubBottomLeaderboard();
+    wikiPage.verifyFandomBottomBoxad();
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "fandomAdsHub",
+      groups = "AdsMobilePresenceHubFandom"
+  )
+  public void adsFandomMobileHubAds(String article) throws IOException {
+    String testedPage = urlBuilder.getUrlForFandomHub(article);
+
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    driver.executeScript(
+        "    (function () {\n"
+        + "    var s = document.createElement('script');\n"
+        + "    s.type = 'text/javascript';\n"
+        + "    s.async = true;\n"
+        + "    s.src = 'https://code.jquery.com/jquery-2.2.4.min.js';\n"
+        + "    var x = document.getElementsByTagName('script')[0];\n"
+        + "    x.parentNode.insertBefore(s, x);\n"
+        + "    })();"
+    );
+
+    wikiPage.verifyFandomHubTopLeaderboard();
+    wikiPage.verifyFandomTopBoxad();
+    wikiPage.verifyFandomHubBottomLeaderboard();
+    wikiPage.verifyFandomBottomBoxad();
   }
 
 }

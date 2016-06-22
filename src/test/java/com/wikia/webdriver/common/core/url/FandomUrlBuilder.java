@@ -37,4 +37,13 @@ public class FandomUrlBuilder {
     }
     return "http://" + baseUrl;
   }
+
+  public String getUrlForFandomHub(String pageTitle) {
+    String baseUrl = FANDOM_URL + "/" + pageTitle;
+    if (!env.equals(ENV_PROD)) {
+      baseUrl = env + "." + baseUrl;
+
+    }
+    return "http://" + baseUrl;
+  }
 }

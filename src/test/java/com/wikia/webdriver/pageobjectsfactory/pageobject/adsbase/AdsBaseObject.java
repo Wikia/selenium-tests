@@ -61,21 +61,26 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
-  private static final String FANDOM_TABBED_FEED_CSS_SELECTOR = "div[id*='fandom-newsletter-signup clearfix']";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
   protected String
-      presentFandomDesktopTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
+      presentFandomDesktopArticleTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
   protected String
-      presentFandomDesktopBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-desktop']";
+      presentFandomDesktopArticleBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-desktop']";
   protected String
-      presentFandomMobileTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-mobile']";
+      presentFandomMobileArticleTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-mobile']";
   protected String
-      presentFandomMobileBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-mobile']";
+      presentFandomMobileArticleBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-mobile']";
+  protected String
+      presentFandomHubTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
+  protected String
+      presentFandomHubBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard']";
 
   protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
+  protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
+
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
@@ -88,15 +93,21 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 
   @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
-  protected WebElement presentFandomDesktopTopLeaderboard;
+  protected WebElement presentFandomDesktopArticleTopLeaderboard;
   @FindBy(css = "div[id*='gpt-bottom-leaderboard-desktop']")
-  protected WebElement presentFandomDesktopBottomLeaderboard;
+  protected WebElement presentFandomDesktopArticleBottomLeaderboard;
   @FindBy(css = "div[id*='gpt-top-leaderboard-mobile']")
-  protected WebElement presentFandomMobileTopLeaderboard;
+  protected WebElement presentFandomMobileArticleTopLeaderboard;
   @FindBy(css = "div[id*='gpt-bottom-leaderboard-mobile']")
-  protected WebElement presentFandomMobileBottomLeaderboard;
-  @FindBy(css = "div[id*='gpt-top-boxad-desktop']")
-  private WebElement presentFandomTopBoxad;
+  protected WebElement presentFandomMobileArticleBottomLeaderboard;
+  @FindBy(css = "div[id*='gpt-top-leaderboard']")
+  protected WebElement presentFandomHubTopLeaderboard;
+  @FindBy(css = "div[id*='gpt-bottom-leaderboard']")
+  protected WebElement presentFandomHubBottomLeaderboard;
+  @FindBy(css = "div[id*='gpt-top-boxad']")
+  protected WebElement presentFandomTopBoxad;
+  @FindBy(css = "div[id*='gpt-bottom-boxad']")
+  protected WebElement presentFandomBottomBoxad;
 
   public AdsBaseObject(WebDriver driver) {
     super();
@@ -155,36 +166,54 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void verifyFandomDesktopTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomDesktopTopLeaderboardSelector, presentFandomDesktopTopLeaderboard);
+  public void verifyFandomDesktopArticleTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomDesktopArticleTopLeaderboardSelector,
+                          presentFandomDesktopArticleTopLeaderboard);
   }
 
-  public void verifyFandomDesktopBottomLeaderboard() {
+  public void verifyFandomDesktopArticleBottomLeaderboard() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        FANDOM_TABBED_FEED_CSS_SELECTOR)));
+        presentFandomDesktopArticleBottomLeaderboardSelector)));
 
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomMobileBottomLeaderboardSelector)));
-
-    verifyAdVisibleInSlot(presentFandomDesktopBottomLeaderboardSelector,
-                          presentFandomDesktopBottomLeaderboard);
+    verifyAdVisibleInSlot(presentFandomDesktopArticleBottomLeaderboardSelector,
+                          presentFandomDesktopArticleBottomLeaderboard);
   }
 
-  public void verifyFandomMobileTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomMobileTopLeaderboardSelector, presentFandomMobileTopLeaderboard);
+  public void verifyFandomMobileArticleTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomMobileArticleTopLeaderboardSelector,
+                          presentFandomMobileArticleTopLeaderboard);
   }
 
-  public void verifyFandomMobileBottomLeaderboard() {
+  public void verifyFandomMobileArticleBottomLeaderboard() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomMobileBottomLeaderboardSelector)));
-    verifyAdVisibleInSlot(presentFandomMobileBottomLeaderboardSelector,
-                          presentFandomMobileBottomLeaderboard);
+        presentFandomMobileArticleBottomLeaderboardSelector)));
+    verifyAdVisibleInSlot(presentFandomMobileArticleBottomLeaderboardSelector,
+                          presentFandomMobileArticleBottomLeaderboard);
+  }
+
+  public void verifyFandomHubTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomHubTopLeaderboardSelector,
+                          presentFandomHubTopLeaderboard);
+  }
+
+  public void verifyFandomHubBottomLeaderboard() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomHubBottomLeaderboardSelector)));
+
+    verifyAdVisibleInSlot(presentFandomHubBottomLeaderboardSelector,
+                          presentFandomHubBottomLeaderboard);
   }
 
   public void verifyFandomTopBoxad() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
         presentFandomTopBoxadSelector)));
     verifyAdVisibleInSlot(presentFandomTopBoxadSelector, presentFandomTopBoxad);
+  }
+
+  public void verifyFandomBottomBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomBottomBoxadSelector)));
+    verifyAdVisibleInSlot(presentFandomBottomBoxadSelector, presentFandomBottomBoxad);
   }
 
   public void verifyFliteTag(String cssFliteSelector) {
@@ -762,7 +791,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     String liftiumTagId = null;
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
     if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slot)) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
+      JavascriptExecutor js = driver;
       WebElement currentLiftiumIframe = (WebElement) js.executeScript(
           "return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
           slotSelector
@@ -832,7 +861,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (isElementOnPage(By.cssSelector(cssSelector))) {
       PageObjectLogging.log("Hiding element", cssSelector, true);
       WebElement element = driver.findElement(By.cssSelector(cssSelector));
-      JavascriptExecutor js = (JavascriptExecutor) driver;
+      JavascriptExecutor js = driver;
       js.executeScript("$(arguments[0]).css('display', 'none')", element);
       waitForElementNotVisibleByElement(element);
     }
