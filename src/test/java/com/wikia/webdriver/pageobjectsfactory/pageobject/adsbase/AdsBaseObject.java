@@ -61,21 +61,42 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
+  private static final String FANDOM_TABBED_FEED_CSS_SELECTOR = "div[id*='fandom-newsletter-signup clearfix']";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
-  protected String presentFandomLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
+
+  protected String
+      presentFandomDesktopTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
+  protected String
+      presentFandomDesktopBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-desktop']";
+  protected String
+      presentFandomMobileTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-mobile']";
+  protected String
+      presentFandomMobileBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-mobile']";
+
+  protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
-  @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
-  protected WebElement presentFandomLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
+
+
+  @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
+  protected WebElement presentFandomDesktopTopLeaderboard;
+  @FindBy(css = "div[id*='gpt-bottom-leaderboard-desktop']")
+  protected WebElement presentFandomDesktopBottomLeaderboard;
+  @FindBy(css = "div[id*='gpt-top-leaderboard-mobile']")
+  protected WebElement presentFandomMobileTopLeaderboard;
+  @FindBy(css = "div[id*='gpt-bottom-leaderboard-mobile']")
+  protected WebElement presentFandomMobileBottomLeaderboard;
+  @FindBy(css = "div[id*='gpt-top-boxad-desktop']")
+  private WebElement presentFandomTopBoxad;
 
   public AdsBaseObject(WebDriver driver) {
     super();
@@ -134,10 +155,37 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void verifyFandomTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomLeaderboardSelector, presentFandomLeaderboard);
+  public void verifyFandomDesktopTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomDesktopTopLeaderboardSelector, presentFandomDesktopTopLeaderboard);
   }
 
+  public void verifyFandomDesktopBottomLeaderboard() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        FANDOM_TABBED_FEED_CSS_SELECTOR)));
+
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomMobileBottomLeaderboardSelector)));
+
+    verifyAdVisibleInSlot(presentFandomDesktopBottomLeaderboardSelector,
+                          presentFandomDesktopBottomLeaderboard);
+  }
+
+  public void verifyFandomMobileTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomMobileTopLeaderboardSelector, presentFandomMobileTopLeaderboard);
+  }
+
+  public void verifyFandomMobileBottomLeaderboard() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomMobileBottomLeaderboardSelector)));
+    verifyAdVisibleInSlot(presentFandomMobileBottomLeaderboardSelector,
+                          presentFandomMobileBottomLeaderboard);
+  }
+
+  public void verifyFandomTopBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomTopBoxadSelector)));
+    verifyAdVisibleInSlot(presentFandomTopBoxadSelector, presentFandomTopBoxad);
+  }
 
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
