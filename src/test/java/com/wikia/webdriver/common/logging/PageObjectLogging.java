@@ -283,6 +283,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       }
 
+      /**
+       * We want to disable sales pitch dialog for new potential contributors
+       * to avoid hiding other UI elements.
+       * see https://wikia-inc.atlassian.net/browse/CE-3768
+       */
+      driver.manage().addCookie(
+          new Cookie("cpBenefitsModalShown", "1", Configuration.getWikiaDomain(), null, null));
+
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(
             new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
