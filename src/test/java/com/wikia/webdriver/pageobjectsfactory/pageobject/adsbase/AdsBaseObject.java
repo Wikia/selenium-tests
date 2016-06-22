@@ -791,7 +791,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     String liftiumTagId = null;
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
     if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slot)) {
-      JavascriptExecutor js = driver;
+      JavascriptExecutor js = (JavascriptExecutor) driver;
       WebElement currentLiftiumIframe = (WebElement) js.executeScript(
           "return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
           slotSelector
@@ -861,7 +861,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (isElementOnPage(By.cssSelector(cssSelector))) {
       PageObjectLogging.log("Hiding element", cssSelector, true);
       WebElement element = driver.findElement(By.cssSelector(cssSelector));
-      JavascriptExecutor js = driver;
+      JavascriptExecutor js = (JavascriptExecutor) driver;
       js.executeScript("$(arguments[0]).css('display', 'none')", element);
       waitForElementNotVisibleByElement(element);
     }
