@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.ArrayList;       
 
 public class ArticleContent extends ApiCall {
 

@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class HeroUnit extends BasePageObject {
 
-  @FindBy(css = "section.hero-mosaic")
+  @FindBy(css = "section.hero-block")
   private WebElement heroMosaic;
 
   public boolean isDisplayed() {

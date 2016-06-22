@@ -503,10 +503,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return this;
   }
 
-  public VisualEditorPageObject isInfoboxInsertedInEditorArea() {
+  public boolean isInfoboxInsertedInEditorArea() {
     wait.forElementVisible(focusedHighlight);
-    Assertion.assertEquals(isElementOnPage(focusedHighlight), true);
-    return this;
+
+    return isElementOnPage(focusedHighlight);
   }
 
   public VisualEditorPageObject clickInfoboxPopup() {
