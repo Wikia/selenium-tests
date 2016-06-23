@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = "aga")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@Test(groups = {"mercury_recentWikiActivity"})
 public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test(groups = "mercury_recentWikiActivity_anonNavigateToRWAfromMenu")
