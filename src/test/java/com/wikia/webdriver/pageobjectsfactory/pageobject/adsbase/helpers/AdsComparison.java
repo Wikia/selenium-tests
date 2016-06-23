@@ -44,7 +44,7 @@ public class AdsComparison {
   }
 
   private void changeOpacity(String selector, int value, WebDriver driver) {
-    PageObjectLogging.log("Css selector",selector, true, driver);
+    PageObjectLogging.log("CSS selector", selector, true, driver);
 
     ((JavascriptExecutor) driver).executeScript(
         "$(arguments[0]).css('opacity', arguments[1]);",
