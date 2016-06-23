@@ -67,8 +67,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsDesktopPresenceHubFandom", "AdsFandom"}
 
   )
-  public void adsFandomDesktopHubAds(String article) throws IOException {
-    String testedPage = urlBuilder.getUrlForFandomHub(article);
+  public void adsFandomDesktopHubAds(String hub) throws IOException {
+    String testedPage = urlBuilder.getUrlForFandomHub(hub);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     getJquery();
     wikiPage.verifyFandomHubTopLeaderboard();
@@ -87,8 +87,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceHubFandom", "AdsFandom"}
 
   )
-  public void adsFandomMobileHubAds(String article) throws IOException {
-    String testedPage = urlBuilder.getUrlForFandomHub(article);
+  public void adsFandomMobileHubAds(String hub) throws IOException {
+    String testedPage = urlBuilder.getUrlForFandomHub(hub);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     getJquery();
     wikiPage.verifyFandomHubTopLeaderboard();

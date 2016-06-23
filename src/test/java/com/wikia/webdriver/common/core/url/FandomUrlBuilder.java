@@ -31,16 +31,14 @@ public class FandomUrlBuilder {
     String baseUrl = FANDOM_URL + "/" + ARTICLE_PATH + "/" + pageTitle;
     if (!env.equals(ENV_PROD)) {
       baseUrl = env + "." + baseUrl;
-
     }
     return "http://" + baseUrl;
   }
 
-  public String getUrlForFandomHub(String pageTitle) {
-    String baseUrl = FANDOM_URL + "/" + pageTitle;
+  public String getUrlForFandomHub(String hub) {
+    String baseUrl = FANDOM_URL + "/" + hub;
     if (!env.equals(ENV_PROD)) {
       baseUrl = env + "." + baseUrl;
-
     }
     return "http://" + baseUrl;
   }
