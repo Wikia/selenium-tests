@@ -767,8 +767,8 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, false},
-        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, true},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true},
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false},
     };
   }
 
