@@ -11,6 +11,7 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 
 @Execute(asUser = User.STAFF, onWikia = "aga")
 @InBrowser(browser = Browser.CHROME)
+@Test(groups = {"templateClassification"})
 public class TemplateClassificationTest extends NewTestTemplate {
 
   @Test(groups = "templateClassification_openAndClose")
