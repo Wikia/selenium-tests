@@ -16,6 +16,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Test(groups = {"discussions-layout"})
 public class LayoutTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";

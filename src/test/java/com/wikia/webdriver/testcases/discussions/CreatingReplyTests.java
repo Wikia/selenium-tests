@@ -17,6 +17,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Test(groups = {"discussions-creating-replies"})
 public class CreatingReplyTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
