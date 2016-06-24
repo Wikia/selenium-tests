@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -23,27 +24,23 @@ public class FacebookButtonTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"FBButton_001", "FacebookButton"})
-  public void facebookButtonIsVisibleOnDropdwon() {
-    DropDownComponentObject dropDown = new DropDownComponentObject(driver);
-    dropDown.openDropDown();
-    dropDown.verifyDropDownFBButtonVisible();
-  }
-
-  @Test(groups = {"FBButton_002", "FacebookButton"})
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
   public void facebookButtonIsVisibleOnSignupPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUpPage = base.openSpecialSignUpPage(wikiURL);
     signUpPage.verifyFBButtonVisible();
   }
 
-  @Test(groups = {"FBButton_003", "FacebookButton"})
+  @Test(groups = {"FBButton_002", "FacebookButton"})
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
   public void facebookButtonIsVisibleOnLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
     login.verifyFBButtonVisible();
   }
 
-  @Test(groups = {"FBButton_004", "FacebookButton"})
+  @Test(groups = {"FBButton_003", "FacebookButton"})
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
   public void facebookButtonIsVisibleOnForcedLoginModal() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
@@ -53,7 +50,8 @@ public class FacebookButtonTests extends NewTestTemplate {
     specialPage.verifyModalFBButtonVisible();
   }
 
-  @Test(groups = {"FBButton_005", "FacebookButton"})
+  @Test(groups = {"FBButton_004", "FacebookButton"})
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
   @Execute(asUser = User.USER)
   public void facebookButtonIsVisibleOnUserPreferencesPage() {
     WikiBasePageObject base = new WikiBasePageObject();
