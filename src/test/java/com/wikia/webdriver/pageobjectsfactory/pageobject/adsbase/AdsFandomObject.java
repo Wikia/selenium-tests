@@ -25,7 +25,6 @@ public class AdsFandomObject extends AdsBaseObject {
   protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
   protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
 
-
   @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
   protected WebElement presentFandomDesktopArticleTopLeaderboard;
 
