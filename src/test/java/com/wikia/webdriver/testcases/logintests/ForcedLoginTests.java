@@ -58,6 +58,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInViaUserLoginPage")
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
   public void anonCanLogInViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
@@ -69,6 +70,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage();
