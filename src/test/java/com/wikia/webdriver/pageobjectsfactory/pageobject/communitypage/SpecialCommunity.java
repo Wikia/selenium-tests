@@ -4,7 +4,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialCommunity extends WikiBasePageObject {
 
-  public static String COMMUNITY_PAGE_URL = "Special:Community";
+  public static final String COMMUNITY_PAGE_URL = "Special:Community";
 
   public SpecialCommunity() { super(); }
 
