@@ -31,15 +31,6 @@ public class LoginTests extends NewTestTemplate {
     login.loginAndVerify(credentials.userName10, credentials.password10, wikiURL);
   }
 
-  @Test(groups = {"Login_anonCanLoginFromDropdown", "Smoke5"})
-  public void anonCanLoginFromDropdown() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.openWikiPage(wikiURL);
-    DropDownComponentObject dropDown = new DropDownComponentObject(driver);
-    dropDown.openDropDown();
-    dropDown.logIn(credentials.userName10, credentials.password10);
-    base.verifyUserLoggedIn(credentials.userName10);
-  }
 
   @Test(groups = {"Login_anonCanLoginOnAuthModalFromGlobalNavigation", "Smoke5"})
   @Execute(onWikia = "agas")
@@ -59,16 +50,6 @@ public class LoginTests extends NewTestTemplate {
   public void anonCanLoginAsStaffOnUserLoginSpecialPage() {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
     login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-  }
-
-  @Test(groups = "Login_anonCanLoginAsStaffFromDropdown")
-  public void anonCanLoginAsStaffFromDropdown() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.openWikiPage(wikiURL);
-    DropDownComponentObject dropDown = new DropDownComponentObject(driver);
-    dropDown.openDropDown();
-    dropDown.logIn(credentials.userNameStaff, credentials.passwordStaff);
-    base.verifyUserLoggedIn(credentials.userNameStaff);
   }
 
   @Test(groups = "Login_anonCanLoginAsStaffOnAuthModalFromGlobalNavigation")

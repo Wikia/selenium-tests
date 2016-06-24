@@ -18,32 +18,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromLoginDropdown")
-  public void anonCanRemindPasswordFromLoginDropdown() {
-    String userName = credentials.userNameForgottenPassword;
-    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.openWikiPage(wikiURL);
-    DropDownComponentObject dropdown = new DropDownComponentObject(driver);
-    dropdown.openDropDown();
-    dropdown.remindPassword(userName, credentials.apiToken);
-
-    dropdown.verifyMessageAboutNewPassword(userName);
-    String
-        newPassword =
-        dropdown.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    dropdown.openDropDown();
-    dropdown.logIn(userName, newPassword);
-    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    newPassword = login.setNewPassword();
-    login.verifyUserLoggedIn(userName);
-
-    login.logOut(driver);
-    dropdown.openDropDown();
-    dropdown.logIn(userName, newPassword);
-    dropdown.verifyUserLoggedIn(userName);
-  }
-
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromAuthModal")
   @RelatedIssue(issueID = "MAIN-7408", comment = "Test Manually. Test is being updated by Social team")
   @Execute(onWikia = "agas")
@@ -96,7 +70,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName", enabled = false)
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
     String userNameUC = credentials.userNameForgottenPassword3;
     String userName = userNameUC.toLowerCase();
