@@ -4,9 +4,9 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class FandomUrlBuilder {
 
-  static final String FANDOM_URL = "fandom.wikia.com";
-  static final  String ARTICLE_PATH = "articles";
-  public static final  String ENV_PROD = "prod";
+  private static final String FANDOM_URL = "fandom.wikia.com";
+  private static final String ARTICLE_PATH = "articles";
+  public static final String ENV_PROD = "prod";
   public static final String ENV_ADENG = "adeng";
   public static final String ENV_QA = "qa";
 

@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
 import org.testng.annotations.Test;
@@ -28,14 +27,14 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
       dataProvider = "fandomAdsPage",
-      groups = {"AdsDesktopPresenceFandom", "AdsFandom"}
+      groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopArticleAds(String article) {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
     fandomPage.verifyFandomDesktopArticleTopLeaderboard();
-    fandomPage.verifyFandomTopBoxad();
+    fandomPage.verifyFandomDesktopTopBoxad();
     fandomPage.verifyFandomDesktopArticleBottomLeaderboard();
   }
 
@@ -46,20 +45,20 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
       dataProvider = "fandomAdsPage",
-      groups = {"AdsMobilePresenceFandom", "AdsFandom"}
+      groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileArticleAds(String article) {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
     AdsFandomObject wikiPage = new AdsFandomObject(driver, testedPage);
     getJquery();
-    wikiPage.verifyFandomMobileArticleTopLeaderboard();
+    wikiPage.verifyFandomMobileTopBoxad();
     wikiPage.verifyFandomMobileArticleBottomLeaderboard();
   }
 
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
       dataProvider = "fandomAdsHub",
-      groups = {"AdsDesktopPresenceHubFandom", "AdsFandom"}
+      groups = {"AdsDesktopPresenceHubFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopHubAds(String hub) {
     String testedHub = urlBuilder.getUrlForFandomHub(hub);
@@ -78,7 +77,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
       dataProvider = "fandomAdsHub",
-      groups = {"AdsMobilePresenceHubFandom", "AdsFandom"}
+      groups = {"AdsMobilePresenceHubFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileHubAds(String hub) {
     String testedHub = urlBuilder.getUrlForFandomHub(hub);

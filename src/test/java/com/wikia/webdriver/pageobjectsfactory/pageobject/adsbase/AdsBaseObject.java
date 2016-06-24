@@ -65,8 +65,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
-
-
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
@@ -75,24 +73,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
-
-
-  @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
-  protected WebElement presentFandomDesktopArticleTopLeaderboard;
-  @FindBy(css = "div[id*='gpt-bottom-leaderboard-desktop']")
-  protected WebElement presentFandomDesktopArticleBottomLeaderboard;
-  @FindBy(css = "div[id*='gpt-top-leaderboard-mobile']")
-  protected WebElement presentFandomMobileArticleTopLeaderboard;
-  @FindBy(css = "div[id*='gpt-bottom-leaderboard-mobile']")
-  protected WebElement presentFandomMobileArticleBottomLeaderboard;
-  @FindBy(css = "div[id*='gpt-top-leaderboard']")
-  protected WebElement presentFandomHubTopLeaderboard;
-  @FindBy(css = "div[id*='gpt-bottom-leaderboard']")
-  protected WebElement presentFandomHubBottomLeaderboard;
-  @FindBy(css = "div[id*='gpt-top-boxad']")
-  protected WebElement presentFandomTopBoxad;
-  @FindBy(css = "div[id*='gpt-bottom-boxad']")
-  protected WebElement presentFandomBottomBoxad;
 
   public AdsBaseObject(WebDriver driver) {
     super();
