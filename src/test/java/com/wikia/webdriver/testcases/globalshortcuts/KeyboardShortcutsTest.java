@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
 @Execute(asUser = User.USER, onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
+@Test(groups = {"globalShortcuts"})
 public class KeyboardShortcutsTest extends NewTestTemplate {
 
   @Test(groups = "globalShortcuts_keyboardShortcuts_openModalByLinkInWikiaBar_CloseModalByCloseButton")

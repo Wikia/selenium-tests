@@ -20,11 +20,14 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME)
-@Test(groups = "MercurySearch")
 public class SearchTests extends NewTestTemplate {
 
   private static final String SEARCH_PHRASE = "Infobox";
   private static final String SEARCH_PHRASE_NO_RESULTS = "AComplexQueryWithNoResults";
+  private static final String MULTIPLE_RESULTS_SEARCH_PHRASE = "Test";
+  private static final String SINGLE_RESULT_SEARCH_PHRASE = "SRPWithOnlyOneSearchResult";
+  private static final String EMPTY_SEARCH_PHRASE = "";
+  private static final int SEARCH_RESULTS_DEFAULT_NUMBER = 25;
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnMobile")
@@ -141,6 +144,7 @@ public class SearchTests extends NewTestTemplate {
             .openForQuery(SEARCH_PHRASE_NO_RESULTS);
 
     Assertion.assertTrue(searchResults.isNoResultsPagePresent());
+    Assertion.assertFalse(searchResults.isLoadMoreButtonVisible());
   }
 
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
@@ -179,5 +183,56 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
     Assertion.assertFalse(searchResults.isNoResultsPagePresent());
     Assertion.assertTrue(searchResults.areResultsPresent());
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_defaultResultsNumberOnSearchResultsPage")
+  public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
+
+    Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_DEFAULT_NUMBER);
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_loadingMoreResultsOnSearchResultsPage")
+  public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
+
+    int defaultCardNumber = resultsPage.getResultCardsNumber();
+    
+    Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
+    Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
+
+    resultsPage.clickLoadMoreButton();
+    int moreResultsLoaded = resultsPage.getResultCardsNumber() - defaultCardNumber;
+
+    Assertion.assertEquals(moreResultsLoaded, SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_loadMoreResultsOnSearchResultsPageNotVisible")
+  public void mercury_search_loadMoreResultsOnSearchResultsPageNotVisible() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(SINGLE_RESULT_SEARCH_PHRASE);
+
+    Assertion.assertTrue(resultsPage.getResultCardsNumber() < SEARCH_RESULTS_DEFAULT_NUMBER);
+    Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = "mercury_search_loadMoreResultsOnSearchResultsPageNotVisible")
+  public void mercury_search_emptySearchPhrase() {
+    SearchResultsPage resultsPage =
+        new SearchResultsPage()
+            .openForQuery(EMPTY_SEARCH_PHRASE);
+
+    Assertion.assertEquals(resultsPage.getResultCardsNumber(), 0);
+    Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
   }
 }

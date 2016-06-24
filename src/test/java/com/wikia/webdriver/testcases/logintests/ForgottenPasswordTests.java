@@ -62,14 +62,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    login.login(userName, newPassword);
-    newPassword = login.setNewPassword();
-    login.verifyUserLoggedIn(userName);
-
-    login.logOut(wikiURL);
-    login.openSpecialUserLogin(wikiURL);
-    login.login(userName, newPassword);
-    login.verifyUserLoggedIn(userName);
+    loginModal.login(userName, newPassword);
+    loginModal.verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
