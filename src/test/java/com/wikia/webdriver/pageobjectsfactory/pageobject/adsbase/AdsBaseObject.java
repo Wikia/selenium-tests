@@ -65,21 +65,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
-  protected String
-      presentFandomDesktopArticleTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
-  protected String
-      presentFandomDesktopArticleBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-desktop']";
-  protected String
-      presentFandomMobileArticleTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-mobile']";
-  protected String
-      presentFandomMobileArticleBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-mobile']";
-  protected String
-      presentFandomHubTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
-  protected String
-      presentFandomHubBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard']";
-
-  protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
-  protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
 
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
@@ -166,53 +151,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void verifyFandomDesktopArticleTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomDesktopArticleTopLeaderboardSelector,
-                          presentFandomDesktopArticleTopLeaderboard);
-  }
-
-  public void verifyFandomDesktopArticleBottomLeaderboard() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomDesktopArticleBottomLeaderboardSelector)));
-    verifyAdVisibleInSlot(presentFandomDesktopArticleBottomLeaderboardSelector,
-                          presentFandomDesktopArticleBottomLeaderboard);
-  }
-
-  public void verifyFandomMobileArticleTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomMobileArticleTopLeaderboardSelector,
-                          presentFandomMobileArticleTopLeaderboard);
-  }
-
-  public void verifyFandomMobileArticleBottomLeaderboard() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomMobileArticleBottomLeaderboardSelector)));
-    verifyAdVisibleInSlot(presentFandomMobileArticleBottomLeaderboardSelector,
-                          presentFandomMobileArticleBottomLeaderboard);
-  }
-
-  public void verifyFandomHubTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomHubTopLeaderboardSelector,
-                          presentFandomHubTopLeaderboard);
-  }
-
-  public void verifyFandomHubBottomLeaderboard() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomHubBottomLeaderboardSelector)));
-    verifyAdVisibleInSlot(presentFandomHubBottomLeaderboardSelector,
-                          presentFandomHubBottomLeaderboard);
-  }
-
-  public void verifyFandomTopBoxad() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomTopBoxadSelector)));
-    verifyAdVisibleInSlot(presentFandomTopBoxadSelector, presentFandomTopBoxad);
-  }
-
-  public void verifyFandomBottomBoxad() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomBoxadSelector)));
-    verifyAdVisibleInSlot(presentFandomBottomBoxadSelector, presentFandomBottomBoxad);
-  }
 
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));

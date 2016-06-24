@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
 import org.testng.annotations.Test;
 
@@ -31,11 +32,11 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   public void adsFandomDesktopArticleAds(String article) {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
-    wikiPage.verifyFandomDesktopArticleTopLeaderboard();
-    wikiPage.verifyFandomTopBoxad();
-    wikiPage.verifyFandomDesktopArticleBottomLeaderboard();
+    fandomPage.verifyFandomDesktopArticleTopLeaderboard();
+    fandomPage.verifyFandomTopBoxad();
+    fandomPage.verifyFandomDesktopArticleBottomLeaderboard();
   }
 
   @InBrowser(
@@ -49,7 +50,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   public void adsFandomMobileArticleAds(String article) {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsFandomObject wikiPage = new AdsFandomObject(driver, testedPage);
     getJquery();
     wikiPage.verifyFandomMobileArticleTopLeaderboard();
     wikiPage.verifyFandomMobileArticleBottomLeaderboard();
@@ -61,13 +62,13 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsDesktopPresenceHubFandom", "AdsFandom"}
   )
   public void adsFandomDesktopHubAds(String hub) {
-    String testedPage = urlBuilder.getUrlForFandomHub(hub);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    String testedHub = urlBuilder.getUrlForFandomHub(hub);
+    AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
     getJquery();
-    wikiPage.verifyFandomHubTopLeaderboard();
-    wikiPage.verifyFandomTopBoxad();
-    wikiPage.verifyFandomHubBottomLeaderboard();
-    wikiPage.verifyFandomBottomBoxad();
+    fandomHub.verifyFandomHubTopLeaderboard();
+    fandomHub.verifyFandomTopBoxad();
+    fandomHub.verifyFandomHubBottomLeaderboard();
+    fandomHub.verifyFandomBottomBoxad();
   }
 
   @InBrowser(
@@ -80,13 +81,13 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceHubFandom", "AdsFandom"}
   )
   public void adsFandomMobileHubAds(String hub) {
-    String testedPage = urlBuilder.getUrlForFandomHub(hub);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    String testedHub = urlBuilder.getUrlForFandomHub(hub);
+    AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
     getJquery();
-    wikiPage.verifyFandomHubTopLeaderboard();
-    wikiPage.verifyFandomTopBoxad();
-    wikiPage.verifyFandomHubBottomLeaderboard();
-    wikiPage.verifyFandomBottomBoxad();
+    fandomHub.verifyFandomHubTopLeaderboard();
+    fandomHub.verifyFandomTopBoxad();
+    fandomHub.verifyFandomHubBottomLeaderboard();
+    fandomHub.verifyFandomBottomBoxad();
   }
 
 }
