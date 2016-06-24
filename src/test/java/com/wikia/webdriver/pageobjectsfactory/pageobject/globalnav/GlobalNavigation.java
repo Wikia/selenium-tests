@@ -87,7 +87,7 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isUserLoggedOut() {
-    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
+    return driver.findElements(By.cssSelector(".avatar-container")).size() > 0;
   }
 
   private DropDownComponentObject getAccountNavigation() {

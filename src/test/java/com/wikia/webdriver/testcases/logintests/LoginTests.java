@@ -3,18 +3,15 @@ package com.wikia.webdriver.testcases.logintests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 import junit.framework.Assert;
 import org.testng.annotations.Test;
@@ -24,12 +21,6 @@ public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
   String jaTestWiki = "ja.ja-test";
-
-  @Test(groups = {"Login_anonCanLoginOnUserLoginSpecialPage", "Smoke5"})
-  public void anonCanLoginOnUserLoginSpecialPage() {
-    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    login.loginAndVerify(credentials.userName10, credentials.password10, wikiURL);
-  }
 
 
   @Test(groups = {"Login_anonCanLoginOnAuthModalFromGlobalNavigation", "Smoke5"})
@@ -46,11 +37,6 @@ public class LoginTests extends NewTestTemplate {
     base.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = "Login_anonCanLoginAsStaffOnUserLoginSpecialPage")
-  public void anonCanLoginAsStaffOnUserLoginSpecialPage() {
-    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-  }
 
   @Test(groups = "Login_anonCanLoginAsStaffOnAuthModalFromGlobalNavigation")
   @Execute(onWikia = "agas")
@@ -69,10 +55,17 @@ public class LoginTests extends NewTestTemplate {
 
   @Test(groups = "Login_anonCanLoginAsJapaneseUserOnUserLoginSpecialPage")
   @Execute(onWikia = "ja.ja-test")
-  public void anonCanLoginAsJapaneseUserOnUserLoginSpecialPage() {
-    SpecialUserLoginPageObject specialLogin = new SpecialUserLoginPageObject(driver);
-    specialLogin.loginAndVerify(credentials.userNameJapanese2, credentials.passwordJapanese2,
-        wikiURL);
+  public void anonCanLoginAsJapaneseUserOnAuthModalFromGlobalNavigation() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    NavigationBar signInLink = new NavigationBar(driver);
+    base.openWikiPage(wikiURL);
+
+    signInLink.clickOnSignIn();
+    AuthModal authModal = signInLink.getAuthModal();
+    Assert.assertTrue(authModal.isOpened());
+
+    authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);
+    base.verifyUserLoggedIn(credentials.userNameJapanese2);
   }
 
   @Test(groups = "Login_userWithoutAValidTokenGetsLoggedOut")
