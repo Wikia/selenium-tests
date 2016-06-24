@@ -100,6 +100,7 @@ public class SignUpTests extends NewTestTemplate {
   }
   
   @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
