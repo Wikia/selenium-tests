@@ -28,6 +28,7 @@ public class SignUpTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"Signup_anonCanNotSignUpWithoutFillingCaptcha", "SignUp"})
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
   public void anonCanNotSignUpWithoutFillingCaptcha() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -41,6 +42,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -57,6 +59,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Signup_anonCanNotSignUpIfTheUsernameAlreadyExists", "SignUp"})
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -65,6 +68,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Signup_anonCanSignUp", "SignUp", "Smoke4"})
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
   public void anonCanSignUp() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
