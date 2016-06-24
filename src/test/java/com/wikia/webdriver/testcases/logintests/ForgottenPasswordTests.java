@@ -70,7 +70,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName", enabled = false)
+  @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
     String userNameUC = credentials.userNameForgottenPassword3;
     String userName = userNameUC.toLowerCase();
@@ -78,6 +78,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+
     login.remindPassword(userName, credentials.apiToken);
     login.verifyMessageAboutNewPassword(userName);
     String
