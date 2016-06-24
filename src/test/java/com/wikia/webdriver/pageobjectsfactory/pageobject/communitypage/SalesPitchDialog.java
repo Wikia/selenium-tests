@@ -1,14 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 public class SalesPitchDialog extends WikiBasePageObject {
 
