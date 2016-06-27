@@ -21,7 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = {"Facebook"})
+@Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -73,7 +73,7 @@ public class FacebookTests extends NewTestTemplate {
     dropDown.openWikiPage(wikiURL);
     dropDown.appendToUrl("noads=1");
     dropDown.openDropDown();
-    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
+//    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
 
     FacebookSignupModalComponentObject fbModal = new FacebookSignupModalComponentObject(driver);
     fbModal.acceptWikiaAppPolicy();

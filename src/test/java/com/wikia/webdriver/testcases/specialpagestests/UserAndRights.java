@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
@@ -20,6 +17,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -42,21 +42,23 @@ public class UserAndRights extends NewTestTemplate {
   }
 
   @Test(groups = {"usersAndRights002"}, dependsOnMethods = {"staffCanBlockUser"})
+  @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldSeeMessageOnArticleEdit() {
     VisualEditModePageObject edit =
         new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
             PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
 
-    edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
+    //edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     edit.verifyUserLoggedIn(User.BLOCKED_USER);
 
     edit.verifyBlockedUserMessage();
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
+  @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldBeAbleToChangeEmail() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
-    editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
+    //editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.openEmailSection();
