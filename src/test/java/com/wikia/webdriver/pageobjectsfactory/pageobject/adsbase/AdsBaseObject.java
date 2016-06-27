@@ -131,6 +131,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
+
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
     WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
