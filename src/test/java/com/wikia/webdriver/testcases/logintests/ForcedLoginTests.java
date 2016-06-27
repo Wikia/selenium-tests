@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.login.WelcomeBackPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -93,7 +94,12 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.openSpecialUpload(wikiURL);
     base.verifyLoginReguiredMessage();
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
-    special.login(credentials.userName10, credentials.password10);
+
+    WelcomeBackPage welcome = new WelcomeBackPage(driver)
+        .typeUsername(credentials.userName10)
+        .typePassword(credentials.password10)
+        .clickSignInButton();
+
     special.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
@@ -105,8 +111,14 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.openSpecialWatchListPage(wikiURL);
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
+
     SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
-    special.login(credentials.userName10, credentials.password10);
+
+    WelcomeBackPage welcome = new WelcomeBackPage(driver)
+        .typeUsername(credentials.userName10)
+        .typePassword(credentials.password10)
+        .clickSignInButton();
+
     special.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
