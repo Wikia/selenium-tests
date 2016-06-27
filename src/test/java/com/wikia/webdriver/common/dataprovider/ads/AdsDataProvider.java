@@ -767,16 +767,16 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, false},
-        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, true},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true},
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false},
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DISABLE_BTF", false},
-        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", true},
+        {"project43", "SyntheticTests/ATF_DISABLE_BTF", true},
+        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false},
     };
   }
 
@@ -1193,6 +1193,43 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsUapOasis() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/UAP/BFAA+BFAB+FMR"),
+            Arrays.asList(
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.TOP_LB)
+                    .put("slotSize", new Dimension(1889, 767))
+                    .put("lineItemId", 290421252)
+                    .put("src", "gpt")
+                    .build(),
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.MEDREC)
+                    .put("slotSize", new Dimension(300, 250))
+                    .put("lineItemId", 290421252)
+                    .put("src", "gpt")
+                    .build()
+            ),
+            Arrays.asList(
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.FLOATING_MEDREC)
+                    .put("slotSize", new Dimension(300, 600))
+                    .put("lineItemId", 290421852)
+                    .put("src", "gpt")
+                    .build(),
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.BOTTOM_LB)
+                    .put("slotSize", new Dimension(1178, 479))
+                    .put("lineItemId", 290421732)
+                    .put("src", "gpt")
+                    .build()
+            )
         }
     };
   }

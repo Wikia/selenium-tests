@@ -45,7 +45,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromAuthModal")
-  @RelatedIssue(issueID = "MAIN-7408", comment = "Test Manually. Test is being updated by Social team")
   @Execute(onWikia = "agas")
   public void anonCanRemindPasswordFromAuthModal() {
     String userName = credentials.userNameForgottenPassword;
@@ -63,14 +62,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    login.login(userName, newPassword);
-    newPassword = login.setNewPassword();
-    login.verifyUserLoggedIn(userName);
-
-    login.logOut(wikiURL);
-    login.openSpecialUserLogin(wikiURL);
-    login.login(userName, newPassword);
-    login.verifyUserLoggedIn(userName);
+    loginModal.login(userName, newPassword);
+    loginModal.verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")

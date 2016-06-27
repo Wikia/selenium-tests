@@ -16,6 +16,7 @@ public class AdsContent {
       "top.window.adDriver2ForcedStatus['%s']='success';";
 
   //SLOTS NAMES
+  public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
   public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
   public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
@@ -59,6 +60,7 @@ public class AdsContent {
 
   static {
     SLOTS_SELECTORS = new HashMap<>();
+    SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(HOME_TOP_LB, "#HOME_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(CORP_TOP_LB, "#CORP_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(HUB_LB, "#HUB_TOP_LEADERBOARD");
