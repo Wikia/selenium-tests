@@ -23,6 +23,7 @@ public class AdsFandomObject extends AdsBaseObject {
   protected String presentFandomTopBoxadDesktopSelector = "div[id*='gpt-top-boxad-desktop']";
   protected String presentFandomTopBoxadMobileSelector = "div[id*='gpt-top-boxad-mobile']";
   protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
+  protected String presentFandomIncontentBoxadSelector = "div[id*='gpt-incontent-boxad']";
   protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
 
   @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
@@ -119,4 +120,27 @@ public class AdsFandomObject extends AdsBaseObject {
     verifyAdVisibleInSlot(presentFandomBottomBoxadSelector, presentFandomBottomBoxad);
   }
 
+  public void verifyNoFandomBottomBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomBottomBoxadSelector)));
+    verifyNoAd(presentFandomBottomBoxadSelector);
+  }
+
+  public void verifyNoFandomIncontentBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomIncontentBoxadSelector)));
+    verifyNoAd(presentFandomIncontentBoxadSelector);
+  }
+
+  public void verifyNoFandomDesktopArticleBottomLeaderboard() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomMobileArticleBottomLeaderboardSelector)));
+    verifyNoAd(presentFandomMobileArticleBottomLeaderboardSelector);
+  }
+
+  public void verifyNoFandomMobileArticleBottomLeaderboard() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
+        presentFandomMobileArticleBottomLeaderboardSelector)));
+    verifyNoAd(presentFandomMobileArticleBottomLeaderboardSelector);
+  }
 }
