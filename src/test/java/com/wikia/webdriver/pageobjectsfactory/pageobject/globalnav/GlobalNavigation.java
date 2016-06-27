@@ -1,14 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.ElementStateHelper;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -16,7 +7,15 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponento
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
 
@@ -70,24 +69,12 @@ public class GlobalNavigation extends BasePageObject {
     return new SearchPageObject(driver);
   }
 
-  public SignUpPageObject signUp() {
-    return getAccountNavigation().openDropDown().clickSignUpLink();
-  }
-
   public DropDownComponentObject openAccountNavigation() {
     return getAccountNavigation().openDropDown();
   }
 
-  public DropDownComponentObject logOut() {
-    return getAccountNavigation().openDropDown().clickLogOut();
-  }
-
   public boolean isLocalSearchDisabled() {
     return !ElementStateHelper.isElementVisible(searchSelect, driver);
-  }
-
-  public boolean isUserLoggedOut() {
-    return driver.findElements(By.cssSelector(".avatar-container")).size() > 0;
   }
 
   private DropDownComponentObject getAccountNavigation() {
@@ -140,5 +127,9 @@ public class GlobalNavigation extends BasePageObject {
 
   public boolean isFandomLogoVisible() {
     return fandomLogo.isDisplayed();
+  }
+
+  public boolean isUserLoggedOut() {
+    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
   }
 }
