@@ -73,7 +73,7 @@ public class FacebookTests extends NewTestTemplate {
     dropDown.openWikiPage(wikiURL);
     dropDown.appendToUrl("noads=1");
     dropDown.openDropDown();
-    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
+//    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
 
     FacebookSignupModalComponentObject fbModal = new FacebookSignupModalComponentObject(driver);
     fbModal.acceptWikiaAppPolicy();
