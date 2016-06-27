@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 /* 
  * Check for facebook button on the page
  */
+@Test(groups = {"auth-facebookButton"})
 public class FacebookButtonTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

@@ -21,7 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = {"Facebook"})
+@Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

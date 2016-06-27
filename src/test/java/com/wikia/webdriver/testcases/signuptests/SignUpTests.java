@@ -25,7 +25,7 @@ import java.util.Calendar;
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
-@Test(groups = {"SignUp"})
+@Test(groups = {"auth-signUp"})
 public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();

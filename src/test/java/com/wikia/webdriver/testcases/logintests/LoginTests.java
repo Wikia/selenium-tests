@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = "Login")
+@Test(groups = "auth-login")
 public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
