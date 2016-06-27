@@ -15,6 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
+
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
@@ -25,10 +26,11 @@ import java.util.Calendar;
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
 public class SignUpTests extends NewTestTemplate {
+
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"Signup_anonCanNotSignUpWithoutFillingCaptcha", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void anonCanNotSignUpWithoutFillingCaptcha() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -36,13 +38,13 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeEmail(credentials.emailQaart1);
     signUp.typePassword(signUp.getTimeStamp());
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     signUp.submit();
     signUp.verifyCaptchaInvalidMessage();
   }
 
   @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -59,7 +61,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Signup_anonCanNotSignUpIfTheUsernameAlreadyExists", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -68,7 +70,7 @@ public class SignUpTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Signup_anonCanSignUp", "SignUp", "Smoke4"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void anonCanSignUp() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -82,7 +84,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
     ConfirmationPageObject confirmPageAlmostThere =
@@ -98,9 +100,9 @@ public class SignUpTests extends NewTestTemplate {
     preferences.selectTab(tabNames.EMAIL);
     preferences.verifyEmailMeSection();
   }
-  
+
   @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it" )
+  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -114,7 +116,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
@@ -145,7 +147,7 @@ public class SignUpTests extends NewTestTemplate {
     signUp.typeUserName(userName);
     signUp.typePassword(password);
     signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-        PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     ConfirmationPageObject confirmPageAlmostThere =
         almostTherePage.enterActivationLink(email, emailPassword, wikiURL, "ja");

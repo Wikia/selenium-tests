@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
@@ -40,7 +39,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"FBButton_003", "FacebookButton"})
-  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it" )
+  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it")
   public void facebookButtonIsVisibleOnForcedLoginModal() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
