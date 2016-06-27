@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = "ForcedLogin")
+@Test(groups = "auth-forcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
