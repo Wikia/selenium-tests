@@ -217,4 +217,8 @@ public class Configuration {
 
     return res.toArray(new String[res.size()]);
   }
+
+  public static String getDisableCommunityPageSalesPitchDialog() {
+    return getProp("disableCommunityPageSalesPitchDialog");
+  }
 }
