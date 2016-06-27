@@ -288,8 +288,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
        * to avoid hiding other UI elements.
        * see https://wikia-inc.atlassian.net/browse/CE-3768
        */
-      driver.manage().addCookie(
-          new Cookie("cpBenefitsModalShown", "1", Configuration.getWikiaDomain(), null, null));
+      if ("true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
+        driver.manage().addCookie(
+            new Cookie("cpBenefitsModalShown", "1", Configuration.getWikiaDomain(), null, null));
+      }
 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(
