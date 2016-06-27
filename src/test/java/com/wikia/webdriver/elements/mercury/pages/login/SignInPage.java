@@ -17,6 +17,14 @@ public class SignInPage extends WikiBasePageObject{
 
     @FindBy(css = ".error")
     private WebElement errorMessage;
+    @FindBy(css = "#loginUsername")
+    private WebElement usernameField;
+    @FindBy(css = "#loginPassword")
+    private WebElement passwordField;
+    @FindBy(css = "#loginSubmit")
+    private WebElement signInButton;
+    @FindBy(css = ".forgotten-password")
+    private WebElement forgottenPasswordLink;
 
     private Wait wait;
 
@@ -34,6 +42,17 @@ public class SignInPage extends WikiBasePageObject{
     public SignInPage verifyErrorMessage(String errorMessage) {
         Assertion.assertEquals(getErrorMessage(), errorMessage);
 
+        return this;
+    }
+
+    public void login(String username, String password) {
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        signInButton.click();
+    }
+
+    public SignInPage clickForgotPasswordLink() {
+        forgottenPasswordLink.click();
         return this;
     }
 }
