@@ -13,8 +13,6 @@ public class SalesPitchDialog extends WikiBasePageObject {
   @FindBy(css = "#CommunityPageBenefitsModal .community-page-entry-point-button")
   private WebElement entryPointButton;
 
-  public SalesPitchDialog() { super(); }
-
   public boolean isVisible() {
     wait.forElementVisible(salesPitchDialog);
 
