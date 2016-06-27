@@ -1196,4 +1196,5 @@ public class AdsDataProvider {
         }
     };
   }
+
 }
