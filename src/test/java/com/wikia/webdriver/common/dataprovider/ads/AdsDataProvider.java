@@ -1205,7 +1205,7 @@ public class AdsDataProvider {
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
-                    .put("slotSize", new Dimension(1440, 585))
+                    .put("slotSize", new Dimension(1889, 767))
                     .put("lineItemId", 290421252)
                     .put("src", "gpt")
                     .build(),
@@ -1225,7 +1225,7 @@ public class AdsDataProvider {
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.BOTTOM_LB)
-                    .put("slotSize", new Dimension(1024, 416))
+                    .put("slotSize", new Dimension(1178, 479))
                     .put("lineItemId", 290421732)
                     .put("src", "gpt")
                     .build()
