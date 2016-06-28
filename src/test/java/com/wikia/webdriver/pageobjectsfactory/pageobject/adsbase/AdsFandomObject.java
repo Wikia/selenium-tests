@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class AdsFandomObject extends AdsBaseObject {
 
-  protected String
-      presentFandomTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
+  protected String presentFandomTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
+
   protected String
       presentFandomBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard']";
   protected String
@@ -19,7 +19,10 @@ public class AdsFandomObject extends AdsBaseObject {
   protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
   protected String presentFandomTopBoxadDesktopSelector = "div[id*='gpt-top-boxad-desktop']";
   protected String presentFandomTopBoxadMobileSelector = "div[id*='gpt-top-boxad-mobile']";
-  protected String presentFandomIncontentBoxadSelector = "div[id*='gpt-incontent-boxad']";
+
+  protected String
+      presentFandomIncontentBoxadDesktopSelector = "div[id*='gpt-incontent-boxad-desktop']";
+
   protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
   protected String presentFandomBottomBoxadDesktopSelector = "div[id*='gpt-bottom-boxad-desktop']";
   protected String presentFandomBottomBoxadMobileSelector = "div[id*='gpt-bottom-boxad-mobile']";
@@ -107,22 +110,16 @@ public class AdsFandomObject extends AdsBaseObject {
     verifyAdVisibleInSlot(presentFandomBottomBoxadSelector, presentFandomBottomBoxad);
   }
 
-  public void verifyNoFandomBottomBoxadDesktop() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomBoxadDesktopSelector)));
-    verifyNoAd(presentFandomBottomBoxadDesktopSelector);
-  }
-
   public void verifyNoFandomBottomBoxadMobile() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
         presentFandomBottomBoxadMobileSelector)));
     verifyNoAd(presentFandomBottomBoxadMobileSelector);
   }
 
-  public void verifyNoFandomIncontentBoxad() {
+  public void verifyNoFandomIncontentBoxadDesktop() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomIncontentBoxadSelector)));
-    verifyNoAd(presentFandomIncontentBoxadSelector);
+        presentFandomIncontentBoxadDesktopSelector)));
+    verifyNoAd(presentFandomIncontentBoxadDesktopSelector);
   }
 
   public void verifyNoFandomBottomLeaderboardDesktop() {
