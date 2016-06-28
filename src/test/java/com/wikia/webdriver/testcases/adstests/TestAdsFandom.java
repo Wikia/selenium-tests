@@ -33,7 +33,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
-    fandomPage.verifyFandomDesktopArticleTopLeaderboard();
+    fandomPage.verifyFandomTopLeaderboard();
     fandomPage.verifyFandomDesktopTopBoxad();
     fandomPage.verifyFandomDesktopArticleBottomLeaderboard();
   }
@@ -64,7 +64,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedHub = urlBuilder.getUrlForFandomHub(hub);
     AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
     getJquery();
-    fandomHub.verifyFandomHubTopLeaderboard();
+    fandomHub.verifyFandomTopLeaderboard();
     fandomHub.verifyFandomTopBoxad();
     fandomHub.verifyFandomHubBottomLeaderboard();
     fandomHub.verifyFandomBottomBoxad();
@@ -83,7 +83,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedHub = urlBuilder.getUrlForFandomHub(hub);
     AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
     getJquery();
-    fandomHub.verifyFandomHubTopLeaderboard();
+    fandomHub.verifyFandomTopLeaderboard();
     fandomHub.verifyFandomTopBoxad();
     fandomHub.verifyFandomHubBottomLeaderboard();
     fandomHub.verifyFandomBottomBoxad();

@@ -8,15 +8,11 @@ import org.openqa.selenium.support.FindBy;
 public class AdsFandomObject extends AdsBaseObject {
 
   protected String
-      presentFandomDesktopArticleTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-desktop']";
+      presentFandomTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
   protected String
       presentFandomDesktopArticleBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-desktop']";
   protected String
-      presentFandomMobileArticleTopLeaderboardSelector = "div[id*='gpt-top-leaderboard-mobile']";
-  protected String
       presentFandomMobileArticleBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard-mobile']";
-  protected String
-      presentFandomHubTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
   protected String
       presentFandomHubBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard']";
 
@@ -26,20 +22,14 @@ public class AdsFandomObject extends AdsBaseObject {
   protected String presentFandomIncontentBoxadSelector = "div[id*='gpt-incontent-boxad']";
   protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
 
-  @FindBy(css = "div[id*='gpt-top-leaderboard-desktop']")
-  protected WebElement presentFandomDesktopArticleTopLeaderboard;
+  @FindBy(css = "div[id*='gpt-top-leaderboard']")
+  protected WebElement presentFandomTopLeaderboard;
 
   @FindBy(css = "div[id*='gpt-bottom-leaderboard-desktop']")
   protected WebElement presentFandomDesktopArticleBottomLeaderboard;
 
-  @FindBy(css = "div[id*='gpt-top-leaderboard-mobile']")
-  protected WebElement presentFandomMobileArticleTopLeaderboard;
-
   @FindBy(css = "div[id*='gpt-bottom-leaderboard-mobile']")
   protected WebElement presentFandomMobileArticleBottomLeaderboard;
-
-  @FindBy(css = "div[id*='gpt-top-leaderboard']")
-  protected WebElement presentFandomHubTopLeaderboard;
 
   @FindBy(css = "div[id*='gpt-bottom-leaderboard']")
   protected WebElement presentFandomHubBottomLeaderboard;
@@ -60,9 +50,8 @@ public class AdsFandomObject extends AdsBaseObject {
     super(driver, testedPage);
     }
 
-  public void verifyFandomDesktopArticleTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomDesktopArticleTopLeaderboardSelector,
-                          presentFandomDesktopArticleTopLeaderboard);
+  public void verifyFandomTopLeaderboard() {
+    verifyAdVisibleInSlot(presentFandomTopLeaderboardSelector, presentFandomTopLeaderboard);
   }
 
   public void verifyFandomDesktopArticleBottomLeaderboard() {
@@ -72,21 +61,11 @@ public class AdsFandomObject extends AdsBaseObject {
                           presentFandomDesktopArticleBottomLeaderboard);
   }
 
-  public void verifyFandomMobileArticleTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomMobileArticleTopLeaderboardSelector,
-                          presentFandomMobileArticleTopLeaderboard);
-  }
-
   public void verifyFandomMobileArticleBottomLeaderboard() {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
         presentFandomMobileArticleBottomLeaderboardSelector)));
     verifyAdVisibleInSlot(presentFandomMobileArticleBottomLeaderboardSelector,
                           presentFandomMobileArticleBottomLeaderboard);
-  }
-
-  public void verifyFandomHubTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomHubTopLeaderboardSelector,
-                          presentFandomHubTopLeaderboard);
   }
 
   public void verifyFandomHubBottomLeaderboard() {

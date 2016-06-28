@@ -34,7 +34,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
 
-    fandomPage.verifyFandomDesktopArticleTopLeaderboard();
+    fandomPage.verifyFandomTopLeaderboard();
     fandomPage.verifyFandomDesktopTopBoxad();
     fandomPage.verifyNoFandomBottomBoxad();
     fandomPage.verifyNoFandomIncontentBoxad();
@@ -55,7 +55,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
 
-    fandomPage.verifyFandomMobileArticleTopLeaderboard();
+    fandomPage.verifyFandomTopLeaderboard();
     fandomPage.verifyFandomMobileTopBoxad();
     fandomPage.verifyNoFandomBottomBoxad();
     fandomPage.verifyNoFandomMobileArticleBottomLeaderboard();
