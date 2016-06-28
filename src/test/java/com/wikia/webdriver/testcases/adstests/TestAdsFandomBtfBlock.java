@@ -11,28 +11,13 @@ import org.testng.annotations.Test;
 
 public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
-  private void getJquery() {
-    driver.executeScript(
-        "    (function () {\n"
-        + "    var s = document.createElement('script');\n"
-        + "    s.type = 'text/javascript';\n"
-        + "    s.async = true;\n"
-        + "    s.src = 'https://code.jquery.com/jquery-2.2.4.min.js';\n"
-        + "    var x = document.getElementsByTagName('script')[0];\n"
-        + "    x.parentNode.insertBefore(s, x);\n"
-        + "    })();"
-    );
-  }
-
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
       dataProvider = "fandomBtfBlockPage",
       groups = {"AdsFandomBtfBlockDesktop"}
   )
   public void adsFandomBtfBlockDesktop(String article) {
-    String testedPage = urlBuilder.getUrlForFandomPage(article);
-    AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
-    getJquery();
+    AdsFandomObject fandomPage = loadPage(article, PAGE_TYPE_ARTICLE);
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();
@@ -50,9 +35,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
       groups = {"AdsFandomBtfBlockMobile"}
   )
   public void adsFandomBtfBlockMobile(String article) {
-    String testedPage = urlBuilder.getUrlForFandomPage(article);
-    AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
-    getJquery();
+    AdsFandomObject fandomPage = loadPage(article, PAGE_TYPE_ARTICLE);
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();
