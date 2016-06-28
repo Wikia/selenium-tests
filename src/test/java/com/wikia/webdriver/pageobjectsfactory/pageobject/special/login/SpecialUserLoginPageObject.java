@@ -14,7 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
-  private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
   @FindBy(css = ".WikiaArticle input[name='username']")
   private WebElement userName;
@@ -84,12 +83,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     scrollAndClick(continueButtonBig);
   }
 
-  public void loginAndVerify(String name, String password, String wikiURL) {
-    openSpecialUserLogin(wikiURL);
-    login(name, password);
-    verifyUserLoggedIn(name);
-  }
-
   public void login(String name, String pass) {
     typeInUserName(name);
     typeInPassword(pass);
@@ -125,11 +118,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     wait.forTextInElement(messagePlaceholder, message);
     PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present",
                           true, driver);
-  }
-
-  public void verifyClosedAccountMessage() {
-    wait.forElementVisible(messagePlaceholder);
-    Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
   }
 
   public void clickLogInLink() {

@@ -43,7 +43,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
     login.remindPasswordNewAuth(userName, credentials.apiToken);
@@ -52,8 +52,13 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    signIn.login(userName, newPassword);
-    signIn.verifyUserLoggedIn(userName);
+
+    signIn
+        .getLoginArea()
+        .typeUsername(userName)
+        .typePassword(newPassword)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
@@ -63,7 +68,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
     login.remindPasswordNewAuth(userName, credentials.apiToken);
@@ -72,9 +77,16 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    signIn.login(userName, newPassword);
     String verifyString = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-    signIn.verifyUserLoggedIn(verifyString);
+
+    signIn
+        .getLoginArea()
+        .typeUsername(userName)
+        .typePassword(newPassword)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(verifyString);
+
+
   }
 
 
