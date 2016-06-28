@@ -16,6 +16,21 @@ public class AdsFandomObject extends AdsBaseObject {
   public static final String INCONTENT_BOXAD = "INCONTENT_BOXAD";
   public static final String BOTTOM_BOXAD = "BOTTOM_BOXAD";
 
+  @FindBy(css = "div[id$='TOP_LEADERBOARD_0__container__']")
+  protected WebElement topLeaderboardElement;
+
+  @FindBy(css = "div[id$='BOTTOM_LEADERBOARD_0__container__']")
+  protected WebElement bottomLeaderboardElement;
+
+  @FindBy(css = "div[id$='TOP_BOXAD_0__container__']")
+  protected WebElement topBoxadElement;
+
+  @FindBy(css = "div[id$='INCONTENT_BOXAD_0__container__']")
+  protected WebElement incontentBoxadElement;
+
+  @FindBy(css = "div[id$='BOTTOM_BOXAD_0__container__']")
+  protected WebElement bottomBoxadElement;
+
   public static final Map<String, String> SLOT_SELECTORS;
 
   static {
@@ -27,45 +42,21 @@ public class AdsFandomObject extends AdsBaseObject {
     SLOT_SELECTORS.put(BOTTOM_BOXAD, "div[id$='BOTTOM_BOXAD_0__container__']");
   }
 
-  @FindBy(css = "div[id$='TOP_LEADERBOARD_0__container__']")
-  protected WebElement topLeaderboardElement;
-
-  @FindBy(css = "div[id$='BOTTOM_LEADERBOARD_0__container__']")
-  protected WebElement bottomLeaderboardElement;
-
-  @FindBy(css = "div[id$='TOP_BOXAD_0__container__']")
-  protected WebElement topBoxadElement;
-
-  @FindBy(css = "div[id$='BOTTOM_BOXAD_0__container__']")
-  protected WebElement bottomBoxadElement;
+  private final Map<String, WebElement> slots;
 
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
+
+    slots = new HashMap<>();
+    slots.put(TOP_LEADERBOARD, topLeaderboardElement);
+    slots.put(BOTTOM_LEADERBOARD, bottomLeaderboardElement);
+    slots.put(TOP_BOXAD, topBoxadElement);
+    slots.put(INCONTENT_BOXAD, incontentBoxadElement);
+    slots.put(BOTTOM_BOXAD, bottomBoxadElement);
   }
 
-  public void verifyTopLeaderboard() {
-    verifyAdVisibleInSlot(SLOT_SELECTORS.get(TOP_LEADERBOARD), topLeaderboardElement);
-  }
-
-  public void verifyBottomLeaderboard() {
-    String selector = SLOT_SELECTORS.get(BOTTOM_LEADERBOARD);
-
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(selector)));
-    verifyAdVisibleInSlot(selector, bottomLeaderboardElement);
-  }
-
-  public void verifyTopBoxad() {
-    String selector = SLOT_SELECTORS.get(TOP_BOXAD);
-
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(selector)));
-    verifyAdVisibleInSlot(selector, topBoxadElement);
-  }
-
-  public void verifyBottomBoxad() {
-    String selector = SLOT_SELECTORS.get(BOTTOM_BOXAD);
-
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(selector)));
-    verifyAdVisibleInSlot(selector, bottomBoxadElement);
+  public void verifySlot(String slotName) {
+    verifyAdVisibleInSlot(SLOT_SELECTORS.get(slotName), slots.get(slotName));
   }
 
   public WebElement getSlot(String slotName) {

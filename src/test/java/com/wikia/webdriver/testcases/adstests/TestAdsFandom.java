@@ -19,9 +19,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   public void adsFandomDesktopArticleAds(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
-    fandomPage.verifyTopLeaderboard();
-    fandomPage.verifyTopBoxad();
-    fandomPage.verifyBottomLeaderboard();
+    fandomPage.verifySlot(AdsFandomObject.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomObject.BOTTOM_LEADERBOARD);
   }
 
   @InBrowser(
@@ -36,8 +36,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   public void adsFandomMobileArticleAds(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
-    fandomPage.verifyTopBoxad();
-    fandomPage.verifyBottomLeaderboard();
+    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomObject.BOTTOM_LEADERBOARD);
   }
 
   @Test(
@@ -65,9 +65,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   private void verifySlotsOnHubPage(String hub) {
     AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
 
-    fandomPage.verifyTopLeaderboard();
-    fandomPage.verifyTopBoxad();
-    fandomPage.verifyBottomLeaderboard();
-    fandomPage.verifyBottomBoxad();
+    fandomPage.verifySlot(AdsFandomObject.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomObject.BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomObject.BOTTOM_BOXAD);
   }
 }
