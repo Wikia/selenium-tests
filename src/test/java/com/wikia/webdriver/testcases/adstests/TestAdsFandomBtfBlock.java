@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -21,8 +22,9 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();
-    fandomPage.verifyNoIncontentBoxad();
-    fandomPage.verifyNoBottomLeaderboard();
+
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.BOTTOM_LEADERBOARD));
   }
 
   @InBrowser(
@@ -39,7 +41,8 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();
-    fandomPage.verifyNoBottomBoxad();
-    fandomPage.verifyNoBottomLeaderboard();
+
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.BOTTOM_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.BOTTOM_LEADERBOARD));
   }
 }
