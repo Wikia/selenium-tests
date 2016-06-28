@@ -3,10 +3,10 @@ package com.wikia.webdriver.testcases.logintests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -57,27 +57,38 @@ public class ForcedLoginTests extends NewTestTemplate {
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInViaUserLoginPage")
-  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it")
   public void anonCanLogInViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginReguiredMessage();
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
-    special.login(credentials.userName10, credentials.password10);
-    special.verifyUserLoggedIn(credentials.userName10);
+    new SignInPage(driver)
+        .getLoginArea()
+        .typeUsername(credentials.userName10)
+        .typePassword(credentials.password10)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(credentials.userName10);
+
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
-  @RelatedIssue(issueID = "SOC-2669", comment = "fails after product change, SOC team on it")
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage();
     base.openSpecialWatchListPage(wikiURL);
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
+
     SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
-    special.login(credentials.userName10, credentials.password10);
+
+    new SignInPage(driver)
+        .getLoginArea()
+        .typeUsername(credentials.userName10)
+        .typePassword(credentials.password10)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(credentials.userName10);
+
     special.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }

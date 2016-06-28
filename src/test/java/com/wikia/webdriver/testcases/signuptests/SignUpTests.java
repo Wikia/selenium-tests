@@ -30,24 +30,11 @@ public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"Signup_anonCanNotSignUpWithoutFillingCaptcha", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
-  public void anonCanNotSignUpWithoutFillingCaptcha() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
-    signUp.typeUserName(signUp.getTimeStamp());
-    signUp.typeEmail(credentials.emailQaart1);
-    signUp.typePassword(signUp.getTimeStamp());
-    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    signUp.submit();
-    signUp.verifyCaptchaInvalidMessage();
-  }
-
   @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
   @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
+
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
@@ -121,7 +108,7 @@ public class SignUpTests extends NewTestTemplate {
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     login.login(userName, password);
     almostTherePage.verifyUserLoggedIn(userName);
   }

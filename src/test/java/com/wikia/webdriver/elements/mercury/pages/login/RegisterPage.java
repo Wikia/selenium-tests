@@ -12,7 +12,8 @@ public class RegisterPage extends WikiBasePageObject {
 
     @FindBy(css = ".footer-callout-emphasis")
     private WebElement SignInButton;
-
+    @FindBy(css = ".signup-providers li a")
+    private WebElement connectWithFacebookButton;
 
     private Wait wait;
 
@@ -26,6 +27,12 @@ public class RegisterPage extends WikiBasePageObject {
         SignInButton.click();
 
         return new SignInPage(driver);
+    }
+
+    public RegisterPage isConnetctWithFacebookButtonVisible() {
+        wait.forElementVisible(connectWithFacebookButton);
+
+        return this;
     }
 }
 
