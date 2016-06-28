@@ -1,11 +1,9 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-
 import org.testng.annotations.Test;
 
 public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {

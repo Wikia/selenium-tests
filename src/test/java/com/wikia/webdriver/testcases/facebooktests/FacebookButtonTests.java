@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.facebooktests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -11,10 +10,8 @@ import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
-
 import org.testng.annotations.Test;
 
 /* 
@@ -51,6 +48,7 @@ public class FacebookButtonTests extends NewTestTemplate {
     authModal.isOpened();
     Assertion.assertTrue(authModal.isConnetctWithFacebookButtonVisible());
   }
+
 
   @Test(groups = {"FBButton_004", "FacebookButton"})
   @Execute(asUser = User.USER)
