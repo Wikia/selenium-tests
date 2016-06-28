@@ -110,26 +110,18 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public void verifyNoFandomBottomBoxadMobile() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomBoxadMobileSelector)));
     verifyNoAd(presentFandomBottomBoxadMobileSelector + " > div");
   }
 
   public void verifyNoFandomIncontentBoxadDesktop() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomIncontentBoxadDesktopSelector)));
     verifyNoAd(presentFandomIncontentBoxadDesktopSelector + " > div");
   }
 
   public void verifyNoFandomBottomLeaderboardDesktop() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomLeaderboardMobileSelector)));
     verifyNoAd(presentFandomBottomLeaderboardMobileSelector + " > div");
   }
 
   public void verifyNoFandomBottomLeaderboardMobile() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomLeaderboardMobileSelector)));
     verifyNoAd(presentFandomBottomLeaderboardMobileSelector + " > div");
   }
 }
