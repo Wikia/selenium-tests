@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -19,9 +20,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   public void adsFandomDesktopArticleAds(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
-    fandomPage.verifySlot(AdsFandomObject.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomObject.BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
   }
 
   @InBrowser(
@@ -36,8 +37,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   public void adsFandomMobileArticleAds(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
-    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomObject.BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
   }
 
   @Test(
@@ -65,9 +66,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   private void verifySlotsOnHubPage(String hub) {
     AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
 
-    fandomPage.verifySlot(AdsFandomObject.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomObject.BOTTOM_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomObject.BOTTOM_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
   }
 }
