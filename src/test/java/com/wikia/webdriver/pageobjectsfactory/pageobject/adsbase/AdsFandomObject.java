@@ -7,121 +7,64 @@ import org.openqa.selenium.support.FindBy;
 
 public class AdsFandomObject extends AdsBaseObject {
 
-  protected String presentFandomTopLeaderboardSelector = "div[id*='gpt-top-leaderboard']";
+  protected String topLeaderboardSelector = "div[id$='TOP_LEADERBOARD_0__container__']";
+  protected String bottomLeaderboardSelector = "div[id$='BOTTOM_LEADERBOARD_0__container__']";
+  protected String topBoxadSelector = "div[id$='TOP_BOXAD_0__container__']";
+  protected String incontentBoxadSelector = "div[id$='INCONTENT_BOXAD_0__container__']";
+  protected String bottomBoxadSelector = "div[id$='BOTTOM_BOXAD_0__container__']";
 
-  protected String
-      presentFandomBottomLeaderboardSelector = "div[id*='gpt-bottom-leaderboard']";
-  protected String
-      presentFandomBottomLeaderboardDesktopSelector = "div[id*='gpt-bottom-leaderboard-desktop']";
-  protected String
-      presentFandomBottomLeaderboardMobileSelector = "div[id*='gpt-bottom-leaderboard-mobile']";
+  @FindBy(css = "div[id$='TOP_LEADERBOARD_0__container__']")
+  protected WebElement topLeaderboardElement;
 
-  protected String presentFandomTopBoxadSelector = "div[id*='gpt-top-boxad']";
-  protected String presentFandomTopBoxadDesktopSelector = "div[id*='gpt-top-boxad-desktop']";
-  protected String presentFandomTopBoxadMobileSelector = "div[id*='gpt-top-boxad-mobile']";
+  @FindBy(css = "div[id$='BOTTOM_LEADERBOARD_0__container__']")
+  protected WebElement bottomLeaderboardElement;
 
-  protected String
-      presentFandomIncontentBoxadDesktopSelector = "div[id*='gpt-incontent-boxad-desktop']";
+  @FindBy(css = "div[id$='TOP_BOXAD_0__container__']")
+  protected WebElement topBoxadElement;
 
-  protected String presentFandomBottomBoxadSelector = "div[id*='gpt-bottom-boxad']";
-  protected String presentFandomBottomBoxadMobileSelector = "div[id*='gpt-bottom-boxad-mobile']";
+  @FindBy(css = "div[id$='INCONTENT_BOXAD_0__container__']")
+  protected WebElement incontentBoxadElement;
 
-  @FindBy(css = "div[id*='gpt-top-leaderboard']")
-  protected WebElement presentFandomTopLeaderboard;
-
-  @FindBy(css = "div[id*='gpt-bottom-leaderboard']")
-  protected WebElement presentFandomBottomLeaderboard;
-
-  @FindBy(css = "div[id*='gpt-bottom-leaderboard-desktop']")
-  protected WebElement presentFandomBottomLeaderboardDesktop;
-
-  @FindBy(css = "div[id*='gpt-bottom-leaderboard-mobile']")
-  protected WebElement presentFandomBottomLeaderboardMobile;
-
-  @FindBy(css = "div[id*='gpt-top-boxad']")
-  protected WebElement presentFandomTopBoxad;
-
-  @FindBy(css = "div[id*='gpt-top-boxad-desktop']")
-  protected WebElement presentFandomTopBoxadDesktop;
-
-  @FindBy(css = "div[id*='gpt-top-boxad-mobile']")
-  protected WebElement presentFandomTopBoxadMobile;
-
-  @FindBy(css = "div[id*='gpt-bottom-boxad']")
-  protected WebElement presentFandomBottomBoxad;
-
-  @FindBy(css = "div[id*='gpt-bottom-boxad-desktop']")
-  protected WebElement presentFandomBottomBoxadDesktop;
-
-  @FindBy(css = "div[id*='gpt-bottom-boxad-mobile']")
-  protected WebElement presentFandomBottomBoxadMobile;
+  @FindBy(css = "div[id$='BOTTOM_BOXAD_0__container__']")
+  protected WebElement bottomBoxadElement;
 
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
-    }
-
-  public void verifyFandomTopLeaderboard() {
-    verifyAdVisibleInSlot(presentFandomTopLeaderboardSelector, presentFandomTopLeaderboard);
   }
 
-  public void verifyFandomBottomLeaderboard() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomLeaderboardSelector)));
-    verifyAdVisibleInSlot(presentFandomBottomLeaderboardSelector,
-                          presentFandomBottomLeaderboard);
+  public void verifyTopLeaderboard() {
+    verifyAdVisibleInSlot(topLeaderboardSelector, topLeaderboardElement);
   }
 
-  public void verifyFandomBottomLeaderboardDesktop() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomLeaderboardDesktopSelector)));
-    verifyAdVisibleInSlot(presentFandomBottomLeaderboardDesktopSelector,
-                          presentFandomBottomLeaderboardDesktop);
+  public void verifyBottomLeaderboard() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(bottomLeaderboardSelector)));
+    verifyAdVisibleInSlot(bottomLeaderboardSelector, bottomLeaderboardElement);
   }
 
-  public void verifyFandomBottomLeaderboardMobile() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomLeaderboardMobileSelector)));
-    verifyAdVisibleInSlot(presentFandomBottomLeaderboardMobileSelector,
-                          presentFandomBottomLeaderboardMobile);
+  public void verifyTopBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(topBoxadSelector)));
+    verifyAdVisibleInSlot(topBoxadSelector, topBoxadElement);
   }
 
-  public void verifyFandomTopBoxad() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomTopBoxadSelector)));
-    verifyAdVisibleInSlot(presentFandomTopBoxadSelector, presentFandomTopBoxad);
+  public void verifyIncontentBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(incontentBoxadSelector)));
+    verifyAdVisibleInSlot(incontentBoxadSelector, incontentBoxadElement);
   }
 
-  public void verifyFandomTopBoxadDesktop() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomTopBoxadDesktopSelector)));
-    verifyAdVisibleInSlot(presentFandomTopBoxadDesktopSelector, presentFandomTopBoxadDesktop);
+  public void verifyBottomBoxad() {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(bottomBoxadSelector)));
+    verifyAdVisibleInSlot(bottomBoxadSelector, bottomBoxadElement);
   }
 
-  public void verifyFandomTopBoxadMobile() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomTopBoxadMobileSelector)));
-    verifyAdVisibleInSlot(presentFandomTopBoxadMobileSelector, presentFandomTopBoxadMobile);
+  public void verifyNoBottomBoxad() {
+    verifyNoAd(bottomBoxadSelector);
   }
 
-  public void verifyFandomBottomBoxad() {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(
-        presentFandomBottomBoxadSelector)));
-    verifyAdVisibleInSlot(presentFandomBottomBoxadSelector, presentFandomBottomBoxad);
+  public void verifyNoIncontentBoxad() {
+    verifyNoAd(incontentBoxadSelector);
   }
 
-  public void verifyNoFandomBottomBoxadMobile() {
-    verifyNoAd(presentFandomBottomBoxadMobileSelector + " > div");
-  }
-
-  public void verifyNoFandomIncontentBoxadDesktop() {
-    verifyNoAd(presentFandomIncontentBoxadDesktopSelector + " > div");
-  }
-
-  public void verifyNoFandomBottomLeaderboardDesktop() {
-    verifyNoAd(presentFandomBottomLeaderboardMobileSelector + " > div");
-  }
-
-  public void verifyNoFandomBottomLeaderboardMobile() {
-    verifyNoAd(presentFandomBottomLeaderboardMobileSelector + " > div");
+  public void verifyNoBottomLeaderboard() {
+    verifyNoAd(bottomLeaderboardSelector);
   }
 }

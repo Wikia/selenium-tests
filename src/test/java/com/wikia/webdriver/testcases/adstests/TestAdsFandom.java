@@ -33,9 +33,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
-    fandomPage.verifyFandomTopLeaderboard();
-    fandomPage.verifyFandomTopBoxadDesktop();
-    fandomPage.verifyFandomBottomLeaderboardDesktop();
+    fandomPage.verifyTopLeaderboard();
+    fandomPage.verifyTopBoxad();
+    fandomPage.verifyBottomLeaderboard();
   }
 
   @InBrowser(
@@ -51,8 +51,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
     AdsFandomObject wikiPage = new AdsFandomObject(driver, testedPage);
     getJquery();
-    wikiPage.verifyFandomTopBoxadMobile();
-    wikiPage.verifyFandomBottomLeaderboardMobile();
+    wikiPage.verifyTopBoxad();
+    wikiPage.verifyBottomLeaderboard();
   }
 
   @Test(
@@ -64,10 +64,10 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedHub = urlBuilder.getUrlForFandomHub(hub);
     AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
     getJquery();
-    fandomHub.verifyFandomTopLeaderboard();
-    fandomHub.verifyFandomTopBoxad();
-    fandomHub.verifyFandomBottomLeaderboard();
-    fandomHub.verifyFandomBottomBoxad();
+    fandomHub.verifyTopLeaderboard();
+    fandomHub.verifyTopBoxad();
+    fandomHub.verifyBottomLeaderboard();
+    fandomHub.verifyBottomBoxad();
   }
 
   @InBrowser(
@@ -83,10 +83,10 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedHub = urlBuilder.getUrlForFandomHub(hub);
     AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
     getJquery();
-    fandomHub.verifyFandomTopLeaderboard();
-    fandomHub.verifyFandomTopBoxad();
-    fandomHub.verifyFandomBottomLeaderboard();
-    fandomHub.verifyFandomBottomBoxad();
+    fandomHub.verifyTopLeaderboard();
+    fandomHub.verifyTopBoxad();
+    fandomHub.verifyBottomLeaderboard();
+    fandomHub.verifyBottomBoxad();
   }
 
 }

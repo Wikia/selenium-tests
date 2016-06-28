@@ -34,10 +34,10 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
 
-    fandomPage.verifyFandomTopLeaderboard();
-    fandomPage.verifyFandomTopBoxadDesktop();
-    fandomPage.verifyNoFandomIncontentBoxadDesktop();
-    fandomPage.verifyNoFandomBottomLeaderboardDesktop();
+    fandomPage.verifyTopLeaderboard();
+    fandomPage.verifyTopBoxad();
+    fandomPage.verifyNoIncontentBoxad();
+    fandomPage.verifyNoBottomLeaderboard();
   }
 
   @InBrowser(
@@ -54,9 +54,9 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
 
-    fandomPage.verifyFandomTopLeaderboard();
-    fandomPage.verifyFandomTopBoxadMobile();
-    fandomPage.verifyNoFandomBottomBoxadMobile();
-    fandomPage.verifyNoFandomBottomLeaderboardMobile();
+    fandomPage.verifyTopLeaderboard();
+    fandomPage.verifyTopBoxad();
+    fandomPage.verifyNoBottomBoxad();
+    fandomPage.verifyNoBottomLeaderboard();
   }
 }
