@@ -84,7 +84,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
         .typeUsername(userName)
         .typePassword(newPassword)
         .clickSignInButtonToSignIn()
-        .verifyUserLoggedIn(userName);
+        .verifyUserLoggedIn(verifyString);
 
 
   }

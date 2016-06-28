@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.logintests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -63,9 +62,6 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.openSpecialUpload(wikiURL);
     base.verifyLoginReguiredMessage();
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
-
-    SignInPage signInPage = new SignInPage(driver);
-
     new SignInPage(driver)
         .getLoginArea()
         .typeUsername(credentials.userName10)
