@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -22,11 +23,11 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
   public void adsFandomBtfBlockDesktop(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
-    fandomPage.verifySlot(AdsFandomObject.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.INCONTENT_BOXAD), assertionMessage);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.BOTTOM_LEADERBOARD), assertionMessage);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD), assertionMessage);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), assertionMessage);
   }
 
   @InBrowser(
@@ -41,10 +42,10 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
   public void adsFandomBtfBlockMobile(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
-    fandomPage.verifySlot(AdsFandomObject.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomObject.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.BOTTOM_BOXAD), assertionMessage);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomObject.BOTTOM_LEADERBOARD), assertionMessage);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD), assertionMessage);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), assertionMessage);
   }
 }
