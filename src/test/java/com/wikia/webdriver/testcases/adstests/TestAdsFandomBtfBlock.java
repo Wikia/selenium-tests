@@ -35,10 +35,10 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     getJquery();
 
     fandomPage.verifyFandomTopLeaderboard();
-    fandomPage.verifyFandomDesktopTopBoxad();
-    fandomPage.verifyNoFandomBottomBoxad();
+    fandomPage.verifyFandomTopBoxadDesktop();
+    fandomPage.verifyNoFandomBottomBoxadDesktop();
     fandomPage.verifyNoFandomIncontentBoxad();
-    fandomPage.verifyNoFandomDesktopArticleBottomLeaderboard();
+    fandomPage.verifyNoFandomBottomLeaderboardDesktop();
   }
 
   @InBrowser(
@@ -56,8 +56,8 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     getJquery();
 
     fandomPage.verifyFandomTopLeaderboard();
-    fandomPage.verifyFandomMobileTopBoxad();
-    fandomPage.verifyNoFandomBottomBoxad();
-    fandomPage.verifyNoFandomMobileArticleBottomLeaderboard();
+    fandomPage.verifyFandomTopBoxadMobile();
+    fandomPage.verifyNoFandomBottomBoxadMobile();
+    fandomPage.verifyNoFandomBottomLeaderboardMobile();
   }
 }

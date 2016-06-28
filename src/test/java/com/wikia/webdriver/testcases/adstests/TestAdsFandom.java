@@ -34,8 +34,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
     getJquery();
     fandomPage.verifyFandomTopLeaderboard();
-    fandomPage.verifyFandomDesktopTopBoxad();
-    fandomPage.verifyFandomDesktopArticleBottomLeaderboard();
+    fandomPage.verifyFandomTopBoxadDesktop();
+    fandomPage.verifyFandomBottomLeaderboardDesktop();
   }
 
   @InBrowser(
@@ -51,8 +51,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     String testedPage = urlBuilder.getUrlForFandomPage(article);
     AdsFandomObject wikiPage = new AdsFandomObject(driver, testedPage);
     getJquery();
-    wikiPage.verifyFandomMobileTopBoxad();
-    wikiPage.verifyFandomMobileArticleBottomLeaderboard();
+    wikiPage.verifyFandomTopBoxadMobile();
+    wikiPage.verifyFandomBottomLeaderboardMobile();
   }
 
   @Test(
@@ -66,7 +66,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     getJquery();
     fandomHub.verifyFandomTopLeaderboard();
     fandomHub.verifyFandomTopBoxad();
-    fandomHub.verifyFandomHubBottomLeaderboard();
+    fandomHub.verifyFandomBottomLeaderboard();
     fandomHub.verifyFandomBottomBoxad();
   }
 
@@ -85,7 +85,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     getJquery();
     fandomHub.verifyFandomTopLeaderboard();
     fandomHub.verifyFandomTopBoxad();
-    fandomHub.verifyFandomHubBottomLeaderboard();
+    fandomHub.verifyFandomBottomLeaderboard();
     fandomHub.verifyFandomBottomBoxad();
   }
 
