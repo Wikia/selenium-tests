@@ -17,7 +17,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopArticleAds(String article) {
-    AdsFandomObject fandomPage = loadPage(article, PAGE_TYPE_ARTICLE);
+    AdsFandomObject fandomPage = loadPage(article);
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();
@@ -34,7 +34,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileArticleAds(String article) {
-    AdsFandomObject fandomPage = loadPage(article, PAGE_TYPE_ARTICLE);
+    AdsFandomObject fandomPage = loadPage(article);
 
     fandomPage.verifyTopBoxad();
     fandomPage.verifyBottomLeaderboard();
@@ -46,12 +46,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsDesktopPresenceHubFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopHubAds(String hub) {
-    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
-
-    fandomPage.verifyTopLeaderboard();
-    fandomPage.verifyTopBoxad();
-    fandomPage.verifyBottomLeaderboard();
-    fandomPage.verifyBottomBoxad();
+    verifySlotsOnHubPage(hub);
   }
 
   @InBrowser(
@@ -64,6 +59,10 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceHubFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileHubAds(String hub) {
+    verifySlotsOnHubPage(hub);
+  }
+
+  private void verifySlotsOnHubPage(String hub) {
     AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
 
     fandomPage.verifyTopLeaderboard();
@@ -71,5 +70,4 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
     fandomPage.verifyBottomLeaderboard();
     fandomPage.verifyBottomBoxad();
   }
-
 }

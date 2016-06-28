@@ -17,7 +17,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
       groups = {"AdsFandomBtfBlockDesktop"}
   )
   public void adsFandomBtfBlockDesktop(String article) {
-    AdsFandomObject fandomPage = loadPage(article, PAGE_TYPE_ARTICLE);
+    AdsFandomObject fandomPage = loadPage(article);
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();
@@ -35,7 +35,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
       groups = {"AdsFandomBtfBlockMobile"}
   )
   public void adsFandomBtfBlockMobile(String article) {
-    AdsFandomObject fandomPage = loadPage(article, PAGE_TYPE_ARTICLE);
+    AdsFandomObject fandomPage = loadPage(article);
 
     fandomPage.verifyTopLeaderboard();
     fandomPage.verifyTopBoxad();

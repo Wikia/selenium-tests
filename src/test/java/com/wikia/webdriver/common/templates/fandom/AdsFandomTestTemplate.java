@@ -31,6 +31,10 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     return pageObject;
   }
 
+  protected AdsFandomObject loadPage(String pageName) {
+    return loadPage(pageName, PAGE_TYPE_ARTICLE);
+  }
+
   private void getJquery() {
     driver.executeScript(
         "    (function () {\n"
