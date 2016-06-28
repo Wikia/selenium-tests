@@ -51,7 +51,6 @@ public class SignInPage extends WikiBasePageObject {
   public void login(String username, String password) {
     wait.forElementVisible(usernameField);
     wait.forElementVisible(passwordField);
-
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
 
