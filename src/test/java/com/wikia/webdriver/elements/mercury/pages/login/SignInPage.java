@@ -50,6 +50,7 @@ public class SignInPage extends WikiBasePageObject {
     wait.forElementVisible(usernameField);
     wait.forElementVisible(passwordField);
     wait.forElementClickable(signInButton);
+
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
     signInButton.click();
@@ -58,6 +59,7 @@ public class SignInPage extends WikiBasePageObject {
   public SignInPage clickForgotPasswordLink() {
     wait.forElementClickable(forgottenPasswordLink);
     forgottenPasswordLink.click();
+
     return this;
   }
 }
