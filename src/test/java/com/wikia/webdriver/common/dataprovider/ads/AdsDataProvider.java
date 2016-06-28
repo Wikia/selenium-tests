@@ -588,7 +588,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Get_It_Right"}
+        {"project43", "SyntheticTests/Spotlights"}
     };
   }
 
