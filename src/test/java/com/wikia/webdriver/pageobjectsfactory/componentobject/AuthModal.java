@@ -27,6 +27,7 @@ public class AuthModal extends WikiBasePageObject {
     this.mainWindowHandle = driver.getWindowHandle();
   }
 
+
   private void switchToAuthModalHandle() {
     for (String winHandle : driver.getWindowHandles()) {
       driver.switchTo().window(winHandle);
