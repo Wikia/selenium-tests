@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 
@@ -15,7 +16,9 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickPhotoButton();
-    visualEditMode.verifyModalLoginAppeared();
+
+    AuthModal auth = new AuthModal();
+    auth.isOpened();
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_002", "ArticleFeaturesCRUDAnon"})
@@ -23,7 +26,9 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickGalleryButton();
-    visualEditMode.verifyModalLoginAppeared();
+
+    AuthModal auth = new AuthModal();
+    auth.isOpened();
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_003", "ArticleFeaturesCRUDAnon"})
@@ -31,7 +36,9 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSlideshowButton();
-    visualEditMode.verifyModalLoginAppeared();
+
+    AuthModal auth = new AuthModal();
+    auth.isOpened();
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_004", "ArticleFeaturesCRUDAnon"})
@@ -39,7 +46,9 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSliderButton();
-    visualEditMode.verifyModalLoginAppeared();
+
+    AuthModal auth = new AuthModal();
+    auth.isOpened();
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_005", "ArticleFeaturesCRUDAnon"})
@@ -47,6 +56,8 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickVideoButton();
-    visualEditMode.verifyModalLoginAppeared();
+
+    AuthModal auth = new AuthModal();
+    auth.isOpened();
   }
 }

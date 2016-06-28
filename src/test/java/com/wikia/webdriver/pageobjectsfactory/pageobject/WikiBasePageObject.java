@@ -176,8 +176,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyModalLoginAppeared() {
-    wait.forElementVisible(logInModal);
-    PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
+    waitForNewWindow();
+    driver.switchTo();
+    PageObjectLogging.log("verify New window", "verify modal login form is displayed", true);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
