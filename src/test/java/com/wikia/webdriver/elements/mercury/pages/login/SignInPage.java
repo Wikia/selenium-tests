@@ -4,37 +4,61 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.elements.mercury.components.login.LoginArea;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignInPage extends WikiBasePageObject{
+public class SignInPage extends WikiBasePageObject {
 
-    @Getter(lazy = true)
-    private final LoginArea loginArea = new LoginArea(driver);
+  @Getter(lazy = true)
+  private final LoginArea loginArea = new LoginArea(driver);
 
-    @FindBy(css = ".error")
-    private WebElement errorMessage;
+  @FindBy(css = ".error")
+  private WebElement errorMessage;
+  @FindBy(css = "#loginUsername")
+  private WebElement usernameField;
+  @FindBy(css = "#loginPassword")
+  private WebElement passwordField;
+  @FindBy(css = "#loginSubmit")
+  private WebElement signInButton;
+  @FindBy(css = ".forgotten-password")
+  private WebElement forgottenPasswordLink;
 
-    private Wait wait;
+  private Wait wait;
 
-    public SignInPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.wait = new Wait(driver);
-    }
+  public SignInPage(WebDriver driver) {
+    PageFactory.initElements(driver, this);
+    this.wait = new Wait(driver);
+  }
 
-    public String getErrorMessage() {
-        wait.forElementVisible(errorMessage);
+  public String getErrorMessage() {
+    wait.forElementVisible(errorMessage);
 
-        return errorMessage.getText();
-    }
+    return errorMessage.getText();
+  }
 
-    public SignInPage verifyErrorMessage(String errorMessage) {
-        Assertion.assertEquals(getErrorMessage(), errorMessage);
+  public SignInPage verifyErrorMessage(String errorMessage) {
+    Assertion.assertEquals(getErrorMessage(), errorMessage);
 
-        return this;
-    }
+    return this;
+  }
+
+  public void login(String username, String password) {
+    wait.forElementVisible(usernameField);
+    wait.forElementVisible(passwordField);
+    usernameField.sendKeys(username);
+    passwordField.sendKeys(password);
+    wait.forElementClickable(signInButton);
+    signInButton.click();
+  }
+
+  public SignInPage clickForgotPasswordLink() {
+    wait.forElementClickable(forgottenPasswordLink);
+    forgottenPasswordLink.click();
+    return this;
+  }
 }
 
