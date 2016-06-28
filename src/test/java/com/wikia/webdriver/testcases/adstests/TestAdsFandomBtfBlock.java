@@ -36,7 +36,6 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
     fandomPage.verifyFandomTopLeaderboard();
     fandomPage.verifyFandomTopBoxadDesktop();
-    fandomPage.verifyNoFandomBottomBoxadDesktop();
     fandomPage.verifyNoFandomIncontentBoxad();
     fandomPage.verifyNoFandomBottomLeaderboardDesktop();
   }
