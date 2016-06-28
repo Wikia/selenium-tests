@@ -26,6 +26,8 @@ public class SignInPage extends WikiBasePageObject {
   private WebElement signInButton;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
+  @FindBy(css = ".signup-providers li a")
+  private WebElement connectWithFacebookButton;
 
   private Wait wait;
 
@@ -49,16 +51,23 @@ public class SignInPage extends WikiBasePageObject {
   public void login(String username, String password) {
     wait.forElementVisible(usernameField);
     wait.forElementVisible(passwordField);
-    wait.forElementClickable(signInButton);
 
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
+
+    wait.forElementClickable(signInButton);
     signInButton.click();
   }
 
   public SignInPage clickForgotPasswordLink() {
     wait.forElementClickable(forgottenPasswordLink);
     forgottenPasswordLink.click();
+
+    return this;
+  }
+
+  public SignInPage isConnetctWithFacebookButtonVisible() {
+    wait.forElementVisible(connectWithFacebookButton);
 
     return this;
   }

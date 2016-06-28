@@ -43,7 +43,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
     login.remindPasswordNewAuth(userName, credentials.apiToken);
@@ -63,7 +63,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
     login.remindPasswordNewAuth(userName, credentials.apiToken);

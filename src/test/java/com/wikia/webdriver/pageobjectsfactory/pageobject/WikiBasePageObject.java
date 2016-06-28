@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
@@ -188,11 +189,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new HistoryPagePageObject(driver);
   }
 
-  public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
-    getUrl(wikiURL);
-    //getGlobalNavigation().signUp();
-    PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
-    return new SignUpPageObject(driver);
+  public SignInPage openSpecialUserSignUpPage(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
+    PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
+    return new SignInPage(driver);
   }
 
   public SignUpPageObject navigateToSpecialSignUpPage(String wikiURL) {
@@ -212,10 +212,16 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialPromotePageObject(driver);
   }
 
-  public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL) {
+  public SpecialUserLoginPageObject openSpecialUserLoginOld(String wikiURL) {
+    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
+    PageObjectLogging.log("openSpecialUserLoginOld", "Special:UserLogin page opened", true);
+    return new SpecialUserLoginPageObject(driver);
+  }
+
+  public SignInPage openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-    return new SpecialUserLoginPageObject(driver);
+    return new SignInPage(driver);
   }
 
   public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
@@ -391,13 +397,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject(driver);
-  }
-
-  public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging.log("SpecialUserLoginOnWiki", "Special:UserLogin opened on: " + wikiURL,
-        true);
-    return new SpecialUserLoginPageObject(driver);
   }
 
   public void verifyUserLoggedIn(final String userName) {

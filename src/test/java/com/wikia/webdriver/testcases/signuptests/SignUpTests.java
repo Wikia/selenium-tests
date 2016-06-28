@@ -121,7 +121,7 @@ public class SignUpTests extends NewTestTemplate {
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     login.login(userName, password);
     almostTherePage.verifyUserLoggedIn(userName);
   }
