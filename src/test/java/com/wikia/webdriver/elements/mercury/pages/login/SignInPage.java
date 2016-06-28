@@ -18,12 +18,6 @@ public class SignInPage extends WikiBasePageObject {
 
   @FindBy(css = ".error")
   private WebElement errorMessage;
-  @FindBy(css = "#loginUsername")
-  private WebElement usernameField;
-  @FindBy(css = "#loginPassword")
-  private WebElement passwordField;
-  @FindBy(css = "#loginSubmit")
-  private WebElement signInButton;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
   @FindBy(css = ".signup-providers li a")
@@ -48,15 +42,6 @@ public class SignInPage extends WikiBasePageObject {
     return this;
   }
 
-  public void login(String username, String password) {
-    wait.forElementVisible(usernameField);
-    wait.forElementVisible(passwordField);
-    usernameField.sendKeys(username);
-    passwordField.sendKeys(password);
-
-    wait.forElementClickable(signInButton);
-    signInButton.click();
-  }
 
   public SignInPage clickForgotPasswordLink() {
     wait.forElementClickable(forgottenPasswordLink);

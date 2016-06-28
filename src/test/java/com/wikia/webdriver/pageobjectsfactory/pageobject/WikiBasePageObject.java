@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
@@ -189,10 +190,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new HistoryPagePageObject(driver);
   }
 
-  public SignInPage openSpecialUserSignUpPage(String wikiURL) {
+  public RegisterPage openSpecialUserSignUpPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
     PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
-    return new SignInPage(driver);
+    return new RegisterPage(driver);
   }
 
   public SignUpPageObject navigateToSpecialSignUpPage(String wikiURL) {

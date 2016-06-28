@@ -52,8 +52,13 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    signIn.login(userName, newPassword);
-    signIn.verifyUserLoggedIn(userName);
+
+    signIn
+        .getLoginArea()
+        .typeUsername(userName)
+        .typePassword(newPassword)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
@@ -72,9 +77,16 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     String
         newPassword =
         login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
-    signIn.login(userName, newPassword);
     String verifyString = userName.substring(0, 1).toUpperCase() + userName.substring(1);
-    signIn.verifyUserLoggedIn(verifyString);
+
+    signIn
+        .getLoginArea()
+        .typeUsername(userName)
+        .typePassword(newPassword)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(userName);
+
+
   }
 
 

@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -25,8 +26,8 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = {"FBButton_001", "FacebookButton"})
   public void facebookButtonIsVisibleOnSignupPage() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SignInPage signInPage = base.openSpecialUserSignUpPage(wikiURL);
-    signInPage.isConnetctWithFacebookButtonVisible();
+    RegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
+    registerPage.isConnetctWithFacebookButtonVisible();
 
   }
 

@@ -38,8 +38,14 @@ public class EditAccountTests extends NewTestTemplate {
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 
     SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
-    signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
-    signInPage.verifyErrorMessage(expectedErrorMessage);
+
+    signInPage
+        .getLoginArea()
+        .typeUsername(credentials.userNameClosedAccount)
+        .typePassword(credentials.passwordClosedAccount)
+        .clickSignInButtonToGetError()
+        .verifyErrorMessage(expectedErrorMessage);
+
   }
 
   @Test(dependsOnMethods = {"EditAccount_001_closeAccount","EditAccount_002_verifyAccountClosed"})
@@ -58,9 +64,13 @@ public class EditAccountTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
 
     SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
-    signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
 
-    base.verifyUserLoggedIn(credentials.userNameClosedAccount);
+    signInPage
+        .getLoginArea()
+        .typeUsername(credentials.userNameClosedAccount)
+        .typePassword(credentials.passwordClosedAccount)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(credentials.userNameClosedAccount);
 
   }
 }

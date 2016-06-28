@@ -65,9 +65,14 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
 
     SignInPage signInPage = new SignInPage(driver);
-    signInPage.login(credentials.userName10, credentials.password10);
 
-    special.verifyUserLoggedIn(credentials.userName10);
+    new SignInPage(driver)
+        .getLoginArea()
+        .typeUsername(credentials.userName10)
+        .typePassword(credentials.password10)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(credentials.userName10);
+
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
@@ -81,8 +86,12 @@ public class ForcedLoginTests extends NewTestTemplate {
 
     SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
 
-    SignInPage signInPage = new SignInPage(driver);
-    signInPage.login(credentials.userName10, credentials.password10);
+    new SignInPage(driver)
+        .getLoginArea()
+        .typeUsername(credentials.userName10)
+        .typePassword(credentials.password10)
+        .clickSignInButtonToSignIn()
+        .verifyUserLoggedIn(credentials.userName10);
 
     special.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));

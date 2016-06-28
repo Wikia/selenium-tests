@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
@@ -30,24 +31,11 @@ public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"Signup_anonCanNotSignUpWithoutFillingCaptcha", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
-  public void anonCanNotSignUpWithoutFillingCaptcha() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
-    signUp.typeUserName(signUp.getTimeStamp());
-    signUp.typeEmail(credentials.emailQaart1);
-    signUp.typePassword(signUp.getTimeStamp());
-    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    signUp.submit();
-    signUp.verifyCaptchaInvalidMessage();
-  }
-
   @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
   @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
+
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
