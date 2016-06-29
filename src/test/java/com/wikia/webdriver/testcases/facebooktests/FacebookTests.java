@@ -38,10 +38,10 @@ public class FacebookTests extends NewTestTemplate {
    *   <li>Verify user can login via facebook</li>
    * </ol>
    */
-  @Test
+  @Test(groups = "Facebook_userCanSignUpViaFacebook")
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
-  public void userCanSignupViaFacebook() {
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
+  public void userCanSignUpViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword());
 
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
@@ -62,9 +62,9 @@ public class FacebookTests extends NewTestTemplate {
    * and wikia accounts 3. login 4. Verify user can login via wikia username/pwd 5. Disconnect
    * facebook via prefs for cleanup
    */
-  @Test
+  @Test(groups = "Facebook_userCanLoginViaFacebook")
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
   public void userCanLoginViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
@@ -81,9 +81,9 @@ public class FacebookTests extends NewTestTemplate {
     dropDown.verifyUserLoggedIn(credentials.userName13);
   }
 
-  @Test
+  @Test(groups = "Facebook_userCanConnectToFacebookViaUserPreferencesPage")
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
   public void userCanConnectToFacebookViaUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
@@ -100,9 +100,9 @@ public class FacebookTests extends NewTestTemplate {
     prefsPage.verifyUserLoggedIn(credentials.userName);
   }
 
-  @Test
+  @Test(groups = "Facebook_userCanConnectToFacebookOnUserPreferencesPage")
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "SOC-2432", comment = "check the functionality manually")
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
   public void userCanConnectToFacebookOnUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
