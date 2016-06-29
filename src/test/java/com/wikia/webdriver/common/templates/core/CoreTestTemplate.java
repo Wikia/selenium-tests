@@ -84,6 +84,8 @@ public abstract class CoreTestTemplate {
     if (declaringClass.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("disableCommunityPageSalesPitchDialog",
+          declaringClass.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
     }
 
     if (declaringClass.isAnnotationPresent(InBrowser.class)) {
@@ -97,6 +99,8 @@ public abstract class CoreTestTemplate {
     if (method.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("disableCommunityPageSalesPitchDialog",
+          method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
     }
 
     if (method.isAnnotationPresent(InBrowser.class)) {

@@ -573,22 +573,22 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsGptPageParamOasis() {
+  public static Object[][] adsGptPageParam() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
         {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
         {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
-        {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
-        {"adtest", "LB", "\"s0c\":[\"ent\",\"tech\"]", true}
+        {"project43", "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
+        {"project43", "SyntheticTests/LB", "\"s0c\":[\"life\",\"crea\",\"edu\",\"tech\"]", true}
     };
   }
 
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Get_It_Right"}
+        {"project43", "SyntheticTests/Spotlights"}
     };
   }
 
@@ -1193,6 +1193,43 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsUapOasis() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/UAP/BFAA+BFAB+FMR"),
+            Arrays.asList(
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.TOP_LB)
+                    .put("slotSize", new Dimension(1889, 767))
+                    .put("lineItemId", 290421252)
+                    .put("src", "gpt")
+                    .build(),
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.MEDREC)
+                    .put("slotSize", new Dimension(300, 250))
+                    .put("lineItemId", 290421252)
+                    .put("src", "gpt")
+                    .build()
+            ),
+            Arrays.asList(
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.FLOATING_MEDREC)
+                    .put("slotSize", new Dimension(300, 600))
+                    .put("lineItemId", 290421852)
+                    .put("src", "gpt")
+                    .build(),
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.BOTTOM_LB)
+                    .put("slotSize", new Dimension(1178, 479))
+                    .put("lineItemId", 290421732)
+                    .put("src", "gpt")
+                    .build()
+            )
         }
     };
   }
