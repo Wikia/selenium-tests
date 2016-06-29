@@ -57,7 +57,7 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
-  @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "uploadAvatar")
+  @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
   @RelatedIssue(issueID = "MAIN-5960", comment =
       "The Delete avatar button (and windows confirmation popup) " +
