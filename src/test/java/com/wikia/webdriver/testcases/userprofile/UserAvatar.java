@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
  * was removed from user page, and placeholder appeared on global navigation 3. Log out and verify
  * that avatar is not visible on global navigation
  */
-@Test(groups = "userProfile-UserAvatar")
+@Test(groups = "userProfile-userAvatar")
 public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
