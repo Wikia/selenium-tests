@@ -573,22 +573,22 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsGptPageParamOasis() {
+  public static Object[][] adsGptPageParam() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
         {"mobileregressiontesting", "PMG", "\"top\":\"1k\"", false},
         {"assassinscreed", "Tunguska", "\"esrb\":\"mature\"", true},
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
-        {"adtest", "LB", "\"s0v\":\"lifestyle\"", true},
-        {"adtest", "LB", "\"s0c\":[\"ent\",\"tech\"]", true}
+        {"project43", "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
+        {"project43", "SyntheticTests/LB", "\"s0c\":[\"life\",\"crea\",\"edu\",\"tech\"]", true}
     };
   }
 
   @DataProvider
   public static Object[][] spotlights() {
     return new Object[][]{
-        {"glee", "Get_It_Right"}
+        {"project43", "SyntheticTests/Spotlights"}
     };
   }
 

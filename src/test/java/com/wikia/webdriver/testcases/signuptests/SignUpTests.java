@@ -25,29 +25,16 @@ import java.util.Calendar;
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
-@Test(groups = {"auth-signUp"})
+@Test(groups = "auth-signUp")
 public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"Signup_anonCanNotSignUpWithoutFillingCaptcha", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
-  public void anonCanNotSignUpWithoutFillingCaptcha() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
-    signUp.typeUserName(signUp.getTimeStamp());
-    signUp.typeEmail(credentials.emailQaart1);
-    signUp.typePassword(signUp.getTimeStamp());
-    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    signUp.submit();
-    signUp.verifyCaptchaInvalidMessage();
-  }
-
-  @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_anonCanNotSignUpIfSheIsYoungerThanTwelve")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
+
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.typeUserName(signUp.getTimeStamp());
     signUp.typeEmail(credentials.emailQaart1);
@@ -61,8 +48,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyTooYoungMessage();
   }
 
-  @Test(groups = {"Signup_anonCanNotSignUpIfTheUsernameAlreadyExists", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -70,8 +57,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-  @Test(groups = {"Signup_anonCanSignUp", "SignUp", "Smoke4"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_anonCanSignUp")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void anonCanSignUp() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -102,8 +89,8 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -121,7 +108,7 @@ public class SignUpTests extends NewTestTemplate {
     AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
     almostTherePage.verifyAlmostTherePage();
 
-    SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     login.login(userName, password);
     almostTherePage.verifyUserLoggedIn(userName);
   }
@@ -133,7 +120,7 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @Test(groups = {"Signup_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters", "SignUp"})
+  @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
   @RelatedIssue(issueID = "QAART-744", comment = "Mail timeout causes the test to fail. Monitor the ticket status")
   public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {

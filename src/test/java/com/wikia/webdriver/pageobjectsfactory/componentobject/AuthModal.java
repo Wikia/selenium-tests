@@ -18,6 +18,8 @@ public class AuthModal extends WikiBasePageObject {
   private WebElement signInButton;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
+  @FindBy(css = ".signup-providers li a")
+  private WebElement connectWithFacebookButton;
 
   private final String mainWindowHandle;
 
@@ -26,6 +28,7 @@ public class AuthModal extends WikiBasePageObject {
     waitForNewWindow();
     this.mainWindowHandle = driver.getWindowHandle();
   }
+
 
   private void switchToAuthModalHandle() {
     for (String winHandle : driver.getWindowHandles()) {
@@ -42,6 +45,14 @@ public class AuthModal extends WikiBasePageObject {
     boolean isOpenedResult = authModal.isDisplayed();
     switchToMainWindowHandle();
     return isOpenedResult;
+  }
+
+  public boolean isConnetctWithFacebookButtonVisible() {
+    switchToAuthModalHandle();
+    boolean isConnetctWithFacebookButtonVisible = authModal.isDisplayed();
+    switchToMainWindowHandle();
+
+    return isConnetctWithFacebookButtonVisible;
   }
 
   public void login(String username, String password) {
