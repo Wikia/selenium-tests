@@ -64,6 +64,11 @@ public abstract class CoreTestTemplate {
       throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
     }
 
+    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
+      GeoEdgeBrowserMobProxy geoEdgeBrowserMobProxy = method.getAnnotation(GeoEdgeBrowserMobProxy.class);
+      Configuration.setGeoEdgeCountry(geoEdgeBrowserMobProxy.country());
+    }
+
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
