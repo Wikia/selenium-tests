@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -11,31 +12,17 @@ import org.testng.annotations.Test;
 
 public class TestAdsFandom extends AdsFandomTestTemplate {
 
-  private void getJquery() {
-    driver.executeScript(
-        "    (function () {\n"
-        + "    var s = document.createElement('script');\n"
-        + "    s.type = 'text/javascript';\n"
-        + "    s.async = true;\n"
-        + "    s.src = 'https://code.jquery.com/jquery-2.2.4.min.js';\n"
-        + "    var x = document.getElementsByTagName('script')[0];\n"
-        + "    x.parentNode.insertBefore(s, x);\n"
-        + "    })();"
-    );
-  }
-
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
       dataProvider = "fandomAdsPage",
       groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopArticleAds(String article) {
-    String testedPage = urlBuilder.getUrlForFandomPage(article);
-    AdsFandomObject fandomPage = new AdsFandomObject(driver, testedPage);
-    getJquery();
-    fandomPage.verifyFandomDesktopArticleTopLeaderboard();
-    fandomPage.verifyFandomDesktopTopBoxad();
-    fandomPage.verifyFandomDesktopArticleBottomLeaderboard();
+    AdsFandomObject fandomPage = loadPage(article);
+
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
   }
 
   @InBrowser(
@@ -48,11 +35,10 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileArticleAds(String article) {
-    String testedPage = urlBuilder.getUrlForFandomPage(article);
-    AdsFandomObject wikiPage = new AdsFandomObject(driver, testedPage);
-    getJquery();
-    wikiPage.verifyFandomMobileTopBoxad();
-    wikiPage.verifyFandomMobileArticleBottomLeaderboard();
+    AdsFandomObject fandomPage = loadPage(article);
+
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
   }
 
   @Test(
@@ -61,13 +47,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsDesktopPresenceHubFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopHubAds(String hub) {
-    String testedHub = urlBuilder.getUrlForFandomHub(hub);
-    AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
-    getJquery();
-    fandomHub.verifyFandomHubTopLeaderboard();
-    fandomHub.verifyFandomTopBoxad();
-    fandomHub.verifyFandomHubBottomLeaderboard();
-    fandomHub.verifyFandomBottomBoxad();
+    verifySlotsOnHubPage(hub);
   }
 
   @InBrowser(
@@ -80,13 +60,15 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceHubFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileHubAds(String hub) {
-    String testedHub = urlBuilder.getUrlForFandomHub(hub);
-    AdsFandomObject fandomHub = new AdsFandomObject(driver, testedHub);
-    getJquery();
-    fandomHub.verifyFandomHubTopLeaderboard();
-    fandomHub.verifyFandomTopBoxad();
-    fandomHub.verifyFandomHubBottomLeaderboard();
-    fandomHub.verifyFandomBottomBoxad();
+    verifySlotsOnHubPage(hub);
   }
 
+  private void verifySlotsOnHubPage(String hub) {
+    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
+
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
+  }
 }
