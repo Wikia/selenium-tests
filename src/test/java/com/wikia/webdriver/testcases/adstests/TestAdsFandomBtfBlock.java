@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
-  private static final String assertionMessage = "Expected BTF slot to be blocked.";
+  private static final String ASSERT_MESSAGE = "Expected BTF slot to be blocked.";
 
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
@@ -26,8 +26,8 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD), assertionMessage);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), assertionMessage);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD), ASSERT_MESSAGE);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), ASSERT_MESSAGE);
   }
 
   @InBrowser(
@@ -45,7 +45,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD), assertionMessage);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), assertionMessage);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD), ASSERT_MESSAGE);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), ASSERT_MESSAGE);
   }
 }

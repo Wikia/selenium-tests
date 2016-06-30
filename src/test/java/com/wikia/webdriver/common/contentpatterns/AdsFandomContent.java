@@ -22,6 +22,9 @@ public class AdsFandomContent {
     SLOT_SELECTORS.put(BOTTOM_BOXAD, "div[id$='BOTTOM_BOXAD_0__container__']");
   }
 
+  private AdsFandomContent() {
+  }
+
   public static String getSlotSelector(String slotName) {
     return SLOT_SELECTORS.get(slotName);
   }
