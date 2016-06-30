@@ -23,22 +23,22 @@ public class FacebookButtonTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"FBButton_001", "FacebookButton"})
-  public void facebookButtonIsVisibleOnSignupPage() {
+  @Test(groups = "FacebookButton_facebookButtonIsVisibleOnSignUpPage")
+  public void facebookButtonIsVisibleOnSignUpPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     RegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
     registerPage.isConnetctWithFacebookButtonVisible();
 
   }
 
-  @Test(groups = {"FBButton_002", "FacebookButton"})
+  @Test(groups = "FacebookButton_facebookButtonIsVisibleOnLoginPage")
   public void facebookButtonIsVisibleOnLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
     signInPage.isConnetctWithFacebookButtonVisible();
   }
 
-  @Test(groups = {"FBButton_003", "FacebookButton"})
+  @Test(groups = "FacebookButton_facebookButtonIsVisibleOnForcedLoginModal")
   public void facebookButtonIsVisibleOnForcedLoginModal() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
@@ -51,7 +51,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = {"FBButton_004", "FacebookButton"})
+  @Test(groups = "FacebookButton_facebookButtonIsVisibleOnUserPreferencesPage")
   @Execute(asUser = User.USER)
   public void facebookButtonIsVisibleOnUserPreferencesPage() {
     WikiBasePageObject base = new WikiBasePageObject();

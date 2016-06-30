@@ -25,13 +25,13 @@ import java.util.Calendar;
  * sign up with existing user name, 4. Sign up, 5. Sign up during CNW process, 6. Login in using not
  * verified user 7. signup using facebook account 8. signup with japanese language
  */
-@Test(groups = {"auth-signUp"})
+@Test(groups = "auth-signUp")
 public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_anonCanNotSignUpIfSheIsYoungerThanTwelve")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
 
@@ -48,8 +48,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyTooYoungMessage();
   }
 
-  @Test(groups = {"Signup_anonCanNotSignUpIfTheUsernameAlreadyExists", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -57,8 +57,8 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-  @Test(groups = {"Signup_anonCanSignUp", "SignUp", "Smoke4"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_anonCanSignUp")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void anonCanSignUp() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -89,8 +89,8 @@ public class SignUpTests extends NewTestTemplate {
     preferences.verifyEmailMeSection();
   }
 
-  @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
+  @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
+  @RelatedIssue(issueID = "SOC-2670", comment = "Test manually")
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -120,7 +120,7 @@ public class SignUpTests extends NewTestTemplate {
    * created account from facebook
    */
 
-  @Test(groups = {"Signup_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters", "SignUp"})
+  @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
   @RelatedIssue(issueID = "QAART-744", comment = "Mail timeout causes the test to fail. Monitor the ticket status")
   public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
