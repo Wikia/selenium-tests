@@ -31,11 +31,11 @@ public class FacebookTests extends NewTestTemplate {
   /**
    * <ol>
    *   <li>Log in to facebook</li>
-   *   <li>Click facebook login on signup page</li>
+   *   <li>Click facebook loginAndSignup on signup page</li>
    *   <li>Deny permission to user's facebook email address</li>
    *   <li>>manually enter email address and create account</li>
-   *   <li>confirm account and login</li>
-   *   <li>Verify user can login via facebook</li>
+   *   <li>confirm account and loginAndSignup</li>
+   *   <li>Verify user can loginAndSignup via facebook</li>
    * </ol>
    */
   @Test
@@ -58,8 +58,8 @@ public class FacebookTests extends NewTestTemplate {
   }
 
   /**
-   * 1. Click facebook login in dropdown menu 2. Enter existing wikia credentials to link facebook
-   * and wikia accounts 3. login 4. Verify user can login via wikia username/pwd 5. Disconnect
+   * 1. Click facebook loginAndSignup in dropdown menu 2. Enter existing wikia credentials to link facebook
+   * and wikia accounts 3. loginAndSignup 4. Verify user can loginAndSignup via wikia username/pwd 5. Disconnect
    * facebook via prefs for cleanup
    */
   @Test

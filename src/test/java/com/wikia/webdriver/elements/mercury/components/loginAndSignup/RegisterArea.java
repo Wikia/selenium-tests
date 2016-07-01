@@ -1,10 +1,10 @@
-package com.wikia.webdriver.elements.mercury.old;
+package com.wikia.webdriver.elements.mercury.components.loginAndSignup;
+
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 
 import org.joda.time.DateTime;
@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignupPageObject {
+public class RegisterArea {
 
   @FindBy(css = "#signupEmail")
   private WebElement signupEmail;
@@ -52,33 +52,33 @@ public class SignupPageObject {
   private Wait wait;
   private UrlBuilder urlBuilder;
 
-  public SignupPageObject(WebDriver driver) {
+
+  public RegisterArea(WebDriver driver) {
     this.driver = driver;
-    this.urlBuilder = new UrlBuilder();
     this.wait = new Wait(driver);
 
     PageFactory.initElements(driver, this);
   }
 
-  private SignupPageObject typeEmailAddress(String email) {
+  public RegisterArea typeEmailAddress(String email) {
     wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
-  private SignupPageObject typeUsername(String username) {
+  public RegisterArea typeUsername(String username) {
     wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
-  private SignupPageObject typePassword(String password) {
+  public RegisterArea typePassword(String password) {
     wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
-  private SignupPageObject typeBirthdate(String month, String day, String year) {
+  public RegisterArea typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
     signupBirthdate.click();
 
@@ -97,7 +97,19 @@ public class SignupPageObject {
     return this;
   }
 
-  public void register() {
+  public RegisterArea register(String user, String password, String email, DateTime birthday) {
+        typeEmailAddress(email).
+        typeUsername(user).
+        typePassword(password).
+        typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
+                      String.valueOf(birthday.getDayOfMonth()),
+                      String.valueOf(birthday.getYear())).
+        clickSignUpSubmitButton();
+
+    return this;
+  }
+
+  public void clickSignUpSubmitButton() {
     wait.forElementVisible(signupSubmitButton);
     signupSubmitButton.click();
   }
@@ -133,23 +145,7 @@ public class SignupPageObject {
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "clickSignUpSubmitButton");
   }
 
-  public SignupPageObject openMobileSignupPage() {
-    new TopBar(driver).openNavigation();
-    new Navigation(driver).clickOnSignInRegisterButton();
-    wait.forElementVisible(signupButton);
-    signupButton.click();
-    return new SignupPageObject(driver);
-  }
 
-  public SignupPageObject signUp(String user, String password, String email, DateTime birthday) {
-    typeEmailAddress(email).
-        typeUsername(user).
-        typePassword(password).
-        typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
-                      String.valueOf(birthday.getDayOfMonth()),
-                      String.valueOf(birthday.getYear())).
-        register();
 
-    return this;
-  }
+
 }

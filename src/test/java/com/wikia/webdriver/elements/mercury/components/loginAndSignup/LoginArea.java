@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.login;
+package com.wikia.webdriver.elements.mercury.components.loginAndSignup;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;

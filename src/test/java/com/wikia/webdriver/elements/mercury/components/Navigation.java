@@ -14,7 +14,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 public class Navigation {
 
-  @FindBy(css = ".wikia-nav--login")
+  @FindBy(css = ".wikia-nav--loginAndSignup")
   private WebElement signInRegisterButton;
 
   @FindBy(css = ".wikia-nav__back")
@@ -67,7 +67,7 @@ public class Navigation {
   }
 
   public RegisterPage clickOnSignInRegisterButton() {
-    PageObjectLogging.logInfo("Open login page");
+    PageObjectLogging.logInfo("Open loginAndSignup page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 

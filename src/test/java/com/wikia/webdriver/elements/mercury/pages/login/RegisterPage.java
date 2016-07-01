@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 public class RegisterPage extends WikiBasePageObject {
 
     @FindBy(css = ".footer-callout-emphasis")
-    private WebElement SignInButton;
+    private WebElement signInButton;
     @FindBy(css = ".signup-providers li a")
     private WebElement connectWithFacebookButton;
 
@@ -23,8 +23,8 @@ public class RegisterPage extends WikiBasePageObject {
     }
 
     public SignInPage clickSignInButton() {
-        wait.forElementClickable(SignInButton);
-        SignInButton.click();
+        wait.forElementClickable(signInButton);
+        signInButton.click();
 
         return new SignInPage(driver);
     }

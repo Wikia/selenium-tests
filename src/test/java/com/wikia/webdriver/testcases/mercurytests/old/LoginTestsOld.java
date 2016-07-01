@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 public class LoginTestsOld extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
-      "We don't recognize these credentials. Try again or register a new account.";
+      "We don't recognize these credentials. Try again or clickSignUpSubmitButton a new account.";
 
   @Test(groups = "MercuryLoginTest_002")
   public void MercuryLoginTest_002_userCanNotLogInWithWrongPassword() {

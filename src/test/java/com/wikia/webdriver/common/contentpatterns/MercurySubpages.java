@@ -73,7 +73,7 @@ public class MercurySubpages {
 
   // Login and SignUp pages
   public static final String JOIN_PAGE = "/join";
-  public static final String REGISTER_PAGE = "/register";
+  public static final String REGISTER_PAGE = "/clickSignUpSubmitButton";
 
   private MercurySubpages() {
   }

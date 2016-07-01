@@ -23,13 +23,13 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private WebElement newPassword;
   @FindBy(css = ".WikiaArticle input[name='retype']")
   private WebElement retypeNewPassword;
-  @FindBy(css = ".WikiaArticle input.login-button.big")
+  @FindBy(css = ".WikiaArticle input.loginAndSignup-button.big")
   private WebElement loginButton;
   @FindBy(css = ".WikiaArticle .forgot-password")
   private WebElement forgotPasswordLink;
   @FindBy(css = ".UserLogin .error-msg")
   private WebElement messagePlaceholder;
-  @FindBy(css = ".login-button.big")
+  @FindBy(css = ".loginAndSignup-button.big")
   private WebElement continueButtonBig;
   /*this element exists when parameter ?type=forgotPassword is added to the url*/
   @FindBy(css = "a[href='/wiki/Special:UserLogin']")
@@ -70,7 +70,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private void clickLoginButton() {
     wait.forElementVisible(loginButton);
     loginButton.click();
-    PageObjectLogging.log("clickLoginButton", "login button clicked", true);
+    PageObjectLogging.log("clickLoginButton", "loginAndSignup button clicked", true);
   }
 
   private void clickForgotPasswordLink() {

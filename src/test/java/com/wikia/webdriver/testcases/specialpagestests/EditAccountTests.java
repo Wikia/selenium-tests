@@ -20,7 +20,7 @@ public class EditAccountTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
   UrlBuilder urlBuilder = new UrlBuilder(Configuration.getEnv());
   private String testedWiki = urlBuilder.getUrlForWiki("community");
-  private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
+  private String expectedErrorMessage = "We don't recognize these credentials. Try again or clickSignUpSubmitButton a new account.";
 
   @Test(groups = {"EditAccountTest_001"})
   @Execute(asUser = User.STAFF)
