@@ -11,6 +11,8 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -300,9 +302,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     infoboxBuilder.selectRowWithIndex(2);
     builderSidebar.typeInInputField("Label 3");
 
-   infoboxBuilder.dragAndDropToTheTop(2)
-        .dragAndDropToTheTop(3)
-        .dragAndDropToTheTop(1);
+    WebElement element = infoboxBuilder.getInfoboxElement(2);
+    WebElement topElement = infoboxBuilder.dragAndDropToTheTop(element);
+    Assertion.assertEquals(element.getText(), topElement.getText());
+
+    element = infoboxBuilder.getInfoboxElement(3);
+    topElement = infoboxBuilder.dragAndDropToTheTop(element);
+    Assertion.assertEquals(element.getText(), topElement.getText());
+
+    element = infoboxBuilder.getInfoboxElement(1);
+    topElement = infoboxBuilder.dragAndDropToTheTop(element);
+    Assertion.assertEquals(element.getText(), topElement.getText());
   }
 
   @Execute(asUser = User.USER)

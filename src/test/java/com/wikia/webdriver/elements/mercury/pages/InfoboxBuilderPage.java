@@ -330,10 +330,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage dragAndDropToTheTop(int index) {
-    WebElement draggedElement = component.get(index);
+  public WebElement getInfoboxElement(int index) {
+    return component.get(index);
+  }
+
+  public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
-    String componentToBeMovedText = draggedElement.getText();
+
     Point location = component.get(component.size() - 1).getLocation();
     Dimension size = component.get(component.size() - 1).getSize();
     Integer targetY = location.getY() + size.getHeight();
@@ -347,9 +350,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
 
-    Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
-
-    return this;
+    return component.get(0);
   }
 
   public void hoverOverSectionChevron(int index) {
