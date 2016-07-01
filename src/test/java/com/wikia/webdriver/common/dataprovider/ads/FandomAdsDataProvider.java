@@ -21,4 +21,11 @@ public class FandomAdsDataProvider {
         {"games"}
     };
   }
+
+  @DataProvider
+  public static Object[][] fandomBtfBlockPage() {
+    return new Object[][]{
+        {"game-of-thrones-the-ghost-of-high-heart"}
+    };
+  }
 }
