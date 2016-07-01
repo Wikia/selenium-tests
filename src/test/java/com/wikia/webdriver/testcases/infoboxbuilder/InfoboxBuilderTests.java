@@ -304,16 +304,19 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.typeInInputField("Third Label");
 
     WebElement element = infoboxBuilder.getInfoboxElement(2);
+    String elementText = element.getText();
     WebElement topElement = infoboxBuilder.dragAndDropToTheTop(element);
-    Assertion.assertEquals(element.getText(), topElement.getText());
+    Assertion.assertEquals(elementText, topElement.getText());
 
     element = infoboxBuilder.getInfoboxElement(3);
+    elementText = element.getText();
     topElement = infoboxBuilder.dragAndDropToTheTop(element);
-    Assertion.assertEquals(element.getText(), topElement.getText());
+    Assertion.assertEquals(elementText, topElement.getText());
 
     element = infoboxBuilder.getInfoboxElement(1);
+    elementText = element.getText();
     topElement = infoboxBuilder.dragAndDropToTheTop(element);
-    Assertion.assertEquals(element.getText(), topElement.getText());
+    Assertion.assertEquals(elementText, topElement.getText());
   }
 
   @Execute(asUser = User.USER)
