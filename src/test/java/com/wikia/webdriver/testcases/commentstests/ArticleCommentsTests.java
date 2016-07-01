@@ -92,7 +92,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     String commentText = article.getFirstCommentText();
     DeletePageObject delete = article.deleteFirstComment();
     delete.submitDeletion();
-    article.verifyNotificationMessage();
+    article.getBannerNotifications().verifyNotificationMessage();
     article.verifyCommentDeleted(commentText);
   }
 }

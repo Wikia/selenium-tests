@@ -28,6 +28,8 @@ public class NavigationBar extends WikiBasePageObject {
   private List<WebElement> suggestionsList;
   @FindBy(css = ".auth-label a.auth-link.sign-in")
   private WebElement signInLink;
+  @FindBy(css = ".auth-label a.auth-link.register")
+  private WebElement registerLink;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -117,6 +119,11 @@ public class NavigationBar extends WikiBasePageObject {
 
   public AuthModal clickOnSignIn(){
     signInLink.click();
+    return new AuthModal();
+  }
+
+  public AuthModal clickOnRegister(){
+    registerLink.click();
     return new AuthModal();
   }
 }

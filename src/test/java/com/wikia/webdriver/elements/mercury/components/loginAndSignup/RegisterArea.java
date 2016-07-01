@@ -6,6 +6,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterArea {
+public class RegisterArea extends BasePageObject{
 
   @FindBy(css = "#signupEmail")
   private WebElement signupEmail;
@@ -52,12 +54,30 @@ public class RegisterArea {
   private Wait wait;
   private UrlBuilder urlBuilder;
 
+  private final String mainWindowHandle;
+
 
   public RegisterArea(WebDriver driver) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
     PageFactory.initElements(driver, this);
+  }
+
+  public RegisterArea() {
+    super();
+    waitForNewWindow();
+    this.mainWindowHandle = driver.getWindowHandle();
+  }
+
+  public void switchToAuthModalHandle() {
+    for (String winHandle : driver.getWindowHandles()) {
+      driver.switchTo().window(winHandle);
+    }
+  }
+
+  public void switchToMainWindowHandle() {
+    driver.switchTo().window(this.mainWindowHandle);
   }
 
   public RegisterArea typeEmailAddress(String email) {

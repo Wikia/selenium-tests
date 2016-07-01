@@ -27,11 +27,11 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore = article.undeleteByFlashMessage();
+    SpecialRestorePageObject restore = article.getBannerNotifications().undeleteByFlashMessage();
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
-    article.verifyNotificationMessage();
+    article.getBannerNotifications().verifyNotificationMessage();
     article.verifyArticleTitle(articleTitle);
   }
 
@@ -45,7 +45,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
-    article.verifyNotificationMessage();
+    article.getBannerNotifications().verifyNotificationMessage();
     article.verifyArticleTitle(articleNewName);
   }
 }

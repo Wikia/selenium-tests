@@ -1,11 +1,15 @@
 package com.wikia.webdriver.testcases.signuptests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.loginAndSignup.RegisterArea;
+import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
@@ -57,36 +61,48 @@ public class SignUpTests extends NewTestTemplate {
     signUp.verifyUserExistsMessage();
   }
 
-  @Test(groups = {"Signup_anonCanSignUp", "SignUp", "Smoke4"})
-  @RelatedIssue(issueID = "SOC-2670", comment = "fails after product change, SOC team on it")
-  public void anonCanSignUp() {
+  @Test(groups = "Signup_anonCanSignUpOnNewAuthModalFromGlobalNav")
+  public void anonCanSignUpOnNewAuthModalFromGlobalNav(){
+    WikiBasePageObject base = new WikiBasePageObject();
+    NavigationBar registerLink = new NavigationBar(driver);
+    registerLink.clickOnRegister();
+    RegisterArea register = new RegisterArea(driver);
+    register.switchToAuthModalHandle();
+    String userName = "User" + register.getTimeStamp();
+    String password = "Pass" + register.getTimeStamp();
+    String email = credentials.emailQaart2;
+    register.typeEmailAddress(email);
+    register.typeUsername(userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+    register.clickSignUpSubmitButton();
+
+    base.verifyUserLoggedIn(userName);
+  }
+
+  @Test(groups = "Signup_anonCanSignUp")
+  public void anonCanSignUpWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
-    signUp.disableCaptcha();
+
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    String emailPassword = credentials.emailPasswordQaart2;
-
-    signUp.typeEmail(email);
-    signUp.typeUserName(userName);
-    signUp.typePassword(password);
-    signUp.enterBirthDate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                          PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
-    almostTherePage.verifyAlmostTherePage();
-    ConfirmationPageObject confirmPageAlmostThere =
-        almostTherePage.enterActivationLink(email, emailPassword, wikiURL);
-    confirmPageAlmostThere.typeInUserName(userName);
-    confirmPageAlmostThere.typeInPassword(password);
-    UserProfilePageObject userProfile =
-        confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
-    userProfile.verifyUserLoggedIn(userName);
+    RegisterArea register = new RegisterArea(driver);
+    register.typeEmailAddress(email);
+    register.typeUsername(userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+    register.clickSignUpSubmitButton();
+    base.verifyUserLoggedIn(userName);
+    BannerNotifications notification = new BannerNotifications();
+    Assertion.assertEquals(
+        "Oh no! Your email address has not yet been confirmed. You should have a confirmation message in your inbox. Didn't get it? Click here and we'll send a new one. If you need to change your address, head to your Preferences page.",
+        notification.getBannerNotificationTextEmailNotConfirmed());
     CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
     toolbar.verifyUserToolBar();
-    PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
-    preferences.selectTab(tabNames.EMAIL);
-    preferences.verifyEmailMeSection();
   }
 
   @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
