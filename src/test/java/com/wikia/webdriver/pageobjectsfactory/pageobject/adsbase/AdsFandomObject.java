@@ -54,7 +54,8 @@ public class AdsFandomObject extends AdsBaseObject {
           "} }"
       );
     } catch (WebDriverException e) {
-      PageObjectLogging.log("JSError", "Can not get line item id of " + slotName, false);
+      PageObjectLogging.log("JSError", "Can not get line item id of " + slotName + ": " +
+          e.getMessage(), false);
       return 0;
     }
   }
