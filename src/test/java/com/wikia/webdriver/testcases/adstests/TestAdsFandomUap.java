@@ -54,5 +54,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
 
     fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
     Assertion.assertEquals(btfId, fandomPage.getLineItemId(AdsFandomContent.BOTTOM_LEADERBOARD));
+
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
   }
 }

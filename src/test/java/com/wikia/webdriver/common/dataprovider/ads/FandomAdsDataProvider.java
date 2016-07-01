@@ -11,23 +11,25 @@ public class FandomAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fandomAdsPage() {
+  public static Object[][] fandomAds() {
     return new Object[][]{
-        {"young-fans-guide-cinema-part-3"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fandomAdsHub() {
-    return new Object[][]{
-        {"games"}
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            "young-fans-guide-cinema-part-3"
+        },
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_HUB,
+            "games"
+        }
     };
   }
 
   @DataProvider
   public static Object[][] fandomBtfBlockPage() {
     return new Object[][]{
-        {"game-of-thrones-the-ghost-of-high-heart"}
+        {
+            "game-of-thrones-the-ghost-of-high-heart"
+        }
     };
   }
 

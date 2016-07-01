@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -14,12 +15,12 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
 
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomAdsPage",
+      dataProvider = "fandomAds",
       groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
   )
-  public void adsFandomDesktopArticleAds(String article) {
-    AdsFandomObject fandomPage = loadPage(article);
-    verifySlots(fandomPage);
+  public void adsFandomDesktopAds(String pageType, String pageName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    verifySlots(fandomPage, pageType);
   }
 
   @InBrowser(
@@ -28,44 +29,35 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomAdsPage",
+      dataProvider = "fandomAds",
       groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
-  public void adsFandomMobileArticleAds(String article) {
-    AdsFandomObject fandomPage = loadPage(article);
-    verifySlots(fandomPage);
+  public void adsFandomMobileAds(String pageType, String pageName) {
+    AdsFandomObject fandomPage = loadPage(pageName);
+    verifySlots(fandomPage, pageType);
   }
 
-  @Test(
-      dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomAdsHub",
-      groups = {"AdsDesktopPresenceHubFandom", "AdsDesktopFandom"}
-  )
-  public void adsFandomDesktopHubAds(String hub) {
-    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
-    verifySlots(fandomPage);
+  private void verifySlots(AdsFandomObject fandomPage, String pageType) {
+    if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_ARTICLE)) {
+      verifyArticleSlots(fandomPage);
+    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_HUB)) {
+      verifyHubSlots(fandomPage);
+    }
   }
 
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
-  )
-  @Test(
-      dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomAdsHub",
-      groups = {"AdsMobilePresenceHubFandom", "AdsMobileFandom"}
-  )
-  public void adsFandomMobileHubAds(String hub) {
-    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
-    verifySlots(fandomPage);
-  }
-
-  private void verifySlots(AdsFandomObject fandomPage) {
-    fandomPage.triggerOnScrollSlots();
-
+  private void verifyArticleSlots(AdsFandomObject fandomPage) {
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.INCONTENT_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
+  }
+
+  private void verifyHubSlots(AdsFandomObject fandomPage) {
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 }
