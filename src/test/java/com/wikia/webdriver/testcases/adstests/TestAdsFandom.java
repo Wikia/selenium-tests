@@ -18,7 +18,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       dataProvider = "fandomAds",
       groups = {"AdsDesktopPresenceFandom", "AdsDesktopFandom"}
   )
-  public void adsFandomDesktopAds(String pageType, String pageName) {
+  public void adsFandomAdsDesktop(String pageType, String pageName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     verifySlots(fandomPage, pageType);
   }
@@ -32,7 +32,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       dataProvider = "fandomAds",
       groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
-  public void adsFandomMobileAds(String pageType, String pageName) {
+  public void adsFandomAdsMobile(String pageType, String pageName) {
     AdsFandomObject fandomPage = loadPage(pageName);
     verifySlots(fandomPage, pageType);
   }
