@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
@@ -340,6 +341,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     Point location = component.get(component.size() - 1).getLocation();
     Dimension size = component.get(component.size() - 1).getSize();
     Integer targetY = location.getY() + size.getHeight();
+
+    PageObjectLogging.log("TargetY", String.valueOf(targetY), true);
 
     new Actions(driver)
         .clickAndHold(draggedElement)
