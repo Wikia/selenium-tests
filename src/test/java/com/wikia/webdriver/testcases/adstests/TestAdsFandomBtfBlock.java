@@ -40,6 +40,8 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
   private void verifySlots(String article) {
     AdsFandomObject fandomPage = loadPage(article);
 
+    fandomPage.triggerOnScrollSlots();
+
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 

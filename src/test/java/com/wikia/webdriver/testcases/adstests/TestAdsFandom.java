@@ -61,6 +61,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   }
 
   private void verifySlots(AdsFandomObject fandomPage) {
+    fandomPage.triggerOnScrollSlots();
+
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
     fandomPage.verifySlot(AdsFandomContent.INCONTENT_BOXAD);

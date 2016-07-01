@@ -1,9 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -34,6 +38,11 @@ public class AdsFandomObject extends AdsBaseObject {
     slots.put(AdsFandomContent.BOTTOM_LEADERBOARD, bottomLeaderboardElement);
     slots.put(AdsFandomContent.TOP_BOXAD, topBoxadElement);
     slots.put(AdsFandomContent.INCONTENT_BOXAD, incontentBoxadElement);
+  }
+
+  public void triggerOnScrollSlots() {
+    JavascriptExecutor js = driver;
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
   }
 
   public void verifySlot(String slotName) {
