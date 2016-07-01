@@ -45,6 +45,21 @@ public class AdsFandomObject extends AdsBaseObject {
     js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
   }
 
+  public long getLineItemId(String slotName) {
+    JavascriptExecutor js = driver;
+    try {
+      return (long) js.executeScript(
+          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
+          "return slots[i].getResponseInformation().lineItemId;" +
+          "} }"
+      );
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("JSError", "Can not get line item id of " + slotName, false);
+      return 0;
+    }
+  }
+
   public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
     
