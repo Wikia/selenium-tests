@@ -287,6 +287,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
+  @Test(groups = "InfoboxBuilderFailing")
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage infoboxBuilder =
@@ -294,13 +295,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     builderSidebar.addRowComponent();
     infoboxBuilder.selectRowWithIndex(0);
-    builderSidebar.typeInInputField("Label 1");
+    builderSidebar.typeInInputField("First Label");
 
     infoboxBuilder.selectRowWithIndex(1);
-    builderSidebar.typeInInputField("Label 2");
+    builderSidebar.typeInInputField("Second Label");
 
     infoboxBuilder.selectRowWithIndex(2);
-    builderSidebar.typeInInputField("Label 3");
+    builderSidebar.typeInInputField("Third Label");
 
     WebElement element = infoboxBuilder.getInfoboxElement(2);
     WebElement topElement = infoboxBuilder.dragAndDropToTheTop(element);
@@ -464,6 +465,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(template.isPermissionErrorDisplayed());
   }
 
+  @Test(groups = "InfoboxBuilderFailing")
   public void verifyOtherContentIsNotChanged() {
     Sidebar builderSidebar = new Sidebar();
     final String templateName = "Infobox_other_content";

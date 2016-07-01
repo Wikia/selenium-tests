@@ -350,6 +350,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
 
+    component = driver.findElements(By.cssSelector(".portable-infobox .sortable-item"));
+
     return component.get(0);
   }
 
