@@ -331,20 +331,21 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage dragAndDropToTheTop(int index) {
-    this.wait.forElementClickable(component.get(index));
-    String componentToBeMovedText = component.get(index).getText();
+    WebElement draggedElement = component.get(index);
+    this.wait.forElementClickable(draggedElement);
+    String componentToBeMovedText = draggedElement.getText();
     Point location = component.get(component.size() - 1).getLocation();
     Dimension size = component.get(component.size() - 1).getSize();
     Integer targetY = location.getY() + size.getHeight();
 
     new Actions(driver)
-        .clickAndHold(component.get(index))
+        .clickAndHold(draggedElement)
         .moveByOffset(0, targetY)
-        .release(component.get(index))
+        .release(draggedElement)
         .perform();
 
-    wait.forElementClickable(component.get(component.size() - 1));
-    component.get(component.size() - 1).click();
+    wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
+
     Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
 
     return this;

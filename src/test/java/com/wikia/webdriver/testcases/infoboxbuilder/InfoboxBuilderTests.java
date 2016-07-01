@@ -286,8 +286,21 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
-    new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering")
-        .dragAndDropToTheTop(2)
+    Sidebar builderSidebar = new Sidebar();
+    InfoboxBuilderPage infoboxBuilder =
+        new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering");
+
+    builderSidebar.addRowComponent();
+    infoboxBuilder.selectRowWithIndex(0);
+    builderSidebar.typeInInputField("Label 1");
+
+    infoboxBuilder.selectRowWithIndex(1);
+    builderSidebar.typeInInputField("Label 2");
+
+    infoboxBuilder.selectRowWithIndex(2);
+    builderSidebar.typeInInputField("Label 3");
+
+   infoboxBuilder.dragAndDropToTheTop(2)
         .dragAndDropToTheTop(3)
         .dragAndDropToTheTop(1);
   }
