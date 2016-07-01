@@ -344,6 +344,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
         .release(draggedElement)
         .perform();
 
+    wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
 
     Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
