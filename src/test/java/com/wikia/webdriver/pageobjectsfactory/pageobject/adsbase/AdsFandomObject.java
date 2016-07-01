@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -62,7 +61,7 @@ public class AdsFandomObject extends AdsBaseObject {
 
   public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
-    
+
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(selector)));
     verifyAdVisibleInSlot(selector, slots.get(slotName));
   }
