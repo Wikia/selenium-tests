@@ -18,7 +18,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomUapPage",
       groups = {"AdsFandomUapDesktop"}
   )
-  public void adsFandomBtfBlockDesktop(String pageType, String pageName, long atfId, long btfId) {
+  public void adsFandomUapDesktop(String pageType, String pageName, long atfId, long btfId) {
     verifyUap(pageType, pageName, atfId, btfId);
   }
 
@@ -31,7 +31,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomUapPage",
       groups = {"AdsFandomUapMobile"}
   )
-  public void adsFandomBtfBlockMobile(String pageType, String pageName, long atfId, long btfId) {
+  public void adsFandomUapMobile(String pageType, String pageName, long atfId, long btfId) {
     verifyUap(pageType, pageName, atfId, btfId);
   }
 
