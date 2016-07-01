@@ -44,6 +44,9 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
     Assertion.assertEquals(atfId, fandomPage.getLineItemId(AdsFandomContent.TOP_BOXAD));
 
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
+
     fandomPage.triggerOnScrollSlots();
 
     fandomPage.verifySlot(AdsFandomContent.INCONTENT_BOXAD);
