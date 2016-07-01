@@ -11,7 +11,6 @@ public class AdsFandomContent {
   public static final String BOTTOM_LEADERBOARD = "BOTTOM_LEADERBOARD";
   public static final String TOP_BOXAD = "TOP_BOXAD";
   public static final String INCONTENT_BOXAD = "INCONTENT_BOXAD";
-  public static final String BOTTOM_BOXAD = "BOTTOM_BOXAD";
 
   static {
     SLOT_SELECTORS = new HashMap<>();
@@ -19,7 +18,6 @@ public class AdsFandomContent {
     SLOT_SELECTORS.put(BOTTOM_LEADERBOARD, "div[id$='BOTTOM_LEADERBOARD_0__container__']");
     SLOT_SELECTORS.put(TOP_BOXAD, "div[id$='TOP_BOXAD_0__container__']");
     SLOT_SELECTORS.put(INCONTENT_BOXAD, "div[id$='INCONTENT_BOXAD_0__container__']");
-    SLOT_SELECTORS.put(BOTTOM_BOXAD, "div[id$='BOTTOM_BOXAD_0__container__']");
   }
 
   private AdsFandomContent() {

@@ -24,9 +24,6 @@ public class AdsFandomObject extends AdsBaseObject {
   @FindBy(css = "div[id$='INCONTENT_BOXAD_0__container__']")
   protected WebElement incontentBoxadElement;
 
-  @FindBy(css = "div[id$='BOTTOM_BOXAD_0__container__']")
-  protected WebElement bottomBoxadElement;
-
   protected final Map<String, WebElement> slots;
 
   public AdsFandomObject(WebDriver driver, String testedPage) {
@@ -37,7 +34,6 @@ public class AdsFandomObject extends AdsBaseObject {
     slots.put(AdsFandomContent.BOTTOM_LEADERBOARD, bottomLeaderboardElement);
     slots.put(AdsFandomContent.TOP_BOXAD, topBoxadElement);
     slots.put(AdsFandomContent.INCONTENT_BOXAD, incontentBoxadElement);
-    slots.put(AdsFandomContent.BOTTOM_BOXAD, bottomBoxadElement);
   }
 
   public void verifySlot(String slotName) {

@@ -19,10 +19,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   public void adsFandomDesktopArticleAds(String article) {
     AdsFandomObject fandomPage = loadPage(article);
-
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
+    verifySlots(fandomPage);
   }
 
   @InBrowser(
@@ -36,9 +33,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   public void adsFandomMobileArticleAds(String article) {
     AdsFandomObject fandomPage = loadPage(article);
-
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
+    verifySlots(fandomPage);
   }
 
   @Test(
@@ -47,7 +42,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsDesktopPresenceHubFandom", "AdsDesktopFandom"}
   )
   public void adsFandomDesktopHubAds(String hub) {
-    verifySlotsOnHubPage(hub);
+    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
+    verifySlots(fandomPage);
   }
 
   @InBrowser(
@@ -60,15 +56,14 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceHubFandom", "AdsMobileFandom"}
   )
   public void adsFandomMobileHubAds(String hub) {
-    verifySlotsOnHubPage(hub);
+    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
+    verifySlots(fandomPage);
   }
 
-  private void verifySlotsOnHubPage(String hub) {
-    AdsFandomObject fandomPage = loadPage(hub, PAGE_TYPE_HUB);
-
+  private void verifySlots(AdsFandomObject fandomPage) {
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.INCONTENT_BOXAD);
     fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
   }
 }
