@@ -2,12 +2,10 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
