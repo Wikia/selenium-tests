@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -22,7 +23,7 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".gamestar-logo")
   private WebElement gameStarLink;
 
-  @FindBy(css = ".wikia-logo")
+  @FindBy(css = ".wikia-logo-container .wikia-logo")
   private WebElement wikiaLogo;
 
   @FindBy(css = "#searchSelect")
@@ -51,14 +52,9 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public HomePage clickWikiaLogo() {
-    String environment = Configuration.getEnv();
-    if (!"prod".equals(environment) && !environment.contains("dev")) {
-      WebDriverWait wait = new WebDriverWait(driver, 5);
-      wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",
-          environment));
-    }
-
+    wait.forElementVisible(wikiaLogo);
     wikiaLogo.click();
+
     return new HomePage();
   }
 
