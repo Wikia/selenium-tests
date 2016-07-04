@@ -320,7 +320,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         new WikiBasePageObject().loginAs(user);
       }
 
-      checkCountryCode(driver, Configuration.getCountryCode());
+      checkCountryCode(driver, StringUtils.defaultIfEmpty(
+          Configuration.getCountryCode(),
+          Configuration.getGeoEdgeCountry())
+      );
     }
 
     logJSError(driver);

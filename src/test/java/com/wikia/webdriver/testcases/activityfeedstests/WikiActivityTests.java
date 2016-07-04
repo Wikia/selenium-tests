@@ -17,6 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
+@Test(groups = "activityFeeds-wikiActivity")
 public class WikiActivityTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -24,7 +25,7 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
-  @Test(groups = {"WikiActivity", "WikiActivity_001", "darwin"})
+  @Test(groups = "WikiActivity_001")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
     String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
@@ -44,7 +45,7 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
-  @Test(groups = {"WikiActivity", "WikiActivity_002", "darwin"})
+  @Test(groups = "WikiActivity_002")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
     SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();
@@ -65,7 +66,7 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
-  @Test(groups = {"WikiActivity", "WikiActivity_003", "darwin"})
+  @Test(groups = "WikiActivity_003")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
@@ -88,7 +89,7 @@ public class WikiActivityTests extends NewTestTemplate {
   /**
    * https://wikia-inc.atlassian.net/browse/DAR-1617
    */
-  @Test(groups = {"WikiActivity", "WikiActivity_004", "darwin"})
+  @Test(groups = "WikiActivity_004")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
     ArticlePageObject article =
