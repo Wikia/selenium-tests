@@ -3,20 +3,19 @@ package com.wikia.webdriver.elements.mercury.components.loginAndSignup;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterArea extends BasePageObject{
+public class RegisterArea extends WikiBasePageObject {
 
+  @FindBy(css = ".auth.desktop.signin-page")
+  private WebElement authModal;
   @FindBy(css = "#signupEmail")
   private WebElement signupEmail;
   @FindBy(css = "#signupUsername")
@@ -50,18 +49,19 @@ public class RegisterArea extends BasePageObject{
   @FindBy(css = ".signup-provider-email")
   private WebElement signupButton;
 
-  private WebDriver driver;
-  private Wait wait;
+//  private WebDriver driver;
+//  private Wait wait;
   private UrlBuilder urlBuilder;
 
   private final String mainWindowHandle;
 
 
   public RegisterArea(WebDriver driver) {
-    this.driver = driver;
-    this.wait = new Wait(driver);
+//    this.driver = driver;
+//    this.wait = new Wait(driver);
 
     PageFactory.initElements(driver, this);
+    mainWindowHandle = null;
   }
 
   public RegisterArea() {
@@ -78,6 +78,13 @@ public class RegisterArea extends BasePageObject{
 
   public void switchToMainWindowHandle() {
     driver.switchTo().window(this.mainWindowHandle);
+  }
+
+  public boolean isOpened() {
+    switchToAuthModalHandle();
+    boolean isOpenedResult = authModal.isDisplayed();
+    switchToMainWindowHandle();
+    return isOpenedResult;
   }
 
   public RegisterArea typeEmailAddress(String email) {
@@ -117,18 +124,6 @@ public class RegisterArea extends BasePageObject{
     return this;
   }
 
-  public RegisterArea register(String user, String password, String email, DateTime birthday) {
-        typeEmailAddress(email).
-        typeUsername(user).
-        typePassword(password).
-        typeBirthdate(String.valueOf(birthday.getMonthOfYear()),
-                      String.valueOf(birthday.getDayOfMonth()),
-                      String.valueOf(birthday.getYear())).
-        clickSignUpSubmitButton();
-
-    return this;
-  }
-
   public void clickSignUpSubmitButton() {
     wait.forElementVisible(signupSubmitButton);
     signupSubmitButton.click();
@@ -164,8 +159,5 @@ public class RegisterArea extends BasePageObject{
   public void openRegisterPage() {
     driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "clickSignUpSubmitButton");
   }
-
-
-
 
 }
