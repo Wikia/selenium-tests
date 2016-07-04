@@ -11,12 +11,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
 
 @Test(groups = "ContentReview")
-public class BasicTests extends NewTestTemplate {
+public class ContentReviewTests extends NewTestTemplate {
 
     @Test
     @Execute(onWikia = "openertest")
     public void anonUserShouldntSeeReviewModule() {
-        SpecialJsPage wikiaJs = new SpecialJsPage(driver).open("wikia");
+        SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
         Assertion.assertFalse(wikiaJs.getReviewModule().isModuleVisible());
     }
@@ -24,13 +24,13 @@ public class BasicTests extends NewTestTemplate {
     @Test
     @Execute(asUser = User.STAFF, onWikia = "openertest")
     public void staffUserShouldSeeReviewModule() {
-        SpecialJsPage wikiaJs = new SpecialJsPage(driver).open("wikia");
+        SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
         Assertion.assertTrue(wikiaJs.getReviewModule().isModuleVisible());
     }
 
     @Test
-    @Execute(asUser = User.STAFF, onWikia = "openertest")
+    @Execute(asUser = User.CONTENT_REVIEWER, onWikia = "openertest")
     public void editJS() {
         final String expectedContent =
                 String.format("My Awesome JS edit %d", DateTime.now().getMillis());
@@ -43,19 +43,20 @@ public class BasicTests extends NewTestTemplate {
                 .clearContent()
                 .insertContent(expectedContent);
 
-        editPage.clickAutoApproveCheckbox().clickPublishButton();
+        editPage
+            .clickPublishButton();
 
-        SpecialJsPage specialJsPage = new SpecialJsPage(driver);
-        Assertion.assertEquals(specialJsPage.getScriptCoentent(), expectedContent);
-        Assertion.assertFalse(specialJsPage.getReviewModule().isSubmitLinkVisible());
+        SpecialJsPage specialJsPage = new SpecialJsPage();
+        Assertion.assertEquals(specialJsPage.getScriptContent(), expectedContent);
+        Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkVisible());
 
         editPage.open("mediawiki:wikia.js")
                 .getAceEditor()
                 .clearContent()
                 .insertContent("Adamk is awesome");
 
-        editPage.clickPublishButton();
-        Assertion.assertEquals(specialJsPage.getScriptCoentent(), "Adamk is awesome");
-        Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkVisible());
+        editPage.clickAutoApproveCheckbox().clickPublishButton();
+        Assertion.assertEquals(specialJsPage.getScriptContent(), "Adamk is awesome");
+        Assertion.assertFalse(specialJsPage.getReviewModule().isSubmitLinkVisible());
     }
 }

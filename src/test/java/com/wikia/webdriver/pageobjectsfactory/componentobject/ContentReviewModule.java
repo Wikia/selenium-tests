@@ -7,18 +7,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by Ludwik on 2015-09-23.
- */
 public class ContentReviewModule extends WikiBasePageObject {
 
     @FindBy(css = ".content-review-module")
     private WebElement contentReviewModule;
-    @FindBy(css = "#content-review-module-submit")
+    @FindBy(css = ".content-review-module-submit")
     private WebElement submitForReviewLink;
 
-    public ContentReviewModule(WebDriver driver) {
-        super(driver);
+    public ContentReviewModule() {
+        super();
     }
 
     public boolean isModuleVisible(){

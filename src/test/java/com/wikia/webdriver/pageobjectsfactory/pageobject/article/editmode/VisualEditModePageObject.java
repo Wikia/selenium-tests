@@ -113,7 +113,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public AceEditor getAceEditor() {
     if (aceEditor == null) {
-      aceEditor = new AceEditor(driver);
+      aceEditor = new AceEditor();
     }
 
     return aceEditor;

@@ -9,14 +9,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class AceEditor extends WikiBasePageObject {
 
-  @FindBy(css = ".ace_text-layer > .ace_line")
+  @FindBy(css = ".ace_text-layer .ace_line")
   private WebElement aceLayerTextArea;
 
   @FindBy(css = "textarea.ace_text-input")
   private WebElement aceInputTextArea;
 
-  public AceEditor(WebDriver driver) {
-    super(driver);
+  public AceEditor() {
+    super();
   }
 
   public AceEditor clearContent() {

@@ -20,8 +20,8 @@ public class SpecialJsPage extends WikiBasePageObject {
 
     private ContentReviewModule contentReviewModule;
 
-    public SpecialJsPage(WebDriver driver) {
-        super(driver);
+    public SpecialJsPage() {
+        super();
     }
 
     /**
@@ -40,7 +40,7 @@ public class SpecialJsPage extends WikiBasePageObject {
         return this;
     }
 
-    public String getScriptCoentent() {
+    public String getScriptContent() {
         wait.forElementVisible(scriptArea);
 
         return scriptArea.getText();
@@ -48,7 +48,7 @@ public class SpecialJsPage extends WikiBasePageObject {
 
     public ContentReviewModule getReviewModule() {
         if (contentReviewModule == null) {
-            contentReviewModule = new ContentReviewModule(driver);
+            contentReviewModule = new ContentReviewModule();
         }
         return contentReviewModule;
     }
