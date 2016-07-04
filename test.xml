@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><suite name="Failed suite [Failed suite [Failed suite [Wikia test suite]]]" guice-stage="DEVELOPMENT" verbose="0">
+  <listeners>
+    <listener class-name="com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter"/>
+  </listeners>
+  <test name="testing(failed)(failed)(failed)">
+    <classes>
+      <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests">
+        <methods>
+          <include name="start"/>
+          <include name="stop"/>
+          <include name="wam_005_testDatePicker"/>
+          <include name="wam_000_setup"/>
+          <include name="initTestContext"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests">
+        <methods>
+          <include name="start"/>
+          <include name="stop"/>
+          <include name="initTestContext"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.signuptests.SignUpTests">
+        <methods>
+          <include name="start"/>
+          <include name="stop"/>
+          <include name="anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters"/>
+          <include name="userCanLoginWithoutConfirmingVerificationEmail"/>
+          <include name="anonCanSignUp"/>
+          <include name="initTestContext"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests">
+        <methods>
+          <include name="start"/>
+          <include name="stop"/>
+          <include name="beforeSuite"/>
+          <include name="userCanConnectToFacebookOnUserPreferencesPage"/>
+          <include name="userCanSignupViaFacebook"/>
+          <include name="userCanConnectToFacebookViaUserPreferencesPage"/>
+          <include name="userCanLoginViaFacebook"/>
+          <include name="initTestContext"/>
+        </methods>
+      </class>
+      <class name="com.wikia.webdriver.testcases.forumtests.ForumBoardTests">
+        <methods>
+          <include name="start"/>
+          <include name="stop"/>
+          <include name="anonymousUserCanFollowDiscussionOnForum"/>
+          <include name="initTestContext"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

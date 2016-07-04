@@ -253,7 +253,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectTitleWithIndex(int index) {
     WebElement selectedTitle = titles.get(index);
     wait.forElementClickable(selectedTitle);
-    selectedTitle.click();
+    scrollAndClick(selectedTitle);
 
     return this;
   }
@@ -261,7 +261,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectImageWithIndex(int index) {
     WebElement selectedImage = images.get(index);
     wait.forElementClickable(selectedImage);
-    selectedImage.click();
+    scrollAndClick(selectedImage);
 
     return this;
   }
@@ -269,7 +269,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectRowWithIndex(int index) {
     WebElement selectedRow = rows.get(index);
     wait.forElementClickable(selectedRow);
-    selectedRow.click();
+    scrollAndClick(selectedRow);
 
     return this;
   }
@@ -277,7 +277,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectHeaderWithIndex(int index) {
     WebElement selectedHeader = headers.get(index);
     wait.forElementClickable(selectedHeader);
-    selectedHeader.click();
+    scrollAndClick(selectedHeader);
 
     return this;
   }
