@@ -17,5 +17,7 @@ public @interface Execute {
 
   String disableFlash() default "";
 
+  String mockAds() default "";
+
   String disableCommunityPageSalesPitchDialog() default "";
 }
