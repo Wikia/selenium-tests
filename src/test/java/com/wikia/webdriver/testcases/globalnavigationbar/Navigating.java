@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 public class Navigating extends NewTestTemplate {
 
   private final String EN_COMMUNITY = "muppet";
-  private final String FANDOM_URL = "http://fandom.wikia.com/";
+  private final String FANDOM_URL = "http://www.wikia.com/fandom";
 
   @DataProvider
   public Object[][] getCentralWikiaUrlForWiki() {
