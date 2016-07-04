@@ -287,7 +287,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  @Test(groups = "InfoboxBuilderFailing")
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage infoboxBuilder =
@@ -465,7 +464,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(template.isPermissionErrorDisplayed());
   }
 
-  @Test(groups = "InfoboxBuilderFailing")
   public void verifyOtherContentIsNotChanged() {
     Sidebar builderSidebar = new Sidebar();
     final String templateName = "Infobox_other_content";
