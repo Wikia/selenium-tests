@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,22 +16,22 @@ public class ContentReviewModule extends WikiBasePageObject {
     }
 
     public boolean isModuleVisible(){
-        try {
-            wait.forElementVisible(contentReviewModule, 5, 1);
-            return true;
-        }catch (TimeoutException e){
-            return false;
-        }
+        wait.forElementVisible(contentReviewModule, 5, 1);
+        return true;
+    }
+
+    public boolean isModuleNotVisible(){
+        waitForElementNotVisibleByElement(contentReviewModule, 5);
+        return true;
     }
 
     public boolean isSubmitLinkVisible() {
-        boolean isLinkVisible = false;
-        try {
-            wait.forElementVisible(submitForReviewLink, 3, 1);
-            isLinkVisible = true;
-        } catch(TimeoutException e) {
-            isLinkVisible = false;
-        }
-        return isModuleVisible() && isLinkVisible;
+        wait.forElementVisible(submitForReviewLink, 3, 1);
+        return true;
+    }
+
+    public boolean isSubmitLinkNotVisible() {
+        waitForElementNotVisibleByElement(submitForReviewLink, 3);
+        return true;
     }
 }

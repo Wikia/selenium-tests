@@ -18,7 +18,7 @@ public class ContentReviewTests extends NewTestTemplate {
     public void anonUserShouldntSeeReviewModule() {
         SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
-        Assertion.assertFalse(wikiaJs.getReviewModule().isModuleVisible());
+        Assertion.assertTrue(wikiaJs.getReviewModule().isModuleNotVisible());
     }
 
     @Test
@@ -57,6 +57,6 @@ public class ContentReviewTests extends NewTestTemplate {
 
         editPage.clickAutoApproveCheckbox().clickPublishButton();
         Assertion.assertEquals(specialJsPage.getScriptContent(), "Adamk is awesome");
-        Assertion.assertFalse(specialJsPage.getReviewModule().isSubmitLinkVisible());
+        Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkNotVisible());
     }
 }
