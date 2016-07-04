@@ -303,15 +303,15 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     infoboxBuilder.selectRowWithIndex(2);
     builderSidebar.typeInInputField("Third Label");
 
-    WebElement element = infoboxBuilder.getInfoboxElement(2);
+    WebElement element = infoboxBuilder.getInfoboxComponent(2);
     WebElement topElement = infoboxBuilder.dragAndDropToTheTop(element);
     Assertion.assertEquals(element.getText(), topElement.getText());
 
-    element = infoboxBuilder.getInfoboxElement(3);
+    element = infoboxBuilder.getInfoboxComponent(3);
     topElement = infoboxBuilder.dragAndDropToTheTop(element);
     Assertion.assertEquals(element.getText(), topElement.getText());
 
-    element = infoboxBuilder.getInfoboxElement(1);
+    element = infoboxBuilder.getInfoboxComponent(1);
     topElement = infoboxBuilder.dragAndDropToTheTop(element);
     Assertion.assertEquals(element.getText(), topElement.getText());
   }

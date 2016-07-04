@@ -331,10 +331,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public WebElement getInfoboxElement(int index) {
-    return component.get(index);
-  }
-
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
@@ -351,6 +347,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
 
     return component.get(0);
+  }
+
+  public WebElement getInfoboxComponent(int index) {
+    return component.get(index);
   }
 
   public void hoverOverSectionChevron(int index) {
