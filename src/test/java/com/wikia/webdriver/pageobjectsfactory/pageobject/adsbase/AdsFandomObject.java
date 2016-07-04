@@ -1,12 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -44,24 +42,7 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public void triggerOnScrollSlots() {
-    JavascriptExecutor js = driver;
-    js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-  }
-
-  public long getLineItemId(String slotName) {
-    JavascriptExecutor js = driver;
-    try {
-      return (long) js.executeScript(
-          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
-          "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
-          "return slots[i].getResponseInformation().lineItemId;" +
-          "} }"
-      );
-    } catch (WebDriverException e) {
-      PageObjectLogging.log("JSError", "Can not get line item id of " + slotName + ": " +
-          e.getMessage(), false);
-      return 0;
-    }
+    jsActions.scrollToBottom(driver);
   }
 
   public void verifySlot(String slotName) {
