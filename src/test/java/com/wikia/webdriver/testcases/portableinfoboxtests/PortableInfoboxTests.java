@@ -26,21 +26,6 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  const static String COPY_INFOBOX_TEXT = "<infobox layout>\n"
-                                          + "<image source=\"image\"><default>\n"
-                                          + "[[File:Burton-jane-ginger-domestic-kitten-felis-catus-rolling-on-back-playing.jpg|thumb|sweet kitty]]\n"
-                                          + "</default><alt>I AM ALT :)</alt>\n"
-                                          + "<caption source=\"z1\"><format>[[{{{z1}}}$$]]</format><default>Default image caption</default></caption>\n"
-                                          + "</image>\n"
-                                          + "                                                                                <title source=\"name\"><default>thisAppearsIfNoNameForInfobox</default></title>\n"
-                                          + "<title source=\"name2\"><default>This is second title</default></title>\n"
-                                          + "<data source=\"url\"><label>\"URL\"</label></data>\n"
-                                          + "<data source=\"nolabel\"></data>\n"
-                                          + "<data source=\"url2\"><label></label><default>\"URL2222222222222\"</default></data>\n"
-                                          + "<data source=\"url3\"><label>\"URL33433333333\"</label></data>\n"
-                                          + "<data source=\"url222222222\"><label>URL</label><default>DEFAULT VALUE</default></data>\n"
-                                          + "</infobox>\n";
-
   public void verifyElementsVisibility() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -207,7 +192,20 @@ public class PortableInfoboxTests extends NewTestTemplate {
 //    TemplatePage template = new TemplatePage();
     ArticlePageObject article = new ArticlePageObject();
     PortableInfobox infobox = new PortableInfobox();
-
+    String templateSyntax = "<infobox layout>\n"
+                                          + "<image source=\"image\"><default>\n"
+                                          + "[[File:Burton-jane-ginger-domestic-kitten-felis-catus-rolling-on-back-playing.jpg|thumb|sweet kitty]]\n"
+                                          + "</default><alt>I AM ALT :)</alt>\n"
+                                          + "<caption source=\"z1\"><format>[[{{{z1}}}$$]]</format><default>Default image caption</default></caption>\n"
+                                          + "</image>\n"
+                                          + "                                                                                <title source=\"name\"><default>thisAppearsIfNoNameForInfobox</default></title>\n"
+                                          + "<title source=\"name2\"><default>This is second title</default></title>\n"
+                                          + "<data source=\"url\"><label>\"URL\"</label></data>\n"
+                                          + "<data source=\"nolabel\"></data>\n"
+                                          + "<data source=\"url2\"><label></label><default>\"URL2222222222222\"</default></data>\n"
+                                          + "<data source=\"url3\"><label>\"URL33433333333\"</label></data>\n"
+                                          + "<data source=\"url222222222\"><label>URL</label><default>DEFAULT VALUE</default></data>\n"
+                                          + "</infobox>\n";
    /* String templateSyntax =
         template
             .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
@@ -221,7 +219,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     article
         .openCurrectArticleSourceMode()
-        .addContentInSourceMode(COPY_INFOBOX_TEXT)
+        .addContentInSourceMode(templateSyntax)
         .submitArticle();
 
     Assertion.assertTrue(infobox.isImageVisible());
