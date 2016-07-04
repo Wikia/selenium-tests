@@ -15,7 +15,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
       groups = "TestSlotsOasis"
   )
   public void adsSmokeTestSlotsOasis() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "SyntheticTests/OasisSlots");
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/OasisSlots");
     ads = new AdsBaseObject(driver, testedPage);
     ads.waitForPageLoaded();
 
@@ -26,7 +26,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
 
   private void smokeTestSlot(String slotName) {
     verifySlotIsLoaded(slotName);
-    ads.verifyGptIframe("wka.life/_adtest//article", slotName, "gpt");
+    ads.verifyGptIframe("wka.life/_project43//article", slotName, "gpt");
   }
 
   private void verifySlotIsLoaded(String slotName) {
