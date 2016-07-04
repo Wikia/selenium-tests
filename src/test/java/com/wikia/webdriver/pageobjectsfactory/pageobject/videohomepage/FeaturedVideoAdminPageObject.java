@@ -13,9 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * Created by Liz Lee on 6/18/14.
- */
 public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".featured-video:first-child")
@@ -24,7 +21,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
   private WebElement saveButton;
 
   public FeaturedVideoAdminPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

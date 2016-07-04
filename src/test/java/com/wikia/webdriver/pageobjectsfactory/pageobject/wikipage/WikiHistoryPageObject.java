@@ -29,7 +29,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
 
 
   public WikiHistoryPageObject(WebDriver driver) {
-    super(driver);
+    super();
     this.articlename = articlename;
     PageFactory.initElements(driver, this);
   }
@@ -56,9 +56,6 @@ public class WikiHistoryPageObject extends WikiBasePageObject {
     return new WikiArticlePageObject(driver);
   }
 
-  /*Author: Michal Nowierski
-   *
-   * */
   public void verifyImportandPageElements() {
     wait.forElementVisible(fromYearField);
     wait.forElementVisible(backToPageLink);

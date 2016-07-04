@@ -2,8 +2,9 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -15,12 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.testng.annotations.Test;
 
-// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
-
-/**
- * @author Karol 'kkarolk' Kujawiak 1. Upload file using Special:NewFiles page 2. Upload file using
- *         Special:Upload page 3. Upload file using Special:MultipleUpload page
- */
 public class ImageServingTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -28,12 +23,12 @@ public class ImageServingTests extends NewTestTemplate {
   @Test(groups = {"ImageServing_001", "ImageServing", "Smoke3"})
   @Execute(asUser = User.USER)
   public void ImageServing_001_SpecialNewFilesTest() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
-    newFiles.clickOnMoreOrFewerOptions();
+    newFiles.clickOnMoreOptions();
     newFiles.checkIgnoreAnyWarnings();
-    newFiles.clickOnMoreOrFewerOptions();
+    newFiles.clickOnFewerOptions();
     newFiles.selectFileToUpload(PageContent.FILE);
     newFiles.clickUploadButton();
     newFiles.verifyFileUploaded(PageContent.FILE);
@@ -47,7 +42,7 @@ public class ImageServingTests extends NewTestTemplate {
       dataProvider = "getFileNames")
  @Execute(asUser = User.USER)
   public void ImageServing_002_SpecialUploadTest(String fileName) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
     upload.selectFileToUpload(PageContent.FILE);
     upload.typeFileName(fileName);
@@ -66,7 +61,7 @@ public class ImageServingTests extends NewTestTemplate {
   @Test(groups = {"ImageServing_003", "ImageServing"})
   @Execute(asUser = User.USER)
   public void ImageServing_003_SpecialMultipleUploadTest() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialMultipleUploadPageObject wikiSpecialMU = base.openSpecialMultipleUpload(wikiURL);
     wikiSpecialMU.selectFilesToUpload(PageContent.LIST_OF_FILES);
     wikiSpecialMU.typeInMultiUploadSummary(PageContent.CAPTION);

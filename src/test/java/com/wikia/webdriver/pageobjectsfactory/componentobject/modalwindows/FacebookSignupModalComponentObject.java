@@ -13,9 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.annotation.Nullable;
 
-/**
- * @author Michal 'justnpT' Nowierski
- */
 public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "button[name='__CONFIRM__']")
@@ -40,7 +37,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement emailCheckbox;
 
   public FacebookSignupModalComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void acceptWikiaAppPolicy() {

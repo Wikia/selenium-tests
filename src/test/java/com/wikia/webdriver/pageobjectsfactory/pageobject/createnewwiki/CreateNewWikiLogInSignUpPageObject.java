@@ -13,9 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
   private static final String ERROR_MESSAGE_CSS =
@@ -36,7 +33,7 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   WebElement errorMessage;
 
   public CreateNewWikiLogInSignUpPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void typeInUserName(String userName) {

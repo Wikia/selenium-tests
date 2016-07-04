@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -10,24 +11,18 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution <p/> VE-1233 Testing Anon adding external link would prompt recaptcha
- */
-
 public class VERecaptchaTests extends NewTestTemplate {
 
   WikiBasePageObject base;
 
   @BeforeMethod(alwaysRun = true)
   public void setupd() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
-  //RC01
-  @Test(
-      groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
-  )
+  // Verify that second click on "Save page" button changes recaptcha.
+  @Test(groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"})
+  @RelatedIssue(issueID = "MAIN-5809", comment = "issue will fail until the issue is fixed")
   public void VEAddRecaptchaTests_001_AddExternalURL() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);

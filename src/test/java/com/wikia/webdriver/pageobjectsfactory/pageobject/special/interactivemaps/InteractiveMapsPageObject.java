@@ -13,12 +13,6 @@ import org.testng.Assert;
 
 import java.util.List;
 
-
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author: Lukasz Jedrzejczak
- */
-
 public class InteractiveMapsPageObject extends ArticlePageObject {
 
   @FindBy(css = "#createMap")
@@ -41,7 +35,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
   private WebElement emptyStateSection;
 
   public InteractiveMapsPageObject(WebDriver driver) {
-    super(driver);
+    super();
     // TODO Auto-generated constructor stub
   }
 

@@ -2,7 +2,10 @@ package com.wikia.webdriver.testcases.forumtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
@@ -22,9 +25,9 @@ public class ForumBoardTests extends NewTestTemplate {
   private String message;
 
   @Test(groups = {"ForumBoardTests_001", "ForumBoardTests", "Forum", "Smoke3"})
-  public void ForumBoardTests_001_startDiscussionWithTitleAndMessage() {
+  @Execute(asUser = User.STAFF)
+  public void staffUserCanStartDiscussionOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
@@ -34,7 +37,7 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_002", "ForumBoardTests", "Forum"})
-  public void ForumBoardTests_002_startDiscussionWithoutTitle() {
+  public void anonymousUserCanStartDiscussionWithoutTitleOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
@@ -46,7 +49,7 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_003", "ForumBoardTests", "Forum"})
-  public void ForumBoardTests_003_startDiscussionWithImage() {
+  public void anonymousUserCanStartDiscussionWithImageOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -58,7 +61,7 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_004", "ForumBoardTests", "Forum"})
-  public void ForumBoardTests_004_startDiscussionWithLink() {
+  public void anonymousUserCanStartDiscussionWithLinkOnForum() {
     String externalLink = PageContent.EXTERNAL_LINK;
     String internalLink = PageContent.REDIRECT_LINK;
     ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -72,7 +75,7 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_005", "ForumBoardTests", "Forum"})
-  public void ForumBoardTests_005_startDiscussionWithVideo() {
+  public void anonymousUserCanStartDiscussionWithVideoOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -83,7 +86,11 @@ public class ForumBoardTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumBoardTests_006", "ForumBoardTests", "Forum"})
-  public void ForumBoardTests_006_followDiscussion() {
+  @RelatedIssue(
+          issueID = "MAIN-7213",
+          comment = "the failure is caused by the environment instability. Please rerun test"
+  )
+  public void anonymousUserCanFollowDiscussionOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -100,7 +107,7 @@ public class ForumBoardTests extends NewTestTemplate {
     @Test(
         enabled = false, //CONCF-476
         groups = {"ForumBoardTests_007", "ForumBoardTests", "Forum"})
-  public void ForumBoardTests_007_highlightDiscussion() {
+  public void anonymousUserCanHighlightDiscussionOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();

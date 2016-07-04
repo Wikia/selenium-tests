@@ -18,9 +18,14 @@ public class SpecialFollowPageObject extends SpecialPageObject {
   @FindBy(css = "#wikiafollowedpages-special-heading-media span>a")
   private List<WebElement> imagesList;
 
-  public SpecialFollowPageObject(WebDriver driver, String wikiURL) {
-    super(driver);
-    getUrl(wikiURL + URLsContent.SPECIAL_FOLLOW);
+  public SpecialFollowPageObject(WebDriver driver) {
+    super();
+  }
+
+  public SpecialFollowPageObject open() {
+    getUrl(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_FOLLOW);
+
+    return this;
   }
 
   public void verifyFollowedArticle(String articleName) {

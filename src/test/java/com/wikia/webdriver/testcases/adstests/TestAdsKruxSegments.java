@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
+import static com.wikia.webdriver.common.core.Assertion.assertStringNotContains;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
@@ -11,9 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEngineering
- */
+import java.util.Map;
+
 public class TestAdsKruxSegments extends TemplateNoFirstLoad {
 
   /**
@@ -35,9 +34,9 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
   public void adsKruxSegments(String kruxKuid,
                               String segment,
                               Page page1,
-                              String expectedSegmentsOnPage1,
+                              Map<String, Boolean> segmentsOnPage1,
                               Page page2,
-                              String expectedSegmentsOnPage2) {
+                              Map<String, Boolean> segmentsOnPage2) {
 
     AdsKruxObject adsKruxObject = new AdsKruxObject(driver);
 
@@ -57,7 +56,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
     adsKruxObject.waitForKrux();
 
     // Check the segments:
-    assertContainsSegs(adsKruxObject.getKxsegs(), expectedSegmentsOnPage1);
+    assertSegments(adsKruxObject.getKxsegs(), segmentsOnPage1);
 
     // Refresh once again, this time with ads and check the GPT params:
     adsKruxObject.getUrl(page1);
@@ -74,7 +73,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
     adsKruxObject.waitForKrux();
 
     // Check the segments:
-    assertContainsSegs(adsKruxObject.getKxsegs(), expectedSegmentsOnPage2);
+    assertSegments(adsKruxObject.getKxsegs(), segmentsOnPage2);
 
     // Refresh once again, this time with ads and check the GPT params:
     adsKruxObject.getUrl(page2);
@@ -92,16 +91,16 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
         "\"ksgmnt\":" + adsKruxObject.getKxsegs());
   }
 
-  private void assertContainsSegs(String actual, String expected) {
+  private void assertSegments(String actualSegments, Map<String, Boolean> expected) {
+    for (Map.Entry<String, Boolean> entry : expected.entrySet()) {
+      String segment = entry.getKey();
+      Boolean isPresent = entry.getValue();
 
-    if ("[]".equals(expected)) {
-      assertEquals(actual, expected);
+      if (isPresent) {
+        assertStringContains(actualSegments, segment);
+      } else {
+        assertStringNotContains(actualSegments, segment);
+      }
     }
-
-    String[] expectedSegs = expected.replace("[", "").replace("]", "").split(",");
-    for (String expectedSeg : expectedSegs) {
-      assertStringContains(actual, expectedSeg);
-    }
-
   }
 }

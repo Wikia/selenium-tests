@@ -4,7 +4,10 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -16,41 +19,38 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
+  @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-7391",
+      comment = "Test Manually. Test is failing as you tube sometime returns a playlist rather than single video")
   public void SpecialVideos_001_Provider() {
-    String wikiURL = urlBuilder.getUrlForWiki("mobileregressiontesting");
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("bananas");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.loginAs(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getWikiFileName());
 
-    filePage.getVenusGlobalNav().openAccountNAvigation().clickLogOut();
+//    filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
     filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
-    filePage = specialVideos.openFilePage(wikiURL, video.getWikiFileName());
+    filePage = filePage.open(video.getWikiFileName());
     filePage.verifyEmptyFilePage();
   }
 
   @Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
+  @Execute(asUser = User.USER)
   public void SpecialVideos_002_Library() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.loginAs(credentials.userName, credentials.password, wikiURL);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);

@@ -14,18 +14,19 @@ public class VideoComponentObject extends WikiBasePageObject {
   protected Integer videoWidth;
 
   public VideoComponentObject(WebDriver driver, WebElement fileEmbed) {
-    super(driver);
+    super();
     videoEmbed = fileEmbed;
   }
 
   public VideoComponentObject(WebDriver driver, WebElement fileEmbed, Integer width) {
-    super(driver);
+    super();
     videoEmbed = fileEmbed;
     videoWidth = width;
   }
 
   public WebElement getVideoPlayerObject() {
-    wait.forElementVisible(videoEmbed);
+    wait.forElementVisible(videoEmbed, 30);
+    wait.forElementPresent(By.cssSelector("*[name=flashvars]"));
     return videoEmbed.findElement(By.cssSelector("*[name=flashvars]"));
   }
 
@@ -55,12 +56,17 @@ public class VideoComponentObject extends WikiBasePageObject {
     WebElement container = videoEmbed.findElement(By.tagName("div"));
     String containerId = "ooyalaplayer-";
     Assertion.assertStringContains(container.getAttribute("id"), containerId);
-    wait.forElementVisible(container.findElement(By.tagName("object")));
+    wait.forElementVisible(container.findElement(By.cssSelector("[id^='ooyalaplayer-']>.innerWrapper")));
     PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
   }
 
+  public void verifyFlashVideoObjectVisible() {
+    wait.forElementVisible(videoEmbed.findElement(By.cssSelector("object")));
+    PageObjectLogging.log("verifyFlashVideoObjectVisible", "Video object is visible", true);
+  }
+
   public void verifyVideoObjectVisible() {
-    wait.forElementVisible(videoEmbed.findElement(By.tagName("object")));
+    wait.forElementVisible(videoEmbed.findElement(By.cssSelector("[id^='ooyalaplayer-']>.innerWrapper")));
     PageObjectLogging.log("verifyVideoObjectVisible", "Video object is visible", true);
   }
 
@@ -125,7 +131,6 @@ public class VideoComponentObject extends WikiBasePageObject {
       case "sevenload":
       case "gametrailers":
       case "viddler":
-      case "bliptv":
       case "twitchtv":
       case "youku":
         break;

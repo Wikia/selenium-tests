@@ -230,7 +230,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     wait.forElementNotPresent(By.cssSelector(thumbnailsVideosGroup));
     for (int i = 0; i < titles.size(); i++) {
       wait.forElementVisible(titles.get(i));
-      scrollToElement(titles.get(i));
+      jsActions.scrollToElement(titles.get(i));
       wait.forElementVisible(images.get(i));
     }
   }
@@ -243,7 +243,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
     Assertion.assertEquals(playMovieImages.size(), thumbnailsVideos.size());
     for (int i = 0; i < titles.size(); i++) {
       wait.forElementVisible(titles.get(i));
-      scrollToElement(titles.get(i));
+      jsActions.scrollToElement(titles.get(i));
       wait.forElementVisible(videoImages.get(i));
     }
   }

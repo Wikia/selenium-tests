@@ -87,7 +87,7 @@ task getSuite << {
     def jobName = job.split(":")[0]
     def apiSuffix = "api/json?pretty=true"
 
-    def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
+    def JenkinsURL = "http://jenkins.wikia-prod:8080/"
     def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
@@ -224,7 +224,7 @@ task getSuiteForGroup << {
     def jobName = job.split(":")[0]
     def apiSuffix = "api/json?pretty=true"
 
-    def JenkinsURL = "http://qa-s2.wikia-prod:8080/"
+    def JenkinsURL = "http://jenkins.wikia-prod:8080/"
     def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
     def jsonSlurper = new JsonSlurper()
@@ -380,15 +380,15 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.47.1'
+    def webdriverVersion = '2.53.0'
 
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
-    testCompile "org.seleniumhq.selenium:selenium-htmlunit-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-ie-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-safari-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-support:${webdriverVersion}"
+    testCompile "org.seleniumhq.selenium:htmlunit-driver:2.20"
     testCompile 'org.apache.httpcomponents:httpcore:4.4.1'
     testCompile 'commons-codec:commons-codec:1.10'
     testCompile 'commons-io:commons-io:2.4'
@@ -409,7 +409,10 @@ dependencies {
     testCompile 'io.appium:java-client:3.1.0'
     testCompile 'joda-time:joda-time:2.7'
     testCompile 'com.jayway.jsonpath:json-path:1.2.0'
-    testCompile 'net.lightbody.bmp:browsermob-core:2.1.0-beta-2'
+    testCompile 'net.lightbody.bmp:browsermob-core:2.1.1'
+    testCompile 'net.sourceforge.htmlunit:htmlunit:2.18'
+    testCompile 'org.slf4j:slf4j-log4j12:1.6.4'
+    testCompile 'org.projectlombok:lombok:1.16.6'
 }
 
 

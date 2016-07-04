@@ -5,8 +5,11 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -17,17 +20,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
-@Test(groups = {"VetArticleComments", "Media"})
+@Test(groups = {"VetArticleComments", "VetTests", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
   public void VetArticleComments_001_Provider() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().clear();
+
+    ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
@@ -36,14 +37,20 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(video.getUrl());
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
-    article.submitComment();
-    article.verifyCommentVideo(video.getTitle());
+    article
+        .getArticleComment()
+        .waitForVideo()
+        .submitComment();
+
+    Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getTitle()));
   }
 
   @Test(groups = {"VetArticleComments_002"})
   @Execute(asUser = User.USER)
   public void VetArticleComments_002_Library() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticleContent().clear();
+
+    ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
     VetOptionsComponentObject vetOptions =

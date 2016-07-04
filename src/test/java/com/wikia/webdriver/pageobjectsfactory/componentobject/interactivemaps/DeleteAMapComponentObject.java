@@ -7,10 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Robert 'Rochan' Chan
- */
-
 public class DeleteAMapComponentObject extends BasePageObject {
 
   @FindBy(css = "#intMapsDeleteMapModal .button.primary")
@@ -21,7 +17,7 @@ public class DeleteAMapComponentObject extends BasePageObject {
   private WebElement deleteMapError;
 
   public DeleteAMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public InteractiveMapsPageObject deleteMap() {

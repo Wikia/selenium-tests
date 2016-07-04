@@ -36,7 +36,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   private WebElement secondForumLink;
 
   public ForumManageBoardsPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

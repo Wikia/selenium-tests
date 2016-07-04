@@ -7,31 +7,25 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.HubsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HubBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.HubName;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialManageWikiaHome;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Michal 'justptT' Nowierski
- * @author Robert 'rochan' Chan
- * @ownership Content X-Wing
- */
 public class HubsTests extends NewTestTemplate {
 
   @DataProvider
   private final Object[][] provideHubName() {
-    return new Object[][] { {HubName.VIDEO_GAMES}, {HubName.ENTERTAINMENT}, {HubName.LIFESTYLE}};
+    return new Object[][] {{HubName.VIDEO_GAMES}, {HubName.ENTERTAINMENT}, {HubName.LIFESTYLE}};
   }
 
   @Test(enabled = false, groups = {"HubsTest_001", "Hubs", "Smoke4"},
       dataProviderClass = HubsDataProvider.class, dataProvider = "provideHubDBName")
   public void HubsTest_001_verifyMosaicSliderShowsImagesOnHover(String hubDBName) {
-    HomePageObject home = new HomePageObject(driver);
+    HomePage home = new HomePage();
     HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
     hub.verifyMosaicSliderImages();
 
@@ -54,14 +48,13 @@ public class HubsTests extends NewTestTemplate {
     hub.mosaicSliderVerifyLargeImageDescriptionDifferent(currentLargeImageDescription);
   }
 
-
+  /**
+   * verify that from community module has its elements
+   */
   @Test(groups = {"HubsTest_002", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
-  /**
-   *  verify that from community module has its elements
-   */
   public void HubsTest_002_verifyFromCommunityModuleHasItsElements(String hubDBName) {
-    HomePageObject home = new HomePageObject(driver);
+    HomePage home = new HomePage();
     HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
     hub.verifyFromModuleHasImages();
     hub.verifyFromModuleHasHeadline();
@@ -69,11 +62,12 @@ public class HubsTests extends NewTestTemplate {
     hub.verifyFromModuleHasQuatation();
   }
 
+  /**
+   * click on 'Get Promoted' button verify if modal appears and if its fields/buttons are working
+   * properly
+   */
   @Test(groups = {"HubsTest_003", "Hubs"}, dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
-  /**
-   * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
-   */
   @Execute(asUser = User.USER_2)
   public void HubsTest_003_VerifyArticleSuggestionWorksProperly(String hubDBName) {
     HubBasePageObject hub =
@@ -101,34 +95,34 @@ public class HubsTests extends NewTestTemplate {
   @Test(enabled = false, groups = {"HubsTest_004", "Hubs"})
   @Execute(asUser = User.STAFF)
   public void HubsTests_004_VerifyCorporateSlotCollection() {
-    SpecialManageWikiaHome manageWikia =
-        new HubBasePageObject(driver).openSpecialManageWikiaHomePage(wikiCorporateURL);
+    SpecialManageWikiaHome manageWikia = new SpecialManageWikiaHome().open();
     Map<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
-    HomePageObject home = new HomePageObject(driver).openCorporateHomePage(wikiCorporateURL);
+    HomePage home = new HomePage().open("wikia");
     Map<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
     home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
   }
 
-  @Test(groups = {"HubsTest_005", "Hubs", "new"})
-  @RelatedIssue(issueID = "XW-391", comment = "The japan homepage url changed, please manually verify that "
-      + "language button redirects to proper url i.e. ja.wikia/Wikia. This will fail until MAIN-5376 is fixed")
+  @Test(groups = {"HubsTest_005", "Hubs", "new"}, enabled = false)
+  @RelatedIssue(issueID = "MAIN-5636",
+      comment = "Second issue: MAIN-5377. Product is not about to fix both of the issues. "
+          + "Test disabled")
   /**
-   * Verify that each language drop down  goes to the correct page
+   * Verify that each language drop down goes to the correct page
    */
   public void HubsTest_005_VerifyLanguagesSelection() {
-    HomePageObject home = new HomePageObject(driver);
-    home.openCorporateHomePage(wikiCorporateURL);
+    HomePage home = new HomePage().open("wikia");
     home.verifyLanguageDropdownURLs();
   }
 
   /**
    * Verify that links in WikiaBar are working
    */
-  @Test(dataProvider = "provideHubName", groups = {"HubsTest_007", "Hubs"})
+  @Test(enabled = false, dataProvider = "provideHubName", groups = {"HubsTest_006", "Hubs"})
+  @RelatedIssue(issueID = "MAIN-6092", comment = "Product requested that this test is disabled. New"
+      + "tests will be create wih MAIN-6101")
   public void HubsTest_006_VerifyLinkInWikiaBar(HubName hubName) {
-    HomePageObject home = new HomePageObject(driver);
-    home.logOut(wikiURL);
-    home.openCorporateHomePage(wikiCorporateURL);
+    HomePage home = new HomePage();
+    home.open("wikia");
     HubBasePageObject hub = new HubBasePageObject(driver);
     hub.clickWikiaBarLink(hubName);
     hub.verifyHubTitle(hubName);

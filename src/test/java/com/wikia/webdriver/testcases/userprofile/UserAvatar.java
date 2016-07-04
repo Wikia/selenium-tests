@@ -1,11 +1,11 @@
 package com.wikia.webdriver.testcases.userprofile;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
@@ -15,62 +15,64 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionP
 import org.testng.annotations.Test;
 
 /**
- * @author Karol 'kkarolk' Kujawiak
- * @author Michal 'justnpT' Nowierski
+ * Test uploadAvatar 1. Open user profile page User:Username and add avatar 2. Verify that avatar
+ * appeared on user page, and on global navigation
  *
- *         Test uploadAvatar 1. Open user profile page User:Username and add avatar 2. Verify that
- *         avatar appeared on user page, and on global navigation
+ * Test clickAvatar 1. Open wikia page and click user avatar on global navigation 2. Make sure you
+ * were redirected to User page
  *
- *         Test clickAvatar 1. Open wikia page and click user avatar on global navigation 2. Make
- *         sure you were redirected to User page
- *
- *         Test removeAvatar 1. Open user profile page User:Username and remove avatar 2. Verify
- *         that avatar was removed from user page, and placeholder appeared on global navigation 3.
- *         Log out and verify that avatar is not visible on global navigation
+ * Test removeAvatar 1. Open user profile page User:Username and remove avatar 2. Verify that avatar
+ * was removed from user page, and placeholder appeared on global navigation 3. Log out and verify
+ * that avatar is not visible on global navigation
  */
-@Test(groups = {"AvatarTest"})
+@Test(groups = "userProfile-userAvatar")
 public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
-          + "see comments in defect if test fails. Not possible to test manually")
-  @Test(groups = {"AvatarTest_001"})
+  @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
-  public void uploadAvatar() {
+  public void staffUserCanUploadAvatar() {
     UserProfilePageObject
         profile =
         new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
     AvatarComponentObject avatar = profile.clickEditAvatar();
+    profile.verifyAvatar();
+    String avatarUrl = profile.getAvatarImageSrc();
     avatar.uploadAvatar(PageContent.FILE);
     avatar.saveProfile();
-    profile.verifyAvatar(credentials.userNameStaffId);
+    profile.verifyAvatarChanged(avatarUrl);
+    String changedAvatarUrl = profile.getAvatarImageSrc();
     profile.verifyAvatarVisible();
-    String avatarURL = profile.getAvatarUrl();
-    profile.verifyURLStatus(200, avatarURL);
+    Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
+    profile.verifyURLStatus(200, changedAvatarUrl);
   }
-  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
-          + "see comments in defect if test fails. Not possible to test manually")
-  @Test(groups = {"AvatarTest_002"}, dependsOnMethods = "uploadAvatar")
+
+  @Test(groups = "UserAvatar_clickOnAvatarRedirectsStaffUserToUserPage")
   @Execute(asUser = User.STAFF)
-  public void clickAvatar() {
-    new SpecialVersionPage(driver).open();
+  public void clickOnAvatarRedirectsStaffUserToUserPage() {
+    new SpecialVersionPage().open();
 
     UserProfilePageObject profile = new UserProfilePageObject(driver).clickOnAvatar();
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
-  @RelatedIssue(issueID = "MAIN-5356", comment = "This Wikia code defect is fixed but "
-          + "see comments in defect if test fails. Not possible to test manually")
-  @Test(groups = {"AvatarTest_003"}, dependsOnMethods = "uploadAvatar")
+  @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
-  public void removeAvatar() {
+  @RelatedIssue(issueID = "MAIN-5960", comment =
+      "The Delete avatar button (and windows confirmation popup) " +
+      "have to be clicked twice in order to delete an avatar")
+  public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
+    String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
-    profile.verifyAvatar(URLsContent.AVATAR_GENERIC);
-    profile.verifyAvatarPlaceholder();
-    profile.logOut(driver);
-    profile.verifyAvatarNotPresent();
+    profile.verifyAvatar();
+
+    profile.verifyAvatarChanged(avatarUrl);
+    String changedAvatarUrl = profile.getAvatarImageSrc();
+    profile.verifyAvatarVisible();
+    Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
+    profile.verifyURLStatus(200, changedAvatarUrl);
   }
 }

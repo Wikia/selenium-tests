@@ -9,16 +9,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromoteP
 
 import org.testng.annotations.Test;
 
-/**
- * @author Michal 'justnpT' Nowierski 1. Upload image, put description and put deadline for a Wiki
- */
 public class PromoteTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"PromoteTests_001", "PromoteTests"})
   public void PromoteTests_001_changePromoteElements() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialPromotePageObject promote = base.openSpecialPromotePage(wikiURL);
     promote.typeIntoHeadline(PageContent.LOREM_IPSUM_SHORT);
@@ -28,5 +25,4 @@ public class PromoteTests extends NewTestTemplate {
     promote.modifyThumnailImage(PageContent.FILE2PNG);
     promote.verifyUploadedImage(PageContent.FILE2PNG);
   }
-
 }

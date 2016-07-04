@@ -4,14 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class BaseMonoBookPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".skin-monobook")
@@ -19,9 +14,8 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
   @FindBy(css = "body.oasis-oasis")
   protected WebElement oasisSkinClass;
 
-  public BaseMonoBookPageObject(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
+  public BaseMonoBookPageObject() {
+    super();
   }
 
   public void openWikiPageWithMonobook() {

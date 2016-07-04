@@ -1,63 +1,64 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.proxy.ProxyServer;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriverException;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.net.InetSocketAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
-public class NetworkTrafficInterceptor extends ProxyServer {
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarEntry;
+
+import org.apache.commons.lang.RandomStringUtils;
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriverException;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
   private Har har;
-  private static final int MAX = 8080;
-  private static final int MIN = 7070;
-  private final int portNumber;
-
-  public NetworkTrafficInterceptor() {
-    super();
-    portNumber = MIN + (int) (Math.random() * ((MAX - MIN) + 1));
-  }
 
   public Proxy startSeleniumProxyServer() {
-    try {
-      setPort(portNumber);
-      start();
-      return seleniumProxy();
-    } catch (Exception ex) {
-      throw new WebDriverException(ex);
-    }
+    start();
+
+    return ClientUtil.createSeleniumProxy(this);
   }
 
   public void startIntercepting(String networkTrafficDumpName) {
     this.har = newHar(networkTrafficDumpName);
   }
 
-  public boolean searchRequestUrlInHar(String needle) {
+  public void startIntercepting() {
+    this.har = newHar(RandomStringUtils.random(5));
+  }
+
+  public HarEntry getEntryByUrlPart(String needle) {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(needle)) {
-        return true;
+        return entry;
       }
     }
-    return false;
+    return null;
+  }
+
+  public HarEntry getEntryByUrlPattern(String pattern) {
+    har = getHar();
+    for (HarEntry entry : har.getLog().getEntries()) {
+      if (entry.getRequest().getUrl().matches(pattern)) {
+        return entry;
+      }
+    }
+    return null;
   }
 
   public void checkAssetsStatuses(String domain) {
     har = getHar();
     for (HarEntry entry : har.getLog().getEntries()) {
       if (entry.getRequest().getUrl().contains(domain)) {
-        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(), entry
-            .getRequest().getUrl(), entry.getResponse().getStatus() < 400);
+        PageObjectLogging.log("RESPONSE STATUS: " + entry.getResponse().getStatus(),
+            entry.getRequest().getUrl(), entry.getResponse().getStatus() < 400);
       }
     }
   }
@@ -92,9 +93,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
   }
 
   public void setProxyServer(String ip) {
-    Map<String, String> options = new HashMap<>();
-    options.put("httpProxy", ip);
-    setOptions(options);
+    setChainedProxy(new InetSocketAddress(ip.split(":")[0], 8888));
   }
 
   @Override

@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 public class SpecialRestorePageObject extends WikiBasePageObject {
 
   @FindBy(css = ".mw-undelete-pagetitle")
@@ -21,10 +18,10 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
   private WebElement submitRestore;
 
   public SpecialRestorePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
-  public void verifyArticleName(String articleName) {
+  public void verifyRestoredArticleName(String articleName) {
     wait.forElementVisible(articleToRestore);
     Assertion.assertStringContains(articleToRestore.getText(), articleName);
   }

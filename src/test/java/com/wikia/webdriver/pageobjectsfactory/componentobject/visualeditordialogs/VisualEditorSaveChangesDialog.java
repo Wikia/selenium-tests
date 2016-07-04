@@ -9,10 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Robert 'rochan' Chan
- */
 public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
@@ -43,7 +39,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     wait.forElementInViewPort(reviewChangesButton);
     wait.forElementVisible(savePanel);
     publishButton.click();
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 
   public void verifyRecaptchaIsVisible() {

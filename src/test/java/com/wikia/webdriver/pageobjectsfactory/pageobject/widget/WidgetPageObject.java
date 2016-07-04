@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,19 +11,14 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership: Content X-Wing
- */
-public abstract class WidgetPageObject extends BasePageObject {
+public abstract class WidgetPageObject extends WikiBasePageObject {
 
   @FindBy(css = "strong.error")
   protected WebElement error;
 
   protected WidgetPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
-
-  protected abstract String getArticleName();
 
   protected abstract String getTagName();
 
@@ -44,26 +39,26 @@ public abstract class WidgetPageObject extends BasePageObject {
 
   protected abstract WebElement getWidgetBody();
 
-  public WidgetPageObject create() {
+  public WidgetPageObject create(String articleName) {
     ArticleContent articleContent = new ArticleContent();
-    articleContent.push(getTag(), getArticleName());
+    articleContent.push(getTag(), articleName);
     return this;
   }
 
   /**
    * Create all tags as defined in widget page object tags field on the tested article
    */
-  public WidgetPageObject createMultiple() {
+  public WidgetPageObject createMultiple(String articleName) {
     String text = "";
     ArticleContent articleContent = new ArticleContent();
 
-    articleContent.clear(getArticleName());
+    articleContent.clear(articleName);
 
     for (String tag : getTags()) {
       text += tag + "\n";
     }
 
-    articleContent.push(text, getArticleName());
+    articleContent.push(text, articleName);
 
     return this;
   }
@@ -71,18 +66,10 @@ public abstract class WidgetPageObject extends BasePageObject {
   /**
    * Create incorrect widget tag on the tested article
    */
-  public WidgetPageObject createIncorrect() {
+  public WidgetPageObject createIncorrect(String articleName) {
     ArticleContent articleContent = new ArticleContent();
-    articleContent.clear(getArticleName());
-    articleContent.push(getIncorrectTag(), getArticleName());
-    return this;
-  }
-
-  /**
-   * Navigate to the tested article
-   */
-  public WidgetPageObject navigate(String wikiUrl) {
-    openMercuryArticleByNameWithCbAndNoAds(wikiUrl, getArticleName());
+    articleContent.clear(articleName);
+    articleContent.push(getIncorrectTag(), articleName);
     return this;
   }
 
@@ -120,8 +107,10 @@ public abstract class WidgetPageObject extends BasePageObject {
   }
 
   public boolean isErrorPresent() {
-    boolean result = isElementVisible(error) && error.getText().equals(getErrorMessage());
+    wait.forElementVisible(error);
+    boolean result =  error.getText().equals(getErrorMessage());
     logVisibility(result);
+
     return result;
   }
 
@@ -136,20 +125,23 @@ public abstract class WidgetPageObject extends BasePageObject {
    * method assumes there may be more than one widgets of certain type on the article.
    */
   protected boolean isWidgetVisible(int widgetIndex) {
-    boolean result = true;
+    boolean result;
     List<WebElement> widgetIFrameList = getWidgetIFrameList();
+
     if (widgetIFrameList.isEmpty()) {
       result = false;
     } else {
       WebElement widgetIFrame = widgetIFrameList.get(widgetIndex);
-      if (!isElementVisible(widgetIFrame)) {
-        return false;
-      } else {
-        driver.switchTo().frame(widgetIFrame);
-        result = isElementVisible(getWidgetBody());
-        driver.switchTo().parentFrame();
-      }
+
+      wait.forElementVisible(widgetIFrame);
+      driver.switchTo().frame(widgetIFrame);
+
+      wait.forElementVisible(getWidgetBody());
+      driver.switchTo().parentFrame();
+
+      result = true;
     }
+
     logVisibility(result);
     return result;
   }

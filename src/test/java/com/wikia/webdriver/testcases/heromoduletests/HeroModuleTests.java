@@ -9,8 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.ModularMainPageObject;
 import org.testng.annotations.Test;
 
 /**
- * Created by RodriGomez on 02/04/15.
- * Set of Test Cases found on https://wikia-inc.atlassian.net/browse/DAT-2563
+ * Set of Test Cases: https://wikia-inc.atlassian.net/browse/DAT-2563
  *
  * TC18: Add a new MoM image, refresh the page and verify it is still visible
  * TC04: upload a new image and verify it is displayed immediately
@@ -21,8 +20,6 @@ import org.testng.annotations.Test;
  * TC10: delete description field and then verify a promotional message and Publish button disability
  * TC11: delete text from desc field and click discard to view previous state
  * TC12: delete text from desc field and populate the field with a character to check Publish button is enabled
- *
- * @ownership Content X-Wing
  */
 public class HeroModuleTests extends NewTestTemplate {
 
@@ -73,7 +70,7 @@ public class HeroModuleTests extends NewTestTemplate {
     mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     mom.verifyAdminStaffButtons();
     mom.logOut();
-    mom.loginAs(credentials.userName, credentials.password, wikiURL);
+    mom.loginAs(credentials.userName13, credentials.password13, wikiURL);
     mom.verifyNoAdminStaffButtons();
     mom.logOut();
     mom.verifyNoAdminStaffButtons();

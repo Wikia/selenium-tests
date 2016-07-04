@@ -1,6 +1,8 @@
 package com.wikia.webdriver.testcases.social_buttons_tests;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,10 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @author: Michal 'justnpT' Nowierski
- * @ownership Content X-Wing
- */
 public class SocialButtonsTests extends NewTestTemplate {
 
   private Credentials credentials = Configuration.getCredentials();
@@ -26,9 +24,11 @@ public class SocialButtonsTests extends NewTestTemplate {
   @Test(groups = {"SocialButtons", "SocialButtons_001"}, dataProvider = "SocialButtonsDataProvider")
   public void SocialButtons_001_differentLanguages(String[] credentials,
       String[] expectedSocialNetworks) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials[0], credentials[1], wikiURL);
-    new ArticlePageObject(driver).openRandomArticle(wikiURL);
+    new ArticlePageObject().open();
     SocialButtonsComponentObject buttons = new SocialButtonsComponentObject(driver);
     buttons.verifyShareButtonsPresent();
     String[] currentSocialNetworks = buttons.getShareButtonTitles();

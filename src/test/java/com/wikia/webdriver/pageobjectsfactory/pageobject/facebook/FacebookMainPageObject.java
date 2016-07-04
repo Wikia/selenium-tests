@@ -7,20 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Michal 'justnpT' Nowierski
- */
 public class FacebookMainPageObject extends WikiBasePageObject {
 
-  @FindBy(css = "#email")
+  @FindBy(css = "input[type='email']")
   private WebElement emailField;
-  @FindBy(css = "#pass")
+  @FindBy(css = "input[type='password']")
   private WebElement passwordField;
-  @FindBy(css = "#loginbutton")
+  @FindBy(css = "button[type='button']")
   private WebElement loginButton;
 
   public FacebookMainPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public FacebookUserPageObject login(String facebookEmail, String facebookPassword) {

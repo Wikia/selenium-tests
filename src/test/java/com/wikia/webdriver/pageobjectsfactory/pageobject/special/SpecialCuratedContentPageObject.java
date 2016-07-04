@@ -7,9 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @ownership Content
- */
 public class SpecialCuratedContentPageObject extends SpecialPageObject {
 
   @FindBy(css = "#addItem")
@@ -32,7 +29,7 @@ public class SpecialCuratedContentPageObject extends SpecialPageObject {
   private WebElement lastElementImageWithError;
 
   public SpecialCuratedContentPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
 

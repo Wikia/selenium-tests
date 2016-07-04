@@ -11,11 +11,6 @@ import org.testng.annotations.Test;
 
 import java.util.EnumSet;
 
-/**
- * @author Qaga
- * @ownership Content X-Wing
- */
-
 public class WamPageTests extends NewTestTemplate {
 
   private WamPageObject wam;
@@ -52,8 +47,6 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyWamIndexPageFirstColumn(1, 20);
     wam.clickNextPaginator();
     wam.verifyWamIndexPageFirstColumn(21, 40);
-    wam.clickNextPaginator();
-    wam.verifyWamIndexPageFirstColumn(41, 60);
   }
 
   @Test(groups = {"WamPage004", "WamPageTests"})
@@ -66,6 +59,7 @@ public class WamPageTests extends NewTestTemplate {
   }
 
   @Test(groups = {"wamPage_005", "WamPageTests"})
+  @RelatedIssue(issueID = "MAIN-7392", comment = "test manually. Unable to reproduce defect")
   public void wam_005_testDatePicker() {
     wam.verifyTodayDateInDatePicker();
     String lastMonthDate = wam.changeDateToLastMonth();

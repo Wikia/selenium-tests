@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".linkEditorDialog > div")
@@ -24,7 +21,7 @@ public class MessageWallAddLinkComponentObject extends WikiBasePageObject {
       By.cssSelector(".linkEditorDialog > div tr:nth-child(1) input[value = ext]");
 
   public MessageWallAddLinkComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private void typeTargetAndText(String target, String text) {

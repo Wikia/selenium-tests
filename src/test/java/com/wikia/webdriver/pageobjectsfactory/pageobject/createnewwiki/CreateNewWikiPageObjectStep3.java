@@ -14,9 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Karol
- */
 public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
   private static final String DATA_THEME_LIST = "li[data-theme]";
@@ -27,7 +24,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
   private WebElement submitButton;
 
   public CreateNewWikiPageObjectStep3(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
@@ -42,7 +39,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 90).until(CommonExpectedConditions
+      new WebDriverWait(driver, 180).until(CommonExpectedConditions
           .elementNotPresent(loadingIndicatorBy));
     } finally {
       restoreDeaultImplicitWait();
@@ -50,6 +47,6 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
     scrollAndClick(submitButton);
     PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

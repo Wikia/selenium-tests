@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class PreviewEditModePageObject extends EditMode {
 
   @FindBy(css = ".modalWrapper.preview")
@@ -31,7 +28,7 @@ public class PreviewEditModePageObject extends EditMode {
   String videoPostionSelector = "figure.t%position%";
 
   public PreviewEditModePageObject(WebDriver driver) {
-    super(driver);
+    super();
     wait.forElementVisible(previewModal);
   }
 

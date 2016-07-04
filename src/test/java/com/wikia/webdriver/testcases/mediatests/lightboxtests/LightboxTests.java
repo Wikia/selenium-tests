@@ -5,8 +5,12 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
@@ -18,80 +22,69 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedVideosPage;
 
 /**
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong 1. Open lightbox from Special:UnusedFiles page 2. Open lightbox from
- *         Special:UnusedVideos page 3. Open lightbox from Special:UncategorizedFiles page 4. Open
- *         lightbox from Special:MostLinkedFiles page 5. Open lightbox from article image and verify
- *         social buttons 6. Open lightbox from article image and verify carousel 7. Open lightbox
- *         from Special:Videos and verify video
- * 
- *         8. Open lightbox from Special:Videos, verify title url and verify file page (logged-in
- *         user)
- * 
- *         9. Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
- *         user)
- * @author Saipetch Kongkatong
- * 
- *         1. Open lightbox from latest photo, 3. Open lightbox from Special:UnusedFiles page 4.
- *         Open lightbox from Special:UnusedVideos page 5. Open lightbox from
- *         Special:UncategorizedFiles page 6. Open lightbox from Special:MostLinkedFiles page 7.
- *         Open lightbox from article image and verify social buttons 8. Open lightbox from article
- *         image and verify carousel 9. Open lightbox from Special:Videos and verify video 10. Open
- *         lightbox from Special:Videos, verify title url and verify file page (logged-in user) 11.
- *         Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in
- *         user)
- *
- * @ownership Content X-Wing
+ * 1. Open lightbox from Special:UnusedFiles page 2. Open lightbox from Special:UnusedVideos page 3.
+ * Open lightbox from Special:UncategorizedFiles page 4. Open lightbox from Special:MostLinkedFiles
+ * page 5. Open lightbox from article image and verify social buttons 6. Open lightbox from article
+ * image and verify carousel 7. Open lightbox from Special:Videos and verify video 8. Open lightbox
+ * from Special:Videos, verify title url and verify file page (logged-in user) 9. Open lightbox from
+ * Special:NewFiles, verify title url and verify file page (logged-in user)
  */
+@Test(groups = {"LightboxTest", "Media"})
 public class LightboxTests extends NewTestTemplate {
 
+  private static final String BROWSER_SIZE = "1400x720";
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"LightboxTest", "LightboxTest_001", "Media"})
+  @Test(groups = "LightboxTest_001")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_001_unusedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
+    LightboxComponentObject lightbox =
+        new SpecialUnusedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
+
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_002", "Media"})
+  @Test(groups = "LightboxTest_002")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_002_unusedVideos() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridVideo(0);
+    LightboxComponentObject lightbox =
+        new SpecialUnusedVideosPage().open().getGalleryGrid().openLightboxForGridVideo(0);
+
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_003", "Media"})
+  @Test(groups = "LightboxTest_003")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_003_uncategorizedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialUncategorizedFilesPageObject unusedFiles =
-        base.openSpecialUncategorizedFilesPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
+    LightboxComponentObject lightbox =
+        new SpecialUncategorizedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
+
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_004", "Media"})
+  @Test(groups = "LightboxTest_004")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_004_mostLinkedFiles() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
-    LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
+    LightboxComponentObject lightbox =
+        new SpecialMostLinkedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
+
     lightbox.verifyLightboxPopup();
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_005", "Media"})
+  @Test(groups = "LightboxTest_005")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject().open();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clearContent();
     PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
     PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
@@ -121,9 +114,10 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxClosed();
   }
 
-  @Test(groups = {"LightboxTest", "Lightbox_006", "Media"})
+  @Test(groups = "Lightbox_006")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_006_verifyCarousel() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.clickPinButton();
@@ -132,9 +126,10 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyCarouselLeftDisabled();
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_007", "Media"})
+  @Test(groups = "LightboxTest_007")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_007_specialVideo() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
@@ -145,11 +140,11 @@ public class LightboxTests extends NewTestTemplate {
    * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file
    * page (logged-in user)
    */
-  @Test(groups = {"LightboxTest", "LightboxTest_008", "Media"})
-  @Execute(asUser = User.STAFF, disableFlash = "false")
+  @Test(groups = "LightboxTest_008")
+  @Execute(asUser = User.USER, disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_008_filepage_video() {
-    SpecialVideosPageObject specialVideos =
-        new WikiBasePageObject(driver).openSpecialVideoPage(wikiURL);
+    SpecialVideosPageObject specialVideos = new WikiBasePageObject().openSpecialVideoPage(wikiURL);
 
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
@@ -157,15 +152,17 @@ public class LightboxTests extends NewTestTemplate {
     FilePagePageObject filePage = lightbox.clickTitle();
     filePage.verifyTabsExistVideo();
     filePage.verifyEmbeddedVideoIsPresent();
-    filePage.verifyVideoAutoplay(true);
   }
 
-  @Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
   /**
-   * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
+   * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file
+   * page (logged-in user)
    */
+  @Test(groups = "LightboxTest_009")
+  @RelatedIssue(issueID = "MAIN-6170", comment = "Test manually")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void LightboxTest_009_filepage_image() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
@@ -179,5 +176,4 @@ public class LightboxTests extends NewTestTemplate {
     FilePagePageObject filePage = lightbox.clickTitle();
     filePage.verifyTabsExistImage();
   }
-
 }

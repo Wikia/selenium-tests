@@ -10,9 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class SlideshowBuilderComponentObject extends BasePageObject {
 
   @FindBy(css = "#WikiaPhotoGallerySlideshowAddImage")
@@ -23,16 +20,7 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
   private WebElement finishButton;
 
   public SlideshowBuilderComponentObject(WebDriver driver) {
-    super(driver);
-    // TODO Auto-generated constructor stub
-  }
-
-  public void adjustWidth(int width) {
-    //TODO
-  }
-
-  public void useSmartCropping() {
-    //TODO
+    super();
   }
 
   public enum Positions {
@@ -67,5 +55,4 @@ public class SlideshowBuilderComponentObject extends BasePageObject {
     finishButton.click();
     PageObjectLogging.log("clickFinish", "finish button clicked", true);
   }
-
 }

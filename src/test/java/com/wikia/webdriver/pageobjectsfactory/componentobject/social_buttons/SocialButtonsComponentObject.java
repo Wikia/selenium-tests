@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
-/**
- * @author Michal 'justnpT' Nowierski
- */
 public class SocialButtonsComponentObject extends WikiBasePageObject {
 
   @FindBys(@FindBy(css = "#PageShareToolbar svg"))
@@ -21,7 +18,7 @@ public class SocialButtonsComponentObject extends WikiBasePageObject {
   protected List<WebElement> shareButtonLinks;
 
   public SocialButtonsComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**

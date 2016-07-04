@@ -13,7 +13,7 @@ public class SpecialEditHubPageObject extends BasePageObject {
   private WebElement edithubDashboardCalendar;
 
   public SpecialEditHubPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyCalendarAppears() {

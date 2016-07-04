@@ -7,13 +7,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.VideoHome
 
 import org.testng.annotations.Test;
 
-/**
- * Created by Liz Lee on 6/4/14.
- * @ownership Content X-Wing
- */
 public class VideoHomePageTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoHomePage_001", "Media", "VideoHomePageTests"})
+  @Test(groups = {"VideoHomePage_001", "Media", "VideoHomePageTests", "VideosPage"})
   @Execute(onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoHomePage_001_FeaturedVideoSlider() {
     VideoHomePageObject videoHomePageObject = new VideoHomePageObject(driver).open();

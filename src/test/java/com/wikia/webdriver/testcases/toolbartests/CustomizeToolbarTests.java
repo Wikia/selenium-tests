@@ -1,19 +1,19 @@
 package com.wikia.webdriver.testcases.toolbartests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.CustomizedToolbarComponentObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 @Test(groups = {"Toolbar", "CustomizeToolbar"})
 public class CustomizeToolbarTests extends NewTestTemplate {
+
+  private static final String BROWSER_SIZE = "800x600";
 
   CustomizedToolbarComponentObject toolbar;
 
@@ -51,8 +51,9 @@ public class CustomizeToolbarTests extends NewTestTemplate {
     toolbar.verifyToolOnToolbar(toolPreferences);
   }
 
-  @Test(groups = {"CustomizeToolbar002"})
+  @Test(groups = "CustomizeToolbar002")
   @Execute(asUser = User.USER_2)
+  @RelatedIssue(issueID = "SUS-130", comment = "check ticket status and test manually if nothing else breaks")
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
   public void CustomizeToolbar002_Editing() {
     toolbar.clickCustomize();
@@ -84,6 +85,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar004"})
   @Execute(asUser = User.USER_2)
+  @RelatedIssue(issueID = "SUS-130", comment = "check ticket status and test manually if nothing else breaks")
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
   public void CustomizeToolbar004_Finding() {
     toolbar.clickCustomize();
@@ -97,6 +99,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar005"})
   @Execute(asUser = User.USER_2)
+  @RelatedIssue(issueID = "SUS-130", comment = "check ticket status and test manually if nothing else breaks")
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
   public void CustomizeToolbar005_ResetDefaults() {
     toolbar.clickCustomize();
@@ -116,7 +119,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar006"})
   @Execute(asUser = User.USER_2)
- // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
+  // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
   public void CustomizeToolbar006_ButtonsActions() {
     toolbar.unfollowIfFollowed();
     toolbar.verifyToolOnToolbar(toolFollow);
@@ -135,12 +138,14 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @Test(groups = {"CustomizeToolbar007"})
   @Execute(asUser = User.USER_2)
+  @InBrowser(browserSize = BROWSER_SIZE)
+  @RelatedIssue(issueID = "SUS-130", comment = "check ticket status and test manually if nothing else breaks")
   public void CustomizeToolbar007_MoreButton() {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.addManyItems(toolPreferences, 8);
     toolbar.clickSave();
-    setWindowSize(800, 600, driver);
+    toolbar.waitForCustomizeToolbarModalToDisappear();
     toolbar.refreshPage();
     toolbar.verifyToolOnToolbar(toolMore);
     toolbar.openMoreMenu();

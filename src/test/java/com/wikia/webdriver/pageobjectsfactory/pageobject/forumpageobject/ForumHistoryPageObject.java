@@ -16,7 +16,7 @@ public class ForumHistoryPageObject extends WikiBasePageObject {
   private WebElement creatorActionCell;
 
   public ForumHistoryPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

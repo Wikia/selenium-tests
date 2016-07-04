@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -14,12 +15,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
-
-/**
- * @author liz_lux
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong
- */
 
 public class FilePagePageObject extends WikiBasePageObject {
 
@@ -56,15 +51,24 @@ public class FilePagePageObject extends WikiBasePageObject {
   @FindBy(css = ".boilerplate b")
   private WebElement imgLicensePlate;
   @FindBy(css = ".tabBody.selected")
-
   private WebElement tabBody;
 
   public FilePagePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
-  public FilePagePageObject(WebDriver driver, String fileName) {
-    super(driver);
+  public FilePagePageObject open(String fileName, boolean noRedirect) {
+    String url = urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
+    if (noRedirect) {
+      url = urlBuilder.appendQueryStringToURL(url, "redirect=no");
+    }
+    getUrl(url);
+
+    return this;
+  }
+
+  public FilePagePageObject open(String fileName) {
+    return  open(fileName, false);
   }
 
   public void clickTab(int tab) {

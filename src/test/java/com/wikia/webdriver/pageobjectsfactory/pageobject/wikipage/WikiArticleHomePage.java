@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class WikiArticleHomePage extends WikiArticlePageObject {
 
-  @FindBy(css = "#HOME_TOP_LEADERBOARD")
+  @FindBy(css = "#HOME_TOP_RIGHT_BOXAD")
   private WebElement wikiHomePageSpecificElement;
 
   public WikiArticleHomePage(WebDriver driver) {

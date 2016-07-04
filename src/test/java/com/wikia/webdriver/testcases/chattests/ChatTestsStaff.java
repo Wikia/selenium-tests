@@ -1,123 +1,94 @@
 package com.wikia.webdriver.testcases.chattests;
 
-import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
-
-import org.openqa.selenium.WebDriver;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 import org.testng.annotations.Test;
 
-/**
- * @author Rebekah Cunningham (modified from ChatTests to test only Staff functionality)
- * @description 1. Two staff users enter Chat 2. Verify switching between main and private message
- * sections when one of the users has written public message 6. Verify switching between main and
- * private message sections when one of the users has written private message 7. Verify non-staff
- * users do not have permission to chat.
- */
-public class ChatTestsStaff extends NewTestTemplate_TwoDrivers {
+public class ChatTestsStaff extends NewTestTemplate {
+
+  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
+  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private Credentials credentials = Configuration.getCredentials();
 
-  private ChatPageObject openChatForUser(
-      WebDriver driver, String userName, String password
-  ) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+  private ChatPage openChatForUser(String userName, String password) {
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(userName, password, wikiURL);
-    return base.openChat(wikiURL);
+    return new ChatPage().open();
   }
 
-    @DontRun(env = {"sandbox"})
-  @Test(groups = {"ChatTestsStaff_001", "ChatStaff"})
-  public void ChatTestsStaff_001_twoUserEnterChat() {
-    switchToWindow(driverOne);
-    ChatPageObject chatUserOne = openChatForUser(
-        driverOne, credentials.userNameStaff, credentials.passwordStaff
-    );
-    chatUserOne.verifyChatPage();
+  @Test(groups = {"ChatStaff", "ChatTests"})
+  public void verifyStaffUsersCanSwitchBetweenMainAndPrivateSections() {
+    ChatPage chatUserOne =
+        openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
-    switchToWindow(driverTwo);
-    ChatPageObject chatUserTwo = openChatForUser(
-        driverTwo, credentials.userNameStaff2, credentials.passwordStaff2
-    );
-    chatUserTwo.verifyChatPage();
-    switchToWindow(driverOne);
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserTwo =
+        openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserTwo.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
-    chatUserOne.verifyUserJoinToChatMessage(credentials.userNameStaff2);
-  }
-
-    @DontRun(env = {"sandbox"})
-  @Test(groups = {"ChatTestsStaff_002", "ChatStaff"})
-  public void ChatTestsStaff_002_verifySwitchingBetweenMainAndPrivateSections() {
-    switchToWindow(driverOne);
-    ChatPageObject chatUserOne = openChatForUser(
-        driverOne, credentials.userNameStaff, credentials.passwordStaff
-    );
-
-    switchToWindow(driverTwo);
-    ChatPageObject chatUserTwo = openChatForUser(
-        driverTwo, credentials.userNameStaff2, credentials.passwordStaff2
-    );
-
-    String userTwoMessage = chatUserTwo.generateMessageFromUser(credentials.userNameStaff2);
-    chatUserTwo.writeOnChat(userTwoMessage);
-
-    switchToWindow(driverOne);
-    chatUserOne.verifyMessageOnChat(userTwoMessage);
-
+    switchToWindow(0);
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
     chatUserOne.selectPrivateMessageToUser(credentials.userNameStaff2);
-    chatUserOne.verifyPrivateMessageHeader();
-    chatUserOne.verifyPrivateMessageIsHighlighted(credentials.userNameStaff2);
-    chatUserOne.verifyPrivateChatTitle();
-
+    Assertion.assertTrue(chatUserOne.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserOne.clickOnMainChat();
-    chatUserOne.verifyMainChatIsHighlighted();
-    chatUserOne.verifyMessageOnChat(userTwoMessage);
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
-    @DontRun(env = {"sandbox"})
-  @Test(groups = {"ChatTestsStaff_003", "ChatStaff"})
-  public void ChatTestsStaff_003_sendPrivateMessage() {
-    switchToWindow(driverOne);
-    ChatPageObject chatUserOne = openChatForUser(
-        driverOne, credentials.userNameStaff, credentials.passwordStaff
-    );
+  @Test(groups = {"ChatStaff", "ChatTests"})
+  public void staffUserCanSendPrivateMessage() {
+    ChatPage chatUserOne =
+        openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
-    switchToWindow(driverTwo);
-    ChatPageObject chatUserTwo = openChatForUser(
-        driverTwo, credentials.userNameStaff2, credentials.passwordStaff2
-    );
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserTwo =
+        openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserTwo.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
-    String userTwoPublicMessage = chatUserTwo.generateMessageFromUser(credentials.userNameStaff2);
-    chatUserTwo.writeOnChat(userTwoPublicMessage);
+    switchToWindow(0);
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
 
-    switchToWindow(driverOne);
-    chatUserOne.verifyMessageOnChat(userTwoPublicMessage);
-
-    switchToWindow(driverTwo);
-    String userTwoPrivateMessage = chatUserTwo.generateMessageFromUser(credentials.userNameStaff2);
+    switchToWindow(1);
     chatUserTwo.selectPrivateMessageToUser(credentials.userNameStaff);
-    chatUserTwo.writeOnChat(userTwoPrivateMessage);
+    Assertion.assertTrue(chatUserTwo.isPrivateMessageHeaderDisplayed());
+    chatUserTwo.writeOnChat(MESSAGE_ON_PRIVATE_CHAT);
 
-    switchToWindow(driverOne);
-    chatUserOne.verifyPrivateMessageHeader();
-    chatUserOne.verifyPrivateMessageNotification();
+    switchToWindow(0);
+    Assertion.assertTrue(chatUserOne.isPrivateMessageHeaderDisplayed(), "PRIVATE MESSAGE HEDER IS DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isPrivateMessageNotificationDisplayed(), "PRIVATE MESSAGE HEDER IS DISPLAYED");
     chatUserOne.clickOnUserInPrivateMessageSection(credentials.userNameStaff2);
-    chatUserOne.verifyMessageOnChat(userTwoPrivateMessage);
+    Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
   }
 
-  @DontRun(env = {"prod", "sandbox"})
-  @Test(groups = {"ChatTestsStaff_004", "ChatStaff"})
-  public void ChatTestsStaff_004_basicUserChatFails() {
+  @Test(groups = {"ChatStaff", "ChatTests"})
+  public void staffOptionsAreNotDisplayedOnOtherStaffUser() {
+    openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
-    switchToWindow(driverOne);
-    ChatPageObject chatUserOne = openChatForUser(
-        driverOne, credentials.userName, credentials.password
-    );
-    SpecialPageObject special = new SpecialPageObject(driver);
-    special.verifyPageHeader("Permissions error");
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserStaff2 = openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserStaff2.clickOnDifferentUser(credentials.userNameStaff);
+    Assertion.assertFalse(chatUserStaff2.areStaffOptionsDisplayed(), "STAFF OPTIONS ARE DISPLAERD");
+  }
+
+  @Test(groups = {"ChatStaff", "ChatTests"})
+  public void staffUserCanNotBlockPrivateMessages() {
+    openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
+
+    switchToWindow(1);
+    new SpecialVersionPage().open();
+    ChatPage chatUserStaff2 = openChatForUser(credentials.userNameStaff2, credentials.passwordStaff2);
+    chatUserStaff2.selectPrivateMessageToUser(credentials.userNameStaff);
+    Assertion.assertTrue(chatUserStaff2.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
+    chatUserStaff2.clickOnUserInPrivateMessageSection(credentials.userNameStaff);
+    Assertion.assertFalse(chatUserStaff2.isBlockPrivateMessageButtonDisplayed(), "BLOCK PRIVATE MESSAGE BUTTON IS DISPLAYED");
   }
 }

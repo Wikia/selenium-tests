@@ -8,16 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Michal 'justnpT' Nowierski
- */
 public class FacebookUserPageObject extends WikiBasePageObject {
 
   @FindBy(css = "a[href$='?ref=logo']")
   private WebElement pageLogo;
 
   public FacebookUserPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyPageLogo() {

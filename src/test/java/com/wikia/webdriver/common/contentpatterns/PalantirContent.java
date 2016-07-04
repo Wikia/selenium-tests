@@ -1,10 +1,5 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-/*
- * @author: Łukasz Nowak
- * @ownership: Mobile Web
- */
-
 public class PalantirContent {
 
   private String success;

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateAMapComponentObject;
@@ -21,11 +21,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'Rochan' Chan
- * @ownership Contribution VE-1337 - Adding existing map onto article VE-1337 - Checking empty state
- *            dialog on wiki with no maps VE-1351 - Adding map in a empty state
- */
 @Test(groups = {"VEAddMap"})
 public class VEAddMapTests extends NewTestTemplate {
 

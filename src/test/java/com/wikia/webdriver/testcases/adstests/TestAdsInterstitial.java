@@ -7,9 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsInterstitial
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEng
- */
 public class TestAdsInterstitial extends TemplateNoFirstLoad {
 
   @Test(

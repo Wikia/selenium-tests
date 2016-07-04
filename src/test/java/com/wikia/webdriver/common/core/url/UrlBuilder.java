@@ -1,9 +1,8 @@
 package com.wikia.webdriver.common.core.url;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 
 public class UrlBuilder {
 
@@ -13,8 +12,8 @@ public class UrlBuilder {
   private String env;
 
   public UrlBuilder() {
-    env = Configuration.getEnv();
-    browser = Configuration.getBrowser();
+    this.env = Configuration.getEnv();
+    this.browser = Configuration.getBrowser();
   }
 
   public UrlBuilder(String env) {
@@ -38,25 +37,16 @@ public class UrlBuilder {
     String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
     url = url + separator + wikiPath;
 
+    String qs = Configuration.getQS();
+    if (StringUtils.isNotBlank(qs)) {
+      url = appendQueryStringToURL(url, qs);
+    }
+
     return url;
   }
 
-  public String getUrlForPathWithoutWiki(String wikiName, String wikiPath) {
-    return getUrlForWiki(wikiName) + wikiPath;
-  }
-
-  /**
-   * Returns URL with www (world wide web) in the domain.
-   *
-   * @param wikiName name of the wiki
-   * @param wikiPath the part of url path that should appear after resource indicator /wiki/
-   */
-  public String getWebUrlForPath(String wikiName, String wikiPath) {
-    String url = getWebUrlForWiki(wikiName);
-    String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
-    url = url + separator + wikiPath;
-
-    return url;
+  public String getUrlForPath(String wikiPath) {
+    return getUrlForPath(Configuration.getWikiName(), wikiPath);
   }
 
   public String getUrlForWiki() {
@@ -64,53 +54,29 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki(String wikiName) {
-    String prefix = getUrlPrefix(wikiName);
-    String suffix = getUrlSuffix(wikiName);
+    String prefix = "wikia".equals(wikiName) ? "www." : "";
+    String suffix;
 
-    return composeUrl(prefix, wikiName, suffix);
-  }
+    if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV)) {
+      String devBoxOwner = env.split("-")[1];
 
-  /**
-   * Returns URL with www (world wide web) in the domain, without the path part
-   */
-  public String getWebUrlForWiki(String wikiName) {
-    String prefix = "www.";
-    String suffix = getUrlSuffix(wikiName);
+      suffix = "." + devBoxOwner + "." + "wikia-dev.com";
+    } else {
+      suffix = wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
+    }
 
     return composeUrl(prefix, wikiName, suffix);
   }
 
   public String appendQueryStringToURL(String url, String qs) {
     String separator = url.contains("?") ? "&" : "?";
-    return url + separator + qs;
-  }
 
-  private String getUrlPrefix(String wikiName) {
-    return "wikia".equals(wikiName) ? "www." : "";
-  }
-
-  private String getUrlSuffix(String wikiName) {
-    if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV)) {
-      String devBoxOwner = env.split("-")[1];
-      return "." + devBoxOwner + "." + "wikia-dev.com";
+    String[] filteredUrl = url.split("#");
+    if (filteredUrl.length > 1) {
+      return filteredUrl[0] + separator + qs + "#" + filteredUrl[1];
+    } else {
+      return url + separator + qs;
     }
-
-    return wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
-  }
-
-  /**
-   * Return url path i.e. from mlp.wikia.com/wiki/Main_Page returns /wiki/Main_Page
-   * 
-   * @param driver WebDriver
-   * @return String
-   */
-  public String getUrlPath(WebDriver driver) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return js.executeScript("return location.pathname").toString();
-  }
-
-  private Boolean isMercuryBrowser() {
-    return browser != null && "CHROMEMOBILEMERCURY".equalsIgnoreCase(browser);
   }
 
   private String composeUrl(String prefix, String wikiName, String suffix) {
@@ -121,12 +87,44 @@ public class UrlBuilder {
         overwrittenPrefix = env + "." + prefix;
       }
 
-      if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV) && !isMercuryBrowser()
-          && wikiName.endsWith("wikia")) {
+      if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV) &&
+          !"CHROMEMOBILEMERCURY".equalsIgnoreCase(browser) && wikiName.endsWith("wikia")) {
         overwrittenWikiName = "wikiaglobal";
       }
     }
 
     return "http://" + overwrittenPrefix + overwrittenWikiName + suffix + "/";
+  }
+
+  public static String getUrlForPageWithWWW(String pageName) {
+    String environment = Configuration.getEnv();
+    String wikiName = Configuration.getWikiName();
+
+    environment = environment.equals("prod") ? "" : environment + ".";
+    wikiName = wikiName.equals("wikia") ? "" : wikiName + ".";
+
+    return environment + "www." + wikiName + "wikia.com" + pageName;
+  }
+
+  public static String getHostForWiki() {
+    String environment = Configuration.getEnv();
+    String wikiName = Configuration.getWikiName();
+
+    environment = environment.equals("prod") ? "" : environment + ".";
+    wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
+
+    return environment + wikiName + "wikia.com";
+  }
+
+  public static String getUrlForPage(String pageName) {
+    return getHostForWiki() + pageName;
+  }
+
+  public static String getUrl(String wikiName, String path) {
+    String environment = Configuration.getEnv();
+
+    environment = environment.equals("prod") ? "" : environment + ".";
+
+    return "http://" + environment + wikiName + ".wikia.com" + path;
   }
 }

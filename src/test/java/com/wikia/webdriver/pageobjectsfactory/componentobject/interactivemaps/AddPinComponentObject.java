@@ -13,11 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author Łukasz Nowak (Dyktus)
- */
-
 public class AddPinComponentObject extends BasePageObject {
 
   @FindBy(css = "input[name=name]")
@@ -44,7 +39,7 @@ public class AddPinComponentObject extends BasePageObject {
   private WebElement errorField;
 
   public AddPinComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clearPinName() {

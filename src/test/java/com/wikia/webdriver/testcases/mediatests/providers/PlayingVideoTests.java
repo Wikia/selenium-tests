@@ -1,34 +1,31 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
 import org.testng.annotations.Test;
-
-/**
- * @author Saipetch Kongkatong, Liz Lee
- * @ownership Content X-Wing
- */
 
 public class PlayingVideoTests extends NewTestTemplate {
 
+  private static final String BROWSER_SIZE = "1400x720";
+
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
-  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123")
+  @Execute(onWikia = "sktest123", disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_001_ooyala() {
-    String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateLightbox";
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     article.verifyVideo();
 
     LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
     lightbox.verifyLightboxVideo();
-    lightbox.verifyVideoAutoplay(providerName);
 
     VideoComponentObject video;
     video = lightbox.getVideoPlayer();
@@ -39,16 +36,16 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
-  @Execute(asUser = User.USER, disableFlash = "false", onWikia = "sktest123")
+  @Execute(onWikia = "sktest123", disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_002_ooyala() {
-    String providerName = "ooyala";
     String articleName = "VideoOoyalaAgegateInline";
 
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     article.verifyVideo();
 
     VideoComponentObject video = article.clickThumbnailVideoInline();
-    article.verifyVideoAutoplay(providerName);
+
     video.verifyVideoEmbedWidth();
     video.verifyVideoOoyalaAgeGate();
     video.verifyVideoObjectVisible();
@@ -56,7 +53,8 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
-  @Execute(disableFlash = "false", onWikia = "sktest123")
+  @Execute(onWikia = "sktest123", disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
     String providerName = "ign";
@@ -75,8 +73,11 @@ public class PlayingVideoTests extends NewTestTemplate {
     video.verifyVideoIgnEmbed();
   }
 
-  @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @Execute(disableFlash = "false", onWikia = "sktest123")
+  @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
+  @RelatedIssue(issueID = "QAART-750", comment = "Test disabled as Selenium doesn't allow to access"
+                                                + "elements with <object> tag. Check after Selenium update.")
+  @Execute(onWikia = "sktest123", disableFlash = "false")
+  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";
@@ -91,7 +92,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
     VideoComponentObject video = lightbox.getVideoPlayer();
     video.verifyVideoEmbedWidth();
-    video.verifyVideoObjectVisible();
+    video.verifyFlashVideoObjectVisible();
     video.verifyVideoAnyclipEmbed();
   }
 }

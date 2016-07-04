@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership: Content X-Wing
- */
 public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = ".PDS_Poll")
@@ -18,7 +15,6 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   By polldaddyBody = By.cssSelector("*");
 
   private static final String TAG_NAME = "pollydaddy";
-  private static final String ARTICLE_NAME = "PolldaddyWidget";
   private static final String[] TAGS = {
       "<polldaddy id=\"8956579\"/>",
       "<polldaddy id=\"9022741\"/>"
@@ -29,10 +25,6 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
 
   public PolldaddyWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {
@@ -70,18 +62,10 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   }
 
   protected boolean isWidgetVisible(int widgetIndex) {
-    boolean result = true;
-    if (polldaddyDivList.isEmpty()) {
-      result = false;
-    } else {
-      WebElement polldaddyWidget = polldaddyDivList.get(widgetIndex);
-      if (!isElementVisible(polldaddyWidget)) {
-        return false;
-      } else {
-        result = isElementVisible(polldaddyWidget.findElement(polldaddyBody));
-      }
-    }
-    logVisibility(result);
-    return result;
+    WebElement polldaddyWidget = polldaddyDivList.get(widgetIndex);
+    wait.forElementVisible(polldaddyWidget);
+    wait.forElementVisible(polldaddyWidget.findElement(polldaddyBody));
+
+    return true;
   }
 }

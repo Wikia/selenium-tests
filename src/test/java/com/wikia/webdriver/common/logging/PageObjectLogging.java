@@ -6,26 +6,31 @@ import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
@@ -122,18 +127,18 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   /**
-   * Log an action that is not user facing.
-   * Log file reader can hide these actions to increase test readability
+   * Log an action that is not user facing. Log file reader can hide these actions to increase test
+   * readability
    */
   public static void logOnLowLevel(String command, String description, boolean success) {
     log(command, description, success, true);
   }
 
-  private static void log(String command, String description, boolean success, boolean ifLowLevel) {
-    logsResults.add(success);
+  private static void log(String command, String description, boolean isSuccess, boolean ifLowLevel) {
+    logsResults.add(isSuccess);
     String escapedDescription = escapeHtml(description);
 
-    String className = success ? "success" : "error";
+    String className = isSuccess ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     if (ifLowLevel) {
       builder.append("<tr class=\"" + className + " lowLevelAction" + "\"><td>" + command
@@ -143,7 +148,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                      + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(NewDriverProvider.getWebDriver());
+    logJSError(DriverProvider.getActiveDriver());
   }
 
   public static void logError(String command, Exception exception) {
@@ -161,6 +166,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     StringBuilder builder =
         new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command + "</td>" + "<td>"
                                    + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
+    CommonUtils.appendTextToFile(logPath, builder.toString());
+  }
+
+  /**
+   * This method will log info to log file (line in blue color)
+   */
+  public static void logInfo(String description) {
+    StringBuilder builder =
+        new StringBuilder().append("<tr class=\"info\"><td>INFO</td><td>"
+                                   + description + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -232,6 +247,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
+    new JavascriptActions(driver).execute("window.stop()");
     StringBuilder builder = new StringBuilder();
     builder.append(
         "<tr class=\"success\"><td>Navigate to</td><td>" + "<a href='" + url + "'>" + url
@@ -259,15 +275,55 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       logWarning("Url after navigation", "Unable to check URL after navigation - alert present");
     }
 
-    Method method = TestContext.getCurrentTestMethod();
+    if (driver.getCurrentUrl().contains(Configuration.getWikiaDomain())) {
+      //HACK FOR DISABLING NOTIFICATIONS
+      try {
+        new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
+      }catch (WebDriverException e){
 
-    if (method.isAnnotationPresent(Execute.class) && TestContext.isIsFirstLoad()) {
-      TestContext.setFirstLoad(false);
-      User user = method.getAnnotation(Execute.class).asUser();
-      if (user == User.ANONYMOUS) {
-      } else {
-        new WikiBasePageObject(driver).loginAs(user);
       }
+
+      /**
+       * We want to disable sales pitch dialog for new potential contributors
+       * to avoid hiding other UI elements.
+       * see https://wikia-inc.atlassian.net/browse/CE-3768
+       */
+      if ("true".equals(Configuration.getDisableCommunityPageSalesPitchDialog())) {
+        driver.manage().addCookie(
+            new Cookie("cpBenefitsModalShown", "1", Configuration.getWikiaDomain(), null, null));
+      }
+
+      if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
+        driver.manage().addCookie(
+            new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
+                       Configuration.getWikiaDomain(), null, null));
+      }
+    }
+
+    Method method = TestContext.getCurrentTestMethod();
+    Class<?> declaringClass = method.getDeclaringClass();
+
+    if (TestContext.isFirstLoad()) {
+      User user = null;
+      TestContext.setFirstLoad(false);
+
+      if (declaringClass.isAnnotationPresent(Execute.class)) {
+        user = declaringClass.getAnnotation(Execute.class).asUser();
+      }
+
+      if (method.isAnnotationPresent(Execute.class)) {
+        user = method.getAnnotation(Execute.class).asUser();
+      }
+
+      if (user != null && user != User.ANONYMOUS) {
+        // log in, make sure user is logged in and flow is on the requested url
+        new WikiBasePageObject().loginAs(user);
+      }
+
+      checkCountryCode(driver, StringUtils.defaultIfEmpty(
+          Configuration.getCountryCode(),
+          Configuration.getGeoEdgeCountry())
+      );
     }
 
     logJSError(driver);
@@ -284,6 +340,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
+
     logJSError(driver);
   }
 
@@ -318,10 +375,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
   @Override
   public void onTestFailure(ITestResult result) {
-    driver = NewDriverProvider.getWebDriver();
-    if (driver == null) {
-      driver = NewDriverProvider.getWebDriver();
-    }
+    driver = DriverProvider.getActiveDriver();
 
     imageCounter += 1;
     if ("true".equals(Configuration.getLogEnabled())) {
@@ -386,6 +440,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
                 + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
                 + "tr.warning{color:black;background-color:#FEE01E;}"
                 + "tr.error{color:black;background-color:#FFCCCC;}"
+                + "tr.info{color:white;background-color:#78a1c0}"
                 + "tr.step{color:white;background:grey}"
                 + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
                 + "<style>td { border-top: 1px solid grey; } </style></head><body>"
@@ -447,5 +502,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onFinish(ITestContext context) {
     CommonUtils.appendTextToFile(logPath, "</body></html>");
+  }
+
+  private void checkCountryCode(WebDriver driver, String expectedCountryCode) {
+    if (StringUtils.isBlank(expectedCountryCode)) {
+      return;
+    }
+
+    String actualCountryCode = new JavascriptActions(driver).getCountry();
+
+    if (expectedCountryCode.equalsIgnoreCase(actualCountryCode)) {
+      logInfo("Country code: " + actualCountryCode);
+    } else {
+      logWarning("Country code",
+                 String.format("Expected: %s, Actual: %s", expectedCountryCode, actualCountryCode));
+    }
   }
 }

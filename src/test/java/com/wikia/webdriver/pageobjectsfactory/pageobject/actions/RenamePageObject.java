@@ -7,9 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 public class RenamePageObject extends ArticlePageObject {
 
   @FindBy(css = "#wpNewTitleMain")
@@ -20,7 +17,7 @@ public class RenamePageObject extends ArticlePageObject {
   private WebElement leaveRedirectCheckbox;
 
   public RenamePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public ArticlePageObject rename(String newName) {
@@ -35,6 +32,6 @@ public class RenamePageObject extends ArticlePageObject {
     }
     scrollAndClick(submitRename);
     PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
-    return new ArticlePageObject(driver);
+    return new ArticlePageObject();
   }
 }

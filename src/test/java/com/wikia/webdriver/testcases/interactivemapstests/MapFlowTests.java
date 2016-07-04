@@ -2,7 +2,11 @@ package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateACustomMapComponentObject;
@@ -16,21 +20,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Rodrigo Molinero Gomez
- * @author: Lukasz Jedrzejczak
- * @author: Lukasz Nowak
- * @ownership: Mobile Web
- */
-
 public class MapFlowTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"MapFlowTests_001", "MapFlowTests", "InteractiveMaps"}, enabled = false)
+  @Execute(asUser = User.USER)
   public void MapFlowTests_001_CreateCustomMapNewImageUpload() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
@@ -49,10 +46,12 @@ public class MapFlowTests extends NewTestTemplate {
     createdMap.verifyControlButtonsAreVisible();
   }
 
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")
   public void MapFlowTests_002_CreateCustomMapWithExistingTemplate() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
@@ -66,7 +65,7 @@ public class MapFlowTests extends NewTestTemplate {
     template.typeMapName(InteractiveMapsContent.MAP_NAME);
     CreatePinTypesComponentObject pinDialog = template.clickNext();
     pinDialog.typePinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME,
-                               InteractiveMapsContent.PIN_TYPE_INDEX);
+        InteractiveMapsContent.PIN_TYPE_INDEX);
     InteractiveMapPageObject createdMap = pinDialog.clickSave();
     createdMap.verifyCreatedMapTitle(InteractiveMapsContent.MAP_NAME);
     createdMap.verifyMapOpened();
@@ -74,10 +73,12 @@ public class MapFlowTests extends NewTestTemplate {
     createdMap.verifyControlButtonsAreVisible();
   }
 
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-5732", comment = "Not possible to test manually in preview environment")
   public void MapFlowTests_003_CreateRealMap() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateRealMapComponentObject realMap = map.clickRealMap();
@@ -92,9 +93,9 @@ public class MapFlowTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MapFlowTests_004", "MapFlowTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void MapFlowTests_004_VerifyBackButtonWorksCorrectly() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject map = specialMap.clickCreateAMap();
     CreateACustomMapComponentObject customMap = map.clickCustomMap();
@@ -113,9 +114,9 @@ public class MapFlowTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MapFlowTests_005", "MapFlowTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void MapFlowTests_005_VerifyCloseButtonsInCreationMapFlow() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     CreateAMapComponentObject createMapModal = specialMap.clickCreateAMap();
     specialMap = createMapModal.clickCloseButton();

@@ -8,12 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @author Saipetch Kongkatong
- */
 public class LightboxComponentObject extends WikiBasePageObject {
 
   private static final Integer VIDEO_WIDTH_LIGHTBOX = 737;
@@ -48,7 +45,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement titleLink;
   @FindBy(css = ".more-info-button")
   private WebElement moreInfoLink;
-  @FindBy(css = ".WikiaLightbox div:not(.video-media)")
+  @FindBy(css = ".WikiaLightbox div.media img")
   private WebElement imageContainer;
   @FindBy(css = "span.carousel-arrow.next")
   private WebElement carouselRight;
@@ -60,7 +57,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement closeShareScreenButton;
 
   public LightboxComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyLightboxPopup() {
@@ -170,6 +167,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public FilePagePageObject clickTitle() {
+    new Actions(driver).moveToElement(titleLink).perform();
     wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);

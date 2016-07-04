@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership Content West Wing
- */
 public class WikiTextShortCutsComponentObject extends SourceEditModePageObject{
 
   @FindBy (css = "a[onclick*='Category']")

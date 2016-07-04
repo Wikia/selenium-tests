@@ -10,19 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'Rochan' Chan <p/> Editor Entry Point Test on wiki that has wgEnabledRTEExt =
- *         false, wgVisualEditorUI = false, wgForceVisualEditor = true User Editor Preference is set
- *         to Default for Anon VE-983 verify VE Editor is loaded when clicking Add Page from the
- *         contribution drop down VE-983 verify VE Editor is loaded when clicking the main edit
- *         button on the top of the article VE-983 verify VE Editor is loaded when clicking the red
- *         link in the article VE-983 verify VE Editor is loaded when clicking the section edit link
- *         in the article VE-983 verify VE Editor is loaded when using ?veaction=edit in the URL
- *         VE-983 verify VE Editor is loaded on List namespace VE-983 verify CK Editor is loaded on
- *         Category namespace VE-983 verify Src Editor is loaded on Template namespace VE-983 verify
- *         CK Editor is loaded when using ?action=edit in the URL
- */
-
 public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
 
   WikiBasePageObject base;
@@ -31,7 +18,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
     wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_AND_RTE_DISABLED_WIKI);
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
   }
 
   @Test(
@@ -40,7 +27,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -52,7 +39,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_002_MainEditEntry() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open(base.getNameForArticle());
+        new ArticlePageObject().open(base.getNameForArticle());
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -64,7 +51,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_003_RedlinkEntry() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+        new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -76,7 +63,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TESTINGPAGE);
+        new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -98,7 +85,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_006_ListNamespace() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.LIST_PAGE);
+        new ArticlePageObject().open(URLsContent.LIST_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -110,7 +97,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_007_CategoryNamespace() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.CATEGORY_PAGE);
+        new ArticlePageObject().open(URLsContent.CATEGORY_PAGE);
     VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -122,7 +109,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   )
   public void VEAndRTEDisabledEditorEntryAnonTests_008_TemplateNamespace() {
     ArticlePageObject article =
-        new ArticlePageObject(driver).open(URLsContent.TEMPLATE_PAGE);
+        new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);
     SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
     src.verifySourceOnlyMode();
   }

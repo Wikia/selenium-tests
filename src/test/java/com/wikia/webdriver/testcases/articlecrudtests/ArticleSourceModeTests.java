@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import java.util.List;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
@@ -26,15 +31,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.List;
-
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 @Test(groups = {"RTE_extended"})
 public class ArticleSourceModeTests extends NewTestTemplate {
 
@@ -43,14 +39,14 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_001"})
   public void RTE_001_Bold() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickBold();
     source.checkSourceContent("'''Bold text'''");
@@ -60,7 +56,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_002"})
   public void RTE_002_Italic() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickItalic();
     source.checkSourceContent("''Italic text''");
@@ -70,7 +66,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_003"})
   public void RTE_003_InternalLink() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickInternalLink();
     source.checkSourceContent("[[Link title]]");
@@ -80,7 +76,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_004"})
   public void RTE_004_ExternalLink() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickExternalLink();
     source.checkSourceContent("[http://www.example.com link title]");
@@ -90,7 +86,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_005"})
   public void RTE_005_HeadLine() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickLvl2Headline();
     source.checkSourceContent("\n== Headline text ==\n");
@@ -100,7 +96,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_006"})
   public void RTE_006_EmbedFile() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickEmbedFile();
     source.checkSourceContent("[[File:Example.jpg]]");
@@ -110,7 +106,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_007"})
   public void RTE_007_EmbedMedia() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickEmbedMedia();
     source.checkSourceContent("[[Media:Example.ogg]]");
@@ -120,7 +116,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_1", "RTE_extended_008"})
   public void RTE_008_Math() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickMath();
     source.checkSourceContent("<math>Insert formula here</math>");
@@ -130,7 +126,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_2", "RTE_extended_009"})
   public void RTE_009_Nowiki() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickNowiki();
     source.checkSourceContent("<nowiki>Insert non-formatted text here</nowiki>");
@@ -140,7 +136,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_2", "RTE_extended_010"})
   public void RTE_010_Signature() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickSignature();
     source.checkSourceContent("--~~~~");
@@ -150,7 +146,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_2", "RTE_extended_011"})
   public void RTE_011_HLine() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickHorizontalLine();
     source.checkSourceContent("\n----\n");
@@ -160,11 +156,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
   public void RTE_012_Photo() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
-    PhotoOptionsComponentObject
-        photoOptions =
+    PhotoOptionsComponentObject photoOptions =
         photoAddPhoto.addPhotoFromWiki(PageContent.ARTICLESOURCEMODEFILE);
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
@@ -177,12 +172,11 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_2", "RTE_extended_013"})
   public void RTE_013_Slideshow() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickAddGallery();
     source.verifyComponentSelector();
-    SlideshowBuilderComponentObject
-        slideshowBuilder =
+    SlideshowBuilderComponentObject slideshowBuilder =
         (SlideshowBuilderComponentObject) source.addComponent("slideshow");
     AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
     slideshowAddPhoto.search("image");
@@ -190,22 +184,20 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     slideshowAddPhoto.clickSelect();
     slideshowBuilder.adjustPosition(Positions.CENTER);
     slideshowBuilder.clickFinish();
-    source.checkSourceContent(
-        "<gallery type=\"slideshow\" position=\"center\">\n" + photoNames.get(0) + "\n" + photoNames
-            .get(
-                1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3) + "\n</gallery>");
+    source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\n"
+        + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
+        + photoNames.get(3) + "\n</gallery>");
     source.submitArticle();
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_014"})
   public void RTE_014_Gallery() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickAddGallery();
     source.verifyComponentSelector();
-    GalleryBuilderComponentObject
-        galleryBuiler =
+    GalleryBuilderComponentObject galleryBuiler =
         (GalleryBuilderComponentObject) source.addComponent("gallery");
     AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
     galleryAddPhoto.search("image");
@@ -216,21 +208,20 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
     galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
     galleryBuiler.clickFinish();
-    source.checkSourceContent(
-        "<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n" + photoNames.get(0) + "\n"
-        + photoNames.get(1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3) + "\n</gallery>");
+    source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"
+        + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
+        + photoNames.get(3) + "\n</gallery>");
     source.submitArticle();
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_015"})
   public void RTE_015_Slider() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickAddGallery();
     source.verifyComponentSelector();
-    SliderBuilderComponentObject
-        sliderBuilder =
+    SliderBuilderComponentObject sliderBuilder =
         (SliderBuilderComponentObject) source.addComponent("slider");
     sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
     AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
@@ -238,21 +229,19 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     List<String> photoNames = sliderAddPhoto.choosePhotos(4);
     sliderAddPhoto.clickSelect();
     sliderBuilder.clickFinish();
-    source.checkSourceContent(
-        "<gallery type=\"slider\" orientation=\"right\">\n" + photoNames.get(0) + "\n" + photoNames
-            .get(
-                1) + "\n" + photoNames.get(2) + "\n" + photoNames.get(3) + "\n</gallery>");
+    source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\n"
+        + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
+        + photoNames.get(3) + "\n</gallery>");
     source.submitArticle();
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_016", "Media"})
   public void RTE_016_Video() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
-    VetOptionsComponentObject
-        vetOptions =
+    VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
@@ -264,7 +253,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_3", "RTE_extended_017"})
   public void RTE_017_MoreMainTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.checkMainTools();
     source.submitArticle();
@@ -273,7 +262,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_3", "RTE_extended_018"})
   public void RTE_018_MoreWikiMarkupTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.checkWikiMarkupTools();
     source.submitArticle();
@@ -282,7 +271,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_4", "RTE_extended_019"})
   public void RTE_019_MoreSympolsTools() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.checkSymbolsTools();
     source.submitArticle();
@@ -292,7 +281,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_4", "RTE_extended_020"})
   public void RTE_020_YoutubeTag_Preview() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
     String videoID = video.getID();
@@ -305,7 +294,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @Test(groups = {"RTE_extended_4", "RTE_extended_021"})
   public void RTE_021_YoutubeTag_Publish() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    ArticlePageObject article = new ArticlePageObject(driver).open(articleName);
+    ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("water");
     String videoID = video.getID();
@@ -313,5 +302,4 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     article = source.clickPublishButton();
     article.verifyArticleTitle(articleName);
   }
-
 }

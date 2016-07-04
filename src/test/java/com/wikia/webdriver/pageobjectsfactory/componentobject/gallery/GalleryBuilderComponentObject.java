@@ -15,9 +15,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class GalleryBuilderComponentObject extends BasePageObject {
 
   @FindBy(css = "#WikiaPhotoGalleryAddImage")
@@ -41,12 +38,12 @@ public class GalleryBuilderComponentObject extends BasePageObject {
   private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
   public GalleryBuilderComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isFinishButtonVisibleOnPage() {
     if (!finishButton.isDisplayed()) {
-      scrollToElement(finishButton);
+      jsActions.scrollToElement(finishButton);
     }
     try {
       wait.forElementVisible(finishButton);

@@ -1,8 +1,5 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class SourceModeContent {
 
   public static final String PLACEHOLDERS =

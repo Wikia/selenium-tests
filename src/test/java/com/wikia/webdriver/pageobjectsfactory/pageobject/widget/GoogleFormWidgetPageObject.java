@@ -7,9 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @ownership: Content X-Wing
- */
 public class GoogleFormWidgetPageObject extends WidgetPageObject {
 
   @FindBy(css = "iframe[data-wikia-widget=\"googleform\"]")
@@ -18,7 +15,6 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
   private WebElement widgetBody;
 
   private static final String TAG_NAME = "googleform";
-  private static final String ARTICLE_NAME = "GoogleFormWidget";
   private static final String[] TAGS = {
       "<googleform url=\"https://docs.google.com/a/wikia-inc.com/forms/d/" +
       "1cwWn51i5vXFBy7c5VkRzapj6FXxbjZy48VkEZyP33R4/viewform?embedded=true\" />",
@@ -33,10 +29,6 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
 
   public GoogleFormWidgetPageObject(WebDriver driver) {
     super(driver);
-  }
-
-  protected String getArticleName() {
-    return ARTICLE_NAME;
   }
 
   protected String getTagName() {

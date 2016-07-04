@@ -12,9 +12,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Saipetch Kongkatong
- */
 public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
   private static final String COOKIE_FROMSEARCH_NAME = "fromsearch";
@@ -71,7 +68,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private By eCommerceSingleProductBy = By.cssSelector(".ecommerce-single-product");
 
   public MonetizationModuleComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void setCookieFromSearch() {
@@ -312,14 +309,14 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private void verifyAmazonPrimeShown(By slotBy) {
     WebElement priceElem = findPriceElementFromSlot(slotBy);
     wait.forElementVisible(priceElem);
-    scrollToElement(priceElem);
+    jsActions.scrollToElement(priceElem);
     PageObjectLogging.log("verifyAmazonPrimeShown", "Amazon prime unit is visible", true);
   }
 
   private void verifyAmazonUnitShown(By slotBy) {
     wait.forElementVisible(slotBy);
     Assertion.assertTrue(isElementOnPage(slotBy));
-    scrollToElement(slotBy);
+    jsActions.scrollToElement(slotBy);
     PageObjectLogging.log("verifyAmazonUnitShown", "Amazon unit is visible", true, driver);
   }
 
@@ -436,7 +433,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
   private void verifyEcommerceUnitShown(By slotBy, By numOfProductBy) {
     wait.forElementVisible(slotBy);
     wait.forElementVisible(numOfProductBy);
-    scrollToElement(numOfProductBy);
+    jsActions.scrollToElement(numOfProductBy);
     Assertion.assertTrue(isElementOnPage(numOfProductBy));
     PageObjectLogging.log("verifyEcommerceUnitShown", "Ecommerce unit is visible", true, driver);
   }

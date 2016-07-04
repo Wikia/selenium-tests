@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -14,10 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. User 5 is posting message on user 6 message wall 2. User
- *         6 is notified about user 6 message
- */
 public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -27,11 +20,12 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   @Test(
       groups = {
           "MessageWallNotificationsOwnerTests_001",
-          "MessageWallNotificationsOwnerTests"
+          "MessageWallNotificationsOwnerTests",
+          "NotificationsTests"
       }
   )
   public void wallOwnerReceivesNotification_setup() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName9, credentials.password9, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName10);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -46,12 +40,13 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   @Test(
       groups = {
           "MessageWallNotificationsOwnerTests_002",
-          "MessageWallNotificationsOwnerTests"
+          "MessageWallNotificationsOwnerTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "wallOwnerReceivesNotification_setup"
   )
-  public void wallOwnerReceivesNotification_verification() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+ public void userIsNotifiedWhenOtherUserWritesMessageOnHerMessageWal() {
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName10, credentials.password10, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();

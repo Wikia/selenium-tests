@@ -20,13 +20,14 @@ public class URLsContent {
   public static final String SPECIAL_PREFERENCES = "wiki/Special:Preferences";
   public static final String SPECIAL_EDITING_PREFERENCES =
       "wiki/Special:Preferences#mw-prefsection-editing";
+  public static final String SPECIAL_EDITING_PREFERENCES_EMAIL =
+      "wiki/Special:Preferences#mw-prefsection-emailv2";
   public static final String SPECIAL_PROMOTE = "wiki/Special:Promote";
   public static final String SPECIAL_CREATE_PAGE = "wiki/Special:CreatePage";
   public static final String SPECIAL_CREATE_BLOGPAGE = "wiki/Special:CreateBlogPage";
   public static final String SPECIAL_ADMIN_DASHBOARD = "wiki/Special:AdminDashboard";
   public static final String SPECIAL_CSS = "wiki/Special:CSS";
   public static final String SPECIAL_CURATED_CONTENT = "wiki/Special:CuratedContent";
-  public static final String SPECIAL_RANDOM = "wiki/Special:Random";
   public static final String SPECIAL_FOLLOW = "wiki/Special:Following";
   public static final String SPECIAL_FORUM = "wiki/Special:Forum";
   public static final String SPECIAL_THEME_DESIGNER = "wiki/Special:ThemeDesigner";
@@ -40,21 +41,15 @@ public class URLsContent {
   public static final String SPECIAL_WIKI_FACTORY = "wiki/Special:WikiFactory";
   public static final String SPECIAL_WHERE_IS_EXTENSION = "Special:WhereIsExtension";
   public static final String SPECIAL_CONTRIBUTIONS = "wiki/Special:Contributions";
-  public static final String SPECIAL_BLOCKLIST = "wiki/Special:BlockList";
-  public static final String SPECIAL_UNBLOCK = "wiki/Special:Unblock";
   public static final String SPECIAL_BLOCK = "wiki/Special:Block";
   public static final String SPECIAL_CHAT = "wiki/Special:Chat";
-  public static final String SPECIAL_MANAGE_WIKIA_HOME = "wiki/Special:ManageWikiaHome";
-  public static final String SPECIAL_UNUSED_FILES = "wiki/Special:UnusedFiles";
-  public static final String SPECIAL_UNUSED_VIDEOS = "wiki/Special:UnusedVideos";
-  public static final String SPECIAL_UNCATEGORIZED_FILES = "wiki/Special:UncategorizedFiles";
-  public static final String SPECIAL_MOST_LINKED_FILES = "wiki/Special:MostLinkedFiles";
-  public static final String SPECIAL_LICENSED_VIDEO_SWAP = "wiki/Special:LicensedVideoSwap";
   public static final String SPECIAL_EDIT_HUB = "wiki/Special:EditHub";
   public static final String SPECIAL_MAPS = "wiki/Special:Maps";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "wiki/Special:VideoPageAdmin/edit";
   public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "wiki/Special:Version";
+  public static final String SPECIAL_INFOBOX_BUILDER = "wiki/Special:InfoboxBuilder/";
+  public static final String SPECIAL_WIKI_FEATURES = "wiki/Special:WikiFeatures/";
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
@@ -76,6 +71,7 @@ public class URLsContent {
   public static final String DISABLE_CAPTCHA = "nocaptchatest=1";
   public static final String SOURCE_MODE = "useeditor=source";
   public static final String MOST_RECENT = "?sort=recent";
+  public static final String ACTION_RAW = "action=raw";
 
   // WAM Scores page url
   public static final String WAM_PAGE = "WAM";
@@ -132,10 +128,16 @@ public class URLsContent {
   public static final String EXTERNAL_URL = "http://www.wikia.com";
 
   // Embed map URL for Interactive Maps
-  public static final String EMBEDED_MAP_EDITPAGE = "wiki/EmbedMap?action=edit";
+  public static final String EMBEDED_MAP_ARTICLE = "EmbedMap";
 
   // Escaped frament URL for Maps
   public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
+
+  // Recent wiki activity on mobile
+  public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
+
+  // Search results page on mobile, replace %query% with searched string
+  public static final String MOBILE_SEARCH_RESULTS_PAGE = "search?query=%query%";
 
   private URLsContent() {
   }

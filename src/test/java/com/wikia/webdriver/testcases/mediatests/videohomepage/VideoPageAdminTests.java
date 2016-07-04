@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.mediatests.videohomepage;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.FeaturedVideoAdminPageObject;
@@ -11,15 +11,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage.LatestVid
 
 import org.testng.annotations.Test;
 
-
-/**
- * Created by Liz Lee on 6/18/14.
- * 
- * @ownership Content X-Wing
- */
 public class VideoPageAdminTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest"})
+  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest", "VideosPage"})
   @Execute(asUser = User.STAFF, onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoPageAdmin_001_AddFeaturedVideo() {
     FeaturedVideoAdminPageObject featuredVideoAdminObject =

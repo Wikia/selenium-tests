@@ -13,11 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * @author Robert 'rochan' Chan <p/> VE-888 Verify VE is able to perform multiple publish on the
- *         same article in one logged in session
- */
-
 public class VisualEditorMultiplePublishTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -28,7 +23,7 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
-    base = new WikiBasePageObject(driver);
+    base = new WikiBasePageObject();
     base.loginAs(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
   }
 
@@ -36,7 +31,7 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplate {
   public void VisualEditorMultiplePublish_001() {
     String targetText = PageContent.ARTICLE_TEXT;
     String articleName = base.getNameForArticle();
-    article = new ArticlePageObject(driver).open(articleName);
+    article = new ArticlePageObject().open(articleName);
     ve = article.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();

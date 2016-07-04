@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class ForumAnonTests extends NewTestTemplate {
 
   @Test(groups = {"ForumAnonTest_001", "ForumAnonTests", "Forum"})
-  public void ForumAnonTest_001_startDiscussionWithTitleAndMessage() {
+  public void anonymousUserCanStartDiscussionOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
@@ -22,7 +22,7 @@ public class ForumAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumAnonTests_002", "ForumAnonTests", "Forum"})
-  public void ForumAnonTests_002_replyToThread() {
+  public void anonymousUserCanReplyToThreadOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();

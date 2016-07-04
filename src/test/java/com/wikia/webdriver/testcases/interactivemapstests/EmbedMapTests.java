@@ -1,7 +1,11 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.AddPinComponentObject;
@@ -16,21 +20,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiA
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Rodrigo Molinero Gomez
- * @author: Lukasz Jedrzejczak
- * @author: Lukasz Nowak
- * @ownership: Mobile Web
- */
-
 public class EmbedMapTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void EmbedMapTests_001_EmbedMapInWikiaPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -48,8 +45,11 @@ public class EmbedMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
+  @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
+                                                 "monitor the issue to find out resolution")
   public void EmbedMapTests_002_VerifyEmbedMapElements() {
-    ArticlePageObject article = new ArticlePageObject(driver);
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     embedMapDialog.verifyEmbedMapModalOpened();
@@ -59,10 +59,10 @@ public class EmbedMapTests extends NewTestTemplate {
     embedMapDialog.verifyBrandFooterNotVisible();
   }
 
-  @Test(groups = {"EmbedMapTests_003", "EmbedMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"EmbedMapTests_003", "EmbedMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void EmbedMapTests_003_VerifyEmbedMapCodeButton() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -78,10 +78,10 @@ public class EmbedMapTests extends NewTestTemplate {
     selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.LARGE);
   }
 
-  @Test(groups = {"EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void EmbedMapTests_004_VerifyEmbedMapOutsideWikia() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
     InteractiveMapPageObject
         selectedMap =
@@ -97,11 +97,11 @@ public class EmbedMapTests extends NewTestTemplate {
     outPage.verifyMapEmbed();
   }
 
-  @Test(groups = {"EmbedMapTests_005", "EmbedMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"EmbedMapTests_005", "EmbedMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void EmbedMapTests_005_VerifyEmbedMapContributeModals() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();
@@ -112,11 +112,11 @@ public class EmbedMapTests extends NewTestTemplate {
     pinTypesDialog.verifyPinTypesDialog();
   }
 
-  @Test(groups = {"EmbedMapTests_006", "EmbedMapTests", "InteractiveMaps"})
+  @Test(enabled = false, groups = {"EmbedMapTests_006", "EmbedMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
   public void EmbedMapTests_006_VerifyEmbeddedMapAddPinType() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
-    ArticlePageObject article = new ArticlePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
+    ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
     EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
     CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();

@@ -3,8 +3,10 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
@@ -12,36 +14,26 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
+@Test(groups = "FollowArticle")
 public class FollowArticleTests extends NewTestTemplate {
 
-  String articleName;
+  private static final String ARTICLE_NAME = "FollowArticleTests";
 
-  @Test(groups = "FollowArticle")
+  @Test
   @Execute(asUser = User.USER)
-  public void FollowArticle_001_setup() {
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    articleName = article.getArticleName();
-    WatchPageObject watch = article.unfollowArticle(wikiURL);
+  public void unfollowArticleIfFollowed() {
+    new ArticleContent().push(PageContent.ARTICLE_TEXT, ARTICLE_NAME);
+
+    ArticlePageObject article = new ArticlePageObject().open(ARTICLE_NAME);
+    WatchPageObject watch = article.unfollowArticle();
     watch.confirmWatchUnwatch();
     article.verifyPageUnfollowed();
   }
 
-  @Test(groups = "FollowArticle", dependsOnMethods = {"FollowArticle_001_setup"})
+  @Test(dependsOnMethods = {"unfollowArticleIfFollowed"})
   @Execute(asUser = User.USER)
-  public void FollowArticle_002_follow() {
-    ArticlePageObject article =
-        new ArticlePageObject(driver).open(articleName);
-    article.follow();
-  }
-
-  @Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods = {"FollowArticle_002_follow"})
-  @Execute(asUser = User.USER)
-  public void FollowArticle_003_verify() {
-    SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
-    follow.verifyFollowedArticle(articleName);
+  public void userCanSeeFollowedArticlesOnHisFollowingSpecialPage() {
+    new ArticlePageObject().open(ARTICLE_NAME).follow();
+    new SpecialFollowPageObject(driver).open().verifyFollowedArticle(ARTICLE_NAME);
   }
 }

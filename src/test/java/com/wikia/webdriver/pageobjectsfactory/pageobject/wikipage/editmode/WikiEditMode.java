@@ -9,23 +9,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class WikiEditMode extends WikiBasePageObject {
 
   @FindBy(css = "#wpSave")
   private WebElement publishButtonGeneral;
 
   public WikiEditMode(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
   /**
    * Click  on Publish button
-   *
-   * @author Michal Nowierski
    */
   public WikiArticlePageObject clickOnPublishButton() {
     wait.forElementVisible(publishButtonGeneral);
@@ -36,5 +31,4 @@ public class WikiEditMode extends WikiBasePageObject {
     PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
     return new WikiArticlePageObject(driver);
   }
-
 }

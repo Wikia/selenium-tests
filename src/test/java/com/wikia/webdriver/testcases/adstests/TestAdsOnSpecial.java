@@ -7,11 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-
 /**
- * @author Sergey Naumov
- * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
- * @ownership AdEngineering
+ * https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
  */
 @Test(
     groups = {"Ads_Special_Pages", "Ads"}

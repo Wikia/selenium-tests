@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.searchtests.intrawiki;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.IntraWikiSearchProvider;
 import com.wikia.webdriver.common.templates.search.IntraWiki;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
@@ -37,7 +39,7 @@ public class BasicActions extends IntraWiki {
 
   @Test(groups = {"anonSearch", "Search", "Search1"})
   public void anonSearch() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
     NavigationBar navigation = new NavigationBar(driver);
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
@@ -45,10 +47,10 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"userSearch", "Search", "Search2"})
+  @Execute(asUser = User.USER)
   public void userSearch() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
     NavigationBar navigation = new NavigationBar(driver);
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
@@ -92,6 +94,8 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_005", "Search", "Search2"})
+  @RelatedIssue(issueID = "MAIN-7142",
+      comment = "Product code defect. No need to test manually")
   public void filtering() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -107,6 +111,8 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_006", "Search", "Search3"})
+  @RelatedIssue(issueID = "MAIN-7142",
+      comment = "Product code defect. No need to test manually")
   public void sortingVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -126,6 +132,8 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_007", "Search", "Search4"})
+  @RelatedIssue(issueID = "MAIN-7142",
+      comment = "Product code defect. No need to test manually")
   public void sortingImages() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -150,6 +158,8 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_010", "Search", "Search2"})
+  @RelatedIssue(issueID = "MAIN-7142",
+      comment = "Product code defect. No need to test manually")
   public void selectImagesOrVideos() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -162,6 +172,8 @@ public class BasicActions extends IntraWiki {
   }
 
   @Test(groups = {"IntraWikiSearch_011", "Search", "Search3"})
+  @RelatedIssue(issueID = "MAIN-7142",
+      comment = "Product code defect. No need to test manually")
   public void defaultNamespaces() {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);
@@ -181,6 +193,8 @@ public class BasicActions extends IntraWiki {
 
   @Test(dataProviderClass = IntraWikiSearchProvider.class, dataProvider = "getNamespaces",
       groups = {"IntraWikiSearch_013", "Search", "Search1"})
+  @RelatedIssue(issueID = "MAIN-7142",
+      comment = "Product code defect. No need to test manually")
   public void namespaces(String searchPhrase, String namespace) {
     IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
     search.openWikiPage(testedWiki);

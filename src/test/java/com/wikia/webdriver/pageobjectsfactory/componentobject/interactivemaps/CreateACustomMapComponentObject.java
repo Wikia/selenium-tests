@@ -1,11 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
@@ -13,11 +7,11 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- * @author Lukasz Jedrzejczak
- * @author Lukasz Nowak (Dyktus)
- */
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class CreateACustomMapComponentObject extends BasePageObject {
 
@@ -37,7 +31,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   private String beforeImageName = "116x116-";
 
   public CreateACustomMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clearSearchTitle() {

@@ -9,9 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-/**
- * @ownership Monetization
- */
 public class MonetizationModuleTests extends NewTestTemplate {
 
   private static final String TEST_COUNTRY_CODE = "TH"; // country that the ads will be shown
@@ -147,13 +144,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * The monetization module is shown on article page for anon user (via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
   public void MonetizationModuleTest_001() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -165,13 +160,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * The monetization module is not shown on article page for anon user (not via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
   public void MonetizationModuleTest_002() {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -183,14 +176,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * The monetization module is not shown on article page for logged in user (via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
   public void MonetizationModuleTest_003() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName3, credentials.password3, wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -203,14 +194,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page for logged in user (not via search
    * engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
   public void MonetizationModuleTest_004() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName4, credentials.password4, wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -222,8 +211,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Check the width of the adsense ad in the monetization module
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModule_005", groups = {"MonetizationModule",
                                                                "MonetizationModuleTest_005",
@@ -231,7 +218,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_005(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -247,14 +234,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Adsense: The monetization module is shown on article page for anon user (via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
   public void MonetizationModuleTest_006() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -274,14 +259,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Adsense: The monetization module is not shown on article page (not via search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
   public void MonetizationModuleTest_007() {
     wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -302,8 +285,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page for blocked geos (use default blocked
    * countries)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_008", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_008",
@@ -312,7 +293,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
                                          String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -337,8 +318,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is shown on article page for anon user with non-blocked geos (via
    * search engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleGeoTestWikis", groups = {"MonetizationModule",
                                                                        "MonetizationModuleTest_009",
@@ -346,7 +325,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_009(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -367,8 +346,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page for non-blocked geos (not via search
    * engine)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleGeoTestWikis", groups = {"MonetizationModule",
                                                                        "MonetizationModuleTest_010",
@@ -376,7 +353,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_010(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -397,8 +374,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * The monetization module is not shown on article page on top 100 wikias for blocked geos (set
    * blocked countries per wiki)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_011", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_011",
@@ -406,7 +381,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_011(String countryCode, Boolean isFromsearch) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_100_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -431,8 +406,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is shown on article page for non-blocked geos (bt/ic/bc/af
    * slots)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_012", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_012",
@@ -440,7 +413,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_012(String testWiki, String testArticle) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -461,8 +434,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is not shown on article page on top 700 wikias for blocked
    * geos (set blocked countries per wiki)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_013", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_013",
@@ -470,7 +441,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_013(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_700_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -488,8 +459,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is shown on article page on top 700 wikias and the rest for
    * particular geos (ic/bc/af slots)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_014", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_014",
@@ -497,7 +466,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_014(String testWiki, String testArticle, String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -519,8 +488,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * Adsense: The monetization module is shown on article page on the rest of wikias for particular
    * geos (bc/af slots)
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(dataProvider = "DataMonetizationModuleTest_015", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_015",
@@ -528,7 +495,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_015(String countryCode) {
     wikiURL = urlBuilder.getUrlForWiki(TEST_DE_WIKI);
     String articleURL = urlBuilder.getUrlForPath(TEST_DE_WIKI, TEST_DE_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -549,13 +516,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * Adsense: The header of monetization module is shown on article page
-   *
-   * @author Saipetch Kongkatong
    */
   @Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
   public void MonetizationModuleTest_016() {
     String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -569,8 +534,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-323 Amazon: The monetization module is shown on article page on the rest for particular
    * geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_017", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_017",
@@ -580,7 +543,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -606,8 +569,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-323 Amazon: The monetization module is NOT shown on article page on the rest for particular
    * geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_018", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_018",
@@ -617,7 +578,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -638,8 +599,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
   /**
    * MON-344 Check the width of the Amazon ad in the monetization module
-   *
-   * @author Rochan
    */
   @Test(dataProvider = "DataMonetizationModule_005", groups = {"MonetizationModule",
                                                                "MonetizationModuleTest_019",
@@ -647,7 +606,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
   public void MonetizationModuleTest_019(int width, int height, int expectedInContent,
                                          int expectedOthers) {
     wikiURL = urlBuilder.getUrlForPath(TEST_AMAZON_WIKI, TEST_AMAZON_ARTICLE);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -663,8 +622,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-323 Amazon: The monetization module with prime video is shown on article page on the rest
    * for particular geos (ic slot)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_020", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_020",
@@ -674,7 +631,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -700,8 +657,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-284 Ecommerce: The monetization module single or multiple product is shown on article page
    * on the rest for particular geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_021", groups = {"MonetizationModule",
                                                                    "MonetizationModuleTest_021",
@@ -711,7 +666,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);
@@ -737,8 +692,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
   /**
    * MON-284 Ecommerce: The monetization module single or multiple product is NOT shown on article
    * page on the rest for particular geos (ic/bc/af slots)
-   *
-   * @author Robert Chan
    */
   @Test(dataProvider = "DataMonetizationModuleTest_022", groups = {"MonetizationModule",
                                                                    "DataMonetizationModuleTest_022",
@@ -748,7 +701,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
     wikiURL = urlBuilder.getUrlForWiki(testWiki);
     String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(articleURL);
     MonetizationModuleComponentObject monetizationModule =
         new MonetizationModuleComponentObject(driver);

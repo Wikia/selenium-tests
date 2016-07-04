@@ -1,17 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 
-/**
- * @author Rodrigo 'RodriGomez' Molinero
- */
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class CreateRealMapComponentObject extends BasePageObject {
 
@@ -29,7 +25,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
   private WebElement mapErrorField;
 
   public CreateRealMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public CreateAMapComponentObject clickBack() {

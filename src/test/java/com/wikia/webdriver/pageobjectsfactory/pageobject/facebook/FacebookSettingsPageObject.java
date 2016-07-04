@@ -11,9 +11,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Michal 'justnpT' Nowierski
- */
 public class FacebookSettingsPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#pageLogo")
@@ -26,11 +23,11 @@ public class FacebookSettingsPageObject extends WikiBasePageObject {
   private List<WebElement> pageElementList;
   @FindBy(css = "#userNavigationLabel")
   private WebElement fbDropDown;
-  @FindBy(xpath = "//span[text()='Log out']")
+  @FindBy(xpath = "//span[text()='Log Out']")
   private WebElement fbLogOut;
 
   public FacebookSettingsPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public FacebookSettingsPageObject open() {

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -9,14 +10,14 @@ import java.io.File;
 
 public class XMLReader {
 
+  private static final File defaultConfigFile = new File(Configuration.getCredentialsFilePath());
+
   private XMLReader() {
 
   }
 
   /**
    * method used to get credentials from configuration xml
-   *
-   * @author Karol Kujawiak
    */
   public static String getValue(File file, String key) {
 
@@ -28,5 +29,9 @@ public class XMLReader {
 
       return e.getMessage();
     }
+  }
+
+  public static String getValue(String key) {
+    return getValue(defaultConfigFile, key);
   }
 }

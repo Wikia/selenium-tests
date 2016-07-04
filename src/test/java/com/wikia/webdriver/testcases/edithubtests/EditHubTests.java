@@ -11,9 +11,6 @@ import org.testng.annotations.Test;
 
 /**
  * 1. Open edit hub dashboard and check if calendar exists
- *
- * @author Damian 'kvas' Jóźwiak
- * @ownership Content X-Wing
  */
 public class EditHubTests extends NewTestTemplate {
 
@@ -23,7 +20,7 @@ public class EditHubTests extends NewTestTemplate {
       dataProviderClass = HubsDataProvider.class,
       dataProvider = "provideHubDBName")
   public void EditHub_001_dashboardSelectVertical(String hubDBName) {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialEditHubPageObject
         pageObject =

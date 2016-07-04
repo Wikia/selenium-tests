@@ -17,7 +17,7 @@ public class HistoryPagePageObject extends BasePageObject {
   private WebElement diffHeader;
 
   public HistoryPagePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public DiffPagePageObject goToDiffPageFromHistoryPage() {

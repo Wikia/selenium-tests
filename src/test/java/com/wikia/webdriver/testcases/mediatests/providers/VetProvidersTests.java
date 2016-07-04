@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.mediatests.providers;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VideoUrlProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -12,25 +14,22 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
+@Test(groups = {"VetProvidersArticle", "ProviderTests", "Media"})
 public class VetProvidersTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
-  @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl", groups = {
-      "VetProvidersArticle", "VetProvidersTests_001", "Media"})
+  @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl")
+  @RelatedIssue(issueID = "SUS-170", comment = "metacafe.com provider doesn't work. Please check if test passes for other providers.")
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
+    new ArticleContent().clear();
+
     PageObjectLogging.log("", videoUrl, true);
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-    visualEditMode.clearContent();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(videoUrl);
     vetOptions.submit();
     visualEditMode.verifyVideo();
-    visualEditMode.submitArticle();
+    ArticlePageObject article = visualEditMode.submitArticle();
     article.verifyVideo();
     article.verifyVideoName(videoName);
   }

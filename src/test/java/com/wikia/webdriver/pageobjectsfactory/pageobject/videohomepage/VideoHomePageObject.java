@@ -14,12 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-
-/**
- * Created by Liz Lee on 6/4/14.
- */
-
-
 public class VideoHomePageObject extends WikiBasePageObject {
 
   @FindBy(css = ".featured-video-slider .bx-controls")
@@ -30,7 +24,7 @@ public class VideoHomePageObject extends WikiBasePageObject {
   private List<WebElement> latestVideoRows;
 
   public VideoHomePageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class SpecialUploadPageObject extends WikiBasePageObject {
 
-
   @FindBy(css = "#wpUploadFile")
   private WebElement browseForFileInput;
   @FindBy(css = "#wpIgnoreWarning")
@@ -23,16 +22,16 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   private WebElement uploadFileName;
 
   public SpecialUploadPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   /**
    * Selects given file in upload browser.
    *
-   * @author Michal Nowierski ** @param file file to Be uploaded <p> Look at folder
-   * acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
+   *  @param file file to Be uploaded
+   *              Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests
+   *              this is where those files are stored
    */
-
   public void selectFileToUpload(String file) {
     browseForFileInput.sendKeys(
         CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)

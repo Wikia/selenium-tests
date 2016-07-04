@@ -6,9 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEng
- */
 public class TestAdsMonocolor extends TemplateNoFirstLoad {
 
   @Test(groups = "AdsMonocolorOasis")

@@ -6,11 +6,12 @@ import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SkinHelper;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkinHelper;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,16 +31,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @ownership AdEngineering
- */
 public class AdsBaseObject extends WikiBasePageObject {
 
+  protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
+  private static final int SLOT_TRIGGER_TIMEOUT_SEC = 10;
+  private static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
-
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
       "data-gpt-creative-id",
@@ -57,45 +57,40 @@ public class AdsBaseObject extends WikiBasePageObject {
       "RemnantGptMobile",
       "Liftium",
   };
-
   private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-  private static final String INCONTENT_BOXAD_SELECTOR = "div[id*='INCONTENT_1']";
-  private static final String FLITE_TAG_SELECTOR = ".flite-tag-extension";
-  private static final String FLITE_TAG_BROKEN_SELECTOR = "#mw-content-text .error";
+  private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
+  private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
+  protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
-  @FindBy(css = INCONTENT_BOXAD_SELECTOR)
-  private WebElement incontentBoxad;
-  @FindBy(css = FLITE_TAG_SELECTOR)
-  private WebElement fliteTag;
-  @FindBy(css = FLITE_TAG_BROKEN_SELECTOR)
-  private WebElement fliteTagBroken;
   @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
   private List<WebElement> liftiumIframes;
+  @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
+  private WebElement middlePrefooter;
 
   public AdsBaseObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public AdsBaseObject(WebDriver driver, String page) {
-    super(driver);
+    super();
     getUrl(page, true);
   }
 
   public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
-    super(driver);
+    super();
     driver.manage().window().setSize(resolution);
     getUrl(testedPage, true);
   }
 
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
-    super(driver);
+    super();
     driver.manage().window().setSize(resolution);
   }
 
@@ -130,24 +125,22 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void verifyTopLeaderboard() {
     if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
         By.cssSelector("#jpsuperheader"))) {
-      PageObjectLogging.log("verifyTopLeaderboard",
-                            "Page has Gotham campaign.", true);
+      PageObjectLogging.logWarning("Special ad", "Ad in #jpsuperheader detected");
       return;
     }
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
-  public void verifyIncontentBoxad() {
-    verifyAdVisibleInSlot(INCONTENT_BOXAD_SELECTOR, incontentBoxad);
-  }
 
-  public void verifyFliteTag() {
-    scrollToElement(wait.forElementVisible(By.cssSelector(FLITE_TAG_SELECTOR)));
+  public void verifyFliteTag(String cssFliteSelector) {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
+    WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
     verifySlotExpanded(fliteTag);
   }
 
-  public void verifyFliteTagBroken(String error) {
-    scrollToElement(wait.forElementVisible(By.cssSelector(FLITE_TAG_BROKEN_SELECTOR)));
+  public void verifyFliteTagBroken(String error, String cssFliteBrokenSelector) {
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteBrokenSelector)));
+    WebElement fliteTagBroken = driver.findElement(By.cssSelector(cssFliteBrokenSelector));
     Assertion.assertEquals(fliteTagBroken.getText(), error);
   }
 
@@ -283,13 +276,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifySpotlights() {
     // Removing comments section as it expands content downwards
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);",
-                     wait.forElementVisible(By.cssSelector("#WikiaArticleFooter")));
+    hideElementIfPresent(ARTICLE_COMMENTS_CSS_SELECTOR);
 
     AdsComparison adsComparison = new AdsComparison();
 
-    scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
+    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
       WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
@@ -299,13 +290,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject verifySize(String slotName, String src, int slotWidth, int slotHeight) {
+  public AdsBaseObject verifyIframeSize(String slotName,
+                                        String src,
+                                        int slotWidth,
+                                        int slotHeight) {
     waitForElementToHaveSize(slotWidth, slotHeight, getIframe(slotName, src));
-
-    PageObjectLogging.log("verifySize",
-                          slotName + " has width: " + slotWidth + ";height: " + slotHeight,
-                          true,
-                          driver);
     return this;
   }
 
@@ -319,8 +308,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
     WebElement element = getIframe(slotName, src);
-    Assertion
-        .assertTrue(new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver));
+    Assertion.assertTrue(
+        new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver),
+        "The image is different than the sample"
+    );
     PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
 
     return this;
@@ -335,10 +326,32 @@ public class AdsBaseObject extends WikiBasePageObject {
   /**
    * Test whether the correct GPT ad unit is called
    *
-   * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param adUnit   the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName the name of the slot an ad is going to be inserted into
+   * @param src      the source of an ad, for example gpt or remnant
    */
   public void verifyGptIframe(String adUnit, String slotName, String src) {
-    String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + src + "/" + slotName + "_0";
+    verifyGptIframe(WIKIA_DFP_CLIENT_ID, adUnit, slotName, src);
+  }
+
+  /**
+   * Test whether the correct GPT ad unit is called
+   *
+   * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or
+   *                    Turtle
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName    the name of the slot an ad is going to be inserted into
+   * @param src         the source of an ad, for example gpt, remnant or empty
+   */
+  public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
+    String iframeId = Joiner.on("/").skipNulls().join(
+        "google_ads_iframe_",
+        String.valueOf(dfpClientId),
+        adUnit,
+        src.length > 0 ? src[0] : null,
+        slotName + "_0"
+    );
+
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
@@ -392,7 +405,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject waitForPageLoaded() {
-    waitForJavaScriptTruthy("document.readyState === 'complete'");
+    jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
     return this;
   }
 
@@ -416,13 +429,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public String getCountry() {
-    waitForJavaScriptTruthy("Wikia.geo");
-    return (String) ((JavascriptExecutor) driver).executeScript(
-        "return Wikia.geo.getCountryCode();"
-    );
-  }
-
   public AdsBaseObject addToUrl(String param) {
     appendToUrl(param);
     waitForPageLoaded();
@@ -433,7 +439,7 @@ public class AdsBaseObject extends WikiBasePageObject {
                          String adSkinRightPath,
                          String backgroundColor,
                          String middleColor) {
-    SkinHelper skinHelper = new SkinHelper(adSkinLeftPath, adSkinRightPath, driver);
+    AdsSkinHelper skinHelper = new AdsSkinHelper(adSkinLeftPath, adSkinRightPath, driver);
     Assertion.assertTrue(skinHelper.skinPresent());
     PageObjectLogging.log("SKIN", "SKIN presents on the page", true);
 
@@ -455,11 +461,13 @@ public class AdsBaseObject extends WikiBasePageObject {
   public boolean checkSlotOnPageLoaded(String slotName) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
+      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
+        triggerAdSlot(AdsContent.FLOATING_MEDREC);
+      }
+
       String slotSelector = AdsContent.getSlotSelector(slotName);
       WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        tryTriggerFloatingMedrec(slot);
-      }
+
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 1;
     } finally {
@@ -557,41 +565,73 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  private void waitForJavaScriptTruthy(final String script) {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(new ExpectedCondition<Boolean>() {
-        public Boolean apply(WebDriver driver) {
-          try {
-            return (boolean) ((JavascriptExecutor) driver)
-                .executeScript("return !!(" + script + ");");
-          } catch (WebDriverException e) {
-            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
-            return false;
-          }
-        }
-      });
-    } finally {
-      restoreDeaultImplicitWait();
+  public void verifyNoAd(final String slotSelector) {
+    if (isElementOnPage(By.cssSelector(slotSelector))) {
+      WebElement element = driver.findElement(By.cssSelector(slotSelector));
+      if (
+          element.isDisplayed()
+          && element.getSize().getHeight() > 1
+          && element.getSize().getWidth() > 1
+          ) {
+        throw new WebDriverException("Ads found on page in selector: " + slotSelector);
+      } else {
+        PageObjectLogging.log(
+            "AdsFoundButNotVisible",
+            "Ads found on page with selector: "
+            + slotSelector
+            + " but is smaller then 1x1 or hidden",
+            true
+        );
+      }
+    } else {
+      PageObjectLogging.log(
+          "AdNotFound",
+          "Ad with selector: "
+          + slotSelector
+          + " not found on page",
+          true
+      );
     }
   }
 
-  private void tryTriggerFloatingMedrec(final WebElement slot) {
+  public AdsBaseObject triggerAdSlot(final String slotName) {
+    final String adSlotSelector = AdsContent.getSlotSelector(slotName);
+    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+
+    if (StringUtils.isEmpty(javaScriptTrigger)) {
+      return this;
+    }
+
     try {
-      new WebDriverWait(driver, 5).until(new ExpectedCondition<Object>() {
+      new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
-          jsActions.execute(
-              " (function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })(); ");
-          return slot.getAttribute("style").contains("visibility: visible;");
+          jsActions.execute(javaScriptTrigger);
+          return driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError("Floating Medrec", e);
+      PageObjectLogging.logError(adSlotSelector + " slot", e);
     }
+
+    return this;
   }
 
-  private void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
+  public void verifyExpandedAdVisibleInSlot(String slotSelector, WebElement slot) {
+    waitForSlotExpanded(slot);
+
+    boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
+
+    extractGptInfo(slotSelector);
+
+    if (!adVisible) {
+      throw new WebDriverException("Ad is not present in " + slotSelector);
+    }
+
+    PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
+  }
+
+  protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {
 
@@ -618,7 +658,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private boolean checkIfGptSlotHasCreativeContent(WebElement element, String hopAdType) {
-    String slotName = element.getAttribute("id").replace("wikia_gpt","google_ads_iframe_");
+    String slotName = element.getAttribute("id").replace("wikia_gpt", "google_ads_iframe_");
     String iframeSelector = "iframe[id*='" + slotName + "_0']";
     String adTypeScriptXpath = String.format("//script[contains(text(), \"%s\")]", hopAdType);
     WebElement iframe = element.findElement(By.cssSelector(iframeSelector));
@@ -658,32 +698,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
     for (String selector : slotsSelectors) {
-      if (isElementOnPage(By.cssSelector(selector))) {
-        WebElement element = driver.findElement(By.cssSelector(selector));
-        if (
-            element.isDisplayed()
-            && element.getSize().getHeight() > 1
-            && element.getSize().getWidth() > 1
-            ) {
-          throw new WebDriverException("Ads found on page in selector: " + selector);
-        } else {
-          PageObjectLogging.log(
-              "AdsFoundButNotVisible",
-              "Ads found on page with selector: "
-              + selector
-              + " but is smaller then 1x1 or hidden",
-              true
-          );
-        }
-      } else {
-        PageObjectLogging.log(
-            "AdNotFound",
-            "Ad with selector: "
-            + selector
-            + " not found on page",
-            true
-        );
-      }
+      verifyNoAd(selector);
     }
   }
 
@@ -748,4 +763,37 @@ public class AdsBaseObject extends WikiBasePageObject {
     return false;
   }
 
+  public void clickOnArticleLink(String linkName) {
+    hideElementIfPresent(FLITE_MASK_CSS_SELECTOR);
+
+    WebElement link = driver.findElement(
+        By.cssSelector("a[title='" + linkName + "']"));
+    link.click();
+
+    waitTitleChangesTo(linkName);
+  }
+
+  protected void hideElementIfPresent(String cssSelector) {
+    if (isElementOnPage(By.cssSelector(cssSelector))) {
+      PageObjectLogging.log("Hiding element", cssSelector, true);
+      WebElement element = driver.findElement(By.cssSelector(cssSelector));
+      JavascriptExecutor js = (JavascriptExecutor) driver;
+      js.executeScript("$(arguments[0]).css('display', 'none')", element);
+      waitForElementNotVisibleByElement(element);
+    }
+  }
+
+  public boolean isMiddlePrefooterOnPage() {
+    return isElementOnPage(middlePrefooter);
+  }
+
+  public void verifyMiddlePrefooterAdPresent() {
+    verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
+  }
+
+  public void triggerComments() {
+    scrollToFooter();
+    jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
+    scrollToFooter();
+  }
 }

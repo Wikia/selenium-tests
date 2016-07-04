@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.notificationstests.messagewallnotifications;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -16,12 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak <p/> 1. User 5 is unfollowing user 6 message wall, 2. User 6 is
- *         writing message on his own message wall, 3. User 5 is following user 6 message wall, 4.
- *         User 6 is replying to his message on his own message wall, 5. User 5 is notified about
- *         user 6 reply
- */
 public class MessageWallNotificationsFollowersResponseTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -31,11 +22,12 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_001",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       }
   )
   public void followerNotificationResponse_setup_1() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     WatchPageObject watch = wall.unfollowCurrentUrl();
@@ -45,12 +37,13 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_002",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_1"
   )
   public void followerNotificationResponse_setup_2() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -65,12 +58,13 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_003",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_2"
   )
   public void followerNotificationResponse_setup_3() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     wall.follow();
@@ -79,12 +73,13 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_004",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_3"
   )
   public void followerNotificationResponse_setup_4() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName8, credentials.password8, wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userName8);
     MessageWallThreadPageObject thread = wall.openThread(title);
@@ -99,12 +94,13 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   @Test(
       groups = {
           "MessageWallNotificationsFollowersResponseTests_005",
-          "MessageWallNotificationsFollowersResponseTests"
+          "MessageWallNotificationsFollowersResponseTests",
+          "NotificationsTests"
       },
       dependsOnMethods = "followerNotificationResponse_setup_4"
   )
-  public void followerNotificationResponse_verification() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+ public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWal() {
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
     notifications.showNotifications();

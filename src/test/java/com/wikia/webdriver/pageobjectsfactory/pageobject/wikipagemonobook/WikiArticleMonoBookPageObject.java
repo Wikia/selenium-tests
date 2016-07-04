@@ -1,18 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipagemonobook;
 
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BaseMonoBookPageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author lukaszk
- */
 public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
   @FindBy(css = "#wpTextbox1")
@@ -22,8 +17,8 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
   @FindBy(css = ".oasis-only-warning")
   private WebElement oasisOnly;
 
-  public WikiArticleMonoBookPageObject(WebDriver driver) {
-    super(driver);
+  public WikiArticleMonoBookPageObject() {
+    super();
   }
 
   public WikiArticleMonoBookPageObject open(String articleTitle) {

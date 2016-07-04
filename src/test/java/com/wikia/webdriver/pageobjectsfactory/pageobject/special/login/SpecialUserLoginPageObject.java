@@ -12,13 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
-
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
-  private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
   @FindBy(css = ".WikiaArticle input[name='username']")
   private WebElement userName;
@@ -34,9 +29,15 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private WebElement forgotPasswordLink;
   @FindBy(css = ".UserLogin .error-msg")
   private WebElement messagePlaceholder;
+  @FindBy(css = ".login-button.big")
+  private WebElement continueButtonBig;
+  /*this element exists when parameter ?type=forgotPassword is added to the url*/
+  @FindBy(css = "a[href='/wiki/Special:UserLogin']")
+  private WebElement logInLink;
+
 
   public SpecialUserLoginPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
@@ -77,10 +78,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     scrollAndClick(forgotPasswordLink);
   }
 
-  public void loginAndVerify(String name, String password, String wikiURL) {
-    openSpecialUserLogin(wikiURL);
-    login(name, password);
-    verifyUserLoggedIn(name);
+  private void clickContinueLink() {
+    wait.forElementVisible(continueButtonBig);
+    scrollAndClick(continueButtonBig);
   }
 
   public void login(String name, String pass) {
@@ -94,6 +94,13 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
                            ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     typeInUserName(name);
     clickForgotPasswordLink();
+  }
+
+  public void remindPasswordNewAuth(String name, String apiToken) {
+    Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
+                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+    typeInUserName(name);
+    clickContinueLink();
   }
 
   public String setNewPassword() {
@@ -113,8 +120,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
                           true, driver);
   }
 
-  public void verifyClosedAccountMessage() {
-    wait.forElementVisible(messagePlaceholder);
-    Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
+  public void clickLogInLink() {
+    wait.forElementVisible(logInLink);
+    logInLink.click();
   }
 }

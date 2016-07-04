@@ -1,18 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 public class SpecialManageWikiaHome extends WikiBasePageObject {
+
+  private static final String SPECIAL_MANAGE_WIKIA_HOME_PATH = "wiki/Special:ManageWikiaHome";
 
   @FindBy(id = "video-games-amount")
   private WebElement videoGamesAmount;
@@ -21,8 +20,11 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
   @FindBy(id = "lifestyle-amount")
   private WebElement lifestyleAmount;
 
-  public SpecialManageWikiaHome(WebDriver driver) {
-    super(driver);
+  public SpecialManageWikiaHome open() {
+    getUrl(urlBuilder.getUrlForPath("wikia", SPECIAL_MANAGE_WIKIA_HOME_PATH));
+    PageObjectLogging.log("openCorpSetupHomePage", "Special:ManageWikiaHome opened", true);
+
+    return this;
   }
 
   /**
@@ -31,11 +33,11 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
   public Map<String, Integer> getSlotSetup() {
     Map<String, Integer> slotSetup = new HashMap<String, Integer>();
     slotSetup.put(HubName.VIDEO_GAMES.toString(),
-                  Integer.parseInt(videoGamesAmount.getAttribute("value")));
+        Integer.parseInt(videoGamesAmount.getAttribute("value")));
     slotSetup.put(HubName.ENTERTAINMENT.toString(),
-                  Integer.parseInt(entertainmentAmount.getAttribute("value")));
-    slotSetup
-        .put(HubName.LIFESTYLE.toString(), Integer.parseInt(lifestyleAmount.getAttribute("value")));
+        Integer.parseInt(entertainmentAmount.getAttribute("value")));
+    slotSetup.put(HubName.LIFESTYLE.toString(),
+        Integer.parseInt(lifestyleAmount.getAttribute("value")));
     return slotSetup;
   }
 }

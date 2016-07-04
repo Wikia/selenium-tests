@@ -50,7 +50,7 @@ public class WamPageObject extends BasePageObject {
   private WebElement monthInCalendar;
 
   public WamPageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
@@ -69,7 +69,7 @@ public class WamPageObject extends BasePageObject {
    */
   public void verifyTabIsSelected(WamTab tab) {
     WebElement wamTab =
-        driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
+            driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
     PageObjectLogging.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
     if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
@@ -94,7 +94,7 @@ public class WamPageObject extends BasePageObject {
 
     if (rows > 1) {
       PageObjectLogging.log("verifyWamIndexIsNotEmpty",
-          "there are more rows in the table than just a head row (" + rows + ")", true);
+              "there are more rows in the table than just a head row (" + rows + ")", true);
     } else {
       PageObjectLogging.log("verifyTabIsSelected", "there is only the head row", false);
     }
@@ -107,7 +107,7 @@ public class WamPageObject extends BasePageObject {
   public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
     wait.forElementPresent(WAM_INDEX_TABLE);
     Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals "
-        + expectedRowsNo);
+            + expectedRowsNo);
   }
 
   /**
@@ -128,10 +128,10 @@ public class WamPageObject extends BasePageObject {
 
     if (result.equals(true)) {
       PageObjectLogging.log("verifyWamVerticalFilterOptions",
-          "There are correct options in the vertical select box", true);
+              "There are correct options in the vertical select box", true);
     } else {
       PageObjectLogging.log("verifyWamVerticalFilterOptions",
-          "There is invalid option in the vertical select box", false);
+              "There is invalid option in the vertical select box", false);
     }
   }
 
@@ -174,15 +174,15 @@ public class WamPageObject extends BasePageObject {
 
   public void selectTab(WamTab tab) {
     scrollAndClick(driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT,
-        tab.getId()))));
+            tab.getId()))));
     isLoaded();
     verifyTabSelected(tab);
   }
 
   private void verifyTabSelected(WamTab tab) {
     Assertion.assertTrue(driver
-        .findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
-        .getAttribute("class").contains("icon-vertical-selected"));
+            .findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())))
+            .getAttribute("class").contains("icon-vertical-selected"));
     wait.forElementVisible(tabSelected);
   }
 
@@ -193,8 +193,8 @@ public class WamPageObject extends BasePageObject {
   public void verifyTodayDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
     String todayDate =
-        DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-            .print(DateTime.now().withZone(DateTimeZone.UTC));
+            DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
+                    .print(DateTime.now().withZone(DateTimeZone.UTC));
     Assertion.assertEquals(todayDate, currentDate, "Current date and today date are not the same");
   }
 
@@ -205,14 +205,11 @@ public class WamPageObject extends BasePageObject {
     DateTime date = DateTime.now().minusMonths(1);
     String previousMonth = DateTimeFormat.forPattern("MMMM").withLocale(Locale.ENGLISH).print(date);
     wait.forTextInElement(monthInCalendar, previousMonth);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // first day of the current month
-    WebElement firstDay =
-        (WebElement) js
-            .executeScript(
-                "return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
-                calendarElement);
+    WebElement firstDay = (WebElement) jsActions.execute(
+            "return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
+            calendarElement);
     firstDay.click();
 
     String year = DateTimeFormat.forPattern("YYYY").print(date);
@@ -228,14 +225,8 @@ public class WamPageObject extends BasePageObject {
 
   public void typeDateInDatePicker(String date) {
     wait.forElementClickable(datePickerInput);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("$(arguments[0])[0].value=''", datePickerInput);
+    jsActions.execute("$(arguments[0])[0].value=''", datePickerInput);
     scrollAndClick(datePickerInput);
     new Actions(driver).sendKeys(datePickerInput, date).sendKeys(datePickerInput, "\n").perform();
-  }
-
-  private String getFormattedDate(Date date, String format) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
-    return dateFormat.format(date);
   }
 }

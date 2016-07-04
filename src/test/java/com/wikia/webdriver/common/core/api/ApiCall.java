@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.core.api;
 
 import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -9,7 +9,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.openqa.selenium.WebDriverException;
 
@@ -20,9 +20,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-/**
- * Created by wikia on 2015-08-27.
- */
 public abstract class ApiCall {
 
   private static String ERROR_MESSAGE = "Problem with API call";
@@ -30,9 +27,7 @@ public abstract class ApiCall {
   protected static String URL_STRING = null;
 
   protected ApiCall() {
-
   }
-
 
   abstract protected String getURL();
 
@@ -53,7 +48,7 @@ public abstract class ApiCall {
   public void call() {
     try {
       URL url = new URL(getURL());
-      CloseableHttpClient httpClient = HttpClients.createDefault();
+      CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
       HttpPost httpPost = getHtppPost(url);
       // set header
       if (getUser() != null) {

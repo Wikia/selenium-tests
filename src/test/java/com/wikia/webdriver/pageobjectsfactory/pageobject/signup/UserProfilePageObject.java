@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.openqa.selenium.By;
@@ -29,13 +29,15 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private WebElement avatarEditButton;
   @FindBy(css = "#UserAvatarRemove")
   private WebElement avatarRemoveButton;
+  @FindBy(css = ".masthead-avatar img.avatar")
+  private WebElement avatar;
 
-  private By image = By.cssSelector("img");
+  private String avatarChangedSelector = ".masthead-avatar img.avatar[src*='/%imageName%']";
 
-  private String avatarSelector = ".masthead-avatar > img[src*='/%imageName%']";
+  private By avatarImage = By.cssSelector("img.avatar");
 
   public UserProfilePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void clickOnBlogTab() {
@@ -69,13 +71,13 @@ public class UserProfilePageObject extends WikiBasePageObject {
     return new BlogPageObject(driver);
   }
 
-  public SpecialCreatePagePageObject clickOnCreateBlogPost() {
+  public SpecialCreatePage clickOnCreateBlogPost() {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
     PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
                           true, driver);
-    return new SpecialCreatePagePageObject(driver);
+    return new SpecialCreatePage();
   }
 
   private void showAvatarControls() {
@@ -94,12 +96,9 @@ public class UserProfilePageObject extends WikiBasePageObject {
     return new AvatarComponentObject(driver);
   }
 
-  public String getAvatarUrl() {
-    return avatarWrapper.findElement(image).getAttribute("src");
-  }
-
   public void clickRemoveAvatar() {
     showAvatarControls();
+    wait.forElementClickable(avatarRemoveButton);
     avatarRemoveButton.click();
     AlertHandler.acceptPopupWindow(driver, 20);
     hideAvatarControls();
@@ -107,14 +106,22 @@ public class UserProfilePageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
   }
 
-  public void verifyAvatar(String fileName) {
-    wait.forElementVisible(By.cssSelector(avatarSelector.replace("%imageName%", fileName)));
-	  PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
+  public void verifyAvatar() {
+    wait.forElementVisible(avatar);
+    PageObjectLogging.log("verifyAvatar", "Desired avatar is visible on user profile page", true);
   }
 
-public void verifyProfilePage(String userName) {
-	verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
-	PageObjectLogging.log("verifyProfilePage", userName +" user profile page verified", true);
-}
+  public void verifyAvatarChanged(String url) {
+    wait.forValueToBeNotPresentInElementsAttribute(avatar, "src", url);
+    PageObjectLogging.log("verifyAvatarChanged", "avatar src value has changed", true);
+  }
 
+  public String getAvatarImageSrc() {
+    return avatarWrapper.findElement(avatarImage).getAttribute("src");
+  }
+
+  public void verifyProfilePage(String userName) {
+    verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
+    PageObjectLogging.log("verifyProfilePage", userName + " user profile page verified", true);
+  }
 }

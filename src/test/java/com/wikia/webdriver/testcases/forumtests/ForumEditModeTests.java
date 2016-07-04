@@ -23,7 +23,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"ForumEditModeTests_001", "Forum", "ForumEditMode"})
-  public void ForumEditModeTests_001_faq() {
+  public void staffUserCanOpenFrequentlyAskedQuestionsModalOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
@@ -44,7 +44,7 @@ public class ForumEditModeTests extends NewTestTemplate {
 
   @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002", "Forum",
                                                  "ForumEditMode"})
-  public void ForumEditModeTests_002_createNewBoard(String name) {
+  public void staffUserCanCreateNewBoard(String name) {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
@@ -57,7 +57,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumEditModeTests_003", "Forum", "ForumEditMode"})
-  public void ForumEditModeTests_003_deleteBoard() {
+  public void staffUserCanDeleteBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
@@ -70,7 +70,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ForumEditModeTests_004", "Forum", "ForumEditMode"})
-  public void ForumEditModeTests_004_editBoard() {
+  public void staffUserCanEditForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
@@ -84,7 +84,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"Forum_005", "Forum", "ForumEditMode"})
-  public void forumEditModeTests_005_moveBoard() {
+  public void staffUserCanMoveBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
@@ -95,8 +95,8 @@ public class ForumEditModeTests extends NewTestTemplate {
     manageForum.clickMoveUp(second);
   }
 
-  @Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
-  public void forumEditModeTests_006_templatesInBoardDescription() {
+  @Test(groups = {"Forum_006", "Forum", "ForumEditMode"}, enabled = false)
+  public void staffUserCanCreateBoardWithTemplate() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
 
     // create a template

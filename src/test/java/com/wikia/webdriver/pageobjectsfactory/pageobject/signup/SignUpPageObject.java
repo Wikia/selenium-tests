@@ -27,9 +27,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class SignUpPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#WikiaSignupForm input[name='userloginext01']")
@@ -58,7 +55,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   private By recaptchaErrorMsgBy = By.cssSelector(".captcha .error-msg");
 
   public SignUpPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private static String md5(InputStream is) {

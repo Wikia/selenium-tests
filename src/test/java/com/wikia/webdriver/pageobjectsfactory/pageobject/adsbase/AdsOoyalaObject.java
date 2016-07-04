@@ -11,13 +11,9 @@ import org.openqa.selenium.support.FindBy;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Dmytro Rets
- * @ownership AdEngineering
- */
 public class AdsOoyalaObject extends AdsBaseObject {
 
-  @FindBy(css = "object[data^='http://player.ooyala.com/player.swf']")
+  @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightbox;
 
   public AdsOoyalaObject(WebDriver driver, String page) {
@@ -53,11 +49,5 @@ public class AdsOoyalaObject extends AdsBaseObject {
     } finally {
       restoreDeaultImplicitWait();
     }
-  }
-
-  public void verifyFlash() {
-    Boolean hasFlash = (Boolean) jsActions.execute(
-        "'undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']");
-    PageObjectLogging.log("Verify flash", "Flash should be turned on", hasFlash);
   }
 }

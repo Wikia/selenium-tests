@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.template.TemplatePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -23,8 +22,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SourceEditModePageObject extends EditMode {
-
-
+  
+  @FindBy(css = "#wpSave")
+  private WebElement submitButton;
   @FindBy(css = "#mw-editbutton-bold")
   private WebElement bold;
   @FindBy(css = "#mw-editbutton-italic")
@@ -79,7 +79,7 @@ public class SourceEditModePageObject extends EditMode {
   private WebElement sourceModeTextArea;
 
   public SourceEditModePageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SourceEditModePageObject focusTextArea() {
@@ -97,7 +97,10 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(getSourceContent().substring(1, 38) + getSourceContent().substring(48), desiredContent.substring(1, 38) + desiredContent.substring(48)
+    int fileNameLength = 38;
+    int fileParametersBeginIndex = 48;
+    Assertion.assertEquals(getSourceContent().substring(1, fileNameLength) + getSourceContent().substring(fileParametersBeginIndex),
+                           desiredContent.substring(1, fileNameLength) + desiredContent.substring(fileParametersBeginIndex)
     );
   }
 
@@ -213,7 +216,7 @@ public class SourceEditModePageObject extends EditMode {
   public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("addContent", "content was added", true);
+    PageObjectLogging.log("addContent", "the following content was added: "+content, true);
     return this;
   }
 
@@ -264,7 +267,9 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkMainTools() {
-    for (int i = 1; i < 17; i++) {
+    //edit tools 'Insert' section in MediaWiki:Edittools
+    int wikitextShortcutsInsertSection = 17;
+    for (int i = 1; i < wikitextShortcutsInsertSection; i++) {
       clearSource();
       clickMore();
       String
@@ -282,7 +287,9 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    for (int i = 1, j = i + 1; i < 21; i++) {
+    //edit tools 'Wiki markup' section in MediaWiki:Edittools
+    int wikitextShortcutsWikiMarkupSection = 21;
+    for (int i = 1; i < wikitextShortcutsWikiMarkupSection; i++) {
       clearSource();
       clickMore();
       String content =
@@ -298,7 +305,9 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSymbolsTools() {
-    for (int i = 1; i < 65; i++) {
+    //edit tools 'Symbols' section in MediaWiki:Edittools
+    int wikitextShortcutsSymbolsSection = 65;
+    for (int i = 1; i < wikitextShortcutsSymbolsSection; i++) {
       clearSource();
       clickMore();
       String
@@ -331,8 +340,8 @@ public class SourceEditModePageObject extends EditMode {
         content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
     );
     Assertion.assertNumber(
-            widthDesired, width,
-            "width is " + width + " should be " + widthDesired
+        widthDesired, width,
+        "Video width in source edit mode is " + width + " while desired width is " + widthDesired
     );
   }
 
@@ -352,7 +361,7 @@ public class SourceEditModePageObject extends EditMode {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging
-            .log("appendContent", "text: '" + content + "', added to the source mode", true);
+        .log("appendContent", "text: '" + content + "', added to the source mode", true);
   }
 
   private void appendNewLine(String content) {
@@ -388,16 +397,6 @@ public class SourceEditModePageObject extends EditMode {
   public ArticlePageObject clickPublishButton() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    return new ArticlePageObject(driver);
-  }
-
-  public void addCategoryToSourceCode(String catName) {
-    sourceModeTextArea.sendKeys(catName);
-  }
-
-  public TemplatePageObject clickPublishButtonInTemplateNamespace() {
-    wait.forElementVisible(submitButton);
-    submitButton.click();
-    return new TemplatePageObject(driver);
+    return new ArticlePageObject();
   }
 }

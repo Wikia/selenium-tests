@@ -7,9 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class AddMediaModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "#UploadPhotosWrapper")
@@ -22,7 +19,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
   protected WebElement addVideoModal;
 
   public AddMediaModalComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void closeAddPhotoModal() {

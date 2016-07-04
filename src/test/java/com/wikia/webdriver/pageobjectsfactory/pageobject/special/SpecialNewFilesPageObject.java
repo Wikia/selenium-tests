@@ -18,10 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author Bogna 'bognix' Knychala
- */
 public class SpecialNewFilesPageObject extends SpecialPageObject {
+
+  private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
 
   @FindBy(css = "a.upphotos[title*='Add a photo']")
   private WebElement addPhotoButton;
@@ -45,7 +44,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   private WebElement fileNameInput;
 
   public SpecialNewFilesPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void addPhoto() {
@@ -71,13 +70,23 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     fileNameInput.sendKeys(fileName);
   }
 
-  public void clickOnMoreOrFewerOptions() {
+  public void clickOnMoreOptions() {
     moreOrFewerOptions.click();
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
     PageObjectLogging.log(
-        "ClickOnMoreOrFewerOptions",
-        "Click on More or Fewer options (depends on which of those two is currently visible)",
+        "ClickOnMoreOptions",
+        "Click on More options",
         true
+    );
+  }
+
+  public void clickOnFewerOptions() {
+    moreOrFewerOptions.click();
+    waitForValueToBePresentInElementsCssByCss("div.options", "display", "none");
+    PageObjectLogging.log(
+            "ClickOnFewerOptions",
+            "Click on Fewer options",
+            true
     );
   }
 
@@ -176,13 +185,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     return new FilePagePageObject(driver);
   }
 
-  public FilePagePageObject openRandomImage() {
-    driver.get(
-        getRandomImageUrl()
-    );
-    return new FilePagePageObject(driver);
-  }
-
   public WatchPageObject unfollowImage(String wikiURL, String imageName) {
     String url = urlBuilder.appendQueryStringToURL(
         wikiURL +
@@ -212,6 +214,10 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     String imageKey = imagesNewFiles.get(itemNumber).getAttribute("data-image-key");
     PageObjectLogging.log("getImageKey", "Image key: " + imageKey, true);
     return imageKey;
+  }
+
+  public String getNewFilesSpecialPageTitle() {
+    return NEW_FILES_SPECIAL_PAGE_TITLE;
   }
 
 }

@@ -1,20 +1,18 @@
 package com.wikia.webdriver.common.core.api;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.ArrayList;       
 
-/**
- * Created by Ludwik on 2015-08-05.
- */
 public class ArticleContent extends ApiCall {
 
   private static String secret;
@@ -55,12 +53,18 @@ public class ArticleContent extends ApiCall {
     call();
   }
 
-  public  void push(String content) {
+  public void push(String content) {
     push(content, TestContext.getCurrentMethodName());
   }
 
-  public  void clear(String articleTitle) {
+  public void push() {
+    push(PageContent.ARTICLE_TEXT, TestContext.getCurrentMethodName());
+  }
+
+  public ArticleContent clear(String articleTitle) {
     push("", articleTitle);
+
+    return this;
   }
 
   public  void clear() {

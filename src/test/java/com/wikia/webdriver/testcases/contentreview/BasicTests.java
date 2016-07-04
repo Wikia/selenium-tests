@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
@@ -37,7 +36,7 @@ public class BasicTests extends NewTestTemplate {
                 String.format("My Awesome JS edit %d", DateTime.now().getMillis());
 
         VisualEditModePageObject editPage =
-                new VisualEditModePageObject(driver).open("mediawiki:wikia.js");
+                new VisualEditModePageObject().open("mediawiki:wikia.js");
 
         editPage
                 .getAceEditor()

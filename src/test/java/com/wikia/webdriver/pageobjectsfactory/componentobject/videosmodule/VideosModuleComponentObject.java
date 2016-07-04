@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author James Sutterfield
- */
 public class VideosModuleComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "#videosModule")
@@ -23,7 +20,7 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
   private static final int VIDEO_COUNT_MAX = 5;
 
   public VideosModuleComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyVideosModuleShowing() {

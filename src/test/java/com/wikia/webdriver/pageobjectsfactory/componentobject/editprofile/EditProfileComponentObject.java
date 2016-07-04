@@ -7,9 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class EditProfileComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "li[data-tab='avatar']")
@@ -18,7 +15,7 @@ public class EditProfileComponentObject extends WikiBasePageObject {
   protected WebElement aboutTab;
 
   public EditProfileComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   protected void clickAvatarTab() {

@@ -2,8 +2,8 @@ package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -11,21 +11,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class CategoriesArticleTests extends NewTestTemplate {
-
-  /**
-   * Add category to article as anon Add category to article from suggestion list as anon Add
-   * category to article as user Add category to article from suggestion list as user Add category
-   * to article as anon edit, delete
-   */
 
   @Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
   public void CategoriesTestsArticle_001_anon() {
-    ArticlePageObject article = new ArticlePageObject(driver);
-    article.openRandomArticle(wikiURL);
+    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+
+    ArticlePageObject article = new ArticlePageObject().open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
@@ -36,7 +28,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   public void CategoriesTestsArticle_002_anonSuggestions() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
     article.submitCategory();
     article.verifyCategoryPresent(desiredCategory);
@@ -47,7 +39,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   public void CategoriesTestsArticle_003_user() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
@@ -59,7 +51,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   public void CategoriesTestsArticle_004_userSuggestions() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
     article.submitCategory();
     article.verifyCategoryPresent(desiredCategory);
@@ -69,7 +61,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   public void CategoriesTestsArticle_005_anonEdit() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + DateTime.now().getMillis();
     article.addCategory(categoryName);
     EditCategoryComponentObject editCategory = article.editCategory(categoryName);
@@ -83,7 +75,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
   public void CategoriesTestsArticle_006_anonDelete() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     article.addCategory("DeleteMe");
     article.verifySubmitCategoryEnabled();
     article.removeCategory("DeleteMe");

@@ -2,22 +2,18 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 
 import org.testng.annotations.Test;
 
-/**
- * @author: Michal 'justnpT' Nowierski
- * @ownership Content X-Wing
- */
 public class ArticleTOCTests extends NewTestTemplate {
 
   /**
@@ -25,9 +21,9 @@ public class ArticleTOCTests extends NewTestTemplate {
    */
   @Test(groups = {"ArticleTOCTests", "ArticleTOCTests_001"})
   public void ArticleTOCTests_001_CreateArticleWithTOCasAnon() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
+    SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();
     VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
     SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
     sourceEditMode.verifySourceModeEnabled();
@@ -45,7 +41,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_002_verifyTOChideShowButtonsWorkForAnon() {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
     article.verifyTOCcollapsed();
     article.clickTOCshowHideButton();
@@ -62,9 +58,9 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_003_verifyTOCisCollapsedOnPreviewForAnon() {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.verifyContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
@@ -80,7 +76,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_004_verifyTOCtakesAnonToSectionClicked() {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
     article.verifyTOCcollapsed();
     article.clickTOCshowHideButton();
@@ -96,7 +92,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_005_verifyTOChideShowButtonsWorkForLoggedInUser() {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
     article.verifyTOCexpanded();
     article.clickTOCshowHideButton();
@@ -114,7 +110,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_006_verifyTOCisExpandedOnPreviewForLoggedInUser() {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver).open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     visualEditMode.verifyContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
@@ -131,7 +127,7 @@ public class ArticleTOCTests extends NewTestTemplate {
   public void ArticleTOCTests_007_verifyTOCtakesLoggedInUserToSectionClicked() {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
-    ArticlePageObject article = new ArticlePageObject(driver).open();
+    ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
     article.verifyTOCexpanded();
     article.verifyTOCsectionLinkWorks(1);

@@ -1,7 +1,9 @@
 package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -12,19 +14,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 
 import org.testng.annotations.Test;
 
+@Test(groups = "comments-blogComments")
 public class BlogCommentsTests extends NewTestTemplate {
-
-  /**
-   * @author Karol 'kkarolk' Kujawiak <p/> Test cases: 1. (Anon) Add comment to the blog post, reply
-   * to the comment 2. (user) Add comment to the blog post, reply to the comment 3. (User) Edit
-   * existing comment, 4. (Staff) Delete existing comment,
-   */
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"BlogComments_001", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_001")
   public void BlogComments_001_Anon_commentReply() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -42,10 +39,10 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
   }
 
-  @Test(groups = {"BlogComments_002", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_002")
+  @Execute(asUser = User.USER)
   public void BlogComments_002_User_commentReply() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -64,10 +61,10 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = {"BlogComments_003", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_003")
+  @Execute(asUser = User.USER)
   public void BlogComments_003_User_editComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
@@ -84,9 +81,9 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = {"BlogComments_004", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_004")
   public void BlogComments_004_Admin_deleteComment() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
+    WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();

@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Robert 'rochan' Chan
- */
 public class VisualEditorDialog extends WikiBasePageObject {
 
   @FindBy(css = ".oo-ui-window-ready .oo-ui-window-frame")
@@ -21,7 +18,7 @@ public class VisualEditorDialog extends WikiBasePageObject {
   private WebElement closeButton;
 
   public VisualEditorDialog(WebDriver driver) {
-    super(driver);
+    super();
     waitForDialogVisible();
   }
 

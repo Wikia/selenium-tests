@@ -2,7 +2,9 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -16,10 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- * @ownership Content X-Wing
- */
 public class VetModalWidthTests extends NewTestTemplate {
 
   /**
@@ -33,14 +31,14 @@ public class VetModalWidthTests extends NewTestTemplate {
 
   final static int WIDTH = 250;
 
-  @Test(groups = {"VetModalWidth", "VetModalwidth_001", "Media"})
+  @Test(groups = {"VetModalWidth", "VetModalwidth_001", "VetTests", "Media"})
+  @Execute(asUser = User.USER)
   public void Vet_Modal_001_widthOnPage() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject
         visualEditMode =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.navigateToArticleEditPage(wikiURL, articleTitle);
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject
         vetOptions =
@@ -58,14 +56,14 @@ public class VetModalWidthTests extends NewTestTemplate {
     article.verifyVideoWidth(WIDTH);
   }
 
-  @Test(groups = {"VetModalWidth", "VetModalwidth_002",
+  @Test(groups = {"VetModalWidth", "VetModalwidth_002", "VetTests",
                   "Media"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
+  @Execute(asUser = User.USER)
   public void Vet_Modal_002_widthInModal() {
-    WikiBasePageObject base = new WikiBasePageObject(driver);
-    base.loginAs(credentials.userName, credentials.password, wikiURL);
+    WikiBasePageObject base = new WikiBasePageObject();
     VisualEditModePageObject
         visualEditModePageObject =
-        base.navigateToArticleEditPageCK(wikiURL, articleTitle);
+        base.navigateToArticleEditPage(wikiURL, articleTitle);
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
     vetOptions.verifyVideoWidth(WIDTH);

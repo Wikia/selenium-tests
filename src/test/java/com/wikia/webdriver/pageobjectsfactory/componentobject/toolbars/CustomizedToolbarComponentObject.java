@@ -12,11 +12,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-
-/**
- * @author Michal 'justnpT' Nowierski
- * @author Karol 'kkarolk' Kujawiak
- */
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
@@ -38,6 +33,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   @FindBy(css = ".tools-menu li > a[data-name='themedesigner]'")
   private WebElement themeDesignerButton;
   private By toolsList = By.cssSelector("ul.tools li");
+  private By customizeToolbar = By.cssSelector("#MyToolsConfigurationWrapper");
   private String searchSuggestionToolCss = "div.autocomplete div[title=\"%s\"]";
   private String toolbarToolCss = "li.overflow a[data-name=\"%s\"]";
   private String toolsListToolCss = "ul.options-list li[data-caption=\"%s\"]";
@@ -47,7 +43,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
 
   public CustomizedToolbarComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
 
@@ -63,8 +59,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   /**
    * Clicks on "Customize" button. User must be logged in.
-   *
-   * @author Michal Nowierski
    */
   public void clickCustomize() {
     wait.forElementVisible(customizeButton);
@@ -75,8 +69,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   /**
    * Clicks on "ResetDefaults" button.
-   *
-   * @author Michal Nowierski
    */
   public void clickResetDefaults() {
     wait.forElementVisible(resetDefaultsButton);
@@ -88,7 +80,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Types GivenString to Find A Tool field
    *
    * @param toolName String to be typed into search field
-   * @author Michal Nowierski
    */
   public void searchTool(String toolName) {
     wait.forElementVisible(findAToolField);
@@ -103,7 +94,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Types GivenString to Find A Tool field
    *
    * @param toolNewName new name for the Tool
-   * @author Michal Nowierski
    */
   public void typeNewName(String toolNewName) {
     renameItemDialogInput.clear();
@@ -113,8 +103,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   /**
    * Clicks on "save" button on Rename Item dialog.
-   *
-   * @author Michal Nowierski
    */
   public void clickSaveNewName() {
     scrollAndClick(saveItemDialogInput);
@@ -126,7 +114,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Click on a Tool after searching for it
    *
    * @param toolName toolname appearing on the list of found tools
-   * @author Michal Nowierski
    */
   public void clickSearchSuggestion(String toolName) {
     scrollAndClick(
@@ -141,9 +128,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   /**
    * Click on a toolbar tool.
    *
-   * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool
-   *                  you want to click.
-   * @author Michal Nowierski
+   * @param data-name data-name of the toolbar tool.
+   *            You should check the data-name of the tool you want to click.
    */
   public void clickOnTool(String toolName) {
     jsActions.click(
@@ -155,9 +141,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   /**
    * Click on a toolbar tool.
    *
-   * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool
-   *                  you want to click.
-   * @author Michal Nowierski
+   * @param data-name data-name of the toolbar tool.
+   *            You should check the data-name of the tool you want to click.
    */
   public void verifyFollowMessage() {
     wait.forElementVisible(pageWatchlistStatusMessage);
@@ -168,8 +153,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   /**
    * Verify that page is followed The method should be used only after clicking on "follow" button.
    * Before that, "follow" button does not have 'title' attribute which is necessary in the method
-   *
-   * @author Michal Nowierski
    */
   public void verifyFollowedToolbar() {
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
@@ -182,8 +165,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Verify that page is unfollowed The method should be used only after clicking on "Unfollow"
    * button. Before that, "follow" button does not have 'title' attribute which is necessary in the
    * method
-   *
-   * @author Michal Nowierski
    */
   public void verifyUnfollowed() {
     wait.forElementClickable(pageWatchlistStatusMessage);
@@ -197,25 +178,21 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Look up if Tool appears on Toolbar List
    *
    * @param toolName {Follow, Edit, History, (...)}
-   * @author Michal Nowierski
    */
   public void verifyToolOnList(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     PageObjectLogging.log("verifyToolOnList", toolName + " visible on the list", true);
-
   }
 
   public void verifyToolNotOnList(String toolName) {
     wait.forElementNotPresent(By.cssSelector(String.format(toolsListToolCss, toolName)));
     PageObjectLogging.log("verifyToolNotOnList", toolName + " not visible on the list", true);
-
   }
 
   /**
    * Remove a wanted Tool by its data-caption
    *
    * @param toolName ID of tool to be removed. {Follow, Edit, History, (...)}
-   * @author Michal Nowierski
    */
   public void clickRemove(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
@@ -228,7 +205,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    *
    * @param toolName ID of tool to be removed. {PageAction:Follow, PageAction:Edit,
    *                 PageAction:History, (...)}
-   * @author Michal Nowierski
    */
   public void clickRename(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
@@ -238,14 +214,11 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   /**
    * Click on save button on customize toolbar
-   *
-   * @author Michal Nowierski
    */
   public void clickSave() {
     wait.forElementVisible(saveButton);
     scrollAndClick(saveButton);
     PageObjectLogging.log("clickSave", "save button clicked", true);
-
   }
 
   public void verifyToolOnToolbar(String toolName) {
@@ -254,12 +227,11 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   /**
-   * <p> Verify that wanted Tool appears in Toolbar. <br> The method finds all of Tools appearing in
+   * Verify that wanted Tool appears in Toolbar. The method finds all of Tools appearing in
    * Toolbar (by their name), and checks if there is at least one name which fits the given param
    * (ToolName)
    *
    * @param ToolName Tool to be verified (name that should appear on toolbar)
-   * @author Michal Nowierski
    */
   public void unfollowIfFollowed() {
     List<WebElement> list = driver.findElements(toolsList);
@@ -309,9 +281,11 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * Get text string from Theme Designer button in My Tools menu
    *
    */
-
   public String getThemeDesignerText() {
     return themeDesignerButton.getText();
   }
 
+  public void waitForCustomizeToolbarModalToDisappear() {
+    wait.forElementNotVisible(customizeToolbar);
+  }
 }

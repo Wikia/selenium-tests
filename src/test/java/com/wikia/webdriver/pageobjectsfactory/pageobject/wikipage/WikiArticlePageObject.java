@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -31,12 +30,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
   private String pageName;
 
   public WikiArticlePageObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 
   public WikiArticlePageObject(WebDriver driver, String pageName) {
-    super(driver);
+    super();
     this.pageName = pageName;
   }
 
@@ -76,27 +75,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     return edit;
   }
 
-  public WikiArticleEditMode createNewDefaultArticle() {
-    this.pageName = PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
-    return createNewArticle(this.pageName, 1);
-  }
-
-  public WikiArticlePageObject openRandomArticle() {
-    scrollAndClick(randomPageButton);
-    wait.forElementVisible(searchButton);
-    PageObjectLogging.log("openRandomArticle", "random page button clicked", true, driver);
-    return new WikiArticlePageObject(driver);
-  }
-
-  public void verifyArticleText(String content) {
-    wait.forTextInElement(articleContentBy, content);
-    PageObjectLogging.log("verifyArticleText", "article text is verified", true);
-  }
-
   /**
    * Click Edit button on a wiki article
-   *
-   * @author Michal Nowierski
    */
   public WikiArticleEditMode edit() {
     wait.forElementVisible(editButton);
@@ -107,8 +87,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
   /**
    * Verify that the image appears on the page
-   *
-   * @author Michal Nowierski
    */
   public void verifyImageOnThePage() {
     wait.forElementPresent(imageOnWikiaArticle);

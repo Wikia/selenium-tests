@@ -12,64 +12,100 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
 public class EditMode extends WikiBasePageObject {
 
   @FindBy(css = "#wpSave")
-  protected WebElement submitButton;
+  private WebElement submitButton;
+
   @FindBy(css = "#wpPreview")
-  private WebElement previewButton;
+  private WebElement desktopPreviewButton;
+
+  @FindBy(css = "#wpPreviewMobile")
+  private WebElement mobilePreviewButton;
+
   @FindBy(css = "a.RTEImageButton")
   private WebElement photoButton;
+
   @FindBy(css = "a.RTEVideoButton")
   private WebElement videoButton;
+
   @FindBy(css = "a.RTEGalleryButton")
   private WebElement galleryButton;
+
   @FindBy(css = "a.RTESlideshowButton")
   private WebElement slideshowButton;
+
   @FindBy(css = "a.RTESliderButton")
   private WebElement sliderButton;
+
   @FindBy(css = "a.cke_button_ModeWysiwyg > span#cke_23_label")
   private WebElement visualButton;
-  @FindBy(css = "a.cke_button_ModeSource > span#cke_22_label")
+
+  @FindBy(css = "a.cke_button_ModeSource > span.cke_label")
   private WebElement sourceButton;
+
   @FindBy(css = "a.cke_off.cke_button_table")
   private WebElement addTableButton;
 
+  @FindBy(css = ".editpage-notices")
+  private WebElement notificationForAnon;
+
   private By submitButtonBy = By.cssSelector("#wpSave");
 
-  public EditMode(WebDriver driver) {
-    super(driver);
+  public EditMode() {
+    super();
   }
 
   private void submit() {
     driver.switchTo().defaultContent();
     wait.forElementClickable(submitButton);
     scrollAndClick(submitButton);
-    wait.forElementNotPresent(submitButtonBy);
-    PageObjectLogging.log("submit", "Page submitted", true);
+
+    PageObjectLogging.logInfo("Submit");
   }
 
   public ArticlePageObject submitArticle() {
     submit();
-    return new ArticlePageObject(driver);
+    wait.forElementNotPresent(submitButtonBy);
+    PageObjectLogging.logInfo("Page submitted");
+
+    return new ArticlePageObject();
+  }
+
+  /**
+   * Submitting an edit is expecting a notification
+   */
+  public EditMode submitExpectingNotification() {
+    submit();
+    wait.forElementVisible(notificationForAnon);
+    PageObjectLogging.logInfo("Notification is visible");
+
+    return this;
   }
 
   public PreviewEditModePageObject previewArticle() {
     driver.switchTo().defaultContent();
-    previewButton.click();
+    wait.forElementClickable(desktopPreviewButton);
+    desktopPreviewButton.click();
     PageObjectLogging.log("preview", "Page preview displayed", true);
     return new PreviewEditModePageObject(driver);
   }
 
+  public MobilePreviewEditModePageObject openMobilePreviewArticle() {
+    driver.switchTo().defaultContent();
+    wait.forElementClickable(mobilePreviewButton);
+    mobilePreviewButton.click();
+    PageObjectLogging.log("mobile preview", "Page mobile preview displayed", true);
+    return new MobilePreviewEditModePageObject();
+  }
+
   public BlogPageObject submitBlog() {
     submit();
+    wait.forElementNotPresent(submitButtonBy);
+
     return new BlogPageObject(driver);
   }
 
@@ -123,6 +159,6 @@ public class EditMode extends WikiBasePageObject {
   public VisualEditModePageObject clickVisualButton() {
     visualButton.click();
     PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
-    return new VisualEditModePageObject(driver);
+    return new VisualEditModePageObject();
   }
 }

@@ -1,20 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-
-/**
- * @author Karol Kujawiak
- */
 
 public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
@@ -34,16 +32,26 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private WebElement languageSelectedIndicator;
   @FindBy(css = ".wiki-domain-error.error-msg")
   private WebElement wikiDomainErrorMessage;
-  ;
 
   private String wikiNameString;
 
   public CreateNewWikiPageObjectStep1(WebDriver driver) {
-    super(driver);
+    super();
+  }
+
+  /**
+   * Open special Page to create new Wikia. This special page 'Special:CreateNewWiki'
+   * is only available on www.wikia.com domain
+   * @return
+   */
+  public CreateNewWikiPageObjectStep1 open(){
+    getUrl(urlBuilder.getUrlForWiki("wikia") + URLsContent.SPECIAL_CREATE_NEW_WIKI);
+
+    return this;
   }
 
   public String getWikiName() {
-    wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + getRandomDigits(3) + getRandomString(5);
+    wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + DateTime.now().getMillis();
     return this.wikiNameString;
   }
 
@@ -74,9 +82,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
   }
 
-  /**
-   * @author Karol Kujawiak
-   */
   public void verifySuccessIcon() {
     wait.forElementVisible(successIcon);
     wait.forElementVisible(submitButton);
@@ -101,10 +106,10 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     return new CreateNewWikiPageObjectStep2(driver);
   }
 
-  public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp() {
+  public AuthModal clickNextToSignIn() {
     scrollAndClick(submitButton);
-    PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-    return new CreateNewWikiLogInSignUpPageObject(driver);
+    PageObjectLogging.log("submit", "button \"Next\" clicked", true, driver);
+    return new AuthModal();
   }
 
   public void verifyWikiName(String expectedWikiName) {

@@ -6,9 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPadObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEng
- */
 public class TestPad extends TemplateNoFirstLoad {
 
   private static final String DISASTER_RECOVERY_URL_PARAM_ON =

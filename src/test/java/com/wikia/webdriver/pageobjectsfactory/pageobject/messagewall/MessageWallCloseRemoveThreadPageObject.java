@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class MessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".wall-action-reason")
@@ -19,7 +16,7 @@ public class MessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
   private WebElement removeConfirmButton;
 
   public MessageWallCloseRemoveThreadPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public MessageWall closeRemoveThread(String reason) {

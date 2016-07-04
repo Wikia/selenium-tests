@@ -2,22 +2,20 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEng
- */
 public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
 
   private static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
   private static final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
+      dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "kruxIntegration",
       groups = "AdsKruxIntegrationMercury"
   )
@@ -31,7 +29,6 @@ public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
       dataProvider = "kruxIntegration",
       groups = "AdsKruxIntegrationOasis"
   )
-  @UseUnstablePageLoadStrategy
   public void adsKruxIntegrationOasis(String wikiName, String article) {
     adsKruxIntegration(wikiName, article, KRUX_SITE_ID_DESKTOP, AdsContent.TOP_LB);
   }

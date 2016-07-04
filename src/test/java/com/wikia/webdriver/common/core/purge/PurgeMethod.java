@@ -4,9 +4,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 import java.net.URI;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 public class PurgeMethod extends HttpRequestBase {
 
   public PurgeMethod(final String uri) {

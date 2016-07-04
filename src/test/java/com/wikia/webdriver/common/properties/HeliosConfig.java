@@ -7,35 +7,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 
-/**
- * Created by Ludwik on 2015-04-24.
- */
 public class HeliosConfig {
 
-  private static String clientSecret;
-  private static String clientId;
   private static String baseURL;
 
   private static void init() {
     File configFile = new File(Configuration.getCredentialsFilePath());
     String env = Configuration.getEnvType();
-    clientId = XMLReader.getValue(configFile, "helios." + env + ".client_id");
-    clientSecret = XMLReader.getValue(configFile, "helios." + env + ".client_secret");
     baseURL = XMLReader.getValue(configFile, "helios." + env + ".base_url");
-  }
-
-  public static String getClientId() {
-    if (StringUtils.isBlank(clientId)) {
-      init();
-    }
-    return clientId;
-  }
-
-  public static String getClientSecret() {
-    if (StringUtils.isBlank(clientSecret)) {
-      init();
-    }
-    return clientSecret;
   }
 
   private static String getBaseURL() {
@@ -64,7 +43,7 @@ public class HeliosConfig {
   }
 
   public enum HeliosController {
-    TOKEN("token"), INFO("info");
+    TOKEN("token"), INFO("info"), USERS("users");
 
     private final String controller;
 

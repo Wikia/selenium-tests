@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -22,8 +22,8 @@ public class ModalTests extends NewTestTemplate {
   public void ModalTests_verifyScrollbarAppears(Dimension dimension) {
     String errorMessage = "can not scroll window";
 
-    ArticlePageObject article = new ArticlePageObject(driver).openRandomArticle(wikiURL);
-    VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+    ArticlePageObject article = new ArticlePageObject().open();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     GalleryBuilderComponentObject galleryBuilder = visualEditMode.clickGalleryButton();
     // resize window
     driver.manage().window().setSize(dimension);
@@ -34,7 +34,7 @@ public class ModalTests extends NewTestTemplate {
 
   @DataProvider(name = "DimensionDataProvider")
   public final Dimension[][] DimensionProvider() {
-    return new Dimension[][] { {new Dimension(1100, 570)}, {new Dimension(800, 570)}};
+    return new Dimension[][]{{new Dimension(1100, 570)}, {new Dimension(800, 570)}};
   }
 
 }

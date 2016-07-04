@@ -7,10 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-/**
- * @ownership AdEng
- */
 public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
+
   private AdsBaseObject ads;
 
   @Test(
@@ -21,7 +19,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
     ads = new AdsBaseObject(driver, testedPage);
     ads.waitForPageLoaded();
 
-    for(String slotName : AdsDataProvider.OASIS_SLOTS_TO_SMOKE_TEST) {
+    for (String slotName : AdsDataProvider.OASIS_SLOTS_TO_SMOKE_TEST) {
       smokeTestSlot(slotName);
     }
   }

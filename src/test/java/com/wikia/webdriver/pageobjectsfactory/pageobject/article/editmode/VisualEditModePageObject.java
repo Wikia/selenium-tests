@@ -1,21 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -29,13 +15,22 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
-/**
- * @author: Bogna 'bognix' Knychała
- */
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
+
 public class VisualEditModePageObject extends EditMode {
 
   private static final String IMAGE_COMPONENT_CSS = "img.image";
   private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
+  @FindBy(css = "#wpSave")
+  private WebElement submitButton;
   @FindBy(css = ".video-thumbnail")
   protected WebElement videoArticle;
   @FindBy(css = "#bodyContent")
@@ -64,7 +59,7 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement categoryInput;
   @FindBy(css = "#CategorySelect .ui-autocomplete")
   private WebElement categorySuggestionsContainer;
-  @FindBy(css = "li.category")
+  @FindBy(css = "li.category>span")
   private List<WebElement> categoryList;
   @FindBy(css = ".RTEMediaCaption")
   private WebElement caption;
@@ -100,8 +95,8 @@ public class VisualEditModePageObject extends EditMode {
   private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
   private AceEditor aceEditor;
 
-  public VisualEditModePageObject(WebDriver driver) {
-    super(driver);
+  public VisualEditModePageObject() {
+    super();
   }
 
   public VisualEditModePageObject open() {
@@ -139,16 +134,6 @@ public class VisualEditModePageObject extends EditMode {
     contentInput.sendKeys(content);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
-  }
-
-  /**
-   * adds new content to an article without clearing the existing content
-   */
-  public void appendContent(String content) {
-    driver.switchTo().frame(iframe);
-    contentInput.sendKeys(content);
-    driver.switchTo().defaultContent();
-    PageObjectLogging.log("appendContent", "content " + content + " added to the article", true);
   }
 
   private void verifyComponent(WebElement component) {
@@ -313,51 +298,9 @@ public class VisualEditModePageObject extends EditMode {
     PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
   }
 
-  /**
-   * Delete unwanted video by its name. Message article page is e.g
-   * http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList This method destination is
-   * exactly related videos message article
-   *
-   * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
-   * @author Michal Nowierski
-   */
-  public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
-    List<String> videos = new ArrayList<String>();
-    wait.forElementVisible(messageSourceModeTextArea);
-    String sourceText = messageSourceModeTextArea.getText();
-    int index = 0;
-    while (true) {
-      int previousStarIndex = sourceText.indexOf("*", index);
-      int nextStarIndex = sourceText.indexOf("*", previousStarIndex + 1);
-      if (nextStarIndex < 0) {
-        break;
-      }
-      String videoText = sourceText.substring(previousStarIndex, nextStarIndex);
-      if (!videoText.contains(unwantedVideoName)) {
-        videos.add(videoText);
-      }
-      index = previousStarIndex + 1;
-    }
-    wait.forElementVisible(messageSourceModeTextArea);
-    messageSourceModeTextArea.clear();
-    messageSourceModeTextArea.sendKeys("WHITELIST");
-    messageSourceModeTextArea.sendKeys(Keys.ENTER);
-    messageSourceModeTextArea.sendKeys(Keys.ENTER);
-    String builder = "";
-    for (int i = 0; i < videos.size(); i++) {
-      builder += videos.get(i);
-      builder += "\n";
-    }
-    CommonUtils.setClipboardContents(builder);
-    messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-    PageObjectLogging.log("deleteUnwantedVideoFromMessage",
-        "Delete all source code on the article", true, driver);
-  }
-
   public void typeCategoryName(String categoryName) {
     wait.forElementVisible(categoryInput);
-    CommonUtils.setClipboardContents(categoryName);
-    categoryInput.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+    categoryInput.sendKeys(categoryName);
     PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
   }
 
@@ -380,7 +323,8 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void submitCategory() {
-    new Actions(driver).sendKeys(categoryInput, Keys.ENTER).perform();
+    new Actions(driver).sendKeys(categoryInput, Keys.ARROW_DOWN)
+        .sendKeys(categoryInput, Keys.ARROW_DOWN).sendKeys(categoryInput, Keys.ENTER).perform();
     PageObjectLogging.log("submitCategory", "category submitted", true);
   }
 
@@ -419,20 +363,27 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public EditCategoryComponentObject editCategory(String categoryName) {
-    WebElement category =
+    WebElement editCategory =
         driver.findElement(By.cssSelector(categoryEditSelector.replace("%categoryName%",
             categoryName)));
-    jsActions.click(category);
+    WebElement category =
+        driver.findElement(By.cssSelector(".category[data-name='" + categoryName + "']"));
+    new Actions(driver).moveToElement(category).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
+        .perform();
+    scrollAndClick(editCategory);
     PageObjectLogging.log("editCategory", "edit category button clicked on category "
         + categoryName, true);
     return new EditCategoryComponentObject(driver);
   }
 
   public void removeCategory(String categoryName) {
-    WebElement category =
+    WebElement removeCategory =
         driver.findElement(By.cssSelector(categoryRemoveSelector.replace("%categoryName%",
             categoryName)));
-    jsActions.click(category);
+    WebElement category =
+        driver.findElement(By.cssSelector(".category[data-name='" + categoryName + "']"));
+    new Actions(driver).moveToElement(category).perform();
+    scrollAndClick(removeCategory);
     PageObjectLogging.log("removeCategory", "remove category button clicked on category "
         + categoryName, true);
   }
@@ -468,11 +419,7 @@ public class VisualEditModePageObject extends EditMode {
   public ArticlePageObject clickPublishButton() {
     wait.forElementVisible(submitButton);
     submitButton.click();
-    return new ArticlePageObject(driver);
-  }
-
-  public void startTracking() {
-    jsActions.execute(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
+    return new ArticlePageObject();
   }
 
   public VisualEditModePageObject clickAutoApproveCheckbox() {

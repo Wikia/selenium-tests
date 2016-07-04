@@ -11,10 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-/**
- * @author Karol
- */
-
 public class CreateNewWikiPageObjectStep2 extends BasePageObject {
 
   @FindBy(css = "textarea#Description")
@@ -29,7 +25,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   private WebElement categoryErrorMsg;
 
   public CreateNewWikiPageObjectStep2(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

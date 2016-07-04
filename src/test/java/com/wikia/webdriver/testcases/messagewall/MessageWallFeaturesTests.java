@@ -5,8 +5,9 @@ package com.wikia.webdriver.testcases.messagewall;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.User;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -17,20 +18,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 
 import org.testng.annotations.Test;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *         <p/>
- *         1. Write message in source mode, 2. Write message in bold font, 3. Write message in
- *         italic font, 4. Write message with internal link, 5. Write message with external link, 6.
- *         Write message with image,
- */
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_001_sourceMode() {
+  public void userCanWriteMessageInSourceMode() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -42,9 +36,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_002_boldMode() {
+  public void userCanWriteMessageInBold() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -56,9 +50,10 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageBoldText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_003_italicMode() {
+  @RelatedIssue(issueID = "SOC-2094", comment = "test should pass locally. The ticket is about instability")
+  public void userCanWriteMessageInItallic() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
@@ -70,9 +65,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageItalicText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_004_image() {
+  public void userCanWriteMessageWithImage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
@@ -85,9 +80,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyImageAdded(title);
   }
 
-  @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_005_internalLink() {
+  public void userCanWriteMessageWithInternalLink() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
@@ -98,9 +93,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyInternalLink(title, PageContent.REDIRECT_LINK, PageContent.TEXT_LINK, wikiURL);
   }
 
-  @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
+  @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  public void MessageWallFeatures_006_externalLink() {
+  public void userCanWriteMessageWithExternalLink() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);

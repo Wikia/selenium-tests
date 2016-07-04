@@ -10,9 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @ownership AdEng
- */
 public class AdsInterstitialObject extends AdsBaseObject {
 
   /**
