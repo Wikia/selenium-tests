@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -204,12 +205,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
     TemplatePage template = new TemplatePage();
     ArticlePageObject article = new ArticlePageObject();
     PortableInfobox infobox = new PortableInfobox();
+    AceEditor editor = new AceEditor();
 
-    String templateSyntax =
-        template
-            .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
-            .editArticleInSrcUsingDropdown()
-            .copyContent();
+
+    template
+        .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
+        .editArticleInSrcUsingDropdown();
+    String templateSyntax = editor.getContent();
 
     (new ArticleContent()).clear();
 
