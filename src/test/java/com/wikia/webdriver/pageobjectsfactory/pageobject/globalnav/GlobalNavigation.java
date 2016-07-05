@@ -32,7 +32,7 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(id = "exploreWikiaDropdown")
   private WebElement exploreWikiaDropdown;
 
-  @FindBy(css = ".global-navigation-2016 .hubs-links a")
+  @FindBy(css = ".global-navigation .hubs-links a")
   private List<WebElement> hubsLinks;
 
   @FindBy(css = ".wikia-logo__subtitle")
