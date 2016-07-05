@@ -54,5 +54,7 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     if (shouldAdBeScaled) {
       adsInterstitial.verifyAdRatio();
     }
+    adsInterstitial.closeInterstitial();
+    adsInterstitial.verifyInterstitialIsClosed();
   }
 }
