@@ -14,10 +14,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarLayout"})
-public class Layout extends NewTestTemplate{
+public class Layout extends NewTestTemplate {
 
+  /**
+   * Additional 10 px are added to width dimension because of the scrollbar appearance.
+   * Dimension is used to resize the window, while test is related to viewport size.
+   */
+  private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1034, 1024);
   private static final Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);
-  private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1024, 1024);
   private static final List<String> EXPECTED_LINKS_BIG_RESOLUTION =
       Arrays.asList("Top Communities", "Community CenFl", "START A WIKIA");
   private static final List<String> EXPECTED_LINKS_SMALL_RESOLUTION =
@@ -69,6 +73,13 @@ public class Layout extends NewTestTemplate{
 
     driver.manage().window().setSize(HUBS_OUTSIDE_DROPDOWN_RESOLUTION);
     Assertion.assertTrue(globalNav.areHubsLinksVisible());
+  }
+
+  @Test(groups = {"linksArePresentOn768x1024Resolution"})
+  public void linksAreNotPresentOn768x1024Resolution() {
+    HomePage homePage = new HomePage();
+    GlobalNavigation globalNav = new GlobalNavigation();
+    homePage.openWikiPage(this.wikiURL);
 
     driver.manage().window().setSize(HUBS_IN_DROPDOWN_RESOLUTION);
     Assertion.assertFalse(globalNav.areHubsLinksVisible());
