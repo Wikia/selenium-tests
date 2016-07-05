@@ -16,13 +16,13 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = "InfoboxBuilderTests")
 @Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
 
   private static final int EUROPA_INFOBOX_WIDTH = 300;
   private static final int DEFAULT_INFOBOX_WIDTH = 270;
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void verifyDefaultStructure() {
     InfoboxBuilderPage builderPage =
@@ -38,6 +38,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(new Sidebar().isTitleUsingArticleName());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void addingComponents() {
     Sidebar builderSidebar = new Sidebar();
@@ -57,6 +58,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(headerComponents + 1, builderPage.countHeaders());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void savingTemplate() {
     Sidebar builderSidebar = new Sidebar();
@@ -74,6 +76,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
                            new TemplatePage().getHeaderText().toLowerCase());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void deletingDefaultComponents() {
     Sidebar builderSidebar = new Sidebar();
@@ -97,6 +100,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(imageComponents - 1, builderPage.countImages());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void deletingDefaultComponentsUsingPopUp() {
     InfoboxBuilderPage builderPage =
@@ -114,6 +118,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
                            builderPage.deleteImageUsingPopUp(0).countImages());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void deletingAddedComponents() {
     Sidebar builderSidebar = new Sidebar();
@@ -145,6 +150,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(headerComponents, builderPage.countHeaders());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.USER)
   public void customizingComponents() {
     TemplatePage template = new TemplatePage();
@@ -176,6 +182,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals("InfoboxBuilderCustomizingComponents", infoboxTitle);
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
   public void setInfoboxTitleToUseArticleName() {
     TemplatePage template = new TemplatePage();
@@ -198,6 +205,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals("SetInfoboxTitleToUseArticleName", infoboxTitle);
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
   public void newTemplateCreation() {
     new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
@@ -208,6 +216,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
   public void verifySidebarBackArrow() {
     Sidebar builderSidebar = new Sidebar();
@@ -231,6 +240,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderSidebar.areAddButtonsPresent());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxPreviewTheme() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
@@ -261,6 +271,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   /* Verify if scrolling is enabled when Infobox's height in
   preview is greater than the preview area height. */
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
   public void verifyScrolling() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
@@ -271,6 +282,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.verifyScrollbarIsVisible().moveToLastComponent();
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.STAFF)
   public void verifyUserInteractions() {
     new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
@@ -286,6 +298,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertNotEquals(borderStyle, "1px solid rgb(26, 94, 184)");
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
@@ -315,6 +328,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(element.getText(), topElement.getText());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void verifyRedirectingUnsupportedInfoboxes() {
     new TemplatePage().open("InfoboxBuilderMultipleInfoboxes").editArticleInSrcUsingDropdown();
@@ -324,6 +338,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void immutableSources() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
@@ -342,6 +357,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals("AutomatedTest", invocationLabelText);
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorClickOnModalBackground() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
@@ -356,6 +372,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isInfoboxBuilderOpened());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorSaveChanges() {
     Sidebar builderSidebar = new Sidebar();
@@ -377,6 +394,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assert.assertFalse(template.isEditAreaEmpty());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorDropChanges() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
@@ -397,6 +415,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(template.isEditAreaEmpty());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void verifyGoToSourceEditorNonEditedInfobox() {
     new InfoboxBuilderPage().openExisting("InfoboxBuilderSavingTemplate");
@@ -406,6 +425,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(driver.getCurrentUrl().contains("InfoboxBuilderSavingTemplate"));
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
   @Execute(asUser = User.USER)
   public void verifyIfInputFieldIsFocusedOnSelectItem() {
     Sidebar builderSidebar = new Sidebar();
@@ -423,6 +443,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderSidebar.isSidebarInputFieldFocused());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.USER)
   public void verifyChevronTooltip() {
     Sidebar builderSidebar = new Sidebar();
@@ -439,6 +460,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isSectionTooltipPresentAbove(2));
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.STAFF)
   public void verifyLoadingEuropaTheme() {
     new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
@@ -448,6 +470,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(builderPage.getInfoboxWidth(), EUROPA_INFOBOX_WIDTH);
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.STAFF)
   public void verifyLoadingDefaultTheme() {
     new WikiFeatures().openWikiFeatures(wikiURL).disableEuropaInfoboxTheme();
@@ -457,6 +480,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.ANONYMOUS)
   public void verifyBuilderAuthentication() {
     TemplateEditPage template = new TemplateEditPage().open("InfoboxBuilderAuthentication");
@@ -464,6 +488,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(template.isPermissionErrorDisplayed());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   public void verifyOtherContentIsNotChanged() {
     Sidebar builderSidebar = new Sidebar();
     final String templateName = "Infobox_other_content";
@@ -489,6 +514,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assert.assertEquals(beforePublish, afterPublish);
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.USER)
   public void verifyNamingConflictTypingNameAfterClickingPublish() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().open();
@@ -503,6 +529,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(builderPage.isErrorMessagePresent());
   }
 
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.USER)
   public void changeTemplateNameByClickingSubhead() {
     Subhead subhead = new Subhead();
