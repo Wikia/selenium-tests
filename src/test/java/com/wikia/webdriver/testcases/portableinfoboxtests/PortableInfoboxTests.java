@@ -198,7 +198,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
                            infobox.getHorizontalItemValuesFontSize(0));
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002", "CopiedPITest"})
   @Execute(asUser = User.USER_9)
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePage template = new TemplatePage();
@@ -209,7 +209,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         template
             .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
             .editArticleInSrcUsingDropdown()
-            .copyContent();
+            .copyContentViaJS();
 
     (new ArticleContent()).clear();
 
