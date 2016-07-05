@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test(groups = "mercury_recentWikiActivity_anonNavigateToRWAfromMenu")
+  @Execute(mockAds = "true")
   public void mercury_recentWikiActivity_anonNavigateToRWAfromMenu() {
     new MainPage()
         .open()
