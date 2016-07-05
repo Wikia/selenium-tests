@@ -27,7 +27,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore = article.getBannerNotifications().undeleteByFlashMessage();
+    SpecialRestorePageObject restore = article.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();

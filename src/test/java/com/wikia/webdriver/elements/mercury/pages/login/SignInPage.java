@@ -2,7 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages.login;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.elements.mercury.components.loginAndSignup.LoginArea;
+import com.wikia.webdriver.elements.mercury.components.login.LoginArea;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;

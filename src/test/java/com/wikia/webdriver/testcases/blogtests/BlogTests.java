@@ -81,7 +81,7 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = blogPage.getBlogName();
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore = base.getBannerNotifications().undeleteByFlashMessage();
+    SpecialRestorePageObject restore = base.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
     blogPage.getBannerNotifications().verifyNotificationMessage();

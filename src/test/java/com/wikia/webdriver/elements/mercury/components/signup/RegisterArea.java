@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.loginAndSignup;
+package com.wikia.webdriver.elements.mercury.components.signup;
 
 
 import com.wikia.webdriver.common.core.Assertion;

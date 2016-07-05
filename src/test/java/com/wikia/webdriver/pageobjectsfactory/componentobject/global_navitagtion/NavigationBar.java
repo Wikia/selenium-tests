@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtio
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.components.loginAndSignup.RegisterArea;
+import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;

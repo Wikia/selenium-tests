@@ -19,7 +19,7 @@ public class BannerNotifications extends BasePageObject{
   private WebElement bannerNotificationEmailNotConfirmed;
 
 
-  public SpecialRestorePageObject undeleteByFlashMessage() {
+  public SpecialRestorePageObject clickUndeleteLinkInBannerNotification() {
     wait.forElementVisible(undeleteLink);
     undeleteLink.click();
     return new SpecialRestorePageObject(driver);
