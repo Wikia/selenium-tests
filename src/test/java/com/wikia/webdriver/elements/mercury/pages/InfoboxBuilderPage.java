@@ -6,7 +6,6 @@ import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -254,7 +253,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectTitleWithIndex(int index) {
     WebElement selectedTitle = titles.get(index);
     wait.forElementClickable(selectedTitle);
-    selectedTitle.click();
+    scrollAndClick(selectedTitle);
 
     return this;
   }
@@ -262,7 +261,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectImageWithIndex(int index) {
     WebElement selectedImage = images.get(index);
     wait.forElementClickable(selectedImage);
-    selectedImage.click();
+    scrollAndClick(selectedImage);
 
     return this;
   }
@@ -270,7 +269,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectRowWithIndex(int index) {
     WebElement selectedRow = rows.get(index);
     wait.forElementClickable(selectedRow);
-    selectedRow.click();
+    scrollAndClick(selectedRow);
 
     return this;
   }
@@ -278,7 +277,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage selectHeaderWithIndex(int index) {
     WebElement selectedHeader = headers.get(index);
     wait.forElementClickable(selectedHeader);
-    selectedHeader.click();
+    scrollAndClick(selectedHeader);
 
     return this;
   }
@@ -330,24 +329,26 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage dragAndDropToTheTop(int index) {
-    this.wait.forElementClickable(component.get(index));
-    String componentToBeMovedText = component.get(index).getText();
-    Point location = component.get(component.size() - 1).getLocation();
-    Dimension size = component.get(component.size() - 1).getSize();
-    Integer targetY = location.getY() + size.getHeight();
+  public WebElement dragAndDropToTheTop(WebElement draggedElement) {
+    this.wait.forElementClickable(draggedElement);
+
+    Point location = component.get(0).getLocation();
+    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 10;
 
     new Actions(driver)
-        .clickAndHold(component.get(index))
+        .clickAndHold(draggedElement)
         .moveByOffset(0, targetY)
-        .release(component.get(index))
+        .release(draggedElement)
         .perform();
 
-    wait.forElementClickable(component.get(component.size() - 1));
-    component.get(component.size() - 1).click();
-    Assertion.assertEquals(componentToBeMovedText, component.get(0).getText());
+    wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
+    wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
 
-    return this;
+    return component.get(0);
+  }
+
+  public WebElement getInfoboxComponent(int index) {
+    return component.get(index);
   }
 
   public void hoverOverSectionChevron(int index) {

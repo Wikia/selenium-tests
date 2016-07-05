@@ -11,6 +11,8 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -286,10 +288,31 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
-    new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering")
-        .dragAndDropToTheTop(2)
-        .dragAndDropToTheTop(3)
-        .dragAndDropToTheTop(1);
+    Sidebar builderSidebar = new Sidebar();
+    InfoboxBuilderPage infoboxBuilder =
+        new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering");
+
+    builderSidebar.addRowComponent();
+    infoboxBuilder.selectRowWithIndex(0);
+    builderSidebar.typeInInputField("First Label");
+
+    infoboxBuilder.selectRowWithIndex(1);
+    builderSidebar.typeInInputField("Second Label");
+
+    infoboxBuilder.selectRowWithIndex(2);
+    builderSidebar.typeInInputField("Third Label");
+
+    WebElement element = infoboxBuilder.getInfoboxComponent(2);
+    WebElement topElement = infoboxBuilder.dragAndDropToTheTop(element);
+    Assertion.assertEquals(element.getText(), topElement.getText());
+
+    element = infoboxBuilder.getInfoboxComponent(3);
+    topElement = infoboxBuilder.dragAndDropToTheTop(element);
+    Assertion.assertEquals(element.getText(), topElement.getText());
+
+    element = infoboxBuilder.getInfoboxComponent(1);
+    topElement = infoboxBuilder.dragAndDropToTheTop(element);
+    Assertion.assertEquals(element.getText(), topElement.getText());
   }
 
   @Execute(asUser = User.USER)
