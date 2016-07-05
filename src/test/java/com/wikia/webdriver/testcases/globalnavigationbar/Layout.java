@@ -18,14 +18,14 @@ public class Layout extends NewTestTemplate {
 
   /**
    * Additional 10 px are added to width dimension because of the scrollbar appearance.
-   * Dimension is used to resize the window, while test is related to viewport size.
+   * Dimension is used to resize the window, while test is verifying viewport size.
    */
   private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1034, 1024);
   private static final Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);
   private static final List<String> EXPECTED_LINKS_BIG_RESOLUTION =
-      Arrays.asList("Top Communities", "Community CenFl", "START A WIKIA");
+      Arrays.asList("Trending Wikias", "Community Central");
   private static final List<String> EXPECTED_LINKS_SMALL_RESOLUTION =
-      Arrays.asList("Games", "Movies", "TV", "Top Communities", "Community Central", "START A WIKIA");
+      Arrays.asList("Games", "Movies", "TV", "Trending Wikias", "Community Central");
 
   private final static String deWikiName = "de.gta";
   private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 720);
@@ -38,8 +38,8 @@ public class Layout extends NewTestTemplate {
     wikiActivity.verifyGlobalNavigation();
   }
 
-  @Test(groups = {"dropdownContainsExpectedLinksOnResolutionChange"})
-  public void dropdownContainsExpectedLinksOnResolutionChange() {
+  @Test(groups = {"verifyDropdownLinksOn1024x1024Resolution"})
+  public void verifyDropdownLinksOn1024x1024Resolution() {
     HomePage homePage = new HomePage();
     GlobalNavigation globalNav = new GlobalNavigation();
     homePage.openWikiPage(this.wikiURL);
@@ -49,14 +49,21 @@ public class Layout extends NewTestTemplate {
     globalNav.openExploreWikiaDropdown();
     Assertion.assertEquals(globalNav.getDropdownLinks(), EXPECTED_LINKS_BIG_RESOLUTION);
     globalNav.closeDropdown();
+  }
+
+  @Test(groups = {"verifyDropdownLinksOn768x1024Resolution"})
+  public void verifyDropdownLinksOn768x1024Resolution() {
+    HomePage homePage = new HomePage();
+    GlobalNavigation globalNav = new GlobalNavigation();
+    homePage.openWikiPage(this.wikiURL);
 
     driver.manage().window().setSize(HUBS_IN_DROPDOWN_RESOLUTION);
     globalNav.openExploreWikiaDropdown();
     Assertion.assertEquals(globalNav.getDropdownLinks(), EXPECTED_LINKS_SMALL_RESOLUTION);
   }
 
-  @Test(groups = {"gameStarLogoIsNotPresentOn768x1024WidthResolution"})
-  public void gameStarLogoIsNotPresentOn768x1024WidthResolution() {
+  @Test(groups = {"gameStarLogoIsNotPresentOn768x1024Resolution"})
+  public void gameStarLogoIsNotPresentOn768x1024Resolution() {
     HomePage homePage = new HomePage();
     homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
     homePage.resizeWindow(HIDE_LOGO_RESOLUTION);

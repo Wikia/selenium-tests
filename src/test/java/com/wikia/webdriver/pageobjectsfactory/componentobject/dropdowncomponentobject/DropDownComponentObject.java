@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,24 +55,13 @@ public class DropDownComponentObject extends WikiBasePageObject {
   }
 
   public DropDownComponentObject openDropDownWithEntryPoint(final WebElement entryPoint) {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver webDriver) {
-          if (!entryPoint.getAttribute("class").contains("active")) {
-            ((JavascriptExecutor) driver)
-                    .executeScript("$(arguments[0]).trigger('click')", entryPoint);
-            return false;
-          }
-          return true;
-        }
-      });
-    } finally {
-      restoreDeaultImplicitWait();
+      wait.forElementClickable(entryPoint);
+      PageObjectLogging.log("DropdownClickable", "Dropdown is clickable", true, driver);
+      entryPoint.click();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log("DropdownClickable", "Dropdown is not clickable", false, driver);
     }
-
-    PageObjectLogging.log("DropdownVisible", "Dropdown is visible", true, driver);
 
     return this;
   }
