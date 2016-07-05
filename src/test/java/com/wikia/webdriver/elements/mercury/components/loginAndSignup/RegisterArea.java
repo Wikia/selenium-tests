@@ -135,6 +135,10 @@ public class RegisterArea extends WikiBasePageObject {
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
+  public boolean doesErrorMessageContainText(){
+    return usernameError.getText().contains("Username is taken");
+  }
+
   public void verifyUsernameTakenError() {
     wait.forElementVisible(usernameError);
     Assertion.assertEquals(usernameError.getText(), "Username is taken");
