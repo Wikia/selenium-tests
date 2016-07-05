@@ -16,15 +16,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = "auth-loginAndSignup")
+@Test(groups = "auth-login")
 public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
   String jaTestWiki = "ja.ja-test";
 
 
-  @Test(groups = {"Login_anonCanLoginOnAuthModalFromGlobalNavigation", "Smoke5"})
-  @Execute(onWikia = "agas")
+  @Test(groups = "Login_anonCanLoginOnAuthModalFromGlobalNavigation")
   public void anonCanLoginOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
@@ -39,7 +38,6 @@ public class LoginTests extends NewTestTemplate {
 
 
   @Test(groups = "Login_anonCanLoginAsStaffOnAuthModalFromGlobalNavigation")
-  @Execute(onWikia = "agas")
   public void anonCanLoginAsStaffOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);

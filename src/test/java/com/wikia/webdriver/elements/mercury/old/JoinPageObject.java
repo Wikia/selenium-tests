@@ -15,7 +15,7 @@ import java.net.URLEncoder;
 
 public class JoinPageObject {
 
-  @FindBy(css = ".clickSignUpSubmitButton-message:last-child")
+  @FindBy(css = ".register-message:last-child")
   private WebElement joinTodayMessage;
 
   @FindBy(css = ".button.signup-provider-email")

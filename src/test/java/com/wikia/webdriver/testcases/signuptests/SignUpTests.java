@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.signuptests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -130,6 +131,7 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
+  @RelatedIssue(issueID = "MAIN-7472")
     public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -148,6 +150,6 @@ public class SignUpTests extends NewTestTemplate {
     base.verifyUserLoggedIn(userName);
     BannerNotifications notification = new BannerNotifications();
     Assertion.assertEquals(notification.getBannerNotificationTextEmailNotConfirmed(),
-                           "Oh no! Your email address has not yet been confirmed. You should have a confirmation message in your inbox. Didn't get it? Click here and we'll send a new one. If you need to change your address, head to your Preferences page.");
+                           "メールアドレスの認証が完了していないようです。受信トレイの確認メールをチェックしてみてください。確認メールが見つからない場合は、ここをクリックすると新しい確認メールが送信されます。メールアドレスを変更する必要がある場合は、「個人設定」ページにアクセスしてください。");
   }
 }

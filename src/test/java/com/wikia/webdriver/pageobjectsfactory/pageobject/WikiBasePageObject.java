@@ -70,7 +70,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WikiBasePageObject extends BasePageObject {
 
-  protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='loginAndSignup']");
+  protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
@@ -184,7 +184,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyModalLoginAppeared() {
     waitForNewWindow();
     driver.switchTo();
-    PageObjectLogging.log("verify New window", "verify modal loginAndSignup form is displayed", true);
+    PageObjectLogging.log("verify New window", "verify modal login form is displayed", true);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
@@ -411,7 +411,7 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(By.cssSelector("#PreviewFrame")).size() > 0) {
         driver.switchTo().frame("PreviewFrame");
       }
-      // open nav if on mercury, required to see loginAndSignup data
+      // open nav if on mercury, required to see login data
       if (driver.findElements(MERCURY_SKIN).size() > 0) {
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
@@ -470,9 +470,9 @@ public class WikiBasePageObject extends BasePageObject {
 
   public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
     wait.forElementVisible(specialUserLoginLink);
-    PageObjectLogging.log("LoginLinkPresent", "Link to loginAndSignup special page present", true, driver);
+    PageObjectLogging.log("LoginLinkPresent", "Link to login special page present", true, driver);
     scrollAndClick(specialUserLoginLink);
-    PageObjectLogging.log("LoginLinkClicked", "Link to loginAndSignup special page clicked", true, driver);
+    PageObjectLogging.log("LoginLinkClicked", "Link to login special page clicked", true, driver);
 
     return new SpecialUserLoginPageObject(driver);
   }

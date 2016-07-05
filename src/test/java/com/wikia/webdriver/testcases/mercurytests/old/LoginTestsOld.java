@@ -1,17 +1,13 @@
 package com.wikia.webdriver.testcases.mercurytests.old;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
@@ -29,7 +25,7 @@ import org.testng.annotations.Test;
 public class LoginTestsOld extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
-      "We don't recognize these credentials. Try again or clickSignUpSubmitButton a new account.";
+      "We don't recognize these credentials. Try again or register a new account.";
 
   @Test(groups = "MercuryLoginTest_002")
   public void MercuryLoginTest_002_userCanNotLogInWithWrongPassword() {

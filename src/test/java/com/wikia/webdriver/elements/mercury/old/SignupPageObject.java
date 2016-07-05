@@ -43,7 +43,7 @@ public class SignupPageObject {
   private WebElement genericError;
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
-  @FindBy(css = ".loginAndSignup")
+  @FindBy(css = ".login")
   private WebElement newloginButton;
   @FindBy(css = ".signup-provider-email")
   private WebElement signupButton;
@@ -130,7 +130,7 @@ public class SignupPageObject {
   }
 
   public void openRegisterPage() {
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "clickSignUpSubmitButton");
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "register");
   }
 
   public SignupPageObject openMobileSignupPage() {

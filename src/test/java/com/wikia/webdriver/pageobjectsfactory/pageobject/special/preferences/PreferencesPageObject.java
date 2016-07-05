@@ -34,7 +34,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   private WebElement facebookEmailInput;
   @FindBy(css = "#facebook #pass")
   private WebElement facebookPasswordInput;
-  @FindBy(css = "#facebook input[name='loginAndSignup']")
+  @FindBy(css = "#facebook input[name='login']")
   private WebElement facebookSubmitButton;
   @FindBy(css = "#mw-input-wpusenewrc")
   private WebElement useAdvancedRecentChangesCheckbox;
@@ -115,7 +115,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
   }
 
   public void connectFacebook(String email, String password) {
-    PageObjectLogging.log("connectFacebook", "Connecting FB via FB loginAndSignup dialog", true);
+    PageObjectLogging.log("connectFacebook", "Connecting FB via FB login dialog", true);
 
     wait.forElementVisible(fbConnect);
     scrollAndClick(fbConnect);

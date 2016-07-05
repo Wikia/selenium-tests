@@ -110,7 +110,7 @@ public class PageContent {
       "Sorry, the page title was rejected by our spam filter. Please use a different title.";
   public static final String
       SIGN_UP_TOO_YOUNG_MESSAGE =
-      "Sorry, we're not able to clickSignUpSubmitButton your account at this time.";
+      "Sorry, we're not able to register your account at this time.";
   public static final String
       SIGN_UP_INVALID_CAPTCHA_MESSAGE =
       "The word you entered didn't match the word in the box, try again!";

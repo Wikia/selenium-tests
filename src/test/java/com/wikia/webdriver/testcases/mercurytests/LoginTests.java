@@ -19,9 +19,9 @@ import org.testng.annotations.Test;
 )
 public class LoginTests extends NewTestTemplate {
 
-    private String expectedErrorMessage = "We don't recognize these credentials. Try again or clickSignUpSubmitButton a new account.";
+    private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
 
-    @Test(groups = "loginAndSignup-anonCanLogInAsRegisteredUser")
+    @Test(groups = "login-anonCanLogInAsRegisteredUser")
     public void anonCanLogInAsRegisteredUser() {
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
@@ -38,7 +38,7 @@ public class LoginTests extends NewTestTemplate {
             .isUserAvatarVisible();
     }
 
-    @Test(groups = "loginAndSignup-anonCanNotLogInWithInvalidPassword")
+    @Test(groups = "login-anonCanNotLogInWithInvalidPassword")
     public void anonCanNotLogInWithInvalidPassword() {
          new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
@@ -53,7 +53,7 @@ public class LoginTests extends NewTestTemplate {
             .verifyErrorMessage(expectedErrorMessage);
     }
 
-    @Test(groups = "loginAndSignup-anonCanNotLogInWithBlankPassword")
+    @Test(groups = "login-anonCanNotLogInWithBlankPassword")
     public void anonCanNotLogInWithBlankPassword() {
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
@@ -66,7 +66,7 @@ public class LoginTests extends NewTestTemplate {
             .verifySignInButtonNotClickable();
     }
 
-    @Test(groups = "loginAndSignup-anonCanNotLogInWithInvalidUsername")
+    @Test(groups = "login-anonCanNotLogInWithInvalidUsername")
     public void anonCanNotLogInWithInvalidUsername() {
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
@@ -81,7 +81,7 @@ public class LoginTests extends NewTestTemplate {
             .verifyErrorMessage(expectedErrorMessage);
     }
 
-    @Test(groups = "loginAndSignup-anonCanNotLogInWithBlankUsername")
+    @Test(groups = "login-anonCanNotLogInWithBlankUsername")
     public void anonCanNotLogInWithBlankUsername() {
         new ArticlePage()
             .open(MercurySubpages.MAIN_PAGE)
