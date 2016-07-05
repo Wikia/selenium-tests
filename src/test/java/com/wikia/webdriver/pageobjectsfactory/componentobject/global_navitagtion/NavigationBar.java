@@ -125,6 +125,6 @@ public class NavigationBar extends WikiBasePageObject {
 
   public RegisterArea clickOnRegister(){
     registerLink.click();
-    return new RegisterArea();
+    return new RegisterArea(true);
   }
 }

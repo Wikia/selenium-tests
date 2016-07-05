@@ -64,6 +64,11 @@ public abstract class CoreTestTemplate {
       throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
     }
 
+    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
+      GeoEdgeBrowserMobProxy geoEdgeBrowserMobProxy = method.getAnnotation(GeoEdgeBrowserMobProxy.class);
+      Configuration.setGeoEdgeCountry(geoEdgeBrowserMobProxy.country());
+    }
+
     driver = DriverProvider.getActiveDriver();
     networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
@@ -84,6 +89,7 @@ public abstract class CoreTestTemplate {
     if (declaringClass.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", declaringClass.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", declaringClass.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("mockAds", declaringClass.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
           declaringClass.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
     }
@@ -99,6 +105,7 @@ public abstract class CoreTestTemplate {
     if (method.isAnnotationPresent(Execute.class)) {
       setTestProperty("wikiName", method.getAnnotation(Execute.class).onWikia());
       setTestProperty("disableFlash", method.getAnnotation(Execute.class).disableFlash());
+      setTestProperty("mockAds", method.getAnnotation(Execute.class).mockAds());
       setTestProperty("disableCommunityPageSalesPitchDialog",
           method.getAnnotation(Execute.class).disableCommunityPageSalesPitchDialog());
     }

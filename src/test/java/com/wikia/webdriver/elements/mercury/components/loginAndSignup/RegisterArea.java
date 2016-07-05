@@ -3,14 +3,11 @@ package com.wikia.webdriver.elements.mercury.components.loginAndSignup;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class RegisterArea extends WikiBasePageObject {
 
@@ -49,25 +46,16 @@ public class RegisterArea extends WikiBasePageObject {
   @FindBy(css = ".signup-provider-email")
   private WebElement signupButton;
 
-//  private WebDriver driver;
-//  private Wait wait;
-  private UrlBuilder urlBuilder;
-
   private final String mainWindowHandle;
 
-
-  public RegisterArea(WebDriver driver) {
-//    this.driver = driver;
-//    this.wait = new Wait(driver);
-
-    PageFactory.initElements(driver, this);
-    mainWindowHandle = null;
-  }
-
-  public RegisterArea() {
+  public RegisterArea(boolean waitForNewWindow) {
     super();
-    waitForNewWindow();
-    this.mainWindowHandle = driver.getWindowHandle();
+    if(waitForNewWindow){
+      waitForNewWindow();
+      this.mainWindowHandle = driver.getWindowHandle();
+    }else {
+      this.mainWindowHandle = null;
+    }
   }
 
   public void switchToAuthModalHandle() {

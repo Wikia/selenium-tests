@@ -76,10 +76,6 @@ public class AdsDataProvider {
         {"monsterhunter", "MH3U:_Monsters"},
         {"monsterhunter", "Portal:MH3U"},
 
-        // Corporate pages
-        {"wikia", "Wikia"},
-        {"wikia", "Video_Games/Lizzunchbox"},
-
         // Main pages
         {"runescape", "RuneScape_Wiki"},
         {"yugioh", "Main_Page"},

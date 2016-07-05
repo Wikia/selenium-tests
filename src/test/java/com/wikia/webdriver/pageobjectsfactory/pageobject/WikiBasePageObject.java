@@ -93,7 +93,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final AuthModal authModal = new AuthModal();
   @Getter(lazy = true)
-  private final RegisterArea registerArea = new RegisterArea();
+  private final RegisterArea registerArea = new RegisterArea(true);
   @Getter(lazy = true)
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")

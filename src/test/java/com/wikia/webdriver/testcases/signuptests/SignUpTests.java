@@ -28,7 +28,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.navigateToSpecialSignUpPage(wikiURL);
-    RegisterArea register = new RegisterArea(driver);
+    RegisterArea register = new RegisterArea(false);
     register.typeUsername(register.getTimeStamp());
     register.typeEmailAddress(credentials.emailQaart1);
     register.typePassword(register.getTimeStamp());
@@ -46,7 +46,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.navigateToSpecialSignUpPage(wikiURL);
-    RegisterArea register = new RegisterArea(driver);
+    RegisterArea register = new RegisterArea(false);
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
     register.typeEmailAddress(email);
@@ -90,7 +90,7 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterArea register = new RegisterArea(driver);
+    RegisterArea register = new RegisterArea(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -100,7 +100,7 @@ public class SignUpTests extends NewTestTemplate {
     base.verifyUserLoggedIn(userName);
     BannerNotifications notification = new BannerNotifications();
     Assertion.assertEquals(notification.getBannerNotificationTextEmailNotConfirmed(),
-        "Oh no! Your email address has not yet been confirmed. You should have a confirmation message in your inbox. Didn't get it? Click here and we'll send a new one. If you need to change your address, head to your Preferences page.");
+                           "Oh no! Your email address has not yet been confirmed. You should have a confirmation message in your inbox. Didn't get it? Click here and we'll send a new one. If you need to change your address, head to your Preferences page.");
   }
 
   @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
@@ -111,7 +111,7 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterArea register = new RegisterArea(driver);
+    RegisterArea register = new RegisterArea(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -132,7 +132,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
   @RelatedIssue(issueID = "MAIN-7472")
-    public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
+  public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
     signUp.disableCaptcha();
@@ -140,7 +140,7 @@ public class SignUpTests extends NewTestTemplate {
     String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
 
-    RegisterArea register = new RegisterArea(driver);
+    RegisterArea register = new RegisterArea(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);

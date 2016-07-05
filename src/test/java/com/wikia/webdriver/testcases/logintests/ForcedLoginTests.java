@@ -40,7 +40,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyUserLoggedIn(credentials.userName10);
   }
 
-  @Test(groups = {"ForcedLogin_anonCanLogInViaAuthModalWhenAddingVideo", "Media"})
+  @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingVideo")
   public void anonCanLogInViaAuthModalWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
