@@ -44,4 +44,9 @@ public class AceEditor extends WikiBasePageObject {
 
     return this;
   }
+
+  public String getContent() {
+    wait.forElementVisible(aceLayerTextArea);
+    return (String) jsActions.execute("ace.edit('editarea').getSession().getValue();");
+  }
 }

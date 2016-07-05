@@ -225,11 +225,6 @@ public class SourceEditModePageObject extends EditMode {
     return textArea.getText();
   }
 
-  public String copyContentViaJS() {
-    wait.forElementVisible(textArea);
-    return (String) jsActions.execute("ace.edit('editarea').getSession().getValue();");
-  }
-
   public String buildTablePropertiesContent(
       int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
   ) {
