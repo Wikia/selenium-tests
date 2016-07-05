@@ -93,7 +93,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickExternalLinkWithIndex(0)
         .getUrlAfterPageIsLoaded();
 
-    Assertion.assertEquals(externalLinkName, externalUrl);
+    Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
   }
 
   public void verifyImagesInWhatLinksHerePage() {
