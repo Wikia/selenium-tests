@@ -2,14 +2,9 @@ package com.wikia.webdriver.testcases.globalnavigationbar;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
