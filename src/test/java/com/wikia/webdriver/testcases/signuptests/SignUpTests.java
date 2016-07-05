@@ -19,12 +19,12 @@ import org.testng.annotations.Test;
 
 import java.util.Calendar;
 
-@Test(groups = "auth-register")
+@Test(groups = "auth-signUp")
 public class SignUpTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "Signup_anonCanNotSignUpIfSheIsYoungerThanTwelve")
+  @Test(groups = "SignUp_anonCanNotSignUpIfSheIsYoungerThanTwelve")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.navigateToSpecialSignUpPage(wikiURL);
@@ -42,7 +42,7 @@ public class SignUpTests extends NewTestTemplate {
     register.verifyBirthdateError();
   }
 
-  @Test(groups = "Signup_anonCanNotSignUpIfTheUsernameAlreadyExists")
+  @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.navigateToSpecialSignUpPage(wikiURL);
@@ -59,7 +59,7 @@ public class SignUpTests extends NewTestTemplate {
     register.verifyUsernameTakenError();
   }
 
-  @Test(groups = "Signup_anonCanSignUpOnNewAuthModalFromGlobalNav")
+  @Test(groups = "SignUp_anonCanSignUpOnNewAuthModalFromGlobalNav")
   public void anonCanSignUpOnNewAuthModalFromGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar registerLink = new NavigationBar(driver);
@@ -81,7 +81,7 @@ public class SignUpTests extends NewTestTemplate {
     base.verifyUserLoggedIn(userName);
   }
 
-  @Test(groups = "Signup_anonCanSignUpWithoutConfirmingVerificationEmail")
+  @Test(groups = "SignUp_anonCanSignUpWithoutConfirmingVerificationEmail")
   public void anonCanSignUpWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -105,7 +105,7 @@ public class SignUpTests extends NewTestTemplate {
     toolbar.verifyUserToolBar();
   }
 
-  @Test(groups = {"Signup_userCanLoginWithoutConfirmingVerificationEmail", "SignUp"})
+  @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
@@ -131,7 +131,7 @@ public class SignUpTests extends NewTestTemplate {
     authModal.login(userName, password);
   }
 
-  @Test(groups = {"Signup_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters", "SignUp"})
+  @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
     public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
