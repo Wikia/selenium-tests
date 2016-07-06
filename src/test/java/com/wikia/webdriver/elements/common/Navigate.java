@@ -7,19 +7,10 @@ import org.joda.time.DateTime;
 
 public class Navigate extends BasePageObject {
 
-  /**
-   * Adding default testing group is invoked explicitly in URL as temporary change until
-   * the end of experiment (01.07.2016) described in DAT-4483.
-   */
-
-  private static final String defaultTestingGroup =
-      "&ABTEST.MERCURY_VIEWABILITY_EXPERIMENT=DEFAULT";
-
   public Navigate toPage(String pageName) {
     String host = UrlBuilder.getHostForWiki();
     String cacheBuster = pageName.equals("") ||
-                         pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis()
-                                                     + defaultTestingGroup;
+                         pageName.equals("/") ? "" : "?cb=" + DateTime.now().getMillis();
 
     driver.get("http://" + host + pageName + cacheBuster);
 
@@ -31,7 +22,7 @@ public class Navigate extends BasePageObject {
     String cacheBuster = "?cb=" + DateTime.now().getMillis();
     reference = "#" + reference;
 
-    driver.get("http://" + host + pageName + cacheBuster + reference + defaultTestingGroup);
+    driver.get("http://" + host + pageName + cacheBuster + reference);
 
     return this;
   }
@@ -44,7 +35,7 @@ public class Navigate extends BasePageObject {
       query = query + "&" + queryParam;
     }
 
-    driver.get("http://" + host + pageName + query + defaultTestingGroup);
+    driver.get("http://" + host + pageName + query);
 
     return this;
   }

@@ -50,24 +50,4 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
     wikiPage.verifyEvolveCallOasis();
   }
 
-  @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
-  @UseUnstablePageLoadStrategy
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      groups = "AdsEvolveOasis",
-      dataProvider = "evolveHopTestPage",
-      // wf ADR-254
-      enabled = false
-  )
-  public void testEvolveHop_CA(
-      String wikiName,
-      String article,
-      String slotName,
-      String nextProviderSrc
-  ) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsEvolveObject wikiPage = new AdsEvolveObject(driver, testedPage);
-    wikiPage.verifyEvolveInSlot(slotName);
-    wikiPage.verifyEvolveHoppedInSlot(slotName, nextProviderSrc);
-  }
 }
