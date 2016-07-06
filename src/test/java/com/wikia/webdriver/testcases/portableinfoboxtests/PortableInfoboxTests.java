@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -22,10 +23,10 @@ import org.testng.annotations.Test;
  * https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
  */
 
-@Test(groups = "PortableInfoboxTests")
 @Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyElementsVisibility() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -42,6 +43,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void infoboxInfoboxNavigationElements() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -53,6 +55,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.getExternalNavigationLinksNumber() > 0);
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyRedlinksRedirecting() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -62,6 +65,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.clickRedLinkWithIndex(0).isCreateNewArticleModalVisible());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyInternalLinksRedirecting() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -79,6 +83,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertEquals(internalLinkName, internalURL);
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyExternalLinksRedirecting() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -93,9 +98,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .clickExternalLinkWithIndex(0)
         .getUrlAfterPageIsLoaded();
 
-    Assertion.assertEquals(externalLinkName, externalUrl);
+    Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyImagesInWhatLinksHerePage() {
     ArticlePageObject article = new ArticlePageObject();
 
@@ -114,6 +120,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(whatLinkHereResult.contains(articleName));
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyLightboxVisibilityAfterClickingImage() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -123,6 +130,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.clickImage().isLightboxVisible());;
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyVisibilityOfTabberAndItsImages() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -132,6 +140,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.isTabberVisible().isTabberImageVisible());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxLayoutChange() {
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
@@ -153,6 +162,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertEquals(oldBackground, infobox.getBackgroundColor());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyOrderedAndUnorderedListFontSizes() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -164,6 +174,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
                            infobox.getUnorderedElementFontSize(1));
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyInfoboxCategoryLinks() {
     PortableInfobox infobox =
         new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01);
@@ -175,6 +186,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new CategoryPageObject(driver).verifyCategoryPageTitle(categoryLinkName);
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyHorizontalGroupFontSize() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -187,17 +199,19 @@ public class PortableInfoboxTests extends NewTestTemplate {
                            infobox.getHorizontalItemValuesFontSize(0));
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.USER_9)
   public void verifyCopiedTemplateSyntaxInArticlePresence() {
     TemplatePage template = new TemplatePage();
     ArticlePageObject article = new ArticlePageObject();
     PortableInfobox infobox = new PortableInfobox();
+    AceEditor editor = new AceEditor();
 
-    String templateSyntax =
-        template
-            .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
-            .editArticleInSrcUsingDropdown()
-            .copyContent();
+
+    template
+        .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
+        .editArticleInSrcUsingDropdown();
+    String templateSyntax = editor.getContent();
 
     (new ArticleContent()).clear();
 
@@ -213,6 +227,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.isInfoboxTitleVisible());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyNavigationElementPadding() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -222,6 +237,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.isNavigationPaddingLeftAndRightEqual(1));
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyGroupHeadersPadding() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -231,6 +247,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.isHeaderPaddingLeftAndRightEqual(1));
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyDivsWrappersAreNotIncluded() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -242,6 +259,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertFalse(infobox.titleContainsDiv(0));
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyEmptyTagsAreNotAppearing() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -251,6 +269,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.infoboxContainsEmptyTag());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void insertEmptyInfoboxInVE() {
     ArticlePageObject article = new ArticlePageObject();
 
@@ -269,6 +288,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void insertInfoboxWithParametersInVE() {
     ArticlePageObject article = new ArticlePageObject();
 
@@ -288,6 +308,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void editInfoboxInVEbyPopup() {
     ArticlePageObject article = new ArticlePageObject();
     (new ArticleContent()).clear();
@@ -313,6 +334,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   @Execute(asUser = User.STAFF)
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
     ArticlePageObject article = new ArticlePageObject();
@@ -337,6 +359,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.USER)
   public void infoboxImageOnCategoryPage() {
     PortableInfobox infobox = new PortableInfobox();

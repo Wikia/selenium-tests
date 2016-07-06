@@ -33,6 +33,9 @@ public class AdsInterstitialObject extends AdsBaseObject {
   @FindBy(css = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div")
   private WebElement interstitialAdWrapper;
 
+  @FindBy(css = ".lightbox-close-wrapper, #ext-wikia-adEngine-template-modal .close")
+  private WebElement interstitialCloseButton;
+
   public AdsInterstitialObject(WebDriver driver, String testedPage,
                                Dimension resolution) {
     super(driver, testedPage, resolution);
@@ -72,6 +75,15 @@ public class AdsInterstitialObject extends AdsBaseObject {
             SIZE_DIFFERENCE_TOLERANCE
         )
     );
+  }
+
+  public void closeInterstitial() {
+    wait.forElementClickable(interstitialCloseButton);
+    interstitialCloseButton.click();
+  }
+
+  public void verifyInterstitialIsClosed() {
+    waitForElementNotVisibleByElement(interstitialAdWrapper);
   }
 
   private boolean isSizeCorrect(int actualSize, int expectedSize) {
