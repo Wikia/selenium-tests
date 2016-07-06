@@ -17,10 +17,10 @@ import java.util.List;
 public class Layout extends NewTestTemplate {
 
   /**
-   * Additional 10 px are added to width dimension because of the scrollbar appearance.
+   * Additional 20 px are added to width dimension because of the scrollbar appearance.
    * Dimension is used to resize the window, while test is verifying viewport size.
    */
-  private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1034, 1024);
+  private static final Dimension HUBS_OUTSIDE_DROPDOWN_RESOLUTION = new Dimension(1044, 1024);
   private static final Dimension HUBS_IN_DROPDOWN_RESOLUTION = new Dimension(768, 1024);
   private static final List<String> EXPECTED_LINKS_BIG_RESOLUTION =
       Arrays.asList("Trending Wikias", "Community Central");
