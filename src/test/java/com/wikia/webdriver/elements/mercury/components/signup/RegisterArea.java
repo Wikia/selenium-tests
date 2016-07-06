@@ -31,8 +31,6 @@ public class RegisterArea extends WikiBasePageObject {
   private WebElement signupSubmitButton;
   @FindBy(css = ".wikia-nav__avatar")
   private WebElement avatar;
-  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[1]/small")
-  private WebElement emailError;
   @FindBy(css = "#signupForm div:nth-child(2) small")
   private WebElement usernameError;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
@@ -41,19 +39,15 @@ public class RegisterArea extends WikiBasePageObject {
   private WebElement genericError;
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
-  @FindBy(css = ".loginAndSignup")
-  private WebElement newloginButton;
-  @FindBy(css = ".signup-provider-email")
-  private WebElement signupButton;
-
+  
   private final String mainWindowHandle;
 
   public RegisterArea(boolean waitForNewWindow) {
     super();
-    if(waitForNewWindow){
+    if (waitForNewWindow) {
       waitForNewWindow();
       this.mainWindowHandle = driver.getWindowHandle();
-    }else {
+    } else {
       this.mainWindowHandle = null;
     }
   }
@@ -123,7 +117,7 @@ public class RegisterArea extends WikiBasePageObject {
     Assertion.assertTrue(avatar.isDisplayed());
   }
 
-  public boolean doesErrorMessageContainText(){
+  public boolean doesErrorMessageContainText() {
     return usernameError.getText().contains("Username is taken");
   }
 
