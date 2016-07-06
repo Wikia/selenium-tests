@@ -97,7 +97,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     String commentText = blogPage.getFirstCommentText();
     DeletePageObject delete = blogPage.deleteFirstComment();
     delete.submitDeletion();
-    blogPage.verifyNotificationMessage();
+    blogPage.getBannerNotifications().verifyNotificationMessage();
     blogPage.verifyCommentDeleted(commentText);
   }
 }
