@@ -39,7 +39,7 @@ public class RegisterArea extends WikiBasePageObject {
   private WebElement genericError;
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
-  
+
   private final String mainWindowHandle;
 
   public RegisterArea(boolean waitForNewWindow) {

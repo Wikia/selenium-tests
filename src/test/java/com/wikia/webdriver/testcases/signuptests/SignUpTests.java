@@ -99,8 +99,13 @@ public class SignUpTests extends NewTestTemplate {
     register.clickSignUpSubmitButton();
     base.verifyUserLoggedIn(userName);
     BannerNotifications notification = new BannerNotifications();
-    Assertion.assertEquals(notification.getBannerNotificationTextEmailNotConfirmed(),
-                           "Oh no! Your email address has not yet been confirmed. You should have a confirmation message in your inbox. Didn't get it? Click here and we'll send a new one. If you need to change your address, head to your Preferences page.");
+    String bannerNotifMessageEN = "Oh no! Your email address has not yet been confirmed. "
+                                  + "You should have a confirmation message in your inbox. "
+                                  + "Didn't get it? Click here and we'll send a new one. "
+                                  + "If you need to change your address, "
+                                  + "head to your Preferences page.";
+    Assertion.assertEquals(
+        notification.getBannerNotificationTextEmailNotConfirmed(), bannerNotifMessageEN);
   }
 
   @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
@@ -149,7 +154,12 @@ public class SignUpTests extends NewTestTemplate {
     register.clickSignUpSubmitButton();
     base.verifyUserLoggedIn(userName);
     BannerNotifications notification = new BannerNotifications();
-    Assertion.assertEquals(notification.getBannerNotificationTextEmailNotConfirmed(),
-                           "メールアドレスの認証が完了していないようです。受信トレイの確認メールをチェックしてみてください。確認メールが見つからない場合は、ここをクリックすると新しい確認メールが送信されます。メールアドレスを変更する必要がある場合は、「個人設定」ページにアクセスしてください。");
+    String banerNotifMessageJapanese = "メールアドレスの認証が完了していないようです。受信トレイの確認メー"
+                                       + "ルをチェックしてみてください。確認メールが見つからない場合は、こ"
+                                       + "こをクリックすると新しい確認メールが送信されます。メールアドレス"
+                                       + "を変更する必要がある場合は、"
+                                       + "「個人設定」ページにアクセスしてください。";
+    Assertion.assertEquals(
+        notification.getBannerNotificationTextEmailNotConfirmed(), banerNotifMessageJapanese);
   }
 }
