@@ -1,9 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
+import com.wikia.webdriver.elements.mercury.old.PortableInfoboxObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.testng.annotations.Test;
 
 public class TestAdsSlotsMercury extends MobileTestTemplate {
@@ -66,6 +70,48 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
     ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
     ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
+  }
+
+  @Test(
+      groups = "AdsSlotsMercury",
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "leaderboardSlotOnPageWithInfobox"
+  )
+  public void adsLeaderboardOnPageWithInfobox(String wikiName,
+                                               String article,
+                                               String adUnit) {
+
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+
+    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
+    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
+
+    Point leaderboardLocation = driver.findElement(By.id(MOBILE_TOP_LEADERBOARD)).getLocation();
+    Point infoboxLocation = driver.findElement(By.className("portable-infobox")).getLocation();
+    
+    Assertion.assertTrue(leaderboardLocation.getY() < infoboxLocation.getY());
+  }
+
+  @Test(
+      groups = "AdsSlotsMercury",
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "leaderboardSlotOnPageWithoutInfobox"
+  )
+  public void adsLeaderboardOnPageWithoutInfobox(String wikiName,
+                                              String article,
+                                              String adUnit) {
+
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+
+    ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
+    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
+
+    Point leaderboardLocation = driver.findElement(By.id(MOBILE_TOP_LEADERBOARD)).getLocation();
+    Point pageHeader = driver.findElement(By.className("wiki-page-header")).getLocation();
+
+    Assertion.assertTrue(leaderboardLocation.getY() < pageHeader.getY());
   }
 
   @Test(
