@@ -25,7 +25,7 @@ public class TableOfContentPageObject {
   private WebElement tocButton;
   @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/*[1]")
   private WebElement tocAtTheTop;
-  @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/aside[contains(@class, 'portable-infobox')][position() = 1]/following-sibling::*[1]")
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/aside[contains(@class, 'portable-infobox')][position() = 1]/following-sibling::*[2]")
   private WebElement tocBelowFirstInfobox;
   @FindBy(css = "nav.table-of-contents li")
   private List<WebElement> tocItems;
