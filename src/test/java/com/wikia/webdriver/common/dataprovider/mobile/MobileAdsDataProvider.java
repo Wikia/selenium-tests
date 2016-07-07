@@ -49,7 +49,7 @@ public class MobileAdsDataProvider {
   public static Object[][] leaderboardSlotOnPageWithoutInfobox() {
     return new Object[][]{
         {
-            "project43", "SyntheticTests/Mercury/Slots/Leaderboard below page header",
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header",
             "wka.life/_project43//article"
         }
     };
