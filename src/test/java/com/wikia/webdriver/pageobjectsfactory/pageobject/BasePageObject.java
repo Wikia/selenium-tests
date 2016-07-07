@@ -534,19 +534,16 @@ public class BasePageObject {
     driver.switchTo().window(tabs.get(tabs.size() - 1));
   }
 
-
-  public Point getElementLocationByCssSelector(String elementName) {
+  public int getElementBottomPositionByCssSelector(String elementName) {
     WebElement element = driver.findElement(By.cssSelector(elementName));
-    wait.forElementVisible(element);
 
-    return element.getLocation();
+    return element.getLocation().getY() + element.getSize().getHeight();
   }
 
-  public Dimension getElementSizeByCssSelector(String elementName) {
+  public int getElementTopPositionByCssSelector(String elementName) {
     WebElement element = driver.findElement(By.cssSelector(elementName));
-    wait.forElementVisible(element);
 
-    return element.getSize();
+    return element.getLocation().getY();
   }
 
 }

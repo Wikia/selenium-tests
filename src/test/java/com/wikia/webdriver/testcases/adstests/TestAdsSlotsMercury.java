@@ -94,12 +94,10 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
-    int infoboxYPosition = infobox.getElementLocationByCssSelector(PORTABLE_INFOBOX).getY();
-    int infoboxHeight = infobox.getElementSizeByCssSelector(PORTABLE_INFOBOX).getHeight();
-    int leaderboardTopYPosition =
-        ads.getElementLocationByCssSelector(MOBILE_TOP_LEADERBOARD_ID).getY();
-
-    Assertion.assertTrue(leaderboardTopYPosition >= (infoboxHeight + infoboxYPosition));
+    Assertion.assertTrue(
+        ads.getElementTopPositionByCssSelector(MOBILE_TOP_LEADERBOARD_ID) >=
+        infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX)
+    );
   }
 
   @InBrowser(
@@ -120,12 +118,10 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
-    int headerYPosition = ads.getElementLocationByCssSelector(ARTICLE_HEADER).getY();
-    int headerHeight = ads.getElementSizeByCssSelector(ARTICLE_HEADER).getHeight();
-    int leaderboardTopYPosition =
-        ads.getElementLocationByCssSelector(MOBILE_TOP_LEADERBOARD_ID).getY();
-
-    Assertion.assertTrue(leaderboardTopYPosition >= (headerYPosition + headerHeight));
+    Assertion.assertTrue(
+        ads.getElementTopPositionByCssSelector(MOBILE_TOP_LEADERBOARD_ID) >=
+        ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER)
+    );
   }
 
   @Test(
