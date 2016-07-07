@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -18,7 +19,6 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   private static final String SRC = "mobile";
   private static final String PORTABLE_INFOBOX = ".portable-infobox";
   private static final String ARTICLE_HEADER = ".wiki-page-header";
-  private static final String MOBILE_TOP_LEADERBOARD_ID = "#MOBILE_TOP_LEADERBOARD";
 
   @Test(
       groups = "AdsSlotsMercury",
@@ -95,8 +95,8 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(MOBILE_TOP_LEADERBOARD_ID) >=
-        infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX)
+        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILETOP_LB))
+        >= infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX)
     );
   }
 
@@ -119,8 +119,8 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(MOBILE_TOP_LEADERBOARD_ID) >=
-        ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER)
+        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILETOP_LB))
+        >= ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER)
     );
   }
 
