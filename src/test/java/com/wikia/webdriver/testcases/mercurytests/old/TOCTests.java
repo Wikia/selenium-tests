@@ -168,7 +168,7 @@ public class TOCTests extends NewTestTemplate {
     init();
     navigate.toPage(MercurySubpages.TOC_WITH_PORTABLE_INFOBOX);
 
-    boolean result = toc.isTOCBelowFirstInfobox();
+    boolean result = toc.isTOCBelowFirstAdSlot();
     PageObjectLogging.log(
         "TOC",
         "is right below the first portable infobox",
