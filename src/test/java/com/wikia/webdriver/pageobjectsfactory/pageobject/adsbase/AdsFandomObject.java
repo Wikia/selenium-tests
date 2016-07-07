@@ -40,9 +40,13 @@ public class AdsFandomObject extends AdsBaseObject {
     slots.put(AdsFandomContent.BOTTOM_BOXAD, bottomBoxadElement);
   }
 
+  public void triggerOnScrollSlots() {
+    jsActions.scrollToBottom(driver);
+  }
+
   public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
-    
+
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(selector)));
     verifyAdVisibleInSlot(selector, slots.get(slotName));
   }
