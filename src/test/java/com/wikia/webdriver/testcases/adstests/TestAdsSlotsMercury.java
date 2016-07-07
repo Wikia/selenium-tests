@@ -3,9 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
-import com.wikia.webdriver.elements.mercury.old.PortableInfoboxObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.testng.annotations.Test;
