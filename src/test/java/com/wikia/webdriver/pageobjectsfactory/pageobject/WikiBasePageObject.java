@@ -12,10 +12,12 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
 import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
+import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
@@ -35,7 +37,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubP
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
@@ -91,6 +92,10 @@ public class WikiBasePageObject extends BasePageObject {
   private final TopBar topBar = new TopBar(driver);
   @Getter(lazy = true)
   private final AuthModal authModal = new AuthModal();
+  @Getter(lazy = true)
+  private final RegisterArea registerArea = new RegisterArea(true);
+  @Getter(lazy = true)
+  private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".UserLoginModal input[type='submit']")
@@ -151,7 +156,7 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = ".banner-notification div.msg a")
   private WebElement undeleteLink;
   @FindBy(css = ".banner-notification")
-  private WebElement flashMessage;
+  private WebElement bannerNotification;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".avatar-container")
@@ -439,23 +444,8 @@ public class WikiBasePageObject extends BasePageObject {
     return new DeletePageObject(driver);
   }
 
-  public SpecialRestorePageObject undeleteByFlashMessage() {
-    wait.forElementVisible(undeleteLink);
-    undeleteLink.click();
-    return new SpecialRestorePageObject(driver);
-  }
-
-  public void verifyNotificationMessage() {
-    driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
-    try {
-      wait.forElementVisible(flashMessage);
-    } finally {
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    }
-  }
-
-  public String getFlashMessageText() {
-    return flashMessage.getText();
+  public String getBannerNotificationText() {
+    return bannerNotification.getText();
   }
 
   public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
@@ -778,9 +768,6 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
-  public void verifyModalFBButtonVisible() {
-    Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonModal));
-  }
 
   public void verifyFBButtonVisible() {
     Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonBasic));
