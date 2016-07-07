@@ -25,8 +25,8 @@ public class TableOfContentPageObject {
   private WebElement tocButton;
   @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/*[1]")
   private WebElement tocAtTheTop;
-  @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/aside[contains(@class, 'portable-infobox')][position() = 1]/following-sibling::*[1]")
-  private WebElement tocBelowFirstInfobox;
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/aside[contains(@class, 'portable-infobox')][position() = 1]/following-sibling::*[2]")
+  private WebElement tocBelowFirstAdSlot;
   @FindBy(css = "nav.table-of-contents li")
   private List<WebElement> tocItems;
 
@@ -57,10 +57,10 @@ public class TableOfContentPageObject {
            tocAtTheTop.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
   }
 
-  public boolean isTOCBelowFirstInfobox() {
-    wait.forElementVisible(tocBelowFirstInfobox);
-    return tocBelowFirstInfobox.isDisplayed() &&
-           tocBelowFirstInfobox.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
+  public boolean isTOCBelowFirstAdSlot() {
+    wait.forElementVisible(tocBelowFirstAdSlot);
+    return tocBelowFirstAdSlot.isDisplayed() &&
+           tocBelowFirstAdSlot.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
   }
 
   public void clickOnTOC() {
