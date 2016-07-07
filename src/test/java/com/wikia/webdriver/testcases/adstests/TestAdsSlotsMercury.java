@@ -1,11 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import org.testng.annotations.Test;
 
 public class TestAdsSlotsMercury extends MobileTestTemplate {
@@ -14,6 +16,9 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
   private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
   private static final String SRC = "mobile";
+  private static final String PORTABLE_INFOBOX = ".portable-infobox";
+  private static final String ARTICLE_HEADER = ".wiki-page-header";
+  private static final String MOBILE_TOP_LEADERBOARD_ID = "#MOBILE_TOP_LEADERBOARD";
 
   @Test(
       groups = "AdsSlotsMercury",
@@ -70,44 +75,57 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
   }
 
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   @Test(
       groups = "AdsSlotsMercury",
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardSlotOnPageWithInfobox"
   )
   public void adsLeaderboardOnPageWithInfobox(String wikiName,
-                                               String article,
-                                               String adUnit) {
+                                              String article,
+                                              String adUnit) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+    PortableInfobox infobox = new PortableInfobox();
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
-    Point leaderboardLocation = driver.findElement(By.id(MOBILE_TOP_LEADERBOARD)).getLocation();
-    Point infoboxLocation = driver.findElement(By.className("portable-infobox")).getLocation();
+    int infoboxYPosition = infobox.getElementLocationByCssSelector(PORTABLE_INFOBOX).getY();
+    int infoboxHeight = infobox.getElementSizeByCssSelector(PORTABLE_INFOBOX).getHeight();
+    int leaderboardTopYPosition =
+        ads.getElementLocationByCssSelector(MOBILE_TOP_LEADERBOARD_ID).getY();
 
-    Assertion.assertTrue(leaderboardLocation.getY() > infoboxLocation.getY());
+    Assertion.assertTrue(leaderboardTopYPosition >= (infoboxHeight + infoboxYPosition));
   }
 
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   @Test(
       groups = "AdsSlotsMercury",
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "leaderboardSlotOnPageWithoutInfobox"
   )
   public void adsLeaderboardOnPageWithoutInfobox(String wikiName,
-                                              String article,
-                                              String adUnit) {
+                                                 String article,
+                                                 String adUnit) {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
-    Point leaderboardLocation = driver.findElement(By.id(MOBILE_TOP_LEADERBOARD)).getLocation();
-    Point pageHeader = driver.findElement(By.className("wiki-page-header")).getLocation();
+    int headerYPosition = ads.getElementLocationByCssSelector(ARTICLE_HEADER).getY();
+    int headerHeight = ads.getElementSizeByCssSelector(ARTICLE_HEADER).getHeight();
+    int leaderboardTopYPosition =
+        ads.getElementLocationByCssSelector(MOBILE_TOP_LEADERBOARD_ID).getY();
 
-    Assertion.assertTrue(leaderboardLocation.getY() > pageHeader.getY());
+    Assertion.assertTrue(leaderboardTopYPosition >= (headerYPosition + headerHeight));
   }
 
   @Test(
