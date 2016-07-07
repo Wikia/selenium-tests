@@ -85,12 +85,11 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
 
     Point leaderboardLocation = driver.findElement(By.id(MOBILE_TOP_LEADERBOARD)).getLocation();
     Point infoboxLocation = driver.findElement(By.className("portable-infobox")).getLocation();
-    
-    Assertion.assertTrue(leaderboardLocation.getY() < infoboxLocation.getY());
+
+    Assertion.assertTrue(leaderboardLocation.getY() > infoboxLocation.getY());
   }
 
   @Test(
@@ -106,12 +105,11 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
 
     Point leaderboardLocation = driver.findElement(By.id(MOBILE_TOP_LEADERBOARD)).getLocation();
     Point pageHeader = driver.findElement(By.className("wiki-page-header")).getLocation();
 
-    Assertion.assertTrue(leaderboardLocation.getY() < pageHeader.getY());
+    Assertion.assertTrue(leaderboardLocation.getY() > pageHeader.getY());
   }
 
   @Test(
