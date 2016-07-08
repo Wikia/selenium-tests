@@ -1,7 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
@@ -58,6 +61,10 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
   @UseUnstablePageLoadStrategy
   @Test(
