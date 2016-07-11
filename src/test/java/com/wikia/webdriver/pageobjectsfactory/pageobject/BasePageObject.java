@@ -533,4 +533,17 @@ public class BasePageObject {
     List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
     driver.switchTo().window(tabs.get(tabs.size() - 1));
   }
+
+  public int getElementBottomPositionByCssSelector(String elementName) {
+    WebElement element = driver.findElement(By.cssSelector(elementName));
+
+    return element.getLocation().getY() + element.getSize().getHeight();
+  }
+
+  public int getElementTopPositionByCssSelector(String elementName) {
+    WebElement element = driver.findElement(By.cssSelector(elementName));
+
+    return element.getLocation().getY();
+  }
+
 }

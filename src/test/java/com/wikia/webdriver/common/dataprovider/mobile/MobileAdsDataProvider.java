@@ -36,6 +36,26 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] leaderboardSlotOnPageWithInfobox() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox",
+            "wka.life/_project43//article"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] leaderboardSlotOnPageWithoutInfobox() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header",
+            "wka.life/_project43//article"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] allSlots() {
     return new Object[][]{
         {

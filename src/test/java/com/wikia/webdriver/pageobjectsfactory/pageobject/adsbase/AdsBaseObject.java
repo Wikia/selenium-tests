@@ -631,6 +631,21 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
   }
 
+  public long getLineItemId(String slotName) {
+    JavascriptExecutor js = driver;
+    try {
+      return (long) js.executeScript(
+          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
+          "return slots[i].getResponseInformation().lineItemId;" +
+          "} }"
+      );
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("Get " + slotName + " line item", e, false);
+      return 0;
+    }
+  }
+
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {

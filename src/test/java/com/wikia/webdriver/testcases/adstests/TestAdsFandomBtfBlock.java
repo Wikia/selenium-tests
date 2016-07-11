@@ -21,13 +21,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
       groups = {"AdsFandomBtfBlockDesktop"}
   )
   public void adsFandomBtfBlockDesktop(String article) {
-    AdsFandomObject fandomPage = loadPage(article);
-
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD), ASSERT_MESSAGE);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), ASSERT_MESSAGE);
+    verifySlots(article);
   }
 
   @InBrowser(
@@ -40,12 +34,19 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
       groups = {"AdsFandomBtfBlockMobile"}
   )
   public void adsFandomBtfBlockMobile(String article) {
+    verifySlots(article);
+  }
+
+  private void verifySlots(String article) {
     AdsFandomObject fandomPage = loadPage(article);
+
+    fandomPage.triggerOnScrollSlots();
 
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD), ASSERT_MESSAGE);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD), ASSERT_MESSAGE);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD), ASSERT_MESSAGE);
   }
 }
