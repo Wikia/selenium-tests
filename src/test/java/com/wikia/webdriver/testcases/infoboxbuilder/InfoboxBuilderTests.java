@@ -70,8 +70,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.addRowComponent();
     new Subhead().clickPublish();
 
-    Assertion.assertTrue(new Spinner().isSpinnerPresent());
-
     Assertion.assertEquals(templateName.toLowerCase(),
                            new TemplatePage().getHeaderText().toLowerCase());
   }
@@ -175,7 +173,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     new Subhead().clickPublish();
 
-    Assertion.assertTrue(new Spinner().isSpinnerPresent());
     Assertion.assertTrue(template.isTemplatePagePresent());
 
     String infoboxTitle = template.getPortableInfobox().getTitleTextWithIndex(0);
@@ -198,7 +195,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderSidebar.setTitleToUseArticleName();
     new Subhead().clickPublish();
 
-    Assertion.assertTrue(new Spinner().isSpinnerPresent());
     Assertion.assertTrue(template.isTemplatePagePresent());
 
     String infoboxTitle = template.getPortableInfobox().getTitleTextWithIndex(0);
