@@ -159,7 +159,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     theme.submitTheme();
 
     article.open(PageContent.PORTABLE_INFOBOX_01);
-    Assertion.assertEquals(oldBackground, infobox.getBackgroundColor());
+    new ArticlePurger().purgeArticleAsLoggedUser();
+
+    Assertion.assertNotEquals(oldBackground, infobox.getBackgroundColor());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
