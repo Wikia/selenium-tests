@@ -350,7 +350,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticlePurger().purgeArticleAsLoggedUser();
 
     VisualEditorPageObject visualEditor = article
-        .open()
         .openVEModeWithMainEditButton()
         .clickInsertToolButton()
         .clickInsertInfoboxFromInsertToolMenu()
