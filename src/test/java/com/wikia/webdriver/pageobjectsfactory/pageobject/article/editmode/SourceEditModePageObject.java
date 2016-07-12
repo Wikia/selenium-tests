@@ -88,6 +88,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public String getSourceContent() {
+    wait.forElementVisible(sourceModeTextArea);
+
     return (String) jsActions.execute("$('.cke_source').attr('value')");
   }
 
