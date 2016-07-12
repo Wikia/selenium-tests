@@ -488,17 +488,17 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject selectInfoboxTemplate(int i) {
-    WebElement element = infoboxTemplatesList.get(i);
-    wait.forElementClickable(element);
-    element.click();
+    WebElement template = infoboxTemplatesList.get(i);
+    wait.forElementClickable(template);
+    template.click();
     return this;
   }
 
   public VisualEditorPageObject typeInParameterField(int i, String parameter) {
-    WebElement element = parametersFieldList.get(i);
-    wait.forElementClickable(element);
-    element.click();
-    element.sendKeys(parameter);
+    WebElement field = parametersFieldList.get(i);
+    wait.forElementClickable(field);
+    field.click();
+    field.sendKeys(parameter);
     return this;
   }
 
