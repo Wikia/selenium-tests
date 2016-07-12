@@ -85,7 +85,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> insertMenuTools;
   @FindBy(css = ".oo-ui-labelElement.oo-ui-optionWidget")
   private List<WebElement> infoboxTemplatesList;
-  @FindBy(css = ".ve-ui-mwParameterPage-field .oo-ui-inputWidget textarea")
+  @FindBy(css = ".oo-ui-inputWidget textarea")
   private List<WebElement> parametersFieldList;
   @FindBy(css = ".oo-ui-buttonElement-button")
   private List<WebElement> buttonsList;
@@ -347,7 +347,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void selectMedia() {
-    wait.forElementVisible(mediaNode);
+    wait.forElementClickable(mediaNode);
     mediaNode.click();
   }
 
@@ -476,29 +476,34 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject clickInsertToolButton() {
+    wait.forElementClickable(insertDropdownMenuButton);
     insertDropdownMenuButton.click();
     return this;
   }
 
   public VisualEditorPageObject clickInsertInfoboxFromInsertToolMenu() {
-    wait.forElementVisible(infoboxInDropdownMenu);
+    wait.forElementClickable(infoboxInDropdownMenu);
     infoboxInDropdownMenu.click();
     return this;
   }
 
   public VisualEditorPageObject selectInfoboxTemplate(int i) {
-    infoboxTemplatesList.get(i).click();
+    WebElement element = infoboxTemplatesList.get(i);
+    wait.forElementClickable(element);
+    element.click();
     return this;
   }
 
   public VisualEditorPageObject typeInParameterField(int i, String parameter) {
-    parametersFieldList.get(i).click();
-    parametersFieldList.get(i).sendKeys(parameter);
+    WebElement element = parametersFieldList.get(i);
+    wait.forElementClickable(element);
+    element.click();
+    element.sendKeys(parameter);
     return this;
   }
 
   public VisualEditorPageObject clickApplyChanges() {
-    wait.forElementVisible(applyChangesButton);
+    wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
     return this;
   }
@@ -510,7 +515,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public VisualEditorPageObject clickInfoboxPopup() {
-    wait.forElementVisible(infoboxPopup);
+    wait.forElementClickable(infoboxPopup);
     infoboxPopup.click();
     return this;
   }
