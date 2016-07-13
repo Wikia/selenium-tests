@@ -196,7 +196,7 @@ public class WamPageObject extends BasePageObject {
     String latestDate =
             DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
                     .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
-    Assertion.assertEquals(latestDate, currentDate, "Current date and the latest possible date are not the same");
+    Assertion.assertEquals(currentDate, latestDate, "Current date and the latest possible date are not the same");
   }
 
   public String changeDateToLastMonth() {
