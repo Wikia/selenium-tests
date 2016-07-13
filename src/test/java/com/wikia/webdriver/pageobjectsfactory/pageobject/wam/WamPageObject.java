@@ -190,12 +190,12 @@ public class WamPageObject extends BasePageObject {
     return selectedHeaderName.getText();
   }
 
-  public void verifyTodayDateInDatePicker() {
+  public void verifyLatestDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
-    String todayDate =
+    String latestDate =
             DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-                    .print(DateTime.now().withZone(DateTimeZone.UTC));
-    Assertion.assertEquals(todayDate, currentDate, "Current date and today date are not the same");
+                    .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
+    Assertion.assertEquals(latestDate, currentDate, "Current date and the latest possible date are not the same");
   }
 
   public String changeDateToLastMonth() {
