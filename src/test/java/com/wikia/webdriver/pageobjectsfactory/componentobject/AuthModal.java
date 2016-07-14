@@ -51,6 +51,13 @@ public class AuthModal extends WikiBasePageObject {
     return isOpenedResult;
   }
 
+  public boolean isSignInOpened() {
+    switchToAuthModalHandle();
+    boolean isOpenedResult = signInAuthModal.isDisplayed();
+    switchToMainWindowHandle();
+    return isOpenedResult;
+  }
+
   public boolean isConnetctWithFacebookButtonVisible() {
     switchToAuthModalHandle();
     boolean isConnetctWithFacebookButtonVisible = registerAuthModal.isDisplayed();

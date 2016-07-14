@@ -30,7 +30,7 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
     AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    Assert.assertTrue(authModal.isSignInOpened());
 
     authModal.login(credentials.userName10, credentials.password10);
     base.verifyUserLoggedIn(credentials.userName10);
@@ -45,7 +45,7 @@ public class LoginTests extends NewTestTemplate {
 
     signInLink.clickOnSignIn();
     AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    Assert.assertTrue(authModal.isSignInOpened());
 
     authModal.login(credentials.userNameStaff, credentials.passwordStaff);
     base.verifyUserLoggedIn(credentials.userNameStaff);
@@ -60,7 +60,7 @@ public class LoginTests extends NewTestTemplate {
 
     signInLink.clickOnSignIn();
     AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    Assert.assertTrue(authModal.isSignInOpened());
 
     authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);
     base.verifyUserLoggedIn(credentials.userNameJapanese2);
