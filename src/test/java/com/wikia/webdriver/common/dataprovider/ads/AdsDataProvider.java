@@ -1221,7 +1221,7 @@ public class AdsDataProvider {
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.BOTTOM_LB)
-                    .put("slotSize", new Dimension(1024, 416))
+                    .put("slotSize", new Dimension(1178, 479))
                     .put("lineItemId", 297978612)
                     .put("src", "gpt")
                     .build()
