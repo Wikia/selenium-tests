@@ -38,7 +38,7 @@ public class GoogleFormTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.widget = new GoogleFormWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
@@ -57,8 +57,7 @@ public class GoogleFormTests extends NewTestTemplate {
 
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -69,10 +68,8 @@ public class GoogleFormTests extends NewTestTemplate {
 
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_1);
-    topBar.openNavigation();
-    navigation.navigateToPage(QUERY_2);
+    topBar.openSearch().navigateToPage(QUERY_1);
+    topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

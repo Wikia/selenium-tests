@@ -25,12 +25,12 @@ import org.testng.annotations.Test;
  * was removed from user page, and placeholder appeared on global navigation 3. Log out and verify
  * that avatar is not visible on global navigation
  */
-@Test(groups = "AvatarTest")
+@Test(groups = "userProfile-userAvatar")
 public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "AvatarTest_001")
+  @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
   public void staffUserCanUploadAvatar() {
     UserProfilePageObject
@@ -48,7 +48,7 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
-  @Test(groups = "AvatarTest_002")
+  @Test(groups = "UserAvatar_clickOnAvatarRedirectsStaffUserToUserPage")
   @Execute(asUser = User.STAFF)
   public void clickOnAvatarRedirectsStaffUserToUserPage() {
     new SpecialVersionPage().open();
@@ -57,10 +57,11 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
-  @RelatedIssue(issueID = "MAIN-5960", comment = "The Delete avatar button (and windows confirmation popup) " +
-          "have to be clicked twice in order to delete an avata")
-  @Test(groups = "AvatarTest_003", dependsOnMethods = "uploadAvatar")
+  @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "MAIN-5960", comment =
+      "The Delete avatar button (and windows confirmation popup) " +
+      "have to be clicked twice in order to delete an avatar")
   public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);

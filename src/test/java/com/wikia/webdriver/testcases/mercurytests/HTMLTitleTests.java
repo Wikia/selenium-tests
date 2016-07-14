@@ -62,7 +62,7 @@ public class HTMLTitleTests extends NewTestTemplate {
       {
           "sktest123",
           "/wiki/Category:Premium",
-          "Category:Premium - Sktest123 Wiki - Wikia"
+          "Category:PremiumVideos - Sktest123 Wiki - Wikia"
       },
       {
           "es.pokemon",
@@ -92,12 +92,12 @@ public class HTMLTitleTests extends NewTestTemplate {
       {
           "starwars",
           "/main/category/Future_films",
-          "Future_films"
+          "Future films - Wookieepedia - Wikia"
       },
       {
           "starwars",
           "/main/section/Films",
-          "Films"
+          "Films - Wookieepedia - Wikia"
       },
       {
           "mediawiki119",
@@ -127,7 +127,7 @@ public class HTMLTitleTests extends NewTestTemplate {
   @BeforeMethod(alwaysRun = true)
   private void init() {
     this.head = new Head();
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "mercury_htmlTitleSet")

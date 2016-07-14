@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
@@ -207,6 +206,12 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyContent(String content) {
     wait.forElementVisible(articleContent);
     Assertion.assertStringContains(articleContent.getText(), content);
+  }
+
+  public String getContent() {
+    wait.forElementVisible(articleContent);
+
+    return articleContent.getText();
   }
 
   public void verifyFormattingFromVE(Formatting format, String content) {

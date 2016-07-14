@@ -21,7 +21,7 @@ public class WeiboTests extends NewTestTemplate {
 
   private void init() {
     this.widget = new WeiboWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "WeiboWidgetTest_001")

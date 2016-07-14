@@ -36,6 +36,26 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] leaderboardSlotOnPageWithInfobox() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox",
+            "wka.life/_project43//article"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] leaderboardSlotOnPageWithoutInfobox() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header",
+            "wka.life/_project43//article"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] allSlots() {
     return new Object[][]{
         {
@@ -57,13 +77,14 @@ public class MobileAdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/DfpParams",
-            "wka.life/_adtest//article",
+            null,
+            "wka.life/_project43//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
-                "\"s1\":\"_adtest\"",
+                "\"s1\":\"_project43\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -79,6 +100,18 @@ public class MobileAdsDataProvider {
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
             )
+        },
+        {
+            "project43",
+            "SyntheticTests/RubiconFastlane",
+            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "wka.life/_project43//article",
+            "MOBILE_TOP_LEADERBOARD",
+            Collections.emptyList(),
+            Arrays.asList(
+                "\"rpfl_7450\":[\"15_tier2000",
+                "\"43_tier2000"
+            )
         }
     };
   }
@@ -89,7 +122,6 @@ public class MobileAdsDataProvider {
         {
             "yugioh",
             "Dark_Magician",
-            null,
             "wka.gaming/_yugioh//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -112,9 +144,9 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"esrb\":\"everyone\"",
-                "\"age\":[\"teen\",\"kid\",\"18-34\"]",
-                "\"gnre\":[\"anime\",\"fantasy\",\"strategy\",\"comics\"]",
-                "\"media\":[\"tv\",\"cards\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"kids\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"anime\",\"comic\",\"fantasy\"]",
+                "\"media\":[\"movies\",\"tv\",\"comics\",\"cards\"]",
                 "\"pform\":[\"pc\",\"psp\"]",
                 "\"sex\":[\"m\"]"
 
@@ -127,7 +159,6 @@ public class MobileAdsDataProvider {
         {
             "fallout",
             "Fallout",
-            null,
             "wka.gaming/_fallout//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -152,12 +183,12 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"18-34\",\"18-24\",\"25-34\",\"teen\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\"]",
-                "\"pform\":[\"pc\",\"xbox360\",\"ps3\"]",
-                "\"pub\":[\"bethesda\",\"bethesda\"]",
+                "\"age\":[\"under18\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"action\",\"adventure\",\"fps\",\"openworld\",\"rpg\",\"scifi\",\"shooter\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"mobile\"]",
+                "\"pub\":[\"bethesda\"]",
                 "\"esrb\":\"mature\"",
-                "\"theme\":[\"military\",\"postapocalypse\"]"
+                "\"theme\":[\"mature\",\"military\",\"postapocalypse\",\"robots\"]"
 
             ),
             Arrays.asList(
@@ -168,7 +199,6 @@ public class MobileAdsDataProvider {
         {
             "runescape",
             "Grew",
-            null,
             "wka.gaming/_runescape//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -189,10 +219,9 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"kids\",\"teen\",\"under18\",\"18-24\"]",
-                "\"gnre\":[\"mmo\",\"rpg\",\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"rpg\",\"mmorpg\",\"openworld\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"free2play\",\"fantasy\",\"mmo\",\"mmorpg\",\"openworld\",\"rpg\"]",
                 "\"pform\":[\"pc\"]",
-                "\"volum\":[\"l\"]",
                 "\"sex\":[\"m\"]",
                 "\"esrb\":\"teen\"",
                 "\"theme\":[\"dragon\",\"heroes\",\"magic\",\"monster\",\"sword\",\"zombie\"]"
@@ -206,7 +235,6 @@ public class MobileAdsDataProvider {
         {
             "lego",
             "LEGO_Wiki",
-            null,
             "wka.life/_lego//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -242,7 +270,6 @@ public class MobileAdsDataProvider {
         {
             "civilization",
             "Category:Browse",
-            null,
             "wka.gaming/_civilization//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -265,9 +292,9 @@ public class MobileAdsDataProvider {
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
                 "\"sex\":[\"m\"]",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"kids\",\"teen\"]",
-                "\"gnre\":[\"rts\",\"strategy\",\"sim\"]",
-                "\"pform\":[\"pc\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"kids\",\"teen\"]",
+                "\"gnre\":[\"casual\",\"free2play\",\"facebook\",\"strategy\",\"scifi\",\"sim\",\"war\"]",
+                "\"pform\":[\"pc\",\"xbox360\",\"ps3\",\"mobile\",\"wii\",\"ds\"]",
                 "\"esrb\":\"everyone\""
             ),
             Arrays.asList(
@@ -278,7 +305,6 @@ public class MobileAdsDataProvider {
         {
             "starcraft",
             "StarCraft_Wiki",
-            null,
             "wka.gaming/_starcraft//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -301,14 +327,14 @@ public class MobileAdsDataProvider {
                 "\"ref\":\"direct\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"teen\",\"13-17\",\"18-34\",\"18-24\",\"25-34\"]",
+                "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
+                "\"media\":[\"books\",\"comics\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"sim\",\"scifi\",\"rts\",\"strategy\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
-                "\"volum\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
-                "\"theme\":[\"space\",\"alien\"]"
+                "\"theme\":[\"alien\",\"heroes\",\"military\",\"robots\",\"space\"]"
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
@@ -318,7 +344,6 @@ public class MobileAdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            null,
             "wka.ent/_overlordmaruyama//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -346,18 +371,6 @@ public class MobileAdsDataProvider {
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
             )
-        },
-        {
-            "adtest",
-            "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_adtest//article",
-            "MOBILE_TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"rpfl_7450\":[\"15_tier2000",
-                "\"43_tier2000"
-            )
         }
     };
   }
@@ -366,7 +379,7 @@ public class MobileAdsDataProvider {
   public static Object[][] dfpEvolveParamsMercury() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/DfpParams",
             4403,
             "ev/wikia_intl/ros",
@@ -374,7 +387,7 @@ public class MobileAdsDataProvider {
             Arrays.asList(
                 "\"s0\":\"life\"",
                 "\"s0v\":\"lifestyle\"",
-                "\"s1\":\"_adtest\"",
+                "\"s1\":\"_project43\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -394,11 +407,41 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] providersChainMercury() {
+    return new Object[][]{
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.MOBILETOP_LB,
+            "DirectGptMobile; RemnantGptMobile"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.MOBILETOP_LB,
+            "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "MOBILE_TOP_LEADERBOARD", "DirectGptMobile; RemnantGptMobile", ""
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.MOBILETOP_LB,
+            ""
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.MOBILETOP_LB,
+            "RubiconFastlane"
         },
     };
   }
@@ -418,9 +461,9 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"project43", "SyntheticTests/AdType/1xHop", "mobile", "\"source\":\"mobile/LB\""},
-        {"project43", "SyntheticTests/AdType/2xHop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
-        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+        {"project43", "SyntheticTests/AdType/1xHop", "DirectGptMobile", "mobile", "\"source\":\"mobile/LB\""},
+        {"project43", "SyntheticTests/AdType/2xHop", "RemnantGptMobile", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
+        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "DirectGptMobile", "mobile", "\"test-marker\":\"42\""}
     };
   }
 

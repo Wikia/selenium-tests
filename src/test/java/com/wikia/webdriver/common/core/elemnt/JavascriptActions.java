@@ -8,6 +8,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Set of commonly used actions invoked by executing JavaScript on a web page
@@ -15,11 +19,12 @@ import org.openqa.selenium.WebElement;
 public class JavascriptActions {
 
   private JavascriptExecutor js;
-  private WebDriver webDriver;
+  private WebDriver driver;
+  private static int WEBDRIVER_WAIT_TIMEOUT_SEC = 15;
 
-  public JavascriptActions(WebDriver webDriver) {
-    this.js = (JavascriptExecutor) webDriver;
-    this.webDriver = webDriver;
+  public JavascriptActions(WebDriver driver) {
+    this.js = (JavascriptExecutor) driver;
+    this.driver = driver;
   }
 
   public void click(String cssSelector) {
@@ -69,11 +74,15 @@ public class JavascriptActions {
             element);
   }
 
+  public void scrollToBottom(WebDriver driver) {
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+  }
+
   public void scrollToElement(By elementBy) {
     try {
       js.executeScript(
           "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 60));",
-          webDriver.findElement(elementBy));
+          driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -128,5 +137,42 @@ public class JavascriptActions {
 
   public void scrollBy(int x, int y) {
     js.executeScript("window.scrollBy(arguments[0], arguments[1])", x, y);
+  }
+
+  public String getCountry() {
+    waitForJavaScriptTruthy("Wikia.geo");
+    return js.executeScript(
+        "return Wikia.geo.getCountryCode();"
+    ).toString();
+  }
+
+  public void waitForJavaScriptTruthy(final String script) {
+    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    try {
+      new WebDriverWait(driver, WEBDRIVER_WAIT_TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
+        public Boolean apply(WebDriver driver) {
+          try {
+            return (boolean) js.executeScript("return !!(" + script + ");");
+          } catch (WebDriverException e) {
+            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
+            return false;
+          }
+        }
+      });
+    } finally {
+      driver.manage().timeouts().implicitlyWait(WEBDRIVER_WAIT_TIMEOUT_SEC, TimeUnit.MILLISECONDS);
+    }
+  }
+
+  public String getWindowErrors() {
+    return js.executeScript("return window.errors || ''").toString();
+  }
+
+  public void addErrorListenerScript() {
+    js.executeScript(
+           "var script = document.createElement('script'); "
+           + "script.innerHTML = 'window.onerror = "
+           + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
+           + "document.querySelector('body').appendChild(script);");
   }
 }

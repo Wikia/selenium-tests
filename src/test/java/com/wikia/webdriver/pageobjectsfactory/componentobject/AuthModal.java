@@ -18,23 +18,24 @@ public class AuthModal extends WikiBasePageObject {
   private WebElement passwordField;
   @FindBy(css = "#loginSubmit")
   private WebElement signInButton;
-  @FindBy(css = ".auth-modal iframe")
-  private WebElement iFrame;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
   @FindBy(css = ".register-page .header-callout-link")
   private WebElement linkToSignInForm;
+  @FindBy(css = ".signup-providers li a")
+  private WebElement connectWithFacebookButton;
 
-  private String mainWindowHandle;
+  private final String mainWindowHandle;
 
-  public AuthModal(){
+  public AuthModal() {
     super();
     waitForNewWindow();
-    this.mainWindowHandle =  driver.getWindowHandle();
+    this.mainWindowHandle = driver.getWindowHandle();
   }
 
+
   private void switchToAuthModalHandle() {
-    for(String winHandle : driver.getWindowHandles()){
+    for (String winHandle : driver.getWindowHandles()) {
       driver.switchTo().window(winHandle);
     }
   }
@@ -43,14 +44,22 @@ public class AuthModal extends WikiBasePageObject {
     driver.switchTo().window(this.mainWindowHandle);
   }
 
-  public boolean isOpened(){
+  public boolean isOpened() {
     switchToAuthModalHandle();
     boolean isOpenedResult = registerAuthModal.isDisplayed();
     switchToMainWindowHandle();
     return isOpenedResult;
   }
 
-  public void login(String username, String password){
+  public boolean isConnetctWithFacebookButtonVisible() {
+    switchToAuthModalHandle();
+    boolean isConnetctWithFacebookButtonVisible = registerAuthModal.isDisplayed();
+    switchToMainWindowHandle();
+
+    return isConnetctWithFacebookButtonVisible;
+  }
+
+  public void login(String username, String password) {
     switchToAuthModalHandle();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
@@ -58,11 +67,11 @@ public class AuthModal extends WikiBasePageObject {
     switchToMainWindowHandle();
   }
 
-  public void login(User user){
+  public void login(User user) {
     login(user.getUserName(), user.getPassword());
   }
 
-  public void clickForgotPasswordLink(){
+  public void clickForgotPasswordLink() {
     switchToAuthModalHandle();
     forgottenPasswordLink.click();
     switchToMainWindowHandle();

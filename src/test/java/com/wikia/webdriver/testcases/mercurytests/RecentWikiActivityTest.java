@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -13,9 +14,11 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = "aga")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@Test(groups = {"mercury_recentWikiActivity"})
 public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test(groups = "mercury_recentWikiActivity_anonNavigateToRWAfromMenu")
+  @Execute(mockAds = "true")
   public void mercury_recentWikiActivity_anonNavigateToRWAfromMenu() {
     new MainPage()
         .open()
@@ -33,6 +36,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
    * Access denied when log in
    */
   @Test(groups = "mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack", enabled = false)
+  @RelatedIssue(issueID = "MAIN-7233")
   @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   public void mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack() {
     this.openDiffPageAndGoBack();

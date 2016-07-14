@@ -131,6 +131,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
+
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
     WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
@@ -404,7 +405,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public AdsBaseObject waitForPageLoaded() {
-    waitForJavaScriptTruthy("document.readyState === 'complete'");
+    jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
     return this;
   }
 
@@ -426,13 +427,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     } finally {
       restoreDeaultImplicitWait();
     }
-  }
-
-  public String getCountry() {
-    waitForJavaScriptTruthy("Wikia.geo");
-    return (String) ((JavascriptExecutor) driver).executeScript(
-        "return Wikia.geo.getCountryCode();"
-    );
   }
 
   public AdsBaseObject addToUrl(String param) {
@@ -571,25 +565,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  public void waitForJavaScriptTruthy(final String script) {
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(new ExpectedCondition<Boolean>() {
-        public Boolean apply(WebDriver driver) {
-          try {
-            return (boolean) ((JavascriptExecutor) driver)
-                .executeScript("return !!(" + script + ");");
-          } catch (WebDriverException e) {
-            PageObjectLogging.logError("waitForJavaScriptTruthy", e);
-            return false;
-          }
-        }
-      });
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
   public void verifyNoAd(final String slotSelector) {
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
@@ -640,6 +615,35 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     return this;
+  }
+
+  public void verifyExpandedAdVisibleInSlot(String slotSelector, WebElement slot) {
+    waitForSlotExpanded(slot);
+
+    boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
+
+    extractGptInfo(slotSelector);
+
+    if (!adVisible) {
+      throw new WebDriverException("Ad is not present in " + slotSelector);
+    }
+
+    PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
+  }
+
+  public long getLineItemId(String slotName) {
+    JavascriptExecutor js = driver;
+    try {
+      return (long) js.executeScript(
+          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
+          "return slots[i].getResponseInformation().lineItemId;" +
+          "} }"
+      );
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("Get " + slotName + " line item", e, false);
+      return 0;
+    }
   }
 
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
@@ -800,5 +804,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMiddlePrefooterAdPresent() {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
+  }
+
+  public void triggerComments() {
+    scrollToFooter();
+    jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
+    scrollToFooter();
   }
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -20,7 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = {"Facebook"})
+@Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -37,9 +38,10 @@ public class FacebookTests extends NewTestTemplate {
    *   <li>Verify user can login via facebook</li>
    * </ol>
    */
-  @Test
+  @Test(groups = "Facebook_userCanSignUpViaFacebook")
   @UseUnstablePageLoadStrategy
-  public void userCanSignupViaFacebook() {
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
+  public void userCanSignUpViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword());
 
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
@@ -60,8 +62,9 @@ public class FacebookTests extends NewTestTemplate {
    * and wikia accounts 3. login 4. Verify user can login via wikia username/pwd 5. Disconnect
    * facebook via prefs for cleanup
    */
-  @Test
+  @Test(groups = "Facebook_userCanLoginViaFacebook")
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
   public void userCanLoginViaFacebook() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
@@ -70,7 +73,7 @@ public class FacebookTests extends NewTestTemplate {
     dropDown.openWikiPage(wikiURL);
     dropDown.appendToUrl("noads=1");
     dropDown.openDropDown();
-    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
+//    dropDown.logInViaFacebook(user.getEmail(), user.getPassword());
 
     FacebookSignupModalComponentObject fbModal = new FacebookSignupModalComponentObject(driver);
     fbModal.acceptWikiaAppPolicy();
@@ -78,8 +81,9 @@ public class FacebookTests extends NewTestTemplate {
     dropDown.verifyUserLoggedIn(credentials.userName13);
   }
 
-  @Test
+  @Test(groups = "Facebook_userCanConnectToFacebookViaUserPreferencesPage")
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
   public void userCanConnectToFacebookViaUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();
@@ -89,14 +93,16 @@ public class FacebookTests extends NewTestTemplate {
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
     prefsPage.connectFacebook(user.getEmail(), user.getPassword());
     prefsPage.verifyFBButtonVisible();
+
     prefsPage.logOut(wikiURL);
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     signUp.clickFacebookSignUp();
     prefsPage.verifyUserLoggedIn(credentials.userName);
   }
 
-  @Test
+  @Test(groups = "Facebook_userCanConnectToFacebookOnUserPreferencesPage")
   @UseUnstablePageLoadStrategy
+  @RelatedIssue(issueID = "SOC-2432", comment = "Test manually")
   public void userCanConnectToFacebookOnUserPreferencesPage() {
     new RemoveFacebookPageObject(driver).removeWikiaApps(user.getEmail(), user.getPassword())
         .logOutFB();

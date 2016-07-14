@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
@@ -25,9 +26,9 @@ public class ImageServingTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
-    newFiles.clickOnMoreOrFewerOptions();
+    newFiles.clickOnMoreOptions();
     newFiles.checkIgnoreAnyWarnings();
-    newFiles.clickOnMoreOrFewerOptions();
+    newFiles.clickOnFewerOptions();
     newFiles.selectFileToUpload(PageContent.FILE);
     newFiles.clickUploadButton();
     newFiles.verifyFileUploaded(PageContent.FILE);

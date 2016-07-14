@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -32,7 +31,7 @@ public class TOCTests extends NewTestTemplate {
 
   private void init() {
     this.toc = new TableOfContentPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.loading = new Loading(driver);
   }
 
@@ -52,11 +51,11 @@ public class TOCTests extends NewTestTemplate {
         true
     );
 
-    boolean result = toc.isTOCUnderArticleName();
+    boolean result = toc.isTOCAtTheTopOfTheArticle();
     PageObjectLogging.log(
         "TOC position",
-        "is under article name",
-        "is not under article name",
+        "is under article name at the top of the article content",
+        "is not under article name at the top of the article content",
         result
     );
 
@@ -148,10 +147,6 @@ public class TOCTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryTOCTest_005")
-  @RelatedIssue(
-      issueID = "XW-1017",
-      comment = "Page scrolls up to top. The defect affects the test stability"
-  )
   public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
     init();
     navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
@@ -164,6 +159,20 @@ public class TOCTests extends NewTestTemplate {
         "Redirection to header from other page",
         "works",
         "does not work",
+        result
+    );
+  }
+
+  @Test(groups = "MercuryTOCTest_006")
+  public void MercuryTOCTest_006_TOCPresence_PlacedUnderInfobox() {
+    init();
+    navigate.toPage(MercurySubpages.TOC_WITH_PORTABLE_INFOBOX);
+
+    boolean result = toc.isTOCBelowFirstAdSlot();
+    PageObjectLogging.log(
+        "TOC",
+        "is right below the first portable infobox",
+        "is in a wrong place, as it's not right below the first portable infobox",
         result
     );
   }

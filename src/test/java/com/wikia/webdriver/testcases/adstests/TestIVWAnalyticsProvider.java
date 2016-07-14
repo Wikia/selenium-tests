@@ -50,7 +50,6 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
       networkTrafficInterceptor.startIntercepting();
       String testedPage = urlBuilder.getUrlForPath(wikiName, path);
       AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
-      Assertion.assertEquals(adsBaseObject.getCountry(), CountryCode.GERMANY);
 
       assertTrackingPixels(adsBaseObject,
                            URL_BASE_SCRIPT,
@@ -69,7 +68,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     adsBaseObject.waitForPageLoaded();
-    Assertion.assertFalse(networkTrafficInterceptor.searchRequestUrlInHar(URL_BASE_SCRIPT),
+    Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(URL_BASE_SCRIPT),
                           "Tracking should not be loaded outside DE/AT/CH country!");
   }
 

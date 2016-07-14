@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -24,8 +23,10 @@ public class TableOfContentPageObject {
   private WebElement TOCMenu;
   @FindBy(css = "nav.table-of-contents div")
   private WebElement tocButton;
-  @FindBy(xpath = "//section[contains(@class, 'article-body')]/h1[position() = 1]/following-sibling::*[2]")
-  private WebElement tocUnderH1;
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/*[1]")
+  private WebElement tocAtTheTop;
+  @FindBy(xpath = "//section[contains(@class, 'article-body')]/article[contains(@class, 'article-content')]/aside[contains(@class, 'portable-infobox')][position() = 1]/following-sibling::*[2]")
+  private WebElement tocBelowFirstAdSlot;
   @FindBy(css = "nav.table-of-contents li")
   private List<WebElement> tocItems;
 
@@ -50,9 +51,16 @@ public class TableOfContentPageObject {
     return true;
   }
 
-  public boolean isTOCUnderArticleName() throws WebDriverException {
-    wait.forElementVisible(tocUnderH1);
-    return tocUnderH1.isDisplayed() && "nav".equals(tocUnderH1.getTagName());
+  public boolean isTOCAtTheTopOfTheArticle() {
+    wait.forElementVisible(tocAtTheTop);
+    return tocAtTheTop.isDisplayed() &&
+           tocAtTheTop.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
+  }
+
+  public boolean isTOCBelowFirstAdSlot() {
+    wait.forElementVisible(tocBelowFirstAdSlot);
+    return tocBelowFirstAdSlot.isDisplayed() &&
+           tocBelowFirstAdSlot.findElement(By.cssSelector("nav.table-of-contents")).isDisplayed();
   }
 
   public void clickOnTOC() {

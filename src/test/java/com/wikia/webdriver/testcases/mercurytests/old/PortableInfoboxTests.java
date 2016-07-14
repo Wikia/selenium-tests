@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,7 +27,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   private void init() {
     this.infobox = new PortableInfoboxObject(driver);
     this.toc = new TableOfContentPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "mercury_infobox_verifyElementsBeforeAndAfterExpanding")
@@ -38,8 +37,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     // Before infobox expanding
     infobox
-        .isMainImageVisible()
-        .isTitleOverImageVisible()
+        .isTitleNotVisible()
         .isImageInTitleNotVisible()
         .isImageInTabberVisible()
         .isImageCaptionInTabberVisible();
@@ -96,18 +94,16 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.isExternalLinkLabelInURL(externalLinkName, externalURL);
   }
 
-  @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox", enabled = false)
-  @RelatedIssue(issueID = "XW-1200", comment = "functionality is broken")
+  @Test(groups = "mercury_infobox_imagesAndVideosOpenInLightbox")
   public void mercury_infobox_imagesAndVideosOpenInLightbox() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_1);
 
     // Check image
     infobox
-        .clickMainImage()
+        .clickOnImageInInfobox()
         .isLightboxOpened()
-        .closeLightbox()
-        .isTitleOverImageVisible();
+        .closeLightbox();
 
     // Check video
     infobox
@@ -116,49 +112,19 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .isLightboxOpened();
   }
 
-  @Test(groups = "mercury_infobox_heroImageIsCentredAndHasTitleAbove")
-  public void mercury_infobox_heroImageIsCentredAndHasTitleAbove() {
-    init();
-    navigate.toPage(MercurySubpages.INFOBOX_2);
-
-    infobox
-        .isTitleAboveImageVisible()
-        .isHeroImageCentered();
-  }
-
   @Test(groups = "mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages")
   public void mercury_infobox_infoboxSizeIsNotAffectedByClickOnImages() {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_3);
 
-    // Check click on main image
     infobox
-        .clickMainImage()
+        .clickGalleryImage(0)
         .isLightboxOpened()
         .closeLightbox()
-        .isInfoboxCollapsed();
-
-    // Check click on "View more" button in gallery in infobox
-    infobox
+        .isInfoboxCollapsed()
         .clickExpandButton()
         .clickGalleryButton(0)
         .isInfoboxExpanded();
-  }
-
-  @Test(groups = "mercury_infobox_heroImageIsSquare")
-  public void mercury_infobox_heroImageIsSquare() {
-    init();
-    navigate.toPage(MercurySubpages.INFOBOX_1);
-
-    infobox.isHeroImageSquare();
-  }
-
-  @Test(groups = "mercury_infobox_heroImageIsRectangle")
-  public void mercury_infobox_heroImageIsRectangle() {
-    init();
-    navigate.toPage(MercurySubpages.INFOBOX_4);
-
-    infobox.isNotHeroImageSquare();
   }
 
   @Test(groups = "mercury_infobox_imageCollectionIsVisibleAndChangingImagesWorks")
@@ -166,7 +132,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     init();
     navigate.toPage(MercurySubpages.INFOBOX_5);
 
-    infobox.isImageInCollectionVisible()
+    infobox
+        .isImageInCollectionVisible()
         .clickNextImageArrow()
         .isImageInCollectionVisible()
         .clickNextImageArrow()

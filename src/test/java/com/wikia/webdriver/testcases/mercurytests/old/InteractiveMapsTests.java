@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests.old;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -26,10 +27,11 @@ public class InteractiveMapsTests extends NewTestTemplate {
   private void init() {
     this.maps = new InteractiveMapsComponentObject(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.MAP);
+    new Navigate().toPage(MercurySubpages.MAP);
   }
 
   @Test(groups = "MercuryInteractiveMapsTest_001")
+  @DontRun(env={"dev", "sandbox", "preview"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
     init();
 

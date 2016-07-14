@@ -81,10 +81,10 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = blogPage.getBlogName();
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore = base.undeleteByFlashMessage();
+    SpecialRestorePageObject restore = base.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
-    blogPage.verifyNotificationMessage();
+    blogPage.getBannerNotifications().verifyNotificationMessage();
     blogPage.verifyBlogTitle(blogTitle);
   }
 
@@ -99,6 +99,6 @@ public class BlogTests extends NewTestTemplate {
     RenamePageObject renamePage = blogPage.renameUsingDropdown();
     renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
     blogPage.verifyBlogTitle(blogTitleMove);
-    blogPage.verifyNotificationMessage();
+    blogPage.getBannerNotifications().verifyNotificationMessage();
   }
 }
