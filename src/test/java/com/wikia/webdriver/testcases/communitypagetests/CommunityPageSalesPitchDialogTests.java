@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.communitypagetests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SalesPitchDialog;
@@ -24,8 +25,22 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.isDialogVisible());
+    Assertion.assertTrue(new SalesPitchDialog().isDialogVisible());
+  }
+
+  @Execute(disableCommunityPageSalesPitchDialog = "false", asUser = User.USER)
+  public void verifySalesPitchDialogNotDisplayedForLoggedUser() {
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject();
+
+    // 2nd pageview
+    article.open(articleTitle);
+    // 3rd pageview
+    article.open(articleTitle);
+    // 4th pageview
+    article.open(articleTitle);
+
+    Assertion.assertTrue(new SalesPitchDialog().isDialogNotVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -44,8 +59,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.isDialogVisible());
+    Assertion.assertTrue(new SalesPitchDialog().isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -60,8 +74,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.clickHelpOutButton().isCommunityPageOpen());
+    Assertion.assertTrue(new SalesPitchDialog().clickHelpOutButton().isCommunityPageOpen());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -76,8 +89,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.clickDialogImage().isCommunityPageOpen());
+    Assertion.assertTrue(new SalesPitchDialog().clickDialogImage().isCommunityPageOpen());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -92,8 +104,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.clickDialogContent().isCommunityPageOpen());
+    Assertion.assertTrue(new SalesPitchDialog().clickDialogContent().isCommunityPageOpen());
   }
 
   public void verifySalesPitchDialogIsNotShownIfCookieIsSet() {
@@ -107,7 +118,6 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    dialog.isDialogNotVisible();
+    Assertion.assertFalse(new SalesPitchDialog().isDialogNotVisible());
   }
 }
