@@ -25,7 +25,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     article.open(articleTitle);
 
     SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.isVisible());
+    Assertion.assertTrue(dialog.isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -45,11 +45,11 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     article.open(articleTitle);
 
     SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.isVisible());
+    Assertion.assertTrue(dialog.isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
-  public void verifyClickEntryPointButtonRedirectToSpecialCommunity() {
+  public void verifyClickHelpOutButtonRedirectToSpecialCommunity() {
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject();
 
@@ -64,6 +64,38 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     Assertion.assertTrue(dialog.clickHelpOutButton().isCommunityPageOpen());
   }
 
+  @Execute(disableCommunityPageSalesPitchDialog = "false")
+  public void verifyDialogImageRedirectToSpecialCommunity() {
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject();
+
+    // 2nd pageview
+    article.open(articleTitle);
+    // 3rd pageview
+    article.open(articleTitle);
+    // 4th pageview
+    article.open(articleTitle);
+
+    SalesPitchDialog dialog = new SalesPitchDialog();
+    Assertion.assertTrue(dialog.clickDialogImage().isCommunityPageOpen());
+  }
+
+  @Execute(disableCommunityPageSalesPitchDialog = "false")
+  public void verifyDialogContentRedirectToSpecialCommunity() {
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject();
+
+    // 2nd pageview
+    article.open(articleTitle);
+    // 3rd pageview
+    article.open(articleTitle);
+    // 4th pageview
+    article.open(articleTitle);
+
+    SalesPitchDialog dialog = new SalesPitchDialog();
+    Assertion.assertTrue(dialog.clickDialogContent().isCommunityPageOpen());
+  }
+
   public void verifySalesPitchDialogIsNotShownIfCookieIsSet() {
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject();
@@ -76,6 +108,6 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     article.open(articleTitle);
 
     SalesPitchDialog dialog = new SalesPitchDialog();
-    dialog.isNotVisible();
+    dialog.isDialogNotVisible();
   }
 }

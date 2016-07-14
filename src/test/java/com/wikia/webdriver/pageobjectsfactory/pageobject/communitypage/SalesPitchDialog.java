@@ -15,13 +15,19 @@ public class SalesPitchDialog extends WikiBasePageObject {
   @FindBy(css = "#CommunityPageBenefitsModal .community-page-entry-point-button")
   private WebElement helpOutButton;
 
-  public boolean isVisible() {
+  @FindBy(css = ".community-page-benefits-image")
+  private WebElement image;
+
+  @FindBy(css = ".community-page-benefits-content")
+  private WebElement dialogContent;
+
+  public boolean isDialogVisible() {
     wait.forElementVisible(salesPitchDialog);
 
     return true;
   }
 
-  public boolean isNotVisible() {
+  public boolean isDialogNotVisible() {
     wait.forElementNotVisible(salesPitchDialog);
 
     return true;
@@ -32,7 +38,29 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(helpOutButton);
       helpOutButton.click();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Entry point button is not visible");
+      PageObjectLogging.logInfo("Help out button is not visible");
+    }
+
+    return new SpecialCommunity();
+  }
+
+  public SpecialCommunity clickDialogImage() {
+    try {
+      wait.forElementVisible(image);
+      image.click();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Dialog image is not visible");
+    }
+
+    return new SpecialCommunity();
+  }
+
+  public SpecialCommunity clickDialogContent() {
+    try {
+      wait.forElementVisible(dialogContent);
+      dialogContent.click();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Dialog content is not visible");
     }
 
     return new SpecialCommunity();
