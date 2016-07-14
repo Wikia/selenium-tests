@@ -61,7 +61,7 @@ public class AuthModal extends WikiBasePageObject {
   public boolean isSignInOpened() {
     switchToAuthModalHandle();
     try {
-      wait.forElementVisible(registerAuthModal);
+      wait.forElementVisible(signInAuthModal);
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo("Sign In Auth Modal is not displayed");
       return false;
