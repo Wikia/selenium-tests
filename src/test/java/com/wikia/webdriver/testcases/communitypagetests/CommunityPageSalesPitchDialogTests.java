@@ -6,8 +6,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SalesPitchDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SpecialCommunity;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "CommunityPageTests")
@@ -63,10 +61,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     article.open(articleTitle);
 
     SalesPitchDialog dialog = new SalesPitchDialog();
-    dialog.clickEntryPointButton();
-
-    SpecialCommunity page = new SpecialCommunity();
-    page.isCommunityPage();
+    Assertion.assertTrue(dialog.clickHelpOutButton().isCommunityPageOpen());
   }
 
   public void verifySalesPitchDialogIsNotShownIfCookieIsSet() {
