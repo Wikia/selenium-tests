@@ -1,8 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -46,16 +48,26 @@ public class AuthModal extends WikiBasePageObject {
 
   public boolean isOpened() {
     switchToAuthModalHandle();
-    boolean isOpenedResult = registerAuthModal.isDisplayed();
+    try {
+      wait.forElementVisible(registerAuthModal);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Register Auth Modal is not displayed");
+      return false;
+    }
     switchToMainWindowHandle();
-    return isOpenedResult;
+    return true;
   }
 
   public boolean isSignInOpened() {
     switchToAuthModalHandle();
-    boolean isOpenedResult = signInAuthModal.isDisplayed();
+    try {
+      wait.forElementVisible(registerAuthModal);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Sign In Auth Modal is not displayed");
+      return false;
+    }
     switchToMainWindowHandle();
-    return isOpenedResult;
+    return true;
   }
 
   public boolean isConnetctWithFacebookButtonVisible() {
@@ -86,6 +98,7 @@ public class AuthModal extends WikiBasePageObject {
 
   public void clickToSignInForm(){
     switchToAuthModalHandle();
+    wait.forElementClickable(linkToSignInForm);
     linkToSignInForm.click();
   }
 
