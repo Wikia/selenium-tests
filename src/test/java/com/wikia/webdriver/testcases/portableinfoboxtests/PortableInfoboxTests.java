@@ -15,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
 import org.testng.annotations.Test;
 
 /**
