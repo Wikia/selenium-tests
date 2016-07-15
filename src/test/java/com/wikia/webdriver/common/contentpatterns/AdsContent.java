@@ -17,6 +17,7 @@ public class AdsContent {
 
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
+  public static final String MOBILE_BOTTOM_LB = "MOBILE_BOTTOM_LEADERBOARD";
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
   public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
   public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
@@ -45,6 +46,10 @@ public class AdsContent {
   //CONTAINERS
   public static final String PREFOOTERS_CONTAINER = "Prefooters";
   public static final String ADS_IN_CONTENT_CONTAINER = "AdsInContent";
+  public static final String MOBILE_IN_CONTENT_CONTAINER = "MOBILE_IN_CONTENT_CONTAINER";
+  public static final String MOBILE_PREFOOTER_CONTAINER = "MOBILE_PREFOOTER_CONTAINER";
+  public static final String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = "MOBILE_BOTTOM_LEADERBOARD_CONTAINER";
+
 
   private AdsContent() {
 
@@ -61,6 +66,7 @@ public class AdsContent {
   static {
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
+    SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(HOME_TOP_LB, "#HOME_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(CORP_TOP_LB, "#CORP_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(HUB_LB, "#HUB_TOP_LEADERBOARD");
@@ -77,6 +83,9 @@ public class AdsContent {
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
     SLOTS_SELECTORS.put(ADS_IN_CONTENT_CONTAINER, "#WikiaAdInContentPlaceHolder");
     SLOTS_SELECTORS.put(PREFOOTERS_CONTAINER, "#WikiaArticleBottomAd, .bottom-ads");
+    SLOTS_SELECTORS.put(MOBILE_IN_CONTENT_CONTAINER, ".mobile-in-content");
+    SLOTS_SELECTORS.put(MOBILE_PREFOOTER_CONTAINER, ".mobile-prefooter");
+    SLOTS_SELECTORS.put(MOBILE_BOTTOM_LEADERBOARD_CONTAINER, ".mobile-bottom-leaderboard");
     SLOTS_SELECTORS.put(TOP_INCONTENT_BOXAD, "#TOP_INCONTENT_BOXAD");
     SLOTS_SELECTORS.put(MOBILETOP_LB, "#MOBILE_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "[id^=MOBILE_IN_CONTENT]");

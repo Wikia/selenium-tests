@@ -1,18 +1,20 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.apache.commons.collections.ListUtils;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Map;
-
-import org.openqa.selenium.Dimension;
 
 public class TestUap extends TemplateNoFirstLoad {
 
@@ -30,6 +32,27 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
     ads.triggerComments();
+    verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsUapMercury",
+      groups = "AdsUapMercury"
+  )
+  public void adsUapMercury(Page page,
+                            List<Map<String, Object>> atfSlots,
+                            List<Map<String, Object>> btfSlots) {
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
+    verifySlotsUnblocked(ads, atfSlots);
+    verifySlotsBlocked(ads, btfSlots);
+    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get("MOBILE_IN_CONTENT_CONTAINER"));
+    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get("MOBILE_PREFOOTER_CONTAINER"));
+    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get("MOBILE_BOTTOM_LEADERBOARD_CONTAINER"));
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
   }
 

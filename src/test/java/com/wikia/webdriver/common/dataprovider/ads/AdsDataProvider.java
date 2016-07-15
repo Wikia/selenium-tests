@@ -1229,4 +1229,41 @@ public class AdsDataProvider {
         }
     };
   }
+
+  @DataProvider
+  public static Object[][] adsUapMercury() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/UAP"),
+            Arrays.asList(
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotSize", new Dimension(360, 540))
+                    .put("lineItemId", 297978612)
+                    .put("src", "mobile")
+                    .build()
+            ),
+            Arrays.asList(
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
+                    .put("slotSize", new Dimension(360, 540))
+                    .put("lineItemId", 297978612)
+                    .put("src", "mobile")
+                    .build(),
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.MOBILE_PREFOOTER)
+                    .put("slotSize", new Dimension(300, 250))
+                    .put("lineItemId", 297978612)
+                    .put("src", "mobile")
+                    .build(),
+                ImmutableMap.<String, Object>builder()
+                    .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
+                    .put("slotSize", new Dimension(300, 250))
+                    .put("lineItemId", 297978612)
+                    .put("src", "mobile")
+                    .build()
+            )
+        }
+    };
+  }
 }

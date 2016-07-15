@@ -811,4 +811,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
     scrollToFooter();
   }
+
+  public void scrollToSlot(String slot) {
+    WebElement slotSelector = driver.findElement(By.cssSelector(slot));
+    jsActions.scrollToElement(slotSelector);
+    PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
+  }
 }
