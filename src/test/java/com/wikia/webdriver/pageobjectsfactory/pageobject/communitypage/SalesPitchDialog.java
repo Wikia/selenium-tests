@@ -2,15 +2,15 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SalesPitchDialog extends WikiBasePageObject {
 
-  private By salesPitchDialog = By.cssSelector("#CommunityPageBenefitsModal");
+  @FindBy(css = "#CommunityPageBenefitsModal")
+  private WebElement salesPitchDialog;
 
   @FindBy(css = "#CommunityPageBenefitsModal .community-page-entry-point-button")
   private WebElement helpOutButton;
@@ -22,15 +22,16 @@ public class SalesPitchDialog extends WikiBasePageObject {
   private WebElement dialogContent;
 
   public boolean isDialogVisible() {
-    wait.forElementVisible(salesPitchDialog);
-
-    return true;
-  }
-
-  public boolean isDialogNotVisible() {
-    wait.forElementNotVisible(salesPitchDialog);
-
-    return true;
+    try {
+      wait.forElementVisible(salesPitchDialog, 5);
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Dialog is not visible");
+      return false;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
   }
 
   public SpecialCommunity clickHelpOutButton() {

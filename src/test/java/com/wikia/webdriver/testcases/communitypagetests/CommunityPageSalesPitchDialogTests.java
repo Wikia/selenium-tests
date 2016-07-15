@@ -40,7 +40,7 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    Assertion.assertTrue(new SalesPitchDialog().isDialogNotVisible());
+    Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -118,6 +118,6 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    Assertion.assertFalse(new SalesPitchDialog().isDialogNotVisible());
+    Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
 }
