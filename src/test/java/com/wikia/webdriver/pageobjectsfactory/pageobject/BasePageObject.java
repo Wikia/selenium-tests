@@ -15,12 +15,10 @@ import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
