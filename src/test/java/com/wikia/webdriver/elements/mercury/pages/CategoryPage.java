@@ -11,12 +11,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.annotation.Nullable;
 
 public class CategoryPage extends WikiBasePageObject {
+
+  @FindBy(css = ".wiki-page-title")
+  private WebElement title;
+  @FindBy(css = ".wiki-page-subtitle")
+  private WebElement subtitle;
 
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
@@ -30,6 +36,14 @@ public class CategoryPage extends WikiBasePageObject {
     super();
 
     navigate = new Navigate();
+  }
+
+  public String getPageTitle() {
+    return title.getText();
+  }
+
+  public String getPageSubtitle() {
+    return subtitle.getText();
   }
 
   public CategoryPage navigateToPageWithArticleAndWithMembersFromUrl() {
