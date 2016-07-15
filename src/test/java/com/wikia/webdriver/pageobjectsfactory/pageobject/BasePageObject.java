@@ -14,7 +14,6 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -319,7 +318,7 @@ public class BasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
-          By.cssSelector(selector), attribute, escapeHtml(value)));
+          By.cssSelector(selector), attribute, value));
     } finally {
       restoreDeaultImplicitWait();
     }
