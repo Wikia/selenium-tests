@@ -33,6 +33,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
+    authModal.clickToSignInForm();
     authModal.login(credentials.userName10, credentials.password10);
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
@@ -48,6 +49,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
+    authModal.clickToSignInForm();
     authModal.login(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
@@ -102,6 +104,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     AuthModal authModal = edit.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
 
+    authModal.clickToSignInForm();
     authModal.login(credentials.userName10, credentials.password10);
     edit.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(edit.isStringInURL(articleName));

@@ -129,7 +129,7 @@ public class SignUpTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
     AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    Assert.assertTrue(authModal.isSignInOpened());
 
     authModal.login(userName, password);
   }
