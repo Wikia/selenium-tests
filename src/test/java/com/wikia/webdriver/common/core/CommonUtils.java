@@ -1,7 +1,12 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
@@ -10,17 +15,13 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 
 public class CommonUtils {
@@ -75,7 +76,7 @@ public class CommonUtils {
 
   public static String sendPost(String apiUrl, String[][] param) {
     try {
-      DefaultHttpClient httpclient = new DefaultHttpClient();
+      CloseableHttpClient httpclient = HttpClients.createDefault();
       HttpPost httpPost = new HttpPost(apiUrl);
       List<NameValuePair> paramPairs = new ArrayList<NameValuePair>();
 
