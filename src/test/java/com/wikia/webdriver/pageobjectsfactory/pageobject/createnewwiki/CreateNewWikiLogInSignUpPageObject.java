@@ -1,17 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
@@ -44,13 +43,6 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
   public void typeInPassword(String password) {
     passwordField.sendKeys(password);
     PageObjectLogging.log("typeInPassword", "password name was typed", true);
-  }
-
-  public void clickForgotPassword(String userName, String apiToken) {
-    Assertion.assertEquals(resetForgotPasswordTime(userName, apiToken),
-        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
-    wait.forElementVisible(forgotPasswordLink);
-    forgotPasswordLink.click();
   }
 
   public CreateNewWikiPageObjectStep2 submitLogin() {
