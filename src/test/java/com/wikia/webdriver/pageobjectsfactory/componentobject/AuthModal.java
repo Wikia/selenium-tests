@@ -1,15 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AuthModal extends WikiBasePageObject {
 
   @FindBy(css = ".auth.desktop.signin-page")
-  private WebElement authModal;
+  private WebElement signInAuthModal;
+  @FindBy(css = ".auth.desktop.register-page")
+  private WebElement registerAuthModal;
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
   @FindBy(css = "#loginPassword")
@@ -18,6 +22,8 @@ public class AuthModal extends WikiBasePageObject {
   private WebElement signInButton;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
+  @FindBy(css = ".register-page .header-callout-link")
+  private WebElement linkToSignInForm;
   @FindBy(css = ".signup-providers li a")
   private WebElement connectWithFacebookButton;
 
@@ -42,14 +48,31 @@ public class AuthModal extends WikiBasePageObject {
 
   public boolean isOpened() {
     switchToAuthModalHandle();
-    boolean isOpenedResult = authModal.isDisplayed();
+    try {
+      wait.forElementVisible(registerAuthModal);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Register Auth Modal is not displayed");
+      return false;
+    }
     switchToMainWindowHandle();
-    return isOpenedResult;
+    return true;
+  }
+
+  public boolean isSignInOpened() {
+    switchToAuthModalHandle();
+    try {
+      wait.forElementVisible(signInAuthModal);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Sign In Auth Modal is not displayed");
+      return false;
+    }
+    switchToMainWindowHandle();
+    return true;
   }
 
   public boolean isConnetctWithFacebookButtonVisible() {
     switchToAuthModalHandle();
-    boolean isConnetctWithFacebookButtonVisible = authModal.isDisplayed();
+    boolean isConnetctWithFacebookButtonVisible = registerAuthModal.isDisplayed();
     switchToMainWindowHandle();
 
     return isConnetctWithFacebookButtonVisible;
@@ -71,6 +94,12 @@ public class AuthModal extends WikiBasePageObject {
     switchToAuthModalHandle();
     forgottenPasswordLink.click();
     switchToMainWindowHandle();
+  }
+
+  public void clickToSignInForm(){
+    switchToAuthModalHandle();
+    wait.forElementClickable(linkToSignInForm);
+    linkToSignInForm.click();
   }
 
 }
