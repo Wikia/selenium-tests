@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -43,7 +42,6 @@ public class UpvotingTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnMobileCanNotUpvote", enabled = false)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2724, Test manually")
   public void anonUserOnMobileCanNotUpvote() {
     postListUpvoteButtonClickDoesntAddAnUpvote();
   }
@@ -69,7 +67,6 @@ public class UpvotingTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote", enabled = false)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2724, Test manually")
   public void anonUserOnDesktopCanNotUpvote() {
     postListUpvoteButtonClickDoesntAddAnUpvote();
   }
@@ -88,7 +85,6 @@ public class UpvotingTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanUpvote", enabled = false)
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2724, Test manually")
   public void registeredUserOnMobileCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
@@ -107,7 +103,6 @@ public class UpvotingTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote", enabled = false)
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION, browser = Browser.FIREFOX)
-  @RelatedIssue(issueID = "SOC-2724, Test manually")
   public void registeredUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
