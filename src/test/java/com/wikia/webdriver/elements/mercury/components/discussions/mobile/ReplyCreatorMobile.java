@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ReplyCreatorMobile extends BasePageObject {
 
-  @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
+  @FindBy(css = ".discussion-editor-entry-point-container .discussion-editor-entry-point-content")
   private WebElement replyCreator;
 
   @FindBy(css = ".modal-dialog-wrapper:not(.discussion-editor-dialog) .modal-dialog")
