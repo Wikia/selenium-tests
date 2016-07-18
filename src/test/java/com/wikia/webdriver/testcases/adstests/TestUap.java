@@ -45,15 +45,30 @@ public class TestUap extends TemplateNoFirstLoad {
       groups = "AdsUapMercury"
   )
   public void adsUapMercury(Page page,
-                            List<Map<String, Object>> atfSlots,
-                            List<Map<String, Object>> btfSlots) {
+                            List<Map<String, Object>> mobileTopLeaderboard,
+                            List<Map<String, Object>> mobileInContent,
+                            List<Map<String, Object>> mobilePrefooter,
+                            List<Map<String, Object>> mobileBottomLeaderboard) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
-    verifySlotsUnblocked(ads, atfSlots);
-    verifySlotsBlocked(ads, btfSlots);
-    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get("MOBILE_IN_CONTENT_CONTAINER"));
-    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get("MOBILE_PREFOOTER_CONTAINER"));
-    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get("MOBILE_BOTTOM_LEADERBOARD_CONTAINER"));
-    verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
+    verifySlotsUnblocked(ads, mobileTopLeaderboard);
+    verifySlotsBlocked(ads, mobileInContent);
+    verifySlotsBlocked(ads, mobilePrefooter);
+    verifySlotsBlocked(ads, mobileBottomLeaderboard);
+    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get(AdsContent.MOBILE_IN_CONTENT_CONTAINER));
+    verifySlotsUnblocked(ads, mobileTopLeaderboard);
+    verifySlotsUnblocked(ads, mobileInContent);
+    verifySlotsBlocked(ads, mobilePrefooter);
+    verifySlotsBlocked(ads, mobileBottomLeaderboard);
+    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get(AdsContent.MOBILE_PREFOOTER_CONTAINER));
+    verifySlotsUnblocked(ads, mobileTopLeaderboard);
+    verifySlotsUnblocked(ads, mobileInContent);
+    verifySlotsUnblocked(ads, mobilePrefooter);
+    verifySlotsBlocked(ads, mobileBottomLeaderboard);
+    ads.scrollToSlot(AdsContent.SLOTS_SELECTORS.get(AdsContent.MOBILE_BOTTOM_LEADERBOARD_CONTAINER));
+    verifySlotsUnblocked(ads, mobileTopLeaderboard);
+    verifySlotsUnblocked(ads, mobileInContent);
+    verifySlotsUnblocked(ads, mobilePrefooter);
+    verifySlotsUnblocked(ads, mobileBottomLeaderboard);
   }
 
   private void verifySlotsBlocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
