@@ -61,12 +61,6 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToSlot(AdsContent.getSlotSelector(AdsContent.MOBILE_PREFOOTER_CONTAINER));
-    verifySlotsUnblocked(ads, mobileTopLeaderboard);
-    verifySlotsUnblocked(ads, mobileInContent);
-    verifySlotsUnblocked(ads, mobilePrefooter);
-    verifySlotsBlocked(ads, mobileBottomLeaderboard);
-
     ads.scrollToSlot(AdsContent.getSlotSelector(AdsContent.MOBILE_BOTTOM_LEADERBOARD_CONTAINER));
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
