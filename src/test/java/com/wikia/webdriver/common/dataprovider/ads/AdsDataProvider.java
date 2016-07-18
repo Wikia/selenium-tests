@@ -1197,32 +1197,32 @@ public class AdsDataProvider {
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP/BFAA+BFAB+FMR"),
+            new Page("project43", "SyntheticTests/UAP"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
                     .put("slotSize", new Dimension(1889, 767))
-                    .put("lineItemId", 290421252)
+                    .put("lineItemId", 297978612)
                     .put("src", "gpt")
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MEDREC)
-                    .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 290421252)
+                    .put("slotSize", new Dimension(300, 600))
+                    .put("lineItemId", 297978612)
                     .put("src", "gpt")
                     .build()
             ),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.FLOATING_MEDREC)
-                    .put("slotSize", new Dimension(300, 600))
-                    .put("lineItemId", 290421852)
+                    .put("slotSize", new Dimension(300, 250))
+                    .put("lineItemId", 297978612)
                     .put("src", "gpt")
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.BOTTOM_LB)
                     .put("slotSize", new Dimension(1178, 479))
-                    .put("lineItemId", 290421732)
+                    .put("lineItemId", 297978612)
                     .put("src", "gpt")
                     .build()
             )
