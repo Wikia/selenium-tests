@@ -26,10 +26,10 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(salesPitchDialog, 5);
       return true;
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Dialog is not visible");
+      PageObjectLogging.log("Dialog is not visible", e, true);
       return false;
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo(e.getMessage());
+      PageObjectLogging.log(e.getMessage(), e, true);
       return false;
     }
   }
@@ -39,7 +39,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(helpOutButton);
       helpOutButton.click();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Help out button is not visible");
+      PageObjectLogging.log("Button is not visible", e, true);
     }
 
     return new SpecialCommunity();
@@ -50,7 +50,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(image);
       image.click();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Dialog image is not visible");
+      PageObjectLogging.log("Dialog image is not visible", e, true);
     }
 
     return new SpecialCommunity();
@@ -61,7 +61,7 @@ public class SalesPitchDialog extends WikiBasePageObject {
       wait.forElementVisible(dialogContent);
       dialogContent.click();
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Dialog content is not visible");
+      PageObjectLogging.log("Dialog content is not visible", e, true);
     }
 
     return new SpecialCommunity();
