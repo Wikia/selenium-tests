@@ -1,13 +1,14 @@
 package com.wikia.webdriver.common.contentpatterns;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AdsContent {
 
   //HashMap with slots selector
-  public static final Map<String, String> SLOTS_SELECTORS;
-  public static final Map<String, String> SLOTS_TRIGGERS;
+  private static final Map<String, String> SLOTS_SELECTORS;
+  private static final Map<String, String> SLOTS_TRIGGERS;
 
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
@@ -53,6 +54,10 @@ public class AdsContent {
 
   private AdsContent() {
 
+  }
+
+  public static Collection<String> getAllSlotsSelectors() {
+    return SLOTS_SELECTORS.values();
   }
 
   public static String getSlotSelector(String slotName) {

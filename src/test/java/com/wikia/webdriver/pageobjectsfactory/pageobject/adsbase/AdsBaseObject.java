@@ -711,7 +711,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyNoAds() {
-    Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
+    Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
     for (String selector : slotsSelectors) {
       verifyNoAd(selector);
     }
