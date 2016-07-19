@@ -817,4 +817,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToElement(slotSelector);
     PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
   }
+
+  public void waitForElementPresent(String id) {
+    wait.forElementPresent(By.id(id));
+  }
 }
