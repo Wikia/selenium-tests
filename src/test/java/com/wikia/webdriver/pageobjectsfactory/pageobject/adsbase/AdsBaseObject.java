@@ -820,5 +820,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void waitForElementPresent(String id) {
     wait.forElementPresent(By.id(id));
+    PageObjectLogging.log("Ad loaded", id , true, driver);
   }
 }
