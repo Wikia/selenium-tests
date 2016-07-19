@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ReplyCreatorDesktop extends BasePageObject {
 
-  @FindBy(css = ".editor-container.pinned-bottom .editor-textarea-overflow")
+  @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
   private WebElement replyCreator;
 
   @FindBy(css = ".modal-dialog-posting-not-allowed .modal-dialog")
