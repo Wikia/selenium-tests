@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class PostsCreatorDesktop extends BasePageObject {
 
-  @FindBy (css = ".discussion-inline-editor-textarea-wrapper .discussion-inline-editor-textarea")
+  @FindBy (css = ".editor-container.pinned-top .editor-wrapper")
   private WebElement postCreator;
 
   @FindBy (css = ".modal-dialog-wrapper:not(.discussion-editor-dialog) .modal-dialog")
