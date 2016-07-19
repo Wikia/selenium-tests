@@ -28,7 +28,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     AuthModal loginModal = new AuthModal();
     loginModal.clickForgotPasswordLink();
     SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    login.remindPasswordNewAuth(userName, credentials.apiToken);
+    login.remindPasswordNewAuth(userName);
     login.verifyMessageAboutNewPassword(userName);
     login.clickLogInLink();
     String
@@ -46,7 +46,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
-    login.remindPasswordNewAuth(userName, credentials.apiToken);
+    login.remindPasswordNewAuth(userName);
     login.verifyMessageAboutNewPassword(userName);
     login.clickLogInLink();
     String
@@ -71,7 +71,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
-    login.remindPasswordNewAuth(userName, credentials.apiToken);
+    login.remindPasswordNewAuth(userName);
     login.verifyMessageAboutNewPassword(userName);
     login.clickLogInLink();
     String

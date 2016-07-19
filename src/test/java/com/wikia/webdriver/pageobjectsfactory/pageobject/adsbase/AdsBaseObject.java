@@ -711,7 +711,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyNoAds() {
-    Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
+    Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
     for (String selector : slotsSelectors) {
       verifyNoAd(selector);
     }
@@ -810,5 +810,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToFooter();
     jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
     scrollToFooter();
+  }
+
+  public void scrollToSlot(String slot) {
+    WebElement slotSelector = driver.findElement(By.cssSelector(slot));
+    jsActions.scrollToElement(slotSelector);
+    PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
   }
 }
