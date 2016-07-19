@@ -28,7 +28,8 @@ public class CreatingReplyTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
 
   public void anonUserOnMobileCanNotWriteNewReply() {
     userOnMobileMustBeLoggedInToUseReplyCreator();
