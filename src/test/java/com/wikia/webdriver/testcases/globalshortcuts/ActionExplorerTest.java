@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.globalshortcuts;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -10,6 +8,9 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
+import org.testng.annotations.Test;
+
+@Test(groups = "globalshortcuts-en")
 @Execute(asUser = User.USER, onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
 public class ActionExplorerTest extends NewTestTemplate {
