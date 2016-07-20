@@ -24,7 +24,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
-  public void VetArticleComments_001_Provider() {
+  public void RegularUserCanAddVideoInArticleCommentEditorByProvidingYoutubeVideoUrl() {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject().open();
@@ -46,7 +46,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_002"})
   @Execute(asUser = User.USER)
-  public void VetArticleComments_002_Library() {
+  public void RegularUserCanAddVideoInArticleCommentEditorByFindingWikiaVideo() {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject().open();
@@ -57,7 +57,11 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     vetOptions.setCaption(PageContent.CAPTION);
     String desiredVideoName = vetOptions.getVideoName();
     vetOptions.submit();
-    article.submitComment();
+    article
+        .getArticleComment()
+        .waitForVideo()
+        .submitComment();
+
     article.verifyCommentVideo(desiredVideoName);
   }
 }
