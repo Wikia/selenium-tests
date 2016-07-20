@@ -28,7 +28,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
-  @RelatedIssue(issueID = "SOC-2730 will fix it")
+  @RelatedIssue(issueID = "SOC-2730, <- will fix it")
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5)
@@ -43,7 +43,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2730 will fix it")
+  @RelatedIssue(issueID = "SOC-2730, <- will fix it")
 
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();
