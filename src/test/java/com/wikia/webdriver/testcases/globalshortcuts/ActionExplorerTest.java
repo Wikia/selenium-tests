@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
 import org.testng.annotations.Test;
 
-@Test(groups = "globalshortcuts-en")
+@Test(groups = "globalshortcutsActionExplorer")
 @Execute(asUser = User.USER, onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
 public class ActionExplorerTest extends NewTestTemplate {
