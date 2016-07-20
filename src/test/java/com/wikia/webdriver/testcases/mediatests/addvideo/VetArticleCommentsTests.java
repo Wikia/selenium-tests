@@ -32,16 +32,17 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("microsoft");
-
+    String expectedCaption = PageContent.CAPTION + article.getTimeStamp();
     VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(video.getUrl());
-    vetOptions.setCaption(PageContent.CAPTION);
+
+    vetOptions.setCaption(expectedCaption);
     vetOptions.submit();
     article
         .getArticleComment()
         .waitForVideo()
         .submitComment();
 
-    Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getFileName()));
+    Assertion.assertTrue(article.getArticleComment().isVideoCaptionVisibleInTheLatestComment(expectedCaption));
   }
 
   @Test(groups = {"VetArticleComments_002"})
