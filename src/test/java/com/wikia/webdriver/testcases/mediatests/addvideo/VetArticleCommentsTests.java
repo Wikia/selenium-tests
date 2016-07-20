@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -42,7 +41,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
         .waitForVideo()
         .submitComment();
 
-    Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getTitle()));
+    Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getFileName()));
   }
 
   @Test(groups = {"VetArticleComments_002"})

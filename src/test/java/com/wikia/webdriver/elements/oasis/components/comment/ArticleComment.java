@@ -13,7 +13,7 @@ public class ArticleComment extends BasePageObject {
   private WebElement commentSubmitButton;
   @FindBy(css = "#cke_contents_article-comm>iframe")
   private WebElement commentIFrame;
-  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
+  String videoInCommentsSelector = ".speech-bubble-message img[data-video-key*='%videoKey%']";
 
   public ArticleComment waitForVideo() {
     driver.switchTo().frame(commentIFrame);
@@ -35,7 +35,7 @@ public class ArticleComment extends BasePageObject {
     try {
       WebElement element =
           driver.findElement(
-              By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
+              By.cssSelector(videoInCommentsSelector.replace("%videoKey%", videoName)));
       return element.isDisplayed();
     } catch (ElementNotFoundException e) {
       return false;
