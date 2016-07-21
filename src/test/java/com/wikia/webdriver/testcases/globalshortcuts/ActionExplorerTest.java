@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME)
 public class ActionExplorerTest extends NewTestTemplate {
 
-  @Test(groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
+  @Test(enabled = false, groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
   @RelatedIssue(issueID = "CE-3356")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
     new HomePage()
