@@ -44,8 +44,8 @@ public class PageContent {
   public static final String CATEGORY_NAME_PREFIX = "Cat";
 
   //generic
-  public static final String CAPTION = "QAWebdriverCaption1";
-  public static final String CAPTION2 = "QAWebdriverCaption2";
+  public static final String CAPTION = "TestDataCaption1";
+  public static final String CAPTION2 = "TestDataCaption2";
   public static final String WIKIA_CONTRIBUTOR = "A Wikia contributor";
 
   //image serving
