@@ -8,7 +8,7 @@ public class SpecialCommunity extends WikiBasePageObject {
 
   public SpecialCommunity() { super(); }
 
-  public boolean isCommunityPage() {
+  public boolean isCommunityPageOpen() {
     return isStringInURL(COMMUNITY_PAGE_URL);
   }
 }
