@@ -26,7 +26,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost")
+  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost", enabled = false)
   @Execute(asUser = User.ANONYMOUS)
   @RelatedIssue(issueID = "SOC-2730")
   @InBrowser(
@@ -40,7 +40,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost", enabled = false)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   @RelatedIssue(issueID = "SOC-2730")
