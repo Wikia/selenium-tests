@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.oasis.components.comment;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +12,8 @@ public class ArticleComment extends BasePageObject {
   private WebElement commentSubmitButton;
   @FindBy(css = "#cke_contents_article-comm>iframe")
   private WebElement commentIFrame;
-  String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
+  @FindBy(css = "#article-comments-ul li:nth-child(1) .caption")
+  private WebElement latestCommentCaption;
 
   public ArticleComment waitForVideo() {
     driver.switchTo().frame(commentIFrame);
@@ -31,14 +31,7 @@ public class ArticleComment extends BasePageObject {
     return this;
   }
 
-  public boolean isVideoVisible(String videoName) {
-    try {
-      WebElement element =
-          driver.findElement(
-              By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
-      return element.isDisplayed();
-    } catch (ElementNotFoundException e) {
-      return false;
-    }
+  public boolean isVideoCaptionVisibleInTheLatestComment(String videoCaption) {
+    return wait.forTextInElement(latestCommentCaption, videoCaption);
   }
 }
