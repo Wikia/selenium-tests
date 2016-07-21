@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSiz
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
