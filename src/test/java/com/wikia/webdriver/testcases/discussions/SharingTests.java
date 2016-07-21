@@ -38,7 +38,8 @@ public class SharingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIconsInPost")
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIconsInPost", enabled = false)
+  @RelatedIssue(issueID = "MAIN-7562")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {

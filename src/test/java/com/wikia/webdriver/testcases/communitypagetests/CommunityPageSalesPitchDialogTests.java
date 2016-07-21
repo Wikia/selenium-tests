@@ -3,11 +3,10 @@ package com.wikia.webdriver.testcases.communitypagetests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SalesPitchDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SpecialCommunity;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "CommunityPageTests")
@@ -26,8 +25,22 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.isVisible());
+    Assertion.assertTrue(new SalesPitchDialog().isDialogVisible());
+  }
+
+  @Execute(disableCommunityPageSalesPitchDialog = "false", asUser = User.USER)
+  public void verifySalesPitchDialogNotDisplayedForLoggedUser() {
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject();
+
+    // 2nd pageview
+    article.open(articleTitle);
+    // 3rd pageview
+    article.open(articleTitle);
+    // 4th pageview
+    article.open(articleTitle);
+
+    Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
@@ -46,12 +59,11 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    Assertion.assertTrue(dialog.isVisible());
+    Assertion.assertTrue(new SalesPitchDialog().isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
-  public void verifyClickEntryPointButtonRedirectToSpecialCommunity() {
+  public void verifyClickHelpOutButtonRedirectToSpecialCommunity() {
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject();
 
@@ -62,11 +74,37 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    dialog.clickEntryPointButton();
+    Assertion.assertTrue(new SalesPitchDialog().clickHelpOutButton().isCommunityPageOpen());
+  }
 
-    SpecialCommunity page = new SpecialCommunity();
-    page.isCommunityPage();
+  @Execute(disableCommunityPageSalesPitchDialog = "false")
+  public void verifyDialogImageRedirectToSpecialCommunity() {
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject();
+
+    // 2nd pageview
+    article.open(articleTitle);
+    // 3rd pageview
+    article.open(articleTitle);
+    // 4th pageview
+    article.open(articleTitle);
+
+    Assertion.assertTrue(new SalesPitchDialog().clickDialogImage().isCommunityPageOpen());
+  }
+
+  @Execute(disableCommunityPageSalesPitchDialog = "false")
+  public void verifyDialogContentRedirectToSpecialCommunity() {
+    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
+    ArticlePageObject article = new ArticlePageObject();
+
+    // 2nd pageview
+    article.open(articleTitle);
+    // 3rd pageview
+    article.open(articleTitle);
+    // 4th pageview
+    article.open(articleTitle);
+
+    Assertion.assertTrue(new SalesPitchDialog().clickDialogContent().isCommunityPageOpen());
   }
 
   public void verifySalesPitchDialogIsNotShownIfCookieIsSet() {
@@ -80,7 +118,6 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     // 4th pageview
     article.open(articleTitle);
 
-    SalesPitchDialog dialog = new SalesPitchDialog();
-    dialog.isNotVisible();
+    Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
 }
