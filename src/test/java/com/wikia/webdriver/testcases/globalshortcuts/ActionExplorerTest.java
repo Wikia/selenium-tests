@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.globalshortcuts;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -10,12 +8,15 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 
+import org.testng.annotations.Test;
+
+@Test(groups = "globalshortcutsActionExplorer")
 @Execute(asUser = User.USER, onWikia = "globalshortcuts-en")
 @InBrowser(browser = Browser.CHROME)
 public class ActionExplorerTest extends NewTestTemplate {
 
-  @Test(groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
-  @RelatedIssue(issueID = "CE-3356")
+  @Test(enabled = false, groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
+  @RelatedIssue(issueID = "WW-82")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
     new HomePage()
         .open()

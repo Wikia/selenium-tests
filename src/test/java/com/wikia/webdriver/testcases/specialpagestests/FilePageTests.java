@@ -17,7 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageOb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
 import org.testng.annotations.Test;
 
 public class FilePageTests extends NewTestTemplate {
@@ -94,12 +93,12 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     // Now delete the video
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getWikiFileName());
+    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone
-    filePage = filePage.open(video.getWikiFileName());
+    filePage = filePage.open(video.getFileName());
     filePage.verifyEmptyFilePage();
   }
 
@@ -125,13 +124,13 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     // Go to the history tab and add a second video to test deleting a version
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getWikiFileName());
+    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
     filePage.selectHistoryTab();
 
     filePage.replaceVideo(VideoContent.YOUTUBE_VIDEO_URL5);
 
     // Load the file page again, should have the same name
-    filePage.open(video.getWikiFileName()).verifyEmbeddedVideoIsPresent();
+    filePage.open(video.getFileName()).verifyEmbeddedVideoIsPresent();
 
     //Removed following lines until SUS-317 is fixed
     //// Go to the history tab and verify there are at least two videos
@@ -144,13 +143,13 @@ public class FilePageTests extends NewTestTemplate {
     //Removed above lines until SUS-317is fixed
 
     // Load the file page again, should have the same name
-    filePage.open(video.getWikiFileName()).verifyEmbeddedVideoIsPresent();
+    filePage.open(video.getFileName()).verifyEmbeddedVideoIsPresent();
 
     // Delete the first version and thus the whole page
     DeletePageObject deletePage = filePage.deleteVersion(1);
     deletePage.submitDeletion();
 
     // Go back to the file page and make sure its gone
-    filePage.open(video.getWikiFileName()).verifyEmptyFilePage();
+    filePage.open(video.getFileName()).verifyEmptyFilePage();
   }
 }
