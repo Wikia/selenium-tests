@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 public class ActionExplorerTest extends NewTestTemplate {
 
   @Test(enabled = false, groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
-  @RelatedIssue(issueID = "CE-3356")
+  @RelatedIssue(issueID = "WW-82")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
     new HomePage()
         .open()
