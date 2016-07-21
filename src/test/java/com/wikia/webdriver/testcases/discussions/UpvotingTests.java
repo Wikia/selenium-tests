@@ -66,7 +66,7 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote", enabled = false)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   @RelatedIssue(issueID = "SOC-2724, Test manually")
