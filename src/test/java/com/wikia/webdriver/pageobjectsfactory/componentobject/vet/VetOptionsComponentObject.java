@@ -142,20 +142,11 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     Assertion.assertEquals(selectedPositionId, desiredPositionId);
   }
 
-  public void clickUpdateVideo() {
-    wait.forElementVisible(updateVideoButton);
-    scrollAndClick(updateVideoButton);
-    PageObjectLogging.log("updateVideoButton", "update video button clicked", true, driver);
-  }
-
-
-  public void verifyVideoWidth(int widthDesired) {
+  public int getVideoWidth() {
     wait.forElementVisible(widthInputField);
     int width = Integer.parseInt(widthInputField.getAttribute("value"));
-    Assertion.assertEquals(
-        widthDesired,
-        width);
-    PageObjectLogging.log("verifyVideoWidth", "video width verified", true);
+
+    return width;
   }
 
   public void verifyCaption(String captionDesired) {

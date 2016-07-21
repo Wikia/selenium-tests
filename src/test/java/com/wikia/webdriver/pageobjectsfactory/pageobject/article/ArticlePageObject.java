@@ -514,10 +514,10 @@ public class ArticlePageObject extends WikiBasePageObject {
     return videoWidth;
   }
 
-  public void verifyVideoWidth(int widthDesired) {
+  public int getVideoWidth() {
     int videoWidth = getVideoWidth(videoThumbnail);
-    Assertion.assertNumber(videoWidth, widthDesired, "width should be " + widthDesired + " but is "
-                                                     + videoWidth);
+
+    return videoWidth;
   }
 
   public void verifyVideoCaption(String captionDesired) {
