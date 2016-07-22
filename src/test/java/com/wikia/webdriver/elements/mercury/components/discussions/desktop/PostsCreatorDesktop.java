@@ -8,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class PostsCreatorDesktop extends BasePageObject {
 
-  @FindBy (css = ".editor-container.pinned-top .editor-wrapper")
+  @FindBy (css = ".discussion-inline-editor-textarea-wrapper .discussion-inline-editor-textarea")
   private WebElement postCreator;
 
-  @FindBy (css = ".modal-dialog-posting-not-allowed .modal-dialog")
+  @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement dialogSignIn;
 
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")

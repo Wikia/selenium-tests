@@ -39,7 +39,7 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotUpvote", enabled = false)
+  @Test(groups = "discussions-anonUserOnMobileCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void anonUserOnMobileCanNotUpvote() {
@@ -64,7 +64,7 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote", enabled = false)
+  @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotUpvote() {
@@ -82,7 +82,7 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote", enabled = false)
+  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   public void registeredUserOnMobileCanUpvote() {
@@ -100,7 +100,7 @@ public class UpvotingTests extends NewTestTemplate {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote", enabled = false)
+  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION, browser = Browser.FIREFOX)
   public void registeredUserOnDesktopCanUpvote() {
