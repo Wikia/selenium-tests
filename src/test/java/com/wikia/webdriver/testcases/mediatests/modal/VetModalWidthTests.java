@@ -19,17 +19,12 @@ import org.testng.annotations.Test;
 
 public class VetModalWidthTests extends NewTestTemplate {
 
-  /**
-   * 1. Verify width in visual mode, source mode, preview, and published page, 2. Verify width in
-   * vet modal when page edited,
-   */
-
   String articleTitle;
   final static int MODAL_WIDTH = 250;
 
   @Test(groups = {"VetModalWidth", "VetModalwidth_001", "VetTests", "Media"})
   @Execute(asUser = User.USER)
-  public void Vet_Modal_001_modalWidthInArticle() {
+  public void Vet_Modal_001_modalWidth() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
@@ -57,9 +52,9 @@ public class VetModalWidthTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalWidth", "VetModalwidth_002", "VetTests", "Media"},
-      dependsOnMethods = "Vet_Modal_001_modalWidthInArticle")
+      dependsOnMethods = "Vet_Modal_001_modalWidth")
   @Execute(asUser = User.USER)
-  public void Vet_Modal_002_modalWidthOnEditPage() {
+  public void Vet_Modal_002_modalWidthOnEditing() {
     WikiBasePageObject base = new WikiBasePageObject();
 
     VisualEditModePageObject visualEditModePageObject =

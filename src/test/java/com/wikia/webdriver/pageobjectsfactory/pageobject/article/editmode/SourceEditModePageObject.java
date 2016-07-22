@@ -326,8 +326,9 @@ public class SourceEditModePageObject extends EditMode {
     }
   }
 
-  private String getContent() {
+  public String getContent() {
     wait.forElementVisible(sourceModeTextArea);
+
     return sourceModeTextArea.getAttribute("value");
   }
 
@@ -343,10 +344,6 @@ public class SourceEditModePageObject extends EditMode {
     );
 
     return width;
-  }
-
-  public void verifyVideoCaption(String desiredCaption) {
-    Assertion.assertStringContains(getContent(), desiredCaption);
   }
 
   /**

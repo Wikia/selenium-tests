@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -67,9 +66,10 @@ public class PreviewEditModePageObject extends EditMode {
     return width;
   }
 
-  public void verifyVideoCaption(String desiredCaption) {
-    String caption = previewModal.findElement(videoCaptionSelector).getText();
-    Assertion.assertStringContains(caption, desiredCaption);
+  public String getVideoCaption() {
+    wait.forElementVisible(videoCaptionSelector);
+
+    return previewModal.findElement(videoCaptionSelector).getText();
   }
 
   public void closePreviewModal() {
@@ -78,9 +78,6 @@ public class PreviewEditModePageObject extends EditMode {
     PageObjectLogging.log("closePreviewModal", "preview modal closed", true);
   }
 
-  public void verifyTextContent(String desiredText) {
-    Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);
-  }
 
   public void publish() {
     previewModal.findElement(publishButton).click();
