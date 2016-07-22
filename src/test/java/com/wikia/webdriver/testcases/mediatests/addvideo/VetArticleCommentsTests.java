@@ -66,6 +66,6 @@ public class VetArticleCommentsTests extends NewTestTemplate {
         .waitForVideo()
         .submitComment();
 
-    article.verifyCommentVideo(desiredVideoName);
+    Assertion.assertTrue(article.verifyCommentVideo(desiredVideoName));
   }
 }

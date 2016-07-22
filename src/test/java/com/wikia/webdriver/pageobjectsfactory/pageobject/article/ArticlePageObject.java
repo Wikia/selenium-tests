@@ -309,9 +309,14 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(mostRecentComment.getText(), comment);
   }
 
-  public void verifyCommentVideo(String videoName) {
-    driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
-    PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
+  public boolean verifyCommentVideo(String videoName) {
+    try {
+      driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log("Video is visible in comments section", e, false);
+      return false;
+    }
   }
 
   public MiniEditorComponentObject triggerEditCommentArea() {
