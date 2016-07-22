@@ -26,8 +26,6 @@ public class ArticlePageObject {
   private WebElement footer;
   @FindBy(css = "svg.global-footer__fandom-logo")
   private WebElement footerLogo;
-  @FindBy(css = "ul.footer-links a")
-  private List<WebElement> footerLinks;
   @FindBy(css = ".contributors > ul > li > a")
   private List<WebElement> topContributorsLinks;
   @FindBy(css = ".wiki-page-header__title")
@@ -89,27 +87,27 @@ public class ArticlePageObject {
     return true;
   }
 
-  public boolean isFooterLogoVisible() {
-    wait.forElementVisible(footerLogo);
-    return footerLogo.isDisplayed();
+  public boolean isFooterVisible() {
+    wait.forElementVisible(footer, 10, 500);
+
+    return true;
   }
 
-  public boolean isElementInFooterVisible(String elementName, int index) {
-    wait.forElementVisible(footerLinks.get(index));
-    return footerLinks.get(index).getText().equals(elementName);
+  public boolean isFooterLogoVisible() {
+    wait.forElementVisible(footerLogo);
+
+    return footerLogo.isDisplayed();
   }
 
   public boolean isUrlContainingUserPage() {
     wait.forElementVisible(userAvatar, 5, 500);
+
     return driver.getCurrentUrl().contains("/wiki/User:");
   }
 
   public String getArticleTitle() {
     wait.forElementVisible(articleTitle);
-    return articleTitle.getText();
-  }
 
-  public void waitForFooterToBeVisible() {
-    wait.forElementVisible(footer, 10, 500);
+    return articleTitle.getText();
   }
 }

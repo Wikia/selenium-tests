@@ -28,10 +28,6 @@ public class ArticlePageTests extends NewTestTemplate {
   private Navigate navigate;
   private Loading loading;
 
-  private static final String[] FOOTER_ELEMENTS =
-      {"Games", "Movies", "TV", "Comics", "Music", "Books", "Lifestyle", "Full site", "Licensing",
-       "Privacy Policy", "Feedback"};
-
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
@@ -77,23 +73,21 @@ public class ArticlePageTests extends NewTestTemplate {
         result
     );
 
-    result = articlePage.isFooterLogoVisible();
+    result = articlePage.isFooterVisible();
     PageObjectLogging.log(
-        "Footer Wikia logo",
+        "Global footer",
         "is visible",
         "is not visible",
         result
     );
 
-    for (int i = 0; i < FOOTER_ELEMENTS.length; ++i) {
-      result = articlePage.isElementInFooterVisible(FOOTER_ELEMENTS[i], i);
-      PageObjectLogging.log(
-          "Footer link " + FOOTER_ELEMENTS[i],
-          "is visible",
-          "is not visible",
-          result
-      );
-    }
+    result = articlePage.isFooterLogoVisible();
+    PageObjectLogging.log(
+        "Global footer logo",
+        "is visible",
+        "is not visible",
+        result
+    );
   }
 
   @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
