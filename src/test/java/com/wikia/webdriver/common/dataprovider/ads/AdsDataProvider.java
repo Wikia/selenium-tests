@@ -857,13 +857,13 @@ public class AdsDataProvider {
   public static Object[][] adsMiddlePrefooter() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "",
             new Dimension(1920, 1080),
             true
         },
         {
-            "adtest",
+            "project43",
             "SyntheticTests/Prefooters",
             new Dimension(1920, 1080),
             false
