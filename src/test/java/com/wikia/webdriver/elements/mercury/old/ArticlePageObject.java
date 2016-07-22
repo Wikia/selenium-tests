@@ -22,7 +22,9 @@ public class ArticlePageObject {
   private List<WebElement> topContributorsThumbs;
   @FindBy(css = "figure.article-image a")
   private List<WebElement> singleImgLink;
-  @FindBy(css = "svg.logo")
+  @FindBy(css = "footer.global-footer")
+  private WebElement footer;
+  @FindBy(css = "svg.global-footer__fandom-logo")
   private WebElement footerLogo;
   @FindBy(css = "ul.footer-links a")
   private List<WebElement> footerLinks;
@@ -108,6 +110,6 @@ public class ArticlePageObject {
   }
 
   public void waitForFooterToBeVisible() {
-    wait.forElementVisible(footerLogo, 10, 500);
+    wait.forElementVisible(footer, 10, 500);
   }
 }
