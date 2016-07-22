@@ -138,8 +138,9 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public PhotoAddComponentObject clickAddImage() {
-    wait.forElementVisible(addImageButton);
+    wait.forElementClickable(addImageButton);
     scrollAndClick(addImageButton);
+
     return new PhotoAddComponentObject(driver);
   }
 
