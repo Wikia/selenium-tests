@@ -257,8 +257,8 @@ public class AdsDataProvider {
   public static Object[][] adDriverForcedStatusSuccess() {
     return new Object[][]{
         {
-            "adtest",
-            "AdDriver2ForceStatus/Success",
+            "project43",
+            "SyntheticTests/AdDriver2ForceStatus/Success",
             Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")
         }
     };
