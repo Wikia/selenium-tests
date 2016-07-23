@@ -13,7 +13,7 @@ public class TestHorseSlots extends NewTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForElementPresent("google_ads_iframe_/5441/wka.gaming/_aga//article/gpt/INVISIBLE_HIGH_IMPACT_2_0__container__");
     try {
-      Thread.sleep(10000);
+      Thread.sleep(15000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -26,7 +26,7 @@ public class TestHorseSlots extends NewTestTemplate {
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForElementPresent("google_ads_iframe_/5441/wka.gaming/_aga//article/gpt/INVISIBLE_HIGH_IMPACT_2_0__container__");
     try {
-      Thread.sleep(10000);
+      Thread.sleep(15000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
