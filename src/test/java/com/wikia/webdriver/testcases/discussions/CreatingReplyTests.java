@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -25,6 +26,7 @@ public class CreatingReplyTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
   @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewReply")
+  @RelatedIssue(issueID = "SOC-2730")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
@@ -38,6 +40,7 @@ public class CreatingReplyTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
   @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewReply")
+  @RelatedIssue(issueID = "SOC-2730")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
 
