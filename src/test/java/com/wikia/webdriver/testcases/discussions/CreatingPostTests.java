@@ -21,16 +21,17 @@ import org.testng.annotations.Test;
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
-  private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
    * ANONS ON MOBILE SECTION
    */
 
   @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost", enabled = false)
-  @RelatedIssue(issueID = "SOC-2372")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "SOC-2730")
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewPost() {
     userOnMobileMustBeLoggedInToUsePostCreator();
   }
@@ -39,10 +40,10 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost", enabled = false)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2724, Test manually")
+  @RelatedIssue(issueID = "SOC-2730")
 
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();

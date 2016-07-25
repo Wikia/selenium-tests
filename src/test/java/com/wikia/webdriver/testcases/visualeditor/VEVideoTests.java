@@ -4,13 +4,13 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
@@ -64,6 +64,7 @@ public class VEVideoTests extends NewTestTemplate {
 
   @Test(groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-757")
   public void removeVideoFromArticle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
