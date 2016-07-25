@@ -31,9 +31,6 @@ public class RecentWikiActivityTest extends NewTestTemplate {
     this.openDiffPageAndGoBack();
   }
 
-  /**
-   * Access denied when log in
-   */
   @Test(groups = "mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack")
   @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   public void mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack() {
