@@ -36,7 +36,6 @@ public class AdsContent {
   public static final String TOP_INCONTENT_BOXAD = "TOP_INCONTENT_BOXAD";
   public static final String MOBILE_TOP_LB = "MOBILE_TOP_LEADERBOARD";
   public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
-  public static final String MOBILE_BOTTOM_LB = "MOBILE_BOTTOM_LEADERBOARD";
   public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
   public static final String INCONTENT_LEADERBOARD = "INCONTENT_LEADERBOARD";
