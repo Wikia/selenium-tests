@@ -38,6 +38,7 @@ public class CreatingReplyTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
   @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewReply")
+  @RelatedIssue(issueID = "SOC-2730")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
 
