@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -23,6 +24,8 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-758", comment = "This issue is related to API call and should not cause permanent " +
+      "test failure. Otherwise the failure must be caused by other issue")
   public void RegularUserCanAddVideoInArticleCommentEditorByProvidingYoutubeVideoUrl() {
     new ArticleContent().clear();
 
