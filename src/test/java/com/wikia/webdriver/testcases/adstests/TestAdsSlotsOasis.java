@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -22,6 +23,8 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
     for (String slotName : AdsDataProvider.OASIS_SLOTS_TO_SMOKE_TEST) {
       smokeTestSlot(slotName);
     }
+
+    Assertion.assertFalse(ads.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB));
   }
 
   private void smokeTestSlot(String slotName) {

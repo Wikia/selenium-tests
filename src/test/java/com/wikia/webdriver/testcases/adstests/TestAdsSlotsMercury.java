@@ -37,6 +37,8 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
     ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
     ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, CREATIVE_IMAGE_URL);
+
+    Assertion.assertFalse(ads.checkSlotOnPageLoaded(AdsContent.MOBILE_BOTTOM_LB));
   }
 
   @Test(
@@ -95,7 +97,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILETOP_LB))
+        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB))
         >= infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX)
     );
   }
@@ -119,7 +121,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILETOP_LB))
+        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB))
         >= ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER)
     );
   }
