@@ -63,6 +63,6 @@ public class VetArticleCommentsTests extends NewTestTemplate {
         .waitForVideo()
         .submitComment();
 
-    Assertion.assertTrue(article.verifyCommentVideo(desiredVideoName));
+    Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName));
   }
 }

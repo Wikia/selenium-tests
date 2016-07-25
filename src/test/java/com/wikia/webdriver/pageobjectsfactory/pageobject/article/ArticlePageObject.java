@@ -309,7 +309,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(mostRecentComment.getText(), comment);
   }
 
-  public boolean verifyCommentVideo(String videoName) {
+  public boolean isVideoCommentPresent(String videoName) {
     try {
       driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
       return true;
