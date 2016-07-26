@@ -19,9 +19,10 @@ import java.util.Map;
 public class TestUap extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
-  private final static String MOBILE_IN_CONTENT_CONTAINER = ".mobile-in-content";
-  private final static String MOBILE_PREFOOTER_CONTAINER = ".mobile-prefooter";
-  private final static String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = ".mobile-bottom-leaderboard";
+  
+  private static final String MOBILE_IN_CONTENT_CONTAINER = ".mobile-in-content";
+  private static final String MOBILE_PREFOOTER_CONTAINER = ".mobile-prefooter";
+  private static final String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = ".mobile-bottom-leaderboard";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
