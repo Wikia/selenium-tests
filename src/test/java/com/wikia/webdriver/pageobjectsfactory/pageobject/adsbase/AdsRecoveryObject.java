@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.Assertion;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +14,10 @@ public class AdsRecoveryObject extends AdsBaseObject {
 
   public AdsRecoveryObject(WebDriver driver, String page) {
     super(driver, page);
+  }
+
+  public AdsRecoveryObject(WebDriver driver, String page, Dimension resolution) {
+    super(driver, page, resolution);
   }
 
   public void verifyUnlockCSS() {
@@ -39,6 +44,10 @@ public class AdsRecoveryObject extends AdsBaseObject {
     WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
 
     verifyIfUnlockCSSIsValid(element.getAttribute("href"));
+  }
+
+  public String getRecoveredAdUnitId(String adUnitId) {
+    return jsActions.execute(String.format("window._sp_.getElementId('%s')", adUnitId)).toString();
   }
 
   private void verifyIfUnlockCSSIsValid(String cssUrl) {
