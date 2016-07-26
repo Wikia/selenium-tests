@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")
-  public void verifySalesPitchDialogDisplayedOnFourthPageview() {
+  public void verifySalesPitchDialogDisplayedOnlyOnFourthPageview() {
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + ArticlePageObject.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject();
 
@@ -26,6 +26,14 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
     article.open(articleTitle);
 
     Assertion.assertTrue(new SalesPitchDialog().isDialogVisible());
+
+    // 5th pageview
+    article.open(articleTitle);
+    Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
+
+    // 6th pageview
+    article.open(articleTitle);
+    Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
 
   @Execute(disableCommunityPageSalesPitchDialog = "false", asUser = User.USER)
@@ -120,4 +128,5 @@ public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
 
     Assertion.assertFalse(new SalesPitchDialog().isDialogVisible());
   }
+
 }
