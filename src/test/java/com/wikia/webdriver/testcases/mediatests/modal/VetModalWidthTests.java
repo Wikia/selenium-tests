@@ -48,7 +48,7 @@ public class VetModalWidthTests extends NewTestTemplate {
 
     previewMode.closePreviewModal();
     ArticlePageObject article = sourceEditMode.submitArticle();
-    Assertion.assertEquals(article.getVideoWidth(), MODAL_WIDTH);
+    Assertion.assertEquals(article.getVideoThumbnailWidth(), MODAL_WIDTH);
   }
 
   @Test(groups = {"VetModalWidth", "VetModalwidth_002", "VetTests", "Media"},

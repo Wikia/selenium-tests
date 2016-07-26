@@ -513,16 +513,11 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public Integer getVideoWidth(WebElement thumbnail) {
-    int videoWidth =
-        Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
-    PageObjectLogging.log("getVideoWidth", "Video width is " + videoWidth, true);
-    return videoWidth;
+    return Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
   }
 
-  public int getVideoWidth() {
-    int videoWidth = getVideoWidth(videoThumbnail);
-
-    return videoWidth;
+  public int getVideoThumbnailWidth() {
+    return getVideoWidth(videoThumbnail);
   }
 
   public String getVideoCaption() {

@@ -61,9 +61,7 @@ public class PreviewEditModePageObject extends EditMode {
   }
 
   public int getVideoWidth() {
-    int width = Integer.parseInt(previewModal.findElement(videoWidthSelector).getAttribute("width"));
-
-    return width;
+    return Integer.parseInt(previewModal.findElement(videoWidthSelector).getAttribute("width"));
   }
 
   public String getVideoCaption() {
