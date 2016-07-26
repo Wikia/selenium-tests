@@ -8,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class SortingTool extends BasePageObject {
 
-  @FindBy(xpath = "//li[text()='Latest']")
+  @FindBy(css = ".sort-latest")
   private WebElement latestTabOnDesktop;
 
-  @FindBy(xpath = "//li[text()='Trending']")
+  @FindBy(css = ".sort-trending")
   private WebElement trendingTabOnDesktop;
 
   public SortingTool clickLatestTabOnDesktop() {
