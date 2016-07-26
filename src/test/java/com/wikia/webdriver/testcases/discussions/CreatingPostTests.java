@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -28,7 +27,6 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
-  @RelatedIssue(issueID = "SOC-2730")
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5)
@@ -43,7 +41,6 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-2730")
 
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();
