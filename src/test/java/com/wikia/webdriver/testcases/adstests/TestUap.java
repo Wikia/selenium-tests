@@ -19,7 +19,7 @@ import java.util.Map;
 public class TestUap extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
-  
+
   private static final String MOBILE_IN_CONTENT_CONTAINER = ".mobile-in-content";
   private static final String MOBILE_PREFOOTER_CONTAINER = ".mobile-prefooter";
   private static final String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = ".mobile-bottom-leaderboard";
@@ -59,14 +59,14 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToSlot(AdsContent.getSlotSelector(MOBILE_IN_CONTENT_CONTAINER));
+    ads.scrollToSlot(MOBILE_IN_CONTENT_CONTAINER);
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToSlot(AdsContent.getSlotSelector(MOBILE_PREFOOTER_CONTAINER));
-    ads.scrollToSlot(AdsContent.getSlotSelector(MOBILE_BOTTOM_LEADERBOARD_CONTAINER));
+    ads.scrollToSlot(MOBILE_PREFOOTER_CONTAINER);
+    ads.scrollToSlot(MOBILE_BOTTOM_LEADERBOARD_CONTAINER);
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
     verifySlotsUnblocked(ads, mobilePrefooter);
