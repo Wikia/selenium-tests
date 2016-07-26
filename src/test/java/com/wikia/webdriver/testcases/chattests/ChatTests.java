@@ -33,8 +33,8 @@ public class ChatTests extends NewTestTemplate {
   private String userFivePassword = credentials.password5;
   private String userSix = credentials.userName6;
   private String userSixPassword = credentials.password6;
-  private String userToBeBanned = credentials.userName7;
-  private String userToBeBannedPassword = credentials.password7;
+  private String userToBeBanned = credentials.userName8;
+  private String userToBeBannedPassword = credentials.password8;
   private String userStaff = credentials.userNameStaff;
   private String userStaffPassword = credentials.passwordStaff;
 
