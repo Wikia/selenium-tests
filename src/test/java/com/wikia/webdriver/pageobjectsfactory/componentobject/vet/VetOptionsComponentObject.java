@@ -145,9 +145,8 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
   public int getVideoWidth() {
     wait.forElementVisible(widthInputField);
-    int width = Integer.parseInt(widthInputField.getAttribute("value"));
 
-    return width;
+    return Integer.parseInt(widthInputField.getAttribute("value"));
   }
 
   public void verifyCaption(String captionDesired) {
