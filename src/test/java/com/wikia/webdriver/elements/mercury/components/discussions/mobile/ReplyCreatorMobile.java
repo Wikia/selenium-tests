@@ -8,16 +8,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class ReplyCreatorMobile extends BasePageObject {
 
-  @FindBy(css = ".editor-container.pinned-bottom .editor-textarea-overflow")
+  @FindBy(css = ".discussion-editor-entry-point-container .discussion-editor-entry-point-content")
   private WebElement replyCreator;
 
-  @FindBy(css = ".modal-dialog-wrapper:not(.discussion-editor-dialog) .modal-dialog")
+  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement dialogSignIn;
 
-  @FindBy(css = ".modal-dialog-content + footer > :first-child")
+  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
   private WebElement okButtonInSignInDialog;
 
-  @FindBy(css = ".modal-dialog-content + footer > :last-child")
+  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
   public ReplyCreatorMobile clickReplyCreator() {
