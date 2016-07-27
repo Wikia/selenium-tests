@@ -73,10 +73,7 @@ public abstract class CoreTestTemplate {
     networkTrafficInterceptor = driver.getProxy();
     setWindowSize();
 
-    if (!isNonAnonUserOnDeclaringClass(method.getDeclaringClass())
-        && !isNonAnonUserOnMethod(method)) {
-      loadFirstPage();
-    }
+    loadFirstPage();
   }
 
   private void setTestProperty(String key, String value) {
