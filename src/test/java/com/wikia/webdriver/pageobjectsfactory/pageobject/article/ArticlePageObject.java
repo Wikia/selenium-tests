@@ -314,7 +314,7 @@ public class ArticlePageObject extends WikiBasePageObject {
       driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
       return true;
     } catch (NoSuchElementException e) {
-      PageObjectLogging.log("Video is visible in comments section", e, false);
+      PageObjectLogging.logInfo("Video is not visible in comments section", e);
       return false;
     }
   }
