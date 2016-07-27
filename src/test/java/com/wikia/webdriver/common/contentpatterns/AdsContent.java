@@ -47,10 +47,6 @@ public class AdsContent {
   //CONTAINERS
   public static final String PREFOOTERS_CONTAINER = "Prefooters";
   public static final String ADS_IN_CONTENT_CONTAINER = "AdsInContent";
-  public static final String MOBILE_IN_CONTENT_CONTAINER = "MOBILE_IN_CONTENT_CONTAINER";
-  public static final String MOBILE_PREFOOTER_CONTAINER = "MOBILE_PREFOOTER_CONTAINER";
-  public static final String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = "MOBILE_BOTTOM_LEADERBOARD_CONTAINER";
-
 
   private AdsContent() {
 
@@ -88,9 +84,6 @@ public class AdsContent {
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
     SLOTS_SELECTORS.put(ADS_IN_CONTENT_CONTAINER, "#WikiaAdInContentPlaceHolder");
     SLOTS_SELECTORS.put(PREFOOTERS_CONTAINER, "#WikiaArticleBottomAd, .bottom-ads");
-    SLOTS_SELECTORS.put(MOBILE_IN_CONTENT_CONTAINER, ".mobile-in-content");
-    SLOTS_SELECTORS.put(MOBILE_PREFOOTER_CONTAINER, ".mobile-prefooter");
-    SLOTS_SELECTORS.put(MOBILE_BOTTOM_LEADERBOARD_CONTAINER, ".mobile-bottom-leaderboard");
     SLOTS_SELECTORS.put(TOP_INCONTENT_BOXAD, "#TOP_INCONTENT_BOXAD");
     SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "[id^=MOBILE_IN_CONTENT]");
