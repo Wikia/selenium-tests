@@ -1153,6 +1153,7 @@ public class AdsDataProvider {
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
             ImmutableMap.<String, Object>builder()
+                .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_LEADERBOARD")
                 .put("slotName", AdsContent.TOP_LB)
                 .put("lineItemId", 277592292)
                 .put("src", "gpt")
@@ -1161,6 +1162,7 @@ public class AdsDataProvider {
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
             ImmutableMap.<String, Object>builder()
+                .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_RIGHT_BOXAD")
                 .put("slotName", AdsContent.MEDREC)
                 .put("lineItemId", 277592292)
                 .put("src", "gpt")
