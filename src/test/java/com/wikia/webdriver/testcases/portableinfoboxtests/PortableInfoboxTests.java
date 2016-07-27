@@ -3,7 +3,9 @@ package com.wikia.webdriver.testcases.portableinfoboxtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -119,14 +121,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(whatLinkHereResult.contains(articleName));
   }
 
+  @InBrowser(browser = Browser.FIREFOX, browserSize = "1200x720")
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyLightboxVisibilityAfterClickingImage() {
-    PortableInfobox infobox = new PortableInfobox();
+    PortableInfobox infobox = new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01);
 
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
     new ArticlePurger().purgeArticleAsAnon();
 
-    Assertion.assertTrue(infobox.clickImage().isLightboxVisible());;
+    Assertion.assertTrue(infobox.clickImage().isLightboxVisible());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
