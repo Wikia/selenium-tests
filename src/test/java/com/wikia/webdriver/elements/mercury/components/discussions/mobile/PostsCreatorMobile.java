@@ -11,13 +11,13 @@ public class PostsCreatorMobile extends BasePageObject {
   @FindBy(css = ".new-post")
   private WebElement postCreator;
 
-  @FindBy (css = ".modal-dialog-wrapper:not(.discussion-editor-dialog) .modal-dialog")
+  @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement dialogSignIn;
 
-  @FindBy (css = ".modal-dialog-content + footer > :first-child")
+  @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
   private WebElement okButtonInSignInDialog;
 
-  @FindBy (css = ".modal-dialog-content + footer > :last-child")
+  @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
   public PostsCreatorMobile clickPostCreator() {

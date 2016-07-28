@@ -26,7 +26,7 @@ public class Post extends BasePageObject {
   @FindBy(css = "li.upvote")
   private List<WebElement> postUpvoteButton;
 
-  @FindBy(css = ".row.post-counters")
+  @FindBy(css = ".post-counters .upvote-count")
   private List<WebElement> postVoteCount;
 
   @FindBy(css = ".toggle-share-area")
