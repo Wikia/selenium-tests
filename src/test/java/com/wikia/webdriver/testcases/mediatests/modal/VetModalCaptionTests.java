@@ -59,7 +59,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_002", "VetTests",
-                  "Media"}, dependsOnGroups = "VetModalCaption_001_modalCaption")
+                  "Media"}, dependsOnGroups = "VetModalCaption_001")
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
     WikiBasePageObject base = new WikiBasePageObject();
