@@ -18,7 +18,7 @@ public class VetProvidersTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl")
-  @RelatedIssue(issueID = "SUS-170 SUS-789", comment = "metacafe.com provider doesn't work. SUS-789 - P2 for gamestar")
+  @RelatedIssue(issueID= "SUS-789", comment= "P2 for gamestar")
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
     new ArticleContent().clear();
 
