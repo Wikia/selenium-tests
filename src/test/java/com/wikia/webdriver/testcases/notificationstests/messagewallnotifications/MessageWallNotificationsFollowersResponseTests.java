@@ -103,7 +103,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
           "followerNotificationResponse_setup_3",
           "followerNotificationResponse_setup_4"}
   )
- public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWal() {
+ public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
     NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
