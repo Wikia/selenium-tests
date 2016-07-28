@@ -113,6 +113,7 @@ public class MessageWall extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     scrollAndClick(postButton);
     new Actions(driver).moveByOffset(0, 0).perform();
+    wait.forElementNotVisible(postButton);
     PageObjectLogging.log("submit", "message submitted", true);
   }
 
