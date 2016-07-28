@@ -44,7 +44,8 @@ public class VetArticleCommentsTests extends NewTestTemplate {
         .waitForVideo()
         .submitComment();
 
-    Assertion.assertTrue(article.getArticleComment().isVideoCaptionVisibleInTheLatestComment(expectedCaption));
+    Assertion.assertTrue(
+        article.getArticleComment().isVideoCaptionVisibleInTheLatestComment(expectedCaption));
   }
 
   @Test(groups = {"VetArticleComments_002"})
@@ -65,6 +66,6 @@ public class VetArticleCommentsTests extends NewTestTemplate {
         .waitForVideo()
         .submitComment();
 
-    article.verifyCommentVideo(desiredVideoName);
+    Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName));
   }
 }

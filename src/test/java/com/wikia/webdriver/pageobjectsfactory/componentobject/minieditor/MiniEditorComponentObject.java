@@ -94,7 +94,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public void addVideoMiniEditor(String url) {
-    wait.forElementVisible(addVideoButton);
+    wait.forElementClickable(addVideoButton);
     scrollAndClick(addVideoButton);
     VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
     VetOptionsComponentObject
@@ -132,14 +132,15 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
   }
 
   public VetAddVideoComponentObject clickAddVideo() {
-    wait.forElementVisible(addVideoButton);
+    wait.forElementClickable(addVideoButton);
     scrollAndClick(addVideoButton);
     return new VetAddVideoComponentObject(driver);
   }
 
   public PhotoAddComponentObject clickAddImage() {
-    wait.forElementVisible(addImageButton);
+    wait.forElementClickable(addImageButton);
     scrollAndClick(addImageButton);
+
     return new PhotoAddComponentObject(driver);
   }
 
