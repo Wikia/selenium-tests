@@ -24,7 +24,9 @@ public class ArticleComment extends BasePageObject {
 
   public ArticleComment submitComment() {
     driver.switchTo().defaultContent();
+    wait.forElementClickable(commentSubmitButton);
     scrollAndClick(commentSubmitButton);
+
     waitForElementNotVisibleByElement(commentSubmitButton, 30);
     PageObjectLogging.log("submitComment", "comment has been submitted", true);
 

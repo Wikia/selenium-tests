@@ -62,7 +62,7 @@ public class VEVideoTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = {"VEVideo", "VEAddExistingVideo"})
+  @Test(enabled = false, groups = {"VEVideo", "VEAddExistingVideo"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-757")
   public void removeVideoFromArticle() {
