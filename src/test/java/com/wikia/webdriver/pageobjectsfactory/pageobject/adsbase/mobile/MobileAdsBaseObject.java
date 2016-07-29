@@ -45,6 +45,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
     }
     waitForSlotExpanded(presentLeaderboard);
 
+    scrollToSlotOnMobile(presentLeaderboardSelector);
+
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
       extractGptInfo(presentLeaderboardSelector);
 
