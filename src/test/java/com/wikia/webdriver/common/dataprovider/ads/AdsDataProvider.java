@@ -413,7 +413,7 @@ public class AdsDataProvider {
         {
             "avatar",
             "Avatar_Wiki",
-            "wka.life/_avatar//home",
+            "wka.ent/_avatar//home",
             "HOME_TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
