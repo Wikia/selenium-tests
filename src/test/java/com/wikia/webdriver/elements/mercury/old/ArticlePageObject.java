@@ -22,9 +22,9 @@ public class ArticlePageObject {
   private List<WebElement> topContributorsThumbs;
   @FindBy(css = "figure.article-image a")
   private List<WebElement> singleImgLink;
-  @FindBy(css = "footer.global-footer")
+  @FindBy(css = "footer.wds-global-footer")
   private WebElement footer;
-  @FindBy(css = "svg.global-footer__fandom-logo")
+  @FindBy(css = "svg.wds-global-footer__fandom-logo")
   private WebElement footerLogo;
   @FindBy(css = ".contributors > ul > li > a")
   private List<WebElement> topContributorsLinks;
