@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 public class TestUap extends TemplateNoFirstLoad {
+public final static String MOBILE_IN_CONTENT_CONTAINER = ".mobile-in-content";
+public final static String MOBILE_PREFOOTER_CONTAINER = ".mobile-prefooter";
+public final static String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = ".mobile-bottom-leaderboard";
+
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
