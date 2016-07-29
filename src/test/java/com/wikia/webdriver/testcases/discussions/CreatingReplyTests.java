@@ -24,11 +24,10 @@ public class CreatingReplyTests extends NewTestTemplate {
   /**
    * ANONS ON MOBILE SECTION
    */
-  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewReply")
+  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewReply", enabled = false)
+  @RelatedIssue(issueID = "SOC-2373")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
 
   public void anonUserOnMobileCanNotWriteNewReply() {
     userOnMobileMustBeLoggedInToUseReplyCreator();

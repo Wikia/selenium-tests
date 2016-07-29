@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
+  private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
    * ANONS ON MOBILE SECTION
@@ -29,7 +30,8 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   public void anonUserOnMobileCanNotWriteNewPost() {
     userOnMobileMustBeLoggedInToUsePostCreator();
   }
