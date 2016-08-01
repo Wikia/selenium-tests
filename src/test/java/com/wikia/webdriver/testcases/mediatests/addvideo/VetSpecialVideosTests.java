@@ -27,7 +27,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   @RelatedIssue(issueID = "MAIN-7391",
       comment = "Test Manually. Test is failing as you tube sometime returns a playlist rather than single video")
   public void SpecialVideos_001_Provider() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("bananas");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("flower");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
