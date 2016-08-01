@@ -14,7 +14,7 @@ public class Navigation extends BasePageObject {
   @FindBy(css = ".games.nav-links-item")
   private WebElement gamesHubButton;
 
-  public HubPage openGamesHub(){
+  public HubPage openGamesHub() {
     gamesHubButton.click();
 
     return new HubPage();
