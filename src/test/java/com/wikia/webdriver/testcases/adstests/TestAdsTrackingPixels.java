@@ -10,9 +10,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
@@ -20,7 +17,7 @@ import org.testng.annotations.Test;
 public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
-  public static final String GA_PIXEL_URL = "http://www.google-analytics.com/collect";
+  public static final String GA_PIXEL_URL = "https://www.google-analytics.com/collect";
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
   public static final String NIELSEN_PIXEL_URL = "http://secure-dcr.imrworldwide.com/cgi-bin/cfg?pli";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
