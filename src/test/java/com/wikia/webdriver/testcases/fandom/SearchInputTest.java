@@ -22,7 +22,9 @@ public class SearchInputTest extends FandomTestTemplate {
         String URL = driver.getCurrentUrl();
         Assert.assertEquals(URL, "http://qa.fandom.wikia.com/?s=TEST");
 
+        SearchInput firstInstance = new SearchInput().firstPostInstance();
+
+
     }
 }
 
-//Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
