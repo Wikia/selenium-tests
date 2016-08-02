@@ -4,6 +4,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
 import static com.wikia.webdriver.common.core.Assertion.assertStringNotContains;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -26,6 +27,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
   private static final String NO_ADS_URL_PARAM =
       "InstantGlobals.wgSitewideDisableGpt=1&InstantGlobals.wgSitewideDisableLiftium=1";
 
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxSegments",
