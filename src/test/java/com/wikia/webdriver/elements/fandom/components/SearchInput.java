@@ -17,6 +17,12 @@ public class SearchInput extends BasePageObject {
     @FindBy(css = ".entry-title")
     private WebElement postInstance;
 
+    @FindBy(linkText = "Articles")
+    private WebElement postsList;
+
+    @FindBy(linkText = "Videos")
+    private WebElement videosList;
+
 
     public SearchInput searchInputValue() {
         searchFieldInput.sendKeys("TEST");
@@ -33,6 +39,18 @@ public class SearchInput extends BasePageObject {
 
     public SearchInput firstPostInstance() {
         postInstance.click();
+
+        return this;
+    }
+
+    public SearchInput searchResultsPosts() {
+        postsList.click();
+
+        return this;
+    }
+
+    public SearchInput searchResultsVideos() {
+        videosList.click();
 
         return this;
     }

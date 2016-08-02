@@ -26,5 +26,24 @@ public class SearchInputTest extends FandomTestTemplate {
 
 
     }
+
+    @Test
+    public void differentUrlForPostsAndVideo() {
+        SearchInput searchInput = new SearchInput().searchInputValue();
+        SearchInput searchInputSubmit = new SearchInput().searchInputSubmit();
+
+        String URL = driver.getCurrentUrl();
+        Assert.assertEquals(URL, "http://qa.fandom.wikia.com/?s=TEST");
+
+        SearchInput postsResult = new SearchInput().searchResultsPosts();
+
+        String postUrl = driver.getCurrentUrl();
+
+        SearchInput videosResult = new SearchInput().searchResultsVideos();
+
+        String videoUrl = driver.getCurrentUrl();
+
+        Assert.assertNotEquals(postUrl, videoUrl);
+    }
 }
 
