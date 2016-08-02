@@ -38,7 +38,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost", enabled = false)
+  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
 
