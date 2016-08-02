@@ -7,14 +7,14 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.testng.annotations.Test;
 
 import java.util.Map;
 
-public class TestAdsKruxSegments extends TemplateNoFirstLoad {
+public class TestAdsKruxSegments extends NewTestTemplate {
 
   /**
    * Krux loads after onload event happens.

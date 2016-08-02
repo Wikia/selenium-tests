@@ -10,12 +10,12 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
+public class TestAdsTrackingPixels extends NewTestTemplate {
 
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
   public static final String GA_PIXEL_URL = "http://www.google-analytics.com/collect";
