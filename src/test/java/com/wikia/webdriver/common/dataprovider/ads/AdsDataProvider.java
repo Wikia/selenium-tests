@@ -1239,7 +1239,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/UAP"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 297978612)
                     .put("src", "mobile")
@@ -1274,7 +1274,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/UAP/Infobox"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 297978612)
                     .put("src", "mobile")

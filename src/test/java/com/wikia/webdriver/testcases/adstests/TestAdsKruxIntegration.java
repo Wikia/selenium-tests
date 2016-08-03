@@ -21,7 +21,7 @@ public class TestAdsKruxIntegration extends TemplateNoFirstLoad {
   )
   @UseUnstablePageLoadStrategy
   public void adsKruxIntegrationMercury(String wikiName, String article) {
-    adsKruxIntegration(wikiName, article, KRUX_SITE_ID_MOBILE, AdsContent.MOBILETOP_LB);
+    adsKruxIntegration(wikiName, article, KRUX_SITE_ID_MOBILE, AdsContent.MOBILE_TOP_LB);
   }
 
   @Test(
