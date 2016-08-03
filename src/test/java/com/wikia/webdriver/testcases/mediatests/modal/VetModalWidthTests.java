@@ -2,10 +2,9 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
@@ -20,52 +19,49 @@ import org.testng.annotations.Test;
 
 public class VetModalWidthTests extends NewTestTemplate {
 
-  /**
-   * 1. Verify width in visual mode, source mode, preview, and published page, 2. Verify width in
-   * vet modal when page edited,
-   */
-
-  Credentials credentials = Configuration.getCredentials();
-
   String articleTitle;
-
-  final static int WIDTH = 250;
+  final static int MODAL_WIDTH = 250;
 
   @Test(groups = {"VetModalWidth", "VetModalwidth_001", "VetTests", "Media"})
   @Execute(asUser = User.USER)
-  public void Vet_Modal_001_widthOnPage() {
+  public void Vet_Modal_001_modalWidth() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject
-        visualEditMode =
+
+    VisualEditModePageObject visualEditMode =
         base.navigateToArticleEditPage(wikiURL, articleTitle);
+
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject
-        vetOptions =
+
+    VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
-    vetOptions.adjustWith(WIDTH);
+    vetOptions.adjustWith(MODAL_WIDTH);
     vetOptions.submit();
-    visualEditMode.verifyVideoWidth(WIDTH);
+    Assertion.assertEquals(visualEditMode.getVideoWidth(), MODAL_WIDTH);
+
     SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
     sourceEditMode.verifySourceModeEnabled();
-    sourceEditMode.verifyVideoWidth(WIDTH);
+    Assertion.assertEquals(sourceEditMode.getVideoWidth(), MODAL_WIDTH);
+
     PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-    previewMode.verifyVideoWidth(WIDTH);
+    Assertion.assertEquals(previewMode.getVideoWidth(), MODAL_WIDTH);
+
     previewMode.closePreviewModal();
     ArticlePageObject article = sourceEditMode.submitArticle();
-    article.verifyVideoWidth(WIDTH);
+    Assertion.assertEquals(article.getVideoThumbnailWidth(), MODAL_WIDTH);
   }
 
-  @Test(groups = {"VetModalWidth", "VetModalwidth_002", "VetTests",
-                  "Media"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
+  @Test(groups = {"VetModalWidth", "VetModalwidth_002", "VetTests", "Media"},
+      dependsOnMethods = "Vet_Modal_001_modalWidth")
   @Execute(asUser = User.USER)
-  public void Vet_Modal_002_widthInModal() {
+  public void Vet_Modal_002_modalWidthOnEditing() {
     WikiBasePageObject base = new WikiBasePageObject();
-    VisualEditModePageObject
-        visualEditModePageObject =
+
+    VisualEditModePageObject visualEditModePageObject =
         base.navigateToArticleEditPage(wikiURL, articleTitle);
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
-    vetOptions.verifyVideoWidth(WIDTH);
+
+    Assertion.assertEquals(vetOptions.getVideoWidth(), MODAL_WIDTH);
   }
 }

@@ -343,7 +343,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     wait.forElementVisible(mediaNode);
     wait.forElementVisible(mediaCaption);
     Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
-    PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
+    PageObjectLogging.log("getVideoCaption", "Video caption matches", true, driver);
   }
 
   public void selectMedia() {

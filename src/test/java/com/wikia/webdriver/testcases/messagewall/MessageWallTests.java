@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.messagewall;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,6 +30,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_001", "MessageWall", "MessageWallTests", "Smoke3"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-801", comment = "The issue might be the reason for 25% failures of this test")
   public void userCanCreateAndEditMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();

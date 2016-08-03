@@ -195,18 +195,20 @@ public class VisualEditModePageObject extends EditMode {
     }
   }
 
-  public void verifyVideoWidth(int widthDesired) {
+  public int getVideoWidth() {
     verifyComponent(video);
     driver.switchTo().frame(iframe);
     int widthCurrent = Integer.parseInt(video.getAttribute("width"));
     driver.switchTo().defaultContent();
-    Assertion.assertNumber(widthCurrent, widthDesired, "width should be " + widthDesired
-            + " but is " + widthCurrent);
+
+    return widthCurrent;
   }
 
-  public void verifyVideoCaption(String captionDesired) {
+  public String getVideoCaption() {
     mouseOverComponent(Components.VIDEO);
-    Assertion.assertEquals(caption.getText(), captionDesired);
+    wait.forElementVisible(caption);
+
+    return caption.getText();
   }
 
   private void mouseOverComponent(Components component) {

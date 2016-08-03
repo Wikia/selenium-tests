@@ -20,6 +20,10 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
   private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
 
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParamsSynthetic",
@@ -43,6 +47,10 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
 
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParams",

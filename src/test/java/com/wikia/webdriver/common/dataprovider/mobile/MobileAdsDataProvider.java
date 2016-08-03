@@ -235,11 +235,11 @@ public class MobileAdsDataProvider {
         {
             "lego",
             "LEGO_Wiki",
-            "wka.life/_lego//home",
+            "wka.ent/_lego//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"life\"",
-                "\"s0v\":\"lifestyle\"",
+                "\"s0\":\"ent\"",
+                "\"s0v\":\"movies\"",
                 "\"s0c\":[\"toys\"]",
                 "\"s1\":\"_lego\"",
                 "\"s2\":\"home\"",
