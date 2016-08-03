@@ -11,7 +11,7 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
 
     @NetworkTrafficDump
     @Test(
-        groups = "AdsDetectAdBlock",
+        groups = "AdsDetectAdBlockPageFair",
         dataProviderClass = AdsDataProvider.class,
         dataProvider = "adsDetectionPageFair"
     )
@@ -25,7 +25,7 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
 
     @NetworkTrafficDump
     @Test(
-            groups = "AdsDetectNoAdBlock",
+            groups = "AdsDetectNoAdBlockPageFair",
             dataProviderClass = AdsDataProvider.class,
             dataProvider = "adsDetectionPageFair"
     )
