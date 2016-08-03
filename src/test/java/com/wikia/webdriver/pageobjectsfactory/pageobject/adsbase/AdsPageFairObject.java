@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.openqa.selenium.*;
 
 public class AdsPageFairObject extends AdsBaseObject {
-    private static final String PATTERN_PAGEFAIR = "http://stats.pagefair.com/stats/page_view_event/[0-9A-Z]{16}/" +
-            "a\\.js.*";
+    private static final String PATTERN_PAGEFAIR =
+            "http://stats.pagefair.com/stats/page_view_event/[0-9A-Z]{16}/a\\.js.*";
     private static final String PAGEFAIR_URL_PARAM = "pagefairdetection=1";
     private static final String PATTERN_PAGEFAIR_ADBLOCK_DETECTED = PATTERN_PAGEFAIR + "is_ab=1.*";
     private static final String PATTERN_PAGEFAIR_ADBLOCK_NOT_DETECTED = PATTERN_PAGEFAIR + "is_ab=0.*";
