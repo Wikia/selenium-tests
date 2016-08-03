@@ -113,6 +113,7 @@ public class MessageWall extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     scrollAndClick(postButton);
     new Actions(driver).moveByOffset(0, 0).perform();
+    wait.forElementNotVisible(postButton);
     PageObjectLogging.log("submit", "message submitted", true);
   }
 
@@ -260,12 +261,15 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
-    Assertion.assertEquals(title,
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
-    Assertion.assertEquals(message,
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText());
-    Assertion.assertEquals(userName,
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
+    Assertion.assertEquals(
+        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(),
+        title);
+    Assertion.assertEquals(
+        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText(),
+        message);
+    Assertion.assertEquals(
+        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText(),
+        userName);
   }
 
   public void verifyMessageBoldText(String title, String message, String userName) {

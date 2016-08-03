@@ -83,20 +83,20 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
    * select theme on Special:ThemeDesigner page
    */
   public String selectTheme(int number) {
-    wait.forElementVisible(themes.get(0));
+    wait.forElementClickable(themes.get(0));
     if (number < 5) {
       scrollAndClick(themes.get(number));
     }
     if (number >= 5 && number < 10) {
       scrollAndClick(nextButton);
-      wait.forElementVisible(secondThemesSet);
+      wait.forElementClickable(secondThemesSet);
       scrollAndClick(themes, number);
     }
     if (number == 10) {
       scrollAndClick(nextButton);
-      wait.forElementVisible(secondThemesSet);
+      wait.forElementClickable(secondThemesSet);
       scrollAndClick(nextButton);
-      wait.forElementVisible(thirdThemesSet);
+      wait.forElementClickable(thirdThemesSet);
       scrollAndClick(themes, number);
     }
     String themeName =
@@ -113,6 +113,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void submitTheme() {
+    wait.forElementClickable(saveButton);
     scrollAndClick(saveButton);
     wait.forElementVisible(saveButtonDisabled);
     PageObjectLogging.log("submitSelection", "selection of new skin saved", true);

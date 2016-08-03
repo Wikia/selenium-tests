@@ -27,10 +27,12 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
   }
 
   public void giveReason(String reason) {
+    wait.forElementClickable(reasonInput);
     reasonInput.sendKeys(reason);
   }
 
   public void restorePage() {
+    wait.forElementClickable(submitRestore);
     scrollAndClick(submitRestore);
     PageObjectLogging.log("ArticleRestored", "Article restored", true);
   }

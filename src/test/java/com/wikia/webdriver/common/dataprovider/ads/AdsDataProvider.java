@@ -413,11 +413,11 @@ public class AdsDataProvider {
         {
             "avatar",
             "Avatar_Wiki",
-            "wka.life/_avatar//home",
+            "wka.ent/_avatar//home",
             "HOME_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"life\"",
-                "\"s0v\":\"lifestyle\"",
+                "\"s0\":\"ent\"",
+                "\"s0v\":\"tv\"",
                 "\"s0c\":[\"tv\"]",
                 "\"s1\":\"_avatar\"",
                 "\"s2\":\"home\"",
@@ -433,7 +433,7 @@ public class AdsDataProvider {
                 "\"age\":[\"under18\",\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\",\"yadult\"]",
                 "\"media\":[\"tv\"]",
                 "\"sex\":[\"m\"]",
-                "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"],\"theme\":[\"magic\"]",
+                "\"gnre\":[\"action\",\"adventure\",\"cartoon\",\"comic\",\"fantasy\"]",
                 "\"theme\":[\"magic\"]",
                 "\"esrb\":\"ec\""
             ),
@@ -1153,6 +1153,7 @@ public class AdsDataProvider {
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
             ImmutableMap.<String, Object>builder()
+                .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_LEADERBOARD")
                 .put("slotName", AdsContent.TOP_LB)
                 .put("lineItemId", 277592292)
                 .put("src", "gpt")
@@ -1161,6 +1162,7 @@ public class AdsDataProvider {
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
             ImmutableMap.<String, Object>builder()
+                .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_RIGHT_BOXAD")
                 .put("slotName", AdsContent.MEDREC)
                 .put("lineItemId", 277592292)
                 .put("src", "gpt")
@@ -1237,7 +1239,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/UAP"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 297978612)
                     .put("src", "mobile")
@@ -1272,7 +1274,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/UAP/Infobox"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 297978612)
                     .put("src", "mobile")
