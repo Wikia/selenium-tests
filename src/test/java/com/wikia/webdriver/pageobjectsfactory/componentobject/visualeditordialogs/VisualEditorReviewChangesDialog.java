@@ -13,6 +13,8 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
   private WebElement returnToSaveFormButton;
+  @FindBy(css = ".ve-ui-mwSaveDialog-viewer")
+  private WebElement wikiaArticleReviewDialog;
   @FindBy(css = ".ve-ui-mwSaveDialog-viewer pre")
   private WebElement wikiaAritlceFirstPreview;
   @FindBy(css = ".diff-addedline")
@@ -41,6 +43,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
   public void verifyAddedDiffs(List<String> targets) {
     waitForDialogVisible();
+    wait.forElementVisible(wikiaArticleReviewDialog);
     if (isElementOnPage(wikiaAritlceFirstPreview)) {
       verifyNewArticleDiffs(targets);
     } else {

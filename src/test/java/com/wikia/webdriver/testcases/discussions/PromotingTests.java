@@ -11,6 +11,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "fallout")
+@Test(groups = {"discussions-promoting"})
 public class PromotingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
@@ -49,7 +50,7 @@ public class PromotingTests extends NewTestTemplate {
 
     Assertion.assertTrue(promoting.isAppleLinkDisplayed());
     Assertion.assertTrue(promoting.isGooglePlayLinkDisplayed());
-    Assertion.assertEquals(promoting.isPromotionAppTextDisplayed(), "Stay up to date on the go. Get the app now!");
+    Assertion.assertEquals(promoting.isPromotionAppTextDisplayed(), "Take your fandom with you, download the app today!");
   }
 
   private void appleLinkRedirectsProperly() {

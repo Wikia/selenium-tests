@@ -2,32 +2,37 @@ package com.wikia.webdriver.elements.mercury.pages.login;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import lombok.Getter;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class JoinPage extends WikiBasePageObject {
+public class RegisterPage extends WikiBasePageObject {
 
     @FindBy(css = ".footer-callout-emphasis")
-    private WebElement SignInButton;
+    private WebElement signInButton;
+    @FindBy(css = ".signup-providers li a")
+    private WebElement connectWithFacebookButton;
 
-    private WebDriver driver;
     private Wait wait;
 
-    public JoinPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new Wait(driver);
-
+    public RegisterPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.wait = new Wait(driver);
     }
 
     public SignInPage clickSignInButton() {
-        wait.forElementClickable(SignInButton);
-        SignInButton.click();
+        wait.forElementClickable(signInButton);
+        signInButton.click();
 
-        return new SignInPage();
+        return new SignInPage(driver);
+    }
+
+    public RegisterPage isConnetctWithFacebookButtonVisible() {
+        wait.forElementVisible(connectWithFacebookButton);
+
+        return this;
     }
 }
 

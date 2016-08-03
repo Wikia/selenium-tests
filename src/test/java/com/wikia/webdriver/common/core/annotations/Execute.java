@@ -16,4 +16,8 @@ public @interface Execute {
   String onWikia() default "";
 
   String disableFlash() default "";
+
+  String mockAds() default "";
+
+  String disableCommunityPageSalesPitchDialog() default "";
 }

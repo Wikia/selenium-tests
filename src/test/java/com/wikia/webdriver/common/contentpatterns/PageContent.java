@@ -44,8 +44,8 @@ public class PageContent {
   public static final String CATEGORY_NAME_PREFIX = "Cat";
 
   //generic
-  public static final String CAPTION = "QAWebdriverCaption1";
-  public static final String CAPTION2 = "QAWebdriverCaption2";
+  public static final String CAPTION = "TestDataCaption1";
+  public static final String CAPTION2 = "TestDataCaption2";
   public static final String WIKIA_CONTRIBUTOR = "A Wikia contributor";
 
   //image serving
@@ -80,6 +80,7 @@ public class PageContent {
   public static final String REDIRECT_LINK = "Formatting";
   public static final String TEXT_LINK = "qaLink";
   public static final String REDLINK = "QAasdfasjsad123213lj";
+  public static final String DISCUSSIONS_LINK = "/d/";
 
   //forum
   public static final String FORUM_TITLE_PREFIX = "QABoardTitle ";

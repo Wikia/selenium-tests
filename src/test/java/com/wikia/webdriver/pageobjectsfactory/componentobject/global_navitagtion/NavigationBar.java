@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtio
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -28,6 +29,8 @@ public class NavigationBar extends WikiBasePageObject {
   private List<WebElement> suggestionsList;
   @FindBy(css = ".auth-label a.auth-link.sign-in")
   private WebElement signInLink;
+  @FindBy(css = ".auth-label a.auth-link.register")
+  private WebElement registerLink;
 
   private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -118,5 +121,10 @@ public class NavigationBar extends WikiBasePageObject {
   public AuthModal clickOnSignIn(){
     signInLink.click();
     return new AuthModal();
+  }
+
+  public RegisterArea clickOnRegister(){
+    registerLink.click();
+    return new RegisterArea(true);
   }
 }

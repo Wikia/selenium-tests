@@ -8,6 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.Period;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -190,12 +191,12 @@ public class WamPageObject extends BasePageObject {
     return selectedHeaderName.getText();
   }
 
-  public void verifyTodayDateInDatePicker() {
+  public void verifyLatestDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
-    String todayDate =
+    String latestDate =
             DateTimeFormat.forPattern("MMMM d, yyyy").withLocale(Locale.ENGLISH)
-                    .print(DateTime.now().withZone(DateTimeZone.UTC));
-    Assertion.assertEquals(todayDate, currentDate, "Current date and today date are not the same");
+                    .print(DateTime.now().minus(Period.days(2)).withZone(DateTimeZone.UTC));
+    Assertion.assertEquals(currentDate, latestDate, "Current date and the latest possible date are not the same");
   }
 
   public String changeDateToLastMonth() {

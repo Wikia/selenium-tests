@@ -131,6 +131,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
+
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
     WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
@@ -630,6 +631,21 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
   }
 
+  public long getLineItemId(String slotName) {
+    JavascriptExecutor js = driver;
+    try {
+      return (long) js.executeScript(
+          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
+          "return slots[i].getResponseInformation().lineItemId;" +
+          "} }"
+      );
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("Get " + slotName + " line item", e, false);
+      return 0;
+    }
+  }
+
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {
@@ -695,7 +711,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyNoAds() {
-    Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
+    Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
     for (String selector : slotsSelectors) {
       verifyNoAd(selector);
     }
@@ -788,5 +804,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMiddlePrefooterAdPresent() {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
+  }
+
+  public void triggerComments() {
+    scrollToFooter();
+    jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
+    scrollToFooter();
+  }
+
+  public void scrollToSlot(String slot) {
+    WebElement slotSelector = driver.findElement(By.cssSelector(slot));
+    jsActions.scrollToElement(slotSelector);
+    PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
   }
 }

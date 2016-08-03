@@ -380,7 +380,7 @@ test {
 }
 
 dependencies {
-    def webdriverVersion = '2.53.0'
+    def webdriverVersion = '2.53.1'
 
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
@@ -409,7 +409,7 @@ dependencies {
     testCompile 'io.appium:java-client:3.1.0'
     testCompile 'joda-time:joda-time:2.7'
     testCompile 'com.jayway.jsonpath:json-path:1.2.0'
-    testCompile 'net.lightbody.bmp:browsermob-core:2.1.0-beta-2'
+    testCompile 'net.lightbody.bmp:browsermob-core:2.1.1'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.18'
     testCompile 'org.slf4j:slf4j-log4j12:1.6.4'
     testCompile 'org.projectlombok:lombok:1.16.6'

@@ -87,7 +87,7 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification selectInfoboxTemplate() {
-    wait.forElementVisible(typeInputInfobox);
+    wait.forElementClickable(typeInputInfobox);
     typeInputInfobox.click();
 
     PageObjectLogging.logInfo("Infobox template was chosen");
@@ -96,7 +96,7 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification selectQuoteTemplate() {
-    wait.forElementVisible(typeInputQuote);
+    wait.forElementClickable(typeInputQuote);
     typeInputQuote.click();
 
     PageObjectLogging.logInfo("Quote template was chosen");

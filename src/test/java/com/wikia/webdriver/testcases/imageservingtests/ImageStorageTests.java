@@ -44,15 +44,15 @@ public class ImageStorageTests extends NewTestTemplate {
 
     DeletePageObject delete = file.deletePage();
     delete.submitDeletion();
-    filesPage.verifyNotificationMessage();
+    filesPage.getBannerNotifications().verifyNotificationMessage();
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
 
-    SpecialRestorePageObject restore = delete.undeleteByFlashMessage();
+    SpecialRestorePageObject restore = delete.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
-    restore.verifyNotificationMessage();
+    restore.getBannerNotifications().verifyNotificationMessage();
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -80,12 +80,12 @@ public class ImageStorageTests extends NewTestTemplate {
     RenamePageObject renamePage = file.renameUsingDropdown();
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
-    file.verifyNotificationMessage();
+    file.getBannerNotifications().verifyNotificationMessage();
     file.verifyHeader(imageNewName);
     file = new FilePagePageObject(driver).open(imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
-    file.verifyNotificationMessage();
+    file.getBannerNotifications().verifyNotificationMessage();
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();

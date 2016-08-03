@@ -1,29 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.ElementStateHelper;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
 
   @FindBy(css = ".gamestar-logo")
   private WebElement gameStarLink;
 
-  @FindBy(css = ".wikia-logo")
+  @FindBy(css = ".wikia-logo-container .wikia-logo")
   private WebElement wikiaLogo;
 
   @FindBy(css = "#searchSelect")
@@ -38,7 +32,7 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(id = "exploreWikiaDropdown")
   private WebElement exploreWikiaDropdown;
 
-  @FindBy(css = ".global-navigation-2016 .hubs-links a")
+  @FindBy(css = ".global-navigation .hubs-links a")
   private List<WebElement> hubsLinks;
 
   @FindBy(css = ".wikia-logo__subtitle")
@@ -52,14 +46,9 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public HomePage clickWikiaLogo() {
-    String environment = Configuration.getEnv();
-    if (!"prod".equals(environment) && !environment.contains("dev")) {
-      WebDriverWait wait = new WebDriverWait(driver, 5);
-      wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href",
-          environment));
-    }
-
+    wait.forElementVisible(wikiaLogo);
     wikiaLogo.click();
+
     return new HomePage();
   }
 
@@ -70,24 +59,12 @@ public class GlobalNavigation extends BasePageObject {
     return new SearchPageObject(driver);
   }
 
-  public SignUpPageObject signUp() {
-    return getAccountNavigation().openDropDown().clickSignUpLink();
-  }
-
   public DropDownComponentObject openAccountNavigation() {
     return getAccountNavigation().openDropDown();
   }
 
-  public DropDownComponentObject logOut() {
-    return getAccountNavigation().openDropDown().clickLogOut();
-  }
-
   public boolean isLocalSearchDisabled() {
     return !ElementStateHelper.isElementVisible(searchSelect, driver);
-  }
-
-  public boolean isUserLoggedOut() {
-    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
   }
 
   private DropDownComponentObject getAccountNavigation() {
@@ -140,5 +117,9 @@ public class GlobalNavigation extends BasePageObject {
 
   public boolean isFandomLogoVisible() {
     return fandomLogo.isDisplayed();
+  }
+
+  public boolean isUserLoggedOut() {
+    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
   }
 }

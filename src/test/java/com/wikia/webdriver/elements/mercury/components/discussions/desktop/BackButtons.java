@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class BackButtons extends BasePageObject {
 
-  @FindBy(css = ".back-button")
+  @FindBy(css = ".wikia-home-link")
   private WebElement backToWiki;
 
   public BackButtons clickBackToWikiLink() {

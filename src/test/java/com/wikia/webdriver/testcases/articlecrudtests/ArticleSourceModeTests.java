@@ -2,16 +2,15 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import java.util.List;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -31,130 +30,136 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 
+@Execute(asUser = User.STAFF)
 @Test(groups = {"RTE_extended"})
 public class ArticleSourceModeTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-  WikiBasePageObject base;
-
-  @BeforeMethod(alwaysRun = true)
-  public void setup_VEPreferred() {
-    base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-  }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_001"})
   public void RTE_001_Bold() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickBold();
-    source.checkSourceContent("'''Bold text'''");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "'''Bold text'''");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_002"})
   public void RTE_002_Italic() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickItalic();
-    source.checkSourceContent("''Italic text''");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "''Italic text''");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_003"})
   public void RTE_003_InternalLink() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickInternalLink();
-    source.checkSourceContent("[[Link title]]");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "[[Link title]]");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_004"})
   public void RTE_004_ExternalLink() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickExternalLink();
-    source.checkSourceContent("[http://www.example.com link title]");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "[http://www.example.com link title]");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_005"})
   public void RTE_005_HeadLine() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickLvl2Headline();
-    source.checkSourceContent("\n== Headline text ==\n");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "\n== Headline text ==\n");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_006"})
   public void RTE_006_EmbedFile() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickEmbedFile();
-    source.checkSourceContent("[[File:Example.jpg]]");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "[[File:Example.jpg]]");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_007"})
   public void RTE_007_EmbedMedia() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickEmbedMedia();
-    source.checkSourceContent("[[Media:Example.ogg]]");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "[[Media:Example.ogg]]");
   }
 
   @Test(groups = {"RTE_extended_1", "RTE_extended_008"})
   public void RTE_008_Math() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickMath();
-    source.checkSourceContent("<math>Insert formula here</math>");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "<math>Insert formula here</math>");
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_009"})
   public void RTE_009_Nowiki() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickNowiki();
-    source.checkSourceContent("<nowiki>Insert non-formatted text here</nowiki>");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(),
+                           "<nowiki>Insert non-formatted text here</nowiki>");
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_010"})
   public void RTE_010_Signature() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickSignature();
-    source.checkSourceContent("--~~~~");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "--~~~~");
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_011"})
   public void RTE_011_HLine() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     source.clickHorizontalLine();
-    source.checkSourceContent("\n----\n");
-    source.submitArticle();
+
+    Assertion.assertEquals(source.getSourceContent(), "\n----\n");
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
   public void RTE_012_Photo() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -164,13 +169,17 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
-    source.checkSourceContent(String.format(
-        PageContent.WIKI_TEXT_PHOTO.replace("%photoName%", photoName), PageContent.CAPTION));
-    source.submitArticle();
+
+    Assertion.assertEquals(
+        source.getSourceContent(),
+        String.format(PageContent.WIKI_TEXT_PHOTO.replace("%photoName%", photoName),
+                      PageContent.CAPTION)
+    );
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_013"})
   public void RTE_013_Slideshow() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -184,14 +193,18 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     slideshowAddPhoto.clickSelect();
     slideshowBuilder.adjustPosition(Positions.CENTER);
     slideshowBuilder.clickFinish();
-    source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\n"
+
+    Assertion.assertEquals(
+        source.getSourceContent(),
+        "<gallery type=\"slideshow\" position=\"center\">\n"
         + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
-        + photoNames.get(3) + "\n</gallery>");
-    source.submitArticle();
+        + photoNames.get(3) + "\n</gallery>"
+    );
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_014"})
   public void RTE_014_Gallery() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -208,14 +221,18 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
     galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
     galleryBuiler.clickFinish();
-    source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"
+
+    Assertion.assertEquals(
+        source.getSourceContent(),
+        "<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"
         + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
-        + photoNames.get(3) + "\n</gallery>");
-    source.submitArticle();
+        + photoNames.get(3) + "\n</gallery>"
+    );
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_015"})
   public void RTE_015_Slider() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -229,14 +246,18 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     List<String> photoNames = sliderAddPhoto.choosePhotos(4);
     sliderAddPhoto.clickSelect();
     sliderBuilder.clickFinish();
-    source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\n"
+
+    Assertion.assertEquals(
+        source.getSourceContent(),
+        "<gallery type=\"slider\" orientation=\"right\">\n"
         + photoNames.get(0) + "\n" + photoNames.get(1) + "\n" + photoNames.get(2) + "\n"
-        + photoNames.get(3) + "\n</gallery>");
-    source.submitArticle();
+        + photoNames.get(3) + "\n</gallery>"
+    );
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_016", "Media"})
   public void RTE_016_Video() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -247,11 +268,11 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     vetOptions.submit();
     source.checkSourceVideoContent(
         "[[" + VideoContent.YOUTUBE_VIDEO_WIKITEXT + PageContent.CAPTION + "]]");
-    source.submitArticle();
   }
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_017"})
   public void RTE_017_MoreMainTools() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -261,6 +282,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @Test(groups = {"RTE_extended_3", "RTE_extended_018"})
   public void RTE_018_MoreWikiMarkupTools() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -270,6 +292,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
 
   @Test(groups = {"RTE_extended_4", "RTE_extended_019"})
   public void RTE_019_MoreSympolsTools() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -280,6 +303,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @CreationTicket(ticketID = "CONCF-626")
   @Test(groups = {"RTE_extended_4", "RTE_extended_020"})
   public void RTE_020_YoutubeTag_Preview() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
@@ -293,6 +317,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   @CreationTicket(ticketID = "CONCF-626")
   @Test(groups = {"RTE_extended_4", "RTE_extended_021"})
   public void RTE_021_YoutubeTag_Publish() {
+    WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();

@@ -33,7 +33,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(VE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
+    prefPage.getBannerNotifications().verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
@@ -47,7 +47,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(CK);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
+    prefPage.getBannerNotifications().verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = aritclePage.navigateToArticleEditPage();
@@ -61,7 +61,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(SOURCE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
+    prefPage.getBannerNotifications().verifyNotificationMessage();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     SourceEditModePageObject src = aritclePage.openSrcModeWithMainEditButton();
@@ -83,7 +83,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
+    prefPage.getBannerNotifications().verifyNotificationMessage();
 
     ConfirmationPageObject confirmPageAlmostThere = new AlmostTherePageObject(driver)
         .enterEmailChangeLink(Configuration.getCredentials().emailQaart2,

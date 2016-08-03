@@ -1,15 +1,19 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 
 import org.testng.annotations.Test;
 
 @Test(groups = "AdsEvolveMercury")
-public class TestAdsEvolveMercury extends MobileTestTemplate {
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+public class TestAdsEvolveMercury extends TemplateNoFirstLoad {
 
   @GeoEdgeBrowserMobProxy(country = CountryCode.CANADA)
   @Test(

@@ -9,6 +9,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxC
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -86,7 +88,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public void verifyVideoAdded(String videoTitle) {
-    waitForValueToBePresentInElementsAttributeByCss(NEWEST_VIDEO_CSS, "title", videoTitle);
+    waitForValueToBePresentInElementsAttributeByCss(NEWEST_VIDEO_CSS, "title", escapeHtml(videoTitle));
     PageObjectLogging.log("verifyVideoAdded",
         "verify that video with following description was added: " + videoTitle, true);
   }
@@ -116,7 +118,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     addVideoViaAjax(video.getUrl());
     deleteVideo();
     String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
-    Assertion.assertEquals(getFlashMessageText(), deletedVideo);
+    Assertion.assertEquals(getBannerNotificationText(), deletedVideo);
     PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
         + " was deleted", true);
   }
@@ -126,7 +128,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
     addVideoViaAjax(video.getUrl());
     deleteVideo();
-    verifyNotificationMessage();
+    getBannerNotifications().verifyNotificationMessage();
     Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
     PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
         + " was deleted", true);
