@@ -4,6 +4,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.fandom.FandomTestTemplate;
 import com.wikia.webdriver.elements.fandom.components.SearchInput;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,8 +24,11 @@ public class SearchInputTest extends FandomTestTemplate {
         String URL = driver.getCurrentUrl();
         Assert.assertEquals(URL, "http://qa.fandom.wikia.com/?s=TEST");
 
+        SearchInput firstPostTitle = new SearchInput().getPostTitle();
         SearchInput firstInstance = new SearchInput().firstPostInstance();
+        SearchInput postTitleFinal = new SearchInput().getPostTitleFinal();
 
+        Assert.assertEquals(firstPostTitle, postTitleFinal);
 
     }
 
@@ -31,10 +36,6 @@ public class SearchInputTest extends FandomTestTemplate {
     public void differentUrlForPostsAndVideo() {
         SearchInput searchInput = new SearchInput().searchInputValue();
         SearchInput searchInputSubmit = new SearchInput().searchInputSubmit();
-
-        String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "http://qa.fandom.wikia.com/?s=TEST");
-
         SearchInput postsResult = new SearchInput().searchResultsPosts();
 
         String postUrl = driver.getCurrentUrl();

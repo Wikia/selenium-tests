@@ -23,37 +23,45 @@ public class SearchInput extends BasePageObject {
     @FindBy(linkText = "Videos")
     private WebElement videosList;
 
+    @FindBy(css = ".clickable-anchor")
+    private WebElement postTitle;
+
+    @FindBy(css = ".entry-title")
+    private WebElement postTitleFinal;
 
     public SearchInput searchInputValue() {
         searchFieldInput.sendKeys("TEST");
-
         return this;
     }
 
     public SearchInput searchInputSubmit() {
         searchFieldInput.submit();
-
         return this;
 
     }
 
     public SearchInput firstPostInstance() {
         postInstance.click();
-
         return this;
     }
 
     public SearchInput searchResultsPosts() {
         postsList.click();
-
         return this;
     }
 
     public SearchInput searchResultsVideos() {
         videosList.click();
-
         return this;
     }
 
+    public SearchInput getPostTitle() {
+        postTitle.getText();
+        return this;
+    }
 
+    public SearchInput getPostTitleFinal() {
+        postTitleFinal.getText();
+        return this;
+    }
 }
