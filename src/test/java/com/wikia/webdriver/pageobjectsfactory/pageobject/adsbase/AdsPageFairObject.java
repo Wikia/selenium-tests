@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 
@@ -39,6 +40,7 @@ public class AdsPageFairObject extends AdsBaseObject {
         try {
             adsBaseObject.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
         } catch (TimeoutException exception) {
+            PageObjectLogging.log("TIMEOUT", exception, true);
             return false;
         }
         return true;
