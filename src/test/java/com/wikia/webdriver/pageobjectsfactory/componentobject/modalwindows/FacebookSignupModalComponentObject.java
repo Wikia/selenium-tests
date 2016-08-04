@@ -1,9 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,18 +15,18 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "button[name='__CONFIRM__']")
   private WebElement appTermsConfirmButton;
-  @FindBy(css = ".UserLoginFacebookLeft input[name='username']")
+  @FindBy(css = "#signupUsername")
   private WebElement usernameField;
-  @FindBy(css = ".UserLoginFacebookLeft input[name='password']")
+  @FindBy(css = "#signupPassword")
   private WebElement passwordField;
-  @FindBy(css = ".UserLoginFacebookLeft input[name='email']")
+  @FindBy(css = "#signupEmail")
   private WebElement emailField;
   @FindBy(css = ".UserLoginFacebookRight input[name='username']")
   private WebElement existingUsernameField;
   @FindBy(css = ".UserLoginFacebookRight input[name='password']")
   private WebElement existingPasswordField;
-  @FindBy(css = ".UserLoginFacebookLeft input[type='submit']")
-  private WebElement createAccountButton;
+  @FindBy(css = "#signupSubmit")
+  private WebElement registerButton;
   @FindBy(css = ".UserLoginFacebookRight input[type='submit']")
   private WebElement loginExistingButton;
   @FindBy(css = "#u_0_4")
@@ -71,26 +69,18 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     Object[] handles = driver.getWindowHandles().toArray();
 
     driver.switchTo().window(handles[1].toString());
-    wait.forElementVisible(editInfoProvided);
-    editInfoProvided.click();
-    PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "editing info provided", true);
-    wait.forElementVisible(emailCheckbox);
-    emailCheckbox.click();
-    PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox", true);
     wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
     driver.switchTo().window(handles[0].toString());
-
   }
 
   public void typeUserName(String userName) {
-    wait.forElementVisible(usernameField);
     usernameField.sendKeys(userName);
     PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
   }
 
   public void typePassword(String password) {
-    wait.forElementVisible(passwordField);
+    wait.forElementClickable(passwordField);
     passwordField.sendKeys(password);
     PageObjectLogging.log("typePassword", "password typed into the field", true);
   }
@@ -101,32 +91,20 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("typeEmail", "email typed into the field", true);
   }
 
-  public void createAccount() {
-    wait.forElementVisible(createAccountButton);
-    createAccountButton.click();
-    PageObjectLogging.log("createAccount", "Create account button clicked", true);
-    waitForElementNotVisibleByElement(createAccountButton);
+  public void clickRegister() {
+    wait.forElementVisible(registerButton);
+    registerButton.click();
+    PageObjectLogging.log("clickRegister", "Create account button clicked", true);
+    waitForElementNotVisibleByElement(registerButton);
   }
 
-  public void createAccountNoEmail(String email, String emailPassword, String userName,
-      String password) {
+  public void createAccountNoEmail(String email, String userName, String password) {
     acceptWikiaAppPolicyNoEmail();
-    MailFunctions.deleteAllEmails(email, emailPassword);
+    waitForValueToBePresentInElementsAttributeByElement(emailField, "value", email);
+
     typeUserName(userName);
     typePassword(password);
-    typeEmail(email);
-    createAccount();
+    clickRegister();
   }
 
-  public void loginExistingAccount(String userName, String password) {
-    wait.forElementVisible(existingUsernameField);
-    existingUsernameField.sendKeys(userName);
-    PageObjectLogging.log("loginExistingAccount", "username " + userName + " typed into the field",
-        true);
-    wait.forElementVisible(existingPasswordField);
-    existingPasswordField.sendKeys(password);
-    PageObjectLogging.log("loginExistingAccount", "password " + password + " typed into the field",
-        true);
-    loginExistingButton.click();
-  }
 }

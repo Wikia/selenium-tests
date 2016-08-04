@@ -18,7 +18,7 @@ public class PreviewEditModePageObject extends EditMode {
 
   By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
   By videoWidthSelector = By.cssSelector(".image > img");
-  By videoCaptionSelector = By.cssSelector("figcaption");
+  By videoCaptionSelector = By.cssSelector("figcaption .caption");
   By contentWrapper = By.cssSelector("#mw-content-text");
   By publishButton = By.cssSelector("#publish");
   By tableOfContents = By.cssSelector("#toc");

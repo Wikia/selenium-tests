@@ -7,20 +7,20 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-public class TestRoadblocksAfterMultiplePageViews extends TemplateNoFirstLoad {
+public class TestAdsRoadblocksAfterMultiplePageViewsOasis extends TemplateNoFirstLoad {
 
   private static final int PAGE_VIEWS_COUNT = 5;
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "skinLimited",
-      groups = "TestRoadblock_GeoEdgeFree"
+      groups = "AdsTestRoadblocksOasis"
   )
-  public void TestRoadblock_GeoEdgeFree(String wikiName, String article, Dimension windowResolution,
-                                        String expectedAdSkinLeftPartPath,
-                                        String expectedAdSkinRightPartPath,
-                                        String backgroundColor,
-                                        String middleColor) {
+  public void adsTestRoadblockOasis(String wikiName, String article, Dimension windowResolution,
+                                    String expectedAdSkinLeftPartPath,
+                                    String expectedAdSkinRightPartPath,
+                                    String backgroundColor,
+                                    String middleColor) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
     for (int i = 0; i < PAGE_VIEWS_COUNT; i++) {

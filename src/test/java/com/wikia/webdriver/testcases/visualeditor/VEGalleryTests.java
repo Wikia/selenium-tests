@@ -51,7 +51,6 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyGalleries(numOfGalleries);
     ve.verifyMediasInGallery(numOfMedias);
     ve.publish();
-    article.logOut(wikiURL);
   }
 
   //AG02
@@ -88,7 +87,6 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog.removeMediaFromCart(numOfMediaToRemoveSecond);
     expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveSecond;
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
-    galleryDialog.logOut(wikiURL);
   }
 
   //AG03
@@ -105,7 +103,6 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickTitleToPreview(7);
     ve.verifyPreviewImage();
-    ve.logOut(wikiURL);
   }
 
   //AG04
@@ -122,7 +119,6 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickMetaDataToPreview(3);
     ve.verifyPreviewImage();
-    ve.logOut(wikiURL);
   }
 
   @Test(
@@ -136,6 +132,5 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.deleteGallery(0);
     ve.verifyGalleries(0);
     ve.publish();
-    article.logOut(wikiURL);
   }
 }
