@@ -9,11 +9,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class FacebookMainPageObject extends WikiBasePageObject {
 
-  @FindBy(css = "input[type='email']")
+  @FindBy(css = "#email")
   private WebElement emailField;
-  @FindBy(css = "input[type='password']")
+  @FindBy(css = "#pass")
   private WebElement passwordField;
-  @FindBy(css = "button[type='button']")
+  @FindBy(css = "#loginbutton")
   private WebElement loginButton;
 
   public FacebookMainPageObject(WebDriver driver) {

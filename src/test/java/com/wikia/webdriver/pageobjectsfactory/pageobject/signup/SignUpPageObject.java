@@ -47,7 +47,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   private WebElement blurryWordHidden;
   @FindBy(css = "input.big")
   private WebElement signupButton;
-  @FindBy(css = "#mw-content-text .wikia-button-facebook")
+  @FindBy(css = ".signup-provider-facebook")
   private WebElement facebookSignUpButton;
 
   private By errorMsgBy = By.className("error-msg");
