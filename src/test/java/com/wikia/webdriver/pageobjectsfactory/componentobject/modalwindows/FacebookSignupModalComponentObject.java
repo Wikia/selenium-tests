@@ -83,16 +83,12 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
   public void typeUserName(String userName) {
     wait.forElementClickable(usernameField);
-    usernameField.click();
-    usernameField.clear();
     usernameField.sendKeys(userName);
     PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
   }
 
   public void typePassword(String password) {
     wait.forElementClickable(passwordField);
-    usernameField.click();
-    usernameField.clear();
     passwordField.sendKeys(password);
     PageObjectLogging.log("typePassword", "password typed into the field", true);
   }
