@@ -650,7 +650,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
 
-    extractLiftiumTagId(slotSelector);
     extractGptInfo(slotSelector);
 
     if (!adVisible) {
@@ -702,40 +701,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
     for (String selector : slotsSelectors) {
       verifyNoAd(selector);
-    }
-  }
-
-
-  private void extractLiftiumTagId(String slotSelector) {
-    String liftiumTagId = null;
-    WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-    if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slot)) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
-      WebElement currentLiftiumIframe = (WebElement) js.executeScript(
-          "return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
-          slotSelector
-      );
-      String liftiumAdSrc = currentLiftiumIframe.getAttribute("src");
-      Pattern pattern = Pattern.compile("tag_id=\\d*");
-      Matcher matcher = pattern.matcher(liftiumAdSrc);
-      if (matcher.find()) {
-        liftiumTagId = matcher.group().replaceAll("[^\\d]", "");
-      }
-    }
-
-    if (liftiumTagId != null) {
-      PageObjectLogging.log(
-          "LiftiumTagId",
-          "Present liftium tag id is: "
-          + liftiumTagId + "; in slot: " + slotSelector,
-          true
-      );
-    } else {
-      PageObjectLogging.log(
-          "LiftiumTagId",
-          "Liftium not present in slot: " + slotSelector,
-          true
-      );
     }
   }
 
