@@ -21,7 +21,7 @@ public class TestPad extends NewTestTemplate {
   )
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = "TestPad",
+      groups = "TestPadMercury",
       dataProvider = "testPad"
   )
   public void testPadMercury(String wikiName, String article, int adHeight) {
@@ -36,7 +36,7 @@ public class TestPad extends NewTestTemplate {
   )
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = "TestPad",
+      groups = "TestPadMercury",
       dataProvider = "testPad"
   )
   public void testPadDisasterRecoveryMercury(String wikiName, String article, int adHeight) {
@@ -49,7 +49,7 @@ public class TestPad extends NewTestTemplate {
   @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = "TestPad",
+      groups = "TestPadOasis",
       dataProvider = "testPad"
   )
   public void testPadOasis(String wikiName, String article, int adHeight) {
@@ -61,7 +61,7 @@ public class TestPad extends NewTestTemplate {
   @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = "TestPad",
+      groups = "TestPadOasis",
       dataProvider = "testPad"
   )
   public void testPadDisasterRecoveryOasis(String wikiName, String article, int adHeight) {
