@@ -277,6 +277,6 @@ public class ChatTests extends NewTestTemplate {
   public void messageAppearsWhenMaxLengthExceeded (){
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.writeLongMessage(1000);
-    Assertion.assertTrue(chatUserOne.isMsgTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
+    Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
   }
 }

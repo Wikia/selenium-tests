@@ -140,7 +140,7 @@ public class ChatPage extends WikiBasePageObject {
     }
   }
 
-  public boolean isMsgTooLongWarningDisplayed () {
+  public boolean isMessageTooLongWarningDisplayed () {
     try {
       return messageLengthExceeded.isDisplayed();
     } catch (TimeoutException | NoSuchElementException ex) {
