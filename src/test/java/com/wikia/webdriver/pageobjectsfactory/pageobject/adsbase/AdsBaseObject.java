@@ -211,17 +211,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
-  public void verifyNoLiftiumAdsInSlots(List<String> slots) {
-    for (String slot : slots) {
-      WebElement slotElement = driver.findElement(By.id(slot));
-      if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slotElement)) {
-        throw new NoSuchElementException("Liftium found in slot " + slot);
-      } else {
-        PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);
-      }
-    }
-  }
-
   /**
    * Test whether the correct GPT ad parameters are passed
    *

@@ -21,6 +21,5 @@ public class TestAdDriverForcedStatus extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyForcedSuccessScriptInSlots(slots);
-    ads.verifyNoLiftiumAdsInSlots(slots);
   }
 }
