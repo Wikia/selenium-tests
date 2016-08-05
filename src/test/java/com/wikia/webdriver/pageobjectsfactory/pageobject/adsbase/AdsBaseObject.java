@@ -54,10 +54,8 @@ public class AdsBaseObject extends WikiBasePageObject {
       "DirectGpt",
       "DirectGptMobile",
       "RemnantGpt",
-      "RemnantGptMobile",
-      "Liftium",
+      "RemnantGptMobile"
   };
-  private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
@@ -69,8 +67,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
-  @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
-  private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
 
@@ -168,22 +164,6 @@ public class AdsBaseObject extends WikiBasePageObject {
           false, driver
       );
       throw new NoSuchElementException("IFrames inside GPT div not found!");
-    }
-  }
-
-  public void verifyNoLiftiumAdsOnPageExceptWikiaBar() {
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
-    if (isElementOnPage(By.cssSelector(LIFTIUM_IFRAME_SELECTOR))) {
-      String iframeSrc = liftiumIframes.get(0).getAttribute("src");
-      if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
-        PageObjectLogging
-            .log("LiftiumAdsNotFound", "Liftium ads not found except WikiaBar", true);
-      } else {
-        throw new WebDriverException("Liftium ads found!");
-      }
-    } else {
-      PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
     }
   }
 
@@ -536,9 +516,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       String providerSlotName = providerSlot.getAttribute("id").split("_")[0];
       String provider = "";
       for (String providerName : PROVIDERS) {
-        String
-            providerSearch =
-            "Liftium".equals(providerName) ? providerName : "/" + providerName + "/";
+        String providerSearch = "/" + providerName + "/";
         if (providerSlotName.contains(providerSearch)) {
           provider = providerName;
           break;
