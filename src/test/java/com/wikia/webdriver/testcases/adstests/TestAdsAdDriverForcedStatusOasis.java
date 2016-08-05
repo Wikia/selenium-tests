@@ -16,8 +16,8 @@ public class TestAdsAdDriverForcedStatusOasis extends TemplateNoFirstLoad {
       groups = "AdsAdDriverForcedStatusOasis"
   )
   public void adsAdDriverForcedStatusSuccessOasis(String wikiName,
-                                                          String article,
-                                                          List<String> slots) {
+                                                  String article,
+                                                  List<String> slots) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyForcedSuccessScriptInSlots(slots);

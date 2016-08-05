@@ -17,10 +17,10 @@ public class TestAdsRoadblocksAfterMultiplePageViewsOasis extends TemplateNoFirs
       groups = "AdsTestRoadblocksOasis"
   )
   public void adsTestRoadblockOasis(String wikiName, String article, Dimension windowResolution,
-                                        String expectedAdSkinLeftPartPath,
-                                        String expectedAdSkinRightPartPath,
-                                        String backgroundColor,
-                                        String middleColor) {
+                                    String expectedAdSkinLeftPartPath,
+                                    String expectedAdSkinRightPartPath,
+                                    String backgroundColor,
+                                    String middleColor) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
     for (int i = 0; i < PAGE_VIEWS_COUNT; i++) {
