@@ -59,7 +59,7 @@ public class FacebookTests extends NewTestTemplate {
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
     String emailPassword = credentials.emailPasswordQaart2;
-    fbModal.createAccountNoEmail(email, emailPassword, userName, password);
+    fbModal.createAccountNoEmail(test_user.get("email"), emailPassword, userName, password);
 
     signUp.verifyUserLoggedIn(userName);
 //    AlmostTherePageObject almostThere = new AlmostTherePageObject(driver);

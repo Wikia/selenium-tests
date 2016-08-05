@@ -19,7 +19,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement usernameField;
   @FindBy(css = "#signupPassword")
   private WebElement passwordField;
-  @FindBy(css = ".UserLoginFacebookLeft input[name='email']")
+  @FindBy(css = "#signupEmail")
   private WebElement emailField;
   @FindBy(css = ".UserLoginFacebookRight input[name='username']")
   private WebElement existingUsernameField;
@@ -78,11 +78,9 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
     driver.switchTo().window(handles[0].toString());
-
   }
 
   public void typeUserName(String userName) {
-    wait.forElementClickable(usernameField);
     usernameField.sendKeys(userName);
     PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
   }
@@ -110,6 +108,8 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
       String password) {
     acceptWikiaAppPolicyNoEmail();
 //    MailFunctions.deleteAllEmails(email, emailPassword);
+waitForValueToBePresentInElementsAttributeByElement(emailField, "value", email);
+
     typeUserName(userName);
     typePassword(password);
 //    typeEmail(email);
