@@ -122,8 +122,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILETOP_LB),
-                         AdsContent.MOBILETOP_LB);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
+                         AdsContent.MOBILE_TOP_LB);
 
     if (isWgVarOn) {
       Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
@@ -151,8 +151,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILETOP_LB),
-                         AdsContent.MOBILETOP_LB);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
+                         AdsContent.MOBILE_TOP_LB);
 
     Assertion.assertNotEquals(
         adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT), isWgVarOn,

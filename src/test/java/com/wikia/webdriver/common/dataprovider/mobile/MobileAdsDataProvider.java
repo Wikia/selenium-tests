@@ -235,11 +235,11 @@ public class MobileAdsDataProvider {
         {
             "lego",
             "LEGO_Wiki",
-            "wka.life/_lego//home",
+            "wka.ent/_lego//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"life\"",
-                "\"s0v\":\"lifestyle\"",
+                "\"s0\":\"ent\"",
+                "\"s0v\":\"movies\"",
                 "\"s0c\":[\"toys\"]",
                 "\"s1\":\"_lego\"",
                 "\"s2\":\"home\"",
@@ -413,14 +413,14 @@ public class MobileAdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            AdsContent.MOBILETOP_LB,
+            AdsContent.MOBILE_TOP_LB,
             "DirectGptMobile; RemnantGptMobile"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            AdsContent.MOBILETOP_LB,
+            AdsContent.MOBILE_TOP_LB,
             "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
         }
     };
@@ -433,14 +433,14 @@ public class MobileAdsDataProvider {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            AdsContent.MOBILETOP_LB,
+            AdsContent.MOBILE_TOP_LB,
             ""
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            AdsContent.MOBILETOP_LB,
+            AdsContent.MOBILE_TOP_LB,
             "RubiconFastlane"
         },
     };
@@ -474,7 +474,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/MobileLeaderboard"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 100))
                 .put("lineItemId", 272132532)
                 .put("src", "mobile")
@@ -484,7 +484,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
                 .put("src", "mobile")
@@ -514,7 +514,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")

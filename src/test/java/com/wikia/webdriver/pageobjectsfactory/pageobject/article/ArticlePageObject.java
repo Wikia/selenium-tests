@@ -309,9 +309,14 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(mostRecentComment.getText(), comment);
   }
 
-  public void verifyCommentVideo(String videoName) {
-    driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
-    PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
+  public boolean isVideoCommentPresent(String videoName) {
+    try {
+      driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Video is not visible in comments section", e);
+      return false;
+    }
   }
 
   public MiniEditorComponentObject triggerEditCommentArea() {
@@ -508,22 +513,15 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public Integer getVideoWidth(WebElement thumbnail) {
-    int videoWidth =
-        Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
-    PageObjectLogging.log("getVideoWidth", "Video width is " + videoWidth, true);
-    return videoWidth;
+    return Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
   }
 
-  public void verifyVideoWidth(int widthDesired) {
-    int videoWidth = getVideoWidth(videoThumbnail);
-    Assertion.assertNumber(videoWidth, widthDesired, "width should be " + widthDesired + " but is "
-                                                     + videoWidth);
+  public int getVideoThumbnailWidth() {
+    return getVideoWidth(videoThumbnail);
   }
 
-  public void verifyVideoCaption(String captionDesired) {
-    String caption = videoThumbnailWrapper.findElement(By.className("caption")).getText();
-    Assertion.assertStringContains(caption, captionDesired);
-    PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
+  public String getVideoCaption() {
+    return videoThumbnailWrapper.findElement(By.className("caption")).getText();
   }
 
   public void verifyVideoName(String nameDesired) {
