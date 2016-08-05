@@ -13,10 +13,7 @@ public class TestAdsAdDriverForcedStatusOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adDriverForcedStatusSuccess",
-      groups = {
-          "AdsAdDriverForcedStatusOasis",
-          "Ads"
-      }
+      groups = "AdsAdDriverForcedStatusOasis"
   )
   public void adsAdDriverForcedStatusSuccessOasis(String wikiName,
                                                           String article,
