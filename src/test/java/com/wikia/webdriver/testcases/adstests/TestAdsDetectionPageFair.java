@@ -18,7 +18,7 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
   public void adsDetectAdBlockPageFair(Page page) {
     networkTrafficInterceptor.startIntercepting();
     AdsPageFairObject adsBaseObject = new AdsPageFairObject(driver, page);
-    adsBaseObject.assertPageFairSendCorrectRequest(true, networkTrafficInterceptor);
+    adsBaseObject.assertPageFairResponse(true, networkTrafficInterceptor);
   }
 
   @NetworkTrafficDump
@@ -30,6 +30,6 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
   public void adsDetectNoAdBlockPageFair(Page page) {
     networkTrafficInterceptor.startIntercepting();
     AdsPageFairObject adsBaseObject = new AdsPageFairObject(driver, page);
-    adsBaseObject.assertPageFairSendCorrectRequest(false, networkTrafficInterceptor);
+    adsBaseObject.assertPageFairResponse(false, networkTrafficInterceptor);
   }
 }

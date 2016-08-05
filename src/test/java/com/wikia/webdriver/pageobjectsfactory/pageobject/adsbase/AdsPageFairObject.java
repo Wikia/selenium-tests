@@ -26,7 +26,7 @@ public class AdsPageFairObject extends AdsBaseObject {
     return urlBuilder.appendQueryStringToURL(url, PAGEFAIR_URL_PARAM);
   }
 
-  public void assertPageFairSendCorrectRequest(
+  public void assertPageFairResponse(
       boolean expectedResult,
       NetworkTrafficInterceptor networkTrafficInterceptor
   ) {
