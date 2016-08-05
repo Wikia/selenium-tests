@@ -689,13 +689,6 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            AdsContent.TOP_LB,
-            "Liftium"
-        },
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
             AdsContent.TOP_LB,
             "RubiconFastlane"
