@@ -8,14 +8,17 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TestAdDriverForcedStatus extends TemplateNoFirstLoad {
+public class TestAdsAdDriverForcedStatusOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adDriverForcedStatusSuccess",
-      groups = {"TestAdDriverForcedStatusSuccess_GeoEdgeFree", "Ads"}
+      groups = {
+          "AdsAdDriverForcedStatusOasis",
+          "Ads"
+      }
   )
-  public void TestAdDriverForcedStatusSuccess_GeoEdgeFree(String wikiName,
+  public void adsAdDriverForcedStatusSuccessOasis(String wikiName,
                                                           String article,
                                                           List<String> slots) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
