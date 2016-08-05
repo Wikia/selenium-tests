@@ -664,7 +664,7 @@ public class AdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; Liftium"
+            "DirectGpt; RemnantGpt"
         },
         {
             "project43",

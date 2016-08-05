@@ -520,7 +520,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
           @Override
           public String toString() {
-            extractLiftiumTagId(AdsContent.getSlotSelector(slotName));
             extractGptInfo(AdsContent.getSlotSelector(slotName));
             return String.format("Expected: [%s], Actual: [%s]", expectedProviders,
                                  Joiner.on("; ").join(getProvidersChain(slotName)));
