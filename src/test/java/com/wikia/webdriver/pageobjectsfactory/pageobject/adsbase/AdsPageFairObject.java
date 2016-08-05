@@ -5,7 +5,8 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.junit.Assert;
-import org.openqa.selenium.*;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 
 public class AdsPageFairObject extends AdsBaseObject {
     private static final String PATTERN_PAGEFAIR =
@@ -14,35 +15,29 @@ public class AdsPageFairObject extends AdsBaseObject {
     private static final String PATTERN_PAGEFAIR_ADBLOCK_DETECTED = PATTERN_PAGEFAIR + "is_ab=1.*";
     private static final String PATTERN_PAGEFAIR_ADBLOCK_NOT_DETECTED = PATTERN_PAGEFAIR + "is_ab=0.*";
 
-    public AdsPageFairObject(WebDriver driver, String page) {
-        super(driver, page);
+    public AdsPageFairObject(WebDriver driver, Page page) {
+        super(driver, AdsPageFairObject.addPageFairDetectionParam(page));
     }
 
-    public static String addPageFairDetectionParam(Page page) {
+    private static String addPageFairDetectionParam(Page page) {
         UrlBuilder urlBuilder = new UrlBuilder();
 
         String url = urlBuilder.getUrlForPage(page);
         return urlBuilder.appendQueryStringToURL(url, PAGEFAIR_URL_PARAM);
     }
 
-    public void assertPageFair(boolean expectedResult, NetworkTrafficInterceptor networkTrafficInterceptor) {
+    public void assertPageFairSendCorrectRequest(boolean expectedResult, NetworkTrafficInterceptor networkTrafficInterceptor) {
         String pattern = expectedResult ? PATTERN_PAGEFAIR_ADBLOCK_DETECTED : PATTERN_PAGEFAIR_ADBLOCK_NOT_DETECTED;
-
-        if (matchRequest(this, pattern, networkTrafficInterceptor)) {
-            return;
-        }
-
-        String expectedValue = expectedResult ? "blocking detected" : "not detected";
-        Assert.fail(String.format("Detection result not correct, expected: %s", expectedValue));
-    }
-
-    private boolean matchRequest(AdsBaseObject adsBaseObject, String pattern, NetworkTrafficInterceptor networkTrafficInterceptor) {
         try {
-            adsBaseObject.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+            this.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
         } catch (TimeoutException exception) {
             PageObjectLogging.log("TIMEOUT", exception, true);
-            return false;
+            Assert.fail(getAssertionFailMessage(expectedResult));
         }
-        return true;
+    }
+
+    private String getAssertionFailMessage(boolean expectedResult) {
+        String expectedValue = expectedResult ? "blocking detected" : "not detected";
+        return String.format("Detection result not correct, expected: %s", expectedValue);
     }
 }

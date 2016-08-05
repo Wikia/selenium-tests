@@ -15,12 +15,10 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
         dataProviderClass = AdsDataProvider.class,
         dataProvider = "adsDetectionPageFair"
     )
-    public void adsDetectAdBlock(Page page) {
-        String url = AdsPageFairObject.addPageFairDetectionParam(page);
+    public void adsDetectAdBlockPageFair(Page page) {
         networkTrafficInterceptor.startIntercepting();
-
-        AdsPageFairObject adsBaseObject = new AdsPageFairObject(driver, url);
-        adsBaseObject.assertPageFair(true, networkTrafficInterceptor);
+        AdsPageFairObject adsBaseObject = new AdsPageFairObject(driver, page);
+        adsBaseObject.assertPageFairSendCorrectRequest(true, networkTrafficInterceptor);
     }
 
     @NetworkTrafficDump
@@ -29,11 +27,9 @@ public class TestAdsDetectionPageFair extends TemplateNoFirstLoad {
             dataProviderClass = AdsDataProvider.class,
             dataProvider = "adsDetectionPageFair"
     )
-    public void adsNotDetectAdBlock(Page page) {
-        String url = AdsPageFairObject.addPageFairDetectionParam(page);
+    public void adsDetectNoAdBlockPageFair(Page page) {
         networkTrafficInterceptor.startIntercepting();
-
-        AdsPageFairObject adsBaseObject = new AdsPageFairObject(driver, url);
-        adsBaseObject.assertPageFair(false, networkTrafficInterceptor);
+        AdsPageFairObject adsBaseObject = new AdsPageFairObject(driver, page);
+        adsBaseObject.assertPageFairSendCorrectRequest(false, networkTrafficInterceptor);
     }
 }
