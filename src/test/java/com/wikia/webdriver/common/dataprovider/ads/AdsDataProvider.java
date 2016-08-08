@@ -699,9 +699,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"wowwiki", "Portal:Main"},
-        {"zh.pad", "Special:Video"}
+        {"project43", "SyntheticTests/Krux"}
     };
   }
 
