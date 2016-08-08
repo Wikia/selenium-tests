@@ -23,8 +23,7 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
    *
    * Unless we visit the pages without ads :-)
    */
-  private static final String NO_ADS_URL_PARAM =
-      "InstantGlobals.wgSitewideDisableGpt=1&InstantGlobals.wgSitewideDisableLiftium=1";
+  private static final String NO_ADS_URL_PARAM = "InstantGlobals.wgSitewideDisableGpt=1";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,

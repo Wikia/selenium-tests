@@ -664,7 +664,7 @@ public class AdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; Liftium"
+            "DirectGpt; RemnantGpt"
         },
         {
             "project43",
@@ -686,13 +686,6 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] disableGptOasis() {
     return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            AdsContent.TOP_LB,
-            "Liftium"
-        },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
