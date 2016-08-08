@@ -68,8 +68,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"wowwiki", "Portal:Main"}
+        {"project43", "SyntheticTests/Krux"}
     };
   }
 
