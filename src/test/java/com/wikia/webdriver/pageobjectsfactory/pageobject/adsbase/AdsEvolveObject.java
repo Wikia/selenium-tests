@@ -44,7 +44,7 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public void verifyEvolveCallMercury() {
-    verifyEvolveInSlot(AdsContent.MOBILETOP_LB);
+    verifyEvolveInSlot(AdsContent.MOBILE_TOP_LB);
     verifyEvolveInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
     verifyEvolveInSlot(AdsContent.MOBILE_PREFOOTER);
   }
