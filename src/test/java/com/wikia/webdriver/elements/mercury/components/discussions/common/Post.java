@@ -41,6 +41,9 @@ public class Post extends BasePageObject {
   @FindBy(css = "svg.upvote")
   private WebElement upvoteButton;
 
+  @FindBy(css = ".load-more-button")
+  private WebElement loadMoreButton;
+
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -55,8 +58,8 @@ public class Post extends BasePageObject {
     return this;
   }
 
-  public Post scrollToBottom(WebDriver driver) {
-    jsActions.scrollToBottom(driver);
+  public Post clickLoadMore() {
+    loadMoreButton.click();
     return this;
   }
 
