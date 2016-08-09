@@ -1,7 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestHorseSlots extends NewTestTemplate {
@@ -19,11 +24,15 @@ public class TestHorseSlots extends NewTestTemplate {
 //    }
 //  }
 //
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"TestHorseSlots_Interstitial", "TestHorseSlots"}, invocationCount = 5)
   public void TestHorseSlots_Interstitial() {
     driver.manage().window().maximize();
-    driver.get("http://sandbox-adeng01.project43.wikia.com/wiki/SyntheticTests/Slots/InvisibleHighImpact/Interstitial");
+    driver.get("http://sandbox-adeng03.project43.wikia.com/wiki/SyntheticTests/Slots/InvisibleHighImpact/Interstitial");
     AdsBaseObject ads = new AdsBaseObject(driver);
+    ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_TOP_LEADERBOARD");
+    WebElement link = driver.findElement(By.cssSelector("a[title='SyntheticTests/Slots/InvisibleHighImpact/FloorAdhesion']"));
+    link.click();
     ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/INVISIBLE_HIGH_IMPACT_2");
     try {
       Thread.sleep(10000);
