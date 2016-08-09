@@ -30,7 +30,7 @@ public class TestAdsKruxSegments extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxSegments",
-      groups = {"AdsKruxSegments", "Ads"}
+      groups = "AdsKruxSegments"
   )
   public void adsKruxSegments(String kruxKuid,
                               String segment,
