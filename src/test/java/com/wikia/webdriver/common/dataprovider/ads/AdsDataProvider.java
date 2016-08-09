@@ -1298,4 +1298,13 @@ public class AdsDataProvider {
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] adsDetectionPageFair() {
+        return new Object[][]{
+                {
+                        new Page("project43")
+                }
+        };
+    }
 }
