@@ -272,4 +272,11 @@ public class ChatTests extends NewTestTemplate {
     chatWindow.refreshPage();
     Assertion.assertTrue(chatUserToBeBanned.isUserOnChat(), "USER IS NOT LOGGED IN TO CHAT");
   }
+
+  @Test(groups = "ChatTests")
+  public void messageAppearsWhenMaxLengthExceeded (){
+    ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
+    chatUserOne.writeLongMessage(1000);
+    Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
+  }
 }
