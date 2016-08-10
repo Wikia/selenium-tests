@@ -707,7 +707,7 @@ public class AdsDataProvider {
   public static Object[][] kruxSegments() {
     return new Object[][]{
         {
-            "J-RIfJI0",
+            "KtCsDKll",
             "pqdapsy7l",
             new Page("vim", "Vim_Tips_Wiki"),
             // Standard segment for visiting adtest before
