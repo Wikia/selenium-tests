@@ -127,7 +127,7 @@ public class LayoutTests extends NewTestTemplate {
   private void userCanViewMorePosts() {
     Post post = new PostsListPage().open().getPost();
     int startingListLength = post.getPostsListLength();
-    post.scrollToBottom(driver);
+    post.clickLoadMore();
     new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(startingListLength < post.getPostsListLength());
