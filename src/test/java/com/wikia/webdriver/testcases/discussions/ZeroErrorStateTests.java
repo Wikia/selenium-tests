@@ -9,8 +9,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 
 import org.testng.annotations.Test;
 
@@ -32,11 +34,25 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userSeeProperMessageWhenUploadsEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage")
+  @Test(groups = "discussions-anonUserOnDesktopSeeProperMessageWhenUploadsEmptyPostsListPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
-    userSeeProperMessageWhenUploadsEmptyPostDetailsPage();
+  public void anonUserOnDesktopSeeProperMessageWhenUploadsEmptyPostsListPage() {
+    userSeeProperMessageWhenUploadsEmptyPostsListPage();
+  }
+
+  @Test(groups = "discussions-anonOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+    userOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage();
+  }
+
+  @Test(groups = "discussions-anonOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
+    userOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage();
   }
 
 
@@ -44,7 +60,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-anonUserOnMobileSeeProperMessageWhenUploadsEmptyReportedPostsPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
@@ -53,38 +69,71 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userSeeProperMessageWhenUploadsEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-anonUserOnMobileSeeProperMessageWhenUploadsEmptyPostsListPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonUserOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
-    userSeeProperMessageWhenUploadsEmptyPostDetailsPage();
+  public void anonUserOnMobileSeeProperMessageWhenUploadsEmptyPostsListPage() {
+    userSeeProperMessageWhenUploadsEmptyPostsListPage();
   }
+
+  @Test(groups = "discussions-anonOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+    userOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage();
+  }
+
+  @Test(groups = "discussions-anonOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
+    userOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage();
+  }
+
 
   /**
    * STAFF USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeePostDetailsList")
+  @Test(groups = "discussions-staffUserOnDesktopSeeProperMessageWhenUploadsEmptyReportedPostsPage")
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopSeeProperMessageWhenUploadsEmptyReportedPostsPage() {
     userSeeProperMessageWhenUploadsEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeePostDetailsList")
+  @Test(groups = "discussions-staffUserOnDesktopSeeProperMessageWhenUploadsEmptyPostsListPage")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopSeeProperMessageWhenUploadsEmptyPostsListPage() {
+    userSeeProperMessageWhenUploadsEmptyPostsListPage();
+  }
+
+  @Test(groups = "discussions-staffUserOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+    userOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage();
+  }
+
+  @Test(groups = "discussions-staffUserOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage")
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
-    userSeeProperMessageWhenUploadsEmptyPostDetailsPage();
+    userOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage();
   }
 
   /**
    * STAFF USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-staffUserOnMobileSeeProperMessageWhenUploadsEmptyReportedPostsPage")
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
@@ -93,39 +142,89 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userSeeProperMessageWhenUploadsEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
+  @Test(groups = "discussions-staffUserOnMobileSeeProperMessageWhenUploadsEmptyPostsListPage")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
+  public void staffUserOnMobileSeeProperMessageWhenUploadsEmptyPostsListPage() {
+    userSeeProperMessageWhenUploadsEmptyPostsListPage();
+  }
+
+  @Test(groups = "discussions-staffUserOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
+  public void staffUserOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+    userOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage();
+  }
+
+  @Test(groups = "discussions-staffUserOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage")
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
-    userSeeProperMessageWhenUploadsEmptyPostDetailsPage();
+    userOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage();
   }
 
   /**
    * TESTING METHODS SECTION
    */
 
-  private void userSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+  private void userOnDesktopSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+    ErrorMessages errorMessage = new UserPostsPage().open().getErrorMessages();
+    Assertion.assertTrue(errorMessage.isErrorMessagePresent());
+    Assertion.assertEquals(
+        errorMessage.getErrorMessageText(),
+        "Uh oh, looks like this page doesn't exist!\n"
+        + "Show Me All Discussions");
+  }
 
+  private void userOnMobileSeeProperMessageWhenUploadsNonExistingUserPostsPage() {
+    ErrorMessages errorMessage = new UserPostsPage().open().getErrorMessages();
+    Assertion.assertTrue(errorMessage.isErrorMessagePresent());
+    Assertion.assertEquals(
+        errorMessage.getErrorMessageText(),
+        "Uh oh, looks like this page doesn't exist!\n"
+        + "All Discussions");
   }
 
   private void userSeeProperMessageWhenUploadsEmptyReportedPostsPage() {
     ErrorMessages errorMessage = new ReportedPostsAndRepliesPage().open().getErrorMessages();
     Assertion.assertTrue(errorMessage.isErrorMessagePresent());
-
-  }
-
-  private void userSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
-    ErrorMessages errorMessages = new PostsListPage().open().getErrorMessages();
-    Assertion.assertTrue(errorMessages.isEmptyPostsListMessageDisplayed());
     Assertion.assertEquals(
-        errorMessages.getEmptyPostsListMessageText(),
-        "No posts yet. Get the discussion started, create the first post now!");
+        errorMessage.getErrorMessageText(),
+        "There are no reported posts or replies.\n"
+        + "Show Me All Discussions");
+
   }
 
   private void userSeeProperMessageWhenUploadsEmptyPostsListPage() {
+    ErrorMessages errorMessage = new PostsListPage().open().getErrorMessages();
+    Assertion.assertTrue(errorMessage.isEmptyPostsListMessageDisplayed());
+    Assertion.assertEquals(
+        errorMessage.getEmptyPostsListMessageText(),
+        "No posts yet. Get the discussion started, create the first post now!");
+  }
 
+  private void userOnDesktopSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
+    ErrorMessages errorMessage = new PostDetailsPage().openEmpyPost().getErrorMessages();
+    Assertion.assertTrue(errorMessage.isErrorMessagePresent());
+    Assertion.assertEquals(
+        errorMessage.getErrorMessageText(),
+        "Uh oh, looks like this page doesn't exist!\n"
+        + "Show Me All Discussions");
+  }
+
+  private void userOnMobileSeeProperMessageWhenUploadsEmptyPostDetailsPage() {
+    ErrorMessages errorMessage = new PostDetailsPage().openEmpyPost().getErrorMessages();
+    Assertion.assertTrue(errorMessage.isErrorMessagePresent());
+    Assertion.assertEquals(
+        errorMessage.getErrorMessageText(),
+        "Uh oh, looks like this page doesn't exist!\n"
+        + "All Discussions");
   }
 }
 

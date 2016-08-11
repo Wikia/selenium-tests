@@ -101,7 +101,7 @@ public class SharingTests extends NewTestTemplate {
   }
 
   private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
-    PostDetailsPage postDetails = new PostDetailsPage().open();
+    PostDetailsPage postDetails = new PostDetailsPage().openDefaultPost();
     String[] currentSocialNetworks = postDetails.getPost().clickShareIcon(0).getSocialNetworkIconsClasses();
 
     for (int i = 0; i < expectedSocialNetworks.length; i++) {

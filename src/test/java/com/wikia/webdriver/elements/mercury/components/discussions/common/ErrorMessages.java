@@ -20,10 +20,15 @@ public class ErrorMessages extends BasePageObject {
     return errorMessage.isDisplayed();
   }
 
-  public boolean isEmptyPostsListMessageDisplayed(){
+  public boolean isEmptyPostsListMessageDisplayed() {
     return emptyPostsListMessage.isDisplayed();
   }
-    public String getEmptyPostsListMessageText(){
-     return emptyPostsListMessageCopy.getText();
-    }
+
+  public String getEmptyPostsListMessageText() {
+    return emptyPostsListMessageCopy.getText();
+  }
+
+  public String getErrorMessageText(){
+    return errorMessage.getText();
+  }
 }
