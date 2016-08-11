@@ -4,16 +4,17 @@ import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
 import static com.wikia.webdriver.common.core.Assertion.assertStringNotContains;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsKruxObject;
 
 import org.testng.annotations.Test;
 
 import java.util.Map;
 
-public class TestAdsKruxSegments extends TemplateNoFirstLoad {
+public class TestAdsKruxSegments extends NewTestTemplate {
 
   /**
    * Krux loads after onload event happens.
@@ -25,10 +26,11 @@ public class TestAdsKruxSegments extends TemplateNoFirstLoad {
    */
   private static final String NO_ADS_URL_PARAM = "InstantGlobals.wgSitewideDisableGpt=1";
 
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "kruxSegments",
-      groups = {"AdsKruxSegments", "Ads"}
+      groups = "AdsKruxSegments"
   )
   public void adsKruxSegments(String kruxKuid,
                               String segment,
