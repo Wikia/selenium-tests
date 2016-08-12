@@ -71,7 +71,7 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
-    new ArticlePageObject(driver).waitForFooterToBeVisible();
+    new ArticlePageObject(driver).isFooterVisible();
 
     boolean result = driver.getCurrentUrl().contains(ROOT_PATH);
     PageObjectLogging.log(
