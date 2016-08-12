@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -109,6 +110,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.PREFOOTER_RIGHT);
   }
 
+  @RelatedIssue(issueID = "ADEN-3761")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
@@ -122,8 +124,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILETOP_LB),
-                         AdsContent.MOBILETOP_LB);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
+                         AdsContent.MOBILE_TOP_LB);
 
     if (isWgVarOn) {
       Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
@@ -139,6 +141,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.MOBILE_PREFOOTER);
   }
 
+  @RelatedIssue(issueID = "ADEN-3761")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -151,8 +154,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoaded();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILETOP_LB),
-                         AdsContent.MOBILETOP_LB);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
+                         AdsContent.MOBILE_TOP_LB);
 
     Assertion.assertNotEquals(
         adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT), isWgVarOn,

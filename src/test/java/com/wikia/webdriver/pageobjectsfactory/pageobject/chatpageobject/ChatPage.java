@@ -57,7 +57,7 @@ public class ChatPage extends WikiBasePageObject {
   private WebElement privateMessagesHeader;
   @FindBy(css = "#Rail h1.wordmark")
   private WebElement chatWordmarkImage;
-  @FindBy(css = "#WikiChatList li")
+  @FindBy(css = "#ChatHeader div.User img")
   private WebElement chatLoadedIndicator;
   @FindBy(css = "#ChatHeader h1.private")
   private WebElement privateChatHeader;
@@ -79,6 +79,8 @@ public class ChatPage extends WikiBasePageObject {
   private WebElement permissionsErrorTitle;
   @FindBy(xpath = "//h1")
   private WebElement userNameTitle;
+  @FindBy(css = "div.limit-reached-msg")
+  private WebElement messageLengthExceeded;
 
   private static final String USER_UNBAN_LINK = "//a[@data-type='ban-undo' and @data-user='%s']";
   private static final String USER_UNBAN_CONFIRM_MESSAGE =
@@ -134,6 +136,15 @@ public class ChatPage extends WikiBasePageObject {
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       PageObjectLogging.log("Message on chat not displayed", ex, true);
+      return false;
+    }
+  }
+
+  public boolean isMessageTooLongWarningDisplayed () {
+    try {
+      return messageLengthExceeded.isDisplayed();
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Warning about too long message not displayed", ex, true);
       return false;
     }
   }
@@ -406,6 +417,14 @@ public class ChatPage extends WikiBasePageObject {
     wait.forElementVisible(chatLoadedIndicator);
     messageWritingArea.sendKeys(message);
     new Actions(driver).sendKeys(messageWritingArea, Keys.ENTER).perform();
+  }
+
+  public void writeLongMessage (int length){
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i <= length; i++) {
+      sb.append('A');
+    }
+    writeOnChat(sb.toString());
   }
 
   public void selectPrivateMessageToUser(String userName) {

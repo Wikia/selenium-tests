@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -9,15 +10,12 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
+public class TestAdsTrackingPixels extends NewTestTemplate {
 
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
   public static final String GA_PIXEL_URL = "http://www.google-analytics.com/collect";
@@ -32,6 +30,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
+  @Execute(mockAds = "true")
   public void adsTrackingPixelsOnConsecutivePages(Page page, String[] articles, String[] urls) {
     // Check tracking pixels on first page view
     networkTrafficInterceptor.startIntercepting();
@@ -53,6 +52,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
 
   @UseUnstablePageLoadStrategy
   @NetworkTrafficDump
+  @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixels",
       dataProviderClass = AdsDataProvider.class,
@@ -68,6 +68,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump
+  @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixels",
       dataProviderClass = AdsDataProvider.class,
@@ -83,6 +84,7 @@ public class TestAdsTrackingPixels extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump
+  @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixelsCuratedMainPage",
       dataProviderClass = AdsDataProvider.class,

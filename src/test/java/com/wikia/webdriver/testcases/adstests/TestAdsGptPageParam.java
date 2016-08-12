@@ -48,7 +48,7 @@ public class TestAdsGptPageParam extends TemplateNoFirstLoad {
                                    String gptPattern,
                                    Boolean paramShouldPresent) {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, urlBuilder.getUrlForPath(wikiName, article));
-    String gptPageParams = wikiPage.getGptPageParams(AdsContent.MOBILETOP_LB);
+    String gptPageParams = wikiPage.getGptPageParams(AdsContent.MOBILE_TOP_LB);
     if (paramShouldPresent) {
       Assertion.assertStringContains(gptPageParams, gptPattern);
     } else {

@@ -664,7 +664,7 @@ public class AdsDataProvider {
             "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; Liftium"
+            "DirectGpt; RemnantGpt"
         },
         {
             "project43",
@@ -689,13 +689,6 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
-            AdsContent.TOP_LB,
-            "Liftium"
-        },
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
             "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
             AdsContent.TOP_LB,
             "RubiconFastlane"
@@ -706,9 +699,7 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"wowwiki", "Portal:Main"},
-        {"zh.pad", "Special:Video"}
+        {"project43", "SyntheticTests/Krux"}
     };
   }
 
@@ -716,7 +707,7 @@ public class AdsDataProvider {
   public static Object[][] kruxSegments() {
     return new Object[][]{
         {
-            "J-RIfJI0",
+            "KtCsDKll",
             "pqdapsy7l",
             new Page("vim", "Vim_Tips_Wiki"),
             // Standard segment for visiting adtest before
@@ -1239,7 +1230,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/UAP"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 297978612)
                     .put("src", "mobile")
@@ -1274,7 +1265,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/UAP/Infobox"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
-                    .put("slotName", AdsContent.MOBILETOP_LB)
+                    .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 297978612)
                     .put("src", "mobile")
@@ -1307,4 +1298,13 @@ public class AdsDataProvider {
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] adsDetectionPageFair() {
+        return new Object[][]{
+                {
+                        new Page("project43")
+                }
+        };
+    }
 }
