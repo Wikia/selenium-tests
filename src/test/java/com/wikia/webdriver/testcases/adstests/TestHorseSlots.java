@@ -28,12 +28,12 @@ public class TestHorseSlots extends NewTestTemplate {
   @Test(groups = {"TestHorseSlots_Interstitial", "TestHorseSlots"}, invocationCount = 5)
   public void TestHorseSlots_Interstitial() {
     driver.manage().window().maximize();
-    driver.get("http://sandbox-adeng03.project43.wikia.com/wiki/SyntheticTests/Slots/InvisibleHighImpact/Interstitial");
+    driver.get("http://bogna.wikia.com/wiki/A");
     AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_TOP_LEADERBOARD");
-    WebElement link = driver.findElement(By.cssSelector("a[title='SyntheticTests/Slots/InvisibleHighImpact/FloorAdhesion']"));
+    ads.waitForElementPresent("wikia_gpt/5441/wka.gaming/_bogna//article/mobile/MOBILE_TOP_LEADERBOARD");
+    WebElement link = driver.findElement(By.cssSelector("a[title='B']"));
     link.click();
-    ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/INVISIBLE_HIGH_IMPACT_2");
+    ads.waitForElementPresent("wikia_gpt/5441/wka.gaming/_bogna//article/mobile/MOBILE_TOP_LEADERBOARD");
     try {
       Thread.sleep(10000);
     } catch (InterruptedException e) {
