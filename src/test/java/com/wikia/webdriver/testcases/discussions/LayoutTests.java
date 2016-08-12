@@ -113,7 +113,7 @@ public class LayoutTests extends NewTestTemplate {
    */
 
   private void postDetailsListLoads() {
-    Reply reply = new PostDetailsPage().open().getReply();
+    Reply reply = new PostDetailsPage().openDefaultPost().getReply();
 
     Assertion.assertFalse(reply.isPostDetailsListEmpty());
   }
