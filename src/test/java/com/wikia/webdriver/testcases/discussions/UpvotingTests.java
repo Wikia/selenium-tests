@@ -142,7 +142,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private void firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
-    Reply reply = new PostDetailsPage().open().getReply();
+    Reply reply = new PostDetailsPage().openDefaultPost().getReply();
     int replyIndex = 0;
     reply.isReplyUpvoteButtonVisible(replyIndex);
     String firstVoteCount = reply.getReplyVoteCount(replyIndex);
@@ -160,7 +160,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private void postDetailsUpvoteButtonClickDoesntAddAnUpvote() {
-    Post post = new PostDetailsPage().open().getPost();
+    Post post = new PostDetailsPage().openDefaultPost().getPost();
     post.isUpvoteButtonVisible();
     String firstVoteCount = post.getPostDetailsVoteCount();
     post.clickPostDetailsUpvoteButton();
@@ -171,7 +171,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private void firstReplyUpvoteButtonClickDoesntAddAnUpvote() {
-    Reply reply = new PostDetailsPage().open().getReply();
+    Reply reply = new PostDetailsPage().openDefaultPost().getReply();
     int replyIndex = 0;
     reply.isReplyUpvoteButtonVisible(replyIndex);
     String firstVoteCount = reply.getReplyVoteCount(replyIndex);

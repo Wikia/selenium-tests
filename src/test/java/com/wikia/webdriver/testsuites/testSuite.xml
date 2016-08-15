@@ -93,6 +93,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.SharingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SortingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
             <class name="com.wikia.webdriver.testcases.edithubtests.EditHubTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests"/>
