@@ -50,7 +50,7 @@ public class CreatingReplyTests extends NewTestTemplate {
    */
 
   private void userOnDesktopMustBeLoggedInToUseReplyCreator() {
-    ReplyCreatorDesktop replyCreator = new PostDetailsPage().open().getReplyCreatorDesktop();
+    ReplyCreatorDesktop replyCreator = new PostDetailsPage().openDefaultPost().getReplyCreatorDesktop();
 
     Assertion.assertTrue(replyCreator.clickReplyCreator().isModalDialogVisible());
 
@@ -64,7 +64,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   }
 
   private void userOnMobileMustBeLoggedInToUseReplyCreator() {
-    ReplyCreatorMobile replyCreator = new PostDetailsPage().open().getReplyCreatorMobile();
+    ReplyCreatorMobile replyCreator = new PostDetailsPage().openDefaultPost().getReplyCreatorMobile();
 
     Assertion.assertTrue(replyCreator.clickReplyCreator().isModalDialogVisible());
 
