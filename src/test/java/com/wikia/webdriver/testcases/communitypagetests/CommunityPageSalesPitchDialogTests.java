@@ -3,13 +3,15 @@ package com.wikia.webdriver.testcases.communitypagetests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.communitypage.SalesPitchDialog;
 import org.testng.annotations.Test;
 
-@Test(groups = "CommunityPageTests")
+// disabling as feature is also disabled
+@Test(groups = "CommunityPageTests", enabled = false)
 @Execute(onWikia = "mediawiki119")
 public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
 
