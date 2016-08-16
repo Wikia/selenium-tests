@@ -2,13 +2,9 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-
 import java.util.List;
 
 
@@ -59,7 +55,7 @@ public class Post extends BasePageObject {
   }
 
   public Post clickLoadMore() {
-    loadMoreButton.click();
+    scrollAndClick(loadMoreButton);
     return this;
   }
 
