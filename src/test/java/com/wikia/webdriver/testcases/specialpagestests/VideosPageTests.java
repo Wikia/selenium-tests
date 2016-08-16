@@ -47,6 +47,7 @@ public class VideosPageTests extends NewTestTemplate {
    * video is).
    */
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
+  @RelatedIssue(issueID = "SUS-863")
   public void VideosPageTest_003() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

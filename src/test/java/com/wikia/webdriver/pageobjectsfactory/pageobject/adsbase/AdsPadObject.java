@@ -21,6 +21,7 @@ public class AdsPadObject extends AdsBaseObject {
   }
 
   public void verifyPadHeight(int height) {
+    wait.forElementVisible(padImg);
     Assertion.assertEquals(padImg.getSize().height, height);
     PageObjectLogging.log("PAD", "PAD is on the page", true, driver);
   }
