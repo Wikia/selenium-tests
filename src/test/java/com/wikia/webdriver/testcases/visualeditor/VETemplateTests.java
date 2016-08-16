@@ -60,7 +60,6 @@ public class VETemplateTests extends NewTestTemplate {
     templateDialog.clearSearchInput();
     templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_MATCH_ARTICLE);
     templateDialog.verifyIsResultTemplate();
-    templateDialog.logOut(wikiURL);
   }
 
   @RelatedIssue(issueID = "WW-108")
@@ -74,7 +73,6 @@ public class VETemplateTests extends NewTestTemplate {
         (VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
     templateDialog.verifyNoResultTemplate();
     templateDialog.verifyIsSuggestedTemplate();
-    templateDialog.logOut(wikiURL);
   }
 
   @RelatedIssue(issueID = "WW-108")
@@ -102,7 +100,6 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   @RelatedIssue(issueID = "WW-108")
@@ -135,7 +132,6 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   @RelatedIssue(issueID = "WW-108")
@@ -153,7 +149,6 @@ public class VETemplateTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   @RelatedIssue(issueID = "WW-108")
@@ -178,6 +173,5 @@ public class VETemplateTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 }

@@ -87,10 +87,4 @@ public class SpecialBlockPage extends WikiBasePageObject {
     }
     PageObjectLogging.log("deselectAllSelections", "all selections deselected", true);
   }
-
-  public void verifyBlockedUserSubmitPage(String userName, String password) {
-    wait.forElementVisible(By.xpath("//p/a[contains(text(), '" + userName + "')]"));
-    wait.forElementVisible(By.xpath("//p[contains(text(), 'has been blocked')]"));
-    logOut(driver);
-  }
 }
