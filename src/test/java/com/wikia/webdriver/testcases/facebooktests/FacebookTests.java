@@ -36,9 +36,9 @@ public class FacebookTests extends NewTestTemplate {
     String email = credentials.emailQaart2;
     String emailPassword = credentials.emailPasswordQaart2;
     fbModal.createAccountNoEmail(test_user.get("email"), emailPassword, userName, password);
-
     signUp.verifyUserLoggedIn(userName);
     api.deleteFacebookTestUser(wikia_production_app_id, test_user.get("id"));
+
   }
   
 }

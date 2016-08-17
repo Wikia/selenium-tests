@@ -2,13 +2,9 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-
 import java.util.List;
 
 
@@ -41,6 +37,9 @@ public class Post extends BasePageObject {
   @FindBy(css = "svg.upvote")
   private WebElement upvoteButton;
 
+  @FindBy(css = ".load-more-button")
+  private WebElement loadMoreButton;
+
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -55,8 +54,8 @@ public class Post extends BasePageObject {
     return this;
   }
 
-  public Post scrollToBottom(WebDriver driver) {
-    jsActions.scrollToBottom(driver);
+  public Post clickLoadMore() {
+    scrollAndClick(loadMoreButton);
     return this;
   }
 

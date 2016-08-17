@@ -493,7 +493,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     String beforePublish = new TemplatePage().getRawContent(templateName)
         .replaceAll(infoboxRegexp, "");
 
-    new TemplatePage().open(templateName).loginAs(User.USER);
+    new TemplatePage().open(templateName).loginAs(User.USER_4);
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting(templateName);
 

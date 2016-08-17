@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -19,6 +20,7 @@ public class TestAdsFliteSkinPresence extends TemplateNoFirstLoad {
       ".flite-ad"
   };
 
+  @RelatedIssue(issueID = "ADEN-3530")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteSkin",
