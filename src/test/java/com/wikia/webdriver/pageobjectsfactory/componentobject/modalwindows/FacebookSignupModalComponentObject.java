@@ -69,12 +69,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     Object[] handles = driver.getWindowHandles().toArray();
 
     driver.switchTo().window(handles[1].toString());
-//    wait.forElementVisiblentVisible(editInfoProvided);
-//    editInfoProvided.click();
-//    PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "editing info provided", true);
-//    wait.forElementVisible(emailCheckbox);
-//    emailCheckbox.click();
-//    PageObjectLogging.log("acceptWikiaAppPolicyNoEmail", "unchecked the email checkboxbox", true);
     wait.forElementVisible(By.cssSelector("button[name='__CONFIRM__']"));
     appTermsConfirmButton.click();
     driver.switchTo().window(handles[0].toString());
@@ -104,27 +98,13 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     waitForElementNotVisibleByElement(registerButton);
   }
 
-  public void createAccountNoEmail(String email, String emailPassword, String userName,
-      String password) {
+  public void createAccountNoEmail(String email, String userName, String password) {
     acceptWikiaAppPolicyNoEmail();
-//    MailFunctions.deleteAllEmails(email, emailPassword);
-waitForValueToBePresentInElementsAttributeByElement(emailField, "value", email);
+    waitForValueToBePresentInElementsAttributeByElement(emailField, "value", email);
 
     typeUserName(userName);
     typePassword(password);
-//    typeEmail(email);
     clickRegister();
   }
 
-  public void loginExistingAccount(String userName, String password) {
-    wait.forElementVisible(existingUsernameField);
-    existingUsernameField.sendKeys(userName);
-    PageObjectLogging.log("loginExistingAccount", "username " + userName + " typed into the field",
-        true);
-    wait.forElementVisible(existingPasswordField);
-    existingPasswordField.sendKeys(password);
-    PageObjectLogging.log("loginExistingAccount", "password " + password + " typed into the field",
-        true);
-    loginExistingButton.click();
-  }
 }

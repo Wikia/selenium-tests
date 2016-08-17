@@ -27,15 +27,13 @@ public class FacebookTests extends NewTestTemplate {
 
     FacebookSettingsPageObject settingsFB = new FacebookSettingsPageObject(driver).open();
     new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
-
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     String userName = "QA" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
-    String email = credentials.emailQaart2;
-    String emailPassword = credentials.emailPasswordQaart2;
-    fbModal.createAccountNoEmail(test_user.get("email"), emailPassword, userName, password);
+
+    fbModal.createAccountNoEmail(test_user.get("email"), userName, password);
     signUp.verifyUserLoggedIn(userName);
     api.deleteFacebookTestUser(wikia_production_app_id, test_user.get("id"));
 

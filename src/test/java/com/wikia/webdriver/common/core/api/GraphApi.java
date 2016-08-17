@@ -24,15 +24,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by neptunooo on 04/08/16.
- */
 public class GraphApi {
 
     private static String ERROR_MESSAGE = "Problem with Graph API call used to create new facebook test user";
     private static ArrayList<BasicNameValuePair> PARAMS;
     private static String wikia_production_app_access_token = "112328095453510|uncl945c48bixtm47AWZM64doDQ";
-    private static String wikia_preview_app_access_token = "983287518357559|RE3IANMJOSmv04gSFO7hThMWVBI";
 
     public HashMap<String, String> createFacebookTestUser(String app_id) {
         try {
