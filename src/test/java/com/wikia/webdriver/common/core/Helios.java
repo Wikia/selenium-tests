@@ -41,6 +41,12 @@ public class Helios {
       RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(3000).build();
 
   private Helios() {
+
+    for (User user : User.values()) {
+      if (StringUtils.isNotBlank(user.getAccessToken())) {
+        tokenCache.put(user.getUserName(), user.getAccessToken());
+      }
+    }
   }
 
   public static String getAccessToken(User user) {
@@ -72,6 +78,12 @@ public class Helios {
   }
 
   public static String getAccessToken(String userName, String password) {
+
+    for (User user : User.values()) {
+      if (userName.equals(user.getUserName()) && StringUtils.isNotBlank(user.getAccessToken())) {
+        tokenCache.put(userName, user.getAccessToken());
+      }
+    }
 
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
 
@@ -130,7 +142,7 @@ public class Helios {
       if (tokenCache.containsKey(userName)) {
 
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
-            + String.format("?code=%s", tokenCache.get(userName));
+            + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
         getInfo.setConfig(requestConfig);
 

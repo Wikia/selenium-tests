@@ -94,7 +94,7 @@ public class FacebookTests extends NewTestTemplate {
     prefsPage.connectFacebook(user.getEmail(), user.getPassword());
     prefsPage.verifyFBButtonVisible();
 
-    prefsPage.logOut(wikiURL);
+    prefsPage.logOut();
     SignUpPageObject signUp = new SignUpPageObject(driver).open();
     signUp.clickFacebookSignUp();
     prefsPage.verifyUserLoggedIn(credentials.userName);
@@ -123,6 +123,5 @@ public class FacebookTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     base.appendToUrl("noads=1");
     base.verifyUserLoggedIn(userName);
-    base.logOut(wikiURL);
   }
 }
