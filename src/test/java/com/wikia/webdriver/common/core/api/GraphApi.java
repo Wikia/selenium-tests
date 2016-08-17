@@ -16,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.WebDriverException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -30,55 +29,45 @@ public class GraphApi {
     private static ArrayList<BasicNameValuePair> PARAMS;
     private static String wikia_production_app_access_token = "112328095453510|uncl945c48bixtm47AWZM64doDQ";
 
-    public HashMap<String, String> createFacebookTestUser(String app_id) {
+    public HashMap<String, String> createFacebookTestUser(String appId) {
         try {
-            HttpResponse response = createTestUser(app_id);
-            InputStream body = response.getEntity().getContent();
+            HttpResponse response = createTestUser(appId);
             String entity = EntityUtils.toString(response.getEntity());
-            HashMap<String, String> result =
-                new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
-            return result;
-        }
-        catch (IOException e) {
+            return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
+        } catch (IOException e) {
             PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
-        }
-        catch (URISyntaxException e) {
+        } catch (URISyntaxException e) {
             PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
         }
 
     }
 
-    public HashMap<String, String> deleteFacebookTestUser(String app_id, String user_id) {
+    public HashMap<String, String> deleteFacebookTestUser(String appId, String userId) {
         try {
-            HttpResponse response = deleteTestUser(user_id);
-            InputStream body = response.getEntity().getContent();
+            HttpResponse response = deleteTestUser(userId);
             String entity = EntityUtils.toString(response.getEntity());
-            HashMap<String, String> result =
-                new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
-            return result;
-        }
-        catch (IOException e) {
+            return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
+        } catch (IOException e) {
             PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
-        }
-        catch (URISyntaxException e) {
+        } catch (URISyntaxException e) {
             PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
         }
 
     }
 
-    private String getURLcreateUser(String app_id) {
+    private String getURLcreateUser(String appId) {
         String host = "https://graph.facebook.com/v2.6/";
-        String path = app_id+"/accounts/test-users";
+        String path = appId+"/accounts/test-users";
         return host + path;
     }
 
-    private String getURLdeleteUser(String user_id) {
+    private String getURLdeleteUser(String userId) {
         String host = "https://graph.facebook.com/v2.7/";
-        String path = user_id;
+        String path = userId;
         return host + path;
     }
 
@@ -89,8 +78,8 @@ public class GraphApi {
         return PARAMS;
     }
 
-    private HttpResponse createTestUser(String app_id) throws IOException, URISyntaxException {
-            URL url = new URL(getURLcreateUser(app_id));
+    private HttpResponse createTestUser(String appId) throws IOException, URISyntaxException {
+            URL url = new URL(getURLcreateUser(appId));
             CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
             HttpPost httpPost = getHtppPost(url);
 
@@ -100,8 +89,8 @@ public class GraphApi {
             return httpClient.execute(httpPost);
     }
 
-    private HttpResponse deleteTestUser(String user_id) throws IOException, URISyntaxException {
-        URL url = new URL(getURLdeleteUser(user_id));
+    private HttpResponse deleteTestUser(String userId) throws IOException, URISyntaxException {
+        URL url = new URL(getURLdeleteUser(userId));
         CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
         HttpDelete httpDelete = getHtppDelete(url);
         return httpClient.execute(httpDelete);
