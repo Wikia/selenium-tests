@@ -6,13 +6,15 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import java.io.File;
 
 public enum User {
-  USER("ci.user.regular.username", "ci.user.regular.password"),
+  USER("ci.user.regular.username", "ci.user.regular.password", "", "ci.user.regular.access_token"),
   USER_2("ci.user.regular2.username", "ci.user.regular2.password"),
   USER_3("ci.user.regular3.username", "ci.user.regular3.password"),
+  USER_4("ci.user.regular4.username", "ci.user.regular4.password"),
   USER_5("ci.user.regular5.username", "ci.user.regular5.password"),
+  USER_6("ci.user.regular6.username", "ci.user.regular6.password"),
   USER_9("ci.user.regular9.username", "ci.user.regular9.password"),
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
-  STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password"),
+  STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "", "ci.user.wikiastaff.access_token"),
   ANONYMOUS("anonymous", "anonymous"),
   REGULAR_USER_JAPAN("ci.user.language2.username", "ci.user.language2.password"),
   USER_GO_SEARCH_PREFERRED("ci.user.goSearchPreferredUser.username",
@@ -27,17 +29,27 @@ public enum User {
   private final String password;
   private final String filePath = Configuration.getCredentialsFilePath();
   private String userId;
+  private String accessToken;
 
   User(String userNameKey, String passwordKey) {
     this.userName = XMLReader.getValue(new File(filePath), userNameKey);
     this.password = XMLReader.getValue(new File(filePath), passwordKey);
     this.userId = "";
+    this.accessToken = "";
   }
 
   User(String userNameKey, String passwordKey, String userId) {
     this.userName = XMLReader.getValue(new File(filePath), userNameKey);
     this.password = XMLReader.getValue(new File(filePath), passwordKey);
     this.userId = XMLReader.getValue(new File(filePath), userId);
+    this.accessToken = "";
+  }
+
+  User(String userNameKey, String passwordKey, String userId, String accessToken) {
+    this.userName = XMLReader.getValue(new File(filePath), userNameKey);
+    this.password = XMLReader.getValue(new File(filePath), passwordKey);
+    this.userId = XMLReader.getValue(new File(filePath), userId);
+    this.userId = XMLReader.getValue(new File(filePath), accessToken);
   }
 
   public String getUserName() {
@@ -49,6 +61,10 @@ public enum User {
   }
 
   public String getUserId() {
+    return userId;
+  }
+
+  public String getAccessToken() {
     return userId;
   }
 }

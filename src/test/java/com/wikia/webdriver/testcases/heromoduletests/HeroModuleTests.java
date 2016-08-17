@@ -67,7 +67,7 @@ public class HeroModuleTests extends NewTestTemplate {
   public void HeroModuleTests_004_OnlyAdminsAndStaffCanModify() {
     ModularMainPageObject mom = new ModularMainPageObject(driver);
     mom.openWikiPage(wikiURL);
-    mom.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    mom.loginAs(credentials.userNameStaff2, credentials.passwordStaff2, wikiURL);
     mom.verifyAdminStaffButtons();
     mom.logOut();
     mom.loginAs(credentials.userName13, credentials.password13, wikiURL);
