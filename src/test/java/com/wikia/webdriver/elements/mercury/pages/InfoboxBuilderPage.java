@@ -329,6 +329,23 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  /**
+   _   _                     __     _
+   | | | |,^.        ,'.      | `.  | |
+   | | |  ,. `.    ,'   `.    | . `.| |
+   | | | .--`,'  ,'  ,^.  `.  | |`.   |
+   | | | |`. `. `. ,'___`. ,' | |  `| |
+   |_| |_|  `. `. `._____,'   |_|   | |
+   `/                    `.|
+   `
+   __               _   _   __         ____  __     _
+   | `. ,^.       ,' | | | |  `.      |  __| | `.  | |
+   | . ' , |  /`,' . | | | | |`.`.    | |__  | . `.| |
+   | |`.'| |  `. ,'| | | | | |  `.`.  |  __| | |`.   |
+   | |   | | ,' . `. | | | | |____` / | |__  | |  `| |
+   |_|   | | \,' `.__| |_| |_______/   `.__| |_|   | |
+   `.|                                       `.|
+   */
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
@@ -338,6 +355,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     new Actions(driver)
         .clickAndHold(draggedElement)
         .moveByOffset(0, targetY)
+        .pause(500)
         .release(draggedElement)
         .perform();
 
