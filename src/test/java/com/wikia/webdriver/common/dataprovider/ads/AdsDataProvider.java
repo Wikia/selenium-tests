@@ -190,21 +190,21 @@ public class AdsDataProvider {
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin",
+            "project43", "SyntheticTests/Skin",
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin",
+            "project43", "SyntheticTests/Skin",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin",
+            "project43", "SyntheticTests/Skin",
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
