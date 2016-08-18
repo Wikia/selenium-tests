@@ -314,6 +314,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage verifyTooltipOnHover() {
+
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
     wait.forElementVisible(component.get(0));
     builder.moveToElement(component.get(0)).pause(500).perform();
     Assertion.assertTrue(tooltip.isDisplayed());
