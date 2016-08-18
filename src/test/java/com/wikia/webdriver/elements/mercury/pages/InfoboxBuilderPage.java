@@ -357,7 +357,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     this.wait.forElementClickable(draggedElement);
 
     Point location = component.get(0).getLocation();
-    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 15;
+    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 50;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
