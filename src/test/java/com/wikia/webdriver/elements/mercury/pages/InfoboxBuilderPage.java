@@ -315,7 +315,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage verifyTooltipOnHover() {
     wait.forElementVisible(component.get(0));
-    builder.moveToElement(component.get(0)).perform();
+    builder.moveToElement(component.get(0)).pause(500).perform();
     Assertion.assertTrue(tooltip.isDisplayed());
 
     return this;
