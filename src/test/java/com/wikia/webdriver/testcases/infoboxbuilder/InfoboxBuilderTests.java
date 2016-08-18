@@ -298,8 +298,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
-    driver.manage().window().setSize(new Dimension(1040, 780));
-
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage infoboxBuilder =
         new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering");
