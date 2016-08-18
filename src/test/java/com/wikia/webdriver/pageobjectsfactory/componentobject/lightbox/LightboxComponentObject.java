@@ -171,7 +171,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
     wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
-    return new FilePagePageObject(driver);
+    return new FilePagePageObject();
   }
 
   public void verifyMoreInfoUrl(String expectedUrl) {

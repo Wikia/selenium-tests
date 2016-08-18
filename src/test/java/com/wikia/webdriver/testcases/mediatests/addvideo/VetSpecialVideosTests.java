@@ -35,7 +35,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
+    FilePagePageObject filePage = new FilePagePageObject().open(video.getFileName());
 
 //    filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
     filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

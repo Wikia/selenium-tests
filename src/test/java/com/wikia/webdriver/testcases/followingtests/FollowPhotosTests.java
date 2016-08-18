@@ -1,12 +1,11 @@
 package com.wikia.webdriver.testcases.followingtests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
@@ -20,7 +19,7 @@ public class FollowPhotosTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void FollowPhoto_001_setup() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialNewFilesPageObject special = base.openSpecialNewFiles(wikiURL);
+    SpecialNewFilesPage special = base.openSpecialNewFiles(wikiURL);
     imageName = special.getRandomImageName();
     WatchPageObject watch = special.unfollowImage(wikiURL, imageName);
     watch.confirmWatchUnwatch();
@@ -30,7 +29,7 @@ public class FollowPhotosTests extends NewTestTemplate {
   @Test(groups = "FollowPhoto", dependsOnMethods = {"FollowPhoto_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowPhoto_002_follow() {
-    new FilePagePageObject(driver).open(imageName).follow();
+    new FilePagePageObject().open(imageName).follow();
   }
 
   @Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})

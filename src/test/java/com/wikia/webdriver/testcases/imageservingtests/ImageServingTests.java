@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.imageservingtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.FileDataProvider;
@@ -10,7 +9,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 
@@ -24,7 +23,7 @@ public class ImageServingTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void ImageServing_001_SpecialNewFilesTest() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
+    SpecialNewFilesPage newFiles = base.openSpecialNewFiles(wikiURL);
     newFiles.addPhoto();
     newFiles.clickOnMoreOptions();
     newFiles.checkIgnoreAnyWarnings();

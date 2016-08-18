@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptions
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
@@ -164,7 +164,7 @@ public class LightboxTests extends NewTestTemplate {
   public void LightboxTest_009_filepage_image() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
+    SpecialNewFilesPage specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
     int itemNumber = 2;
 

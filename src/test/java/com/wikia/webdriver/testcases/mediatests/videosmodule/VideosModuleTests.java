@@ -23,7 +23,7 @@ public class VideosModuleTests extends NewTestTemplate {
     new ArticlePageObject().open();
     videosModule.verifyVideosModuleShowing();
 
-    new FilePagePageObject(driver).open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
+    new FilePagePageObject().open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
     videosModule.verifyVideosModuleShowing();
   }
 

@@ -59,7 +59,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
   public FilePagePageObject clickUploadButton() {
     scrollAndClick(uploadFileInput);
     PageObjectLogging.log("clickOnUploadFile", "upload file button clicked.", true);
-    return new FilePagePageObject(driver);
+    return new FilePagePageObject();
   }
 
   public void typeFileName(String fileName) {

@@ -29,7 +29,7 @@ public class FollowVideosTests extends NewTestTemplate {
   @Test(groups = "FollowVideo", dependsOnMethods = {"FollowVideo_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowVideo_002_follow() {
-    new FilePagePageObject(driver).open(videoName).follow();
+    new FilePagePageObject().open(videoName).follow();
   }
 
   @Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})

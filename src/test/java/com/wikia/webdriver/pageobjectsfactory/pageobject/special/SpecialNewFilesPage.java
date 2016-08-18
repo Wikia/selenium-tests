@@ -1,5 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
@@ -8,17 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxC
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-public class SpecialNewFilesPageObject extends SpecialPageObject {
+public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
 
@@ -32,8 +31,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   private WebElement moreOrFewerOptions;
   @FindBy(css = "div.toggles input[name='wpIgnoreWarning']")
   private WebElement ignoreAnyWarnings;
-  @FindBy(css = "div.wikia-gallery div.wikia-gallery-item img")
-  private WebElement wikiaPreviewImg;
   @FindBy(css = "div.wikia-gallery div.wikia-gallery-item:first-child img")
   private WebElement latestWikiaPreviewImg;
   @FindBys(@FindBy(css = "#mw-content-text img"))
@@ -43,71 +40,60 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
   @FindBy(css = "input[name='wpDestFile']")
   private WebElement fileNameInput;
 
-  public SpecialNewFilesPageObject(WebDriver driver) {
-    super();
-  }
-
-  public void addPhoto() {
+  public SpecialNewFilesPage addPhoto() {
     scrollAndClick(addPhotoButton);
-    PageObjectLogging.log(
-        "ClickAddPhotoButton",
-        "Add photo button clicked",
-        true
-    );
+    PageObjectLogging.log("ClickAddPhotoButton", "Add photo button clicked", true);
+
+    return this;
   }
 
-  public void clickUploadButton() {
+  public SpecialNewFilesPage clickUploadButton() {
     scrollAndClick(uploadFileInput);
-    PageObjectLogging.log(
-        "ClickOnUploadaPhoto",
-        "Click on upload a photo button",
-        true
-    );
+    PageObjectLogging.log("ClickOnUploadaPhoto", "Click on upload a photo button", true);
+
+    return this;
   }
 
-  public void setFileName(String fileName) {
+  public SpecialNewFilesPage setFileName(String fileName) {
     fileNameInput.clear();
     fileNameInput.sendKeys(fileName);
+
+    return this;
   }
 
-  public void clickOnMoreOptions() {
+  public SpecialNewFilesPage clickOnMoreOptions() {
     moreOrFewerOptions.click();
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "block");
-    PageObjectLogging.log(
-        "ClickOnMoreOptions",
-        "Click on More options",
-        true
-    );
+    PageObjectLogging.log("ClickOnMoreOptions", "Click on More options", true);
+
+    return this;
   }
 
-  public void clickOnFewerOptions() {
+  public SpecialNewFilesPage clickOnFewerOptions() {
     moreOrFewerOptions.click();
     waitForValueToBePresentInElementsCssByCss("div.options", "display", "none");
-    PageObjectLogging.log(
-            "ClickOnFewerOptions",
-            "Click on Fewer options",
-            true
-    );
+    PageObjectLogging.log("ClickOnFewerOptions", "Click on Fewer options", true);
+
+    return this;
   }
 
-  public void checkIgnoreAnyWarnings() {
+  public SpecialNewFilesPage checkIgnoreAnyWarnings() {
     wait.forElementVisible(ignoreAnyWarnings);
     ignoreAnyWarnings.click();
-    PageObjectLogging.log(
-        "CheckIgnoreAnyWarnings",
-        "Check 'Ignore Any Warnings' option",
-        true
-    );
+    PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
+
+    return this;
   }
 
-  public void selectFileToUpload(String file) {
+  public SpecialNewFilesPage selectFileToUpload(String file) {
     browseForFileInput.sendKeys(
-        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file)
-    );
+        CommonUtils.getAbsolutePathForFile(PageContent.IMAGE_UPLOAD_RESOURCES_PATH + file));
 
     waitForValueToBePresentInElementsCssByCss("div.status", "display", "block");
 
     PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
+
+    return this;
   }
 
   public void verifyFileUploaded(String fileName) {
@@ -117,41 +103,21 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
       PageObjectLogging.log("SLEEP INTERRUPTED", e, false);
     }
     driver.navigate().refresh();
-    waitForValueToBePresentInElementsAttributeByElement(
-        latestWikiaPreviewImg,
-        "src",
-        fileName);
-    PageObjectLogging.log(
-        "waitForFile",
-        "Verify if " + fileName + " has been succesfully uploaded",
-        true
-    );
+    waitForValueToBePresentInElementsAttributeByElement(latestWikiaPreviewImg, "src", fileName);
+    PageObjectLogging.log("waitForFile",
+        "Verify if " + fileName + " has been successfully uploaded", true);
   }
 
   /**
    * @return name of random image on Special:NewFiles page
    */
   public String getRandomImageName() {
-    List<String> hrefs = new ArrayList<String>();
+    List<String> hrefs = new ArrayList<>();
     for (WebElement elem : imagesNewFiles) {
       hrefs.add(elem.getAttribute("data-image-name"));
     }
     Random r = new Random();
     return hrefs.get((r.nextInt(hrefs.size() - 1)) + 1);
-  }
-
-  /**
-   * @return url of random image on Special:NewFiles page
-   */
-  public String getRandomImageUrl() {
-    List<String> hrefs = new ArrayList<String>();
-    for (WebElement elem : imagesNewFiles) {
-      hrefs.add(elem.findElement(parentBy).getAttribute("href"));
-    }
-    Random r = new Random();
-    String href = hrefs.get((r.nextInt(hrefs.size() - 1)) + 1);
-    PageObjectLogging.log("getRandomImageUrl", href + " image is selected", true);
-    return href;
   }
 
   public String getImageUrl(String imageName) {
@@ -164,14 +130,8 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     throw new NoSuchElementException("there is no " + imageName + " on Special:NewFiles page");
   }
 
-  @Deprecated
-  public FilePagePageObject openImage(String imageName) {
-    driver.get(getImageUrl(imageName));
-    return new FilePagePageObject(driver);
-  }
-
   /**
-   * @param imageName  eg. test.png. This file should be visible on Special:NewFiles
+   * @param imageName eg. test.png. This file should be visible on Special:NewFiles
    * @param noRedirect if true, ?redirect=no is added to current url
    * @return new file page object of file specified in imageName parameter
    */
@@ -182,17 +142,13 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
       url = urlBuilder.appendQueryStringToURL(url, parameter);
     }
     driver.get(url);
-    return new FilePagePageObject(driver);
+    return new FilePagePageObject();
   }
 
   public WatchPageObject unfollowImage(String wikiURL, String imageName) {
     String url = urlBuilder.appendQueryStringToURL(
-        wikiURL +
-        URLsContent.WIKI_DIR +
-        URLsContent.FILE_NAMESPACE +
-        imageName,
-        URLsContent.ACTION_UNFOLLOW
-    );
+        wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + imageName,
+        URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
     return new WatchPageObject(driver);
   }
@@ -202,22 +158,17 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     return new LightboxComponentObject(driver);
   }
 
-  public String getFileUrl(String wikiURL, int itemNumber) {
-    String
-        fileUrl =
-        wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getImageKey(itemNumber);
-    PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
-    return fileUrl;
+  /**
+   * Hide warnings, cause they may interrupt with test stability - test clicks warning instead of
+   * "More Options" link
+   */
+  public SpecialNewFilesPage hideWarnings() {
+    jsActions.execute("$(\"div.status\").attr(\"style\", \"display=none\")");
+
+    return this;
   }
 
-  public String getImageKey(int itemNumber) {
-    String imageKey = imagesNewFiles.get(itemNumber).getAttribute("data-image-key");
-    PageObjectLogging.log("getImageKey", "Image key: " + imageKey, true);
-    return imageKey;
-  }
-
-  public String getNewFilesSpecialPageTitle() {
+  public String getTitle(){
     return NEW_FILES_SPECIAL_PAGE_TITLE;
   }
-
 }

@@ -29,7 +29,7 @@ public class FilePageTests extends NewTestTemplate {
    */
   @Test(groups = {"FilePage", "filePage001_tabs", "Media"})
   public void filePage001_tabs() {
-    FilePagePageObject filePage = new FilePagePageObject(driver);
+    FilePagePageObject filePage = new FilePagePageObject();
     filePage.open(URLsContent.FILENAME_001);
 
     filePage.verifySelectedTab("about");
@@ -51,7 +51,7 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
   @Execute(asUser = User.USER)
   public void filePage002_tabsLoggedIn() {
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(URLsContent.FILENAME_001);
+    FilePagePageObject filePage = new FilePagePageObject().open(URLsContent.FILENAME_001);
 
     filePage.refreshAndVerifyTabs(0);
     filePage.refreshAndVerifyTabs(1);
@@ -93,7 +93,7 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     // Now delete the video
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
+    FilePagePageObject filePage = new FilePagePageObject().open(video.getFileName());
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
@@ -124,7 +124,7 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     // Go to the history tab and add a second video to test deleting a version
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
+    FilePagePageObject filePage = new FilePagePageObject().open(video.getFileName());
     filePage.selectHistoryTab();
 
     filePage.replaceVideo(VideoContent.YOUTUBE_VIDEO_URL5);

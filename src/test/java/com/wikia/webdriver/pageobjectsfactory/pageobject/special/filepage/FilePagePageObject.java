@@ -1,20 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog.ImageLicense;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 
 public class FilePagePageObject extends WikiBasePageObject {
 
@@ -24,20 +21,10 @@ public class FilePagePageObject extends WikiBasePageObject {
 
   @FindBys(@FindBy(css = "ul.tabs li a"))
   private List<WebElement> tabList;
-  @FindBy(css = "section[data-listing-type='local'] h3.page-listing-title a")
-  private WebElement appearsListing;
-  @FindBy(css = "section[data-listing-type='local'] div.page-list-pagination img.right")
-  private WebElement localPageNext;
-  @FindBy(css = "section[data-listing-type='local'] div.page-list-pagination img.left")
-  private WebElement localPagePrev;
   @FindBy(css = ".fullImageLink")
   private WebElement fileEmbedded;
-  @FindBy(css = ".filehistory .video-thumb")
-  private WebElement videoThumbnail;
   @FindBys(@FindBy(css = ".tabs li"))
   private List<WebElement> tabs;
-  @FindBy(css = ".video-provider a")
-  private WebElement provider;
   @FindBy(css = "div#mw-imagepage-nofile")
   private WebElement noFileText;
   @FindBy(css = "li#mw-imagepage-reupload-link a")
@@ -53,12 +40,9 @@ public class FilePagePageObject extends WikiBasePageObject {
   @FindBy(css = ".tabBody.selected")
   private WebElement tabBody;
 
-  public FilePagePageObject(WebDriver driver) {
-    super();
-  }
-
   public FilePagePageObject open(String fileName, boolean noRedirect) {
-    String url = urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
+    String url =
+        urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
     if (noRedirect) {
       url = urlBuilder.appendQueryStringToURL(url, "redirect=no");
     }
@@ -68,40 +52,24 @@ public class FilePagePageObject extends WikiBasePageObject {
   }
 
   public FilePagePageObject open(String fileName) {
-    return  open(fileName, false);
+    return open(fileName, false);
   }
 
   public void clickTab(int tab) {
     WebElement currentTab = tabList.get(tab);
     wait.forElementVisible(currentTab);
     scrollAndClick(currentTab);
-    PageObjectLogging.log(
-        "clickTab",
-        tab + " selected",
-        true
-    );
-  }
-
-  public void selectAboutTab() {
-    clickTab(ABOUT_TAB);
+    PageObjectLogging.log("clickTab", tab + " selected", true);
   }
 
   public void selectHistoryTab() {
     clickTab(HISTORY_TAB);
   }
 
-  public void selectMetadataTab() {
-    clickTab(METADATA_TAB);
-  }
-
   public void verifySelectedTab(String tabName) {
     wait.forElementVisible(tabBody);
     Assertion.assertEquals(tabBody.getAttribute("data-tab-body"), tabName);
-    PageObjectLogging.log(
-        "verified selected tab",
-        tabName + " selected",
-        true
-    );
+    PageObjectLogging.log("verified selected tab", tabName + " selected", true);
   }
 
   public void refreshAndVerifyTabs(int tab) {
@@ -122,40 +90,16 @@ public class FilePagePageObject extends WikiBasePageObject {
     verifySelectedTab(tabName);
   }
 
-  // Page forward in the local "appears on" section
-  public void clickLocalAppearsPageNext() {
-    localPageNext.click();
-    PageObjectLogging
-        .log("clickLocalAppearsPageNext", "local appears page next button clicked", true);
-  }
-
-  // Page backward in the local "appears on" section
-  public void clickLocalAppearsPagePrev() {
-    localPagePrev.click();
-    PageObjectLogging
-        .log("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
-  }
-
-  // Verify that a specific video title is in the "Appears on these pages" list
-  public void verifyAppearsOn(String articleName) {
-    Assertion.assertTrue(appearsListing.getText().equals(articleName));
-  }
-
   public void verifyEmbeddedVideoIsPresent() {
     wait.forElementVisible(fileEmbedded);
-    PageObjectLogging
-        .log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+    PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
+        true);
   }
 
   public void verifyEmptyFilePage() {
     wait.forElementVisible(noFileText);
-    PageObjectLogging
-        .log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
-  }
-
-  public void verifyThumbnailIsPresent() {
-    wait.forElementVisible(videoThumbnail);
-    PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true);
+    PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
+        true);
   }
 
   public String getImageUrl() {
@@ -185,12 +129,6 @@ public class FilePagePageObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyVideoAutoplay(boolean status) {
-    String providerName = provider.getText().toLowerCase();
-    VideoComponentObject video = new VideoComponentObject(driver, fileEmbedded);
-    video.verifyVideoAutoplay(providerName, status);
-  }
-
   public void replaceVideo(String url) {
     wait.forElementVisible(reuploadLink);
     scrollAndClick(reuploadLink);
@@ -203,21 +141,11 @@ public class FilePagePageObject extends WikiBasePageObject {
     PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
   }
 
-  public void verifyVersionCountAtLeast(int count) {
-    Assertion.assertTrue(historyDeleteLinks.size() >= count, "Version count is at least " + count);
-  }
-
   public DeletePageObject deleteVersion(int num) {
     scrollAndClick(historyDeleteLinks.get(num - 1));
 
     PageObjectLogging.log("deletePage", "delete page opened", true);
 
     return new DeletePageObject(driver);
-  }
-
-  public void verifyImageLicense(ImageLicense imageLicense) {
-    Assertion.assertStringContains(
-        imgLicensePlate.getText(), imageLicense.getText()
-    );
   }
 }
