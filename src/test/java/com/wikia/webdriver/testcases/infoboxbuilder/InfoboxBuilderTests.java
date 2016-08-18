@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -297,6 +298,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
+    driver.manage().window().setSize(new Dimension(1040, 780));
+
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage infoboxBuilder =
         new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyReordering");
