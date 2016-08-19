@@ -10,7 +10,7 @@ public class TestAdsMonocolor extends TemplateNoFirstLoad {
 
   @Test(groups = "AdsMonocolorOasis")
   public void adsMonocolorOasis() {
-    String testPage = urlBuilder.getUrlForPath("adtest", "Monocolor_Ad");
+    String testPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Monocolor_Ad");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testPage);
     adsBaseObject.verifyMonocolorAd(AdsContent.TOP_LB);
   }
