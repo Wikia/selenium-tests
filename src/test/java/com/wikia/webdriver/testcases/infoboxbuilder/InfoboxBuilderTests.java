@@ -295,7 +295,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertNotEquals(borderStyle, "1px solid rgb(26, 94, 184)");
   }
 
-  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
+  @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002", "test_verify"})
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
