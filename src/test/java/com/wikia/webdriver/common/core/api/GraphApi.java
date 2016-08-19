@@ -28,7 +28,7 @@ public class GraphApi {
     private static final String ERROR_MESSAGE = "Problem with Graph API call used to create new facebook test user";
     private static ArrayList<BasicNameValuePair> PARAMS;
     private static final String wikia_production_app_access_token = XMLReader
-        .getValue("facebook.prod.accessToken");
+        .getValue("ci.user.facebook.prod.accessToken");
 
     public HashMap<String, String> createFacebookTestUser(String appId) {
         try {
