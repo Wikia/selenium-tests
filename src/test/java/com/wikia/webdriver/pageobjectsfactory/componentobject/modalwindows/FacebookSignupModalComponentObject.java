@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import javax.annotation.Nullable;
 
 public class FacebookSignupModalComponentObject extends WikiBasePageObject {
@@ -21,20 +20,10 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
   private WebElement passwordField;
   @FindBy(css = "#signupEmail")
   private WebElement emailField;
-  @FindBy(css = ".UserLoginFacebookRight input[name='username']")
-  private WebElement existingUsernameField;
-  @FindBy(css = ".UserLoginFacebookRight input[name='password']")
-  private WebElement existingPasswordField;
   @FindBy(css = "#signupSubmit")
   private WebElement registerButton;
-  @FindBy(css = ".UserLoginFacebookRight input[type='submit']")
-  private WebElement loginExistingButton;
-  @FindBy(css = "#u_0_4")
-  private WebElement editInfoProvided;
-  @FindBy(xpath = "//input[@type='checkbox'][@value='email']/..")
-  private WebElement emailCheckbox;
 
-  public FacebookSignupModalComponentObject(WebDriver driver) {
+  public FacebookSignupModalComponentObject() {
     super();
   }
 
@@ -83,12 +72,6 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
     wait.forElementClickable(passwordField);
     passwordField.sendKeys(password);
     PageObjectLogging.log("typePassword", "password typed into the field", true);
-  }
-
-  public void typeEmail(String email) {
-    wait.forElementVisible(emailField);
-    emailField.sendKeys(email);
-    PageObjectLogging.log("typeEmail", "email typed into the field", true);
   }
 
   public void clickRegister() {

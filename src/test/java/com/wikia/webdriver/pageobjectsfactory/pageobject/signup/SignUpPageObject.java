@@ -145,7 +145,7 @@ public class SignUpPageObject extends WikiBasePageObject {
     wait.forElementClickable(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
-    return new FacebookSignupModalComponentObject(driver);
+    return new FacebookSignupModalComponentObject();
   }
 
   public AlmostTherePageObject submit(String email, String password) {
