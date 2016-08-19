@@ -26,6 +26,7 @@ import java.util.HashMap;
 public class GraphApi {
 
     private static final String ERROR_MESSAGE = "Problem with Graph API call used to create new facebook test user";
+    private static final String URI_SYNTAX_EXCEPTION = "URI_SYNTAX EXCEPTION";
     private static ArrayList<BasicNameValuePair> PARAMS;
     private static final String wikia_production_app_access_token = XMLReader
         .getValue("facebook.prod.accessToken");
@@ -36,10 +37,10 @@ public class GraphApi {
             String entity = EntityUtils.toString(response.getEntity());
             return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
         } catch (IOException e) {
-            PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
         } catch (URISyntaxException e) {
-            PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
         }
 
@@ -51,10 +52,10 @@ public class GraphApi {
             String entity = EntityUtils.toString(response.getEntity());
             return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
         } catch (IOException e) {
-            PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
         } catch (URISyntaxException e) {
-            PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
             throw new WebDriverException(ERROR_MESSAGE);
         }
 
