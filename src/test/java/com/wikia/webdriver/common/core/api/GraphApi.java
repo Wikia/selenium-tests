@@ -29,7 +29,7 @@ public class GraphApi {
     private static final String URI_SYNTAX_EXCEPTION = "URI_SYNTAX EXCEPTION";
     private static ArrayList<BasicNameValuePair> PARAMS;
     private static final String wikia_production_app_access_token = XMLReader
-        .getValue("facebook.prod.accessToken");
+        .getValue("ci.user.facebook.prod.accessToken");
 
     public HashMap<String, String> createFacebookTestUser(String appId) {
         try {

@@ -13,7 +13,7 @@ import java.util.HashMap;
 @Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
 
-  String wikiaProductionAppId = XMLReader.getValue("facebook.prod.appId");
+  String wikiaProductionAppId = XMLReader.getValue("ci.user.facebook.prod.appId");
 
   @Test(groups = "Facebook_userCanSignUpViaFacebook")
   public void userCanSignUpViaFacebook() {
