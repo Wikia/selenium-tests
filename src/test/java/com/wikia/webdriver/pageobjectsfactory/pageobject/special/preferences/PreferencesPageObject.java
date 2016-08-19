@@ -136,7 +136,7 @@ public class PreferencesPageObject extends WikiBasePageObject {
 
     driver.switchTo().window(windows[0].toString());
 
-    new FacebookSignupModalComponentObject(driver).acceptWikiaAppPolicy();
+    new FacebookSignupModalComponentObject().acceptWikiaAppPolicy();
 
     wait.forElementVisible(facebookDisconnect);
   }
