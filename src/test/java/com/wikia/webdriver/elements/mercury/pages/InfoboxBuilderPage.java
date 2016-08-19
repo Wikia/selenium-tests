@@ -7,6 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObje
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -80,10 +81,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
-  public InfoboxBuilderPage() {
-    super();
-  }
-
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
@@ -91,6 +88,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
+    wait.forElementVisible(previewArea);
 
     return this;
   }
@@ -313,19 +311,20 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage verifyTooltipOnHover() {
-
-    try {
-      Thread.sleep(3000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
+  public InfoboxBuilderPage hoverMouseOverComponent(int index){
     wait.forElementVisible(component.get(0));
     builder.moveToElement(component.get(0)).pause(500).perform();
-    Assertion.assertTrue(tooltip.isDisplayed());
 
     return this;
+  }
+
+  public boolean isTooltipVisible() {
+    try{
+      wait.forElementVisible(tooltip);
+      return true;
+    }catch (TimeoutException e){
+      return false;
+    }
   }
 
   public InfoboxBuilderPage moveToLastComponent() {

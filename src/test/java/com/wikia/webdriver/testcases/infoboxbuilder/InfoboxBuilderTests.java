@@ -286,7 +286,9 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openNew("InfoboxBuilderVerifySelectedBorderStyling")
-        .verifyTooltipOnHover();
+        .hoverMouseOverComponent(0);
+
+    Assertion.assertTrue(builderPage.isTooltipVisible(), "Component tooltip is not visible");
 
     String borderStyle = builderPage.getBorderStyle();
     Assertion.assertEquals(borderStyle, "1px solid rgb(26, 94, 184)");
