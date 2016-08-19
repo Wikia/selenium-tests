@@ -362,9 +362,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     new Actions(driver)
         .clickAndHold(draggedElement)
         .moveByOffset(0, targetY)
-        .pause(2000)
         .release(draggedElement)
-        .pause(1000)
+        .pause(500)
         .perform();
 
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
