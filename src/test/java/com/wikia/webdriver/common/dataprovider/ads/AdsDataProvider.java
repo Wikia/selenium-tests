@@ -23,6 +23,12 @@ public class AdsDataProvider {
       AdsContent.PREFOOTER_RIGHT
   };
 
+  private static final String NO_SKIN_WIKI_NAME = "adtest";
+  private static final String NO_SKIN_PAGE_NAME = "Skin";
+
+  private static final String GRADIENT_WIKI_NAME = "adtest-pluto";
+  private static final String GRADIENT_PAGE_NAME = "Skin";
+
   private AdsDataProvider() {
   }
 
@@ -160,64 +166,58 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] skin() {
-    final String noSkinWikiName = "adtest";
-    final String noSkinPageName = "Skin";
-
-    final String gradientWikiName = "adtest-pluto";
-    final String gradientPageName = "Skin";
-
     return new Object[][]{
         {
-            gradientWikiName, gradientPageName,
+            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
             new Dimension(1200, 1000),
             "src/test/resources/adsResources/no_wikia_skin_left.png",
             "src/test/resources/adsResources/no_wikia_skin_right.png",
             null,
             null
         }, {
-            gradientWikiName, gradientPageName,
+            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            gradientWikiName, gradientPageName,
+            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            gradientWikiName, gradientPageName,
+            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            noSkinWikiName, noSkinPageName,
+            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            noSkinWikiName, noSkinPageName,
+            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            noSkinWikiName, noSkinPageName,
+            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            noSkinWikiName, "Skin/NoMiddleColor",
+            NO_SKIN_WIKI_NAME, "Skin/NoMiddleColor",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
@@ -231,7 +231,7 @@ public class AdsDataProvider {
   public static Object[][] skinLimited() {
     return new Object[][]{
         {
-            "adtest-pluto", "Skin",
+            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
@@ -239,7 +239,7 @@ public class AdsDataProvider {
             "FFFFFF"
         },
         {
-            "adtest", "Skin",
+            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
@@ -1313,4 +1313,14 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsMonocolorOasis() {
+    return new Object[][]{
+        {
+            "adtest",
+            "Monocolor_Ad"
+        }
+    };
+  }
 }
