@@ -160,60 +160,64 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] skin() {
-    final String wikiName = "project43";
-    final String pageName = "SyntheticTests/Skin";
+    final String noSkinWikiName = "adtest";
+    final String noSkinPageName = "Skin";
+
+    final String gradientWikiName = "adtest-pluto";
+    final String gradientPageName = "Skin";
+
     return new Object[][]{
         {
-            "adtest-pluto", "Skin",
+            gradientWikiName, gradientPageName,
             new Dimension(1200, 1000),
             "src/test/resources/adsResources/no_wikia_skin_left.png",
             "src/test/resources/adsResources/no_wikia_skin_right.png",
             null,
             null
         }, {
-            "adtest-pluto", "Skin",
+            gradientWikiName, gradientPageName,
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest-pluto", "Skin",
+            gradientWikiName, gradientPageName,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest-pluto", "Skin",
+            gradientWikiName, gradientPageName,
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            wikiName, pageName,
+            noSkinWikiName, noSkinPageName,
             new Dimension(1600, 900),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            wikiName, pageName,
+            noSkinWikiName, noSkinPageName,
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            wikiName, pageName,
+            noSkinWikiName, noSkinPageName,
             new Dimension(2400, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest", "Skin/NoMiddleColor",
+            noSkinWikiName, "Skin/NoMiddleColor",
             new Dimension(1920, 1080),
             "src/test/resources/adsResources/wikia_skin_left.png",
             "src/test/resources/adsResources/wikia_skin_right.png",
