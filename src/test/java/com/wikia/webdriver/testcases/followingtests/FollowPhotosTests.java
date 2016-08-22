@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
@@ -29,7 +29,7 @@ public class FollowPhotosTests extends NewTestTemplate {
   @Test(groups = "FollowPhoto", dependsOnMethods = {"FollowPhoto_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowPhoto_002_follow() {
-    new FilePagePageObject().open(imageName).follow();
+    new FilePage().open(imageName).follow();
   }
 
   @Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods = {"FollowPhoto_002_follow"})

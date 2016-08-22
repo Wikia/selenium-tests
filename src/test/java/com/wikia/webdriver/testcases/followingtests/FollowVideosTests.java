@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
@@ -29,7 +29,7 @@ public class FollowVideosTests extends NewTestTemplate {
   @Test(groups = "FollowVideo", dependsOnMethods = {"FollowVideo_001_setup"})
   @Execute(asUser = User.USER)
   public void FollowVideo_002_follow() {
-    new FilePagePageObject().open(videoName).follow();
+    new FilePage().open(videoName).follow();
   }
 
   @Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})

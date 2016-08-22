@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 public class SpecialNewFilesPage extends SpecialPageObject {
@@ -135,14 +135,14 @@ public class SpecialNewFilesPage extends SpecialPageObject {
    * @param noRedirect if true, ?redirect=no is added to current url
    * @return new file page object of file specified in imageName parameter
    */
-  public FilePagePageObject openImage(String imageName, boolean noRedirect) {
+  public FilePage openImage(String imageName, boolean noRedirect) {
     String url = getImageUrl(imageName);
     if (noRedirect) {
       String parameter = "redirect=no";
       url = urlBuilder.appendQueryStringToURL(url, parameter);
     }
     driver.get(url);
-    return new FilePagePageObject();
+    return new FilePage();
   }
 
   public WatchPageObject unfollowImage(String wikiURL, String imageName) {

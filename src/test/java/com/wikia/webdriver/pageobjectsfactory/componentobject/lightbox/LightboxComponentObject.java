@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -166,12 +166,12 @@ public class LightboxComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyTitleUrl", "Title URL is correct", true);
   }
 
-  public FilePagePageObject clickTitle() {
+  public FilePage clickTitle() {
     new Actions(driver).moveToElement(titleLink).perform();
     wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
-    return new FilePagePageObject();
+    return new FilePage();
   }
 
   public void verifyMoreInfoUrl(String expectedUrl) {

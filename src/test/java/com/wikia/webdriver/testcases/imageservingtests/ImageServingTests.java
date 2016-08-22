@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
 import org.testng.annotations.Test;
 
@@ -46,7 +46,7 @@ public class ImageServingTests extends NewTestTemplate {
     upload.selectFileToUpload(PageContent.FILE);
     upload.typeFileName(fileName);
     upload.checkIgnoreAnyWarnings();
-    FilePagePageObject filePage = upload.clickUploadButton();
+    FilePage filePage = upload.clickUploadButton();
     filePage.verifySelectedTab("about");
     filePage.verifyHeader(fileName);
 

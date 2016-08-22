@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -34,7 +34,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.clickUploadButton();
     filesPage.verifyFileUploaded(fileName);
 
-    FilePagePageObject file = new FilePagePageObject().open(fileName, true);
+    FilePage file = new FilePage().open(fileName, true);
     imageURL = file.getImageUrl();
     imageThumbnailURL = file.getImageThumbnailUrl();
     file.verifyURLStatus(200, imageURL);
@@ -79,14 +79,14 @@ public class ImageStorageTests extends NewTestTemplate {
         .clickUploadButton()
         .verifyFileUploaded(fileName);
 
-    FilePagePageObject file = new FilePagePageObject().open(fileName, true);
+    FilePage file = new FilePage().open(fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
 
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
     file.getBannerNotifications().verifyNotificationMessage();
     file.verifyHeader(imageNewName);
-    file = new FilePagePageObject().open(imageNewName, true);
+    file = new FilePage().open(imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
     file.getBannerNotifications().verifyNotificationMessage();

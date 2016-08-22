@@ -13,7 +13,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 
-public class FilePagePageObject extends WikiBasePageObject {
+public class FilePage extends WikiBasePageObject {
 
   public static final int ABOUT_TAB = 0;
   public static final int HISTORY_TAB = 1;
@@ -40,7 +40,7 @@ public class FilePagePageObject extends WikiBasePageObject {
   @FindBy(css = ".tabBody.selected")
   private WebElement tabBody;
 
-  public FilePagePageObject open(String fileName, boolean noRedirect) {
+  public FilePage open(String fileName, boolean noRedirect) {
     String url =
         urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + fileName;
     if (noRedirect) {
@@ -51,7 +51,7 @@ public class FilePagePageObject extends WikiBasePageObject {
     return this;
   }
 
-  public FilePagePageObject open(String fileName) {
+  public FilePage open(String fileName) {
     return open(fileName, false);
   }
 

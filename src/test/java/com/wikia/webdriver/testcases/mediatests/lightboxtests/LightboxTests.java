@@ -21,7 +21,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialMostLinkedFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUncategorizedFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.SpecialUnusedFilesPage;
@@ -149,7 +149,7 @@ public class LightboxTests extends NewTestTemplate {
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxVideo();
-    FilePagePageObject filePage = lightbox.clickTitle();
+    FilePage filePage = lightbox.clickTitle();
     filePage.verifyTabsExistVideo();
     filePage.verifyEmbeddedVideoIsPresent();
   }
@@ -173,7 +173,7 @@ public class LightboxTests extends NewTestTemplate {
     lightbox.verifyLightboxImage();
     // lightbox.verifyTitleUrl(fileUrl);
     // lightbox.verifyMoreInfoUrl(fileUrl);
-    FilePagePageObject filePage = lightbox.clickTitle();
+    FilePage filePage = lightbox.clickTitle();
     filePage.verifyTabsExistImage();
   }
 }
