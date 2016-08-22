@@ -105,6 +105,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     new TemplateEditPage().open("temp_template");
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
     driver.switchTo().frame(builderIFrame);
+    wait.forElementVisible(previewArea);
 
     return this;
   }
