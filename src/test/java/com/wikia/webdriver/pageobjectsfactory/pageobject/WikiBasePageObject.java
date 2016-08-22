@@ -536,27 +536,6 @@ public class WikiBasePageObject extends BasePageObject {
     }
   }
 
-  public void logOut(WebDriver driver) {
-    try {
-      driver.manage().deleteAllCookies();
-      driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.LOGOUT);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
-    }
-    wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out", true, driver);
-  }
-
-  public void logOut(String wikiURL) {
-    try {
-      getUrl(wikiURL + URLsContent.LOGOUT);
-    } catch (TimeoutException e) {
-      PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
-    }
-    wait.forElementPresent(LOGIN_BUTTON_CSS);
-    PageObjectLogging.log("logOut", "user is logged out", true, driver);
-  }
-
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
     String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
