@@ -163,7 +163,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
    * "More Options" link
    */
   public SpecialNewFilesPage hideWarnings() {
-    jsActions.execute("$(\"div.status\").attr(\"style\", \"display=none\")");
+    jsActions.execute("$('div.status').attr('style', 'display=none')");
 
     return this;
   }
