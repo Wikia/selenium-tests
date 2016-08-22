@@ -25,7 +25,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -542,13 +542,13 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new PhotoAddComponentObject(driver);
   }
 
-  public FilePagePageObject clickVideoDetailsButton() {
+  public FilePage clickVideoDetailsButton() {
     wait.forElementVisible(videoTitle);
     jsActions.execute("$('a.details.sprite').css('visibility', 'visible')");
     wait.forElementVisible(videoDetailsButton);
     videoDetailsButton.click();
     PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-    return new FilePagePageObject(driver);
+    return new FilePage();
   }
 
   private void clickAddCategoryButton() {

@@ -2,11 +2,13 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -80,10 +82,6 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
-  public InfoboxBuilderPage() {
-    super();
-  }
-
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
@@ -91,6 +89,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
+    wait.forElementVisible(previewArea);
 
     return this;
   }
@@ -107,6 +106,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     new TemplateEditPage().open("temp_template");
     getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
     driver.switchTo().frame(builderIFrame);
+    wait.forElementVisible(previewArea);
 
     return this;
   }
@@ -313,12 +313,21 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage verifyTooltipOnHover() {
+  public InfoboxBuilderPage hoverMouseOverComponent(int index){
     wait.forElementVisible(component.get(0));
-    builder.moveToElement(component.get(0)).perform();
-    Assertion.assertTrue(tooltip.isDisplayed());
+    builder.moveToElement(component.get(0)).pause(500).perform();
 
     return this;
+  }
+
+  public boolean isTooltipVisible() {
+    try{
+      wait.forElementVisible(tooltip);
+      return true;
+    }catch (TimeoutException e){
+      PageObjectLogging.logInfo("Tooltip not visible");
+      return false;
+    }
   }
 
   public InfoboxBuilderPage moveToLastComponent() {
@@ -329,6 +338,23 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
+  /**
+   _   _                     __     _
+   | | | |,^.        ,'.      | `.  | |
+   | | |  ,. `.    ,'   `.    | . `.| |
+   | | | .--`,'  ,'  ,^.  `.  | |`.   |
+   | | | |`. `. `. ,'___`. ,' | |  `| |
+   |_| |_|  `. `. `._____,'   |_|   | |
+   `/                    `.|
+   `
+   __               _   _   __         ____  __     _
+   | `. ,^.       ,' | | | |  `.      |  __| | `.  | |
+   | . ' , |  /`,' . | | | | |`.`.    | |__  | . `.| |
+   | |`.'| |  `. ,'| | | | | |  `.`.  |  __| | |`.   |
+   | |   | | ,' . `. | | | | |____` / | |__  | |  `| |
+   |_|   | | \,' `.__| |_| |_______/   `.__| |_|   | |
+   `.|                                       `.|
+   */
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
@@ -339,6 +365,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
         .clickAndHold(draggedElement)
         .moveByOffset(0, targetY)
         .release(draggedElement)
+        .pause(500)
         .perform();
 
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
