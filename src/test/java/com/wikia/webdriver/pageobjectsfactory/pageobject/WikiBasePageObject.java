@@ -35,7 +35,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
@@ -60,7 +60,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -252,9 +251,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialVideosPageObject(driver);
   }
 
-  public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {
+  public SpecialNewFilesPage openSpecialNewFiles(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_NEW_FILES);
-    return new SpecialNewFilesPageObject(driver);
+    return new SpecialNewFilesPage();
   }
 
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {

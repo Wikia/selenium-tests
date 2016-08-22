@@ -47,7 +47,7 @@ public class SignUpPageObject extends WikiBasePageObject {
   private WebElement blurryWordHidden;
   @FindBy(css = "input.big")
   private WebElement signupButton;
-  @FindBy(css = "#mw-content-text .wikia-button-facebook")
+  @FindBy(css = ".signup-provider-facebook")
   private WebElement facebookSignUpButton;
 
   private By errorMsgBy = By.className("error-msg");
@@ -142,10 +142,10 @@ public class SignUpPageObject extends WikiBasePageObject {
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    wait.forElementVisible(facebookSignUpButton);
+    wait.forElementClickable(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
-    return new FacebookSignupModalComponentObject(driver);
+    return new FacebookSignupModalComponentObject();
   }
 
   public AlmostTherePageObject submit(String email, String password) {

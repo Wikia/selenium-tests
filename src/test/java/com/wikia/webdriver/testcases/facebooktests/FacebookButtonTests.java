@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 import org.testng.annotations.Test;
@@ -41,8 +41,8 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnForcedLoginModal")
   public void facebookButtonIsVisibleOnForcedLoginModal() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
+    SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
+    specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
 
     AuthModal authModal = new AuthModal();
