@@ -47,6 +47,23 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   /**
+   * LOGGED-IN USERS ON DESKTOP SECTION
+   */
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+
+  public void loggedInUserCanExpandPostEditorOnDesktop() {
+    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
+
+    postsCreator.clickPostCreator();
+
+    Assertion.assertTrue(postsCreator.isExpanded());
+    Assertion.assertFalse(postsCreator.isPostButtonActive());
+  }
+
+  /**
    * TESTING METHODS SECTION
    */
 
@@ -77,6 +94,4 @@ public class CreatingPostTests extends NewTestTemplate {
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
-
-
 }

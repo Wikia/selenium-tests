@@ -20,6 +20,12 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
+  @FindBy (css = ".discussion-inline-editor.is-active")
+  private WebElement activeDiscussionEditor;
+
+  @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
+  private WebElement editorSubmit;
+
   public PostsCreatorDesktop clickPostCreator() {
     postCreator.click();
     return this;
@@ -27,6 +33,14 @@ public class PostsCreatorDesktop extends BasePageObject {
 
   public boolean isModalDialogVisible() {
     return dialogSignIn.isDisplayed();
+  }
+
+  public boolean isExpanded() {
+    return activeDiscussionEditor.isDisplayed();
+  }
+
+  public boolean isPostButtonActive() {
+    return editorSubmit.isEnabled();
   }
 
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {
