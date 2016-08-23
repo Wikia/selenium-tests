@@ -20,8 +20,8 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
-  @FindBy (css = ".discussion-inline-editor.is-active")
-  private WebElement activeDiscussionEditor;
+  @FindBy (css = ".discussion-inline-editor")
+  private WebElement discussionEditor;
 
   @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
   private WebElement editorSubmit;
@@ -36,7 +36,7 @@ public class PostsCreatorDesktop extends BasePageObject {
   }
 
   public boolean isExpanded() {
-    return activeDiscussionEditor.isDisplayed();
+    return discussionEditor.getAttribute("class").contains("is-active");
   }
 
   public boolean isPostButtonActive() {
