@@ -50,6 +50,7 @@ public class WamPageTests extends NewTestTemplate {
   }
 
   @Test(groups = {"WamPage004", "WamPageTests"})
+  @RelatedIssue(issueID = "SUS-923")
   public void wam_004_compareTabAndHeaderName() {
     for (WamTab tab : WamTab.values()) {
       wam.selectTab(tab);
