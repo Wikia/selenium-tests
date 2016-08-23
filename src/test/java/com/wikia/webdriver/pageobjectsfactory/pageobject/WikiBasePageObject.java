@@ -643,13 +643,6 @@ public class WikiBasePageObject extends BasePageObject {
         .toString();
   }
 
-  public void openSpecialPromoteOnCurrentWiki() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String url = (String) js.executeScript("return wgServer");
-    getUrl(url + "/" + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
-  }
-
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
         URLsContent.VEACTION_EDIT));

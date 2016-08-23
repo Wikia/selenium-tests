@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.configuration.EnvType;
 
 public class UrlBuilder {
 
-  private static final String PROD_URL_FORMAT = "http://%s%s.%s/";
-  private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s/";
+  private static final String PROD_URL_FORMAT = "http://%s%s.%s";
+  private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
   private String env;
 
   public UrlBuilder() {
@@ -19,31 +19,8 @@ public class UrlBuilder {
     this.env = env;
   }
 
-  public static String getUrlForPageWithWWW(String pageName) {
-    String environment = Configuration.getEnv();
-    String wikiName = Configuration.getWikiName();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-    wikiName = wikiName.equals("wikia") ? "" : wikiName + ".";
-
-    return environment + "www." + wikiName + "wikia.com" + pageName;
-  }
-
-  public static String getHostForWiki() {
-    return getHostForWiki(Configuration.getWikiName());
-  }
-
-  public static String getHostForWiki(String wikiName) {
-    String environment = Configuration.getEnv();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-    wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
-
-    return environment + wikiName + "wikia.com/";
-  }
-
-  public static String getUrlForPage(String pageName) {
-    return getHostForWiki() + pageName;
+  public String getUrlForPageWithWWW(String pageName) {
+    return getUrlForWiki(true) + pageName;
   }
 
   public static String getUrl(String wikiName, String path) {
@@ -52,6 +29,10 @@ public class UrlBuilder {
     environment = environment.equals("prod") ? "" : environment + ".";
 
     return "http://" + environment + wikiName + ".wikia.com" + path;
+  }
+
+  public String getUrlForPage(String pageName) {
+    return getUrlForWiki() + pageName;
   }
 
   public String getUrlForPage(Page page) {
@@ -63,9 +44,9 @@ public class UrlBuilder {
 
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = "";
-    if(wikiName.endsWith("wikia")){
+    if (wikiName.endsWith("wikia")) {
       url = String.format("/%s/%s", getUrlForWiki(wikiName), wikiPath);
-    }else {
+    } else {
       url = String.format("/%s/wiki/%s", getUrlForWiki(wikiName), wikiPath);
     }
 
@@ -87,6 +68,10 @@ public class UrlBuilder {
 
   public String getUrlForWiki(String wikiName) {
     return getUrlForWiki(wikiName, false);
+  }
+
+  public String getUrlForWiki(boolean addWWW) {
+    return getUrlForWiki(Configuration.getWikiName(), addWWW);
   }
 
   public String getUrlForWiki(String wikiName, boolean addWWW) {
