@@ -36,6 +36,26 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] leaderboardSlotOnPageWithInfobox() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox",
+            "wka.life/_project43//article"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] leaderboardSlotOnPageWithoutInfobox() {
+    return new Object[][]{
+        {
+            "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header",
+            "wka.life/_project43//article"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] allSlots() {
     return new Object[][]{
         {
@@ -48,8 +68,7 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] kruxIntegration() {
     return new Object[][]{
-        {"elderscrolls", "Skyrim"},
-        {"wowwiki", "Portal:Main"}
+        {"project43", "SyntheticTests/Krux"}
     };
   }
 
@@ -57,13 +76,14 @@ public class MobileAdsDataProvider {
   public static Object[][] dfpParamsSynthetic() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/DfpParams",
-            "wka.life/_adtest//article",
+            null,
+            "wka.life/_project43//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"life\"",
-                "\"s1\":\"_adtest\"",
+                "\"s1\":\"_project43\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -79,6 +99,18 @@ public class MobileAdsDataProvider {
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
             )
+        },
+        {
+            "project43",
+            "SyntheticTests/RubiconFastlane",
+            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "wka.life/_project43//article",
+            "MOBILE_TOP_LEADERBOARD",
+            Collections.emptyList(),
+            Arrays.asList(
+                "\"rpfl_7450\":[\"15_tier2000",
+                "\"43_tier2000"
+            )
         }
     };
   }
@@ -89,7 +121,6 @@ public class MobileAdsDataProvider {
         {
             "yugioh",
             "Dark_Magician",
-            null,
             "wka.gaming/_yugioh//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -127,7 +158,6 @@ public class MobileAdsDataProvider {
         {
             "fallout",
             "Fallout",
-            null,
             "wka.gaming/_fallout//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -168,7 +198,6 @@ public class MobileAdsDataProvider {
         {
             "runescape",
             "Grew",
-            null,
             "wka.gaming/_runescape//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -205,12 +234,11 @@ public class MobileAdsDataProvider {
         {
             "lego",
             "LEGO_Wiki",
-            null,
-            "wka.life/_lego//home",
+            "wka.ent/_lego//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
-                "\"s0\":\"life\"",
-                "\"s0v\":\"lifestyle\"",
+                "\"s0\":\"ent\"",
+                "\"s0v\":\"movies\"",
                 "\"s0c\":[\"toys\"]",
                 "\"s1\":\"_lego\"",
                 "\"s2\":\"home\"",
@@ -241,7 +269,6 @@ public class MobileAdsDataProvider {
         {
             "civilization",
             "Category:Browse",
-            null,
             "wka.gaming/_civilization//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -277,7 +304,6 @@ public class MobileAdsDataProvider {
         {
             "starcraft",
             "StarCraft_Wiki",
-            null,
             "wka.gaming/_starcraft//home",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -317,7 +343,6 @@ public class MobileAdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            null,
             "wka.ent/_overlordmaruyama//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
@@ -345,18 +370,6 @@ public class MobileAdsDataProvider {
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
             )
-        },
-        {
-            "adtest",
-            "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_adtest//article",
-            "MOBILE_TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"rpfl_7450\":[\"15_tier2000",
-                "\"43_tier2000"
-            )
         }
     };
   }
@@ -365,7 +378,7 @@ public class MobileAdsDataProvider {
   public static Object[][] dfpEvolveParamsMercury() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/DfpParams",
             4403,
             "ev/wikia_intl/ros",
@@ -373,7 +386,7 @@ public class MobileAdsDataProvider {
             Arrays.asList(
                 "\"s0\":\"life\"",
                 "\"s0v\":\"lifestyle\"",
-                "\"s1\":\"_adtest\"",
+                "\"s1\":\"_project43\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
                 "\"hostpre\":\"",
@@ -393,11 +406,41 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] providersChainMercury() {
+    return new Object[][]{
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.MOBILE_TOP_LB,
+            "DirectGptMobile; RemnantGptMobile"
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.MOBILE_TOP_LB,
+            "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] disableGptMercury() {
     return new Object[][]{
         {
-            "adtest", "SyntheticTests/ProvidersChain", "InstantGlobals.wgSitewideDisableGpt=1",
-            "MOBILE_TOP_LEADERBOARD", "DirectGptMobile; RemnantGptMobile", ""
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            AdsContent.MOBILE_TOP_LB,
+            ""
+        },
+        {
+            "project43",
+            "SyntheticTests/ProvidersChain",
+            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            AdsContent.MOBILE_TOP_LB,
+            "RubiconFastlane"
         },
     };
   }
@@ -417,9 +460,9 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"project43", "SyntheticTests/AdType/1xHop", "mobile", "\"source\":\"mobile/LB\""},
-        {"project43", "SyntheticTests/AdType/2xHop", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
-        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "mobile", "\"test-marker\":\"42\""}
+        {"project43", "SyntheticTests/AdType/1xHop", "DirectGptMobile", "mobile", "\"source\":\"mobile/LB\""},
+        {"project43", "SyntheticTests/AdType/2xHop", "RemnantGptMobile", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
+        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "DirectGptMobile", "mobile", "\"test-marker\":\"42\""}
     };
   }
 
@@ -430,7 +473,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/MobileLeaderboard"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 100))
                 .put("lineItemId", 272132532)
                 .put("src", "mobile")
@@ -440,7 +483,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/320x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(320, 50))
                 .put("lineItemId", 257602332)
                 .put("src", "mobile")
@@ -470,7 +513,7 @@ public class MobileAdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/300x50"),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MOBILETOP_LB)
+                .put("slotName", AdsContent.MOBILE_TOP_LB)
                 .put("slotSize", new Dimension(300, 50))
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")

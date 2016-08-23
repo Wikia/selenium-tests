@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import com.google.common.collect.ImmutableMap;
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class AdsAmazonObject extends AdsBaseObject {
 
   private static final String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb";
+  private static final String AMAZON_BID_URL = "aax.amazon-adsystem.com/e/dtb/bid";
   private static final String AMAZON_SCRIPT = "script[src*=\'" + AMAZON_SCRIPT_URL + "\']";
   private static final String AMAZON_IFRAME = "iframe[src*=\'" + AMAZON_SCRIPT_URL + "\']";
   private static final String AMAZON_GPT_PATTERN = "\"amznslots\":[\"a";
@@ -98,6 +100,10 @@ public class AdsAmazonObject extends AdsBaseObject {
     } else {
       throw new NoSuchElementException("Amazon params not found on page");
     }
+  }
+
+  public void verifyResponseIsValid(NetworkTrafficInterceptor networkTab) {
+    wait.forSuccessfulResponse(networkTab, AMAZON_BID_URL);
   }
 
   public AdsAmazonObject clickAmazonArticleLink(String linkName) {

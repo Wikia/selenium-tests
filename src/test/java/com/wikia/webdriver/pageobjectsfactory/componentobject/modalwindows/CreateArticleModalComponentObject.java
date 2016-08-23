@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -66,7 +67,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
    * standard - layout with video and image placeholders top - layout for top10List page blank -
    * blank page's layout
    *
-   * @param String layout
+   * @param layout
    */
   private void chooseLayout(String layout) {
     if ("standard".equals(layout)) {
@@ -85,8 +86,14 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyCreateNewArticleModal() {
-    wait.forElementVisible(addAPageButton);
+  public boolean isCreateNewArticleModalVisible() {
+    try {
+      wait.forElementVisible(addAPageButton);
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
   }
 
 }

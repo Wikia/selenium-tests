@@ -38,7 +38,7 @@ public class GoogleFormTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.widget = new GoogleFormWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")

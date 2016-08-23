@@ -16,12 +16,13 @@ public class TestAdsHopMercury extends TemplateNoFirstLoad {
   )
   public void adsHopPostMessageMercury(String wikiName,
                                        String article,
+                                       String containerId,
                                        String src,
                                        String extraParam) {
     String testPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsHopObject adsHopObject = new AdsHopObject(driver, testPage);
-    adsHopObject.verifyClassHidden(AdsContent.MOBILETOP_LB, src);
-    adsHopObject.verifyPostMessage(AdsContent.MOBILETOP_LB, src, extraParam);
-    adsHopObject.verifyLineItemIdsDiffer(AdsContent.MOBILETOP_LB);
+    adsHopObject.verifyClassHidden(AdsContent.MOBILE_TOP_LB, containerId);
+    adsHopObject.verifyPostMessage(AdsContent.MOBILE_TOP_LB, src, extraParam);
+    adsHopObject.verifyLineItemIdsDiffer(AdsContent.MOBILE_TOP_LB);
   }
 }

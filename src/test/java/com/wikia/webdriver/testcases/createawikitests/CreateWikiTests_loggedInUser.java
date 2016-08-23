@@ -3,18 +3,17 @@ package com.wikia.webdriver.testcases.createawikitests;
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.helpers.WikiaProperties;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_User"})
@@ -25,8 +24,6 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "QAART-688", comment = "the deletion part can not be checked "
-                                                 + "until the issue is fixed")
   public void CreateNewWiki_001_createDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -41,12 +38,14 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
+    DeletePageObject deletePage = article.deleteUsingDropdown();
+    deletePage.submitDeletion();
     article.verifyUserLoggedIn(credentials.userName);
+
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "MAIN-6928", comment = "the related issue treates about unstable environment of this test")
   public void CreateNewWiki_002_createWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);

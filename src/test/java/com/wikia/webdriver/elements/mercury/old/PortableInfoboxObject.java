@@ -21,14 +21,8 @@ public class PortableInfoboxObject {
   @FindBy(css = ".portable-infobox")
   private WebElement infoboxWrapper;
 
-  @FindBy(css = ".portable-infobox-hero-image")
-  private WebElement mainImage;
-
-  @FindBy(css = ".portable-infobox .pi-hero-title")
-  private WebElement title;
-
-  @FindBy(css = ".portable-infobox .pi-title")
-  private WebElement titleSmallImage;
+  @FindBy(css = ".portable-infobox .pi-data .article-media-thumbnail-image-wrapper img")
+  private WebElement imageInInfobox;
 
   @FindBy(css = ".portable-infobox .pi-expand-button")
   private WebElement expandButton;
@@ -48,11 +42,11 @@ public class PortableInfoboxObject {
   @FindBy(css = ".portable-infobox .article-video figcaption")
   private WebElement videoCaption;
 
-  @FindBy(css = ".pi-title img")
-  private WebElement imageInTitle;
-
   @FindBy(css = ".pi-image-collection")
   private WebElement imageInCollection;
+
+  @FindBy(css = ".portable-infobox .article-media-linked-gallery img")
+  private List<WebElement> galleryImageList;
 
   @FindBy(css = ".portable-infobox .article-media-linked-gallery button")
   private List<WebElement> galleryButtonList;
@@ -80,11 +74,6 @@ public class PortableInfoboxObject {
 
   @FindBy(css = ".pi-header")
   private List<WebElement> headers;
-
-  @FindBy(css = ".portable-infobox .pi-image img")
-  private List<WebElement> images;
-
-  private By imageInTitleSelector = By.cssSelector(".pi-title img");
 
   private Wait wait;
   private WebDriver driver;
@@ -124,17 +113,15 @@ public class PortableInfoboxObject {
   }
 
   public PortableInfoboxObject clickExpandButton() {
-    wait.forElementVisible(expandButton);
-    expandButton.click();
+    wait.forElementClickable(expandButton).click();
 
     return this;
   }
 
   public PortableInfoboxObject clickExternalLink(int index) {
     Assertion.assertFalse(externalLinks.isEmpty());
-    wait.forElementVisible(externalLinks.get(index));
+    wait.forElementClickable(externalLinks.get(index)).click();
 
-    externalLinks.get(index).click();
     return this;
   }
 
@@ -144,39 +131,32 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject clickMainImage() {
-    wait.forElementVisible(mainImage);
-    mainImage.click();
+  public PortableInfoboxObject clickOnImageInInfobox() {
+    wait.forElementClickable(imageInInfobox).click();
 
     return this;
   }
 
   public PortableInfoboxObject clickVideo() {
-    wait.forElementVisible(video);
-    video.click();
+    wait.forElementClickable(video).click();
+
+    return this;
+  }
+
+  public PortableInfoboxObject clickGalleryImage(int index) {
+    wait.forElementClickable(galleryImageList.get(index)).click();
 
     return this;
   }
 
   public PortableInfoboxObject clickGalleryButton(int index) {
-    Assertion.assertFalse(galleryButtonList.isEmpty());
-    wait.forElementVisible(galleryButtonList.get(index));
-
-    galleryButtonList.get(index).click();
+    wait.forElementClickable(galleryButtonList.get(index)).click();
 
     return this;
   }
 
   public PortableInfoboxObject clickNextImageArrow() {
-    wait.forElementVisible(nextImageArrow);
-    nextImageArrow.click();
-
-    return this;
-  }
-
-  public PortableInfoboxObject isMainImageVisible() {
-    wait.forElementVisible(mainImage);
-    PageObjectLogging.log("Main image", MercuryMessages.VISIBLE_MSG, true);
+    wait.forElementClickable(nextImageArrow).click();
 
     return this;
   }
@@ -187,23 +167,16 @@ public class PortableInfoboxObject {
     return this;
   }
 
-  public PortableInfoboxObject isTitleOverImageVisible() {
-    wait.forElementVisible(title);
-    PageObjectLogging.log("Title over image", MercuryMessages.VISIBLE_MSG, true);
-
-    return this;
-  }
-
-  public PortableInfoboxObject isTitleAboveImageVisible() {
-    wait.forElementVisible(titleSmallImage);
-    PageObjectLogging.log("Title above image", MercuryMessages.VISIBLE_MSG, true);
-
-    return this;
-  }
-
   public PortableInfoboxObject isImageInTitleNotVisible() {
-    wait.forElementNotVisible(imageInTitleSelector);
-    PageObjectLogging.log("Main image title", MercuryMessages.INVISIBLE_MSG, true);
+    wait.forElementNotVisible(By.cssSelector(".pi-title img"));
+    PageObjectLogging.log("Hero image title", MercuryMessages.INVISIBLE_MSG, true);
+
+    return this;
+  }
+
+  public PortableInfoboxObject isTitleNotVisible() {
+    wait.forElementNotVisible(By.cssSelector(".portable-infobox .pi-title"));
+    PageObjectLogging.log("Portable infobox title", MercuryMessages.INVISIBLE_MSG, true);
 
     return this;
   }
@@ -254,30 +227,6 @@ public class PortableInfoboxObject {
     wait.forElementVisible(videoCaption);
     PageObjectLogging.log("Video caption", MercuryMessages.VISIBLE_MSG, true);
 
-    return this;
-  }
-
-  /**
-   * Hero image is the image that appears on the top of infobox
-   */
-  public PortableInfoboxObject isHeroImageCentered() {
-    Assertion.assertEquals(images.get(0).getCssValue("vertical-align"), "middle");
-    PageObjectLogging.log("Hero image", "is centered", true);
-
-    return this;
-  }
-
-  public PortableInfoboxObject isHeroImageSquare() {
-    wait.forElementVisible(mainImage);
-    Assertion.assertEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
-    PageObjectLogging.log("Hero image", "is square", true);
-    return this;
-  }
-
-  public PortableInfoboxObject isNotHeroImageSquare() {
-    wait.forElementVisible(mainImage);
-    Assertion.assertNotEquals(mainImage.getSize().getHeight(), mainImage.getSize().getWidth());
-    PageObjectLogging.log("Hero image", "is not square", true);
     return this;
   }
 

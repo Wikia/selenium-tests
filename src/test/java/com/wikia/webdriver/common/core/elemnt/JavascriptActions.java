@@ -74,6 +74,10 @@ public class JavascriptActions {
             element);
   }
 
+  public void scrollToBottom(WebDriver driver) {
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+  }
+
   public void scrollToElement(By elementBy) {
     try {
       js.executeScript(

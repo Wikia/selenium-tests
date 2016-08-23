@@ -68,7 +68,11 @@ public class ForumNotificationsTests extends NewTestTemplate {
 
   @Test(groups = {"ForumNotificationsTests_004", "ForumNotificationsTests",
                   "NotificationsTests"},
-      dependsOnMethods = {"forumNotificationsTests_003_userCLeavesReply"})
+      dependsOnMethods = {
+          "forumNotificationsTests_003_userCLeavesReply",
+          "forumNotificationsTests_002_userBLeavesReply",
+          "forumNotificationsTests_001_userAStartsDiscussion"
+      })
   @Execute(asUser = User.USER)
   public void userIsNotifiedWhenRegularAndStaffUsersReplyToHerDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);

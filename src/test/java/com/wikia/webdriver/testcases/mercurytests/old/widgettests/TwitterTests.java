@@ -30,14 +30,14 @@ public class TwitterTests extends NewTestTemplate {
 
   private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/TwitterMercury/OneWidget";
   private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/TwitterMercury/MultipleWidgets";
-  private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/TwitterMercury/IncorrectWidget";
+  private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "TwitterMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.widget = new TwitterWidgetPageObject(driver);
   }
 
@@ -89,12 +89,12 @@ public class TwitterTests extends NewTestTemplate {
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryTwitterWidgetTest_005", enabled = false)
+  @Test(groups = "MercuryTwitterWidgetTest_005")
   public void MercuryTwitterWidgetTest_005_isErrorPresent() {
     init();
 
     widget.createIncorrect(TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/wiki/" + TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

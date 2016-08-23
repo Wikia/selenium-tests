@@ -3,51 +3,58 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.List;
-import org.openqa.selenium.NoSuchElementException;
 
 public class Navigation {
 
-  @FindBy(css = ".side-nav-menu__item.main")
+  @FindBy(css = ".wikia-nav--login")
   private WebElement signInRegisterButton;
 
-  @FindBy(css = ".side-nav-menu__item.back")
+  @FindBy(css = ".wikia-nav__back")
   private WebElement backButton;
 
-  @FindBy(css = ".side-nav-menu__item.menu")
+  @FindBy(css = ".nav-menu__item.nav-menu--root")
   private List<WebElement> subMenuLinks;
 
-  @FindBy(css = "li.side-nav-menu__item a")
+  @FindBy(css = "li.nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
   @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
   private WebElement recentWikiActivityLink;
 
-  @FindBy(css = ".profile-link")
-  private WebElement userProfile;
-
-  @FindBy(css = ".main")
+  @FindBy(css = ".wikia-nav__header")
   private WebElement navigationMainHeader;
 
-  @FindBy(css = ".side-nav-menu__footer")
-  private WebElement homeOfFandomFooter;
-
-  @FindBy(css = "li.games")
+  @FindBy(css = ".nav-menu--games")
   private WebElement gamesHub;
 
-  @FindBy(css = "li.movies")
+  @FindBy(css = ".nav-menu--movies")
   private WebElement moviesHub;
 
-  @FindBy(css = "li.tv")
+  @FindBy(css = ".nav-menu--tv")
   private WebElement tvHub;
 
+  @FindBy(css = ".wikia-nav__avatar")
+  private WebElement userAvatar;
 
-  private By localNavMenu = By.cssSelector(".local-nav-menu");
+  @FindBy(css = ".wikia-nav--profile-link")
+  private WebElement userProfileLink;
+
+  @FindBy(css = ".wikia-nav--logout")
+  private WebElement logoutLink;
+
+  @FindBy(css = ".nav-menu__header")
+  private WebElement exploreWikiHeader;
+
   private By navigationComponent = By.cssSelector(".side-nav-menu");
   private WebDriver driver;
   private Wait wait;
@@ -61,18 +68,28 @@ public class Navigation {
     PageFactory.initElements(driver, this);
   }
 
-  public Navigation clickOnSignInRegisterButton() {
+  public RegisterPage clickOnSignInRegisterButton() {
     PageObjectLogging.logInfo("Open login page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 
-    return this;
+    return new RegisterPage(driver);
   }
 
   public Navigation clickBackButton() {
     PageObjectLogging.logInfo("Go back to previous navigation level");
     wait.forElementClickable(backButton);
     backButton.click();
+
+    return this;
+  }
+
+  public Navigation clickExploreWikiHeader() {
+    PageObjectLogging.logInfo("Click 'Explore Wiki' header");
+    wait.forElementClickable(exploreWikiHeader);
+
+    exploreWikiHeader.click();
+    loading.handleAsyncPageReload();
 
     return this;
   }
@@ -127,51 +144,49 @@ public class Navigation {
     return this;
   }
 
-  public boolean isUserProfileLinkVisible() {
-    try {
-      return userProfile.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-
   public boolean isMainHeaderVisible() {
-    try {
-      return navigationMainHeader.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(navigationMainHeader);
   }
 
   public boolean isBackButtonVisible() {
-    try {
-      return backButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+    return isElementVisible(backButton);
   }
 
-  public boolean isFooterVisible() {
-    try {
-      return homeOfFandomFooter.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
+  public boolean isUserAvatarVisible() {
+    return isElementVisible(userAvatar);
+  }
+
+  public boolean isUserProfileLinkVisible() {
+    return isElementVisible(userProfileLink);
+  }
+
+  public boolean isLogoutLinkVisible() {
+    return isElementVisible(logoutLink);
+  }
+
+  public boolean isExploreWikiHeaderVisible() {
+    return isElementVisible(exploreWikiHeader);
   }
 
   public boolean areHubLinksVisible() {
+    return isElementVisible(gamesHub)
+        && isElementVisible(moviesHub)
+        && isElementVisible(tvHub);
+  }
+
+  private boolean isElementVisible(WebElement element) {
     try {
-      return gamesHub.isDisplayed()
-          && moviesHub.isDisplayed()
-          && tvHub.isDisplayed();
+      return element.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
   }
+
+  public String getNavigationHeaderText() {
+    wait.forElementVisible(navigationMainHeader);
+
+    return navigationMainHeader.getText();
+  }
+
 }

@@ -31,7 +31,7 @@ public class SignupPageObject {
   private WebElement signupBirthYear;
   @FindBy(css = "#signupSubmit")
   private WebElement signupSubmitButton;
-  @FindBy(css = ".avatar")
+  @FindBy(css = ".wikia-nav__avatar")
   private WebElement avatar;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[1]/small")
   private WebElement emailError;
@@ -106,11 +106,6 @@ public class SignupPageObject {
     new TopBar(driver).openNavigation();
     wait.forElementVisible(avatar);
     Assertion.assertTrue(avatar.isDisplayed());
-  }
-
-  public void verifyEmailInUseError() {
-    wait.forElementVisible(emailError);
-    Assertion.assertEquals(emailError.getText(), "Email is already registered on Wikia");
   }
 
   public void verifyUsernameTakenError() {

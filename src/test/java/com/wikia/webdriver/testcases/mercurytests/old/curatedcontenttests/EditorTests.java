@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.CuratedContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -70,7 +69,7 @@ public class EditorTests extends NewTestTemplate {
     this.uploadImage = new UploadImageModalComponentObject(driver);
     this.search = new SearchForImagePageObject(driver);
     this.croppingTool = new CroppingToolPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
     this.loading = new Loading(driver);
   }
 
@@ -85,7 +84,6 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_001")
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when run in parallel")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
     init();
 
@@ -121,7 +119,6 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
-  @RelatedIssue(issueID = "XW-829, XW-1281", comment = "Unstable when run in parallel")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     init();
 
@@ -177,7 +174,6 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_003")
-  @RelatedIssue(issueID = "XW-829", comment = "Unstable when runned in paralel")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
     init();
 

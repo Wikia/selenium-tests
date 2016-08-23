@@ -5,6 +5,7 @@ package com.wikia.webdriver.testcases.mediatests.addvideo;
 
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
@@ -14,8 +15,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import org.testng.annotations.Test;
 
 public class VetSpecialVideosTests extends NewTestTemplate {
@@ -24,8 +24,10 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   @Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-7391",
+      comment = "Test Manually. Test is failing as you tube sometime returns a playlist rather than single video")
   public void SpecialVideos_001_Provider() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("cats");
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("flower");
 
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
@@ -33,14 +35,14 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getWikiFileName());
+    FilePage filePage = new FilePage().open(video.getFileName());
 
-    filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
+//    filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
     filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
-    filePage = filePage.open(video.getWikiFileName());
+    filePage = filePage.open(video.getFileName());
     filePage.verifyEmptyFilePage();
   }
 

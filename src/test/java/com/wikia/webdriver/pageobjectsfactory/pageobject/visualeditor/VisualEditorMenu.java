@@ -57,6 +57,32 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private List<WebElement> toolListItems;
   @FindBy(css = ".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
   private WebElement enabledPublishButton;
+  @FindBy(css = ".oo-ui-icon-video")
+  private WebElement videoButton;
+  @FindBy(css = ".oo-ui-icon-gallery")
+  private WebElement galleryButton;
+  @FindBy(css = ".oo-ui-icon-image")
+  private WebElement imageButton;
+  @FindBy(css = ".oo-ui-icon-bullet-list")
+  private WebElement bulletList;
+  @FindBy(css = ".oo-ui-icon-template")
+  private WebElement template;
+  @FindBy(css = ".oo-ui-icon-number-list")
+  private WebElement numberedList;
+  @FindBy(css = ".oo-ui-tool-name-wikiaMapInsert .oo-ui-tool-title")
+  private WebElement map;
+  @FindBy(css = ".oo-ui-icon-reference")
+  private WebElement reference;
+  @FindBy(css = ".oo-ui-icon-references")
+  private WebElement referenceList;
+  @FindBy(css = ".oo-ui-icon-settings")
+  private WebElement pageSettings;
+  @FindBy(css = ".oo-ui-icon-tag")
+  private WebElement categories;
+  @FindBy(css = ".oo-ui-icon-keyboard")
+  private WebElement keyboardShortcuts;
+  @FindBy(css = ".oo-ui-icon-source")
+  private WebElement sourceEditor;
 
   private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
   private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
@@ -66,14 +92,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By outdentBy = By.cssSelector(".oo-ui-icon-outdent-list");
   private By publishButtonDisabled = By
       .cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
-  private By mapBy = By.cssSelector(".oo-ui-tool-name-wikiaMapInsert .oo-ui-tool-title");
   private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
-  private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
-  private By bulletListBy = By.cssSelector(".oo-ui-icon-bullet-list");
-  private By templateBy = By.cssSelector(".oo-ui-icon-template");
-  private By referenceBy = By.cssSelector(".oo-ui-icon-reference");
-  private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
-  private By galleryBy = By.cssSelector(".oo-ui-icon-gallery");
   private By paragraphBy = By.cssSelector(".oo-ui-tool-name-paragraph");
   private By headingBy = By.cssSelector(".oo-ui-tool-name-heading2");
   private By subHeading1By = By.cssSelector(".oo-ui-tool-name-heading3");
@@ -82,10 +101,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By subHeading4By = By.cssSelector(".oo-ui-tool-name-heading6");
   private By preformatedBy = By.cssSelector(".oo-ui-tool-name-preformatted");
   private By menuItemBy = By.cssSelector(".oo-ui-tool-title");
-  private By pageSettingsBy = By.cssSelector(".oo-ui-icon-settings");
-  private By categoriesBy = By.cssSelector(".oo-ui-icon-tag");
-  private By keyboardShortcutsBy = By.cssSelector(".oo-ui-icon-keyboard");
-  private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
   private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
 
   public VisualEditorMenu(WebDriver driver) {
@@ -177,45 +192,37 @@ public class VisualEditorMenu extends WikiBasePageObject {
   public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {
     switch (insert) {
       case MAP:
-        clickInsertItemFromDropDown(mapBy);
+        clickInsertItemFromDropDown(map);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorAddMapDialog(driver);
-      case MEDIA:
-        clickInsertItemFromDropDown(mediaBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-        return new VisualEditorAddMediaDialog(driver);
       case REFERENCE:
-        clickInsertItemFromDropDown(referenceBy);
+        clickInsertItemFromDropDown(reference);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorReferenceDialog(driver);
       case REFERENCE_LIST:
-        clickInsertItemFromDropDown(referenceListBy);
+        clickInsertItemFromDropDown(referenceList);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorReferenceListDialog(driver);
       case TEMPLATE:
-        clickInsertItemFromDropDown(templateBy);
+        clickInsertItemFromDropDown(template);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorInsertTemplateDialog(driver);
       case PAGE_SETTINGS:
-        clickHamburgerItemFromDropDown(pageSettingsBy);
+        clickHamburgerItemFromDropDown(pageSettings);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorOptionsDialog(driver);
       case CATEGORIES:
-        clickHamburgerItemFromDropDown(categoriesBy);
+        clickHamburgerItemFromDropDown(categories);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorOptionsDialog(driver);
       case KEYBOARD_SHORTCUTS:
-        clickHamburgerItemFromDropDown(keyboardShortcutsBy);
+        clickHamburgerItemFromDropDown(keyboardShortcuts);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorKeyboardShortcutsDialog(driver);
       case SOURCE_EDITOR:
-        clickHamburgerItemFromDropDown(sourceEditorBy);
+        clickHamburgerItemFromDropDown(sourceEditor);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
         return new VisualEditorSourceEditorDialog(driver);
-      case GALLERY:
-        clickInsertItemFromDropDown(galleryBy);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-        return new VisualEditorInsertGalleryDialog(driver);
       default:
         throw new NoSuchElementException("Non-existing dialog selected");
     }
@@ -224,35 +231,53 @@ public class VisualEditorMenu extends WikiBasePageObject {
   public void insertList(InsertList insert) {
     switch (insert) {
       case BULLET_LIST:
-        clickInsertItemFromDropDown(bulletListBy);
+        clickInsertItemFromDropDown(bulletList);
         break;
       case NUMBERED_LIST:
-        clickInsertItemFromDropDown(numberbedListBy);
+        clickInsertItemFromDropDown(numberedList);
         break;
     }
     PageObjectLogging.log("selectInsertToInsertList", insert.toString() + " selected", true);
   }
 
-  private void clickInsertItemFromDropDown(By insertBy) {
+  private void clickInsertItemFromDropDown(WebElement insertBy) {
     clickItemFromDropDown(toolListDropDowns.get(this.INSERT_LIST),
-        toolListItems.get(this.INSERT_LIST), insertBy);
+                          toolListItems.get(this.INSERT_LIST), insertBy);
   }
 
-  private void clickHamburgerItemFromDropDown(By insertBy) {
+  private void clickHamburgerItemFromDropDown(WebElement insertBy) {
     clickItemFromDropDown(toolListDropDowns.get(this.HAMBURGER_LIST),
-        toolListItems.get(this.HAMBURGER_LIST), insertBy);
+                          toolListItems.get(this.HAMBURGER_LIST), insertBy);
   }
 
-  private void clickItemFromDropDown(WebElement list, WebElement item, By insertBy) {
+  private void clickItemFromDropDown(WebElement list, WebElement item, WebElement insertBy) {
     wait.forElementClickable(list);
     Actions actions = new Actions(driver);
-    actions.click(list).click(item.findElement(insertBy)).build().perform();
+    actions.click(list).click(insertBy).build().perform();
   }
 
   public VisualEditorHyperLinkDialog clickLinkButton() {
     wait.forElementClickable(linkButton);
     linkButton.click();
     return new VisualEditorHyperLinkDialog(driver);
+  }
+
+  public VisualEditorAddMediaDialog clickVideoButton() {
+    wait.forElementClickable(videoButton);
+    videoButton.click();
+    return new VisualEditorAddMediaDialog(driver);
+  }
+
+  public VisualEditorInsertGalleryDialog clickGalleryButton() {
+    wait.forElementClickable(galleryButton);
+    galleryButton.click();
+    return new VisualEditorInsertGalleryDialog(driver);
+  }
+
+  public VisualEditorAddMediaDialog clickImageButton() {
+    wait.forElementClickable(imageButton);
+    imageButton.click();
+    return new VisualEditorAddMediaDialog(driver);
   }
 
   public void clickCodeButton() {

@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -25,8 +24,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
-          "monitor the issue to find out resolution")
   public void NonSpecificMapTests_001_ClickMapAndVerifyCorrectRedirect() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -63,7 +60,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
     customMapDialog.verifyTemplateListElementVisible(0);
   }
 
-  @RelatedIssue(issueID = "", comment = "Functionaliy will be deprecated. No need to test manually")
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
   @Execute(asUser = User.USER)
@@ -81,8 +77,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
   @Test(groups = {"NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
-          "monitor the issue to find out resolution")
   public void NonSpecificMapTests_005_VerifyMapListElements() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -116,8 +110,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 
   @Test(groups = {"NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
-          "monitor the issue to find out resolution")
   public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -137,6 +129,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
   }
 
   @Test(groups = {"NonSpecificMapTests_010", "NonSpecificMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   public void NonSpecificMapTests_010_VerifyFragmentContentTagVisibility() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -148,8 +141,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 
   @Test(groups = {"NonSpecificMapTests_011", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
-          "monitor the issue to find out resolution")
   public void NonSpecificMapTests_011_VerifyEscapedFragmentPageContent() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -161,9 +152,8 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyPoiPointDescription();
   }
 
-  @RelatedIssue(issueID = " ",
-      comment = "Functionality is being depracated NO need to test manually")
   @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
+  @DontRun(env = {"dev", "sandbox", "preview"})
   @NetworkTrafficDump
   public void NonSpecificMapTests_012_VerifyLinkedArticlePontoRequest() {
     WikiBasePageObject base = new WikiBasePageObject();

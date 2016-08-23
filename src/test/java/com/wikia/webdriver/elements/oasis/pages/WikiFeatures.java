@@ -9,10 +9,10 @@ import java.util.List;
 
 public class WikiFeatures extends BasePageObject {
 
-  @FindBy(css = "#WikiFeatures > ul:nth-child(3) > li:nth-child(1) > div.actions > span > span.button")
+  @FindBy(css = "#WikiFeatures li[data-name=\"wgEnablePortableInfoboxEuropaTheme\"] .actions .button")
   private WebElement europaInfoboxThemeSlider;
 
-  @FindBy(css = "#WikiFeatures > ul:nth-child(3) > li:nth-child(1) > div.actions > span > span.texton")
+  @FindBy(css = "#WikiFeatures li[data-name=\"wgEnablePortableInfoboxEuropaTheme\"] .actions .texton")
   private WebElement europaInfoboxThemeSliderText;
 
   @FindBy(css = "#DeactivateDialog")

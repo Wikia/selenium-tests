@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -45,14 +44,9 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public void verifyEvolveCallMercury() {
-    verifyEvolveInSlot(AdsContent.MOBILETOP_LB);
+    verifyEvolveInSlot(AdsContent.MOBILE_TOP_LB);
     verifyEvolveInSlot(AdsContent.MOBILE_AD_IN_CONTENT);
     verifyEvolveInSlot(AdsContent.MOBILE_PREFOOTER);
   }
 
-  public void verifyEvolveHoppedInSlot(String slotName, String nextProviderSrc) {
-    String nextProviderSlotCss = String.format("div[id*=\'%s/%s\']", nextProviderSrc, slotName);
-    Assertion.assertTrue(isElementOnPage(By.cssSelector(nextProviderSlotCss)));
-    PageObjectLogging.log("Evolve", "Evolve hopped to " + nextProviderSrc, true);
-  }
 }

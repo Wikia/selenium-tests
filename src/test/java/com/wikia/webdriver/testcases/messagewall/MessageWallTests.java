@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.messagewall;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,15 +14,10 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallCloseRemoveThreadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
-
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPage;
 
 public class MessageWallTests extends NewTestTemplate {
 
@@ -30,6 +30,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_001", "MessageWall", "MessageWallTests", "Smoke3"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "SUS-801", comment = "The issue might be the reason for 25% failures of this test")
   public void userCanCreateAndEditMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -162,19 +163,19 @@ public class MessageWallTests extends NewTestTemplate {
    */
   @Test(groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
   public void blockedUserCanCreatePostOnHerMessageWall() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
     boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
     if (!isUserBlocked) {
-      base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-      SpecialBlockPageObject blockPage = new SpecialBlockPageObject(driver).open();
+      blockListPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+      SpecialBlockPage blockPage = new SpecialBlockPage(driver).open();
       blockPage.typeInUserName(credentials.userNameBlockedAccount);
       blockPage.typeExpiration("10 year");
       blockPage.typeReason("block QATestsBlockedUser");
       blockPage.deselectAllSelections();
       blockPage.clickBlockButton();
     }
-    base.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+    blockListPage.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
+        wikiURL);
     MessageWall wall = new MessageWall(driver).open(credentials.userNameBlockedAccount);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();

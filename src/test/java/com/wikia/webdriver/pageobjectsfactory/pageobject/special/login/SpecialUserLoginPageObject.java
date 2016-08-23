@@ -1,5 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.login;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -7,14 +12,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
-  private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
   @FindBy(css = ".WikiaArticle input[name='username']")
   private WebElement userName;
@@ -32,7 +31,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
   private WebElement messagePlaceholder;
   @FindBy(css = ".login-button.big")
   private WebElement continueButtonBig;
-  /*this element exists when parameter ?type=forgotPassword is added to the url*/
+  /* this element exists when parameter ?type=forgotPassword is added to the url */
   @FindBy(css = "a[href='/wiki/Special:UserLogin']")
   private WebElement logInLink;
 
@@ -84,52 +83,25 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
     scrollAndClick(continueButtonBig);
   }
 
-  public void loginAndVerify(String name, String password, String wikiURL) {
-    openSpecialUserLogin(wikiURL);
-    login(name, password);
-    verifyUserLoggedIn(name);
-  }
-
   public void login(String name, String pass) {
     typeInUserName(name);
     typeInPassword(pass);
     clickLoginButton();
   }
 
-  public void remindPassword(String name, String apiToken) {
-    Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
-                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
-    typeInUserName(name);
-    clickForgotPasswordLink();
-  }
-
-  public void remindPasswordNewAuth(String name, String apiToken) {
-    Assertion.assertEquals(resetForgotPasswordTime(name, apiToken),
-                           ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
+  public void remindPasswordNewAuth(String name) {
+    Assertion.assertEquals(resetForgotPasswordTime(name, Configuration.getCredentials().apiToken),
+        ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE);
     typeInUserName(name);
     clickContinueLink();
-  }
-
-  public String setNewPassword() {
-    String randomPassword = Configuration.getCredentials().password + getTimeStamp();
-    typeInNewPassword(randomPassword);
-    retypeInNewPassword(randomPassword);
-    clickLoginButton();
-    PageObjectLogging.log("setNewPassword", "new password is set", true, driver);
-    return randomPassword;
   }
 
   public void verifyMessageAboutNewPassword(String userName) {
     wait.forElementVisible(messagePlaceholder);
     String message = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
     wait.forTextInElement(messagePlaceholder, message);
-    PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present",
-                          true, driver);
-  }
-
-  public void verifyClosedAccountMessage() {
-    wait.forElementVisible(messagePlaceholder);
-    Assertion.assertEquals(messagePlaceholder.getText(), DISABLED_ACCOUNT_MESSAGE);
+    PageObjectLogging.log("newPasswordSentMessage", "Message about new password sent present", true,
+        driver);
   }
 
   public void clickLogInLink() {

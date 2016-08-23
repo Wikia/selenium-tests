@@ -21,11 +21,18 @@ public class SmartBannerTest extends NewTestTemplate {
   private void init() {
     this.smartBanner = new SmartBanner(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.MLP_MAIN_PAGE);
+    new Navigate().toPage(MercurySubpages.MLP_MAIN_PAGE);
   }
 
-  @Test(groups = "mercury_smartBanner_hasFixedPositionOnTopAndCanBeClosed")
-  public void mercury_smartBanner_hasFixedPositionOnTopAndCanBeClosed() {
+  @Test(groups = "mercury_smartBanner_isNotVisibleOnScrollDown")
+  public void mercury_smartBanner_isNotVisibleOnScrollDown() {
+    init();
+
+    smartBanner.scrollDown();
+  }
+
+  @Test(groups = "mercury_smartBanner_canBeClosed")
+  public void mercury_smartBanner_canBeClosed() {
     init();
 
     smartBanner.scrollDown();

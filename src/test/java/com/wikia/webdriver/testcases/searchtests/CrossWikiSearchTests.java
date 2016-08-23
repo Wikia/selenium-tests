@@ -1,15 +1,12 @@
 package com.wikia.webdriver.testcases.searchtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.CrossWikiSearchProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch.CrossWikiSearchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
-
-import org.testng.annotations.Test;
 
 /**
  * Author: Artur Dwornik & Rodrigo Molinero Gomez Date: 29.03.13 Time: 11:22 STAPI01: Verify that
@@ -19,15 +16,11 @@ import org.testng.annotations.Test;
  * results from cross wiki search STAPI04: Verify that no pagination or description is displayed
  * when there are no results STAPI05: Verify that no pagination is displayed when there are results
  * but they are less than 10 STAPI06: Verify that push to top exact match is working correctly for
- * different wikis STAPI07: Verify that Special:PRomote page data is displayed in cross-wiki search
- * results STAPI08: Verify that performing a certain search will always display results in same
- * order STAPI09: Verify that searching for a query with either roman or decimal numbers will
+ * different wikis STAPI09: Verify that searching for a query with either roman or decimal numbers will
  * display expected result in first page
  */
 @Test(groups = "CrossWikiSearch")
 public class CrossWikiSearchTests extends NewTestTemplate {
-
-  Credentials credentials = Configuration.getCredentials();
 
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getExactMatchQueries",
       groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch_1"})
@@ -108,29 +101,12 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyFirstResultTitle(wikiName);
   }
 
-  @Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch_1"})
-  public void crossWikiSearch_007_specialPromoteData() {
-    CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
-    search.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    search.goToSearchPage(wikiCorporateURL);
-    search.searchFor(SearchContent.SEARCH_PHRASE);
-    String searchDescription = search.getFirstDescription();
-    String searchImage = search.getFirstImageText();
-    search.openResult(0);
-    search.openSpecialPromoteOnCurrentWiki();
-    SpecialPromotePageObject promote = new SpecialPromotePageObject(driver);
-
-    promote.verifyCrossWikiSearchDescription(searchDescription);
-    promote.verifyCrossWikiSearchImage(searchImage);
-  }
-
   /**
    * Navigate to http://www.wikia.com/index.php?title=Special:Search type: GTA V verify that GTA V
    * wikia was found type: GTA 5 verify that GTA V wikia was found
    */
-  @Test(
-        enabled = false, //MAIN-4498
-        groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch_2"})
+  @Test(enabled = false, // MAIN-4498
+      groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_009_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -139,5 +115,4 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.searchFor(SearchContent.SEARCH_PHRASE_DECIMAL_NUMBER);
     search.verifyQuery(SearchContent.WIKI_NAME);
   }
-
 }

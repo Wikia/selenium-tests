@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.core.Assertion;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,7 +22,7 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public SpecialWhatLinksHerePageObject clickShowbutton() {
+  public SpecialWhatLinksHerePageObject clickShowButton() {
     wait.forElementVisible(showButton);
     showButton.click();
     return this;
@@ -41,10 +39,8 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
     return this;
   }
 
-  public SpecialWhatLinksHerePageObject verifyInfoboxArticleInList(String articleName) {
-    wait.forElementVisible(filtersSection);
-    String firstResult = whatLinksList.get(0).getText();
-    Assertion.assertStringContains(firstResult, articleName);
-    return this;
+  public String getWhatLinksHereArticleName(int index) {
+    wait.forElementVisible(whatLinksList.get(index));
+    return whatLinksList.get(index).getText();
   }
 }

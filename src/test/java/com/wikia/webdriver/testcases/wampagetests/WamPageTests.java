@@ -59,8 +59,9 @@ public class WamPageTests extends NewTestTemplate {
   }
 
   @Test(groups = {"wamPage_005", "WamPageTests"})
+  @RelatedIssue(issueID = "MAIN-7392", comment = "test manually. Unable to reproduce defect")
   public void wam_005_testDatePicker() {
-    wam.verifyTodayDateInDatePicker();
+    wam.verifyLatestDateInDatePicker();
     String lastMonthDate = wam.changeDateToLastMonth();
     wam.verifyDateInDatePicker(lastMonthDate);
     String date = "July 12, 2014";

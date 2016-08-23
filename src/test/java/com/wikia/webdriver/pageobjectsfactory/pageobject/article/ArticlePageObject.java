@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
@@ -26,7 +25,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -209,6 +208,12 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(articleContent.getText(), content);
   }
 
+  public String getContent() {
+    wait.forElementVisible(articleContent);
+
+    return articleContent.getText();
+  }
+
   public void verifyFormattingFromVE(Formatting format, String content) {
     waitForElementNotVisibleByElement(veMode);
     List<WebElement> elements = articleContentContainer.findElements(format.getTag());
@@ -304,9 +309,14 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(mostRecentComment.getText(), comment);
   }
 
-  public void verifyCommentVideo(String videoName) {
-    driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
-    PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
+  public boolean isVideoCommentPresent(String videoName) {
+    try {
+      driver.findElement(By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName)));
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Video is not visible in comments section", e);
+      return false;
+    }
   }
 
   public MiniEditorComponentObject triggerEditCommentArea() {
@@ -503,22 +513,15 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public Integer getVideoWidth(WebElement thumbnail) {
-    int videoWidth =
-        Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
-    PageObjectLogging.log("getVideoWidth", "Video width is " + videoWidth, true);
-    return videoWidth;
+    return Integer.parseInt(thumbnail.findElement(By.tagName("img")).getAttribute("width"));
   }
 
-  public void verifyVideoWidth(int widthDesired) {
-    int videoWidth = getVideoWidth(videoThumbnail);
-    Assertion.assertNumber(videoWidth, widthDesired, "width should be " + widthDesired + " but is "
-                                                     + videoWidth);
+  public int getVideoThumbnailWidth() {
+    return getVideoWidth(videoThumbnail);
   }
 
-  public void verifyVideoCaption(String captionDesired) {
-    String caption = videoThumbnailWrapper.findElement(By.className("caption")).getText();
-    Assertion.assertStringContains(caption, captionDesired);
-    PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
+  public String getVideoCaption() {
+    return videoThumbnailWrapper.findElement(By.className("caption")).getText();
   }
 
   public void verifyVideoName(String nameDesired) {
@@ -539,13 +542,13 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new PhotoAddComponentObject(driver);
   }
 
-  public FilePagePageObject clickVideoDetailsButton() {
+  public FilePage clickVideoDetailsButton() {
     wait.forElementVisible(videoTitle);
     jsActions.execute("$('a.details.sprite').css('visibility', 'visible')");
     wait.forElementVisible(videoDetailsButton);
     videoDetailsButton.click();
     PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-    return new FilePagePageObject(driver);
+    return new FilePage();
   }
 
   private void clickAddCategoryButton() {

@@ -49,7 +49,7 @@ public class AllTagsTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @BeforeMethod(alwaysRun = true)

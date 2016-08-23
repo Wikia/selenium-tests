@@ -8,10 +8,12 @@ public class MercurySubpages {
   public static final String LINKED_IMAGES = "/wiki/LinkedImages";
   public static final String TOC = "/wiki/TOC";
   public static final String TOC_WITHOUT_H2 = "/wiki/TOCWithoutH2";
+  public static final String TOC_WITH_PORTABLE_INFOBOX = "/wiki/TOC_with_portable_infobox";
   public static final String COMMENTS = "/wiki/Comments";
   public static final String MAP = "/wiki/Map";
   public static final String QUESTION_MARK = "/wiki/Question?mark?question";
   public static final String COLON = "/wiki/Colon:colon:colon";
+  public static final String NO_INFOBOX = "/wiki/Article_without_infobox";
 
   public static final String INFOBOX_1 = "/wiki/Infobox1";
   public static final String INFOBOX_2 = "/wiki/Infobox2";
@@ -64,11 +66,16 @@ public class MercurySubpages {
   public static final String NTAVCC_MAIN_PAGE = "/wiki/Mercuryntavcc_Wikia";
 
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
-  public static final String ECC_MAIN_PAGE = "/wiki/Mercury_Empty_CC_Editor_Wikia";
+  public static final String ECC_MAIN_PAGE = "/wiki/Mercury_empty_CC_Wikia";
 
   // Articles on mlp.wikia.com
   public static final String MLP_MAIN_PAGE = "/wiki/My_Little_Pony_Friendship_is_Magic_Wiki";
 
+  // Login and SignUp pages
+  public static final String JOIN_PAGE = "/join";
+  public static final String REGISTER_PAGE = "/register";
+
   private MercurySubpages() {
   }
+
 }

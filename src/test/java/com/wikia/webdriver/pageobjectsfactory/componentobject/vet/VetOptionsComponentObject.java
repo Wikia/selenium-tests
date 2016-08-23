@@ -40,6 +40,8 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   @FindBy(css = "div#VideoEmbedNameRow p")
   private WebElement videoNameCaption;
 
+  private static final int VIDEO_THUMBNAIL_WIDTH = 350;
+
   public VetOptionsComponentObject(WebDriver driver) {
     super(driver);
     PageFactory.initElements(driver, this);
@@ -65,7 +67,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   }
 
   private void clickAddaVideo() {
-    wait.forElementVisible(addAvideo);
     wait.forElementClickable(addAvideo);
     scrollAndClick(addAvideo);
     PageObjectLogging.log("clickAddaVideo", "add video button clicked", true, driver);
@@ -81,7 +82,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     wait.forElementVisible(videoThumbnail);
     Dimension dim = videoThumbnail.getSize();
     int w = dim.getWidth();
-    Assertion.assertEquals(w, 350);
+    Assertion.assertEquals(w, VIDEO_THUMBNAIL_WIDTH);
     PageObjectLogging.log("verifyVideoThumbnail", "video thumbnail is visible", true);
   }
 
@@ -142,20 +143,10 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     Assertion.assertEquals(selectedPositionId, desiredPositionId);
   }
 
-  public void clickUpdateVideo() {
-    wait.forElementVisible(updateVideoButton);
-    scrollAndClick(updateVideoButton);
-    PageObjectLogging.log("updateVideoButton", "update video button clicked", true, driver);
-  }
-
-
-  public void verifyVideoWidth(int widthDesired) {
+  public int getVideoWidth() {
     wait.forElementVisible(widthInputField);
-    int width = Integer.parseInt(widthInputField.getAttribute("value"));
-    Assertion.assertEquals(
-        widthDesired,
-        width);
-    PageObjectLogging.log("verifyVideoWidth", "video width verified", true);
+
+    return Integer.parseInt(widthInputField.getAttribute("value"));
   }
 
   public void verifyCaption(String captionDesired) {

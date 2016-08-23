@@ -3,13 +3,15 @@ package com.wikia.webdriver.testcases.widgettests;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"SoundCloudWidgetTests", "WidgetTests"})
+@InBrowser(browser = Browser.CHROME)
 public class SoundCloudTests extends NewTestTemplate {
 
   private static final String SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME = "/wiki/SoundCloudOasis/OneWidget";
@@ -20,7 +22,7 @@ public class SoundCloudTests extends NewTestTemplate {
 
   private void init() {
     this.widget = new SoundCloudWidgetPageObject(driver);
-    this.navigate = new Navigate(driver);
+    this.navigate = new Navigate();
   }
 
   @Test(groups = "SoundCloudWidgetTest_001")

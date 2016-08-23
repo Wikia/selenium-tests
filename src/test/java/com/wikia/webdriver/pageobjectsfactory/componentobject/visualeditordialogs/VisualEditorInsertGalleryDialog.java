@@ -24,6 +24,8 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
   private WebElement dialogBody;
   @FindBy(css = ".ve-ui-wikiaSingleMediaQueryWidget .oo-ui-pendingElement-pending")
   private WebElement queryPending;
+  @FindBy(css = ".ve-ui-mwMediaResultWidget-done:nth-child(9)")
+  private WebElement resultsList;
 
   //Cart
   @FindBy(css = ".ve-ui-wikiaSingleMediaCartOptionWidget")
@@ -50,13 +52,6 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     PageObjectLogging.log("typeInSearchTextField", "Typed " + input + " in the search field", true);
   }
 
-  private void clickClearInputButton() {
-    if (clearInputButton.isDisplayed()) {
-      wait.forElementClickable(clearInputButton);
-      clearInputButton.click();
-    }
-  }
-
   private void clickAddGalleryButton() {
     wait.forElementVisible(doneButton);
     wait.forElementClickable(doneButton);
@@ -69,6 +64,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     searchInput.clear();
     typeInSearchTextField(searchText);
     waitForElementNotVisibleByElement(queryPending);
+    wait.forElementVisible(resultsList);
     return new VisualEditorInsertGalleryDialog(driver);
   }
 

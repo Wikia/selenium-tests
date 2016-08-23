@@ -157,7 +157,6 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
   }
 
   @Test(

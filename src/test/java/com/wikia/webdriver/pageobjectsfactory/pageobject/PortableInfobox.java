@@ -3,13 +3,15 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
-public class PortableInfobox extends WikiBasePageObject {
+public class PortableInfobox extends BasePageObject {
 
   @FindBy(css = ".pi-image")
   private WebElement image;
@@ -32,9 +34,6 @@ public class PortableInfobox extends WikiBasePageObject {
   @FindBy(css = ".tabbertab .image")
   private WebElement tabberImage;
 
-  @FindBy(css = ".pi-image")
-  private WebElement imageWrapper;
-
   @FindBy(css = "body")
   private WebElement bodyElement;
 
@@ -50,14 +49,17 @@ public class PortableInfobox extends WikiBasePageObject {
   @FindBy(css = ".pi-data-value .newcategory")
   private WebElement categoryLinkInInfobox;
 
+  @FindBy(css = ".pi-navigation")
+  private WebElement navigation;
+
+  @FindBy(css = ".pi-image")
+  private List<WebElement> imagesWrappers;
+
   @FindBy(css = "h3.pi-data-label.pi-secondary-font")
-  private WebElement horizontalItemLabel;
+  private List<WebElement> horizontalItemLabels;
 
   @FindBy(css = "div.pi-data-value")
-  private WebElement horizontalItemValue;
-
-  @FindBy(css = ".pi-navigation")
-  private WebElement poemTag;
+  private List<WebElement> horizontalItemValues;
 
   @FindBy(css = ".poem")
   private List<WebElement> internalLinksInsidePoemTag;
@@ -75,7 +77,7 @@ public class PortableInfobox extends WikiBasePageObject {
   private List<WebElement> categories;
 
   @FindBy(css = ".pi-navigation a[href*='redlink']")
-  private List<WebElement> redlLinks;
+  private List<WebElement> redLinks;
 
   @FindBy(css = ".pi-item .external")
   private List<WebElement> externalLinks;
@@ -115,10 +117,6 @@ public class PortableInfobox extends WikiBasePageObject {
     return layout.getCssValue("background-color");
   }
 
-  public String getTitleBackgroundColor(int index) {
-    return titles.get(index).getCssValue("background-color");
-  }
-
   public String getLinkRedirectTitle(WebElement element) {
     wait.forElementVisible(element);
     jsActions.scrollToElement(element);
@@ -133,11 +131,11 @@ public class PortableInfobox extends WikiBasePageObject {
     return selectedLabel.getText();
   }
 
-  public String getExternalLinkRedirectTitleWithIndex(int index) {
+  public String getExternalLinkRedirectTitle(int index) {
     return getLinkRedirectTitle(externalLinks.get(index));
   }
 
-  public String getInternalLinkRedirectTitleWithIndex(int index) {
+  public String getInternalLinkRedirectTitle(int index) {
     return getLinkRedirectTitle(internalLinks.get(index));
   }
 
@@ -225,178 +223,124 @@ public class PortableInfobox extends WikiBasePageObject {
     return this;
   }
 
-  public PortableInfobox compareURLAndExternalLink(String externalLinkName,
-                                                   String externalNavigatedURL) {
-    Assertion.assertEquals(externalLinkName, externalNavigatedURL);
-
-    return this;
+  public String getHorizontalItemLabelFontSize(int index) {
+    return horizontalItemLabels.get(index).getCssValue("font-size");
   }
 
-  public void compareURLAndInternalLink(String internalLinkName, String internalNavigatedURL) {
-    Assertion.assertEquals(internalLinkName, internalNavigatedURL);
+  public String getHorizontalItemValuesFontSize(int index) {
+    return horizontalItemValues.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizes(WebElement firstElement,
-                                          WebElement secondElement) {
-    Assertion.assertEquals(
-        firstElement.getCssValue("font-size"),
-        secondElement.getCssValue("font-size")
-    );
-
-    return this;
+  public String getItemValuesFontSize(int index) {
+    return itemValues.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenHorizontalItemLabelAndItemLabel() {
-    compareFontSizes(horizontalItemLabel, itemLabels.get(0));
-
-    return this;
+  public String getItemLabelsFontSize(int index) {
+    return itemLabels.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenHorizontalItemValueAndItemValue() {
-    compareFontSizes(horizontalItemValue, itemValues.get(0));
-
-    return this;
+  public String getOrderedElementFontSize(int index) {
+    return orderedElements.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenItemValueAndOrderedListItemWithIndex(int index) {
-    compareFontSizes(itemValues.get(0), orderedElements.get(index));
-
-    return this;
+  public String getUnorderedElementFontSize(int index) {
+    return unorderedElements.get(index).getCssValue("font-size");
   }
 
-  public PortableInfobox compareFontSizesBetweenItemValueAndUnorderedListItemWithIndex(int index) {
-    compareFontSizes(itemValues.get(0), unorderedElements.get(index));
-
-    return this;
+  private boolean isElementVisible(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
   }
 
-  public PortableInfobox compareInfoboxAndCategoryPageImages(String imageName, String categoryImageURL) {
-    Assertion.assertStringContains(imageName, categoryImageURL);
-
-    return this;
+  public boolean isImageVisible() {
+    return isElementVisible(image);
   }
 
-  public PortableInfobox isImagePresented() {
-    wait.forElementVisible(image);
-    Assertion.assertEquals(isElementOnPage(image), true);
-
-    return this;
-  }
-
-  public PortableInfobox isTabberPresented() {
+  public PortableInfobox isTabberVisible() {
     wait.forElementVisible(tabber);
     Assertion.assertEquals(isElementOnPage(tabber), true);
 
     return this;
   }
 
-  public PortableInfobox isTabberImagePresented() {
-    wait.forElementVisible(tabberImage);
-    Assertion.assertEquals(isElementOnPage(tabberImage), true);
-
-    return this;
+  public boolean isTabberImageVisible() {
+    return isElementVisible(tabberImage);
   }
 
-  public PortableInfobox isInfoboxTitlePresented() {
-    wait.forElementVisible(title);
-    Assertion.assertEquals(isElementOnPage(title), true);
-
-    return this;
+  public boolean isInfoboxTitleVisible() {
+    return isElementVisible(title);
   }
 
-  public PortableInfobox isLightboxPresented() {
-    wait.forElementVisible(lightbox);
-    Assertion.assertEquals(isElementOnPage(lightbox), true);
-
-    return this;
+  public boolean isLightboxVisible() {
+    return isElementVisible(lightbox);
   }
 
-  public PortableInfobox areLinksInPoemTagPresented() {
-    wait.forElementVisible(poemTag);
-    Assertion.assertFalse(internalLinksInsidePoemTag.isEmpty());
-    Assertion.assertFalse(externalLinksInsidePoemTag.isEmpty());
-
-    return this;
+  public boolean isInfoboxNavigationElementVisible() {
+    return isElementVisible(navigation);
   }
 
-  public PortableInfobox areQuotationMarksPresented() {
+  public int getInternalNavigationLinksNumber() {
+    return internalLinksInsidePoemTag.size();
+  }
+
+  public int getExternalNavigationLinksNumber() {
+    return externalLinksInsidePoemTag.size();
+  }
+
+  public boolean areQuotationMarksPresented() {
     wait.forElementVisible(h3Elements);
-    Assertion.assertStringContains("\"URL\"", h3Elements.getText());
 
-    return this;
+    return h3Elements.getText().contains("\"URL\"");
   }
 
-  public PortableInfobox areBoldElementsMoreThanOne() {
-    Assertion.assertFalse(boldElements.isEmpty());
+  public int getBoldElementsNumber() {
 
-    return this;
+    return boldElements.size();
   }
 
-  public PortableInfobox areItalicElementsMoreThanOne() {
-    Assertion.assertFalse(italicElements.isEmpty());
+  public int getItalicElementsNumber() {
 
-    return this;
+    return italicElements.size();
   }
 
-  public PortableInfobox areHeadersMoreThanOne() {
-    Assertion.assertFalse(h3Titles.isEmpty());
+  public int getHeadersNumber() {
 
-    return this;
+    return h3Titles.size();
   }
 
-  public void verifyChangedBackground(String oldBackgroundValue, String newBackgroundValue) {
-    Assertion.assertEquals(oldBackgroundValue, newBackgroundValue);
+  public boolean isReferenceElementVisible() {
+    return isElementVisible(referenceElements);
   }
 
-  public PortableInfobox verifyReferencesPresence() {
-    wait.forElementVisible(referenceElements);
-
-    return this;
+  public boolean isNavigationPaddingLeftAndRightEqual(int index) {
+    String left = getNavigationElements(index).getCssValue("padding-left");
+    String right = getNavigationElements(index).getCssValue("padding-right");
+    return left.equalsIgnoreCase(right);
   }
 
-  public PortableInfobox verifyPadding(WebElement element) {
-    Assertion.assertEquals(
-        element.getCssValue("padding-left"),
-        element.getCssValue("padding-right")
-    );
-
-    return this;
+  public boolean isHeaderPaddingLeftAndRightEqual(int index) {
+    String left = getGroupHeader(index).getCssValue("padding-left");
+    String right = getGroupHeader(index).getCssValue("padding-right");
+    return left.equalsIgnoreCase(right);
   }
 
-  public PortableInfobox verifyPaddingNavigationElementWithIndex(int index) {
-    verifyPadding(getNavigationElements(index));
-
-    return this;
+  public boolean imageContainsDiv(int index) {
+    return imagesWrappers.get(index).getTagName().contains("div");
   }
 
-  public PortableInfobox verifyDivsNotAppearingInImage() {
-    Assertion.assertNotEquals(imageWrapper.getTagName(), "div");
-
-    return this;
+  public boolean titleContainsDiv(int index) {
+    return titles.get(index).getTagName().contains("div");
   }
 
-  public PortableInfobox verifyDivsNotAppearingInTitle() {
-    Assertion.assertNotEquals(titles.get(0).getTagName(), "div");
-
-    return this;
+  public boolean headerContainsDiv(int index) {
+    return groupHeadersWrappers.get(index).getTagName().contains("div");
   }
 
-  public PortableInfobox verifyDivsNotAppearingInHeaderWithIndex(int index) {
-    Assertion.assertNotEquals(groupHeadersWrappers.get(index).getTagName(), "div");
-
-    return this;
+  public boolean infoboxContainsEmptyTag() {
+    return layout.getText().contains("Default");
   }
-
-  public PortableInfobox verifyEmptyTags() {
-    Assertion.assertStringContains(layout.getText(), "Default");
-
-    return this;
-  }
-
-  public PortableInfobox verifyGroupHeaderPaddingWithIndex(int index) {
-    verifyPadding(getGroupHeader(index));
-
-    return this;
-  }
-
 }

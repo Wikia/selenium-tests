@@ -1,10 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -23,16 +22,17 @@ public class TestAdsRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryOasis"
   )
   public void adsRecoveryOasis(Page page, Map<String, Object> slotInfo) {
+    String adUnitId = slotInfo.get("adUnitId").toString();
     String slotName = slotInfo.get("slotName").toString();
     String url = urlBuilder.getUrlForPage(page);
 
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, url, DESKTOP_SIZE);
+    AdsRecoveryObject adsBaseObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
-    String slotSelector = AdsContent.getSlotSelector(slotName);
-    WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+    String recoveredAdUnitIdSelector = "#" + adsBaseObject.getRecoveredAdUnitId(adUnitId);
+    WebElement recoveredSlot = driver.findElement(By.cssSelector(recoveredAdUnitIdSelector));
 
     adsBaseObject.triggerAdSlot(slotName)
         .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
-        .verifyExpandedAdVisibleInSlot(slotSelector, slot);
+        .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelector, recoveredSlot);
   }
 }

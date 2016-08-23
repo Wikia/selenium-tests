@@ -30,8 +30,11 @@ public class UrlBuilder {
   }
 
   public static String getHostForWiki() {
+    return getHostForWiki(Configuration.getWikiName());
+  }
+
+  public static String getHostForWiki(String wikiName) {
     String environment = Configuration.getEnv();
-    String wikiName = Configuration.getWikiName();
 
     environment = environment.equals("prod") ? "" : environment + ".";
     wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";

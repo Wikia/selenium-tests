@@ -17,6 +17,8 @@ public class CuratedMainPagePageObject {
   private WebElement mobileTopLeaderboard;
   @FindBy(css = ".wiki-page-title")
   private WebElement articleTitle;
+  @FindBy(css = ".wiki-page-header__title")
+  private WebElement revisedArticleTitle;
   @FindBy(css = ".wikia-stats-container")
   private WebElement wikiaStatsContainer;
   @FindBy(css = ".featured-content")
@@ -69,6 +71,10 @@ public class CuratedMainPagePageObject {
 
   public boolean isArticleTitleVisible() {
     return isCuratedElementVisible(articleTitle);
+  }
+
+  public boolean isRevisedArticleTitleVisible() {
+    return isCuratedElementVisible(revisedArticleTitle);
   }
 
   public boolean isWikiaStatsContainerVisible() {

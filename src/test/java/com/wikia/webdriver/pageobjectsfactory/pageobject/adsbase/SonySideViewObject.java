@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class SonySideViewObject extends BasePageObject {
 
   private static final String SONY_SIDE_VIEW_URL =
-      "http://adtest.wikia.com/wiki/Sony/info.tvsideview.sony.net/sony-sideview.html";
+      "http://project43.wikia.com/wiki/SyntheticTests/Sony/info.tvsideview.sony.net/sony-sideview.html";
 
   public SonySideViewObject(WebDriver driver) {
     super();

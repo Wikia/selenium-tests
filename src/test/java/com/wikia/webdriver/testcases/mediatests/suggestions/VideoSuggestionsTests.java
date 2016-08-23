@@ -24,3 +24,4 @@ public class VideoSuggestionsTests extends NewTestTemplate {
     edit.clickOnPublishButton();
   }
 }
+

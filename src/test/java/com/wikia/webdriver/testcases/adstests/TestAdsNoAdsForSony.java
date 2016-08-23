@@ -1,5 +1,8 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -22,6 +25,10 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
     wikiPage.verifyNoAdsOnPage();
   }
 
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "noAdsForSony",

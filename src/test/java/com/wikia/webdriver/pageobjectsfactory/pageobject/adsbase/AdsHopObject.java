@@ -24,16 +24,16 @@ public class AdsHopObject extends AdsBaseObject {
     super(driver, page);
   }
 
-  public void verifyClassHidden(final String slotName, final String src) {
+  public void verifyClassHidden(final String slotName, final String containerId) {
     new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver driver) {
-        return "hidden".equals(getTestedDiv(slotName, src).getAttribute("class").trim());
+        return "hidden".equals(getTestedContainer(slotName, containerId).getAttribute("class").trim());
       }
 
       @Override
       public String toString() {
-        return src + " div doesn't have class=\"hidden\"";
+        return containerId + " div doesn't have class=\"hidden\"";
       }
     });
   }
@@ -72,20 +72,29 @@ public class AdsHopObject extends AdsBaseObject {
     }
   }
 
+  private WebElement getTestedContainer(final String slotName, final String id) {
+    final String slotSelector = AdsContent.getSlotSelector(slotName);
+    return getTestedElement(slotSelector + " > div[id*='" + id + "']");
+  }
+
   private WebElement getTestedDiv(final String slotName, final String src) {
     final String slotSelector = AdsContent.getSlotSelector(slotName);
+    return getTestedElement(slotSelector + " > div > div[id*='" + src + "']");
+  }
+
+  private WebElement getTestedElement(final String elementSelector) {
     return new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(
         new ExpectedCondition<WebElement>() {
           @Override
           public WebElement apply(WebDriver driver) {
             java.util.List<WebElement> elements = driver
-                .findElements(By.cssSelector(slotSelector + " > div > div[id*='" + src + "']"));
+                .findElements(By.cssSelector(elementSelector));
             return elements.isEmpty() ? null : elements.get(0);
           }
 
           @Override
           public String toString() {
-            return slotName + " does not have the " + src + " div";
+            return "could not find element:" + elementSelector;
           }
         });
   }

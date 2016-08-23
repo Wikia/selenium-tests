@@ -23,5 +23,5 @@ public interface Video {
    * Poznańska Wiki-1424144130' a proper filename should be, 'WikiEvolution_-_Poznańska_Wiki-1424144130',
    * so a url to video on WIKIA should look like: (wikiName).wikia.com/wiki/File:WikiEvolution_-_Poznańska_Wiki-1424144130
    */
-  public String getWikiFileName();
+  public String getFileName();
 }

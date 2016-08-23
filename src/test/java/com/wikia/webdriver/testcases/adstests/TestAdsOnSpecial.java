@@ -10,17 +10,15 @@ import org.testng.annotations.Test;
 /**
  * https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
  */
-@Test(
-    groups = {"Ads_Special_Pages", "Ads"}
-)
+
 public class TestAdsOnSpecial extends TemplateNoFirstLoad {
 
   @Test(
-      groups = {"TestAdsOnSpecialPages_GeoEdgeFree"},
+      groups = {"TestAdsOnSpecialPages"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "specialPages"
   )
-  public void TestAdsOnSpecialPages_GeoEdgeFree(String wikiName, String article, String lineItemId,
+  public void TestAdsOnSpecialPages(String wikiName, String article, String lineItemId,
                                                 String adUnit, String leaderboardSlot,
                                                 String prefooterSlot,
                                                 Dimension resolution) throws Exception {
@@ -34,11 +32,11 @@ public class TestAdsOnSpecial extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"TestAdsOnFilePages_GeoEdgeFree"},
+      groups = {"TestAdsOnFilePages"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "filePages"
   )
-  public void TestAdsOnFilePages_GeoEdgeFree(String wikiName, String article, String lineItemId,
+  public void TestAdsOnFilePages(String wikiName, String article, String lineItemId,
                                              String adUnit, String leaderboardSlot,
                                              String medrecSlot,
                                              Dimension resolution) throws Exception {
@@ -50,6 +48,4 @@ public class TestAdsOnSpecial extends TemplateNoFirstLoad {
     ads.verifyGptIframe(adUnit, medrecSlot, "gpt");
     ads.verifyGptAdInSlot(medrecSlot, lineItemId, "");
   }
-
-
 }

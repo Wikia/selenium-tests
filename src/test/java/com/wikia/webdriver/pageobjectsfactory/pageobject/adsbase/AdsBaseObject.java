@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AdsBaseObject extends WikiBasePageObject {
 
@@ -54,10 +52,8 @@ public class AdsBaseObject extends WikiBasePageObject {
       "DirectGpt",
       "DirectGptMobile",
       "RemnantGpt",
-      "RemnantGptMobile",
-      "Liftium",
+      "RemnantGptMobile"
   };
-  private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
@@ -69,8 +65,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
-  @FindBy(css = LIFTIUM_IFRAME_SELECTOR)
-  private List<WebElement> liftiumIframes;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
 
@@ -131,6 +125,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
   }
 
+
   public void verifyFliteTag(String cssFliteSelector) {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
     WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
@@ -170,22 +165,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyNoLiftiumAdsOnPageExceptWikiaBar() {
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
-    if (isElementOnPage(By.cssSelector(LIFTIUM_IFRAME_SELECTOR))) {
-      String iframeSrc = liftiumIframes.get(0).getAttribute("src");
-      if (liftiumIframes.size() == 1 && iframeSrc.contains("WIKIA_BAR_BOXAD_1")) {
-        PageObjectLogging
-            .log("LiftiumAdsNotFound", "Liftium ads not found except WikiaBar", true);
-      } else {
-        throw new WebDriverException("Liftium ads found!");
-      }
-    } else {
-      PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
-    }
-  }
-
   public void verifyNoAdsOnPage() {
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
     scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
@@ -208,17 +187,6 @@ public class AdsBaseObject extends WikiBasePageObject {
         true,
         driver
     );
-  }
-
-  public void verifyNoLiftiumAdsInSlots(List<String> slots) {
-    for (String slot : slots) {
-      WebElement slotElement = driver.findElement(By.id(slot));
-      if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slotElement)) {
-        throw new NoSuchElementException("Liftium found in slot " + slot);
-      } else {
-        PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);
-      }
-    }
   }
 
   /**
@@ -530,7 +498,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
           @Override
           public String toString() {
-            extractLiftiumTagId(AdsContent.getSlotSelector(slotName));
             extractGptInfo(AdsContent.getSlotSelector(slotName));
             return String.format("Expected: [%s], Actual: [%s]", expectedProviders,
                                  Joiner.on("; ").join(getProvidersChain(slotName)));
@@ -547,9 +514,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       String providerSlotName = providerSlot.getAttribute("id").split("_")[0];
       String provider = "";
       for (String providerName : PROVIDERS) {
-        String
-            providerSearch =
-            "Liftium".equals(providerName) ? providerName : "/" + providerName + "/";
+        String providerSearch = "/" + providerName + "/";
         if (providerSlotName.contains(providerSearch)) {
           provider = providerName;
           break;
@@ -630,6 +595,21 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
   }
 
+  public long getLineItemId(String slotName) {
+    JavascriptExecutor js = driver;
+    try {
+      return (long) js.executeScript(
+          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
+          "return slots[i].getResponseInformation().lineItemId;" +
+          "} }"
+      );
+    } catch (WebDriverException e) {
+      PageObjectLogging.log("Get " + slotName + " line item", e, false);
+      return 0;
+    }
+  }
+
   protected void verifyAdVisibleInSlot(String slotSelector, WebElement slot) {
 
     if (!checkIfSlotExpanded(slot)) {
@@ -646,7 +626,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
 
-    extractLiftiumTagId(slotSelector);
     extractGptInfo(slotSelector);
 
     if (!adVisible) {
@@ -695,43 +674,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyNoAds() {
-    Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
+    Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
     for (String selector : slotsSelectors) {
       verifyNoAd(selector);
-    }
-  }
-
-
-  private void extractLiftiumTagId(String slotSelector) {
-    String liftiumTagId = null;
-    WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-    if (isElementInContext(LIFTIUM_IFRAME_SELECTOR, slot)) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
-      WebElement currentLiftiumIframe = (WebElement) js.executeScript(
-          "return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
-          slotSelector
-      );
-      String liftiumAdSrc = currentLiftiumIframe.getAttribute("src");
-      Pattern pattern = Pattern.compile("tag_id=\\d*");
-      Matcher matcher = pattern.matcher(liftiumAdSrc);
-      if (matcher.find()) {
-        liftiumTagId = matcher.group().replaceAll("[^\\d]", "");
-      }
-    }
-
-    if (liftiumTagId != null) {
-      PageObjectLogging.log(
-          "LiftiumTagId",
-          "Present liftium tag id is: "
-          + liftiumTagId + "; in slot: " + slotSelector,
-          true
-      );
-    } else {
-      PageObjectLogging.log(
-          "LiftiumTagId",
-          "Liftium not present in slot: " + slotSelector,
-          true
-      );
     }
   }
 
@@ -788,5 +733,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMiddlePrefooterAdPresent() {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
+  }
+
+  public void triggerComments() {
+    scrollToFooter();
+    jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
+    scrollToFooter();
+  }
+
+  public void scrollToSlot(String slot) {
+    WebElement slotSelector = driver.findElement(By.cssSelector(slot));
+    jsActions.scrollToElement(slotSelector);
+    PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
   }
 }

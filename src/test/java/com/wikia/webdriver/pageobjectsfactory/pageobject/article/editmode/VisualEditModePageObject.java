@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -79,6 +80,8 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement addTableLightbox;
   @FindBy(css = IMAGE_COMPONENT_CSS)
   private WebElement image;
+  @FindBy(css = "#wpApprove")
+  private WebElement autoApproveCheckbox;
 
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
@@ -90,6 +93,7 @@ public class VisualEditModePageObject extends EditMode {
   private String categoryRemoveSelector =
       "li.category[data-name='%categoryName%'] li.removeCategory";
   private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
+  private AceEditor aceEditor;
 
   public VisualEditModePageObject() {
     super();
@@ -105,6 +109,14 @@ public class VisualEditModePageObject extends EditMode {
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForWiki(Configuration.getWikiName())
         + URLsContent.WIKI_DIR + articleName, URLsContent.ACTION_EDIT));
     return this;
+  }
+
+  public AceEditor getAceEditor() {
+    if (aceEditor == null) {
+      aceEditor = new AceEditor();
+    }
+
+    return aceEditor;
   }
 
   public void clearContent() {
@@ -183,18 +195,20 @@ public class VisualEditModePageObject extends EditMode {
     }
   }
 
-  public void verifyVideoWidth(int widthDesired) {
+  public int getVideoWidth() {
     verifyComponent(video);
     driver.switchTo().frame(iframe);
     int widthCurrent = Integer.parseInt(video.getAttribute("width"));
     driver.switchTo().defaultContent();
-    Assertion.assertNumber(widthCurrent, widthDesired, "width should be " + widthDesired
-        + " but is " + widthCurrent);
+
+    return widthCurrent;
   }
 
-  public void verifyVideoCaption(String captionDesired) {
+  public String getVideoCaption() {
     mouseOverComponent(Components.VIDEO);
-    Assertion.assertEquals(caption.getText(), captionDesired);
+    wait.forElementVisible(caption);
+
+    return caption.getText();
   }
 
   private void mouseOverComponent(Components component) {
@@ -328,7 +342,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public void verifyCategoryNotPresent(String category) {
     wait.forElementNotPresent(By.cssSelector(categoryRemovedSelector.replace("%categoryName%",
-        category)));
+            category)));
     boolean categoryVisible = true;
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
@@ -380,7 +394,7 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(blockedUserMessage1);
     wait.forElementVisible(blockedUserMessage2);
     PageObjectLogging.log("verifyBlockedUserMessage",
-        "blocked user message when attempting to create article verified", true);
+            "blocked user message when attempting to create article verified", true);
   }
 
   private void selectFromContextMenu(WebElement option) {
@@ -408,6 +422,12 @@ public class VisualEditModePageObject extends EditMode {
     wait.forElementVisible(submitButton);
     submitButton.click();
     return new ArticlePageObject();
+  }
+
+  public VisualEditModePageObject clickAutoApproveCheckbox() {
+    wait.forElementVisible(autoApproveCheckbox);
+    autoApproveCheckbox.click();
+    return this;
   }
 
   public enum Components {

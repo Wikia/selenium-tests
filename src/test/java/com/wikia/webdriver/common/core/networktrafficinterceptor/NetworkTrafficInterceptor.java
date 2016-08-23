@@ -1,13 +1,13 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.net.InetSocketAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.proxy.ProxyServer;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Proxy;
@@ -15,26 +15,14 @@ import org.openqa.selenium.WebDriverException;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-public class NetworkTrafficInterceptor extends ProxyServer {
+public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
-  private static final int MAX = 8080;
-  private static final int MIN = 7070;
-  private final int portNumber;
   private Har har;
 
-  public NetworkTrafficInterceptor() {
-    super();
-    portNumber = MIN + (int) (Math.random() * ((MAX - MIN) + 1));
-  }
-
   public Proxy startSeleniumProxyServer() {
-    try {
-      setPort(portNumber);
-      start();
-      return seleniumProxy();
-    } catch (Exception ex) {
-      throw new WebDriverException(ex);
-    }
+    start();
+
+    return ClientUtil.createSeleniumProxy(this);
   }
 
   public void startIntercepting(String networkTrafficDumpName) {
@@ -105,10 +93,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
   }
 
   public void setProxyServer(String ip) {
-    Map<String, String> options = new HashMap<>();
-    options.put("httpProxy", ip);
-    options.put("sslProxy", ip);
-    setOptions(options);
+    setChainedProxy(new InetSocketAddress(ip.split(":")[0], 8888));
   }
 
   @Override

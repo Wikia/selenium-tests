@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -27,7 +28,8 @@ public class VEAddMapTests extends NewTestTemplate {
   String articleName, mapID;
   InteractiveMapPageObject createdMap;
 
-  @Test(groups = {"VEAddMapTests_001", "VEAddExistingMap"})
+  @RelatedIssue(issueID = "WW-108")
+  @Test(enabled = false, groups = {"VEAddMapTests_001", "VEAddExistingMap"})
   @Execute(asUser = User.USER_12, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void VEAddMapTests_001_AddExistingMap() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -44,7 +46,8 @@ public class VEAddMapTests extends NewTestTemplate {
     article.verifyVEPublishComplete();
   }
 
-  @Test(groups = {"VEAddMapTests_002", "VEEmptyMap"})
+  @RelatedIssue(issueID = "WW-108")
+  @Test(enabled = false, groups = {"VEAddMapTests_002", "VEEmptyMap"})
   @Execute(asUser = User.USER_12, onWikia = URLsContent.RTE_DISABLED_WIKI)
   public void VEAddMapTests_002_CheckEmptyMapWiki() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
@@ -58,7 +61,8 @@ public class VEAddMapTests extends NewTestTemplate {
     mapDialog.checkIsEmptyState();
   }
 
-  @Test(groups = {"VEAddMapTests_003", "VEAddMapFromZeroState"})
+  @RelatedIssue(issueID = "WW-108")
+  @Test(enabled = false, groups = {"VEAddMapTests_003", "VEAddMapFromZeroState"})
   @Execute(asUser = User.USER_12, onWikia = URLsContent.VE_DISABLED_WIKI)
   public void VEAddMapTests_003_InsertMapFromZeroState() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();

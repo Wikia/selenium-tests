@@ -88,6 +88,8 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public String getSourceContent() {
+    wait.forElementVisible(sourceModeTextArea);
+
     return (String) jsActions.execute("$('.cke_source').attr('value')");
   }
 
@@ -324,8 +326,9 @@ public class SourceEditModePageObject extends EditMode {
     }
   }
 
-  private String getContent() {
+  public String getContent() {
     wait.forElementVisible(sourceModeTextArea);
+
     return sourceModeTextArea.getAttribute("value");
   }
 
@@ -334,19 +337,10 @@ public class SourceEditModePageObject extends EditMode {
     );
   }
 
-  public void verifyVideoWidth(int widthDesired) {
+  public int getVideoWidth() {
     String content = getContent();
-    int width = Integer.parseInt(
-        content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
-    );
-    Assertion.assertNumber(
-        widthDesired, width,
-        "Video width in source edit mode is " + width + " while desired width is " + widthDesired
-    );
-  }
-
-  public void verifyVideoCaption(String desiredCaption) {
-    Assertion.assertStringContains(getContent(), desiredCaption);
+    
+    return Integer.parseInt(content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1));
   }
 
   /**

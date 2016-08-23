@@ -1,9 +1,10 @@
 package com.wikia.webdriver.elements.mercury.components;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.NoSuchElementException;
 
-public class TopBar extends WikiBasePageObject {
+public class TopBar extends BasePageObject {
 
   @FindBy(css = ".site-head")
   private WebElement navBar;
@@ -25,19 +26,21 @@ public class TopBar extends WikiBasePageObject {
   @FindBy(css = ".site-head-icon-search")
   private WebElement searchIcon;
 
+  @FindBy(css = ".site-head-icon-search > a.icon-button")
+  private WebElement searchIconClickableLink;
+
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
   private WebElement closeButton;
 
-  private By navigationComponent = By.cssSelector(".side-nav-menu");
-
-  @FindBy(css = ".local-nav-menu")
+  @FindBy(css = ".nav-menu")
   private WebElement navMenu;
 
-  private Wait wait;
+  @FindBy(css = ".site-head-fandom-bar")
+  private WebElement fandomBar;
+
+  private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
   public TopBar(WebDriver driver) {
-    this.wait = new Wait(driver);
-
     PageFactory.initElements(driver, this);
   }
 
@@ -70,6 +73,13 @@ public class TopBar extends WikiBasePageObject {
 
     return new Navigation(driver);
   }
+
+  public void clickWikiaLogo() {
+    PageObjectLogging.logInfo("Click Wikia logo");
+    wait.forElementClickable(logo);
+    logo.click();
+  }
+
 
   public boolean isNavigationBarVisible() {
     try {
@@ -107,9 +117,32 @@ public class TopBar extends WikiBasePageObject {
     }
   }
 
+  public boolean isSearchIconClickable() {
+    try {
+      searchIconClickableLink.isDisplayed();
+      wait.forElementClickable(searchIconClickableLink, 0);
+      return true;
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
   public boolean isCloseIconVisible() {
     try {
       return closeButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean isFandomBarVisible() {
+    try {
+      return fandomBar.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

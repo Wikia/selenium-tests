@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
@@ -15,11 +12,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -29,34 +29,36 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights001"})
   @Execute(asUser = User.STAFF)
   public void staffCanBlockUser() {
-    SpecialBlockPageObject block = new SpecialBlockPageObject(driver).open();
+    SpecialBlockPage block = new SpecialBlockPage(driver).open();
     block.deselectAllSelections();
     block.typeInUserName(credentials.userNameBlocked);
     block.selectExpiration("2 hours");
     block.clickBlockButton();
 
-    SpecialBlockListPageObject list =
-        new SpecialBlockListPageObject(driver).openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPage list =
+        new SpecialBlockListPage().open();
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserBlocked(credentials.userNameBlocked);
   }
 
   @Test(groups = {"usersAndRights002"}, dependsOnMethods = {"staffCanBlockUser"})
+  @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldSeeMessageOnArticleEdit() {
     VisualEditModePageObject edit =
         new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
             PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
 
-    edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
+    //edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     edit.verifyUserLoggedIn(User.BLOCKED_USER);
 
     edit.verifyBlockedUserMessage();
   }
 
   @Test(groups = {"usersAndRights003"}, dependsOnMethods = {"staffCanBlockUser"})
+  @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldBeAbleToChangeEmail() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
-    editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
+    //editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.openEmailSection();
@@ -67,7 +69,7 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.verifyNotificationMessage();
+    prefPage.getBannerNotifications().verifyNotificationMessage();
 
     ConfirmationPageObject confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(
@@ -85,12 +87,12 @@ public class UserAndRights extends NewTestTemplate {
   @Test(groups = {"usersAndRights004"}, dependsOnMethods = {"staffCanBlockUser"})
   @Execute(asUser = User.STAFF)
   public void staffCanUnblockUser() {
-    SpecialUnblockPageObject unblock =
-        new SpecialUnblockPageObject(driver).openSpecialUnblockPage(wikiURL);
+    SpecialUnblockPage unblock =
+        new SpecialUnblockPage().open();
     unblock.unblockUser(credentials.userNameBlocked);
     unblock.verifyUnblockMessage(credentials.userNameBlocked);
 
-    SpecialBlockListPageObject list = unblock.openSpecialBlockListPage(wikiURL);
+    SpecialBlockListPage list = new SpecialBlockListPage().open();
     list.searchForUser(credentials.userNameBlocked);
     list.verifyUserUnblocked();
   }

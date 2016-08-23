@@ -31,6 +31,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   private WebElement fileNameInput;
   @FindBy(css = ".ve-ui-wikiaMediaPageWidget-item-license select")
   private WebElement imageLicenseDropdown;
+  @FindBy(css = ".ve-ui-wikiaMediaPageWidget-item")
+  private WebElement mediaAdded;
 
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
   private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget");
@@ -82,8 +84,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject addMediaByURL(String url) {
     waitForDialogVisible();
     typeInSearchTextField(url);
-    wait.forElementVisible(topUploadButton);
-    wait.forElementClickable(topUploadButton);
+    wait.forElementVisible(mediaAdded);
     clickAddMediaButton();
     waitForDialogNotVisible();
     return new VisualEditorPageObject(driver);
@@ -92,13 +93,14 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorAddMediaDialog searchMedia(String searchText) {
     waitForDialogVisible();
     typeInSearchTextField(searchText);
+    wait.forElementVisible(mediaResultsBy);
     return new VisualEditorAddMediaDialog(driver);
   }
 
   public VisualEditorPageObject addExistingMedia(int number) {
     waitForDialogVisible();
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-    wait.forElementVisible(mediaResultsWidget);
+    wait.forElementVisible(mediaResultsBy);
     List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
     for (int i = 0; i < number; i++) {
       WebElement mediaAddIcon = mediaResults.get(i).findElement(mediaAddIconBy);

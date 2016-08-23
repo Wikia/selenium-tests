@@ -14,11 +14,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 
 import org.testng.annotations.Test;
 
+@Test(groups = "comments-blogComments")
 public class BlogCommentsTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"BlogComments_001", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_001")
   public void BlogComments_001_Anon_commentReply() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
@@ -38,7 +39,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
   }
 
-  @Test(groups = {"BlogComments_002", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_002")
   @Execute(asUser = User.USER)
   public void BlogComments_002_User_commentReply() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -60,7 +61,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = {"BlogComments_003", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_003")
   @Execute(asUser = User.USER)
   public void BlogComments_003_User_editComment() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -80,7 +81,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     blogPage.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = {"BlogComments_004", "BlogCommentsTests"})
+  @Test(groups = "BlogComments_004")
   public void BlogComments_004_Admin_deleteComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -96,7 +97,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     String commentText = blogPage.getFirstCommentText();
     DeletePageObject delete = blogPage.deleteFirstComment();
     delete.submitDeletion();
-    blogPage.verifyNotificationMessage();
+    blogPage.getBannerNotifications().verifyNotificationMessage();
     blogPage.verifyCommentDeleted(commentText);
   }
 }

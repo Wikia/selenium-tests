@@ -66,6 +66,7 @@ public class FirefoxBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+    caps.setCapability("marionette", true);
 
     return new WikiaWebDriver(new FirefoxDriver(caps), server, false);
   }

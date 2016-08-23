@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,9 +49,9 @@ public class SmartBanner {
     PageObjectLogging.logInfo("Scroll down");
     jsActions.scrollBy(0, 100);
 
-    PageObjectLogging.logInfo("Smart banner position is fixed at the top");
+    PageObjectLogging.logInfo("Smart banner position is not fixed at the top");
     wait.forElementPresent(smartBannerComponent);
-    Assertion.assertTrue(
+    Assertion.assertFalse(
         driver.findElement(smartBannerComponent).getLocation().getY() == SMART_BANNER_POS_Y,
         "Smart banner position is not fixed at the top"
     );

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -16,6 +17,7 @@ public class VideosPageTests extends NewTestTemplate {
    * Verify UI elements on the Special:Videos page Logged-Out
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
+  @RelatedIssue(issueID = "SUS-756")
   public void VideosPageTest_001() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
@@ -29,6 +31,7 @@ public class VideosPageTests extends NewTestTemplate {
    * running this test is sustainable).
    */
   @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
+  @RelatedIssue(issueID = "SUS-755")
   public void VideosPageTest_002() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -44,6 +47,7 @@ public class VideosPageTests extends NewTestTemplate {
    * video is).
    */
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
+  @RelatedIssue(issueID = "SUS-863")
   public void VideosPageTest_003() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

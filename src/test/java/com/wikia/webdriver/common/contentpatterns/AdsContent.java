@@ -1,13 +1,14 @@
 package com.wikia.webdriver.common.contentpatterns;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AdsContent {
 
   //HashMap with slots selector
-  public static final Map<String, String> SLOTS_SELECTORS;
-  public static final Map<String, String> SLOTS_TRIGGERS;
+  private static final Map<String, String> SLOTS_SELECTORS;
+  private static final Map<String, String> SLOTS_TRIGGERS;
 
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
@@ -16,6 +17,8 @@ public class AdsContent {
       "top.window.adDriver2ForcedStatus['%s']='success';";
 
   //SLOTS NAMES
+  public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
+  public static final String MOBILE_BOTTOM_LB = "MOBILE_BOTTOM_LEADERBOARD";
   public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
   public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
   public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
@@ -31,7 +34,7 @@ public class AdsContent {
   public static final String PREFOOTER_RIGHT = "PREFOOTER_RIGHT_BOXAD";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
   public static final String TOP_INCONTENT_BOXAD = "TOP_INCONTENT_BOXAD";
-  public static final String MOBILETOP_LB = "MOBILE_TOP_LEADERBOARD";
+  public static final String MOBILE_TOP_LB = "MOBILE_TOP_LEADERBOARD";
   public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
   public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
   public static final String INCONTENT_PLAYER = "INCONTENT_PLAYER";
@@ -49,6 +52,10 @@ public class AdsContent {
 
   }
 
+  public static Collection<String> getAllSlotsSelectors() {
+    return SLOTS_SELECTORS.values();
+  }
+
   public static String getSlotSelector(String slotName) {
     return SLOTS_SELECTORS.get(slotName);
   }
@@ -59,6 +66,8 @@ public class AdsContent {
 
   static {
     SLOTS_SELECTORS = new HashMap<>();
+    SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
+    SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(HOME_TOP_LB, "#HOME_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(CORP_TOP_LB, "#CORP_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(HUB_LB, "#HUB_TOP_LEADERBOARD");
@@ -76,7 +85,7 @@ public class AdsContent {
     SLOTS_SELECTORS.put(ADS_IN_CONTENT_CONTAINER, "#WikiaAdInContentPlaceHolder");
     SLOTS_SELECTORS.put(PREFOOTERS_CONTAINER, "#WikiaArticleBottomAd, .bottom-ads");
     SLOTS_SELECTORS.put(TOP_INCONTENT_BOXAD, "#TOP_INCONTENT_BOXAD");
-    SLOTS_SELECTORS.put(MOBILETOP_LB, "#MOBILE_TOP_LEADERBOARD");
+    SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "[id^=MOBILE_IN_CONTENT]");
     SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
     SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");

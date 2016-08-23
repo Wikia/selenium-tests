@@ -1,40 +1,43 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject;
 
-import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class AuthModal extends WikiBasePageObject {
 
   @FindBy(css = ".auth.desktop.signin-page")
-  private WebElement authModal;
+  private WebElement signInAuthModal;
+  @FindBy(css = ".auth.desktop.register-page")
+  private WebElement registerAuthModal;
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
   @FindBy(css = "#loginPassword")
   private WebElement passwordField;
   @FindBy(css = "#loginSubmit")
   private WebElement signInButton;
-  @FindBy(css = ".auth-modal iframe")
-  private WebElement iFrame;
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
+  @FindBy(css = ".register-page .header-callout-link")
+  private WebElement linkToSignInForm;
+  @FindBy(css = ".signup-providers li a")
+  private WebElement connectWithFacebookButton;
 
-  private String mainWindowHandle;
+  private final String mainWindowHandle;
 
-  public AuthModal(){
+  public AuthModal() {
     super();
     waitForNewWindow();
-    this.mainWindowHandle =  driver.getWindowHandle();
+    this.mainWindowHandle = driver.getWindowHandle();
   }
 
+
   private void switchToAuthModalHandle() {
-    for(String winHandle : driver.getWindowHandles()){
+    for (String winHandle : driver.getWindowHandles()) {
       driver.switchTo().window(winHandle);
     }
   }
@@ -43,14 +46,39 @@ public class AuthModal extends WikiBasePageObject {
     driver.switchTo().window(this.mainWindowHandle);
   }
 
-  public boolean isOpened(){
+  public boolean isOpened() {
     switchToAuthModalHandle();
-    boolean isOpenedResult = authModal.isDisplayed();
+    try {
+      wait.forElementVisible(registerAuthModal);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Register Auth Modal is not displayed");
+      return false;
+    }
     switchToMainWindowHandle();
-    return isOpenedResult;
+    return true;
   }
 
-  public void login(String username, String password){
+  public boolean isSignInOpened() {
+    switchToAuthModalHandle();
+    try {
+      wait.forElementVisible(signInAuthModal);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Sign In Auth Modal is not displayed");
+      return false;
+    }
+    switchToMainWindowHandle();
+    return true;
+  }
+
+  public boolean isConnetctWithFacebookButtonVisible() {
+    switchToAuthModalHandle();
+    boolean isConnetctWithFacebookButtonVisible = registerAuthModal.isDisplayed();
+    switchToMainWindowHandle();
+
+    return isConnetctWithFacebookButtonVisible;
+  }
+
+  public void login(String username, String password) {
     switchToAuthModalHandle();
     usernameField.sendKeys(username);
     passwordField.sendKeys(password);
@@ -58,14 +86,20 @@ public class AuthModal extends WikiBasePageObject {
     switchToMainWindowHandle();
   }
 
-  public void login(User user){
+  public void login(User user) {
     login(user.getUserName(), user.getPassword());
   }
 
-  public void clickForgotPasswordLink(){
+  public void clickForgotPasswordLink() {
     switchToAuthModalHandle();
     forgottenPasswordLink.click();
     switchToMainWindowHandle();
+  }
+
+  public void clickToSignInForm(){
+    switchToAuthModalHandle();
+    wait.forElementClickable(linkToSignInForm);
+    linkToSignInForm.click();
   }
 
 }

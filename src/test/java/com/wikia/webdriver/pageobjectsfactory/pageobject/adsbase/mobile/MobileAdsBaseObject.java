@@ -19,6 +19,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
                                                      "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
   private static final String INTERSTITIAL_AD_OPENED_SELECTOR = ".ember-view.lightbox-wrapper.open";
+  private static final String MOBILE_TOP_LEADERBOARD_ID = "MOBILE_TOP_LEADERBOARD";
 
   private AdsComparison adsComparison;
 
@@ -44,6 +45,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
       return;
     }
     waitForSlotExpanded(presentLeaderboard);
+    scrollToSlotOnMobile(MOBILE_TOP_LEADERBOARD_ID);
 
     if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
       extractGptInfo(presentLeaderboardSelector);
@@ -137,8 +139,10 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   private void scrollToSlotOnMobile(String slotName) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     js.executeScript(
-        "var elementY = document.getElementById(arguments[0]).offsetTop;" +
-        "window.scrollTo(0, elementY);",
+        "var element = document.getElementById(arguments[0]);" +
+        "var elementY = element.offsetTop;" +
+        "var elementH = element.offsetHeight;" +
+        "window.scrollTo(0, elementY - elementH);",
         slotName
     );
   }

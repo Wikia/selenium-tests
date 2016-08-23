@@ -8,28 +8,20 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TopBarTests extends NewTestTemplate {
 
-  private TopBar topBar;
-  private Navigation navigation;
-
-  private void init() {
-    this.topBar = new TopBar(driver);
-    this.navigation = new Navigation(driver);
-
-    new Navigate(driver).toPage(MercurySubpages.MAIN_PAGE);
-  }
-
   @Test(groups = "mercury_topbar_topBarIsAlwaysVisible")
   public void mercury_topbar_topBarIsAlwaysVisible() {
-    init();
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
 
     Assertion.assertTrue(topBar.isNavigationBarVisible());
     Assertion.assertTrue(topBar.isLogoVisible());
@@ -37,6 +29,7 @@ public class TopBarTests extends NewTestTemplate {
     Assertion.assertTrue(topBar.isSearchIconVisible());
 
     driver.executeScript("window.scrollTo(100, document.body.scrollHeight)");
+
     Assertion.assertTrue(topBar.isNavigationBarVisible());
     Assertion.assertTrue(topBar.isLogoVisible());
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
@@ -45,22 +38,30 @@ public class TopBarTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_closeButtonAppears")
   public void mercury_topbar_closeButtonAppears() {
-    init();
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
 
     topBar.openSearch();
     Assertion.assertTrue(topBar.isCloseIconVisible());
+
     topBar.clickCloseButton();
     Assertion.assertTrue(topBar.isSearchIconVisible());
 
     topBar.openNavigation();
     Assertion.assertTrue(topBar.isCloseIconVisible());
+
     topBar.clickCloseButton();
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
-  @Test(groups = "mecury_topbar_switchBetweenSearchAndNavigation")
-  public void mecury_topbar_switchBetweenSearchAndNavigation() {
-    init();
+  @Test(groups = "mercury_topbar_switchBetweenSearchAndNavigation")
+  public void mercury_topbar_switchBetweenSearchAndNavigation() {
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
 
     topBar.openSearch();
     Assertion.assertTrue(topBar.isCloseIconVisible());
@@ -69,5 +70,38 @@ public class TopBarTests extends NewTestTemplate {
     topBar.openNavigation();
     Assertion.assertTrue(topBar.isCloseIconVisible());
     Assertion.assertTrue(topBar.isSearchIconVisible());
+  }
+
+  @Test(groups = "mercury_topbar_fandomBarIsVisibleOnEnglishCommunity")
+  public void mercury_topbar_fandomBarIsVisibleOnEnglishCommunity() {
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
+
+    Assertion.assertTrue(topBar.isFandomBarVisible());
+  }
+
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  @Test(groups = "mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity")
+  public void mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity() {
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
+
+    Assertion.assertFalse(topBar.isFandomBarVisible());
+  }
+
+  @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
+  public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
+    TopBar topBar =
+        new ArticlePage()
+            .open(MercurySubpages.MAIN_PAGE)
+            .getTopBar();
+
+    topBar.clickWikiaLogo();
+
+    Assertion.assertTrue(topBar.getCurrentUrl().contains("www.wikia.com/fandom"));
   }
 }

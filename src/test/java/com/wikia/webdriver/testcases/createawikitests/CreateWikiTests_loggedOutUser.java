@@ -28,8 +28,9 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
         cnw1.typeInWikiName(wikiName);
         cnw1.verifySuccessIcon();
         AuthModal authModal = cnw1.clickNextToSignIn();
+        authModal.clickToSignInForm();
 
-        Assert.assertTrue(authModal.isOpened());
+        Assert.assertTrue(authModal.isSignInOpened());
 
         authModal.login(credentials.userName10, credentials.password10);
         CreateNewWikiPageObjectStep2 cnw2 = new CreateNewWikiPageObjectStep2(driver);

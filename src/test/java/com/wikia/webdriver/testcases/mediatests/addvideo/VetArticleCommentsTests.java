@@ -17,7 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.testng.annotations.Test;
 
 @Test(groups = {"VetArticleComments", "VetTests", "Media"})
@@ -25,7 +24,9 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
-  public void VetArticleComments_001_Provider() {
+  @RelatedIssue(issueID = "SUS-758", comment = "This issue is related to API call and should not cause permanent " +
+      "test failure. Otherwise the failure must be caused by other issue")
+  public void RegularUserCanAddVideoInArticleCommentEditorByProvidingYoutubeVideoUrl() {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject().open();
@@ -33,21 +34,23 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("microsoft");
-
+    String expectedCaption = PageContent.CAPTION + article.getTimeStamp();
     VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(video.getUrl());
-    vetOptions.setCaption(PageContent.CAPTION);
+
+    vetOptions.setCaption(expectedCaption);
     vetOptions.submit();
     article
         .getArticleComment()
         .waitForVideo()
         .submitComment();
 
-    Assertion.assertTrue(article.getArticleComment().isVideoVisible(video.getTitle()));
+    Assertion.assertTrue(
+        article.getArticleComment().isVideoCaptionVisibleInTheLatestComment(expectedCaption));
   }
 
   @Test(groups = {"VetArticleComments_002"})
   @Execute(asUser = User.USER)
-  public void VetArticleComments_002_Library() {
+  public void RegularUserCanAddVideoInArticleCommentEditorByFindingWikiaVideo() {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject().open();
@@ -58,7 +61,11 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     vetOptions.setCaption(PageContent.CAPTION);
     String desiredVideoName = vetOptions.getVideoName();
     vetOptions.submit();
-    article.submitComment();
-    article.verifyCommentVideo(desiredVideoName);
+    article
+        .getArticleComment()
+        .waitForVideo()
+        .submitComment();
+
+    Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName));
   }
 }

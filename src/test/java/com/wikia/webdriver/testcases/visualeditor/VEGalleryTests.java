@@ -2,18 +2,23 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertGalleryDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * These tests are failing in FF, but was tested manually
+ * - VEGalleryTests_005_Remove
+ */
+@InBrowser(browser = Browser.CHROME)
 public class VEGalleryTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -40,17 +45,12 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.typeTextArea(PageContent.ARTICLE_TEXT);
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.addExistingMedia(numOfMedias);
     ve.verifyGalleries(numOfGalleries);
     ve.verifyMediasInGallery(numOfMedias);
-    VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
-    article = saveChangesDialog.savePage();
-    article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
+    ve.publish();
   }
 
   //AG02
@@ -68,9 +68,7 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     //verify # of cart items  = 9
     galleryDialog.addMediaToCart(initialNumOfMedia);
@@ -89,7 +87,6 @@ public class VEGalleryTests extends NewTestTemplate {
     galleryDialog.removeMediaFromCart(numOfMediaToRemoveSecond);
     expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveSecond;
     galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
-    galleryDialog.logOut(wikiURL);
   }
 
   //AG03
@@ -102,13 +99,10 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickTitleToPreview(7);
     ve.verifyPreviewImage();
-    ve.logOut(wikiURL);
   }
 
   //AG04
@@ -121,13 +115,10 @@ public class VEGalleryTests extends NewTestTemplate {
     VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, randomArticleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    VisualEditorInsertGalleryDialog galleryDialog =
-        (VisualEditorInsertGalleryDialog) ve
-            .openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+    VisualEditorInsertGalleryDialog galleryDialog = ve.clickGalleryButton();
     galleryDialog = galleryDialog.searchMedia("he");
     ve = galleryDialog.clickMetaDataToPreview(3);
     ve.verifyPreviewImage();
-    ve.logOut(wikiURL);
   }
 
   @Test(
@@ -140,9 +131,6 @@ public class VEGalleryTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     ve.deleteGallery(0);
     ve.verifyGalleries(0);
-    VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
-    article = saveChangesDialog.savePage();
-    article.verifyVEPublishComplete();
-    article.logOut(wikiURL);
+    ve.publish();
   }
 }

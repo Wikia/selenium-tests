@@ -57,7 +57,7 @@ public class YoutubeVideo implements Video {
   }
 
   @Override
-  public String getWikiFileName() {
+  public String getFileName() {
     return this.fileName;
   }
 

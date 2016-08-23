@@ -14,12 +14,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
-@Test(groups = {"ArticleComments"})
+@Test(groups = "comments-articleComments")
 public class ArticleCommentsTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"ArticleComments_001", "Smoke2"})
+  @Test(groups = "ArticleComments_001")
   @Execute(asUser = User.USER)
   public void ArticleComments_001_editComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
@@ -38,7 +38,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = {"ArticleComments_002"})
+  @Test(groups = "ArticleComments_002")
   @Execute(asUser = User.USER)
   public void ArticleComments_002_replyComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
@@ -58,7 +58,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyReplyCreator(credentials.userName);
   }
 
-  @Test(groups = {"ArticleComments_003"})
+  @Test(groups = "ArticleComments_003")
   public void ArticleComments_003_anonReplyComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -77,7 +77,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
   }
 
-  @Test(groups = {"ArticleComments_004"})
+  @Test(groups = "ArticleComments_004")
   @Execute(asUser = User.STAFF)
   public void ArticleComments_004_deleteComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
@@ -92,7 +92,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     String commentText = article.getFirstCommentText();
     DeletePageObject delete = article.deleteFirstComment();
     delete.submitDeletion();
-    article.verifyNotificationMessage();
+    article.getBannerNotifications().verifyNotificationMessage();
     article.verifyCommentDeleted(commentText);
   }
 }

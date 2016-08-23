@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsInterstitialObject;
@@ -24,6 +25,7 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
   }
 
+  @RelatedIssue(issueID = "ADEN-3531")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "TestInterstitialMercury",
@@ -54,5 +56,7 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     if (shouldAdBeScaled) {
       adsInterstitial.verifyAdRatio();
     }
+    adsInterstitial.closeInterstitial();
+    adsInterstitial.verifyInterstitialIsClosed();
   }
 }

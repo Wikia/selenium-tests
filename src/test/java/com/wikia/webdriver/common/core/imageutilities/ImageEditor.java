@@ -44,6 +44,14 @@ public class ImageEditor {
     if (height < 1) {
       height = 1;
     }
+    // workaround for whenever WebElement.getLocation() return negatives
+    // https://github.com/Wikia/selenium-tests/blob/9d00f02ba24391534a80520908c2973d9e6bed86/src/test/java/com/wikia/webdriver/common/core/imageutilities/Shooter.java#L46
+    if (start.getX() < 0) {
+      start.move(0, start.getY());
+    }
+    if (start.getY() < 0) {
+      start.move(start.getX(), 0);
+    }
     BufferedImage dest = image.getSubimage(
         start.getX(), start.getY(), width, height
     );

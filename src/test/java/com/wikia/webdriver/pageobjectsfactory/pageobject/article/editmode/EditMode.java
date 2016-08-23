@@ -23,9 +23,6 @@ public class EditMode extends WikiBasePageObject {
   @FindBy(css = "#wpPreview")
   private WebElement desktopPreviewButton;
 
-  @FindBy(css = "#wpPreviewMobile")
-  private WebElement mobilePreviewButton;
-
   @FindBy(css = "a.RTEImageButton")
   private WebElement photoButton;
 
@@ -92,14 +89,6 @@ public class EditMode extends WikiBasePageObject {
     desktopPreviewButton.click();
     PageObjectLogging.log("preview", "Page preview displayed", true);
     return new PreviewEditModePageObject(driver);
-  }
-
-  public MobilePreviewEditModePageObject openMobilePreviewArticle() {
-    driver.switchTo().defaultContent();
-    wait.forElementClickable(mobilePreviewButton);
-    mobilePreviewButton.click();
-    PageObjectLogging.log("mobile preview", "Page mobile preview displayed", true);
-    return new MobilePreviewEditModePageObject();
   }
 
   public BlogPageObject submitBlog() {

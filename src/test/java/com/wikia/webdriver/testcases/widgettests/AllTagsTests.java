@@ -3,7 +3,9 @@ package com.wikia.webdriver.testcases.widgettests;
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
@@ -22,7 +24,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-@Test(groups = {"AllTagsWidgetTests", "WidgetTests"})
+@InBrowser(browser = Browser.CHROME)
 public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "/wiki/AllTagsWidget";
@@ -55,7 +57,7 @@ public class AllTagsTests extends NewTestTemplate {
   @Test(groups = "AllTagsWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void AllTagsWidgetTest_001_isLoaded() {
-    new Navigate(driver).toPage(ARTICLE_NAME);
+    new Navigate().toPage(ARTICLE_NAME);
 
     for (WidgetPageObject widget : widgets) {
       Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);

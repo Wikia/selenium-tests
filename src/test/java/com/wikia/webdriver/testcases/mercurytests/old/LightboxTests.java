@@ -29,7 +29,7 @@ public class LightboxTests extends NewTestTemplate {
     this.gallery = new GalleryComponentObject(driver);
     this.lightbox = new LightboxComponentObject(driver);
 
-    new Navigate(driver).toPage(MercurySubpages.GALLERY);
+    new Navigate().toPage(MercurySubpages.GALLERY);
   }
 
   @Test(groups = "mercury_lightbox_openAndClose")

@@ -23,7 +23,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
   private WebElement emptyStateDialogHeadline;
   @FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-text")
   private WebElement emptyStateDialogText;
-  @FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labelElement-label")
+  @FindBy(css = ".ve-ui-wikiaMapInsertDialog-results-headline-button .oo-ui-labelElement-label")
   private WebElement emptyStateCreateAMapButton;
 
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");

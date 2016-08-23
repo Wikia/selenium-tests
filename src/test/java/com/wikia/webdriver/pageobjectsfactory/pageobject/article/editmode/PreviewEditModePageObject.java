@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
@@ -19,7 +18,7 @@ public class PreviewEditModePageObject extends EditMode {
 
   By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
   By videoWidthSelector = By.cssSelector(".image > img");
-  By videoCaptionSelector = By.cssSelector("figcaption");
+  By videoCaptionSelector = By.cssSelector("figcaption .caption");
   By contentWrapper = By.cssSelector("#mw-content-text");
   By publishButton = By.cssSelector("#publish");
   By tableOfContents = By.cssSelector("#toc");
@@ -61,17 +60,14 @@ public class PreviewEditModePageObject extends EditMode {
     );
   }
 
-  public void verifyVideoWidth(int desiredWidth) {
-    int width = Integer.parseInt(previewModal.findElement(
-        videoWidthSelector
-    ).getAttribute("width"));
-    Assertion
-        .assertNumber(width, desiredWidth, "width should be " + desiredWidth + " but is " + width);
+  public int getVideoWidth() {
+    return Integer.parseInt(previewModal.findElement(videoWidthSelector).getAttribute("width"));
   }
 
-  public void verifyVideoCaption(String desiredCaption) {
-    String caption = previewModal.findElement(videoCaptionSelector).getText();
-    Assertion.assertStringContains(caption, desiredCaption);
+  public String getVideoCaption() {
+    wait.forElementVisible(videoCaptionSelector);
+
+    return previewModal.findElement(videoCaptionSelector).getText();
   }
 
   public void closePreviewModal() {
@@ -80,9 +76,6 @@ public class PreviewEditModePageObject extends EditMode {
     PageObjectLogging.log("closePreviewModal", "preview modal closed", true);
   }
 
-  public void verifyTextContent(String desiredText) {
-    Assertion.assertEquals(previewModal.findElement(contentWrapper).getText(), desiredText);
-  }
 
   public void publish() {
     previewModal.findElement(publishButton).click();

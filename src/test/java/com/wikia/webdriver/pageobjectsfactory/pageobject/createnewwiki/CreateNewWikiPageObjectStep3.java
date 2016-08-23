@@ -39,7 +39,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 90).until(CommonExpectedConditions
+      new WebDriverWait(driver, 180).until(CommonExpectedConditions
           .elementNotPresent(loadingIndicatorBy));
     } finally {
       restoreDeaultImplicitWait();

@@ -2,10 +2,9 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
@@ -27,35 +26,36 @@ public class VetModalCaptionTests extends NewTestTemplate {
    * editable for premium videos,
    */
 
-  Credentials credentials = Configuration.getCredentials();
-
   String articleTitleCaption;
   String articleTitleNotEditable;
   String caption;
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_001", "VetTests", "Media"})
   @Execute(asUser = User.USER)
-  public void VetModalCaption_001_captionOnPage() {
+  public void VetModalCaption_001_modalCaption() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleCaption = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject
-        visualEditMode =
+
+    VisualEditModePageObject visualEditMode =
         base.navigateToArticleEditPage(wikiURL, articleTitleCaption);
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject vetOptions = vetAddingVideo
-        .addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+    VetOptionsComponentObject vetOptions =
+        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     caption = PageContent.CAPTION + vetOptions.getTimeStamp();
     vetOptions.setCaption(caption);
     vetOptions.submit();
-    visualEditMode.verifyVideoCaption(caption);
+    Assertion.assertEquals(visualEditMode.getVideoCaption(), caption);
+
     SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
     sourceEditMode.verifySourceModeEnabled();
-    sourceEditMode.verifyVideoCaption(caption);
+    Assertion.assertTrue(sourceEditMode.getContent().contains(caption));
+
     PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-    previewMode.verifyVideoCaption(caption);
+    Assertion.assertEquals(previewMode.getVideoCaption(), caption);
+
     previewMode.closePreviewModal();
     ArticlePageObject article = sourceEditMode.submitArticle();
-    article.verifyVideoCaption(caption);
+    Assertion.assertEquals(article.getVideoCaption(), caption);
   }
 
   @Test(groups = {"VetModalCaption", "VetModalCaption_002", "VetTests",
