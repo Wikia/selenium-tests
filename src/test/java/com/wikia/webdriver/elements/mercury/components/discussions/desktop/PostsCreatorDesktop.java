@@ -26,6 +26,9 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
   private WebElement editorSubmit;
 
+  @FindBy (css = ".editor-overlay-message .message-close")
+  private WebElement editorGuidelinesMessageCLoseButton;
+
   public PostsCreatorDesktop clickPostCreator() {
     postCreator.click();
     return this;
@@ -41,6 +44,12 @@ public class PostsCreatorDesktop extends BasePageObject {
 
   public boolean isPostButtonActive() {
     return editorSubmit.isEnabled();
+  }
+
+  public void closeGuidelinesMessage() {
+    if (editorGuidelinesMessageCLoseButton.isDisplayed()) {
+      editorGuidelinesMessageCLoseButton.click();
+    }
   }
 
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {

@@ -63,6 +63,20 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+
+  public void userOnDesktopCannotSaveEmptyPost() {
+    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
+
+    postsCreator
+            .clickPostCreator()
+            .closeGuidelinesMessage();
+
+    Assertion.assertFalse(postsCreator.isPostButtonActive());
+  }
+
   /**
    * TESTING METHODS SECTION
    */
