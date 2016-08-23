@@ -9,10 +9,12 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -41,7 +43,6 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();
   }
@@ -53,7 +54,6 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-
   public void loggedInUserCanExpandPostEditorOnDesktop() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
 
@@ -65,8 +65,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
-
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSaveEmptyPost() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
 
@@ -75,6 +74,31 @@ public class CreatingPostTests extends NewTestTemplate {
             .closeGuidelinesMessage();
 
     Assertion.assertFalse(postsCreator.isPostButtonActive());
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanAddPostWithoutTitle() {
+    PostsListPage postList = new PostsListPage().open();
+    PostsCreatorDesktop postsCreator = postList.getPostCreatorDesktop();
+
+    postsCreator
+            .clickPostCreator()
+            .closeGuidelinesMessage()
+            .fillPostContent("dupakupa123")
+            .selectCategory(0);
+
+    Assertion.assertTrue(postsCreator.isPostButtonActive());
+
+    postsCreator.clickSubmitButton();
+
+    Post post = postList.getPost();
+    post.getNewestPost()
+            .ifPresent(webElement -> {
+              Assertion.assertEquals("now", webElement.findElement(By.className("timestamp")).getText());
+              Assertion.assertEquals("", webElement.findElement(By.className("post-title")).getText());
+            });
   }
 
   /**

@@ -5,7 +5,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 
 public class Post extends BasePageObject {
@@ -61,6 +64,10 @@ public class Post extends BasePageObject {
 
   public int getPostsListLength() {
     return postList.size();
+  }
+
+  public Optional<WebElement> getNewestPost() {
+    return postList.isEmpty() ? Optional.empty() : Optional.of(postList.get(0));
   }
 
   public boolean isUpvoteButtonVisible(int index) {
