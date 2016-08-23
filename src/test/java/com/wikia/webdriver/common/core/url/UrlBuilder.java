@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.configuration.EnvType;
 
 public class UrlBuilder {
 
-  private static final String PROD_URL_FORMAT = "http://%s%s.%s";
-  private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
+  private static final String PROD_URL_FORMAT = "http://%s%s.%s/";
+  private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s/";
   private String env;
 
   public UrlBuilder() {
@@ -39,7 +39,7 @@ public class UrlBuilder {
     environment = environment.equals("prod") ? "" : environment + ".";
     wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
 
-    return environment + wikiName + "wikia.com";
+    return environment + wikiName + "wikia.com/";
   }
 
   public static String getUrlForPage(String pageName) {

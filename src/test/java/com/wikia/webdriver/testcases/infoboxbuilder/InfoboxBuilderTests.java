@@ -16,7 +16,6 @@ import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 
-@Execute(onWikia = "mediawiki119")
 public class InfoboxBuilderTests extends NewTestTemplate {
 
   private static final int EUROPA_INFOBOX_WIDTH = 300;
