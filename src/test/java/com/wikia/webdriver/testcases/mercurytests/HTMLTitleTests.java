@@ -100,17 +100,17 @@ public class HTMLTitleTests extends NewTestTemplate {
           "Films - Wookieepedia - Wikia"
       },
       {
-          "mediawiki119",
+          "selenium",
           "/d/f/203236/latest",
           "Discussions - Mediawiki 1.19 test Wiki - Wikia"
       },
       {
-          "mediawiki119",
+          "selenium",
           "/d/p/2706859396041803285",
           "Discussions - Mediawiki 1.19 test Wiki - Wikia"
       },
       {
-          "mediawiki119",
+          "selenium",
           "/d/u/27334045",
           "Discussions - Mediawiki 1.19 test Wiki - Wikia"
       },

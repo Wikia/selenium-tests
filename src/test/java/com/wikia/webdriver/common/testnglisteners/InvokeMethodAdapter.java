@@ -20,7 +20,7 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
       // if there are verification failures...
       if (PageObjectLogging.getVerificationStack().contains(false)) {
         result.setStatus(ITestResult.FAILURE);
-        result.setThrowable(new TestFailedException());
+        result.setThrowable(new TestFailedException(result.getThrowable()));
       }
       if (verificationFailures.size() > 0) {
         // set the test to failed
