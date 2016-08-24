@@ -155,17 +155,7 @@ public class Configuration {
   }
 
   public static EnvType getEnvType() {
-    if (getEnv().contains("prod")) {
-      return EnvType.PROD;
-    } else if (getEnv().contains("staging")) {
-      return EnvType.STAGING;
-    } else if (getEnv().contains("verify") || getEnv().contains("preview")
-        || getEnv().contains("sandbox")) {
-      return EnvType.SANDBOX;
-    } else if (getEnv().contains("dev")) {
-      return EnvType.DEV;
-    }
-    return EnvType.PROD;
+    return getEnvType(getEnv());
   }
 
   public static EnvType getEnvType(String env) {
@@ -179,7 +169,7 @@ public class Configuration {
     } else if (env.contains("dev")) {
       return EnvType.DEV;
     }
-    return EnvType.PROD;
+    return EnvType.DEV;
   }
 
   public static void setTestValue(String key, String value) {
