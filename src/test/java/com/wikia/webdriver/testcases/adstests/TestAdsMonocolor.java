@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsMonocolor extends NewTestTemplate {
 
+  @Execute(mockAds = "true")
   @Test(
       groups = "AdsMonocolorOasis",
       dataProviderClass = AdsDataProvider.class,
