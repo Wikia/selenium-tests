@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule.Video
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "de.vidauto")
@@ -23,7 +23,7 @@ public class VideosModuleTests extends NewTestTemplate {
     new ArticlePageObject().open();
     videosModule.verifyVideosModuleShowing();
 
-    new FilePagePageObject(driver).open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
+    new FilePage().open(VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
     videosModule.verifyVideosModuleShowing();
   }
 

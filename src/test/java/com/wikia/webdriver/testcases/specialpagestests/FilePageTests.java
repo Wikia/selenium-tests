@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import org.testng.annotations.Test;
 
 public class FilePageTests extends NewTestTemplate {
@@ -29,18 +29,18 @@ public class FilePageTests extends NewTestTemplate {
    */
   @Test(groups = {"FilePage", "filePage001_tabs", "Media"})
   public void filePage001_tabs() {
-    FilePagePageObject filePage = new FilePagePageObject(driver);
+    FilePage filePage = new FilePage();
     filePage.open(URLsContent.FILENAME_001);
 
     filePage.verifySelectedTab("about");
 
-    filePage.clickTab(FilePagePageObject.HISTORY_TAB);
+    filePage.clickTab(FilePage.HISTORY_TAB);
     filePage.verifySelectedTab("history");
 
-    filePage.clickTab(FilePagePageObject.ABOUT_TAB);
+    filePage.clickTab(FilePage.ABOUT_TAB);
     filePage.verifySelectedTab("about");
 
-    filePage.clickTab(FilePagePageObject.METADATA_TAB);
+    filePage.clickTab(FilePage.METADATA_TAB);
     filePage.verifySelectedTab("metadata");
   }
 
@@ -51,7 +51,7 @@ public class FilePageTests extends NewTestTemplate {
   @Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
   @Execute(asUser = User.USER)
   public void filePage002_tabsLoggedIn() {
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(URLsContent.FILENAME_001);
+    FilePage filePage = new FilePage().open(URLsContent.FILENAME_001);
 
     filePage.refreshAndVerifyTabs(0);
     filePage.refreshAndVerifyTabs(1);
@@ -93,7 +93,7 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     // Now delete the video
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
+    FilePage filePage = new FilePage().open(video.getFileName());
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
@@ -124,7 +124,7 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.verifyVideoAdded(video.getTitle());
 
     // Go to the history tab and add a second video to test deleting a version
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
+    FilePage filePage = new FilePage().open(video.getFileName());
     filePage.selectHistoryTab();
 
     filePage.replaceVideo(VideoContent.YOUTUBE_VIDEO_URL5);

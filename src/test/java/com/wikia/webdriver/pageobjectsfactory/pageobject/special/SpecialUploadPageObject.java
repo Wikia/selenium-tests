@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -56,10 +56,10 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
   }
 
-  public FilePagePageObject clickUploadButton() {
+  public FilePage clickUploadButton() {
     scrollAndClick(uploadFileInput);
     PageObjectLogging.log("clickOnUploadFile", "upload file button clicked.", true);
-    return new FilePagePageObject(driver);
+    return new FilePage();
   }
 
   public void typeFileName(String fileName) {

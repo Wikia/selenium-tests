@@ -15,7 +15,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import org.testng.annotations.Test;
 
 public class VetSpecialVideosTests extends NewTestTemplate {
@@ -35,7 +35,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     vetAddingVideo.addVideoByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
-    FilePagePageObject filePage = new FilePagePageObject(driver).open(video.getFileName());
+    FilePage filePage = new FilePage().open(video.getFileName());
 
 //    filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
     filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

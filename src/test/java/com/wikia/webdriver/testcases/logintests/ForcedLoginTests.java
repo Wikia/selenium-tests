@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMe
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
@@ -27,8 +27,8 @@ public class ForcedLoginTests extends NewTestTemplate {
   @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingFile")
   public void anonCanLogInViaAuthModalWhenAddingFile() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifyPageHeader(specialPage.getNewFilesSpecialPageTitle());
+    SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
+    specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
     AuthModal authModal = specialPage.getAuthModal();
     Assert.assertTrue(authModal.isOpened());
