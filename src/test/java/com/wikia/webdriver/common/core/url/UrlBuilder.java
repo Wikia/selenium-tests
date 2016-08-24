@@ -68,7 +68,7 @@ public class UrlBuilder {
 
   public String getUrlForWiki(String wikiName, boolean addWWW) {
     EnvType env = Configuration.getEnvType(this.env);
-    final String wikiaName = isGlobal(wikiName);
+    final String wikiaName = getWikiaGlobalName(wikiName);
 
     String www = "";
     if (addWWW) {
@@ -94,7 +94,7 @@ public class UrlBuilder {
     }
   }
 
-  private String isGlobal(String wikiName) {
+  private String getWikiaGlobalName(String wikiName) {
     if (wikiName.endsWith(".wikia")) {
       if (Configuration.getEnvType(this.env) == EnvType.DEV) {
         return "wikiaglobal";
