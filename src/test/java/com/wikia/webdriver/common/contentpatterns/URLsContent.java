@@ -37,16 +37,16 @@ public class URLsContent {
   public static final String SPECIAL_MULTI_WIKI_FINDER = "/wiki/Special:Multiwikifinder";
   public static final String LOGOUT = "/wiki/Special:UserLogout?noexternals=1";
   public static final String USER_PROFILE = "/wiki/User:%userName%";
-  public static final String SPECIAL_CREATE_NEW_WIKI = "Special:CreateNewWiki";
+  public static final String SPECIAL_CREATE_NEW_WIKI = "/Special:CreateNewWiki";
   public static final String SPECIAL_WIKI_FACTORY = "/wiki/Special:WikiFactory";
-  public static final String SPECIAL_WHERE_IS_EXTENSION = "Special:WhereIsExtension";
+  public static final String SPECIAL_WHERE_IS_EXTENSION = "/Special:WhereIsExtension";
   public static final String SPECIAL_CONTRIBUTIONS = "/wiki/Special:Contributions";
   public static final String SPECIAL_BLOCK = "/wiki/Special:Block";
   public static final String SPECIAL_CHAT = "/wiki/Special:Chat";
   public static final String SPECIAL_EDIT_HUB = "/wiki/Special:EditHub";
   public static final String SPECIAL_MAPS = "/wiki/Special:Maps";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "/wiki/Special:VideoPageAdmin/edit";
-  public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
+  public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "/wiki/Special:Version";
   public static final String SPECIAL_INFOBOX_BUILDER = "/wiki/Special:InfoboxBuilder/";
   public static final String SPECIAL_WIKI_FEATURES = "/wiki/Special:WikiFeatures/";
@@ -74,7 +74,7 @@ public class URLsContent {
   public static final String ACTION_RAW = "action=raw";
 
   // WAM Scores page url
-  public static final String WAM_PAGE = "WAM";
+  public static final String WAM_PAGE = "/WAM";
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
