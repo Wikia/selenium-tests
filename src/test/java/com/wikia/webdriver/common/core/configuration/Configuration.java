@@ -169,7 +169,7 @@ public class Configuration {
     } else if (env.contains("dev")) {
       return EnvType.DEV;
     }
-    return EnvType.DEV;
+    return EnvType.PROD;
   }
 
   public static void setTestValue(String key, String value) {
