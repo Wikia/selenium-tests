@@ -134,7 +134,7 @@ public class URLsContent {
   public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
 
   // Recent wiki activity on mobile
-  public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
+  public static final String RECENT_WIKI_ACTIVITY = "/recent-wiki-activity";
 
   // Search results page on mobile, replace %query% with searched string
   public static final String MOBILE_SEARCH_RESULTS_PAGE = "search?query=%query%";
