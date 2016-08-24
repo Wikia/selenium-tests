@@ -36,8 +36,8 @@ public class UrlBuilder {
 
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = "";
-    if (wikiName.endsWith("wikia")) {
-      url = String.format("%s%s", getUrlForWiki(wikiName), wikiPath);
+    if (!wikiPath.startsWith("/")) {
+      url = String.format("%s/%s", getUrlForWiki(wikiName), wikiPath);
     } else {
       url = String.format("%s%s", getUrlForWiki(wikiName), wikiPath);
     }
