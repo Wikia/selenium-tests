@@ -63,7 +63,6 @@ public class Sidebar extends WikiBasePageObject {
   }
 
   public boolean areAddButtonsPresent() {
-    wait.forXMilliseconds(5000);
     wait.forElementVisible(componentsButtonsWrapper);
 
     return true;
@@ -104,6 +103,7 @@ public class Sidebar extends WikiBasePageObject {
   public Sidebar clickBackArrow() {
     wait.forElementClickable(backArrowButton);
     backArrowButton.click();
+    wait.forElementNotVisible(backArrowButton);
 
     return this;
   }
