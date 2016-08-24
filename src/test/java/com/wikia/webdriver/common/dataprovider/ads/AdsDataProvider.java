@@ -1318,8 +1318,8 @@ public class AdsDataProvider {
   public static Object[][] adsMonocolorOasis() {
     return new Object[][]{
         {
-            "project43",
-            "SyntheticTests/Monocolor_Ad"
+            "adtest",
+            "Monocolor_Ad"
         }
     };
   }
