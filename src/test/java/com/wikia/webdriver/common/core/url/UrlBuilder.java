@@ -23,14 +23,6 @@ public class UrlBuilder {
     return getUrlForWiki(true) + pageName;
   }
 
-  public static String getUrl(String wikiName, String path) {
-    String environment = Configuration.getEnv();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-
-    return "http://" + environment + wikiName + ".wikia.com" + path;
-  }
-
   public String getUrlForPage(String pageName) {
     return getUrlForWiki() + pageName;
   }
@@ -45,9 +37,9 @@ public class UrlBuilder {
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = "";
     if (wikiName.endsWith("wikia")) {
-      url = String.format("/%s/%s", getUrlForWiki(wikiName), wikiPath);
+      url = String.format("%s%s", getUrlForWiki(wikiName), wikiPath);
     } else {
-      url = String.format("/%s/wiki/%s", getUrlForWiki(wikiName), wikiPath);
+      url = String.format("%s%s", getUrlForWiki(wikiName), wikiPath);
     }
 
     String qs = Configuration.getQS();
