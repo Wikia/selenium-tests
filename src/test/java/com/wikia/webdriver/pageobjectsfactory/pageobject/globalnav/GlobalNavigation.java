@@ -14,9 +14,6 @@ import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
 
-  @FindBy(css = ".gamestar-logo")
-  private WebElement gameStarLink;
-
   @FindBy(css = ".wikia-logo-container .wikia-logo")
   private WebElement wikiaLogo;
 
@@ -40,10 +37,6 @@ public class GlobalNavigation extends BasePageObject {
 
   private DropDownComponentObject accountNavigation;
   private DropDownComponentObject exploreWikiaDropdownComponent;
-
-  public boolean isGameStarLogoDisplayed() {
-    return ElementStateHelper.isElementVisible(gameStarLink, driver);
-  }
 
   public HomePage clickWikiaLogo() {
     wait.forElementVisible(wikiaLogo);
