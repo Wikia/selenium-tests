@@ -551,7 +551,7 @@ public class WikiBasePageObject extends BasePageObject {
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie",
         "user was logged in by by helios using acces token: " + token, true);
-//    logMercuryUserId();
+    logMercuryUserId();
 
     return token;
   }
