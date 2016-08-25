@@ -63,7 +63,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   public void goToSearchPage(String searchUrl) {
     try {
-      getUrl(searchUrl + "index.php?title=Special:Search");
+      getUrl(searchUrl + "/index.php?title=Special:Search");
     } catch (TimeoutException e) {
       PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
     }
