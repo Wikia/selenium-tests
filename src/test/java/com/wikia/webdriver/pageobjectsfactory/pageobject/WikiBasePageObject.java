@@ -548,7 +548,7 @@ public class WikiBasePageObject extends BasePageObject {
       refreshPageAddingCacheBuster();
     }
 
-//    verifyUserLoggedIn(userName);
+    verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie",
         "user was logged in by by helios using acces token: " + token, true);
     logMercuryUserId();
