@@ -33,7 +33,7 @@ public class PostDetailsPage extends WikiBasePageObject {
   private static final String EMPTY_POST_ID = "4809883";
 
   public PostDetailsPage open(String wikiID) {
-    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
+    getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
     return this;
   }
 

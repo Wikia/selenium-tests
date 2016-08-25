@@ -46,7 +46,7 @@ public class JoinPageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
     }
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "join" + "?redirect="
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/join" + "?redirect="
                + redirectParameter);
     return this;
   }

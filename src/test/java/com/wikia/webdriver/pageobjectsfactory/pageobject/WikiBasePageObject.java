@@ -538,9 +538,8 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
-    String domain = Configuration.getEnvType().getWikiaDomain();
 
-    driver.manage().addCookie(new Cookie("access_token", token, domain, null, null));
+    driver.manage().addCookie(new Cookie("access_token", token));
 
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);

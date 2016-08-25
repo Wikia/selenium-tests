@@ -9,7 +9,7 @@ public class Navigate extends BasePageObject {
   public Navigate toPage(String pageName) {
     String query = getQueryParams(pageName);
 
-    driver.get(urlBuilder.getUrlForWiki() + query);
+    driver.get(urlBuilder.getUrlForWiki() + pageName + query);
 
     return this;
   }

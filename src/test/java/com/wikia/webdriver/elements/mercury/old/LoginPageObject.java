@@ -56,7 +56,7 @@ public class LoginPageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("encoding", "problem occured during URL encoding", false);
     }
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "login" + "?redirect="
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/login" + "?redirect="
                + redirectParameter);
     return this;
   }
