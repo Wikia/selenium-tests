@@ -28,12 +28,12 @@ public class PostDetailsPage extends WikiBasePageObject {
   private final ErrorMessages errorMessages = new ErrorMessages();
 
 
-  private static final String PATH = "d/p/%s";
+  private static final String PATH = "/d/p/%s";
   private static final String DEFAULT_POST_ID = "2741364719297234368";
   private static final String EMPTY_POST_ID = "4809883";
 
   public PostDetailsPage open(String wikiID) {
-    driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH, wikiID));
+    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
     return this;
   }
 
