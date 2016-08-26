@@ -86,7 +86,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator
             .clickPostCreator()
             .closeGuidelinesMessage()
-            .fillPostContent("dupakupa123")
+            .fillPostContent("test")
             .selectCategory(0);
 
     Assertion.assertTrue(postsCreator.isPostButtonActive());
