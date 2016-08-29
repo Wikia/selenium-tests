@@ -50,7 +50,7 @@ public class CropImageTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = "MercuryCropImageTest_001")
+  @Test(groups = {"MercuryCropImageTest_001", "CropImage"})
   public void MercuryCropImageTest_001_cropOptionInModal() {
     init();
 

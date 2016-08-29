@@ -29,7 +29,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Uploa
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
+@Test(groups = "CuratedEditor")
 @Execute(
     onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
     asUser = User.STAFF

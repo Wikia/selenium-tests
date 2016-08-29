@@ -13,6 +13,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPag
 
 import org.testng.annotations.Test;
 
+@Test(groups = "CuratedSection")
 @Execute(onWikia = MercuryWikis.MERCURY_CC)
 @InBrowser(
     browser = Browser.CHROME,

@@ -14,7 +14,8 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class ErrorPageTests extends NewTestTemplate {
 
-  @Test(groups = "mercury_errorPage_navigateFromErrorPageToArticlePageUsingGlobalNav")
+  @Test(groups = {"mercury_errorPage_navigateFromErrorPageToArticlePageUsingGlobalNav",
+                  "ErrorPage"})
   public void mercury_errorPage_navigateFromErrorPageToArticlePageUsingGlobalNav() {
     new ErrorPage()
         .navigateToErrorPageFromUrl()

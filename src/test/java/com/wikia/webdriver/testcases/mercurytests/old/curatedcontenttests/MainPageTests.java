@@ -18,7 +18,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPag
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "CuratedMainPage")
 @InBrowser(
     emulator = Emulator.GOOGLE_NEXUS_5,
     browser = Browser.CHROME

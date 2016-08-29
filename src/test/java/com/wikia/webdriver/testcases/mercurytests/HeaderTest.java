@@ -31,7 +31,7 @@ public class HeaderTest extends NewTestTemplate {
   private static final String INVALID_ATTRIBUTE_MESSAGE_TEMPLATE = "%s has invalid %s attribute.";
 
 
-  @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
+  @Test(groups = {"mercury_header_checkElementsVisibilityWithoutInfobox", "Header"})
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
     Header header =
         new ArticlePage()
@@ -52,7 +52,8 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
+  @Test(groups = {"mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage",
+                  "Header"})
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage() {
     Header header =
         new ArticlePage()
@@ -73,7 +74,8 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage")
+  @Test(groups = {"mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage",
+                  "Header"})
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage() {
     Header header =
         new ArticlePage()
@@ -94,7 +96,7 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_header_heroImageIsProperlyStyled")
+  @Test(groups = {"mercury_header_heroImageIsProperlyStyled", "Header"})
   public void mercury_header_heroImageIsProperlyStyled() {
     Header header =
         new ArticlePage()
@@ -117,7 +119,7 @@ public class HeaderTest extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "mercury_header_heroImageIsSquare")
+  @Test(groups = {"mercury_header_heroImageIsSquare", "Header"})
   public void mercury_header_heroImageIsSquare() {
     Header header =
         new ArticlePage()
@@ -130,7 +132,7 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_header_heroImageIsRectangle")
+  @Test(groups = {"mercury_header_heroImageIsRectangle", "Header"})
   public void mercury_header_heroImageIsRectangle() {
     Header header =
         new ArticlePage()

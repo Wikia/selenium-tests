@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "TOC")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,

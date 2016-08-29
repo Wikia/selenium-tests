@@ -15,29 +15,34 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryPageTest extends NewTestTemplate {
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl")
+  @Test(groups = {"mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl",
+                  "Category"})
   public void mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl() {
     new CategoryPage().navigateToPageWithoutArticleAndWithMembersFromUrl();
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl")
+  @Test(groups = {"mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl",
+                  "Category"})
   public void mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl() {
     new CategoryPage().navigateToPageWithArticleAndWithMembersFromUrl();
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl")
+  @Test(groups = {"mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl",
+                  "Category"})
   public void mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl() {
     new CategoryPage().navigateToPageWithArticleAndWithoutMembersFromUrl();
   }
 
-  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink")
+  @Test(groups = {"mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink",
+                  "Category"})
   public void mercury_category_navigateToCategoryPageFromLinkInArticle() {
     new ArticlePage()
         .openPageWithLinkToCategoryPage()
         .openCategoryPageFromLink();
   }
 
-  @Test(groups = "mercury_category_navigateThroughSection")
+  @Test(groups = {"mercury_category_navigateThroughSection",
+                  "Category"})
   public void mercury_category_navigateThroughSection() {
     new CategoryPage()
         .navigateToPageWithArticleAndWithMembersFromUrl()

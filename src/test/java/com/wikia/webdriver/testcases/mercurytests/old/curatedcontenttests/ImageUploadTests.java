@@ -47,7 +47,7 @@ public class ImageUploadTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = "MercuryImageUploadTest_001")
+  @Test(groups = {"MercuryImageUploadTest_001", "ImageUpload"})
   public void MercuryImageUploadTest_001_saveNewPhoto() {
     init();
 

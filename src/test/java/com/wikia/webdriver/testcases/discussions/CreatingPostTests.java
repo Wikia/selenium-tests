@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,8 +13,10 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Posts
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
+import org.testng.annotations.Test;
+
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-@Test(groups = {"discussions-creating-posts"})
+@Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";

@@ -27,7 +27,7 @@ public class LoginTestsOld extends NewTestTemplate {
   private static final String ERROR_MESSAGE =
       "We don't recognize these credentials. Try again or register a new account.";
 
-  @Test(groups = "MercuryLoginTest_002")
+  @Test(groups = {"MercuryLoginTest_002", "LoginTests_001"})
   public void MercuryLoginTest_002_userCanNotLogInWithWrongPassword() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userName10, "thisIsWrongPassword");
@@ -35,7 +35,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(loginPageObject.getErrorMessage(), ERROR_MESSAGE);
   }
 
-  @Test(groups = "MercuryLoginTest_003")
+  @Test(groups = {"MercuryLoginTest_003", "LoginTests_001"})
   public void MercuryLoginTest_003_invalidUserCanNotLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn("notExistingUserName", Configuration.getCredentials().password10);
@@ -43,7 +43,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(loginPageObject.getErrorMessage(), ERROR_MESSAGE);
   }
 
-  @Test(groups = "MercuryLoginTest_004")
+  @Test(groups = {"MercuryLoginTest_004", "LoginTests_001"})
   public void MercuryLoginTest_004_notPossibleToLogInWhenUsernameFieldBlank() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn("", Configuration.getCredentials().password10);
@@ -51,7 +51,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
 
-  @Test(groups = "MercuryLoginTest_005")
+  @Test(groups = {"MercuryLoginTest_005", "LoginTests_001"})
   public void MercuryLoginTest_005_notPossibleToLogInWhenPasswordFieldBlank() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userName10, "");
@@ -59,7 +59,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
 
-  @Test(groups = "MercuryLoginTest_006")
+  @Test(groups = {"MercuryLoginTest_006", "LoginTests_001"})
   public void MercuryLoginTest_006_closeButtonWorksAndRedirectsProperly() {
     ArticlePageObject homePage = new ArticlePageObject(driver);
     driver.get(wikiURL);
@@ -72,7 +72,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(expectedHomePageTitle, homePage.getArticleTitle());
   }
 
-  @Test(groups = "MercuryLoginTest_007")
+  @Test(groups = {"MercuryLoginTest_007", "LoginTests_002"})
   public void MercuryLoginTest_007_registerNowLinkWorks() {
     SignupPageObject registrationPage = new SignupPageObject(driver);
     registrationPage.openRegisterPage();
@@ -84,7 +84,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(expectedHeader, currentHeader);
   }
 
-  @Test(groups = "MercuryLoginTest_008")
+  @Test(groups = {"MercuryLoginTest_008", "LoginTests_002")
   public void MercuryLoginTest_008_userIsTakenToJoinPage() {
     JoinPageObject joinPageObject = new JoinPageObject(driver).get();
     String expectedMessage = joinPageObject.getJoinTodayText();
@@ -97,7 +97,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(joinPageObject.getJoinTodayText(), expectedMessage);
   }
 
-  @Test(groups = "MercuryLoginTest_009")
+  @Test(groups = {"MercuryLoginTest_009", "LoginTests_002")
   public void MercuryLoginTest_009_registerButtonWorksOnJoinPage() {
     SignupPageObject registrationPage = new SignupPageObject(driver);
     registrationPage.openRegisterPage();
@@ -109,7 +109,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(registrationPage.getRegisterHeaderText(), expectedHeader);
   }
 
-  @Test(groups = "MercuryLoginTest_010")
+  @Test(groups = {"MercuryLoginTest_010", "LoginTests_002")
   public void MercuryLoginTest_010_signInLinkWorksOnJoinPage() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     String expectedHeader = loginPageObject.getLoginHeaderText();
@@ -120,7 +120,7 @@ public class LoginTestsOld extends NewTestTemplate {
     Assertion.assertEquals(loginPageObject.getLoginHeaderText(), expectedHeader);
   }
 
-  @Test(groups = "MercuryLoginTest_011")
+  @Test(groups = {"MercuryLoginTest_011", "LoginTests_002")
   public void MercuryLoginTest_011_japaneseUserLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userNameJapanese2,
@@ -129,7 +129,7 @@ public class LoginTestsOld extends NewTestTemplate {
 //        Configuration.getCredentials().userNameJapanese2));
   }
 
-  @Test(groups = "MercuryLoginTest_012")
+  @Test(groups = {"MercuryLoginTest_012", "LoginTests_002")
   public void MercuryLoginTest_012_passwordTogglerWorks() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.typePassword(Configuration.getCredentials().password10);

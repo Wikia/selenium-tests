@@ -14,7 +14,8 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryTest extends NewTestTemplate {
 
-  @Test(groups = "mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage")
+  @Test(groups = {"mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage",
+                  "Category"})
   public void mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage() {
     new MainPage()
         .openRegularMainPage()

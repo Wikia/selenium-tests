@@ -26,7 +26,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
   @NetworkTrafficDump
   @Test(
-      groups = "AdsTrackingPixels",
+      groups = {"AdsTrackingPixels"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixelsOnConsecutivePages"
   )
@@ -54,7 +54,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @NetworkTrafficDump
   @Execute(mockAds = "true")
   @Test(
-      groups = "AdsTrackingPixels",
+      groups = {"AdsTrackingPixels"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixelsSent"
   )
@@ -70,7 +70,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @NetworkTrafficDump
   @Execute(mockAds = "true")
   @Test(
-      groups = "AdsTrackingPixels",
+      groups = {"AdsTrackingPixels"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixelsNotSent"
   )
@@ -86,7 +86,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @NetworkTrafficDump
   @Execute(mockAds = "true")
   @Test(
-      groups = "AdsTrackingPixelsCuratedMainPage",
+      groups = {"AdsTrackingPixelsCuratedMainPage"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsTrackingPixelsSentCuratedMainPages"
   )
@@ -102,7 +102,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
 
   @NetworkTrafficDump
   @Test(
-          groups = "AdsTrackingPixelsAuthPage",
+          groups = {"AdsTrackingPixelsAuthPage"},
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsTrackingPixelsSentAuthPage"
   )
