@@ -1,38 +1,32 @@
 package com.wikia.webdriver.elements.common;
 
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.joda.time.DateTime;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class Navigate extends BasePageObject {
 
-  private static final String PROTOCOL = "http://";
-
   public Navigate toPage(String pageName) {
-    String host = UrlBuilder.getHostForWiki();
     String query = getQueryParams(pageName);
 
-    driver.get(PROTOCOL + host + pageName + query);
+    driver.get(urlBuilder.getUrlForWiki() + pageName + query);
 
     return this;
   }
 
   public Navigate toPage(String pageName, String reference) {
-    String host = UrlBuilder.getHostForWiki();
     String query = getQueryParams(pageName);
     reference = "#" + reference;
 
-    driver.get(PROTOCOL + host + pageName + query + reference);
+    driver.get(urlBuilder.getUrlForPage(pageName) + query + reference);
 
     return this;
   }
 
   public Navigate toPage(String pageName, String[] queryParams) {
-    String host = UrlBuilder.getHostForWiki();
     String query = getQueryParams(pageName, queryParams);
 
-    driver.get(PROTOCOL + host + pageName + query);
+    driver.get(urlBuilder.getUrlForPage(pageName) + query);
 
     return this;
   }
@@ -40,7 +34,7 @@ public class Navigate extends BasePageObject {
   public Navigate toPage(String host, String pageName, String[] queryParams) {
     String query = getQueryParams(pageName, queryParams);
 
-    driver.get(PROTOCOL + host + pageName + query);
+    driver.get(urlBuilder.getUrlForPage(pageName) + query);
 
     return this;
   }

@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 
 // disabling as feature is also disabled
 @Test(groups = "CommunityPageTests", enabled = false)
-@Execute(onWikia = "mediawiki119")
 public class CommunityPageSalesPitchDialogTests extends NewTestTemplate {
 
   @Execute(disableCommunityPageSalesPitchDialog = "false")

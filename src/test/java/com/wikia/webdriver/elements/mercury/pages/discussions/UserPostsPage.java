@@ -10,11 +10,11 @@ public class UserPostsPage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
-  private static final String PATH = "d/u/%s";
+  private static final String PATH = "/d/u/%s";
   private static final String NON_EXISTING_USER_ID = "4809883";
 
   public UserPostsPage open(String wikiID) {
-    driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH, wikiID));
+    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
     return this;
   }
 

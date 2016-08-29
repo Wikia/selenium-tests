@@ -130,7 +130,7 @@ public class SignupPageObject {
   }
 
   public void openRegisterPage() {
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "register");
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/register");
   }
 
   public SignupPageObject openMobileSignupPage() {

@@ -63,12 +63,12 @@ public class PostsListPage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
-  private static final String PATH = "d/f/%s";
+  private static final String PATH = "/d/f/%s";
   private static final String DEFAULT_FORUM_ID = "1362702";
 
 
   public PostsListPage open(String wikiID) {
-    driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH, wikiID));
+    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
     return this;
   }
 
