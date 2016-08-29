@@ -10,39 +10,34 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.CategoryPage;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Category")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryPageTest extends NewTestTemplate {
 
-  @Test(groups = {"mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl",
-                  "Category"})
+  @Test(groups = "mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl")
   public void mercury_category_navigateToCategoryPageWithoutArticleAndWithMembersFromUrl() {
     new CategoryPage().navigateToPageWithoutArticleAndWithMembersFromUrl();
   }
 
-  @Test(groups = {"mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl",
-                  "Category"})
+  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl")
   public void mercury_category_navigateToCategoryPageWithArticleAndWithMembersFromUrl() {
     new CategoryPage().navigateToPageWithArticleAndWithMembersFromUrl();
   }
 
-  @Test(groups = {"mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl",
-                  "Category"})
+  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl")
   public void mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl() {
     new CategoryPage().navigateToPageWithArticleAndWithoutMembersFromUrl();
   }
 
-  @Test(groups = {"mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink",
-                  "Category"})
+  @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromLink")
   public void mercury_category_navigateToCategoryPageFromLinkInArticle() {
     new ArticlePage()
         .openPageWithLinkToCategoryPage()
         .openCategoryPageFromLink();
   }
 
-  @Test(groups = {"mercury_category_navigateThroughSection",
-                  "Category"})
+  @Test(groups = "mercury_category_navigateThroughSection")
   public void mercury_category_navigateThroughSection() {
     new CategoryPage()
         .navigateToPageWithArticleAndWithMembersFromUrl()
