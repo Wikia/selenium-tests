@@ -307,7 +307,7 @@ public class MessageWall extends WikiBasePageObject {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href"), wikiURL + "wiki/" + target);
+        .getAttribute("href"), wikiURL + "/wiki/" + target);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
         .getText(), text);
   }

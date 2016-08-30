@@ -129,7 +129,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     String temp = driver.getCurrentUrl();
     try {
 
-      getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
+      getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumExists", e, false);
     }
@@ -141,7 +141,7 @@ public class ForumManageBoardsPageObject extends BasePageObject {
 
   public void verifyForumNotExists(String forumName, String wikiURL) {
     try {
-      getUrl(wikiURL + "wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
+      getUrl(wikiURL + "/wiki/Board:" + URLEncoder.encode(forumName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumNotExists", e, false);
     }

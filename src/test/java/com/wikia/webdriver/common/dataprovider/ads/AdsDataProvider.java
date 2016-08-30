@@ -919,7 +919,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             MercuryWikis.MERCURY_CC,
-            "main/section/Categories",
+            "/main/section/Categories",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -928,7 +928,7 @@ public class AdsDataProvider {
             }
         }, {
             MercuryWikis.MERCURY_CC,
-            "main/category/Articles",
+            "/main/category/Articles",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -944,7 +944,7 @@ public class AdsDataProvider {
         return new Object[][]{
             {
                 MercuryWikis.MERCURY_AUTOMATION_TESTING,
-                "join",
+                "/join",
                 new String[]{
                     TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
                 }

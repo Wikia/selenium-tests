@@ -1,13 +1,5 @@
 package com.wikia.webdriver.common.core.configuration;
 
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.properties.Credentials;
-
-import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriverException;
-import org.yaml.snakeyaml.Yaml;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,45 +9,58 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import lombok.Getter;
+
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriverException;
+import org.yaml.snakeyaml.Yaml;
+
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.properties.Credentials;
+
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
- * Configuration handling: <ol> <li>Look for the property key in testConfig map, if key is present,
- * return the value</li> <li>Look for the property key in system properties - return value of this
- * property if key present </li> <li>If no System Property is found - value is provided from
- * configuration files (config_default.yml and config.yml). Values provided in config.yml, are
- * overriding values from config_default.yml</li> </ol>
+ * Configuration handling:
+ * <ol>
+ * <li>Look for the property key in testConfig map, if key is present, return the value</li>
+ * <li>Look for the property key in system properties - return value of this property if key present
+ * </li>
+ * <li>If no System Property is found - value is provided from configuration files
+ * (config_default.yml and config.yml). Values provided in config.yml, are overriding values from
+ * config_default.yml</li>
+ * </ol>
  */
 public class Configuration {
 
   private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
   private static final String LOCAL_CONFIG_FILE_NAME = "config.yml";
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
-  private static String wikiaDomain;
   private static String geoEdgeCountry;
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
+  @Getter(lazy = true)
+  private static final String wikiaDomain = getEnvType().getWikiaDomain();
 
-  private Configuration() {
-  }
+  private Configuration() {}
 
   private static Map<String, String> readConfiguration() {
     if (defaultConfig == null) {
       Yaml yaml = new Yaml();
 
       try {
-        defaultConfig =
-            (Map<String, String>) yaml
-                .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
+        defaultConfig = (Map<String, String>) yaml
+            .load(new FileInputStream(new File(DEFAULT_CONFIG_FILE_NAME)));
       } catch (FileNotFoundException e) {
-        throw new TestEnvInitFailedException(String.format("CANNOT FIND DEFAULT CONFIG FILE : %s",
-                                                           DEFAULT_CONFIG_FILE_NAME), e);
+        throw new TestEnvInitFailedException(
+            String.format("CANNOT FIND DEFAULT CONFIG FILE : %s", DEFAULT_CONFIG_FILE_NAME), e);
       }
 
       File localConfigFile = new File(LOCAL_CONFIG_FILE_NAME);
       if (localConfigFile.exists()) {
         try {
-          defaultConfig.putAll((Map<String, String>) yaml
-              .load(new FileInputStream(localConfigFile)));
+          defaultConfig
+              .putAll((Map<String, String>) yaml.load(new FileInputStream(localConfigFile)));
         } catch (FileNotFoundException e) {
           LOGGER.log(Level.INFO, "local config file not found", e);
         }
@@ -76,14 +81,14 @@ public class Configuration {
   }
 
   private static String getPropertyFromFile(String propertyName) {
-    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null : String
-        .valueOf(readConfiguration().get(propertyName));
+    return "null".equals(String.valueOf(readConfiguration().get(propertyName))) ? null
+        : String.valueOf(readConfiguration().get(propertyName));
   }
 
   private static String getProp(String propertyName) {
     if (testConfig.get(propertyName) == null) {
       return System.getProperty(propertyName) != null ? System.getProperty(propertyName)
-                                                      : getPropertyFromFile(propertyName);
+          : getPropertyFromFile(propertyName);
     } else {
       return testConfig.get(propertyName);
     }
@@ -141,7 +146,7 @@ public class Configuration {
     return getProp("emulator");
   }
 
-  public static String getPageLoadStrategy(){
+  public static String getPageLoadStrategy() {
     return getProp("unstablePageLoadStrategy");
   }
 
@@ -149,24 +154,22 @@ public class Configuration {
     return new Credentials();
   }
 
-  public static String getEnvType() {
-    if (getEnv().contains("prod")) {
-      return "prod";
-    } else if (getEnv().contains("verify") || getEnv().contains("preview")
-               || getEnv().contains("sandbox")) {
-      return "staging";
-    } else if (getEnv().contains("dev")) {
-      return "dev";
-    }
-    return "";
+  public static EnvType getEnvType() {
+    return getEnvType(getEnv());
   }
 
-  public static String getWikiaDomain() {
-    if (StringUtils.isBlank(wikiaDomain)) {
-      wikiaDomain = "dev".equals(getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
+  public static EnvType getEnvType(String env) {
+    if (env.contains("prod")) {
+      return EnvType.PROD;
+    } else if (env.contains("staging")) {
+      return EnvType.STAGING;
+    } else if (env.contains("verify") || env.contains("preview")
+               || env.contains("sandbox")) {
+      return EnvType.SANDBOX;
+    } else if (env.contains("dev")) {
+      return EnvType.DEV;
     }
-
-    return wikiaDomain;
+    return EnvType.PROD;
   }
 
   public static void setTestValue(String key, String value) {
@@ -181,7 +184,7 @@ public class Configuration {
     return getProp("countryCode");
   }
 
-  public static boolean useProxy(){
+  public static boolean useProxy() {
     return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode());
   }
 
@@ -196,7 +199,7 @@ public class Configuration {
         return null;
       } else {
         return new Dimension(Integer.valueOf(size.split("x")[0]),
-                             Integer.valueOf(size.split("x")[1]));
+            Integer.valueOf(size.split("x")[1]));
       }
     } else {
       throw new WebDriverException("browser size: " + size + " is not a proper value");
@@ -207,7 +210,7 @@ public class Configuration {
     String exts = getProp("extensions");
 
     if (StringUtils.isEmpty(exts)) {
-      return new String[]{};
+      return new String[] {};
     }
 
     ArrayList<String> res = new ArrayList<>();

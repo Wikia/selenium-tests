@@ -1,5 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import lombok.Getter;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -49,23 +67,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import lombok.Getter;
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -537,9 +538,9 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String loginAs(String userName, String password, String wikiURL) {
     String token = Helios.getAccessToken(userName, password);
-    String domian = "dev".equals(Configuration.getEnvType()) ? ".wikia-dev.com" : ".wikia.com";
 
-    driver.manage().addCookie(new Cookie("access_token", token, domian, null, null));
+    driver.manage().addCookie(new Cookie("access_token", token,
+        String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
 
     if (driver.getCurrentUrl().contains("Logout")) {
       driver.get(wikiURL);
@@ -640,13 +641,6 @@ public class WikiBasePageObject extends BasePageObject {
         .executeScript("return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
             element, pseudoElement, cssValue)
         .toString();
-  }
-
-  public void openSpecialPromoteOnCurrentWiki() {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    String url = (String) js.executeScript("return wgServer");
-    getUrl(url + "/" + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
   }
 
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
