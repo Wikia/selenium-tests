@@ -44,6 +44,7 @@ public class SearchTests extends NewTestTemplate {
                            article.getHeader().getPageTitle().toLowerCase());
   }
 
+  @Execute(onWikia = "dauto")
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnDesktop",
                   "Mercury_Search_001"})
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
