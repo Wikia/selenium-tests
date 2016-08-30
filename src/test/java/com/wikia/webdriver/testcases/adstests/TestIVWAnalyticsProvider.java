@@ -54,7 +54,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
       AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
       JavascriptActions jsActions = new JavascriptActions(driver);
 
-      jsActions.waitForJavaScriptTruthy("typeof(iom) == 'object'");
+      jsActions.waitForJavaScriptTruthy("typeof iom === 'object'");
       assertTrackingPixels(adsBaseObject, URL_TRACKING_SCRIPT);
   }
 
