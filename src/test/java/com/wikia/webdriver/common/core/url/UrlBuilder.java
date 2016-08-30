@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.configuration.EnvType;
 public class UrlBuilder {
 
   private static final String PROD_URL_FORMAT = "http://%s%s.%s";
+  private static final String SANDBOX_URL_FORMAT = "http://%s.%s%s.%s";
   private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
   private String env;
 
@@ -87,7 +88,7 @@ public class UrlBuilder {
         return String.format(PROD_URL_FORMAT, www, wikiaName, env.getWikiaDomain());
       }
       case SANDBOX: {
-        return String.format(DEV_URL_FORMAT, www, this.env, wikiaName, env.getWikiaDomain());
+        return String.format(SANDBOX_URL_FORMAT, this.env, www, wikiaName, env.getWikiaDomain());
       }
       default:
         return "";
