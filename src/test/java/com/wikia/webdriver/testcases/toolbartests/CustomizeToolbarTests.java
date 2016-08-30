@@ -25,7 +25,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   // tools
   String toolPreferences = "Preferences";
   String toolDoubleRedirects = "Double redirects";
-  String toolUploadPhoto = "Upload photo";
+  String toolUploadFile = "Upload file";
   String toolMore = "more…";
   String toolFollow = "Follow";
   String toolFollowing = "Following";
@@ -91,10 +91,10 @@ public class CustomizeToolbarTests extends NewTestTemplate {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.searchTool(searchQueryUploadPhoto);
-    toolbar.clickSearchSuggestion(toolUploadPhoto);
-    toolbar.verifyToolOnList(toolUploadPhoto);
+    toolbar.clickSearchSuggestion(toolUploadFile);
+    toolbar.verifyToolOnList(toolUploadFile);
     toolbar.clickSave();
-    toolbar.verifyToolOnToolbar(toolUploadPhoto);
+    toolbar.verifyToolOnToolbar(toolUploadFile);
   }
 
   @Test(groups = {"CustomizeToolbar005"})
