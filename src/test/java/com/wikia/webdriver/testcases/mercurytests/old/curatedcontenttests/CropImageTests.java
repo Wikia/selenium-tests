@@ -19,7 +19,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Searc
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_CropImage")
 @Execute(
     onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
     asUser = User.STAFF
@@ -50,7 +50,7 @@ public class CropImageTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = {"MercuryCropImageTest_001", "CropImage"})
+  @Test(groups = "MercuryCropImageTest_001")
   public void MercuryCropImageTest_001_cropOptionInModal() {
     init();
 

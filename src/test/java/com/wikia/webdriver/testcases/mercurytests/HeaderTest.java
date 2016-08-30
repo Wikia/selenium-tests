@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Test(groups = "Mercury_Header")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {
@@ -31,7 +31,7 @@ public class HeaderTest extends NewTestTemplate {
   private static final String INVALID_ATTRIBUTE_MESSAGE_TEMPLATE = "%s has invalid %s attribute.";
 
 
-  @Test(groups = {"mercury_header_checkElementsVisibilityWithoutInfobox", "Header"})
+  @Test(groups = "mercury_header_checkElementsVisibilityWithoutInfobox")
   public void mercury_header_checkElementsVisibilityWithoutInfobox() {
     Header header =
         new ArticlePage()
@@ -52,8 +52,7 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = {"mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage",
-                  "Header"})
+  @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage")
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithHeroImage() {
     Header header =
         new ArticlePage()
@@ -74,8 +73,7 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = {"mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage",
-                  "Header"})
+  @Test(groups = "mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage")
   public void mercury_header_checkElementsVisibilityWithInfoboxAndWithoutHeroImage() {
     Header header =
         new ArticlePage()
@@ -96,7 +94,7 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = {"mercury_header_heroImageIsProperlyStyled", "Header"})
+  @Test(groups = "mercury_header_heroImageIsProperlyStyled")
   public void mercury_header_heroImageIsProperlyStyled() {
     Header header =
         new ArticlePage()
@@ -119,7 +117,7 @@ public class HeaderTest extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"mercury_header_heroImageIsSquare", "Header"})
+  @Test(groups = "mercury_header_heroImageIsSquare")
   public void mercury_header_heroImageIsSquare() {
     Header header =
         new ArticlePage()
@@ -132,7 +130,7 @@ public class HeaderTest extends NewTestTemplate {
     );
   }
 
-  @Test(groups = {"mercury_header_heroImageIsRectangle", "Header"})
+  @Test(groups = "mercury_header_heroImageIsRectangle")
   public void mercury_header_heroImageIsRectangle() {
     Header header =
         new ArticlePage()

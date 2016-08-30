@@ -20,7 +20,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPag
 
 import org.testng.annotations.Test;
 
-@Test(groups = "CuratedNavigation")
+@Test(groups = "Mercury_CuratedNavigation")
 @Execute(onWikia = MercuryWikis.MERCURY_CC)
 @InBrowser(
     browser = Browser.CHROME,

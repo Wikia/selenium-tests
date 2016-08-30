@@ -16,7 +16,7 @@ import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 
 import org.testng.annotations.Test;
 
-@Test(groups = "Article")
+@Test(groups = "Mercury_Article")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,

@@ -13,13 +13,12 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_Navigation")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class NavigationTest extends NewTestTemplate {
 
-  @Test(groups = {"mercury_navigation_openAndCloseNavigationAndItsSubMenu",
-                  "Navigation"})
+  @Test(groups = "mercury_navigation_openAndCloseNavigationAndItsSubMenu")
   public void mercury_navigation_openAndCloseNavigationAndItsSubMenu() {
     TopBar topBar =
         new ArticlePage()
@@ -36,7 +35,7 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
-  @Test(groups = {"mercury_navigation_resetNavigationState", "Navigation"})
+  @Test(groups = "mercury_navigation_resetNavigationState")
   public void mercury_navigation_resetNavigationState() {
     TopBar topBar =
         new ArticlePage()
@@ -55,7 +54,7 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  @Test(groups = {"mercury_navigation_backButton", "Navigation"})
+  @Test(groups = "mercury_navigation_backButton")
   public void mercury_navigation_backButton() {
     Navigation navigation =
         new ArticlePage()
@@ -72,7 +71,7 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  @Test(groups = {"mercury_navigation_navigationOnEnglishWiki", "Navigation"})
+  @Test(groups = "mercury_navigation_navigationOnEnglishWiki")
   public void mercury_navigation_navigationOnEnglishWiki() {
     Navigation navigation =
         new ArticlePage()
@@ -84,7 +83,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Execute(onWikia = MercuryWikis.DE_WIKI)
-  @Test(groups = {"mercury_navigation_navigationOnNonEnglishWiki", "Navigation"})
+  @Test(groups = "mercury_navigation_navigationOnNonEnglishWiki")
   public void mercury_navigation_navigationOnNonEnglishWiki() {
     Navigation navigation =
         new ArticlePage()
@@ -96,7 +95,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  @Test(groups = {"mercury_navigation_navigationElementsUserLoggedIn", "Navigation"})
+  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     Navigation navigation =
         new ArticlePage()
@@ -110,8 +109,7 @@ public class NavigationTest extends NewTestTemplate {
   }
 
   @Execute(asUser = User.ANONYMOUS)
-  @Test(groups = {"mercury_navigation_navigationElementsAnonymousUser",
-                  "Navigation"})
+  @Test(groups = "mercury_navigation_navigationElementsAnonymousUser")
   public void mercury_navigation_navigationElementsAnonymousUser() {
     Navigation navigation =
         new ArticlePage()
@@ -125,8 +123,7 @@ public class NavigationTest extends NewTestTemplate {
     Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
   }
 
-  @Test(groups = {"mercury_navigation_exploreWikiNavigatesToWikiMainPage",
-                  "Navigation"})
+  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
   public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
     new ArticlePage()
         .open(MercurySubpages.INFOBOX_1)

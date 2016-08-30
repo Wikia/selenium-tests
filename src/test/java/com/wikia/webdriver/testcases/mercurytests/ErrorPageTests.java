@@ -9,13 +9,12 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ErrorPage;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_ErrorPage")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class ErrorPageTests extends NewTestTemplate {
 
-  @Test(groups = {"mercury_errorPage_navigateFromErrorPageToArticlePageUsingGlobalNav",
-                  "ErrorPage"})
+  @Test(groups = "mercury_errorPage_navigateFromErrorPageToArticlePageUsingGlobalNav")
   public void mercury_errorPage_navigateFromErrorPageToArticlePageUsingGlobalNav() {
     new ErrorPage()
         .navigateToErrorPageFromUrl()

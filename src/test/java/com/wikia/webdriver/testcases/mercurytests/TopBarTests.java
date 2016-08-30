@@ -12,7 +12,7 @@ import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import org.testng.annotations.Test;
 
-@Test(groups = "TopBar")
+@Test(groups = "Mercury_TopBar")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TopBarTests extends NewTestTemplate {

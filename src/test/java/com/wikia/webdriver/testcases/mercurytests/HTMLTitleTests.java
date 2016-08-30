@@ -130,7 +130,7 @@ public class HTMLTitleTests extends NewTestTemplate {
     this.navigate = new Navigate();
   }
 
-  @Test(groups = {"mercury_htmlTitleSet", "htmlTitleSet"})
+  @Test(groups = {"mercury_htmlTitleSet", "Mercury_htmlTitleSet"})
   public void mercury_htmlTitleSet() {
     for (String[] testCase : testCases) {
       String testUrl = urlBuilder.appendQueryStringToURL
