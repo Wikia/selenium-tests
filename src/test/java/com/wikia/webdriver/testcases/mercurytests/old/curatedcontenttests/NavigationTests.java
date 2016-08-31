@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -21,6 +20,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPag
 
 import org.testng.annotations.Test;
 
+@Test(groups = "Mercury_CuratedNavigation")
 @Execute(onWikia = MercuryWikis.MERCURY_CC)
 @InBrowser(
     browser = Browser.CHROME,
@@ -132,21 +132,21 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_004_navigateThroughDifferentUrl() {
     init();
 
-    String expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_CATEGORY_TEMPLATES);
+    String expectedUrl = urlBuilder.getUrlForPage(MercurySubpages.CC_CATEGORY_TEMPLATES);
     navigate.toPage(MercurySubpages.CC_CATEGORY_TEMPLATES);
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
-    expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_SECTION_CATEGORIES);
+    expectedUrl = urlBuilder.getUrlForPage(MercurySubpages.CC_SECTION_CATEGORIES);
     navigate.toPage(MercurySubpages.CC_SECTION_CATEGORIES);
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
-    expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
+    expectedUrl = urlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
     navigate.toPage(MercurySubpages.CC_EMPTY_CATEGORY);
     mercuryError.setAlertMessage(MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(expectedUrl));
 
-    expectedUrl = UrlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
+    expectedUrl = urlBuilder.getUrlForPage(MercurySubpages.CC_MAIN_PAGE);
     navigate.toPage(MercurySubpages.CC_NOT_EXISTING_SECTION);
     mercuryError.setAlertMessage(MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_SECTION);
     Assertion.assertTrue(mercuryError.isAlertMessageVisible());

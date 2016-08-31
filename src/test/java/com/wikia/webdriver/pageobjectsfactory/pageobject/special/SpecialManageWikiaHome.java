@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class SpecialManageWikiaHome extends WikiBasePageObject {
 
-  private static final String SPECIAL_MANAGE_WIKIA_HOME_PATH = "wiki/Special:ManageWikiaHome";
+  private static final String SPECIAL_MANAGE_WIKIA_HOME_PATH = "/wiki/Special:ManageWikiaHome";
 
   @FindBy(id = "video-games-amount")
   private WebElement videoGamesAmount;

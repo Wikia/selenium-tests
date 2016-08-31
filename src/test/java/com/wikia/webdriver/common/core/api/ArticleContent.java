@@ -22,7 +22,7 @@ public class ArticleContent extends ApiCall {
 
   public ArticleContent() {
     baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-              + "wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
+              + "/wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
 
     File configFile = new File(Configuration.getCredentialsFilePath());
     if (StringUtils.isBlank(secret)) {

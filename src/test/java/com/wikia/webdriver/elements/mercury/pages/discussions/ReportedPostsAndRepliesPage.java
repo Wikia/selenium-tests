@@ -10,10 +10,10 @@ public class ReportedPostsAndRepliesPage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
-  private static final String PATH = "d/reported";
+  private static final String PATH = "/d/reported";
 
   public ReportedPostsAndRepliesPage open() {
-    driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH));
+    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
     return this;
   }
 }
