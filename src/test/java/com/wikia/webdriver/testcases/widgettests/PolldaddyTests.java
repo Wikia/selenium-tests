@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "PolldaddyWidget")
 @InBrowser(browser = Browser.CHROME)
 public class PolldaddyTests extends NewTestTemplate {
 

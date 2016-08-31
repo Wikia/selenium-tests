@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "TwitterWidget")
 @InBrowser(browser = Browser.CHROME)
 public class TwitterTests extends NewTestTemplate {
 

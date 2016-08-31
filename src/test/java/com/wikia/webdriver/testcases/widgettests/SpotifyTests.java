@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "SpotifyWidget")
 @InBrowser(browser = Browser.CHROME)
 public class SpotifyTests extends NewTestTemplate {
 

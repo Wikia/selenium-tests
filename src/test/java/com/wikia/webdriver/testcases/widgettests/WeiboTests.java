@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "WeiboWidget")
 @InBrowser(browser = Browser.CHROME)
 public class WeiboTests extends NewTestTemplate {
 

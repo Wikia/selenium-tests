@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "VKWidget")
 @InBrowser(browser = Browser.CHROME)
 public class VKTests extends NewTestTemplate {
 
