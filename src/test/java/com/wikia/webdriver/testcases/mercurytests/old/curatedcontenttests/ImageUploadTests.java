@@ -18,7 +18,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.Cropp
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_ImageUpload")
 @Execute(
     onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR,
     asUser = User.STAFF

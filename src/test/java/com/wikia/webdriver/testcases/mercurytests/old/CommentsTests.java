@@ -17,6 +17,7 @@ import com.wikia.webdriver.elements.mercury.old.CommentsPageObject;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
+@Test(groups = "Mercury_Comments")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
