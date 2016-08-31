@@ -31,6 +31,11 @@ public class TestHorseSlots extends NewTestTemplate {
     driver.get("http://sandbox-adeng04.project43.wikia.com/wiki/A");
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_TOP_LEADERBOARD");
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     WebElement link = driver.findElement(By.cssSelector("a[title='B']"));
     link.click();
     ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_TOP_LEADERBOARD");
