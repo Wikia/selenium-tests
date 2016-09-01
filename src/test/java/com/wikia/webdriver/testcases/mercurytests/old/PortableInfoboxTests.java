@@ -12,7 +12,7 @@ import com.wikia.webdriver.elements.mercury.old.PortableInfoboxObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_Infobox")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,

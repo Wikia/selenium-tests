@@ -13,7 +13,7 @@ import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_Signup")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
