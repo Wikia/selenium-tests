@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,14 +11,16 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 
-import org.testng.annotations.Test;
 @Test(groups = "GoogleFormWidget")
 @InBrowser(browser = Browser.CHROME)
 public class GoogleFormTests extends NewTestTemplate {
 
-  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormOasis/OneWidget";
-  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/GoogleFormOasis/MultipleWidgets";
-  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormOasis/IncorrectWidget";
+  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME =
+      "/wiki/GoogleFormOasis/OneWidget";
+  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
+      "/wiki/GoogleFormOasis/MultipleWidgets";
+  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME =
+      "/wiki/GoogleFormOasis/IncorrectWidget";
 
   private GoogleFormWidgetPageObject widget;
   private Navigate navigate;

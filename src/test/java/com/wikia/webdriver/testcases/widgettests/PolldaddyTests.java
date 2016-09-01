@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,14 +11,15 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 
-import org.testng.annotations.Test;
 @Test(groups = "PolldaddyWidget")
 @InBrowser(browser = Browser.CHROME)
 public class PolldaddyTests extends NewTestTemplate {
 
   private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "/wiki/PollDaddyOasis/OneWidget";
-  private static final String POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/PollDaddyOasis/MultipleWidgets";
-  private static final String POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PollDaddyOasis/IncorrectWidget";
+  private static final String POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
+      "/wiki/PollDaddyOasis/MultipleWidgets";
+  private static final String POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME =
+      "/wiki/PollDaddyOasis/IncorrectWidget";
 
   private PolldaddyWidgetPageObject widget;
   private Navigate navigate;
