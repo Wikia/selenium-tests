@@ -75,9 +75,9 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = "myTest")
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {
     final long timestamp = System.nanoTime();
     final String description = "Automated test, timestamp " + timestamp;
@@ -107,7 +107,7 @@ public class CreatingPostTests extends NewTestTemplate {
       Assertion.assertEquals(webElement.findElement(By.className("post-details-link")).getText(), description);
       Assertion.assertStringContains(webElement.findElement(By.className("post-category-name")).getText(), categoryPill.getName());
     } else {
-      Assertion.fail("Post with description \"" + description + "\" was not added/found.");
+      Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
     }
   }
 
