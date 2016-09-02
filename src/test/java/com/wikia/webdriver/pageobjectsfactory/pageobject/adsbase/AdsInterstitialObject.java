@@ -100,8 +100,11 @@ public class AdsInterstitialObject extends AdsBaseObject {
     boolean isMercury = false;
     try {
       isMercury = interstitialCloseButtonMercury.isDisplayed();
-    } catch (NoSuchElementException e) { /* ignore */ }
-    PageObjectLogging.log("Interstitial Mercury", isMercury ? "Yes" : "No", true);
+      PageObjectLogging.log("Interstitial Mercury", "Yes", true);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.log("Interstitial Mercury", "No", true);
+    }
+
 
     if (isMercury) {
       String closeButtonText = interstitialCloseButtonMercury.getText();
