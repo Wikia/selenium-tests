@@ -139,8 +139,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
     verifyAddVideoButton();
     PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
-    verifySortDropdown();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
     verifyNewestVideo();
     PageObjectLogging.log("verifyElementsOnPage",
         "verify that there is at least one video present", true);
