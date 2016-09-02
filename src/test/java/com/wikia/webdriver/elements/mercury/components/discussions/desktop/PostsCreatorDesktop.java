@@ -1,13 +1,11 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class PostsCreatorDesktop extends BasePageObject {

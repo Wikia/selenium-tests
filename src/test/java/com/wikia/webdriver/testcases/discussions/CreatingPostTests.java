@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
