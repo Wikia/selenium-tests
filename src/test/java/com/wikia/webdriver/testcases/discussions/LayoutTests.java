@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-layout"})
 public class LayoutTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
+  private static final String DESKTOP_RESOLUTION = "1440x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**

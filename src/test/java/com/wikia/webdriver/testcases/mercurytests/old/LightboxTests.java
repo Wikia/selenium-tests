@@ -15,6 +15,7 @@ import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 
 import org.testng.annotations.Test;
 
+@Test(groups = "Mercury_Lightbox")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,

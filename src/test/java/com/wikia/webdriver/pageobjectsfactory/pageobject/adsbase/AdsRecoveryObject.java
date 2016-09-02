@@ -37,8 +37,8 @@ public class AdsRecoveryObject extends AdsBaseObject {
   public void verifyRecoveryUnlockCSS() {
     // Stylesheets with lock scss package in href
     String lockCssSelector = "link[href*=\"" + LOCK_CSS_PACKAGE + "\"]";
-    // Sibling to above selector which is link and contains href in wikia.com/__are endpoint
-    String unlockCssSelector = lockCssSelector + " + link[href*=\"wikia.com/__are\"]";
+    // Sibling to above selector which is link and contains href in wikia.com/__bre endpoint
+    String unlockCssSelector = lockCssSelector + " + link[href*=\"wikia.com/__bre\"]";
 
     wait.forElementPresent(By.cssSelector(lockCssSelector));
     WebElement element = driver.findElement(By.cssSelector(unlockCssSelector));
@@ -61,6 +61,6 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   private void verifyNotProxiedUrl(String url) {
-    Assertion.assertStringNotContains(url, "wikia.com/__are");
+    Assertion.assertStringNotContains(url, "wikia.com/__bre");
   }
 }

@@ -29,9 +29,6 @@ public class Layout extends NewTestTemplate {
   private static final List<String> EXPECTED_LINKS_SMALL_RESOLUTION =
       Arrays.asList("Games", "Movies", "TV", "Trending Wikias", "Community Central");
 
-  private final static String deWikiName = "de.gta";
-  private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 720);
-
   @Test(groups = {"globalNavigationBarIsFixedOnScroll"})
   public void globalNavigationBarIsFixedOnScroll() {
     SpecialWikiActivityPageObject wikiActivity = new SpecialWikiActivityPageObject(driver).open();
@@ -58,16 +55,6 @@ public class Layout extends NewTestTemplate {
     driver.manage().window().setSize(HUBS_IN_DROPDOWN_RESOLUTION);
     globalNav.openExploreWikiaDropdown();
     Assertion.assertEquals(globalNav.getDropdownLinks(), EXPECTED_LINKS_SMALL_RESOLUTION);
-  }
-
-  @Test(groups = {"gameStarLogoIsNotPresentOn768x1024Resolution"})
-  public void gameStarLogoIsNotPresentOn768x1024Resolution() {
-    HomePage homePage = new HomePage();
-    homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
-    homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
-
-    Assertion.assertFalse((new GlobalNavigation()).isGameStarLogoDisplayed(),
-        "GameStar Logo shouldn't be visible");
   }
 
   @InBrowser(browser = Browser.FIREFOX, browserSize = HUBS_OUTSIDE_DROPDOWN_RESOLUTION)

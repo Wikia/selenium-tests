@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.MainPage;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_Category")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class CategoryTest extends NewTestTemplate {

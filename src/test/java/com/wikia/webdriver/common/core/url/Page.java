@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.core.url;
 public class Page {
   private String wikiName;
   private String wikiPath;
+  private UrlBuilder urlBuilder = new UrlBuilder();
 
   public Page(String wikiName, String wikiPath) {
     this.wikiName = wikiName;
@@ -22,6 +23,6 @@ public class Page {
   }
 
   public String getUrl() {
-    return UrlBuilder.getUrl(this.wikiName, this.wikiPath);
+    return urlBuilder.getUrlForPath(this.wikiName, this.wikiPath);
   }
 }

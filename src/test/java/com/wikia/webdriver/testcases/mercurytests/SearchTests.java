@@ -18,7 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME)
 public class SearchTests extends NewTestTemplate {
 
@@ -29,8 +28,10 @@ public class SearchTests extends NewTestTemplate {
   private static final String EMPTY_SEARCH_PHRASE = "";
   private static final int SEARCH_RESULTS_DEFAULT_NUMBER = 25;
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnMobile")
+  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
+                  "Mercury_Search_001"})
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
     ArticlePage article = new ArticlePage().open(MercurySubpages.MAIN_PAGE);
     String clickedSuggestion = article.getTopBar()
@@ -43,8 +44,9 @@ public class SearchTests extends NewTestTemplate {
                            article.getHeader().getPageTitle().toLowerCase());
   }
 
-  @Execute(onWikia = MercuryWikis.MEDIAWIKI_119)
-  @Test(groups = "mercury_search_navigateUsingSearchSuggestionsOnDesktop")
+  @Execute(onWikia = "dauto")
+  @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnDesktop",
+                  "Mercury_Search_001"})
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
     String clickedSuggestion =
@@ -59,8 +61,9 @@ public class SearchTests extends NewTestTemplate {
                            new ArticlePageObject().getArticleName().toLowerCase());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_navigateToPageUsingSearchResults")
+  @Test(groups = {"mercury_search_navigateToPageUsingSearchResults", "Mercury_Search_001"})
   public void mercury_search_navigateToPageUsingSearchResults() {
     String resultLink =
         new SearchResultsPage()
@@ -70,8 +73,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertEquals(driver.getCurrentUrl(), resultLink);
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_cancelSearchPhrase")
+  @Test(groups = {"mercury_search_cancelSearchPhrase", "Mercury_Search_001"})
   public void mercury_search_clearSearchPhrase() {
     String currentPhrase = new ArticlePage()
         .open(MercurySubpages.MAIN_PAGE)
@@ -84,8 +88,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(currentPhrase.isEmpty());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_verifySearchLayout")
+  @Test(groups = {"mercury_search_verifySearchLayout", "Mercury_Search_001"})
   public void mercury_search_verifySearchLayout() {
     Search search =
         new ArticlePage()
@@ -98,8 +103,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(search.isInputFieldSearchIconVisible());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_userIsRedirectedToSearchResultsPage")
+  @Test(groups = {"mercury_search_userIsRedirectedToSearchResultsPage", "Mercury_Search_001"})
   public void mercury_search_userIsRedirectedToSearchResultsPage() {
     SearchResultsPage searchResults =
         new ArticlePage()
@@ -112,8 +118,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(searchResults.isSearchResultsPageOpen());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_searchResultsPageHasNoSearchIconInTopBar")
+  @Test(groups = {"mercury_search_searchResultsPageHasNoSearchIconInTopBar", "Mercury_Search_001"})
   public void mercury_search_searchResultsPageHasNoSearchIconInTopBar() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
@@ -122,8 +129,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertFalse(resultsPage.getTopBar().isSearchIconClickable());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_searchInputDoesNotCoverNavigation")
+  @Test(groups = {"mercury_search_searchInputDoesNotCoverNavigation", "Mercury_Search_001"})
   public void mercury_search_searchInputDoesNotCoverNavigation() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
@@ -136,8 +144,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertFalse(resultsPage.getSearch().isSearchInputFieldEditable());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_searchNoResultsPageDisplayed")
+  @Test(groups = {"mercury_search_searchNoResultsPageDisplayed", "Mercury_Search_002"})
   public void mercury_search_searchNoResultsPageDisplayed() {
     SearchResultsPage searchResults =
         new SearchResultsPage()
@@ -147,8 +156,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertFalse(searchResults.isLoadMoreButtonVisible());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_noSuggestionsOnSearchResultsPage")
+  @Test(groups = {"mercury_search_noSuggestionsOnSearchResultsPage", "Mercury_Search_002"})
   public void mercury_search_noSuggestionsOnSearchResultsPage() {
     SearchResultsPage searchResults =
         new SearchResultsPage()
@@ -157,8 +167,9 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertFalse(searchResults.getSearch().areSearchSuggestionsDisplayed());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_focusOnTryAnotherSearchWhenNoResults")
+  @Test(groups = {"mercury_search_focusOnTryAnotherSearchWhenNoResults", "Mercury_Search_002"})
   public void mercury_search_focusOnTryAnotherSearchWhenNoResults() {
     SearchResultsPage searchResults =
         new SearchResultsPage()
@@ -169,8 +180,10 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(searchResults.getSearch().getSearchPhrase().isEmpty());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_redirectToNewResultsPageFromNoResults")
+  @Test(groups = {"mercury_search_redirectToNewResultsPageFromNoResults",
+                  "Mercury_Search_002"})
   public void mercury_search_redirectToNewResultsPageFromNoResults() {
     SearchResultsPage searchResults =
         new SearchResultsPage()
@@ -185,8 +198,10 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(searchResults.areResultsPresent());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_defaultResultsNumberOnSearchResultsPage")
+  @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage",
+                  "Mercury_Search_002"})
   public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
@@ -195,8 +210,10 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertEquals(resultsPage.getResultCardsNumber(), SEARCH_RESULTS_DEFAULT_NUMBER);
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_loadingMoreResultsOnSearchResultsPage")
+  @Test(groups = {"mercury_search_loadingMoreResultsOnSearchResultsPage",
+                  "Mercury_Search_002"})
   public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
@@ -214,8 +231,10 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_loadMoreResultsOnSearchResultsPageNotVisible")
+  @Test(groups = {"mercury_search_loadMoreResultsOnSearchResultsPageNotVisible",
+                  "Mercury_Search_002"})
   public void mercury_search_loadMoreResultsOnSearchResultsPageNotVisible() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
@@ -225,8 +244,10 @@ public class SearchTests extends NewTestTemplate {
     Assertion.assertFalse(resultsPage.isLoadMoreButtonVisible());
   }
 
+  @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = "mercury_search_loadMoreResultsOnSearchResultsPageNotVisible")
+  @Test(groups = {"mercury_search_loadMoreResultsOnSearchResultsPageNotVisible",
+                  "Mercury_Search_002"})
   public void mercury_search_emptySearchPhrase() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
