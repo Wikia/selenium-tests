@@ -33,9 +33,10 @@ public class AdsInterstitialObject extends AdsBaseObject {
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
 
-  static final String interstitialAdWrapperSelector = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div";
+  static final String
+      INTERSTITIAL_AD_WRAPPER_SELECTOR = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div";
 
-  @FindBy(css = interstitialAdWrapperSelector)
+  @FindBy(css = INTERSTITIAL_AD_WRAPPER_SELECTOR)
   private WebElement interstitialAdWrapper;
 
   @FindBy(css = ".lightbox-close-wrapper, #ext-wikia-adEngine-template-modal .close")
@@ -54,7 +55,8 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
   public void waitForInterstitialShowUp() {
     JavascriptActions javascriptActions = new JavascriptActions(driver);
-    javascriptActions.waitForJavaScriptTruthy("document.querySelectorAll(\""+interstitialAdWrapperSelector+"\").length == 1");
+    javascriptActions.waitForJavaScriptTruthy("document.querySelectorAll(\"" + INTERSTITIAL_AD_WRAPPER_SELECTOR
+                                              + "\").length == 1");
   }
 
   public void verifyAdRatio() {
