@@ -1,8 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,15 +33,28 @@ public class AdsInterstitialObject extends AdsBaseObject {
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
 
-  @FindBy(css = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div")
+  static final String interstitialAdWrapperSelector = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div";
+
+  @FindBy(css = interstitialAdWrapperSelector)
   private WebElement interstitialAdWrapper;
 
   @FindBy(css = ".lightbox-close-wrapper, #ext-wikia-adEngine-template-modal .close")
   private WebElement interstitialCloseButton;
 
+  @FindBy(css = ".lightbox-close-wrapper")
+  private WebElement interstitialCloseButtonMercury;
+
+  @FindBy(css = "#ext-wikia-adEngine-template-modal .close-counter")
+  private WebElement interstitialCounterOasis;
+
   public AdsInterstitialObject(WebDriver driver, String testedPage,
                                Dimension resolution) {
     super(driver, testedPage, resolution);
+  }
+
+  public void waitForInterstitialShowUp() {
+    JavascriptActions javascriptActions = new JavascriptActions(driver);
+    javascriptActions.waitForJavaScriptTruthy("document.querySelectorAll(\""+interstitialAdWrapperSelector+"\").length == 1");
   }
 
   public void verifyAdRatio() {
@@ -77,7 +93,23 @@ public class AdsInterstitialObject extends AdsBaseObject {
     );
   }
 
-  public void closeInterstitial() {
+  public void closeInterstitial() throws InterruptedException {
+
+    boolean isMercury = false;
+    try {
+      isMercury = interstitialCloseButtonMercury.isDisplayed();
+    } catch (NoSuchElementException e) { /* ignore */ }
+    PageObjectLogging.log("Interstitial Mercury", isMercury ? "Yes" : "No", true);
+
+    if (isMercury) {
+      String closeButtonText = interstitialCloseButtonMercury.getText();
+      if (closeButtonText.length() > 0) {
+        Integer waitTillCloseButtonAppears = Integer.parseInt(closeButtonText);
+        PageObjectLogging.log("Wait time for close button", String.valueOf(waitTillCloseButtonAppears), true);
+        Thread.sleep((waitTillCloseButtonAppears+2) * 1000);
+      }
+    }
+
     wait.forElementClickable(interstitialCloseButton);
     interstitialCloseButton.click();
   }
