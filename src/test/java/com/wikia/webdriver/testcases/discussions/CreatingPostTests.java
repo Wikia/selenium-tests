@@ -10,12 +10,11 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -68,44 +67,34 @@ public class CreatingPostTests extends NewTestTemplate {
   public void userOnDesktopCannotSaveEmptyPost() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
 
-    postsCreator
-            .clickPostCreator()
+    postsCreator.clickPostCreator()
             .closeGuidelinesMessage();
 
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = "myTest")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {
-    final long timestamp = System.nanoTime();
-    final String description = "Automated test, timestamp " + timestamp;
+    final String description = createUniqueDescription();
 
     PostsListPage postListPage = new PostsListPage().open();
     PostsCreatorDesktop postsCreator = postListPage.getPostCreatorDesktop();
 
-    CategoryPill categoryPill = postsCreator.clickPostCreator()
-            .closeGuidelinesMessage()
-            .fillPostDescriptionWith(description)
-            .clickAddCategoryButton()
-            .findCategoryOnPosition(0);
-
-    categoryPill.click();
-
-    Assertion.assertTrue(postsCreator.isPostButtonActive());
+    final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
 
     postsCreator.clickSubmitButton()
                 .waitForSpinnerToAppearAndDisappear();
 
     Post posts = postListPage.getPost();
-    WebElement webElement = posts.waitForPostToAppearWith(description)
+    PostEntity postEntity = posts.waitForPostToAppearWith(description)
             .getTheNewestPost();
 
-    if (null != webElement) {
-      Assertion.assertStringContains(webElement.findElement(By.className("timestamp")).getText(), "now");
-      Assertion.assertEquals(webElement.findElement(By.className("post-details-link")).getText(), description);
-      Assertion.assertStringContains(webElement.findElement(By.className("post-category-name")).getText(), categoryPill.getName());
+    if (null != postEntity) {
+      Assertion.assertStringContains(postEntity.findTimestamp(), "now");
+      Assertion.assertEquals(postEntity.findDescription(), description);
+      Assertion.assertStringContains(postEntity.findCategory(), categoryPill.getName());
     } else {
       Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
     }
@@ -141,5 +130,22 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clickSignInButtonInSignInDialog();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
+  }
+
+  private String createUniqueDescription() {
+    final long timestamp = System.nanoTime();
+    return "Automated test, timestamp " + timestamp;
+  }
+
+  private CategoryPill fillPostCategoryWith(PostsCreatorDesktop postsCreator, String description) {
+    CategoryPill categoryPill = postsCreator.clickPostCreator()
+        .closeGuidelinesMessage()
+        .fillPostDescriptionWith(description)
+        .clickAddCategoryButton()
+        .findCategoryOnPosition(0);
+
+    categoryPill.click();
+
+    return categoryPill;
   }
 }

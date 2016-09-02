@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import javax.annotation.CheckForNull;
 import java.util.List;
 
 
@@ -64,8 +65,9 @@ public class Post extends BasePageObject {
     return postList.size();
   }
 
-  public WebElement getTheNewestPost() {
-    return postList.isEmpty() ? null : postList.get(0);
+  @CheckForNull
+  public PostEntity getTheNewestPost() {
+    return postList.isEmpty() ? null : new PostEntity(postList.get(0));
   }
 
   public boolean isUpvoteButtonVisible(int index) {
