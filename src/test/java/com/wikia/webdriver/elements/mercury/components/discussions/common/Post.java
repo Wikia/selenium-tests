@@ -64,8 +64,8 @@ public class Post extends BasePageObject {
     return postList.size();
   }
 
-  public Optional<WebElement> getNewestPost() {
-    return postList.isEmpty() ? Optional.empty() : Optional.of(postList.get(0));
+  public WebElement getTheNewestPost() {
+    return postList.isEmpty() ? null : postList.get(0);
   }
 
   public boolean isUpvoteButtonVisible(int index) {
@@ -105,6 +105,12 @@ public class Post extends BasePageObject {
     } catch (InterruptedException e) {
       PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
     }
+
+    return this;
+  }
+
+  public Post waitForPostToAppearWith(final String description) {
+    wait.forTextInElement(By.cssSelector(".discussion.forum > :nth-child(3)"), description);
 
     return this;
   }

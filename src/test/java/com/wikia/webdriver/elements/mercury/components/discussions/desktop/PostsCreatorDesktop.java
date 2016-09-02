@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 
 public class PostsCreatorDesktop extends BasePageObject {
 
@@ -37,8 +35,11 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".discussion-inline-editor #categoryPickerButtonDesktop")
   private WebElement addCategoryButton;
 
-  @FindBy (css = ".discussion-inline-editor .pop-over-compass")
-  private WebElement categoryPillsPopover;
+  private final CategoryPills categoryPills;
+
+  public PostsCreatorDesktop() {
+    this.categoryPills = new CategoryPills();
+  }
 
   public PostsCreatorDesktop clickPostCreator() {
     postCreator.click();
@@ -59,6 +60,16 @@ public class PostsCreatorDesktop extends BasePageObject {
 
   public PostsCreatorDesktop clickSubmitButton() {
     editorSubmit.click();
+    return this;
+  }
+
+  public PostsCreatorDesktop waitForSpinnerToAppearAndDisappear() {
+    final By spinner = By.cssSelector(".discussion-inline-editor svg.spinner");
+
+    wait.forElementVisible(spinner);
+    wait.forElementNotPresent(spinner);
+
+    return this;
   }
 
   public PostsCreatorDesktop closeGuidelinesMessage() {
@@ -68,7 +79,7 @@ public class PostsCreatorDesktop extends BasePageObject {
     return this;
   }
 
-  public PostsCreatorDesktop fillPostContent(String text) {
+  public PostsCreatorDesktop fillPostDescriptionWith(String text) {
     editorContentTextarea.sendKeys(text);
     return this;
   }
@@ -78,18 +89,11 @@ public class PostsCreatorDesktop extends BasePageObject {
     return this;
   }
 
-  public PostsCreatorDesktop selectCategory(int categoryNumber) {
+  public CategoryPills clickAddCategoryButton() {
     addCategoryButton.click();
+    wait.forElementVisible(By.cssSelector(".discussion-inline-editor .pop-over-compass"));
 
-    wait.forElementVisible(categoryPillsPopover);
-
-    List<WebElement> categories = categoryPillsPopover.findElements(By.tagName("a"));
-
-    if (categoryNumber < categories.size()) {
-      categories.get(categoryNumber).click();
-    }
-
-    return this;
+    return categoryPills;
   }
 
   public PostsCreatorDesktop clickSignInButtonInSignInDialog() {
