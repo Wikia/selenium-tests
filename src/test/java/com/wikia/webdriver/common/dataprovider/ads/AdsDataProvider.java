@@ -57,13 +57,11 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] noAdsForUsers() {
     return new Object[][]{
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypasta", "Categoria:Creepypasta"},
-        {"wikia", "Video_Games/Lizzunchbox"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"monsterhunter", "Portal:MH3U"},
-        {"adtest-pluto", "VeryLongPage"},
-        {"breakingbad", "File:AARON-PAUL-JACKET.jpg"},
+        {"project43", "SyntheticTests/LongPage"},
+        {"project43", "Category:Browse"},
+        {"project43", "Special:Videos"},
+        {"project43", "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)"},
+        {"project43", "Koperek:SyntheticTests/NoAds"},
     };
   }
 
