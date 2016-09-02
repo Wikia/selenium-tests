@@ -172,6 +172,12 @@ public class PortableInfobox extends BasePageObject {
     return imageTag.getAttribute("data-image-name");
   }
 
+  public PortableInfobox waitForUrlToContain(String expectedURL){
+    wait.forUrlContains(expectedURL);
+
+    return this;
+  }
+
   public PortableInfobox clickLink(WebElement element) {
     wait.forElementVisible(element);
     jsActions.scrollToElement(element);

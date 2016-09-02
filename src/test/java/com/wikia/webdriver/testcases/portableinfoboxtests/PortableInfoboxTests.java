@@ -95,11 +95,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .open(PageContent.PORTABLE_INFOBOX_01)
         .getExternalLinkRedirectTitle(0);
 
-    String externalUrl = infobox
+    infobox
         .clickExternalLinkWithIndex(0)
-        .getUrlAfterPageIsLoaded();
+            .waitForUrlToContain(externalLinkName);
 
-    Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
+    Assertion.assertEquals(externalLinkName, driver.getCurrentUrl());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
