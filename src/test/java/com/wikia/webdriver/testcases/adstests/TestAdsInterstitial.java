@@ -26,7 +26,6 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
   }
 
-  @RelatedIssue(issueID = "ADEN-3531")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "TestInterstitialMercury",
