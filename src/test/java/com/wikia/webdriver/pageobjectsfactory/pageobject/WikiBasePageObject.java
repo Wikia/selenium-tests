@@ -582,7 +582,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void follow() {
     wait.forElementVisible(followButton);
     jsActions.click(followButton);
-    wait.forTextInElement(followButton, "Following");
+    wait.forTextInElement(followButton, "Watching");
     PageObjectLogging.log("followArticle", "page is followed", true, driver);
   }
 

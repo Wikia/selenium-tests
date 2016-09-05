@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,14 +11,15 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 
-import org.testng.annotations.Test;
-
+@Test(groups = "TwitterWidget")
 @InBrowser(browser = Browser.CHROME)
 public class TwitterTests extends NewTestTemplate {
 
   private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/TwitterOasis/OneWidget";
-  private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/TwitterOasis/MultipleWidgets";
-  private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/TwitterOasis/IncorrectWidget";
+  private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME =
+      "/wiki/TwitterOasis/MultipleWidgets";
+  private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME =
+      "/wiki/TwitterOasis/IncorrectWidget";
 
   private TwitterWidgetPageObject widget;
   private Navigate navigate;
@@ -45,10 +48,8 @@ public class TwitterTests extends NewTestTemplate {
     widget.createMultiple(TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
     navigate.toPage(TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
-    Assertion.assertTrue(
-        widget.areAllValidSwappedForIFrames(),
-        MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG
-    );
+    Assertion.assertTrue(widget.areAllValidSwappedForIFrames(),
+        MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }

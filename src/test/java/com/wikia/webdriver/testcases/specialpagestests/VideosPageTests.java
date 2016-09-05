@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
 import org.testng.annotations.Test;
 
 public class VideosPageTests extends NewTestTemplate {
@@ -17,7 +16,6 @@ public class VideosPageTests extends NewTestTemplate {
    * Verify UI elements on the Special:Videos page Logged-Out
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
-  @RelatedIssue(issueID = "SUS-756")
   public void VideosPageTest_001() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);

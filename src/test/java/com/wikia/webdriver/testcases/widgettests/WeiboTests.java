@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,14 +11,15 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 
-import org.testng.annotations.Test;
-
+@Test(groups = "WeiboWidget")
 @InBrowser(browser = Browser.CHROME)
 public class WeiboTests extends NewTestTemplate {
 
   private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "/wiki/WeiboOasis/OneWidget";
-  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/WeiboOasis/MultipleWidgets";
-  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/WeiboOasis/IncorrectWidget";
+  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME =
+      "/wiki/WeiboOasis/MultipleWidgets";
+  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME =
+      "/wiki/WeiboOasis/IncorrectWidget";
 
   private WeiboWidgetPageObject widget;
   private Navigate navigate;
