@@ -9,6 +9,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   private final CategoryPills categoryPills;
 
+  public BasePostsCreator() {
+    this.categoryPills = new CategoryPills();
+  }
+
   protected abstract String getBaseCssClassName();
 
   protected abstract WebElement getPostsCreator();
@@ -22,10 +26,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getAddCategoryButton();
 
   protected abstract WebElement getSubmitButton();
-
-  public BasePostsCreator() {
-    this.categoryPills = new CategoryPills();
-  }
 
   @Override
   public PostsCreator click() {
