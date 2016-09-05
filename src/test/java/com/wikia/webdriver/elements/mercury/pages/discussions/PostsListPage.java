@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.OptionsPostAndReply;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
@@ -17,6 +18,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsC
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
 
 
 public class PostsListPage extends WikiBasePageObject {
@@ -74,5 +76,10 @@ public class PostsListPage extends WikiBasePageObject {
 
   public PostsListPage open() {
     return open(DEFAULT_FORUM_ID);
+  }
+
+  public PostsListPage scrollToLoadMoreButton() {
+    new JavascriptActions(driver).scrollToElement(By.className("load-more-button"));
+    return this;
   }
 }
