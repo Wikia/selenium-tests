@@ -87,22 +87,27 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
     postsCreator.fillTitleWith(TEXT);
-    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with only title filled.");
+    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only title filled.");
 
     postsCreator.fillDescriptionWith(TEXT);
-    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with title and description filled.");
+    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+        "User should not be able to add post with title and description filled.");
 
     postsCreator.clearTitle();
-    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with only description filled.");
+    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only description filled.");
     postsCreator.clearDesciption();
 
     postsCreator.clickAddCategoryButton()
         .findCategoryOnPosition(0)
         .click();
-    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with only category selected.");
+    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+        "User should not be able to add post with only category selected.");
 
     postsCreator.fillTitleWith(TEXT);
-    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with category selected and title filled.");
+    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+        "User should not be able to add post with category selected and title filled.");
 
   }
 
