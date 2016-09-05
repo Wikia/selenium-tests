@@ -56,6 +56,11 @@ public class Post extends BasePageObject {
     return this;
   }
 
+  public Post scrollToLoadMoreButton() {
+    scrollTo(loadMoreButton);
+    return this;
+  }
+
   public Post clickLoadMore() {
     scrollAndClick(loadMoreButton);
     return this;

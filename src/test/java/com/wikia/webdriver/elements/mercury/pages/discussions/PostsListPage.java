@@ -1,24 +1,15 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.OptionsPostAndReply;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import lombok.Getter;
-import org.openqa.selenium.By;
 
 
 public class PostsListPage extends WikiBasePageObject {
@@ -76,10 +67,5 @@ public class PostsListPage extends WikiBasePageObject {
 
   public PostsListPage open() {
     return open(DEFAULT_FORUM_ID);
-  }
-
-  public PostsListPage scrollToLoadMoreButton() {
-    new JavascriptActions(driver).scrollToElement(By.className("load-more-button"));
-    return this;
   }
 }
