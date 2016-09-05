@@ -34,4 +34,9 @@ public class PostEntity {
   public void click() {
     findDescriptionElement().click();
   }
+
+  public MoreOptionsPopOver clickMoreOptions() {
+    webElement.findElement(By.className("discussion-more-options")).click();
+    return new MoreOptionsPopOver(webElement);
+  }
 }
