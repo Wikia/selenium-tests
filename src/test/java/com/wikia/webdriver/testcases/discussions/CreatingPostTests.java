@@ -9,8 +9,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
@@ -57,21 +57,15 @@ public class CreatingPostTests extends NewTestTemplate {
     final String description = createUniqueDescription();
 
     PostsListPage postListPage = new PostsListPage().open();
-    PostsCreatorMobile postsCreator = postListPage.getPostsCreatorMobile();
+    PostsCreator postsCreator = postListPage.getPostsCreatorMobile();
 
-    final CategoryPill categoryPill = postsCreator.clickPostCreator()
-        .closeGuidelinesMessage()
-        .fillDescriptionWith(description)
-        .clickAddCategoryButton()
-        .findCategoryOnPosition(0);
+    final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
 
-    categoryPill.click();
+    postsCreator.clickSubmitButton()
+        .waitForSpinnerToAppearAndDisappear();
 
-    postsCreator.clickSubmitButton();
-//        .waitForSpinnerToAppearAndDisappear();
-
-    Post posts = postListPage.getPost();
-    PostEntity postEntity = posts.waitForPostToAppearOnMobileWith(description)
+    PostEntity postEntity = postListPage.getPost()
+        .waitForPostToAppearWith(description)
         .getTheNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
@@ -87,7 +81,7 @@ public class CreatingPostTests extends NewTestTemplate {
   public void loggedInUserCanExpandPostEditorOnDesktop() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
 
-    postsCreator.clickPostCreator();
+    postsCreator.click();
 
     Assertion.assertTrue(postsCreator.isExpanded());
     Assertion.assertFalse(postsCreator.isPostButtonActive());
@@ -112,7 +106,7 @@ public class CreatingPostTests extends NewTestTemplate {
     PostsListPage postListPage = new PostsListPage().open();
     PostsCreatorDesktop postsCreator = postListPage.getPostCreatorDesktop();
 
-    postsCreator.clickPostCreator()
+    postsCreator.click()
         .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
@@ -148,16 +142,16 @@ public class CreatingPostTests extends NewTestTemplate {
     final String description = createUniqueDescription();
 
     PostsListPage postListPage = new PostsListPage().open();
-    PostsCreatorDesktop postsCreator = postListPage.getPostCreatorDesktop();
+    PostsCreator postsCreator = postListPage.getPostCreatorDesktop();
 
     final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
 
     postsCreator.clickSubmitButton()
                 .waitForSpinnerToAppearAndDisappear();
 
-    Post posts = postListPage.getPost();
-    PostEntity postEntity = posts.waitForPostToAppearWith(description)
-            .getTheNewestPost();
+    PostEntity postEntity = postListPage.getPost()
+        .waitForPostToAppearWith(description)
+        .getTheNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
@@ -169,11 +163,11 @@ public class CreatingPostTests extends NewTestTemplate {
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
 
-    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
 
     postsCreator.clickOkButtonInSignInDialog();
 
-    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
 
     postsCreator.clickSignInButtonInSignInDialog();
 
@@ -183,11 +177,11 @@ public class CreatingPostTests extends NewTestTemplate {
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
 
-    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
 
     postsCreator.clickOkButtonInSignInDialog();
 
-    Assertion.assertTrue(postsCreator.clickPostCreator().isModalDialogVisible());
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
 
     postsCreator.clickSignInButtonInSignInDialog();
 
@@ -199,8 +193,8 @@ public class CreatingPostTests extends NewTestTemplate {
     return "Automated test, timestamp " + timestamp;
   }
 
-  private CategoryPill fillPostCategoryWith(PostsCreatorDesktop postsCreator, String description) {
-    CategoryPill categoryPill = postsCreator.clickPostCreator()
+  private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
+    CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()
         .fillDescriptionWith(description)
         .clickAddCategoryButton()

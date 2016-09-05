@@ -1,18 +1,22 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class PostsCreatorDesktop extends BasePageObject {
+public class PostsCreatorDesktop extends BasePostsCreator {
 
+  @Getter
   @FindBy (css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
-  private WebElement postCreator;
+  private WebElement postsCreator;
 
+  @Getter
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
-  private WebElement dialogSignIn;
+  private WebElement signInDialog;
 
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
   private WebElement okButtonInSignInDialog;
@@ -23,34 +27,42 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".discussion-inline-editor")
   private WebElement discussionEditor;
 
+  @Getter
   @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
   private WebElement submitButton;
 
+  @Getter
   @FindBy (css = ".editor-overlay-message .message-close")
   private WebElement guidelinesMessageCloseButton;
 
+  @Getter
   @FindBy (css = "#categoryPickerButtonDesktop")
   private WebElement addCategoryButton;
 
   @FindBy (css = ".discussion-inline-editor .discussion-textarea-with-counter")
   private WebElement titleTextarea;
 
+  @Getter
   @FindBy (css = ".discussion-inline-editor textarea[required]")
   private WebElement descriptionTextarea;
 
-  private final CategoryPills categoryPills;
-
   public PostsCreatorDesktop() {
-    this.categoryPills = new CategoryPills();
+    super();
   }
 
-  public PostsCreatorDesktop clickPostCreator() {
-    postCreator.click();
+  @Override
+  protected String getBaseCssClassName() {
+    return "discussion-inline-editor";
+  }
+
+  @Override
+  public PostsCreator waitForSpinnerToAppearAndDisappear() {
+    final By spinner = By.cssSelector("." + getBaseCssClassName() + " svg.spinner");
+
+    wait.forElementVisible(spinner);
+    wait.forElementNotPresent(spinner);
+
     return this;
-  }
-
-  public boolean isModalDialogVisible() {
-    return dialogSignIn.isDisplayed();
   }
 
   public boolean isExpanded() {
@@ -59,27 +71,6 @@ public class PostsCreatorDesktop extends BasePageObject {
 
   public boolean isPostButtonActive() {
     return submitButton.isEnabled();
-  }
-
-  public PostsCreatorDesktop clickSubmitButton() {
-    submitButton.click();
-    return this;
-  }
-
-  public PostsCreatorDesktop waitForSpinnerToAppearAndDisappear() {
-    final By spinner = By.cssSelector(".discussion-inline-editor svg.spinner");
-
-    wait.forElementVisible(spinner);
-    wait.forElementNotPresent(spinner);
-
-    return this;
-  }
-
-  public PostsCreatorDesktop closeGuidelinesMessage() {
-    if (guidelinesMessageCloseButton.isDisplayed()) {
-      guidelinesMessageCloseButton.click();
-    }
-    return this;
   }
 
   public PostsCreatorDesktop fillTitleWith(String text) {
@@ -92,11 +83,6 @@ public class PostsCreatorDesktop extends BasePageObject {
     return this;
   }
 
-  public PostsCreatorDesktop fillDescriptionWith(String text) {
-    descriptionTextarea.sendKeys(text);
-    return this;
-  }
-
   public PostsCreatorDesktop clearDescription() {
     descriptionTextarea.clear();
     return this;
@@ -105,13 +91,6 @@ public class PostsCreatorDesktop extends BasePageObject {
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {
     okButtonInSignInDialog.click();
     return this;
-  }
-
-  public CategoryPills clickAddCategoryButton() {
-    addCategoryButton.click();
-    wait.forElementVisible(By.cssSelector(".discussion-inline-editor .pop-over-compass"));
-
-    return categoryPills;
   }
 
   public PostsCreatorDesktop clickSignInButtonInSignInDialog() {

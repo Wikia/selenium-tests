@@ -112,15 +112,7 @@ public class Post extends BasePageObject {
   }
 
   public Post waitForPostToAppearWith(final String description) {
-    wait.forTextInElement(By.cssSelector(".discussion.forum > :nth-child(3)"), description);
-
-    return this;
-  }
-
-
-  public Post waitForPostToAppearOnMobileWith(final String description) {
-    wait.forTextInElement(By.cssSelector(".discussion.forum > :nth-child(2)"), description);
-
+    wait.forTextInElement(By.cssSelector(".discussion.forum.forum-wrapper"), description);
     return this;
   }
 
