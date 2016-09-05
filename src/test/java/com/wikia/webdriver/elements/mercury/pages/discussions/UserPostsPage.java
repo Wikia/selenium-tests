@@ -1,11 +1,15 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
 
 public class UserPostsPage extends WikiBasePageObject {
+
+  @Getter(lazy = true)
+  private final Post post = new Post();
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
@@ -25,7 +29,7 @@ public class UserPostsPage extends WikiBasePageObject {
     return open(NON_EXISTING_USER_ID);
   }
 
-  public UserPostsPage openDefault() {
+  public UserPostsPage openDefaultUserPage() {
     return open(EXISTING_USER_ID);
   }
 }

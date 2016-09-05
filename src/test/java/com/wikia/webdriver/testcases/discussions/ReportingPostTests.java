@@ -11,11 +11,14 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-reporting-posts")
 public class ReportingPostTests extends NewTestTemplate {
+
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
 
   @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
   @Execute(asUser = User.ANONYMOUS)
@@ -31,6 +34,40 @@ public class ReportingPostTests extends NewTestTemplate {
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
     PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
     assertThatReportPostOptionIsNotAvailable(postDetailsPage.getPost());
+  }
+
+
+  @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotReportPostOnuserPostsPage() {
+    UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
+    assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
+  }
+
+  @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotReportPostOnPostListPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
+  }
+
+  @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
+    PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
+    assertThatReportPostOptionIsNotAvailable(postDetailsPage.getPost());
+  }
+
+
+  @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotReportPostOnuserPostsPage() {
+    UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
+    assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
   }
 
   public void assertThatReportPostOptionIsNotAvailable(Post post) {
