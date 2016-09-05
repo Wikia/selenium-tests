@@ -30,6 +30,8 @@ public class AdsInterstitialObject extends AdsBaseObject {
    */
   private static final int SIZE_DIFFERENCE_TOLERANCE = 32;
 
+  private static final int WAIT_BUTTON_DELAY_TOLERANCE = 2;
+
   @FindBy(css = "iframe.wikia-ad-iframe")
   private WebElement interstitialAdIframe;
 
@@ -55,8 +57,9 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
   public void waitForInterstitialShowUp() {
     JavascriptActions javascriptActions = new JavascriptActions(driver);
-    javascriptActions.waitForJavaScriptTruthy("document.querySelectorAll(\"" + INTERSTITIAL_AD_WRAPPER_SELECTOR
-                                              + "\").length == 1");
+    String jsIsInterstitialPresent = String.format("document.querySelectorAll('%s').length == 1",
+                                                   INTERSTITIAL_AD_WRAPPER_SELECTOR);
+    javascriptActions.waitForJavaScriptTruthy(jsIsInterstitialPresent);
   }
 
   public void verifyAdRatio() {
@@ -111,7 +114,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
       if (closeButtonText.length() > 0) {
         Integer waitTillCloseButtonAppears = Integer.parseInt(closeButtonText);
         PageObjectLogging.log("Wait time for close button", String.valueOf(waitTillCloseButtonAppears), true);
-        Thread.sleep((waitTillCloseButtonAppears+2) * 1000);
+        Thread.sleep((waitTillCloseButtonAppears+WAIT_BUTTON_DELAY_TOLERANCE) * 1000);
       }
     }
 
