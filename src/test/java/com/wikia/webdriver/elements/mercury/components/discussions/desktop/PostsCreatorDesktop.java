@@ -24,19 +24,19 @@ public class PostsCreatorDesktop extends BasePageObject {
   private WebElement discussionEditor;
 
   @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
-  private WebElement editorSubmit;
+  private WebElement submitButton;
 
   @FindBy (css = ".editor-overlay-message .message-close")
-  private WebElement editorGuidelinesMessageCLoseButton;
+  private WebElement guidelinesMessageCloseButton;
+
+  @FindBy (css = "#categoryPickerButtonDesktop")
+  private WebElement addCategoryButton;
 
   @FindBy (css = ".discussion-inline-editor .discussion-textarea-with-counter")
-  private WebElement editorTitleTextarea;
+  private WebElement titleTextarea;
 
   @FindBy (css = ".discussion-inline-editor textarea[required]")
-  private WebElement editorDescriptionTextarea;
-
-  @FindBy (css = ".discussion-inline-editor #categoryPickerButtonDesktop")
-  private WebElement addCategoryButton;
+  private WebElement descriptionTextarea;
 
   private final CategoryPills categoryPills;
 
@@ -58,11 +58,11 @@ public class PostsCreatorDesktop extends BasePageObject {
   }
 
   public boolean isPostButtonActive() {
-    return editorSubmit.isEnabled();
+    return submitButton.isEnabled();
   }
 
   public PostsCreatorDesktop clickSubmitButton() {
-    editorSubmit.click();
+    submitButton.click();
     return this;
   }
 
@@ -76,29 +76,29 @@ public class PostsCreatorDesktop extends BasePageObject {
   }
 
   public PostsCreatorDesktop closeGuidelinesMessage() {
-    if (editorGuidelinesMessageCLoseButton.isDisplayed()) {
-      editorGuidelinesMessageCLoseButton.click();
+    if (guidelinesMessageCloseButton.isDisplayed()) {
+      guidelinesMessageCloseButton.click();
     }
     return this;
   }
 
   public PostsCreatorDesktop fillTitleWith(String text) {
-    editorTitleTextarea.sendKeys(text);
+    titleTextarea.sendKeys(text);
     return this;
   }
 
   public PostsCreatorDesktop clearTitle() {
-    editorTitleTextarea.clear();
+    titleTextarea.clear();
     return this;
   }
 
   public PostsCreatorDesktop fillDescriptionWith(String text) {
-    editorDescriptionTextarea.sendKeys(text);
+    descriptionTextarea.sendKeys(text);
     return this;
   }
 
-  public PostsCreatorDesktop clearDesciption() {
-    editorDescriptionTextarea.clear();
+  public PostsCreatorDesktop clearDescription() {
+    descriptionTextarea.clear();
     return this;
   }
 

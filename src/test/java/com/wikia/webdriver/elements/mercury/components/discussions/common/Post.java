@@ -117,6 +117,13 @@ public class Post extends BasePageObject {
     return this;
   }
 
+
+  public Post waitForPostToAppearOnMobileWith(final String description) {
+    wait.forTextInElement(By.cssSelector(".discussion.forum > :nth-child(2)"), description);
+
+    return this;
+  }
+
   public Post clickShareIcon(int postIndex) {
     WebElement button = toggleShare.get(postIndex);
     wait.forElementClickable(button);

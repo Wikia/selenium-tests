@@ -25,7 +25,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private static final String TEXT = "text";
 
-  /**
+  /*
    * ANONS ON MOBILE SECTION
    */
 
@@ -36,7 +36,7 @@ public class CreatingPostTests extends NewTestTemplate {
     userOnMobileMustBeLoggedInToUsePostCreator();
   }
 
-  /**
+  /*
    * ANONS ON DESKTOP SECTION
    */
 
@@ -47,7 +47,37 @@ public class CreatingPostTests extends NewTestTemplate {
     userOnDesktopMustBeLoggedInToUsePostCreator();
   }
 
-  /**
+  /*
+   * LOGGED-IN USERS ON MOBILE SECTION
+   */
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanAddPostWithoutTitle() {
+    final String description = createUniqueDescription();
+
+    PostsListPage postListPage = new PostsListPage().open();
+    PostsCreatorMobile postsCreator = postListPage.getPostsCreatorMobile();
+
+    final CategoryPill categoryPill = postsCreator.clickPostCreator()
+        .closeGuidelinesMessage()
+        .fillDescriptionWith(description)
+        .clickAddCategoryButton()
+        .findCategoryOnPosition(0);
+
+    categoryPill.click();
+
+    postsCreator.clickSubmitButton();
+//        .waitForSpinnerToAppearAndDisappear();
+
+    Post posts = postListPage.getPost();
+    PostEntity postEntity = posts.waitForPostToAppearOnMobileWith(description)
+        .getTheNewestPost();
+
+    assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
+  }
+
+  /*
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
 
@@ -97,7 +127,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clearTitle();
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only description filled.");
-    postsCreator.clearDesciption();
+    postsCreator.clearDescription();
 
     postsCreator.clickAddCategoryButton()
         .findCategoryOnPosition(0)
@@ -129,13 +159,7 @@ public class CreatingPostTests extends NewTestTemplate {
     PostEntity postEntity = posts.waitForPostToAppearWith(description)
             .getTheNewestPost();
 
-    if (null != postEntity) {
-      Assertion.assertStringContains(postEntity.findTimestamp(), "now");
-      Assertion.assertEquals(postEntity.findDescription(), description);
-      Assertion.assertStringContains(postEntity.findCategory(), categoryPill.getName());
-    } else {
-      Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
-    }
+    assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
 
   /**
@@ -185,5 +209,16 @@ public class CreatingPostTests extends NewTestTemplate {
     categoryPill.click();
 
     return categoryPill;
+  }
+
+  private void assertThatPostWasAddedWith(final PostEntity postEntity, final String description,
+      final String categoryName) {
+    if (null != postEntity) {
+      Assertion.assertStringContains(postEntity.findTimestamp(), "now");
+      Assertion.assertEquals(postEntity.findDescription(), description);
+      Assertion.assertStringContains(postEntity.findCategory(), categoryName);
+    } else {
+      Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
+    }
   }
 }
