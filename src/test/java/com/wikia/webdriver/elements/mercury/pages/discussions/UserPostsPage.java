@@ -11,6 +11,9 @@ public class UserPostsPage extends WikiBasePageObject {
   private final ErrorMessages errorMessages = new ErrorMessages();
 
   private static final String PATH = "/d/u/%s";
+
+  private static final String EXISTING_USER_ID = "1342502";
+
   private static final String NON_EXISTING_USER_ID = "4809883";
 
   public UserPostsPage open(String wikiID) {
@@ -20,5 +23,9 @@ public class UserPostsPage extends WikiBasePageObject {
 
   public UserPostsPage open() {
     return open(NON_EXISTING_USER_ID);
+  }
+
+  public UserPostsPage openDefault() {
+    return open(EXISTING_USER_ID);
   }
 }
