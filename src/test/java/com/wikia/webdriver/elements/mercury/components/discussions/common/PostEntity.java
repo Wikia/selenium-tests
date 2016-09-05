@@ -16,10 +16,18 @@ public class PostEntity {
   }
 
   public String findDescription() {
-    return webElement.findElement(By.className("post-details-link")).getText();
+    return findDescriptionElement().getText();
+  }
+
+  private WebElement findDescriptionElement() {
+    return webElement.findElement(By.className("post-details-link"));
   }
 
   public String findCategory() {
     return webElement.findElement(By.className("post-category-name")).getText();
+  }
+
+  public void click() {
+    findDescriptionElement().click();
   }
 }

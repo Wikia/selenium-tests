@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -14,8 +15,15 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsC
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
+import javax.annotation.Nullable;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-creating-posts")
@@ -50,7 +58,7 @@ public class CreatingPostTests extends NewTestTemplate {
   /*
    * LOGGED-IN USERS ON MOBILE SECTION
    */
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddPostWithoutTitle() {
@@ -71,6 +79,13 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
 
+  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
+    userCanClickPostAndGoToPostDetailsPage();
+  }
+
   /*
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
@@ -89,14 +104,14 @@ public class CreatingPostTests extends NewTestTemplate {
 
   /**
    * This test covers all situations when post cannot be added (submit button is disabled).
-   *
+   * <p>
    * | Category | Title | Description |
    * |          |     x |             |
    * |          |     x |           x |
    * |          |       |           x |
    * |        x |       |             |
    * |        x |     x |             |
-   *
+   * <p>
    * * x - means category was selected or text was added
    */
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
@@ -147,13 +162,20 @@ public class CreatingPostTests extends NewTestTemplate {
     final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
 
     postsCreator.clickSubmitButton()
-                .waitForSpinnerToAppearAndDisappear();
+        .waitForSpinnerToAppearAndDisappear();
 
     PostEntity postEntity = postListPage.getPost()
         .waitForPostToAppearWith(description)
         .getTheNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
+    userCanClickPostAndGoToPostDetailsPage();
   }
 
   /**
@@ -214,5 +236,26 @@ public class CreatingPostTests extends NewTestTemplate {
     } else {
       Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
     }
+  }
+
+  private void userCanClickPostAndGoToPostDetailsPage() {
+    PostsListPage postListPage = new PostsListPage().open();
+
+    postListPage.getPost()
+        .getTheNewestPost()
+        .click();
+
+    waitForPostDetailsTransitionToFinish();
+
+    Assertion.assertTrue(PostDetailsPage.is(driver.getCurrentUrl()));
+  }
+
+  private void waitForPostDetailsTransitionToFinish() {
+    new WebDriverWait(driver, 5).until(new Predicate<WebDriver>() {
+      @Override
+      public boolean apply(@Nullable WebDriver input) {
+        return ExpectedConditions.presenceOfElementLocated(By.className("post-details-view")).apply(input).isDisplayed();
+      }
+    });
   }
 }
