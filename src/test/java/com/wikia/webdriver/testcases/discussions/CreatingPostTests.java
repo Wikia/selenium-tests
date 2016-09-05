@@ -173,7 +173,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
     userCanClickPostAndGoToPostDetailsPage();
   }
