@@ -241,13 +241,18 @@ public class CreatingPostTests extends NewTestTemplate {
   private void userCanClickPostAndGoToPostDetailsPage() {
     PostsListPage postListPage = new PostsListPage().open();
 
-    postListPage.getPost()
-        .getTheNewestPost()
-        .click();
+    PostEntity post = postListPage.getPost()
+        .getTheNewestPost();
+
+    final String postDetailsUrl = post.findLinkToPostDetails();
+
+    post.click();
 
     waitForPostDetailsTransitionToFinish();
 
-    Assertion.assertTrue(PostDetailsPage.is(driver.getCurrentUrl()));
+    final String url = driver.getCurrentUrl();
+    Assertion.assertTrue(PostDetailsPage.is(url));
+    Assertion.assertTrue(url.endsWith(postDetailsUrl));
   }
 
   private void waitForPostDetailsTransitionToFinish() {

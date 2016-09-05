@@ -27,6 +27,10 @@ public class PostEntity {
     return webElement.findElement(By.className("post-category-name")).getText();
   }
 
+  public String findLinkToPostDetails() {
+    return findDescriptionElement().getAttribute("href");
+  }
+
   public void click() {
     findDescriptionElement().click();
   }
