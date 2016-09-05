@@ -29,8 +29,11 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".editor-overlay-message .message-close")
   private WebElement editorGuidelinesMessageCLoseButton;
 
+  @FindBy (css = ".discussion-inline-editor .discussion-textarea-with-counter")
+  private WebElement editorTitleTextarea;
+
   @FindBy (css = ".discussion-inline-editor textarea[required]")
-  private WebElement editorContentTextarea;
+  private WebElement editorDescriptionTextarea;
 
   @FindBy (css = ".discussion-inline-editor #categoryPickerButtonDesktop")
   private WebElement addCategoryButton;
@@ -79,8 +82,23 @@ public class PostsCreatorDesktop extends BasePageObject {
     return this;
   }
 
-  public PostsCreatorDesktop fillPostDescriptionWith(String text) {
-    editorContentTextarea.sendKeys(text);
+  public PostsCreatorDesktop fillTitleWith(String text) {
+    editorTitleTextarea.sendKeys(text);
+    return this;
+  }
+
+  public PostsCreatorDesktop clearTitle() {
+    editorTitleTextarea.clear();
+    return this;
+  }
+
+  public PostsCreatorDesktop fillDescriptionWith(String text) {
+    editorDescriptionTextarea.sendKeys(text);
+    return this;
+  }
+
+  public PostsCreatorDesktop clearDesciption() {
+    editorDescriptionTextarea.clear();
     return this;
   }
 

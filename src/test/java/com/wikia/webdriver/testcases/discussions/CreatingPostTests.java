@@ -23,6 +23,8 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
+  private static final String TEXT = "text";
+
   /**
    * ANONS ON MOBILE SECTION
    */
@@ -61,16 +63,47 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
+  /**
+   * This test covers all situations when post cannot be added (submit button is disabled).
+   *
+   * | Category | Title | Description |
+   * |          |     x |             |
+   * |          |     x |           x |
+   * |          |       |           x |
+   * |        x |       |             |
+   * |        x |     x |             |
+   *
+   * * x - means category was selected or text was added
+   */
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void userOnDesktopCannotSaveEmptyPost() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
+  public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
+    PostsListPage postListPage = new PostsListPage().open();
+    PostsCreatorDesktop postsCreator = postListPage.getPostCreatorDesktop();
 
     postsCreator.clickPostCreator()
-            .closeGuidelinesMessage();
-
+        .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
+
+    postsCreator.fillTitleWith(TEXT);
+    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with only title filled.");
+
+    postsCreator.fillDescriptionWith(TEXT);
+    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with title and description filled.");
+
+    postsCreator.clearTitle();
+    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with only description filled.");
+    postsCreator.clearDesciption();
+
+    postsCreator.clickAddCategoryButton()
+        .findCategoryOnPosition(0)
+        .click();
+    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with only category selected.");
+
+    postsCreator.fillTitleWith(TEXT);
+    Assertion.assertFalse(postsCreator.isPostButtonActive(), "User should not be able to add post with category selected and title filled.");
+
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
@@ -140,7 +173,7 @@ public class CreatingPostTests extends NewTestTemplate {
   private CategoryPill fillPostCategoryWith(PostsCreatorDesktop postsCreator, String description) {
     CategoryPill categoryPill = postsCreator.clickPostCreator()
         .closeGuidelinesMessage()
-        .fillPostDescriptionWith(description)
+        .fillDescriptionWith(description)
         .clickAddCategoryButton()
         .findCategoryOnPosition(0);
 
