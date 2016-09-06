@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -14,8 +15,15 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsC
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
+import javax.annotation.Nullable;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-creating-posts")
@@ -80,6 +88,13 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
 
+  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
+    assertThatUserCanClickPostAndGoToPostDetailsPage();
+  }
+
   /*
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
@@ -123,6 +138,13 @@ public class CreatingPostTests extends NewTestTemplate {
         .getTheNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
+    assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
 
   /**
@@ -224,5 +246,31 @@ public class CreatingPostTests extends NewTestTemplate {
     } else {
       Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
     }
+  }
+
+  private void assertThatUserCanClickPostAndGoToPostDetailsPage() {
+    PostsListPage postListPage = new PostsListPage().open();
+
+    PostEntity post = postListPage.getPost()
+        .getTheNewestPost();
+
+    final String postDetailsUrl = post.findLinkToPostDetails();
+
+    post.click();
+
+    waitForPostDetailsTransitionToFinish();
+
+    final String url = driver.getCurrentUrl();
+    Assertion.assertTrue(PostDetailsPage.is(url));
+    Assertion.assertTrue(url.endsWith(postDetailsUrl));
+  }
+
+  private void waitForPostDetailsTransitionToFinish() {
+    new WebDriverWait(driver, 5).until(new Predicate<WebDriver>() {
+      @Override
+      public boolean apply(@Nullable WebDriver input) {
+        return ExpectedConditions.presenceOfElementLocated(By.className("post-details-view")).apply(input).isDisplayed();
+      }
+    });
   }
 }
