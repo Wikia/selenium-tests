@@ -131,6 +131,16 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatAddedPostCanBeReportedOnPostDetailsPage(postsListPage, postsCreator);
   }
 
+  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanReportPostOnUserPostsPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
+
+    assertThatAddedPostCanBeReportedOnUserPostsPage(postsListPage, postsCreator);
+  }
+
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
     boolean actual = post.getTheNewestPost()
         .clickMoreOptions()
