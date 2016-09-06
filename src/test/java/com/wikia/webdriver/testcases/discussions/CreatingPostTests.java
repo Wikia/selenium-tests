@@ -58,11 +58,11 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopSeesStickyEditorAfterScrollDown")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
-    PostsCreatorDesktop postsCreator = postsListPage.getPostCreatorDesktop();
+    PostsCreatorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
 
     Assertion.assertFalse(postsCreator.isExpanded());
     Assertion.assertTrue(postsCreator.isSticky());
@@ -71,6 +71,16 @@ public class CreatingPostTests extends NewTestTemplate {
   /*
    * LOGGED-IN USERS ON MOBILE SECTION
    */
+
+  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
+    PostsListPage postListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postListPage.getPostsCreatorMobile();
+    assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
+  }
+
   @Test(groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -82,8 +92,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
     final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
 
-    postsCreator.clickSubmitButton()
-        .waitForSpinnerToAppearAndDisappear();
+    postsCreator.clickSubmitButton();
 
     PostEntity postEntity = postListPage.getPost()
         .waitForPostToAppearWith(description)
@@ -96,7 +105,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
-    userCanClickPostAndGoToPostDetailsPage();
+    assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
 
   /*
@@ -106,8 +115,8 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserCanExpandPostEditorOnDesktop() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
+  public void userOnDesktopCanExpandPostEditor() {
+    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
     postsCreator.click();
 
@@ -115,25 +124,87 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
+    PostsListPage postListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postListPage.getPostsCreatorDesktop();
+    assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanAddPostWithoutTitle() {
+    final String description = TextGenerator.createUniqueText();
+
+    PostsListPage postListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postListPage.getPostsCreatorDesktop();
+
+    final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
+
+    postsCreator.clickSubmitButton();
+
+    PostEntity postEntity = postListPage.getPost()
+        .waitForPostToAppearWith(description)
+        .getTheNewestPost();
+
+    assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
+    assertThatUserCanClickPostAndGoToPostDetailsPage();
+  }
+
+  /**
+   * TESTING METHODS SECTION
+   */
+
+  private void userOnMobileMustBeLoggedInToUsePostCreator() {
+    PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+
+    postsCreator.clickOkButtonInSignInDialog();
+
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+
+    postsCreator.clickSignInButtonInSignInDialog();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
+  }
+
+  private void userOnDesktopMustBeLoggedInToUsePostCreator() {
+    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+
+    postsCreator.clickOkButtonInSignInDialog();
+
+    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
+
+    postsCreator.clickSignInButtonInSignInDialog();
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
+  }
+
   /**
    * This test covers all situations when post cannot be added (submit button is disabled).
-   * <p>
+   *
    * | Category | Title | Description |
    * |          |     x |             |
    * |          |     x |           x |
    * |          |       |           x |
    * |        x |       |             |
    * |        x |     x |             |
-   * <p>
+   *
    * * x - means category was selected or text was added
    */
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
-  @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
-    PostsListPage postListPage = new PostsListPage().open();
-    PostsCreatorDesktop postsCreator = postListPage.getPostCreatorDesktop();
-
+  private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(PostsCreator postsCreator) {
     postsCreator.click()
         .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
@@ -160,67 +231,6 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.fillTitleWith(TEXT);
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with category selected and title filled.");
-
-  }
-
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
-  @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void userOnDesktopCanAddPostWithoutTitle() {
-    final String description = TextGenerator.createUniqueText();
-
-    PostsListPage postListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postListPage.getPostCreatorDesktop();
-
-    final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
-
-    postsCreator.clickSubmitButton()
-        .waitForSpinnerToAppearAndDisappear();
-
-    PostEntity postEntity = postListPage.getPost()
-        .waitForPostToAppearWith(description)
-        .getTheNewestPost();
-
-    assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
-  }
-
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
-  @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
-    userCanClickPostAndGoToPostDetailsPage();
-  }
-
-  /**
-   * TESTING METHODS SECTION
-   */
-
-  private void userOnMobileMustBeLoggedInToUsePostCreator() {
-    PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
-
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
-    postsCreator.clickOkButtonInSignInDialog();
-
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
-    postsCreator.clickSignInButtonInSignInDialog();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
-  }
-
-  private void userOnDesktopMustBeLoggedInToUsePostCreator() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostCreatorDesktop();
-
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
-    postsCreator.clickOkButtonInSignInDialog();
-
-    Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
-    postsCreator.clickSignInButtonInSignInDialog();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
 
   private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
@@ -246,7 +256,7 @@ public class CreatingPostTests extends NewTestTemplate {
     }
   }
 
-  private void userCanClickPostAndGoToPostDetailsPage() {
+  private void assertThatUserCanClickPostAndGoToPostDetailsPage() {
     PostsListPage postListPage = new PostsListPage().open();
 
     PostEntity post = postListPage.getPost()

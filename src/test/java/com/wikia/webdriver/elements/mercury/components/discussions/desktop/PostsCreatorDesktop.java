@@ -1,9 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -56,16 +54,6 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     return "discussion-inline-editor";
   }
 
-  @Override
-  public PostsCreator waitForSpinnerToAppearAndDisappear() {
-    final By spinner = By.cssSelector("." + getBaseCssClassName() + " svg.spinner");
-
-    wait.forElementVisible(spinner);
-    wait.forElementNotPresent(spinner);
-
-    return this;
-  }
-
   public boolean isExpanded() {
     return editor.getAttribute("class").contains("is-active");
   }
@@ -74,6 +62,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     return editor.getAttribute("class").contains("is-sticky");
   }
 
+<<<<<<< HEAD
   public boolean isPostButtonActive() {
     return submitButton.isEnabled();
   }
@@ -88,6 +77,8 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     return this;
   }
 
+=======
+>>>>>>> master
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {
     okButtonInSignInDialog.click();
     return this;

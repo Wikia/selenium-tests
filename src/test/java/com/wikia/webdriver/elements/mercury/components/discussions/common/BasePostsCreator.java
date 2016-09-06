@@ -40,6 +40,12 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return getSignInDialog().isDisplayed();
   }
 
+
+  @Override
+  public boolean isPostButtonActive() {
+    return getSubmitButton().isEnabled();
+  }
+
   @Override
   public PostsCreator closeGuidelinesMessage() {
     if (getGuidelinesMessageCloseButton().isDisplayed()) {
@@ -63,8 +69,20 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
+  public PostsCreator clearTitle() {
+    getTitleTextarea().clear();
+    return this;
+  }
+
+  @Override
   public PostsCreator fillDescriptionWith(String text) {
     getDescriptionTextarea().sendKeys(text);
+    return this;
+  }
+
+  @Override
+  public PostsCreator clearDescription() {
+    getDescriptionTextarea().clear();
     return this;
   }
 
@@ -88,8 +106,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
     category.click();
 
-    clickSubmitButton()
-        .waitForSpinnerToAppearAndDisappear();
+    clickSubmitButton();
 
     return new PostEntity.Data(categoryName, title, description);
   }

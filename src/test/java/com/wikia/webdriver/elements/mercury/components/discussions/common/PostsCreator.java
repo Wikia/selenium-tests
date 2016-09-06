@@ -4,6 +4,8 @@ public interface PostsCreator {
 
   boolean isSignInDialogVisible();
 
+  boolean isPostButtonActive();
+
   PostsCreator click();
 
   PostsCreator closeGuidelinesMessage();
@@ -12,11 +14,13 @@ public interface PostsCreator {
 
   PostsCreator fillTitleWith(final String text);
 
+  PostsCreator clearTitle();
+
   PostsCreator fillDescriptionWith(final String text);
 
-  PostsCreator clickSubmitButton();
+  PostsCreator clearDescription();
 
-  PostsCreator waitForSpinnerToAppearAndDisappear();
+  PostsCreator clickSubmitButton();
 
   PostEntity.Data addPostWithRandomData();
 }

@@ -1,9 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -51,14 +49,6 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @Override
   protected String getBaseCssClassName() {
     return "discussion-standalone-editor";
-  }
-
-  @Override
-  public PostsCreator waitForSpinnerToAppearAndDisappear() {
-    final By success = By.cssSelector("." + getBaseCssClassName() + " svg.success");
-    wait.forElementNotPresent(success);
-
-    return this;
   }
 
   public PostsCreatorMobile clickOkButtonInSignInDialog() {

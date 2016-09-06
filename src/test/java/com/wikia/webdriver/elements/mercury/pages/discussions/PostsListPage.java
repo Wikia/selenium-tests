@@ -4,11 +4,18 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorM
 import com.wikia.webdriver.elements.mercury.components.discussions.common.OptionsPostAndReply;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.*;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import lombok.Getter;
 
 
@@ -36,7 +43,7 @@ public class PostsListPage extends WikiBasePageObject {
   private final Moderation moderationTools = new Moderation();
 
   @Getter(lazy = true)
-  private final PostsCreatorDesktop postCreatorDesktop = new PostsCreatorDesktop();
+  private final PostsCreatorDesktop postsCreatorDesktop = new PostsCreatorDesktop();
 
   @Getter(lazy = true)
   private final PostsCreatorMobile postsCreatorMobile = new PostsCreatorMobile();
