@@ -134,22 +134,24 @@ public class AdsDataProvider {
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_2.png",
                     "src/test/resources/adsResources/flite_skin_right_2.png",
-                    "div[id*='div18']"
+                    "div[data-layer*='Button #2']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_3.png",
                     "src/test/resources/adsResources/flite_skin_right_3.png",
-                    "div[id*='div16']"
-                ),
+                    "div[data-layer*='Button #3']"
+                )
+                ,
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_4.png",
                     "src/test/resources/adsResources/flite_skin_right_4.png",
-                    "div[id*='div14']"
-                ),
+                    "div[data-layer*='Button #4']"
+                )
+                ,
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_1.png",
                     "src/test/resources/adsResources/flite_skin_right_1.png",
-                    "div[id*='div20']"
+                    "div[data-layer='Button #1']"
                 )
             )
         },
