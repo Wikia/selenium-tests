@@ -23,6 +23,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   public static final String NIELSEN_PIXEL_URL = "http://secure-dcr.imrworldwide.com/cgi-bin/cfg?pli";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
   public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
+  public static final String UBISOFT_PIXEL_URL = "//ubistatic2-a.akamaihd.net/worldwide_analytics/tagcommander/wikia/tc_WikiaEMEA_1.js";
 
   @NetworkTrafficDump
   @Test(
