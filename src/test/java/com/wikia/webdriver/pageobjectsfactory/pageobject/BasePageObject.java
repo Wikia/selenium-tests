@@ -162,6 +162,11 @@ public class BasePageObject {
     return isElementInElement;
   }
 
+  protected void scrollTo(WebElement element) {
+    jsActions.scrollElementIntoViewPort(element);
+    wait.forElementClickable(element, 5);
+  }
+
   protected void scrollAndClick(WebElement element) {
     jsActions.scrollElementIntoViewPort(element);
     wait.forElementClickable(element, 5);

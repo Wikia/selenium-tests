@@ -5,6 +5,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import javax.annotation.CheckForNull;
 import java.util.List;
 
 
@@ -54,6 +56,11 @@ public class Post extends BasePageObject {
     return this;
   }
 
+  public Post scrollToLoadMoreButton() {
+    scrollTo(loadMoreButton);
+    return this;
+  }
+
   public Post clickLoadMore() {
     scrollAndClick(loadMoreButton);
     return this;
@@ -61,6 +68,11 @@ public class Post extends BasePageObject {
 
   public int getPostsListLength() {
     return postList.size();
+  }
+
+  @CheckForNull
+  public PostEntity getTheNewestPost() {
+    return postList.isEmpty() ? null : new PostEntity(postList.get(0));
   }
 
   public boolean isUpvoteButtonVisible(int index) {
@@ -101,6 +113,11 @@ public class Post extends BasePageObject {
       PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
     }
 
+    return this;
+  }
+
+  public Post waitForPostToAppearWith(final String description) {
+    wait.forTextInElement(By.cssSelector(".discussion.forum.forum-wrapper"), description);
     return this;
   }
 
