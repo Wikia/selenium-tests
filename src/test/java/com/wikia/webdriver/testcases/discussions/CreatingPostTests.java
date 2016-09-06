@@ -61,7 +61,7 @@ public class CreatingPostTests extends NewTestTemplate {
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
-    PostsCreatorDesktop postsCreator = postsListPage.getPostCreatorDesktop();
+    PostsCreatorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
 
     Assertion.assertFalse(postsCreator.isExpanded());
     Assertion.assertTrue(postsCreator.isSticky());
