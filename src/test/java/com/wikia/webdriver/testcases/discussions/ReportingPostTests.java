@@ -17,11 +17,17 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-reporting-posts")
 public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
+
+  private final AtomicReference<String> postId = new AtomicReference<>();
+
+  private final AtomicReference<String> userId = new AtomicReference<>();
 
   // Anonymous user on mobile
 
@@ -58,6 +64,28 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsListPage postsListPage = new PostsListPage().open();
 
     Assertion.assertTrue(postsListPage.getPost().getReportedPosts().isEmpty(),
+        "Anonymous user should not see reported posts.");
+  }
+
+  @Test(groups = "discussions-anonUserMobileReporting",
+      dependsOnMethods = "userOnMobileCanReportPostOnPostDetailsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
+    PostDetailsPage postDetailsPage = new PostDetailsPage().open(postId.get());
+
+    Assertion.assertTrue(postDetailsPage.getPost().getReportedPosts().isEmpty(),
+        "Anonymous user should not see reported posts.");
+  }
+
+  @Test(groups = "discussions-anonUserMobileReporting",
+      dependsOnMethods = "userOnMobileCanReportPostOnUserPostsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
+    UserPostsPage userPostsPage = new UserPostsPage().open(userId.get());
+
+    Assertion.assertTrue(userPostsPage.getPost().getReportedPosts().isEmpty(),
         "Anonymous user should not see reported posts.");
   }
 
@@ -202,6 +230,8 @@ public class ReportingPostTests extends NewTestTemplate {
 
     new Transitions(driver).waitForPostDetailsPageTransition();
 
+    postId.set(PostDetailsPage.extractPostIdFrom(driver.getCurrentUrl()));
+
     PostEntity postEntity = new PostDetailsPage().getPost().getTheNewestPost();
     reportPost(postEntity);
 
@@ -216,6 +246,8 @@ public class ReportingPostTests extends NewTestTemplate {
         .clickViewAllPostsByOption();
 
     new Transitions(driver).waitForUserPostsPageTransition();
+
+    userId.set(UserPostsPage.extractUserIdFrom(driver.getCurrentUrl()));
 
     PostEntity postEntity = new UserPostsPage().getPost().getTheNewestPost();
     reportPost(postEntity);
