@@ -140,14 +140,12 @@ public class AdsDataProvider {
                     "src/test/resources/adsResources/flite_skin_left_3.png",
                     "src/test/resources/adsResources/flite_skin_right_3.png",
                     "div[data-layer*='Button #3']"
-                )
-                ,
+                ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_4.png",
                     "src/test/resources/adsResources/flite_skin_right_4.png",
                     "div[data-layer*='Button #4']"
-                )
-                ,
+                ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_1.png",
                     "src/test/resources/adsResources/flite_skin_right_1.png",
