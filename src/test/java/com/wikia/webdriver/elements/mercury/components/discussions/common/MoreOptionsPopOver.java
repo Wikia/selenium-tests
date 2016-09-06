@@ -15,6 +15,11 @@ public class MoreOptionsPopOver {
     return !webElement.findElements(By.className("report-link")).isEmpty();
   }
 
+  public MoreOptionsPopOver clickViewAllPostsByOption() {
+    webElement.findElement(By.cssSelector("a[href^='/d/u/']")).click();
+    return this;
+  }
+
   public MoreOptionsPopOver clickReportPostOption() {
     webElement.findElement(By.className("report-link")).click();
     return this;

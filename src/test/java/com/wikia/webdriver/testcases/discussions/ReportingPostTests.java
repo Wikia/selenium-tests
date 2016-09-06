@@ -96,7 +96,17 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
-    assertThatAddedPostCanBeReportedonPostDetailsPage(postsListPage, postsCreator);
+    assertThatAddedPostCanBeReportedOnPostDetailsPage(postsListPage, postsCreator);
+  }
+
+  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanReportPostOnUserPostsPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
+
+    assertThatAddedPostCanBeReportedOnUserPostsPage(postsListPage, postsCreator);
   }
 
   // User on desktop
@@ -118,7 +128,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
-    assertThatAddedPostCanBeReportedonPostDetailsPage(postsListPage, postsCreator);
+    assertThatAddedPostCanBeReportedOnPostDetailsPage(postsListPage, postsCreator);
   }
 
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
@@ -132,9 +142,7 @@ public class ReportingPostTests extends NewTestTemplate {
   private void assertThatAddedPostCanBeReportedOnPostsListPage(
       final PostsListPage postsListPage, final PostsCreator postsCreator) {
     PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
-
-    postEntity.clickMoreOptions()
-        .clickReportPostOption();
+    reportPost(postEntity);
 
     Assertion.assertTrue(postEntity.isReported());
   }
@@ -149,16 +157,33 @@ public class ReportingPostTests extends NewTestTemplate {
         .getTheNewestPost();
   }
 
-  private void assertThatAddedPostCanBeReportedonPostDetailsPage(
+  private void reportPost(final PostEntity postEntity) {
+    postEntity.clickMoreOptions()
+        .clickReportPostOption();
+  }
+
+  private void assertThatAddedPostCanBeReportedOnPostDetailsPage(
       final PostsListPage postsListPage, final PostsCreator postsCreator) {
     createAndGetNewPost(postsListPage, postsCreator).click();
 
-    new Transitions(driver).waitForPostDetailsTransition();
+    new Transitions(driver).waitForPostDetailsPageTransition();
 
     PostEntity postEntity = new PostDetailsPage().getPost().getTheNewestPost();
+    reportPost(postEntity);
 
-    postEntity.clickMoreOptions()
-        .clickReportPostOption();
+    Assertion.assertTrue(postEntity.isReported());
+  }
+
+  private void assertThatAddedPostCanBeReportedOnUserPostsPage(
+      final PostsListPage postsListPage, final PostsCreator postsCreator) {
+    createAndGetNewPost(postsListPage, postsCreator)
+        .clickMoreOptions()
+        .clickViewAllPostsByOption();
+
+    new Transitions(driver).waitForUserPostsPageTransition();
+
+    PostEntity postEntity = new UserPostsPage().getPost().getTheNewestPost();
+    reportPost(postEntity);
 
     Assertion.assertTrue(postEntity.isReported());
   }

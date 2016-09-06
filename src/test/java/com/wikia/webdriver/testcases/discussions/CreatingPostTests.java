@@ -254,7 +254,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
     post.click();
 
-    new Transitions(driver).waitForPostDetailsTransition();
+    new Transitions(driver).waitForPostDetailsPageTransition();
 
     final String url = driver.getCurrentUrl();
     Assertion.assertTrue(PostDetailsPage.is(url));

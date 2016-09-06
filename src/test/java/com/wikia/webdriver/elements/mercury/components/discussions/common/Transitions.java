@@ -12,16 +12,26 @@ import javax.annotation.Nullable;
 @AllArgsConstructor
 public class Transitions {
 
+  private static final long TIMEOUT_IN_SECONDS = 5;
+
   private final WebDriver webDriver;
 
-  public void waitForPostDetailsTransition() {
-    new WebDriverWait(webDriver, 5).until(new Predicate<WebDriver>() {
+  public void waitForPostDetailsPageTransition() {
+    waitToAppear("post-details-view");
+  }
+
+  private void waitToAppear(final String cssClassName) {
+    new WebDriverWait(webDriver, TIMEOUT_IN_SECONDS).until(new Predicate<WebDriver>() {
       @Override
       public boolean apply(@Nullable WebDriver input) {
-        return ExpectedConditions.presenceOfElementLocated(By.className("post-details-view"))
+        return ExpectedConditions.presenceOfElementLocated(By.className(cssClassName))
             .apply(input)
             .isDisplayed();
       }
     });
+  }
+
+  public void waitForUserPostsPageTransition() {
+    waitToAppear("discussion-user-list");
   }
 }
