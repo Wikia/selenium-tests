@@ -20,6 +20,8 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
+  // Anonymous user on mobile
+
   @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -45,9 +47,11 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
   }
 
+  // Anonymous user on desktop
+
   @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
