@@ -83,9 +83,32 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
+    assertThatAddedPostCanBeReported(postsListPage, postsCreator);
+  }
+
+  // User on desktop
+
+  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanReportPostOnPostListPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
+
+    assertThatAddedPostCanBeReported(postsListPage, postsCreator);
+  }
+
+  public void assertThatReportPostOptionIsNotAvailable(final Post post) {
+    boolean actual = post.getTheNewestPost()
+        .clickMoreOptions()
+        .hasReportPostOption();
+
+    Assertion.assertFalse(actual);
+  }
+
+  public void assertThatAddedPostCanBeReported(final PostsListPage postsListPage, final PostsCreator postsCreator) {
     PostEntity.Data postEntityData = postsCreator.click()
         .closeGuidelinesMessage()
         .addPostWithRandomData();
@@ -98,13 +121,5 @@ public class ReportingPostTests extends NewTestTemplate {
         .clickReportPostOption();
 
     Assertion.assertTrue(postEntity.isReported());
-  }
-
-  public void assertThatReportPostOptionIsNotAvailable(Post post) {
-    boolean actual = post.getTheNewestPost()
-        .clickMoreOptions()
-        .hasReportPostOption();
-
-    Assertion.assertFalse(actual);
   }
 }

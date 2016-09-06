@@ -62,23 +62,6 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     return editor.getAttribute("class").contains("is-sticky");
   }
 
-<<<<<<< HEAD
-  public boolean isPostButtonActive() {
-    return submitButton.isEnabled();
-  }
-
-  public PostsCreatorDesktop clearTitle() {
-    titleTextarea.clear();
-    return this;
-  }
-
-  public PostsCreatorDesktop clearDescription() {
-    descriptionTextarea.clear();
-    return this;
-  }
-
-=======
->>>>>>> master
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {
     okButtonInSignInDialog.click();
     return this;
