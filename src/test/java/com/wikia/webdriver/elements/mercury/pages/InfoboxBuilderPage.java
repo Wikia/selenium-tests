@@ -359,13 +359,14 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     this.wait.forElementClickable(draggedElement);
 
     Point location = component.get(0).getLocation();
-    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 10;
+    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 5;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
         .moveByOffset(0, targetY)
-        .release(draggedElement)
         .pause(500)
+        .release(draggedElement)
+        .pause(1000)
         .perform();
 
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
