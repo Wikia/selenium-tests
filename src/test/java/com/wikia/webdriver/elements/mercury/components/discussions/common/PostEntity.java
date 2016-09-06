@@ -13,13 +13,20 @@ public class PostEntity {
     this.webElement = webElement;
   }
 
+  public boolean hasTopNote() {
+    return null != webElement.findElement(By.className("top-note"));
+  }
+
   public boolean isReported() {
-    webElement.findElement(By.className("top-note"));
     return webElement.getAttribute("class").contains("is-reported");
   }
 
   public String findTimestamp() {
     return webElement.findElement(By.className("timestamp")).getText();
+  }
+
+  public String findTitle() {
+    return webElement.findElement(By.cssSelector(".post-title")).getText();
   }
 
   public String findDescription() {
@@ -48,7 +55,7 @@ public class PostEntity {
   }
 
   public Data toData() {
-    return new Data(findCategory(), findDescription(), "");
+    return new Data(findCategory(),  findTitle(), findDescription());
   }
 
   @lombok.Data()

@@ -1,5 +1,9 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
@@ -7,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 
@@ -73,6 +78,25 @@ public class Post extends BasePageObject {
   @CheckForNull
   public PostEntity getTheNewestPost() {
     return postList.isEmpty() ? null : new PostEntity(postList.get(0));
+  }
+
+  public List<PostEntity> getReportedPosts() {
+    return Lists.newArrayList(Iterables.filter(getPostEntities(), new Predicate<PostEntity>() {
+      @Override
+      public boolean apply(@Nullable PostEntity postEntity) {
+        return postEntity.isReported();
+      }
+    }));
+  }
+
+  private List<PostEntity> getPostEntities() {
+    return Lists.transform(postList, new Function<WebElement, PostEntity>() {
+      @Nullable
+      @Override
+      public PostEntity apply(@Nullable WebElement webElemnt) {
+        return new PostEntity(webElemnt);
+      }
+    });
   }
 
   public boolean isUpvoteButtonVisible(int index) {

@@ -28,7 +28,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonUserOnMobileCanNotReportPostOnPostListPage() {
+  public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
   }
@@ -50,12 +50,23 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
   }
 
+  @Test(groups = "discussions-anonUserMobileReporting",
+      dependsOnMethods = "userOnMobileCanReportPostOnPostsListPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+
+    Assertion.assertTrue(postsListPage.getPost().getReportedPosts().isEmpty(),
+        "Anonymous user should not see reported posts.");
+  }
+
   // Anonymous user on desktop
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanNotReportPostOnPostListPage() {
+  public void anonUserOnDesktopCanNotReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
   }
@@ -82,7 +93,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanReportPostOnPostListPage() {
+  public void userOnMobileCanReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
@@ -114,7 +125,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void userOnDesktopCanReportPostOnPostListPage() {
+  public void userOnDesktopCanReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
@@ -174,8 +185,10 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private void assertThatPostIsReported(final PostEntity postEntity) {
+    Assertion.assertTrue(postEntity.hasTopNote(),
+        "Post should have top note. (Note with reporter should appear at the top of post.)");
     Assertion.assertTrue(postEntity.isReported(),
-        "Post should be reported (Note with reported should appear at the top of post.)");
+        "Post should be reported.");
   }
 
   private void assertThatReportPostOptionIsNotPresent(final PostEntity postEntity) {
