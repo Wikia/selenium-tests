@@ -3,6 +3,8 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class MoreOptionsPopOver {
 
   private final WebElement webElement;
@@ -12,7 +14,21 @@ public class MoreOptionsPopOver {
   }
 
   public boolean hasReportPostOption() {
-    return !webElement.findElements(By.className("report-link")).isEmpty();
+    return hasOption("report-link");
+  }
+
+  private boolean hasOption(String cssClassName) {
+    boolean result = false;
+
+    List<WebElement> options = webElement.findElements(By.tagName("a"));
+    for (WebElement option : options) {
+      if (option.getAttribute("class").contains(cssClassName)) {
+        result = true;
+        break;
+      }
+    }
+
+    return result;
   }
 
   public MoreOptionsPopOver clickViewAllPostsByOption() {
