@@ -131,7 +131,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatAddedPostCanBeReportedOnPostDetailsPage(postsListPage, postsCreator);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnUserPostsPage() {
