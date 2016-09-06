@@ -17,7 +17,8 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-reporting-posts")
@@ -25,9 +26,15 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
-  private final AtomicReference<String> postId = new AtomicReference<>();
+  private final String POST_ID_ADDED_ON_DESKTOP_DURING_TEST = "desktop-post-id";
 
-  private final AtomicReference<String> userId = new AtomicReference<>();
+  private final String POST_ID_ADDED_ON_MOBILE_DURING_TEST = "mobile-post-id";
+
+  private final String USER_ID_ADDED_ON_DESKTOP_DURING_TEST = "desktop-user-id";
+
+  private final String USER_ID_ADDED_ON_MOBILE_DURING_TEST = "mobile-user-id";
+
+  private final Map<String, String> IDS = new ConcurrentHashMap<>(8);
 
   // Anonymous user on mobile
 
@@ -61,10 +68,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
-    PostsListPage postsListPage = new PostsListPage().open();
-
-    Assertion.assertTrue(postsListPage.getPost().getReportedPosts().isEmpty(),
-        "Anonymous user should not see reported posts.");
+    assertThatAnonymousUserDoesNotSeeReportedPostsOnPostsListPage();
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -72,10 +76,8 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
-    PostDetailsPage postDetailsPage = new PostDetailsPage().open(postId.get());
-
-    Assertion.assertTrue(postDetailsPage.getPost().getReportedPosts().isEmpty(),
-        "Anonymous user should not see reported posts.");
+    assertThatAnonymousUserDoesNotSeeReportedPostsOnPostDetailsPage(
+        IDS.get(POST_ID_ADDED_ON_MOBILE_DURING_TEST));
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -83,10 +85,8 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
-    UserPostsPage userPostsPage = new UserPostsPage().open(userId.get());
-
-    Assertion.assertTrue(userPostsPage.getPost().getReportedPosts().isEmpty(),
-        "Anonymous user should not see reported posts.");
+    assertThatAnonymousUserDoesNotSeeReportedPostsOnUserPostsPage(
+        IDS.get(USER_ID_ADDED_ON_MOBILE_DURING_TEST));
   }
 
   // Anonymous user on desktop
@@ -116,6 +116,32 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
   }
 
+  @Test(groups = "discussions-anonUserDesktopReporting",
+      dependsOnMethods = "userOnDesktopCanReportPostOnPostsListPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
+    assertThatAnonymousUserDoesNotSeeReportedPostsOnPostsListPage();
+  }
+
+  @Test(groups = "discussions-anonUserDesktopReporting",
+      dependsOnMethods = "userOnDesktopCanReportPostOnPostDetailsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
+    assertThatAnonymousUserDoesNotSeeReportedPostsOnPostDetailsPage(
+        IDS.get(POST_ID_ADDED_ON_DESKTOP_DURING_TEST));
+  }
+
+  @Test(groups = "discussions-anonUserDesktopReporting",
+      dependsOnMethods = "userOnDesktopCanReportPostOnUserPostsPage")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
+    assertThatAnonymousUserDoesNotSeeReportedPostsOnUserPostsPage(
+        IDS.get(USER_ID_ADDED_ON_DESKTOP_DURING_TEST));
+  }
+
   // User on mobile
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
@@ -136,6 +162,8 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
     assertThatAddedPostCanBeReportedOnPostDetailsPage(postsListPage, postsCreator);
+
+    IDS.put(POST_ID_ADDED_ON_MOBILE_DURING_TEST, PostDetailsPage.extractPostIdFrom(driver.getCurrentUrl()));
   }
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
@@ -146,6 +174,8 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
     assertThatAddedPostCanBeReportedOnUserPostsPage(postsListPage, postsCreator);
+
+    IDS.put(USER_ID_ADDED_ON_MOBILE_DURING_TEST, UserPostsPage.extractUserIdFrom(driver.getCurrentUrl()));
   }
 
   // User on desktop
@@ -168,6 +198,8 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
     assertThatAddedPostCanBeReportedOnPostDetailsPage(postsListPage, postsCreator);
+
+    IDS.put(POST_ID_ADDED_ON_DESKTOP_DURING_TEST, PostDetailsPage.extractPostIdFrom(driver.getCurrentUrl()));
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
@@ -178,6 +210,8 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
     assertThatAddedPostCanBeReportedOnUserPostsPage(postsListPage, postsCreator);
+
+    IDS.put(USER_ID_ADDED_ON_DESKTOP_DURING_TEST, UserPostsPage.extractUserIdFrom(driver.getCurrentUrl()));
   }
 
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
@@ -230,8 +264,6 @@ public class ReportingPostTests extends NewTestTemplate {
 
     new Transitions(driver).waitForPostDetailsPageTransition();
 
-    postId.set(PostDetailsPage.extractPostIdFrom(driver.getCurrentUrl()));
-
     PostEntity postEntity = new PostDetailsPage().getPost().getTheNewestPost();
     reportPost(postEntity);
 
@@ -247,12 +279,31 @@ public class ReportingPostTests extends NewTestTemplate {
 
     new Transitions(driver).waitForUserPostsPageTransition();
 
-    userId.set(UserPostsPage.extractUserIdFrom(driver.getCurrentUrl()));
-
     PostEntity postEntity = new UserPostsPage().getPost().getTheNewestPost();
     reportPost(postEntity);
 
     assertThatPostIsReported(postEntity);
     assertThatReportPostOptionIsNotPresent(postEntity);
+  }
+
+  private void assertThatAnonymousUserDoesNotSeeReportedPostsOnPostsListPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+
+    Assertion.assertTrue(postsListPage.getPost().getReportedPosts().isEmpty(),
+        "Anonymous user should not see reported posts.");
+  }
+
+  private void assertThatAnonymousUserDoesNotSeeReportedPostsOnPostDetailsPage(String postId) {
+    PostDetailsPage postDetailsPage = new PostDetailsPage().open(postId);
+
+    Assertion.assertTrue(postDetailsPage.getPost().getReportedPosts().isEmpty(),
+        "Anonymous user should not see reported posts.");
+  }
+
+  private void assertThatAnonymousUserDoesNotSeeReportedPostsOnUserPostsPage(String userId) {
+    UserPostsPage userPostsPage = new UserPostsPage().open(userId);
+
+    Assertion.assertTrue(userPostsPage.getPost().getReportedPosts().isEmpty(),
+        "Anonymous user should not see reported posts.");
   }
 }
