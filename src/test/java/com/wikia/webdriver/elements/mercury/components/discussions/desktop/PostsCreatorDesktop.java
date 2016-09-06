@@ -1,18 +1,20 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
+import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class PostsCreatorDesktop extends BasePageObject {
+public class PostsCreatorDesktop extends BasePostsCreator {
 
+  @Getter
   @FindBy (css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
-  private WebElement postCreator;
+  private WebElement postsCreator;
 
+  @Getter
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
-  private WebElement dialogSignIn;
+  private WebElement signInDialog;
 
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
   private WebElement okButtonInSignInDialog;
@@ -20,13 +22,40 @@ public class PostsCreatorDesktop extends BasePageObject {
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
-  public PostsCreatorDesktop clickPostCreator() {
-    postCreator.click();
-    return this;
+  @FindBy (css = ".discussion-inline-editor")
+  private WebElement discussionEditor;
+
+  @Getter
+  @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
+  private WebElement submitButton;
+
+  @Getter
+  @FindBy (css = ".editor-overlay-message .message-close")
+  private WebElement guidelinesMessageCloseButton;
+
+  @Getter
+  @FindBy (css = "#categoryPickerButtonDesktop")
+  private WebElement addCategoryButton;
+
+  @Getter
+  @FindBy (css = ".discussion-inline-editor .discussion-textarea-with-counter")
+  private WebElement titleTextarea;
+
+  @Getter
+  @FindBy (css = ".discussion-inline-editor textarea[required]")
+  private WebElement descriptionTextarea;
+
+  public PostsCreatorDesktop() {
+    super();
   }
 
-  public boolean isModalDialogVisible() {
-    return dialogSignIn.isDisplayed();
+  @Override
+  protected String getBaseCssClassName() {
+    return "discussion-inline-editor";
+  }
+
+  public boolean isExpanded() {
+    return discussionEditor.getAttribute("class").contains("is-active");
   }
 
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {
