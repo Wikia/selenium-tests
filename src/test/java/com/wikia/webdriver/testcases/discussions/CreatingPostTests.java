@@ -57,7 +57,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopSeesStickyEditorAfterScrollDown")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
