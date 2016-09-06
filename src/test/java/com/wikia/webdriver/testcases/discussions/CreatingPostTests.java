@@ -32,8 +32,6 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
-  private static final String TEXT = "text";
-
   /*
    * ANONS ON MOBILE SECTION
    */
@@ -209,11 +207,11 @@ public class CreatingPostTests extends NewTestTemplate {
         .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
-    postsCreator.fillTitleWith(TEXT);
+    postsCreator.fillTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only title filled.");
 
-    postsCreator.fillDescriptionWith(TEXT);
+    postsCreator.fillDescriptionWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with title and description filled.");
 
@@ -228,7 +226,7 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only category selected.");
 
-    postsCreator.fillTitleWith(TEXT);
+    postsCreator.fillTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with category selected and title filled.");
   }
