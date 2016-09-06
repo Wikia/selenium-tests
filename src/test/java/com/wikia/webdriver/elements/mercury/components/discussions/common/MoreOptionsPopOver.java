@@ -15,6 +15,11 @@ public class MoreOptionsPopOver {
     return !webElement.findElements(By.className("report-link")).isEmpty();
   }
 
+  public MoreOptionsPopOver clickReportPostOption() {
+    webElement.findElement(By.className("report-link")).click();
+    return this;
+  }
+
   static MoreOptionsPopOver fromPostEntity(WebElement webElement) {
     return new MoreOptionsPopOver(webElement.findElement(By.className(".more-options-pop-over")));
   }

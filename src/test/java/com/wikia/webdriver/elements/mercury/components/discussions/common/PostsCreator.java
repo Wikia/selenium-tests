@@ -1,7 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPills;
-
 public interface PostsCreator {
 
   boolean isSignInDialogVisible();
@@ -12,9 +10,13 @@ public interface PostsCreator {
 
   CategoryPills clickAddCategoryButton();
 
+  PostsCreator fillTitleWith(final String text);
+
   PostsCreator fillDescriptionWith(final String text);
 
   PostsCreator clickSubmitButton();
 
   PostsCreator waitForSpinnerToAppearAndDisappear();
+
+  PostEntity.Data addPostWithRandomData();
 }

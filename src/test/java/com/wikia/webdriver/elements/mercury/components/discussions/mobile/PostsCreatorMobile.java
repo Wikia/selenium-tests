@@ -37,6 +37,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement addCategoryButton;
 
   @Getter
+  @FindBy (css = ".discussion-standalone-editor .discussion-textarea-with-counter")
+  private WebElement titleTextarea;
+
+  @Getter
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
@@ -52,7 +56,6 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @Override
   public PostsCreator waitForSpinnerToAppearAndDisappear() {
     final By success = By.cssSelector("." + getBaseCssClassName() + " svg.success");
-
     wait.forElementNotPresent(success);
 
     return this;

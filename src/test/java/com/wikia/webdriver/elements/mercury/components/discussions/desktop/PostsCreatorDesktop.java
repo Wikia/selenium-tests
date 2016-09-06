@@ -39,6 +39,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   @FindBy (css = "#categoryPickerButtonDesktop")
   private WebElement addCategoryButton;
 
+  @Getter
   @FindBy (css = ".discussion-inline-editor .discussion-textarea-with-counter")
   private WebElement titleTextarea;
 
@@ -75,11 +76,6 @@ public class PostsCreatorDesktop extends BasePostsCreator {
 
   public boolean isPostButtonActive() {
     return submitButton.isEnabled();
-  }
-
-  public PostsCreatorDesktop fillTitleWith(String text) {
-    titleTextarea.sendKeys(text);
-    return this;
   }
 
   public PostsCreatorDesktop clearTitle() {

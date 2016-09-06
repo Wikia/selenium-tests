@@ -9,6 +9,8 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
@@ -72,6 +74,30 @@ public class ReportingPostTests extends NewTestTemplate {
   public void anonUserOnDesktopCanNotReportPostOnuserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
+  }
+
+  // User on mobile
+
+  @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanReportPostOnPostListPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+
+    PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
+
+    PostEntity.Data postEntityData = postsCreator.click()
+        .closeGuidelinesMessage()
+        .addPostWithRandomData();
+
+    PostEntity postEntity = postsListPage.getPost()
+        .waitForPostToAppearWith(postEntityData.getDescription())
+        .getTheNewestPost();
+
+    postEntity.clickMoreOptions()
+        .clickReportPostOption();
+
+    Assertion.assertTrue(postEntity.isReported());
   }
 
   public void assertThatReportPostOptionIsNotAvailable(Post post) {

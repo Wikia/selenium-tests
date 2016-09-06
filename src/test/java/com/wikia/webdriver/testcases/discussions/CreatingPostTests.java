@@ -12,7 +12,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPill;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
@@ -74,7 +75,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddPostWithoutTitle() {
-    final String description = createUniqueDescription();
+    final String description = TextGenerator.createUniqueText();
 
     PostsListPage postListPage = new PostsListPage().open();
     PostsCreator postsCreator = postListPage.getPostsCreatorMobile();
@@ -166,7 +167,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {
-    final String description = createUniqueDescription();
+    final String description = TextGenerator.createUniqueText();
 
     PostsListPage postListPage = new PostsListPage().open();
     PostsCreator postsCreator = postListPage.getPostCreatorDesktop();
@@ -220,11 +221,6 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clickSignInButtonInSignInDialog();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
-  }
-
-  private String createUniqueDescription() {
-    final long timestamp = System.nanoTime();
-    return "Automated test, timestamp " + timestamp;
   }
 
   private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {

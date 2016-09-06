@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,6 +19,8 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getSignInDialog();
 
   protected abstract WebElement getGuidelinesMessageCloseButton();
+
+  protected abstract WebElement getTitleTextarea();
 
   protected abstract WebElement getDescriptionTextarea();
 
@@ -56,6 +57,12 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
+  public PostsCreator fillTitleWith(String text) {
+    getTitleTextarea().sendKeys(text);
+    return this;
+  }
+
+  @Override
   public PostsCreator fillDescriptionWith(String text) {
     getDescriptionTextarea().sendKeys(text);
     return this;
@@ -65,5 +72,25 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   public PostsCreator clickSubmitButton() {
     getSubmitButton().click();
     return this;
+  }
+
+  @Override
+  public PostEntity.Data addPostWithRandomData() {
+    final String title = TextGenerator.defaultText();
+    final String description = TextGenerator.createUniqueText();
+
+    CategoryPill category = fillTitleWith(title)
+        .fillDescriptionWith(description)
+        .clickAddCategoryButton()
+        .findCategoryOnPosition(0);
+
+    final String categoryName = category.getName();
+
+    category.click();
+
+    clickSubmitButton()
+        .waitForSpinnerToAppearAndDisappear();
+
+    return new PostEntity.Data(categoryName, title, description);
   }
 }

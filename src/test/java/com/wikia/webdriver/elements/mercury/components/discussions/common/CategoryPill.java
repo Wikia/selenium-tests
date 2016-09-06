@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
+package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
