@@ -103,12 +103,22 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
     assertThatAddedPostCanBeReportedOnPostsListPage(postsListPage, postsCreator);
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanReportPostOnPostDetailsPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
+
+    assertThatAddedPostCanBeReportedonPostDetailsPage(postsListPage, postsCreator);
   }
 
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
