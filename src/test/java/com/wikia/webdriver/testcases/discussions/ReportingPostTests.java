@@ -24,7 +24,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   // Anonymous user on mobile
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
+  @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostListPage() {
@@ -32,7 +32,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
+  @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
@@ -41,7 +41,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
+  @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnuserPostsPage() {
@@ -51,7 +51,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   // Anonymous user on desktop
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
+  @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostListPage() {
@@ -59,7 +59,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
+  @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
@@ -68,7 +68,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotReportPost")
+  @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnuserPostsPage() {
@@ -78,7 +78,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   // User on mobile
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotReportPost")
+  @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostListPage() {
