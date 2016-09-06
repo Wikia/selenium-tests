@@ -92,7 +92,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
-    userCanClickPostAndGoToPostDetailsPage();
+    assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
 
   /*
@@ -144,7 +144,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
-    userCanClickPostAndGoToPostDetailsPage();
+    assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
 
   /**
@@ -248,7 +248,7 @@ public class CreatingPostTests extends NewTestTemplate {
     }
   }
 
-  private void userCanClickPostAndGoToPostDetailsPage() {
+  private void assertThatUserCanClickPostAndGoToPostDetailsPage() {
     PostsListPage postListPage = new PostsListPage().open();
 
     PostEntity post = postListPage.getPost()
