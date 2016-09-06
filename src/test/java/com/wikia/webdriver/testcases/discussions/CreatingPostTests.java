@@ -55,6 +55,18 @@ public class CreatingPostTests extends NewTestTemplate {
     userOnDesktopMustBeLoggedInToUsePostCreator();
   }
 
+  @Test(groups = "discussions-anonUserOnDesktopSeesStickyEditorAfterScrollDown")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    postsListPage.getPost().scrollToLoadMoreButton();
+    PostsCreatorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
+
+    Assertion.assertFalse(postsCreator.isExpanded());
+    Assertion.assertTrue(postsCreator.isSticky());
+  }
+
   /*
    * LOGGED-IN USERS ON MOBILE SECTION
    */

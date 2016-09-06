@@ -23,7 +23,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   private WebElement signInButtonInSignInDialog;
 
   @FindBy (css = ".discussion-inline-editor")
-  private WebElement discussionEditor;
+  private WebElement editor;
 
   @Getter
   @FindBy (css = ".discussion-inline-editor .discussion-inline-editor-submit")
@@ -55,7 +55,11 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   }
 
   public boolean isExpanded() {
-    return discussionEditor.getAttribute("class").contains("is-active");
+    return editor.getAttribute("class").contains("is-active");
+  }
+
+  public boolean isSticky() {
+    return editor.getAttribute("class").contains("is-sticky");
   }
 
   public PostsCreatorDesktop clickOkButtonInSignInDialog() {
