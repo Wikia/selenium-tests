@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -10,21 +9,12 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.CategoryPill;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-
-import javax.annotation.Nullable;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-creating-posts")
@@ -264,19 +254,10 @@ public class CreatingPostTests extends NewTestTemplate {
 
     post.click();
 
-    waitForPostDetailsTransitionToFinish();
+    new Transitions(driver).waitForPostDetailsTransition();
 
     final String url = driver.getCurrentUrl();
     Assertion.assertTrue(PostDetailsPage.is(url));
     Assertion.assertTrue(url.endsWith(postDetailsUrl));
-  }
-
-  private void waitForPostDetailsTransitionToFinish() {
-    new WebDriverWait(driver, 5).until(new Predicate<WebDriver>() {
-      @Override
-      public boolean apply(@Nullable WebDriver input) {
-        return ExpectedConditions.presenceOfElementLocated(By.className("post-details-view")).apply(input).isDisplayed();
-      }
-    });
   }
 }

@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
@@ -44,7 +45,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonUserOnMobileCanNotReportPostOnuserPostsPage() {
+  public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
   }
@@ -71,7 +72,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanNotReportPostOnuserPostsPage() {
+  public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
   }
@@ -85,7 +86,17 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
-    assertThatAddedPostCanBeReported(postsListPage, postsCreator);
+    assertThatAddedPostCanBeReportedOnPostsListPage(postsListPage, postsCreator);
+  }
+
+  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanReportPostOnPostDetailsPage() {
+    PostsListPage postsListPage = new PostsListPage().open();
+    PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
+
+    assertThatAddedPostCanBeReportedonPostDetailsPage(postsListPage, postsCreator);
   }
 
   // User on desktop
@@ -97,10 +108,10 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
-    assertThatAddedPostCanBeReported(postsListPage, postsCreator);
+    assertThatAddedPostCanBeReportedOnPostsListPage(postsListPage, postsCreator);
   }
 
-  public void assertThatReportPostOptionIsNotAvailable(final Post post) {
+  private void assertThatReportPostOptionIsNotAvailable(final Post post) {
     boolean actual = post.getTheNewestPost()
         .clickMoreOptions()
         .hasReportPostOption();
@@ -108,14 +119,33 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual);
   }
 
-  public void assertThatAddedPostCanBeReported(final PostsListPage postsListPage, final PostsCreator postsCreator) {
+  private void assertThatAddedPostCanBeReportedOnPostsListPage(
+      final PostsListPage postsListPage, final PostsCreator postsCreator) {
+    PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
+
+    postEntity.clickMoreOptions()
+        .clickReportPostOption();
+
+    Assertion.assertTrue(postEntity.isReported());
+  }
+
+  private PostEntity createAndGetNewPost(final PostsListPage postsListPage, final PostsCreator postsCreator) {
     PostEntity.Data postEntityData = postsCreator.click()
         .closeGuidelinesMessage()
         .addPostWithRandomData();
 
-    PostEntity postEntity = postsListPage.getPost()
+    return postsListPage.getPost()
         .waitForPostToAppearWith(postEntityData.getDescription())
         .getTheNewestPost();
+  }
+
+  private void assertThatAddedPostCanBeReportedonPostDetailsPage(
+      final PostsListPage postsListPage, final PostsCreator postsCreator) {
+    createAndGetNewPost(postsListPage, postsCreator).click();
+
+    new Transitions(driver).waitForPostDetailsTransition();
+
+    PostEntity postEntity = new PostDetailsPage().getPost().getTheNewestPost();
 
     postEntity.clickMoreOptions()
         .clickReportPostOption();
