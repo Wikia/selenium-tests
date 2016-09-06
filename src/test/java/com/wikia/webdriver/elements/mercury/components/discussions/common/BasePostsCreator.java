@@ -21,6 +21,8 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   protected abstract WebElement getGuidelinesMessageCloseButton();
 
+  protected abstract WebElement getTitleTextarea();
+
   protected abstract WebElement getDescriptionTextarea();
 
   protected abstract WebElement getAddCategoryButton();
@@ -37,6 +39,12 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   @Override
   public boolean isSignInDialogVisible() {
     return getSignInDialog().isDisplayed();
+  }
+
+
+  @Override
+  public boolean isPostButtonActive() {
+    return getSubmitButton().isEnabled();
   }
 
   @Override
@@ -56,8 +64,26 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
+  public PostsCreator fillTitleWith(String text) {
+    getTitleTextarea().sendKeys(text);
+    return this;
+  }
+
+  @Override
+  public PostsCreator clearTitle() {
+    getTitleTextarea().clear();
+    return this;
+  }
+
+  @Override
   public PostsCreator fillDescriptionWith(String text) {
     getDescriptionTextarea().sendKeys(text);
+    return this;
+  }
+
+  @Override
+  public PostsCreator clearDescription() {
+    getDescriptionTextarea().clear();
     return this;
   }
 
