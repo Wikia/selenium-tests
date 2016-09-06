@@ -87,7 +87,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void loggedInUserCanExpandPostEditorOnDesktop() {
+  public void userOnDesktopCanExpandPostEditor() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
     postsCreator.click();
