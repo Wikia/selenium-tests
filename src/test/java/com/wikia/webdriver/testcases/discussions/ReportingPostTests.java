@@ -54,7 +54,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
@@ -62,7 +62,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
     PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
     assertThatReportPostOptionIsNotAvailable(postDetailsPage.getPost());
@@ -71,7 +71,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
     assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
@@ -113,7 +113,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
@@ -123,7 +123,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostDetailsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
@@ -133,7 +133,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnUserPostsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
@@ -154,7 +154,8 @@ public class ReportingPostTests extends NewTestTemplate {
     PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
     reportPost(postEntity);
 
-    Assertion.assertTrue(postEntity.isReported());
+    assertThatPostIsReported(postEntity);
+    assertThatReportPostOptionIsNotPresent(postEntity);
   }
 
   private PostEntity createAndGetNewPost(final PostsListPage postsListPage, final PostsCreator postsCreator) {
@@ -172,6 +173,16 @@ public class ReportingPostTests extends NewTestTemplate {
         .clickReportPostOption();
   }
 
+  private void assertThatPostIsReported(final PostEntity postEntity) {
+    Assertion.assertTrue(postEntity.isReported(),
+        "Post should be reported (Note with reported should appear at the top of post.)");
+  }
+
+  private void assertThatReportPostOptionIsNotPresent(final PostEntity postEntity) {
+    Assertion.assertFalse(postEntity.clickMoreOptions().hasReportPostOption(),
+        "There should be no 'Report post' option in 'More options' on post already reported by user.");
+  }
+
   private void assertThatAddedPostCanBeReportedOnPostDetailsPage(
       final PostsListPage postsListPage, final PostsCreator postsCreator) {
     createAndGetNewPost(postsListPage, postsCreator).click();
@@ -181,7 +192,8 @@ public class ReportingPostTests extends NewTestTemplate {
     PostEntity postEntity = new PostDetailsPage().getPost().getTheNewestPost();
     reportPost(postEntity);
 
-    Assertion.assertTrue(postEntity.isReported());
+    assertThatPostIsReported(postEntity);
+    assertThatReportPostOptionIsNotPresent(postEntity);
   }
 
   private void assertThatAddedPostCanBeReportedOnUserPostsPage(
@@ -195,6 +207,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostEntity postEntity = new UserPostsPage().getPost().getTheNewestPost();
     reportPost(postEntity);
 
-    Assertion.assertTrue(postEntity.isReported());
+    assertThatPostIsReported(postEntity);
+    assertThatReportPostOptionIsNotPresent(postEntity);
   }
 }
