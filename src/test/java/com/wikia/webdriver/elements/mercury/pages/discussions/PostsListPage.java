@@ -43,7 +43,7 @@ public class PostsListPage extends WikiBasePageObject {
   private final Moderation moderationTools = new Moderation();
 
   @Getter(lazy = true)
-  private final PostsCreatorDesktop postCreatorDesktop = new PostsCreatorDesktop();
+  private final PostsCreatorDesktop postsCreatorDesktop = new PostsCreatorDesktop();
 
   @Getter(lazy = true)
   private final PostsCreatorMobile postsCreatorMobile = new PostsCreatorMobile();
