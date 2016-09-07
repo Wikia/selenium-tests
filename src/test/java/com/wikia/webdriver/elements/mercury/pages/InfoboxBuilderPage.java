@@ -358,12 +358,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
-    Point location = component.get(0).getLocation();
+    Point location = driver.findElement(By.cssSelector(".portable-infobox")).getLocation();
     Integer targetY = draggedElement.getLocation().getY() - location.getY() + 10;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
-        .moveByOffset(0, targetY)
+        .moveByOffset(0,targetY)
+        .pause(500)
         .release(draggedElement)
         .pause(500)
         .perform();
