@@ -100,12 +100,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
     showAvatarControls();
     wait.forElementClickable(avatarRemoveButton);
     avatarRemoveButton.click();
-//    avatarRemoveButton.click();
-//    Alert alert = driver.switchTo().alert();
-//    alert.accept();
-    //Assertion.assertTrue(AlertHandler.isAlertPresent(driver));
     AlertHandler.acceptPopupWindow(driver, 10);
-
     hideAvatarControls();
     wait.forElementVisible(avatarWrapper);
     PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
