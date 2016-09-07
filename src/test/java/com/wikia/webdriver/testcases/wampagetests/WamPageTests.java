@@ -52,8 +52,6 @@ public class WamPageTests extends NewTestTemplate {
   @Test(groups = {"wamPage_005", "WamPageTests"})
   public void wam_005_testDatePicker() {
     wam.verifyLatestDateInDatePicker();
-    String lastMonthDate = wam.changeDateToLastMonth();
-    wam.verifyDateInDatePicker(lastMonthDate);
     String date = "July 12, 2014";
     wam.typeDateInDatePicker(date);
     wam.verifyDateInDatePicker(date);
