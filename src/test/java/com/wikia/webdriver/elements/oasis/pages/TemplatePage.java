@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -68,5 +69,11 @@ public class TemplatePage extends WikiBasePageObject {
     wait.forElementVisible(pageBackgroundColor);
 
     return pageBackgroundColor.getCssValue("background-color");
+  }
+
+  public TemplatePage createTemplate(String templateName) {
+    new ArticleContent().push("", "Template:" + templateName);
+
+    return this;
   }
 }

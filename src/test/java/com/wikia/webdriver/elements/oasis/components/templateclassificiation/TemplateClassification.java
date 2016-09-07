@@ -55,16 +55,8 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification save() {
-    String oldTemplateName = this.templateName;
     wait.forElementClickable(saveButton);
     saveButton.click();
-
-    wait.forElementVisible(entryPointLink);
-    String currentTemplateName = entryPointLink.getText();
-    Assertion.assertFalse(currentTemplateName.equals(oldTemplateName),
-                          "Template type did not change");
-    PageObjectLogging.logInfo(
-        "Template type changed from: '" + oldTemplateName + "', to: '" + currentTemplateName + "'");
 
     return this;
   }
@@ -100,6 +92,18 @@ public class TemplateClassification extends WikiBasePageObject {
     typeInputQuote.click();
 
     PageObjectLogging.logInfo("Quote template was chosen");
+
+    return this;
+  }
+
+  public TemplateClassification compareTemplateTypes() {
+    String oldTemplateName = this.templateName;
+    wait.forElementVisible(entryPointLink);
+    String currentTemplateName = entryPointLink.getText();
+    Assertion.assertFalse(currentTemplateName.equals(oldTemplateName),
+                          "Template type did not change");
+    PageObjectLogging.logInfo(
+        "Template type changed from: '" + oldTemplateName + "', to: '" + currentTemplateName + "'");
 
     return this;
   }

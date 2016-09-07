@@ -14,10 +14,13 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 @Test(groups = {"templateClassification"})
 public class TemplateClassificationTest extends NewTestTemplate {
 
+  private String templateName = "T";
+
   @Test(groups = "templateClassification_openAndClose")
   public void templateClassification_openAndClose() {
     new TemplatePage()
-        .open("T")
+        .createTemplate(this.templateName)
+        .open(this.templateName)
         .getTemplateClassification()
         .open()
         .close();
@@ -26,7 +29,8 @@ public class TemplateClassificationTest extends NewTestTemplate {
   @Test(groups = "templateClassification_changeTemplateType")
   public void templateClassification_changeTemplateType() {
     new TemplatePage()
-        .open("T")
+        .createTemplate(this.templateName)
+        .open(this.templateName)
         .getTemplateClassification()
         .open()
         .changeTemplateType()
@@ -39,6 +43,7 @@ public class TemplateClassificationTest extends NewTestTemplate {
         .open("AutoTestInfobox")
         .getTemplateClassification()
         .selectQuoteTemplate()
-        .save();
+        .save()
+        .compareTemplateTypes();
   }
 }
