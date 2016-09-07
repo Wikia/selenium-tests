@@ -199,25 +199,6 @@ public class WamPageObject extends BasePageObject {
     Assertion.assertEquals(currentDate, latestDate, "Current date and the latest possible date are not the same");
   }
 
-  public String changeDateToLastMonth() {
-    scrollAndClick(datePickerInput);
-    wait.forElementVisible(calendarElement);
-    previousMonthArrow.click();
-    DateTime date = DateTime.now().minusMonths(1);
-    String previousMonth = DateTimeFormat.forPattern("MMMM").withLocale(Locale.ENGLISH).print(date);
-    wait.forTextInElement(monthInCalendar, previousMonth);
-
-    // first day of the current month
-    WebElement firstDay = (WebElement) jsActions.execute(
-            "return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
-            calendarElement);
-    firstDay.click();
-
-    String year = DateTimeFormat.forPattern("YYYY").print(date);
-
-    return previousMonth + " 1, " + year;
-  }
-
   public void verifyDateInDatePicker(String date) {
     isLoaded();
     String currentDate = datePickerInput.getAttribute("value");
