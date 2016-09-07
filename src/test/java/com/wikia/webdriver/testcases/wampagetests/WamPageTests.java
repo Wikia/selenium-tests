@@ -49,18 +49,7 @@ public class WamPageTests extends NewTestTemplate {
     wam.verifyWamIndexPageFirstColumn(21, 40);
   }
 
-  @Test(groups = {"WamPage004", "WamPageTests"})
-  @RelatedIssue(issueID = "SUS-923")
-  public void wam_004_compareTabAndHeaderName() {
-    for (WamTab tab : WamTab.values()) {
-      wam.selectTab(tab);
-      Assertion
-          .assertEquals(wam.getSelectedHeaderName().toUpperCase(), tab.getExpectedHeaderName());
-    }
-  }
-
   @Test(groups = {"wamPage_005", "WamPageTests"})
-  @RelatedIssue(issueID = "MAIN-7392", comment = "test manually. Unable to reproduce defect")
   public void wam_005_testDatePicker() {
     wam.verifyLatestDateInDatePicker();
     String lastMonthDate = wam.changeDateToLastMonth();

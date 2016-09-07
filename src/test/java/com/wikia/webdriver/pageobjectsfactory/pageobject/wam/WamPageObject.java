@@ -187,10 +187,6 @@ public class WamPageObject extends BasePageObject {
     wait.forElementVisible(tabSelected);
   }
 
-  public String getSelectedHeaderName() {
-    return selectedHeaderName.getText();
-  }
-
   public void verifyLatestDateInDatePicker() {
     String currentDate = datePickerInput.getAttribute("value");
     String latestDate =
