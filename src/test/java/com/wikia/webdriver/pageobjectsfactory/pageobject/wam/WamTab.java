@@ -17,10 +17,6 @@ public enum WamTab {
     return verticalId;
   }
 
-  public String getExpectedHeaderName() {
-    return verticalId > 0 ? String.format("TOP GAINERS: %s", expectedHeader) : "TOP GAINERS";
-  }
-
   private String getIdAsString() {
     return Integer.toString(verticalId);
   }
