@@ -359,11 +359,11 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     this.wait.forElementClickable(draggedElement);
 
     Point location = driver.findElement(By.cssSelector(".portable-infobox.pi-background")).getLocation();
-    Integer targetY = draggedElement.getLocation().getY() - location.getY() - 10;
+    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 15;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
-        .moveByOffset(0,targetY)
+        .moveToElement(draggedElement,0,targetY)
         .pause(500)
         .release(draggedElement)
         .pause(500)
