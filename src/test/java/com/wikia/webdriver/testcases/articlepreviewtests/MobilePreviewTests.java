@@ -6,6 +6,7 @@ import com.wikia.webdriver.elements.oasis.pages.ArticlePreviewPage;
 
 import org.testng.annotations.Test;
 
+@Test(groups = "MobilePreview")
 @Execute(onWikia = "mercuryautomationtesting")
 public class MobilePreviewTests extends NewTestTemplate {
 

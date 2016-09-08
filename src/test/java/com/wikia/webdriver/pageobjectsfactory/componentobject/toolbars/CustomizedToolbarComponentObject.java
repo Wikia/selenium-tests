@@ -158,7 +158,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
             "title", "Unfollow");
     PageObjectLogging.log("verifyFollowedToolbar", "follow button verified", true);
-
   }
 
   /**
@@ -169,9 +168,8 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void verifyUnfollowed() {
     wait.forElementClickable(pageWatchlistStatusMessage);
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
-                                                    "title", "Follow");
+            "title", "Follow");
     PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
-
   }
 
   /**

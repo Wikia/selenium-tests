@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Test(groups = "Mercury_Header")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class HeaderTest extends NewTestTemplate {

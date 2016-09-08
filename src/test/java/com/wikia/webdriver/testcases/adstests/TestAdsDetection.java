@@ -15,9 +15,9 @@ public class TestAdsDetection extends TemplateNoFirstLoad {
       "http://www\\..*\\.com/bcn.*deo=0.*";
 
   public static final String PIXEL_PATTERN_WITH_ADBLOCK_AND_RECOVERY =
-      ".*\\.wikia\\.com/__are\\?.*deo=1.*";
+      ".*\\.wikia\\.com/__bre\\?.*deo=1.*";
   public static final String PIXEL_PATTERN_WITHOUT_ADBLOCK_AND_RECOVERY =
-      ".*\\.wikia\\.com/__are\\?.*deo=0.*";
+      ".*\\.wikia\\.com/__bre\\?.*deo=0.*";
 
   @NetworkTrafficDump
   @Test(

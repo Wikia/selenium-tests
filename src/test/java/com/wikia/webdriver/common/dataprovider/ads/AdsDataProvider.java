@@ -63,13 +63,11 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] noAdsForUsers() {
     return new Object[][]{
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypasta", "Categoria:Creepypasta"},
-        {"wikia", "Video_Games/Lizzunchbox"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"monsterhunter", "Portal:MH3U"},
-        {"adtest-pluto", "VeryLongPage"},
-        {"breakingbad", "File:AARON-PAUL-JACKET.jpg"},
+        {"project43", "SyntheticTests/LongPage"},
+        {"project43", "Category:Browse"},
+        {"project43", "Special:Videos"},
+        {"project43", "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)"},
+        {"project43", "Koperek:SyntheticTests/NoAds"},
     };
   }
 
@@ -142,22 +140,22 @@ public class AdsDataProvider {
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_2.png",
                     "src/test/resources/adsResources/flite_skin_right_2.png",
-                    "div[id*='div18']"
+                    "div[data-layer*='Button #2']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_3.png",
                     "src/test/resources/adsResources/flite_skin_right_3.png",
-                    "div[id*='div16']"
+                    "div[data-layer*='Button #3']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_4.png",
                     "src/test/resources/adsResources/flite_skin_right_4.png",
-                    "div[id*='div14']"
+                    "div[data-layer*='Button #4']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_1.png",
                     "src/test/resources/adsResources/flite_skin_right_1.png",
-                    "div[id*='div20']"
+                    "div[data-layer='Button #1']"
                 )
             )
         },

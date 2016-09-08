@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsInterstitialObject;
@@ -21,11 +20,10 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
       Dimension pageSize,
       Dimension adSize,
       boolean shouldAdBeScaled
-  ) {
+  ) throws InterruptedException {
     testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
   }
 
-  @RelatedIssue(issueID = "ADEN-3531")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "TestInterstitialMercury",
@@ -37,7 +35,7 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
       Dimension pageSize,
       Dimension adSize,
       boolean shouldAdBeScaled
-  ) {
+  ) throws InterruptedException {
     testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
   }
 
@@ -47,11 +45,12 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
       Dimension pageSize,
       Dimension adSize,
       boolean shouldAdBeScaled
-  ) {
+  ) throws InterruptedException {
     String url = urlBuilder.getUrlForPath(wikiName, article);
     String testedPage = urlBuilder.appendQueryStringToURL(url, "highimpactslot=1");
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver, testedPage, pageSize);
     adsInterstitial.waitForPageLoaded();
+    adsInterstitial.waitForInterstitialShowUp();
     adsInterstitial.verifySize(adSize);
     if (shouldAdBeScaled) {
       adsInterstitial.verifyAdRatio();
