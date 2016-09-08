@@ -27,6 +27,8 @@ public class MailFunctions {
 
   public static String getFirstEmailContent(String userName, String password, String subject) {
     try {
+      PageObjectLogging.logInfo("Checking emails for " + userName + " that contain '" + subject + "'");
+
       // establishing connections
       Properties props = System.getProperties();
       props.setProperty("mail.store.protocol", "imaps");
