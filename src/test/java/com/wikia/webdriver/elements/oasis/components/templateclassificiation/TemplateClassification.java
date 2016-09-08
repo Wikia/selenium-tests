@@ -23,6 +23,8 @@ public class TemplateClassification extends WikiBasePageObject {
 
   private By modalSelector = By.cssSelector(".template-classification-edit-modal");
 
+  private static final String TEMPLATE_TYPE_UNKNOWN = "Unknown";
+
   public TemplateClassification() {
     super();
   }
@@ -73,7 +75,7 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification resetTemplateType() {
-    this.changeTemplateType("Unknown");
+    this.changeTemplateType(TEMPLATE_TYPE_UNKNOWN);
 
     return this;
   }

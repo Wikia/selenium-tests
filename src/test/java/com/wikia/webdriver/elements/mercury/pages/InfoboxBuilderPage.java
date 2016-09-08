@@ -82,10 +82,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
+  private static final String TEMPLATE_TYPE_INFOBOX = "Infobox";
+
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .changeTemplateType("Infobox")
+        .changeTemplateType(TEMPLATE_TYPE_INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
