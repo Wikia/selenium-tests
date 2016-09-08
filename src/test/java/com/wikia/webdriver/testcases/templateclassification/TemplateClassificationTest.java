@@ -16,38 +16,41 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 @Test(groups = {"templateClassification"})
 public class TemplateClassificationTest extends NewTestTemplate {
 
-  private String templateName = "T";
+  private static final String DEFAULT_TEMPLATE_NAME = "T";
+  private static final String TEMPLATE_TYPE_UNKNOWN = "Unknown";
+  private static final String TEMPLATE_TYPE_INFOBOX = "Infobox";
+  private static final String TEMPLATE_TYPE_QUOTE   = "Quote";
 
   @Test(groups = "templateClassification_createTemplateAndChangeItsType")
   public void templateClassification_createTemplateAndChangeItsType() {
     TemplatePage templatePage = new TemplatePage();
 
     TemplateClassification templateClassification = templatePage
-            .createTemplate(this.templateName)
-            .open(this.templateName)
-            .getTemplateClassification();
-
-    templateClassification
+            .createTemplate(DEFAULT_TEMPLATE_NAME)
+            .open(DEFAULT_TEMPLATE_NAME)
+            .getTemplateClassification()
             .open()
             .resetTemplateType()
             .save();
 
-    Assertion.assertTrue(templateName.equals("Unknown"), "Template type was reset");
+    String templateType = templateClassification.getTemplateType();
+
+    Assertion.assertTrue(templateType.equals(TEMPLATE_TYPE_UNKNOWN), "Template type was reset");
     PageObjectLogging.logInfo("Template type was reset");
 
     templateClassification
             .open()
-            .changeTemplateType("Infobox")
+            .changeTemplateType(TEMPLATE_TYPE_INFOBOX)
             .save();
 
-    String templateType = templateClassification.getTemplateType();
+    templateType = templateClassification.getTemplateType();
 
-    Assertion.assertTrue(templateType.equals("Infobox"), "Template type set to Infobox");
+    Assertion.assertTrue(templateType.equals(TEMPLATE_TYPE_INFOBOX), "Template type set to Infobox");
     PageObjectLogging.logInfo("Template type set to: '" + templateType + "'");
 
     templateClassification
             .open()
-            .changeTemplateType("Quote")
+            .changeTemplateType(TEMPLATE_TYPE_QUOTE)
             .save();
 
     String oldTemplateType = templateType;
