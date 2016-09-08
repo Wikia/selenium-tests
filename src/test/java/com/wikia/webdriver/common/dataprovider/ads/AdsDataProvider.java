@@ -23,11 +23,16 @@ public class AdsDataProvider {
       AdsContent.PREFOOTER_RIGHT
   };
 
-  private static final String NO_SKIN_WIKI_NAME = "adtest";
-  private static final String NO_SKIN_PAGE_NAME = "Skin";
+  private static final String WIKI_REGULAR = "adtest-pluto";
+  private static final String WIKI_SPECIAL = "project43";
 
-  private static final String GRADIENT_WIKI_NAME = "adtest-pluto";
-  private static final String GRADIENT_PAGE_NAME = "Skin";
+  private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
+  private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
+
+  private static final String NO_SKIN_LEFT =
+      "src/test/resources/adsResources/no_wikia_skin_left.png";
+  private static final String NO_SKIN_RIGHT =
+      "src/test/resources/adsResources/no_wikia_skin_right.png";
 
   private AdsDataProvider() {
   }
@@ -163,62 +168,36 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] skin() {
+  public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
-            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
+            WIKI_REGULAR, "Skin",
             new Dimension(1200, 1000),
-            "src/test/resources/adsResources/no_wikia_skin_left.png",
-            "src/test/resources/adsResources/no_wikia_skin_right.png",
+            NO_SKIN_LEFT, NO_SKIN_RIGHT,
             null,
             null
         }, {
-            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
+            WIKI_REGULAR, "Skin",
             new Dimension(1600, 900),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
+            WIKI_REGULAR, "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
+            WIKI_REGULAR, "Skin",
             new Dimension(2400, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
-            new Dimension(1600, 900),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
+            WIKI_REGULAR, "Skin/NoMiddleColor",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
-            new Dimension(2400, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            NO_SKIN_WIKI_NAME, "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
         }
@@ -226,21 +205,50 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] skinLimited() {
+  public static Object[][] skinWithoutTheme() {
     return new Object[][]{
         {
-            GRADIENT_WIKI_NAME, GRADIENT_PAGE_NAME,
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(1600, 900),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(2400, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
+            new Dimension(1920, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            ""
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] roadblocks() {
+    return new Object[][]{
+        {
+            WIKI_REGULAR, "Skin",
+            new Dimension(1920, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         },
         {
-            NO_SKIN_WIKI_NAME, NO_SKIN_PAGE_NAME,
+            WIKI_SPECIAL, "SyntheticTests/Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }
