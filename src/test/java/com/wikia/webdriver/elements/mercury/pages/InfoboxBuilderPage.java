@@ -85,7 +85,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .selectInfoboxTemplate()
+        .changeTemplateType("Infobox")
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
