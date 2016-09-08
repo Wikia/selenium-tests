@@ -28,28 +28,34 @@ public class TemplateClassificationTest extends NewTestTemplate {
             .getTemplateClassification();
 
     templateClassification
-            .resetTemplateType();
+            .open()
+            .resetTemplateType()
+            .save();
 
     Assertion.assertTrue(templateName.equals("Unknown"), "Template type was reset");
     PageObjectLogging.logInfo("Template type was reset");
 
     templateClassification
-            .changeTemplateType("Infobox");
+            .open()
+            .changeTemplateType("Infobox")
+            .save();
 
-    String templateName = templateClassification.getTemplateType();
+    String templateType = templateClassification.getTemplateType();
 
-    Assertion.assertTrue(templateName.equals("Infobox"), "Template type set to Infobox");
-    PageObjectLogging.logInfo("Template type set to: '" + templateName + "'");
+    Assertion.assertTrue(templateType.equals("Infobox"), "Template type set to Infobox");
+    PageObjectLogging.logInfo("Template type set to: '" + templateType + "'");
 
     templateClassification
-            .changeTemplateType("Quote");
+            .open()
+            .changeTemplateType("Quote")
+            .save();
 
-    String oldTemplateName = templateName;
-    String currentTemplateName = templateClassification.getTemplateType();
+    String oldTemplateType = templateType;
+    String currentTemplateType = templateClassification.getTemplateType();
 
-    Assertion.assertFalse(currentTemplateName.equals(oldTemplateName), "Template type did not change");
+    Assertion.assertFalse(currentTemplateType.equals(oldTemplateType), "Template type did not change");
     PageObjectLogging.logInfo(
-            "Template type changed from: '" + oldTemplateName + "', to: '" + currentTemplateName + "'");
+            "Template type changed from: '" + oldTemplateType + "', to: '" + currentTemplateType + "'");
 
   }
 }
