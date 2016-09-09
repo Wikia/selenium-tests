@@ -298,7 +298,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
-        driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token")));
+        driver.manage().addCookie(
+            new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
+                       Configuration.getWikiaDomain(), "/", null));
       }
     }
 
