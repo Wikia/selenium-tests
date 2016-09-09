@@ -299,11 +299,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-           Configuration.getEnvType().getWikiaDomain(), null, null));
-        String mockAdsCookie = String.valueOf(
-            new JavascriptActions(driver).execute("document.cookie")
-        );
-        log("Cookies", mockAdsCookie, true);
+           String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
       }
     }
 
