@@ -3,6 +3,9 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -113,6 +116,10 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   }
 
   @Execute(mockAds = "true")
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtfPluto",
@@ -124,6 +131,10 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   }
 
   @Execute(mockAds = "true")
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtfPluto",
@@ -134,6 +145,10 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     adsAtfDisableBtfMercury(wikiName, article, isWgVarOn);
   }
 
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
@@ -164,6 +179,10 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
                          AdsContent.MOBILE_PREFOOTER);
   }
 
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
