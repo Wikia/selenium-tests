@@ -2,21 +2,23 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
+public class TestAdsBtfBlocking extends NewTestTemplate {
 
   private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
 
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
@@ -57,6 +59,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.FLOATING_MEDREC);
   }
 
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -91,6 +94,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
    * https://wikia-inc.atlassian.net/browse/ADEN-2156 Test whether ads on small screens are
    * displayed when wgAdDriverDelayBelowTheFold is enabled
    */
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -111,6 +115,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   }
 
   @RelatedIssue(issueID = "ADEN-3761")
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
@@ -141,6 +146,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.MOBILE_PREFOOTER);
   }
 
+  @Execute(mockAds = "true")
   @RelatedIssue(issueID = "ADEN-3761")
   @Test(
       dataProviderClass = AdsDataProvider.class,
