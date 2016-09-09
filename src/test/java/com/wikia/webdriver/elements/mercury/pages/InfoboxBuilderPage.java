@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -82,12 +83,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-chevron-area")
   private List<WebElement> sectionHeadersChevron;
 
-  private static final String TEMPLATE_TYPE_INFOBOX = "Infobox";
-
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .changeTemplateType(TEMPLATE_TYPE_INFOBOX)
+        .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
