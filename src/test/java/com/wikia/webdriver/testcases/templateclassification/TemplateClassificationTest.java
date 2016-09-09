@@ -20,31 +20,32 @@ public class TemplateClassificationTest extends NewTestTemplate {
 
   @Test(groups = "templateClassification_createTemplateAndChangeItsType")
   public void templateClassification_createTemplateAndChangeItsType() {
-    TemplatePage templatePage = new TemplatePage();
+    TemplatePage templatePage = new TemplatePage()
+        .createTemplate(DEFAULT_TEMPLATE_NAME)
+        .open(DEFAULT_TEMPLATE_NAME);
 
-    TemplateClassification templateClassification = templatePage
-      .createTemplate(DEFAULT_TEMPLATE_NAME)
-      .open(DEFAULT_TEMPLATE_NAME)
-      .getTemplateClassification()
-      .open()
-      .resetTemplateType()
-      .save();
+    TemplateClassification templateClassification = templatePage.getTemplateClassification();
+
+    templateClassification
+        .open()
+        .resetTemplateType()
+        .save();
 
     String oldTemplateType = templateClassification.getTemplateType();
 
     Assertion.assertEquals(templateClassification.getTemplateType(), TemplateTypes.UNKNOWN.getType());
 
     templateClassification
-      .open()
-      .changeTemplateType(TemplateTypes.INFOBOX)
-      .save();
+        .open()
+        .changeTemplateType(TemplateTypes.INFOBOX)
+        .save();
 
     Assertion.assertEquals(templateClassification.getTemplateType(), TemplateTypes.INFOBOX.getType());
 
     templateClassification
-      .open()
-      .changeTemplateType(TemplateTypes.QUOTE)
-      .save();
+        .open()
+        .changeTemplateType(TemplateTypes.QUOTE)
+        .save();
 
     String currentTemplateType = templateClassification.getTemplateType();
 
