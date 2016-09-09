@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.templateclassification;
 
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import org.testng.annotations.Test;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -17,7 +16,7 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 @Test(groups = {"templateClassification"})
 public class TemplateClassificationTest extends NewTestTemplate {
 
-  public static final String DEFAULT_TEMPLATE_NAME = "T";
+  private static final String DEFAULT_TEMPLATE_NAME = "T";
 
   @Test(groups = "templateClassification_createTemplateAndChangeItsType")
   public void templateClassification_createTemplateAndChangeItsType() {
@@ -31,32 +30,24 @@ public class TemplateClassificationTest extends NewTestTemplate {
       .resetTemplateType()
       .save();
 
-    String templateType = templateClassification.getTemplateType();
+    String oldTemplateType = templateClassification.getTemplateType();
 
-    Assertion.assertTrue(templateType.equals(TemplateTypes.TEMPLATE_TYPE_UNKNOWN), "Template type was reset");
-    PageObjectLogging.logInfo("Template type was reset");
-
-    templateClassification
-      .open()
-      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
-      .save();
-
-    templateType = templateClassification.getTemplateType();
-
-    Assertion.assertTrue(templateType.equals(TemplateTypes.TEMPLATE_TYPE_INFOBOX), "Template type set to Infobox");
-    PageObjectLogging.logInfo("Template type set to: '" + templateType + "'");
+    Assertion.assertEquals(templateClassification.getTemplateType(), TemplateTypes.UNKNOWN.getType());
 
     templateClassification
       .open()
-      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_QUOTE)
+      .changeTemplateType(TemplateTypes.INFOBOX)
       .save();
 
-    String oldTemplateType = templateType;
+    Assertion.assertEquals(templateClassification.getTemplateType(), TemplateTypes.INFOBOX.getType());
+
+    templateClassification
+      .open()
+      .changeTemplateType(TemplateTypes.QUOTE)
+      .save();
+
     String currentTemplateType = templateClassification.getTemplateType();
 
-    Assertion.assertFalse(currentTemplateType.equals(oldTemplateType), "Template type did not change");
-    PageObjectLogging.logInfo(
-            "Template type changed from: '" + oldTemplateType + "', to: '" + currentTemplateType + "'");
-
+    Assertion.assertNotEquals(currentTemplateType, oldTemplateType);
   }
 }

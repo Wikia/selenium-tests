@@ -201,7 +201,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   public void newTemplateCreation() {
     new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
       .getTemplateClassification()
-      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
+      .changeTemplateType(TemplateTypes.INFOBOX)
       .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
@@ -403,7 +403,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     TemplateEditPage template = new TemplateEditPage();
     template
       .getTemplateClassification()
-      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
+      .changeTemplateType(TemplateTypes.INFOBOX)
       .clickAddButton();
 
     Assertion.assertTrue(template.isEditAreaDisplayed());

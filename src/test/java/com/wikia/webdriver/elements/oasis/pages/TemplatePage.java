@@ -1,8 +1,8 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
+import com.wikia.webdriver.elements.oasis.components.templatecontent.TemplateContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -72,7 +72,7 @@ public class TemplatePage extends WikiBasePageObject {
   }
 
   public TemplatePage createTemplate(String templateName) {
-    new ArticleContent().push("", "Template:" + templateName);
+    new TemplateContent().push(templateName);
 
     return this;
   }

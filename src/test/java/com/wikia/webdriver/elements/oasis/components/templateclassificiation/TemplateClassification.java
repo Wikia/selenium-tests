@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
-import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -20,8 +20,6 @@ public class TemplateClassification extends WikiBasePageObject {
   private WebElement closeButton;
 
   private By modalSelector = By.cssSelector(".template-classification-edit-modal");
-
-  private static final String TEMPLATE_TYPE_UNKNOWN = "Unknown";
 
   public TemplateClassification() {
     super();
@@ -61,7 +59,8 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  public TemplateClassification changeTemplateType(String templateName) {
+  public TemplateClassification changeTemplateType(TemplateTypes templateType) {
+    String templateName = templateType.getType();
     WebElement typeInput = driver.findElement(By.cssSelector("#template-classification-" + templateName.toLowerCase()));
 
     wait.forElementClickable(typeInput);
@@ -73,7 +72,7 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification resetTemplateType() {
-    this.changeTemplateType(TEMPLATE_TYPE_UNKNOWN);
+    this.changeTemplateType(TemplateTypes.UNKNOWN);
 
     return this;
   }

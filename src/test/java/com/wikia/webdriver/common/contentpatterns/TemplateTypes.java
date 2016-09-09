@@ -1,12 +1,18 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-public class TemplateTypes {
+import org.apache.commons.lang.StringUtils;
 
-    public static final String TEMPLATE_TYPE_UNKNOWN = "Unknown";
-    public static final String TEMPLATE_TYPE_INFOBOX = "Infobox";
-    public static final String TEMPLATE_TYPE_QUOTE   = "Quote";
+public enum TemplateTypes {
 
-    private TemplateTypes() {
+  UNKNOWN, INFOBOX, QUOTE;
 
-    }
+  private final String type;
+
+  TemplateTypes() {
+    this.type = StringUtils.capitalize(this.toString().toLowerCase());
+  }
+
+  public String getType() {
+    return this.type;
+  }
 }
