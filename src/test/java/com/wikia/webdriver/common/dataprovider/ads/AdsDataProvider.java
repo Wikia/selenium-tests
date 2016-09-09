@@ -1317,8 +1317,8 @@ public class AdsDataProvider {
   public static Object[][] adsMonocolorOasis() {
     return new Object[][]{
         {
-            "adtest",
-            "Monocolor_Ad"
+            WIKI_SPECIAL,
+            "SyntheticTests/Monocolor_Ad"
         }
     };
   }
