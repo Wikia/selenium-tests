@@ -25,10 +25,10 @@ public class TestHorseSlots extends NewTestTemplate {
 //  }
 //
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"TestHorseSlots_Interstitial", "TestHorseSlots"}, invocationCount = 5)
+  @Test(groups = {"TestHorseSlots_Interstitial", "TestHorseSlots"}, invocationCount = 10)
   public void TestHorseSlots_Interstitial() {
     driver.manage().window().maximize();
-    driver.get("http://sandbox-adeng04.project43.wikia.com/wiki/A");
+    driver.get("http://sandbox-adeng01.project43.wikia.com/wiki/A");
     AdsBaseObject ads = new AdsBaseObject(driver);
     ads.waitForElementPresent("wikia_gpt/5441/wka.life/_project43//article/mobile/MOBILE_TOP_LEADERBOARD");
     try {
