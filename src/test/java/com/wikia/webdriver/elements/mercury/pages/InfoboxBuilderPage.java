@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -85,7 +86,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .selectInfoboxTemplate()
+        .changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
