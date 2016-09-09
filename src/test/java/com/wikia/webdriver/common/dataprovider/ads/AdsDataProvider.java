@@ -239,13 +239,6 @@ public class AdsDataProvider {
   public static Object[][] roadblocks() {
     return new Object[][]{
         {
-            WIKI_REGULAR, "Skin",
-            new Dimension(1920, 1080),
-            SKIN_LEFT, SKIN_RIGHT,
-            "AAAAAA",
-            "FFFFFF"
-        },
-        {
             WIKI_SPECIAL, "SyntheticTests/Skin",
             new Dimension(1920, 1080),
             SKIN_LEFT, SKIN_RIGHT,
