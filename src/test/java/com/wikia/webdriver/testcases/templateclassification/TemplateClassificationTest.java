@@ -17,17 +17,19 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 @Test(groups = {"templateClassification"})
 public class TemplateClassificationTest extends NewTestTemplate {
 
+  public static final String DEFAULT_TEMPLATE_NAME = "T";
+
   @Test(groups = "templateClassification_createTemplateAndChangeItsType")
   public void templateClassification_createTemplateAndChangeItsType() {
     TemplatePage templatePage = new TemplatePage();
 
     TemplateClassification templateClassification = templatePage
-            .createTemplate(TemplateTypes.DEFAULT_TEMPLATE_NAME)
-            .open(TemplateTypes.DEFAULT_TEMPLATE_NAME)
-            .getTemplateClassification()
-            .open()
-            .resetTemplateType()
-            .save();
+      .createTemplate(DEFAULT_TEMPLATE_NAME)
+      .open(DEFAULT_TEMPLATE_NAME)
+      .getTemplateClassification()
+      .open()
+      .resetTemplateType()
+      .save();
 
     String templateType = templateClassification.getTemplateType();
 
@@ -35,9 +37,9 @@ public class TemplateClassificationTest extends NewTestTemplate {
     PageObjectLogging.logInfo("Template type was reset");
 
     templateClassification
-            .open()
-            .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
-            .save();
+      .open()
+      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
+      .save();
 
     templateType = templateClassification.getTemplateType();
 
@@ -45,9 +47,9 @@ public class TemplateClassificationTest extends NewTestTemplate {
     PageObjectLogging.logInfo("Template type set to: '" + templateType + "'");
 
     templateClassification
-            .open()
-            .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_QUOTE)
-            .save();
+      .open()
+      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_QUOTE)
+      .save();
 
     String oldTemplateType = templateType;
     String currentTemplateType = templateClassification.getTemplateType();

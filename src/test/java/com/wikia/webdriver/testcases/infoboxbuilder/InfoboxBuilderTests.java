@@ -199,8 +199,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
   public void newTemplateCreation() {
-    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation").getTemplateClassification()
-        .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX).clickAddButton();
+    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
+      .getTemplateClassification()
+      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
+      .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
@@ -399,7 +401,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.clickDropChangesButton();
 
     TemplateEditPage template = new TemplateEditPage();
-    template.getTemplateClassification().changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX).clickAddButton();
+    template
+      .getTemplateClassification()
+      .changeTemplateType(TemplateTypes.TEMPLATE_TYPE_INFOBOX)
+      .clickAddButton();
 
     Assertion.assertTrue(template.isEditAreaDisplayed());
     Assertion.assertTrue(template.isEditAreaEmpty());

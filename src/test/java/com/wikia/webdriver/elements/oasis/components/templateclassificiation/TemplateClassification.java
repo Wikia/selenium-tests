@@ -19,8 +19,6 @@ public class TemplateClassification extends WikiBasePageObject {
   @FindBy(css = ".template-classification-edit-modal .close")
   private WebElement closeButton;
 
-  private WebElement typeInput;
-
   private By modalSelector = By.cssSelector(".template-classification-edit-modal");
 
   private static final String TEMPLATE_TYPE_UNKNOWN = "Unknown";
@@ -64,7 +62,7 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification changeTemplateType(String templateName) {
-    typeInput =  driver.findElement(By.cssSelector("#template-classification-" + templateName.toLowerCase()));
+    WebElement typeInput = driver.findElement(By.cssSelector("#template-classification-" + templateName.toLowerCase()));
 
     wait.forElementClickable(typeInput);
     typeInput.click();
