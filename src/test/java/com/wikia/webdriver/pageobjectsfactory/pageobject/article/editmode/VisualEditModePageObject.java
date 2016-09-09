@@ -169,6 +169,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void verifyContentLoaded() {
+    wait.forElementVisible(iframe);
     driver.switchTo().frame(iframe);
     wait.forElementVisible(contentInput);
     PageObjectLogging.log("verifyContentLoaded", "RTE editor loaded", true, driver);
