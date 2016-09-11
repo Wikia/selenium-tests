@@ -321,7 +321,7 @@ public class AdsDataProvider {
             Arrays.asList(
                 "\"s0\":\"gaming\"",
                 "\"s0v\":\"games\"",
-                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
+                "\"s0c\":[\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
