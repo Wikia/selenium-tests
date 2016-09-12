@@ -19,6 +19,7 @@ public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
     adsTaboolaObject.getUrl(testedPage);
 
     adsTaboolaObject.verifyTaboolaContainer(AdsTaboolaObject.ABOVE_ARTICLE_CSS_SELECTOR);
+    adsTaboolaObject.verifyTaboolaContainer(AdsTaboolaObject.BELOW_ARTICLE_CSS_SELECTOR);
   }
 
 }
