@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
 
-  @RelatedIssue(issueID = "ADEN-3590")
   @Test(groups = "AdsTaboolaOasis")
   public void adsTaboolaOasis() {
 
