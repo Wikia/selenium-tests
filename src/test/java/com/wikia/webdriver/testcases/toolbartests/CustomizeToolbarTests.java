@@ -25,10 +25,10 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   // tools
   String toolPreferences = "Preferences";
   String toolDoubleRedirects = "Double redirects";
-  String toolUploadFile = "Upload file";
+  String toolUploadPhoto = "Upload photo";
   String toolMore = "more…";
-  String toolWatch = "Watch";
-  String toolUnwatch = "Unwatch";
+  String toolFollow = "Follow";
+  String toolFollowing = "Following";
 
   String editSuffix = "123";
 
@@ -91,10 +91,10 @@ public class CustomizeToolbarTests extends NewTestTemplate {
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.searchTool(searchQueryUploadPhoto);
-    toolbar.clickSearchSuggestion(toolUploadFile);
-    toolbar.verifyToolOnList(toolUploadFile);
+    toolbar.clickSearchSuggestion(toolUploadPhoto);
+    toolbar.verifyToolOnList(toolUploadPhoto);
     toolbar.clickSave();
-    toolbar.verifyToolOnToolbar(toolUploadFile);
+    toolbar.verifyToolOnToolbar(toolUploadPhoto);
   }
 
   @Test(groups = {"CustomizeToolbar005"})
@@ -122,13 +122,15 @@ public class CustomizeToolbarTests extends NewTestTemplate {
   // https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
   public void CustomizeToolbar006_ButtonsActions() {
     toolbar.unfollowIfFollowed();
-    toolbar.verifyToolOnToolbar(toolWatch);
+    toolbar.verifyToolOnToolbar(toolFollow);
     toolbar.clickOnTool("follow");
     toolbar.verifyFollowMessage();
-    toolbar.verifyToolOnToolbar(toolUnwatch);
+    toolbar.verifyFollowedToolbar();
+    toolbar.verifyToolOnToolbar(toolFollowing);
     toolbar.clickOnTool("follow");
     toolbar.verifyFollowMessage();
-    toolbar.verifyToolOnToolbar(toolWatch);
+    toolbar.verifyUnfollowed();
+    toolbar.verifyToolOnToolbar(toolFollow);
     toolbar.clickCustomize();
     toolbar.clickResetDefaults();
     toolbar.clickSave();

@@ -415,15 +415,14 @@ public class WikiBasePageObject extends BasePageObject {
       if (driver.findElements(MERCURY_SKIN).size() > 0) {
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
-      }
-
-      wait.forElementVisible(By
-          .cssSelector(LOGGED_IN_USER_SELECTOR.replace("%userName%", userName.replace(" ", "_"))));
-
-      // closing menu if mercury
-      if (driver.findElements(MERCURY_SKIN).size() > 0) {
+        wait.forElementVisible(By.cssSelector(
+            LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
+        //close nav on mercury
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
+      } else {
+        wait.forElementVisible(By.cssSelector(
+            LOGGED_IN_USER_SELECTOR_OASIS.replace("%userName%", userName.replace(" ", "_"))));
       }
     } finally {
       restoreDeaultImplicitWait();
@@ -582,7 +581,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void follow() {
     wait.forElementVisible(followButton);
     jsActions.click(followButton);
-    wait.forTextInElement(followButton, "Watching");
+    wait.forTextInElement(followButton, "Following");
     PageObjectLogging.log("followArticle", "page is followed", true, driver);
   }
 
@@ -602,7 +601,7 @@ public class WikiBasePageObject extends BasePageObject {
   public DeletePageObject deleteUsingDropdown() {
     articleEditDropdown.click();
     wait.forElementVisible(deleteDropdown);
-    deleteDropdown.click();
+    scrollAndClick(deleteDropdown);
     return new DeletePageObject(driver);
   }
 

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -198,8 +199,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
   public void newTemplateCreation() {
-    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation").getTemplateClassification()
-        .changeTemplateType().clickAddButton();
+    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
+      .getTemplateClassification()
+      .changeTemplateType(TemplateTypes.INFOBOX)
+      .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
@@ -398,7 +401,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.clickDropChangesButton();
 
     TemplateEditPage template = new TemplateEditPage();
-    template.getTemplateClassification().selectInfoboxTemplate().clickAddButton();
+    template
+      .getTemplateClassification()
+      .changeTemplateType(TemplateTypes.INFOBOX)
+      .clickAddButton();
 
     Assertion.assertTrue(template.isEditAreaDisplayed());
     Assertion.assertTrue(template.isEditAreaEmpty());

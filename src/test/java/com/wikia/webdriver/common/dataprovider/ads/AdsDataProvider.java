@@ -23,6 +23,17 @@ public class AdsDataProvider {
       AdsContent.PREFOOTER_RIGHT
   };
 
+  private static final String WIKI_REGULAR = "adtest-pluto";
+  private static final String WIKI_SPECIAL = "project43";
+
+  private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
+  private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
+
+  private static final String NO_SKIN_LEFT =
+      "src/test/resources/adsResources/no_wikia_skin_left.png";
+  private static final String NO_SKIN_RIGHT =
+      "src/test/resources/adsResources/no_wikia_skin_right.png";
+
   private AdsDataProvider() {
   }
 
@@ -157,64 +168,36 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] skin() {
-    final String wikiName = "project43";
-    final String pageName = "SyntheticTests/Skin";
+  public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(1200, 1000),
-            "src/test/resources/adsResources/no_wikia_skin_left.png",
-            "src/test/resources/adsResources/no_wikia_skin_right.png",
+            NO_SKIN_LEFT, NO_SKIN_RIGHT,
             null,
             null
         }, {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(1600, 900),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(2400, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            wikiName, pageName,
-            new Dimension(1600, 900),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            wikiName, pageName,
+            WIKI_REGULAR, "Skin/NoMiddleColor",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            wikiName, pageName,
-            new Dimension(2400, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            "adtest", "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
         }
@@ -222,21 +205,43 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] skinLimited() {
+  public static Object[][] skinWithoutTheme() {
     return new Object[][]{
         {
-            "adtest-pluto", "Skin",
-            new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(1600, 900),
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
-        },
-        {
-            "adtest", "Skin",
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(2400, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
+            new Dimension(1920, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            ""
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] roadblocks() {
+    return new Object[][]{
+        {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(1920, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }
@@ -754,16 +759,28 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true},
-        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false},
+        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true}
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DISABLE_BTF", true},
-        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"project43", "SyntheticTests/ATF_DISABLE_BTF", true}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] delayBtfPluto() {
+      return new Object[][]{
+            {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false}
+      };
+    }
+
+  @DataProvider
+  public static Object[][] disableBtfPluto() {
+    return new Object[][]{
+            {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
     };
   }
 
@@ -1307,4 +1324,14 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsMonocolorOasis() {
+    return new Object[][]{
+        {
+            WIKI_SPECIAL,
+            "SyntheticTests/Monocolor_Ad"
+        }
+    };
+  }
 }

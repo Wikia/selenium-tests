@@ -26,7 +26,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdSkinPresence"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxSegments"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>

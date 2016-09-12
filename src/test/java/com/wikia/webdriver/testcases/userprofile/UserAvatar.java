@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.userprofile;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -59,9 +58,6 @@ public class UserAvatar extends NewTestTemplate {
 
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "MAIN-5960", comment =
-      "The Delete avatar button (and windows confirmation popup) " +
-      "have to be clicked twice in order to delete an avatar")
   public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
@@ -69,10 +65,14 @@ public class UserAvatar extends NewTestTemplate {
     profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
-    profile.verifyAvatarChanged(avatarUrl);
-    String changedAvatarUrl = profile.getAvatarImageSrc();
-    profile.verifyAvatarVisible();
+    profile.openWikiPage(); //user needs to visit other page to get avatar refreshed
+    UserProfilePageObject changedProfile = new UserProfilePageObject(driver).openProfilePage(
+        credentials.userNameStaff, wikiURL);
+
+    changedProfile.verifyAvatarChanged(avatarUrl);
+    String changedAvatarUrl = changedProfile.getAvatarImageSrc();
+    changedProfile.verifyAvatarVisible();
     Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
-    profile.verifyURLStatus(200, changedAvatarUrl);
+    changedProfile.verifyURLStatus(200, changedAvatarUrl);
   }
 }
