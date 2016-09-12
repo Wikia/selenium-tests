@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -16,10 +17,13 @@ public class VideosPageTests extends NewTestTemplate {
    * Verify UI elements on the Special:Videos page Logged-Out
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
-  public void VideosPageTest_001() {
+  public void VideosPageTest_001_UIComponentsPresence() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
-    specialVideos.verifyElementsOnPage();
+
+    Assertion.assertTrue(specialVideos.isHeaderVisible());
+    Assertion.assertTrue(specialVideos.isAddVideoButtonClickable());
+    Assertion.assertTrue(specialVideos.isNewestVideoVisible());
   }
 
   /**
