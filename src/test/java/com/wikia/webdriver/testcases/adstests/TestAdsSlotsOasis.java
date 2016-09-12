@@ -18,7 +18,7 @@ public class TestAdsSlotsOasis extends TemplateNoFirstLoad {
   public void adsSmokeTestSlotsOasis() {
     String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/OasisSlots");
     ads = new AdsBaseObject(driver, testedPage);
-    ads.waitForPageLoaded();
+    ads.waitForPageLoaded(true);
 
     for (String slotName : AdsDataProvider.OASIS_SLOTS_TO_SMOKE_TEST) {
       smokeTestSlot(slotName);
