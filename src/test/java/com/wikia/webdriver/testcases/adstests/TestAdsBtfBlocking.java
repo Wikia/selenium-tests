@@ -32,7 +32,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
-    adsBaseObject.waitForPageLoaded(true);
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
@@ -72,7 +72,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
-    adsBaseObject.waitForPageLoaded(true);
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
@@ -106,7 +106,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
-    adsBaseObject.waitForPageLoaded(true);
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT),
@@ -160,7 +160,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
-    adsBaseObject.waitForPageLoaded(true);
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
                          AdsContent.MOBILE_TOP_LB);
@@ -193,7 +193,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
-    adsBaseObject.waitForPageLoaded(true);
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
                          AdsContent.MOBILE_TOP_LB);

@@ -49,7 +49,7 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
     String url = urlBuilder.getUrlForPath(wikiName, article);
     String testedPage = urlBuilder.appendQueryStringToURL(url, "highimpactslot=1");
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver, testedPage, pageSize);
-    adsInterstitial.waitForPageLoaded(true);
+    adsInterstitial.waitForPageLoadedWithGpt();
     adsInterstitial.waitForInterstitialShowUp();
     adsInterstitial.verifySize(adSize);
     if (shouldAdBeScaled) {

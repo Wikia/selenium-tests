@@ -376,14 +376,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public AdsBaseObject waitForPageLoaded(boolean withGPT) {
+  public AdsBaseObject waitForPageLoadedWithGpt() {
     waitForPageLoaded();
-    if (withGPT) {
-      String waitForGPTJS = "typeof window.googletag === 'object'";
-      jsActions.waitForJavaScriptTruthy(waitForGPTJS);
 
-      PageObjectLogging.log("GPT Loaded", String.valueOf(jsActions.execute(waitForGPTJS)), true);
-    }
+    String waitForGPTJS = "typeof window.googletag === 'object'";
+    jsActions.waitForJavaScriptTruthy(waitForGPTJS);
+    PageObjectLogging.log("GPT Loaded", String.valueOf(jsActions.execute(waitForGPTJS)), true);
+
     return this;
   }
 
