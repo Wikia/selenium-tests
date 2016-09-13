@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.oasis.components.comment;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,11 +16,15 @@ public class ArticleComment extends BasePageObject {
   @FindBy(css = "#article-comments-ul li:nth-child(1) .caption")
   private WebElement latestCommentCaption;
 
-  public ArticleComment waitForVideo() {
+  public boolean isVideoVisible() {
     driver.switchTo().frame(commentIFrame);
-    wait.forElementVisible(By.cssSelector("img"));
-
-    return this;
+    try {
+      wait.forElementVisible(By.cssSelector("img"));
+      return true;
+    } catch(NoSuchElementException e) {
+      PageObjectLogging.logInfo("Video element is not visible", e);
+      return false;
+    }
   }
 
   public ArticleComment submitComment() {
@@ -31,6 +36,12 @@ public class ArticleComment extends BasePageObject {
     PageObjectLogging.log("submitComment", "comment has been submitted", true);
 
     return this;
+  }
+
+  public String getLatestCommentCaption() {
+    wait.forElementVisible(latestCommentCaption);
+
+    return latestCommentCaption.getText();
   }
 
   public boolean isVideoCaptionVisibleInTheLatestComment(String videoCaption) {

@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"VetArticleComments", "VetTests", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
-  @Test(groups = {"VetArticleComments_001"})
+  @Test(groups = {"VetArticleComments_001"}, invocationCount = 30)
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-758", comment = "This issue is related to API call and should not cause permanent " +
       "test failure. Otherwise the failure must be caused by other issue")
@@ -35,20 +35,19 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("microsoft");
     String expectedCaption = PageContent.CAPTION + article.getTimeStamp();
-    VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(video.getUrl());
 
-    vetOptions.setCaption(expectedCaption);
-    vetOptions.submit();
-    article
-        .getArticleComment()
-        .waitForVideo()
-        .submitComment();
+    vetAddingVideo
+        .addVideoByUrl(video.getUrl())
+        .setCaption(expectedCaption)
+        .submit();
 
-    Assertion.assertTrue(
-        article.getArticleComment().isVideoCaptionVisibleInTheLatestComment(expectedCaption));
+    Assertion.assertTrue(article.getArticleComment().isVideoVisible());
+
+    article.submitComment();
+    Assertion.assertEquals(article.getArticleComment().getLatestCommentCaption(), expectedCaption);
   }
 
-  @Test(groups = {"VetArticleComments_002"})
+  @Test(groups = {"VetArticleComments_002"}, invocationCount = 30)
   @Execute(asUser = User.USER)
   public void RegularUserCanAddVideoInArticleCommentEditorByFindingWikiaVideo() {
     new ArticleContent().clear();
@@ -56,16 +55,16 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
+
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
     vetOptions.setCaption(PageContent.CAPTION);
     String desiredVideoName = vetOptions.getVideoName();
     vetOptions.submit();
-    article
-        .getArticleComment()
-        .waitForVideo()
-        .submitComment();
 
+    Assertion.assertTrue(article.getArticleComment().isVideoVisible());
+
+    article.submitComment();
     Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName));
   }
 }
