@@ -23,7 +23,7 @@ public class DeleteAMapComponentObject extends BasePageObject {
   public InteractiveMapsPageObject deleteMap() {
     clickDeleteMap();
     waitForElementNotVisibleByElement(deleteMapModal);
-    return new InteractiveMapsPageObject(driver);
+    return new InteractiveMapsPageObject();
   }
 
   public void clickDeleteMap() {

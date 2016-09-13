@@ -13,7 +13,7 @@ public class TestAdsRoadblocksAfterMultiplePageViewsOasis extends TemplateNoFirs
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "skinLimited",
+      dataProvider = "roadblocks",
       groups = "AdsTestRoadblocksOasis"
   )
   public void adsTestRoadblockOasis(String wikiName, String article, Dimension windowResolution,

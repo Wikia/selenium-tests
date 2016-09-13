@@ -376,6 +376,16 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
+  public AdsBaseObject waitForPageLoadedWithGpt() {
+    waitForPageLoaded();
+
+    String waitForGPTJS = "typeof window.googletag === 'object'";
+    jsActions.waitForJavaScriptTruthy(waitForGPTJS);
+    PageObjectLogging.log("GPT Loaded", String.valueOf(jsActions.execute(waitForGPTJS)), true);
+
+    return this;
+  }
+
   /**
    * Mercury is a single page application (SPA) and if you want to test navigating between different
    * pages in the application you might want to use this method after clicking anything which is not

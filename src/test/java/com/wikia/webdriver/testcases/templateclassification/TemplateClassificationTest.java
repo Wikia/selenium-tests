@@ -1,12 +1,14 @@
 package com.wikia.webdriver.testcases.templateclassification;
 
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import org.testng.annotations.Test;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 
 @Execute(asUser = User.STAFF, onWikia = "aga")
@@ -14,31 +16,39 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 @Test(groups = {"templateClassification"})
 public class TemplateClassificationTest extends NewTestTemplate {
 
-  @Test(groups = "templateClassification_openAndClose")
-  public void templateClassification_openAndClose() {
-    new TemplatePage()
-        .open("T")
-        .getTemplateClassification()
-        .open()
-        .close();
-  }
+  private static final String DEFAULT_TEMPLATE_NAME = "T";
 
-  @Test(groups = "templateClassification_changeTemplateType")
-  public void templateClassification_changeTemplateType() {
-    new TemplatePage()
-        .open("T")
-        .getTemplateClassification()
-        .open()
-        .changeTemplateType()
-        .close();
-  }
+  @Test(groups = "templateClassification_createTemplateAndChangeItsType")
+  public void templateClassification_createTemplateAndChangeItsType() {
+    TemplatePage templatePage = new TemplatePage()
+        .createTemplate(DEFAULT_TEMPLATE_NAME)
+        .open(DEFAULT_TEMPLATE_NAME);
 
-  @Test(groups = "templateClassification_saveTemplateTypeForNewTemplate")
-  public void templateClassification_saveTemplateTypeForNewTemplate() {
-    new TemplateEditPage()
-        .open("AutoTestInfobox")
-        .getTemplateClassification()
-        .selectQuoteTemplate()
+    TemplateClassification templateClassification = templatePage.getTemplateClassification();
+
+    templateClassification
+        .open()
+        .resetTemplateType()
         .save();
+
+    String oldTemplateType = templateClassification.getTemplateType();
+
+    Assertion.assertEquals(templateClassification.getTemplateType(), TemplateTypes.UNKNOWN.getType());
+
+    templateClassification
+        .open()
+        .changeTemplateType(TemplateTypes.INFOBOX)
+        .save();
+
+    Assertion.assertEquals(templateClassification.getTemplateType(), TemplateTypes.INFOBOX.getType());
+
+    templateClassification
+        .open()
+        .changeTemplateType(TemplateTypes.QUOTE)
+        .save();
+
+    String currentTemplateType = templateClassification.getTemplateType();
+
+    Assertion.assertNotEquals(currentTemplateType, oldTemplateType);
   }
 }

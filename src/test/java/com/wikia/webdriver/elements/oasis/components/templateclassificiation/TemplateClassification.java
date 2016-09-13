@@ -1,6 +1,6 @@
 package com.wikia.webdriver.elements.oasis.components.templateclassificiation;
 
-import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -13,12 +13,6 @@ public class TemplateClassification extends WikiBasePageObject {
   @FindBy(css = ".template-classification-type-label")
   private WebElement entryPointLink;
 
-  @FindBy(css = "#template-classification-infobox")
-  private WebElement typeInputInfobox;
-
-  @FindBy(css = "#template-classification-quote")
-  private WebElement typeInputQuote;
-
   @FindBy(css = ".button.normal.primary")
   private WebElement saveButton;
 
@@ -27,15 +21,12 @@ public class TemplateClassification extends WikiBasePageObject {
 
   private By modalSelector = By.cssSelector(".template-classification-edit-modal");
 
-  private String templateName = "";
-
   public TemplateClassification() {
     super();
   }
 
   public TemplateClassification open() {
     wait.forElementClickable(entryPointLink);
-    this.templateName = entryPointLink.getText();
     entryPointLink.click();
 
     wait.forElementVisible(modalSelector);
@@ -55,16 +46,8 @@ public class TemplateClassification extends WikiBasePageObject {
   }
 
   public TemplateClassification save() {
-    String oldTemplateName = this.templateName;
     wait.forElementClickable(saveButton);
     saveButton.click();
-
-    wait.forElementVisible(entryPointLink);
-    String currentTemplateName = entryPointLink.getText();
-    Assertion.assertFalse(currentTemplateName.equals(oldTemplateName),
-                          "Template type did not change");
-    PageObjectLogging.logInfo(
-        "Template type changed from: '" + oldTemplateName + "', to: '" + currentTemplateName + "'");
 
     return this;
   }
@@ -76,31 +59,27 @@ public class TemplateClassification extends WikiBasePageObject {
     return this;
   }
 
-  public TemplateClassification changeTemplateType() {
-    if (!this.templateName.equals("Infobox")) {
-      selectInfoboxTemplate();
-    } else {
-      selectQuoteTemplate();
-    }
+  public TemplateClassification changeTemplateType(TemplateTypes templateType) {
+    String templateName = templateType.getType();
+    WebElement typeInput = driver.findElement(By.cssSelector("#template-classification-" + templateName.toLowerCase()));
+
+    wait.forElementClickable(typeInput);
+    typeInput.click();
+
+    PageObjectLogging.logInfo(templateName + " template was chosen");
 
     return this;
   }
 
-  public TemplateClassification selectInfoboxTemplate() {
-    wait.forElementClickable(typeInputInfobox);
-    typeInputInfobox.click();
-
-    PageObjectLogging.logInfo("Infobox template was chosen");
+  public TemplateClassification resetTemplateType() {
+    this.changeTemplateType(TemplateTypes.UNKNOWN);
 
     return this;
   }
 
-  public TemplateClassification selectQuoteTemplate() {
-    wait.forElementClickable(typeInputQuote);
-    typeInputQuote.click();
+  public String getTemplateType() {
+    wait.forElementVisible(entryPointLink);
 
-    PageObjectLogging.logInfo("Quote template was chosen");
-
-    return this;
+    return entryPointLink.getText();
   }
 }
