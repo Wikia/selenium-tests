@@ -47,6 +47,7 @@ public class YoutubeVideoProvider {
     nvps.add(new BasicNameValuePair("q", searchQuery));
     nvps.add(new BasicNameValuePair("publishedAfter", DateTime.now(DateTimeZone.forID("UTC"))
         .minusMinutes(60).toString()));
+    nvps.add(new BasicNameValuePair("type","video"));
 
     HttpGet httpPost =
         new HttpGet("https://www.googleapis.com/youtube/v3/search?"
