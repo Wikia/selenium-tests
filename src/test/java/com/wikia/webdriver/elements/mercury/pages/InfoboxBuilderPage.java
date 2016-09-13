@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -85,7 +86,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .selectInfoboxTemplate()
+        .changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
@@ -358,12 +359,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
-    Point location = driver.findElement(By.cssSelector(".portable-infobox")).getLocation();
-    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 10;
+    Point location = driver.findElement(By.cssSelector(".portable-infobox.pi-background")).getLocation();
+    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 50;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
-        .moveByOffset(0,targetY)
+        .moveToElement(draggedElement,0,targetY)
         .pause(500)
         .release(draggedElement)
         .pause(500)
