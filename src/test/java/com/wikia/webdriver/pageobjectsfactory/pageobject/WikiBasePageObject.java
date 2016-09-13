@@ -1,23 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import lombok.Getter;
-
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -68,9 +50,25 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
+import lombok.Getter;
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 public class WikiBasePageObject extends BasePageObject {
 
-  protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
@@ -649,10 +647,15 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditorPageObject(driver);
   }
 
+  public String getEditToken() {
+    return (String) jsActions.execute("mw.user.tokens.get('editToken')");
+  }
+
   public void addVideoViaAjax(String videoURL) {
-    jsActions.execute(
-        "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
-            + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
+    String editToken = getEditToken();
+    String request = new String("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
+                                + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
+    jsActions.execute(request);
   }
 
   public void verifyVEPublishComplete() {
@@ -723,10 +726,6 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("ResizeWindow",
           "Cannot resize window (width=" + width + ", height=" + height + ")", true);
     }
-  }
-
-  public void resizeWindow(Dimension resolution) {
-    resizeWindow(resolution.width, resolution.height);
   }
 
   public void scrollToFooter() {

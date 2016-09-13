@@ -121,7 +121,7 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEEnabledEditorEntryAnonTests_009_actionEdit() {
     VisualEditModePageObject ck =
         base.navigateToArticleEditPage(wikiURL, base.getNameForArticle());
-    ck.verifyContentLoaded();
+    ck.isContentLoaded();
     ck.clickPublishButton();
   }
 }

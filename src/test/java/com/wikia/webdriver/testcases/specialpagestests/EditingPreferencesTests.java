@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -20,6 +17,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Edi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 @Test(groups = {"EditingPreferencesTest"})
 public class EditingPreferencesTests extends NewTestTemplate {
 
@@ -33,7 +33,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(VE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
+
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
@@ -47,11 +49,13 @@ public class EditingPreferencesTests extends NewTestTemplate {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(CK);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
+
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = aritclePage.navigateToArticleEditPage();
-    ck.verifyContentLoaded();
+    ck.isContentLoaded();
     ck.clickPublishButton();
   }
 
@@ -61,8 +65,10 @@ public class EditingPreferencesTests extends NewTestTemplate {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(SOURCE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
+
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     SourceEditModePageObject src = aritclePage.openSrcModeWithMainEditButton();
     src.verifySourceOnlyMode();
@@ -83,7 +89,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
 
     ConfirmationPageObject confirmPageAlmostThere = new AlmostTherePageObject(driver)
         .enterEmailChangeLink(Configuration.getCredentials().emailQaart2,

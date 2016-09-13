@@ -92,8 +92,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return newestVideoTitle.getText();
   }
 
-  public void deleteVideo() {
+  public void deleteNewestVideo() {
     openSpecialVideoPageMostRecent(getWikiUrl());
+    wait.forElementVisible(newestVideoTitle);
     jsActions.execute("$('.special-videos-grid .remove').first().show()");
     wait.forElementVisible(newestVideo);
     newestVideoDeleteIcon.click();
@@ -103,25 +104,15 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
   public void verifyDeleteViaGlobalNotifications() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
-
+    System.out.println("Video: " + video.getTitle());
+    System.out.println("Get URL: " + video.getUrl());
     addVideoViaAjax(video.getUrl());
-    deleteVideo();
+    deleteNewestVideo();
     String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
-    System.out.println(getBannerNotificationText());
-    System.out.println(deletedVideo);
+    System.out.println("BannerNotificationText: " + getBannerNotificationText());
+    System.out.println("Deleted video: " + deletedVideo);
     Assertion.assertEquals(getBannerNotificationText(), deletedVideo);
     PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-        + " was deleted", true);
-  }
-
-  public void verifyDeleteViaVideoNotPresent() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
-
-    addVideoViaAjax(video.getUrl());
-    deleteVideo();
-    getBannerNotifications().verifyNotificationMessage();
-    Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
-    PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
         + " was deleted", true);
   }
 

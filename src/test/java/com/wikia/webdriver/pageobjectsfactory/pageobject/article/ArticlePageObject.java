@@ -807,7 +807,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = openCKModeWithMainEditButton();
-        ck.verifyContentLoaded();
+        ck.isContentLoaded();
         ck.clickPublishButton();
         break;
       case SRC:
@@ -827,7 +827,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = createArticleInCKUsingDropdown(articleName);
-        ck.verifyContentLoaded();
+        ck.isContentLoaded();
         ck.clickPublishButton();
         break;
       case SRC:
@@ -847,7 +847,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = openCKModeWithSectionEditButton(0);
-        ck.verifyContentLoaded();
+        ck.isContentLoaded();
         ck.clickPublishButton();
         break;
       case SRC:
@@ -867,7 +867,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = openCKModeWithRedLinks(0);
-        ck.verifyContentLoaded();
+        ck.isContentLoaded();
         ck.clickPublishButton();
         break;
       case SRC:
@@ -882,7 +882,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     switch (expectedEditor) {
       case CK:
         VisualEditModePageObject ck = navigateToArticleEditPage(wikiURL, articleName);
-        ck.verifyContentLoaded();
+        ck.isContentLoaded();
         ck.clickPublishButton();
         break;
       case SRC:

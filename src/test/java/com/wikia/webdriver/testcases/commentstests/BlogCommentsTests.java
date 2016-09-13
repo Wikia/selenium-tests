@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.commentstests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -97,7 +98,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     String commentText = blogPage.getFirstCommentText();
     DeletePageObject delete = blogPage.deleteFirstComment();
     delete.submitDeletion();
-    blogPage.getBannerNotifications().verifyNotificationMessage();
+    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible());
     blogPage.verifyCommentDeleted(commentText);
   }
 }

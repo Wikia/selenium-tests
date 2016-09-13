@@ -69,7 +69,8 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.getBannerNotifications().verifyNotificationMessage();
+    
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
 
     ConfirmationPageObject confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(

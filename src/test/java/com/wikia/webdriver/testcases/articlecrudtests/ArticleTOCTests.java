@@ -61,7 +61,7 @@ public class ArticleTOCTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
-    visualEditMode.verifyContentLoaded();
+    visualEditMode.isContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
     preview.verifyTOCcollapsedOnPreview();
@@ -111,7 +111,7 @@ public class ArticleTOCTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
-    visualEditMode.verifyContentLoaded();
+    visualEditMode.isContentLoaded();
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
     preview.verifyTOCexpandedOnPreview();

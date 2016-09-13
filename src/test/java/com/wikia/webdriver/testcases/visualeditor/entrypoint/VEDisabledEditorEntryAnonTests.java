@@ -28,7 +28,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
-    ck.verifyContentLoaded();
+    ck.isContentLoaded();
     ck.clickPublishButton();
   }
 
@@ -37,7 +37,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEDisabledEditorEntryAnonTestsTests_002_MainEditEntry() {
     ArticlePageObject article = new ArticlePageObject().open(base.getNameForArticle());
     VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
-    ck.verifyContentLoaded();
+    ck.isContentLoaded();
     ck.clickPublishButton();
   }
 
@@ -98,7 +98,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEDisabledEditorEntryAnonTestsTests_009_actionEdit() {
     VisualEditModePageObject ck =
         base.navigateToArticleEditPage(wikiURL, base.getNameForArticle());
-    ck.verifyContentLoaded();
+    ck.isContentLoaded();
     ck.clickPublishButton();
   }
 }

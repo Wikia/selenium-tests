@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -124,10 +125,15 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     return this.videoName;
   }
 
-  public void verifySuggestionsIsDisplayed() {
-    wait.forElementVisible(suggestedVideo);
-    PageObjectLogging.log("verifySuggestionsIsDisplayed",
-                          "Verified suggested module appeared", true, driver);
+  public boolean areSuggestionsDisplayed() {
+    try {
+      wait.forElementVisible(suggestedVideo);
+      return true;
+    } catch(NoSuchElementException e) {
+      PageObjectLogging.log("areSuggestionsDisplayed",
+                            "Verified suggested module appeared", false, driver);
+      return false;
+    }
   }
 
   public WikiArticleEditMode clickCloseButton() {

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.blogtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -84,7 +85,9 @@ public class BlogTests extends NewTestTemplate {
     SpecialRestorePageObject restore = base.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
-    blogPage.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible());
+
     blogPage.verifyBlogTitle(blogTitle);
   }
 
@@ -99,6 +102,7 @@ public class BlogTests extends NewTestTemplate {
     RenamePageObject renamePage = blogPage.renameUsingDropdown();
     renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
     blogPage.verifyBlogTitle(blogTitleMove);
-    blogPage.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible());
   }
 }
