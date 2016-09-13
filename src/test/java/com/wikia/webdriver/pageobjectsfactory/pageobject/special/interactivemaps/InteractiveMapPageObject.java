@@ -1,5 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -12,19 +20,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
 public class InteractiveMapPageObject extends BasePageObject {
 
-  @FindBy(css = "#map")
-  private WebElement map;
+  private final By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
   @FindBy(css = ".WikiaPageHeader>h1")
   private WebElement createdMapTitle;
   @FindBy(css = ".point-type.enabled > span")
@@ -71,8 +69,6 @@ public class InteractiveMapPageObject extends BasePageObject {
   private WebElement zoomInButton;
   @FindBy(css = ".leaflet-control-zoom-out")
   private WebElement zoomOutButton;
-  @FindBy(css = ".leaflet-map-pane.leaflet-zoom-anim")
-  private WebElement zoomAnim;
   @FindBy(css = ".description")
   private WebElement pinDescription;
   @FindBy(css = ".edit-poi-link")
@@ -97,16 +93,8 @@ public class InteractiveMapPageObject extends BasePageObject {
   private WebElement poiNameSection;
   @FindBy(css = ".wikia-interactive-map dd")
   private WebElement poiDescriptionSection;
-
-  private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
-
-  public InteractiveMapPageObject(WebDriver driver) {
-    super();
-  }
-
-  public enum embedMapDialogButtons {
-    SMALL, MEDIUM, LARGE;
-  }
+  @FindBy(css = ".wikia-interactive-map-wrapper")
+  private WebElement mapWrapper;
 
   public void clickEmbedMapCodeButton() {
     wait.forElementVisible(mapFrame);
@@ -139,8 +127,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(filterBox);
     wait.forElementVisible(editPinTypesButton);
     editPinTypesButton.click();
-    PageObjectLogging.log("clickEditPinTypesButton",
-                          "Edit Pin Types button were clicked", true, driver);
+    PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button were clicked", true,
+        driver);
     driver.switchTo().defaultContent();
     return new CreatePinTypesComponentObject(driver);
   }
@@ -179,11 +167,10 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void clickOnSingleEnabledCategory() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    wait.forElementVisible(
-        enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
+    wait.forElementVisible(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX).click();
-    PageObjectLogging.log("clickOnSingleEnabledCategory",
-                          "Single enabled category was clicked", true);
+    PageObjectLogging.log("clickOnSingleEnabledCategory", "Single enabled category was clicked",
+        true);
     driver.switchTo().defaultContent();
   }
 
@@ -193,8 +180,8 @@ public class InteractiveMapPageObject extends BasePageObject {
     driver.switchTo().frame(mapFrame);
     wait.forElementVisible(disabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     disabledPinTypesCollection.get(0).click();
-    PageObjectLogging.log("clickOnSingleDisabledCategory",
-                          "Single disabled category was clicked", true);
+    PageObjectLogging.log("clickOnSingleDisabledCategory", "Single disabled category was clicked",
+        true);
     driver.switchTo().defaultContent();
   }
 
@@ -272,7 +259,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyMapOpened() {
     wait.forElementVisible(mapFrame);
-    jsActions.scrollToElement(mapFrame);
+    jsActions.scrollToElement(mapWrapper);
+    jsActions.execute("$('.wikia-bar .arrow').click()");
     driver.switchTo().frame(mapFrame);
     driver.switchTo().defaultContent();
     PageObjectLogging.log("verifyMapOpened", "Map was opened", true);
@@ -315,19 +303,14 @@ public class InteractiveMapPageObject extends BasePageObject {
       default:
         throw new NoSuchElementException("Non-existing dialog button selected");
     }
-    PageObjectLogging.log("verifyEmbedMapCode",
-                          button + "embed map code was correctly displayed", true);
+    PageObjectLogging.log("verifyEmbedMapCode", button + "embed map code was correctly displayed",
+        true);
   }
 
   public void verifyPopUpVisible() {
     wait.forElementVisible(pinDescription);
     Assertion.assertEquals(isElementOnPage(pinDescription), true);
     driver.switchTo().defaultContent();
-  }
-
-  public void verifyZoomMap() {
-    wait.forElementVisible(zoomAnim);
-    PageObjectLogging.log("verifyZoomMap", "Map was zoomed", true, driver);
   }
 
   public void verifyAllPinTypesIsCheck() {
@@ -373,8 +356,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyPinTypesAreCheck() {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
-    wait.forElementVisible(
-        enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
+    wait.forElementVisible(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
     Assertion.assertEquals(disabledPinTypesCollection.size(), 0);
     driver.switchTo().defaultContent();
   }
@@ -398,7 +380,7 @@ public class InteractiveMapPageObject extends BasePageObject {
     Assertion.assertEquals(isElementOnPage(zoomInButton), true);
     Assertion.assertEquals(isElementOnPage(zoomOutButton), true);
     PageObjectLogging.log("verifyControlButtonsAreVisible",
-                          "embedMap, zoom in/out buttons were visible", true);
+        "embedMap, zoom in/out buttons were visible", true);
     driver.switchTo().defaultContent();
   }
 
@@ -408,39 +390,16 @@ public class InteractiveMapPageObject extends BasePageObject {
     Assertion.assertEquals(isElementOnPage(pinPopupImage), true);
   }
 
-  public void verifyPinPopupImageNotExist() {
-    wait.forElementVisible(mapFrame);
-    driver.switchTo().frame(mapFrame);
-    Assertion.assertEquals(isElementOnPage(pinPopupImage), false);
-  }
-
-  public void verifyPinPopUp() {
-    Assertion.assertEquals(isElementOnPage(pinDescription), true);
-    Assertion.assertEquals(isElementOnPage(pinEditLink), true);
-  }
-
-  public void verifyMapWasNotLoaded() {
-    Assertion.assertEquals(isElementOnPage(map), false);
-  }
-
   public void verifyPinTypeExists(String pinTypeName) {
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     while (createdPinNames.size() - 1 != 0) {
-      if (createdPinNames
-          .get(createdPinNames.size() - 1)
-          .getText()
-          .contains(pinTypeName)
-          ) {
-        Assertion.assertEquals(
-            createdPinNames.get(createdPinNames.size() - 1).getText(), pinTypeName
-        );
+      if (createdPinNames.get(createdPinNames.size() - 1).getText().contains(pinTypeName)) {
+        Assertion.assertEquals(createdPinNames.get(createdPinNames.size() - 1).getText(),
+            pinTypeName);
       } else {
-        PageObjectLogging.log(
-            "verifyPinTypeExist",
-            "Pin type with name " + pinTypeName + " does not exist",
-            true
-        );
+        PageObjectLogging.log("verifyPinTypeExist",
+            "Pin type with name " + pinTypeName + " does not exist", true);
 
       }
       break;
@@ -478,8 +437,8 @@ public class InteractiveMapPageObject extends BasePageObject {
   public void verifyEscapedFragmentMetaTag() {
     wait.forElementVisible(createdMapTitle);
     wait.forElementPresent(escapedFragmentMetaDataTag);
-    PageObjectLogging.log("verifyEscapedFragmentMetaTag",
-                          "Escaped fragment meta tag is in DOM", true);
+    PageObjectLogging.log("verifyEscapedFragmentMetaTag", "Escaped fragment meta tag is in DOM",
+        true);
   }
 
   public void verifyPoiCategoryTitle() {
@@ -494,8 +453,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 
   public void verifyPoiPointDescription() {
     wait.forElementVisible(poiDescriptionSection);
-    PageObjectLogging.log("verifyPoiPointDescription",
-                          "Poi description section is displayed", true);
+    PageObjectLogging.log("verifyPoiPointDescription", "Poi description section is displayed",
+        true);
   }
 
   public void verifyPontoGetRequest(NetworkTrafficInterceptor networkTab) {
@@ -504,5 +463,9 @@ public class InteractiveMapPageObject extends BasePageObject {
     } else {
       throw new NoSuchElementException("Request from ponto did not come");
     }
+  }
+
+  public enum embedMapDialogButtons {
+    SMALL, MEDIUM, LARGE
   }
 }

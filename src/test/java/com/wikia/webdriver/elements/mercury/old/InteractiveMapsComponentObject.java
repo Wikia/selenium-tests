@@ -1,19 +1,13 @@
 package com.wikia.webdriver.elements.mercury.old;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class InteractiveMapsComponentObject {
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+public class InteractiveMapsComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".current")
   private WebElement mapFrame;
@@ -38,18 +32,6 @@ public class InteractiveMapsComponentObject {
   @FindBy(css = ".article-media-map-thumbnail img")
   private WebElement mapThumbnail;
 
-  private JavascriptExecutor jsexec;
-  private Wait wait;
-  private WebDriver driver;
-
-  public InteractiveMapsComponentObject(WebDriver driver) {
-    this.driver = driver;
-    this.wait = new Wait(driver);
-    this.jsexec = (JavascriptExecutor) driver;
-
-    PageFactory.initElements(driver, this);
-  }
-
   public void clickMapThumbnail() {
     wait.forElementVisible(mapThumbnail);
     mapThumbnail.click();
@@ -60,34 +42,9 @@ public class InteractiveMapsComponentObject {
     closeMapLightbox.click();
   }
 
-  public void clickFilterBox() {
-    wait.forElementVisible(filterBoxHeader);
-    jsexec.executeScript("arguments[0].click();", filterBoxHeader);
-  }
-
-  public void clickZoomIn() {
-    wait.forElementVisible(zoomInButton);
-    jsexec.executeScript("arguments[0].click();", zoomInButton);
-  }
-
-  public void clickZoomOut() {
-    wait.forElementVisible(zoomOutButton);
-    jsexec.executeScript("arguments[0].click();", zoomOutButton);
-  }
-
   public void clickPin() {
     wait.forElementVisible(poiPin);
-    jsexec.executeScript("arguments[0].click();", poiPin);
-  }
-
-  public boolean isFilterBoxWasExpanded() {
-    try {
-      wait.forElementVisible(filterBox, 5, 1000);
-    } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
-      PageObjectLogging.log("Filter box not expanded", e, true);
-      return false;
-    }
-    return true;
+    driver.executeScript("arguments[0].click();", poiPin);
   }
 
   public boolean isMapModalVisible() {
@@ -115,13 +72,6 @@ public class InteractiveMapsComponentObject {
     wait.forElementVisible(poiPopUp);
 
     return true;
-  }
-
-  public boolean isZoomInButtonEnabled() throws WebDriverException {
-    if (zoomInButton.getAttribute("class") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-    return !zoomInButton.getAttribute("class").contains("disabled");
   }
 
   public void switchToMapFrame() {

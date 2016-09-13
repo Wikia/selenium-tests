@@ -43,7 +43,7 @@ public class CreateAMapComponentObject extends BasePageObject {
   public InteractiveMapsPageObject clickCloseButton() {
     wait.forElementVisible(closeButton);
     closeButton.click();
-    return new InteractiveMapsPageObject(driver);
+    return new InteractiveMapsPageObject();
   }
 
   public void verifyLearnMoreLinkRedirect(String link) {

@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
@@ -44,7 +43,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
@@ -70,16 +68,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 
 public class WikiBasePageObject extends BasePageObject {
 
-  protected static final By LOGIN_BUTTON_CSS = By.cssSelector("a[data-id='login']");
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".AccountNavigation a[title*=%userName%]";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
-  private static final String LOGGED_IN_USER_SELECTOR_MONOBOOK = "#pt-userpage a[href*=%userName%]";
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
       ".wikia-nav__avatar img[alt*=%userName%]";
-  private static final String LOGGED_IN_USER_SELECTOR = LOGGED_IN_USER_SELECTOR_MERCURY + ","
-      + LOGGED_IN_USER_SELECTOR_OASIS + "," + LOGGED_IN_USER_SELECTOR_MONOBOOK;
   @Getter(lazy = true)
   private final GlobalNavigation globalNavigation = new GlobalNavigation();
   @Getter(lazy = true)
@@ -98,18 +92,10 @@ public class WikiBasePageObject extends BasePageObject {
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
   protected WebElement body;
-  @FindBy(css = ".UserLoginModal input[type='submit']")
-  protected WebElement modalLoginSubmit;
-  @FindBy(css = ".UserLoginModal input[name='password']")
-  protected WebElement modalPasswordInput;
   @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement wikiFirstHeader;
-  @FindBy(css = ".UserLoginModal input[name='username']")
-  protected WebElement modalUserNameInput;
   @FindBy(css = "a[data-id='logout']")
   protected WebElement navigationLogoutLink;
-  @FindBy(css = "#userForceLoginModal")
-  protected WebElement logInModal;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
@@ -144,17 +130,11 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement headerWhereIsMyExtensionPage;
   @FindBy(css = "#globalNavigation")
   protected WebElement newGlobalNavigation;
-  @FindBy(css = "#userForceLoginModal .wikia-button-facebook")
-  protected WebElement formConnectWithFbButtonModal;
   @FindBy(css = "#mw-content-text .wikia-button-facebook")
   protected WebElement formConnectWithFbButtonBasic;
-  @FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
-  protected WebElement formConnectWithFbButtonDropDown;
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
-  @FindBy(css = ".banner-notification div.msg a")
-  private WebElement undeleteLink;
   @FindBy(css = ".banner-notification")
   private WebElement bannerNotification;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
@@ -166,10 +146,6 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
 
-  public WikiBasePageObject() {
-    super();
-  }
-
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
     return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
@@ -179,12 +155,6 @@ public class WikiBasePageObject extends BasePageObject {
     String[][] apiRequestParameters = {{"action", ApiActions.API_ACTION_FORGOT_PASSWORD},
         {"user", userName}, {"token", apiToken}, {"format", "json"},};
     return CommonUtils.sendPost(URLsContent.API_URL, apiRequestParameters);
-  }
-
-  public void verifyModalLoginAppeared() {
-    waitForNewWindow();
-    driver.switchTo();
-    PageObjectLogging.log("verify New window", "verify modal login form is displayed", true);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
@@ -287,7 +257,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS);
-    return new InteractiveMapsPageObject(driver);
+    return new InteractiveMapsPageObject();
   }
 
   public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
@@ -297,7 +267,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
-    return new InteractiveMapPageObject(driver);
+    return new InteractiveMapPageObject();
   }
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
@@ -417,7 +387,7 @@ public class WikiBasePageObject extends BasePageObject {
         driver.findElement(MERCURY_NAV_ICON).click();
         wait.forElementVisible(By.cssSelector(
             LOGGED_IN_USER_SELECTOR_MERCURY.replace("%userName%", userName.replace(" ", "_"))));
-        //close nav on mercury
+        // close nav on mercury
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
       } else {
@@ -457,11 +427,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new ArticlePageObject();
   }
 
-  public void verifyUrl(String url) {
-    waitForStringInURL(url);
-  }
-
-  public void verifyLoginReguiredMessage() {
+  public void verifyLoginRequiredMessage() {
     wait.forTextInElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
     PageObjectLogging.log("LoginRequiredMessage", "Login required message in first header present",
         true, driver);
@@ -481,20 +447,6 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
-  public void logInViaModal(String userName, String password) {
-    wait.forElementVisible(modalUserNameInput);
-    modalUserNameInput.sendKeys(userName);
-    wait.forElementVisible(modalPasswordInput);
-    modalPasswordInput.sendKeys(password);
-    PageObjectLogging.log("FillLoginForm", "Login form in modal is filled", true, driver);
-
-    scrollAndClick(modalLoginSubmit);
-    PageObjectLogging.log("LoginFormSubmitted", "Login form is submitted", true);
-
-    waitForElementNotVisibleByElement(logInModal);
-    PageObjectLogging.log("LoginModalDissapears", "Login modal is no longer visible", true);
-  }
-
   public String receiveMailWithNewPassword(String email, String password) {
     String newPassword = MailFunctions.getPasswordFromEmailContent(
         MailFunctions.getFirstEmailContent(email, password, "Reset your Wikia password"));
@@ -508,7 +460,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(cssEditSummary);
     String summary = cssEditSummary.getText();
     PageObjectLogging.log("cssEditSummary",
-        "the following edit summaty was get from Wikia.css: " + summary, true);
+        "the following edit summary was get from Wikia.css: " + summary, true);
     return summary;
   }
 
@@ -549,7 +501,7 @@ public class WikiBasePageObject extends BasePageObject {
 
     verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie",
-        "user was logged in by by helios using acces token: " + token, true);
+        "user was logged in by by helios using access token: " + token, true);
     logMercuryUserId();
 
     return token;
@@ -560,8 +512,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   private void logMercuryUserId() {
-    Object scriptOut =
-        ((JavascriptExecutor) driver).executeScript("return window.M && window.M.prop('userId')");
+    Object scriptOut = driver.executeScript("return window.M && window.M.prop('userId')");
 
     if (scriptOut != null) {
       PageObjectLogging.logInfo("Mercury userID: " + scriptOut.toString());
@@ -624,11 +575,6 @@ public class WikiBasePageObject extends BasePageObject {
   public HubBasePageObject openHubByUrl(String hubUrl) {
     getUrl(hubUrl);
     return new HubBasePageObject(driver);
-  }
-
-  public FacebookMainPageObject openFacebookMainPage() {
-    getUrl(URLsContent.FACEBOOK_MAINPAGE);
-    return new FacebookMainPageObject(driver);
   }
 
   public String getNameForArticle() {
@@ -722,10 +668,6 @@ public class WikiBasePageObject extends BasePageObject {
       PageObjectLogging.log("ResizeWindow",
           "Cannot resize window (width=" + width + ", height=" + height + ")", true);
     }
-  }
-
-  public void resizeWindow(Dimension resolution) {
-    resizeWindow(resolution.width, resolution.height);
   }
 
   public void scrollToFooter() {
