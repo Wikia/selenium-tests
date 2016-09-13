@@ -287,7 +287,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS);
-    return new InteractiveMapsPageObject(driver);
+    return new InteractiveMapsPageObject();
   }
 
   public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
@@ -297,7 +297,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
     getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
-    return new InteractiveMapPageObject(driver);
+    return new InteractiveMapPageObject();
   }
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {

@@ -42,7 +42,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
   public InteractiveMapsPageObject clickCloseButton() {
     wait.forElementVisible(closeButton);
     closeButton.click();
-    return new InteractiveMapsPageObject(driver);
+    return new InteractiveMapsPageObject();
   }
 
   public CreateAMapComponentObject clickBack() {

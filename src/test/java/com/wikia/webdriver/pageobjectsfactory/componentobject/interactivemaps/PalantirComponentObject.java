@@ -21,7 +21,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   private WebElement playerPoint;
 
   public PalantirComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   private PalantirContent getResponse(Object response, String methodName) {
