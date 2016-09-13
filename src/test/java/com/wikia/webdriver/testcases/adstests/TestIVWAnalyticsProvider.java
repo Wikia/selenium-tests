@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
@@ -40,7 +39,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
       );
     }
   }
-  @RelatedIssue(issueID = "ADEN-3495")
+
   @NetworkTrafficDump
   @GeoEdgeBrowserMobProxy(country = CountryCode.GERMANY)
   @Test(
@@ -68,7 +67,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
-    adsBaseObject.waitForPageLoaded();
+    adsBaseObject.waitForPageLoadedWithGpt();
     Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(URL_BASE_SCRIPT),
                           "Tracking should not be loaded outside DE/AT/CH country!");
   }
