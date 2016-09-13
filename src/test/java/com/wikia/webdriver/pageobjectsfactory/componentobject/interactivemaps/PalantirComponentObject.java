@@ -1,17 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.PalantirContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class PalantirComponentObject extends InteractiveMapPageObject {
 
@@ -20,54 +19,36 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
   @FindBy(css = "img[src*='player_location_marker.png']")
   private WebElement playerPoint;
 
-  public PalantirComponentObject(WebDriver driver) {
-    super();
-  }
-
   private PalantirContent getResponse(Object response, String methodName) {
     Map<String, String> map = (Map) response;
-    PalantirContent handle = new PalantirContent(
-        String.valueOf(map.get(PalantirContent.PONTO_MSG_SUCCESS)),
-        String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
-        map.get(PalantirContent.PONTO_MSG_MESSAGE)
-    );
+    PalantirContent handle =
+        new PalantirContent(String.valueOf(map.get(PalantirContent.PONTO_MSG_SUCCESS)),
+            String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
+            map.get(PalantirContent.PONTO_MSG_MESSAGE));
     PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
     return handle;
   }
 
   public PalantirContent deletePlayerPosition() {
     wait.forElementVisible(mapFrame);
-    JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
-    Object res = jsexec.executeAsyncScript(PalantirContent.PONTO_REMOVEPLAYER);
+    Object res = driver.executeAsyncScript(PalantirContent.PONTO_REMOVEPLAYER);
     return getResponse(res, "deletePlayerPosition");
   }
 
   public PalantirContent setAndVerifyPlayerPosition(double lat, double lng, double zoom,
-                                                    boolean centerMap) {
+      boolean centerMap) {
     wait.forElementVisible(mapFrame);
-    JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
-    Object res = jsexec.executeAsyncScript(
-        PalantirContent.PONTO_SETPLAYER,
-        lat,
-        lng,
-        zoom,
-        centerMap
-    );
+    Object res =
+        driver.executeAsyncScript(PalantirContent.PONTO_SETPLAYER, lat, lng, zoom, centerMap);
     return getResponse(res, "setAndVerifyPlayerPosition");
   }
 
   public PalantirContent updateMapPosition(double lat, double lng, int zoom) {
     wait.forElementVisible(mapFrame);
-    JavascriptExecutor jsexec = (JavascriptExecutor) driver;
     driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
-    Object res = jsexec.executeAsyncScript(
-        PalantirContent.PONTO_UPDATEPOSITION,
-        lat,
-        lng,
-        zoom
-    );
+    Object res = driver.executeAsyncScript(PalantirContent.PONTO_UPDATEPOSITION, lat, lng, zoom);
     return getResponse(res, "updateMapPosition");
   }
 

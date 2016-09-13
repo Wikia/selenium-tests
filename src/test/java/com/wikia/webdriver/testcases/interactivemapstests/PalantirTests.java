@@ -17,7 +17,7 @@ public class PalantirTests extends NewTestTemplate {
         selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
-    PalantirComponentObject poi = new PalantirComponentObject(driver);
+    PalantirComponentObject poi = new PalantirComponentObject();
     PalantirContent handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
     poi.verifyCorrectPlayerPos(handle);
     poi.verifyPoiAppearOnMap();
@@ -30,7 +30,7 @@ public class PalantirTests extends NewTestTemplate {
         selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
-    PalantirComponentObject poi = new PalantirComponentObject(driver);
+    PalantirComponentObject poi = new PalantirComponentObject();
     PalantirContent handle = poi.setAndVerifyPlayerPosition(9300, 15000, 3, true);
     poi.verifyWrongPlayerPos(handle);
     poi.verifyPoiNotAppearOnMap();
@@ -43,7 +43,7 @@ public class PalantirTests extends NewTestTemplate {
         selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
-    PalantirComponentObject poi = new PalantirComponentObject(driver);
+    PalantirComponentObject poi = new PalantirComponentObject();
     PalantirContent handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
     poi.verifyCorrectPlayerPos(handle);
     poi.verifyPoiAppearOnMap();
@@ -59,7 +59,7 @@ public class PalantirTests extends NewTestTemplate {
         selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
-    PalantirComponentObject poi = new PalantirComponentObject(driver);
+    PalantirComponentObject poi = new PalantirComponentObject();
     PalantirContent handle = poi.setAndVerifyPlayerPosition(-40, -10, 3000, true);
     poi.verifyWrongZoomLevel(handle);
     poi.verifyPoiNotAppearOnMap();
@@ -72,7 +72,7 @@ public class PalantirTests extends NewTestTemplate {
         selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
-    PalantirComponentObject poi = new PalantirComponentObject(driver);
+    PalantirComponentObject poi = new PalantirComponentObject();
     PalantirContent handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
     poi.verifyCorrectPlayerPos(handle);
     handle = poi.updateMapPosition(-90, -10, 3);
@@ -86,7 +86,7 @@ public class PalantirTests extends NewTestTemplate {
         selectedMap =
         specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
     selectedMap.verifyMapOpened();
-    PalantirComponentObject poi = new PalantirComponentObject(driver);
+    PalantirComponentObject poi = new PalantirComponentObject();
     PalantirContent handle = poi.setAndVerifyPlayerPosition(-40, -10, 3.4, true);
     poi.verifyDecimalZoomLevel(handle);
     poi.verifyPoiNotAppearOnMap();
