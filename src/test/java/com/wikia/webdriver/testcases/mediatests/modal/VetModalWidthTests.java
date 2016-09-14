@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,21 +17,19 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
-import org.testng.annotations.Test;
-
+@Test(groups = {"VetModalWidth", "VetTests", "Media"})
 public class VetModalWidthTests extends NewTestTemplate {
 
-  String articleTitle;
   final static int MODAL_WIDTH = 250;
+  String articleTitle;
 
-  @Test(groups = {"VetModalWidth", "VetModalwidth_001", "VetTests", "Media"})
+  @Test(groups = {"VetModalwidth_001"})
   @Execute(asUser = User.USER)
   public void Vet_Modal_001_modalWidth() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
-    VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPage(wikiURL, articleTitle);
+    VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
 
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 
@@ -51,8 +51,7 @@ public class VetModalWidthTests extends NewTestTemplate {
     Assertion.assertEquals(article.getVideoThumbnailWidth(), MODAL_WIDTH);
   }
 
-  @Test(groups = {"VetModalWidth", "VetModalwidth_002", "VetTests", "Media"},
-      dependsOnMethods = "Vet_Modal_001_modalWidth")
+  @Test(groups = {"VetModalwidth_002"}, dependsOnMethods = "Vet_Modal_001_modalWidth")
   @Execute(asUser = User.USER)
   public void Vet_Modal_002_modalWidthOnEditing() {
     WikiBasePageObject base = new WikiBasePageObject();

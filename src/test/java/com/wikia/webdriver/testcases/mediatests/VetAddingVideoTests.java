@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -12,18 +14,17 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
-import org.testng.annotations.Test;
-
 /**
  * Documentation: https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0
  * AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
  */
 
+@Test(groups = {"VetTests", "VetAddVideo", "Media"})
 public class VetAddingVideoTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo", "Media"})
+  @Test(groups = {"VetAddVideo_001"})
   @Execute(asUser = User.USER)
   public void VetAddVideo_001_MessageWallProvider() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
@@ -43,7 +44,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.verifyPostedMessageVideo(title);
   }
 
-  @Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo", "Media"})
+  @Test(groups = {"VetAddVideo_002"})
   @Execute(asUser = User.USER)
   public void VetAddVideo_002_MessageWallLibrary() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
