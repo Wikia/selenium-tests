@@ -56,6 +56,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     captionField.clear();
     captionField.sendKeys(caption);
     PageObjectLogging.log("setCaption", "caption was set to: " + caption, true);
+
     return this;
   }
 
@@ -96,6 +97,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     clickAddaVideo();
     clickRetunToEditing();
     verifyVideoModalNotVisible();
+
     return new WikiArticleEditMode(driver);
   }
 

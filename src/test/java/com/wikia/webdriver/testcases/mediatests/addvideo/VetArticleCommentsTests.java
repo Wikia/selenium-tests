@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"VetArticleComments", "VetTests", "Media"})
 public class VetArticleCommentsTests extends NewTestTemplate {
 
-  @Test(groups = {"VetArticleComments_001"}, invocationCount = 30)
+  @Test(groups = {"VetArticleComments_001"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-758", comment = "This issue is related to API call and should not cause permanent " +
       "test failure. Otherwise the failure must be caused by other issue")
@@ -47,7 +47,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     Assertion.assertEquals(article.getArticleComment().getLatestCommentCaption(), expectedCaption);
   }
 
-  @Test(groups = {"VetArticleComments_002"}, invocationCount = 30)
+  @Test(groups = {"VetArticleComments_002"})
   @Execute(asUser = User.USER)
   public void RegularUserCanAddVideoInArticleCommentEditorByFindingWikiaVideo() {
     new ArticleContent().clear();

@@ -55,7 +55,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = aritclePage.navigateToArticleEditPage();
-    ck.isContentLoaded();
+    Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }
 

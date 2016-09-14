@@ -593,12 +593,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditorPageObject(driver);
   }
 
-  public String getEditToken() {
-    return (String) jsActions.execute("mw.user.tokens.get('editToken')");
-  }
-
   public void addVideoViaAjax(String videoURL) {
-    String editToken = getEditToken();
     String request = new String("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
                                 + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
     jsActions.execute(request);

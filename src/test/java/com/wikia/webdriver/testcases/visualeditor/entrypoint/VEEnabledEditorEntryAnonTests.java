@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -121,7 +122,8 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEEnabledEditorEntryAnonTests_009_actionEdit() {
     VisualEditModePageObject ck =
         base.navigateToArticleEditPage(wikiURL, base.getNameForArticle());
-    ck.isContentLoaded();
+    
+    Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }
 }

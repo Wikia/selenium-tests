@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxC
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -120,7 +120,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     try {
       wait.forElementVisible(h1Header);
       return true;
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
       return false;
     }
@@ -130,7 +130,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     try {
       wait.forElementClickable(addVideo);
       return true;
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
       return false;
     }
@@ -140,7 +140,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     try {
       wait.forElementVisible(newestVideo);
       return true;
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.log("verifyElementsOnPage",
                             "verify that there is at least one video present", true);
       return false;

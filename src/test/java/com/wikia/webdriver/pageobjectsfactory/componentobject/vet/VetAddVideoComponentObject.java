@@ -5,7 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -129,7 +129,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     try {
       wait.forElementVisible(suggestedVideo);
       return true;
-    } catch(NoSuchElementException e) {
+    } catch(TimeoutException e) {
       PageObjectLogging.log("areSuggestionsDisplayed",
                             "Verified suggested module appeared", false, driver);
       return false;

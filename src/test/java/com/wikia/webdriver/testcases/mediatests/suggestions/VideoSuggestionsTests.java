@@ -17,7 +17,7 @@ public class VideoSuggestionsTests extends NewTestTemplate {
   public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed() {
     ArticlePageObject article = new ArticlePageObject().open("Frank_Woods");
     VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
-    Assertion.assertTrue(ck.isContentLoaded());
+    Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
 
     VetAddVideoComponentObject vetAddingVideo = ck.clickVideoButton();
     Assertion.assertTrue(vetAddingVideo.areSuggestionsDisplayed());
