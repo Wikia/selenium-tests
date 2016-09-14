@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TestDfpParamsPresentMobile extends MobileTestTemplate {
+public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
@@ -27,7 +27,7 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParamsSynthetic",
-      groups = {"MobileAds", "DfpParamsPresentSyntheticMercury"}
+      groups = {"MobileAds", "AdsDfpParamsPresentSyntheticMercury"}
   )
   public void dfpParamsPresentSyntheticMercury(String wikiName,
                                                String article,
@@ -54,7 +54,7 @@ public class TestDfpParamsPresentMobile extends MobileTestTemplate {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpParams",
-      groups = {"MobileAds", "DfpParamsPresentMercury"}
+      groups = {"MobileAds", "AdsDfpParamsPresentMercury"}
   )
   public void dfpParamsPresentMercury(String wikiName,
                                       String article,

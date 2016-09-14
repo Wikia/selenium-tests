@@ -46,8 +46,6 @@ public class EmbedMapTests extends NewTestTemplate {
 
   @Test(groups = {"EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
-  @RelatedIssue(issueID = "QAART-690", comment = "functionality status is deprecated, " +
-                                                 "monitor the issue to find out resolution")
   public void EmbedMapTests_002_VerifyEmbedMapElements() {
     ArticlePageObject article = new ArticlePageObject();
     article.open(InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);

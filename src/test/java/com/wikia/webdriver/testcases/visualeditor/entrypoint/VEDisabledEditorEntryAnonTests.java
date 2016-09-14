@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -28,7 +29,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
-    ck.verifyContentLoaded();
+    Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }
 
@@ -37,7 +38,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEDisabledEditorEntryAnonTestsTests_002_MainEditEntry() {
     ArticlePageObject article = new ArticlePageObject().open(base.getNameForArticle());
     VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
-    ck.verifyContentLoaded();
+    Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }
 
@@ -98,7 +99,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEDisabledEditorEntryAnonTestsTests_009_actionEdit() {
     VisualEditModePageObject ck =
         base.navigateToArticleEditPage(wikiURL, base.getNameForArticle());
-    ck.verifyContentLoaded();
+    Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }
 }

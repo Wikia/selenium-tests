@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -61,7 +62,7 @@ public class ArticleTOCTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open();
     article.verifyTOCpresent();
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
-    visualEditMode.verifyContentLoaded();
+    Assertion.assertTrue(visualEditMode.isContentLoaded(), "Content is not loaded");
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
     preview.verifyTOCcollapsedOnPreview();
@@ -111,7 +112,7 @@ public class ArticleTOCTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_WITH_TOC_LINES);
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
-    visualEditMode.verifyContentLoaded();
+    Assertion.assertTrue(visualEditMode.isContentLoaded(), "Content is not loaded");
     PreviewEditModePageObject preview = visualEditMode.previewArticle();
     preview.verifyTOCpresentOnPreview();
     preview.verifyTOCexpandedOnPreview();
