@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = {"NotificationsTests", "MessageWallNotificationsFollowersResponseTests"})
 public class MessageWallNotificationsFollowersResponseTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -20,11 +20,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   String title;
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersResponseTests_001",
-          "MessageWallNotificationsFollowersResponseTests",
-          "NotificationsTests"
-      }
+      groups = {"MessageWallNotificationsFollowersResponseTests_001"}
   )
   public void followerNotificationResponse_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -35,11 +31,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersResponseTests_002",
-          "MessageWallNotificationsFollowersResponseTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsFollowersResponseTests_002" },
       dependsOnMethods = "followerNotificationResponse_setup_1"
   )
   public void followerNotificationResponse_setup_2() {
@@ -56,11 +48,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersResponseTests_003",
-          "MessageWallNotificationsFollowersResponseTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsFollowersResponseTests_003"},
       dependsOnMethods = "followerNotificationResponse_setup_2"
   )
   public void followerNotificationResponse_setup_3() {
@@ -71,11 +59,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersResponseTests_004",
-          "MessageWallNotificationsFollowersResponseTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsFollowersResponseTests_004"},
       dependsOnMethods = "followerNotificationResponse_setup_3"
   )
   public void followerNotificationResponse_setup_4() {
@@ -92,11 +76,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersResponseTests_005",
-          "MessageWallNotificationsFollowersResponseTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsFollowersResponseTests_005"},
       dependsOnMethods = {
           "followerNotificationResponse_setup_1",
           "followerNotificationResponse_setup_2",
