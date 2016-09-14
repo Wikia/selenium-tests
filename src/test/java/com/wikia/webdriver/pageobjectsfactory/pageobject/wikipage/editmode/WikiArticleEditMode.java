@@ -1,16 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class WikiArticleEditMode extends WikiEditMode {
 
@@ -18,8 +15,6 @@ public class WikiArticleEditMode extends WikiEditMode {
   private WebElement videoButton;
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
-  @FindBy(css = "#wpTextbox1")
-  private WebElement messageSourceModeTextArea;
   @FindBy(css = "div.cke_wrapper.cke_ltr div.cke_contents iframe")
   private WebElement iFrame;
   @FindBy(css = "span.cke_button_ModeSource a span.cke_label")
@@ -34,11 +29,6 @@ public class WikiArticleEditMode extends WikiEditMode {
   private WebElement sourceButton;
   @FindBy(css = "a[data-map-title]")
   private WebElement embededMap;
-
-  public WikiArticleEditMode(WebDriver driver) {
-    super(driver);
-    PageFactory.initElements(driver, this);
-  }
 
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
@@ -71,8 +61,8 @@ public class WikiArticleEditMode extends WikiEditMode {
   public void verifySourceEditorContentIsEmpty() {
     wait.forElementVisible(sourceModeTextArea);
     Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
-    PageObjectLogging.log("verifySourceEditorContentIsEmpty",
-                          "Source editor content was cleaned", true);
+    PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned",
+        true);
   }
 
   public void clearSource() {
@@ -86,8 +76,8 @@ public class WikiArticleEditMode extends WikiEditMode {
     driver.switchTo().frame(iFrame);
     wait.forElementVisible(bodyContent);
     bodyContent.sendKeys(content);
-    PageObjectLogging.log("typeInContent", "content " + bodyContent.getText()
-                                           + " - type into article body", true, driver);
+    PageObjectLogging.log("typeInContent",
+        "content " + bodyContent.getText() + " - type into article body", true, driver);
     driver.switchTo().defaultContent();
   }
 
@@ -101,37 +91,13 @@ public class WikiArticleEditMode extends WikiEditMode {
   public WikiArticleEditMode editArticleByName(String name, String wikiUrl) {
     String newUrl = URLsContent.ADD_ARTICLE.replace("%title%", name);
     getUrl(wikiUrl + newUrl);
-    return new WikiArticleEditMode(driver);
-  }
-
-  public VetAddVideoComponentObject clickVideoButton() {
-    wait.forElementVisible(videoButton);
-    scrollAndClick(videoButton);
-    PageObjectLogging.log("clickVideoButton", "video button clicked", true);
-    return new VetAddVideoComponentObject(driver);
+    return new WikiArticleEditMode();
   }
 
   public void typeContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log(
-        "typeInContent",
-        "content type into source mode textarea",
-        true,
-        driver
-    );
-  }
-
-  public void typeInTemplateContent(String content) {
-    driver.switchTo().defaultContent();
-    wait.forElementVisible(messageSourceModeTextArea);
-    messageSourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log(
-        "typeInContent",
-        "content type into source mode textarea",
-        true,
-        driver
-    );
+    PageObjectLogging.log("typeInContent", "content type into source mode textarea", true, driver);
   }
 
   public void verifyEmbededMap(String mapID) {
