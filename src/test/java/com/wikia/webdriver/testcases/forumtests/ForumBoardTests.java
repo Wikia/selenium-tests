@@ -110,7 +110,7 @@ public class ForumBoardTests extends NewTestTemplate {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
-      
+
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, true);

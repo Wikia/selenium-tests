@@ -3,9 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.video.YoutubeVideo;
-import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -66,12 +63,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return new WatchPageObject(driver);
   }
 
-  private void verifySortDropdown() {
-    wait.forElementVisible(sortDropdown);
-  }
-
   public VetAddVideoComponentObject clickAddAVideo() {
-    wait.forElementClickable(addVideo);;
+    wait.forElementClickable(addVideo);
     scrollAndClick(addVideo);
     return new VetAddVideoComponentObject(driver);
   }
@@ -102,26 +95,12 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteConfirmButton.click();
   }
 
-  public void verifyDeleteViaGlobalNotifications() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
-    System.out.println("Video: " + video.getTitle());
-    System.out.println("Get URL: " + video.getUrl());
-    addVideoViaAjax(video.getUrl());
-    deleteNewestVideo();
-    String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
-    System.out.println("BannerNotificationText: " + getBannerNotificationText());
-    System.out.println("Deleted video: " + deletedVideo);
-    Assertion.assertEquals(getBannerNotificationText(), deletedVideo);
-    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-        + " was deleted", true);
-  }
-
   public boolean isHeaderVisible() {
     try {
       wait.forElementVisible(h1Header);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
+      PageObjectLogging.logInfo("Header is not visible", e);
       return false;
     }
   }
@@ -131,7 +110,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       wait.forElementClickable(addVideo);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
+      PageObjectLogging.logInfo("Add video button is not clickable", e);
       return false;
     }
   }
@@ -141,8 +120,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
       wait.forElementVisible(newestVideo);
       return true;
     } catch (TimeoutException e) {
-      PageObjectLogging.log("verifyElementsOnPage",
-                            "verify that there is at least one video present", true);
+      PageObjectLogging.logInfo("Newest video is not visible", e);
       return false;
     }
   }

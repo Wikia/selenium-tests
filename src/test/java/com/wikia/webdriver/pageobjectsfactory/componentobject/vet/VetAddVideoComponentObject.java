@@ -88,15 +88,10 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
   }
 
-  public void verifyAddVideoModal() {
-    wait.forElementVisible(urlField);
-    wait.forElementVisible(addUrlButton);
-    PageObjectLogging.log("verifyAddVideoModal", "add video modal is displayed", true);
-  }
-
   public VetOptionsComponentObject addVideoByUrl(String url) {
     typeInUrl(url);
     clickAddButtonProvider();
+
     return new VetOptionsComponentObject(driver);
   }
 
@@ -107,6 +102,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     clickVideoThumbnail(i);
     checkVideoPreviewAppearing();
     clickAddVideoLibrary(i);
+
     return new VetOptionsComponentObject(driver);
   }
 
@@ -128,10 +124,11 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   public boolean areSuggestionsDisplayed() {
     try {
       wait.forElementVisible(suggestedVideo);
+
       return true;
     } catch(TimeoutException e) {
-      PageObjectLogging.log("areSuggestionsDisplayed",
-                            "Verified suggested module appeared", false, driver);
+      PageObjectLogging.logInfo("Suggestion are not displayed", e);
+
       return false;
     }
   }
@@ -140,6 +137,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     wait.forElementVisible(closeButton);
     scrollAndClick(closeButton);
     PageObjectLogging.log("clickCloseButton", "close button clicked", true);
+
     return new WikiArticleEditMode(driver);
   }
 }
