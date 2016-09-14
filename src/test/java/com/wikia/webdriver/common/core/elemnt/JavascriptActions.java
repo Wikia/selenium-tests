@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,16 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Set of commonly used actions invoked by executing JavaScript on a web page
  */
 public class JavascriptActions {
 
-  private JavascriptExecutor js;
-  private WebDriver driver;
-  private static int WEBDRIVER_WAIT_TIMEOUT_SEC = 15;
+  private final static int WEBDRIVER_WAIT_TIMEOUT_SEC = 15;
+  private final JavascriptExecutor js;
+  private final WebDriver driver;
 
   public JavascriptActions(WebDriver driver) {
     this.js = (JavascriptExecutor) driver;
@@ -66,15 +66,14 @@ public class JavascriptActions {
     js.executeScript("$(arguments[0]).mouseenter()", element);
   }
 
-  public boolean isElementInViewPort(WebElement element) {
-    return (Boolean) js
-        .executeScript(
-            "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
+  private boolean isElementInViewPort(WebElement element) {
+    return (Boolean) js.executeScript(
+        "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
             + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
-            element);
+        element);
   }
 
-  public void scrollToBottom(WebDriver driver) {
+  public void scrollToBottom() {
     js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
   }
 
@@ -93,10 +92,7 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element) {
     try {
       js.executeScript(
-          "var x = $(arguments[0]); " +
-          "window.scroll(0,parseInt(x.offset().top - 100));",
-          element
-      );
+          "var x = $(arguments[0]); " + "window.scroll(0,parseInt(x.offset().top - 50));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -107,11 +103,8 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element, int offset) {
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" +
-          "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
-          element,
-          offset
-      );
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
+          element, offset);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -129,7 +122,7 @@ public class JavascriptActions {
     js.executeScript("$(arguments[0]).scrollTop(arguments[1])", modal, scrollTop);
   }
 
-  public void scrollElementIntoViewPort(WebElement element){
+  public void scrollElementIntoViewPort(WebElement element) {
     if (!isElementInViewPort(element)) {
       scrollToElement(element);
     }
@@ -141,9 +134,7 @@ public class JavascriptActions {
 
   public String getCountry() {
     waitForJavaScriptTruthy("Wikia.geo");
-    return js.executeScript(
-        "return Wikia.geo.getCountryCode();"
-    ).toString();
+    return js.executeScript("return Wikia.geo.getCountryCode();").toString();
   }
 
   public void waitForJavaScriptTruthy(final String script) {
@@ -170,9 +161,8 @@ public class JavascriptActions {
 
   public void addErrorListenerScript() {
     js.executeScript(
-           "var script = document.createElement('script'); "
-           + "script.innerHTML = 'window.onerror = "
-           + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
-           + "document.querySelector('body').appendChild(script);");
+        "var script = document.createElement('script'); " + "script.innerHTML = 'window.onerror = "
+            + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
+            + "document.querySelector('body').appendChild(script);");
   }
 }

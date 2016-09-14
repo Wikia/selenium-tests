@@ -163,6 +163,7 @@ public class MessageWall extends WikiBasePageObject {
   public MessageWallCloseRemoveThreadPageObject clickRemoveThread() {
     refreshPage();
     setDisplayStyle(newMessageMenu, "block");
+    wait.forElementVisible(firstMessageWrapperBy);
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(removeButtonBy));
     setDisplayStyle(newMessageMenu, "none");

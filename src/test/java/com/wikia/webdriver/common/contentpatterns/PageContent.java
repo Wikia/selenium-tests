@@ -83,7 +83,7 @@ public class PageContent {
   public static final String DISCUSSIONS_LINK = "/d/";
 
   //forum
-  public static final String FORUM_TITLE_PREFIX = "QABoardTitle ";
+  public static final String FORUM_TITLE_PREFIX = "QABoardTitle%s";
   public static final String FORUM_TITLE_EDIT_PREFIX = "QABoardTitleEdit ";
   public static final String FORUM_TITLE_40_CHAR_PREFIX = "QABoardlongtitle 40 forty c";
   public static final String FORUM_TITLE_SLASH_PREFIX = "QABoard/Title";
@@ -95,7 +95,7 @@ public class PageContent {
   public static final String
       FORUM_DESCRIPTION_EDIT_PREFIX =
       "Duis quam ante, fringilla at cursus tristique edit ";
-  public static final String FORUM_MESSAGE = "QAforumMessage";
+  public static final String FORUM_MESSAGE = "QAforumMessage%s";
   public static final String FORUM_BOARD = "QABoardForMoveThreadTest";
   public static final String CLOSE_REASON = "QA reason";
 

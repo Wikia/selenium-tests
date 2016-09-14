@@ -33,9 +33,6 @@ public class VideoUrlProvider {
             "http://www.dailymotion.com/video/x101vdw_robert-pattison-y-kristen-stewart-se-dan-un-tiempo_people#.UZovsrWnqXw",
             "Robert Pattison y Kristen Stewart se dan un tiempo"
         }, {
-            "http://www.gamestar.de/videos/action,9/batman-arkham-origins,70131.html",
-            "Batman Arkham Origins - Erster Teaser-Trailer Batman vs. Deathstroke"
-        }, {
             "http://www.hulu.com/watch/489169",
             "The Unnatural (Bob's Burgers)"
         }, {

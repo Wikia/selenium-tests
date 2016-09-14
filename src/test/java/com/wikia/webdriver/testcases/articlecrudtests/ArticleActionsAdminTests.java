@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -32,7 +33,10 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
-    article.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
+
     article.verifyArticleTitle(articleTitle);
   }
 
@@ -46,7 +50,10 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
-    article.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
+
     article.verifyArticleTitle(articleNewName);
   }
 }

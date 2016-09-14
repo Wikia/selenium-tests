@@ -151,6 +151,28 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   }
 
   /**
+   * Verify that page is followed The method should be used only after clicking on "follow" button.
+   * Before that, "follow" button does not have 'title' attribute which is necessary in the method
+   */
+  public void verifyFollowedToolbar() {
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
+            "title", "Unfollow");
+    PageObjectLogging.log("verifyFollowedToolbar", "follow button verified", true);
+  }
+
+  /**
+   * Verify that page is unfollowed The method should be used only after clicking on "Unfollow"
+   * button. Before that, "follow" button does not have 'title' attribute which is necessary in the
+   * method
+   */
+  public void verifyUnfollowed() {
+    wait.forElementClickable(pageWatchlistStatusMessage);
+    waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
+            "title", "Follow");
+    PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
+  }
+
+  /**
    * Look up if Tool appears on Toolbar List
    *
    * @param toolName {Follow, Edit, History, (...)}

@@ -4,8 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.templateclassificiation.TemplateClassification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -39,7 +40,7 @@ public class TemplateEditPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(editArea);
       return editArea.isDisplayed();
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo("Edit are was not displayed");
     }
     return false;

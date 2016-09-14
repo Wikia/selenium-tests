@@ -19,6 +19,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -168,11 +169,18 @@ public class VisualEditModePageObject extends EditMode {
     verifyComponent(video);
   }
 
-  public void verifyContentLoaded() {
+  public boolean isContentLoaded() {
+    wait.forElementVisible(iframe);
     driver.switchTo().frame(iframe);
-    wait.forElementVisible(contentInput);
-    PageObjectLogging.log("verifyContentLoaded", "RTE editor loaded", true, driver);
-    driver.switchTo().defaultContent();
+    try {
+      wait.forElementVisible(contentInput);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("isContentLoaded", "RTE editor loaded", false, driver);
+      return false;
+    } finally {
+      driver.switchTo().defaultContent();
+    }
   }
 
   public void verifyVideoPosition(PositionsVideo position) {

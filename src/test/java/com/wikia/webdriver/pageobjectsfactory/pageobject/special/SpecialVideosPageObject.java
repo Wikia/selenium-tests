@@ -1,16 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.video.YoutubeVideo;
-import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,24 +63,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return new WatchPageObject(driver);
   }
 
-  private void verifyH1() {
-    wait.forElementVisible(h1Header);
-  }
-
-  private void verifyNewestVideo() {
-    wait.forElementVisible(newestVideo);
-  }
-
-  private void verifyAddVideoButton() {
-    wait.forElementClickable(addVideo);
-  }
-
-  private void verifySortDropdown() {
-    wait.forElementVisible(sortDropdown);
-  }
-
   public VetAddVideoComponentObject clickAddAVideo() {
-    verifyAddVideoButton();
+    wait.forElementClickable(addVideo);
     scrollAndClick(addVideo);
     return new VetAddVideoComponentObject(driver);
   }
@@ -103,8 +85,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return newestVideoTitle.getText();
   }
 
-  public void deleteVideo() {
+  public void deleteNewestVideo() {
     openSpecialVideoPageMostRecent(getWikiUrl());
+    wait.forElementVisible(newestVideoTitle);
     jsActions.execute("$('.special-videos-grid .remove').first().show()");
     wait.forElementVisible(newestVideo);
     newestVideoDeleteIcon.click();
@@ -112,35 +95,34 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     deleteConfirmButton.click();
   }
 
-  public void verifyDeleteViaGlobalNotifications() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
-
-    addVideoViaAjax(video.getUrl());
-    deleteVideo();
-    String deletedVideo = "\"File:" + video.getTitle() + "\" has been deleted. (undelete)";
-    Assertion.assertEquals(getBannerNotificationText(), deletedVideo);
-    PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo
-        + " was deleted", true);
+  public boolean isHeaderVisible() {
+    try {
+      wait.forElementVisible(h1Header);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Header is not visible", e);
+      return false;
+    }
   }
 
-  public void verifyDeleteViaVideoNotPresent() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("truth");
-
-    addVideoViaAjax(video.getUrl());
-    deleteVideo();
-    getBannerNotifications().verifyNotificationMessage();
-    Assertion.assertNotEquals(getNewestVideoTitle(), video.getTitle());
-    PageObjectLogging.log("verifyDeleteVideoNotPresent", "verify video " + video.getTitle()
-        + " was deleted", true);
+  public boolean isAddVideoButtonClickable() {
+    try {
+      wait.forElementClickable(addVideo);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Add video button is not clickable", e);
+      return false;
+    }
   }
 
-  public void verifyElementsOnPage() {
-    verifyH1();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
-    verifyAddVideoButton();
-    PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
-    verifyNewestVideo();
-    PageObjectLogging.log("verifyElementsOnPage",
-        "verify that there is at least one video present", true);
+  public boolean isNewestVideoVisible() {
+    try {
+      wait.forElementVisible(newestVideo);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Newest video is not visible", e);
+      return false;
+    }
   }
+
 }
