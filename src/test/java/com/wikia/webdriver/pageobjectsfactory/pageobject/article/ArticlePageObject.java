@@ -681,11 +681,12 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
+    wait.forElementVisible(welcomeLightBoxTitle);
     Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
   }
 
   public void closeNewWikiCongratulationsLightBox() {
-    wait.forElementVisible(welcomeLightBoxCloseButton);
+    wait.forElementClickable(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
     PageObjectLogging.log("closeNewWikiCongratulationsLightBox ",
                           "congratulations lightbox closed", true);

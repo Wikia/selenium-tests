@@ -55,7 +55,7 @@ public class ForumBoardTests extends NewTestTemplate {
     title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
-    forumBoard.startDiscussionWithImgae(title);
+    forumBoard.startDiscussionWithImage(title);
     forumBoard.clickPostButton();
     forumBoard.verifyDiscussionWithImage();
   }
