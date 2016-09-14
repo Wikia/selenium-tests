@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.awt.*;
 
-public class TestOoyalaAds extends TemplateNoFirstLoad {
+public class TestAdsOoyalaOasis extends TemplateNoFirstLoad {
 
   private static final Color GREEN = new Color(4, 253, 6);
   private static final Color BLUE = new Color(4, 0, 254);
@@ -17,10 +17,10 @@ public class TestOoyalaAds extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      groups = {"TestOoyalaAds_GeoEdgeFree"},
+      groups = {"AdsOoyalaPrerollOasis"},
       dataProvider = "ooyalaAds"
   )
-  public void TestOoyalaAds_GeoEdgeFree(String wikiName, String article) {
+  public void adsOoyalaPrerollOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyLightboxAd(BLUE, AD_DURATION_SEC);
