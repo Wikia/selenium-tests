@@ -138,6 +138,6 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     scrollAndClick(closeButton);
     PageObjectLogging.log("clickCloseButton", "close button clicked", true);
 
-    return new WikiArticleEditMode(driver);
+    return new WikiArticleEditMode();
   }
 }

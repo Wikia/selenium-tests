@@ -320,7 +320,7 @@ public class ArticleRTETest extends NewTestTemplate {
 
   @Test(dataProvider = "wikiTextsProvider", groups = {"RTE"})
   public void ArticleRTETest_001(String[] wikiTexts) {
-    WikiArticleEditMode edit = new WikiArticleEditMode(driver);
+    WikiArticleEditMode edit = new WikiArticleEditMode();
     edit.editArticleByName("RTE_test_page", wikiURL);
     edit.clickOnSourceButton();
     for (String wikitext : wikiTexts) {

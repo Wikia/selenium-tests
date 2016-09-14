@@ -1,5 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import lombok.Getter;
+
+import org.joda.time.DateTime;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -48,22 +65,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
-import lombok.Getter;
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -455,14 +456,6 @@ public class WikiBasePageObject extends BasePageObject {
     return newPassword;
   }
 
-  public String getFirstCssRevision() {
-    wait.forElementVisible(cssEditSummary);
-    String summary = cssEditSummary.getText();
-    PageObjectLogging.log("cssEditSummary",
-        "the following edit summary was get from Wikia.css: " + summary, true);
-    return summary;
-  }
-
   public void verifyRevisionMarkedAsMinor() {
     if (isElementOnPage(cssMinorEdit)) {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
@@ -594,8 +587,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void addVideoViaAjax(String videoURL) {
-    String request = new String("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
-                                + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
+    String request = new String(
+        "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
+            + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
     jsActions.execute(request);
   }
 
@@ -608,7 +602,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public WikiHistoryPageObject openArticleHistoryPage() {
     getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.ACTION_HISTORY));
-    return new WikiHistoryPageObject(driver);
+    return new WikiHistoryPageObject();
   }
 
   private String getArticleName() {

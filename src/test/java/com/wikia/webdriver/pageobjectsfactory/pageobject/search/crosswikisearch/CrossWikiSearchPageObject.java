@@ -147,7 +147,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     WebElement resultLink = resultLinks.get(resultNumeber);
     wait.forElementVisible(resultLink);
     scrollAndClick(resultLink);
-    return new WikiArticleHomePage(driver);
+    return new WikiArticleHomePage();
   }
 
   public CrossWikiSearchPageObject prevPage() {
