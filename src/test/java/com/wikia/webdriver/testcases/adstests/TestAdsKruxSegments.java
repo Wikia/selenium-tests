@@ -48,12 +48,12 @@ public class TestAdsKruxSegments extends NewTestTemplate {
 
     // Visit page1:
     adsKruxObject.getUrl(page1, NO_ADS_URL_PARAM);
-    adsKruxObject.waitForPageLoaded();
+    adsKruxObject.waitForPageLoadedWithGpt();
     adsKruxObject.waitForKrux();
 
     // Most of the time we get the correct segment here, but let's check it on the next page view:
     adsKruxObject.getUrl(page1, NO_ADS_URL_PARAM);
-    adsKruxObject.waitForPageLoaded();
+    adsKruxObject.waitForPageLoadedWithGpt();
     adsKruxObject.waitForKrux();
 
     // Check the segments:
@@ -65,12 +65,12 @@ public class TestAdsKruxSegments extends NewTestTemplate {
 
     // Visit page2:
     adsKruxObject.getUrl(page2, NO_ADS_URL_PARAM);
-    adsKruxObject.waitForPageLoaded();
+    adsKruxObject.waitForPageLoadedWithGpt();
     adsKruxObject.waitForKrux();
 
     // Most of the time we get the correct segment here, but let's check it on the next page view:
     adsKruxObject.getUrl(page2, NO_ADS_URL_PARAM);
-    adsKruxObject.waitForPageLoaded();
+    adsKruxObject.waitForPageLoadedWithGpt();
     adsKruxObject.waitForKrux();
 
     // Check the segments:

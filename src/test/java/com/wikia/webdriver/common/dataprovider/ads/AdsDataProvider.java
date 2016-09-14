@@ -321,7 +321,7 @@ public class AdsDataProvider {
             Arrays.asList(
                 "\"s0\":\"gaming\"",
                 "\"s0v\":\"games\"",
-                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
+                "\"s0c\":[\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -582,7 +582,7 @@ public class AdsDataProvider {
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
         {"project43", "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
-        {"project43", "SyntheticTests/LB", "\"s0c\":[\"life\",\"crea\",\"edu\",\"tech\"]", true}
+        {"project43", "SyntheticTests/LB", "\"s0c\":[\"tech\"]", true}
     };
   }
 
