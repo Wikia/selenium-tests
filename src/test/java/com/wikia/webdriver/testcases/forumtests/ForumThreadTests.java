@@ -21,7 +21,7 @@ public class ForumThreadTests extends NewTestTemplate {
   public void staffUserCanReplyToForumThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -36,7 +36,7 @@ public class ForumThreadTests extends NewTestTemplate {
   public void staffUserCanRemoveThreadAndUndoRemoval() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -53,7 +53,7 @@ public class ForumThreadTests extends NewTestTemplate {
   public void staffUserCanMoveThreadToOtherBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
     List<String> forumNames = forumMainPage.getForumNamesList();
@@ -69,7 +69,7 @@ public class ForumThreadTests extends NewTestTemplate {
   public void threadHistoryPageContainsTableAndCells() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -84,7 +84,7 @@ public class ForumThreadTests extends NewTestTemplate {
   public void staffUserCanCloseAndReopenThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();

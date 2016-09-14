@@ -15,7 +15,7 @@ public class ForumAnonTests extends NewTestTemplate {
   public void anonymousUserCanStartDiscussionOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -26,7 +26,7 @@ public class ForumAnonTests extends NewTestTemplate {
   public void anonymousUserCanReplyToThreadOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
