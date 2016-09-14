@@ -14,21 +14,26 @@ import java.util.concurrent.TimeUnit;
 public class AdsOoyalaObject extends AdsBaseObject {
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
-  private WebElement lightbox;
+  private WebElement lightboxVideo;
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
   }
 
+  public void playVideo() {
+    wait.forElementVisible(lightboxVideo);
+    lightboxVideo.click();
+  }
+
   public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
-    verifyColorAd(lightbox, lightboxAdColor, adDurationSec);
+    verifyColorAd(lightboxVideo, lightboxAdColor, adDurationSec);
     PageObjectLogging.log("LightboxAd",
                           "Lightbox had " + lightboxAdColor + " during " + adDurationSec
                           + " seconds", true);
   }
 
   public void verifyLightboxVideo(Color lightboxVideoColor, int videoDurationSec) {
-    verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
+    verifyColorAd(lightboxVideo, lightboxVideoColor, videoDurationSec);
     PageObjectLogging.log("LightboxVideo",
                           "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
                           + " seconds", true);
