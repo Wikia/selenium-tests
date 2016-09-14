@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
 import org.testng.annotations.Test;
-
+@Test(groups = {"NotificationsTests", "MessageWallNotificationsOwnerTests"})
 public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -18,11 +18,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   String title;
 
   @Test(
-      groups = {
-          "MessageWallNotificationsOwnerTests_001",
-          "MessageWallNotificationsOwnerTests",
-          "NotificationsTests"
-      }
+      groups = { "MessageWallNotificationsOwnerTests_001"}
   )
   public void wallOwnerReceivesNotification_setup() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -38,11 +34,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsOwnerTests_002",
-          "MessageWallNotificationsOwnerTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsOwnerTests_002"},
       dependsOnMethods = "wallOwnerReceivesNotification_setup"
   )
  public void userIsNotifiedWhenOtherUserWritesMessageOnHerMessageWal() {
