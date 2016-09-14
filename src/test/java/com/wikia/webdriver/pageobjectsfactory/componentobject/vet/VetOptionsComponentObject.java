@@ -98,7 +98,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     clickRetunToEditing();
     verifyVideoModalNotVisible();
 
-    return new WikiArticleEditMode(driver);
+    return new WikiArticleEditMode();
   }
 
   public void update() {

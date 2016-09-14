@@ -1,5 +1,9 @@
 package com.wikia.webdriver.testcases.forumtests;
 
+import java.util.List;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -9,14 +13,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumHi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
 
-import org.testng.annotations.Test;
-
-import java.util.List;
-
+@Test(groups = {"ForumThreadTests", "Forum"})
 public class ForumThreadTests extends NewTestTemplate {
 
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
+  @Test(groups = {"ForumThreadTests_001", "Smoke3"})
   public void staffUserCanReplyToForumThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
@@ -31,7 +32,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
+  @Test(groups = {"ForumThreadTests_002", "Forum"})
   public void staffUserCanRemoveThreadAndUndoRemoval() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
@@ -48,7 +49,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"ForumThreadTests_003", "ForumThreadTests", "Forum"})
+  @Test(groups = {"ForumThreadTests_003"})
   public void staffUserCanMoveThreadToOtherBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
@@ -64,7 +65,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"ForumThreadTests_004", "ForumThreadTests", "Forum"})
+  @Test(groups = {"ForumThreadTests_004"})
   public void threadHistoryPageContainsTableAndCells() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
@@ -79,7 +80,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"ForumThreadTests_005", "ForumThreadTests", "Forum"})
+  @Test(groups = {"ForumThreadTests_005"})
   public void staffUserCanCloseAndReopenThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
