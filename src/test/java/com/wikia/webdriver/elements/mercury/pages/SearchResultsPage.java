@@ -69,7 +69,7 @@ public class SearchResultsPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(searchResultsContainer);
       return true;
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       return false;
     }
   }
@@ -78,8 +78,6 @@ public class SearchResultsPage extends WikiBasePageObject {
     try {
       wait.forElementVisible(noResultsContainer, 0);
       return true;
-    } catch (NoSuchElementException e) {
-      return false;
     } catch (TimeoutException e) {
       return false;
     }
@@ -93,8 +91,6 @@ public class SearchResultsPage extends WikiBasePageObject {
     try {
       wait.forElementClickable(By.cssSelector(SEARCH_RESULT_SELECTOR), 0);
       return true;
-    } catch (NoSuchElementException e) {
-      return false;
     } catch (TimeoutException e) {
       return false;
     }

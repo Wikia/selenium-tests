@@ -51,11 +51,13 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     return videoNameCaption.getText();
   }
 
-  public void setCaption(String caption) {
+  public VetOptionsComponentObject setCaption(String caption) {
     wait.forElementVisible(captionField);
     captionField.clear();
     captionField.sendKeys(caption);
     PageObjectLogging.log("setCaption", "caption was set to: " + caption, true);
+
+    return this;
   }
 
   public void adjustWith(int width) {
@@ -95,7 +97,8 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
     clickAddaVideo();
     clickRetunToEditing();
     verifyVideoModalNotVisible();
-    return new WikiArticleEditMode(driver);
+
+    return new WikiArticleEditMode();
   }
 
   public void update() {

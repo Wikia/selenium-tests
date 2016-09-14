@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 
 import org.testng.annotations.Test;
-
+@Test(groups = {"NotificationsTests", "MessageWallNotificationsThreadCreatorTests"})
 public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -18,11 +18,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
   String title;
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadCreatorTests_001",
-          "MessageWallNotificationsThreadCreatorTests",
-          "NotificationsTests"
-      }
+      groups = {"MessageWallNotificationsThreadCreatorTests_001"}
   )
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -38,11 +34,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadCreatorTests_002",
-          "MessageWallNotificationsThreadCreatorTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsThreadCreatorTests_002"},
       dependsOnMethods = "threadCreatorNotification_setup_1"
   )
   public void threadCreatorNotification_setup_2() {
@@ -57,11 +49,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate 
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadCreatorTests_003",
-          "MessageWallNotificationsThreadCreatorTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsThreadCreatorTests_003"},
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
  public void userIsNotifiedWhenOtherUserWritesResponseOnHerMessageWal() {

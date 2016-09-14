@@ -34,8 +34,8 @@ public class ForumBoardPageObject extends BasePageObject {
   private WebElement highlight;
   @FindBy(css = "#Forum .board-description")
   private WebElement boardDescription;
-  private String discussionTextarea = "textarea.title:nth-child(2)";
-  private String wikiaEditorTextarea = "#WikiaEditor-0";
+  @FindBy(css = "#WikiaEditor-0")
+  private WebElement wikiaEditorTextArea;
 
   MiniEditorComponentObject miniEditor;
 
@@ -54,9 +54,11 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public ForumThreadPageObject startDiscussion(String title, String message, boolean highlight) {
-    jsActions.focus(discussionTextarea);
+    wait.forElementVisible(discussionTitleArea);
+    jsActions.focus(discussionTitleArea);
     discussionTitleArea.sendKeys(title);
-    jsActions.focus(wikiaEditorTextarea);
+    wait.forElementVisible(wikiaEditorTextArea);
+    jsActions.focus(wikiaEditorTextArea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -82,8 +84,10 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public ForumThreadPageObject startDiscussionWithoutTitle(String message) {
-    jsActions.focus(discussionTextarea);
-    jsActions.focus(wikiaEditorTextarea);
+    wait.forElementVisible(discussionTitleArea);
+    jsActions.focus(discussionTitleArea);
+    wait.forElementVisible(wikiaEditorTextArea);
+    jsActions.focus(wikiaEditorTextArea);
     driver.switchTo().frame(miniEditor.miniEditorIframe);
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
@@ -99,13 +103,6 @@ public class ForumBoardPageObject extends BasePageObject {
     PageObjectLogging.log("clickPostButton", "post button clicked", true, driver);
   }
 
-  public void verifyDiscussionTitleAndMessage(String title, String message) {
-    wait.forTextInElement(discussionTitle, title);
-    wait.forTextInElement(discussionBody.get(0), message);
-    PageObjectLogging.log("verifyDiscussionWithTitle",
-        "discussion with title and message verified", true);
-  }
-
   public void verifyBoardDescription(String description) {
     wait.forTextInElement(boardDescription, description);
     PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
@@ -117,14 +114,16 @@ public class ForumBoardPageObject extends BasePageObject {
     scrollAndClick(postButton);
   }
 
-  public void startDiscussionWithImgae(String title) {
-    jsActions.focus(discussionTextarea);
+  public void startDiscussionWithImage(String title) {
+    wait.forElementVisible(discussionTitleArea);
+    jsActions.focus(discussionTitleArea);
     discussionTitleArea.sendKeys(title);
-    jsActions.focus(wikiaEditorTextarea);
+    wait.forElementVisible(wikiaEditorTextArea);
+    jsActions.focus(wikiaEditorTextArea);
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
     PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
     photoOptions.clickAddPhoto();
-    PageObjectLogging.log("startDiscussionWithImgae", "discussion with image started" + title,
+    PageObjectLogging.log("startDiscussionWithImage", "discussion with image started" + title,
         true, driver);
   }
 
@@ -134,9 +133,11 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithLink(String internalLink, String externalLink, String title) {
-    jsActions.focus(discussionTextarea);
+    wait.forElementVisible(discussionTitleArea);
+    jsActions.focus(discussionTitleArea);
     discussionTitleArea.sendKeys(title);
-    jsActions.focus(wikiaEditorTextarea);
+    wait.forElementVisible(wikiaEditorTextArea);
+    jsActions.focus(wikiaEditorTextArea);
     // add internal wikia link
     miniEditor.addInternalLink(internalLink);
     // add external link
@@ -158,9 +159,11 @@ public class ForumBoardPageObject extends BasePageObject {
   }
 
   public void startDiscussionWithVideo(String url, String title) {
-    jsActions.focus(discussionTextarea);
+    wait.forElementVisible(discussionTitleArea);
+    jsActions.focus(discussionTitleArea);
     discussionTitleArea.sendKeys(title);
-    jsActions.focus(wikiaEditorTextarea);
+    wait.forElementVisible(wikiaEditorTextArea);
+    jsActions.focus(wikiaEditorTextArea);
     miniEditor.addVideoMiniEditor(url);
     PageObjectLogging.log("startDiscussionWithVideo", "discussion with video started" + title,
         true, driver);

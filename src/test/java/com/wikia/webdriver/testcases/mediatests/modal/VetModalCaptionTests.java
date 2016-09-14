@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,8 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
-import org.testng.annotations.Test;
-
+@Test(groups = {"VetModalCaption", "VetTests", "Media"})
 public class VetModalCaptionTests extends NewTestTemplate {
 
   /**
@@ -30,7 +31,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   String articleTitleNotEditable;
   String caption;
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_001", "VetTests", "Media"})
+  @Test(groups = {"VetModalCaption_001"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_001_modalCaption() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -58,30 +59,27 @@ public class VetModalCaptionTests extends NewTestTemplate {
     Assertion.assertEquals(article.getVideoCaption(), caption);
   }
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_002", "VetTests",
-                  "Media"}, dependsOnGroups = "VetModalCaption_001")
+  @Test(groups = {"VetModalCaption_002"}, dependsOnGroups = "VetModalCaption_001")
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
     WikiBasePageObject base = new WikiBasePageObject();
-    VisualEditModePageObject
-        visualEditModePageObject =
+    VisualEditModePageObject visualEditModePageObject =
         base.navigateToArticleEditPage(wikiURL, articleTitleCaption);
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
     vetOptions.verifyCaption(caption);
   }
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_005", "VetTests", "Media"})
+  @Test(groups = {"VetModalCaption_005"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitleNotEditable = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject
-        visualEditMode =
+    VisualEditModePageObject visualEditMode =
         base.navigateToArticleEditPage(wikiURL, articleTitleNotEditable);
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-    VetOptionsComponentObject vetOptions = vetAddingVideo
-        .addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 1);
+    VetOptionsComponentObject vetOptions =
+        vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 1);
     vetOptions.verifyNameNotEditable();
   }
 }

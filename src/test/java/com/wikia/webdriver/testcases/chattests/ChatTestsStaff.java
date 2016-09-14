@@ -9,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 import org.testng.annotations.Test;
 
+@Test(groups = {"Chat", "ChatForStaff"})
 public class ChatTestsStaff extends NewTestTemplate {
 
   private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
@@ -23,7 +24,7 @@ public class ChatTestsStaff extends NewTestTemplate {
     return new ChatPage().open();
   }
 
-  @Test(groups = {"ChatStaff", "ChatTests"})
+  @Test
   public void verifyStaffUsersCanSwitchBetweenMainAndPrivateSections() {
     ChatPage chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
@@ -42,7 +43,7 @@ public class ChatTestsStaff extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
-  @Test(groups = {"ChatStaff", "ChatTests"})
+  @Test
   public void staffUserCanSendPrivateMessage() {
     ChatPage chatUserOne =
         openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
@@ -68,7 +69,7 @@ public class ChatTestsStaff extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), "MESSAGE ON PRIVATE CHAT IS NOT DISPLAYED");
   }
 
-  @Test(groups = {"ChatStaff", "ChatTests"})
+  @Test
   public void staffOptionsAreNotDisplayedOnOtherStaffUser() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 
@@ -79,7 +80,7 @@ public class ChatTestsStaff extends NewTestTemplate {
     Assertion.assertFalse(chatUserStaff2.areStaffOptionsDisplayed(), "STAFF OPTIONS ARE DISPLAERD");
   }
 
-  @Test(groups = {"ChatStaff", "ChatTests"})
+  @Test
   public void staffUserCanNotBlockPrivateMessages() {
     openChatForUser(credentials.userNameStaff, credentials.passwordStaff);
 

@@ -41,7 +41,7 @@ public class AdsDataProvider {
   public static Object[][] ooyalaAds() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/OoyalaVideo/" +
             "Simple?file=Synthetic_video_ad_test_(all_green_video)_320x240_(ooyala-stored_video)",
         }

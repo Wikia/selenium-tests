@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -90,7 +90,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     try {
       wait.forElementVisible(addAPageButton);
       return true;
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
