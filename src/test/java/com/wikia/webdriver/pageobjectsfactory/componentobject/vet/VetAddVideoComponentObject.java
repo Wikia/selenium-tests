@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -87,15 +88,10 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
   }
 
-  public void verifyAddVideoModal() {
-    wait.forElementVisible(urlField);
-    wait.forElementVisible(addUrlButton);
-    PageObjectLogging.log("verifyAddVideoModal", "add video modal is displayed", true);
-  }
-
   public VetOptionsComponentObject addVideoByUrl(String url) {
     typeInUrl(url);
     clickAddButtonProvider();
+
     return new VetOptionsComponentObject(driver);
   }
 
@@ -106,6 +102,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     clickVideoThumbnail(i);
     checkVideoPreviewAppearing();
     clickAddVideoLibrary(i);
+
     return new VetOptionsComponentObject(driver);
   }
 
@@ -124,16 +121,23 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     return this.videoName;
   }
 
-  public void verifySuggestionsIsDisplayed() {
-    wait.forElementVisible(suggestedVideo);
-    PageObjectLogging.log("verifySuggestionsIsDisplayed",
-                          "Verified suggested module appeared", true, driver);
+  public boolean areSuggestionsDisplayed() {
+    try {
+      wait.forElementVisible(suggestedVideo);
+
+      return true;
+    } catch(TimeoutException e) {
+      PageObjectLogging.logInfo("Suggestion are not displayed", e);
+
+      return false;
+    }
   }
 
   public WikiArticleEditMode clickCloseButton() {
     wait.forElementVisible(closeButton);
     scrollAndClick(closeButton);
     PageObjectLogging.log("clickCloseButton", "close button clicked", true);
+
     return new WikiArticleEditMode(driver);
   }
 }

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -50,7 +50,7 @@ public class AuthModal extends WikiBasePageObject {
     switchToAuthModalHandle();
     try {
       wait.forElementVisible(registerAuthModal);
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo("Register Auth Modal is not displayed");
       return false;
     }
@@ -62,7 +62,7 @@ public class AuthModal extends WikiBasePageObject {
     switchToAuthModalHandle();
     try {
       wait.forElementVisible(signInAuthModal);
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo("Sign In Auth Modal is not displayed");
       return false;
     }
