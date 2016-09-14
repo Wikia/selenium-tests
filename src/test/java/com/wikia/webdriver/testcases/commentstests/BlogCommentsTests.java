@@ -98,7 +98,9 @@ public class BlogCommentsTests extends NewTestTemplate {
     String commentText = blogPage.getFirstCommentText();
     DeletePageObject delete = blogPage.deleteFirstComment();
     delete.submitDeletion();
-    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible());
+
+    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
     blogPage.verifyCommentDeleted(commentText);
   }
 }

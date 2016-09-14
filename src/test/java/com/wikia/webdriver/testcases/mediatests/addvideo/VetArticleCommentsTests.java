@@ -44,7 +44,8 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     Assertion.assertTrue(article.getArticleComment().isVideoVisible());
 
     article.submitComment();
-    Assertion.assertEquals(article.getArticleComment().getLatestCommentCaption(), expectedCaption);
+    Assertion.assertEquals(article.getArticleComment().getLatestCommentCaption(), expectedCaption,
+                           "Latest comment caption doesn't equal to expected caption");
   }
 
   @Test(groups = {"VetArticleComments_002"})
@@ -62,9 +63,11 @@ public class VetArticleCommentsTests extends NewTestTemplate {
     String desiredVideoName = vetOptions.getVideoName();
     vetOptions.submit();
 
-    Assertion.assertTrue(article.getArticleComment().isVideoVisible());
+    Assertion.assertTrue(article.getArticleComment().isVideoVisible(),
+                         "Video is not visible");
 
     article.submitComment();
-    Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName));
+    Assertion.assertTrue(article.isVideoCommentPresent(desiredVideoName),
+                         "Video comment doesn't have desired name");
   }
 }

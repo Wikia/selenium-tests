@@ -24,9 +24,10 @@ public class VideosPageTests extends NewTestTemplate {
     SpecialVideosPageObject specialVideos =
         new WikiBasePageObject().openSpecialVideoPageMostRecent(wikiURL);
 
-    Assertion.assertTrue(specialVideos.isHeaderVisible());
-    Assertion.assertTrue(specialVideos.isAddVideoButtonClickable());
-    Assertion.assertTrue(specialVideos.isNewestVideoVisible());
+    Assertion.assertTrue(specialVideos.isHeaderVisible(), "Header is not visible");
+    Assertion.assertTrue(specialVideos.isAddVideoButtonClickable(),
+                         "Add video button is not clickable");
+    Assertion.assertTrue(specialVideos.isNewestVideoVisible(), "Newest video is not visible");
   }
 
   /**
@@ -48,7 +49,8 @@ public class VideosPageTests extends NewTestTemplate {
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
 
-    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(video.getTitle()));
+    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(video.getTitle()),
+                         "Banner notification text doesn't contains video title");
   }
 
   /**
@@ -70,6 +72,7 @@ public class VideosPageTests extends NewTestTemplate {
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
-    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), video.getTitle());
+    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), video.getTitle(),
+                              "Video is still visible as newest video");
   }
 }

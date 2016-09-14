@@ -19,8 +19,9 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
   public void staffUserCanReplyToForumThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
-    String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -33,8 +34,9 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
   public void staffUserCanRemoveThreadAndUndoRemoval() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
-    String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -49,8 +51,9 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_003", "ForumThreadTests", "Forum"})
   public void staffUserCanMoveThreadToOtherBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
-    String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+
     forumMainPage.openForumMainPage(wikiURL);
     List<String> forumNames = forumMainPage.getForumNamesList();
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -64,8 +67,9 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_004", "ForumThreadTests", "Forum"})
   public void threadHistoryPageContainsTableAndCells() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
-    String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -78,8 +82,9 @@ public class ForumThreadTests extends NewTestTemplate {
   @Test(groups = {"ForumThreadTests_005", "ForumThreadTests", "Forum"})
   public void staffUserCanCloseAndReopenThread() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    String title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
-    String message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp());
+
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);

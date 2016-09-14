@@ -34,7 +34,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
     editPrefPage.selectPreferredEditor(VE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
-    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Notification message is not visible");
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -50,7 +51,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
     editPrefPage.selectPreferredEditor(CK);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
-    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Notification message is not visible");
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -66,7 +68,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
     editPrefPage.selectPreferredEditor(SOURCE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
-    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Notification message is not visible");
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -90,7 +93,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
-    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Notification message is not visible");
 
     ConfirmationPageObject confirmPageAlmostThere = new AlmostTherePageObject(driver)
         .enterEmailChangeLink(Configuration.getCredentials().emailQaart2,
@@ -101,6 +105,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
         Configuration.getCredentials().emailPassword);
 
     editPrefPage.openEmailSection();
-    Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress);
+    Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress,
+                           "Email address doesn't equal to new email address");
   }
 }

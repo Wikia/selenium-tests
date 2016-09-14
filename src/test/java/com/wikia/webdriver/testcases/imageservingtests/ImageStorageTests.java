@@ -45,7 +45,8 @@ public class ImageStorageTests extends NewTestTemplate {
 
     DeletePageObject delete = file.deletePage();
     delete.submitDeletion();
-    Assertion.assertTrue(filesPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(filesPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
@@ -54,7 +55,8 @@ public class ImageStorageTests extends NewTestTemplate {
         delete.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
-    Assertion.assertTrue(restore.getBannerNotifications().isNotificationMessageVisible());;
+    Assertion.assertTrue(restore.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -86,13 +88,15 @@ public class ImageStorageTests extends NewTestTemplate {
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
 
-    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
     file.verifyHeader(imageNewName);
     file = new FilePage().open(imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
 
-    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();

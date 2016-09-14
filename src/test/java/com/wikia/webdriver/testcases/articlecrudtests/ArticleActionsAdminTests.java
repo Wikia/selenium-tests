@@ -34,7 +34,8 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
 
-    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     article.verifyArticleTitle(articleTitle);
   }
@@ -50,7 +51,8 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
 
-    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     article.verifyArticleTitle(articleNewName);
   }

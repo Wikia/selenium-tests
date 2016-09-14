@@ -20,7 +20,7 @@ public class VideoSuggestionsTests extends NewTestTemplate {
     Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
 
     VetAddVideoComponentObject vetAddingVideo = ck.clickVideoButton();
-    Assertion.assertTrue(vetAddingVideo.areSuggestionsDisplayed());
+    Assertion.assertTrue(vetAddingVideo.areSuggestionsDisplayed(),
+                         "Video suggestions are not displayed");
   }
 }
-

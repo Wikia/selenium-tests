@@ -86,7 +86,8 @@ public class BlogTests extends NewTestTemplate {
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
 
-    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     blogPage.verifyBlogTitle(blogTitle);
   }
@@ -103,6 +104,7 @@ public class BlogTests extends NewTestTemplate {
     renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
     blogPage.verifyBlogTitle(blogTitleMove);
 
-    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible());
+    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
   }
 }
