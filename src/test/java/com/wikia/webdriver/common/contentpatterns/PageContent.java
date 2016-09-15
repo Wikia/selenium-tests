@@ -38,7 +38,10 @@ public class PageContent {
 
   //templates
   public static final String TEMPLATE_NAMESPACE = "Template";
-
+  public static final String
+      INFOBOX2_TEMPLATE =
+      "<infobox> <title source=\"title1\"> <default>{{PAGENAME}}</default> </title> <image source=\"image1\"> <caption source=\"caption1\"/> </image> <title source=\"title3\"/> <data source=\"row1\"> <label>URL</label> </data> <data source=\"row2\"> <label>Key value only</label> </data> <data source=\"row3\"> <label>Poem and links</label> </data> <data source=\"row4\"> <label>Internal link</label> </data> <title source=\"title2\"/> <data source=\"row5\"> <label>Question?</label> </data> <group layout=\"horizontal\" show=\"incomplete\"> <header>Incomplete horizontal</header> <data source=\"horizontal1\"> <label><b>Incomplete1</b></label></data> <data source=\"horizontal2\"> <label><i>Incomplete2</i></label></data> </group> <data source=\"z1\"><label>z1</label></data> <data source=\"z1\"><label>z1</label></data> <group layout=\"horizontal\"> <header>Complete horizontal</header> <data source=\"h1\"><label><b>ąę</b></label></data> <data source=\"h2\"><label><u>$$</u></label></data> <data source=\"h3\"><label><i>test</i></label></data> </group> <navigation>Navigation</navigation> <data source=\"nav1\"> <label><b>Nav1</b></label> </data> <data source=\"nav2\"> <label><u>Nav2</u></label> </data> <data source=\"nav3\"> <label><i>Nav3</i></label> </data> </infobox> [[Category:InfoboxCategory]] {{reflist|2}}\n"
+      + "<noinclude> Example usage:<pre> {{Infobox4Automatio02 Clone |title1=Example |image1=Example |caption1=Example |row1=Example |row2=Example |row3=Example |row4=Example |title2=Example |row5=Example }} </pre> </noinclude>";
   //blogs
   public static final String BLOG_POST_NAME_PREFIX = "blogPost";
   public static final String BLOG_CONTENT = "blogContent";
@@ -137,11 +140,12 @@ public class PageContent {
 
   //Portable Infoboxes content
   public static final String PORTABLE_INFOBOX_02 = "Infobox4Automation01";
-  public static final String PORTABLE_INFOBOX_01 = "Infobox2";
+  public static final String INFOBOX_2 = "Infobox2";
   public static final String PORTABLE_INFOBOX_EMPTY_TAGS = "Infobox4Automation09";
   public static final String PI_TEMPLATE_WEBSITE_SIMPLE = "Template:Infobox_Website_Simple";
-  public static final String FILE_IMAGE_NAME = "File:WallPaperHD_138.jpg";
-
+  public static final String
+      INFOBOX2_INVOCATION =
+      "{{Infobox2 |title1=Automation testing |image1=[[File:Image010.jpg]] |caption1=$$ Example <> caption $$ |row1=https://www.wikipedia.org <ref>Ref wikipedia</ref>|row2=Example? |row3=[[Category:VEINFOBOX]] |row4=<poem> 200 (Txt) 420 ([[Infobox1 | internal infobox link]])) 400 ([[RedLink0840238084242 | infobox internal red link]]) 300 https://www.wikipedia.org 600 ([[https://www.wikia.com]] -ref) 1200 ([[Infobox2 | infobox self link]] and [[Infobox2]]) </poem> |title2=http://www.wikia.com/Fandom |row5= == Nope == |horizontal1 = Incomplete horizontal. <b>Bold text</b> |horizontal2 = Incomplete horizontal. ''Italic text'' |z1 = <u>Underline text</u> and [[Infobox2]] |h1 = Complete horizontal. <b>Bold text</b> |h2 = Complete horizontal. ''Italic text'' |h3 = Complete horizontal. <u>Underline text</u> |nav1 = [[Infobox1]] <b>nav</b> |nav2 = [[Infobox1]] <b>nav</b> |nav3 = [[Infobox1]] <b>nav</b> }}";
   //Customized toolbar
   public static final String FOLLOW = "follow";
 

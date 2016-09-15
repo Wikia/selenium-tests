@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -15,6 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -30,10 +32,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyElementsVisibility() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(infobox.getHeadersNumber() > 0 );
     Assertion.assertTrue(infobox.isImageVisible());
@@ -47,10 +49,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void infoboxInfoboxNavigationElements() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(infobox.isInfoboxNavigationElementVisible());
     Assertion.assertTrue(infobox.getInternalNavigationLinksNumber() > 0);
@@ -59,41 +61,41 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyRedlinksRedirecting() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(infobox.clickRedLinkWithIndex(0).isCreateNewArticleModalVisible());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyInternalLinksRedirecting() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     String internalLinkName = infobox
-        .open(PageContent.PORTABLE_INFOBOX_01)
-        .getInternalLinkRedirectTitle(3);
+        .open(PageContent.INFOBOX_2)
+        .getInternalLinkRedirectTitle(2);
 
     String internalURL = infobox
-        .clickInternalLinkWithIndex(3)
+        .clickInternalLinkWithIndex(2)
         .getUrlAfterPageIsLoaded();
 
-    Assertion.assertEquals(internalLinkName, internalURL);
+    Assertion.assertTrue(internalURL.contains(internalLinkName));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyExternalLinksRedirecting() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     String externalLinkName = infobox
-        .open(PageContent.PORTABLE_INFOBOX_01)
+        .open(PageContent.INFOBOX_2)
         .getExternalLinkRedirectTitle(0);
 
     String externalUrl = infobox
@@ -105,29 +107,32 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyImagesInWhatLinksHerePage() {
+    new ArticleContent().push(String.format("[[%s]]", PageContent.INFOBOX_2),
+                              "Infobox2_WhatLinksHere");
+    //provide an article linking to testing Infobox
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     ArticlePageObject article = new ArticlePageObject();
-
-    article.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
-
+    article.open("Infobox2_WhatLinksHere");
     String articleName = article.getArticleName();
 
-    String whatLinkHereResult = article
-        .openSpecialWhatLinksHere(wikiURL)
-        .clickPageInputField()
-        .typeInfoboxImageName(PageContent.FILE_IMAGE_NAME)
-        .clickShowButton()
-        .getWhatLinksHereArticleName(0);
+    SpecialWhatLinksHerePageObject whatLinksHere = article.openSpecialWhatLinksHere(wikiURL);
 
-    Assertion.assertTrue(whatLinkHereResult.contains(articleName));
+    whatLinksHere
+        .clickPageInputField()
+        .typeInfoboxImageName("Infobox2")
+        .clickShowButton();
+
+    Assertion.assertTrue(whatLinksHere.whatLinksHereContainsArticleName(articleName));
   }
 
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1200x720")
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyLightboxVisibilityAfterClickingImage() {
-    PortableInfobox infobox = new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01);
-
-    new ArticlePurger().purgeArticleAsAnon();
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    PortableInfobox infobox = new PortableInfobox();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(infobox.clickImage().isLightboxVisible());
   }
@@ -145,14 +150,15 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxLayoutChange() {
-    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
-    ArticlePageObject article = new ArticlePageObject();
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
 
     theme.openSpecialDesignerPage(wikiURL).selectTheme(4);
     theme.submitTheme();
 
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
+    infobox.open(PageContent.INFOBOX_2);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
     String oldBackground = infobox.getBackgroundColor();
@@ -160,7 +166,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     theme.openSpecialDesignerPage(wikiURL).selectTheme(1);
     theme.submitTheme();
 
-    article.open(PageContent.PORTABLE_INFOBOX_01);
+    infobox.open(PageContent.INFOBOX_2);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
     Assertion.assertNotEquals(oldBackground, infobox.getBackgroundColor());
@@ -180,22 +186,24 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyInfoboxCategoryLinks() {
-    PortableInfobox infobox =
-        new PortableInfobox().open(PageContent.PORTABLE_INFOBOX_01);
-
-    new ArticlePurger().purgeArticleAsAnon();
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    PortableInfobox infobox = new PortableInfobox();
+    infobox.open(PageContent.INFOBOX_2);
 
     String categoryLinkName = infobox.getCategoryLinkName();
     infobox.clickCategoryLink();
-    new CategoryPageObject(driver).verifyCategoryPageTitle(categoryLinkName);
+    String categoryPageTitle = new CategoryPageObject(driver).getCategoryPageTitle();
+
+    Assertion.assertTrue(categoryLinkName.contains(categoryPageTitle));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyHorizontalGroupFontSize() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertEquals(infobox.getItemLabelsFontSize(0),
                            infobox.getHorizontalItemLabelFontSize(0));
@@ -233,30 +241,30 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyNavigationElementPadding() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(infobox.isNavigationPaddingLeftAndRightEqual(1));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyGroupHeadersPadding() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(infobox.isHeaderPaddingLeftAndRightEqual(1));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyDivsWrappersAreNotIncluded() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_01);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertFalse(infobox.imageContainsDiv(0));
     Assertion.assertFalse(infobox.headerContainsDiv(0));

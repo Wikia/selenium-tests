@@ -44,9 +44,9 @@ public class PortableInfobox extends BasePageObject {
   private WebElement referenceElements;
 
   @FindBy(css = ".pi-data-label")
-  private WebElement h3Elements;
+  private List<WebElement> h3Elements;
 
-  @FindBy(css = ".pi-data-value .newcategory")
+  @FindBy(css = ".newcategory")
   private WebElement categoryLinkInInfobox;
 
   @FindBy(css = ".pi-navigation")
@@ -76,7 +76,7 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = "#articleCategories .category a")
   private List<WebElement> categories;
 
-  @FindBy(css = ".pi-navigation a[href*='redlink']")
+  @FindBy(css = "a[href*='redlink']")
   private List<WebElement> redLinks;
 
   @FindBy(css = ".pi-item .external")
@@ -292,9 +292,14 @@ public class PortableInfobox extends BasePageObject {
   }
 
   public boolean areQuotationMarksPresented() {
-    wait.forElementVisible(h3Elements);
-
-    return h3Elements.getText().contains("\"URL\"");
+    boolean questionMarkPresented = false;
+    for(int i=0; i<h3Elements.size(); i++) {
+      wait.forElementVisible(h3Elements.get(i));
+      if (h3Elements.get(i).getText().contains("?")) {
+        questionMarkPresented = true;
+      }
+    }
+    return questionMarkPresented;
   }
 
   public int getBoldElementsNumber() {
