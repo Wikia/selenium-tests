@@ -20,7 +20,6 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
 
-  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
@@ -64,6 +63,17 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
+      dataProvider = "delayBtfPluto",
+      groups = "AdsBtfBlockingOasis"
+  )
+  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, int delaySec, boolean isWgVarOn)
+      throws InterruptedException {
+      adsAtfDelayBtfOasis(wikiName, article, delaySec, isWgVarOn);
+  }
+
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
       groups = "AdsBtfBlockingOasis"
   )
@@ -90,6 +100,16 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     Assertion.assertNotEquals(
         adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn,
         AdsContent.FLOATING_MEDREC);
+  }
+
+  @Execute(mockAds = "true")
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "disableBtfPluto",
+      groups = "AdsBtfBlockingOasis"
+  )
+  public void adsAtfDisableBtfOasisPluto(String wikiName, String article, boolean isWgVarOn) {
+    adsAtfDisableBtfOasis(wikiName, article, isWgVarOn);
   }
 
   /**
