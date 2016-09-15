@@ -48,7 +48,7 @@ public class TemplateContent extends ApiCall {
   }
 
   public void push(String text, String templateTitle) {
-    URL_STRING = baseURL + PageContent.TEMPLATE_NAMESPACE + templateTitle;
+    URL_STRING = String.format("%s%s:%s", baseURL, PageContent.TEMPLATE_NAMESPACE, templateTitle);
     PARAMS.add(new BasicNameValuePair("text", text));
     call();
   }

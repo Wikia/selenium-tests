@@ -37,7 +37,7 @@ public class PageContent {
       "text of the sub-heading number 2\n";
 
   //templates
-  public static final String TEMPLATE_NAMESPACE = "Template:";
+  public static final String TEMPLATE_NAMESPACE = "Template";
 
   //blogs
   public static final String BLOG_POST_NAME_PREFIX = "blogPost";
