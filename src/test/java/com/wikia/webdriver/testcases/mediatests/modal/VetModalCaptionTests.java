@@ -19,6 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Source
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
+@Test(groups = {"VetModalCaption", "VetTests", "Media"})
 public class VetModalCaptionTests extends NewTestTemplate {
 
   /**
@@ -32,7 +33,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
   String articleTitleNotEditable;
   String caption;
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_001", "VetTests", "Media"})
+  @Test(groups = {"VetModalCaption_001"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_001_modalCaption() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -60,7 +61,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
     Assertion.assertEquals(article.getVideoCaption(), caption);
   }
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_002", "VetTests", "Media"})
+  @Test(groups = {"VetModalCaption_002"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
     String captionText = String.format("Caption-%d", DateTime.now().getMillis());
@@ -74,7 +75,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
     vetOptions.verifyCaption(captionText);
   }
 
-  @Test(groups = {"VetModalCaption", "VetModalCaption_005", "VetTests", "Media"})
+  @Test(groups = {"VetModalCaption_005"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_005_videoNameNotEditable() {
     WikiBasePageObject base = new WikiBasePageObject();
