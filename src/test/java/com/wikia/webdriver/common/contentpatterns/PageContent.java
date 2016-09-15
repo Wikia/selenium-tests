@@ -137,7 +137,7 @@ public class PageContent {
 
   //Portable Infoboxes content
   public static final String PORTABLE_INFOBOX_02 = "Infobox4Automation01";
-  public static final String PORTABLE_INFOBOX_01 = "Infobox4Automation02";
+  public static final String PORTABLE_INFOBOX_01 = "Infobox2";
   public static final String PORTABLE_INFOBOX_EMPTY_TAGS = "Infobox4Automation09";
   public static final String PI_TEMPLATE_WEBSITE_SIMPLE = "Template:Infobox_Website_Simple";
   public static final String FILE_IMAGE_NAME = "File:WallPaperHD_138.jpg";
