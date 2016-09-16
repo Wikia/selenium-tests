@@ -234,6 +234,27 @@ public class ReportingPostTests extends NewTestTemplate {
     IDS.put(USER_ID_THAT_ADDED_POST_ON_DESKTOP_DURING_TEST, UserPostsPage.extractUserIdFrom(driver.getCurrentUrl()));
   }
 
+
+  @Test(groups = "discussions-loggedInUsersDesktopReporting",
+      dependsOnMethods = "userOnDesktopCanReportPostOnPostDetailsPage")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPage() {
+    PageWithPosts page = new PostDetailsPage().open(
+        IDS.get(POST_ID_ADDED_ON_DESKTOP_DURING_TEST));
+    assertThatUserCanNotSeeReportedIndicatorOnPostReportedByAnotherUser(page);
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopReporting",
+      dependsOnMethods = "userOnDesktopCanReportPostOnUserPostsPage")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPage() {
+    PageWithPosts page = new UserPostsPage().open(
+        IDS.get(USER_ID_THAT_ADDED_POST_ON_DESKTOP_DURING_TEST));
+    assertThatUserCanNotSeeReportedIndicatorOnPostReportedByAnotherUser(page);
+  }
+
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
     boolean actual = post.getTheNewestPost()
         .clickMoreOptions()
