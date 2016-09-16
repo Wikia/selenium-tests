@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.regex.Pattern;
 
 
-public class PostDetailsPage extends WikiBasePageObject {
+public class PostDetailsPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final Post post = new Post();
