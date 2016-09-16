@@ -48,7 +48,6 @@ public class UserAndRights extends NewTestTemplate {
         new WikiBasePageObject().goToArticleDefaultContentEditPage(wikiURL,
             PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis());
 
-    //edit.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     edit.verifyUserLoggedIn(User.BLOCKED_USER);
 
     edit.verifyBlockedUserMessage();
@@ -58,7 +57,6 @@ public class UserAndRights extends NewTestTemplate {
   @Execute(asUser = User.BLOCKED_USER)
   public void blockedUserShouldBeAbleToChangeEmail() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
-    //editPrefPage.getGlobalNavigation().openAccountNavigation().logIn(User.BLOCKED_USER);
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.openEmailSection();
@@ -69,7 +67,9 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    prefPage.getBannerNotifications().verifyNotificationMessage();
+    
+    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Notification message is not visible");
 
     ConfirmationPageObject confirmPageAlmostThere =
         new AlmostTherePageObject(driver).enterEmailChangeLink(

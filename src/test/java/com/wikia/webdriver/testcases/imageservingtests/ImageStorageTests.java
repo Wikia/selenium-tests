@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -13,6 +11,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -44,7 +45,8 @@ public class ImageStorageTests extends NewTestTemplate {
 
     DeletePageObject delete = file.deletePage();
     delete.submitDeletion();
-    filesPage.getBannerNotifications().verifyNotificationMessage();
+    Assertion.assertTrue(filesPage.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
@@ -53,7 +55,8 @@ public class ImageStorageTests extends NewTestTemplate {
         delete.getBannerNotifications().clickUndeleteLinkInBannerNotification();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
-    restore.getBannerNotifications().verifyNotificationMessage();
+    Assertion.assertTrue(restore.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -84,12 +87,16 @@ public class ImageStorageTests extends NewTestTemplate {
 
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
-    file.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
     file.verifyHeader(imageNewName);
     file = new FilePage().open(imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
-    file.getBannerNotifications().verifyNotificationMessage();
+
+    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification message is not visible");
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();

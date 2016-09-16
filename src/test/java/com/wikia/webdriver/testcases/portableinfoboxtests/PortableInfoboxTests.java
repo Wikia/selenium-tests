@@ -9,14 +9,15 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AceEditor;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.category.CategoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+
 import org.testng.annotations.Test;
 
 /**

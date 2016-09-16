@@ -41,7 +41,7 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public void triggerOnScrollSlots() {
-    jsActions.scrollToBottom(driver);
+    jsActions.scrollToBottom();
   }
 
   public void verifySlot(String slotName) {

@@ -58,6 +58,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
+  private long tStart;
+
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
@@ -86,6 +88,22 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
     super();
     driver.manage().window().setSize(resolution);
+  }
+
+  public void timerStart() {
+    tStart = System.currentTimeMillis();
+  }
+
+  public String getNumberOfSecondsFromStart() {
+    long tEnd = System.currentTimeMillis();
+    long tDelta = tEnd - tStart;
+    double elapsedSeconds = tDelta / 1000.0;
+    return String.valueOf(elapsedSeconds);
+  }
+
+  public void logNumberOfSecondsFromStart(String message) {
+    PageObjectLogging.log("seconds after start",
+                          message + " [" + getNumberOfSecondsFromStart() + "] s", true);
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
@@ -373,6 +391,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject waitForPageLoaded() {
     jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
+    return this;
+  }
+
+  public AdsBaseObject waitForPageLoadedWithGpt() {
+    timerStart();
+    waitForPageLoaded();
+
+    String waitForGPTJS = "typeof window.googletag === 'object'";
+    jsActions.waitForJavaScriptTruthy(waitForGPTJS);
+    PageObjectLogging.log("GPT Loaded", "after " +
+                                        String.valueOf(getNumberOfSecondsFromStart()) + " s", true);
     return this;
   }
 

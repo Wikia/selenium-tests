@@ -45,7 +45,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
   public InteractiveMapsPageObject clickClose() {
     wait.forElementVisible(closeButton);
     closeButton.click();
-    return new InteractiveMapsPageObject(driver);
+    return new InteractiveMapsPageObject();
   }
 
   public void typeMapName(String mapName) {

@@ -2,16 +2,19 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
+public class TestAdsBtfBlocking extends NewTestTemplate {
 
   private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
@@ -28,7 +31,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
-    adsBaseObject.waitForPageLoaded();
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
@@ -57,6 +60,18 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.FLOATING_MEDREC);
   }
 
+  @Execute(mockAds = "true")
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "delayBtfPluto",
+      groups = "AdsBtfBlockingOasis"
+  )
+  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, int delaySec, boolean isWgVarOn)
+      throws InterruptedException {
+      adsAtfDelayBtfOasis(wikiName, article, delaySec, isWgVarOn);
+  }
+
+
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -67,7 +82,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
-    adsBaseObject.waitForPageLoaded();
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
@@ -87,6 +102,16 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
         AdsContent.FLOATING_MEDREC);
   }
 
+  @Execute(mockAds = "true")
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "disableBtfPluto",
+      groups = "AdsBtfBlockingOasis"
+  )
+  public void adsAtfDisableBtfOasisPluto(String wikiName, String article, boolean isWgVarOn) {
+    adsAtfDisableBtfOasis(wikiName, article, isWgVarOn);
+  }
+
   /**
    * https://wikia-inc.atlassian.net/browse/ADEN-2156 Test whether ads on small screens are
    * displayed when wgAdDriverDelayBelowTheFold is enabled
@@ -101,7 +126,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
-    adsBaseObject.waitForPageLoaded();
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT),
@@ -110,7 +135,40 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.PREFOOTER_RIGHT);
   }
 
-  @RelatedIssue(issueID = "ADEN-3761")
+  @Execute(mockAds = "true")
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "delayBtfPluto",
+      groups = "AdsBtfBlockingMercury"
+  )
+  public void adsAtfDelayBtfMercuryPluto(String wikiName, String article, int delaySec, boolean isWgVarOn)
+      throws InterruptedException {
+    adsAtfDelayBtfMercury(wikiName, article, delaySec, isWgVarOn);
+  }
+
+  @Execute(mockAds = "true")
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "disableBtfPluto",
+      groups = "AdsBtfBlockingMercury"
+  )
+  public void adsAtfDisableBtfMercuryPluto(String wikiName, String article, boolean isWgVarOn)
+      throws InterruptedException {
+    adsAtfDisableBtfMercury(wikiName, article, isWgVarOn);
+  }
+
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
@@ -122,7 +180,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
-    adsBaseObject.waitForPageLoaded();
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
                          AdsContent.MOBILE_TOP_LB);
@@ -141,7 +199,10 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.MOBILE_PREFOOTER);
   }
 
-  @RelatedIssue(issueID = "ADEN-3761")
+  @InBrowser(
+      emulator = Emulator.GOOGLE_NEXUS_5,
+      browser = Browser.CHROME
+  )
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -152,7 +213,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
-    adsBaseObject.waitForPageLoaded();
+    adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
                          AdsContent.MOBILE_TOP_LB);

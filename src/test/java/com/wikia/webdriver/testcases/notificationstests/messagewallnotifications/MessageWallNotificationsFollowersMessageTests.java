@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 import org.testng.annotations.Test;
 
+@Test(groups = {"NotificationsTests", "MessageWallNotificationsFollowersMessageTests"})
 public class MessageWallNotificationsFollowersMessageTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -19,11 +20,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   String title;
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersMessageTests_001",
-          "MessageWallNotificationsFollowersMessageTests",
-          "NotificationsTests"
-      }
+      groups = {"MessageWallNotificationsFollowersMessageTests_001"}
   )
   public void followerNotificationNewMessage_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -35,11 +32,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersMessageTests_002",
-          "MessageWallNotificationsFollowersMessageTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsFollowersMessageTests_002"},
       dependsOnMethods = "followerNotificationNewMessage_setup_1"
   )
   public void followerNotificationNewMessage_setup_2() {
@@ -56,11 +49,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsFollowersMessageTests_003",
-          "MessageWallNotificationsFollowersMessageTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsFollowersMessageTests_003"},
       dependsOnMethods = "followerNotificationNewMessage_setup_2"
   )
   public void userIsNotifiedWhenOtherUserWritesMessageOnFollowedMessageWal() {
