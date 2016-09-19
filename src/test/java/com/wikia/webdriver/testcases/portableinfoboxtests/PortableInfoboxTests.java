@@ -63,7 +63,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
-    Assertion.assertTrue(infobox.isInfoboxNavigationElementVisible());
+    Assertion.assertTrue(infobox.isInfoboxNavigationElementVisible(0));
     Assertion.assertTrue(infobox.getInternalNavigationLinksNumber() > 0);
     Assertion.assertTrue(infobox.getExternalNavigationLinksNumber() > 0);
   }
@@ -248,16 +248,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .submitArticle();
 
     Assertion.assertTrue(infobox.isInfoboxTitleVisible());
-  }
-
-  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
-  public void verifyNavigationElementPadding() {
-    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
-    PortableInfobox infobox = new PortableInfobox();
-    infobox.open(PageContent.INFOBOX_2);
-
-    Assertion.assertTrue(infobox.isNavigationPaddingLeftAndRightEqual(1));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})

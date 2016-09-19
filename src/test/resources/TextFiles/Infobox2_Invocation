@@ -5,10 +5,11 @@
 |row1=https://www.wikipedia.org <ref>Ref wikipedia</ref>
 |row2=Example? |row3=[[Category:VEINFOBOX]]
 |row4=
-<poem> 200 (Txt) 420 ([[Infobox1
-| internal infobox link]])) 400 ([[RedLink0840238084242
-| infobox internal red link]]) 300 https://www.wikipedia.org 600 ([[https://www.wikia.com]] -ref) 1200 ([[Infobox2
-| infobox self link]] and [[Infobox2]])
+<poem> 200 (Txt)
+420 [[Infobox1|internal link]]
+400 [[Redlink89328932|red link]]
+600 ([[https://www.wikia.com]] -ref)
+1200 [[Infobox2|self link]]
 </poem>
 
 |title2=http://www.wikia.com/Fandom
@@ -29,4 +30,3 @@
 |nav1 = [[Infobox1]] <b>nav</b>
 |nav2 = [[Infobox1]] <b>nav</b>
 |nav3 = [[Infobox1]] <b>nav</b> }}
-

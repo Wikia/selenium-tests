@@ -49,9 +49,6 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = ".newcategory")
   private WebElement categoryLinkInInfobox;
 
-  @FindBy(css = ".pi-navigation")
-  private WebElement navigation;
-
   @FindBy(css = ".pi-image")
   private List<WebElement> imagesWrappers;
 
@@ -67,8 +64,8 @@ public class PortableInfobox extends BasePageObject {
   @FindBy(css = ".poem a[href*='redlink']")
   private List<WebElement> externalLinksInsidePoemTag;
 
-  @FindBy(css = ".poem .external")
-  private List<WebElement> navigationElements;
+  @FindBy(css = ".pi-navigation")
+  private List<WebElement> navigation;
 
   @FindBy(css = ".pi-header")
   private List<WebElement> groupHeadersWrappers;
@@ -137,10 +134,6 @@ public class PortableInfobox extends BasePageObject {
 
   public String getInternalLinkRedirectTitle(int index) {
     return getLinkRedirectTitle(internalLinks.get(index));
-  }
-
-  public WebElement getNavigationElements(int index) {
-    return navigationElements.get(index);
   }
 
   public WebElement getGroupHeader(int index) {
@@ -279,8 +272,8 @@ public class PortableInfobox extends BasePageObject {
     return isElementVisible(lightbox);
   }
 
-  public boolean isInfoboxNavigationElementVisible() {
-    return isElementVisible(navigation);
+  public boolean isInfoboxNavigationElementVisible(int index) {
+    return isElementVisible(navigation.get(index));
   }
 
   public int getInternalNavigationLinksNumber() {
@@ -319,12 +312,6 @@ public class PortableInfobox extends BasePageObject {
 
   public boolean isReferenceElementVisible() {
     return isElementVisible(referenceElements);
-  }
-
-  public boolean isNavigationPaddingLeftAndRightEqual(int index) {
-    String left = getNavigationElements(index).getCssValue("padding-left");
-    String right = getNavigationElements(index).getCssValue("padding-right");
-    return left.equalsIgnoreCase(right);
   }
 
   public boolean isHeaderPaddingLeftAndRightEqual(int index) {

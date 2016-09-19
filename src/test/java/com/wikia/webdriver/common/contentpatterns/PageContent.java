@@ -79,7 +79,7 @@ public class PageContent {
       "." + File.separator + "src" + File.separator +
       "test" + File.separator + "resources" + File.separator +
       "TextFiles" + File.separator;
-  
+
   //message wall
   public static final String MESSAGE_WALL_TITLE_PREFIX = "QAMessageWallTitle";
   public static final String MESSAGE_WALL_MESSAGE_PREFIX = "QAMessageWallMessage";
