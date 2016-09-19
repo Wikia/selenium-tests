@@ -456,14 +456,6 @@ public class WikiBasePageObject extends BasePageObject {
     return newPassword;
   }
 
-  public String getFirstCssRevision() {
-    wait.forElementVisible(cssEditSummary);
-    String summary = cssEditSummary.getText();
-    PageObjectLogging.log("cssEditSummary",
-        "the following edit summary was get from Wikia.css: " + summary, true);
-    return summary;
-  }
-
   public void verifyRevisionMarkedAsMinor() {
     if (isElementOnPage(cssMinorEdit)) {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
@@ -595,9 +587,10 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void addVideoViaAjax(String videoURL) {
-    jsActions.execute(
+    String request = new String(
         "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
             + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
+    jsActions.execute(request);
   }
 
   public void verifyVEPublishComplete() {
@@ -609,7 +602,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public WikiHistoryPageObject openArticleHistoryPage() {
     getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.ACTION_HISTORY));
-    return new WikiHistoryPageObject(driver);
+    return new WikiHistoryPageObject();
   }
 
   private String getArticleName() {

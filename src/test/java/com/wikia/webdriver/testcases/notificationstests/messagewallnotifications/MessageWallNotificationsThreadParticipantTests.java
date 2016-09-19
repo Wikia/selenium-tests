@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
  * 3. User 5 is replying on user 6 message wall, 3. User 6 is notified about reply on user's 5
  * message wall
  */
+@Test(groups = {"NotificationsTests", "MessageWallNotificationsThreadParticipantTests"})
 public class MessageWallNotificationsThreadParticipantTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
@@ -27,11 +28,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   String title;
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_001",
-          "MessageWallNotificationsThreadParticipantTests",
-          "NotificationsTests"
-      }
+      groups = {"MessageWallNotificationsThreadParticipantTests_001"}
   )
   public void threadCreatorNotification_setup_1() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -47,11 +44,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_002",
-          "MessageWallNotificationsThreadParticipantTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsThreadParticipantTests_002"},
       dependsOnMethods = "threadCreatorNotification_setup_1"
   )
   public void threadCreatorNotification_setup_2() {
@@ -66,11 +59,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_003",
-          "MessageWallNotificationsThreadParticipantTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsThreadParticipantTests_003"},
       dependsOnMethods = "threadCreatorNotification_setup_2"
   )
   public void threadCreatorNotification_setup_3() {
@@ -86,11 +75,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
   }
 
   @Test(
-      groups = {
-          "MessageWallNotificationsThreadParticipantTests_004",
-          "MessageWallNotificationsThreadParticipantTests",
-          "NotificationsTests"
-      },
+      groups = {"MessageWallNotificationsThreadParticipantTests_004"},
       dependsOnMethods = "threadCreatorNotification_setup_3"
   )
   public void userIsNotifiedWhenOtherUserWritesResponseToHerResponseOnMessageWal() {

@@ -36,6 +36,9 @@ public class PageContent {
       "===sub-heading number 2===\n" +
       "text of the sub-heading number 2\n";
 
+  //templates
+  public static final String TEMPLATE_NAMESPACE = "Template";
+
   //blogs
   public static final String BLOG_POST_NAME_PREFIX = "blogPost";
   public static final String BLOG_CONTENT = "blogContent";
@@ -83,7 +86,7 @@ public class PageContent {
   public static final String DISCUSSIONS_LINK = "/d/";
 
   //forum
-  public static final String FORUM_TITLE_PREFIX = "QABoardTitle ";
+  public static final String FORUM_TITLE_PREFIX = "QABoardTitle%s";
   public static final String FORUM_TITLE_EDIT_PREFIX = "QABoardTitleEdit ";
   public static final String FORUM_TITLE_40_CHAR_PREFIX = "QABoardlongtitle 40 forty c";
   public static final String FORUM_TITLE_SLASH_PREFIX = "QABoard/Title";
@@ -95,7 +98,7 @@ public class PageContent {
   public static final String
       FORUM_DESCRIPTION_EDIT_PREFIX =
       "Duis quam ante, fringilla at cursus tristique edit ";
-  public static final String FORUM_MESSAGE = "QAforumMessage";
+  public static final String FORUM_MESSAGE = "QAforumMessage%s";
   public static final String FORUM_BOARD = "QABoardForMoveThreadTest";
   public static final String CLOSE_REASON = "QA reason";
 
