@@ -1,6 +1,8 @@
 package com.wikia.webdriver.common.core.helpers;
 
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -12,7 +14,7 @@ public class FileTextLoader {
     String NL = System.getProperty("line.separator");
     Scanner scanner = null;
     try {
-      scanner = new Scanner(new File("src/test/resources/TextFiles/" + filename), "UTF-8");
+      scanner = new Scanner(new File(PageContent.TEXT_FILE_RESOURCES_PATH + filename), "UTF-8");
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }

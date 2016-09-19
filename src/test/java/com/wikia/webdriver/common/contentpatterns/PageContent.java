@@ -6,6 +6,8 @@ import java.io.File;
 
 public class PageContent {
 
+  private static FileTextLoader textLoader = new FileTextLoader();
+
   //wiki
   public static final String LOREM_IPSUM_SHORT = "Lorem ipsum dolor";
   public static final String
@@ -40,9 +42,7 @@ public class PageContent {
 
   //templates
   public static final String TEMPLATE_NAMESPACE = "Template";
-  public static final String
-      INFOBOX2_TEMPLATE = "<infobox> <title source=\"title1\"> <default>{{PAGENAME}}</default> </title> <image source=\"image1\"> <caption source=\"caption1\"/> </image> <title source=\"title3\"/> <data source=\"row1\"> <label>URL</label> </data> <data source=\"row2\"> <label>Key value only</label> </data> <data source=\"row3\"> <label>Poem and links</label> </data> <data source=\"row4\"> <label>Internal link</label> </data> <title source=\"title2\"/> <data source=\"row5\"> <label>Question?</label> </data> <data source=\"row6\"> <label>Tabber</label> </data> <data source=\"row7\"> <label>Ordered list</label> </data> <data source=\"row8\"> <label>Unordered list</label> </data> <group layout=\"horizontal\" show=\"incomplete\"> <header>Incomplete horizontal</header> <data source=\"horizontal1\"> <label><b>Incomplete1</b></label></data> <data source=\"horizontal2\"> <label><i>Incomplete2</i></label></data> </group> <data source=\"z1\"><label>z1</label></data> <data source=\"z1\"><label>z1</label></data> <group layout=\"horizontal\"> <header>Complete horizontal</header> <data source=\"h1\"><label><b>ąę</b></label></data> <data source=\"h2\"><label><u>$$</u></label></data> <data source=\"h3\"><label><i>test</i></label></data> </group> <navigation>Navigation</navigation> <data source=\"nav1\"> <label><b>Nav1</b></label> </data> <data source=\"nav2\"> <label><u>Nav2</u></label> </data> <data source=\"nav3\"> <label><i>Nav3</i></label> </data> </infobox> [[Category:InfoboxCategory]] {{reflist|2}}\n"
-                          + "<noinclude> Example usage:<pre> {{Infobox4Automatio02 Clone |title1=Example |image1=Example |caption1=Example |row1=Example |row2=Example |row3=Example |row4=Example |title2=Example |row5=Example }} </pre> </noinclude>";
+
   //blogs
   public static final String BLOG_POST_NAME_PREFIX = "blogPost";
   public static final String BLOG_CONTENT = "blogContent";
@@ -75,6 +75,11 @@ public class PageContent {
       "test" + File.separator + "resources" + File.separator +
       "ImagesForUploadTests" + File.separator;
 
+  public static final String TEXT_FILE_RESOURCES_PATH =
+      "." + File.separator + "src" + File.separator +
+      "test" + File.separator + "resources" + File.separator +
+      "TextFiles" + File.separator;
+  
   //message wall
   public static final String MESSAGE_WALL_TITLE_PREFIX = "QAMessageWallTitle";
   public static final String MESSAGE_WALL_MESSAGE_PREFIX = "QAMessageWallMessage";
@@ -142,11 +147,6 @@ public class PageContent {
   //Portable Infoboxes content
   public static final String INFOBOX_1 = "Infobox1";
   public static final String INFOBOX_2 = "Infobox2";
-  public static final String PORTABLE_INFOBOX_02 = "Infobox4Automation01";
-  public static final String INFOBOX_EMPTY_TAGS_INVOCATION = "<infobox layout=\"stacked\"> <data source=\"a\"><default>Default</default></data> <data source=\"b\"></data> <title></title> <image></image> <header></header> </infobox>";
-  public static final String PI_TEMPLATE_WEBSITE_SIMPLE = "Template:Infobox_Website_Simple";
-  public static final String
-      INFOBOX2_INVOCATION = new FileTextLoader().loadFileTextContent("Infobox2_Invocation");
 
   //Customized toolbar
   public static final String FOLLOW = "follow";

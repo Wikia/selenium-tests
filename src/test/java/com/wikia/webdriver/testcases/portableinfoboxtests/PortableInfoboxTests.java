@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
+import com.wikia.webdriver.common.core.helpers.FileTextLoader;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
@@ -30,10 +31,18 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
+  private static final FileTextLoader loader = new FileTextLoader();
+  private static final String
+      INFOBOX_EMPTY_TAGS_INVOCATION = loader.loadFileTextContent("Infobox_Empty_Tags_Invocation");
+  private String
+      INFOBOX2_INVOCATION = loader.loadFileTextContent("Infobox2_Invocation");
+  private String
+      INFOBOX2_TEMPLATE = loader.loadFileTextContent("Infobox2_Template");
+
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyElementsVisibility() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -49,8 +58,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void infoboxInfoboxNavigationElements() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -61,8 +70,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyRedlinksRedirecting() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -71,8 +80,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyInternalLinksRedirecting() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -89,8 +98,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyExternalLinksRedirecting() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -110,8 +119,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticleContent().push(String.format("[[%s]]", PageContent.INFOBOX_2),
                               "Infobox2_WhatLinksHere");
     //provide an article linking to testing Infobox
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     ArticlePageObject article = new ArticlePageObject();
     article.open("Infobox2_WhatLinksHere");
     String articleName = article.getArticleName();
@@ -129,8 +138,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1200x720")
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyLightboxVisibilityAfterClickingImage() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -139,8 +148,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyVisibilityOfTabberAndItsImages() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
 
     infobox.open(PageContent.INFOBOX_2);
@@ -152,8 +161,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.STAFF)
   public void verifyInfoboxLayoutChange() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
 
@@ -176,8 +185,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyOrderedAndUnorderedListFontSizes() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -188,8 +197,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyInfoboxCategoryLinks() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -202,8 +211,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyHorizontalGroupFontSize() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -243,8 +252,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyNavigationElementPadding() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -253,8 +262,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyGroupHeadersPadding() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -263,8 +272,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyDivsWrappersAreNotIncluded() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
@@ -275,7 +284,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyEmptyTagsAreNotAppearing() {
-    new ArticleContent().push(PageContent.INFOBOX_EMPTY_TAGS_INVOCATION, PageContent.INFOBOX_1);
+    new ArticleContent().push(INFOBOX_EMPTY_TAGS_INVOCATION, PageContent.INFOBOX_1);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_1);
 
@@ -374,8 +383,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.USER)
   public void infoboxImageOnCategoryPage() {
-    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
+    new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
