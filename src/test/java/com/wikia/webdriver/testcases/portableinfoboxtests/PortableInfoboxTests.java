@@ -139,9 +139,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyVisibilityOfTabberAndItsImages() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
 
-    infobox.open(PageContent.PORTABLE_INFOBOX_02);
+    infobox.open(PageContent.INFOBOX_2);
     new ArticlePurger().purgeArticleAsAnon();
 
     Assertion.assertTrue(infobox.isTabberVisible().isTabberImageVisible());
@@ -174,10 +176,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyOrderedAndUnorderedListFontSizes() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_02);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertEquals(infobox.getItemValuesFontSize(1), infobox.getOrderedElementFontSize(1));
     Assertion.assertEquals(infobox.getItemValuesFontSize(1),
@@ -221,7 +223,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
 
     template
-        .openArticleByName(wikiURL, PageContent.PI_TEMPLATE_WEBSITE_SIMPLE)
+        .openArticleByName(wikiURL, String.format("%s:%s",
+                           PageContent.TEMPLATE_NAMESPACE, PageContent.INFOBOX_2))
         .editArticleInSrcUsingDropdown();
     String templateSyntax = editor.getContent();
 
@@ -235,7 +238,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
         .addContentInSourceMode(templateSyntax)
         .submitArticle();
 
-    Assertion.assertTrue(infobox.isImageVisible());
     Assertion.assertTrue(infobox.isInfoboxTitleVisible());
   }
 
@@ -273,10 +275,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void verifyEmptyTagsAreNotAppearing() {
+    new ArticleContent().push(PageContent.INFOBOX_EMPTY_TAGS_INVOCATION, PageContent.INFOBOX_1);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_EMPTY_TAGS);
-    new ArticlePurger().purgeArticleAsAnon();
+    infobox.open(PageContent.INFOBOX_1);
 
     Assertion.assertTrue(infobox.infoboxContainsEmptyTag());
   }
@@ -373,10 +374,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.USER)
   public void infoboxImageOnCategoryPage() {
+    new TemplateContent().push(PageContent.INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push(PageContent.INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-
-    infobox.open(PageContent.PORTABLE_INFOBOX_02);
-    new ArticlePurger().purgeArticleAsLoggedUser();
+    infobox.open(PageContent.INFOBOX_2);
 
     String imageName = infobox.getDataImageName();
 
@@ -384,7 +385,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticlePurger().purgeArticleAsLoggedUser();
 
     String categoryImageURL = categoryPage.getPageImageURL(
-        categoryPage.getArticleIndexInGalleryByName(PageContent.PORTABLE_INFOBOX_02)
+        categoryPage.getArticleIndexInGalleryByName(PageContent.INFOBOX_2)
     );
 
     Assertion.assertTrue(categoryImageURL.contains(imageName));
