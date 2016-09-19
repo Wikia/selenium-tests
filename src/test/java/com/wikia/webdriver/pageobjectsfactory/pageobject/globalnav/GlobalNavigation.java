@@ -113,6 +113,6 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isUserLoggedOut() {
-    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
+    return driver.findElements(By.cssSelector(".wds-global-navigation__account-menu")).size() > 0;
   }
 }
