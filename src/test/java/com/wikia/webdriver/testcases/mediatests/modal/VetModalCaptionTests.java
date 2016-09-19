@@ -1,11 +1,13 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
@@ -59,15 +61,18 @@ public class VetModalCaptionTests extends NewTestTemplate {
     Assertion.assertEquals(article.getVideoCaption(), caption);
   }
 
-  @Test(groups = {"VetModalCaption_002"}, dependsOnGroups = "VetModalCaption_001")
+  @Test(groups = {"VetModalCaption_002"})
   @Execute(asUser = User.USER)
   public void VetModalCaption_002_captionInModal() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    VisualEditModePageObject visualEditModePageObject =
-        base.navigateToArticleEditPage(wikiURL, articleTitleCaption);
+    String captionText = String.format("Caption-%d", DateTime.now().getMillis());
+    new ArticleContent().push(String
+        .format("[[File:WikiEvolution - Poznańska Wiki|thumb|right|335 px|%s]]", captionText));
+
     VetOptionsComponentObject vetOptions =
-        (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
-    vetOptions.verifyCaption(caption);
+        (VetOptionsComponentObject) new VisualEditModePageObject().open()
+            .modifyComponent(Components.VIDEO);
+
+    vetOptions.verifyCaption(captionText);
   }
 
   @Test(groups = {"VetModalCaption_005"})
