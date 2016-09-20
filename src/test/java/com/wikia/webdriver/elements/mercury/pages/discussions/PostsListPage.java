@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
 
-public class PostsListPage extends WikiBasePageObject {
+public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final Post post = new Post();

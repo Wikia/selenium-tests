@@ -84,7 +84,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = postListPage.getPost()
         .waitForPostToAppearWith(description)
-        .getTheNewestPost();
+        .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
@@ -136,7 +136,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = postListPage.getPost()
         .waitForPostToAppearWith(description)
-        .getTheNewestPost();
+        .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
@@ -248,7 +248,7 @@ public class CreatingPostTests extends NewTestTemplate {
     PostsListPage postListPage = new PostsListPage().open();
 
     PostEntity post = postListPage.getPost()
-        .getTheNewestPost();
+        .findNewestPost();
 
     final String postDetailsUrl = post.findLinkToPostDetails();
 

@@ -108,6 +108,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
     clickSubmitButton();
 
-    return new PostEntity.Data(categoryName, title, description);
+    return PostEntity.Data.builder()
+        .category(categoryName)
+        .title(title)
+        .description(description)
+        .build();
   }
 }

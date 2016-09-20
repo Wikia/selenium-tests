@@ -1,9 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import lombok.Builder;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import javax.annotation.Nullable;
 
 public class PostEntity {
 
@@ -21,6 +25,11 @@ public class PostEntity {
     return webElement.getAttribute("class").contains("is-reported");
   }
 
+  public String findId() {
+    final String idAttribute = webElement.findElement(By.className("discussion-more-options")).getAttribute("id");
+    return StringUtils.substringAfterLast(idAttribute, "-");
+  }
+
   public String findTimestamp() {
     return webElement.findElement(By.className("timestamp")).getText();
   }
@@ -30,11 +39,23 @@ public class PostEntity {
   }
 
   public String findDescription() {
-    return findDescriptionElement().getText();
+    return isOnPostDetailsPage()
+        ? createDescriptionOnPostDetailsPage()
+        : findDescriptionElement().getText();
   }
 
-  private WebElement findDescriptionElement() {
-    return webElement.findElement(By.className("post-details-link"));
+  private boolean isOnPostDetailsPage() {
+    return Iterables.all(webElement.findElements(By.tagName("a")), new Predicate<WebElement>() {
+      @Override
+      public boolean apply(@Nullable WebElement e) {
+        return !e.getAttribute("class").contains("post-details-link");
+      }
+    });
+  }
+
+  private String createDescriptionOnPostDetailsPage() {
+    final String content = webElement.findElement(By.className("discussion-content")).getText();
+    return StringUtils.remove(content, findTitle());
   }
 
   public String findCategory() {
@@ -42,11 +63,28 @@ public class PostEntity {
   }
 
   public String findLinkToPostDetails() {
-    return findDescriptionElement().getAttribute("href");
+    return isOnPostDetailsPage() ? StringUtils.EMPTY : findDescriptionElement().getAttribute("href");
+  }
+
+  private WebElement findDescriptionElement() {
+    return webElement.findElement(By.className("post-details-link"));
+  }
+
+  public String findAuthorId() {
+    clickMoreOptions();
+
+    String hrefAttribute = webElement.findElement(By.cssSelector("a[href^='/d/u']")).getAttribute("href");
+    final String authorId = StringUtils.substringAfterLast(hrefAttribute, "/");
+
+    clickMoreOptions();
+
+    return authorId;
   }
 
   public void click() {
-    findDescriptionElement().click();
+    if (!isOnPostDetailsPage()) {
+      findDescriptionElement().click();
+    }
   }
 
   public MoreOptionsPopOver clickMoreOptions() {
@@ -55,12 +93,22 @@ public class PostEntity {
   }
 
   public Data toData() {
-    return new Data(findCategory(),  findTitle(), findDescription());
+    return Data.builder()
+        .id(findId())
+        .authroId(findAuthorId())
+        .category(findCategory())
+        .title(findTitle())
+        .description(findDescription())
+        .build();
   }
 
-  @lombok.Data()
-  @AllArgsConstructor(access = AccessLevel.PACKAGE)
+  @lombok.Data
+  @Builder
   public static class Data {
+
+    private final String id;
+
+    private final String authroId;
 
     private final String category;
 

@@ -76,8 +76,18 @@ public class Post extends BasePageObject {
   }
 
   @CheckForNull
-  public PostEntity getTheNewestPost() {
+  public PostEntity findNewestPost() {
     return postList.isEmpty() ? null : new PostEntity(postList.get(0));
+  }
+
+  @CheckForNull
+  public PostEntity findPostById(final String id) {
+    return Iterables.tryFind(getPostEntities(), new Predicate<PostEntity>() {
+      @Override
+      public boolean apply(@Nullable PostEntity input) {
+        return input.findId().equals(id);
+      }
+    }).orNull();
   }
 
   public List<PostEntity> getReportedPosts() {
