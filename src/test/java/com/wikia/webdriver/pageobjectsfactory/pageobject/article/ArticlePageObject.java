@@ -35,6 +35,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -391,32 +392,64 @@ public class ArticlePageObject extends WikiBasePageObject {
     return articleName;
   }
 
-  public void verifyDropdownForAdmin() {
-    articleEditDropdown.click();
-    wait.forElementVisible(renameDropdown);
-    wait.forElementVisible(deleteDropdown);
-    wait.forElementVisible(historyDropdown);
-    wait.forElementVisible(protectDropdown);
-    wait.forElementVisible(veEditButton);
-    Assertion.assertEquals(editDropdownElements.size(), 5);
-    PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for admin", true);
+  public int getEditDropdownElementsSize() {
+    return editDropdownElements.size();
   }
 
-  public void verifyDropdownForUser() {
+  public void clickArticleEditDropdown() {
+    wait.forElementClickable(articleEditDropdown);
+
     articleEditDropdown.click();
-    wait.forElementVisible(historyDropdown);
-    wait.forElementVisible(renameDropdown);
-    wait.forElementVisible(veEditButton);
-    Assertion.assertEquals(editDropdownElements.size(), 3);
-    PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for user", true);
   }
 
-  public void verifyDropdownForAnon() {
-    articleEditDropdown.click();
-    wait.forElementVisible(historyDropdown);
-    wait.forElementVisible(veEditButton);
-    Assertion.assertEquals(editDropdownElements.size(), 2);
-    PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
+  public boolean isRenameButtonVisible(){
+    try {
+      wait.forElementVisible(renameDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Rename button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isDeleteButtonVisible(){
+    try {
+      wait.forElementVisible(deleteDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Delete button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isHistoryButtonVisible(){
+    try {
+      wait.forElementVisible(historyDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("History button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isProtectButtonVisible(){
+    try {
+      wait.forElementVisible(protectDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Protect button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isVEEditButtonVisible(){
+    try {
+      wait.forElementVisible(veEditButton);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("VE edit button is not visible", e);
+      return false;
+    }
   }
 
   public void verifyPhoto() {
