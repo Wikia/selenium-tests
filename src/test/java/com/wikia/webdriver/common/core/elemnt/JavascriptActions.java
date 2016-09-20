@@ -92,7 +92,7 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element) {
     try {
       js.executeScript(
-          "var x = $(arguments[0]); " + "window.scroll(0,parseInt(x.offset().top - 50));", element);
+          "var x = $(arguments[0]); " + "window.scrollIntoView(true);", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
