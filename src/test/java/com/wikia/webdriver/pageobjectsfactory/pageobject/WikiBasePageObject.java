@@ -139,7 +139,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement bannerNotification;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
-  @FindBy(css = ".avatar-container")
+  @FindBy(css = ".wds-global-navigation__user-menu")
   private WebElement globalNavigationAvatar;
   @FindBy(css = "#WikiaFooter")
   private WebElement footer;
