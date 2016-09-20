@@ -34,9 +34,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
   private static final FileTextLoader loader = new FileTextLoader();
   private static final String
       INFOBOX_EMPTY_TAGS_INVOCATION = loader.loadFileTextContent("Infobox_Empty_Tags_Invocation");
-  private String
+  private static final String
       INFOBOX2_INVOCATION = loader.loadFileTextContent("Infobox2_Invocation");
-  private String
+  private static final String
       INFOBOX2_TEMPLATE = loader.loadFileTextContent("Infobox2_Template");
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
