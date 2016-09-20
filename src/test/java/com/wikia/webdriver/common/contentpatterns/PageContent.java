@@ -1,13 +1,9 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-import com.wikia.webdriver.common.core.helpers.FileTextLoader;
-
 import java.io.File;
 
 public class PageContent {
-
-  private static FileTextLoader textLoader = new FileTextLoader();
-
+  
   //wiki
   public static final String LOREM_IPSUM_SHORT = "Lorem ipsum dolor";
   public static final String
