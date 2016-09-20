@@ -94,7 +94,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement body;
   @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement wikiFirstHeader;
-  @FindBy(css = "a#global-navigation-user-sign-out")
+  @FindBy(css = "#global-navigation-user-sign-out")
   protected WebElement navigationLogoutLink;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
