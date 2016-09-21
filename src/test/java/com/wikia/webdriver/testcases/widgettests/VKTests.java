@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
 
-@Test(groups = "VKWidget")
 @InBrowser(browser = Browser.CHROME)
 public class VKTests extends NewTestTemplate {
 

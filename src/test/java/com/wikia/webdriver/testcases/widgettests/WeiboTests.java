@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
 
-@Test(groups = "WeiboWidget")
 @InBrowser(browser = Browser.CHROME)
 public class WeiboTests extends NewTestTemplate {
 
