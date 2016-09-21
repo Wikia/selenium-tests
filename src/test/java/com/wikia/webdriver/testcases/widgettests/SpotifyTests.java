@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
 
+@Test(groups = "SpotifyWidget")
 @InBrowser(browser = Browser.CHROME)
 public class SpotifyTests extends NewTestTemplate {
 

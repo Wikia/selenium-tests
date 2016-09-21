@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 
+@Test(groups = "PolldaddyWidget")
 @InBrowser(browser = Browser.CHROME)
 public class PolldaddyTests extends NewTestTemplate {
 

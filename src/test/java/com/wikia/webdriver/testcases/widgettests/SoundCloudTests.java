@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
 
+@Test(groups = "SoundCloudWidget")
 @InBrowser(browser = Browser.CHROME)
 public class SoundCloudTests extends NewTestTemplate {
 

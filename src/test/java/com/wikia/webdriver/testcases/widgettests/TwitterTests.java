@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
 
+@Test(groups = "TwitterWidget")
 @InBrowser(browser = Browser.CHROME)
 public class TwitterTests extends NewTestTemplate {
 
