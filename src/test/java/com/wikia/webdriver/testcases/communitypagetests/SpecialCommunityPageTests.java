@@ -17,7 +17,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
   public void verifyAnonEditingForbiddenFlow() {
     SpecialCommunity page = new SpecialCommunity();
     // click the first link from any card
-    WebElement link = page.open().getLinkFromCards();
+    WebElement link = page.getLinkFromCards();
     String url = getEditUrl(link.getText(), "veaction=edit");
     link.click();
     // should be at register page
@@ -30,7 +30,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
   @Execute(onWikia = "mediawiki119", asUser = User.ANONYMOUS, mockAds = "true")
   public void verifyAnonEditingFlow() {
     SpecialCommunity page = new SpecialCommunity();
-    WebElement link = page.open().getLinkFromCards();
+    WebElement link = page.getLinkFromCards();
     String url = getEditUrl(link.getText(), "veaction=edit");
 
     link.click();
@@ -41,7 +41,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
   @Execute(onWikia = "muppet", asUser = User.USER, mockAds = "true")
   public void verifyUserEditingFlow() {
     SpecialCommunity page = new SpecialCommunity();
-    WebElement link = page.open().getLinkFromCards();
+    WebElement link = page.getLinkFromCards();
     String url = getEditUrl(link.getText(), "action=edit");
 
     link.click();
