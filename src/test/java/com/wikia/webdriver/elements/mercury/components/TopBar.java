@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.mercury.components;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TopBar extends BasePageObject {
@@ -17,7 +17,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".site-head")
   private WebElement navBar;
 
-  @FindBy(css = ".wikia-logo")
+  @FindBy(css = ".fandom-logo")
   private WebElement logo;
 
   @FindBy(css = ".site-head-icon-nav")
@@ -35,8 +35,11 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".nav-menu")
   private WebElement navMenu;
 
-  @FindBy(css = ".site-head-fandom-bar")
-  private WebElement fandomBar;
+  @FindBy(css = ".wds-global-navigation__search-input")
+  private WebElement searchInput;
+
+  @FindBy(css = ".wds-global-navigation__search-suggestions .wds-global-navigation__dropdown-link")
+  private List<WebElement> searchSuggestions;
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
 
@@ -53,6 +56,19 @@ public class TopBar extends BasePageObject {
     wait.forElementVisible(navMenu);
 
     return new Navigation(driver);
+  }
+
+  public String typeInDesktopSearchAndSelectSuggestion(String query, int suggestionIndex) {
+    wait.forElementVisible(searchInput);
+    searchInput.sendKeys(query);
+
+    WebElement selectedSearchSuggestion = searchSuggestions.get(suggestionIndex);
+    wait.forElementClickable(selectedSearchSuggestion);
+
+    String selectedSearchSuggestionText = selectedSearchSuggestion.getText();
+    selectedSearchSuggestion.click();
+
+    return selectedSearchSuggestionText;
   }
 
   public Search openSearch() {
@@ -134,15 +150,6 @@ public class TopBar extends BasePageObject {
   public boolean isCloseIconVisible() {
     try {
       return closeButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-      return false;
-    }
-  }
-
-  public boolean isFandomBarVisible() {
-    try {
-      return fandomBar.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

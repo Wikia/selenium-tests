@@ -73,27 +73,6 @@ public class TopBarTests extends NewTestTemplate {
     Assertion.assertTrue(topBar.isSearchIconVisible());
   }
 
-  @Test(groups = "mercury_topbar_fandomBarIsVisibleOnEnglishCommunity")
-  public void mercury_topbar_fandomBarIsVisibleOnEnglishCommunity() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
-
-    Assertion.assertTrue(topBar.isFandomBarVisible());
-  }
-
-  @Execute(onWikia = MercuryWikis.DE_WIKI)
-  @Test(groups = "mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity")
-  public void mercury_topbar_fandomBarIsNotVisibleOnNonEnglishCommunity() {
-    TopBar topBar =
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopBar();
-
-    Assertion.assertFalse(topBar.isFandomBarVisible());
-  }
-
   @Test(groups = "mercury_topbar_wikiaLogoRedirectsToFandomPage")
   public void mercury_topbar_wikiaLogoRedirectsToFandomPage() {
     TopBar topBar =
