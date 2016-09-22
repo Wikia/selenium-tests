@@ -60,7 +60,7 @@ public class PageContent {
 
   //image storage
   public static final String FILERENAME = "Image003.jpg";
-  public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
+  public static final String ARTICLESOURCEMODEFILE = "Image010.jpg";
 
   public static final String[] LIST_OF_FILES = {
       "Image001.jpg", "Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
