@@ -52,7 +52,7 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
 
   private String getEditUrl(String page, String query) {
     return urlBuilder.appendQueryStringToURL(
-        urlBuilder.getUrlForPage(String.format("/wiki/%s", page.replace(" ", "_"))),
+        urlBuilder.getUrlForPage(String.format("/wiki/%s", urlBuilder.normalizePageName(page))),
         query);
   }
 

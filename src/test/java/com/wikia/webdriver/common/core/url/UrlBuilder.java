@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.url;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
+
+import org.apache.commons.lang.StringUtils;
 
 public class UrlBuilder {
 
@@ -18,6 +18,10 @@ public class UrlBuilder {
 
   public UrlBuilder(String env) {
     this.env = env;
+  }
+
+  public String normalizePageName(String pageName) {
+    return pageName.replace(" ", "_");
   }
 
   public String getUrlForPageWithWWW(String pageName) {
