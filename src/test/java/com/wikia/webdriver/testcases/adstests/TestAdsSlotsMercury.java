@@ -20,6 +20,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   private static final String PORTABLE_INFOBOX = ".portable-infobox";
   private static final String ARTICLE_HEADER = ".wiki-page-header";
   private static final String ARTICLE_BODY = ".article-body";
+  private static final String ARTICLE_FOOTER = ".article-footer";
 
   @Test(
       groups = "AdsSlotsMercury",
@@ -34,6 +35,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
     ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, SRC);
+    ads.scrollToPosition(ARTICLE_FOOTER);
     ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
     ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, CREATIVE_IMAGE_URL);
     ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, CREATIVE_IMAGE_URL);
