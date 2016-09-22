@@ -101,7 +101,6 @@ public class JavascriptActions {
   }
 
   public void scrollToSpecificElement(WebElement element) {
-//    JavascriptExecutor je = (JavascriptExecutor) driver;
     try {
       js.executeScript("arguments[0].scrollIntoView(true);",element);
     } catch (WebDriverException e) {
