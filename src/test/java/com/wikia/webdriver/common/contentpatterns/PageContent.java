@@ -80,7 +80,7 @@ public class PageContent {
   //links
   public static final String EXTERNAL_LINK = "http://www.wikia.com/";
   public static final String INTERNAL_LINK = "Home";
-  public static final String REDIRECT_LINK = "Formatting";
+  public static final String REDIRECT_LINK = "Main_Page";
   public static final String TEXT_LINK = "qaLink";
   public static final String REDLINK = "QAasdfasjsad123213lj";
   public static final String DISCUSSIONS_LINK = "/d/";
