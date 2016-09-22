@@ -28,6 +28,10 @@ public class UrlBuilder {
     return getUrlForWiki() + pageName;
   }
 
+  public String getUrlForPage(String wikiName, String pageName) {
+    return getUrlForWiki(wikiName) + pageName;
+  }
+
   public String getUrlForPage(Page page) {
     if (page.getWikiPath() == null) {
       return getUrlForWiki(page.getWikiName(), false);

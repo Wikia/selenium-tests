@@ -21,10 +21,11 @@ public class SpecialCommunityPageTests extends NewTestTemplate {
     String url = getEditUrl(link.getText(), "veaction=edit");
     link.click();
     // should be at register page
+    Assertion.assertTrue(page.isStringInURL(urlBuilder.getUrlForPage("www", "/signin")));
     page.loginAs(User.USER);
 
     // we are back to link
-    Assertion.assertEquals(url, page.getCurrentUrl());
+    Assertion.assertEquals(page.getCurrentUrl(), url);
   }
 
   @Execute(onWikia = "mediawiki119", asUser = User.ANONYMOUS, mockAds = "true")
