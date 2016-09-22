@@ -19,6 +19,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
   private static final String SRC = "mobile";
   private static final String PORTABLE_INFOBOX = ".portable-infobox";
   private static final String ARTICLE_HEADER = ".wiki-page-header";
+  private static final String ARTICLE_BODY = ".article-body";
 
   @Test(
       groups = "AdsSlotsMercury",
@@ -142,11 +143,12 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
     ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
 
+    ads.scrollToPosition(ARTICLE_BODY);
     ads.mercuryNavigateToAnArticle(secondArticle);
     ads.waitTitleChangesTo(secondArticle);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
-    ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, SRC);
 
+    ads.scrollToPosition(ARTICLE_BODY);
     ads.mercuryNavigateToAnArticle(thirdArticle);
     ads.waitTitleChangesTo(thirdArticle);
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);

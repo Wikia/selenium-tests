@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -20,9 +21,9 @@ public class TestUap extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
-  private static final String MOBILE_IN_CONTENT_CONTAINER = ".mobile-in-content";
-  private static final String MOBILE_PREFOOTER_CONTAINER = ".mobile-prefooter";
-  private static final String MOBILE_BOTTOM_LEADERBOARD_CONTAINER = ".mobile-bottom-leaderboard";
+  private static final String MOBILE_HEADER = "#Header";
+  private static final String MOBILE_ARTICLE_FOOTER = ".article-footer";
+  private static final String MOBILE_GLOBAL_FOOTER = ".wds-global-footer__fandom-header";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -59,14 +60,17 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToSlot(MOBILE_IN_CONTENT_CONTAINER);
+    ads.scrollToPosition(MOBILE_HEADER);
+    Assertion.assertTrue(ads.isMobileInContentAdDisplayed(), "Mobile in content ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToSlot(MOBILE_PREFOOTER_CONTAINER);
-    ads.scrollToSlot(MOBILE_BOTTOM_LEADERBOARD_CONTAINER);
+    ads.scrollToPosition(MOBILE_ARTICLE_FOOTER);
+    Assertion.assertTrue(ads.isMobilePrefooterAdDisplayed(), "Mobile prefooter ad is not dispalyed");
+    ads.scrollToPosition(MOBILE_GLOBAL_FOOTER);
+    Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(), "Mobile bottom leaderboard ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
     verifySlotsUnblocked(ads, mobilePrefooter);

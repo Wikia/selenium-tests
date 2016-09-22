@@ -92,8 +92,22 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element) {
     try {
       js.executeScript(
-          "var x = $(arguments[0]); " + "window.scrollIntoView(true);", element);
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 50));", element);
     } catch (WebDriverException e) {
+      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
+        PageObjectLogging.log("JSError", "JQuery is not defined", false);
+      }
+    }
+  }
+
+  public void scrollToSpecificElement(WebElement element) {
+//    JavascriptExecutor je = (JavascriptExecutor) driver;
+    try {
+      System.out.println("jestem w scrollu");
+      js.executeScript("arguments[0].scrollIntoView(true);",element);
+      System.out.println("zeskrolowalem");
+    } catch (WebDriverException e) {
+      System.out.println(e);
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }

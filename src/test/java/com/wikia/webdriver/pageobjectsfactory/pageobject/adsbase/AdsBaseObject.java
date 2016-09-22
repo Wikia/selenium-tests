@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.TimeoutException;
 
 public class AdsBaseObject extends WikiBasePageObject {
 
@@ -69,6 +70,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement presentMedrec;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
+  @FindBy(css = "#WikiaFooter")
+  private WebElement wikiaFooter;
+  @FindBy(css = ".mobile-in-content")
+  private WebElement mobileInContent;
+  @FindBy(css = ".mobile-prefooter")
+  private WebElement mobilePrefooter;
+  @FindBy(css = ".mobile-bottom-leaderboard")
+  private WebElement mobileBottomLeaderboard;
 
   public AdsBaseObject(WebDriver driver) {
     super();
@@ -260,12 +269,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifySpotlights() {
-    // Removing comments section as it expands content downwards
-    hideElementIfPresent(ARTICLE_COMMENTS_CSS_SELECTOR);
-
     AdsComparison adsComparison = new AdsComparison();
-
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
       WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
@@ -770,9 +774,43 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToFooter();
   }
 
-  public void scrollToSlot(String slot) {
-    WebElement slotSelector = driver.findElement(By.cssSelector(slot));
-    jsActions.scrollToElement(slotSelector);
-    PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
+  private WebElement pageSelector(String webSelector) {
+    return driver.findElement(By.cssSelector(webSelector));
   }
+
+  public void scrollToPosition(String selector) {
+    jsActions.scrollToSpecificElement(pageSelector(selector));
+    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
+  }
+
+  public boolean isMobileInContentAdDisplayed() {
+    try{
+      wait.forElementVisible(mobileInContent);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Mobile in content ad is not displayed", ex, true);
+      return false;
+    }
+  }
+
+  public boolean isMobilePrefooterAdDisplayed() {
+    try{
+      wait.forElementVisible(mobilePrefooter);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Mobile prefooter ad is not displayed", ex, true);
+      return false;
+    }
+  }
+
+  public boolean isMobileBottomLeaderboardAdDisplayed() {
+    try{
+      wait.forElementVisible(mobileBottomLeaderboard);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
+      return false;
+    }
+  }
+
 }
