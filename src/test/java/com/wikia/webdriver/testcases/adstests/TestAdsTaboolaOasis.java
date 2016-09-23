@@ -11,7 +11,6 @@ public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
   public void adsTaboolaOasis() {
 
     String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Taboola");
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, AdsTaboolaObject.URL_PARAM_TRIGGER);
 
     AdsTaboolaObject adsTaboolaObject = new AdsTaboolaObject(driver);
     adsTaboolaObject.getUrl(testedPage);

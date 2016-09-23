@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 public class AdsTaboolaObject extends AdsBaseObject {
 
-  public static final String URL_PARAM_TRIGGER = "AbTest.NATIVE_ADS_TABOOLA=YES";
   public static final String BELOW_ARTICLE_CSS_SELECTOR = "#NATIVE_TABOOLA_ARTICLE";
   public static final String ABOVE_ARTICLE_CSS_SELECTOR = "#taboola-above-article-thumbnails";
 
