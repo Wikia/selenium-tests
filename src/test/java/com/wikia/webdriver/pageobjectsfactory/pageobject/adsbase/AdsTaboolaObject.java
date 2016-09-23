@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.Assertion;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class AdsTaboolaObject extends AdsBaseObject {
 
@@ -18,10 +17,5 @@ public class AdsTaboolaObject extends AdsBaseObject {
   public void verifyTaboolaContainer(String slotCssSelector) {
     Assertion.assertTrue(isElementOnPage(By.cssSelector(slotCssSelector)),
                          slotCssSelector + " taboola container is not present");
-  }
-
-  public void verifyTaboolaAdsPresent(String slotCssSelector) {
-    WebElement taboolaSlot = driver.findElement(By.cssSelector(slotCssSelector));
-    verifyAdVisibleInSlot(slotCssSelector, taboolaSlot);
   }
 }
