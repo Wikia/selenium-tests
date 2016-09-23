@@ -21,8 +21,8 @@ public class TestUap extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
-  private static final String MOBILE_HEADER = "#Header";
-  private static final String MOBILE_ARTICLE_FOOTER = ".article-footer";
+  private static final String MOBILE_IN_CONTENT = "div#ember681.ember-view.ad-slot-wrapper.mobile-in-content";
+  private static final String MOBILE_PREFUTER = "div#ember682.ember-view.ad-slot-wrapper.mobile-prefooter";
   private static final String MOBILE_BOTTOM_LEADERBOARD = ".ember-view.ad-slot-wrapper.mobile-bottom-leaderboard";
 
   @Test(
@@ -60,14 +60,14 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToPosition(MOBILE_HEADER);
+    ads.scrollToPosition(MOBILE_IN_CONTENT);
     Assertion.assertTrue(ads.isMobileInContentAdDisplayed(), "Mobile in content ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
     verifySlotsBlocked(ads, mobilePrefooter);
     verifySlotsBlocked(ads, mobileBottomLeaderboard);
 
-    ads.scrollToPosition(MOBILE_ARTICLE_FOOTER);
+    ads.scrollToPosition(MOBILE_PREFUTER);
     Assertion.assertTrue(ads.isMobilePrefooterAdDisplayed(), "Mobile prefooter ad is not dispalyed");
     ads.scrollToPosition(MOBILE_BOTTOM_LEADERBOARD);
     Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(), "Mobile bottom leaderboard ad is not dispalyed");

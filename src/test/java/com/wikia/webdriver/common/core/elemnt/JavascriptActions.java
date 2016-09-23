@@ -102,7 +102,8 @@ public class JavascriptActions {
 
   public void scrollToSpecificElement(WebElement element) {
     try {
-      js.executeScript("arguments[0].scrollIntoView(true);",element);
+      js.executeScript(
+          "arguments[0].scrollIntoView(true);",element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);

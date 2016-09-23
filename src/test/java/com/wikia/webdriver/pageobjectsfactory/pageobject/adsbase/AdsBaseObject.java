@@ -774,12 +774,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToFooter();
   }
 
-  private WebElement pageSelector(String webSelector) {
-    return driver.findElement(By.cssSelector(webSelector));
-  }
-
   public void scrollToPosition(String selector) {
-    jsActions.scrollToSpecificElement(pageSelector(selector));
+    jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
   }
 
