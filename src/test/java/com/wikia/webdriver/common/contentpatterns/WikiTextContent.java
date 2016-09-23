@@ -13,7 +13,7 @@ public class WikiTextContent {
   public static final String SUBHEADING4_OPENING = "====== ";
   public static final String SUBHEADING4_CLOSING = " ======";
 
-  public static final String PREFORMATTED = "";
+  public static final String PREFORMATTED = " ";
   public static final String BOLD = "'''";
   public static final String ITALIC = "''";
 
