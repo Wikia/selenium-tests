@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -293,6 +294,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002", "test_verify"})
+  @RelatedIssue(issueID = "WW-173" )
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();

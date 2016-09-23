@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor.text;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -104,7 +105,8 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
-  public void VisualEditorEditing_003_insertToExistingArticle() {
+  @RelatedIssue(issueID="WW-215)
+  public void VisualEditorEditing_003_c() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
