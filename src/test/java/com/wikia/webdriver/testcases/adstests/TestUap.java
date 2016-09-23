@@ -23,7 +23,7 @@ public class TestUap extends TemplateNoFirstLoad {
 
   private static final String MOBILE_HEADER = "#Header";
   private static final String MOBILE_ARTICLE_FOOTER = ".article-footer";
-  private static final String MOBILE_GLOBAL_FOOTER = ".wds-global-footer__fandom-header";
+  private static final String MOBILE_BOTTOM_LEADERBOARD = ".ember-view.ad-slot-wrapper.mobile-bottom-leaderboard";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -69,7 +69,7 @@ public class TestUap extends TemplateNoFirstLoad {
 
     ads.scrollToPosition(MOBILE_ARTICLE_FOOTER);
     Assertion.assertTrue(ads.isMobilePrefooterAdDisplayed(), "Mobile prefooter ad is not dispalyed");
-    ads.scrollToPosition(MOBILE_GLOBAL_FOOTER);
+    ads.scrollToPosition(MOBILE_BOTTOM_LEADERBOARD);
     Assertion.assertTrue(ads.isMobileBottomLeaderboardAdDisplayed(), "Mobile bottom leaderboard ad is not dispalyed");
     verifySlotsUnblocked(ads, mobileTopLeaderboard);
     verifySlotsUnblocked(ads, mobileInContent);
