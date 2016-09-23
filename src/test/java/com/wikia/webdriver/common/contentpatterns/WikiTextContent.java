@@ -13,6 +13,9 @@ public class WikiTextContent {
   public static final String SUBHEADING4_OPENING = "====== ";
   public static final String SUBHEADING4_CLOSING = " ======";
 
+  /**
+   * @see <a href="https://www.mediawiki.org/wiki/Help:Formatting">Wikitext formatting</a>
+   */
   public static final String PREFORMATTED = " ";
   public static final String BOLD = "'''";
   public static final String ITALIC = "''";
