@@ -20,6 +20,9 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".wikia-logo")
   private WebElement logo;
 
+  @FindBy(css = ".logo-fandom")
+  private WebElement logoFandom;
+
   @FindBy(css = ".site-head-icon-nav")
   private WebElement hamburgerIcon;
 
@@ -94,6 +97,7 @@ public class TopBar extends BasePageObject {
     PageObjectLogging.logInfo("Click Wikia logo");
     wait.forElementClickable(logo);
     logo.click();
+    wait.forElementVisible(logoFandom);
   }
 
 

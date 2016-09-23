@@ -82,6 +82,6 @@ public class TopBarTests extends NewTestTemplate {
 
     topBar.clickWikiaLogo();
 
-    Assertion.assertTrue(topBar.getCurrentUrl().contains("www.wikia.com/fandom"));
+    Assertion.assertTrue(topBar.getCurrentUrl().contains("fandom.wikia.com"));
   }
 }
