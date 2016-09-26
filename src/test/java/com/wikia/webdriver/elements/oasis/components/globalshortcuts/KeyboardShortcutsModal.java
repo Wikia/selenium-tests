@@ -15,7 +15,7 @@ public class KeyboardShortcutsModal extends WikiBasePageObject {
   private static final String INSIGHTS_PAGE = "/wiki/Special:Insights";
   @FindBy(css = ".global-shortcuts-help .close")
   private WebElement closeButton;
-  @FindBy(css = ".wds-global-navigation__search-input")
+  @FindBy(css = ".global-navigation .search-input")
   private WebElement globalNavigationSearchInput;
   private By keyboardShortcutsModalSelector = By.cssSelector(".global-shortcuts-help");
   private By actionExplorerModalSelector = By.cssSelector(".global-shortcuts-search");
