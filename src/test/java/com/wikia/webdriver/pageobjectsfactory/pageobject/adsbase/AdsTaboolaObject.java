@@ -21,8 +21,10 @@ public class AdsTaboolaObject extends AdsBaseObject {
     Assertion.assertTrue(isElementOnPage(By.cssSelector(slotCssSelector)),
                          slotCssSelector + " taboola container is not present");
 
-    PageObjectLogging.logInfo(String.format("Taboola containers: %s and %s are present",
-                                            ABOVE_ARTICLE_CSS_SELECTOR,
-                                            BELOW_ARTICLE_CSS_SELECTOR));
+    PageObjectLogging.log(
+        "verifyTaboolaContainer",
+        String.format("Taboola container present: %s", slotCssSelector),
+        true
+    );
   }
 }

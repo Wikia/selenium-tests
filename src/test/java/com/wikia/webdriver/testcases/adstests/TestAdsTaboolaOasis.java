@@ -27,7 +27,11 @@ public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
         AdsTaboolaObject.TABOOLA_LOADER_REQUEST
     );
 
-    PageObjectLogging.logInfo("Taboola loader.js has been requested");
+    PageObjectLogging.log(
+        "adsTaboolaOasis",
+        "Taboola loader.js has been requested",
+        true
+    );
   }
 
 }
