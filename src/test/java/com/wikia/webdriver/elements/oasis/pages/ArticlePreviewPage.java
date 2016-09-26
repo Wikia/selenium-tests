@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.oasis.pages;
 
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.elements.oasis.components.articlepreview.MobilePreviewModal;

@@ -126,7 +126,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
           driver
       );
 
-      jsActions.scrollToElement(link);
       link.click();
     } else {
       PageObjectLogging.logWarning(
