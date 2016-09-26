@@ -1,9 +1,9 @@
 package com.wikia.webdriver.common.core.url;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.configuration.EnvType;
+
+import org.apache.commons.lang.StringUtils;
 
 public class UrlBuilder {
 
@@ -20,12 +20,20 @@ public class UrlBuilder {
     this.env = env;
   }
 
+  public String normalizePageName(String pageName) {
+    return pageName.replace(" ", "_");
+  }
+
   public String getUrlForPageWithWWW(String pageName) {
     return getUrlForWiki(true) + pageName;
   }
 
   public String getUrlForPage(String pageName) {
     return getUrlForWiki() + pageName;
+  }
+
+  public String getUrlForPage(String wikiName, String pageName) {
+    return getUrlForWiki(wikiName) + pageName;
   }
 
   public String getUrlForPage(Page page) {
