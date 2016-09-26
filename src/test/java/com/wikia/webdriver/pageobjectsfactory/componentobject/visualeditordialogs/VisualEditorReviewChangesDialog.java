@@ -102,7 +102,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
   private boolean isDiffFound(List<String> targets, String source) {
     for (String target : targets) {
-      if (source.contains(target)) {
+      if (source.equals(target)) {
         return true;
       }
     }
