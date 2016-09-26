@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mercuryautomationtesting")
 public class SearchPageTests extends NewTestTemplate {
 
-  @Test()
+  @Test(groups = "searchPageTests_exactMatchShowsRelatedCommunityModule")
   public void searchPageTests_exactMatchShowsRelatedCommunityModule() {
     new SearchPagePageObject()
         .navigateToSearchPage()
