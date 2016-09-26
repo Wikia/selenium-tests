@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ArticlePurger;
-import com.wikia.webdriver.common.core.helpers.FileTextLoader;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
@@ -31,13 +31,13 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  private static final FileTextLoader loader = new FileTextLoader();
+  private static final ContentLoader loader = new ContentLoader();
   private static final String
-      INFOBOX_EMPTY_TAGS_INVOCATION = loader.loadFileTextContent("Infobox_Empty_Tags_Invocation");
+      INFOBOX_EMPTY_TAGS_INVOCATION = loader.loadWikiTextContent("Infobox_Empty_Tags_Invocation");
   private static final String
-      INFOBOX2_INVOCATION = loader.loadFileTextContent("Infobox2_Invocation");
+      INFOBOX2_INVOCATION = loader.loadWikiTextContent("Infobox2_Invocation");
   private static final String
-      INFOBOX2_TEMPLATE = loader.loadFileTextContent("Infobox2_Template");
+      INFOBOX2_TEMPLATE = loader.loadWikiTextContent("Infobox2_Template");
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyElementsVisibility() {

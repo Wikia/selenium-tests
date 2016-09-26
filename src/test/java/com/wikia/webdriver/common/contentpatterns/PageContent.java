@@ -71,11 +71,6 @@ public class PageContent {
       "test" + File.separator + "resources" + File.separator +
       "ImagesForUploadTests" + File.separator;
 
-  public static final String TEXT_FILE_RESOURCES_PATH =
-      "." + File.separator + "src" + File.separator +
-      "test" + File.separator + "resources" + File.separator +
-      "TextFiles" + File.separator;
-
   //message wall
   public static final String MESSAGE_WALL_TITLE_PREFIX = "QAMessageWallTitle";
   public static final String MESSAGE_WALL_MESSAGE_PREFIX = "QAMessageWallMessage";
