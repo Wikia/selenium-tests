@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.search.SearchPagePageObject;
+import com.wikia.webdriver.elements.oasis.pages.SearchPage;
 
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ public class SearchPageTests extends NewTestTemplate {
 
   @Test(groups = "searchPageTests_exactMatchShowsRelatedCommunityModule")
   public void searchPageTests_exactMatchShowsRelatedCommunityModule() {
-    new SearchPagePageObject()
+    new SearchPage()
         .navigateToSearchPage()
         .typeInSearchInputCommunityName()
         .clickSearchButton()
