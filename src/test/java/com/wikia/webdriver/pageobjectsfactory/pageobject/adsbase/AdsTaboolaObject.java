@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,5 +20,9 @@ public class AdsTaboolaObject extends AdsBaseObject {
   public void verifyTaboolaContainer(String slotCssSelector) {
     Assertion.assertTrue(isElementOnPage(By.cssSelector(slotCssSelector)),
                          slotCssSelector + " taboola container is not present");
+
+    PageObjectLogging.logInfo(String.format("Taboola containers: %s and %s are present",
+                                            ABOVE_ARTICLE_CSS_SELECTOR,
+                                            BELOW_ARTICLE_CSS_SELECTOR));
   }
 }

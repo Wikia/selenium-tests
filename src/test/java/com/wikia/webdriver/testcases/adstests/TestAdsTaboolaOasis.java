@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsTaboolaObject;
 
@@ -25,6 +26,8 @@ public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
         networkTrafficInterceptor,
         AdsTaboolaObject.TABOOLA_LOADER_REQUEST
     );
+
+    PageObjectLogging.logInfo("Taboola loader.js has been requested");
   }
 
 }
