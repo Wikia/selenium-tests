@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 public class TestAdsSpotlights extends TemplateNoFirstLoad {
 
+  private static final String WIKIA_FOOTER = "#WikiaFooter";
+
   @Test(
       dataProvider = "spotlights",
       dataProviderClass = AdsDataProvider.class,
@@ -16,6 +18,7 @@ public class TestAdsSpotlights extends TemplateNoFirstLoad {
   public void adsSpotlightsOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    wikiPage.scrollToPosition(WIKIA_FOOTER);
     wikiPage.verifySpotlights();
   }
 }
