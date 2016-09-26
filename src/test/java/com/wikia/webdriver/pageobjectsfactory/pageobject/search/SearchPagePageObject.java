@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.search;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.WebElement;
@@ -9,38 +9,45 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchPagePageObject extends WikiBasePageObject {
 
-  @FindBy(css = ".SearchInput input#search-v2-input")
-  private WebElement searchField;
+  @FindBy(css = "#search-v2-input")
+  private WebElement searchInput;
 
-  @FindBy(css = "button#search-v2-button")
+  @FindBy(css = "#search-v2-button")
   private WebElement searchButton;
 
-  @FindBy (css = ".exact-wiki-match__result")
+  @FindBy(css = ".exact-wiki-match__result")
   private WebElement relatedCommunityModule;
+
+  private static final String SPECIAL_SEARCH_PAGE = "/wiki/Special:Search";
+  private static final String EXISTING_COMMUNITY_NAME = "pokemon";
 
   public SearchPagePageObject() {
     super();
   }
 
-  public SearchPagePageObject open() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.SPECIAL_SEARCH_PAGE);
+  public SearchPagePageObject navigateToSearchPage() {
+    new Navigate().toPage(SPECIAL_SEARCH_PAGE);
 
     return this;
   }
 
-  public SearchPagePageObject typeInCommunityName() {
+  public SearchPagePageObject typeInSearchInputCommunityName() {
+    wait.forElementClickable(searchInput);
+    searchInput.sendKeys(EXISTING_COMMUNITY_NAME);
 
-    searchField.click();
-    searchField.sendKeys("pokemon");
     return this;
   }
 
-  public void clickSearchButton() {
+  public SearchPagePageObject clickSearchButton() {
+    wait.forElementClickable(searchButton);
     searchButton.click();
+
+    return this;
   }
 
-  public boolean isRelatedCommunityModulePresent() {
-    return relatedCommunityModule.isDisplayed();
+  public void relatedCommunityModuleIsVisible() {
+    PageObjectLogging.logInfo("Is related community module visible?");
+    wait.forElementVisible(relatedCommunityModule);
+    PageObjectLogging.logInfo("Related community module is visible");
   }
-
 }
