@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class SearchPageTests extends NewTestTemplate {
 
   @Test(groups = "searchPageTests_exactMatchShowsRelatedCommunityModule")
-  public void searchPageTests_exactMatchShowsRelatedCommunityModule() {
+  public void exactMatchShowsRelatedCommunityModule() {
     new SearchPage()
         .navigateToSearchPage()
         .typeInSearchInputCommunityName()
