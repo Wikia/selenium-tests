@@ -16,7 +16,7 @@ public class SearchPageTests extends NewTestTemplate {
   public void exactMatchShowsRelatedCommunityModule() {
     new SearchPage()
         .navigateToSearchPage()
-        .typeInSearchInputCommunityName()
+        .typeCommunityNameInSearchInput()
         .clickSearchButton()
         .relatedCommunityModuleIsVisible();
   }

@@ -31,7 +31,7 @@ public class SearchPage extends WikiBasePageObject {
     return this;
   }
 
-  public SearchPage typeInSearchInputCommunityName() {
+  public SearchPage typeCommunityNameInSearchInput() {
     wait.forElementClickable(searchInput);
     searchInput.sendKeys(EXISTING_COMMUNITY_NAME);
 
