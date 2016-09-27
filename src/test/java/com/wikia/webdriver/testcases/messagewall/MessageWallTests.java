@@ -1,13 +1,9 @@
 package com.wikia.webdriver.testcases.messagewall;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -18,6 +14,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallCloseRemoveThreadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockPage;
+
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class MessageWallTests extends NewTestTemplate {
 
@@ -77,7 +77,7 @@ public class MessageWallTests extends NewTestTemplate {
     MessageWallCloseRemoveThreadPageObject remove = wall.clickCloseThread();
     String reason = PageContent.CLOSE_REASON + wall.getTimeStamp();
     remove.closeRemoveThread(reason);
-    wall.verifyThreadClosed(credentials.userNameStaff, reason, title);
+    wall.verifyThreadClosed(credentials.userNameStaff, reason);
     wall.clickReopenThread();
     wall.verifyThreadReopened();
   }

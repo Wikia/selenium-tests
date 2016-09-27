@@ -48,6 +48,11 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".msg-title > a")
   private List<WebElement> threadList;
 
+  @FindBy(css = ".deleteorremove-bubble > .message")
+  private WebElement closeThreadInfobox;
+  @FindBy(css = ".comments li.SpeechBubble.message.message-main:nth-child(1)")
+  private WebElement firstMessageWrapper;
+
   private String newMessageMenu =
       ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
@@ -68,9 +73,7 @@ public class MessageWall extends WikiBasePageObject {
   By quoteButtonBy = By.cssSelector(".quote-button.secondary");
   By quoteMessageBy = By.cssSelector(".replies p");
   By saveChangesButtonBy = By.cssSelector(".save-edit");
-  By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  By firstMessageWrapperBy = By
-      .cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
   By replyButtonBy = By.cssSelector(".replyButton");
   By replyBodyBy = By.cssSelector(".replyBody");
 
@@ -237,10 +240,11 @@ public class MessageWall extends WikiBasePageObject {
     PageObjectLogging.log("verifyThreadRemoved", "verifyed thread removed", true);
   }
 
-  public void verifyThreadClosed(String userName, String reason, String message) {
+  public void verifyThreadClosed(String userName, String reason) {
     refreshPage();
-    Assertion.assertStringContains(
-        driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
+    wait.forElementVisible(firstMessageWrapperBy);
+    wait.forElementVisible(closeThreadInfobox);
+    Assertion.assertStringContains(closeThreadInfobox.getText(),
         userName + " closed this thread because:\n" + reason);
     PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
   }
