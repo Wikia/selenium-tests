@@ -48,8 +48,8 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".msg-title > a")
   private List<WebElement> threadList;
 
-  @FindBy(css = ".deleteorremove-bubble > .message")
-  private WebElement closeThreadInfobox;
+  @FindBy(css = ".deleteorremove-bubble > .message > .reason")
+  private WebElement closeThreadInfoboxReason;
   @FindBy(css = ".comments li.SpeechBubble.message.message-main:nth-child(1)")
   private WebElement firstMessageWrapper;
 
@@ -243,8 +243,8 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyThreadClosed(String userName, String reason) {
     refreshPage();
     wait.forElementVisible(firstMessageWrapperBy);
-    wait.forElementVisible(closeThreadInfobox);
-    Assertion.assertStringContains(closeThreadInfobox.getText(),
+    wait.forElementVisible(closeThreadInfoboxReason);
+    Assertion.assertStringContains(closeThreadInfoboxReason.getText(),
         userName + " closed this thread because:\n" + reason);
     PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
   }
