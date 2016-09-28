@@ -1,16 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class AdsTaboolaObject extends AdsBaseObject {
 
-  public static final String URL_PARAM_TRIGGER = "AbTest.NATIVE_ADS_TABOOLA=YES";
   public static final String BELOW_ARTICLE_CSS_SELECTOR = "#NATIVE_TABOOLA_ARTICLE";
-  public static final String ABOVE_ARTICLE_CSS_SELECTOR = "#taboola-above-article-thumbnails";
+  public static final String ABOVE_ARTICLE_CSS_SELECTOR = "#TOP_LEADERBOARD_AB";
+  public static final String TABOOLA_LOADER_REQUEST
+      = "http://cdn.taboola.com/libtrc/wikia-network/loader.js";
 
   public AdsTaboolaObject(WebDriver driver) {
     super(driver);
@@ -19,10 +20,11 @@ public class AdsTaboolaObject extends AdsBaseObject {
   public void verifyTaboolaContainer(String slotCssSelector) {
     Assertion.assertTrue(isElementOnPage(By.cssSelector(slotCssSelector)),
                          slotCssSelector + " taboola container is not present");
-  }
 
-  public void verifyTaboolaAdsPresent(String slotCssSelector) {
-    WebElement taboolaSlot = driver.findElement(By.cssSelector(slotCssSelector));
-    verifyAdVisibleInSlot(slotCssSelector, taboolaSlot);
+    PageObjectLogging.log(
+        "verifyTaboolaContainer",
+        String.format("Taboola container present: %s", slotCssSelector),
+        true
+    );
   }
 }
