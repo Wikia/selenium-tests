@@ -1,19 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HomePage extends WikiBasePageObject {
 
@@ -34,7 +34,7 @@ public class HomePage extends WikiBasePageObject {
     return open(Configuration.getWikiName());
   }
 
-  public HomePage open(String wikiName){
+  public HomePage open(String wikiName) {
     getUrl(urlBuilder.getUrlForWiki(wikiName));
     waitForPageLoad();
 
@@ -57,7 +57,7 @@ public class HomePage extends WikiBasePageObject {
       getUrl(url);
       String hubName = hubIndicator.getText().toLowerCase();
       //example: [ Video Games ] to Video_Games
-      hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_");
+      hubName = urlBuilder.normalizePageName(hubName.substring(2, hubName.length() - 2));
       switch (hubName) {
         case "video_games":
           video += 1;
