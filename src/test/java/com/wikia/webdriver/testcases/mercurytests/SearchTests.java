@@ -52,9 +52,7 @@ public class SearchTests extends NewTestTemplate {
     String clickedSuggestion =
         new DiscussionsPage()
             .getTopBar()
-            .openSearch()
-            .typeInSearch(SEARCH_PHRASE)
-            .clickSearchSuggestion(0);
+            .typeInDesktopSearchAndSelectSuggestion(SEARCH_PHRASE, 0);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
     Assertion.assertEquals(clickedSuggestion.toLowerCase(),
@@ -220,7 +218,7 @@ public class SearchTests extends NewTestTemplate {
             .openForQuery(MULTIPLE_RESULTS_SEARCH_PHRASE);
 
     int defaultCardNumber = resultsPage.getResultCardsNumber();
-    
+
     Assertion.assertTrue(resultsPage.isLoadMoreButtonVisible());
     Assertion.assertEquals(defaultCardNumber, SEARCH_RESULTS_DEFAULT_NUMBER);
 
