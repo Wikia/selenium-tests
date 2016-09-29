@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.video;
 
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+
 import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +21,7 @@ public class YoutubeVideo implements Video {
     this.url = url;
     this.title = capitaliseFirstWord(escapeSpecialCharactersAndReduceSpacesFromTitle(title));
 
-    this.fileName = transformTitleToFileName(this.title);
+    this.fileName = (new UrlBuilder()).normalizePageName(this.title);
     this.videoID = videoId;
   }
 
@@ -59,10 +61,6 @@ public class YoutubeVideo implements Video {
   @Override
   public String getFileName() {
     return this.fileName;
-  }
-
-  private String transformTitleToFileName(String title) {
-    return title.replace(" ", "_");
   }
 
   private String capitaliseFirstWord(String title) {
