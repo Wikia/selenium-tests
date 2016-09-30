@@ -17,7 +17,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".site-head")
   private WebElement navBar;
 
-  @FindBy(css = ".wikia-logo")
+  @FindBy(css = ".fandom-logo")
   private WebElement logo;
 
   @FindBy(css = ".logo-fandom")
