@@ -82,6 +82,15 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     wikiPage.verifyThereIsNoWikiaBar(browser);
   }
 
+  @Test(
+      groups = "AdsFloorAdhesionOasis"
+  )
+  public void testFloorAdhesionCloseButtonOasis() {
+    AdsFloorAdhesionObject wikiPage =
+        new AdsFloorAdhesionObject(driver, getArticleUrl(ARTICLE_TITLE, URL_TRIGGER));
+    wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
+  }
+
   private String getArticleUrl(String articleTitle, String urlTrigger) {
     String url = urlBuilder.getUrlForPath(WIKI_NAME, articleTitle);
     return urlBuilder.appendQueryStringToURL(url, urlTrigger);
