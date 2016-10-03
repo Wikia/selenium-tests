@@ -46,36 +46,42 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
   }
 
   @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "amazonSites",
       groups = {
           "MercuryAds",
           "MercuryAmazonAds"
-      })
-  public void AmazonAds_debugMode() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+      }
+  )
+  public void AmazonAdsOnMobile_debugMode(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
-        .clickAmazonArticleLink("AmazonFirstArticle")
+        .clickAmazonArticleLink("AmazonSecondPageView")
         .verifyAdsFromAmazonPresent()
         .verifyGPTParams();
   }
 
   @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "amazonSites",
       groups = {
           "MercuryAds",
           "MercuryAmazonAds"
-      })
-  public void AmazonAds_debugModeOnConsecutivePageViews() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+      }
+  )
+  public void AmazonAdsOnMobile_debugModeOnConsecutivePageViews(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
-        .clickAmazonArticleLink("AmazonFirstArticle")
+        .clickAmazonArticleLink("AmazonSecondPageView")
         .verifyAdsFromAmazonPresent();
 
     amazonAds.verifyGPTParams();
 
-    amazonAds.clickAmazonArticleLink("AmazonSecondArticle")
+    amazonAds.clickAmazonArticleLink("AmazonThirdPageView")
         .verifyNoAdsFromAmazonPresent();
   }
 }
