@@ -355,20 +355,27 @@ public class InfoboxBuilderPage extends SpecialPageObject {
    | |   | | ,' . `. | | | | |____` / | |__  | |  `| |
    |_|   | | \,' `.__| |_| |_______/   `.__| |_|   | |
    `.|                                       `.|
+
+   Dragging move is actually a 20 small moves, to make is a bit slower
    */
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
-    Point location = driver.findElement(By.cssSelector(".portable-infobox.pi-background")).getLocation();
+    WebElement infoboxBackground =
+        driver.findElement(By.cssSelector(".portable-infobox.pi-background"));
+
+    Point location = infoboxBackground.getLocation();
     Integer targetY = draggedElement.getLocation().getY() - location.getY() + 50;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
-        .moveToElement(draggedElement,0,targetY)
-        .pause(500)
-        .release(draggedElement)
-        .pause(500)
         .perform();
+
+    for(int i = 0; i<20; i++){
+      new Actions(driver).moveByOffset(0, -targetY/20).perform();
+    }
+
+    new Actions(driver).release().perform();
 
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");
