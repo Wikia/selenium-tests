@@ -48,10 +48,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "amazonSites",
-      groups = {
-          "MercuryAds",
-          "MercuryAmazonAds"
-      }
+      groups = "MercuryAmazonAds"
   )
   public void AmazonAdsOnMobile_debugMode(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
@@ -66,10 +63,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "amazonSites",
-      groups = {
-          "MercuryAds",
-          "MercuryAmazonAds"
-      }
+      groups = "MercuryAmazonAds"
   )
   public void AmazonAdsOnMobile_debugModeOnConsecutivePageViews(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
