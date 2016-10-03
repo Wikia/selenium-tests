@@ -1,16 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class AdsKruxObject extends AdsBaseObject {
 
