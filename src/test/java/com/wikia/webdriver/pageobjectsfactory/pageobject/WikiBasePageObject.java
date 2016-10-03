@@ -449,7 +449,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String receiveMailWithNewPassword(String email, String password) {
     String newPassword = MailFunctions.getPasswordFromEmailContent(
-        MailFunctions.getFirstEmailContent(email, password, "Reset your Wikia password"));
+        MailFunctions.getFirstEmailContent(email, password, "Reset your Fandom password"));
     PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
         true);
 
