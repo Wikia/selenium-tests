@@ -145,7 +145,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     int
         from =
         textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
-    int to = from + text.length() + 1;
+    int to = from + text.length();
     selectText(from, to);
   }
 
