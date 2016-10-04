@@ -65,7 +65,8 @@ public abstract class CoreTestTemplate {
     }
 
     if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
-      GeoEdgeBrowserMobProxy geoEdgeBrowserMobProxy = method.getAnnotation(GeoEdgeBrowserMobProxy.class);
+      GeoEdgeBrowserMobProxy geoEdgeBrowserMobProxy =
+          method.getAnnotation(GeoEdgeBrowserMobProxy.class);
       Configuration.setGeoEdgeCountry(geoEdgeBrowserMobProxy.country());
     }
 
@@ -125,6 +126,8 @@ public abstract class CoreTestTemplate {
       setTestProperty("dumpNetworkTraffic",
           String.valueOf(method.getAnnotation(NetworkTrafficDump.class).networkTrafficDump()));
       setTestProperty("useProxy", "true");
+      setTestProperty("useMITM",
+          String.valueOf(method.getAnnotation(NetworkTrafficDump.class).useMITM()));
     }
   }
 
