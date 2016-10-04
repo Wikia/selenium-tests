@@ -87,7 +87,7 @@ public abstract class BrowserAbstract {
     if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
       String countryCode = Configuration.getCountryCode();
-      server.setTrustAllServers(false);
+      server.setTrustAllServers(true);
       server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
       server.setRequestTimeout(90, TimeUnit.SECONDS);
       server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
