@@ -60,7 +60,6 @@ public class PageContent {
 
   //image storage
   public static final String FILERENAME = "Image003.jpg";
-  public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
   public static final String[] LIST_OF_FILES = {
       "Image001.jpg", "Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
@@ -80,7 +79,7 @@ public class PageContent {
   //links
   public static final String EXTERNAL_LINK = "http://www.wikia.com/";
   public static final String INTERNAL_LINK = "Home";
-  public static final String REDIRECT_LINK = "Formatting";
+  public static final String REDIRECT_LINK = "Main_Page";
   public static final String TEXT_LINK = "qaLink";
   public static final String REDLINK = "QAasdfasjsad123213lj";
   public static final String DISCUSSIONS_LINK = "/d/";
