@@ -45,7 +45,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
   }
 
   private String getEmailChangeConfirmationLink(String email, String password) {
-    String mailSubject = "Confirm your email address change on Wikia";
+    String mailSubject = "Confirm your email address change on Fandom";
     String www =
         MailFunctions.getActivationLinkFromEmailContent(MailFunctions.getFirstEmailContent(email,
             password, mailSubject));
