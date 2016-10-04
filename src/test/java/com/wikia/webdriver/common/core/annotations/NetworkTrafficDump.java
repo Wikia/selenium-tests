@@ -10,5 +10,9 @@ import java.lang.annotation.Target;
 public @interface NetworkTrafficDump {
   boolean networkTrafficDump() default true;
 
+  /**
+   * true if you want to capture HTTPS traffic by Main in The Middle
+   * @return
+   */
   boolean useMITM() default false;
 }

@@ -71,7 +71,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixels",
-      dataProviderClass = AdsDataProvider.class,
+      dataProviderClass =AdsDataProvider .class,
       dataProvider = "adsTrackingPixelsNotSent"
   )
   public void adsTrackingPixelNotSent(String wiki, String[] pixelUrls) {
