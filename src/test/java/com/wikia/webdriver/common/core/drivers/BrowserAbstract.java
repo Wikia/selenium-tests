@@ -87,7 +87,7 @@ public abstract class BrowserAbstract {
       server = new NetworkTrafficInterceptor();
       String countryCode = Configuration.getCountryCode();
       server.setTrustAllServers(true);
-      server.setMitmDisabled(true);
+      server.setMitmDisabled(false);
       server.setRequestTimeout(90, TimeUnit.SECONDS);
       server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
       if (StringUtils.isNotBlank(countryCode)) {
