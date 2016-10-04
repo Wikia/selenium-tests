@@ -71,7 +71,6 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       adsAtfDelayBtfOasis(wikiName, article, delaySec, isWgVarOn);
   }
 
-
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
@@ -133,6 +132,35 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
                          AdsContent.PREFOOTER_LEFT);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT),
                          AdsContent.PREFOOTER_RIGHT);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "disableBtfExceptHighlyViewableSlots",
+      groups = "AdsBtfBlockingOasis"
+  )
+  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article, boolean isWgVarOn) {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
+    adsBaseObject.waitForPageLoadedWithGpt();
+
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
+
+    Assertion.assertNotEquals(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn,
+        AdsContent.PREFOOTER_LEFT);
+    Assertion.assertNotEquals(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn,
+        AdsContent.PREFOOTER_RIGHT);
+    Assertion.assertNotEquals(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn,
+        AdsContent.LEFT_SKYSCRAPPER_2);
   }
 
   @Execute(mockAds = "true")
