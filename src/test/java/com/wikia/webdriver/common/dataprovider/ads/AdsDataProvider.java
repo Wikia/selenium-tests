@@ -772,15 +772,15 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] delayBtfPluto() {
-      return new Object[][]{
-            {"adtest-pluto", "SyntheticTests/Delay_BTF", 20, false}
-      };
-    }
+    return new Object[][]{
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false}
+    };
+  }
 
   @DataProvider
   public static Object[][] disableBtfPluto() {
     return new Object[][]{
-            {"adtest-pluto", "SyntheticTests/Disable_BTF", false}
+        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
     };
   }
 
