@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TopNoteModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -13,6 +14,9 @@ import java.util.regex.Pattern;
 
 
 public class PostDetailsPage extends WikiBasePageObject implements PageWithPosts {
+
+  @Getter(lazy = true)
+  private final TopNoteModalDialog topNoteModalDialog = new TopNoteModalDialog();
 
   @Getter(lazy = true)
   private final Post post = new Post();

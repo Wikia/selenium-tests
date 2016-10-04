@@ -18,11 +18,19 @@ public class PostEntity {
   }
 
   public boolean hasTopNote() {
-    return null != webElement.findElement(By.className("top-note"));
+    return null != findTopNoteElement();
+  }
+
+  private WebElement findTopNoteElement() {
+    return webElement.findElement(By.className("top-note"));
   }
 
   public boolean isReported() {
     return webElement.getAttribute("class").contains("is-reported");
+  }
+
+  public TopNote findTopNote() {
+    return new TopNote(findTopNoteElement());
   }
 
   public String findId() {

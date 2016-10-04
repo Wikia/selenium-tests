@@ -8,7 +8,10 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
@@ -45,8 +48,6 @@ public class ReportingPostTests extends NewTestTemplate {
   private final String USER_ID_THAT_ADDED_POST_ON_MOBILE_DURING_TEST = "mobile-user-id";
 
   private final Map<String, PostEntity.Data> POST_DATA = new ConcurrentHashMap<>(8);
-
-//  private final Map<String, String> IDS = new ConcurrentHashMap<>(8);
 
   // Anonymous user on mobile
 
@@ -317,6 +318,44 @@ public class ReportingPostTests extends NewTestTemplate {
     PageWithPosts page = new UserPostsPage().open(postData.getAuthroId());
 
     assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postData.getId());
+  }
+
+  // Discussions moderator on mobile
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting",
+      dependsOnMethods = {
+          "userOnMobileCanReportPostOnPostDetailsPage",
+          "anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage",
+          "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void moderatorOnMobileCannotSeeReportedIndicator() {
+    final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+
+    PostDetailsPage page = new PostDetailsPage().open(postId);
+
+    final PostEntity postEntity = page.getPost().findPostById(postId);
+
+    Assertion.assertTrue(postEntity.isReported(),
+        "Discussion moderator should see reported indicator on posts which were reported by other users.");
+
+    postEntity.findTopNote()
+        .clickValidate();
+
+    page.getTopNoteModalDialog()
+        .clickCancel();
+
+    Assertion.assertTrue(postEntity.isReported(),
+        "Discussion moderator should see reported indicator on posts which were reported by other users.");
+
+    postEntity.findTopNote()
+        .clickValidate();
+
+    page.getTopNoteModalDialog()
+        .clickApprove();
+
+    Assertion.assertFalse(postEntity.isReported(),
+        "Discussion moderator should not see reported indicator on approved posts.");
   }
 
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
