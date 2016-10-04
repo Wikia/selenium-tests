@@ -12,7 +12,6 @@ public class AdsKruxObject extends AdsBaseObject {
 
   private static final String KRUX_CDN = "http://cdn.krxd.net/";
   private static final String KRUX_CONTROL_TAG_URL_PREFIX = KRUX_CDN + "controltag?confid=";
-  private static final String PUB = "44c1a380-770f-11df-93f2-0800200c9a66";
 
   @FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
   private WebElement kruxControlTag;
