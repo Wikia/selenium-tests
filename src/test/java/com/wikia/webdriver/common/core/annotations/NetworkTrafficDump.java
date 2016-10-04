@@ -9,4 +9,6 @@ import java.lang.annotation.Target;
 @Target(value = {ElementType.METHOD, ElementType.TYPE, ElementType.CONSTRUCTOR})
 public @interface NetworkTrafficDump {
   boolean networkTrafficDump() default true;
+
+  boolean useMITM() default false;
 }

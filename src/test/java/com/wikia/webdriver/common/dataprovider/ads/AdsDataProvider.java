@@ -917,7 +917,7 @@ public class AdsDataProvider {
             }
         },
         {
-            "divergent",
+            "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
