@@ -89,7 +89,7 @@ public abstract class BrowserAbstract {
       server.setTrustAllServers(true);
       server.setMitmDisabled(false);
       server.setRequestTimeout(90, TimeUnit.SECONDS);
-      server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+      server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES, CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
       if (StringUtils.isNotBlank(countryCode)) {
         server.setProxyServer(GeoEdgeProxy.getProxyAddress(countryCode));
       }
