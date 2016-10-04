@@ -51,7 +51,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   }
 
   @UseUnstablePageLoadStrategy
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixels",
@@ -71,7 +71,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixels",
-      dataProviderClass = AdsDataProvider.class,
+      dataProviderClass =AdsDataProvider .class,
       dataProvider = "adsTrackingPixelsNotSent"
   )
   public void adsTrackingPixelNotSent(String wiki, String[] pixelUrls) {
@@ -83,7 +83,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
     assertTrackingPixelsNotSent(pixelUrls);
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Execute(mockAds = "true")
   @Test(
       groups = "AdsTrackingPixelsCuratedMainPage",
