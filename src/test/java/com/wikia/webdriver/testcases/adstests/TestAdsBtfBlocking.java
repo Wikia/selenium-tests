@@ -16,6 +16,9 @@ import org.testng.annotations.Test;
 
 public class TestAdsBtfBlocking extends NewTestTemplate {
 
+  private static String ENABLE_INCONTENT_LEADERBOARD =
+      "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]";
+
   private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
@@ -66,9 +69,10 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtfPluto",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, int delaySec, boolean isWgVarOn)
+  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, int delaySec,
+                                       boolean isWgVarOn)
       throws InterruptedException {
-      adsAtfDelayBtfOasis(wikiName, article, delaySec, isWgVarOn);
+    adsAtfDelayBtfOasis(wikiName, article, delaySec, isWgVarOn);
   }
 
   @Test(
@@ -139,10 +143,12 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "disableBtfExceptHighlyViewableSlots",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article, boolean isWgVarOn) {
+  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article,
+                                                             boolean isWgVarOn) {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage, ENABLE_INCONTENT_LEADERBOARD);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
@@ -150,6 +156,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INCONTENT_LEADERBOARD));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
 
     Assertion.assertNotEquals(
@@ -173,7 +180,8 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtfPluto",
       groups = "AdsBtfBlockingMercury"
   )
-  public void adsAtfDelayBtfMercuryPluto(String wikiName, String article, int delaySec, boolean isWgVarOn)
+  public void adsAtfDelayBtfMercuryPluto(String wikiName, String article, int delaySec,
+                                         boolean isWgVarOn)
       throws InterruptedException {
     adsAtfDelayBtfMercury(wikiName, article, delaySec, isWgVarOn);
   }
@@ -202,7 +210,8 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtf",
       groups = "AdsBtfBlockingMercury"
   )
-  public void adsAtfDelayBtfMercury(String wikiName, String article, int delaySec, boolean isWgVarOn)
+  public void adsAtfDelayBtfMercury(String wikiName, String article, int delaySec,
+                                    boolean isWgVarOn)
       throws InterruptedException {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
