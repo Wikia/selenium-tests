@@ -3,11 +3,13 @@ package com.wikia.webdriver.testcases.userprofile;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
@@ -29,6 +31,29 @@ public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
+  @Test(groups = "UserAvatar_clickOnAvatarOpensUserMenu")
+  @Execute(asUser = User.STAFF)
+  public void clickOnAvatarOpensUserMenu() {
+    new SpecialVersionPage().open();
+
+    GlobalNavigation userAvatar = new GlobalNavigation();
+    userAvatar.clickUserAvatar();
+
+    Assertion.assertTrue(userAvatar.isUserMenuOpened());
+  }
+
+  @Test(groups = "UserAvatar_userCanEnterHisProfileFromUserMenu")
+  @Execute(asUser = User.STAFF)
+  public void userCanEnterHisProfileFromUserMenu(){
+    new SpecialVersionPage().open();
+
+    GlobalNavigation userAvatar = new GlobalNavigation();
+    userAvatar.clickUserAvatar().clickViewProfile();
+
+    UserProfilePageObject profile = new UserProfilePageObject(driver);
+    profile.verifyProfilePage(credentials.userNameStaff);
+  }
+
   @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
   public void staffUserCanUploadAvatar() {
@@ -47,17 +72,10 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
-  @Test(groups = "UserAvatar_clickOnAvatarRedirectsStaffUserToUserPage")
-  @Execute(asUser = User.STAFF)
-  public void clickOnAvatarRedirectsStaffUserToUserPage() {
-    new SpecialVersionPage().open();
-
-    UserProfilePageObject profile = new UserProfilePageObject(driver).clickOnAvatar();
-    profile.verifyProfilePage(credentials.userNameStaff);
-  }
 
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "MAIN-8080")
   public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);

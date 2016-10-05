@@ -28,7 +28,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxSegments"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
@@ -77,7 +76,7 @@
             <class name="com.wikia.webdriver.testcases.blogtests.BlogTests"/>
             <class name="com.wikia.webdriver.testcases.categoriestests.CategoriesArticleTests"/>
             <class name="com.wikia.webdriver.testcases.categoriestests.CategoriesTestsEditMode"/>
-            <class name="com.wikia.webdriver.testcases.communitypagetests.CommunityPageSalesPitchDialogTests"/>
+            <class name="com.wikia.webdriver.testcases.communitypagetests.SpecialCommunityPageTests"/>
             <class name="com.wikia.webdriver.testcases.chattests.ChatTests"/>
             <class name="com.wikia.webdriver.testcases.chattests.ChatTestsStaff"/>
             <class name="com.wikia.webdriver.testcases.commentstests.ArticleCommentsTests"/>
@@ -191,6 +190,7 @@
             <class name="com.wikia.webdriver.testcases.oasismainpage.CuratedContentModal"/>
             <class name="com.wikia.webdriver.testcases.portableinfoboxtests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.CrossWikiSearchTests"/>
+            <class name="com.wikia.webdriver.testcases.searchtests.SearchPageTests"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.BasicActions"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.ExactMatch"/>
             <class name="com.wikia.webdriver.testcases.searchtests.intrawiki.GoSearchFeature"/>

@@ -27,14 +27,14 @@ public class AdsAmazonObject extends AdsBaseObject {
 
   private static final ImmutableMap<String, String> amazonLinkCssSelectors =
       new ImmutableMap.Builder<String, String>()
-          .put("AmazonFirstArticle", "a[href='/wiki/Amazon']")
-          .put("AmazonSecondArticle", "a[href='/wiki/SyntheticTests/AmazonStep2']")
+          .put("AmazonSecondPageView", "a[href='/wiki/SyntheticTests/Amazon/2']")
+          .put("AmazonThirdPageView", "a[href='/wiki/SyntheticTests/Amazon/3']")
           .build();
 
   private static final ImmutableMap<String, String> amazonLinkTitles =
       new ImmutableMap.Builder<String, String>()
-          .put("AmazonFirstArticle", "Amazon")
-          .put("AmazonSecondArticle", "SyntheticTests/AmazonStep2")
+          .put("AmazonSecondPageView", "SyntheticTests/Amazon/2")
+          .put("AmazonThirdPageView", "SyntheticTests/Amazon/3")
           .build();
 
   @FindBy(css = AMAZON_SLOTS_CSS_SELECTOR)

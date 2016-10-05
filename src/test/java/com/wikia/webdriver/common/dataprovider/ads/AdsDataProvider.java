@@ -709,54 +709,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxSegments() {
-    return new Object[][]{
-        {
-            "KtCsDKll",
-            "pqdapsy7l",
-            new Page("vim", "Vim_Tips_Wiki"),
-            // Standard segment for visiting adtest before
-            ImmutableMap.<String, Boolean>builder()
-                .put("pqdapsy7l", true)
-                .build(),
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            // Both standard and real-time segment for adtest
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .put("pqdapsy7l", true)
-                .build(),
-        },
-        {
-            null,
-            null,
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .build(),
-            new Page("glee", "Glee_TV_Show_Wiki"),
-            // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", false)
-                .build(),
-        },
-        {
-            null,
-            null,
-            new Page("vim", "Vim_Tips_Wiki"),
-            // No pqdapsy7l (standard segment for adtest)
-            ImmutableMap.<String, Boolean>builder()
-                .put("pqdapsy7l", false)
-                .build(),
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            // Real time segment for adtest
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .build(),
-        },
-    };
-  }
-
-  @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
         {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true}
@@ -918,7 +870,7 @@ public class AdsDataProvider {
             }
         },
         {
-            "divergent",
+            "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
