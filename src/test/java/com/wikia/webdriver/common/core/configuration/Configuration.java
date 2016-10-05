@@ -146,6 +146,10 @@ public class Configuration {
     return getProp("emulator");
   }
 
+  public static String useMITM() {
+    return getProp("useMITM");
+  }
+
   public static String getPageLoadStrategy() {
     return getProp("unstablePageLoadStrategy");
   }

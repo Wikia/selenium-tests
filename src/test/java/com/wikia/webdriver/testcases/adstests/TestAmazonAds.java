@@ -14,7 +14,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
       dataProvider = "amazonSites",
       groups = {"AmazonAds", "AmazonAds", "Ads"}
   )
-  public void AmazonAds(String wikiName, String path) {
+  public void adsAmazonOasis(String wikiName, String path) {
     testAmazonAd(wikiName, path, false);
   }
 
@@ -24,7 +24,7 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
       dataProvider = "amazonSites",
       groups = {"AmazonAds", "AmazonAds_debugMode", "Ads"}
   )
-  public void AmazonAds_debugMode(String wikiName, String path) {
+  public void adsAmazonDebugModeOasis(String wikiName, String path) {
     testAmazonAd(wikiName, path, true);
   }
 
@@ -46,36 +46,36 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {
-          "MercuryAds",
-          "MercuryAmazonAds"
-      })
-  public void AmazonAds_debugMode() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "amazonSites",
+      groups = "AmazonAdsMercury"
+  )
+  public void adsAmazonDebugModeMercury(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
-        .clickAmazonArticleLink("AmazonFirstArticle")
+        .clickAmazonArticleLink("AmazonSecondPageView")
         .verifyAdsFromAmazonPresent()
         .verifyGPTParams();
   }
 
   @Test(
-      groups = {
-          "MercuryAds",
-          "MercuryAmazonAds"
-      })
-  public void AmazonAds_debugModeOnConsecutivePageViews() {
-    String testedPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "amazonSites",
+      groups = "AmazonAdsMercury"
+  )
+  public void adsAmazonDebugModeOnConsecutivePagesMercury(String wikiName, String path) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
-        .clickAmazonArticleLink("AmazonFirstArticle")
+        .clickAmazonArticleLink("AmazonSecondPageView")
         .verifyAdsFromAmazonPresent();
 
     amazonAds.verifyGPTParams();
 
-    amazonAds.clickAmazonArticleLink("AmazonSecondArticle")
+    amazonAds.clickAmazonArticleLink("AmazonThirdPageView")
         .verifyNoAdsFromAmazonPresent();
   }
 }
