@@ -234,6 +234,7 @@
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
             <class name="com.wikia.webdriver.testcases.fandom.HeroUnitTest"/>
+            <class name="com.wikia.webdriver.testcases.fandom.HubPageTest"/>
             <class name="com.wikia.webdriver.testcases.fandom.WPAdminPageTest"/>
         </classes>
     </test>

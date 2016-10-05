@@ -17,4 +17,5 @@ public class MainPage extends FandomPage<MainPage> {
 
     return this;
   }
+
 }
