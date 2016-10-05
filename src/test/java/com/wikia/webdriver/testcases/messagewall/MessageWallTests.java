@@ -65,6 +65,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_003", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "MAIN-8116")
   public void userCanCreateAndCloseMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
     MiniEditorComponentObject mini = wall.triggerMessageArea();

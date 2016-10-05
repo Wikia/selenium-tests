@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ArticlePageObject {
 
-  @FindBy(css = ".wikia-logo")
+  @FindBy(css = ".fandom-logo")
   private WebElement wikiaLogo;
   @FindBy(css = ".site-head-icon-search")
   private WebElement searchButton;
@@ -24,7 +24,7 @@ public class ArticlePageObject {
   private List<WebElement> singleImgLink;
   @FindBy(css = "footer.wds-global-footer")
   private WebElement footer;
-  @FindBy(css = "svg.wds-global-footer__fandom-logo")
+  @FindBy(css = ".wds-global-footer__header-logo")
   private WebElement footerLogo;
   @FindBy(css = ".contributors > ul > li > a")
   private List<WebElement> topContributorsLinks;

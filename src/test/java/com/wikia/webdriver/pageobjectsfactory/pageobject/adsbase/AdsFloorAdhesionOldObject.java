@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -15,9 +16,8 @@ public class AdsFloorAdhesionOldObject extends AdsBaseObject {
   private static final String FLOOR_ADHESION_CLOSE_CSS = "#ext-wikia-adEngine-template-floor .close";
   private static final String WIKIA_BAR_CSS = "#WikiaBar";
 
-  public AdsFloorAdhesionOldObject(WebDriver driver, String testedPage) {
-    super(driver);
-    getUrl(testedPage, true);
+  public AdsFloorAdhesionOldObject(WebDriver driver, String testedPage, Dimension resolution) {
+    super(driver, testedPage, resolution);
   }
 
   public void verifyFloorAdhesionPresent(String expectedSlotName, String expectedLineItemId,
