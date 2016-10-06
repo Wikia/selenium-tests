@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -9,6 +10,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsRecoveryUnlockCSSOasis extends TemplateNoFirstLoad {
 
+  @Execute(mockAds = "true")
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsRecoveryUnlockCSSOasis",
