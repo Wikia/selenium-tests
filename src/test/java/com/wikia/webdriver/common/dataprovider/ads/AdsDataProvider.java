@@ -719,28 +719,35 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true}
+        {"project43", "SyntheticTests/Delay_BTF", 20, true}
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DISABLE_BTF", true}
+        {"project43", "SyntheticTests/Disable_BTF", true}
     };
   }
 
   @DataProvider
   public static Object[][] delayBtfPluto() {
-      return new Object[][]{
-            {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false}
-      };
-    }
+    return new Object[][]{
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false}
+    };
+  }
 
   @DataProvider
   public static Object[][] disableBtfPluto() {
     return new Object[][]{
-            {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
+        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] disableBtfExceptHighlyViewableSlots() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/Disable_BTF/Unblock_HIVI", true}
     };
   }
 
