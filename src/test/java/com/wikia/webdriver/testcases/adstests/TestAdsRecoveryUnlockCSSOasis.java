@@ -16,8 +16,7 @@ public class TestAdsRecoveryUnlockCSSOasis extends NewTestTemplate {
       dataProvider = "adsRecoveryUnlockCSSOasis",
       groups = "AdsRecoveryUnlockCSSOasis"
   )
-  public void adsRecoveryUnlockCSSOasis(Page page, boolean isRecoveryEnabled)
-      throws InterruptedException {
+  public void adsRecoveryUnlockCSSOasis(Page page, boolean isRecoveryEnabled) {
     String url = urlBuilder.getUrlForPage(page);
 
     AdsRecoveryObject adsObject = new AdsRecoveryObject(driver, url);
