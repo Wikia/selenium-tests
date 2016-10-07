@@ -32,6 +32,6 @@ public class AdsPageFairObject extends AdsBaseObject {
   ) {
     String pattern = expectedResult ?
                      PATTERN_PAGEFAIR_ADBLOCK_DETECTED : PATTERN_PAGEFAIR_ADBLOCK_NOT_DETECTED;
-    this.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
+    this.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern, 45);
   }
 }
