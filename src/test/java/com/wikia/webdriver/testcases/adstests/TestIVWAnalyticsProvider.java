@@ -1,24 +1,24 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.geoedge.CountryCode;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
+public class TestIVWAnalyticsProvider extends NewTestTemplate {
 
   public static final String URL_BASE_SCRIPT = "script.ioam.de/iam.js";
   public static final String URL_TRACKING_SCRIPT = "de.ioam.de/tx.io?st=wikia";
-
 
   @Test(groups = "TestIVWAnalyticsProvider")
   public void testIVW2AnalyticsProvider() throws IOException {
@@ -40,6 +40,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
     }
   }
 
+  @Execute(mockAds = "true")
   @NetworkTrafficDump
   @GeoEdgeBrowserMobProxy(country = CountryCode.GERMANY)
   @Test(
@@ -57,6 +58,7 @@ public class TestIVWAnalyticsProvider extends TemplateNoFirstLoad {
       assertTrackingPixels(adsBaseObject, URL_TRACKING_SCRIPT);
   }
 
+  @Execute(mockAds = "true")
   @NetworkTrafficDump
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
