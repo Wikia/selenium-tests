@@ -441,6 +441,32 @@ public class Wait {
     }
   }
 
+  public void forSuccessfulResponseByUrlPattern(final NetworkTrafficInterceptor trafficInterceptor,
+                                                final String pattern, int timeout) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      new WebDriverWait(driver, timeout).until(
+          new ExpectedCondition<Boolean>() {
+            private HarEntry entry;
+
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+              entry = trafficInterceptor.getEntryByUrlPattern(pattern);
+              return entry != null && entry.getResponse().getStatus() < 400;
+            }
+
+            @Override
+            public String toString() {
+              return entry == null ? String.format("sent request matching pattern: %s", pattern) :
+                     String.format("successful response (pattern: %s)", pattern);
+            }
+          }
+      );
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   public void forUrlContains(String text) {
     wait.until(ExpectedConditions.urlContains(text));
   }
