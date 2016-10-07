@@ -602,6 +602,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidCustomAdapter() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
+    };
+  }
+
+  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
