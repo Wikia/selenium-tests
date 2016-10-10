@@ -37,6 +37,8 @@ public class AdsPrebidObject extends AdsBaseObject {
       assertKeyValue(keyValues, "hb_size", size, "Size passed in slot key-values");
       assertKeyValue(keyValues, "hb_pb", price, "Price passed in slot key-values");
     } catch (JSONException exception) {
+      PageObjectLogging
+          .log("Prebid.js key-values", "Prebid.js key-values not found in slot div", false);
       PageObjectLogging.log("Prebid.js key-values", exception, false);
     }
   }
