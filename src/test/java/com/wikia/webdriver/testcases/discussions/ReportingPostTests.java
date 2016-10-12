@@ -8,7 +8,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
@@ -56,7 +55,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
+    assertThatReportPostOptionIsNotAvailableOn(postsListPage);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -64,7 +63,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
     PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
-    assertThatReportPostOptionIsNotAvailable(postDetailsPage.getPost());
+    assertThatReportPostOptionIsNotAvailableOn(postDetailsPage);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -72,7 +71,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
-    assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
+    assertThatReportPostOptionIsNotAvailableOn(userPostsPage);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -114,7 +113,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    assertThatReportPostOptionIsNotAvailable(postsListPage.getPost());
+    assertThatReportPostOptionIsNotAvailableOn(postsListPage);
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting")
@@ -122,7 +121,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
     PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
-    assertThatReportPostOptionIsNotAvailable(postDetailsPage.getPost());
+    assertThatReportPostOptionIsNotAvailableOn(postDetailsPage);
   }
 
 
@@ -131,7 +130,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
-    assertThatReportPostOptionIsNotAvailable(userPostsPage.getPost());
+    assertThatReportPostOptionIsNotAvailableOn(userPostsPage);
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting",
@@ -206,6 +205,27 @@ public class ReportingPostTests extends NewTestTemplate {
 
     assertThatPostCanBeReported(postEntity);
   }
+
+  @Test(groups = "discussions-loggedInUsersMobileReporting",
+      dependsOnMethods = {
+          "userOnMobileCanReportPostOnPostDetailsPage",
+          "anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage",
+          "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
+          "moderatorOnMobileCanApproveReportedPostOnPostDetailsPage"})
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCannotReReportPostOnPostDetailsPage() {
+    final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+
+    PostDetailsPage page = new PostDetailsPage().open(postId);
+
+    PostEntity postEntity = page.getPost().findPostById(postId);
+
+    assertThatPostIsNotReported(postEntity);
+    assertThatReportPostOptionIsNotAvailableFor(postEntity);
+  }
+
+  // Second user on mobile
 
   @Test(groups = "discussions-loggedInUsersMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnPostsListPage")
@@ -284,6 +304,8 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatPostCanBeReported(postEntity);
   }
 
+  // Second user on desktop
+
   @Test(groups = "discussions-loggedInUsersDesktopReporting",
       dependsOnMethods = "userOnDesktopCanReportPostOnPostsListPage")
   @Execute(asUser = User.USER_2)
@@ -354,12 +376,8 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(page, postId);
   }
 
-  private void assertThatReportPostOptionIsNotAvailable(final Post post) {
-    boolean actual = post.findNewestPost()
-        .clickMoreOptions()
-        .hasReportPostOption();
-
-    Assertion.assertFalse(actual, "Report option should be unavailable.");
+  private void assertThatReportPostOptionIsNotAvailableOn(final PageWithPosts page) {
+    assertThatReportPostOptionIsNotAvailableFor(page.getPost().findNewestPost());
   }
 
   private void assertThatNoPostHasReportedIndicator(final PageWithPosts pageWithPosts) {
@@ -389,7 +407,7 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPost(postEntity);
 
     assertThatPostIsReported(postEntity);
-    assertThatReportPostOptionIsNotPresent(postEntity);
+    assertThatReportPostOptionIsNotAvailableFor(postEntity);
   }
 
   private void reportPost(final PostEntity postEntity) {
@@ -404,7 +422,12 @@ public class ReportingPostTests extends NewTestTemplate {
         "Post should be reported.");
   }
 
-  private void assertThatReportPostOptionIsNotPresent(final PostEntity postEntity) {
+  private void assertThatPostIsNotReported(final PostEntity postEntity) {
+    Assertion.assertFalse(postEntity.isReported(),
+        "Post should not be reported.");
+  }
+
+  private void assertThatReportPostOptionIsNotAvailableFor(final PostEntity postEntity) {
     Assertion.assertFalse(postEntity.clickMoreOptions().hasReportPostOption(),
         "There should be no 'Report post' option in 'More options' on post already reported by user.");
   }
