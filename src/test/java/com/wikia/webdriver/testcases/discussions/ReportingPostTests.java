@@ -270,8 +270,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "userOnMobileCanReportPostOnPostDetailsPage",
           "anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage",
           "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
-          "moderatorOnMobileCanApproveReportedPostOnPostDetailsPage",
-          "userOnMobileCannotReReportPostOnPostDetailsPage"})
+          "moderatorOnMobileCanApproveReportedPostOnPostDetailsPage"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
@@ -422,8 +421,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "userOnDesktopCanReportPostOnPostDetailsPage",
           "anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage",
           "userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
-          "moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage",
-          "userOnDesktopCannotReReportPostOnPostDetailsPage"})
+          "moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage"})
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
@@ -449,6 +447,24 @@ public class ReportingPostTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
     assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(page, postId);
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting",
+      dependsOnMethods = {
+          "userOnDesktopCanReportPostOnPostDetailsPage",
+          "anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage",
+          "userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
+          "moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage",
+          "userOnDesktopCannotReReportPostOnPostDetailsPage",
+          "userOnDesktopCanReportApprovedPostOnPostDetailsPage"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
+    final String postId = POST_DATA.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+
+    PostDetailsPage page = new PostDetailsPage().open(postId);
+
+    assertThatDiscussionsModeratorCanSeeAndRemoveReportedPost(page, postId);
   }
 
   private void assertThatReportPostOptionIsNotAvailableOn(final PageWithPosts page) {
