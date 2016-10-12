@@ -26,7 +26,15 @@ public class PostEntity {
   }
 
   public boolean isReported() {
-    return webElement.getAttribute("class").contains("is-reported");
+    return hasClass("is-reported");
+  }
+
+  private boolean hasClass(final String className) {
+    return webElement.getAttribute("class").contains(className);
+  }
+
+  public boolean isDeleted() {
+    return hasClass("is-deleted");
   }
 
   public TopNote findTopNote() {
@@ -43,7 +51,7 @@ public class PostEntity {
   }
 
   public String findTitle() {
-    return webElement.findElement(By.cssSelector(".post-title")).getText();
+    return webElement.findElement(By.className("post-title")).getText();
   }
 
   public String findDescription() {
@@ -103,7 +111,7 @@ public class PostEntity {
   public Data toData() {
     return Data.builder()
         .id(findId())
-        .authroId(findAuthorId())
+        .authorId(findAuthorId())
         .category(findCategory())
         .title(findTitle())
         .description(findDescription())
@@ -116,7 +124,7 @@ public class PostEntity {
 
     private final String id;
 
-    private final String authroId;
+    private final String authorId;
 
     private final String category;
 

@@ -9,16 +9,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
+/**
+ * This class should be used only for post details page. On this page only post can be approved or deleted, thus
+ * only on this page approve and remove modal dialogs will appear.
+ */
 public class TopNoteModalDialog extends BasePageObject {
 
   private final long TIMEOUT = 10;
-
-  @FindBy(css = ".discussion-dialog.is-visible.modal-dialog-approve")
-  private WebElement modalDialogApprove;
-
-  @FindBy(css = ".discussion-dialog.is-visible.modal-dialog-delete")
-  private WebElement modalDialogDelete;
 
   @FindBy(className = "post-detail")
   private WebElement post;
@@ -28,7 +27,20 @@ public class TopNoteModalDialog extends BasePageObject {
   }
 
   private WebElement getActiveDialog() {
-    return null == modalDialogApprove ? modalDialogDelete : modalDialogApprove;
+    WebElement dialog = null;
+
+    List<WebElement> elements = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
+    if (elements.isEmpty()) {
+      // allow selenium to throw exception
+      dialog = driver.findElement(By.cssSelector(".discussion-dialog.is-visible.modal-dialog-approve"));
+    } else if (1 < elements.size()) {
+      // only one modal dialog should be visible
+      throw new IllegalStateException("Only one modal dialog should be visible!");
+    } else {
+      dialog = elements.get(0);
+    }
+
+    return dialog;
   }
 
   public void clickApprove() {
