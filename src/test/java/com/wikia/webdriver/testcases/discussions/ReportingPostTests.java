@@ -334,28 +334,24 @@ public class ReportingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
-    final PostEntity postEntity = page.getPost().findPostById(postId);
+    assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(page, postId);
+  }
 
-    Assertion.assertTrue(postEntity.isReported(),
-        "Discussion moderator should see reported indicator on posts which were reported by other users.");
+  // Discussions moderator on desktop
 
-    postEntity.findTopNote()
-        .clickValidate();
+  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting",
+      dependsOnMethods = {
+          "userOnDesktopCanReportPostOnPostDetailsPage",
+          "anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage",
+          "userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
+    final String postId = POST_DATA.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
-    page.getTopNoteModalDialog()
-        .clickCancel();
+    PostDetailsPage page = new PostDetailsPage().open(postId);
 
-    Assertion.assertTrue(postEntity.isReported(),
-        "Reported post should be still reported when discussion moderator clicks cancel on validate.");
-
-    postEntity.findTopNote()
-        .clickValidate();
-
-    page.getTopNoteModalDialog()
-        .clickApprove();
-
-    Assertion.assertFalse(postEntity.isReported(),
-        "Discussion moderator should not see reported indicator on approved posts.");
+    assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(page, postId);
   }
 
   private void assertThatReportPostOptionIsNotAvailable(final Post post) {
@@ -427,7 +423,40 @@ public class ReportingPostTests extends NewTestTemplate {
       final PageWithPosts page, final String postId) {
     PostEntity postEntity = page.getPost().findPostById(postId);
 
-    Assertion.assertFalse(postEntity.isReported(), "User should not see reported indicator on posts which were not reported by them.");
+    Assertion.assertFalse(postEntity.isReported(),
+        "User should not see reported indicator on posts which were not reported by them.");
     assertThatPostCanBeReported(postEntity);
+  }
+
+  private void assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(
+      final PostDetailsPage page, final String postId) {
+    final PostEntity postEntity = page.getPost().findPostById(postId);
+
+    assertThatPostIsReported(postEntity);
+    assertThatDiscussionsModeratorCanClickCancelOnValidateModalDialog(page, postEntity);
+    assertThatDiscussionsModeratorCanApproveReportedPost(page, postEntity);
+  }
+
+  private void assertThatDiscussionsModeratorCanClickCancelOnValidateModalDialog(
+      final PostDetailsPage page, final PostEntity postEntity) {
+    postEntity.findTopNote()
+        .clickValidate();
+
+    page.getTopNoteModalDialog()
+        .clickCancel();
+
+    assertThatPostIsReported(postEntity);
+  }
+
+  private void assertThatDiscussionsModeratorCanApproveReportedPost(
+      final PostDetailsPage page, final PostEntity postEntity) {
+    postEntity.findTopNote()
+        .clickValidate();
+
+    page.getTopNoteModalDialog()
+        .clickApprove();
+
+    Assertion.assertFalse(postEntity.isReported(),
+        "Discussion moderator should not see reported indicator on approved posts.");
   }
 }
