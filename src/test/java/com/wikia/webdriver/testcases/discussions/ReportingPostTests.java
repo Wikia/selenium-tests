@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -52,7 +51,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     assertThatReportPostOptionIsNotAvailableOn(postsListPage);
@@ -60,7 +59,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
     PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
     assertThatReportPostOptionIsNotAvailableOn(postDetailsPage);
@@ -68,7 +67,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
     UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
     assertThatReportPostOptionIsNotAvailableOn(userPostsPage);
@@ -77,7 +76,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnPostsListPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
     PostsListPage page = new PostsListPage().open();
 
@@ -87,7 +86,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnPostDetailsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
     PostDetailsPage page = new PostDetailsPage().open(
         POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId());
@@ -98,7 +97,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnUserPostsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
     UserPostsPage page = new UserPostsPage().open(
         POST_DATA.get(POST_ON_MOBILE_ON_USER_PAGE).getAuthroId());
@@ -136,7 +135,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting",
       dependsOnMethods = "userOnDesktopCanReportPostOnPostsListPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
     PostsListPage page = new PostsListPage().open();
 
@@ -146,7 +145,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting",
       dependsOnMethods = "userOnDesktopCanReportPostOnPostDetailsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
     PostDetailsPage page = new PostDetailsPage().open(
         POST_DATA.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId());
@@ -157,7 +156,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting",
       dependsOnMethods = "userOnDesktopCanReportPostOnUserPostsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
     UserPostsPage page = new UserPostsPage().open(
         POST_DATA.get(POST_ON_DESKTOP_ON_USER_PAGE).getAuthroId());
@@ -169,7 +168,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCanReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
@@ -182,7 +181,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCanReportPostOnPostDetailsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
@@ -195,7 +194,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCanReportPostOnUserPostsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
@@ -213,7 +212,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
           "moderatorOnMobileCanApproveReportedPostOnPostDetailsPage"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
     final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
@@ -230,7 +229,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnPostsListPage")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POSTS_LIST).getId();
 
@@ -242,7 +241,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnPostDetailsPage")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
@@ -254,7 +253,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting",
       dependsOnMethods = "userOnMobileCanReportPostOnUserPostsPage")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     final PostEntity.Data postData = POST_DATA.get(POST_ON_MOBILE_ON_USER_PAGE);
 
@@ -273,7 +272,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "moderatorOnMobileCanApproveReportedPostOnPostDetailsPage",
           "userOnMobileCannotReReportPostOnPostDetailsPage"})
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
     final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
@@ -371,7 +370,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopReporting",
       dependsOnMethods = "userOnDesktopCanReportPostOnUserPostsPage")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     final PostEntity.Data postData = POST_DATA.get(POST_ON_DESKTOP_ON_USER_PAGE);
 
@@ -390,7 +389,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage",
           "userOnDesktopCannotReReportPostOnPostDetailsPage"})
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
     final String postId = POST_DATA.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
@@ -407,7 +406,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage",
           "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
