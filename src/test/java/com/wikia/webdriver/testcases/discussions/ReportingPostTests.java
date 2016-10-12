@@ -380,6 +380,25 @@ public class ReportingPostTests extends NewTestTemplate {
     assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postData.getId());
   }
 
+  // Third user on desktop
+
+  @Test(groups = "discussions-loggedInUsersDesktopReporting",
+      dependsOnMethods = {
+          "userOnDesktopCanReportPostOnPostDetailsPage",
+          "anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage",
+          "userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
+          "moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage",
+          "userOnDesktopCannotReReportPostOnPostDetailsPage"})
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
+    final String postId = POST_DATA.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+
+    PostDetailsPage page = new PostDetailsPage().open(postId);
+
+    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+  }
+
   // Discussions moderator on mobile
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting",
