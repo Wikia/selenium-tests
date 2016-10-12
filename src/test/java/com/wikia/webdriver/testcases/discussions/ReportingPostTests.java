@@ -329,7 +329,7 @@ public class ReportingPostTests extends NewTestTemplate {
           "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void moderatorOnMobileCannotSeeReportedIndicator() {
+  public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
@@ -346,7 +346,7 @@ public class ReportingPostTests extends NewTestTemplate {
         .clickCancel();
 
     Assertion.assertTrue(postEntity.isReported(),
-        "Discussion moderator should see reported indicator on posts which were reported by other users.");
+        "Reported post should be still reported when discussion moderator clicks cancel on validate.");
 
     postEntity.findTopNote()
         .clickValidate();
