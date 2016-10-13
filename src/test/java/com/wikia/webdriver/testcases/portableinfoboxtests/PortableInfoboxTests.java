@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -22,8 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLink
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
-import org.testng.annotations.Test;
-
 /**
  * Set of Test Cases found on:
  * https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
@@ -32,13 +32,12 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
-  private static final ContentLoader loader = new ContentLoader();
-  private static final String
-      INFOBOX_EMPTY_TAGS_INVOCATION = loader.loadWikiTextContent("Infobox_Empty_Tags_Invocation");
-  private static final String
-      INFOBOX2_INVOCATION = loader.loadWikiTextContent("Infobox2_Invocation");
-  private static final String
-      INFOBOX2_TEMPLATE = loader.loadWikiTextContent("Infobox2_Template");
+  private static final String INFOBOX_EMPTY_TAGS_INVOCATION =
+      ContentLoader.loadWikiTextContent("Infobox_Empty_Tags_Invocation");
+  private static final String INFOBOX2_INVOCATION =
+      ContentLoader.loadWikiTextContent("Infobox2_Invocation");
+  private static final String INFOBOX2_TEMPLATE =
+      ContentLoader.loadWikiTextContent("Infobox2_Template");
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
   public void verifyElementsVisibility() {
@@ -47,11 +46,11 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
-    Assertion.assertTrue(infobox.getHeadersNumber() > 0 );
+    Assertion.assertTrue(infobox.getHeadersNumber() > 0);
     Assertion.assertTrue(infobox.isImageVisible());
     Assertion.assertTrue(infobox.isInfoboxTitleVisible());
-    Assertion.assertTrue(infobox.getBoldElementsNumber() > 0 );
-    Assertion.assertTrue(infobox.getItalicElementsNumber() > 0 );
+    Assertion.assertTrue(infobox.getBoldElementsNumber() > 0);
+    Assertion.assertTrue(infobox.getItalicElementsNumber() > 0);
     Assertion.assertTrue(infobox.areQuotationMarksPresented());
     Assertion.assertTrue(infobox.isReferenceElementVisible());
 
@@ -86,32 +85,25 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
-    String internalLinkName = infobox
-        .open(PageContent.INFOBOX_2)
-        .getInternalLinkRedirectTitle(2);
+    String internalLinkName = infobox.open(PageContent.INFOBOX_2).getInternalLinkRedirectTitle(2);
 
-    String internalURL = infobox
-        .clickInternalLinkWithIndex(2)
-        .getUrlAfterPageIsLoaded();
+    String internalURL = infobox.clickInternalLinkWithIndex(2).getUrlAfterPageIsLoaded();
 
     Assertion.assertTrue(internalURL.contains(internalLinkName));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
-  @RelatedIssue(issueID = "WW-423", comment = "test is prone to race condition, check locally or test manually")
+  @RelatedIssue(issueID = "WW-423",
+      comment = "test is prone to race condition, check locally or test manually")
   public void verifyExternalLinksRedirecting() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
-    String externalLinkName = infobox
-        .open(PageContent.INFOBOX_2)
-        .getExternalLinkRedirectTitle(0);
+    String externalLinkName = infobox.open(PageContent.INFOBOX_2).getExternalLinkRedirectTitle(0);
 
-    String externalUrl = infobox
-        .clickExternalLinkWithIndex(0)
-        .getUrlAfterPageIsLoaded();
+    String externalUrl = infobox.clickExternalLinkWithIndex(0).getUrlAfterPageIsLoaded();
 
     Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
   }
@@ -119,8 +111,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyImagesInWhatLinksHerePage() {
     new ArticleContent().push(String.format("[[%s]]", PageContent.INFOBOX_2),
-                              "Infobox2_WhatLinksHere");
-    //provide an article linking to testing Infobox
+        "Infobox2_WhatLinksHere");
+    // provide an article linking to testing Infobox
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     ArticlePageObject article = new ArticlePageObject();
@@ -129,10 +121,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     SpecialWhatLinksHerePageObject whatLinksHere = article.openSpecialWhatLinksHere(wikiURL);
 
-    whatLinksHere
-        .clickPageInputField()
-        .typeInfoboxImageName("Infobox2")
-        .clickShowButton();
+    whatLinksHere.clickPageInputField().typeInfoboxImageName("Infobox2").clickShowButton();
 
     Assertion.assertTrue(whatLinksHere.whatLinksHereContainsArticleName(articleName));
   }
@@ -194,7 +183,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     Assertion.assertEquals(infobox.getItemValuesFontSize(1), infobox.getOrderedElementFontSize(1));
     Assertion.assertEquals(infobox.getItemValuesFontSize(1),
-                           infobox.getUnorderedElementFontSize(1));
+        infobox.getUnorderedElementFontSize(1));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
@@ -219,9 +208,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertEquals(infobox.getItemLabelsFontSize(0),
-                           infobox.getHorizontalItemLabelFontSize(0));
+        infobox.getHorizontalItemLabelFontSize(0));
     Assertion.assertEquals(infobox.getItemValuesFontSize(0),
-                           infobox.getHorizontalItemValuesFontSize(0));
+        infobox.getHorizontalItemValuesFontSize(0));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
@@ -234,8 +223,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
 
     template
-        .openArticleByName(wikiURL, String.format("%s:%s",
-                           PageContent.TEMPLATE_NAMESPACE, PageContent.INFOBOX_2))
+        .openArticleByName(wikiURL,
+            String.format("%s:%s", PageContent.TEMPLATE_NAMESPACE, PageContent.INFOBOX_2))
         .editArticleInSrcUsingDropdown();
     String templateSyntax = editor.getContent();
 
@@ -244,10 +233,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    article
-        .openCurrectArticleSourceMode()
-        .addContentInSourceMode(templateSyntax)
-        .submitArticle();
+    article.openCurrectArticleSourceMode().addContentInSourceMode(templateSyntax).submitArticle();
 
     Assertion.assertTrue(infobox.isInfoboxTitleVisible());
   }
@@ -285,37 +271,30 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void insertEmptyInfoboxInVE() {
+
+    new ArticleContent().clear();
+
     ArticlePageObject article = new ArticlePageObject();
-
-    (new ArticleContent()).clear();
-
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    VisualEditorPageObject visualEditor = article
-        .openVEModeWithMainEditButton()
-        .clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2)
-        .clickApplyChanges();
+    VisualEditorPageObject visualEditor =
+        article.openVEModeWithMainEditButton().clickInsertToolButton()
+            .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).clickApplyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void insertInfoboxWithParametersInVE() {
+    new ArticleContent().clear();
+
     ArticlePageObject article = new ArticlePageObject();
-
-    (new ArticleContent()).clear();
-
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    VisualEditorPageObject visualEditor = article
-        .openVEModeWithMainEditButton()
-        .clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2)
+    VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
+        .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges();
 
@@ -324,24 +303,20 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   public void editInfoboxInVEbyPopup() {
-    ArticlePageObject article = new ArticlePageObject();
-    (new ArticleContent()).clear();
+    new ArticleContent().clear();
 
+    ArticlePageObject article = new ArticlePageObject();
     article.open();
     new ArticlePurger().purgeArticleAsAnon();
 
-    VisualEditorPageObject visualEditor = article
-        .openVEModeWithMainEditButton()
-        .clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2)
+    VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
+        .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
 
-    visualEditor
-        .clickInfoboxPopup()
+    visualEditor.clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges();
 
@@ -351,9 +326,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   @Execute(asUser = User.STAFF)
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
-    ArticlePageObject article = new ArticlePageObject();
-    (new ArticleContent()).clear();
+    new ArticleContent().clear();
 
+    ArticlePageObject article = new ArticlePageObject();
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
     theme.openSpecialDesignerPage(wikiURL).selectTheme(3);
     theme.submitTheme();
@@ -361,11 +336,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     article.open();
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    VisualEditorPageObject visualEditor = article
-        .openVEModeWithMainEditButton()
-        .clickInsertToolButton()
-        .clickInsertInfoboxFromInsertToolMenu()
-        .selectInfoboxTemplate(2)
+    VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
+        .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges();
 
@@ -385,9 +357,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    String categoryImageURL = categoryPage.getPageImageURL(
-        categoryPage.getArticleIndexInGalleryByName(PageContent.INFOBOX_2)
-    );
+    String categoryImageURL = categoryPage
+        .getPageImageURL(categoryPage.getArticleIndexInGalleryByName(PageContent.INFOBOX_2));
 
     Assertion.assertTrue(categoryImageURL.contains(imageName));
   }
