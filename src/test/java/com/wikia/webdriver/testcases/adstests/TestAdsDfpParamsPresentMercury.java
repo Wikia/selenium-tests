@@ -2,8 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.geoedge.CountryCode;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -73,12 +71,10 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
   )
-  @GeoEdgeBrowserMobProxy(country = CountryCode.NEW_ZEALAND)
-  @UseUnstablePageLoadStrategy
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "dfpEvolveParamsMercury",
-      groups = {"Ads", "AdsEvolveMercury"}
+      groups = {"MobileAds", "AdsEvolveMercury"}
   )
   public void dfpEvolveParamsPresentMercury(String wikiName,
                                           String article,
@@ -87,7 +83,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
                                           String slot,
                                           List<String> pageParams,
                                           List<String> slotParams) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPath(wikiName, article), "forcead=evolve2");
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(dfpClientId, adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
