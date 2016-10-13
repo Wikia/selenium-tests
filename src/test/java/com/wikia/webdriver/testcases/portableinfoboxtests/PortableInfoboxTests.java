@@ -68,7 +68,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.clickRedLinkWithIndex(0).isCreateNewArticleModalVisible());
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyInternalLinksRedirecting() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -81,13 +81,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String internalURL = infobox
         .clickInternalLinkWithIndex(3)
-        .getUrlAfterPageIsLoaded();
+        .waitForUrlToContain(internalLinkName)
+        .getCurrentUrl();
 
     Assertion.assertEquals(internalLinkName, internalURL);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
-  @RelatedIssue(issueID = "WW-423", comment = "test is prone to race condition, check locally or test manually")
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyExternalLinksRedirecting() {
     PortableInfobox infobox = new PortableInfobox();
 
@@ -100,7 +100,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String externalUrl = infobox
         .clickExternalLinkWithIndex(0)
-        .getUrlAfterPageIsLoaded();
+        .waitForUrlToContain(externalLinkName)
+        .getCurrentUrl();
 
     Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
   }
