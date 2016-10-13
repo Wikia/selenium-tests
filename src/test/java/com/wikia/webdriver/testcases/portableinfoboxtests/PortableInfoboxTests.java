@@ -78,7 +78,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     Assertion.assertTrue(infobox.clickRedLinkWithIndex(0).isCreateNewArticleModalVisible());
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyInternalLinksRedirecting() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
@@ -87,12 +87,13 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String internalLinkName = infobox.open(PageContent.INFOBOX_2).getInternalLinkRedirectTitle(2);
 
-    String internalURL = infobox.clickInternalLinkWithIndex(2).getUrlAfterPageIsLoaded();
+    String internalURL =
+        infobox.clickInternalLinkWithIndex(3).waitForUrlToContain(internalLinkName).getCurrentUrl();
 
-    Assertion.assertTrue(internalURL.contains(internalLinkName));
+    Assertion.assertEquals(internalLinkName, internalURL);
   }
 
-  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001"})
+  @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   @RelatedIssue(issueID = "WW-423",
       comment = "test is prone to race condition, check locally or test manually")
   public void verifyExternalLinksRedirecting() {
@@ -101,9 +102,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
-    String externalLinkName = infobox.open(PageContent.INFOBOX_2).getExternalLinkRedirectTitle(0);
+    String externalLinkName = infobox.getExternalLinkRedirectTitle(0);
 
-    String externalUrl = infobox.clickExternalLinkWithIndex(0).getUrlAfterPageIsLoaded();
+    String externalUrl =
+        infobox.clickExternalLinkWithIndex(0).waitForUrlToContain(externalLinkName).getCurrentUrl();
 
     Assertion.assertEquals(externalLinkName.toLowerCase(), externalUrl.toLowerCase());
   }

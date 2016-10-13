@@ -147,10 +147,10 @@ public class PortableInfobox extends BasePageObject {
     return selectedTitle.getText();
   }
 
-  public String getUrlAfterPageIsLoaded() {
-    wait.forElementVisible(bodyElement);
+  public PortableInfobox waitForUrlToContain(String target) {
+    this.waitForStringInURL(target);
 
-    return driver.getCurrentUrl();
+    return this;
   }
 
   public String getCategoryLinkName() {
