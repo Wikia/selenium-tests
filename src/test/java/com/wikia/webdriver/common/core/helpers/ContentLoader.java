@@ -13,7 +13,9 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class ContentLoader {
 
-  private final static String TEXT_FILES_PATH_FORMAT = "TextFiles/%s";
+  private static final String TEXT_FILES_PATH_FORMAT = "TextFiles/%s";
+
+  private ContentLoader() {}
 
   /**
    * @param filename - name of file which content should be loaded
