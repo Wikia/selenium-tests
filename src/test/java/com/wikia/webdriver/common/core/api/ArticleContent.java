@@ -17,7 +17,6 @@ public class ArticleContent extends ApiCall {
 
   private static String secret;
   private static String baseURL;
-  private static String URL_STRING;
   private static ArrayList<BasicNameValuePair> PARAMS;
 
   public ArticleContent() {
