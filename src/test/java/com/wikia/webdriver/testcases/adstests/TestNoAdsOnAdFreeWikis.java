@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 import org.testng.annotations.Test;
 
 @Test(
@@ -17,8 +18,9 @@ public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
       groups = {"TestNoAdsOnAdsFreeWikis_AU"}
   )
   public void TestNoAdsOnAdsFreeWikis_AU(String wikiName, String path) {
-    String testedPage = urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPath(wikiName, path), "forcead=evolve2");
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
+    AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
+    wikiPage.enableEvolve(testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
 

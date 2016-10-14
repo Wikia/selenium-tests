@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 
@@ -66,8 +67,9 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
                                     String slot,
                                     List<String> pageParams,
                                     List<String> slotParams) {
-    String testedPage = urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPath(wikiName, article), "forcead=evolve2");
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    AdsEvolveObject ads = new AdsEvolveObject(driver);
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    ads.enableEvolve(testedPage);
     ads.verifyGptIframe(dfpClientId, adUnit, slot);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
