@@ -24,6 +24,8 @@ public abstract class ApiCall {
 
   private static String ERROR_MESSAGE = "Problem with API call";
 
+  protected static String URL_STRING = null;
+
   protected ApiCall() {
   }
 
