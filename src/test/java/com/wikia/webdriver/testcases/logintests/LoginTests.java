@@ -47,6 +47,7 @@ public class LoginTests extends NewTestTemplate {
     AuthModal authModal = signInLink.getAuthModal();
     Assert.assertTrue(authModal.isSignInOpened());
 
+    //we are using userNameStaff2 because of PLATFORM-2502 and PLATFORM-2508
     authModal.login(credentials.userNameStaff2, credentials.passwordStaff2);
     base.verifyUserLoggedIn(credentials.userNameStaff);
   }
