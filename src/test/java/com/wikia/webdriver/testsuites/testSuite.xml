@@ -179,7 +179,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
-            <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
             <class name="com.wikia.webdriver.testcases.multiwikifindertests.MultiWikiFinderTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersMessageTests"/>
