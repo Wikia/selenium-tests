@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.skin.Skin;
@@ -200,6 +201,7 @@ public class SearchTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage",
                   "Mercury_Search_002"})
+  @RelatedIssue(issueID = "SUS-1151")
   public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
@@ -212,6 +214,7 @@ public class SearchTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = {"mercury_search_loadingMoreResultsOnSearchResultsPage",
                   "Mercury_Search_002"})
+  @RelatedIssue(issueID = "SUS-1151")
   public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
     SearchResultsPage resultsPage =
         new SearchResultsPage()
