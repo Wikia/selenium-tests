@@ -140,7 +140,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   /**
    * Clicks on nth result
    *
-   * @param resultNumber zero based number of result to click
+   * @param resultNumeber zero based number of result to click
    * @return result page
    */
   public WikiArticleHomePage openResult(int resultNumeber) {
@@ -185,7 +185,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   public void verifyThumbnails(int number) {
     Assertion.assertNumber(thumbnails.size(), number, "checking number of thumbnails");
     for (WebElement elem : thumbnails) {
-      Assertion.assertStringContains(elem.getAttribute("src"), ".png");
+      Assertion.assertStringContainsOneOfTwoElements(elem.getAttribute("src"), ".png", ".jpg");
     }
     PageObjectLogging.log("verifyThumbnails", "thumbnails verified",
                           true);
