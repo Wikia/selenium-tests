@@ -1,11 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.geoedge.CountryCode;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject;
 import org.testng.annotations.Test;
 
 @Test(
@@ -13,7 +12,6 @@ import org.testng.annotations.Test;
 )
 public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
 
-  @GeoEdgeBrowserMobProxy(country = CountryCode.AUSTRALIA)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adFreeWikis",
@@ -21,7 +19,8 @@ public class TestNoAdsOnAdFreeWikis extends TemplateNoFirstLoad {
   )
   public void TestNoAdsOnAdsFreeWikis_AU(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
+    wikiPage.enableEvolve(testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
 
