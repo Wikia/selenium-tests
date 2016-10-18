@@ -94,6 +94,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyExternalLinksRedirecting() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
+    new ArticleContent().push("", PageContent.INFOBOX_1);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
