@@ -38,7 +38,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private static final String POST_ON_MOBILE_ON_USER_PAGE = "post-mobile-user-page";
 
-  private final Map<String, PostEntity.Data> postData = new ConcurrentHashMap<>(8);
+  private final Map<String, PostEntity.Data> testsPostData = new ConcurrentHashMap<>(8);
 
   // Anonymous user on mobile
 
@@ -82,7 +82,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
     PostDetailsPage page = new PostDetailsPage().open(
-        postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId());
+        testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId());
 
     assertThatNoPostHasReportedIndicator(page);
   }
@@ -93,7 +93,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
     UserPostsPage page = new UserPostsPage().open(
-        postData.get(POST_ON_MOBILE_ON_USER_PAGE).getAuthorId());
+        testsPostData.get(POST_ON_MOBILE_ON_USER_PAGE).getAuthorId());
 
     assertThatNoPostHasReportedIndicator(page);
   }
@@ -110,7 +110,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -161,7 +161,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
     PostDetailsPage page = new PostDetailsPage().open(
-        postData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId());
+        testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId());
 
     assertThatNoPostHasReportedIndicator(page);
   }
@@ -172,7 +172,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
     UserPostsPage page = new UserPostsPage().open(
-        postData.get(POST_ON_DESKTOP_ON_USER_PAGE).getAuthorId());
+        testsPostData.get(POST_ON_DESKTOP_ON_USER_PAGE).getAuthorId());
 
     assertThatNoPostHasReportedIndicator(page);
   }
@@ -187,7 +187,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
     PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
-    postData.put(POST_ON_MOBILE_ON_POSTS_LIST, postEntity.toData());
+    testsPostData.put(POST_ON_MOBILE_ON_POSTS_LIST, postEntity.toData());
 
     assertThatPostCanBeReported(postEntity);
   }
@@ -200,7 +200,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
     PostEntity postEntity = addPostAndGoToPostDetailsPage(postsListPage, postsCreator);
-    postData.put(POST_ON_MOBILE_ON_POST_DETAILS, postEntity.toData());
+    testsPostData.put(POST_ON_MOBILE_ON_POST_DETAILS, postEntity.toData());
 
     assertThatPostCanBeReported(postEntity);
   }
@@ -213,7 +213,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
 
     PostEntity postEntity = addPostAndGoToUserPostsPage(postsListPage, postsCreator);
-    postData.put(POST_ON_MOBILE_ON_USER_PAGE, postEntity.toData());
+    testsPostData.put(POST_ON_MOBILE_ON_USER_PAGE, postEntity.toData());
 
     assertThatPostCanBeReported(postEntity);
   }
@@ -227,7 +227,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -244,7 +244,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POSTS_LIST).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POSTS_LIST).getId();
 
     PageWithPosts page = new PostsListPage().open();
 
@@ -256,7 +256,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PageWithPosts page = new PostDetailsPage().open(postId);
 
@@ -268,7 +268,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
-    final PostEntity.Data postData = this.postData.get(POST_ON_MOBILE_ON_USER_PAGE);
+    final PostEntity.Data postData = this.testsPostData.get(POST_ON_MOBILE_ON_USER_PAGE);
 
     PageWithPosts page = new UserPostsPage().open(postData.getAuthorId());
 
@@ -286,7 +286,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -303,7 +303,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -321,7 +321,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -338,7 +338,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
     PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
-    postData.put(POST_ON_DESKTOP_ON_POSTS_LIST, postEntity.toData());
+    testsPostData.put(POST_ON_DESKTOP_ON_POSTS_LIST, postEntity.toData());
 
     assertThatPostCanBeReported(postEntity);
   }
@@ -351,7 +351,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
     PostEntity postEntity = addPostAndGoToPostDetailsPage(postsListPage, postsCreator);
-    postData.put(POST_ON_DESKTOP_ON_POST_DETAILS, postEntity.toData());
+    testsPostData.put(POST_ON_DESKTOP_ON_POST_DETAILS, postEntity.toData());
 
     assertThatPostCanBeReported(postEntity);
   }
@@ -364,7 +364,7 @@ public class ReportingPostTests extends NewTestTemplate {
     PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
 
     PostEntity postEntity = addPostAndGoToUserPostsPage(postsListPage, postsCreator);
-    postData.put(POST_ON_DESKTOP_ON_USER_PAGE, postEntity.toData());
+    testsPostData.put(POST_ON_DESKTOP_ON_USER_PAGE, postEntity.toData());
 
     assertThatPostCanBeReported(postEntity);
   }
@@ -378,7 +378,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -395,7 +395,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
-    final String postId = postData.get(POST_ON_DESKTOP_ON_POSTS_LIST).getId();
+    final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POSTS_LIST).getId();
 
     PageWithPosts page = new PostsListPage().open();
 
@@ -407,7 +407,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
-    final String postId = postData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
     PageWithPosts page = new PostDetailsPage().open(postId);
 
@@ -419,7 +419,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
-    final PostEntity.Data postData = this.postData.get(POST_ON_DESKTOP_ON_USER_PAGE);
+    final PostEntity.Data postData = this.testsPostData.get(POST_ON_DESKTOP_ON_USER_PAGE);
 
     PageWithPosts page = new UserPostsPage().open(postData.getAuthorId());
 
@@ -437,7 +437,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -454,7 +454,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
@@ -472,7 +472,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
-    final String postId = postData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
+    final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
 
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
