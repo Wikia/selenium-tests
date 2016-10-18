@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
  * Set of Test Cases found on: https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
  */
 
-@Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
   private static final String INFOBOX_EMPTY_TAGS_INVOCATION =
@@ -78,6 +77,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyInternalLinksRedirecting() {
+    new ArticleContent().push("article cannot be empty", PageContent.INFOBOX_1);
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
@@ -94,7 +94,6 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyExternalLinksRedirecting() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
-    new ArticleContent().push("", PageContent.INFOBOX_1);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
