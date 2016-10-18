@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
+package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
