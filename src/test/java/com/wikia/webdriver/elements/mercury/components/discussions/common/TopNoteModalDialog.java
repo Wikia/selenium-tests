@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class TopNoteModalDialog extends BasePageObject {
 
-  private final long TIMEOUT = 10;
+  private static final long TIMEOUT = 10;
 
   @FindBy(className = "post-detail")
   private WebElement post;
