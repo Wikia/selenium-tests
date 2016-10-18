@@ -496,7 +496,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private boolean postHasReportedIndicator(final PageWithPosts pageWithPosts) {
-    return pageWithPosts.getPost().getReportedPosts().isEmpty();
+    return !pageWithPosts.getPost().getReportedPosts().isEmpty();
   }
 
   private PostEntity createNewPost(final PostsListPage postsListPage, final PostsCreator postsCreator) {
@@ -520,7 +520,7 @@ public class ReportingPostTests extends NewTestTemplate {
   private boolean postCanBeReported(final PostEntity postEntity) {
     reportPost(postEntity);
 
-    return isReported(postEntity) && isReportPostOptionAvailableFor(postEntity);
+    return isReported(postEntity) && !isReportPostOptionAvailableFor(postEntity);
   }
 
   private void reportPost(final PostEntity postEntity) {
