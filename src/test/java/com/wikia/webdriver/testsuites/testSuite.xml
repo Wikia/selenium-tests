@@ -7,7 +7,6 @@
         <classes>
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparisonMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDfpParamsPresentMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
@@ -180,7 +179,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
-            <class name="com.wikia.webdriver.testcases.monetizationtests.monetizationmodule.MonetizationModuleTests"/>
             <class name="com.wikia.webdriver.testcases.multiwikifindertests.MultiWikiFinderTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersMessageTests"/>
