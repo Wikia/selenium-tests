@@ -90,6 +90,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.LayoutTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.NavigatingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.PromotingTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.ReportingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SharingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SortingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
