@@ -38,14 +38,6 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private final String POST_ON_MOBILE_ON_USER_PAGE = "post-mobile-user-page";
 
-  private final String POST_ID_ADDED_ON_DESKTOP_DURING_TEST = "desktop-post-id";
-
-  private final String POST_ID_ADDED_ON_MOBILE_DURING_TEST = "mobile-post-id";
-
-  private final String USER_ID_THAT_ADDED_POST_ON_DESKTOP_DURING_TEST = "desktop-user-id";
-
-  private final String USER_ID_THAT_ADDED_POST_ON_MOBILE_DURING_TEST = "mobile-user-id";
-
   private final Map<String, PostEntity.Data> POST_DATA = new ConcurrentHashMap<>(8);
 
   // Anonymous user on mobile
@@ -104,6 +96,26 @@ public class ReportingPostTests extends NewTestTemplate {
         POST_DATA.get(POST_ON_MOBILE_ON_USER_PAGE).getAuthorId());
 
     assertThatNoPostHasReportedIndicator(page);
+  }
+
+  @Test(groups = "discussions-anonUserMobileReporting",
+      dependsOnMethods = {
+          "userOnMobileCanReportPostOnPostDetailsPage",
+          "anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage",
+          "userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost",
+          "moderatorOnMobileCanApproveReportedPostOnPostDetailsPage",
+          "userOnMobileCannotReReportPostOnPostDetailsPage",
+          "userOnMobileCanReportApprovedPostOnPostDetailsPage",
+          "moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage"})
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
+    final String postId = POST_DATA.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
+
+    PostDetailsPage page = new PostDetailsPage().open(postId);
+
+    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(),
+        "Anonymous user should not see deleted post.");
   }
 
   // Anonymous user on desktop
