@@ -50,6 +50,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPag
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import lombok.Getter;
+import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +65,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -615,11 +618,16 @@ public class WikiBasePageObject extends BasePageObject {
         "The wgPageName variable contains article name" + targetText, true);
   }
 
-  public void verifyNumberOfTop1kWikis(Integer numberOfWikis) {
-    String pattern = "List of wikis with matched criteria (" + numberOfWikis + ")";
+  public void verifyNumberOfTop1kWikisInRange(Range expectedRange) {
     wait.forElementVisible(headerWhereIsMyExtensionPage);
-    PageObjectLogging.log("verifyNumberOfTop1kWikis", "Verification of top 1k wikis", true, driver);
-    Assertion.assertStringContains(headerWhereIsMyExtensionPage.getText(), pattern);
+    PageObjectLogging.log("verifyNumberOfTop1kWikisInRange", "Verification of top 1k wikis", true, driver);
+    Pattern p = Pattern.compile("\\d+");
+    Matcher m = p.matcher(headerWhereIsMyExtensionPage.getText());
+    m.find();
+    Assertion.assertTrue(
+            expectedRange.contains(Integer.parseInt(m.group())),
+            String.format("Number of Top 1k Wikis between %s and %s", expectedRange.getMinimum(), expectedRange.getMaximum())
+    );
   }
 
   protected Boolean isNewGlobalNavPresent() {
@@ -682,13 +690,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyAvatarVisible() {
     wait.forElementVisible(globalNavigationAvatar);
     PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
-  }
-
-  public UserProfilePageObject clickOnAvatar() {
-    getGlobalNavigation().openAccountNavigation();
-    globalNavigationAvatar.click();
-    PageObjectLogging.log("clickOnAvatar", "clicked on avatar", true);
-    return new UserProfilePageObject(driver);
   }
 
   public void redirectToAnotherRandomArticle() {
