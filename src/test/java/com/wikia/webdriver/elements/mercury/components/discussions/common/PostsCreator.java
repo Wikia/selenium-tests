@@ -22,5 +22,5 @@ public interface PostsCreator {
 
   PostsCreator clickSubmitButton();
 
-  PostEntity.Data addPostWithRandomData();
+  PostEntity.Data addPostWithTimestamp();
 }

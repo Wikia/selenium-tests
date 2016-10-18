@@ -491,7 +491,7 @@ public class ReportingPostTests extends NewTestTemplate {
   private PostEntity createAndGetNewPost(final PostsListPage postsListPage, final PostsCreator postsCreator) {
     PostEntity.Data postData = postsCreator.click()
         .closeGuidelinesMessage()
-        .addPostWithRandomData();
+        .addPostWithTimestamp();
 
     return postsListPage.getPost()
         .waitForPostToAppearWith(postData.getDescription())

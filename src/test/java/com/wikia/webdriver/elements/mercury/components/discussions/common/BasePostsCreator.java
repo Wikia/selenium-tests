@@ -93,7 +93,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostEntity.Data addPostWithRandomData() {
+  public PostEntity.Data addPostWithTimestamp() {
     final String title = TextGenerator.defaultText();
     final String description = TextGenerator.createUniqueText();
 
