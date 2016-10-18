@@ -26,6 +26,18 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
+  private static final String NO_REPORT_POST_OPTION_MESSAGE = "'Report Post' option in 'More Options' should not be available.";
+
+  private static final String REPORTED_INDICATOR_ON_POST_MESSAGE = "Reported indicator on post should be visible.";
+
+  private static final String NO_REPORTED_INDICATOR_ON_POST_MESSAGE = "Reported indicator on post should not be visible.";
+
+  private static final String CAN_REPORT_POST_MESSAGE = "User should be able to report post.";
+
+  private static final String REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE = "User should not see reported indicator on posts which were not reported by them.";
+
+  private static final String DELETED_POST_MESSAGE = "Post should be deleted.";
+
   private static final String POST_ON_DESKTOP_ON_POSTS_LIST = "post-desktop-posts-list";
 
   private static final String POST_ON_DESKTOP_ON_POST_DETAILS = "post-desktop-post-details";
@@ -46,24 +58,27 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
-    PostsListPage postsListPage = new PostsListPage().open();
-    assertThatReportPostOptionIsNotAvailableOn(postsListPage);
+    PostsListPage page = new PostsListPage().open();
+
+    Assertion.assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
-    PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
-    assertThatReportPostOptionIsNotAvailableOn(postDetailsPage);
+    PostDetailsPage page = new PostDetailsPage().openDefaultPost();
+
+    Assertion.assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
-    UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
-    assertThatReportPostOptionIsNotAvailableOn(userPostsPage);
+    UserPostsPage page = new UserPostsPage().openDefaultUserPage();
+
+    Assertion.assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -73,7 +88,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
     PostsListPage page = new PostsListPage().open();
 
-    assertThatNoPostHasReportedIndicator(page);
+    Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -81,10 +96,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
-    PostDetailsPage page = new PostDetailsPage().open(
-        testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId());
+    PostDetailsPage page = new PostDetailsPage().open(testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId());
 
-    assertThatNoPostHasReportedIndicator(page);
+    Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -92,10 +106,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
-    UserPostsPage page = new UserPostsPage().open(
-        testsPostData.get(POST_ON_MOBILE_ON_USER_PAGE).getAuthorId());
+    UserPostsPage page = new UserPostsPage().open(testsPostData.get(POST_ON_MOBILE_ON_USER_PAGE).getAuthorId());
 
-    assertThatNoPostHasReportedIndicator(page);
+    Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting",
@@ -111,11 +124,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
 
-    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(),
-        "Anonymous user should not see deleted post.");
+    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), "Anonymous user should not see deleted post.");
   }
 
   // Anonymous user on desktop
@@ -124,16 +135,18 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostsListPage() {
-    PostsListPage postsListPage = new PostsListPage().open();
-    assertThatReportPostOptionIsNotAvailableOn(postsListPage);
+    PostsListPage page = new PostsListPage().open();
+
+    Assertion.assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
-    PostDetailsPage postDetailsPage = new PostDetailsPage().openDefaultPost();
-    assertThatReportPostOptionIsNotAvailableOn(postDetailsPage);
+    PostDetailsPage page = new PostDetailsPage().openDefaultPost();
+
+    Assertion.assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
 
@@ -141,8 +154,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
-    UserPostsPage userPostsPage = new UserPostsPage().openDefaultUserPage();
-    assertThatReportPostOptionIsNotAvailableOn(userPostsPage);
+    UserPostsPage page = new UserPostsPage().openDefaultUserPage();
+
+    Assertion.assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting",
@@ -152,7 +166,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
     PostsListPage page = new PostsListPage().open();
 
-    assertThatNoPostHasReportedIndicator(page);
+    Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting",
@@ -160,10 +174,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
-    PostDetailsPage page = new PostDetailsPage().open(
-        testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId());
+    PostDetailsPage page = new PostDetailsPage().open(testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId());
 
-    assertThatNoPostHasReportedIndicator(page);
+    Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting",
@@ -171,10 +184,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
-    UserPostsPage page = new UserPostsPage().open(
-        testsPostData.get(POST_ON_DESKTOP_ON_USER_PAGE).getAuthorId());
+    UserPostsPage page = new UserPostsPage().open(testsPostData.get(POST_ON_DESKTOP_ON_USER_PAGE).getAuthorId());
 
-    assertThatNoPostHasReportedIndicator(page);
+    Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   // User on mobile
@@ -184,12 +196,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
-
-    PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
+    PostEntity postEntity = createNewPost(postsListPage, postsListPage.getPostsCreatorMobile());
     testsPostData.put(POST_ON_MOBILE_ON_POSTS_LIST, postEntity.toData());
 
-    assertThatPostCanBeReported(postEntity);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
@@ -197,12 +207,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostDetailsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
-
-    PostEntity postEntity = addPostAndGoToPostDetailsPage(postsListPage, postsCreator);
+    PostEntity postEntity = addPostAndGoToPostDetailsPage(postsListPage, postsListPage.getPostsCreatorMobile());
     testsPostData.put(POST_ON_MOBILE_ON_POST_DETAILS, postEntity.toData());
 
-    assertThatPostCanBeReported(postEntity);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
@@ -210,12 +218,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnUserPostsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postsListPage.getPostsCreatorMobile();
-
-    PostEntity postEntity = addPostAndGoToUserPostsPage(postsListPage, postsCreator);
+    PostEntity postEntity = addPostAndGoToUserPostsPage(postsListPage, postsListPage.getPostsCreatorMobile());
     testsPostData.put(POST_ON_MOBILE_ON_USER_PAGE, postEntity.toData());
 
-    assertThatPostCanBeReported(postEntity);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobileReporting",
@@ -228,13 +234,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
-
     PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostIsNotReported(postEntity);
-    assertThatReportPostOptionIsNotAvailableFor(postEntity);
+    Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   // Second user on mobile
@@ -245,10 +249,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POSTS_LIST).getId();
-
     PageWithPosts page = new PostsListPage().open();
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobileReporting",
@@ -257,10 +262,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
-
     PageWithPosts page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobileReporting",
@@ -269,10 +275,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     final PostEntity.Data postData = this.testsPostData.get(POST_ON_MOBILE_ON_USER_PAGE);
-
     PageWithPosts page = new UserPostsPage().open(postData.getAuthorId());
+    final PostEntity postEntity = page.getPost().findPostById(postData.getId());
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postData.getId());
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   // Third user on mobile
@@ -287,10 +294,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   // Discussions moderator on mobile
@@ -304,10 +312,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(page, postId);
+    Assertion.assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertTrue(clickCancelOnValidatePostModalDialog(page, postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertFalse(clickApproveOnValidatePostModalDialog(page, postEntity), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting",
@@ -322,10 +332,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_MOBILE_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatDiscussionsModeratorCanSeeAndRemoveReportedPost(page, postId);
+    Assertion.assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertTrue(clickCancelOnDeletePostModalDialog(page, postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertTrue(clickApproveOnDeletePostModalDialog(page, postEntity), DELETED_POST_MESSAGE);
   }
 
   // User on desktop
@@ -335,12 +347,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostsListPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
-
-    PostEntity postEntity = createAndGetNewPost(postsListPage, postsCreator);
+    PostEntity postEntity = createNewPost(postsListPage, postsListPage.getPostsCreatorDesktop());
     testsPostData.put(POST_ON_DESKTOP_ON_POSTS_LIST, postEntity.toData());
 
-    assertThatPostCanBeReported(postEntity);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
@@ -348,12 +358,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostDetailsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
-
-    PostEntity postEntity = addPostAndGoToPostDetailsPage(postsListPage, postsCreator);
+    PostEntity postEntity = addPostAndGoToPostDetailsPage(postsListPage, postsListPage.getPostsCreatorDesktop());
     testsPostData.put(POST_ON_DESKTOP_ON_POST_DETAILS, postEntity.toData());
 
-    assertThatPostCanBeReported(postEntity);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
@@ -361,12 +369,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnUserPostsPage() {
     PostsListPage postsListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postsListPage.getPostsCreatorDesktop();
-
-    PostEntity postEntity = addPostAndGoToUserPostsPage(postsListPage, postsCreator);
+    PostEntity postEntity = addPostAndGoToUserPostsPage(postsListPage, postsListPage.getPostsCreatorDesktop());
     testsPostData.put(POST_ON_DESKTOP_ON_USER_PAGE, postEntity.toData());
 
-    assertThatPostCanBeReported(postEntity);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting",
@@ -379,13 +385,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
-
     PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostIsNotReported(postEntity);
-    assertThatReportPostOptionIsNotAvailableFor(postEntity);
+    Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
   // Second user on desktop
@@ -396,10 +400,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POSTS_LIST).getId();
-
     PageWithPosts page = new PostsListPage().open();
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting",
@@ -408,10 +413,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
-
     PageWithPosts page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting",
@@ -420,10 +426,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     final PostEntity.Data postData = this.testsPostData.get(POST_ON_DESKTOP_ON_USER_PAGE);
-
     PageWithPosts page = new UserPostsPage().open(postData.getAuthorId());
+    final PostEntity postEntity = page.getPost().findPostById(postData.getId());
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postData.getId());
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   // Third user on desktop
@@ -438,10 +445,11 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(page, postId);
+    Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
   // Discussions moderator on desktop
@@ -455,10 +463,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(page, postId);
+    Assertion.assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertTrue(clickCancelOnValidatePostModalDialog(page, postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertFalse(clickApproveOnValidatePostModalDialog(page, postEntity), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting",
@@ -473,22 +483,23 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
     final String postId = testsPostData.get(POST_ON_DESKTOP_ON_POST_DETAILS).getId();
-
     PostDetailsPage page = new PostDetailsPage().open(postId);
+    final PostEntity postEntity = page.getPost().findPostById(postId);
 
-    assertThatDiscussionsModeratorCanSeeAndRemoveReportedPost(page, postId);
+    Assertion.assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertTrue(clickCancelOnDeletePostModalDialog(page, postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertTrue(clickApproveOnDeletePostModalDialog(page, postEntity), DELETED_POST_MESSAGE);
   }
 
-  private void assertThatReportPostOptionIsNotAvailableOn(final PageWithPosts page) {
-    assertThatReportPostOptionIsNotAvailableFor(page.getPost().findNewestPost());
+  private boolean isReportPostOptionAvailableOn(final PageWithPosts page) {
+    return isReportPostOptionAvailableFor(page.getPost().findNewestPost());
   }
 
-  private void assertThatNoPostHasReportedIndicator(final PageWithPosts pageWithPosts) {
-    Assertion.assertTrue(pageWithPosts.getPost().getReportedPosts().isEmpty(),
-        "Anonymous user should not see reported indicator.");
+  private boolean postHasReportedIndicator(final PageWithPosts pageWithPosts) {
+    return pageWithPosts.getPost().getReportedPosts().isEmpty();
   }
 
-  private PostEntity createAndGetNewPost(final PostsListPage postsListPage, final PostsCreator postsCreator) {
+  private PostEntity createNewPost(final PostsListPage postsListPage, final PostsCreator postsCreator) {
     PostEntity.Data postData = postsCreator.click()
         .closeGuidelinesMessage()
         .addPostWithTimestamp();
@@ -499,18 +510,17 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostEntity addPostAndGoToPostDetailsPage(final PostsListPage postsListPage, final PostsCreator postsCreator) {
-    createAndGetNewPost(postsListPage, postsCreator).click();
+    createNewPost(postsListPage, postsCreator).click();
 
     new Transitions(driver).waitForPostDetailsPageTransition();
 
     return new PostDetailsPage().getPost().findNewestPost();
   }
 
-  private void assertThatPostCanBeReported(final PostEntity postEntity) {
+  private boolean postCanBeReported(final PostEntity postEntity) {
     reportPost(postEntity);
 
-    assertThatPostIsReported(postEntity);
-    assertThatReportPostOptionIsNotAvailableFor(postEntity);
+    return isReported(postEntity) && isReportPostOptionAvailableFor(postEntity);
   }
 
   private void reportPost(final PostEntity postEntity) {
@@ -518,25 +528,16 @@ public class ReportingPostTests extends NewTestTemplate {
         .clickReportPostOption();
   }
 
-  private void assertThatPostIsReported(final PostEntity postEntity) {
-    Assertion.assertTrue(postEntity.hasTopNote(),
-        "Post should have top note. (Note with reporter should appear at the top of post.)");
-    Assertion.assertTrue(postEntity.isReported(),
-        "Post should be reported.");
+  private boolean isReported(final PostEntity postEntity) {
+    return postEntity.hasTopNote() && postEntity.isReported();
   }
 
-  private void assertThatPostIsNotReported(final PostEntity postEntity) {
-    Assertion.assertFalse(postEntity.isReported(),
-        "Post should not be reported.");
-  }
-
-  private void assertThatReportPostOptionIsNotAvailableFor(final PostEntity postEntity) {
-    Assertion.assertFalse(postEntity.clickMoreOptions().hasReportPostOption(),
-        "There should be no 'Report post' option in 'More options' on post already reported by user.");
+  private boolean isReportPostOptionAvailableFor(final PostEntity postEntity) {
+    return postEntity.clickMoreOptions().hasReportPostOption();
   }
 
   private PostEntity addPostAndGoToUserPostsPage(final PostsListPage postsListPage, final PostsCreator postsCreator) {
-    createAndGetNewPost(postsListPage, postsCreator)
+    createNewPost(postsListPage, postsCreator)
         .clickMoreOptions()
         .clickViewAllPostsByOption();
 
@@ -545,76 +546,43 @@ public class ReportingPostTests extends NewTestTemplate {
     return new UserPostsPage().getPost().findNewestPost();
   }
 
-  private void assertThatPostReportedByOtherUserDoesNotHaveReportedIndicatorAndCanBeReportedByCurrentUser(
-      final PageWithPosts page, final String postId) {
-    PostEntity postEntity = page.getPost().findPostById(postId);
-
-    Assertion.assertFalse(postEntity.isReported(),
-        "User should not see reported indicator on posts which were not reported by them.");
-    assertThatPostCanBeReported(postEntity);
-  }
-
-  private void assertThatDiscussionsModeratorCanSeeAndApproveReportedPost(
-      final PostDetailsPage page, final String postId) {
-    final PostEntity postEntity = page.getPost().findPostById(postId);
-
-    assertThatPostIsReported(postEntity);
-    assertThatDiscussionsModeratorCanClickCancelOnValidateModalDialog(page, postEntity);
-    assertThatDiscussionsModeratorCanApproveReportedPost(page, postEntity);
-  }
-
-  private void assertThatDiscussionsModeratorCanClickCancelOnValidateModalDialog(
-      final PostDetailsPage page, final PostEntity postEntity) {
+  private boolean clickCancelOnValidatePostModalDialog(final PostDetailsPage page, final PostEntity postEntity) {
     postEntity.findTopNote()
         .clickValidate();
 
     page.getTopNoteModalDialog()
         .clickCancel();
 
-    assertThatPostIsReported(postEntity);
+    return isReported(postEntity);
   }
 
-  private void assertThatDiscussionsModeratorCanApproveReportedPost(
-      final PostDetailsPage page, final PostEntity postEntity) {
+  private boolean clickApproveOnValidatePostModalDialog(final PostDetailsPage page, final PostEntity postEntity) {
     postEntity.findTopNote()
         .clickValidate();
 
     page.getTopNoteModalDialog()
         .clickApprove();
 
-    Assertion.assertFalse(postEntity.isReported(),
-        "Discussion moderator should not see reported indicator on approved post.");
+    return postEntity.isReported();
   }
 
-  private void assertThatDiscussionsModeratorCanSeeAndRemoveReportedPost(
-      final PostDetailsPage page, final String postId) {
-    final PostEntity postEntity = page.getPost().findPostById(postId);
-
-    assertThatPostIsReported(postEntity);
-    assertThatDiscussionsModeratorCanClickCancelOnDeleteModalDialog(page, postEntity);
-    assertThatDiscussionsModeratorCanDeleteReportedPost(page, postEntity);
-  }
-
-  private void assertThatDiscussionsModeratorCanClickCancelOnDeleteModalDialog(
-      final PostDetailsPage page, final PostEntity postEntity) {
+  private boolean clickCancelOnDeletePostModalDialog(final PostDetailsPage page, final PostEntity postEntity) {
     postEntity.findTopNote()
         .clickDelete();
 
     page.getTopNoteModalDialog()
         .clickCancel();
 
-    assertThatPostIsReported(postEntity);
+    return isReported(postEntity);
   }
 
-  private void assertThatDiscussionsModeratorCanDeleteReportedPost(
-      final PostDetailsPage page, final PostEntity postEntity) {
+  private boolean clickApproveOnDeletePostModalDialog(final PostDetailsPage page, final PostEntity postEntity) {
     postEntity.findTopNote()
         .clickDelete();
 
     page.getTopNoteModalDialog()
         .clickApprove();
 
-    Assertion.assertTrue(postEntity.isDeleted(),
-        "Discussion moderator should see deleted indicator on deleted post.");
+    return postEntity.isDeleted();
   }
 }

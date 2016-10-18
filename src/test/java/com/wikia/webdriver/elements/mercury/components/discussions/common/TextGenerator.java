@@ -15,6 +15,6 @@ public final class TextGenerator {
   }
 
   public static String createUniqueText() {
-    return String.format(UNIQUE_TEXT_FORMAT, System.nanoTime());
+    return String.format(UNIQUE_TEXT_FORMAT, System.currentTimeMillis());
   }
 }
