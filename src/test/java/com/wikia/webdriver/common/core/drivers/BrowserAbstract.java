@@ -83,13 +83,15 @@ public abstract class BrowserAbstract {
    * Set Proxy instance for a Browser instance
    */
   protected void setProxy() {
+
     if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
       String countryCode = Configuration.getCountryCode();
       server.setTrustAllServers(true);
-      server.setMitmDisabled(false);
+      server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
       server.setRequestTimeout(90, TimeUnit.SECONDS);
-      server.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+      server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
+          CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
       if (StringUtils.isNotBlank(countryCode)) {
         server.setProxyServer(GeoEdgeProxy.getProxyAddress(countryCode));
       }
