@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.category;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -23,7 +22,7 @@ public class CategoryPageObject extends WikiBasePageObject {
         super();
     }
 
-    public void verifyCategoryPageTitle(String categoryLinkName) {
+    public String getCategoryPageTitle() {
         wait.forElementVisible(categoryHeader);
         String title = categoryHeader.getText();
         PageObjectLogging.log(
@@ -31,7 +30,8 @@ public class CategoryPageObject extends WikiBasePageObject {
             "the name of the category is: " + title,
             true
         );
-        Assertion.assertEquals("Category:" + title, categoryLinkName);
+
+        return title;
     }
 
     public int getArticleIndexInGalleryByName(String articleName) {

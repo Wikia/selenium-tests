@@ -1,0 +1,32 @@
+{{Infobox2
+|title1=Automation testing
+|image1=[[File:Image010.jpg]]
+|caption1=$$ Example <> caption $$
+|row1=https://www.wikipedia.org <ref>Ref wikipedia</ref>
+|row2=Example? |row3=[[Category:VEINFOBOX]]
+|row4=
+<poem> 200 (Txt)
+420 [[Infobox1|internal link]]
+400 [[Redlink89328932|red link]]
+600 ([[https://www.wikia.com]] -ref)
+1200 [[Infobox2|self link]]
+</poem>
+
+|title2=http://www.wikia.com/Fandom
+|row5= == Nope ==
+|row6= <tabber> 1=[[File:Image009.jpg|thumb|Caption1]]</tabber> Text under the tabber.
+|row7 = #VeryVeryVeryVeryVeryLongLine
+#Second very very very very very long line
+#Three
+|row8 = *VeryVeryVeryVeryVeryLongLine
+*Second very very very very very long line
+*Three
+|horizontal1 = Incomplete horizontal. <b>Bold text</b>
+|horizontal2 = Incomplete horizontal. ''Italic text''
+|z1 = <u>Underline text</u> and [[Infobox2]]
+|h1 = Complete horizontal. <b>Bold text</b>
+|h2 = Complete horizontal. ''Italic text''
+|h3 = Complete horizontal. <u>Underline text</u>
+|nav1 = [[Infobox1]] <b>nav</b>
+|nav2 = [[Infobox1]] <b>nav</b>
+|nav3 = [[Infobox1]] <b>nav</b> }}
