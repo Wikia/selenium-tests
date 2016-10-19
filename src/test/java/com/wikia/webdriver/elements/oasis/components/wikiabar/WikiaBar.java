@@ -25,15 +25,15 @@ public class WikiaBar extends WikiBasePageObject {
     super();
   }
 
-  public KeyboardShortcutsModal clickOnShortcutsLink() {
-    wait.forElementClickable(collapseButton);
+  public WikiaBar ensureBarIsNotCollapsed() {
     if (isCollapsed()) {
       toggle();
-      PageObjectLogging.logInfo("Click on uncollapse in Wikia bar");
-      wait.forElementClickable(shortcutsLink);
-      PageObjectLogging.logInfo("Shortcuts link clickable in Wikia bar");
     }
+    return this;
+  }
 
+  public KeyboardShortcutsModal clickOnShortcutsLink() {
+    wait.forElementClickable(shortcutsLink);
     shortcutsLink.click();
     PageObjectLogging.logInfo("Click on shortcuts link in Wikia bar");
 
@@ -48,7 +48,9 @@ public class WikiaBar extends WikiBasePageObject {
   }
 
   public WikiaBar toggle() {
+    wait.forElementClickable(collapseButton);
     collapseButton.click();
+    PageObjectLogging.logInfo("Click on collapse/uncollapse in Wikia bar");
     return this;
   }
 }
