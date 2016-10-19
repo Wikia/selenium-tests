@@ -3,15 +3,20 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TopNoteModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;
 
 
-public class PostDetailsPage extends WikiBasePageObject {
+public class PostDetailsPage extends WikiBasePageObject implements PageWithPosts {
+
+  @Getter(lazy = true)
+  private final TopNoteModalDialog topNoteModalDialog = new TopNoteModalDialog();
 
   @Getter(lazy = true)
   private final Post post = new Post();
@@ -36,8 +41,8 @@ public class PostDetailsPage extends WikiBasePageObject {
 
   private static final String EMPTY_POST_ID = "4809883";
 
-  public PostDetailsPage open(String wikiID) {
-    getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
+  public PostDetailsPage open(String postId) {
+    getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, postId));
     return this;
   }
 
@@ -45,7 +50,7 @@ public class PostDetailsPage extends WikiBasePageObject {
     return open(DEFAULT_POST_ID);
   }
 
-  public PostDetailsPage openEmpyPost() {
+  public PostDetailsPage openEmptyPost() {
     return open(EMPTY_POST_ID);
   }
 
@@ -53,4 +58,7 @@ public class PostDetailsPage extends WikiBasePageObject {
     return PAGE_PATTERN.matcher(url).find();
   }
 
+  public static String extractPostIdFrom(String url) {
+    return PostDetailsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
+  }
 }

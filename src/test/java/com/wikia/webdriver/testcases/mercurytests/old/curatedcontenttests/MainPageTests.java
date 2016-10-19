@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -67,6 +68,7 @@ public class MainPageTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedMainPageTest_001")
   @Execute(onWikia = MercuryWikis.MERCURY_CC)
+  @RelatedIssue(issueID = "XW-1739", comment = "if this tests fails just edit any article on mercurycc.wikia.com and wait 24h")
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
 

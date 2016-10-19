@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -28,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.TimeoutException;
 
 public class AdsBaseObject extends WikiBasePageObject {
 
@@ -808,5 +808,4 @@ public class AdsBaseObject extends WikiBasePageObject {
       return false;
     }
   }
-
 }
