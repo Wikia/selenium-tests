@@ -39,8 +39,15 @@ public class SpecialWhatLinksHerePageObject extends SpecialPageObject {
     return this;
   }
 
-  public String getWhatLinksHereArticleName(int index) {
-    wait.forElementVisible(whatLinksList.get(index));
-    return whatLinksList.get(index).getText();
+  public boolean whatLinksHereContainsArticleName(String articleName) {
+    boolean containsArticleName = false;
+    for(int i=0; i<whatLinksList.size(); i++) {
+      wait.forElementVisible(whatLinksList.get(i));
+      if(whatLinksList.get(i).getText().contains(articleName)) {
+        containsArticleName = true;
+      }
+    }
+
+    return containsArticleName;
   }
 }

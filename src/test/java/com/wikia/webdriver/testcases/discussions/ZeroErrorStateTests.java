@@ -205,13 +205,13 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   private void userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
-    ErrorMessages errorMessage = new PostDetailsPage().openEmpyPost().getErrorMessages();
+    ErrorMessages errorMessage = new PostDetailsPage().openEmptyPost().getErrorMessages();
     Assertion.assertTrue(errorMessage.isErrorMessagePresent());
     Assertion.assertEquals(errorMessage.getErrorMessageText(), MESSAGE_1 + MESSAGE_2);
   }
 
   private void userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage() {
-    ErrorMessages errorMessage = new PostDetailsPage().openEmpyPost().getErrorMessages();
+    ErrorMessages errorMessage = new PostDetailsPage().openEmptyPost().getErrorMessages();
     Assertion.assertTrue(errorMessage.isErrorMessagePresent());
     Assertion.assertEquals(errorMessage.getErrorMessageText(), MESSAGE_1 + MESSAGE_3);
   }

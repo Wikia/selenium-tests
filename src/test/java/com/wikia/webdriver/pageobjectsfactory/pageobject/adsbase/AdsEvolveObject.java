@@ -49,4 +49,9 @@ public class AdsEvolveObject extends AdsBaseObject {
     verifyEvolveInSlot(AdsContent.MOBILE_PREFOOTER);
   }
 
+  public void enableEvolve(String testedPage) {
+    String url = urlBuilder.appendQueryStringToURL(testedPage, "Wikia.InstantGlobals.wgAdDriverEvolve2Countries=[XX]");
+    driver.get(url);
+  }
+
 }
