@@ -65,7 +65,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement focusedHighlight;
   @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
   private WebElement veSurface;
-  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
+  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled .oo-ui-decoratedOptionWidget")
   private WebElement infoboxPopup;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-buttonElement")
   private WebElement applyChangesButton;
