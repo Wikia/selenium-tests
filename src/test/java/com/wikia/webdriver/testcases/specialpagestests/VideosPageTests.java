@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 public class VideosPageTests extends NewTestTemplate {
 
   static final String VIDEO_QUERY = "truth";
+  static String ADDED_VIDEO_TITLE;
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
@@ -44,12 +45,17 @@ public class VideosPageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
     specialVideos.addVideoViaAjax(video.getUrl());
+
+    specialVideos.isNewVideoAdded();
+
+    ADDED_VIDEO_TITLE = specialVideos.getNewestVideoTitle();
+
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
 
-    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(video.getTitle()),
+    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(ADDED_VIDEO_TITLE),
                          "Banner notification text doesn't contains video title");
   }
 
@@ -68,11 +74,16 @@ public class VideosPageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
     specialVideos.addVideoViaAjax(video.getUrl());
+
+    specialVideos.isNewVideoAdded();
+
+    ADDED_VIDEO_TITLE = specialVideos.getNewestVideoTitle();
+
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
-    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), video.getTitle(),
+    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), ADDED_VIDEO_TITLE,
                               "Video is still visible as newest video");
   }
 }
