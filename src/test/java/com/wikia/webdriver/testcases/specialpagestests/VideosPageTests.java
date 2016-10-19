@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 public class VideosPageTests extends NewTestTemplate {
 
   static final String VIDEO_QUERY = "truth";
-  static String ADDED_VIDEO_TITLE;
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
@@ -48,14 +47,14 @@ public class VideosPageTests extends NewTestTemplate {
 
     specialVideos.isNewVideoAdded();
 
-    ADDED_VIDEO_TITLE = specialVideos.getNewestVideoTitle();
+    String addedVideoTitle = specialVideos.getNewestVideoTitle();
 
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
 
-    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(ADDED_VIDEO_TITLE),
+    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(addedVideoTitle),
                          "Banner notification text doesn't contains video title");
   }
 
@@ -77,13 +76,13 @@ public class VideosPageTests extends NewTestTemplate {
 
     specialVideos.isNewVideoAdded();
 
-    ADDED_VIDEO_TITLE = specialVideos.getNewestVideoTitle();
+    String addedVideoTitle = specialVideos.getNewestVideoTitle();
 
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
-    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), ADDED_VIDEO_TITLE,
+    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
                               "Video is still visible as newest video");
   }
 }
