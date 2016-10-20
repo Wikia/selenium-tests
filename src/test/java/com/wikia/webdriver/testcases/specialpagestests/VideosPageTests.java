@@ -44,12 +44,17 @@ public class VideosPageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
     specialVideos.addVideoViaAjax(video.getUrl());
+
+    specialVideos.isNewVideoAdded();
+
+    String addedVideoTitle = specialVideos.getNewestVideoTitle();
+
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
 
-    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(video.getTitle()),
+    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(addedVideoTitle),
                          "Banner notification text doesn't contains video title");
   }
 
@@ -68,11 +73,16 @@ public class VideosPageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
     specialVideos.addVideoViaAjax(video.getUrl());
+
+    specialVideos.isNewVideoAdded();
+
+    String addedVideoTitle = specialVideos.getNewestVideoTitle();
+
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
-    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), video.getTitle(),
+    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
                               "Video is still visible as newest video");
   }
 }
