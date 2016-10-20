@@ -1,51 +1,42 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.category;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class CategoryPageObject extends WikiBasePageObject {
 
-    @FindBy(css = "#WikiaPageHeader h1")
-    private WebElement categoryHeader;
-    @FindBy(css = ".category-gallery-item img")
-    private List<WebElement> categoryGalleryItemImages;
-    @FindBy(css = ".category-gallery-item .title")
-    private List<WebElement> categoryGalleryItemsName;
+  @FindBy(css = "#WikiaPageHeader h1")
+  private WebElement categoryHeader;
+  @FindBy(css = ".category-gallery-item")
+  private List<WebElement> categoryGalleryItems;
 
-    public CategoryPageObject(WebDriver driver) {
-        super();
+  public String getCategoryPageTitle() {
+    wait.forElementVisible(categoryHeader);
+    String title = categoryHeader.getText();
+    PageObjectLogging.log("getCategoryname", "the name of the category is: " + title, true);
+
+    return title;
+  }
+
+  /**
+   * Get image URL for a specific article from gallery
+   * 
+   * @param articleName - name of the article
+   * @return null if there is no such article name displayed
+   */
+  public String getImageURLFromGallery(String articleName) {
+    for (WebElement page : categoryGalleryItems) {
+      if (page.findElement(By.cssSelector("a")).getAttribute("title").equals(articleName)) {
+        return page.findElement(By.cssSelector("img")).getAttribute("src");
+      }
     }
 
-    public String getCategoryPageTitle() {
-        wait.forElementVisible(categoryHeader);
-        String title = categoryHeader.getText();
-        PageObjectLogging.log(
-            "getCategoryname",
-            "the name of the category is: " + title,
-            true
-        );
-
-        return title;
-    }
-
-    public int getArticleIndexInGalleryByName(String articleName) {
-        int index = -1;
-        for(int i=0; i<categoryGalleryItemsName.size(); i++) {
-            if(articleName.equals(categoryGalleryItemsName.get(i).getText())) {
-                index = i;
-            }
-        }
-        return index;
-    }
-
-    public String getPageImageURL(int index) {
-        wait.forElementVisible(categoryGalleryItemImages.get(index));
-        return categoryGalleryItemImages.get(index).getAttribute("src");
-    }
+    return null;
+  }
 }
