@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.searchtests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.SearchContent;
@@ -44,21 +45,24 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     // verify results pos parameter for first page
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
-    search.verifyThumbnails(SearchContent.RESULTS_PER_PAGE);
+    search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
+    Assertion.assertTrue(search.areThumbnailsContainImages(), "Thumbnail does not contain image");
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
     search.nextPage();
     // verify results pos parameter for second page
     search.verifyResultsPosForPage(1, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
-    search.verifyThumbnails(SearchContent.RESULTS_PER_PAGE);
+    search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
+    Assertion.assertTrue(search.areThumbnailsContainImages(), "Thumbnail does not contain image");
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
     search.prevPage();
     // verify results pos parameter for first page
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
-    search.verifyThumbnails(SearchContent.RESULTS_PER_PAGE);
+    search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
+    Assertion.assertTrue(search.areThumbnailsContainImages(), "Thumbnail does not contain image");
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
   }

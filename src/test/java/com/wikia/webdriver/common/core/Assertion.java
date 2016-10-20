@@ -36,27 +36,6 @@ public class Assertion extends Assert {
     return assertion;
   }
 
-  public static boolean assertStringContainsOneOfTwoElements(String current, String firstPattern, String secondPattern) {
-    String currentEncoded = encodeSpecialChars(current);
-    String patternsEncoded = encodeSpecialChars(firstPattern) + " or " + encodeSpecialChars(secondPattern);
-    boolean assertion = true;
-    try {
-      if (!(current.contains(firstPattern) || current.contains(secondPattern))) {
-        throw new AssertionError();
-      }
-    } catch (AssertionError ass) {
-      addVerificationFailure(ass);
-      assertion = false;
-    }
-    PageObjectLogging.log(
-            "assertStringContains",
-            "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
-                    + patternsEncoded + "\"",
-            assertion
-    );
-    return assertion;
-  }
-
   public static boolean assertStringNotContains(String current, String pattern) {
     String currentEncoded = encodeSpecialChars(current);
     String patternEncoded = encodeSpecialChars(pattern);
