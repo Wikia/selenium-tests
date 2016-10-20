@@ -168,7 +168,7 @@ public class Configuration {
     } else if (env.contains("staging")) {
       return EnvType.STAGING;
     } else if (env.contains("verify") || env.contains("preview")
-               || env.contains("sandbox")) {
+               || env.contains("sandbox") || env.contains("stable")) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {
       return EnvType.DEV;
