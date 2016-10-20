@@ -81,18 +81,26 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public String getNewestVideoTitle() {
-    wait.forElementVisible(newestVideo);
     return newestVideoTitle.getText();
   }
 
   public void deleteNewestVideo() {
-    openSpecialVideoPageMostRecent(getWikiUrl());
-    wait.forElementVisible(newestVideoTitle);
-    jsActions.execute("$('.special-videos-grid .remove').first().show()");
-    wait.forElementVisible(newestVideo);
     newestVideoDeleteIcon.click();
     wait.forElementVisible(deleteConfirmButton);
     deleteConfirmButton.click();
+  }
+
+  public boolean isNewVideoAdded() {
+    try {
+      openSpecialVideoPageMostRecent(getWikiUrl());
+      wait.forElementVisible(newestVideoTitle);
+      jsActions.execute("$('.special-videos-grid .remove').first().show()");
+      wait.forElementVisible(newestVideo);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Title is not visible", e);
+      return false;
+    }
   }
 
   public boolean isHeaderVisible() {
