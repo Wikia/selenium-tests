@@ -141,11 +141,11 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   /**
    * Clicks on nth result
    *
-   * @param resultNumeber zero based number of result to click
+   * @param resultNumber zero based number of result to click
    * @return result page
    */
-  public WikiArticleHomePage openResult(int resultNumeber) {
-    WebElement resultLink = resultLinks.get(resultNumeber);
+  public WikiArticleHomePage openResult(int resultNumber) {
+    WebElement resultLink = resultLinks.get(resultNumber);
     wait.forElementVisible(resultLink);
     scrollAndClick(resultLink);
     return new WikiArticleHomePage();
