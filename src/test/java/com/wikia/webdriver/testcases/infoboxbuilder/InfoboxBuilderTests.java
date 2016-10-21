@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
@@ -197,6 +198,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
+  @RelatedIssue(issueID = "WW-401")
   @Execute(asUser = User.USER)
   public void newTemplateCreation() {
     new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
@@ -293,6 +295,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002", "test_verify"})
+  @RelatedIssue(issueID = "WW-401")
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
