@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.regex.*;
 
 /**
  * Author: Artur Dwornik Date: 28.03.13 Time: 19:29
@@ -143,8 +144,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
    * @param resultNumber zero based number of result to click
    * @return result page
    */
-  public WikiArticleHomePage openResult(int resultNumeber) {
-    WebElement resultLink = resultLinks.get(resultNumeber);
+  public WikiArticleHomePage openResult(int resultNumber) {
+    WebElement resultLink = resultLinks.get(resultNumber);
     wait.forElementVisible(resultLink);
     scrollAndClick(resultLink);
     return new WikiArticleHomePage();
@@ -182,13 +183,26 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
                           true);
   }
 
-  public void verifyThumbnails(int number) {
+  public void verifyThumbnailsAmount(int number) {
     Assertion.assertNumber(thumbnails.size(), number, "checking number of thumbnails");
-    for (WebElement elem : thumbnails) {
-      Assertion.assertStringContains(elem.getAttribute("src"), ".png");
-    }
-    PageObjectLogging.log("verifyThumbnails", "thumbnails verified",
+    PageObjectLogging.log("verifyThumbnailsAmount", "thumbnails verified",
                           true);
+  }
+
+  public boolean areThumbnailsContainImages() {
+    String jpgOrPngImage = ".*\\.(png|jpg).*";
+    for (WebElement elem : thumbnails) {
+      boolean isImage = Pattern.matches(jpgOrPngImage, elem.getAttribute("src"));
+      try {
+        if (!isImage) {
+          throw new AssertionError();
+        }
+      } catch (AssertionError ass) {
+        PageObjectLogging.log("Thumbnail does not contain image", ass, true);
+        return false;
+      }
+    }
+    return true;
   }
 
   public void verifyDescription(int number) {
