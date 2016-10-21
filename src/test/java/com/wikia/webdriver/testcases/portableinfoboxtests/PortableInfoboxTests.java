@@ -193,7 +193,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String categoryLinkName = infobox.getCategoryLinkName();
     infobox.clickCategoryLink();
-    String categoryPageTitle = new CategoryPageObject(driver).getCategoryPageTitle();
+    String categoryPageTitle = new CategoryPageObject().getCategoryPageTitle();
 
     Assertion.assertTrue(categoryLinkName.contains(categoryPageTitle));
   }
@@ -355,8 +355,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    String categoryImageURL = categoryPage
-        .getPageImageURL(categoryPage.getArticleIndexInGalleryByName(PageContent.INFOBOX_2));
+    String categoryImageURL = categoryPage.getImageURLFromGallery(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(categoryImageURL.contains(imageName));
   }
