@@ -198,7 +198,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
           throw new AssertionError();
         }
       } catch (AssertionError ass) {
-        PageObjectLogging.log("isThumbnailContaisImage", "thumbnail does not contain image", true);
+        PageObjectLogging.log("Thumbnail does not contain image", ass, true);
         return false;
       }
     }

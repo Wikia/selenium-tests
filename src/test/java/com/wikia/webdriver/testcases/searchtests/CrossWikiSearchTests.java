@@ -23,6 +23,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHom
 @Test(groups = "CrossWikiSearch")
 public class CrossWikiSearchTests extends NewTestTemplate {
 
+  private static final String LACK_OF_IMAGE = "Thumbnail does not contain image";
+
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getExactMatchQueries",
       groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_001_exactMatch(String query, String wikiName, String vertical) {
@@ -46,7 +48,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
     search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
-    Assertion.assertTrue(search.areThumbnailsContainImages(), "Thumbnail does not contain image");
+    Assertion.assertTrue(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
     search.nextPage();
@@ -54,7 +56,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyResultsPosForPage(1, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
     search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
-    Assertion.assertTrue(search.areThumbnailsContainImages(), "Thumbnail does not contain image");
+    Assertion.assertTrue(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
     search.prevPage();
@@ -62,7 +64,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
     search.verifyThumbnailsAmount(SearchContent.RESULTS_PER_PAGE);
-    Assertion.assertTrue(search.areThumbnailsContainImages(), "Thumbnail does not contain image");
+    Assertion.assertTrue(search.areThumbnailsContainImages(), LACK_OF_IMAGE);
     search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
   }
