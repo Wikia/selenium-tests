@@ -199,14 +199,14 @@ public class PortableInfobox extends BasePageObject {
     wait.forElementVisible(categoryLinkInInfobox);
     scrollAndClick(categoryLinkInInfobox);
 
-    return new CategoryPageObject(driver);
+    return new CategoryPageObject();
   }
 
   public CategoryPageObject clickCategoryWithIndex(int index) {
     wait.forElementVisible(categories.get(index));
     scrollAndClick(categories.get(index));
 
-    return new CategoryPageObject(driver);
+    return new CategoryPageObject();
   }
 
   public PortableInfobox open(String articleTitle) {
