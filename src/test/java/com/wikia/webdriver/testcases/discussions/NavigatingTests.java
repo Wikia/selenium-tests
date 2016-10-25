@@ -63,9 +63,11 @@ public class NavigatingTests extends NewTestTemplate {
    */
 
   private void backToWiki() {
-    BackButtons backButtons = new PostsListPage().open().getBackButtons();
+    PostsListPage postListPage = new PostsListPage();
+    BackButtons backButtons = postListPage.open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
+    Assertion.assertTrue(postListPage.isWikiFirstHeaderVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
   }
 

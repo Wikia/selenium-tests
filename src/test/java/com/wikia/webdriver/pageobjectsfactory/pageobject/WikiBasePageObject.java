@@ -776,6 +776,18 @@ public class WikiBasePageObject extends BasePageObject {
         "cb=" + DateTime.now().getMillis()));
   }
 
+  public Boolean isWikiFirstHeaderVisible() {
+    try {
+      wait.forElementVisible(wikiFirstHeader);
+      return true;
+    }
+
+    catch(TimeoutException e) {
+      PageObjectLogging.logInfo("FirstPageHeader object not visible", e);
+      return false;
+    }
+  }
+
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
