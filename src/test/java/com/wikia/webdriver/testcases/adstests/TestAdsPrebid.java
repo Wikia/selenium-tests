@@ -44,10 +44,5 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
 
     prebidAds.verifyKeyValues(AdsContent.MOBILE_TOP_LB, "wikia", "320x50", "8.30");
     prebidAds.verifyPrebidCreative(AdsContent.MOBILE_TOP_LB, true);
-
-    prebidAds.goToNextPageView();
-
-    prebidAds.verifyKeyValues(AdsContent.MOBILE_TOP_LB, null, null, null);
-    prebidAds.verifyPrebidCreative(AdsContent.MOBILE_TOP_LB, false);
   }
 }
