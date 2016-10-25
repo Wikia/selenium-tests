@@ -62,7 +62,7 @@ public class ForcedLoginTests extends NewTestTemplate {
   public void anonCanLogInViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
-    base.verifyLoginReguiredMessage();
+    base.verifyLoginRequiredMessage();
     SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
     new SignInPage(driver)
         .getLoginArea()

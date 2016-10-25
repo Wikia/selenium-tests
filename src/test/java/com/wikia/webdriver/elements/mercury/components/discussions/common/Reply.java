@@ -35,7 +35,7 @@ public class Reply extends BasePageObject {
 
   public void clickReplyUpvoteButton(int replyIndex) {
     WebElement button = replyUpvoteButton.get(replyIndex);
-    wait.forElementClickable(button);
+    wait.forElementClickable(button, replyIndex);
     button.click();
   }
 

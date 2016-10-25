@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
@@ -30,6 +31,29 @@ public class UserAvatar extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
+  @Test(groups = "UserAvatar_clickOnAvatarOpensUserMenu")
+  @Execute(asUser = User.STAFF)
+  public void clickOnAvatarOpensUserMenu() {
+    new SpecialVersionPage().open();
+
+    GlobalNavigation userAvatar = new GlobalNavigation();
+    userAvatar.clickUserAvatar();
+
+    Assertion.assertTrue(userAvatar.isUserMenuOpened());
+  }
+
+  @Test(groups = "UserAvatar_userCanEnterHisProfileFromUserMenu")
+  @Execute(asUser = User.STAFF)
+  public void userCanEnterHisProfileFromUserMenu(){
+    new SpecialVersionPage().open();
+
+    GlobalNavigation userAvatar = new GlobalNavigation();
+    userAvatar.clickUserAvatar().clickViewProfile();
+
+    UserProfilePageObject profile = new UserProfilePageObject(driver);
+    profile.verifyProfilePage(credentials.userNameStaff);
+  }
+
   @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
   public void staffUserCanUploadAvatar() {
@@ -48,20 +72,10 @@ public class UserAvatar extends NewTestTemplate {
     profile.verifyURLStatus(200, changedAvatarUrl);
   }
 
-  @Test(groups = "UserAvatar_clickOnAvatarRedirectsStaffUserToUserPage")
-  @Execute(asUser = User.STAFF)
-  public void clickOnAvatarRedirectsStaffUserToUserPage() {
-    new SpecialVersionPage().open();
-
-    UserProfilePageObject profile = new UserProfilePageObject(driver).clickOnAvatar();
-    profile.verifyProfilePage(credentials.userNameStaff);
-  }
 
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "MAIN-5960", comment =
-      "The Delete avatar button (and windows confirmation popup) " +
-      "have to be clicked twice in order to delete an avatar")
+  @RelatedIssue(issueID = "MAIN-8080")
   public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
@@ -69,10 +83,14 @@ public class UserAvatar extends NewTestTemplate {
     profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
-    profile.verifyAvatarChanged(avatarUrl);
-    String changedAvatarUrl = profile.getAvatarImageSrc();
-    profile.verifyAvatarVisible();
+    profile.openWikiPage(); //user needs to visit other page to get avatar refreshed
+    UserProfilePageObject changedProfile = new UserProfilePageObject(driver).openProfilePage(
+        credentials.userNameStaff, wikiURL);
+
+    changedProfile.verifyAvatarChanged(avatarUrl);
+    String changedAvatarUrl = changedProfile.getAvatarImageSrc();
+    changedProfile.verifyAvatarVisible();
     Assertion.assertNotEquals(changedAvatarUrl, avatarUrl);
-    profile.verifyURLStatus(200, changedAvatarUrl);
+    changedProfile.verifyURLStatus(200, changedAvatarUrl);
   }
 }

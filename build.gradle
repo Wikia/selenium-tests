@@ -2,8 +2,8 @@ apply plugin: 'java'
 
 group = 'com.wikia.qa'
 version = '1.0.0'
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
@@ -409,7 +409,7 @@ dependencies {
     testCompile 'io.appium:java-client:3.1.0'
     testCompile 'joda-time:joda-time:2.7'
     testCompile 'com.jayway.jsonpath:json-path:1.2.0'
-    testCompile 'net.lightbody.bmp:browsermob-core:2.1.1'
+    testCompile 'net.lightbody.bmp:browsermob-core:2.1.2'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.18'
     testCompile 'org.slf4j:slf4j-log4j12:1.6.4'
     testCompile 'org.projectlombok:lombok:1.16.6'

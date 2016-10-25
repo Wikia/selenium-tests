@@ -13,24 +13,34 @@ import java.util.concurrent.TimeUnit;
 
 public class AdsOoyalaObject extends AdsBaseObject {
 
+  private static final Color GREEN = new Color(4, 253, 6);
+  private static final Color BLUE = new Color(4, 0, 254);
+  private static final int AD_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 30;
+
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
-  private WebElement lightbox;
+  private WebElement lightboxVideo;
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
   }
 
-  public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
-    verifyColorAd(lightbox, lightboxAdColor, adDurationSec);
+  public void playVideo() {
+    wait.forElementVisible(lightboxVideo);
+    lightboxVideo.click();
+  }
+
+  public void verifyLightboxAd() {
+    verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
     PageObjectLogging.log("LightboxAd",
-                          "Lightbox had " + lightboxAdColor + " during " + adDurationSec
+                          "Lightbox had " + BLUE + " during " + AD_DURATION_SEC
                           + " seconds", true);
   }
 
-  public void verifyLightboxVideo(Color lightboxVideoColor, int videoDurationSec) {
-    verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
+  public void verifyLightboxVideo() {
+    verifyColorAd(lightboxVideo, GREEN, VIDEO_DURATION_SEC);
     PageObjectLogging.log("LightboxVideo",
-                          "Lightbox had " + lightboxVideoColor + " during " + videoDurationSec
+                          "Lightbox had " + GREEN + " during " + VIDEO_DURATION_SEC
                           + " seconds", true);
   }
 

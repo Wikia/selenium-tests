@@ -60,7 +60,7 @@ public class AddPinComponentObject extends BasePageObject {
     cancelButton.click();
     PageObjectLogging.log("clickCancelButton", "cancel button clicked", true, driver);
     driver.switchTo().defaultContent();
-    return new InteractiveMapPageObject(driver);
+    return new InteractiveMapPageObject();
   }
 
   public void clearPinDescription() {
@@ -74,7 +74,7 @@ public class AddPinComponentObject extends BasePageObject {
     saveButton.click();
     PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
     driver.switchTo().defaultContent();
-    return new InteractiveMapPageObject(driver);
+    return new InteractiveMapPageObject();
   }
 
   public void clickSuggestion(int opt) {
@@ -87,7 +87,7 @@ public class AddPinComponentObject extends BasePageObject {
     wait.forElementVisible(deleteButton);
     deleteButton.click();
     driver.switchTo().defaultContent();
-    return new InteractiveMapPageObject(driver);
+    return new InteractiveMapPageObject();
   }
 
   public String getAssociatedArticleImageSrc() {

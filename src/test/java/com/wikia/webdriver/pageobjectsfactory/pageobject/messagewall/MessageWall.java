@@ -163,6 +163,7 @@ public class MessageWall extends WikiBasePageObject {
   public MessageWallCloseRemoveThreadPageObject clickRemoveThread() {
     refreshPage();
     setDisplayStyle(newMessageMenu, "block");
+    wait.forElementVisible(firstMessageWrapperBy);
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(removeButtonBy));
     setDisplayStyle(newMessageMenu, "none");
@@ -307,7 +308,7 @@ public class MessageWall extends WikiBasePageObject {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getAttribute("href"), wikiURL + "wiki/" + target);
+        .getAttribute("href"), wikiURL + "/wiki/" + target);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
         .getText(), text);
   }

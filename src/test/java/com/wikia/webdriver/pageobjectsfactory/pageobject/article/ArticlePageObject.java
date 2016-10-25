@@ -52,13 +52,13 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement pageContentContainer;
   @FindBy(css = "#mw-content-text p")
   protected WebElement articleContent;
-  @FindBy(css = ".wikia-menu-button.contribute, .contribute-button")
+  @FindBy(css = ".wikia-menu-button.contribute.secondary, .contribute-button")
   protected WebElement contributeDropdown;
   @FindBy(css = "#ca-history")
   protected WebElement historyDropdown;
-  @FindBy(css = ".WikiaMenuElement .createpage, ul .createpage")
+  @FindBy(css = ".wikia-menu-button.contribute.secondary .createpage")
   protected WebElement addArticleInDropdown;
-  @FindBy(css = ".wikia-menu-button.contribute a[data-id='edit']")
+  @FindBy(css = ".wikia-menu-button.contribute.secondary a[data-id='edit']")
   protected WebElement editArticleInDropDown;
   @FindBy(css = "#wpCreatePageDialogTitle")
   protected WebElement articleTitleInputModal;
@@ -681,11 +681,12 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
+    wait.forElementVisible(welcomeLightBoxTitle);
     Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
   }
 
   public void closeNewWikiCongratulationsLightBox() {
-    wait.forElementVisible(welcomeLightBoxCloseButton);
+    wait.forElementClickable(welcomeLightBoxCloseButton);
     scrollAndClick(welcomeLightBoxCloseButton);
     PageObjectLogging.log("closeNewWikiCongratulationsLightBox ",
                           "congratulations lightbox closed", true);
@@ -807,7 +808,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = openCKModeWithMainEditButton();
-        ck.verifyContentLoaded();
+        Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;
       case SRC:
@@ -827,7 +828,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = createArticleInCKUsingDropdown(articleName);
-        ck.verifyContentLoaded();
+        Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;
       case SRC:
@@ -847,7 +848,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = openCKModeWithSectionEditButton(0);
-        ck.verifyContentLoaded();
+        Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;
       case SRC:
@@ -867,7 +868,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         break;
       case CK:
         VisualEditModePageObject ck = openCKModeWithRedLinks(0);
-        ck.verifyContentLoaded();
+        Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;
       case SRC:
@@ -882,7 +883,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     switch (expectedEditor) {
       case CK:
         VisualEditModePageObject ck = navigateToArticleEditPage(wikiURL, articleName);
-        ck.verifyContentLoaded();
+        Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;
       case SRC:

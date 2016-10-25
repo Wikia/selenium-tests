@@ -5,17 +5,16 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponento
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
-
-  @FindBy(css = ".gamestar-logo")
-  private WebElement gameStarLink;
 
   @FindBy(css = ".wikia-logo-container .wikia-logo")
   private WebElement wikiaLogo;
@@ -38,12 +37,18 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".wikia-logo__subtitle")
   private WebElement fandomLogo;
 
+  @FindBy(css = ".wds-global-navigation__user-menu")
+  private WebElement userAvatar;
+
+  @FindBy(css = ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content")
+  private WebElement userMenu;
+
+  @FindBy(css =
+      ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content li:first-child")
+  private WebElement viewProfile;
+
   private DropDownComponentObject accountNavigation;
   private DropDownComponentObject exploreWikiaDropdownComponent;
-
-  public boolean isGameStarLogoDisplayed() {
-    return ElementStateHelper.isElementVisible(gameStarLink, driver);
-  }
 
   public HomePage clickWikiaLogo() {
     wait.forElementVisible(wikiaLogo);
@@ -57,6 +62,19 @@ public class GlobalNavigation extends BasePageObject {
     searchInput.sendKeys(query);
     searchInput.submit();
     return new SearchPageObject(driver);
+  }
+
+  public GlobalNavigation clickUserAvatar() {
+    userAvatar.click();
+    return this;
+  }
+
+  public boolean isUserMenuOpened() {
+    return userMenu.isDisplayed();
+  }
+
+  public void clickViewProfile() {
+    viewProfile.click();
   }
 
   public DropDownComponentObject openAccountNavigation() {
@@ -120,6 +138,6 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isUserLoggedOut() {
-    return driver.findElements(By.cssSelector("a[data-id='login']")).size() > 0;
+    return driver.findElements(By.cssSelector(".wds-global-navigation__account-menu")).size() > 0;
   }
 }

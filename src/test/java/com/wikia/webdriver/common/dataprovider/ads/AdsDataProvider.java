@@ -23,6 +23,17 @@ public class AdsDataProvider {
       AdsContent.PREFOOTER_RIGHT
   };
 
+  private static final String WIKI_REGULAR = "adtest-pluto";
+  private static final String WIKI_SPECIAL = "project43";
+
+  private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
+  private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
+
+  private static final String NO_SKIN_LEFT =
+      "src/test/resources/adsResources/no_wikia_skin_left.png";
+  private static final String NO_SKIN_RIGHT =
+      "src/test/resources/adsResources/no_wikia_skin_right.png";
+
   private AdsDataProvider() {
   }
 
@@ -30,7 +41,7 @@ public class AdsDataProvider {
   public static Object[][] ooyalaAds() {
     return new Object[][]{
         {
-            "adtest",
+            "project43",
             "SyntheticTests/OoyalaVideo/" +
             "Simple?file=Synthetic_video_ad_test_(all_green_video)_320x240_(ooyala-stored_video)",
         }
@@ -57,13 +68,11 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] noAdsForUsers() {
     return new Object[][]{
-        {"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-        {"it.creepypasta", "Categoria:Creepypasta"},
-        {"wikia", "Video_Games/Lizzunchbox"},
-        {"monsterhunter", "MH3U:_Monsters"},
-        {"monsterhunter", "Portal:MH3U"},
-        {"adtest-pluto", "VeryLongPage"},
-        {"breakingbad", "File:AARON-PAUL-JACKET.jpg"},
+        {"project43", "SyntheticTests/LongPage"},
+        {"project43", "Category:Browse"},
+        {"project43", "Special:Videos"},
+        {"project43", "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)"},
+        {"project43", "Koperek:SyntheticTests/NoAds"},
     };
   }
 
@@ -136,22 +145,22 @@ public class AdsDataProvider {
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_2.png",
                     "src/test/resources/adsResources/flite_skin_right_2.png",
-                    "div[id*='div18']"
+                    "div[data-layer*='Button #2']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_3.png",
                     "src/test/resources/adsResources/flite_skin_right_3.png",
-                    "div[id*='div16']"
+                    "div[data-layer*='Button #3']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_4.png",
                     "src/test/resources/adsResources/flite_skin_right_4.png",
-                    "div[id*='div14']"
+                    "div[data-layer*='Button #4']"
                 ),
                 Arrays.asList(
                     "src/test/resources/adsResources/flite_skin_left_1.png",
                     "src/test/resources/adsResources/flite_skin_right_1.png",
-                    "div[id*='div20']"
+                    "div[data-layer='Button #1']"
                 )
             )
         },
@@ -159,64 +168,36 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] skin() {
-    final String wikiName = "project43";
-    final String pageName = "SyntheticTests/Skin";
+  public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(1200, 1000),
-            "src/test/resources/adsResources/no_wikia_skin_left.png",
-            "src/test/resources/adsResources/no_wikia_skin_right.png",
+            NO_SKIN_LEFT, NO_SKIN_RIGHT,
             null,
             null
         }, {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(1600, 900),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            "adtest-pluto", "Skin",
+            WIKI_REGULAR, "Skin",
             new Dimension(2400, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }, {
-            wikiName, pageName,
-            new Dimension(1600, 900),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            wikiName, pageName,
+            WIKI_REGULAR, "Skin/NoMiddleColor",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            wikiName, pageName,
-            new Dimension(2400, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
-            "AAAAAA",
-            "FFFFFF"
-        }, {
-            "adtest", "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
         }
@@ -224,21 +205,43 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] skinLimited() {
+  public static Object[][] skinWithoutTheme() {
     return new Object[][]{
         {
-            "adtest-pluto", "Skin",
-            new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(1600, 900),
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
-        },
-        {
-            "adtest", "Skin",
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
             new Dimension(1920, 1080),
-            "src/test/resources/adsResources/wikia_skin_left.png",
-            "src/test/resources/adsResources/wikia_skin_right.png",
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(2400, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            "FFFFFF"
+        }, {
+            WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
+            new Dimension(1920, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
+            "AAAAAA",
+            ""
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] roadblocks() {
+    return new Object[][]{
+        {
+            WIKI_SPECIAL, "SyntheticTests/Skin",
+            new Dimension(1920, 1080),
+            SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
         }
@@ -300,8 +303,9 @@ public class AdsDataProvider {
             "TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000",
-                "\"57_tier2000"
+                "\"rpfl_7450\":[\"2_tier",
+                "\"57_tier",
+                "_tier2000"
             )
         }
     };
@@ -318,7 +322,7 @@ public class AdsDataProvider {
             Arrays.asList(
                 "\"s0\":\"gaming\"",
                 "\"s0v\":\"games\"",
-                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
+                "\"s0c\":[\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",
@@ -579,7 +583,7 @@ public class AdsDataProvider {
         {"101dalmatians", "Jewel", "\"esrb\":\"ec\"", true},
         {"tardis", "Mang", "\"esrb\":\"teen\"", true},
         {"project43", "SyntheticTests/LB", "\"s0v\":\"lifestyle\"", true},
-        {"project43", "SyntheticTests/LB", "\"s0c\":[\"life\",\"crea\",\"edu\",\"tech\"]", true}
+        {"project43", "SyntheticTests/LB", "\"s0c\":[\"tech\"]", true}
     };
   }
 
@@ -594,6 +598,13 @@ public class AdsDataProvider {
   public static Object[][] amazonSites() {
     return new Object[][]{
         {"project43", "SyntheticTests/Amazon"},
+    };
+  }
+
+  @DataProvider
+  public static Object[][] prebidCustomAdapter() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
     };
   }
 
@@ -706,66 +717,37 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxSegments() {
-    return new Object[][]{
-        {
-            "KtCsDKll",
-            "pqdapsy7l",
-            new Page("vim", "Vim_Tips_Wiki"),
-            // Standard segment for visiting adtest before
-            ImmutableMap.<String, Boolean>builder()
-                .put("pqdapsy7l", true)
-                .build(),
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            // Both standard and real-time segment for adtest
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .put("pqdapsy7l", true)
-                .build(),
-        },
-        {
-            null,
-            null,
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .build(),
-            new Page("glee", "Glee_TV_Show_Wiki"),
-            // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", false)
-                .build(),
-        },
-        {
-            null,
-            null,
-            new Page("vim", "Vim_Tips_Wiki"),
-            // No pqdapsy7l (standard segment for adtest)
-            ImmutableMap.<String, Boolean>builder()
-                .put("pqdapsy7l", false)
-                .build(),
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            // Real time segment for adtest
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .build(),
-        },
-    };
-  }
-
-  @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true},
-        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false},
+        {"project43", "SyntheticTests/Delay_BTF", 20, true}
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DISABLE_BTF", true},
-        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false},
+        {"project43", "SyntheticTests/Disable_BTF", true}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] delayBtfPluto() {
+    return new Object[][]{
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] disableBtfPluto() {
+    return new Object[][]{
+        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] disableBtfExceptHighlyViewableSlots() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/Disable_BTF/Unblock_HIVI", true}
     };
   }
 
@@ -902,7 +884,7 @@ public class AdsDataProvider {
             }
         },
         {
-            "divergent",
+            "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -915,7 +897,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             MercuryWikis.MERCURY_CC,
-            "main/section/Categories",
+            "/main/section/Categories",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -924,7 +906,7 @@ public class AdsDataProvider {
             }
         }, {
             MercuryWikis.MERCURY_CC,
-            "main/category/Articles",
+            "/main/category/Articles",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -940,7 +922,7 @@ public class AdsDataProvider {
         return new Object[][]{
             {
                 MercuryWikis.MERCURY_AUTOMATION_TESTING,
-                "join",
+                "/join",
                 new String[]{
                     TestAdsTrackingPixels.QUANTQAST_PIXEL_URL_SECURE
                 }
@@ -1309,4 +1291,14 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsMonocolorOasis() {
+    return new Object[][]{
+        {
+            WIKI_SPECIAL,
+            "SyntheticTests/Monocolor_Ad"
+        }
+    };
+  }
 }

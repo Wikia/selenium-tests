@@ -17,12 +17,11 @@ public class ArticleContent extends ApiCall {
 
   private static String secret;
   private static String baseURL;
-  private static String URL_STRING;
   private static ArrayList<BasicNameValuePair> PARAMS;
 
   public ArticleContent() {
     baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-              + "wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
+              + "/wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
 
     File configFile = new File(Configuration.getCredentialsFilePath());
     if (StringUtils.isBlank(secret)) {

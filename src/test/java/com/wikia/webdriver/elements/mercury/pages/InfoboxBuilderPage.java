@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -85,7 +86,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   public InfoboxBuilderPage openNew(String templateName) {
     new TemplateEditPage().open(templateName)
         .getTemplateClassification()
-        .selectInfoboxTemplate()
+        .changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
@@ -354,19 +355,27 @@ public class InfoboxBuilderPage extends SpecialPageObject {
    | |   | | ,' . `. | | | | |____` / | |__  | |  `| |
    |_|   | | \,' `.__| |_| |_______/   `.__| |_|   | |
    `.|                                       `.|
+
+   Dragging move is actually a 20 small moves, to make is a bit slower
    */
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
 
-    Point location = component.get(0).getLocation();
-    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 10;
+    WebElement infoboxBackground =
+        driver.findElement(By.cssSelector(".portable-infobox.pi-background"));
+
+    Point location = infoboxBackground.getLocation();
+    Integer targetY = draggedElement.getLocation().getY() - location.getY() + 50;
 
     new Actions(driver)
         .clickAndHold(draggedElement)
-        .moveByOffset(0, targetY)
-        .release(draggedElement)
-        .pause(500)
         .perform();
+
+    for(int i = 0; i<20; i++){
+      new Actions(driver).moveByOffset(0, -targetY/20).perform();
+    }
+
+    new Actions(driver).release().perform();
 
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dragging");
     wait.forValueToBeNotPresentInElementsAttribute(draggedElement, "class", "is-dropping");

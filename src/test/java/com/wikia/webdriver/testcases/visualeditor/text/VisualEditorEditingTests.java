@@ -83,7 +83,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   )
   public void VisualEditorEditing_002_delete() {
 
-    String removeText = "Lorem";
+    String removeText = "Lorem ";
     List<String> deletedWikiTexts;
     deletedWikiTexts = new ArrayList<>();
     deletedWikiTexts.add(removeText);

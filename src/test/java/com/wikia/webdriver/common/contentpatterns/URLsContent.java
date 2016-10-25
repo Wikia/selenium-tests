@@ -6,57 +6,57 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 public class URLsContent {
 
   // Common url component
-  public static final String WIKI_DIR = "wiki/";
+  public static final String WIKI_DIR = "/wiki/";
   public static final String WIKIA_DIR = "Wikia";
 
   // Special Urls - links to special pages
-  public static final String SPECIAL_USER_LOGIN = "wiki/Special:UserLogin";
-  public static final String SPECIAL_USER_SIGNUP = "wiki/Special:UserSignup";
-  public static final String SPECIAL_NEW_FILES = "wiki/Special:NewFiles";
-  public static final String SPECIAL_VIDEOS = "wiki/Special:Videos";
-  public static final String SPECIAL_UPLOAD = "wiki/Special:Upload";
-  public static final String SPECIAL_MULTIPLE_UPLOAD = "wiki/Special:MultipleUpload";
-  public static final String SPECIAL_WATCHLIST = "wiki/Special:Watchlist";
-  public static final String SPECIAL_PREFERENCES = "wiki/Special:Preferences";
+  public static final String SPECIAL_USER_LOGIN = "/wiki/Special:UserLogin";
+  public static final String SPECIAL_USER_SIGNUP = "/wiki/Special:UserSignup";
+  public static final String SPECIAL_NEW_FILES = "/wiki/Special:NewFiles";
+  public static final String SPECIAL_VIDEOS = "/wiki/Special:Videos";
+  public static final String SPECIAL_UPLOAD = "/wiki/Special:Upload";
+  public static final String SPECIAL_MULTIPLE_UPLOAD = "/wiki/Special:MultipleUpload";
+  public static final String SPECIAL_WATCHLIST = "/wiki/Special:Watchlist";
+  public static final String SPECIAL_PREFERENCES = "/wiki/Special:Preferences";
   public static final String SPECIAL_EDITING_PREFERENCES =
-      "wiki/Special:Preferences#mw-prefsection-editing";
+      "/wiki/Special:Preferences#mw-prefsection-editing";
   public static final String SPECIAL_EDITING_PREFERENCES_EMAIL =
-      "wiki/Special:Preferences#mw-prefsection-emailv2";
-  public static final String SPECIAL_PROMOTE = "wiki/Special:Promote";
-  public static final String SPECIAL_CREATE_PAGE = "wiki/Special:CreatePage";
-  public static final String SPECIAL_CREATE_BLOGPAGE = "wiki/Special:CreateBlogPage";
-  public static final String SPECIAL_ADMIN_DASHBOARD = "wiki/Special:AdminDashboard";
-  public static final String SPECIAL_CSS = "wiki/Special:CSS";
-  public static final String SPECIAL_CURATED_CONTENT = "wiki/Special:CuratedContent";
-  public static final String SPECIAL_FOLLOW = "wiki/Special:Following";
-  public static final String SPECIAL_FORUM = "wiki/Special:Forum";
-  public static final String SPECIAL_THEME_DESIGNER = "wiki/Special:ThemeDesigner";
-  public static final String SPECIAL_WIKI_ACTIVITY = "wiki/Special:WikiActivity";
-  public static final String SPECIAL_EDIT_ACCOUNT = "wiki/Special:EditAccount";
-  public static final String USER_MESSAGE_WALL = "wiki/Message_Wall:";
-  public static final String SPECIAL_MULTI_WIKI_FINDER = "wiki/Special:Multiwikifinder";
-  public static final String LOGOUT = "wiki/Special:UserLogout?noexternals=1";
-  public static final String USER_PROFILE = "wiki/User:%userName%";
-  public static final String SPECIAL_CREATE_NEW_WIKI = "Special:CreateNewWiki";
-  public static final String SPECIAL_WIKI_FACTORY = "wiki/Special:WikiFactory";
-  public static final String SPECIAL_WHERE_IS_EXTENSION = "Special:WhereIsExtension";
-  public static final String SPECIAL_CONTRIBUTIONS = "wiki/Special:Contributions";
-  public static final String SPECIAL_BLOCK = "wiki/Special:Block";
-  public static final String SPECIAL_CHAT = "wiki/Special:Chat";
-  public static final String SPECIAL_EDIT_HUB = "wiki/Special:EditHub";
-  public static final String SPECIAL_MAPS = "wiki/Special:Maps";
-  public static final String SPECIAL_VIDEO_PAGE_ADMIN = "wiki/Special:VideoPageAdmin/edit";
-  public static final String SPECIAL_WHAT_LINKS_HERE = "Special:WhatLinksHere";
-  public static final String SPECIAL_VERSION = "wiki/Special:Version";
-  public static final String SPECIAL_INFOBOX_BUILDER = "wiki/Special:InfoboxBuilder/";
-  public static final String SPECIAL_WIKI_FEATURES = "wiki/Special:WikiFeatures/";
+      "/wiki/Special:Preferences#mw-prefsection-emailv2";
+  public static final String SPECIAL_PROMOTE = "/wiki/Special:Promote";
+  public static final String SPECIAL_CREATE_PAGE = "/wiki/Special:CreatePage";
+  public static final String SPECIAL_CREATE_BLOGPAGE = "/wiki/Special:CreateBlogPage";
+  public static final String SPECIAL_ADMIN_DASHBOARD = "/wiki/Special:AdminDashboard";
+  public static final String SPECIAL_CSS = "/wiki/Special:CSS";
+  public static final String SPECIAL_CURATED_CONTENT = "/wiki/Special:CuratedContent";
+  public static final String SPECIAL_FOLLOW = "/wiki/Special:Following";
+  public static final String SPECIAL_FORUM = "/wiki/Special:Forum";
+  public static final String SPECIAL_THEME_DESIGNER = "/wiki/Special:ThemeDesigner";
+  public static final String SPECIAL_WIKI_ACTIVITY = "/wiki/Special:WikiActivity";
+  public static final String SPECIAL_EDIT_ACCOUNT = "/wiki/Special:EditAccount";
+  public static final String USER_MESSAGE_WALL = "/wiki/Message_Wall:";
+  public static final String SPECIAL_MULTI_WIKI_FINDER = "/wiki/Special:Multiwikifinder";
+  public static final String LOGOUT = "/wiki/Special:UserLogout?noexternals=1";
+  public static final String USER_PROFILE = "/wiki/User:%userName%";
+  public static final String SPECIAL_CREATE_NEW_WIKI = "/Special:CreateNewWiki";
+  public static final String SPECIAL_WIKI_FACTORY = "/wiki/Special:WikiFactory";
+  public static final String SPECIAL_WHERE_IS_EXTENSION = "/Special:WhereIsExtension";
+  public static final String SPECIAL_CONTRIBUTIONS = "/wiki/Special:Contributions";
+  public static final String SPECIAL_BLOCK = "/wiki/Special:Block";
+  public static final String SPECIAL_CHAT = "/wiki/Special:Chat";
+  public static final String SPECIAL_EDIT_HUB = "/wiki/Special:EditHub";
+  public static final String SPECIAL_MAPS = "/wiki/Special:Maps";
+  public static final String SPECIAL_VIDEO_PAGE_ADMIN = "/wiki/Special:VideoPageAdmin/edit";
+  public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
+  public static final String SPECIAL_VERSION = "/wiki/Special:Version";
+  public static final String SPECIAL_INFOBOX_BUILDER = "/wiki/Special:InfoboxBuilder/";
+  public static final String SPECIAL_WIKI_FEATURES = "/wiki/Special:WikiFeatures/";
 
   // Mediawiki Urls
   public static final String MEDIAWIKI_CSS = "MediaWiki:Wikia.css";
 
   // Blog list page url
-  public static final String BLOG_LIST = "wiki/Blog:%listName%/";
-  public static final String BLOG_NAMESPACE = "wiki/User_blog:%userName%/";
+  public static final String BLOG_LIST = "/wiki/Blog:%listName%/";
+  public static final String BLOG_NAMESPACE = "/wiki/User_blog:%userName%/";
 
   // Mediawiki template url
   public static final String TEMPLATE_NAMESPACE = "Template";
@@ -74,12 +74,12 @@ public class URLsContent {
   public static final String ACTION_RAW = "action=raw";
 
   // WAM Scores page url
-  public static final String WAM_PAGE = "WAM";
+  public static final String WAM_PAGE = "/WAM";
 
   // replace %title% with new article name
   public static final String ADD_ARTICLE = "index.php?title=%title%&action=edit";
   public static final String API_URL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-      + "api.php";
+      + "/api.php";
 
   // File Pages
   public static final String FILE_NAMESPACE = "File:";
@@ -134,10 +134,10 @@ public class URLsContent {
   public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
 
   // Recent wiki activity on mobile
-  public static final String RECENT_WIKI_ACTIVITY = "recent-wiki-activity";
+  public static final String RECENT_WIKI_ACTIVITY = "/recent-wiki-activity";
 
   // Search results page on mobile, replace %query% with searched string
-  public static final String MOBILE_SEARCH_RESULTS_PAGE = "search?query=%query%";
+  public static final String MOBILE_SEARCH_RESULTS_PAGE = "/search?query=%query%";
 
   private URLsContent() {
   }
