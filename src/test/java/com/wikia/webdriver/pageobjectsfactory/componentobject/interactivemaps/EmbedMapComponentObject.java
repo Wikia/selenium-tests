@@ -28,7 +28,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
   private WebElement brandFooter;
 
   public EmbedMapComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public void verifyMapTitlePresented() {

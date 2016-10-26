@@ -47,7 +47,7 @@ public class LoginTests extends NewTestTemplate {
     AuthModal authModal = signInLink.getAuthModal();
     Assert.assertTrue(authModal.isSignInOpened());
 
-    authModal.login(credentials.userNameStaff, credentials.passwordStaff);
+    authModal.login(credentials.userNameStaff2, credentials.passwordStaff2);
     base.verifyUserLoggedIn(credentials.userNameStaff);
   }
 

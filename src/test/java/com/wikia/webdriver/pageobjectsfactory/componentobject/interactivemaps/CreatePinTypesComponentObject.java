@@ -44,7 +44,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
     saveButton.click();
     PageObjectLogging.log("clickSave", "clicked save button in create pin types modal", true);
     driver.switchTo().defaultContent();
-    return new InteractiveMapPageObject(driver);
+    return new InteractiveMapPageObject();
   }
 
   public void clickAddAnotherPinType() {

@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 
 import java.util.List;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
@@ -158,6 +159,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
+  @RelatedIssue(issueID = "QAART-874")
   public void RTE_012_Photo() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -165,7 +167,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
     PhotoOptionsComponentObject photoOptions =
-        photoAddPhoto.addPhotoFromWiki(PageContent.ARTICLESOURCEMODEFILE);
+        photoAddPhoto.addPhotoFromWiki(PageContent.FILE);
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();

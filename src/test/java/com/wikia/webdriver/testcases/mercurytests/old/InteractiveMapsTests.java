@@ -15,6 +15,7 @@ import com.wikia.webdriver.elements.mercury.old.InteractiveMapsComponentObject;
 
 import org.testng.annotations.Test;
 
+@Test(groups = "Mercury_InteractiveMaps")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
@@ -25,7 +26,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   private InteractiveMapsComponentObject maps;
 
   private void init() {
-    this.maps = new InteractiveMapsComponentObject(driver);
+    this.maps = new InteractiveMapsComponentObject();
 
     new Navigate().toPage(MercurySubpages.MAP);
   }

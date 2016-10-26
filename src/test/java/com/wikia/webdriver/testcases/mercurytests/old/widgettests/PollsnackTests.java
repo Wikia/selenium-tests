@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 
 import org.testng.annotations.Test;
-
+@Test(groups = "Mercury_PollysnackWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,

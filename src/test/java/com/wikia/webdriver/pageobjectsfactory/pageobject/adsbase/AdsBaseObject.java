@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -58,6 +59,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
+  private long tStart;
+
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
   protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
@@ -67,6 +70,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   private WebElement presentMedrec;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
+  @FindBy(css = "#WikiaFooter")
+  private WebElement wikiaFooter;
+  @FindBy(css = ".mobile-in-content")
+  private WebElement mobileInContent;
+  @FindBy(css = ".mobile-prefooter")
+  private WebElement mobilePrefooter;
+  @FindBy(css = ".mobile-bottom-leaderboard")
+  private WebElement mobileBottomLeaderboard;
 
   public AdsBaseObject(WebDriver driver) {
     super();
@@ -86,6 +97,22 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
     super();
     driver.manage().window().setSize(resolution);
+  }
+
+  public void timerStart() {
+    tStart = System.currentTimeMillis();
+  }
+
+  public String getNumberOfSecondsFromStart() {
+    long tEnd = System.currentTimeMillis();
+    long tDelta = tEnd - tStart;
+    double elapsedSeconds = tDelta / 1000.0;
+    return String.valueOf(elapsedSeconds);
+  }
+
+  public void logNumberOfSecondsFromStart(String message) {
+    PageObjectLogging.log("seconds after start",
+                          message + " [" + getNumberOfSecondsFromStart() + "] s", true);
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
@@ -242,12 +269,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifySpotlights() {
-    // Removing comments section as it expands content downwards
-    hideElementIfPresent(ARTICLE_COMMENTS_CSS_SELECTOR);
-
     AdsComparison adsComparison = new AdsComparison();
-
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector("#SPOTLIGHT_FOOTER")));
 
     for (String spotlightSelector : SPOTLIGHT_SLOTS) {
       WebElement slot = wait.forElementVisible(By.cssSelector(spotlightSelector + " img"));
@@ -373,6 +395,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public AdsBaseObject waitForPageLoaded() {
     jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
+    return this;
+  }
+
+  public AdsBaseObject waitForPageLoadedWithGpt() {
+    timerStart();
+    waitForPageLoaded();
+
+    String waitForGPTJS = "typeof window.googletag === 'object'";
+    jsActions.waitForJavaScriptTruthy(waitForGPTJS);
+    PageObjectLogging.log("GPT Loaded", "after " +
+                                        String.valueOf(getNumberOfSecondsFromStart()) + " s", true);
     return this;
   }
 
@@ -599,7 +632,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     JavascriptExecutor js = driver;
     try {
       return (long) js.executeScript(
-          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "var slots = googletag.pubads().getSlots(); for (var i = 0; i < slots.length; i++) { " +
           "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
           "return slots[i].getResponseInformation().lineItemId;" +
           "} }"
@@ -741,9 +774,38 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToFooter();
   }
 
-  public void scrollToSlot(String slot) {
-    WebElement slotSelector = driver.findElement(By.cssSelector(slot));
-    jsActions.scrollToElement(slotSelector);
-    PageObjectLogging.log("scrollToSlot", "Scroll to the slot " + slot, true);
+  public void scrollToPosition(String selector) {
+    jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
+    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
+  }
+
+  public boolean isMobileInContentAdDisplayed() {
+    try{
+      wait.forElementVisible(mobileInContent);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Mobile in content ad is not displayed", ex, true);
+      return false;
+    }
+  }
+
+  public boolean isMobilePrefooterAdDisplayed() {
+    try{
+      wait.forElementVisible(mobilePrefooter);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Mobile prefooter ad is not displayed", ex, true);
+      return false;
+    }
+  }
+
+  public boolean isMobileBottomLeaderboardAdDisplayed() {
+    try{
+      wait.forElementVisible(mobileBottomLeaderboard);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
+      return false;
+    }
   }
 }

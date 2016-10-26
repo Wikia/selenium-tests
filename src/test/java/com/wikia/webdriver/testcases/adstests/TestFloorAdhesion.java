@@ -7,8 +7,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesio
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsFloorAdhesionSkinContext;
 
 import org.testng.annotations.Test;
+import org.openqa.selenium.Dimension;
 
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
+
+  private static Dimension MOBILE_SIZE = new Dimension(414, 736);
+  private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
   private static final String WIKI_NAME = "project43";
 
@@ -25,14 +29,79 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
   private static final String CREATIVE_ID = "94178805972";
 
   @Test(
-      groups = {"AdsFloorAdhesionOasis", "AdsFloorAdhesionMercury"}
+      groups = "AdsFloorAdhesionOasis"
   )
-  public void testOldFloorAdhesionPresence() {
+  public void testOldFloorAdhesionPresenceOasis() {
+    testOldFloorAdhesionPresence(DESKTOP_SIZE);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionMercury"
+  )
+  public void testOldFloorAdhesionPresenceMercury() {
+    testOldFloorAdhesionPresence(MOBILE_SIZE);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionOasis"
+  )
+  public void testOldFloorAdhesionModalOasis() {
+    testOldFloorAdhesionModal(DESKTOP_SIZE);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionMercury"
+  )
+  public void testOldFloorAdhesionModalMercury() {
+    testOldFloorAdhesionModal(MOBILE_SIZE);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionOasis"
+  )
+  public void testOldFloorAdhesionCloseButtonOasis() {
+    testOldFloorAdhesionCloseButton(DESKTOP_SIZE);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionMercury"
+  )
+  public void testOldFloorAdhesionCloseButtonMercury() {
+    testOldFloorAdhesionCloseButton(MOBILE_SIZE);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionOasis"
+  )
+  public void testFloorAdhesionPresenceOasis() {
+    String browser = Configuration.getBrowser();
+    AdsFloorAdhesionObject wikiPage =
+        new AdsFloorAdhesionObject(driver, getArticleUrl(ARTICLE_TITLE, URL_TRIGGER));
+
+    wikiPage.verifyFloorAdhesionPresent(SLOT_NAME, LINE_ITEM_ID, CREATIVE_ID);
+    wikiPage.verifyThereIsNoWikiaBar(browser);
+  }
+
+  @Test(
+      groups = "AdsFloorAdhesionOasis"
+  )
+  public void testFloorAdhesionCloseButtonOasis() {
+    AdsFloorAdhesionObject wikiPage =
+        new AdsFloorAdhesionObject(driver, getArticleUrl(ARTICLE_TITLE, URL_TRIGGER));
+    wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
+  }
+
+  private String getArticleUrl(String articleTitle, String urlTrigger) {
+    String url = urlBuilder.getUrlForPath(WIKI_NAME, articleTitle);
+    return urlBuilder.appendQueryStringToURL(url, urlTrigger);
+  }
+
+  private void testOldFloorAdhesionPresence(Dimension resolution) {
     String browser = Configuration.getBrowser();
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
     AdsFloorAdhesionOldObject wikiPage =
-        new AdsFloorAdhesionOldObject(driver, getArticleUrl(OLD_ARTICLE_TITLE, OLD_URL_TRIGGER));
+        new AdsFloorAdhesionOldObject(driver, getArticleUrl(OLD_ARTICLE_TITLE, OLD_URL_TRIGGER), resolution);
 
     wikiPage.verifyFloorAdhesionPresent(
         skinContext.getSlotName(),
@@ -42,14 +111,11 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
     wikiPage.verifyThereIsNoWikiaBar(browser);
   }
 
-  @Test(
-      groups = {"AdsFloorAdhesionOasis", "AdsFloorAdhesionMercury"}
-  )
-  public void testOldFloorAdhesionModal() {
+  private void testOldFloorAdhesionModal(Dimension resolution) {
     String browser = Configuration.getBrowser();
 
     AdsFloorAdhesionOldObject wikiPage =
-        new AdsFloorAdhesionOldObject(driver, getArticleUrl(OLD_ARTICLE_TITLE, OLD_URL_TRIGGER));
+        new AdsFloorAdhesionOldObject(driver, getArticleUrl(OLD_ARTICLE_TITLE, OLD_URL_TRIGGER), resolution);
     AdsFloorAdhesionSkinContext skinContext = new AdsFloorAdhesionSkinContext(browser);
 
     String floorAdhesionModalSelector = skinContext.getModalSelector();
@@ -61,38 +127,10 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
         .verifyThereIsNoModal(floorAdhesionModalSelector);
   }
 
-  @Test(
-      groups = {"AdsFloorAdhesionOasis", "AdsFloorAdhesionMercury"}
-  )
-  public void testOldFloorAdhesionCloseButton() {
+  private void testOldFloorAdhesionCloseButton(Dimension resolution) {
     AdsFloorAdhesionOldObject wikiPage =
-        new AdsFloorAdhesionOldObject(driver, getArticleUrl(OLD_ARTICLE_TITLE, OLD_URL_TRIGGER));
+        new AdsFloorAdhesionOldObject(driver, getArticleUrl(OLD_ARTICLE_TITLE, OLD_URL_TRIGGER), resolution);
     wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
   }
 
-  @Test(
-      groups = "AdsFloorAdhesionOasis"
-  )
-  public void testFloorAdhesionPresence() {
-    String browser = Configuration.getBrowser();
-    AdsFloorAdhesionObject wikiPage =
-        new AdsFloorAdhesionObject(driver, getArticleUrl(ARTICLE_TITLE, URL_TRIGGER));
-
-    wikiPage.verifyFloorAdhesionPresent(SLOT_NAME, LINE_ITEM_ID, CREATIVE_ID);
-    wikiPage.verifyThereIsNoWikiaBar(browser);
-  }
-
-  @Test(
-      groups = {"AdsFloorAdhesionOasis"}
-  )
-  public void testFloorAdhesionCloseButton() {
-    AdsFloorAdhesionObject wikiPage =
-        new AdsFloorAdhesionObject(driver, getArticleUrl(ARTICLE_TITLE, URL_TRIGGER));
-    wikiPage.clickFloorAdhesionClose().verifyThereIsNoFloorAdhesion();
-  }
-
-  private String getArticleUrl(String articleTitle, String urlTrigger) {
-    String url = urlBuilder.getUrlForPath(WIKI_NAME, articleTitle);
-    return urlBuilder.appendQueryStringToURL(url, urlTrigger);
-  }
 }

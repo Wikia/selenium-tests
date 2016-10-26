@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
@@ -13,11 +15,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
-import org.testng.annotations.Test;
-
+@Test(groups = {"VetTests", "Media", "VideoArticlePlacehoder"})
 public class VetArticlePlaceholderTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "VetTests", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_001"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void userCanAddVideoByUrlUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
@@ -30,7 +31,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "VetTests", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_002"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void userCanAddVideoFromWikiaUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
@@ -43,17 +44,16 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "VetTests", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_003"})
   @Execute(asUser = User.STAFF, onWikia = "mobileregressiontesting")
   public void userCanAddVideoByUrlUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
-    //Added cause of MAIN-6374 issue
+    // Added cause of MAIN-6374 issue
     new ArticlePageObject().open();
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
-    VetAddVideoComponentObject
-        vetAddingVideo =
+    VetAddVideoComponentObject vetAddingVideo =
         (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -64,16 +64,15 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
     article.verifyVideo();
   }
 
-  @Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "VetTests", "Media"})
+  @Test(groups = {"VideoArticlePlacehoder_004"})
   @Execute(asUser = User.STAFF, onWikia = "mobileregressiontesting")
   public void userCanAddVideoFromWikiaUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
-    //Added cause of MAIN-6374 issue
+    // Added cause of MAIN-6374 issue
     new ArticlePageObject().open();
 
-    VisualEditModePageObject visualEditMode =
-        new VisualEditModePageObject().open();
+    VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetAddVideoComponentObject vetAddingVideo =
         (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
     VetOptionsComponentObject vetOptions =

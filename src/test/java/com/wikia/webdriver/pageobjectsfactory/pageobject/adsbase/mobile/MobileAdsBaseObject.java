@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,59 +13,16 @@ import org.openqa.selenium.WebElement;
 
 public class MobileAdsBaseObject extends AdsBaseObject {
 
-  private static final String SMART_BANNER_SELECTOR = ".android.smartbanner";
-  private static final String CELTRA_MASK_SELECTOR = "body > div[style*=position][style*=z-index]" +
-                                                     "[style*='left: 0'][style*='bottom: auto'][style*='right: auto']";
   private static final String MERCURY_ARTICLE_CONTAINER_SELECTOR = "#ember-container";
-  private static final String INTERSTITIAL_AD_OPENED_SELECTOR = ".ember-view.lightbox-wrapper.open";
-  private static final String MOBILE_TOP_LEADERBOARD_ID = "MOBILE_TOP_LEADERBOARD";
-
-  private AdsComparison adsComparison;
 
   public MobileAdsBaseObject(WikiaWebDriver driver, String page) {
     super(driver, page);
-    adsComparison = new AdsComparison();
 
     if (driver.isChromeMobile()) {
       verifyMercury();
     }
 
     PageObjectLogging.log("", "Page screenshot", true, driver);
-  }
-
-  public void verifyMobileTopLeaderboard() {
-    // Only works for WikiaMobile
-    hideElementIfPresent(SMART_BANNER_SELECTOR);
-
-    wait.forElementVisible(presentLeaderboard);
-    if (isElementOnPage(By.cssSelector(INTERSTITIAL_AD_OPENED_SELECTOR))) {
-      PageObjectLogging.logWarning("Special ad", "Interstitial ad detected");
-      extractGptInfo(presentHighImpactSlotSelector);
-      return;
-    }
-    waitForSlotExpanded(presentLeaderboard);
-    scrollToSlotOnMobile(MOBILE_TOP_LEADERBOARD_ID);
-
-    if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver)) {
-      extractGptInfo(presentLeaderboardSelector);
-
-      if (isElementOnPage(By.cssSelector(CELTRA_MASK_SELECTOR))) {
-        PageObjectLogging.logWarning("Special ad", "Celtra ad detected");
-        return;
-      }
-
-      if (isElementOnPage(By.cssSelector(FLITE_MASK_CSS_SELECTOR))) {
-        PageObjectLogging.logWarning("Special ad", "Flite ad detected");
-        return;
-      }
-
-      throw new NoSuchElementException(
-          "No ad detected in selector: "
-          + presentLeaderboardSelector
-      );
-    }
-
-    extractGptInfo(presentLeaderboardSelector);
   }
 
   public void verifyNoAdInSlot(String slotName) {
@@ -126,7 +82,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
           driver
       );
 
-      jsActions.scrollToElement(link);
       link.click();
     } else {
       PageObjectLogging.logWarning(
@@ -137,7 +92,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
   }
 
   private void scrollToSlotOnMobile(String slotName) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
+    JavascriptExecutor js = driver;
     js.executeScript(
         "var element = document.getElementById(arguments[0]);" +
         "var elementY = element.offsetTop;" +

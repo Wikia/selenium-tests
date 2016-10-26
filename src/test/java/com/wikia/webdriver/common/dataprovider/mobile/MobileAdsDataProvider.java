@@ -108,8 +108,9 @@ public class MobileAdsDataProvider {
             "MOBILE_TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"15_tier2000",
-                "\"43_tier2000"
+                "\"rpfl_7450\":[\"15_tier",
+                "\"43_tier",
+                "_tier2000"
             )
         }
     };
@@ -126,7 +127,7 @@ public class MobileAdsDataProvider {
             Arrays.asList(
                 "\"s0\":\"gaming\"",
                 "\"s0v\":\"games\"",
-                "\"s0c\":[\"gaming\",\"videogames\",\"anime\"]",
+                "\"s0c\":[\"anime\"]",
                 "\"s1\":\"_yugioh\"",
                 "\"s2\":\"article\"",
                 "\"dmn\":\"wikiacom\"",

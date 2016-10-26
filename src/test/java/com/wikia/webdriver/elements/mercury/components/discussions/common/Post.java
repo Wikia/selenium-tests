@@ -1,10 +1,17 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 
@@ -54,6 +61,11 @@ public class Post extends BasePageObject {
     return this;
   }
 
+  public Post scrollToLoadMoreButton() {
+    scrollTo(loadMoreButton);
+    return this;
+  }
+
   public Post clickLoadMore() {
     scrollAndClick(loadMoreButton);
     return this;
@@ -61,6 +73,40 @@ public class Post extends BasePageObject {
 
   public int getPostsListLength() {
     return postList.size();
+  }
+
+  @CheckForNull
+  public PostEntity findNewestPost() {
+    return postList.isEmpty() ? null : new PostEntity(postList.get(0));
+  }
+
+  @CheckForNull
+  public PostEntity findPostById(final String id) {
+    return Iterables.tryFind(getPostEntities(), new Predicate<PostEntity>() {
+      @Override
+      public boolean apply(@Nullable PostEntity input) {
+        return input.findId().equals(id);
+      }
+    }).orNull();
+  }
+
+  public List<PostEntity> getReportedPosts() {
+    return Lists.newArrayList(Iterables.filter(getPostEntities(), new Predicate<PostEntity>() {
+      @Override
+      public boolean apply(@Nullable PostEntity postEntity) {
+        return postEntity.isReported();
+      }
+    }));
+  }
+
+  private List<PostEntity> getPostEntities() {
+    return Lists.transform(postList, new Function<WebElement, PostEntity>() {
+      @Nullable
+      @Override
+      public PostEntity apply(@Nullable WebElement webElemnt) {
+        return new PostEntity(webElemnt);
+      }
+    });
   }
 
   public boolean isUpvoteButtonVisible(int index) {
@@ -101,6 +147,11 @@ public class Post extends BasePageObject {
       PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
     }
 
+    return this;
+  }
+
+  public Post waitForPostToAppearWith(final String description) {
+    wait.forTextInElement(By.cssSelector(".discussion.forum.forum-wrapper"), description);
     return this;
   }
 

@@ -15,7 +15,7 @@ public class CuratedContent extends ApiCall {
 
   @Override protected String getURL() {
     return new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-           + "wikia.php?controller=CuratedContent&method=setCuratedContentData";
+           + "/wikia.php?controller=CuratedContent&method=setCuratedContentData";
   }
 
   @Override protected User getUser() {

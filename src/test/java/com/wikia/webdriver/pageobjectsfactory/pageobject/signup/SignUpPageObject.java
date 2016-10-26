@@ -175,7 +175,7 @@ public class SignUpPageObject extends WikiBasePageObject {
       String captchaId = blurryWordHidden.getAttribute("value");
       String urlAd =
           urlBuilder.getUrlForWiki(Configuration.getWikiName())
-          + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
+          + "/wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
       URL url = new URL(urlAd);
 
       String md5 = md5(url.openStream());

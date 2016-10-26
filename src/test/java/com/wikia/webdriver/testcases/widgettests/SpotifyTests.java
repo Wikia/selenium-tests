@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.widgettests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -9,14 +11,15 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
 
-import org.testng.annotations.Test;
-
+@Test(groups = "SpotifyWidget")
 @InBrowser(browser = Browser.CHROME)
 public class SpotifyTests extends NewTestTemplate {
 
   private static final String SPOTIFY_ONE_WIDGET_ARTICLE_NAME = "/wiki/SpotifyOasis/OneWidget";
-  private static final String SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/SpotifyOasis/MultipleWidgets";
-  private static final String SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/SpotifyOasis/IncorrectWidget";
+  private static final String SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME =
+      "/wiki/SpotifyOasis/MultipleWidgets";
+  private static final String SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME =
+      "/wiki/SpotifyOasis/IncorrectWidget";
 
   private SpotifyWidgetPageObject widget;
   private Navigate navigate;

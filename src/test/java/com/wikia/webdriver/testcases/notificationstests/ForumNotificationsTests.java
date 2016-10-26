@@ -30,8 +30,8 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void forumNotificationsTests_001_userAStartsDiscussion() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
-    message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
+    title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     forumBoardTitle = forumBoard.getTitle();

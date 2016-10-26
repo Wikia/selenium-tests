@@ -1,8 +1,11 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.video.YoutubeVideo;
+import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
@@ -11,17 +14,20 @@ import org.testng.annotations.Test;
 
 public class VideosPageTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
+  static final String VIDEO_QUERY = "truth";
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
    */
   @Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
-  @RelatedIssue(issueID = "SUS-756")
-  public void VideosPageTest_001() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
-    specialVideos.verifyElementsOnPage();
+  public void VideosPageTest_001_UIComponentsPresence() {
+    SpecialVideosPageObject specialVideos =
+        new WikiBasePageObject().openSpecialVideoPageMostRecent(wikiURL);
+
+    Assertion.assertTrue(specialVideos.isHeaderVisible(), "Header is not visible");
+    Assertion.assertTrue(specialVideos.isAddVideoButtonClickable(),
+                         "Add video button is not clickable");
+    Assertion.assertTrue(specialVideos.isNewestVideoVisible(), "Newest video is not visible");
   }
 
   /**
@@ -30,13 +36,26 @@ public class VideosPageTests extends NewTestTemplate {
    * presented by Global Notifications. (Note: This test also adds a video beforehand to make sure
    * running this test is sustainable).
    */
+  @Execute(asUser = User.STAFF)
   @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
   @RelatedIssue(issueID = "SUS-755")
   public void VideosPageTest_002() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.verifyDeleteViaGlobalNotifications();
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
+
+    specialVideos.addVideoViaAjax(video.getUrl());
+
+    specialVideos.isNewVideoAdded();
+
+    String addedVideoTitle = specialVideos.getNewestVideoTitle();
+
+    specialVideos.deleteNewestVideo();
+
+    Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification is not visible");
+
+    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(addedVideoTitle),
+                         "Banner notification text doesn't contains video title");
   }
 
   /**
@@ -46,12 +65,24 @@ public class VideosPageTests extends NewTestTemplate {
    * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
    * video is).
    */
+  @Execute(asUser = User.STAFF)
   @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
   @RelatedIssue(issueID = "SUS-863")
   public void VideosPageTest_003() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
-    specialVideos.verifyDeleteViaVideoNotPresent();
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
+
+    specialVideos.addVideoViaAjax(video.getUrl());
+
+    specialVideos.isNewVideoAdded();
+
+    String addedVideoTitle = specialVideos.getNewestVideoTitle();
+
+    specialVideos.deleteNewestVideo();
+
+    Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
+                         "Banner notification is not visible");
+    Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
+                              "Video is still visible as newest video");
   }
 }

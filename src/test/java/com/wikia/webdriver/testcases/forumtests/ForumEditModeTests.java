@@ -1,52 +1,39 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.properties.Credentials;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
+
+@Test(groups = {"Forum", "ForumEditMode"})
 public class ForumEditModeTests extends NewTestTemplate {
 
-	/*
-         * StoryQA0128 - Create test cases for forum
-	 * https://wikia.fogbugz.com/default.asp?95449
-	 */
-
   private String title, description, first, second;
-  Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"ForumEditModeTests_001", "Forum", "ForumEditMode"})
+  @DataProvider
+  private static final Object[][] getForumName() {
+    return new Object[][] {{PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
+        {PageContent.FORUM_TITLE_PREFIX}, {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
+        {PageContent.FORUM_TITLE_SLASH_PREFIX}, {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}};
+  }
+
+  @Test(groups = {"ForumEditModeTests_001"})
+  @Execute(asUser = User.STAFF)
   public void staffUserCanOpenFrequentlyAskedQuestionsModalOnForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     forumMainPage.verifyFaqLightBox();
   }
 
-  @DataProvider
-  private static final Object[][] getForumName() {
-    return new Object[][]
-        {
-            {PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
-            {PageContent.FORUM_TITLE_PREFIX},
-            {PageContent.FORUM_TITLE_40_CHAR_PREFIX},
-            {PageContent.FORUM_TITLE_SLASH_PREFIX},
-            {PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}
-        };
-  }
-
-  @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002", "Forum",
-                                                 "ForumEditMode"})
+  @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002"})
+  @Execute(asUser = User.STAFF)
   public void staffUserCanCreateNewBoard(String name) {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     title = name + manageForum.getTimeStamp();
@@ -56,10 +43,10 @@ public class ForumEditModeTests extends NewTestTemplate {
     manageForum.verifyForumExists(title, wikiURL);
   }
 
-  @Test(groups = {"ForumEditModeTests_003", "Forum", "ForumEditMode"})
+  @Test(groups = {"ForumEditModeTests_003"})
+  @Execute(asUser = User.STAFF)
   public void staffUserCanDeleteBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -69,10 +56,10 @@ public class ForumEditModeTests extends NewTestTemplate {
     manageForum.verifyForumNotExists(first, wikiURL);
   }
 
-  @Test(groups = {"ForumEditModeTests_004", "Forum", "ForumEditMode"})
+  @Test(groups = {"ForumEditModeTests_004"})
+  @Execute(asUser = User.STAFF)
   public void staffUserCanEditForum() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -83,10 +70,10 @@ public class ForumEditModeTests extends NewTestTemplate {
     manageForum.verifyForumExists(title, wikiURL);
   }
 
-  @Test(groups = {"Forum_005", "Forum", "ForumEditMode"})
+  @Test(groups = {"Forum_005", "Forum"})
+  @Execute(asUser = User.STAFF)
   public void staffUserCanMoveBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -94,32 +81,4 @@ public class ForumEditModeTests extends NewTestTemplate {
     second = manageForum.getSecondForumName();
     manageForum.clickMoveUp(second);
   }
-
-  @Test(groups = {"Forum_006", "Forum", "ForumEditMode"}, enabled = false)
-  public void staffUserCanCreateBoardWithTemplate() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
-
-    // create a template
-    String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
-    WikiArticlePageObject article = new WikiArticlePageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    article.createNewTemplate(wikiURL, templateNameAndContent, templateNameAndContent);
-
-    // open forum page and create new board
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
-
-    // create new board and verify its creation
-    String boardTitle = "QA with tpl (" + forumManageBoardPage.getTimeStamp() + ")";
-    String boardDescWithoutTpl = "QA with tpl.";
-    String boardDescWithTpl = boardDescWithoutTpl + " {{" + templateNameAndContent + "}}";
-    String boardDescWithTplParsed = boardDescWithoutTpl + " " + templateNameAndContent;
-    forumManageBoardPage.createNewBoard(boardTitle, boardDescWithTpl);
-    forumManageBoardPage.verifyBoardCreated(boardTitle, boardDescWithoutTpl);
-
-    // open the board and verify there is the template's content in description
-    ForumBoardPageObject boardPage = forumMainPage.openForumBoard();
-    boardPage.verifyBoardDescription(boardDescWithTplParsed);
-  }
-
 }

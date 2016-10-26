@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.OptionsPostAndReply;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
@@ -15,17 +14,13 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.Discus
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import lombok.Getter;
 
 
-public class PostsListPage extends WikiBasePageObject {
+public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final Post post = new Post();
-
-  @Getter(lazy = true)
-  private final OptionsPostAndReply postOptions = new OptionsPostAndReply();
 
   @Getter(lazy = true)
   private final PostEditor postEditor = new PostEditor();
@@ -40,10 +35,10 @@ public class PostsListPage extends WikiBasePageObject {
   private final HeroUnit heroUnit = new HeroUnit();
 
   @Getter(lazy = true)
-  private final Moderation moderationTools = new Moderation();
+  private final Moderation moderation = new Moderation();
 
   @Getter(lazy = true)
-  private final PostsCreatorDesktop postCreatorDesktop = new PostsCreatorDesktop();
+  private final PostsCreatorDesktop postsCreatorDesktop = new PostsCreatorDesktop();
 
   @Getter(lazy = true)
   private final PostsCreatorMobile postsCreatorMobile = new PostsCreatorMobile();
@@ -63,12 +58,12 @@ public class PostsListPage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
-  private static final String PATH = "d/f/%s";
+  private static final String PATH = "/d/f/%s";
   private static final String DEFAULT_FORUM_ID = "1362702";
 
 
   public PostsListPage open(String wikiID) {
-    driver.get(urlBuilder.getUrlForWiki().replace("/wiki", "") + String.format(PATH, wikiID));
+    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
     return this;
   }
 

@@ -1,41 +1,55 @@
 package com.wikia.webdriver.common.core.url;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.configuration.EnvType;
+
+import org.apache.commons.lang.StringUtils;
 
 public class UrlBuilder {
 
-  private static final String WOW_WIKI = "wowwiki";
-  private static final String SANDBOX_MERCURY_DEV = "sandbox-mercurydev";
-  private String browser;
+  private static final String PROD_URL_FORMAT = "http://%s%s.%s";
+  private static final String SANDBOX_URL_FORMAT = "http://%s.%s%s.%s";
+  private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
   private String env;
 
   public UrlBuilder() {
     this.env = Configuration.getEnv();
-    this.browser = Configuration.getBrowser();
   }
 
   public UrlBuilder(String env) {
     this.env = env;
   }
 
-  public UrlBuilder(String env, String browser) {
-    this.env = env;
-    this.browser = browser;
+  public String normalizePageName(String pageName) {
+    return pageName.replace(" ", "_");
+  }
+
+  public String getUrlForPageWithWWW(String pageName) {
+    return getUrlForWiki(true) + pageName;
+  }
+
+  public String getUrlForPage(String pageName) {
+    return getUrlForWiki() + pageName;
+  }
+
+  public String getUrlForPage(String wikiName, String pageName) {
+    return getUrlForWiki(wikiName) + pageName;
   }
 
   public String getUrlForPage(Page page) {
     if (page.getWikiPath() == null) {
-      return getUrlForWiki(page.getWikiName());
+      return getUrlForWiki(page.getWikiName(), false);
     }
     return getUrlForPath(page.getWikiName(), page.getWikiPath());
   }
 
   public String getUrlForPath(String wikiName, String wikiPath) {
-    String url = getUrlForWiki(wikiName);
-    String separator = wikiName.endsWith("wikia") || wikiName.equals(WOW_WIKI) ? "" : "wiki/";
-    url = url + separator + wikiPath;
+    String url = "";
+    if (!wikiPath.startsWith("/")) {
+      url = String.format("%s/%s", getUrlForWiki(wikiName), wikiPath);
+    } else {
+      url = String.format("%s%s", getUrlForWiki(wikiName), wikiPath);
+    }
 
     String qs = Configuration.getQS();
     if (StringUtils.isNotBlank(qs)) {
@@ -50,22 +64,55 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki() {
-    return getUrlForWiki(Configuration.getWikiName());
+    return getUrlForWiki(Configuration.getWikiName(), false);
   }
 
   public String getUrlForWiki(String wikiName) {
-    String prefix = "wikia".equals(wikiName) ? "www." : "";
-    String suffix;
+    return getUrlForWiki(wikiName, false);
+  }
 
-    if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV)) {
-      String devBoxOwner = env.split("-")[1];
+  public String getUrlForWiki(boolean addWWW) {
+    return getUrlForWiki(Configuration.getWikiName(), addWWW);
+  }
 
-      suffix = "." + devBoxOwner + "." + "wikia-dev.com";
-    } else {
-      suffix = wikiName.endsWith("wikia") ? ".com" : ".wikia.com";
+  public String getUrlForWiki(String wikiName, boolean addWWW) {
+    EnvType env = Configuration.getEnvType(this.env);
+    final String wikiaName = getWikiaGlobalName(wikiName);
+
+    String www = "";
+    if (addWWW) {
+      www = "www.";
     }
 
-    return composeUrl(prefix, wikiName, suffix);
+    switch (env) {
+      case DEV: {
+        String devBoxOwner = this.env.split("-")[1];
+        return String.format(DEV_URL_FORMAT, www, wikiaName, devBoxOwner, env.getWikiaDomain());
+      }
+      case PROD: {
+        return String.format(PROD_URL_FORMAT, www, wikiaName, env.getWikiaDomain());
+      }
+      case STAGING: {
+        return String.format(PROD_URL_FORMAT, www, wikiaName, env.getWikiaDomain());
+      }
+      case SANDBOX: {
+        return String.format(SANDBOX_URL_FORMAT, this.env, www, wikiaName, env.getWikiaDomain());
+      }
+      default:
+        return "";
+    }
+  }
+
+  private String getWikiaGlobalName(String wikiName) {
+    if (wikiName.endsWith(".wikia")) {
+      if (Configuration.getEnvType(this.env) == EnvType.DEV) {
+        return "wikiaglobal";
+      } else {
+        return wikiName.replace(".wikia", "");
+      }
+    } else {
+      return wikiName;
+    }
   }
 
   public String appendQueryStringToURL(String url, String qs) {
@@ -77,63 +124,5 @@ public class UrlBuilder {
     } else {
       return url + separator + qs;
     }
-  }
-
-  private String composeUrl(String prefix, String wikiName, String suffix) {
-    String overwrittenWikiName = wikiName;
-    String overwrittenPrefix = prefix;
-    if (env != null) {
-      if ((!env.contains("dev") || env.contains(SANDBOX_MERCURY_DEV)) && !"prod".equals(env)) {
-        overwrittenPrefix = env + "." + prefix;
-      }
-
-      if (env.contains("dev") && !env.contains(SANDBOX_MERCURY_DEV) &&
-          !"CHROMEMOBILEMERCURY".equalsIgnoreCase(browser) && wikiName.endsWith("wikia")) {
-        overwrittenWikiName = "wikiaglobal";
-      }
-    }
-
-    return "http://" + overwrittenPrefix + overwrittenWikiName + suffix + "/";
-  }
-
-  public static String getUrlForPageWithWWW(String pageName) {
-    String environment = Configuration.getEnv();
-    String wikiName = Configuration.getWikiName();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-    wikiName = wikiName.equals("wikia") ? "" : wikiName + ".";
-
-    return environment + "www." + wikiName + "wikia.com" + pageName;
-  }
-
-  public static String getHostForWiki() {
-    String environment = Configuration.getEnv();
-    String wikiName = Configuration.getWikiName();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-    wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
-
-    return environment + wikiName + "wikia.com";
-  }
-
-  public static String getHostForWiki(String wikiName) {
-    String environment = Configuration.getEnv();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-    wikiName = wikiName.equals("wikia") ? "www." : wikiName + ".";
-
-    return environment + wikiName + "wikia.com";
-  }
-
-  public static String getUrlForPage(String pageName) {
-    return getHostForWiki() + pageName;
-  }
-
-  public static String getUrl(String wikiName, String path) {
-    String environment = Configuration.getEnv();
-
-    environment = environment.equals("prod") ? "" : environment + ".";
-
-    return "http://" + environment + wikiName + ".wikia.com" + path;
   }
 }

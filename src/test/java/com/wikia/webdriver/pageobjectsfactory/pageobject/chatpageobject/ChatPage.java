@@ -340,7 +340,7 @@ public class ChatPage extends WikiBasePageObject {
   }
 
   public void unBanUser(String userName) {
-    wait.forElementVisible(getUserUnbanLink(userName));
+    wait.forElementClickable(getUserUnbanLink(userName));
     getUserUnbanLink(userName).click();
     PageObjectLogging.log("unBanUser", userName + " is no longer banned", true);
   }

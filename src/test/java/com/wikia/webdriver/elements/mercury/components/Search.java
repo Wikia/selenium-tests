@@ -6,7 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -100,7 +99,7 @@ public class Search extends BasePageObject {
     try {
       wait.forElementClickable(searchInput, 0).click();
       return true;
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
     } catch (WebDriverException e) {
@@ -128,8 +127,6 @@ public class Search extends BasePageObject {
     try {
       wait.forElementPresent(By.cssSelector(focusedSearchInput), FOCUS_TIMEOUT_IN_SECONDS);
       return true;
-    } catch (NoSuchElementException e) {
-      return false;
     } catch (TimeoutException e) {
       return false;
     }
@@ -139,7 +136,7 @@ public class Search extends BasePageObject {
     try {
       wait.forElementVisible(element);
       return element.isDisplayed();
-    } catch (NoSuchElementException e) {
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;
     }
