@@ -780,9 +780,7 @@ public class WikiBasePageObject extends BasePageObject {
     try {
       wait.forElementVisible(wikiFirstHeader);
       return true;
-    }
-
-    catch(TimeoutException e) {
+    } catch(TimeoutException e) {
       PageObjectLogging.logInfo("FirstPageHeader object not visible", e);
       return false;
     }
