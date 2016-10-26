@@ -108,7 +108,6 @@ public class LayoutTests extends NewTestTemplate {
     postDetailsListLoads();
   }
 
-
   /**
    * TESTING METHODS SECTION
    */
@@ -132,7 +131,5 @@ public class LayoutTests extends NewTestTemplate {
     new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(startingListLength < post.getPostsListLength());
-  }
-
   }
 }
