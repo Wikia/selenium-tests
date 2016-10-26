@@ -14,6 +14,7 @@ import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -198,13 +199,13 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @RelatedIssue(issueID = "WW-401")
   @Execute(asUser = User.USER)
-  public void newTemplateCreation() {
-    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
-      .getTemplateClassification()
-      .changeTemplateType(TemplateTypes.INFOBOX)
-      .clickAddButton();
+  public void newInfoboxTemplateCreationRedirectsToInfoboxBuilder() {
+    new TemplateEditPage()
+        .open("NewInfoboxTemplateCreationRedirectsToInfoboxBuilder" + DateTime.now().getMillis())
+        .getTemplateClassification()
+        .changeTemplateType(TemplateTypes.INFOBOX)
+        .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
@@ -295,7 +296,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002", "test_verify"})
-  @RelatedIssue(issueID = "WW-401")
+  @RelatedIssue(issueID = "WW-462")
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
