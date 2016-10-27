@@ -59,7 +59,7 @@ public class PromotingTests extends NewTestTemplate {
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
     driver.switchTo().window(newWindow);
 
-    Assertion.assertTrue(driver.getTitle().contains("Wikia Fan App for: Fallout"));
+    Assertion.assertTrue(driver.getTitle().contains("Fandom Community for: Fallout"));
   }
 
   private void googlePlayLinkRedirectsProperly() {
