@@ -132,7 +132,6 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-3267")
   public void userOnDesktopCanAddPostWithoutTitle() {
     final String description = TextGenerator.createUniqueText();
 
