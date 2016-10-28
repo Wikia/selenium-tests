@@ -97,8 +97,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> mediaNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
-  @FindBy(css = ".ve-ce-surface.mw-body-content")
-  private WebElement infoboxNode;
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
