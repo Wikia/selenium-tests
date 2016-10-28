@@ -67,8 +67,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement veSurface;
   @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled .oo-ui-iconElement")
   private WebElement infoboxPopup;
-  @FindBy(css=".pi-item.pi-item-spacing.pi-title")
-  private WebElement infoboxPopupCollapsed;
+  @FindBy(css = ".portable-infobox")
+  private WebElement infoboxInArticle;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-buttonElement")
   private WebElement applyChangesButton;
   @FindBy(css = ".oo-ui-labelElement.oo-ui-popupToolGroup.oo-ui-listToolGroup")
@@ -563,13 +563,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return mediaDialog;
   }
 
-  public VisualEditorPageObject clickTextArea() {
-    infoboxNode.click();
+  public VisualEditorPageObject clickEditArea() {
+    editArea.click();
     return this;
   }
 
-  public VisualEditorPageObject clickInfoboxNode() {
-    infoboxPopupCollapsed.click();
+  public VisualEditorPageObject clickInfobox() {
+    infoboxInArticle.click();
     return this;
   }
 }
