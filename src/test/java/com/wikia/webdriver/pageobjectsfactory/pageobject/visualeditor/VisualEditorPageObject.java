@@ -564,16 +564,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return mediaDialog;
   }
 
-  public VisualEditorPageObject  getTextArea() {
+  public VisualEditorPageObject clickTextArea() {
     infoboxNode.click();
     return this;
   }
 
-  public VisualEditorPageObject  getInfoboxNode() {
+  public VisualEditorPageObject  clickInfoboxNode() {
     infoboxPopupCollapsed.click();
     return this;
   }
 }
-
-
-
