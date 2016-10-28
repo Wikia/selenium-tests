@@ -1,12 +1,9 @@
 package com.wikia.webdriver.testcases.portableinfoboxtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -24,12 +21,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLink
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
+import org.testng.annotations.Test;
+
 /**
- * Set of Test Cases found on:
- * https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
+ * Set of Test Cases found on: https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
  */
 
-@Execute(onWikia = "mediawiki119")
 public class PortableInfoboxTests extends NewTestTemplate {
 
   private static final String INFOBOX_EMPTY_TAGS_INVOCATION =
@@ -80,22 +77,21 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
   public void verifyInternalLinksRedirecting() {
+    new ArticleContent().push("article cannot be empty", PageContent.INFOBOX_1);
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
     infobox.open(PageContent.INFOBOX_2);
 
-    String internalLinkName = infobox.open(PageContent.INFOBOX_2).getInternalLinkRedirectTitle(2);
+    String internalLinkName = infobox.getInternalLinkRedirectTitle(0);
 
     String internalURL =
-        infobox.clickInternalLinkWithIndex(3).waitForUrlToContain(internalLinkName).getCurrentUrl();
+        infobox.clickInternalLinkWithIndex(0).waitForUrlToContain(internalLinkName).getCurrentUrl();
 
     Assertion.assertEquals(internalLinkName, internalURL);
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_001", "PortableInfoboxLinksTests"})
-  @RelatedIssue(issueID = "WW-423",
-      comment = "test is prone to race condition, check locally or test manually")
   public void verifyExternalLinksRedirecting() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
@@ -113,7 +109,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   public void verifyImagesInWhatLinksHerePage() {
     new ArticleContent().push(String.format("[[%s]]", PageContent.INFOBOX_2),
-        "Infobox2_WhatLinksHere");
+                              "Infobox2_WhatLinksHere");
     // provide an article linking to testing Infobox
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
@@ -185,7 +181,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     Assertion.assertEquals(infobox.getItemValuesFontSize(1), infobox.getOrderedElementFontSize(1));
     Assertion.assertEquals(infobox.getItemValuesFontSize(1),
-        infobox.getUnorderedElementFontSize(1));
+                           infobox.getUnorderedElementFontSize(1));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
@@ -197,7 +193,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String categoryLinkName = infobox.getCategoryLinkName();
     infobox.clickCategoryLink();
-    String categoryPageTitle = new CategoryPageObject(driver).getCategoryPageTitle();
+    String categoryPageTitle = new CategoryPageObject().getCategoryPageTitle();
 
     Assertion.assertTrue(categoryLinkName.contains(categoryPageTitle));
   }
@@ -210,9 +206,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     infobox.open(PageContent.INFOBOX_2);
 
     Assertion.assertEquals(infobox.getItemLabelsFontSize(0),
-        infobox.getHorizontalItemLabelFontSize(0));
+                           infobox.getHorizontalItemLabelFontSize(0));
     Assertion.assertEquals(infobox.getItemValuesFontSize(0),
-        infobox.getHorizontalItemValuesFontSize(0));
+                           infobox.getHorizontalItemValuesFontSize(0));
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
@@ -223,10 +219,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     AceEditor editor = new AceEditor();
 
-
     template
         .openArticleByName(wikiURL,
-            String.format("%s:%s", PageContent.TEMPLATE_NAMESPACE, PageContent.INFOBOX_2))
+                           String.format("%s:%s", PageContent.TEMPLATE_NAMESPACE,
+                                         PageContent.INFOBOX_2))
         .editArticleInSrcUsingDropdown();
     String templateSyntax = editor.getContent();
 
@@ -359,8 +355,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    String categoryImageURL = categoryPage
-        .getPageImageURL(categoryPage.getArticleIndexInGalleryByName(PageContent.INFOBOX_2));
+    String categoryImageURL = categoryPage.getImageURLFromGallery(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(categoryImageURL.contains(imageName));
   }

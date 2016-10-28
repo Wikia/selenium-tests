@@ -19,6 +19,7 @@ public class KeyboardShortcutsTest extends NewTestTemplate {
     new HomePage()
         .open()
         .getWikiaBar()
+        .ensureBarIsNotCollapsed()
         .clickOnShortcutsLink()
         .clickCloseButton();
   }

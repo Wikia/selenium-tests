@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.OptionsPostAndReply;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
@@ -15,17 +14,13 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.Discus
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import lombok.Getter;
 
 
-public class PostsListPage extends WikiBasePageObject {
+public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final Post post = new Post();
-
-  @Getter(lazy = true)
-  private final OptionsPostAndReply postOptions = new OptionsPostAndReply();
 
   @Getter(lazy = true)
   private final PostEditor postEditor = new PostEditor();
@@ -40,7 +35,7 @@ public class PostsListPage extends WikiBasePageObject {
   private final HeroUnit heroUnit = new HeroUnit();
 
   @Getter(lazy = true)
-  private final Moderation moderationTools = new Moderation();
+  private final Moderation moderation = new Moderation();
 
   @Getter(lazy = true)
   private final PostsCreatorDesktop postsCreatorDesktop = new PostsCreatorDesktop();

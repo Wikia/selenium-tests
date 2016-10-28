@@ -602,6 +602,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidCustomAdapter() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
+    };
+  }
+
+  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
@@ -1135,20 +1142,6 @@ public class AdsDataProvider {
                 .put("lineItemId", 277592292)
                 .put("src", "gpt")
                 .build()
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsRecoveryUnlockCSSOasis() {
-    return new Object[][]{
-        {
-            new Page("project43", "Project43_Wikia"),
-            false
-        },
-        {
-            new Page("arecovery", "SyntheticTests/Static_image"),
-            true
         }
     };
   }

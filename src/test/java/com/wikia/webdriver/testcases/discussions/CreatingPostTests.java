@@ -1,37 +1,32 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPill;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 
-import javax.annotation.Nullable;
+import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
-
-  private static final String TEXT = "text";
 
   /*
    * ANONS ON MOBILE SECTION
@@ -80,11 +75,12 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
+  @RelatedIssue(issueID = "SOC-3267")
   @Test(groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddPostWithoutTitle() {
-    final String description = createUniqueDescription();
+    final String description = TextGenerator.createUniqueText();
 
     PostsListPage postListPage = new PostsListPage().open();
     PostsCreator postsCreator = postListPage.getPostsCreatorMobile();
@@ -95,7 +91,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = postListPage.getPost()
         .waitForPostToAppearWith(description)
-        .getTheNewestPost();
+        .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
@@ -132,11 +128,12 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
+  @RelatedIssue(issueID = "SOC-3267")
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {
-    final String description = createUniqueDescription();
+    final String description = TextGenerator.createUniqueText();
 
     PostsListPage postListPage = new PostsListPage().open();
     PostsCreator postsCreator = postListPage.getPostsCreatorDesktop();
@@ -147,7 +144,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
     PostEntity postEntity = postListPage.getPost()
         .waitForPostToAppearWith(description)
-        .getTheNewestPost();
+        .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
   }
@@ -208,11 +205,11 @@ public class CreatingPostTests extends NewTestTemplate {
         .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
-    postsCreator.fillTitleWith(TEXT);
+    postsCreator.fillTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only title filled.");
 
-    postsCreator.fillDescriptionWith(TEXT);
+    postsCreator.fillDescriptionWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with title and description filled.");
 
@@ -227,14 +224,9 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only category selected.");
 
-    postsCreator.fillTitleWith(TEXT);
+    postsCreator.fillTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with category selected and title filled.");
-  }
-
-  private String createUniqueDescription() {
-    final long timestamp = System.nanoTime();
-    return "Automated test, timestamp " + timestamp;
   }
 
   private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
@@ -264,25 +256,16 @@ public class CreatingPostTests extends NewTestTemplate {
     PostsListPage postListPage = new PostsListPage().open();
 
     PostEntity post = postListPage.getPost()
-        .getTheNewestPost();
+        .findNewestPost();
 
     final String postDetailsUrl = post.findLinkToPostDetails();
 
     post.click();
 
-    waitForPostDetailsTransitionToFinish();
+    new Transitions(driver).waitForPostDetailsPageTransition();
 
     final String url = driver.getCurrentUrl();
     Assertion.assertTrue(PostDetailsPage.is(url));
     Assertion.assertTrue(url.endsWith(postDetailsUrl));
-  }
-
-  private void waitForPostDetailsTransitionToFinish() {
-    new WebDriverWait(driver, 5).until(new Predicate<WebDriver>() {
-      @Override
-      public boolean apply(@Nullable WebDriver input) {
-        return ExpectedConditions.presenceOfElementLocated(By.className("post-details-view")).apply(input).isDisplayed();
-      }
-    });
   }
 }

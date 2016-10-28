@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -91,5 +90,28 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   public PostsCreator clickSubmitButton() {
     getSubmitButton().click();
     return this;
+  }
+
+  @Override
+  public PostEntity.Data addPostWithTimestamp() {
+    final String title = TextGenerator.defaultText();
+    final String description = TextGenerator.createUniqueText();
+
+    CategoryPill category = fillTitleWith(title)
+        .fillDescriptionWith(description)
+        .clickAddCategoryButton()
+        .findCategoryOnPosition(0);
+
+    final String categoryName = category.getName();
+
+    category.click();
+
+    clickSubmitButton();
+
+    return PostEntity.Data.builder()
+        .category(categoryName)
+        .title(title)
+        .description(description)
+        .build();
   }
 }
