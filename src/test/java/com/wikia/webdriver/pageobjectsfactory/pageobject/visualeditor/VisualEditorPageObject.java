@@ -65,8 +65,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement focusedHighlight;
   @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
   private WebElement veSurface;
-  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
+  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled .oo-ui-iconElement")
   private WebElement infoboxPopup;
+  @FindBy(css=".pi-item.pi-item-spacing.pi-title")
+  private WebElement infoboxPopupCollapsed;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-buttonElement")
   private WebElement applyChangesButton;
   @FindBy(css = ".oo-ui-labelElement.oo-ui-popupToolGroup.oo-ui-listToolGroup")
@@ -95,6 +97,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private List<WebElement> mediaNodes;
   @FindBy(css = ".media-gallery-wrapper.ve-ce-branchNode>div")
   private List<WebElement> galleryNodes;
+  @FindBy(css = ".ve-ce-surface.mw-body-content")
+  private WebElement infoboxNode;
+
 
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
@@ -120,6 +125,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextArea(String text) {
     wait.forElementVisible(editArea);
+    editArea.click();
     editArea.sendKeys(text);
     PageObjectLogging.log("write", "text " + text + "written", true);
   }
@@ -409,7 +415,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
                            "The number of inline transclusion node is not equal");
   }
 
-
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
     wait.forElementClickable(selectedGallery);
@@ -505,12 +510,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public VisualEditorPageObject clickApplyChanges() {
     wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
+    wait.forElementNotVisible(applyChangesButton);
     return this;
   }
 
   public boolean isInfoboxInsertedInEditorArea() {
     wait.forElementVisible(focusedHighlight);
-
     return isElementOnPage(focusedHighlight);
   }
 
@@ -559,4 +564,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return mediaDialog;
   }
 
+  public VisualEditorPageObject  getTextArea() {
+    infoboxNode.click();
+    return this;
+  }
+
+  public VisualEditorPageObject  getInfoboxNode() {
+    infoboxPopupCollapsed.click();
+    return this;
+  }
 }
+
+
+

@@ -314,7 +314,10 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
 
-    visualEditor.clickInfoboxPopup()
+    visualEditor.getTextArea();
+    visualEditor.getInfoboxNode();
+    visualEditor
+        .clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
         .clickApplyChanges();
 
