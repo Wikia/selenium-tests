@@ -278,7 +278,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor =
         article.openVEModeWithMainEditButton().clickInsertToolButton()
-            .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).clickApplyChanges();
+            .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -294,7 +294,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -310,16 +310,16 @@ public class PortableInfoboxTests extends NewTestTemplate {
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
 
-    visualEditor.getTextArea();
-    visualEditor.getInfoboxNode();
+    visualEditor.clickTextArea();
+    visualEditor.clickInfoboxNode();
     visualEditor
         .clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -340,7 +340,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
