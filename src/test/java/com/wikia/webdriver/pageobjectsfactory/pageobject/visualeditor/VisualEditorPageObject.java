@@ -100,7 +100,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   @FindBy(css = ".ve-ce-surface.mw-body-content")
   private WebElement infoboxNode;
 
-
   private By contextMenuBy = By.cssSelector(".ve-ui-contextSelectWidget");
   private By contextEditBy = By.cssSelector(".oo-ui-labelElement");
   private By blockTransclusionBy = By.cssSelector("div[typeof='mw:Transclusion']");
@@ -507,7 +506,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return this;
   }
 
-  public VisualEditorPageObject clickApplyChanges() {
+  public VisualEditorPageObject applyChanges() {
     wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
     wait.forElementNotVisible(applyChangesButton);
@@ -569,7 +568,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return this;
   }
 
-  public VisualEditorPageObject  clickInfoboxNode() {
+  public VisualEditorPageObject clickInfoboxNode() {
     infoboxPopupCollapsed.click();
     return this;
   }
