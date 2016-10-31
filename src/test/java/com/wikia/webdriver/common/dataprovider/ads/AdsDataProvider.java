@@ -1147,20 +1147,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryUnlockCSSOasis() {
-    return new Object[][]{
-        {
-            new Page("project43", "Project43_Wikia"),
-            false
-        },
-        {
-            new Page("arecovery", "SyntheticTests/Static_image"),
-            true
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsAdvertisementText() {
     return new Object[][]{
         {
