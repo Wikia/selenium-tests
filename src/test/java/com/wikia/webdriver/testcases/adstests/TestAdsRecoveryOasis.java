@@ -35,4 +35,16 @@ public class TestAdsRecoveryOasis extends TemplateNoFirstLoad {
         .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
         .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelector, recoveredSlot);
   }
+
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsRecoveryOasisProject43",
+      groups = "AdsRecoveryOasis"
+  )
+  public void adsRecoveryOasisByCountry(Page page, Map<String, Object> slotInfo) {
+    adsRecoveryOasis(page, slotInfo);
+  }
+
+  //public void adsRecoveryOasisHopToTaboola() {}
 }
