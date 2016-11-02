@@ -45,6 +45,7 @@ public class NavigatingTests extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @RelatedIssue(issueID = "SOC-2301")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
