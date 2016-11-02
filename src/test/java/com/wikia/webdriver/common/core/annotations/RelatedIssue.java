@@ -13,5 +13,7 @@ import java.lang.annotation.Target;
 public @interface RelatedIssue {
   String issueID();
 
+  String env() default "";
+
   String comment() default "";
 }
