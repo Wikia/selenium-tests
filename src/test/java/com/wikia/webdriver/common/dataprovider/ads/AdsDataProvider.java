@@ -1150,7 +1150,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoveryOasisProject43() {
       return new Object[][]{
           {
-              new Page("project43", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)
@@ -1159,7 +1159,7 @@ public class AdsDataProvider {
                   .build()
           },
           {
-              new Page("project43", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
                   .put("slotName", AdsContent.MEDREC)
