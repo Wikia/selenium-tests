@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -75,7 +74,6 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @RelatedIssue(issueID = "SOC-3267")
   @Test(groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -128,7 +126,6 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @RelatedIssue(issueID = "SOC-3267")
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
