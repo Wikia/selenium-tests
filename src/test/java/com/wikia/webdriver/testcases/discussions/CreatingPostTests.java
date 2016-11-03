@@ -76,7 +76,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "SOC-3267")
-  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Test(enabled = false, groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddPostWithoutTitle() {
@@ -129,7 +129,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @RelatedIssue(issueID = "SOC-3267")
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(enabled = false, groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {
