@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsTaboolaObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -36,7 +37,6 @@ public class TestAdsRecoveryOasis extends TemplateNoFirstLoad {
         .verifyExpandedAdVisibleInSlot(recoveredAdUnitIdSelector, recoveredSlot);
   }
 
-
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsRecoveryOasisProject43",
@@ -46,5 +46,22 @@ public class TestAdsRecoveryOasis extends TemplateNoFirstLoad {
     adsRecoveryOasis(page, slotInfo);
   }
 
-  //public void adsRecoveryOasisHopToTaboola() {}
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsRecoveryOasisHopToTaboola",
+      groups = "AdsRecoveryOasis"
+  )
+  public void adsRecoveryOasisHopToTaboola(Page page, Map<String, Object> slotInfo) {
+    String slotName = slotInfo.get("slotName").toString();
+    String adUnitId = slotInfo.get("adUnitId").toString();
+    String url = urlBuilder.getUrlForPage(page);
+
+    AdsRecoveryObject adsBaseObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+
+    String recoveredAdUnitIdSelector = "#" + adsBaseObject.getRecoveredAdUnitId(adUnitId);
+    adsBaseObject.triggerAdSlot(slotName).verifyNoAd(recoveredAdUnitIdSelector);
+
+    AdsTaboolaObject adsTaboolaObject = new AdsTaboolaObject(driver);
+    adsTaboolaObject.verifyTaboolaContainer(AdsTaboolaObject.ABOVE_ARTICLE_CSS_SELECTOR);
+  }
 }

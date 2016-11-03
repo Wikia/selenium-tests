@@ -1171,6 +1171,19 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsRecoveryOasisHopToTaboola() {
+      return new Object[][]{
+          {
+              new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
+                  .put("slotName", AdsContent.TOP_LB)
+                  .build()
+          }
+      };
+  }
+
+  @DataProvider
   public static Object[][] adsAdvertisementText() {
     return new Object[][]{
         {
