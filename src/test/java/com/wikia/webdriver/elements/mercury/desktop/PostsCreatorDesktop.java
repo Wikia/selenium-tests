@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
+package com.wikia.webdriver.elements.mercury.desktop;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import lombok.Getter;

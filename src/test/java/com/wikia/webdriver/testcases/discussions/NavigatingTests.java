@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
+import com.wikia.webdriver.elements.mercury.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
@@ -55,8 +55,7 @@ public class NavigatingTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanClickUsername() {
-    clickUsernameLoadsUserPage();
+  public void anonUserOnDesktopCanClickUsername() {clickUsernameLoadsUserPage();
   }
 
   /**
