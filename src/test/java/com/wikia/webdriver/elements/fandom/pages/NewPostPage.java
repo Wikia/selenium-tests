@@ -22,7 +22,7 @@ public class NewPostPage extends FandomWPPage<NewPostPage> {
 
   @Override
   public NewPostPage open() {
-    getUrl("http://qa.fandom.wikia.com/wp-admin/post-new.php");
+    getUrl(SITE_URL + "wp-admin/post-new.php");
 
     return this;
   }
