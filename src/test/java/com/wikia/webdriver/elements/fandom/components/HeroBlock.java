@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.fandom.components;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,5 +19,9 @@ public class HeroBlock extends BasePageObject {
     } catch (ElementNotFoundException e) {
       return false;
     }
+  }
+
+  public boolean hasFiveHeroUnits() {
+    return heroMosaic.findElements(By.cssSelector(".clickable-unit")).size() == 5;
   }
 }

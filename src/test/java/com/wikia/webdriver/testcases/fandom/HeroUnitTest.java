@@ -15,4 +15,13 @@ public class HeroUnitTest extends FandomTestTemplate {
 
     Assertion.assertTrue(homePage.getHeroBlock().isDisplayed(), "Hero block is not displayed");
   }
+
+  @Test
+  public void anonCanSeeFiveHeroUnits() {
+    HomePage homePage = new HomePage().open();
+
+    Assertion.assertTrue(homePage.getHeroBlock().hasFiveHeroUnits(), "Hero block doesn't have five units.");
+  }
+
+
 }
