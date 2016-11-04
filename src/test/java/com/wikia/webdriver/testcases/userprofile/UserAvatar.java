@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.userprofile;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -75,7 +74,6 @@ public class UserAvatar extends NewTestTemplate {
 
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "MAIN-8080")
   public void staffUserCanRemoveAvatar() {
     UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
         credentials.userNameStaff, wikiURL);
