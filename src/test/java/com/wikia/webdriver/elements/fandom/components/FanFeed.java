@@ -7,16 +7,16 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-public class HeroUnit extends BasePageObject {
+public class FanFeed extends BasePageObject {
 
-  @FindBy(css = "section.hero-block")
-  private WebElement heroMosaic;
+  @FindBy(css = "section.fan-feed")
+  private WebElement fanFeed;
 
   public boolean isDisplayed() {
     try {
-      return heroMosaic.isDisplayed();
+      return fanFeed.isDisplayed();
     } catch (ElementNotFoundException e) {
-      return true;
+      return false;
     }
   }
 }
