@@ -22,6 +22,6 @@ public class HeroBlock extends BasePageObject {
   }
 
   public boolean hasFiveHeroUnits() {
-    return heroMosaic.findElements(By.cssSelector(".clickable-unit")).size() == 5;
+    return heroMosaic.findElements(By.cssSelector(".hero")).size() == 5;
   }
 }
