@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 public class AdsTaboolaObject extends AdsBaseObject {
 
-  public static final String BELOW_ARTICLE_CSS_SELECTOR = "#NATIVE_TABOOLA_ARTICLE";
-  public static final String ABOVE_ARTICLE_CSS_SELECTOR = "#TOP_LEADERBOARD_AB";
+  public static final String BELOW_ARTICLE_CSS_SELECTOR = "#NATIVE_TABOOLA_ARTICLE > *";
+  public static final String ABOVE_ARTICLE_CSS_SELECTOR = "#TOP_LEADERBOARD_AB > *";
   public static final String TABOOLA_LOADER_REQUEST
       = "http://cdn.taboola.com/libtrc/wikia-network/loader.js";
 
