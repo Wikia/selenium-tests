@@ -17,11 +17,11 @@ public class EditorHomePageObject {
 
   @FindBy(css = ".sub-head--done")
   private WebElement publishButton;
-  @FindBy(css = "section:nth-of-type(1) .curated-content-editor-add-item-btn")
-  private WebElement addFeaturedContentButton;
   @FindBy(css = "section:nth-of-type(2) .curated-content-editor-add-item-btn")
-  private WebElement addNewSectionButton;
+  private WebElement addFeaturedContentButton;
   @FindBy(css = "section:nth-of-type(3) .curated-content-editor-add-item-btn")
+  private WebElement addNewSectionButton;
+  @FindBy(css = "section:nth-of-type(4) .curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
 
   private WebDriver driver;
