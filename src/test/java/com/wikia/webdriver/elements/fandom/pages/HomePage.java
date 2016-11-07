@@ -16,4 +16,8 @@ public class HomePage extends FandomPage<HomePage> {
 
     return this;
   }
+
+  public void gaPageViewTracked() {
+
+  }
 }
