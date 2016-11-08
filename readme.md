@@ -13,7 +13,7 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 3. Go to "Annotation Processors"
     * Windows: click Settings -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
     * OSX: click Intellij IDEA -> Preferences -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
-    
+
 4. Install IDE configurations from [Wikia's Java Coding Guidelines](https://github.com/Wikia/guidelines/tree/master/Java)
 
 ## Adding Tests
@@ -89,72 +89,7 @@ The following are valid for use in the `-Dbrowser` parameter:
 
 ### Groups
 
-The following are valid for use in the `-Dgroups` parameter:
-
-* ArticleCRUDUser
-* ArticleCRUDAnon
-* ArticleComments
-* ArticleEditDropdown
-* ArticleActionsAdmin
-* ArticleFeaturesCRUDAnon
-* ArticleFeaturesCRUDUser
-* ArticleTOCTests
-* AvatarTest
-* BlogTests
-* BlogFeaturesTests
-* BlogCommentsTests
-* CategoriesTestsArticle
-* CategoriesTestsArticleEditMode
-* Chat
-* CNW_lang
-* CNW
-* EditAccountTest
-* FollowArticle
-* FollowBlog
-* FollowPhoto
-* FollowVideo
-* ForumBoardTests
-* ForumEditMode
-* ForumThreadTests
-* ForumNotificationsTests
-* ForgottenPassword
-* ForcedLogin
-* Hubs
-* ImageServing
-* ImageStorageTests
-* InteractiveMaps
-* Login
-* Media
-* MessageWall
-* MessageWallFeatures
-* MessageWallNotificationsFollowersMessageTests
-* MessageWallNotificationsFollowersResponseTests
-* MessageWallNotificationsOwnerTests
-* MessageWallNotificationsThreadCreatorTests
-* MessageWallNotificationsThreadParticipantTests
-* MultiWikiFinder
-* RTE
-* RTE_extended
-* CrossWikiSearch
-* IntraWikiSearch
-* IntraWikiSearchExactMatch
-* Seo
-* SignUp
-* SpecialVideo
-* ThemeDesigner
-* Toolbar
-* Top_10_list_Tests
-* UsersAndRights
-* VetAddVideo
-* VetModalAlignment
-* VetModalCaption
-* VetModalWidth
-* VetProvidersRV
-* VetProvidersArticle
-* VideoSuggestions
-* VideoArticlePlacehoder
-* WamPageTests
-* WikiActivity
+Whole group of tests can be run with `-Dgroups` parameter. Groups are declared as annotation `@group()` above the tests.
 
 ## Reading Logs
 
