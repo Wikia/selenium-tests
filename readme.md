@@ -7,8 +7,8 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 2. Enable [LOMBOK](https://projectlombok.org/) plugin on your IDE, follow the vendor instructions for installing LOMBOK for your IDE.
   * For eclipse follow [this instruction](https://projectlombok.org/download.html)
   * For IntelliJ Idea:
-   ** Windows: click Settings -> Plugins -> Browse repositories for "lombok" -> Install. Restart IntelliJ.
-   ** OSX: click IntelliJ IDEA -> Preferences -> Plugins -> Browse repositories for "lombok" -> Install. Restart Intellij.
+    * Windows: click Settings -> Plugins -> Browse repositories for "lombok" -> Install. Restart IntelliJ.
+    * OSX: click IntelliJ IDEA -> Preferences -> Plugins -> Browse repositories for "lombok" -> Install. Restart Intellij.
 
 3. Go to "Annotation Processors"
     * Windows: click Settings -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
