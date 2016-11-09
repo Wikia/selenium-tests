@@ -1,16 +1,19 @@
 package com.wikia.webdriver.common.remote.operations;
 
+import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
+import org.json.JSONObject;
 
-public class ReportPost extends ModeratePost {
+public class ValidatePost extends ModeratePost {
 
-  private static final String REPORT_POST_URL_SUFFIX = "%s/posts/%s/report";
+  private static final String REPORT_POST_URL_SUFFIX = "%s/posts/%s/report/valid";
 
-  public ReportPost(User user) {
+  public ValidatePost(User user) {
     super(user);
   }
+
   protected String buildUrl(final ModeratePostContext context) {
     return Discussions.service(String.format(REPORT_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
   }

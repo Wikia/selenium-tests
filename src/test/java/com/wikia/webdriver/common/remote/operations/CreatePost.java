@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class CreatePost {
 
-  public final static String CREATE_POST_URL_SUFFIX = "%s/forums/%s/threads";
+  public static final String CREATE_POST_URL_SUFFIX = "%s/forums/%s/threads";
 
   private final PostRemoteOperation remoteOperation;
 

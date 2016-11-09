@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.RemoteException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,6 +42,9 @@ public class BaseRemoteOperation {
 
           if (response.getStatusLine().getStatusCode() >= 400) {
             PageObjectLogging.log("Error while making request.", result, false);
+            throw new RemoteException("Error while invoking request. "
+                + " Method: " + requestBase.getMethod()
+                + " Url: " + requestBase.getURI().toString());
           }
         }
       } catch (UnsupportedEncodingException x) {

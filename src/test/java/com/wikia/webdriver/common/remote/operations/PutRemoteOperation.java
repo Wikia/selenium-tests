@@ -16,12 +16,18 @@ public class PutRemoteOperation extends BaseRemoteOperation {
     super(user);
   }
 
+  public String execute(final String url) {
+    return execute(url, null);
+  }
+
   public String execute(final String url, final JSONObject jsonObject) {
     String result = StringUtils.EMPTY;
 
     try {
       final HttpPut put = new HttpPut(url);
-      put.setEntity(new StringEntity(jsonObject.toString()));
+      if (null != jsonObject) {
+        put.setEntity(new StringEntity(jsonObject.toString()));
+      }
       result = super.execute(put);
     } catch (UnsupportedEncodingException x) {
       PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);

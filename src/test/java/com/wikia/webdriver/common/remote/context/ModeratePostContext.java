@@ -8,20 +8,20 @@ import lombok.Getter;
 import java.util.Objects;
 
 @Getter
-public class ReportPostContext extends RemoteContext {
+public class ModeratePostContext extends RemoteContext {
 
   private final String postId;
 
   @Builder
-  public ReportPostContext(String siteId, String postId) {
+  public ModeratePostContext(String siteId, String postId) {
     super(siteId);
     this.postId = postId;
   }
 
-  public static ReportPostContext defaultContextUsing(PostEntity.Data data) {
+  public static ModeratePostContext defaultContextUsing(PostEntity.Data data) {
     Objects.requireNonNull(data.getFirstPostId(), "First post id is required to report post. Post id is not used in this operation!");
 
-    return ReportPostContext.builder()
+    return ModeratePostContext.builder()
         .siteId(Discussions.DAUTO_WIKIA_SITE_ID)
         // in order to report post (in front end) it has to be treated as reply (in front end, but post in back end)
         .postId(data.getFirstPostId())
