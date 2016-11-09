@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.imageservingtests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -68,6 +69,7 @@ public class ImageStorageTests extends NewTestTemplate {
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "WW-489")
   public void ImageStorage_002_moveImage() {
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
 

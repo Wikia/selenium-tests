@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor.text;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
@@ -20,9 +21,8 @@ public class VECopyAndPasteTests extends NewTestTemplate {
     base = new WikiBasePageObject();
   }
 
-  @Test(
-      groups = {"VECopyAndPasteTests", "VECopyAndPasteTests_001"}
-  )
+  @Test(groups = {"VECopyAndPasteTests", "VECopyAndPasteTests_001"})
+  @RelatedIssue(issueID = "QAART-888")
   public void VECopyAndPasteTests_001_copyAndPaste() throws InterruptedException {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
