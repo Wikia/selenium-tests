@@ -5,15 +5,21 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.CategoryPill;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -69,7 +75,8 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @RelatedIssue(issueID = "SOC-3267")
+  @Test(enabled = false, groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddPostWithoutTitle() {
@@ -121,7 +128,8 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @RelatedIssue(issueID = "SOC-3267")
+  @Test(enabled = false, groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {

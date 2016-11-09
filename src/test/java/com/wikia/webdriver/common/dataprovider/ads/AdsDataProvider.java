@@ -1147,17 +1147,40 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryUnlockCSSOasis() {
-    return new Object[][]{
-        {
-            new Page("project43", "Project43_Wikia"),
-            false
-        },
-        {
-            new Page("arecovery", "SyntheticTests/Static_image"),
-            true
-        }
-    };
+  public static Object[][] adsRecoveryOasisProject43() {
+      return new Object[][]{
+          {
+              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
+                  .put("slotName", AdsContent.TOP_LB)
+                  .put("lineItemId", 257545212)
+                  .put("src", "gpt")
+                  .build()
+          },
+          {
+              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
+                  .put("slotName", AdsContent.MEDREC)
+                  .put("lineItemId", 257545212)
+                  .put("src", "gpt")
+                  .build()
+          }
+      };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryOasisHopToTaboola() {
+      return new Object[][]{
+          {
+              new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
+                  .put("slotName", AdsContent.TOP_LB)
+                  .build()
+          }
+      };
   }
 
   @DataProvider

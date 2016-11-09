@@ -44,7 +44,8 @@ public class NavigatingTests extends NewTestTemplate {
     backToWiki();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @Test(enabled = false, groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @RelatedIssue(issueID = "SOC-2301")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
@@ -63,9 +64,11 @@ public class NavigatingTests extends NewTestTemplate {
    */
 
   private void backToWiki() {
-    BackButtons backButtons = new PostsListPage().open().getBackButtons();
+    PostsListPage postListPage = new PostsListPage();
+    BackButtons backButtons = postListPage.open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
+    Assertion.assertTrue(postListPage.isWikiFirstHeaderVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
   }
 

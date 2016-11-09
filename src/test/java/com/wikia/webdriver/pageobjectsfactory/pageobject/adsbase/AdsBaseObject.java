@@ -632,7 +632,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     JavascriptExecutor js = driver;
     try {
       return (long) js.executeScript(
-          "var slots = googletag.getSlots(); for (var i = 0; i < slots.length; i++) { " +
+          "var slots = googletag.pubads().getSlots(); for (var i = 0; i < slots.length; i++) { " +
           "if (slots[i].getTargeting('pos').indexOf('" + slotName + "') !== -1) { " +
           "return slots[i].getResponseInformation().lineItemId;" +
           "} }"

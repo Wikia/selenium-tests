@@ -26,6 +26,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetAddVideo_001"})
+  @RelatedIssue(issueID = "QAART-889")
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "WW-490")
   public void VetAddVideo_001_MessageWallProvider() {
@@ -47,6 +48,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetAddVideo_002"})
+  @RelatedIssue(issueID = "QAART-889")
   @Execute(asUser = User.USER)
   public void VetAddVideo_002_MessageWallLibrary() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);

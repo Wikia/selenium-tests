@@ -193,7 +193,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String categoryLinkName = infobox.getCategoryLinkName();
     infobox.clickCategoryLink();
-    String categoryPageTitle = new CategoryPageObject(driver).getCategoryPageTitle();
+    String categoryPageTitle = new CategoryPageObject().getCategoryPageTitle();
 
     Assertion.assertTrue(categoryLinkName.contains(categoryPageTitle));
   }
@@ -278,7 +278,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor =
         article.openVEModeWithMainEditButton().clickInsertToolButton()
-            .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).clickApplyChanges();
+            .clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2).applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -294,7 +294,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -310,13 +310,16 @@ public class PortableInfoboxTests extends NewTestTemplate {
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
 
-    visualEditor.clickInfoboxPopup()
+    visualEditor.clickEditArea();
+    visualEditor.clickInfobox();
+    visualEditor
+        .clickInfoboxPopup()
         .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -337,7 +340,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
         .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
-        .clickApplyChanges();
+        .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
   }
@@ -355,8 +358,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     CategoryPageObject categoryPage = infobox.clickCategoryWithIndex(0);
     new ArticlePurger().purgeArticleAsLoggedUser();
 
-    String categoryImageURL = categoryPage
-        .getPageImageURL(categoryPage.getArticleIndexInGalleryByName(PageContent.INFOBOX_2));
+    String categoryImageURL = categoryPage.getImageURLFromGallery(PageContent.INFOBOX_2);
 
     Assertion.assertTrue(categoryImageURL.contains(imageName));
   }
