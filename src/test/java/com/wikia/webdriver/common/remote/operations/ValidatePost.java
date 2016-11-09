@@ -1,10 +1,8 @@
 package com.wikia.webdriver.common.remote.operations;
 
-import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
-import org.json.JSONObject;
 
 public class ValidatePost extends ModeratePost {
 
