@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.desktop.Promoting;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;

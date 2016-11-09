@@ -4,7 +4,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorM
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TopNoteModalDialog;
-import com.wikia.webdriver.elements.mercury.desktop.ReplyCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;

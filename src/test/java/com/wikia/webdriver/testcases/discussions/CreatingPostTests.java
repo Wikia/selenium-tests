@@ -16,7 +16,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsC
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
-import com.wikia.webdriver.elements.mercury.desktop.PostsCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
