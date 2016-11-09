@@ -57,7 +57,7 @@ public class GuidelinesTests extends NewTestTemplate {
     @Test(groups = "discussions-StaffUserOnDesktopCanClickEditGuidelines")
     @Execute(asUser = User.STAFF)
     @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-    public void StaffOnDesktopCanClickEditGuidelines() {
+    public void staffOnDesktopCanClickEditGuidelines() {
         GuidelinesPage guidelinesPage = new GuidelinesPage();
         guidelinesPage.open();
 
