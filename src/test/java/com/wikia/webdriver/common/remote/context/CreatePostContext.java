@@ -1,0 +1,33 @@
+package com.wikia.webdriver.common.remote.context;
+
+import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+public class CreatePostContext extends RemoteContext {
+
+  private final String categoryId;
+
+  private final String title;
+
+  private final String description;
+
+  @Builder
+  private CreatePostContext(String siteId, String categoryId, String title, String description) {
+    super(siteId);
+    this.categoryId = categoryId;
+    this.title = title;
+    this.description = description;
+  }
+
+  public static CreatePostContext defaultContext() {
+    return CreatePostContext.builder()
+        .siteId(Discussions.DAUTO_WIKIA_SITE_ID)
+        .categoryId(Discussions.DAUTO_WIKIA_SITE_ID)
+        .title(TextGenerator.defaultText())
+        .description(TextGenerator.createUniqueText())
+        .build();
+  }
+}

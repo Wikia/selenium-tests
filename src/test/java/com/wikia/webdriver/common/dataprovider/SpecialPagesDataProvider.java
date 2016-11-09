@@ -20,7 +20,7 @@ public class SpecialPagesDataProvider {
         {"Special:WithoutInterwiki", "Pages without language links"},
         {"Special:ProtectedPages", "Protected pages"},
         {"Special:ShortPages", "Short pages"},
-        {"Special:TagsReport", "Tags report"},
+        {"Special:TagsReport", "Tags reportPost"},
         {"Special:UncategorizedCategories", "Uncategorized categories"},
         {"Special:UncategorizedPages", "Uncategorized pages"},
         {"Special:UncategorizedFiles", "Uncategorized photos"},

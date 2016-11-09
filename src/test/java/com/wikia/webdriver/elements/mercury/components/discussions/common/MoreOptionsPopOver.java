@@ -14,7 +14,7 @@ public class MoreOptionsPopOver {
   }
 
   public boolean hasReportPostOption() {
-    return hasOption("report-link");
+    return hasOption("execute-link");
   }
 
   private boolean hasOption(String cssClassName) {
