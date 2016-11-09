@@ -55,7 +55,8 @@ public class NavigatingTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanClickUsername() {clickUsernameLoadsUserPage();
+  public void anonUserOnDesktopCanClickUsername() {
+    clickUsernameLoadsUserPage();
   }
 
   /**
