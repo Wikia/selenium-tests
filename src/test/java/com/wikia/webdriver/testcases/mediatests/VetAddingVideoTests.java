@@ -28,7 +28,6 @@ public class VetAddingVideoTests extends NewTestTemplate {
   @Test(groups = {"VetAddVideo_001"})
   @RelatedIssue(issueID = "QAART-889")
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "WW-490")
   public void VetAddVideo_001_MessageWallProvider() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
