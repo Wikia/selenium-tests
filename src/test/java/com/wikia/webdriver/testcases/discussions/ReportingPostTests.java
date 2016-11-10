@@ -96,6 +96,20 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotSeeDeletedPostOnPostsListPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsThirdUser(data);
+    deletePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
+    Assertion.assertNull(post, "Anonymous user should not see deleted post.");
+  }
+
+  @Test(groups = "discussions-anonUserMobileReporting")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
     reportPostRemotelyAsSecondUser(data);
@@ -105,6 +119,20 @@ public class ReportingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), "Anonymous user should not see deleted post.");
+  }
+
+  @Test(groups = "discussions-anonUserMobileReporting")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsThirdUser(data);
+    deletePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity post = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
+    Assertion.assertNull(post, "Anonymous user should not see deleted post.");
   }
 
   // Anonymous user on desktop
