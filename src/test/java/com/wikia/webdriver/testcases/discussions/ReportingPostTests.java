@@ -39,6 +39,8 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE = "User should not see deleted post.";
 
+  public static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST = "Discussions moderator should see re reported post.";
+
   // Anonymous user on mobile
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -458,7 +460,7 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
 
     PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
-    Assertion.assertNotNull(post, "Discussions moderator should see re reported post.");
+    Assertion.assertNotNull(post, DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST);
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
@@ -717,7 +719,7 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
 
     PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
-    Assertion.assertNotNull(post, "Discussions moderator should see re reported post.");
+    Assertion.assertNotNull(post, DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST);
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
