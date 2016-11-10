@@ -4,15 +4,24 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.fandom.FandomTestTemplate;
-import com.wikia.webdriver.elements.fandom.pages.MainPage;
+import com.wikia.webdriver.elements.fandom.pages.HomePage;
 
 @Test(groups = {"Fandom", "Fandom_HeroUnit"})
 public class HeroUnitTest extends FandomTestTemplate {
 
   @Test
   public void anonCanSeeHeroUnit() {
-    MainPage mainPage = new MainPage().open();
+    HomePage homePage = new HomePage().open();
 
-    Assertion.assertTrue(mainPage.getHeroUnit().isDisplayed(), "Hero Image is not Displayed");
+    Assertion.assertTrue(homePage.getHeroBlock().isDisplayed(), "Hero block is not displayed");
   }
+
+  @Test
+  public void anonCanSeeFiveHeroUnits() {
+    HomePage homePage = new HomePage().open();
+
+    Assertion.assertTrue(homePage.getHeroBlock().hasFiveHeroUnits(), "Hero block doesn't have five units.");
+  }
+
+
 }
