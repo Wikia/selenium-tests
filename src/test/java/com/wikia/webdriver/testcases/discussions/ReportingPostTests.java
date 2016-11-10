@@ -274,6 +274,17 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void moderatorOnMobileCanSeeReportedPostOnPostListPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+
+    final PostEntity postEntity = new PostsListPage().open().getPost().findPostById(data.getId());
+    Assertion.assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
     reportPostRemotelyAsSecondUser(data);
@@ -283,6 +294,17 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertTrue(clickCancelOnValidatePostModalDialog(page, postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertFalse(clickApproveOnValidatePostModalDialog(page, postEntity), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void moderatorOnMobileCanSeeReportedPostOnUserPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+
+    final PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
+    Assertion.assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
