@@ -167,6 +167,20 @@ public class ReportingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
+  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsThirdUser(data);
+    deletePostRemotelyAsDiscussionsModerator(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), "Anonymous user should not see deleted post.");
+  }
+
   // User on mobile
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
