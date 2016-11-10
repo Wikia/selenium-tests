@@ -31,7 +31,7 @@ public class BaseRemoteOperation {
     String result = StringUtils.EMPTY;
 
     try (CloseableHttpClient client = HttpClientBuilder.create().disableContentCompression().build()) {
-      makeRequest(client, request);
+      result = makeRequest(client, request);
     } catch (IOException x) {
       PageObjectLogging.log("Error while creating/closing http client.", ExceptionUtils.getStackTrace(x), false);
     }
@@ -41,10 +41,9 @@ public class BaseRemoteOperation {
 
   private String makeRequest(final CloseableHttpClient client, final HttpEntityEnclosingRequestBase request)
       throws IOException {
-    String result = "";
+    String result = StringUtils.EMPTY;
 
     try {
-      request.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
       request.setHeader(Discussions.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
 
       try (CloseableHttpResponse response = client.execute(request)) {

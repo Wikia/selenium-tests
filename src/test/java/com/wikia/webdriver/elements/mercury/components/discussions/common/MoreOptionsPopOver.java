@@ -14,13 +14,13 @@ public class MoreOptionsPopOver {
   }
 
   public boolean hasReportPostOption() {
-    return hasOption("execute-link");
+    return hasOption("report");
   }
 
   private boolean hasOption(String cssClassName) {
     boolean result = false;
 
-    List<WebElement> options = webElement.findElements(By.tagName("a"));
+    List<WebElement> options = webElement.findElements(By.tagName("svg"));
     for (WebElement option : options) {
       if (option.getAttribute("class").contains(cssClassName)) {
         result = true;
@@ -37,7 +37,7 @@ public class MoreOptionsPopOver {
   }
 
   public MoreOptionsPopOver clickReportPostOption() {
-    webElement.findElement(By.className("report-link")).click();
+    webElement.findElement(By.className("report")).click();
     return this;
   }
 

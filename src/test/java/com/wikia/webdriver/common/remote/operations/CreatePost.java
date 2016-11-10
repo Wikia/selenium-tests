@@ -33,7 +33,7 @@ public class CreatePost {
 
     return PostEntity.Data.builder()
         .id(json.read("$.id"))
-        .category("$.forumName")
+        .category(json.read("$.forumName"))
         .title(json.read("$.title"))
         .description(json.read("$.rawContent"))
         .authorId(json.read("$.createdBy.id"))

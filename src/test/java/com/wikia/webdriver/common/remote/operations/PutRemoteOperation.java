@@ -4,7 +4,9 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 
@@ -26,6 +28,7 @@ public class PutRemoteOperation extends BaseRemoteOperation {
     try {
       final HttpPut put = new HttpPut(url);
       if (null != jsonObject) {
+        put.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
         put.setEntity(new StringEntity(jsonObject.toString()));
       }
       result = super.execute(put);

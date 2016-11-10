@@ -4,7 +4,9 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 
@@ -22,6 +24,7 @@ public class PostRemoteOperation extends BaseRemoteOperation {
 
     try {
       final HttpPost post = new HttpPost(url);
+      post.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
       post.setEntity(new StringEntity(jsonObject.toString()));
       result = super.execute(post);
     } catch (UnsupportedEncodingException x) {

@@ -150,7 +150,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() throws InterruptedException {
+  public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
