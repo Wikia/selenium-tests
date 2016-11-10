@@ -13,6 +13,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEn
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
@@ -439,6 +440,18 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void moderatorOnMobileCanNotSeeApprovedPostOnReportedPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
+    Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
     reportPostRemotelyAsSecondUser(data);
@@ -669,6 +682,18 @@ public class ReportingPostTests extends NewTestTemplate {
 
     final PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
     Assertion.assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void moderatorOnDesktopCanNotSeeApprovedPostOnReportedPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
+    Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
