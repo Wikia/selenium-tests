@@ -205,12 +205,36 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCannotReReportPostOnPostsListPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    validatePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity postEntity = new PostsListPage().open().getPost().findPostById(data.getId());
+    Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     PostEntity postEntity = page.getPost().findPostById(data.getId());
+    Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
+    Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCannotReReportPostOnUserPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    validatePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
     Assertion.assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
