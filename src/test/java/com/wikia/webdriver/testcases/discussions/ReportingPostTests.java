@@ -452,6 +452,18 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void moderatorOnMobileCanSeeReReportedPostOnReportedPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsSecondUser(data);
+
+    PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
+    Assertion.assertNotNull(post, "Discussions moderator should see re reported post.");
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
     reportPostRemotelyAsSecondUser(data);
@@ -694,6 +706,18 @@ public class ReportingPostTests extends NewTestTemplate {
 
     PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
     Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
+  }
+
+  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void moderatorOnDesktopCanSeeReReportedPostOnReportedPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsSecondUser(data);
+
+    PostEntity post = new ReportedPostsAndRepliesPage().open().getPost().findPostById(data.getId());
+    Assertion.assertNotNull(post, "Discussions moderator should see re reported post.");
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
