@@ -34,6 +34,8 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DELETED_POST_MESSAGE = "Post should be deleted.";
 
+  private static final String NOT_VISIBLE_DELETED_POST_MESSAGE = "Anonymous user should not see deleted post.";
+
   // Anonymous user on mobile
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -104,7 +106,7 @@ public class ReportingPostTests extends NewTestTemplate {
     deletePostRemotelyAsDiscussionsModerator(data);
 
     PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
-    Assertion.assertNull(post, "Anonymous user should not see deleted post.");
+    Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -118,7 +120,7 @@ public class ReportingPostTests extends NewTestTemplate {
     deletePostRemotelyAsDiscussionsModerator(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), "Anonymous user should not see deleted post.");
+    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -132,7 +134,7 @@ public class ReportingPostTests extends NewTestTemplate {
     deletePostRemotelyAsDiscussionsModerator(data);
 
     PostEntity post = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
-    Assertion.assertNull(post, "Anonymous user should not see deleted post.");
+    Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
   // Anonymous user on desktop
@@ -198,6 +200,20 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsThirdUser(data);
+    deletePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
+    Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
+  }
+
+  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
     reportPostRemotelyAsSecondUser(data);
@@ -206,7 +222,21 @@ public class ReportingPostTests extends NewTestTemplate {
     deletePostRemotelyAsDiscussionsModerator(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), "Anonymous user should not see deleted post.");
+    Assertion.assertTrue(page.getErrorMessages().isErrorMessagePresent(), NOT_VISIBLE_DELETED_POST_MESSAGE);
+  }
+
+  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonUserOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
+    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    reportPostRemotelyAsSecondUser(data);
+    validatePostRemotelyAsDiscussionsModerator(data);
+    reportPostRemotelyAsThirdUser(data);
+    deletePostRemotelyAsDiscussionsModerator(data);
+
+    PostEntity post = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
+    Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
   // User on mobile
