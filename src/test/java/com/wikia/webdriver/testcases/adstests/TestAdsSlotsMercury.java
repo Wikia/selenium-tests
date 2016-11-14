@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
@@ -99,9 +100,15 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
+    int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
+    int pageElementPosition = infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX);
+
+    PageObjectLogging.log("ad position", String.valueOf(adPosition), true);
+    PageObjectLogging.log("infobox position", String.valueOf(pageElementPosition), true);
+
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB))
-        >= infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX)
+        adPosition >= pageElementPosition,
+        "verify if ad position is >= infobox position"
     );
   }
 
@@ -123,9 +130,15 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
+    int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
+    int pageElementPosition = ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER);
+
+    PageObjectLogging.log("ad position", String.valueOf(adPosition), true);
+    PageObjectLogging.log("page header position", String.valueOf(pageElementPosition), true);
+
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB))
-        >= ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER)
+        adPosition >= pageElementPosition,
+        "ad position >= page header position"
     );
   }
 
