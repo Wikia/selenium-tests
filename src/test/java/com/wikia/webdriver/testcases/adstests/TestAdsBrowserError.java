@@ -13,7 +13,7 @@ public class TestAdsBrowserError extends TemplateNoFirstLoad {
   public void adsScrollHandlerBrowserError() {
     JavascriptActions jsActions = new JavascriptActions(driver);
 
-    String testPage = urlBuilder.getUrlForPath("adtest", "Wikia_Ad_Testing");
+    String testPage = urlBuilder.getUrlForPath("project43", "UAP");
     testPage = urlBuilder.appendQueryStringToURL(testPage, "scrollhandler=1");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver);
     adsBaseObject.getUrl(testPage);
