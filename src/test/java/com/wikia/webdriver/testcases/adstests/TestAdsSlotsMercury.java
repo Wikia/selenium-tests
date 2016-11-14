@@ -106,12 +106,12 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX);
 
-    PageObjectLogging.log("ad position", String.valueOf(adPosition), true);
-    PageObjectLogging.log("infobox position", String.valueOf(pageElementPosition), true);
+    PageObjectLogging.log("Ad top position", String.valueOf(adPosition), true);
+    PageObjectLogging.log("Infobox bottom position", String.valueOf(pageElementPosition), true);
 
     Assertion.assertTrue(
         adPosition >= pageElementPosition,
-        "verify if ad position is >= infobox position"
+        "Verify if ad top position is >= infobox bottom position (ad below infobox)"
     );
   }
 
@@ -138,12 +138,12 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
     int pageElementPosition = ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER);
 
-    PageObjectLogging.log("ad position", String.valueOf(adPosition), true);
-    PageObjectLogging.log("page header position", String.valueOf(pageElementPosition), true);
+    PageObjectLogging.log("Ad top position", String.valueOf(adPosition), true);
+    PageObjectLogging.log("Page header bottom position", String.valueOf(pageElementPosition), true);
 
     Assertion.assertTrue(
         adPosition >= pageElementPosition,
-        "ad position >= page header position"
+        "Ad top position >= page header position (ad below page header)"
     );
   }
 
