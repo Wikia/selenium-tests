@@ -97,7 +97,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     PortableInfobox infobox = new PortableInfobox();
-
+    ads.waitForPageLoadedWithGpt();
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
@@ -127,7 +127,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-
+    ads.waitForPageLoadedWithGpt();
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
     int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
