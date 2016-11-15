@@ -54,7 +54,7 @@ public class GuidelinesTests extends NewTestTemplate {
     /**
      * LOGGED IN USERS ON DESKTOP SECTION
      */
-    @Test(groups = "discussions-StaffUserOnDesktopCanClickEditGuidelines")
+    @Test(groups = "discussions-staffUserOnDesktopCanClickEditGuidelines")
     @Execute(asUser = User.STAFF)
     @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
     public void staffOnDesktopCanClickEditGuidelines() {
@@ -64,10 +64,37 @@ public class GuidelinesTests extends NewTestTemplate {
         Assertion.assertTrue(guidelinesPage.isModalGuidelinesDisplayed());
     }
 
+    @Test(groups = "discussions-discussionsModeratorOnDesktopCanClickEditGuidelines")
+    @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+    @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+    public void discussionsModeratorOnDesktopCanClickEditGuidelines() {
+        GuidelinesPage guidelinesPage = new GuidelinesPage();
+        guidelinesPage.open();
+
+        Assertion.assertTrue(guidelinesPage.isEditButtonDisplayed());
+    }
+
     @Test(groups = "discussions-regularUserOnDesktopCanClickBackToDiscussions")
     @Execute(asUser = User.USER_6)
     @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
     public void regularUserOnDesktopCanClickBackToDiscussions() {
+        DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
+
+        Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
+    }
+
+    @Test(groups = "discussions-discussionsModeratorOnDesktopCanClickBackToDiscussions")
+    @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+    @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+    public void discussionsModeratorOnDesktopCanClickBackToDiscussions() {
+        DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
+
+        Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
+    }
+    @Test(groups = "discussions-staffOnDesktopCanClickBackToDiscussions")
+    @Execute(asUser = User.STAFF)
+    @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+    public void staffOnDesktopCanClickBackToDiscussions() {
         DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
         Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
@@ -81,5 +108,32 @@ public class GuidelinesTests extends NewTestTemplate {
         guidelinesPage.open();
 
         Assertion.assertFalse(guidelinesPage.isEditButtonDisplayed());
+    }
+    @Test(groups = "discussions-regularUserOnDesktopCanSeeGuidelinesHeroUnit")
+    @Execute(asUser = User.USER_6)
+    @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+    public void regularUserOnDesktopCanSeeGuidelinesHeroUnit() {
+        GuidelinesPage guidelinesPage = new GuidelinesPage();
+        guidelinesPage.open();
+
+        Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
+    }
+    @Test(groups = "discussions-discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit")
+    @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+    @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+    public void discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit() {
+        GuidelinesPage guidelinesPage = new GuidelinesPage();
+        guidelinesPage.open();
+
+        Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
+    }
+    @Test(groups = "discussions-staffOnDesktopCanSeeGuidelinesHeroUnit")
+    @Execute(asUser = User.STAFF)
+    @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+    public void staffOnDesktopCanSeeGuidelinesHeroUnit() {
+        GuidelinesPage guidelinesPage = new GuidelinesPage();
+        guidelinesPage.open();
+
+        Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
     }
 }
