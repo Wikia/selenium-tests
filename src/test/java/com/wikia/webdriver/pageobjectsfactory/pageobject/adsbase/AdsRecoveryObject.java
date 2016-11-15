@@ -14,7 +14,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   public String getRecoveredAdUnitId(String adUnitId) {
-    jsActions.waitForJavaScriptTruthy("window._sp_");
+    jsActions.waitForJavaScriptTruthy("window._sp_ && window._sp_.getElementId");
     return jsActions.execute(String.format("window._sp_.getElementId('%s')", adUnitId)).toString();
   }
 }
