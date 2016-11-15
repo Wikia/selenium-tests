@@ -30,7 +30,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
 
   @Test(groups = "mercury_recentWikiActivity_anonOpenDiffPageAndGoBack")
   @RelatedIssue(issueID = "WW-465")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"preview", "prod"})
   public void mercury_recentWikiActivity_anonOpenDiffPageAndGoBack() {
     this.openDiffPageAndGoBack();
   }
@@ -38,7 +38,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
   @Test(groups = "mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack")
   @Execute(asUser = User.CONSTANTLY_BLOCKED_USER)
   @RelatedIssue(issueID = "WW-465")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"preview", "prod"})
   public void mercury_recentWikiActivity_blockedUserOpenDiffPageAndGoBack() {
     this.openDiffPageAndGoBack();
   }
@@ -46,7 +46,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
   @Test(groups = "mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithoutSummary")
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "WW-465")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"preview", "prod"})
   public void mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithoutSummary() {
     this.openDiffPage()
         .submitWithoutSummary()
@@ -56,7 +56,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
   @Test(groups = "mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithSummary")
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "WW-465")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"preview", "prod"})
   public void mercury_recentWikiActivity_loggedUserOpenDiffPageAndSubmitWithSummary() {
     this.openDiffPage()
         .submitWithSummary()
@@ -66,7 +66,7 @@ public class RecentWikiActivityTest extends NewTestTemplate {
   @Test(groups = "mercury_recentWikiActivity_loggedUserOpenDiffPageAndGoBackFromSummary")
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "WW-465")
-  @DontRun(env = {"dev", "sandbox", "preview"})
+  @DontRun(env = {"preview", "prod"})
   public void mercury_recentWikiActivity_loggedUserOpenDiffPageAndGoBackFromSummary() {
     this.openDiffPage()
         .goBackFromSummaryPage();
