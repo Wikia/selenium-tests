@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -82,7 +81,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
   }
 
-  @Execute(mockAds = "true")
+
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
@@ -115,7 +114,6 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     );
   }
 
-  @Execute(mockAds = "true")
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5

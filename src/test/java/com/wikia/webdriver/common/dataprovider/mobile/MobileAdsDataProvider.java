@@ -40,7 +40,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_infobox",
-            "wka.showcase/_project43//article"
+            "wka.life/_project43//article"
         }
     };
   }
@@ -50,7 +50,7 @@ public class MobileAdsDataProvider {
     return new Object[][]{
         {
             "project43", "SyntheticTests/Mercury/Slots/Leaderboard_below_page_header",
-            "wka.showcase/_project43//article"
+            "wka.life/_project43//article"
         }
     };
   }
