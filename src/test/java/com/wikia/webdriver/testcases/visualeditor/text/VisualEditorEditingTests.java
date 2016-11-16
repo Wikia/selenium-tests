@@ -83,6 +83,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
+  @RelatedIssue(issueID = "WW-487")
   public void VisualEditorEditing_002_delete() {
 
     String removeText = "Lorem ";
