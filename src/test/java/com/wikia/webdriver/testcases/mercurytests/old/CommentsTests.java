@@ -42,7 +42,6 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_containsAvatarUsernameTimestampAndContent")
-  @RelatedIssue(issueID = "MAIN-8605")
   public void mercury_comments_containsAvatarUsernameTimestampAndContent() {
     init();
 
@@ -237,7 +236,6 @@ public class CommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
-  @RelatedIssue(issueID = "MAIN-8605")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     init();
 
