@@ -136,7 +136,6 @@ public class SignUpTests extends NewTestTemplate {
 
   @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
-  @RelatedIssue(issueID = "MAIN-7472")
   public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
     SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
