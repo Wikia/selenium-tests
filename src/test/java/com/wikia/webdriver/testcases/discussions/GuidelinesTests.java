@@ -32,7 +32,7 @@ public class GuidelinesTests extends NewTestTemplate {
     Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotClickEditGuidelines")
+  @Test(groups = "discussions-anonUserOnDesktopCanNotSeeEditGuidelines")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotClickEditGuidelines() {
@@ -54,8 +54,9 @@ public class GuidelinesTests extends NewTestTemplate {
 
   /**
    * LOGGED IN USERS ON DESKTOP SECTION
+   * User_6 was chosen because, I take the last available user form the list of users
    */
-  @Test(groups = "discussions-staffUserOnDesktopCanClickEditGuidelines")
+  @Test(groups = "discussions-staffUserOnDesktopCanSeeEditGuidelines")
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffOnDesktopCanClickEditGuidelines() {
@@ -65,7 +66,7 @@ public class GuidelinesTests extends NewTestTemplate {
     Assertion.assertTrue(guidelinesPage.isModalGuidelinesDisplayed());
   }
 
-  @Test(groups = "discussions-discussionsModeratorOnDesktopCanClickEditGuidelines")
+  @Test(groups = "discussions-discussionsModeratorOnDesktopCanSeeEditGuidelines")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanClickEditGuidelines() {
@@ -102,7 +103,7 @@ public class GuidelinesTests extends NewTestTemplate {
     Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
   }
 
-  @Test(groups = "discussions-regularUserOnDesktopCanNotClickEditGuidelines")
+  @Test(groups = "discussions-regularUserOnDesktopCanNotSeeEditGuidelines")
   @Execute(asUser = User.USER_6)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void regularUserOnDesktopCanNotClickEditGuidelines() {
