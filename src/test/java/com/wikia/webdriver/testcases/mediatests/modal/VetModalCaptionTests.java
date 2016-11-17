@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -63,6 +64,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 
   @Test(groups = {"VetModalCaption_002"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "WW-516")
   public void VetModalCaption_002_captionInModal() {
     String captionText = String.format("Caption-%d", DateTime.now().getMillis());
     new ArticleContent().push(String
