@@ -29,6 +29,15 @@ public class GuidelinesPage extends WikiBasePageObject {
     @FindBy(css = ".guidelines-edit-link")
     private WebElement editButton;
 
+    @FindBy (css = ".editor-close")
+    private WebElement editorClose;
+
+    @FindBy (css = ".discussion-standalone-editor-save-button")
+    private WebElement saveButton;
+
+    @FindBy (css = ".discussion-standalone-editor-textarea")
+    private WebElement guidelinesText;
+
     public GuidelinesPage open() {
         driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
         return this;
