@@ -29,7 +29,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
-    cnw1.verifySuccessIcon();
+    cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
@@ -51,7 +51,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
-    cnw1.verifySuccessIcon();
+    cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     cnw2.selectAllAgesCheckbox();
@@ -73,7 +73,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     wikiDomain = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.typeInWikiDomain(wikiDomain);
-    cnw1.verifySuccessIcon();
+    cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
     cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
@@ -113,7 +113,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     wikiDomain = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.typeInWikiDomain(wikiDomain);
-    cnw1.verifySuccessIcon();
+    cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
     cnw2.submit();
     cnw2.verifyCategoryError();

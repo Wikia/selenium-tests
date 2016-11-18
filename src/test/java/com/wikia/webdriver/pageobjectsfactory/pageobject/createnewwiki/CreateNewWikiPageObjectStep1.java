@@ -20,8 +20,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private WebElement wikiName;
   @FindBy(name = "wiki-domain")
   private WebElement wikiDomain;
-  @FindBy(css = "span.domain-status-icon img[src*='check.png']")
-  private WebElement successIcon;
   @FindBy(css = ".next.enabled")
   private WebElement submitButton;
   @FindBy(css = "select[name='wiki-language']")
@@ -82,10 +80,9 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
   }
 
-  public void verifySuccessIcon() {
-    wait.forElementVisible(successIcon);
+  public void verifyNextButtonEnabled() {
     wait.forElementVisible(submitButton);
-    PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);
+    PageObjectLogging.log("waitForNextButton", "Next button enabled", true, driver);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {

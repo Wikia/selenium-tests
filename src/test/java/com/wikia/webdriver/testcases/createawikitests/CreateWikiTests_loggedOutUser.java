@@ -26,7 +26,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
         CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
         String wikiName = cnw1.getWikiName();
         cnw1.typeInWikiName(wikiName);
-        cnw1.verifySuccessIcon();
+        cnw1.verifyNextButtonEnabled();
         AuthModal authModal = cnw1.clickNextToSignIn();
         authModal.clickToSignInForm();
 
