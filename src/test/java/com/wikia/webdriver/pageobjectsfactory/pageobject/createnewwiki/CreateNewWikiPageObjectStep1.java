@@ -69,7 +69,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
         selectedLanguage.click();
 
         Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
-        PageObjectLogging.log("selectLanguage", "selected " + selectedLanguageText + " category", true, driver);
+        PageObjectLogging.log("selectLanguage", "selected " + selectedLanguageText + " language", true, driver);
         break;
       }
     }
