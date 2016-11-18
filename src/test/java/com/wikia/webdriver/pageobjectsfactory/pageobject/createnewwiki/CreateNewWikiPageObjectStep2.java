@@ -20,7 +20,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   private WebElement wikiCategoryList;
   @FindBy(css = "form[name='desc-form'] input[class='next']")
   private WebElement submitButton;
-  @FindBy(name = "all-ages")
+  @FindBy(css = "label[for='allAges']")
   private WebElement allAgesCheckBox;
   @FindBy(css = "#DescWiki .wiki-vertical-error.error-msg")
   private WebElement categoryErrorMsg;
