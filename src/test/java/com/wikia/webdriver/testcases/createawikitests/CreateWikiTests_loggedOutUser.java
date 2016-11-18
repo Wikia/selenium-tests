@@ -34,7 +34,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
         authModal.login(credentials.userName10, credentials.password10);
         CreateNewWikiPageObjectStep2 cnw2 = new CreateNewWikiPageObjectStep2(driver);
-        cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
+        cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
         CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
         cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
         ArticlePageObject article = cnw3.submit();

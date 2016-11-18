@@ -4,19 +4,20 @@ import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 public class CreateNewWikiPageObjectStep2 extends BasePageObject {
 
   @FindBy(css = "textarea#Description")
   private WebElement descriptionField;
-  @FindBy(css = "select[name='wiki-vertical']")
-  private WebElement wikiCategory;
+  @FindBy(css = "#DescWiki .wds-dropdown")
+  private WebElement wikiCategoryDropdown;
+  @FindBy(css = "#DescWiki .wds-dropdown .wds-list")
+  private WebElement wikiCategoryList;
   @FindBy(css = "form[name='desc-form'] input[class='next']")
   private WebElement submitButton;
   @FindBy(name = "all-ages")
@@ -36,11 +37,17 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
         .log("describeYourTopic", "describe your topic populated with: " + description, true);
   }
 
-  public void selectCategory(String category) {
-    wait.forElementVisible(wikiCategory);
-    Select dropList = new Select(wikiCategory);
-    dropList.selectByVisibleText(category);
-    PageObjectLogging.log("selectCategory", "selected " + category + " category", true, driver);
+  public void selectCategory(int categoryId) {
+    wait.forElementVisible(wikiCategoryDropdown);
+    wikiCategoryDropdown.click();
+
+    WebElement selectedCategory = wikiCategoryList.findElement(By.id(String.valueOf(categoryId)));
+    wait.forElementClickable(selectedCategory);
+
+    String selectedCategoryText = selectedCategory.getText();
+    selectedCategory.click();
+
+    PageObjectLogging.log("selectCategory", "selected " + selectedCategoryText + " category", true, driver);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {
