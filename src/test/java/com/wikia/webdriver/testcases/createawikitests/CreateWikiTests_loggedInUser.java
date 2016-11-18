@@ -115,7 +115,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
     cnw1.typeInWikiDomain(wikiDomain);
     cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.submit();
+    cnw2.selectCategory(-1);
     cnw2.verifyCategoryError();
   }
 }

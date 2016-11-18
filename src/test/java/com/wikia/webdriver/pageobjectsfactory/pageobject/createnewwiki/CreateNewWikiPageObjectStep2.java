@@ -22,7 +22,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   private WebElement submitButton;
   @FindBy(name = "all-ages")
   private WebElement allAgesCheckBox;
-  @FindBy(css = "#DescWiki .submit-error.error-msg")
+  @FindBy(css = "#DescWiki .wiki-vertical-error.error-msg")
   private WebElement categoryErrorMsg;
 
   public CreateNewWikiPageObjectStep2(WebDriver driver) {
