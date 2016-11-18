@@ -38,7 +38,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void selectCategory(int categoryId) {
-    wait.forElementVisible(wikiCategoryDropdown);
+    wait.forElementClickable(wikiCategoryDropdown);
     wikiCategoryDropdown.click();
 
     WebElement selectedCategory = wikiCategoryList.findElement(By.id(String.valueOf(categoryId)));

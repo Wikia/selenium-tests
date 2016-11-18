@@ -56,7 +56,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
 
   public void selectLanguage(String lang) {
-    wait.forElementVisible(wikiLanguageDropdown);
+    wait.forElementClickable(wikiLanguageDropdown);
     wikiLanguageDropdown.click();
 
     List<WebElement> langList = wikiLanguageList.findElements(By.cssSelector("li:not(.spacer)"));
