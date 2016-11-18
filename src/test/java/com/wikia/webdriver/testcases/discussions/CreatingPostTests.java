@@ -75,10 +75,10 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @RelatedIssue(issueID = "SOC-3267")
   @Test(enabled = false, groups = "discussions-loggedInUsersMobilePosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "SOC-3562")
   public void userOnMobileCanAddPostWithoutTitle() {
     final String description = TextGenerator.createUniqueText();
 
@@ -128,8 +128,7 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @RelatedIssue(issueID = "SOC-3267")
-  @Test(enabled = false, groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() {
