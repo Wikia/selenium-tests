@@ -167,7 +167,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
   )
   public void VisualEditorEditing_005_switchToSourceMode() {
-    String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    String articleName2 = "QA article1356922966851";
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
@@ -194,7 +194,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   public void VisualEditorEditing_006_editSummary() {
     String summaryText =
         "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
-    String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    String articleName2 = "QA article1356922966851";
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
@@ -213,7 +213,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   )
   public void VisualEditorEditing_007_minorEdit() {
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);
-    String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    String articleName2 = "QA article1356922966851";
 
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName2);
     ve.verifyVEToolBarPresent();
