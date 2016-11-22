@@ -204,8 +204,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public ArticlePageObject publish() {
     verifyVEToolBarPresent();
     VisualEditorSaveChangesDialog save = clickPublishButton();
-    ArticlePageObject article = save.savePage();
+    ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
+
     return article;
   }
 
