@@ -2,14 +2,32 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Alignment;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.ImageSize;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Indentation;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Setting;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Transclusion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
@@ -185,7 +203,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public ArticlePageObject publish() {
     verifyVEToolBarPresent();
-    clickPublishButton();
+    VisualEditorSaveChangesDialog save = clickPublishButton();
     ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
 
