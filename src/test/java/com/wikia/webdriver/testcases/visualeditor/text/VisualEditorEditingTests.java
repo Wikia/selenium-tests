@@ -99,7 +99,6 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     saveDialog.savePage();
     ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
-    
   }
 
   @Test(
@@ -182,8 +181,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     saveDialog.savePage();
     article.verifyVEPublishComplete();
-    article.verifyContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-
+    article.verifyContent(text);
   }
 
   @Test(
