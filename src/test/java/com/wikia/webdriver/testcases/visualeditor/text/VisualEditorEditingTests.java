@@ -156,9 +156,10 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.clickPublishButton();
     ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
-    article.verifyHTMLContent(By.cssSelector("a[href*='" + PageContent.INTERNAL_LINK + "']"));
-    article.verifyHTMLContent(By.cssSelector("a.new[href*='" + PageContent.REDLINK + "']"));
-    article.verifyHTMLContent(By.cssSelector("a.external[href*='" + PageContent.EXTERNAL_LINK + "']"));
+    article.verifyElementInContent(By.cssSelector("a[href*='" + PageContent.INTERNAL_LINK + "']"));
+    article.verifyElementInContent(By.cssSelector("a.new[href*='" + PageContent.REDLINK + "']"));
+    article.verifyElementInContent(
+        By.cssSelector("a.external[href*='" + PageContent.EXTERNAL_LINK + "']"));
   }
 
   @Test(
