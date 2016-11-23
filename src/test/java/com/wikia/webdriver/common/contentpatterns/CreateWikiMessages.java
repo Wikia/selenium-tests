@@ -19,7 +19,7 @@ public class CreateWikiMessages {
       "Duis quam ante, fringilla at cursus tristique, laoreet vel elit. " +
       "Nullam rhoncus, magna ut dictum ultrices, mauris lectus consectetur tellus, " +
       "sed dignissim elit justo vel ante.";
-  public static final String WIKI_CATEGORY = "TV";
+  public static final int WIKI_CATEGORY_ID = 1;
   public static final String WIKI_THEME = "carbon";
   public static final String CATEGORY_ERROR_MESSAGE = "Please choose a category";
 

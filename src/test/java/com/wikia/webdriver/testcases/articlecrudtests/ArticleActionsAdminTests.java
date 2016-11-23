@@ -21,7 +21,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "WW-505")
+  @RelatedIssue(issueID = "WW-568")
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
     String articleTitle = "DeleteUndeleArticle";
@@ -44,7 +44,6 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleActionsAdmin_002"})
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "WW-506")
   @Execute(asUser = User.STAFF)
   public void moveArticle() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
