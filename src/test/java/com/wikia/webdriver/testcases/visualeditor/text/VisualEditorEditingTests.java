@@ -13,6 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
+
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -155,7 +157,9 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.clickPublishButton();
     ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
-    article.verifyContent("Home");
+    article.verifyHTMLContent(By.cssSelector("a[href*='" + PageContent.INTERNAL_LINK + "']"));
+    article.verifyHTMLContent(By.cssSelector("a.new[href*='" + PageContent.REDLINK + "']"));
+    article.verifyHTMLContent(By.cssSelector("a.external[href*='" + PageContent.EXTERNAL_LINK + "']"));
   }
 
   @Test(
