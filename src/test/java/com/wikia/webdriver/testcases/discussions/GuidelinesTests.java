@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
