@@ -41,7 +41,7 @@ public class LayoutTests extends NewTestTemplate {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanViewMorePosts")
+  @Test(enabled = false, groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   @RelatedIssue(issueID = "SOC-3182")
