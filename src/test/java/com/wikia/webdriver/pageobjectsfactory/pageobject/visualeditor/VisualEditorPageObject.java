@@ -15,7 +15,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -203,9 +202,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public ArticlePageObject publish() {
     verifyVEToolBarPresent();
-    VisualEditorSaveChangesDialog save = clickPublishButton();
-    ArticlePageObject article = save.savePage();
+    clickPublishButton();
+    ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
+
     return article;
   }
 
