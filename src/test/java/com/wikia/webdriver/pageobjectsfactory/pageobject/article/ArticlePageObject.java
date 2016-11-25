@@ -208,6 +208,11 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertStringContains(articleContent.getText(), content);
   }
 
+  public void verifyElementInContent(By element) {
+    wait.forElementVisible(articleContent);
+    Assertion.assertTrue(articleContentContainer.findElement(element).isDisplayed());
+  }
+
   public String getContent() {
     wait.forElementVisible(articleContent);
 

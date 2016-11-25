@@ -137,6 +137,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_010"})
+  @RelatedIssue(issueID = "QAART-874")
   public void RTE_010_Signature() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

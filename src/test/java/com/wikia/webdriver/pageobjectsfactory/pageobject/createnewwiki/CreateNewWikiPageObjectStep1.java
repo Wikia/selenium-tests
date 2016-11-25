@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.joda.time.DateTime;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,14 +21,12 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private WebElement wikiName;
   @FindBy(name = "wiki-domain")
   private WebElement wikiDomain;
-  @FindBy(css = "span.domain-status-icon img[src*='check.png']")
-  private WebElement successIcon;
   @FindBy(css = ".next.enabled")
   private WebElement submitButton;
-  @FindBy(css = "select[name='wiki-language']")
-  private WebElement languageSelector;
-  @FindBy(css = "#ChangeLang")
-  private WebElement languageSelectorTrigger;
+  @FindBy(css = "#NameWiki .wds-dropdown")
+  private WebElement wikiLanguageDropdown;
+  @FindBy(css = "#NameWiki .wds-dropdown .wds-list")
+  private WebElement wikiLanguageList;
   @FindBy(css = ".domain-country")
   private WebElement languageSelectedIndicator;
   @FindBy(css = ".wiki-domain-error.error-msg")
@@ -57,15 +56,21 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
 
   public void selectLanguage(String lang) {
-    scrollAndClick(languageSelectorTrigger);
-    wait.forElementVisible(languageSelector);
-    Select language = new Select(languageSelector);
-    List<WebElement> langList = language.getOptions();
+    wait.forElementClickable(wikiLanguageDropdown);
+    wikiLanguageDropdown.click();
+
+    List<WebElement> langList = wikiLanguageList.findElements(By.cssSelector("li:not(.spacer)"));
+    String langSelector = lang + ":";
+
     for (int i = 0; i < langList.size(); i++) {
-      String langDropElement = langList.get(i).getText();
-      if (langDropElement.contains(lang + ":")) {
-        language.selectByIndex(i);
+      WebElement selectedLanguage = langList.get(i);
+      String selectedLanguageText = selectedLanguage.getText();
+      if (selectedLanguageText.contains(langSelector)) {
+        wait.forElementClickable(selectedLanguage);
+        selectedLanguage.click();
+
         Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
+        PageObjectLogging.log("selectLanguage", "selected " + selectedLanguageText + " language", true, driver);
         break;
       }
     }
@@ -82,10 +87,9 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
   }
 
-  public void verifySuccessIcon() {
-    wait.forElementVisible(successIcon);
+  public void verifyNextButtonEnabled() {
     wait.forElementVisible(submitButton);
-    PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);
+    PageObjectLogging.log("waitForNextButton", "Next button enabled", true, driver);
   }
 
   public void verifyOccupiedWikiAddress(String wikiName) {
