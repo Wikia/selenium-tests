@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -199,8 +200,8 @@ public class SearchTests extends NewTestTemplate {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage",
-                  "Mercury_Search_002"})
+  @Test(groups = {"mercury_search_defaultResultsNumberOnSearchResultsPage"})
+  @DontRun(env = {"preview", "prod"})
   @RelatedIssue(issueID = "SUS-1151")
   public void mercury_search_defaultResultsNumberOnSearchResultsPage() {
     SearchResultsPage resultsPage =
@@ -212,8 +213,8 @@ public class SearchTests extends NewTestTemplate {
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
   @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = {"mercury_search_loadingMoreResultsOnSearchResultsPage",
-                  "Mercury_Search_002"})
+  @Test(groups = {"mercury_search_loadingMoreResultsOnSearchResultsPage"})
+  @DontRun(env = {"preview", "prod"})
   @RelatedIssue(issueID = "SUS-1151")
   public void mercury_search_loadingMoreResultsOnSearchResultsPage() {
     SearchResultsPage resultsPage =
