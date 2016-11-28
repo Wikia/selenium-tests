@@ -1,7 +1,9 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
+
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import lombok.Getter;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -28,6 +30,15 @@ public class GuidelinesPage extends WikiBasePageObject {
 
     @FindBy(css = ".guidelines-edit-link")
     private WebElement editButton;
+
+    @FindBy (css = ".editor-close")
+    private WebElement editorClose;
+
+    @FindBy (css = ".discussion-standalone-editor-save-button")
+    private WebElement saveButton;
+
+    @FindBy (css = ".discussion-standalone-editor-textarea")
+    private WebElement guidelinesText;
 
     public GuidelinesPage open() {
         driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));

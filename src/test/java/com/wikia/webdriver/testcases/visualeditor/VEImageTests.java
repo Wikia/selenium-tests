@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -73,13 +72,18 @@ public class VEImageTests extends NewTestTemplate {
     wikiTexts.add("|centre");
     wikiTexts.add("|left");
 
-    String randomArticleName =
-        PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject(driver).getTimeStamp();
-    VisualEditorPageObject ve =
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject(driver).getTimeStamp();
+    VisualEditorPageObject veCreatePage =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, randomArticleName);
-    VisualEditorAddMediaDialog mediaDialog =  ve.searchImage("h");
-    ve = mediaDialog.addExistingMedia(numOfMedia);
-    ve.verifyMedias(numOfMedia);
+    VisualEditorAddMediaDialog mediaDialog =  veCreatePage.searchImage("h");
+    veCreatePage = mediaDialog.addExistingMedia(numOfMedia);
+    veCreatePage.verifyMedias(numOfMedia);
+    veCreatePage.clickPublishButton();
+    veCreatePage.waitForPageLoad();
+
+    ArticlePageObject article = new ArticlePageObject();
+    article.openVEModeWithMainEditButton();
+    VisualEditorPageObject ve = new VisualEditorPageObject(driver);
     ve.alignMedia(2, Alignment.LEFT);
     ve.alignMedia(0, Alignment.CENTER);
     ve.verifyEditorSurfacePresent();
@@ -88,7 +92,7 @@ public class VEImageTests extends NewTestTemplate {
     VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
     reviewDialog.verifyAddedDiffs(wikiTexts);
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
-    ArticlePageObject article = saveDialog.savePage();
+    saveDialog.savePage();
     article.verifyVEPublishComplete();
   }
 }
