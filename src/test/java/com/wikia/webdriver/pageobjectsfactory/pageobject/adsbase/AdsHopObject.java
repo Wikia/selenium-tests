@@ -28,7 +28,7 @@ public class AdsHopObject extends AdsBaseObject {
     new WebDriverWait(driver, AD_SUCCESS_TIMEOUT_SEC).until(new ExpectedCondition<Boolean>() {
       @Override
       public Boolean apply(WebDriver driver) {
-        return "hidden".equals(getTestedContainer(slotName, containerId).getAttribute("class").trim());
+        return getTestedContainer(slotName, containerId).getAttribute("class").contains("hidden");
       }
 
       @Override
