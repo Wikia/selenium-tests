@@ -42,7 +42,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_003"})
-  @RelatedIssue(issueID = "WW-567")
+  @RelatedIssue(issueID = "QAART-896")
   public void articleCRUDAnon_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
