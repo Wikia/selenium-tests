@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingFiltersOnDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
@@ -71,8 +71,10 @@ public class SortingTests extends NewTestTemplate {
    */
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
-    FiltersPopOver filtersPopOver = new PostsListPage().open().getFiltersPopOver();
-    DiscussionsHeader discussionsHeader = new PostsListPage().open().getDiscussionsHeader();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    FiltersPopOver filtersPopOver = page.getFiltersPopOver();
+    DiscussionsHeader discussionsHeader = page.getDiscussionsHeader();
     discussionsHeader.clickSortButtonOnMobile();
 
     Assertion.assertTrue(filtersPopOver.isSortListVisibleMobile());
@@ -87,13 +89,15 @@ public class SortingTests extends NewTestTemplate {
   }
 
   private void userCanSwitchBetweenLatestAndTrendingTab() {
-    SortingTool sortingTool = new PostsListPage().open().getSortingTool();
-    sortingTool.clickLatestTabOnDesktop();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    SortingFiltersOnDesktop filters = page.getSortingFiltersOnDesktop();
+    filters.clickLatestOption();
     new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
 
-    sortingTool.clickTrendingTabOnDesktop();
+    filters.clickTrendingOption();
     new Loading(driver).handleAsyncPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));

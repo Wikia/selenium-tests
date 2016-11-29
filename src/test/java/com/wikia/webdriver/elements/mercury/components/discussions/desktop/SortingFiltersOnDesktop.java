@@ -6,21 +6,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class SortingTool extends BasePageObject {
+public class SortingFiltersOnDesktop extends BasePageObject {
 
   @FindBy(css = ".sort-latest")
-  private WebElement latestTabOnDesktop;
+  private WebElement latestFilter;
 
   @FindBy(css = ".sort-trending")
-  private WebElement trendingTabOnDesktop;
+  private WebElement trendingFilter;
 
-  public SortingTool clickLatestTabOnDesktop() {
-    latestTabOnDesktop.click();
+  public SortingFiltersOnDesktop clickLatestOption() {
+    latestFilter.click();
     return this;
   }
 
-  public SortingTool clickTrendingTabOnDesktop() {
-    trendingTabOnDesktop.click();
+  public SortingFiltersOnDesktop clickTrendingOption() {
+    trendingFilter.click();
     return this;
   }
 }
