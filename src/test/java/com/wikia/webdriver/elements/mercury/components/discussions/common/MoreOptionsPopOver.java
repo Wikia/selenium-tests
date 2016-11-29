@@ -1,17 +1,15 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class MoreOptionsPopOver {
 
   private final WebElement webElement;
-
-  MoreOptionsPopOver(WebElement webElement) {
-    this.webElement = webElement;
-  }
 
   public boolean hasReportPostOption() {
     return hasOption("report-link");
@@ -31,13 +29,18 @@ public class MoreOptionsPopOver {
     return result;
   }
 
-  public MoreOptionsPopOver clickViewAllPostsByOption() {
-    webElement.findElement(By.cssSelector("a[href^='/d/u/']")).click();
+  public MoreOptionsPopOver clickReportPostOption() {
+    webElement.findElement(By.className("report-link")).click();
     return this;
   }
 
-  public MoreOptionsPopOver clickReportPostOption() {
-    webElement.findElement(By.className("report-link")).click();
+  public ShareDialog clickSharePostOption() {
+    webElement.findElement(By.className("share-link")).click();
+    return new ShareDialog(webElement.findElement(By.cssSelector(".discussion-share-dialog .modal-dialog")));
+  }
+
+  public MoreOptionsPopOver clickViewAllPostsByOption() {
+    webElement.findElement(By.cssSelector("a[href^='/d/u/']")).click();
     return this;
   }
 
