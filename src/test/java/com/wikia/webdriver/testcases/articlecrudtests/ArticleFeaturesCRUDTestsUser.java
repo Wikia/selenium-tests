@@ -280,7 +280,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
       dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_011"})
-  @RelatedIssue(issueID = "WW-511")
   @Execute(asUser = User.USER)
   public void addingTable(int border, int width, int height,
                           int cellspacing, int cellpadding,
@@ -340,7 +339,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(dataProviderClass = ArticleFeaturesCRUDDataProvider.class,
       dataProvider = "getTableProperties", groups = {"ArticleFeaturesCRUDUser_013"})
-  @RelatedIssue(issueID = "WW-511")
   @Execute(asUser = User.USER)
   public void deleteTable(int border, int width, int height,
                           int cellspacing, int cellpadding,
@@ -360,7 +358,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleFeaturesCRUDUser_014"})
-  @RelatedIssue(issueID = "WW-511")
   @Execute(asUser = User.USER)
   public void addingImagePlaceholder() {
     new ArticleContent().clear();
