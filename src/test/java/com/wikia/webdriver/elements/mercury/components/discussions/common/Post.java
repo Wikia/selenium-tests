@@ -35,7 +35,7 @@ public class Post extends BasePageObject {
   @FindBy(css = "li.upvote-area")
   private WebElement upvoteArea;
 
-  @FindBy(css = "svg.upvote")
+  @FindBy(css = ".post-actions svg.upvote")
   private WebElement upvoteButton;
 
   @FindBy(css = ".load-more-button")
