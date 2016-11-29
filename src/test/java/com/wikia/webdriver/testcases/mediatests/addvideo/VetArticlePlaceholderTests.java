@@ -20,7 +20,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 public class VetArticlePlaceholderTests extends NewTestTemplate {
   @Test(groups = {"VideoArticlePlacehoder_001"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
-  @RelatedIssue(issueID = "WW-525")
   public void userCanAddVideoByUrlUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
@@ -34,7 +33,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_002"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
-  @RelatedIssue(issueID = "WW-525")
   public void userCanAddVideoFromWikiaUsingPlaceholder() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
@@ -48,7 +46,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_003"})
   @Execute(asUser = User.STAFF, onWikia = "mobileregressiontesting")
-  @RelatedIssue(issueID = "WW-525")
   public void userCanAddVideoByUrlUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 
@@ -69,7 +66,6 @@ public class VetArticlePlaceholderTests extends NewTestTemplate {
 
   @Test(groups = {"VideoArticlePlacehoder_004"})
   @Execute(asUser = User.STAFF, onWikia = "mobileregressiontesting")
-  @RelatedIssue(issueID = "WW-525")
   public void userCanAddVideoFromWikiaUsingPlaceholderInEditMode() {
     new ArticleContent().push(SourceModeContent.PLACEHOLDERS);
 

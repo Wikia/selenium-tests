@@ -26,7 +26,6 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
-  @RelatedIssue(issueID = "WW-514")
   public void CategoriesTestsArticle_002_anonSuggestions() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -49,7 +48,6 @@ public class CategoriesArticleTests extends NewTestTemplate {
   }
 
   @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
-  @RelatedIssue(issueID = "WW-514")
   @Execute(asUser = User.USER)
   public void CategoriesTestsArticle_004_userSuggestions() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
