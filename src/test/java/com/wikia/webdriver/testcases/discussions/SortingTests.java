@@ -71,8 +71,10 @@ public class SortingTests extends NewTestTemplate {
    */
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
-    FiltersPopOver filtersPopOver = new PostsListPage().open().getFiltersPopOver();
-    DiscussionsHeader discussionsHeader = new PostsListPage().open().getDiscussionsHeader();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    FiltersPopOver filtersPopOver = page.getFiltersPopOver();
+    DiscussionsHeader discussionsHeader = page.getDiscussionsHeader();
     discussionsHeader.clickSortButtonOnMobile();
 
     Assertion.assertTrue(filtersPopOver.isSortListVisibleMobile());
