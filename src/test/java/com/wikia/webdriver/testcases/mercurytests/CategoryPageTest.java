@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -26,6 +27,7 @@ public class CategoryPageTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl")
+  @RelatedIssue(issueID = "SEO-618", comment = "commit was reverted;tests- to be updated")
   public void mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl() {
     new CategoryPage().navigateToPageWithArticleAndWithoutMembersFromUrl();
   }

@@ -69,7 +69,7 @@ public class PageContent {
   public static final String MESSAGE_WALL_QUOTE_PREFIX = "QAQuote";
 
   // links
-  public static final String EXTERNAL_LINK = "http://www.wikia.com/";
+  public static final String EXTERNAL_LINK = "http://www.pudelek.pl/";
   public static final String INTERNAL_LINK = "Home";
   public static final String REDIRECT_LINK = "Main_Page";
   public static final String TEXT_LINK = "qaLink";

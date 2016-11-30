@@ -29,9 +29,9 @@ public class CreateWikiTests_lang extends NewTestTemplate {
     cnw1.selectLanguage(lang);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
-    cnw1.verifySuccessIcon();
+    cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
+    cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
     CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
     ArticlePageObject article = cnw3.submit();

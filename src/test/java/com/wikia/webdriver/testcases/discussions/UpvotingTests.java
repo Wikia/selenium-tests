@@ -112,7 +112,7 @@ public class UpvotingTests extends NewTestTemplate {
    */
 
   private void postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
-    Post post = new PostsListPage().open().getPost();
+    Post post = findPosts();
     int postIndex = 0;
     post.isUpvoteButtonVisible(postIndex);
     String firstVoteCount = post.getVoteCount(postIndex);
@@ -129,8 +129,14 @@ public class UpvotingTests extends NewTestTemplate {
     Assertion.assertEquals(firstVoteCount, thirdVoteCount);
   }
 
+  private Post findPosts() {
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    return page.getPost();
+  }
+  
   private void postListUpvoteButtonClickDoesntAddAnUpvote() {
-    Post post = new PostsListPage().open().getPost();
+    Post post = findPosts();
     int replyIndex = 0;
     post.isUpvoteButtonVisible(replyIndex);
     String firstVoteCount = post.getVoteCount(replyIndex);

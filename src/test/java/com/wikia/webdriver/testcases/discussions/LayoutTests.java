@@ -41,7 +41,7 @@ public class LayoutTests extends NewTestTemplate {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanViewMorePosts")
+  @Test(enabled = false, groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
   @RelatedIssue(issueID = "SOC-3182")
@@ -127,7 +127,9 @@ public class LayoutTests extends NewTestTemplate {
   }
 
   private void userCanViewMorePosts() {
-    Post post = new PostsListPage().open().getPost();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    Post post = page.getPost();
     int startingListLength = post.getPostsListLength();
     post.clickLoadMore();
     new Loading(driver).handleAsyncPageReload();

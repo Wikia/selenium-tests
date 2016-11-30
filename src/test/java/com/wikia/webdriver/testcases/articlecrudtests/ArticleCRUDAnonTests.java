@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -41,6 +42,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_003"})
+  @RelatedIssue(issueID = "QAART-896")
   public void articleCRUDAnon_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();

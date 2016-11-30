@@ -13,12 +13,16 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-labelElement-label")
   private WebElement returnToSaveFormButton;
+
   @FindBy(css = ".ve-ui-mwSaveDialog-viewer")
   private WebElement wikiaArticleReviewDialog;
+
   @FindBy(css = ".ve-ui-mwSaveDialog-viewer pre")
   private WebElement wikiaAritlceFirstPreview;
+
   @FindBy(css = ".diff-addedline")
   private List<WebElement> addedLines;
+
   @FindBy(css = ".diff-deletedline")
   private List<WebElement> deletedLines;
 
@@ -55,6 +59,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
     int count = 0;
     int expectedCount = 0;
     List<WebElement> diffLines = null;
+
     if (mode == DELETE) {
       expectedCount = deletedLines.size();
       diffLines = deletedLines;
@@ -62,14 +67,18 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
       expectedCount = addedLines.size();
       diffLines = addedLines;
     }
+
     for (WebElement currentDiff : diffLines) {
       String currentText;
+
       //Check to see if the current diff line has inline diff
       if (isElementInContext(DIFF_LINE_STRING, currentDiff)) {
         List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
+
         //iterate through multiple inline diffs
         for (WebElement currentInlineDiff : inlineDiffs) {
           String currentInlineText = currentInlineDiff.getText();
+
           if (isDiffFound(targets, currentInlineText)) {
             targets.remove(currentInlineText);
             count++;
@@ -77,6 +86,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
         }
       } else {
         currentText = currentDiff.getText();
+
         if (currentText.isEmpty()) {
           expectedCount--;
         } else {
@@ -87,7 +97,9 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
         }
       }
     }
+
     Assertion.assertNumber(count, expectedCount, "Number of diffs.");
+
     if (mode == INSERT) {
       Assertion.assertNumber(targets.size(), 0, "Number of diffs.");
     }
