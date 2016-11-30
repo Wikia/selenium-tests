@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -30,9 +31,10 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage")
+  @Test(enabled = false, groups = "discussions-anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-3667")
   public void anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
@@ -44,9 +46,10 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
-  @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
+  @Test(enabled = false, groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-3667")
   public void anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
