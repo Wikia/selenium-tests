@@ -70,8 +70,9 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
-    PostsListPage postListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postListPage.getPostsCreatorMobile();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    PostsCreator postsCreator = page.getPostsCreatorMobile();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
@@ -111,7 +112,10 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanExpandPostEditor() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+
+    PostsCreatorDesktop postsCreator = page.getPostsCreatorDesktop();
 
     postsCreator.click();
 
@@ -123,8 +127,9 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
-    PostsListPage postListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postListPage.getPostsCreatorDesktop();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    PostsCreator postsCreator = page.getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
@@ -136,6 +141,7 @@ public class CreatingPostTests extends NewTestTemplate {
     final String description = TextGenerator.createUniqueText();
 
     PostsListPage postListPage = new PostsListPage().open();
+    postListPage.getIntroducingFollowingModal().confirmSeeingModal();
     PostsCreator postsCreator = postListPage.getPostsCreatorDesktop();
 
     final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
@@ -161,7 +167,10 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
-    PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+
+    PostsCreatorMobile postsCreator = page.getPostsCreatorMobile();
 
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
 
@@ -175,7 +184,10 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+
+    PostsCreatorDesktop postsCreator = page.getPostsCreatorDesktop();
 
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
 
@@ -190,14 +202,14 @@ public class CreatingPostTests extends NewTestTemplate {
 
   /**
    * This test covers all situations when post cannot be added (submit button is disabled).
-   *
+   * <p>
    * | Category | Title | Description |
    * |          |     x |             |
    * |          |     x |           x |
    * |          |       |           x |
    * |        x |       |             |
    * |        x |     x |             |
-   *
+   * <p>
    * * x - means category was selected or text was added
    */
   private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(PostsCreator postsCreator) {
@@ -253,10 +265,10 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private void assertThatUserCanClickPostAndGoToPostDetailsPage() {
-    PostsListPage postListPage = new PostsListPage().open();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
 
-    PostEntity post = postListPage.getPost()
-        .findNewestPost();
+    final PostEntity post = page.getPost().findNewestPost();
 
     final String postDetailsUrl = post.findLinkToPostDetails();
 
