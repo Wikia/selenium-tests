@@ -27,7 +27,7 @@ public class CategoryPageTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl")
-  @RelatedIssue(issueID = "WW-604")
+  @RelatedIssue(issueID = "SEO-618", comment = "commit was reverted;tests- to be updated")
   public void mercury_category_navigateToCategoryPageWithArticleAndWithoutMembersFromUrl() {
     new CategoryPage().navigateToPageWithArticleAndWithoutMembersFromUrl();
   }
