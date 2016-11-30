@@ -13,7 +13,6 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -443,6 +442,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-8926")
   public void verifyChevronTooltip() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
