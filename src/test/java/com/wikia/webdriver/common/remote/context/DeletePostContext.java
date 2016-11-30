@@ -18,11 +18,11 @@ public class DeletePostContext extends RemoteContext {
     this.postId = postId;
   }
 
-  public static DeletePostContext defaultContextUsing(PostEntity.Data data) {
+  public static DeletePostContext defaultContextUsing(final String siteId, final PostEntity.Data data) {
     Objects.requireNonNull(data.getId());
 
     return DeletePostContext.builder()
-        .siteId(Discussions.DAUTO_WIKIA_SITE_ID)
+        .siteId(siteId)
         .postId(data.getId())
         .build();
   }

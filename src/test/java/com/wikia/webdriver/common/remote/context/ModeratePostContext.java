@@ -18,11 +18,11 @@ public class ModeratePostContext extends RemoteContext {
     this.postId = postId;
   }
 
-  public static ModeratePostContext defaultContextUsing(PostEntity.Data data) {
+  public static ModeratePostContext defaultContextUsing(final String siteId, final PostEntity.Data data) {
     Objects.requireNonNull(data.getFirstPostId(), "First post id is required to report post. Post id is not used in this operation!");
 
     return ModeratePostContext.builder()
-        .siteId(Discussions.DAUTO_WIKIA_SITE_ID)
+        .siteId(siteId)
         // in order to report post (in front end) it has to be treated as reply (in front end, but post in back end)
         .postId(data.getFirstPostId())
         .build();

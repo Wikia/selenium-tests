@@ -5,6 +5,8 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGe
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 public class CreatePostContext extends RemoteContext {
 
@@ -22,10 +24,12 @@ public class CreatePostContext extends RemoteContext {
     this.description = description;
   }
 
-  public static CreatePostContext defaultContext() {
+  public static CreatePostContext defaultContext(final String siteId) {
+    Objects.requireNonNull(siteId);
+
     return CreatePostContext.builder()
-        .siteId(Discussions.DAUTO_WIKIA_SITE_ID)
-        .categoryId(Discussions.DAUTO_WIKIA_SITE_ID)
+        .siteId(siteId)
+        .categoryId(siteId)
         .title(TextGenerator.defaultText())
         .description(TextGenerator.createUniqueText())
         .build();

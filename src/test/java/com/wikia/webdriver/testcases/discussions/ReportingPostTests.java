@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
@@ -74,7 +74,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
-    createAndReportPostRemotelyAsFristUser();
+    createAndReportPostRemotelyAsFirstUser();
 
     PostsListPage page = new PostsListPage().open();
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -84,7 +84,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -94,7 +94,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -164,7 +164,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
-    createAndReportPostRemotelyAsFristUser();
+    createAndReportPostRemotelyAsFirstUser();
 
     PostsListPage page = new PostsListPage().open();
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -174,7 +174,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -184,7 +184,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
     Assertion.assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -259,7 +259,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostsListPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostEntity postEntity = new PostsListPage().open().getPost().findPostById(data.getId());
@@ -271,7 +271,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -284,7 +284,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
@@ -328,7 +328,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PageWithPosts page = new PostsListPage().open();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
@@ -340,7 +340,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PageWithPosts page = new PostDetailsPage().open(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
@@ -352,7 +352,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
@@ -366,7 +366,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostsListPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -379,7 +379,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -392,7 +392,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -407,7 +407,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReportedPostOnPostListPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
     final PostEntity postEntity = new PostsListPage().open().getPost().findPostById(data.getId());
@@ -418,7 +418,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -432,7 +432,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReportedPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
     final PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
@@ -443,7 +443,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanNotSeeApprovedPostOnReportedPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -455,7 +455,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReReportedPostOnReportedPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
     reportPostRemotelyAsSecondUser(data);
 
@@ -467,7 +467,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
     reportPostRemotelyAsThirdUser(data);
@@ -518,7 +518,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnPostsListPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostEntity postEntity = new PostsListPage().open().getPost().findPostById(data.getId());
@@ -530,7 +530,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -543,7 +543,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
     PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
@@ -587,7 +587,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PageWithPosts page = new PostsListPage().open();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
@@ -599,7 +599,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PageWithPosts page = new PostDetailsPage().open(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
@@ -611,7 +611,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
     PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
@@ -625,7 +625,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostsListPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -638,7 +638,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -651,7 +651,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -666,7 +666,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnPostListPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
     final PostEntity postEntity = new PostsListPage().open().getPost().findPostById(data.getId());
@@ -677,7 +677,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -691,7 +691,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnUserPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
     final PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
@@ -702,7 +702,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanNotSeeApprovedPostOnReportedPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
@@ -714,7 +714,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReReportedPostOnReportedPostsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
     reportPostRemotelyAsSecondUser(data);
 
@@ -726,7 +726,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
     reportPostRemotelyAsThirdUser(data);
@@ -739,34 +739,33 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
-    return DiscussionsOperations.using(User.USER).cratePostWithUniqueData();
+    return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
   }
-
-  private PostEntity.Data createAndReportPostRemotelyAsFristUser() {
-    DiscussionsOperations operations = DiscussionsOperations.using(User.USER);
+  private PostEntity.Data createAndReportPostRemotelyAsFirstUser() {
+    DiscussionsOperations operations = DiscussionsOperations.using(User.USER, driver);
     final PostEntity.Data data = operations.cratePostWithUniqueData();
     operations.reportPost(data);
     return data;
   }
 
   private void reportPostRemotelyAsSecondUser(PostEntity.Data data) {
-    DiscussionsOperations.using(User.USER_2).reportPost(data);
+    DiscussionsOperations.using(User.USER_2, driver).reportPost(data);
   }
 
   private void validatePostRemotelyAsDiscussionsModerator(PostEntity.Data data) {
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR).validatePost(data);
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).validatePost(data);
   }
 
   private void reportPostRemotelyAsThirdUser(PostEntity.Data data) {
-    DiscussionsOperations.using(User.USER_3).reportPost(data);
+    DiscussionsOperations.using(User.USER_3, driver).reportPost(data);
   }
 
   private void deletePostRemotelyAsDiscussionsModerator(PostEntity.Data data) {
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR).deletePost(data);
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).deletePost(data);
   }
 
   private PostEntity.Data createAndReportAndDeletePostRemotely() {
-    PostEntity.Data data = createAndReportPostRemotelyAsFristUser();
+    PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
     reportPostRemotelyAsThirdUser(data);
