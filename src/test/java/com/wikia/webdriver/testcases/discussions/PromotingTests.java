@@ -46,16 +46,21 @@ public class PromotingTests extends NewTestTemplate {
    */
 
   private void discussionsAppPromotionUnitPresentOnPage() {
-    Promoting promoting = new PostsListPage().open("3035").getPromoting();
-
+    Promoting promoting = findPromoting();
     Assertion.assertTrue(promoting.isAppleLinkDisplayed());
     Assertion.assertTrue(promoting.isGooglePlayLinkDisplayed());
     Assertion.assertEquals(promoting.isPromotionAppTextDisplayed(), "Take your fandom with you, download the app today!");
   }
 
+  private Promoting findPromoting() {
+    PostsListPage page = new PostsListPage().open("3035");
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    return page.getPromoting();
+  }
+
   private void appleLinkRedirectsProperly() {
-    Promoting postsList = new PostsListPage().open("3035").getPromoting();
-    postsList.clickAppleLinkInAppPromotion();
+    Promoting promoting = findPromoting();
+    promoting.clickAppleLinkInAppPromotion();
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
     driver.switchTo().window(newWindow);
 
@@ -63,8 +68,8 @@ public class PromotingTests extends NewTestTemplate {
   }
 
   private void googlePlayLinkRedirectsProperly() {
-    Promoting postsList = new PostsListPage().open("3035").getPromoting();
-    postsList.clickGooglePlayLinkInAppPromotion();
+    Promoting promoting = findPromoting();
+    promoting.clickGooglePlayLinkInAppPromotion();
     String newWindow = driver.getWindowHandles().toArray()[1].toString();
     driver.switchTo().window(newWindow);
 
