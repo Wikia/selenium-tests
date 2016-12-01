@@ -12,13 +12,13 @@ public class MoreOptionsPopOver {
   private final WebElement webElement;
 
   public boolean hasReportPostOption() {
-    return hasOption("report-link");
+    return hasOption("report");
   }
 
   private boolean hasOption(String cssClassName) {
     boolean result = false;
 
-    List<WebElement> options = webElement.findElements(By.tagName("a"));
+    List<WebElement> options = webElement.findElements(By.tagName("svg"));
     for (WebElement option : options) {
       if (option.getAttribute("class").contains(cssClassName)) {
         result = true;
