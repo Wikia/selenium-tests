@@ -134,7 +134,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostsListPage() {
     PostsListPage page = openPostsListPage();
 
@@ -143,7 +143,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
     PostDetailsPage page = new PostDetailsPage().openDefaultPost();
 
@@ -153,7 +153,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
     UserPostsPage page = new UserPostsPage().openDefaultUserPage();
 
@@ -162,7 +162,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
     createAndReportPostRemotelyAsFirstUser();
 
@@ -172,7 +172,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
@@ -182,7 +182,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
@@ -192,7 +192,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -202,7 +202,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -212,7 +212,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -483,7 +483,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostsListPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
 
@@ -494,7 +494,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostDetailsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
 
@@ -505,7 +505,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnUserPostsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
 
@@ -516,7 +516,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnPostsListPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
@@ -528,7 +528,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
@@ -541,7 +541,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotReReportPostOnUserPostsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
@@ -553,7 +553,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -563,7 +563,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -573,7 +573,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -585,7 +585,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
@@ -597,7 +597,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
@@ -609,7 +609,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
 
@@ -623,7 +623,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostsListPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -636,7 +636,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -649,7 +649,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnUserPostsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -664,7 +664,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnPostListPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -675,7 +675,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -689,7 +689,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnUserPostsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -700,7 +700,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanNotSeeApprovedPostOnReportedPostsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -712,7 +712,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReReportedPostOnReportedPostsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
@@ -724,7 +724,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
