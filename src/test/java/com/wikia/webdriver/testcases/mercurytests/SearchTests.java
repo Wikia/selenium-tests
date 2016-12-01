@@ -49,11 +49,12 @@ public class SearchTests extends NewTestTemplate {
   @Execute(onWikia = "dauto")
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnDesktop",
                   "Mercury_Search_001"})
-  @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
+  @InBrowser(browser = Browser.CHROME, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
+    DiscussionsPage page = new DiscussionsPage();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
     String clickedSuggestion =
-        new DiscussionsPage()
-            .getTopBar()
+          page.getTopBar()
             .typeInDesktopSearchAndSelectSuggestion(SEARCH_PHRASE, 0);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
