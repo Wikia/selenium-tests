@@ -18,7 +18,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   private WebElement wikiCategoryDropdown;
   @FindBy(css = "#DescWiki .wds-dropdown .wds-list")
   private WebElement wikiCategoryList;
-  @FindBy(css = "form[name='desc-form'] input[class='next']")
+  @FindBy(css = "form[name='desc-form'] input.next")
   private WebElement submitButton;
   @FindBy(css = "label[for='allAges']")
   private WebElement allAgesCheckBox;
