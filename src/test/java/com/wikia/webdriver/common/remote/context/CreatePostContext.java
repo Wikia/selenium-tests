@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.remote.context;
 
-import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import lombok.Builder;
 import lombok.Getter;
