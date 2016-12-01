@@ -41,18 +41,6 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN),
                          AdsContent.INVISIBLE_SKIN);
 
-    if (isWgVarOn) {
-      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT),
-                            AdsContent.PREFOOTER_LEFT);
-      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT),
-                            AdsContent.PREFOOTER_RIGHT);
-      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2),
-                            AdsContent.LEFT_SKYSCRAPPER_2);
-      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC),
-                            AdsContent.FLOATING_MEDREC);
-      Thread.sleep(1000 * delaySec);
-    }
-
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT),
                          AdsContent.PREFOOTER_LEFT);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT),
@@ -218,17 +206,6 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
-
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
-                         AdsContent.MOBILE_TOP_LB);
-
-    if (isWgVarOn) {
-      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
-                            AdsContent.MOBILE_AD_IN_CONTENT);
-      Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER),
-                            AdsContent.MOBILE_PREFOOTER);
-      Thread.sleep(1000 * delaySec);
-    }
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
                          AdsContent.MOBILE_AD_IN_CONTENT);
