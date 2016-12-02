@@ -46,10 +46,9 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
-  @Test(enabled = false, groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
+  @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-3667")
   public void anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
@@ -66,7 +65,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage")
+  @RelatedIssue(issueID = "SOC-3667")
+  @Test(enabled = false, groups = "discussions-anonUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
