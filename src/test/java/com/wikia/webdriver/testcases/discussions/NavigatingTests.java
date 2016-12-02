@@ -64,17 +64,19 @@ public class NavigatingTests extends NewTestTemplate {
    */
 
   private void backToWiki() {
-    PostsListPage postListPage = new PostsListPage();
-    BackButtons backButtons = postListPage.open().getBackButtons();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    BackButtons backButtons = page.open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
-    Assertion.assertTrue(postListPage.isWikiFirstHeaderVisible());
+    Assertion.assertTrue(page.isWikiFirstHeaderVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
   }
 
   private void clickAvatarLoadsUserPage() {
-    Post post = new PostsListPage().open().getPost();
-    post.clickUserAvatar();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    page.getPost().clickUserAvatar();
 
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(
@@ -82,8 +84,9 @@ public class NavigatingTests extends NewTestTemplate {
   }
 
   private void clickUsernameLoadsUserPage() {
-    Post post = new PostsListPage().open().getPost();
-    post.clickUsernameLink();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    page.getPost().clickUsernameLink();
 
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(

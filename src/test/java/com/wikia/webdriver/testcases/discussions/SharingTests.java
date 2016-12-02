@@ -7,11 +7,16 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ShareDialog;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = {"discussions-sharing"})
@@ -19,8 +24,8 @@ public class SharingTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
-  private static final String[] expected_networks_for_english_language =
-      new String[]{"Facebook", "Twitter", "Reddit", "Tumblr"};
+  private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE =
+      Arrays.asList("facebook", "twitter", "reddit", "tumblr");
 
   /**
    * ANONS ON MOBILE SECTION
@@ -29,25 +34,46 @@ public class SharingTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void anonUserOnMobileCanSeeSocialNetworkIcons() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
+  public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
+  }
+
+  @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
   }
 
   /**
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIconsInPost")
+  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanSeeSocialNetworkIconsInPost() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);}
+  public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostListPage() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
+  }
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void anonUserOnDesktopCanSeeSocialNetworkIcons() {
-    socialNetworkIconsAreDisplayed(expected_networks_for_english_language);}
+  public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostDetailsPage() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
+  }
 
   /**
    * LOGGED IN USERS ON MOBILE SECTION
@@ -56,8 +82,21 @@ public class SharingTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
-  public void loggedInUserOnMobileCanSeeSocialNetworkIcons() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
+  public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
+  }
+
+  @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
   }
 
   /**
@@ -67,52 +106,46 @@ public class SharingTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void registeredUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
-    toggleShareIconClickDisplaysSocialNetworkIcons(expected_networks_for_english_language);
+  public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails")
   @Execute(asUser = User.USER_3)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
-  public void registeredUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
-    socialNetworkIconsAreDisplayed(expected_networks_for_english_language);
+  public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
+    List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
+
+    Assertion.assertEquals(socialNetworkNames, EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE,
+        "Displayed social networks are different than expected.");
   }
 
   /**
    * TESTING METHODS SECTION
    */
 
-  private void toggleShareIconClickDisplaysSocialNetworkIcons(String[] expectedSocialNetworks) {
-    Post post = new PostsListPage().open().getPost();
-    int postIndex = 0;
-    post.clickShareIcon(postIndex);
-    String[] currentSocialNetworks = post.getSocialNetworkIconClasses(postIndex);
-
-    for (int i = 0; i < expectedSocialNetworks.length; i++) {
-      String currentSocialNetwork = currentSocialNetworks[i];
-      String expectedSocialNetwork = expectedSocialNetworks[i];
-
-      Assertion.assertEquals(
-          currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
-          "Expected network not found on its position. Note that the order of social buttons "
-          + "matters, as defined in requirements. Missing network:" + expectedSocialNetwork
-      );
-    }
+  private List<String> findSocialNetworksNamesForFirstPostOnPostListPage() {
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    return findSocialNetworksNamesForFirstPostOn(page);
   }
 
-  private void socialNetworkIconsAreDisplayed(String[] expectedSocialNetworks) {
-    PostDetailsPage postDetails = new PostDetailsPage().openDefaultPost();
-    String[] currentSocialNetworks = postDetails.getPost().clickShareIcon(0).getSocialNetworkIconsClasses();
+  private List<String> findSocialNetworksNamesForFirstPostOn(final PageWithPosts page) {
+    return page.getPost()
+        .findNewestPost()
+        .clickMoreOptions()
+        .clickSharePostOption()
+        .getSocialIcons()
+        .stream()
+        .map(ShareDialog.SocialIcon::getSocialNetworkName)
+        .collect(toList());
+  }
 
-    for (int i = 0; i < expectedSocialNetworks.length; i++) {
-      String currentSocialNetwork = currentSocialNetworks[i];
-      String expectedSocialNetwork = expectedSocialNetworks[i];
-
-      Assertion.assertEquals(
-          currentSocialNetwork.toLowerCase(), expectedSocialNetwork.toLowerCase(),
-          "Expected network not found on its position. Note that the order of social buttons "
-          + "matters, as defined in requirements. Missing network:" + expectedSocialNetwork
-      );
-    }
+  private List<String> findSocialNetworksNamesForFirstPostOnPostDetailsPage() {
+    PostDetailsPage page = new PostDetailsPage().openDefaultPost();
+    return findSocialNetworksNamesForFirstPostOn(page);
   }
 }

@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.IntroducingFollowingModal;
 import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
 import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
@@ -85,6 +86,8 @@ public class WikiBasePageObject extends BasePageObject {
   private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
   @Getter(lazy = true)
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
+  @Getter(lazy = true)
+  private final IntroducingFollowingModal introducingFollowingModal = new IntroducingFollowingModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
   @Getter(lazy = true)
