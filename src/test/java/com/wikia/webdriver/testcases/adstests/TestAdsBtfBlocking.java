@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -28,7 +29,8 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtf",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDelayBtfOasis(String wikiName, String article, int delaySec, boolean isWgVarOn)
+  @RelatedIssue(issueID = "ADEN-4344")
+  public void adsAtfDelayBtfOasis(String wikiName, String article, boolean isWgVarOn)
       throws InterruptedException {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
@@ -57,10 +59,9 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtfPluto",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, int delaySec,
-                                       boolean isWgVarOn)
+  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, boolean isWgVarOn)
       throws InterruptedException {
-    adsAtfDelayBtfOasis(wikiName, article, delaySec, isWgVarOn);
+    adsAtfDelayBtfOasis(wikiName, article, isWgVarOn);
   }
 
   @Test(
@@ -168,10 +169,10 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtfPluto",
       groups = "AdsBtfBlockingMercury"
   )
-  public void adsAtfDelayBtfMercuryPluto(String wikiName, String article, int delaySec,
+  public void adsAtfDelayBtfMercuryPluto(String wikiName, String article,
                                          boolean isWgVarOn)
       throws InterruptedException {
-    adsAtfDelayBtfMercury(wikiName, article, delaySec, isWgVarOn);
+    adsAtfDelayBtfMercury(wikiName, article, isWgVarOn);
   }
 
   @Execute(mockAds = "true")
@@ -198,7 +199,8 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "delayBtf",
       groups = "AdsBtfBlockingMercury"
   )
-  public void adsAtfDelayBtfMercury(String wikiName, String article, int delaySec,
+  @RelatedIssue(issueID = "ADEN-4344")
+  public void adsAtfDelayBtfMercury(String wikiName, String article,
                                     boolean isWgVarOn)
       throws InterruptedException {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
