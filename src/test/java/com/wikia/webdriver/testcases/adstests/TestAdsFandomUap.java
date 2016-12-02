@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
@@ -31,6 +32,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
       dataProvider = "fandomUapPage",
       groups = {"AdsFandomUapMobile"}
   )
+  @RelatedIssue(issueID = "ADEN-4339")
   public void adsFandomUapMobile(String pageType, String pageName, long atfId, long btfId) {
     verifyUap(pageType, pageName, atfId, btfId);
   }
