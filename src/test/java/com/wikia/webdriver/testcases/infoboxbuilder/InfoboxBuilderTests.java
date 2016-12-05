@@ -296,7 +296,6 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002", "test_verify"})
-  @RelatedIssue(issueID = "WW-462")
   @Execute(asUser = User.STAFF)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();

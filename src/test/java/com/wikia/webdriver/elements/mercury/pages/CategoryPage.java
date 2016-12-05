@@ -4,9 +4,11 @@ import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +19,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.annotation.Nullable;
 
 public class CategoryPage extends WikiBasePageObject {
+
+  private static final String ERROR_PAGE_TITLE = "Error 404";
+
+  @Getter(lazy = true)
+  private final Header header = new Header();
 
   private By article = By.cssSelector(".article-content");
   private By categorySections = By.cssSelector(".category-sections");
@@ -44,8 +51,9 @@ public class CategoryPage extends WikiBasePageObject {
   public CategoryPage navigateToPageWithArticleAndWithoutMembersFromUrl() {
     navigate.toPage(MercurySubpages.CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS);
 
-    articleContainerIsVisible();
-    noMembersMessageIsVisible();
+    articleContainerIsNotPresent();
+    categorySectionsContainerIsNotPresent();
+    verifyErrorPage();
 
     return this;
   }
@@ -108,6 +116,22 @@ public class CategoryPage extends WikiBasePageObject {
   private CategoryPage categorySectionsContainerIsVisible() {
     wait.forElementVisible(categorySections);
     PageObjectLogging.logInfo("Category sections container is visible.");
+
+    return this;
+  }
+
+  private CategoryPage categorySectionsContainerIsNotPresent() {
+    wait.forElementNotPresent(categorySections);
+    PageObjectLogging.logInfo("Category sections container is not present in DOM.");
+
+    return this;
+  }
+
+  private CategoryPage verifyErrorPage() {
+    String title = getHeader().getPageTitle();
+    Assertion.assertEquals(ERROR_PAGE_TITLE, title);
+    verifyURLStatus(404, getCurrentUrl());
+    PageObjectLogging.logInfo("Category page shows 404 error.");
 
     return this;
   }

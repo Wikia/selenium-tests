@@ -20,7 +20,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
   private By loadingIndicatorBy = By.cssSelector(".wikiaThrobber");
   private String themeLocator = "li[data-theme='%name%']";
 
-  @FindBy(css = "li[id='ThemeWiki'] input[class='next enabled']")
+  @FindBy(css = "li[id='ThemeWiki'] input.next.enabled")
   private WebElement submitButton;
 
   public CreateNewWikiPageObjectStep3(WebDriver driver) {
