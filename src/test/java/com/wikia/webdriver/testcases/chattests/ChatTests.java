@@ -138,10 +138,12 @@ public class ChatTests extends NewTestTemplate {
     chatUserStaff.banUser(userToBeBanned);
 
     switchToWindow(0);
-    Assertion.assertTrue(userToBeBaned.isUserKickedFromChat(), "BANED USER IS ABLE TO WRITE MESSAGE");
-
-    switchToWindow(1);
-    chatUserStaff.unBanUser(userToBeBanned);
+    try {
+      Assertion.assertTrue(userToBeBaned.isUserKickedFromChat(), "BANED USER IS ABLE TO WRITE MESSAGE");
+    } finally {
+      switchToWindow(1);
+      chatUserStaff.unBanUser(userToBeBanned);
+    }
     Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDisplayed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
@@ -166,8 +168,11 @@ public class ChatTests extends NewTestTemplate {
     chatUserFive.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
-    Assertion.assertFalse(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS DISPLAYED IN PRIVATE SECTION");
-    chatUserOne.allowPrivateMessageFromUser(userFive);
+    try {
+      Assertion.assertFalse(chatUserOne.isUserInPrivateSectionDisplayed(userFive), "USER IS DISPLAYED IN PRIVATE SECTION");
+    } finally {
+      chatUserOne.allowPrivateMessageFromUser(userFive);
+    }
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
@@ -264,10 +269,12 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(1);
     chatWindow.refreshPage();
 
-    Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
-
-    switchToWindow(0);
-    chatUserStaff.unBanUser(userToBeBanned);
+    try {
+      Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
+    } finally {
+      switchToWindow(0);
+      chatUserStaff.unBanUser(userToBeBanned);
+    }
 
     switchToWindow(1);
     chatWindow.refreshPage();
