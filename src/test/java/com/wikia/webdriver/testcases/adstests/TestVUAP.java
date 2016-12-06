@@ -37,6 +37,22 @@ public class TestVUAP extends TemplateNoFirstLoad {
   @Test(
           groups = "AdsUapDesktop"
   )
+  public void adsBottomAdVideoClosesWhenFinishPlaysOasis() {
+    Page page = new Page(PROJECT43, VUAP_ARTICLE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+
+    ads.scrollToBottomLeaderboard();
+
+    VUAP vuap = new VUAP(driver, BOTTOM_LEADERBOARD);
+    vuap.play();
+
+    vuap.waitForVideoPlayerVisible();
+    vuap.waitForVideoPlayerHidden();
+  }
+
+  @Test(
+          groups = "AdsUapDesktop"
+  )
   public void adsTopAdImageClickedOpensNewPageOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
