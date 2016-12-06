@@ -802,7 +802,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public boolean isAdDisplayed(String adSlotName) {
     try {
-      System.out.println(String.format(adSlotName, adSlotName));
       wait.forElementVisible(By.cssSelector(String.format(AD_SLOT_SELECTOR, adSlotName)));
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
