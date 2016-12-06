@@ -1,28 +1,28 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class VUAP {
-    private static By triggerButtonSelector = By.id("button");
+    private static By playTriggerButtonSelector = By.id("button");
     private static By UIElementsSelector = By.className("overVideoLayer");
+    private final Wait wait;
     private WikiaWebDriver driver;
-    private WikiBasePageObject pageObject;
     private WebElement iframe;
-    private WebElement triggerButton;
+    private WebElement playTriggerButton;
 
-    public VUAP(WikiaWebDriver driver, WikiBasePageObject pageObject, String slotName) {
+    public VUAP(WikiaWebDriver driver, String slotName) {
+        this.wait = new Wait(driver);
         this.driver = driver;
-        this.pageObject = pageObject;
-        iframe = findIframe(driver, pageObject, slotName);
-        triggerButton = findTriggerButton(driver, pageObject);
+        iframe = findIframe(slotName);
+        playTriggerButton = findTriggerButton(driver);
     }
 
-    private WebElement findIframe(WikiaWebDriver driver, WikiBasePageObject pageObject, String slotName) {
+    private WebElement findIframe(String slotName) {
         By iframeSelector = By.id(getAdUnit(slotName));
-        pageObject.wait.forElementPresent(iframeSelector);
+        wait.forElementPresent(iframeSelector);
         return driver.findElement(iframeSelector);
     }
 
@@ -30,11 +30,11 @@ public class VUAP {
         return "google_ads_iframe_/5441/wka.life/_project43//article/gpt/" + slotName + "_0";
     }
 
-    private WebElement findTriggerButton(WikiaWebDriver driver, WikiBasePageObject pageObject) {
+    private WebElement findTriggerButton(WikiaWebDriver driver) {
         driver.switchTo().frame(iframe);
 
-        pageObject.wait.forElementClickable(triggerButtonSelector);
-        WebElement element = driver.findElement(triggerButtonSelector);
+        wait.forElementClickable(playTriggerButtonSelector);
+        WebElement element = driver.findElement(playTriggerButtonSelector);
         driver.switchTo().defaultContent();
         return element;
     }
@@ -52,15 +52,15 @@ public class VUAP {
             e.printStackTrace();
         }
 
-        triggerButton.click();
+        playTriggerButton.click();
         driver.switchTo().defaultContent();
     }
 
     public void waitForVideoPlayerVisible() {
-        pageObject.wait.forElementVisible(UIElementsSelector);
+        wait.forElementVisible(UIElementsSelector);
     }
 
     public void waitForVideoPlayerHidden() {
-        pageObject.wait.forElementNotVisible(UIElementsSelector);
+        wait.forElementNotVisible(UIElementsSelector);
     }
 }

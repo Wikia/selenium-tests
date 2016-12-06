@@ -17,7 +17,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
     Page page = new Page("project43", "SyntheticTests/VUAP");
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    VUAP vuap = new VUAP(driver, ads, "TOP_LEADERBOARD");
+    VUAP vuap = new VUAP(driver, "TOP_LEADERBOARD");
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
