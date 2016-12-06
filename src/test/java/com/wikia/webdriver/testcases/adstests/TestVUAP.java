@@ -61,6 +61,6 @@ public class TestVUAP extends TemplateNoFirstLoad {
 
   public void verifyUrl(){
     String actualUrl = driver.getCurrentUrl().toString();
-    Assertion.assertEquals(ActualUrl, FANDOM_URL );
+    Assertion.assertEquals(actualUrl, FANDOM_URL );
   }
 }
