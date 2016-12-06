@@ -14,7 +14,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
   private static final String BOTTOM_LEADERBOARD = "BOTTOM_LEADERBOARD";
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
   private static final String PROJECT43 = "project43";
-  private static final String VUAP_ARTICLE = "http://www.wikia.com/fandom";
+  private static final String VUAP_ARTICLE = "SyntheticTests/VUAP";
 
   private final String currentBrowserTab() {
     return driver.getWindowHandle();
