@@ -58,6 +58,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
+  private static final String AD_SLOT_SELECTOR = "div[id*='%s']";
 
   private long tStart;
 
@@ -777,6 +778,37 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToPosition(String selector) {
     jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
+  }
+  // This scroll has been created becouse of ADEN-4359
+  public void scrollToBottomLeaderboard(){
+    scrollToFooter();
+    scrollTo(presentLeaderboard);
+    scrollToFooter();
+  }
+
+  public void clickOnAdImage(String adSlotName){
+    driver.findElement(By.cssSelector(String.format(AD_SLOT_SELECTOR, adSlotName))).click();
+    PageObjectLogging.log("clickOnAdImage", adSlotName + " is clicked", true);
+  }
+
+  public void switchToSecondTab(String firstTab) {
+    ArrayList<String> openTabs = new ArrayList(driver.getWindowHandles());
+    for (String window : openTabs) {
+      if (window != firstTab) {
+        driver.switchTo().window(window);
+      }
+    }
+  }
+
+  public boolean isAdDisplayed(String adSlotName) {
+    try {
+      System.out.println(String.format(adSlotName, adSlotName));
+      wait.forElementVisible(By.cssSelector(String.format(AD_SLOT_SELECTOR, adSlotName)));
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log(adSlotName + " is not displayed", ex, true);
+      return false;
+    }
   }
 
   public boolean isMobileInContentAdDisplayed() {
