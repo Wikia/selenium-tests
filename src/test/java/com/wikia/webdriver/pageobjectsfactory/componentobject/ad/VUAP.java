@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class VUAP {
+    private static final int VIDEO_LENGTH = 6000;
+    private static By videoContainerSelector = By.cssSelector(".video-ima-container.hidden");
     private static By playTriggerButtonSelector = By.id("button");
     private static By UIElementsSelector = By.className("overVideoLayer");
     private final Wait wait;
@@ -62,5 +64,14 @@ public class VUAP {
 
     public void waitForVideoPlayerHidden() {
         wait.forElementNotVisible(UIElementsSelector);
+    }
+
+    public void waitForEndOfVideo() {
+        final int timeout = VIDEO_LENGTH + 3000;
+        wait.forElementPresent(videoContainerSelector, timeout);
+    }
+
+    public void waitForStartOfVideo() {
+        waitForVideoPlayerVisible();
     }
 }
