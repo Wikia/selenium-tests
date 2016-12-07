@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -27,7 +26,6 @@ public class TestVUAP extends TemplateNoFirstLoad {
     vuap.waitForVideoPlayerHidden();
   }
 
-  @NetworkTrafficDump
   @Test(
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsVUAPDesktop",
@@ -39,8 +37,6 @@ public class TestVUAP extends TemplateNoFirstLoad {
 
     final int VIDEO_WIDTH = 1830;
     final int VIDEO_HEIGHT = 1034;
-
-    networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
