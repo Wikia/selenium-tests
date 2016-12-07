@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-public class TestVUAP extends TemplateNoFirstLoad {
+public class TestAdsVUAP extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
@@ -19,7 +19,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
   private final String clickThroughUrl() {
     return driver.getCurrentUrl();
   }
-  
+
   @Test(
           groups = "AdsUapDesktop"
   )
