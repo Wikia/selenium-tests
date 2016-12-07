@@ -3,23 +3,23 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VUAP;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 public class TestVUAP extends TemplateNoFirstLoad {
+
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
-  private static final String TOP_LEADERBOARD = "TOP_LEADERBOARD";
-  private static final String BOTTOM_LEADERBOARD = "BOTTOM_LEADERBOARD";
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
   private static final String PROJECT43 = "project43";
   private static final String VUAP_ARTICLE = "SyntheticTests/VUAP";
 
-  private final String currentBrowserTab() {
-    return driver.getWindowHandle();
+  private final String clickThroughUrl() {
+    return driver.getCurrentUrl();
   }
-
+  
   @Test(
           groups = "AdsUapDesktop"
   )
@@ -27,7 +27,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    VUAP vuap = new VUAP(driver, TOP_LEADERBOARD);
+    VUAP vuap = new VUAP(driver, AdsContent.TOP_LB);
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
@@ -43,7 +43,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
 
     ads.scrollToBottomLeaderboard();
 
-    VUAP vuap = new VUAP(driver, BOTTOM_LEADERBOARD);
+    VUAP vuap = new VUAP(driver, AdsContent.BOTTOM_LB);
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
@@ -56,10 +56,11 @@ public class TestVUAP extends TemplateNoFirstLoad {
   public void adsTopAdImageClickedOpensNewPageOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    Assertion.assertTrue(ads.isAdDisplayed(TOP_LEADERBOARD));
-    ads.clickOnAdImage(TOP_LEADERBOARD);
-    ads.switchToSecondTab(currentBrowserTab());
-    verifyUrl();
+    Assertion.assertTrue(ads.isAdDisplayed(AdsContent.TOP_LB));
+    ads.clickOnAdImage(AdsContent.TOP_LB);
+    ads.switchToNewBrowserTab();
+    Assertion.assertEquals(clickThroughUrl(), FANDOM_URL);
+
   }
 
   @Test(
@@ -69,14 +70,9 @@ public class TestVUAP extends TemplateNoFirstLoad {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     ads.scrollToBottomLeaderboard();
-    Assertion.assertTrue(ads.isAdDisplayed(BOTTOM_LEADERBOARD));
-    ads.clickOnAdImage(BOTTOM_LEADERBOARD);
-    ads.switchToSecondTab(currentBrowserTab());
-    verifyUrl();
-  }
-
-  public void verifyUrl(){
-    String actualUrl = driver.getCurrentUrl().toString();
-    Assertion.assertEquals(actualUrl, FANDOM_URL );
+    Assertion.assertTrue(ads.isAdDisplayed(AdsContent.BOTTOM_LB));
+    ads.clickOnAdImage(AdsContent.BOTTOM_LB);
+    ads.switchToNewBrowserTab();
+    Assertion.assertEquals(clickThroughUrl(), FANDOM_URL);
   }
 }
