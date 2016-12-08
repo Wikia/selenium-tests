@@ -298,7 +298,9 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
-    wait.forElementVisible(editMessageWrapper);
+    wait.forElementVisible(editMessageWrapper.findElement(messageTitleBy));
+    wait.forElementVisible(editMessageWrapper.findElement(messageBodyBy));
+    wait.forElementVisible(editMessageWrapper.findElement(messageUserNameBy));
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).getText(), message);
     Assertion.assertEquals(editMessageWrapper.findElement(messageUserNameBy).getText(), userName);
