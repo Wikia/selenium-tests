@@ -46,15 +46,16 @@ public class VUAP {
   }
 
   public void play() {
+    waitForVideoReadyToPlay();
+
     driver.switchTo().frame(iframe);
-
-    try {
-      Thread.sleep(2000); // TODO replace with "wait for video will be ready to play"
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
     playTriggerButton.click();
+    driver.switchTo().defaultContent();
+  }
+
+  private void waitForVideoReadyToPlay() {
+    driver.switchTo().frame(iframe);
+    wait.forElementVisible(playTriggerButtonSelector);
     driver.switchTo().defaultContent();
   }
 
@@ -66,12 +67,7 @@ public class VUAP {
     wait.forElementNotVisible(UIElementsSelector);
   }
 
-  public void waitForEndOfVideo() {
-    final int timeout = VIDEO_LENGTH + 3000;
-    wait.forElementPresent(videoContainerSelector, timeout);
-  }
+  public void waitForVideoEnd() { wait.forElementPresent(videoContainerSelector, VIDEO_LENGTH); }
 
-  public void waitForStartOfVideo() {
-    waitForVideoPlayerVisible();
-  }
+  public void waitForVideoStart() { waitForVideoPlayerVisible(); }
 }

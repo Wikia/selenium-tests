@@ -14,7 +14,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
   @Test(
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsVUAPDesktop",
-          groups = "AdsVuapDesktop"
+          groups = "AdsVuapFlow"
   )
   public void testVideoPlayFlow(String slotName, Page page) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
@@ -29,7 +29,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
   @Test(
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsVUAPDesktop",
-          groups = "AdsVuapDesktop"
+          groups = "AdsVuapSizes"
   )
   public void testSlotSizes(String slotName, Page page) {
     final int IMAGE_WIDTH = 1830;
@@ -44,9 +44,9 @@ public class TestVUAP extends TemplateNoFirstLoad {
 
     ads.verifySlotSize(slotName, IMAGE_WIDTH, IMAGE_HEIGHT);
     vuap.play();
-    vuap.waitForStartOfVideo();
+    vuap.waitForVideoStart();
     ads.verifySlotSize(slotName, VIDEO_WIDTH, VIDEO_HEIGHT);
-    vuap.waitForEndOfVideo();
+    vuap.waitForVideoEnd();
     ads.verifySlotSize(slotName, IMAGE_WIDTH, IMAGE_HEIGHT);
   }
 }
