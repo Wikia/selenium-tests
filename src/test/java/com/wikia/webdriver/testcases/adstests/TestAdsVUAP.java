@@ -21,11 +21,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "AdsUapDesktop"
+          groups = "AdsVuapOasis"
   )
   public void adsTopAdVideoClosesWhenFinishPlaysOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
     VUAP vuap = new VUAP(driver, AdsContent.TOP_LB);
     vuap.play();
@@ -35,7 +35,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "AdsUapDesktop"
+          groups = "AdsVuapOasis"
   )
   public void adsBottomAdVideoClosesWhenFinishPlaysOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
@@ -51,12 +51,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "AdsUapDesktop"
+          groups = "AdsVuapOasis"
   )
   public void adsTopAdImageClickedOpensNewPageOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    Assertion.assertTrue(ads.isAdDisplayed(AdsContent.TOP_LB));
     ads.clickOnAdImage(AdsContent.TOP_LB);
     ads.switchToNewBrowserTab();
     Assertion.assertEquals(clickThroughUrl(), FANDOM_URL);
@@ -64,13 +63,12 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "AdsUapDesktop"
+          groups = "AdsVuapOasis"
   )
   public void adsBottomAdImageClickedOpensNewPageOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     ads.scrollToBottomLeaderboard();
-    Assertion.assertTrue(ads.isAdDisplayed(AdsContent.BOTTOM_LB));
     ads.clickOnAdImage(AdsContent.BOTTOM_LB);
     ads.switchToNewBrowserTab();
     Assertion.assertEquals(clickThroughUrl(), FANDOM_URL);

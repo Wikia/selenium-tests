@@ -786,18 +786,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void clickOnAdImage(String slotName){
+    wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
     driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName))).click();
     PageObjectLogging.log("clickOnAdImage", slotName + " is clicked", true);
-  }
-
-  public boolean isAdDisplayed(String slotName) {
-    try {
-      wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-      return true;
-    } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log(slotName + " is not displayed", ex, true);
-      return false;
-    }
   }
 
   public boolean isMobileInContentAdDisplayed() {
