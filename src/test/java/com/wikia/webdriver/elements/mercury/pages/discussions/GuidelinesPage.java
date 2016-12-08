@@ -1,12 +1,17 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.server.handler.SendKeys;
+import org.openqa.selenium.remote.server.handler.interactions.SendKeyToActiveElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GuidelinesPage extends WikiBasePageObject {
@@ -31,13 +36,13 @@ public class GuidelinesPage extends WikiBasePageObject {
     @FindBy(css = ".guidelines-edit-link")
     private WebElement editButton;
 
-    @FindBy (css = ".editor-close")
+    @FindBy(css = ".editor-close")
     private WebElement editorClose;
 
-    @FindBy (css = ".discussion-standalone-editor-save-button")
+    @FindBy(css = ".discussion-standalone-editor-save-button")
     private WebElement saveButton;
 
-    @FindBy (css = ".discussion-standalone-editor-textarea")
+    @FindBy(css = ".discussion-standalone-editor-textarea")
     private WebElement guidelinesText;
 
     public GuidelinesPage open() {
@@ -86,7 +91,7 @@ public class GuidelinesPage extends WikiBasePageObject {
             wait.forElementVisible(contentText);
 
             return contentText.isDisplayed();
-        } catch(TimeoutException e) {
+        } catch (TimeoutException e) {
             PageObjectLogging.logInfo("contentText is not displayed", e);
 
             return false;
@@ -98,11 +103,50 @@ public class GuidelinesPage extends WikiBasePageObject {
             wait.forElementVisible(editButton);
 
             return editButton.isDisplayed();
-        } catch(TimeoutException e) {
+        } catch (TimeoutException e) {
             PageObjectLogging.logInfo("Edit button is not displayed", e);
 
             return false;
         }
     }
 
+    public void clickSaveButton() {
+        wait.forElementClickable(saveButton);
+        saveButton.click();
+    }
+
+    public void guidelinesAddNewText(String contentText) {
+        driver.findElement(By.className("discussion-standalone-editor-textarea")).sendKeys(contentText);
+        clickSaveButton();
+       //driver.findElement(By.className("discussion-standalone-editor-textarea")).getText().replace(contentText, "");
+    }
+
+    public void verifyContentNevTextInGuidelines(String content) {
+        wait.forTextInElement(contentText, content);
+    }
+
+    public void testNewTextToGuidelines() {
+        String guidelinesText =  TextGenerator.createUniqueText();
+        clickEditGuidelines();
+        guidelinesAddNewText(guidelinesText);
+        verifyContentNevTextInGuidelines(guidelinesText);
+        clickEditGuidelines();
+        //driver.findElement(By.className("discussion-standalone-editor-textarea")).getText().replace((CharSequence) contentText, "");
+        String replace = driver.findElement(By.className("discussion-standalone-editor-textarea")).getText()
+                .replace(guidelinesText, "");
+        guidelinesAddNewText(replace);
+        clickSaveButton();
+    }
+
+     public boolean isNewGuidelinesTextDispleyed() {
+
+        try {
+            testNewTextToGuidelines();
+            return guidelinesText.isDisplayed();
+        } catch (TimeoutException e) {
+            PageObjectLogging.logInfo("New text in Guidelines is not displayed", e);
+
+            return false;
+        }
+    }
 }
