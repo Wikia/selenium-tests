@@ -502,7 +502,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
   }
 
-  private void waitForElementToHaveSize(int width, int height, WebElement element) {
+  public void waitForElementToHaveSize(int width, int height, WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
@@ -807,5 +807,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
       return false;
     }
+  }
+
+  public void verifySlotSize(String slotName, int width, int height) {
+    waitForElementToHaveSize(width, height, driver.findElement(By.id(slotName)));
   }
 }
