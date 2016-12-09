@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 )
 public class TestAdsVUAP extends TemplateNoFirstLoad {
 
-  private static final Dimension DESKTOP_SIZE = new Dimension(1830, 1080);
+  private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
 
   @Test(
@@ -83,21 +83,18 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           groups = {"AdsVuapSizes", "AdsVuapTopOasis"}
   )
   public void adsCheckSlotSizesOasis(String slotName, Page page) {
-    final int imageWidth = 1830;
-    final int imageHeight = 744;
-
-    final int videoWidth = 1830;
-    final int videoHeight = 1034;
-
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+
+    final int imageHeight = (int) (ads.getViewPortWidth() / VUAP.IMAGE_ASPECT_RATIO);
+    final int videoHeight = (int) (ads.getViewPortWidth() / VUAP.VIDEO_ASPECT_RATIO);
 
     VUAP vuap = new VUAP(driver, slotName);
 
-    ads.verifySlotSize(slotName, imageWidth, imageHeight);
+    ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
     vuap.play();
     vuap.waitForVideoStart();
-    ads.verifySlotSize(slotName, videoWidth, videoHeight);
+    ads.verifySlotSize(slotName, ads.getViewPortWidth(), videoHeight);
     vuap.waitForVideoEnd();
-    ads.verifySlotSize(slotName, imageWidth, imageHeight);
+    ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
   }
 }

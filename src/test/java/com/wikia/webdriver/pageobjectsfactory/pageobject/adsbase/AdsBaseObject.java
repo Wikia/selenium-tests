@@ -390,6 +390,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return getGptParams(slotName, "data-gpt-page-params");
   }
 
+  public int getViewPortWidth() {
+    return driver.findElement(By.cssSelector("body")).getSize().getWidth();
+  }
+
   public void verifyMonocolorAd(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
