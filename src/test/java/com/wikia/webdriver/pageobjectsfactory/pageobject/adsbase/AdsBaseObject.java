@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.google.inject.spi.Element;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -99,12 +100,12 @@ public class AdsBaseObject extends WikiBasePageObject {
     driver.manage().window().setSize(resolution);
   }
 
-  public void timerStart() {
-    tStart = System.currentTimeMillis();
+  private WebElement adSelector(String slotName){
+    return wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
   }
 
-  private WebElement adSelector(String slotName){
-    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+  public void timerStart() {
+    tStart = System.currentTimeMillis();
   }
 
   public String getNumberOfSecondsFromStart() {
@@ -506,7 +507,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
   }
 
-  private void waitForElementToHaveSize(int width, int height, WebElement element) {
+  public void waitForElementToHaveSize(int width, int height, WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
@@ -790,7 +791,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void clickOnAdImage(String slotName){
-    wait.forElementVisible(adSelector(slotName));
+    adSelector(slotName);
     adSelector(slotName).click();
     PageObjectLogging.log("clickOnAdImage", slotName + " is clicked", true);
   }
@@ -823,5 +824,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
       return false;
     }
+  }
+
+  public void verifySlotSize(String slotName, int width, int height) {
+    waitForElementToHaveSize(width, height, driver.findElement(By.id(slotName)));
   }
 }

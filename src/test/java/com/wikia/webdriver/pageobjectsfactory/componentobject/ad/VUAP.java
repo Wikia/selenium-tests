@@ -6,61 +6,71 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class VUAP {
-    private static By playTriggerButtonSelector = By.id("button");
-    private static By UIElementsSelector = By.className("overVideoLayer");
-    private final Wait wait;
-    private WikiaWebDriver driver;
-    private WebElement iframe;
-    private WebElement playTriggerButton;
+  private static final int VIDEO_LENGTH = 6000;
+  private static By videoContainerSelector = By.cssSelector(".video-ima-container.hidden");
+  private static By playTriggerButtonSelector = By.id("button");
+  private static By UIElementsSelector = By.className("overVideoLayer");
+  private final Wait wait;
+  private WikiaWebDriver driver;
+  private WebElement iframe;
+  private WebElement playTriggerButton;
 
-    public VUAP(WikiaWebDriver driver, String slotName) {
-        this.wait = new Wait(driver);
-        this.driver = driver;
-        iframe = findIframe(slotName);
-        playTriggerButton = findTriggerButton(driver);
-    }
+  public VUAP(WikiaWebDriver driver, String slotName) {
+    this.wait = new Wait(driver);
+    this.driver = driver;
+    setIframe(slotName);
+    setTriggerButton(driver);
+  }
 
-    private WebElement findIframe(String slotName) {
-        By iframeSelector = By.id(getAdUnit(slotName));
-        wait.forElementPresent(iframeSelector);
-        return driver.findElement(iframeSelector);
-    }
+  private String getAdUnit(String slotName) {
+    return "google_ads_iframe_/5441/wka.life/_project43//article/gpt/" + slotName + "_0";
+  }
 
-    private String getAdUnit(String slotName) {
-        return "google_ads_iframe_/5441/wka.life/_project43//article/gpt/" + slotName + "_0";
-    }
+  private void setIframe(String slotName) {
+    By iframeSelector = By.id(getAdUnit(slotName));
+    wait.forElementPresent(iframeSelector);
+    iframe = driver.findElement(iframeSelector);
+  }
 
-    private WebElement findTriggerButton(WikiaWebDriver driver) {
-        driver.switchTo().frame(iframe);
+  private void setTriggerButton(WikiaWebDriver driver) {
+    runInAdFrame(() -> {
+      wait.forElementClickable(playTriggerButtonSelector);
+      playTriggerButton = driver.findElement(playTriggerButtonSelector);
+    });
+  }
 
-        wait.forElementClickable(playTriggerButtonSelector);
-        WebElement element = driver.findElement(playTriggerButtonSelector);
-        driver.switchTo().defaultContent();
-        return element;
-    }
+  public WebElement getIframe() {
+    return iframe;
+  }
 
-    public WebElement getIframe() {
-        return iframe;
-    }
+  public void play() {
+    waitForVideoReadyToPlay();
+    runInAdFrame(() -> playTriggerButton.click());
+  }
 
-    public void play() {
-        driver.switchTo().frame(iframe);
+  private interface Lambda {
+    void run();
+  }
 
-        try {
-            Thread.sleep(2000); // TODO replace with "wait for video will be ready to play"
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+  private void runInAdFrame(Lambda f) {
+    driver.switchTo().frame(iframe);
+    f.run();
+    driver.switchTo().defaultContent();
+  }
 
-        playTriggerButton.click();
-        driver.switchTo().defaultContent();
-    }
+  private void waitForVideoReadyToPlay() {
+    runInAdFrame(() -> wait.forElementVisible(playTriggerButtonSelector));
+  }
 
-    public void waitForVideoPlayerVisible() {
-        wait.forElementVisible(UIElementsSelector);
-    }
+  public void waitForVideoPlayerVisible() {
+    wait.forElementVisible(UIElementsSelector);
+  }
 
-    public void waitForVideoPlayerHidden() {
-        wait.forElementNotVisible(UIElementsSelector);
-    }
+  public void waitForVideoPlayerHidden() {
+    wait.forElementNotVisible(UIElementsSelector);
+  }
+
+  public void waitForVideoEnd() { wait.forElementPresent(videoContainerSelector, VIDEO_LENGTH); }
+
+  public void waitForVideoStart() { waitForVideoPlayerVisible(); }
 }
