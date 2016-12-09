@@ -18,27 +18,25 @@ public class VUAP {
   public VUAP(WikiaWebDriver driver, String slotName) {
     this.wait = new Wait(driver);
     this.driver = driver;
-    iframe = findIframe(slotName);
-    playTriggerButton = findTriggerButton(driver);
-  }
-
-  private WebElement findIframe(String slotName) {
-    By iframeSelector = By.id(getAdUnit(slotName));
-    wait.forElementPresent(iframeSelector);
-    return driver.findElement(iframeSelector);
+    setIframe(slotName);
+    setTriggerButton(driver);
   }
 
   private String getAdUnit(String slotName) {
     return "google_ads_iframe_/5441/wka.life/_project43//article/gpt/" + slotName + "_0";
   }
 
-  private WebElement findTriggerButton(WikiaWebDriver driver) {
-    driver.switchTo().frame(iframe);
+  private void setIframe(String slotName) {
+    By iframeSelector = By.id(getAdUnit(slotName));
+    wait.forElementPresent(iframeSelector);
+    iframe = driver.findElement(iframeSelector);
+  }
 
-    wait.forElementClickable(playTriggerButtonSelector);
-    WebElement element = driver.findElement(playTriggerButtonSelector);
-    driver.switchTo().defaultContent();
-    return element;
+  private void setTriggerButton(WikiaWebDriver driver) {
+    runInAdFrame(() -> {
+      wait.forElementClickable(playTriggerButtonSelector);
+      playTriggerButton = driver.findElement(playTriggerButtonSelector);
+    });
   }
 
   public WebElement getIframe() {
@@ -47,16 +45,17 @@ public class VUAP {
 
   public void play() {
     waitForVideoReadyToPlay();
+    runInAdFrame(() -> playTriggerButton.click());
+  }
 
+  private void runInAdFrame(Runnable f) {
     driver.switchTo().frame(iframe);
-    playTriggerButton.click();
+    f.run();
     driver.switchTo().defaultContent();
   }
 
   private void waitForVideoReadyToPlay() {
-    driver.switchTo().frame(iframe);
-    wait.forElementVisible(playTriggerButtonSelector);
-    driver.switchTo().defaultContent();
+    runInAdFrame(() -> wait.forElementVisible(playTriggerButtonSelector));
   }
 
   public void waitForVideoPlayerVisible() {
