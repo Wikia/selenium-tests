@@ -35,21 +35,21 @@ public class TestVUAP extends TemplateNoFirstLoad {
           groups = "AdsVuapSizes"
   )
   public void testSlotSizes(String slotName, Page page) {
-    final int IMAGE_WIDTH = 1830;
-    final int IMAGE_HEIGHT = 744;
+    final int imageWidth = 1830;
+    final int imageHeight = 744;
 
-    final int VIDEO_WIDTH = 1830;
-    final int VIDEO_HEIGHT = 1034;
+    final int videoWidth = 1830;
+    final int videoHeight = 1034;
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
     VUAP vuap = new VUAP(driver, slotName);
 
-    ads.verifySlotSize(slotName, IMAGE_WIDTH, IMAGE_HEIGHT);
+    ads.verifySlotSize(slotName, imageWidth, imageHeight);
     vuap.play();
     vuap.waitForVideoStart();
-    ads.verifySlotSize(slotName, VIDEO_WIDTH, VIDEO_HEIGHT);
+    ads.verifySlotSize(slotName, videoWidth, videoHeight);
     vuap.waitForVideoEnd();
-    ads.verifySlotSize(slotName, IMAGE_WIDTH, IMAGE_HEIGHT);
+    ads.verifySlotSize(slotName, imageWidth, imageHeight);
   }
 }
