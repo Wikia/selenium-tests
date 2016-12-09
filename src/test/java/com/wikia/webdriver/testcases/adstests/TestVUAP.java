@@ -8,6 +8,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
+@Test(
+        groups = "AdsVuap"
+)
 public class TestVUAP extends TemplateNoFirstLoad {
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
