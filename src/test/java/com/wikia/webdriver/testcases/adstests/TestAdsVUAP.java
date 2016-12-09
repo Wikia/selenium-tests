@@ -16,12 +16,8 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   private static final String PROJECT43 = "project43";
   private static final String VUAP_ARTICLE = "SyntheticTests/VUAP";
 
-  private final String clickThroughUrl() {
-    return driver.getCurrentUrl();
-  }
-
   @Test(
-          groups = "AdsVuapOasis"
+          groups = {"AdsVuapOasis" , "AdsTopAdVideoClosesWhenFinishPlaysOasis"}
   )
   public void adsTopAdVideoClosesWhenFinishPlaysOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
@@ -35,7 +31,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "AdsVuapOasis"
+          groups = {"AdsVuapOasis", "AdsBottomAdVideoClosesWhenFinishPlaysOasis"}
   )
   public void adsBottomAdVideoClosesWhenFinishPlaysOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
@@ -51,26 +47,24 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   }
 
   @Test(
-          groups = "AdsVuapOasis"
+          groups = {"AdsVuapOasis", "AdsTopAdImageClickedOpensNewPageOasis"}
   )
   public void adsTopAdImageClickedOpensNewPageOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     ads.clickOnAdImage(AdsContent.TOP_LB);
-    ads.switchToNewBrowserTab();
-    Assertion.assertEquals(clickThroughUrl(), FANDOM_URL);
+    Assertion.assertEquals(ads.switchToNewBrowserTab(), FANDOM_URL);
 
   }
 
   @Test(
-          groups = "AdsVuapOasis"
+          groups = {"AdsVuapOasis", "AdsBottomAdImageClickedOpensNewPageOasis"}
   )
   public void adsBottomAdImageClickedOpensNewPageOasis() {
     Page page = new Page(PROJECT43, VUAP_ARTICLE);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     ads.scrollToBottomLeaderboard();
     ads.clickOnAdImage(AdsContent.BOTTOM_LB);
-    ads.switchToNewBrowserTab();
-    Assertion.assertEquals(clickThroughUrl(), FANDOM_URL);
+    Assertion.assertEquals(ads.switchToNewBrowserTab(), FANDOM_URL);
   }
 }

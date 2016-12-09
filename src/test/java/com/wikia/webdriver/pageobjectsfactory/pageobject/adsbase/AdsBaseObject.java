@@ -79,6 +79,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
 
+  private WebElement adSelector(String slotName){
+    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+  }
+
   public AdsBaseObject(WebDriver driver) {
     super();
   }
@@ -778,16 +782,16 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
   }
-  // This scroll has been created becouse ad is not displayed if we scroll quickly to the Footer ADEN-4359
+  // This scroll has been created because ad is not displayed if we scroll quickly to the Footer ADEN-4359
   public void scrollToBottomLeaderboard(){
     scrollToFooter();
-    scrollTo(presentLeaderboard);
+    wait.forElementVisible(By.cssSelector(".editarea"));
     scrollToFooter();
   }
 
   public void clickOnAdImage(String slotName){
-    wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-    driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName))).click();
+    wait.forElementVisible(adSelector(slotName));
+    adSelector(slotName).click();
     PageObjectLogging.log("clickOnAdImage", slotName + " is clicked", true);
   }
 
