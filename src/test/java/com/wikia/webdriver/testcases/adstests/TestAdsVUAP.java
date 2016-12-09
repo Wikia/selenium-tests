@@ -82,7 +82,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPTopDesktop",
           groups = {"AdsVuapSizes", "AdsVuapTopOasis"}
   )
-  public void AdsCheckSlotSizesOasis(String slotName, Page page) {
+  public void adsCheckSlotSizesOasis(String slotName, Page page) {
     final int imageWidth = 1830;
     final int imageHeight = 744;
 
