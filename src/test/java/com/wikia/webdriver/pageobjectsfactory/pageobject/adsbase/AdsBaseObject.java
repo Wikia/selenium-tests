@@ -79,10 +79,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   @FindBy(css = ".mobile-bottom-leaderboard")
   private WebElement mobileBottomLeaderboard;
 
-  private WebElement adSelector(String slotName){
-    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-  }
-
   public AdsBaseObject(WebDriver driver) {
     super();
   }
@@ -105,6 +101,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void timerStart() {
     tStart = System.currentTimeMillis();
+  }
+
+  private WebElement adSelector(String slotName){
+    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName)));
   }
 
   public String getNumberOfSecondsFromStart() {
