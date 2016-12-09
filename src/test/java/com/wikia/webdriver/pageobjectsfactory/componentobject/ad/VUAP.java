@@ -48,7 +48,11 @@ public class VUAP {
     runInAdFrame(() -> playTriggerButton.click());
   }
 
-  private void runInAdFrame(Runnable f) {
+  private interface Lambda {
+    void run();
+  }
+
+  private void runInAdFrame(Lambda f) {
     driver.switchTo().frame(iframe);
     f.run();
     driver.switchTo().defaultContent();
