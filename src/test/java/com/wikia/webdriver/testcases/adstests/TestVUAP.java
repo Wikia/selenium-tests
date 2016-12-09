@@ -20,7 +20,7 @@ public class TestVUAP extends TemplateNoFirstLoad {
           groups = "AdsVuapFlow"
   )
   public void testVideoPlayFlow(String slotName, Page page) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
     VUAP vuap = new VUAP(driver, slotName);
     vuap.play();
