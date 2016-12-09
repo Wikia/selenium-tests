@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.inject.spi.Element;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
