@@ -1,9 +1,11 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
@@ -45,6 +47,9 @@ public class GuidelinesPage extends WikiBasePageObject {
     @FindBy(css = ".discussion-standalone-editor-textarea")
     private WebElement guidelinesText;
 
+    @FindBy(css = "modal-dialog-wrapper")
+    private WebElement wrapperDiscussionsGuidelines;
+
     public GuidelinesPage open() {
         driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
         return this;
@@ -58,7 +63,8 @@ public class GuidelinesPage extends WikiBasePageObject {
     }
 
     public void clickEditGuidelines() {
-        wait.forElementClickable(editButton);
+//        wait.forElementClickable(editButton);
+        wait.forElementNotVisible(By.className("discussion-standalone-editor"));
         editButton.click();
     }
 
@@ -74,31 +80,56 @@ public class GuidelinesPage extends WikiBasePageObject {
         }
     }
 
-    public boolean isGuidelinesHeroUnitDisplayed() {
-        try {
-            wait.forElementVisible(heroUnit);
+//    public boolean isGuidelinesHeroUnitDisplayed() {
+//        try {
+//            wait.forElementVisible(heroUnit);
+//
+//            return heroUnit.isDisplayed();
+//        } catch (TimeoutException e) {
+//            PageObjectLogging.logInfo("heroUnit is not displayed", e);
+//
+//            return false;
+//        }
+//    }
 
-            return heroUnit.isDisplayed();
+    public boolean isGuidelinesHeroUnitDisplayed() {
+        return isSthg(heroUnit);
+    }
+
+    private boolean isSthg(WebElement element) {
+        boolean result = false;
+
+        try {
+            wait.forElementVisible(element);
+            result = element.isDisplayed();
         } catch (TimeoutException e) {
             PageObjectLogging.logInfo("heroUnit is not displayed", e);
-
-            return false;
         }
+
+        return result;
     }
 
     public boolean isGuidelinesTextDisplayed() {
-        try {
-            wait.forElementVisible(contentText);
-
-            return contentText.isDisplayed();
-        } catch (TimeoutException e) {
-            PageObjectLogging.logInfo("contentText is not displayed", e);
-
-            return false;
-        }
+        return isSthg(contentText);
     }
 
+//    public boolean isGuidelinesTextDisplayed() {
+//        try {
+//            wait.forElementVisible(contentText);
+//
+//            return contentText.isDisplayed();
+//        } catch (TimeoutException e) {
+//            PageObjectLogging.logInfo("contentText is not displayed", e);
+//
+//            return false;
+//        }
+//    }
+
     public boolean isEditButtonDisplayed() {
+        return isSthg(editButton);
+    }
+
+    /*public boolean isEditButtonDisplayed() {
         try {
             wait.forElementVisible(editButton);
 
@@ -108,7 +139,7 @@ public class GuidelinesPage extends WikiBasePageObject {
 
             return false;
         }
-    }
+    }*/
 
     public void clickSaveButton() {
         wait.forElementClickable(saveButton);
@@ -118,7 +149,6 @@ public class GuidelinesPage extends WikiBasePageObject {
     public void guidelinesAddNewText(String contentText) {
         driver.findElement(By.className("discussion-standalone-editor-textarea")).sendKeys(contentText);
         clickSaveButton();
-       //driver.findElement(By.className("discussion-standalone-editor-textarea")).getText().replace(contentText, "");
     }
 
     public void verifyContentNevTextInGuidelines(String content) {
@@ -126,19 +156,19 @@ public class GuidelinesPage extends WikiBasePageObject {
     }
 
     public void testNewTextToGuidelines() {
-        String guidelinesText =  TextGenerator.createUniqueText();
+        String guidelinesText = TextGenerator.createUniqueText();
         clickEditGuidelines();
         guidelinesAddNewText(guidelinesText);
         verifyContentNevTextInGuidelines(guidelinesText);
+        contentText.isDisplayed();
+
         clickEditGuidelines();
-        //driver.findElement(By.className("discussion-standalone-editor-textarea")).getText().replace((CharSequence) contentText, "");
         String replace = driver.findElement(By.className("discussion-standalone-editor-textarea")).getText()
-                .replace(guidelinesText, "");
+            .replace(guidelinesText, "");
         guidelinesAddNewText(replace);
-        clickSaveButton();
     }
 
-     public boolean isNewGuidelinesTextDispleyed() {
+     public boolean isNewGuidelinesTextDisplayed() {
 
         try {
             testNewTextToGuidelines();
@@ -148,5 +178,5 @@ public class GuidelinesPage extends WikiBasePageObject {
 
             return false;
         }
-    }
+     }
 }

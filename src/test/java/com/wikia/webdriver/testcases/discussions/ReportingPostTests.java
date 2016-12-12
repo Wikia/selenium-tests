@@ -202,7 +202,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
@@ -664,7 +664,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnPostListPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
