@@ -1324,4 +1324,14 @@ public class AdsDataProvider {
         }
     };
   }
+
+  @DataProvider
+  public static Object[][] adsVUAPDesktop() {
+    return new Object[][]{
+      {
+        "TOP_LEADERBOARD",
+        new Page("project43", "SyntheticTests/VUAP")
+      }
+    };
+  }
 }
