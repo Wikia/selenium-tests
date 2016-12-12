@@ -52,6 +52,10 @@ public class VUAP {
     runInAdFrame(() -> playTriggerButton.click());
   }
 
+  public void pause() {
+    driver.findElement(By.className("overVideoLayer")).click();
+  }
+
   private interface Lambda {
     void run();
   }

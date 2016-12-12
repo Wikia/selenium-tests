@@ -120,4 +120,28 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
     Assert.assertEquals(time + delay, vuap.getCurrentVideoTime().intValue());
   }
+
+  @Test(
+          dataProviderClass = AdsDataProvider.class,
+          dataProvider = "adsVUAPTopDesktop",
+          groups = {"AdsVuapPause", "AdsVuapTopOasis"}
+  )
+  public void adsVuapPause(String slotName, Page page) throws InterruptedException {
+    int delay = 2;
+
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    VUAP vuap = new VUAP(driver, slotName);
+
+    vuap.play();
+    vuap.waitForVideoStart();
+    Thread.sleep(delay * 1000);
+
+    vuap.pause();
+    int time = vuap.getCurrentVideoTime().intValue();
+
+    Thread.sleep(delay * 1000);
+
+    Assert.assertNotEquals(0, vuap.getCurrentVideoTime().intValue());
+    Assert.assertEquals(time, vuap.getCurrentVideoTime().intValue());
+  }
 }
