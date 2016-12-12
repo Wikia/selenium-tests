@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VUAP;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(
@@ -96,5 +97,27 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), videoHeight);
     vuap.waitForVideoEnd();
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
+  }
+
+  @Test(
+          dataProviderClass = AdsDataProvider.class,
+          dataProvider = "adsVUAPTopDesktop",
+          groups = {"AdsVuapTimeProgressing", "AdsVuapTopOasis"}
+  )
+  public void adsVuapTimeProgressing(String slotName, Page page) throws InterruptedException {
+    int delay = 2;
+
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    VUAP vuap = new VUAP(driver, slotName);
+
+    vuap.play();
+    vuap.waitForVideoStart();
+    Thread.sleep(delay * 1000);
+
+    int time = vuap.getCurrentVideoTime().intValue();
+
+    Thread.sleep(delay * 1000);
+
+    Assert.assertEquals(time + delay, vuap.getCurrentVideoTime().intValue());
   }
 }
