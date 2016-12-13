@@ -6,7 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class VUAP {
+  public static final double IMAGE_ASPECT_RATIO = 2.459;
+  public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
+
   private static By videoContainerSelector = By.cssSelector(".video-ima-container.hidden");
   private static By playTriggerButtonSelector = By.id("button");
   private static By UIElementsSelector = By.className("overVideoLayer");
