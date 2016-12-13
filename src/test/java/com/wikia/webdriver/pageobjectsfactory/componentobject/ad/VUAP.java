@@ -10,7 +10,6 @@ public class VUAP {
   public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
   private static final By VIDEO_IFRAME_SELECTOR = By.cssSelector(".video-ima-container iframe");
-
   private static By videoContainerSelector = By.cssSelector(".video-ima-container.hidden");
   private static By playTriggerButtonSelector = By.id("button");
   private static By UIElementsSelector = By.className("overVideoLayer");
@@ -19,19 +18,19 @@ public class VUAP {
   private WebElement iframe;
   private WebElement playTriggerButton;
 
-  public VUAP(WikiaWebDriver driver, String slotName) {
+  public VUAP(WikiaWebDriver driver, String platform, String slotName) {
     this.wait = new Wait(driver);
     this.driver = driver;
-    setIframe(slotName);
+    setIframe(platform, slotName);
     setTriggerButton(driver);
   }
 
-  private String getAdUnit(String slotName) {
-    return "google_ads_iframe_/5441/wka.life/_project43//article/gpt/" + slotName + "_0";
+  private String getAdUnit(String platform, String slotName) {
+    return "google_ads_iframe_/5441/wka.life/_project43//article/" + platform + "/" + slotName + "_0";
   }
 
-  private void setIframe(String slotName) {
-    By iframeSelector = By.id(getAdUnit(slotName));
+  private void setIframe(String platform, String slotName) {
+    By iframeSelector = By.id(getAdUnit(platform, slotName));
     wait.forElementPresent(iframeSelector);
     iframe = driver.findElement(iframeSelector);
   }
@@ -48,8 +47,7 @@ public class VUAP {
   }
 
   public void play() {
-    waitForVideoReadyToPlay();
-    runInAdFrame(() -> playTriggerButton.click());
+    runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
   }
 
   public void pause() {
@@ -64,10 +62,6 @@ public class VUAP {
     driver.switchTo().frame(iframe);
     f.run();
     driver.switchTo().defaultContent();
-  }
-
-  private void waitForVideoReadyToPlay() {
-    runInAdFrame(() -> wait.forElementVisible(playTriggerButtonSelector));
   }
 
   public void waitForVideoPlayerVisible() {

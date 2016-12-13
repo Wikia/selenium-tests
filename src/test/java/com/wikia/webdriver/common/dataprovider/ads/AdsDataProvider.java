@@ -1325,22 +1325,34 @@ public class AdsDataProvider {
     };
   }
 
-  @DataProvider
-  public static Object[][] adsVUAPTopDesktop() {
-    return new Object[][]{
-      {
-        AdsContent.TOP_LB,
-        new Page("project43", "SyntheticTests/VUAP")
-      }
-    };
-  }
+    @DataProvider
+    public static Object[][] adsVUAPTopDesktop() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        ImmutableMap.of("src", "gpt", "slotName", AdsContent.TOP_LB)
+
+                }
+        };
+    }
 
     @DataProvider
     public static Object[][] adsVUAPBottomDesktop() {
         return new Object[][]{
                 {
-                        AdsContent.BOTTOM_LB,
-                        new Page("project43", "SyntheticTests/VUAP")
+
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        ImmutableMap.of("src", "gpt", "slotName", AdsContent.BOTTOM_LB)
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] adsVUAPTopMercury() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        ImmutableMap.of("src", "mobile", "slotName", AdsContent.MOBILE_TOP_LB)
                 }
         };
     }
