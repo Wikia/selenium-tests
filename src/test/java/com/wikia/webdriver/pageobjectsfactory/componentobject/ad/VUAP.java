@@ -6,7 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class VUAP {
+  public static final double IMAGE_ASPECT_RATIO = 2.459;
+  public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
+  private static final By VIDEO_IFRAME_SELECTOR = By.cssSelector(".video-ima-container iframe");
+
   private static By videoContainerSelector = By.cssSelector(".video-ima-container.hidden");
   private static By playTriggerButtonSelector = By.id("button");
   private static By UIElementsSelector = By.className("overVideoLayer");
@@ -48,6 +52,10 @@ public class VUAP {
     runInAdFrame(() -> playTriggerButton.click());
   }
 
+  public void pause() {
+    driver.findElement(By.className("overVideoLayer")).click();
+  }
+
   private interface Lambda {
     void run();
   }
@@ -73,4 +81,14 @@ public class VUAP {
   public void waitForVideoEnd() { wait.forElementPresent(videoContainerSelector, VIDEO_LENGTH); }
 
   public void waitForVideoStart() { waitForVideoPlayerVisible(); }
+
+  public Double getCurrentVideoTime() {
+    String result;
+
+    driver.switchTo().frame(driver.findElement(VIDEO_IFRAME_SELECTOR));
+    result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
+    driver.switchTo().defaultContent();
+
+    return Double.parseDouble(result);
+  }
 }
