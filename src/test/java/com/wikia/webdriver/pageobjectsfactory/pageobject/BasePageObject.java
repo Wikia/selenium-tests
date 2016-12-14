@@ -534,9 +534,11 @@ public class BasePageObject {
                                                 + targetHeight + ")", true, driver);
   }
 
-  public void switchToNewBrowserTab() {
+  public String switchToNewBrowserTab() {
     List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
     driver.switchTo().window(tabs.get(tabs.size() - 1));
+
+    return driver.getCurrentUrl();
   }
 
   public int getElementBottomPositionByCssSelector(String elementName) {
