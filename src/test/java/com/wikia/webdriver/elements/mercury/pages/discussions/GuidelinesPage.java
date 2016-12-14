@@ -102,8 +102,8 @@ public class GuidelinesPage extends WikiBasePageObject {
   }
 
   public void guidelinesAddNewText(String contentText) {
-    driver.findElement(By.className("discussion-standalone-editor-textarea")).clear();
-    driver.findElement(By.className("discussion-standalone-editor-textarea")).sendKeys(contentText);
+    this.guidelinesText.clear();
+    this.guidelinesText.sendKeys(contentText);
     clickSaveButton();
   }
 
