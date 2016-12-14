@@ -1331,7 +1331,6 @@ public class AdsDataProvider {
                 {
                         new Page("project43", "SyntheticTests/VUAP"),
                         ImmutableMap.of("src", "gpt", "slotName", AdsContent.TOP_LB)
-
                 }
         };
     }

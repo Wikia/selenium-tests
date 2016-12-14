@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 @Test(
-        groups = "AdsVuapDesctop"
+        groups = "AdsVuapDesktop"
 )
 public class TestAdsVUAP extends TemplateNoFirstLoad {
 
@@ -21,6 +22,8 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
   private static final String SLOT_NAME = "slotName";
   private static final String SRC = "src";
+  private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
+  private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
   private static final int DELAY = 2;
   private static final int VIDEO_START_TIME = 0;
 
@@ -108,38 +111,47 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
   }
 
+  @NetworkTrafficDump
   @Test(
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsVuapTimeProgressing"
   )
   public void adsVuapTimeProgressing(Page page, Map<String, String> map) throws InterruptedException {
-    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    networkTrafficInterceptor.startIntercepting();
+
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
 
     vuap.play();
     vuap.waitForVideoStart();
-    Thread.sleep(DELAY * 1000);
 
-    int time = vuap.getCurrentVideoTime().intValue();
+    ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-    Thread.sleep(DELAY * 1000);
+    int quartileTime = vuap.getCurrentVideoTime().intValue();
 
-    Assert.assertEquals(time + DELAY, vuap.getCurrentVideoTime().intValue());
+    ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
+
+    int midTime = vuap.getCurrentVideoTime().intValue();
+
+    Assertion.assertTrue(vuap.isTimeProgressing(quartileTime, midTime));
   }
 
+  @NetworkTrafficDump
   @Test(
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsVuapPause"
   )
   public void adsVuapPause(Page page, Map<String, String> map) throws InterruptedException {
-    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    networkTrafficInterceptor.startIntercepting();
+
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
 
     vuap.play();
     vuap.waitForVideoStart();
-    Thread.sleep(DELAY * 1000);
+    ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
     vuap.pause();
     int time = vuap.getCurrentVideoTime().intValue();

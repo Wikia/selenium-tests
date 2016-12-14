@@ -85,4 +85,11 @@ public class VUAP {
 
     return Double.parseDouble(result);
   }
+
+  public boolean isTimeProgressing(int quartileTime, int midTime) {
+    if (quartileTime < midTime){
+      return true;
+    }
+    return false;
+  }
 }
