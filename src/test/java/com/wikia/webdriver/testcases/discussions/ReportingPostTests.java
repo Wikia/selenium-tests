@@ -45,7 +45,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
     PostsListPage page = openPostsListPage();
 
