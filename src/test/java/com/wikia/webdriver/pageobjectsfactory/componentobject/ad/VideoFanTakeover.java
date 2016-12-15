@@ -2,15 +2,15 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class VUAP {
+public class VideoFanTakeover {
   public static final double IMAGE_ASPECT_RATIO = 2.459;
   public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
   private static final By VIDEO_IFRAME_SELECTOR = By.cssSelector(".video-ima-container iframe");
-
   private static By videoContainerSelector = By.cssSelector(".video-ima-container.hidden");
   private static By playTriggerButtonSelector = By.id("button");
   private static By UIElementsSelector = By.className("overVideoLayer");
@@ -19,19 +19,15 @@ public class VUAP {
   private WebElement iframe;
   private WebElement playTriggerButton;
 
-  public VUAP(WikiaWebDriver driver, String slotName) {
+  public VideoFanTakeover(WikiaWebDriver driver, String iframeId) {
     this.wait = new Wait(driver);
     this.driver = driver;
-    setIframe(slotName);
+    setIframe(iframeId);
     setTriggerButton(driver);
   }
 
-  private String getAdUnit(String slotName) {
-    return "google_ads_iframe_/5441/wka.life/_project43//article/gpt/" + slotName + "_0";
-  }
-
-  private void setIframe(String slotName) {
-    By iframeSelector = By.id(getAdUnit(slotName));
+  private void setIframe(String iframeId) {
+    By iframeSelector = By.id(iframeId);
     wait.forElementPresent(iframeSelector);
     iframe = driver.findElement(iframeSelector);
   }
@@ -48,8 +44,7 @@ public class VUAP {
   }
 
   public void play() {
-    waitForVideoReadyToPlay();
-    runInAdFrame(() -> playTriggerButton.click());
+    runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
   }
 
   public void pause() {
@@ -64,10 +59,6 @@ public class VUAP {
     driver.switchTo().frame(iframe);
     f.run();
     driver.switchTo().defaultContent();
-  }
-
-  private void waitForVideoReadyToPlay() {
-    runInAdFrame(() -> wait.forElementVisible(playTriggerButtonSelector));
   }
 
   public void waitForVideoPlayerVisible() {
@@ -90,5 +81,12 @@ public class VUAP {
     driver.switchTo().defaultContent();
 
     return Double.parseDouble(result);
+  }
+
+  public boolean isTimeProgressing(int quartileTime, int midTime) {
+    if (quartileTime < midTime){
+      return true;
+    }
+    return false;
   }
 }
