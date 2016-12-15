@@ -15,24 +15,21 @@ import java.util.Map;
 )
 public class TestAdsVuapMercury extends MobileTestTemplate {
 
-    private static final String FANDOM_URL = "http://www.wikia.com/fandom";
-    private static final String URL = "pagead2.googlesyndication.com/pagead/gen_204?rt";
-    private static final String SLOT_NAME = "slotName";
-    private static final String SRC = "src";
+    private static final String TOP_VIDEO_URL = "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD";
 
-    @NetworkTrafficDump
+
+    @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
             dataProvider = "adsVUAPTopMercury",
             groups = "AdsTopAdVideoClosesWhenFinishPlaysMercury"
     )
-    public void adsTopAdVideoClosesWhenFinishPlaysMercury(Page page, Map<String, String> map) {
+    public void adsTopAdVideoClosesWhenFinishPlaysMercury(Page page, String slotName, String iframeId) {
         networkTrafficInterceptor.startIntercepting();
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
-        ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL);
+        ads.wait.forSuccessfulResponse(networkTrafficInterceptor, TOP_VIDEO_URL);
 
-
-        VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
+        VUAP vuap = new VUAP(driver, iframeId);
         vuap.play();
 
         vuap.waitForVideoPlayerVisible();

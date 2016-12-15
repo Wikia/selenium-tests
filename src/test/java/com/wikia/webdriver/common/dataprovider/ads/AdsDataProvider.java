@@ -1358,7 +1358,11 @@ public class AdsDataProvider {
         return new Object[][]{
                 {
                         new Page("project43", "SyntheticTests/VUAP"),
-                        ImmutableMap.of("src", "mobile", "slotName", AdsContent.MOBILE_TOP_LB)
+                        AdsContent.MOBILE_TOP_LB,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
+                                AdsContent.MOBILE_TOP_LB
+                        )
                 }
         };
     }
