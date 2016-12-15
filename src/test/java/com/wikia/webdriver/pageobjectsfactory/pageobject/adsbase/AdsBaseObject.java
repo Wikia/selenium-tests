@@ -99,6 +99,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     driver.manage().window().setSize(resolution);
   }
 
+  private WebElement adSelector(String slotName){
+    return wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+  }
+
   public void timerStart() {
     tStart = System.currentTimeMillis();
   }
@@ -386,6 +390,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return getGptParams(slotName, "data-gpt-page-params");
   }
 
+  public int getViewPortWidth() {
+    return driver.findElement(By.cssSelector("body")).getSize().getWidth();
+  }
+
   public void verifyMonocolorAd(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
@@ -502,7 +510,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
   }
 
-  private void waitForElementToHaveSize(int width, int height, WebElement element) {
+  public void waitForElementToHaveSize(int width, int height, WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
@@ -778,6 +786,18 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
   }
+  // This scroll has been created because ad is not displayed if we scroll quickly to the Footer ADEN-4359
+  public void scrollToBottomLeaderboard(){
+    scrollToFooter();
+    wait.forElementVisible(By.cssSelector(".editarea"));
+    scrollToFooter();
+  }
+
+  public void clickOnAdImage(String slotName){
+    adSelector(slotName);
+    adSelector(slotName).click();
+    PageObjectLogging.log("clickOnAdImage", slotName + " is clicked", true);
+  }
 
   public boolean isMobileInContentAdDisplayed() {
     try{
@@ -807,5 +827,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
       return false;
     }
+  }
+
+  public void verifySlotSize(String slotName, int width, int height) {
+    waitForElementToHaveSize(width, height, driver.findElement(By.id(slotName)));
   }
 }
