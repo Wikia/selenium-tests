@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VUAP;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.Dimension;
@@ -32,11 +32,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   public void adsTopAdVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    VUAP vuap = new VUAP(driver, iframeId);
-    vuap.play();
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    videoFanTakeover.play();
 
-    vuap.waitForVideoPlayerVisible();
-    vuap.waitForVideoPlayerHidden();
+    videoFanTakeover.waitForVideoPlayerVisible();
+    videoFanTakeover.waitForVideoPlayerHidden();
   }
 
 
@@ -50,11 +50,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
     ads.scrollToBottomLeaderboard();
 
-    VUAP vuap = new VUAP(driver, iframeId);
-    vuap.play();
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    videoFanTakeover.play();
 
-    vuap.waitForVideoPlayerVisible();
-    vuap.waitForVideoPlayerHidden();
+    videoFanTakeover.waitForVideoPlayerVisible();
+    videoFanTakeover.waitForVideoPlayerHidden();
   }
 
   @Test(
@@ -92,16 +92,16 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   public void adsCheckSlotSizesOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    final int imageHeight = (int) (ads.getViewPortWidth() / VUAP.IMAGE_ASPECT_RATIO);
-    final int videoHeight = (int) (ads.getViewPortWidth() / VUAP.VIDEO_ASPECT_RATIO);
+    final int imageHeight = (int) (ads.getViewPortWidth() / VideoFanTakeover.IMAGE_ASPECT_RATIO);
+    final int videoHeight = (int) (ads.getViewPortWidth() / VideoFanTakeover.VIDEO_ASPECT_RATIO);
 
-    VUAP vuap = new VUAP(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
-    vuap.play();
-    vuap.waitForVideoStart();
+    videoFanTakeover.play();
+    videoFanTakeover.waitForVideoStart();
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), videoHeight);
-    vuap.waitForVideoEnd();
+    videoFanTakeover.waitForVideoEnd();
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
   }
 
@@ -115,20 +115,20 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    VUAP vuap = new VUAP(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    vuap.play();
-    vuap.waitForVideoStart();
+    videoFanTakeover.play();
+    videoFanTakeover.waitForVideoStart();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-    int quartileTime = vuap.getCurrentVideoTime().intValue();
+    int quartileTime = videoFanTakeover.getCurrentVideoTime().intValue();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
 
-    int midTime = vuap.getCurrentVideoTime().intValue();
+    int midTime = videoFanTakeover.getCurrentVideoTime().intValue();
 
-    Assertion.assertTrue(vuap.isTimeProgressing(quartileTime, midTime));
+    Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
   }
 
   @NetworkTrafficDump
@@ -141,18 +141,18 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    VUAP vuap = new VUAP(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    vuap.play();
-    vuap.waitForVideoStart();
+    videoFanTakeover.play();
+    videoFanTakeover.waitForVideoStart();
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-    vuap.pause();
-    int time = vuap.getCurrentVideoTime().intValue();
+    videoFanTakeover.pause();
+    int time = videoFanTakeover.getCurrentVideoTime().intValue();
 
     Thread.sleep(DELAY * 1000);
 
-    Assert.assertNotEquals(VIDEO_START_TIME, vuap.getCurrentVideoTime().intValue());
-    Assert.assertEquals(time, vuap.getCurrentVideoTime().intValue());
+    Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTime().intValue());
+    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTime().intValue());
   }
 }

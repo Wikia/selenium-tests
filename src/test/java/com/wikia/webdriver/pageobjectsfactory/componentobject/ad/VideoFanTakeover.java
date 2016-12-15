@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class VUAP {
+public class VideoFanTakeover {
   public static final double IMAGE_ASPECT_RATIO = 2.459;
   public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
@@ -19,7 +19,7 @@ public class VUAP {
   private WebElement iframe;
   private WebElement playTriggerButton;
 
-  public VUAP(WikiaWebDriver driver, String iframeId) {
+  public VideoFanTakeover(WikiaWebDriver driver, String iframeId) {
     this.wait = new Wait(driver);
     this.driver = driver;
     setIframe(iframeId);

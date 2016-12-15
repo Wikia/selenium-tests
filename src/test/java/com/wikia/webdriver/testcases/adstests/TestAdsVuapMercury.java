@@ -4,10 +4,9 @@ import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VUAP;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
-
 
 @Test(
         groups = "AdsVuapMercury"
@@ -28,10 +27,10 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, TOP_VIDEO_URL);
 
-        VUAP vuap = new VUAP(driver, iframeId);
-        vuap.play();
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        videoFanTakeover.play();
 
-        vuap.waitForVideoPlayerVisible();
-        vuap.waitForVideoPlayerHidden();
+        videoFanTakeover.waitForVideoPlayerVisible();
+        videoFanTakeover.waitForVideoPlayerHidden();
     }
 }
