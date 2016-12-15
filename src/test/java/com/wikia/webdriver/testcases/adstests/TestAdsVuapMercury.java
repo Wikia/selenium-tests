@@ -8,7 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VUAP;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
-import java.util.Map;
 
 @Test(
         groups = "AdsVuapMercury"
