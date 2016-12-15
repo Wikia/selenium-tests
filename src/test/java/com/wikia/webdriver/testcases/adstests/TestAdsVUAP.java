@@ -7,11 +7,10 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VUAP;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Map;
 
 @Test(
         groups = "AdsVuapDesktop"
@@ -20,24 +19,20 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
-  private static final String AD_UNIT= "adUnit";
-  private static final String SLOT_NAME = "slotName";
-  private static final String SRC = "src";
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
   private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
   private static final int DELAY = 2;
   private static final int VIDEO_START_TIME = 0;
-
 
   @Test(
           dataProviderClass = AdsDataProvider.class,
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsTopAdVideoClosesWhenFinishPlaysOasis"
   )
-  public void adsTopAdVideoClosesWhenFinishPlaysOasis(Page page, Map<String, String> map) {
+  public void adsTopAdVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
+    VUAP vuap = new VUAP(driver, iframeId);
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
@@ -50,12 +45,12 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPBottomDesktop",
           groups = "AdsBottomAdVideoClosesWhenFinishPlaysOasis"
   )
-  public void adsBottomAdVideoClosesWhenFinishPlaysOasis(Page page, Map<String,String> map) {
+  public void adsBottomAdVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
     ads.scrollToBottomLeaderboard();
 
-    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
+    VUAP vuap = new VUAP(driver, iframeId);
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
@@ -67,10 +62,10 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsTopAdImageClickedOpensNewPageOasis"
   )
-  public void adsTopAdImageClickedOpensNewPageOasis(Page page, Map<String, String> map) {
+  public void adsTopAdImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    ads.clickOnAdImage(map.get(SLOT_NAME));
+    ads.clickOnAdImage(slotName);
 
     Assertion.assertEquals(ads.switchToNewBrowserTab(), FANDOM_URL);
   }
@@ -80,11 +75,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPBottomDesktop",
           groups = "AdsBottomAdImageClickedOpensNewPageOasis"
   )
-  public void adsBottomAdImageClickedOpensNewPageOasis(Page page, Map<String, String> map) {
+  public void adsBottomAdImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
     ads.scrollToBottomLeaderboard();
-    ads.clickOnAdImage(map.get(SLOT_NAME));
+    ads.clickOnAdImage(slotName);
 
     Assertion.assertEquals(ads.switchToNewBrowserTab(), FANDOM_URL);
   }
@@ -94,15 +89,13 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsVuapSizes"
   )
-  public void adsCheckSlotSizesOasis(Page page, Map<String, String> map) {
-    String slotName = map.get(SLOT_NAME);
-
+  public void adsCheckSlotSizesOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
     final int imageHeight = (int) (ads.getViewPortWidth() / VUAP.IMAGE_ASPECT_RATIO);
     final int videoHeight = (int) (ads.getViewPortWidth() / VUAP.VIDEO_ASPECT_RATIO);
 
-    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
+    VUAP vuap = new VUAP(driver, iframeId);
 
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
     vuap.play();
@@ -118,11 +111,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsVuapTimeProgressing"
   )
-  public void adsVuapTimeProgressing(Page page, Map<String, String> map) throws InterruptedException {
+  public void adsVuapTimeProgressing(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
+    VUAP vuap = new VUAP(driver, iframeId);
 
     vuap.play();
     vuap.waitForVideoStart();
@@ -144,11 +137,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
           dataProvider = "adsVUAPTopDesktop",
           groups = "AdsVuapPause"
   )
-  public void adsVuapPause(Page page, Map<String, String> map) throws InterruptedException {
+  public void adsVuapPause(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
+    VUAP vuap = new VUAP(driver, iframeId);
 
     vuap.play();
     vuap.waitForVideoStart();

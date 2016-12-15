@@ -1330,10 +1330,10 @@ public class AdsDataProvider {
         return new Object[][]{
                 {
                         new Page("project43", "SyntheticTests/VUAP"),
-                        ImmutableMap.of(
-                            "src", "gpt",
-                            "slotName", AdsContent.TOP_LB,
-                            "adUnit", "wka.life/_project43//article"
+                        AdsContent.TOP_LB,
+                        String.format(
+                            "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
+                            AdsContent.TOP_LB
                         )
                 }
         };
@@ -1344,10 +1344,10 @@ public class AdsDataProvider {
         return new Object[][]{
                 {
                         new Page("project43", "SyntheticTests/VUAP"),
-                        ImmutableMap.of(
-                            "src", "gpt",
-                            "slotName", AdsContent.BOTTOM_LB,
-                            "adUnit", "wka.life/_project43//article"
+                        AdsContent.BOTTOM_LB,
+                        String.format(
+                            "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
+                            AdsContent.BOTTOM_LB
                         )
                 }
         };

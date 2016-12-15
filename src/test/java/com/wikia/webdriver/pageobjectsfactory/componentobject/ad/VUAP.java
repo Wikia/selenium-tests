@@ -2,12 +2,11 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class VUAP extends AdsBaseObject {
+public class VUAP {
   public static final double IMAGE_ASPECT_RATIO = 2.459;
   public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
@@ -20,10 +19,10 @@ public class VUAP extends AdsBaseObject {
   private WebElement iframe;
   private WebElement playTriggerButton;
 
-  public VUAP(WikiaWebDriver driver, String adUnit, String slotName, String src) {
+  public VUAP(WikiaWebDriver driver, String iframeId) {
     this.wait = new Wait(driver);
     this.driver = driver;
-    setIframe(buildGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit, slotName, src));
+    setIframe(iframeId);
     setTriggerButton(driver);
   }
 
