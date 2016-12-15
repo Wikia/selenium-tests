@@ -72,10 +72,10 @@ public class GuidelinesPage extends WikiBasePageObject {
   }
 
   public boolean isGuidelinesHeroUnitDisplayed() {
-    return isSthg(heroUnit);
+    return isElementVisible(heroUnit);
   }
 
-  private boolean isSthg(WebElement element) {
+  private boolean isElementVisible(WebElement element) {
     boolean result = false;
 
     try {
@@ -89,11 +89,11 @@ public class GuidelinesPage extends WikiBasePageObject {
   }
 
   public boolean isGuidelinesTextDisplayed() {
-    return isSthg(contentText);
+    return isElementVisible(contentText);
   }
 
   public boolean isEditButtonDisplayed() {
-    return isSthg(editButton);
+    return isElementVisible(editButton);
   }
 
   public void clickSaveButton() {
@@ -107,7 +107,7 @@ public class GuidelinesPage extends WikiBasePageObject {
     clickSaveButton();
   }
 
-  public void verifyContentNevTextInGuidelines(String content) {
+  public void verifyContentNewTextInGuidelines(String content) {
     wait.forTextInElement(contentText, content);
   }
 
@@ -115,12 +115,12 @@ public class GuidelinesPage extends WikiBasePageObject {
     String guidelinesText = TextGenerator.createUniqueText();
     clickEditGuidelines();
     guidelinesAddNewText(guidelinesText);
-    verifyContentNevTextInGuidelines(guidelinesText);
+    verifyContentNewTextInGuidelines(guidelinesText);
     contentText.isDisplayed();
-    deletingNewTestFromGuidelines(guidelinesText);
+    deleteNewTestFromGuidelines(guidelinesText);
   }
 
-  public void deletingNewTestFromGuidelines(String guidelinesText) {
+  public void deleteNewTestFromGuidelines(String guidelinesText) {
     clickEditGuidelines();
     String replace = driver.findElement(By.className("guidelines-text")).getText()
         .replace(guidelinesText, "Discussion Guidelines");
