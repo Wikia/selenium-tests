@@ -2,10 +2,12 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class VUAP {
+public class VUAP extends AdsBaseObject {
   public static final double IMAGE_ASPECT_RATIO = 2.459;
   public static final double VIDEO_ASPECT_RATIO = 1.769;
   private static final int VIDEO_LENGTH = 6000;
@@ -18,19 +20,15 @@ public class VUAP {
   private WebElement iframe;
   private WebElement playTriggerButton;
 
-  public VUAP(WikiaWebDriver driver, String platform, String slotName) {
+  public VUAP(WikiaWebDriver driver, String adUnit, String slotName, String src) {
     this.wait = new Wait(driver);
     this.driver = driver;
-    setIframe(platform, slotName);
+    setIframe(buildGptIframeId(WIKIA_DFP_CLIENT_ID, adUnit, slotName, src));
     setTriggerButton(driver);
   }
 
-  private String getAdUnit(String platform, String slotName) {
-    return "google_ads_iframe_/5441/wka.life/_project43//article/" + platform + "/" + slotName + "_0";
-  }
-
-  private void setIframe(String platform, String slotName) {
-    By iframeSelector = By.id(getAdUnit(platform, slotName));
+  private void setIframe(String iframeId) {
+    By iframeSelector = By.id(iframeId);
     wait.forElementPresent(iframeSelector);
     iframe = driver.findElement(iframeSelector);
   }

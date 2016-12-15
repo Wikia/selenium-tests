@@ -1330,7 +1330,11 @@ public class AdsDataProvider {
         return new Object[][]{
                 {
                         new Page("project43", "SyntheticTests/VUAP"),
-                        ImmutableMap.of("src", "gpt", "slotName", AdsContent.TOP_LB)
+                        ImmutableMap.of(
+                            "src", "gpt",
+                            "slotName", AdsContent.TOP_LB,
+                            "adUnit", "wka.life/_project43//article"
+                        )
                 }
         };
     }
@@ -1339,9 +1343,12 @@ public class AdsDataProvider {
     public static Object[][] adsVUAPBottomDesktop() {
         return new Object[][]{
                 {
-
                         new Page("project43", "SyntheticTests/VUAP"),
-                        ImmutableMap.of("src", "gpt", "slotName", AdsContent.BOTTOM_LB)
+                        ImmutableMap.of(
+                            "src", "gpt",
+                            "slotName", AdsContent.BOTTOM_LB,
+                            "adUnit", "wka.life/_project43//article"
+                        )
                 }
         };
     }

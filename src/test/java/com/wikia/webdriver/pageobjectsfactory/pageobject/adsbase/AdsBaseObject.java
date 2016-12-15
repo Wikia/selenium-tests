@@ -37,7 +37,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
   private static final int SLOT_TRIGGER_TIMEOUT_SEC = 10;
-  private static final int WIKIA_DFP_CLIENT_ID = 5441;
+  protected static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",

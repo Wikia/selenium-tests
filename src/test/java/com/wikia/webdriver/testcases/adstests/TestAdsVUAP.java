@@ -20,6 +20,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
+  private static final String AD_UNIT= "adUnit";
   private static final String SLOT_NAME = "slotName";
   private static final String SRC = "src";
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
@@ -36,7 +37,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   public void adsTopAdVideoClosesWhenFinishPlaysOasis(Page page, Map<String, String> map) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
+    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
@@ -54,7 +55,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
     ads.scrollToBottomLeaderboard();
 
-    VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
+    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
     vuap.play();
 
     vuap.waitForVideoPlayerVisible();
@@ -101,7 +102,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     final int imageHeight = (int) (ads.getViewPortWidth() / VUAP.IMAGE_ASPECT_RATIO);
     final int videoHeight = (int) (ads.getViewPortWidth() / VUAP.VIDEO_ASPECT_RATIO);
 
-    VUAP vuap = new VUAP(driver, map.get(SRC), slotName);
+    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
 
     ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
     vuap.play();
@@ -121,7 +122,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
+    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
 
     vuap.play();
     vuap.waitForVideoStart();
@@ -147,7 +148,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
 
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    VUAP vuap = new VUAP(driver, map.get(SRC), map.get(SLOT_NAME));
+    VUAP vuap = new VUAP(driver, map.get(AD_UNIT), map.get(SLOT_NAME), map.get(SRC));
 
     vuap.play();
     vuap.waitForVideoStart();
