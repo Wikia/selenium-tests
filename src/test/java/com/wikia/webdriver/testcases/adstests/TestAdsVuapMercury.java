@@ -52,7 +52,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-        videoFanTakeover.clickOnAdImage(slotName);
+        videoFanTakeover.clickOnAdImage();
 
         String tabUrl = ads.switchToNewBrowserTab();
         videoFanTakeover.verifyFandomTabOpened(tabUrl);

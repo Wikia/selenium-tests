@@ -80,10 +80,10 @@ public class VideoFanTakeover {
     wait.forElementPresent(By.cssSelector(String.format(VIDEO_CONTAINER_SELECTOR, slotName)), VIDEO_LENGTH);
   }
 
-  public void clickOnAdImage(String slotName){
+  public void clickOnAdImage(){
     runInAdFrame(() -> {
     Actions action = new Actions(driver);
-    action.moveToElement(wait.forElementClickable(playTriggerButtonSelector), 20, 20).click().build().perform();
+    action.moveToElement(wait.forElementClickable(playTriggerButtonSelector), -20, -20).click().build().perform();
     });
   }
 

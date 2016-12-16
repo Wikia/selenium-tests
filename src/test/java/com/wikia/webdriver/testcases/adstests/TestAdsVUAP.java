@@ -49,7 +49,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
     ads.scrollToSlot(slotName);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    videoFanTakeover.clickOnAdImage(slotName);
+    videoFanTakeover.clickOnAdImage();
 
     String tabUrl = ads.switchToNewBrowserTab();
     videoFanTakeover.verifyFandomTabOpened(tabUrl);
