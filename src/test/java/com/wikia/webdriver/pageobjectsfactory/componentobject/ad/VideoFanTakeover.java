@@ -80,7 +80,6 @@ public class VideoFanTakeover {
 
   public void waitForVideoEnd(String slotName) {
     wait.forElementPresent(By.cssSelector(String.format(VIDEO_CONTAINER_SELECTOR, slotName)), VIDEO_LENGTH);
-    waitforAdToLoad();
   }
 
   public void clickOnAdImage(){
@@ -146,7 +145,7 @@ public class VideoFanTakeover {
       if (imageHeight == getAdSlotHigh(slotName)){
         return true;
       }
-      Thread.sleep(100);
+      Thread.sleep(200);
       time = System.currentTimeMillis();
     }
     return false;
