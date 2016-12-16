@@ -92,7 +92,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
     videoFanTakeover.waitForVideoStart(slotName);
     double videoHeight = videoFanTakeover.getAdVideoHigh(slotName);
 
-    videoFanTakeover.verifyVideoHasBigerSizeThenAdImage(videoHeight, imageHeight, slotName);
+    Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
     videoFanTakeover.waitForVideoEnd(slotName);
     videoFanTakeover.verifyAdImageHasRequiredSize(imageHeight, slotName);
@@ -114,10 +114,10 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
 
     videoFanTakeover.waitForVideoStart(slotName);
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-    double quartileTime = videoFanTakeover.getCurrentVideoTime(slotName).doubleValue();
+    double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-    double midTime = videoFanTakeover.getCurrentVideoTime(slotName).doubleValue();
+    double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
 
     Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
   }
@@ -141,11 +141,11 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
 
     videoFanTakeover.pause();
 
-    double time = videoFanTakeover.getCurrentVideoTime(slotName).doubleValue();
+    double time = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
 
     Thread.sleep(DELAY * 1000);
 
-    Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTime(slotName).doubleValue());
-    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTime(slotName).doubleValue());
+    Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
+    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
   }
 }

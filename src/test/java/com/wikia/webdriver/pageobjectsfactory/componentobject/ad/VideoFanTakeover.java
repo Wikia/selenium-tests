@@ -12,9 +12,11 @@ import org.openqa.selenium.interactions.Actions;
 public class VideoFanTakeover {
   private static final int VIDEO_LENGTH = 6000;
   private static final String VIDEO_IFRAME_SELECTOR = "#%s .video-ima-container iframe";
+  private static final String MOBILE_VIDEO_SELECTOR = "#%s .video-ima-container video";
   private static final String VIDEO_CONTAINER_SELECTOR = "#%s .video-ima-container.hidden";
   private static final String UI_ELEMENT_SELECTOR = "#%s .overVideoLayer";
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
+  private static final int PERCENT = 28;
   private static By playTriggerButtonSelector = By.id("button");
   private static By closeVideoButton = By.className("close-ad");
   private final Wait wait;
@@ -78,6 +80,7 @@ public class VideoFanTakeover {
 
   public void waitForVideoEnd(String slotName) {
     wait.forElementPresent(By.cssSelector(String.format(VIDEO_CONTAINER_SELECTOR, slotName)), VIDEO_LENGTH);
+    waitforAdToLoad();
   }
 
   public void clickOnAdImage(){
@@ -91,13 +94,20 @@ public class VideoFanTakeover {
 
   public void clickOnVideoCloseButon() { wait.forElementVisible(closeVideoButton).click(); }
 
-  public Double getCurrentVideoTime(String slotName) {
+  public Double getCurrentVideoTimeOnDesktop(String slotName) {
     String result;
 
     driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(VIDEO_IFRAME_SELECTOR, slotName))));
     result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
     driver.switchTo().defaultContent();
 
+    return Double.parseDouble(result);
+  }
+
+  public Double getCurrentVideoTimeOnMobile(String slotName) {
+    String result;
+
+    result = driver.findElement(By.cssSelector(String.format(MOBILE_VIDEO_SELECTOR, slotName))).getAttribute("currentTime");
     return Double.parseDouble(result);
   }
 
@@ -113,32 +123,24 @@ public class VideoFanTakeover {
     Assertion.assertEquals(tabUrl, FANDOM_URL);
   }
 
-  public void verifyVideoHasBigerSizeThenAdImage(double videoHeight, double imageHeight, String slotName) {
+  public boolean isVideoAdBiggerThanImageAdOasis(double videoHeight, double imageHeight) {
     int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
-    Assertion.assertNumber(percentResult, expectedSlotSize(slotName), "Video ad is 23 percent bigger then image ad");
+    if (percentResult == PERCENT) {
+      return true;
+    }
+    return false;
+  }
+
+// Different way of checking slot sizes on mercury because of the very small difference between two slots
+  public boolean isVideoAdBiggerTahnImageAdMercury(double videoHeight, double imageHeight) {
+    if (videoHeight > imageHeight) {
+      return true;
+    }
+    return false;
   }
 
   public void verifyAdImageHasRequiredSize (double imageHeight, String slotName) {
     Assertion.assertEquals(imageHeight, getAdSlotHigh(slotName));
-  }
-
-  public int expectedSlotSize(String slotName) {
-    int percent = 0;
-    switch(slotName) {
-      case AdsContent.TOP_LB:
-        percent = 23;
-        break;
-      case AdsContent.BOTTOM_LB:
-        percent = 23;
-        break;
-      case AdsContent.MOBILE_TOP_LB:
-        percent = 0;
-        break;
-      case AdsContent.MOBILE_BOTTOM_LB:
-        percent = 0;
-        break;
-    }
-    return percent;
   }
 
   public boolean isTimeProgressing(double quartileTime, double midTime) {
