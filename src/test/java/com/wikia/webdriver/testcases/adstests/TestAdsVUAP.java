@@ -15,10 +15,9 @@ import org.testng.annotations.Test;
 @Test(
         groups = "AdsVuapDesktop"
 )
-public class TestAdsVUAP extends TemplateNoFirstLoad {
+public class TestAdsVuap extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
-  private static final String FANDOM_URL = "http://www.wikia.com/fandom";
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
   private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
   private static final int DELAY = 2;
@@ -26,107 +25,99 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
   @Test(
           dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPTopDesktop",
-          groups = "AdsTopAdVideoClosesWhenFinishPlaysOasis"
+          dataProvider = "adsVuapDesktop",
+          groups = "AdsVideoClosesWhenFinishPlaysOasis"
   )
-  public void adsTopAdVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
-    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-    videoFanTakeover.play();
-
-    videoFanTakeover.waitForVideoPlayerVisible();
-    videoFanTakeover.waitForVideoPlayerHidden();
-  }
-
-
-  @Test(
-          dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPBottomDesktop",
-          groups = "AdsBottomAdVideoClosesWhenFinishPlaysOasis"
-  )
-  public void adsBottomAdVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
+  public void adsVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
-    ads.scrollToBottomLeaderboard();
-
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-    videoFanTakeover.play();
-
-    videoFanTakeover.waitForVideoPlayerVisible();
-    videoFanTakeover.waitForVideoPlayerHidden();
-  }
-
-  @Test(
-          dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPTopDesktop",
-          groups = "AdsTopAdImageClickedOpensNewPageOasis"
-  )
-  public void adsTopAdImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
-    ads.clickOnAdImage(slotName);
-
-    Assertion.assertEquals(ads.switchToNewBrowserTab(), FANDOM_URL);
-  }
-
-  @Test(
-          dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPBottomDesktop",
-          groups = "AdsBottomAdImageClickedOpensNewPageOasis"
-  )
-  public void adsBottomAdImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
-    ads.scrollToBottomLeaderboard();
-    ads.clickOnAdImage(slotName);
-
-    Assertion.assertEquals(ads.switchToNewBrowserTab(), FANDOM_URL);
-  }
-
-  @Test(
-          dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPTopDesktop",
-          groups = "AdsVuapSizes"
-  )
-  public void adsCheckSlotSizesOasis(Page page, String slotName, String iframeId) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
-    final int imageHeight = (int) (ads.getViewPortWidth() / VideoFanTakeover.IMAGE_ASPECT_RATIO);
-    final int videoHeight = (int) (ads.getViewPortWidth() / VideoFanTakeover.VIDEO_ASPECT_RATIO);
-
+    ads.scrollToSlot(slotName);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
     videoFanTakeover.play();
-    videoFanTakeover.waitForVideoStart();
-    ads.verifySlotSize(slotName, ads.getViewPortWidth(), videoHeight);
-    videoFanTakeover.waitForVideoEnd();
-    ads.verifySlotSize(slotName, ads.getViewPortWidth(), imageHeight);
+
+    videoFanTakeover.waitForVideoPlayerVisible(slotName);
+    videoFanTakeover.waitForVideoPlayerHidden(slotName);
+  }
+
+  @Test(
+          dataProviderClass = AdsDataProvider.class,
+          dataProvider = "adsVuapDesktop",
+          groups = "AdsImageClickedOpensNewPageOasis"
+  )
+  public void adsImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    ads.scrollToSlot(slotName);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+
+    videoFanTakeover.clickOnAdImage(slotName);
+
+    String tabUrl = ads.switchToNewBrowserTab();
+    videoFanTakeover.verifyFandomTabOpened(tabUrl);
+  }
+
+  @Test(
+          dataProviderClass = AdsDataProvider.class,
+          dataProvider = "adsVuapDesktop",
+          groups = "AdsVuapVideoClosesWhenTapCloseButtonOasis"
+  )
+  public void adsVuapVideoClosesWhenTapCloseButtonOasis(Page page, String slotName, String iframeId) {
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    ads.scrollToSlot(slotName);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+
+    videoFanTakeover.play();
+
+    videoFanTakeover.waitForVideoPlayerVisible(slotName);
+
+    videoFanTakeover.clickOnVideoCloseButon();
+
+    videoFanTakeover.waitForVideoPlayerHidden(slotName);
+  }
+
+  @Test(
+          dataProviderClass = AdsDataProvider.class,
+          dataProvider = "adsVuapDesktop",
+          groups = "AdsVuapCheckSlotSizesOasis"
+  )
+  public void adsVuapCheckSlotSizesOasis(Page page, String slotName, String iframeId) {
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    ads.scrollToSlot(slotName);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+
+    videoFanTakeover.waitforAdToLoad();
+    double imageHeight = videoFanTakeover.getAdSlotHigh(slotName);
+
+    videoFanTakeover.play();
+
+    videoFanTakeover.waitForVideoStart(slotName);
+    double videoHeight = videoFanTakeover.getAdVideoHigh(slotName);
+
+    videoFanTakeover.verifyVideoHasBigerSizeThenAdImage(videoHeight, imageHeight, slotName);
+
+    videoFanTakeover.waitForVideoEnd(slotName);
+    videoFanTakeover.verifyAdImageHasRequiredSize(imageHeight, slotName);
   }
 
   @NetworkTrafficDump
   @Test(
           dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPTopDesktop",
-          groups = "AdsVuapTimeProgressing"
+          dataProvider = "adsVuapDesktop",
+          groups = "AdsVuapTimeProgressingOasis"
   )
-  public void adsVuapTimeProgressing(Page page, String slotName, String iframeId) throws InterruptedException {
+  public void adsVuapTimeProgressingOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
-
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    ads.scrollToSlot(slotName);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.play();
-    videoFanTakeover.waitForVideoStart();
 
+    videoFanTakeover.waitForVideoStart(slotName);
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-
-    int quartileTime = videoFanTakeover.getCurrentVideoTime().intValue();
+    double quartileTime = videoFanTakeover.getCurrentVideoTime(slotName).doubleValue();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-
-    int midTime = videoFanTakeover.getCurrentVideoTime().intValue();
+    double midTime = videoFanTakeover.getCurrentVideoTime(slotName).doubleValue();
 
     Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
   }
@@ -134,25 +125,27 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   @NetworkTrafficDump
   @Test(
           dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVUAPTopDesktop",
-          groups = "AdsVuapPause"
+          dataProvider = "adsVuapDesktop",
+          groups = "AdsVuapVideoPauseOasis"
   )
-  public void adsVuapPause(Page page, String slotName, String iframeId) throws InterruptedException {
+  public void adsVuapVideoPauseOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
-
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    ads.scrollToSlot(slotName);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.play();
-    videoFanTakeover.waitForVideoStart();
+
+    videoFanTakeover.waitForVideoStart(slotName);
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
     videoFanTakeover.pause();
-    int time = videoFanTakeover.getCurrentVideoTime().intValue();
+
+    double time = videoFanTakeover.getCurrentVideoTime(slotName).doubleValue();
 
     Thread.sleep(DELAY * 1000);
 
-    Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTime().intValue());
-    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTime().intValue());
+    Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTime(slotName).doubleValue());
+    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTime(slotName).doubleValue());
   }
 }

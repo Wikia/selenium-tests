@@ -402,10 +402,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return getGptParams(slotName, "data-gpt-page-params");
   }
 
-  public int getViewPortWidth() {
-    return driver.findElement(By.cssSelector("body")).getSize().getWidth();
-  }
-
   public void verifyMonocolorAd(String slotName) {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     WebElement slot = driver.findElement(By.cssSelector(slotSelector));
@@ -798,17 +794,19 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
   }
-  // This scroll has been created because ad is not displayed if we scroll quickly to the Footer ADEN-4359
-  public void scrollToBottomLeaderboard(){
-    scrollToFooter();
-    wait.forElementVisible(By.cssSelector(".editarea"));
-    scrollToFooter();
-  }
 
-  public void clickOnAdImage(String slotName){
-    adSelector(slotName);
-    adSelector(slotName).click();
-    PageObjectLogging.log("clickOnAdImage", slotName + " is clicked", true);
+  // This scroll has been created because ad is not displayed if we scroll quickly to the Footer ADEN-4359
+  public void scrollToSlot(String slotName) {
+    switch(slotName) {
+      case AdsContent.BOTTOM_LB:
+        scrollToFooter();
+        wait.forElementVisible(By.cssSelector(".editarea"));
+        scrollToFooter();
+        break;
+      case AdsContent.MOBILE_BOTTOM_LB:
+        scrollToMobileFooter();
+        break;
+    }
   }
 
   public boolean isMobileInContentAdDisplayed() {
