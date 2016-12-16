@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -40,9 +41,10 @@ public class LayoutTests extends NewTestTemplate {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanViewMorePosts")
+  @Test(enabled = false, groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @RelatedIssue(issueID = "SOC-3182")
   public void anonUserOnMobileCanViewMorePosts() {
     userCanViewMorePosts();
   }
@@ -125,7 +127,9 @@ public class LayoutTests extends NewTestTemplate {
   }
 
   private void userCanViewMorePosts() {
-    Post post = new PostsListPage().open().getPost();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    Post post = page.getPost();
     int startingListLength = post.getPostsListLength();
     post.clickLoadMore();
     new Loading(driver).handleAsyncPageReload();

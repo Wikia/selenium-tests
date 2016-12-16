@@ -1,13 +1,10 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
-import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
@@ -16,6 +13,11 @@ import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
 import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
+
+import org.joda.time.DateTime;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class InfoboxBuilderTests extends NewTestTemplate {
 
@@ -198,11 +200,12 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.USER)
-  public void newTemplateCreation() {
-    new TemplateEditPage().open("InfoboxBuilderNewTemplateCreation")
-      .getTemplateClassification()
-      .changeTemplateType(TemplateTypes.INFOBOX)
-      .clickAddButton();
+  public void newInfoboxTemplateCreationRedirectsToInfoboxBuilder() {
+    new TemplateEditPage()
+        .open("NewInfoboxTemplateCreationRedirectsToInfoboxBuilder" + DateTime.now().getMillis())
+        .getTemplateClassification()
+        .changeTemplateType(TemplateTypes.INFOBOX)
+        .clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
@@ -244,7 +247,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     themeDesigner.submitTheme();
 
     String templateBgColor =
-        template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
+        template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
     String previewBgColor =
         builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 
@@ -253,7 +256,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(2);
     themeDesigner.submitTheme();
 
-    templateBgColor = template.open(PageContent.PORTABLE_INFOBOX_01).getPageBackgroundColor();
+    templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
     previewBgColor =
         builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 

@@ -303,8 +303,9 @@ public class AdsDataProvider {
             "TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier2000",
-                "\"57_tier2000"
+                "\"rpfl_7450\":[\"2_tier",
+                "\"57_tier",
+                "_tier2000"
             )
         }
     };
@@ -601,6 +602,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidCustomAdapter() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
+    };
+  }
+
+  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
@@ -709,78 +717,37 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] kruxSegments() {
-    return new Object[][]{
-        {
-            "KtCsDKll",
-            "pqdapsy7l",
-            new Page("vim", "Vim_Tips_Wiki"),
-            // Standard segment for visiting adtest before
-            ImmutableMap.<String, Boolean>builder()
-                .put("pqdapsy7l", true)
-                .build(),
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            // Both standard and real-time segment for adtest
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .put("pqdapsy7l", true)
-                .build(),
-        },
-        {
-            null,
-            null,
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .build(),
-            new Page("glee", "Glee_TV_Show_Wiki"),
-            // No o8l9bis26 (real time segment for adtest, they don't traverse through wikis)
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", false)
-                .build(),
-        },
-        {
-            null,
-            null,
-            new Page("vim", "Vim_Tips_Wiki"),
-            // No pqdapsy7l (standard segment for adtest)
-            ImmutableMap.<String, Boolean>builder()
-                .put("pqdapsy7l", false)
-                .build(),
-            new Page("adtest", "SyntheticTests/Krux/Page_1"),
-            // Real time segment for adtest
-            ImmutableMap.<String, Boolean>builder()
-                .put("o8l9bis26", true)
-                .build(),
-        },
-    };
-  }
-
-  @DataProvider
   public static Object[][] delayBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DELAY_BTF", 20, true}
+        {"project43", "SyntheticTests/Delay_BTF", true}
     };
   }
 
   @DataProvider
   public static Object[][] disableBtf() {
     return new Object[][]{
-        {"project43", "SyntheticTests/ATF_DISABLE_BTF", true}
+        {"project43", "SyntheticTests/Disable_BTF", true}
     };
   }
 
   @DataProvider
   public static Object[][] delayBtfPluto() {
-      return new Object[][]{
-            {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", 20, false}
-      };
-    }
+    return new Object[][]{
+        {"adtest-pluto", "SyntheticTests/ATF_DELAY_BTF", false}
+    };
+  }
 
   @DataProvider
   public static Object[][] disableBtfPluto() {
     return new Object[][]{
-            {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
+        {"adtest-pluto", "SyntheticTests/ATF_DISABLE_BTF", false}
+    };
+  }
+
+  @DataProvider
+  public static Object[][] disableBtfExceptHighlyViewableSlots() {
+    return new Object[][]{
+        {"project43", "SyntheticTests/Disable_BTF/Unblock_HIVI", true}
     };
   }
 
@@ -917,7 +884,7 @@ public class AdsDataProvider {
             }
         },
         {
-            "divergent",
+            "lego",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -1180,17 +1147,40 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryUnlockCSSOasis() {
-    return new Object[][]{
-        {
-            new Page("project43", "Project43_Wikia"),
-            false
-        },
-        {
-            new Page("arecovery", "SyntheticTests/Static_image"),
-            true
-        }
-    };
+  public static Object[][] adsRecoveryOasisProject43() {
+      return new Object[][]{
+          {
+              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
+                  .put("slotName", AdsContent.TOP_LB)
+                  .put("lineItemId", 257545212)
+                  .put("src", "gpt")
+                  .build()
+          },
+          {
+              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
+                  .put("slotName", AdsContent.MEDREC)
+                  .put("lineItemId", 257545212)
+                  .put("src", "gpt")
+                  .build()
+          }
+      };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoveryOasisHopToTaboola() {
+      return new Object[][]{
+          {
+              new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              ImmutableMap.<String, Object>builder()
+                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
+                  .put("slotName", AdsContent.TOP_LB)
+                  .build()
+          }
+      };
   }
 
   @DataProvider
@@ -1334,4 +1324,46 @@ public class AdsDataProvider {
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] adsVUAPTopDesktop() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        AdsContent.TOP_LB,
+                        String.format(
+                            "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
+                            AdsContent.TOP_LB
+                        )
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] adsVUAPBottomDesktop() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        AdsContent.BOTTOM_LB,
+                        String.format(
+                            "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
+                            AdsContent.BOTTOM_LB
+                        )
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] adsVUAPTopMercury() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        AdsContent.MOBILE_TOP_LB,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
+                                AdsContent.MOBILE_TOP_LB
+                        )
+                }
+        };
+    }
 }

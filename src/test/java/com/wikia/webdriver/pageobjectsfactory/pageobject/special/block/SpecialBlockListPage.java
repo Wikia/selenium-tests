@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.block;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -75,7 +76,7 @@ public class SpecialBlockListPage extends WikiBasePageObject {
     if (!isElementOnPage(expirationDateElement)) {
       return isBlocked;
     }
-    SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
+    SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy", Locale.US);
     String expirationDateText = expirationDateElement.getText();
     try {
       Date expirationDate = blockListDateFormat.parse(expirationDateText);

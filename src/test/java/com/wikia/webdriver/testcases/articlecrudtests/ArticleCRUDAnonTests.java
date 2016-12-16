@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -41,10 +42,11 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_003"})
+  @RelatedIssue(issueID = "QAART-896")
   public void articleCRUDAnon_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown");
+    ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown" + "?AbTest.ADD_NEW_PAGE=CONTROL1");
     VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -79,7 +81,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDAnon_006"})
   public void articleCRUDAnon_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
-    ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown");
+    ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown" + "?AbTest.ADD_NEW_PAGE=CONTROL1");
     VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitExpectingNotification().submitArticle();

@@ -6,8 +6,15 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 1. Make sure you have [Java](http://www.java.com/) installed on your system, if not follow the vendor instructions for installing them on your operating system.
 2. Enable [LOMBOK](https://projectlombok.org/) plugin on your IDE, follow the vendor instructions for installing LOMBOK for your IDE.
   * For eclipse follow [this instruction](https://projectlombok.org/download.html)
-  * For intellij idea go to settings -> plugins -> browse repositories for "lombok" -> install, restart. Then go to "Annotation Processors" and set "Enable annotation processing"
-3. Install IDE configurations from [Wikia's Java Coding Guidelines](https://github.com/Wikia/guidelines/tree/master/Java)
+  * For IntelliJ Idea:
+    * Windows: click Settings -> Plugins -> Browse repositories for "lombok" -> Install. Restart IntelliJ.
+    * OSX: click IntelliJ IDEA -> Preferences -> Plugins -> Browse repositories for "lombok" -> Install. Restart Intellij.
+
+3. Go to "Annotation Processors"
+    * Windows: click Settings -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
+    * OSX: click Intellij IDEA -> Preferences -> Build, Execution, Deployment -> Annotation Processors. Set "Enable annotation processing".
+
+4. Install IDE configurations from [Wikia's Java Coding Guidelines](https://github.com/Wikia/guidelines/tree/master/Java)
 
 ## Adding Tests
 Please remember to keep this repository up to date as the tests become worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it. Also, make sure to code your tests in a cross-operating system compliant manner as it's valid to run them in Windows, Mac or Linux environments.
@@ -82,72 +89,7 @@ The following are valid for use in the `-Dbrowser` parameter:
 
 ### Groups
 
-The following are valid for use in the `-Dgroups` parameter:
-
-* ArticleCRUDUser
-* ArticleCRUDAnon
-* ArticleComments
-* ArticleEditDropdown
-* ArticleActionsAdmin
-* ArticleFeaturesCRUDAnon
-* ArticleFeaturesCRUDUser
-* ArticleTOCTests
-* AvatarTest
-* BlogTests
-* BlogFeaturesTests
-* BlogCommentsTests
-* CategoriesTestsArticle
-* CategoriesTestsArticleEditMode
-* Chat
-* CNW_lang
-* CNW
-* EditAccountTest
-* FollowArticle
-* FollowBlog
-* FollowPhoto
-* FollowVideo
-* ForumBoardTests
-* ForumEditMode
-* ForumThreadTests
-* ForumNotificationsTests
-* ForgottenPassword
-* ForcedLogin
-* Hubs
-* ImageServing
-* ImageStorageTests
-* InteractiveMaps
-* Login
-* Media
-* MessageWall
-* MessageWallFeatures
-* MessageWallNotificationsFollowersMessageTests
-* MessageWallNotificationsFollowersResponseTests
-* MessageWallNotificationsOwnerTests
-* MessageWallNotificationsThreadCreatorTests
-* MessageWallNotificationsThreadParticipantTests
-* MultiWikiFinder
-* RTE
-* RTE_extended
-* CrossWikiSearch
-* IntraWikiSearch
-* IntraWikiSearchExactMatch
-* Seo
-* SignUp
-* SpecialVideo
-* ThemeDesigner
-* Toolbar
-* Top_10_list_Tests
-* UsersAndRights
-* VetAddVideo
-* VetModalAlignment
-* VetModalCaption
-* VetModalWidth
-* VetProvidersRV
-* VetProvidersArticle
-* VideoSuggestions
-* VideoArticlePlacehoder
-* WamPageTests
-* WikiActivity
+Whole group of tests can be run with `-Dgroups` parameter. Groups are declared as annotation `@group()` above the tests.
 
 ## Reading Logs
 

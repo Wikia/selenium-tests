@@ -7,14 +7,14 @@ import com.wikia.webdriver.elements.fandom.FandomPage;
 import com.wikia.webdriver.elements.fandom.components.WPLoginBox;
 
 public class AdminLoginPage extends FandomPage<AdminLoginPage> {
-  private final String URL = "http://qa.fandom.wikia.com/wp-admin";
+  private final String url = SITE_URL + "wp-admin";
 
   @Getter(lazy = true)
   private final WPLoginBox loginBox = new WPLoginBox();
 
   @Override
   public AdminLoginPage open() {
-    getUrl(URL);
+    getUrl(url);
 
     return this;
   }

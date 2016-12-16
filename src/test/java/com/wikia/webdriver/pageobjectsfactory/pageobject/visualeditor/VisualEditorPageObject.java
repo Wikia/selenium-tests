@@ -15,7 +15,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorMediaSettingsDialog;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
@@ -65,8 +64,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private WebElement focusedHighlight;
   @FindBy(css = ".ve-init-mw-viewPageTarget-surface")
   private WebElement veSurface;
-  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled")
+  @FindBy(css = ".oo-ui-popupWidget-body .oo-ui-widget-enabled .oo-ui-iconElement")
   private WebElement infoboxPopup;
+  @FindBy(css = ".portable-infobox")
+  private WebElement infoboxInArticle;
   @FindBy(css = ".oo-ui-processDialog-actions-primary .oo-ui-buttonElement")
   private WebElement applyChangesButton;
   @FindBy(css = ".oo-ui-labelElement.oo-ui-popupToolGroup.oo-ui-listToolGroup")
@@ -120,6 +121,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextArea(String text) {
     wait.forElementVisible(editArea);
+    editArea.click();
     editArea.sendKeys(text);
     PageObjectLogging.log("write", "text " + text + "written", true);
   }
@@ -145,7 +147,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     int
         from =
         textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
-    int to = from + text.length() + 1;
+    int to = from + text.length();
     selectText(from, to);
   }
 
@@ -200,9 +202,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public ArticlePageObject publish() {
     verifyVEToolBarPresent();
-    VisualEditorSaveChangesDialog save = clickPublishButton();
-    ArticlePageObject article = save.savePage();
+    clickPublishButton();
+    ArticlePageObject article = new ArticlePageObject();
     article.verifyVEPublishComplete();
+
     return article;
   }
 
@@ -409,7 +412,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
                            "The number of inline transclusion node is not equal");
   }
 
-
   public void selectGallery(int index) {
     WebElement selectedGallery = galleryNodes.get(index);
     wait.forElementClickable(selectedGallery);
@@ -502,15 +504,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return this;
   }
 
-  public VisualEditorPageObject clickApplyChanges() {
+  public VisualEditorPageObject applyChanges() {
     wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
+    wait.forElementNotVisible(applyChangesButton);
     return this;
   }
 
   public boolean isInfoboxInsertedInEditorArea() {
     wait.forElementVisible(focusedHighlight);
-
     return isElementOnPage(focusedHighlight);
   }
 
@@ -559,4 +561,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     return mediaDialog;
   }
 
+  public VisualEditorPageObject clickEditArea() {
+    editArea.click();
+    return this;
+  }
+
+  public VisualEditorPageObject clickInfobox() {
+    infoboxInArticle.click();
+    return this;
+  }
 }

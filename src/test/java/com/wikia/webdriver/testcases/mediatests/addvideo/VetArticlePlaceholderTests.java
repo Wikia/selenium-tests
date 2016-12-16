@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
@@ -17,7 +18,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 @Test(groups = {"VetTests", "Media", "VideoArticlePlacehoder"})
 public class VetArticlePlaceholderTests extends NewTestTemplate {
-
   @Test(groups = {"VideoArticlePlacehoder_001"})
   @Execute(asUser = User.USER, onWikia = "mobileregressiontesting")
   public void userCanAddVideoByUrlUsingPlaceholder() {

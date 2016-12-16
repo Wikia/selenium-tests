@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAdsBaseObject;
@@ -80,6 +81,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
   }
 
+
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5
@@ -97,11 +99,18 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
     PortableInfobox infobox = new PortableInfobox();
 
+    ads.waitForPageLoadedWithGpt();
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
+    int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
+    int pageElementPosition = infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX);
+
+    PageObjectLogging.log("Ad top position", String.valueOf(adPosition), true);
+    PageObjectLogging.log("Infobox bottom position", String.valueOf(pageElementPosition), true);
+
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB))
-        >= infobox.getElementBottomPositionByCssSelector(PORTABLE_INFOBOX)
+        adPosition >= pageElementPosition,
+        "Verify if ad top position is >= infobox bottom position (ad below infobox)"
     );
   }
 
@@ -121,11 +130,18 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
+    ads.waitForPageLoadedWithGpt();
     ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, SRC);
 
+    int adPosition = ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB));
+    int pageElementPosition = ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER);
+
+    PageObjectLogging.log("Ad top position", String.valueOf(adPosition), true);
+    PageObjectLogging.log("Page header bottom position", String.valueOf(pageElementPosition), true);
+
     Assertion.assertTrue(
-        ads.getElementTopPositionByCssSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_TOP_LB))
-        >= ads.getElementBottomPositionByCssSelector(ARTICLE_HEADER)
+        adPosition >= pageElementPosition,
+        "Ad top position >= page header position (ad below page header)"
     );
   }
 

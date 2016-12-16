@@ -44,7 +44,8 @@ public class NavigatingTests extends NewTestTemplate {
     backToWiki();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @Test(enabled = false, groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @RelatedIssue(issueID = "SOC-2301")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanClickAvatar() {
@@ -63,15 +64,19 @@ public class NavigatingTests extends NewTestTemplate {
    */
 
   private void backToWiki() {
-    BackButtons backButtons = new PostsListPage().open().getBackButtons();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    BackButtons backButtons = page.open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
+    Assertion.assertTrue(page.isWikiFirstHeaderVisible());
     Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
   }
 
   private void clickAvatarLoadsUserPage() {
-    Post post = new PostsListPage().open().getPost();
-    post.clickUserAvatar();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    page.getPost().clickUserAvatar();
 
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(
@@ -79,8 +84,9 @@ public class NavigatingTests extends NewTestTemplate {
   }
 
   private void clickUsernameLoadsUserPage() {
-    Post post = new PostsListPage().open().getPost();
-    post.clickUsernameLink();
+    PostsListPage page = new PostsListPage().open();
+    page.getIntroducingFollowingModal().confirmSeeingModal();
+    page.getPost().clickUsernameLink();
 
     Assertion.assertTrue(
             driver.getCurrentUrl().contains(

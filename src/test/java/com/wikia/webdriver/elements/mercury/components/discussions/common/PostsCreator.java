@@ -1,7 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CategoryPills;
-
 public interface PostsCreator {
 
   boolean isSignInDialogVisible();
@@ -23,4 +21,6 @@ public interface PostsCreator {
   PostsCreator clearDescription();
 
   PostsCreator clickSubmitButton();
+
+  PostEntity.Data addPostWithTimestamp();
 }

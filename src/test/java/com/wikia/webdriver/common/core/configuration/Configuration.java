@@ -146,6 +146,10 @@ public class Configuration {
     return getProp("emulator");
   }
 
+  public static String useMITM() {
+    return getProp("useMITM");
+  }
+
   public static String getPageLoadStrategy() {
     return getProp("unstablePageLoadStrategy");
   }
@@ -164,7 +168,7 @@ public class Configuration {
     } else if (env.contains("staging")) {
       return EnvType.STAGING;
     } else if (env.contains("verify") || env.contains("preview")
-               || env.contains("sandbox")) {
+               || env.contains("sandbox") || env.contains("stable")) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {
       return EnvType.DEV;

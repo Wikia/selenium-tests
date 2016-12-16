@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.OptionsPostAndReply;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.IntroducingFollowingModal;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
@@ -10,22 +10,18 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroU
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingTool;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingFiltersOnDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import lombok.Getter;
 
 
-public class PostsListPage extends WikiBasePageObject {
+public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final Post post = new Post();
-
-  @Getter(lazy = true)
-  private final OptionsPostAndReply postOptions = new OptionsPostAndReply();
 
   @Getter(lazy = true)
   private final PostEditor postEditor = new PostEditor();
@@ -40,7 +36,10 @@ public class PostsListPage extends WikiBasePageObject {
   private final HeroUnit heroUnit = new HeroUnit();
 
   @Getter(lazy = true)
-  private final Moderation moderationTools = new Moderation();
+  private final IntroducingFollowingModal introducingFollowingModal = new IntroducingFollowingModal();
+
+  @Getter(lazy = true)
+  private final Moderation moderation = new Moderation();
 
   @Getter(lazy = true)
   private final PostsCreatorDesktop postsCreatorDesktop = new PostsCreatorDesktop();
@@ -52,7 +51,7 @@ public class PostsListPage extends WikiBasePageObject {
   private final Promoting promoting = new Promoting();
 
   @Getter(lazy = true)
-  private final SortingTool sortingTool = new SortingTool();
+  private final SortingFiltersOnDesktop sortingFiltersOnDesktop = new SortingFiltersOnDesktop();
 
   @Getter(lazy = true)
   private final DiscussionsHeader discussionsHeader = new DiscussionsHeader();

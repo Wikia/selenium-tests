@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -49,7 +50,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open();
+    ArticlePageObject article = new ArticlePageObject().open(TestContext.getCurrentMethodName() + "?AbTest.ADD_NEW_PAGE=CONTROL1");
     VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();

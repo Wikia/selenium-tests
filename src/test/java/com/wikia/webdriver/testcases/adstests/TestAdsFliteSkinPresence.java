@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -16,11 +15,10 @@ public class TestAdsFliteSkinPresence extends TemplateNoFirstLoad {
 
   private static final String[] FLITE_SYNTHETIC_SUPERHEROES_IFRAMES = new String[]{
       "iframe[id$=TOP_LEADERBOARD_0]",
-      "#f_ad_dd9465c8-a687-46cd-8550-b6ee529f76ed",
+      "#f_ad_e256ed66-f583-4d74-8c42-4c9d52dd4676",
       ".flite-ad"
   };
-
-  @RelatedIssue(issueID = "ADEN-3530")
+  
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "fliteSkin",

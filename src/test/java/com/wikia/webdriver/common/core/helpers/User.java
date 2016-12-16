@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import java.io.File;
 
 public enum User {
-  USER("ci.user.regular.username", "ci.user.regular.password", "", "ci.user.regular.access_token"),
+  USER("ci.user.regular.username", "ci.user.regular.password", "ci.user.regular.user_id", "ci.user.regular.access_token"),
   USER_2("ci.user.regular2.username", "ci.user.regular2.password"),
   USER_3("ci.user.regular3.username", "ci.user.regular3.password"),
   USER_4("ci.user.regular4.username", "ci.user.regular4.password"),
@@ -16,6 +16,7 @@ public enum User {
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
   STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "", "ci.user.wikiastaff.access_token"),
   ANONYMOUS("anonymous", "anonymous"),
+  DISCUSSIONS_MODERATOR("ci.user.discussions.moderator.username", "ci.user.discussions.moderator.password"),
   REGULAR_USER_JAPAN("ci.user.language2.username", "ci.user.language2.password"),
   USER_GO_SEARCH_PREFERRED("ci.user.goSearchPreferredUser.username",
                            "ci.user.goSearchPreferredUser.password"),
@@ -49,7 +50,7 @@ public enum User {
     this.userName = XMLReader.getValue(new File(filePath), userNameKey);
     this.password = XMLReader.getValue(new File(filePath), passwordKey);
     this.userId = XMLReader.getValue(new File(filePath), userId);
-    this.userId = XMLReader.getValue(new File(filePath), accessToken);
+    this.accessToken = XMLReader.getValue(new File(filePath), accessToken);
   }
 
   public String getUserName() {
@@ -65,6 +66,6 @@ public enum User {
   }
 
   public String getAccessToken() {
-    return userId;
+    return accessToken;
   }
 }

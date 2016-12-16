@@ -50,13 +50,13 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement pageContentContainer;
   @FindBy(css = "#mw-content-text p")
   protected WebElement articleContent;
-  @FindBy(css = ".wikia-menu-button.contribute, .contribute-button")
+  @FindBy(css = ".wikia-menu-button.contribute.secondary, .contribute-button")
   protected WebElement contributeDropdown;
   @FindBy(css = "#ca-history")
   protected WebElement historyDropdown;
-  @FindBy(css = ".WikiaMenuElement .createpage, ul .createpage")
+  @FindBy(css = ".wikia-menu-button.contribute.secondary .createpage")
   protected WebElement addArticleInDropdown;
-  @FindBy(css = ".wikia-menu-button.contribute a[data-id='edit']")
+  @FindBy(css = ".wikia-menu-button.contribute.secondary a[data-id='edit']")
   protected WebElement editArticleInDropDown;
   @FindBy(css = "#wpCreatePageDialogTitle")
   protected WebElement articleTitleInputModal;
@@ -198,6 +198,11 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyContent(String content) {
     wait.forElementVisible(articleContent);
     Assertion.assertStringContains(articleContent.getText(), content);
+  }
+
+  public void verifyElementInContent(By element) {
+    wait.forElementVisible(articleContent);
+    Assertion.assertTrue(articleContentContainer.findElement(element).isDisplayed());
   }
 
   public String getContent() {
