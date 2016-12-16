@@ -131,7 +131,7 @@ public class VideoFanTakeover {
     return false;
   }
 
-// Different way of checking slot sizes on mercury because of the very small difference between two slots
+// Different way of checking slot sizes on mercury because of the very small difference between two slots sizes
   public boolean isVideoAdBiggerTahnImageAdMercury(double videoHeight, double imageHeight) {
     if (videoHeight > imageHeight) {
       return true;
@@ -139,8 +139,17 @@ public class VideoFanTakeover {
     return false;
   }
 
-  public void verifyAdImageHasRequiredSize (double imageHeight, String slotName) {
-    Assertion.assertEquals(imageHeight, getAdSlotHigh(slotName));
+  public boolean isImageAdInCorrectSize(double imageHeight, String slotName) throws InterruptedException {
+    long time = System.currentTimeMillis();
+    long endTime = time+2000;
+    while(time < endTime) {
+      if (imageHeight == getAdSlotHigh(slotName)){
+        return true;
+      }
+      Thread.sleep(100);
+      time = System.currentTimeMillis();
+    }
+    return false;
   }
 
   public boolean isTimeProgressing(double quartileTime, double midTime) {

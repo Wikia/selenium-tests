@@ -86,7 +86,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
             dataProvider = "adsVuapMercury",
             groups = "AdsVuapCheckSlotSizesMercury"
     )
-    public void adsVuapCheckSlotSizesMercury(Page page, String slotName, String iframeId, String videoUrl) {
+    public void adsVuapCheckSlotSizesMercury(Page page, String slotName, String iframeId, String videoUrl) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         ads.scrollToSlot(slotName);
@@ -104,7 +104,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerTahnImageAdMercury(videoHeight, imageHeight));
 
         videoFanTakeover.waitForVideoEnd(slotName);
-        videoFanTakeover.verifyAdImageHasRequiredSize(imageHeight, slotName);
+        Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotName));
     }
 
     @NetworkTrafficDump(useMITM = true)

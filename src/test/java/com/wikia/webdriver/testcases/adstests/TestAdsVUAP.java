@@ -79,7 +79,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
           dataProvider = "adsVuapDesktop",
           groups = "AdsVuapCheckSlotSizesOasis"
   )
-  public void adsVuapCheckSlotSizesOasis(Page page, String slotName, String iframeId) {
+  public void adsVuapCheckSlotSizesOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     ads.scrollToSlot(slotName);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
@@ -95,7 +95,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
     Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
     videoFanTakeover.waitForVideoEnd(slotName);
-    videoFanTakeover.verifyAdImageHasRequiredSize(imageHeight, slotName);
+    Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotName));
   }
 
   @NetworkTrafficDump
