@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = "fallout")
@@ -54,7 +53,6 @@ public class PromotingTests extends NewTestTemplate {
 
   private Promoting findPromoting() {
     PostsListPage page = new PostsListPage().open("3035");
-    page.getIntroducingFollowingModal().confirmSeeingModal();
     return page.getPromoting();
   }
 
