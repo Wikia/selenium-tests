@@ -28,7 +28,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
           dataProvider = "adsVuapDesktop",
           groups = "AdsVideoClosesWhenFinishPlaysOasis"
   )
-  public void adsVideoClosesWhenFinishPlaysOasis(Page page, String slotName, String iframeId) {
+  public void adsVideoClosedAfterPlayingOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     ads.scrollToSlot(slotName);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
@@ -85,13 +85,12 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.waitforAdToLoad();
-    double imageHeight = videoFanTakeover.getAdSlotHigh(slotName);
+    double imageHeight = videoFanTakeover.getAdSlotHeigh(slotName);
 
     videoFanTakeover.play();
 
     videoFanTakeover.waitForVideoStart(slotName);
-    double videoHeight = videoFanTakeover.getAdVideoHigh(slotName);
-
+    double videoHeight = videoFanTakeover.getAdVideoHeigh(slotName);
     Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
     videoFanTakeover.waitForVideoEnd(slotName);
@@ -118,7 +117,6 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
     double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
-
     Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
   }
 

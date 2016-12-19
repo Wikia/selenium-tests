@@ -26,7 +26,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
             dataProvider = "adsVuapMercury",
             groups = "AdsTopAdVideoClosesWhenFinishPlaysMercury"
     )
-    public void adsTopAdVideoClosesWhenFinishPlaysMercury(Page page, String slotName, String iframeId, String videoUrl) {
+    public void adsVideoClosedAfterPlayingMercury(Page page, String slotName, String iframeId, String videoUrl) {
         networkTrafficInterceptor.startIntercepting();
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         ads.scrollToSlot(slotName);
@@ -92,15 +92,13 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.scrollToSlot(slotName);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-
         videoFanTakeover.waitforAdToLoad();
-        double imageHeight = videoFanTakeover.getAdSlotHigh(slotName);
+        double imageHeight = videoFanTakeover.getAdSlotHeigh(slotName);
 
         videoFanTakeover.play();
 
         videoFanTakeover.waitForVideoStart(slotName);
-        double videoHeight = videoFanTakeover.getAdVideoHigh(slotName);
-
+        double videoHeight = videoFanTakeover.getAdVideoHeigh(slotName);
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerTahnImageAdMercury(videoHeight, imageHeight));
 
         videoFanTakeover.waitForVideoEnd(slotName);
@@ -128,7 +126,6 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
         double midTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
-
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
