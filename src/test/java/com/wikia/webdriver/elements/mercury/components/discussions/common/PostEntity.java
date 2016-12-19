@@ -97,6 +97,10 @@ public class PostEntity {
     return authorId;
   }
 
+  public PostActionsRow findPostActions() {
+    return new PostActionsRow(webElement.findElement(By.className("post-actions")));
+  }
+
   public void click() {
     if (!isOnPostDetailsPage()) {
       findDescriptionElement().click();

@@ -28,6 +28,8 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
+  private static final String POST_SHOULD_BE_FOLLOWED_ERROR_MESSAGE = "Created post should be followed.";
+
   /*
    * ANONS ON MOBILE SECTION
    */
@@ -95,6 +97,7 @@ public class CreatingPostTests extends NewTestTemplate {
         .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
+    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_ERROR_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobilePosting")
@@ -153,6 +156,7 @@ public class CreatingPostTests extends NewTestTemplate {
         .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
+    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_ERROR_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
