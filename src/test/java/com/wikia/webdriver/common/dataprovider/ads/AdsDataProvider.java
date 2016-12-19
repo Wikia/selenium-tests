@@ -1325,22 +1325,44 @@ public class AdsDataProvider {
     };
   }
 
-  @DataProvider
-  public static Object[][] adsVUAPTopDesktop() {
-    return new Object[][]{
-      {
-        AdsContent.TOP_LB,
-        new Page("project43", "SyntheticTests/VUAP")
-      }
-    };
-  }
+    @DataProvider
+    public static Object[][] adsVUAPTopDesktop() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        AdsContent.TOP_LB,
+                        String.format(
+                            "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
+                            AdsContent.TOP_LB
+                        )
+                }
+        };
+    }
 
     @DataProvider
     public static Object[][] adsVUAPBottomDesktop() {
         return new Object[][]{
                 {
+                        new Page("project43", "SyntheticTests/VUAP"),
                         AdsContent.BOTTOM_LB,
-                        new Page("project43", "SyntheticTests/VUAP")
+                        String.format(
+                            "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
+                            AdsContent.BOTTOM_LB
+                        )
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] adsVUAPTopMercury() {
+        return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP"),
+                        AdsContent.MOBILE_TOP_LB,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
+                                AdsContent.MOBILE_TOP_LB
+                        )
                 }
         };
     }
