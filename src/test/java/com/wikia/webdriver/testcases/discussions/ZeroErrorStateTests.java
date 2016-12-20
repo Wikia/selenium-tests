@@ -8,8 +8,11 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Replies;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
@@ -26,6 +29,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   private static final String MESSAGE_1 = "Uh oh, looks like this page doesn't exist!\n";
   private static final String MESSAGE_2 = "Show Me All Discussions";
   private static final String MESSAGE_3 = "All Discussions";
+  private static final String NO_REPLIES_MESSAGE = "No replies yet. Be the first!";
 
   /**
    * ANONS ON DESKTOP SECTION
@@ -60,6 +64,12 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
+  @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
+    userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
+  }
 
   /**
    * ANONS ON MOBILE SECTION
@@ -102,6 +112,14 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
+  @Test(groups = "discussions-anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
+    userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
+  }
 
   /**
    * STAFF USERS ON DESKTOP SECTION
@@ -133,6 +151,13 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage();
+  }
+
+  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
+    userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
 
   /**
@@ -173,6 +198,15 @@ public class ZeroErrorStateTests extends NewTestTemplate {
       emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage();
+  }
+
+  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5)
+  public void staffUserOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
+    userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
 
   /**
@@ -217,6 +251,16 @@ public class ZeroErrorStateTests extends NewTestTemplate {
     ErrorMessages errorMessage = new PostDetailsPage().openEmptyPost().getErrorMessages();
     Assertion.assertTrue(errorMessage.isErrorMessagePresent());
     Assertion.assertEquals(errorMessage.getErrorMessageText(), MESSAGE_1 + MESSAGE_3);
+  }
+
+  private void userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
+    final String postId = DiscussionsOperations.using(User.USER, driver)
+        .cratePostWithUniqueData().getId();
+
+    final Replies replies = new PostDetailsPage().open(postId).getReplies();
+
+    Assertion.assertTrue(replies.isEmpty(), "There should be no replies on new post (without replies).");
+    Assertion.assertEquals(replies.getNoRepliesMessage(), NO_REPLIES_MESSAGE);
   }
 }
 
