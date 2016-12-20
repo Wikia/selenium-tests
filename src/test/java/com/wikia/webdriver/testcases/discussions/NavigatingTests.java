@@ -9,10 +9,8 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -65,7 +63,6 @@ public class NavigatingTests extends NewTestTemplate {
 
   private void backToWiki() {
     PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
     BackButtons backButtons = page.open().getBackButtons();
     backButtons.clickBackToWikiLink();
 
@@ -75,7 +72,6 @@ public class NavigatingTests extends NewTestTemplate {
 
   private void clickAvatarLoadsUserPage() {
     PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
     page.getPost().clickUserAvatar();
 
     Assertion.assertTrue(
@@ -85,7 +81,6 @@ public class NavigatingTests extends NewTestTemplate {
 
   private void clickUsernameLoadsUserPage() {
     PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
     page.getPost().clickUsernameLink();
 
     Assertion.assertTrue(
