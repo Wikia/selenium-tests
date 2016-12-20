@@ -127,9 +127,7 @@ public class LayoutTests extends NewTestTemplate {
   }
 
   private void userCanViewMorePosts() {
-    PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
-    Post post = page.getPost();
+    Post post = new PostsListPage().open().getPost();
     int startingListLength = post.getPostsListLength();
     post.clickLoadMore();
     new Loading(driver).handleAsyncPageReload();
