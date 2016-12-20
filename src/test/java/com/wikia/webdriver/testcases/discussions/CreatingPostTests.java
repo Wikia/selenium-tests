@@ -99,11 +99,7 @@ public class CreatingPostTests extends NewTestTemplate {
     description = addLinkToDescription(postsCreator, description);
     Assertion.assertTrue(postsCreator.hasOpenGraph(), OPEN_GRAPH_SHOULD_LOAD_MESSAGE);
 
-    postsCreator.clickSubmitButton();
-
-    PostEntity postEntity = page.getPost()
-        .waitForPostToAppearWith(description)
-        .findNewestPost();
+    PostEntity postEntity = submitAndWaitForPostToAppear(postsCreator, page, description);
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
     Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_MESSAGE);
@@ -143,7 +139,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
 
@@ -155,11 +151,7 @@ public class CreatingPostTests extends NewTestTemplate {
     description = addLinkToDescription(postsCreator, description);
     Assertion.assertTrue(postsCreator.hasOpenGraph(), OPEN_GRAPH_SHOULD_LOAD_MESSAGE);
 
-    postsCreator.clickSubmitButton();
-
-    PostEntity postEntity = page.getPost()
-        .waitForPostToAppearWith(description)
-        .findNewestPost();
+    PostEntity postEntity = submitAndWaitForPostToAppear(postsCreator, page, description);
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
     Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_MESSAGE);
@@ -265,6 +257,14 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.addDescriptionWith(new URL(url));
 
     return text;
+  }
+
+  private PostEntity submitAndWaitForPostToAppear(final PostsCreator postsCreator, final PostsListPage page, final String description) {
+    postsCreator.clickSubmitButton();
+
+    return page.getPost()
+        .waitForPostToAppearWith(description)
+        .findNewestPost();
   }
 
   private void assertThatPostWasAddedWith(final PostEntity postEntity, final String description,
