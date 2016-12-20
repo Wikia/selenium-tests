@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 @Test(
         groups = "AdsVuapDesktop"
 )
-public class TestAdsVUAP extends TemplateNoFirstLoad {
+public class TestAdsVuap extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
@@ -30,7 +31,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   )
   public void adsVideoClosedAfterPlayingOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    ads.scrollToSlot(slotName);
+    scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.play();
@@ -46,7 +47,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   )
   public void adsImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    ads.scrollToSlot(slotName);
+    scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.clickOnAdImage();
@@ -62,7 +63,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   )
   public void adsVuapVideoClosesWhenTapCloseButtonOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    ads.scrollToSlot(slotName);
+    scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.play();
@@ -81,16 +82,16 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   )
   public void adsVuapCheckSlotSizesOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    ads.scrollToSlot(slotName);
+    scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.waitforAdToLoad();
-    double imageHeight = videoFanTakeover.getAdSlotHeigh(slotName);
+    double imageHeight = videoFanTakeover.getAdSlotHeight(slotName);
 
     videoFanTakeover.play();
 
     videoFanTakeover.waitForVideoStart(slotName);
-    double videoHeight = videoFanTakeover.getAdVideoHeigh(slotName);
+    double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
     Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
     videoFanTakeover.waitForVideoEnd(slotName);
@@ -106,7 +107,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   public void adsVuapTimeProgressingOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    ads.scrollToSlot(slotName);
+    scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.play();
@@ -129,7 +130,7 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
   public void adsVuapVideoPauseOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-    ads.scrollToSlot(slotName);
+    scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
     videoFanTakeover.play();
@@ -145,5 +146,11 @@ public class TestAdsVUAP extends TemplateNoFirstLoad {
 
     Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
     Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
+  }
+
+  private void scrollToSlot(String slotName, AdsBaseObject ads) {
+    if (slotName == AdsContent.BOTTOM_LB) {
+      ads.triggerComments();
+    }
   }
 }

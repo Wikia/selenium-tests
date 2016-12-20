@@ -795,15 +795,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
   }
 
-  // This scroll has been created because ad is not displayed if we scroll quickly to the Footer ADEN-4359
-  public void scrollToSlot(String slotName) {
-    if (slotName == AdsContent.BOTTOM_LB) {
-      triggerComments();
-    } else if (slotName == AdsContent.MOBILE_BOTTOM_LB){
-        scrollToMobileFooter();
-    }
-  }
-
   public boolean isMobileInContentAdDisplayed() {
     try{
       wait.forElementVisible(mobileInContent);

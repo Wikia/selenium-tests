@@ -18,7 +18,7 @@ public class VideoFanTakeover {
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD = 28;
   private static By playTriggerButtonSelector = By.id("button");
-  private static By closeVideoButton = By.className("close-ad");
+  private static By closeVideoButtonSelector = By.className("close-ad");
   private final Wait wait;
   private WikiaWebDriver driver;
   private WebElement iframe;
@@ -90,7 +90,9 @@ public class VideoFanTakeover {
     });
   }
 
-  public void clickOnVideoCloseButon() { wait.forElementVisible(closeVideoButton).click(); }
+  public void clickOnVideoCloseButon() {
+    wait.forElementVisible(closeVideoButtonSelector).click();
+  }
 
   public Double getCurrentVideoTimeOnDesktop(String slotName) {
     String result;
@@ -109,11 +111,11 @@ public class VideoFanTakeover {
     return Double.parseDouble(result);
   }
 
-  public double getAdSlotHeigh(String slotName) {
+  public double getAdSlotHeight(String slotName) {
     return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName))).getSize().getHeight();
   }
 
-  public double getAdVideoHeigh(String slotName) {
+  public double getAdVideoHeight(String slotName) {
     return driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).getSize().getHeight();
   }
 
@@ -141,7 +143,7 @@ public class VideoFanTakeover {
     long time = System.currentTimeMillis();
     long endTime = time+2000;
     while(time < endTime) {
-      if (imageHeight == getAdSlotHeigh(slotName)){
+      if (imageHeight == getAdSlotHeight(slotName)){
         return true;
       }
       Thread.sleep(200);
