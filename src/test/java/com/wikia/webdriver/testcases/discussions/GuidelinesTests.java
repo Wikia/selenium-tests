@@ -125,7 +125,6 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
