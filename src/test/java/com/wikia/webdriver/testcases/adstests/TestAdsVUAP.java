@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test(
         groups = "AdsVuapDesktop"
 )
-public class TestAdsVuap extends TemplateNoFirstLoad {
+public class TestAdsVUAP extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
