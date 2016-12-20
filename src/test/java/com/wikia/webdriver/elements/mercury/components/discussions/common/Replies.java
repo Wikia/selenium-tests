@@ -3,7 +3,6 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
