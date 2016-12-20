@@ -66,7 +66,7 @@ public class VideoFanTakeover {
     driver.switchTo().defaultContent();
   }
 
-  public void waitForVideoPlayerVisible(String slotName) {
+  public void waitForVideoStart(String slotName) {
     wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
   }
 
@@ -85,11 +85,10 @@ public class VideoFanTakeover {
   public void clickOnAdImage(){
     runInAdFrame(() -> {
     Actions action = new Actions(driver);
+    //Setting -20 value to make sure click will be executed 20px left and 20px up from video button to click on ad image
     action.moveToElement(wait.forElementClickable(playTriggerButtonSelector), -20, -20).click().build().perform();
     });
   }
-
-  public void waitForVideoStart(String slotName) { waitForVideoPlayerVisible(slotName); }
 
   public void clickOnVideoCloseButon() { wait.forElementVisible(closeVideoButton).click(); }
 

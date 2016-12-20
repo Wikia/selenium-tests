@@ -35,7 +35,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
 
     videoFanTakeover.play();
 
-    videoFanTakeover.waitForVideoPlayerVisible(slotName);
+    videoFanTakeover.waitForVideoStart(slotName);
     videoFanTakeover.waitForVideoPlayerHidden(slotName);
   }
 
@@ -67,7 +67,7 @@ public class TestAdsVuap extends TemplateNoFirstLoad {
 
     videoFanTakeover.play();
 
-    videoFanTakeover.waitForVideoPlayerVisible(slotName);
+    videoFanTakeover.waitForVideoStart(slotName);
 
     videoFanTakeover.clickOnVideoCloseButon();
 

@@ -35,7 +35,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoPlayerVisible(slotName);
+        videoFanTakeover.waitForVideoStart(slotName);
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
     }
 
@@ -73,7 +73,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoPlayerVisible(slotName);
+        videoFanTakeover.waitForVideoStart(slotName);
 
         videoFanTakeover.clickOnVideoCloseButon();
 
