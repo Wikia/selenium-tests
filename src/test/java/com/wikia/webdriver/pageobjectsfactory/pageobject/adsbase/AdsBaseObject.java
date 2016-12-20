@@ -798,10 +798,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   // This scroll has been created because ad is not displayed if we scroll quickly to the Footer ADEN-4359
   public void scrollToSlot(String slotName) {
     if (slotName == AdsContent.BOTTOM_LB) {
-      scrollToFooter();
-      wait.forElementVisible(By.cssSelector(".editarea"));
-      scrollToFooter();
-    }else if (slotName == AdsContent.MOBILE_BOTTOM_LB){
+      triggerComments();
+    } else if (slotName == AdsContent.MOBILE_BOTTOM_LB){
         scrollToMobileFooter();
     }
   }
