@@ -22,13 +22,20 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
-  private static final String POST_SHOULD_BE_FOLLOWED_ERROR_MESSAGE = "Created post should be followed.";
+  private static final String POST_SHOULD_BE_FOLLOWED_MESSAGE = "Created post should be followed.";
+
+  private static final String OPEN_GRAPH_SHOULD_LOAD_MESSAGE = "Open graph should start loading.";
+
+  private static final String OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE = "Open graph should appear at the end of post content.";
 
   /*
    * ANONS ON MOBILE SECTION
@@ -82,22 +89,26 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "SOC-3562")
-  public void userOnMobileCanAddPostWithoutTitle() {
-    final String description = TextGenerator.createUniqueText();
+  public void userOnMobileCanAddPostWithoutTitle() throws MalformedURLException {
+    String description = TextGenerator.createUniqueText();
 
-    PostsListPage postListPage = new PostsListPage().open();
-    PostsCreator postsCreator = postListPage.getPostsCreatorMobile();
+    PostsListPage page = new PostsListPage().open();
+    PostsCreator postsCreator = page.getPostsCreatorMobile();
 
     final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
 
+    description = addLinkToDescription(postsCreator, description);
+    Assertion.assertTrue(postsCreator.hasOpenGraph(), OPEN_GRAPH_SHOULD_LOAD_MESSAGE);
+
     postsCreator.clickSubmitButton();
 
-    PostEntity postEntity = postListPage.getPost()
+    PostEntity postEntity = page.getPost()
         .waitForPostToAppearWith(description)
         .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
-    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_ERROR_MESSAGE);
+    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_MESSAGE);
+    Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersMobilePosting")
@@ -138,16 +149,18 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  @RelatedIssue(issueID = "SOC-3267")
-  public void userOnDesktopCanAddPostWithoutTitle() {
-    final String description = TextGenerator.createUniqueText();
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanAddPostWithoutTitle() throws MalformedURLException {
+    String description = TextGenerator.createUniqueText();
 
     PostsListPage postListPage = new PostsListPage().open();
     postListPage.getIntroducingFollowingModal().confirmSeeingModal();
     PostsCreator postsCreator = postListPage.getPostsCreatorDesktop();
 
     final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
+
+    description = addLinkToDescription(postsCreator, description);
+    Assertion.assertTrue(postsCreator.hasOpenGraph(), OPEN_GRAPH_SHOULD_LOAD_MESSAGE);
 
     postsCreator.clickSubmitButton();
 
@@ -156,7 +169,8 @@ public class CreatingPostTests extends NewTestTemplate {
         .findNewestPost();
 
     assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
-    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_ERROR_MESSAGE);
+    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_MESSAGE);
+    Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
@@ -221,11 +235,11 @@ public class CreatingPostTests extends NewTestTemplate {
         .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
 
-    postsCreator.fillTitleWith(TextGenerator.defaultText());
+    postsCreator.addTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only title filled.");
 
-    postsCreator.fillDescriptionWith(TextGenerator.defaultText());
+    postsCreator.addDescriptionWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with title and description filled.");
 
@@ -240,7 +254,7 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only category selected.");
 
-    postsCreator.fillTitleWith(TextGenerator.defaultText());
+    postsCreator.addTitleWith(TextGenerator.defaultText());
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with category selected and title filled.");
   }
@@ -248,13 +262,22 @@ public class CreatingPostTests extends NewTestTemplate {
   private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
     CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()
-        .fillDescriptionWith(description)
+        .addDescriptionWith(description)
         .clickAddCategoryButton()
         .findCategoryOnPosition(0);
 
     categoryPill.click();
 
     return categoryPill;
+  }
+
+  private String addLinkToDescription(final PostsCreator postsCreator, final String description) throws MalformedURLException {
+    final String url = "http://www.wikia.com/";
+
+    String text = description + " http://www.wikia.com/";
+    postsCreator.addDescriptionWith(new URL(url));
+
+    return text;
   }
 
   private void assertThatPostWasAddedWith(final PostEntity postEntity, final String description,

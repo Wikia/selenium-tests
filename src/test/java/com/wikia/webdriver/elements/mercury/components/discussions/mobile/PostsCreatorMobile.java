@@ -1,15 +1,18 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.net.URL;
 
 
 public class PostsCreatorMobile extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".new-post")
+  @FindBy(className = "new-post")
   private WebElement postsCreator;
 
   @Getter
@@ -21,6 +24,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
 
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
+
+  @Getter
+  @FindBy (css = ".discussion-standalone-editor")
+  private WebElement editor;
 
   @Getter
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-save-button")

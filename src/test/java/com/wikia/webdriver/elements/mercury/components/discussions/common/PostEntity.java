@@ -17,6 +17,10 @@ public class PostEntity {
     this.webElement = webElement;
   }
 
+  public boolean hasOpenGraphAtContentEnd() {
+    return null != webElement.findElement(By.cssSelector(".discussion-content + .og-container"));
+  }
+
   public boolean hasTopNote() {
     return null != findTopNoteElement();
   }
