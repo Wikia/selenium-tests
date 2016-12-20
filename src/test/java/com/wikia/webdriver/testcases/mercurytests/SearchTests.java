@@ -51,10 +51,7 @@ public class SearchTests extends NewTestTemplate {
                   "Mercury_Search_001"})
   @InBrowser(browser = Browser.FIREFOX, browserSize = "1920x1080")
   public void mercury_search_navigateUsingSearchSuggestionsOnDesktop() {
-    DiscussionsPage page = new DiscussionsPage();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
-    String clickedSuggestion =
-          page.getTopBar()
+    String clickedSuggestion = new DiscussionsPage().getTopBar()
             .typeInDesktopSearchAndSelectSuggestion(SEARCH_PHRASE, 0);
 
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.OASIS));
