@@ -1,12 +1,9 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.net.URL;
 
 
 public class PostsCreatorMobile extends BasePostsCreator {
