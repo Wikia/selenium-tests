@@ -40,6 +40,7 @@ public class LockingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
 
     PostEntity postEntity = unlockPost(data);
 
@@ -74,6 +75,31 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   // Discussions moderator on mobile
+
+
+  @Test(groups = "discussions-discussionsModeratorMobileLocking")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsModeratorOnMobileCanLockPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+
+    PostEntity postEntity = lockPost(data);
+
+    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+  }
+
+  @Test(groups = "discussions-discussionsModeratorMobileLocking")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsModeratorOnMobileCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
+
+    PostEntity postEntity = unlockPost(data);
+
+    final String name = User.DISCUSSIONS_MODERATOR.name();
+    Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
+  }
 
   @Test(groups = "discussions-discussionsModeratorMobileLocking")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
