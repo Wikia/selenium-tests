@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -18,22 +19,19 @@ public class MoreOptionsPopOver {
 
   private final WebElement post;
 
-  public boolean hasReportPostOption() {
-    return hasOption("report");
+  public boolean hasLockPostOption() {
+    return hasOption("#wds-icons-lock-small");
   }
 
-  private boolean hasOption(String cssClassName) {
-    boolean result = false;
+  public boolean hasReportPostOption() {
+    return hasOption("#wds-icons-alert-small");
+  }
 
-    List<WebElement> options = post.findElements(By.tagName("svg"));
-    for (WebElement option : options) {
-      if (option.getAttribute("class").contains(cssClassName)) {
-        result = true;
-        break;
-      }
-    }
-
-    return result;
+  private boolean hasOption(final String href) {
+    return post.findElements(By.cssSelector(".more-options-pop-over use")).stream()
+        .map(element -> element.getAttribute("xlink:href"))
+        .peek(System.out::println)
+        .anyMatch(attribute -> attribute.equals(href));
   }
 
   public MoreOptionsPopOver clickLockPostOption() {

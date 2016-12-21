@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.MoreOptionsPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
@@ -22,9 +23,35 @@ public class LockingPostTests extends NewTestTemplate {
 
   public static final String SHOULD_UNLOCK_MESSAGE = "%s should be able to unlock post locked by %s.";
 
+  // Anonymous user on mobile
+
+  @Test(groups = "discussions-anonymousUserMobileLocking")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsPopOverOnPostDetailsPage(data);
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), "Anonymous user should not be able to lock a post.");
+  }
+
+  // User on mobile
+
+  @Test(groups = "discussions-anonymousUserMobileLocking")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsPopOverOnPostDetailsPage(data);
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), "User should not be able to lock a post.");
+  }
+
   // Discussions Administrator on mobile
 
-  @Test(groups = "discussions-discussionsAdministratorUserMobileLocking")
+  @Test(groups = "discussions-discussionsAdministratorMobileLocking")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanLockPostOnPostDetailsPage() {
@@ -35,7 +62,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
   }
 
-  @Test(groups = "discussions-discussionsAdministratorUserMobileLocking")
+  @Test(groups = "discussions-discussionsAdministratorMobileLocking")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
@@ -136,6 +163,10 @@ public class LockingPostTests extends NewTestTemplate {
         .isEmpty();
 
     Assertion.assertFalse(actual, "Discussions Moderator should be able to add reply to post unlocked by staff.");
+  }
+
+  private MoreOptionsPopOver findMoreOptionsPopOverOnPostDetailsPage(final PostEntity.Data  data) {
+    return new PostDetailsPage().open(data.getId()).getPost().findNewestPost().clickMoreOptions();
   }
 
   private PostEntity lockPost(final PostEntity.Data data) {
