@@ -136,6 +136,36 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
+
+  @Test(groups = "discussions-staffUserMobileLocking")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void staffUserOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
+    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+  }
+
+  @Test(groups = "discussions-staffUserMobileLocking")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void staffUserOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
+        .unlockPost(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final String text = addReply(page);
+    boolean actual = isReplyPresent(page, text);
+
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
+    Assertion.assertFalse(actual, message);
+  }
+
   // Discussions moderator on mobile
 
   @Test(groups = "discussions-discussionsModeratorMobileLocking")
