@@ -5,22 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class Replies extends BasePageObject {
 
   @FindBy(className = "replies-list")
-  private WebElement component;
+  private WebElement webElement;
 
-  public boolean isEmpty() {
-    return findReplies().isEmpty();
+  public boolean hasNoRepliesIcon() {
+    return null != webElement.findElement(By.cssSelector(".icon.no-replies"));
   }
 
-  private List<WebElement> findReplies() {
-    return component.findElements(By.className("post-reply"));
+  public boolean isEmpty() {
+    return webElement.findElements(By.className("post-reply")).isEmpty();
   }
 
   public String getNoRepliesMessage() {
-    return component.findElement(By.className("discussion-no-replies")).getText();
+    return webElement.findElement(By.className("discussion-no-replies")).getText();
   }
 }

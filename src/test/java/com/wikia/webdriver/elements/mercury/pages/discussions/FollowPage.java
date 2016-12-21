@@ -11,8 +11,9 @@ public class FollowPage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final NoFollowedPostsMessage noFollowedPostsMessage = new NoFollowedPostsMessage();
 
-  public FollowPage open() {
-    getUrl(urlBuilder.getUrlForWiki() + PATH);
-    return this;
+  public static FollowPage open() {
+    final FollowPage page = new FollowPage();
+    page.getUrl(page.urlBuilder.getUrlForWiki() + PATH);
+    return page;
   }
 }

@@ -33,6 +33,8 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   private static final String FOLLOW_MESSAGE_HEADER_TEXT = "Welcome to your Following tab.";
   private static final String FOLLOW_MESSAGE_CONTENT_TEXT = "Hit the “Follow” icon at the bottom of any post to fill your list with discussions that matter most to you. We’ll put them here and notify you of new activity.";
   private static final String FOLLOW_MESSAGE_BUTTON_TEXT = "FIND POSTS TO FOLLOW";
+  public static final String NO_REPLIES_ICON_MESSAGE = "No replies icon should be visible.";
+  public static final String NO_REPLIES_UNDER_POST_MESSAGE = "There should be no replies on new post (without replies).";
 
   /**
    * ANONS ON DESKTOP SECTION
@@ -69,7 +71,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
@@ -278,12 +280,13 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
     final Replies replies = new PostDetailsPage().open(postId).getReplies();
 
-    Assertion.assertTrue(replies.isEmpty(), "There should be no replies on new post (without replies).");
+    Assertion.assertTrue(replies.isEmpty(), NO_REPLIES_UNDER_POST_MESSAGE);
+    Assertion.assertTrue(replies.hasNoRepliesIcon(), NO_REPLIES_ICON_MESSAGE);
     Assertion.assertEquals(replies.getNoRepliesMessage(), NO_REPLIES_MESSAGE);
   }
 
   private void userSeesProperMessageWhenOpensEmptyFollowPage() {
-    NoFollowedPostsMessage noFollowedPostsMessage = new FollowPage().open().getNoFollowedPostsMessage();
+    NoFollowedPostsMessage noFollowedPostsMessage = FollowPage.open().getNoFollowedPostsMessage();
 
     Assertion.assertEquals(noFollowedPostsMessage.getHeaderText(), FOLLOW_MESSAGE_HEADER_TEXT);
     Assertion.assertEquals(noFollowedPostsMessage.getContentText(), FOLLOW_MESSAGE_CONTENT_TEXT);
