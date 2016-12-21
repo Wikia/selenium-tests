@@ -17,6 +17,10 @@ public class PostEntity {
     this.webElement = webElement;
   }
 
+  public boolean hasOpenGraphAtContentEnd() {
+    return null != webElement.findElement(By.cssSelector(".discussion-content + .og-container"));
+  }
+
   public boolean hasTopNote() {
     return null != findTopNoteElement();
   }
@@ -95,6 +99,10 @@ public class PostEntity {
     clickMoreOptions();
 
     return authorId;
+  }
+
+  public PostActionsRow findPostActions() {
+    return new PostActionsRow(webElement.findElement(By.className("post-actions")));
   }
 
   public void click() {
