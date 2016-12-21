@@ -30,7 +30,6 @@ public class MoreOptionsPopOver {
   private boolean hasOption(final String href) {
     return post.findElements(By.cssSelector(".more-options-pop-over use")).stream()
         .map(element -> element.getAttribute("xlink:href"))
-        .peek(System.out::println)
         .anyMatch(attribute -> attribute.equals(href));
   }
 

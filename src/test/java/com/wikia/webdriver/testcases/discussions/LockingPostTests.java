@@ -12,7 +12,10 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.MoreOptionsPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -35,25 +38,77 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new PostDetailsPage().open(data.getId());
 
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsPopOverOnPostDetailsPage(data);
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  // User on mobile
+  @Test(groups = "discussions-anonymousUserMobileLocking")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonymousUserOnMobileCanNotLockAPostOnPostsListPage() {
+    DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new PostsListPage().open();
+
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+  }
+
+  @Test(groups = "discussions-anonymousUserMobileLocking")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonymousUserOnMobileCanNotLockAPostOnUserPostsPage() {
+    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
+
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+  }
+
+  // Second User on mobile
 
   @Test(groups = "discussions-userMobileLocking")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
 
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsPopOverOnPostDetailsPage(data);
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER.name()));
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
+
+  @Test(groups = "discussions-userMobileLocking")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanNotLockAPostOnPostsListPage() {
+    DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new PostsListPage().open();
+
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+  }
+
+  @Test(groups = "discussions-userMobileLocking")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanNotLockAPostOnUserPostsPage() {
+    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
+
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+  }
+
+  // User on mobile
 
   @Test(groups = "discussions-userMobileLocking")
   @Execute(asUser = User.USER)
@@ -222,8 +277,8 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
-  private MoreOptionsPopOver findMoreOptionsPopOverOnPostDetailsPage(final PostEntity.Data data) {
-    return new PostDetailsPage().open(data.getId()).getPost().findNewestPost().clickMoreOptions();
+  private MoreOptionsPopOver findMoreOptions(final PageWithPosts page) {
+    return page.getPost().findNewestPost().clickMoreOptions();
   }
 
   private PostEntity lockPost(final PostEntity.Data data) {
