@@ -52,8 +52,20 @@ public class ImageReview extends WikiBasePageObject {
   @FindBy(css = ".image-review-summary-dialog")
   private WebElement summaryDialog;
 
+  @FindBy(css = ".image-review-summary-dialog > .image-review-toggle-summary-button")
+  private WebElement showStatisticsButton;
+
+  @FindBy(css = ".image-review-summary-dialog > a")
+  private WebElement downloadCsvButton;
+
   @FindBy(css = ".sub-head > button")
   private List<WebElement> navbarButtons;
+
+  @FindBy(css = ".image-review-summary-input")
+  private WebElement showHistoryInput;
+
+  @FindBy(css = ".image-review-summary-dialog:nth-of-type(2) > button")
+  private WebElement showHistoryButton;
 
   @FindBy(css = ".image-review-action-buttons > button")
   private List<WebElement> actionButtons;
@@ -72,6 +84,9 @@ public class ImageReview extends WikiBasePageObject {
 
   @FindBy(css = ".image-review-image-container > .image-review-button-group > button:nth-child(3)")
   private List<WebElement> questionableImageButtons;
+
+  @FindBy(css = ".image-review-summary-dialog > .image-review-date-input > input")
+  private List<WebElement> statisticsDateInputs;
 
 
   public ImageReview open() {
@@ -173,6 +188,56 @@ public class ImageReview extends WikiBasePageObject {
   public boolean isSummaryDialogVisible() {
     try {
       return summaryDialog.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
+  public boolean isShowStatisticsButtonVisible() {
+    try {
+      return showStatisticsButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
+  public boolean isStatisticsDateInputVisible(int index) {
+    try {
+      return statisticsDateInputs.get(index).isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
+  public boolean isDownloadCsvVisible() {
+    try {
+      return downloadCsvButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
+  public boolean isShowHistoryInputVisible() {
+    try {
+      return showHistoryInput.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
+  public boolean isShowHistoryButtonVisible() {
+    try {
+      return showHistoryButton.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
 

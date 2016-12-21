@@ -78,15 +78,28 @@ public class ImageReviewTests extends NewTestTemplate {
     String imageReviewURL = imageReviewPage.getCurrentUrl();
 
     ImageReview summaryPage = imageReviewPage.clickShowSummaryButton();
-
     Assertion.assertTrue(summaryPage.isSummaryDialogVisible());
     Assertion.assertNotEquals(imageReviewURL, summaryPage.getCurrentUrl());
-
     Assertion.assertTrue(summaryPage.isBackButtonVisible());
-    imageReviewPage = summaryPage.clickBackButton();
 
+    imageReviewPage = summaryPage.clickBackButton();
     Assertion.assertTrue(imageReviewPage.getImagesToReviewNumber() > 0);
     Assertion.assertEquals(imageReviewURL, imageReviewPage.getCurrentUrl());
+  }
+
+  @Execute(asUser = User.STAFF)
+  @Test(groups = "verifySummaryPageElementsForStaffUser")
+  public void verifySummaryPageElementsForStaffUser() {
+    ImageReview summaryPage = new ImageReview().open().clickShowSummaryButton();
+
+    Assertion.assertTrue(summaryPage.isSummaryDialogVisible());
+    Assertion.assertTrue(summaryPage.isBackButtonVisible());
+    Assertion.assertTrue(summaryPage.isShowStatisticsButtonVisible());
+    Assertion.assertTrue(summaryPage.isStatisticsDateInputVisible(0));
+    Assertion.assertTrue(summaryPage.isStatisticsDateInputVisible(1));
+    Assertion.assertTrue(summaryPage.isDownloadCsvVisible());
+    Assertion.assertTrue(summaryPage.isShowHistoryInputVisible());
+    Assertion.assertTrue(summaryPage.isShowHistoryButtonVisible());
   }
 
   @Execute(asUser = User.STAFF)
