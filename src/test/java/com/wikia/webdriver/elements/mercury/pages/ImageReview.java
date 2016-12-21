@@ -43,6 +43,15 @@ public class ImageReview extends WikiBasePageObject {
   @FindBy(css = ".image-review-button-group > .button-link > a")
   private WebElement contextLinkButton;
 
+  @FindBy(css = ".sub-head > button:nth-child(2)")
+  private WebElement showSummaryButton;
+
+  @FindBy(css = ".sub-head > .sub-head--cancel")
+  private WebElement backButton;
+
+  @FindBy(css = ".image-review-summary-dialog")
+  private WebElement summaryDialog;
+
   @FindBy(css = ".sub-head > button")
   private List<WebElement> navbarButtons;
 
@@ -151,6 +160,26 @@ public class ImageReview extends WikiBasePageObject {
     }
   }
 
+  public boolean isBackButtonVisible() {
+    try {
+      return backButton.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
+  public boolean isSummaryDialogVisible() {
+    try {
+      return summaryDialog.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+
+      return false;
+    }
+  }
+
   public String getAlertNotificationText() {
     wait.forElementVisible(alertNotification);
 
@@ -207,6 +236,20 @@ public class ImageReview extends WikiBasePageObject {
     imagesToReview.get(index).click();
 
     return this;
+  }
+
+  public ImageReview clickShowSummaryButton() {
+    wait.forElementClickable(showSummaryButton);
+    showSummaryButton.click();
+
+    return new ImageReview();
+  }
+
+  public ImageReview clickBackButton() {
+    wait.forElementClickable(backButton);
+    backButton.click();
+
+    return new ImageReview();
   }
 
 }
