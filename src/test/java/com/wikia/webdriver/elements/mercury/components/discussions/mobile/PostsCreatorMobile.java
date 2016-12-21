@@ -23,7 +23,7 @@ public class PostsCreatorMobile extends BasePostsCreator {
   private WebElement signInButtonInSignInDialog;
 
   @Getter
-  @FindBy (css = ".discussion-standalone-editor")
+  @FindBy (className = "discussion-standalone-editor")
   private WebElement editor;
 
   @Getter

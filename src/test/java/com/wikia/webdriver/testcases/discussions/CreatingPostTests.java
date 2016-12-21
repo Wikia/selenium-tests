@@ -31,6 +31,8 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
+  private static final String WIKIA_URL = "http://www.wikia.com/";
+
   private static final String POST_SHOULD_BE_FOLLOWED_MESSAGE = "Created post should be followed.";
 
   private static final String OPEN_GRAPH_SHOULD_LOAD_MESSAGE = "Open graph should start loading.";
@@ -251,10 +253,8 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private String addLinkToDescription(final PostsCreator postsCreator, final String description) throws MalformedURLException {
-    final String url = "http://www.wikia.com/";
-
-    String text = description + " http://www.wikia.com/";
-    postsCreator.addDescriptionWith(new URL(url));
+    String text = description + " " + WIKIA_URL;
+    postsCreator.addDescriptionWith(new URL(WIKIA_URL));
 
     return text;
   }
