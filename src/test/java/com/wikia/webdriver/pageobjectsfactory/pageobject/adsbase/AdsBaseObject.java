@@ -37,7 +37,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
   private static final int SLOT_TRIGGER_TIMEOUT_SEC = 10;
-  private static final int WIKIA_DFP_CLIENT_ID = 5441;
+  protected static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
   private static final String[] GPT_DATA_ATTRIBUTES = {
       "data-gpt-line-item-id",
@@ -97,6 +97,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
     super();
     driver.manage().window().setSize(resolution);
+  }
+
+  private WebElement adSelector(String slotName){
+    return wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
   }
 
   public void timerStart() {
@@ -324,6 +328,25 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   /**
+   * Builds GPT iframe id
+   *
+   * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or
+   *                    Turtle
+   * @param adUnit      the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+   * @param slotName    the name of the slot an ad is going to be inserted into
+   * @param src         the source of an ad, for example gpt, remnant or empty
+   */
+  public String buildGptIframeId(int dfpClientId, String adUnit, String slotName, String... src) {
+    return Joiner.on("/").skipNulls().join(
+        "google_ads_iframe_",
+        String.valueOf(dfpClientId),
+        adUnit,
+        src.length > 0 ? src[0] : null,
+        slotName + "_0"
+    );
+  }
+
+  /**
    * Test whether the correct GPT ad unit is called
    *
    * @param dfpClientId in most cases it's Wikia id but we have other partners like Evolve or
@@ -333,14 +356,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * @param src         the source of an ad, for example gpt, remnant or empty
    */
   public void verifyGptIframe(int dfpClientId, String adUnit, String slotName, String... src) {
-    String iframeId = Joiner.on("/").skipNulls().join(
-        "google_ads_iframe_",
-        String.valueOf(dfpClientId),
-        adUnit,
-        src.length > 0 ? src[0] : null,
-        slotName + "_0"
-    );
-
+    String iframeId = buildGptIframeId(dfpClientId, adUnit, slotName, src);
     By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']");
 
     wait.forElementPresent(cssSelector);
@@ -502,7 +518,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
   }
 
-  private void waitForElementToHaveSize(int width, int height, WebElement element) {
+  public void waitForElementToHaveSize(int width, int height, WebElement element) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
@@ -807,5 +823,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
       return false;
     }
+  }
+
+  public void verifySlotSize(String slotName, int width, int height) {
+    waitForElementToHaveSize(width, height, driver.findElement(By.id(slotName)));
   }
 }

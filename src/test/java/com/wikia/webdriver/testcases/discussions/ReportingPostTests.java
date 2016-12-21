@@ -738,9 +738,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostsListPage openPostsListPage() {
-    PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
-    return page;
+    return new PostsListPage().open();
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
