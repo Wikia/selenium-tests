@@ -128,9 +128,7 @@ public class SharingTests extends NewTestTemplate {
    */
 
   private List<String> findSocialNetworksNamesForFirstPostOnPostListPage() {
-    PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
-    return findSocialNetworksNamesForFirstPostOn(page);
+    return findSocialNetworksNamesForFirstPostOn(new PostsListPage().open());
   }
 
   private List<String> findSocialNetworksNamesForFirstPostOn(final PageWithPosts page) {

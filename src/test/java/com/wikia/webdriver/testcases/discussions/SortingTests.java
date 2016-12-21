@@ -72,7 +72,6 @@ public class SortingTests extends NewTestTemplate {
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
     PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
     FiltersPopOver filtersPopOver = page.getFiltersPopOver();
     DiscussionsHeader discussionsHeader = page.getDiscussionsHeader();
     discussionsHeader.clickSortButtonOnMobile();
@@ -89,9 +88,7 @@ public class SortingTests extends NewTestTemplate {
   }
 
   private void userCanSwitchBetweenLatestAndTrendingTab() {
-    PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
-    SortingFiltersOnDesktop filters = page.getSortingFiltersOnDesktop();
+    SortingFiltersOnDesktop filters = new PostsListPage().open().getSortingFiltersOnDesktop();
     filters.clickLatestOption();
     new Loading(driver).handleAsyncPageReload();
 
