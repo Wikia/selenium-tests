@@ -132,7 +132,7 @@ public class VideoFanTakeover {
   }
 
 // Different way of checking slot sizes on mercury because of the very small difference between two slots sizes
-  public boolean isVideoAdBiggerTahnImageAdMercury(double videoHeight, double imageHeight) {
+  public boolean isVideoAdBiggerThanImageAdMercury(double videoHeight, double imageHeight) {
     if (videoHeight > imageHeight) {
       return true;
     }
