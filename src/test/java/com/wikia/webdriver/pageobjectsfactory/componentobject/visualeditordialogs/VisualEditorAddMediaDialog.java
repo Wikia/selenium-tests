@@ -36,9 +36,10 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
   private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget");
-  private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
+  private By mediaAddIconBy = By.cssSelector(".ve-ui-WikiaMediaOptionWidget-thumbnail:not(.ve-ui-texture-transparency)");
   private By mediaTitlesBy = By
       .cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
+  private By previewVideoButtonBy = By.cssSelector(".oo-ui-icon-preview-video");
 
   public enum ImageLicense {
     NONESELECTED("None selected", ""), FAIRUSE("Fairuse", ""), SELF("Self",
@@ -181,7 +182,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
   public VisualEditorPageObject previewExistingMediaByTitle(String title) {
     waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
-    media.click();
+    media.findElement(previewVideoButtonBy).click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
     return new VisualEditorPageObject(driver);
   }
@@ -190,6 +191,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     wait.forElementVisible(mediaResultsWidget);
     return Elements.getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title",
-        title);
+        title).findElement(parentBy).findElement(parentBy);
   }
 }
