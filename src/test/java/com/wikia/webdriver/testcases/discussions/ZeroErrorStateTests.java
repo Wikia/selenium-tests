@@ -71,7 +71,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
