@@ -146,6 +146,8 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationAvatar;
   @FindBy(css = "#WikiaFooter")
   private WebElement footer;
+  @FindBy(css = ".wds-global-footer__header")
+  private WebElement mobileFooter;
   @FindBy(css = "#globalNavigation")
   private WebElement globalNavigationBar;
 
@@ -675,6 +677,12 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(footer);
     jsActions.scrollToElement(footer);
     PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
+  }
+
+  public void scrollToMobileFooter() {
+    wait.forElementVisible(mobileFooter);
+    jsActions.scrollToElement(mobileFooter);
+    PageObjectLogging.log("scrollToMobileFooter", "Scroll to the mobile footer of the page", true);
   }
 
   public void verifyGlobalNavigation() {
