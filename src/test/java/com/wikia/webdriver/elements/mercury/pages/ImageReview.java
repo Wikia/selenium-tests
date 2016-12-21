@@ -2,7 +2,8 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.NoSuchElementException;
+
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -31,13 +32,15 @@ public class ImageReview extends WikiBasePageObject {
   @FindBy(css = ".image-review-modal-history")
   private WebElement imageInfoInModal;
 
-  @FindBy(css = ".image-review-image-details > img")
+  @FindBy(css = ".modal-dialog-wrapper > .modal-dialog > .image-review-image-details > img")
   private WebElement imageInModal;
 
-  @FindBy(css = ".image-review-image-details > p:nth-child(1) > a")
+  @FindBy(css = ".modal-dialog-wrapper > .modal-dialog > "
+                + ".image-review-image-details > p:nth-child(2) > a")
   private WebElement contextLinkInModal;
 
-  @FindBy(css = ".image-review-modal-history")
+  @FindBy(css = ".modal-dialog-wrapper > .modal-dialog > "
+                + ".image-review-image-details > .image-review-modal-history")
   private WebElement imageHistoryInModal;
 
   @FindBy(css = ".image-review-button-group > .button-link > a")
@@ -70,179 +73,76 @@ public class ImageReview extends WikiBasePageObject {
   @FindBy(css = ".image-review-action-buttons > button")
   private List<WebElement> actionButtons;
 
-  @FindBy(css = ".image-review-image-container")
-  private List<WebElement> imageContainer;
-
   @FindBy(css = ".image-review-image-container > img")
   private List<WebElement> imagesToReview;
-
-  @FindBy(css = ".image-review-image-container > .image-review-button-group > button:nth-child(1)")
-  private List<WebElement> acceptImageButtons;
-
-  @FindBy(css = ".image-review-image-container > .image-review-button-group > button:nth-child(2)")
-  private List<WebElement> rejectImageButtons;
-
-  @FindBy(css = ".image-review-image-container > .image-review-button-group > button:nth-child(3)")
-  private List<WebElement> questionableImageButtons;
 
   @FindBy(css = ".image-review-summary-dialog > .image-review-date-input > input")
   private List<WebElement> statisticsDateInputs;
 
 
   public ImageReview open() {
-    getUrl("http://www.wikia.com/image-review");
-
+    getUrl(String.format("%s/image-review", urlBuilder.getWikiGlobalURL()));
     return this;
   }
 
-  public boolean isTitleVisible() {
-    try {
-      return title.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isTitleDisplayed() {
+    return this.isElementDisplayed(title);
   }
 
-  public boolean isAlertNotificationVisible() {
-    try {
-      return alertNotification.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isAlertNotificationDisplayed() {
+    return this.isElementDisplayed(alertNotification);
   }
 
-  public boolean isTopMessageVisible() {
-    try {
-      return topMessage.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isTopMessageDisplayed() {
+    return this.isElementDisplayed(topMessage);
   }
 
-  public boolean isImageInfoInModalVisible() {
-    try {
-      return imageInfoInModal.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isImageInfoInModalDisplayed() {
+    return this.isElementDisplayed(imageInfoInModal);
   }
 
-  public boolean isImageInModalVisible() {
-    try {
-      return imageInModal.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isImageInModalDisplayed() {
+    return this.isElementDisplayed(imageInModal);
   }
 
-  public boolean isContextLinkInModalVisible() {
-    try {
-      return contextLinkInModal.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isContextLinkInModalDisplayed() {
+    return this.isElementDisplayed(contextLinkInModal);
   }
 
-  public boolean isImageHistoryInModalVisible() {
-    try {
-      return imageHistoryInModal.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isImageHistoryInModalDisplayed() {
+    return this.isElementDisplayed(imageHistoryInModal);
   }
 
-  public boolean isContextLinkButtonInModalVisible() {
-    try {
-      return contextLinkButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isContextLinkButtonInModalDisplayed() {
+    return this.isElementDisplayed(contextLinkButton);
   }
 
-  public boolean isBackButtonVisible() {
-    try {
-      return backButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isBackButtonDisplayed() {
+    return this.isElementDisplayed(backButton);
   }
 
-  public boolean isSummaryDialogVisible() {
-    try {
-      return summaryDialog.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isSummaryDialogDisplayed() {
+    return this.isElementDisplayed(summaryDialog);
   }
 
-  public boolean isShowStatisticsButtonVisible() {
-    try {
-      return showStatisticsButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isShowStatisticsButtonDisplayed() {
+    return this.isElementDisplayed(showStatisticsButton);
   }
 
-  public boolean isStatisticsDateInputVisible(int index) {
-    try {
-      return statisticsDateInputs.get(index).isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isStatisticsDateInputDisplayed(int index) {
+    return this.isElementDisplayed(statisticsDateInputs.get(index));
   }
 
-  public boolean isDownloadCsvVisible() {
-    try {
-      return downloadCsvButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isDownloadCsvDisplayed() {
+    return this.isElementDisplayed(downloadCsvButton);
   }
 
-  public boolean isShowHistoryInputVisible() {
-    try {
-      return showHistoryInput.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isShowHistoryInputDisplayed() {
+    return this.isElementDisplayed(showHistoryInput);
   }
 
-  public boolean isShowHistoryButtonVisible() {
-    try {
-      return showHistoryButton.isDisplayed();
-    } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo(e.getMessage());
-
-      return false;
-    }
+  public boolean isShowHistoryButtonDisplayed() {
+    return this.isElementDisplayed(showHistoryButton);
   }
 
   public String getAlertNotificationText() {
@@ -270,27 +170,17 @@ public class ImageReview extends WikiBasePageObject {
     return actionButtons.size();
   }
 
-  public int getImagesToReviewNumber() {
-    wait.forElementVisible(imagesToReview.get(0));
-
-    return imagesToReview.size();
-  }
-
   public boolean areNavbarButtonsClickable() {
     wait.forElementVisible(navbar);
 
     for (WebElement navbarButton : navbarButtons) {
-      wait.forElementClickable(navbarButton);
-    }
+      try {
+        wait.forElementClickable(navbarButton);
+      } catch(TimeoutException e) {
+        PageObjectLogging.logInfo(e.getMessage());
 
-    return true;
-  }
-
-  public boolean areButtonsForImageClickable() {
-    for (int i=0; i<imagesToReview.size(); i++) {
-      wait.forElementClickable(acceptImageButtons.get(i));
-      wait.forElementClickable(rejectImageButtons.get(i));
-      wait.forElementClickable(questionableImageButtons.get(i));
+        return false;
+      }
     }
 
     return true;
@@ -316,5 +206,4 @@ public class ImageReview extends WikiBasePageObject {
 
     return new ImageReview();
   }
-
 }

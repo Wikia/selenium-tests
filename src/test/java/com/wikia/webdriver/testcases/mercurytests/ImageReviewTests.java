@@ -23,7 +23,7 @@ public class ImageReviewTests extends NewTestTemplate {
   public void anonCannotEnterImageReview() {
     ImageReview imageReviewPage = new ImageReview().open();
 
-    Assertion.assertTrue(imageReviewPage.isAlertNotificationVisible());
+    Assertion.assertTrue(imageReviewPage.isAlertNotificationDisplayed());
     Assertion.assertEquals(imageReviewPage.getAlertNotificationText(), ANON_ALERT_MESSAGE);
   }
 
@@ -32,7 +32,7 @@ public class ImageReviewTests extends NewTestTemplate {
   public void regularUserCannotEnterImageReview() {
     ImageReview imageReviewPage = new ImageReview().open();
 
-    Assertion.assertTrue(imageReviewPage.isAlertNotificationVisible());
+    Assertion.assertTrue(imageReviewPage.isAlertNotificationDisplayed());
     Assertion.assertEquals(imageReviewPage.getAlertNotificationText(), ANON_ALERT_MESSAGE);
   }
 
@@ -41,17 +41,15 @@ public class ImageReviewTests extends NewTestTemplate {
   public void verifyImageReviewElementsForStaffUser() {
     ImageReview imageReviewPage = new ImageReview().open();
 
-    Assertion.assertTrue(imageReviewPage.isTitleVisible());
-    Assertion.assertTrue(imageReviewPage.isTopMessageVisible());
-    Assertion.assertTrue(imageReviewPage.isContextLinkButtonInModalVisible());
+    Assertion.assertTrue(imageReviewPage.isTitleDisplayed());
+    Assertion.assertTrue(imageReviewPage.isTopMessageDisplayed());
+    Assertion.assertTrue(imageReviewPage.isContextLinkButtonInModalDisplayed());
 
     Assertion.assertEquals(imageReviewPage.getNavbarButtonsNumber(), STAFF_NAVBAR_BUTTONS_NUMBER);
     Assertion.assertEquals(imageReviewPage.getActionButtonsNumber(), STAFF_ACTION_BUTTONS_NUMBER);
     Assertion.assertEquals(imageReviewPage.getCurrentStatusText(), UNREVIEWED_VIEW_MESSAGE);
-    Assertion.assertTrue(imageReviewPage.getImagesToReviewNumber() > 0);
 
     Assertion.assertTrue(imageReviewPage.areNavbarButtonsClickable());
-    Assertion.assertTrue(imageReviewPage.areButtonsForImageClickable());
   }
 
   @Execute(asUser = User.IMAGE_REVIEWER)
@@ -59,16 +57,14 @@ public class ImageReviewTests extends NewTestTemplate {
   public void verifyImageReviewElementsForImageReviewerUser() {
     ImageReview imageReviewPage = new ImageReview().open();
 
-    Assertion.assertTrue(imageReviewPage.isTitleVisible());
-    Assertion.assertTrue(imageReviewPage.isTopMessageVisible());
-    Assertion.assertTrue(imageReviewPage.isContextLinkButtonInModalVisible());
+    Assertion.assertTrue(imageReviewPage.isTitleDisplayed());
+    Assertion.assertTrue(imageReviewPage.isTopMessageDisplayed());
+    Assertion.assertTrue(imageReviewPage.isContextLinkButtonInModalDisplayed());
 
     Assertion.assertEquals(imageReviewPage.getNavbarButtonsNumber(), REVIEWER_NAVBAR_BUTTONS_NUMBER);
     Assertion.assertEquals(imageReviewPage.getActionButtonsNumber(), REVIEWER_ACTION_BUTTONS_NUMBER);
-    Assertion.assertTrue(imageReviewPage.getImagesToReviewNumber() > 0);
 
     Assertion.assertTrue(imageReviewPage.areNavbarButtonsClickable());
-    Assertion.assertTrue(imageReviewPage.areButtonsForImageClickable());
   }
 
   @Execute(asUser = User.STAFF)
@@ -78,12 +74,12 @@ public class ImageReviewTests extends NewTestTemplate {
     String imageReviewURL = imageReviewPage.getCurrentUrl();
 
     ImageReview summaryPage = imageReviewPage.clickShowSummaryButton();
-    Assertion.assertTrue(summaryPage.isSummaryDialogVisible());
+    Assertion.assertTrue(summaryPage.isSummaryDialogDisplayed());
     Assertion.assertNotEquals(imageReviewURL, summaryPage.getCurrentUrl());
-    Assertion.assertTrue(summaryPage.isBackButtonVisible());
+    Assertion.assertTrue(summaryPage.isBackButtonDisplayed());
 
     imageReviewPage = summaryPage.clickBackButton();
-    Assertion.assertTrue(imageReviewPage.getImagesToReviewNumber() > 0);
+    Assertion.assertTrue(imageReviewPage.isTopMessageDisplayed());
     Assertion.assertEquals(imageReviewURL, imageReviewPage.getCurrentUrl());
   }
 
@@ -92,14 +88,14 @@ public class ImageReviewTests extends NewTestTemplate {
   public void verifySummaryPageElementsForStaffUser() {
     ImageReview summaryPage = new ImageReview().open().clickShowSummaryButton();
 
-    Assertion.assertTrue(summaryPage.isSummaryDialogVisible());
-    Assertion.assertTrue(summaryPage.isBackButtonVisible());
-    Assertion.assertTrue(summaryPage.isShowStatisticsButtonVisible());
-    Assertion.assertTrue(summaryPage.isStatisticsDateInputVisible(0));
-    Assertion.assertTrue(summaryPage.isStatisticsDateInputVisible(1));
-    Assertion.assertTrue(summaryPage.isDownloadCsvVisible());
-    Assertion.assertTrue(summaryPage.isShowHistoryInputVisible());
-    Assertion.assertTrue(summaryPage.isShowHistoryButtonVisible());
+    Assertion.assertTrue(summaryPage.isSummaryDialogDisplayed());
+    Assertion.assertTrue(summaryPage.isBackButtonDisplayed());
+    Assertion.assertTrue(summaryPage.isShowStatisticsButtonDisplayed());
+    Assertion.assertTrue(summaryPage.isStatisticsDateInputDisplayed(0));
+    Assertion.assertTrue(summaryPage.isStatisticsDateInputDisplayed(1));
+    Assertion.assertTrue(summaryPage.isDownloadCsvDisplayed());
+    Assertion.assertTrue(summaryPage.isShowHistoryInputDisplayed());
+    Assertion.assertTrue(summaryPage.isShowHistoryButtonDisplayed());
   }
 
   @Execute(asUser = User.STAFF)
@@ -107,21 +103,21 @@ public class ImageReviewTests extends NewTestTemplate {
   public void verifyImageInformationModalElementsForStaffUser() {
     ImageReview imageReviewPage = new ImageReview().open().clickImage(0);
 
-    Assertion.assertTrue(imageReviewPage.isImageInfoInModalVisible());
-    Assertion.assertTrue(imageReviewPage.isImageInModalVisible());
-    Assertion.assertTrue(imageReviewPage.isContextLinkInModalVisible());
-    Assertion.assertTrue(imageReviewPage.isImageHistoryInModalVisible());
+    Assertion.assertTrue(imageReviewPage.isImageInfoInModalDisplayed());
+    Assertion.assertTrue(imageReviewPage.isImageInModalDisplayed());
+    Assertion.assertTrue(imageReviewPage.isContextLinkInModalDisplayed());
+    Assertion.assertTrue(imageReviewPage.isImageHistoryInModalDisplayed());
   }
 
-//  @Execute(asUser = User.IMAGE_REVIEWER)
-//  @Test(groups = "verifyImageInformationModalElementsForStaffUser")
-//  public void verifyImageInformationModalElementsForImageReviewerUser() {
-//    ImageReview imageReviewPage = new ImageReview().open().clickImage(0);
-//
-//    Assertion.assertTrue(imageReviewPage.isImageInfoInModalVisible());
-//    Assertion.assertTrue(imageReviewPage.isImageInModalVisible());
-//    Assertion.assertTrue(imageReviewPage.isContextLinkInModalVisible());
-//    Assertion.assertTrue(imageReviewPage.isImageHistoryInModalVisible());
-//  }
+  @Execute(asUser = User.IMAGE_REVIEWER)
+  @Test(groups = "verifyImageInformationModalElementsForStaffUser")
+  public void verifyImageInformationModalElementsForImageReviewerUser() {
+    ImageReview imageReviewPage = new ImageReview().open().clickImage(0);
+
+    Assertion.assertTrue(imageReviewPage.isImageInfoInModalDisplayed());
+    Assertion.assertTrue(imageReviewPage.isImageInModalDisplayed());
+    Assertion.assertTrue(imageReviewPage.isContextLinkInModalDisplayed());
+    Assertion.assertTrue(imageReviewPage.isImageHistoryInModalDisplayed());
+  }
 
 }

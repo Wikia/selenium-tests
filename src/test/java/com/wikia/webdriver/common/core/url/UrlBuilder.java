@@ -10,6 +10,7 @@ public class UrlBuilder {
   private static final String PROD_URL_FORMAT = "http://%s%s.%s";
   private static final String SANDBOX_URL_FORMAT = "http://%s.%s%s.%s";
   private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
+
   private String env;
 
   public UrlBuilder() {
@@ -100,6 +101,22 @@ public class UrlBuilder {
       }
       default:
         return "";
+    }
+  }
+
+  public  String getWikiGlobalURL(){
+    EnvType env = Configuration.getEnvType(this.env);
+
+    switch (env) {
+      case DEV: {
+        String devBoxOwner = this.env.split("-")[1];
+        return String.format("http://%s.www.%s", devBoxOwner, env.getWikiaDomain());
+      }
+      case SANDBOX: {
+        return String.format("http://%s.www.%s", this.env, env.getWikiaDomain());
+      }
+      default:
+        return String.format("http://www.%s", env.getWikiaDomain());
     }
   }
 
