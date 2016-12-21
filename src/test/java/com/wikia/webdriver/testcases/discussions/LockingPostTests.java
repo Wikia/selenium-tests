@@ -19,9 +19,15 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-locking-posts")
 public class LockingPostTests extends NewTestTemplate {
 
-  public static final String SHOULD_LOCK_MESSAGE = "%s  should be able to lock the post.";
+  public static final String SHOULD_NOT_LOCK_MESSAGE = "%s should not be able to lock a post.";
+
+  public static final String SHOULD_LOCK_MESSAGE = "%s should be able to lock the post.";
 
   public static final String SHOULD_UNLOCK_MESSAGE = "%s should be able to unlock post locked by %s.";
+
+  public static final String SHOULD_NOT_ADD_REPLY_MESSAGE = "%s should not be able to create reply under post locked by %s.";
+
+  public static final String SHOULD_ADD_REPLY_MESSAGE = "%s should be able to add reply to post unlocked by %s.";
 
   // Anonymous user on mobile
 
@@ -33,12 +39,12 @@ public class LockingPostTests extends NewTestTemplate {
 
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsPopOverOnPostDetailsPage(data);
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), "Anonymous user should not be able to lock a post.");
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
   // User on mobile
 
-  @Test(groups = "discussions-anonymousUserMobileLocking")
+  @Test(groups = "discussions-userMobileLocking")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
@@ -46,7 +52,36 @@ public class LockingPostTests extends NewTestTemplate {
 
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsPopOverOnPostDetailsPage(data);
 
-    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), "User should not be able to lock a post.");
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER.name()));
+  }
+
+  @Test(groups = "discussions-userMobileLocking")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+  }
+
+  @Test(groups = "discussions-userMobileLocking")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
+        .unlockPost(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final String text = addReply(page);
+    boolean actual = isReplyPresent(page, text);
+
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    Assertion.assertFalse(actual, message);
   }
 
   // Discussions Administrator on mobile
@@ -103,7 +138,6 @@ public class LockingPostTests extends NewTestTemplate {
 
   // Discussions moderator on mobile
 
-
   @Test(groups = "discussions-discussionsModeratorMobileLocking")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -137,7 +171,8 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
 
-    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), "Discussions moderator should not be able to create reply under post locked by staff.");
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
+    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
 
 
@@ -149,23 +184,15 @@ public class LockingPostTests extends NewTestTemplate {
     DiscussionsOperations.using(User.STAFF, driver).lockPost(data)
         .unlockPost(data);
 
-    final String text = TextGenerator.createUniqueText();
-
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final String text = addReply(page);
+    boolean actual = isReplyPresent(page, text);
 
-    page.getReplyCreatorMobile().click()
-        .clickGuidelinesReadButton()
-        .add(text)
-        .clickSubmitButton();
-
-    boolean actual = page.getReplies()
-        .waitForReplyToAppearWith(text)
-        .isEmpty();
-
-    Assertion.assertFalse(actual, "Discussions Moderator should be able to add reply to post unlocked by staff.");
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
+    Assertion.assertFalse(actual, message);
   }
 
-  private MoreOptionsPopOver findMoreOptionsPopOverOnPostDetailsPage(final PostEntity.Data  data) {
+  private MoreOptionsPopOver findMoreOptionsPopOverOnPostDetailsPage(final PostEntity.Data data) {
     return new PostDetailsPage().open(data.getId()).getPost().findNewestPost().clickMoreOptions();
   }
 
@@ -181,5 +208,22 @@ public class LockingPostTests extends NewTestTemplate {
     final PostEntity postEntity = page.getPost().findNewestPost();
     postEntity.clickMoreOptions().clickUnlockPostOption();
     return postEntity;
+  }
+
+  private String addReply(PostDetailsPage page) {
+    final String text = TextGenerator.createUniqueText();
+
+    page.getReplyCreatorMobile().click()
+        .clickGuidelinesReadButton()
+        .add(text)
+        .clickSubmitButton();
+
+    return text;
+  }
+
+  private boolean isReplyPresent(PostDetailsPage page, String text) {
+    return page.getReplies()
+        .waitForReplyToAppearWith(text)
+        .isEmpty();
   }
 }
