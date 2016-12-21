@@ -4,14 +4,12 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
 
-public class LockPost {
+public class UnlockPost {
 
-  static final String LOCK_POST_URL_SUFFIX = "%s/threads/%s/lock";
+  private final DeleteRemoteOperation remoteOperation;
 
-  private final PutRemoteOperation remoteOperation;
-
-  public LockPost(User user) {
-    this.remoteOperation = new PutRemoteOperation(user);
+  public UnlockPost(User user) {
+    this.remoteOperation = new DeleteRemoteOperation(user);
   }
 
   public void execute(final ThreadContext context) {
@@ -20,6 +18,6 @@ public class LockPost {
   }
 
   private String buildUrl(final ThreadContext context) {
-    return Discussions.service(String.format(LOCK_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
+    return Discussions.service(String.format(LockPost.LOCK_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
   }
 }

@@ -21,11 +21,20 @@ public class ReplyCreatorMobile extends BasePageObject {
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
+  @FindBy(css = ".editor-overlay-message .message-button")
+  private WebElement guidelinesReadButton;
+
+  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-save-button")
+  private WebElement submitButton;
+
+  @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
+  private WebElement textarea;
+
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();
   }
 
-  public ReplyCreatorMobile clickReplyCreator() {
+  public ReplyCreatorMobile click() {
     replyCreator.click();
     return this;
   }
@@ -44,4 +53,18 @@ public class ReplyCreatorMobile extends BasePageObject {
     return this;
   }
 
+  public ReplyCreatorMobile clickGuidelinesReadButton() {
+    guidelinesReadButton.click();
+    return this;
+  }
+
+  public ReplyCreatorMobile add(final String text) {
+    textarea.sendKeys(text);
+    return this;
+  }
+
+  public ReplyCreatorMobile clickSubmitButton() {
+    submitButton.click();
+    return this;
+  }
 }

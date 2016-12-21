@@ -21,4 +21,9 @@ public class Replies extends BasePageObject {
   public String getNoRepliesMessage() {
     return webElement.findElement(By.className("discussion-no-replies")).getText();
   }
+
+  public Replies waitForReplyToAppearWith(final String text) {
+    wait.forTextInElement(By.cssSelector(".discussion-reply .discussion-content"), text);
+    return this;
+  }
 }

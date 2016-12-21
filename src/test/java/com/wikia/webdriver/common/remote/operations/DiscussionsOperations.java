@@ -3,8 +3,8 @@ package com.wikia.webdriver.common.remote.operations;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CreatePostContext;
-import com.wikia.webdriver.common.remote.context.ThreadContext;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
+import com.wikia.webdriver.common.remote.context.ThreadContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
@@ -36,12 +36,13 @@ public class DiscussionsOperations {
     new DeletePost(user).execute(context);
   }
 
-  public void lockPost(PostEntity.Data data) {
-    lockPost(ThreadContext.defaultContextUsing(extractSiteId(), data));
+  public DiscussionsOperations lockPost(PostEntity.Data data) {
+    return lockPost(ThreadContext.defaultContextUsing(extractSiteId(), data));
   }
 
-  public void lockPost(ThreadContext context) {
+  public DiscussionsOperations lockPost(ThreadContext context) {
     new LockPost(user).execute(context);
+    return this;
   }
 
   public void reportPost(PostEntity.Data data) {
@@ -50,6 +51,14 @@ public class DiscussionsOperations {
 
   public void reportPost(ModeratePostContext context) {
     new ReportPost(user).execute(context);
+  }
+
+  public void unlockPost(PostEntity.Data data) {
+    unlockPost(ThreadContext.defaultContextUsing(extractSiteId(), data));
+  }
+
+  public void unlockPost(ThreadContext context) {
+    new UnlockPost(user).execute(context);
   }
 
   public void validatePost(PostEntity.Data data) {
