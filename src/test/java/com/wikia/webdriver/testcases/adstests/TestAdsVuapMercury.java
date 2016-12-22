@@ -89,12 +89,13 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
     )
     public void adsVuapCheckSlotSizesMercury(Page page, String slotName, String iframeId, String videoUrl) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
+        String slotSelector = AdsContent.getSlotSelector(slotName);
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
         videoFanTakeover.waitforAdToLoad();
-        double imageHeight = videoFanTakeover.getAdSlotHeight(AdsContent.getSlotSelector(slotName));
+        double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
         videoFanTakeover.play();
 
@@ -103,7 +104,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMobile(videoHeight, imageHeight));
 
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
-        Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotName));
+        Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -160,7 +161,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
     private void scrollToSlot(String slotName, AdsBaseObject ads) {
         if (slotName == AdsContent.MOBILE_BOTTOM_LB) {
-            ads.scrollToFooter();
+            ads.scrollToMobileFooter();
         }
     }
 }
