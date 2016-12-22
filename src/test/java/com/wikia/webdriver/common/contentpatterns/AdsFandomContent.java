@@ -34,6 +34,5 @@ public class AdsFandomContent {
   public static String getSlotSelector(String slotName) {
     return SLOT_SELECTORS.get(slotName);
   }
-
 }
 

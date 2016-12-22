@@ -1,10 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -66,10 +66,12 @@ public class VideoFanTakeover {
 
   public void waitForVideoStart(String slotName) {
     wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
+    PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
   }
 
   public void waitForVideoPlayerHidden(String slotName) {
     wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
+    PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
   }
 
   public void waitforAdToLoad() {
@@ -79,13 +81,15 @@ public class VideoFanTakeover {
   public void clickOnAdImage(){
     runInAdFrame(() -> {
     Actions action = new Actions(driver);
-    //Setting -20 value to make sure click will be executed 20px left and 20px up from video button to click on ad image
-    action.moveToElement(wait.forElementClickable(playTriggerButtonSelector), -20, -20).click().build().perform();
+      //Setting -20 value to make sure click will be executed 20px left and 20px up from video button to click on ad image
+      action.moveToElement(wait.forElementClickable(playTriggerButtonSelector), -20, -20).click().build().perform();
+      PageObjectLogging.log("clickOnAdImage", "ad image clicked", true, driver);
     });
   }
 
   public void clickOnVideoCloseButon() {
     wait.forElementVisible(closeVideoButtonSelector).click();
+    PageObjectLogging.log("clickOnVideoCloseButon", "close video button clicked", true, driver);
   }
 
   public Double getCurrentVideoTimeOnDesktop(String slotName) {
@@ -122,6 +126,9 @@ public class VideoFanTakeover {
     if (percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD) {
       return true;
     }
+    PageObjectLogging.log("isVideoAdBiggerThanImageAdOasis",
+            "Expected percentage difference between video height and image height is not equal with "
+            + PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD + " percent", false, driver);
     return false;
   }
 
@@ -130,6 +137,8 @@ public class VideoFanTakeover {
     if (videoHeight > imageHeight) {
       return true;
     }
+    PageObjectLogging.log("isVideoAdBiggerThanImageAdMobile",
+            "Ad image height = " + imageHeight + " is not smaller than video height = " + videoHeight, false, driver);
     return false;
   }
 
@@ -143,6 +152,8 @@ public class VideoFanTakeover {
       Thread.sleep(200);
       time = System.currentTimeMillis();
     }
+    PageObjectLogging.log("isImageAdInCorrectSize",
+            "Image is not in correct, required size " + imageHeight + " is not equal with actual size " + getAdSlotHeight(slotSelector), false, driver);
     return false;
   }
 
@@ -150,6 +161,8 @@ public class VideoFanTakeover {
     if (quartileTime < midTime){
       return true;
     }
+    PageObjectLogging.log("isTimeProgressing",
+            "Video time is not progressing, quartileTime " + quartileTime + " is not smaller than midTime " + midTime , false, driver);
     return false;
   }
 }
