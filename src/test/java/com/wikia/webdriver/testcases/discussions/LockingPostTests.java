@@ -223,10 +223,30 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
+    PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
-    PostEntity postEntity = unlockPost(data);
+    final String name = User.DISCUSSIONS_ADMINISTRATOR.name();
+    Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
+  }
+
+  // Discussions Administrator on desktop
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanLockPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+
+    PostEntity postEntity = lockPost(data);
+
+    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
+    PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
     final String name = User.DISCUSSIONS_ADMINISTRATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
@@ -249,10 +269,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileCanUnlockPostLockedByStaffOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.STAFF, driver).lockPost(data);
-
-    PostEntity postEntity = unlockPost(data);
+    PostEntity postEntity = unlockPostLockedByStaff();
 
     final String name = User.STAFF.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
@@ -263,10 +280,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
-
-    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
@@ -282,6 +296,55 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final String text = addReplyOnMobile(page);
+    boolean actual = isReplyNotPresent(page, text);
+
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
+    Assertion.assertFalse(actual, message);
+  }
+
+  // Staff user on desktop
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopCanLockPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+
+    PostEntity postEntity = lockPost(data);
+
+    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopCanUnlockPostLockedByStaffOnPostDetailsPage() {
+    PostEntity postEntity = unlockPostLockedByStaff();
+
+    final String name = User.STAFF.name();
+    Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
+    PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
+
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
+    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffUserOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
+        .unlockPost(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final String text = addReplyOnDesktop(page);
     boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
@@ -305,10 +368,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsModeratorOnMobileCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
-
-    PostEntity postEntity = unlockPost(data);
+    PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
 
     final String name = User.DISCUSSIONS_MODERATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
@@ -318,10 +378,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsModeratorOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.STAFF, driver).lockPost(data);
-
-    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    PostDetailsPage page = openPageWithPostLockedByStaff();
 
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
@@ -332,13 +389,54 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsModeratorOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.STAFF, driver).lockPost(data)
-        .unlockPost(data);
-
-    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPageWithPostUnlockedByStaff();
     final String text = addReplyOnMobile(page);
-    boolean actual = isReplyNotPresent(page, text);
+    final boolean actual = isReplyNotPresent(page, text);
+
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
+    Assertion.assertFalse(actual, message);
+  }
+
+  // Discussions moderator on desktop
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsModeratorOnDesktopCanLockPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+
+    PostEntity postEntity = lockPost(data);
+
+    Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsModeratorOnDesktopCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
+    PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
+
+    final String name = User.DISCUSSIONS_MODERATOR.name();
+    Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsModeratorOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
+    PostDetailsPage page = openPageWithPostLockedByStaff();
+
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
+    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsModeratorOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
+    final PostDetailsPage page = openPageWithPostUnlockedByStaff();
+    final String text = addReplyOnDesktop(page);
+    final boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
     Assertion.assertFalse(actual, message);
@@ -414,6 +512,49 @@ public class LockingPostTests extends NewTestTemplate {
         .clickSubmitButton();
 
     return text;
+  }
+
+  private PostEntity unlockPostLockedByDiscussionsAdministrator() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
+
+    return unlockPost(data);
+  }
+
+  private PostEntity unlockPostLockedByStaff() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.STAFF, driver).lockPost(data);
+
+    return unlockPost(data);
+  }
+
+  private PostEntity unlockPostLockedByDiscussionsModerator() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
+
+    return unlockPost(data);
+  }
+
+  private PostDetailsPage openPageWithPostLockedByDiscussionsModerator() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
+
+    return new PostDetailsPage().open(data.getId());
+  }
+
+  private PostDetailsPage openPageWithPostLockedByStaff() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.STAFF, driver).lockPost(data);
+
+    return new PostDetailsPage().open(data.getId());
+  }
+
+  private PostDetailsPage openPageWithPostUnlockedByStaff() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.STAFF, driver).lockPost(data)
+        .unlockPost(data);
+
+    return new PostDetailsPage().open(data.getId());
   }
 
   private boolean isReplyNotPresent(PostDetailsPage page, String text) {
