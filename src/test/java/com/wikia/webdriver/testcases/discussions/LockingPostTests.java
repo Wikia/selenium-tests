@@ -22,15 +22,17 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-locking-posts")
 public class LockingPostTests extends NewTestTemplate {
 
-  public static final String SHOULD_NOT_LOCK_MESSAGE = "%s should not be able to lock a post.";
+  private static final String DESKTOP_RESOLUTION = "1920x1080";
 
-  public static final String SHOULD_LOCK_MESSAGE = "%s should be able to lock the post.";
+  private static final String SHOULD_NOT_LOCK_MESSAGE = "%s should not be able to lock a post.";
 
-  public static final String SHOULD_UNLOCK_MESSAGE = "%s should be able to unlock post locked by %s.";
+  private static final String SHOULD_LOCK_MESSAGE = "%s should be able to lock the post.";
 
-  public static final String SHOULD_NOT_ADD_REPLY_MESSAGE = "%s should not be able to create reply under post locked by %s.";
+  private static final String SHOULD_UNLOCK_MESSAGE = "%s should be able to unlock post locked by %s.";
 
-  public static final String SHOULD_ADD_REPLY_MESSAGE = "%s should be able to add reply to post unlocked by %s.";
+  private static final String SHOULD_NOT_ADD_REPLY_MESSAGE = "%s should not be able to create reply under post locked by %s.";
+
+  private static final String SHOULD_ADD_REPLY_MESSAGE = "%s should be able to add reply to post unlocked by %s.";
 
   // Anonymous user on mobile
 
@@ -38,10 +40,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    final PageWithPosts page = new PostDetailsPage().open(data.getId());
-
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
@@ -50,10 +49,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnPostsListPage() {
-    DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    final PageWithPosts page = new PostsListPage().open();
-
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
@@ -62,10 +58,36 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnUserPostsPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+  }
+
+  // Anonymous user on desktop
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonymousUserOnDesktopCanNotLockAPostOnPostDetailsPage() {
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonymousUserOnDesktopCanNotLockAPostOnPostsListPage() {
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void anonymousUserOnDesktopCanNotLockAPostOnUserPostsPage() {
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
@@ -76,10 +98,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
-
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
@@ -88,10 +107,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnPostsListPage() {
-    DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    final PageWithPosts page = new PostsListPage().open();
-
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
@@ -100,10 +116,36 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnUserPostsPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
-    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptions(page);
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+  }
+
+  // Second User on desktop
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnDesktopCanNotLockAPostOnPostsListPage() {
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
+
+    Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
+    final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
@@ -277,8 +319,33 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
+  private MoreOptionsPopOver findMoreOptionsOnPostDetailsPage() {
+    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new PostDetailsPage().open(data.getId());
+
+    return findMoreOptions(page);
+  }
+
   private MoreOptionsPopOver findMoreOptions(final PageWithPosts page) {
     return page.getPost().findNewestPost().clickMoreOptions();
+  }
+
+  private MoreOptionsPopOver findMoreOptionsOnPostsListPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new PostsListPage().open();
+
+    return findMoreOptions(page, data);
+  }
+
+  private MoreOptionsPopOver findMoreOptions(final PageWithPosts page, final PostEntity.Data data) {
+    return page.getPost().findPostById(data.getId()).clickMoreOptions();
+  }
+
+  private MoreOptionsPopOver findMoreOptionsOnUserPostsPage() {
+    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
+
+    return findMoreOptions(page, data);
   }
 
   private PostEntity lockPost(final PostEntity.Data data) {
