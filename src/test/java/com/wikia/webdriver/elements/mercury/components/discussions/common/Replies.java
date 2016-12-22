@@ -15,7 +15,8 @@ public class Replies extends BasePageObject {
   }
 
   public boolean isEmpty() {
-    return webElement.findElements(By.className("post-reply")).isEmpty();
+    WebElement element = webElement.findElement(By.cssSelector("div:first-of-type"));
+    return element.getAttribute("class").contains("discussion-no-replies");
   }
 
   public String getNoRepliesMessage() {

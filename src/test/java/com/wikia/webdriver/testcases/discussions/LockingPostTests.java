@@ -133,7 +133,7 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final String text = addReply(page);
-    boolean actual = isReplyPresent(page, text);
+    boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
     Assertion.assertFalse(actual, message);
@@ -215,7 +215,7 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final String text = addReply(page);
-    boolean actual = isReplyPresent(page, text);
+    boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
     Assertion.assertFalse(actual, message);
@@ -271,7 +271,7 @@ public class LockingPostTests extends NewTestTemplate {
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final String text = addReply(page);
-    boolean actual = isReplyPresent(page, text);
+    boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
     Assertion.assertFalse(actual, message);
@@ -306,7 +306,7 @@ public class LockingPostTests extends NewTestTemplate {
     return text;
   }
 
-  private boolean isReplyPresent(PostDetailsPage page, String text) {
+  private boolean isReplyNotPresent(PostDetailsPage page, String text) {
     return page.getReplies()
         .waitForReplyToAppearWith(text)
         .isEmpty();
