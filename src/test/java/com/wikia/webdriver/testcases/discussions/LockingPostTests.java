@@ -125,7 +125,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -134,7 +134,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -143,7 +143,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -156,10 +156,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
-
-    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
@@ -174,7 +171,35 @@ public class LockingPostTests extends NewTestTemplate {
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    final String text = addReply(page);
+    final String text = addReplyOnMobile(page);
+    boolean actual = isReplyNotPresent(page, text);
+
+    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    Assertion.assertFalse(actual, message);
+  }
+
+  // User on desktop
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
+    PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
+
+    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
+    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+  }
+
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
+        .unlockPost(data);
+
+    PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final String text = addReplyOnDesktop(page);
     boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
@@ -256,7 +281,7 @@ public class LockingPostTests extends NewTestTemplate {
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    final String text = addReply(page);
+    final String text = addReplyOnMobile(page);
     boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
@@ -312,7 +337,7 @@ public class LockingPostTests extends NewTestTemplate {
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    final String text = addReply(page);
+    final String text = addReplyOnMobile(page);
     boolean actual = isReplyNotPresent(page, text);
 
     final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
@@ -348,6 +373,13 @@ public class LockingPostTests extends NewTestTemplate {
     return findMoreOptions(page, data);
   }
 
+  private PostDetailsPage lockPostAsDiscussionsModeratorAndOpenPostDetailsPage() {
+    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
+
+    return new PostDetailsPage().open(data.getId());
+  }
+
   private PostEntity lockPost(final PostEntity.Data data) {
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
     final PostEntity postEntity = page.getPost().findNewestPost();
@@ -362,10 +394,21 @@ public class LockingPostTests extends NewTestTemplate {
     return postEntity;
   }
 
-  private String addReply(PostDetailsPage page) {
+  private String addReplyOnMobile(PostDetailsPage page) {
     final String text = TextGenerator.createUniqueText();
 
     page.getReplyCreatorMobile().click()
+        .clickGuidelinesReadButton()
+        .add(text)
+        .clickSubmitButton();
+
+    return text;
+  }
+
+  private String addReplyOnDesktop(PostDetailsPage page) {
+    final String text = TextGenerator.createUniqueText();
+
+    page.getReplyCreatorDesktop().click()
         .clickGuidelinesReadButton()
         .add(text)
         .clickSubmitButton();

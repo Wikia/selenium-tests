@@ -52,11 +52,11 @@ public class CreatingReplyTests extends NewTestTemplate {
   private void userOnDesktopMustBeLoggedInToUseReplyCreator() {
     ReplyCreatorDesktop replyCreator = new PostDetailsPage().openDefaultPost().getReplyCreatorDesktop();
 
-    Assertion.assertTrue(replyCreator.clickReplyCreator().isModalDialogVisible());
+    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
 
     replyCreator.clickOkButtonInSignInDialog();
 
-    Assertion.assertTrue(replyCreator.clickReplyCreator().isModalDialogVisible());
+    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
 
     replyCreator.clickSignInButtonInSignInDialog();
 

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
@@ -20,8 +21,16 @@ public class ReplyCreatorDesktop extends BasePageObject {
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
+  @FindBy(css = ".editor-overlay-message .message-button")
+  private WebElement guidelinesReadButton;
 
-  public ReplyCreatorDesktop clickReplyCreator() {
+  @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-submit")
+  private WebElement submitButton;
+
+  @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-textarea")
+  private WebElement textarea;
+
+  public ReplyCreatorDesktop click() {
     replyCreator.click();
     return this;
   }
@@ -41,4 +50,19 @@ public class ReplyCreatorDesktop extends BasePageObject {
     return this;
   }
 
+
+  public ReplyCreatorDesktop clickGuidelinesReadButton() {
+    guidelinesReadButton.click();
+    return this;
+  }
+
+  public ReplyCreatorDesktop add(final String text) {
+    textarea.sendKeys(text);
+    return this;
+  }
+
+  public ReplyCreatorDesktop clickSubmitButton() {
+    submitButton.click();
+    return this;
+  }
 }
