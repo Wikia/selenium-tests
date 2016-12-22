@@ -15,10 +15,16 @@ public class Replies extends BasePageObject {
   }
 
   public boolean isEmpty() {
-    return webElement.findElements(By.className("post-reply")).isEmpty();
+    WebElement element = webElement.findElement(By.cssSelector("div:first-of-type"));
+    return element.getAttribute("class").contains("discussion-no-replies");
   }
 
   public String getNoRepliesMessage() {
     return webElement.findElement(By.className("discussion-no-replies")).getText();
+  }
+
+  public Replies waitForReplyToAppearWith(final String text) {
+    wait.forTextInElement(By.cssSelector(".discussion-reply .discussion-content"), text);
+    return this;
   }
 }
