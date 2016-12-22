@@ -14,6 +14,8 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 
 public class Post extends BasePageObject {
 
@@ -76,7 +78,7 @@ public class Post extends BasePageObject {
 
   @CheckForNull
   public PostEntity findPostById(final String id) {
-    return Iterables.tryFind(getPostEntities(), new Predicate<PostEntity>() {
+    return Iterables.tryFind(getPosts(), new Predicate<PostEntity>() {
       @Override
       public boolean apply(@Nullable PostEntity input) {
         return input.findId().equals(id);
@@ -85,7 +87,7 @@ public class Post extends BasePageObject {
   }
 
   public List<PostEntity> getReportedPosts() {
-    return Lists.newArrayList(Iterables.filter(getPostEntities(), new Predicate<PostEntity>() {
+    return Lists.newArrayList(Iterables.filter(getPosts(), new Predicate<PostEntity>() {
       @Override
       public boolean apply(@Nullable PostEntity postEntity) {
         return postEntity.isReported();
@@ -93,14 +95,10 @@ public class Post extends BasePageObject {
     }));
   }
 
-  private List<PostEntity> getPostEntities() {
-    return Lists.transform(postList, new Function<WebElement, PostEntity>() {
-      @Nullable
-      @Override
-      public PostEntity apply(@Nullable WebElement webElemnt) {
-        return new PostEntity(webElemnt);
-      }
-    });
+  public List<PostEntity> getPosts() {
+    return postList.stream()
+        .map(PostEntity::new)
+        .collect(toList());
   }
 
   public boolean isUpvoteButtonVisible(int index) {

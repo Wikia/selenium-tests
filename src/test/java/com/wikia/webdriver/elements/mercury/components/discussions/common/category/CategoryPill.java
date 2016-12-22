@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.components.discussions.common;
+package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -13,7 +13,7 @@ public class CategoryPill {
   @Getter
   private final String name;
 
-  CategoryPill(WebElement webElement, int position) {
+  public CategoryPill(WebElement webElement, int position) {
     this.webElement = webElement;
     this.position = position;
     this.name = webElement.getText();

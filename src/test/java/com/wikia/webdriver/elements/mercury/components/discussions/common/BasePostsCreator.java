@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
