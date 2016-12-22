@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 
 import org.testng.annotations.DataProvider;
@@ -50,4 +51,52 @@ public class FandomAdsDataProvider {
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] fandomVuapPage() {
+        return new Object[][]{
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        "silicon-valley-perfect-mike-judge",
+                        AdsFandomContent.GPT_TOP_LEADERBOARD,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
+                                AdsFandomContent.TOP_LEADERBOARD
+                        )
+                },
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        "silicon-valley-perfect-mike-judge",
+                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
+                                AdsFandomContent.BOTTOM_LEADERBOARD
+                        )
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] fandomVuapPageMobile() {
+        return new Object[][]{
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        "silicon-valley-perfect-mike-judge",
+                        AdsFandomContent.GPT_TOP_LEADERBOARD,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
+                                AdsFandomContent.TOP_LEADERBOARD
+                        )
+                },
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        "silicon-valley-perfect-mike-judge",
+                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD_MOBILE,
+                        String.format(
+                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
+                                AdsFandomContent.BOTTOM_LEADERBOARD
+                        )
+                }
+        };
+    }
 }

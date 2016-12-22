@@ -1,19 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class VideoFanTakeover {
-  private static final int VIDEO_LENGTH = 6000;
   private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-ima-container iframe";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-ima-container video";
-  private static final String VIDEO_CONTAINER_SELECTOR_FORMAT = "#%s .video-ima-container.hidden";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .overVideoLayer";
   private static final String FANDOM_URL = "http://www.wikia.com/fandom";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD = 28;
@@ -78,10 +76,6 @@ public class VideoFanTakeover {
     runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector));
   }
 
-  public void waitForVideoEnd(String slotName) {
-    wait.forElementPresent(By.cssSelector(String.format(VIDEO_CONTAINER_SELECTOR_FORMAT, slotName)), VIDEO_LENGTH);
-  }
-
   public void clickOnAdImage(){
     runInAdFrame(() -> {
     Actions action = new Actions(driver);
@@ -111,8 +105,8 @@ public class VideoFanTakeover {
     return Double.parseDouble(result);
   }
 
-  public double getAdSlotHeight(String slotName) {
-    return driver.findElement(By.cssSelector(AdsContent.getSlotSelector(slotName))).getSize().getHeight();
+  public double getAdSlotHeight(String slotSelector) {
+    return driver.findElement(By.cssSelector(slotSelector)).getSize().getHeight();
   }
 
   public double getAdVideoHeight(String slotName) {
@@ -132,18 +126,18 @@ public class VideoFanTakeover {
   }
 
 // Different way of checking slot sizes on mercury because of the very small difference between two slots sizes
-  public boolean isVideoAdBiggerThanImageAdMercury(double videoHeight, double imageHeight) {
+  public boolean isVideoAdBiggerThanImageAdMobile(double videoHeight, double imageHeight) {
     if (videoHeight > imageHeight) {
       return true;
     }
     return false;
   }
 
-  public boolean isImageAdInCorrectSize(double imageHeight, String slotName) throws InterruptedException {
+  public boolean isImageAdInCorrectSize(double imageHeight, String slotSelector) throws InterruptedException {
     long time = System.currentTimeMillis();
-    long endTime = time+2000;
+    long endTime = time+5000;
     while(time < endTime) {
-      if (imageHeight == getAdSlotHeight(slotName)){
+      if (imageHeight == getAdSlotHeight(slotSelector)){
         return true;
       }
       Thread.sleep(200);

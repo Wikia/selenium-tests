@@ -94,15 +94,15 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
         videoFanTakeover.waitforAdToLoad();
-        double imageHeight = videoFanTakeover.getAdSlotHeight(slotName);
+        double imageHeight = videoFanTakeover.getAdSlotHeight(AdsContent.getSlotSelector(slotName));
 
         videoFanTakeover.play();
 
         videoFanTakeover.waitForVideoStart(slotName);
         double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
-        Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMercury(videoHeight, imageHeight));
+        Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMobile(videoHeight, imageHeight));
 
-        videoFanTakeover.waitForVideoEnd(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden(slotName);
         Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotName));
     }
 
