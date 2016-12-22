@@ -34,6 +34,7 @@ public class MoreOptionsPopOver {
   }
 
   public MoreOptionsPopOver clickLockPostOption() {
+    // should be changed to post.findElement(By.className("<class name>")).click(); after SOC-3791
     clickReportLinkOption("Lock Post");
     waitFor(PostEntity::isLocked);
     return this;
@@ -66,6 +67,7 @@ public class MoreOptionsPopOver {
   }
 
   public MoreOptionsPopOver clickUnlockPostOption() {
+    // should be changed to post.findElement(By.className("<class name>")).click(); after SOC-3791
     clickReportLinkOption("Unlock Post");
     waitFor(Predicates.not(PostEntity::isLocked));
     return this;
