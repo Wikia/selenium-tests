@@ -187,7 +187,7 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
-    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+    Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
@@ -332,7 +332,7 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
-    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+    Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
@@ -427,7 +427,7 @@ public class LockingPostTests extends NewTestTemplate {
     PostDetailsPage page = openPageWithPostLockedByStaff();
 
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
-    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
+    Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})

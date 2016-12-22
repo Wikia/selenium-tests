@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -29,6 +30,10 @@ public class ReplyCreatorDesktop extends BasePageObject {
 
   @FindBy(css = ".discussion-inline-reply-editor .discussion-inline-editor-textarea")
   private WebElement textarea;
+
+  public boolean isPresent() {
+    return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
+  }
 
   public ReplyCreatorDesktop click() {
     replyCreator.click();
