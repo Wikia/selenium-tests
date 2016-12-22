@@ -24,6 +24,8 @@ public class LockingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
 
+  private static final String SHOULD_BE_LOCKED_MESSAGE = "Post should be locked.";
+
   private static final String SHOULD_NOT_LOCK_MESSAGE = "%s should not be able to lock a post.";
 
   private static final String SHOULD_LOCK_MESSAGE = "%s should be able to lock the post.";
@@ -158,6 +160,7 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
+    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
@@ -186,6 +189,7 @@ public class LockingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
+    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.USER.name(), User.DISCUSSIONS_MODERATOR.name());
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
@@ -282,6 +286,7 @@ public class LockingPostTests extends NewTestTemplate {
   public void staffUserOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
+    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
@@ -331,6 +336,7 @@ public class LockingPostTests extends NewTestTemplate {
   public void staffUserOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
+    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
@@ -380,6 +386,7 @@ public class LockingPostTests extends NewTestTemplate {
   public void discussionsModeratorOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByStaff();
 
+    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
@@ -426,6 +433,7 @@ public class LockingPostTests extends NewTestTemplate {
   public void discussionsModeratorOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByStaff();
 
+    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
     final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
