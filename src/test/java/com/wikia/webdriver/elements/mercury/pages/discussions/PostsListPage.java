@@ -94,7 +94,7 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
             }
           });
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 }

@@ -46,7 +46,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
         }
       });
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
 
     PageObjectLogging.log("DropdownVisible", "Login dropdown is visible", true, driver);
