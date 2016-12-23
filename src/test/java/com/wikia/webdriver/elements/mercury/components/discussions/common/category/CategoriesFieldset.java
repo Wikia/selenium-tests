@@ -1,7 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,8 +10,17 @@ import java.util.List;
 
 public class CategoriesFieldset extends WikiBasePageObject {
 
+  @FindBy(css = ".discussion-filters-fields-wrapper .discussion-categories")
+  private WebElement fieldset;
+
   @FindBy(css = ".discussion-categories .discussion-categories-list > li")
   private List<WebElement> categories;
+
+
+  public boolean canEdit() {
+    WebElement svg = fieldset.findElement(By.cssSelector("use:first-of-type"));
+    return svg.getAttribute("xlink:href").equals("#pencil");
+  }
 
   @CheckForNull
   public CategoryPill clickCategory(final int position) {
@@ -28,4 +37,5 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
     return result;
   }
+
 }

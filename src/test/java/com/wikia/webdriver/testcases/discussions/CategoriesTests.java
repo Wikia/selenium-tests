@@ -27,18 +27,30 @@ public class CategoriesTests extends NewTestTemplate {
 
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
 
+  public static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
+
   // Anonymous user on mobile
 
   @Test(groups = "discussions-anonUserOnMobileCategories")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonymousUserOnMobileCanChangeCategory() {
+  public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnMobile(page);
 
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
 
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+  }
+
+  @Test(groups = "discussions-anonUserOnMobileCategories")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+    final boolean actual = canEditCategories(page);
+
+    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   // Anonymous user on desktop
@@ -60,7 +72,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = "discussions-userOnMobileCategories")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanChangeCategory() {
+  public void userOnMobileCanChangeCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnMobile(page);
 
@@ -69,7 +81,17 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
   }
 
-  // User on mobile
+  @Test(groups = "discussions-userOnMobileCategories")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanNotEditCategoryOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+    final boolean actual = canEditCategories(page);
+
+    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
+  }
+
+  // User on desktop
 
   @Test(groups = "discussions-userOnDesktopCategories")
   @Execute(asUser = User.USER)
@@ -112,5 +134,11 @@ public class CategoriesTests extends NewTestTemplate {
         .map(PostEntity::findCategory)
         .distinct()
         .allMatch(category -> category.endsWith(categoryName));
+  }
+
+  private boolean canEditCategories(PostsListPage page) {
+    return page.getFiltersPopOver().click()
+        .getCategoriesFieldset()
+        .canEdit();
   }
 }
