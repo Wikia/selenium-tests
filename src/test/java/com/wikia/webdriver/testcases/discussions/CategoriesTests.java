@@ -48,7 +48,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final boolean actual = canEditCategories(page);
+    final boolean actual = canEditCategoriesOnMobile(page);
 
     Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
@@ -65,6 +65,16 @@ public class CategoriesTests extends NewTestTemplate {
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
 
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+  }
+
+  @Test(groups = "discussions-anonUserOnDesktopCategories")
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+    final boolean actual = canEditCategoriesOnDesktop(page);
+
+    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   // User on mobile
@@ -86,7 +96,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final boolean actual = canEditCategories(page);
+    final boolean actual = canEditCategoriesOnMobile(page);
 
     Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
@@ -103,6 +113,16 @@ public class CategoriesTests extends NewTestTemplate {
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
 
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+  }
+
+  @Test(groups = "discussions-userOnDesktopCategories")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+    final boolean actual = canEditCategoriesOnDesktop(page);
+
+    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
@@ -136,8 +156,14 @@ public class CategoriesTests extends NewTestTemplate {
         .allMatch(category -> category.endsWith(categoryName));
   }
 
-  private boolean canEditCategories(PostsListPage page) {
+  private boolean canEditCategoriesOnMobile(PostsListPage page) {
     return page.getFiltersPopOver().click()
+        .getCategoriesFieldset()
+        .canEdit();
+  }
+
+  private boolean canEditCategoriesOnDesktop(PostsListPage page) {
+    return page.getModeration()
         .getCategoriesFieldset()
         .canEdit();
   }

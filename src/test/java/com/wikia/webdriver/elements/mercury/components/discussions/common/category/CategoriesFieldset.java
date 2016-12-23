@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CategoriesFieldset extends WikiBasePageObject {
 
-  @FindBy(css = ".discussion-filters-fields-wrapper .discussion-categories")
+  @FindBy(className = "discussion-categories")
   private WebElement fieldset;
 
   @FindBy(css = ".discussion-categories .discussion-categories-list > li")
@@ -18,7 +18,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
 
   public boolean canEdit() {
-    WebElement svg = fieldset.findElement(By.cssSelector("use:first-of-type"));
+    WebElement svg = fieldset.findElement(By.cssSelector("use"));
     return svg.getAttribute("xlink:href").equals("#pencil");
   }
 
