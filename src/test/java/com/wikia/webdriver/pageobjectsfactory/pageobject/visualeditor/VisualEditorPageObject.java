@@ -570,4 +570,5 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     infoboxInArticle.click();
     return this;
   }
+
 }
