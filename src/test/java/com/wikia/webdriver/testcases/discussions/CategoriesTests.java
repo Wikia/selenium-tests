@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
@@ -28,6 +29,10 @@ public class CategoriesTests extends NewTestTemplate {
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
 
   public static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
+
+  public static final String SHOULD_EDIT_CATEGORIES_MESSAGE = "Should be able to edit categories.";
+
+  public static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE = "General category should be not editable";
 
   // Anonymous user on mobile
 
@@ -123,6 +128,43 @@ public class CategoriesTests extends NewTestTemplate {
     final boolean actual = canEditCategoriesOnDesktop(page);
 
     Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
+  }
+
+  // Discussions Administrator on mobile
+
+  /**
+   * Category "All" is not present on edit categories modal on mobile
+   */
+  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanNotEditGeneralCategoryOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+
+    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
+        .getCategoriesFieldset();
+
+    Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
+    Assertion.assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
+  }
+
+  // Discussions Administrator on desktop
+
+  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanNotEditGeneralCategoryOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+
+    CategoriesFieldset categoriesFieldset = page.getModeration()
+        .getCategoriesFieldset();
+
+    Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
+
+    categoriesFieldset.clickEdit();
+
+    Assertion.assertFalse(categoriesFieldset.canEditAllCategory(), "All category should be not editable");
+    Assertion.assertFalse(categoriesFieldset.canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
   private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
