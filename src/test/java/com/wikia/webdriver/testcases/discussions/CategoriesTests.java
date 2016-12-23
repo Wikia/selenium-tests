@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
@@ -19,8 +20,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moder
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
-
-import javax.xml.soap.Text;
 
 /**
  * To avoid creating unnecessary data, some of these tests assume that on www.dauto.wikia.com exists category on 4th
@@ -39,6 +38,10 @@ public class CategoriesTests extends NewTestTemplate {
   private static final String SHOULD_EDIT_CATEGORIES_MESSAGE = "Should be able to edit categories.";
 
   private static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE = "General category should be not editable";
+
+  private static final String CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE = "Category %s should appear in categories list.";
+
+  private static final String CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE = "Category %s should be visible on post creator.";
 
   // Anonymous user on mobile
 
@@ -159,29 +162,22 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanAddCategoryOnPostsListPage() {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
+
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = TextGenerator.createUniqueCategory();
 
-    final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
-        .getCategoriesFieldset()
-        .clickEdit()
-        .addCategory(categoryName)
-        .clickApproveButton();
+    final CategoriesFieldset categoriesFieldset = addCategory(
+        page.getFiltersPopOver().click().getCategoriesFieldset(),
+        categoryName);
 
     page.waitForPageReload();
 
     CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
-    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), "Category " + categoryName + " should appear in categories list.");
+    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+    Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
 
-    boolean actual = page.getPostsCreatorMobile().click()
-        .closeGuidelinesMessage()
-        .clickAddCategoryButton()
-        .hasCategory(categoryName);
-
-    Assertion.assertTrue(actual, "Category " + categoryName + " should be visible on post creator.");
-
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
+    removeCategoryRemotely(siteId, data);
   }
 
   // Discussions Administrator on desktop
@@ -201,6 +197,29 @@ public class CategoriesTests extends NewTestTemplate {
 
     Assertion.assertFalse(categoriesFieldset.canEditAllCategory(), "All category should be not editable");
     Assertion.assertFalse(categoriesFieldset.canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
+  }
+
+  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanAddCategoryOnPostsListPage() {
+    final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
+
+    final PostsListPage page = new PostsListPage().open();
+    final String categoryName = TextGenerator.createUniqueCategory();
+
+    final CategoriesFieldset categoriesFieldset = addCategory(
+        page.getModeration().getCategoriesFieldset(),
+        categoryName);
+
+    page.waitForPageReload();
+
+    final CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
+
+    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+    Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+
+    removeCategoryRemotely(siteId, data);
   }
 
   private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
@@ -245,4 +264,22 @@ public class CategoriesTests extends NewTestTemplate {
         .getCategoriesFieldset()
         .canEdit();
   }
+
+  private CategoriesFieldset addCategory(CategoriesFieldset categoriesFieldset, String categoryName) {
+    return categoriesFieldset.clickEdit()
+        .addCategory(categoryName)
+        .clickApproveButton();
+  }
+
+  private boolean isCategoryIn(PostsCreator postsCreator, String categoryName) {
+    return postsCreator.click()
+        .closeGuidelinesMessage()
+        .clickAddCategoryButton()
+        .hasCategory(categoryName);
+  }
+
+  private void removeCategoryRemotely(String siteId, CategoryPill.Data data) {
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
+  }
+
 }
