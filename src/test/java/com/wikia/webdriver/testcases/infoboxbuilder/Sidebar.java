@@ -112,8 +112,6 @@ public class Sidebar extends WikiBasePageObject {
     wait.forElementClickable(sidebarCheckbox);
     sidebarCheckbox.click();
 
-
-
     String chevronContent = getPseudoElementValue(infoboxHeader, ":after", "content");
 
     if (sidebarCheckbox.isSelected()) {
