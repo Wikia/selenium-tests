@@ -16,6 +16,7 @@ public enum User {
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
   STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "", "ci.user.wikiastaff.access_token"),
   ANONYMOUS("anonymous", "anonymous"),
+  DISCUSSIONS_ADMINISTRATOR("ci.user.discussions.administrator.username", "ci.user.discussions.administrator.password"),
   DISCUSSIONS_MODERATOR("ci.user.discussions.moderator.username", "ci.user.discussions.moderator.password"),
   REGULAR_USER_JAPAN("ci.user.language2.username", "ci.user.language2.password"),
   USER_GO_SEARCH_PREFERRED("ci.user.goSearchPreferredUser.username",

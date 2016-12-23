@@ -12,12 +12,13 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class PutRemoteOperation extends BaseRemoteOperation {
+public class PutRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
 
   PutRemoteOperation(User user) {
     super(user);
   }
 
+  @Override
   public String execute(final String url) {
     return execute(url, null);
   }
