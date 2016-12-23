@@ -11,10 +11,13 @@ public class CategoryContext extends RemoteContext {
 
   private final String categoryId;
 
+  private final String categoryName;
+
   @Builder
-  public CategoryContext(String siteId, String categoryId) {
+  public CategoryContext(String siteId, String categoryId, String categoryName) {
     super(siteId);
     this.categoryId = categoryId;
+    this.categoryName = categoryName;
   }
 
   public static CategoryContext defaultContextUsing(final String siteId, final CategoryPill.Data data) {
@@ -23,6 +26,7 @@ public class CategoryContext extends RemoteContext {
     return CategoryContext.builder()
         .siteId(siteId)
         .categoryId(data.getId())
+        .categoryName(data.getName())
         .build();
   }
 }

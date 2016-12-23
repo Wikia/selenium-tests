@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.operations;
+package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import org.apache.http.client.methods.HttpDelete;
@@ -6,9 +6,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.json.JSONObject;
 
 
-class DeleteRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
+public class DeleteRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
 
-  DeleteRemoteOperation(User user) {
+  public DeleteRemoteOperation(User user) {
     super(user);
   }
 

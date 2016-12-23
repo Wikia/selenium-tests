@@ -1,13 +1,13 @@
-package com.wikia.webdriver.common.remote.operations;
+package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import org.apache.http.client.methods.HttpPost;
 import org.json.JSONObject;
 
 
-class PostRemoteOperation extends BaseRemoteOperation {
+public class PostRemoteOperation extends BaseRemoteOperation {
 
-  PostRemoteOperation(User user) {
+  public PostRemoteOperation(User user) {
     super(user);
   }
 

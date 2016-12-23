@@ -31,6 +31,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   private static final int CATEGORY_POSITION = 4;
 
+  /**
+   * Edit categories on mobile does not have "All" category at the begining of the list, thus General category
+   * has index 0.
+   */
+  private static final int EDITABLE_CATEGORY_POSITION_ON_MOBILE = 5;
+
+  private static final String EDITABLE_CATEGORY_ORIGINAL_NAME = "Editable Category";
+
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
 
   private static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
@@ -164,7 +172,7 @@ public class CategoriesTests extends NewTestTemplate {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
 
     final PostsListPage page = new PostsListPage().open();
-    final String categoryName = TextGenerator.createUniqueCategory();
+    final String categoryName = TextGenerator.createUniqueCategoryName();
 
     final CategoriesFieldset categoriesFieldset = addCategory(
         page.getFiltersPopOver().click().getCategoriesFieldset(),
@@ -179,6 +187,31 @@ public class CategoriesTests extends NewTestTemplate {
 
     removeCategoryRemotely(siteId, data);
   }
+
+  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanEditCategoryOnPostsListPage() {
+    final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
+
+    final PostsListPage page = new PostsListPage().open();
+    final String categoryName = TextGenerator.createUniqueCategoryName();
+
+    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
+        .getCategoriesFieldset().clickEdit()
+        .rename(EDITABLE_CATEGORY_POSITION_ON_MOBILE, categoryName)
+        .clickApproveButton();
+
+    page.waitForPageReload();
+
+    CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
+
+    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+    Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(siteId, data);
+  }
+
 
   // Discussions Administrator on desktop
 
@@ -206,7 +239,7 @@ public class CategoriesTests extends NewTestTemplate {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
 
     final PostsListPage page = new PostsListPage().open();
-    final String categoryName = TextGenerator.createUniqueCategory();
+    final String categoryName = TextGenerator.createUniqueCategoryName();
 
     final CategoriesFieldset categoriesFieldset = addCategory(
         page.getModeration().getCategoriesFieldset(),

@@ -55,6 +55,14 @@ public class DiscussionsOperations {
     return this;
   }
 
+  public void renameCategory(final String siteId, CategoryPill.Data data) {
+    renameCategory(CategoryContext.defaultContextUsing(siteId, data));
+  }
+
+  public void renameCategory(CategoryContext context) {
+    new RenameCategory(user).execute(context);
+  }
+
   public void reportPost(PostEntity.Data data) {
     reportPost(ModeratePostContext.defaultContextUsing(extractSiteId(), data));
   }

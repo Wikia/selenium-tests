@@ -12,9 +12,9 @@ import java.util.function.Function;
 
 public class CategoriesFieldset extends WikiBasePageObject {
 
-  public static final int GENERAL_CATEGORY_POSITION_MOBILE = 0;
+  private static final int GENERAL_CATEGORY_POSITION_MOBILE = 0;
 
-  public static final int GENERAL_CATEGORY_POSITION_DESKTOP = 1;
+  private static final int GENERAL_CATEGORY_POSITION_DESKTOP = 1;
 
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
@@ -131,5 +131,17 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return categories.stream()
         .map(WebElement::getText)
         .anyMatch(name -> name.equals(categoryName));
+  }
+
+  public CategoriesFieldset rename(final int position, final String newCategoryName) {
+    withBoundaryCheck(editableCategories, position, webElement -> {
+      webElement.click();
+      WebElement input = webElement.findElement(By.cssSelector("input[type='text']"));
+      input.clear();
+      input.sendKeys(newCategoryName);
+      return null;
+    });
+
+    return this;
   }
 }
