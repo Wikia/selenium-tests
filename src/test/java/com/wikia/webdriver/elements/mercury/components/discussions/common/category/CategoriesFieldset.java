@@ -12,7 +12,9 @@ import java.util.function.Function;
 
 public class CategoriesFieldset extends WikiBasePageObject {
 
-  public static final int GENERAL_CATEGORY_POSITION = 0;
+  public static final int GENERAL_CATEGORY_POSITION_MOBILE = 0;
+
+  public static final int GENERAL_CATEGORY_POSITION_DESKTOP = 1;
 
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
@@ -61,7 +63,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   /**
-   * @param position - category position, first category is 0 - General
+   * @param position - category position, first category is 0 - All
    * @return category pill
    * @throws IllegalArgumentException when category is not found
    */
@@ -107,7 +109,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public boolean canEditGeneralCategory() {
-    return canEditCategoryAt(GENERAL_CATEGORY_POSITION);
+    return canEditCategoryAt(isMobile() ? GENERAL_CATEGORY_POSITION_MOBILE : GENERAL_CATEGORY_POSITION_DESKTOP);
   }
 
   public CategoriesFieldset addCategory(final String categoryName) {
