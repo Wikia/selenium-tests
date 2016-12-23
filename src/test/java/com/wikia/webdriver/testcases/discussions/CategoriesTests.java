@@ -7,14 +7,20 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
+
+import javax.xml.soap.Text;
 
 /**
  * To avoid creating unnecessary data, some of these tests assume that on www.dauto.wikia.com exists category on 4th
@@ -28,11 +34,11 @@ public class CategoriesTests extends NewTestTemplate {
 
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
 
-  public static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
+  private static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
 
-  public static final String SHOULD_EDIT_CATEGORIES_MESSAGE = "Should be able to edit categories.";
+  private static final String SHOULD_EDIT_CATEGORIES_MESSAGE = "Should be able to edit categories.";
 
-  public static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE = "General category should be not editable";
+  private static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE = "General category should be not editable";
 
   // Anonymous user on mobile
 
@@ -148,6 +154,36 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
+  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanAddCategoryOnPostsListPage() {
+    final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
+    final PostsListPage page = new PostsListPage().open();
+    final String categoryName = TextGenerator.createUniqueCategory();
+
+    final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
+        .getCategoriesFieldset()
+        .clickEdit()
+        .addCategory(categoryName)
+        .clickApproveButton();
+
+    page.waitForPageReload();
+
+    CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
+
+    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), "Category " + categoryName + " should appear in categories list.");
+
+    boolean actual = page.getPostsCreatorMobile().click()
+        .closeGuidelinesMessage()
+        .clickAddCategoryButton()
+        .hasCategory(categoryName);
+
+    Assertion.assertTrue(actual, "Category " + categoryName + " should be visible on post creator.");
+
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
+  }
+
   // Discussions Administrator on desktop
 
   @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
@@ -171,7 +207,7 @@ public class CategoriesTests extends NewTestTemplate {
     final FiltersPopOver filtersPopOver = page.getFiltersPopOver().click();
 
     final String categoryName = filtersPopOver.getCategoriesFieldset()
-        .clickCategory(CATEGORY_POSITION)
+        .clickCategoryAt(CATEGORY_POSITION)
         .getName();
 
     filtersPopOver.clickApplyButton();
@@ -184,7 +220,7 @@ public class CategoriesTests extends NewTestTemplate {
     final Moderation moderation = page.getModeration();
 
     final String categoryName = moderation.getCategoriesFieldset()
-        .clickCategory(CATEGORY_POSITION)
+        .clickCategoryAt(CATEGORY_POSITION)
         .getName();
 
     page.waitForPageReloadWith(categoryName);

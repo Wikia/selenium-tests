@@ -133,8 +133,8 @@ public class PostEntity {
         .build();
   }
 
-  @lombok.Data
   @Builder
+  @lombok.Data
   public static class Data {
 
     private final String id;

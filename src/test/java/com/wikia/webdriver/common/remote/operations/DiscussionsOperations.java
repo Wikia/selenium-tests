@@ -2,10 +2,12 @@ package com.wikia.webdriver.common.remote.operations;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.context.CreatePostContext;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
@@ -20,12 +22,20 @@ public class DiscussionsOperations {
     return createPost(CreatePostContext.defaultContext(extractSiteId()));
   }
 
-  private String extractSiteId() {
+  public String extractSiteId() {
     return Discussions.extractSiteIdFromMediaWikiUsing(driver);
   }
 
   public PostEntity.Data createPost(CreatePostContext context) {
     return new CreatePost(user).execute(context);
+  }
+
+  public void deleteCategory(final String siteId, CategoryPill.Data data) {
+    deleteCategory(CategoryContext.defaultContextUsing(siteId, data));
+  }
+
+  public void deleteCategory(CategoryContext context) {
+    new DeleteCategory(user).execute(context);
   }
 
   public void deletePost(PostEntity.Data data) {

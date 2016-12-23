@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
+import com.google.common.collect.Iterables;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -34,26 +35,49 @@ public class CategoriesFieldset extends WikiBasePageObject {
   @FindBy(css = ".discussion-categories-list .sortable-item")
   private List<WebElement> editableCategories;
 
+  @FindBy(className = "discussion-categories-edit-add-link")
+  private WebElement addCategoryLink;
+
+  @FindBy(css = ".discussion-categories-edit button.submit")
+  private WebElement approveChangesButton;
+
   public boolean canEdit() {
     WebElement svg = fieldset.findElement(By.tagName("use"));
     return svg.getAttribute("xlink:href").equals("#pencil");
   }
 
   @CheckForNull
-  public CategoryPill clickCategory(final int position) {
-    return withBoundryCheck(categories, position, webElement -> {
+  public CategoryPill findCategoryWith(final String categoryName) {
+    CategoryPill result = null;
+
+    for (int i = 0; i < categories.size() && result == null; i++) {
+      WebElement category = categories.get(i);
+      if (category.getText().equals(categoryName)) {
+        result = new CategoryPill(category, i);
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * @param position - category position, first category is 0 - General
+   * @return category pill
+   * @throws IllegalArgumentException when category is not found
+   */
+  public CategoryPill clickCategoryAt(final int position) {
+    return withBoundaryCheck(categories, position, webElement -> {
       final CategoryPill result = new CategoryPill(webElement, position);
       webElement.click();
       return result;
     });
   }
 
-  private <T> T withBoundryCheck(final List<WebElement> elements, final int position, Function<WebElement, T> fun) {
+  private <T> T withBoundaryCheck(final List<WebElement> elements, final int position, Function<WebElement, T> transform) {
     final int size = elements.size();
 
     if (size > position) {
-      WebElement webElement = elements.get(position);
-      return fun.apply(webElement);
+      return transform.apply(elements.get(position));
     } else {
       throw new IllegalArgumentException("You wanted to click category on position " + position + " but there is only " + size + " categories.");
     }
@@ -65,7 +89,6 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public boolean canEditAllCategory() {
-
     return isMobile() ? false
         // plesae remeber to change this line when SOC-3793 is done - "isCategoryEditable(editableCategoryAll)"
         : !editableCategoryAll.findElement(By.className("fancy-checkbox-span")).getAttribute("class").contains("disabled");
@@ -80,10 +103,31 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public boolean canEditCategoryAt(final int position) {
-    return withBoundryCheck(editableCategories, position, this::isCategoryEditable);
+    return withBoundaryCheck(editableCategories, position, this::isCategoryEditable);
   }
 
   public boolean canEditGeneralCategory() {
     return canEditCategoryAt(GENERAL_CATEGORY_POSITION);
+  }
+
+  public CategoriesFieldset addCategory(final String categoryName) {
+    this.addCategoryLink.click();
+    WebElement lastCategory = Iterables.getLast(this.editableCategories);
+    if (!lastCategory.getText().trim().isEmpty()) {
+      throw new IllegalStateException("Just created category should not contain text.");
+    }
+    lastCategory.findElement(By.cssSelector("input[type='text']")).sendKeys(categoryName);
+    return this;
+  }
+
+  public CategoriesFieldset clickApproveButton() {
+    approveChangesButton.click();
+    return this;
+  }
+
+  public boolean hasCategory(final String categoryName) {
+    return categories.stream()
+        .map(WebElement::getText)
+        .anyMatch(name -> name.equals(categoryName));
   }
 }

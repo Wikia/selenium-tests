@@ -6,6 +6,10 @@ public final class TextGenerator {
 
   private static final String UNIQUE_TEXT_FORMAT = "Automated test, timestamp %d";
 
+  private static final String CATEGORY_NAME_FORMAT = "Category %d";
+
+  private static final int MAX_CATEGORY_NAME_LENGTH = 20;
+
   private TextGenerator() {
     throw new AssertionError();
   }
@@ -16,5 +20,9 @@ public final class TextGenerator {
 
   public static String createUniqueText() {
     return String.format(UNIQUE_TEXT_FORMAT, System.currentTimeMillis());
+  }
+
+  public static String createUniqueCategory() {
+    return String.format(CATEGORY_NAME_FORMAT, System.currentTimeMillis()).substring(0, MAX_CATEGORY_NAME_LENGTH);
   }
 }

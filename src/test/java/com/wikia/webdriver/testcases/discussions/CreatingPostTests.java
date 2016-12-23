@@ -230,7 +230,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clearDescription();
 
     postsCreator.clickAddCategoryButton()
-        .findCategoryOnPosition(0)
+        .findCategoryOn(0)
         .click();
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only category selected.");
@@ -245,7 +245,7 @@ public class CreatingPostTests extends NewTestTemplate {
         .closeGuidelinesMessage()
         .addDescriptionWith(description)
         .clickAddCategoryButton()
-        .findCategoryOnPosition(0);
+        .findCategoryOn(0);
 
     categoryPill.click();
 

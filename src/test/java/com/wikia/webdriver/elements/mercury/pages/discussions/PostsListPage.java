@@ -79,9 +79,13 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
     return open(DEFAULT_FORUM_ID);
   }
 
-  public void waitForPageReloadWith(final String categoryName) {
+  public void waitForPageReload() {
     wait.forElementVisible(By.className("loading-overlay"));
     wait.forElementNotVisible(By.className("loading-overlay"));
+  }
+
+  public void waitForPageReloadWith(final String categoryName) {
+    waitForPageReload();
 
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {

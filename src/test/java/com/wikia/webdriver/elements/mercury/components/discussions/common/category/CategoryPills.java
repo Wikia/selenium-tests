@@ -15,18 +15,28 @@ public class CategoryPills extends BasePageObject {
 
   /**
    *
-   * @param categoryPosition - category position in pop over, counted from 0
+   * @param position - category position in pop over, counted from 0
    * @return category pill or null if category pill was not found
    */
   @CheckForNull
-  public CategoryPill findCategoryOnPosition(int categoryPosition) {
+  public CategoryPill findCategoryOn(int position) {
     CategoryPill result = null;
 
-    final List<WebElement> categoryPills = categoryPillsPopover.findElements(By.tagName("a"));
-    if (categoryPosition < categoryPills.size()) {
-      result = new CategoryPill(categoryPills.get(categoryPosition), categoryPosition);
+    final List<WebElement> categoryPills = findCategoryPills();
+    if (position < categoryPills.size()) {
+      result = new CategoryPill(categoryPills.get(position), position);
     }
 
     return result;
+  }
+
+  private List<WebElement> findCategoryPills() {
+    return categoryPillsPopover.findElements(By.tagName("a"));
+  }
+
+  public boolean hasCategory(final String categoryName) {
+    return findCategoryPills().stream()
+        .map(WebElement::getText)
+        .anyMatch(name -> name.equals(categoryName));
   }
 }

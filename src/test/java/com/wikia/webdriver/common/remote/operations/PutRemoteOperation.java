@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class PutRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
+class PutRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
 
   PutRemoteOperation(User user) {
     super(user);
