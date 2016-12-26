@@ -22,6 +22,7 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   @FindBy (css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
 
+  @Getter
   @FindBy (css = ".discussion-inline-editor")
   private WebElement editor;
 
@@ -71,5 +72,4 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     signInButtonInSignInDialog.click();
     return this;
   }
-
 }

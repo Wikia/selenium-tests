@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class PostsCreatorMobile extends BasePostsCreator {
 
   @Getter
-  @FindBy(css = ".new-post")
+  @FindBy(className = "new-post")
   private WebElement postsCreator;
 
   @Getter
@@ -21,6 +21,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
 
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .signin-button")
   private WebElement signInButtonInSignInDialog;
+
+  @Getter
+  @FindBy (className = "discussion-standalone-editor")
+  private WebElement editor;
 
   @Getter
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-save-button")

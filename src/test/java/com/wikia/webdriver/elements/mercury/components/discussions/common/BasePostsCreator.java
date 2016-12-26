@@ -4,6 +4,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.net.URL;
+
 public abstract class BasePostsCreator extends BasePageObject implements PostsCreator {
 
   private final CategoryPills categoryPills;
@@ -15,6 +17,8 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract String getBaseCssClassName();
 
   protected abstract WebElement getPostsCreator();
+
+  protected abstract WebElement getEditor();
 
   protected abstract WebElement getSignInDialog();
 
@@ -47,6 +51,18 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
+  public boolean hasOpenGraph() {
+    boolean result = false;
+
+    final WebElement openGraphContainer = getEditor().findElement(By.className("og-container"));
+    if (null != openGraphContainer) {
+      result = null != openGraphContainer.findElement(By.className("og-texts"));
+    }
+
+    return result;
+  }
+
+  @Override
   public PostsCreator closeGuidelinesMessage() {
     if (getGuidelinesMessageCloseButton().isDisplayed()) {
       getGuidelinesMessageCloseButton().click();
@@ -63,7 +79,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator fillTitleWith(String text) {
+  public PostsCreator addTitleWith(final String text) {
     getTitleTextarea().sendKeys(text);
     return this;
   }
@@ -75,8 +91,14 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator fillDescriptionWith(String text) {
+  public PostsCreator addDescriptionWith(final String text) {
     getDescriptionTextarea().sendKeys(text);
+    return this;
+  }
+
+  @Override
+  public PostsCreator addDescriptionWith(final URL url) {
+    getDescriptionTextarea().sendKeys(" " + url.toString() + " ");
     return this;
   }
 
@@ -90,28 +112,5 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   public PostsCreator clickSubmitButton() {
     getSubmitButton().click();
     return this;
-  }
-
-  @Override
-  public PostEntity.Data addPostWithTimestamp() {
-    final String title = TextGenerator.defaultText();
-    final String description = TextGenerator.createUniqueText();
-
-    CategoryPill category = fillTitleWith(title)
-        .fillDescriptionWith(description)
-        .clickAddCategoryButton()
-        .findCategoryOnPosition(0);
-
-    final String categoryName = category.getName();
-
-    category.click();
-
-    clickSubmitButton();
-
-    return PostEntity.Data.builder()
-        .category(categoryName)
-        .title(title)
-        .description(description)
-        .build();
   }
 }
