@@ -160,4 +160,24 @@ public class CategoriesFieldset extends WikiBasePageObject {
   public String getInfoMessageText() {
     return infoMessage.getText();
   }
+
+  public CategoriesFieldset removeTemporaryCategory(final String categoryName) {
+    return removeCategory(categoryName, "action-local-delete");
+  }
+
+  private CategoriesFieldset removeCategory(final String categoryName, final String actionName) {
+    for (WebElement element : editableCategories) {
+      final String value = element.findElement(By.cssSelector("input[type='text']")).getAttribute("value");
+      if (value.equals(categoryName)) {
+        element.click();
+        element.findElement(By.className(actionName)).click();
+      }
+    }
+    return this;
+  }
+
+  public DeleteCategoryModal removeCategory(final String categoryName) {
+    removeCategory(categoryName, "action-delete");
+    return new DeleteCategoryModal(this);
+  }
 }

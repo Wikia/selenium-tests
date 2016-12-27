@@ -53,8 +53,10 @@ public class CategoriesTests extends NewTestTemplate {
   private static final String CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE = "Category %s should be visible on post creator.";
 
   private static final String MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE = "Discussions Administrator should not be able to add more than nine categories. ( + 1 \"General\")";
-  public static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE = "You have reached the limit of allowed categories (10).";
-  public static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE = "Info message should appear when reached max categories limit.";
+
+  private static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE = "You have reached the limit of allowed categories (10).";
+
+  private static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE = "Info message should appear when reached max categories limit.";
 
   // Anonymous user on mobile
 
@@ -233,6 +235,40 @@ public class CategoriesTests extends NewTestTemplate {
     addCategoriesUntilMaxReached(categoriesFieldset);
 
     Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
+  }
+
+  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanRemoveCategoriesOnPostsListPage() {
+    CategoryPill.Data data = DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver)
+        .createCategory(TextGenerator.createUniqueCategoryName());
+
+    final PostsListPage page = new PostsListPage().open();
+
+    final String temporaryCategoryName = TextGenerator.createUniqueCategoryName();
+    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
+        .getCategoriesFieldset();
+
+    categoriesFieldset.clickEdit()
+        .addCategory(temporaryCategoryName)
+        .removeTemporaryCategory(temporaryCategoryName)
+        .clickApproveButton();
+
+    page.waitForPageReload();
+
+    Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), "Temporary category should not be added.");
+
+    categoriesFieldset.clickEdit()
+        .removeCategory(data.getName())
+        .clickPill(0)
+        .clickConfirmButton()
+        .clickApproveButton();
+
+    page.waitForPageReload();
+
+    Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), "Temporary category should be removed.");
+
   }
 
 
