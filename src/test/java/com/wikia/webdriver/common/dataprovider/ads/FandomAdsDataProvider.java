@@ -7,9 +7,10 @@ import org.testng.annotations.DataProvider;
 
 public class FandomAdsDataProvider {
 
-  private FandomAdsDataProvider() {
+  private static final String VUAP_PAGE_SLUG = "silicon-valley-perfect-mike-judge";
+  private static final String AD_UNIT_TEMPLATE = "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0";
 
-  }
+  private FandomAdsDataProvider() { }
 
   @DataProvider
   public static Object[][] fandomAds() {
@@ -57,21 +58,15 @@ public class FandomAdsDataProvider {
         return new Object[][]{
                 {
                         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        "silicon-valley-perfect-mike-judge",
+                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
                         AdsFandomContent.GPT_TOP_LEADERBOARD,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
-                                AdsFandomContent.TOP_LEADERBOARD
-                        )
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
                 },
                 {
                         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        "silicon-valley-perfect-mike-judge",
+                        VUAP_PAGE_SLUG,
                         AdsFandomContent.GPT_BOTTOM_LEADERBOARD,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
-                                AdsFandomContent.BOTTOM_LEADERBOARD
-                        )
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
                 }
         };
     }
@@ -81,21 +76,15 @@ public class FandomAdsDataProvider {
         return new Object[][]{
                 {
                         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        "silicon-valley-perfect-mike-judge",
+                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
                         AdsFandomContent.GPT_TOP_LEADERBOARD,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
-                                AdsFandomContent.TOP_LEADERBOARD
-                        )
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
                 },
                 {
                         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        "silicon-valley-perfect-mike-judge",
+                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
                         AdsFandomContent.GPT_BOTTOM_LEADERBOARD_MOBILE,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0",
-                                AdsFandomContent.BOTTOM_LEADERBOARD
-                        )
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
                 }
         };
     }
