@@ -38,6 +38,9 @@ public class CategoriesTests extends NewTestTemplate {
 
   private static final int MAX_NUMBER_OF_CATEGORIES = 10;
 
+  // Category name: General
+  private static final int PILL_POSITION_ON_DELETE_CATEGORY_MODAL = 0;
+
   private static final String EDITABLE_CATEGORY_ORIGINAL_NAME = "Editable Category";
 
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
@@ -57,6 +60,10 @@ public class CategoriesTests extends NewTestTemplate {
   private static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE = "You have reached the limit of allowed categories (10).";
 
   private static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE = "Info message should appear when reached max categories limit.";
+
+  private static final String TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE = "Temporary category should not be added.";
+
+  private static final String CATEGORY_SHOULD_BE_REMOVED_MESSAGE = "Category should be removed.";
 
   // Anonymous user on mobile
 
@@ -244,33 +251,16 @@ public class CategoriesTests extends NewTestTemplate {
     CategoryPill.Data data = DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver)
         .createCategory(TextGenerator.createUniqueCategoryName());
 
-    final PostsListPage page = new PostsListPage().open();
-
     final String temporaryCategoryName = TextGenerator.createUniqueCategoryName();
-    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
-        .getCategoriesFieldset();
+    final PostsListPage page = new PostsListPage().open();
+    final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
 
-    categoriesFieldset.clickEdit()
-        .addCategory(temporaryCategoryName)
-        .removeTemporaryCategory(temporaryCategoryName)
-        .clickApproveButton();
-
-    page.waitForPageReload();
-
+    addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
     Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), "Temporary category should not be added.");
 
-    categoriesFieldset.clickEdit()
-        .removeCategory(data.getName())
-        .clickPill(0)
-        .clickConfirmButton()
-        .clickApproveButton();
-
-    page.waitForPageReload();
-
+    removeCategory(data, page, categoriesFieldset);
     Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), "Temporary category should be removed.");
-
   }
-
 
   // Discussions Administrator on desktop
 
@@ -357,6 +347,24 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
+  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanRemoveCategoriesOnPostsListPage() {
+    CategoryPill.Data data = DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver)
+        .createCategory(TextGenerator.createUniqueCategoryName());
+
+    final String temporaryCategoryName = TextGenerator.createUniqueCategoryName();
+    final PostsListPage page = new PostsListPage().open();
+    final CategoriesFieldset categoriesFieldset = page.getModeration().getCategoriesFieldset();
+
+    addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
+    Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
+
+    removeCategory(data, page, categoriesFieldset);
+    Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
+  }
+
   private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
     final FiltersPopOver filtersPopOver = page.getFiltersPopOver().click();
 
@@ -436,5 +444,24 @@ public class CategoriesTests extends NewTestTemplate {
     if (counter == MAX_NUMBER_OF_CATEGORIES) {
       Assertion.fail(MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE);
     }
+  }
+
+  private void removeCategory(CategoryPill.Data data, PostsListPage page, CategoriesFieldset categoriesFieldset) {
+    categoriesFieldset.clickEdit()
+        .removeCategory(data.getName())
+        .clickPill(PILL_POSITION_ON_DELETE_CATEGORY_MODAL)
+        .clickConfirmButton()
+        .clickApproveButton();
+
+    page.waitForPageReload();
+  }
+
+  private void addAndRemoveTemporaryCategory(PostsListPage page, String temporaryCategoryName, CategoriesFieldset categoriesFieldset) {
+    categoriesFieldset.clickEdit()
+        .addCategory(temporaryCategoryName)
+        .removeTemporaryCategory(temporaryCategoryName)
+        .clickApproveButton();
+
+    page.waitForPageReload();
   }
 }
