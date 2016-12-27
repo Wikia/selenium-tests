@@ -90,6 +90,11 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return this;
   }
 
+  /**
+   * For mobile "All" category is not visible, that is why it's always false - can not be edited.
+   *
+   * @return true if "All" category can be edited
+   */
   public boolean canEditAllCategory() {
     return isMobile() ? false
         // plesae remeber to change this line when SOC-3793 is done - "isCategoryEditable(editableCategoryAll)"

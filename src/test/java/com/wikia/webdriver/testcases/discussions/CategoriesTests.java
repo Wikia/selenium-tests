@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -31,13 +30,11 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
+  // Category name: Category 3
   private static final int CATEGORY_POSITION = 4;
 
-  /**
-   * Edit categories on mobile does not have "All" category at the begining of the list, thus General category
-   * has index 0.
-   */
-  private static final int EDITABLE_CATEGORY_POSITION_ON_MOBILE = 5;
+  // Category name: Editable Category
+  private static final int EDITABLE_CATEGORY_POSITION = 5;
 
   private static final String EDITABLE_CATEGORY_ORIGINAL_NAME = "Editable Category";
 
@@ -201,7 +198,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
         .getCategoriesFieldset().clickEdit()
-        .rename(EDITABLE_CATEGORY_POSITION_ON_MOBILE, categoryName)
+        .rename(EDITABLE_CATEGORY_POSITION, categoryName)
         .clickApproveButton();
 
     page.waitForPageReload();
@@ -269,7 +266,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     CategoriesFieldset categoriesFieldset = page.getModeration()
         .getCategoriesFieldset().clickEdit()
-        .rename(EDITABLE_CATEGORY_POSITION_ON_MOBILE, categoryName)
+        .rename(EDITABLE_CATEGORY_POSITION, categoryName)
         .clickApproveButton();
 
     page.waitForPageReload();
