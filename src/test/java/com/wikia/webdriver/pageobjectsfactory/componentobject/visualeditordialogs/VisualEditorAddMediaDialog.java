@@ -36,9 +36,11 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
   private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
   private By mediaResultsBy = By.cssSelector(".ve-ui-mwMediaResultWidget");
-  private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
+  private By mediaAddIconBy = By.cssSelector(".ve-ui-WikiaMediaOptionWidget-thumbnail:not(.ve-ui-texture-transparency)");
   private By mediaTitlesBy = By
       .cssSelector(".ve-ui-wikiaMediaResultsWidget .oo-ui-labelElement-label");
+  private By previewVideoButtonBy = By.cssSelector(".oo-ui-icon-preview-video");
+  private By previewPhotoButtonBy = By.cssSelector(".oo-ui-icon-preview-photo");
 
   public enum ImageLicense {
     NONESELECTED("None selected", ""), FAIRUSE("Fairuse", ""), SELF("Self",
@@ -178,18 +180,26 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     PageObjectLogging.log("selectFileToUpload", "file " + fileName + " added to upload", true);
   }
 
-  public VisualEditorPageObject previewExistingMediaByTitle(String title) {
+  public VisualEditorPageObject previewExistingVideoByTitle(String title) {
     waitForDialogVisible();
     WebElement media = findMediaByTitle(title);
-    media.click();
+    media.findElement(previewVideoButtonBy).click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
     return new VisualEditorPageObject(driver);
   }
 
-  private WebElement findMediaByTitle(String title) {
+  public VisualEditorPageObject previewExistingPhotoByTitle(String title) {
+    waitForDialogVisible();
+    WebElement media = findMediaByTitle(title);
+    media.findElement(previewPhotoButtonBy).click();
+    PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
+    return new VisualEditorPageObject(driver);
+  }
+
+    private WebElement findMediaByTitle(String title) {
     WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
     wait.forElementVisible(mediaResultsWidget);
     return Elements.getElementByValue(mediaResultsWidget.findElements(mediaTitlesBy), "title",
-        title);
+        title).findElement(parentBy).findElement(parentBy);
   }
 }

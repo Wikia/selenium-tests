@@ -92,7 +92,7 @@ public class VEVideoTests extends NewTestTemplate {
     VisualEditorPageObject ve =
         new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(mediaTitle);
-    ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
+    ve = mediaDialog.previewExistingVideoByTitle(mediaTitle);
     ve.verifyPreviewVideo();
   }
 
