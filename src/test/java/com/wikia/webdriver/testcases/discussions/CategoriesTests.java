@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
+import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
@@ -215,7 +216,7 @@ public class CategoriesTests extends NewTestTemplate {
         .categoryId(data.getId())
         .categoryName(EDITABLE_CATEGORY_ORIGINAL_NAME)
         .build();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
+    DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
   }
 
 
@@ -318,7 +319,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void removeCategoryRemotely(String siteId, CategoryPill.Data data) {
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
+    DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
   }
 
 }

@@ -34,13 +34,21 @@ public class CategoryPill {
     return new Data(getId(), position, name);
   }
 
-  @AllArgsConstructor
   @lombok.Data
   public static class Data {
+
     private String id;
 
     private int position;
 
     private String name;
+
+    private int displayOrder = 0;
+
+    public Data(String id, int position, String name) {
+      this.id = id;
+      this.position = position;
+      this.name = name;
+    }
   }
 }

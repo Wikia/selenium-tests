@@ -22,20 +22,12 @@ public class DiscussionsOperations {
     return createPost(CreatePostContext.defaultContext(extractSiteId()));
   }
 
-  public String extractSiteId() {
+  private String extractSiteId() {
     return Discussions.extractSiteIdFromMediaWikiUsing(driver);
   }
 
   public PostEntity.Data createPost(CreatePostContext context) {
     return new CreatePost(user).execute(context);
-  }
-
-  public void deleteCategory(final String siteId, CategoryPill.Data data) {
-    deleteCategory(CategoryContext.defaultContextUsing(siteId, data));
-  }
-
-  public void deleteCategory(CategoryContext context) {
-    new DeleteCategory(user).execute(context);
   }
 
   public void deletePost(PostEntity.Data data) {
@@ -53,10 +45,6 @@ public class DiscussionsOperations {
   public DiscussionsOperations lockPost(ThreadContext context) {
     new LockPost(user).execute(context);
     return this;
-  }
-
-  public void renameCategory(CategoryContext context) {
-    new RenameCategory(user).execute(context);
   }
 
   public void reportPost(PostEntity.Data data) {

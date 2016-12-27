@@ -1,13 +1,10 @@
 package com.wikia.webdriver.common.remote.operations;
 
 import com.google.common.collect.ImmutableMap;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import org.json.JSONObject;
 
 public class RenameCategory {
