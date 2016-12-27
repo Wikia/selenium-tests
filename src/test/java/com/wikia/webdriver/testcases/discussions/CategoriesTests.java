@@ -211,12 +211,7 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
     Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
 
-    final CategoryContext context = CategoryContext.builder()
-        .siteId(siteId)
-        .categoryId(data.getId())
-        .categoryName(EDITABLE_CATEGORY_ORIGINAL_NAME)
-        .build();
-    DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
+    revertCategoryName(siteId, data);
   }
 
 
@@ -260,6 +255,33 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
 
     removeCategoryRemotely(siteId, data);
+  }
+
+
+  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanEditCategoryOnPostsListPage() {
+    final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
+
+    final PostsListPage page = new PostsListPage().open();
+    final String categoryName = TextGenerator.createUniqueCategoryName();
+
+    CategoriesFieldset categoriesFieldset = page.getModeration()
+        .getCategoriesFieldset().clickEdit()
+        .rename(EDITABLE_CATEGORY_POSITION_ON_MOBILE, categoryName)
+        .clickApproveButton();
+
+    page.waitForPageReload();
+
+    CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
+
+    try {
+      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+    } finally {
+      revertCategoryName(siteId, data);
+    }
   }
 
   private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
@@ -322,4 +344,12 @@ public class CategoriesTests extends NewTestTemplate {
     DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
   }
 
+  private void revertCategoryName(String siteId, CategoryPill.Data data) {
+    final CategoryContext context = CategoryContext.builder()
+        .siteId(siteId)
+        .categoryId(data.getId())
+        .categoryName(EDITABLE_CATEGORY_ORIGINAL_NAME)
+        .build();
+    DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
+  }
 }
