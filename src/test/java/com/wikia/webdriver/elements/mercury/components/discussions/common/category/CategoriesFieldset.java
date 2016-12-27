@@ -43,6 +43,9 @@ public class CategoriesFieldset extends WikiBasePageObject {
   @FindBy(css = ".discussion-categories-edit button.submit")
   private WebElement approveChangesButton;
 
+  @FindBy(className = "categories-edit-info-message")
+  private WebElement infoMessage;
+
   public boolean canEdit() {
     WebElement svg = fieldset.findElement(By.tagName("use"));
     return svg.getAttribute("xlink:href").equals("#pencil");
@@ -117,6 +120,10 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return canEditCategoryAt(isMobile() ? GENERAL_CATEGORY_POSITION_MOBILE : GENERAL_CATEGORY_POSITION_DESKTOP);
   }
 
+  public boolean canAddCategory() {
+    return !this.addCategoryLink.getAttribute("class").contains("active-element-disabled-theme-color");
+  }
+
   public CategoriesFieldset addCategory(final String categoryName) {
     this.addCategoryLink.click();
     WebElement lastCategory = Iterables.getLast(this.editableCategories);
@@ -148,5 +155,9 @@ public class CategoriesFieldset extends WikiBasePageObject {
     });
 
     return this;
+  }
+
+  public String getInfoMessageText() {
+    return infoMessage.getText();
   }
 }

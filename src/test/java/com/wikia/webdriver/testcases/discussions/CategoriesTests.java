@@ -36,6 +36,8 @@ public class CategoriesTests extends NewTestTemplate {
   // Category name: Editable Category
   private static final int EDITABLE_CATEGORY_POSITION = 5;
 
+  private static final int MAX_NUMBER_OF_CATEGORIES = 10;
+
   private static final String EDITABLE_CATEGORY_ORIGINAL_NAME = "Editable Category";
 
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
@@ -209,6 +211,31 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
 
     revertCategoryName(siteId, data);
+  }
+
+  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategoriesOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+
+    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
+        .getCategoriesFieldset().clickEdit();
+
+    int counter = 0;
+    while (categoriesFieldset.canAddCategory() && counter < MAX_NUMBER_OF_CATEGORIES) {
+      categoriesFieldset.addCategory(TextGenerator.createUniqueCategoryName());
+      counter++;
+    }
+
+    if (counter == MAX_NUMBER_OF_CATEGORIES) {
+      Assertion.fail("Discussions Administrator should not be able to add more than nine categories. ( + 1 \"General\")");
+    }
+
+    Assertion.assertEquals(
+        categoriesFieldset.getInfoMessageText(),
+        "You have reached the limit of allowed categories (10).",
+        "Info message should appear when reached max categories limit.");
   }
 
 
