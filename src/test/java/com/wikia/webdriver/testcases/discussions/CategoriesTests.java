@@ -52,6 +52,10 @@ public class CategoriesTests extends NewTestTemplate {
 
   private static final String CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE = "Category %s should be visible on post creator.";
 
+  private static final String MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE = "Discussions Administrator should not be able to add more than nine categories. ( + 1 \"General\")";
+  public static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE = "You have reached the limit of allowed categories (10).";
+  public static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE = "Info message should appear when reached max categories limit.";
+
   // Anonymous user on mobile
 
   @Test(groups = "discussions-anonUserOnMobileCategories")
@@ -183,10 +187,12 @@ public class CategoriesTests extends NewTestTemplate {
 
     CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
-    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-    Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
-
-    removeCategoryRemotely(siteId, data);
+    try {
+      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+    } finally {
+      removeCategoryRemotely(siteId, data);
+    }
   }
 
   @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
@@ -207,10 +213,12 @@ public class CategoriesTests extends NewTestTemplate {
 
     CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
-    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-    Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
-
-    revertCategoryName(siteId, data);
+    try {
+      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+    } finally {
+      revertCategoryName(siteId, data);
+    }
   }
 
   @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
@@ -222,20 +230,9 @@ public class CategoriesTests extends NewTestTemplate {
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
         .getCategoriesFieldset().clickEdit();
 
-    int counter = 0;
-    while (categoriesFieldset.canAddCategory() && counter < MAX_NUMBER_OF_CATEGORIES) {
-      categoriesFieldset.addCategory(TextGenerator.createUniqueCategoryName());
-      counter++;
-    }
+    addCategoriesUntilMaxReached(categoriesFieldset);
 
-    if (counter == MAX_NUMBER_OF_CATEGORIES) {
-      Assertion.fail("Discussions Administrator should not be able to add more than nine categories. ( + 1 \"General\")");
-    }
-
-    Assertion.assertEquals(
-        categoriesFieldset.getInfoMessageText(),
-        "You have reached the limit of allowed categories (10).",
-        "Info message should appear when reached max categories limit.");
+    Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
 
@@ -254,7 +251,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     categoriesFieldset.clickEdit();
 
-    Assertion.assertFalse(categoriesFieldset.canEditAllCategory(), "All category should be not editable");
+    Assertion.assertFalse(categoriesFieldset.canEditAllCategory(), "All category should not be editable.");
     Assertion.assertFalse(categoriesFieldset.canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
@@ -275,10 +272,12 @@ public class CategoriesTests extends NewTestTemplate {
 
     final CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
-    Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-    Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
-
-    removeCategoryRemotely(siteId, data);
+    try {
+      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+    } finally {
+      removeCategoryRemotely(siteId, data);
+    }
   }
 
 
@@ -306,6 +305,20 @@ public class CategoriesTests extends NewTestTemplate {
     } finally {
       revertCategoryName(siteId, data);
     }
+  }
+
+  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategoriesOnPostsListPage() {
+    final PostsListPage page = new PostsListPage().open();
+
+    CategoriesFieldset categoriesFieldset = page.getModeration()
+        .getCategoriesFieldset().clickEdit();
+
+    addCategoriesUntilMaxReached(categoriesFieldset);
+
+    Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
   private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
@@ -375,5 +388,17 @@ public class CategoriesTests extends NewTestTemplate {
         .categoryName(EDITABLE_CATEGORY_ORIGINAL_NAME)
         .build();
     DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
+  }
+
+  private void addCategoriesUntilMaxReached(CategoriesFieldset categoriesFieldset) {
+    int counter = 0;
+    while (categoriesFieldset.canAddCategory() && counter < MAX_NUMBER_OF_CATEGORIES) {
+      categoriesFieldset.addCategory(TextGenerator.createUniqueCategoryName());
+      counter++;
+    }
+
+    if (counter == MAX_NUMBER_OF_CATEGORIES) {
+      Assertion.fail(MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE);
+    }
   }
 }
