@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
@@ -209,7 +210,12 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
     Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
 
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(siteId, data);
+    final CategoryContext context = CategoryContext.builder()
+        .siteId(siteId)
+        .categoryId(data.getId())
+        .categoryName(EDITABLE_CATEGORY_ORIGINAL_NAME)
+        .build();
+    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
   }
 
 
