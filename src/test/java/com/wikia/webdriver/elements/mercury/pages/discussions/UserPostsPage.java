@@ -1,10 +1,12 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebElement;
 
 import java.util.regex.Pattern;
 
@@ -15,6 +17,9 @@ public class UserPostsPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
+
+  @Getter(lazy = true)
+  private final DeleteAllButton deleteAll = new DeleteAllButton();
 
   private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+$");
 

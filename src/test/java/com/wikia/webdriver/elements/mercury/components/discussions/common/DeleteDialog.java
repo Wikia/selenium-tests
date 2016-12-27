@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-@AllArgsConstructor
 public class DeleteDialog extends ConfirmationDialog {
 
   @FindBy(className = "post-detail")
