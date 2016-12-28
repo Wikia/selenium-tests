@@ -13,19 +13,11 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -539,6 +531,22 @@ public class BasePageObject {
     driver.switchTo().window(tabs.get(tabs.size() - 1));
 
     return driver.getCurrentUrl();
+  }
+
+  private ArrayList<String> getTabUrls() {
+    String currentTab = driver.getWindowHandle();
+    ArrayList<String> result = new ArrayList<>();
+    for(String windowHandler : driver.getWindowHandles()) {
+      driver.switchTo().window(windowHandler);
+      result.add(driver.getCurrentUrl());
+    }
+
+    driver.switchTo().window(currentTab);
+    return result;
+  }
+
+  public boolean tabContainsUrl(String url) {
+    return getTabUrls().contains(url);
   }
 
   public int getElementBottomPositionByCssSelector(String elementName) {

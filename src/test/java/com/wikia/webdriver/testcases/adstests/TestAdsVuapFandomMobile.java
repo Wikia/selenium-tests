@@ -103,7 +103,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
             dataProvider = "fandomVuapPageMobile",
             groups = "AdsVuapVideoPauseFandomMobile"
     )
-    public void adsVuapVideoPauseFandoMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
+    public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         fandomPage.triggerOnScrollSlots();

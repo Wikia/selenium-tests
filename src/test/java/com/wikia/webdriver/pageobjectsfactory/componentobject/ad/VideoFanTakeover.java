@@ -3,17 +3,15 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 public class VideoFanTakeover {
   private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-ima-container iframe";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-ima-container video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .overVideoLayer";
-  private static final String FANDOM_URL = "http://www.wikia.com/fandom";
+  public static final String AD_REDIRECT_URL = "http://www.wikia.com/explore-pl";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD = 28;
   private static By playTriggerButtonSelector = By.id("button");
   private static By closeVideoButtonSelector = By.className("close-ad");
@@ -80,9 +78,9 @@ public class VideoFanTakeover {
 
   public void clickOnAdImage(){
     runInAdFrame(() -> {
-    Actions action = new Actions(driver);
-      //Setting -20 value to make sure click will be executed 20px left and 20px up from video button to click on ad image
-      action.moveToElement(wait.forElementClickable(playTriggerButtonSelector), -20, -20).click().build().perform();
+      final By adImageTrigger = By.cssSelector("#adContainer a");
+      wait.forElementClickable(adImageTrigger);
+      driver.findElement(adImageTrigger).click();
       PageObjectLogging.log("clickOnAdImage", "ad image clicked", true, driver);
     });
   }
@@ -118,7 +116,7 @@ public class VideoFanTakeover {
   }
 
   public void verifyFandomTabOpened(String tabUrl) {
-    Assertion.assertEquals(tabUrl, FANDOM_URL);
+    Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);
   }
 
   public boolean isVideoAdBiggerThanImageAdOasis(double videoHeight, double imageHeight) {

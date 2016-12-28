@@ -3,8 +3,8 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
-import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
+import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 import org.testng.Assert;
@@ -41,16 +41,14 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
             dataProvider = "fandomVuapPage",
             groups = "AdsImageClickedOpensNewPageFandom"
     )
-    public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName, String iframeId) {
+    public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         fandomPage.triggerOnScrollSlots();
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
         fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
 
         videoFanTakeover.clickOnAdImage();
-
-        String tabUrl = fandomPage.switchToNewBrowserTab();
-        videoFanTakeover.verifyFandomTabOpened(tabUrl);
+        Assert.assertTrue(fandomPage.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
     }
 
     @Test(
@@ -78,7 +76,7 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
             dataProvider = "fandomVuapPage",
             groups = "AdsVuapCheckSlotSizesFamdom"
     )
-    public void adsVuapCheckSlotSizesFamdom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
+    public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         String slotSelector = AdsFandomContent.getSlotSelector(slotName);
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         fandomPage.triggerOnScrollSlots();
