@@ -1,10 +1,14 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import java.net.URL;
+
 public interface PostsCreator {
 
   boolean isSignInDialogVisible();
 
   boolean isPostButtonActive();
+
+  boolean hasOpenGraph();
 
   PostsCreator click();
 
@@ -12,15 +16,15 @@ public interface PostsCreator {
 
   CategoryPills clickAddCategoryButton();
 
-  PostsCreator fillTitleWith(final String text);
+  PostsCreator addTitleWith(final String text);
 
   PostsCreator clearTitle();
 
-  PostsCreator fillDescriptionWith(final String text);
+  PostsCreator addDescriptionWith(final String text);
+
+  PostsCreator addDescriptionWith(final URL url);
 
   PostsCreator clearDescription();
 
   PostsCreator clickSubmitButton();
-
-  PostEntity.Data addPostWithTimestamp();
 }

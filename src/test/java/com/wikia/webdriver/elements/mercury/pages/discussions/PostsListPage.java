@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.IntroducingFollowingModal;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
@@ -34,9 +33,6 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final HeroUnit heroUnit = new HeroUnit();
-
-  @Getter(lazy = true)
-  private final IntroducingFollowingModal introducingFollowingModal = new IntroducingFollowingModal();
 
   @Getter(lazy = true)
   private final Moderation moderation = new Moderation();

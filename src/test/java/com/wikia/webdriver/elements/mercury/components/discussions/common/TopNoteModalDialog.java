@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class TopNoteModalDialog extends BasePageObject {
 
-  private static final long TIMEOUT = 10;
-
   @FindBy(className = "post-detail")
   private WebElement post;
 
@@ -45,7 +43,7 @@ public class TopNoteModalDialog extends BasePageObject {
 
   public void clickApprove() {
     getActiveDialog().findElement(By.className("confirm-button")).click();
-    new WebDriverWait(driver, TIMEOUT).until(new Predicate<WebDriver>() {
+    new WebDriverWait(driver, DiscussionsConstants.TIMEOUT).until(new Predicate<WebDriver>() {
       @Override
       public boolean apply(@Nullable WebDriver input) {
         return !post.getAttribute("class").contains("is-reported");

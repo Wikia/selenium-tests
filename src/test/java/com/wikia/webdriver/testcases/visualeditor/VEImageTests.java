@@ -38,7 +38,7 @@ public class VEImageTests extends NewTestTemplate {
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMediaDialog mediaDialog = ve.clickImageButton();
     mediaDialog = mediaDialog.searchMedia(mediaTitle);
-    ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
+    ve = mediaDialog.previewExistingPhotoByTitle(mediaTitle);
     ve.verifyPreviewImage();
   }
 

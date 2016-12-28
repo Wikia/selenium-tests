@@ -2,19 +2,24 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
 
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class PostEntity {
 
-  private final WebElement webElement;
+  @Getter(AccessLevel.PACKAGE)
+  private final WebElement post;
 
-  PostEntity(WebElement webElement) {
-    this.webElement = webElement;
+  public boolean hasOpenGraphAtContentEnd() {
+    return null != post.findElement(By.cssSelector(".discussion-content + .og-container"));
   }
 
   public boolean hasTopNote() {
@@ -22,7 +27,11 @@ public class PostEntity {
   }
 
   private WebElement findTopNoteElement() {
-    return webElement.findElement(By.className("top-note"));
+    return post.findElement(By.className("top-note"));
+  }
+
+  public boolean isLocked() {
+    return hasClass("is-locked");
   }
 
   public boolean isReported() {
@@ -30,7 +39,7 @@ public class PostEntity {
   }
 
   private boolean hasClass(final String className) {
-    return webElement.getAttribute("class").contains(className);
+    return post.getAttribute("class").contains(className);
   }
 
   public boolean isDeleted() {
@@ -42,16 +51,16 @@ public class PostEntity {
   }
 
   public String findId() {
-    final String idAttribute = webElement.findElement(By.className("discussion-more-options")).getAttribute("id");
+    final String idAttribute = post.findElement(By.className("discussion-more-options")).getAttribute("id");
     return StringUtils.substringAfterLast(idAttribute, "-");
   }
 
   public String findTimestamp() {
-    return webElement.findElement(By.className("timestamp")).getText();
+    return post.findElement(By.className("timestamp")).getText();
   }
 
   public String findTitle() {
-    return webElement.findElement(By.className("post-title")).getText();
+    return post.findElement(By.className("post-title")).getText();
   }
 
   public String findDescription() {
@@ -61,7 +70,7 @@ public class PostEntity {
   }
 
   private boolean isOnPostDetailsPage() {
-    return Iterables.all(webElement.findElements(By.tagName("a")), new Predicate<WebElement>() {
+    return Iterables.all(post.findElements(By.tagName("a")), new Predicate<WebElement>() {
       @Override
       public boolean apply(@Nullable WebElement e) {
         return !e.getAttribute("class").contains("post-details-link");
@@ -70,12 +79,12 @@ public class PostEntity {
   }
 
   private String createDescriptionOnPostDetailsPage() {
-    final String content = webElement.findElement(By.className("discussion-content")).getText();
+    final String content = post.findElement(By.className("discussion-content")).getText();
     return StringUtils.remove(content, findTitle());
   }
 
   public String findCategory() {
-    return webElement.findElement(By.className("post-category-name")).getText();
+    return post.findElement(By.className("post-category-name")).getText();
   }
 
   public String findLinkToPostDetails() {
@@ -83,18 +92,22 @@ public class PostEntity {
   }
 
   private WebElement findDescriptionElement() {
-    return webElement.findElement(By.className("post-details-link"));
+    return post.findElement(By.className("post-details-link"));
   }
 
   public String findAuthorId() {
     clickMoreOptions();
 
-    String hrefAttribute = webElement.findElement(By.cssSelector("a[href^='/d/u']")).getAttribute("href");
+    String hrefAttribute = post.findElement(By.cssSelector("a[href^='/d/u']")).getAttribute("href");
     final String authorId = StringUtils.substringAfterLast(hrefAttribute, "/");
 
     clickMoreOptions();
 
     return authorId;
+  }
+
+  public PostActionsRow findPostActions() {
+    return new PostActionsRow(post.findElement(By.className("post-actions")));
   }
 
   public void click() {
@@ -104,8 +117,8 @@ public class PostEntity {
   }
 
   public MoreOptionsPopOver clickMoreOptions() {
-    webElement.findElement(By.className("discussion-more-options")).click();
-    return new MoreOptionsPopOver(webElement);
+    post.findElement(By.className("discussion-more-options")).click();
+    return MoreOptionsPopOver.fromPostEntity(this);
   }
 
   public Data toData() {

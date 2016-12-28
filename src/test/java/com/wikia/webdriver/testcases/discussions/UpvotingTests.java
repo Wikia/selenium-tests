@@ -130,9 +130,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private Post findPosts() {
-    PostsListPage page = new PostsListPage().open();
-    page.getIntroducingFollowingModal().confirmSeeingModal();
-    return page.getPost();
+    return new PostsListPage().open().getPost();
   }
   
   private void postListUpvoteButtonClickDoesntAddAnUpvote() {
