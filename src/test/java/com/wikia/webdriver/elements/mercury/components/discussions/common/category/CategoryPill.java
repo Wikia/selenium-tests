@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;

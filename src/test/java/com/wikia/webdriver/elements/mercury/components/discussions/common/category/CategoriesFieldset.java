@@ -14,6 +14,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
   private static final String GENERAL_CATEGORY_NAME = "General";
 
+  private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
+
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
 
@@ -46,7 +48,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
   public boolean canEdit() {
     WebElement svg = fieldset.findElement(By.tagName("use"));
-    return svg.getAttribute("xlink:href").equals("#pencil");
+    return "#pencil".equals(svg.getAttribute("xlink:href"));
   }
 
   @CheckForNull
@@ -114,7 +116,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
     WebElement result = null;
 
     for (WebElement element : editableCategories) {
-      final String value = element.findElement(By.cssSelector("input[type='text']")).getAttribute("value");
+      final String value = element.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR)).getAttribute("value");
       if (value.equals(categoryName)) {
         result = element;
       }
@@ -137,7 +139,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
     if (!lastCategory.getText().trim().isEmpty()) {
       throw new IllegalStateException("Just created category should not contain text.");
     }
-    lastCategory.findElement(By.cssSelector("input[type='text']")).sendKeys(categoryName);
+    lastCategory.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR)).sendKeys(categoryName);
     return this;
   }
 
@@ -155,7 +157,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   public CategoriesFieldset rename(final int position, final String newCategoryName) {
     withBoundaryCheck(editableCategories, position, webElement -> {
       webElement.click();
-      WebElement input = webElement.findElement(By.cssSelector("input[type='text']"));
+      WebElement input = webElement.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR));
       input.clear();
       input.sendKeys(newCategoryName);
       return null;

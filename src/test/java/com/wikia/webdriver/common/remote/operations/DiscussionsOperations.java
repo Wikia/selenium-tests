@@ -2,12 +2,10 @@ package com.wikia.webdriver.common.remote.operations;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
-import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.context.CreatePostContext;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
