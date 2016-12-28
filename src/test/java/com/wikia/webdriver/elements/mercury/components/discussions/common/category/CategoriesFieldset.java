@@ -12,9 +12,7 @@ import java.util.function.Function;
 
 public class CategoriesFieldset extends WikiBasePageObject {
 
-  private static final int GENERAL_CATEGORY_POSITION_MOBILE = 0;
-
-  private static final int GENERAL_CATEGORY_POSITION_DESKTOP = 1;
+  private static final String GENERAL_CATEGORY_NAME = "General";
 
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
@@ -100,7 +98,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
    */
   public boolean canEditAllCategory() {
     return isMobile() ? false
-        // plesae remeber to change this line when SOC-3793 is done - "isCategoryEditable(editableCategoryAll)"
+        // please remember to change this line when SOC-3793 is done - "isCategoryEditable(editableCategoryAll)"
         : !editableCategoryAll.findElement(By.className("fancy-checkbox-span")).getAttribute("class").contains("disabled");
   }
 
@@ -108,16 +106,25 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return !label.isDisplayed();
   }
 
+  public boolean canEditGeneralCategory() {
+    return isCategoryEditable(findEditableCategoryWith(GENERAL_CATEGORY_NAME));
+  }
+
+  private WebElement findEditableCategoryWith(final String categoryName) {
+    WebElement result = null;
+
+    for (WebElement element : editableCategories) {
+      final String value = element.findElement(By.cssSelector("input[type='text']")).getAttribute("value");
+      if (value.equals(categoryName)) {
+        result = element;
+      }
+    }
+
+    return result;
+  }
+
   private boolean isCategoryEditable(WebElement webElement) {
     return webElement.findElement(By.tagName("input")).isEnabled();
-  }
-
-  public boolean canEditCategoryAt(final int position) {
-    return withBoundaryCheck(editableCategories, position, this::isCategoryEditable);
-  }
-
-  public boolean canEditGeneralCategory() {
-    return canEditCategoryAt(isMobile() ? GENERAL_CATEGORY_POSITION_MOBILE : GENERAL_CATEGORY_POSITION_DESKTOP);
   }
 
   public boolean canAddCategory() {
@@ -166,13 +173,12 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   private CategoriesFieldset removeCategory(final String categoryName, final String actionName) {
-    for (WebElement element : editableCategories) {
-      final String value = element.findElement(By.cssSelector("input[type='text']")).getAttribute("value");
-      if (value.equals(categoryName)) {
-        element.click();
-        element.findElement(By.className(actionName)).click();
-      }
+    final WebElement element = findEditableCategoryWith(categoryName);
+    if (null != element) {
+      element.click();
+      element.findElement(By.className(actionName)).click();
     }
+
     return this;
   }
 

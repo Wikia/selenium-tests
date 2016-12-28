@@ -93,7 +93,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCategories")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategory() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnDesktop(page);
@@ -105,7 +105,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCategories")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
     final boolean actual = canEditCategoriesOnDesktop(page);
@@ -141,7 +141,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-userOnDesktopCategories")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnDesktop(page);
@@ -153,7 +153,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-userOnDesktopCategories")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
     final boolean actual = canEditCategoriesOnDesktop(page);
@@ -266,7 +266,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotEditGeneralCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
 
@@ -283,7 +283,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanAddCategoryOnPostsListPage() {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
 
@@ -309,7 +309,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanEditCategoryOnPostsListPage() {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
 
@@ -335,7 +335,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategoriesOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
 
@@ -349,7 +349,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanRemoveCategoriesOnPostsListPage() {
     CategoryPill.Data data = DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver)
         .createCategory(TextGenerator.createUniqueCategoryName());
