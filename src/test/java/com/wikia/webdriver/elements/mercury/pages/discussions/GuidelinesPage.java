@@ -13,6 +13,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class GuidelinesPage extends WikiBasePageObject {
 
+  private static final String DEFAULT_GUIDELINES_TEXT = "Discussion Guidelines";
+
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
@@ -54,89 +56,70 @@ public class GuidelinesPage extends WikiBasePageObject {
     return new DiscussionsPage();
   }
 
-  public void clickEditGuidelines() {
+  private void clickEditGuidelines() {
     wait.forElementNotVisible(By.className("discussion-standalone-editor"));
     editButton.click();
   }
 
   public boolean isModalGuidelinesDisplayed() {
-    try {
-      wait.forElementVisible(editModal);
-
-      return editModal.isDisplayed();
-    } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("editModal is not displayed", e);
-
-      return false;
-    }
+    return isElementVisible(editModal, "Edit modal");
   }
 
-  public boolean isGuidelinesHeroUnitDisplayed() {
-    return isElementVisible(heroUnit);
-  }
-
-  private boolean isElementVisible(WebElement element) {
+  private boolean isElementVisible(WebElement element, String elementName) {
     boolean result = false;
 
     try {
       wait.forElementVisible(element);
       result = element.isDisplayed();
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("heroUnit is not displayed", e);
+      PageObjectLogging.logInfo(elementName + " is not displayed", e);
     }
 
     return result;
   }
 
-  public boolean isGuidelinesTextDisplayed() {
-    return isElementVisible(contentText);
+  public boolean isGuidelinesHeroUnitDisplayed() {
+    return isElementVisible(heroUnit, "Hero unit");
   }
 
   public boolean isEditButtonDisplayed() {
-    return isElementVisible(editButton);
+    return isElementVisible(editButton, "Edit button");
   }
 
-  public void clickSaveButton() {
+  private void clickSaveButton() {
     wait.forElementClickable(saveButton);
     saveButton.click();
   }
 
-  public void guidelinesAddNewText(String contentText) {
+  private void addText(String text) {
     this.guidelinesText.clear();
-    this.guidelinesText.sendKeys(contentText);
+    this.guidelinesText.sendKeys(text);
     clickSaveButton();
   }
 
-  public void verifyContentNewTextInGuidelines(String content) {
-    wait.forTextInElement(contentText, content);
+  private String addNewTextToGuidelines() {
+    final String text = TextGenerator.createUniqueText();
+    clickEditGuidelines();
+    addText(text);
+    return text;
   }
 
-  public void addNewTextToGuidelines() {
-    String guidelinesText = TextGenerator.createUniqueText();
-    clickEditGuidelines();
-    guidelinesAddNewText(guidelinesText);
-    verifyContentNewTextInGuidelines(guidelinesText);
+  private void hasTextInGuidelines(String text) {
+    wait.forTextInElement(contentText, text);
     contentText.isDisplayed();
-    deleteNewTestFromGuidelines(guidelinesText);
   }
 
-  public void deleteNewTestFromGuidelines(String guidelinesText) {
+  public void deleteTextFromGuidelines(String text) {
     clickEditGuidelines();
-    String replace = driver.findElement(By.className("guidelines-text")).getText()
-        .replace(guidelinesText, "Discussion Guidelines");
-    guidelinesAddNewText(replace);
-    wait.forTextNotInElement(contentText, guidelinesText);
+    addText(DEFAULT_GUIDELINES_TEXT);
+    wait.forTextNotInElement(contentText, text);
   }
 
-  public boolean isNewGuidelinesTextDisplayed() {
+  public boolean canAddNewTextToGuidelines() {
+      final String text = addNewTextToGuidelines();
+      hasTextInGuidelines(text);
+      deleteTextFromGuidelines(text);
 
-    try {
-      addNewTextToGuidelines();
-      return guidelinesText.isDisplayed();
-    } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("New text in Guidelines is not displayed", e);
-
-      return false;
-    }
+      return DEFAULT_GUIDELINES_TEXT.equals(contentText.getText());
   }
 }

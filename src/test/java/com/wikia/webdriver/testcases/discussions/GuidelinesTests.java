@@ -149,16 +149,16 @@ public class GuidelinesTests extends NewTestTemplate {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
 
-    Assertion.assertTrue(guidelinesPage.isNewGuidelinesTextDisplayed());
+    Assertion.assertTrue(guidelinesPage.canAddNewTextToGuidelines());
   }
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanAddTextToGuidelines")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanAddTextToGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
 
-    Assertion.assertTrue(guidelinesPage.isNewGuidelinesTextDisplayed());
+    Assertion.assertTrue(guidelinesPage.canAddNewTextToGuidelines());
   }
 }
