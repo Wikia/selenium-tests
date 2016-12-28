@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.google.common.base.Predicate;
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
