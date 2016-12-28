@@ -195,7 +195,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
     DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
