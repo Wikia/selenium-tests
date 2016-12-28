@@ -67,7 +67,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   // Anonymous user on mobile
 
-  @Test(groups = "discussions-anonUserOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
@@ -75,47 +75,43 @@ public class CategoriesTests extends NewTestTemplate {
     final String categoryName = openPageAndSelectCategoryOnMobile(page);
 
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final boolean actual = canEditCategoriesOnMobile(page);
 
-    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
+    Assertion.assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   // Anonymous user on desktop
 
-  @Test(groups = "discussions-anonUserOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategory() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnDesktop(page);
 
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final boolean actual = canEditCategoriesOnDesktop(page);
 
-    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
+    Assertion.assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   // User on mobile
 
-  @Test(groups = "discussions-userOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanChangeCategoryOnPostsListPage() {
@@ -123,42 +119,38 @@ public class CategoriesTests extends NewTestTemplate {
     final String categoryName = openPageAndSelectCategoryOnMobile(page);
 
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
   }
 
-  @Test(groups = "discussions-userOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final boolean actual = canEditCategoriesOnMobile(page);
 
-    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
+    Assertion.assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   // User on desktop
 
-  @Test(groups = "discussions-userOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-userOnDesktopCategories"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnDesktop(page);
 
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
   }
 
-  @Test(groups = "discussions-userOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-userOnDesktopCategories"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final boolean actual = canEditCategoriesOnDesktop(page);
 
-    Assertion.assertFalse(actual, CATEGORIES_NOT_EDITABLE_MESSAGE);
+    Assertion.assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
   }
 
   // Discussions Administrator on mobile
@@ -166,20 +158,18 @@ public class CategoriesTests extends NewTestTemplate {
   /**
    * Category "All" is not present on edit categories modal on mobile
    */
-  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-
-    CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
-        .getCategoriesFieldset();
+    final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
 
     Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
     Assertion.assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanAddCategoryOnPostsListPage() {
@@ -204,7 +194,7 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanEditCategoryOnPostsListPage() {
@@ -230,7 +220,7 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategoriesOnPostsListPage() {
@@ -244,7 +234,7 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnMobileCategories")
+  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanRemoveCategoriesOnPostsListPage() {
@@ -264,26 +254,23 @@ public class CategoriesTests extends NewTestTemplate {
 
   // Discussions Administrator on desktop
 
-  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void discussionsAdministratorOnDesktopCanNotEditGeneralCategoryOnPostsListPage() {
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-
-    CategoriesFieldset categoriesFieldset = page.getModeration()
-        .getCategoriesFieldset();
+    final CategoriesFieldset categoriesFieldset = page.getModeration().getCategoriesFieldset();
 
     Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
 
     categoriesFieldset.clickEdit();
-
     Assertion.assertFalse(categoriesFieldset.canEditAllCategory(), "All category should not be editable.");
     Assertion.assertFalse(categoriesFieldset.canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanAddCategoryOnPostsListPage() {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
 
@@ -307,9 +294,9 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanEditCategoryOnPostsListPage() {
     final String siteId = Discussions.extractSiteIdFromMediaWikiUsing(driver);
 
@@ -333,9 +320,9 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategoriesOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
 
@@ -347,9 +334,9 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
-  @Test(groups = "discussions-discussionsAdministratorOnDesktopCategories")
+  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanRemoveCategoriesOnPostsListPage() {
     CategoryPill.Data data = DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver)
         .createCategory(TextGenerator.createUniqueCategoryName());
