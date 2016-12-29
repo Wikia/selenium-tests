@@ -246,10 +246,10 @@ public class CategoriesTests extends NewTestTemplate {
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
 
     addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
-    Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), "Temporary category should not be added.");
+    Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
 
     removeCategory(data, page, categoriesFieldset);
-    Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), "Temporary category should be removed.");
+    Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
   }
 
   // Discussions Administrator on desktop
