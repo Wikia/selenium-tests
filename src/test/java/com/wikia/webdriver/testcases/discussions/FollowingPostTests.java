@@ -302,8 +302,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private PostActionsRow clickUnfollowOn(PageWithPosts page) {
-    return page.getPost().findNewestPost().findPostActions()
-        .clickFollow();
+    return clickFollowOn(page);
   }
 
   private PostActionsRow clickFollowOn(PageWithPosts page) {
