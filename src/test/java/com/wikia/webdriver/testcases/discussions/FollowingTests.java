@@ -14,11 +14,15 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostAc
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.pages.discussions.AvailablePage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.FollowPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -28,6 +32,11 @@ public class FollowingTests extends NewTestTemplate {
   private static final String SIGN_IN_MODAL_SHOULD_APPEAR = "Sign in/Following modal dialog should appear.";
 
   private static final String MODAL_SHOULD_NOT_BE_VISIBLE = "Sign in/Following modal dialog should not be visible after clicking ok button.";
+
+  private static final String SHOULD_FOLLOW_POST = "User should be able follow post.";
+
+
+  private static final String SHOULD_UNFOLLOW_POST = "User should be able unfollow post.";
 
   // Anonymous user on mobile
 
@@ -80,13 +89,100 @@ public class FollowingTests extends NewTestTemplate {
   @Test(groups = "discussions-userMobileFollowing")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanFollowPostOnPostsListPage() {
+    assertThatPostCanBeFollowedOn(data -> new PostsListPage().open());
+  }
+
+  @Test(groups = "discussions-userMobileFollowing")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanFollowPostOnPostDetailsPage() {
+    assertThatPostCanBeFollowedOn(data -> new PostDetailsPage().open(data.getId()));
+  }
+
+  @Test(groups = "discussions-userMobileFollowing")
+  @Execute(asUser = User.USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanFollowPostOnUserPostsPage() {
+    assertThatPostCanBeFollowedOn(data -> new UserPostsPage().open(data.getAuthorId()));
+  }
+
+  /**
+   * Post created by user is automatically followed.
+   */
+  @Test(groups = "discussions-userMobileFollowing")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanUnfollowPostOnPostsListPage() {
+    assertThatPostCanBeUnfollowedOn(data -> new PostsListPage().open());
+  }
+
+  /**
+   * Post created by user is automatically followed.
+   */
+  @Test(groups = "discussions-userMobileFollowing")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanUnfollowPostOnPostDetailsPage() {
+    assertThatPostCanBeUnfollowedOn(data -> new PostDetailsPage().open(data.getId()));
+  }
+
+  /**
+   * Post created by user is automatically followed.
+   */
+  @Test(groups = "discussions-userMobileFollowing")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanUnfollowPostOnUserPostsPage() {
+    assertThatPostCanBeUnfollowedOn(data -> new UserPostsPage().open(data.getAuthorId()));
+  }
+
+  /**
+   * By default all posts on "Followed" tab are followed.
+   */
+  @Test(groups = "discussions-userMobileFollowing")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
+    createPostAsUserRemotely();
+    final FollowPage page = FollowPage.open();
+
+    final PostActionsRow postActions = clickUnfollowOn(page);
+    sleepForOneSecond();
+    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
+
+    clickFollowOn(page);
+    sleepForOneSecond();
+    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+  }
+
+  // Discussions Administrator on mobile
+
+  @Test(groups = "discussions-discussionsAdministratorMobileFollowing")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanFollowPostOnReportedPostsPage() {
     final PostEntity.Data data = createPostAsUserRemotely();
+    DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
-    final PostActionsRow postActions = openPostDetailsPageAndFindPostActions(data)
-        .clickFollow();
+    final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
+    sleepForOneSecond();
+    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+  }
 
-    Assertion.assertTrue(postActions.isFollowed(), "User should follow post.");
+  /**
+   * Post created by user is automatically followed.
+   */
+  @Test(groups = "discussions-discussionsAdministratorMobileFollowing")
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
+    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).cratePostWithUniqueData();
+    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+
+    final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
+    sleepForOneSecond();
+    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
   // Test methods
@@ -107,8 +203,41 @@ public class FollowingTests extends NewTestTemplate {
     return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
   }
 
-  private PostActionsRow openPostDetailsPageAndFindPostActions(PostEntity.Data data) {
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    return page.getPost().findNewestPost().findPostActions();
+  private PostActionsRow clickUnfollowOn(PageWithPosts page) {
+    return page.getPost().findNewestPost().findPostActions()
+        .clickFollow();
+  }
+
+  private PostActionsRow clickFollowOn(PageWithPosts page) {
+    return page.getPost().findNewestPost().findPostActions()
+        .clickFollow();
+  }
+
+  private void assertThatPostCanBeFollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
+    final PostEntity.Data data = createPostAsUserRemotely();
+
+    final PostActionsRow postActions = clickFollowOn(navigator.apply(data));
+    sleepForOneSecond();
+    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+  }
+
+  private void assertThatPostCanBeUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
+    final PostEntity.Data data = createPostAsUserRemotely();
+
+    final PostActionsRow postActions = clickUnfollowOn(navigator.apply(data));
+    sleepForOneSecond();
+    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
+  }
+
+  /**
+   * Because follow may not succeed this test should wait at least 1 second to check if "followed" flag on post
+   * did not change to "not followed" state. 1 second is sufficient for happy path scenario.
+   */
+  private void sleepForOneSecond() {
+    try {
+      TimeUnit.SECONDS.sleep(1);
+    } catch (InterruptedException x) {
+      // ignore this exception
+    }
   }
 }
