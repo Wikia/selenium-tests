@@ -9,70 +9,143 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-editing-post")
 public class EditingPostTests extends NewTestTemplate {
 
+  private static final String USER_MOBILE_TEST_GROUP = "discussions-userMobileEditingPost";
+
+  private static final String USER_DESKTOP_TEST_GROUP = "discussions-userDesktopEditingPost";
+
+  private static final String DISCUSSIONS_ADMINISTRATOR_MOBILE_TEST_GROUP = "discussions-discussionsAdministratorMobileEditingPost";
+
+  private static final String DISCUSSIONS_ADMINISTRATOR_DESKTOP_TEST_GROUP = "discussions-discussionsAdministratorDesktopEditingPost";
+
   private static final String EDITED_BY_PREFIX = "(edited by ";
 
   private static final String EDITED_BY_ADMINISTRATORS = EDITED_BY_PREFIX + "administrators)";
 
+  private static final String EDITED_BY_QA_STAFF = EDITED_BY_PREFIX + "QATestsStaff)";
+
   private static final String SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE = "Post should have edited by section below post content.";
+
+  private static final String SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE = "Post should not have information about who edited the post on posts list page.";
+
+  private static final String EDITED_BY_ADMINISTRATORS_MESSAGE = "Post should have information that it was edited by administrators.";
+
+  private static final String SAME_PERSON_MESSAGE = "If author and editor are the same person, edited by section should not be visible.";
+
+  private static final String SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE = "Post should have detailed information by who it was edited.";
 
   // User on mobile
 
-  @Test(groups = "discussions-userMobileEditingPost")
+  @Test(groups = USER_MOBILE_TEST_GROUP)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    data = DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
-    Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_ADMINISTRATORS, "Post should have information that it was edited by administrators.");
+    Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_ADMINISTRATORS, EDITED_BY_ADMINISTRATORS_MESSAGE);
   }
 
-  @Test(groups = "discussions-userMobileEditingPost")
+  @Test(groups = USER_MOBILE_TEST_GROUP)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    data = DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
     final PostEntity post = new PostsListPage().open(data.getId()).getPost().findNewestPost();
-    Assertion.assertFalse(post.hasEditedBySection(), "Post should not have information about who edited the post on posts list page.");
+    Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-userMobileEditingPost")
+  @Test(groups = USER_MOBILE_TEST_GROUP)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeThatPostWasEditedByAuthorOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.STAFF, driver).cratePostWithUniqueData();
-    data = DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsStaffRemotely());
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
-    Assertion.assertFalse(post.hasEditedBySection(), "If author and editor are the same person, edited by section should not be visible.");
+    Assertion.assertFalse(post.hasEditedBySection(), SAME_PERSON_MESSAGE);
+  }
+
+  // User on desktop
+
+  @Test(groups = USER_DESKTOP_TEST_GROUP)
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void userOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
+
+    final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
+    Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
+    Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_ADMINISTRATORS, EDITED_BY_ADMINISTRATORS_MESSAGE);
+  }
+
+  @Test(groups = USER_DESKTOP_TEST_GROUP)
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void userOnDesktopCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
+
+    final PostEntity post = new PostsListPage().open(data.getId()).getPost().findNewestPost();
+    Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
+    ;
+  }
+
+  @Test(groups = USER_DESKTOP_TEST_GROUP)
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void userOnDesktopCanNotSeeThatPostWasEditedByAuthorOnPostDetailsPage() {
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsStaffRemotely());
+
+    final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
+    Assertion.assertFalse(post.hasEditedBySection(), SAME_PERSON_MESSAGE);
   }
 
   // Discussions Administrator on mobile
 
-  @Test(groups = "discussions-discussionsAdministratorMobileEditingPost")
+  @Test(groups = DISCUSSIONS_ADMINISTRATOR_MOBILE_TEST_GROUP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
-    data = DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
-    Assertion.assertStringNotContains(post.getEditedBySectionText(), EDITED_BY_ADMINISTRATORS);
-    Assertion.assertTrue(StringUtils.startsWith(post.getEditedBySectionText(), EDITED_BY_PREFIX), "Post should have detailed information by who it was edited.");
+    Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_QA_STAFF, SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE);
+  }
+
+
+  // Discussions Administrator on desktop
+
+  @Test(groups = DISCUSSIONS_ADMINISTRATOR_DESKTOP_TEST_GROUP)
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  public void discussionsAdministratorOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
+    final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
+
+    final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
+    Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
+    Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_QA_STAFF, SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE);
+  }
+
+  private PostEntity.Data createPostAsUserRemotely() {
+    return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+  }
+
+  private PostEntity.Data createPostAsStaffRemotely() {
+    return DiscussionsOperations.using(User.STAFF, driver).cratePostWithUniqueData();
+  }
+
+  private PostEntity.Data updatePostAsStaffRemotely(PostEntity.Data data) {
+    return DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
   }
 }
