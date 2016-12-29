@@ -1,5 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
+
 import java.net.URL;
 
 public interface PostsCreator {

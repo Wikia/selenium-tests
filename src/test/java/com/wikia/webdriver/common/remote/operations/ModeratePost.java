@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.remote.operations;
 import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
+import com.wikia.webdriver.common.remote.operations.http.PutRemoteOperation;
 import org.json.JSONObject;
 
 abstract class ModeratePost {
