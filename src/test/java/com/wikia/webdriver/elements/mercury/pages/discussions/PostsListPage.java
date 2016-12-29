@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
@@ -17,7 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
 
-public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
+public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
   @Getter(lazy = true)
   private final Post post = new Post();
@@ -54,6 +55,9 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
+
+  @Getter(lazy = true)
+  private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
