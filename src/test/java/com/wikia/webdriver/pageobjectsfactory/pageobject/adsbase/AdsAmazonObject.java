@@ -68,7 +68,7 @@ public class AdsAmazonObject extends AdsBaseObject {
         }
       });
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 

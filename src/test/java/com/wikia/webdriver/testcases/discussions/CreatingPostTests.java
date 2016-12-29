@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.CategoryPill;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
@@ -230,7 +230,7 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.clearDescription();
 
     postsCreator.clickAddCategoryButton()
-        .findCategoryOnPosition(0)
+        .findCategoryOn(0)
         .click();
     Assertion.assertFalse(postsCreator.isPostButtonActive(),
         "User should not be able to add post with only category selected.");
@@ -245,7 +245,7 @@ public class CreatingPostTests extends NewTestTemplate {
         .closeGuidelinesMessage()
         .addDescriptionWith(description)
         .clickAddCategoryButton()
-        .findCategoryOnPosition(0);
+        .findCategoryOn(0);
 
     categoryPill.click();
 

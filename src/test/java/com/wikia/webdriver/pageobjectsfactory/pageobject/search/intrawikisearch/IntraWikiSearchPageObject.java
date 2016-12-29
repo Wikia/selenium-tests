@@ -258,7 +258,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
         }
       });
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
 
     Assertion.assertTrue(titles.get(0).getText().startsWith(namespace));

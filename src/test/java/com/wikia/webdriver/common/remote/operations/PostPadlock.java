@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote.operations;
 
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
+import com.wikia.webdriver.common.remote.operations.http.RemoteOperation;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
