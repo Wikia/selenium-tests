@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.remote.operations;
 
 import com.google.common.collect.ImmutableMap;
-import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
