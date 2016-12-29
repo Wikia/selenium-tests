@@ -26,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
-@Test(groups = "discussions-following")
-public class FollowingTests extends NewTestTemplate {
+@Test(groups = "discussions-following-post")
+public class FollowingPostTests extends NewTestTemplate {
 
   private static final String SIGN_IN_MODAL_SHOULD_APPEAR = "Sign in/Following modal dialog should appear.";
 
@@ -39,21 +39,21 @@ public class FollowingTests extends NewTestTemplate {
 
   // Anonymous user on mobile
 
-  @Test(groups = "discussions-anonymousUserMobileFollowing")
+  @Test(groups = "discussions-anonymousUserMobileFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotFollowPostOnPostsListPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostsListPage().open());
   }
 
-  @Test(groups = "discussions-anonymousUserMobileFollowing")
+  @Test(groups = "discussions-anonymousUserMobileFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotFollowPostOnPostDetailsPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
-  @Test(groups = "discussions-anonymousUserMobileFollowing")
+  @Test(groups = "discussions-anonymousUserMobileFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotFollowPostOnUserPostsPage() {
@@ -62,21 +62,21 @@ public class FollowingTests extends NewTestTemplate {
 
   // Anonymous user on desktop
 
-  @Test(groups = "discussions-anonymousUserDesktopFollowing")
+  @Test(groups = "discussions-anonymousUserDesktopFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotFollowPostOnPostsListPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostsListPage().open());
   }
 
-  @Test(groups = "discussions-anonymousUserDesktopFollowing")
+  @Test(groups = "discussions-anonymousUserDesktopFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotFollowPostOnPostDetailsPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
-  @Test(groups = "discussions-anonymousUserDesktopFollowing")
+  @Test(groups = "discussions-anonymousUserDesktopFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotFollowPostOnUserPostsPage() {
@@ -85,21 +85,21 @@ public class FollowingTests extends NewTestTemplate {
 
   // User on mobile
 
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanFollowPostOnPostsListPage() {
     assertThatPostCanBeFollowedOn(data -> new PostsListPage().open());
   }
 
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanFollowPostOnPostDetailsPage() {
     assertThatPostCanBeFollowedOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanFollowPostOnUserPostsPage() {
@@ -109,7 +109,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanUnfollowPostOnPostsListPage() {
@@ -119,7 +119,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanUnfollowPostOnPostDetailsPage() {
@@ -129,7 +129,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanUnfollowPostOnUserPostsPage() {
@@ -139,7 +139,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * By default all posts on "Followed" tab are followed.
    */
-  @Test(groups = "discussions-userMobileFollowing")
+  @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
@@ -157,21 +157,21 @@ public class FollowingTests extends NewTestTemplate {
 
   // User on desktop
 
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanFollowPostOnPostsListPage() {
     assertThatPostCanBeFollowedOn(data -> new PostsListPage().open());
   }
 
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanFollowPostOnPostDetailsPage() {
     assertThatPostCanBeFollowedOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanFollowPostOnUserPostsPage() {
@@ -181,7 +181,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanUnfollowPostOnPostsListPage() {
@@ -191,7 +191,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanUnfollowPostOnPostDetailsPage() {
@@ -201,7 +201,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanUnfollowPostOnUserPostsPage() {
@@ -211,7 +211,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * By default all posts on "Followed" tab are followed.
    */
-  @Test(groups = "discussions-userDesktopFollowing")
+  @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnDesktopCanFollowAndUnfollowPostOnFollowedPostsPage() {
@@ -229,7 +229,7 @@ public class FollowingTests extends NewTestTemplate {
 
   // Discussions Administrator on mobile
 
-  @Test(groups = "discussions-discussionsAdministratorMobileFollowing")
+  @Test(groups = "discussions-discussionsAdministratorMobileFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanFollowPostOnReportedPostsPage() {
@@ -243,7 +243,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-discussionsAdministratorMobileFollowing")
+  @Test(groups = "discussions-discussionsAdministratorMobileFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
@@ -257,7 +257,7 @@ public class FollowingTests extends NewTestTemplate {
 
   // Discussions Administrator on desktop
 
-  @Test(groups = "discussions-discussionsAdministratorDesktopFollowing")
+  @Test(groups = "discussions-discussionsAdministratorDesktopFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanFollowPostOnReportedPostsPage() {
@@ -271,7 +271,7 @@ public class FollowingTests extends NewTestTemplate {
   /**
    * Post created by user is automatically followed.
    */
-  @Test(groups = "discussions-discussionsAdministratorDesktopFollowing")
+  @Test(groups = "discussions-discussionsAdministratorDesktopFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanUnfollowPostOnReportedListPage() {

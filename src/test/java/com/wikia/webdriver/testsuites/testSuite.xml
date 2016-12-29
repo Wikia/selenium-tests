@@ -87,6 +87,7 @@
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedOutUser"/>
             <class name="com.wikia.webdriver.testcases.discussions.CreatingReplyTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.CreatingPostTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.FollowingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.GuidelinesTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.LayoutTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.LockingPostTests"/>
