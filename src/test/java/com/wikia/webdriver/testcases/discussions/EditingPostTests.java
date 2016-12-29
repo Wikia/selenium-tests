@@ -19,6 +19,12 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-editing-post")
 public class EditingPostTests extends NewTestTemplate {
 
+  private static final String EDITED_BY_PREFIX = "(edited by ";
+
+  private static final String EDITED_BY_ADMINISTRATORS = EDITED_BY_PREFIX + "administrators)";
+
+  private static final String SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE = "Post should have edited by section below post content.";
+
   // User on mobile
 
   @Test(groups = "discussions-userMobileEditingPost")
@@ -29,8 +35,8 @@ public class EditingPostTests extends NewTestTemplate {
     data = DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
-    Assertion.assertTrue(post.hasEditedBySection(), "Post should have edited by section below post content.");
-    Assertion.assertEquals(post.getEditedBySectionText(), "(edited by administrators)", "Post should have information that it was edited by administrators.");
+    Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
+    Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_ADMINISTRATORS, "Post should have information that it was edited by administrators.");
   }
 
   @Test(groups = "discussions-userMobileEditingPost")
@@ -65,8 +71,8 @@ public class EditingPostTests extends NewTestTemplate {
     data = DiscussionsOperations.using(User.STAFF, driver).updatePost(data);
 
     final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findNewestPost();
-    Assertion.assertTrue(post.hasEditedBySection(), "Post should have edited by section below post content.");
-    Assertion.assertStringNotContains(post.getEditedBySectionText(), "(edited by administrators)");
-    Assertion.assertTrue(StringUtils.startsWith(post.getEditedBySectionText(), "(edited by "), "Post should have detailed information by who it was edited.");
+    Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
+    Assertion.assertStringNotContains(post.getEditedBySectionText(), EDITED_BY_ADMINISTRATORS);
+    Assertion.assertTrue(StringUtils.startsWith(post.getEditedBySectionText(), EDITED_BY_PREFIX), "Post should have detailed information by who it was edited.");
   }
 }
