@@ -10,8 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -25,7 +26,7 @@ public class BaseRemoteOperation {
   @Getter
   private final User user;
 
-  String execute(final HttpEntityEnclosingRequestBase request) {
+  String execute(final HttpRequestBase request) {
     String result = StringUtils.EMPTY;
 
     try (CloseableHttpClient client = HttpClientBuilder.create().disableContentCompression().build()) {
@@ -37,7 +38,7 @@ public class BaseRemoteOperation {
     return result;
   }
 
-  private String makeRequest(final CloseableHttpClient client, final HttpEntityEnclosingRequestBase request)
+  private String makeRequest(final CloseableHttpClient client, final HttpRequestBase request)
       throws IOException {
     String result = StringUtils.EMPTY;
 
@@ -54,17 +55,21 @@ public class BaseRemoteOperation {
     return result;
   }
 
-  private String handleResponse(final HttpEntityEnclosingRequestBase requestBase, final CloseableHttpResponse response)
+  private String handleResponse(final HttpRequestBase requestBase, final CloseableHttpResponse response)
       throws IOException {
-    final String result = EntityUtils.toString(response.getEntity());
+    String result = StringUtils.EMPTY;
+    final HttpEntity entity = response.getEntity();
 
-    if (response.getStatusLine().getStatusCode() >= 400) {
-      PageObjectLogging.log("Error while making request.", result, false);
-      throw new RemoteException("Error while invoking request. "
-          + " Method: " + requestBase.getMethod()
-          + " Url: " + requestBase.getURI().toString());
+    if (null != entity) {
+      result = EntityUtils.toString(entity);
+
+      if (response.getStatusLine().getStatusCode() >= 400) {
+        PageObjectLogging.log("Error while making request.", result, false);
+        throw new RemoteException("Error while invoking request. "
+            + " Method: " + requestBase.getMethod()
+            + " Url: " + requestBase.getURI().toString());
+      }
     }
-
     return result;
   }
 }

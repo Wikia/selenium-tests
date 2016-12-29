@@ -141,4 +141,23 @@ public class GuidelinesTests extends NewTestTemplate {
 
     Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
   }
+  @Test(groups = "discussions-staffOnDesktopCanAddTextToGuidelines")
+  @Execute(asUser = User.STAFF)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  public void staffOnDesktopCanAddTextToGuidelines() {
+    GuidelinesPage guidelinesPage = new GuidelinesPage();
+    guidelinesPage.open();
+
+    Assertion.assertTrue(guidelinesPage.canAddNewTextToGuidelines());
+  }
+
+  @Test(groups = "discussions-discussionsModeratorOnDesktopCanAddTextToGuidelines")
+  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void discussionsModeratorOnDesktopCanAddTextToGuidelines() {
+    GuidelinesPage guidelinesPage = new GuidelinesPage();
+    guidelinesPage.open();
+
+    Assertion.assertTrue(guidelinesPage.canAddNewTextToGuidelines());
+  }
 }
