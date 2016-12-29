@@ -15,6 +15,10 @@ import javax.annotation.Nullable;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class PostEntity {
 
+  private static final String CLASS_ATTRIBUTE = "class";
+
+  private static final String POST_EDITED_BY_CLASS_NAME = "post-edited-by-row";
+
   @Getter(AccessLevel.PACKAGE)
   private final WebElement post;
 
@@ -39,7 +43,7 @@ public class PostEntity {
   }
 
   private boolean hasClass(final String className) {
-    return post.getAttribute("class").contains(className);
+    return post.getAttribute(CLASS_ATTRIBUTE).contains(className);
   }
 
   public boolean isDeleted() {
@@ -73,7 +77,7 @@ public class PostEntity {
     return Iterables.all(post.findElements(By.tagName("a")), new Predicate<WebElement>() {
       @Override
       public boolean apply(@Nullable WebElement e) {
-        return !e.getAttribute("class").contains("post-details-link");
+        return !e.getAttribute(CLASS_ATTRIBUTE).contains("post-details-link");
       }
     });
   }
@@ -104,6 +108,16 @@ public class PostEntity {
     clickMoreOptions();
 
     return authorId;
+  }
+
+  public boolean hasEditedBySection() {
+    return post.findElement(By.cssSelector(".discussion-content + div"))
+        .getAttribute(CLASS_ATTRIBUTE)
+        .contains(POST_EDITED_BY_CLASS_NAME);
+  }
+
+  public String getEditedBySectionText() {
+    return post.findElement(By.className(POST_EDITED_BY_CLASS_NAME)).getText();
   }
 
   public PostActionsRow findPostActions() {
