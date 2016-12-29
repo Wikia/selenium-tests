@@ -5,6 +5,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Discus
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
@@ -24,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 
-public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
+public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
   private static final String DEFAULT_FORUM_ID = "1362702";
 
@@ -65,6 +66,9 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
+
+  @Getter(lazy = true)
+  private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
