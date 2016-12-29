@@ -80,7 +80,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
@@ -91,18 +91,17 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
     final PostEntity post = new PostsListPage().open(data.getId()).getPost().findNewestPost();
     Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
-    ;
   }
 
   @Test(groups = USER_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotSeeThatPostWasEditedByAuthorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsStaffRemotely());
 
@@ -128,7 +127,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = DISCUSSIONS_ADMINISTRATOR_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
