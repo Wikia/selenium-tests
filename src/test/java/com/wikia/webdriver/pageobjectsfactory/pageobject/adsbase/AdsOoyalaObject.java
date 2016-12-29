@@ -57,7 +57,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
                         .elementToHaveColor(element, color,
                                             AdsComparison.IMAGES_THRESHOLD_PERCENT));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 }

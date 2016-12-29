@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class PostEntity {
@@ -64,7 +65,8 @@ public class PostEntity {
   }
 
   public String findTitle() {
-    return post.findElement(By.className("post-title")).getText();
+    List<WebElement> elements = post.findElements(By.className("post-title"));
+    return elements.isEmpty() ? "" : elements.get(0).getText();
   }
 
   public String findDescription() {
@@ -145,8 +147,8 @@ public class PostEntity {
         .build();
   }
 
-  @lombok.Data
   @Builder
+  @lombok.Data
   public static class Data {
 
     private final String id;

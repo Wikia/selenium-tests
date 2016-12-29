@@ -400,7 +400,7 @@ public class WikiBasePageObject extends BasePageObject {
             LOGGED_IN_USER_SELECTOR_OASIS.replace("%userName%", userName.replace(" ", "_"))));
       }
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
       driver.switchTo().defaultContent();
     }
     PageObjectLogging.log("verifyUserLoggedIn", "user " + userName + " logged in", true);
