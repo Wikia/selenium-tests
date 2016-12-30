@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.remote.operations;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
+import com.wikia.webdriver.common.remote.operations.http.PutRemoteOperation;
 
 public class DeletePost {
 
@@ -20,6 +21,6 @@ public class DeletePost {
   }
 
   private String buildUrl(final ThreadContext context) {
-    return Discussions.service(String.format(DELETE_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
+    return Discussions.service(String.format(DELETE_POST_URL_SUFFIX, context.getSiteId(), context.getThreadId()));
   }
 }

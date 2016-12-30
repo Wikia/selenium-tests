@@ -1,11 +1,12 @@
 package com.wikia.webdriver.common.remote.operations;
 
 import com.google.common.collect.ImmutableMap;
-import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CreatePostContext;
+import com.wikia.webdriver.common.remote.operations.json.JsonToPostEntityMapper;
+import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import org.json.JSONObject;
 
@@ -28,17 +29,7 @@ public class CreatePost {
         .build());
 
     final String response = remoteOperation.execute(buildUrl(context), jsonObject);
-
-    DocumentContext json = JsonPath.parse(response);
-
-    return PostEntity.Data.builder()
-        .id(json.read("$.id"))
-        .category(json.read("$.forumName"))
-        .title(json.read("$.title"))
-        .description(json.read("$.rawContent"))
-        .authorId(json.read("$.createdBy.id"))
-        .firstPostId(json.read("$.firstPostId"))
-        .build();
+    return new JsonToPostEntityMapper(JsonPath.parse(response)).toData();
   }
 
   private String buildUrl(final CreatePostContext context) {

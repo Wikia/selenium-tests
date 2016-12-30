@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CreatePostContext;
 import com.wikia.webdriver.common.remote.context.ModeratePostContext;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
+import com.wikia.webdriver.common.remote.context.UpdatePostContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
@@ -59,6 +60,14 @@ public class DiscussionsOperations {
 
   public void unlockPost(ThreadContext context) {
     new UnlockPost(user).execute(context);
+  }
+
+  public PostEntity.Data updatePost(PostEntity.Data data) {
+    return updatePost(UpdatePostContext.defaultContext(extractSiteId(), data));
+  }
+
+  public PostEntity.Data updatePost(UpdatePostContext context) {
+    return new UpdatePost(user).execute(context);
   }
 
   public void validatePost(PostEntity.Data data) {
