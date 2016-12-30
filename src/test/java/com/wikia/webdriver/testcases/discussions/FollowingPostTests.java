@@ -23,7 +23,6 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRe
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
