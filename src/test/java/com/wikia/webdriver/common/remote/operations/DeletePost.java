@@ -21,6 +21,6 @@ public class DeletePost {
   }
 
   private String buildUrl(final ThreadContext context) {
-    return Discussions.service(String.format(DELETE_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
+    return Discussions.service(String.format(DELETE_POST_URL_SUFFIX, context.getSiteId(), context.getThreadId()));
   }
 }
