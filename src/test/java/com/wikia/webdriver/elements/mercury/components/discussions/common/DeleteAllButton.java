@@ -11,7 +11,7 @@ public class DeleteAllButton extends BasePageObject {
   private WebElement button;
 
   public boolean isVisible() {
-    return button.isDisplayed();
+    return button != null && button.isDisplayed();
   }
 
   public DeleteDialog click() {

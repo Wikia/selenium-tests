@@ -16,7 +16,7 @@ public class DiscussionsOperations {
 
   private final WebDriver driver;
 
-  public PostEntity.Data cratePostWithUniqueData() {
+  public PostEntity.Data createPostWithUniqueData() {
     return createPost(CreatePostContext.defaultContext(extractSiteId()));
   }
 

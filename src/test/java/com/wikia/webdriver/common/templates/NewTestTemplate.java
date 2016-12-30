@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.templates;
 
 import java.lang.reflect.Method;
 
+import org.apache.http.client.methods.HttpRequestBase;
 import org.testng.annotations.BeforeMethod;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
