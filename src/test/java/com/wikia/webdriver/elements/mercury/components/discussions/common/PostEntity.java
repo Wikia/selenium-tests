@@ -2,12 +2,14 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.wikia.webdriver.common.core.WikiaWebDriver;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
@@ -135,6 +137,10 @@ public class PostEntity {
   public MoreOptionsPopOver clickMoreOptions() {
     post.findElement(By.className("discussion-more-options")).click();
     return MoreOptionsPopOver.fromPostEntity(this);
+  }
+
+  public WebElement getWebElement() {
+    return post;
   }
 
   public Data toData() {
