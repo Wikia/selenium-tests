@@ -1,8 +1,11 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.google.common.base.Predicate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
@@ -15,9 +18,18 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.Filter
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
 
 
-public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
+public class PostsListPage extends WikiBasePageObject implements AvailablePage {
+
+  private static final String DEFAULT_FORUM_ID = "1362702";
+
+  private static final String PATH = "/d/f/%s";
 
   @Getter(lazy = true)
   private final Post post = new Post();
@@ -56,10 +68,10 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
 
   @Getter(lazy = true)
-  private final ErrorMessages errorMessages = new ErrorMessages();
+  private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
 
-  private static final String PATH = "/d/f/%s";
-  private static final String DEFAULT_FORUM_ID = "1362702";
+  @Getter(lazy = true)
+  private final ErrorMessages errorMessages = new ErrorMessages();
 
 
   public PostsListPage open(String wikiID) {
@@ -69,5 +81,28 @@ public class PostsListPage extends WikiBasePageObject implements PageWithPosts {
 
   public PostsListPage open() {
     return open(DEFAULT_FORUM_ID);
+  }
+
+  public void waitForPageReload() {
+    wait.forElementVisible(By.className("loading-overlay"));
+    wait.forElementNotVisible(By.className("loading-overlay"));
+  }
+
+  public void waitForPageReloadWith(final String categoryName) {
+    waitForPageReload();
+
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      new FluentWait<>(getPost())
+          .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
+          .until(new Predicate<Post>() {
+            @Override
+            public boolean apply(@Nullable Post post) {
+              return post.findNewestPost().findCategory().endsWith(categoryName);
+            }
+          });
+    } finally {
+      restoreDefaultImplicitWait();
+    }
   }
 }

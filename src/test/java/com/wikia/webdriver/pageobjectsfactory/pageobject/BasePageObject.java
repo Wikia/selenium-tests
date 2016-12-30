@@ -98,7 +98,7 @@ public class BasePageObject {
     try {
       return driver.findElements(by).size() > 0;
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -115,7 +115,7 @@ public class BasePageObject {
     } catch (WebDriverException ex) {
       isElementOnPage = false;
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
     return isElementOnPage;
   }
@@ -158,7 +158,7 @@ public class BasePageObject {
     } catch (WebDriverException ex) {
       numElementOnPage = 0;
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
     return numElementOnPage;
   }
@@ -173,7 +173,7 @@ public class BasePageObject {
     } catch (WebDriverException ex) {
       isElementInElement = false;
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
     return isElementInElement;
   }
@@ -222,7 +222,7 @@ public class BasePageObject {
         }
       });
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -317,7 +317,7 @@ public class BasePageObject {
     try {
       waitFor.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -326,7 +326,7 @@ public class BasePageObject {
     try {
       new WebDriverWait(driver, timeout).until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -341,7 +341,7 @@ public class BasePageObject {
       waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
           By.cssSelector(selector), attribute, value));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -352,7 +352,7 @@ public class BasePageObject {
       waitFor.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
                                                                        cssProperty, expectedValue));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -509,7 +509,7 @@ public class BasePageObject {
     driver.manage().timeouts().implicitlyWait(value, timeUnit);
   }
 
-  protected void restoreDeaultImplicitWait() {
+  protected void restoreDefaultImplicitWait() {
     changeImplicitWait(timeOut, TimeUnit.SECONDS);
   }
 

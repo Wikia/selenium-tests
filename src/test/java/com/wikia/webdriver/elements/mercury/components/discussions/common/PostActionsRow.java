@@ -11,6 +11,11 @@ public class PostActionsRow {
     this.webElement = webElement;
   }
 
+  public PostActionsRow clickFollow() {
+    findFollowArea().click();
+    return this;
+  }
+
   public boolean isFollowed() {
     return findFollowArea().getAttribute("class").contains("is-active");
   }
