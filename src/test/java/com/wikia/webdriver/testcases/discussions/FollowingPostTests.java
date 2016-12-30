@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -139,9 +140,10 @@ public class FollowingPostTests extends NewTestTemplate {
   /**
    * By default all posts on "Followed" tab are followed.
    */
-  @Test(groups = "discussions-userMobileFollowingPost")
+  @Test(groups = "discussions-userMobileFollowingPost", enabled = false)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
@@ -209,9 +211,10 @@ public class FollowingPostTests extends NewTestTemplate {
   /**
    * By default all posts on "Followed" tab are followed.
    */
-  @Test(groups = "discussions-userDesktopFollowingPost")
+  @Test(groups = "discussions-userDesktopFollowingPost", enabled = false)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnDesktopCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
