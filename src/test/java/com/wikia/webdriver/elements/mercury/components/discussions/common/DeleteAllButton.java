@@ -1,8 +1,10 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.FluentWait;
 
 
 public class DeleteAllButton extends BasePageObject {
@@ -11,11 +13,15 @@ public class DeleteAllButton extends BasePageObject {
   private WebElement button;
 
   public boolean isVisible() {
-    return button != null && button.isDisplayed();
+    try {
+      return button.isDisplayed();
+    } catch (NoSuchElementException e) {
+      return false;
+    }
   }
 
   public DeleteDialog click() {
-    button.click();
+    wait.forElementVisible(button).click();
     return new DeleteDialog();
   }
 

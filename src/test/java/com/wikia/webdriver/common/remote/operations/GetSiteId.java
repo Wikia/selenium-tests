@@ -12,7 +12,9 @@ public class GetSiteId {
 
   public GetSiteId(String wikiUrl) {
     this.wikiUrl = wikiUrl;
+    System.out.println(this.wikiUrl);
     this.setSiteId();
+    System.out.println("Site id is: " + this.getSiteId());
   }
 
   @Getter

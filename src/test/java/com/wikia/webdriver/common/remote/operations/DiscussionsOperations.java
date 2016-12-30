@@ -18,7 +18,11 @@ public class DiscussionsOperations {
   private final WebDriver driver;
 
   public PostEntity.Data createPostWithUniqueData() {
-    return createPost(CreatePostContext.defaultContext(extractSiteId()));
+    return createPostWithUniqueData(extractSiteId());
+  }
+
+  public PostEntity.Data createPostWithUniqueData(String siteId) {
+    return createPost(CreatePostContext.defaultContext(siteId));
   }
 
   private String extractSiteId() {

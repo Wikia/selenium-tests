@@ -11,7 +11,7 @@ public enum User {
   USER_3("ci.user.regular3.username", "ci.user.regular3.password"),
   USER_4("ci.user.regular4.username", "ci.user.regular4.password"),
   USER_5("ci.user.regular5.username", "ci.user.regular5.password"),
-  USER_6("ci.user.regular6.username", "ci.user.regular6.password"),
+  USER_6("ci.user.regular6.username", "ci.user.regular6.password", "ci.user.regular6.user_id"),
   USER_9("ci.user.regular9.username", "ci.user.regular9.password"),
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
   STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "ci.user.wikiastaff.id", "ci.user.wikiastaff.access_token"),
