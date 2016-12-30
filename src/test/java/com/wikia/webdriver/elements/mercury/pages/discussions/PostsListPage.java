@@ -5,7 +5,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Discus
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
@@ -97,9 +96,8 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
           .until(new Predicate<Post>() {
             @Override
             public boolean apply(@Nullable Post post) {
-              final PostEntity postEntity = post.findNewestPost();
-              wait.forElementClickable(postEntity.getWebElement());
-              return postEntity.findCategory().endsWith(categoryName);
+              return post.getPosts().stream()
+                  .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName));
             }
           });
     } finally {
