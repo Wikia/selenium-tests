@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
 @Test(groups = "ImageReview")
 public class ImageReviewTests extends NewTestTemplate {
 
-  private final int STAFF_NAVBAR_BUTTONS_NUMBER = 2;
-  private final int REVIEWER_NAVBAR_BUTTONS_NUMBER = 1;
-  private final int STAFF_ACTION_BUTTONS_NUMBER = 4;
-  private final int REVIEWER_ACTION_BUTTONS_NUMBER = 1;
-  private final String ANON_ALERT_MESSAGE = "Unable to load image review\n×";
-  private final String UNREVIEWED_VIEW_MESSAGE = "UNREVIEWED";
+  private static final int STAFF_NAVBAR_BUTTONS_NUMBER = 2;
+  private static final int REVIEWER_NAVBAR_BUTTONS_NUMBER = 1;
+  private static final int STAFF_ACTION_BUTTONS_NUMBER = 4;
+  private static final int REVIEWER_ACTION_BUTTONS_NUMBER = 1;
+  private static final String ANON_ALERT_MESSAGE = "Unable to load image review\n×";
+  private static final String UNREVIEWED_VIEW_MESSAGE = "UNREVIEWED";
 
   @Execute(asUser = User.ANONYMOUS)
   @Test(groups = "anonCannotEnterImageReview")
@@ -96,28 +96,6 @@ public class ImageReviewTests extends NewTestTemplate {
     Assertion.assertTrue(summaryPage.isDownloadCsvDisplayed());
     Assertion.assertTrue(summaryPage.isShowHistoryInputDisplayed());
     Assertion.assertTrue(summaryPage.isShowHistoryButtonDisplayed());
-  }
-
-  @Execute(asUser = User.STAFF)
-  @Test(groups = "verifyImageInformationModalElementsForStaffUser")
-  public void verifyImageInformationModalElementsForStaffUser() {
-    ImageReview imageReviewPage = new ImageReview().open().clickImage(0);
-
-    Assertion.assertTrue(imageReviewPage.isImageInfoInModalDisplayed());
-    Assertion.assertTrue(imageReviewPage.isImageInModalDisplayed());
-    Assertion.assertTrue(imageReviewPage.isContextLinkInModalDisplayed());
-    Assertion.assertTrue(imageReviewPage.isImageHistoryInModalDisplayed());
-  }
-
-  @Execute(asUser = User.IMAGE_REVIEWER)
-  @Test(groups = "verifyImageInformationModalElementsForStaffUser")
-  public void verifyImageInformationModalElementsForImageReviewerUser() {
-    ImageReview imageReviewPage = new ImageReview().open().clickImage(0);
-
-    Assertion.assertTrue(imageReviewPage.isImageInfoInModalDisplayed());
-    Assertion.assertTrue(imageReviewPage.isImageInModalDisplayed());
-    Assertion.assertTrue(imageReviewPage.isContextLinkInModalDisplayed());
-    Assertion.assertTrue(imageReviewPage.isImageHistoryInModalDisplayed());
   }
 
 }

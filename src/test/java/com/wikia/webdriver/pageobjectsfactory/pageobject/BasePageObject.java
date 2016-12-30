@@ -234,7 +234,7 @@ public class BasePageObject {
     return driver.getCurrentUrl();
   }
 
-  public void   getUrl(String url) {
+  public void getUrl(String url) {
     getUrl(url, false);
   }
 

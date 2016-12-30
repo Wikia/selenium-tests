@@ -29,20 +29,6 @@ public class ImageReview extends WikiBasePageObject {
   @FindBy(css = ".image-review-text > p:nth-child(2) > strong")
   private WebElement currentStatusMessage;
 
-  @FindBy(css = ".image-review-modal-history")
-  private WebElement imageInfoInModal;
-
-  @FindBy(css = ".modal-dialog-wrapper > .modal-dialog > .image-review-image-details > img")
-  private WebElement imageInModal;
-
-  @FindBy(css = ".modal-dialog-wrapper > .modal-dialog > "
-                + ".image-review-image-details > p:nth-child(2) > a")
-  private WebElement contextLinkInModal;
-
-  @FindBy(css = ".modal-dialog-wrapper > .modal-dialog > "
-                + ".image-review-image-details > .image-review-modal-history")
-  private WebElement imageHistoryInModal;
-
   @FindBy(css = ".image-review-button-group > .button-link > a")
   private WebElement contextLinkButton;
 
@@ -73,9 +59,6 @@ public class ImageReview extends WikiBasePageObject {
   @FindBy(css = ".image-review-action-buttons > button")
   private List<WebElement> actionButtons;
 
-  @FindBy(css = ".image-review-image-container > img")
-  private List<WebElement> imagesToReview;
-
   @FindBy(css = ".image-review-summary-dialog > .image-review-date-input > input")
   private List<WebElement> statisticsDateInputs;
 
@@ -95,22 +78,6 @@ public class ImageReview extends WikiBasePageObject {
 
   public boolean isTopMessageDisplayed() {
     return this.isElementDisplayed(topMessage);
-  }
-
-  public boolean isImageInfoInModalDisplayed() {
-    return this.isElementDisplayed(imageInfoInModal);
-  }
-
-  public boolean isImageInModalDisplayed() {
-    return this.isElementDisplayed(imageInModal);
-  }
-
-  public boolean isContextLinkInModalDisplayed() {
-    return this.isElementDisplayed(contextLinkInModal);
-  }
-
-  public boolean isImageHistoryInModalDisplayed() {
-    return this.isElementDisplayed(imageHistoryInModal);
   }
 
   public boolean isContextLinkButtonInModalDisplayed() {
@@ -184,13 +151,6 @@ public class ImageReview extends WikiBasePageObject {
     }
 
     return true;
-  }
-
-  public ImageReview clickImage(int index) {
-    wait.forElementClickable(imagesToReview.get(index));
-    imagesToReview.get(index).click();
-
-    return this;
   }
 
   public ImageReview clickShowSummaryButton() {
