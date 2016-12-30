@@ -89,6 +89,8 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
   }
 
   public void waitForPageReloadWith(final String categoryName) {
+    waitForPageReload();
+
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
       new FluentWait<>(getPost())
