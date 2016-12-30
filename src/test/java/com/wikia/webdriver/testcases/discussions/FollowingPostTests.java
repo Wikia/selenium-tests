@@ -147,11 +147,9 @@ public class FollowingPostTests extends NewTestTemplate {
     final FollowPage page = FollowPage.open();
 
     final PostActionsRow postActions = clickUnfollowOn(page);
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
 
     clickFollowOn(page);
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -219,11 +217,9 @@ public class FollowingPostTests extends NewTestTemplate {
     final FollowPage page = FollowPage.open();
 
     final PostActionsRow postActions = clickUnfollowOn(page);
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
 
     clickFollowOn(page);
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -236,7 +232,6 @@ public class FollowingPostTests extends NewTestTemplate {
     createAndReportPostAsUserRemotely();
 
     final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -251,7 +246,6 @@ public class FollowingPostTests extends NewTestTemplate {
     DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
@@ -264,7 +258,6 @@ public class FollowingPostTests extends NewTestTemplate {
     createAndReportPostAsUserRemotely();
 
     final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -279,7 +272,6 @@ public class FollowingPostTests extends NewTestTemplate {
     DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
@@ -314,7 +306,6 @@ public class FollowingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createPostAsUserRemotely();
 
     final PostActionsRow postActions = clickFollowOn(navigator.apply(data));
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -322,20 +313,7 @@ public class FollowingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createPostAsUserRemotely();
 
     final PostActionsRow postActions = clickUnfollowOn(navigator.apply(data));
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
-  }
-
-  /**
-   * Because follow may not succeed tests should wait at least 1 second to check if "followed" flag on post
-   * did not change to "not followed" state. 1 second is sufficient for happy path scenario.
-   */
-  private void sleepForOneSecond() {
-    try {
-      TimeUnit.SECONDS.sleep(1);
-    } catch (InterruptedException x) {
-      // ignore this exception
-    }
   }
 
   private void createAndReportPostAsUserRemotely() {

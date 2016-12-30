@@ -174,19 +174,6 @@ public class CreatingReplyTests extends NewTestTemplate {
   private void assertThatPostCanBeUnfollowed(PostDetailsPage page) {
     final PostActionsRow postActions = page.getPost().findNewestPost().findPostActions();
     postActions.clickFollow();
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_MESSAGE);
-  }
-
-  /**
-   * Because follow may not succeed tests should wait at least 1 second to check if "followed" flag on post
-   * did not change to "not followed" state. 1 second is sufficient for happy path scenario.
-   */
-  private void sleepForOneSecond() {
-    try {
-      TimeUnit.SECONDS.sleep(1);
-    } catch (InterruptedException x) {
-      // ignore this exception
-    }
   }
 }
