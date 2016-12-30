@@ -137,6 +137,10 @@ public class PostEntity {
     return MoreOptionsPopOver.fromPostEntity(this);
   }
 
+  public WebElement getWebElement() {
+    return post;
+  }
+
   public Data toData() {
     return Data.builder()
         .id(findId())

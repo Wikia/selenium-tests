@@ -92,7 +92,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void anonymousUserOnDesktopCanChangeCategory() {
+  public void anonymousUserOnDesktopCanChangeCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = openPageAndSelectCategoryOnDesktop(page);
 
