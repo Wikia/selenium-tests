@@ -16,10 +16,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEn
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = {"discussions-creating-replies"})
