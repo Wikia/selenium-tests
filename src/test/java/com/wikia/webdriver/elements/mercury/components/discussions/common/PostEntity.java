@@ -2,14 +2,12 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.wikia.webdriver.common.core.WikiaWebDriver;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nullable;
