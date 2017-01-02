@@ -441,7 +441,7 @@ public class AdsBaseObject extends WikiBasePageObject {
           ExpectedConditions.titleContains(desiredArticleTitle)
       );
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -487,7 +487,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 1;
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 
@@ -523,7 +523,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     try {
       waitFor.until(CommonExpectedConditions.elementToHaveSize(element, width, height));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
   }
 

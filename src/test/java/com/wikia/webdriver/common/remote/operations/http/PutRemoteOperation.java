@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.operations;
+package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 
 public class PutRemoteOperation extends BaseRemoteOperation implements RemoteOperation {
 
-  PutRemoteOperation(User user) {
+  public PutRemoteOperation(User user) {
     super(user);
   }
 

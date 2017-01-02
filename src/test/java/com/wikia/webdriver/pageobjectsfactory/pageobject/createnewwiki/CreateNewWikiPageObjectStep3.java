@@ -42,7 +42,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject {
       new WebDriverWait(driver, 180).until(CommonExpectedConditions
           .elementNotPresent(loadingIndicatorBy));
     } finally {
-      restoreDeaultImplicitWait();
+      restoreDefaultImplicitWait();
     }
 
     scrollAndClick(submitButton);

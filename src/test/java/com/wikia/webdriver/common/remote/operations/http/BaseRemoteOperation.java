@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.operations;
+package com.wikia.webdriver.common.remote.operations.http;
 
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -11,17 +11,22 @@ import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-public class BaseRemoteOperation {
+class BaseRemoteOperation {
 
   @Getter
   private final User user;
@@ -33,6 +38,20 @@ public class BaseRemoteOperation {
       result = makeRequest(client, request);
     } catch (IOException x) {
       PageObjectLogging.log("Error while creating/closing http client.", ExceptionUtils.getStackTrace(x), false);
+    }
+
+    return result;
+  }
+
+  String execute(final HttpEntityEnclosingRequestBase request, final JSONObject jsonObject) {
+    String result = StringUtils.EMPTY;
+
+    try {
+      request.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
+      request.setEntity(new StringEntity(jsonObject.toString()));
+      result = execute(request);
+    } catch (UnsupportedEncodingException x) {
+      PageObjectLogging.log("Error while creating http post entity.", ExceptionUtils.getStackTrace(x), false);
     }
 
     return result;
@@ -64,10 +83,10 @@ public class BaseRemoteOperation {
       result = EntityUtils.toString(entity);
 
       if (response.getStatusLine().getStatusCode() >= 400) {
-        PageObjectLogging.log("Error while making request.", result, false);
         throw new RemoteException("Error while invoking request. "
             + " Method: " + requestBase.getMethod()
-            + " Url: " + requestBase.getURI().toString());
+            + " Url: " + requestBase.getURI().toString()
+            + " Response: " + result);
       }
     }
     return result;
