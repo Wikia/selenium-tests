@@ -49,11 +49,24 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return this;
   }
 
+  @Override
+  public ReplyCreator clearText() {
+    getTextarea().clear();
+    return this;
+  }
+
+  @Override
   public ReplyCreator add(final String text) {
     getTextarea().sendKeys(text);
     return this;
   }
 
+  @Override
+  public boolean isSubmitButtonActive() {
+    return getSubmitButton().isEnabled();
+  }
+
+  @Override
   public ReplyCreator clickSubmitButton() {
     getSubmitButton().click();
     return this;

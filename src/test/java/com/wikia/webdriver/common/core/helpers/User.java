@@ -15,7 +15,7 @@ public enum User {
   USER_9("ci.user.regular9.username", "ci.user.regular9.password"),
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
   IMAGE_REVIEWER("ci.user.reviewer.username", "ci.user.reviewer.password", "ci.user.reviewer.user_id"),
-  STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "", "ci.user.wikiastaff.access_token"),
+  STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "ci.user.wikiastaff.id", "ci.user.wikiastaff.access_token"),
   ANONYMOUS("anonymous", "anonymous"),
   DISCUSSIONS_ADMINISTRATOR("ci.user.discussions.administrator.username", "ci.user.discussions.administrator.password"),
   DISCUSSIONS_MODERATOR("ci.user.discussions.moderator.username", "ci.user.discussions.moderator.password"),

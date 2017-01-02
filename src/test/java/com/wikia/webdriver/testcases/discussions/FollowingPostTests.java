@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -22,7 +23,6 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRe
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
@@ -139,19 +139,18 @@ public class FollowingPostTests extends NewTestTemplate {
   /**
    * By default all posts on "Followed" tab are followed.
    */
-  @Test(groups = "discussions-userMobileFollowingPost")
+  @Test(groups = "discussions-userMobileFollowingPost", enabled = false)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
 
     final PostActionsRow postActions = clickUnfollowOn(page);
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
 
     clickFollowOn(page);
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -211,19 +210,18 @@ public class FollowingPostTests extends NewTestTemplate {
   /**
    * By default all posts on "Followed" tab are followed.
    */
-  @Test(groups = "discussions-userDesktopFollowingPost")
+  @Test(groups = "discussions-userDesktopFollowingPost", enabled = false)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnDesktopCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
 
     final PostActionsRow postActions = clickUnfollowOn(page);
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
 
     clickFollowOn(page);
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -236,7 +234,6 @@ public class FollowingPostTests extends NewTestTemplate {
     createAndReportPostAsUserRemotely();
 
     final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -251,7 +248,6 @@ public class FollowingPostTests extends NewTestTemplate {
     DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
@@ -264,7 +260,6 @@ public class FollowingPostTests extends NewTestTemplate {
     createAndReportPostAsUserRemotely();
 
     final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -279,7 +274,6 @@ public class FollowingPostTests extends NewTestTemplate {
     DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
@@ -314,7 +308,6 @@ public class FollowingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createPostAsUserRemotely();
 
     final PostActionsRow postActions = clickFollowOn(navigator.apply(data));
-    sleepForOneSecond();
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
@@ -322,20 +315,7 @@ public class FollowingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createPostAsUserRemotely();
 
     final PostActionsRow postActions = clickUnfollowOn(navigator.apply(data));
-    sleepForOneSecond();
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
-  }
-
-  /**
-   * Because follow may not succeed tests should wait at least 1 second to check if "followed" flag on post
-   * did not change to "not followed" state. 1 second is sufficient for happy path scenario.
-   */
-  private void sleepForOneSecond() {
-    try {
-      TimeUnit.SECONDS.sleep(1);
-    } catch (InterruptedException x) {
-      // ignore this exception
-    }
   }
 
   private void createAndReportPostAsUserRemotely() {

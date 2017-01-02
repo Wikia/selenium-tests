@@ -98,7 +98,8 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
           .until(new Predicate<Post>() {
             @Override
             public boolean apply(@Nullable Post post) {
-              return post.findNewestPost().findCategory().endsWith(categoryName);
+              return post.getPosts().stream()
+                  .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName));
             }
           });
     } finally {
