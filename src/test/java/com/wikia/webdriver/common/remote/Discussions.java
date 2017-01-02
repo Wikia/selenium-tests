@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.remote.operations.GetSiteId;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,10 @@ public final class Discussions {
     String text = driver.findElement(By.cssSelector(".wikitable tr:nth-child(7) td:nth-child(2)")).getText();
     // Found text: "city_id: 1362702, cluster: c7, dc: sjc"
     return StringUtils.substringBetween(text, ": ", ",");
+  }
+
+  public static String extractSiteIdFromMediaWiki(String wikiUrl) {
+    return new GetSiteId(wikiUrl).getSiteId();
   }
 
   public static String service(String url) {

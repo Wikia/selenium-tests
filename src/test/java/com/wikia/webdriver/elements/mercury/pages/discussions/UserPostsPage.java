@@ -7,7 +7,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.SignIn
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.WebElement;
 
 import java.util.regex.Pattern;
 
