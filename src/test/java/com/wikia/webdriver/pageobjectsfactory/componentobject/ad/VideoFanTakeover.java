@@ -20,26 +20,17 @@ public class VideoFanTakeover {
   private final Wait wait;
   private WikiaWebDriver driver;
   private WebElement iframe;
-  private WebElement playTriggerButton;
 
   public VideoFanTakeover(WikiaWebDriver driver, String iframeId) {
     this.wait = new Wait(driver);
     this.driver = driver;
     setIframe(iframeId);
-    setTriggerButton(driver);
   }
 
   private void setIframe(String iframeId) {
     By iframeSelector = By.id(iframeId);
     wait.forElementPresent(iframeSelector);
     iframe = driver.findElement(iframeSelector);
-  }
-
-  private void setTriggerButton(WikiaWebDriver driver) {
-    runInAdFrame(() -> {
-      wait.forElementClickable(playTriggerButtonSelector);
-      playTriggerButton = driver.findElement(playTriggerButtonSelector);
-    });
   }
 
   public WebElement getIframe() {
