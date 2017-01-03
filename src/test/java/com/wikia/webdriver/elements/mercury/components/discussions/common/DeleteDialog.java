@@ -23,4 +23,11 @@ public class DeleteDialog extends ConfirmationDialog {
     );
   }
 
+  public void cancelAndWait() {
+    super.clickCancel();
+    new WebDriverWait(driver, DiscussionsConstants.TIMEOUT).until(
+      (Predicate<WebDriver>) input -> postList.stream().anyMatch(p -> !p.getAttribute("class").contains("is-deleted"))
+    );
+  }
+
 }

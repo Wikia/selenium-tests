@@ -8,10 +8,12 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.*;
@@ -30,11 +32,21 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   private String siteId;
 
   /**
+   * Hacky way to get rid of totally redundant loading of Special:Version.
+   * The only reason it was loaded was to extract siteId; in this case siteId is extracted from
+   * response of the same page, but parsing is via regex, once, so no need to load the page each time
+   */
+  @Override
+  protected void loadFirstPage() {}
+
+  // FIXTURES
+
+  /**
    *
    * @param wikiName wiki on which a post by `UserWithPosts` will be created
    * @return post that was created
    */
-  @BeforeClass
+
   private PostEntity.Data setUp(String wikiName) {
     String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
     siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
@@ -48,16 +60,10 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
    * @param post to be deleted as staff user
    */
   private void cleanUp(PostEntity.Data post) {
-    DiscussionsOperations.using(User.STAFF, driver).deletePost(post);
+    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, this.siteId);
   }
 
-  // hacky way to get rid of totally redundant loading of Special:Version
-  @Override
-  protected void loadFirstPage() {}
-
-  /***
-   * ANON
-   */
+  // ANON
 
   @Test(groups = "discussions-deleteAllPostsByUser")
   @Execute(asUser = User.ANONYMOUS)
@@ -75,10 +81,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     Assertion.assertTrue(deleteAllOptionNotVisible(UserWithPosts.getUserId()));
   }
 
-  /***
-   *
-   * REGULAR USER
-   */
+  // REGULAR USER
 
   @Test(groups = "discussions-deleteAllPostsByUser")
   @Execute(asUser = User.USER)
@@ -94,9 +97,30 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     Assertion.assertTrue(deleteAllOptionNotVisible(UserWithPosts.getUserId()));
   }
 
+  // VSTF
+
+  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Execute(asUser = User.VSTF)
+  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  public void vstfUserDesktopCanDeleteAllPosts() {
+    getDeleteAllButton(UserWithPosts.getUserId()).click().confirmAndWait();
+    new Shooter().savePageScreenshot("logs/sreenshots/screen123", driver);
+  }
+
+  // HELPER METHODS
+
+  /**
+   *
+   * @param userId of user whose posts page will be opened and checked for DELETE ALL button visibility
+   * @return true if DELETE ALL button visible, false otherwise
+   */
+
   private boolean deleteAllOptionNotVisible(String userId) {
-    UserPostsPage userPosts = new UserPostsPage().open(userId);
-    return userPosts.getDeleteAll().isNotVisible();
+    return getDeleteAllButton(userId).isNotVisible();
+  }
+
+  private DeleteAllButton getDeleteAllButton(String userId) {
+    return new UserPostsPage().open(userId).getDeleteAll();
   }
 
 }

@@ -17,10 +17,12 @@ public class DiscussionsOperations {
 
   private final WebDriver driver;
 
+  // callable only when on Special:Version
   public PostEntity.Data createPostWithUniqueData() {
     return createPostWithUniqueData(extractSiteId());
   }
 
+  // callable from anywhere
   public PostEntity.Data createPostWithUniqueData(String siteId) {
     return createPost(CreatePostContext.defaultContext(siteId));
   }
@@ -33,8 +35,14 @@ public class DiscussionsOperations {
     return new CreatePost(user).execute(context);
   }
 
+  // callable only when on Special:Version
   public void deletePost(PostEntity.Data data) {
-    deletePost(ThreadContext.defaultContextUsing(extractSiteId(), data));
+    deletePost(data, extractSiteId());
+  }
+
+  // callable from anywhere
+  public void deletePost(PostEntity.Data data, String siteId) {
+    deletePost(ThreadContext.defaultContextUsing(siteId, data));
   }
 
   public void deletePost(ThreadContext context) {
