@@ -67,7 +67,7 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
 
         videoFanTakeover.play();
         videoFanTakeover.waitForVideoStart(slotName);
-        videoFanTakeover.clickOnVideoCloseButon();
+        videoFanTakeover.clickOnVideoCloseButton();
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
     }
 
@@ -83,7 +83,7 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
         fandomPage.scrollToSlot(slotSelector);
 
-        videoFanTakeover.waitforAdToLoad();
+        videoFanTakeover.waitForAdToLoad();
         double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
         videoFanTakeover.play();

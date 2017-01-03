@@ -76,7 +76,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
         videoFanTakeover.waitForVideoStart(slotName);
 
-        videoFanTakeover.clickOnVideoCloseButon();
+        videoFanTakeover.clickOnVideoCloseButton();
 
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
     }
@@ -94,7 +94,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        videoFanTakeover.waitforAdToLoad();
+        videoFanTakeover.waitForAdToLoad();
         double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
         videoFanTakeover.play();

@@ -74,7 +74,7 @@ public class VideoFanTakeover {
     PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
   }
 
-  public void waitforAdToLoad() {
+  public void waitForAdToLoad() {
     runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector));
   }
 
@@ -87,9 +87,9 @@ public class VideoFanTakeover {
     });
   }
 
-  public void clickOnVideoCloseButon() {
+  public void clickOnVideoCloseButton() {
     wait.forElementVisible(closeVideoButtonSelector).click();
-    PageObjectLogging.log("clickOnVideoCloseButon", "close video button clicked", true, driver);
+    PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
   public Double getCurrentVideoTimeOnDesktop(String slotName) {

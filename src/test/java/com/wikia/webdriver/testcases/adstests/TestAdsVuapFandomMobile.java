@@ -71,7 +71,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
 
         videoFanTakeover.waitForVideoStart(slotName);
 
-        videoFanTakeover.clickOnVideoCloseButon();
+        videoFanTakeover.clickOnVideoCloseButton();
 
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
     }

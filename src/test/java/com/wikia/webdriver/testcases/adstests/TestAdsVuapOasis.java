@@ -70,7 +70,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
     videoFanTakeover.waitForVideoStart(slotName);
 
-    videoFanTakeover.clickOnVideoCloseButon();
+    videoFanTakeover.clickOnVideoCloseButton();
 
     videoFanTakeover.waitForVideoPlayerHidden(slotName);
   }
@@ -86,7 +86,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    videoFanTakeover.waitforAdToLoad();
+    videoFanTakeover.waitForAdToLoad();
     double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
     videoFanTakeover.play();
