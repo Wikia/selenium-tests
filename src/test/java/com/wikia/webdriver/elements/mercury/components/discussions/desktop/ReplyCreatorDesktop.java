@@ -37,8 +37,16 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement textarea;
 
+  @FindBy(css = ".discussion-inline-reply-editor")
+  private WebElement editor;
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
+  }
+
+  @Override
+  public int getEditorHeight() {
+    return editor.getSize().getHeight();
   }
 }

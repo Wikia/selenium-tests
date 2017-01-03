@@ -9,12 +9,12 @@ import java.util.Objects;
 @Getter
 public class ThreadContext extends RemoteContext {
 
-  private final String postId;
+  private final String threadId;
 
   @Builder
-  public ThreadContext(String siteId, String postId) {
+  public ThreadContext(String siteId, String threadId) {
     super(siteId);
-    this.postId = postId;
+    this.threadId = threadId;
   }
 
   public static ThreadContext defaultContextUsing(final String siteId, final PostEntity.Data data) {
@@ -22,7 +22,7 @@ public class ThreadContext extends RemoteContext {
 
     return ThreadContext.builder()
         .siteId(siteId)
-        .postId(data.getId())
+        .threadId(data.getId())
         .build();
   }
 }

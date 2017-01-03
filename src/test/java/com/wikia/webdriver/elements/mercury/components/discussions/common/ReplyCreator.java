@@ -2,6 +2,8 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 public interface ReplyCreator {
 
+  int getEditorHeight();
+
   boolean isPresent();
 
   ReplyCreator click();
@@ -14,7 +16,11 @@ public interface ReplyCreator {
 
   ReplyCreator clickGuidelinesReadButton();
 
+  ReplyCreator clearText();
+
   ReplyCreator add(final String text);
+
+  boolean isSubmitButtonActive();
 
   ReplyCreator clickSubmitButton();
 }
