@@ -13,7 +13,7 @@ public class VideoFanTakeover {
   private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-ima-container iframe";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-ima-container video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .overVideoLayer";
-  public static final String AD_REDIRECT_URL = "http://fandom.wikia.com";
+  public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD = 28;
   private static By playTriggerButtonSelector = By.id("button");
   private static By closeVideoButtonSelector = By.className("close-ad");
