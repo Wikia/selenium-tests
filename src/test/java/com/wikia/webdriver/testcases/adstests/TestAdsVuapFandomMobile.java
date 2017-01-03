@@ -10,6 +10,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 @Test(
         groups = "AdsVuapFandomMobile"
 )
@@ -119,7 +121,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
 
         double time = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
 
-        Thread.sleep(DELAY * 1000);
+        TimeUnit.SECONDS.sleep(DELAY);
 
         Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
         Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());

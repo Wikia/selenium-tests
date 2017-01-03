@@ -10,6 +10,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 @Test(
         groups = "AdsVuapFandomDesktop"
 )
@@ -142,7 +144,7 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
 
         double time = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
 
-        Thread.sleep(DELAY * 1000);
+        TimeUnit.SECONDS.sleep(DELAY);
 
         Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
         Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());

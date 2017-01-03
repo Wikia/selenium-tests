@@ -7,6 +7,8 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.concurrent.TimeUnit;
+
 public class VideoFanTakeover {
   private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-ima-container iframe";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-ima-container video";
@@ -147,7 +149,7 @@ public class VideoFanTakeover {
       if (imageHeight == getAdSlotHeight(slotSelector)){
         return true;
       }
-      Thread.sleep(200);
+      TimeUnit.MILLISECONDS.sleep(200);
       time = System.currentTimeMillis();
     }
     PageObjectLogging.log("isImageAdInCorrectSize",
