@@ -116,11 +116,11 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
 
         videoFanTakeover.pause();
 
-        double time = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
+        double time = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName);
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
+        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
     }
 }

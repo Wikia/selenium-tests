@@ -111,10 +111,10 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
 
         videoFanTakeover.waitForVideoStart(slotName);
         fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
+        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName);
 
         fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
+        double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName);
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
@@ -136,12 +136,12 @@ public class TestAdsVuapFandomDesktop extends AdsFandomTestTemplate{
 
         videoFanTakeover.pause();
 
-        double time = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
+        double time = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName);
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
+        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName));
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName));
     }
 }
 
