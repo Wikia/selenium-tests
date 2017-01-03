@@ -28,14 +28,19 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
     )
     public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
         videoFanTakeover.play();
 
         videoFanTakeover.waitForVideoStart(slotName);
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
+    }
+
+    private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
+        fandomPage.triggerOnScrollSlots();
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        return videoFanTakeover;
     }
 
     @Test(
@@ -45,9 +50,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
     )
     public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
         videoFanTakeover.clickOnAdImage();
 
@@ -62,9 +65,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
     )
     public void adsVuapVideoClosesWhenTapCloseButtonFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
         videoFanTakeover.play();
 
@@ -84,9 +85,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
     public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
         videoFanTakeover.play();
 
@@ -108,9 +107,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
     public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
         videoFanTakeover.play();
 
