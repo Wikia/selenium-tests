@@ -533,9 +533,9 @@ public class BasePageObject {
     return driver.getCurrentUrl();
   }
 
-  private ArrayList<String> getTabUrls() {
+  private List<String> getTabUrls() {
     String currentTab = driver.getWindowHandle();
-    ArrayList<String> result = new ArrayList<>();
+    List<String> result = new ArrayList<>();
     for(String windowHandler : driver.getWindowHandles()) {
       driver.switchTo().window(windowHandler);
       result.add(driver.getCurrentUrl());
