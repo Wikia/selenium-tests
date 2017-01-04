@@ -19,7 +19,6 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
     private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
     private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
-    private static final int VIDEO_START_TIME = 0;
 
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
@@ -120,7 +119,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
         Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
     }
 }

@@ -19,7 +19,6 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
     private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
     private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
-    private static final int VIDEO_START_TIME = 0;
 
     @NetworkTrafficDump(useMITM = true)
     @Test(
@@ -155,7 +154,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
         Thread.sleep(DELAY * 1000);
         
-        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
         Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
     }
 
