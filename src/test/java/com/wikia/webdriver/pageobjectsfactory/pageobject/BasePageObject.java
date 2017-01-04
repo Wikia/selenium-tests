@@ -21,6 +21,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -117,6 +118,21 @@ public class BasePageObject {
       restoreDefaultImplicitWait();
     }
     return isElementOnPage;
+  }
+
+  /**
+   * Method to check if WebElement is displayed on the page
+   * @param element
+   * @return true if element is displayed, otherwise return false
+   */
+
+  protected boolean isElementDisplayed(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
   }
 
   /**
