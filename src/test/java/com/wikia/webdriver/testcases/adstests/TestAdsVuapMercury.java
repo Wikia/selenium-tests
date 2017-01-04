@@ -33,9 +33,8 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
     }
 
@@ -71,9 +70,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-        videoFanTakeover.play();
-
-        videoFanTakeover.waitForVideoStart(slotName);
+        videoFanTakeover.play(slotName);
 
         videoFanTakeover.clickOnVideoCloseButton();
 
@@ -96,9 +93,8 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         videoFanTakeover.waitForAdToLoad();
         double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMobile(videoHeight, imageHeight));
 
@@ -119,9 +115,8 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
         double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
 
@@ -143,9 +138,8 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
         videoFanTakeover.pause();

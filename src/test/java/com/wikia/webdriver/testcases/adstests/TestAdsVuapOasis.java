@@ -33,9 +33,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    videoFanTakeover.play();
+    videoFanTakeover.play(slotName);
 
-    videoFanTakeover.waitForVideoStart(slotName);
     videoFanTakeover.waitForVideoPlayerHidden(slotName);
   }
 
@@ -65,9 +64,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    videoFanTakeover.play();
-
-    videoFanTakeover.waitForVideoStart(slotName);
+    videoFanTakeover.play(slotName);
 
     videoFanTakeover.clickOnVideoCloseButton();
 
@@ -88,9 +85,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     videoFanTakeover.waitForAdToLoad();
     double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
-    videoFanTakeover.play();
+    videoFanTakeover.play(slotName);
 
-    videoFanTakeover.waitForVideoStart(slotName);
     double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
     Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
@@ -110,9 +106,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    videoFanTakeover.play();
+    videoFanTakeover.play(slotName);
 
-    videoFanTakeover.waitForVideoStart(slotName);
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
     double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
 
@@ -133,9 +128,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
 
-    videoFanTakeover.play();
+    videoFanTakeover.play(slotName);
 
-    videoFanTakeover.waitForVideoStart(slotName);
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
     videoFanTakeover.pause();

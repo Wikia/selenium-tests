@@ -37,8 +37,9 @@ public class VideoFanTakeover {
     return iframe;
   }
 
-  public void play() {
+  public void play(String slotName) {
     runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
+    waitForVideoStart(slotName);
   }
 
   public void pause() {

@@ -29,17 +29,9 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         videoFanTakeover.waitForVideoPlayerHidden(slotName);
-    }
-
-    private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
-        return videoFanTakeover;
     }
 
     @Test(
@@ -66,9 +58,7 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play();
-
-        videoFanTakeover.waitForVideoStart(slotName);
+        videoFanTakeover.play(slotName);
 
         videoFanTakeover.clickOnVideoCloseButton();
 
@@ -86,9 +76,8 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
         double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
 
@@ -108,9 +97,8 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play();
+        videoFanTakeover.play(slotName);
 
-        videoFanTakeover.waitForVideoStart(slotName);
         fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
         videoFanTakeover.pause();
@@ -121,5 +109,12 @@ public class TestAdsVuapFandomMobile extends AdsFandomMobileTestTemplate {
 
         Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
         Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName));
+    }
+
+    private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
+        fandomPage.triggerOnScrollSlots();
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        return videoFanTakeover;
     }
 }
