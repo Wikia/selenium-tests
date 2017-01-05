@@ -153,7 +153,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\""
             )
         },
         {
@@ -193,7 +194,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\""
             )
         },
         {
@@ -229,7 +231,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\""
             )
         },
         {
@@ -264,7 +267,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\""
             )
         },
         {
@@ -299,7 +303,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\""
             )
         },
         {
@@ -338,7 +343,9 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\"",
+                "\"loc\":\"top\""
             )
         },
         {
@@ -369,7 +376,8 @@ public class MobileAdsDataProvider {
             ),
             Arrays.asList(
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
-                "\"src\":\"mobile\""
+                "\"src\":\"mobile\"",
+                "\"loc\":\"top\""
             )
         }
     };
