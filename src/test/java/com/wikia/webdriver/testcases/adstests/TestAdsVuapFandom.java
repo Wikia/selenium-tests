@@ -184,7 +184,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     }
 
     private FandomVideoFanTakeover videoFandomPage() {
-        FandomVideoFanTakeover videoFandomPage = new FandomVideoFanTakeover(driver);
-        return videoFandomPage;
+        return new FandomVideoFanTakeover(driver);
     }
 }
