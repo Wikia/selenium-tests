@@ -79,13 +79,14 @@ public class FandomAdsDataProvider {
                         FandomAdsDataProvider.VUAP_PAGE_SLUG,
                         AdsFandomContent.GPT_TOP_LEADERBOARD,
                         String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
-                },
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
-                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD_MOBILE,
-                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
                 }
+//  Currently on Fandom mobile BFFA is not displayed ADEN-4479 waiting for fix
+//                {
+//                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+//                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
+//                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD_MOBILE,
+//                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
+//                }
         };
     }
 }
