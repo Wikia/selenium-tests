@@ -10,6 +10,7 @@ public class UrlBuilder {
   private static final String PROD_URL_FORMAT = "http://%s%s.%s";
   private static final String SANDBOX_URL_FORMAT = "http://%s.%s%s.%s";
   private static final String DEV_URL_FORMAT = "http://%s%s.%s.%s";
+
   private String env;
 
   public UrlBuilder() {
@@ -76,7 +77,7 @@ public class UrlBuilder {
   }
 
   public String getUrlForWiki(String wikiName, boolean addWWW) {
-    EnvType env = Configuration.getEnvType(this.env);
+    EnvType envType = Configuration.getEnvType(this.env);
     final String wikiaName = getWikiaGlobalName(wikiName);
 
     String www = "";
@@ -84,22 +85,38 @@ public class UrlBuilder {
       www = "www.";
     }
 
-    switch (env) {
+    switch (envType) {
       case DEV: {
         String devBoxOwner = this.env.split("-")[1];
-        return String.format(DEV_URL_FORMAT, www, wikiaName, devBoxOwner, env.getWikiaDomain());
+        return String.format(DEV_URL_FORMAT, www, wikiaName, devBoxOwner, envType.getWikiaDomain());
       }
       case PROD: {
-        return String.format(PROD_URL_FORMAT, www, wikiaName, env.getWikiaDomain());
+        return String.format(PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
       }
       case STAGING: {
-        return String.format(PROD_URL_FORMAT, www, wikiaName, env.getWikiaDomain());
+        return String.format(PROD_URL_FORMAT, www, wikiaName, envType.getWikiaDomain());
       }
       case SANDBOX: {
-        return String.format(SANDBOX_URL_FORMAT, this.env, www, wikiaName, env.getWikiaDomain());
+        return String.format(SANDBOX_URL_FORMAT, this.env, www, wikiaName, envType.getWikiaDomain());
       }
       default:
         return "";
+    }
+  }
+
+  public String getWikiGlobalURL(){
+    EnvType env = Configuration.getEnvType(this.env);
+
+    switch (env) {
+      case DEV: {
+        String devBoxOwner = this.env.split("-")[1];
+        return String.format("http://%s.www.%s", devBoxOwner, env.getWikiaDomain());
+      }
+      case SANDBOX: {
+        return String.format("http://%s.www.%s", this.env, env.getWikiaDomain());
+      }
+      default:
+        return String.format("http://www.%s", env.getWikiaDomain());
     }
   }
 
