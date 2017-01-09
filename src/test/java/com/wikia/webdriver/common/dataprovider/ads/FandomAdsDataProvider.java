@@ -1,14 +1,16 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 
 import org.testng.annotations.DataProvider;
 
 public class FandomAdsDataProvider {
 
-  private FandomAdsDataProvider() {
+  private static final String VUAP_PAGE_SLUG = "silicon-valley-perfect-mike-judge";
+  private static final String AD_UNIT_TEMPLATE = "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0";
 
-  }
+  private FandomAdsDataProvider() { }
 
   @DataProvider
   public static Object[][] fandomAds() {
@@ -50,4 +52,41 @@ public class FandomAdsDataProvider {
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] vuapPage() {
+        return new Object[][]{
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
+                        AdsFandomContent.GPT_TOP_LEADERBOARD,
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
+                },
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        VUAP_PAGE_SLUG,
+                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD,
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
+                }
+        };
+    }
+
+    @DataProvider
+    public static Object[][] vuapPageMobile() {
+        return new Object[][]{
+                {
+                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
+                        AdsFandomContent.GPT_TOP_LEADERBOARD,
+                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
+                }
+//  Currently on Fandom mobile BFFA is not displayed ADEN-4479 waiting for fix
+//                {
+//                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+//                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
+//                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD_MOBILE,
+//                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
+//                }
+        };
+    }
 }
