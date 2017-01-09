@@ -9,7 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 
 import org.testng.annotations.Test;
 
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsOoyalaMercury extends TemplateNoFirstLoad {
 
   @Test(
