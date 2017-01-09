@@ -16,7 +16,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
 
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPage",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsVideoClosedAfterPlayingFandom"}
     )
     public void adsVideoClosedAfterPlayingFandom(String pageType, String pageName, String slotName, String iframeId) {
@@ -30,19 +30,19 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
 
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPage",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsImageClickedOpensNewPageFandom"}
     )
     public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage(slotName).verifyFandomPageOpend(videoFanTakeover);
+        videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
     }
 
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPage",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsVuapVideoClosesWhenTapCloseButtonFandom"}
     )
     public void adsVuapVideoClosesWhenTapCloseButtonFandom(String pageType, String pageName, String slotName, String iframeId) {
@@ -54,20 +54,20 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
 
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPage",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFamdom"}
     )
     public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage(slotName).verifySlotSizesVuapFandom(videoFanTakeover);
+        videoFandomPage(slotName).verifySlotSizesVuap(videoFanTakeover);
     }
 
     @NetworkTrafficDump
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPage",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressingFandom"}
     )
     public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
@@ -80,7 +80,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     @NetworkTrafficDump
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPage",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsVuapVideoPauseFandom"}
     )
     public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
@@ -96,7 +96,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPageMobile",
+            dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
     )
     public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
@@ -114,14 +114,14 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPageMobile",
+            dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"}
     )
     public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage(slotName).verifyFandomPageOpend(videoFanTakeover);
+        videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
     }
 
     @InBrowser(
@@ -130,7 +130,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPageMobile",
+            dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVuapVideoClosesWhenTapCloseButtonFandomMobile"}
     )
     public void adsVuapVideoClosesWhenTapCloseButtonFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
@@ -147,7 +147,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPageMobile",
+            dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressingFandomMobile"}
     )
     public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
@@ -165,7 +165,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "fandomVuapPageMobile",
+            dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVuapVideoPauseFandomMobile"}
     )
     public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {

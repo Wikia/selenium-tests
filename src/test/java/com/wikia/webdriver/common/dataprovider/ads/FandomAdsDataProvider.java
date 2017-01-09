@@ -54,7 +54,7 @@ public class FandomAdsDataProvider {
   }
 
     @DataProvider
-    public static Object[][] fandomVuapPage() {
+    public static Object[][] vuapPage() {
         return new Object[][]{
                 {
                         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
@@ -72,7 +72,7 @@ public class FandomAdsDataProvider {
     }
 
     @DataProvider
-    public static Object[][] fandomVuapPageMobile() {
+    public static Object[][] vuapPageMobile() {
         return new Object[][]{
                 {
                         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,

@@ -27,7 +27,7 @@ public class FandomVideoFanTakeover {
         this.slotName = slotName;
     }
 
-    public void verifyFandomPageOpend(VideoFanTakeover videoFanTakeover){
+    public void verifyFandomPageOpened(VideoFanTakeover videoFanTakeover){
         AdsBaseObject fandom = new AdsBaseObject(driver);
         videoFanTakeover.clickOnAdImage();
         Assert.assertTrue(fandom.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
@@ -40,7 +40,7 @@ public class FandomVideoFanTakeover {
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 
-    public void verifySlotSizesVuapFandom(VideoFanTakeover videoFanTakeover) throws InterruptedException {
+    public void verifySlotSizesVuap(VideoFanTakeover videoFanTakeover) throws InterruptedException {
         String slotSelector = AdsFandomContent.getSlotSelector(slotName);
         videoFanTakeover.waitForAdToLoad();
         double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
