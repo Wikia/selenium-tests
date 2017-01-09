@@ -61,6 +61,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandomMobile"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
@@ -177,6 +179,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.ErrorPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.ImageReviewTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LoginTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.RecentWikiActivityTest"/>

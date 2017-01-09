@@ -13,7 +13,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -21,6 +20,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -117,6 +117,21 @@ public class BasePageObject {
       restoreDefaultImplicitWait();
     }
     return isElementOnPage;
+  }
+
+  /**
+   * Method to check if WebElement is displayed on the page
+   * @param element
+   * @return true if element is displayed, otherwise return false
+   */
+
+  protected boolean isElementDisplayed(WebElement element) {
+    try {
+      return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
   }
 
   /**
@@ -539,6 +554,22 @@ public class BasePageObject {
     driver.switchTo().window(tabs.get(tabs.size() - 1));
 
     return driver.getCurrentUrl();
+  }
+
+  private List<String> getTabUrls() {
+    String currentTab = driver.getWindowHandle();
+    List<String> result = new ArrayList<>();
+    for(String windowHandler : driver.getWindowHandles()) {
+      driver.switchTo().window(windowHandler);
+      result.add(driver.getCurrentUrl());
+    }
+
+    driver.switchTo().window(currentTab);
+    return result;
+  }
+
+  public boolean tabContainsUrl(String url) {
+    return getTabUrls().contains(url);
   }
 
   public int getElementBottomPositionByCssSelector(String elementName) {
