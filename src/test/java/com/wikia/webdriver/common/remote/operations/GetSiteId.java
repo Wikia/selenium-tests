@@ -15,7 +15,6 @@ public class GetSiteId {
 
   public GetSiteId(String wikiUrl) {
     this.wikiUrl = wikiUrl;
-    System.out.println(this.wikiUrl);
     this.setSiteId();
   }
 
@@ -28,7 +27,6 @@ public class GetSiteId {
     String response = request.execute(this.wikiUrl + URLsContent.SPECIAL_VERSION, new JSONObject());
     Pattern p = Pattern.compile(".*city_id: (\\d+).*", Pattern.DOTALL);
     Matcher m = p.matcher(response);
-    System.out.println(m.groupCount());
     if (m.find())
       this.siteId = m.group(1);
     else
