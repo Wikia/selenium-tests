@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.FandomVideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
-import org.omg.CORBA.portable.Streamable;
 import org.testng.annotations.Test;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate{
