@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.FandomVideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+import org.omg.CORBA.portable.Streamable;
 import org.testng.annotations.Test;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate{
@@ -23,9 +24,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoPlayerHidden(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden();
     }
 
     @Test(
@@ -37,7 +38,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyFandomPageOpend(videoFanTakeover);
+        videoFandomPage(slotName).verifyFandomPageOpend(videoFanTakeover);
     }
 
     @Test(
@@ -49,7 +50,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyVideoClosesAfterTapOnCloseButton(slotName, videoFanTakeover);
+        videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
     }
 
     @Test(
@@ -61,7 +62,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifySlotSizesVuapFandom(slotName, videoFanTakeover);
+        videoFandomPage(slotName).verifySlotSizesVuapFandom(videoFanTakeover);
     }
 
     @NetworkTrafficDump
@@ -74,7 +75,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyIsVideoTimeProgresingOnDesktop(slotName, networkTrafficInterceptor, videoFanTakeover);
+        videoFandomPage(slotName).verifyIsVideoTimeProgresingOnDesktop(networkTrafficInterceptor, videoFanTakeover);
     }
 
     @NetworkTrafficDump
@@ -87,7 +88,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyIsVideoPausedOnDesktop(slotName, networkTrafficInterceptor, videoFanTakeover);
+        videoFandomPage(slotName).verifyIsVideoPausedOnDesktop(networkTrafficInterceptor, videoFanTakeover);
     }
 
     @InBrowser(
@@ -103,9 +104,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoPlayerHidden(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden();
     }
 
     @InBrowser(
@@ -121,7 +122,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyFandomPageOpend(videoFanTakeover);
+        videoFandomPage(slotName).verifyFandomPageOpend(videoFanTakeover);
     }
 
     @InBrowser(
@@ -137,7 +138,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyVideoClosesAfterTapOnCloseButton(slotName, videoFanTakeover);
+        videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
     }
 
     @NetworkTrafficDump
@@ -155,7 +156,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyIsVideoTimeProgresingOnMobile(slotName, networkTrafficInterceptor, videoFanTakeover);
+        videoFandomPage(slotName).verifyIsVideoTimeProgresingOnMobile(networkTrafficInterceptor, videoFanTakeover);
     }
 
     @NetworkTrafficDump
@@ -173,17 +174,17 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFandomPage().verifyIsVideoPausedOnMobile(slotName, networkTrafficInterceptor, videoFanTakeover);
+        videoFandomPage(slotName).verifyIsVideoPausedOnMobile(networkTrafficInterceptor, videoFanTakeover);
     }
 
     private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
         fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
         fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
         return videoFanTakeover;
     }
 
-    private FandomVideoFanTakeover videoFandomPage() {
-        return new FandomVideoFanTakeover(driver);
+    private FandomVideoFanTakeover videoFandomPage(String slotName) {
+        return new FandomVideoFanTakeover(driver, slotName);
     }
 }

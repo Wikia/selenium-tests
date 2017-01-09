@@ -31,11 +31,11 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   public void adsVideoClosedAfterPlayingOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     scrollToSlot(slotName, ads);
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
-    videoFanTakeover.play(slotName);
+    videoFanTakeover.play();
 
-    videoFanTakeover.waitForVideoPlayerHidden(slotName);
+    videoFanTakeover.waitForVideoPlayerHidden();
   }
 
   @Test(
@@ -46,7 +46,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   public void adsImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     scrollToSlot(slotName, ads);
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
     videoFanTakeover.clickOnAdImage();
 
@@ -62,13 +62,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   public void adsVuapVideoClosesWhenTapCloseButtonOasis(Page page, String slotName, String iframeId) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     scrollToSlot(slotName, ads);
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
-    videoFanTakeover.play(slotName);
+    videoFanTakeover.play();
 
     videoFanTakeover.clickOnVideoCloseButton();
 
-    videoFanTakeover.waitForVideoPlayerHidden(slotName);
+    videoFanTakeover.waitForVideoPlayerHidden();
   }
 
   @Test(
@@ -80,17 +80,17 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     String slotSelector = AdsContent.getSlotSelector(slotName);
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     scrollToSlot(slotName, ads);
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
     videoFanTakeover.waitForAdToLoad();
     double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
-    videoFanTakeover.play(slotName);
+    videoFanTakeover.play();
 
-    double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
+    double videoHeight = videoFanTakeover.getAdVideoHeight();
     Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
-    videoFanTakeover.waitForVideoPlayerHidden(slotName);
+    videoFanTakeover.waitForVideoPlayerHidden();
     Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
   }
 
@@ -104,15 +104,15 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     scrollToSlot(slotName, ads);
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
-    videoFanTakeover.play(slotName);
+    videoFanTakeover.play();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-    double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
+    double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop().doubleValue();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-    double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
+    double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop().doubleValue();
     Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
   }
 
@@ -126,20 +126,20 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     scrollToSlot(slotName, ads);
-    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+    VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
-    videoFanTakeover.play(slotName);
+    videoFanTakeover.play();
 
     ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
     videoFanTakeover.pause();
 
-    double time = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue();
+    double time = videoFanTakeover.getCurrentVideoTimeOnDesktop().doubleValue();
 
     Thread.sleep(DELAY * 1000);
 
-    Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
-    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName).doubleValue());
+    Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop().doubleValue());
+    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop().doubleValue());
   }
 
   private void scrollToSlot(String slotName, AdsBaseObject ads) {

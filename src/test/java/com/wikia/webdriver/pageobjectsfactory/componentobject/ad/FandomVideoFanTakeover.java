@@ -18,11 +18,13 @@ public class FandomVideoFanTakeover {
     private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
     private final Wait wait;
+    private final String slotName;
     private WikiaWebDriver driver;
 
-    public FandomVideoFanTakeover(WikiaWebDriver driver) {
+    public FandomVideoFanTakeover(WikiaWebDriver driver, String slotName) {
         this.wait = new Wait(driver);
         this.driver = driver;
+        this.slotName = slotName;
     }
 
     public void verifyFandomPageOpend(VideoFanTakeover videoFanTakeover){
@@ -31,84 +33,84 @@ public class FandomVideoFanTakeover {
         Assert.assertTrue(fandom.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
     }
 
-    public void verifyVideoClosesAfterTapOnCloseButton(String slotName, VideoFanTakeover videoFanTakeover){
-        videoFanTakeover.play(slotName);
+    public void verifyVideoClosesAfterTapOnCloseButton(VideoFanTakeover videoFanTakeover){
+        videoFanTakeover.play();
 
         videoFanTakeover.clickOnVideoCloseButton();
-        videoFanTakeover.waitForVideoPlayerHidden(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden();
     }
 
-    public void verifySlotSizesVuapFandom(String slotName, VideoFanTakeover videoFanTakeover) throws InterruptedException {
+    public void verifySlotSizesVuapFandom(VideoFanTakeover videoFanTakeover) throws InterruptedException {
         String slotSelector = AdsFandomContent.getSlotSelector(slotName);
         videoFanTakeover.waitForAdToLoad();
         double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
-        double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
+        double videoHeight = videoFanTakeover.getAdVideoHeight();
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
-        videoFanTakeover.waitForVideoPlayerHidden(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden();
         Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
     }
 
-    public void verifyIsVideoTimeProgresingOnDesktop(String slotName, NetworkTrafficInterceptor networkTrafficInterceptor,
+    public void verifyIsVideoTimeProgresingOnDesktop(NetworkTrafficInterceptor networkTrafficInterceptor,
                                                      VideoFanTakeover videoFanTakeover) {
         networkTrafficInterceptor.startIntercepting();
 
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName);
+        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName);
+        double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
-    public void verifyIsVideoTimeProgresingOnMobile(String slotName, NetworkTrafficInterceptor networkTrafficInterceptor,
+    public void verifyIsVideoTimeProgresingOnMobile(NetworkTrafficInterceptor networkTrafficInterceptor,
                                                     VideoFanTakeover videoFanTakeover) {
         networkTrafficInterceptor.startIntercepting();
 
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName);
+        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName);
+        double midTime = videoFanTakeover.getCurrentVideoTimeOnMobile();
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
-    public void verifyIsVideoPausedOnDesktop(String slotName, NetworkTrafficInterceptor networkTrafficInterceptor,
+    public void verifyIsVideoPausedOnDesktop(NetworkTrafficInterceptor networkTrafficInterceptor,
                                              VideoFanTakeover videoFanTakeover) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
         videoFanTakeover.pause();
-        double time = videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName);
+        double time = videoFanTakeover.getCurrentVideoTimeOnDesktop();
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName), "Video did not start");
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(slotName), "Video did not pause");
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not start");
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not pause");
     }
 
-    public void verifyIsVideoPausedOnMobile(String slotName, NetworkTrafficInterceptor networkTrafficInterceptor,
+    public void verifyIsVideoPausedOnMobile(NetworkTrafficInterceptor networkTrafficInterceptor,
                                             VideoFanTakeover videoFanTakeover) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
-        videoFanTakeover.play(slotName);
+        videoFanTakeover.play();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
         videoFanTakeover.pause();
-        double time = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName);
+        double time = videoFanTakeover.getCurrentVideoTimeOnMobile();
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName), "Video did not start");
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName), "Video did not pause");
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not start");
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not pause");
     }
 }

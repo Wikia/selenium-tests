@@ -14,16 +14,18 @@ public class VideoFanTakeover {
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-ima-container video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .overVideoLayer";
   public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
-  private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD = 28;
+  private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
   private static By playTriggerButtonSelector = By.id("button");
   private static By closeVideoButtonSelector = By.className("close-ad");
   private final Wait wait;
+  private final String slotName;
   private WikiaWebDriver driver;
   private WebElement iframe;
 
-  public VideoFanTakeover(WikiaWebDriver driver, String iframeId) {
+  public VideoFanTakeover(WikiaWebDriver driver, String iframeId, String slotName) {
     this.wait = new Wait(driver);
     this.driver = driver;
+    this.slotName = slotName;
     setIframe(iframeId);
   }
 
@@ -37,9 +39,9 @@ public class VideoFanTakeover {
     return iframe;
   }
 
-  public void play(String slotName) {
+  public void play() {
     runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
-    waitForVideoStart(slotName);
+    waitForVideoStart();
   }
 
   public void pause() {
@@ -56,12 +58,12 @@ public class VideoFanTakeover {
     driver.switchTo().defaultContent();
   }
 
-  public void waitForVideoStart(String slotName) {
+  public void waitForVideoStart() {
     wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
     PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
   }
 
-  public void waitForVideoPlayerHidden(String slotName) {
+  public void waitForVideoPlayerHidden() {
     wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
     PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
   }
@@ -84,7 +86,7 @@ public class VideoFanTakeover {
     PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
-  public Double getCurrentVideoTimeOnDesktop(String slotName) {
+  public Double getCurrentVideoTimeOnDesktop() {
     String result;
 
     driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(VIDEO_IFRAME_SELECTOR_FORMAT, slotName))));
@@ -94,7 +96,7 @@ public class VideoFanTakeover {
     return Double.parseDouble(result);
   }
 
-  public Double getCurrentVideoTimeOnMobile(String slotName) {
+  public Double getCurrentVideoTimeOnMobile() {
     String result;
 
     result = driver.findElement(By.cssSelector(String.format(MOBILE_VIDEO_SELECTOR_FORMAT, slotName))).getAttribute("currentTime");
@@ -105,22 +107,21 @@ public class VideoFanTakeover {
     return driver.findElement(By.cssSelector(slotSelector)).getSize().getHeight();
   }
 
-  public double getAdVideoHeight(String slotName) {
+  public double getAdVideoHeight() {
     return driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).getSize().getHeight();
   }
 
-  public void verifyFandomTabOpened(String tabUrl) {
-    Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);
+  public void verifyFandomTabOpened(String tabUrl) {Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);
   }
 
   public boolean isVideoAdBiggerThanImageAdOasis(double videoHeight, double imageHeight) {
     int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
-    if (percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD) {
+    if (percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD) {
       return true;
     }
     PageObjectLogging.log("isVideoAdBiggerThanImageAdOasis",
             "Expected percentage difference between video height and image height is not equal with "
-            + PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IAMGE_AD + " percent", false, driver);
+            + PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD + " percent", false, driver);
     return false;
   }
 
@@ -136,7 +137,7 @@ public class VideoFanTakeover {
 
   public boolean isImageAdInCorrectSize(double imageHeight, String slotSelector) throws InterruptedException {
     long time = System.currentTimeMillis();
-    long endTime = time+5000;
+    long endTime = time+3000;
     while(time < endTime) {
       if (imageHeight == getAdSlotHeight(slotSelector)){
         return true;
