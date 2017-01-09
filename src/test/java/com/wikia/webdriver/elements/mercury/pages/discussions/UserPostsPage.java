@@ -49,7 +49,4 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
     return UserPostsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
   }
 
-  // dirty hack to get rid of another nasty hack
-  @Override public void verifyUserLoggedIn(final String userName) {}
-
 }

@@ -26,6 +26,10 @@ public class ConfirmationDialog extends BasePageObject {
     return dialog;
   }
 
+  public boolean isVisible() {
+    return getActiveDialog().isDisplayed();
+  }
+
   public void clickCancel() {
     getActiveDialog().findElement(By.className("cancel-button")).click();
   }

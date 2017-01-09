@@ -19,6 +19,7 @@ public enum User {
   DISCUSSIONS_ADMINISTRATOR("ci.user.discussions.administrator.username", "ci.user.discussions.administrator.password"),
   DISCUSSIONS_MODERATOR("ci.user.discussions.moderator.username", "ci.user.discussions.moderator.password"),
   VSTF("ci.user.vstf.username", "ci.user.vstf.password"),
+  HELPER("ci.user.helper.username", "ci.user.helper.password"),
   REGULAR_USER_JAPAN("ci.user.language2.username", "ci.user.language2.password"),
   USER_GO_SEARCH_PREFERRED("ci.user.goSearchPreferredUser.username",
                            "ci.user.goSearchPreferredUser.password"),

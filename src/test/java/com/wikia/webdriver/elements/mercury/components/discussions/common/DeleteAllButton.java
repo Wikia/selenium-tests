@@ -26,7 +26,7 @@ public class DeleteAllButton extends BasePageObject {
 
   public boolean isNotVisible() {
     try {
-      return rightRail.isDisplayed() && wait.forElementNotVisible(button);
+      return rightRail.isEnabled() && wait.forElementNotVisible(button);
     } catch (TimeoutException e) {
       return false;
     }
