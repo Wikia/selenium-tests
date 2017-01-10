@@ -14,7 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(
-        groups = "AdsVuapDesktop"
+        groups = "AdsVuapOasis"
 )
 public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
