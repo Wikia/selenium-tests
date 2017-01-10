@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 
-import lombok.AllArgsConstructor;
 import com.google.common.base.Predicate;
 
 import org.openqa.selenium.WebDriver;

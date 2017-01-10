@@ -2,7 +2,7 @@ package com.wikia.webdriver.common.remote;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.remote.operations.GetSiteId;
+import com.wikia.webdriver.common.remote.operations.SiteId;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +27,7 @@ public final class Discussions {
   }
 
   public static String extractSiteIdFromMediaWiki(String wikiUrl) {
-    return new GetSiteId(wikiUrl).getSiteId();
+    return new SiteId(wikiUrl).getSiteId();
   }
 
   public static String service(String url) {

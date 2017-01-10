@@ -20,6 +20,7 @@ public class DeleteAllButton extends BasePageObject {
     try {
       return button.isDisplayed();
     } catch (NoSuchElementException e) {
+      System.err.println(e.toString());
       return false;
     }
   }
@@ -28,6 +29,7 @@ public class DeleteAllButton extends BasePageObject {
     try {
       return rightRail.isEnabled() && wait.forElementNotVisible(button);
     } catch (TimeoutException e) {
+      System.err.println(e.toString());
       return false;
     }
   }

@@ -10,20 +10,17 @@ import java.util.List;
 public class ConfirmationDialog extends BasePageObject {
 
   private WebElement getActiveDialog() {
-    WebElement dialog = null;
 
     List<WebElement> elements = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
     if (elements.isEmpty()) {
       // allow selenium to throw exception
-      dialog = driver.findElement(By.cssSelector(".discussion-dialog.is-visible.modal-dialog-approve"));
+      return driver.findElement(By.cssSelector(".discussion-dialog.is-visible.modal-dialog-approve"));
     } else if (1 < elements.size()) {
       // only one modal dialog should be visible
       throw new IllegalStateException("Only one modal dialog should be visible!");
     } else {
-      dialog = elements.get(0);
+      return elements.get(0);
     }
-
-    return dialog;
   }
 
   public boolean isVisible() {
