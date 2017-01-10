@@ -60,11 +60,7 @@ public class VideoFanTakeover {
     driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName))).click();
   }
 
-  private interface Lambda {
-    void run();
-  }
-
-  private void runInAdFrame(Lambda f) {
+  private void runInAdFrame(Runnable f) {
     driver.switchTo().frame(iframe);
     f.run();
     driver.switchTo().defaultContent();
