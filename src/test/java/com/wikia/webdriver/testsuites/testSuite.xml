@@ -156,7 +156,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.ImageUploadTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.NavigationTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.SectionItemsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.InteractiveMapsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LoginTestsOld"/>

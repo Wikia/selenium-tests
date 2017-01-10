@@ -54,7 +54,6 @@ public class MainPageTests extends NewTestTemplate {
   private Navigate navigate;
   private CuratedMainPagePageObject cc;
   private CuratedContentPageObject curatedContent;
-  private MercuryAlertComponentObject mercuryAlert;
   private Loading loading;
 
   private void init() {
@@ -62,8 +61,6 @@ public class MainPageTests extends NewTestTemplate {
     this.cc = new CuratedMainPagePageObject(driver);
     this.curatedContent = new CuratedContentPageObject(driver);
     this.loading = new Loading(driver);
-    this.mercuryAlert = new MercuryAlertComponentObject(
-        driver, MercuryAlertComponentObject.AlertMessage.NOT_EXISTING_CATEGORY);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_001")
@@ -454,20 +451,5 @@ public class MainPageTests extends NewTestTemplate {
         MercuryMessages.VISIBLE_MSG,
         result
     );
-  }
-
-  @Test(groups = "MercuryCuratedMainPageTest_006")
-  @Execute(onWikia = MercuryWikis.MERCURY_CC)
-  public void MercuryCuratedMainPageTest_006_CheckWrongCategoryAlert() {
-    init();
-
-    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
-
-    String oldUrl = driver.getCurrentUrl();
-    curatedContent.clickOnCuratedContentElementByIndex(2);
-    Assertion.assertTrue(mercuryAlert.isAlertMessageVisible());
-
-    loading.handleAsyncPageReload();
-    Assertion.assertTrue(oldUrl.contains(driver.getCurrentUrl()));
   }
 }
