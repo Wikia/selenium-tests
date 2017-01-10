@@ -10,13 +10,16 @@ import org.openqa.selenium.WebElement;
 import java.util.concurrent.TimeUnit;
 
 public class VideoFanTakeover {
-  private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-ima-container iframe";
-  private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-ima-container video";
-  private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .overVideoLayer";
+  private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-player iframe";
+  private static final String VIDEO_IFRAME_SELECTOR_FANDOM_FORMAT = "#%s .video-ima-container iframe";
+  private static final String MOBILE_VIDEO_SELECTOR_FANDOM_FORMAT = "#%s .video-ima-container video";
+  private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-player video";
+  private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .pause-overlay";
+  private static final String UI_ELEMENT_CLOSE_BUTTON_FORMAT = "#%s .close-ad";
+  private static final String UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT = "#%s .overVideoLayer";
   public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
   private static By playTriggerButtonSelector = By.id("button");
-  private static By closeVideoButtonSelector = By.className("close-ad");
   private final Wait wait;
   private final String slotName;
   private WikiaWebDriver driver;
@@ -44,15 +47,20 @@ public class VideoFanTakeover {
     waitForVideoStart();
   }
 
+  public void playOnFandom() {
+    runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
+    waitForVideoStartOnFandom();
+  }
+
   public void pause() {
-    driver.findElement(By.className("overVideoLayer")).click();
+    driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).click();
   }
 
-  private interface Lambda {
-    void run();
+  public void pauseVideoOnFandom() {
+    driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName))).click();
   }
 
-  private void runInAdFrame(Lambda f) {
+  private void runInAdFrame(Runnable f) {
     driver.switchTo().frame(iframe);
     f.run();
     driver.switchTo().defaultContent();
@@ -63,8 +71,18 @@ public class VideoFanTakeover {
     PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
   }
 
+  public void waitForVideoStartOnFandom() {
+    wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName)));
+    PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
+  }
+
   public void waitForVideoPlayerHidden() {
     wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
+    PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
+  }
+
+  public void waitForVideoPlayerHiddenOnFandom() {
+    wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName)));
     PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
   }
 
@@ -82,7 +100,7 @@ public class VideoFanTakeover {
   }
 
   public void clickOnVideoCloseButton() {
-    wait.forElementVisible(closeVideoButtonSelector).click();
+    wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT, slotName))).click();
     PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
@@ -96,10 +114,27 @@ public class VideoFanTakeover {
     return Double.parseDouble(result);
   }
 
+  public Double getCurrentVideoTimeOnFandom() {
+    String result;
+
+    driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(VIDEO_IFRAME_SELECTOR_FANDOM_FORMAT, slotName))));
+    result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
+    driver.switchTo().defaultContent();
+
+    return Double.parseDouble(result);
+  }
+
   public Double getCurrentVideoTimeOnMobile() {
     String result;
 
     result = driver.findElement(By.cssSelector(String.format(MOBILE_VIDEO_SELECTOR_FORMAT, slotName))).getAttribute("currentTime");
+    return Double.parseDouble(result);
+  }
+
+  public Double getCurrentVideoTimeOnFandomMobile() {
+    String result;
+
+    result = driver.findElement(By.cssSelector(String.format(MOBILE_VIDEO_SELECTOR_FANDOM_FORMAT, slotName))).getAttribute("currentTime");
     return Double.parseDouble(result);
   }
 
@@ -109,6 +144,10 @@ public class VideoFanTakeover {
 
   public double getAdVideoHeight() {
     return driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).getSize().getHeight();
+  }
+
+  public double getAdVideoHeightOnFandom() {
+    return driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName))).getSize().getHeight();
   }
 
   public void verifyFandomTabOpened(String tabUrl) {Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);

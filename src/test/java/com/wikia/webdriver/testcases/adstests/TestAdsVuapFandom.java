@@ -23,9 +23,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
-        videoFanTakeover.waitForVideoPlayerHidden();
+        videoFanTakeover.waitForVideoPlayerHiddenOnFandom();
     }
 
     @Test(
@@ -103,9 +103,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
 
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
-        videoFanTakeover.waitForVideoPlayerHidden();
+        videoFanTakeover.waitForVideoPlayerHiddenOnFandom();
     }
 
     @InBrowser(

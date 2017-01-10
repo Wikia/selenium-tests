@@ -34,10 +34,10 @@ public class FandomVideoFanTakeover {
     }
 
     public void verifyVideoClosesAfterTapOnCloseButton(VideoFanTakeover videoFanTakeover){
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
         videoFanTakeover.clickOnVideoCloseButton();
-        videoFanTakeover.waitForVideoPlayerHidden();
+        videoFanTakeover.waitForVideoPlayerHiddenOnFandom();
     }
 
     public void verifySlotSizesVuap(VideoFanTakeover videoFanTakeover) throws InterruptedException {
@@ -45,12 +45,12 @@ public class FandomVideoFanTakeover {
         videoFanTakeover.waitForAdToLoad();
         double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
-        double videoHeight = videoFanTakeover.getAdVideoHeight();
+        double videoHeight = videoFanTakeover.getAdVideoHeightOnFandom();
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight ));
 
-        videoFanTakeover.waitForVideoPlayerHidden();
+        videoFanTakeover.waitForVideoPlayerHiddenOnFandom();
         Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
     }
 
@@ -58,13 +58,13 @@ public class FandomVideoFanTakeover {
                                                      VideoFanTakeover videoFanTakeover) {
         networkTrafficInterceptor.startIntercepting();
 
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnFandom();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+        double midTime = videoFanTakeover.getCurrentVideoTimeOnFandom();
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
@@ -72,45 +72,45 @@ public class FandomVideoFanTakeover {
                                                     VideoFanTakeover videoFanTakeover) {
         networkTrafficInterceptor.startIntercepting();
 
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile();
+        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnFandomMobile();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnMobile();
+        double midTime = videoFanTakeover.getCurrentVideoTimeOnFandomMobile();
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
     public void verifyIsVideoPausedOnDesktop(NetworkTrafficInterceptor networkTrafficInterceptor,
                                              VideoFanTakeover videoFanTakeover) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-        videoFanTakeover.pause();
-        double time = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+        videoFanTakeover.pauseVideoOnFandom();
+        double time = videoFanTakeover.getCurrentVideoTimeOnFandom();
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not start");
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not pause");
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnFandom(), "Video did not start");
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnFandom(), "Video did not pause");
     }
 
     public void verifyIsVideoPausedOnMobile(NetworkTrafficInterceptor networkTrafficInterceptor,
                                             VideoFanTakeover videoFanTakeover) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
-        videoFanTakeover.play();
+        videoFanTakeover.playOnFandom();
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-        videoFanTakeover.pause();
-        double time = videoFanTakeover.getCurrentVideoTimeOnMobile();
+        videoFanTakeover.pauseVideoOnFandom();
+        double time = videoFanTakeover.getCurrentVideoTimeOnFandomMobile();
 
         TimeUnit.SECONDS.sleep(DELAY);
 
-        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not start");
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not pause");
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnFandomMobile(), "Video did not start");
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnFandomMobile(), "Video did not pause");
     }
 }
