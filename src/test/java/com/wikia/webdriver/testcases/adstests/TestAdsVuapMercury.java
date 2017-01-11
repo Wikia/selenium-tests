@@ -19,7 +19,6 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
     private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
     private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
-    private static final int VIDEO_START_TIME = 0;
 
     @NetworkTrafficDump(useMITM = true)
     @Test(
@@ -32,12 +31,11 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoStart(slotName);
-        videoFanTakeover.waitForVideoPlayerHidden(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden();
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -51,7 +49,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
         videoFanTakeover.clickOnAdImage();
 
@@ -70,15 +68,13 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoStart(slotName);
+        videoFanTakeover.clickOnVideoCloseButton();
 
-        videoFanTakeover.clickOnVideoCloseButon();
-
-        videoFanTakeover.waitForVideoPlayerHidden(slotName);
+        videoFanTakeover.waitForVideoPlayerHidden();
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -89,21 +85,21 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
     )
     public void adsVuapCheckSlotSizesMercury(Page page, String slotName, String iframeId, String videoUrl) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
+        String slotSelector = AdsContent.getSlotSelector(slotName);
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
-        videoFanTakeover.waitforAdToLoad();
-        double imageHeight = videoFanTakeover.getAdSlotHeight(slotName);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
+        videoFanTakeover.waitForAdToLoad();
+        double imageHeight = videoFanTakeover.getAdSlotHeight(slotSelector);
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoStart(slotName);
-        double videoHeight = videoFanTakeover.getAdVideoHeight(slotName);
-        Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMercury(videoHeight, imageHeight));
+        double videoHeight = videoFanTakeover.getAdVideoHeight();
+        Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMobile(videoHeight, imageHeight));
 
-        videoFanTakeover.waitForVideoEnd(slotName);
-        Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotName));
+        videoFanTakeover.waitForVideoPlayerHidden();
+        Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -117,16 +113,15 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoStart(slotName);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
+        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue();
 
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
+        double midTime = videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue();
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
@@ -141,26 +136,25 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
         scrollToSlot(slotName, ads);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId);
+        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
         videoFanTakeover.play();
 
-        videoFanTakeover.waitForVideoStart(slotName);
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
         videoFanTakeover.pause();
 
-        double time = videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue();
+        double time = videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue();
 
         Thread.sleep(DELAY * 1000);
         
-        Assert.assertNotEquals(VIDEO_START_TIME, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(slotName).doubleValue());
+        Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue());
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue());
     }
 
     private void scrollToSlot(String slotName, AdsBaseObject ads) {
         if (slotName == AdsContent.MOBILE_BOTTOM_LB) {
-            ads.scrollToFooter();
+            ads.scrollToMobileFooter();
         }
     }
 }

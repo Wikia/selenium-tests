@@ -743,11 +743,11 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
-    return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
   }
   private PostEntity.Data createAndReportPostRemotelyAsFirstUser() {
     DiscussionsOperations operations = DiscussionsOperations.using(User.USER, driver);
-    final PostEntity.Data data = operations.cratePostWithUniqueData();
+    final PostEntity.Data data = operations.createPostWithUniqueData();
     operations.reportPost(data);
     return data;
   }

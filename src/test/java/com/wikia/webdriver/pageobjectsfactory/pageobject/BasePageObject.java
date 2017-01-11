@@ -13,7 +13,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -555,6 +554,22 @@ public class BasePageObject {
     driver.switchTo().window(tabs.get(tabs.size() - 1));
 
     return driver.getCurrentUrl();
+  }
+
+  private List<String> getTabUrls() {
+    String currentTab = driver.getWindowHandle();
+    List<String> result = new ArrayList<>();
+    for(String windowHandler : driver.getWindowHandles()) {
+      driver.switchTo().window(windowHandler);
+      result.add(driver.getCurrentUrl());
+    }
+
+    driver.switchTo().window(currentTab);
+    return result;
+  }
+
+  public boolean tabContainsUrl(String url) {
+    return getTabUrls().contains(url);
   }
 
   public int getElementBottomPositionByCssSelector(String elementName) {

@@ -137,11 +137,11 @@ public class EditingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
-    return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private PostEntity.Data createPostAsStaffRemotely() {
-    return DiscussionsOperations.using(User.STAFF, driver).cratePostWithUniqueData();
+    return DiscussionsOperations.using(User.STAFF, driver).createPostWithUniqueData();
   }
 
   private PostEntity.Data updatePostAsStaffRemotely(PostEntity.Data data) {
