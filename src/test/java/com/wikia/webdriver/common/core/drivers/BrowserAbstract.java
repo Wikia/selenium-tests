@@ -5,7 +5,6 @@ import java.util.logging.Level;
 
 import net.lightbody.bmp.proxy.CaptureType;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -14,7 +13,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -86,15 +84,11 @@ public abstract class BrowserAbstract {
 
     if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
-      String countryCode = Configuration.getCountryCode();
       server.setTrustAllServers(true);
       server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
       server.setRequestTimeout(90, TimeUnit.SECONDS);
       server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
           CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
-      if (StringUtils.isNotBlank(countryCode)) {
-        server.setProxyServer(GeoEdgeProxy.getProxyAddress(countryCode));
-      }
 
       caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
     }
