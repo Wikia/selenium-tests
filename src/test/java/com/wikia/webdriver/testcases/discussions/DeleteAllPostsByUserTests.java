@@ -30,21 +30,21 @@ import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
-  private final User USER_WITH_POSTS = User.USER_6;
+  private static final User userWithPosts = User.USER_6;
   private String siteId;
 
   // FIXTURES
 
   /**
    *
-   * @param wikiName wiki on which a post by `USER_WITH_POSTS` will be created
+   * @param wikiName wiki on which a post by `userWithPosts` will be created
    * @return post that was created
    */
   private PostEntity.Data setUp(String wikiName) {
     String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
     siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
     return DiscussionsOperations
-      .using(USER_WITH_POSTS, driver)
+      .using(userWithPosts, driver)
       .createPostWithUniqueData(siteId);
   }
 
@@ -66,7 +66,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void clickDeleteAllDesktopDisplaysConfirmationDialog() {
-    DeleteDialog confirmationDialog = getDeleteAllButton(USER_WITH_POSTS.getUserId()).click();
+    DeleteDialog confirmationDialog = getDeleteAllButton(userWithPosts.getUserId()).click();
     assertTrue(confirmationDialog.isVisible());
   }
 
@@ -74,7 +74,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void clickDeleteAllMobileDisplaysConfirmationDialog() {
-    DeleteDialog confirmationDialog = getDeleteAllButton(USER_WITH_POSTS.getUserId()).click();
+    DeleteDialog confirmationDialog = getDeleteAllButton(userWithPosts.getUserId()).click();
     assertTrue(confirmationDialog.isVisible());
   }
 
@@ -99,7 +99,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonDesktopDeleteAllOptionNotVisible() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_AUTO);
-    assertTrue(deleteAllOptionNotVisible(USER_WITH_POSTS.getUserId()));
+    assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
@@ -108,7 +108,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonMobileDeleteAllOptionNotVisible() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_AUTO);
-    assertTrue(deleteAllOptionNotVisible(USER_WITH_POSTS.getUserId()));
+    assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
@@ -119,7 +119,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void regularUserDesktopDeleteAllOptionNotVisible() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_AUTO);
-    assertTrue(deleteAllOptionNotVisible(USER_WITH_POSTS.getUserId()));
+    assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
@@ -128,7 +128,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void regularUserMobileDeleteAllOptionNotVisible() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_AUTO);
-    assertTrue(deleteAllOptionNotVisible(USER_WITH_POSTS.getUserId()));
+    assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
@@ -187,7 +187,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void modUserDesktopDeleteAllOptionNotVisibleOnDifferentWiki() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_MESSAGING);
-    assertTrue(deleteAllOptionNotVisible(USER_WITH_POSTS.getUserId()));
+    assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
@@ -196,7 +196,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void modUserMobileDeleteAllOptionNotVisibleOnDifferentWiki() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_MESSAGING);
-    assertTrue(deleteAllOptionNotVisible(USER_WITH_POSTS.getUserId()));
+    assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
 
@@ -226,13 +226,13 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   private PostEntity deleteAllAndReturnFirst() {
     String postId = setUp().getId();
-    getDeleteAllButton(USER_WITH_POSTS.getUserId()).click().confirmAndWait();
+    getDeleteAllButton(userWithPosts.getUserId()).click().confirmAndWait();
     return new Post().findPostById(postId);
   }
 
   private PostEntity cancelAndReturnFirst() {
     String postId = setUp().getId();
-    getDeleteAllButton(USER_WITH_POSTS.getUserId()).click().cancelAndWait();
+    getDeleteAllButton(userWithPosts.getUserId()).click().cancelAndWait();
     return new Post().findPostById(postId);
   }
 

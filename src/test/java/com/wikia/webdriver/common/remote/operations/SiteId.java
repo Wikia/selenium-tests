@@ -27,8 +27,7 @@ public class SiteId {
     Matcher m = p.matcher(response);
     if (m.find()) {
       this.siteId = m.group(1);
-    }
-    else {
+    } else {
       this.siteId = "";
     }
   }
