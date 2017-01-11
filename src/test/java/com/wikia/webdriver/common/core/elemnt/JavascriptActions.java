@@ -166,6 +166,13 @@ public class JavascriptActions {
     }
   }
 
+  public void changeElementOpacity(String selector, int value) {
+    driver.findElement(By.cssSelector(selector));
+    js.executeScript(
+            "document.querySelector(arguments[0]).style.opacity = arguments[1];",
+            selector, value);
+  }
+
   public String getWindowErrors() {
     return js.executeScript("return window.errors || ''").toString();
   }

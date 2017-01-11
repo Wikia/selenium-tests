@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
@@ -44,12 +45,8 @@ public class AdsComparison {
   }
 
   private void changeOpacity(String selector, int value, WebDriver driver) {
-    PageObjectLogging.log("CSS selector", selector, true, driver);
-
-    ((JavascriptExecutor) driver).executeScript(
-        "$(arguments[0]).css('opacity', arguments[1]);",
-        selector, Integer.toString(value)
-    );
+    JavascriptActions javascriptActions = new JavascriptActions(driver);
+    javascriptActions.changeElementOpacity(selector, value);
   }
 
   public boolean compareImageWithScreenshot(final String pathToImage,

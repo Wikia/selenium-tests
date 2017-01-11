@@ -26,25 +26,10 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     }
 
     AdsFandomObject pageObject = new AdsFandomObject(driver, pageUrl);
-    getJquery();
-
     return pageObject;
   }
 
   protected AdsFandomObject loadPage(String pageName) {
     return loadPage(pageName, PAGE_TYPE_ARTICLE);
-  }
-
-  private void getJquery() {
-    driver.executeScript(
-        "    (function () {\n"
-        + "    var s = document.createElement('script');\n"
-        + "    s.type = 'text/javascript';\n"
-        + "    s.async = true;\n"
-        + "    s.src = 'https://code.jquery.com/jquery-2.2.4.min.js';\n"
-        + "    var x = document.getElementsByTagName('script')[0];\n"
-        + "    x.parentNode.insertBefore(s, x);\n"
-        + "    })();"
-    );
   }
 }
