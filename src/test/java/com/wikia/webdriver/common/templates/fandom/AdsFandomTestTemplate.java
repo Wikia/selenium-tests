@@ -25,8 +25,7 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
         break;
     }
 
-    AdsFandomObject pageObject = new AdsFandomObject(driver, pageUrl);
-    return pageObject;
+    return new AdsFandomObject(driver, pageUrl);
   }
 
   protected AdsFandomObject loadPage(String pageName) {
