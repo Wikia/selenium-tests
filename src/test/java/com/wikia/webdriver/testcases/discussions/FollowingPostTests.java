@@ -244,7 +244,7 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).cratePostWithUniqueData();
+    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
@@ -270,7 +270,7 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanUnfollowPostOnReportedListPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).cratePostWithUniqueData();
+    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
@@ -292,7 +292,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
-    return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private PostActionsRow clickUnfollowOn(PageWithPosts page) {

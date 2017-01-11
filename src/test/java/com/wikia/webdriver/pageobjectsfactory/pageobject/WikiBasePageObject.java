@@ -407,7 +407,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyUserLoggedIn(User user) {
-    verifyUserLoggedIn(user.getUserName());
+    this.verifyUserLoggedIn(user.getUserName());
   }
 
   public DeletePageObject deletePage() {
@@ -496,7 +496,7 @@ public class WikiBasePageObject extends BasePageObject {
       refreshPageAddingCacheBuster();
     }
 
-    verifyUserLoggedIn(userName);
+    this.verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie",
         "user was logged in by by helios using access token: " + token, true);
     logMercuryUserId();
