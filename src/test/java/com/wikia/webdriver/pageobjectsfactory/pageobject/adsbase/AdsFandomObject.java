@@ -44,15 +44,15 @@ public class AdsFandomObject extends AdsBaseObject {
     jsActions.scrollToBottom();
   }
 
-  public void verifySlot(String slotName) {
+  public void verifySlot(String slotName, String slotElementId) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
 
-    scrollToSlot(selector);
+    scrollToSlot(slotElementId);
     verifyAdVisibleInSlot(selector, slots.get(slotName));
   }
 
   public void scrollToSlot(String slotSelector) {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(slotSelector)));
+    jsActions.scrollToElementOnFandom(slotSelector);
   }
 
   public WebElement getSlot(String slotName) {

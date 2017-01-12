@@ -15,6 +15,12 @@ public class AdsFandomContent {
   public static final String GPT_TOP_LEADERBOARD = "gpt-top-leaderboard";
   public static final String GPT_BOTTOM_LEADERBOARD = "gpt-bottom-leaderboard-desktop";
   public static final String GPT_BOTTOM_LEADERBOARD_MOBILE = "gpt-bottom-leaderboard-mobile";
+  public static final String GPT_TOP_BOXAD_DESKTOP = "gpt-top-boxad-desktop";
+  public static final String GPT_TOP_BOXAD_MOBILE = "gpt-top-boxad-mobile";
+  public static final String GPT_TOP_BOXAD = "gpt-top-boxad";
+  public static final String GPT_BOTTOM_BOXAD = "gpt-bottom-boxad";
+  public static final String GPT_INCONTENT_BOXAD = "gpt-incontent-boxad-desktop";
+  public static final String GPT_INCONTENT_BOXAD_MOBILE = "gpt-incontent-boxad-mobile";
 
   static {
     SLOT_SELECTORS = new HashMap<>();

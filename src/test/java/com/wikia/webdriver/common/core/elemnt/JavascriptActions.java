@@ -123,6 +123,11 @@ public class JavascriptActions {
     }
   }
 
+  public void scrollToElementOnFandom(String elementId) {
+    js.executeScript("var e = document.getElementById(arguments[0]);" +
+            "e.scrollIntoView(true);", elementId);
+  }
+
   public void scrollToElementInModal(WebElement element, WebElement modal) {
     int elementOffsetTop = Integer.parseInt(
         js.executeScript("return Math.round($(arguments[0]).offset().top)", element).toString());

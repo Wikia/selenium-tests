@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -179,7 +178,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
         fandomPage.triggerOnScrollSlots();
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
-        fandomPage.scrollToSlot(AdsFandomContent.getSlotSelector(slotName));
+        fandomPage.scrollToSlot(slotName);
         return videoFanTakeover;
     }
 
