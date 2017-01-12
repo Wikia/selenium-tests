@@ -2,12 +2,12 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-public class TestAdsDetection extends TemplateNoFirstLoad {
+public class TestAdsDetection extends NewTestTemplate {
 
   public static final String PIXEL_PATTERN_WITH_ADBLOCK =
       "http://www\\..*\\.com/bcn.*deo=1.*";
