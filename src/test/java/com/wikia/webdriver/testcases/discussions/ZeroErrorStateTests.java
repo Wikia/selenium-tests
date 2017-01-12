@@ -276,7 +276,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   private void userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     final String postId = DiscussionsOperations.using(User.USER, driver)
-        .cratePostWithUniqueData().getId();
+        .createPostWithUniqueData().getId();
 
     final Replies replies = new PostDetailsPage().open(postId).getReplies();
 
