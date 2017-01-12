@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
@@ -11,14 +12,13 @@ import java.util.regex.Pattern;
 
 public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
 
-  @Getter(lazy = true)
-  private final Post post = new Post();
+  @Getter(lazy = true) private final Post post = new Post();
 
-  @Getter(lazy = true)
-  private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
+  @Getter(lazy = true) private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
 
-  @Getter(lazy = true)
-  private final ErrorMessages errorMessages = new ErrorMessages();
+  @Getter(lazy = true) private final ErrorMessages errorMessages = new ErrorMessages();
+
+  @Getter(lazy = true) private final DeleteAllButton deleteAll = new DeleteAllButton();
 
   private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+$");
 
@@ -48,4 +48,5 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
   public static String extractUserIdFrom(String url) {
     return UserPostsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
   }
+
 }
