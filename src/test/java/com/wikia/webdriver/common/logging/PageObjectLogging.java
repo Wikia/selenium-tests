@@ -2,17 +2,21 @@ package com.wikia.webdriver.common.logging;
 
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import com.wikia.webdriver.common.core.AlertHandler;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.SelectorStack;
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.annotations.DontRun;
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.imageutilities.Shooter;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -34,21 +38,17 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.XMLReader;
-import com.wikia.webdriver.common.core.annotations.DontRun;
-import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -77,9 +77,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String className = success ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + description
-        + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
-        + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
-        + ".html'>HTML Source</a></td></tr>");
+                   + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                   + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                   + ".html'>HTML Source</a></td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(driver);
   }
@@ -92,9 +92,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     String className = success ? "success" : "error";
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>" + e.getMessage()
-        + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
-        + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
-        + ".html'>HTML Source</a></td></tr>");
+                   + "</td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                   + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                   + ".html'>HTML Source</a></td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(driver);
   }
@@ -108,7 +108,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
-      boolean success) {
+                         boolean success) {
     String description = descriptionOnFail;
     if (success) {
       description = descriptionOnSuccess;
@@ -117,7 +117,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   public static void log(String command, String descriptionOnSuccess, String descriptionOnFail,
-      boolean success, boolean ifLowLevel) {
+                         boolean success, boolean ifLowLevel) {
     String description = descriptionOnFail;
     if (success) {
       description = descriptionOnSuccess;
@@ -134,7 +134,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private static void log(String command, String description, boolean isSuccess,
-      boolean ifLowLevel) {
+                          boolean ifLowLevel) {
     logsResults.add(isSuccess);
     String escapedDescription = escapeHtml(description);
 
@@ -142,10 +142,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     StringBuilder builder = new StringBuilder();
     if (ifLowLevel) {
       builder.append("<tr class=\"" + className + " lowLevelAction" + "\"><td>" + command
-          + "</td><td>" + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
+                     + "</td><td>" + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     } else {
       builder.append("<tr class=\"" + className + "\"><td>" + command + "</td><td>"
-          + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
+                     + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(DriverProvider.getActiveDriver());
@@ -164,7 +164,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
    */
   public static void logWarning(String command, String description) {
     StringBuilder builder = new StringBuilder().append("<tr class=\"warning\">" + "<td>" + command
-        + "</td>" + "<td>" + description + "</td>" + "<td> <br/> &nbsp;</td></tr>");
+                                                       + "</td>" + "<td>" + description + "</td>"
+                                                       + "<td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -182,7 +183,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
    */
   public static void logInfo(String description, Throwable e) {
     StringBuilder builder = new StringBuilder().append("<tr class=\"info\"><td>INFO</td><td>"
-        + description + " : " + e.getMessage() + "</td><td> <br/> &nbsp;</td></tr>");
+                                                       + description + " : " + e.getMessage()
+                                                       + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -200,7 +202,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     imageAsBase64 = "<img src=\"data:image/png;base64," + imageAsBase64 + "\">";
     String className = success ? "success" : "error";
     CommonUtils.appendTextToFile(logPath, ("<tr class=\"" + className + "\"><td>" + command
-        + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
+                                           + "</td><td>" + imageAsBase64
+                                           + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
   private static void logJSError(WebDriver driver) {
@@ -231,12 +234,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
       String jiraUrl = jiraPath + issueID;
       builder.append("<tr class=\"step\"><td>Known failure</td><td><h1><em>" + testName + " - "
-          + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
-          + testMethod.getAnnotation(RelatedIssue.class).comment()
-          + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+                     + "<a href=\"" + jiraUrl + "\">" + issueID + "</a> "
+                     + testMethod.getAnnotation(RelatedIssue.class).comment() + " " + testMethod
+                         .getAnnotation(RelatedIssue.class).env()
+                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
     } else {
       builder.append("<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName
-          + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
+                     + "</em></h1></td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
     testStarted = true;
@@ -245,8 +249,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public static void stopLogging() {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"step\">" + "<td>&nbsp</td><td>STOP LOGGING METHOD  "
-        + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
-        + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</table>");
+                   + "<div style=\"text-align:center\">" + "<a href=\"#toc\" style=\"color:blue\">"
+                   + "<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" + "</table>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     testStarted = false;
   }
@@ -256,7 +260,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     new JavascriptActions(driver).execute("window.stop()");
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + "<a href='" + url + "'>" + url
-        + "</a></td><td> <br/> &nbsp;</td></tr>");
+                   + "</a></td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     logJSError(driver);
   }
@@ -267,8 +271,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (!AlertHandler.isAlertPresent(driver)) {
       if (url.equals(driver.getCurrentUrl())) {
         builder.append("<tr class=\"success\"><td>Url after navigation</td><td>" + "<a href='"
-            + driver.getCurrentUrl() + "'>" + driver.getCurrentUrl()
-            + "</a></td><td> <br/> &nbsp;</td></tr>");
+                       + driver.getCurrentUrl() + "'>" + driver.getCurrentUrl()
+                       + "</a></td><td> <br/> &nbsp;</td></tr>");
         CommonUtils.appendTextToFile(logPath, builder.toString());
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
@@ -299,7 +303,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       if (TestContext.isFirstLoad() && "true".equals(Configuration.getMockAds())) {
         driver.manage().addCookie(new Cookie("mock-ads", XMLReader.getValue("mock.ads_token"),
-           String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
+                                             String.format(".%s", Configuration.getEnvType()
+                                                 .getWikiaDomain()), null, null));
       }
     }
 
@@ -324,7 +329,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
 
       checkCountryCode(driver, StringUtils.defaultIfEmpty(Configuration.getCountryCode(),
-          Configuration.getGeoEdgeCountry()));
+                                                          Configuration.getGeoEdgeCountry()));
     }
 
     logJSError(driver);
@@ -349,7 +354,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void afterClickOn(WebElement element, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
-        + "</td><td> <br/> &nbsp;</td></tr>");
+                   + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -357,7 +362,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void afterChangeValueOf(WebElement element, WebDriver driver) {
     StringBuilder builder = new StringBuilder();
     builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>"
-        + lastFindBy + "</td><td> <br/> &nbsp;</td></tr>");
+                   + lastFindBy + "</td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
   }
 
@@ -389,13 +394,13 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
 
       String exception = escapeHtml(result.getThrowable().toString() + "\n"
-          + ExceptionUtils.getStackTrace(result.getThrowable()));
+                                    + ExceptionUtils.getStackTrace(result.getThrowable()));
 
       StringBuilder builder = new StringBuilder();
       builder.append("<tr class=\"error\"><td>error</td><td><pre>" + exception
-          + "</pre></td><td> <br/><a href='screenshots/screenshot" + imageCounter
-          + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
-          + ".html'>HTML Source</a></td></tr>");
+                     + "</pre></td><td> <br/><a href='screenshots/screenshot" + imageCounter
+                     + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
+                     + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
       logJSError(driver);
       stopLogging();
@@ -423,7 +428,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   @Override
-  public void onTestFailedButWithinSuccessPercentage(ITestResult result) {}
+  public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+  }
 
   @Override
   public void onStart(ITestContext context) {
@@ -434,25 +440,29 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
     StringBuilder builder = new StringBuilder();
     builder.append("<html><style>"
-        + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
-        + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
-        + "tr.warning{color:black;background-color:#FEE01E;}"
-        + "tr.error{color:black;background-color:#FFCCCC;}"
-        + "tr.info{color:white;background-color:#78a1c0}" + "tr.step{color:white;background:grey}"
-        + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
-        + "<style>td { border-top: 1px solid grey; } </style></head><body>"
-        + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
-        + "<p>Date: "
-        + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ").print(DateTime.now(DateTimeZone.UTC))
-        + "</p>" + "<p>Polish Time: "
-        + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ")
-            .print(DateTime.now()
-                .withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/Warsaw"))))
-        + "</p>" + "<p>Browser: " + Configuration.getBrowser() + "</p>" + "<p>OS: "
-        + System.getProperty("os.name") + "</p>" + "<p>Testing environment: "
-        + new UrlBuilder().getUrlForWiki(Configuration.getWikiName()) + "</p>"
-        + "<p>Testing environment: " + Configuration.getEnv() + "</p>" + "<p>Tested version: "
-        + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
+                   + "table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) "
+                   + "{width:100px;}tr.success{color:black;background-color:#CCFFCC;}"
+                   + "tr.warning{color:black;background-color:#FEE01E;}"
+                   + "tr.error{color:black;background-color:#FFCCCC;}"
+                   + "tr.info{color:white;background-color:#78a1c0}"
+                   + "tr.step{color:white;background:grey}"
+                   + "</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">"
+                   + "<style>td { border-top: 1px solid grey; } </style></head><body>"
+                   + "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>"
+                   + "<p>Date: "
+                   + DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ")
+                       .print(DateTime.now(DateTimeZone.UTC))
+                   + "</p>" + "<p>Polish Time: "
+                   + DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss ZZ")
+                       .print(DateTime.now()
+                                  .withZone(DateTimeZone.forTimeZone(
+                                      TimeZone.getTimeZone("Europe/Warsaw"))))
+                   + "</p>" + "<p>Browser: " + Configuration.getBrowser() + "</p>" + "<p>OS: "
+                   + System.getProperty("os.name") + "</p>" + "<p>Testing environment: "
+                   + new UrlBuilder().getUrlForWiki(Configuration.getWikiName()) + "</p>"
+                   + "<p>Testing environment: " + Configuration.getEnv() + "</p>"
+                   + "<p>Tested version: "
+                   + "TO DO: GET WIKI VERSION HERE" + "</p>" + "<div id='toc'></div>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
     appendShowHideButtons();
     try {
@@ -509,7 +519,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       logInfo("Country code: " + actualCountryCode);
     } else {
       logWarning("Country code",
-          String.format("Expected: %s, Actual: %s", expectedCountryCode, actualCountryCode));
+                 String.format("Expected: %s, Actual: %s", expectedCountryCode, actualCountryCode));
     }
   }
 }
