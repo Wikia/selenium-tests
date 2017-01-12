@@ -19,12 +19,10 @@ public class AdsContent {
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
   public static final String MOBILE_BOTTOM_LB = "MOBILE_BOTTOM_LEADERBOARD";
-  public static final String HOME_TOP_LB = "HOME_TOP_LEADERBOARD";
   public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
   public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
   public static final String CORP_TOP_LB = "CORP_TOP_LEADERBOARD";
   public static final String TOP_LB = "TOP_LEADERBOARD";
-  public static final String HOME_MEDREC = "HOME_TOP_RIGHT_BOXAD";
   public static final String CORP_MEDREC = "CORP_TOP_RIGHT_BOXAD";
   public static final String MEDREC = "TOP_RIGHT_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
@@ -69,12 +67,10 @@ public class AdsContent {
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
-    SLOTS_SELECTORS.put(HOME_TOP_LB, "#HOME_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(CORP_TOP_LB, "#CORP_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(HUB_LB, "#HUB_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(HUB_LB_GPT, "[id*='gpt/HUB_TOP_LEADERBOARD']");
     SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(HOME_MEDREC, "#HOME_TOP_RIGHT_BOXAD");
     SLOTS_SELECTORS.put(CORP_MEDREC, "#CORP_TOP_RIGHT_BOXAD");
     SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
     SLOTS_SELECTORS.put(LEFT_SKYSCRAPPER_2, "#LEFT_SKYSCRAPER_2");
