@@ -7,17 +7,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -322,9 +318,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         // log in, make sure user is logged in and flow is on the requested url
         new WikiBasePageObject().loginAs(user);
       }
-
-      checkCountryCode(driver, StringUtils.defaultIfEmpty(Configuration.getCountryCode(),
-          Configuration.getGeoEdgeCountry()));
     }
 
     logJSError(driver);
@@ -429,8 +422,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   public void onStart(ITestContext context) {
     CommonUtils.createDirectory(screenDirPath);
     imageCounter = 0;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    Date date = new Date();
 
     StringBuilder builder = new StringBuilder();
     builder.append("<html><style>"
@@ -496,20 +487,5 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void onFinish(ITestContext context) {
     CommonUtils.appendTextToFile(logPath, "</body></html>");
-  }
-
-  private void checkCountryCode(WebDriver driver, String expectedCountryCode) {
-    if (StringUtils.isBlank(expectedCountryCode)) {
-      return;
-    }
-
-    String actualCountryCode = new JavascriptActions(driver).getCountry();
-
-    if (expectedCountryCode.equalsIgnoreCase(actualCountryCode)) {
-      logInfo("Country code: " + actualCountryCode);
-    } else {
-      logWarning("Country code",
-          String.format("Expected: %s, Actual: %s", expectedCountryCode, actualCountryCode));
-    }
   }
 }
