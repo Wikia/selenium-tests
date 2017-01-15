@@ -47,8 +47,8 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
 
   private void verifyArticleSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD, AdsFandomContent.GPT_TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD, AdsFandomContent.GPT_TOP_BOXAD_DESKTOP);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_DESKTOP);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
@@ -56,9 +56,9 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
 
   private void verifyHubSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD, AdsFandomContent.GPT_TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD, AdsFandomContent.GPT_TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD, AdsFandomContent.GPT_BOTTOM_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }

@@ -25,8 +25,8 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
     fandomPage.triggerOnScrollSlots();
 
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD, AdsFandomContent.GPT_TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD, AdsFandomContent.GPT_TOP_BOXAD_DESKTOP);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_DESKTOP);
 
     Assertion.assertTrue(areBtfSlotsHidden(fandomPage), "BTF ads are displayed");
   }
@@ -45,8 +45,8 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
 
     fandomPage.triggerOnScrollSlots();
 
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD, AdsFandomContent.GPT_TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD, AdsFandomContent.GPT_TOP_BOXAD_MOBILE);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_MOBILE);
 
     Assertion.assertTrue(areBtfSlotsHidden(fandomPage), "BTF ads are displayed");
   }

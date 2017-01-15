@@ -12,43 +12,23 @@ import java.util.Map;
 
 public class AdsFandomObject extends AdsBaseObject {
 
-  @FindBy(css = "div[id$='TOP_LEADERBOARD_0__container__']")
-  protected WebElement topLeaderboardElement;
-
-  @FindBy(css = "div[id$='BOTTOM_LEADERBOARD_0__container__']")
-  protected WebElement bottomLeaderboardElement;
-
-  @FindBy(css = "div[id$='TOP_BOXAD_0__container__']")
-  protected WebElement topBoxadElement;
-
-  @FindBy(css = "div[id$='INCONTENT_BOXAD_0__container__']")
-  protected WebElement incontentBoxadElement;
-
-  @FindBy(css = "div[id$='BOTTOM_BOXAD_0__container__']")
-  protected WebElement bottomBoxadElement;
-
-  protected final Map<String, WebElement> slots;
-
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
+  }
 
-    slots = new HashMap<>();
-    slots.put(AdsFandomContent.TOP_LEADERBOARD, topLeaderboardElement);
-    slots.put(AdsFandomContent.BOTTOM_LEADERBOARD, bottomLeaderboardElement);
-    slots.put(AdsFandomContent.TOP_BOXAD, topBoxadElement);
-    slots.put(AdsFandomContent.INCONTENT_BOXAD, incontentBoxadElement);
-    slots.put(AdsFandomContent.BOTTOM_BOXAD, bottomBoxadElement);
+  private WebElement slots(String slotSelector) {
+    return driver.findElement(By.cssSelector(AdsFandomContent.getSlotSelector(slotSelector)));
   }
 
   public void triggerOnScrollSlots() {
     jsActions.scrollToBottom();
   }
 
-  public void verifySlot(String slotName, String slotElementId) {
+  public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
 
-    scrollToSlot(slotElementId);
-    verifyAdVisibleInSlot(selector, slots.get(slotName));
+    scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
+    verifyAdVisibleInSlot(selector, slots(slotName));
   }
 
   public void scrollToSlot(String slotSelector) {

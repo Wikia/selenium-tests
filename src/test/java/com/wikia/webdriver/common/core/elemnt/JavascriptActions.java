@@ -125,7 +125,7 @@ public class JavascriptActions {
 
   public void scrollToElementOnFandom(String elementId) {
     js.executeScript("var e = document.getElementById(arguments[0]);" +
-            "e.scrollIntoView(true);", elementId);
+            "e.scrollIntoViewIfNeeded(true);", elementId);
   }
 
   public void scrollToElementInModal(WebElement element, WebElement modal) {

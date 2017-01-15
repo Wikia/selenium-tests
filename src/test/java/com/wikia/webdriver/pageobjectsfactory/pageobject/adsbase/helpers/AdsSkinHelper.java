@@ -110,7 +110,7 @@ public class AdsSkinHelper {
   }
 
   private void hideCoveredSkinElements() {
-    adsComparison.hideSlot(AdsContent.WIKIA_BAR, driver);
+    adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.WIKIA_BAR), driver);
     adsComparison.hideSlot(WIKIA_MESSAGE_BUBLE, driver);
   }
 

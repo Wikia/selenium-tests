@@ -12,80 +12,87 @@ public class FandomAdsDataProvider {
 
   private FandomAdsDataProvider() { }
 
-    @DataProvider
-    public static Object[][] fandomAds() {
-        return new Object[][]{
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        "young-fans-guide-cinema-part-3"
-                },
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_HUB,
-                        "games"
-                }
-        };
-    }
+  @DataProvider
+  public static Object[][] fandomAds() {
+    return new Object[][]{
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            "young-fans-guide-cinema-part-3"
+        },
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_HUB,
+            "games"
+        }
+    };
+  }
 
-    @DataProvider
-    public static Object[][] fandomBtfBlockPage() {
-        return new Object[][]{
-                {
-                        "game-of-thrones-the-ghost-of-high-heart"
-                }
-        };
-    }
+  @DataProvider
+  public static Object[][] fandomBtfBlockPage() {
+    return new Object[][]{
+        {
+            "game-of-thrones-the-ghost-of-high-heart"
+        }
+    };
+  }
 
-    @DataProvider
-    public static Object[][] fandomUapPage() {
-        return new Object[][]{
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        "box-office-audiences-download-angry-birds",
-                        291751932,
-                        291759372
-                },
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_HUB,
-                        "tv",
-                        291751932,
-                        291759372
-                }
-        };
-    }
+  @DataProvider
+  public static Object[][] fandomArticleUapPage() {
+    return new Object[][]{
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            "box-office-audiences-download-angry-birds",
+            291751932,
+            291759372
+        }
+    };
+  }
 
-    @DataProvider
-    public static Object[][] vuapPage() {
-        return new Object[][]{
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
-                        AdsFandomContent.GPT_TOP_LEADERBOARD,
-                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
-                },
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        VUAP_PAGE_SLUG,
-                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD,
-                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
-                }
-        };
-    }
 
-    @DataProvider
-    public static Object[][] vuapPageMobile() {
-        return new Object[][]{
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
-                        AdsFandomContent.GPT_TOP_LEADERBOARD,
-                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
-                },
-                {
-                        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-                        FandomAdsDataProvider.VUAP_PAGE_SLUG,
-                        AdsFandomContent.GPT_BOTTOM_LEADERBOARD_MOBILE,
-                        String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
-                }
-        };
-    }
+  @DataProvider
+  public static Object[][] fandomHubUapPage() {
+    return new Object[][]{
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_HUB,
+            "tv",
+            291751932,
+            291759372
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] vuapPage() {
+    return new Object[][]{
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            FandomAdsDataProvider.VUAP_PAGE_SLUG,
+            AdsFandomContent.TOP_LEADERBOARD,
+            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
+        },
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            VUAP_PAGE_SLUG,
+            AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP,
+            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] vuapPageMobile() {
+    return new Object[][]{
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            FandomAdsDataProvider.VUAP_PAGE_SLUG,
+            AdsFandomContent.TOP_LEADERBOARD,
+            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
+        },
+        {
+            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+            FandomAdsDataProvider.VUAP_PAGE_SLUG,
+            AdsFandomContent.BOTTOM_LEADERBOARD_MOBILE,
+            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
+        }
+    };
+  }
 }

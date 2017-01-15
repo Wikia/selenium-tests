@@ -44,6 +44,7 @@ public class AdsComparison {
   }
 
   private void changeOpacity(String selector, int value, WebDriver driver) {
+    PageObjectLogging.log("CSS selector", selector, true, driver);
     JavascriptActions javascriptActions = new JavascriptActions(driver);
     javascriptActions.changeElementOpacity(selector, value);
   }

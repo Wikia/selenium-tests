@@ -16,13 +16,14 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
 
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomUapPage",
+      dataProvider = "fandomArticleUapPage",
       groups = {"AdsFandomUapDesktop"}
   )
-  public void adsFandomUapDesktop(String pageType, String pageName, long atfId, long btfId) {
+  public void adsFandomArticleUapDesktop(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    verifyUapAtf(atfId, AdsFandomContent.GPT_TOP_BOXAD_DESKTOP, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.GPT_INCONTENT_BOXAD, fandomPage);
+    fandomPage.triggerOnScrollSlots();
+    verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD_DESKTOP, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP, fandomPage);
   }
 
   @InBrowser(
@@ -31,31 +32,61 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
   )
   @Test(
       dataProviderClass = FandomAdsDataProvider.class,
-      dataProvider = "fandomUapPage",
+      dataProvider = "fandomArticleUapPage",
       groups = {"AdsFandomUapMobile"}
   )
   @RelatedIssue(issueID = "ADEN-4339")
-  public void adsFandomUapMobile(String pageType, String pageName, long atfId, long btfId) {
+  public void adsFandomArticleUapMobile(String pageType, String pageName, long atfId, long btfId) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    verifyUapAtf(atfId, AdsFandomContent.GPT_TOP_BOXAD_MOBILE, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.GPT_INCONTENT_BOXAD_MOBILE, fandomPage);
+    fandomPage.triggerOnScrollSlots();
+    
+    verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD_MOBILE, fandomPage);
+    fandomPage.triggerOnScrollSlots();
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_MOBILE, AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP, fandomPage);
+  }
+
+  @Test(
+      dataProviderClass = FandomAdsDataProvider.class,
+      dataProvider = "fandomHubUapPage",
+      groups = {"AdsFandomUapDesktop"}
+  )
+  public void adsFandomHubUapDesktop(String pageType, String pageName, long atfId, long btfId) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    fandomPage.triggerOnScrollSlots();
+    verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      dataProviderClass = FandomAdsDataProvider.class,
+      dataProvider = "fandomHubUapPage",
+      groups = {"AdsFandomUapMobile"}
+  )
+  @RelatedIssue(issueID = "ADEN-4339")
+  public void adsFandomHubUapMobile(String pageType, String pageName, long atfId, long btfId) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    fandomPage.triggerOnScrollSlots();
+    verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_MOBILE, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
   }
 
   private void verifyUapAtf(long atfId, String slotName, AdsFandomObject fandomPage) {
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD, AdsFandomContent.GPT_TOP_LEADERBOARD);
+    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     Assertion.assertEquals(atfId, fandomPage.getLineItemId(AdsFandomContent.TOP_LEADERBOARD));
 
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD, slotName);
+    fandomPage.verifySlot(slotName);
     Assertion.assertEquals(atfId, fandomPage.getLineItemId(AdsFandomContent.TOP_BOXAD));
   }
 
-  private void verifyUapBtf(long btfId, String slotName, AdsFandomObject fandomPage) {
-    fandomPage.triggerOnScrollSlots();
-
-    fandomPage.verifySlot(AdsFandomContent.INCONTENT_BOXAD, slotName);
+  private void verifyUapBtf(long btfId, String slotName, String bottomSlotName, AdsFandomObject fandomPage) {
+    fandomPage.verifySlot(slotName);
     Assertion.assertEquals(btfId, fandomPage.getLineItemId(AdsFandomContent.INCONTENT_BOXAD));
 
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_LEADERBOARD, AdsFandomContent.GPT_BOTTOM_LEADERBOARD);
+    fandomPage.verifySlot(bottomSlotName);
     Assertion.assertEquals(btfId, fandomPage.getLineItemId(AdsFandomContent.BOTTOM_LEADERBOARD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
   }
