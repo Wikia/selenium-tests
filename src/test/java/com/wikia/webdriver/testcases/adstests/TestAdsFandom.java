@@ -20,7 +20,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   public void adsFandomAdsDesktop(String pageType, String pageName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    verifySlots(fandomPage, pageType);
+    verifySlots(fandomPage, pageType, AdsFandomContent.TOP_BOXAD_DESKTOP);
   }
 
   @InBrowser(
@@ -34,21 +34,21 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   )
   public void adsFandomAdsMobile(String pageType, String pageName) {
     AdsFandomObject fandomPage = loadPage(pageName);
-    verifySlots(fandomPage, pageType);
+    verifySlots(fandomPage, pageType, AdsFandomContent.TOP_BOXAD_MOBILE);
   }
 
-  private void verifySlots(AdsFandomObject fandomPage, String pageType) {
+  private void verifySlots(AdsFandomObject fandomPage, String pageType, String slotName) {
     if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_ARTICLE)) {
-      verifyArticleSlots(fandomPage);
+      verifyArticleSlots(fandomPage, slotName);
     } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_HUB)) {
       verifyHubSlots(fandomPage);
     }
   }
 
-  private void verifyArticleSlots(AdsFandomObject fandomPage) {
+  private void verifyArticleSlots(AdsFandomObject fandomPage, String slotName) {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_DESKTOP);
+    fandomPage.verifySlot(slotName);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
