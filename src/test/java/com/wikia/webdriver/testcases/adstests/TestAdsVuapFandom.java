@@ -90,6 +90,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
         videoFandomPage(slotName).verifyIsVideoPausedOnDesktop(networkTrafficInterceptor, videoFanTakeover);
     }
 
+    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -99,15 +100,19 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
             dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
     )
-    public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
+    public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName,
+                                                       String iframeId, String videoUrl) {
+        networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
 
         videoFanTakeover.playOnFandom();
 
         videoFanTakeover.waitForVideoPlayerHiddenOnFandom();
     }
 
+    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -117,13 +122,17 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
             dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"}
     )
-    public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
+    public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName,
+                                                        String iframeId, String videoUrl) {
+        networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
     }
 
+    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -133,14 +142,17 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
             dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVuapVideoClosesWhenTapCloseButtonFandomMobile"}
     )
-    public void adsVuapVideoClosesWhenTapCloseButtonFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
+    public void adsVuapVideoClosesWhenTapCloseButtonFandomMobile(String pageType, String pageName, String slotName,
+                                                                 String iframeId, String videoUrl) {
+        networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
     }
 
-    @NetworkTrafficDump
+    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -150,15 +162,17 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
             dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressingFandomMobile"}
     )
-    public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
+    public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName,
+                                                   String iframeId, String videoUrl) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyIsVideoTimeProgresingOnMobile(networkTrafficInterceptor, videoFanTakeover);
     }
 
-    @NetworkTrafficDump
+    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -168,10 +182,12 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
             dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVuapVideoPauseFandomMobile"}
     )
-    public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
+    public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName,
+                                              String iframeId, String videoUrl) throws InterruptedException {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyIsVideoPausedOnMobile(networkTrafficInterceptor, videoFanTakeover);
     }
