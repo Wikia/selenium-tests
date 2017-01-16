@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DeleteCategoryModal extends WikiBasePageObject {
 
@@ -22,13 +23,17 @@ public class DeleteCategoryModal extends WikiBasePageObject {
   }
 
   /**
-   * Categories are indexed from 0, where 0 is "General"
    *
-   * @param position - category position
+   * @param categoryName name of destination category
    * @return this object
    */
-  public DeleteCategoryModal clickPill(final int position) {
-    categories.get(position).click();
+  public DeleteCategoryModal clickPill(final String categoryName) {
+      categories.stream()
+        .filter(element -> element.getText().equalsIgnoreCase(categoryName))
+        .collect(Collectors.toList())
+        .get(0)
+        .click();
+
     return this;
   }
 

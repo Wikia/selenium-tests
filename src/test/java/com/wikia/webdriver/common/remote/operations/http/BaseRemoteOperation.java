@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -60,11 +61,11 @@ class BaseRemoteOperation {
   private String makeRequest(final CloseableHttpClient client, final HttpRequestBase request)
       throws IOException {
     String result = StringUtils.EMPTY;
-
+    if(user != null) {
+      String token = Helios.getAccessToken(user);
+      request.setHeader(Discussions.ACCESS_TOKEN_HEADER, token);
+    }
     try (CloseableHttpResponse response = client.execute(request)) {
-      if(user != null) {
-        request.setHeader(Discussions.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
-      }
       result = handleResponse(request, response);
     } catch (UnsupportedEncodingException x) {
       PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);

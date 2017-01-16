@@ -1,15 +1,18 @@
 package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
+import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -30,40 +33,52 @@ import org.testng.annotations.Test;
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
-  // Category name: Category 3
-  private static final int CATEGORY_POSITION = 4;
-
-  // Category name: Editable Category
-  private static final int EDITABLE_CATEGORY_POSITION = 5;
+  private String siteId;
 
   private static final int MAX_NUMBER_OF_CATEGORIES = 10;
 
-  // Category name: General
-  private static final int PILL_POSITION_ON_DELETE_CATEGORY_MODAL = 0;
-
+  private static final String GENERAL_CATEGORY_NAME = "General";
+  private static final String NEW_CATEGORY_NAME = "Automatic category";
   private static final String EDITABLE_CATEGORY_ORIGINAL_NAME = "Editable Category";
 
+  // assertion messages
+
   private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
-
   private static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
-
   private static final String SHOULD_EDIT_CATEGORIES_MESSAGE = "Should be able to edit categories.";
-
   private static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE = "General category should be not editable";
-
   private static final String CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE = "Category %s should appear in categories list.";
-
   private static final String CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE = "Category %s should be visible on post creator.";
-
   private static final String MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE = "Discussions Administrator should not be able to add more than nine categories. ( + 1 \"General\")";
-
   private static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE = "You have reached the limit of allowed categories (10).";
-
   private static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE = "Info message should appear when reached max categories limit.";
-
   private static final String TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE = "Temporary category should not be added.";
-
   private static final String CATEGORY_SHOULD_BE_REMOVED_MESSAGE = "Category should be removed.";
+
+  // fixtures
+
+  /**
+   * Creates a unique post using DISCUSSIONS_ADMINISTRATOR account in NEW_CATEGORY_NAME category
+   * @param wikiName wiki on which post is made
+   * @return new post
+   */
+  private PostEntity.Data setUp(String wikiName) {
+    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
+    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+    CategoryPill.Data category = addCategoryRemotely(siteId, NEW_CATEGORY_NAME);
+    return DiscussionsOperations
+      .using(User.STAFF, driver)
+      .createPostWithCategory(category.getId(), siteId);
+  }
+
+  private PostEntity.Data setUp() {
+    return setUp(MercuryWikis.DISCUSSIONS_AUTO);
+  }
+
+  private void cleanUp(PostEntity.Data post) {
+    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, this.siteId);
+  }
+
 
   // Anonymous user on mobile
 
@@ -71,11 +86,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
-    final PostsListPage page = new PostsListPage().open();
-    final String categoryName = openPageAndSelectCategoryOnMobile(page);
+    PostEntity.Data post = setUp();
 
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+    final PostsListPage page = new PostsListPage().open();
+    openPageAndSelectCategoryOnMobile(page, NEW_CATEGORY_NAME);
+    final boolean isCategoryVisible = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
+    Assertion.assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+
+    cleanUp(post);
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
@@ -91,13 +109,13 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final String categoryName = openPageAndSelectCategoryOnDesktop(page);
+    openPageAndSelectCategoryOnDesktop(page, NEW_CATEGORY_NAME);
 
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
+    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
@@ -116,10 +134,10 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanChangeCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final String categoryName = openPageAndSelectCategoryOnMobile(page);
+    openPageAndSelectCategoryOnMobile(page, NEW_CATEGORY_NAME);
 
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
+    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
@@ -138,7 +156,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
     final PostsListPage page = new PostsListPage().open();
-    final String categoryName = openPageAndSelectCategoryOnDesktop(page);
+    final String categoryName = openPageAndSelectCategoryOnDesktop(page, NEW_CATEGORY_NAME);
 
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
     Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
@@ -205,7 +223,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
         .getCategoriesFieldset().clickEdit()
-        .rename(EDITABLE_CATEGORY_POSITION, categoryName)
+        .rename(EDITABLE_CATEGORY_ORIGINAL_NAME, categoryName)
         .clickApproveButton();
 
     page.waitForPageReload();
@@ -259,7 +277,7 @@ public class CategoriesTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
-    final CategoriesFieldset categoriesFieldset = page.getModeration().getCategoriesFieldset();
+    final CategoriesFieldset categoriesFieldset = page.getCategories();
 
     Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
 
@@ -277,9 +295,7 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = TextGenerator.createUniqueCategoryName();
 
-    final CategoriesFieldset categoriesFieldset = addCategory(
-        page.getModeration().getCategoriesFieldset(),
-        categoryName);
+    final CategoriesFieldset categoriesFieldset = addCategory(page.getCategories(), categoryName);
 
     page.waitForPageReload();
 
@@ -303,9 +319,8 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final String categoryName = TextGenerator.createUniqueCategoryName();
 
-    CategoriesFieldset categoriesFieldset = page.getModeration()
-        .getCategoriesFieldset().clickEdit()
-        .rename(EDITABLE_CATEGORY_POSITION, categoryName)
+    CategoriesFieldset categoriesFieldset = page.getCategories().clickEdit()
+        .rename(EDITABLE_CATEGORY_ORIGINAL_NAME, categoryName)
         .clickApproveButton();
 
     page.waitForPageReload();
@@ -326,8 +341,7 @@ public class CategoriesTests extends NewTestTemplate {
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategoriesOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open();
 
-    CategoriesFieldset categoriesFieldset = page.getModeration()
-        .getCategoriesFieldset().clickEdit();
+    CategoriesFieldset categoriesFieldset = page.getCategories().clickEdit();
 
     addCategoriesUntilMaxReached(categoriesFieldset);
 
@@ -343,7 +357,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     final String temporaryCategoryName = TextGenerator.createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open();
-    final CategoriesFieldset categoriesFieldset = page.getModeration().getCategoriesFieldset();
+    final CategoriesFieldset categoriesFieldset = page.getCategories();
 
     addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
     Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
@@ -352,26 +366,18 @@ public class CategoriesTests extends NewTestTemplate {
     Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
   }
 
-  private String openPageAndSelectCategoryOnMobile(PostsListPage page) {
+  private void openPageAndSelectCategoryOnMobile(PostsListPage page, String categoryName) {
     final FiltersPopOver filtersPopOver = page.getFiltersPopOver().click();
 
-    final String categoryName = filtersPopOver.getCategoriesFieldset()
-        .clickCategoryAt(CATEGORY_POSITION)
-        .getName();
-
+    filtersPopOver.getCategoriesFieldset()
+        .clickCategoryWith(categoryName);
     filtersPopOver.clickApplyButton();
 
     page.waitForPageReloadWith(categoryName);
-    return categoryName;
   }
 
-  private String openPageAndSelectCategoryOnDesktop(PostsListPage page) {
-    final Moderation moderation = page.getModeration();
-
-    final String categoryName = moderation.getCategoriesFieldset()
-        .clickCategoryAt(CATEGORY_POSITION)
-        .getName();
-
+  private String openPageAndSelectCategoryOnDesktop(PostsListPage page, String categoryName) {
+    CategoriesFieldset categories = new CategoriesFieldset();
     page.waitForPageReloadWith(categoryName);
     return categoryName;
   }
@@ -390,9 +396,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private boolean canEditCategoriesOnDesktop(PostsListPage page) {
-    return page.getModeration()
-        .getCategoriesFieldset()
-        .canEdit();
+    return page.getCategories().canEdit();
   }
 
   private CategoriesFieldset addCategory(CategoriesFieldset categoriesFieldset, String categoryName) {
@@ -409,7 +413,13 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void removeCategoryRemotely(String siteId, CategoryPill.Data data) {
-    DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).deleteCategory(siteId, data);
+    DiscussionsCategoryOperations.using(User.STAFF, driver).deleteCategory(siteId, data);
+  }
+
+  private CategoryPill.Data addCategoryRemotely(String siteId, String categoryName) {
+    return DiscussionsCategoryOperations
+      .using(User.STAFF, driver)
+      .createCategory(categoryName, siteId);
   }
 
   private void revertCategoryName(String siteId, CategoryPill.Data data) {
@@ -418,7 +428,7 @@ public class CategoriesTests extends NewTestTemplate {
         .categoryId(data.getId())
         .categoryName(EDITABLE_CATEGORY_ORIGINAL_NAME)
         .build();
-    DiscussionsCategoryOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).renameCategory(context);
+    DiscussionsCategoryOperations.using(User.STAFF, driver).renameCategory(context);
   }
 
   private void addCategoriesUntilMaxReached(CategoriesFieldset categoriesFieldset) {
@@ -433,10 +443,16 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
+  /**
+   * Removes category `data` on page, moves existing posts within that category to GENERAL_CATEGORY_NAME
+   * @param data category to be removed
+   * @param page page on which category removal is executed
+   * @param categoriesFieldset categories where category to be removed exists
+   */
   private void removeCategory(CategoryPill.Data data, PostsListPage page, CategoriesFieldset categoriesFieldset) {
     categoriesFieldset.clickEdit()
         .removeCategory(data.getName())
-        .clickPill(PILL_POSITION_ON_DELETE_CATEGORY_MODAL)
+        .clickPill(GENERAL_CATEGORY_NAME)
         .clickConfirmButton()
         .clickApproveButton();
 

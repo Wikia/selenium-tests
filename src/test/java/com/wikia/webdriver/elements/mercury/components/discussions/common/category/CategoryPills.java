@@ -24,7 +24,7 @@ public class CategoryPills extends BasePageObject {
 
     final List<WebElement> categoryPills = findCategoryPills();
     if (position < categoryPills.size()) {
-      result = new CategoryPill(categoryPills.get(position), position);
+      result = new CategoryPill(categoryPills.get(position));
     }
 
     return result;

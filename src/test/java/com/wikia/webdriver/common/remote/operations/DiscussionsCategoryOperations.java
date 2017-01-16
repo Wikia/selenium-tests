@@ -16,7 +16,11 @@ public class DiscussionsCategoryOperations {
   private final WebDriver driver;
 
   public CategoryPill.Data createCategory(String categoryName) {
-    return createCategory(CreateCategoryContext.defaultContextUsing(extractSiteId(), categoryName));
+    return createCategory(categoryName, extractSiteId());
+  }
+
+  public CategoryPill.Data createCategory(String categoryName, String siteId) {
+    return createCategory(CreateCategoryContext.defaultContextUsing(siteId, categoryName));
   }
 
   private String extractSiteId() {
@@ -27,7 +31,6 @@ public class DiscussionsCategoryOperations {
     return new CreateCategory(user).execute(context);
   }
 
-
   public void deleteCategory(final String siteId, CategoryPill.Data data) {
     deleteCategory(CategoryContext.defaultContextUsing(siteId, data));
   }
@@ -35,7 +38,6 @@ public class DiscussionsCategoryOperations {
   public void deleteCategory(CategoryContext context) {
     new DeleteCategory(user).execute(context);
   }
-
 
   public void renameCategory(CategoryContext context) {
     new RenameCategory(user).execute(context);

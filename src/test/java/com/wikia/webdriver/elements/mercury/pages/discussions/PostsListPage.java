@@ -6,6 +6,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorM
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
@@ -72,6 +73,10 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
+
+  @Getter(lazy = true)
+  private final CategoriesFieldset categories = new CategoriesFieldset();
+
 
 
   public PostsListPage open(String wikiID) {

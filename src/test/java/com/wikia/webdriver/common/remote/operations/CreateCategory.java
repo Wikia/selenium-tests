@@ -33,7 +33,7 @@ public class CreateCategory {
 
     DocumentContext json = JsonPath.parse(response);
 
-    CategoryPill.Data data = new CategoryPill.Data(json.read("$.id"), 0, json.read("$.name"));
+    CategoryPill.Data data = new CategoryPill.Data(json.read("$.id"), json.read("$.name"));
     data.setDisplayOrder(json.read("$.displayOrder"));
     return data;
   }
