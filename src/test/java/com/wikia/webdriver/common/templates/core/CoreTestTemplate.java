@@ -18,8 +18,6 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
-import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
@@ -62,12 +60,6 @@ public abstract class CoreTestTemplate {
 
     if (isTestExcludedFromEnv(method)) {
       throw new SkipException("Test can't be run on " + Configuration.getEnv() + " environment");
-    }
-
-    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
-      GeoEdgeBrowserMobProxy geoEdgeBrowserMobProxy =
-          method.getAnnotation(GeoEdgeBrowserMobProxy.class);
-      Configuration.setGeoEdgeCountry(geoEdgeBrowserMobProxy.country());
     }
 
     driver = DriverProvider.getActiveDriver();
@@ -118,10 +110,6 @@ public abstract class CoreTestTemplate {
       setTestProperty("unstablePageLoadStrategy", "true");
     }
 
-    if (method.isAnnotationPresent(GeoEdgeBrowserMobProxy.class)) {
-      setTestProperty("countryCode", method.getAnnotation(GeoEdgeBrowserMobProxy.class).country());
-    }
-
     if (method.isAnnotationPresent(NetworkTrafficDump.class)) {
       setTestProperty("dumpNetworkTraffic",
           String.valueOf(method.getAnnotation(NetworkTrafficDump.class).networkTrafficDump()));
@@ -145,16 +133,6 @@ public abstract class CoreTestTemplate {
       }
     }
     return false;
-  }
-
-  protected boolean isNonAnonUserOnDeclaringClass(Class<?> declaringClass) {
-    return declaringClass.isAnnotationPresent(Execute.class)
-        && declaringClass.getAnnotation(Execute.class).asUser() != User.ANONYMOUS;
-  }
-
-  protected boolean isNonAnonUserOnMethod(Method method) {
-    return method.isAnnotationPresent(Execute.class)
-        && method.getAnnotation(Execute.class).asUser() != User.ANONYMOUS;
   }
 
   protected void prepareDirectories() {

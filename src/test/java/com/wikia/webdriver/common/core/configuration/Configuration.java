@@ -36,7 +36,6 @@ public class Configuration {
   private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
   private static final String LOCAL_CONFIG_FILE_NAME = "config.yml";
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
-  private static String geoEdgeCountry;
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
   @Getter(lazy = true)
@@ -70,14 +69,6 @@ public class Configuration {
     }
 
     return defaultConfig;
-  }
-
-  public static String getGeoEdgeCountry() {
-    return geoEdgeCountry;
-  }
-
-  public static void setGeoEdgeCountry(String geoEdgeCountry) {
-    Configuration.geoEdgeCountry = geoEdgeCountry;
   }
 
   private static String getPropertyFromFile(String propertyName) {

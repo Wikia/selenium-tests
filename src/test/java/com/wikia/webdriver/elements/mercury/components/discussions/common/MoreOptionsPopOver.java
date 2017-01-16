@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
@@ -72,9 +73,9 @@ public class MoreOptionsPopOver {
     return this;
   }
 
-  public MoreOptionsPopOver clickViewAllPostsByOption() {
+  public UserPostsPage clickViewAllPostsByOption() {
     post.findElement(By.cssSelector("a[href^='/d/u/']")).click();
-    return this;
+    return new UserPostsPage();
   }
 
   static MoreOptionsPopOver fromPostEntity(final PostEntity postEntity) {
