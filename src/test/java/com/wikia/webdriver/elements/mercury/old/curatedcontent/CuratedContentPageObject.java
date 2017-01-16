@@ -4,15 +4,12 @@ import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,14 +27,6 @@ public class CuratedContentPageObject {
   private WebElement sectionContainer;
   @FindBy(css = "div.curated-content a")
   private List<WebElement> curatedContentItems;
-  @FindBy(css = ".load-more-items")
-  private WebElement loadMoreButton;
-
-  private By loadMoreButtonSelector = By.cssSelector(".load-more-items");
-  private By articleItemIcon = By.cssSelector("#namespace-article");
-  private By blogItemIcon = By.cssSelector("#namespace-blog");
-  private By imageItemIcon = By.cssSelector("#namespace-image");
-  private By videoItemIcon = By.cssSelector("#namespace-video");
 
   private enum Labels {
     ARTICLE("Article wrapper"),
@@ -92,39 +81,6 @@ public class CuratedContentPageObject {
     return this;
   }
 
-  public CuratedContentPageObject clickOnLoadMoreButton() {
-    wait.forElementVisible(loadMoreButton);
-    jsActions.scrollToElement(loadMoreButton);
-    loadMoreButton.click();
-    return this;
-  }
-
-  public CuratedContentPageObject navigateToMainPage() {
-    clickOnMainPageLink();
-    new Loading(driver).handleAsyncPageReload();
-    return this;
-  }
-
-  public CuratedContentPageObject isArticleIconVisible() {
-    wait.forElementPresent(articleItemIcon);
-    return this;
-  }
-
-  public CuratedContentPageObject isBlogIconVisible() {
-    wait.forElementPresent(blogItemIcon);
-    return this;
-  }
-
-  public CuratedContentPageObject isImageIconVisible() {
-    wait.forElementPresent(imageItemIcon);
-    return this;
-  }
-
-  public CuratedContentPageObject isVideoIconVisible() {
-    wait.forElementPresent(videoItemIcon);
-    return this;
-  }
-
   public CuratedContentPageObject isTitleVisible() {
     wait.forElementVisible(sectionTitle);
     PageObjectLogging.logInfo(Labels.SECTION_TITLE.name + " " + MercuryMessages.VISIBLE_MSG);
@@ -146,56 +102,6 @@ public class CuratedContentPageObject {
   public CuratedContentPageObject isCuratedContentItemVisibleByIndex(int elementNumber) {
     wait.forElementVisible(curatedContentItems.get(elementNumber));
     PageObjectLogging.logInfo(Labels.SECTION_ITEM.name + " " + MercuryMessages.VISIBLE_MSG);
-    return this;
-  }
-
-  public CuratedContentPageObject isLoadMoreButtonVisible() {
-    wait.forElementVisible(loadMoreButton);
-    PageObjectLogging.logInfo(Labels.LOAD_MORE_BUTTON.name + " " + MercuryMessages.VISIBLE_MSG);
-    return this;
-  }
-
-  public CuratedContentPageObject isLoadMoreButtonHidden() {
-    wait.forElementNotPresent(loadMoreButtonSelector);
-    PageObjectLogging.logInfo(Labels.LOAD_MORE_BUTTON.name + " " + MercuryMessages.INVISIBLE_MSG);
-    return this;
-  }
-
-  public CuratedContentPageObject isCurrentNumberOfItemsExpected(int expectedNumber) {
-    int currentNumber = getCuratedContentItemsNumber();
-    String message = "Expected: " + expectedNumber + ", get: " + currentNumber;
-
-    PageObjectLogging.log(
-        Labels.NUMBER_OF_ITEMS.name,
-        message,
-        expectedNumber == currentNumber
-    );
-    return this;
-  }
-
-  public CuratedContentPageObject areItemsInCuratedContentUnique() {
-    List<String> itemsLabels = new ArrayList<>();
-    boolean conflict = false;
-
-    for (WebElement element : curatedContentItems) {
-      element = element.findElement(By.cssSelector("div.item-caption"));
-      String label = element.getText();
-
-      if (itemsLabels.contains(label)) {
-        conflict = true;
-        break;
-      }
-
-      itemsLabels.add(label);
-    }
-
-    PageObjectLogging.log(
-        Labels.ITEM_LABELS.name,
-        MercuryMessages.LIST_ITEMS_ARE_UNIQUE_MSG,
-        MercuryMessages.LIST_ITEMS_ARE_NOT_UNIQUE_MSG,
-        !conflict
-    );
-
     return this;
   }
 }

@@ -44,17 +44,6 @@ public class MercurySubpages {
   public static final String CC_REDIRECT_SOURCE_1 = "/wiki/RedirectSource1";
   public static final String CC_REDIRECT_DESTINATION = "/wiki/RedirectDestination1";
 
-  // Categories in mercurycc.wikia.com
-  public static final String CC_CATEGORY_ARTICLES = "/main/category/Articles";
-  public static final String CC_CATEGORY_BLOGS = "/main/category/Blog_posts";
-  public static final String CC_CATEGORY_TEMPLATES = "/main/category/Templates";
-  public static final String CC_EMPTY_CATEGORY = "/main/category/Qwerty";
-  public static final String CC_CATEGORY_28_ITEMS = "/main/category/28itemsCategory";
-  public static final String CC_CATEGORY_10_ITEMS = "/main/category/10itemsCategory";
-
-  // Sections in mercurycc.wikia.com
-  public static final String CC_SECTION_CATEGORIES = "/main/section/Categories";
-  public static final String CC_NOT_EXISTING_SECTION = "/main/section/Qwerty";
 
   // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "/wiki/Mercuryntacc_Wikia";
