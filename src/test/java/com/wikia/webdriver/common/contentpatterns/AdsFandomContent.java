@@ -13,8 +13,8 @@ public class AdsFandomContent {
   public static final String BOTTOM_LEADERBOARD_DESKTOP = "BOTTOM_LEADERBOARD_DESKTOP";
   public static final String BOTTOM_LEADERBOARD_MOBILE = "BOTTOM_LEADERBOARD_MOBILE";
   public static final String TOP_BOXAD = "TOP_BOXAD";
-  public static final String TOP_BOXAD_MOBILE = "TOP_BOXAD_MOBILE";
   public static final String TOP_BOXAD_DESKTOP = "TOP_BOXAD_DESKTOP";
+  public static final String TOP_BOXAD_MOBILE = "TOP_BOXAD_MOBILE";
   public static final String INCONTENT_BOXAD = "INCONTENT_BOXAD";
   public static final String INCONTENT_BOXAD_MOBILE = "INCONTENT_BOXAD_MOBILE";
   public static final String BOTTOM_BOXAD = "BOTTOM_BOXAD";
@@ -40,11 +40,11 @@ public class AdsFandomContent {
     GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_DESKTOP, "gpt-bottom-leaderboard-desktop");
     GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_MOBILE, "gpt-bottom-leaderboard-mobile");
     GPT_SLOT_SELECTORS.put(TOP_BOXAD, "gpt-top-boxad");
-    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD, "gpt-incontent-boxad-desktop");
-    GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-bottom-boxad");
-    GPT_SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "gpt-top-boxad-mobile");
     GPT_SLOT_SELECTORS.put(TOP_BOXAD_DESKTOP, "gpt-top-boxad-desktop");
+    GPT_SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "gpt-top-boxad-mobile");
+    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD, "gpt-incontent-boxad-desktop");
     GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_MOBILE, "gpt-incontent-boxad-mobile");
+    GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-bottom-boxad");
   }
 
   private AdsFandomContent() {
