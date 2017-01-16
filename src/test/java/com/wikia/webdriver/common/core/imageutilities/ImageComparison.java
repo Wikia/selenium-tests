@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriverException;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -35,18 +35,6 @@ public class ImageComparison {
       throw new WebDriverException(e);
     }
     return Arrays.equals(fileInBytes1, fileInBytes2);
-  }
-
-  /**
-   * Compare two files byte length in specific accuracy
-   *
-   * @param accuracy use value between 0.0 and 1.0 i.e 0.98 for 98% accuracy
-   * @return boolean
-   */
-  public boolean areFilesTheSame(File file1, File file2, double accuracy) {
-    double difference = (double) file1.length() / file2.length();
-    return (difference >= accuracy && difference <= 1.0) || (difference >= 1.0
-                                                             && difference <= 2.0 - accuracy);
   }
 
   /**
