@@ -59,6 +59,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
@@ -89,6 +90,7 @@
             <class name="com.wikia.webdriver.testcases.discussions.CategoriesTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.CreatingReplyTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.CreatingPostTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.DeleteAllPostsByUserTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.EditingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.FollowingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.GuidelinesTests"/>

@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -15,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,11 +39,7 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver from) {
         try {
           String elementsAttributeValue = findElement(locator, from).getAttribute(attribute);
-          if (elementsAttributeValue == null) {
-            return false;
-          } else {
-            return elementsAttributeValue.contains(value);
-          }
+          return elementsAttributeValue != null && elementsAttributeValue.contains(value);
         } catch (StaleElementReferenceException e) {
           return false;
         }
@@ -211,54 +206,6 @@ public class CommonExpectedConditions {
   /**
    * An expectation for checking if the given text is present in the specified element.
    */
-  public static ExpectedCondition<Boolean> textToBePresentInElementLocatedBy(
-      final By elmentLocator, final String text) {
-
-    return new ExpectedCondition<Boolean>() {
-      public Boolean apply(WebDriver driver) {
-        try {
-          String elementText = driver.findElement(elmentLocator).getText();
-          return elementText.contains(text);
-        } catch (StaleElementReferenceException e) {
-          return false;
-        }
-      }
-
-      @Override
-      public String toString() {
-        return String.format("text ('%s') to be present in element located by %s", text,
-            elmentLocator.toString());
-      }
-    };
-  }
-
-  /**
-   * An expectation for checking if the given text is present in the specified element.
-   */
-  public static ExpectedCondition<Boolean> textToBePresentInElementLocatedBy(
-      final By elmentLocator, final int index, final String text) {
-
-    return new ExpectedCondition<Boolean>() {
-      public Boolean apply(WebDriver driver) {
-        try {
-          String elementText = driver.findElements(elmentLocator).get(index).getText();
-          return elementText.contains(text);
-        } catch (StaleElementReferenceException e) {
-          return false;
-        }
-      }
-
-      @Override
-      public String toString() {
-        return String.format("text ('%s') to be present in element located by %s", text,
-            elmentLocator.toString());
-      }
-    };
-  }
-
-  /**
-   * An expectation for checking if the given text is present in the specified element.
-   */
   public static ExpectedCondition<Boolean> textToBePresentInElement(final By selectorBy,
       final String text) {
 
@@ -319,30 +266,6 @@ public class CommonExpectedConditions {
   }
 
   /**
-   * An expectation for checking if the given text is not present in the specified element located
-   * by.
-   */
-  public static ExpectedCondition<Boolean> textNotPresentInElementLocatedBy(final By by,
-      final String text) {
-
-    return new ExpectedCondition<Boolean>() {
-      public Boolean apply(WebDriver driver) {
-        try {
-          return !driver.findElement(by).getText().contains(text);
-        } catch (NoSuchElementException | StaleElementReferenceException e) {
-          return false;
-        }
-      }
-
-      @Override
-      public String toString() {
-        return String.format("text ('%s') to be present in element located by %s", text,
-            by.toString());
-      }
-    };
-  }
-
-  /**
    * Looks up an element. Logs and re-throws WebDriverException if thrown.
    * <p/>
    * Method exists to gather data for http://code.google.com/p/selenium/issues/detail?id=1800
@@ -384,10 +307,6 @@ public class CommonExpectedConditions {
     };
   }
 
-  /**
-   * @param bySelector
-   * @return
-   */
   public static ExpectedCondition<Boolean> elementNotPresent(final By bySelector) {
     return new ExpectedCondition<Boolean>() {
       @Override
@@ -402,28 +321,6 @@ public class CommonExpectedConditions {
     };
   }
 
-
-  public static ExpectedCondition<Boolean> elementVisible(final WebElement element) {
-    return new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver driver) {
-        try {
-          return element.isDisplayed();
-        } catch (StaleElementReferenceException e) {
-          // Returns false because stale element implies that element
-          // is still not visible.
-          return false;
-        } catch (NoSuchElementException e) {
-          return false;
-        }
-      }
-
-      @Override
-      public String toString() {
-        return String.format("Element ('%s') not visisble!", element.getTagName());
-      }
-    };
-  }
 
   public static ExpectedCondition<Boolean> elementInViewPort(final WebElement element) {
     return new ExpectedCondition<Boolean>() {
@@ -455,31 +352,6 @@ public class CommonExpectedConditions {
       @Override
       public String toString() {
         return String.format("New window not found");
-      }
-    };
-  }
-
-  public static ExpectedCondition<Boolean> oneOfTagsPresentInElement(final WebElement slot,
-      final String tagNameOne, final String tagNameTwo) {
-    return new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver driver) {
-        Dimension zero = new Dimension(0, 0);
-        Dimension one = new Dimension(1, 1);
-        List<WebElement> tagsNodes =
-            slot.findElements(By.cssSelector(tagNameOne + "," + tagNameTwo));
-        for (WebElement tagNode : tagsNodes) {
-          if (tagNode.getSize() != zero && tagNode.getSize() != one && tagNode.isDisplayed()) {
-            return true;
-          }
-        }
-        return false;
-      }
-
-      @Override
-      public String toString() {
-        return String.format("%s tag or %s that matches the criteria were not found!", tagNameOne,
-            tagNameTwo);
       }
     };
   }
@@ -523,29 +395,6 @@ public class CommonExpectedConditions {
     };
   }
 
-  public static ExpectedCondition<Boolean> scriptReturnsTrue(final String jsScript) {
-    return new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver driver) {
-        return (Boolean) ((JavascriptExecutor) driver).executeScript(jsScript);
-      }
-    };
-  }
-
-  public static ExpectedCondition<Boolean> scriptReturnsTrue(final String jsScript,
-      final String argument) {
-    return new ExpectedCondition<Boolean>() {
-      @Override
-      public Boolean apply(WebDriver driver) {
-        return (Boolean) ((JavascriptExecutor) driver).executeScript(jsScript, argument);
-      }
-    };
-  }
-
-  /**
-   * @param bySelector
-   * @return
-   */
   public static ExpectedCondition<Boolean> cssValuePresentForElement(final By bySelector,
       final String cssProperty, final String expectedValue) {
     return new ExpectedCondition<Boolean>() {

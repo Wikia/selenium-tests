@@ -6,7 +6,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class WikiArticleHomePage extends WikiBasePageObject {
 
-  private By wikiHomePageSpecificElement = By.cssSelector("#HOME_TOP_LEADERBOARD");
+  private By wikiHomePageSpecificElement = By.className("mainpage");
 
   /**
    * Check if current page is in fact home page of wiki
