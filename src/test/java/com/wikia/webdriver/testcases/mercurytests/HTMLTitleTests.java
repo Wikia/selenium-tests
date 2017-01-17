@@ -91,11 +91,6 @@ public class HTMLTitleTests extends NewTestTemplate {
       },
       {
           "starwars",
-          "/main/category/Future_films",
-          "Future films | Wookieepedia | Fandom powered by Wikia"
-      },
-      {
-          "starwars",
           "/main/section/Films",
           "Films | Wookieepedia | Fandom powered by Wikia"
       },
