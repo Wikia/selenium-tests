@@ -42,7 +42,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
     
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD_MOBILE, fandomPage);
     fandomPage.triggerOnScrollSlots();
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_MOBILE, AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_MOBILE, AdsFandomContent.BOTTOM_LEADERBOARD_MOBILE, fandomPage);
   }
 
   @Test(
