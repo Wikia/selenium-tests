@@ -62,10 +62,11 @@ public class CategoriesFieldset extends WikiBasePageObject {
    * @return first WebElement category that matches the name
    */
   private WebElement getCategoryWith(final String categoryName) {
-    return categories.stream()
+    List<WebElement> categoryList = categories.stream()
       .filter(element -> element.getText().equalsIgnoreCase(categoryName))
-      .collect(Collectors.toList())
-      .get(0);
+      .collect(Collectors.toList());
+
+      return categoryList.get(categoryList.size() - 1);
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {

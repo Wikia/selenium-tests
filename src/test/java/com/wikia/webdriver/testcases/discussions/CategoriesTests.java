@@ -14,6 +14,7 @@ import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.Category;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
@@ -77,6 +78,8 @@ public class CategoriesTests extends NewTestTemplate {
 
   private void cleanUp(PostEntity.Data post) {
     DiscussionsOperations.using(User.STAFF, driver).deletePost(post, this.siteId);
+    // TODO: remove category
+    //removeCategoryRemotely(this.siteId, );
   }
 
 
