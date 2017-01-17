@@ -112,15 +112,9 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(WebElement element, int offset) {
-    try {
-      js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
-          element, offset);
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
+    js.executeScript(
+        "window.scroll(0, " + (element.getLocation().getY() - offset) + ");"
+    );
   }
 
   public void scrollToElementInModal(WebElement element, WebElement modal) {
