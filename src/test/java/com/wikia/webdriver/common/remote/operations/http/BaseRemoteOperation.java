@@ -60,11 +60,10 @@ class BaseRemoteOperation {
   private String makeRequest(final CloseableHttpClient client, final HttpRequestBase request)
       throws IOException {
     String result = StringUtils.EMPTY;
-
+    if(user != null) {
+      request.setHeader(Discussions.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
+    }
     try (CloseableHttpResponse response = client.execute(request)) {
-      if(user != null) {
-        request.setHeader(Discussions.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
-      }
       result = handleResponse(request, response);
     } catch (UnsupportedEncodingException x) {
       PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);
