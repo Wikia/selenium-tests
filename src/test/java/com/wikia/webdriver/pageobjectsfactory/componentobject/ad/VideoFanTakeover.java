@@ -42,6 +42,10 @@ public class VideoFanTakeover {
     return iframe;
   }
 
+  private WebElement videoCloseButton(String slotName) {
+   return wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT, slotName)));
+  }
+
   public void play() {
     runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
     waitForVideoStart();
@@ -100,24 +104,24 @@ public class VideoFanTakeover {
   }
 
   public void clickOnVideoCloseButton() {
-    wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT, slotName))).click();
+    scrollToAdsElement(videoCloseButton(slotName), 60);
+
+    videoCloseButton(slotName).click();
     PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
   public Double getCurrentVideoTimeOnDesktop() {
-    String result;
-
-    driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(VIDEO_IFRAME_SELECTOR_FORMAT, slotName))));
-    result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
-    driver.switchTo().defaultContent();
-
-    return Double.parseDouble(result);
+    return getCurrentVideoTime(VIDEO_IFRAME_SELECTOR_FORMAT);
   }
 
   public Double getCurrentVideoTimeOnFandom() {
+    return getCurrentVideoTime(VIDEO_IFRAME_SELECTOR_FANDOM_FORMAT);
+  }
+
+  private Double getCurrentVideoTime(String selectorFormat) {
     String result;
 
-    driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(VIDEO_IFRAME_SELECTOR_FANDOM_FORMAT, slotName))));
+    driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(selectorFormat, slotName))));
     result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
     driver.switchTo().defaultContent();
 
@@ -196,5 +200,11 @@ public class VideoFanTakeover {
     PageObjectLogging.log("isTimeProgressing",
             "Video time is not progressing, quartileTime " + quartileTime + " is not smaller than midTime " + midTime , false, driver);
     return false;
+  }
+//  This scroll has been implemented because driver was not able to execute script in JavascriptActions
+  private void scrollToAdsElement(WebElement element, int offset) {
+    driver.executeScript(
+        "window.scroll(0, " + (element.getLocation().getY() - offset) + ");"
+    );
   }
 }
