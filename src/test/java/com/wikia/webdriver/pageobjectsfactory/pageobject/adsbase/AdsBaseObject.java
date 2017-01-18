@@ -56,13 +56,11 @@ public class AdsBaseObject extends WikiBasePageObject {
       "RemnantGptMobile"
   };
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-  private static final String ARTICLE_COMMENTS_CSS_SELECTOR = "#WikiaArticleFooter";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
 
   private long tStart;
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
-  protected String presentHighImpactSlotSelector = "div[id*='INVISIBLE_HIGH_IMPACT']";
 
   @FindBy(css = "div[id*='TOP_LEADERBOARD']")
   protected WebElement presentLeaderboard;
@@ -99,10 +97,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     driver.manage().window().setSize(resolution);
   }
 
-  private WebElement adSelector(String slotName){
-    return wait.forElementVisible(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-  }
-
   public void timerStart() {
     tStart = System.currentTimeMillis();
   }
@@ -112,11 +106,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     long tDelta = tEnd - tStart;
     double elapsedSeconds = tDelta / 1000.0;
     return String.valueOf(elapsedSeconds);
-  }
-
-  public void logNumberOfSecondsFromStart(String message) {
-    PageObjectLogging.log("seconds after start",
-                          message + " [" + getNumberOfSecondsFromStart() + "] s", true);
   }
 
   public void verifyForcedSuccessScriptInSlots(List<String> slots) {
@@ -167,33 +156,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteBrokenSelector)));
     WebElement fliteTagBroken = driver.findElement(By.cssSelector(cssFliteBrokenSelector));
     Assertion.assertEquals(fliteTagBroken.getText(), error);
-  }
-
-  public void verifyHubTopLeaderboard() throws Exception {
-    String hubLBName = AdsContent.HUB_LB;
-    WebElement
-        hubLB =
-        driver.findElement(By.cssSelector(AdsContent.getSlotSelector(hubLBName)));
-    verifyScriptPresentInSlotScripts(hubLBName, hubLB);
-    PageObjectLogging.log("HUB_TOP_LEADERBOARD found", "HUB_TOP_LEADERBOARD found", true);
-
-    WebElement
-        hubGPTLB =
-        hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.HUB_LB_GPT)));
-    PageObjectLogging
-        .log("HUB_TOP_LEADERBOARD_gpt found", "HUB_TOP_LEADERBOARD_gpt found", true);
-
-    if (hubGPTLB.findElements(By.cssSelector("iframe")).size() > 1) {
-      PageObjectLogging
-          .log("IFrames found", "2 IFrames found in HUB_TOP_LEADERBOAD_gpt div", true);
-    } else {
-      PageObjectLogging.log(
-          "IFrames not found",
-          "2 IFrames expected to be found in HUB_TOP_LEADERBOAD_gpt div, found less",
-          false, driver
-      );
-      throw new NoSuchElementException("IFrames inside GPT div not found!");
-    }
   }
 
   public void verifyNoAdsOnPage() {
@@ -299,17 +261,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public AdsBaseObject verifyAdImage(String slotName, String src, String imageUrl) {
-    WebElement element = getIframe(slotName, src);
-    Assertion.assertTrue(
-        new AdsComparison().compareImageWithScreenshot(imageUrl, element, driver),
-        "The image is different than the sample"
-    );
-    PageObjectLogging.log("verifyAdImage", "Ad looks good", true, driver);
-
-    return this;
-  }
-
   public AdsBaseObject verifyProvidersChain(String slotName, String providers) {
     PageObjectLogging.log("SlotName", slotName, true);
     waitForProvidersChain(slotName, providers, PROVIDER_CHAIN_TIMEOUT_SEC);
@@ -368,13 +319,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     msg = "Received \"load\" event from GPT iframe #" + iframeId + "  in slot " + slotName;
     PageObjectLogging.log("verifyGptIframe", msg, true, driver);
-  }
-
-  public AdsBaseObject refresh(int times) {
-    for (int i = 0; i < times; i++) {
-      refreshPage();
-    }
-    return this;
   }
 
   public void waitForSlotCollapsed(WebElement slot) {
@@ -443,12 +387,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     } finally {
       restoreDefaultImplicitWait();
     }
-  }
-
-  public AdsBaseObject addToUrl(String param) {
-    appendToUrl(param);
-    waitForPageLoaded();
-    return this;
   }
 
   public void verifySkin(String adSkinLeftPath,
@@ -701,27 +639,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  private void verifyScriptPresentInSlotScripts(String slotName, WebElement slotElement) {
-    String scriptExpectedResult = AdsContent.ADS_PUSHSLOT_SCRIPT.replace(
-        "%slot%", slotName
-    );
-    if (checkScriptPresentInElement(slotElement, scriptExpectedResult)) {
-      PageObjectLogging.log(
-          "PushSlotsScriptFound",
-          "Script " + scriptExpectedResult + " found",
-          true
-      );
-    } else {
-      PageObjectLogging.log(
-          "PushSlotsScriptNotFound",
-          "Script " + scriptExpectedResult + " not found",
-          false,
-          driver
-      );
-      throw new NoSuchElementException("Script for pushing ads not found in element");
-    }
-  }
-
   private void verifyNoAds() {
     Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
     for (String selector : slotsSelectors) {
@@ -823,9 +740,5 @@ public class AdsBaseObject extends WikiBasePageObject {
       PageObjectLogging.log("Mobile bottom leaderboard ad is not displayed", ex, true);
       return false;
     }
-  }
-
-  public void verifySlotSize(String slotName, int width, int height) {
-    waitForElementToHaveSize(width, height, driver.findElement(By.id(slotName)));
   }
 }
