@@ -329,10 +329,6 @@ public class BasePageObject {
     }
   }
 
-  public void waitForElementNotClickableByElement(WebElement element) {
-    waitFor.until(CommonExpectedConditions.elementNotToBeClickable(element));
-  }
-
   public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute,
                                                               String value) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
@@ -376,21 +372,6 @@ public class BasePageObject {
   public void openWikiPage() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
-  }
-
-  /*
-   * notifications methods - will be moved to other class
-   */
-  public void notifications_verifyLatestNotificationTitle(String title) {
-    notifications_showNotifications();
-    // the below method is native click which is the only way to load
-    // notification
-    notifications_clickOnNotificationsLogo();
-    wait.forElementVisible(notificationsLatestNotificationOnWiki);
-    wait.forTextInElement(notificationsLatestNotificationOnWiki, title);
-    PageObjectLogging.log("notifications_verifyNotificationTitle",
-                          "Verify that the latest notification has the following title: " + title,
-                          true, driver);
   }
 
   public void notifications_clickOnNotificationsLogo() {
