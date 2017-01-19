@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
@@ -16,7 +17,8 @@ public class VideoFanTakeover {
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-player video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .pause-overlay";
   private static final String UI_ELEMENT_CLOSE_BUTTON_FORMAT = "#%s .close-ad";
-  private static final String UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT = "#%s .overVideoLayer";
+  private static final String UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT = "#%s .pause-overlay";
+  private static final int GLOBAL_NAV_HEIGHT = 60;
   public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
   private static By playTriggerButtonSelector = By.id("button");
@@ -104,7 +106,7 @@ public class VideoFanTakeover {
   }
 
   public void clickOnVideoCloseButton() {
-    scrollToAdVideo(getVideoCloseButton(slotName), 60);
+    scrollToAdVideo(getVideoCloseButton(slotName));
 
     getVideoCloseButton(slotName).click();
     PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
@@ -202,10 +204,8 @@ public class VideoFanTakeover {
     return false;
   }
 //  This scroll has been implemented because driver was not able to execute script in JavascriptActions
-  private void scrollToAdVideo(WebElement element, int offset) {
-    int elementPosition = element.getLocation().getY() - offset;
-    driver.executeScript(
-        "window.scroll(0,arguments[0])",  elementPosition
-    );
+  private void scrollToAdVideo(WebElement element) {
+    JavascriptActions javascriptActions = new JavascriptActions(driver);
+    javascriptActions.scrollToElement(element, GLOBAL_NAV_HEIGHT);
   }
 }

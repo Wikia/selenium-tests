@@ -195,7 +195,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
         fandomPage.triggerOnScrollSlots();
         VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, AdsFandomContent.getGptSlotSelector(slotName));
-        fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName), 60);
+        fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
         return videoFanTakeover;
     }
 
