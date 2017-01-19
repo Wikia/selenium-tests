@@ -51,8 +51,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
@@ -623,12 +621,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   protected Boolean isNewGlobalNavPresent() {
     return isElementOnPage(newGlobalNavigation);
-  }
-
-  public void setCookie(String name, String value) {
-    Cookie newCookie = new Cookie(name, value);
-    driver.manage().addCookie(newCookie);
-    PageObjectLogging.log("setCookie", "Set cookie: '" + name + "' to " + value, true);
   }
 
   public Dimension getWindowSize() {
