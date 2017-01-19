@@ -17,13 +17,25 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
   @Test(groups = "AdsVuapAutoplayAutoplayOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapAutoplayDesktop")
-  public void vuapAutoplayShouldStartPlayingAdvertisementAutomatically(Page page, String videoIframeSelector) {
+  public void vuapAutoplayShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
 
-    final AutoplayVuap vuap = new AutoplayVuap(driver, videoIframeSelector);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.pause();
 
     Assert.assertTrue(vuap.hasStarted(), "VUAP did not automatically played when page was opened.");
     Assert.assertEquals(vuap.findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
+  }
+
+  @Test(groups = "AdsVuapAutoplayAutoplayOasis",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapAutoplayDesktop")
+  public void vuapAutoplayShouldCloseWhenClickingCloseButton(Page page, String slot, String videoIframeSelector) {
+    final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+    vuap.stop();
+
+    Assert.assertTrue(vuap.isInvisible(), "VUAP should not be visible.");
   }
 }

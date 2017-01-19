@@ -1350,10 +1350,11 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsVuapAutoplayDesktop() {
     return new Object[][]{
-        {
-            new Page("project43", "SyntheticTests/VUAP/McDonalds"),
-            "#" + AdsContent.TOP_LB + " .video-player iframe"
-        }
+                {
+                        new Page("project43", "SyntheticTests/VUAP/McDonalds"),
+                        AdsContent.TOP_LB,
+                        "#" + AdsContent.TOP_LB + " .video-player iframe"
+                }
     };
   }
 
