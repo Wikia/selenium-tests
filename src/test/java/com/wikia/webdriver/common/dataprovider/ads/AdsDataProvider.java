@@ -1347,6 +1347,16 @@ public class AdsDataProvider {
         };
     }
 
+  @DataProvider
+  public static Object[][] adsVuapAutoplayDesktop() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/VUAP/McDonalds"),
+            "#" + AdsContent.TOP_LB + " .video-player iframe"
+        }
+    };
+  }
+
     @DataProvider
     public static Object[][] adsVuapMercury() {
         return new Object[][]{
