@@ -9,17 +9,19 @@ import java.util.function.Function;
 
 public class AutoplayVuap {
 
+  private static final String SLOT_SELECTOR_PREFIX = "#%s .";
+
   private static final String PAUSE_CLASS_NAME = "pause-overlay";
 
   private static final String STOP_CLASS_NAME = "close-ad";
 
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
 
-  private static final String PAUSE_BUTTON_SELECTOR_FORMAT = "#%s ." + PAUSE_CLASS_NAME;
+  private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
 
-  private static final String STOP_BUTTON_SELECTOR_FORMAT = "#%s ." + STOP_CLASS_NAME;
+  private static final String STOP_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + STOP_CLASS_NAME;
 
-  private static final String CURRENT_TIME_SELECTOR_FORMAT = "#%s ." + CURRENT_TIME_CLASS_NAME;
+  private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
 
   private final WikiaWebDriver driver;
 

@@ -20,7 +20,7 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapAutoplayDesktop")
   public void vuapAutoplayShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
-    final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.pause();
 
@@ -32,7 +32,7 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapAutoplayDesktop")
   public void vuapAutoplayShouldCloseWhenClickingCloseButton(Page page, String slot, String videoIframeSelector) {
-    final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.stop();
 
@@ -43,7 +43,7 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapAutoplayDesktop")
   public void vuapAutoplayShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
-    final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.pause();
 
