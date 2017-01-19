@@ -112,8 +112,9 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(WebElement element, int offset) {
+    int elementPosition = element.getLocation().getY() - offset;
     js.executeScript(
-        "window.scroll(0, " + (element.getLocation().getY() - offset) + ");"
+        "window.scroll(0,arguments[0])",  elementPosition
     );
   }
 
@@ -161,7 +162,6 @@ public class JavascriptActions {
   }
 
   public void changeElementOpacity(String selector, int value) {
-    driver.findElement(By.cssSelector(selector));
     js.executeScript(
             "document.querySelector(arguments[0]).style.opacity = arguments[1];",
             selector, value);

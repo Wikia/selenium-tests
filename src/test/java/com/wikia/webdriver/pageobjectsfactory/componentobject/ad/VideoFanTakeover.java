@@ -42,7 +42,7 @@ public class VideoFanTakeover {
     return iframe;
   }
 
-  private WebElement videoCloseButton(String slotName) {
+  private WebElement getVideoCloseButton(String slotName) {
    return wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT, slotName)));
   }
 
@@ -104,9 +104,9 @@ public class VideoFanTakeover {
   }
 
   public void clickOnVideoCloseButton() {
-    scrollToAdsElement(videoCloseButton(slotName), 60);
+    scrollToAdVideo(getVideoCloseButton(slotName), 60);
 
-    videoCloseButton(slotName).click();
+    getVideoCloseButton(slotName).click();
     PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
@@ -202,9 +202,10 @@ public class VideoFanTakeover {
     return false;
   }
 //  This scroll has been implemented because driver was not able to execute script in JavascriptActions
-  private void scrollToAdsElement(WebElement element, int offset) {
+  private void scrollToAdVideo(WebElement element, int offset) {
+    int elementPosition = element.getLocation().getY() - offset;
     driver.executeScript(
-        "window.scroll(0, " + (element.getLocation().getY() - offset) + ");"
+        "window.scroll(0,arguments[0])",  elementPosition
     );
   }
 }
