@@ -76,8 +76,8 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
     vuap.play();
     try {
       TimeUnit.SECONDS.sleep(1);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    } catch (InterruptedException x) {
+      // ignore this exception
     }
   }
 }
