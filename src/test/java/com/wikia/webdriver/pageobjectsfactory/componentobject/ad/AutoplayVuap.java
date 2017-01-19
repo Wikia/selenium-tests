@@ -70,7 +70,7 @@ public class AutoplayVuap {
   public void clickOnImage() {
     final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
     driver.switchTo().frame(iframe);
-    driver.findElement(By.id("background_left")).click();
+    driver.findElement(By.id("background_right")).click();
     driver.switchTo().defaultContent();
   }
 
