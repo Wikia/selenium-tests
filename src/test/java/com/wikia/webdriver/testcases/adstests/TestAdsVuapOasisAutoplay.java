@@ -16,6 +16,10 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
+  private static final long MAX_AUTOPLAY_MOVIE_START_DELAY = 5L;
+
+  private static final long MAX_AUTOPLAY_MOVIE_DURATION = 20L;
+
   @Test(groups = "AdsVuapAutoplayAutoplayOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapAutoplayDesktop")
@@ -70,6 +74,16 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
+  }
+
+  @Test(groups = "AdsVuapAutoplayEndOasis",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapAutoplayDesktop")
+  public void vuapAutoplayShouldEnd(Page page, String slot, String videoIframeSelector) {
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+    vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_START_DELAY);
+    vuap.waitForVideoToEnd(MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
   private void playVideoForOneSecond(final AutoplayVuap vuap) {

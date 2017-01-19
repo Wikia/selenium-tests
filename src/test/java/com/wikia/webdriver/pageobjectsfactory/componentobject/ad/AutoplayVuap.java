@@ -1,10 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
+import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
 
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class AutoplayVuap {
@@ -85,6 +89,10 @@ public class AutoplayVuap {
     return getCurrentTime() > 0;
   }
 
+  public boolean isVisible() {
+    return usingVideoIframeContext(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
+  }
+
   public boolean isInvisible() {
     return usingVideoContext(video -> wait.forElementNotVisible(video));
   }
@@ -93,8 +101,23 @@ public class AutoplayVuap {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
 
+  public void waitForVideoToStart(final long timeout) {
+    waitFor(AutoplayVuap::isVisible, timeout);
+  }
+
+  public void waitForVideoToEnd(final long timeout) {
+    waitFor(AutoplayVuap::isInvisible, timeout);
+  }
+
   private void clickElement(final String selector) {
     wait.forElementClickable(By.cssSelector(selector)).click();
+  }
+
+  private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
+    new FluentWait<AutoplayVuap>(this)
+        .withTimeout(timeout, TimeUnit.SECONDS)
+        .pollingEvery(1, TimeUnit.SECONDS)
+        .until(predicate);
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
