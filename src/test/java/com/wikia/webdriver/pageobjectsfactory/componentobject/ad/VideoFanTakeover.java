@@ -12,12 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class VideoFanTakeover {
   private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-player iframe";
-  private static final String VIDEO_IFRAME_SELECTOR_FANDOM_FORMAT = "#%s .video-ima-container iframe";
-  private static final String MOBILE_VIDEO_SELECTOR_FANDOM_FORMAT = "#%s .video-ima-container video";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-player video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .pause-overlay";
   private static final String UI_ELEMENT_CLOSE_BUTTON_FORMAT = "#%s .close-ad";
-  private static final String UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT = "#%s .pause-overlay";
   private static final int GLOBAL_NAV_HEIGHT = 60;
   public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
@@ -53,17 +50,8 @@ public class VideoFanTakeover {
     waitForVideoStart();
   }
 
-  public void playOnFandom() {
-    runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
-    waitForVideoStartOnFandom();
-  }
-
   public void pause() {
     driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).click();
-  }
-
-  public void pauseVideoOnFandom() {
-    driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName))).click();
   }
 
   private void runInAdFrame(Runnable f) {
@@ -77,18 +65,8 @@ public class VideoFanTakeover {
     PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
   }
 
-  public void waitForVideoStartOnFandom() {
-    wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName)));
-    PageObjectLogging.log("waitForVideoStart", "video started", true, driver);
-  }
-
   public void waitForVideoPlayerHidden() {
     wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName)));
-    PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
-  }
-
-  public void waitForVideoPlayerHiddenOnFandom() {
-    wait.forElementNotVisible(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName)));
     PageObjectLogging.log("waitForVideoPlayerHidden", "video ended, video hidden", true, driver);
   }
 
@@ -116,10 +94,6 @@ public class VideoFanTakeover {
     return getCurrentVideoTime(VIDEO_IFRAME_SELECTOR_FORMAT);
   }
 
-  public Double getCurrentVideoTimeOnFandom() {
-    return getCurrentVideoTime(VIDEO_IFRAME_SELECTOR_FANDOM_FORMAT);
-  }
-
   private Double getCurrentVideoTime(String selectorFormat) {
     String result;
 
@@ -137,23 +111,12 @@ public class VideoFanTakeover {
     return Double.parseDouble(result);
   }
 
-  public Double getCurrentVideoTimeOnFandomMobile() {
-    String result;
-
-    result = driver.findElement(By.cssSelector(String.format(MOBILE_VIDEO_SELECTOR_FANDOM_FORMAT, slotName))).getAttribute("currentTime");
-    return Double.parseDouble(result);
-  }
-
   public double getAdSlotHeight(String slotSelector) {
     return driver.findElement(By.cssSelector(slotSelector)).getSize().getHeight();
   }
 
   public double getAdVideoHeight() {
     return driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).getSize().getHeight();
-  }
-
-  public double getAdVideoHeightOnFandom() {
-    return driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_ON_FANDOM_FORMAT, slotName))).getSize().getHeight();
   }
 
   public void verifyFandomTabOpened(String tabUrl) {Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);
@@ -203,7 +166,7 @@ public class VideoFanTakeover {
             "Video time is not progressing, quartileTime " + quartileTime + " is not smaller than midTime " + midTime , false, driver);
     return false;
   }
-//  This scroll has been implemented because driver was not able to execute script in JavascriptActions
+
   private void scrollToAdVideo(WebElement element) {
     JavascriptActions javascriptActions = new JavascriptActions(driver);
     javascriptActions.scrollToElement(element, GLOBAL_NAV_HEIGHT);
