@@ -13,9 +13,13 @@ public class AutoplayVuap {
 
   private static final String STOP_CLASS_NAME = "close-ad";
 
+  private static final String CURRENT_TIME_CLASS_NAME = "current-time";
+
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = "#%s ." + PAUSE_CLASS_NAME;
 
   private static final String STOP_BUTTON_SELECTOR_FORMAT = "#%s ." + STOP_CLASS_NAME;
+
+  private static final String CURRENT_TIME_SELECTOR_FORMAT = "#%s ." + CURRENT_TIME_CLASS_NAME;
 
   private final WikiaWebDriver driver;
 
@@ -25,25 +29,51 @@ public class AutoplayVuap {
 
   private final String iframeSelector;
 
+  private boolean playing;
+
   public AutoplayVuap(WikiaWebDriver driver, String slot, String iframeSelector) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
     this.slot = slot;
     this.iframeSelector = iframeSelector;
+    this.playing = true;
+  }
+
+  public void play() {
+    if (!playing) {
+      clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+      playing = true;
+    }
   }
 
   public void pause() {
-    clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+    if (playing) {
+      clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+      playing = false;
+    }
   }
 
   public void stop() {
-    clickElement(String.format(STOP_BUTTON_SELECTOR_FORMAT, slot));
+    if (playing) {
+      clickElement(String.format(STOP_BUTTON_SELECTOR_FORMAT, slot));
+      playing = false;
+    }
+  }
+
+  public double getCurrentTime() {
+    final String currentTime = usingVideoContext(video -> video.getAttribute("currentTime"));
+    return Double.parseDouble(currentTime);
+  }
+
+  public double getIndicatorCurrentTime() {
+    final String selector = String.format(CURRENT_TIME_SELECTOR_FORMAT, slot);
+    final String value = driver.findElement(By.cssSelector(selector)).getCssValue("transition-duration");
+    return Double.parseDouble(value.substring(0, value.length() - 1));
   }
 
   public boolean hasStarted() {
-    final String currentTime = usingVideoContext(video -> video.getAttribute("currentTime"));
-    return Double.parseDouble(currentTime) > 0;
+    return getCurrentTime() > 0;
   }
 
   public boolean isInvisible() {
