@@ -21,7 +21,6 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
       dataProvider = "adsVuapAutoplayDesktop")
   public void vuapAutoplayShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.pause();
 
@@ -34,7 +33,6 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
       dataProvider = "adsVuapAutoplayDesktop")
   public void vuapAutoplayShouldCloseWhenClickingCloseButton(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.stop();
 
@@ -46,7 +44,6 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
       dataProvider = "adsVuapAutoplayDesktop")
   public void vuapAutoplayShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
-
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     vuap.pause();
 
@@ -59,6 +56,20 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
 
     Assert.assertTrue(currentTime < vuap.getCurrentTime(), "Video should be played.");
     Assert.assertTrue(indicatorCurrentTime > vuap.getIndicatorCurrentTime(), "Video time indicator should move.");
+  }
+
+  @Test(groups = "AdsVuapAutoplayClickOasis",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapAutoplayDesktop")
+  public void vuapAutoplayShouldHaveLinkToFandomOnImage(Page page, String slot, String videoIframeSelector) {
+    final String expected = "http://fandom.wikia.com/";
+
+    final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+    vuap.clickOnImage();
+
+    final String actual = ads.switchToNewBrowserTab();
+    Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
   }
 
   private void playVideoForOneSecond(final AutoplayVuap vuap) {

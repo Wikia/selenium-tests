@@ -27,16 +27,16 @@ public class AutoplayVuap {
 
   private final String slot;
 
-  private final String iframeSelector;
+  private final String videoIframeSelector;
 
   private boolean playing;
 
-  public AutoplayVuap(WikiaWebDriver driver, String slot, String iframeSelector) {
+  public AutoplayVuap(WikiaWebDriver driver, String slot, String videoIframeSelector) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
     this.slot = slot;
-    this.iframeSelector = iframeSelector;
+    this.videoIframeSelector = videoIframeSelector;
     this.playing = true;
   }
 
@@ -59,6 +59,13 @@ public class AutoplayVuap {
       clickElement(String.format(STOP_BUTTON_SELECTOR_FORMAT, slot));
       playing = false;
     }
+  }
+
+  public void clickOnImage() {
+    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
+    driver.switchTo().frame(iframe);
+    driver.findElement(By.id("background_left")).click();
+    driver.switchTo().defaultContent();
   }
 
   public double getCurrentTime() {
@@ -89,11 +96,11 @@ public class AutoplayVuap {
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
-    return usingIframeContext(webDriver -> fun.apply(driver.findElement(By.tagName("video"))));
+    return usingVideoIframeContext(webDriver -> fun.apply(driver.findElement(By.tagName("video"))));
   }
 
-  private <T> T usingIframeContext(final Function<WikiaWebDriver, T> fun) {
-    final WebElement iframe = driver.findElement(By.cssSelector(iframeSelector));
+  private <T> T usingVideoIframeContext(final Function<WikiaWebDriver, T> fun) {
+    final WebElement iframe = driver.findElement(By.cssSelector(videoIframeSelector));
     driver.switchTo().frame(iframe);
     final T result = fun.apply(driver);
     driver.switchTo().defaultContent();
