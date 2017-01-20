@@ -20,10 +20,13 @@ public class AutoplayVuap {
 
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
 
+  // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
 
+  // #TOP_LEADERBOARD .close-ad
   private static final String STOP_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + STOP_CLASS_NAME;
 
+  // #TOP_LEADERBOARD .current-time
   private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
 
   private final WikiaWebDriver driver;
