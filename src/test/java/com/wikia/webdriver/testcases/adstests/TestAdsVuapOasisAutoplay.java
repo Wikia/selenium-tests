@@ -86,6 +86,22 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
     vuap.waitForVideoToEnd(MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
+  @Test(groups = "AdsVuapAutoplayEndOasis",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapAutoplayDesktop")
+  public void vuapAutoplayShouldMute(Page page, String slot, String videoIframeSelector) {
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+
+    Assert.assertTrue(vuap.isUnmuted(), "Video should be unmuted.");
+
+    vuap.mute();
+    Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
+
+    vuap.unmute();
+    Assert.assertTrue(vuap.isUnmuted(), "Video should be unmuted.");
+  }
+
   private void playVideoForOneSecond(final AutoplayVuap vuap) {
     vuap.play();
     try {

@@ -20,6 +20,8 @@ public class AutoplayVuap {
 
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
 
+  private static final String SPEAKER_CLASS_NAME = "speaker";
+
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
 
@@ -28,6 +30,9 @@ public class AutoplayVuap {
 
   // #TOP_LEADERBOARD .current-time
   private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .speaker
+  private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
 
   private final WikiaWebDriver driver;
 
@@ -39,6 +44,8 @@ public class AutoplayVuap {
 
   private boolean playing;
 
+  private boolean muted;
+
   public AutoplayVuap(WikiaWebDriver driver, String slot, String videoIframeSelector) {
     this.driver = driver;
     this.wait = new Wait(driver);
@@ -46,12 +53,20 @@ public class AutoplayVuap {
     this.slot = slot;
     this.videoIframeSelector = videoIframeSelector;
     this.playing = true;
+    this.muted = false;
   }
 
-  public void play() {
-    if (!playing) {
-      clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
-      playing = true;
+  public void mute() {
+    if (!muted) {
+      clickElement(String.format(SPEAKER_SELECTOR_FORMAT, slot));
+      muted = true;
+    }
+  }
+
+  public void unmute() {
+    if (muted) {
+      clickElement(String.format(SPEAKER_SELECTOR_FORMAT, slot));
+      muted = false;
     }
   }
 
@@ -59,6 +74,13 @@ public class AutoplayVuap {
     if (playing) {
       clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
       playing = false;
+    }
+  }
+
+  public void play() {
+    if (!playing) {
+      clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+      playing = true;
     }
   }
 
@@ -99,6 +121,14 @@ public class AutoplayVuap {
     return usingVideoContext(video -> wait.forElementNotVisible(video));
   }
 
+  public boolean isMuted() {
+    return findSpeakerIcon().getAttribute("class").contains("mute");
+  }
+
+  public boolean isUnmuted() {
+    return !isMuted();
+  }
+
   public String findTitle() {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
@@ -113,6 +143,10 @@ public class AutoplayVuap {
 
   private void clickElement(final String selector) {
     wait.forElementClickable(By.cssSelector(selector)).click();
+  }
+
+  private WebElement findSpeakerIcon() {
+    return driver.findElement(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
   }
 
   private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
