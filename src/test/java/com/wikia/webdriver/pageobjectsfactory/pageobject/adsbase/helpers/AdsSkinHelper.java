@@ -23,6 +23,7 @@ import java.io.File;
 public class AdsSkinHelper {
 
   private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
+  private static final String WIKIA_MESSAGE_BUBLE_CLOSE_BUTTON = ".sprite close-notification";
   private static final int IMAGES_THRESHOLD_PERCENT = 12;
   private final WebDriver driver;
   private String pathToLeftPart;
@@ -110,8 +111,14 @@ public class AdsSkinHelper {
   }
 
   private void hideCoveredSkinElements() {
-    adsComparison.hideSlot(AdsContent.WIKIA_BAR, driver);
-    adsComparison.hideSlot(WIKIA_MESSAGE_BUBLE, driver);
+    closeWikiaNotifications();
+    adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.WIKIA_BAR), driver);
+  }
+
+  private void closeWikiaNotifications() {
+    if (!driver.findElements(By.cssSelector(WIKIA_MESSAGE_BUBLE)).isEmpty()){
+      driver.findElement(By.cssSelector(WIKIA_MESSAGE_BUBLE_CLOSE_BUTTON)).click();
+    }
   }
 
   public String getMiddleColor() {

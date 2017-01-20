@@ -28,11 +28,9 @@ public class InteractiveMapsContent {
   public static final String MAP_NAME = "testingMapName";
   public static final String PIN_TYPE_NAME = "testingPinType";
   public static final String PIN_NAME = "testingPinName";
-  public static final String MAP_DELETED_SUCCESSFUL = "Map was successfully deleted!";
   public static final String
       MAP_DELETE_ERROR =
       "You are not allowed to execute the action you have requested.";
-  public static final String MAP_DELETED_MSG = "This map is deleted";
   public static final String EXTERNAL_LINK = "http://www.gazeta.pl/0,0.html";
   public static final String
       ARTICLE_WHICH_DOES_NOT_EXIST =
