@@ -19,11 +19,7 @@ public class AdsContent {
   //SLOTS NAMES
   public static final String BOTTOM_LB = "BOTTOM_LEADERBOARD";
   public static final String MOBILE_BOTTOM_LB = "MOBILE_BOTTOM_LEADERBOARD";
-  public static final String HUB_LB = "HUB_TOP_LEADERBOARD";
-  public static final String HUB_LB_GPT = "HUB_TOP_LEADERBOARD_gpt";
-  public static final String CORP_TOP_LB = "CORP_TOP_LEADERBOARD";
   public static final String TOP_LB = "TOP_LEADERBOARD";
-  public static final String CORP_MEDREC = "CORP_TOP_RIGHT_BOXAD";
   public static final String MEDREC = "TOP_RIGHT_BOXAD";
   public static final String FLOATING_MEDREC = "INCONTENT_BOXAD_1";
   public static final String LEFT_SKYSCRAPPER_2 = "LEFT_SKYSCRAPER_2";
@@ -31,7 +27,6 @@ public class AdsContent {
   public static final String PREFOOTER_LEFT = "PREFOOTER_LEFT_BOXAD";
   public static final String PREFOOTER_RIGHT = "PREFOOTER_RIGHT_BOXAD";
   public static final String WIKIA_BAR = "WIKIA_BAR_BOXAD_1";
-  public static final String TOP_INCONTENT_BOXAD = "TOP_INCONTENT_BOXAD";
   public static final String MOBILE_TOP_LB = "MOBILE_TOP_LEADERBOARD";
   public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
   public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
@@ -67,11 +62,7 @@ public class AdsContent {
     SLOTS_SELECTORS = new HashMap<>();
     SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
     SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
-    SLOTS_SELECTORS.put(CORP_TOP_LB, "#CORP_TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(HUB_LB, "#HUB_TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(HUB_LB_GPT, "[id*='gpt/HUB_TOP_LEADERBOARD']");
     SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
-    SLOTS_SELECTORS.put(CORP_MEDREC, "#CORP_TOP_RIGHT_BOXAD");
     SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
     SLOTS_SELECTORS.put(LEFT_SKYSCRAPPER_2, "#LEFT_SKYSCRAPER_2");
     SLOTS_SELECTORS.put(LEFT_SKYSCRAPPER_3, "#LEFT_SKYSCRAPER_3");
@@ -81,7 +72,6 @@ public class AdsContent {
     SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
     SLOTS_SELECTORS.put(ADS_IN_CONTENT_CONTAINER, "#WikiaAdInContentPlaceHolder");
     SLOTS_SELECTORS.put(PREFOOTERS_CONTAINER, "#WikiaArticleBottomAd, .bottom-ads");
-    SLOTS_SELECTORS.put(TOP_INCONTENT_BOXAD, "#TOP_INCONTENT_BOXAD");
     SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
     SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "[id^=MOBILE_IN_CONTENT]");
     SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
