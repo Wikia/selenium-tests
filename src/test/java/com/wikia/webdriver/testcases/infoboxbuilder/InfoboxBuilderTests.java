@@ -441,6 +441,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
   @Execute(asUser = User.USER)
+  @RelatedIssue(issueID = "MAIN-8926")
   public void verifyChevronTooltip() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
