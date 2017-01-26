@@ -83,7 +83,6 @@ public class NavigationTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
-    loading.handleAsyncPageReload();
 
     curatedContent
         .isTitleVisible()
