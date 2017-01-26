@@ -12,7 +12,7 @@ public class FanFeed extends BasePageObject {
   @FindBy(css = "section.fan-feed")
   private WebElement fanFeed;
 
-  public boolean isDisplayed() {
+  public boolean isFanFeedDisplayed() {
     try {
       return fanFeed.isDisplayed();
     } catch (ElementNotFoundException e) {
