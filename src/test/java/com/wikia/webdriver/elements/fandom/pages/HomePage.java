@@ -24,4 +24,15 @@ public class HomePage extends FandomPage<HomePage> {
 
     return this;
   }
+
+  /**
+   * Only use this for read-only b/c it touches production
+   * Good for testing CORS
+   * @return HomePage
+   */
+  public HomePage openWWW() {
+    getUrl(WWW_SITE_URL);
+
+    return this;
+  }
 }

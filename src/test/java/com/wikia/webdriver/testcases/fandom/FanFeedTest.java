@@ -22,9 +22,10 @@ public class FanFeedTest extends FandomTestTemplate {
     }
 
     @Test
-    public void canLoadMore() {
-        HomePage homePage = new HomePage().open();
-        LoadMore loadMore = homePage.getLoadMore();
+    public void canLoadMoreWithCors() {
+        // test on www to ensure CORS is working okay
+        HomePage wwwHomePage = new HomePage().openWWW();
+        LoadMore loadMore = wwwHomePage.getLoadMore();
 
         Assertion.assertTrue(loadMore.isLoadMoreDisplayed(), "Load more button is not displayed");
         Assertion.assertTrue(loadMore.areMorePostsDisplayed(), "Load more functionality is not working");
