@@ -15,10 +15,7 @@ public class LoadMore extends BasePageObject {
     @FindBy(css = ".more-stories .load-more-btn")
     private WebElement loadMoreButton;
 
-    @FindBy(css = "[tracking-label='more-top-stories.item-15']")
-    private WebElement firstLazyPost;
-
-    public boolean isLoadMoreDisplayed() {
+    public boolean isButtonDisplayed() {
         try {
             return loadMoreButton.isDisplayed();
         } catch (ElementNotFoundException e) {

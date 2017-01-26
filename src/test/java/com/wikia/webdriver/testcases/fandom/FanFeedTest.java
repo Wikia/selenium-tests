@@ -18,7 +18,7 @@ public class FanFeedTest extends FandomTestTemplate {
     public void canSeeFanFeed() {
         HomePage homePage = new HomePage().open();
 
-        Assertion.assertTrue(homePage.getFanFeed().isFanFeedDisplayed(), "Fan Feed is not displayed");
+        Assertion.assertTrue(homePage.getFanFeed().isDisplayed(), "Fan Feed is not displayed");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class FanFeedTest extends FandomTestTemplate {
         HomePage wwwHomePage = new HomePage().openWWW();
         LoadMore loadMore = wwwHomePage.getLoadMore();
 
-        Assertion.assertTrue(loadMore.isLoadMoreDisplayed(), "Load more button is not displayed");
+        Assertion.assertTrue(loadMore.isButtonDisplayed(), "Load more button is not displayed");
         Assertion.assertTrue(loadMore.areMorePostsDisplayed(), "Load more functionality is not working");
     }
 }
