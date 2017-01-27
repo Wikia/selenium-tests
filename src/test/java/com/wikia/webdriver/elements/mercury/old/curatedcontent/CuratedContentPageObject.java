@@ -24,7 +24,7 @@ public class CuratedContentPageObject {
   private WebElement articleWrapper;
   @FindBy(css = ".wiki-page-title")
   private WebElement sectionTitle;
-  @FindBy(css = ".wiki-title a")
+  @FindBy(css = ".curated-content-section__back")
   private WebElement linkToMainPage;
   @FindBy(css = ".curated-content-items")
   private WebElement sectionContainer;
