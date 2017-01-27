@@ -4,8 +4,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
-import com.wikia.webdriver.common.core.geoedge.CountryCode;
-import com.wikia.webdriver.common.core.geoedge.GeoEdgeBrowserMobProxy;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -40,22 +38,26 @@ public class TestIVWAnalyticsProvider extends NewTestTemplate {
     }
   }
 
+  /*
+   * We are not longer supporting Germany (DE). Netzathleten (advertisement provider) is responsible for calling ivw
+   * in this country.
+   */
   @Execute(mockAds = "true")
   @NetworkTrafficDump
-  @GeoEdgeBrowserMobProxy(country = CountryCode.GERMANY)
   @Test(
       dataProviderClass = GermanAdsDataProvider.class,
       dataProvider = "germanArticles",
       groups = "TestIV3AnalyticsProviderInDE"
   )
   public void testIV3AnalyticsProviderInDE(String wikiName, String path) {
-      networkTrafficInterceptor.startIntercepting();
-      String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-      AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
-      JavascriptActions jsActions = new JavascriptActions(driver);
+    networkTrafficInterceptor.startIntercepting();
+    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "forcecountry=CH");
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
+    JavascriptActions jsActions = new JavascriptActions(driver);
 
-      jsActions.waitForJavaScriptTruthy("typeof iom === 'object'");
-      assertTrackingPixels(adsBaseObject, URL_TRACKING_SCRIPT);
+    jsActions.waitForJavaScriptTruthy("typeof iom === 'object'");
+    assertTrackingPixels(adsBaseObject, URL_TRACKING_SCRIPT);
   }
 
   @Execute(mockAds = "true")
@@ -68,10 +70,11 @@ public class TestIVWAnalyticsProvider extends NewTestTemplate {
   public void testIV3AnalyticsProviderInUS(String wikiName, String path) {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "forcecountry=US");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     adsBaseObject.waitForPageLoadedWithGpt();
     Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(URL_BASE_SCRIPT),
-                          "Tracking should not be loaded outside DE/AT/CH country!");
+        "Tracking should not be loaded outside AT/CH country!");
   }
 
   private void assertTrackingPixels(AdsBaseObject adsBaseObject, String... pixelUrls) {

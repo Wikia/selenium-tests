@@ -112,15 +112,10 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(WebElement element, int offset) {
-    try {
-      js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - arguments[1]));",
-          element, offset);
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
+    int elementPosition = element.getLocation().getY() - offset;
+    js.executeScript(
+        "window.scroll(0,arguments[0])",  elementPosition
+    );
   }
 
   public void scrollToElementInModal(WebElement element, WebElement modal) {
@@ -164,6 +159,12 @@ public class JavascriptActions {
     } finally {
       driver.manage().timeouts().implicitlyWait(WEBDRIVER_WAIT_TIMEOUT_SEC, TimeUnit.MILLISECONDS);
     }
+  }
+
+  public void changeElementOpacity(String selector, int value) {
+    js.executeScript(
+            "document.querySelector(arguments[0]).style.opacity = arguments[1];",
+            selector, value);
   }
 
   public String getWindowErrors() {

@@ -420,7 +420,7 @@ public class AdsDataProvider {
             "avatar",
             "Avatar_Wiki",
             "wka.ent/_avatar//home",
-            "HOME_TOP_LEADERBOARD",
+            "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"ent\"",
                 "\"s0v\":\"tv\"",
@@ -445,7 +445,7 @@ public class AdsDataProvider {
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
-                "\"pos\":\"HOME_TOP_LEADERBOARD\"",
+                "\"pos\":\"TOP_LEADERBOARD\"",
                 "\"src\":\"gpt\""
             )
         },
@@ -484,7 +484,7 @@ public class AdsDataProvider {
             "starcraft",
             "StarCraft_Wiki",
             "wka.gaming/_starcraft//home",
-            "HOME_TOP_LEADERBOARD",
+            "TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"gaming\"",
                 "\"s0v\":\"games\"",
@@ -510,7 +510,7 @@ public class AdsDataProvider {
             ),
             Arrays.asList(
                 "\"loc\":\"top\"",
-                "\"pos\":\"HOME_TOP_LEADERBOARD\"",
+                "\"pos\":\"TOP_LEADERBOARD\"",
                 "\"src\":\"gpt\""
             )
         },
@@ -1346,6 +1346,17 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsVuapAutoplayDesktop() {
+    return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP/McDonalds"),
+                        AdsContent.TOP_LB,
+                        "#" + AdsContent.TOP_LB + " .video-player iframe"
+                }
+    };
+  }
 
     @DataProvider
     public static Object[][] adsVuapMercury() {

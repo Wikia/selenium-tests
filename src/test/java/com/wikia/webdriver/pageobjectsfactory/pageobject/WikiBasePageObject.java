@@ -32,7 +32,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialEditHubPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
@@ -52,8 +51,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
@@ -284,11 +281,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_WATCHLIST);
   }
 
-  public SpecialEditHubPageObject openSpecialEditHub(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_EDIT_HUB);
-    return new SpecialEditHubPageObject(driver);
-  }
-
   public SourceEditModePageObject openCurrectArticleSourceMode() {
     String queryStrings[] = {URLsContent.ACTION_EDIT, URLsContent.SOURCE_MODE};
     appendMultipleQueryStringsToUrl(queryStrings);
@@ -407,7 +399,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyUserLoggedIn(User user) {
-    verifyUserLoggedIn(user.getUserName());
+    this.verifyUserLoggedIn(user.getUserName());
   }
 
   public DeletePageObject deletePage() {
@@ -496,7 +488,7 @@ public class WikiBasePageObject extends BasePageObject {
       refreshPageAddingCacheBuster();
     }
 
-    verifyUserLoggedIn(userName);
+    this.verifyUserLoggedIn(userName);
     PageObjectLogging.log("loginCookie",
         "user was logged in by by helios using access token: " + token, true);
     logMercuryUserId();
@@ -569,11 +561,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(url);
   }
 
-  public HubBasePageObject openHubByUrl(String hubUrl) {
-    getUrl(hubUrl);
-    return new HubBasePageObject(driver);
-  }
-
   public String getNameForArticle() {
     return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
   }
@@ -636,41 +623,8 @@ public class WikiBasePageObject extends BasePageObject {
     return isElementOnPage(newGlobalNavigation);
   }
 
-  public void setCookie(String name, String value) {
-    Cookie newCookie = new Cookie(name, value);
-    driver.manage().addCookie(newCookie);
-    PageObjectLogging.log("setCookie", "Set cookie: '" + name + "' to " + value, true);
-  }
-
-  public void deleteCookie(String name) {
-    driver.manage().deleteCookieNamed(name);
-    PageObjectLogging.log("deleteCookie", "Remove '" + name + "' from cookie", true);
-  }
-
-  public void setCookieGeo(String countryCode) {
-    String cookieName = "Geo";
-    try {
-      JSONObject geo = new JSONObject();
-      geo.put("country", countryCode);
-      setCookie(cookieName, geo.toString());
-    } catch (JSONException ex) {
-      PageObjectLogging.log("setCookieGeo", "Cannot set cookie ('" + cookieName + "')", true);
-    }
-  }
-
   public Dimension getWindowSize() {
     return driver.manage().window().getSize();
-  }
-
-  public void resizeWindow(int width, int height) {
-    try {
-      driver.manage().window().setSize(new Dimension(width, height));
-      PageObjectLogging.log("ResizeWindow",
-          "Resize window (width=" + width + ", height=" + height + ")", true);
-    } catch (WebDriverException ex) {
-      PageObjectLogging.log("ResizeWindow",
-          "Cannot resize window (width=" + width + ", height=" + height + ")", true);
-    }
   }
 
   public void scrollToFooter() {
@@ -698,11 +652,6 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyAvatarVisible() {
     wait.forElementVisible(globalNavigationAvatar);
     PageObjectLogging.log("verifyAvatarVisible", "desired avatar is visible on navbar", true);
-  }
-
-  public void redirectToAnotherRandomArticle() {
-    String wikiURL = getCurrentUrl().substring(0, getCurrentUrl().indexOf("wiki/"));
-    getUrl(wikiURL + URLsContent.WIKI_DIR + "Special:Random/article");
   }
 
   /**

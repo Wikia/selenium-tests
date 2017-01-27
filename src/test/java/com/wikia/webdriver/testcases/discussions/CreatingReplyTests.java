@@ -137,7 +137,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
-    return DiscussionsOperations.using(User.USER, driver).cratePostWithUniqueData();
+    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private void assertThatUserCanCreateReply(PostDetailsPage page, ReplyCreator replyCreator) {

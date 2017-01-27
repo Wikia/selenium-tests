@@ -266,11 +266,6 @@ public class InteractiveMapPageObject extends BasePageObject {
     PageObjectLogging.log("verifyMapOpened", "Map was opened", true);
   }
 
-  public void verifyMapOpenedForDeleteMapTests() {
-    wait.forElementVisible(mapFrame);
-    PageObjectLogging.log("verifyMapOpenedForDeleteMapTests", "Map was opened", true);
-  }
-
   public void verifyCreatedMapTitle(String mapTitle) {
     wait.forElementVisible(createdMapTitle);
     Assertion.assertEquals(createdMapTitle.getText(), mapTitle);
@@ -424,13 +419,6 @@ public class InteractiveMapPageObject extends BasePageObject {
     wait.forElementVisible(actionDropDown);
     actionDropDown.click();
     deleteMapButton.click();
-    return new DeleteAMapComponentObject(driver);
-  }
-
-  public DeleteAMapComponentObject restoreMap() {
-    wait.forElementVisible(actionDropDown);
-    actionDropDown.click();
-    restoreMapButton.click();
     return new DeleteAMapComponentObject(driver);
   }
 

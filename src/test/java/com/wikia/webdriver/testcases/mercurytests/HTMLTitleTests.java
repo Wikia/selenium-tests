@@ -90,16 +90,6 @@ public class HTMLTitleTests extends NewTestTemplate {
           "Droid starfighter | Wookieepedia | Fandom powered by Wikia"
       },
       {
-          "starwars",
-          "/main/category/Future_films",
-          "Future films | Wookieepedia | Fandom powered by Wikia"
-      },
-      {
-          "starwars",
-          "/main/section/Films",
-          "Films | Wookieepedia | Fandom powered by Wikia"
-      },
-      {
           "mediawiki119",
           "/d/f/203236/latest",
           "Discussions | Mediawiki 1.19 test Wiki | Fandom powered by Wikia"
