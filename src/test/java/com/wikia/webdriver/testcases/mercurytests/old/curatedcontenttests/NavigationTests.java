@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
@@ -15,7 +14,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
-import com.wikia.webdriver.elements.mercury.old.MercuryAlertComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 
 import org.testng.annotations.Test;
@@ -63,12 +61,11 @@ public class NavigationTests extends NewTestTemplate {
     curatedContent
         .isTitleVisible()
         .isLinkToMainPageVisible()
-        // TODO select not hidden section
         .isSectionVisible()
         .isCuratedContentItemVisibleByIndex(1);
 
     UrlChecker.isPathContainedInCurrentUrl(
-        driver, MercuryPaths.ROOT_PATH_SECTION + curatedContent.getTitle());
+        driver, MercurySubpages.CC_MAIN_PAGE);
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_003")

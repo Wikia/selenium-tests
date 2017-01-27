@@ -26,9 +26,9 @@ public class CuratedContentPageObject {
   private WebElement sectionTitle;
   @FindBy(css = ".curated-content-section__back")
   private WebElement linkToMainPage;
-  @FindBy(css = ".curated-content-items")
+  @FindBy(css = ".curated-content-section:not(.hidden) .curated-content-items")
   private WebElement sectionContainer;
-  @FindBy(css = "div.curated-content a")
+  @FindBy(css = ".curated-content .curated-content-section:not(.hidden) .curated-content-item")
   private List<WebElement> curatedContentItems;
   @FindBy(css = ".load-more-items")
   private WebElement loadMoreButton;
