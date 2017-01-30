@@ -96,7 +96,7 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     try {
       new FluentWait<>(getPost())
           .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-          .until((Predicate<Post>) post -> post.getPosts().stream()
+          .until((Predicate<Post>) p -> p.getPosts().stream()
               .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName)));
     } finally {
       restoreDefaultImplicitWait();

@@ -212,11 +212,11 @@ public class BasePageObject {
     }
   }
 
-  public void verifyURLcontains(final String givenString, int timeOut) {
+  public void verifyUrlContains(final String givenString, int timeOut) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       new WebDriverWait(driver, timeOut).until(
-          (ExpectedCondition<Boolean>) driver -> driver.getCurrentUrl().toLowerCase()
+          (ExpectedCondition<Boolean>) d -> d.getCurrentUrl().toLowerCase()
               .contains(givenString.toLowerCase()));
     } finally {
       restoreDefaultImplicitWait();
@@ -410,14 +410,12 @@ public class BasePageObject {
   }
 
   public void pressDownArrow(WebElement element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("var e = jQuery.Event(\"keydown\"); "
+    driver.executeScript("var e = jQuery.Event(\"keydown\"); "
                      + "e.which=40; $(arguments[0]).trigger(e);", element);
   }
 
   public void setDisplayStyle(String selector, String style) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
+    driver.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
                      style);
   }
 
