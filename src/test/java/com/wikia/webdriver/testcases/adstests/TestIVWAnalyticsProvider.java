@@ -31,24 +31,28 @@ public class TestIVWAnalyticsProvider extends NewTestTemplate {
 
       Boolean isParamOnPage = htmlSource.contains(ivw2Param);
       PageObjectLogging.log(
-              "IVW2",
-              ivw2Param + " param on the page: " + String.valueOf(isParamOnPage),
-              isParamOnPage
+          "IVW2",
+          ivw2Param + " param on the page: " + String.valueOf(isParamOnPage),
+          isParamOnPage
       );
     }
   }
 
+  /*
+   * We are not longer supporting Germany (DE). Netzathleten (advertisement provider) is responsible for calling ivw
+   * in this country.
+   */
   @Execute(mockAds = "true")
   @NetworkTrafficDump
   @Test(
-          dataProviderClass = GermanAdsDataProvider.class,
-          dataProvider = "germanArticles",
-          groups = "TestIV3AnalyticsProviderInDE"
+      dataProviderClass = GermanAdsDataProvider.class,
+      dataProvider = "germanArticles",
+      groups = "TestIV3AnalyticsProviderInDE"
   )
   public void testIV3AnalyticsProviderInDE(String wikiName, String path) {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "forcecountry=DE");
+    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "forcecountry=CH");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     JavascriptActions jsActions = new JavascriptActions(driver);
 
@@ -59,9 +63,9 @@ public class TestIVWAnalyticsProvider extends NewTestTemplate {
   @Execute(mockAds = "true")
   @NetworkTrafficDump
   @Test(
-          dataProviderClass = GermanAdsDataProvider.class,
-          dataProvider = "germanArticles",
-          groups = "TestIV3AnalyticsProviderInUS"
+      dataProviderClass = GermanAdsDataProvider.class,
+      dataProvider = "germanArticles",
+      groups = "TestIV3AnalyticsProviderInUS"
   )
   public void testIV3AnalyticsProviderInUS(String wikiName, String path) {
     networkTrafficInterceptor.startIntercepting();
@@ -70,7 +74,7 @@ public class TestIVWAnalyticsProvider extends NewTestTemplate {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
     adsBaseObject.waitForPageLoadedWithGpt();
     Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(URL_BASE_SCRIPT),
-            "Tracking should not be loaded outside DE/AT/CH country!");
+        "Tracking should not be loaded outside AT/CH country!");
   }
 
   private void assertTrackingPixels(AdsBaseObject adsBaseObject, String... pixelUrls) {

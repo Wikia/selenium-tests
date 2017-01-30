@@ -21,11 +21,11 @@ public class CuratedContentPageObject {
   private WebElement articleWrapper;
   @FindBy(css = ".wiki-page-title")
   private WebElement sectionTitle;
-  @FindBy(css = ".wiki-title a")
+  @FindBy(css = ".curated-content-section__back")
   private WebElement linkToMainPage;
-  @FindBy(css = ".curated-content-items")
+  @FindBy(css = ".curated-content-section:not(.hidden) .curated-content-items")
   private WebElement sectionContainer;
-  @FindBy(css = "div.curated-content a")
+  @FindBy(css = ".curated-content .curated-content-section:not(.hidden) .curated-content-item")
   private List<WebElement> curatedContentItems;
 
   private enum Labels {
