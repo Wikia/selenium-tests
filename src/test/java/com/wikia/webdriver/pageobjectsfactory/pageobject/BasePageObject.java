@@ -282,9 +282,8 @@ public class BasePageObject {
 
   protected Boolean scrollToSelector(String selector) {
     if (isElementOnPage(By.cssSelector(selector))) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
       try {
-        js.executeScript("var x = $(arguments[0]);"
+        driver.executeScript("var x = $(arguments[0]);"
                          + "window.scroll(0,x.position()['top']+x.height()+100);"
                          + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
@@ -402,8 +401,8 @@ public class BasePageObject {
 
   public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
     String currentUrl = getCurrentUrl();
-    for (int i = 0; i < queryStrings.length; i++) {
-      currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);
+    for (String queryString : queryStrings) {
+      currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryString);
     }
     driver.get(currentUrl);
     PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
