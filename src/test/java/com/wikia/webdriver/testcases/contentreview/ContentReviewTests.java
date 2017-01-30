@@ -14,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialJsPage;
 public class ContentReviewTests extends NewTestTemplate {
 
     @Test
-    @Execute(onWikia = "openertest")
     public void anonUserShouldntSeeReviewModule() {
         SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
@@ -22,7 +21,7 @@ public class ContentReviewTests extends NewTestTemplate {
     }
 
     @Test
-    @Execute(asUser = User.STAFF, onWikia = "openertest")
+    @Execute(asUser = User.STAFF)
     public void staffUserShouldSeeReviewModule() {
         SpecialJsPage wikiaJs = new SpecialJsPage().open("wikia");
 
@@ -30,7 +29,7 @@ public class ContentReviewTests extends NewTestTemplate {
     }
 
     @Test
-    @Execute(asUser = User.CONTENT_REVIEWER, onWikia = "openertest")
+    @Execute(asUser = User.CONTENT_REVIEWER)
     public void editJS() {
         final String expectedContent =
                 String.format("My Awesome JS edit %d", DateTime.now().getMillis());
