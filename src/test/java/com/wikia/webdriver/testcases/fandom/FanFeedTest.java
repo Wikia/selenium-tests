@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.fandom;
 
-import com.wikia.webdriver.elements.fandom.components.FanFeed;
 import com.wikia.webdriver.elements.fandom.components.LoadMore;
 import com.wikia.webdriver.elements.fandom.pages.HomePage;
 import org.testng.annotations.Test;
@@ -28,6 +27,6 @@ public class FanFeedTest extends FandomTestTemplate {
         LoadMore loadMore = wwwHomePage.getLoadMore();
 
         Assertion.assertTrue(loadMore.isButtonDisplayed(), "Load more button is not displayed");
-        Assertion.assertTrue(loadMore.areMorePostsDisplayed(), "Load more functionality is not working");
+        Assertion.assertTrue(loadMore.waitForMorePosts(), "Load more functionality is not working");
     }
 }

@@ -23,7 +23,7 @@ public class LoadMore extends BasePageObject {
         }
     }
 
-    public boolean areMorePostsDisplayed() {
+    public boolean waitForMorePosts() {
         try {
             loadMoreButton.click();
             WebElement element = wait.forElementPresent(By.cssSelector("[tracking-label='more-top-stories.item-15']"));
