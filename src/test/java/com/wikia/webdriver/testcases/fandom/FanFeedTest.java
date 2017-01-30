@@ -7,9 +7,6 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.templates.fandom.FandomTestTemplate;
 import com.wikia.webdriver.common.core.Assertion;
 
-/**
- * Created by liz_lux on 1/24/17.
- */
 @Test(groups = {"Fandom", "Fandom_FanFeed"})
 public class FanFeedTest extends FandomTestTemplate {
 
