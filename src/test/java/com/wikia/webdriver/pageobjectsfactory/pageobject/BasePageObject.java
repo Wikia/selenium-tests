@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -23,7 +24,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -69,7 +69,8 @@ public class BasePageObject {
 
   //wait for comscore to load
   public void waitForPageLoad() {
-    wait.forElementPresent(By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
+    wait.forElementPresent(
+        By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
   }
 
   public static String getTimeStamp() {
@@ -121,7 +122,7 @@ public class BasePageObject {
 
   /**
    * Method to check if WebElement is displayed on the page
-   * @param element
+   *
    * @return true if element is displayed, otherwise return false
    */
 
@@ -214,12 +215,9 @@ public class BasePageObject {
   public void verifyURLcontains(final String givenString, int timeOut) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, timeOut).until(new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-          return driver.getCurrentUrl().toLowerCase().contains(givenString.toLowerCase());
-        }
-      });
+      new WebDriverWait(driver, timeOut).until(
+          (ExpectedCondition<Boolean>) driver -> driver.getCurrentUrl().toLowerCase()
+              .contains(givenString.toLowerCase()));
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -323,7 +321,8 @@ public class BasePageObject {
   public void waitForElementNotVisibleByElement(WebElement element, long timeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, timeout).until(CommonExpectedConditions.invisibilityOfElementLocated(element));
+      new WebDriverWait(driver, timeout)
+          .until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -381,7 +380,7 @@ public class BasePageObject {
     PageObjectLogging.log("notifications_clickOnNotificationsLogo",
                           "click on notifications logo on the upper right corner", true, driver);
   }
-  
+
   public void notifications_showNotifications() {
     wait.forElementVisible(notificationsShowNotificationsLogo);
     jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
@@ -540,7 +539,7 @@ public class BasePageObject {
   private List<String> getTabUrls() {
     String currentTab = driver.getWindowHandle();
     List<String> result = new ArrayList<>();
-    for(String windowHandler : driver.getWindowHandles()) {
+    for (String windowHandler : driver.getWindowHandles()) {
       driver.switchTo().window(windowHandler);
       result.add(driver.getCurrentUrl());
     }
