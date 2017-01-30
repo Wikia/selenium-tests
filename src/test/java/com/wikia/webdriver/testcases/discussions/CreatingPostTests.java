@@ -141,7 +141,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
