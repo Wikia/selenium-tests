@@ -50,7 +50,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
-    final PostsListPage page = openPostsListPage();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
@@ -58,15 +58,19 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
-    final PostDetailsPage page = new PostDetailsPage().openDefaultPost();
+    final PostDetailsPage page = openDefaultPostDetailsWaitingUtilLoaded();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
+  }
+
+  private PostDetailsPage openDefaultPostDetailsWaitingUtilLoaded() {
+    return new PostDetailsPage().openDefaultPost();
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
-    final UserPostsPage page = new UserPostsPage().openDefaultUserPage();
+    final UserPostsPage page = openDefaultUserPostPageWaiting();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
@@ -75,7 +79,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
     createAndReportPostRemotelyAsFirstUser();
-    final PostsListPage page = openPostsListPage();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
@@ -84,7 +88,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
@@ -93,7 +97,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
+    final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
@@ -102,7 +106,8 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostEntity post = openPostsListPage().getPost().findPostById(data.getId());
+    final PostsListPage postsListPage = openPostListPageAndWaitUntilLoaded();
+    final PostEntity post = postsListPage.getPost().findPostById(data.getId());
     assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
@@ -111,7 +116,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     assertTrue(page.getErrorMessages().isErrorMessagePresent(),
                ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -121,7 +126,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final UserPostsPage open = new UserPostsPage().open(data.getAuthorId());
+    final UserPostsPage open = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     final PostEntity post = open.getPost().findPostById(data.getId());
     assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -132,7 +137,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostsListPage() {
-    final PostsListPage page = openPostsListPage();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
@@ -140,7 +145,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
-    final PostDetailsPage page = new PostDetailsPage().openDefaultPost();
+    final PostDetailsPage page = openDefaultPostDetailsWaitingUtilLoaded();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
@@ -149,8 +154,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
-    final UserPostsPage page = new UserPostsPage().openDefaultUserPage();
+    final UserPostsPage page = openDefaultUserPostPageWaiting();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
+  }
+
+  private UserPostsPage openDefaultUserPostPageWaiting() {
+    return new UserPostsPage().openDefaultUserPage();
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting")
@@ -158,7 +167,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
     createAndReportPostRemotelyAsFirstUser();
-    final PostsListPage page = openPostsListPage();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
@@ -167,7 +176,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
@@ -176,7 +185,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
+    final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
@@ -185,7 +194,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostEntity post = openPostsListPage().getPost().findPostById(data.getId());
+    final PostEntity
+        post =
+        openPostListPageAndWaitUntilLoaded().getPost().findPostById(data.getId());
     assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
@@ -194,7 +205,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     assertTrue(page.getErrorMessages().isErrorMessagePresent(),
                ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -204,7 +215,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
+    UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     PostEntity post = page.getPost().findPostById(data.getId());
     assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -216,7 +227,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostsListPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
-    final PostsListPage page = openPostsListPage();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -226,7 +237,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostDetailsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -236,7 +247,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnUserPostsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
+    final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -251,7 +262,8 @@ public class ReportingPostTests extends NewTestTemplate {
   private void userCannotReReportPostOnPostListPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
-    final PostEntity postEntity = openPostsListPage().getPost().findPostById(data.getId());
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
+    final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
     assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
@@ -275,7 +287,9 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeDeletedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostEntity post = openPostsListPage().getPost().findPostById(data.getId());
+    final PostEntity
+        post =
+        openPostListPageAndWaitUntilLoaded().getPost().findPostById(data.getId());
     assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
@@ -284,7 +298,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     assertTrue(page.getErrorMessages().isErrorMessagePresent(),
                NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -294,7 +308,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
+    final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     final PostEntity post = page.getPost().findPostById(data.getId());
     assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -310,7 +324,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private void userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    final PageWithPosts page = openPostsListPage();
+    final PageWithPosts page = openPostListPageAndWaitUntilLoaded();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
@@ -340,7 +354,9 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    final PostEntity postEntity = openPostsListPage().getPost().findPostById(data.getId());
+    final PostEntity
+        postEntity =
+        openPostListPageAndWaitUntilLoaded().getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -349,11 +365,15 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
+    userCanReportApprovedPostOnPostDetailsPage();
+  }
+
+  private void userCanReportApprovedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
@@ -363,14 +383,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnUserPostsPage() {
-    final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    validatePostRemotelyAsDiscussionsModerator(data);
-
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
-    assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
-    assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
+    userCanReportApprovedPostOnUserPostsPage();
   }
 
   // Discussions moderator on mobile
@@ -379,10 +392,15 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReportedPostOnPostListPage() {
+    moderatorCanSeeReportedPostOnPostListPage();
+  }
+
+  private void moderatorCanSeeReportedPostOnPostListPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
-    final PostEntity postEntity = openPostsListPage().getPost().findPostById(data.getId());
+    final PostsListPage postsListPage = openPostListPageAndWaitUntilLoaded();
+    final PostEntity postEntity = postsListPage.getPost().findPostById(data.getId());
     assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
   }
 
@@ -390,10 +408,14 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
+    moderatorCanApproveReportedPostOnPostDetailsPage();
+  }
+
+  private void moderatorCanApproveReportedPostOnPostDetailsPage() {
     PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
 
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
     assertTrue(clickCancelOnValidatePostModalDialog(page, postEntity),
@@ -406,12 +428,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReportedPostOnUserPostsPage() {
-    final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
-    assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    moderatorCanSeeReportedPostOnUserPostsPage();
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
@@ -452,7 +469,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnPostsListPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
-    final PostsListPage page = openPostsListPage();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -472,7 +489,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportPostOnUserPostsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
-    final UserPostsPage page = new UserPostsPage().open(data.getAuthorId());
+    final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -495,7 +512,7 @@ public class ReportingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
     assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
@@ -529,7 +546,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostsListPage openPostListPageAndWaitUntilLoaded() {
-    final PostsListPage post = openPostsListPage();
+    final PostsListPage post = new PostsListPage().open();
     post.waitForPageLoad();
     return post;
   }
@@ -539,7 +556,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     assertTrue(page.getErrorMessages().isErrorMessagePresent(),
                NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
@@ -587,7 +604,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private void userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
+    final PageWithPosts page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
@@ -603,7 +620,7 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    PostsListPage page = openPostListPageAndWaitUntilLoaded();
+    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
@@ -613,14 +630,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
-    final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    validatePostRemotelyAsDiscussionsModerator(data);
-
-    final PostDetailsPage post = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = post.getPost().findPostById(data.getId());
-    assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
-    assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
+    userCanReportApprovedPostOnPostDetailsPage();
   }
 
   private PostDetailsPage openPostDetailsPageAndWaitUntilLoaded(String postId) {
@@ -633,6 +643,10 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanReportApprovedPostOnUserPostsPage() {
+    userCanReportApprovedPostOnUserPostsPage();
+  }
+
+  private void userCanReportApprovedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
@@ -655,32 +669,24 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnPostListPage() {
-    final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    final PostsListPage page = openPostListPageAndWaitUntilLoaded();
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
-    assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
+    moderatorCanSeeReportedPostOnPostListPage();
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
-    final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
-    final PostEntity postEntity = page.getPost().findPostById(data.getId());
-    assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
-    assertTrue(clickCancelOnValidatePostModalDialog(page, postEntity),
-               REPORTED_INDICATOR_ON_POST_MESSAGE);
-    assertFalse(clickApproveOnValidatePostModalDialog(page, postEntity),
-                NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
+    moderatorCanApproveReportedPostOnPostDetailsPage();
   }
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void moderatorOnDesktopCanSeeReportedPostOnUserPostsPage() {
+    moderatorCanSeeReportedPostOnUserPostsPage();
+  }
+
+  private void moderatorCanSeeReportedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
@@ -725,16 +731,12 @@ public class ReportingPostTests extends NewTestTemplate {
     validatePostRemotelyAsDiscussionsModerator(data);
     reportPostRemotelyAsThirdUser(data);
 
-    final PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
     assertTrue(clickCancelOnDeletePostModalDialog(page, postEntity),
                REPORTED_INDICATOR_ON_POST_MESSAGE);
     assertTrue(clickApproveOnDeletePostModalDialog(page, postEntity), DELETED_POST_MESSAGE);
-  }
-
-  private PostsListPage openPostsListPage() {
-    return new PostsListPage().open();
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
@@ -788,8 +790,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private void reportPost(final PostEntity postEntity) {
-    postEntity.clickMoreOptions()
-        .clickReportPostOption();
+    postEntity.clickMoreOptions().clickReportPostOption();
   }
 
   private boolean isReported(final PostEntity postEntity) {
