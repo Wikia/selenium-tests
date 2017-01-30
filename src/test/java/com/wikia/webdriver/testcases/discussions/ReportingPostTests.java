@@ -9,37 +9,32 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
+
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
 @Test(groups = "discussions-reporting-posts")
 public class ReportingPostTests extends NewTestTemplate {
 
+  public static final String
+      DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST =
+      "Discussions moderator should see re reported post.";
   private static final String DESKTOP_RESOLUTION = "1920x1080";
-
   private static final String NO_REPORT_POST_OPTION_MESSAGE = "'Report Post' option in 'More Options' should not be available.";
-
   private static final String REPORTED_INDICATOR_ON_POST_MESSAGE = "Reported indicator on post should be visible.";
-
   private static final String NO_REPORTED_INDICATOR_ON_POST_MESSAGE = "Reported indicator on post should not be visible.";
-
   private static final String CAN_REPORT_POST_MESSAGE = "User should be able to report post.";
-
   private static final String REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE = "User should not see reported indicator on posts which were not reported by them.";
-
   private static final String DELETED_POST_MESSAGE = "Post should be deleted.";
-
   private static final String ANON_NOT_VISIBLE_DELETED_POST_MESSAGE = "Anonymous user should not see deleted post.";
-
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE = "User should not see deleted post.";
-
-  public static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST = "Discussions moderator should see re reported post.";
 
   // Anonymous user on mobile
 
@@ -499,6 +494,7 @@ public class ReportingPostTests extends NewTestTemplate {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
+    page.waitForPageLoad();
     PostEntity postEntity = page.getPost().findPostById(data.getId());
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -557,7 +553,7 @@ public class ReportingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
     PostEntity.Data data = createAndReportAndDeletePostRemotely();
 
-    PostEntity post = openPostsListPage().getPost().findPostById(data.getId());
+    PostEntity post = openPostsListPage().waitForPageReload().getPost().findPostById(data.getId());
     Assertion.assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
@@ -629,7 +625,9 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    final PostEntity postEntity = openPostsListPage().getPost().findPostById(data.getId());
+    Post post = openPostsListPage().getPost();
+    post.waitForPageLoad();
+    final PostEntity postEntity = post.findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -642,7 +640,9 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    final PostEntity postEntity = new PostDetailsPage().open(data.getId()).getPost().findPostById(data.getId());
+    Post post = new PostDetailsPage().open(data.getId()).getPost();
+    post.waitForPageLoad();
+    final PostEntity postEntity = post.findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
@@ -655,7 +655,9 @@ public class ReportingPostTests extends NewTestTemplate {
     reportPostRemotelyAsSecondUser(data);
     validatePostRemotelyAsDiscussionsModerator(data);
 
-    final PostEntity postEntity = new UserPostsPage().open(data.getAuthorId()).getPost().findPostById(data.getId());
+    Post post = new UserPostsPage().open(data.getAuthorId()).getPost();
+    post.waitForPageLoad();
+    final PostEntity postEntity = post.findPostById(data.getId());
     Assertion.assertFalse(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
     Assertion.assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
