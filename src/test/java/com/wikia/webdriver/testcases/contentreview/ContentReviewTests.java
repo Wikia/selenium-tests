@@ -31,8 +31,7 @@ public class ContentReviewTests extends NewTestTemplate {
     @Test
     @Execute(asUser = User.CONTENT_REVIEWER)
     public void editJS() {
-        final String expectedContent =
-                String.format("My Awesome JS edit %d", DateTime.now().getMillis());
+        final String expectedContent = "console.log(\"content review test\");";
 
         VisualEditModePageObject editPage =
                 new VisualEditModePageObject().open("mediawiki:wikia.js");
@@ -52,10 +51,10 @@ public class ContentReviewTests extends NewTestTemplate {
         editPage.open("mediawiki:wikia.js")
                 .getAceEditor()
                 .clearContent()
-                .insertContent("Adamk is awesome");
+                .insertContent( "console.log(\"content review test 2\");");
 
         editPage.clickAutoApproveCheckbox().clickPublishButton();
-        Assertion.assertEquals(specialJsPage.getScriptContent(), "Adamk is awesome");
+        Assertion.assertEquals(specialJsPage.getScriptContent(),  "console.log(\"content review test 2\");");
         Assertion.assertTrue(specialJsPage.getReviewModule().isSubmitLinkNotVisible());
     }
 }
