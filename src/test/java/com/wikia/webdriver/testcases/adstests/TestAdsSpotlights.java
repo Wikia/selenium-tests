@@ -10,9 +10,7 @@ import org.testng.annotations.Test;
 public class TestAdsSpotlights extends TemplateNoFirstLoad {
 
   private static final String WIKIA_FOOTER = "#WikiaFooter";
-
-  //This test is failing, waiting for fix in https://wikia-inc.atlassian.net/browse/CAKE-1155
-  @DontRun(env = {"preview", "prod"})
+  
   @Test(
       dataProvider = "spotlights",
       dataProviderClass = AdsDataProvider.class,
