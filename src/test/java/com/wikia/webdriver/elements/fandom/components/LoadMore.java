@@ -17,7 +17,7 @@ public class LoadMore extends BasePageObject {
         try {
             return loadMoreButton.isDisplayed();
         } catch (ElementNotFoundException e) {
-            PageObjectLogging.log("LoadMore", "Load More button is not displayed", true);
+            PageObjectLogging.log("LoadMore", "Load More button is not displayed. " + e.getMessage(), false);
             return false;
         }
     }
@@ -27,7 +27,7 @@ public class LoadMore extends BasePageObject {
             WebElement element = loadPosts();
             return element.isDisplayed();
         } catch (ElementNotFoundException e) {
-            PageObjectLogging.log("LoadMore", "More posts did not load", true);
+            PageObjectLogging.log("LoadMore", "More posts did not load. " + e.getMessage(), false);
             return false;
         }
     }
