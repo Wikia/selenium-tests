@@ -53,8 +53,7 @@ public class PostEntity {
   }
 
   public String findId() {
-    final String
-        idAttribute =
+    final String idAttribute =
         post.findElement(By.className("discussion-more-options")).getAttribute("id");
     return StringUtils.substringAfterLast(idAttribute, "-");
   }
