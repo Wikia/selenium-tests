@@ -8,9 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-/**
- * Created by liz_lux on 1/26/17.
- */
 public class LoadMore extends BasePageObject {
 
     @FindBy(css = ".more-stories .load-more-btn")
