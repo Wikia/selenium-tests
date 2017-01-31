@@ -100,7 +100,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Test(
           groups = "AdsTrackingPixelsAuthPage",
           dataProviderClass = AdsDataProvider.class,
