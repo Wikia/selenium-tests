@@ -1,6 +1,6 @@
 node('ubuntu') {
   stage 'Build'
-    sh 'bash ./build.sh'
+    sh 'echo "BUILDING"'
 
   stage 'Unit Tests'
     sh 'bash ./test.sh'
