@@ -107,7 +107,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = USER_ON_DESKTOP_GROUP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();

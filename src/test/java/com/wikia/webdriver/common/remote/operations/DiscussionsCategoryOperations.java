@@ -39,6 +39,14 @@ public class DiscussionsCategoryOperations {
     new DeleteCategory(user).execute(context);
   }
 
+  public void getCategoriesFromSite(final String siteId, User user) {
+    new Categories(user).execute(CreateCategoryContext.defaultContextUsing(siteId, "some name"));
+  }
+
+  public void deleteAllCategories(final String siteId) {
+
+  }
+
   public void renameCategory(CategoryContext context) {
     new RenameCategory(user).execute(context);
   }

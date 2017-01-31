@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
+import com.wikia.webdriver.common.remote.context.CreatePostContext;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -24,6 +25,8 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.catego
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 /**
@@ -58,28 +61,36 @@ public class CategoriesTests extends NewTestTemplate {
 
   // fixtures
 
+
+  @BeforeClass
+  private void deleteCategoriesClass() {
+    String wikiUrl = new UrlBuilder().getUrlForWiki(MercuryWikis.DISCUSSIONS_AUTO);
+    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+    System.out.println("@BeforeClass: " + siteId);
+    DiscussionsCategoryOperations.using(User.STAFF, driver).getCategoriesFromSite(siteId, User.STAFF);
+  }
+
   /**
    * Creates a unique post using DISCUSSIONS_ADMINISTRATOR account in NEW_CATEGORY_NAME category
    * @param wikiName wiki on which post is made
-   * @return new post
+   * @return new category
    */
-  private PostEntity.Data setUp(String wikiName) {
+  private CategoryPill.Data setUp(String wikiName) {
     String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
     siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
     CategoryPill.Data category = addCategoryRemotely(siteId, NEW_CATEGORY_NAME);
-    return DiscussionsOperations
+    DiscussionsOperations
       .using(User.STAFF, driver)
       .createPostWithCategory(category.getId(), siteId);
+    return category;
   }
 
-  private PostEntity.Data setUp() {
+  private CategoryPill.Data setUp() {
     return setUp(MercuryWikis.DISCUSSIONS_AUTO);
   }
 
-  private void cleanUp(PostEntity.Data post) {
-    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, this.siteId);
-    // TODO: remove category
-    //removeCategoryRemotely(this.siteId, );
+  private void cleanUp(CategoryPill.Data category) {
+    DiscussionsCategoryOperations.using(User.STAFF, driver).deleteCategory(this.siteId, category);
   }
 
 
@@ -89,14 +100,16 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
-    PostEntity.Data post = setUp();
+    CategoryPill.Data postCategory = setUp();
 
     final PostsListPage page = new PostsListPage().open();
     openPageAndSelectCategoryOnMobile(page, NEW_CATEGORY_NAME);
     final boolean isCategoryVisible = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
-    Assertion.assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
-
-    cleanUp(post);
+    try {
+      Assertion.assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
