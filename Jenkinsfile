@@ -1,6 +1,9 @@
 node('ubuntu') {
+
+  checkout scm
+
   stage 'Build'
-    sh 'bash ./test.sh'
+    sh 'bash ./build.sh'
 
   stage 'Unit Tests'
     sh 'bash ./test.sh'
