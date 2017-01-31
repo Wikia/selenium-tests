@@ -239,6 +239,7 @@
             <class name="com.wikia.webdriver.testcases.widgettests.VKTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.WeiboTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.GoogleFormTests"/>
+            <class name="com.wikia.webdriver.testcases.fandom.FlyOutTest"/>
             <class name="com.wikia.webdriver.testcases.fandom.HeroUnitTest"/>
             <class name="com.wikia.webdriver.testcases.fandom.WPAdminPageTest"/>
         </classes>
