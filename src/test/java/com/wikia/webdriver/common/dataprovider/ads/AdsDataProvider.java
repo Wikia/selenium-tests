@@ -892,31 +892,6 @@ public class AdsDataProvider {
     };
   }
 
-  @DataProvider
-  public static Object[][] adsTrackingPixelsSentCuratedMainPages() {
-    return new Object[][]{
-        {
-            MercuryWikis.MERCURY_CC,
-            "/main/section/Categories",
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
-                TestAdsTrackingPixels.GA_PIXEL_URL
-            }
-        }, {
-            MercuryWikis.MERCURY_CC,
-            "/main/category/Articles",
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
-                TestAdsTrackingPixels.GA_PIXEL_URL
-            }
-        }
-    };
-  }
-
     @DataProvider
     public static Object[][] adsTrackingPixelsSentAuthPage() {
         return new Object[][]{
