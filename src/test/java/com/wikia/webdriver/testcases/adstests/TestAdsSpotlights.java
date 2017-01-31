@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class TestAdsSpotlights extends TemplateNoFirstLoad {
 
   private static final String WIKIA_FOOTER = "#WikiaFooter";
-
+  
   @Test(
       dataProvider = "spotlights",
       dataProviderClass = AdsDataProvider.class,

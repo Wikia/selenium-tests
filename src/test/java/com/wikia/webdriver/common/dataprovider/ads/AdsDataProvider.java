@@ -892,31 +892,6 @@ public class AdsDataProvider {
     };
   }
 
-  @DataProvider
-  public static Object[][] adsTrackingPixelsSentCuratedMainPages() {
-    return new Object[][]{
-        {
-            MercuryWikis.MERCURY_CC,
-            "/main/section/Categories",
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
-                TestAdsTrackingPixels.GA_PIXEL_URL
-            }
-        }, {
-            MercuryWikis.MERCURY_CC,
-            "/main/category/Articles",
-            new String[]{
-                TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
-                TestAdsTrackingPixels.KRUX_PIXEL_URL,
-                TestAdsTrackingPixels.QUANTQAST_PIXEL_URL,
-                TestAdsTrackingPixels.GA_PIXEL_URL
-            }
-        }
-    };
-  }
-
     @DataProvider
     public static Object[][] adsTrackingPixelsSentAuthPage() {
         return new Object[][]{
@@ -1346,6 +1321,17 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsVuapAutoplayDesktop() {
+    return new Object[][]{
+                {
+                        new Page("project43", "SyntheticTests/VUAP/McDonalds"),
+                        AdsContent.TOP_LB,
+                        "#" + AdsContent.TOP_LB + " .video-player iframe"
+                }
+    };
+  }
 
     @DataProvider
     public static Object[][] adsVuapMercury() {

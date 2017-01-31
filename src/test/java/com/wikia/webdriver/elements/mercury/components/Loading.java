@@ -35,7 +35,7 @@ public class Loading {
     }
 
     if (spinnerPresent) {
-      wait.forElementNotVisible(loadingOverlay, 4, 3000);
+      wait.forElementNotVisible(loadingOverlay, 8, 3000);
       PageObjectLogging.logInfo("Loading overlay is not present");
     }
   }

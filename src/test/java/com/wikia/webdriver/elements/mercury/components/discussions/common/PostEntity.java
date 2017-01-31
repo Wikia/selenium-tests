@@ -1,7 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -56,7 +53,8 @@ public class PostEntity {
   }
 
   public String findId() {
-    final String idAttribute = post.findElement(By.className("discussion-more-options")).getAttribute("id");
+    final String idAttribute =
+        post.findElement(By.className("discussion-more-options")).getAttribute("id");
     return StringUtils.substringAfterLast(idAttribute, "-");
   }
 
@@ -71,17 +69,13 @@ public class PostEntity {
 
   public String findDescription() {
     return isOnPostDetailsPage()
-        ? createDescriptionOnPostDetailsPage()
-        : findDescriptionElement().getText();
+           ? createDescriptionOnPostDetailsPage()
+           : findDescriptionElement().getText();
   }
 
   private boolean isOnPostDetailsPage() {
-    return Iterables.all(post.findElements(By.tagName("a")), new Predicate<WebElement>() {
-      @Override
-      public boolean apply(@Nullable WebElement e) {
-        return !e.getAttribute(CLASS_ATTRIBUTE).contains("post-details-link");
-      }
-    });
+    return post.findElements(By.tagName("a")).stream()
+        .noneMatch(e -> e.getAttribute(CLASS_ATTRIBUTE).contains("post-details-link"));
   }
 
   private String createDescriptionOnPostDetailsPage() {
@@ -94,7 +88,8 @@ public class PostEntity {
   }
 
   public String findLinkToPostDetails() {
-    return isOnPostDetailsPage() ? StringUtils.EMPTY : findDescriptionElement().getAttribute("href");
+    return isOnPostDetailsPage() ? StringUtils.EMPTY
+                                 : findDescriptionElement().getAttribute("href");
   }
 
   private WebElement findDescriptionElement() {
