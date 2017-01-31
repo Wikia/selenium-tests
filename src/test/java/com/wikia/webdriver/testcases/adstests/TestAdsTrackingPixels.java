@@ -84,23 +84,6 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Execute(mockAds = "true")
-  @Test(
-      groups = "AdsTrackingPixelsCuratedMainPage",
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsTrackingPixelsSentCuratedMainPages"
-  )
-  public void adsTrackingPixelSentCuratedMainPages(String wiki, String page, String[] pixelUrls) {
-    networkTrafficInterceptor.startIntercepting();
-
-    // /main/ URLs are not in /wiki/ directory thus we can't use getUrlForPath method and simple concatenation is enough
-    String testedPage = urlBuilder.getUrlForWiki(wiki) + page;
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
-
-    assertTrackingPixelsSent(adsBaseObject, pixelUrls);
-  }
-
-  @NetworkTrafficDump
   @Test(
           groups = "AdsTrackingPixelsAuthPage",
           dataProviderClass = AdsDataProvider.class,
