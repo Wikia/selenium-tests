@@ -1,50 +1,47 @@
 package com.wikia.webdriver.common.remote.operations;
 
-import com.jayway.jsonpath.Criteria;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.Filter;
-import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.*;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.RemoteException;
-import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.context.CreateCategoryContext;
-import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
-import com.wikia.webdriver.elements.mercury.components.Category;
+import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
-import org.json.JSONObject;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Categories {
 
   public static final String GET_CATEGORIES_URL_SUFFIX = "%s/forums";
-
-
-  private final PostRemoteOperation remoteOperation;
+  private final GetRemoteOperation remoteOperation;
 
   Categories(User user) {
-    remoteOperation = new PostRemoteOperation(user);
+    remoteOperation = new GetRemoteOperation(user);
   }
 
-  public void execute(final CreateCategoryContext context) {
-    JSONObject jsonObject = new JSONObject();
-
+  public ArrayList<CategoryPill.Data> execute(final CreateCategoryContext context) {
     String response = null;
     try {
-      response = remoteOperation.execute(buildUrl(context), jsonObject);
+      response = remoteOperation.execute(buildUrl(context));
     } catch(RemoteException e) {
-      System.out.println(e.toString());
       PageObjectLogging.logError("error: ", e);
     }
+    return getCategories(response, context);
+  }
 
-    DocumentContext json = JsonPath.parse(response);
-    Filter fne = Filter.filter(Criteria.where("id").ne(context.getSiteId()));
-    List<String> categories = json.read("$._embedded.doc:forum.[*]");
-    for(String s : categories) {
-      System.out.println(s);
+  private ArrayList<CategoryPill.Data> getCategories(String response, CreateCategoryContext ctxt) {
+    Object json = Configuration.defaultConfiguration().jsonProvider().parse(response);
+    int len = JsonPath.read(json, "$._embedded.doc:forum.length()");
+    ArrayList<CategoryPill.Data> categories = new ArrayList<>();
+    for (int i = 0; i < len; i++) {
+      String id = JsonPath.read(json, "$._embedded.doc:forum[" + i + "].id");
+      String name = JsonPath.read(json, "$._embedded.doc:forum[" + i + "].name");
+      if (!id.equals(ctxt.getSiteId())) {
+        categories.add(new CategoryPill.Data(id, name));
+      }
     }
+    return categories;
   }
 
   private String buildUrl(final CreateCategoryContext context) {

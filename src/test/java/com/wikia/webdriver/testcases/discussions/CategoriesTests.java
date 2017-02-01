@@ -63,7 +63,7 @@ public class CategoriesTests extends NewTestTemplate {
 
 
   @BeforeClass
-  private void deleteCategoriesClass() {
+  private void deleteCategories() {
     String wikiUrl = new UrlBuilder().getUrlForWiki(MercuryWikis.DISCUSSIONS_AUTO);
     siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
     System.out.println("@BeforeClass: " + siteId);
