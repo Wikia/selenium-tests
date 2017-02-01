@@ -1,19 +1,20 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import static java.util.stream.Collectors.toList;
+
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import javax.annotation.CheckForNull;
 
 
 public class Post extends BasePageObject {
@@ -77,21 +78,12 @@ public class Post extends BasePageObject {
 
   @CheckForNull
   public PostEntity findPostById(final String id) {
-    return Iterables.tryFind(getPosts(), new Predicate<PostEntity>() {
-      @Override
-      public boolean apply(@Nullable PostEntity input) {
-        return input.findId().equals(id);
-      }
-    }).orNull();
+    return Iterables.tryFind(getPosts(), input -> input.findId().equals(id)).orNull();
   }
 
   public List<PostEntity> getReportedPosts() {
-    return Lists.newArrayList(Iterables.filter(getPosts(), new Predicate<PostEntity>() {
-      @Override
-      public boolean apply(@Nullable PostEntity postEntity) {
-        return postEntity.isReported();
-      }
-    }));
+    return Lists.newArrayList(getPosts().stream().filter(PostEntity::isReported)
+                                  .collect(Collectors.toList()));
   }
 
   public List<PostEntity> getPosts() {

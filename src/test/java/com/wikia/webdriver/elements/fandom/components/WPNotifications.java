@@ -16,7 +16,7 @@ public class WPNotifications extends BasePageObject {
 
   public boolean isNotificationVisible(String notificationText) {
     for (WebElement element : notifications) {
-      if (element.findElement(By.cssSelector("p")).getText().equals(notificationText)) {
+      if (element.findElement(By.cssSelector("p")).getText().contains(notificationText)) {
         return true;
       }
     }
