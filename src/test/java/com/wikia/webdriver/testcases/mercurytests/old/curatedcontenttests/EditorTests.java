@@ -164,7 +164,6 @@ public class EditorTests extends NewTestTemplate {
     );
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
-    loading.handleAsyncPageReload();
 
     Assertion.assertNumber(
         curatedContent.getCuratedContentItemsNumber(),

@@ -20,7 +20,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRe
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_MESSAGING)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_EMPTY)
 @Test(groups = {"discussions-zero-error-state"})
 
 public class ZeroErrorStateTests extends NewTestTemplate {

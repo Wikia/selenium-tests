@@ -15,12 +15,12 @@ public class WPLoginBox extends BasePageObject {
   private WebElement password;
 
   @FindBy(css = "#wp-submit")
-  private WebElement sumbmit;
+  private WebElement submit;
 
   public WPLoginBox login(FandomUser user) {
     username.sendKeys(user.getUsername());
     password.sendKeys(user.getPassword());
-    sumbmit.click();
+    submit.click();
 
     return this;
   }

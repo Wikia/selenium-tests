@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
@@ -18,11 +17,12 @@ import com.wikia.webdriver.elements.mercury.components.discussions.mobile.Discus
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import com.google.common.base.Predicate;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 
@@ -88,9 +88,10 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     return open(DEFAULT_FORUM_ID);
   }
 
-  public void waitForPageReload() {
+  public PostsListPage waitForPageReload() {
     wait.forElementVisible(By.className("loading-overlay"));
     wait.forElementNotVisible(By.className("loading-overlay"));
+    return this;
   }
 
   public void waitForPageReloadWith(final String categoryName) {
@@ -100,13 +101,8 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     try {
       new FluentWait<>(getPost())
           .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-          .until(new Predicate<Post>() {
-            @Override
-            public boolean apply(@Nullable Post post) {
-              return post.getPosts().stream()
-                  .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName));
-            }
-          });
+          .until((Predicate<Post>) p -> p.getPosts().stream()
+              .allMatch(postEntity -> postEntity.findCategory().endsWith(categoryName)));
     } finally {
       restoreDefaultImplicitWait();
     }

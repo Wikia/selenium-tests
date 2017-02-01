@@ -18,6 +18,7 @@ public class MercuryWikis {
   public static final String DE_WIKI = "de.demercurytests";
   public static final String DISCUSSIONS_AUTO = "dauto";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";
+  public static final String DISCUSSIONS_EMPTY = "discussions-empty";
 
   private MercuryWikis() {
   }

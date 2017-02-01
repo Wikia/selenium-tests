@@ -30,7 +30,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
@@ -61,6 +60,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasisAutoplay"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
@@ -103,7 +103,6 @@
             <class name="com.wikia.webdriver.testcases.discussions.SortingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
-            <class name="com.wikia.webdriver.testcases.edithubtests.EditHubTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests"/>
             <class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowArticleTests"/>
@@ -121,7 +120,6 @@
             <class name="com.wikia.webdriver.testcases.globalshortcuts.ActionExplorerTest"/>
             <class name="com.wikia.webdriver.testcases.globalshortcuts.KeyboardShortcutsTest"/>
             <class name="com.wikia.webdriver.testcases.heromoduletests.HeroModuleTests"/>
-            <class name="com.wikia.webdriver.testcases.hubstests.HubsTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>
             <class name="com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests"/>

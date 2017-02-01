@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests;
 
-import com.wikia.webdriver.common.contentpatterns.MercuryPaths;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
@@ -40,13 +39,24 @@ public class NavigationTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedNavigationTest_001")
-  public void MercuryCuratedNavigationTest_001_navigateThroughSection() {
+  public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
+    init();
+
+    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
+
+    curatedContent.clickOnCuratedContentElementByIndex(1);
+    loading.handleAsyncPageReload();
+
+    UrlChecker.isPathContainedInCurrentUrl(driver, "/wiki/Category:");
+  }
+
+  @Test(groups = "MercuryCuratedNavigationTest_002")
+  public void MercuryCuratedNavigationTest_002_navigateThroughSection() {
     init();
 
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
-    loading.handleAsyncPageReload();
 
     curatedContent
         .isTitleVisible()
@@ -55,11 +65,11 @@ public class NavigationTests extends NewTestTemplate {
         .isCuratedContentItemVisibleByIndex(1);
 
     UrlChecker.isPathContainedInCurrentUrl(
-        driver, MercuryPaths.ROOT_PATH_SECTION + curatedContent.getTitle());
+        driver, MercurySubpages.CC_MAIN_PAGE);
   }
 
-  @Test(groups = "MercuryCuratedNavigationTest_002")
-  public void MercuryCuratedNavigationTest_002_redirectToExistingArticle() {
+  @Test(groups = "MercuryCuratedNavigationTest_003")
+  public void MercuryCuratedNavigationTest_003_redirectToExistingArticle() {
     init();
 
     String redirect = WikiTextContent.REDIRECT +
