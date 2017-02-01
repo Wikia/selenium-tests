@@ -8,6 +8,8 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.catego
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
+
 @AllArgsConstructor(staticName = "using")
 public class DiscussionsCategoryOperations {
 
@@ -39,12 +41,16 @@ public class DiscussionsCategoryOperations {
     new DeleteCategory(user).execute(context);
   }
 
-  public void getCategoriesFromSite(final String siteId, User user) {
-    new Categories(user).execute(CreateCategoryContext.defaultContextUsing(siteId, "some name"));
+  public ArrayList<CategoryPill.Data> getCategoriesFromSite(final String siteId, User user) {
+    return new Categories(user).execute(CreateCategoryContext.defaultContextUsing(siteId, ""));
   }
 
-  public void deleteAllCategories(final String siteId) {
-
+  public void deleteAllCategories(final String siteId, User user) {
+    ArrayList<CategoryPill.Data> categories = getCategoriesFromSite(siteId, user);
+    for (CategoryPill.Data category : categories) {
+      System.out.println("Deleting: " + category.getName());
+      deleteCategory(siteId, category);
+    }
   }
 
   public void renameCategory(CategoryContext context) {

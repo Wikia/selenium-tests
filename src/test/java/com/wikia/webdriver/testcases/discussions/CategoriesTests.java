@@ -1,8 +1,13 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static com.wikia.webdriver.common.core.Assertion.assertFalse;
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static com.wikia.webdriver.common.core.Assertion.assertNull;
+import static com.wikia.webdriver.common.core.Assertion.fail;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -11,7 +16,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
-import com.wikia.webdriver.common.remote.context.CreatePostContext;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -22,12 +26,11 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsC
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
 
 /**
  * To avoid creating unnecessary data, some of these tests assume that on www.dauto.wikia.com exists category on 4th
@@ -61,13 +64,11 @@ public class CategoriesTests extends NewTestTemplate {
 
   // fixtures
 
-
   @BeforeClass
   private void deleteCategories() {
     String wikiUrl = new UrlBuilder().getUrlForWiki(MercuryWikis.DISCUSSIONS_AUTO);
     siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
-    System.out.println("@BeforeClass: " + siteId);
-    DiscussionsCategoryOperations.using(User.STAFF, driver).getCategoriesFromSite(siteId, User.STAFF);
+    DiscussionsCategoryOperations.using(User.STAFF, driver).deleteAllCategories(siteId, User.STAFF);
   }
 
   /**
@@ -106,7 +107,7 @@ public class CategoriesTests extends NewTestTemplate {
     openPageAndSelectCategoryOnMobile(page, NEW_CATEGORY_NAME);
     final boolean isCategoryVisible = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
     try {
-      Assertion.assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+      assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
     } finally {
       cleanUp(postCategory);
     }
@@ -116,9 +117,13 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
-
-    Assertion.assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    try {
+      assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   // Anonymous user on desktop
@@ -127,20 +132,28 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
     openPageAndSelectCategoryOnDesktop(page, NEW_CATEGORY_NAME);
-
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
-    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+    try {
+      assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
-
-    Assertion.assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    try {
+      assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   // User on mobile
@@ -149,20 +162,28 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanChangeCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
     openPageAndSelectCategoryOnMobile(page, NEW_CATEGORY_NAME);
-
     final boolean actual = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
-    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+    try {
+      assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotEditCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
-
-    Assertion.assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    try {
+      assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   // User on desktop
@@ -171,36 +192,45 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
-    final String categoryName = openPageAndSelectCategoryOnDesktop(page, NEW_CATEGORY_NAME);
-
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, categoryName);
-    Assertion.assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, categoryName));
+    openPageAndSelectCategoryOnDesktop(page, NEW_CATEGORY_NAME);
+    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, NEW_CATEGORY_NAME);
+    try {
+      assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, NEW_CATEGORY_NAME));
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-userOnDesktopCategories"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
-
-    Assertion.assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    try {
+      assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   // Discussions Administrator on mobile
 
-  /**
-   * Category "All" is not present on edit categories modal on mobile
-   */
   @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategoryOnPostsListPage() {
+    CategoryPill.Data postCategory = setUp();
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
-
-    Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
-    Assertion.assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
+    try {
+      assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
+      assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
@@ -221,8 +251,8 @@ public class CategoriesTests extends NewTestTemplate {
     CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
     try {
-      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+      assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       removeCategoryRemotely(siteId, data);
     }
@@ -247,8 +277,8 @@ public class CategoriesTests extends NewTestTemplate {
     CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
     try {
-      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+      assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      assertTrue(isCategoryIn(page.getPostsCreatorMobile(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       revertCategoryName(siteId, data);
     }
@@ -265,7 +295,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     addCategoriesUntilMaxReached(categoriesFieldset);
 
-    Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
+    assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
@@ -280,10 +310,10 @@ public class CategoriesTests extends NewTestTemplate {
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
 
     addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
-    Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
+    assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
 
     removeCategory(data, page, categoriesFieldset);
-    Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
+    assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
   }
 
   // Discussions Administrator on desktop
@@ -295,11 +325,11 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open();
     final CategoriesFieldset categoriesFieldset = page.getCategories();
 
-    Assertion.assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
+    assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
 
     categoriesFieldset.clickEdit();
-    Assertion.assertFalse(categoriesFieldset.canEditAllCategory(), "All category should not be editable.");
-    Assertion.assertFalse(categoriesFieldset.canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
+    assertFalse(categoriesFieldset.canEditAllCategory(), "All category should not be editable.");
+    assertFalse(categoriesFieldset.canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
@@ -318,8 +348,8 @@ public class CategoriesTests extends NewTestTemplate {
     final CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
     try {
-      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+      assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       removeCategoryRemotely(siteId, data);
     }
@@ -344,8 +374,8 @@ public class CategoriesTests extends NewTestTemplate {
     CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
 
     try {
-      Assertion.assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      Assertion.assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+      assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       revertCategoryName(siteId, data);
     }
@@ -361,7 +391,7 @@ public class CategoriesTests extends NewTestTemplate {
 
     addCategoriesUntilMaxReached(categoriesFieldset);
 
-    Assertion.assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
+    assertEquals(categoriesFieldset.getInfoMessageText(), CATEGORIES_LIMIT_REACHED_INFO_MESSAGE, INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE);
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
@@ -376,10 +406,10 @@ public class CategoriesTests extends NewTestTemplate {
     final CategoriesFieldset categoriesFieldset = page.getCategories();
 
     addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
-    Assertion.assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
+    assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
 
     removeCategory(data, page, categoriesFieldset);
-    Assertion.assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
+    assertNull(categoriesFieldset.findCategoryWith(data.getName()), CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
   }
 
   private void openPageAndSelectCategoryOnMobile(PostsListPage page, String categoryName) {
@@ -392,10 +422,9 @@ public class CategoriesTests extends NewTestTemplate {
     page.waitForPageReloadWith(categoryName);
   }
 
-  private String openPageAndSelectCategoryOnDesktop(PostsListPage page, String categoryName) {
-    CategoriesFieldset categories = new CategoriesFieldset();
+  private void openPageAndSelectCategoryOnDesktop(PostsListPage page, String categoryName) {
+    page.getCategories().clickCategoryWith(categoryName);
     page.waitForPageReloadWith(categoryName);
-    return categoryName;
   }
 
   private boolean postsOnPageAreOnlyFromOneCategory(PostsListPage page, String categoryName) {
@@ -455,7 +484,7 @@ public class CategoriesTests extends NewTestTemplate {
     }
 
     if (counter == MAX_NUMBER_OF_CATEGORIES) {
-      Assertion.fail(MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE);
+      fail(MAX_NUMBER_OF_CATEGORIES_REACHED_FAIL_MESSAGE);
     }
   }
 
