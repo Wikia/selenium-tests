@@ -83,6 +83,8 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement image;
   @FindBy(css = "#wpApprove")
   private WebElement autoApproveCheckbox;
+  @FindBy(css = ".module_categories")
+  private WebElement categoriesModuleBar;
 
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
@@ -349,6 +351,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void verifyCategoryNotPresent(String category) {
+    this.scrollTo(categoriesModuleBar);
     wait.forElementNotPresent(By.cssSelector(categoryRemovedSelector.replace("%categoryName%",
             category)));
     boolean categoryVisible = true;
