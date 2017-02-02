@@ -28,7 +28,7 @@ public class CategoryPageTest extends NewTestTemplate {
     articleContent.push(String.format("[[%s]]", categoryName), String.format("B-%s", categoryName));
     articleContent.push(String.format("[[%s]]", categoryName), String.format("C-%s", categoryName));
 
-    CategoryPage category = new CategoryPage().open(String.format("/wiki/%s", categoryName));
+    CategoryPage category = new CategoryPage().open(categoryName);
 
     Assert.assertEquals("", category.getArticleContent());
     Assert.assertTrue(category.categoryMembersContainerIsVisible());
@@ -46,7 +46,7 @@ public class CategoryPageTest extends NewTestTemplate {
     articleContent.push(String.format("[[%s]]", categoryName), String.format("B-%s", categoryName));
     articleContent.push(String.format("[[%s]]", categoryName), String.format("C-%s", categoryName));
 
-    CategoryPage category = new CategoryPage().open(String.format("/wiki/%s", categoryName));
+    CategoryPage category = new CategoryPage().open(categoryName);
 
     Assert.assertFalse("".equals(category.getArticleContent()));
     Assert.assertTrue(category.categoryMembersContainerIsVisible());
@@ -58,7 +58,7 @@ public class CategoryPageTest extends NewTestTemplate {
     final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
 
     new ArticleContent().push("some irrelevant content of category article", categoryName);
-    CategoryPage category = new CategoryPage().open(String.format("/wiki/%s", categoryName));
+    CategoryPage category = new CategoryPage().open(categoryName);
 
     Assert.assertEquals(404, category.getURLStatus(category.getCurrentUrl()));
   }
@@ -80,10 +80,11 @@ public class CategoryPageTest extends NewTestTemplate {
   public void mercury_category_navigateToCategoryMemberPage() {
     final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
     final String articleContent = "Test article content";
+
     new ArticleContent().push(String.format("%s [[%s]]", articleContent, categoryName));
 
     ArticlePage article = new CategoryPage()
-        .open(String.format("/wiki/%s", categoryName))
+        .open(categoryName)
         .navigateToCategoryMemberPage();
 
     Assert.assertEquals(articleContent, article.getArticleContent());

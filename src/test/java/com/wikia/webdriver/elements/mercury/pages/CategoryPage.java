@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
@@ -28,7 +29,8 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public CategoryPage open(String categoryName) {
-    this.navigate.toPage(categoryName);
+    this.navigate.toPage(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
+
     return this;
   }
 
