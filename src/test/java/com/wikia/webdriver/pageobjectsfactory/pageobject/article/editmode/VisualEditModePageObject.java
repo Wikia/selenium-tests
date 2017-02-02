@@ -86,6 +86,11 @@ public class VisualEditModePageObject extends EditMode {
   @FindBy(css = ".module_categories")
   private WebElement categoriesModuleBar;
 
+
+  @FindBy(css = ".rail-auto-height")
+  private WebElement modalElement;
+
+
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
   private By sliderBy = By.cssSelector("img.image-gallery-slider");
@@ -311,6 +316,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void typeCategoryName(String categoryName) {
+    jsActions.scrollToElementInModal(categoryInput,modalElement);
     wait.forElementVisible(categoryInput);
     categoryInput.sendKeys(categoryName);
     PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
