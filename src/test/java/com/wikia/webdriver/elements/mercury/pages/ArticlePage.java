@@ -35,6 +35,7 @@ public class ArticlePage extends WikiBasePageObject {
     wait.forElementClickable(categoriesDropdown);
     driver.findElement(categoriesDropdown).click();
 
+    wait.forXMilliseconds(1500);
     wait.forElementClickable(categoryLink);
     driver.findElement(categoryLink).click();
 

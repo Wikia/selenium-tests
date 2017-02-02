@@ -41,6 +41,7 @@ public class CategoryPage extends WikiBasePageObject {
     WebElement member = driver.findElement(categoryMembers);
     String memberName = member.getText();
 
+    wait.forXMilliseconds(1500);
     wait.forElementClickable(member);
     member.click();
 
