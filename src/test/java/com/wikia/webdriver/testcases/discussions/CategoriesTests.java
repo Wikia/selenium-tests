@@ -34,22 +34,35 @@ import java.util.ArrayList;
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
+
   private String siteId;
   private static final int MAX_NUMBER_OF_CATEGORIES = 10;
   private static final String GENERAL_CATEGORY_NAME = "General";
 
   // assertion messages
 
-  private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE = "Only \"%s\" category should be visible.";
-  private static final String CATEGORIES_NOT_EDITABLE_MESSAGE = "Should not be able to edit categories.";
-  private static final String SHOULD_EDIT_CATEGORIES_MESSAGE = "Should be able to edit categories.";
-  private static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE = "General category should be not editable";
-  private static final String CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE = "Category %s should appear in categories list.";
-  private static final String CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE = "Category %s should be visible on post creator.";
-  private static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE = "You have reached the limit of allowed categories (10).";
-  private static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE = "Info message should appear when reached max categories limit.";
-  private static final String TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE = "Temporary category should not be added.";
-  private static final String CATEGORY_SHOULD_BE_REMOVED_MESSAGE = "Category should be removed.";
+  private static final String CATEGORY_SHOULD_BE_VISIBLE_MESSAGE =
+    "Only \"%s\" category should be visible.";
+  private static final String CATEGORIES_NOT_EDITABLE_MESSAGE =
+    "Should not be able to edit categories.";
+  private static final String SHOULD_EDIT_CATEGORIES_MESSAGE =
+    "Should be able to edit categories.";
+  private static final String GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE =
+    "General category should not be editable";
+  private static final String ALL_CATEGORY_SHOULD_NOT_BE_EDITABLE_MESSAGE =
+    "\'All\' category should not be editable.";
+  private static final String CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE =
+    "Category %s should appear in categories list.";
+  private static final String CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE =
+    "Category %s should be visible on post creator.";
+  private static final String CATEGORIES_LIMIT_REACHED_INFO_MESSAGE =
+    "You have reached the limit of allowed categories (10).";
+  private static final String INFOR_MESSAGE_SHOULD_APPEAR_MESSAGE =
+    "Info message should appear when reached max categories limit.";
+  private static final String TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE =
+    "Temporary category should not be added.";
+  private static final String CATEGORY_SHOULD_BE_REMOVED_MESSAGE =
+    "Category should be removed.";
 
   // fixtures
 
@@ -104,31 +117,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-
-    final PostsListPage page = new PostsListPage().open(siteId);
-    openPageAndSelectCategoryOnMobile(page, postCategory.getName());
-    final boolean isCategoryVisible = postsOnPageAreOnlyFromOneCategory(page, 
-      postCategory.getName());
-    try {
-      assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, 
-        postCategory.getName()));
-    } finally {
-      cleanUp(postCategory);
-    }
+    changeCategoryMobile();
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    try {
-      assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
-    } finally {
-      cleanUp(postCategory);
-    }
+    cannotEditCategoryMobile();
   }
 
   // Anonymous user on desktop
@@ -137,28 +133,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    openPageAndSelectCategoryOnDesktop(page, postCategory.getName());
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, postCategory.getName());
-    try {
-      assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, postCategory.getName()));
-    } finally {
-      cleanUp(postCategory);
-    }
+    canChangeCategoryDesktop();
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    try {
-      assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
-    } finally {
-      cleanUp(postCategory);
-    }
+    cannotEditCategoryDesktop();
   }
 
   // User on mobile
@@ -167,28 +149,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanChangeCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    openPageAndSelectCategoryOnMobile(page, postCategory.getName());
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, postCategory.getName());
-    try {
-      assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, postCategory.getName()));
-    } finally {
-      cleanUp(postCategory);
-    }
+    changeCategoryMobile();
   }
 
   @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotEditCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    try {
-      assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
-    } finally {
-      cleanUp(postCategory);
-    }
+    cannotEditCategoryMobile();
   }
 
   // User on desktop
@@ -197,28 +165,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    openPageAndSelectCategoryOnDesktop(page, postCategory.getName());
-    final boolean actual = postsOnPageAreOnlyFromOneCategory(page, postCategory.getName());
-    try {
-      assertTrue(actual, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE, postCategory.getName()));
-    } finally {
-      cleanUp(postCategory);
-    }
+    canChangeCategoryDesktop();
   }
 
   @Test(groups = {"discussions-categories-desktop", "discussions-userOnDesktopCategories"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
-    final PostsListPage page = new PostsListPage().open(siteId);
-    try {
-      assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
-    } finally {
-      cleanUp(postCategory);
-    }
+    cannotEditCategoryDesktop();
   }
 
   // Discussions Administrator on mobile
@@ -319,13 +273,7 @@ public class CategoriesTests extends NewTestTemplate {
       .click()
       .getCategoriesFieldset();
 
-    addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
-    assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName), 
-      TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
-
-    removeCategory(data, page, categoriesFieldset);
-    assertNull(categoriesFieldset.findCategoryWith(data.getName()), 
-      CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
+    canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
   }
 
   // Discussions Administrator on desktop
@@ -337,11 +285,9 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getCategories();
 
-    assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
-
     categoriesFieldset.clickEdit();
     assertFalse(categoriesFieldset.canEditAllCategory(), 
-      "All category should not be editable.");
+      ALL_CATEGORY_SHOULD_NOT_BE_EDITABLE_MESSAGE);
     assertFalse(categoriesFieldset.canEditGeneralCategory(), 
       GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
@@ -368,9 +314,6 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-
-  // this
-  // one
   @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
@@ -421,6 +364,59 @@ public class CategoriesTests extends NewTestTemplate {
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getCategories();
 
+    canRemoveCategories(page, temporaryCategoryName, categoriesFieldset, data);
+  }
+
+  // test methods body
+
+  private void canChangeCategoryDesktop() {
+    CategoryPill.Data postCategory = setUp();
+    final PostsListPage page = new PostsListPage().open(siteId);
+    openPageAndSelectCategoryOnDesktop(page, postCategory.getName());
+    assertCategoryVisibleAndCleanUp(page, postCategory);
+  }
+
+  private void changeCategoryMobile() {
+    CategoryPill.Data postCategory = setUp();
+    final PostsListPage page = new PostsListPage().open(siteId);
+    openPageAndSelectCategoryOnMobile(page, postCategory.getName());
+    assertCategoryVisibleAndCleanUp(page, postCategory);
+  }
+
+  private void assertCategoryVisibleAndCleanUp(PostsListPage page, CategoryPill.Data postCategory) {
+    final boolean isCategoryVisible = postsOnPageAreOnlyFromOneCategory(page,
+      postCategory.getName());
+    try {
+      assertTrue(isCategoryVisible, String.format(CATEGORY_SHOULD_BE_VISIBLE_MESSAGE,
+        postCategory.getName()));
+    } finally {
+      cleanUp(postCategory);
+    }
+  }
+
+  private void cannotEditCategoryDesktop() {
+    CategoryPill.Data postCategory = setUp();
+    final PostsListPage page = new PostsListPage().open(siteId);
+    try {
+      assertFalse(canEditCategoriesOnDesktop(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
+  }
+
+  private void cannotEditCategoryMobile() {
+    CategoryPill.Data postCategory = setUp();
+    final PostsListPage page = new PostsListPage().open(siteId);
+    try {
+      assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);
+    } finally {
+      cleanUp(postCategory);
+    }
+  }
+
+  private void canRemoveCategories(PostsListPage page, String temporaryCategoryName,
+    CategoriesFieldset categoriesFieldset, CategoryPill.Data data) {
+
     addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
     assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName),
       TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
@@ -429,6 +425,8 @@ public class CategoriesTests extends NewTestTemplate {
     assertNull(categoriesFieldset.findCategoryWith(data.getName()),
       CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
   }
+
+  // helpers
 
   private void openPageAndSelectCategoryOnMobile(PostsListPage page, String categoryName) {
     final FiltersPopOver filtersPopOver = page.getFiltersPopOver().click();
