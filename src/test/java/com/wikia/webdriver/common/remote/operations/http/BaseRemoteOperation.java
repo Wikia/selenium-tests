@@ -50,7 +50,7 @@ class BaseRemoteOperation {
       request.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
       request.setEntity(new StringEntity(jsonObject.toString()));
       result = execute(request);
-    } catch (UnsupportedEncodingException x) {
+    } catch (UnsupportedEncodingException|RemoteException x) {
       PageObjectLogging.log("Error while creating http post entity.", ExceptionUtils.getStackTrace(x), false);
     }
 

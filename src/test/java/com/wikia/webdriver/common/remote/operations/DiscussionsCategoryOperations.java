@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.remote.operations;
 
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.context.CreateCategoryContext;
@@ -8,6 +9,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.catego
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 @AllArgsConstructor(staticName = "using")
@@ -48,7 +50,7 @@ public class DiscussionsCategoryOperations {
   public void deleteAllCategories(final String siteId, User user) {
     ArrayList<CategoryPill.Data> categories = getCategoriesFromSite(siteId, user);
     for (CategoryPill.Data category : categories) {
-      System.out.println("Deleting: " + category.getName());
+      PageObjectLogging.logInfo("Deleting category: " + category.getName());
       deleteCategory(siteId, category);
     }
   }

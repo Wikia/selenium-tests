@@ -25,17 +25,17 @@ public class CategoriesFieldset extends WikiBasePageObject {
   @FindBy(className = "discussion-categories-edit-link")
   private WebElement editLink;
 
-  @FindBy(css = ".discussion-categories .discussion-categories-list > li")
+  @FindBy(css = ".discussion-categories-list > li")
   private List<WebElement> categories;
+
+  @FindBy(css = ".discussion-categories-input-wrapper")
+  private List<WebElement> editableCategories;
 
   @FindBy(className = "discussion-categories-edit")
   private WebElement categoriesEdit;
 
   @FindBy(className = "discussion-category-all")
   private WebElement editableCategoryAll;
-
-  @FindBy(css = ".discussion-categories-list .sortable-item")
-  private List<WebElement> editableCategories;
 
   @FindBy(className = "discussion-categories-edit-add-link")
   private WebElement addCategoryLink;
@@ -53,7 +53,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
   @CheckForNull
   public CategoryPill findCategoryWith(final String categoryName) {
-    return new CategoryPill(getCategoryWith(categoryName));
+    WebElement category = getCategoryWith(categoryName);
+    return category == null ? null : new CategoryPill(category);
   }
 
   /**
@@ -61,12 +62,36 @@ public class CategoriesFieldset extends WikiBasePageObject {
    * @param categoryName to match
    * @return first WebElement category that matches the name
    */
-  private WebElement getCategoryWith(final String categoryName) {
-    List<WebElement> categoryList = categories.stream()
-      .filter(element -> element.getText().equalsIgnoreCase(categoryName))
+  private WebElement getCategory(List<WebElement> categoryList, final String categoryName) {
+    List<WebElement> foundCategories = categoryList.stream()
+      .filter(element -> element
+        .getAttribute("innerText")
+        .trim()
+        .equalsIgnoreCase(categoryName)
+      )
       .collect(Collectors.toList());
 
-      return categoryList.get(categoryList.size() - 1);
+      return foundCategories.isEmpty() ? null : foundCategories.get(foundCategories.size() - 1);
+  }
+
+  private int getCategoryPosition(List<WebElement> categoryList, final String categoryName) {
+    WebElement category = getCategory(categoryList, categoryName);
+    return categoryList.indexOf(category);
+  }
+
+  private WebElement getCategoryWith(String categoryName) {
+    return getCategory(this.categories, categoryName);
+  }
+
+  /**
+   *
+   * @param categoryName to look for
+   * @return this category on list of editable categories
+   * Categories on editable categories list don't have any attribute based on their names,
+   * and thus a lookup in non-editable categories list must be made beforehand
+   */
+  private WebElement getEditableCategoryWith(String categoryName) {
+    return editableCategories.get(getCategoryPosition(categories, categoryName));
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
@@ -143,12 +168,14 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public CategoriesFieldset rename(final String oldCategoryName, final String newCategoryName) {
-    WebElement category = getCategoryWith(oldCategoryName);
+    WebElement category = getEditableCategoryWith(oldCategoryName);
     WebElement input = category.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR));
     input.clear();
     input.sendKeys(newCategoryName);
     return this;
   }
+
+
 
   public String getInfoMessageText() {
     return infoMessage.getText();
