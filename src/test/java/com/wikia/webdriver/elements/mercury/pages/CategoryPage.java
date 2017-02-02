@@ -19,6 +19,8 @@ public class CategoryPage extends WikiBasePageObject {
   private By articleContent = By.cssSelector(".article-content");
   private By categoryMembersContainer = By.cssSelector(".category-members-grouped");
   private By categoryMembers = By.cssSelector(".category-members-group li a");
+  private By nextButton = By.cssSelector(".category-navigation__next");
+  private By previousButton = By.cssSelector(".category-navigation__prev");
 
   private Navigate navigate;
 
@@ -61,6 +63,34 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public boolean hasCategoryMembers() {
+    wait.forElementVisible(categoryMembers);
+
     return driver.findElements(categoryMembers).size() > 0;
+  }
+
+  public boolean nextButtonIsVisible() {
+    wait.forElementVisible(nextButton);
+
+    return driver.findElement(nextButton).isDisplayed();
+  }
+
+  public boolean previousButtonIsVisible() {
+    wait.forElementVisible(previousButton);
+
+    return driver.findElement(previousButton).isDisplayed();
+  }
+
+  public CategoryPage clickNextButton() {
+    wait.forElementClickable(nextButton);
+    this.scrollAndClick(driver.findElement(nextButton));
+
+    return this;
+  }
+
+  public CategoryPage clickPreviousButton() {
+    wait.forElementClickable(previousButton);
+    this.scrollAndClick(driver.findElement(previousButton));
+
+    return this;
   }
 }

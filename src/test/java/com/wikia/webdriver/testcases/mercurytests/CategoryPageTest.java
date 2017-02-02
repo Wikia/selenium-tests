@@ -90,5 +90,34 @@ public class CategoryPageTest extends NewTestTemplate {
     Assert.assertEquals(articleContent, article.getArticleContent());
   }
 
-  //TODO: test pagination
+  @Test(groups = "mercury_category_testPageination")
+  public void mercury_category_testPagination() {
+    // This test assumes that there are more than 200 articles created and with category like one below.
+    // Staging env should have fixture of this articles to create them everytime it is rebuilded
+
+    final String categoryName = String.format("Category:%s", TestContext.getCurrentMethodName());
+    ArticleContent articleContent = new ArticleContent();
+
+    articleContent.push("some irrelevant content of category article", categoryName);
+
+    // execute this loop only once on staging and then create fixture
+//    for (int i = 0; i < 300; ++i) {
+//      articleContent.push(String.format("aa [[%s]]", categoryName), String.format("%d-%s", i, categoryName));
+//    }
+
+    CategoryPage categoryPage = new CategoryPage().open(categoryName);
+
+    Assert.assertTrue(categoryPage.hasCategoryMembers());
+    Assert.assertTrue(categoryPage.nextButtonIsVisible());
+
+    categoryPage.clickNextButton();
+
+    Assert.assertTrue(categoryPage.hasCategoryMembers());
+    Assert.assertTrue(categoryPage.previousButtonIsVisible());
+
+    categoryPage.clickPreviousButton();
+
+    Assert.assertTrue(categoryPage.hasCategoryMembers());
+    Assert.assertTrue(categoryPage.nextButtonIsVisible());
+  }
 }
