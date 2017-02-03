@@ -355,10 +355,8 @@ public class VisualEditModePageObject extends EditMode {
         categoryVisible = true;
       }
     }
-    for (int i = 0; i<categoryList.size(); i++){
-        System.out.println("Element listy " + categoryList.get(i).getText());
-    }
-    Assertion.assertTrue(categoryVisible, "category " + category + " not present.");
+    Assertion.assertFalse(categoryVisible, "category " + category + " not present. Available categories: " +
+                                          categoryList.stream().map(d->d.getText()).collect(Collectors.joining(", ")) + ".");
   }
 
   public void verifyCategoryNotPresent(String category) {
