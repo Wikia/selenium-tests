@@ -34,8 +34,6 @@ public class ArticlePage extends WikiBasePageObject {
   private By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
 
   public CategoryPage openCategoryPageFromCategoriesDropdown() {
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
-
     wait.forElementClickable(categoriesDropdown);
     driver.findElement(categoriesDropdown).click();
 
@@ -44,7 +42,6 @@ public class ArticlePage extends WikiBasePageObject {
 
     new Loading(driver).handleAsyncPageReload();
 
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
     return new CategoryPage();
   }
 

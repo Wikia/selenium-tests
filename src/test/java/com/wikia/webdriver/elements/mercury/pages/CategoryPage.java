@@ -95,16 +95,12 @@ public class CategoryPage extends WikiBasePageObject {
     this.scrollAndClick(driver.findElement(nextButton));
     PageObjectLogging.logInfo("Next page button clicked.");
 
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
-
     return this;
   }
 
   public CategoryPage clickPreviousButton() {
     this.scrollAndClick(driver.findElement(previousButton));
     PageObjectLogging.logInfo("Previous page button clicked.");
-
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
 
     return this;
   }
