@@ -25,6 +25,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VisualEditModePageObject extends EditMode {
 
@@ -348,12 +349,16 @@ public class VisualEditModePageObject extends EditMode {
 
   public void verifyCategoryPresent(String category) {
     boolean categoryVisible = false;
+    Assertion.assertTrue(categoryList.size()>0,"Category list is empty");
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
         categoryVisible = true;
       }
     }
-    Assertion.assertTrue(categoryVisible, "category " + category + " not present");
+    for (int i = 0; i<categoryList.size(); i++){
+        System.out.println("Element listy " + categoryList.get(i).getText());
+    }
+    Assertion.assertTrue(categoryVisible, "category " + category + " not present.");
   }
 
   public void verifyCategoryNotPresent(String category) {
