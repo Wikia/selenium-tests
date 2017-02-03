@@ -2,15 +2,10 @@ package com.wikia.webdriver.common.remote.operations;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.CategoryContext;
 import com.wikia.webdriver.common.remote.context.CreateCategoryContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import lombok.AllArgsConstructor;
-import org.openqa.selenium.WebDriver;
-
-import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor(staticName = "using")

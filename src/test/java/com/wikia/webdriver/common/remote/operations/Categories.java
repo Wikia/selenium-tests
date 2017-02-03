@@ -14,7 +14,13 @@ import java.util.List;
 
 public class Categories {
 
-  public static final String GET_CATEGORIES_URL_SUFFIX = "%s/forums";
+  private class CategoriesNotFetched extends RuntimeException {
+    private CategoriesNotFetched(String message, RemoteException cause) {
+      super(message, cause);
+    }
+  }
+
+  private static final String GET_CATEGORIES_URL_SUFFIX = "%s/forums";
   private final GetRemoteOperation remoteOperation;
 
   Categories(User user) {
@@ -26,7 +32,7 @@ public class Categories {
       return getCategories(remoteOperation.execute(buildUrl(context)), context);
     } catch(RemoteException e) {
       PageObjectLogging.logError("error: ", e);
-      throw new RuntimeException("Could not fetch categories.", e);
+      throw new CategoriesNotFetched("Could not fetch categories.", e);
     }
   }
 

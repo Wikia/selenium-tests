@@ -14,15 +14,21 @@ import org.json.JSONObject;
 
 public class CreateCategory {
 
+  private class CategoryNotCreated extends RuntimeException {
+    private CategoryNotCreated(String message, RemoteException cause) {
+      super(message, cause);
+    }
+  }
+
   private static final int PARENT_ID = 1;
-  public static final String CREATE_CATEGORY_URL_SUFFIX = "%s/forums";
+  private static final String CREATE_CATEGORY_URL_SUFFIX = "%s/forums";
   private final PostRemoteOperation remoteOperation;
 
   CreateCategory(User user) {
     remoteOperation = new PostRemoteOperation(user);
   }
 
-  public CategoryPill.Data execute(final CreateCategoryContext context) throws RuntimeException {
+  public CategoryPill.Data execute(final CreateCategoryContext context) {
     JSONObject jsonObject = new JSONObject(ImmutableMap.builder()
         .put("name", context.getCategoryName())
         .put("parentId", PARENT_ID)
@@ -34,7 +40,7 @@ public class CreateCategory {
       response = remoteOperation.execute(buildUrl(context), jsonObject);
     } catch(RemoteException e) {
       PageObjectLogging.logError("error: ", e);
-      throw new RuntimeException("Could not create a new category.", e);
+      throw new CategoryNotCreated("Could not create a new category.", e);
     }
 
     DocumentContext json = JsonPath.parse(response);
