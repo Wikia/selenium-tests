@@ -3,6 +3,8 @@ package com.wikia.webdriver.elements.mercury.pages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -32,15 +34,17 @@ public class ArticlePage extends WikiBasePageObject {
   private By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
 
   public CategoryPage openCategoryPageFromCategoriesDropdown() {
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
+
     wait.forElementClickable(categoriesDropdown);
     driver.findElement(categoriesDropdown).click();
 
-    wait.forXMilliseconds(1500);
     wait.forElementClickable(categoryLink);
     driver.findElement(categoryLink).click();
 
     new Loading(driver).handleAsyncPageReload();
 
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
     return new CategoryPage();
   }
 
@@ -53,6 +57,8 @@ public class ArticlePage extends WikiBasePageObject {
   public ArticlePage open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
+
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
 
     return this;
   }

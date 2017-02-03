@@ -2,6 +2,8 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -32,6 +34,8 @@ public class CategoryPage extends WikiBasePageObject {
 
   public CategoryPage open(String categoryName) {
     this.navigate.toPage(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
+
     PageObjectLogging.logInfo(String.format("%s category page opened", categoryName));
 
     return this;
@@ -39,16 +43,18 @@ public class CategoryPage extends WikiBasePageObject {
 
 
   public ArticlePage navigateToCategoryMemberPage() {
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
+
     WebElement member = driver.findElement(categoryMembers);
     String memberName = member.getText();
 
-    wait.forXMilliseconds(1500);
     wait.forElementClickable(member);
     member.click();
 
     new Loading(driver).handleAsyncPageReload();
-
     PageObjectLogging.logInfo(String.format("You were redirected to page: \"%s\".", memberName));
+
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
 
     return new ArticlePage();
   }
@@ -89,12 +95,16 @@ public class CategoryPage extends WikiBasePageObject {
     this.scrollAndClick(driver.findElement(nextButton));
     PageObjectLogging.logInfo("Next page button clicked.");
 
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
+
     return this;
   }
 
   public CategoryPage clickPreviousButton() {
     this.scrollAndClick(driver.findElement(previousButton));
     PageObjectLogging.logInfo("Previous page button clicked.");
+
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
 
     return this;
   }
