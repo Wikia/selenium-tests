@@ -16,17 +16,12 @@ public class AutoplayVuap {
 
   private static final String PAUSE_CLASS_NAME = "pause-overlay";
 
-  private static final String STOP_CLASS_NAME = "close-ad";
-
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
 
   private static final String SPEAKER_CLASS_NAME = "speaker";
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
-
-  // #TOP_LEADERBOARD .close-ad
-  private static final String STOP_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + STOP_CLASS_NAME;
 
   // #TOP_LEADERBOARD .current-time
   private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
@@ -81,13 +76,6 @@ public class AutoplayVuap {
     if (!playing) {
       clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
       playing = true;
-    }
-  }
-
-  public void stop() {
-    if (playing) {
-      clickElement(String.format(STOP_BUTTON_SELECTOR_FORMAT, slot));
-      playing = false;
     }
   }
 
