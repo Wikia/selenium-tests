@@ -349,7 +349,7 @@ public class VisualEditModePageObject extends EditMode {
 
   public void verifyCategoryPresent(String category) {
     boolean categoryVisible = false;
-    Assertion.assertTrue(categoryList.size()>0,"Category list is empty");
+//    Assertion.assertFalse(categoryList.isEmpty(),"Category list is empty");
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
         categoryVisible = true;
