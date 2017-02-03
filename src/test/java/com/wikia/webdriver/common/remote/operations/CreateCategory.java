@@ -15,10 +15,7 @@ import org.json.JSONObject;
 public class CreateCategory {
 
   private static final int PARENT_ID = 1;
-
   public static final String CREATE_CATEGORY_URL_SUFFIX = "%s/forums";
-  public static final String MAX_CATEGORIES_REACHED = "Parent forum already contains the maximum number of child forums.";
-
   private final PostRemoteOperation remoteOperation;
 
   CreateCategory(User user) {
@@ -36,9 +33,6 @@ public class CreateCategory {
     try {
       response = remoteOperation.execute(buildUrl(context), jsonObject);
     } catch(RemoteException e) {
-      if(e.toString().contains(MAX_CATEGORIES_REACHED)) {
-        // TODO: remove all categories except "General", "All"
-      }
       PageObjectLogging.logError("error: ", e);
     }
 

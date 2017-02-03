@@ -202,7 +202,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
