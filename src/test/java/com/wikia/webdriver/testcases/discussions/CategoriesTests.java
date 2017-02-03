@@ -113,15 +113,15 @@ public class CategoriesTests extends NewTestTemplate {
 
   // Anonymous user on mobile
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
-  @Execute(asUser = User.ANONYMOUS)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
     changeCategoryMobile();
   }
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-anonUserOnMobileCategories"})
-  @Execute(asUser = User.ANONYMOUS)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
     cannotEditCategoryMobile();
@@ -129,14 +129,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   // Anonymous user on desktop
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategoryOnPostsListPage() {
     canChangeCategoryDesktop();
   }
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-anonUserOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
@@ -145,15 +145,15 @@ public class CategoriesTests extends NewTestTemplate {
 
   // User on mobile
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
-  @Execute(asUser = User.USER)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanChangeCategoryOnPostsListPage() {
     changeCategoryMobile();
   }
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-userOnMobileCategories"})
-  @Execute(asUser = User.USER)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotEditCategoryOnPostsListPage() {
     cannotEditCategoryMobile();
@@ -161,14 +161,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   // User on desktop
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-userOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-userOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
@@ -177,8 +177,8 @@ public class CategoriesTests extends NewTestTemplate {
 
   // Discussions Administrator on mobile
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategoryOnPostsListPage() {
     CategoryPill.Data postCategory = setUp();
@@ -192,8 +192,8 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanAddCategoryOnPostsListPage() {
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -217,8 +217,8 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanEditCategoryOnPostsListPage() {
     CategoryPill.Data editableCategory = setUp();
@@ -242,8 +242,8 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategoriesOnPostsListPage() {
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MAX_NUMBER_OF_CATEGORIES - 1);
@@ -260,8 +260,8 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-mobile", "discussions-discussionsAdministratorOnMobileCategories"})
-  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
+  @Test(groups = {"discussions-categories-mobile"})
+  @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanRemoveCategoriesOnPostsListPage() {
     CategoryPill.Data data = setUp();
@@ -278,7 +278,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   // Discussions Administrator on desktop
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategoryOnPostsListPage() {
@@ -292,7 +292,7 @@ public class CategoriesTests extends NewTestTemplate {
       GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
   }
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanAddCategoryOnPostsListPage() {
@@ -314,7 +314,7 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanEditCategoryOnPostsListPage() {
@@ -338,7 +338,7 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategoriesOnPostsListPage() {
@@ -354,7 +354,7 @@ public class CategoriesTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = {"discussions-categories-desktop", "discussions-discussionsAdministratorOnDesktopCategories"})
+  @Test(groups = {"discussions-categories-desktop"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanRemoveCategoriesOnPostsListPage() {
