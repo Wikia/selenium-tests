@@ -355,7 +355,7 @@ public class VisualEditModePageObject extends EditMode {
         categoryVisible = true;
       }
     }
-    Assertion.assertFalse(categoryVisible, "category " + category + " not present. Available categories: " +
+    Assertion.assertTrue(categoryVisible, "category " + category + " not present. Available ones: " +
                                           categoryList.stream().map(d->d.getText()).collect(Collectors.joining(", ")) + ".");
   }
 
