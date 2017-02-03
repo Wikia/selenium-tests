@@ -114,15 +114,20 @@ public class CategoriesTests extends NewTestTemplate {
 
   /**
    *
+   * @param wikiName to create categories on,
    * @param size number of posts with unique categories to create
    * @return list of categories
    */
-  private ArrayList<CategoryPill.Data> setUp(int size) {
+  private ArrayList<CategoryPill.Data> setUp(final String wikiName, int size) {
     ArrayList<CategoryPill.Data> categories = new ArrayList<>();
     for (int i = 0; i < size; i++) {
-      categories.add(setUp());
+      categories.add(setUp(wikiName));
     }
     return categories;
+  }
+
+  private ArrayList<CategoryPill.Data> setUp(int size) {
+    return setUp(MercuryWikis.DISCUSSIONS_AUTO, size);
   }
 
   /**
@@ -149,14 +154,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonymousUserOnMobileCanChangeCategoryOnPostsListPage() {
+  public void anonymousUserOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonymousUserOnMobileCanNotEditCategoryOnPostsListPage() {
+  public void anonymousUserOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
 
@@ -165,14 +170,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void anonymousUserOnDesktopCanChangeCategoryOnPostsListPage() {
+  public void anonymousUserOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void anonymousUserOnDesktopCanNotEditCategoryOnPostsListPage() {
+  public void anonymousUserOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
 
@@ -181,14 +186,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanChangeCategoryOnPostsListPage() {
+  public void userOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanNotEditCategoryOnPostsListPage() {
+  public void userOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
 
@@ -204,7 +209,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void userOnDesktopCanNotEditCategoryOnPostsListPage() {
+  public void userOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
 
@@ -213,8 +218,8 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsAdministratorOnMobileCanNotEditGeneralCategoryOnPostsListPage() {
-    CategoryPill.Data postCategory = setUp();
+  public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
+    CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
     try {
@@ -228,7 +233,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsAdministratorOnMobileCanAddCategoryOnPostsListPage() {
+  public void discussionsAdministratorOnMobileCanAddCategory() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final String categoryName = createUniqueCategoryName();
     final CategoriesFieldset categoriesFieldset = addCategory(
@@ -249,13 +254,13 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsAdministratorOnMobileCanEditCategoryOnPostsListPage() {
-    CategoryPill.Data editableCategory = setUp();
+  public void discussionsAdministratorOnMobileCanEditCategory() {
+    CategoryPill.Data editableCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open(siteId);
     final String editedName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click()
         .getCategoriesFieldset().clickEdit()
-        .rename(editableCategory.getName(), editedName)
+        .renameMobile(editableCategory.getName(), editedName)
         .clickApproveButton();
     page.waitForPageReload();
     CategoryPill.Data editedCategory = categoriesFieldset.findCategoryWith(editedName).toData();
@@ -272,8 +277,10 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategoriesOnPostsListPage() {
-    ArrayList<CategoryPill.Data> categoriesAdded = setUp(MAX_NUMBER_OF_CATEGORIES - 1);
+  public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategories() {
+    deleteCategoriesMobile();
+    ArrayList<CategoryPill.Data> categoriesAdded = setUp(MercuryWikis.DISCUSSIONS_MOBILE,
+      MAX_NUMBER_OF_CATEGORIES - 1);
     final PostsListPage page = new PostsListPage().open(siteId);
     final String newCategoryName = createUniqueCategoryName();
     CategoriesFieldset categoriesFieldset = addCategory(
@@ -290,8 +297,8 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsAdministratorOnMobileCanRemoveCategoriesOnPostsListPage() {
-    CategoryPill.Data data = setUp();
+  public void discussionsAdministratorOnMobileCanRemoveCategory() {
+    CategoryPill.Data data = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final String temporaryCategoryName = createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page
@@ -306,7 +313,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategoryOnPostsListPage() {
+  public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategories() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getCategories();
     categoriesFieldset.clickEdit();
@@ -319,7 +326,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void discussionsAdministratorOnDesktopCanAddCategoryOnPostsListPage() {
+  public void discussionsAdministratorOnDesktopCanAddCategory() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final String categoryName = createUniqueCategoryName();
     final CategoriesFieldset categoriesFieldset = addCategory(page.getCategories(), categoryName);
@@ -336,13 +343,14 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void discussionsAdministratorOnDesktopCanEditCategoryOnPostsListPage() {
+  public void discussionsAdministratorOnDesktopCanEditCategory() {
     CategoryPill.Data editableCategory = setUp();
     final PostsListPage page = new PostsListPage().open(siteId);
     final String newCategoryName = createUniqueCategoryName();
-    CategoriesFieldset categoriesFieldset = page.getCategories().clickEdit()
-        .rename(editableCategory.getName(), newCategoryName)
-        .clickApproveButton();
+    CategoriesFieldset categoriesFieldset = page
+      .getCategories()
+      .renameDesktop(editableCategory.getName(), newCategoryName)
+      .clickApproveButton();
     page.waitForPageReload();
     CategoryPill.Data editedCategory = categoriesFieldset.findCategoryWith(newCategoryName).toData();
     try {
@@ -358,7 +366,8 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategoriesOnPostsListPage() {
+  public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategories() {
+    deleteCategoriesDesktop();
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MAX_NUMBER_OF_CATEGORIES - 1);
     final PostsListPage page = new PostsListPage().open(siteId);
     final String newCategoryName = createUniqueCategoryName();
@@ -374,7 +383,7 @@ public class CategoriesTests extends NewTestTemplate {
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
-  public void discussionsAdministratorOnDesktopCanRemoveCategoriesOnPostsListPage() {
+  public void discussionsAdministratorOnDesktopCanRemoveCategory() {
     CategoryPill.Data data = setUp();
     final String temporaryCategoryName = createUniqueCategoryName();
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -392,7 +401,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void changeCategoryMobile() {
-    CategoryPill.Data postCategory = setUp();
+    CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open(siteId);
     openPageAndSelectCategoryOnMobile(page, postCategory.getName());
     assertCategoryVisibleAndCleanUp(page, postCategory);
@@ -420,7 +429,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void cannotEditCategoryMobile() {
-    CategoryPill.Data postCategory = setUp();
+    CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open(siteId);
     try {
       assertFalse(canEditCategoriesOnMobile(page), CATEGORIES_NOT_EDITABLE_MESSAGE);

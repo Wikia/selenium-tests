@@ -207,7 +207,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   public void clickRename(String toolName) {
     wait.forElementVisible(By.cssSelector(String.format(toolsListToolCss, toolName)));
     jsActions.click(String.format(toolsListToolCss, toolName) + toolsListToolEditCss);
-    PageObjectLogging.log("clickRename", "rename button for " + toolName + " clicked", true);
+    PageObjectLogging.log("clickRename", "renameMobile button for " + toolName + " clicked", true);
   }
 
   /**

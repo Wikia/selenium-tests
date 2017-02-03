@@ -71,12 +71,27 @@ public class CategoriesFieldset extends WikiBasePageObject {
       )
       .collect(Collectors.toList());
 
-      return foundCategories.isEmpty() ? null : foundCategories.get(foundCategories.size() - 1);
+      // because of differences in mobile and desktop views
+      if (foundCategories.isEmpty()) {
+        return null;
+      } else if (foundCategories.size() == 1) {
+        return foundCategories.get(0) ;
+      } else {
+        return foundCategories
+          .stream()
+          .filter(WebElement::isDisplayed)
+          .collect(Collectors.toList())
+          .get(0);
+      }
   }
 
   private int getCategoryPosition(List<WebElement> categoryList, final String categoryName) {
     WebElement category = getCategory(categoryList, categoryName);
     return categoryList.indexOf(category);
+  }
+
+  private int getCategoryPosition(final String categoryName) {
+    return getCategoryPosition(this.categories, categoryName);
   }
 
   private WebElement getCategoryWith(String categoryName) {
@@ -92,6 +107,12 @@ public class CategoriesFieldset extends WikiBasePageObject {
    */
   private WebElement getEditableCategoryWith(String categoryName) {
     return editableCategories.get(getCategoryPosition(categories, categoryName));
+  }
+
+  public WebElement getEditableCategoriesDesktop(String categoryName) {
+    int position = getCategoryPosition(categoryName);
+    this.clickEdit();
+    return editableCategories.get(position);
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
@@ -142,10 +163,6 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return webElement.findElement(By.tagName("input")).isEnabled();
   }
 
-  public boolean canAddCategory() {
-    return !this.addCategoryLink.getAttribute("class").contains("active-element-disabled-theme-color");
-  }
-
   public CategoriesFieldset addCategory(final String categoryName) {
     this.addCategoryLink.click();
     WebElement lastCategory = Iterables.getLast(this.editableCategories);
@@ -167,15 +184,22 @@ public class CategoriesFieldset extends WikiBasePageObject {
         .anyMatch(name -> name.equals(categoryName));
   }
 
-  public CategoriesFieldset rename(final String oldCategoryName, final String newCategoryName) {
+  public CategoriesFieldset renameMobile(final String oldCategoryName, final String newCategoryName) {
     WebElement category = getEditableCategoryWith(oldCategoryName);
+    return rename(category, newCategoryName);
+  }
+
+  public CategoriesFieldset renameDesktop(final String oldCategoryName, final String newCategoryName) {
+    WebElement category = getEditableCategoriesDesktop(oldCategoryName);
+    return rename(category, newCategoryName);
+  }
+
+  private CategoriesFieldset rename(WebElement category, final String newCategoryName) {
     WebElement input = category.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR));
     input.clear();
     input.sendKeys(newCategoryName);
     return this;
   }
-
-
 
   public String getInfoMessageText() {
     return infoMessage.getText();
