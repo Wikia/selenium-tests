@@ -112,8 +112,6 @@ public class Helios {
         response = httpClient.execute(httpPost);
       }
 
-      System.out.println(response);
-
       HttpEntity entity = response.getEntity();
       JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
 

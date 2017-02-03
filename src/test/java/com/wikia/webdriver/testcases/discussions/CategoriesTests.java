@@ -224,7 +224,8 @@ public class CategoriesTests extends NewTestTemplate {
     final CategoriesFieldset categoriesFieldset = page.getFiltersPopOver().click().getCategoriesFieldset();
     try {
       assertTrue(categoriesFieldset.canEdit(), SHOULD_EDIT_CATEGORIES_MESSAGE);
-      assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(), GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
+      assertFalse(categoriesFieldset.clickEdit().canEditGeneralCategory(),
+        GENERAL_CATEGORY_SHOULD_BE_NOT_EDITABLE_MESSAGE);
     } finally {
       cleanUp(postCategory);
     }
@@ -333,8 +334,10 @@ public class CategoriesTests extends NewTestTemplate {
     page.waitForPageReload();
     final CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
     try {
-      assertTrue(categoriesFieldset.hasCategory(categoryName), String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
-      assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName), String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
+      assertTrue(categoriesFieldset.hasCategory(categoryName),
+        String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
+      assertTrue(isCategoryIn(page.getPostsCreatorDesktop(), categoryName),
+        String.format(CATEGORY_SHOULD_BE_VISIBLE_IN_CREATOR_MESSAGE, categoryName));
     } finally {
       removeCategoryRemotely(siteId, data);
     }

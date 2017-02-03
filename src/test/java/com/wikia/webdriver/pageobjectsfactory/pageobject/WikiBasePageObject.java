@@ -477,7 +477,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
-    System.out.println("Loging in as: " + userName + " " + password);
+    System.out.println("Logging in as: " + userName + " " + password);
     String token = Helios.getAccessToken(userName, password);
 
     driver.manage().addCookie(new Cookie("access_token", token,
