@@ -11,24 +11,15 @@ import org.openqa.selenium.WebDriver;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor(staticName = "using")
 public class DiscussionsCategoryOperations {
 
   private final User user;
 
-  private final WebDriver driver;
-
-  public CategoryPill.Data createCategory(String categoryName) {
-    return createCategory(categoryName, extractSiteId());
-  }
-
   public CategoryPill.Data createCategory(String categoryName, String siteId) {
     return createCategory(CreateCategoryContext.defaultContextUsing(siteId, categoryName));
-  }
-
-  private String extractSiteId() {
-    return Discussions.extractSiteIdFromMediaWikiUsing(driver);
   }
 
   public CategoryPill.Data createCategory(CreateCategoryContext context) {
@@ -43,19 +34,16 @@ public class DiscussionsCategoryOperations {
     new DeleteCategory(user).execute(context);
   }
 
-  public ArrayList<CategoryPill.Data> getCategoriesFromSite(final String siteId, User user) {
+  public List<CategoryPill.Data> getCategoriesFromSite(final String siteId, User user) {
     return new Categories(user).execute(CreateCategoryContext.defaultContextUsing(siteId, ""));
   }
 
   public void deleteAllCategories(final String siteId, User user) {
-    ArrayList<CategoryPill.Data> categories = getCategoriesFromSite(siteId, user);
+    List<CategoryPill.Data> categories = getCategoriesFromSite(siteId, user);
     for (CategoryPill.Data category : categories) {
       PageObjectLogging.logInfo("Deleting category: " + category.getName());
       deleteCategory(siteId, category);
     }
   }
 
-  public void renameCategory(CategoryContext context) {
-    new RenameCategory(user).execute(context);
-  }
 }

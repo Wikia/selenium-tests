@@ -20,14 +20,12 @@ public class CategoryPills extends BasePageObject {
    */
   @CheckForNull
   public CategoryPill findCategoryOn(int position) {
-    CategoryPill result = null;
-
     final List<WebElement> categoryPills = findCategoryPills();
     if (position < categoryPills.size()) {
-      result = new CategoryPill(categoryPills.get(position));
+      return new CategoryPill(categoryPills.get(position));
+    } else {
+      return null;
     }
-
-    return result;
   }
 
   private List<WebElement> findCategoryPills() {

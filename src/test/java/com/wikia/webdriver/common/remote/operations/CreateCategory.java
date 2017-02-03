@@ -22,18 +22,19 @@ public class CreateCategory {
     remoteOperation = new PostRemoteOperation(user);
   }
 
-  public CategoryPill.Data execute(final CreateCategoryContext context) {
+  public CategoryPill.Data execute(final CreateCategoryContext context) throws RuntimeException {
     JSONObject jsonObject = new JSONObject(ImmutableMap.builder()
         .put("name", context.getCategoryName())
         .put("parentId", PARENT_ID)
         .put("siteId", context.getSiteId())
         .build());
 
-    String response = null;
+    String response;
     try {
       response = remoteOperation.execute(buildUrl(context), jsonObject);
     } catch(RemoteException e) {
       PageObjectLogging.logError("error: ", e);
+      throw new RuntimeException("Could not create a new category.", e);
     }
 
     DocumentContext json = JsonPath.parse(response);

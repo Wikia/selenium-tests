@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common.categ
 import com.google.common.collect.Iterables;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -62,7 +63,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
    * @param categoryName to match
    * @return first WebElement category that matches the name
    */
-  private WebElement getCategory(List<WebElement> categoryList, final String categoryName) {
+  private WebElement getCategory(List<WebElement> categoryList, final String categoryName)
+    throws NotFoundException {
     List<WebElement> foundCategories = categoryList.stream()
       .filter(element -> element
         .getAttribute("innerText")
@@ -73,7 +75,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
       // because of differences in mobile and desktop views
       if (foundCategories.isEmpty()) {
-        return null;
+        throw new NotFoundException("Could not find any categories on the list");
       } else if (foundCategories.size() == 1) {
         return foundCategories.get(0) ;
       } else {

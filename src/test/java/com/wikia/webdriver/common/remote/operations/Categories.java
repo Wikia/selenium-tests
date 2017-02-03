@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Categories {
 
@@ -20,20 +21,19 @@ public class Categories {
     remoteOperation = new GetRemoteOperation(user);
   }
 
-  public ArrayList<CategoryPill.Data> execute(final CreateCategoryContext context) {
-    String response = null;
+  public List<CategoryPill.Data> execute(final CreateCategoryContext context) {
     try {
-      response = remoteOperation.execute(buildUrl(context));
+      return getCategories(remoteOperation.execute(buildUrl(context)), context);
     } catch(RemoteException e) {
       PageObjectLogging.logError("error: ", e);
+      throw new RuntimeException("Could not fetch categories.", e);
     }
-    return getCategories(response, context);
   }
 
-  private ArrayList<CategoryPill.Data> getCategories(String response, CreateCategoryContext ctxt) {
+  private List<CategoryPill.Data> getCategories(String response, CreateCategoryContext ctxt) {
     Object json = Configuration.defaultConfiguration().jsonProvider().parse(response);
     int len = JsonPath.read(json, "$._embedded.doc:forum.length()");
-    ArrayList<CategoryPill.Data> categories = new ArrayList<>();
+    List<CategoryPill.Data> categories = new ArrayList<>();
     for (int i = 0; i < len; i++) {
       String id = JsonPath.read(json, "$._embedded.doc:forum[" + i + "].id");
       String name = JsonPath.read(json, "$._embedded.doc:forum[" + i + "].name");
