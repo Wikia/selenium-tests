@@ -90,7 +90,7 @@ public class CategoryPageTest extends NewTestTemplate {
     Assert.assertEquals(articleContent, article.getArticleContent());
   }
 
-  @Test(groups = "mercury_category_testPageination")
+  @Test(groups = "mercury_category_testPagination")
   public void mercury_category_testPagination() {
     // This test assumes that there are more than 200 articles created and with category like one below.
     // Staging env should have fixture of this articles to create them everytime it is rebuilded
