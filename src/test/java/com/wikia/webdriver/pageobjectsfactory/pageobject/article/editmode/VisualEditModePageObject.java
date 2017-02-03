@@ -347,9 +347,15 @@ public class VisualEditModePageObject extends EditMode {
     PageObjectLogging.log("submitCategory", "category submitted", true);
   }
 
-  public void verifyCategoryPresent(String category) {
+  public void verifyCategoryPresent(String category){
     boolean categoryVisible = false;
-//    Assertion.assertFalse(categoryList.isEmpty(),"Category list is empty");
+//    Assertion.assertFalse(categoryList.isEmpty(),"Category list is empty")
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
         categoryVisible = true;
