@@ -71,7 +71,7 @@ public class CategoryPageTest extends NewTestTemplate {
 
     CategoryPage categoryPage = new ArticlePage()
         .open()
-        .openCategoryPageFromLink();
+        .openCategoryPageFromCategoriesDropdown();
 
     Assert.assertTrue(categoryPage.hasCategoryMembers());
   }

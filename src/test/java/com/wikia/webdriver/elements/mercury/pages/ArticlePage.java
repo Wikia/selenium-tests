@@ -31,7 +31,7 @@ public class ArticlePage extends WikiBasePageObject {
   private By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");
   private By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
 
-  public CategoryPage openCategoryPageFromLink() {
+  public CategoryPage openCategoryPageFromCategoriesDropdown() {
     wait.forElementClickable(categoriesDropdown);
     driver.findElement(categoriesDropdown).click();
 
