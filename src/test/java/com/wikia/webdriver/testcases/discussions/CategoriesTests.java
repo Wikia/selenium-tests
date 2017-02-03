@@ -90,7 +90,7 @@ public class CategoriesTests extends NewTestTemplate {
   private void deleteCategories(String wikiName) {
     String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
     siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
-    DiscussionsCategoryOperations.using(User.STAFF, driver).deleteAllCategories(siteId, User.STAFF);
+    DiscussionsCategoryOperations.using(User.STAFF).deleteAllCategories(siteId, User.STAFF);
   }
 
   /**
@@ -135,7 +135,7 @@ public class CategoriesTests extends NewTestTemplate {
    * @param category category data to delete remotely
    */
   private void cleanUp(CategoryPill.Data category) {
-    DiscussionsCategoryOperations.using(User.STAFF, driver).deleteCategory(this.siteId, category);
+    DiscussionsCategoryOperations.using(User.STAFF).deleteCategory(this.siteId, category);
   }
 
   /**
@@ -496,12 +496,12 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void removeCategoryRemotely(String siteId, CategoryPill.Data data) {
-    DiscussionsCategoryOperations.using(User.STAFF, driver).deleteCategory(siteId, data);
+    DiscussionsCategoryOperations.using(User.STAFF).deleteCategory(siteId, data);
   }
 
   private CategoryPill.Data addCategoryRemotely(String siteId, String categoryName) {
     return DiscussionsCategoryOperations
-      .using(User.STAFF, driver)
+      .using(User.STAFF)
       .createCategory(categoryName, siteId);
   }
 
