@@ -32,6 +32,7 @@ public class CategoryPage extends WikiBasePageObject {
 
   public CategoryPage open(String categoryName) {
     this.navigate.toPage(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
+    PageObjectLogging.logInfo(String.format("%s category page opened", categoryName));
 
     return this;
   }
@@ -58,37 +59,42 @@ public class CategoryPage extends WikiBasePageObject {
 
   public boolean categoryMembersContainerIsVisible() {
     wait.forElementVisible(categoryMembersContainer);
-    PageObjectLogging.logInfo("Category sections container is visible.");
+    PageObjectLogging.logInfo("Category members container is visible.");
 
     return true;
   }
 
   public boolean hasCategoryMembers() {
     wait.forElementVisible(categoryMembers);
+    PageObjectLogging.logInfo("Category has members.");
 
     return driver.findElements(categoryMembers).size() > 0;
   }
 
   public boolean nextButtonIsVisible() {
     wait.forElementVisible(nextButton);
+    PageObjectLogging.logInfo("Next page button is visible.");
 
     return driver.findElement(nextButton).isDisplayed();
   }
 
   public boolean previousButtonIsVisible() {
     wait.forElementVisible(previousButton);
+    PageObjectLogging.logInfo("Previous page button is visible.");
 
     return driver.findElement(previousButton).isDisplayed();
   }
 
   public CategoryPage clickNextButton() {
     this.scrollAndClick(driver.findElement(nextButton));
+    PageObjectLogging.logInfo("Next page button clicked.");
 
     return this;
   }
 
   public CategoryPage clickPreviousButton() {
     this.scrollAndClick(driver.findElement(previousButton));
+    PageObjectLogging.logInfo("Previous page button clicked.");
 
     return this;
   }
