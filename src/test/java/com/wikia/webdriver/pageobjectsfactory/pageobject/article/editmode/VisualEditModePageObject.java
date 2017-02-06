@@ -90,8 +90,6 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement autoApproveCheckbox;
   @FindBy(css = ".module_categories")
   private WebElement categoriesModuleBar;
-
-
   @FindBy(css = ".rail-auto-height")
   private WebElement modalElement;
 
@@ -373,8 +371,8 @@ public class VisualEditModePageObject extends EditMode {
         break;
       }
     }
-    Assertion.assertTrue(categoryVisible, "category " + category + " not present. Available ones: " +
-                                          categoryList.stream().map(d->d.getText()).collect(Collectors.joining(", ")) + ".");
+    String listedCategories = categoryList.stream().map(d->d.getText()).collect(Collectors.joining(", "));
+    Assertion.assertTrue(categoryVisible, "Category " + category + " not present. Listed ones: " + listedCategories + ".");
   }
 
   public void verifyCategoryNotPresent(String category) {
