@@ -169,14 +169,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
@@ -201,14 +201,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
@@ -313,7 +313,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategories() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getCategories();
@@ -326,7 +326,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanAddCategory() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final String categoryName = createUniqueCategoryName();
@@ -345,7 +345,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanEditCategory() {
     CategoryPill.Data editableCategory = setUp();
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -368,7 +368,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategories() {
     deleteCategoriesDesktop();
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MAX_NUMBER_OF_CATEGORIES - 1);
@@ -385,7 +385,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanRemoveCategory() {
     CategoryPill.Data data = setUp();
     final String temporaryCategoryName = createUniqueCategoryName();
