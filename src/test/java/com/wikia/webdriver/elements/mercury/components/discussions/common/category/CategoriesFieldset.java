@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CategoriesFieldset extends WikiBasePageObject {
@@ -53,9 +54,14 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   @CheckForNull
-  public CategoryPill findCategoryWith(final String categoryName) {
-    WebElement category = getCategoryWith(categoryName);
-    return category == null ? null : new CategoryPill(category);
+  public Optional<CategoryPill> findCategoryWith(final String categoryName) {
+    return getCategoryWith(categoryName).map(CategoryPill::new);
+  }
+
+  public CategoryPill.Data findCategoryOrElseThrow(final String categoryName) {
+    return findCategoryWith(categoryName)
+      .orElseThrow(() -> new RuntimeException("Couldn't find category!"))
+      .toData();
   }
 
   /**
@@ -63,7 +69,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
    * @param categoryName to match
    * @return first WebElement category that matches the name
    */
-  private WebElement getCategory(List<WebElement> categoryList, final String categoryName)
+  private Optional<WebElement> getCategory(List<WebElement> categoryList, final String categoryName)
     throws NotFoundException {
     List<WebElement> foundCategories = categoryList.stream()
       .filter(element -> element
@@ -75,20 +81,20 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
       // because of differences in mobile and desktop views
       if (foundCategories.isEmpty()) {
-        throw new NotFoundException("Could not find any categories on the list");
+        return Optional.empty();
       } else if (foundCategories.size() == 1) {
-        return foundCategories.get(0) ;
+        return Optional.of(foundCategories.get(0));
       } else {
         return foundCategories
           .stream()
           .filter(WebElement::isDisplayed)
-          .collect(Collectors.toList())
-          .get(0);
+          .findFirst();
       }
   }
 
   private int getCategoryPosition(List<WebElement> categoryList, final String categoryName) {
-    WebElement category = getCategory(categoryList, categoryName);
+    WebElement category = getCategory(categoryList, categoryName)
+      .orElseThrow(()-> new RuntimeException("Could not found category!"));
     return categoryList.indexOf(category);
   }
 
@@ -96,7 +102,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return getCategoryPosition(this.categories, categoryName);
   }
 
-  private WebElement getCategoryWith(String categoryName) {
+  private Optional<WebElement> getCategoryWith(String categoryName) {
     return getCategory(this.categories, categoryName);
   }
 
@@ -118,7 +124,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
-    getCategoryWith(categoryName).click();
+    getCategoryWith(categoryName).orElseThrow(() -> new RuntimeException("nt found")).click();
     return this;
   }
 
