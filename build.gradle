@@ -408,7 +408,7 @@ dependencies {
     testCompile 'org.json:json:20080701'
     testCompile 'io.appium:java-client:3.1.0'
     testCompile 'joda-time:joda-time:2.7'
-    testCompile 'com.jayway.jsonpath:json-path:1.2.0'
+    testCompile 'com.jayway.jsonpath:json-path:2.2.0'
     testCompile 'net.lightbody.bmp:browsermob-core:2.1.2'
     testCompile 'net.sourceforge.htmlunit:htmlunit:2.18'
     testCompile 'org.slf4j:slf4j-log4j12:1.6.4'

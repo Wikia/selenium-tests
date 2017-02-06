@@ -16,8 +16,12 @@ public class MercuryWikis {
   // Other wikis
   public static final String MLP = "mlp";
   public static final String DE_WIKI = "de.demercurytests";
+  // for discussions desktop view tests
   public static final String DISCUSSIONS_AUTO = "dauto";
+  // for discussions mobile view tests
+  public static final String DISCUSSIONS_MOBILE = "dauto-mobile";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";
+  // for testing zero state messages - please don't add any posts!
   public static final String DISCUSSIONS_EMPTY = "discussions-empty";
 
   private MercuryWikis() {
