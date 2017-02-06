@@ -18,6 +18,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
   private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
   private static final String DELETE_COMMAND = "action-delete";
 
+  private static final String CATEGORY_NOT_FOUND = "Could not find category!";
+
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
 
@@ -58,9 +60,10 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return getCategoryWith(categoryName).map(CategoryPill::new);
   }
 
-  public CategoryPill.Data findCategoryOrElseThrow(final String categoryName) {
+  public CategoryPill.Data findCategoryOrElseThrow(final String categoryName)
+    throws NotFoundException {
     return findCategoryWith(categoryName)
-      .orElseThrow(() -> new RuntimeException("Couldn't find category!"))
+      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
       .toData();
   }
 
@@ -92,9 +95,10 @@ public class CategoriesFieldset extends WikiBasePageObject {
       }
   }
 
-  private int getCategoryPosition(List<WebElement> categoryList, final String categoryName) {
+  private int getCategoryPosition(List<WebElement> categoryList, final String categoryName)
+    throws NotFoundException {
     WebElement category = getCategory(categoryList, categoryName)
-      .orElseThrow(()-> new RuntimeException("Could not found category!"));
+      .orElseThrow(()-> new NotFoundException(CATEGORY_NOT_FOUND));
     return categoryList.indexOf(category);
   }
 
@@ -124,7 +128,9 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
-    getCategoryWith(categoryName).orElseThrow(() -> new RuntimeException("nt found")).click();
+    getCategoryWith(categoryName)
+      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+      .click();
     return this;
   }
 
