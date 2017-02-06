@@ -31,6 +31,20 @@ public class DiscussionsOperations {
     return createPost(CreatePostContext.defaultContext(siteId));
   }
 
+  /**
+   * Callable only when on Special:Version
+   */
+  public PostEntity.Data createPostWithCategory(String categoryId) {
+    return createPostWithCategory(categoryId, extractSiteId());
+  }
+
+  /**
+   * Callable from anywhere
+   */
+  public PostEntity.Data createPostWithCategory(String categoryId, String siteId) {
+    return createPost(CreatePostContext.categoryContext(siteId, categoryId));
+  }
+
   private String extractSiteId() {
     return Discussions.extractSiteIdFromMediaWikiUsing(driver);
   }
