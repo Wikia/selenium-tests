@@ -13,6 +13,7 @@ chromedriver.log
 bin/
 build/
 logs/
+classes/
 target/
 test-output/
 Thumbs.db
