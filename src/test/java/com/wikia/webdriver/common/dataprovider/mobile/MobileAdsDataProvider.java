@@ -108,7 +108,6 @@ public class MobileAdsDataProvider {
             "MOBILE_TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"15_tier",
                 "\"43_tier",
                 "_tier2000"
             )

@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAd
 import org.testng.annotations.Test;
 
 public class TestAdsSlotsMercury extends MobileTestTemplate {
-  private static final String CREATIVE_IMAGE_URL = "googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg";
+  private static final String CREATIVE_IMAGE_URL = "googlesyndication.com/simgad/8216620376696319112";
   private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
   private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
   private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
