@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Array;
 import java.net.URL;
 
 public abstract class BasePostsCreator extends BasePageObject implements PostsCreator {
@@ -93,7 +94,13 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public PostsCreator addDescriptionWith(final String text) {
-    getDescriptionTextarea().sendKeys(text);
+    WebElement description = getDescriptionTextarea();
+    //String[] desc = text.split("\n");
+    //for(String line : desc) {
+    //  System.out.println("Sending: " + line);
+    //  description.sendKeys(line + "\n");
+    //}
+    description.sendKeys(text);
     return this;
   }
 

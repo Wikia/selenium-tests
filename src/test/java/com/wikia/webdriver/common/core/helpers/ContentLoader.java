@@ -25,24 +25,23 @@ public class ContentLoader {
     StringBuilder textContent = new StringBuilder();
     String separator = System.getProperty("line.separator");
     Scanner scanner = null;
-
+    String path = String.format(TEXT_FILES_PATH_FORMAT, filename);
     try {
-      scanner =
-          new Scanner(
-              new File(ClassLoader
-                  .getSystemResource(String.format(TEXT_FILES_PATH_FORMAT, filename)).getPath()),
-          "UTF-8");
+      scanner = new Scanner(new File(ClassLoader.getSystemResource(path).getPath()), "UTF-8");
     } catch (FileNotFoundException e) {
       PageObjectLogging.logError("File was not loaded", e);
     }
-    try {
-      while (scanner.hasNextLine()) {
-        textContent.append(scanner.nextLine() + separator);
+    if (scanner != null) {
+      try {
+        while (scanner.hasNextLine()) {
+          textContent.append(scanner.nextLine()).append(separator);
+        }
+      } finally {
+        scanner.close();
       }
-    } finally {
-      scanner.close();
+    } else {
+      throw new NullPointerException("Could not initialize scanner!");
     }
-
     return textContent.toString();
   }
 

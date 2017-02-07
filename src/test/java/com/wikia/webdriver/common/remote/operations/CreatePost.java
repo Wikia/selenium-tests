@@ -29,6 +29,7 @@ public class CreatePost {
         .build());
 
     final String response = remoteOperation.execute(buildUrl(context), jsonObject);
+
     return new JsonToPostEntityMapper(JsonPath.parse(response)).toData();
   }
 

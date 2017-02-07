@@ -2,24 +2,25 @@ package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
@@ -30,14 +31,18 @@ import java.net.URL;
 public class CreatingPostTests extends NewTestTemplate {
 
   private static final String DESKTOP_RESOLUTION = "1920x1080";
-
   private static final String WIKIA_URL = "http://www.wikia.com/";
-
   private static final String POST_SHOULD_BE_FOLLOWED_MESSAGE = "Created post should be followed.";
-
   private static final String OPEN_GRAPH_SHOULD_LOAD_MESSAGE = "Open graph should start loading.";
-
   private static final String OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE = "Open graph should appear at the end of post content.";
+  private static final String FIRST_LINE = "# Big List of Naughty Strings\n";
+
+  private String siteId;
+
+  private void setUp(String wikiName) {
+    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
+    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+  }
 
   /*
    * ANONS ON MOBILE SECTION
@@ -84,6 +89,44 @@ public class CreatingPostTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorMobile();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
+  }
+
+  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
+    setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    PostEntity.Data post = createNaughtyStringsPostRemotely(User.USER);
+    String id = post.getId();
+    String description = new PostsListPage().open().getPost().findPostById(id).findDescription();
+    try {
+      Assertion.assertStringContains(description, FIRST_LINE);
+    } finally {
+      cleanUp(post);
+    }
+  }
+
+  private void cleanUp(PostEntity.Data post) {
+    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, siteId);
+  }
+
+  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
+    setUp(MercuryWikis.DISCUSSIONS_MOBILE);
+    PostEntity.Data post = createNaughtyStringsPostRemotely(User.USER);
+    String id = post.getId();
+    String description = new PostDetailsPage()
+      .open(id)
+      .getPost()
+      .findPostById(id)
+      .findDescription();
+    try {
+      Assertion.assertStringContains(description, FIRST_LINE);
+    } finally {
+      cleanUp(post);
+    }
   }
 
   @Test(enabled = false, groups = "discussions-loggedInUsersMobilePosting")
@@ -137,6 +180,21 @@ public class CreatingPostTests extends NewTestTemplate {
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
     PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
+    PostsListPage page = new PostsListPage().open();
+    createPostWithNaughtyStringsDesktop(page);
+  }
+
+  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
+
   }
 
   @Test(groups = "discussions-loggedInUsersDesktopPosting")
@@ -290,5 +348,26 @@ public class CreatingPostTests extends NewTestTemplate {
     final String url = driver.getCurrentUrl();
     Assertion.assertTrue(PostDetailsPage.is(url));
     Assertion.assertTrue(url.endsWith(postDetailsUrl));
+  }
+
+  private PostsCreator createPostWithNaughtyStrings(PostsListPage page, PostsCreator postCreator) {
+    String description = FIRST_LINE + ContentLoader.loadWikiTextContent("blns.txt");
+    fillPostCategoryWith(postCreator, description);
+    postCreator.addTitleWith("Naughty strings");
+    return postCreator.clickSubmitButton();
+  }
+
+  private PostsCreator createPostWithNaughtyStringsMobile(PostsListPage page) {
+    return createPostWithNaughtyStrings(page, page.getPostsCreatorMobile());
+  }
+
+  private PostsCreator createPostWithNaughtyStringsDesktop(PostsListPage page) {
+    return createPostWithNaughtyStrings(page, page.getPostsCreatorDesktop());
+  }
+
+  private PostEntity.Data createNaughtyStringsPostRemotely(User user) {
+    String description = FIRST_LINE + ContentLoader.loadWikiTextContent("blns.txt");
+    String title = "Naughty strings";
+    return DiscussionsOperations.using(user, driver).createCustomPost(siteId, title, description);
   }
 }
