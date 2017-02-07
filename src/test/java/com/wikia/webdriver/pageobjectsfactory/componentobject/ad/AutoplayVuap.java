@@ -48,7 +48,7 @@ public class AutoplayVuap {
     this.slot = slot;
     this.videoIframeSelector = videoIframeSelector;
     this.playing = true;
-    this.muted = false;
+    this.muted = true;
   }
 
   public void mute() {
