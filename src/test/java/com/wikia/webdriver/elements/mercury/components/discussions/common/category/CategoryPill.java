@@ -10,14 +10,10 @@ public class CategoryPill {
   private final WebElement webElement;
 
   @Getter
-  private final int position;
-
-  @Getter
   private final String name;
 
-  public CategoryPill(WebElement webElement, int position) {
+  public CategoryPill(WebElement webElement) {
     this.webElement = webElement;
-    this.position = position;
     this.name = webElement.getText();
   }
 
@@ -30,7 +26,7 @@ public class CategoryPill {
   }
 
   public Data toData() {
-    return new Data(getId(), position, name);
+    return new Data(getId(), name);
   }
 
   @lombok.Data
@@ -38,15 +34,12 @@ public class CategoryPill {
 
     private String id;
 
-    private int position;
-
     private String name;
 
     private int displayOrder = 0;
 
-    public Data(String id, int position, String name) {
+    public Data(String id, String name) {
       this.id = id;
-      this.position = position;
       this.name = name;
     }
   }
