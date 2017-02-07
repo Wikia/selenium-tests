@@ -145,12 +145,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void selectText(int from, int to) {
     String
-        showSelectiontJS =
+        selectTextJS =
         "ve.init.target.getSurface().getModel().change(" +
         "null, new ve.dm.LinearSelection(" +
         "ve.init.target.getSurface().getModel().getDocument(),new ve.Range(" +
         from + "," + to + " )));";
-    driver.executeScript(showSelectiontJS);
+    driver.executeScript(selectTextJS);
   }
 
   public void selectText(String text) {
@@ -176,6 +176,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void removeText(String text) {
+    editArea.click();
     selectText(text);
     editArea.sendKeys(Keys.DELETE);
   }
