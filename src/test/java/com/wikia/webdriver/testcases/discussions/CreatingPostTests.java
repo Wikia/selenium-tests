@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -37,6 +36,9 @@ public class CreatingPostTests extends NewTestTemplate {
   private static final String OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE = "Open graph should appear at the end of post content.";
   private static final String FIRST_LINE = "# Big List of Naughty Strings\n";
 
+  private static final String DESKTOP = "discussions-creating-posts-desktop";
+  private static final String MOBILE = "discussions-creating-posts-mobile";
+
   private String siteId;
 
   private void setUp(String wikiName) {
@@ -48,8 +50,8 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewPost")
-  @Execute(asUser = User.ANONYMOUS)
+  @Test(groups = {MOBILE})
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewPost() {
     userOnMobileMustBeLoggedInToUsePostCreator();
@@ -59,16 +61,16 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewPost")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopSeesStickyEditorAfterScrollDown")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
@@ -82,8 +84,8 @@ public class CreatingPostTests extends NewTestTemplate {
    * LOGGED-IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUsersMobilePosting")
-  @Execute(asUser = User.USER)
+  @Test(groups = {MOBILE})
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
     PostsListPage page = new PostsListPage().open();
@@ -91,48 +93,23 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobilePosting")
+  @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
-    setUp(MercuryWikis.DISCUSSIONS_MOBILE);
-    PostEntity.Data post = createNaughtyStringsPostRemotely(User.USER);
-    String id = post.getId();
-    String description = new PostsListPage().open().getPost().findPostById(id).findDescription();
-    try {
-      Assertion.assertStringContains(description, FIRST_LINE);
-    } finally {
-      cleanUp(post);
-    }
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_MOBILE);
   }
 
-  private void cleanUp(PostEntity.Data post) {
-    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, siteId);
-  }
-
-  @Test(groups = "discussions-loggedInUsersMobilePosting")
-  @Execute(asUser = User.USER)
+  @Test(groups = {MOBILE})
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
-    setUp(MercuryWikis.DISCUSSIONS_MOBILE);
-    PostEntity.Data post = createNaughtyStringsPostRemotely(User.USER);
-    String id = post.getId();
-    String description = new PostDetailsPage()
-      .open(id)
-      .getPost()
-      .findPostById(id)
-      .findDescription();
-    try {
-      Assertion.assertStringContains(description, FIRST_LINE);
-    } finally {
-      cleanUp(post);
-    }
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_MOBILE);
   }
 
-  @Test(enabled = false, groups = "discussions-loggedInUsersMobilePosting")
-  @Execute(asUser = User.USER)
+  @Test(groups = {MOBILE})
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "SOC-3562")
   public void userOnMobileCanAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
 
@@ -151,8 +128,8 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobilePosting")
-  @Execute(asUser = User.USER)
+  @Test(groups = {MOBILE})
+  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
     assertThatUserCanClickPostAndGoToPostDetailsPage();
@@ -162,9 +139,9 @@ public class CreatingPostTests extends NewTestTemplate {
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanExpandPostEditor() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
@@ -174,32 +151,31 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
     PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
-    PostsListPage page = new PostsListPage().open();
-    createPostWithNaughtyStringsDesktop(page);
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_AUTO);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
-
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_AUTO);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
 
@@ -218,9 +194,9 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopPosting")
+  @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
     assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
@@ -350,24 +326,45 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertTrue(url.endsWith(postDetailsUrl));
   }
 
-  private PostsCreator createPostWithNaughtyStrings(PostsListPage page, PostsCreator postCreator) {
-    String description = FIRST_LINE + ContentLoader.loadWikiTextContent("blns.txt");
-    fillPostCategoryWith(postCreator, description);
-    postCreator.addTitleWith("Naughty strings");
-    return postCreator.clickSubmitButton();
-  }
-
-  private PostsCreator createPostWithNaughtyStringsMobile(PostsListPage page) {
-    return createPostWithNaughtyStrings(page, page.getPostsCreatorMobile());
-  }
-
-  private PostsCreator createPostWithNaughtyStringsDesktop(PostsListPage page) {
-    return createPostWithNaughtyStrings(page, page.getPostsCreatorDesktop());
-  }
-
   private PostEntity.Data createNaughtyStringsPostRemotely(User user) {
     String description = FIRST_LINE + ContentLoader.loadWikiTextContent("blns.txt");
     String title = "Naughty strings";
     return DiscussionsOperations.using(user, driver).createCustomPost(siteId, title, description);
+  }
+
+  private PostEntity.Data createWeirdCharactersPostOnWiki(String wiki) {
+    setUp(wiki);
+    return createNaughtyStringsPostRemotely(User.USER);
+  }
+
+  private void cleanUp(PostEntity.Data post) {
+    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, siteId);
+  }
+
+  private void assertPostWithWeirdCharactersDisplayedOnPostsListPage(String wiki) {
+    PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
+    String description = new PostsListPage()
+      .open()
+      .getPost()
+      .findPostById(post.getId())
+      .findDescription();
+    try {
+      Assertion.assertStringContains(description, FIRST_LINE);
+    } finally {
+      cleanUp(post);
+    }
+  }
+
+  private void assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(String wiki) {
+    PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
+    String description = new PostDetailsPage()
+      .open(post.getId())
+      .getPost()
+      .getPostDetailText();
+    try {
+      Assertion.assertStringContains(description, FIRST_LINE);
+    } finally {
+      cleanUp(post);
+    }
   }
 }

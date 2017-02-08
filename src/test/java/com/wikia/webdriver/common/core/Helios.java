@@ -103,6 +103,7 @@ public class Helios {
 
     CloseableHttpResponse response = null;
     String token = "";
+    JSONObject responseValue = null;
     httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
     try {
       try {
@@ -113,12 +114,9 @@ public class Helios {
       }
 
       HttpEntity entity = response.getEntity();
-      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
+      responseValue = new JSONObject(EntityUtils.toString(entity));
 
       EntityUtils.consume(entity);
-
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
 
       token = responseValue.getString("access_token");
       tokenCache.put(userName, token);
@@ -132,6 +130,11 @@ public class Helios {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
+    } finally {
+      PageObjectLogging.log("LOGIN HEADERS: ",
+        response != null ? response.toString() : null, true);
+      PageObjectLogging.log("LOGIN RESPONSE: ",
+        responseValue != null ? responseValue.toString() : null, true);
     }
     return token;
   }

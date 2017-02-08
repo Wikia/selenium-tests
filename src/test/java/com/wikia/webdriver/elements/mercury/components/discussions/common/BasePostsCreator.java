@@ -94,13 +94,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public PostsCreator addDescriptionWith(final String text) {
-    WebElement description = getDescriptionTextarea();
-    //String[] desc = text.split("\n");
-    //for(String line : desc) {
-    //  System.out.println("Sending: " + line);
-    //  description.sendKeys(line + "\n");
-    //}
-    description.sendKeys(text);
+    getDescriptionTextarea().sendKeys(text);
     return this;
   }
 
