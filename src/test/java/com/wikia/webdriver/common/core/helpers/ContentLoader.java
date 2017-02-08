@@ -15,11 +15,17 @@ public class ContentLoader {
 
   private ContentLoader() {}
 
+  private static class ContentLoaderException extends Exception {
+    private ContentLoaderException(String reason, Exception ex) {
+      super(reason, ex);
+    }
+  }
+
   /**
    * @param filename - name of file which content should be loaded
    * @return content of desired file
    */
-  public static String loadWikiTextContent(String filename) {
+  public static String loadWikiTextContent(String filename) throws ContentLoaderException {
     StringBuilder textContent = new StringBuilder();
     String separator = System.getProperty("line.separator");
     String path = String.format(TEXT_FILES_PATH_FORMAT, filename);
@@ -29,7 +35,7 @@ public class ContentLoader {
         textContent.append(scanner.nextLine()).append(separator);
       }
     } catch (NullPointerException | FileNotFoundException ex) {
-      throw new RuntimeException("Error when loading file!", ex);
+      throw new ContentLoaderException("Error when loading file!", ex);
     }
     return textContent.toString();
   }
