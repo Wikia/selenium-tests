@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import com.wikia.webdriver.common.contentpatterns.XSSContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  * Set of commonly used actions invoked by executing JavaScript on a web page
@@ -80,7 +80,7 @@ public class JavascriptActions {
   public void scrollToElement(By elementBy) {
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 80));",
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 60));",
           driver.findElement(elementBy));
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
@@ -92,7 +92,7 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element) {
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 80));", element);
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 60));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
