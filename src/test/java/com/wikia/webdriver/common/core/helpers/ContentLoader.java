@@ -15,8 +15,8 @@ public class ContentLoader {
 
   private ContentLoader() {}
 
-  private static class ContentLoaderException extends Exception {
-    private ContentLoaderException(String reason, Exception ex) {
+  public static class ContentLoaderException extends RuntimeException {
+    public ContentLoaderException(String reason, Exception ex) {
       super(reason, ex);
     }
   }
