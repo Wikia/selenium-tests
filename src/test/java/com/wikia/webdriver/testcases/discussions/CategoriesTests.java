@@ -241,7 +241,7 @@ public class CategoriesTests extends NewTestTemplate {
         page.getFiltersPopOver().click().getCategoriesFieldset(),
         categoryName);
     page.waitForPageReload();
-    CategoryPill.Data newCategory = categoriesFieldset.findCategoryWith(categoryName).toData();
+    CategoryPill.Data newCategory = categoriesFieldset.findCategoryOrElseThrow(categoryName);
     try {
       assertTrue(categoriesFieldset.hasCategory(categoryName), 
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
@@ -264,7 +264,7 @@ public class CategoriesTests extends NewTestTemplate {
         .renameMobile(editableCategory.getName(), editedName)
         .clickApproveButton();
     page.waitForPageReload();
-    CategoryPill.Data editedCategory = categoriesFieldset.findCategoryWith(editedName).toData();
+    CategoryPill.Data editedCategory = categoriesFieldset.findCategoryOrElseThrow(editedName);
     try {
       assertTrue(categoriesFieldset.hasCategory(editedName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, editedName));
@@ -332,7 +332,7 @@ public class CategoriesTests extends NewTestTemplate {
     final String categoryName = createUniqueCategoryName();
     final CategoriesFieldset categoriesFieldset = addCategory(page.getCategories(), categoryName);
     page.waitForPageReload();
-    final CategoryPill.Data data = categoriesFieldset.findCategoryWith(categoryName).toData();
+    final CategoryPill.Data data = categoriesFieldset.findCategoryOrElseThrow(categoryName);
     try {
       assertTrue(categoriesFieldset.hasCategory(categoryName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, categoryName));
@@ -355,7 +355,7 @@ public class CategoriesTests extends NewTestTemplate {
       .renameDesktop(editableCategory.getName(), newCategoryName)
       .clickApproveButton();
     page.waitForPageReload();
-    CategoryPill.Data editedCategory = categoriesFieldset.findCategoryWith(newCategoryName).toData();
+    CategoryPill.Data editedCategory = categoriesFieldset.findCategoryOrElseThrow(newCategoryName);
     try {
       assertTrue(categoriesFieldset.hasCategory(newCategoryName),
         String.format(CATEGORY_SHOULD_BE_VISILBE_IN_LIST_MESSAGE, newCategoryName));
@@ -444,10 +444,10 @@ public class CategoriesTests extends NewTestTemplate {
   private void canRemoveCategories(PostsListPage page, String temporaryCategoryName,
     CategoriesFieldset categoriesFieldset, CategoryPill.Data data) {
     addAndRemoveTemporaryCategory(page, temporaryCategoryName, categoriesFieldset);
-    assertNull(categoriesFieldset.findCategoryWith(temporaryCategoryName),
+    assertFalse(categoriesFieldset.findCategoryWith(temporaryCategoryName).isPresent(),
       TEMPORARY_CATEGORY_SHOULD_NOT_BE_ADDED_MESSAGE);
     removeCategory(data, page, categoriesFieldset);
-    assertNull(categoriesFieldset.findCategoryWith(data.getName()),
+    assertFalse(categoriesFieldset.findCategoryWith(data.getName()).isPresent(),
       CATEGORY_SHOULD_BE_REMOVED_MESSAGE);
   }
 
