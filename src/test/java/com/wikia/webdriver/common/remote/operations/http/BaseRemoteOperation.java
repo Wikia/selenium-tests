@@ -48,7 +48,6 @@ class BaseRemoteOperation {
 
     try {
       request.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
-      System.out.println(request.getFirstHeader(HttpHeaders.CONTENT_TYPE));
       request.setEntity(new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON));
       result = execute(request);
     } catch (RemoteException ex) {
