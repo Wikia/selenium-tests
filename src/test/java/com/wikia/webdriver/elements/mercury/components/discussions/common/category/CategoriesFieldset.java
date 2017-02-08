@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CategoriesFieldset extends WikiBasePageObject {
@@ -16,6 +17,8 @@ public class CategoriesFieldset extends WikiBasePageObject {
   private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
   private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
   private static final String DELETE_COMMAND = "action-delete";
+
+  private static final String CATEGORY_NOT_FOUND = "Could not find category!";
 
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
@@ -53,9 +56,15 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   @CheckForNull
-  public CategoryPill findCategoryWith(final String categoryName) {
-    WebElement category = getCategoryWith(categoryName);
-    return category == null ? null : new CategoryPill(category);
+  public Optional<CategoryPill> findCategoryWith(final String categoryName) {
+    return getCategoryWith(categoryName).map(CategoryPill::new);
+  }
+
+  public CategoryPill.Data findCategoryOrElseThrow(final String categoryName)
+    throws NotFoundException {
+    return findCategoryWith(categoryName)
+      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+      .toData();
   }
 
   /**
@@ -63,7 +72,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
    * @param categoryName to match
    * @return first WebElement category that matches the name
    */
-  private WebElement getCategory(List<WebElement> categoryList, final String categoryName)
+  private Optional<WebElement> getCategory(List<WebElement> categoryList, final String categoryName)
     throws NotFoundException {
     List<WebElement> foundCategories = categoryList.stream()
       .filter(element -> element
@@ -75,20 +84,21 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
       // because of differences in mobile and desktop views
       if (foundCategories.isEmpty()) {
-        throw new NotFoundException("Could not find any categories on the list");
+        return Optional.empty();
       } else if (foundCategories.size() == 1) {
-        return foundCategories.get(0) ;
+        return Optional.of(foundCategories.get(0));
       } else {
         return foundCategories
           .stream()
           .filter(WebElement::isDisplayed)
-          .collect(Collectors.toList())
-          .get(0);
+          .findFirst();
       }
   }
 
-  private int getCategoryPosition(List<WebElement> categoryList, final String categoryName) {
-    WebElement category = getCategory(categoryList, categoryName);
+  private int getCategoryPosition(List<WebElement> categoryList, final String categoryName)
+    throws NotFoundException {
+    WebElement category = getCategory(categoryList, categoryName)
+      .orElseThrow(()-> new NotFoundException(CATEGORY_NOT_FOUND));
     return categoryList.indexOf(category);
   }
 
@@ -96,7 +106,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return getCategoryPosition(this.categories, categoryName);
   }
 
-  private WebElement getCategoryWith(String categoryName) {
+  private Optional<WebElement> getCategoryWith(String categoryName) {
     return getCategory(this.categories, categoryName);
   }
 
@@ -118,7 +128,9 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
-    getCategoryWith(categoryName).click();
+    getCategoryWith(categoryName)
+      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+      .click();
     return this;
   }
 
