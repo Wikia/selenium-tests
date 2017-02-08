@@ -287,12 +287,16 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageItalicText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
+    WebElement testElement = driver.findElement(firstMessageWrapperBy);
     Assertion.assertEquals(title,
         driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
+    By locator = By.cssSelector((firstMessageWrapperBy.toString() + messageBodyBy.toString() + messageTextItalicBy.toString()).replace("By.cssSelector:",""));
+    String commentMessage = driver.findElement(locator).getText();
     Assertion.assertEquals(
         message,
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextItalicBy).getText());
+//        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
+//            .findElement(messageTextItalicBy).getText());
+        commentMessage);
     Assertion.assertEquals(userName,
         driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
