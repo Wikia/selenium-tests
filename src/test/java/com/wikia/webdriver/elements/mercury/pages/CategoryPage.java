@@ -84,11 +84,13 @@ public class CategoryPage extends WikiBasePageObject {
     return driver.findElement(nextButton).isDisplayed();
   }
 
-  public boolean previousButtonIsVisible() {
-    wait.forElementVisible(previousButton);
+  public boolean previousButtonInViewPost() {
+    WebElement previousButtonElement = driver.findElement(previousButton);
+
+    wait.forElementInViewPort(previousButtonElement);
     PageObjectLogging.logInfo("Previous page button is visible.");
 
-    return driver.findElement(previousButton).isDisplayed();
+    return previousButtonElement.isDisplayed();
   }
 
   public CategoryPage clickNextButton() {
