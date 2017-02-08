@@ -113,7 +113,7 @@ public class CategoryPageTest extends NewTestTemplate {
     categoryPage.clickNextButton();
 
     Assert.assertTrue(categoryPage.hasCategoryMembers());
-    Assert.assertTrue(categoryPage.previousButtonInViewPost());
+    Assert.assertTrue(categoryPage.previousButtonIsVisible());
 
     categoryPage.clickPreviousButton();
 
