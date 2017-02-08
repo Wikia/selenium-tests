@@ -91,7 +91,7 @@ public class CategoryPageTest extends NewTestTemplate {
   }
 
   @Test(groups = "mercury_category_testPagination")
-  public void mercury_category_testPagination() {
+  public void mercury_category_testPagination() throws InterruptedException {
     // This test assumes that there are more than 200 articles created and with category like one below.
     // Staging env should have fixture of this articles to create them everytime it is rebuilded
 
@@ -114,6 +114,10 @@ public class CategoryPageTest extends NewTestTemplate {
 
     Assert.assertTrue(categoryPage.hasCategoryMembers());
     Assert.assertTrue(categoryPage.previousButtonIsVisible());
+
+    // Wait for scroll animation to be finished.
+    // categoryPage.previousButtonIsVisible() scrolls to element but jQuery animation scrolls back to somewhere in the middle of a page.
+    Thread.sleep(1000);
 
     categoryPage.clickPreviousButton();
 
