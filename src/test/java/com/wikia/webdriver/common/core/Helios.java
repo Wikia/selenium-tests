@@ -103,7 +103,6 @@ public class Helios {
 
     CloseableHttpResponse response = null;
     String token = "";
-    JSONObject responseValue = null;
     httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
     try {
       try {
@@ -114,7 +113,7 @@ public class Helios {
       }
 
       HttpEntity entity = response.getEntity();
-      responseValue = new JSONObject(EntityUtils.toString(entity));
+      JSONObject responseValue = new JSONObject(EntityUtils.toString(entity));
 
       EntityUtils.consume(entity);
 
@@ -134,7 +133,7 @@ public class Helios {
       PageObjectLogging.log("LOGIN HEADERS: ",
         response != null ? response.toString() : null, true);
       PageObjectLogging.log("LOGIN RESPONSE: ",
-        responseValue != null ? responseValue.toString() : null, true);
+        response != null ? response.getEntity().toString() : null, true);
     }
     return token;
   }

@@ -50,7 +50,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = {MOBILE})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewPost() {
@@ -61,16 +61,16 @@ public class CreatingPostTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();
   }
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
@@ -84,7 +84,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * LOGGED-IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = {MOBILE})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
@@ -93,21 +93,21 @@ public class CreatingPostTests extends NewTestTemplate {
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @Test(groups = {MOBILE})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
     assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_MOBILE);
   }
 
-  @Test(groups = {MOBILE})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
     assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_MOBILE);
   }
 
-  @Test(groups = {MOBILE})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddPostWithoutTitle() throws MalformedURLException {
@@ -128,7 +128,7 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
   }
 
-  @Test(groups = {MOBILE})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
@@ -139,9 +139,9 @@ public class CreatingPostTests extends NewTestTemplate {
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanExpandPostEditor() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
@@ -151,31 +151,31 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
     PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
     assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_AUTO);
   }
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
     assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_AUTO);
   }
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
 
@@ -194,9 +194,9 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
   }
 
-  @Test(groups = {DESKTOP})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
     assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
