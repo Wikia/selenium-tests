@@ -291,12 +291,10 @@ public class MessageWall extends WikiBasePageObject {
     Assertion.assertEquals(title,
         driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
     By locator = By.cssSelector((firstMessageWrapperBy.toString() + messageBodyBy.toString() + messageTextItalicBy.toString()).replace("By.cssSelector:",""));
-    String commentMessage = driver.findElement(locator).getText();
-    Assertion.assertEquals(
-        message,
-//        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-//            .findElement(messageTextItalicBy).getText());
-        commentMessage);
+    WebElement commentMessageTextBox = driver.findElement(locator);
+    wait.forElementVisible(commentMessageTextBox);
+    String commentMessageText = commentMessageTextBox.getText();
+    Assertion.assertEquals(message,commentMessageText);
     Assertion.assertEquals(userName,
         driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
