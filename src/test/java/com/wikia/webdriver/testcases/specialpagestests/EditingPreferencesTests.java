@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -29,6 +30,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
   @Test(groups = {"EditPreferences_001"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
+  @RelatedIssue(issueID = "MAIN-9722", comment = "test failing randomly")
   public void EditPreferences_001_selectVE() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(VE);
@@ -46,6 +48,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
   @Test(groups = {"EditPreferences_002"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
+  @RelatedIssue(issueID = "MAIN-9722", comment = "test failing randomly")
   public void EditPreferences_002_selectCK() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
     editPrefPage.selectPreferredEditor(CK);
@@ -79,6 +82,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
   @Test(groups = {"EditPreferences_004"})
   @Execute(asUser = User.USER_5)
+  @RelatedIssue(issueID = "MAIN-9722", comment = "test failing randomly")
   public void changeEmailAddress() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
 
