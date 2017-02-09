@@ -62,7 +62,7 @@ public class HTMLTitleTests extends NewTestTemplate {
       {
           "sktest123",
           "/wiki/Category:Premium",
-          "Category:PremiumVideos | Sktest123 Wiki | Fandom powered by Wikia"
+          "PremiumVideos | Sktest123 Wiki | Fandom powered by Wikia"
       },
       {
           "es.pokemon",

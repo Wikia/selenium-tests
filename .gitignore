@@ -12,7 +12,9 @@ config.yml
 chromedriver.log
 bin/
 build/
+classes/
 logs/
+classes/
 target/
 test-output/
 Thumbs.db
