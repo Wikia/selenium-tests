@@ -57,7 +57,7 @@ public class MessageWall extends WikiBasePageObject {
   By messageBodyBy = By.cssSelector(".msg-body");
   By imageBy = By.cssSelector(".thumbimage");
   By messageTextBoldBy = By.cssSelector("b");
-  By messageTextItalicBy = By.cssSelector("*");
+  By messageTextItalicBy = By.cssSelector("i");
   By messageLinkBy = By.cssSelector("a");
   By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
   By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
