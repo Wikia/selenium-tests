@@ -98,7 +98,6 @@ public class VEVideoTests extends NewTestTemplate {
 
   @Test(groups = {"VEVideo", "VEMediaResize"})
   @Execute(asUser = User.USER_9)
-  @RelatedIssue(issueID = "QAART-897")
   public void resizeVideoWithHandle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
@@ -114,8 +113,7 @@ public class VEVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VEVideo", "VEMediaResize"})
-  @Execute(asUser = User.USER_9)
-  @RelatedIssue(issueID = "QAART-897")
+  @Execute(asUser = User.USER_9))
   public void resizeVideoWithSetting() {
     int resizeNumber = 250;
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
