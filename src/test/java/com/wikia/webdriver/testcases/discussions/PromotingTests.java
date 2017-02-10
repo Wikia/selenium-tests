@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -13,6 +12,10 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
+
 
 @Execute(onWikia = MercuryWikis.FALLOUT)
 @Test(groups = {"discussions-promoting"})
@@ -31,9 +34,9 @@ public class PromotingTests extends NewTestTemplate {
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanSeeAppPromotion() {
     Promoting promoting = findPromoting();
-    Assertion.assertTrue(promoting.isAppleLinkDisplayed());
-    Assertion.assertTrue(promoting.isGooglePlayLinkDisplayed());
-    Assertion.assertEquals(promoting.getPromotionAppText(), DESKTOP_PROMOTION_TEXT);
+    assertTrue(promoting.isAppleLinkDisplayed());
+    assertTrue(promoting.isGooglePlayLinkDisplayed());
+    assertEquals(promoting.getPromotionAppText(), DESKTOP_PROMOTION_TEXT);
   }
 
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
@@ -55,8 +58,8 @@ public class PromotingTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeeAppPromotion() {
     Promoting promoting = findPromoting();
-    Assertion.assertTrue(promoting.isMobileBannerDisplayed());
-    Assertion.assertStringContains(promoting.getPromotionAppMobileText(), MOBILE_PROMOTION_TEXT);
+    assertTrue(promoting.isMobileBannerDisplayed());
+    assertStringContains(promoting.getPromotionAppMobileText(), MOBILE_PROMOTION_TEXT);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -76,6 +79,6 @@ public class PromotingTests extends NewTestTemplate {
   }
 
   private void assertAppPageOpened(String appTitle) {
-    Assertion.assertTrue(driver.getTitle().contains(appTitle));
+    assertTrue(driver.getTitle().contains(appTitle));
   }
 }

@@ -494,6 +494,10 @@ public class BasePageObject {
     return driver.getCurrentUrl();
   }
 
+  private int getTabsCount() {
+    return driver.getWindowHandles().size();
+  }
+
   private String getNewTab(String parentTab) {
     Optional<String> newTab = driver
       .getWindowHandles()
@@ -510,16 +514,16 @@ public class BasePageObject {
   }
 
   private void waitForLinkOpenedInNewTab(WebElement link) {
-    int tabs = driver.getWindowHandles().size();
+    int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
     new WebDriverWait(driver, TIMEOUT_PAGE_REGISTRATION)
-      .until((Predicate<WebDriver>) input -> driver.getWindowHandles().size() > tabs);
+      .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
   }
 
   protected void openLinkInNewTab(WebElement link) {
-    String oldTab = driver.getWindowHandle();
+    String currentTab = driver.getWindowHandle();
     waitForLinkOpenedInNewTab(link);
-    switchToNewTab(oldTab);
+    switchToNewTab(currentTab);
   }
 
   private List<String> getTabUrls() {
