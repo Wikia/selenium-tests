@@ -42,8 +42,7 @@ public class CreatingPostTests extends NewTestTemplate {
   private String siteId;
 
   private void setUp(String wikiName) {
-    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
-    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
   }
 
   /*

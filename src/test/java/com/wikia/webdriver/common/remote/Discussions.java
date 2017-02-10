@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.remote;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.operations.SiteId;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
@@ -26,8 +27,13 @@ public final class Discussions {
     return StringUtils.substringBetween(text, ": ", ",");
   }
 
-  public static String extractSiteIdFromMediaWiki(String wikiUrl) {
+  private static String extractSiteIdFromMediaWiki(String wikiUrl) {
     return new SiteId(wikiUrl).getSiteId();
+  }
+
+  public static String excractSiteIdFromWikiName(String wikiName) {
+    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
+    return extractSiteIdFromMediaWiki(wikiUrl);
   }
 
   public static String service(String url) {

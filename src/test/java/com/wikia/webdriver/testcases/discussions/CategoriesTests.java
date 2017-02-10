@@ -88,8 +88,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void deleteCategories(String wikiName) {
-    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
-    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
     DiscussionsCategoryOperations.using(User.STAFF).deleteAllCategories(siteId, User.STAFF);
   }
 
@@ -99,8 +98,7 @@ public class CategoriesTests extends NewTestTemplate {
    * @return new category
    */
   private CategoryPill.Data setUp(String wikiName) {
-    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
-    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
     CategoryPill.Data category = addCategoryRemotely(siteId, createUniqueCategoryName());
     DiscussionsOperations
       .using(User.STAFF, driver)
