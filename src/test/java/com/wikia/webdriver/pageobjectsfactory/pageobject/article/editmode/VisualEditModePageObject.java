@@ -20,16 +20,21 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VisualEditModePageObject extends EditMode {
 
   private static final String IMAGE_COMPONENT_CSS = "img.image";
   private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
+  public static final int ELEMENT_SHOW_UP_TIMEOUT = 3;
   @FindBy(css = "#wpSave")
   private WebElement submitButton;
   @FindBy(css = ".video-thumbnail")
@@ -83,6 +88,11 @@ public class VisualEditModePageObject extends EditMode {
   private WebElement image;
   @FindBy(css = "#wpApprove")
   private WebElement autoApproveCheckbox;
+  @FindBy(css = ".module_categories")
+  private WebElement categoriesModuleBar;
+  @FindBy(css = ".rail-auto-height")
+  private WebElement modalElement;
+
 
   private By galleryBy = By.cssSelector("img.image-gallery");
   private By slideshowBy = By.cssSelector("img.image-slideshow");
@@ -309,6 +319,7 @@ public class VisualEditModePageObject extends EditMode {
   }
 
   public void typeCategoryName(String categoryName) {
+    jsActions.scrollToElementInModal(categoryInput,modalElement);
     wait.forElementVisible(categoryInput);
     categoryInput.sendKeys(categoryName);
     PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
@@ -332,23 +343,40 @@ public class VisualEditModePageObject extends EditMode {
     }
   }
 
-  public void submitCategory() {
+  public void submitCategory(){
+    int categoryListSizeBeforeSubmission = categoryList.size();
     new Actions(driver).sendKeys(categoryInput, Keys.ARROW_DOWN)
         .sendKeys(categoryInput, Keys.ARROW_DOWN).sendKeys(categoryInput, Keys.ENTER).perform();
     PageObjectLogging.log("submitCategory", "category submitted", true);
+
+    waitForNewCategoryToAppear(categoryListSizeBeforeSubmission);
   }
 
-  public void verifyCategoryPresent(String category) {
+  private void waitForNewCategoryToAppear(final int categoryListSizeBeforeSubmission) {
+    WebDriverWait wait = new WebDriverWait(driver, ELEMENT_SHOW_UP_TIMEOUT);
+    wait.until(new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        return categoryList.size() > categoryListSizeBeforeSubmission ? true : false;
+      }
+    });
+  }
+
+  public void verifyCategoryPresent(String category){
     boolean categoryVisible = false;
+
+    Assertion.assertFalse(categoryList.isEmpty(),"Category list is empty");
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
         categoryVisible = true;
+        break;
       }
     }
-    Assertion.assertTrue(categoryVisible, "category " + category + " not present");
+    String listedCategories = categoryList.stream().map(d->d.getText()).collect(Collectors.joining(", "));
+    Assertion.assertTrue(categoryVisible, "Category " + category + " not present. Listed ones: " + listedCategories + ".");
   }
 
   public void verifyCategoryNotPresent(String category) {
+    this.scrollTo(categoriesModuleBar);
     wait.forElementNotPresent(By.cssSelector(categoryRemovedSelector.replace("%categoryName%",
             category)));
     boolean categoryVisible = true;
