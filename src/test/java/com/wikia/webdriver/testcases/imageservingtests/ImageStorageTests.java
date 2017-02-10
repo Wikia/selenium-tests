@@ -69,7 +69,7 @@ public class ImageStorageTests extends NewTestTemplate {
   @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "WW-489")
+  @RelatedIssue(issueID = "QAART-921")
   public void ImageStorage_002_moveImage() {
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
 

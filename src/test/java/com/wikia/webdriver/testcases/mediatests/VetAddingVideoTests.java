@@ -26,7 +26,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = {"VetAddVideo_001"})
-  @RelatedIssue(issueID = "QAART-889")
+  @RelatedIssue(issueID = "QAART-889", comment = "test fails randomly")
   @Execute(asUser = User.USER)
   public void VetAddVideo_001_MessageWallProvider() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);

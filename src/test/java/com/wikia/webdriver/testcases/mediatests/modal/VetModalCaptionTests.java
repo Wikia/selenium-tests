@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -19,6 +15,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Previe
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 @Test(groups = {"VetModalCaption", "VetTests", "Media"})
 public class VetModalCaptionTests extends NewTestTemplate {
@@ -64,7 +62,6 @@ public class VetModalCaptionTests extends NewTestTemplate {
 
   @Test(groups = {"VetModalCaption_002"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "WW-516")
   public void VetModalCaption_002_captionInModal() {
     String captionText = String.format("Caption-%d", DateTime.now().getMillis());
     new ArticleContent().push(String
