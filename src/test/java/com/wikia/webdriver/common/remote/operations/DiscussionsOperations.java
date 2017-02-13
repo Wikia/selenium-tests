@@ -45,6 +45,10 @@ public class DiscussionsOperations {
     return createPost(CreatePostContext.categoryContext(siteId, categoryId));
   }
 
+  public PostEntity.Data createCustomPost(String siteId, String title, String description) {
+    return createPost(CreatePostContext.postContext(siteId, title, description));
+  }
+
   private String extractSiteId() {
     return Discussions.extractSiteIdFromMediaWikiUsing(driver);
   }

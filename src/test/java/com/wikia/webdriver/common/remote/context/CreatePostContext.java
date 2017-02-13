@@ -49,4 +49,14 @@ public class CreatePostContext extends RemoteContext {
   public static CreatePostContext defaultContext(final String siteId) {
     return categoryContext(siteId, siteId);
   }
+
+  public static CreatePostContext postContext(final String siteId, final String title,
+    final String description) {
+    return CreatePostContext.builder()
+      .siteId(siteId)
+      .categoryId(siteId)
+      .title(title)
+      .description(description)
+      .build();
+  }
 }
