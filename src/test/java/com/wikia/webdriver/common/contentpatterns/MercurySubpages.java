@@ -21,15 +21,6 @@ public class MercurySubpages {
   public static final String INFOBOX_4 = "/wiki/Infobox4";
   public static final String INFOBOX_5 = "/wiki/Infobox5";
 
-  public static final String CATEGORY_WITH_ARTICLE_AND_WITH_MEMBERS =
-      "/wiki/Category:Category_page_test_-_Category_with_description";
-  public static final String CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS =
-      "/wiki/Category:Category_page_test_-_Category_with_description_and_no_members";
-  public static final String CATEGORY_WITHOUT_ARTICLE_AND_WITH_MEMBERS =
-      "/wiki/Category:Category_page_test_-_Category_without_description";
-  public static final String ARTICLE_WITH_CATEGORY_COMPONENT = "/wiki/Category_test_001";
-  public static final String ARTICLE_WITH_LINK_TO_CATEGORY_WITH_ARTICLE_AND_WITHOUT_MEMBERS =
-      "/wiki/Category_page_test_-_link_to_an_empty_category";
 
   /**
    * Legend:
