@@ -9,12 +9,17 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class MessageWall extends WikiBasePageObject {
@@ -25,6 +30,10 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement boldButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic > .cke_icon")
   private WebElement italicButton;
+
+  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic")
+  private WebElement italicButtonWrapper;
+
   @FindBy(css = ".cke_toolbar_insert .RTEImageButton > .cke_icon")
   private WebElement imageButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_link > .cke_icon")
@@ -215,7 +224,8 @@ public class MessageWall extends WikiBasePageObject {
   public void clickItalicButton() {
     wait.forElementVisible(italicButton);
     scrollAndClick(italicButton);
-    PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
+    PageObjectLogging.log("clickItalicButton","italic button clicked, class: " + italicButtonWrapper.getAttribute("class"), true);
+    PageObjectLogging.log("clickItalicButtonWithScreenshot", new InterruptedException(), true, driver);
   }
 
   public MessageWallAddLinkComponentObject clickLinkButton() {
