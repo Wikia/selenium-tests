@@ -224,6 +224,11 @@ public class MessageWall extends WikiBasePageObject {
   public void clickItalicButton() {
     wait.forElementVisible(italicButton);
     scrollAndClick(italicButton);
+    try{
+      Thread.sleep(1000);
+    }
+    catch(InterruptedException ie){
+    }
     PageObjectLogging.log("clickItalicButton","italic button clicked, class: " + italicButtonWrapper.getAttribute("class"), true);
     PageObjectLogging.log("clickItalicButtonWithScreenshot", new InterruptedException(), true, driver);
   }
