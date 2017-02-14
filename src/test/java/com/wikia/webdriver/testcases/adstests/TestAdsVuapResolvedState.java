@@ -14,10 +14,6 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
-  private static final long MAX_AUTOPLAY_MOVIE_START_DELAY = 5L;
-
-  private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
-
   @Test(groups = "AdsVuapResolvedStateAutoplayOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
