@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
@@ -20,6 +21,12 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   private List<WebElement> newPageActivitiesList;
   @FindBys(@FindBy(css = "li.activity-type-categorization"))
   private List<WebElement> categorizationActivitiesList;
+  @FindBys(@FindBy(css = "li.activity-type-talk.activity-ns-1201"))
+  private List<WebElement> wallPostActivitiesList;
+
+  By entryTitleBy = By.cssSelector("strong a");
+  By wallThreadAuthorBy = By.cssSelector(".wallfeed tr:first-child .real-name");
+  By wallThreadMainContentBy = By.cssSelector(".wallfeed tr:first-child p:nth-child(2)");
 
   public SpecialWikiActivityPageObject(WebDriver driver) {
     super();
@@ -30,6 +37,29 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
            + URLsContent.SPECIAL_WIKI_ACTIVITY);
 
     return this;
+  }
+
+  /**
+   * SUS-1309: Verify title, content and author of newly submitted Wall thread is visible on Wiki Activity
+   *
+   * @see com.wikia.webdriver.testcases.messagewall.MessageWallTests
+   * @param postTitle title of new Wall Thread
+   * @param postContent content of new Wall Thread
+   * @param authorName name of user who posted new thread
+   */
+  public void verifyNewWallThreadEntry(String postTitle, String postContent, String authorName) {
+    WebElement result = wallPostActivitiesList
+            .stream()
+            .filter(
+              postEntry ->
+                    postEntry.findElement(entryTitleBy).getText().equals(postTitle) &&
+                    postEntry.findElement(wallThreadAuthorBy).getText().equals(authorName) &&
+                    postEntry.findElement(wallThreadMainContentBy).getText().startsWith(postContent)
+            )
+            .findFirst()
+            .orElse(null);
+
+    Assertion.assertNotNull(result);
   }
 
   /**
