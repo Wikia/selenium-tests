@@ -43,15 +43,18 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
    * SUS-1309: Verify title, content and author of newly submitted Wall thread is visible on Wiki Activity
    *
    * @see com.wikia.webdriver.testcases.messagewall.MessageWallTests
-   * @param postTitle title of new Wall Thread
-   * @param postContent content of new Wall Thread
-   * @param authorName name of user who posted new thread
+   * @param postTitle title of new Wall Thread that is expected to be title of entry
+   * @param postContent content of new Wall Thread that is expected to be shown in entry
+   * @param authorName name of user who posted new thread who is expected to be author of entry
    */
   public void verifyNewWallThreadEntry(String postTitle, String postContent, String authorName) {
-    WebElement result = wallPostActivitiesList
+    // To prevent race conditions (something may have created new wall message while we were switching to WA)
+    // we check all entries on WA which belong to wall posts
+    WebElement result =
+        wallPostActivitiesList
             .stream()
             .filter(
-              postEntry ->
+                postEntry ->
                     postEntry.findElement(entryTitleBy).getText().equals(postTitle) &&
                     postEntry.findElement(wallThreadAuthorBy).getText().equals(authorName) &&
                     postEntry.findElement(wallThreadMainContentBy).getText().startsWith(postContent)
