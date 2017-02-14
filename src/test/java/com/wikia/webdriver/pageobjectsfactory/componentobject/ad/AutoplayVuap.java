@@ -3,9 +3,11 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -29,6 +31,10 @@ public class AutoplayVuap {
   // #TOP_LEADERBOARD .speaker
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
 
+  private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
+
+  private double videoHeight = 0;
+
   private final WikiaWebDriver driver;
 
   private final Wait wait;
@@ -49,6 +55,37 @@ public class AutoplayVuap {
     this.videoIframeSelector = videoIframeSelector;
     this.playing = true;
     this.muted = true;
+  }
+
+  public void verifyAutoplayIsMuted() {
+    Assert.assertTrue(isMuted(), "Video should be muted.");
+
+    unmute();
+    Assert.assertTrue(isUnmuted(), "Video should be unmuted.");
+
+    mute();
+    Assert.assertTrue(isMuted(), "Video should be muted.");
+  }
+
+  public void verifyVideoTimeIsProgressing() {
+    pause();
+
+    final double currentTime = getCurrentTime();
+    final double indicatorCurrentTime = getIndicatorCurrentTime();
+
+    playVideoForOneSecond(this);
+
+    pause();
+
+    Assert.assertTrue(currentTime < getCurrentTime(), "Video should be played.");
+    Assert.assertTrue(indicatorCurrentTime > getIndicatorCurrentTime(), "Video time indicator should move.");
+  }
+
+  public void verifyVideAutoplay() {
+    pause();
+
+    Assert.assertTrue(hasStarted(), "VUAP did not automatically played when page was opened.");
+    Assert.assertEquals(findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
   }
 
   public void mute() {
@@ -86,9 +123,24 @@ public class AutoplayVuap {
     driver.switchTo().defaultContent();
   }
 
+  public void clickOnImageResolvedState() {
+    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
+    driver.switchTo().frame(iframe);
+    driver.findElement(By.id("background2")).click();
+    driver.switchTo().defaultContent();
+  }
+
   public double getCurrentTime() {
     final String currentTime = usingVideoContext(video -> video.getAttribute("currentTime"));
     return Double.parseDouble(currentTime);
+  }
+
+  public double getVideoHieght() {
+    if (playing) {
+      videoHeight = driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
+      return videoHeight;
+    }
+    return videoHeight;
   }
 
   public double getIndicatorCurrentTime() {
@@ -144,6 +196,14 @@ public class AutoplayVuap {
         .until(predicate);
   }
 
+  public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
+    int percentResult = (int)Math.round(100-(100/(defaultVideoHeight/resolvedVideoHeight)));
+    if (percentResult == EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT) {
+    return true;
+    }
+    return false;
+  }
+
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
     return usingVideoIframeContext(webDriver -> fun.apply(driver.findElement(By.tagName("video"))));
   }
@@ -154,5 +214,14 @@ public class AutoplayVuap {
     final T result = fun.apply(driver);
     driver.switchTo().defaultContent();
     return result;
+  }
+
+  private void playVideoForOneSecond(final AutoplayVuap vuap) {
+    vuap.play();
+    try {
+      TimeUnit.SECONDS.sleep(1);
+    } catch (InterruptedException x) {
+      // ignore this exception
+    }
   }
 }
