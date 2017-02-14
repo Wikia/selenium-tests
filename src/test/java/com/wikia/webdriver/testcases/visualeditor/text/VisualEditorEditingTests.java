@@ -72,8 +72,11 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.typeTextInAllFormat(text);
     ve.typeTextInAllStyle(text);
     ve.typeTextInAllList(text);
-    ve.clickPublishButton();
-    ArticlePageObject article = new ArticlePageObject();
+    VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+    VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+    reviewDialog.verifyAddedDiffs(wikiTexts);
+    saveDialog = reviewDialog.clickReturnToSaveFormButton();
+    ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     article.verifyContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
   }
@@ -82,7 +85,6 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
-  @RelatedIssue(issueID = "XW-2377")
   public void VisualEditorEditing_002_delete() {
 
     String removeText = "Lorem ";
@@ -94,10 +96,11 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.removeText(removeText);
-    ve.clickPublishButton();
-    VisualEditorSaveChangesDialog saveDialog = new VisualEditorSaveChangesDialog(driver);
-    saveDialog.savePage();
-    ArticlePageObject article = new ArticlePageObject();
+    VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+    VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+    reviewDialog.verifyDeletedDiffs(deletedWikiTexts);
+    saveDialog = reviewDialog.clickReturnToSaveFormButton();
+    ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
   }
 
@@ -105,11 +108,14 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
-  @RelatedIssue(issueID = "XW-2377")
+  @RelatedIssue(issueID = "WW-487")
   public void VisualEditorEditing_003_insertToExistingArticle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
+    ve.putCursorAtTheEnd();
+    ve.typeReturn();
+    ve.typeReturn();
     ve.typeTextInAllFormat(text);
     ve.typeTextInAllStyle(text);
     ve.typeTextInAllList(text);
@@ -119,6 +125,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     saveDialog = reviewDialog.clickReturnToSaveFormButton();
     ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
+    article.verifyContent(text);
   }
 
   @Test(
@@ -153,8 +160,11 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     veLinkDialog.clickLinkResult();
     ve = veLinkDialog.clickDoneButton();
     ve.typeReturn();
-    ve.clickPublishButton();
-    ArticlePageObject article = new ArticlePageObject();
+    VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+    VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+    reviewDialog.verifyAddedDiffs(linkWikiTexts);
+    saveDialog = reviewDialog.clickReturnToSaveFormButton();
+    ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     article.verifyElementInContent(By.cssSelector("a[href*='" + PageContent.INTERNAL_LINK + "']"));
     article.verifyElementInContent(By.cssSelector("a.new[href*='" + PageContent.REDLINK + "']"));
@@ -172,15 +182,18 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve = ve.typeInSourceEditor(text);
+    VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+    VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+    reviewDialog.verifyAddedDiffs(firstSourceEditText);
+    ve = reviewDialog.closeDialog();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
-    ve.clickPublishButton();
-    ve.waitForPageLoad();
-    ArticlePageObject article = new ArticlePageObject();
-    article.openVEModeWithMainEditButton();
-    ve.typeInSourceEditor(text);
-    VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-    saveDialog.savePage();
+    ve = ve.typeInSourceEditor(text);
+    saveDialog = ve.clickPublishButton();
+    reviewDialog = saveDialog.clickReviewYourChanges();
+    reviewDialog.verifyAddedDiffs(secondSourceEditText);
+    saveDialog = reviewDialog.clickReturnToSaveFormButton();
+    ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     article.verifyContent(text);
   }
@@ -197,14 +210,9 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.typeTextArea("a");
-    ve.clickPublishButton();
-    ve.waitForPageLoad();
-    ArticlePageObject article = new ArticlePageObject();
-    article.openVEModeWithMainEditButton();
-    ve.typeTextArea("a");
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     saveDialog.typeEditSummary(summaryText);
-    saveDialog.savePage();
+    ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
     historyPage.verifyLatestEditSummary(summaryText);
@@ -221,14 +229,9 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.typeTextArea("b");
-    ve.clickPublishButton();
-    ve.waitForPageLoad();
-    ArticlePageObject article = new ArticlePageObject();
-    article.openVEModeWithMainEditButton();
-    ve.typeTextArea("b");
     VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
     saveDialog.clickMinorEdit();
-    saveDialog.savePage();
+    ArticlePageObject article = saveDialog.savePage();
     article.verifyVEPublishComplete();
     WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
     historyPage.verifyRevisionMarkedAsMinor();

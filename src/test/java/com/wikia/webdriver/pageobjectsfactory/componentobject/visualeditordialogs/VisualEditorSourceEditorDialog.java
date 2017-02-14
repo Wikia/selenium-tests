@@ -35,6 +35,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
     waitForElementNotVisibleByElement(loadingIndicator);
     WebElement editArea = dialog.findElement(editAreaBy);
     wait.forElementClickable(editArea);
+    editArea.click();
     editArea.sendKeys(text);
     waitForValueToBePresentInElementsAttributeByElement(editArea, "value", text);
     PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
