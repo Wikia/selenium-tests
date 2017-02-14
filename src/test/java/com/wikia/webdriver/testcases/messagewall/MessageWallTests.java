@@ -197,7 +197,6 @@ public class MessageWallTests extends NewTestTemplate {
    */
   @Test(groups = {"MessageWall_009", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "SUS-1309", comment = "Regression test to ensure title, content, author info of new Thread shows properly in Wiki Activity")
   public void newWallPostTitleIsShownInWikiActivity() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
