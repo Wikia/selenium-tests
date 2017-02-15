@@ -109,7 +109,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanAddPostWithoutTitle() throws MalformedURLException {
+  public void userOnMobileCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorMobile();
