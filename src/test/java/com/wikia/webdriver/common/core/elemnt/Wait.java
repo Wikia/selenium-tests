@@ -388,6 +388,15 @@ public class Wait {
     }
   }
 
+  public boolean forAttributeToContain(WebElement element, String attribute, String expectedValue) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try{
+      return wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute, expectedValue));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
   /**
    * Wait for successful (http response code less than 400) response from specific service
    *

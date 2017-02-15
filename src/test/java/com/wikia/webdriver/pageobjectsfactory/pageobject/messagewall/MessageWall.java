@@ -24,6 +24,7 @@ import java.util.List;
 
 public class MessageWall extends WikiBasePageObject {
 
+  public static final String TEXT_EDITOR_BUTTON_CLICKED = "cke_on";
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_bold > .cke_icon")
@@ -222,8 +223,10 @@ public class MessageWall extends WikiBasePageObject {
 
   public void clickItalicButton() {
     wait.forElementVisible(italicButton);
+    wait.forElementClickable(italicButton);
     scrollAndClick(italicButton);
-    wait.forValueToBePresentInElementsAttribute(italicButton, "aria-pressed", "true");
+    wait.forAttributeToContain(italicButton.findElement(By.xpath("..")), "class",
+                               TEXT_EDITOR_BUTTON_CLICKED);
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
