@@ -28,7 +28,7 @@ public class MessageWallTests extends NewTestTemplate {
     new Actions(driver).moveByOffset(0, 0).perform();
   }
 
-  @Test(groups = {"MessageWall_001", "MessageWall", "MessageWallTests", "Smoke3"})
+  @Test(groups = {"MessageWall_001", "MessageWall", "MessageWallTests", "Smoke3"}, invocationCount = 10)
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-801", comment = "The issue might be the reason for 25% failures of this test")
   public void userCanCreateAndEditMessage() {
@@ -47,7 +47,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageEditText(title, messageEdit, credentials.userName);
   }
 
-  @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"}, invocationCount = 10)
+  @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndRemoveMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
