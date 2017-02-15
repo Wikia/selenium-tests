@@ -143,8 +143,10 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapResolvedShouldEnd(Page page, String slot, String videoIframeSelector) {
-    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+
+    ads.refreshPage();
 
     verifyVideEndedAndReplyButtonDisplayed(vuap);
   }
