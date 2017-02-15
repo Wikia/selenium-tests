@@ -8,6 +8,10 @@ public class VuapAssertions {
 
   private static final long MAX_AUTOPLAY_MOVIE_START_DELAY = 5L;
 
+  private VuapAssertions() {
+    throw new IllegalAccessError("Utility class");
+  }
+
   public static void verifyAutoplayUnmuteAndMute(final AutoplayVuap vuap) {
     Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
 
