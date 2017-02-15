@@ -21,6 +21,7 @@ import org.openqa.selenium.support.FindBy;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import javax.swing.text.html.HTML;
 
 public class MessageWall extends WikiBasePageObject {
 
@@ -225,7 +226,7 @@ public class MessageWall extends WikiBasePageObject {
     wait.forElementVisible(italicButton);
     wait.forElementClickable(italicButton);
     scrollAndClick(italicButton);
-    wait.forAttributeToContain(italicButton.findElement(By.xpath("..")), "class",
+    wait.forAttributeToContain(italicButton.findElement(By.xpath("..")), HTML.Attribute.CLASS.toString(),
                                TEXT_EDITOR_BUTTON_CLICKED);
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
