@@ -47,7 +47,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.verifyMessageEditText(title, messageEdit, credentials.userName);
   }
 
-  @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"}, invocationCount = 10)
   @Execute(asUser = User.USER)
   public void userCanCreateAndRemoveMessage() {
     MessageWall wall = new MessageWall(driver).open(credentials.userName);
