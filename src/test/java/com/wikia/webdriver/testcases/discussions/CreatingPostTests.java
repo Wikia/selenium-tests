@@ -175,22 +175,13 @@ public class CreatingPostTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
-  public void userOnDesktopCanAddPostWithoutTitle() throws MalformedURLException {
+  public void userOnDesktopCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
-
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorDesktop();
+    fillPostCategoryWith(postsCreator, description);
 
-    final CategoryPill categoryPill = fillPostCategoryWith(postsCreator, description);
-
-    description = addLinkToDescription(postsCreator, description);
-    Assertion.assertTrue(postsCreator.hasOpenGraph(), OPEN_GRAPH_SHOULD_LOAD_MESSAGE);
-
-    PostEntity postEntity = submitAndWaitForPostToAppear(postsCreator, page, description);
-
-    assertThatPostWasAddedWith(postEntity, description, categoryPill.getName());
-    Assertion.assertTrue(postEntity.findPostActions().isFollowed(), POST_SHOULD_BE_FOLLOWED_MESSAGE);
-    Assertion.assertTrue(postEntity.hasOpenGraphAtContentEnd(), OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE);
+    Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
   @Test(groups = DESKTOP)
