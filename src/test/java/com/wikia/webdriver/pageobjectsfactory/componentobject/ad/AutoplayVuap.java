@@ -3,11 +3,9 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -55,37 +53,6 @@ public class AutoplayVuap {
     this.videoIframeSelector = videoIframeSelector;
     this.playing = true;
     this.muted = true;
-  }
-
-  public void verifyAutoplayIsMuted() {
-    Assert.assertTrue(isMuted(), "Video should be muted.");
-
-    unmute();
-    Assert.assertTrue(isUnmuted(), "Video should be unmuted.");
-
-    mute();
-    Assert.assertTrue(isMuted(), "Video should be muted.");
-  }
-
-  public void verifyVideoTimeIsProgressing() {
-    pause();
-
-    final double currentTime = getCurrentTime();
-    final double indicatorCurrentTime = getIndicatorCurrentTime();
-
-    playVideoForOneSecond(this);
-
-    pause();
-
-    Assert.assertTrue(currentTime < getCurrentTime(), "Video should be played.");
-    Assert.assertTrue(indicatorCurrentTime > getIndicatorCurrentTime(), "Video time indicator should move.");
-  }
-
-  public void verifyVideAutoplay() {
-    pause();
-
-    Assert.assertTrue(hasStarted(), "VUAP did not automatically played when page was opened.");
-    Assert.assertEquals(findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
   }
 
   public void mute() {
@@ -157,10 +124,6 @@ public class AutoplayVuap {
     return usingVideoIframeContext(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
   }
 
-  public boolean isInvisible() {
-    return usingVideoContext(video -> wait.forElementNotVisible(video));
-  }
-
   public boolean isMuted() {
     return findSpeakerIcon().getAttribute("class").contains("mute");
   }
@@ -178,7 +141,7 @@ public class AutoplayVuap {
   }
 
   public void waitForVideoToEnd(final long timeout) {
-    waitFor(AutoplayVuap::isInvisible, timeout);
+    waitFor(AutoplayVuap::isOverlayVisible, timeout);
   }
 
   private void clickElement(final String selector) {
@@ -190,10 +153,14 @@ public class AutoplayVuap {
   }
 
   private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
-    new FluentWait<AutoplayVuap>(this)
+    new FluentWait<>(this)
         .withTimeout(timeout, TimeUnit.SECONDS)
         .pollingEvery(1, TimeUnit.SECONDS)
         .until(predicate);
+  }
+
+  private boolean isOverlayVisible() {
+    return driver.findElement(By.cssSelector(".replay-overlay")).isDisplayed();
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
@@ -214,14 +181,5 @@ public class AutoplayVuap {
     final T result = fun.apply(driver);
     driver.switchTo().defaultContent();
     return result;
-  }
-
-  private void playVideoForOneSecond(final AutoplayVuap vuap) {
-    vuap.play();
-    try {
-      TimeUnit.SECONDS.sleep(1);
-    } catch (InterruptedException x) {
-      // ignore this exception
-    }
   }
 }

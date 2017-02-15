@@ -9,32 +9,38 @@ package com.wikia.webdriver.testcases.adstests;
     import org.testng.Assert;
     import org.testng.annotations.Test;
 
+    import java.util.concurrent.TimeUnit;
+
 @Test(groups = "AdsVuapResolvedStateOasis")
 public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
   private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
-  @Test(groups = "AdsVuapResolvedStateAutoplayOasis",
+  private static final long MAX_AUTOPLAY_MOVIE_START_DELAY = 5L;
+
+  private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
+
+  @Test(groups = "AdsVuapDefaultStateAutoplayOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
-    vuap.verifyVideAutoplay();
+    verifyVideAutoplay(vuap);
   }
 
-  @Test(groups = "AdsVuapResolvedStateTimeProgressOasis",
+  @Test(groups = "AdsVuapDefaultStateTimeProgressOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
-    vuap.verifyVideoTimeIsProgressing();
+    verifyVideoTimeIsProgressing(vuap);
   }
 
-  @Test(groups = "AdsVuapResolvedStateClickOasis",
+  @Test(groups = "AdsVuapDefaultStateClickOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapDefaultStateShouldHaveLinkToFandomOnImage(Page page, String slot, String videoIframeSelector) {
@@ -48,17 +54,27 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
   }
 
-  @Test(groups = "AdsVuapResolvedStateEndOasis",
+  @Test(groups = "AdsVuapDefaultStateMuteOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapDefaultStateShouldMute(Page page, String slot, String videoIframeSelector) {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
-    vuap.verifyAutoplayIsMuted();
+    verifyAutoplayIsMuted(vuap);
   }
 
-  @Test(groups = "AdsVuapResolvedStateEndOasis",
+  @Test(groups = "AdsVuapDefaultEndOasis",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapResolvedStateDesktop")
+  public void vuapDefaultShouldEnd(Page page, String slot, String videoIframeSelector) {
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+
+    verifyVideEndedAndReplyButtonDisplayed(vuap);
+  }
+
+  @Test(groups = "AdsVuapResolvedStateOnSecodPageView",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapResolvedStateAfterSecondPageView(Page page, String slot, String videoIframeSelector) {
@@ -79,7 +95,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     ads.refreshPage();
 
-    vuap.verifyVideAutoplay();
+    verifyVideAutoplay(vuap);
   }
 
   @Test(groups = "AdsVuapResolvedStateTimeProgressOasis",
@@ -91,7 +107,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
     ads.refreshPage();
 
-    vuap.verifyVideoTimeIsProgressing();
+    verifyVideoTimeIsProgressing(vuap);
   }
 
   @Test(groups = "AdsVuapResolvedStateClickOasis",
@@ -111,7 +127,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
   }
 
-  @Test(groups = "AdsVuapResolvedStateEndOasis",
+  @Test(groups = "AdsVuapResolvedStateMuteOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapResolvedStateShouldMute(Page page, String slot, String videoIframeSelector) {
@@ -120,7 +136,63 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
     ads.refreshPage();
 
-    vuap.verifyAutoplayIsMuted();
+    verifyAutoplayIsMuted(vuap);
+  }
+
+  @Test(groups = "AdsVuapResolvedEndOasis",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapResolvedStateDesktop")
+  public void vuapResolvedShouldEnd(Page page, String slot, String videoIframeSelector) {
+    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+
+    verifyVideEndedAndReplyButtonDisplayed(vuap);
+  }
+
+  private void verifyAutoplayIsMuted(final AutoplayVuap vuap) {
+    Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
+
+    vuap.unmute();
+    Assert.assertTrue(vuap.isUnmuted(), "Video should be unmuted.");
+
+    vuap.mute();
+    Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
+  }
+
+  private void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) {
+    vuap.pause();
+
+    final double currentTime = vuap.getCurrentTime();
+    final double indicatorCurrentTime = vuap.getIndicatorCurrentTime();
+
+    playVideoForOneSecond(vuap);
+
+    vuap.pause();
+
+    Assert.assertTrue(currentTime < vuap.getCurrentTime(), "Video should be played.");
+    Assert.assertTrue(indicatorCurrentTime > vuap.getIndicatorCurrentTime(), "Video time indicator should move.");
+  }
+
+  private void verifyVideAutoplay(final AutoplayVuap vuap) {
+    vuap.pause();
+
+    Assert.assertTrue(vuap.hasStarted(), "VUAP did not automatically played when page was opened.");
+    Assert.assertEquals(vuap.findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
+  }
+
+  private void verifyVideEndedAndReplyButtonDisplayed(final AutoplayVuap vuap) {
+    vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_START_DELAY);
+    vuap.waitForVideoToEnd(MAX_AUTOPLAY_MOVIE_DURATION);
+
+  }
+
+  private void playVideoForOneSecond(final AutoplayVuap vuap) {
+    vuap.play();
+    try {
+      TimeUnit.SECONDS.sleep(1);
+    } catch (InterruptedException x) {
+      // ignore this exception
+    }
   }
 }
 
