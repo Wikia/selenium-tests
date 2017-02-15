@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -13,21 +14,13 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,10 +30,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
 
+  private static final int TIMEOUT_PAGE_REGISTRATION = 3000;
   public final Wait wait;
   protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
@@ -48,15 +43,6 @@ public class BasePageObject {
   protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
-
-  @FindBy(css = "#WallNotifications div.notification div.msg-title")
-  protected WebElement notificationsLatestNotificationOnWiki;
-  @FindBy(css = "#WallNotifications > li")
-  protected WebElement notificationsShowNotificationsLogo;
-  @FindBy(css = ".mw-htmlform-submit")
-  protected WebElement followSubmit;
-  @FindBy(css = "#ca-unwatch")
-  protected WebElement followedButton;
 
   public BasePageObject() {
     this.waitFor = new WebDriverWait(driver, timeOut);
@@ -69,23 +55,14 @@ public class BasePageObject {
 
   //wait for comscore to load
   public void waitForPageLoad() {
-    wait.forElementPresent(By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
+    wait.forElementPresent(
+        By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
   }
 
   public static String getTimeStamp() {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);
-  }
-
-  public void mouseOverInArticleIframe(String cssSelecotr) {
-    jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-                      + cssSelecotr + "')).mouseenter()");
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseOverInArticleIframe", e, false);
-    }
   }
 
   /**
@@ -121,7 +98,7 @@ public class BasePageObject {
 
   /**
    * Method to check if WebElement is displayed on the page
-   * @param element
+   *
    * @return true if element is displayed, otherwise return false
    */
 
@@ -211,15 +188,12 @@ public class BasePageObject {
     }
   }
 
-  public void verifyURLcontains(final String givenString, int timeOut) {
+  public void verifyUrlContains(final String givenString, int timeOut) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, timeOut).until(new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver driver) {
-          return driver.getCurrentUrl().toLowerCase().contains(givenString.toLowerCase());
-        }
-      });
+      new WebDriverWait(driver, timeOut).until(
+          (ExpectedCondition<Boolean>) d -> d.getCurrentUrl().toLowerCase()
+              .contains(givenString.toLowerCase()));
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -284,9 +258,8 @@ public class BasePageObject {
 
   protected Boolean scrollToSelector(String selector) {
     if (isElementOnPage(By.cssSelector(selector))) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
       try {
-        js.executeScript("var x = $(arguments[0]);"
+        driver.executeScript("var x = $(arguments[0]);"
                          + "window.scroll(0,x.position()['top']+x.height()+100);"
                          + "$(window).trigger('scroll');", selector);
       } catch (WebDriverException e) {
@@ -323,7 +296,8 @@ public class BasePageObject {
   public void waitForElementNotVisibleByElement(WebElement element, long timeout) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, timeout).until(CommonExpectedConditions.invisibilityOfElementLocated(element));
+      new WebDriverWait(driver, timeout)
+          .until(CommonExpectedConditions.invisibilityOfElementLocated(element));
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -374,21 +348,6 @@ public class BasePageObject {
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 
-  public void notifications_clickOnNotificationsLogo() {
-    wait.forElementVisible(notificationsShowNotificationsLogo);
-    wait.forElementClickable(notificationsShowNotificationsLogo);
-    notificationsShowNotificationsLogo.click();
-    PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-                          "click on notifications logo on the upper right corner", true, driver);
-  }
-  
-  public void notifications_showNotifications() {
-    wait.forElementVisible(notificationsShowNotificationsLogo);
-    jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
-    PageObjectLogging.log("norifications_showNotifications",
-                          "show notifications by adding 'show' class to element", true, driver);
-  }
-
   /**
    * Wait for new window present
    */
@@ -403,22 +362,20 @@ public class BasePageObject {
 
   public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
     String currentUrl = getCurrentUrl();
-    for (int i = 0; i < queryStrings.length; i++) {
-      currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);
+    for (String queryString : queryStrings) {
+      currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryString);
     }
     driver.get(currentUrl);
     PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
   }
 
   public void pressDownArrow(WebElement element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("var e = jQuery.Event(\"keydown\"); "
+    driver.executeScript("var e = jQuery.Event(\"keydown\"); "
                      + "e.which=40; $(arguments[0]).trigger(e);", element);
   }
 
   public void setDisplayStyle(String selector, String style) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
+    driver.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
                      style);
   }
 
@@ -537,10 +494,42 @@ public class BasePageObject {
     return driver.getCurrentUrl();
   }
 
+  private int getTabsCount() {
+    return driver.getWindowHandles().size();
+  }
+
+  private String getNewTab(String parentTab) {
+    Optional<String> newTab = driver
+      .getWindowHandles()
+      .stream()
+      .filter(handleName -> !handleName.equals(parentTab))
+      .findFirst();
+    return newTab.orElseThrow(() -> new NotFoundException("New tab not found!"));
+  }
+
+  private String switchToNewTab(String parentTab) {
+    String newTab = getNewTab(parentTab);
+    driver.switchTo().window(newTab);
+    return newTab;
+  }
+
+  private void waitForLinkOpenedInNewTab(WebElement link) {
+    int initialTabsNumber = driver.getWindowHandles().size();
+    link.click();
+    new WebDriverWait(driver, TIMEOUT_PAGE_REGISTRATION)
+      .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
+  }
+
+  protected void openLinkInNewTab(WebElement link) {
+    String currentTab = driver.getWindowHandle();
+    waitForLinkOpenedInNewTab(link);
+    switchToNewTab(currentTab);
+  }
+
   private List<String> getTabUrls() {
     String currentTab = driver.getWindowHandle();
     List<String> result = new ArrayList<>();
-    for(String windowHandler : driver.getWindowHandles()) {
+    for (String windowHandler : driver.getWindowHandles()) {
       driver.switchTo().window(windowHandler);
       result.add(driver.getCurrentUrl());
     }

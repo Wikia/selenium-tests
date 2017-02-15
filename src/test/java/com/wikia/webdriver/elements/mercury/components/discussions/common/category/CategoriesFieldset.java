@@ -1,20 +1,24 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
-
 import com.google.common.collect.Iterables;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
-import java.util.function.Function;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CategoriesFieldset extends WikiBasePageObject {
 
   private static final String GENERAL_CATEGORY_NAME = "General";
-
   private static final String INPUT_TYPE_TEXT_SELECTOR = "input[type='text']";
+  private static final String LOCAL_DELETE_COMMAND = "action-local-delete";
+  private static final String DELETE_COMMAND = "action-delete";
+
+  private static final String CATEGORY_NOT_FOUND = "Could not find category!";
 
   @FindBy(className = "discussion-categories")
   private WebElement fieldset;
@@ -25,17 +29,17 @@ public class CategoriesFieldset extends WikiBasePageObject {
   @FindBy(className = "discussion-categories-edit-link")
   private WebElement editLink;
 
-  @FindBy(css = ".discussion-categories .discussion-categories-list > li")
+  @FindBy(css = ".discussion-categories-list > li")
   private List<WebElement> categories;
+
+  @FindBy(css = ".discussion-categories-input-wrapper")
+  private List<WebElement> editableCategories;
 
   @FindBy(className = "discussion-categories-edit")
   private WebElement categoriesEdit;
 
   @FindBy(className = "discussion-category-all")
   private WebElement editableCategoryAll;
-
-  @FindBy(css = ".discussion-categories-list .sortable-item")
-  private List<WebElement> editableCategories;
 
   @FindBy(className = "discussion-categories-edit-add-link")
   private WebElement addCategoryLink;
@@ -52,40 +56,82 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   @CheckForNull
-  public CategoryPill findCategoryWith(final String categoryName) {
-    CategoryPill result = null;
+  public Optional<CategoryPill> findCategoryWith(final String categoryName) {
+    return getCategoryWith(categoryName).map(CategoryPill::new);
+  }
 
-    for (int i = 0; i < categories.size() && result == null; i++) {
-      WebElement category = categories.get(i);
-      if (category.getText().equals(categoryName)) {
-        result = new CategoryPill(category, i);
-      }
-    }
-
-    return result;
+  public CategoryPill.Data findCategoryOrElseThrow(final String categoryName)
+    throws NotFoundException {
+    return findCategoryWith(categoryName)
+      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+      .toData();
   }
 
   /**
-   * @param position - category position, first category is 0 - All
-   * @return category pill
-   * @throws IllegalArgumentException when category is not found
+   *
+   * @param categoryName to match
+   * @return first WebElement category that matches the name
    */
-  public CategoryPill clickCategoryAt(final int position) {
-    return withBoundaryCheck(categories, position, webElement -> {
-      final CategoryPill result = new CategoryPill(webElement, position);
-      webElement.click();
-      return result;
-    });
+  private Optional<WebElement> getCategory(List<WebElement> categoryList, final String categoryName)
+    throws NotFoundException {
+    List<WebElement> foundCategories = categoryList.stream()
+      .filter(element -> element
+        .getAttribute("innerText")
+        .trim()
+        .equalsIgnoreCase(categoryName)
+      )
+      .collect(Collectors.toList());
+
+      // because of differences in mobile and desktop views
+      if (foundCategories.isEmpty()) {
+        return Optional.empty();
+      } else if (foundCategories.size() == 1) {
+        return Optional.of(foundCategories.get(0));
+      } else {
+        return foundCategories
+          .stream()
+          .filter(WebElement::isDisplayed)
+          .findFirst();
+      }
   }
 
-  private <T> T withBoundaryCheck(final List<WebElement> elements, final int position, Function<WebElement, T> transform) {
-    final int size = elements.size();
+  private int getCategoryPosition(List<WebElement> categoryList, final String categoryName)
+    throws NotFoundException {
+    WebElement category = getCategory(categoryList, categoryName)
+      .orElseThrow(()-> new NotFoundException(CATEGORY_NOT_FOUND));
+    return categoryList.indexOf(category);
+  }
 
-    if (size > position) {
-      return transform.apply(elements.get(position));
-    } else {
-      throw new IllegalArgumentException("You wanted to click category on position " + position + " but there is only " + size + " categories.");
-    }
+  private int getCategoryPosition(final String categoryName) {
+    return getCategoryPosition(this.categories, categoryName);
+  }
+
+  private Optional<WebElement> getCategoryWith(String categoryName) {
+    return getCategory(this.categories, categoryName);
+  }
+
+  /**
+   *
+   * @param categoryName to look for
+   * @return this category on list of editable categories
+   * Categories on editable categories list don't have any attribute based on their names,
+   * and thus a lookup in non-editable categories list must be made beforehand
+   */
+  private WebElement getEditableCategoryWith(String categoryName) {
+    return editableCategories.get(getCategoryPosition(categories, categoryName));
+  }
+
+  public WebElement getEditableCategoriesDesktop(String categoryName) {
+    int position = getCategoryPosition(categoryName);
+    this.clickEdit();
+    return editableCategories.get(position);
+  }
+
+  public CategoriesFieldset clickCategoryWith(final String categoryName) {
+    getCategoryWith(categoryName)
+      .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
+      .click();
+    return this;
   }
 
   public CategoriesFieldset clickEdit() {
@@ -95,13 +141,15 @@ public class CategoriesFieldset extends WikiBasePageObject {
 
   /**
    * For mobile "All" category is not visible, that is why it's always false - can not be edited.
-   *
+   * TODO: please remember to change this line when SOC-3793 is done:
+   * TODO: "isCategoryEditable(editableCategoryAll)"
    * @return true if "All" category can be edited
    */
   public boolean canEditAllCategory() {
-    return isMobile() ? false
-        // please remember to change this line when SOC-3793 is done - "isCategoryEditable(editableCategoryAll)"
-        : !editableCategoryAll.findElement(By.className("fancy-checkbox-span")).getAttribute("class").contains("disabled");
+    return !isMobile() && !editableCategoryAll
+      .findElement(By.className("fancy-checkbox-span"))
+      .getAttribute("class")
+      .contains("disabled");
   }
 
   private boolean isMobile() {
@@ -129,10 +177,6 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return webElement.findElement(By.tagName("input")).isEnabled();
   }
 
-  public boolean canAddCategory() {
-    return !this.addCategoryLink.getAttribute("class").contains("active-element-disabled-theme-color");
-  }
-
   public CategoriesFieldset addCategory(final String categoryName) {
     this.addCategoryLink.click();
     WebElement lastCategory = Iterables.getLast(this.editableCategories);
@@ -154,15 +198,20 @@ public class CategoriesFieldset extends WikiBasePageObject {
         .anyMatch(name -> name.equals(categoryName));
   }
 
-  public CategoriesFieldset rename(final int position, final String newCategoryName) {
-    withBoundaryCheck(editableCategories, position, webElement -> {
-      webElement.click();
-      WebElement input = webElement.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR));
-      input.clear();
-      input.sendKeys(newCategoryName);
-      return null;
-    });
+  public CategoriesFieldset renameMobile(final String oldCategoryName, final String newCategoryName) {
+    WebElement category = getEditableCategoryWith(oldCategoryName);
+    return rename(category, newCategoryName);
+  }
 
+  public CategoriesFieldset renameDesktop(final String oldCategoryName, final String newCategoryName) {
+    WebElement category = getEditableCategoriesDesktop(oldCategoryName);
+    return rename(category, newCategoryName);
+  }
+
+  private CategoriesFieldset rename(WebElement category, final String newCategoryName) {
+    WebElement input = category.findElement(By.cssSelector(INPUT_TYPE_TEXT_SELECTOR));
+    input.clear();
+    input.sendKeys(newCategoryName);
     return this;
   }
 
@@ -171,7 +220,12 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public CategoriesFieldset removeTemporaryCategory(final String categoryName) {
-    return removeCategory(categoryName, "action-local-delete");
+    return removeCategory(categoryName, LOCAL_DELETE_COMMAND);
+  }
+
+  public DeleteCategoryModal removeCategory(final String categoryName) {
+    removeCategory(categoryName, DELETE_COMMAND);
+    return new DeleteCategoryModal(this);
   }
 
   private CategoriesFieldset removeCategory(final String categoryName, final String actionName) {
@@ -184,8 +238,4 @@ public class CategoriesFieldset extends WikiBasePageObject {
     return this;
   }
 
-  public DeleteCategoryModal removeCategory(final String categoryName) {
-    removeCategory(categoryName, "action-delete");
-    return new DeleteCategoryModal(this);
-  }
 }

@@ -121,7 +121,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   public void typeTextArea(String text) {
     wait.forElementVisible(editArea);
-    editArea.click();
     editArea.sendKeys(text);
     PageObjectLogging.log("write", "text " + text + "written", true);
   }
@@ -131,14 +130,27 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     PageObjectLogging.log("press", "key " + key.toString() + "pressed", true);
   }
 
+  public void putCursorAtTheEnd() {
+    wait.forElementVisible(editArea);
+    String putCursorAtTheEndJS = "ve.init.target.getSurface().getModel().setLinearSelection(" +
+            "new ve.Range(" +
+            "ve.init.target.getSurface().getView().getNearestCorrectOffset(" +
+            "ve.init.target.getSurface().getModel().getDocument().getInternalList().getListNode().getOuterRange().to," +
+            "1" +
+            ")" +
+            ")" +
+            ")";
+    driver.executeScript(putCursorAtTheEndJS);
+  }
+
   public void selectText(int from, int to) {
     String
-        showSelectiontJS =
+        selectTextJS =
         "ve.init.target.getSurface().getModel().change(" +
         "null, new ve.dm.LinearSelection(" +
         "ve.init.target.getSurface().getModel().getDocument(),new ve.Range(" +
         from + "," + to + " )));";
-    ((JavascriptExecutor) driver).executeScript(showSelectiontJS);
+    driver.executeScript(selectTextJS);
   }
 
   public void selectText(String text) {
@@ -164,6 +176,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   public void removeText(String text) {
+    editArea.click();
     selectText(text);
     editArea.sendKeys(Keys.DELETE);
   }
@@ -456,7 +469,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   }
 
   private Point getTransclusionLocation(int index, Transclusion transclusion) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
+    JavascriptExecutor js = driver;
     Object
         templateBounding =
         js.executeScript(VEContent.BOUNDING_SCRIPT, transclusion.getCssSelector(), index);

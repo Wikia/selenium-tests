@@ -121,7 +121,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public void verifyProfilePage(String userName) {
-    verifyURLcontains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
+    verifyUrlContains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
     PageObjectLogging.log("verifyProfilePage", userName + " user profile page verified", true);
   }
 }

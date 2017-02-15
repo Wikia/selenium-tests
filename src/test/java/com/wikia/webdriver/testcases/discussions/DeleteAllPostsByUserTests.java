@@ -41,8 +41,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
    * @return post that was created
    */
   private PostEntity.Data setUp(String wikiName) {
-    String wikiUrl = new UrlBuilder().getUrlForWiki(wikiName);
-    siteId = Discussions.extractSiteIdFromMediaWiki(wikiUrl + URLsContent.SPECIAL_VERSION);
+    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
     return DiscussionsOperations
       .using(userWithPosts, driver)
       .createPostWithUniqueData(siteId);

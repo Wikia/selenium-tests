@@ -23,14 +23,40 @@ public class CreatePostContext extends RemoteContext {
     this.description = description;
   }
 
-  public static CreatePostContext defaultContext(final String siteId) {
+  /**
+   * Builds CreatePostContext with unique title&description
+   * @param siteId ID of wiki to create a post on
+   * @param categoryId i.e. forumId
+   * @return context to create a post
+   */
+  public static CreatePostContext categoryContext(final String siteId, final String categoryId) {
     Objects.requireNonNull(siteId);
+    Objects.requireNonNull(categoryId);
 
     return CreatePostContext.builder()
-        .siteId(siteId)
-        .categoryId(siteId)
-        .title(TextGenerator.defaultText())
-        .description(TextGenerator.createUniqueText())
-        .build();
+      .siteId(siteId)
+      .categoryId(categoryId)
+      .title(TextGenerator.defaultText())
+      .description(TextGenerator.createUniqueText())
+      .build();
+  }
+
+  /**
+   *
+   * @param siteId is ID of wiki, but also "General" category ID in discussions on that Wiki by default
+   * @return context with categoryId = siteId
+   */
+  public static CreatePostContext defaultContext(final String siteId) {
+    return categoryContext(siteId, siteId);
+  }
+
+  public static CreatePostContext postContext(final String siteId, final String title,
+    final String description) {
+    return CreatePostContext.builder()
+      .siteId(siteId)
+      .categoryId(siteId)
+      .title(title)
+      .description(description)
+      .build();
   }
 }
