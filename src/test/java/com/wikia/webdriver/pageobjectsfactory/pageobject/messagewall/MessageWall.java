@@ -28,12 +28,10 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement sourceModeButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_bold > .cke_icon")
   private WebElement boldButton;
-  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic > .cke_icon")
+  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic > .cke_button_italic")
   private WebElement italicButton;
-
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic")
   private WebElement italicButtonWrapper;
-
   @FindBy(css = ".cke_toolbar_insert .RTEImageButton > .cke_icon")
   private WebElement imageButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_link > .cke_icon")
@@ -67,6 +65,7 @@ public class MessageWall extends WikiBasePageObject {
   By imageBy = By.cssSelector(".thumbimage");
   By messageTextBoldBy = By.cssSelector("b");
   By messageTextItalicBy = By.cssSelector("i");
+  By messageTextBy = By.cssSelector(".msg-body *");
   By messageLinkBy = By.cssSelector("a");
   By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
   By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
@@ -224,12 +223,7 @@ public class MessageWall extends WikiBasePageObject {
   public void clickItalicButton() {
     wait.forElementVisible(italicButton);
     scrollAndClick(italicButton);
-    try{
-      Thread.sleep(1000);
-    }
-    catch(InterruptedException ie){
-    }
-    PageObjectLogging.log("clickItalicButton","italic button clicked, class: " + italicButtonWrapper.getAttribute("class"), true);
+    wait.forValueToBePresentInElementsAttribute(italicButton, "aria-pressed", "true");
     PageObjectLogging.log("clickItalicButtonWithScreenshot", new InterruptedException(), true, driver);
   }
 
@@ -302,16 +296,14 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageItalicText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
-    WebElement testElement = driver.findElement(firstMessageWrapperBy);
-    Assertion.assertEquals(title,
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
-    By locator = By.cssSelector((firstMessageWrapperBy.toString() + messageBodyBy.toString() + messageTextItalicBy.toString()).replace("By.cssSelector:",""));
-    WebElement commentMessageTextBox = driver.findElement(locator);
+    WebElement commentMessageTextBox = driver.findElement(firstMessageWrapperBy).findElement(messageTextBy);
     wait.forElementVisible(commentMessageTextBox);
-    String commentMessageText = commentMessageTextBox.getText();
-    Assertion.assertEquals(message,commentMessageText);
+    Assertion.assertEquals(title,
+                           driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
+    Assertion.assertEquals(message,commentMessageTextBox.getText());
+    Assertion.assertTrue(commentMessageTextBox.findElement(messageTextItalicBy).isDisplayed(), "Text is not italic");
     Assertion.assertEquals(userName,
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
+                           driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
