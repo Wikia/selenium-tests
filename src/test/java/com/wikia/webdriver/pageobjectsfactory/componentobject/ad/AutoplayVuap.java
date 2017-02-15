@@ -164,11 +164,11 @@ public class AutoplayVuap {
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
-    int percentResult = (int)Math.round(100-(100/(defaultVideoHeight/resolvedVideoHeight)));
-    if (percentResult == EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT) {
-    return true;
-    }
-    return false;
+    return EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT == getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight);
+  }
+
+  private int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
+    return (int) Math.round(100 - (100 / (defaultVideoHeight / resolvedVideoHeight)));
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
