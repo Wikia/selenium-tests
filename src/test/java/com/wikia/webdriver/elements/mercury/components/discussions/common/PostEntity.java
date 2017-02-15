@@ -93,7 +93,7 @@ public class PostEntity {
   }
 
   private WebElement findDescriptionElement() {
-    return post.findElement(By.className("post-details-link"));
+    return post.findElement(By.cssSelector(".post-details-link.clamp"));
   }
 
   public String findAuthorId() {

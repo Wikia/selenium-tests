@@ -43,6 +43,9 @@ public class Post extends BasePageObject {
   @FindBy(css = ".load-more-button")
   private WebElement loadMoreButton;
 
+  @FindBy(css = ".discussion.post .discussion-content")
+  private WebElement postDetails;
+
   public boolean isPostListEmpty() {
     return postList.isEmpty();
   }
@@ -159,5 +162,9 @@ public class Post extends BasePageObject {
   public boolean isUpvoteButtonVisible() {
     wait.forElementVisible(upvoteButton);
     return upvoteButton.isDisplayed();
+  }
+
+  public String getPostDetailText() {
+    return wait.forElementVisible(postDetails).getText();
   }
 }

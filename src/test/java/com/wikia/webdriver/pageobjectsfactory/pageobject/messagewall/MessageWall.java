@@ -244,7 +244,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void verifyThreadClosed(String userName, String reason, String message) {
-    refreshPage();
+    refreshPageAddingCacheBuster();
     Assertion.assertStringContains(
         driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
         userName + " closed this thread because:\n" + reason);

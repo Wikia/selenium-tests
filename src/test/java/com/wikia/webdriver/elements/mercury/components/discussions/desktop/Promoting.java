@@ -17,23 +17,42 @@ public class Promoting extends BasePageObject {
   @FindBy(css = ".google-play-badge")
   private WebElement googlePlayAppLink;
 
+  @FindBy(css = ".smart-banner-android")
+  private WebElement mobileBanner;
+
+  @FindBy(css = ".smart-banner-android .sb-button")
+  private WebElement mobileInstallButton;
+
   public boolean isAppleLinkDisplayed() {
     return appleAppLink.isDisplayed();
+  }
+
+  public boolean isMobileBannerDisplayed() {
+    return mobileBanner.isDisplayed();
   }
 
   public boolean isGooglePlayLinkDisplayed() {
     return googlePlayAppLink.isDisplayed();
   }
 
-  public String isPromotionAppTextDisplayed() {
+  public String getPromotionAppText() {
     return appPromotionText.getText();
   }
 
+  public String getPromotionAppMobileText() {
+    return mobileBanner.getText();
+  }
+
+  public void clickInstallOnMobileBanner() {
+    openLinkInNewTab(mobileInstallButton);
+  }
+
   public void clickAppleLinkInAppPromotion() {
-    appleAppLink.click();
+    openLinkInNewTab(appleAppLink);
   }
 
   public void clickGooglePlayLinkInAppPromotion() {
-    googlePlayAppLink.click();
+    openLinkInNewTab(googlePlayAppLink);
   }
+
 }

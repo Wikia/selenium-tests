@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -18,16 +19,8 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,10 +30,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
 
+  private static final int TIMEOUT_PAGE_REGISTRATION = 3000;
   public final Wait wait;
   protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
@@ -48,15 +43,6 @@ public class BasePageObject {
   protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
-
-  @FindBy(css = "#WallNotifications div.notification div.msg-title")
-  protected WebElement notificationsLatestNotificationOnWiki;
-  @FindBy(css = "#WallNotifications > li")
-  protected WebElement notificationsShowNotificationsLogo;
-  @FindBy(css = ".mw-htmlform-submit")
-  protected WebElement followSubmit;
-  @FindBy(css = "#ca-unwatch")
-  protected WebElement followedButton;
 
   public BasePageObject() {
     this.waitFor = new WebDriverWait(driver, timeOut);
@@ -77,16 +63,6 @@ public class BasePageObject {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);
-  }
-
-  public void mouseOverInArticleIframe(String cssSelecotr) {
-    jsActions.execute("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-                      + cssSelecotr + "')).mouseenter()");
-    try {
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
-      PageObjectLogging.log("mouseOverInArticleIframe", e, false);
-    }
   }
 
   /**
@@ -372,21 +348,6 @@ public class BasePageObject {
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 
-  public void notifications_clickOnNotificationsLogo() {
-    wait.forElementVisible(notificationsShowNotificationsLogo);
-    wait.forElementClickable(notificationsShowNotificationsLogo);
-    notificationsShowNotificationsLogo.click();
-    PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-                          "click on notifications logo on the upper right corner", true, driver);
-  }
-
-  public void notifications_showNotifications() {
-    wait.forElementVisible(notificationsShowNotificationsLogo);
-    jsActions.execute("$('#WallNotifications ul.subnav').addClass('show')");
-    PageObjectLogging.log("norifications_showNotifications",
-                          "show notifications by adding 'show' class to element", true, driver);
-  }
-
   /**
    * Wait for new window present
    */
@@ -531,6 +492,38 @@ public class BasePageObject {
     driver.switchTo().window(tabs.get(tabs.size() - 1));
 
     return driver.getCurrentUrl();
+  }
+
+  private int getTabsCount() {
+    return driver.getWindowHandles().size();
+  }
+
+  private String getNewTab(String parentTab) {
+    Optional<String> newTab = driver
+      .getWindowHandles()
+      .stream()
+      .filter(handleName -> !handleName.equals(parentTab))
+      .findFirst();
+    return newTab.orElseThrow(() -> new NotFoundException("New tab not found!"));
+  }
+
+  private String switchToNewTab(String parentTab) {
+    String newTab = getNewTab(parentTab);
+    driver.switchTo().window(newTab);
+    return newTab;
+  }
+
+  private void waitForLinkOpenedInNewTab(WebElement link) {
+    int initialTabsNumber = driver.getWindowHandles().size();
+    link.click();
+    new WebDriverWait(driver, TIMEOUT_PAGE_REGISTRATION)
+      .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
+  }
+
+  protected void openLinkInNewTab(WebElement link) {
+    String currentTab = driver.getWindowHandle();
+    waitForLinkOpenedInNewTab(link);
+    switchToNewTab(currentTab);
   }
 
   private List<String> getTabUrls() {
