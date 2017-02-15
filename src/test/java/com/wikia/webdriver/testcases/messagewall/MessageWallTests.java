@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.messagewall;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -189,5 +190,26 @@ public class MessageWallTests extends NewTestTemplate {
     miniReply.switchAndQuoteMessageWall(reply);
     wall.submitQuote();
     wall.verifyQuote(reply);
+  }
+
+  /**
+   * SUS-1309: Regression test to ensure title, content, author info of new Thread shows properly in Wiki Activity
+   */
+  @Test(groups = {"MessageWall_009", "MessageWall", "MessageWallTests"})
+  @Execute(asUser = User.USER)
+  public void newWallPostTitleIsShownInWikiActivity() {
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MiniEditorComponentObject mini = wall.triggerMessageArea();
+
+    String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + MessageWall.getTimeStamp();
+    String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + MessageWall.getTimeStamp();
+    mini.switchAndWrite(message);
+    wall.writeTitle(title);
+    wall.submit();
+
+    wall.verifyMessageText(title, message, credentials.userName);
+    new SpecialWikiActivityPageObject(driver)
+            .open()
+            .verifyNewWallThreadEntry(title, message, credentials.userName);
   }
 }
