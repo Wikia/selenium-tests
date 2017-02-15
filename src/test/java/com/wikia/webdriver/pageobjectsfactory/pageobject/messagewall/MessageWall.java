@@ -224,7 +224,7 @@ public class MessageWall extends WikiBasePageObject {
     wait.forElementVisible(italicButton);
     scrollAndClick(italicButton);
     wait.forValueToBePresentInElementsAttribute(italicButton, "aria-pressed", "true");
-    PageObjectLogging.log("clickItalicButtonWithScreenshot", new InterruptedException(), true, driver);
+    PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
   public MessageWallAddLinkComponentObject clickLinkButton() {
@@ -301,7 +301,7 @@ public class MessageWall extends WikiBasePageObject {
     Assertion.assertEquals(title,
                            driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
     Assertion.assertEquals(message,commentMessageTextBox.getText());
-    Assertion.assertTrue(commentMessageTextBox.findElement(messageTextItalicBy).isDisplayed(), "Text is not italic");
+    Assertion.assertEquals(true, commentMessageTextBox.findElement(messageTextItalicBy).isDisplayed(), "Text is not italic");
     Assertion.assertEquals(userName,
                            driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }

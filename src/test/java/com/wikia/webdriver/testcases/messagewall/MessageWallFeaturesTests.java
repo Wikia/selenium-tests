@@ -50,7 +50,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageBoldText(title, message, credentials.userName);
   }
 
-  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"}, invocationCount = 10)
+  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SOC-2094", comment = "test should pass locally. The ticket is about instability")
   public void userCanWriteMessageInItallic() {
