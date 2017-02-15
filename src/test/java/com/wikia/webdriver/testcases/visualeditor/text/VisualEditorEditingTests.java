@@ -63,7 +63,6 @@ public class VisualEditorEditingTests extends NewTestTemplate {
           "VisualEditorEditing_003", "VisualEditorDelete"
       }
   )
-  @RelatedIssue(issueID = "XW-2377")
   public void VisualEditorEditing_001_insertToNewArticle() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
@@ -108,7 +107,6 @@ public class VisualEditorEditingTests extends NewTestTemplate {
       groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
-  @RelatedIssue(issueID = "WW-487")
   public void VisualEditorEditing_003_insertToExistingArticle() {
     VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
