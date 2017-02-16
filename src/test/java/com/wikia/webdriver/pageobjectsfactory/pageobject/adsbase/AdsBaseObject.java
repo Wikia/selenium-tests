@@ -339,7 +339,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     WebElement
         adsDiv =
         driver.findElement(
-            By.cssSelector("div[id*='wikia_gpt'][id*='" + slotName + "'][" + attr + "]"));
+            By.cssSelector("#"+slotName+" [" + attr + "]"));
     return adsDiv.getAttribute(attr);
   }
 
