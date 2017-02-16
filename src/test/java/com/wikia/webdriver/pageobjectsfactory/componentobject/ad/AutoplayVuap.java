@@ -31,8 +31,6 @@ public class AutoplayVuap {
 
   private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
 
-  private double videoHeight = 0;
-
   private final WikiaWebDriver driver;
 
   private final Wait wait;
@@ -104,10 +102,9 @@ public class AutoplayVuap {
 
   public double getVideoHieght() {
     if (playing) {
-      videoHeight = driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
-      return videoHeight;
+      return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
     }
-    return videoHeight;
+    return 0;
   }
 
   public double getIndicatorCurrentTime() {
