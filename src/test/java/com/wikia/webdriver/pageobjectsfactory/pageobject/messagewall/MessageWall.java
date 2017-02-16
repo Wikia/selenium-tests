@@ -17,6 +17,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+import javax.swing.text.html.HTML;
+
 public class MessageWall extends WikiBasePageObject {
 
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
@@ -300,6 +302,11 @@ public class MessageWall extends WikiBasePageObject {
   public void verifyMessageEditText(String title, String message, String userName) {
     wait.forElementVisible(editMessageWrapper);
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
+
+
+    WebElement msgBodyTextBox = editMessageWrapper.findElement(messageBodyBy);
+    PageObjectLogging.log("Klasa msgBody: ", msgBodyTextBox.getAttribute(HTML.Attribute.CLASS.toString()), true);
+
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).getText(), message);
     Assertion.assertEquals(editMessageWrapper.findElement(messageUserNameBy).getText(), userName);
   }
