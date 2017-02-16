@@ -17,7 +17,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import javax.swing.text.html.HTML;
 
 public class MessageWall extends WikiBasePageObject {
 
