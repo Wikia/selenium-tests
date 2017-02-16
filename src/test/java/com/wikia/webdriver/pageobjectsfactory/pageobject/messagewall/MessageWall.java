@@ -301,12 +301,11 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageEditText(String title, String message, String userName) {
     wait.forElementVisible(editMessageWrapper);
-    wait.forElementVisible(editMessageWrapper.findElement(messageBodyBy));
+    WebElement msgBodyTextBox = editMessageWrapper.findElement(messageBodyBy);
+    wait.forElementVisible(msgBodyTextBox);
 
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
-    WebElement msgBodyTextBox = editMessageWrapper.findElement(messageBodyBy);
-    PageObjectLogging.log("Class msgBody: ", msgBodyTextBox.getAttribute(HTML.Attribute.CLASS.toString()) + " with value " + msgBodyTextBox.getText(), true);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).getText(), message);
+    Assertion.assertEquals(msgBodyTextBox.getText(), message);
     Assertion.assertEquals(editMessageWrapper.findElement(messageUserNameBy).getText(), userName);
   }
 
