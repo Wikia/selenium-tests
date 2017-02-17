@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
 
 public class FandomTestTemplate extends CoreTestTemplate {
 
-  private String mainURL = "http://%s:%s@qa.fandom.wikia.com/";
+  private String mainURL = "http://%s:%s@sandbox-qa.fandom.wikia.com/";
   protected FandomUrlBuilder urlBuilder = new FandomUrlBuilder();
 
   @Override
