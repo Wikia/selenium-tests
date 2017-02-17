@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.templates.core.CoreTestTemplate;
 
 public class FandomTestTemplate extends CoreTestTemplate {
 
-  private String mainURL = "http://%s:%s@sandbox-qa.fandom.wikia.com/";
+  private String mainURL = "http://sandbox-qa.fandom.wikia.com/";
   protected FandomUrlBuilder urlBuilder = new FandomUrlBuilder();
 
   @Override
@@ -16,7 +16,6 @@ public class FandomTestTemplate extends CoreTestTemplate {
 
   @Override
   protected void loadFirstPage() {
-    driver.navigate().to(String.format(mainURL, Configuration.getCredentials().httpAuthName,
-        Configuration.getCredentials().httpAuthPass));
+    driver.navigate().to(mainURL);
   }
 }

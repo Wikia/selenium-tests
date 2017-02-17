@@ -242,9 +242,6 @@ public class Credentials {
     apiToken = XMLReader.getValue(file, "ci.api.token");
 
     youTubeApiKey = XMLReader.getValue(file, "ci.api.youtube.key");
-
-    httpAuthName = XMLReader.getValue("fandom.auth.username");
-    httpAuthPass = XMLReader.getValue("fandom.auth.password");
   }
 
   public String getUserBaseOnEditorPref(EditorPref editorPref) {
