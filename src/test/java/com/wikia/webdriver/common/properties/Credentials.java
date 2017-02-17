@@ -133,9 +133,6 @@ public class Credentials {
 
   public final String apiToken;
 
-  public final String httpAuthName;
-  public final String httpAuthPass;
-
   public Credentials() {
     File file = new File(Configuration.getCredentialsFilePath());
     userName = XMLReader.getValue(file, "ci.user.regular.username");
