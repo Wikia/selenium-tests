@@ -281,17 +281,6 @@ public class Wait {
     }
   }
 
-  public boolean forValueToBePresentInElementsAttribute(
-      WebElement element, String attribute, String value) {
-    changeImplicitWait(0, TimeUnit.SECONDS);
-    try {
-      return wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
-          element, attribute, value));
-    } finally {
-      restoreDeaultImplicitWait();
-    }
-  }
-
   /**
    * Wait for element to not be present in DOM
    */
@@ -318,6 +307,17 @@ public class Wait {
       } else {
         return forTextNotInElement(SelectorStack.read(), text);
       }
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forValueToBePresentInElementsAttribute (
+      WebElement element, String attribute, String value) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
+          element, attribute, value));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -390,8 +390,10 @@ public class Wait {
 
   public boolean forAttributeToContain(WebElement element, String attribute, String expectedValue) {
     changeImplicitWait(0, TimeUnit.SECONDS);
-    try{
-      return wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute, expectedValue));
+    try {
+      return wait.until(CommonExpectedConditions
+                            .valueToBePresentInElementsAttribute(element, attribute,
+                                                                 expectedValue));
     } finally {
       restoreDeaultImplicitWait();
     }

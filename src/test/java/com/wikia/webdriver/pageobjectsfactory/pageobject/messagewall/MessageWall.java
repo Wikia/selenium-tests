@@ -294,14 +294,17 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageItalicText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
-    WebElement commentMessageTextBox = driver.findElement(firstMessageWrapperBy).findElement(messageTextBy);
-    wait.forElementVisible(commentMessageTextBox);
-    Assertion.assertEquals(title,
-                           driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
-    Assertion.assertEquals(message,commentMessageTextBox.getText());
-    Assertion.assertEquals(true, commentMessageTextBox.findElement(messageTextItalicBy).isDisplayed(), "Text is not italic");
-    Assertion.assertEquals(userName,
-                           driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
+    WebElement firstMessageWrapper = driver.findElement(firstMessageWrapperBy);
+    WebElement messageTextBox = firstMessageWrapper.findElement(messageTextBy);
+    WebElement titleTextBox = firstMessageWrapper.findElement(messageTitleBy);
+    WebElement userNameTextBox = firstMessageWrapper.findElement(messageUserNameBy);
+    WebElement italicMsgTextBox = messageTextBox.findElement(messageTextItalicBy);
+    wait.forElementVisible(messageTextBox);
+
+    Assertion.assertEquals(title, titleTextBox.getText());
+    Assertion.assertEquals(message, messageTextBox.getText());
+    Assertion.assertEquals(true, italicMsgTextBox.isDisplayed(), "Text is not italic");
+    Assertion.assertEquals(userName, userNameTextBox.getText());
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
