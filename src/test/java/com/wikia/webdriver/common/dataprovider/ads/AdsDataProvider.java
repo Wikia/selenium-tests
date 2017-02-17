@@ -502,7 +502,7 @@ public class AdsDataProvider {
                 "\"top\":\"1k\"",
                 "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\",\"esports\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
