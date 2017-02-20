@@ -8,23 +8,26 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
+import javax.swing.text.html.HTML;
+
 
 public class MessageWall extends WikiBasePageObject {
 
+  public static final String TEXT_EDITOR_BUTTON_CLICKED = "cke_on";
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_bold > .cke_icon")
   private WebElement boldButton;
-  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic > .cke_icon")
+  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic > .cke_button_italic")
   private WebElement italicButton;
+  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic")
+  private WebElement italicButtonWrapper;
   @FindBy(css = ".cke_toolbar_insert .RTEImageButton > .cke_icon")
   private WebElement imageButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_link > .cke_icon")
@@ -58,6 +61,7 @@ public class MessageWall extends WikiBasePageObject {
   By imageBy = By.cssSelector(".thumbimage");
   By messageTextBoldBy = By.cssSelector("b");
   By messageTextItalicBy = By.cssSelector("i");
+  By messageTextBy = By.cssSelector(".msg-body *");
   By messageLinkBy = By.cssSelector("a");
   By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
   By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
@@ -214,7 +218,10 @@ public class MessageWall extends WikiBasePageObject {
 
   public void clickItalicButton() {
     wait.forElementVisible(italicButton);
+    wait.forElementClickable(italicButton);
     scrollAndClick(italicButton);
+    wait.forAttributeToContain(italicButton.findElement(By.xpath("..")), HTML.Attribute.CLASS.toString(),
+                               TEXT_EDITOR_BUTTON_CLICKED);
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
@@ -287,20 +294,26 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageItalicText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
-    Assertion.assertEquals(title,
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
-    Assertion.assertEquals(
-        message,
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextItalicBy).getText());
-    Assertion.assertEquals(userName,
-        driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
+    WebElement firstMessageWrapper = driver.findElement(firstMessageWrapperBy);
+    WebElement messageTextBox = firstMessageWrapper.findElement(messageTextBy);
+    WebElement titleTextBox = firstMessageWrapper.findElement(messageTitleBy);
+    WebElement userNameTextBox = firstMessageWrapper.findElement(messageUserNameBy);
+    WebElement italicMsgTextBox = messageTextBox.findElement(messageTextItalicBy);
+    wait.forElementVisible(messageTextBox);
+
+    Assertion.assertEquals(title, titleTextBox.getText());
+    Assertion.assertEquals(message, messageTextBox.getText());
+    Assertion.assertEquals(true, italicMsgTextBox.isDisplayed(), "Text is not italic");
+    Assertion.assertEquals(userName, userNameTextBox.getText());
   }
 
   public void verifyMessageEditText(String title, String message, String userName) {
     wait.forElementVisible(editMessageWrapper);
+    WebElement msgBodyTextBox = editMessageWrapper.findElement(messageBodyBy);
+    wait.forElementVisible(msgBodyTextBox);
+
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).getText(), message);
+    Assertion.assertEquals(msgBodyTextBox.getText(), message);
     Assertion.assertEquals(editMessageWrapper.findElement(messageUserNameBy).getText(), userName);
   }
 
