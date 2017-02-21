@@ -28,9 +28,6 @@ public class Navigation {
   @FindBy(css = "li.nav-menu__item a")
   private List<WebElement> localNavPageLinks;
 
-  @FindBy(css = "a[href=\"/recent-wiki-activity\"]")
-  private WebElement recentWikiActivityLink;
-
   @FindBy(css = ".wikia-nav__header")
   private WebElement navigationMainHeader;
 
@@ -127,19 +124,6 @@ public class Navigation {
                           "Navigation to selected page failed");
     PageObjectLogging.logInfo("Successfully navigated to selected page");
 
-
-    return this;
-  }
-
-  public Navigation openRecentWikiActivity() {
-    wait.forElementClickable(recentWikiActivityLink);
-    recentWikiActivityLink.click();
-
-    loading.handleAsyncPageReload();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains("/recent-wiki-activity"),
-                         "You were not redirected to the recent wiki activity page");
-    PageObjectLogging.logInfo("You were redirected to the recent wiki activity page");
 
     return this;
   }

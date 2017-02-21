@@ -13,7 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import org.testng.annotations.Test;
 
 @Test(groups = "auth-forgottenPassword")
-public class ForgottenPasswordTests extends NewTestTemplate {
+public class
+ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 

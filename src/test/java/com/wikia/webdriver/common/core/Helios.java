@@ -117,9 +117,6 @@ public class Helios {
 
       EntityUtils.consume(entity);
 
-      PageObjectLogging.log("LOGIN HEADERS: ", response.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", responseValue.toString(), true);
-
       token = responseValue.getString("access_token");
       tokenCache.put(userName, token);
     } catch (JSONException e) {
@@ -132,6 +129,11 @@ public class Helios {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
+    } finally {
+      PageObjectLogging.log("LOGIN HEADERS: ",
+        response != null ? response.toString() : null, true);
+      PageObjectLogging.log("LOGIN RESPONSE: ",
+        response != null ? response.getEntity().toString() : null, true);
     }
     return token;
   }

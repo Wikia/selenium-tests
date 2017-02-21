@@ -190,9 +190,10 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   }
 
   public boolean areThumbnailsContainImages() {
-    String jpgOrPngImage = ".*\\.(png|jpg).*";
+    String jpgOrPngImage = ".*(\\.png|\\.jpg|Wikia-hero-image).*";
     for (WebElement elem : thumbnails) {
       boolean isImage = Pattern.matches(jpgOrPngImage, elem.getAttribute("src"));
+      PageObjectLogging.log("isImage", elem.getAttribute("src").toString(), true);
       try {
         if (!isImage) {
           throw new AssertionError();

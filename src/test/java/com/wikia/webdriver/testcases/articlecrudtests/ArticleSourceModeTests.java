@@ -1,9 +1,5 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import java.util.List;
-
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -30,6 +26,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Execute(asUser = User.STAFF)
 @Test(groups = {"RTE_extended"})
@@ -137,7 +136,6 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_010"})
-  @RelatedIssue(issueID = "QAART-874")
   public void RTE_010_Signature() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -160,9 +158,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
-  @RelatedIssue(issueID = "QAART-874")
+  @Execute(onWikia = "seleniumtests")
   public void RTE_012_Photo() {
     WikiBasePageObject base = new WikiBasePageObject();
+    base.loginAs(User.STAFF);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();

@@ -108,7 +108,6 @@ public class MobileAdsDataProvider {
             "MOBILE_TOP_LEADERBOARD",
             Collections.emptyList(),
             Arrays.asList(
-                "\"rpfl_7450\":[\"15_tier",
                 "\"43_tier",
                 "_tier2000"
             )
@@ -335,7 +334,7 @@ public class MobileAdsDataProvider {
                 "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                 "\"media\":[\"books\",\"comics\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\",\"esports\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
