@@ -5,38 +5,14 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.dataprovider.ads.GermanAdsDataProvider;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 public class TestIVWAnalyticsProvider extends NewTestTemplate {
 
   public static final String URL_BASE_SCRIPT = "script.ioam.de/iam.js";
   public static final String URL_TRACKING_SCRIPT = "de.ioam.de/tx.io?st=wikia";
-
-  @Test(groups = "TestIVWAnalyticsProvider")
-  public void testIVW2AnalyticsProvider() throws IOException {
-    for (Object[] data : GermanAdsDataProvider.IVW2_TEST_DATA) {
-      String wikiName = (String) data[0];
-      String article = (String) data[1];
-      String ivw2Param = (String) data[2];
-
-      String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-      driver.get(testedPage);
-      String htmlSource = driver.getPageSource();
-
-      Boolean isParamOnPage = htmlSource.contains(ivw2Param);
-      PageObjectLogging.log(
-          "IVW2",
-          ivw2Param + " param on the page: " + String.valueOf(isParamOnPage),
-          isParamOnPage
-      );
-    }
-  }
 
   /*
    * We are not longer supporting Germany (DE). Netzathleten (advertisement provider) is responsible for calling ivw
