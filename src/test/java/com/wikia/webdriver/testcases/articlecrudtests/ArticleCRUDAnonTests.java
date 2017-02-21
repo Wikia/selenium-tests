@@ -43,7 +43,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_addDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown" + "?AbTest.ADD_NEW_PAGE=CONTROL1");
+    ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown");
     VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
