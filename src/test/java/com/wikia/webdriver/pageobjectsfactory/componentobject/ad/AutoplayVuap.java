@@ -29,6 +29,8 @@ public class AutoplayVuap {
   // #TOP_LEADERBOARD .speaker
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
 
+  private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
+
   private final WikiaWebDriver driver;
 
   private final Wait wait;
@@ -86,9 +88,23 @@ public class AutoplayVuap {
     driver.switchTo().defaultContent();
   }
 
+  public void clickOnImageResolvedState() {
+    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
+    driver.switchTo().frame(iframe);
+    driver.findElement(By.id("background2")).click();
+    driver.switchTo().defaultContent();
+  }
+
   public double getCurrentTime() {
     final String currentTime = usingVideoContext(video -> video.getAttribute("currentTime"));
     return Double.parseDouble(currentTime);
+  }
+
+  public double getVideoHieght() {
+    if (playing) {
+      return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
+    }
+    return 0;
   }
 
   public double getIndicatorCurrentTime() {
@@ -103,10 +119,6 @@ public class AutoplayVuap {
 
   public boolean isVisible() {
     return usingVideoIframeContext(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
-  }
-
-  public boolean isInvisible() {
-    return usingVideoContext(video -> wait.forElementNotVisible(video));
   }
 
   public boolean isMuted() {
@@ -126,7 +138,7 @@ public class AutoplayVuap {
   }
 
   public void waitForVideoToEnd(final long timeout) {
-    waitFor(AutoplayVuap::isInvisible, timeout);
+    waitFor(AutoplayVuap::isOverlayVisible, timeout);
   }
 
   private void clickElement(final String selector) {
@@ -138,10 +150,22 @@ public class AutoplayVuap {
   }
 
   private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
-    new FluentWait<AutoplayVuap>(this)
+    new FluentWait<>(this)
         .withTimeout(timeout, TimeUnit.SECONDS)
         .pollingEvery(1, TimeUnit.SECONDS)
         .until(predicate);
+  }
+
+  private boolean isOverlayVisible() {
+    return driver.findElement(By.cssSelector(".replay-overlay")).isDisplayed();
+  }
+
+  public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
+    return EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT == getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight);
+  }
+
+  private int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
+    return (int) Math.round(100 - (100 / (defaultVideoHeight / resolvedVideoHeight)));
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {

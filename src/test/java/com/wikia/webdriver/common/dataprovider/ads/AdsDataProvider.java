@@ -1333,6 +1333,17 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] adsVuapResolvedStateDesktop() {
+    return new Object[][]{
+        {
+            new Page("project43", "SyntheticTests/VUAP/ResolveState2"),
+            AdsContent.TOP_LB,
+            "#" + AdsContent.TOP_LB + " .video-player iframe"
+        }
+    };
+  }
+
     @DataProvider
     public static Object[][] adsVuapMercury() {
         return new Object[][]{
