@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.CreationTicket;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
@@ -159,9 +158,10 @@ public class ArticleSourceModeTests extends NewTestTemplate {
   }
 
   @Test(groups = {"RTE_extended_2", "RTE_extended_012"})
-  @RelatedIssue(issueID = "QAART-874", comment = "test fails randomly")
+  @Execute(onWikia = "seleniumtests")
   public void RTE_012_Photo() {
     WikiBasePageObject base = new WikiBasePageObject();
+    base.loginAs(User.STAFF);
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
     SourceEditModePageObject source = article.openCurrectArticleSourceMode();
