@@ -21,7 +21,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
-  @RelatedIssue(issueID = "WW-568")
+  @RelatedIssue(issueID = "MAIN-9808", comment = "problems with banner notifications")
   @Execute(asUser = User.STAFF)
   public void deleteUndeleteArticle() {
     String articleTitle = "DeleteUndeleArticle";
