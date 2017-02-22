@@ -55,7 +55,7 @@ public class ArticlePage extends WikiBasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
 
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     return this;
   }

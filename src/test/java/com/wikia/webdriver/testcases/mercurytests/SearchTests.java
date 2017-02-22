@@ -41,7 +41,7 @@ public class SearchTests extends NewTestTemplate {
         .typeInSearch(SEARCH_PHRASE)
         .clickSearchSuggestion(0);
 
-    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     Assertion.assertEquals(clickedSuggestion.toLowerCase(),
                            article.getHeader().getPageTitle().toLowerCase());
   }
