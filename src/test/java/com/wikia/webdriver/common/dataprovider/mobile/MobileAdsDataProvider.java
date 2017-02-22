@@ -334,7 +334,7 @@ public class MobileAdsDataProvider {
                 "\"age\":[\"13-17\",\"18-24\",\"25-34\",\"18-34\",\"teen\"]",
                 "\"media\":[\"books\",\"comics\"]",
                 "\"esrb\":\"teen\"",
-                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\"]",
+                "\"gnre\":[\"rpg\",\"rts\",\"strategy\",\"sim\",\"war\",\"esports\"]",
                 "\"pform\":[\"pc\"]",
                 "\"sex\":[\"m\"]",
                 "\"pub\":[\"blizzard\"]",
