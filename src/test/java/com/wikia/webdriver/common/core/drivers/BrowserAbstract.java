@@ -91,8 +91,8 @@ public abstract class BrowserAbstract {
           CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
 
       server.addRequestFilter((request, contents, messageInfo) -> {
-        if (request.getUri().contains(".wikia")){
-          request.headers().add("HEADER-IGORA", "VALUE");
+        if (request.getUri().contains(".wikia.com/wiki/")){
+          request.headers().add("X-XW-2699", "1");
         }
         return null;
       });
