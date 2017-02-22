@@ -82,13 +82,20 @@ public abstract class BrowserAbstract {
    */
   protected void setProxy() {
 
-    if (Configuration.useProxy()) {
+    if (true) {
       server = new NetworkTrafficInterceptor();
       server.setTrustAllServers(true);
       server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
       server.setRequestTimeout(90, TimeUnit.SECONDS);
       server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
           CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
+
+      server.addRequestFilter((request, contents, messageInfo) -> {
+        if (request.getUri().contains(".wikia")){
+          request.headers().add("HEADER-IGORA", "VALUE");
+        }
+        return null;
+      });
 
       caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
     }
