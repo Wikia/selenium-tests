@@ -63,8 +63,4 @@ public class ArticlePage extends WikiBasePageObject {
   public String getArticleContent() {
     return driver.findElement(articleContent).getText();
   }
-
-  public ArticlePage openDiscussions() {
-    return this.open("/d/");
-  }
 }
