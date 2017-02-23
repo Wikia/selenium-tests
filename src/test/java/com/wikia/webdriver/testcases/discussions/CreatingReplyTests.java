@@ -22,24 +22,19 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-creating-replies"})
 public class CreatingReplyTests extends NewTestTemplate {
 
-  private static final String USER_ON_MOBILE_GROUP = "discussions-userOnMobileCreatingReply";
-
-  private static final String USER_ON_DESKTOP_GROUP = "discussions-userOnDesktopCreatingReply";
-
   private static final String SUBMIT_BUTTON_INACTIVE_MESSAGE = "Submit button should be inactive when no text was typed.";
-
   private static final String SUBMIT_BUTTON_ACTIVE_MESSAGE = "Submit button should active after typing text.";
-
   private static final String REPLY_ADDED_MESSAGE = "Reply should appear below post.";
-
   private static final String POST_FOLLOWED_BY_DEFAULT = "Post should be followed by default when reply was created for post.";
-
   private static final String SHOULD_UNFOLLOW_MESSAGE = "User should be able to unfollow post followed by default.";
+
+  private static final String MOBILE = "discussions-creating-replies-mobile";
+  private static final String DESKTOP = "discussions-creating-replies-desktop";
 
   // Anonymous on mobile
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotWriteNewReply")
-  @Execute(asUser = User.ANONYMOUS)
+  @Test(groups = MOBILE)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
@@ -48,9 +43,9 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   // Anonymous on desktop
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotWriteNewReply")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     userOnDesktopMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
@@ -58,8 +53,8 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   // User on mobile
 
-  @Test(groups = USER_ON_MOBILE_GROUP)
-  @Execute(asUser = User.USER_2)
+  @Test(groups = MOBILE)
+  @Execute(asUser = User.USER_2, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
@@ -68,8 +63,8 @@ public class CreatingReplyTests extends NewTestTemplate {
     assertThatUserCanCreateReply(page, replyCreator);
   }
 
-  @Test(groups = USER_ON_MOBILE_GROUP)
-  @Execute(asUser = User.USER_2)
+  @Test(groups = MOBILE)
+  @Execute(asUser = User.USER_2, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
@@ -81,9 +76,9 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   // User on desktop
 
-  @Test(groups = USER_ON_DESKTOP_GROUP)
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void replyEditorExpandsForUserOnDesktopOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
@@ -95,9 +90,9 @@ public class CreatingReplyTests extends NewTestTemplate {
     Assertion.assertFalse(replyCreator.isSubmitButtonActive(), SUBMIT_BUTTON_INACTIVE_MESSAGE);
   }
 
-  @Test(groups = USER_ON_DESKTOP_GROUP)
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
@@ -105,9 +100,9 @@ public class CreatingReplyTests extends NewTestTemplate {
     assertThatUserCanCreateReply(page, replyCreator);
   }
 
-  @Test(groups = USER_ON_DESKTOP_GROUP)
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
