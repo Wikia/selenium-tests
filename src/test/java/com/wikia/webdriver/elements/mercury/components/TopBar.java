@@ -32,7 +32,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".site-head-icon-search > a.icon-button")
   private WebElement searchIconClickableLink;
 
-  @FindBy(css = ".icon-button-icon > use[*|href*='close']")
+  @FindBy(css = ".site-head-icon-nav > .icon-button-icon")
   private WebElement closeButton;
 
   @FindBy(css = ".nav-menu")
