@@ -181,7 +181,8 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.LoginTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMercuryTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMobileWikiTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SearchMercuryTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SearchMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SmartBannerTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
             <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
