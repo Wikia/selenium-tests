@@ -6,7 +6,7 @@ import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-public abstract class NavigationTest extends NewTestTemplate {
+public abstract class NavigationTests extends NewTestTemplate {
 
   void mercury_navigation_openAndCloseNavigationAndItsSubMenu(WikiBasePageObject page) {
     TopBar topBar = page.getTopBar();
