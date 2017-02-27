@@ -60,7 +60,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   @Test(
       groups = {
           "VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002",
-          "VisualEditorEditing_003", "VisualEditorDelete"
+          "VisualEditorEditing_003"
       }
   )
   public void VisualEditorEditing_001_insertToNewArticle() {
@@ -81,7 +81,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
+      groups = {"VisualEditorEditing", "VisualEditorEditing_002"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
   public void VisualEditorEditing_002_delete() {
