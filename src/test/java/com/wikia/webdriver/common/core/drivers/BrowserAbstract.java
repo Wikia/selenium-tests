@@ -82,20 +82,13 @@ public abstract class BrowserAbstract {
    */
   protected void setProxy() {
 
-    if (true) {
+    if (Configuration.useProxy()) {
       server = new NetworkTrafficInterceptor();
       server.setTrustAllServers(true);
       server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
       server.setRequestTimeout(90, TimeUnit.SECONDS);
       server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
           CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
-
-      server.addRequestFilter((request, contents, messageInfo) -> {
-        if (request.getUri().contains(".wikia.com/wiki/")){
-          request.headers().add("X-XW-2699", "1");
-        }
-        return null;
-      });
 
       caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
     }
