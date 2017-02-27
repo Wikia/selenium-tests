@@ -1,11 +1,14 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import org.testng.annotations.Test;
 
@@ -68,8 +71,12 @@ public class NavigationMercuryTest extends NavigationTest {
 
   @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
   public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
-    super.mercury_navigation_exploreWikiNavigatesToWikiMainPage(
-        new GuidelinesPage().open()
-    );
+    new GuidelinesPage()
+        .open()
+        .getTopBar()
+        .openNavigation()
+        .clickExploreWikiHeader(Skin.MERCURY);
+
+    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 }

@@ -1,6 +1,8 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -46,6 +48,9 @@ public class GuidelinesPage extends WikiBasePageObject {
 
   public GuidelinesPage open() {
     driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
+
+    new SkinHelper(driver).isSkin(Skin.MERCURY);
+
     return this;
   }
 
@@ -109,7 +114,7 @@ public class GuidelinesPage extends WikiBasePageObject {
     contentText.isDisplayed();
   }
 
-  public void deleteTextFromGuidelines(String text) {
+  private void deleteTextFromGuidelines(String text) {
     clickEditGuidelines();
     addText(DEFAULT_GUIDELINES_TEXT);
     wait.forTextNotInElement(contentText, text);

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -76,13 +75,5 @@ public abstract class NavigationTest extends NewTestTemplate {
     Assertion.assertFalse(navigation.isUserProfileLinkVisible());
     Assertion.assertFalse(navigation.isLogoutLinkVisible());
     Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
-  }
-
-  void mercury_navigation_exploreWikiNavigatesToWikiMainPage(WikiBasePageObject page) {
-    page.getTopBar()
-        .openNavigation()
-        .clickExploreWikiHeader();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 }
