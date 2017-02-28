@@ -58,8 +58,9 @@ public class CuratedMainPagePageObject {
 
   public int getElementOffsetTop(String element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer
-        .parseInt(js.executeScript("return $(arguments[0]).offset().top", element).toString());
+    return Integer.parseInt(
+        js.executeScript("return $(arguments[0]).offset() && $(arguments[0]).offset().top", element).toString()
+    );
   }
 
   public boolean isMobileTopLeaderboardVisible() {
