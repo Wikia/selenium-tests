@@ -23,7 +23,7 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__clear")
   private WebElement clearSearchButton;
 
-  @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
+  @FindBy(css = ".wikia-search__search-icon > svg")
   private WebElement inputFieldSearchIcon;
 
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
