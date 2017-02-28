@@ -12,9 +12,10 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
@@ -56,7 +57,6 @@ public class EditorTests extends NewTestTemplate {
   private SearchForImagePageObject search;
   private CroppingToolPageObject croppingTool;
   private Navigate navigate;
-  private Loading loading;
 
   private void init() {
     this.curatedMainPage = new CuratedMainPagePageObject(driver);
@@ -70,7 +70,6 @@ public class EditorTests extends NewTestTemplate {
     this.search = new SearchForImagePageObject(driver);
     this.croppingTool = new CroppingToolPageObject(driver);
     this.navigate = new Navigate();
-    this.loading = new Loading(driver);
   }
 
   @BeforeMethod(alwaysRun = true)
@@ -88,11 +87,15 @@ public class EditorTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
+
     Boolean result = curatedMainPage.isFeaturedContentVisible();
 
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
+
     editor.clickAddFeaturedContent();
     itemForm.typeDisplayName(ITEM_DISPLAY_NAME);
     itemForm.typePageName(ITEM_PAGE_NAME);
@@ -108,6 +111,7 @@ public class EditorTests extends NewTestTemplate {
     editor.waitForAddCategoryButtonToBeVisible();
     editor.publish();
 
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     result = curatedMainPage.isFeaturedContentVisible();
 
     PageObjectLogging.log(
@@ -123,11 +127,15 @@ public class EditorTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
+
     Boolean result = curatedMainPage.isCuratedContentVisible();
 
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
+
     editor.clickAddSection();
     section.typeDisplayName(SECTION_DISPLAY_NAME);
     section.clickOnImage();
@@ -154,6 +162,7 @@ public class EditorTests extends NewTestTemplate {
     editor.waitForAddCategoryButtonToBeVisible();
     editor.publish();
 
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     result = curatedMainPage.isCuratedContentVisible();
 
     PageObjectLogging.log(
@@ -177,11 +186,15 @@ public class EditorTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
+
     Boolean result = curatedMainPage.isCuratedContentVisible();
 
     Assertion.assertFalse(result, MercuryMessages.VISIBLE_MSG);
 
     navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MERCURY));
+
     editor.clickAddCategory();
     itemForm.typeDisplayName(ITEM_DISPLAY_NAME);
     itemForm.typePageName(ITEM_PAGE_NAME);
@@ -197,6 +210,7 @@ public class EditorTests extends NewTestTemplate {
     editor.waitForAddCategoryButtonToBeVisible();
     editor.publish();
 
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     result = curatedMainPage.isCuratedContentVisible();
 
     PageObjectLogging.log(
