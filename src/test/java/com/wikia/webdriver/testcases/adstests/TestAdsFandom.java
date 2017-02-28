@@ -33,7 +33,7 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
       groups = {"AdsMobilePresenceFandom", "AdsMobileFandom"}
   )
   public void adsFandomAdsMobile(String pageType, String pageName) {
-    AdsFandomObject fandomPage = loadPage(pageName);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
     verifySlotsOnMobile(fandomPage, pageType);
   }
 
