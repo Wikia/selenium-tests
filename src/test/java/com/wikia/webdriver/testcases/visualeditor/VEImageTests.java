@@ -79,6 +79,7 @@ public class VEImageTests extends NewTestTemplate {
     veCreatePage = mediaDialog.addExistingMedia(numOfMedia);
     veCreatePage.verifyMedias(numOfMedia);
     veCreatePage.clickPublishButton();
+    new VisualEditorSaveChangesDialog(this.driver).savePage();
     veCreatePage.waitForPageLoad();
 
     ArticlePageObject article = new ArticlePageObject();
