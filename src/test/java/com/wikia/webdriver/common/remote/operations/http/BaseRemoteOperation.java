@@ -52,6 +52,7 @@ class BaseRemoteOperation {
       request.setEntity(new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON));
       result = execute(request);
     } catch (RemoteException ex) {
+      PageObjectLogging.log("Request: ", request.toString(), false);
       PageObjectLogging.log("Error while creating http post entity.", ExceptionUtils.getStackTrace(ex), false);
     }
 
