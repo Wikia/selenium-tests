@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -52,11 +53,22 @@ class BaseRemoteOperation {
       request.setEntity(new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON));
       result = execute(request);
     } catch (RemoteException ex) {
-      PageObjectLogging.log("Request: ", request.toString(), false);
-      PageObjectLogging.log("Error while creating http post entity.", ExceptionUtils.getStackTrace(ex), false);
+      PageObjectLogging.log("Request: ",
+        getRequestString(request) + "\n" + request.getEntity(), false);
+      PageObjectLogging.log("Error while creating http post entity.",
+        ExceptionUtils.getStackTrace(ex), false);
     }
 
     return result;
+  }
+
+  private String getRequestString(HttpRequestBase request) {
+    Header[] headers = request.getAllHeaders();
+    String headersString = "";
+    for(Header h : headers) {
+      headersString = headersString + h.getName() + ": " + h.getValue() + "\n";
+    }
+    return headersString + "\n" + request.toString();
   }
 
   private String makeRequest(final CloseableHttpClient client, final HttpRequestBase request)
@@ -69,7 +81,7 @@ class BaseRemoteOperation {
       result = handleResponse(request, response);
     } catch (UnsupportedEncodingException | SSLException x) {
       PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);
-      PageObjectLogging.log("Request: ", request.toString(), false);
+      PageObjectLogging.log("Request: ", getRequestString(request), false);
     }
 
     return result;
