@@ -34,7 +34,7 @@ public class CategoryPage extends WikiBasePageObject {
 
   public CategoryPage open(String categoryName) {
     this.navigate.toPage(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     PageObjectLogging.logInfo(String.format("%s category page opened", categoryName));
 
@@ -43,7 +43,7 @@ public class CategoryPage extends WikiBasePageObject {
 
 
   public ArticlePage navigateToCategoryMemberPage() {
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     WebElement member = driver.findElement(categoryMembers);
     String memberName = member.getText();
@@ -54,7 +54,7 @@ public class CategoryPage extends WikiBasePageObject {
     new Loading(driver).handleAsyncPageReload();
     PageObjectLogging.logInfo(String.format("You were redirected to page: \"%s\".", memberName));
 
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     return new ArticlePage();
   }

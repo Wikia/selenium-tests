@@ -1,6 +1,9 @@
 package com.wikia.webdriver.elements.mercury.components;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.pages.SearchResultsPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -20,7 +23,7 @@ public class Search extends BasePageObject {
   @FindBy(css = ".wikia-search__clear")
   private WebElement clearSearchButton;
 
-  @FindBy(css = ".wikia-search__search-icon > svg > use[*|href*='#search']")
+  @FindBy(css = ".wikia-search__search-icon > svg")
   private WebElement inputFieldSearchIcon;
 
   public static final int FOCUS_TIMEOUT_IN_SECONDS = 1;
@@ -29,8 +32,7 @@ public class Search extends BasePageObject {
   private static final String searchSuggestionClass = ".wikia-search__suggestions li.mw-content";
   private static final String focusedSearchInput = ".wikia-search--focused input";
 
-  public String clickSearchSuggestion(int index) {
-    Loading loading = new Loading(driver);
+  public String clickSearchSuggestion(int index, Skin fromSkin) {
     String clickedSuggestion;
 
     PageObjectLogging.logInfo("Select search suggestion no.: " + index);
@@ -40,7 +42,14 @@ public class Search extends BasePageObject {
     clickedSuggestion = searchResult.getText();
 
     searchResult.click();
-    loading.handleAsyncPageReload();
+
+    // Mobile wiki opens the suggested page using AJAX, Mercury reloads the page and opens Mobile Wiki
+    if (fromSkin == Skin.MOBILE_WIKI) {
+      Loading loading = new Loading(driver);
+      loading.handleAsyncPageReload();
+    } else {
+      Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
+    }
 
     return clickedSuggestion;
   }
@@ -64,7 +73,7 @@ public class Search extends BasePageObject {
     PageObjectLogging.logInfo("Type in search input field: " + pageName);
     typeInSearch(pageName);
     PageObjectLogging.logInfo("Select first search suggestion");
-    clickSearchSuggestion(0);
+    clickSearchSuggestion(0, Skin.MOBILE_WIKI);
 
     return this;
   }
@@ -77,8 +86,16 @@ public class Search extends BasePageObject {
     return this;
   }
 
-  public SearchResultsPage clickEnterAndNavigateToSearchResults() {
+  public SearchResultsPage clickEnterAndNavigateToSearchResults(Skin fromSkin) {
     new Actions(driver).sendKeys(Keys.ENTER).perform();
+
+    // Mobile wiki opens the SRP using AJAX, Mercury reloads the page and opens Mobile Wiki
+    if (fromSkin == Skin.MOBILE_WIKI) {
+      Loading loading = new Loading(driver);
+      loading.handleAsyncPageReload();
+    } else {
+      Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
+    }
 
     return new SearchResultsPage();
   }

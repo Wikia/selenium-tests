@@ -25,7 +25,7 @@ public class SearchResultsPage extends WikiBasePageObject {
   @FindBy(css = ".search-error-not-found__action")
   private WebElement tryAnotherSearchLink;
 
-  @FindBy(css = ".search-results__load-more-wrapper .wikia-button")
+  @FindBy(css = ".search-results__load-more-wrapper .wds-button")
   private WebElement loadMoreButton;
 
   @FindBy(css = ".search-results__list .wikia-card")
@@ -38,8 +38,10 @@ public class SearchResultsPage extends WikiBasePageObject {
   private static final String SPINNER_SELECTOR = ".spinner";
 
   public SearchResultsPage openForQuery(String query) {
-    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(),
-                         URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query)));
+    getUrl(
+        String.format("%s%s", urlBuilder.getUrlForWiki(),
+        URLsContent.MOBILE_SEARCH_RESULTS_PAGE.replace("%query%", query))
+    );
 
     return this;
   }
