@@ -22,6 +22,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import javax.net.ssl.SSLException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -51,6 +52,7 @@ class BaseRemoteOperation {
       request.setEntity(new StringEntity(jsonObject.toString(), ContentType.APPLICATION_JSON));
       result = execute(request);
     } catch (RemoteException ex) {
+      PageObjectLogging.log("Request: ", request.toString(), false);
       PageObjectLogging.log("Error while creating http post entity.", ExceptionUtils.getStackTrace(ex), false);
     }
 
@@ -65,8 +67,9 @@ class BaseRemoteOperation {
     }
     try (CloseableHttpResponse response = client.execute(request)) {
       result = handleResponse(request, response);
-    } catch (UnsupportedEncodingException x) {
+    } catch (UnsupportedEncodingException | SSLException x) {
       PageObjectLogging.log("Error while creating post entity.", ExceptionUtils.getStackTrace(x), false);
+      PageObjectLogging.log("Request: ", request.toString(), false);
     }
 
     return result;
