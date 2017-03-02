@@ -3,6 +3,8 @@ package com.wikia.webdriver.elements.mercury.components;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
 
 import org.openqa.selenium.By;
@@ -81,12 +83,18 @@ public class Navigation {
     return this;
   }
 
-  public Navigation clickExploreWikiHeader() {
+  public Navigation clickExploreWikiHeader(Skin fromSkin) {
     PageObjectLogging.logInfo("Click 'Explore Wiki' header");
     wait.forElementClickable(exploreWikiHeader);
 
     exploreWikiHeader.click();
-    loading.handleAsyncPageReload();
+
+    // Mobile wiki opens the main page using AJAX, Mercury reloads the page and opens Mobile Wiki
+    if (fromSkin == Skin.MOBILE_WIKI) {
+      loading.handleAsyncPageReload();
+    } else {
+      new SkinHelper(driver).isSkin(Skin.MERCURY);
+    }
 
     return this;
   }
@@ -146,10 +154,6 @@ public class Navigation {
 
   public boolean isLogoutLinkVisible() {
     return isElementVisible(logoutLink);
-  }
-
-  public boolean isExploreWikiHeaderVisible() {
-    return isElementVisible(exploreWikiHeader);
   }
 
   public boolean areHubLinksVisible() {

@@ -10,6 +10,8 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.skin.Skin;
+import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -69,6 +71,7 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     new ArticlePageObject(driver).isFooterVisible();
 
     boolean result = driver.getCurrentUrl().contains(ROOT_PATH);
@@ -178,6 +181,7 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = cc.isRevisedArticleTitleVisible();
     PageObjectLogging.log(
@@ -234,6 +238,7 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.NTACC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = !cc.isTrendingArticlesVisible();
     PageObjectLogging.log(
@@ -314,6 +319,7 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.NTVCC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
@@ -378,6 +384,7 @@ public class MainPageTests extends NewTestTemplate {
     init();
 
     navigate.toPage(MercurySubpages.NTAVCC_MAIN_PAGE);
+    Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = cc.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
