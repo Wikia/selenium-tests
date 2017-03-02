@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 
 import org.openqa.selenium.By;
@@ -49,20 +48,19 @@ public class CuratedMainPagePageObject {
 
   private WebDriver driver;
   private Wait wait;
-  private JavascriptActions jsActions;
 
   public CuratedMainPagePageObject(WebDriver driver) {
     this.driver = driver;
     this.wait = new Wait(driver);
-    this.jsActions = new JavascriptActions(driver);
 
     PageFactory.initElements(driver, this);
   }
 
   public int getElementOffsetTop(String element) {
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer
-        .parseInt(js.executeScript("return $(arguments[0]).offset().top", element).toString());
+    return Integer.parseInt(
+        js.executeScript("return $(arguments[0]).offset() && $(arguments[0]).offset().top", element).toString()
+    );
   }
 
   public boolean isMobileTopLeaderboardVisible() {

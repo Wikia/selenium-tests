@@ -48,6 +48,8 @@ public class ArticlePage extends WikiBasePageObject {
   public ArticlePage open(String pageName) {
     getNavigate().toPage(pageName);
 
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
+
     return this;
   }
 
@@ -55,16 +57,12 @@ public class ArticlePage extends WikiBasePageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR
            + TestContext.getCurrentMethodName());
 
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
+    new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     return this;
   }
 
   public String getArticleContent() {
     return driver.findElement(articleContent).getText();
-  }
-
-  public ArticlePage openDiscussions() {
-    return this.open("/d/");
   }
 }
