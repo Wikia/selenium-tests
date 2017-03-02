@@ -21,6 +21,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -303,20 +304,28 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     Class<?> declaringClass = method.getDeclaringClass();
 
     if (TestContext.isFirstLoad()) {
-      User user = null;
       TestContext.setFirstLoad(false);
+    }
 
-      if (declaringClass.isAnnotationPresent(Execute.class)) {
-        user = declaringClass.getAnnotation(Execute.class).asUser();
-      }
+    // SUS-1737 / QAART-937: Perform this check on every page load
+    // to check if user is not logged out
+    User user = User.ANONYMOUS;
 
-      if (method.isAnnotationPresent(Execute.class)) {
-        user = method.getAnnotation(Execute.class).asUser();
-      }
+    if (declaringClass.isAnnotationPresent(Execute.class)) {
+      user = declaringClass.getAnnotation(Execute.class).asUser();
+    }
 
-      if (user != null && user != User.ANONYMOUS) {
+    if (method.isAnnotationPresent(Execute.class)) {
+      user = method.getAnnotation(Execute.class).asUser();
+    }
+
+    if (user != User.ANONYMOUS) {
+      WikiBasePageObject basePageObject = new WikiBasePageObject();
+      try {
+        basePageObject.verifyUserLoggedIn(user);
+      } catch (TimeoutException e) {
         // log in, make sure user is logged in and flow is on the requested url
-        new WikiBasePageObject().loginAs(user);
+        basePageObject.loginAs(user);
       }
     }
 

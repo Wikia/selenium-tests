@@ -3,9 +3,7 @@ package com.wikia.webdriver.testcases.notificationstests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
@@ -19,7 +17,6 @@ public class ForumNotificationsTests extends NewTestTemplate {
   private String title;
   private String forumBoardTitle;
   private String message;
-  Credentials credentials = Configuration.getCredentials();
 
   /**
    * Test case created to check possible regression of DAR-112 defect <p/>
@@ -43,9 +40,9 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Test(groups = {"ForumNotificationsTests_002", "ForumNotificationsTests",
                   "NotificationsTests"},
       dependsOnMethods = {"forumNotificationsTests_001_userAStartsDiscussion"})
+  @Execute(asUser = User.USER_2)
   public void forumNotificationsTests_002_userBLeavesReply() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userName2, credentials.password2, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
     ForumThreadPageObject forumThread = forumBoard.openDiscussion(title);
@@ -56,9 +53,9 @@ public class ForumNotificationsTests extends NewTestTemplate {
   @Test(groups = {"ForumNotificationsTests_003", "ForumNotificationsTests",
                   "NotificationsTests"},
       dependsOnMethods = {"forumNotificationsTests_002_userBLeavesReply"})
+  @Execute(asUser = User.STAFF)
   public void forumNotificationsTests_003_userCLeavesReply() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
-    forumMainPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     forumMainPage.openForumMainPage(wikiURL);
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
     ForumThreadPageObject forumThread = forumBoard.openDiscussion(title);
@@ -81,8 +78,8 @@ public class ForumNotificationsTests extends NewTestTemplate {
     forumMainPage.openForumMainPage(wikiURL);
     notifications.showNotifications();
     String anchoredLink = notifications.getNotificationLink(
-        credentials.userNameStaff + " and " +
-        credentials.userName2 + " replied to your thread on the " +
+        User.STAFF.getUserName() + " and " +
+        User.USER_2.getUserName() + " replied to your thread on the " +
         forumBoardTitle.replace("_", " ")
     );
     String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
