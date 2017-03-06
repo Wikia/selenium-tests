@@ -9,6 +9,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.annotations.Test;
 
+/**
+ + * Tests for ivw were disabled as per ADEN-4782 ticket, which disabled ivw in all countries.
+ + */
 public class TestIVWAnalyticsProvider extends NewTestTemplate {
 
   public static final String URL_BASE_SCRIPT = "script.ioam.de/iam.js";
