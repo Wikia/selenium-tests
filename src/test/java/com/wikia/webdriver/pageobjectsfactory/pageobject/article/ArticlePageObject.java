@@ -327,6 +327,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public MiniEditorComponentObject triggerEditCommentArea() {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
+    PageObjectLogging.log("First check",mostRecentComment.getText(), true);
 //    JavascriptExecutor js = (JavascriptExecutor) driver;
 //    mostRecentComment.sendKeys("");
 
@@ -336,14 +337,36 @@ public class ArticlePageObject extends WikiBasePageObject {
     Actions actions =  new Actions(driver);
     actions.moveToElement(editButton).perform();
 
+//    List<Comment> comments = getComments();
+//    Comment firstComment = comments.stream().filter(c-> c.getMessage() == "").findFirst().get();
+//    firstComment.editComment();
 
 //    wait.forElementClickable(editButton);
+    PageObjectLogging.log("Second check",mostRecentComment.getText(), true);
     editButton.click();
 
 //    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
 //                     EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);
   }
+
+//  public class Comment{
+//    public Comment(){
+//
+//    }
+//    public String getUser(){
+//
+//    }
+//
+//    public String getMessage(){
+//
+//    }
+//
+//    public void editComment(){
+//
+//    }
+//
+//  }
 
   public DeletePageObject deleteFirstComment() {
     jsActions.scrollToElement(allCommentsArea);
