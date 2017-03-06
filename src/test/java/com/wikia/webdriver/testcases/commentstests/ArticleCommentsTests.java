@@ -20,7 +20,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "ArticleComments_001")
+  @Test(groups = "ArticleComments_001", invocationCount = 10)
   @Execute(asUser = User.USER)
   public void ArticleComments_001_editComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
