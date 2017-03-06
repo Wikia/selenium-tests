@@ -330,7 +330,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     JavascriptExecutor js = (JavascriptExecutor) driver;
 //    mostRecentComment.sendKeys("");
     WebElement editButton = mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR));
-    editButton.sendKeys("");
+    mostRecentComment.sendKeys("");
     wait.forElementClickable(editButton);
     editButton.click();
 
