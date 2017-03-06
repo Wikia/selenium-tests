@@ -329,8 +329,10 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement mostRecentComment = articleComments.get(0);
     JavascriptExecutor js = (JavascriptExecutor) driver;
 //    mostRecentComment.sendKeys("");
-    mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR)).sendKeys("");
-    mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR)).click();
+    WebElement editButton = mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR));
+    editButton.sendKeys("");
+    wait.forElementClickable(editButton);
+    editButton.click();
 
 //    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
 //                     EDIT_BUTTON_SELECTOR);
