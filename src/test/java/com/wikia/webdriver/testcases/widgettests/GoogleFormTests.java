@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.widgettests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -10,6 +8,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
+
+import org.testng.annotations.Test;
 
 @Test(groups = "GoogleFormWidget")
 @InBrowser(browser = Browser.CHROME)
@@ -38,7 +38,16 @@ public class GoogleFormTests extends NewTestTemplate {
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
-    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+//    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
+
+    //Loaded set to false
+    Assertion.assertEquals("true", String.valueOf(widget.isLoaded()));
+
+//    Assertion.assertTrue(widget.isLoaded());
+
+
+//    Assertion.assertEquals("test1", Boolean.toString(widget.isLoaded()));
+//    Assertion.assertEquals("test2", Boolean.toString(widget.isLoaded()));
   }
 
   @Test(groups = "GoogleFormWidgetTest_002")
@@ -49,7 +58,7 @@ public class GoogleFormTests extends NewTestTemplate {
     widget.createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
-    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertEquals(true, widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "GoogleFormWidgetTest_003")
