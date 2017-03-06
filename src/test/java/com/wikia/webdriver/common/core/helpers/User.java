@@ -15,6 +15,7 @@ public enum User {
   USER_9("ci.user.regular9.username", "ci.user.regular9.password"),
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
   USER_CNW("ci.user.cnw.username", "ci.user.cnw.password", "ci.user.cnw.user_id", "ci.user.cnw.access_token"),
+  USER_VET_MODAL("ci.user.vet_modal.username", "ci.user.vet_modal.password", "ci.user.vet_modal.user_id", "ci.user.vet_modal.access_token"),
   IMAGE_REVIEWER("ci.user.reviewer.username", "ci.user.reviewer.password", "ci.user.reviewer.user_id"),
   STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "ci.user.wikiastaff.id", "ci.user.wikiastaff.access_token"),
   ANONYMOUS("anonymous", "anonymous"),

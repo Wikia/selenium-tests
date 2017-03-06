@@ -33,7 +33,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   String articleTitle3;
 
   @Test(groups = {"VetModalAlignment_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_001_leftOnPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle1 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -56,7 +56,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalAlignment_002"}, dependsOnMethods = "Vet_Modal_001_leftOnPage")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_002_leftInModal() {
     WikiBasePageObject base = new WikiBasePageObject();
     VisualEditModePageObject visualEditModePageObject =
@@ -67,7 +67,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalAlignment_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_003_centerOnPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -90,7 +90,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalAlignment_004"}, dependsOnMethods = "Vet_Modal_003_centerOnPage")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_004_centerInModal() {
     WikiBasePageObject base = new WikiBasePageObject();
     VisualEditModePageObject visualEditModePageObject =
@@ -101,7 +101,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalAlignment_005"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_005_rightOnPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle3 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -124,7 +124,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalAlignment_006"}, dependsOnMethods = "Vet_Modal_005_rightOnPage")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_006_rightInModal() {
     WikiBasePageObject base = new WikiBasePageObject();
     VisualEditModePageObject visualEditModePageObject =
