@@ -2,14 +2,13 @@ package com.wikia.webdriver.testcases.mediatests.modal;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.PositionsVideo;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
@@ -28,18 +27,15 @@ public class VetModalAlignmentTests extends NewTestTemplate {
    * center alignment in vet modal when page edited,
    */
 
-  String articleTitle1;
-  String articleTitle2;
-  String articleTitle3;
-
   @Test(groups = {"VetModalAlignment_001"})
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_001_leftOnPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    articleTitle1 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    new ArticleContent().push("");
+
     VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPage(wikiURL, articleTitle1);
+        new ArticlePageObject().open().navigateToArticleEditPage();
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
+
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
     vetOptions.adjustPosition(PositionsVideo.LEFT);
@@ -55,12 +51,14 @@ public class VetModalAlignmentTests extends NewTestTemplate {
     article.verifyVideoAlignment(PositionsVideo.LEFT);
   }
 
-  @Test(groups = {"VetModalAlignment_002"}, dependsOnMethods = "Vet_Modal_001_leftOnPage")
+  @Test(groups = {"VetModalAlignment_002"})
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_002_leftInModal() {
-    WikiBasePageObject base = new WikiBasePageObject();
+    new ArticleContent()
+        .push("[[File:WikiEvolution - Poznańska Wiki-1488886756|thumb|left|335 px]]");
+
     VisualEditModePageObject visualEditModePageObject =
-        base.navigateToArticleEditPage(wikiURL, articleTitle1);
+        new ArticlePageObject().open().navigateToArticleEditPage();
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
     vetOptions.verifyVideoAlignmentSelected(PositionsVideo.LEFT);
@@ -69,10 +67,10 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Test(groups = {"VetModalAlignment_003"})
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_003_centerOnPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    articleTitle2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    new ArticleContent().push();
+
     VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPage(wikiURL, articleTitle2);
+        new ArticlePageObject().open().navigateToArticleEditPage();
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -89,12 +87,14 @@ public class VetModalAlignmentTests extends NewTestTemplate {
     article.verifyVideoAlignment(PositionsVideo.CENTER);
   }
 
-  @Test(groups = {"VetModalAlignment_004"}, dependsOnMethods = "Vet_Modal_003_centerOnPage")
+  @Test(groups = {"VetModalAlignment_004"})
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_004_centerInModal() {
-    WikiBasePageObject base = new WikiBasePageObject();
+    new ArticleContent()
+        .push("[[File:WikiEvolution - Poznańska Wiki-1488886756|thumb|center|335 px]]");
+
     VisualEditModePageObject visualEditModePageObject =
-        base.navigateToArticleEditPage(wikiURL, articleTitle2);
+        new ArticlePageObject().open().navigateToArticleEditPage();
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
     vetOptions.verifyVideoAlignmentSelected(PositionsVideo.CENTER);
@@ -103,10 +103,10 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Test(groups = {"VetModalAlignment_005"})
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_005_rightOnPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    articleTitle3 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+    new ArticleContent().push();
+
     VisualEditModePageObject visualEditMode =
-        base.navigateToArticleEditPage(wikiURL, articleTitle3);
+        new ArticlePageObject().open().navigateToArticleEditPage();
     VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -123,12 +123,15 @@ public class VetModalAlignmentTests extends NewTestTemplate {
     article.verifyVideoAlignment(PositionsVideo.RIGHT);
   }
 
-  @Test(groups = {"VetModalAlignment_006"}, dependsOnMethods = "Vet_Modal_005_rightOnPage")
+  @Test(groups = {"VetModalAlignment_006"})
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_006_rightInModal() {
-    WikiBasePageObject base = new WikiBasePageObject();
+    new ArticleContent()
+        .push("[[File:WikiEvolution - Poznańska Wiki-1488886756|thumb|right|335 px]]");
+
     VisualEditModePageObject visualEditModePageObject =
-        base.navigateToArticleEditPage(wikiURL, articleTitle3);
+        new ArticlePageObject().open().navigateToArticleEditPage();
+
     VetOptionsComponentObject vetOptions =
         (VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
     vetOptions.verifyVideoAlignmentSelected(PositionsVideo.RIGHT);
