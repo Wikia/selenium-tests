@@ -173,16 +173,19 @@ public class ForumThreadPageObject extends BasePageObject {
     PageObjectLogging.log("undoRemove", "click on 'undo' button", true, driver);
   }
 
-  public void moveThread(String forumBoardName) {
+  public String moveThread() {
     clickOnMoreButton();
     clickOnMoveThreadButton();
     wait.forElementVisible(moveThreadModalSelectElement);
     Select dropList = new Select(moveThreadModalSelectElement);
-    dropList.selectByVisibleText(forumBoardName);
+    String selectedItem = dropList.getOptions().get(1).getText();
+    dropList.selectByIndex(1);
     wait.forElementClickable(moveThreadModalMoveThreadButton);
     scrollAndClick(moveThreadModalMoveThreadButton);
     PageObjectLogging
-        .log("moveThread", "thread moved to the following board: " + forumBoardName, true, driver);
+        .log("moveThread", "thread moved to the following board: " + selectedItem, true, driver);
+
+    return selectedItem;
   }
 
   public void closeThread(String reason) {
@@ -206,7 +209,7 @@ public class ForumThreadPageObject extends BasePageObject {
   public void verifyParentBoard(String forumBoardName) {
     wait.forElementVisible(movedThreadText);
     wait.forElementPresent(parentBoardField);
-    wait.forTextInElement(parentBoardField, forumBoardName);
+    wait.forTextInElement(parentBoardField, forumBoardName + " board");
     PageObjectLogging.log("verifyParentBoard",
                           "verify that the parent board of current thread is the following: "
                           + forumBoardName, true);

@@ -1,11 +1,10 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import java.util.List;
-
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
@@ -49,6 +48,8 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "SUS-1770",
+      comment = "Test wont pass until product is fixed, don't bother reruning")
   @Test(groups = {"ForumThreadTests_003"})
   public void staffUserCanMoveThreadToOtherBoard() {
     ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -56,12 +57,10 @@ public class ForumThreadTests extends NewTestTemplate {
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
-    List<String> forumNames = forumMainPage.getForumNamesList();
     ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
-    forumThread.moveThread(forumNames.get(1));
-    forumThread.verifyParentBoard(forumNames.get(1));
+    forumThread.verifyParentBoard(forumThread.moveThread());
   }
 
   @Execute(asUser = User.STAFF)
