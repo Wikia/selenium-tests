@@ -2,24 +2,30 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.mobile.MobileTestTemplate;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 @Test(
         groups = "AdsVuapMercury"
 )
-public class TestAdsVuapMercury extends MobileTestTemplate {
+public class TestAdsVuapMercury extends NewTestTemplate {
 
     private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
     private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
 
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -38,6 +44,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -57,6 +64,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         videoFanTakeover.verifyFandomTabOpened(tabUrl);
     }
 
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -77,6 +85,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.APPLE_IPHONE_6)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -102,6 +111,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
     }
 
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -125,6 +135,7 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -146,14 +157,14 @@ public class TestAdsVuapMercury extends MobileTestTemplate {
 
         double time = videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue();
 
-        Thread.sleep(DELAY * 1000);
-        
+        TimeUnit.SECONDS.sleep(DELAY);
+
         Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue());
         Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue());
     }
 
     private void scrollToSlot(String slotName, AdsBaseObject ads) {
-        if (slotName == AdsContent.MOBILE_BOTTOM_LB) {
+        if (AdsContent.MOBILE_BOTTOM_LB.equals(slotName)) {
             ads.scrollToMobileFooter();
         }
     }
