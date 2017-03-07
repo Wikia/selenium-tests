@@ -328,30 +328,29 @@ public class ArticlePageObject extends WikiBasePageObject {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
     PageObjectLogging.log("First check",mostRecentComment.getText(), true);
-//    JavascriptExecutor js = (JavascriptExecutor) driver;
+    JavascriptExecutor js = (JavascriptExecutor) driver;
 //    mostRecentComment.sendKeys("");
 
     WebElement editButton = mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR));
-    WebElement replyButton = mostRecentComment.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
-//    jsActions.focus(editButton);
     Actions actions =  new Actions(driver);
     actions.moveToElement(editButton).perform();
 
 //    List<Comment> comments = getComments();
 //    Comment firstComment = comments.stream().filter(c-> c.getMessage() == "").findFirst().get();
-//    firstComment.editComment();
+//   firstComment.editComment();
 
 //    wait.forElementClickable(editButton);
-    PageObjectLogging.log("Second check",mostRecentComment.getText(), true);
+    //PageObjectLogging.log("Second check",mostRecentComment.getText(), true);
     editButton.click();
 
-//    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
-//                     EDIT_BUTTON_SELECTOR);
+    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
+                     EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);
   }
 
 //  public class Comment{
-//    public Comment(){
+//    By selector = selector;
+//    public Comment(By selector){
 //
 //    }
 //    public String getUser(){
