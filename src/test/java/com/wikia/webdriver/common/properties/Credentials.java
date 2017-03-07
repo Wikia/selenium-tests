@@ -131,6 +131,9 @@ public class Credentials {
   public final String userNameItalian;
   public final String passwordItalian;
 
+  public final String userNameComments;
+  public final String passwordComments;
+
   public final String apiToken;
 
   public Credentials() {
@@ -235,6 +238,9 @@ public class Credentials {
 
     userNameGoSearchPreferred = XMLReader.getValue(file, "ci.user.goSearchPreferredUser.username");
     passwordGoSearchPreferred = XMLReader.getValue(file, "ci.user.goSearchPreferredUser.password");
+
+    userNameComments = XMLReader.getValue(file, "ci.user.comments.username");
+    passwordComments = XMLReader.getValue(file, "ci.user.comments.password");
 
     apiToken = XMLReader.getValue(file, "ci.api.token");
 

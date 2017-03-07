@@ -69,7 +69,7 @@ import java.util.regex.Pattern;
 public class WikiBasePageObject extends BasePageObject {
 
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
-      ".wds-global-navigation__user-menu img[alt*=%userName%]";
+      ".wds-global-navigation__user-menu img";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
@@ -388,8 +388,11 @@ public class WikiBasePageObject extends BasePageObject {
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
       } else {
-        wait.forElementVisible(By.cssSelector(
-            LOGGED_IN_USER_SELECTOR_OASIS.replace("%userName%", userName.replace(" ", "_"))));
+        WebElement avatar = driver.findElement(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
+        wait.forElementVisible(avatar);
+        String loggedInUserName = avatar.getAttribute("alt");
+        if (!loggedInUserName.equals(userName))
+          throw new IllegalArgumentException("Invalid user, expected " + userName + ", but found: " + loggedInUserName);
       }
     } finally {
       restoreDefaultImplicitWait();

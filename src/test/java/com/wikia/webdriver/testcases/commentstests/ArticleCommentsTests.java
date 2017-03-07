@@ -20,8 +20,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "ArticleComments_001", invocationCount = 6)
-  @Execute(asUser = User.USER)
+  @Test(groups = "ArticleComments_001", invocationCount = 10)
+  @Execute(asUser = User.COMMENTS_REGULAR_USER)
   public void ArticleComments_001_editComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -31,7 +31,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     article.submitComment();
     article.verifyCommentText(comment);
-    article.verifyCommentCreator(credentials.userName);
+    article.verifyCommentCreator(credentials.userNameComments);
     article.triggerEditCommentArea();
     String commentEdited = PageContent.COMMENT_TEXT + article.getTimeStamp();
     editor.switchAndEditComment(commentEdited);
@@ -39,8 +39,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = "ArticleComments_002")
-  @Execute(asUser = User.USER)
+  @Test(groups = "ArticleComments_002", invocationCount = 10)
+  @Execute(asUser = User.COMMENTS_REGULAR_USER)
   public void ArticleComments_002_replyComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
@@ -50,13 +50,13 @@ public class ArticleCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     article.submitComment();
     article.verifyCommentText(comment);
-    article.verifyCommentCreator(credentials.userName);
+    article.verifyCommentCreator(credentials.userNameComments);
     article.triggerCommentReply();
     String commentReply = PageContent.REPLY_TEXT + article.getTimeStamp();
     editor.switchAndReplyComment(commentReply);
     article.submitReplyComment();
     article.verifyCommentReply(commentReply);
-    article.verifyReplyCreator(credentials.userName);
+    article.verifyReplyCreator(credentials.userNameComments);
   }
 
   @Test(groups = "ArticleComments_003")
