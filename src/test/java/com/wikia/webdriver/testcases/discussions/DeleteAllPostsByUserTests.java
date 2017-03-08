@@ -46,7 +46,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   }
 
   private PostEntity.Data setUp() {
-    return setUp(MercuryWikis.DISCUSSIONS_1);
+    return setUp(MercuryWikis.DISCUSSIONS_4);
   }
 
   /**
@@ -95,7 +95,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void anonDesktopDeleteAllOptionNotVisible() {
-    PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_1);
+    PostEntity.Data post = setUp();
     assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
@@ -104,7 +104,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonMobileDeleteAllOptionNotVisible() {
-    PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_1);
+    PostEntity.Data post = setUp();
     assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
@@ -115,7 +115,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browserSize = DESKTOP_RESOLUTION)
   public void regularUserDesktopDeleteAllOptionNotVisible() {
-    PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_1);
+    PostEntity.Data post = setUp();
     assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
@@ -124,7 +124,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void regularUserMobileDeleteAllOptionNotVisible() {
-    PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_1);
+    PostEntity.Data post = setUp();
     assertTrue(deleteAllOptionNotVisible(userWithPosts.getUserId()));
     cleanUp(post);
   }
