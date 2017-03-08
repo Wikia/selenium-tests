@@ -43,9 +43,9 @@ public class MessageWall extends WikiBasePageObject {
   By replyBodyBy = By.cssSelector(".replyBody");
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
-  @FindBy(css = "span.cke_button.cke_button_bold")
+  @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
   private WebElement boldButton;
-  @FindBy(css = "span.cke_button.cke_button_italic")
+  @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_italic")
   private WebElement italicButton;
   @FindBy(css = "span.cke_button.cke_button_italic")
   private WebElement italicButtonWrapper;
@@ -147,7 +147,8 @@ public class MessageWall extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     messageTitleField.clear();
     messageTitleField.sendKeys(title);
-    PageObjectLogging.log("writeTitle", "title written", messageTitleField.getText().equals(title));
+    PageObjectLogging.log("writeTitle", "title written",
+        messageTitleField.getAttribute("value").equals(title));
   }
 
   public void writeSourceMode(String text) {
