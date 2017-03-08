@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
@@ -142,7 +144,7 @@ public class MessageWall extends WikiBasePageObject {
   public void setTitle(String title) {
     driver.switchTo().defaultContent();
     messageTitleField.clear();
-    messageTitleField.sendKeys(title);
+    Typing.sendKeysHumanSpeed(messageTitleField, title);
     wait.forAttributeToContain(messageTitleField, "value", title);
     PageObjectLogging.log("writeTitle", "title written",
         messageTitleField.getAttribute("value").equals(title));
