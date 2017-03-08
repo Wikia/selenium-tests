@@ -18,7 +18,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGe
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_3)
 @Test(groups = {"discussions-creating-replies"})
 public class CreatingReplyTests extends NewTestTemplate {
 
