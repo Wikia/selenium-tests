@@ -147,6 +147,7 @@ public class MessageWall extends WikiBasePageObject {
     driver.switchTo().defaultContent();
     messageTitleField.clear();
     messageTitleField.sendKeys(title);
+    wait.forAttributeToContain(messageTitleField, "value", title)
     PageObjectLogging.log("writeTitle", "title written",
         messageTitleField.getAttribute("value").equals(title));
   }
