@@ -391,8 +391,10 @@ public class WikiBasePageObject extends BasePageObject {
         WebElement avatar = driver.findElement(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
         wait.forElementVisible(avatar);
         String loggedInUserName = avatar.getAttribute("alt");
-        if (!loggedInUserName.equals(userName))
-          throw new IllegalArgumentException("Invalid user, expected " + userName + ", but found: " + loggedInUserName);
+        if (!loggedInUserName.equals(userName)) {
+          throw new IllegalArgumentException(
+              "Invalid user, expected " + userName + ", but found: " + loggedInUserName);
+        }
       }
     } finally {
       restoreDefaultImplicitWait();

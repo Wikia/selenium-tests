@@ -336,6 +336,7 @@ public class ArticlePageObject extends WikiBasePageObject {
                      EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);
   }
+
   public DeletePageObject deleteFirstComment() {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
