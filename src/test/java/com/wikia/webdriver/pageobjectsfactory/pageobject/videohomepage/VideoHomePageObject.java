@@ -41,6 +41,7 @@ public class VideoHomePageObject extends WikiBasePageObject {
   }
 
   public void verifyFeaturedSliderSlides(int count) {
+    jsActions.scrollElementIntoViewPort(featuredSlides.stream().findFirst().get());
     wait.forElementVisible(featuredSlides.get(0));
     Assertion.assertTrue(featuredSlides.size() >= count);
     PageObjectLogging.log("verifyFeaturedSliderSlides",
