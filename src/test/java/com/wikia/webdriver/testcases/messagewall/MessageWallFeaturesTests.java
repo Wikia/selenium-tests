@@ -28,7 +28,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
-  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"}, invocationCount = 25)
+  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInBold() {
     MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
@@ -42,7 +42,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageBoldText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
-  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"}, invocationCount = 25)
+  @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInItallic() {
     MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
