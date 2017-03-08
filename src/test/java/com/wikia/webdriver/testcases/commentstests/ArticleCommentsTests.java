@@ -20,7 +20,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "ArticleComments_001", invocationCount = 10)
+  @Test(groups = "ArticleComments_001")
   @Execute(asUser = User.COMMENTS_REGULAR_USER)
   public void ArticleComments_001_editComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
@@ -39,7 +39,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyCommentText(commentEdited);
   }
 
-  @Test(groups = "ArticleComments_002", invocationCount = 10)
+  @Test(groups = "ArticleComments_002")
   @Execute(asUser = User.COMMENTS_REGULAR_USER)
   public void ArticleComments_002_replyComment() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
