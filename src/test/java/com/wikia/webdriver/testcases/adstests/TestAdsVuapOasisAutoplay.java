@@ -24,7 +24,7 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
-    VuapAssertions.verifyVideoAutoplay(vuap);
+    VuapAssertions.verifyVideoPlay(vuap);
   }
 
   @Test(groups = "AdsVuapAutoplayTimeProgressOasis",
@@ -45,7 +45,7 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
 
     final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    vuap.clickOnImage();
+    vuap.clickOnDefoultStateAdImage();
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
@@ -68,6 +68,6 @@ public class TestAdsVuapOasisAutoplay extends TemplateNoFirstLoad {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
-    VuapAssertions.verifyAutoplayUnmuteAndMute(vuap);
+    VuapAssertions.verifyVideoUnmuteAndMute(vuap);
   }
 }

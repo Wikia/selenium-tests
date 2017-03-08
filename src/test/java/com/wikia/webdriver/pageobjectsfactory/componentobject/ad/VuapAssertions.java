@@ -12,7 +12,7 @@ public class VuapAssertions {
     throw new IllegalAccessError("Utility class");
   }
 
-  public static void verifyAutoplayUnmuteAndMute(final AutoplayVuap vuap) {
+  public static void verifyVideoUnmuteAndMute(final AutoplayVuap vuap) {
     Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
 
     vuap.unmute();
@@ -36,7 +36,7 @@ public class VuapAssertions {
     Assert.assertTrue(indicatorCurrentTime > vuap.getIndicatorCurrentTime(), "Video time indicator should move.");
   }
 
-  public static void verifyVideoAutoplay(final AutoplayVuap vuap) {
+  public static void verifyVideoPlay(final AutoplayVuap vuap) {
     vuap.pause();
 
     Assert.assertTrue(vuap.hasStarted(), "VUAP did not automatically played when page was opened.");
@@ -48,10 +48,14 @@ public class VuapAssertions {
     vuap.waitForVideoToEnd(maxVideoDuration);
   }
 
+  public static void verifyVideoClosedAndReplyButtonDisplayed(final AutoplayVuap vuap, long maxVideoDuration) {
+    vuap.waitForVideoToEnd(maxVideoDuration);
+  }
+
   private static void playVideoForOneSecond(final AutoplayVuap vuap) {
     vuap.play();
     try {
-      TimeUnit.SECONDS.sleep(1);
+      TimeUnit.MILLISECONDS.sleep(200);
     } catch (InterruptedException x) {
       // ignore this exception
     }

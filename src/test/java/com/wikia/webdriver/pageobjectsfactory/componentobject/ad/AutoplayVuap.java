@@ -14,20 +14,38 @@ public class AutoplayVuap {
 
   private static final String SLOT_SELECTOR_PREFIX = "#%s .";
 
-  private static final String PAUSE_CLASS_NAME = "pause-overlay";
+  private static final String PAUSE_CLASS_NAME = "pause-overlay ";
+
+  private static final String REPLAY_CLASS_NAME = "replay-overlay";
 
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
 
   private static final String SPEAKER_CLASS_NAME = "speaker";
 
+  private static final String CLOSE_BUTTON_CLASS_NAME = "close-ad";
+
+  private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "div#area2";
+
+  private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "div#area4";
+
+  private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
+
+  private static final String AD_DEFAULT_STATE_IMAGE_SELECTOR = "background_right";
+
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .replay-overlay
+  private static final String REPLAY_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + REPLAY_CLASS_NAME;
 
   // #TOP_LEADERBOARD .current-time
   private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
 
   // #TOP_LEADERBOARD .speaker
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .close-ad
+  private static final String CLSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
   private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
 
@@ -81,17 +99,39 @@ public class AutoplayVuap {
     }
   }
 
-  public void clickOnImage() {
-    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
-    driver.switchTo().frame(iframe);
-    driver.findElement(By.id("background_right")).click();
-    driver.switchTo().defaultContent();
+  public void replay() {
+      clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
+      playing = true;
   }
 
-  public void clickOnImageResolvedState() {
+  public void clickOnDefoultStateAdImage() {
+    clickOnAdImage(AD_DEFAULT_STATE_IMAGE_SELECTOR);
+  }
+
+  public void clickOnDefaultAdTngClickArea2() {
+    clickOnAdImage(AD_TNG_CLICK_AREA_2_SELECTOR);
+  }
+
+  public void clickOnDefaultAdTngClickArea4() {
+    clickOnAdImage(AD_TNG_CLICK_AREA_4_SELECTOR);
+  }
+
+  public void clickOnAdImageResolvedState() {
+    clickOnAdImage(AD_RESOLVED_STATE_IMAGE_SELECTOR);
+  }
+
+  public void clickOnSoundButton() {
+    findSpeakerIcon().click();
+  }
+
+  public void clickOnCloseButton() {
+    findCloseButton().click();
+  }
+
+  private void clickOnAdImage(String clickAreaSelector) {
     final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
     driver.switchTo().frame(iframe);
-    driver.findElement(By.id("background2")).click();
+    driver.findElement(By.cssSelector(clickAreaSelector)).click();
     driver.switchTo().defaultContent();
   }
 
@@ -102,6 +142,7 @@ public class AutoplayVuap {
 
   public double getVideoHieght() {
     if (playing) {
+      pause();
       return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
     }
     return 0;
@@ -146,7 +187,11 @@ public class AutoplayVuap {
   }
 
   private WebElement findSpeakerIcon() {
-    return driver.findElement(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
+    return wait.forElementClickable(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
+  }
+
+  private WebElement findCloseButton() {
+    return wait.forElementClickable(By.cssSelector(String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
   private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
