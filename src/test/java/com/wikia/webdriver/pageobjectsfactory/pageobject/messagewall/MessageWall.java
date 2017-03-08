@@ -210,8 +210,17 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickBoldButton() {
-    wait.forElementVisible(boldButton);
+    boolean state = boldButton.getAttribute("class").contains("cke_on");
+    wait.forElementClickable(boldButton);
     scrollAndClick(boldButton);
+    if (state) {
+      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_bold.cke_off"));
+      PageObjectLogging.log("clickItalicButton", "italic button is now OFF", true);
+    } else {
+      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_bold.cke_on"));
+      PageObjectLogging.log("clickItalicButton", "italic button is now ON", true);
+    }
+
     PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
   }
 

@@ -29,16 +29,16 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
-  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"})
+  @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"}, invocationCount = 25)
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInBold() {
     MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
+    wall.writeTitle(title);
     wall.clickBoldButton();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
     wall.submit();
     wall.verifyMessageBoldText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
