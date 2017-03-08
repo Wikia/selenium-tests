@@ -33,7 +33,7 @@ public class TopBar extends BasePageObject {
   private WebElement searchIconClickableLink;
 
   @FindBy(css = ".icon-button-icon > use[*|href*='close']")
-  private WebElement closeButton;
+  private WebElement closeButtonInnerElement;
 
   @FindBy(css = ".nav-menu")
   private WebElement navMenu;
@@ -45,6 +45,7 @@ public class TopBar extends BasePageObject {
   private List<WebElement> searchSuggestions;
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
+  private By parentBy = By.xpath("./..");
 
   public TopBar(WebDriver driver) {
     PageFactory.initElements(driver, this);
@@ -86,6 +87,9 @@ public class TopBar extends BasePageObject {
   }
 
   public Navigation clickCloseButton() {
+    // Clicking on the inner element doesn't always work so we click the parent (<svg>) instead
+    WebElement closeButton = closeButtonInnerElement.findElement(parentBy);
+
     PageObjectLogging.logInfo("Click close button");
     wait.forElementClickable(closeButton);
     closeButton.click();
@@ -153,7 +157,7 @@ public class TopBar extends BasePageObject {
 
   public boolean isCloseIconVisible() {
     try {
-      return closeButton.isDisplayed();
+      return closeButtonInnerElement.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
       return false;

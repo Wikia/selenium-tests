@@ -1,5 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -8,25 +16,38 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import java.util.List;
-import javax.swing.text.html.HTML;
 
 
 public class MessageWall extends WikiBasePageObject {
 
   public static final String TEXT_EDITOR_BUTTON_CLICKED = "cke_on";
+  By messageTitleBy = By.cssSelector(".msg-title");
+  By messageBodyBy = By.cssSelector(".msg-body");
+  By imageBy = By.cssSelector(".thumbimage");
+  By messageTextBoldBy = By.cssSelector("b");
+  By messageTextItalicBy = By.cssSelector("i");
+  By messageTextBy = By.cssSelector(".msg-body *");
+  By messageLinkBy = By.cssSelector("a");
+  By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
+  By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
+  By editButtonBy = By.cssSelector(".edit-message");
+  By removeButtonBy = By.cssSelector(".remove-message");
+  By reopenButtonBy = By.cssSelector(".reopen-thread");
+  By quoteButtonBy = By.cssSelector(".quote-button.secondary");
+  By quoteMessageBy = By.cssSelector(".replies p");
+  By saveChangesButtonBy = By.cssSelector(".save-edit");
+  By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
+  By firstMessageWrapperBy =
+      By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  By replyButtonBy = By.cssSelector(".replyButton");
+  By replyBodyBy = By.cssSelector(".replyBody");
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_bold > .cke_icon")
   private WebElement boldButton;
-  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic > .cke_button_italic")
+  @FindBy(css = "span.cke_button.cke_button_italic")
   private WebElement italicButton;
-  @FindBy(css = ".cke_toolbar_formatmini .cke_button_italic")
+  @FindBy(css = "span.cke_button.cke_button_italic")
   private WebElement italicButtonWrapper;
   @FindBy(css = ".cke_toolbar_insert .RTEImageButton > .cke_icon")
   private WebElement imageButton;
@@ -50,33 +71,11 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".msg-title > a")
   private List<WebElement> threadList;
-
   private String newMessageMenu =
       ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
   private String closeButtonString = ".close-thread";
-
-  By messageTitleBy = By.cssSelector(".msg-title");
-  By messageBodyBy = By.cssSelector(".msg-body");
-  By imageBy = By.cssSelector(".thumbimage");
-  By messageTextBoldBy = By.cssSelector("b");
-  By messageTextItalicBy = By.cssSelector("i");
-  By messageTextBy = By.cssSelector(".msg-body *");
-  By messageLinkBy = By.cssSelector("a");
-  By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
-  By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
-  By editButtonBy = By.cssSelector(".edit-message");
-  By removeButtonBy = By.cssSelector(".remove-message");
   By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
-  By reopenButtonBy = By.cssSelector(".reopen-thread");
-  By quoteButtonBy = By.cssSelector(".quote-button.secondary");
-  By quoteMessageBy = By.cssSelector(".replies p");
-  By saveChangesButtonBy = By.cssSelector(".save-edit");
-  By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  By firstMessageWrapperBy = By
-      .cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  By replyButtonBy = By.cssSelector(".replyButton");
-  By replyBodyBy = By.cssSelector(".replyBody");
 
   public MessageWall(WebDriver driver) {
     super();
@@ -217,11 +216,16 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickItalicButton() {
-    wait.forElementVisible(italicButton);
-    wait.forElementClickable(italicButton);
+    boolean state = italicButton.getAttribute("class").contains("cke_on");
     scrollAndClick(italicButton);
-    wait.forAttributeToContain(italicButton.findElement(By.xpath("..")), HTML.Attribute.CLASS.toString(),
-                               TEXT_EDITOR_BUTTON_CLICKED);
+    if (state) {
+      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_italic.cke_off"));
+      PageObjectLogging.log("clickItalicButton", "italic button is now OFF", true);
+    } else {
+      wait.forElementPresent(By.cssSelector(".cke_button.cke_button_italic.cke_on"));
+      PageObjectLogging.log("clickItalicButton", "italic button is now ON", true);
+    }
+
     PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
@@ -263,18 +267,16 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyMessageTitle(String title) {
     wait.forTextInElement(messageTitleBy, title);
-    PageObjectLogging
-        .log("verifyMessageTitle", "message with title: " + title + ", verified", true);
+    PageObjectLogging.log("verifyMessageTitle", "message with title: " + title + ", verified",
+        true);
   }
 
   public void verifyMessageText(String title, String message, String userName) {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(),
-        title);
+        driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText(),
-        message);
+        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy).getText(), message);
     Assertion.assertEquals(
         driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText(),
         userName);
@@ -284,10 +286,8 @@ public class MessageWall extends WikiBasePageObject {
     wait.forTextInElement(messageTitleBy, title);
     Assertion.assertEquals(title,
         driver.findElement(firstMessageWrapperBy).findElement(messageTitleBy).getText());
-    Assertion.assertEquals(
-        message,
-        driver.findElement(firstMessageWrapperBy).findElement(messageBodyBy)
-            .findElement(messageTextBoldBy).getText());
+    Assertion.assertEquals(message, driver.findElement(firstMessageWrapperBy)
+        .findElement(messageBodyBy).findElement(messageTextBoldBy).getText());
     Assertion.assertEquals(userName,
         driver.findElement(firstMessageWrapperBy).findElement(messageUserNameBy).getText());
   }
@@ -322,8 +322,8 @@ public class MessageWall extends WikiBasePageObject {
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
         .getAttribute("href"), wikiURL + "/wiki/" + target);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getText(), text);
+    Assertion.assertEquals(
+        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text);
   }
 
   public void verifyExternalLink(String title, String target, String text, String wikiURL) {
@@ -331,13 +331,13 @@ public class MessageWall extends WikiBasePageObject {
     Assertion.assertEquals(editMessageWrapper.findElement(messageTitleBy).getText(), title);
     Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
         .getAttribute("href"), target);
-    Assertion.assertEquals(editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy)
-        .getText(), text);
+    Assertion.assertEquals(
+        editMessageWrapper.findElement(messageBodyBy).findElement(messageLinkBy).getText(), text);
   }
 
   public void verifyQuote(String quoteText) {
-    Assertion.assertEquals(driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy)
-                               .getText(), quoteText);
+    Assertion.assertEquals(
+        driver.findElement(firstMessageWrapperBy).findElement(quoteMessageBy).getText(), quoteText);
   }
 
   public void verifyImageAdded(String title) {
@@ -355,7 +355,7 @@ public class MessageWall extends WikiBasePageObject {
         }
       }
       return new MessageWallThreadPageObject(driver);
-    }finally {
+    } finally {
       waitForPageLoad();
     }
   }

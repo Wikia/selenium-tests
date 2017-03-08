@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.visualeditor.text;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -60,7 +59,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   @Test(
       groups = {
           "VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002",
-          "VisualEditorEditing_003", "VisualEditorDelete"
+          "VisualEditorEditing_003"
       }
   )
   public void VisualEditorEditing_001_insertToNewArticle() {
@@ -81,7 +80,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorDelete", "VisualEditorEditing_002"},
+      groups = {"VisualEditorEditing", "VisualEditorEditing_002"},
       dependsOnGroups = "VisualEditorEditing_001"
   )
   public void VisualEditorEditing_002_delete() {

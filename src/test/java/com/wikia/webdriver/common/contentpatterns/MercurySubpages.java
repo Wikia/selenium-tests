@@ -46,7 +46,7 @@ public class MercurySubpages {
   public static final String NTAVCC_MAIN_PAGE = "/wiki/Mercuryntavcc_Wikia";
 
   // Articles prepared for mercuryemptycc.wikia.com wiki (without FC, CC, TA and TV)
-  public static final String ECC_MAIN_PAGE = "/wiki/Mercury_empty_CC_Wikia";
+  public static final String ECC_MAIN_PAGE = "/wiki/Mercury_Empty_CC_Editor_Wikia";
 
   // Articles on mlp.wikia.com
   public static final String MLP_MAIN_PAGE = "/wiki/My_Little_Pony_Friendship_is_Magic_Wiki";
