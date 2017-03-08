@@ -43,7 +43,7 @@ public class MessageWall extends WikiBasePageObject {
   By replyBodyBy = By.cssSelector(".replyBody");
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
-  @FindBy(css = ".cke_toolbar_formatmini .cke_button_bold > .cke_icon")
+  @FindBy(css = "span.cke_button.cke_button_bold")
   private WebElement boldButton;
   @FindBy(css = "span.cke_button.cke_button_italic")
   private WebElement italicButton;
@@ -143,19 +143,11 @@ public class MessageWall extends WikiBasePageObject {
     return new MiniEditorPreviewComponentObject(driver);
   }
 
-  public void writeTitle(String title) {
+  public void setTitle(String title) {
     driver.switchTo().defaultContent();
     messageTitleField.clear();
     messageTitleField.sendKeys(title);
-    PageObjectLogging.log("writeTitle", "title written", true);
-  }
-
-  public void writeEditTitle(String title) {
-    driver.switchTo().defaultContent();
-    WebElement titleField = editMessageWrapper.findElement(messageTitleBy);
-    titleField.clear();
-    titleField.sendKeys(title);
-    PageObjectLogging.log("writeEditTitle", "title edited", true);
+    PageObjectLogging.log("writeTitle", "title written", messageTitleField.getText().equals(title));
   }
 
   public void writeSourceMode(String text) {
@@ -215,17 +207,16 @@ public class MessageWall extends WikiBasePageObject {
     scrollAndClick(boldButton);
     if (state) {
       wait.forElementPresent(By.cssSelector(".cke_button.cke_button_bold.cke_off"));
-      PageObjectLogging.log("clickItalicButton", "italic button is now OFF", true);
+      PageObjectLogging.log("clickBoldButton", "italic button is now OFF", true);
     } else {
       wait.forElementPresent(By.cssSelector(".cke_button.cke_button_bold.cke_on"));
-      PageObjectLogging.log("clickItalicButton", "italic button is now ON", true);
+      PageObjectLogging.log("clickBoldButton", "italic button is now ON", true);
     }
-
-    PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
   }
 
   public void clickItalicButton() {
     boolean state = italicButton.getAttribute("class").contains("cke_on");
+    wait.forElementClickable(boldButton);
     scrollAndClick(italicButton);
     if (state) {
       wait.forElementPresent(By.cssSelector(".cke_button.cke_button_italic.cke_off"));
@@ -234,8 +225,6 @@ public class MessageWall extends WikiBasePageObject {
       wait.forElementPresent(By.cssSelector(".cke_button.cke_button_italic.cke_on"));
       PageObjectLogging.log("clickItalicButton", "italic button is now ON", true);
     }
-
-    PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
   }
 
   public MessageWallAddLinkComponentObject clickLinkButton() {
