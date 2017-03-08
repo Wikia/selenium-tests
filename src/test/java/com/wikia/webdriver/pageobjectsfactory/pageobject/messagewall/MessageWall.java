@@ -20,35 +20,37 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class MessageWall extends WikiBasePageObject {
 
-  public static final String TEXT_EDITOR_BUTTON_CLICKED = "cke_on";
-  By messageTitleBy = By.cssSelector(".msg-title");
-  By messageBodyBy = By.cssSelector(".msg-body");
-  By imageBy = By.cssSelector(".thumbimage");
-  By messageTextBoldBy = By.cssSelector("b");
-  By messageTextItalicBy = By.cssSelector("i");
-  By messageTextBy = By.cssSelector(".msg-body *");
-  By messageLinkBy = By.cssSelector("a");
-  By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
-  By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
-  By editButtonBy = By.cssSelector(".edit-message");
-  By removeButtonBy = By.cssSelector(".remove-message");
-  By reopenButtonBy = By.cssSelector(".reopen-thread");
-  By quoteButtonBy = By.cssSelector(".quote-button.secondary");
-  By quoteMessageBy = By.cssSelector(".replies p");
-  By saveChangesButtonBy = By.cssSelector(".save-edit");
-  By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  By firstMessageWrapperBy =
+  final By firstMessageWrapperBy =
       By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  By replyButtonBy = By.cssSelector(".replyButton");
-  By replyBodyBy = By.cssSelector(".replyBody");
+  final By replyButtonBy = By.cssSelector(".replyButton");
+  private final By messageTitleBy = By.cssSelector(".msg-title");
+  private final By messageBodyBy = By.cssSelector(".msg-body");
+  private final By imageBy = By.cssSelector(".thumbimage");
+  private final By messageTextBoldBy = By.cssSelector("b");
+  private final By messageTextItalicBy = By.cssSelector("i");
+  private final By messageTextBy = By.cssSelector(".msg-body *");
+  private final By messageLinkBy = By.cssSelector("a");
+  private final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
+  private final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
+  private final By editButtonBy = By.cssSelector(".edit-message");
+  private final By removeButtonBy = By.cssSelector(".remove-message");
+  private final By reopenButtonBy = By.cssSelector(".reopen-thread");
+  private final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
+  private final By quoteMessageBy = By.cssSelector(".replies p");
+  private final By saveChangesButtonBy = By.cssSelector(".save-edit");
+  private final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
+  private final By replyBodyBy = By.cssSelector(".replyBody");
+  private final String newMessageMenu =
+      ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
+  private final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
+  private final String closeButtonString = ".close-thread";
+  private final By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
   private WebElement boldButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_italic")
   private WebElement italicButton;
-  @FindBy(css = "span.cke_button.cke_button_italic")
-  private WebElement italicButtonWrapper;
   @FindBy(css = ".cke_toolbar_insert .RTEImageButton > .cke_icon")
   private WebElement imageButton;
   @FindBy(css = ".cke_toolbar_formatmini .cke_button_link > .cke_icon")
@@ -71,11 +73,6 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".msg-title > a")
   private List<WebElement> threadList;
-  private String newMessageMenu =
-      ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
-  private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
-  private String closeButtonString = ".close-thread";
-  By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
 
   public MessageWall(WebDriver driver) {
     super();
