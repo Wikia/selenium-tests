@@ -1,14 +1,11 @@
-/**
- *
- */
 package com.wikia.webdriver.testcases.messagewall;
+
+import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -16,16 +13,12 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptions
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallAddLinkComponentObject;
 
-import org.testng.annotations.Test;
-
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures", "MessageWallTests"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInSourceMode() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -33,13 +26,13 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     wall.writeSourceMode(message);
     wall.writeTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userName);
+    wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
   @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInBold() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -47,14 +40,15 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     mini.switchAndWrite(message);
     wall.writeTitle(title);
     wall.submit();
-    wall.verifyMessageBoldText(title, message, credentials.userName);
+    wall.verifyMessageBoldText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
   @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"})
-  @Execute(asUser = User.USER)
-  @RelatedIssue(issueID = "SOC-2094", comment = "test should pass locally. The ticket is about instability")
+  @Execute(asUser = User.USER_MESSAGE_WALL)
+  @RelatedIssue(issueID = "SOC-2094",
+      comment = "test should pass locally. The ticket is about instability")
   public void userCanWriteMessageInItallic() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -62,13 +56,13 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
     mini.switchAndWrite(message);
     wall.writeTitle(title);
     wall.submit();
-    wall.verifyMessageItalicText(title, message, credentials.userName);
+    wall.verifyMessageItalicText(title, message, User.USER_MESSAGE_WALL.getUserName());
   }
 
   @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures", "MessageWallTests"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageWithImage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
@@ -81,9 +75,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures", "MessageWallTests"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageWithInternalLink() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
@@ -94,9 +88,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   }
 
   @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures", "MessageWallTests"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageWithExternalLink() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.writeTitle(title);
     wall.triggerMessageArea();
