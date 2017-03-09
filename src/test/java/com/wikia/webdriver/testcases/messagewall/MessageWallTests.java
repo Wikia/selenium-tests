@@ -38,7 +38,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName);
     wall.triggerEditMessageArea();
@@ -56,7 +56,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName);
     MessageWallCloseRemoveThreadPageObject remove = wall.clickRemoveThread();
@@ -72,7 +72,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userNameStaff);
     MessageWallCloseRemoveThreadPageObject remove = wall.clickCloseThread();
@@ -91,7 +91,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userNameStaff);
     MiniEditorComponentObject miniQuote = wall.clickQuoteButton();
@@ -109,7 +109,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     MiniEditorPreviewComponentObject preview = wall.preview();
     preview.verifyTextContent(message);
     preview.publish();
@@ -124,7 +124,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
@@ -148,7 +148,7 @@ public class MessageWallTests extends NewTestTemplate {
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.clickSourceModeButton();
     wall.writeSourceMode(SourceModeContent.UNCLOSED_DIV_COMMENT);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageTitle(title);
     wall.refreshPage();
@@ -182,7 +182,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userNameBlockedAccount);
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
@@ -204,7 +204,7 @@ public class MessageWallTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + MessageWall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + MessageWall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
 
     wall.verifyMessageText(title, message, credentials.userName);

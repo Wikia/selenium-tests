@@ -267,11 +267,17 @@ public class ChatTests extends NewTestTemplate {
     chatUserStaff.banUser(userToBeBanned);
 
     switchToWindow(1);
+    //there is a minimum time between
+    try {
+      Thread.sleep(8000);
+
     chatWindow.refreshPage();
 
-    try {
       Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
-    } finally {
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    finally {
       switchToWindow(0);
       chatUserStaff.unBanUser(userToBeBanned);
     }
