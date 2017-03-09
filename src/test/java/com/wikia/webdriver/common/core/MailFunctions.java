@@ -130,7 +130,7 @@ public class MailFunctions {
     }
   }
 
-  public static String getPasswordFromEmailContent(String mailContent) {
+  public static String getPasswordResetLinkFromEmailContent(String mailContent) {
     // mail content contain '=' chars, which has to be removed
     String content = mailContent.replace("=", "");
     Pattern p = Pattern.compile("below:[\\s\\S]*?(?=If)"); // getting new password

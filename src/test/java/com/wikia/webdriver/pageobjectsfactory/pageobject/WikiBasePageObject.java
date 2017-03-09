@@ -444,13 +444,13 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
-  public String receiveMailWithNewPassword(String email, String password) {
-    String newPassword = MailFunctions.getPasswordFromEmailContent(
-        MailFunctions.getFirstEmailContent(email, password, "Reset your Fandom password"));
-    PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
+  public String getPasswordResetLink(String email, String password) {
+    String passwordResetEmail = MailFunctions.getFirstEmailContent(email, password, "Reset your Fandom password");
+    String resetLink = MailFunctions.getPasswordResetLinkFromEmailContent(passwordResetEmail);
+    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
         true);
 
-    return newPassword;
+    return resetLink;
   }
 
   public void verifyRevisionMarkedAsMinor() {

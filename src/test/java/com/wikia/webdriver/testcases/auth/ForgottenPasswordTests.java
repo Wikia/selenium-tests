@@ -34,7 +34,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     login.clickLogInLink();
     String
         newPassword =
-        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
+        login.getPasswordResetLink(credentials.email, credentials.emailPassword);
     loginModal.login(userName, newPassword);
     loginModal.verifyUserLoggedIn(userName);
   }
@@ -52,7 +52,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     login.clickLogInLink();
     String
         newPassword =
-        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
+        login.getPasswordResetLink(credentials.email, credentials.emailPassword);
 
     signIn
         .getLoginArea()
@@ -77,7 +77,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     login.clickLogInLink();
     String
         newPassword =
-        login.receiveMailWithNewPassword(credentials.email, credentials.emailPassword);
+        login.getPasswordResetLink(credentials.email, credentials.emailPassword);
     String verifyString = userName.substring(0, 1).toUpperCase() + userName.substring(1);
 
     signIn
