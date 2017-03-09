@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,8 +42,10 @@ public class VideoHomePageObject extends WikiBasePageObject {
   }
 
   public void verifyFeaturedSliderSlides(int count) {
-    jsActions.scrollElementIntoViewPort(featuredSlides.stream().findFirst().get());
-    wait.forElementVisible(featuredSlides.get(0));
+    wait.forElementPresent(By.cssSelector(
+        "#featured-video-bxslider li[style*='display: list-item;'],"
+        + "#featured-video-bxslider li[style*='display: block;']"
+    ));
     Assertion.assertTrue(featuredSlides.size() >= count);
     PageObjectLogging.log("verifyFeaturedSliderSlides",
                           "At least " + count + "latest Videos modules have rendered", true);
