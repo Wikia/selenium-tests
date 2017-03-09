@@ -40,7 +40,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
         article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
         article.closeNewWikiCongratulationsLightBox();
         article.verifyWikiTitleHeader(wikiName);
-        article.verifyUserLoggedIn(credentials.userName);
+        article.verifyUserLoggedIn(credentials.userName10);
     }
 
 }
