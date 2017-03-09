@@ -31,7 +31,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     article.submitComment();
     article.verifyCommentText(comment);
-    article.verifyCommentCreator(credentials.userNameComments);
+    article.verifyCommentCreator(User.COMMENTS_REGULAR_USER.getUserName());
     article.triggerEditCommentArea();
     String commentEdited = PageContent.COMMENT_TEXT + article.getTimeStamp();
     editor.switchAndEditComment(commentEdited);
@@ -50,13 +50,13 @@ public class ArticleCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     article.submitComment();
     article.verifyCommentText(comment);
-    article.verifyCommentCreator(credentials.userNameComments);
+    article.verifyCommentCreator(User.COMMENTS_REGULAR_USER.getUserName());
     article.triggerCommentReply();
     String commentReply = PageContent.REPLY_TEXT + article.getTimeStamp();
     editor.switchAndReplyComment(commentReply);
     article.submitReplyComment();
     article.verifyCommentReply(commentReply);
-    article.verifyReplyCreator(credentials.userNameComments);
+    article.verifyReplyCreator(User.COMMENTS_REGULAR_USER.getUserName());
   }
 
   @Test(groups = "ArticleComments_003")
