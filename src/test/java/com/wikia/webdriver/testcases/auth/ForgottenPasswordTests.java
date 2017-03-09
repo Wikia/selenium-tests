@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.logintests;
+package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;

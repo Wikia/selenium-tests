@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.logintests;
+package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
