@@ -267,9 +267,9 @@ public class ChatTests extends NewTestTemplate {
     chatUserStaff.banUser(userToBeBanned);
 
     switchToWindow(1);
-    //there is a minimum time between
+    //there is a minimum time between user gets banned, and action to take effect
     try {
-      Thread.sleep(8000);
+      Thread.sleep(5000);
 
     chatWindow.refreshPage();
 
@@ -280,6 +280,12 @@ public class ChatTests extends NewTestTemplate {
     finally {
       switchToWindow(0);
       chatUserStaff.unBanUser(userToBeBanned);
+    }
+
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
 
     switchToWindow(1);
