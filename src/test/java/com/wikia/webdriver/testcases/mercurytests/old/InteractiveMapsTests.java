@@ -32,7 +32,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     new Navigate().toPage(MercurySubpages.MAP);
   }
 
-  @RelatedIssue(issueID = "SUS-1775", "Test won't pass until product is fixed, please don't bother reruning")
+  @RelatedIssue(issueID = "SUS-1775", comment = "Test won't pass until product is fixed, please don't bother reruning")
   @Test(groups = "MercuryInteractiveMapsTest_001")
   @DontRun(env={"dev", "sandbox", "preview"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
