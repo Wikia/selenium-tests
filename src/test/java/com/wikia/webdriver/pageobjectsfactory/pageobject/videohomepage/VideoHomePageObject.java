@@ -48,7 +48,7 @@ public class VideoHomePageObject extends WikiBasePageObject {
     ));
     Assertion.assertTrue(featuredSlides.size() >= count);
     PageObjectLogging.log("verifyFeaturedSliderSlides",
-                          "At least " + count + "latest Videos modules have rendered", true);
+                          "At least " + count + " latest Videos modules have rendered", true);
   }
 
   public void verifyLatestVideosRows(int count) {
