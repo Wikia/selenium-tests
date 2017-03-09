@@ -19,11 +19,11 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
 
   private static final String PROJECT43_TNG_ARTICLE_LINK = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
 
-  private AdsBaseObject openPageWithVideoInLocalStorage(Page page, String player, String video) {
+  private AdsBaseObject openPageWithVideoInLocalStorage(Page page) {
     final AdsBaseObject ads = new AdsBaseObject(driver);
     ads.getUrl(urlBuilder.getUrlForWiki("project43"));
     JavascriptActions runScript = new JavascriptActions(driver);
-    runScript.execute("localStorage.setItem('" + player + video + ");");
+    runScript.execute("localStorage.setItem('" + VuapVideos.PORVATA_VAST + VuapVideos.VAST_VIDEO + ");");
     ads.getUrl(page);
     return ads;
   }
@@ -32,7 +32,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
-    openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     VuapAssertions.verifyVideoPlay(vuap);
@@ -42,7 +42,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
-    openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
@@ -52,9 +52,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapDefaultStateShouldHaveLinkToProject43ArticleOnImage(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    vuap.clickOnDefaultAdTngClickArea2();
+    vuap.clickOnClickArea2();
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(PROJECT43_TNG_ARTICLE_LINK), "Image should point to page on project43.");
@@ -64,9 +64,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapDefaultStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    vuap.clickOnDefaultAdTngClickArea4();
+    vuap.clickOnClickArea4();
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
@@ -76,16 +76,16 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapDefaultStateAutoplayIsMutredAfrerReplayIsNotMuted(Page page, String slot, String videoIframeSelector) {
-    openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
 
-    VuapAssertions.verifyVideoEndedAndReplyButtonDisplayed(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+    VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
 
     vuap.replay();
 
-    vuap.clickOnSoundButton();
+    vuap.mute();
 
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
   }
@@ -94,15 +94,18 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateApearsOnSecondPageView(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    double defaultVideoHeight = vuap.getVideoHieght();
+
+    vuap.pause();
+    double defaultVideoHeight = vuap.getVideoHieghtWhilePaused();
 
     ads.refreshPage();
 
     vuap.replay();
 
-    double resolvedVideoHeight = vuap.getVideoHieght();
+    vuap.pause();
+    double resolvedVideoHeight = vuap.getVideoHieghtWhilePaused();
 
     Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, resolvedVideoHeight));
   }
@@ -111,7 +114,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateShouldStartPlayingAfterClickOnReplay(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     ads.refreshPage();
 
@@ -124,7 +127,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     ads.refreshPage();
@@ -138,12 +141,12 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateShouldHaveLinkToProject43ArticleOnImage(Page page, String slot, String videoIframeSelector) {
-    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     ads.refreshPage();
 
-    vuap.clickOnDefaultAdTngClickArea2();
+    vuap.clickOnClickArea2();
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(PROJECT43_TNG_ARTICLE_LINK), "Image should point to page on project43.");
@@ -153,12 +156,12 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot, String videoIframeSelector) {
-    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     ads.refreshPage();
 
-    vuap.clickOnDefaultAdTngClickArea4();
+    vuap.clickOnClickArea4();
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
@@ -168,7 +171,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateShoulCloseAfterTapingOncloseButton(Page page, String slot, String videoIframeSelector) {
-    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     ads.refreshPage();
@@ -177,23 +180,23 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
 
     vuap.pause();
 
-    vuap.clickOnCloseButton();
+    vuap.close();
 
-    VuapAssertions.verifyVideoClosedAndReplyButtonDisplayed(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+    VuapAssertions.verifyReplyButtonDisplayedAfterVideoClose(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
   @Test(groups = "AdsVuapResolvedStateIsNotMuteOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedStateIsNotMute(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     ads.refreshPage();
 
     vuap.replay();
 
-    vuap.clickOnSoundButton();
+    vuap.mute();
 
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
   }
@@ -202,13 +205,13 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesctop")
   public void vuapResolvedShouldEnd(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.PORVATA_VAST, VuapVideos.VAST_VIDEO);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     ads.refreshPage();
 
     vuap.replay();
 
-    VuapAssertions.verifyVideoEndedAndReplyButtonDisplayed(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+    VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 }

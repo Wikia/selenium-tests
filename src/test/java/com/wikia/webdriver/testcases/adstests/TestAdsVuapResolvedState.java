@@ -68,7 +68,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
-    VuapAssertions.verifyVideoEndedAndReplyButtonDisplayed(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+    VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
   @Test(groups = "AdsVuapResolvedStateOnSecodPageView",
@@ -77,11 +77,11 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
   public void vuapResolvedStateAfterSecondPageView(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    double defaultVideoHeight = vuap.getVideoHieght();
+    double defaultVideoHeight = vuap.getVideoHieghtWhilePaused();
 
     ads.refreshPage();
 
-    Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, vuap.getVideoHieght()));
+    Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, vuap.getVideoHieghtWhilePaused()));
   }
 
   @Test(groups = "AdsVuapResolvedStateAutoplayOasis",
@@ -145,7 +145,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
     ads.refreshPage();
 
-    VuapAssertions.verifyVideoEndedAndReplyButtonDisplayed(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+    VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 }
 

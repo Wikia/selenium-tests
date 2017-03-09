@@ -2,10 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 public class VuapVideos {
 
-  private VuapVideos() {
-    throw new IllegalAccessError("Utility class");
-  }
-
   public static final String PORVATA_VAST = "porvata_vast";
 
   public static final String VAST_VIDEO = "', '<?xml version=\"1.0\" encoding=\"UTF-8\"?><VAST xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance" +
@@ -29,4 +25,8 @@ public class VuapVideos {
       "</Tracking></TrackingEvents> " +
       "<MediaFiles><MediaFile type=\"video/webm\" height=\"360\" width=\"640\" delivery=\"progressive\">" +
       "<![CDATA[http://public.adeng.wikia-dev.pl/porvata/red.webm]]></MediaFile></MediaFiles></Linear></Creative></Creatives></InLine></Ad></VAST>'";
+
+  private VuapVideos() {
+    throw new IllegalAccessError("Utility class");
+  }
 }

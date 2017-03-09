@@ -24,9 +24,9 @@ public class AutoplayVuap {
 
   private static final String CLOSE_BUTTON_CLASS_NAME = "close-ad";
 
-  private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "div#area2";
+  private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
 
-  private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "div#area4";
+  private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
 
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
 
@@ -101,31 +101,28 @@ public class AutoplayVuap {
 
   public void replay() {
       clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
+      muted = false;
       playing = true;
   }
 
-  public void clickOnDefoultStateAdImage() {
+  public void close() {
+    findCloseButton().click();
+  }
+
+  public void clickOnDefaultStateAdImage() {
     clickOnAdImage(AD_DEFAULT_STATE_IMAGE_SELECTOR);
   }
 
-  public void clickOnDefaultAdTngClickArea2() {
+  public void clickOnClickArea2() {
     clickOnAdImage(AD_TNG_CLICK_AREA_2_SELECTOR);
   }
 
-  public void clickOnDefaultAdTngClickArea4() {
+  public void clickOnClickArea4() {
     clickOnAdImage(AD_TNG_CLICK_AREA_4_SELECTOR);
   }
 
   public void clickOnAdImageResolvedState() {
     clickOnAdImage(AD_RESOLVED_STATE_IMAGE_SELECTOR);
-  }
-
-  public void clickOnSoundButton() {
-    findSpeakerIcon().click();
-  }
-
-  public void clickOnCloseButton() {
-    findCloseButton().click();
   }
 
   private void clickOnAdImage(String clickAreaSelector) {
@@ -140,9 +137,8 @@ public class AutoplayVuap {
     return Double.parseDouble(currentTime);
   }
 
-  public double getVideoHieght() {
-    if (playing) {
-      pause();
+  public double getVideoHieghtWhilePaused() {
+    if (!playing) {
       return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
     }
     return 0;
