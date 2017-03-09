@@ -42,10 +42,7 @@ public class VideoHomePageObject extends WikiBasePageObject {
   }
 
   public void verifyFeaturedSliderSlides(int count) {
-    wait.forElementPresent(By.cssSelector(
-        "#featured-video-bxslider li[style*='display: list-item;'],"
-        + "#featured-video-bxslider li[style*='display: block;']"
-    ));
+    wait.forElementPresent(By.cssSelector("#featured-video-bxslider li[style*='z-index: 50;']"));
     Assertion.assertTrue(featuredSlides.size() >= count);
     PageObjectLogging.log("verifyFeaturedSliderSlides",
                           "At least " + count + " latest Videos modules have rendered", true);

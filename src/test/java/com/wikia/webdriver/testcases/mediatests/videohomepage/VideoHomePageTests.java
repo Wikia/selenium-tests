@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class VideoHomePageTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoHomePage_001", "Media", "VideoHomePageTests", "VideosPage"})
+  @Test(groups = {"VideoHomePage_001", "Media", "VideoHomePageTests", "VideosPage"}, invocationCount = 5)
   @Execute(onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoHomePage_001_FeaturedVideoSlider() {
     VideoHomePageObject videoHomePageObject = new VideoHomePageObject(driver).open();
