@@ -6,13 +6,11 @@ import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static com.wikia.webdriver.common.core.Assertion.assertNull;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
@@ -30,7 +28,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = "discussions-categories")
 public class CategoriesTests extends NewTestTemplate {
 
@@ -72,11 +70,11 @@ public class CategoriesTests extends NewTestTemplate {
   // fixtures
 
   /**
-   * Runs once before all tests in DESKTOP group, deletes all categories on DISCUSSIONS_AUTO wiki
+   * Runs once before all tests in DESKTOP group, deletes all categories on DISCUSSIONS_1 wiki
    */
   @BeforeClass(groups = {DESKTOP})
   private void deleteCategoriesDesktop() {
-    deleteCategories(MercuryWikis.DISCUSSIONS_AUTO);
+    deleteCategories(MercuryWikis.DISCUSSIONS_1);
   }
 
   /**
@@ -107,7 +105,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private CategoryPill.Data setUp() {
-    return setUp(MercuryWikis.DISCUSSIONS_AUTO);
+    return setUp(MercuryWikis.DISCUSSIONS_1);
   }
 
   /**
@@ -125,7 +123,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private ArrayList<CategoryPill.Data> setUp(int size) {
-    return setUp(MercuryWikis.DISCUSSIONS_AUTO, size);
+    return setUp(MercuryWikis.DISCUSSIONS_1, size);
   }
 
   /**
