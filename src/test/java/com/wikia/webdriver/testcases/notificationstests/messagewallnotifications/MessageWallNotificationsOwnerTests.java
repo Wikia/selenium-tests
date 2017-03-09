@@ -28,7 +28,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName9);
   }

@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,9 +33,7 @@ public class VideoFanTakeover {
   }
 
   private void setIframe(String iframeId) {
-    By iframeSelector = By.id(iframeId);
-    wait.forElementPresent(iframeSelector);
-    iframe = driver.findElement(iframeSelector);
+    iframe = wait.forElementPresent(By.id(iframeId));
   }
 
   public WebElement getIframe() {
@@ -78,7 +77,8 @@ public class VideoFanTakeover {
     runInAdFrame(() -> {
       final By adImageTrigger = By.cssSelector("#adContainer a");
       wait.forElementClickable(adImageTrigger);
-      driver.findElement(adImageTrigger).click();
+      //do not click in the middle of image, there might be click to play there
+      new Actions(driver).moveToElement(driver.findElement(adImageTrigger), 10, 10).click().build().perform();
       PageObjectLogging.log("clickOnAdImage", "ad image clicked", true, driver);
     });
   }

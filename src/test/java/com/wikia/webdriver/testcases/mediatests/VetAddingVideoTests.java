@@ -35,7 +35,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     wall.clickBoldButton();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL3);
@@ -56,7 +56,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     wall.clickBoldButton();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
     VetOptionsComponentObject vetOptions =
         vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);

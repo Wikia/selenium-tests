@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -31,6 +32,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
     new Navigate().toPage(MercurySubpages.MAP);
   }
 
+  @RelatedIssue(issueID = "SUS-1775", comment = "Test won't pass until product is fixed, please don't bother reruning")
   @Test(groups = "MercuryInteractiveMapsTest_001")
   @DontRun(env={"dev", "sandbox", "preview"})
   public void MercuryInteractiveMapsTest_001_MapModal_Url_Title_PinPopUp_Close() {
