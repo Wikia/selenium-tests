@@ -11,7 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 @Test(groups = "AdsVuapTngOasis")
 public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
 
