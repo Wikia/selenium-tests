@@ -22,7 +22,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = "discussions-reporting-posts")
 public class ReportingPostTests extends NewTestTemplate {
 

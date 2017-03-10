@@ -70,7 +70,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -118,7 +118,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
-  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5)
@@ -159,7 +159,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
-  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
@@ -213,7 +213,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
-  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+  @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(
       browser = Browser.CHROME,
       emulator = Emulator.GOOGLE_NEXUS_5)

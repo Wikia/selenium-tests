@@ -19,7 +19,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
 @Test(groups = "discussions-locking-posts")
 public class LockingPostTests extends NewTestTemplate {
 

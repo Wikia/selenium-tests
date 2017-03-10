@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 
 import java.util.function.Function;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = "discussions-following-post")
 public class FollowingPostTests extends NewTestTemplate {
 
