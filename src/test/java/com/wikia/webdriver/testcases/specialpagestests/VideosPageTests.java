@@ -38,7 +38,7 @@ public class VideosPageTests extends NewTestTemplate {
    * running this test is sustainable).
    */
   @Execute(asUser = User.STAFF)
-  @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"}, invocationCount = 10)
+  @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
   @RelatedIssue(issueID = "SUS-755")
   public void VideosPageTest_002() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
