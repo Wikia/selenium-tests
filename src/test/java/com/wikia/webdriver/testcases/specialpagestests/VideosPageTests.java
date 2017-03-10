@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 public class VideosPageTests extends NewTestTemplate {
 
   static final String VIDEO_QUERY = "truth";
+  public static final String SUFFIX_FOR_LONG_TITLE = " ...";
 
   /**
    * Verify UI elements on the Special:Videos page Logged-Out
@@ -44,18 +45,19 @@ public class VideosPageTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
     specialVideos.addVideoViaAjax(video.getUrl());
-
     specialVideos.isNewVideoAdded();
 
     String addedVideoTitle = specialVideos.getNewestVideoTitle();
-
+    String addedVideoTitlePattern =
+        addedVideoTitle.endsWith(SUFFIX_FOR_LONG_TITLE)
+        ? addedVideoTitle.replace(SUFFIX_FOR_LONG_TITLE, "")
+        : addedVideoTitle;
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
                          "Banner notification is not visible");
-
-    Assertion.assertTrue(specialVideos.getBannerNotificationText().contains(addedVideoTitle),
-                         "Banner notification text doesn't contains video title");
+    Assertion
+        .assertStringContains(specialVideos.getBannerNotificationText(), addedVideoTitlePattern);
   }
 
   /**
