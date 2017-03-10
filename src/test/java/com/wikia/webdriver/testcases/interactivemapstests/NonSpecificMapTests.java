@@ -60,7 +60,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
-  @Execute(asUser = User.USER)
   public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
