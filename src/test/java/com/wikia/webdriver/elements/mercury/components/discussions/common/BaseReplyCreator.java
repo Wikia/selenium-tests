@@ -21,7 +21,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   @Override
   public ReplyCreator click() {
-    getReplyCreator().click();
+    wait.forElementVisible(getReplyCreator()).click();
     return this;
   }
 
