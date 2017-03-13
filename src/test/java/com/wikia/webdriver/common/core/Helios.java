@@ -38,6 +38,12 @@ public class Helios {
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
+
+  /**
+   * Standard cookie spec is used instead of default one in order to suppress warnings about
+   * SetCookie header values containing un-escaped commas
+   * (e.g. "expires=Sat, 09 Sep 2017 15:33:53 GMT")
+   */
   private static RequestConfig requestConfig = RequestConfig.custom()
     .setConnectTimeout(3000)
     .setSocketTimeout(3000)
