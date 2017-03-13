@@ -27,7 +27,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   @Override
   public boolean isModalDialogVisible() {
-    return getDialogSignIn().isDisplayed();
+    return wait.forElementVisible(getDialogSignIn()).isDisplayed();
   }
 
   @Override
@@ -51,13 +51,13 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   @Override
   public ReplyCreator clearText() {
-    getTextarea().clear();
+    wait.forElementVisible(getTextarea()).clear();
     return this;
   }
 
   @Override
   public ReplyCreator add(final String text) {
-    getTextarea().sendKeys(text);
+    wait.forElementVisible(getTextarea()).sendKeys(text);
     return this;
   }
 
