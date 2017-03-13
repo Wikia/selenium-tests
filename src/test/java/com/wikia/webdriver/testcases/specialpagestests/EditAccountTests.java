@@ -14,7 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 
 import org.testng.annotations.Test;
 
-@Test(groups = "EditAccountTest")
+@Test(groups = "EditAccountTest", enabled = false)
 public class EditAccountTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
