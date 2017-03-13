@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -37,8 +38,11 @@ public class Helios {
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
-  private static RequestConfig requestConfig =
-      RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(3000).build();
+  private static RequestConfig requestConfig = RequestConfig.custom()
+    .setConnectTimeout(3000)
+    .setSocketTimeout(3000)
+    .setCookieSpec(CookieSpecs.STANDARD)
+    .build();
 
   private Helios() {
 
