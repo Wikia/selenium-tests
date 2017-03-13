@@ -13,6 +13,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -30,13 +32,20 @@ import java.io.UnsupportedEncodingException;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 class BaseRemoteOperation {
 
+  private static RequestConfig requestConfig = RequestConfig.custom()
+    .setCookieSpec(CookieSpecs.STANDARD)
+    .build();
+
   @Getter
   private final User user;
 
   public String execute(final HttpRequestBase request) {
     String result = StringUtils.EMPTY;
 
-    try (CloseableHttpClient client = HttpClientBuilder.create().disableContentCompression().build()) {
+    try (CloseableHttpClient client = HttpClientBuilder.create()
+      .disableContentCompression()
+      .setDefaultRequestConfig(requestConfig)
+      .build()) {
       result = makeRequest(client, request);
     } catch (IOException x) {
       PageObjectLogging.log("Error while creating/closing http client.", ExceptionUtils.getStackTrace(x), false);
