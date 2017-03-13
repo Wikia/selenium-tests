@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_3)
 @Test(groups = {"discussions-sorting"})
 public class SortingTests extends NewTestTemplate {
 

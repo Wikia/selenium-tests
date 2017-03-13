@@ -27,7 +27,7 @@ public class BannerNotifications extends BasePageObject{
 
   public boolean isNotificationMessageVisible() {
     try {
-      wait.forElementVisible(bannerNotification, 10);
+      wait.forElementVisible(bannerNotification, 5);
       return true;
     } catch(TimeoutException e) {
       PageObjectLogging.logInfo("Banner notification is not visible", e);

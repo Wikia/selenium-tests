@@ -17,7 +17,11 @@ public class MercuryWikis {
   public static final String MLP = "mlp";
   public static final String DE_WIKI = "de.demercurytests";
   // for discussions desktop view tests
-  public static final String DISCUSSIONS_AUTO = "dauto";
+  public static final String DISCUSSIONS_1 = "dauto";
+  public static final String DISCUSSIONS_2 = "dauto2";
+  public static final String DISCUSSIONS_3 = "dauto3";
+  public static final String DISCUSSIONS_4 = "dauto4";
+  public static final String DISCUSSIONS_5 = "dauto5";
   // for discussions mobile view tests
   public static final String DISCUSSIONS_MOBILE = "dauto-mobile";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";

@@ -12,7 +12,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = {"discussions-guidelines"})
 public class GuidelinesTests extends NewTestTemplate {
 
