@@ -66,7 +66,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_1)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
