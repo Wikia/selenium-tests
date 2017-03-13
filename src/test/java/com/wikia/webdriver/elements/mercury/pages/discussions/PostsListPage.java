@@ -103,7 +103,7 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     try {
       o.run();
     } catch (TimeoutException e) {
-      PageObjectLogging.logError(e.getMessage(), e);
+      PageObjectLogging.log("Timed out waiting", e.getMessage(), true);
     }
   }
 
