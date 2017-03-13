@@ -48,10 +48,10 @@ public class VideosPageTests extends NewTestTemplate {
     specialVideos.isNewVideoAdded();
 
     String addedVideoTitle = specialVideos.getNewestVideoTitle();
-    String addedVideoTitlePattern =
-        addedVideoTitle.endsWith(SUFFIX_FOR_LONG_TITLE)
-        ? addedVideoTitle.replace(SUFFIX_FOR_LONG_TITLE, "")
-        : addedVideoTitle;
+    String addedVideoTitlePattern = addedVideoTitle;
+    if(addedVideoTitle.endsWith(SUFFIX_FOR_LONG_TITLE)){
+      addedVideoTitlePattern = addedVideoTitle.replace(SUFFIX_FOR_LONG_TITLE, "");
+    }
     specialVideos.deleteNewestVideo();
 
     Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),

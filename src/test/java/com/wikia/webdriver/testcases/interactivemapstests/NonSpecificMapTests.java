@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateACustomMapComponentObject;
@@ -59,7 +60,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 
   @DontRun(env = {"dev", "sandbox", "preview"})
   @Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
-  @Execute(asUser = User.USER)
   public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
     WikiBasePageObject base = new WikiBasePageObject();
     InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -147,6 +147,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyPoiPointDescription();
   }
 
+  @RelatedIssue(issueID = "SUS-1775", comment = "Product is broken")
   @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   @NetworkTrafficDump
