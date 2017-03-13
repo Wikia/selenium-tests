@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 import com.google.common.collect.Iterables;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
@@ -128,6 +129,7 @@ public class CategoriesFieldset extends WikiBasePageObject {
   }
 
   public CategoriesFieldset clickCategoryWith(final String categoryName) {
+    PageObjectLogging.log("Clicking on category", categoryName, true);
     getCategoryWith(categoryName)
       .orElseThrow(() -> new NotFoundException(CATEGORY_NOT_FOUND))
       .click();
