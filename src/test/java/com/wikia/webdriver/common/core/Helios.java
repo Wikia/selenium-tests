@@ -62,7 +62,6 @@ public class Helios {
 
     HttpDelete httpDelete =
         new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
-    httpDelete.setConfig(requestConfig);
     httpDelete.setHeader("THE-SCHWARTZ", Configuration.getCredentials().apiToken);
 
     CloseableHttpResponse response = null;
@@ -98,7 +97,6 @@ public class Helios {
     }
 
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
-    httpPost.setConfig(requestConfig);
     List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
@@ -150,7 +148,6 @@ public class Helios {
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
             + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
-        getInfo.setConfig(requestConfig);
 
         if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
           return tokenCache.get(userName);
@@ -166,6 +163,6 @@ public class Helios {
 
   private static CloseableHttpClient getDefaultClient() {
     return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-        .disableAutomaticRetries().build();
+        .disableAutomaticRetries().setDefaultRequestConfig(requestConfig).build();
   }
 }
