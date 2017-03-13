@@ -388,8 +388,8 @@ public class WikiBasePageObject extends BasePageObject {
         wait.forElementClickable(MERCURY_NAV_ICON);
         driver.findElement(MERCURY_NAV_ICON).click();
       } else {
+        wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
         WebElement avatar = driver.findElement(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
-        wait.forElementVisible(avatar);
         String loggedInUserName = avatar.getAttribute("alt");
         if (!loggedInUserName.equals(userName)) {
           throw new IllegalArgumentException(
