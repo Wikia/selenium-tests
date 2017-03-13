@@ -327,7 +327,10 @@ public class ArticlePageObject extends WikiBasePageObject {
   public MiniEditorComponentObject triggerEditCommentArea() {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
+    PageObjectLogging.log("First check",mostRecentComment.getText(), true);
     JavascriptExecutor js = (JavascriptExecutor) driver;
+    WebElement editButton = mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR));
+    new Actions(driver).moveToElement(editButton).perform();
     js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
                      EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);

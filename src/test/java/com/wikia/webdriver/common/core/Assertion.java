@@ -18,10 +18,11 @@ public class Assertion extends Assert {
   public static boolean assertStringContains(String current, String pattern) {
     String currentEncoded = encodeSpecialChars(current);
     String patternEncoded = encodeSpecialChars(pattern);
+
     boolean assertion = true;
     try {
       if (!current.contains(pattern)) {
-        throw new AssertionError();
+        throw new AssertionError("String [" + current + "] doesn't match pattern [" + pattern + "]");
       }
     } catch (AssertionError ass) {
       addVerificationFailure(ass);

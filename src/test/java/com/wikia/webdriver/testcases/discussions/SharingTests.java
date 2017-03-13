@@ -18,7 +18,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 

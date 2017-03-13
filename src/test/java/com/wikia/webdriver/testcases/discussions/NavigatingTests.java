@@ -13,7 +13,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackB
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
 public class NavigatingTests extends NewTestTemplate {
 
