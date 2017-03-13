@@ -23,9 +23,12 @@ import com.google.common.base.Predicate;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 
 public class PostsListPage extends WikiBasePageObject implements AvailablePage {
@@ -91,14 +94,17 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
   }
 
   public PostsListPage waitForPageReload() {
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay")));
+    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")));
+    return this;
+  }
+
+  private void waitSafely(Runnable o) {
     try {
-      wait.forElementVisible(By.className("loading-overlay"));
+      o.run();
     } catch (TimeoutException e) {
       PageObjectLogging.logError(e.getMessage(), e);
-    } finally {
-      wait.forElementNotVisible(By.className("loading-overlay"));
     }
-    return this;
   }
 
   public void waitForPageReloadWith(final String categoryName) {
