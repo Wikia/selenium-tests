@@ -23,13 +23,9 @@ import com.google.common.base.Predicate;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 
 public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
