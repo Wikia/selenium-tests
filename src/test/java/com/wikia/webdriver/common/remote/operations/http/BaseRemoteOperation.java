@@ -32,6 +32,11 @@ import java.io.UnsupportedEncodingException;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 class BaseRemoteOperation {
 
+  /**
+   * Standard cookie spec is used instead of default one in order to suppress warnings about
+   * SetCookie header values containing un-escaped commas
+   * (e.g. "expires=Sat, 09 Sep 2017 15:33:53 GMT")
+   */
   private static RequestConfig requestConfig = RequestConfig.custom()
     .setCookieSpec(CookieSpecs.STANDARD)
     .build();
