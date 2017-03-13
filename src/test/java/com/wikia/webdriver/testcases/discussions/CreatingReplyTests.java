@@ -45,7 +45,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     userOnDesktopMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
@@ -78,7 +78,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void replyEditorExpandsForUserOnDesktopOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
@@ -92,7 +92,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
@@ -102,7 +102,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
   public void userOnDesktopShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
