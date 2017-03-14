@@ -1355,7 +1355,7 @@ public class AdsDataProvider {
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }
