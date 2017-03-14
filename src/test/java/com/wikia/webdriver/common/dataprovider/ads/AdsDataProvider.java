@@ -1344,6 +1344,17 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] adsVuapTngDesctop() {
+    return new Object[][]{
+        {
+            new Page("project43", "DevTemplates/VUAP/TNG"),
+            AdsContent.TOP_LB,
+            "#" + AdsContent.TOP_LB + " .video-player iframe"
+        }
+    };
+  }
+
     @DataProvider
     public static Object[][] adsVuapMercury() {
         return new Object[][]{
