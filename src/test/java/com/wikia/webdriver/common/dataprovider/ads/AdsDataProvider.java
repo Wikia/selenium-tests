@@ -1351,6 +1351,11 @@ public class AdsDataProvider {
             new Page("project43", "DevTemplates/VUAP/TNG"),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + " .video-player iframe"
+        },
+        {
+            new Page("project43", "DevTemplates/VUAP/TNG"),
+            AdsContent.BOTTOM_LB,
+            "#" + AdsContent.BOTTOM_LB + " .video-player iframe"
         }
     };
   }

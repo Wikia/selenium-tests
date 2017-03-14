@@ -198,7 +198,7 @@ public class AutoplayVuap {
   }
 
   private boolean isOverlayVisible() {
-    return driver.findElement(By.cssSelector(".replay-overlay")).isDisplayed();
+    return driver.findElement(By.cssSelector(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot))).isDisplayed();
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
