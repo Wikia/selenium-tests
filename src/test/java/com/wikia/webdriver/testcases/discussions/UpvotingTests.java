@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
@@ -17,8 +19,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = {"discussions-upvoting"})
 public class UpvotingTests extends NewTestTemplate {
-
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
+  
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**

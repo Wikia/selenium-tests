@@ -1,10 +1,11 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import static com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator.createUniqueCategoryName;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
-import static com.wikia.webdriver.common.core.Assertion.assertNull;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -15,7 +16,6 @@ import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.operations.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
@@ -165,14 +165,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
@@ -197,14 +197,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
@@ -309,7 +309,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategories() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getCategories();
@@ -322,7 +322,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanAddCategory() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final String categoryName = createUniqueCategoryName();
@@ -341,7 +341,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanEditCategory() {
     CategoryPill.Data editableCategory = setUp();
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -364,7 +364,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategories() {
     deleteCategoriesDesktop();
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MAX_NUMBER_OF_CATEGORIES - 1);
@@ -381,7 +381,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanRemoveCategory() {
     CategoryPill.Data data = setUp();
     final String temporaryCategoryName = createUniqueCategoryName();

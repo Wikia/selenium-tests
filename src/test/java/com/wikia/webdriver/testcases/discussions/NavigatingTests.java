@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -17,7 +19,6 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-navigation"})
 public class NavigatingTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
