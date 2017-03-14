@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -21,15 +22,13 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-sorting"})
 public class SortingTests extends NewTestTemplate {
 
-  private static final String MOBILE_RESOLUTION = "600x800";
-
   /**
    * ANONS ON MOBILE SECTION
    */
 
   @Test(groups = "discussions-anonUserOnMobileCanSortPostsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }
@@ -51,7 +50,7 @@ public class SortingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSortPostsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }
