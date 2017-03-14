@@ -143,6 +143,7 @@ public class InteractiveMapPageObject extends BasePageObject {
   }
 
   public void clickZoomOutButton() {
+    jsActions.scrollElementIntoViewPort(mapFrame);
     wait.forElementVisible(mapFrame);
     driver.switchTo().frame(mapFrame);
     wait.forElementClickable(zoomOutButton);

@@ -1,8 +1,9 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -10,7 +11,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -25,11 +25,10 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String WIKIA_URL = "http://www.wikia.com/";
   private static final String POST_SHOULD_BE_FOLLOWED_MESSAGE = "Created post should be followed.";
   private static final String OPEN_GRAPH_SHOULD_LOAD_MESSAGE = "Open graph should start loading.";
@@ -68,7 +67,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @Execute(asUser = User.ANONYMOUS)
+  @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_1)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
@@ -153,14 +152,14 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_AUTO);
+    assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
-    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_AUTO);
+    assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = DESKTOP)

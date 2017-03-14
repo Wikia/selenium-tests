@@ -55,7 +55,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_002_leftInModal() {
     new ArticleContent()
-        .push("[[File:WikiEvolution - Poznańska Wiki-1488886756|thumb|left|335 px]]");
+        .push("[[File:Batman_-_Following|thumb|left|335 px]]");
 
     VisualEditModePageObject visualEditModePageObject =
         new ArticlePageObject().open().navigateToArticleEditPage();
@@ -91,7 +91,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_004_centerInModal() {
     new ArticleContent()
-        .push("[[File:WikiEvolution - Poznańska Wiki-1488886756|thumb|center|335 px]]");
+        .push("[[File:Batman_-_Following|thumb|center|335 px]]");
 
     VisualEditModePageObject visualEditModePageObject =
         new ArticlePageObject().open().navigateToArticleEditPage();
@@ -127,7 +127,7 @@ public class VetModalAlignmentTests extends NewTestTemplate {
   @Execute(asUser = User.USER_VET_MODAL)
   public void Vet_Modal_006_rightInModal() {
     new ArticleContent()
-        .push("[[File:WikiEvolution - Poznańska Wiki-1488886756|thumb|right|335 px]]");
+        .push("[[File:Batman_-_Following|thumb|right|335 px]]");
 
     VisualEditModePageObject visualEditModePageObject =
         new ArticlePageObject().open().navigateToArticleEditPage();
