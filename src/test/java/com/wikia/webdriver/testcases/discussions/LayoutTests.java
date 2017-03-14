@@ -1,11 +1,14 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
@@ -20,30 +23,27 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-layout"})
 public class LayoutTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1440x1080";
-  private static final String MOBILE_RESOLUTION = "600x800";
-
   /**
    * ANONS ON MOBILE SECTION
    */
 
   @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
   @Test(groups = "discussions-anonUserOnMobileCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
   @Test(enabled = false, groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "SOC-3182")
   public void anonUserOnMobileCanViewMorePosts() {
     userCanViewMorePosts();
@@ -80,14 +80,14 @@ public class LayoutTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }

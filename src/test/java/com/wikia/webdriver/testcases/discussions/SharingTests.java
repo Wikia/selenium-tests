@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ShareDialog;
@@ -18,12 +19,13 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
+
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
-  private static final String MOBILE_RESOLUTION = "600x800";
   private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE =
       Arrays.asList("facebook", "twitter", "reddit", "tumblr");
 
@@ -33,7 +35,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
@@ -43,7 +45,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
@@ -81,7 +83,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
@@ -91,7 +93,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
