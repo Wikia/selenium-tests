@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -15,6 +16,9 @@ public class BaseAuthPage extends WikiBasePageObject {
   private WebElement connectWithFacebookButton;
   @FindBy(css = ".footer-callout-emphasis")
   private WebElement signInButton;
+  @FindBy(css = ".error")
+  private WebElement errorMessage;
+
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
     wait.forElementClickable(facebookSignUpButton);
@@ -32,6 +36,16 @@ public class BaseAuthPage extends WikiBasePageObject {
     wait.forElementClickable(signInButton);
     signInButton.click();
 
-    return new SignInPage(driver);
+    return new SignInPage();
   }
+
+  private String getErrorMessage() {
+    return wait.forElementVisible(errorMessage).getText();
+  }
+
+  public BaseAuthPage verifyErrorMessage(String errorMessage) {
+    Assertion.assertEquals(getErrorMessage(), errorMessage);
+    return this;
+  }
+
 }
