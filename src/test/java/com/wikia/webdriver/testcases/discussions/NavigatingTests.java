@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -7,6 +9,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
@@ -17,16 +20,13 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-navigation"})
 public class NavigatingTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
-  private static final String MOBILE_RESOLUTION = "600x800";
-
   /**
    * ANONS ON MOBILE SECTION
    */
 
   @Test(groups = "discussions-anonUserOnMobileCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = MOBILE_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanClickUsername() {
     clickUsernameLoadsUserPage();
   }

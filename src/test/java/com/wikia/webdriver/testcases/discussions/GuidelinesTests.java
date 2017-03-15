@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -15,9 +17,6 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = {"discussions-guidelines"})
 public class GuidelinesTests extends NewTestTemplate {
-
-  private static final String DESKTOP_RESOLUTION = "1440x1080";
-  private static final String MOBILE_RESOLUTION = "600x800";
 
   /**
    * ANONS ON DESKTOP SECTION

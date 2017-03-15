@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -10,7 +12,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostActionsRow;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
@@ -45,7 +46,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void anonUserOnDesktopCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     userOnDesktopMustBeLoggedInToUseReplyCreator(page.getReplyCreatorDesktop());
@@ -78,7 +79,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void replyEditorExpandsForUserOnDesktopOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
@@ -92,7 +93,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
@@ -102,7 +103,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, browserSize = DiscussionsConstants.DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();

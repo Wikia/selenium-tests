@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -37,8 +38,17 @@ public class Helios {
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
-  private static RequestConfig requestConfig =
-      RequestConfig.custom().setConnectTimeout(3000).setSocketTimeout(3000).build();
+
+  /**
+   * Standard cookie spec is used instead of default one in order to suppress warnings about
+   * SetCookie header values containing un-escaped commas
+   * (e.g. "expires=Sat, 09 Sep 2017 15:33:53 GMT")
+   */
+  private static RequestConfig requestConfig = RequestConfig.custom()
+    .setConnectTimeout(3000)
+    .setSocketTimeout(3000)
+    .setCookieSpec(CookieSpecs.STANDARD)
+    .build();
 
   private Helios() {
 
@@ -58,7 +68,6 @@ public class Helios {
 
     HttpDelete httpDelete =
         new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
-    httpDelete.setConfig(requestConfig);
     httpDelete.setHeader("THE-SCHWARTZ", Configuration.getCredentials().apiToken);
 
     CloseableHttpResponse response = null;
@@ -94,7 +103,6 @@ public class Helios {
     }
 
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
-    httpPost.setConfig(requestConfig);
     List<NameValuePair> nvps = new ArrayList<>();
 
     nvps.add(new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()));
@@ -146,7 +154,6 @@ public class Helios {
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
             + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
-        getInfo.setConfig(requestConfig);
 
         if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
           return tokenCache.get(userName);
@@ -162,6 +169,6 @@ public class Helios {
 
   private static CloseableHttpClient getDefaultClient() {
     return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-        .disableAutomaticRetries().build();
+        .disableAutomaticRetries().setDefaultRequestConfig(requestConfig).build();
   }
 }

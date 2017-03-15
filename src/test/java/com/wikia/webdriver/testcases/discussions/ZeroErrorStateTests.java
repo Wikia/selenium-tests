@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -25,7 +27,6 @@ import org.testng.annotations.Test;
 
 public class ZeroErrorStateTests extends NewTestTemplate {
 
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String MESSAGE_1 = "Uh oh, looks like this page doesn't exist!\n";
   private static final String MESSAGE_2 = "Show Me All Discussions";
   private static final String MESSAGE_3 = "All Discussions";
