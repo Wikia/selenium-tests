@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
@@ -552,6 +553,19 @@ public class BasePageObject {
     WebElement element = driver.findElement(By.cssSelector(elementName));
 
     return element.getLocation().getY();
+  }
+
+  private static String getEmailChangeConfirmationLink(String email, String password) {
+    String mailSubject = "Confirm your email address change on Fandom";
+    String url = MailFunctions.getActivationLinkFromEmailContent(
+      MailFunctions.getFirstEmailContent(email, password, mailSubject));
+    PageObjectLogging.log("getActivationLinkFromMail",
+      "activation link is visible in email content: " + url, true);
+    return url;
+  }
+
+  public void enterEmailChangeLink(String email, String password) {
+    getUrl(getEmailChangeConfirmationLink(email, password));
   }
 
 }
