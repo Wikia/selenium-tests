@@ -45,6 +45,10 @@ public class RegisterPage extends BaseAuthPage {
 
   private final String mainWindowHandle;
 
+  public RegisterPage() {
+    this(false);
+  }
+
   public RegisterPage(boolean waitForNewWindow) {
     super();
     if (waitForNewWindow) {

@@ -126,9 +126,9 @@ public class NavigationBar extends WikiBasePageObject {
     return new AuthModal();
   }
 
-  public RegisterPage.RegisterArea clickOnRegister(){
+  public RegisterPage clickOnRegister(){
     myAccount.click();
     registerLink.click();
-    return new RegisterPage.RegisterArea(true);
+    return new RegisterPage(true);
   }
 }

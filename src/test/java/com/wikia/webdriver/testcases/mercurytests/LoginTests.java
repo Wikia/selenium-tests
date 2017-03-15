@@ -29,7 +29,6 @@ public class LoginTests extends NewTestTemplate {
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
-            .getLoginArea()
             .typeUsername(Configuration.getCredentials().userName10)
             .typePassword(Configuration.getCredentials().password10)
             .clickSignInButtonToSignIn()
@@ -46,7 +45,6 @@ public class LoginTests extends NewTestTemplate {
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
-            .getLoginArea()
             .typeUsername(Configuration.getCredentials().userName10)
             .typePassword(Configuration.getCredentials().password11)
             .clickSignInButtonToGetError()
@@ -61,7 +59,6 @@ public class LoginTests extends NewTestTemplate {
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
-            .getLoginArea()
             .typeUsername(Configuration.getCredentials().userName10)
             .verifySignInButtonNotClickable();
     }
@@ -74,7 +71,6 @@ public class LoginTests extends NewTestTemplate {
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
-            .getLoginArea()
             .typeUsername(String.valueOf(DateTime.now().getMillis()))
             .typePassword(Configuration.getCredentials().password10)
             .clickSignInButtonToGetError()
@@ -89,7 +85,6 @@ public class LoginTests extends NewTestTemplate {
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
-            .getLoginArea()
             .typePassword(Configuration.getCredentials().password10)
             .verifySignInButtonNotClickable();
     }

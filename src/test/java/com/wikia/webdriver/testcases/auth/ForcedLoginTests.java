@@ -62,8 +62,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginRequiredMessage();
-    new SignInPage(driver)
-        .getLoginArea()
+    new SignInPage()
         .typeUsername(credentials.userName10)
         .typePassword(credentials.password10)
         .clickSignInButtonToSignIn()
@@ -80,8 +79,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
 
-    new SignInPage(driver)
-        .getLoginArea()
+    new SignInPage()
         .typeUsername(credentials.userName10)
         .typePassword(credentials.password10)
         .clickSignInButtonToSignIn()

@@ -26,7 +26,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
-    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
+    RegisterPage register = new RegisterPage(false);
     register.typeUsername(register.getTimeStamp());
     register.typeEmailAddress(credentials.emailQaart1);
     register.typePassword(register.getTimeStamp());
@@ -44,7 +44,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
-    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
+    RegisterPage register = new RegisterPage(false);
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
     register.typeEmailAddress(email);
@@ -62,8 +62,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanSignUpOnNewAuthModalFromGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar registerLink = new NavigationBar(driver);
-    registerLink.clickOnRegister();
-    RegisterPage.RegisterArea register = registerLink.getRegisterArea();
+    RegisterPage register = registerLink.clickOnRegister();
     register.switchToAuthModalHandle();
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
@@ -88,7 +87,7 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
+    RegisterPage register = new RegisterPage(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -114,7 +113,7 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
+    RegisterPage register = new RegisterPage(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -142,7 +141,7 @@ public class SignUpTests extends NewTestTemplate {
     String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
 
-    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
+    RegisterPage register = new RegisterPage(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);

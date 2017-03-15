@@ -83,7 +83,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final AuthModal authModal = new AuthModal();
   @Getter(lazy = true)
-  private final RegisterPage.RegisterArea registerArea = new RegisterPage.RegisterArea(true);
+  private final RegisterPage registerPage = new RegisterPage(true);
   @Getter(lazy = true)
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
@@ -166,7 +166,7 @@ public class WikiBasePageObject extends BasePageObject {
   public RegisterPage openSpecialUserSignUpPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
     PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
-    return new RegisterPage(driver);
+    return new RegisterPage();
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
@@ -184,7 +184,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SignInPage openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-    return new SignInPage(driver);
+    return new SignInPage();
   }
 
   public UserProfilePageObject openProfilePage(String userName, String wikiURL) {

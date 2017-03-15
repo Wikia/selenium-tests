@@ -38,7 +38,6 @@ public class EditAccountTests extends NewTestTemplate {
     SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
 
     signInPage
-        .getLoginArea()
         .typeUsername(credentials.userNameClosedAccount)
         .typePassword(credentials.passwordClosedAccount)
         .clickSignInButtonToGetError()
@@ -64,7 +63,6 @@ public class EditAccountTests extends NewTestTemplate {
     SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
 
     signInPage
-        .getLoginArea()
         .typeUsername(credentials.userNameClosedAccount)
         .typePassword(credentials.passwordClosedAccount)
         .clickSignInButtonToSignIn()

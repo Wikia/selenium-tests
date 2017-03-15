@@ -37,12 +37,11 @@ ForgottenPasswordTests extends NewTestTemplate {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    SignInPage signIn = new SignInPage(driver);
+    SignInPage signIn = new SignInPage();
     signIn.clickForgotPasswordLink();
     String newPassword = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
 
     signIn
-        .getLoginArea()
         .typeUsername(userName)
         .typePassword(newPassword)
         .clickSignInButtonToSignIn()
@@ -57,7 +56,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     SignInPage login = base.openSpecialUserLogin(wikiURL);
-    SignInPage signIn = new SignInPage(driver);
+    SignInPage signIn = new SignInPage();
     signIn.clickForgotPasswordLink();
     String
         newPassword =
@@ -65,7 +64,6 @@ ForgottenPasswordTests extends NewTestTemplate {
     String verifyString = userName.substring(0, 1).toUpperCase() + userName.substring(1);
 
     signIn
-        .getLoginArea()
         .typeUsername(userName)
         .typePassword(newPassword)
         .clickSignInButtonToSignIn()
