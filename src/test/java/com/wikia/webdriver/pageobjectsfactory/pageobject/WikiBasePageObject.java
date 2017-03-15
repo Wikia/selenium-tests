@@ -12,7 +12,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
@@ -86,7 +85,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final AuthModal authModal = new AuthModal();
   @Getter(lazy = true)
-  private final RegisterArea registerArea = new RegisterArea(true);
+  private final RegisterPage.RegisterArea registerArea = new RegisterPage.RegisterArea(true);
   @Getter(lazy = true)
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")

@@ -6,11 +6,11 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
 import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 import junit.framework.Assert;
@@ -27,7 +27,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.navigateToSpecialSignUpPage(wikiURL);
-    RegisterArea register = new RegisterArea(false);
+    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     register.typeUsername(register.getTimeStamp());
     register.typeEmailAddress(credentials.emailQaart1);
     register.typePassword(register.getTimeStamp());
@@ -45,7 +45,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.navigateToSpecialSignUpPage(wikiURL);
-    RegisterArea register = new RegisterArea(false);
+    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
     register.typeEmailAddress(email);
@@ -64,7 +64,7 @@ public class SignUpTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar registerLink = new NavigationBar(driver);
     registerLink.clickOnRegister();
-    RegisterArea register = registerLink.getRegisterArea();
+    RegisterPage.RegisterArea register = registerLink.getRegisterArea();
     register.switchToAuthModalHandle();
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
@@ -89,7 +89,7 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterArea register = new RegisterArea(false);
+    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -115,7 +115,7 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterArea register = new RegisterArea(false);
+    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -143,7 +143,7 @@ public class SignUpTests extends NewTestTemplate {
     String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
 
-    RegisterArea register = new RegisterArea(false);
+    RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
