@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
-import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

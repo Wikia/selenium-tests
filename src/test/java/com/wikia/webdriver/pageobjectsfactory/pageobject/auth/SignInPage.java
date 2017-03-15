@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.mercury.pages.login;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.Wait;

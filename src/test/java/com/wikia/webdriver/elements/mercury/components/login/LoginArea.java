@@ -2,7 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.login;
 
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebDriver;
