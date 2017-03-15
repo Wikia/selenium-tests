@@ -30,7 +30,7 @@ public class AutoplayVuap {
 
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
 
-  private static final String AD_DEFAULT_STATE_IMAGE_SELECTOR = "background_right";
+  private static final String AD_DEFAULT_STATE_IMAGE_SELECTOR = "#background_right";
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
