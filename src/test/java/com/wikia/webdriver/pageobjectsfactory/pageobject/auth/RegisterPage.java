@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
+import com.fasterxml.jackson.databind.deser.Deserializers;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -11,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage extends WikiBasePageObject {
+public class RegisterPage extends BaseAuthPage {
 
     @FindBy(css = ".footer-callout-emphasis")
     private WebElement signInButton;
@@ -23,6 +25,11 @@ public class RegisterPage extends WikiBasePageObject {
     public RegisterPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.wait = new Wait(driver);
+    }
+
+    public RegisterPage open() {
+        driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
+        return this;
     }
 
     public SignInPage clickSignInButton() {

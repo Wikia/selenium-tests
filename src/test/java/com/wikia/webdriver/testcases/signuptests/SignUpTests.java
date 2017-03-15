@@ -11,7 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 
 import junit.framework.Assert;
 import org.testng.annotations.Test;
@@ -26,7 +25,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_anonCanNotSignUpIfSheIsYoungerThanTwelve")
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.navigateToSpecialSignUpPage(wikiURL);
+    base.openSpecialUserSignUpPage(wikiURL);
     RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     register.typeUsername(register.getTimeStamp());
     register.typeEmailAddress(credentials.emailQaart1);
@@ -44,7 +43,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.navigateToSpecialSignUpPage(wikiURL);
+    base.openSpecialUserSignUpPage(wikiURL);
     RegisterPage.RegisterArea register = new RegisterPage.RegisterArea(false);
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
@@ -84,7 +83,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_anonCanSignUpWithoutConfirmingVerificationEmail")
   public void anonCanSignUpWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
+    RegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
 
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
@@ -110,7 +109,7 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
+    RegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
 
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
@@ -137,7 +136,7 @@ public class SignUpTests extends NewTestTemplate {
   @Execute(onWikia = "ja.ja-test")
   public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SignUpPageObject signUp = base.navigateToSpecialSignUpPage(wikiURL);
+    RegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "ユーザー" + signUp.getTimeStamp();
     String password = "パス" + signUp.getTimeStamp();

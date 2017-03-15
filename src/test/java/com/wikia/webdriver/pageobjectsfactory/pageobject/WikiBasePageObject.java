@@ -28,7 +28,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
@@ -169,11 +168,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
     PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
     return new RegisterPage(driver);
-  }
-
-  public SignUpPageObject navigateToSpecialSignUpPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
-    return new SignUpPageObject(driver);
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
