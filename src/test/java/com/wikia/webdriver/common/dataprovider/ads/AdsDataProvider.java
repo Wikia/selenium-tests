@@ -1347,7 +1347,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsVuapTngDesctop() {
+  public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
             new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
