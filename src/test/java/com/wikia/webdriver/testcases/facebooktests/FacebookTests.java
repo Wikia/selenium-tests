@@ -22,7 +22,7 @@ public class FacebookTests extends NewTestTemplate {
 
     new FacebookSettingsPageObject(driver).open();
     new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
-    RegisterPage signUp = new RegisterPage(driver).open();
+    RegisterPage signUp = new RegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     String userName = "QA" + signUp.getTimeStamp();

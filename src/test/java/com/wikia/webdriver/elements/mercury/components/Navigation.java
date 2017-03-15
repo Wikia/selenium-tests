@@ -72,7 +72,7 @@ public class Navigation {
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 
-    return new RegisterPage(driver);
+    return new RegisterPage();
   }
 
   public Navigation clickBackButton() {
