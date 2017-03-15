@@ -27,13 +27,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     signInLink.clickOnSignIn();
     AuthModal loginModal = new AuthModal();
     loginModal.clickForgotPasswordLink();
-    SignInPage login = new SignInPage(driver);
-    //login.remindPasswordNewAuth(userName);
-    //login.verifyMessageAboutNewPassword(userName);
-    //login.clickLogInLink();
-    String
-        newPassword =
-        login.getPasswordResetLink(credentials.email, credentials.emailPassword);
+    String newPassword = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
     loginModal.login(userName, newPassword);
     loginModal.verifyUserLoggedIn(userName);
   }
@@ -43,15 +37,9 @@ ForgottenPasswordTests extends NewTestTemplate {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    SignInPage login = base.openSpecialUserLogin(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
-    //login.remindPasswordNewAuth(userName);
-    //login.verifyMessageAboutNewPassword(userName);
-    //login.clickLogInLink();
-    String
-        newPassword =
-        login.getPasswordResetLink(credentials.email, credentials.emailPassword);
+    String newPassword = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
 
     signIn
         .getLoginArea()
@@ -71,9 +59,6 @@ ForgottenPasswordTests extends NewTestTemplate {
     SignInPage login = base.openSpecialUserLogin(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
-    //login.remindPasswordNewAuth(userName);
-    //login.verifyMessageAboutNewPassword(userName);
-    //login.clickLogInLink();
     String
         newPassword =
         login.getPasswordResetLink(credentials.email, credentials.emailPassword);
