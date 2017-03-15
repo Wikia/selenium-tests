@@ -8,7 +8,6 @@ import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 import org.testng.annotations.Test;
 
@@ -28,10 +27,10 @@ ForgottenPasswordTests extends NewTestTemplate {
     signInLink.clickOnSignIn();
     AuthModal loginModal = new AuthModal();
     loginModal.clickForgotPasswordLink();
-    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    login.remindPasswordNewAuth(userName);
-    login.verifyMessageAboutNewPassword(userName);
-    login.clickLogInLink();
+    SignInPage login = new SignInPage(driver);
+    //login.remindPasswordNewAuth(userName);
+    //login.verifyMessageAboutNewPassword(userName);
+    //login.clickLogInLink();
     String
         newPassword =
         login.getPasswordResetLink(credentials.email, credentials.emailPassword);
@@ -44,12 +43,12 @@ ForgottenPasswordTests extends NewTestTemplate {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
+    SignInPage login = base.openSpecialUserLogin(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
-    login.remindPasswordNewAuth(userName);
-    login.verifyMessageAboutNewPassword(userName);
-    login.clickLogInLink();
+    //login.remindPasswordNewAuth(userName);
+    //login.verifyMessageAboutNewPassword(userName);
+    //login.clickLogInLink();
     String
         newPassword =
         login.getPasswordResetLink(credentials.email, credentials.emailPassword);
@@ -69,12 +68,12 @@ ForgottenPasswordTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    SpecialUserLoginPageObject login = base.openSpecialUserLoginOld(wikiURL);
+    SignInPage login = base.openSpecialUserLogin(wikiURL);
     SignInPage signIn = new SignInPage(driver);
     signIn.clickForgotPasswordLink();
-    login.remindPasswordNewAuth(userName);
-    login.verifyMessageAboutNewPassword(userName);
-    login.clickLogInLink();
+    //login.remindPasswordNewAuth(userName);
+    //login.verifyMessageAboutNewPassword(userName);
+    //login.clickLogInLink();
     String
         newPassword =
         login.getPasswordResetLink(credentials.email, credentials.emailPassword);

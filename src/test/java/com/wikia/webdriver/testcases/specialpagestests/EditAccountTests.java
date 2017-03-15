@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount.EditAccount;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 import org.testng.annotations.Test;
 
@@ -35,7 +34,6 @@ public class EditAccountTests extends NewTestTemplate {
   @Test(dependsOnMethods = "EditAccount_001_closeAccount")
   public void EditAccount_002_verifyAccountClosed() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 
     SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
 

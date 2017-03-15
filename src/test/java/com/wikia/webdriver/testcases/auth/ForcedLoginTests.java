@@ -14,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 import junit.framework.Assert;
 import org.testng.annotations.Test;
@@ -63,7 +62,6 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginRequiredMessage();
-    SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
     new SignInPage(driver)
         .getLoginArea()
         .typeUsername(credentials.userName10)
@@ -71,7 +69,7 @@ public class ForcedLoginTests extends NewTestTemplate {
         .clickSignInButtonToSignIn()
         .verifyUserLoggedIn(credentials.userName10);
 
-    Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
+    Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
@@ -82,8 +80,6 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
 
-    SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
-
     new SignInPage(driver)
         .getLoginArea()
         .typeUsername(credentials.userName10)
@@ -91,8 +87,8 @@ public class ForcedLoginTests extends NewTestTemplate {
         .clickSignInButtonToSignIn()
         .verifyUserLoggedIn(credentials.userName10);
 
-    special.verifyUserLoggedIn(credentials.userName10);
-    Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
+    base.verifyUserLoggedIn(credentials.userName10);
+    Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingPhoto")

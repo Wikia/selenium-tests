@@ -40,7 +40,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
@@ -188,12 +187,6 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(wikiURL + URLsContent.SPECIAL_PROMOTE);
     PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
     return new SpecialPromotePageObject(driver);
-  }
-
-  public SpecialUserLoginPageObject openSpecialUserLoginOld(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging.log("openSpecialUserLoginOld", "Special:UserLogin page opened", true);
-    return new SpecialUserLoginPageObject(driver);
   }
 
   public SignInPage openSpecialUserLogin(String wikiURL) {
@@ -434,13 +427,11 @@ public class WikiBasePageObject extends BasePageObject {
         true, driver);
   }
 
-  public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
+  public void clickLoginOnSpecialPage() {
     wait.forElementVisible(specialUserLoginLink);
     PageObjectLogging.log("LoginLinkPresent", "Link to login special page present", true, driver);
     scrollAndClick(specialUserLoginLink);
     PageObjectLogging.log("LoginLinkClicked", "Link to login special page clicked", true, driver);
-
-    return new SpecialUserLoginPageObject(driver);
   }
 
   public void verifyNotLoggedInMessage() {
