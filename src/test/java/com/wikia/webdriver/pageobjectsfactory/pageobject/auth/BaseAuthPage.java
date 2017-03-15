@@ -11,11 +11,27 @@ public class BaseAuthPage extends WikiBasePageObject {
 
   @FindBy(css = ".signup-provider-facebook")
   private WebElement facebookSignUpButton;
+  @FindBy(css = ".signup-providers li a")
+  private WebElement connectWithFacebookButton;
+  @FindBy(css = ".footer-callout-emphasis")
+  private WebElement signInButton;
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
     wait.forElementClickable(facebookSignUpButton);
     facebookSignUpButton.click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
     return new FacebookSignupModalComponentObject();
+  }
+
+  public BaseAuthPage isConnetctWithFacebookButtonVisible() {
+    wait.forElementVisible(connectWithFacebookButton);
+    return this;
+  }
+
+  public SignInPage clickSignInButton() {
+    wait.forElementClickable(signInButton);
+    signInButton.click();
+
+    return new SignInPage(driver);
   }
 }

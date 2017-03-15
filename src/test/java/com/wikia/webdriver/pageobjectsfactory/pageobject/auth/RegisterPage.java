@@ -3,184 +3,152 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage extends BaseAuthPage {
 
-    @FindBy(css = ".footer-callout-emphasis")
-    private WebElement signInButton;
-    @FindBy(css = ".signup-providers li a")
-    private WebElement connectWithFacebookButton;
+  public RegisterPage open() {
+      driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
+      return this;
+  }
 
-    private Wait wait;
+  @FindBy(css = ".auth.desktop.signin-page")
+  private WebElement authModal;
+  @FindBy(css = "#signupEmail")
+  private WebElement signupEmail;
+  @FindBy(css = "#signupUsername")
+  private WebElement signupUsername;
+  @FindBy(css = "#signupPassword")
+  private WebElement signupPassword;
+  @FindBy(css = "#signupBirthDate")
+  private WebElement signupBirthdate;
+  @FindBy(css = ".birth-month")
+  private WebElement signupBirthMonth;
+  @FindBy(css = ".birth-day")
+  private WebElement signupBirthDay;
+  @FindBy(css = ".birth-year")
+  private WebElement signupBirthYear;
+  @FindBy(css = "#signupSubmit")
+  private WebElement signupSubmitButton;
+  @FindBy(css = ".wikia-nav__avatar")
+  private WebElement avatar;
+  @FindBy(css = "#signupForm div:nth-child(2) small")
+  private WebElement usernameError;
+  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
+  private WebElement passwordError;
+  @FindBy(css = "#signupForm > small.error")
+  private WebElement genericError;
+  @FindBy(css = " header.auth-header")
+  private WebElement registerHeader;
 
-    public RegisterPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.wait = new Wait(driver);
+  private final String mainWindowHandle;
+
+  public RegisterPage(boolean waitForNewWindow) {
+    super();
+    if (waitForNewWindow) {
+      waitForNewWindow();
+      this.mainWindowHandle = driver.getWindowHandle();
+    } else {
+      this.mainWindowHandle = null;
     }
+  }
 
-    public RegisterPage open() {
-        driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
-        return this;
+  public void switchToAuthModalHandle() {
+    for (String winHandle : driver.getWindowHandles()) {
+      driver.switchTo().window(winHandle);
     }
+  }
 
-    public SignInPage clickSignInButton() {
-        wait.forElementClickable(signInButton);
-        signInButton.click();
+  public void switchToMainWindowHandle() {
+    driver.switchTo().window(this.mainWindowHandle);
+  }
 
-        return new SignInPage(driver);
-    }
+  public boolean isOpened() {
+    switchToAuthModalHandle();
+    boolean isOpenedResult = authModal.isDisplayed();
+    switchToMainWindowHandle();
+    return isOpenedResult;
+  }
 
-    public RegisterPage isConnetctWithFacebookButtonVisible() {
-        wait.forElementVisible(connectWithFacebookButton);
+  public RegisterPage typeEmailAddress(String email) {
+    wait.forElementVisible(signupEmail);
+    signupEmail.sendKeys(email);
+    return this;
+  }
 
-        return this;
-    }
+  public RegisterPage typeUsername(String username) {
+    wait.forElementVisible(signupUsername);
+    signupUsername.sendKeys(username);
+    return this;
+  }
 
-    public static class RegisterArea extends WikiBasePageObject {
+  public RegisterPage typePassword(String password) {
+    wait.forElementVisible(signupPassword);
+    signupPassword.sendKeys(password);
+    return this;
+  }
 
-      @FindBy(css = ".auth.desktop.signin-page")
-      private WebElement authModal;
-      @FindBy(css = "#signupEmail")
-      private WebElement signupEmail;
-      @FindBy(css = "#signupUsername")
-      private WebElement signupUsername;
-      @FindBy(css = "#signupPassword")
-      private WebElement signupPassword;
-      @FindBy(css = "#signupBirthDate")
-      private WebElement signupBirthdate;
-      @FindBy(css = ".birth-month")
-      private WebElement signupBirthMonth;
-      @FindBy(css = ".birth-day")
-      private WebElement signupBirthDay;
-      @FindBy(css = ".birth-year")
-      private WebElement signupBirthYear;
-      @FindBy(css = "#signupSubmit")
-      private WebElement signupSubmitButton;
-      @FindBy(css = ".wikia-nav__avatar")
-      private WebElement avatar;
-      @FindBy(css = "#signupForm div:nth-child(2) small")
-      private WebElement usernameError;
-      @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
-      private WebElement passwordError;
-      @FindBy(css = "#signupForm > small.error")
-      private WebElement genericError;
-      @FindBy(css = " header.auth-header")
-      private WebElement registerHeader;
+  public RegisterPage typeBirthdate(String month, String day, String year) {
+    wait.forElementVisible(signupBirthdate);
+    signupBirthdate.click();
 
-      private final String mainWindowHandle;
+    wait.forElementVisible(signupBirthMonth);
+    signupBirthMonth.click();
+    signupBirthMonth.sendKeys(month);
 
-      public RegisterArea(boolean waitForNewWindow) {
-        super();
-        if (waitForNewWindow) {
-          waitForNewWindow();
-          this.mainWindowHandle = driver.getWindowHandle();
-        } else {
-          this.mainWindowHandle = null;
-        }
-      }
+    wait.forElementVisible(signupBirthDay);
+    signupBirthDay.click();
+    signupBirthDay.sendKeys(day);
 
-      public void switchToAuthModalHandle() {
-        for (String winHandle : driver.getWindowHandles()) {
-          driver.switchTo().window(winHandle);
-        }
-      }
+    wait.forElementVisible(signupBirthYear);
+    signupBirthYear.click();
+    signupBirthYear.sendKeys(year);
 
-      public void switchToMainWindowHandle() {
-        driver.switchTo().window(this.mainWindowHandle);
-      }
+    return this;
+  }
 
-      public boolean isOpened() {
-        switchToAuthModalHandle();
-        boolean isOpenedResult = authModal.isDisplayed();
-        switchToMainWindowHandle();
-        return isOpenedResult;
-      }
+  public void clickSignUpSubmitButton() {
+    wait.forElementVisible(signupSubmitButton);
+    signupSubmitButton.click();
+  }
 
-      public RegisterArea typeEmailAddress(String email) {
-        wait.forElementVisible(signupEmail);
-        signupEmail.sendKeys(email);
-        return this;
-      }
+  public void verifyAvatarAfterSignup() {
+    new TopBar(driver).openNavigation();
+    wait.forElementVisible(avatar);
+    Assertion.assertTrue(avatar.isDisplayed());
+  }
 
-      public RegisterArea typeUsername(String username) {
-        wait.forElementVisible(signupUsername);
-        signupUsername.sendKeys(username);
-        return this;
-      }
+  public boolean doesErrorMessageContainText() {
+    return usernameError.getText().contains("Username is taken");
+  }
 
-      public RegisterArea typePassword(String password) {
-        wait.forElementVisible(signupPassword);
-        signupPassword.sendKeys(password);
-        return this;
-      }
+  public void verifyUsernameTakenError() {
+    wait.forElementVisible(usernameError);
+    Assertion.assertEquals(usernameError.getText(), "Username is taken");
+  }
 
-      public RegisterArea typeBirthdate(String month, String day, String year) {
-        wait.forElementVisible(signupBirthdate);
-        signupBirthdate.click();
+  public void verifyPasswordError() {
+    wait.forElementVisible(passwordError);
+    Assertion.assertEquals(passwordError.getText(), "Password and username cannot match");
+  }
 
-        wait.forElementVisible(signupBirthMonth);
-        signupBirthMonth.click();
-        signupBirthMonth.sendKeys(month);
+  public void verifyBirthdateError() {
+    wait.forElementVisible(genericError);
+    Assertion.assertEquals(genericError.getText(),
+                           "We cannot complete your registration at this time");
+  }
 
-        wait.forElementVisible(signupBirthDay);
-        signupBirthDay.click();
-        signupBirthDay.sendKeys(day);
+  public String getRegisterHeaderText() {
+    wait.forElementVisible(registerHeader);
+    return registerHeader.getText();
+  }
 
-        wait.forElementVisible(signupBirthYear);
-        signupBirthYear.click();
-        signupBirthYear.sendKeys(year);
+  public void openRegisterPage() {
+    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "clickSignUpSubmitButton");
+  }
 
-        return this;
-      }
-
-      public void clickSignUpSubmitButton() {
-        wait.forElementVisible(signupSubmitButton);
-        signupSubmitButton.click();
-      }
-
-      public void verifyAvatarAfterSignup() {
-        new TopBar(driver).openNavigation();
-        wait.forElementVisible(avatar);
-        Assertion.assertTrue(avatar.isDisplayed());
-      }
-
-      public boolean doesErrorMessageContainText() {
-        return usernameError.getText().contains("Username is taken");
-      }
-
-      public void verifyUsernameTakenError() {
-        wait.forElementVisible(usernameError);
-        Assertion.assertEquals(usernameError.getText(), "Username is taken");
-      }
-
-      public void verifyPasswordError() {
-        wait.forElementVisible(passwordError);
-        Assertion.assertEquals(passwordError.getText(), "Password and username cannot match");
-      }
-
-      public void verifyBirthdateError() {
-        wait.forElementVisible(genericError);
-        Assertion.assertEquals(genericError.getText(),
-                               "We cannot complete your registration at this time");
-      }
-
-      public String getRegisterHeaderText() {
-        wait.forElementVisible(registerHeader);
-        return registerHeader.getText();
-      }
-
-      public void openRegisterPage() {
-        driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "clickSignUpSubmitButton");
-      }
-
-    }
 }
+
 
