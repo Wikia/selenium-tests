@@ -141,6 +141,10 @@ public class Configuration {
     return getProp("useMITM");
   }
 
+  public static String useZap() {
+    return getProp("useZapProxy");
+  }
+
   public static String getPageLoadStrategy() {
     return getProp("unstablePageLoadStrategy");
   }
@@ -158,8 +162,8 @@ public class Configuration {
       return EnvType.PROD;
     } else if (env.contains("staging")) {
       return EnvType.STAGING;
-    } else if (env.contains("verify") || env.contains("preview")
-               || env.contains("sandbox") || env.contains("stable")) {
+    } else if (env.contains("verify") || env.contains("preview") || env.contains("sandbox")
+        || env.contains("stable")) {
       return EnvType.SANDBOX;
     } else if (env.contains("dev")) {
       return EnvType.DEV;
@@ -180,7 +184,8 @@ public class Configuration {
   }
 
   public static boolean useProxy() {
-    return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode());
+    return Boolean.valueOf(getProp("useProxy")) || StringUtils.isNotBlank(getCountryCode())
+        || Boolean.valueOf(getProp("useZapProxy"));
   }
 
   /**
