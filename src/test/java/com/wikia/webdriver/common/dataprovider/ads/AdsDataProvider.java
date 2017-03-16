@@ -1306,7 +1306,7 @@ public class AdsDataProvider {
     public static Object[][] adsVuapDesktop() {
         return new Object[][]{
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.TOP_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
@@ -1314,7 +1314,7 @@ public class AdsDataProvider {
                         )
                 },
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.BOTTOM_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
@@ -1366,7 +1366,7 @@ public class AdsDataProvider {
     public static Object[][] adsVuapMercury() {
         return new Object[][]{
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.MOBILE_TOP_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
@@ -1375,7 +1375,7 @@ public class AdsDataProvider {
                         "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
                 },
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.MOBILE_BOTTOM_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
