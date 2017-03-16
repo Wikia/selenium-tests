@@ -131,17 +131,13 @@ public class MailFunctions {
   }
 
   public static String getPasswordResetLinkFromEmailContent(String mailContent) {
-    // mail content contain '=' chars, which has to be removed
-    String content = mailContent.replace("=", "");
-    Pattern p = Pattern.compile("below:[\\s\\S]*?(?=If)"); // getting new password
-    // from mail content
-    Matcher m = p.matcher(content);
-    
+    String linkPattern = ".*<a[^>]*href3D\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
+    Pattern p = Pattern.compile(linkPattern, Pattern.DOTALL);
+    Matcher m = p.matcher(mailContent.replace("=", ""));
     if (m.find()) {
-      return m.group(0).replace("below:", "");
-      // m.group(0) returns first match for the regexp
+      return m.group("url").replace("click?upn3D", "click?upn=");
     } else {
-      throw new WebDriverException("There was no match in the following content: \n" + content);
+      throw new WebDriverException("There was no match in the following content: \n" + mailContent);
     }
   }
 

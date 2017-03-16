@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ForgotPasswordPage;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,7 @@ public class AuthModal extends WikiBasePageObject {
     super();
     waitForNewWindow();
     this.mainWindowHandle = driver.getWindowHandle();
+    switchToAuthModalHandle();
   }
 
 
@@ -90,10 +92,11 @@ public class AuthModal extends WikiBasePageObject {
     login(user.getUserName(), user.getPassword());
   }
 
-  public void clickForgotPasswordLink() {
+  public ForgotPasswordPage clickForgotPasswordLink() {
     switchToAuthModalHandle();
     forgottenPasswordLink.click();
     switchToMainWindowHandle();
+    return new ForgotPasswordPage();
   }
 
   public void clickToSignInForm(){

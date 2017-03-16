@@ -65,7 +65,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     new SignInPage()
         .typeUsername(credentials.userName10)
         .typePassword(credentials.password10)
-        .clickSignInButtonToSignIn()
+        .clickSignInButton()
         .verifyUserLoggedIn(credentials.userName10);
 
     Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
@@ -82,7 +82,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     new SignInPage()
         .typeUsername(credentials.userName10)
         .typePassword(credentials.password10)
-        .clickSignInButtonToSignIn()
+        .clickSignInButton()
         .verifyUserLoggedIn(credentials.userName10);
 
     base.verifyUserLoggedIn(credentials.userName10);

@@ -40,7 +40,7 @@ public class EditAccountTests extends NewTestTemplate {
     signInPage
         .typeUsername(credentials.userNameClosedAccount)
         .typePassword(credentials.passwordClosedAccount)
-        .clickSignInButtonToGetError()
+        .clickSignInButton()
         .verifyErrorMessage(expectedErrorMessage);
 
   }
@@ -65,7 +65,7 @@ public class EditAccountTests extends NewTestTemplate {
     signInPage
         .typeUsername(credentials.userNameClosedAccount)
         .typePassword(credentials.passwordClosedAccount)
-        .clickSignInButtonToSignIn()
+        .clickSignInButton()
         .verifyUserLoggedIn(credentials.userNameClosedAccount);
 
   }

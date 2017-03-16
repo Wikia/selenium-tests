@@ -14,10 +14,18 @@ public class BaseAuthPage extends WikiBasePageObject {
   private WebElement facebookSignUpButton;
   @FindBy(css = ".signup-providers li a")
   private WebElement connectWithFacebookButton;
-  @FindBy(css = ".footer-callout-emphasis")
+  @FindBy(css = "#loginSubmit")
   private WebElement signInButton;
+  @FindBy(css = "#loginSubmit:disabled")
+  private WebElement disabledSignInButton;
   @FindBy(css = ".error")
   private WebElement errorMessage;
+  @FindBy(css = "#loginUsername")
+  private WebElement usernameField;
+  @FindBy(css = "#signupPassword")
+  private WebElement passwordField;
+  @FindBy(className = "auth-header")
+  private WebElement header;
 
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
@@ -32,11 +40,9 @@ public class BaseAuthPage extends WikiBasePageObject {
     return this;
   }
 
-  public SignInPage clickSignInButton() {
-    wait.forElementClickable(signInButton);
-    signInButton.click();
-
-    return new SignInPage();
+  public BaseAuthPage clickSignInButton() {
+    wait.forElementClickable(signInButton).click();
+    return this;
   }
 
   private String getErrorMessage() {
@@ -46,6 +52,20 @@ public class BaseAuthPage extends WikiBasePageObject {
   public BaseAuthPage verifyErrorMessage(String errorMessage) {
     Assertion.assertEquals(getErrorMessage(), errorMessage);
     return this;
+  }
+
+  public BaseAuthPage typeUsername(String username) {
+    fillInput(usernameField, username);
+    return this;
+  }
+
+  public BaseAuthPage typePassword(String password) {
+    fillInput(passwordField, password);
+    return this;
+  }
+
+  public void verifySignInButtonNotClickable() {
+    wait.forElementVisible(disabledSignInButton);
   }
 
 }

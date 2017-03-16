@@ -26,10 +26,15 @@ ForgottenPasswordTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
     AuthModal loginModal = new AuthModal();
-    loginModal.clickForgotPasswordLink();
-    String newPassword = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
-    loginModal.login(userName, newPassword);
-    loginModal.verifyUserLoggedIn(userName);
+    loginModal
+      .clickForgotPasswordLink()
+      .requestLinkForUsername(userName);
+
+    String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
+    driver.get(resetLink);
+    loginModal.isSignInOpened();
+    //loginModal.login(userName, newPassword);
+    //loginModal.verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
@@ -44,8 +49,9 @@ ForgottenPasswordTests extends NewTestTemplate {
     signIn
         .typeUsername(userName)
         .typePassword(newPassword)
-        .clickSignInButtonToSignIn()
-        .verifyUserLoggedIn(userName);
+        .clickSignInButton();
+
+    signIn.verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
@@ -66,7 +72,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     signIn
         .typeUsername(userName)
         .typePassword(newPassword)
-        .clickSignInButtonToSignIn()
+        .clickSignInButton()
         .verifyUserLoggedIn(verifyString);
   }
 }

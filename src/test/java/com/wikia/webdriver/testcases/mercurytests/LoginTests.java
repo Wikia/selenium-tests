@@ -23,38 +23,42 @@ public class LoginTests extends NewTestTemplate {
 
     @Test(groups = "login-anonCanLogInAsRegisteredUser")
     public void anonCanLogInAsRegisteredUser() {
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
+        ArticlePage article = new ArticlePage();
+
+            article.open(MercurySubpages.MAIN_PAGE)
             .getTopbar()
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
             .typeUsername(Configuration.getCredentials().userName10)
             .typePassword(Configuration.getCredentials().password10)
-            .clickSignInButtonToSignIn()
-            .getTopbar()
+            .clickSignInButton();
+
+            article.getTopbar()
             .openNavigation()
             .isUserAvatarVisible();
     }
 
     @Test(groups = "login-anonCanNotLogInWithInvalidPassword")
     public void anonCanNotLogInWithInvalidPassword() {
-         new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
+        ArticlePage article = new ArticlePage();
+
+        article.open(MercurySubpages.MAIN_PAGE)
             .getTopbar()
             .openNavigation()
             .clickOnSignInRegisterButton()
             .clickSignInButton()
             .typeUsername(Configuration.getCredentials().userName10)
             .typePassword(Configuration.getCredentials().password11)
-            .clickSignInButtonToGetError()
+            .clickSignInButton()
             .verifyErrorMessage(expectedErrorMessage);
     }
 
     @Test(groups = "login-anonCanNotLogInWithBlankPassword")
     public void anonCanNotLogInWithBlankPassword() {
-        new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
+        ArticlePage article = new ArticlePage();
+
+        article.open(MercurySubpages.MAIN_PAGE)
             .getTopbar()
             .openNavigation()
             .clickOnSignInRegisterButton()
@@ -73,7 +77,7 @@ public class LoginTests extends NewTestTemplate {
             .clickSignInButton()
             .typeUsername(String.valueOf(DateTime.now().getMillis()))
             .typePassword(Configuration.getCredentials().password10)
-            .clickSignInButtonToGetError()
+            .clickSignInButton()
             .verifyErrorMessage(expectedErrorMessage);
     }
 

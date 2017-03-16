@@ -349,6 +349,10 @@ public class BasePageObject {
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
   }
 
+  public void fillInput(WebElement input, String value) {
+    wait.forElementVisible(input).sendKeys(value);
+  }
+
   /**
    * Wait for new window present
    */
