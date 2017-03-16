@@ -3,10 +3,10 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtio
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 import org.openqa.selenium.By;
@@ -120,10 +120,10 @@ public class NavigationBar extends WikiBasePageObject {
     return new ArticlePageObject();
   }
 
-  public AuthModal clickOnSignIn(){
+  public SignInPage clickOnSignIn(){
     myAccount.click();
     signInLink.click();
-    return new AuthModal();
+    return new SignInPage();
   }
 
   public RegisterPage clickOnRegister(){

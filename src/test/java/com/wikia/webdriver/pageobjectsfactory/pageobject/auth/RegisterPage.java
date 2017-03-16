@@ -69,7 +69,7 @@ public class RegisterPage extends BaseAuthPage {
     driver.switchTo().window(this.mainWindowHandle);
   }
 
-  public boolean isOpened() {
+  public boolean isModalOpen() {
     switchToAuthModalHandle();
     boolean isOpenedResult = authModal.isDisplayed();
     switchToMainWindowHandle();

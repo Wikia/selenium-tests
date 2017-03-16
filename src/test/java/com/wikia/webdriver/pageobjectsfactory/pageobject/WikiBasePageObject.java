@@ -18,7 +18,6 @@ import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplo
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -80,8 +79,6 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
-  @Getter(lazy = true)
-  private final AuthModal authModal = new AuthModal();
   @Getter(lazy = true)
   private final RegisterPage registerPage = new RegisterPage(true);
   @Getter(lazy = true)

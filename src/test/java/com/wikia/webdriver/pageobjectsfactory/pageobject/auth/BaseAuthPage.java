@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -35,9 +36,8 @@ public class BaseAuthPage extends WikiBasePageObject {
     return new FacebookSignupModalComponentObject();
   }
 
-  public BaseAuthPage isConnetctWithFacebookButtonVisible() {
-    wait.forElementVisible(connectWithFacebookButton);
-    return this;
+  public boolean isConnetctWithFacebookButtonVisible() {
+    return wait.forElementVisible(connectWithFacebookButton).isDisplayed();
   }
 
   public BaseAuthPage clickSignInButton() {
@@ -68,4 +68,55 @@ public class BaseAuthPage extends WikiBasePageObject {
     wait.forElementVisible(disabledSignInButton);
   }
 
+  @FindBy(css = ".auth.desktop.signin-page")
+  private WebElement signInAuthModal;
+  @FindBy(css = ".auth.desktop.register-page")
+  private WebElement registerAuthModal;
+  @FindBy(css = ".register-page .header-callout-link")
+  private WebElement linkToSignInForm;
+
+  private final String mainWindowHandle;
+
+  public BaseAuthPage() {
+    super();
+    this.mainWindowHandle = driver.getWindowHandle();
+    switchToAuthModalHandle();
+  }
+
+
+  private void switchToAuthModalHandle() {
+    for (String winHandle : driver.getWindowHandles()) {
+      driver.switchTo().window(winHandle);
+    }
+  }
+
+  private void switchToMainWindowHandle() {
+    driver.switchTo().window(this.mainWindowHandle);
+  }
+
+  public void login(String username, String password) {
+    typeUsername(username);
+    typePassword(password);
+    clickSignInButton();
+  }
+
+  public void login(User user) {
+    login(user.getUserName(), user.getPassword());
+  }
+
+  public boolean isModalOpen() {
+    switchToAuthModalHandle();
+    boolean isOpen = isAuthHeaderDisplayed();
+    switchToMainWindowHandle();
+    return isOpen;
+  }
+
+  private boolean isAuthHeaderDisplayed() {
+    return wait.forElementVisible(header).isDisplayed();
+  }
+
+  public BaseAuthPage navigateToSignIn() {
+    wait.forElementVisible(linkToSignInForm).click();
+    return new SignInPage();
+  }
 }

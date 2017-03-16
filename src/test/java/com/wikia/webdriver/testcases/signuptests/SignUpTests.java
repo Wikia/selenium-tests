@@ -7,9 +7,9 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
 
 import junit.framework.Assert;
@@ -58,12 +58,11 @@ public class SignUpTests extends NewTestTemplate {
 
   }
 
-  @Test(groups = "SignUp_anonCanSignUpOnNewAuthModalFromGlobalNav")
-  public void anonCanSignUpOnNewAuthModalFromGlobalNav() {
+  @Test(groups = "SignUp_anonCanSignUpOnNewBaseAuthPageFromGlobalNav")
+  public void anonCanSignUpOnNewBaseAuthPageFromGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar registerLink = new NavigationBar(driver);
     RegisterPage register = registerLink.clickOnRegister();
-    register.switchToAuthModalHandle();
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
@@ -124,11 +123,10 @@ public class SignUpTests extends NewTestTemplate {
     base.logOut();
 
     NavigationBar signInLink = new NavigationBar(driver);
-    signInLink.clickOnSignIn();
-    AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isSignInOpened());
+    BaseAuthPage page = signInLink.clickOnSignIn();
+    Assert.assertTrue(page.isModalOpen());
 
-    authModal.login(userName, password);
+    page.login(userName, password);
   }
 
   @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")

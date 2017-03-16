@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -25,14 +24,14 @@ ForgottenPasswordTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
-    AuthModal loginModal = new AuthModal();
+    SignInPage loginModal = new SignInPage();
     loginModal
       .clickForgotPasswordLink()
       .requestLinkForUsername(userName);
 
     String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
     driver.get(resetLink);
-    loginModal.isSignInOpened();
+    loginModal.isModalOpen();
     //loginModal.login(userName, newPassword);
     //loginModal.verifyUserLoggedIn(userName);
   }

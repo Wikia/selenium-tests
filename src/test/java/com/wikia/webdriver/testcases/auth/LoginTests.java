@@ -8,11 +8,12 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
@@ -28,9 +29,9 @@ public class LoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
-    signInLink.clickOnSignIn();
-    AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isSignInOpened());
+    SignInPage authModal = signInLink.clickOnSignIn();
+
+    Assert.assertTrue(authModal.isModalOpen());
 
     authModal.login(credentials.userName10, credentials.password10);
     base.verifyUserLoggedIn(credentials.userName10);
@@ -43,9 +44,9 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
-    signInLink.clickOnSignIn();
-    AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isSignInOpened());
+    SignInPage authModal = signInLink.clickOnSignIn();
+
+    Assert.assertTrue(authModal.isModalOpen());
 
     //we are using userNameStaff2 because of PLATFORM-2502 and PLATFORM-2508
     authModal.login(credentials.userNameStaff2, credentials.passwordStaff2);
@@ -59,9 +60,8 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
-    signInLink.clickOnSignIn();
-    AuthModal authModal = signInLink.getAuthModal();
-    Assert.assertTrue(authModal.isSignInOpened());
+    SignInPage authModal = signInLink.clickOnSignIn();
+    Assert.assertTrue(authModal.isModalOpen());
 
     authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);
     base.verifyUserLoggedIn(credentials.userNameJapanese2);

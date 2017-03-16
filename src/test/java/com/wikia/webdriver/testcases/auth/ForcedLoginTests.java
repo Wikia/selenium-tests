@@ -6,8 +6,8 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -29,10 +29,10 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
-    AuthModal authModal = specialPage.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    BaseAuthPage authModal = new BaseAuthPage();
+    Assert.assertTrue(authModal.isModalOpen());
 
-    authModal.clickToSignInForm();
+    authModal.navigateToSignIn();
     authModal.login(credentials.userName10, credentials.password10);
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
@@ -45,10 +45,10 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
-    AuthModal authModal = specialPage.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    BaseAuthPage authModal = new BaseAuthPage();
+    Assert.assertTrue(authModal.isModalOpen());
 
-    authModal.clickToSignInForm();
+    authModal.navigateToSignIn();
     authModal.login(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
@@ -95,10 +95,10 @@ public class ForcedLoginTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
-    AuthModal authModal = edit.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    BaseAuthPage authModal = new BaseAuthPage();
+    Assert.assertTrue(authModal.isModalOpen());
 
-    authModal.clickToSignInForm();
+    authModal.navigateToSignIn();
     authModal.login(credentials.userName10, credentials.password10);
     edit.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(edit.isStringInURL(articleName));

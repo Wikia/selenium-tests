@@ -6,9 +6,9 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
@@ -45,8 +45,8 @@ public class FacebookButtonTests extends NewTestTemplate {
     specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
 
-    AuthModal authModal = new AuthModal();
-    authModal.isOpened();
+    BaseAuthPage authModal = new BaseAuthPage();
+    authModal.isModalOpen();
     Assertion.assertTrue(authModal.isConnetctWithFacebookButtonVisible());
   }
 
