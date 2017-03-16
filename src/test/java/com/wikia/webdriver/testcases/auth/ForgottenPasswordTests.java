@@ -28,6 +28,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     loginModal
       .clickForgotPasswordLink()
       .requestLinkForUsername(userName);
+    loginModal.looseFocus();
 
     String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
     driver.get(resetLink);

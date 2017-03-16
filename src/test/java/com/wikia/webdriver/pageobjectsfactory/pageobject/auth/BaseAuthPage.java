@@ -119,4 +119,8 @@ public class BaseAuthPage extends WikiBasePageObject {
     wait.forElementVisible(linkToSignInForm).click();
     return new SignInPage();
   }
+
+  public void looseFocus() {
+    switchToAuthModalHandle();
+  }
 }
