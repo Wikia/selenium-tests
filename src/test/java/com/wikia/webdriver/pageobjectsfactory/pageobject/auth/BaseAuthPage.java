@@ -86,9 +86,13 @@ public class BaseAuthPage extends WikiBasePageObject {
 
   private void switchToAuthModalHandle() {
     for (String winHandle : driver.getWindowHandles()) {
-      driver.switchTo().window(winHandle);
+      if (!winHandle.equals(mainWindowHandle)) {
+        driver.switchTo().window(winHandle);
+      }
     }
   }
+
+
 
   private void switchToMainWindowHandle() {
     driver.switchTo().window(this.mainWindowHandle);
@@ -121,6 +125,10 @@ public class BaseAuthPage extends WikiBasePageObject {
   }
 
   public void looseFocus() {
+    switchToAuthModalHandle();
+  }
+
+  public void gainFocus() {
     switchToAuthModalHandle();
   }
 }

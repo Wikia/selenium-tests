@@ -11,8 +11,6 @@ public class SignInPage extends BaseAuthPage {
   @FindBy(css = "#loginPassword")
   private WebElement passwordField;
 
-
-
   public ForgotPasswordPage clickForgotPasswordLink() {
     wait.forElementClickable(forgottenPasswordLink);
     forgottenPasswordLink.click();

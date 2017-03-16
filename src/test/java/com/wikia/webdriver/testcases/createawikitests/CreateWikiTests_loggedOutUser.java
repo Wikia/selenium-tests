@@ -30,6 +30,7 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
         Assert.assertTrue(authModal.isModalOpen());
 
+        authModal.gainFocus();
         authModal.login(credentials.userName10, credentials.password10);
         CreateNewWikiPageObjectStep2 cnw2 = new CreateNewWikiPageObjectStep2(driver);
         cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);
