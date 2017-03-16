@@ -1174,7 +1174,7 @@ public class AdsDataProvider {
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP"),
+            new Page("project43", "SyntheticTests/UAP/Legacy"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
@@ -1211,7 +1211,7 @@ public class AdsDataProvider {
   public static Object[][] adsUapMercury() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP"),
+            new Page("project43", "SyntheticTests/UAP/Legacy"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
