@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.core.drivers;
 
+import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -12,6 +13,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -86,6 +88,10 @@ public abstract class BrowserAbstract {
       server = new NetworkTrafficInterceptor();
       server.setTrustAllServers(true);
       server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
+      if ("true".equals(Configuration.useZap())) {
+        server.setChainedProxy(new InetSocketAddress(XMLReader.getValue("zap_proxy.address"),
+            Integer.parseInt(XMLReader.getValue("zap_proxy.port"))));
+      }
       server.setRequestTimeout(90, TimeUnit.SECONDS);
       server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
           CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
