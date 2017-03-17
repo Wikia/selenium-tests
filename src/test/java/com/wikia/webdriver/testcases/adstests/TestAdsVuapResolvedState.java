@@ -71,7 +71,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
   }
 
-  @Test(groups = "AdsVuapResolvedStateOnSecodPageView",
+  @Test(groups = "AdsVuapResolvedStateOnSecondPageView",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapResolvedStateAfterSecondPageView(Page page, String slot, String videoIframeSelector) {

@@ -34,6 +34,8 @@ public class AdsDataProvider {
   private static final String NO_SKIN_RIGHT =
       "src/test/resources/adsResources/no_wikia_skin_right.png";
 
+  private static final String VIDEO_PLAYER_IFRAME = " .video-player iframe";
+
   private AdsDataProvider() {
   }
 
@@ -1172,7 +1174,7 @@ public class AdsDataProvider {
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP"),
+            new Page("project43", "SyntheticTests/UAP/Legacy"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
@@ -1209,7 +1211,7 @@ public class AdsDataProvider {
   public static Object[][] adsUapMercury() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP"),
+            new Page("project43", "SyntheticTests/UAP/Legacy"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
@@ -1304,7 +1306,7 @@ public class AdsDataProvider {
     public static Object[][] adsVuapDesktop() {
         return new Object[][]{
                 {
-                        new Page("project43", "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.TOP_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
@@ -1312,7 +1314,7 @@ public class AdsDataProvider {
                         )
                 },
                 {
-                        new Page("project43", "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.BOTTOM_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
@@ -1326,9 +1328,9 @@ public class AdsDataProvider {
   public static Object[][] adsVuapAutoplayDesktop() {
     return new Object[][]{
                 {
-                        new Page("project43", "SyntheticTests/VUAP/McDonalds"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/McDonalds"),
                         AdsContent.TOP_LB,
-                        "#" + AdsContent.TOP_LB + " .video-player iframe"
+                        "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
                 }
     };
   }
@@ -1337,20 +1339,25 @@ public class AdsDataProvider {
   public static Object[][] adsVuapResolvedStateDesktop() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/VUAP/ResolveState2"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolveState2"),
             AdsContent.TOP_LB,
-            "#" + AdsContent.TOP_LB + " .video-player iframe"
+            "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         }
     };
   }
 
   @DataProvider
-  public static Object[][] adsVuapTngDesctop() {
+  public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
-            new Page("project43", "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
             AdsContent.TOP_LB,
-            "#" + AdsContent.TOP_LB + " .video-player iframe"
+            "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
+        },
+        {
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            AdsContent.BOTTOM_LB,
+            "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }
     };
   }
@@ -1359,7 +1366,7 @@ public class AdsDataProvider {
     public static Object[][] adsVuapMercury() {
         return new Object[][]{
                 {
-                        new Page("project43", "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.MOBILE_TOP_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
@@ -1368,7 +1375,7 @@ public class AdsDataProvider {
                         "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
                 },
                 {
-                        new Page("project43", "SyntheticTests/VUAP"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
                         AdsContent.MOBILE_BOTTOM_LB,
                         String.format(
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
