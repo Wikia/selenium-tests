@@ -1,11 +1,11 @@
 package com.wikia.webdriver.common.core.drivers;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import net.lightbody.bmp.proxy.CaptureType;
 
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -83,20 +83,24 @@ public abstract class BrowserAbstract {
    * Set Proxy instance for a Browser instance
    */
   protected void setProxy() {
-
+    Proxy proxyServer;
     if (Configuration.useProxy()) {
-      server = new NetworkTrafficInterceptor();
-      server.setTrustAllServers(true);
-      server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
       if ("true".equals(Configuration.useZap())) {
-        server.setChainedProxy(new InetSocketAddress(XMLReader.getValue("zap_proxy.address"),
-            Integer.parseInt(XMLReader.getValue("zap_proxy.port"))));
+        proxyServer = new Proxy();
+        String proxyAddress = String.format("%s:%s", XMLReader.getValue("zap_proxy.address"),
+            Integer.parseInt(XMLReader.getValue("zap_proxy.port")));
+        proxyServer.setHttpProxy(proxyAddress);
+        proxyServer.setSslProxy(proxyAddress);
+      } else {
+        server = new NetworkTrafficInterceptor();
+        server.setTrustAllServers(true);
+        server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
+        server.setRequestTimeout(90, TimeUnit.SECONDS);
+        server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
+            CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
+        proxyServer = server.startSeleniumProxyServer();
       }
-      server.setRequestTimeout(90, TimeUnit.SECONDS);
-      server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
-          CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
-
-      caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
+      caps.setCapability(CapabilityType.PROXY, proxyServer);
     }
   }
 }
