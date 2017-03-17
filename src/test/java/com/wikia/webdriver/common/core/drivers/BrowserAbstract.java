@@ -83,14 +83,13 @@ public abstract class BrowserAbstract {
    * Set Proxy instance for a Browser instance
    */
   protected void setProxy() {
-    Proxy proxyServer;
     if (Configuration.useProxy()) {
+      Proxy proxyServer = new Proxy();
       if ("true".equals(Configuration.useZap())) {
-        proxyServer = new Proxy();
-        String proxyAddress = String.format("%s:%s", XMLReader.getValue("zap_proxy.address"),
+        String zapProxyAddress = String.format("%s:%s", XMLReader.getValue("zap_proxy.address"),
             Integer.parseInt(XMLReader.getValue("zap_proxy.port")));
-        proxyServer.setHttpProxy(proxyAddress);
-        proxyServer.setSslProxy(proxyAddress);
+        proxyServer.setHttpProxy(zapProxyAddress);
+        proxyServer.setSslProxy(zapProxyAddress);
       } else {
         server = new NetworkTrafficInterceptor();
         server.setTrustAllServers(true);
@@ -98,7 +97,7 @@ public abstract class BrowserAbstract {
         server.setRequestTimeout(90, TimeUnit.SECONDS);
         server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
             CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
-        proxyServer = server.startSeleniumProxyServer();
+        proxyServer = server.startBrowserMobProxyServer();
       }
       caps.setCapability(CapabilityType.PROXY, proxyServer);
     }
