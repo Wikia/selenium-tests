@@ -15,6 +15,7 @@ takeScreenshots: true
 mockAds: false
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
+useZapProxy: false
 
 # Specify browser window size in format <width>x<height>, example: 800x600
 # use "maximised" value if you want browser to be maximised
