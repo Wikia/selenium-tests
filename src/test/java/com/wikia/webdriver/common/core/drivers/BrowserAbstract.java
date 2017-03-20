@@ -5,6 +5,7 @@ import java.util.logging.Level;
 
 import net.lightbody.bmp.proxy.CaptureType;
 
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -12,6 +13,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -81,16 +83,23 @@ public abstract class BrowserAbstract {
    * Set Proxy instance for a Browser instance
    */
   protected void setProxy() {
-
     if (Configuration.useProxy()) {
-      server = new NetworkTrafficInterceptor();
-      server.setTrustAllServers(true);
-      server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
-      server.setRequestTimeout(90, TimeUnit.SECONDS);
-      server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
-          CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
-
-      caps.setCapability(CapabilityType.PROXY, server.startSeleniumProxyServer());
+      Proxy proxyServer = new Proxy();
+      if ("true".equals(Configuration.useZap())) {
+        String zapProxyAddress = String.format("%s:%s", XMLReader.getValue("zap_proxy.address"),
+            Integer.parseInt(XMLReader.getValue("zap_proxy.port")));
+        proxyServer.setHttpProxy(zapProxyAddress);
+        proxyServer.setSslProxy(zapProxyAddress);
+      } else {
+        server = new NetworkTrafficInterceptor();
+        server.setTrustAllServers(true);
+        server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
+        server.setRequestTimeout(90, TimeUnit.SECONDS);
+        server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
+            CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
+        proxyServer = server.startBrowserMobProxyServer();
+      }
+      caps.setCapability(CapabilityType.PROXY, proxyServer);
     }
   }
 }
