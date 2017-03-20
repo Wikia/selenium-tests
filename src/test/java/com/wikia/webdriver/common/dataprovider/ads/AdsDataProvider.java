@@ -296,19 +296,21 @@ public class AdsDataProvider {
                 "\"pos\":\"TOP_LEADERBOARD\"",
                 "\"src\":\"gpt\""
             )
-        },
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] dfpRubiconParamsSynthetic() {
+    return new Object[][]{
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
             "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier",
-                "\"57_tier",
-                "_tier2000"
-            )
+            ".*rpfl_7450\":\\[\"2_tier\\d{4}.*\",\"57_tier.*",
+            ".*rpfl_7450\":\\[\"2_tier.*\",\"57_tier\\d{4}\"\\].*"
         }
     };
   }

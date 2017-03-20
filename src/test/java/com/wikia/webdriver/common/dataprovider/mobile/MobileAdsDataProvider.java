@@ -99,18 +99,21 @@ public class MobileAdsDataProvider {
                 "\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
                 "\"src\":\"mobile\""
             )
-        },
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] dfpRubiconParamsSynthetic() {
+    return new Object[][]{
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
             "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "MOBILE_TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"43_tier",
-                "_tier2000"
-            )
+            ".*rpfl_7450\":\\[\"43_tier\\d{4}.*\",\"44_tier.*",
+            ".*rpfl_7450\":\\[\"43_tier.*\",\"44_tier\\d{4}\"\\].*"
         }
     };
   }
