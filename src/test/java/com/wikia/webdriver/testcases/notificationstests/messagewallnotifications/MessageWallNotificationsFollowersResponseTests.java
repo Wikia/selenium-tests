@@ -76,7 +76,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 
 
   @Test(
-      groups = {"MessageWallNotificationsFollowersResponseTests_005"}, invocationCount = 25
+      groups = {"MessageWallNotificationsFollowersResponseTests_005"}
   )
  public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
