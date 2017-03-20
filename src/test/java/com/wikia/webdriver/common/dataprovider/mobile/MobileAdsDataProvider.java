@@ -8,7 +8,6 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class MobileAdsDataProvider {
 
