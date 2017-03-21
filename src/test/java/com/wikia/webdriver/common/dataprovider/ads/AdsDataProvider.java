@@ -755,15 +755,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] testPad() {
-    return new Object[][]{
-        {"adtest-pad", "Adtest-pad_Wikia", 250},
-        {"adtest-pad", "Article_1", 480},
-        {"adtest-pad", "Article_2", 480}
-    };
-  }
-
-  @DataProvider
   public static Object[][] interstitialOasis() {
     return new Object[][]{
         {

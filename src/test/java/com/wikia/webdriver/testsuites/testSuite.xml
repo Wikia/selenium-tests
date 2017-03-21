@@ -54,7 +54,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
