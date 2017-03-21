@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -17,6 +18,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   private static final String LINE_ITEM_ID = "282067812";
   private static final String CREATIVE_ID = "50006703732";
+  private static final String SRC_MOBILE = "mobile";
 
   @InBrowser(
       browser = Browser.CHROME,
@@ -40,8 +42,37 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     }
 
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-    ads.verifyGptIframe(adUnit, slot, "mobile");
+    ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
     ads.verifyGptParams(slot, pageParams, slotParams);
+    ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "dfpRubiconParamsSynthetic",
+      groups = {"MobileAds", "AdsDfpParamsPresentSyntheticMercury"}
+  )
+  public void dfpRubiconParamsPresentSyntheticMercury(String wikiName,
+                                                      String article,
+                                                      String queryString,
+                                                      String adUnit,
+                                                      String slot,
+                                                      String patternParam43tierPrice,
+                                                      String patternParam44tierPrice) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    if (StringUtils.isNotEmpty(queryString)) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
+    }
+
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    String currentGptSlotParams = ads.getGptParams(slot, "data-gpt-slot-params");
+    ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
+    Assertion.assertTrue(ads.areRubiconDfpParamsPresent(currentGptSlotParams, patternParam43tierPrice, patternParam44tierPrice),
+        currentGptSlotParams + " does not contains " + patternParam43tierPrice + " or " + patternParam44tierPrice);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
 
@@ -63,7 +94,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
 
-    ads.verifyGptIframe(adUnit, slot, "mobile");
+    ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
 
