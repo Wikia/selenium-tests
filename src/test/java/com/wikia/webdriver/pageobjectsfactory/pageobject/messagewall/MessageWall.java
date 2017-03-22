@@ -20,31 +20,31 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class MessageWall extends WikiBasePageObject {
 
-  final By firstMessageWrapperBy =
+  static final By firstMessageWrapperBy =
       By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  final By replyButtonBy = By.cssSelector(".replyButton");
-  private final By messageTitleBy = By.cssSelector(".msg-title");
-  private final By messageBodyBy = By.cssSelector(".msg-body");
-  private final By imageBy = By.cssSelector(".thumbimage");
-  private final By messageTextBoldBy = By.cssSelector("b");
-  private final By messageTextItalicBy = By.cssSelector("i");
-  private final By messageTextBy = By.cssSelector(".msg-body *");
-  private final By messageLinkBy = By.cssSelector("a");
-  private final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
-  private final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
-  private final By editButtonBy = By.cssSelector(".edit-message");
-  private final By removeButtonBy = By.cssSelector(".remove-message");
-  private final By reopenButtonBy = By.cssSelector(".reopen-thread");
-  private final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
-  private final By quoteMessageBy = By.cssSelector(".replies p");
-  private final By saveChangesButtonBy = By.cssSelector(".save-edit");
-  private final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  private final By replyBodyBy = By.cssSelector(".replyBody");
-  private final String newMessageMenu =
+  static final By replyButtonBy = By.cssSelector(".replyButton");
+  private static final By messageTitleBy = By.cssSelector(".msg-title");
+  private static final By messageBodyBy = By.cssSelector(".msg-body");
+  private static final By imageBy = By.cssSelector(".thumbimage");
+  private static final By messageTextBoldBy = By.cssSelector("b");
+  private static final By messageTextItalicBy = By.cssSelector("i");
+  private static final By messageTextBy = By.cssSelector(".msg-body *");
+  private static final By messageLinkBy = By.cssSelector("a");
+  private static final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
+  private static final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
+  private static final By editButtonBy = By.cssSelector(".edit-message");
+  private static final By removeButtonBy = By.cssSelector(".remove-message");
+  private static final By reopenButtonBy = By.cssSelector(".reopen-thread");
+  private static final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
+  private static final By quoteMessageBy = By.cssSelector(".replies p");
+  private static final By saveChangesButtonBy = By.cssSelector(".save-edit");
+  private static final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
+  private static final By replyBodyBy = By.cssSelector(".replyBody");
+  private static final String newMessageMenu =
       ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
-  private final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
-  private final String closeButtonString = ".close-thread";
-  private final By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
+  private static final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
+  private static final String closeButtonString = ".close-thread";
+  private static final By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
