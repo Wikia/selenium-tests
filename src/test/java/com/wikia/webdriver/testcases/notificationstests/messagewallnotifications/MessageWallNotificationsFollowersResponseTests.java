@@ -42,7 +42,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
-    wall.writeTitle(title);
+    wall.setTitle(title);
     wall.submit();
     wall.verifyMessageText(title, message, credentials.userName8);
   }
@@ -75,14 +75,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
   }
 
 
-  @Test(
-      groups = {"MessageWallNotificationsFollowersResponseTests_005"},
-      dependsOnMethods = {
-          "followerNotificationResponse_setup_1",
-          "followerNotificationResponse_setup_2",
-          "followerNotificationResponse_setup_3",
-          "followerNotificationResponse_setup_4"}
-  )
+  @Test(groups = {"MessageWallNotificationsFollowersResponseTests_005"})
  public void userIsNotifiedWhenOtherUserWritesResponseOnFollowedMessageWall() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName7, credentials.password7, wikiURL);

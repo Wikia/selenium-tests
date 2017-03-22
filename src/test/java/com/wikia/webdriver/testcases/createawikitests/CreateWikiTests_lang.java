@@ -1,11 +1,11 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.CreateNewWikiDataProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -13,17 +13,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
-import org.testng.annotations.Test;
-
 @Test(groups = {"CNW_lang"})
 public class CreateWikiTests_lang extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
-  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs", groups = {
-      "CreateNewWiki_lang_001", "CNW_lang_first"})
-  @Execute(asUser = User.USER)
- public void CreateNewWiki_lang_TC001(String lang) {
+  @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs",
+      groups = {"CreateNewWiki_lang_001", "CNW_lang_first"})
+  @Execute(asUser = User.USER_CNW)
+  public void CreateNewWiki_lang_TC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.selectLanguage(lang);
@@ -38,13 +34,13 @@ public class CreateWikiTests_lang extends NewTestTemplate {
     article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
     article.closeNewWikiCongratulationsLightBox();
     article.verifyWikiTitleHeader(wikiName);
-    article.verifyUserLoggedIn(credentials.userName);
+    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangSecondHalf",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
-  @Execute(asUser = User.USER)
-   public void langSecondHalf(String lang) {
+  @Execute(asUser = User.USER_CNW)
+  public void langSecondHalf(String lang) {
     CreateNewWiki_lang_TC001(lang);
   }
 }

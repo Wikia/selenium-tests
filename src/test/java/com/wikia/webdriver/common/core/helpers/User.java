@@ -14,8 +14,13 @@ public enum User {
   USER_6("ci.user.regular6.username", "ci.user.regular6.password", "ci.user.regular6.id"),
   USER_9("ci.user.regular9.username", "ci.user.regular9.password"),
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
+  USER_CNW("ci.user.cnw.username", "ci.user.cnw.password", "ci.user.cnw.user_id", "ci.user.cnw.access_token"),
+  USER_ADMIN_FORUM("ci.user.forum.username", "ci.user.forum.password", "ci.user.forum.user_id", "ci.user.forum.access_token"),
+  USER_MESSAGE_WALL("ci.user.message_wall.username", "ci.user.message_wall.password", "ci.user.message_wall.user_id", "ci.user.message_wall.access_token"),
+  USER_VET_MODAL("ci.user.vet_modal.username", "ci.user.vet_modal.password", "ci.user.vet_modal.user_id", "ci.user.vet_modal.access_token"),
   IMAGE_REVIEWER("ci.user.reviewer.username", "ci.user.reviewer.password", "ci.user.reviewer.user_id"),
   STAFF("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "ci.user.wikiastaff.id", "ci.user.wikiastaff.access_token"),
+  STAFF_FORUM("ci.user.wikiastaff.username", "ci.user.wikiastaff.password", "ci.user.wikiastaff.id", "ci.user.wikiastaff.access_token"),
   ANONYMOUS("anonymous", "anonymous"),
   DISCUSSIONS_ADMINISTRATOR("ci.user.discussions.administrator.username", "ci.user.discussions.administrator.password"),
   DISCUSSIONS_MODERATOR("ci.user.discussions.moderator.username", "ci.user.discussions.moderator.password"),
@@ -27,7 +32,8 @@ public enum User {
   BLOCKED_USER("ci.user.tooManyLoginAttempts.username", "ci.user.tooManyLoginAttempts.password"),
   CONSTANTLY_BLOCKED_USER("ci.user.constantlyBlockedAccountUser.username", "ci.user.constantlyBlockedAccountUser.password"),
   GOOGLE_CONNECTED("ci.user.google_connected.username", "ci.user.google_connected.password"),
-  CONTENT_REVIEWER("ci.user.wikiaContentReviewer.username", "ci.user.wikiaContentReviewer.password");
+  CONTENT_REVIEWER("ci.user.wikiaContentReviewer.username", "ci.user.wikiaContentReviewer.password"),
+  COMMENTS_REGULAR_USER("ci.user.comments.username", "ci.user.comments.password", "ci.user.comments.id", "ci.user.comments.access_token");
 
   private final String userName;
 

@@ -47,6 +47,6 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
 
   @Override
   public int getEditorHeight() {
-    return editor.getSize().getHeight();
+    return wait.forElementVisible(editor).getSize().getHeight();
   }
 }

@@ -19,7 +19,7 @@ public class NetworkTrafficInterceptor extends BrowserMobProxyServer {
 
   private Har har;
 
-  public Proxy startSeleniumProxyServer() {
+  public Proxy startBrowserMobProxyServer() {
     start();
 
     return ClientUtil.createSeleniumProxy(this);

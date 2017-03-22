@@ -27,7 +27,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
   private static final String DEFAULT_FORUM_ID = "1362702";
@@ -91,14 +90,17 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
   }
 
   public PostsListPage waitForPageReload() {
-    try {
-      wait.forElementVisible(By.className("loading-overlay"));
-    } catch (TimeoutException e) {
-      PageObjectLogging.logError(e.getMessage(), e);
-    } finally {
-      wait.forElementNotVisible(By.className("loading-overlay"));
-    }
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay")));
+    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")));
     return this;
+  }
+
+  private void waitSafely(Runnable o) {
+    try {
+      o.run();
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("Timed out waiting", e.getMessage(), true);
+    }
   }
 
   public void waitForPageReloadWith(final String categoryName) {

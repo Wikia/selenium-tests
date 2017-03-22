@@ -94,7 +94,7 @@ public class VideoComponentObject extends WikiBasePageObject {
   }
 
   public void verifyVideoAutoplay(String providerName, boolean status) {
-    PageObjectLogging.log("verifyVideoAutoplay", "Provider: " + providerName, true);
+    PageObjectLogging.log("verifyVideoPlay", "Provider: " + providerName, true);
 
     String autoplayStr = "";
     String embedCode = "";

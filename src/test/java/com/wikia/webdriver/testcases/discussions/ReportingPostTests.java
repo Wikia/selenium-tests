@@ -5,6 +5,8 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
+import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
+
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -22,13 +24,12 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_AUTO)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = "discussions-reporting-posts")
 public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST =
       "Discussions moderator should see re reported post.";
-  private static final String DESKTOP_RESOLUTION = "1920x1080";
   private static final String NO_REPORT_POST_OPTION_MESSAGE =
       "'Report Post' option in 'More Options' should not be available.";
   private static final String REPORTED_INDICATOR_ON_POST_MESSAGE =
