@@ -15,7 +15,8 @@ import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 @Test(groups = {"ArticleCRUDUser"})
-public class ArticleCRUDUserTests extends NewTestTemplate {
+public class
+ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_001"})
   @Execute(asUser = User.USER)
