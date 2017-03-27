@@ -1,20 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
-/**
- * Created by ogolec on 27.03.17.
- */
 public interface RegisterPage {
-  AttachedRegisterPage open();
+  RegisterPage open();
 
-  boolean isModalOpen();
+  RegisterPage typeEmailAddress(String email);
 
-  AttachedRegisterPage typeEmailAddress(String email);
+  RegisterPage typeUsername(String username);
 
-  AttachedRegisterPage typeUsername(String username);
+  RegisterPage typePassword(String password);
 
-  AttachedRegisterPage typePassword(String password);
-
-  AttachedRegisterPage typeBirthdate(String month, String day, String year);
+  RegisterPage typeBirthdate(String month, String day, String year);
 
   void clickSignUpSubmitButton();
 

@@ -1,12 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 
-/**
- * Created by ogolec on 27.03.17.
- */
 public interface SignInPage {
+
   ForgotPasswordPage clickForgotPasswordLink();
 
-  DetachedSignInPage typePassword(String password);
+  SignInPage typePassword(String password);
+
+  void login(String username, String password);
+
+  void login(User user);
+
+
 }

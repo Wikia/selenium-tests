@@ -1,12 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedRegisterPage extends BaseAuthPage implements RegisterPage {
+public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
 
   @Override public AttachedRegisterPage open() {
       driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
@@ -42,50 +42,38 @@ public class AttachedRegisterPage extends BaseAuthPage implements RegisterPage {
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
 
-  @Override public boolean isModalOpen() {
-    return true;
-  }
-
-  @Override public AttachedRegisterPage typeEmailAddress(String email) {
-    wait.forElementVisible(signupEmail);
-    signupEmail.sendKeys(email);
+  @Override public RegisterPage typeEmailAddress(String email) {
+    wait.forElementVisible(signupEmail).sendKeys(email);
     return this;
   }
 
-  @Override public AttachedRegisterPage typeUsername(String username) {
-    wait.forElementVisible(signupUsername);
-    signupUsername.sendKeys(username);
+  @Override public RegisterPage typeUsername(String username) {
+    wait.forElementVisible(signupUsername).sendKeys(username);
     return this;
   }
 
-  @Override public AttachedRegisterPage typePassword(String password) {
-    wait.forElementVisible(signupPassword);
-    signupPassword.sendKeys(password);
+  @Override public RegisterPage typePassword(String password) {
+    wait.forElementVisible(signupPassword).sendKeys(password);
     return this;
   }
 
-  @Override public AttachedRegisterPage typeBirthdate(String month, String day, String year) {
-    wait.forElementVisible(signupBirthdate);
-    signupBirthdate.click();
+  @Override public RegisterPage typeBirthdate(String month, String day, String year) {
+    wait.forElementVisible(signupBirthdate).click();
 
-    wait.forElementVisible(signupBirthMonth);
-    signupBirthMonth.click();
+    wait.forElementVisible(signupBirthMonth).click();
     signupBirthMonth.sendKeys(month);
 
-    wait.forElementVisible(signupBirthDay);
-    signupBirthDay.click();
+    wait.forElementVisible(signupBirthDay).click();
     signupBirthDay.sendKeys(day);
 
-    wait.forElementVisible(signupBirthYear);
-    signupBirthYear.click();
+    wait.forElementVisible(signupBirthYear).click();
     signupBirthYear.sendKeys(year);
 
     return this;
   }
 
   @Override public void clickSignUpSubmitButton() {
-    wait.forElementVisible(signupSubmitButton);
-    signupSubmitButton.click();
+    wait.forElementVisible(signupSubmitButton).click();
   }
 
 
@@ -94,9 +82,7 @@ public class AttachedRegisterPage extends BaseAuthPage implements RegisterPage {
   }
 
   @Override public void verifyBirthdateError() {
-    wait.forElementVisible(genericError);
-    Assertion.assertEquals(genericError.getText(),
-                           "We cannot complete your registration at this time");
+    wait.forTextInElement(genericError, "We cannot complete your registration at this time");
   }
 
 }
