@@ -30,8 +30,6 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     AttachedSignInPage authModal = signInLink.clickOnSignIn();
 
-    Assert.assertTrue(authModal.isModalOpen());
-
     authModal.login(credentials.userName10, credentials.password10);
     base.verifyUserLoggedIn(credentials.userName10);
   }
@@ -44,8 +42,6 @@ public class LoginTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
 
     AttachedSignInPage authModal = signInLink.clickOnSignIn();
-
-    Assert.assertTrue(authModal.isModalOpen());
 
     //we are using userNameStaff2 because of PLATFORM-2502 and PLATFORM-2508
     authModal.login(credentials.userNameStaff2, credentials.passwordStaff2);
@@ -60,7 +56,6 @@ public class LoginTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
 
     AttachedSignInPage authModal = signInLink.clickOnSignIn();
-    Assert.assertTrue(authModal.isModalOpen());
 
     authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);
     base.verifyUserLoggedIn(credentials.userNameJapanese2);

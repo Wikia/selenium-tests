@@ -30,10 +30,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
     AuthPageContext authModal = new AuthPageContext();
-    Assert.assertTrue(authModal.isModalOpen());
 
-    authModal.navigateToSignIn();
-    authModal.login(credentials.userName10, credentials.password10);
+    authModal.navigateToSignIn().login(credentials.userName10, credentials.password10);
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
 
@@ -46,10 +44,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
     AuthPageContext authModal = new AuthPageContext();
-    Assert.assertTrue(authModal.isModalOpen());
 
-    authModal.navigateToSignIn();
-    authModal.login(credentials.userName10, credentials.password10);
+    authModal.navigateToSignIn().login(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddVideoModal();
@@ -62,12 +58,9 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginRequiredMessage();
-    new AttachedSignInPage()
-        .typeUsername(credentials.userName10)
-        .typePassword(credentials.password10)
-        .clickSignInButton()
-        .verifyUserLoggedIn(credentials.userName10);
+    new AttachedSignInPage().login(credentials.userName10, credentials.password10);
 
+    base.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
@@ -79,11 +72,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
 
-    new AttachedSignInPage()
-        .typeUsername(credentials.userName10)
-        .typePassword(credentials.password10)
-        .clickSignInButton()
-        .verifyUserLoggedIn(credentials.userName10);
+    new AttachedSignInPage().login(credentials.userName10, credentials.password10);
 
     base.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
@@ -96,10 +85,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
     AuthPageContext authModal = new AuthPageContext();
-    Assert.assertTrue(authModal.isModalOpen());
 
-    authModal.navigateToSignIn();
-    authModal.login(credentials.userName10, credentials.password10);
+    authModal.navigateToSignIn().login(credentials.userName10, credentials.password10);
     edit.verifyUserLoggedIn(credentials.userName10);
     Assertion.assertTrue(edit.isStringInURL(articleName));
     Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
