@@ -1,4 +1,4 @@
-node('ubuntu') {
+node('linux') {
 
   checkout scm
 
