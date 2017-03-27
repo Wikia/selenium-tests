@@ -30,8 +30,7 @@ public class BaseAuthPage extends WikiBasePageObject {
 
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    wait.forElementClickable(facebookSignUpButton);
-    facebookSignUpButton.click();
+    wait.forElementClickable(facebookSignUpButton).click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
     return new FacebookSignupModalComponentObject();
   }
