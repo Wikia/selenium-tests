@@ -2,14 +2,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class RegisterPage extends BaseAuthPage {
+public class AttachedRegisterPage extends BaseAuthPage {
 
-  public RegisterPage open() {
+  public AttachedRegisterPage open() {
       driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
       return this;
   }
@@ -43,58 +41,29 @@ public class RegisterPage extends BaseAuthPage {
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
 
-  private final String mainWindowHandle;
-
-  public RegisterPage() {
-    this(false);
-  }
-
-  public RegisterPage(boolean waitForNewWindow) {
-    super();
-    if (waitForNewWindow) {
-      waitForNewWindow();
-      this.mainWindowHandle = driver.getWindowHandle();
-    } else {
-      this.mainWindowHandle = null;
-    }
-  }
-
-  public void switchToAuthModalHandle() {
-    for (String winHandle : driver.getWindowHandles()) {
-      driver.switchTo().window(winHandle);
-    }
-  }
-
-  public void switchToMainWindowHandle() {
-    driver.switchTo().window(this.mainWindowHandle);
-  }
-
   public boolean isModalOpen() {
-    switchToAuthModalHandle();
-    boolean isOpenedResult = authModal.isDisplayed();
-    switchToMainWindowHandle();
-    return isOpenedResult;
+    return true;
   }
 
-  public RegisterPage typeEmailAddress(String email) {
+  public AttachedRegisterPage typeEmailAddress(String email) {
     wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
-  public RegisterPage typeUsername(String username) {
+  public AttachedRegisterPage typeUsername(String username) {
     wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
-  public RegisterPage typePassword(String password) {
+  public AttachedRegisterPage typePassword(String password) {
     wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
-  public RegisterPage typeBirthdate(String month, String day, String year) {
+  public AttachedRegisterPage typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
     signupBirthdate.click();
 
@@ -118,39 +87,15 @@ public class RegisterPage extends BaseAuthPage {
     signupSubmitButton.click();
   }
 
-  public void verifyAvatarAfterSignup() {
-    new TopBar(driver).openNavigation();
-    wait.forElementVisible(avatar);
-    Assertion.assertTrue(avatar.isDisplayed());
-  }
 
   public boolean doesErrorMessageContainText() {
     return usernameError.getText().contains("Username is taken");
-  }
-
-  public void verifyUsernameTakenError() {
-    wait.forElementVisible(usernameError);
-    Assertion.assertEquals(usernameError.getText(), "Username is taken");
-  }
-
-  public void verifyPasswordError() {
-    wait.forElementVisible(passwordError);
-    Assertion.assertEquals(passwordError.getText(), "Password and username cannot match");
   }
 
   public void verifyBirthdateError() {
     wait.forElementVisible(genericError);
     Assertion.assertEquals(genericError.getText(),
                            "We cannot complete your registration at this time");
-  }
-
-  public String getRegisterHeaderText() {
-    wait.forElementVisible(registerHeader);
-    return registerHeader.getText();
-  }
-
-  public void openRegisterPage() {
-    driver.get(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "clickSignUpSubmitButton");
   }
 
 }

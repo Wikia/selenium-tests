@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.editaccount.EditAccount;
 
@@ -35,7 +35,7 @@ public class EditAccountTests extends NewTestTemplate {
   public void EditAccount_002_verifyAccountClosed() {
     WikiBasePageObject base = new WikiBasePageObject();
 
-    SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
 
     signInPage
         .typeUsername(credentials.userNameClosedAccount)
@@ -60,7 +60,7 @@ public class EditAccountTests extends NewTestTemplate {
   public void EditAccount_004_verifyAccountReopened() {
     WikiBasePageObject base = new WikiBasePageObject();
 
-    SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
 
     signInPage
         .typeUsername(credentials.userNameClosedAccount)

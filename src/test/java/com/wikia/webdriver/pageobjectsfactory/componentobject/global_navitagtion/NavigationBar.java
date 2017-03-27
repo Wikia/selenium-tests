@@ -5,8 +5,8 @@ import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 import org.openqa.selenium.By;
@@ -120,15 +120,15 @@ public class NavigationBar extends WikiBasePageObject {
     return new ArticlePageObject();
   }
 
-  public SignInPage clickOnSignIn(){
+  public AttachedSignInPage clickOnSignIn(){
     myAccount.click();
     signInLink.click();
-    return new SignInPage();
+    return new AttachedSignInPage();
   }
 
-  public RegisterPage clickOnRegister(){
+  public AttachedRegisterPage clickOnRegister(){
     myAccount.click();
     registerLink.click();
-    return new RegisterPage(true);
+    return new AttachedRegisterPage(true);
   }
 }

@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotific
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
 
 import junit.framework.Assert;
 import org.testng.annotations.Test;
@@ -26,7 +26,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
-    RegisterPage register = new RegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage(false);
     register.typeUsername(register.getTimeStamp());
     register.typeEmailAddress(credentials.emailQaart1);
     register.typePassword(register.getTimeStamp());
@@ -44,7 +44,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
-    RegisterPage register = new RegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage(false);
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
     register.typeEmailAddress(email);
@@ -62,7 +62,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanSignUpOnNewBaseAuthPageFromGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar registerLink = new NavigationBar(driver);
-    RegisterPage register = registerLink.clickOnRegister();
+    AttachedRegisterPage register = registerLink.clickOnRegister();
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
@@ -81,12 +81,12 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_anonCanSignUpWithoutConfirmingVerificationEmail")
   public void anonCanSignUpWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
-    RegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
 
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterPage register = new RegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -107,12 +107,12 @@ public class SignUpTests extends NewTestTemplate {
   @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
   public void userCanLoginWithoutConfirmingVerificationEmail() {
     WikiBasePageObject base = new WikiBasePageObject();
-    RegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
 
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    RegisterPage register = new RegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
@@ -133,13 +133,13 @@ public class SignUpTests extends NewTestTemplate {
   @Execute(onWikia = "ja.ja-test")
   public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
-    RegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
     signUp.disableCaptcha();
     String userName = "ユーザー" + signUp.getTimeStamp();
     String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
 
-    RegisterPage register = new RegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage(false);
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);

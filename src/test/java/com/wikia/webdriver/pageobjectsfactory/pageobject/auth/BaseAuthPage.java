@@ -120,7 +120,7 @@ public class BaseAuthPage extends WikiBasePageObject {
 
   public BaseAuthPage navigateToSignIn() {
     wait.forElementVisible(linkToSignInForm).click();
-    return new SignInPage();
+    return new AttachedSignInPage();
   }
 
   public void looseFocus() {

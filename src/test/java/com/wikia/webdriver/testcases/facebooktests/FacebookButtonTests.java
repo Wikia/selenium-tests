@@ -7,8 +7,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
@@ -26,7 +26,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnSignUpPage")
   public void facebookButtonIsVisibleOnSignUpPage() {
     WikiBasePageObject base = new WikiBasePageObject();
-    RegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
     registerPage.isConnetctWithFacebookButtonVisible();
 
   }
@@ -34,7 +34,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnLoginPage")
   public void facebookButtonIsVisibleOnLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
     signInPage.isConnetctWithFacebookButtonVisible();
   }
 

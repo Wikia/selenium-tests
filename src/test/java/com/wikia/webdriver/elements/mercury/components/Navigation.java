@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -67,12 +67,12 @@ public class Navigation {
     PageFactory.initElements(driver, this);
   }
 
-  public RegisterPage clickOnSignInRegisterButton() {
+  public AttachedRegisterPage clickOnSignInRegisterButton() {
     PageObjectLogging.logInfo("Open login page");
     wait.forElementClickable(signInRegisterButton);
     signInRegisterButton.click();
 
-    return new RegisterPage();
+    return new AttachedRegisterPage();
   }
 
   public Navigation clickBackButton() {

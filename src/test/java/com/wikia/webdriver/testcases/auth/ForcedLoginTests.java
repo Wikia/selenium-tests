@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -62,7 +62,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginRequiredMessage();
-    new SignInPage()
+    new AttachedSignInPage()
         .typeUsername(credentials.userName10)
         .typePassword(credentials.password10)
         .clickSignInButton()
@@ -79,7 +79,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
 
-    new SignInPage()
+    new AttachedSignInPage()
         .typeUsername(credentials.userName10)
         .typePassword(credentials.password10)
         .clickSignInButton()

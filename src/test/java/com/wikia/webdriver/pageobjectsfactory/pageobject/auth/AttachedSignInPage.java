@@ -3,7 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SignInPage extends BaseAuthPage {
+public class AttachedSignInPage extends BaseAuthPage {
 
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
@@ -11,14 +11,14 @@ public class SignInPage extends BaseAuthPage {
   @FindBy(css = "#loginPassword")
   private WebElement passwordField;
 
-  public ForgotPasswordPage clickForgotPasswordLink() {
+  public AttachedForgotPasswordPage clickForgotPasswordLink() {
     wait.forElementClickable(forgottenPasswordLink);
     forgottenPasswordLink.click();
 
-    return new ForgotPasswordPage();
+    return new AttachedForgotPasswordPage();
   }
 
-  public SignInPage typePassword(String password) {
+  public AttachedSignInPage typePassword(String password) {
     wait.forElementVisible(passwordField).sendKeys(password);
     return this;
   }

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
 import org.testng.annotations.Test;
@@ -22,7 +22,7 @@ public class FacebookTests extends NewTestTemplate {
 
     new FacebookSettingsPageObject(driver).open();
     new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
-    RegisterPage signUp = new RegisterPage().open();
+    AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     String userName = "QA" + signUp.getTimeStamp();

@@ -1,22 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
-public class DetachedForgotPasswordPage {
+public class DetachedForgotPasswordPage implements ForgotPasswordPage {
 
-  ForgotPasswordPage forgotPasswordPage;
+  AttachedForgotPasswordPage forgotPasswordPage;
 
-  public DetachedForgotPasswordPage(ForgotPasswordPage forgotPasswordPage) {
+  public DetachedForgotPasswordPage(AttachedForgotPasswordPage forgotPasswordPage) {
     this.forgotPasswordPage = forgotPasswordPage;
   }
 
   public DetachedForgotPasswordPage() {
-    this.forgotPasswordPage = new ForgotPasswordPage();
+    this.forgotPasswordPage = new AttachedForgotPasswordPage();
   }
 
-  public void submit() {
+  @Override public void submit() {
     this.forgotPasswordPage.submit();
   }
 
-  public void requestLinkForUsername(String username) {
+  @Override public void requestLinkForUsername(String username) {
     this.forgotPasswordPage.requestLinkForUsername(username);
   }
 }

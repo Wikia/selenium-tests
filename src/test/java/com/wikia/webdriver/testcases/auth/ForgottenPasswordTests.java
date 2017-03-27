@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -24,7 +24,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     signInLink.clickOnSignIn();
-    SignInPage loginModal = new SignInPage();
+    AttachedSignInPage loginModal = new AttachedSignInPage();
     loginModal
       .clickForgotPasswordLink()
       .requestLinkForUsername(userName);
@@ -42,7 +42,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    SignInPage signIn = new SignInPage();
+    AttachedSignInPage signIn = new AttachedSignInPage();
     signIn.clickForgotPasswordLink();
     String newPassword = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
 
@@ -61,8 +61,8 @@ ForgottenPasswordTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    SignInPage login = base.openSpecialUserLogin(wikiURL);
-    SignInPage signIn = new SignInPage();
+    AttachedSignInPage login = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signIn = new AttachedSignInPage();
     signIn.clickForgotPasswordLink();
     String
         newPassword =

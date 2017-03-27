@@ -9,11 +9,10 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
@@ -29,7 +28,7 @@ public class LoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
-    SignInPage authModal = signInLink.clickOnSignIn();
+    AttachedSignInPage authModal = signInLink.clickOnSignIn();
 
     Assert.assertTrue(authModal.isModalOpen());
 
@@ -44,7 +43,7 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
-    SignInPage authModal = signInLink.clickOnSignIn();
+    AttachedSignInPage authModal = signInLink.clickOnSignIn();
 
     Assert.assertTrue(authModal.isModalOpen());
 
@@ -60,7 +59,7 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
-    SignInPage authModal = signInLink.clickOnSignIn();
+    AttachedSignInPage authModal = signInLink.clickOnSignIn();
     Assert.assertTrue(authModal.isModalOpen());
 
     authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);

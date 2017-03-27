@@ -4,10 +4,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class DetachedSignInPage extends BasePageObject {
 
-  private SignInPage signIn = new SignInPage();
+  private AttachedSignInPage signIn = new AttachedSignInPage();
 
-  public DetachedForgotPasswordPage clickForgotPasswordLink() {
-    ForgotPasswordPage forgotPassword = this.signIn.clickForgotPasswordLink();
+  public ForgotPasswordPage clickForgotPasswordLink() {
+    AttachedForgotPasswordPage forgotPassword = this.signIn.clickForgotPasswordLink();
     return new DetachedForgotPasswordPage(forgotPassword);
   }
 

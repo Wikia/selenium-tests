@@ -12,8 +12,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.RegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
@@ -80,7 +80,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
   @Getter(lazy = true)
-  private final RegisterPage registerPage = new RegisterPage(true);
+  private final AttachedRegisterPage registerPage = new AttachedRegisterPage(true);
   @Getter(lazy = true)
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
@@ -160,10 +160,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new HistoryPagePageObject(driver);
   }
 
-  public RegisterPage openSpecialUserSignUpPage(String wikiURL) {
+  public AttachedRegisterPage openSpecialUserSignUpPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
     PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
-    return new RegisterPage();
+    return new AttachedRegisterPage();
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
@@ -178,10 +178,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialPromotePageObject(driver);
   }
 
-  public SignInPage openSpecialUserLogin(String wikiURL) {
+  public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-    return new SignInPage();
+    return new AttachedSignInPage();
   }
 
   public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
