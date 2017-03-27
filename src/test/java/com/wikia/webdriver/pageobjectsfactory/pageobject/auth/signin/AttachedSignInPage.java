@@ -19,9 +19,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   private WebElement signInButton;
 
   public ForgotPasswordPage clickForgotPasswordLink() {
-    wait.forElementClickable(forgottenPasswordLink);
-    forgottenPasswordLink.click();
-
+    waitAndClick(forgottenPasswordLink);
     return new AttachedForgotPasswordPage();
   }
 
@@ -36,7 +34,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   }
 
   private SignInPage clickSignInButton() {
-    wait.forElementClickable(signInButton).click();
+    waitAndClick(signInButton);
     return this;
   }
 

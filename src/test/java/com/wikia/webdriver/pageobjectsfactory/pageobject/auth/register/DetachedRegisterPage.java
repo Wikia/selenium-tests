@@ -1,8 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
 public class DetachedRegisterPage extends BasePageObject implements RegisterPage {
+
+  private RegisterPage registerPage;
+
+  public DetachedRegisterPage() {
+    this.registerPage = new AttachedRegisterPage();
+  }
+
+  public DetachedRegisterPage(RegisterPage registerPage) {
+    this.registerPage = registerPage;
+  }
 
   @Override public AttachedRegisterPage open() {
     return null;
