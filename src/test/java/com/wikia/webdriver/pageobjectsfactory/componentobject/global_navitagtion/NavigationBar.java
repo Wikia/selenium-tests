@@ -5,8 +5,8 @@ import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 import org.openqa.selenium.By;

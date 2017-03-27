@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword;
 
 public class DetachedForgotPasswordPage implements ForgotPasswordPage {
 

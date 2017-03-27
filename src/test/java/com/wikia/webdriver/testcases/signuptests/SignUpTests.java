@@ -10,7 +10,7 @@ import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotific
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 
 import junit.framework.Assert;
 import org.testng.annotations.Test;

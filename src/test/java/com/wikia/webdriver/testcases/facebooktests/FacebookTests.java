@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
 import org.testng.annotations.Test;

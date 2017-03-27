@@ -1,13 +1,14 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedRegisterPage extends BaseAuthPage {
+public class AttachedRegisterPage extends BaseAuthPage implements RegisterPage {
 
-  public AttachedRegisterPage open() {
+  @Override public AttachedRegisterPage open() {
       driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
       return this;
   }
@@ -41,29 +42,29 @@ public class AttachedRegisterPage extends BaseAuthPage {
   @FindBy(css = " header.auth-header")
   private WebElement registerHeader;
 
-  public boolean isModalOpen() {
+  @Override public boolean isModalOpen() {
     return true;
   }
 
-  public AttachedRegisterPage typeEmailAddress(String email) {
+  @Override public AttachedRegisterPage typeEmailAddress(String email) {
     wait.forElementVisible(signupEmail);
     signupEmail.sendKeys(email);
     return this;
   }
 
-  public AttachedRegisterPage typeUsername(String username) {
+  @Override public AttachedRegisterPage typeUsername(String username) {
     wait.forElementVisible(signupUsername);
     signupUsername.sendKeys(username);
     return this;
   }
 
-  public AttachedRegisterPage typePassword(String password) {
+  @Override public AttachedRegisterPage typePassword(String password) {
     wait.forElementVisible(signupPassword);
     signupPassword.sendKeys(password);
     return this;
   }
 
-  public AttachedRegisterPage typeBirthdate(String month, String day, String year) {
+  @Override public AttachedRegisterPage typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
     signupBirthdate.click();
 
@@ -82,17 +83,17 @@ public class AttachedRegisterPage extends BaseAuthPage {
     return this;
   }
 
-  public void clickSignUpSubmitButton() {
+  @Override public void clickSignUpSubmitButton() {
     wait.forElementVisible(signupSubmitButton);
     signupSubmitButton.click();
   }
 
 
-  public boolean doesErrorMessageContainText() {
+  @Override public boolean doesErrorMessageContainText() {
     return usernameError.getText().contains("Username is taken");
   }
 
-  public void verifyBirthdateError() {
+  @Override public void verifyBirthdateError() {
     wait.forElementVisible(genericError);
     Assertion.assertEquals(genericError.getText(),
                            "We cannot complete your registration at this time");

@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 

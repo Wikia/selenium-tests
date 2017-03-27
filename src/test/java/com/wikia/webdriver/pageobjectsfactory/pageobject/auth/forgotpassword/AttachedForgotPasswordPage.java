@@ -1,6 +1,7 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword;
 
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
