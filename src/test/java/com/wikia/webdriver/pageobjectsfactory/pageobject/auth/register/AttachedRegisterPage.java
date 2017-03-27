@@ -13,67 +13,63 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
       return this;
   }
 
-  @FindBy(css = ".auth.desktop.signin-page")
-  private WebElement authModal;
+
   @FindBy(css = "#signupEmail")
-  private WebElement signupEmail;
+  private WebElement emailField;
   @FindBy(css = "#signupUsername")
-  private WebElement signupUsername;
+  private WebElement usernameField;
   @FindBy(css = "#signupPassword")
-  private WebElement signupPassword;
+  private WebElement passwordField;
   @FindBy(css = "#signupBirthDate")
-  private WebElement signupBirthdate;
+  private WebElement birthdateField;
   @FindBy(css = ".birth-month")
-  private WebElement signupBirthMonth;
+  private WebElement birthMonthField;
   @FindBy(css = ".birth-day")
-  private WebElement signupBirthDay;
+  private WebElement birthDayField;
   @FindBy(css = ".birth-year")
-  private WebElement signupBirthYear;
+  private WebElement birthYearField;
   @FindBy(css = "#signupSubmit")
-  private WebElement signupSubmitButton;
-  @FindBy(css = ".wikia-nav__avatar")
-  private WebElement avatar;
+  private WebElement submitButton;
   @FindBy(css = "#signupForm div:nth-child(2) small")
   private WebElement usernameError;
   @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
   private WebElement passwordError;
   @FindBy(css = "#signupForm > small.error")
   private WebElement genericError;
-  @FindBy(css = " header.auth-header")
-  private WebElement registerHeader;
+
 
   @Override public RegisterPage typeEmailAddress(String email) {
-    wait.forElementVisible(signupEmail).sendKeys(email);
+    fillInput(emailField, email);
     return this;
   }
 
   @Override public RegisterPage typeUsername(String username) {
-    wait.forElementVisible(signupUsername).sendKeys(username);
+    fillInput(usernameField, username);
     return this;
   }
 
   @Override public RegisterPage typePassword(String password) {
-    wait.forElementVisible(signupPassword).sendKeys(password);
+    fillInput(passwordField, password);
     return this;
   }
 
   @Override public RegisterPage typeBirthdate(String month, String day, String year) {
-    wait.forElementVisible(signupBirthdate).click();
+    waitAndClick(birthdateField);
 
-    wait.forElementVisible(signupBirthMonth).click();
-    signupBirthMonth.sendKeys(month);
+    waitAndClick(birthMonthField);
+    birthMonthField.sendKeys(month);
 
-    wait.forElementVisible(signupBirthDay).click();
-    signupBirthDay.sendKeys(day);
+    waitAndClick(birthDayField);
+    birthDayField.sendKeys(day);
 
-    wait.forElementVisible(signupBirthYear).click();
-    signupBirthYear.sendKeys(year);
+    waitAndClick(birthYearField);
+    birthYearField.sendKeys(year);
 
     return this;
   }
 
   @Override public void clickSignUpSubmitButton() {
-    wait.forElementVisible(signupSubmitButton).click();
+    waitAndClick(submitButton);
   }
 
 

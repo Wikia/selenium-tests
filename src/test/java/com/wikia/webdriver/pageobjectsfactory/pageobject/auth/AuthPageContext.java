@@ -25,6 +25,8 @@ public class AuthPageContext extends WikiBasePageObject {
   private WebElement registerAuthModal;
   @FindBy(css = ".register-page .header-callout-link")
   private WebElement linkToSignInForm;
+  @FindBy(css = " header.auth-header")
+  private WebElement registerHeader;
 
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
