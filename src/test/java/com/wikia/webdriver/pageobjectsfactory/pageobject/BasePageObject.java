@@ -518,6 +518,10 @@ public class BasePageObject {
     return newTab;
   }
 
+  public WebDriver switchToMainWindow() {
+    return driver.switchTo().defaultContent();
+  }
+
   private void waitForLinkOpenedInNewTab(WebElement link) {
     int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
