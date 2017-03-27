@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
@@ -29,7 +29,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
-    BaseAuthPage authModal = new BaseAuthPage();
+    AuthPageContext authModal = new AuthPageContext();
     Assert.assertTrue(authModal.isModalOpen());
 
     authModal.navigateToSignIn();
@@ -45,7 +45,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
-    BaseAuthPage authModal = new BaseAuthPage();
+    AuthPageContext authModal = new AuthPageContext();
     Assert.assertTrue(authModal.isModalOpen());
 
     authModal.navigateToSignIn();
@@ -95,7 +95,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
-    BaseAuthPage authModal = new BaseAuthPage();
+    AuthPageContext authModal = new AuthPageContext();
     Assert.assertTrue(authModal.isModalOpen());
 
     authModal.navigateToSignIn();

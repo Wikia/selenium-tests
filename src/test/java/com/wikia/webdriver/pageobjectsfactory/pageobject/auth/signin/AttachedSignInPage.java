@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 import org.openqa.selenium.WebElement;

@@ -7,7 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BaseAuthPage extends WikiBasePageObject {
+public class AuthPageContext extends WikiBasePageObject {
 
   @FindBy(css = ".signup-provider-facebook")
   private WebElement facebookSignUpButton;
@@ -41,7 +41,7 @@ public class BaseAuthPage extends WikiBasePageObject {
 
   private final String mainWindowHandle;
 
-  public BaseAuthPage() {
+  public AuthPageContext() {
     super();
     this.mainWindowHandle = driver.getWindowHandle();
     switchToAuthModalHandle();

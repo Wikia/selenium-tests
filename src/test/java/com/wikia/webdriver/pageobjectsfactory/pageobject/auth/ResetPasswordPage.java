@@ -1,5 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
 
-public class ResetPasswordPage extends BaseAuthPage {
+public class ResetPasswordPage extends AuthPageContext {
 }

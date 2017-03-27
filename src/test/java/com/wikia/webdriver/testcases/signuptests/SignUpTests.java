@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 
 import junit.framework.Assert;
@@ -123,7 +123,7 @@ public class SignUpTests extends NewTestTemplate {
     base.logOut();
 
     NavigationBar signInLink = new NavigationBar(driver);
-    BaseAuthPage page = signInLink.clickOnSignIn();
+    AuthPageContext page = signInLink.clickOnSignIn();
     Assert.assertTrue(page.isModalOpen());
 
     page.login(userName, password);

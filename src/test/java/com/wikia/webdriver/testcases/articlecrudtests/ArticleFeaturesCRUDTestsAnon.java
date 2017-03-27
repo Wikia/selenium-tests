@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.BaseAuthPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import org.testng.annotations.Test;
 
 public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
@@ -16,7 +16,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickPhotoButton();
 
-    BaseAuthPage auth = new BaseAuthPage();
+    AuthPageContext auth = new AuthPageContext();
     auth.isModalOpen();
   }
 
@@ -26,7 +26,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickGalleryButton();
 
-    BaseAuthPage auth = new BaseAuthPage();
+    AuthPageContext auth = new AuthPageContext();
     auth.isModalOpen();
   }
 
@@ -36,7 +36,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSlideshowButton();
 
-    BaseAuthPage auth = new BaseAuthPage();
+    AuthPageContext auth = new AuthPageContext();
     auth.isModalOpen();
   }
 
@@ -46,7 +46,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSliderButton();
 
-    BaseAuthPage auth = new BaseAuthPage();
+    AuthPageContext auth = new AuthPageContext();
     auth.isModalOpen();
   }
 
@@ -56,7 +56,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickVideoButton();
 
-    BaseAuthPage auth = new BaseAuthPage();
+    AuthPageContext auth = new AuthPageContext();
     auth.isModalOpen();
   }
 }
