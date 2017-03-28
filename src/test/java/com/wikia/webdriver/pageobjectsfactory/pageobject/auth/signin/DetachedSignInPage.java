@@ -1,19 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.DetachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 
-public class DetachedSignInPage extends BasePageObject implements SignInPage {
+public class DetachedSignInPage extends BasePageObject implements SignInPage, FacebookAuthContext {
 
-  private SignInPage signInPage;
+  private AttachedSignInPage signInPage;
 
   public DetachedSignInPage() {
     this.signInPage = new AttachedSignInPage();
   }
 
-  public DetachedSignInPage(SignInPage signInPage) {
+  public DetachedSignInPage(AttachedSignInPage signInPage) {
     this.signInPage = signInPage;
   }
 
@@ -28,10 +31,22 @@ public class DetachedSignInPage extends BasePageObject implements SignInPage {
   }
 
   @Override public void login(String username, String password) {
-
+    this.signInPage.login(username, password);
   }
 
   @Override public void login(User user) {
+    this.login(user.getUserName(), user.getPassword());
+  }
 
+  @Override public RegisterPage navigateToRegister() {
+    return this.signInPage.navigateToRegister();
+  }
+
+  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+    return this.signInPage.clickFacebookSignUp();
+  }
+
+  @Override public boolean isConnetctWithFacebookButtonVisible() {
+    return this.signInPage.isConnetctWithFacebookButtonVisible();
   }
 }

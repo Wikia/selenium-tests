@@ -1,18 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
-
-  @Override public AttachedRegisterPage open() {
-      driver.get(urlBuilder.getUrlForWiki() + URLsContent.SPECIAL_USER_SIGNUP);
-      return this;
-  }
-
+public class AttachedRegisterPage extends BasePageObject implements RegisterPage,
+  FacebookAuthContext {
 
   @FindBy(css = "#signupEmail")
   private WebElement emailField;
@@ -37,6 +36,16 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   @FindBy(css = "#signupForm > small.error")
   private WebElement genericError;
 
+  private AuthPageContext authContext;
+
+  public AttachedRegisterPage() {
+    this.authContext = new AuthPageContext();
+  }
+
+  @Override public AttachedRegisterPage open() {
+    driver.get(urlBuilder.getUrlForWiki() + URLsContent.USER_SIGNUP);
+    return this;
+  }
 
   @Override public RegisterPage typeEmailAddress(String email) {
     fillInput(emailField, email);
@@ -79,6 +88,18 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override public void verifyBirthdateError() {
     wait.forTextInElement(genericError, "We cannot complete your registration at this time");
+  }
+
+  @Override public SignInPage navigateToSignIn() {
+    return this.authContext.navigateToSignIn();
+  }
+
+  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+    return this.authContext.clickFacebookSignUp();
+  }
+
+  @Override public boolean isConnetctWithFacebookButtonVisible() {
+    return this.authContext.isConnetctWithFacebookButtonVisible();
   }
 
 }

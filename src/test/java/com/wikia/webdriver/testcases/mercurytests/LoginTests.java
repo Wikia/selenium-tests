@@ -12,6 +12,9 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
+
+
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
@@ -33,9 +36,7 @@ public class LoginTests extends NewTestTemplate {
             .login(Configuration.getCredentials().userName10,
               Configuration.getCredentials().password10);
 
-            article.getTopbar()
-            .openNavigation()
-            .isUserAvatarVisible();
+        article.verifyUserLoggedIn(Configuration.getCredentials().userName10);
     }
 
     @Test(groups = "login-anonCanNotLogInWithInvalidPassword")

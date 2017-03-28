@@ -10,8 +10,8 @@ public class URLsContent {
   public static final String WIKIA_DIR = "Wikia";
 
   // Special Urls - links to special pages
-  public static final String SPECIAL_USER_LOGIN = "/wiki/Special:UserLogin";
-  public static final String SPECIAL_USER_SIGNUP = "/wiki/Special:UserSignup";
+  public static final String USER_LOGIN = "/signin";
+  public static final String USER_SIGNUP = "/register";
   public static final String SPECIAL_NEW_FILES = "/wiki/Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "/wiki/Special:Videos";
   public static final String SPECIAL_UPLOAD = "/wiki/Special:Upload";

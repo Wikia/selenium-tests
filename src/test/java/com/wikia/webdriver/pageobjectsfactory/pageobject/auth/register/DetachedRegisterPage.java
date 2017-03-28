@@ -1,17 +1,21 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
-public class DetachedRegisterPage extends BasePageObject implements RegisterPage {
+public class DetachedRegisterPage extends BasePageObject implements RegisterPage,
+  FacebookAuthContext {
 
-  private RegisterPage registerPage;
+  private AttachedRegisterPage registerPage;
 
   public DetachedRegisterPage() {
     this.registerPage = new AttachedRegisterPage();
   }
 
-  public DetachedRegisterPage(RegisterPage registerPage) {
+  public DetachedRegisterPage(AttachedRegisterPage registerPage) {
     this.registerPage = registerPage;
   }
 
@@ -45,5 +49,17 @@ public class DetachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override public void verifyBirthdateError() {
 
+  }
+
+  @Override public SignInPage navigateToSignIn() {
+    return this.registerPage.navigateToSignIn();
+  }
+
+  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+    return this.registerPage.clickFacebookSignUp();
+  }
+
+  @Override public boolean isConnetctWithFacebookButtonVisible() {
+    return this.registerPage.isConnetctWithFacebookButtonVisible();
   }
 }

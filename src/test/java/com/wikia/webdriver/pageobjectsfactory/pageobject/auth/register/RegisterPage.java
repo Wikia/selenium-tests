@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
+
 public interface RegisterPage {
   RegisterPage open();
 
@@ -16,4 +18,7 @@ public interface RegisterPage {
   boolean doesErrorMessageContainText();
 
   void verifyBirthdateError();
+
+  SignInPage navigateToSignIn();
+
 }

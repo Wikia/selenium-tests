@@ -80,8 +80,6 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
   @Getter(lazy = true)
-  private final AttachedRegisterPage registerPage = new AttachedRegisterPage(true);
-  @Getter(lazy = true)
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
   protected WebElement body;
@@ -161,7 +159,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AttachedRegisterPage openSpecialUserSignUpPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
+    getUrl(wikiURL + URLsContent.USER_SIGNUP);
     PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
     return new AttachedRegisterPage();
   }
@@ -179,7 +177,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
+    getUrl(wikiURL + URLsContent.USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
     return new AttachedSignInPage();
   }
