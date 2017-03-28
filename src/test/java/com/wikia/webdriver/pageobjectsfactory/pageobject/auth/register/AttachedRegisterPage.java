@@ -29,12 +29,6 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   private WebElement birthYearField;
   @FindBy(css = "#signupSubmit")
   private WebElement submitButton;
-  @FindBy(css = "#signupForm div:nth-child(2) small")
-  private WebElement usernameError;
-  @FindBy(xpath = "//*[@id=\"signupForm\"]/div[3]/small")
-  private WebElement passwordError;
-  @FindBy(css = "#signupForm > small.error")
-  private WebElement genericError;
 
   private AuthPageContext authContext;
 
@@ -77,21 +71,16 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     return this;
   }
 
-  @Override public void clickSignUpSubmitButton() {
+  @Override public void submit() {
     waitAndClick(submitButton);
-  }
-
-
-  @Override public boolean doesErrorMessageContainText() {
-    return usernameError.getText().contains("Username is taken");
-  }
-
-  @Override public void verifyBirthdateError() {
-    wait.forTextInElement(genericError, "We cannot complete your registration at this time");
   }
 
   @Override public SignInPage navigateToSignIn() {
     return this.authContext.navigateToSignIn();
+  }
+
+  @Override public String getError() {
+    return null;
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {

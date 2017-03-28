@@ -1,10 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.elements.mercury.pages.ErrorPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
@@ -43,15 +46,10 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
     return this;
   }
 
-  private SignInPage clickSignInButton() {
-    waitAndClick(signInButton);
-    return this;
-  }
-
   @Override public void login(String username, String password) {
     typeUsername(username);
     typePassword(password);
-    clickSignInButton();
+    submit();
   }
 
   @Override public void login(User user) {
@@ -61,6 +59,18 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
 
   @Override public RegisterPage navigateToRegister() {
     return this.authContext.navigateToSignUp();
+  }
+
+  @Override public String getError() {
+    return FormError.getError();
+  }
+
+  @Override public void submit() {
+    waitAndClick(signInButton);
+  }
+
+  @Override public FormPage open() {
+    return null;
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {

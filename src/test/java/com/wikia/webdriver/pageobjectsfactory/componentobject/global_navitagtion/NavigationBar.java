@@ -129,6 +129,6 @@ public class NavigationBar extends WikiBasePageObject {
   public AttachedRegisterPage clickOnRegister(){
     myAccount.click();
     registerLink.click();
-    return new AttachedRegisterPage(true);
+    return new AttachedRegisterPage();
   }
 }

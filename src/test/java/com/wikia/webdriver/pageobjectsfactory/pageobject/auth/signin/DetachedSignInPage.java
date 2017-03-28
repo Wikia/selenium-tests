@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.DetachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
@@ -40,6 +41,18 @@ public class DetachedSignInPage extends BasePageObject implements SignInPage, Fa
 
   @Override public RegisterPage navigateToRegister() {
     return this.signInPage.navigateToRegister();
+  }
+
+  @Override public String getError() {
+    return this.signInPage.getError();
+  }
+
+  @Override public void submit() {
+    this.signInPage.submit();
+  }
+
+  @Override public FormPage open() {
+    return this.signInPage.open();
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {

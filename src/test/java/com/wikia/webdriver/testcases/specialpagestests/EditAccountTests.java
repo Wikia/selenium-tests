@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -34,21 +35,15 @@ public class EditAccountTests extends NewTestTemplate {
   @Test(dependsOnMethods = "EditAccount_001_closeAccount")
   public void EditAccount_002_verifyAccountClosed() {
     WikiBasePageObject base = new WikiBasePageObject();
-
     AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
-
-    signInPage
-        .login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
-
-        .verifyErrorMessage(expectedErrorMessage);
-
+    signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
+    Assertion.assertEquals(signInPage.getError(), expectedErrorMessage);
   }
 
   @Test(dependsOnMethods = {"EditAccount_001_closeAccount","EditAccount_002_verifyAccountClosed"})
   @Execute(asUser = User.STAFF)
   public void EditAccount_003_reopenAccount() {
     EditAccount editAccount = new EditAccount(driver).navigateToSpecialEditAccount(testedWiki);
-
     editAccount.goToAccountManagement(credentials.userNameClosedAccount);
     editAccount.reopenAccount(credentials.passwordClosedAccount);
     editAccount.verifyAccountReopenedMessage();
@@ -58,14 +53,9 @@ public class EditAccountTests extends NewTestTemplate {
       "EditAccount_002_verifyAccountClosed", "EditAccount_003_reopenAccount"})
   public void EditAccount_004_verifyAccountReopened() {
     WikiBasePageObject base = new WikiBasePageObject();
-
     AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
-
-    signInPage
-        .typeUsername(credentials.userNameClosedAccount)
-        .typePassword(credentials.passwordClosedAccount)
-        .clickSignInButton()
-        .verifyUserLoggedIn(credentials.userNameClosedAccount);
+    signInPage.login(credentials.userNameClosedAccount, credentials.passwordClosedAccount);
+    base.verifyUserLoggedIn(credentials.userNameClosedAccount);
 
   }
 }

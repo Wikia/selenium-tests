@@ -39,16 +39,12 @@ public class DetachedRegisterPage extends BasePageObject implements RegisterPage
     return null;
   }
 
-  @Override public void clickSignUpSubmitButton() {
-
+  @Override public String getError() {
+    return this.registerPage.getError();
   }
 
-  @Override public boolean doesErrorMessageContainText() {
-    return false;
-  }
-
-  @Override public void verifyBirthdateError() {
-
+  @Override public void submit() {
+    this.registerPage.submit();
   }
 
   @Override public SignInPage navigateToSignIn() {

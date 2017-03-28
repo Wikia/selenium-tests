@@ -6,7 +6,9 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
@@ -25,12 +27,8 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
         String wikiName = cnw1.getWikiName();
         cnw1.typeInWikiName(wikiName);
         cnw1.verifyNextButtonEnabled();
-        AttachedSignInPage authModal = cnw1.clickNextToSignIn();
-        authModal.navigateToSignIn();
-
-        Assert.assertTrue(authModal.isModalOpen());
-
-        authModal.gainFocus();
+        cnw1.clickNextToSignIn().navigateToSignIn();
+        DetachedSignInPage authModal = new DetachedSignInPage();
         authModal.login(credentials.userName10, credentials.password10);
         CreateNewWikiPageObjectStep2 cnw2 = new CreateNewWikiPageObjectStep2(driver);
         cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);

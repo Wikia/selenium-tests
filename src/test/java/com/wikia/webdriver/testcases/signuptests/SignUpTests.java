@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
@@ -26,7 +27,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
-    AttachedRegisterPage register = new AttachedRegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage();
     register.typeUsername(register.getTimeStamp());
     register.typeEmailAddress(credentials.emailQaart1);
     register.typePassword(register.getTimeStamp());
@@ -36,15 +37,15 @@ public class SignUpTests extends NewTestTemplate {
         Integer.toString(currentDate.get(Calendar.MONTH) + 1),
         Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
         Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
-    register.clickSignUpSubmitButton();
-    register.verifyBirthdateError();
+    register.submit();
+    Assertion.assertEquals(register.getError(), "We cannot complete your registration at this time");
   }
 
   @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
   public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
-    AttachedRegisterPage register = new AttachedRegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage();
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
     register.typeEmailAddress(email);
@@ -53,8 +54,8 @@ public class SignUpTests extends NewTestTemplate {
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
 
-    register.clickSignUpSubmitButton();
-    Assertion.assertTrue(register.doesErrorMessageContainText());
+    register.submit();
+    Assertion.assertEquals(register.getError(), "Username is taken");
 
   }
 
@@ -72,8 +73,7 @@ public class SignUpTests extends NewTestTemplate {
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
 
-    register.clickSignUpSubmitButton();
-    register.switchToMainWindowHandle();
+    register.submit();
 
     base.verifyUserLoggedIn(userName);
   }
@@ -86,13 +86,13 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    AttachedRegisterPage register = new AttachedRegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage();
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    register.clickSignUpSubmitButton();
+    register.submit();
     base.verifyUserLoggedIn(userName);
     BannerNotifications notification = new BannerNotifications();
     String bannerNotifMessageEN = "Oh no! Your email address has not yet been confirmed. "
@@ -112,20 +112,18 @@ public class SignUpTests extends NewTestTemplate {
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
-    AttachedRegisterPage register = new AttachedRegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage();
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    register.clickSignUpSubmitButton();
+    register.submit();
     base.verifyUserLoggedIn(userName);
     base.logOut();
 
     NavigationBar signInLink = new NavigationBar(driver);
-    AuthPageContext page = signInLink.clickOnSignIn();
-    Assert.assertTrue(page.isModalOpen());
-
+    AttachedSignInPage page = signInLink.clickOnSignIn();
     page.login(userName, password);
   }
 
@@ -134,18 +132,18 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
-    signUp.disableCaptcha();
+    base.disableCaptcha();
     String userName = "ユーザー" + signUp.getTimeStamp();
     String password = "パス" + signUp.getTimeStamp();
     String email = credentials.emailQaart2;
 
-    AttachedRegisterPage register = new AttachedRegisterPage(false);
+    AttachedRegisterPage register = new AttachedRegisterPage();
     register.typeEmailAddress(email);
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
-    register.clickSignUpSubmitButton();
+    register.submit();
     base.verifyUserLoggedIn(userName);
     BannerNotifications notification = new BannerNotifications();
     String banerNotifMessageJapanese = "メールアドレスの認証が完了していないようです。受信トレイの確認メー"

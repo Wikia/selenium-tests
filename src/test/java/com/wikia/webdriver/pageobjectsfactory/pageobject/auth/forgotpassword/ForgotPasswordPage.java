@@ -1,8 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword;
 
-public interface ForgotPasswordPage {
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 
-  void submit();
+public interface ForgotPasswordPage extends FormPage {
 
   void requestLinkForUsername(String username);
 }
