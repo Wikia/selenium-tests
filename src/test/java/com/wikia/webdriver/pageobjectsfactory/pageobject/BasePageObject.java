@@ -16,6 +16,7 @@ import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -522,14 +523,17 @@ public class BasePageObject {
     Optional<String> newTab = driver
       .getWindowHandles()
       .stream()
-      .map(handleName -> driver.switchTo().window(handleName).getTitle())
-      .filter(windowTitle -> windowTitle.startsWith(title))
+      .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
+      .filter(nameToTile -> nameToTile.getValue().startsWith(title))
+      .map(Pair::getKey)
       .findFirst();
     return newTab.orElseThrow(() -> new NotFoundException(
       String.format("Tab with title %1$s doesn't exist", title)));
   }
 
   public WebDriver switchToWindowWithTitle(String title) {
+    PageObjectLogging.log("Switching windows",
+      "Switching to window with title: " + title, true);
     return driver.switchTo().window(getTabWithTitle(title));
   }
 

@@ -9,7 +9,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
-import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
