@@ -1,8 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 
-public class DetachedForgotPasswordPage implements ForgotPasswordPage {
+public class DetachedForgotPasswordPage extends DetachedWindow implements ForgotPasswordPage {
 
   ForgotPasswordPage forgotPasswordPage;
 
@@ -33,4 +34,5 @@ public class DetachedForgotPasswordPage implements ForgotPasswordPage {
   @Override public void requestLinkForUsername(String username) {
     this.forgotPasswordPage.requestLinkForUsername(username);
   }
+
 }

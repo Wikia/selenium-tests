@@ -1,11 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
-public class DetachedRegisterPage extends BasePageObject implements RegisterPage,
+public class DetachedRegisterPage extends DetachedWindow implements RegisterPage,
   FacebookAuthContext {
 
   private AttachedRegisterPage registerPage;

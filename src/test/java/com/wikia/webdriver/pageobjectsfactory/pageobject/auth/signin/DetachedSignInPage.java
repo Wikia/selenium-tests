@@ -2,14 +2,14 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.DetachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 
-public class DetachedSignInPage extends BasePageObject implements SignInPage, FacebookAuthContext {
+public class DetachedSignInPage extends DetachedWindow implements SignInPage, FacebookAuthContext {
 
   private AttachedSignInPage signInPage;
 
