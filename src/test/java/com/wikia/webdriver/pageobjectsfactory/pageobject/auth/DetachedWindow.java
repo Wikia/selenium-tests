@@ -1,13 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
 
-public abstract class DetachedWindow {
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-  private void gainFocus() {
+public abstract class DetachedWindow extends BasePageObject {
 
+  private void gainFocus(String title) {
+    switchToWindowWithTitle(title);
   }
 
   private void loseFocus() {
-
+    switchToMainWindow();
   }
 
 }

@@ -518,6 +518,21 @@ public class BasePageObject {
     return newTab;
   }
 
+  private String getTabWithTitle(String title) {
+    Optional<String> newTab = driver
+      .getWindowHandles()
+      .stream()
+      .map(handleName -> driver.switchTo().window(handleName).getTitle())
+      .filter(windowTitle -> windowTitle.startsWith(title))
+      .findFirst();
+    return newTab.orElseThrow(() -> new NotFoundException(
+      String.format("Tab with title %1$s doesn't exist", title)));
+  }
+
+  public WebDriver switchToWindowWithTitle(String title) {
+    return driver.switchTo().window(getTabWithTitle(title));
+  }
+
   public WebDriver switchToMainWindow() {
     return driver.switchTo().defaultContent();
   }
