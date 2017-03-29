@@ -5,6 +5,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
 public interface RegisterPage extends FormPage {
 
+  String pageTitle = "Join Fandom Today";
+
   RegisterPage typeEmailAddress(String email);
 
   RegisterPage typeUsername(String username);

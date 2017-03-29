@@ -7,6 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterP
 
 public interface SignInPage extends FormPage {
 
+  String pageTitle = "Sign in";
+
   ForgotPasswordPage clickForgotPasswordLink();
 
   SignInPage typePassword(String password);
