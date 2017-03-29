@@ -9,56 +9,67 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   FacebookAuthContext {
 
   private AttachedRegisterPage registerPage;
+  private String title = RegisterPage.pageTitle;
 
   public DetachedRegisterPage() {
-    this.registerPage = new AttachedRegisterPage();
+    registerPage = new AttachedRegisterPage();
   }
 
   public DetachedRegisterPage(AttachedRegisterPage registerPage) {
-    this.registerPage = registerPage;
+    registerPage = registerPage;
   }
 
-  @Override public AttachedRegisterPage open() {
-    return null;
+  @Override public RegisterPage open() {
+    throw new UnsupportedOperationException("Error trying to open a detached window in old tab");
   }
 
   @Override public boolean isDisplayed() {
-    return this.registerPage.isDisplayed();
+    gainFocus(title);
+    return registerPage.isDisplayed();
   }
 
-  @Override public AttachedRegisterPage typeEmailAddress(String email) {
-    return null;
+  @Override public RegisterPage typeEmailAddress(String email) {
+    gainFocus(title);
+    return registerPage.typeEmailAddress(email);
   }
 
-  @Override public AttachedRegisterPage typeUsername(String username) {
-    return null;
+  @Override public RegisterPage typeUsername(String username) {
+    gainFocus(title);
+    return registerPage.typeUsername(username);
   }
 
-  @Override public AttachedRegisterPage typePassword(String password) {
-    return null;
+  @Override public RegisterPage typePassword(String password) {
+    gainFocus(title);
+    return registerPage.typePassword(password);
   }
 
-  @Override public AttachedRegisterPage typeBirthdate(String month, String day, String year) {
-    return null;
+  @Override public RegisterPage typeBirthdate(String month, String day, String year) {
+    gainFocus(title);
+    return registerPage.typeBirthdate(month, day, year);
   }
 
   @Override public String getError() {
-    return this.registerPage.getError();
+    gainFocus(title);
+    return registerPage.getError();
   }
 
   @Override public void submit() {
-    this.registerPage.submit();
+    gainFocus(title);
+    registerPage.submit();
   }
 
   @Override public SignInPage navigateToSignIn() {
-    return this.registerPage.navigateToSignIn();
+    gainFocus(title);
+    return registerPage.navigateToSignIn();
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    return this.registerPage.clickFacebookSignUp();
+    gainFocus(title);
+    return registerPage.clickFacebookSignUp();
   }
 
   @Override public boolean isConnetctWithFacebookButtonVisible() {
-    return this.registerPage.isConnetctWithFacebookButtonVisible();
+    gainFocus(title);
+    return registerPage.isConnetctWithFacebookButtonVisible();
   }
 }

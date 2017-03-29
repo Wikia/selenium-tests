@@ -18,7 +18,7 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
   private AuthPageContext authContext;
 
   public AttachedForgotPasswordPage() {
-    this.authContext = new AuthPageContext();
+    authContext = new AuthPageContext();
   }
 
   public void submit() {
@@ -30,7 +30,7 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
   }
 
   @Override public boolean isDisplayed() {
-    return this.authContext.isHeaderDisplayed();
+    return authContext.isHeaderDisplayed();
   }
 
   public void requestLinkForUsername(String username) {

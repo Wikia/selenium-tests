@@ -33,7 +33,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   private AuthPageContext authContext;
 
   public AttachedRegisterPage() {
-    this.authContext = new AuthPageContext();
+    authContext = new AuthPageContext();
   }
 
   @Override public AttachedRegisterPage open() {
@@ -42,7 +42,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   }
 
   @Override public boolean isDisplayed() {
-    return this.authContext.isHeaderDisplayed();
+    return authContext.isHeaderDisplayed();
   }
 
   @Override public RegisterPage typeEmailAddress(String email) {
@@ -80,7 +80,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   }
 
   @Override public SignInPage navigateToSignIn() {
-    return this.authContext.navigateToSignIn();
+    return authContext.navigateToSignIn();
   }
 
   @Override public String getError() {
@@ -88,11 +88,11 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    return this.authContext.clickFacebookSignUp();
+    return authContext.clickFacebookSignUp();
   }
 
   @Override public boolean isConnetctWithFacebookButtonVisible() {
-    return this.authContext.isConnetctWithFacebookButtonVisible();
+    return authContext.isConnetctWithFacebookButtonVisible();
   }
 
 }

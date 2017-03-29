@@ -28,7 +28,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
   private AuthPageContext authContext;
 
   public AttachedSignInPage() {
-    this.authContext = new AuthPageContext();
+    authContext = new AuthPageContext();
   }
 
   public ForgotPasswordPage clickForgotPasswordLink() {
@@ -58,7 +58,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
   }
 
   @Override public RegisterPage navigateToRegister() {
-    return this.authContext.navigateToSignUp();
+    return authContext.navigateToSignUp();
   }
 
   @Override public String getError() {
@@ -74,15 +74,15 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
   }
 
   @Override public boolean isDisplayed() {
-    return this.authContext.isHeaderDisplayed();
+    return authContext.isHeaderDisplayed();
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    return this.authContext.clickFacebookSignUp();
+    return authContext.clickFacebookSignUp();
   }
 
   @Override public boolean isConnetctWithFacebookButtonVisible() {
-    return this.authContext.isConnetctWithFacebookButtonVisible();
+    return authContext.isConnetctWithFacebookButtonVisible();
   }
 }
 
