@@ -73,6 +73,10 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
     return null;
   }
 
+  @Override public boolean isDisplayed() {
+    return this.authContext.isHeaderDisplayed();
+  }
+
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
     return this.authContext.clickFacebookSignUp();
   }

@@ -55,6 +55,10 @@ public class DetachedSignInPage extends BasePageObject implements SignInPage, Fa
     return this.signInPage.open();
   }
 
+  @Override public boolean isDisplayed() {
+    return this.signInPage.isDisplayed();
+  }
+
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
     return this.signInPage.clickFacebookSignUp();
   }

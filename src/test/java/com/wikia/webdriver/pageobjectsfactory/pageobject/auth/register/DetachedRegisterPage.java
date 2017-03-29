@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
 public class DetachedRegisterPage extends BasePageObject implements RegisterPage,
@@ -21,6 +20,10 @@ public class DetachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override public AttachedRegisterPage open() {
     return null;
+  }
+
+  @Override public boolean isDisplayed() {
+    return this.registerPage.isDisplayed();
   }
 
   @Override public AttachedRegisterPage typeEmailAddress(String email) {

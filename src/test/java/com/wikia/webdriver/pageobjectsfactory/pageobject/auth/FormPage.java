@@ -9,4 +9,6 @@ public interface FormPage {
 
   FormPage open();
 
+  boolean isDisplayed();
+
 }

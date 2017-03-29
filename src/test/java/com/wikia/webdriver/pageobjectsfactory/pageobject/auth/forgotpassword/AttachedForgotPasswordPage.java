@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword;
 
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 import org.openqa.selenium.WebElement;
@@ -14,12 +15,22 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
 
+  private AuthPageContext authContext;
+
+  public AttachedForgotPasswordPage() {
+    this.authContext = new AuthPageContext();
+  }
+
   public void submit() {
     wait.forElementVisible(requestLinkButton).click();
   }
 
   @Override public FormPage open() {
     return null;
+  }
+
+  @Override public boolean isDisplayed() {
+    return this.authContext.isHeaderDisplayed();
   }
 
   public void requestLinkForUsername(String username) {

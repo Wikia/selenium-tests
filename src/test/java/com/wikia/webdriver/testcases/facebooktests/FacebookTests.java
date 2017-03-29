@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
@@ -29,7 +30,7 @@ public class FacebookTests extends NewTestTemplate {
     String password = "Pass" + signUp.getTimeStamp();
 
     fbModal.createAccountNoEmail(test_user.get("email"), userName, password);
-    signUp.verifyUserLoggedIn(userName);
+    new WikiBasePageObject().verifyUserLoggedIn(userName);
     api.deleteFacebookTestUser(test_user.get("id"));
 
   }

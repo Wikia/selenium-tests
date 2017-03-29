@@ -26,6 +26,10 @@ public class DetachedForgotPasswordPage implements ForgotPasswordPage {
     return this.forgotPasswordPage.open();
   }
 
+  @Override public boolean isDisplayed() {
+    return this.forgotPasswordPage.isDisplayed();
+  }
+
   @Override public void requestLinkForUsername(String username) {
     this.forgotPasswordPage.requestLinkForUsername(username);
   }

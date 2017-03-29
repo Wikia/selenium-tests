@@ -41,6 +41,10 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     return this;
   }
 
+  @Override public boolean isDisplayed() {
+    return this.authContext.isHeaderDisplayed();
+  }
+
   @Override public RegisterPage typeEmailAddress(String email) {
     fillInput(emailField, email);
     return this;

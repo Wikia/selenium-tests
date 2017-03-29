@@ -19,7 +19,8 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
   private WebElement linkToSignInForm;
   @FindBy(css = ".signin-page .header-callout-link")
   private WebElement linkToSignUpForm;
-
+  @FindBy(css = ".auth-header")
+  private WebElement authHeader;
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
     wait.forElementClickable(facebookSignUpButton).click();
@@ -31,7 +32,6 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
     return wait.forElementVisible(connectWithFacebookButton).isDisplayed();
   }
 
-
   public SignInPage navigateToSignIn() {
     waitAndClick(linkToSignInForm);
     return new AttachedSignInPage();
@@ -40,6 +40,10 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
   public RegisterPage navigateToSignUp() {
     waitAndClick(linkToSignUpForm);
     return new AttachedRegisterPage();
+  }
+
+  public boolean isHeaderDisplayed() {
+    return wait.forElementVisible(authHeader).isDisplayed();
   }
 
 }

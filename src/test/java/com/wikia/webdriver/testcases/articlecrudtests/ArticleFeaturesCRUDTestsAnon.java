@@ -3,8 +3,10 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
 
@@ -16,8 +18,8 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickPhotoButton();
 
-    AuthPageContext auth = new AuthPageContext();
-    auth.isModalOpen();
+    DetachedRegisterPage auth = new DetachedRegisterPage();
+    assertTrue(auth.isDisplayed());
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_002", "ArticleFeaturesCRUDAnon"})
@@ -26,8 +28,8 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickGalleryButton();
 
-    AuthPageContext auth = new AuthPageContext();
-    auth.isModalOpen();
+    DetachedRegisterPage auth = new DetachedRegisterPage();
+    assertTrue(auth.isDisplayed());
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_003", "ArticleFeaturesCRUDAnon"})
@@ -36,8 +38,8 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSlideshowButton();
 
-    AuthPageContext auth = new AuthPageContext();
-    auth.isModalOpen();
+    DetachedRegisterPage auth = new DetachedRegisterPage();
+    assertTrue(auth.isDisplayed());
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_004", "ArticleFeaturesCRUDAnon"})
@@ -46,8 +48,8 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickSliderButton();
 
-    AuthPageContext auth = new AuthPageContext();
-    auth.isModalOpen();
+    DetachedRegisterPage auth = new DetachedRegisterPage();
+    assertTrue(auth.isDisplayed());
   }
 
   @Test(groups = {"ArticleFeatureCRUDAnonymous_005", "ArticleFeaturesCRUDAnon"})
@@ -56,7 +58,7 @@ public class ArticleFeaturesCRUDTestsAnon extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.clickVideoButton();
 
-    AuthPageContext auth = new AuthPageContext();
-    auth.isModalOpen();
+    DetachedRegisterPage auth = new DetachedRegisterPage();
+    assertTrue(auth.isDisplayed());
   }
 }
