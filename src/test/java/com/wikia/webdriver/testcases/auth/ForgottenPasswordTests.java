@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.testng.annotations.Test;
@@ -22,17 +22,14 @@ ForgottenPasswordTests extends NewTestTemplate {
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    NavigationBar signInLink = new NavigationBar(driver);
-    signInLink.clickOnSignIn();
-    AttachedSignInPage loginModal = new AttachedSignInPage();
+    AttachedSignInPage loginModal = new NavigationBar(driver).clickOnSignIn();
     loginModal
       .clickForgotPasswordLink()
       .requestLinkForUsername(userName);
 
     String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
     driver.get(resetLink);
-    //loginModal.login(userName, newPassword);
-    //loginModal.verifyUserLoggedIn(userName);
+
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
