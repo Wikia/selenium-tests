@@ -1,13 +1,17 @@
 package com.wikia.webdriver.testcases.auth;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.MailFunctions;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ResetPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import org.testng.annotations.Test;
 
 @Test(groups = "auth-forgottenPassword")
@@ -18,17 +22,19 @@ ForgottenPasswordTests extends NewTestTemplate {
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromAuthModal")
   public void anonCanRemindPasswordFromAuthModal() {
-    String userName = credentials.userNameForgottenPassword;
-    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
+        MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    AttachedSignInPage loginModal = new NavigationBar(driver).clickOnSignIn();
+    DetachedSignInPage loginModal = new DetachedSignInPage(new NavigationBar(driver).clickOnSignIn());
     loginModal
       .clickForgotPasswordLink()
-      .requestLinkForUsername(userName);
+      .requestLinkForUsername(User.FORGOTTEN_PASSWORD.getUserName());
 
     String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
-    driver.get(resetLink);
+    ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
+    resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
+
+    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
 
   }
 

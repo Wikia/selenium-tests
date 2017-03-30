@@ -21,6 +21,8 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
   private WebElement linkToSignUpForm;
   @FindBy(css = ".auth-header")
   private WebElement authHeader;
+  @FindBy(css = ".auth-content")
+  private WebElement content;
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
     wait.forElementClickable(facebookSignUpButton).click();
@@ -44,6 +46,11 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
 
   public boolean isHeaderDisplayed() {
     return wait.forElementVisible(authHeader).isDisplayed();
+  }
+
+  public boolean containsText(String text) {
+    System.out.println("Text: " + wait.forElementVisible(content).getText() + " ||EOL");
+    return wait.forTextInElement(content, text);
   }
 
 }

@@ -9,8 +9,8 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
 
   private String title = ForgotPasswordPage.pageTitle;
 
-  public DetachedForgotPasswordPage(ForgotPasswordPage forgotPasswordPage) {
-    forgotPasswordPage = forgotPasswordPage;
+  public DetachedForgotPasswordPage(ForgotPasswordPage page) {
+    forgotPasswordPage = page;
   }
 
   public DetachedForgotPasswordPage() {
@@ -44,6 +44,7 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   @Override public void requestLinkForUsername(String username) {
     gainFocus(title);
     forgotPasswordPage.requestLinkForUsername(username);
+    loseFocus();
   }
 
 }

@@ -59,8 +59,7 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
   }
 
   @Override public FormPage open() {
-    gainFocus(title);
-    return signInPage.open();
+    throw new UnsupportedOperationException("Error trying to open a detached window in old tab");
   }
 
   @Override public boolean isDisplayed() {

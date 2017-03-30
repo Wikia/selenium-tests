@@ -10,7 +10,7 @@ public abstract class DetachedWindow extends BasePageObject {
     }
   }
 
-  public void loseFocus() {
+  protected void loseFocus() {
     switchToMainWindow();
   }
 
