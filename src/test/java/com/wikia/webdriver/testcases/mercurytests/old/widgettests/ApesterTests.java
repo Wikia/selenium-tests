@@ -12,7 +12,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_PollydaddyWidget")
@@ -21,76 +21,77 @@ import org.testng.annotations.Test;
     browser = Browser.CHROME,
     emulator = Emulator.GOOGLE_NEXUS_5
 )
-public class PlaybuzzTests extends NewTestTemplate {
+public class ApesterTests extends NewTestTemplate {
 
   private TopBar topBar;
   private Navigation navigation;
   private Navigate navigate;
-  private PlaybuzzWidgetPageObject widget;
+  private ApesterWidgetPageObject widget;
 
-  private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "/wiki/PlaybuzzMercury/OneWidget";
+  private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/ApesterMercury/OneWidget";
   private static final String
-      PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME = "/wiki/PlaybuzzMercury/MultipleWidgets";
-  private static final String PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/Playbuzzmercury/IncorrectWidget";
+      APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/ApesterMercury/MultipleWidgets";
+  private static final String
+      APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/Apestermercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
-  private static final String QUERY_2 = PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME.substring(6);
+  private static final String QUERY_2 = APESTER_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new PlaybuzzWidgetPageObject(driver);
+    this.widget = new ApesterWidgetPageObject(driver);
   }
 
-  @Test(groups = "MercuryPlaybuzzWidgetTest_001")
-  public void MercuryPlaybuzzWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
+  @Test(groups = "MercuryApesterWidgetTest_001")
+  public void MercuryApesterWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
     init();
 
-    widget.create(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPlaybuzzWidgetTest_002")
-  public void MercuryPlaybuzzWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+  @Test(groups = "MercuryApesterWidgetTest_002")
+  public void MercuryApesterWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     init();
 
-    widget.create(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(APESTER_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPlaybuzzWidgetTest_003")
-  public void MercuryPlaybuzzWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+  @Test(groups = "MercuryApesterWidgetTest_003")
+  public void MercuryApesterWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
     init();
 
-    widget.create(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
+    widget.create(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPlaybuzzWidgetTest_004")
-  public void MercuryPlaybuzzWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+  @Test(groups = "MercuryApesterWidgetTest_004")
+  public void MercuryApesterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     init();
 
-    widget.createMultiple(PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME);
-    navigate.toPage(PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME);
+    widget.createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
-  @Test(groups = "MercuryPlaybuzzWidgetTest_005")
-  public void MercuryPlaybuzzWidgetTest_005_isErrorPresent() {
+  @Test(groups = "MercuryApesterWidgetTest_005")
+  public void MercuryApesterWidgetTest_005_isErrorPresent() {
     init();
 
-    widget.createIncorrect(PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
+    widget.createIncorrect(APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
