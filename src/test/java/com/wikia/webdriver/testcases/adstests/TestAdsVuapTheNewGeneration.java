@@ -30,7 +30,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     return ads;
   }
 
-  @Test(groups = {"AdsAdsVuapDefaultStateTng", "AdsVuapDefaultStateAutoplayOasis"},
+  @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateAutoplayOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
@@ -41,7 +41,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     VuapAssertions.verifyVideoPlay(vuap);
   }
 
-  @Test(groups = {"AdsAdsVuapDefaultStateTng", "AdsVuapDefaultStateTimeProgressOasis"},
+  @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateTimeProgressOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
@@ -52,7 +52,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
   }
 
-  @Test(groups = {"AdsAdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
+  @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
   public void vuapDefaultStateShouldHaveLinkToProject43ArticleOnImage(Page page, String slot, String videoIframeSelector) {
@@ -66,7 +66,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(PROJECT43_TNG_ARTICLE_LINK), "Image should point to page on project43.");
   }
 
-  @Test(groups = {"AdsAdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
+  @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
   public void vuapDefaultStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot, String videoIframeSelector) {
@@ -80,7 +80,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
   }
 
-  @Test(groups = {"AdsAdsVuapDefaultStateTng", "AdsVuapDefaultStateMuteOasis"},
+  @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateMuteOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
   public void vuapDefaultStateAutoplayIsMutredAfrerReplayIsNotMuted(Page page, String slot, String videoIframeSelector) {

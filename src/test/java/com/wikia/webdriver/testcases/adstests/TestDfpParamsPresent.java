@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -34,6 +35,31 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
+    ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "dfpRubiconParamsSynthetic",
+      groups = {"DfpParamsPresentSyntheticOasis", "Ads"}
+  )
+  public void dfpRubiconParamsPresentSyntheticOasis(String wikiName,
+                                             String article,
+                                             String queryString,
+                                             String adUnit,
+                                             String slot,
+                                             String patternParam2tierPrice,
+                                             String patternParam57tierPrice) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    if (StringUtils.isNotEmpty(queryString)) {
+      testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
+    }
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+    String currentGptSlotParams = ads.getGptParams(slot, "data-gpt-slot-params");
+
+    ads.verifyGptIframe(adUnit, slot, "gpt");
+    Assertion.assertTrue(ads.areRubiconDfpParamsPresent(currentGptSlotParams, patternParam2tierPrice, patternParam57tierPrice),
+        currentGptSlotParams + " does not contains " + patternParam2tierPrice + " or " + patternParam57tierPrice);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
 
