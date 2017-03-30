@@ -10,7 +10,6 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class AdsDataProvider {
 
@@ -296,19 +295,21 @@ public class AdsDataProvider {
                 "\"pos\":\"TOP_LEADERBOARD\"",
                 "\"src\":\"gpt\""
             )
-        },
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] dfpRubiconParamsSynthetic() {
+    return new Object[][]{
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
             "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            Collections.emptyList(),
-            Arrays.asList(
-                "\"rpfl_7450\":[\"2_tier",
-                "\"57_tier",
-                "_tier2000"
-            )
+            ".*rpfl_7450\":\\[\"2_tier\\d{4}.*\",\"57_tier.*",
+            ".*rpfl_7450\":\\[\"2_tier.*\",\"57_tier\\d{4}\"\\].*"
         }
     };
   }
@@ -750,15 +751,6 @@ public class AdsDataProvider {
   public static Object[][] disableBtfExceptHighlyViewableSlots() {
     return new Object[][]{
         {"project43", "SyntheticTests/Disable_BTF/Unblock_HIVI", true}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] testPad() {
-    return new Object[][]{
-        {"adtest-pad", "Adtest-pad_Wikia", 250},
-        {"adtest-pad", "Article_1", 480},
-        {"adtest-pad", "Article_2", 480}
     };
   }
 

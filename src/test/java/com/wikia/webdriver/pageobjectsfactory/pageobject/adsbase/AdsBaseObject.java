@@ -742,4 +742,17 @@ public class AdsBaseObject extends WikiBasePageObject {
       return false;
     }
   }
+
+  public boolean areRubiconDfpParamsPresent(String currentGptSlotParams, String patternParamFirsttierPrice, String patternParamSecondtierPrice) {
+    try {
+      if (currentGptSlotParams.matches(patternParamFirsttierPrice)) {
+        return true;
+      }else {
+        return currentGptSlotParams.matches(patternParamSecondtierPrice);
+      }
+    }catch (AssertionError ass) {
+      PageObjectLogging.log(currentGptSlotParams + " does not contains all expected dfp params", ass, true);
+      return false;
+    }
+  }
 }
