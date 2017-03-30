@@ -23,7 +23,7 @@ public class NotificationsComponentObject extends WikiBasePageObject {
   private List<WebElement> notificationsList;
   @FindBy(css = "#notificationsContainer")
   private WebElement notificationsDropdown;
-  @FindBy(css = ".wds-global-navigation__notifications-menu-counter")
+  @FindBy(css = ".wds-global-navigation__notifications-menu-counter.notifications-count")
   private WebElement bubblesCount;
   @FindBy(css = "#wall-notifications-markasread-sub")
   private WebElement markNotificationsAsRead;
