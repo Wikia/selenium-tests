@@ -31,7 +31,7 @@ public class PlaybuzzTests extends NewTestTemplate {
   private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "/wiki/PlaybuzzMercury/OneWidget";
   private static final String
       PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME = "/wiki/PlaybuzzMercury/MultipleWidgets";
-  private static final String PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/Playbuzzmercury/IncorrectWidget";
+  private static final String PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PlaybuzzMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME.substring(6);
 

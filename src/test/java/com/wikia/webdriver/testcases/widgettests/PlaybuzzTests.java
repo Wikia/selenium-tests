@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Test(groups = "PlaybuzzWidget")
 @InBrowser(browser = Browser.CHROME)
 public class PlaybuzzTests extends NewTestTemplate {
-  private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "/wiki/PlaybuzzOasisOneWidget";
+  private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "/wiki/PlaybuzzOasis/OneWidget";
   private static final String PLAYBUZZ_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
       "/wiki/PlaybuzzOasis/MultipleWidgets";
   private static final String PLAYBUZZ_FORM_INCORRECT_WIDGET_ARTICLE_NAME =
@@ -31,7 +31,7 @@ public class PlaybuzzTests extends NewTestTemplate {
   }
 
   @Test(groups = "PlaybuzzWidgetTest_001")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.STAFF)
+  @Execute(onWikia = "mercuryautomationtesting")
   public void PlaybuzzWidgetTest_001_isLoaded() {
     init();
 
