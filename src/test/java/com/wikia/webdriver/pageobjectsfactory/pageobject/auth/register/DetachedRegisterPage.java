@@ -28,6 +28,10 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     return registerPage.isDisplayed();
   }
 
+  @Override public boolean submitButtonNotClickable() {
+    return registerPage.submitButtonNotClickable();
+  }
+
   @Override public RegisterPage typeEmailAddress(String email) {
     gainFocus(title);
     return registerPage.typeEmailAddress(email);

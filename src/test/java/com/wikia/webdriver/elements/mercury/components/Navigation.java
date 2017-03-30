@@ -5,8 +5,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.JoinTodayPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -42,7 +41,7 @@ public class Navigation {
   @FindBy(css = ".nav-menu--tv")
   private WebElement tvHub;
 
-  @FindBy(css = ".wikia-nav__avatar")
+  @FindBy(css = ".wikia-nav__avatar img")
   private WebElement userAvatar;
 
   @FindBy(css = ".wikia-nav--profile-link")
@@ -67,11 +66,11 @@ public class Navigation {
     PageFactory.initElements(driver, this);
   }
 
-  public AuthPageContext clickOnSignInRegisterButton() {
-    PageObjectLogging.logInfo("Open login page");
+  public JoinTodayPage clickOnSignInRegisterButton() {
+    PageObjectLogging.logInfo("Open Join Today page on mobile");
     wait.forElementClickable(signInRegisterButton).click();
 
-    return new AuthPageContext();
+    return new JoinTodayPage();
   }
 
   public Navigation clickBackButton() {
@@ -145,6 +144,10 @@ public class Navigation {
 
   public boolean isUserAvatarVisible() {
     return isElementVisible(userAvatar);
+  }
+
+  public boolean isUserAvatarVisible(final String username) {
+    return wait.forElementVisible(userAvatar).isDisplayed() && userAvatar.getAttribute("alt").equals(username);
   }
 
   public boolean isUserProfileLinkVisible() {

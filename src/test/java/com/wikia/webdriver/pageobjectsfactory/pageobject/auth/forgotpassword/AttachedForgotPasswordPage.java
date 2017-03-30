@@ -33,12 +33,16 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
     return authContext.isHeaderDisplayed();
   }
 
+  @Override public boolean submitButtonNotClickable() {
+    return wait.forElementVisible(requestLinkButton).isEnabled();
+  }
+
   public void requestLinkForUsername(String username) {
     fillInput(usernameField, username);
     submit();
   }
 
   @Override public String getError() {
-    return FormError.getError();
+    return new FormError().getError();
   }
 }

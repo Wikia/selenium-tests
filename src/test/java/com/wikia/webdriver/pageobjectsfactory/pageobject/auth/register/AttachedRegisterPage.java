@@ -45,6 +45,10 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     return authContext.isHeaderDisplayed();
   }
 
+  @Override public boolean submitButtonNotClickable() {
+    return !wait.forElementVisible(submitButton).isEnabled();
+  }
+
   @Override public RegisterPage typeEmailAddress(String email) {
     fillInput(emailField, email);
     return this;

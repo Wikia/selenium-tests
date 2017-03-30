@@ -62,7 +62,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
   }
 
   @Override public String getError() {
-    return FormError.getError();
+    return new FormError().getError();
   }
 
   @Override public void submit() {
@@ -83,6 +83,10 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
 
   @Override public boolean isConnetctWithFacebookButtonVisible() {
     return authContext.isConnetctWithFacebookButtonVisible();
+  }
+
+  @Override public boolean submitButtonNotClickable() {
+    return !wait.forElementVisible(signInButton).isEnabled();
   }
 }
 

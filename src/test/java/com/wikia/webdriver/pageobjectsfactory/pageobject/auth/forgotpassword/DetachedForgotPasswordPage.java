@@ -10,22 +10,22 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   private String title = ForgotPasswordPage.pageTitle;
 
   public DetachedForgotPasswordPage(ForgotPasswordPage forgotPasswordPage) {
-    this.forgotPasswordPage = forgotPasswordPage;
+    forgotPasswordPage = forgotPasswordPage;
   }
 
   public DetachedForgotPasswordPage() {
-    this.forgotPasswordPage = new AttachedForgotPasswordPage();
+    forgotPasswordPage = new AttachedForgotPasswordPage();
   }
 
   @Override public String getError() {
-    gainFocus(this.title);
-    return this.forgotPasswordPage.getError();
+    gainFocus(title);
+    return forgotPasswordPage.getError();
 
   }
 
   @Override public void submit() {
-    gainFocus(this.title);
-    this.forgotPasswordPage.submit();
+    gainFocus(title);
+    forgotPasswordPage.submit();
   }
 
   @Override public FormPage open() {
@@ -33,13 +33,17 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   }
 
   @Override public boolean isDisplayed() {
-    gainFocus(this.title);
-    return this.forgotPasswordPage.isDisplayed();
+    gainFocus(title);
+    return forgotPasswordPage.isDisplayed();
+  }
+
+  @Override public boolean submitButtonNotClickable() {
+    return forgotPasswordPage.submitButtonNotClickable();
   }
 
   @Override public void requestLinkForUsername(String username) {
-    gainFocus(this.title);
-    this.forgotPasswordPage.requestLinkForUsername(username);
+    gainFocus(title);
+    forgotPasswordPage.requestLinkForUsername(username);
   }
 
 }

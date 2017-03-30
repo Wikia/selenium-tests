@@ -68,6 +68,11 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
     return signInPage.isDisplayed();
   }
 
+  @Override public boolean submitButtonNotClickable() {
+    gainFocus(title);
+    return signInPage.submitButtonNotClickable();
+  }
+
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
     gainFocus(title);
     return signInPage.clickFacebookSignUp();
