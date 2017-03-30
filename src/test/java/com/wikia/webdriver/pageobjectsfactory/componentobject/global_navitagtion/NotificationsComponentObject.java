@@ -17,13 +17,13 @@ import java.util.List;
 
 public class NotificationsComponentObject extends WikiBasePageObject {
 
-  @FindBy(css = "div.bubbles")
+  @FindBy(css = "#notificationsEntryPoint div.bubbles")
   protected WebElement notificationsBubbles;
-  @FindBys(@FindBy(css = ".notification.unread"))
+  @FindBys(@FindBy(css = "#notificationsEntryPoint .notification.unread"))
   private List<WebElement> notificationsList;
   @FindBy(css = "#notificationsContainer")
   private WebElement notificationsDropdown;
-  @FindBy(css = ".wds-global-navigation__notifications-menu-counter.notifications-count")
+  @FindBy(css = "#notificationsEntryPoint .notifications-count")
   private WebElement bubblesCount;
   @FindBy(css = "#wall-notifications-markasread-sub")
   private WebElement markNotificationsAsRead;
