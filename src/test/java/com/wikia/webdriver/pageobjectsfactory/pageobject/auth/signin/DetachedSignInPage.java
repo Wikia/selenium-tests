@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterP
 public class DetachedSignInPage extends DetachedWindow implements SignInPage, FacebookAuthContext {
 
   private AttachedSignInPage signInPage;
-  private String title = SignInPage.pageTitle;
+  private final static String TITLE = "Sign in";
 
   public DetachedSignInPage() {
     signInPage = new AttachedSignInPage();
@@ -24,21 +24,21 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
   }
 
   @Override public ForgotPasswordPage clickForgotPasswordLink() {
-    gainFocus(title);
+    gainFocus(TITLE);
     AttachedForgotPasswordPage forgotPassword = signInPage.clickForgotPasswordLink();
     return new DetachedForgotPasswordPage(forgotPassword);
   }
 
   @Override public SignInPage typePassword(String password) {
-    gainFocus(title);
+    gainFocus(TITLE);
     signInPage.typePassword(password);
     return this;
   }
 
   @Override public void login(String username, String password) {
-    gainFocus(title);
+    gainFocus(TITLE);
     signInPage.login(username, password);
-    loseFocus(title);
+    loseFocus(TITLE);
   }
 
   @Override public void login(User user) {
@@ -46,17 +46,17 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
   }
 
   @Override public RegisterPage navigateToRegister() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return signInPage.navigateToRegister();
   }
 
   @Override public String getError() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return signInPage.getError();
   }
 
   @Override public void submit() {
-    gainFocus(title);
+    gainFocus(TITLE);
     signInPage.submit();
   }
 
@@ -65,22 +65,22 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
   }
 
   @Override public boolean isDisplayed() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return signInPage.isDisplayed();
   }
 
   @Override public boolean submitButtonNotClickable() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return signInPage.submitButtonNotClickable();
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return signInPage.clickFacebookSignUp();
   }
 
   @Override public boolean isConnetctWithFacebookButtonVisible() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return signInPage.isConnetctWithFacebookButtonVisible();
   }
 }

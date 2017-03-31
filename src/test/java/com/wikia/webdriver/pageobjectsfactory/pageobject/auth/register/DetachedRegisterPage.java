@@ -4,13 +4,12 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Faceb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage,
   FacebookAuthContext {
 
   private AttachedRegisterPage registerPage;
-  private String title = RegisterPage.pageTitle;
+  private final static String TITLE = "Join Fandom Today";
 
   public DetachedRegisterPage() {
     registerPage = new AttachedRegisterPage();
@@ -25,7 +24,7 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   }
 
   @Override public boolean isDisplayed() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.isDisplayed();
   }
 
@@ -34,48 +33,48 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   }
 
   @Override public RegisterPage typeEmailAddress(String email) {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.typeEmailAddress(email);
   }
 
   @Override public RegisterPage typeUsername(String username) {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.typeUsername(username);
   }
 
   @Override public RegisterPage typePassword(String password) {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.typePassword(password);
   }
 
   @Override public RegisterPage typeBirthdate(String month, String day, String year) {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.typeBirthdate(month, day, year);
   }
 
   @Override public String getError() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.getError();
   }
 
   @Override public void submit() {
-    gainFocus(title);
+    gainFocus(TITLE);
     registerPage.submit();
-    loseFocus(title);
+    loseFocus(TITLE);
   }
 
   @Override public DetachedSignInPage navigateToSignIn() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return new DetachedSignInPage(registerPage.navigateToSignIn());
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.clickFacebookSignUp();
   }
 
   @Override public boolean isConnetctWithFacebookButtonVisible() {
-    gainFocus(title);
+    gainFocus(TITLE);
     return registerPage.isConnetctWithFacebookButtonVisible();
   }
 }

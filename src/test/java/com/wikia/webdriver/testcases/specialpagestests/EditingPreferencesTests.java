@@ -25,8 +25,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
   private static final String SOURCE = "1";
   private static final String VE = "2";
   private static final String CK = "3";
-  private static final String username = Configuration.getCredentials().emailQaart2;
-  private static final String password = Configuration.getCredentials().emailPasswordQaart2;
+  private static final String USERNAME = Configuration.getCredentials().emailQaart2;
+  private static final String PASSWORD = Configuration.getCredentials().emailPasswordQaart2;
 
   @Test(groups = {"EditPreferences_001"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
@@ -87,7 +87,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     String newEmailAddress = MailFunctions.getEmail(editPrefPage.getEmailAdress());
 
-    MailFunctions.deleteAllEmails(username, password);
+    MailFunctions.deleteAllEmails(USERNAME, PASSWORD);
 
     Assertion.assertNotEquals(newEmailAddress, editPrefPage.getEmailAdress(),
         "New email and old email SHOULD NOT be the same");
@@ -98,7 +98,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
                          "Notification message is not visible");
 
-    editPrefPage.enterEmailChangeLink(username, password);
+    editPrefPage.enterEmailChangeLink(USERNAME, PASSWORD);
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress,
                            "Email address doesn't equal to new email address");

@@ -5,7 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
-import lombok.Getter;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,7 +16,7 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
   @FindBy(css = "#loginUsername")
   private WebElement usernameField;
 
-  private final String PASS_REQUESTED_SUCCESS = "Thanks! Please check your email.";
+  private static final String PASS_REQUESTED_SUCCESS = "Thanks! Please check your email.";
 
   private AuthPageContext authContext;
 
