@@ -13,6 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
@@ -20,7 +21,6 @@ import org.testng.annotations.Test;
 public class LoginTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
-  String jaTestWiki = "ja.ja-test";
 
 
   @Test(groups = "Login_anonCanLoginOnAuthModalFromGlobalNavigation")
@@ -28,7 +28,7 @@ public class LoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
-    AttachedSignInPage authModal = signInLink.clickOnSignIn();
+    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
     authModal.login(credentials.userName10, credentials.password10);
     base.verifyUserLoggedIn(credentials.userName10);
@@ -41,21 +41,21 @@ public class LoginTests extends NewTestTemplate {
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
-    AttachedSignInPage authModal = signInLink.clickOnSignIn();
+    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
     //we are using userNameStaff2 because of PLATFORM-2502 and PLATFORM-2508
     authModal.login(credentials.userNameStaff2, credentials.passwordStaff2);
     base.verifyUserLoggedIn(credentials.userNameStaff2);
   }
 
-  @Test(groups = "Login_anonCanLoginAsJapaneseUserOnUserLoginSpecialPage")
+  @Test(groups = "Login_anonCanLoginAsJapaneseUserOnUserLoginSpecialPage", enabled = false)
   @Execute(onWikia = "ja.ja-test")
   public void anonCanLoginAsJapaneseUserOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
-    AttachedSignInPage authModal = signInLink.clickOnSignIn();
+    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
     authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);
     base.verifyUserLoggedIn(credentials.userNameJapanese2);

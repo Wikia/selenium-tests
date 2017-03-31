@@ -6,6 +6,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,12 +85,12 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     waitAndClick(submitButton);
   }
 
-  @Override public SignInPage navigateToSignIn() {
+  @Override public AttachedSignInPage navigateToSignIn() {
     return authContext.navigateToSignIn();
   }
 
   @Override public String getError() {
-    return null;
+    return new FormError().getError();
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {

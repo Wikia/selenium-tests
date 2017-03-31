@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class FormError extends BasePageObject {
 
-  @FindBy(css = "form .error")
+  @FindBy(css = "form small.error")
   private WebElement error;
 
   public String getError() {

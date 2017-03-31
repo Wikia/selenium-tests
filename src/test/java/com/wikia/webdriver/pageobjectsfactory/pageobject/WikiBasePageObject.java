@@ -370,7 +370,7 @@ public class WikiBasePageObject extends BasePageObject {
       } else {
         WebElement avatar = wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
         String loggedInUserName = avatar.getAttribute("alt");
-        if (!loggedInUserName.equals(userName)) {
+        if (!loggedInUserName.equals(userName) && !loggedInUserName.equals(userName + " avatar")) {
           throw new IllegalArgumentException(
               "Invalid user, expected " + userName + ", but found: " + loggedInUserName);
         }
@@ -460,6 +460,10 @@ public class WikiBasePageObject extends BasePageObject {
     } catch (TimeoutException e) {
       PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
     }
+  }
+
+  public void logoutFromAnywhere() {
+    driver.get(URLsContent.LOGOUT_URL);
   }
 
   public String loginAs(String userName, String password, String wikiURL) {

@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage,
@@ -15,8 +16,8 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     registerPage = new AttachedRegisterPage();
   }
 
-  public DetachedRegisterPage(AttachedRegisterPage registerPage) {
-    registerPage = registerPage;
+  public DetachedRegisterPage(AttachedRegisterPage page) {
+    registerPage = page;
   }
 
   @Override public RegisterPage open() {
@@ -60,11 +61,12 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   @Override public void submit() {
     gainFocus(title);
     registerPage.submit();
+    loseFocus(title);
   }
 
-  @Override public SignInPage navigateToSignIn() {
+  @Override public DetachedSignInPage navigateToSignIn() {
     gainFocus(title);
-    return registerPage.navigateToSignIn();
+    return new DetachedSignInPage(registerPage.navigateToSignIn());
   }
 
   @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {

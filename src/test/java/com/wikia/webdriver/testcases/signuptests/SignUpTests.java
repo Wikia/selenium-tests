@@ -12,7 +12,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
@@ -24,11 +26,11 @@ public class SignUpTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = "SignUp_anonCanNotSignUpIfSheIsYoungerThanTwelve")
-  public void anonCanNotSignUpIfSheIsYoungerThanTwelve() {
+  public void anonCanNotSignUpIfYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
     AttachedRegisterPage register = new AttachedRegisterPage();
-    register.typeUsername(register.getTimeStamp());
+    register.typeUsername(register.getTimeStamp() + " some letters");
     register.typeEmailAddress(credentials.emailQaart1);
     register.typePassword(register.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
@@ -55,7 +57,7 @@ public class SignUpTests extends NewTestTemplate {
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
 
     register.submit();
-    Assertion.assertEquals(register.getError(), "Username is taken");
+    Assertion.assertStringContains(register.getError(), "Username is taken");
 
   }
 
@@ -63,7 +65,7 @@ public class SignUpTests extends NewTestTemplate {
   public void anonCanSignUpOnNewBaseAuthPageFromGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar registerLink = new NavigationBar(driver);
-    AttachedRegisterPage register = registerLink.clickOnRegister();
+    DetachedRegisterPage register = new DetachedRegisterPage(registerLink.clickOnRegister());
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
     String email = credentials.emailQaart2;
@@ -94,14 +96,6 @@ public class SignUpTests extends NewTestTemplate {
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     register.submit();
     base.verifyUserLoggedIn(userName);
-    BannerNotifications notification = new BannerNotifications();
-    String bannerNotifMessageEN = "Oh no! Your email address has not yet been confirmed. "
-                                  + "You should have a confirmation message in your inbox. "
-                                  + "Didn't get it? Click here and we'll send a new one. "
-                                  + "If you need to change your address, "
-                                  + "head to your Preferences page.";
-    Assertion.assertEquals(
-        notification.getBannerNotificationTextEmailNotConfirmed(), bannerNotifMessageEN);
   }
 
   @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
@@ -120,11 +114,11 @@ public class SignUpTests extends NewTestTemplate {
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     register.submit();
     base.verifyUserLoggedIn(userName);
-    base.logOut();
-
+    base.logoutFromAnywhere();
     NavigationBar signInLink = new NavigationBar(driver);
-    AttachedSignInPage page = signInLink.clickOnSignIn();
+    DetachedSignInPage page = new DetachedSignInPage(signInLink.clickOnSignIn());
     page.login(userName, password);
+    base.verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
@@ -142,16 +136,8 @@ public class SignUpTests extends NewTestTemplate {
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
-                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+      PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     register.submit();
     base.verifyUserLoggedIn(userName);
-    BannerNotifications notification = new BannerNotifications();
-    String banerNotifMessageJapanese = "メールアドレスの認証が完了していないようです。受信トレイの確認メー"
-                                       + "ルをチェックしてみてください。確認メールが見つからない場合は、こ"
-                                       + "こをクリックすると新しい確認メールが送信されます。メールアドレス"
-                                       + "を変更する必要がある場合は、"
-                                       + "「個人設定」ページにアクセスしてください。";
-    Assertion.assertEquals(
-        notification.getBannerNotificationTextEmailNotConfirmed(), banerNotifMessageJapanese);
   }
 }

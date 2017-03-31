@@ -38,6 +38,7 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
   @Override public void login(String username, String password) {
     gainFocus(title);
     signInPage.login(username, password);
+    loseFocus(title);
   }
 
   @Override public void login(User user) {

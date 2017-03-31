@@ -26,6 +26,7 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   @Override public void submit() {
     gainFocus(title);
     forgotPasswordPage.submit();
+    loseFocus(title);
   }
 
   @Override public FormPage open() {

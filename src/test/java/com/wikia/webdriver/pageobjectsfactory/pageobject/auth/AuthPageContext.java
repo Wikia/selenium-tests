@@ -34,7 +34,7 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
     return wait.forElementVisible(connectWithFacebookButton).isDisplayed();
   }
 
-  public SignInPage navigateToSignIn() {
+  public AttachedSignInPage navigateToSignIn() {
     waitAndClick(linkToSignInForm);
     return new AttachedSignInPage();
   }
