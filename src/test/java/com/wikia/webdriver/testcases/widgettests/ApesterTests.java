@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
@@ -15,6 +14,7 @@ import org.testng.annotations.Test;
 @Test(groups = "ApesterWidget")
 @InBrowser(browser = Browser.CHROME)
 public class ApesterTests extends NewTestTemplate {
+
   private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/ApesterOasis/OneWidget";
   private static final String APESTER_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
       "/wiki/ApesterOasis/MultipleWidgets";
@@ -42,7 +42,7 @@ public class ApesterTests extends NewTestTemplate {
 
   @Test(groups = {"ApesterWidgetTest_002"})
   @Execute(onWikia = "mercuryautomationtesting")
-  public void PollsnackWidgetTest_002_areLoaded() {
+  public void ApesterWidgetTest_002_areLoaded() {
     init();
 
     widget.createMultiple(APESTER_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);

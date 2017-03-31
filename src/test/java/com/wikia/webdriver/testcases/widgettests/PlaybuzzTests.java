@@ -2,11 +2,9 @@ package com.wikia.webdriver.testcases.widgettests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
@@ -16,6 +14,7 @@ import org.testng.annotations.Test;
 @Test(groups = "PlaybuzzWidget")
 @InBrowser(browser = Browser.CHROME)
 public class PlaybuzzTests extends NewTestTemplate {
+
   private static final String PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME = "/wiki/PlaybuzzOasis/OneWidget";
   private static final String PLAYBUZZ_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
       "/wiki/PlaybuzzOasis/MultipleWidgets";
@@ -43,7 +42,7 @@ public class PlaybuzzTests extends NewTestTemplate {
 
   @Test(groups = {"PlaybuzzWidgetTest_002"})
   @Execute(onWikia = "mercuryautomationtesting")
-  public void PollsnackWidgetTest_002_areLoaded() {
+  public void PlaybuzzWidgetTest_002_areLoaded() {
     init();
 
     widget.createMultiple(PLAYBUZZ_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
