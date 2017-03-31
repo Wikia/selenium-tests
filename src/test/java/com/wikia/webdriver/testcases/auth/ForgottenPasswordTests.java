@@ -14,11 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import org.testng.annotations.Test;
 
-import javax.jws.soap.SOAPBinding;
-
 @Test(groups = "auth-forgottenPassword")
-public class
-ForgottenPasswordTests extends NewTestTemplate {
+public class ForgottenPasswordTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
