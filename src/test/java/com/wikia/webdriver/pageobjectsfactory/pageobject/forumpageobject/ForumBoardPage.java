@@ -1,29 +1,29 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
+public class ForumBoardPage extends BasePageObject {
 
-import java.util.List;
-
-public class ForumBoardPageObject extends BasePageObject {
+  private final MiniEditorComponentObject miniEditor = new MiniEditorComponentObject(driver);
 
   @FindBy(css = "textarea.title:nth-child(2)")
   private WebElement discussionTitleArea;
   @FindBy(css = "button.submit")
   private WebElement postButton;
-  @FindBy(css = "div.msg-title a")
-  private WebElement discussionTitle;
   @FindBys(@FindBy(css = "div.msg-body p"))
   private List<WebElement> discussionBody;
   @FindBys(@FindBy(css = "li.SpeechBubble img.thumbimage"))
@@ -32,17 +32,19 @@ public class ForumBoardPageObject extends BasePageObject {
   private List<WebElement> threadTitlesList;
   @FindBy(css = ".notify-everyone")
   private WebElement highlight;
-  @FindBy(css = "#Forum .board-description")
-  private WebElement boardDescription;
   @FindBy(css = "#WikiaEditor-0")
   private WebElement wikiaEditorTextArea;
 
-  MiniEditorComponentObject miniEditor;
+  /**
+   * Navigate to forum board width specified title
+   * @param forumBoardTitle
+   * @return
+   */
+  public ForumBoardPage open(String forumBoardTitle) {
+    getUrl(String.format("%s%s%s:%s", urlBuilder.getUrlForWiki(Configuration.getWikiName()),
+        URLsContent.WIKI_DIR, URLsContent.FORUM_BOARD_NAMESPACE, forumBoardTitle));
 
-  public ForumBoardPageObject(WebDriver driver) {
-    super();
-    miniEditor = new MiniEditorComponentObject(driver);
-    PageFactory.initElements(driver, this);
+    return this;
   }
 
   private void checkHighlightCheckbox(boolean isHighLighted) {
@@ -64,8 +66,8 @@ public class ForumBoardPageObject extends BasePageObject {
     driver.switchTo().defaultContent();
     checkHighlightCheckbox(highlight);
     clickPostButton();
-    PageObjectLogging.log("startDiscussion", "discussion with message: " + message
-        + ", with title " + title + " posted", true, driver);
+    PageObjectLogging.log("startDiscussion",
+        "discussion with message: " + message + ", with title " + title + " posted", true, driver);
     return new ForumThreadPageObject(driver);
   }
 
@@ -92,8 +94,8 @@ public class ForumBoardPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(message);
     driver.switchTo().defaultContent();
     clickPostNotitleButton();
-    PageObjectLogging.log("startDiscussionWithoutTitle", "discussion with message: " + message
-        + " without title, posted", true, driver);
+    PageObjectLogging.log("startDiscussionWithoutTitle",
+        "discussion with message: " + message + " without title, posted", true, driver);
     return new ForumThreadPageObject(driver);
   }
 
@@ -101,11 +103,6 @@ public class ForumBoardPageObject extends BasePageObject {
     wait.forElementClickable(postButton);
     scrollAndClick(postButton);
     PageObjectLogging.log("clickPostButton", "post button clicked", true, driver);
-  }
-
-  public void verifyBoardDescription(String description) {
-    wait.forTextInElement(boardDescription, description);
-    PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
   }
 
   public void clickPostNotitleButton() {
@@ -123,8 +120,8 @@ public class ForumBoardPageObject extends BasePageObject {
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
     PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
     photoOptions.clickAddPhoto();
-    PageObjectLogging.log("startDiscussionWithImage", "discussion with image started" + title,
-        true, driver);
+    PageObjectLogging.log("startDiscussionWithImage", "discussion with image started" + title, true,
+        driver);
   }
 
   public void verifyDiscussionWithImage() {
@@ -146,16 +143,17 @@ public class ForumBoardPageObject extends BasePageObject {
     miniEditor.writeMiniEditor(Keys.ENTER);
     driver.switchTo().defaultContent();
     miniEditor.addExternalLink(externalLink);
-    PageObjectLogging.log("startDiscussionWithLink", "internal and external links: " + internalLink
-        + " and" + externalLink + "added", true, driver);
+    PageObjectLogging.log("startDiscussionWithLink",
+        "internal and external links: " + internalLink + " and" + externalLink + "added", true,
+        driver);
 
   }
 
   public void verifyStartedDiscussionWithLinks(String internalLink, String externalLink) {
     wait.forTextInElement(discussionBody, 0, internalLink);
     wait.forTextInElement(discussionBody, 1, externalLink);
-    PageObjectLogging.log("verifyStartedDiscussionWithLinks", "internal and external links: "
-        + internalLink + " and" + externalLink + "verified", true);
+    PageObjectLogging.log("verifyStartedDiscussionWithLinks",
+        "internal and external links: " + internalLink + " and" + externalLink + "verified", true);
   }
 
   public void startDiscussionWithVideo(String url, String title) {
@@ -165,8 +163,8 @@ public class ForumBoardPageObject extends BasePageObject {
     wait.forElementVisible(wikiaEditorTextArea);
     jsActions.focus(wikiaEditorTextArea);
     miniEditor.addVideoMiniEditor(url);
-    PageObjectLogging.log("startDiscussionWithVideo", "discussion with video started" + title,
-        true, driver);
+    PageObjectLogging.log("startDiscussionWithVideo", "discussion with video started" + title, true,
+        driver);
   }
 
   public void unfollowIfDiscussionIsFollowed(int threadNumber) {
@@ -178,8 +176,8 @@ public class ForumBoardPageObject extends BasePageObject {
           "discussion is followed. Preparing to click \"unfollowed\"", true);
       wait.forElementClickable(followButton);
       scrollAndClick(followButton);
-      PageObjectLogging
-          .log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true, driver);
+      PageObjectLogging.log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true,
+          driver);
     } else {
       PageObjectLogging.log("unfollowIfDiscussionIsFollowed", "discussion was unfollowed already",
           true);
@@ -190,8 +188,8 @@ public class ForumBoardPageObject extends BasePageObject {
     WebElement followButton =
         driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
     wait.forTextInElement(followButton, followStatus);
-    PageObjectLogging.log("verifyTextOnFollowButton", "verify that thread number " + threadNumber
-        + " has the status: " + followStatus, true);
+    PageObjectLogging.log("verifyTextOnFollowButton",
+        "verify that thread number " + threadNumber + " has the status: " + followStatus, true);
   }
 
   public void clickOnFollowButton(int threadNumber) {
@@ -200,8 +198,8 @@ public class ForumBoardPageObject extends BasePageObject {
     wait.forElementVisible(followButton);
     wait.forElementClickable(followButton);
     scrollAndClick(followButton);
-    PageObjectLogging.log("clickOnFollowButton", "click on follow button of thread number "
-        + threadNumber, true, driver);
+    PageObjectLogging.log("clickOnFollowButton",
+        "click on follow button of thread number " + threadNumber, true, driver);
   }
 
   public String getTitle() {

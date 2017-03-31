@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 
 //User has to be an admin on wiki to delete and create forum
 @Test(groups = {"Forum", "ForumEditMode"})
@@ -26,7 +26,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_001"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanOpenFrequentlyAskedQuestionsModalOnForum() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     forumMainPage.verifyFaqLightBox();
   }
@@ -34,7 +34,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanCreateNewBoard(String name) {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     title = name + manageForum.getTimeStamp();
@@ -47,7 +47,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_003"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanDeleteBoard() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -60,7 +60,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_004"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanEditForum() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
@@ -74,7 +74,7 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"Forum_005", "Forum"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanMoveBoard() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
     first = manageForum.getFirstForumName();
