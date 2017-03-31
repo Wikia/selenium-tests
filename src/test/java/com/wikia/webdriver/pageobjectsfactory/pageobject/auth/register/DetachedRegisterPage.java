@@ -9,7 +9,7 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   FacebookAuthContext {
 
   private AttachedRegisterPage registerPage;
-  private final static String TITLE = "Join Fandom Today";
+  private static final String TITLE = "Join Fandom Today";
 
   public DetachedRegisterPage() {
     registerPage = new AttachedRegisterPage();

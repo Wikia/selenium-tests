@@ -7,7 +7,7 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
 
   private AttachedForgotPasswordPage forgotPasswordPage;
 
-  private final static String TITLE = "Forgot password";
+  private static final String TITLE = "Forgot password";
 
   public DetachedForgotPasswordPage(AttachedForgotPasswordPage page) {
     forgotPasswordPage = page;

@@ -11,10 +11,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
-import junit.framework.Assert;
+
 import org.testng.annotations.Test;
 
 @Test(groups = "auth-login")

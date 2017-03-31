@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterP
 public class DetachedSignInPage extends DetachedWindow implements SignInPage, FacebookAuthContext {
 
   private AttachedSignInPage signInPage;
-  private final static String TITLE = "Sign in";
+  private static final String TITLE = "Sign in";
 
   public DetachedSignInPage() {
     signInPage = new AttachedSignInPage();

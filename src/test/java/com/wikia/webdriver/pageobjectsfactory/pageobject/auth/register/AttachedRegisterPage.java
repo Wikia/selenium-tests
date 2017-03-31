@@ -8,7 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
