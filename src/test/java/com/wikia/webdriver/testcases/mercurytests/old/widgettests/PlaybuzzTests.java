@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
 
 import org.testng.annotations.Test;
-@Test(groups = "Mercury_PollydaddyWidget")
+@Test(groups = "Mercury_PlaybuzzWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
@@ -24,7 +24,6 @@ import org.testng.annotations.Test;
 public class PlaybuzzTests extends NewTestTemplate {
 
   private TopBar topBar;
-  private Navigation navigation;
   private Navigate navigate;
   private PlaybuzzWidgetPageObject widget;
 
@@ -37,7 +36,6 @@ public class PlaybuzzTests extends NewTestTemplate {
 
   private void init() {
     this.topBar = new TopBar(driver);
-    this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
     this.widget = new PlaybuzzWidgetPageObject(driver);
   }

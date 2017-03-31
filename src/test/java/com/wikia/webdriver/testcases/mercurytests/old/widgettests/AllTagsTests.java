@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
@@ -65,6 +66,7 @@ public class AllTagsTests extends NewTestTemplate {
     widgets.add(new GoogleFormWidgetPageObject(driver));
     widgets.add(new PolldaddyWidgetPageObject(driver));
     widgets.add(new PlaybuzzWidgetPageObject(driver));
+    widgets.add(new ApesterWidgetPageObject(driver));
 
     String content = ">>> " + DateTime.now().getMillis() + " <<<";
 

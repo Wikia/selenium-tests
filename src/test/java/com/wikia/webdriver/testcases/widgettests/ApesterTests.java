@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test(groups = "ApesterWidget")
 @InBrowser(browser = Browser.CHROME)
 public class ApesterTests extends NewTestTemplate {
-  private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/ApesterOasisOneWidget";
+  private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "/wiki/ApesterOasis/OneWidget";
   private static final String APESTER_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
       "/wiki/ApesterOasis/MultipleWidgets";
   private static final String APESTER_FORM_INCORRECT_WIDGET_ARTICLE_NAME =
@@ -30,7 +30,7 @@ public class ApesterTests extends NewTestTemplate {
   }
 
   @Test(groups = "ApesterWidgetTest_001")
-  @Execute(onWikia = "mercuryautomationtesting", asUser = User.STAFF)
+  @Execute(onWikia = "mercuryautomationtesting")
   public void ApesterWidgetTest_001_isLoaded() {
     init();
 

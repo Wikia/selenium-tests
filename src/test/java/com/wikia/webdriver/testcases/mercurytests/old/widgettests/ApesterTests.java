@@ -15,7 +15,8 @@ import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 
 import org.testng.annotations.Test;
-@Test(groups = "Mercury_PollydaddyWidget")
+
+@Test(groups = "Mercury_ApesterWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
@@ -24,7 +25,6 @@ import org.testng.annotations.Test;
 public class ApesterTests extends NewTestTemplate {
 
   private TopBar topBar;
-  private Navigation navigation;
   private Navigate navigate;
   private ApesterWidgetPageObject widget;
 
@@ -32,13 +32,12 @@ public class ApesterTests extends NewTestTemplate {
   private static final String
       APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/ApesterMercury/MultipleWidgets";
   private static final String
-      APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/Apestermercury/IncorrectWidget";
+      APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/ApesterMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = APESTER_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
     this.topBar = new TopBar(driver);
-    this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
     this.widget = new ApesterWidgetPageObject(driver);
   }
