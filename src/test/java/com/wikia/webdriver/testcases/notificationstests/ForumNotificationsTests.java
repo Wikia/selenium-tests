@@ -1,11 +1,15 @@
 package com.wikia.webdriver.testcases.notificationstests;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NotificationsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
@@ -61,9 +65,14 @@ public class ForumNotificationsTests extends NewTestTemplate {
 
     forumMainPage.openForumMainPage(wikiURL);
     notifications.showNotifications();
-    String anchoredLink = notifications
-        .getNotificationLink(User.STAFF.getUserName() + " and " + User.USER_2.getUserName()
-            + " replied to your thread on the " + forumBoardTitle.replace("_", " "));
+    String anchoredLink = null;
+    try {
+      anchoredLink = notifications.getNotificationLink(User.STAFF.getUserName() + " and "
+          + User.USER_2.getUserName() + " replied to your thread on the "
+          + URLDecoder.decode(forumBoardTitle, "UTF-8").replace("_", " "));
+    } catch (UnsupportedEncodingException e) {
+      PageObjectLogging.logError("Could not decode forum board name", e);
+    }
     String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
     Assertion.assertEquals(anchor, "#2");
   }
