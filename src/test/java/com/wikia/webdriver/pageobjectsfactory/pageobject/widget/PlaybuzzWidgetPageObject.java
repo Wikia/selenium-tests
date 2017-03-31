@@ -35,12 +35,12 @@ public class PlaybuzzWidgetPageObject extends WidgetPageObject {
   }
 
   @Override
-  public String getTag() {
+  public String getSingleTag() {
     return TAGS[0];
   }
 
   @Override
-  protected String[] getTags() {
+  protected String[] getMultipleTags() {
     return TAGS;
   }
 

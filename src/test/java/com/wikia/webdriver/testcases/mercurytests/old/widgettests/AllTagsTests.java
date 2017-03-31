@@ -71,7 +71,7 @@ public class AllTagsTests extends NewTestTemplate {
     String content = ">>> " + DateTime.now().getMillis() + " <<<";
 
     for (WidgetPageObject widget : widgets) {
-      content += widget.getTag();
+      content += widget.getSingleTag();
     }
 
     ArticleContent articleContent = new ArticleContent();
