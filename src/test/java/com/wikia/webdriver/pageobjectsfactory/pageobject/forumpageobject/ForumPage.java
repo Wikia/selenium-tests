@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-public class ForumPageObject extends WikiBasePageObject {
+public class ForumPage extends WikiBasePageObject {
 
   @FindBy(css = ".button.policies-link")
   private WebElement faqButton;
@@ -26,11 +24,6 @@ public class ForumPageObject extends WikiBasePageObject {
   private WebElement faqModalLoadingState;
 
   private By forumBoardsList = By.cssSelector("ul.boards h4 a");
-
-  public ForumPageObject(WebDriver driver) {
-    super();
-    PageFactory.initElements(driver, this);
-  }
 
   private void openFaqLightBox() {
     wait.forElementVisible(faqButton);
@@ -65,7 +58,7 @@ public class ForumPageObject extends WikiBasePageObject {
   /*
    * this method choose first link on the board which doesn't contain chinese signs
    */
-  public ForumBoardPageObject openForumBoard() {
+  public ForumBoardPage openForumBoard() {
     WebElement forumBoardLink = null;
     for (int i = 0; i < getForumElementsList().size(); i++) {
       if (!getForumElementsList().get(i).toString().contains("%")) {
@@ -77,10 +70,10 @@ public class ForumPageObject extends WikiBasePageObject {
     wait.forElementClickable(forumBoardLink);
     scrollAndClick(forumBoardLink);
     PageObjectLogging.log("openForumBoard", "click on the forum Board", true, driver);
-    return new ForumBoardPageObject(driver);
+    return new ForumBoardPage();
   }
 
-  public ForumBoardPageObject openForumBoard(String forumBoardTitle) {
+  public ForumBoardPage openForumBoard(String forumBoardTitle) {
     int forumNumber = 0;
     List<String> forumNames = getForumNamesList();
     String formattedForumBoardTitle = forumBoardTitle.replace("_", " ");

@@ -61,6 +61,9 @@ public class URLsContent {
   // Mediawiki template url
   public static final String TEMPLATE_NAMESPACE = "Template";
 
+  //B Forum Board namespace
+  public static final String FORUM_BOARD_NAMESPACE = "Board";
+
   // Extra switches - appear after ? in link
   public static final String NOEXTERNALS = "?noexternals=1";
   public static final String ACTION_EDIT = "action=edit";
