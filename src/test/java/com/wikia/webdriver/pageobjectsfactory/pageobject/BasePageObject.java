@@ -347,8 +347,12 @@ public class BasePageObject {
   }
 
   public void openWikiPage() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
+    getUrl(getWikiUrl() + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+  }
+
+  public String getWikiUrl() {
+    return urlBuilder.getUrlForWiki(Configuration.getWikiName());
   }
 
   public void fillInput(WebElement input, String value) {

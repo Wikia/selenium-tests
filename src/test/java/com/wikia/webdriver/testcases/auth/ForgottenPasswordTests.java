@@ -14,6 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import org.testng.annotations.Test;
 
+import javax.jws.soap.SOAPBinding;
+
 @Test(groups = "auth-forgottenPassword")
 public class
 ForgottenPasswordTests extends NewTestTemplate {
@@ -34,40 +36,36 @@ ForgottenPasswordTests extends NewTestTemplate {
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    Assertion.assertFalse(resetPass.newPasswordSetSuccessfully());
+    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
 
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
-    String userName = credentials.userNameForgottenPassword2;
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    AttachedSignInPage signIn = new AttachedSignInPage();
-    signIn.clickForgotPasswordLink();
-    String newPassword = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
+    AttachedSignInPage signIn = new AttachedSignInPage().open();
+    signIn.clickForgotPasswordLink().requestLinkForUsername(User.FORGOTTEN_PASSWORD.getUserName());
+    String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
+    ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
+    resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    signIn.login(userName, newPassword);
+    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
 
-    base.verifyUserLoggedIn(userName);
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
-    String userNameUC = credentials.userNameForgottenPassword3;
-    String userName = userNameUC.toLowerCase();
+    String username = User.FORGOTTEN_PASSWORD.getUserName();
+    String lowercaseUsername = Character.toLowerCase(username.charAt(0)) + username.substring(1);
     MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
-    base.openWikiPage(wikiURL);
-    AttachedSignInPage login = base.openSpecialUserLogin(wikiURL);
-    AttachedSignInPage signIn = new AttachedSignInPage();
-    signIn.clickForgotPasswordLink();
-    String
-        newPassword =
-        base.getPasswordResetLink(credentials.email, credentials.emailPassword);
-    String verifyString = userName.substring(0, 1).toUpperCase() + userName.substring(1);
+    AttachedSignInPage signIn = new AttachedSignInPage().open();
+    signIn.clickForgotPasswordLink().requestLinkForUsername(lowercaseUsername);
+    String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
+    ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
+    resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    signIn.login(userName, newPassword);
-    base.verifyUserLoggedIn(verifyString);
+    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 }

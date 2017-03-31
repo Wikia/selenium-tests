@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.elements.mercury.pages.ErrorPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
@@ -69,8 +71,9 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
     waitAndClick(signInButton);
   }
 
-  @Override public FormPage open() {
-    return null;
+  @Override public AttachedSignInPage open() {
+     getUrl(getWikiUrl() + URLsContent.USER_LOGIN);
+     return this;
   }
 
   @Override public boolean isDisplayed() {
