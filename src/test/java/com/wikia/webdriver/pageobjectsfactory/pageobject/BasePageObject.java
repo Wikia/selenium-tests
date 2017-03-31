@@ -15,7 +15,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -34,6 +33,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
 
 public class BasePageObject {
 
@@ -520,21 +521,37 @@ public class BasePageObject {
   }
 
   private String getTabWithTitle(String title) {
+    return getTabWithCondition(nameToTitle -> nameToTitle.getValue().startsWith(title));
+  }
+
+  private String getOtherTab(String title) {
+    return getTabWithCondition(nameToTitle -> !nameToTitle.getValue().startsWith(title));
+  }
+
+  private String getTabWithCondition(
+    java.util.function.Predicate<? super Pair<String, String>> condition) {
     Optional<String> newTab = driver
       .getWindowHandles()
       .stream()
       .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
-      .filter(nameToTile -> nameToTile.getValue().startsWith(title))
+      .filter(condition)
       .map(Pair::getKey)
       .findFirst();
     return newTab.orElseThrow(() -> new NotFoundException(
       String.format("Tab with title %1$s doesn't exist", title)));
   }
 
+
   public WebDriver switchToWindowWithTitle(String title) {
     PageObjectLogging.log("Switching windows",
       "Switching to window with title: " + title, true);
     return driver.switchTo().window(getTabWithTitle(title));
+  }
+
+  public WebDriver switchAwayFromWindowWithTitle(String title) {
+    PageObjectLogging.log("Switching windows",
+      "Switching away from window with title: " + title, true);
+    return driver.switchTo().window(getOtherTab(title));
   }
 
   public WebDriver switchToMainWindow() {

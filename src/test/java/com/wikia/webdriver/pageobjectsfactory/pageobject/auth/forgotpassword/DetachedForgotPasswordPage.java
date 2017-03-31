@@ -5,11 +5,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 
 public class DetachedForgotPasswordPage extends DetachedWindow implements ForgotPasswordPage {
 
-  private ForgotPasswordPage forgotPasswordPage;
+  private AttachedForgotPasswordPage forgotPasswordPage;
 
   private String title = ForgotPasswordPage.pageTitle;
 
-  public DetachedForgotPasswordPage(ForgotPasswordPage page) {
+  public DetachedForgotPasswordPage(AttachedForgotPasswordPage page) {
     forgotPasswordPage = page;
   }
 
@@ -44,7 +44,9 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   @Override public void requestLinkForUsername(String username) {
     gainFocus(title);
     forgotPasswordPage.requestLinkForUsername(username);
-    loseFocus();
+    if(forgotPasswordPage.isConfirmationDisplayed()) {
+      loseFocus(title);
+    }
   }
 
 }

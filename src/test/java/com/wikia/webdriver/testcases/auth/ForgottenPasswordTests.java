@@ -34,7 +34,7 @@ ForgottenPasswordTests extends NewTestTemplate {
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
+    Assertion.assertFalse(resetPass.newPasswordSetSuccessfully());
 
   }
 

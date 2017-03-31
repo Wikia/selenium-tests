@@ -31,7 +31,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
     authContext = new AuthPageContext();
   }
 
-  public ForgotPasswordPage clickForgotPasswordLink() {
+  public AttachedForgotPasswordPage clickForgotPasswordLink() {
     waitAndClick(forgottenPasswordLink);
     return new AttachedForgotPasswordPage();
   }

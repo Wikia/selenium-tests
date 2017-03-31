@@ -10,8 +10,10 @@ public abstract class DetachedWindow extends BasePageObject {
     }
   }
 
-  protected void loseFocus() {
-    switchToMainWindow();
+  protected void loseFocus(String title) {
+    if(driver.getTitle().startsWith(title)) {
+      switchAwayFromWindowWithTitle(title);
+    }
   }
 
 }

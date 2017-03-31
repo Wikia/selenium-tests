@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Faceb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.DetachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
@@ -24,7 +25,7 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
 
   @Override public ForgotPasswordPage clickForgotPasswordLink() {
     gainFocus(title);
-    ForgotPasswordPage forgotPassword = signInPage.clickForgotPasswordLink();
+    AttachedForgotPasswordPage forgotPassword = signInPage.clickForgotPasswordLink();
     return new DetachedForgotPasswordPage(forgotPassword);
   }
 

@@ -13,8 +13,10 @@ public class ResetPasswordPage extends BasePageObject implements FormPage {
   private WebElement newPasswordConfirmationInput;
   @FindBy(id = "resetPasswordSubmit")
   private WebElement resetPasswordButton;
+  @FindBy (css = ".second-card .auth-header")
+  private WebElement secondCardHeader;
 
-  private static final String PASSWORD_RESET_SUCCESS = "You can now sign in with your new password.";
+  private static final String PASSWORD_RESET_SUCCESS = "Your password has been reset.";
 
   private AuthPageContext authContext;
 
@@ -58,6 +60,6 @@ public class ResetPasswordPage extends BasePageObject implements FormPage {
   }
 
   public boolean newPasswordSetSuccessfully() {
-    return authContext.containsText(PASSWORD_RESET_SUCCESS);
+    return authContext.confirmationDisplayed(PASSWORD_RESET_SUCCESS);
   }
 }
