@@ -6,57 +6,66 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class VKWidgetPageObject extends WidgetPageObject {
+/**
+ * Created by ryba on 30/03/2017.
+ */
+public class PlaybuzzWidgetPageObject extends WidgetPageObject {
 
-  @FindBy(css = ".widget-vk")
-  private List<WebElement> widgetWrapperList;
-  @FindBy(css = ".widget-vk iframe")
+  @FindBy(css = ".pb_feed iframe")
   private List<WebElement> widgetIFrameList;
-  @FindBy(css = ".widget_body")
-  private WebElement widgetBody;
 
-  private static final String TAG_NAME = "vk";
+  @FindBy(css = ".pb_feed")
+  private List<WebElement> widgetWrapperList;
+
+  @FindBy(css = "body")
+  private List<WebElement> widgetBody;
+
   private static final String[] TAGS = {
-      "<vk group-id=\"59925174\" />",
-      "<vk group-id=\"53477573\" />",
+      "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />",
+      "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />"
   };
-  private static final String INCORRECT_TAG = "<vk />";
-  private static final String ERROR_MESSAGE =
-      "Failed to render the VK widget. Please check if all required parameters are in place.";
 
-  public VKWidgetPageObject(WebDriver driver) {
+  public PlaybuzzWidgetPageObject(WebDriver driver) {
     super(driver);
   }
 
+  @Override
   protected String getTagName() {
-    return TAG_NAME;
+    return "playbuzz";
   }
 
+  @Override
   public String getSingleTag() {
     return TAGS[0];
   }
 
+  @Override
   protected String[] getMultipleTags() {
     return TAGS;
   }
 
+  @Override
   protected String getIncorrectTag() {
-    return INCORRECT_TAG;
+    return "<playbuzz />";
   }
 
+  @Override
   protected String getErrorMessage() {
-    return ERROR_MESSAGE;
+    return "Failed to render the Playbuzz widget. Please check if all required parameters are in place.";
   }
 
+  @Override
   protected List<WebElement> getWidgetWrapperList() {
     return widgetWrapperList;
   }
 
+  @Override
   protected List<WebElement> getWidgetIFrameList() {
     return widgetIFrameList;
   }
 
+  @Override
   protected WebElement getWidgetBody() {
-    return widgetBody;
+    return widgetBody.get(0);
   }
 }
