@@ -26,7 +26,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
@@ -239,10 +239,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialCreatePage();
   }
 
-  public ForumPageObject openForumMainPage(String wikiURL) {
+  public ForumPage openForumMainPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
     PageObjectLogging.log("openForumPage", "forum page opened", true);
-    return new ForumPageObject(driver);
+    return new ForumPage();
   }
 
   public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL) {
