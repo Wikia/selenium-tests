@@ -99,5 +99,3 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   }
 
 }
-
-

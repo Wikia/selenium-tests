@@ -5,9 +5,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 
 public class DetachedForgotPasswordPage extends DetachedWindow implements ForgotPasswordPage {
 
-  private AttachedForgotPasswordPage forgotPasswordPage;
-
   private static final String TITLE = "Forgot password";
+  private AttachedForgotPasswordPage forgotPasswordPage;
 
   public DetachedForgotPasswordPage(AttachedForgotPasswordPage page) {
     forgotPasswordPage = page;
@@ -18,15 +17,15 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   }
 
   @Override public String getError() {
-    gainFocus(TITLE);
+    gainFocus();
     return forgotPasswordPage.getError();
 
   }
 
   @Override public void submit() {
-    gainFocus(TITLE);
+    gainFocus();
     forgotPasswordPage.submit();
-    loseFocus(TITLE);
+    loseFocus();
   }
 
   @Override public FormPage open() {
@@ -34,7 +33,7 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   }
 
   @Override public boolean isDisplayed() {
-    gainFocus(TITLE);
+    gainFocus();
     return forgotPasswordPage.isDisplayed();
   }
 
@@ -43,11 +42,14 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
   }
 
   @Override public void requestLinkForUsername(String username) {
-    gainFocus(TITLE);
+    gainFocus();
     forgotPasswordPage.requestLinkForUsername(username);
     if(forgotPasswordPage.isConfirmationDisplayed()) {
-      loseFocus(TITLE);
+      loseFocus();
     }
   }
 
+  @Override protected String getTitle() {
+    return TITLE;
+  }
 }

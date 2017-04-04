@@ -23,21 +23,21 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
   }
 
   @Override public ForgotPasswordPage clickForgotPasswordLink() {
-    gainFocus(TITLE);
+    gainFocus();
     AttachedForgotPasswordPage forgotPassword = signInPage.clickForgotPasswordLink();
     return new DetachedForgotPasswordPage(forgotPassword);
   }
 
   @Override public SignInPage typePassword(String password) {
-    gainFocus(TITLE);
+    gainFocus();
     signInPage.typePassword(password);
     return this;
   }
 
   @Override public void login(String username, String password) {
-    gainFocus(TITLE);
+    gainFocus();
     signInPage.login(username, password);
-    loseFocus(TITLE);
+    loseFocus();
   }
 
   @Override public void login(User user) {
@@ -45,17 +45,17 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
   }
 
   @Override public RegisterPage navigateToRegister() {
-    gainFocus(TITLE);
+    gainFocus();
     return signInPage.navigateToRegister();
   }
 
   @Override public String getError() {
-    gainFocus(TITLE);
+    gainFocus();
     return signInPage.getError();
   }
 
   @Override public void submit() {
-    gainFocus(TITLE);
+    gainFocus();
     signInPage.submit();
   }
 
@@ -64,22 +64,26 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
   }
 
   @Override public boolean isDisplayed() {
-    gainFocus(TITLE);
+    gainFocus();
     return signInPage.isDisplayed();
   }
 
   @Override public boolean submitButtonNotClickable() {
-    gainFocus(TITLE);
+    gainFocus();
     return signInPage.submitButtonNotClickable();
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    gainFocus(TITLE);
+    gainFocus();
     return signInPage.clickFacebookSignUp();
   }
 
   public boolean isConnectWithFacebookButtonVisible() {
-    gainFocus(TITLE);
+    gainFocus();
     return signInPage.isConnectWithFacebookButtonVisible();
+  }
+
+  @Override protected String getTitle() {
+    return TITLE;
   }
 }

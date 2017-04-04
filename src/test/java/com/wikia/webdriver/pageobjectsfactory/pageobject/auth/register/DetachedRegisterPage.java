@@ -22,7 +22,7 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   }
 
   @Override public boolean isDisplayed() {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.isDisplayed();
   }
 
@@ -31,48 +31,52 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   }
 
   @Override public RegisterPage typeEmailAddress(String email) {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.typeEmailAddress(email);
   }
 
   @Override public RegisterPage typeUsername(String username) {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.typeUsername(username);
   }
 
   @Override public RegisterPage typePassword(String password) {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.typePassword(password);
   }
 
   @Override public RegisterPage typeBirthdate(String month, String day, String year) {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.typeBirthdate(month, day, year);
   }
 
   @Override public String getError() {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.getError();
   }
 
   @Override public void submit() {
-    gainFocus(TITLE);
+    gainFocus();
     registerPage.submit();
-    loseFocus(TITLE);
+    loseFocus();
   }
 
   @Override public DetachedSignInPage navigateToSignIn() {
-    gainFocus(TITLE);
+    gainFocus();
     return new DetachedSignInPage(registerPage.navigateToSignIn());
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.clickFacebookSignUp();
   }
 
   public boolean isConnectWithFacebookButtonVisible() {
-    gainFocus(TITLE);
+    gainFocus();
     return registerPage.isConnectWithFacebookButtonVisible();
+  }
+
+  @Override protected String getTitle() {
+    return TITLE;
   }
 }

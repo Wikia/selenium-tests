@@ -87,5 +87,3 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     return !wait.forElementVisible(signInButton).isEnabled();
   }
 }
-
-
