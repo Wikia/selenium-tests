@@ -12,6 +12,7 @@ public class URLsContent {
   // Special Urls - links to special pages
   public static final String USER_LOGIN = "/signin";
   public static final String USER_SIGNUP = "/register";
+  public static final String USER_FORGOT_PASSWORD = "/forgot-password";
   public static final String SPECIAL_NEW_FILES = "/wiki/Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "/wiki/Special:Videos";
   public static final String SPECIAL_UPLOAD = "/wiki/Special:Upload";

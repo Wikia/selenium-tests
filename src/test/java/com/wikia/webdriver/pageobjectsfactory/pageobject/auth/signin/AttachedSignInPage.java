@@ -15,11 +15,11 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
 
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
-  @FindBy(css = "#loginUsername")
+  @FindBy(id = "loginUsername")
   private WebElement usernameField;
-  @FindBy(css = "#loginPassword")
+  @FindBy(id = "loginPassword")
   private WebElement passwordField;
-  @FindBy(css = "#loginSubmit")
+  @FindBy(id = "loginSubmit")
   private WebElement signInButton;
 
   private AuthPageContext authContext;

@@ -12,13 +12,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
 
-  @FindBy(css = "#signupEmail")
+  @FindBy(id = "signupEmail")
   private WebElement emailField;
-  @FindBy(css = "#signupUsername")
+  @FindBy(id = "signupUsername")
   private WebElement usernameField;
-  @FindBy(css = "#signupPassword")
+  @FindBy(id = "signupPassword")
   private WebElement passwordField;
-  @FindBy(css = "#signupBirthDate")
+  @FindBy(id = "signupBirthDate")
   private WebElement birthdateField;
   @FindBy(css = ".birth-month")
   private WebElement birthMonthField;
@@ -26,7 +26,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   private WebElement birthDayField;
   @FindBy(css = ".birth-year")
   private WebElement birthYearField;
-  @FindBy(css = "#signupSubmit")
+  @FindBy(id = "signupSubmit")
   private WebElement submitButton;
 
   private AuthPageContext authContext;
