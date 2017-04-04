@@ -23,7 +23,8 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 )
 public class LoginTests extends NewTestTemplate {
 
-    private String expectedErrorMessage = "We don't recognize these credentials. Try again or register a new account.";
+    private static final String EXPECTED_ERROR_MESSAGE =
+      "We don't recognize these credentials. Try again or register a new account.";
 
     @Test(groups = "login-anonCanLogInAsRegisteredUser")
     public void anonCanLogInAsRegisteredUser() {
@@ -51,7 +52,7 @@ public class LoginTests extends NewTestTemplate {
             .navigateToSignIn();
 
     signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
-    assertTrue(signIn.getError().contains(expectedErrorMessage));
+    assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
     }
 
     @Test(groups = "login-anonCanNotLogInWithBlankPassword")
@@ -78,7 +79,7 @@ public class LoginTests extends NewTestTemplate {
             .navigateToSignIn();
 
         signIn.login(String.valueOf(DateTime.now().getMillis()), Configuration.getCredentials().password10);
-        assertTrue(signIn.getError().contains(expectedErrorMessage));
+        assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
     }
 
     @Test(groups = "login-anonCanNotLogInWithBlankUsername")

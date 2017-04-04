@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.signuptests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -15,6 +14,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSig
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
+
+import static  com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static  com.wikia.webdriver.common.core.Assertion.assertStringContains;
 
 @Test(groups = "auth-signUp")
 public class SignUpTests extends NewTestTemplate {
@@ -36,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
         Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
         Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
     register.submit();
-    Assertion.assertEquals(register.getError(), "We cannot complete your registration at this time");
+    assertEquals(register.getError(), "We cannot complete your registration at this time");
   }
 
   @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
@@ -53,7 +55,7 @@ public class SignUpTests extends NewTestTemplate {
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
 
     register.submit();
-    Assertion.assertStringContains(register.getError(), "Username is taken");
+    assertStringContains(register.getError(), "Username is taken");
 
   }
 

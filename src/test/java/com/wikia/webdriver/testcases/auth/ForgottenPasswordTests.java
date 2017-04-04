@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -13,6 +12,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forgottenPassword")
 public class ForgottenPasswordTests extends NewTestTemplate {
@@ -33,8 +34,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
-
+    assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
@@ -47,8 +47,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
-
+    assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName")
@@ -63,6 +62,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
 
-    Assertion.assertTrue(resetPass.newPasswordSetSuccessfully());
+    assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 }

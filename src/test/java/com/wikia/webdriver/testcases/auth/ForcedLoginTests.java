@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -17,6 +16,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
@@ -62,7 +63,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     new AttachedSignInPage().login(credentials.userName10, credentials.password10);
 
     base.verifyUserLoggedIn(credentials.userName10);
-    Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
+    assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
@@ -76,7 +77,7 @@ public class ForcedLoginTests extends NewTestTemplate {
     new AttachedSignInPage().login(credentials.userName10, credentials.password10);
 
     base.verifyUserLoggedIn(credentials.userName10);
-    Assertion.assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
+    assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingPhoto")
@@ -89,8 +90,8 @@ public class ForcedLoginTests extends NewTestTemplate {
 
     authModal.login(credentials.userName10, credentials.password10);
     edit.verifyUserLoggedIn(credentials.userName10);
-    Assertion.assertTrue(edit.isStringInURL(articleName));
-    Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
+    assertTrue(edit.isStringInURL(articleName));
+    assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
     addPhoto.verifyAddPhotoModal();
   }

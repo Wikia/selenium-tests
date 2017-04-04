@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
@@ -14,6 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-login")
 public class LoginTests extends NewTestTemplate {
@@ -68,6 +69,6 @@ public class LoginTests extends NewTestTemplate {
     Helios.deleteAllTokens(User.USER_12);
 
     article.refreshPageAddingCacheBuster();
-    Assertion.assertTrue(article.getGlobalNavigation().isUserLoggedOut());
+    assertTrue(article.getGlobalNavigation().isUserLoggedOut());
   }
 }
