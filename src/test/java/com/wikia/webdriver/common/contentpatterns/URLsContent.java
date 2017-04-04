@@ -130,7 +130,7 @@ public class URLsContent {
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
 
-  public static final String LOGOUT_URL = EXTERNAL_URL + "/logout";
+  public static final String USER_SIGNOUT = EXTERNAL_URL + "/logout";
 
   // Embed map URL for Interactive Maps
   public static final String EMBEDED_MAP_ARTICLE = "EmbedMap";

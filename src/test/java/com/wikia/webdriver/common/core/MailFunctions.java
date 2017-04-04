@@ -22,6 +22,9 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class MailFunctions {
 
+  private static final String PASSWORD_RESET_LINK_PATTERN =
+    ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
+
   private MailFunctions() {
   }
 
@@ -131,13 +134,20 @@ public class MailFunctions {
   }
 
   public static String getPasswordResetLinkFromEmailContent(String mailContent) {
-    String linkPattern = ".*<a[^>]*href3D\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
-    Pattern p = Pattern.compile(linkPattern, Pattern.DOTALL);
-    Matcher m = p.matcher(mailContent.replace("=", ""));
+    // Pattern.DOTALL flag forces dot in regex to also match line terminators
+    Pattern p = Pattern.compile(PASSWORD_RESET_LINK_PATTERN, Pattern.DOTALL);
+    /*
+      remove "=" character except when followed by "3D" hex sequence
+      and replace "=3D" sequence with a single "=" character
+      because of RFC-2045 line breaks and encoding in IMAP
+      see: https://tools.ietf.org/html/rfc2045#section-6.7
+    */
+    String formattedContent = mailContent.replaceAll("=(?!3D)", "").replaceAll("=3D", "=");
+    Matcher m = p.matcher(formattedContent);
     if (m.find()) {
-      return m.group("url").replace("click?upn3D", "click?upn=");
+      return m.group("url");
     } else {
-      throw new WebDriverException("There was no match in the following content: \n" + mailContent);
+      throw new WebDriverException("There was no match in the following content: \n" + formattedContent);
     }
   }
 

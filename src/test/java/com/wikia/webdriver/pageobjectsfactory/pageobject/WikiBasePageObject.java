@@ -463,7 +463,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void logoutFromAnywhere() {
-    driver.get(URLsContent.LOGOUT_URL);
+    driver.get(URLsContent.USER_SIGNOUT);
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
