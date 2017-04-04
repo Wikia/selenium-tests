@@ -32,13 +32,7 @@ public class Replies extends BasePageObject {
   public Replies waitForReplyToAppearWith(final String text) {
     new FluentWait<>(driver)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-        .until(new Predicate<WikiaWebDriver>() {
-          @Override
-          public boolean apply(@Nullable WikiaWebDriver input) {
-            WebElement element = input.findElement(By.cssSelector(".discussion-reply .discussion-content"));
-            return element.getText().contains(text);
-          }
-        });
+        .until((Predicate<WikiaWebDriver>) input -> wait.forElementPresent(By.cssSelector(".discussion-reply .discussion-content")).getText().contains(text));
     return this;
   }
 }

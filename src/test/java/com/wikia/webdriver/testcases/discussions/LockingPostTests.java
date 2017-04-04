@@ -69,7 +69,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -78,7 +78,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -87,7 +87,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void anonymousUserOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -127,7 +127,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -136,7 +136,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -145,7 +145,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -185,7 +185,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
@@ -194,9 +194,9 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"}, invocationCount = 20)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
@@ -237,7 +237,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
 
@@ -248,7 +248,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
@@ -311,7 +311,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
 
@@ -322,7 +322,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopCanUnlockPostLockedByStaffOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByStaff();
 
@@ -332,7 +332,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
@@ -343,7 +343,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
@@ -408,7 +408,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
 
@@ -419,7 +419,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
 
@@ -429,7 +429,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByStaff();
 
@@ -438,9 +438,9 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"}, invocationCount = 20)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     final PostDetailsPage page = openPageWithPostUnlockedByStaff();
     final String text = addReplyOnDesktop(page);
