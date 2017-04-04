@@ -35,11 +35,11 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
     return TAG_NAME;
   }
 
-  public String getTag() {
+  public String getSingleTag() {
     return TAGS[0];
   }
 
-  protected String[] getTags() {
+  protected String[] getMultipleTags() {
     return TAGS;
   }
 

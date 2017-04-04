@@ -163,6 +163,8 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.AllTagsTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.ApesterTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PlaybuzzTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PollsnackTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PolldaddyTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.SoundCloudTests"/>
@@ -232,7 +234,9 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.AllTagsTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.ApesterTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.PollsnackTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.PlaybuzzTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.PolldaddyTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SpotifyTests"/>
