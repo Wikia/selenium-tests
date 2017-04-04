@@ -20,7 +20,7 @@ import org.openqa.selenium.WebDriverException;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-public class MailFunctions {
+public class EmailUtils {
 
   private static final String PASSWORD_RESET_LINK =
     ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
@@ -29,7 +29,7 @@ public class MailFunctions {
   private static Pattern PASSWORD_RESET_PATTERN =
     Pattern.compile(PASSWORD_RESET_LINK, Pattern.DOTALL);
 
-  private MailFunctions() {
+  private EmailUtils() {
   }
 
   public static String getFirstEmailContent(String userName, String password, String subject) {

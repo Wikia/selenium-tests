@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -431,8 +431,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getPasswordResetLink(String email, String password) {
-    String passwordResetEmail = MailFunctions.getFirstEmailContent(email, password, "Reset your Fandom password");
-    String resetLink = MailFunctions.getPasswordResetLinkFromEmailContent(passwordResetEmail);
+    String passwordResetEmail = EmailUtils
+      .getFirstEmailContent(email, password, "Reset your Fandom password");
+    String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
     PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
         true);
 

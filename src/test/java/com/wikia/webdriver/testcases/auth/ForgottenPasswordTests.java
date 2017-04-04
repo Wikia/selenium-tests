@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -21,7 +21,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordFromAuthModal")
   public void anonCanRemindPasswordFromAuthModal() {
-        MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
+        EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     DetachedSignInPage loginModal = new DetachedSignInPage(new NavigationBar(driver).clickOnSignIn());
@@ -39,7 +39,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   @Test(groups = "ForgottenPassword_anonCanRemindPasswordOnUserLoginSpecialPage")
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
-    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
+    EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedSignInPage signIn = new AttachedSignInPage().open();
     signIn.clickForgotPasswordLink().requestLinkForUsername(User.FORGOTTEN_PASSWORD.getUserName());
@@ -55,7 +55,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
     String username = User.FORGOTTEN_PASSWORD.getUserName();
     String lowercaseUsername = Character.toLowerCase(username.charAt(0)) + username.substring(1);
-    MailFunctions.deleteAllEmails(credentials.email, credentials.emailPassword);
+    EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedSignInPage signIn = new AttachedSignInPage().open();
     signIn.clickForgotPasswordLink().requestLinkForUsername(lowercaseUsername);

@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -85,9 +85,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
   public void changeEmailAddress() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
 
-    String newEmailAddress = MailFunctions.getEmail(editPrefPage.getEmailAdress());
+    String newEmailAddress = EmailUtils.getEmail(editPrefPage.getEmailAdress());
 
-    MailFunctions.deleteAllEmails(USERNAME, PASSWORD);
+    EmailUtils.deleteAllEmails(USERNAME, PASSWORD);
 
     Assertion.assertNotEquals(newEmailAddress, editPrefPage.getEmailAdress(),
         "New email and old email SHOULD NOT be the same");

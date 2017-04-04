@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -60,9 +60,9 @@ public class UserAndRights extends NewTestTemplate {
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.openEmailSection();
-    MailFunctions.deleteAllEmails(username, password);
+    EmailUtils.deleteAllEmails(username, password);
 
-    String newEmailAddress = MailFunctions.getEmail(editPrefPage.getEmailAdress());
+    String newEmailAddress = EmailUtils.getEmail(editPrefPage.getEmailAdress());
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
