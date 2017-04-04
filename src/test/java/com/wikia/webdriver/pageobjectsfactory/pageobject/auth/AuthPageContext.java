@@ -1,5 +1,4 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
@@ -29,8 +28,8 @@ public class AuthPageContext extends WikiBasePageObject {
     return fbAuthContext.clickFacebookSignUp();
   }
 
-  public boolean isConnetctWithFacebookButtonVisible() {
-    return fbAuthContext.isConnetctWithFacebookButtonVisible();
+  public boolean isConnectWithFacebookButtonVisible() {
+    return fbAuthContext.isConnectWithFacebookButtonVisible();
   }
 
   public AttachedSignInPage navigateToSignIn() {

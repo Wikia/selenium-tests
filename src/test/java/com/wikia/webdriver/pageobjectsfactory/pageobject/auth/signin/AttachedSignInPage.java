@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
@@ -80,8 +79,8 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     return authContext.clickFacebookSignUp();
   }
 
-  public boolean isConnetctWithFacebookButtonVisible() {
-    return authContext.isConnetctWithFacebookButtonVisible();
+  public boolean isConnectWithFacebookButtonVisible() {
+    return authContext.isConnectWithFacebookButtonVisible();
   }
 
   @Override public boolean submitButtonNotClickable() {

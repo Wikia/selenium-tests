@@ -28,7 +28,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   public void facebookButtonIsVisibleOnSignUpPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedRegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
-    assertTrue(registerPage.isConnetctWithFacebookButtonVisible());
+    assertTrue(registerPage.isConnectWithFacebookButtonVisible());
 
   }
 
@@ -36,7 +36,7 @@ public class FacebookButtonTests extends NewTestTemplate {
   public void facebookButtonIsVisibleOnLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
-    assertTrue(signInPage.isConnetctWithFacebookButtonVisible());
+    assertTrue(signInPage.isConnectWithFacebookButtonVisible());
   }
 
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnForcedLoginModal")
@@ -47,7 +47,7 @@ public class FacebookButtonTests extends NewTestTemplate {
     specialPage.addPhoto();
 
     DetachedRegisterPage registerPage = new DetachedRegisterPage();
-    assertTrue(registerPage.isConnetctWithFacebookButtonVisible());
+    assertTrue(registerPage.isConnectWithFacebookButtonVisible());
   }
 
 

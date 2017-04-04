@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.AttachedForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.DetachedForgotPasswordPage;
@@ -79,8 +78,8 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
     return signInPage.clickFacebookSignUp();
   }
 
-  public boolean isConnetctWithFacebookButtonVisible() {
+  public boolean isConnectWithFacebookButtonVisible() {
     gainFocus(TITLE);
-    return signInPage.isConnetctWithFacebookButtonVisible();
+    return signInPage.isConnectWithFacebookButtonVisible();
   }
 }

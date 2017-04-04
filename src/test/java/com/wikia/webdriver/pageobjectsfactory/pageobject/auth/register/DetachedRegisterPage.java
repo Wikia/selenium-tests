@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage {
@@ -72,8 +71,8 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     return registerPage.clickFacebookSignUp();
   }
 
-  public boolean isConnetctWithFacebookButtonVisible() {
+  public boolean isConnectWithFacebookButtonVisible() {
     gainFocus(TITLE);
-    return registerPage.isConnetctWithFacebookButtonVisible();
+    return registerPage.isConnectWithFacebookButtonVisible();
   }
 }

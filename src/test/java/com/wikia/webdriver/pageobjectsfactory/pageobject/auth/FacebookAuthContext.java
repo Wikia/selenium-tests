@@ -9,17 +9,15 @@ import org.openqa.selenium.support.FindBy;
 public class FacebookAuthContext extends BasePageObject {
 
   @FindBy(css = ".signup-provider-facebook")
-  private WebElement facebookSignUpButton;
-  @FindBy(css = ".signup-providers li a")
   private WebElement connectWithFacebookButton;
 
   protected FacebookSignupModalComponentObject clickFacebookSignUp() {
-    wait.forElementClickable(facebookSignUpButton).click();
+    wait.forElementClickable(connectWithFacebookButton).click();
     PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
     return new FacebookSignupModalComponentObject();
   }
 
-  protected boolean isConnetctWithFacebookButtonVisible() {
+  protected boolean isConnectWithFacebookButtonVisible() {
     return wait.forElementVisible(connectWithFacebookButton).isDisplayed();
   }
 
