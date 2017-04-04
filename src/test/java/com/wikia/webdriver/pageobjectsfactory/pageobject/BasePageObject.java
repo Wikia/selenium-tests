@@ -542,19 +542,19 @@ public class BasePageObject {
       .map(Pair::getKey)
       .findFirst();
     return newTab.orElseThrow(() -> new NotFoundException(
-      String.format("Tab with title %1$s doesn't exist", title)));
+      String.format("Tab with title %s doesn't exist", title)));
   }
 
 
   public WebDriver switchToWindowWithTitle(String title) {
     PageObjectLogging.log("Switching windows",
-      "Switching to window with title: " + title, true);
+      String.format("Switching to window with title: %s", title), true);
     return driver.switchTo().window(getTabWithTitle(title));
   }
 
   public WebDriver switchAwayFromWindowWithTitle(String title) {
     PageObjectLogging.log("Switching windows",
-      "Switching away from window with title: " + title, true);
+      String.format("Switching away from window with title: %s", title), true);
     return driver.switchTo().window(getOtherTab(title));
   }
 
