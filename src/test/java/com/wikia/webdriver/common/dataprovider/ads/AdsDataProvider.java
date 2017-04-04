@@ -612,6 +612,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidVelesAdapter() {
+    return new Object[][]{
+        {"project43","SyntheticTests/Cap", 333201132},
+    };
+  }
+
+  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
