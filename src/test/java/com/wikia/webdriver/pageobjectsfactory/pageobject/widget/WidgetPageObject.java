@@ -22,12 +22,12 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
 
   protected abstract String getTagName();
 
-  public abstract String getTag();
+  public abstract String getSingleTag();
 
   /**
    * Get all tags defined in the widget page object
    */
-  protected abstract String[] getTags();
+  protected abstract String[] getMultipleTags();
 
   protected abstract String getIncorrectTag();
 
@@ -41,7 +41,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
 
   public WidgetPageObject create(String articleName) {
     ArticleContent articleContent = new ArticleContent();
-    articleContent.push(getTag(), articleName);
+    articleContent.push(getSingleTag(), articleName);
     return this;
   }
 
@@ -54,7 +54,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
 
     articleContent.clear(articleName);
 
-    for (String tag : getTags()) {
+    for (String tag : getMultipleTags()) {
       text += tag + "\n";
     }
 
@@ -93,7 +93,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
    */
   public boolean areLoaded() {
     boolean result = true;
-    String[] tags = getTags();
+    String[] tags = getMultipleTags();
     for (int i = 0; i < tags.length; i++) {
       if (!isWidgetVisible(i)) {
         result = false;
