@@ -22,8 +22,12 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class MailFunctions {
 
-  private static final String PASSWORD_RESET_LINK_PATTERN =
+  private static final String PASSWORD_RESET_LINK =
     ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
+
+  // Pattern.DOTALL flag forces dot in regex to also match line terminators
+  private static Pattern PASSWORD_RESET_PATTERN =
+    Pattern.compile(PASSWORD_RESET_LINK, Pattern.DOTALL);
 
   private MailFunctions() {
   }
@@ -134,8 +138,6 @@ public class MailFunctions {
   }
 
   public static String getPasswordResetLinkFromEmailContent(String mailContent) {
-    // Pattern.DOTALL flag forces dot in regex to also match line terminators
-    Pattern p = Pattern.compile(PASSWORD_RESET_LINK_PATTERN, Pattern.DOTALL);
     /*
       remove "=" character except when followed by "3D" hex sequence
       and replace "=3D" sequence with a single "=" character
@@ -143,7 +145,7 @@ public class MailFunctions {
       see: https://tools.ietf.org/html/rfc2045#section-6.7
     */
     String formattedContent = mailContent.replaceAll("=(?!3D)", "").replaceAll("=3D", "=");
-    Matcher m = p.matcher(formattedContent);
+    Matcher m = PASSWORD_RESET_PATTERN.matcher(formattedContent);
     if (m.find()) {
       return m.group("url");
     } else {
