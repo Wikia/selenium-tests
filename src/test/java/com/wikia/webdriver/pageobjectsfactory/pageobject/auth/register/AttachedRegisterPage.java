@@ -11,8 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSig
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedRegisterPage extends BasePageObject implements RegisterPage,
-  FacebookAuthContext {
+public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
 
   @FindBy(css = "#signupEmail")
   private WebElement emailField;
@@ -92,11 +91,11 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     return new FormError().getError();
   }
 
-  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+  public FacebookSignupModalComponentObject clickFacebookSignUp() {
     return authContext.clickFacebookSignUp();
   }
 
-  @Override public boolean isConnetctWithFacebookButtonVisible() {
+  public boolean isConnetctWithFacebookButtonVisible() {
     return authContext.isConnetctWithFacebookButtonVisible();
   }
 

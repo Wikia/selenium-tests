@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterP
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AttachedSignInPage extends BasePageObject implements SignInPage, FacebookAuthContext {
+public class AttachedSignInPage extends BasePageObject implements SignInPage {
 
   @FindBy(css = ".forgotten-password")
   private WebElement forgottenPasswordLink;
@@ -76,11 +76,11 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage, Fa
     return authContext.isHeaderDisplayed();
   }
 
-  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+  public FacebookSignupModalComponentObject clickFacebookSignUp() {
     return authContext.clickFacebookSignUp();
   }
 
-  @Override public boolean isConnetctWithFacebookButtonVisible() {
+  public boolean isConnetctWithFacebookButtonVisible() {
     return authContext.isConnetctWithFacebookButtonVisible();
   }
 

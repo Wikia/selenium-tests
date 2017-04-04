@@ -8,12 +8,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSig
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AuthPageContext extends WikiBasePageObject implements FacebookAuthContext {
+public class AuthPageContext extends WikiBasePageObject {
 
-  @FindBy(css = ".signup-provider-facebook")
-  private WebElement facebookSignUpButton;
-  @FindBy(css = ".signup-providers li a")
-  private WebElement connectWithFacebookButton;
   @FindBy(css = ".register-page .header-callout-link")
   private WebElement linkToSignInForm;
   @FindBy(css = ".signin-page .header-callout-link")
@@ -23,14 +19,18 @@ public class AuthPageContext extends WikiBasePageObject implements FacebookAuthC
   @FindBy(css = ".second-card .auth-header")
   private WebElement secondCardHeader;
 
-  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
-    wait.forElementClickable(facebookSignUpButton).click();
-    PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
-    return new FacebookSignupModalComponentObject();
+  private FacebookAuthContext fbAuthContext;
+
+  public AuthPageContext() {
+    fbAuthContext = new FacebookAuthContext();
   }
 
-  @Override public boolean isConnetctWithFacebookButtonVisible() {
-    return wait.forElementVisible(connectWithFacebookButton).isDisplayed();
+  public FacebookSignupModalComponentObject clickFacebookSignUp() {
+    return fbAuthContext.clickFacebookSignUp();
+  }
+
+  public boolean isConnetctWithFacebookButtonVisible() {
+    return fbAuthContext.isConnetctWithFacebookButtonVisible();
   }
 
   public AttachedSignInPage navigateToSignIn() {

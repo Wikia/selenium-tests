@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.Det
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.forgotpassword.ForgotPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 
-public class DetachedSignInPage extends DetachedWindow implements SignInPage, FacebookAuthContext {
+public class DetachedSignInPage extends DetachedWindow implements SignInPage {
 
   private AttachedSignInPage signInPage;
   private static final String TITLE = "Sign in";
@@ -74,12 +74,12 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage, Fa
     return signInPage.submitButtonNotClickable();
   }
 
-  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+  public FacebookSignupModalComponentObject clickFacebookSignUp() {
     gainFocus(TITLE);
     return signInPage.clickFacebookSignUp();
   }
 
-  @Override public boolean isConnetctWithFacebookButtonVisible() {
+  public boolean isConnetctWithFacebookButtonVisible() {
     gainFocus(TITLE);
     return signInPage.isConnetctWithFacebookButtonVisible();
   }

@@ -5,8 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FacebookAuthContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
-public class DetachedRegisterPage extends DetachedWindow implements RegisterPage,
-  FacebookAuthContext {
+public class DetachedRegisterPage extends DetachedWindow implements RegisterPage {
 
   private AttachedRegisterPage registerPage;
   private static final String TITLE = "Join Fandom Today";
@@ -68,12 +67,12 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     return new DetachedSignInPage(registerPage.navigateToSignIn());
   }
 
-  @Override public FacebookSignupModalComponentObject clickFacebookSignUp() {
+  public FacebookSignupModalComponentObject clickFacebookSignUp() {
     gainFocus(TITLE);
     return registerPage.clickFacebookSignUp();
   }
 
-  @Override public boolean isConnetctWithFacebookButtonVisible() {
+  public boolean isConnetctWithFacebookButtonVisible() {
     gainFocus(TITLE);
     return registerPage.isConnetctWithFacebookButtonVisible();
   }
