@@ -3,7 +3,7 @@ package com.wikia.webdriver.testcases.specialpagestests;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -12,8 +12,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.AlmostTherePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.ConfirmationPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -27,6 +25,8 @@ public class EditingPreferencesTests extends NewTestTemplate {
   private static final String SOURCE = "1";
   private static final String VE = "2";
   private static final String CK = "3";
+  private static final String USERNAME = Configuration.getCredentials().emailQaart2;
+  private static final String PASSWORD = Configuration.getCredentials().emailPasswordQaart2;
 
   @Test(groups = {"EditPreferences_001"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
@@ -82,14 +82,12 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
   @Test(groups = {"EditPreferences_004"})
   @Execute(asUser = User.USER_5)
-  @RelatedIssue(issueID = "MAIN-9722", comment = "test failing randomly")
   public void changeEmailAddress() {
     EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
 
-    String newEmailAddress = MailFunctions.getEmail(editPrefPage.getEmailAdress());
+    String newEmailAddress = EmailUtils.getEmail(editPrefPage.getEmailAdress());
 
-    MailFunctions.deleteAllEmails(Configuration.getCredentials().emailQaart2,
-        Configuration.getCredentials().emailPasswordQaart2);
+    EmailUtils.deleteAllEmails(USERNAME, PASSWORD);
 
     Assertion.assertNotEquals(newEmailAddress, editPrefPage.getEmailAdress(),
         "New email and old email SHOULD NOT be the same");
@@ -100,14 +98,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
                          "Notification message is not visible");
 
-    ConfirmationPageObject confirmPageAlmostThere = new AlmostTherePageObject(driver)
-        .enterEmailChangeLink(Configuration.getCredentials().emailQaart2,
-            Configuration.getCredentials().emailPasswordQaart2);
-    confirmPageAlmostThere.typeInUserName(User.USER_5.getUserName());
-    confirmPageAlmostThere.typeInPassword(User.USER_5.getPassword());
-    confirmPageAlmostThere.clickSubmitButton(Configuration.getCredentials().email,
-        Configuration.getCredentials().emailPassword);
-
+    editPrefPage.enterEmailChangeLink(USERNAME, PASSWORD);
     editPrefPage.openEmailSection();
     Assertion.assertEquals(editPrefPage.getEmailAdress(), newEmailAddress,
                            "Email address doesn't equal to new email address");
