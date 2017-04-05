@@ -16,8 +16,8 @@ public class VideoSuggestionsTests extends NewTestTemplate {
   @Test(groups = {"VideoSuggestions_001"})
   @Execute(onWikia = "callofduty", asUser = User.USER)
   public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed() {
-    ArticlePageObject article = new ArticlePageObject().open("Frank_Woods");
-    VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
+    VisualEditModePageObject ck = 
+      new ArticlePageObject().open("Frank_Woods").navigateToArticleEditPage();
     Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
 
     VetAddVideoComponentObject vetAddingVideo = ck.clickVideoButton();
