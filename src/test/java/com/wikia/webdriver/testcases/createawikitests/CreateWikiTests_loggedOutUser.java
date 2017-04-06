@@ -1,17 +1,15 @@
 package com.wikia.webdriver.testcases.createawikitests;
 
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
-import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_Anon"})
@@ -26,11 +24,8 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
         String wikiName = cnw1.getWikiName();
         cnw1.typeInWikiName(wikiName);
         cnw1.verifyNextButtonEnabled();
-        AuthModal authModal = cnw1.clickNextToSignIn();
-        authModal.clickToSignInForm();
-
-        Assert.assertTrue(authModal.isSignInOpened());
-
+        cnw1.clickNextToSignIn().navigateToSignIn();
+        DetachedSignInPage authModal = new DetachedSignInPage();
         authModal.login(credentials.userName10, credentials.password10);
         CreateNewWikiPageObjectStep2 cnw2 = new CreateNewWikiPageObjectStep2(driver);
         cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY_ID);

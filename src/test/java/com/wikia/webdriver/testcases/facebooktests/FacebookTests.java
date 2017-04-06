@@ -4,9 +4,10 @@ import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import org.testng.annotations.Test;
 import java.util.HashMap;
 
@@ -22,14 +23,14 @@ public class FacebookTests extends NewTestTemplate {
 
     new FacebookSettingsPageObject(driver).open();
     new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
-    SignUpPageObject signUp = new SignUpPageObject(driver).open();
+    AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     String userName = "QA" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
 
     fbModal.createAccountNoEmail(test_user.get("email"), userName, password);
-    signUp.verifyUserLoggedIn(userName);
+    new WikiBasePageObject().verifyUserLoggedIn(userName);
     api.deleteFacebookTestUser(test_user.get("id"));
 
   }

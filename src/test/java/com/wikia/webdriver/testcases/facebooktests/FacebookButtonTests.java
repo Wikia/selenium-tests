@@ -1,19 +1,20 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
-import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 /* 
  * Check for facebook button on the page
@@ -26,16 +27,16 @@ public class FacebookButtonTests extends NewTestTemplate {
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnSignUpPage")
   public void facebookButtonIsVisibleOnSignUpPage() {
     WikiBasePageObject base = new WikiBasePageObject();
-    RegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
-    registerPage.isConnetctWithFacebookButtonVisible();
+    AttachedRegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
+    assertTrue(registerPage.isConnectWithFacebookButtonVisible());
 
   }
 
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnLoginPage")
   public void facebookButtonIsVisibleOnLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
-    SignInPage signInPage = base.openSpecialUserLogin(wikiURL);
-    signInPage.isConnetctWithFacebookButtonVisible();
+    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    assertTrue(signInPage.isConnectWithFacebookButtonVisible());
   }
 
   @Test(groups = "FacebookButton_facebookButtonIsVisibleOnForcedLoginModal")
@@ -45,9 +46,8 @@ public class FacebookButtonTests extends NewTestTemplate {
     specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
 
-    AuthModal authModal = new AuthModal();
-    authModal.isOpened();
-    Assertion.assertTrue(authModal.isConnetctWithFacebookButtonVisible());
+    DetachedRegisterPage registerPage = new DetachedRegisterPage();
+    assertTrue(registerPage.isConnectWithFacebookButtonVisible());
   }
 
 
