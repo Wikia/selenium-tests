@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
@@ -14,7 +15,7 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -32,6 +33,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
 
 public class BasePageObject {
 
@@ -344,8 +347,16 @@ public class BasePageObject {
   }
 
   public void openWikiPage() {
-    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.NOEXTERNALS);
+    getUrl(getWikiUrl() + URLsContent.NOEXTERNALS);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+  }
+
+  public String getWikiUrl() {
+    return urlBuilder.getUrlForWiki(Configuration.getWikiName());
+  }
+
+  public void fillInput(WebElement input, String value) {
+    wait.forElementVisible(input).sendKeys(value);
   }
 
   /**
@@ -513,6 +524,44 @@ public class BasePageObject {
     return newTab;
   }
 
+  private String getTabWithTitle(String title) {
+    return getTabWithCondition(nameToTitle -> nameToTitle.getValue().startsWith(title));
+  }
+
+  private String getOtherTab(String title) {
+    return getTabWithCondition(nameToTitle -> !nameToTitle.getValue().startsWith(title));
+  }
+
+  private String getTabWithCondition(
+    java.util.function.Predicate<? super Pair<String, String>> condition) {
+    Optional<String> newTab = driver
+      .getWindowHandles()
+      .stream()
+      .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
+      .filter(condition)
+      .map(Pair::getKey)
+      .findFirst();
+    return newTab.orElseThrow(() -> new NotFoundException(
+      String.format("Tab with title %s doesn't exist", title)));
+  }
+
+
+  public WebDriver switchToWindowWithTitle(String title) {
+    PageObjectLogging.log("Switching windows",
+      String.format("Switching to window with title: %s", title), true);
+    return driver.switchTo().window(getTabWithTitle(title));
+  }
+
+  public WebDriver switchAwayFromWindowWithTitle(String title) {
+    PageObjectLogging.log("Switching windows",
+      String.format("Switching away from window with title: %s", title), true);
+    return driver.switchTo().window(getOtherTab(title));
+  }
+
+  public WebDriver switchToMainWindow() {
+    return driver.switchTo().defaultContent();
+  }
+
   private void waitForLinkOpenedInNewTab(WebElement link) {
     int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
@@ -552,6 +601,19 @@ public class BasePageObject {
     WebElement element = driver.findElement(By.cssSelector(elementName));
 
     return element.getLocation().getY();
+  }
+
+  private static String getEmailChangeConfirmationLink(String email, String password) {
+    String mailSubject = "Confirm your email address change on Fandom";
+    String url = EmailUtils.getActivationLinkFromEmailContent(
+      EmailUtils.getFirstEmailContent(email, password, mailSubject));
+    PageObjectLogging.log("getActivationLinkFromMail",
+      "activation link is visible in email content: " + url, true);
+    return url;
+  }
+
+  public void enterEmailChangeLink(String email, String password) {
+    getUrl(getEmailChangeConfirmationLink(email, password));
   }
 
 }

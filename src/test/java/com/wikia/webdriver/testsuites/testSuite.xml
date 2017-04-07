@@ -54,7 +54,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPad"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
@@ -63,6 +62,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasisAutoplay"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapTheNewGeneration"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
@@ -132,9 +132,9 @@
             <class name="com.wikia.webdriver.testcases.interactivemapstests.PalantirTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.PinMapTests"/>
             <class name="com.wikia.webdriver.testcases.interactivemapstests.PinTypeMapTests"/>
-            <class name="com.wikia.webdriver.testcases.logintests.ForcedLoginTests"/>
-            <class name="com.wikia.webdriver.testcases.logintests.ForgottenPasswordTests"/>
-            <class name="com.wikia.webdriver.testcases.logintests.LoginTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.ForcedLoginTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.ForgottenPasswordTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.LoginTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.addvideo.VetArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.addvideo.VetArticlePlaceholderTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.addvideo.VetSpecialVideosTests"/>
@@ -163,6 +163,8 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.AllTagsTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.ApesterTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PlaybuzzTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PollsnackTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.PolldaddyTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.widgettests.SoundCloudTests"/>
@@ -232,7 +234,9 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
             <class name="com.wikia.webdriver.testcases.wampagetests.WamPageTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.AllTagsTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.ApesterTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.PollsnackTests"/>
+            <class name="com.wikia.webdriver.testcases.widgettests.PlaybuzzTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.PolldaddyTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SoundCloudTests"/>
             <class name="com.wikia.webdriver.testcases.widgettests.SpotifyTests"/>
