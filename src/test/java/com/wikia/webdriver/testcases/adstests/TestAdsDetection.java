@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 
 public class TestAdsDetection extends NewTestTemplate {
