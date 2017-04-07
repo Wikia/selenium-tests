@@ -41,8 +41,11 @@ public class Navigation {
   @FindBy(css = ".nav-menu--tv")
   private WebElement tvHub;
 
-  @FindBy(css = ".wikia-nav__avatar img")
+  @FindBy(css = ".wikia-nav__avatar")
   private WebElement userAvatar;
+
+  @FindBy(css = ".wikia-nav__avatar img")
+  private WebElement userAvatarImg;
 
   @FindBy(css = ".wikia-nav--profile-link")
   private WebElement userProfileLink;
@@ -147,7 +150,7 @@ public class Navigation {
   }
 
   public boolean isUserAvatarVisible(final String username) {
-    return wait.forElementVisible(userAvatar).isDisplayed() && userAvatar.getAttribute("alt").equals(username);
+    return wait.forElementVisible(userAvatarImg).isDisplayed() && userAvatarImg.getAttribute("alt").equals(username);
   }
 
   public boolean isUserProfileLinkVisible() {
