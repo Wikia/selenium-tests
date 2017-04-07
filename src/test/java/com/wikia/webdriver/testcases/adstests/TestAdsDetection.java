@@ -1,10 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.Test;
 
 public class TestAdsDetection extends NewTestTemplate {
@@ -25,12 +27,12 @@ public class TestAdsDetection extends NewTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsDetection"
   )
-  public void adsDetectNoAdBlock(String wiki, boolean isRecoveryEnabled) {
+  public void adsDetectNoAdBlock(Page wiki, String urlParam, boolean isRecoveryEnabled) {
     String pattern = PIXEL_PATTERN_WITHOUT_ADBLOCK;
     if (isRecoveryEnabled) {
       pattern = PIXEL_PATTERN_WITHOUT_ADBLOCK_AND_RECOVERY;
     }
-    assertPixelWithDetectionStatus(wiki, pattern);
+    assertPixelWithDetectionStatus(wiki, urlParam, pattern);
   }
 
   @NetworkTrafficDump
@@ -39,19 +41,21 @@ public class TestAdsDetection extends NewTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsDetection"
   )
-  public void adsDetectAdBlock(String wiki, boolean isRecoveryEnabled) {
+  public void adsDetectAdBlock(Page wiki, String urlParam, boolean isRecoveryEnabled) {
     String pattern = PIXEL_PATTERN_WITH_ADBLOCK;
     if (isRecoveryEnabled) {
       pattern = PIXEL_PATTERN_WITH_ADBLOCK_AND_RECOVERY;
     }
-    assertPixelWithDetectionStatus(wiki, pattern);
+    assertPixelWithDetectionStatus(wiki, urlParam, pattern);
   }
 
-  private void assertPixelWithDetectionStatus(String wiki, String pixelPattern) {
+  private void assertPixelWithDetectionStatus(Page wiki, String urlParam, String pixelPattern) {
     networkTrafficInterceptor.startIntercepting();
 
-    String testedPage = urlBuilder.getUrlForWiki(wiki);
-    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage);
+    String url = urlBuilder.getUrlForPage(wiki);
+    url = urlBuilder.appendQueryStringToURL(url, urlParam);
+
+    AdsBaseObject adsBaseObject = new AdsBaseObject(driver, url);
 
     adsBaseObject.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pixelPattern);
   }

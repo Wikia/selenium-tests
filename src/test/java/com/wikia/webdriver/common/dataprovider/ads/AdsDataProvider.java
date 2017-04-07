@@ -922,11 +922,13 @@ public class AdsDataProvider {
   public static Object[][] adsDetection() {
     return new Object[][]{
         {
-            "project43",
+            new Page("project43", "Project43_Wikia"),
+            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
             false
         },
         {
-            "arecovery",
+            new Page("arecovery", "ARecovery_Wikia"),
+            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
             true
         }
     };
