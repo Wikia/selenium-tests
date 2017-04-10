@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 /**
  * Set of Test Cases found on: https://wikia-inc.atlassian.net/wiki/display/WW/Portable+Infoboxes+tests+plan
  */
-
+@InBrowser(browser = Browser.CHROME)
 public class PortableInfoboxTests extends NewTestTemplate {
 
   private static final String INFOBOX_EMPTY_TAGS_INVOCATION =

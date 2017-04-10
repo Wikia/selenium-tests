@@ -20,9 +20,16 @@ import org.openqa.selenium.WebDriverException;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-public class MailFunctions {
+public class EmailUtils {
 
-  private MailFunctions() {
+  private static final String PASSWORD_RESET_LINK =
+    ".*<a[^>]*href=\"(?<url>[^\"]+?)\"[^>]+>SET NEW PASSWORD</a>.*";
+
+  // Pattern.DOTALL flag forces dot in regex to also match line terminators
+  private static Pattern PASSWORD_RESET_PATTERN =
+    Pattern.compile(PASSWORD_RESET_LINK, Pattern.DOTALL);
+
+  private EmailUtils() {
   }
 
   public static String getFirstEmailContent(String userName, String password, String subject) {
@@ -130,18 +137,19 @@ public class MailFunctions {
     }
   }
 
-  public static String getPasswordFromEmailContent(String mailContent) {
-    // mail content contain '=' chars, which has to be removed
-    String content = mailContent.replace("=", "");
-    Pattern p = Pattern.compile("below:[\\s\\S]*?(?=If)"); // getting new password
-    // from mail content
-    Matcher m = p.matcher(content);
-    
+  public static String getPasswordResetLinkFromEmailContent(String mailContent) {
+    /*
+      remove "=" character except when followed by "3D" hex sequence
+      and replace "=3D" sequence with a single "=" character
+      because of RFC-2045 line breaks and encoding in IMAP
+      see: https://tools.ietf.org/html/rfc2045#section-6.7
+    */
+    String formattedContent = mailContent.replaceAll("=(?!3D)", "").replaceAll("=3D", "=");
+    Matcher m = PASSWORD_RESET_PATTERN.matcher(formattedContent);
     if (m.find()) {
-      return m.group(0).replace("below:", "");
-      // m.group(0) returns first match for the regexp
+      return m.group("url");
     } else {
-      throw new WebDriverException("There was no match in the following content: \n" + content);
+      throw new WebDriverException("There was no match in the following content: \n" + formattedContent);
     }
   }
 
