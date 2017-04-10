@@ -254,7 +254,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserKickedFromChat(), "USER IS NOT KICKED FROM CHAT");
   }
 
-  @Test
+  @Test(invocationCount = 5)
   public void bannedUserCanNotEnterTheChat() {
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
@@ -263,6 +263,7 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned, userToBeBannedPassword);
 
     switchToWindow(0);
+    String name = chatUserStaff.getUserName();
     chatUserStaff.clickOnDifferentUser(userToBeBanned);
     chatUserStaff.banUser(userToBeBanned);
 
