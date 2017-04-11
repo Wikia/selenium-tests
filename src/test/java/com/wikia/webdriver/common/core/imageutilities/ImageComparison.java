@@ -85,6 +85,7 @@ public class ImageComparison {
     for (int x = 0; x < image1.getWidth(); x++) {
       for (int y = 0; y < image1.getHeight(); y++) {
         if (image1.getRGB(x, y) == image2.getRGB(x, y)) {
+          System.out.println();
           sameCount += 1;
         }
       }

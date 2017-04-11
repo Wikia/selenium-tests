@@ -1125,6 +1125,18 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsRecoveryPageFairOasis() {
+    return new Object[][]{
+        {
+            new Page("arecovery", "SyntheticTests/Static_image"),
+            "cb=35674143234324423432233333131231321313334",
+            "src/test/resources/adsResources/kolo.png"
+//            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]",
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsRecoveryOasisProject43() {
       return new Object[][]{
           {
