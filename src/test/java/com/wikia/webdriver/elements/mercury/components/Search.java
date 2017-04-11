@@ -122,7 +122,7 @@ public class Search extends BasePageObject {
     } catch (WebDriverException e) {
       // @TODO: this would be best pushed to Selenium upstream to actually throw a more specific
       // exception
-      if (e.getMessage().contains("Element is not clickable at point")) {
+      if (e.getMessage().contains("Other element would receive the click")) {
         return false;
       } else {
         throw e;
