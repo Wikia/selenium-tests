@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
@@ -20,12 +19,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Creat
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.VECreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
@@ -35,6 +32,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -116,10 +114,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement videoAddPlaceholder;
   @FindBy(css = ".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
   private WebElement imageAddPlaceholder;
-  @FindBy(css = "figcaption p")
-  private WebElement videoTitle;
-  @FindBy(css = "a.details.sprite")
-  private WebElement videoDetailsButton;
   @FindBy(css = "#CategorySelectAdd")
   private WebElement addCategory;
   @FindBy(css = "#CategorySelectInput")
@@ -156,8 +150,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
-  @FindBy(css = ".portable-infobox")
-  private PortableInfobox portableInfobox;
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
@@ -233,24 +225,10 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertTrue(isPresent, "text is not present in the article");
   }
 
-  public void verifyStyleFromVE(Style style, String content) {
-    waitForElementNotVisibleByElement(veMode);
-    List<WebElement> elements = articleContentContainer.findElements(style.getTag());
-    boolean isPresent = false;
-    for (WebElement elem : elements) {
-      if (elem.getText().equals(content)) {
-        isPresent = true;
-        break;
-      }
-    }
-    wait.forElementVisible(articleEditButton);
-    Assertion.assertTrue(isPresent, "text is not present in the article");
-  }
-
   public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
     scrollAndClick(contributeDropdown);
     wait.forElementVisible(addArticleInDropdown);
-    CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+    CreateArticleModalComponentObject articleModal = clickArticleInDropDown();
     articleModal.createPageWithBlankLayout(articleTitle);
     return new VisualEditModePageObject();
   }
@@ -258,12 +236,12 @@ public class ArticlePageObject extends WikiBasePageObject {
   public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
     contributeDropdown.click();
     wait.forElementVisible(addArticleInDropdown);
-    CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+    CreateArticleModalComponentObject articleModal = clickArticleInDropDown();
     articleModal.createPageWithBlankLayout(articleTitle);
     return new SourceEditModePageObject(driver);
   }
 
-  private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {
+  private CreateArticleModalComponentObject clickArticleInDropDown() {
     wait.forElementClickable(addArticleInDropdown);
     addArticleInDropdown.click();
     return new CreateArticleModalComponentObject(driver);
@@ -399,32 +377,64 @@ public class ArticlePageObject extends WikiBasePageObject {
     return articleName;
   }
 
-  public void verifyDropdownForAdmin() {
-    articleEditDropdown.click();
-    wait.forElementVisible(renameDropdown);
-    wait.forElementVisible(deleteDropdown);
-    wait.forElementVisible(historyDropdown);
-    wait.forElementVisible(protectDropdown);
-    wait.forElementVisible(veEditButton);
-    Assertion.assertEquals(editDropdownElements.size(), 5);
-    PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for admin", true);
+  public int getEditDropdownElementsSize() {
+    return editDropdownElements.size();
   }
 
-  public void verifyDropdownForUser() {
+  public void clickArticleEditDropdown() {
+    wait.forElementClickable(articleEditDropdown);
+
     articleEditDropdown.click();
-    wait.forElementVisible(historyDropdown);
-    wait.forElementVisible(renameDropdown);
-    wait.forElementVisible(veEditButton);
-    Assertion.assertEquals(editDropdownElements.size(), 3);
-    PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for user", true);
   }
 
-  public void verifyDropdownForAnon() {
-    articleEditDropdown.click();
-    wait.forElementVisible(historyDropdown);
-    wait.forElementVisible(veEditButton);
-    Assertion.assertEquals(editDropdownElements.size(), 2);
-    PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
+  public boolean isRenameButtonVisible(){
+    try {
+      wait.forElementVisible(renameDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Rename button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isDeleteButtonVisible(){
+    try {
+      wait.forElementVisible(deleteDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Delete button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isHistoryButtonVisible(){
+    try {
+      wait.forElementVisible(historyDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("History button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isProtectButtonVisible(){
+    try {
+      wait.forElementVisible(protectDropdown);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("Protect button is not visible", e);
+      return false;
+    }
+  }
+
+  public boolean isVEEditButtonVisible(){
+    try {
+      wait.forElementVisible(veEditButton);
+      return true;
+    } catch (TimeoutException e) {
+      PageObjectLogging.logInfo("VE edit button is not visible", e);
+      return false;
+    }
   }
 
   public void verifyPhoto() {
@@ -455,15 +465,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyVideoInline() {
     wait.forElementVisible(videoInline);
     PageObjectLogging.log("verifyVideoInline", "Video is visible", true);
-  }
-
-  public void verifyVideoAutoplay(String providerName) {
-    VideoComponentObject video = new VideoComponentObject(driver, videoInline);
-    video.verifyVideoAutoplay(providerName, true);
-  }
-
-  public VideoComponentObject getVideoPlayer() {
-    return new VideoComponentObject(driver, videoInline);
   }
 
   private void verifyTableProperty(String propertyName, int propertyValue) {
@@ -548,15 +549,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(imageAddPlaceholder);
     scrollAndClick(imageAddPlaceholder);
     return new PhotoAddComponentObject(driver);
-  }
-
-  public FilePage clickVideoDetailsButton() {
-    wait.forElementVisible(videoTitle);
-    jsActions.execute("$('a.details.sprite').css('visibility', 'visible')");
-    wait.forElementVisible(videoDetailsButton);
-    videoDetailsButton.click();
-    PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-    return new FilePage();
   }
 
   private void clickAddCategoryButton() {
@@ -784,27 +776,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     viewEmbedMapButton.click();
     driver.switchTo().activeElement();
     return new EmbedMapComponentObject(driver);
-  }
-
-  /**
-   * @param rgba String representing function rgba(int, int, int, int)
-   * @return int[], where 0='red', 1='green', 2='blue'
-   */
-  public static int[] convertRGBAFunctiontoIntTable(String rgba) {
-    int[] extract = new int[3];
-    int start = rgba.indexOf("(", 0) + 1;
-    int end = rgba.indexOf(",", 0);
-    int red = Integer.parseInt(rgba.substring(start, end));
-    start = rgba.indexOf(" ", end + 1) + 1;
-    end = rgba.indexOf(",", end + 1);
-    int green = Integer.parseInt(rgba.substring(start, end));
-    start = rgba.indexOf(" ", end + 1) + 1;
-    end = rgba.indexOf(",", end + 1);
-    int blue = Integer.parseInt(rgba.substring(start, end));
-    extract[0] = red;
-    extract[1] = green;
-    extract[2] = blue;
-    return extract;
   }
 
   public void verifyMainEditEditor(Editor expectedEditor) {

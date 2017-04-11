@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -10,25 +13,42 @@ import org.testng.annotations.Test;
 @Test(groups = {"ArticleEditDropdown"})
 public class ArticleEditDropdownTests extends NewTestTemplate {
 
-  private static final String articleName = "DropdownStatus";
-
   @Test(groups = {"ArticleEditDropdown_001"})
   @Execute(asUser = User.STAFF)
   public void ArticleEditDropdown_001_admin() {
-    ArticlePageObject article = new ArticlePageObject().open(articleName);
-    article.verifyDropdownForAdmin();
+    new ArticleContent().push(PageContent.LOREM_IPSUM_LONG);
+    ArticlePageObject article = new ArticlePageObject().open();
+    article.clickArticleEditDropdown();
+
+    Assertion.assertTrue(article.isRenameButtonVisible());
+    Assertion.assertTrue(article.isDeleteButtonVisible());
+    Assertion.assertTrue(article.isHistoryButtonVisible());
+    Assertion.assertTrue(article.isProtectButtonVisible());
+    Assertion.assertTrue(article.isVEEditButtonVisible());
+    Assertion.assertEquals(article.getEditDropdownElementsSize(), 5);
   }
 
   @Test(groups = {"ArticleEditDropdown_002"})
   @Execute(asUser = User.USER)
   public void ArticleEditDropdown_002_user() {
-    ArticlePageObject article = new ArticlePageObject().open(articleName);
-    article.verifyDropdownForUser();
+    new ArticleContent().push(PageContent.LOREM_IPSUM_LONG);
+    ArticlePageObject article = new ArticlePageObject().open();
+    article.clickArticleEditDropdown();
+
+    Assertion.assertTrue(article.isRenameButtonVisible());
+    Assertion.assertTrue(article.isHistoryButtonVisible());
+    Assertion.assertTrue(article.isVEEditButtonVisible());
+    Assertion.assertEquals(article.getEditDropdownElementsSize(), 3);
   }
 
   @Test(groups = {"ArticleEditDropdown_003"})
   public void ArticleEditDropdown_003_anon() {
-    ArticlePageObject article = new ArticlePageObject().open(articleName);
-    article.verifyDropdownForAnon();
+    new ArticleContent().push(PageContent.LOREM_IPSUM_LONG);
+    ArticlePageObject article = new ArticlePageObject().open();
+    article.clickArticleEditDropdown();
+
+    Assertion.assertTrue(article.isHistoryButtonVisible());
+    Assertion.assertTrue(article.isVEEditButtonVisible());
+    Assertion.assertEquals(article.getEditDropdownElementsSize(), 2);
   }
 }
