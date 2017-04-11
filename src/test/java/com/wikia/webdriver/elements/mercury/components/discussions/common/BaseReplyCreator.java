@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
@@ -18,6 +19,8 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   protected abstract WebElement getTextarea();
 
   protected abstract WebElement getSubmitButton();
+
+  protected abstract WebElement getLoadingSuccess();
 
   @Override
   public ReplyCreator click() {
@@ -69,6 +72,12 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   @Override
   public ReplyCreator clickSubmitButton() {
     getSubmitButton().click();
+    return this.waitForSpinnerToDisappear();
+  }
+
+  private ReplyCreator waitForSpinnerToDisappear() {
+    waitSafely(() -> wait.forElementVisible(getLoadingSuccess()));
+    waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
   }
 }

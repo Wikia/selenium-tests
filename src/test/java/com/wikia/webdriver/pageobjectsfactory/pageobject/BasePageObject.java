@@ -142,6 +142,14 @@ public class BasePageObject {
     return numElementOnPage;
   }
 
+  public void waitSafely(Runnable o) {
+    try {
+      o.run();
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("Timed out waiting", e.getMessage(), true);
+    }
+  }
+
   protected boolean isElementInContext(String cssSelector, WebElement element) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
     boolean isElementInElement = true;

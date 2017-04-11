@@ -37,6 +37,10 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   private WebElement textarea;
 
+  @FindBy(css = ".wds-spinner__overlay .success")
+  @Getter
+  private WebElement loadingSuccess;
+
   @FindBy(css = ".discussion-inline-reply-editor")
   private WebElement editor;
 
