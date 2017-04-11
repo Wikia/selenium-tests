@@ -34,6 +34,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsPageFairRecoveryOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRecoveryOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
