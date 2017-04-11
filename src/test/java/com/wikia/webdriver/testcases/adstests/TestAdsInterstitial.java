@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsInterstitialObject;
@@ -14,48 +19,30 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
       groups = "TestInterstitialOasis",
       dataProvider = "interstitialOasis"
   )
-  public void adsInterstitialAdScaledOasis(
-      String wikiName,
-      String article,
-      Dimension pageSize,
-      Dimension adSize,
-      boolean shouldAdBeScaled
-  ) throws InterruptedException {
-    testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
+  public void adsInterstitialAdScaledOasis(Page page, String selector, Dimension adSize) throws InterruptedException {
+    testInterstitial2(page, selector, adSize);
   }
 
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = "TestInterstitialMercury",
       dataProvider = "interstitialMercury"
   )
-  public void adsInterstitialAdScaledMercury(
-      String wikiName,
-      String article,
-      Dimension pageSize,
-      Dimension adSize,
-      boolean shouldAdBeScaled
-  ) throws InterruptedException {
-    testInterstitial(wikiName, article, pageSize, adSize, shouldAdBeScaled);
+  public void adsInterstitialAdScaledOnMobileInPortraitPosition(Page page, String selector, Dimension adSize) throws InterruptedException {
+    testInterstitial2(page, selector, adSize);
   }
 
-  private void testInterstitial(
-      String wikiName,
-      String article,
-      Dimension pageSize,
-      Dimension adSize,
-      boolean shouldAdBeScaled
-  ) throws InterruptedException {
-    String url = urlBuilder.getUrlForPath(wikiName, article);
-    String testedPage = urlBuilder.appendQueryStringToURL(url, "highimpactslot=1");
-    AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver, testedPage, pageSize);
+  private void testInterstitial2(Page page, String selector, Dimension adSize) throws InterruptedException {
+    AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver);
+    adsInterstitial.getUrl(page);
+
     adsInterstitial.waitForPageLoadedWithGpt();
-    adsInterstitial.waitForInterstitialShowUp();
-    adsInterstitial.verifySize(adSize);
-    if (shouldAdBeScaled) {
-      adsInterstitial.verifyAdRatio();
-    }
+    Assertion.assertTrue(adsInterstitial.isInterstitialAdDisplayed(), "No Interstitial ad is not displayed");
+    adsInterstitial.verifySize(selector, adSize);
     adsInterstitial.closeInterstitial();
     adsInterstitial.verifyInterstitialIsClosed();
   }
+
+
 }

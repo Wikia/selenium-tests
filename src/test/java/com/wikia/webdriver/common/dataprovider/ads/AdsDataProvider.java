@@ -762,69 +762,23 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] interstitialOasis() {
+  public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(1920, 1080),
-            new Dimension(600, 590),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(1920, 1080),
-            new Dimension(300, 343),
-            false
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(800, 800),
-            new Dimension(569, 564),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(800, 800),
-            new Dimension(300, 343),
-            false
+            new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
+            ".invisible-high-impact-wrapper.interstitial .provider-container iframe",
+            new Dimension(300, 250)
         },
     };
   }
 
   @DataProvider
-  public static Object[][] interstitialMercury() {
+  public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(600, 800),
-            new Dimension(590, 491),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(600, 800),
-            new Dimension(300, 258),
-            false
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(800, 500),
-            new Dimension(405, 338),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(800, 500),
-            new Dimension(300, 258),
-            false
+            new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
+            "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe",
+            new Dimension(728, 90)
         },
     };
   }
