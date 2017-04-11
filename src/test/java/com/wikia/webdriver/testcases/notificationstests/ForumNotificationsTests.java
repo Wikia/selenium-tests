@@ -65,11 +65,9 @@ public class ForumNotificationsTests extends NewTestTemplate {
 
     forumMainPage.openForumMainPage(wikiURL);
     notifications.showNotifications();
-    
     String anchoredLink = null;
     try {
-      anchoredLink = notifications.getNotificationLink(
-          User.STAFF.getUserName() + " and "
+      anchoredLink = notifications.getNotificationLink(User.STAFF.getUserName() + " and "
           + User.USER_2.getUserName() + " replied to your thread on the "
           + URLDecoder.decode(forumBoardTitle, "UTF-8").replace("_", " "));
     } catch (UnsupportedEncodingException e) {
