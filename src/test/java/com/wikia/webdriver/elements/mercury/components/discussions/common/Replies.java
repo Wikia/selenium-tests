@@ -16,6 +16,9 @@ public class Replies extends BasePageObject {
   @FindBy(className = "replies-list")
   private WebElement webElement;
 
+  @FindBy(css = ".discussion-reply .discussion-content")
+  private WebElement replyContent;
+
   public boolean hasNoRepliesIcon() {
     return null != webElement.findElement(By.cssSelector(".icon.no-replies"));
   }
@@ -32,7 +35,9 @@ public class Replies extends BasePageObject {
   public Replies waitForReplyToAppearWith(final String text) {
     new FluentWait<>(driver)
         .withTimeout(DiscussionsConstants.TIMEOUT, TimeUnit.SECONDS)
-        .until((Predicate<WikiaWebDriver>) input -> wait.forElementPresent(By.cssSelector(".discussion-reply .discussion-content")).getText().contains(text));
+        .until((Predicate<WikiaWebDriver>) input -> wait.forElementVisible(replyContent)
+          .getText()
+          .contains(text));
     return this;
   }
 }
