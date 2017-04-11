@@ -194,7 +194,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"}, invocationCount = 20)
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
@@ -438,7 +438,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"}, invocationCount = 20)
+  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
