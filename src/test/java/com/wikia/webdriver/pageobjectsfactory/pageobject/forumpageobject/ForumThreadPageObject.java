@@ -52,8 +52,10 @@ public class ForumThreadPageObject extends BasePageObject {
   private WebElement undoThreadRemoveButton;
   @FindBys(@FindBy(css = "div.msg-body p"))
   private List<WebElement> discussionBody;
-  @FindBy(xpath = "//div[@class='msg-toolbar']//a[contains(text(), 'Thread moved by')]")
-  private WebElement movedThreadText;
+  @FindBy(className = "speech-bubble-message")
+  private WebElement message;
+  @FindBy(className = "BreadCrumbs")
+  private WebElement breadCrumbs;
 
   By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
 
@@ -128,6 +130,8 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void clickOnMoreButton() {
+    scrollTo(message);
+
     jsActions.execute("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
     wait.forElementVisible(moreButton);
     wait.forElementClickable(moreButton);
@@ -207,9 +211,10 @@ public class ForumThreadPageObject extends BasePageObject {
   }
 
   public void verifyParentBoard(String forumBoardName) {
-    wait.forElementVisible(movedThreadText);
-    wait.forElementPresent(parentBoardField);
-    wait.forTextInElement(parentBoardField, forumBoardName + " board");
+    driver.navigate().refresh();
+    
+    wait.forElementVisible(breadCrumbs);
+    wait.forTextInElement(breadCrumbs, forumBoardName + " board");
     PageObjectLogging.log("verifyParentBoard",
                           "verify that the parent board of current thread is the following: "
                           + forumBoardName, true);

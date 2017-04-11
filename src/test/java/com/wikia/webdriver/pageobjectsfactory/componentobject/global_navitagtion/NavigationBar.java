@@ -3,10 +3,10 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtio
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikisearch.IntraWikiSearchPageObject;
 
 import org.openqa.selenium.By;
@@ -120,15 +120,15 @@ public class NavigationBar extends WikiBasePageObject {
     return new ArticlePageObject();
   }
 
-  public AuthModal clickOnSignIn(){
+  public AttachedSignInPage clickOnSignIn(){
     myAccount.click();
     signInLink.click();
-    return new AuthModal();
+    return new AttachedSignInPage();
   }
 
-  public RegisterArea clickOnRegister(){
+  public AttachedRegisterPage clickOnRegister(){
     myAccount.click();
     registerLink.click();
-    return new RegisterArea(true);
+    return new AttachedRegisterPage();
   }
 }

@@ -1,23 +1,23 @@
-package com.wikia.webdriver.testcases.logintests;
+package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
-import junit.framework.Assert;
 import org.testng.annotations.Test;
+
+import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
@@ -30,10 +30,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
     specialPage.verifyPageHeader(specialPage.getTitle());
     specialPage.addPhoto();
-    AuthModal authModal = specialPage.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
 
-    authModal.clickToSignInForm();
     authModal.login(credentials.userName10, credentials.password10);
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
@@ -46,10 +44,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
-    AuthModal authModal = specialPage.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
 
-    authModal.clickToSignInForm();
     authModal.login(credentials.userName10, credentials.password10);
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
@@ -63,15 +59,11 @@ public class ForcedLoginTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginRequiredMessage();
-    SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
-    new SignInPage(driver)
-        .getLoginArea()
-        .typeUsername(credentials.userName10)
-        .typePassword(credentials.password10)
-        .clickSignInButtonToSignIn()
-        .verifyUserLoggedIn(credentials.userName10);
+    base.clickLoginOnSpecialPage();
+    new AttachedSignInPage().login(credentials.userName10, credentials.password10);
 
-    Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_UPLOAD));
+    base.verifyUserLoggedIn(credentials.userName10);
+    assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
@@ -82,17 +74,10 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
 
-    SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
+    new AttachedSignInPage().login(credentials.userName10, credentials.password10);
 
-    new SignInPage(driver)
-        .getLoginArea()
-        .typeUsername(credentials.userName10)
-        .typePassword(credentials.password10)
-        .clickSignInButtonToSignIn()
-        .verifyUserLoggedIn(credentials.userName10);
-
-    special.verifyUserLoggedIn(credentials.userName10);
-    Assertion.assertTrue(special.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
+    base.verifyUserLoggedIn(credentials.userName10);
+    assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
   @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingPhoto")
@@ -101,14 +86,12 @@ public class ForcedLoginTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
     edit.clickPhotoButton();
-    AuthModal authModal = edit.getAuthModal();
-    Assert.assertTrue(authModal.isOpened());
+    DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
 
-    authModal.clickToSignInForm();
     authModal.login(credentials.userName10, credentials.password10);
     edit.verifyUserLoggedIn(credentials.userName10);
-    Assertion.assertTrue(edit.isStringInURL(articleName));
-    Assertion.assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
+    assertTrue(edit.isStringInURL(articleName));
+    assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
     addPhoto.verifyAddPhotoModal();
   }

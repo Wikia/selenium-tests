@@ -5,8 +5,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
-import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.JoinTodayPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +44,9 @@ public class Navigation {
   @FindBy(css = ".wikia-nav__avatar")
   private WebElement userAvatar;
 
+  @FindBy(css = ".wikia-nav__avatar img")
+  private WebElement userAvatarImg;
+
   @FindBy(css = ".wikia-nav--profile-link")
   private WebElement userProfileLink;
 
@@ -67,12 +69,11 @@ public class Navigation {
     PageFactory.initElements(driver, this);
   }
 
-  public RegisterPage clickOnSignInRegisterButton() {
-    PageObjectLogging.logInfo("Open login page");
-    wait.forElementClickable(signInRegisterButton);
-    signInRegisterButton.click();
+  public JoinTodayPage clickOnSignInRegisterButton() {
+    PageObjectLogging.logInfo("Open Join Today page on mobile");
+    wait.forElementClickable(signInRegisterButton).click();
 
-    return new RegisterPage(driver);
+    return new JoinTodayPage();
   }
 
   public Navigation clickBackButton() {
@@ -146,6 +147,10 @@ public class Navigation {
 
   public boolean isUserAvatarVisible() {
     return isElementVisible(userAvatar);
+  }
+
+  public boolean isUserAvatarVisible(final String username) {
+    return wait.forElementVisible(userAvatarImg).isDisplayed() && userAvatarImg.getAttribute("alt").equals(username);
   }
 
   public boolean isUserProfileLinkVisible() {

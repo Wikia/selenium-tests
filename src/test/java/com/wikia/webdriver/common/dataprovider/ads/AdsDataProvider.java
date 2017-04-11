@@ -612,6 +612,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidVelesAdapter() {
+    return new Object[][]{
+        {"project43","SyntheticTests/Cap", 333201132},
+    };
+  }
+
+  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
@@ -915,11 +922,13 @@ public class AdsDataProvider {
   public static Object[][] adsDetection() {
     return new Object[][]{
         {
-            "project43",
+            new Page("project43", "Project43_Wikia"),
+            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
             false
         },
         {
-            "arecovery",
+            new Page("arecovery", "ARecovery_Wikia"),
+            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
             true
         }
     };
@@ -1364,7 +1373,7 @@ public class AdsDataProvider {
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
                                 AdsContent.MOBILE_TOP_LB
                         ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
+                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
                 },
                 {
                         new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
@@ -1373,7 +1382,7 @@ public class AdsDataProvider {
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
                                 AdsContent.MOBILE_BOTTOM_LB
                         ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_BOTTOM_LEADERBOARD"
+                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_BOTTOM_LEADERBOARD"
                 }
         };
     }
