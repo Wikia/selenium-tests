@@ -18,13 +18,10 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       dataProvider = "adsRecoveryPageFairOasis",
       groups = "AdsRecoveryPageFairOasis"
   )
-  public void adsRecoveryPageFairOasis(Page page, String urlParam) {
-
-    String pp = urlBuilder.getUrlForWiki("project43");
+  public void adsRecoveryPageFairOasis(Page page) {
     String url = urlBuilder.getUrlForPage(page);
-    url = urlBuilder.appendQueryStringToURL(url, urlParam);
-    AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, pp, DESKTOP_SIZE);
-    adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    adsRecoveryObject.refreshPageAddingCacheBuster();
 
     adsRecoveryObject.verifyPageFairRecovery();
   }

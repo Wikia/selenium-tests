@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers;
 
-import com.sun.jna.platform.FileUtils;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
@@ -17,7 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class AdsComparison {
 
@@ -51,11 +49,13 @@ public class AdsComparison {
     javascriptActions.changeElementOpacity(selector, value);
   }
 
-  public boolean compareImageWithScreenshot(final String pathToImage, final WebDriver driver) {
+  public boolean compareImageWithScreenshot(final String pathToImage,
+                                            final WebElement element,
+                                            final WebDriver driver) {
     BufferedImage expectedImage = imageEditor.fileToImage(new File(pathToImage));
-    BufferedImage actualImage = imageEditor.fileToImage(new File("src/test/resources/adsResources/test3.png"));
-//        shooter.capturePage(driver));
-    return !imageComparison.areImagesDifferent(actualImage, expectedImage, 12);
+    BufferedImage actualImage = imageEditor.fileToImage(
+        shooter.captureWebElement(element, driver));
+    return imageComparison.areImagesTheSame(actualImage, expectedImage);
   }
 
   public boolean isAdVisible(final WebElement element, final String selector,

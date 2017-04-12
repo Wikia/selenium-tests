@@ -3,10 +3,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import static org.apache.commons.io.FileUtils.readFileToString;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -41,7 +43,8 @@ public class AdsRecoveryObject extends AdsBaseObject {
       expectedRecoveredLB = readFileToString(new File(EXPECTED_TOP_LEADERBOARD_PATH));
       expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
     } catch (IOException e) {
-      e.printStackTrace();
+      PageObjectLogging.log("Can't open file", e, false);
+      throw new WebDriverException("Can't open expected PageFair recovery file.");
     }
 
     // when PF recovered ad is on page, inserts span elements as a direct children of body

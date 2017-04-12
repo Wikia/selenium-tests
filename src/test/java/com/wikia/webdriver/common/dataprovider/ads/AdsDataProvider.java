@@ -1128,9 +1128,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoveryPageFairOasis() {
     return new Object[][]{
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
-            "cb=35674143234324423432233333131231321313334"
-//            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]",
+            new Page("arecovery", "SyntheticTests/Static_image")
         }
     };
   }
