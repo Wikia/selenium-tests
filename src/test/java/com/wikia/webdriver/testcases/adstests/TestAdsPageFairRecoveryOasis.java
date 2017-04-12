@@ -23,7 +23,20 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecovery();
+    adsRecoveryObject.verifyPageFairRecoveryWithAdBlock();
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsRecoveryPageFairOasis",
+      groups = "AdsRecoveryNoAdblockPageFairOasis"
+  )
+  public void AdsRecoveryNoAdblockPageFairOasis(Page page) {
+    String url = urlBuilder.getUrlForPage(page);
+    AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    adsRecoveryObject.refreshPageAddingCacheBuster();
+
+    adsRecoveryObject.verifyPageFairRecoveryWithNoAdBlock();
   }
 }
 

@@ -31,19 +31,19 @@ public class AdsRecoveryObject extends AdsBaseObject {
     return jsActions.execute(getIdScript).toString();
   }
 
-  public void verifyPageFairRecovery() {
+  public void verifyPageFairRecoveryWithAdBlock() {
     int recoverableAdsCount = 2;
     By spansBodyChildrenSelector = By.cssSelector("body>span");
     Dimension topLeaderboardSize = new Dimension(728, 90);
     Dimension medrecSize = new Dimension(300, 250);
-    String expectedRecoveredLB = null;
-    String expectedRecoveredMR = null;
+    String expectedRecoveredLB;
+    String expectedRecoveredMR;
 
     try {
       expectedRecoveredLB = readFileToString(new File(EXPECTED_TOP_LEADERBOARD_PATH));
       expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
     } catch (IOException e) {
-      PageObjectLogging.log("Can't open file", e, false);
+      PageObjectLogging.log("Can't open expected PageFair recovery file.", e, false);
       throw new WebDriverException("Can't open expected PageFair recovery file.");
     }
 
@@ -74,5 +74,15 @@ public class AdsRecoveryObject extends AdsBaseObject {
         Assertion.fail("Not supported PageFair recovery ad size encountered: " + adSize);
       }
     }
+  }
+
+  public void verifyPageFairRecoveryWithNoAdBlock() {
+    verifyTopLeaderboard();
+    verifyMedrec();
+
+    // there should be no elements with adonis-marker attribute in DOM
+    List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
+
+    Assertion.assertEquals(markedSlots.size(), 0);
   }
 }
