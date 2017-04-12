@@ -1,9 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.EmailUtils;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
