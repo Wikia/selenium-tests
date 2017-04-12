@@ -1,16 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import static org.apache.commons.io.FileUtils.readFileToString;
+
 import com.wikia.webdriver.common.core.Assertion;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AdsRecoveryObject extends AdsBaseObject {
+  private static final String EXPECTED_TOP_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
+  private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
 
   public AdsRecoveryObject(WebDriver driver, String page, Dimension resolution) {
     super(driver, page, resolution);
@@ -23,9 +30,19 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   public void verifyPageFairRecovery() {
+    int recoverableAdsCount = 2;
     By spansBodyChildrenSelector = By.cssSelector("body>span");
     Dimension topLeaderboardSize = new Dimension(728, 90);
     Dimension medrecSize = new Dimension(300, 250);
+    String expectedRecoveredLB = null;
+    String expectedRecoveredMR = null;
+
+    try {
+      expectedRecoveredLB = readFileToString(new File(EXPECTED_TOP_LEADERBOARD_PATH));
+      expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     // when PF recovered ad is on page, inserts span elements as a direct children of body
     wait.forElementPresent(spansBodyChildrenSelector);
@@ -34,7 +51,6 @@ public class AdsRecoveryObject extends AdsBaseObject {
     verifyNoAdsOnPage();
 
     String firstSpanClass = driver.findElement(spansBodyChildrenSelector).getAttribute("class");
-    //System.out.println("\n\nCLASS:" + firstSpanClass);
     List<WebElement> recoveredAds = driver
         .findElements(By.cssSelector("body>span." + firstSpanClass))
         .stream()
@@ -42,19 +58,17 @@ public class AdsRecoveryObject extends AdsBaseObject {
         .filter(e -> e.getCssValue("background").contains("data:image/jpeg"))
         .collect(Collectors.toList());
 
-    String recoveredTopLeaderboard = "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABLAAD/4QPZaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29";
-    String recoveredMedrec = "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA3AAD/4QPZaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29";
+    Assert.assertEquals(recoveredAds.size(), recoverableAdsCount);
 
     for (WebElement ad : recoveredAds) {
-      System.out.println("\n\nNA STRONIE:");
-      System.out.println(ad.getAttribute("class"));
-      System.out.println(ad.getSize());
-      System.out.println(ad.getCssValue("background").substring(0, 300));
+      Dimension adSize = ad.getSize();
 
-      if (ad.getSize() == topLeaderboardSize) {
-        Assertion.assertTrue(ad.getCssValue("background").contains(recoveredTopLeaderboard), "Ad of size" + ad.getSize() + "is not recovered!");
-      } else if (ad.getSize() == medrecSize) {
-        Assertion.assertTrue(ad.getCssValue("background").contains(recoveredMedrec), "Ad of size" + ad.getSize() + "is not recovered!");
+      if (adSize.equals(topLeaderboardSize)) {
+        Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredLB), "TOP_LEADERBOARD is not correctly recovered!");
+      } else if (adSize.equals(medrecSize)) {
+        Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredMR), "MEDREC is not correctly recovered!");
+      } else {
+        Assertion.fail("Not supported PageFair recovery ad size encountered: " + adSize);
       }
     }
   }
