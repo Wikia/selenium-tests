@@ -1129,8 +1129,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
-            "cb=35674143234324423432233333131231321313334",
-            "src/test/resources/adsResources/kolo.png"
+            "cb=35674143234324423432233333131231321313334"
 //            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]",
         }
     };
