@@ -10,13 +10,8 @@ import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
 import java.util.List;
-import java.util.Optional;
-
 import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 public class VideosPageTests extends NewTestTemplate {
