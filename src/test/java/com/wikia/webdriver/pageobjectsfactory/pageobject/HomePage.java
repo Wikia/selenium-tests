@@ -20,9 +20,9 @@ public class HomePage extends WikiBasePageObject {
 
   public HomePage openAndWaitForGlobalShortcuts() {
     open();
-    waitFor.until((Predicate<WebDriver>) arg0 -> (driver.executeScript(
+    waitFor.until((Predicate<WebDriver>) arg0 -> driver.executeScript(
         "return typeof window.wgGlobalShortcutsLoaded !== 'undefined' && window.wgGlobalShortcutsLoaded")
-                                                      .equals(true)));
+                                                      .equals(true));
 
     return this;
   }
