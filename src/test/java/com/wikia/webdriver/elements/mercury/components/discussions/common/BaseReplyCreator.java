@@ -71,10 +71,10 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   @Override
   public ReplyCreator clickSubmitButton() {
     getSubmitButton().click();
-    return this.waitForSpinnerToDisappear();
+    return this.waitForConfirmation();
   }
 
-  private ReplyCreator waitForSpinnerToDisappear() {
+  private ReplyCreator waitForConfirmation() {
     waitSafely(() -> wait.forElementVisible(getLoadingSuccess()));
     waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
