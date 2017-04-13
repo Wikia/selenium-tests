@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.elements.fandom.components.Notification;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -54,15 +55,21 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 public class WikiBasePageObject extends BasePageObject {
 
+
+  public static final String CONFIRM_NOTIFICATION = "CONFIRM";
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".wds-global-navigation__user-menu img";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
@@ -126,8 +133,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
-  @FindBy(css = ".banner-notification")
-  private WebElement bannerNotification;
+  @FindBys(@FindBy(css = ".banner-notification"))
+  private List<WebElement> notificationElements;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-global-navigation__user-menu")
@@ -398,8 +405,19 @@ public class WikiBasePageObject extends BasePageObject {
     return new DeletePageObject(driver);
   }
 
-  public String getBannerNotificationText() {
-    return bannerNotification.getText();
+  public List<Notification> getNotifications(){
+    List<Notification> notificationList = new ArrayList<>();
+    for (WebElement notificationElement : notificationElements){
+      Notification notification = new Notification(driver, notificationElement);
+      notificationList.add(notification);
+    }
+    return notificationList;
+  }
+
+  public List<Notification> getNotifications(String notificationType){
+    List<Notification> notificationList = getNotifications();
+    return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType))
+            .collect(Collectors.toList());
   }
 
   public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
