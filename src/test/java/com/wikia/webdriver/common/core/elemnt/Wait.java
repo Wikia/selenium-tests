@@ -41,7 +41,7 @@ public class Wait {
   }
 
   public void forPageLoaded() {
-    wait.until((Predicate<WebDriver>) arg0 -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+    wait.until((Predicate<WebDriver>) arg0 -> ((JavascriptExecutor) driver).executeScript("return window.wgGlobalShortcutsLoaded").equals(true));
   }
 
   /**

@@ -68,12 +68,6 @@ public class BasePageObject {
 
   public void waitForPageLoad() {
     wait.forPageLoaded();
-
-    try {
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 
   public static String getTimeStamp() {
