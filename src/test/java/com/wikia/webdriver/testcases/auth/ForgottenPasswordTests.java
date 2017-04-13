@@ -22,12 +22,12 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
   @Test
   public void anonCanRemindPasswordFromAuthModal() {
-    performResetPasswordFlowForUser(User.FORGOTTEN_PASSWORD);
+    executeResetPasswordFlow(User.FORGOTTEN_PASSWORD);
   }
 
   @Test
-  public void anonCanResetPasswordForUsernameWithSpace() {
-    performResetPasswordFlowForUser(User.FORGOTTEN_PASSWORD_SPACES);
+  public void anonCanResetPasswordForUsernameWithSpaces() {
+    executeResetPasswordFlow(User.FORGOTTEN_PASSWORD_SPACES);
   }
 
   @Test
@@ -58,7 +58,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 
-  private void performResetPasswordFlowForUser(User user) {
+  private void executeResetPasswordFlow(User user) {
     EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
