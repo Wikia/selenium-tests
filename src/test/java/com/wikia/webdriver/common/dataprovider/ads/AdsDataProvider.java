@@ -1101,7 +1101,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] AdsRecoverySourcePointOasis() {
+  public static Object[][] adsRecoverySourcePointOasis() {
     return new Object[][]{
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
@@ -1134,7 +1134,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] AdsRecoverySourcePointOasisProject43() {
+  public static Object[][] adsRecoverySourcePointOasisProject43() {
       return new Object[][]{
           {
               new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
@@ -1158,7 +1158,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] AdsRecoverySourcePointOasisHopToTaboola() {
+  public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
       return new Object[][]{
           {
               new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),

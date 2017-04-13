@@ -19,10 +19,10 @@ public class TestAdsRecoverySourcePointOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "AdsRecoverySourcePointOasis",
+      dataProvider = "adsRecoverySourcePointOasis",
       groups = "AdsRecoverySourcePointOasis"
   )
-  public void AdsRecoverySourcePointOasis(Page page, Map<String, Object> slotInfo) {
+  public void adsRecoverySourcePointOasis(Page page, Map<String, Object> slotInfo) {
     String adUnitId = slotInfo.get("adUnitId").toString();
     String slotName = slotInfo.get("slotName").toString();
     String url = urlBuilder.getUrlForPage(page);
@@ -39,19 +39,19 @@ public class TestAdsRecoverySourcePointOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "AdsRecoverySourcePointOasisProject43",
+      dataProvider = "adsRecoverySourcePointOasisProject43",
       groups = "AdsRecoverySourcePointOasis"
   )
-  public void AdsRecoverySourcePointOasisByCountry(Page page, Map<String, Object> slotInfo) {
-    AdsRecoverySourcePointOasis(page, slotInfo);
+  public void adsRecoverySourcePointOasisByCountry(Page page, Map<String, Object> slotInfo) {
+    adsRecoverySourcePointOasis(page, slotInfo);
   }
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "AdsRecoverySourcePointOasisHopToTaboola",
+      dataProvider = "adsRecoverySourcePointOasisHopToTaboola",
       groups = "AdsRecoverySourcePointOasis"
   )
-  public void AdsRecoverySourcePointOasisHopToTaboola(Page page, Map<String, Object> slotInfo) {
+  public void adsRecoverySourcePointOasisHopToTaboola(Page page, Map<String, Object> slotInfo) {
     String slotName = slotInfo.get("slotName").toString();
     String adUnitId = slotInfo.get("adUnitId").toString();
     String url = urlBuilder.getUrlForPage(page);
