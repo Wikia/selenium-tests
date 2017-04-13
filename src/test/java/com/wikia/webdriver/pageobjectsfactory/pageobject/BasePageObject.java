@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.google.common.base.Predicate;
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,12 +16,23 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
+import com.google.common.base.Predicate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -33,8 +45,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
 
 public class BasePageObject {
 
@@ -60,6 +70,7 @@ public class BasePageObject {
   public void waitForPageLoad() {
     wait.forElementPresent(
         By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
+
   }
 
   public static String getTimeStamp() {
