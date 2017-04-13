@@ -5,8 +5,10 @@ import com.wikia.webdriver.common.core.SelectorStack;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.google.common.base.Predicate;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -36,6 +38,10 @@ public class Wait {
   public Wait(WebDriver webDriver) {
     this.driver = webDriver;
     this.wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
+  }
+
+  public void forPageLoaded() {
+    wait.until((Predicate<WebDriver>) arg0 -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
   }
 
   /**
