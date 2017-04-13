@@ -25,6 +25,8 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
   private static final int WAIT_BUTTON_DELAY_TOLERANCE = 2;
 
+  private static final String INTERSTITSIAL_AD_SELECTOR = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe";
+
   @FindBy(css = "a.close")
   private WebElement interstitialCloseButton;
 
@@ -48,9 +50,9 @@ public class AdsInterstitialObject extends AdsBaseObject {
     }
   }
 
-  public void verifySize(String selector, Dimension expectedAdSize) {
+  public void verifySize(Dimension expectedAdSize) {
 
-    Dimension actualSize = driver.findElement(By.cssSelector(selector)).getSize();
+    Dimension actualSize = driver.findElement(By.cssSelector(INTERSTITSIAL_AD_SELECTOR)).getSize();
     Dimension expectedSize = expectedAdSize;
 
 

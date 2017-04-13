@@ -19,8 +19,8 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
       groups = "TestInterstitialOasis",
       dataProvider = "interstitialOasis"
   )
-  public void adsInterstitialAdScaledOasis(Page page, String selector, Dimension adSize) throws InterruptedException {
-    testInterstitial2(page, selector, adSize);
+  public void adsInterstitialAdOnOasis(Page page, Dimension adSize) throws InterruptedException {
+    testInterstitial(page, adSize);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -29,20 +29,18 @@ public class TestAdsInterstitial extends TemplateNoFirstLoad {
       groups = "TestInterstitialMercury",
       dataProvider = "interstitialMercury"
   )
-  public void adsInterstitialAdScaledOnMobileInPortraitPosition(Page page, String selector, Dimension adSize) throws InterruptedException {
-    testInterstitial2(page, selector, adSize);
+  public void adsInterstitialAdOnMobileInPortraitPosition(Page page,  Dimension adSize) throws InterruptedException {
+    testInterstitial(page, adSize);
   }
 
-  private void testInterstitial2(Page page, String selector, Dimension adSize) throws InterruptedException {
+  private void testInterstitial(Page page, Dimension adSize) throws InterruptedException {
     AdsInterstitialObject adsInterstitial = new AdsInterstitialObject(driver);
     adsInterstitial.getUrl(page);
 
     adsInterstitial.waitForPageLoadedWithGpt();
     Assertion.assertTrue(adsInterstitial.isInterstitialAdDisplayed(), "No Interstitial ad is not displayed");
-    adsInterstitial.verifySize(selector, adSize);
+    adsInterstitial.verifySize(adSize);
     adsInterstitial.closeInterstitial();
     adsInterstitial.verifyInterstitialIsClosed();
   }
-
-
 }

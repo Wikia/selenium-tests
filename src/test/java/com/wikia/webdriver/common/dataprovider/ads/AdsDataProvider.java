@@ -766,7 +766,6 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
-            ".invisible-high-impact-wrapper.interstitial .provider-container iframe",
             new Dimension(300, 250)
         },
     };
@@ -777,7 +776,6 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
-            "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe",
             new Dimension(728, 90)
         },
     };
