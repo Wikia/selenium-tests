@@ -13,16 +13,16 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
-public class TestAdsRecoverySourcePointOasis extends TemplateNoFirstLoad {
+public class TestAdsRecoveryOasis extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsRecoverySourcePointOasis",
-      groups = "AdsRecoverySourcePointOasis"
+      dataProvider = "adsRecoveryOasis",
+      groups = "AdsRecoveryOasis"
   )
-  public void adsRecoverySourcePointOasis(Page page, Map<String, Object> slotInfo) {
+  public void adsRecoveryOasis(Page page, Map<String, Object> slotInfo) {
     String adUnitId = slotInfo.get("adUnitId").toString();
     String slotName = slotInfo.get("slotName").toString();
     String url = urlBuilder.getUrlForPage(page);
@@ -39,19 +39,19 @@ public class TestAdsRecoverySourcePointOasis extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsRecoverySourcePointOasisProject43",
-      groups = "AdsRecoverySourcePointOasis"
+      dataProvider = "adsRecoveryOasisProject43",
+      groups = "AdsRecoveryOasis"
   )
-  public void adsRecoverySourcePointOasisByCountry(Page page, Map<String, Object> slotInfo) {
-    adsRecoverySourcePointOasis(page, slotInfo);
+  public void adsRecoveryOasisByCountry(Page page, Map<String, Object> slotInfo) {
+    adsRecoveryOasis(page, slotInfo);
   }
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsRecoverySourcePointOasisHopToTaboola",
-      groups = "AdsRecoverySourcePointOasis"
+      dataProvider = "adsRecoveryOasisHopToTaboola",
+      groups = "AdsRecoveryOasis"
   )
-  public void adsRecoverySourcePointOasisHopToTaboola(Page page, Map<String, Object> slotInfo) {
+  public void adsRecoveryOasisHopToTaboola(Page page, Map<String, Object> slotInfo) {
     String slotName = slotInfo.get("slotName").toString();
     String adUnitId = slotInfo.get("adUnitId").toString();
     String url = urlBuilder.getUrlForPage(page);

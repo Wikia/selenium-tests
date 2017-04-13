@@ -95,6 +95,14 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     return this;
   }
 
+  private void waitSafely(Runnable o) {
+    try {
+      o.run();
+    } catch (TimeoutException e) {
+      PageObjectLogging.log("Timed out waiting", e.getMessage(), true);
+    }
+  }
+
   public void waitForPageReloadWith(final String categoryName) {
     waitForPageReload();
 

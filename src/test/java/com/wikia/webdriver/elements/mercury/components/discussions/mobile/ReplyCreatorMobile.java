@@ -30,10 +30,6 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
   private WebElement textarea;
 
-  @FindBy(css = ".wds-spinner__stroke")
-  @Getter
-  private WebElement loadingSuccess;
-
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();

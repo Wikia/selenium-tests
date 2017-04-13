@@ -1101,7 +1101,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoverySourcePointOasis() {
+  public static Object[][] adsRecoveryOasis() {
     return new Object[][]{
         {
             new Page("arecovery", "SyntheticTests/Static_image"),
@@ -1125,16 +1125,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryPageFairOasis() {
-    return new Object[][]{
-        {
-            new Page("arecovery", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]"),
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsRecoverySourcePointOasisProject43() {
+  public static Object[][] adsRecoveryOasisProject43() {
       return new Object[][]{
           {
               new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
@@ -1158,7 +1149,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
+  public static Object[][] adsRecoveryOasisHopToTaboola() {
       return new Object[][]{
           {
               new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
