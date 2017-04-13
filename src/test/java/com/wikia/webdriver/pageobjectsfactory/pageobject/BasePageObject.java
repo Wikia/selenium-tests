@@ -53,7 +53,7 @@ public class BasePageObject {
   protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
   public Actions builder;
-  protected int timeOut = 30;
+  protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
 
@@ -66,8 +66,11 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
+  //wait for comscore to load
   public void waitForPageLoad() {
-    wait.forPageLoaded();
+    wait.forElementPresent(
+        By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
+
   }
 
   public static String getTimeStamp() {
