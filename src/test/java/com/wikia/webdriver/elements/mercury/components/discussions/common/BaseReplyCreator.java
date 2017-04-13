@@ -19,6 +19,8 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   protected abstract WebElement getSubmitButton();
 
+  protected abstract WebElement getLoadingSuccess();
+
   @Override
   public ReplyCreator click() {
     wait.forElementVisible(getReplyCreator()).click();
@@ -69,6 +71,12 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   @Override
   public ReplyCreator clickSubmitButton() {
     getSubmitButton().click();
+    return this.waitForConfirmation();
+  }
+
+  private ReplyCreator waitForConfirmation() {
+    waitSafely(() -> wait.forElementVisible(getLoadingSuccess()));
+    waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
   }
 }
