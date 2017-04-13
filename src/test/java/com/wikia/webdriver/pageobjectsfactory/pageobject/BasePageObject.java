@@ -53,7 +53,7 @@ public class BasePageObject {
   protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
   public Actions builder;
-  protected int timeOut = 15;
+  protected int timeOut = 30;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
 
