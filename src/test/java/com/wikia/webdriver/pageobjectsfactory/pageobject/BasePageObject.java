@@ -146,7 +146,7 @@ public class BasePageObject {
     try {
       o.run();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Timed out waiting", e.getMessage(), true);
+      PageObjectLogging.log("Timed out waiting", e, true);
     }
   }
 
