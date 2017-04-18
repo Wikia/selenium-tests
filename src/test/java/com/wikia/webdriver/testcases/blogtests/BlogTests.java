@@ -89,8 +89,8 @@ public class BlogTests extends NewTestTemplate {
     deletePage.submitDeletion();
 
     List<Notification> confirmNotifications = base.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     SpecialRestorePageObject restore = base.getNotifications(CONFIRM_NOTIFICATION)
             .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
 
@@ -98,7 +98,7 @@ public class BlogTests extends NewTestTemplate {
     restore.restorePage();
 
     confirmNotifications = blogPage.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
+    Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of banner notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
                          "Banner notification message is not visible");
@@ -119,8 +119,8 @@ public class BlogTests extends NewTestTemplate {
     blogPage.verifyBlogTitle(blogTitleMove);
 
     List<Notification> confirmNotifications = blogPage.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
                          "Banner notification message is not visible");
   }

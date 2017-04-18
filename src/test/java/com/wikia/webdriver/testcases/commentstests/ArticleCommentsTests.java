@@ -100,8 +100,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
     delete.submitDeletion();
 
     List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
     article.verifyCommentDeleted(commentText);
   }

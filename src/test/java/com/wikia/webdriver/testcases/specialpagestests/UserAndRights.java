@@ -73,8 +73,8 @@ public class UserAndRights extends NewTestTemplate {
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
     List<Notification> confirmNotifications = prefPage.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 

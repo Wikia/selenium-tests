@@ -36,8 +36,8 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
     List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     SpecialRestorePageObject restore = article.getNotifications(CONFIRM_NOTIFICATION)
             .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
 
@@ -63,8 +63,8 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
 
-    Assertion.assertTrue(confirmNotifications.size()==1,
-                         "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     Assertion.assertEquals(confirmNotifications.stream().findFirst().get().getMessage(),
             "\"" + articleOldTitle + "\" has been renamed \"" + articleNewName + "\"",
             "Banner notification messsage is invalid");

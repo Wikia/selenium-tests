@@ -69,8 +69,8 @@ public class ImageStorageTests extends NewTestTemplate {
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
     confirmNotifications = restore.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 
@@ -106,8 +106,8 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage.rename(imageNewName, true);
 
     List<Notification> confirmNotifications = file.getNotifications(CONFIRM_NOTIFICATION);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 

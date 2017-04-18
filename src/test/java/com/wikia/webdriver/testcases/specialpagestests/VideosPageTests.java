@@ -88,8 +88,8 @@ public class VideosPageTests extends NewTestTemplate {
 
         List<Notification> confirmNotifications = specialVideos.getNotifications(CONFIRM_NOTIFICATION);
 
-        Assertion.assertTrue(confirmNotifications.stream().findFirst().isPresent(),
-                "No confirming notifications were displayed");
+        Assertion.assertEquals(confirmNotifications.size(),1,
+                "Number of action confirming notifications is invalid");
         Assertion.assertStringContains(confirmNotifications.stream().findFirst().get().getMessage(),addedVideoTitle);
         Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
                 "Video is still visible as newest video");

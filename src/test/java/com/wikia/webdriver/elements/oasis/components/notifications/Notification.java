@@ -3,10 +3,14 @@ package com.wikia.webdriver.elements.oasis.components.notifications;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import jdk.nashorn.internal.objects.NativeRegExp;
+import org.apache.http.protocol.HTTP;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLDocument;
 
 
 public class Notification extends BasePageObject {
@@ -28,8 +32,11 @@ public class Notification extends BasePageObject {
     }
 
     public String getType(){
-        String[] classes =  "banner confirm non-dismissable".split(" ",2);
-        return classes[classes.length-1];
+        String classString = parentElement.getAttribute("class");
+        if (classString==null)
+            throw new  NullPointerException("Couldn't get class attribute from notification");
+        String[] classArray =  classString.split(" ",2);
+        return classArray[classArray.length-1];
     }
 
     public void undelete(){
