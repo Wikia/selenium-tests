@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -88,16 +89,16 @@ public class BlogTests extends NewTestTemplate {
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
 
-    List<Notification> confirmNotifications = base.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = base.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
-    SpecialRestorePageObject restore = base.getNotifications(CONFIRM_NOTIFICATION)
+    SpecialRestorePageObject restore = base.getNotifications(NotificationType.CONFIRM)
             .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
 
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
 
-    confirmNotifications = blogPage.getNotifications(CONFIRM_NOTIFICATION);
+    confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of banner notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
@@ -118,7 +119,7 @@ public class BlogTests extends NewTestTemplate {
     renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
     blogPage.verifyBlogTitle(blogTitleMove);
 
-    List<Notification> confirmNotifications = blogPage.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),

@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
@@ -52,7 +53,7 @@ public class ImageStorageTests extends NewTestTemplate {
     DeletePageObject delete = file.deletePage();
     delete.submitDeletion();
 
-    List<Notification> confirmNotifications = filesPage.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = filesPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertTrue(confirmNotifications.size()==1,
             "Number of banner notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
@@ -61,14 +62,14 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
 
-    confirmNotifications = delete.getNotifications(CONFIRM_NOTIFICATION);
+    confirmNotifications = delete.getNotifications(NotificationType.CONFIRM);
     Assertion.assertTrue(confirmNotifications.size()==1,
             "Number of banner notifications is invalid");
     SpecialRestorePageObject restore =
         confirmNotifications.stream().findFirst().get().clickUndeleteLinkInBannerNotification();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
-    confirmNotifications = restore.getNotifications(CONFIRM_NOTIFICATION);
+    confirmNotifications = restore.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
@@ -105,7 +106,7 @@ public class ImageStorageTests extends NewTestTemplate {
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
 
-    List<Notification> confirmNotifications = file.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = file.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
@@ -116,7 +117,7 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
 
-    confirmNotifications = file.getNotifications(CONFIRM_NOTIFICATION);
+    confirmNotifications = file.getNotifications(NotificationType.CONFIRM);
     Assertion.assertTrue(confirmNotifications.size()==1,
             "Number of banner notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),

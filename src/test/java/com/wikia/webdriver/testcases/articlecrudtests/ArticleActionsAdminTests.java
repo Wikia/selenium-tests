@@ -10,6 +10,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -35,16 +36,19 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
-    List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
-    SpecialRestorePageObject restore = article.getNotifications(CONFIRM_NOTIFICATION)
+    SpecialRestorePageObject restore = article.getNotifications(NotificationType.CONFIRM)
             .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
 
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
-    Assertion.assertTrue(article.getNotifications(CONFIRM_NOTIFICATION).stream().findFirst().isPresent());
+    confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            "Number of action confirming notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
 
     article.verifyArticleTitle(articleTitle);
   }
@@ -61,7 +65,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
 
-    List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
 
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");

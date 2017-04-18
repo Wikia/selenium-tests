@@ -2,15 +2,9 @@ package com.wikia.webdriver.elements.oasis.components.notifications;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
-import jdk.nashorn.internal.objects.NativeRegExp;
-import org.apache.http.protocol.HTTP;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import javax.swing.text.html.HTML;
-import javax.swing.text.html.HTMLDocument;
 
 
 public class Notification extends BasePageObject {

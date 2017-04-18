@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
@@ -56,7 +57,7 @@ public class VideosPageTests extends NewTestTemplate {
         }
         specialVideos.deleteNewestVideo();
 
-        List<Notification> confirmNotifications = specialVideos.getNotifications(CONFIRM_NOTIFICATION);
+        List<Notification> confirmNotifications = specialVideos.getNotifications(NotificationType.CONFIRM);
 
         Assertion.assertTrue(confirmNotifications.stream().findFirst().isPresent(),
                 "No confirming notifications were displayed");
@@ -86,7 +87,7 @@ public class VideosPageTests extends NewTestTemplate {
 
         specialVideos.deleteNewestVideo();
 
-        List<Notification> confirmNotifications = specialVideos.getNotifications(CONFIRM_NOTIFICATION);
+        List<Notification> confirmNotifications = specialVideos.getNotifications(NotificationType.CONFIRM);
 
         Assertion.assertEquals(confirmNotifications.size(),1,
                 "Number of action confirming notifications is invalid");

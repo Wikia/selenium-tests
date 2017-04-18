@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
@@ -72,7 +73,7 @@ public class UserAndRights extends NewTestTemplate {
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
-    List<Notification> confirmNotifications = prefPage.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),

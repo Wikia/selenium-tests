@@ -13,6 +13,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
@@ -410,9 +411,9 @@ public class WikiBasePageObject extends BasePageObject {
     return notificationList;
   }
 
-  public List<Notification> getNotifications(String notificationType){
+  public List<Notification> getNotifications(NotificationType notificationType){
     List<Notification> notificationList = getNotifications();
-    return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType))
+    return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType.name()))
             .collect(Collectors.toList());
   }
 

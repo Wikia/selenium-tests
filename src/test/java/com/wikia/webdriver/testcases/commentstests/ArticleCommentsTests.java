@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -99,7 +100,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     DeletePageObject delete = article.deleteFirstComment();
     delete.submitDeletion();
 
-    List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
+    List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
             "Number of action confirming notifications is invalid");
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
