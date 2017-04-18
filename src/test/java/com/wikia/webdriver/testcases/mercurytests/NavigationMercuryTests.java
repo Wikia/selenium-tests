@@ -55,7 +55,6 @@ public class NavigationMercuryTests extends NavigationTests {
 
   @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX)
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(
         new GuidelinesPage().open()
