@@ -53,9 +53,8 @@ public class NavigationMercuryTests extends NavigationTests {
     );
   }
 
-  // TODO: enable as a part of fix in IRIS-4209
-  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn", enabled = false)
-  @Execute(asUser = User.USER)
+  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
+  @Execute(asUser = User.USER_3)
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(
         new GuidelinesPage().open()

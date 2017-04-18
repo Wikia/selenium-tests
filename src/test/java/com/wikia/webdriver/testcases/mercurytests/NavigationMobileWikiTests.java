@@ -53,8 +53,8 @@ public class NavigationMobileWikiTests extends NavigationTests {
     );
   }
 
-  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn", enabled = false)
-  @Execute(asUser = User.USER)
+  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
+  @Execute(asUser = User.USER_3)
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(
         new ArticlePage().open(MercurySubpages.MAIN_PAGE)
