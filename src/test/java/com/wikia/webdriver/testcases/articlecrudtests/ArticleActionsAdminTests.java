@@ -11,19 +11,20 @@ import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
-
 import org.testng.annotations.Test;
-
 import java.util.List;
 
-import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
+import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS;
+
 
 @Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {
+
 
   @Test(groups = {"ArticleActionsAdmin_001"})
   @UseUnstablePageLoadStrategy
@@ -38,7 +39,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     deletePage.submitDeletion();
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore = article.getNotifications(NotificationType.CONFIRM)
             .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
 
@@ -47,7 +48,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     restore.restorePage();
     confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
 
     article.verifyArticleTitle(articleTitle);
@@ -68,7 +69,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
 
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertEquals(confirmNotifications.stream().findFirst().get().getMessage(),
             "\"" + articleOldTitle + "\" has been renamed \"" + articleNewName + "\"",
             "Banner notification messsage is invalid");

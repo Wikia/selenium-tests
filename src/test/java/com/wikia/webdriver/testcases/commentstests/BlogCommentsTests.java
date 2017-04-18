@@ -16,10 +16,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.testng.annotations.Test;
-
 import java.util.List;
 
-import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 @Test(groups = "comments-blogComments")
 public class BlogCommentsTests extends NewTestTemplate {

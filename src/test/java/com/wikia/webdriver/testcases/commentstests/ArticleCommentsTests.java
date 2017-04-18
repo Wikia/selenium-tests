@@ -13,13 +13,10 @@ import com.wikia.webdriver.elements.oasis.components.notifications.NotificationT
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
-import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 @Test(groups = "comments-articleComments")
 public class ArticleCommentsTests extends NewTestTemplate {

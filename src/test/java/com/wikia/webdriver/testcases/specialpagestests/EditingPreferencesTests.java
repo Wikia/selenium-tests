@@ -20,10 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
 import java.util.List;
-
-import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 @Test(groups = {"EditingPreferencesTest"})
 public class EditingPreferencesTests extends NewTestTemplate {
@@ -44,7 +41,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 
@@ -65,7 +62,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 
@@ -85,7 +82,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 
@@ -113,7 +110,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
             "Banner notification message is not visible");
 

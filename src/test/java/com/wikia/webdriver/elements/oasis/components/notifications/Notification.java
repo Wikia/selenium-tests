@@ -27,8 +27,9 @@ public class Notification extends BasePageObject {
 
     public String getType(){
         String classString = parentElement.getAttribute("class");
-        if (classString==null)
+        if (classString==null){
             throw new  NullPointerException("Couldn't get class attribute from notification");
+        }
         String[] classArray =  classString.split(" ",2);
         return classArray[classArray.length-1];
     }
