@@ -23,7 +23,7 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".logo-fandom")
   private WebElement logoFandom;
 
-  @FindBy(css = ".site-head__nav-icon-wrapper")
+  @FindBy(css = ".site-head-icon-nav")
   private WebElement hamburgerIcon;
 
   @FindBy(css = ".site-head-icon-search")
