@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
@@ -14,6 +15,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 @Test(groups = "comments-blogComments")
 public class BlogCommentsTests extends NewTestTemplate {
@@ -99,7 +104,10 @@ public class BlogCommentsTests extends NewTestTemplate {
     DeletePageObject delete = blogPage.deleteFirstComment();
     delete.submitDeletion();
 
-    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible(),
+    List<Notification> confirmNotifications = blogPage.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
                          "Banner notification message is not visible");
     blogPage.verifyCommentDeleted(commentText);
   }

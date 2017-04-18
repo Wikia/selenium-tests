@@ -198,6 +198,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   }
 
+  public String getArticleTitle(){
+    wait.forElementVisible(articleTitle);
+    return articleTitle.getText();
+  }
+
   public void verifyArticleTitle(String title) {
     wait.forElementVisible(articleHeader);
     Assertion.assertEquals(articleHeader.getText(), title);

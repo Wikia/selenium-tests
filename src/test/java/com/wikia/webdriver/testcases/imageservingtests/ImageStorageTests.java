@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
@@ -15,6 +16,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -46,18 +51,28 @@ public class ImageStorageTests extends NewTestTemplate {
 
     DeletePageObject delete = file.deletePage();
     delete.submitDeletion();
-    Assertion.assertTrue(filesPage.getBannerNotifications().isNotificationMessageVisible(),
+
+    List<Notification> confirmNotifications = filesPage.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
                          "Banner notification message is not visible");
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
 
+    confirmNotifications = delete.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
     SpecialRestorePageObject restore =
-        delete.getBannerNotifications().clickUndeleteLinkInBannerNotification();
+        confirmNotifications.stream().findFirst().get().clickUndeleteLinkInBannerNotification();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
-    Assertion.assertTrue(restore.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    confirmNotifications = restore.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+            "Banner notification message is not visible");
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -90,15 +105,22 @@ public class ImageStorageTests extends NewTestTemplate {
     String imageNewName = DateTime.now().getMillis() + PageContent.FILERENAME;
     renamePage.rename(imageNewName, true);
 
-    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    List<Notification> confirmNotifications = file.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+            "Banner notification message is not visible");
+
     file.verifyHeader(imageNewName);
     file = new FilePage().open(imageNewName, true);
     renamePage = file.renameUsingDropdown();
     renamePage.rename(fileName, true);
 
-    Assertion.assertTrue(file.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    confirmNotifications = file.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+            "Banner notification message is not visible");
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();

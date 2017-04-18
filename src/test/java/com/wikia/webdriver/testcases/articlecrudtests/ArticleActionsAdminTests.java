@@ -9,12 +9,17 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 @Test(groups = {"ArticleActionsAdmin"})
 public class ArticleActionsAdminTests extends NewTestTemplate {
@@ -30,14 +35,16 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore =
-        article.getBannerNotifications().clickUndeleteLinkInBannerNotification();
+    List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    SpecialRestorePageObject restore = article.getNotifications(CONFIRM_NOTIFICATION)
+            .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
+
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());
     restore.restorePage();
-
-    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    Assertion.assertTrue(article.getNotifications(CONFIRM_NOTIFICATION).stream().findFirst().isPresent());
 
     article.verifyArticleTitle(articleTitle);
   }
@@ -49,13 +56,19 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject().open();
+    String articleOldTitle = article.getArticleTitle();
     String articleNewName = TestContext.getCurrentMethodName() + article.getTimeStamp();
     RenamePageObject renamePage = article.renameUsingDropdown();
     renamePage.rename(articleNewName, false);
 
-    Assertion.assertTrue(article.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    List<Notification> confirmNotifications = article.getNotifications(CONFIRM_NOTIFICATION);
 
-    article.verifyArticleTitle(articleNewName);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+                         "Number of banner notifications is invalid");
+    Assertion.assertEquals(confirmNotifications.stream().findFirst().get().getMessage(),
+            "\"" + articleOldTitle + "\" has been renamed \"" + articleNewName + "\"",
+            "Banner notification messsage is invalid");
+    Assertion.assertEquals(article.getArticleName(), articleNewName,
+            "New article title is invalid");
   }
 }

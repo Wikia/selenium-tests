@@ -1,6 +1,6 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import com.wikia.webdriver.elements.fandom.components.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -56,9 +56,6 @@ public class VideosPageTests extends NewTestTemplate {
         }
         specialVideos.deleteNewestVideo();
 
-        Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
-                "Banner notification is not visible");
-
         List<Notification> confirmNotifications = specialVideos.getNotifications(CONFIRM_NOTIFICATION);
 
         Assertion.assertTrue(confirmNotifications.stream().findFirst().isPresent(),
@@ -89,8 +86,11 @@ public class VideosPageTests extends NewTestTemplate {
 
         specialVideos.deleteNewestVideo();
 
-        Assertion.assertTrue(specialVideos.getBannerNotifications().isNotificationMessageVisible(),
-                "Banner notification is not visible");
+        List<Notification> confirmNotifications = specialVideos.getNotifications(CONFIRM_NOTIFICATION);
+
+        Assertion.assertTrue(confirmNotifications.stream().findFirst().isPresent(),
+                "No confirming notifications were displayed");
+        Assertion.assertStringContains(confirmNotifications.stream().findFirst().get().getMessage(),addedVideoTitle);
         Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
                 "Video is still visible as newest video");
     }

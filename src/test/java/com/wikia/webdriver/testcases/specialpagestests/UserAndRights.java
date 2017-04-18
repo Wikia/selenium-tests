@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
@@ -18,6 +19,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.CONFIRM_NOTIFICATION;
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -66,9 +71,12 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    
-    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
-                         "Notification message is not visible");
+
+    List<Notification> confirmNotifications = prefPage.getNotifications(CONFIRM_NOTIFICATION);
+    Assertion.assertTrue(confirmNotifications.size()==1,
+            "Number of banner notifications is invalid");
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+            "Banner notification message is not visible");
 
     prefPage.enterEmailChangeLink(username, password);
 
