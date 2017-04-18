@@ -59,10 +59,12 @@ public class VideosPageTests extends NewTestTemplate {
 
         List<Notification> confirmNotifications = specialVideos.getNotifications(NotificationType.CONFIRM);
 
-        Assertion.assertTrue(confirmNotifications.stream().findFirst().isPresent(),
-                "No confirming notifications were displayed");
-        String actualNotificationMessage = confirmNotifications.stream().findFirst().get().getMessage();
-        Assertion.assertStringContains(actualNotificationMessage, addedVideoTitlePattern);
+        Assertion.assertEquals(confirmNotifications.size(),1,
+                SpecialVideosPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+        Notification notification = confirmNotifications.stream().findFirst().get();
+        Assertion.assertTrue(notification.isVisible(),
+                SpecialVideosPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        Assertion.assertStringContains(notification.getMessage(), addedVideoTitlePattern);
     }
 
     /**
@@ -90,8 +92,11 @@ public class VideosPageTests extends NewTestTemplate {
         List<Notification> confirmNotifications = specialVideos.getNotifications(NotificationType.CONFIRM);
 
         Assertion.assertEquals(confirmNotifications.size(),1,
-                "Number of action confirming notifications is invalid");
-        Assertion.assertStringContains(confirmNotifications.stream().findFirst().get().getMessage(),addedVideoTitle);
+                SpecialVideosPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+        Notification notification = confirmNotifications.stream().findFirst().get();
+        Assertion.assertTrue(notification.isVisible(),
+                SpecialVideosPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        Assertion.assertStringContains(notification.getMessage(),addedVideoTitle);
         Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
                 "Video is still visible as newest video");
     }

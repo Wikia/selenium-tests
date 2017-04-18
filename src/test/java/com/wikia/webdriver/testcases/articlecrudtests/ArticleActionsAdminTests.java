@@ -11,15 +11,12 @@ import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import org.testng.annotations.Test;
 import java.util.List;
-
-import static com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS;
 
 
 @Test(groups = {"ArticleActionsAdmin"})

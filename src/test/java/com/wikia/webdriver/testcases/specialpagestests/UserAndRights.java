@@ -72,9 +72,9 @@ public class UserAndRights extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     prefPage.enterEmailChangeLink(username, password);
 

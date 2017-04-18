@@ -69,8 +69,14 @@ public class WikiBasePageObject extends BasePageObject {
 
 
   public static class PageMessages{
+
+    private PageMessages() {
+      throw new IllegalAccessError("Utility class");
+    }
+
     public static final String INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS =
             "Number of action confirming notifications is invalid";
+    public static final String BANNER_NOTIFICATION_NOT_VISIBLE = "Banner notification message is not visible";
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".wds-global-navigation__user-menu img";

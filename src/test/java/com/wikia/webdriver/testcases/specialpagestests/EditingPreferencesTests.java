@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
@@ -43,7 +44,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -64,7 +65,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -84,7 +85,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
@@ -112,7 +113,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     editPrefPage.enterEmailChangeLink(USERNAME, PASSWORD);
     editPrefPage.openEmailSection();

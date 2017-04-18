@@ -105,9 +105,9 @@ public class BlogCommentsTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            "Number of action confirming notifications is invalid");
+            DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         "Banner notification message is not visible");
+                         DeletePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
     blogPage.verifyCommentDeleted(commentText);
   }
 }

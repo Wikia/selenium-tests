@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
@@ -54,7 +55,7 @@ public class ImageStorageTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         "Banner notification message is not visible");
+                         DeletePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
@@ -70,7 +71,7 @@ public class ImageStorageTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            SpecialRestorePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -107,7 +108,7 @@ public class ImageStorageTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             RenamePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            RenamePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     file.verifyHeader(imageNewName);
     file = new FilePage().open(imageNewName, true);
@@ -118,7 +119,7 @@ public class ImageStorageTests extends NewTestTemplate {
     Assertion.assertTrue(confirmNotifications.size()==1,
             RenamePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            "Banner notification message is not visible");
+            RenamePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();
