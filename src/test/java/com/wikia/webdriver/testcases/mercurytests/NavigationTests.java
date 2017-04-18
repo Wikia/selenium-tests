@@ -65,7 +65,7 @@ public abstract class NavigationTests extends NewTestTemplate {
 
     Assertion.assertTrue(navigation.isUserAvatarVisible());
     Assertion.assertTrue(navigation.isUserProfileLinkVisible());
-    Assertion.assertTrue(navigation.isLogoutLinkVisible());
+    Assertion.assertTrue(navigation.isNavigationToUserProfileVisible());
   }
 
   void mercury_navigation_navigationElementsAnonymousUser(WikiBasePageObject page) {
@@ -73,7 +73,7 @@ public abstract class NavigationTests extends NewTestTemplate {
 
     Assertion.assertTrue(navigation.isUserAvatarVisible());
     Assertion.assertFalse(navigation.isUserProfileLinkVisible());
-    Assertion.assertFalse(navigation.isLogoutLinkVisible());
+    Assertion.assertFalse(navigation.isNavigationToUserProfileVisible());
     Assertion.assertEquals(navigation.getNavigationHeaderText(), "Sign In | Register");
   }
 }

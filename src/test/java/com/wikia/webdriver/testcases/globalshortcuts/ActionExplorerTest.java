@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.globalshortcuts;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -18,7 +17,7 @@ public class ActionExplorerTest extends NewTestTemplate {
   @Test(enabled = false, groups = "globalShortcuts_actionExplorer_openAndCloseModalByShortcuts")
   public void globalShortcuts_actionExplorer_openAndCloseModalByShortcuts() {
     new HomePage()
-        .open()
+        .openAndWaitForGlobalShortcuts()
         .getActionExplorer()
         .useShortcut(".")
         .useShortcut("ESC");
@@ -27,7 +26,7 @@ public class ActionExplorerTest extends NewTestTemplate {
   @Test(groups = "globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch")
   public void globalShortcuts_actionExplorer_openKeyboardShortcutsBySearch() {
     new HomePage()
-        .open()
+        .openAndWaitForGlobalShortcuts()
         .getActionExplorer()
         .useShortcut(".")
         .searchFor("Keyboard")
@@ -37,7 +36,7 @@ public class ActionExplorerTest extends NewTestTemplate {
   @Test(groups = "globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions")
   public void globalShortcuts_actionExplorer_openSpecialAllPagesFromAutocompleteSuggestions() {
     new HomePage()
-        .open()
+        .openAndWaitForGlobalShortcuts()
         .getActionExplorer()
         .useShortcut(".")
         .scrollToAllPagesLink()
