@@ -12,7 +12,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -86,7 +86,7 @@ public class CategoriesTests extends NewTestTemplate {
   }
 
   private void deleteCategories(String wikiName) {
-    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
+    siteId = Utils.excractSiteIdFromWikiName(wikiName);
     DiscussionsCategoryOperations.using(User.STAFF).deleteAllCategories(siteId, User.STAFF);
   }
 
@@ -96,7 +96,7 @@ public class CategoriesTests extends NewTestTemplate {
    * @return new category
    */
   private CategoryPill.Data setUp(String wikiName) {
-    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
+    siteId = Utils.excractSiteIdFromWikiName(wikiName);
     CategoryPill.Data category = addCategoryRemotely(siteId, createUniqueCategoryName());
     DiscussionsOperations
       .using(User.STAFF, driver)

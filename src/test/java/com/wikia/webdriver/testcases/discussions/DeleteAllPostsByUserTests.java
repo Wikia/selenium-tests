@@ -6,7 +6,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
@@ -39,7 +39,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
    * @return post that was created
    */
   private PostEntity.Data setUp(String wikiName) {
-    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
+    siteId = Utils.excractSiteIdFromWikiName(wikiName);
     return DiscussionsOperations
       .using(userWithPosts, driver)
       .createPostWithUniqueData(siteId);

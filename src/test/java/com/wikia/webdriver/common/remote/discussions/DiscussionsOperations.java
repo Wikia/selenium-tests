@@ -1,7 +1,7 @@
 package com.wikia.webdriver.common.remote.discussions;
 
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.context.CreatePostContext;
 import com.wikia.webdriver.common.remote.discussions.context.ModeratePostContext;
 import com.wikia.webdriver.common.remote.discussions.context.ThreadContext;
@@ -19,7 +19,7 @@ public class DiscussionsOperations {
   private final WebDriver driver;
 
   public static String service(String url) {
-    return Discussions.buildServicesUrl() + DISCUSSIONS_SERVICE + url;
+    return Utils.buildServicesUrl() + DISCUSSIONS_SERVICE + url;
   }
 
   /**
@@ -55,7 +55,7 @@ public class DiscussionsOperations {
   }
 
   private String extractSiteId() {
-    return Discussions.extractSiteIdFromMediaWikiUsing(driver);
+    return Utils.extractSiteIdFromMediaWikiUsing(driver);
   }
 
   public PostEntity.Data createPost(CreatePostContext context) {

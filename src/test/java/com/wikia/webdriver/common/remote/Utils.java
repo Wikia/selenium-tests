@@ -10,11 +10,11 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.util.Objects;
 
-public final class Discussions {
+public final class Utils {
 
   public static final String ACCESS_TOKEN_HEADER = "X-Wikia-AccessToken";
 
-  private Discussions() {
+  private Utils() {
     throw new AssertionError();
   }
 
