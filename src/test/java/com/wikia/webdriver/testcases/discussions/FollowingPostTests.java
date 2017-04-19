@@ -226,7 +226,7 @@ public class FollowingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
-  // Utils Administrator on mobile
+  // Discussions Administrator on mobile
 
   @Test(groups = "discussions-discussionsAdministratorMobileFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
@@ -252,7 +252,7 @@ public class FollowingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
-  // Utils Administrator on desktop
+  // Discussions Administrator on desktop
 
   @Test(groups = "discussions-discussionsAdministratorDesktopFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)

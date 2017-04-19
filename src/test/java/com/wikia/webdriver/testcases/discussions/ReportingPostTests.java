@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST =
-      "Utils moderator should see re reported post.";
+      "Discussions moderator should see re reported post.";
   private static final String NO_REPORT_POST_OPTION_MESSAGE =
       "'Report Post' option in 'More Options' should not be available.";
   private static final String REPORTED_INDICATOR_ON_POST_MESSAGE =

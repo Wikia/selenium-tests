@@ -110,7 +110,7 @@ public class EditingPostTests extends NewTestTemplate {
     Assertion.assertFalse(post.hasEditedBySection(), SAME_PERSON_MESSAGE);
   }
 
-  // Utils Administrator on mobile
+  // Discussions Administrator on mobile
 
   @Test(groups = DISCUSSIONS_ADMINISTRATOR_MOBILE_TEST_GROUP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
@@ -124,7 +124,7 @@ public class EditingPostTests extends NewTestTemplate {
   }
 
 
-  // Utils Administrator on desktop
+  // Discussions Administrator on desktop
 
   @Test(groups = DISCUSSIONS_ADMINISTRATOR_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.remote.discussions;
 
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.discussions.context.ModeratePostContext;
 
 public class ValidatePost extends ModeratePost {
@@ -12,7 +13,6 @@ public class ValidatePost extends ModeratePost {
   }
 
   protected String buildUrl(final ModeratePostContext context) {
-    return DiscussionsOperations
-      .service(String.format(REPORT_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
+    return Discussions.service(String.format(REPORT_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
   }
 }

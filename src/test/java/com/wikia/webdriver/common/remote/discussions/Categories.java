@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.remote.discussions;
 import com.jayway.jsonpath.*;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.RemoteException;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.GetRemoteOperation;
@@ -50,6 +51,6 @@ public class Categories {
   }
 
   private String buildUrl(final CreateCategoryContext context) {
-    return DiscussionsOperations.service(String.format(GET_CATEGORIES_URL_SUFFIX, context.getSiteId()));
+    return Discussions.service(String.format(GET_CATEGORIES_URL_SUFFIX, context.getSiteId()));
   }
 }

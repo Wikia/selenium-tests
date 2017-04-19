@@ -10,11 +10,13 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.util.Objects;
 
-public final class Utils {
+public final class Discussions {
+
+  private static final String DISCUSSIONS_SERVICE = "discussion/";
 
   public static final String ACCESS_TOKEN_HEADER = "X-Wikia-AccessToken";
 
-  private Utils() {
+  private Discussions() {
     throw new AssertionError();
   }
 
@@ -33,7 +35,11 @@ public final class Utils {
     return extractSiteIdFromMediaWiki(wikiUrl);
   }
 
-  public static String buildServicesUrl() {
+  public static String service(String url) {
+    return buildServicesUrl() + DISCUSSIONS_SERVICE + url;
+  }
+
+  private static String buildServicesUrl() {
     File configurationFile = new File(Configuration.getCredentialsFilePath());
     final String environment = Configuration.getEnvType().getKey();
     final String url = XMLReader.getValue(configurationFile, "services." + environment);

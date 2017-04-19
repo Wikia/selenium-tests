@@ -5,6 +5,7 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.RemoteException;
 import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
@@ -50,6 +51,6 @@ public class CreateCategory {
   }
 
   private String buildUrl(final CreateCategoryContext context) {
-    return DiscussionsOperations.service(String.format(CREATE_CATEGORY_URL_SUFFIX, context.getSiteId()));
+    return Discussions.service(String.format(CREATE_CATEGORY_URL_SUFFIX, context.getSiteId()));
   }
 }

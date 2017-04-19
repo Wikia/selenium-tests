@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
@@ -41,7 +41,7 @@ public class CreatingPostTests extends NewTestTemplate {
   private String siteId;
 
   private void setUp(String wikiName) {
-    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
   }
 
   /*

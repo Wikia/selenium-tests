@@ -3,6 +3,7 @@ package com.wikia.webdriver.common.remote.discussions;
 import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.discussions.context.UpdatePostContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import com.wikia.webdriver.common.remote.operations.json.JsonToPostEntityMapper;
@@ -32,7 +33,6 @@ public class UpdatePost {
   }
 
   private String buildUrl(final UpdatePostContext context) {
-    return DiscussionsOperations
-      .service(String.format(UPDATE_POST_URL_SUFFIX, context.getSiteId(), context.getThreadId()));
+    return Discussions.service(String.format(UPDATE_POST_URL_SUFFIX, context.getSiteId(), context.getThreadId()));
   }
 }
