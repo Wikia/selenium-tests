@@ -47,6 +47,9 @@ public class GlobalNavigation extends BasePageObject {
       ".wds-global-navigation__user-menu .wds-global-navigation__dropdown-content li:first-child")
   private WebElement viewProfile;
 
+  @FindBy(css = ".wds-sign-out__button")
+  private WebElement signOutButton;
+
   private DropDownComponentObject accountNavigation;
   private DropDownComponentObject exploreWikiaDropdownComponent;
 
@@ -67,6 +70,11 @@ public class GlobalNavigation extends BasePageObject {
   public GlobalNavigation clickUserAvatar() {
     userAvatar.click();
     return this;
+  }
+
+  public void clickSignOut() {
+    clickUserAvatar();
+    wait.forElementVisible(signOutButton).click();
   }
 
   public boolean isUserMenuOpened() {
