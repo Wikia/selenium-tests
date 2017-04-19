@@ -13,9 +13,14 @@ import org.openqa.selenium.WebDriver;
 @AllArgsConstructor(staticName = "using")
 public class DiscussionsOperations {
 
+  private static final String DISCUSSIONS_SERVICE = "discussion/";
   private final User user;
 
   private final WebDriver driver;
+
+  public static String service(String url) {
+    return Discussions.buildServicesUrl() + DISCUSSIONS_SERVICE + url;
+  }
 
   /**
    * Callable only when on Special:Version

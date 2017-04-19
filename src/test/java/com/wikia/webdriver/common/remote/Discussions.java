@@ -12,8 +12,6 @@ import java.util.Objects;
 
 public final class Discussions {
 
-  private static final String DISCUSSIONS_SERVICE = "discussion/";
-
   public static final String ACCESS_TOKEN_HEADER = "X-Wikia-AccessToken";
 
   private Discussions() {
@@ -35,11 +33,7 @@ public final class Discussions {
     return extractSiteIdFromMediaWiki(wikiUrl);
   }
 
-  public static String service(String url) {
-    return buildServicesUrl() + DISCUSSIONS_SERVICE + url;
-  }
-
-  private static String buildServicesUrl() {
+  public static String buildServicesUrl() {
     File configurationFile = new File(Configuration.getCredentialsFilePath());
     final String environment = Configuration.getEnvType().getKey();
     final String url = XMLReader.getValue(configurationFile, "services." + environment);

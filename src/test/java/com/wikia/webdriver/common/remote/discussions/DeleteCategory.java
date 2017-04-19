@@ -3,7 +3,6 @@ package com.wikia.webdriver.common.remote.discussions;
 
 import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.discussions.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.DeleteRemoteOperation;
 import org.json.JSONObject;
@@ -27,6 +26,7 @@ public class DeleteCategory {
   }
 
   private String buildUrl(final CategoryContext context) {
-    return Discussions.service(String.format(DELETE_CATEGORY_URL_SUFFIX, context.getSiteId(), context.getCategoryId()));
+    return DiscussionsOperations
+      .service(String.format(DELETE_CATEGORY_URL_SUFFIX, context.getSiteId(), context.getCategoryId()));
   }
 }
