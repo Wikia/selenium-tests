@@ -1,9 +1,9 @@
-package com.wikia.webdriver.common.remote.operations.discussions;
+package com.wikia.webdriver.common.remote.discussions;
 
 import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
-import com.wikia.webdriver.common.remote.context.CategoryContext;
+import com.wikia.webdriver.common.remote.discussions.context.CategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import org.json.JSONObject;
 

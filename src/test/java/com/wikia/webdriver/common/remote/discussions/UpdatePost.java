@@ -1,10 +1,10 @@
-package com.wikia.webdriver.common.remote.operations.discussions;
+package com.wikia.webdriver.common.remote.discussions;
 
 import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Discussions;
-import com.wikia.webdriver.common.remote.context.UpdatePostContext;
+import com.wikia.webdriver.common.remote.discussions.context.UpdatePostContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import com.wikia.webdriver.common.remote.operations.json.JsonToPostEntityMapper;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;

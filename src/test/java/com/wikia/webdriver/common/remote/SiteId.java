@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.operations;
+package com.wikia.webdriver.common.remote;
 
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;

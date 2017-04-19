@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.operations.discussions;
+package com.wikia.webdriver.common.remote.discussions;
 
 import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.DocumentContext;
@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.RemoteException;
-import com.wikia.webdriver.common.remote.context.CreateCategoryContext;
+import com.wikia.webdriver.common.remote.discussions.context.CreateCategoryContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import org.json.JSONObject;
