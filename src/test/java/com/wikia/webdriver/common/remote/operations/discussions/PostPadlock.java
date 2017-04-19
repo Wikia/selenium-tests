@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.operations;
+package com.wikia.webdriver.common.remote.operations.discussions;
 
 import com.wikia.webdriver.common.remote.Discussions;
 import com.wikia.webdriver.common.remote.context.ThreadContext;
