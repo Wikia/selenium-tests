@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.remote.discussions.context;
 
+import com.wikia.webdriver.common.remote.context.RemoteContext;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import lombok.Builder;
 import lombok.Getter;

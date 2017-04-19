@@ -1,4 +1,4 @@
-package com.wikia.webdriver.common.remote.discussions.context;
+package com.wikia.webdriver.common.remote.context;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
