@@ -210,7 +210,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
-  // Discussions Administrator on mobile
+  // Utils Administrator on mobile
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsAdministratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
@@ -233,7 +233,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
-  // Discussions Administrator on desktop
+  // Utils Administrator on desktop
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
@@ -357,7 +357,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
-  // Discussions moderator on mobile
+  // Utils moderator on mobile
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
@@ -404,7 +404,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
-  // Discussions moderator on desktop
+  // Utils moderator on desktop
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)

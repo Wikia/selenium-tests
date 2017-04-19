@@ -28,8 +28,8 @@ import org.testng.annotations.Test;
 public class ZeroErrorStateTests extends NewTestTemplate {
 
   private static final String MESSAGE_1 = "Uh oh, looks like this page doesn't exist!\n";
-  private static final String MESSAGE_2 = "Show Me All Discussions";
-  private static final String MESSAGE_3 = "All Discussions";
+  private static final String MESSAGE_2 = "Show Me All Utils";
+  private static final String MESSAGE_3 = "All Utils";
   private static final String NO_REPLIES_MESSAGE = "No replies yet. Be the first!";
   private static final String FOLLOW_MESSAGE_HEADER_TEXT = "Welcome to your Following tab.";
   private static final String FOLLOW_MESSAGE_CONTENT_TEXT = "Hit the “Follow” icon at the bottom of any post to fill your list with discussions that matter most to you. We’ll put them here and notify you of new activity.";
