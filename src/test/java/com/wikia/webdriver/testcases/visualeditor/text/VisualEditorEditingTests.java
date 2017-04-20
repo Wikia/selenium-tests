@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
@@ -28,32 +29,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   private String text = WikiTextContent.TEXT;
   private List<String> wikiTexts, firstSourceEditText, secondSourceEditText;
 
-  private String startingWikiText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
-          "\n" +
-          "== Lorem ipsum dolor sit amet, consectetur adipiscing elit. ==\n" +
-          "\n" +
-          "=== Lorem ipsum dolor sit amet, consectetur adipiscing elit. ===\n" +
-          "\n" +
-          "==== Lorem ipsum dolor sit amet, consectetur adipiscing elit. ====\n" +
-          "\n" +
-          "===== Lorem ipsum dolor sit amet, consectetur adipiscing elit. =====\n" +
-          "\n" +
-          "====== Lorem ipsum dolor sit amet, consectetur adipiscing elit. ======\n" +
-          " Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
-          "'''Lorem ipsum dolor sit amet, consectetur adipiscing elit.'''\n" +
-          "\n" +
-          "''Lorem ipsum dolor sit amet, consectetur adipiscing elit.''\n" +
-          "\n" +
-          "<s>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</s>\n" +
-          "\n" +
-          "<u>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</u>\n" +
-          "\n" +
-          "<sub>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sub>\n" +
-          "\n" +
-          "<sup>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</sup>\n" +
-          "\n" +
-          "* Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
-          "# Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  private String startingWikiText = ContentLoader.loadWikiTextContent("Visual_Editor_Existing_Article");
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {

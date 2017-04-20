@@ -87,7 +87,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   public VisualEditorPageObject open(){
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(
             "/" + TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
-    
+
     return this;
   }
 
