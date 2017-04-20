@@ -25,9 +25,12 @@ public class TestAdsRecoverySourcePointOasis extends TemplateNoFirstLoad {
   public void adsRecoverySourcePointOasis(Page page, Map<String, Object> slotInfo) {
     String adUnitId = slotInfo.get("adUnitId").toString();
     String slotName = slotInfo.get("slotName").toString();
-    String url = urlBuilder.getUrlForPage(page);
 
+    String url = urlBuilder.getUrlForPage(page);
     AdsRecoveryObject adsBaseObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    adsBaseObject.refreshPageAddingCacheBuster();
+
+    adsBaseObject.waitForRecoveredSlot(slotName);
 
     String recoveredAdUnitIdSelector = "#" + adsBaseObject.getRecoveredAdUnitId(adUnitId);
     WebElement recoveredSlot = driver.findElement(By.cssSelector(recoveredAdUnitIdSelector));
@@ -54,9 +57,12 @@ public class TestAdsRecoverySourcePointOasis extends TemplateNoFirstLoad {
   public void adsRecoverySourcePointOasisHopToTaboola(Page page, Map<String, Object> slotInfo) {
     String slotName = slotInfo.get("slotName").toString();
     String adUnitId = slotInfo.get("adUnitId").toString();
-    String url = urlBuilder.getUrlForPage(page);
 
+    String url = urlBuilder.getUrlForPage(page);
     AdsRecoveryObject adsBaseObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    adsBaseObject.refreshPageAddingCacheBuster();
+
+    adsBaseObject.waitForRecoveredSlot(slotName);
 
     String recoveredAdUnitIdSelector = "#" + adsBaseObject.getRecoveredAdUnitId(adUnitId);
     adsBaseObject.triggerAdSlot(slotName).verifyNoAd(recoveredAdUnitIdSelector);
