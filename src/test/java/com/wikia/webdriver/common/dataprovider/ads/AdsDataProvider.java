@@ -28,6 +28,9 @@ public class AdsDataProvider {
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
 
+  private static final String SOURCE_POINT_INSTANT_GLOBAL = "?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]" +
+      "&?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]";
+
   private static final String NO_SKIN_LEFT =
       "src/test/resources/adsResources/no_wikia_skin_left.png";
   private static final String NO_SKIN_RIGHT =
@@ -1056,7 +1059,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoverySourcePointOasis() {
     return new Object[][]{
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
             ImmutableMap.<String, Object>builder()
                 .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_LEADERBOARD")
                 .put("slotName", AdsContent.TOP_LB)
@@ -1065,7 +1068,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
             ImmutableMap.<String, Object>builder()
                 .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_RIGHT_BOXAD")
                 .put("slotName", AdsContent.MEDREC)
@@ -1089,7 +1092,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoverySourcePointOasisProject43() {
       return new Object[][]{
           {
-              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)
@@ -1098,7 +1101,7 @@ public class AdsDataProvider {
                   .build()
           },
           {
-              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
                   .put("slotName", AdsContent.MEDREC)
@@ -1113,7 +1116,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
       return new Object[][]{
           {
-              new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image/HopToTaboola" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)

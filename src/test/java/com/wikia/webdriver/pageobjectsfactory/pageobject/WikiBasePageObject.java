@@ -82,8 +82,6 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement body;
   @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement wikiFirstHeader;
-  @FindBy(css = "#global-navigation-user-sign-out")
-  protected WebElement navigationLogoutLink;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
@@ -446,15 +444,11 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   /**
-   * Logout by navigating to 'logout' button href attribute value;
+   * Logout by clicking on "Sign out" option in global navigation
    */
   public void logOut() {
     try {
-      if (navigationLogoutLink.getAttribute("href") != null) {
-        driver.get(navigationLogoutLink.getAttribute("href"));
-      } else {
-        throw new WebDriverException("No logout link provided");
-      }
+      getGlobalNavigation().clickSignOut();
     } catch (TimeoutException e) {
       PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
     }
