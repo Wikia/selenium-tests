@@ -89,7 +89,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(mediaAdded);
     clickAddMediaButton();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorAddMediaDialog searchMedia(String searchText) {
@@ -110,7 +110,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     }
     clickAddMediaButton();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject uploadImage(String fileName) {
@@ -119,7 +119,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     wait.forElementVisible(topUploadButton);
     clickAddMediaButton();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject uploadImage(String fileName, String newFileName) {
@@ -129,7 +129,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     typeNewFileName(newFileName);
     clickAddMediaButton();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void selectImageLicense(ImageLicense imageLicense) {
@@ -149,7 +149,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     selectImageLicense(imageLicense);
     clickAddMediaButton();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   private void typeNewFileName(String newFileName) {
@@ -170,7 +170,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     WebElement targetMedia = mediaResultsWidget.findElements(mediaTitlesBy).get(index);
     targetMedia.click();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   private void selectFileToUpload(String fileName) {
@@ -185,7 +185,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     WebElement media = findMediaByTitle(title);
     media.findElement(previewVideoButtonBy).click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject previewExistingPhotoByTitle(String title) {
@@ -193,7 +193,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
     WebElement media = findMediaByTitle(title);
     media.findElement(previewPhotoButtonBy).click();
     PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
     private WebElement findMediaByTitle(String title) {

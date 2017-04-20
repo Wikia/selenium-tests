@@ -34,7 +34,7 @@ public class VEAddMapTests extends NewTestTemplate {
   public void VEAddMapTests_001_AddExistingMap() {
     articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMapDialog mapDialog =
@@ -53,7 +53,7 @@ public class VEAddMapTests extends NewTestTemplate {
     articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMapDialog mapDialog =
@@ -68,7 +68,7 @@ public class VEAddMapTests extends NewTestTemplate {
     articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     VisualEditorAddMapDialog mapDialog =

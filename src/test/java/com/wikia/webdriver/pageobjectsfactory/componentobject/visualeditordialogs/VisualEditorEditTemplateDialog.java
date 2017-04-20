@@ -82,7 +82,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
       } else {
         throw new NoSuchElementException("This template has no param.");
       }
-      return new VisualEditorPageObject(driver);
+      return new VisualEditorPageObject();
     } finally {
       waitForDialogNotVisible();
     }
@@ -97,7 +97,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
       } else {
         throw new NoSuchElementException("This template has no param.");
       }
-      return new VisualEditorPageObject(driver);
+      return new VisualEditorPageObject();
     } finally {
       waitForDialogNotVisible();
     }

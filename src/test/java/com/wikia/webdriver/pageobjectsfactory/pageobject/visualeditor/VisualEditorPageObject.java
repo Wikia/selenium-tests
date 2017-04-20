@@ -1,7 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.*;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.*;
@@ -82,8 +84,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
   private By blockTransclusionBy = By.cssSelector("div[typeof='mw:Transclusion']");
   private By inlineTransclusionBy = By.cssSelector("span[typeof='mw:Transclusion']");
 
-  public VisualEditorPageObject(WebDriver driver) {
-    super(driver);
+  public VisualEditorPageObject open(){
+    getUrl(urlBuilder.appendQueryStringToURL(urlBuilder.getUrlForPage(
+            "/" + TestContext.getCurrentMethodName()), URLsContent.VEACTION_EDIT));
+    
+    return this;
   }
 
   public void selectMediaAndDelete() {

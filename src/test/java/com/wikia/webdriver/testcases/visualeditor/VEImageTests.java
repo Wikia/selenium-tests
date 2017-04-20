@@ -32,7 +32,7 @@ public class VEImageTests extends NewTestTemplate {
     String mediaTitle = "Thomas Wright 1792 - 1849";
 
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -48,7 +48,7 @@ public class VEImageTests extends NewTestTemplate {
     String captionText = "test123";
 
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
@@ -72,9 +72,9 @@ public class VEImageTests extends NewTestTemplate {
     wikiTexts.add("|centre");
     wikiTexts.add("|left");
 
-    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject(driver).getTimeStamp();
+    String randomArticleName = PageContent.ARTICLE_NAME_PREFIX + new VisualEditorPageObject().getTimeStamp();
     VisualEditorPageObject veCreatePage =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, randomArticleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, randomArticleName);
     VisualEditorAddMediaDialog mediaDialog =  veCreatePage.searchImage("h");
     veCreatePage = mediaDialog.addExistingMedia(numOfMedia);
     veCreatePage.verifyMedias(numOfMedia);
@@ -84,7 +84,7 @@ public class VEImageTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject();
     article.openVEModeWithMainEditButton();
-    VisualEditorPageObject ve = new VisualEditorPageObject(driver);
+    VisualEditorPageObject ve = new VisualEditorPageObject();
     ve.alignMedia(2, Alignment.LEFT);
     ve.alignMedia(0, Alignment.CENTER);
     ve.verifyEditorSurfacePresent();

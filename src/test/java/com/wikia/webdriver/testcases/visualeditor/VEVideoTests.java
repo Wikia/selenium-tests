@@ -27,7 +27,7 @@ public class VEVideoTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void addNonPremiumVideo() {
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
     VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
@@ -39,7 +39,7 @@ public class VEVideoTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void addPremiumVideo() {
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
     VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
@@ -51,7 +51,7 @@ public class VEVideoTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void addExistingVideo() {
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, PageContent.ARTICLE_NAME_PREFIX
                                                                     + DateTime.now().getMillis());
 
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("y");
@@ -68,7 +68,7 @@ public class VEVideoTests extends NewTestTemplate {
   public void removeVideoFromArticle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
     VisualEditorPageObject veNew = ve.addVideoToContent(VideoContent.NON_PREMIUM_VIDEO_URL);
     veNew.verifyVideos(1);
@@ -90,7 +90,7 @@ public class VEVideoTests extends NewTestTemplate {
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo(mediaTitle);
     ve = mediaDialog.previewExistingVideoByTitle(mediaTitle);
     ve.verifyPreviewVideo();
@@ -101,7 +101,7 @@ public class VEVideoTests extends NewTestTemplate {
   public void resizeVideoWithHandle() {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
     ve = mediaDialog.addExistingMedia(1);
@@ -119,7 +119,7 @@ public class VEVideoTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
     VisualEditorPageObject ve =
-        new VisualEditorPageObject(driver).openVEOnArticle(wikiURL, articleName);
+        new VisualEditorPageObject().openVEOnArticle(wikiURL, articleName);
 
     VisualEditorAddMediaDialog mediaDialog = ve.searchVideo("h");
     ve = mediaDialog.addExistingMedia(1);
