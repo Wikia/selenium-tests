@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
@@ -22,7 +23,7 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
 
   @Test(groups = {"AdsRefreshingFMR"})
   public void floatingMR() {
-    AdsBaseObject page = new AdsBaseObject(driver, urlBuilder.getUrlForPath(WIKI_NAME, PATH));
+    AdsBaseObject page = new AdsBaseObject(driver, urlBuilder.getUrlForPath(WIKI_NAME, PATH), WindowSize.DESKTOP);
     scrollToSeeFMR(AdsContent.FLOATING_MEDREC, page);
     page.verifyAdChainForSlot(CREATIVE_ID_CHAIN, AdsContent.FLOATING_MEDREC, page);
   }

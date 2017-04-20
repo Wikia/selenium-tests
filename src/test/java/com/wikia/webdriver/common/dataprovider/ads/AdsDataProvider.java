@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
@@ -188,7 +189,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -200,7 +201,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -219,7 +220,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -231,7 +232,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -244,7 +245,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -790,13 +791,13 @@ public class AdsDataProvider {
         {
             "project43",
             "",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             true
         },
         {
             "project43",
             "SyntheticTests/Prefooters",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             false
         }
     };
