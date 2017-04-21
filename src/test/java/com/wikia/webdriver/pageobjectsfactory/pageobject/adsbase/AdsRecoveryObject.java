@@ -80,10 +80,8 @@ public class AdsRecoveryObject extends AdsBaseObject {
     verifyTopLeaderboard();
     verifyMedrec();
 
-    // TODO: uncomment after ADEN-5041 is merged
-    // there should be no elements with adonis-marker attribute in DOM
-    // List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
-    // Assertion.assertEquals(markedSlots.size(), 0);
+    List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
+    Assertion.assertEquals(markedSlots.size(), 0);
   }
 
   public void waitForRecoveredSlot(String slotName) {
