@@ -57,7 +57,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
     wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   private void typeCustomSize(int size, ImageSize side) {
