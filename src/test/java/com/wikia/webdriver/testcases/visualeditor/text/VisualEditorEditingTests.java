@@ -2,8 +2,9 @@ package com.wikia.webdriver.testcases.visualeditor.text;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.WikiTextContent;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
@@ -13,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
-
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -28,7 +28,8 @@ public class VisualEditorEditingTests extends NewTestTemplate {
 
   private String text = WikiTextContent.TEXT;
   private List<String> wikiTexts, firstSourceEditText, secondSourceEditText;
-  private String articleName;
+
+  private String startingWikiText = ContentLoader.loadWikiTextContent("Visual_Editor_Existing_Article");
 
   @BeforeMethod(alwaysRun = true)
   public void setup() {
@@ -54,44 +55,19 @@ public class VisualEditorEditingTests extends NewTestTemplate {
     firstSourceEditText.add(text);
     secondSourceEditText = new ArrayList<>();
     secondSourceEditText.add(text + "\n" + text);
-
   }
 
   @Test(
-      groups = {
-          "VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002",
-          "VisualEditorEditing_003"
-      }
-  )
-  public void VisualEditorEditing_001_insertToNewArticle() {
-    articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
-    ve.verifyVEToolBarPresent();
-    ve.verifyEditorSurfacePresent();
-    ve.typeTextInAllFormat(text);
-    ve.typeTextInAllStyle(text);
-    ve.typeTextInAllList(text);
-    VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-    VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
-    reviewDialog.verifyAddedDiffs(wikiTexts);
-    saveDialog = reviewDialog.clickReturnToSaveFormButton();
-    ArticlePageObject article = saveDialog.savePage();
-    article.verifyVEPublishComplete();
-    article.verifyContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-  }
-
-  @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_002"},
-      dependsOnGroups = "VisualEditorEditing_001"
-  )
+      groups = {"VisualEditorEditing", "VisualEditorEditing_002"})
   public void VisualEditorEditing_002_delete() {
+    new ArticleContent().push(startingWikiText);
 
     String removeText = "Lorem ";
     List<String> deletedWikiTexts;
     deletedWikiTexts = new ArrayList<>();
     deletedWikiTexts.add(removeText);
 
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    VisualEditorPageObject ve = new VisualEditorPageObject().open();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.removeText(removeText);
@@ -104,12 +80,11 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
-      dependsOnGroups = "VisualEditorEditing_001"
-  )
-  @RelatedIssue(issueID = "XW-2949")
+      groups = {"VisualEditorEditing", "VisualEditorEditing_003"})
   public void VisualEditorEditing_003_insertToExistingArticle() {
-    VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+    new ArticleContent().push(startingWikiText);
+
+    VisualEditorPageObject ve = new VisualEditorPageObject().open();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     ve.putCursorAtTheEnd();
@@ -128,8 +103,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorLinks", "VisualEditorEditing_004"}
-  )
+      groups = {"VisualEditorLinks", "VisualEditorEditing_004"})
   public void VisualEditorEditing_004_insertLinks() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
     ArrayList<String> linkWikiTexts = new ArrayList<>();
@@ -172,8 +146,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
-  )
+      groups = {"VisualEditorEditing", "VisualEditorEditing_005"})
   public void VisualEditorEditing_005_switchToSourceMode() {
     String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 
@@ -198,8 +171,7 @@ public class VisualEditorEditingTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEditing", "VisualEditorEditing_006"}
-  )
+      groups = {"VisualEditorEditing", "VisualEditorEditing_006"})
   public void VisualEditorEditing_006_editSummary() {
     String summaryText =
         "This is an example summary text being used by test: VisualEditorEditing_006_editSummary";
