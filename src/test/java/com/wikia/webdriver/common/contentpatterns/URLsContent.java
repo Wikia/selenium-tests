@@ -10,8 +10,9 @@ public class URLsContent {
   public static final String WIKIA_DIR = "Wikia";
 
   // Special Urls - links to special pages
-  public static final String SPECIAL_USER_LOGIN = "/wiki/Special:UserLogin";
-  public static final String SPECIAL_USER_SIGNUP = "/wiki/Special:UserSignup";
+  public static final String USER_LOGIN = "/signin";
+  public static final String USER_SIGNUP = "/register";
+  public static final String USER_FORGOT_PASSWORD = "/forgot-password";
   public static final String SPECIAL_NEW_FILES = "/wiki/Special:NewFiles";
   public static final String SPECIAL_VIDEOS = "/wiki/Special:Videos";
   public static final String SPECIAL_UPLOAD = "/wiki/Special:Upload";
@@ -60,6 +61,9 @@ public class URLsContent {
 
   // Mediawiki template url
   public static final String TEMPLATE_NAMESPACE = "Template";
+
+  //B Forum Board namespace
+  public static final String FORUM_BOARD_NAMESPACE = "Board";
 
   // Extra switches - appear after ? in link
   public static final String NOEXTERNALS = "?noexternals=1";
@@ -126,6 +130,8 @@ public class URLsContent {
 
   // External URL
   public static final String EXTERNAL_URL = "http://www.wikia.com";
+
+  public static final String USER_SIGNOUT = EXTERNAL_URL + "/logout";
 
   // Embed map URL for Interactive Maps
   public static final String EMBEDED_MAP_ARTICLE = "EmbedMap";

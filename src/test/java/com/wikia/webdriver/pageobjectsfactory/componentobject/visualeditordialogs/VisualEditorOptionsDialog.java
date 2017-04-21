@@ -79,7 +79,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
     wait.forElementVisible(applyChangesButton);
     wait.forElementClickable(applyChangesButton);
     applyChangesButton.click();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void addCategory(String cat) {

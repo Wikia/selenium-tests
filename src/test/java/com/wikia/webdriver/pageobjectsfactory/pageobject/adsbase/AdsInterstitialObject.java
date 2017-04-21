@@ -1,17 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AdsInterstitialObject extends AdsBaseObject {
 
@@ -32,54 +25,42 @@ public class AdsInterstitialObject extends AdsBaseObject {
 
   private static final int WAIT_BUTTON_DELAY_TOLERANCE = 2;
 
-  @FindBy(css = "iframe.wikia-ad-iframe")
-  private WebElement interstitialAdIframe;
+  private static final String INTERSTITSIAL_AD_SELECTOR = "#INVISIBLE_HIGH_IMPACT_2 .provider-container iframe";
 
-  static final String
-      INTERSTITIAL_AD_WRAPPER_SELECTOR = "div#ext-wikia-adEngine-template-modal, div.lightbox-content-inner > div";
-
-  @FindBy(css = INTERSTITIAL_AD_WRAPPER_SELECTOR)
-  private WebElement interstitialAdWrapper;
-
-  @FindBy(css = ".lightbox-close-wrapper, #ext-wikia-adEngine-template-modal .close")
+  @FindBy(css = "a.close")
   private WebElement interstitialCloseButton;
 
   @FindBy(css = ".lightbox-close-wrapper")
   private WebElement interstitialCloseButtonMercury;
 
-  @FindBy(css = "#ext-wikia-adEngine-template-modal .close-counter")
-  private WebElement interstitialCounterOasis;
+  @FindBy(css = "#INVISIBLE_HIGH_IMPACT_2")
+  private WebElement interstitialAd;
 
-  public AdsInterstitialObject(WebDriver driver, String testedPage,
-                               Dimension resolution) {
-    super(driver, testedPage, resolution);
+  public AdsInterstitialObject(WebDriver driver) {
+    super(driver);
   }
 
-  public void waitForInterstitialShowUp() {
-    JavascriptActions javascriptActions = new JavascriptActions(driver);
-    String jsIsInterstitialPresent = String.format("document.querySelectorAll('%s').length == 1",
-                                                   INTERSTITIAL_AD_WRAPPER_SELECTOR);
-    javascriptActions.waitForJavaScriptTruthy(jsIsInterstitialPresent);
-  }
-
-  public void verifyAdRatio() {
-    String scaledAdRatio = interstitialAdIframe.getCssValue("transform");
-    Pattern pattern = Pattern.compile("matrix\\((.*), 0, 0, (.*), 0, 0\\)");
-    Matcher matcher = pattern.matcher(scaledAdRatio);
-    if (!matcher.find()) {
-      throw new AssertionError("Ad is not scaled");
+  public boolean isInterstitialAdDisplayed() {
+    try {
+      wait.forElementVisible(interstitialAd);
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Hight Impact Interstitial ad is not Displayed", ex, true);
+      return false;
     }
-    Assertion.assertEquals(matcher.group(1), matcher.group(2), "Ad is scaled unproportionally");
   }
 
-  public void verifySize(Dimension expectedSize) {
-    Dimension actualSize = interstitialAdWrapper.getSize();
+  public void verifySize(Dimension expectedAdSize) {
+
+    Dimension actualSize = driver.findElement(By.cssSelector(INTERSTITSIAL_AD_SELECTOR)).getSize();
+    Dimension expectedSize = expectedAdSize;
+
 
     Assertion.assertTrue(
         isSizeCorrect(actualSize.getWidth(), expectedSize.getWidth()),
         String.format(
             "The width of ad unit is not within tolerance range " +
-            "[actual: %d, expected: %d, tolerance: +-%d]",
+                "[actual: %d, expected: %d, tolerance: +-%d]",
             actualSize.getWidth(),
             expectedSize.getWidth(),
             SIZE_DIFFERENCE_TOLERANCE
@@ -89,8 +70,8 @@ public class AdsInterstitialObject extends AdsBaseObject {
     Assertion.assertTrue(
         isSizeCorrect(actualSize.getHeight(), expectedSize.getHeight()),
         String.format(
-            "The height of ad unit is not within tolerance range " +
-            "[actual: %d, expected: %d, tolerance: +-%d]",
+            "The width of ad unit is not within tolerance range " +
+                "[actual: %d, expected: %d, tolerance: +-%d]",
             actualSize.getHeight(),
             expectedSize.getHeight(),
             SIZE_DIFFERENCE_TOLERANCE
@@ -123,7 +104,7 @@ public class AdsInterstitialObject extends AdsBaseObject {
   }
 
   public void verifyInterstitialIsClosed() {
-    waitForElementNotVisibleByElement(interstitialAdWrapper);
+    waitForElementNotVisibleByElement(interstitialAd);
   }
 
   private boolean isSizeCorrect(int actualSize, int expectedSize) {

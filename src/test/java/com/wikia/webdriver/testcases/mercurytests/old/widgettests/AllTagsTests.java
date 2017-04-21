@@ -13,7 +13,9 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
@@ -63,11 +65,13 @@ public class AllTagsTests extends NewTestTemplate {
     widgets.add(new WeiboWidgetPageObject(driver));
     widgets.add(new GoogleFormWidgetPageObject(driver));
     widgets.add(new PolldaddyWidgetPageObject(driver));
+    widgets.add(new PlaybuzzWidgetPageObject(driver));
+    widgets.add(new ApesterWidgetPageObject(driver));
 
     String content = ">>> " + DateTime.now().getMillis() + " <<<";
 
     for (WidgetPageObject widget : widgets) {
-      content += widget.getTag();
+      content += widget.getSingleTag();
     }
 
     ArticleContent articleContent = new ArticleContent();

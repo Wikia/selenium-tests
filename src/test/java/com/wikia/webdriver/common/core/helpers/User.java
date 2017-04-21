@@ -33,7 +33,9 @@ public enum User {
   CONSTANTLY_BLOCKED_USER("ci.user.constantlyBlockedAccountUser.username", "ci.user.constantlyBlockedAccountUser.password"),
   GOOGLE_CONNECTED("ci.user.google_connected.username", "ci.user.google_connected.password"),
   CONTENT_REVIEWER("ci.user.wikiaContentReviewer.username", "ci.user.wikiaContentReviewer.password"),
-  COMMENTS_REGULAR_USER("ci.user.comments.username", "ci.user.comments.password", "ci.user.comments.id", "ci.user.comments.access_token");
+  COMMENTS_REGULAR_USER("ci.user.comments.username", "ci.user.comments.password", "ci.user.comments.id", "ci.user.comments.access_token"),
+  FORGOTTEN_PASSWORD("ci.user.forgottenPassword.username", "ci.user.forgottenPassword.password"),
+  FORGOTTEN_PASSWORD_SPACES("ci.user.forgottenPasswordSpaces.username", "ci.user.forgottenPasswordSpaces.password");
 
   private final String userName;
 

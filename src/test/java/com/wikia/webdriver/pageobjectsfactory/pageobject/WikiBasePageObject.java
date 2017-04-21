@@ -4,33 +4,26 @@ import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.MailFunctions;
+import com.wikia.webdriver.common.core.*;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.components.signup.RegisterArea;
-import com.wikia.webdriver.elements.mercury.pages.login.RegisterPage;
-import com.wikia.webdriver.elements.mercury.pages.login.SignInPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.AuthModal;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
@@ -40,7 +33,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
@@ -85,17 +77,11 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
   @Getter(lazy = true)
-  private final AuthModal authModal = new AuthModal();
-  @Getter(lazy = true)
-  private final RegisterArea registerArea = new RegisterArea(true);
-  @Getter(lazy = true)
   private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = "#WikiaPageHeader h1")
   protected WebElement wikiFirstHeader;
-  @FindBy(css = "#global-navigation-user-sign-out")
-  protected WebElement navigationLogoutLink;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
@@ -167,15 +153,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new HistoryPagePageObject(driver);
   }
 
-  public RegisterPage openSpecialUserSignUpPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
+  public AttachedRegisterPage openSpecialUserSignUpPage(String wikiURL) {
+    getUrl(wikiURL + URLsContent.USER_SIGNUP);
     PageObjectLogging.log("openSpecialUserSignUpPage", "Special:UserSignup page opened", true);
-    return new RegisterPage(driver);
-  }
-
-  public SignUpPageObject navigateToSpecialSignUpPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_SIGNUP);
-    return new SignUpPageObject(driver);
+    return new AttachedRegisterPage();
   }
 
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
@@ -190,16 +171,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialPromotePageObject(driver);
   }
 
-  public SpecialUserLoginPageObject openSpecialUserLoginOld(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
-    PageObjectLogging.log("openSpecialUserLoginOld", "Special:UserLogin page opened", true);
-    return new SpecialUserLoginPageObject(driver);
-  }
-
-  public SignInPage openSpecialUserLogin(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_USER_LOGIN);
+  public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
+    getUrl(wikiURL + URLsContent.USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-    return new SignInPage(driver);
+    return new AttachedSignInPage();
   }
 
   public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
@@ -239,10 +214,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialCreatePage();
   }
 
-  public ForumPageObject openForumMainPage(String wikiURL) {
+  public ForumPage openForumMainPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
     PageObjectLogging.log("openForumPage", "forum page opened", true);
-    return new ForumPageObject(driver);
+    return new ForumPage();
   }
 
   public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL) {
@@ -308,7 +283,7 @@ public class WikiBasePageObject extends BasePageObject {
     veEditButton.click();
     PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
         driver);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
@@ -317,7 +292,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openVEModeWithSectionEditButton",
         "VE edit button clicked at section: " + section, true, driver);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
@@ -369,7 +344,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openVEOnArticle(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.VEACTION_EDIT));
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void verifyUserLoggedIn(final String userName) {
@@ -390,7 +365,7 @@ public class WikiBasePageObject extends BasePageObject {
       } else {
         WebElement avatar = wait.forElementVisible(By.cssSelector(LOGGED_IN_USER_SELECTOR_OASIS));
         String loggedInUserName = avatar.getAttribute("alt");
-        if (!loggedInUserName.equals(userName)) {
+        if (!loggedInUserName.equals(userName) && !loggedInUserName.equals(userName + " avatar")) {
           throw new IllegalArgumentException(
               "Invalid user, expected " + userName + ", but found: " + loggedInUserName);
         }
@@ -404,6 +379,10 @@ public class WikiBasePageObject extends BasePageObject {
 
   public void verifyUserLoggedIn(User user) {
     this.verifyUserLoggedIn(user.getUserName());
+  }
+
+  public boolean userLoggedInMobile(final String username) {
+    return getTopBar().openNavigation().isUserAvatarVisible(username);
   }
 
   public DeletePageObject deletePage() {
@@ -434,13 +413,11 @@ public class WikiBasePageObject extends BasePageObject {
         true, driver);
   }
 
-  public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
+  public void clickLoginOnSpecialPage() {
     wait.forElementVisible(specialUserLoginLink);
     PageObjectLogging.log("LoginLinkPresent", "Link to login special page present", true, driver);
     scrollAndClick(specialUserLoginLink);
     PageObjectLogging.log("LoginLinkClicked", "Link to login special page clicked", true, driver);
-
-    return new SpecialUserLoginPageObject(driver);
   }
 
   public void verifyNotLoggedInMessage() {
@@ -448,13 +425,14 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
-  public String receiveMailWithNewPassword(String email, String password) {
-    String newPassword = MailFunctions.getPasswordFromEmailContent(
-        MailFunctions.getFirstEmailContent(email, password, "Reset your Fandom password"));
-    PageObjectLogging.log("NewPasswordRecived", "New password recived from mail: " + newPassword,
+  public String getPasswordResetLink(String email, String password) {
+    String passwordResetEmail = EmailUtils
+      .getFirstEmailContent(email, password, "Reset your Fandom password");
+    String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
+    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
         true);
 
-    return newPassword;
+    return resetLink;
   }
 
   public void verifyRevisionMarkedAsMinor() {
@@ -466,18 +444,18 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   /**
-   * Logout by navigating to 'logout' button href attribute value;
+   * Logout by clicking on "Sign out" option in global navigation
    */
   public void logOut() {
     try {
-      if (navigationLogoutLink.getAttribute("href") != null) {
-        driver.get(navigationLogoutLink.getAttribute("href"));
-      } else {
-        throw new WebDriverException("No logout link provided");
-      }
+      getGlobalNavigation().clickSignOut();
     } catch (TimeoutException e) {
       PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
     }
+  }
+
+  public void logoutFromAnywhere() {
+    driver.get(URLsContent.USER_SIGNOUT);
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
@@ -579,7 +557,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
         URLsContent.VEACTION_EDIT));
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void addVideoViaAjax(String videoURL) {

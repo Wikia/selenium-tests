@@ -28,6 +28,9 @@ public class AdsDataProvider {
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
 
+  private static final String SOURCE_POINT_INSTANT_GLOBAL = "?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]" +
+      "&?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]";
+
   private static final String NO_SKIN_LEFT =
       "src/test/resources/adsResources/no_wikia_skin_left.png";
   private static final String NO_SKIN_RIGHT =
@@ -612,6 +615,13 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidVelesAdapter() {
+    return new Object[][]{
+        {"project43","SyntheticTests/Cap", 333201132},
+    };
+  }
+
+  @DataProvider
   public static Object[][] fliteTagBrokenOasis() {
     return new Object[][]{
         {
@@ -755,69 +765,21 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] interstitialOasis() {
+  public static Object[][] interstitialMercury() {
     return new Object[][]{
         {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(1920, 1080),
-            new Dimension(600, 590),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(1920, 1080),
-            new Dimension(300, 343),
-            false
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(800, 800),
-            new Dimension(569, 564),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(800, 800),
-            new Dimension(300, 343),
-            false
+            new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
+            new Dimension(300, 250)
         },
     };
   }
 
   @DataProvider
-  public static Object[][] interstitialMercury() {
+  public static Object[][] interstitialOasis() {
     return new Object[][]{
         {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(600, 800),
-            new Dimension(590, 491),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(600, 800),
-            new Dimension(300, 258),
-            false
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial",
-            new Dimension(800, 500),
-            new Dimension(405, 338),
-            true
-        },
-        {
-            "project43",
-            "SyntheticTests/Interstitial/NotScalable",
-            new Dimension(800, 500),
-            new Dimension(300, 258),
-            false
+            new Page("project43", "SyntheticTests/Slots/InvisibleHighImpact/Interstitial"),
+            new Dimension(728, 90)
         },
     };
   }
@@ -915,11 +877,13 @@ public class AdsDataProvider {
   public static Object[][] adsDetection() {
     return new Object[][]{
         {
-            "project43",
+            new Page("project43", "Project43_Wikia"),
+            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
             false
         },
         {
-            "arecovery",
+            new Page("arecovery", "ARecovery_Wikia"),
+            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
             true
         }
     };
@@ -1092,10 +1056,10 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryOasis() {
+  public static Object[][] adsRecoverySourcePointOasis() {
     return new Object[][]{
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
             ImmutableMap.<String, Object>builder()
                 .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_LEADERBOARD")
                 .put("slotName", AdsContent.TOP_LB)
@@ -1104,7 +1068,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
             ImmutableMap.<String, Object>builder()
                 .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_RIGHT_BOXAD")
                 .put("slotName", AdsContent.MEDREC)
@@ -1116,10 +1080,19 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryOasisProject43() {
+  public static Object[][] adsRecoveryPageFairOasis() {
+    return new Object[][]{
+        {
+            new Page("arecovery", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]"),
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsRecoverySourcePointOasisProject43() {
       return new Object[][]{
           {
-              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)
@@ -1128,7 +1101,7 @@ public class AdsDataProvider {
                   .build()
           },
           {
-              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
                   .put("slotName", AdsContent.MEDREC)
@@ -1140,10 +1113,10 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryOasisHopToTaboola() {
+  public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
       return new Object[][]{
           {
-              new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image/HopToTaboola" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)
@@ -1364,7 +1337,7 @@ public class AdsDataProvider {
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
                                 AdsContent.MOBILE_TOP_LB
                         ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
+                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
                 },
                 {
                         new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
@@ -1373,7 +1346,7 @@ public class AdsDataProvider {
                                 "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
                                 AdsContent.MOBILE_BOTTOM_LB
                         ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_BOTTOM_LEADERBOARD"
+                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_BOTTOM_LEADERBOARD"
                 }
         };
     }

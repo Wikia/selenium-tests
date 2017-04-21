@@ -79,7 +79,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
       mediaAddIcon.click();
     }
     clickAddGalleryButton();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void removeMediaFromCart(int number) {
@@ -113,7 +113,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     wait.forElementVisible(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_TITLES_BY).get(index);
     scrollAndClick(targetMedia);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject clickMetaDataToPreview(int index) {
@@ -122,6 +122,6 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
     wait.forElementVisible(mediaResultsWidget);
     WebElement targetMedia = mediaResultsWidget.findElements(MEDIA_META_BY).get(index);
     scrollAndClick(targetMedia);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 }

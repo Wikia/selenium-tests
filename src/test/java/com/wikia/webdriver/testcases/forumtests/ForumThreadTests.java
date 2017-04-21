@@ -7,9 +7,9 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumHistoryPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
 
 @Test(groups = {"ForumThreadTests", "Forum"})
@@ -18,12 +18,12 @@ public class ForumThreadTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @Test(groups = {"ForumThreadTests_001", "Smoke3"})
   public void staffUserCanReplyToForumThread() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.reply(message);
@@ -33,12 +33,12 @@ public class ForumThreadTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @Test(groups = {"ForumThreadTests_002", "Forum"})
   public void staffUserCanRemoveThreadAndUndoRemoval() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.removeThread("QA reason");
@@ -52,12 +52,12 @@ public class ForumThreadTests extends NewTestTemplate {
       comment = "Test wont pass until product is fixed, don't bother reruning")
   @Test(groups = {"ForumThreadTests_003"})
   public void staffUserCanMoveThreadToOtherBoard() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.verifyParentBoard(forumThread.moveThread());
@@ -66,12 +66,12 @@ public class ForumThreadTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @Test(groups = {"ForumThreadTests_004"})
   public void threadHistoryPageContainsTableAndCells() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     ForumHistoryPageObject forumHistory = forumThread.openHistory();
@@ -81,12 +81,12 @@ public class ForumThreadTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @Test(groups = {"ForumThreadTests_005"})
   public void staffUserCanCloseAndReopenThread() {
-    ForumPageObject forumMainPage = new ForumPageObject(driver);
+    ForumPage forumMainPage = new ForumPage();
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
     String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
 
     forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
     forumThread.closeThread(PageContent.CLOSE_REASON);
