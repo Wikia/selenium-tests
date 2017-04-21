@@ -77,9 +77,6 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   public void verifyPageFairRecoveryWithNoAdBlock() {
-    verifyTopLeaderboard();
-    verifyMedrec();
-
     List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
     Assertion.assertEquals(markedSlots.size(), 0);
   }
