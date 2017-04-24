@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import org.json.JSONObject;
 
-public class MarkAsRead {
+class MarkAsRead {
 
   private final static String MARK_AS_READ_SUFFIX = "mark-all-as-read";
   private final PostRemoteOperation remoteOperation;
@@ -13,7 +13,7 @@ public class MarkAsRead {
     remoteOperation = new PostRemoteOperation(user);
   }
 
-  public void execute() {
+  protected void execute() {
     remoteOperation.execute(buildUrl(), new JSONObject());
   }
 
