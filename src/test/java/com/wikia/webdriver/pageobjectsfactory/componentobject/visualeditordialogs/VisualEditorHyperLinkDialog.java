@@ -46,7 +46,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
     WebElement doneButton = dialog.findElement(doneButtonBy);
     doneButton.click();
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void typeInLinkInput(String text) {
