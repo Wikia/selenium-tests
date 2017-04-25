@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -9,6 +10,7 @@ public class NotificationsDropdown extends BasePageObject implements Dropdown  {
   @FindBy(id = "onSiteNotificationsDropdown")
   private WebElement notificationsBell;
 
+  @Getter
   private Notifications notifications = new Notifications();
 
   @Override public Dropdown expand() {
