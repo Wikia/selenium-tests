@@ -9,11 +9,19 @@ public class NotificationsDropdown extends BasePageObject implements Dropdown  {
   @FindBy(id = "onSiteNotificationsDropdown")
   private WebElement notificationsBell;
 
+  private Notifications notifications = new Notifications();
+
   @Override public Dropdown expand() {
-    return null;
+    waitSafely(() -> wait.forElementNotVisible(notifications.getNotificationsList()));
+    waitAndClick(notificationsBell);
+    wait.forElementVisible(notifications.getNotificationsList());
+    return this;
   }
 
   @Override public Dropdown collapse() {
-    return null;
+    waitSafely(() -> wait.forElementVisible(notifications.getNotificationsList()));
+    waitAndClick(notificationsBell);
+    wait.forElementNotVisible(notifications.getNotificationsList());
+    return this;
   }
 }
