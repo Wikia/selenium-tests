@@ -755,4 +755,14 @@ public class AdsBaseObject extends WikiBasePageObject {
       return false;
     }
   }
+
+  public void waitForAdInSlot(String creativeId, String slotName) {
+    wait.forElementPresent(By.cssSelector("#" + slotName + " div[data-gpt-creative-id='" + creativeId + "']"));
+  }
+
+  public void verifyAdChainForSlot(String[] creativeIdChain, String slotName, AdsBaseObject page) {
+    for (String creativeId : creativeIdChain) {
+      page.waitForAdInSlot(creativeId, slotName);
+    }
+  }
 }
