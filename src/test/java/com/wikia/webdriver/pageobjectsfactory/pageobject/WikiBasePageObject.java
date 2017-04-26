@@ -5,10 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.EmailUtils;
+import com.wikia.webdriver.common.core.*;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -299,7 +296,7 @@ public class WikiBasePageObject extends BasePageObject {
     veEditButton.click();
     PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
         driver);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
@@ -308,7 +305,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openVEModeWithSectionEditButton",
         "VE edit button clicked at section: " + section, true, driver);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
@@ -360,7 +357,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openVEOnArticle(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.VEACTION_EDIT));
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void verifyUserLoggedIn(final String userName) {
@@ -584,7 +581,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
         URLsContent.VEACTION_EDIT));
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void addVideoViaAjax(String videoURL) {

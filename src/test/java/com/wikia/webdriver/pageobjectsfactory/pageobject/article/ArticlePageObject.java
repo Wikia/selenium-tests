@@ -282,7 +282,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     wait.forElementVisible(articleTitleInputModal);
     articleTitleInputModal.sendKeys(articleTitle);
     scrollAndClick(submitModal);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditModePageObject editArticleInRTEUsingDropdown() {
@@ -754,7 +754,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement redLinkToClick = redLinks.get(linkNumber);
     VECreateArticleModalComponentObject veArticleModal = clickVERedLink(redLinkToClick);
     veArticleModal.createPage();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
