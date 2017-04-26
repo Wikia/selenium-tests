@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.JoinTodayPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -180,6 +181,11 @@ public class Navigation {
     wait.forElementVisible(navigationMainHeader);
 
     return navigationMainHeader.getText();
+  }
+
+  public UserProfile openUserProfile() {
+    wait.forElementVisible(userProfileLink).click();
+    return new UserProfile();
   }
 
 }

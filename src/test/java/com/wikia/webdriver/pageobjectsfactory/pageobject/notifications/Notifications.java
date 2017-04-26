@@ -14,6 +14,10 @@ public class Notifications extends BasePageObject {
   @FindBy(css = ".wds-notifications__zero-state")
   private WebElement emptyState;
 
+  public Notifications() {
+    wait.forElementVisible(getNotificationsList());
+  }
+
   public boolean isEmptyStateMessageVisible() {
     return wait.forElementVisible(emptyState).isDisplayed();
   }

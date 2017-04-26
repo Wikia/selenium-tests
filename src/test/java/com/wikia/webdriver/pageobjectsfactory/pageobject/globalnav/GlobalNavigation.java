@@ -6,6 +6,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,6 +54,9 @@ public class GlobalNavigation extends BasePageObject {
 
   private DropDownComponentObject accountNavigation;
   private DropDownComponentObject exploreWikiaDropdownComponent;
+
+  @Getter
+  private NotificationsDropdown notificationsDropdown = new NotificationsDropdown();
 
   public HomePage clickWikiaLogo() {
     wait.forElementVisible(wikiaLogo);
