@@ -1,4 +1,4 @@
-package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
+package com.wikia.webdriver.pageobjectsfactory.pageobject.notifications;
 
 public enum NotificationType {
 
