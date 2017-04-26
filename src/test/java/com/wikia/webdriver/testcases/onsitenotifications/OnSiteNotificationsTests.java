@@ -30,5 +30,4 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData(siteId);
   }
 
-  private PostEntity.Data
 }
