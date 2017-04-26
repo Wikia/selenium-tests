@@ -18,6 +18,4 @@ public class Notifications extends BasePageObject {
     return wait.forElementVisible(emptyState).isDisplayed();
   }
 
-
-
 }

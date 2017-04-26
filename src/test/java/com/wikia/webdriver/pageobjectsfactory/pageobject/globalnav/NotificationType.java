@@ -2,11 +2,13 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav;
 
 public enum NotificationType {
 
-  POST_UPVOTE("discussion-post-upvote");
+  POST_UPVOTE("%s upvoted your discussion %s"),
+  POST_REPLY("%s replied to %s"),
+  REPLY_UPVOTE("%s upvoted your reply");
 
-  private final String key;
+  private final String format;
 
   NotificationType(String key) {
-    this.key = key;
+    format = key;
   }
 }
