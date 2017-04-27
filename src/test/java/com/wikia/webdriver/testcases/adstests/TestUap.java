@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -9,7 +10,6 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.apache.commons.collections.ListUtils;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TestUap extends TemplateNoFirstLoad {
-
-  private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
   private static final String MOBILE_IN_CONTENT = ".mobile-in-content";
   private static final String MOBILE_PREFOOTER = ".mobile-prefooter";
@@ -33,7 +31,7 @@ public class TestUap extends TemplateNoFirstLoad {
   public void adsUapOasis(Page page,
                           List<Map<String, Object>> atfSlots,
                           List<Map<String, Object>> btfSlots) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
     ads.triggerComments();
