@@ -15,7 +15,7 @@ public class JsonToReplyPostEntityMapper {
     return ReplyEntity.Data.builder()
       .id(json.read("$.id"))
       .threadId(json.read("$.threadId"))
-      .title(json.read("$.title"))
+      .body(json.read("$.body"))
       .authorId(json.read("$.creatorId"))
       .build();
   }

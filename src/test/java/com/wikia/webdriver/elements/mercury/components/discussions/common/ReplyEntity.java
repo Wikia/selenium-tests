@@ -8,7 +8,7 @@ public class ReplyEntity {
   @lombok.Data
   public static class Data {
     private final String id;
-    private final String title;
+    private final String body;
     private final String authorId;
     private final String threadId;
   }

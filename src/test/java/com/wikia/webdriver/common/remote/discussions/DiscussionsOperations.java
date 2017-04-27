@@ -2,11 +2,9 @@ package com.wikia.webdriver.common.remote.discussions;
 
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
-import com.wikia.webdriver.common.remote.discussions.context.CreatePostContext;
-import com.wikia.webdriver.common.remote.discussions.context.ModeratePostContext;
-import com.wikia.webdriver.common.remote.discussions.context.ThreadContext;
-import com.wikia.webdriver.common.remote.discussions.context.UpdatePostContext;
+import com.wikia.webdriver.common.remote.discussions.context.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntity;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
@@ -34,6 +32,13 @@ public class DiscussionsOperations {
    */
   public PostEntity.Data createPostWithUniqueData(String siteId) {
     return createPost(CreatePostContext.defaultContext(siteId));
+  }
+
+  /**
+   * Callable from anywhere
+   */
+  public ReplyEntity.Data createReplyToPost(String siteId, PostEntity.Data post) {
+    return new CreateReply(user).execute(CreateReplyContext.defaultContext(siteId, post.getId()));
   }
 
   /**

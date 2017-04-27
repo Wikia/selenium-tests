@@ -2,9 +2,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.notifications;
 
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@Builder
 public class Notification extends BasePageObject {
 
   @FindBy(css = ".wds-notification-card")
