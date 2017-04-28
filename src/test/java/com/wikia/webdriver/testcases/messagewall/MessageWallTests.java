@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.messagewall;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import org.openqa.selenium.interactions.Actions;
@@ -132,6 +134,20 @@ public class MessageWallTests extends NewTestTemplate {
     miniReply.switchAndQuoteMessageWall(reply);
     wall.submitQuote();
     wall.verifyQuote(reply);
+  }
+
+  @Test(groups = "MessageWall")
+  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5, asUser = User.USER_3)
+  public void userCanPreviewMessageWallThreadWhenDiscussionsEnabled() {
+    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+    String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
+    mini.switchAndWrite(message);
+    wall.setTitle(title);
+    wall.submit();
+    wall.verifyMessageText(title, message, credentials.userName);
+    Assertion.assertStringContains(wall.openThread(title).getMessageContents(), message);
   }
 
   /**
