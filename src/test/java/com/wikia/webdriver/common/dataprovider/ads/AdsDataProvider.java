@@ -1369,6 +1369,12 @@ public class AdsDataProvider {
                 .put(AdsContent.TOP_LB, "20.00")
                 .put(AdsContent.INCONTENT_LEADERBOARD, "20.00")
                 .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "Project43_Wikia?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "0.00")
+                .build()
         }
     };
   }
