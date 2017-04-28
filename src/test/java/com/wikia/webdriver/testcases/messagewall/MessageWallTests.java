@@ -177,7 +177,7 @@ public class MessageWallTests extends NewTestTemplate {
    * messageWall 3. QATestsBlockedUser should be able to post on his MessageWall 4.
    * QATestsBlockedUser should be able to respond on his MessageWall
    */
-  @Test(groups = {"MessageWall_008", "MessageWallMessageWall", "MessageWallTests"})
+  @Test(groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
   public void blockedUserCanCreatePostOnHerMessageWall() {
     SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
     boolean isUserBlocked = blockListPage.isUserBlocked(User.CONSTANTLY_BLOCKED_USER.getUserName());
