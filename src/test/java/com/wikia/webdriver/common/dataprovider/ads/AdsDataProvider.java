@@ -1,12 +1,11 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
-
-import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -1353,4 +1352,24 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsVelesTracking() {
+    return new Object[][]{
+        {
+          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
+          ImmutableMap.builder()
+            .put(AdsContent.TOP_LB, "20.00")
+            .put(AdsContent.INCONTENT_LEADERBOARD, "USED")
+            .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "20.00")
+                .put(AdsContent.INCONTENT_LEADERBOARD, "20.00")
+                .build()
+        }
+    };
+  }
 }
