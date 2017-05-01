@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.messagewall;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import org.openqa.selenium.interactions.Actions;
@@ -22,8 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 
 public class MessageWallTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
   @BeforeMethod
   public void mouseMove() {
     new Actions(driver).moveByOffset(0, 0).perform();
@@ -33,32 +33,32 @@ public class MessageWallTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @RelatedIssue(issueID = "SUS-801", comment = "The issue might be the reason for 25% failures of this test")
   public void userCanCreateAndEditMessage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userName);
+    wall.verifyMessageText(title, message, User.USER.getUserName());
     wall.triggerEditMessageArea();
     String messageEdit = PageContent.MESSAGE_WALL_MESSAGE_EDIT_PREFIX + wall.getTimeStamp();
     mini.switchAndEditMessageWall(messageEdit);
     wall.submitEdition();
-    wall.verifyMessageEditText(title, messageEdit, credentials.userName);
+    wall.verifyMessageEditText(title, messageEdit, User.USER.getUserName());
   }
 
   @Test(groups = {"MessageWall_002", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndRemoveMessage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userName);
+    wall.verifyMessageText(title, message, User.USER.getUserName());
     MessageWallCloseRemoveThreadPageObject remove = wall.clickRemoveThread();
     remove.closeRemoveThread("adss");
     wall.verifyThreadRemoved();
@@ -67,18 +67,18 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_003", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.STAFF)
   public void userCanCreateAndCloseMessage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
+    MessageWall wall = new MessageWall(driver).open(User.STAFF.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userNameStaff);
+    wall.verifyMessageText(title, message, User.STAFF.getUserName());
     MessageWallCloseRemoveThreadPageObject remove = wall.clickCloseThread();
     String reason = PageContent.CLOSE_REASON + wall.getTimeStamp();
     remove.closeRemoveThread(reason);
-    wall.verifyThreadClosed(credentials.userNameStaff, reason, title);
+    wall.verifyThreadClosed(User.STAFF.getUserName(), reason, title);
     wall.clickReopenThread();
     wall.verifyThreadReopened();
   }
@@ -86,14 +86,14 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_004", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.STAFF)
   public void userCanCreateAndQuoteMessage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userNameStaff);
+    MessageWall wall = new MessageWall(driver).open(User.STAFF.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userNameStaff);
+    wall.verifyMessageText(title, message, User.STAFF.getUserName());
     MiniEditorComponentObject miniQuote = wall.clickQuoteButton();
     String quote = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniQuote.switchAndQuoteMessageWall(quote);
@@ -104,7 +104,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_005", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndPreviewMessage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -113,25 +113,40 @@ public class MessageWallTests extends NewTestTemplate {
     MiniEditorPreviewComponentObject preview = wall.preview();
     preview.verifyTextContent(message);
     preview.publish();
-    wall.verifyMessageText(title, message, credentials.userName);
+    wall.verifyMessageText(title, message, User.USER.getUserName());
   }
 
   @Test(groups = {"MessageWall_006", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void userCanCreateAndReplyToMessage() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userName);
+    wall.verifyMessageText(title, message, User.USER.getUserName());
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndQuoteMessageWall(reply);
     wall.submitQuote();
     wall.verifyQuote(reply);
+  }
+
+  @Test(groups = "MessageWallTests")
+  @RelatedIssue(issueID = "IRIS-4352")
+  @Execute(onWikia = MercuryWikis.DISCUSSIONS_5, asUser = User.USER_3)
+  public void userCanPreviewMessageWallThreadWhenDiscussionsEnabled() {
+    MessageWall wall = new MessageWall(driver).open(User.USER.getUserName());
+    MiniEditorComponentObject mini = wall.triggerMessageArea();
+    String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+    String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
+    mini.switchAndWrite(message);
+    wall.setTitle(title);
+    wall.submit();
+    wall.verifyMessageText(title, message, User.USER_3.getUserName());
+    Assertion.assertStringContains(wall.openThread(title).getMessageContents(), message);
   }
 
   /**
@@ -140,10 +155,10 @@ public class MessageWallTests extends NewTestTemplate {
    * unClosedDivComment 2. refresh the page 3. make sure that reply area avatar doesn't appear by
    * default
    */
-  @Test(groups = {"MessageWall_007", "MeArticleTOCTestsArticleTOCTestsssageWall"})
+  @Test(groups = {"MessageWall_007", "MeArticleTOCTestsArticleTOCTestsssageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void CreatingMessageWithUnclosedTagDoesNotShowAvatar() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName11);
+    MessageWall wall = new MessageWall(driver).open(User.USER_11.getUserName());
     wall.triggerMessageArea();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.clickSourceModeButton();
@@ -165,26 +180,26 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_008", "MessageWall", "MessageWallTests"})
   public void blockedUserCanCreatePostOnHerMessageWall() {
     SpecialBlockListPage blockListPage = new SpecialBlockListPage().open();
-    boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
+    boolean isUserBlocked = blockListPage.isUserBlocked(User.CONSTANTLY_BLOCKED_USER.getUserName());
     if (!isUserBlocked) {
-      blockListPage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+      blockListPage.loginAs(User.STAFF.getUserName(), User.STAFF.getPassword(), wikiURL);
       SpecialBlockPage blockPage = new SpecialBlockPage(driver).open();
-      blockPage.typeInUserName(credentials.userNameBlockedAccount);
+      blockPage.typeInUserName(User.CONSTANTLY_BLOCKED_USER.getUserName());
       blockPage.typeExpiration("10 year");
       blockPage.typeReason("block QATestsBlockedUser");
       blockPage.deselectAllSelections();
       blockPage.clickBlockButton();
     }
-    blockListPage.loginAs(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount,
-        wikiURL);
-    MessageWall wall = new MessageWall(driver).open(credentials.userNameBlockedAccount);
+    blockListPage.loginAs(User.CONSTANTLY_BLOCKED_USER.getUserName(),
+      User.CONSTANTLY_BLOCKED_USER.getPassword(), wikiURL);
+    MessageWall wall = new MessageWall(driver).open(User.CONSTANTLY_BLOCKED_USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     mini.switchAndWrite(message);
     wall.setTitle(title);
     wall.submit();
-    wall.verifyMessageText(title, message, credentials.userNameBlockedAccount);
+    wall.verifyMessageText(title, message, User.CONSTANTLY_BLOCKED_USER.getUserName());
     MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
     String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
     miniReply.switchAndQuoteMessageWall(reply);
@@ -198,7 +213,7 @@ public class MessageWallTests extends NewTestTemplate {
   @Test(groups = {"MessageWall_009", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.USER)
   public void newWallPostTitleIsShownInWikiActivity() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.USER.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
 
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + MessageWall.getTimeStamp();
@@ -207,9 +222,9 @@ public class MessageWallTests extends NewTestTemplate {
     wall.setTitle(title);
     wall.submit();
 
-    wall.verifyMessageText(title, message, credentials.userName);
+    wall.verifyMessageText(title, message, User.USER.getUserName());
     new SpecialWikiActivityPageObject(driver)
             .open()
-            .verifyNewWallThreadEntry(title, message, credentials.userName);
+            .verifyNewWallThreadEntry(title, message, User.USER.getUserName());
   }
 }
