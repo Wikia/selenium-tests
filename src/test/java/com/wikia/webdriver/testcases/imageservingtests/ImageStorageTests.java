@@ -63,7 +63,7 @@ public class ImageStorageTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore =
-        confirmNotifications.stream().findFirst().get().clickUndeleteLinkInBannerNotification();
+        confirmNotifications.stream().findFirst().get().undelete();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
     confirmNotifications = restore.getNotifications(NotificationType.CONFIRM);

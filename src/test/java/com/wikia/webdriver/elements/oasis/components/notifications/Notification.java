@@ -34,12 +34,7 @@ public class Notification extends BasePageObject {
         return classArray[classArray.length-1];
     }
 
-    public void undelete(){
-        WebElement undeleteLink  = wait.forElementVisible(undeleteLinkBy);
-        undeleteLink.click();
-    }
-
-    public SpecialRestorePageObject clickUndeleteLinkInBannerNotification() {
+    public SpecialRestorePageObject undelete() {
         WebElement undeleteLink  = wait.forElementVisible(undeleteLinkBy);
         undeleteLink.click();
         return new SpecialRestorePageObject(driver);

@@ -43,12 +43,12 @@ public class VideosPageTests extends NewTestTemplate {
     @Execute(asUser = User.STAFF)
     @Test(groups = {"VideosPage", "VideosPageTest_002", "Media"})
     @RelatedIssue(issueID = "SUS-755")
-    public void VideosPageTest_002() {
+    public void VideosPageTest_002_deleteVideo_notificationContainsTitle() {
         SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
         YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
         specialVideos.addVideoViaAjax(video.getUrl());
-        specialVideos.isNewVideoAdded();
+        Assertion.assertTrue(specialVideos.isNewVideoAdded());
 
         String addedVideoTitle = specialVideos.getNewestVideoTitle();
         String addedVideoTitlePattern = addedVideoTitle;
@@ -77,13 +77,13 @@ public class VideosPageTests extends NewTestTemplate {
     @Execute(asUser = User.STAFF)
     @Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})
     @RelatedIssue(issueID = "SUS-863")
-    public void VideosPageTest_003() {
+    public void VideosPageTest_003_deleteVideo_removedFromRecentVideos() {
         SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
         YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery(VIDEO_QUERY);
 
         specialVideos.addVideoViaAjax(video.getUrl());
 
-        specialVideos.isNewVideoAdded();
+        Assertion.assertTrue(specialVideos.isNewVideoAdded());
 
         String addedVideoTitle = specialVideos.getNewestVideoTitle();
 

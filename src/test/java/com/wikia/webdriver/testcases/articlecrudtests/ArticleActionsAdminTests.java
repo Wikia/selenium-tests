@@ -38,7 +38,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore = article.getNotifications(NotificationType.CONFIRM)
-            .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
+            .stream().findFirst().get().undelete();
 
     restore.verifyRestoredArticleName(articleTitle);
     restore.giveReason(article.getTimeStamp());

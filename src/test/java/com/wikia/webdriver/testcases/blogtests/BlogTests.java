@@ -90,7 +90,7 @@ public class BlogTests extends NewTestTemplate {
     Assertion.assertEquals(confirmNotifications.size(),1,
             DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore = base.getNotifications(NotificationType.CONFIRM)
-            .stream().findFirst().get().clickUndeleteLinkInBannerNotification();
+            .stream().findFirst().get().undelete();
 
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();

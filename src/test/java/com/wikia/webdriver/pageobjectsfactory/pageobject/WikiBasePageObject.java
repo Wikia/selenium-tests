@@ -40,7 +40,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
@@ -49,11 +48,9 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
