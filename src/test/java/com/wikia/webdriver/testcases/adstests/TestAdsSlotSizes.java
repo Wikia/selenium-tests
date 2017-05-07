@@ -1,12 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
@@ -14,9 +14,6 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 public class TestAdsSlotSizes extends TemplateNoFirstLoad {
-
-  private static Dimension MOBILE_SIZE = new Dimension(414, 736);
-  private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -27,7 +24,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
                                 String urlParamToEnable,
                                 Map<String, Object> slotInfo) {
 
-    adsSlotSizes(page, urlParamToEnable, DESKTOP_SIZE, slotInfo);
+    adsSlotSizes(page, urlParamToEnable, WindowSize.DESKTOP, slotInfo);
   }
 
   @Test(
@@ -39,7 +36,7 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
                                   String urlParamToEnable,
                                   Map<String, Object> slotInfo) {
 
-    adsSlotSizes(page, urlParamToEnable, MOBILE_SIZE, slotInfo);
+    adsSlotSizes(page, urlParamToEnable, WindowSize.PHONE, slotInfo);
   }
 
   private void adsSlotSizes(Page page,
