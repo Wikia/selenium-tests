@@ -28,7 +28,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
 public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
-  private static final User userWithPosts = User.USER_9;
+  private static final User userWithPosts = User.USER_12;
   private String siteId;
 
   // FIXTURES
