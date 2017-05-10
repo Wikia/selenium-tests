@@ -1,9 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,9 +19,18 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final Color BLUE = new Color(4, 0, 254);
   private static final int AD_DURATION_SEC = 30;
   private static final int VIDEO_DURATION_SEC = 30;
+  private static final String PATTERN_DFP_PREROLL =
+      "^https://pubads.g.doubleclick\\.net\\/gampad\\/ads(.*)pos%3DFEATURED_VIDEO(.*)src%3Dpremium(.*)";
+
+  private static final String ARTICLE_VIDEO_ID = "ooyala-article-video";
+  private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = "#ooyala-article-video .oo-state-screen-selectable";
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
+  @FindBy(id = ARTICLE_VIDEO_ID)
+  private WebElement articleVideo;
+  @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
+  private WebElement articleVideoClickArea;
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
@@ -28,6 +39,17 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void playVideo() {
     wait.forElementVisible(lightboxVideo);
     lightboxVideo.click();
+  }
+
+  public void verifyPlayerOnPage() {
+    wait.forElementPresent(By.id(ARTICLE_VIDEO_ID));
+  }
+
+  public void verifyPremiumPreroll(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
+    networkTrafficInterceptor.startIntercepting();
+    wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_CLICK_AREA_SELECTOR));
+    articleVideoClickArea.click();
+    page.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN_DFP_PREROLL);
   }
 
   public void verifyLightboxAd() {

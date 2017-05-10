@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
@@ -7,6 +8,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 import org.testng.annotations.Test;
 
 public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
+
+  @NetworkTrafficDump(useMITM = true)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"AdsPremiumPrerollOasis"},
@@ -15,9 +18,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
   public void adsPremiumPrerollOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    // find video and click on play
-    //     -> request to DFP is being sent after clicking play button,
-    //     -> preroll is requested with new adunit (pos=FEATURED_VIDEO and src=premium),
-    //
+    wikiPage.verifyPlayerOnPage();
+    wikiPage.verifyPremiumPreroll(networkTrafficInterceptor, wikiPage);
   }
 }
