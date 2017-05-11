@@ -39,9 +39,14 @@ public class AdsOoyalaObject extends AdsBaseObject {
     super(driver, page);
   }
 
-  public void playVideo() {
+  public void playLightboxVideo() {
     wait.forElementVisible(lightboxVideo);
     lightboxVideo.click();
+  }
+
+  public void playArticleVideo() {
+    wait.forElementVisible(articleVideoWrapper);
+    articleVideoClickArea.click();
   }
 
   public void verifyPlayerOnPage() {
@@ -50,8 +55,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyPremiumPrerollRequest(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
     networkTrafficInterceptor.startIntercepting();
-    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR));
-    articleVideoClickArea.click();
+    playArticleVideo();
     page.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN_DFP_PREROLL);
   }
 

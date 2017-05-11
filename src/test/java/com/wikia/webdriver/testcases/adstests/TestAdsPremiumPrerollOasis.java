@@ -33,6 +33,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article + "&noads=1");
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
+    wikiPage.playArticleVideo();
     wikiPage.verifyArticleVideo();
   }
 }

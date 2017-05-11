@@ -1143,7 +1143,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "project43",
-            "SyntheticTests/Premium/FeaturedVideo?cb=5678"
+            "SyntheticTests/Premium/FeaturedVideo?AbTest.FEATURED_VIDEO_AUTOPLAY=CONTROL"
         }
     };
   }
