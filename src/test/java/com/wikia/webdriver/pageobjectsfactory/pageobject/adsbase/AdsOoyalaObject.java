@@ -67,6 +67,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleVideo() {
+    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
     verifyColorAd(articleVideoWrapper, GREEN, VIDEO_DURATION_SEC);
     PageObjectLogging.log("ArticleAd",
                           "Article had " + GREEN + " during " + VIDEO_DURATION_SEC
