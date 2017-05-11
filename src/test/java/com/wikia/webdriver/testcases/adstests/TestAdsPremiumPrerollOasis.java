@@ -24,15 +24,15 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
     wikiPage.verifyArticleVideo();
   }
 
-//  @Test(
-//      dataProviderClass = AdsDataProvider.class,
-//      groups = {"AdsPremiumPrerollOasis"},
-//      dataProvider = "adsPremiumPrerollOasis"
-//  )
-//  public void adsPremiumPrerollOasisNoAds(String wikiName, String article) {
-//    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?noads=1");
-//    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-//    wikiPage.verifyPlayerOnPage();
-//    //wikiPage.verifyLightboxVideo();
-//  }
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      groups = {"AdsPremiumPrerollOasis"},
+      dataProvider = "adsPremiumPrerollOasis"
+  )
+  public void adsPremiumPrerollOasisNoAds(String wikiName, String article) {
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "&noads=1");
+    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
+    wikiPage.verifyPlayerOnPage();
+    wikiPage.verifyArticleVideo();
+  }
 }

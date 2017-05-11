@@ -23,11 +23,12 @@ public class AdsOoyalaObject extends AdsBaseObject {
       "^https://pubads.g.doubleclick\\.net\\/gampad\\/ads(.*)pos%3DFEATURED_VIDEO(.*)src%3Dpremium(.*)";
 
   private static final String ARTICLE_VIDEO_ID = "ooyala-article-video";
+  private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = "#ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = "#ooyala-article-video .oo-state-screen-selectable";
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
-  @FindBy(css = "#ooyala-article-video > .innerWrapper")
+  @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
   private WebElement articleVideoWrapper;
   @FindBy(id = ARTICLE_VIDEO_ID)
   private WebElement articleVideo;
@@ -49,7 +50,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyPremiumPrerollRequest(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
     networkTrafficInterceptor.startIntercepting();
-    wait.forElementVisible(By.cssSelector("#ooyala-article-video > .innerWrapper"));
+    wait.forElementVisible(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR));
     articleVideoClickArea.click();
     page.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN_DFP_PREROLL);
   }
