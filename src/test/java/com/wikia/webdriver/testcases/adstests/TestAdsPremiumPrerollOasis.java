@@ -19,6 +19,20 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
-    wikiPage.verifyPremiumPreroll(networkTrafficInterceptor, wikiPage);
+    wikiPage.verifyPremiumPrerollRequest(networkTrafficInterceptor, wikiPage);
+    wikiPage.verifyArticleAd();
+    wikiPage.verifyArticleVideo();
   }
+
+//  @Test(
+//      dataProviderClass = AdsDataProvider.class,
+//      groups = {"AdsPremiumPrerollOasis"},
+//      dataProvider = "adsPremiumPrerollOasis"
+//  )
+//  public void adsPremiumPrerollOasisNoAds(String wikiName, String article) {
+//    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?noads=1");
+//    AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
+//    wikiPage.verifyPlayerOnPage();
+//    //wikiPage.verifyLightboxVideo();
+//  }
 }

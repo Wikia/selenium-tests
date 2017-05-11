@@ -27,6 +27,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
+  @FindBy(css = "#ooyala-article-video > .innerWrapper")
+  private WebElement articleVideoWrapper;
   @FindBy(id = ARTICLE_VIDEO_ID)
   private WebElement articleVideo;
   @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
@@ -45,11 +47,25 @@ public class AdsOoyalaObject extends AdsBaseObject {
     wait.forElementPresent(By.id(ARTICLE_VIDEO_ID));
   }
 
-  public void verifyPremiumPreroll(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
+  public void verifyPremiumPrerollRequest(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
     networkTrafficInterceptor.startIntercepting();
-    wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_CLICK_AREA_SELECTOR));
+    wait.forElementVisible(By.cssSelector("#ooyala-article-video > .innerWrapper"));
     articleVideoClickArea.click();
     page.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN_DFP_PREROLL);
+  }
+
+  public void verifyArticleAd() {
+    verifyColorAd(articleVideoWrapper, BLUE, AD_DURATION_SEC);
+    PageObjectLogging.log("ArticleAd",
+                          "Article had " + BLUE + " during " + AD_DURATION_SEC
+                          + " seconds", true);
+  }
+
+  public void verifyArticleVideo() {
+    verifyColorAd(articleVideoWrapper, GREEN, VIDEO_DURATION_SEC);
+    PageObjectLogging.log("ArticleAd",
+                          "Article had " + GREEN + " during " + VIDEO_DURATION_SEC
+                          + " seconds", true);
   }
 
   public void verifyLightboxAd() {
@@ -71,6 +87,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
     waitForColorAds(element, color);
     adsComparison.verifyColorAd(element, color, durationSec, driver);
   }
+
 
   private void waitForColorAds(WebElement element, Color color) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
