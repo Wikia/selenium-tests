@@ -36,7 +36,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     deletePage.submitDeletion();
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore = article.getNotifications(NotificationType.CONFIRM)
             .stream().findFirst().get().undelete();
 
@@ -45,7 +45,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     restore.restorePage();
     confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible());
 
     article.verifyArticleTitle(articleTitle);
@@ -66,7 +66,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
     List<Notification> confirmNotifications = article.getNotifications(NotificationType.CONFIRM);
 
     Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertEquals(confirmNotifications.stream().findFirst().get().getMessage(),
             "\"" + articleOldTitle + "\" has been renamed \"" + articleNewName + "\"",
             "Banner notification messsage is invalid");

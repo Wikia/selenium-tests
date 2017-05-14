@@ -52,25 +52,25 @@ public class ImageStorageTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = filesPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         DeletePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                         DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
 
     confirmNotifications = delete.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore =
         confirmNotifications.stream().findFirst().get().undelete();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
     confirmNotifications = restore.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            SpecialRestorePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -105,9 +105,9 @@ public class ImageStorageTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = file.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            RenamePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            RenamePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     file.verifyHeader(imageNewName);
     file = new FilePage().open(imageNewName, true);
@@ -116,9 +116,9 @@ public class ImageStorageTests extends NewTestTemplate {
 
     confirmNotifications = file.getNotifications(NotificationType.CONFIRM);
     Assertion.assertTrue(confirmNotifications.size()==1,
-            RenamePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            RenamePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();

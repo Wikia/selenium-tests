@@ -88,7 +88,7 @@ public class BlogTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = base.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     SpecialRestorePageObject restore = base.getNotifications(NotificationType.CONFIRM)
             .stream().findFirst().get().undelete();
 
@@ -97,9 +97,9 @@ public class BlogTests extends NewTestTemplate {
 
     confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         SpecialRestorePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                         SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     blogPage.verifyBlogTitle(blogTitle);
   }
@@ -118,8 +118,8 @@ public class BlogTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            RenamePageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         RenamePageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                         RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
   }
 }

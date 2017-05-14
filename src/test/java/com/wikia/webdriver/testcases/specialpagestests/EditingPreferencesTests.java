@@ -41,9 +41,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -62,9 +62,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject aritclePage = new ArticlePageObject().open(articleName);
@@ -82,9 +82,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
 
@@ -110,9 +110,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
     List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,
-            PreferencesPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+            PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            PreferencesPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+            PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     editPrefPage.enterEmailChangeLink(USERNAME, PASSWORD);
     editPrefPage.openEmailSection();

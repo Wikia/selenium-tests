@@ -60,10 +60,10 @@ public class VideosPageTests extends NewTestTemplate {
         List<Notification> confirmNotifications = specialVideos.getNotifications(NotificationType.CONFIRM);
 
         Assertion.assertEquals(confirmNotifications.size(),1,
-                SpecialVideosPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+                SpecialVideosPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
         Notification notification = confirmNotifications.stream().findFirst().get();
         Assertion.assertTrue(notification.isVisible(),
-                SpecialVideosPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                SpecialVideosPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
         Assertion.assertStringContains(notification.getMessage(), addedVideoTitlePattern);
     }
 
@@ -92,10 +92,10 @@ public class VideosPageTests extends NewTestTemplate {
         List<Notification> confirmNotifications = specialVideos.getNotifications(NotificationType.CONFIRM);
 
         Assertion.assertEquals(confirmNotifications.size(),1,
-                SpecialVideosPageObject.PageMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+                SpecialVideosPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
         Notification notification = confirmNotifications.stream().findFirst().get();
         Assertion.assertTrue(notification.isVisible(),
-                SpecialVideosPageObject.PageMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+                SpecialVideosPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
         Assertion.assertStringContains(notification.getMessage(),addedVideoTitle);
         Assertion.assertNotEquals(specialVideos.getNewestVideoTitle(), addedVideoTitle,
                 "Video is still visible as newest video");
