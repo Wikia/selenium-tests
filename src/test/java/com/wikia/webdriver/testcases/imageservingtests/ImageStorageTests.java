@@ -27,6 +27,7 @@ public class ImageStorageTests extends NewTestTemplate {
   @Test(groups = {"ImageStorageTests", "ImageStorage_001"})
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.USER_2)
+  @RelatedIssue(issueID = "QAART-1028")
   public void ImageStorage_001_deleteImage() {
     SpecialNewFilesPage filesPage =
         new SpecialNewFilesPage().openSpecialNewFiles(wikiURL);

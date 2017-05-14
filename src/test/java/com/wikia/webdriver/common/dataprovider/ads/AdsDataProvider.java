@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
@@ -30,6 +31,8 @@ public class AdsDataProvider {
 
   private static final String SOURCE_POINT_INSTANT_GLOBAL = "?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]" +
       "&?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]";
+
+  private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
       "src/test/resources/adsResources/no_wikia_skin_left.png";
@@ -188,7 +191,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -200,7 +203,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -219,7 +222,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -231,7 +234,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -244,7 +247,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -790,13 +793,13 @@ public class AdsDataProvider {
         {
             "project43",
             "",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             true
         },
         {
             "project43",
             "SyntheticTests/Prefooters",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             false
         }
     };
@@ -1315,12 +1318,12 @@ public class AdsDataProvider {
   public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }
