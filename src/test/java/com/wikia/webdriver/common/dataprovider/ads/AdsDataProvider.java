@@ -742,7 +742,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "project43",
+            "project43", "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -750,13 +750,13 @@ public class AdsDataProvider {
             }
         },
         {
-            "angrybirds",
+            "angrybirds", " Angry_Birds_Wiki",
             new String[]{
                 TestAdsTrackingPixels.GA_PIXEL_URL
             }
         },
         {
-            "lego",
+            "lego", "LEGO_Wiki",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -781,7 +781,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
-            "project43",
+            "project43", "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
