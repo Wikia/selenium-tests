@@ -77,12 +77,12 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   public void verifyPageFairRecoveryWithNoAdBlock() {
-    verifyTopLeaderboard();
-    verifyMedrec();
+    List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
+    Assertion.assertEquals(markedSlots.size(), 0);
+  }
 
-    // TODO: uncomment after ADEN-5041 is merged
-    // there should be no elements with adonis-marker attribute in DOM
-    // List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
-    // Assertion.assertEquals(markedSlots.size(), 0);
+  public void waitForRecoveredSlot(String slotName) {
+    // We are waitnig for Source Point recovered slot (second div appears in slot)
+    wait.forElementPresent(By.cssSelector("#" + slotName + " .provider-container > div:nth-child(2)"));
   }
 }

@@ -1,22 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.Helios;
-import com.wikia.webdriver.common.core.EmailUtils;
+import com.wikia.webdriver.common.core.*;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
-import com.wikia.webdriver.elements.oasis.components.notifications.BannerNotifications;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -42,7 +40,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
@@ -51,18 +48,30 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.FindBys;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 public class WikiBasePageObject extends BasePageObject {
 
+
+  public static class AssertionMessages {
+
+    public static final String INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS =
+            "Number of action confirming notifications is invalid";
+    public static final String BANNER_NOTIFICATION_NOT_VISIBLE = "Banner notification message is not visible";
+
+    private AssertionMessages() {
+      throw new IllegalAccessError("Utility class");
+    }
+  }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".wds-global-navigation__user-menu img";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
@@ -79,8 +88,6 @@ public class WikiBasePageObject extends BasePageObject {
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
   private final TopBar topBar = new TopBar(driver);
-  @Getter(lazy = true)
-  private final BannerNotifications bannerNotifications = new BannerNotifications();
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = "#WikiaPageHeader h1")
@@ -124,8 +131,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
-  @FindBy(css = ".banner-notification")
-  private WebElement bannerNotification;
+  @FindBys(@FindBy(css = ".banner-notification"))
+  private List<WebElement> notificationElements;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-global-navigation__user-menu")
@@ -286,7 +293,7 @@ public class WikiBasePageObject extends BasePageObject {
     veEditButton.click();
     PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
         driver);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
@@ -295,7 +302,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openVEModeWithSectionEditButton",
         "VE edit button clicked at section: " + section, true, driver);
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
@@ -347,7 +354,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openVEOnArticle(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.VEACTION_EDIT));
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void verifyUserLoggedIn(final String userName) {
@@ -396,8 +403,19 @@ public class WikiBasePageObject extends BasePageObject {
     return new DeletePageObject(driver);
   }
 
-  public String getBannerNotificationText() {
-    return bannerNotification.getText();
+  public List<Notification> getNotifications(){
+    List<Notification> notificationList = new ArrayList<>();
+    for (WebElement notificationElement : notificationElements){
+      Notification notification = new Notification(driver, notificationElement);
+      notificationList.add(notification);
+    }
+    return notificationList;
+  }
+
+  public List<Notification> getNotifications(NotificationType notificationType){
+    List<Notification> notificationList = getNotifications();
+    return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType.name()))
+            .collect(Collectors.toList());
   }
 
   public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
@@ -560,7 +578,7 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
         URLsContent.VEACTION_EDIT));
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void addVideoViaAjax(String videoURL) {

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
@@ -27,6 +28,11 @@ public class AdsDataProvider {
 
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
+
+  private static final String SOURCE_POINT_INSTANT_GLOBAL = "?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]" +
+      "&?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]";
+
+  private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
       "src/test/resources/adsResources/no_wikia_skin_left.png";
@@ -185,7 +191,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -197,7 +203,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -216,7 +222,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -228,7 +234,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -241,7 +247,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -787,13 +793,13 @@ public class AdsDataProvider {
         {
             "project43",
             "",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             true
         },
         {
             "project43",
             "SyntheticTests/Prefooters",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             false
         }
     };
@@ -1056,7 +1062,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoverySourcePointOasis() {
     return new Object[][]{
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
             ImmutableMap.<String, Object>builder()
                 .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_LEADERBOARD")
                 .put("slotName", AdsContent.TOP_LB)
@@ -1065,7 +1071,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("arecovery", "SyntheticTests/Static_image"),
+            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
             ImmutableMap.<String, Object>builder()
                 .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_RIGHT_BOXAD")
                 .put("slotName", AdsContent.MEDREC)
@@ -1089,7 +1095,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoverySourcePointOasisProject43() {
       return new Object[][]{
           {
-              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)
@@ -1098,7 +1104,7 @@ public class AdsDataProvider {
                   .build()
           },
           {
-              new Page("project43", "SourcePoint/Static_image?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
                   .put("slotName", AdsContent.MEDREC)
@@ -1113,7 +1119,7 @@ public class AdsDataProvider {
   public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
       return new Object[][]{
           {
-              new Page("project43", "SourcePoint/Static_image/HopToTaboola?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]"),
+              new Page("project43", "SourcePoint/Static_image/HopToTaboola" + SOURCE_POINT_INSTANT_GLOBAL),
               ImmutableMap.<String, Object>builder()
                   .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
                   .put("slotName", AdsContent.TOP_LB)
@@ -1128,6 +1134,16 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsPremiumPrerollOasis() {
+    return new Object[][]{
+        {
+            "project43",
+            "SyntheticTests/Premium/FeaturedVideo?AbTest.FEATURED_VIDEO_AUTOPLAY=CONTROL"
         }
     };
   }
@@ -1312,12 +1328,12 @@ public class AdsDataProvider {
   public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }

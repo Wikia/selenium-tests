@@ -20,7 +20,7 @@ public class TestAdsOoyalaMercury extends TemplateNoFirstLoad {
   public void adsOoyalaPrerollMercury(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.playVideo();
+    wikiPage.playLightboxVideo();
     wikiPage.verifyLightboxAd();
     wikiPage.verifyLightboxVideo();
   }

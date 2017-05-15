@@ -1,9 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,17 +19,59 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final Color BLUE = new Color(4, 0, 254);
   private static final int AD_DURATION_SEC = 30;
   private static final int VIDEO_DURATION_SEC = 30;
+  private static final String PATTERN_DFP_PREROLL =
+      "^https://pubads.g.doubleclick\\.net\\/gampad\\/ads(.*)pos%3DFEATURED_VIDEO(.*)src%3Dpremium(.*)";
+
+  private static final String ARTICLE_VIDEO_ID = "ooyala-article-video";
+  private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = "#ooyala-article-video > .innerWrapper";
+  private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = "#ooyala-article-video .oo-state-screen-selectable";
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
+  @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
+  private WebElement articleVideoWrapper;
+  @FindBy(id = ARTICLE_VIDEO_ID)
+  private WebElement articleVideo;
+  @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
+  private WebElement articleVideoClickArea;
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
   }
 
-  public void playVideo() {
+  public void playLightboxVideo() {
     wait.forElementVisible(lightboxVideo);
     lightboxVideo.click();
+  }
+
+  public void playArticleVideo() {
+    wait.forElementVisible(articleVideoWrapper);
+    articleVideoClickArea.click();
+  }
+
+  public void verifyPlayerOnPage() {
+    wait.forElementPresent(By.id(ARTICLE_VIDEO_ID));
+  }
+
+  public void verifyPremiumPrerollRequest(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
+    networkTrafficInterceptor.startIntercepting();
+    playArticleVideo();
+    page.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN_DFP_PREROLL);
+  }
+
+  public void verifyArticleAd() {
+    verifyColorAd(articleVideoWrapper, BLUE, AD_DURATION_SEC);
+    PageObjectLogging.log("ArticleAd",
+                          "Article had " + BLUE + " during " + AD_DURATION_SEC
+                          + " seconds", true);
+  }
+
+  public void verifyArticleVideo() {
+    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
+    verifyColorAd(articleVideoWrapper, GREEN, VIDEO_DURATION_SEC);
+    PageObjectLogging.log("ArticleAd",
+                          "Article had " + GREEN + " during " + VIDEO_DURATION_SEC
+                          + " seconds", true);
   }
 
   public void verifyLightboxAd() {
@@ -49,6 +93,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
     waitForColorAds(element, color);
     adsComparison.verifyColorAd(element, color, durationSec, driver);
   }
+
 
   private void waitForColorAds(WebElement element, Color color) {
     changeImplicitWait(500, TimeUnit.MILLISECONDS);
