@@ -138,43 +138,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fliteSkin() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Flite/Background_Takeover",
-            new Dimension(1200, 1000),
-            Arrays.asList(
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_1.png",
-                    "src/test/resources/adsResources/flite_skin_right_1.png",
-                    ""
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_2.png",
-                    "src/test/resources/adsResources/flite_skin_right_2.png",
-                    "div[data-layer*='Button #2']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_3.png",
-                    "src/test/resources/adsResources/flite_skin_right_3.png",
-                    "div[data-layer*='Button #3']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_4.png",
-                    "src/test/resources/adsResources/flite_skin_right_4.png",
-                    "div[data-layer*='Button #4']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_1.png",
-                    "src/test/resources/adsResources/flite_skin_right_1.png",
-                    "div[data-layer='Button #1']"
-                )
-            )
-        },
-        };
-  }
-
-  @DataProvider
   public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
@@ -622,56 +585,6 @@ public class AdsDataProvider {
     return new Object[][]{
         {"project43","SyntheticTests/Cap", 333201132},
     };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagBrokenOasis() {
-    return new Object[][]{
-        {
-            "SyntheticTests/FliteTagBrokenWidth",
-            "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenHeight",
-            "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenTag",
-            "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagBrokenMercury() {
-    return new Object[][]{
-        {
-            "SyntheticTests/FliteTagBrokenWidth",
-            "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenHeight",
-            "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenTag",
-            "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagOasis() {
-    return new Object[][]{
-        {"SyntheticTests/FliteTag"},
-        {"SyntheticTests/FliteTagModifiedTag"}};
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagMercury() {
-    return new Object[][]{
-        {"SyntheticTests/FliteTag"},
-        {"SyntheticTests/FliteTagModifiedTag"}};
   }
 
   @DataProvider
