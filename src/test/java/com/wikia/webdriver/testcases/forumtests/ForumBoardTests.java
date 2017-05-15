@@ -81,7 +81,7 @@ public class ForumBoardTests extends NewTestTemplate {
     forumBoard.clickPostButton();
   }
 
-  @Test(groups = {"ForumBoardTests_006"}, invocationCount = 20)
+  @Test(groups = {"ForumBoardTests_006"})
   @Execute(asUser = User.STAFF)
   @RelatedIssue(issueID = "MAIN-7213",
       comment = "the failure is caused by the environment instability. Please rerun test")
