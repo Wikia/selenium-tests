@@ -32,7 +32,6 @@ import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
 
-  protected static final String FLITE_MASK_CSS_SELECTOR = ".flite-mask";
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
@@ -144,19 +143,6 @@ public class AdsBaseObject extends WikiBasePageObject {
       return;
     }
     verifyAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
-  }
-
-
-  public void verifyFliteTag(String cssFliteSelector) {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteSelector)));
-    WebElement fliteTag = driver.findElement(By.cssSelector(cssFliteSelector));
-    verifySlotExpanded(fliteTag);
-  }
-
-  public void verifyFliteTagBroken(String error, String cssFliteBrokenSelector) {
-    jsActions.scrollToElement(wait.forElementVisible(By.cssSelector(cssFliteBrokenSelector)));
-    WebElement fliteTagBroken = driver.findElement(By.cssSelector(cssFliteBrokenSelector));
-    Assertion.assertEquals(fliteTagBroken.getText(), error);
   }
 
   public void verifyNoAdsOnPage() {
@@ -675,8 +661,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void clickOnArticleLink(String linkName) {
-    hideElementIfPresent(FLITE_MASK_CSS_SELECTOR);
-
     WebElement link = driver.findElement(
         By.cssSelector("a[title='" + linkName + "']"));
     link.click();
