@@ -1,13 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -15,6 +7,13 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 public class ForumBoardPage extends BasePageObject {
 
@@ -168,9 +167,11 @@ public class ForumBoardPage extends BasePageObject {
   }
 
   public void unfollowIfDiscussionIsFollowed(int threadNumber) {
-    WebElement followButton =
-        driver.findElement(By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow"));
-    wait.forElementVisible(followButton);
+
+    //TODO: Get a list of threads not to put locator in this method
+    By followButtonBy = By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow");
+    WebElement followButton = wait.forElementVisible(followButtonBy);
+
     if (followButton.getText().contains("Following")) {
       PageObjectLogging.log("unfollowIfDiscussionIsFollowed",
           "discussion is followed. Preparing to click \"unfollowed\"", true);
