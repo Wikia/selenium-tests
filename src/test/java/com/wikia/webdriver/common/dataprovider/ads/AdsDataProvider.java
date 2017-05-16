@@ -809,36 +809,6 @@ public class AdsDataProvider {
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/728x90"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(728, 90))
-                .put("lineItemId", 269658972)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/468x60"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(468, 60))
-                .put("lineItemId", 269666292)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/300x250"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 269672052)
-                .put("src", "gpt")
-                .build()
-        },
-        {
             new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
             "",
             ImmutableMap.<String, Object>builder()

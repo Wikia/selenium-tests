@@ -11,7 +11,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDfpParamsPresentMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdDriverForcedStatusOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdvertisementTextOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBrowserError"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDetection"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDetectionPageFair"/>
