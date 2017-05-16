@@ -1012,16 +1012,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsAdvertisementText() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsPremiumPrerollOasis() {
     return new Object[][]{
         {
