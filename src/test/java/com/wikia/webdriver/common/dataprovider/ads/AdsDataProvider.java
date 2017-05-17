@@ -1022,6 +1022,16 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsPremiumPrerollOasis() {
+    return new Object[][]{
+        {
+            "project43",
+            "SyntheticTests/Premium/FeaturedVideo?AbTest.FEATURED_VIDEO_AUTOPLAY=CONTROL"
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
