@@ -1,16 +1,14 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
+import org.testng.annotations.Test;
 
 @Test(groups = {"ForumBoardTests", "Forum"})
 public class ForumBoardTests extends NewTestTemplate {
@@ -83,8 +81,6 @@ public class ForumBoardTests extends NewTestTemplate {
 
   @Test(groups = {"ForumBoardTests_006"})
   @Execute(asUser = User.STAFF)
-  @RelatedIssue(issueID = "MAIN-7213",
-      comment = "the failure is caused by the environment instability. Please rerun test")
   public void anonymousUserCanFollowDiscussionOnForum() {
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);

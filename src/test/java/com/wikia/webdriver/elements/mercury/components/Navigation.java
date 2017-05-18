@@ -50,8 +50,8 @@ public class Navigation {
   @FindBy(css = ".wikia-nav--profile-link")
   private WebElement userProfileLink;
 
-  @FindBy(css = ".wikia-nav--logout")
-  private WebElement logoutLink;
+  @FindBy(css = ".wds-menu-chevron")
+  private WebElement userProfileArrow;
 
   @FindBy(css = ".nav-menu__header")
   private WebElement exploreWikiHeader;
@@ -157,8 +157,8 @@ public class Navigation {
     return isElementVisible(userProfileLink);
   }
 
-  public boolean isLogoutLinkVisible() {
-    return isElementVisible(logoutLink);
+  public boolean isNavigationToUserProfileVisible() {
+    return isElementVisible(userProfileArrow);
   }
 
   public boolean areHubLinksVisible() {

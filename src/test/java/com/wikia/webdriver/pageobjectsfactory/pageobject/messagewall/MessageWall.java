@@ -72,7 +72,7 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement editMessageWrapper;
   @FindBy(css = ".speech-bubble-message-removed")
   private WebElement removedThreadMessage;
-  @FindBy(css = ".msg-title > a")
+  @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
 
   public MessageWall(WebDriver driver) {

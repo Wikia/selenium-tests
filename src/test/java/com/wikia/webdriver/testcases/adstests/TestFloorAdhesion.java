@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFloorAdhesionObject;
@@ -10,10 +11,6 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.Dimension;
 
 public class TestFloorAdhesion extends TemplateNoFirstLoad {
-
-  private static Dimension MOBILE_SIZE = new Dimension(414, 736);
-  private static Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
-
   private static final String WIKI_NAME = "project43";
 
   private static final String OLD_ARTICLE_TITLE = "SyntheticTests/FloorAdhesion";
@@ -32,42 +29,42 @@ public class TestFloorAdhesion extends TemplateNoFirstLoad {
       groups = "AdsFloorAdhesionOasis"
   )
   public void testOldFloorAdhesionPresenceOasis() {
-    testOldFloorAdhesionPresence(DESKTOP_SIZE);
+    testOldFloorAdhesionPresence(WindowSize.DESKTOP);
   }
 
   @Test(
       groups = "AdsFloorAdhesionMercury"
   )
   public void testOldFloorAdhesionPresenceMercury() {
-    testOldFloorAdhesionPresence(MOBILE_SIZE);
+    testOldFloorAdhesionPresence(WindowSize.PHONE);
   }
 
   @Test(
       groups = "AdsFloorAdhesionOasis"
   )
   public void testOldFloorAdhesionModalOasis() {
-    testOldFloorAdhesionModal(DESKTOP_SIZE);
+    testOldFloorAdhesionModal(WindowSize.DESKTOP);
   }
 
   @Test(
       groups = "AdsFloorAdhesionMercury"
   )
   public void testOldFloorAdhesionModalMercury() {
-    testOldFloorAdhesionModal(MOBILE_SIZE);
+    testOldFloorAdhesionModal(WindowSize.PHONE);
   }
 
   @Test(
       groups = "AdsFloorAdhesionOasis"
   )
   public void testOldFloorAdhesionCloseButtonOasis() {
-    testOldFloorAdhesionCloseButton(DESKTOP_SIZE);
+    testOldFloorAdhesionCloseButton(WindowSize.DESKTOP);
   }
 
   @Test(
       groups = "AdsFloorAdhesionMercury"
   )
   public void testOldFloorAdhesionCloseButtonMercury() {
-    testOldFloorAdhesionCloseButton(MOBILE_SIZE);
+    testOldFloorAdhesionCloseButton(WindowSize.PHONE);
   }
 
   @Test(

@@ -22,7 +22,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -102,10 +101,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private By preformatedBy = By.cssSelector(".oo-ui-tool-name-preformatted");
   private By menuItemBy = By.cssSelector(".oo-ui-tool-title");
   private By labelBy = By.cssSelector(".oo-ui-labelElement-label");
-
-  public VisualEditorMenu(WebDriver driver) {
-    super();
-  }
 
   private void clickStyleItemFromDropDown(By styleBy) {
     WebElement styleListElement = toolListDropDowns.get(STYLE_LIST);

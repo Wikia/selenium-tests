@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
@@ -8,8 +9,6 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
-import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +17,6 @@ import org.testng.annotations.Test;
 )
 public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
-  private static final Dimension DESKTOP_SIZE = new Dimension(1920, 1080);
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
   private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
   private static final int DELAY = 2;
@@ -29,7 +27,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
           groups = "AdsVideoClosesWhenFinishPlaysOasis"
   )
   public void adsVideoClosedAfterPlayingOasis(Page page, String slotName, String iframeId) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
@@ -44,7 +42,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
           groups = "AdsImageClickedOpensNewPageOasis"
   )
   public void adsImageClickedOpensNewPageOasis(Page page, String slotName, String iframeId) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
@@ -60,7 +58,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
           groups = "AdsVuapVideoClosesWhenTapCloseButtonOasis"
   )
   public void adsVuapVideoClosesWhenTapCloseButtonOasis(Page page, String slotName, String iframeId) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
@@ -78,7 +76,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void adsVuapCheckSlotSizesOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     String slotSelector = AdsContent.getSlotSelector(slotName);
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
@@ -102,7 +100,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void adsVuapTimeProgressingOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 
@@ -124,7 +122,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void adsVuapVideoPauseOasis(Page page, String slotName, String iframeId) throws InterruptedException {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), DESKTOP_SIZE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     scrollToSlot(slotName, ads);
     VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, slotName);
 

@@ -8,6 +8,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
@@ -16,8 +18,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
 import org.testng.annotations.Test;
+import java.util.List;
+
 
 public class BlogTests extends NewTestTemplate {
 
@@ -82,12 +85,21 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = blogPage.getBlogName();
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
-    SpecialRestorePageObject restore = base.getBannerNotifications().clickUndeleteLinkInBannerNotification();
+
+    List<Notification> confirmNotifications = base.getNotifications(NotificationType.CONFIRM);
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    SpecialRestorePageObject restore = base.getNotifications(NotificationType.CONFIRM)
+            .stream().findFirst().get().undelete();
+
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
 
-    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+                         SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     blogPage.verifyBlogTitle(blogTitle);
   }
@@ -104,7 +116,10 @@ public class BlogTests extends NewTestTemplate {
     renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
     blogPage.verifyBlogTitle(blogTitleMove);
 
-    Assertion.assertTrue(blogPage.getBannerNotifications().isNotificationMessageVisible(),
-                         "Banner notification message is not visible");
+    List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+                         RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
   }
 }
