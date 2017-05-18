@@ -1,13 +1,13 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.video.VideoTile;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,9 +18,11 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class SpecialVideosPageObject extends SpecialPageObject {
 
+  private static final String LONG_TITLE_SUFFIX = " ...";
   @FindBy(css = ".WikiaPageHeader h1")
   private WebElement h1Header;
   @FindBy(css = "a.button.addVideo")
@@ -39,6 +41,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   private WebElement deleteConfirmButton;
   @FindBy(css = "#sorting-dropdown")
   private WebElement sortDropdown;
+  @FindBys(@FindBy(css = ".special-videos-grid li"))
+  private List<WebElement> videoTileElements;
+
 
   private static final String NEWEST_VIDEO_CSS = ".special-videos-grid li:nth-child(1) .title a";
 
@@ -69,10 +74,28 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return new VetAddVideoComponentObject(driver);
   }
 
-  public void verifyVideoAdded(String videoTitle) {
-    waitForValueToBePresentInElementsAttributeByCss(NEWEST_VIDEO_CSS, "title", escapeHtml(videoTitle));
+  public List<VideoTile> getVideoTiles(int numberOfTiles){
+    wait.forElementPresent(By.cssSelector(NEWEST_VIDEO_CSS));
+    List<VideoTile> videoTileList = new ArrayList<>();
+    List<WebElement> subList = videoTileElements.subList(0,numberOfTiles);
+    for (WebElement videoTileElement : subList){
+      VideoTile notification = new VideoTile(videoTileElement);
+      videoTileList.add(notification);
+    }
+    return videoTileList;
+  }
+
+  public void verifyVideoAdded(String expectedVideoTitle) {
+
+    List<String> patternList = getVideoTiles(2).stream().map(
+            v->(v.getTitle().endsWith(LONG_TITLE_SUFFIX))
+                    ? v.getTitle().replace(LONG_TITLE_SUFFIX, "")
+                    : v.getTitle()
+    ).collect(Collectors.toList());
+
     PageObjectLogging.log("verifyVideoAdded",
-        "verify that video with following description was added: " + videoTitle, true);
+        "verify that video with following description was added: " + expectedVideoTitle, true);
+    Assertion.assertStringContainsAnyPattern(expectedVideoTitle, patternList);
   }
 
   public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {

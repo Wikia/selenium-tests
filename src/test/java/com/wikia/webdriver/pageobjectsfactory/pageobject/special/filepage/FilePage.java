@@ -1,17 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 public class FilePage extends WikiBasePageObject {
 
@@ -26,7 +26,7 @@ public class FilePage extends WikiBasePageObject {
   @FindBys(@FindBy(css = ".tabs li"))
   private List<WebElement> tabs;
   @FindBy(css = "div#mw-imagepage-nofile")
-  private WebElement noFileText;
+  private WebElement noFileTextBox;
   @FindBy(css = "li#mw-imagepage-reupload-link a")
   private WebElement reuploadLink;
   @FindBy(css = "#wpWikiaVideoAddUrl")
@@ -96,8 +96,17 @@ public class FilePage extends WikiBasePageObject {
         true);
   }
 
+  public boolean isNoFileTextBoxVisible(){
+    try{
+      wait.forElementVisible(noFileTextBox);
+      return true;
+    } catch (TimeoutException e){
+      return false;
+    }
+  }
+
   public void verifyEmptyFilePage() {
-    wait.forElementVisible(noFileText);
+    Assertion.assertEquals(isNoFileTextBoxVisible(), true);
     PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible",
         true);
   }

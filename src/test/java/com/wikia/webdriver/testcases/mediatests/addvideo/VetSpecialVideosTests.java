@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -14,17 +12,17 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
+import org.testng.annotations.Test;
 
 @Test(groups = {"VetTests", "SpecialVideo", "Media"})
 public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"VetTests001"})
+  @Test(groups = {"VetTests001"}, invocationCount = 15)
   @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("flower");
-
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
