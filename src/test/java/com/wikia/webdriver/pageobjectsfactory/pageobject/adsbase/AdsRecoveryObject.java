@@ -81,7 +81,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
     Assertion.assertEquals(markedSlots.size(), RECOVERABLE_ADS_COUNT);
   }
 
-  public void verifyPageFairRecoveryLoggedIn() {
+  public void verifyPageFairRecoveryNoMarkersOnPage() {
     List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
     Assertion.assertEquals(markedSlots.size(), 0);
   }

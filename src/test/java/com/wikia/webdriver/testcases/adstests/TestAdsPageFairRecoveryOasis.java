@@ -52,7 +52,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryLoggedIn();
+    adsRecoveryObject.verifyPageFairRecoveryNoMarkersOnPage();
   }
 }
 
