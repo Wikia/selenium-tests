@@ -138,43 +138,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fliteSkin() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Flite/Background_Takeover",
-            new Dimension(1200, 1000),
-            Arrays.asList(
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_1.png",
-                    "src/test/resources/adsResources/flite_skin_right_1.png",
-                    ""
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_2.png",
-                    "src/test/resources/adsResources/flite_skin_right_2.png",
-                    "div[data-layer*='Button #2']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_3.png",
-                    "src/test/resources/adsResources/flite_skin_right_3.png",
-                    "div[data-layer*='Button #3']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_4.png",
-                    "src/test/resources/adsResources/flite_skin_right_4.png",
-                    "div[data-layer*='Button #4']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_1.png",
-                    "src/test/resources/adsResources/flite_skin_right_1.png",
-                    "div[data-layer='Button #1']"
-                )
-            )
-        },
-        };
-  }
-
-  @DataProvider
   public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
@@ -625,56 +588,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fliteTagBrokenOasis() {
-    return new Object[][]{
-        {
-            "SyntheticTests/FliteTagBrokenWidth",
-            "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenHeight",
-            "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenTag",
-            "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagBrokenMercury() {
-    return new Object[][]{
-        {
-            "SyntheticTests/FliteTagBrokenWidth",
-            "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenHeight",
-            "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenTag",
-            "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagOasis() {
-    return new Object[][]{
-        {"SyntheticTests/FliteTag"},
-        {"SyntheticTests/FliteTagModifiedTag"}};
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagMercury() {
-    return new Object[][]{
-        {"SyntheticTests/FliteTag"},
-        {"SyntheticTests/FliteTagModifiedTag"}};
-  }
-
-  @DataProvider
   public static Object[][] evolveTestPage() {
     return new Object[][]{{"project43", "SyntheticTests/Evolve"}};
   }
@@ -829,7 +742,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "project43",
+            "project43", "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -837,13 +750,13 @@ public class AdsDataProvider {
             }
         },
         {
-            "angrybirds",
+            "angrybirds", " Angry_Birds_Wiki",
             new String[]{
                 TestAdsTrackingPixels.GA_PIXEL_URL
             }
         },
         {
-            "lego",
+            "lego", "LEGO_Wiki",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -868,7 +781,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
-            "project43",
+            "project43", "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -895,36 +808,6 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/728x90"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(728, 90))
-                .put("lineItemId", 269658972)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/468x60"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(468, 60))
-                .put("lineItemId", 269666292)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/300x250"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 269672052)
-                .put("src", "gpt")
-                .build()
-        },
         {
             new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
             "",
@@ -1126,16 +1009,6 @@ public class AdsDataProvider {
                   .build()
           }
       };
-  }
-
-  @DataProvider
-  public static Object[][] adsAdvertisementText() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
-        }
-    };
   }
 
   @DataProvider
