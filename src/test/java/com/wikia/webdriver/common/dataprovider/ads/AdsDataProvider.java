@@ -1360,14 +1360,14 @@ public class AdsDataProvider {
           new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
           ImmutableMap.builder()
             .put(AdsContent.TOP_LB, "20.00")
-            .put(AdsContent.INCONTENT_LEADERBOARD, "USED")
+            .put(AdsContent.INCONTENT_PLAYER, "USED")
             .build()
         },
         {
             new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "20.00")
-                .put(AdsContent.INCONTENT_LEADERBOARD, "20.00")
+                .put(AdsContent.INCONTENT_PLAYER, "20.00")
                 .build()
         },
         {

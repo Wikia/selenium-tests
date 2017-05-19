@@ -33,17 +33,26 @@ public class TestAdsVelesTracking extends NewTestTemplate {
       dataProvider = "adsVelesTracking")
   public void adsTrackingVelesTracked(final Page page, final Map<String, String> positionsAndPrices) {
     networkTrafficInterceptor.startIntercepting();
-    new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
 
-    Set<HarEntry> entries = findEntriesByUrlPart(VELES_TRACKING_REQUEST_PART);
+    Set<HarEntry> entries = findEntriesByUrlPart(pageObject, VELES_TRACKING_REQUEST_PART, positionsAndPrices);
 
     Assertion.assertTrue(wasVelesTrackedIn(entries, positionsAndPrices), "Veles should be tracked only in " + positionsAndPrices);
   }
 
-  private Set<HarEntry> findEntriesByUrlPart(final String s) {
+  private Set<HarEntry> findEntriesByUrlPart(AdsBaseObject pageObject, final String s, final Map<String, String> positionsAndPrices) {
+    for(String slotName: positionsAndPrices.keySet()) {
+      waitForSlotTrackingRequest(pageObject, slotName);
+    }
+
     return networkTrafficInterceptor.getHar().getLog().getEntries().stream()
         .filter(entry -> entry.getRequest().getUrl().contains(s))
         .collect(toSet());
+  }
+
+  private void waitForSlotTrackingRequest(AdsBaseObject pageObject, String slotName) {
+    final String pattern = String.format(".*%s.*%s=%s.*", VELES_TRACKING_REQUEST_PART, VELES_TRACKING_POSITION_PARAMETER, slotName);
+    pageObject.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, pattern);
   }
 
   private boolean wasVelesTrackedIn(final Set<HarEntry> entries, final Map<String, String> positionsAndPrices) {
