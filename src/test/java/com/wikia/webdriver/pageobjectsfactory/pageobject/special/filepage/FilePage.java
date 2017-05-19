@@ -99,8 +99,10 @@ public class FilePage extends WikiBasePageObject {
   public boolean isNoFileTextBoxVisible(){
     try{
       wait.forElementVisible(noFileTextBox);
+      PageObjectLogging.log("isNoFileTextBoxVisible", "No-file textbox is visible ", true);
       return true;
     } catch (TimeoutException e){
+      PageObjectLogging.log("isNoFileTextBoxVisible", "No-file textbox is not visible ", false);
       return false;
     }
   }

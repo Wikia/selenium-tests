@@ -88,7 +88,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public void verifyVideoAdded(String expectedVideoTitle) {
 
     List<String> patternList = getVideoTiles(2).stream().map(
-            v->(v.getTitle().endsWith(LONG_TITLE_SUFFIX))
+            v->v.getTitle().endsWith(LONG_TITLE_SUFFIX)
                     ? v.getTitle().replace(LONG_TITLE_SUFFIX, "")
                     : v.getTitle()
     ).collect(Collectors.toList());
