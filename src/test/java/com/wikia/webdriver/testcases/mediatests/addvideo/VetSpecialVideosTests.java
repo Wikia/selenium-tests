@@ -19,7 +19,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = {"VetTests001"}, invocationCount = 15)
+  @Test(groups = {"VetTests001"})
   @Execute(asUser = User.USER)
   public void SpecialVideos_001_Provider() {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("flower");
