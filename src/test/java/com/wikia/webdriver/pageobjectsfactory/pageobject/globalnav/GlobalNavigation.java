@@ -107,14 +107,14 @@ public class GlobalNavigation extends BasePageObject {
 
   public HomePage clickExploreWikisLink() {
     wait.forElementClickable(exploreWikisLink).click();
-    PageObjectLogging.log("clickExploreWikisLink", "clicked on explore wikis link in global nav bar", true);
+    PageObjectLogging.logInfo("clicked on explore wikis link in global nav bar");
 
     return new HomePage();
   }
 
   public HomePage clickFandomUniversityLink() {
     wait.forElementClickable(fandomUniversityLink).click();
-    PageObjectLogging.log("clickFandomUniversityLink", "clicked on fandom university link in global nav bar", true);
+    PageObjectLogging.logInfo("clicked on fandom university link in global nav bar");
 
     return new HomePage();
   }
@@ -123,13 +123,13 @@ public class GlobalNavigation extends BasePageObject {
     searchInput.sendKeys(query);
     searchInput.submit();
 
-    PageObjectLogging.log("search", "search query typed and submitted", true);
+    PageObjectLogging.logInfo("search query typed and submitted");
     return new SearchPageObject(driver);
   }
 
   public GlobalNavigation clickUserAvatar() {
     wait.forElementClickable(userAvatar).click();
-    PageObjectLogging.log("clickUserAvatar", "clicked on user avatar in global nav bar", true);
+    PageObjectLogging.logInfo("clicked on user avatar in global nav bar");
 
     return this;
   }
@@ -137,7 +137,7 @@ public class GlobalNavigation extends BasePageObject {
   public void clickSignOut() {
     clickUserAvatar();
     wait.forElementClickable(signOutButton).click();
-    PageObjectLogging.log("clickSignOut", "link to sign out clicked", true);
+    PageObjectLogging.logInfo("link to sign out clicked");
   }
 
   public boolean isUserMenuOpened() {
