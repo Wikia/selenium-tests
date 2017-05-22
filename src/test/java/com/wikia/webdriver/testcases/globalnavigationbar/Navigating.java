@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
 public class Navigating extends NewTestTemplate {
 
-  @Execute(onWikia = "muppet")
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void logoClickOnEnglishCommunityOpensFandom() {
     HomePage homePage = new HomePage();

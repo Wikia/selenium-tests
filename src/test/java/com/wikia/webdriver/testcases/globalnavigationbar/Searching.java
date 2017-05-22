@@ -11,7 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarSearching"})
-    public class Searching extends NewTestTemplate {
+public class Searching extends NewTestTemplate {
 
   @DataProvider
   public Object[][] getDataForGlobalSearch() {
@@ -22,8 +22,7 @@ import org.testng.annotations.Test;
     };
   }
 
-  @Test(
-      groups = {"serachGlobalNavigationBarAsAnon"},
+  @Test(groups = {"serachGlobalNavigationBarAsAnon"},
       dataProvider = "getDataForGlobalSearch"
   )
   public void serachGlobalNavigationBarAsAnon(
