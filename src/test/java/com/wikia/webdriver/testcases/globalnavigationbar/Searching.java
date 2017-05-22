@@ -33,8 +33,7 @@ public class Searching extends NewTestTemplate {
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 
-    String currentUrl = driver.getCurrentUrl();
-    Assertion.assertStringContains(currentUrl, expectedSpecialPage);
+    Assertion.assertStringContains(driver.getCurrentUrl(), expectedSpecialPage);
     Assertion.assertTrue(search.isResultPresent());
   }
 
@@ -51,8 +50,7 @@ public class Searching extends NewTestTemplate {
     SearchPageObject search = homePage.getGlobalNavigation()
         .search(query);
 
-    String currentUrl = driver.getCurrentUrl();
-    Assertion.assertStringContains(currentUrl, expectedSpecialPage);
+    Assertion.assertStringContains(driver.getCurrentUrl(), expectedSpecialPage);
     Assertion.assertTrue(search.isResultPresent());
   }
 

@@ -12,86 +12,77 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void logoClickOnEnglishCommunityOpensFandom() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+    new HomePage()
+        .getGlobalNavigation()
+        .clickFandomLogo();
 
-
-    homePage = globalNav.clickFandomLogo();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/"));
   }
 
   @Test(groups = {"gamesHubLinkClickOnEnCommunityOpensGamesHub"})
   public void testGamesHubLink() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+    new HomePage()
+        .getGlobalNavigation()
+        .clickGamesHubLink();
 
-    homePage = globalNav.clickGamesHubLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/games"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/games"));
   }
 
   @Test(groups = {"moviesHubLinkClickOnEnCommunityOpensMoviesHub"})
   public void testMoviesHubLink() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+   new HomePage()
+        .getGlobalNavigation()
+        .clickMoviesHubLink();
 
-    homePage = globalNav.clickMoviesHubLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/movies"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/movies"));
   }
 
   @Test(groups = {"tvHubLinkClickOnEnCommunityOpensTvHub"})
   public void testTVHubLink() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+    new HomePage()
+        .getGlobalNavigation()
+        .clickTVHubLink();
 
-    homePage = globalNav.clickTVHubLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/tv"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/tv"));
   }
 
   @Test(groups = {"communityCentralLinkClickOnDeCommunityOpensDeCommunityCentral"})
   @Execute(onWikia = "de.gta")
   public void testCommunityCentralLinkOnDeCommunity() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+    new HomePage()
+        .getGlobalNavigation()
+        .clickCommunityCentralLink();
 
-    homePage = globalNav.clickCommunityCentralLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("de.community", "/wiki/Community_Deutschland"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("de.community", "/wiki/Community_Deutschland"));
   }
 
   @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})
   public void testExploreWikisLink() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+    new HomePage()
+        .getGlobalNavigation()
+        .openWikisMenu()
+        .clickExploreWikisLink();
 
-    globalNav = globalNav.openWikisMenu();
-    homePage = globalNav.clickExploreWikisLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/explore"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/explore"));
   }
 
   @Test(groups = {"fandomUniversityLinkClickOnEnCommunityOpensFandomUniversity"})
   public void testFandomUniversityLink() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+   new HomePage()
+        .getGlobalNavigation()
+        .openWikisMenu()
+        .clickFandomUniversityLink();
 
-    globalNav = globalNav.openWikisMenu();
-    homePage = globalNav.clickFandomUniversityLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("community", "/wiki/Fandom_University"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("community", "/wiki/Fandom_University"));
   }
 
   @Test(groups = {"communityCentralLinkClickOnEnCommunityOpensEnCommunityCentral"})
   public void testCommunityCentralLink() {
-    HomePage homePage = new HomePage();
-    GlobalNavigation globalNav = homePage.getGlobalNavigation();
+    new HomePage()
+        .getGlobalNavigation()
+        .openWikisMenu()
+        .clickCommunityCentralLink();
 
-    globalNav = globalNav.openWikisMenu();
-    homePage = globalNav.clickCommunityCentralLink();
-
-    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("community", "/wiki/Community_Central"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("community", "/wiki/Community_Central"));
   }
 }

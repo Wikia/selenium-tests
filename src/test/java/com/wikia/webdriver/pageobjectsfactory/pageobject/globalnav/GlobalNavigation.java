@@ -172,10 +172,6 @@ public class GlobalNavigation extends BasePageObject {
     return isElementDisplayed(wikisMenu);
   }
 
-  public boolean isWikisMenuContentVisible() {
-    return isElementDisplayed(wikisMenuContent);
-  }
-
   public boolean isSearchInputVisible() {
     return isElementDisplayed(searchInput);
   }
