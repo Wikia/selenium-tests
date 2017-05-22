@@ -41,9 +41,9 @@ public class CropImageTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.curatedMainPage = new CuratedMainPagePageObject(driver);
-    this.editor = new EditorHomePageObject(driver);
-    this.itemForm = new ItemFormPageObject(driver);
+    this.curatedMainPage = new CuratedMainPagePageObject();
+    this.editor = new EditorHomePageObject();
+    this.itemForm = new ItemFormPageObject();
     this.imageModal = new UploadImageModalComponentObject(driver);
     this.search = new SearchForImagePageObject(driver);
     this.croppingTool = new CroppingToolPageObject(driver);

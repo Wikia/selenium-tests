@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleFeaturesCRUDDataProvider;
@@ -254,6 +255,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
   @Test(groups = {"ArticleFeaturesCRUDUser_010", "Smoke1"})
   @Execute(asUser = User.USER)
+  @InBrowser(browserSize = "1024x720")
   public void addImage() {
     new ArticleContent().clear();
 

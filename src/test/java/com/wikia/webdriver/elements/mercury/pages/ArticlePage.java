@@ -10,6 +10,7 @@ import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
@@ -28,6 +29,9 @@ public class ArticlePage extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final TopBar topbar = new TopBar(driver);
+
+  @Getter(lazy = true)
+  private final CuratedMainPagePageObject curratedMainPage = new CuratedMainPagePageObject();
 
   private By articleContent = By.cssSelector(".article-content");
   private By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");

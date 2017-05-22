@@ -1,19 +1,20 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionFormPageObject;
-
-import org.openqa.selenium.WebDriver;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionFormPageObject;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.SectionItemListPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
- * This class represents the main editor view on mercury.
- * The editor home is responsible for adding top level curated content items
+ * This class represents the main editor view on mercury. The editor home is responsible for adding
+ * top level curated content items
  */
-public class EditorHomePageObject {
+public class EditorHomePageObject extends BasePageObject {
 
   @FindBy(css = ".sub-head--done")
   private WebElement publishButton;
@@ -24,45 +25,46 @@ public class EditorHomePageObject {
   @FindBy(css = "section:nth-of-type(4) .curated-content-editor-add-item-btn")
   private WebElement addCategoryButton;
 
-  private WebDriver driver;
-  private Wait wait;
+  @Getter(lazy = true)
+  private final SectionItemListPageObject sectionItemList = new SectionItemListPageObject();
 
-  public EditorHomePageObject(WebDriver driver) {
-    this.driver = driver;
-    this.wait = new Wait(driver);
+  public EditorHomePageObject open() {
+    getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + "/main/edit");
 
-    PageFactory.initElements(driver, this);
+    return this;
   }
 
   public CuratedMainPagePageObject publish() {
     wait.forElementVisible(publishButton);
     publishButton.click();
 
-    return new CuratedMainPagePageObject(driver);
+    return new CuratedMainPagePageObject();
   }
 
   public ItemFormPageObject clickAddFeaturedContent() {
     wait.forElementVisible(addFeaturedContentButton);
     addFeaturedContentButton.click();
 
-    return new ItemFormPageObject(driver);
+    return new ItemFormPageObject();
   }
 
   public SectionFormPageObject clickAddSection() {
     wait.forElementVisible(addNewSectionButton);
     addNewSectionButton.click();
 
-    return new SectionFormPageObject(driver);
+    return new SectionFormPageObject();
   }
 
   public ItemFormPageObject clickAddCategory() {
     wait.forElementVisible(addCategoryButton);
     addCategoryButton.click();
 
-    return new ItemFormPageObject(driver);
+    return new ItemFormPageObject();
   }
 
-  public void waitForAddCategoryButtonToBeVisible() {
+  public EditorHomePageObject waitForAddCategoryButtonToBeVisible() {
     wait.forElementVisible(addCategoryButton);
+
+    return this;
   }
 }
