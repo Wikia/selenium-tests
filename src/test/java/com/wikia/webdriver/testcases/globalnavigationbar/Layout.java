@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
 @Test(groups = {"globalnavigationbar", "globalnavigationbarLayout"})
 public class Layout extends NewTestTemplate {
 
-  @Test(groups = {"globalNavigationBarIsFixedOnScroll"})
-  public void globalNavigationBarIsFixedOnScroll() {
+  @Test(groups = {"globalNavigationBarIsFixedOnScrollForAnon"})
+  public void globalNavigationBarIsFixedOnScrollForAnon() {
     SpecialWikiActivityPageObject wikiActivity = new SpecialWikiActivityPageObject(driver).open();
     wikiActivity.verifyGlobalNavigation();
     wikiActivity.scrollToFooter();
