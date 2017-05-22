@@ -2,8 +2,6 @@ package com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorfor
 
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedEditorFormPageObject;
 
-import org.openqa.selenium.WebDriver;
-
 /**
  * This class represents category editor Form
  * That object differs from Section Form:
@@ -15,14 +13,10 @@ import org.openqa.selenium.WebDriver;
  */
 public class CategoryFormPageObject extends CuratedEditorFormPageObject {
 
-  public CategoryFormPageObject(WebDriver driver) {
-    super(driver);
-  }
-
   public SectionItemListPageObject clickDone() {
     wait.forElementVisible(doneButton);
     doneButton.click();
 
-    return new SectionItemListPageObject(driver);
+    return new SectionItemListPageObject();
   }
 }
