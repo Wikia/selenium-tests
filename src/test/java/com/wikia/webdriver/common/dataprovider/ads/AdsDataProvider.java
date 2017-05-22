@@ -1355,25 +1355,41 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] adsVelesTracking() {
+    final String TURN_ON_VELES = "?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]";
+
     return new Object[][]{
         {
-          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
-          ImmutableMap.builder()
-            .put(AdsContent.TOP_LB, "20.00")
-            .put(AdsContent.INCONTENT_PLAYER, "USED")
-            .build()
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard" + TURN_ON_VELES),
+            ImmutableMap.builder()
+              .put(AdsContent.TOP_LB, "20.00")
+              .put(AdsContent.INCONTENT_PLAYER, "USED")
+              .build()
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles" + TURN_ON_VELES),
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "20.00")
                 .put(AdsContent.INCONTENT_PLAYER, "20.00")
                 .build()
         },
         {
-            new Page(WIKI_SPECIAL, "Project43_Wikia?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]"),
+            new Page(WIKI_SPECIAL, "Project43_Wikia" + TURN_ON_VELES), // Veles Timeout (page without VAST)
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "0.00")
+                .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + TURN_ON_VELES),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "NOT_INVOLVED")
+                .put(AdsContent.INCONTENT_PLAYER, "20.00")
+                .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard" + TURN_ON_VELES),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "20.00")
+                .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
                 .build()
         }
     };
