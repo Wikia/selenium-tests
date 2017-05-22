@@ -37,7 +37,8 @@ public enum User {
   CONTENT_REVIEWER("ci.user.wikiaContentReviewer.username", "ci.user.wikiaContentReviewer.password"),
   COMMENTS_REGULAR_USER("ci.user.comments.username", "ci.user.comments.password", "ci.user.comments.id", "ci.user.comments.access_token"),
   FORGOTTEN_PASSWORD("ci.user.forgottenPassword.username", "ci.user.forgottenPassword.password"),
-  FORGOTTEN_PASSWORD_SPACES("ci.user.forgottenPasswordSpaces.username", "ci.user.forgottenPasswordSpaces.password");
+  FORGOTTEN_PASSWORD_SPACES("ci.user.forgottenPasswordSpaces.username", "ci.user.forgottenPasswordSpaces.password"),
+  CURATED_CONTENT_USER("ci.user.curated_content.username", "ci.user.curated_content.password", "ci.user.curated_content.id", "ci.user.curated_content.access_token");
 
   private final String userName;
 

@@ -1,16 +1,13 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class CuratedMainPagePageObject {
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+public class CuratedMainPagePageObject extends BasePageObject {
 
   @FindBy(css = ".mobile-top-leaderboard")
   private WebElement mobileTopLeaderboard;
@@ -35,32 +32,10 @@ public class CuratedMainPagePageObject {
 
   private By mainPagePadSlot = By.cssSelector(".main-page-pad-slot");
 
-  private enum Settings {
-    TIME_OUT_IN_SEC(5),
-    CHECK_OUT_IN_MILLI_SEC(1000);
-
-    private int value;
-
-    Settings(int value) {
-      this.value = value;
-    }
-  }
-
-  private WebDriver driver;
-  private Wait wait;
-
-  public CuratedMainPagePageObject(WebDriver driver) {
-    this.driver = driver;
-    this.wait = new Wait(driver);
-
-    PageFactory.initElements(driver, this);
-  }
-
   public int getElementOffsetTop(String element) {
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    return Integer.parseInt(
-        js.executeScript("return $(arguments[0]).offset() && $(arguments[0]).offset().top", element).toString()
-    );
+    return Integer.parseInt(driver
+        .executeScript("return $(arguments[0]).offset() && $(arguments[0]).offset().top", element)
+        .toString());
   }
 
   public boolean isMobileTopLeaderboardVisible() {
@@ -115,10 +90,20 @@ public class CuratedMainPagePageObject {
   private boolean isCuratedElementVisible(WebElement element) {
     try {
       wait.forElementVisible(element, Settings.TIME_OUT_IN_SEC.value,
-                             Settings.CHECK_OUT_IN_MILLI_SEC.value);
+          Settings.CHECK_OUT_IN_MILLI_SEC.value);
     } catch (TimeoutException e) {
       return false;
     }
     return true;
+  }
+
+  private enum Settings {
+    TIME_OUT_IN_SEC(5), CHECK_OUT_IN_MILLI_SEC(1000);
+
+    private int value;
+
+    Settings(int value) {
+      this.value = value;
+    }
   }
 }
