@@ -10,8 +10,6 @@ import org.testng.annotations.Test;
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
 public class Navigating extends NewTestTemplate {
 
-  private final String FANDOM_URL = "http://www.wikia.com/fandom";
-
   @Execute(onWikia = "muppet")
   @Test(groups = {"fandomLogoClickOnEnCommunityOpensFandomWikia"})
   public void logoClickOnEnglishCommunityOpensFandom() {
@@ -22,6 +20,6 @@ public class Navigating extends NewTestTemplate {
 
     homePage = globalNav.clickWikiaLogo();
 
-    Assertion.assertEquals(homePage.getCurrentUrl(), FANDOM_URL);
+    Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/"));
   }
 }

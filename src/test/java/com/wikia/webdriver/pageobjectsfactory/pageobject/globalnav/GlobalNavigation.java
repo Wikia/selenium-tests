@@ -15,10 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalNavigation extends BasePageObject {
-
-  @FindBy(css = ".wikia-logo-container .wikia-logo")
-  private WebElement wikiaLogo;
-
   @FindBy(css = "#searchSelect")
   private WebElement searchSelect;
 
@@ -34,7 +30,7 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = ".global-navigation .hubs-links a")
   private List<WebElement> hubsLinks;
 
-  @FindBy(css = ".wikia-logo__subtitle")
+  @FindBy(css = ".wds-global-navigation__logo")
   private WebElement fandomLogo;
 
   @FindBy(css = ".wds-global-navigation__user-menu")
@@ -54,8 +50,8 @@ public class GlobalNavigation extends BasePageObject {
   private DropDownComponentObject exploreWikiaDropdownComponent;
 
   public HomePage clickWikiaLogo() {
-    wait.forElementVisible(wikiaLogo);
-    wikiaLogo.click();
+    wait.forElementVisible(fandomLogo);
+    fandomLogo.click();
 
     return new HomePage();
   }
