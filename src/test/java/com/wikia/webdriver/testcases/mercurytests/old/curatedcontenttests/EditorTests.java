@@ -21,7 +21,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObj
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 
 @Test(groups = "Mercury_CuratedEditor")
-@Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.STAFF)
+@Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.CURATED_CONTENT_USER)
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class EditorTests extends NewTestTemplate {
 
