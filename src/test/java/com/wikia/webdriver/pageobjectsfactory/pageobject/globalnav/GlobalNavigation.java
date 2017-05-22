@@ -49,15 +49,14 @@ public class GlobalNavigation extends BasePageObject {
   private DropDownComponentObject accountNavigation;
   private DropDownComponentObject exploreWikiaDropdownComponent;
 
-  public HomePage clickWikiaLogo() {
+  public HomePage clickFandomLogo() {
     wait.forElementVisible(fandomLogo);
     fandomLogo.click();
 
     return new HomePage();
   }
 
-  public SearchPageObject searchGlobally(String query) {
-    new Select(searchSelect).selectByValue("global");
+  public SearchPageObject search(String query) {
     searchInput.sendKeys(query);
     searchInput.submit();
     return new SearchPageObject(driver);

@@ -18,7 +18,7 @@ public class Navigating extends NewTestTemplate {
 
     Assertion.assertTrue(globalNav.isFandomLogoVisible(), "Fandom logo not visible");
 
-    homePage = globalNav.clickWikiaLogo();
+    homePage = globalNav.clickFandomLogo();
 
     Assertion.assertEquals(homePage.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/"));
   }

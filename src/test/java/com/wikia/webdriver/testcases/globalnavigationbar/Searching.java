@@ -14,57 +14,46 @@ import org.testng.annotations.Test;
     public class Searching extends NewTestTemplate {
 
   @DataProvider
-  public Object[][] getDataForGlobalSearchAnon() {
+  public Object[][] getDataForGlobalSearch() {
     return new Object[][]{
-        {"muppet", "gta", "Special:Search", "resultsLang=en"},
-        {"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
-        {"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
+        {"muppet", "kermit", "Special:Search"},
+        {"de.gta", "san fierro", "Spezial:Suche"},
+        {"zh.pad", "pad", "Special:%E6%90%9C%E7%B4%A2"}
     };
   }
 
   @Test(
       groups = {"serachGlobalNavigationBarAsAnon"},
-      dataProvider = "getDataForGlobalSearchAnon"
+      dataProvider = "getDataForGlobalSearch"
   )
   public void serachGlobalNavigationBarAsAnon(
-      String wikiName, String query, String expectedSpecialPage, String resultLang
+      String wikiName, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     SearchPageObject search = homePage.getGlobalNavigation()
-        .searchGlobally(query);
+        .search(query);
 
     String currentUrl = driver.getCurrentUrl();
     Assertion.assertStringContains(currentUrl, expectedSpecialPage);
-    Assertion.assertStringContains(currentUrl, resultLang);
     Assertion.assertTrue(search.isResultPresent());
-  }
-
-  @DataProvider
-  public Object[][] getDataForGlobalSearchLoggedIn() {
-    return new Object[][]{
-        {"muppet", "gta", "Special:Search", "resultsLang=en"},
-        {"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
-        {"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
-    };
   }
 
   @Test(
       groups = {"serachGlobalNavigationBarAsLoggedIn"},
-      dataProvider = "getDataForGlobalSearchLoggedIn"
+      dataProvider = "getDataForGlobalSearch"
   )
   @Execute(asUser = User.USER)
   public void serachGlobalNavigationBarAsLoggedIn(
-      String wikiName, String query, String expectedSpecialPage, String resultLang
+      String wikiName, String query, String expectedSpecialPage
   ) {
     HomePage homePage = new HomePage();
     homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
     SearchPageObject search = homePage.getGlobalNavigation()
-        .searchGlobally(query);
+        .search(query);
 
     String currentUrl = driver.getCurrentUrl();
     Assertion.assertStringContains(currentUrl, expectedSpecialPage);
-    Assertion.assertStringContains(currentUrl, resultLang);
     Assertion.assertTrue(search.isResultPresent());
   }
 
