@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
+
 import org.testng.annotations.Test;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarNavigating"})
@@ -30,7 +30,7 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"moviesHubLinkClickOnEnCommunityOpensMoviesHub"})
   public void testMoviesHubLink() {
-   new HomePage()
+    new HomePage()
         .getGlobalNavigation()
         .clickMoviesHubLink();
 
@@ -53,7 +53,8 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickCommunityCentralLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("de.community", "/wiki/Community_Deutschland"));
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           urlBuilder.getUrlForPage("de.community", "/wiki/Community_Deutschland"));
   }
 
   @Test(groups = {"exploreWikisLinkClickOnEnCommunityOpensExplorePage"})
@@ -68,12 +69,13 @@ public class Navigating extends NewTestTemplate {
 
   @Test(groups = {"fandomUniversityLinkClickOnEnCommunityOpensFandomUniversity"})
   public void testFandomUniversityLink() {
-   new HomePage()
+    new HomePage()
         .getGlobalNavigation()
         .openWikisMenu()
         .clickFandomUniversityLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("community", "/wiki/Fandom_University"));
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           urlBuilder.getUrlForPage("community", "/wiki/Fandom_University"));
   }
 
   @Test(groups = {"communityCentralLinkClickOnEnCommunityOpensEnCommunityCentral"})
@@ -83,6 +85,7 @@ public class Navigating extends NewTestTemplate {
         .openWikisMenu()
         .clickCommunityCentralLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("community", "/wiki/Community_Central"));
+    Assertion.assertEquals(driver.getCurrentUrl(),
+                           urlBuilder.getUrlForPage("community", "/wiki/Community_Central"));
   }
 }
