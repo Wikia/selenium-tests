@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.globalnavigationbar;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
@@ -59,6 +60,48 @@ public class Layout extends NewTestTemplate {
   }
 
 
+  @Test(groups = {"globalNavigationBarLayoutForDeAnon1284x900"})
+  @Execute(onWikia = "de.gta")
+  @InBrowser(browserSize = "1284x900")
+  public void testLayoutForDeAnon1284x900() {
+    GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
+
+    Assert.assertTrue(globalNavigation.isFandomLogoVisible());
+    Assert.assertTrue(globalNavigation.isCommunityCentralLinkVisible());
+    Assert.assertTrue(globalNavigation.isSearchInputVisible());
+    Assert.assertTrue(globalNavigation.isAccountMenuVisible());
+    Assert.assertTrue(globalNavigation.isStartWikiButtonVisible());
+    Assert.assertTrue(globalNavigation.isPartnerSlotLinkVisible());
+
+    Assert.assertFalse(globalNavigation.isGamesHubVisible());
+    Assert.assertFalse(globalNavigation.isMoviesHubVisible());
+    Assert.assertFalse(globalNavigation.isTVHubVisible());
+    Assert.assertFalse(globalNavigation.isWikisMenuVisible());
+    Assert.assertFalse(globalNavigation.isUserAvatarVisible());
+    Assert.assertFalse(globalNavigation.isNotificationsIconVisible());
+  }
+
+  @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn1284x900"})
+  @Execute(onWikia = "de.gta", asUser = User.USER_GERMAN)
+  @InBrowser(browserSize = "1284x900")
+  public void testLayoutForDeLoggedIn1284x900() {
+    GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
+
+    Assert.assertTrue(globalNavigation.isFandomLogoVisible());
+    Assert.assertTrue(globalNavigation.isCommunityCentralLinkVisible());
+    Assert.assertTrue(globalNavigation.isSearchInputVisible());
+    Assert.assertTrue(globalNavigation.isUserAvatarVisible());
+    Assert.assertTrue(globalNavigation.isNotificationsIconVisible());
+    Assert.assertTrue(globalNavigation.isStartWikiButtonVisible());
+    Assert.assertTrue(globalNavigation.isPartnerSlotLinkVisible());
+
+    Assert.assertFalse(globalNavigation.isGamesHubVisible());
+    Assert.assertFalse(globalNavigation.isMoviesHubVisible());
+    Assert.assertFalse(globalNavigation.isTVHubVisible());
+    Assert.assertFalse(globalNavigation.isWikisMenuVisible());
+    Assert.assertFalse(globalNavigation.isAccountMenuVisible());
+  }
+
   @Test(groups = {"globalNavigationBarLayoutForDeAnon"})
   @Execute(onWikia = "de.gta")
   public void testLayoutForDeAnon() {
@@ -76,6 +119,7 @@ public class Layout extends NewTestTemplate {
     Assert.assertFalse(globalNavigation.isWikisMenuVisible());
     Assert.assertFalse(globalNavigation.isUserAvatarVisible());
     Assert.assertFalse(globalNavigation.isNotificationsIconVisible());
+    Assert.assertFalse(globalNavigation.isPartnerSlotLinkVisible());
   }
 
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
@@ -95,5 +139,6 @@ public class Layout extends NewTestTemplate {
     Assert.assertFalse(globalNavigation.isTVHubVisible());
     Assert.assertFalse(globalNavigation.isWikisMenuVisible());
     Assert.assertFalse(globalNavigation.isAccountMenuVisible());
+    Assert.assertFalse(globalNavigation.isPartnerSlotLinkVisible());
   }
 }

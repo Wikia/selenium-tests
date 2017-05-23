@@ -63,6 +63,9 @@ public class GlobalNavigation extends BasePageObject {
   @FindBy(css = "a[data-tracking-label=\"link.fandom-university\"]")
   private WebElement fandomUniversityLink;
 
+  @FindBy(css = ".wds-global-navigation__partner-slot-link")
+  private WebElement partnerSlotLink;
+
   public HomePage clickFandomLogo() {
     wait.forElementClickable(fandomLogo).click();
     PageObjectLogging.log("clickFandomLogo", "clicked on fandom logo in global nav bar", true);
@@ -194,5 +197,9 @@ public class GlobalNavigation extends BasePageObject {
 
   public boolean isCommunityCentralLinkVisible() {
     return isElementDisplayed(communityCentralLink);
+  }
+
+  public boolean isPartnerSlotLinkVisible() {
+    return isElementDisplayed(partnerSlotLink);
   }
 }
