@@ -53,14 +53,14 @@ public class MainPageTests extends NewTestTemplate {
   }
 
   private Navigate navigate;
-  private CuratedMainPagePageObject cc;
+  private CuratedMainPagePageObject curatedMainPage;
   private CuratedContentPageObject curatedContent;
   private Loading loading;
 
   private void init() {
     this.navigate = new Navigate();
-    this.cc = new CuratedMainPagePageObject(driver);
-    this.curatedContent = new CuratedContentPageObject(driver);
+    this.curatedMainPage = new CuratedMainPagePageObject();
+    this.curatedContent = new CuratedContentPageObject();
     this.loading = new Loading(driver);
   }
 
@@ -82,7 +82,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobileTopLeaderboardVisible();
+    result = curatedMainPage.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
@@ -90,7 +90,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isArticleTitleVisible();
+    result = curatedMainPage.isArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -98,7 +98,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isWikiaStatsContainerVisible();
+    result = curatedMainPage.isWikiaStatsContainerVisible();
     PageObjectLogging.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
@@ -106,9 +106,9 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    Assertion.assertTrue(cc.isMainPagePadSlotInDOM());
+    Assertion.assertTrue(curatedMainPage.isMainPagePadSlotInDOM());
 
-    result = cc.isFeaturedContentVisible();
+    result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -116,7 +116,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isCuratedContentVisible();
+    result = curatedMainPage.isCuratedContentVisible();
     PageObjectLogging.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -124,7 +124,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobileInContentVisible();
+    result = curatedMainPage.isMobileInContentVisible();
     PageObjectLogging.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -132,7 +132,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isTrendingArticlesVisible();
+    result = curatedMainPage.isTrendingArticlesVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.VISIBLE_MSG,
@@ -140,7 +140,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobilePrefooterVisible();
+    result = curatedMainPage.isMobilePrefooterVisible();
     PageObjectLogging.log(
         PageElements.PREFOOTER.name,
         MercuryMessages.VISIBLE_MSG,
@@ -148,7 +148,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isTrendingVideosVisible();
+    result = curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.VISIBLE_MSG,
@@ -160,7 +160,7 @@ public class MainPageTests extends NewTestTemplate {
     String lastElement = "top";
 
     for (PageElements element : PageElements.values()) {
-      int newPosition = cc.getElementOffsetTop(element.className);
+      int newPosition = curatedMainPage.getElementOffsetTop(element.className);
 
       result = lastPosition <= newPosition;
       PageObjectLogging.log(
@@ -183,7 +183,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
-    boolean result = cc.isRevisedArticleTitleVisible();
+    boolean result = curatedMainPage.isRevisedArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -191,7 +191,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isWikiaStatsContainerVisible();
+    result = !curatedMainPage.isWikiaStatsContainerVisible();
     PageObjectLogging.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -199,7 +199,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isFeaturedContentVisible();
+    result = !curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -207,7 +207,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isCuratedContentVisible();
+    result = !curatedMainPage.isCuratedContentVisible();
     PageObjectLogging.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -215,7 +215,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isTrendingArticlesVisible();
+    result = !curatedMainPage.isTrendingArticlesVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -223,7 +223,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isTrendingVideosVisible();
+    result = !curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -240,7 +240,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.NTACC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
-    boolean result = !cc.isTrendingArticlesVisible();
+    boolean result = !curatedMainPage.isTrendingArticlesVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -248,7 +248,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobileTopLeaderboardVisible();
+    result = curatedMainPage.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
@@ -256,7 +256,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isArticleTitleVisible();
+    result = curatedMainPage.isArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -264,7 +264,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isWikiaStatsContainerVisible();
+    result = curatedMainPage.isWikiaStatsContainerVisible();
     PageObjectLogging.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
@@ -272,7 +272,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isFeaturedContentVisible();
+    result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -280,7 +280,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isCuratedContentVisible();
+    result = curatedMainPage.isCuratedContentVisible();
     PageObjectLogging.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -288,7 +288,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobileInContentVisible();
+    result = curatedMainPage.isMobileInContentVisible();
     PageObjectLogging.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -296,7 +296,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isMobilePrefooterVisible();
+    result = !curatedMainPage.isMobilePrefooterVisible();
     PageObjectLogging.log(
         PageElements.PREFOOTER.name,
         MercuryMessages.VISIBLE_MSG,
@@ -304,7 +304,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isTrendingVideosVisible();
+    result = curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.VISIBLE_MSG,
@@ -321,7 +321,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.NTVCC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
-    boolean result = cc.isMobileTopLeaderboardVisible();
+    boolean result = curatedMainPage.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
@@ -329,7 +329,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isArticleTitleVisible();
+    result = curatedMainPage.isArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -337,7 +337,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isWikiaStatsContainerVisible();
+    result = curatedMainPage.isWikiaStatsContainerVisible();
     PageObjectLogging.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
@@ -345,7 +345,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isFeaturedContentVisible();
+    result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -353,7 +353,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isCuratedContentVisible();
+    result = curatedMainPage.isCuratedContentVisible();
     PageObjectLogging.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -361,7 +361,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobileInContentVisible();
+    result = curatedMainPage.isMobileInContentVisible();
     PageObjectLogging.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -369,7 +369,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isTrendingVideosVisible();
+    result = !curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -386,7 +386,7 @@ public class MainPageTests extends NewTestTemplate {
     navigate.toPage(MercurySubpages.NTAVCC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
-    boolean result = cc.isMobileTopLeaderboardVisible();
+    boolean result = curatedMainPage.isMobileTopLeaderboardVisible();
     PageObjectLogging.log(
         PageElements.TOP_LEADERBOARD.name,
         MercuryMessages.VISIBLE_MSG,
@@ -394,7 +394,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isArticleTitleVisible();
+    result = curatedMainPage.isArticleTitleVisible();
     PageObjectLogging.log(
         PageElements.ARTICLE_TITLE.name,
         MercuryMessages.VISIBLE_MSG,
@@ -402,7 +402,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isWikiaStatsContainerVisible();
+    result = curatedMainPage.isWikiaStatsContainerVisible();
     PageObjectLogging.log(
         PageElements.WIKIA_STATS.name,
         MercuryMessages.VISIBLE_MSG,
@@ -410,7 +410,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isFeaturedContentVisible();
+    result = curatedMainPage.isFeaturedContentVisible();
     PageObjectLogging.log(
         PageElements.FEATURED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -418,7 +418,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isCuratedContentVisible();
+    result = curatedMainPage.isCuratedContentVisible();
     PageObjectLogging.log(
         PageElements.CURATED_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -426,7 +426,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = cc.isMobileInContentVisible();
+    result = curatedMainPage.isMobileInContentVisible();
     PageObjectLogging.log(
         PageElements.IN_CONTENT.name,
         MercuryMessages.VISIBLE_MSG,
@@ -434,7 +434,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isTrendingArticlesVisible();
+    result = !curatedMainPage.isTrendingArticlesVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_ARTICLES.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -442,7 +442,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isMobilePrefooterVisible();
+    result = !curatedMainPage.isMobilePrefooterVisible();
     PageObjectLogging.log(
         PageElements.PREFOOTER.name,
         MercuryMessages.INVISIBLE_MSG,
@@ -450,7 +450,7 @@ public class MainPageTests extends NewTestTemplate {
         result
     );
 
-    result = !cc.isTrendingVideosVisible();
+    result = !curatedMainPage.isTrendingVideosVisible();
     PageObjectLogging.log(
         PageElements.TRENDING_VIDEOS.name,
         MercuryMessages.INVISIBLE_MSG,
