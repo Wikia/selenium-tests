@@ -6,7 +6,16 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.HttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import net.lightbody.bmp.core.har.HarEntry;
+import net.lightbody.bmp.filters.RequestFilter;
+import net.lightbody.bmp.util.HttpMessageContents;
+import net.lightbody.bmp.util.HttpMessageInfo;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.testng.annotations.Test;
@@ -32,6 +41,19 @@ public class TestAdsVelesTracking extends NewTestTemplate {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVelesTracking")
   public void adsTrackingVelesTracked(final Page page, final Map<String, String> positionsAndPrices) {
+    networkTrafficInterceptor.addRequestFilter(new RequestFilter() {
+      @Override
+      public HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents,
+                                        HttpMessageInfo messageInfo) {
+
+        if(request.getUri().contains("ads")){
+          DefaultFullHttpResponse
+              response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR);
+          return response;
+        }
+        return null;
+      }
+    });
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
 
