@@ -91,6 +91,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   public VetOptionsComponentObject addVideoByUrl(String url) {
     typeInUrl(url);
     clickAddButtonProvider();
+    wait.forElementNotVisible(addUrlButton);
 
     return new VetOptionsComponentObject(driver);
   }
