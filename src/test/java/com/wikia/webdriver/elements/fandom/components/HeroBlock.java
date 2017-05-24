@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.fandom.components;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -38,11 +38,11 @@ public class ImageUploadTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.curatedMainPage = new CuratedMainPagePageObject(driver);
+    this.curatedMainPage = new CuratedMainPagePageObject();
     this.crop = new CroppingToolPageObject(driver);
-    this.editor = new EditorHomePageObject(driver);
+    this.editor = new EditorHomePageObject();
     this.generator = new ImageGenerator();
-    this.itemForm = new ItemFormPageObject(driver);
+    this.itemForm = new ItemFormPageObject();
     this.upload = new UploadImageModalComponentObject(driver);
     this.navigate = new Navigate();
   }
