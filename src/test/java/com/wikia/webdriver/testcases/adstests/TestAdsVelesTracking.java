@@ -44,7 +44,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
-      groups = "AdsTrackingVelesError",
+      groups = {"AdsTrackingVeles", "AdsTrackingVelesErrors"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVelesErrorTracking"
   )
