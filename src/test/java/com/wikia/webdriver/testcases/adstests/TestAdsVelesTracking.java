@@ -4,18 +4,10 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpVersion;
+import io.netty.handler.codec.http.DefaultHttpResponse;
 import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.util.HttpMessageContents;
-import net.lightbody.bmp.util.HttpMessageInfo;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.testng.annotations.Test;
@@ -27,7 +19,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
-public class TestAdsVelesTracking extends NewTestTemplate {
+public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   public static final String VELES_TRACKING_REQUEST_PART = "adengadinfo";
 
@@ -35,31 +27,49 @@ public class TestAdsVelesTracking extends NewTestTemplate {
 
   public static final String VELES_TRACKING_PRICE_PARAMETER = "bidder_8";
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump()
   @Test(
       groups = "AdsTrackingVeles",
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVelesTracking")
+      dataProvider = "adsVelesTracking"
+  )
   public void adsTrackingVelesTracked(final Page page, final Map<String, String> positionsAndPrices) {
-    networkTrafficInterceptor.addRequestFilter(new RequestFilter() {
-      @Override
-      public HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents,
-                                        HttpMessageInfo messageInfo) {
-
-        if(request.getUri().contains("ads")){
-          DefaultFullHttpResponse
-              response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR);
-          return response;
-        }
-        return null;
-      }
-    });
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
 
     Set<HarEntry> entries = findEntriesByUrlPart(pageObject, VELES_TRACKING_REQUEST_PART, positionsAndPrices);
 
     Assertion.assertTrue(wasVelesTrackedIn(entries, positionsAndPrices), "Veles should be tracked only in " + positionsAndPrices);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      groups = "AdsTrackingVelesError",
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVelesErrorTracking"
+  )
+  public void adsTrackingVelesErrorTracked(
+    final Page page,
+    final Map<String, String> positionsAndPrices,
+    final Map<String, DefaultHttpResponse> mockRules
+  ) {
+    mockResponses(mockRules);
+    adsTrackingVelesTracked(page,positionsAndPrices);
+  }
+
+  private void mockResponses(Map<String, DefaultHttpResponse> mockRules) {
+    if (mockRules != null && !mockRules.isEmpty()) {
+      networkTrafficInterceptor.addRequestFilter((request, contents, messageInfo) -> {
+
+        for (Map.Entry<String, DefaultHttpResponse> rule : mockRules.entrySet()) {
+          if (request.getUri().matches(rule.getKey())) {
+            return rule.getValue();
+          }
+        }
+
+        return null;
+      });
+    }
   }
 
   private Set<HarEntry> findEntriesByUrlPart(AdsBaseObject pageObject, final String s, final Map<String, String> positionsAndPrices) {

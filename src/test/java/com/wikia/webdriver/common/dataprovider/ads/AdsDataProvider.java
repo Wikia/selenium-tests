@@ -6,6 +6,9 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -1359,23 +1362,10 @@ public class AdsDataProvider {
 
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard" + TURN_ON_VELES),
-            ImmutableMap.builder()
-              .put(AdsContent.TOP_LB, "20.00")
-              .put(AdsContent.INCONTENT_PLAYER, "USED")
-              .build()
-        },
-        {
             new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles" + TURN_ON_VELES),
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "20.00")
                 .put(AdsContent.INCONTENT_PLAYER, "20.00")
-                .build()
-        },
-        {
-            new Page(WIKI_SPECIAL, "Project43_Wikia" + TURN_ON_VELES), // Veles Timeout (page without VAST)
-            ImmutableMap.builder()
-                .put(AdsContent.TOP_LB, "0.00")
                 .build()
         },
         {
@@ -1392,6 +1382,34 @@ public class AdsDataProvider {
                 .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
                 .build()
         }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVelesErrorTracking() {
+    final String TURN_ON_VELES = "?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]";
+
+    return new Object[][]{
+      {
+          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard" + TURN_ON_VELES),
+          ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "")
+                .put(AdsContent.INCONTENT_PLAYER, "")
+                .build(),
+          ImmutableMap.builder()
+                .put(".*output=vast.*", new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT))
+                .build()
+
+      },
+      {
+          new Page(WIKI_SPECIAL, "Project43_Wikia" + TURN_ON_VELES), // Veles Timeout (page without VAST)
+          ImmutableMap.builder()
+              .put(AdsContent.TOP_LB, "0.00")
+              .build(),
+          ImmutableMap.builder()
+              .build()
+      }
+
     };
   }
 }
