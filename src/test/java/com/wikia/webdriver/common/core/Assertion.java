@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Assertion extends Assert {
 
@@ -33,6 +34,36 @@ public class Assertion extends Assert {
         "assertion " + assertion + "! Current \"" + currentEncoded + "\" Pattern: \""
         + patternEncoded + "\"",
         assertion
+    );
+    return assertion;
+  }
+
+  /**
+   * Checks if element matches any of the patterns from the list,
+   * useful to check if expected video title on the list of videos
+   * on the page which titles can be shortened (the ones with ... suffix)
+   * @param expectedElement
+   * @param currentList List of patterns
+   */
+  public static boolean assertStringContainsAnyPattern(String expectedElement, List<String> currentList) {
+    List<String> currentListEncoded = currentList.stream().map(e->encodeSpecialChars(e)).collect(Collectors.toList());
+    String expectedElementEncoded = encodeSpecialChars(expectedElement);
+    boolean assertion = true;
+    try {
+      if (!currentList.stream().anyMatch(e->expectedElement.contains(e))) {
+        throw new AssertionError("String [" + expectedElement + "] doesn't match any of the patterns [" +
+                currentList.stream().collect(Collectors.joining(", ")) + "]"
+                );
+      }
+    } catch (AssertionError ass) {
+      addVerificationFailure(ass);
+      assertion = false;
+    }
+    PageObjectLogging.log(
+            "assertStringContainsAnyPattern",
+            "assertion " + assertion + "! String: \"" + expectedElementEncoded +
+            "\". List of patterns \"" + currentListEncoded.stream().collect(Collectors.joining(", ")) + ".",
+            assertion
     );
     return assertion;
   }

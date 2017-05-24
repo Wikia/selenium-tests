@@ -27,9 +27,11 @@ public class SearchForImagePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public void type(String searchPhrase) {
+  public SearchForImagePageObject type(String searchPhrase) {
     wait.forElementVisible(searchInput);
     searchInput.sendKeys(searchPhrase);
+
+    return this;
   }
 
   public CroppingToolPageObject clickOnImage(int imageIndex) {

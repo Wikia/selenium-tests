@@ -8,6 +8,8 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBlockListPage;
@@ -15,9 +17,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialBl
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.block.SpecialUnblockPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditPreferencesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
+import java.util.List;
+
 
 @Test(groups = {"UsersAndRights"})
 public class UserAndRights extends NewTestTemplate {
@@ -66,9 +69,12 @@ public class UserAndRights extends NewTestTemplate {
 
     editPrefPage.changeEmail(newEmailAddress);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
-    
-    Assertion.assertTrue(prefPage.getBannerNotifications().isNotificationMessageVisible(),
-                         "Notification message is not visible");
+
+    List<Notification> confirmNotifications = prefPage.getNotifications(NotificationType.CONFIRM);
+    Assertion.assertEquals(confirmNotifications.size(),1,
+            PreferencesPageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
+            PreferencesPageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     prefPage.enterEmailChangeLink(username, password);
 

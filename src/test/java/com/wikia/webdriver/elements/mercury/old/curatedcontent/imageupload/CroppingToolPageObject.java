@@ -12,7 +12,7 @@ public class CroppingToolPageObject extends CuratedEditorFormPageObject {
   private WebElement cropperContainer;
 
   public CroppingToolPageObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public boolean isCropperLoaded() {

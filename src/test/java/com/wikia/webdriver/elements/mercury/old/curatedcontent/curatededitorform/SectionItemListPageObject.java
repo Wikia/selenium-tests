@@ -1,14 +1,13 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform;
 
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedEditorFormPageObject;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedEditorFormPageObject;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
 
 public class SectionItemListPageObject extends CuratedEditorFormPageObject {
 
@@ -17,27 +16,16 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
   @FindBy(css = ".curated-content-editor-row")
   private List<WebElement> item;
 
-  By itemDisplayNameLocator = By.cssSelector(".title");
-
-  public SectionItemListPageObject(WebDriver driver) {
-    super(driver);
-  }
+  private By itemDisplayNameLocator = By.cssSelector(".title");
 
   public EditorHomePageObject clickDone() {
     wait.forElementVisible(doneButton);
     doneButton.click();
 
-    return new EditorHomePageObject(driver);
+    return new EditorHomePageObject();
   }
 
-  public CategoryFormPageObject clickAddCategory() {
-    wait.forElementVisible(addCategoryButton);
-    addCategoryButton.click();
-
-    return new CategoryFormPageObject(driver);
-  }
-
-  public void verifyItem(String itemDisplayName) {
+  public SectionItemListPageObject verifyItem(String itemDisplayName) {
     WebElement innerElem;
 
     for (WebElement element : item) {
@@ -45,12 +33,23 @@ public class SectionItemListPageObject extends CuratedEditorFormPageObject {
       innerElem = element.findElement(itemDisplayNameLocator);
 
       if (innerElem.getText().equals(itemDisplayName)) {
-        return;
+        break;
       }
     }
+
+    return this;
   }
 
-  public void waitForAddCategoryButtonToBeVisible() {
+  public CategoryFormPageObject clickAddCategory() {
     wait.forElementVisible(addCategoryButton);
+    addCategoryButton.click();
+
+    return new CategoryFormPageObject();
+  }
+
+  public SectionItemListPageObject waitForAddCategoryButtonToBeVisible() {
+    wait.forElementVisible(addCategoryButton);
+
+    return this;
   }
 }

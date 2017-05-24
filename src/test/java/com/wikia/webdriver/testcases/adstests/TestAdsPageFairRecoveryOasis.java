@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -31,12 +33,26 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       dataProvider = "adsRecoveryPageFairOasis",
       groups = "AdsRecoveryNoAdblockPageFairOasis"
   )
-  public void AdsRecoveryNoAdblockPageFairOasis(Page page) {
+  public void adsRecoveryNoAdblockPageFairOasis(Page page) {
     String url = urlBuilder.getUrlForPage(page);
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
     adsRecoveryObject.verifyPageFairRecoveryWithNoAdBlock();
+  }
+
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsRecoveryPageFairOasis",
+      groups = "AdsRecoveryLoggedInPageFairOasis"
+  )
+  @Execute(asUser = User.USER_2)
+  public void adsRecoveryLoggedInPageFairOasis(Page page) {
+    String url = urlBuilder.getUrlForPage(page);
+    AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+    adsRecoveryObject.refreshPageAddingCacheBuster();
+
+    adsRecoveryObject.verifyPageFairRecoveryNoMarkersOnPage();
   }
 }
 
