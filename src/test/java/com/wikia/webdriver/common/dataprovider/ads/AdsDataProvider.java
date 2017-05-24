@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -1358,25 +1359,23 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] adsVelesTracking() {
-    final String TURN_ON_VELES = "?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]";
-
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles" + TURN_ON_VELES),
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM),
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "20.00")
                 .put(AdsContent.INCONTENT_PLAYER, "20.00")
                 .build()
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + TURN_ON_VELES),
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM),
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "NOT_INVOLVED")
                 .put(AdsContent.INCONTENT_PLAYER, "20.00")
                 .build()
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard" + TURN_ON_VELES),
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
             ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "20.00")
                 .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
@@ -1387,11 +1386,9 @@ public class AdsDataProvider {
 
   @DataProvider
   public static Object[][] adsVelesErrorTracking() {
-    final String TURN_ON_VELES = "?InstantGlobals.wgAdDriverVelesBidderCountries=[XX]";
-
     return new Object[][]{
       {
-          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard" + TURN_ON_VELES),
+          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
           ImmutableMap.builder()
                 .put(AdsContent.TOP_LB, "")
                 .put(AdsContent.INCONTENT_PLAYER, "")
@@ -1402,7 +1399,7 @@ public class AdsDataProvider {
 
       },
       {
-          new Page(WIKI_SPECIAL, "Project43_Wikia" + TURN_ON_VELES), // Veles Timeout (page without VAST)
+          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM), // Veles Timeout (page without VAST)
           ImmutableMap.builder()
               .put(AdsContent.TOP_LB, "0.00")
               .build(),

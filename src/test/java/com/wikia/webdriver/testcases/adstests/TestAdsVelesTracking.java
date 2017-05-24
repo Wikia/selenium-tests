@@ -54,7 +54,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     final Map<String, DefaultHttpResponse> mockRules
   ) {
     mockResponses(mockRules);
-    adsTrackingVelesTracked(page,positionsAndPrices);
+    adsTrackingVelesTracked(page, positionsAndPrices);
   }
 
   private void mockResponses(Map<String, DefaultHttpResponse> mockRules) {
