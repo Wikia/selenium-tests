@@ -1,12 +1,15 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
-
-import com.google.common.collect.ImmutableMap;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -1236,4 +1239,57 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsVelesTracking() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "20.00")
+                .put(AdsContent.INCONTENT_PLAYER, "20.00")
+                .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "NOT_INVOLVED")
+                .put(AdsContent.INCONTENT_PLAYER, "20.00")
+                .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "20.00")
+                .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
+                .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVelesErrorTracking() {
+    return new Object[][]{
+      {
+          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
+          ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "")
+                .put(AdsContent.INCONTENT_PLAYER, "")
+                .build(),
+          ImmutableMap.builder()
+                .put(".*output=vast.*", new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT))
+                .build()
+
+      },
+      {
+          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM), // Veles Timeout (page without VAST)
+          ImmutableMap.builder()
+              .put(AdsContent.TOP_LB, "0.00")
+              .build(),
+          ImmutableMap.builder()
+              .build()
+      }
+
+    };
+  }
 }

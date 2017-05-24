@@ -39,6 +39,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVelesTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTaboolaOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdXCollapse"/>
