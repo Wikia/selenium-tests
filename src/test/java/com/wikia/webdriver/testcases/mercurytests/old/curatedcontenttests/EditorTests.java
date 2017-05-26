@@ -37,7 +37,7 @@ public class EditorTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedEditorTest_001")
   public void MercuryCuratedEditorTest_001_addAndSaveItemToFeaturedContent() {
-    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCurratedMainPage()
+    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();
 
     PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
@@ -56,7 +56,7 @@ public class EditorTests extends NewTestTemplate {
         .waitForAddCategoryButtonToBeVisible()
         .publish();
 
-    result = new ArticlePage().getCurratedMainPage().isFeaturedContentVisible();
+    result = new ArticlePage().getCuratedMainPage().isFeaturedContentVisible();
 
     PageObjectLogging.log("Featured Content", MercuryMessages.VISIBLE_MSG,
         MercuryMessages.INVISIBLE_MSG, result);
@@ -64,7 +64,7 @@ public class EditorTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedEditorTest_002")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
-    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCurratedMainPage()
+    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();
 
     PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
@@ -107,7 +107,7 @@ public class EditorTests extends NewTestTemplate {
 
   @Test(groups = "MercuryCuratedEditorTest_003")
   public void MercuryCuratedEditorTest_003_addAndSaveItemToOptionalSection() {
-    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCurratedMainPage()
+    Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();
 
     PageObjectLogging.logInfo(String.format("Curated content is visible: %s", result));
