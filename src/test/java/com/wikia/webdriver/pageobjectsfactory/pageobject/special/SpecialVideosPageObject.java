@@ -108,9 +108,11 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public void deleteNewestVideo() {
+    String videoTitle = getNewestVideoTitle();
     newestVideoDeleteIcon.click();
     wait.forElementVisible(deleteConfirmButton);
     deleteConfirmButton.click();
+    PageObjectLogging.log("Delete video", "Deleted video with title [" + videoTitle + "]", true);
   }
 
   public boolean isNewVideoAdded() {
