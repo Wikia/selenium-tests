@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
+import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
@@ -25,6 +26,12 @@ public class JavascriptActions {
   public JavascriptActions(WebDriver driver) {
     this.js = (JavascriptExecutor) driver;
     this.driver = driver;
+  }
+
+
+  public JavascriptActions() {
+    this.driver = DriverProvider.getActiveDriver();
+    this.js = (JavascriptExecutor) driver;
   }
 
   public void click(String cssSelector) {
@@ -176,5 +183,11 @@ public class JavascriptActions {
         "var script = document.createElement('script'); " + "script.innerHTML = 'window.onerror = "
             + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
             + "document.querySelector('body').appendChild(script);");
+  }
+
+
+  public Long getCurrentPosition() {
+    Long value = (Long) js.executeScript("return window.pageYOffset;");
+    return value;
   }
 }
