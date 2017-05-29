@@ -1015,7 +1015,7 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsPremiumPrerollOasis() {
+  public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
             "project43",
