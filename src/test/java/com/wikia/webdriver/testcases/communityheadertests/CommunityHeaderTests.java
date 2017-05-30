@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 @Test(groups = {"CommunityHeaderTests"})
 public class CommunityHeaderTests extends NewTestTemplate {
   // TODO Test cases:
-  // - links in explore link to proper places
   // - disscuss link logic
   //    - for wiki with discussions enabled
   //    - for wiki with forum and discussions enabled
@@ -64,5 +63,40 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     communityHeader.clickAddNewPage();
     Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
+  }
+
+  public void testExploreMenuLinks() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    communityHeader
+        .openExploreMenu()
+        .clickExploreWikiActivityLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
+
+    communityHeader
+        .openExploreMenu()
+        .clickExploreCommunityLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Community"));
+
+    communityHeader
+        .openExploreMenu()
+        .clickExploreVideosLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Videos"));
+
+    communityHeader
+        .openExploreMenu()
+        .clickExploreImagesLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Images"));
+
+    communityHeader
+        .openExploreMenu()
+        .clickExploreRandomLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
+
   }
 }

@@ -5,6 +5,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class CommunityHeader extends BasePageObject {
@@ -23,6 +24,24 @@ public class CommunityHeader extends BasePageObject {
 
   @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"admin-dashboard\"]")
   private WebElement adminDashboardButton;
+
+  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-small")
+  private WebElement exploreTab;
+
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-activity\"]")
+  private WebElement exploreWikiActivityLink;
+
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-random\"]")
+  private WebElement exploreRandomLink;
+
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-community\"]")
+  private WebElement exploreCommunityLink;
+
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-videos\"]")
+  private WebElement exploreVideosLink;
+
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-images\"]")
+  private WebElement exploreImagesLink;
 
 
   public CommunityHeader() {
@@ -63,5 +82,43 @@ public class CommunityHeader extends BasePageObject {
     wait.forElementClickable(adminDashboardButton).click();
 
     PageObjectLogging.logInfo("clicked admin dashboard Button");
+  }
+
+  public CommunityHeader openExploreMenu()  {
+   new Actions(driver).moveToElement(exploreTab).perform();
+
+   PageObjectLogging.logInfo("explore dropdown opened");
+
+   return this;
+  }
+
+  public void clickExploreWikiActivityLink() {
+    wait.forElementClickable(exploreWikiActivityLink).click();
+
+    PageObjectLogging.logInfo("explore -> wikiActivity link clicked");
+  }
+
+  public void clickExploreRandomLink() {
+    wait.forElementClickable(exploreRandomLink).click();
+
+    PageObjectLogging.logInfo("explore -> random page link clicked");
+  }
+
+  public void clickExploreCommunityLink() {
+    wait.forElementClickable(exploreCommunityLink).click();
+
+    PageObjectLogging.logInfo("explore -> community link clicked");
+  }
+
+  public void clickExploreVideosLink() {
+    wait.forElementClickable(exploreVideosLink).click();
+
+    PageObjectLogging.logInfo("explore -> videos link clicked");
+  }
+
+  public void clickExploreImagesLink() {
+    wait.forElementClickable(exploreImagesLink).click();
+
+    PageObjectLogging.logInfo("explore -> images link clicked");
   }
 }
