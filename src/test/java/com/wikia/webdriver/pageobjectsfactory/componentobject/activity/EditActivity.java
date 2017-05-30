@@ -9,26 +9,17 @@ import org.openqa.selenium.WebElement;
 
 public class EditActivity extends Activity {
 
-  By diffButtonSelector = By.cssSelector("a.activityfeed-diff");
-  //By changeDescription = By.cssSelector("tr.summary");
-
-  WebElement diffLink;
-  WebElement changeDescriptionTextBox;
+  private WebElement diffLink;
 
   public EditActivity(WebDriver driver, WebElement parentElement) {
     super(driver, parentElement);
 
+    By diffButtonSelector = By.cssSelector("a.activityfeed-diff");
     diffLink = parentElement.findElement(diffButtonSelector);
-    //changeDescriptionTextBox = parentElement.findElement(changeDescription);
-
   }
 
   public DiffPagePageObject showChanges() {
     scrollAndClick(diffLink);
     return new DiffPagePageObject(driver);
   }
-
-//  public String getChangeDescription(){
-//    return changeDescriptionTextBox.getText();
-//  }
 }

@@ -6,12 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.ActivityPageCreator;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.CategorizationActivityPageCreator;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.EditActivityPageCreator;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.NewActivityPageCreator;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.WallPostActivityPageCreator;
-
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +20,7 @@ import java.util.List;
 public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   @FindBys(@FindBy(css = "li[class*=\"activity-type\"]"))
-  private List<WebElement> activitiesList;
+  private List<WebElement> activityWebElementList;
   @FindBys(@FindBy(css = "li.activity-type-edit"))
   private List<WebElement> editActivitiesList;
   @FindBys(@FindBy(css = "li.activity-type-new"))
@@ -188,43 +183,43 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     }
 
   }
-//-------------------------------------------------------------
+
   public void verifyNoRecentEditionIsPresent(String articleName, String userName){
-    List<Activity> activityList = getActivities();
+    List<Activity> activityList = getActivities(10);
     Boolean listContainsRecentEdition = activityList.stream().anyMatch(
         p->p.getTitle().equals(articleName));
     Assertion.assertFalse(listContainsRecentEdition);
   }
 
+  /**
+   * Gets all activities from special page
+   * @return
+   */
   public List<Activity> getActivities() {
+    return getActivities(activityWebElementList.size());
+  }
+
+  /**
+   * Gets activities from special page, limited by provided value
+   * @param numberOfActivities
+   * @return
+   */
+  public List<Activity> getActivities(int numberOfActivities) {
+
     List<Activity> activityList = new ArrayList<>();
-//    editActivitiesList.forEach(a->activityList.add(new Activity(driver, a)));
-    for (int i=0;i<5;i++){
-    //for (WebElement element : editActivitiesList) {
+    int numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
+            ? activityWebElementList.size() : numberOfActivities;
+    List<WebElement> activityWebElementSubList = activityWebElementList.subList(0, numberOfActivitiesToFetch);
+
+    for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
       Activity activity;
-//      String elementClass = activitiesList.get(i).getAttribute(HTML.Attribute.CLASS.toString());
-//      if (elementClass.contains("activity-type-edit")){
-//          activity = new EditActivity(driver, editActivitiesList.get(i));
-//      }
-//      else if (elementClass.contains("activity-type-new")){
-//        activity = new NewActivity(driver, editActivitiesList.get(i));
-//      }
-//      else if (elementClass.contains("activity-type-categorization")){
-//        activity = new CategorizationActivity(driver, editActivitiesList.get(i));
-//      }
-//      else if (elementClass.contains("activity-type-talk")){
-//        activity = new WallPostActivity(driver, editActivitiesList.get(i));
-//      }
-//      else {
-//        throw new IllegalArgumentException("Activity is not recognized");
-//      }
       List<ActivityPageCreator> creators = Arrays.asList(
-        new EditActivityPageCreator(),
-        new NewActivityPageCreator(),
-        new CategorizationActivityPageCreator(),
-        new WallPostActivityPageCreator()
+              new EditActivityPageCreator(),
+              new NewActivityPageCreator(),
+              new CategorizationActivityPageCreator(),
+              new WallPostActivityPageCreator()
       );
-      activity = new ActivityPageFactory(driver, editActivitiesList.get(i), creators).createActivityPage();
+      activity = new ActivityPageFactory(driver, activityWebElementSubList.get(i), creators).createActivityPage();
 
       activityList.add(activity);
     }

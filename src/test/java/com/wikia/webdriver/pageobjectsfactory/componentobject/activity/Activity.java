@@ -7,20 +7,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by szymonczerwinski on 10.03.2017.
- */
+
 public class Activity extends BasePageObject {
 
-  By userLinkSelector = By.cssSelector("span.subtle > a");
-  By titleSelector = By.cssSelector("a.title");
-
-  WebElement userLink;
-  WebElement titleLink;
+  private WebElement userLink;
+  private WebElement titleLink;
 
   public Activity(WebDriver driver, WebElement parentElement) {
     super();
 
+    By userLinkSelector = By.cssSelector("span.subtle > a");
+    By titleSelector = By.cssSelector("a.title");
     userLink = parentElement.findElement(userLinkSelector);
     titleLink = parentElement.findElement(titleSelector);
   }

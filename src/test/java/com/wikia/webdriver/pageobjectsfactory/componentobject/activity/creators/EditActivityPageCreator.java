@@ -6,12 +6,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.EditActiv
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by szymonczerwinski on 20.03.2017.
- */
-public class EditActivityPageCreator extends ActivityPageCreator{
 
-  public static final String EDIT_ACTIVITY_CSS_SELECTOR = "activity-type-edit";
+public class EditActivityPageCreator extends ActivityPageCreator {
+
+  private static final String EDIT_ACTIVITY_CSS_SELECTOR = "activity-type-edit";
 
   public EditActivityPageCreator() {
     super();

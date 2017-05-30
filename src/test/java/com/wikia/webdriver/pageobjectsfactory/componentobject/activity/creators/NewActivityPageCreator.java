@@ -6,12 +6,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.NewActivi
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by szymonczerwinski on 20.03.2017.
- */
-public class NewActivityPageCreator extends ActivityPageCreator{
 
-  public static final String NEW_ACTIVITY_CSS_SELECTOR = "activity-type-new";
+public class NewActivityPageCreator extends ActivityPageCreator {
+
+  private static final String NEW_ACTIVITY_CSS_SELECTOR = "activity-type-new";
 
   public NewActivityPageCreator() {
     super();

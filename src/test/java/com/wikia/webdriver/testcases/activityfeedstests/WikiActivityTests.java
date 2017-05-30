@@ -137,7 +137,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
-    List<Activity> activityList = activityPage.getActivities();
+    List<Activity> activityList = activityPage.getActivities(10);
 
     String title = activityList.stream().findFirst().get().getTitle();
     ArticlePageObject article = activityList.stream().findFirst().get().clickOnTitle();
@@ -154,7 +154,7 @@ public class WikiActivityTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
-    List<Activity> activityList = activityPage.getActivities();
+    List<Activity> activityList = activityPage.getActivities(10);
 
     Activity chosenActivity = activityList.stream().findFirst().get();
     String expectedUserName = chosenActivity.getUser();
@@ -170,7 +170,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
-    List<Activity> activityList = activityPage.getActivities();
+    List<Activity> activityList = activityPage.getActivities(10);
     EditActivity editActivity = (EditActivity) activityList
         .stream()
         .filter(activity -> activity instanceof EditActivity)
