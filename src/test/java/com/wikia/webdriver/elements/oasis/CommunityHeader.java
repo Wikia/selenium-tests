@@ -15,6 +15,8 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-community-header__sitename a")
   private WebElement wikiName;
 
+  @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"add-new-page\"]")
+  private WebElement addNewPageButton;
 
   public CommunityHeader() {
     super();
@@ -36,5 +38,11 @@ public class CommunityHeader extends BasePageObject {
     PageObjectLogging.logInfo("clicked on wiki name");
 
     return new MainPage();
+  }
+
+  public void clickAddNewPage() {
+    wait.forElementClickable(addNewPageButton).click();
+
+    PageObjectLogging.logInfo("clicked Add New Page button");
   }
 }

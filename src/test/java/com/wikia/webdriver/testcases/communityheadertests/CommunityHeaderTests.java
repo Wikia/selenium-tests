@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.communityheadertests;
 
+import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.CommunityHeader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
@@ -33,5 +35,12 @@ public class CommunityHeaderTests extends NewTestTemplate {
     MainPage mainPage = new CommunityHeader().clickWikiName();
 
     Assert.assertTrue(mainPage.isMainPage());
+  }
+
+  @Execute(asUser = User.ANONYMOUS)
+  public void anonCanAddPageViaAddPageButton() {
+    new CommunityHeader().clickAddNewPage();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
   }
 }
