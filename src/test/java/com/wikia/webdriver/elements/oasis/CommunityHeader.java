@@ -10,7 +10,11 @@ import org.openqa.selenium.support.FindBy;
 public class CommunityHeader extends BasePageObject {
 
   @FindBy(css = ".wds-community-header__wordmark img")
-  private WebElement wordmarkLink;
+  private WebElement wordmark;
+
+  @FindBy(css = ".wds-community-header__sitename a")
+  private WebElement wikiName;
+
 
   public CommunityHeader() {
     super();
@@ -19,13 +23,18 @@ public class CommunityHeader extends BasePageObject {
   }
 
   public MainPage clickWordmark() {
-    wait
-        .forElementClickable(wordmarkLink)
-        .click();
+    wait.forElementClickable(wordmark).click();
 
     PageObjectLogging.logInfo("clicked on wordmark image");
 
     return new MainPage();
   }
 
+  public MainPage clickWikiName() {
+    wait.forElementClickable(wikiName).click();
+
+    PageObjectLogging.logInfo("clicked on wiki name");
+
+    return new MainPage();
+  }
 }

@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 @Test(groups = {"CommunityHeaderTests"})
 public class CommunityHeaderTests extends NewTestTemplate {
   // TODO Test cases:
-  // - wiki name links to main page
   // - buttons for anon links to proper places
   // - buttons for logged in links to proper places
   // - buttons for admin links to proper places
@@ -26,6 +25,12 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
   public void wordmarkShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeader().clickWordmark();
+
+    Assert.assertTrue(mainPage.isMainPage());
+  }
+
+  public void wikiNameShouldLinkToMainPage() {
+    MainPage mainPage = new CommunityHeader().clickWikiName();
 
     Assert.assertTrue(mainPage.isMainPage());
   }
