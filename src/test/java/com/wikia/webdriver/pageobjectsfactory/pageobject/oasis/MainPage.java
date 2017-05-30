@@ -13,9 +13,8 @@ public class MainPage extends ArticlePageObject {
   @FindBy(css = "#CuratedContentTool")
   protected WebElement curatedContentToolButton;
 
-  public MainPage(WebDriver driver) {
-    super();
-  }
+  @FindBy(css = "body")
+  protected WebElement body;
 
   public MainPage open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
@@ -26,5 +25,9 @@ public class MainPage extends ArticlePageObject {
     wait.forElementClickable(curatedContentToolButton);
     scrollAndClick(curatedContentToolButton);
     return new CuratedContentToolModal(driver);
+  }
+
+  public boolean isMainPage() {
+    return body.getAttribute("class").contains(" mainpage ");
   }
 }

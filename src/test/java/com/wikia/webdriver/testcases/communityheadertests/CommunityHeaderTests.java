@@ -1,11 +1,15 @@
 package com.wikia.webdriver.testcases.communityheadertests;
 
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.oasis.CommunityHeader;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
+import junit.framework.Assert;
+import org.testng.annotations.Test;
 
+@Test(groups = {"CommunityHeaderTests"})
 public class CommunityHeaderTests extends NewTestTemplate {
-  // TODO: Test cases:
-  // - wordmark link links to main page
+  // TODO Test cases:
   // - wiki name links to main page
   // - buttons for anon links to proper places
   // - buttons for logged in links to proper places
@@ -19,5 +23,10 @@ public class CommunityHeaderTests extends NewTestTemplate {
   // - visibility of elements for bigger breakpoint
   // - visibility of elements for lower breakpoint
 
-  public new 
+
+  public void wordmarkShouldLinkToMainPage() {
+    MainPage mainPage = new CommunityHeader().clickWordmark();
+
+    Assert.assertTrue(mainPage.isMainPage());
+  }
 }
