@@ -19,4 +19,5 @@ public class CommunityHeaderTests extends NewTestTemplate {
   // - visibility of elements for bigger breakpoint
   // - visibility of elements for lower breakpoint
 
+  public new 
 }
