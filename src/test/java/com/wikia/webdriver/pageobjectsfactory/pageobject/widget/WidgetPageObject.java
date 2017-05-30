@@ -79,7 +79,6 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
   public boolean isLoaded() {
 //    boolean result = isWidgetVisible(0);
     boolean result = false;
-//    logVisibility(result);
     logVisibility(result);
     return result;
   }

@@ -8,9 +8,7 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by szymonczerwinski on 01.03.2017.
- */
+
 public class VelocityWrapper {
 
   StringBuilder builder;
