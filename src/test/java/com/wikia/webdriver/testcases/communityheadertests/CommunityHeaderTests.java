@@ -12,10 +12,7 @@ import org.testng.annotations.Test;
 @Test(groups = {"CommunityHeaderTests"})
 public class CommunityHeaderTests extends NewTestTemplate {
   // TODO Test cases:
-  // - buttons for anon links to proper places
-  // - buttons for logged in links to proper places
-  // - buttons for admin links to proper places
-  // - links in explore links to proper places
+  // - links in explore link to proper places
   // - disscuss link logic
   //    - for wiki with discussions enabled
   //    - for wiki with forum and discussions enabled
@@ -38,9 +35,34 @@ public class CommunityHeaderTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.ANONYMOUS)
-  public void anonCanAddPageViaAddPageButton() {
+  public void testAnonWikiButtons() {
     new CommunityHeader().clickAddNewPage();
 
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
+  }
+
+  @Execute(asUser = User.USER)
+  public void testLoggedInWikiButtons() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    communityHeader.clickWikiActivity();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
+
+    communityHeader.clickAddNewPage();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
+  }
+
+  @Execute(asUser = User.MW119_ADMINISTRATOR)
+  public void testAdminWikiButtons() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    communityHeader.clickWikiActivity();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
+
+    communityHeader.clickAdminDashboard();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:AdminDashboard"));
+
+    communityHeader.clickAddNewPage();
     Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
   }
 }
