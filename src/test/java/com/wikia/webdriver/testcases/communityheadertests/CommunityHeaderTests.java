@@ -13,12 +13,8 @@ import org.testng.annotations.Test;
 public class CommunityHeaderTests extends NewTestTemplate {
   // TODO Test cases:
   // - disscuss link logic
-  //    - for wiki with discussions enabled
-  //    - for wiki with forum and discussions enabled
   //    - for wiki with only forum enabled
   //    - for wiki without forum or discussions
-  // - visibility of elements for bigger breakpoint
-  // - visibility of elements for lower breakpoint
 
 
   public void wordmarkShouldLinkToMainPage() {
@@ -98,5 +94,25 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     Assert.assertTrue(driver.getCurrentUrl().matches(".*\\.wikia\\.com/wiki/(?!Special:Images).*"));
 
+  }
+
+  @Execute(onWikia = "qatestdiscussionsnoforum")
+  public void testDiscussLinkOnWikiWithDiscussionsWithoutForum() {
+    new CommunityHeader().clickDiscussLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("wikia.com/d/f"));
+  }
+
+  @Execute(onWikia = "qatestdiscussiosandforum")
+  public void testDiscussLinkOnWikiWithDiscussionsAndForum() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    communityHeader
+        .openExploreMenu()
+        .clickExploreForumLink();
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Forum"));
+
+    communityHeader.clickDiscussLink();
+    Assert.assertTrue(driver.getCurrentUrl().contains("wikia.com/d/f"));
   }
 }

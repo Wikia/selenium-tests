@@ -43,6 +43,12 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-images\"]")
   private WebElement exploreImagesLink;
 
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-forum\"]")
+  private WebElement exploreForumLink;
+
+  @FindBy(css = ".wds-community-header a[data-tracking=\"discuss\"")
+  private WebElement discussLink;
+
 
   public CommunityHeader() {
     super();
@@ -120,5 +126,17 @@ public class CommunityHeader extends BasePageObject {
     wait.forElementClickable(exploreImagesLink).click();
 
     PageObjectLogging.logInfo("explore -> images link clicked");
+  }
+
+  public void clickDiscussLink() {
+    wait.forElementClickable(discussLink).click();
+
+    PageObjectLogging.logInfo("discuss link clicked");
+  }
+
+  public void clickExploreForumLink() {
+    wait.forElementClickable(exploreForumLink).click();
+
+    PageObjectLogging.logInfo("explore->forum link clicked");
   }
 }
