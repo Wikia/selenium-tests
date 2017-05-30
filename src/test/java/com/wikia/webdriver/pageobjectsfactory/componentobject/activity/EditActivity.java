@@ -6,9 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-/**
- * Created by szymonczerwinski on 10.03.2017.
- */
+
 public class EditActivity extends Activity {
 
   By diffButtonSelector = By.cssSelector("a.activityfeed-diff");
@@ -26,7 +24,7 @@ public class EditActivity extends Activity {
   }
 
   public DiffPagePageObject showChanges() {
-    diffLink.click();
+    scrollAndClick(diffLink);
     return new DiffPagePageObject(driver);
   }
 

@@ -34,12 +34,12 @@ public class Activity extends BasePageObject {
   }
 
   public ArticlePageObject clickOnTitle() {
-    titleLink.click();
+    scrollAndClick(titleLink);
     return new ArticlePageObject();
   }
 
   public UserProfilePageObject clickOnUserLink() {
-    userLink.click();
+    scrollAndClick(userLink);
     return new UserProfilePageObject(driver);
   }
 }
