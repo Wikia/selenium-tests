@@ -62,7 +62,7 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeAnon1284x900"})
   @Execute(onWikia = "de.gta")
-  @InBrowser(browserSize = "1284x900")
+  @InBrowser(browserSize = "1296x900")
   public void testLayoutForDeAnon1284x900() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
@@ -83,7 +83,7 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn1284x900"})
   @Execute(onWikia = "de.gta", asUser = User.USER_GERMAN)
-  @InBrowser(browserSize = "1284x900")
+  @InBrowser(browserSize = "1296x900")
   public void testLayoutForDeLoggedIn1284x900() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
