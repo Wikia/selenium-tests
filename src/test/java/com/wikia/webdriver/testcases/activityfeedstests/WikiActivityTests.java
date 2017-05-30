@@ -151,7 +151,6 @@ public class WikiActivityTests extends NewTestTemplate {
     String articleTitle = "clickingUserRedirectsToUserPage";
     new ArticleContent().push("content", articleTitle);
 
-    ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
     List<Activity> activityList = activityPage.getActivities(10);
