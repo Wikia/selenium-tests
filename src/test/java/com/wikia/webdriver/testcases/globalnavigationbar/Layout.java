@@ -105,9 +105,9 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeAnon"})
   @Execute(onWikia = "de.gta")
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_SMALL)
   public void testLayoutForDeAnon() {
-    GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
+    GlobalNavigation globalNavigation = new HomePage().open().getGlobalNavigation();
 
     Assert.assertTrue(globalNavigation.isFandomLogoVisible());
     Assert.assertTrue(globalNavigation.isCommunityCentralLinkVisible());

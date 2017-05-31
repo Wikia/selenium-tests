@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import junit.framework.Test;
 import lombok.Getter;
 
 import org.apache.commons.lang.StringUtils;
@@ -138,9 +137,9 @@ public class Configuration {
   }
 
   public static Emulator getEmulator() {
-    if(TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)){
+    if (TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
       return TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
-    }else {
+    } else {
       return Emulator.DEFAULT;
     }
   }
