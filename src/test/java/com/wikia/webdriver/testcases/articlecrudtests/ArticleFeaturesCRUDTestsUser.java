@@ -214,7 +214,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
   public void modifyVideo() {
     new ArticleContent()
         .push(
-            "[[File:Wikia University - How to Contact Wikia|thumb|right|335 px]]QAWebdriverCaption");
+            "[[File:Wikia University - How to Contact Wikia|thumb|right|335 px|QAWebdriverCaption]]");
 
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
     VetOptionsComponentObject
