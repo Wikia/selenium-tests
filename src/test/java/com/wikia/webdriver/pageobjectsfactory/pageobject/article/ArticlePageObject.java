@@ -146,7 +146,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   private List<WebElement> categorySuggestionsListItems;
   @FindBy(css = ".article-table")
   private WebElement table;
-  @FindBy(css = ".WikiHeader > h2 > a")
+  @FindBy(css = ".wds-community-header__sitename a")
   private WebElement wikiNameHeader;
   @FindBy(css = "#mw-content-text img.thumbimage")
   private WebElement thumbnailImageArticle;
