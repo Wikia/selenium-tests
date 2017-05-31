@@ -50,12 +50,6 @@ public class CommunityHeader extends BasePageObject {
   private WebElement discussLink;
 
 
-  public CommunityHeader() {
-    super();
-
-    this.waitForPageLoad();
-  }
-
   public MainPage clickWordmark() {
     wait.forElementClickable(wordmark).click();
 
