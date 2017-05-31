@@ -11,12 +11,6 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"CommunityHeaderTests"})
 public class CommunityHeaderTests extends NewTestTemplate {
-  // TODO Test cases:
-  // - disscuss link logic
-  //    - for wiki with only forum enabled
-  //    - for wiki without forum or discussions
-
-
   public void wordmarkShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeader().clickWordmark();
 
@@ -114,5 +108,22 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
     communityHeader.clickDiscussLink();
     Assert.assertTrue(driver.getCurrentUrl().contains("wikia.com/d/f"));
+  }
+
+  @Execute(onWikia = "qatestforumnodiscussions")
+  public void testDiscussLinkOnWikiWithNoDiscussionsAndWithForum() {
+    new CommunityHeader().clickDiscussLink();
+
+    Assert.assertTrue(driver.getCurrentUrl().contains("Special:Forum"));
+  }
+
+  @Execute(onWikia = "qatestnodiscussionsnoforum")
+  public void testNoDiscussLinkOnWikiWithNoDiscussionsAndWithNoForum() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    Assert.assertFalse(communityHeader.isDiscussLinkDisplayed());
+
+    communityHeader.openExploreMenu();
+    Assert.assertFalse(communityHeader.isExploreForumLinkDisplayed());
   }
 }
