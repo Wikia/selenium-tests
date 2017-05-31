@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import junit.framework.Test;
 import lombok.Getter;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,7 +17,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
 import org.yaml.snakeyaml.Yaml;
 
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.properties.Credentials;
 
 /**
@@ -133,8 +137,12 @@ public class Configuration {
     return getProp("mockAds");
   }
 
-  public static String getEmulator() {
-    return getProp("emulator");
+  public static Emulator getEmulator() {
+    if(TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)){
+      return TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
+    }else {
+      return Emulator.DEFAULT;
+    }
   }
 
   public static String useMITM() {

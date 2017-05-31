@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -11,6 +12,7 @@ import com.wikia.webdriver.common.core.ExtHelper;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.BrowserAbstract;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.driverprovider.UserAgentsRegistry;
 
 public class ChromeBrowser extends BrowserAbstract {
@@ -29,7 +31,7 @@ public class ChromeBrowser extends BrowserAbstract {
   public void setOptions() {
     String chromeBinaryPath = "";
     String osName = System.getProperty("os.name").toUpperCase();
-    String emulator = Configuration.getEmulator();
+    Emulator emulator = Configuration.getEmulator();
 
     if (osName.contains("WINDOWS")) {
       chromeBinaryPath = CHROMEDRIVER_PATH_WINDOWS;
@@ -59,9 +61,14 @@ public class ChromeBrowser extends BrowserAbstract {
       chromeOptions.addArguments("--user-agent=" + UserAgentsRegistry.IPHONE.getUserAgent());
     }
 
-    if (!"null".equals(emulator)) {
-      Map<String, String> mobileEmulation = new HashMap<>();
-      mobileEmulation.put("deviceName", emulator);
+    if (!emulator.equals(Emulator.DEFAULT)){
+      Map<String, Object> mobileEmulation = new HashMap<>();
+      if (StringUtils.isNotBlank(emulator.getDeviceName())){
+        mobileEmulation.put("deviceName", emulator.getDeviceName());
+      }else{
+        mobileEmulation.put("deviceMetrics", emulator.getDeviceMetrics());
+      }
+
       chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
     }
   }

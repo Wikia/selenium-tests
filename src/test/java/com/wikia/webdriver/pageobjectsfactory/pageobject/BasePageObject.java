@@ -115,6 +115,21 @@ public class BasePageObject {
   }
 
   /**
+   * Method to check if WebElement is displayed on the page
+   *
+   * @return true if element is displayed, otherwise return false
+   */
+
+  protected boolean isElementDisplayed(WebElement element, int timeout) {
+    try {
+      wait.forElementVisible(element, timeout);
+      return true;
+    }catch (TimeoutException e){
+      return false;
+    }
+  }
+
+  /**
    * Make sure element is ready to be clicked and click on it The separation of this method has
    * particular reason. It allows global modification of such click usages. This way it is very easy
    * to control what criteria have to be met in order to click on element
