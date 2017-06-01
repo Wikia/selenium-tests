@@ -147,7 +147,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyPoiPointDescription();
   }
 
-  @RelatedIssue(issueID = "SUS-1775", comment = "Product is broken")
+  @RelatedIssue(issueID = "SUS-1401", comment = "Product is broken")
   @Test(groups = {"NonSpecificMapTests_012", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   @NetworkTrafficDump
