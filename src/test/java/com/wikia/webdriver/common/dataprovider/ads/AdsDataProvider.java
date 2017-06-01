@@ -1146,16 +1146,6 @@ public class AdsDataProvider {
         };
     }
 
-  @DataProvider
-  public static Object[][] adsMonocolorOasis() {
-    return new Object[][]{
-        {
-            WIKI_SPECIAL,
-            "SyntheticTests/Monocolor_Ad"
-        }
-    };
-  }
-
     @DataProvider
     public static Object[][] adsVuapDesktop() {
         return new Object[][]{
