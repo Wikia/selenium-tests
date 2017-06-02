@@ -12,7 +12,8 @@ public class TestAdsTaboolaOasis extends TemplateNoFirstLoad {
   @NetworkTrafficDump
   @Test(groups = "AdsTaboolaOasis")
   public void adsTaboolaOasis() {
-    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Taboola");
+    String testedPage = urlBuilder.getUrlForPath("project43",
+        "SyntheticTests/Taboola?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]&InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]");
 
     networkTrafficInterceptor.startIntercepting();
 

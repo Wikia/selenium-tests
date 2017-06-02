@@ -10,11 +10,18 @@ import com.wikia.webdriver.elements.mercury.components.Header;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
+@SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})
 public class ArticlePage extends WikiBasePageObject {
 
   @Getter(lazy = true)
@@ -29,9 +36,18 @@ public class ArticlePage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final TopBar topbar = new TopBar(driver);
 
-  private By articleContent = By.cssSelector(".article-content");
-  private By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");
-  private By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
+  @Getter(lazy = true)
+  private final CuratedMainPagePageObject curatedMainPage = new CuratedMainPagePageObject();
+
+  @Getter(lazy = true)
+  private final LightboxComponentObject lightbox = new LightboxComponentObject();
+
+  @FindBy(css = "article a")
+  private List<WebElement> linksList;
+
+  private final By articleContent = By.cssSelector(".article-content");
+  private final By categoriesDropdown = By.cssSelector(".article-footer .collapsible-menu");
+  private final By categoryLink = By.cssSelector(".article-footer .collapsible-menu li a");
 
   public CategoryPage openCategoryPageFromCategoriesDropdown() {
     wait.forElementClickable(categoriesDropdown);
@@ -63,6 +79,21 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public String getArticleContent() {
+
     return driver.findElement(articleContent).getText();
+  }
+
+  public ArticlePage clickArticleLink(int index) {
+    linksList.get(index).click();
+
+    wait.forUrlContains(linksList.get(index).getAttribute("href"));
+
+    return this;
+  }
+
+  public Long scrollToLink(int index, int offset) {
+    jsActions.scrollToElement(linksList.get(index), offset);
+
+    return jsActions.getCurrentPosition();
   }
 }

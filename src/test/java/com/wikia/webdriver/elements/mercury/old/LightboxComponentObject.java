@@ -1,19 +1,21 @@
 package com.wikia.webdriver.elements.mercury.old;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.Loading;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class LightboxComponentObject {
+import java.util.List;
+
+
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+public class LightboxComponentObject extends WikiBasePageObject {
 
   @FindBy(css = ".lightbox-content")
   private WebElement lightboxContent;
@@ -25,16 +27,10 @@ public class LightboxComponentObject {
   private WebElement lightboxHeader;
   @FindBy(css = ".lightbox-close-wrapper")
   private WebElement closeLightboxButton;
+  @FindBy(css = "article img")
+  private List<WebElement> imageList;
 
-  private Wait wait;
-  private Loading loading;
-
-  public LightboxComponentObject(WebDriver driver) {
-    this.wait = new Wait(driver);
-    this.loading = new Loading(driver);
-
-    PageFactory.initElements(driver, this);
-  }
+  private final Loading loading = new Loading(driver);
 
   public boolean isLightboxOpened() {
     try {
@@ -62,16 +58,6 @@ public class LightboxComponentObject {
     return !lightboxFooter.getCssValue("display").contains("none");
   }
 
-  public String getCurrentImagePath() throws WebDriverException {
-    wait.forElementVisible(currentImage);
-
-    if (currentImage.getAttribute("src") == null) {
-      throw new WebDriverException("Expected String but got null");
-    }
-
-    return currentImage.getAttribute("src");
-  }
-
   public void clickCloseButton() {
     wait.forElementVisible(closeLightboxButton);
     closeLightboxButton.click();
@@ -81,5 +67,9 @@ public class LightboxComponentObject {
     loading.handleAsyncPageReload();
     wait.forElementVisible(currentImage);
     currentImage.click();
+  }
+
+  public void openLightboxImage(int index) {
+    imageList.get(index).click();
   }
 }

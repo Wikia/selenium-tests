@@ -126,7 +126,7 @@ public class PortableInfoboxObject {
   }
 
   public PortableInfoboxObject closeLightbox() {
-    new LightboxComponentObject(driver).clickCloseButton();
+    new LightboxComponentObject().clickCloseButton();
 
     return this;
   }
@@ -162,7 +162,7 @@ public class PortableInfoboxObject {
   }
 
   public PortableInfoboxObject isLightboxOpened() {
-    Assertion.assertTrue(new LightboxComponentObject(driver).isLightboxOpened());
+    Assertion.assertTrue(new LightboxComponentObject().isLightboxOpened());
 
     return this;
   }

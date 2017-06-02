@@ -27,7 +27,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
     applyChangesButton.click();
     waitForElementNotVisibleByElement(loadingIndicator);
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void typeInEditArea(String text) {

@@ -137,7 +137,6 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, ENABLE_INCONTENT_LEADERBOARD);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
@@ -145,7 +144,6 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_SKIN));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_HIGH_IMPACT_2));
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INCONTENT_LEADERBOARD), String.format("Ad is not loaded inside %s", AdsContent.INCONTENT_LEADERBOARD));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
 
     Assertion.assertNotEquals(

@@ -32,7 +32,7 @@ public class NavigationTests extends NewTestTemplate {
   private ArticlePageObject article;
 
   private void init() {
-    this.curatedContent = new CuratedContentPageObject(driver);
+    this.curatedContent = new CuratedContentPageObject();
     this.navigate = new Navigate();
     this.loading = new Loading(driver);
     this.article = new ArticlePageObject(driver);

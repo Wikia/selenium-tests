@@ -1,15 +1,14 @@
 package com.wikia.webdriver.elements.mercury.old.curatedcontent;
 
-import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.elements.mercury.components.Loading;
-import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public abstract class CuratedEditorFormPageObject {
+import com.wikia.webdriver.elements.mercury.components.Loading;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.curatededitorform.ItemFormPageObject;
+import com.wikia.webdriver.elements.mercury.old.curatedcontent.imageupload.UploadImageModalComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
+public abstract class CuratedEditorFormPageObject extends BasePageObject {
 
   @FindBy(css = "input#label")
   protected WebElement displayNameField;
@@ -24,22 +23,15 @@ public abstract class CuratedEditorFormPageObject {
   @FindBy(css = ".curated-content-editor-photo")
   protected WebElement imageField;
 
-  protected Wait wait;
-  protected WebDriver driver;
-  private Loading loading;
+  private Loading loading = new Loading(driver);
 
-  public CuratedEditorFormPageObject(WebDriver driver) {
-    this.driver = driver;
-    this.wait = new Wait(driver);
-    this.loading = new Loading(driver);
-
-    PageFactory.initElements(driver, this);
-  }
-
-  public void clickDoneButton() {
+  public ItemFormPageObject clickDoneButton() {
     loading.handleAsyncPageReload();
     wait.forElementVisible(doneButton);
     doneButton.click();
+    waitForDeleteButtonToBeVisible();
+
+    return new ItemFormPageObject();
   }
 
   public UploadImageModalComponentObject clickOnImage() {
@@ -49,17 +41,21 @@ public abstract class CuratedEditorFormPageObject {
     return new UploadImageModalComponentObject(driver);
   }
 
-  public void typeDisplayName(String displayName) {
+  public CuratedEditorFormPageObject typeDisplayName(String displayName) {
     wait.forElementVisible(displayNameField);
     displayNameField.sendKeys(displayName);
+
+    return this;
   }
 
-  public void typePageName(String pageName) {
+  public CuratedEditorFormPageObject typePageName(String pageName) {
     wait.forElementVisible(pageNameField);
     pageNameField.sendKeys(pageName);
+
+    return this;
   }
 
-  public void waitForDeleteButtonToBeVisible() {
+  private void waitForDeleteButtonToBeVisible() {
     wait.forElementVisible(deleteItemButton);
   }
 }

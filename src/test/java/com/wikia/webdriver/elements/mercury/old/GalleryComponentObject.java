@@ -31,6 +31,6 @@ public class GalleryComponentObject {
     wait.forElementVisible(galleryImagesArray.get(index));
     jsActions.scrollToElement(galleryImagesArray.get(index));
     galleryImagesArray.get(index).click();
-    return new LightboxComponentObject(driver);
+    return new LightboxComponentObject();
   }
 }

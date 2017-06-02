@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AdsRecoveryObject extends AdsBaseObject {
+  private static final int RECOVERABLE_ADS_COUNT = 2;
   private static final String EXPECTED_TOP_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
   private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
 
@@ -32,7 +33,6 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   public void verifyPageFairRecoveryWithAdBlock() {
-    int recoverableAdsCount = 2;
     By spansBodyChildrenSelector = By.cssSelector("body>span");
     Dimension topLeaderboardSize = new Dimension(728, 90);
     Dimension medrecSize = new Dimension(300, 250);
@@ -61,7 +61,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
         .filter(e -> e.getCssValue("background").contains("data:image/jpeg"))
         .collect(Collectors.toList());
 
-    Assert.assertEquals(recoveredAds.size(), recoverableAdsCount);
+    Assert.assertEquals(recoveredAds.size(), RECOVERABLE_ADS_COUNT);
 
     for (WebElement ad : recoveredAds) {
       Dimension adSize = ad.getSize();
@@ -77,13 +77,13 @@ public class AdsRecoveryObject extends AdsBaseObject {
   }
 
   public void verifyPageFairRecoveryWithNoAdBlock() {
-    verifyTopLeaderboard();
-    verifyMedrec();
+    List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
+    Assertion.assertEquals(markedSlots.size(), RECOVERABLE_ADS_COUNT);
+  }
 
-    // TODO: uncomment after ADEN-5041 is merged
-    // there should be no elements with adonis-marker attribute in DOM
-    // List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
-    // Assertion.assertEquals(markedSlots.size(), 0);
+  public void verifyPageFairRecoveryNoMarkersOnPage() {
+    List<WebElement> markedSlots = driver.findElements(By.cssSelector("[adonis-marker]"));
+    Assertion.assertEquals(markedSlots.size(), 0);
   }
 
   public void waitForRecoveredSlot(String slotName) {

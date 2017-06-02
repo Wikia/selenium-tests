@@ -1,11 +1,15 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
+import com.google.common.collect.ImmutableMap;
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
-
-import com.google.common.collect.ImmutableMap;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -30,6 +34,8 @@ public class AdsDataProvider {
 
   private static final String SOURCE_POINT_INSTANT_GLOBAL = "?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]" +
       "&?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]";
+
+  private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
       "src/test/resources/adsResources/no_wikia_skin_left.png";
@@ -135,43 +141,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fliteSkin() {
-    return new Object[][]{
-        {
-            "project43", "SyntheticTests/Flite/Background_Takeover",
-            new Dimension(1200, 1000),
-            Arrays.asList(
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_1.png",
-                    "src/test/resources/adsResources/flite_skin_right_1.png",
-                    ""
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_2.png",
-                    "src/test/resources/adsResources/flite_skin_right_2.png",
-                    "div[data-layer*='Button #2']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_3.png",
-                    "src/test/resources/adsResources/flite_skin_right_3.png",
-                    "div[data-layer*='Button #3']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_4.png",
-                    "src/test/resources/adsResources/flite_skin_right_4.png",
-                    "div[data-layer*='Button #4']"
-                ),
-                Arrays.asList(
-                    "src/test/resources/adsResources/flite_skin_left_1.png",
-                    "src/test/resources/adsResources/flite_skin_right_1.png",
-                    "div[data-layer='Button #1']"
-                )
-            )
-        },
-        };
-  }
-
-  @DataProvider
   public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
@@ -188,7 +157,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -200,7 +169,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_REGULAR, "Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -219,7 +188,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -231,7 +200,7 @@ public class AdsDataProvider {
             "FFFFFF"
         }, {
             WIKI_SPECIAL, "SyntheticTests/Skin/NoMiddleColor",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             ""
@@ -244,7 +213,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             WIKI_SPECIAL, "SyntheticTests/Skin",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             SKIN_LEFT, SKIN_RIGHT,
             "AAAAAA",
             "FFFFFF"
@@ -622,56 +591,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] fliteTagBrokenOasis() {
-    return new Object[][]{
-        {
-            "SyntheticTests/FliteTagBrokenWidth",
-            "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenHeight",
-            "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenTag",
-            "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagBrokenMercury() {
-    return new Object[][]{
-        {
-            "SyntheticTests/FliteTagBrokenWidth",
-            "Invalid width of the flite unit was passed. Make sure you provide width parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenHeight",
-            "Invalid height of the flite unit was passed. Make sure you provide height parameter with numeric value."
-        },
-        {
-            "SyntheticTests/FliteTagBrokenTag",
-            "Invalid guid parameter was passed. Provide valid guid or remove this tag from article's content."
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagOasis() {
-    return new Object[][]{
-        {"SyntheticTests/FliteTag"},
-        {"SyntheticTests/FliteTagModifiedTag"}};
-  }
-
-  @DataProvider
-  public static Object[][] fliteTagMercury() {
-    return new Object[][]{
-        {"SyntheticTests/FliteTag"},
-        {"SyntheticTests/FliteTagModifiedTag"}};
-  }
-
-  @DataProvider
   public static Object[][] evolveTestPage() {
     return new Object[][]{{"project43", "SyntheticTests/Evolve"}};
   }
@@ -790,13 +709,13 @@ public class AdsDataProvider {
         {
             "project43",
             "",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             true
         },
         {
             "project43",
             "SyntheticTests/Prefooters",
-            new Dimension(1920, 1080),
+            WindowSize.DESKTOP,
             false
         }
     };
@@ -826,7 +745,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsSent() {
     return new Object[][]{
         {
-            "project43",
+            "project43", "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.COMSCORE_PIXEL_URL,
                 TestAdsTrackingPixels.KRUX_PIXEL_URL,
@@ -834,13 +753,13 @@ public class AdsDataProvider {
             }
         },
         {
-            "angrybirds",
+            "angrybirds", " Angry_Birds_Wiki",
             new String[]{
                 TestAdsTrackingPixels.GA_PIXEL_URL
             }
         },
         {
-            "lego",
+            "lego", "LEGO_Wiki",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -865,7 +784,7 @@ public class AdsDataProvider {
   public static Object[][] adsTrackingPixelsNotSent() {
     return new Object[][]{
         {
-            "project43",
+            "project43", "Project43_Wikia",
             new String[]{
                 TestAdsTrackingPixels.NIELSEN_PIXEL_URL
             }
@@ -892,36 +811,6 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/728x90"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(728, 90))
-                .put("lineItemId", 269658972)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/468x60"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(468, 60))
-                .put("lineItemId", 269666292)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/INCONTENT_LEADERBOARD/300x250"),
-            "InstantGlobals.wgAdDriverIncontentLeaderboardSlotCountries=[XX]",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.INCONTENT_LEADERBOARD)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 269672052)
-                .put("src", "gpt")
-                .build()
-        },
         {
             new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
             "",
@@ -1126,11 +1015,11 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsAdvertisementText() {
+  public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
             "project43",
-            "SyntheticTests/INCONTENT_LEADERBOARD/300x250"
+            "SyntheticTests/Premium/FeaturedVideo?AbTest.FEATURED_VIDEO_AUTOPLAY=CONTROL"
         }
     };
   }
@@ -1315,12 +1204,12 @@ public class AdsDataProvider {
   public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG"),
+            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }
@@ -1350,4 +1239,57 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsVelesTracking() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "20.00")
+                .put(AdsContent.INCONTENT_PLAYER, "20.00")
+                .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "NOT_INVOLVED")
+                .put(AdsContent.INCONTENT_PLAYER, "20.00")
+                .build()
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
+            ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "20.00")
+                .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
+                .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVelesErrorTracking() {
+    return new Object[][]{
+      {
+          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
+          ImmutableMap.builder()
+                .put(AdsContent.TOP_LB, "")
+                .put(AdsContent.INCONTENT_PLAYER, "")
+                .build(),
+          ImmutableMap.builder()
+                .put(".*output=vast.*", new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT))
+                .build()
+
+      },
+      {
+          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM), // Veles Timeout (page without VAST)
+          ImmutableMap.builder()
+              .put(AdsContent.TOP_LB, "0.00")
+              .build(),
+          ImmutableMap.builder()
+              .build()
+      }
+
+    };
+  }
 }

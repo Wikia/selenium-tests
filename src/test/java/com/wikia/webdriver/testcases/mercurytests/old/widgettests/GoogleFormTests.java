@@ -29,7 +29,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private Navigate navigate;
 
   private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormMercury/OneWidget";
-  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/GoogleFormMercury/MultipleWidgets";
+  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/GoogleFormMercury_MultipleWidgets";
   private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME.substring(6);
@@ -78,7 +78,7 @@ public class GoogleFormTests extends NewTestTemplate {
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     init();
 
-    widget.createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    widget.createMultiple("GoogleFormMercury_OneWidget");
     navigate.toPage(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);

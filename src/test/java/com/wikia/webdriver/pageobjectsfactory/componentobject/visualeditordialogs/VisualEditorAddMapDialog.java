@@ -67,7 +67,7 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
           "The dialog is in empty state, the wiki needs to contain map.");
     }
     waitForDialogNotVisible();
-    return new VisualEditorPageObject(driver);
+    return new VisualEditorPageObject();
   }
 
   public void checkIsEmptyState() {
