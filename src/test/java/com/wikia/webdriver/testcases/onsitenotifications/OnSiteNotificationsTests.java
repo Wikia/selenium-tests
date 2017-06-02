@@ -25,6 +25,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void userOnDesktopReceivesPostReplyNotification() {
     ReplyEntity.Data reply = createReplyToPostAs(createPostAs(User.USER), User.USER_2);
+    System.out.println("Reply to thread: " + reply.getThreadId());
   }
 
   private PostEntity.Data createPostAs(User user) {
