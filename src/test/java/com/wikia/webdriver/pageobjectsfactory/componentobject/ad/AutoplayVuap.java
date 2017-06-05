@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
@@ -100,7 +101,7 @@ public class AutoplayVuap {
   }
 
   public void replay() {
-      clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
+      clickOnReplayButton(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
       muted = false;
       playing = true;
   }
@@ -179,7 +180,15 @@ public class AutoplayVuap {
   }
 
   private void clickElement(final String selector) {
-    wait.forElementVisible(By.cssSelector(selector)).click();
+    wait.forElementClickable(By.cssSelector(selector)).click();
+  }
+
+  private void clickOnReplayButton(final String selector) {
+    Actions builder = new Actions(driver);
+    builder.contextClick(wait.forElementClickable(By.cssSelector(selector)))
+        .moveToElement(driver.findElement(By.cssSelector(selector)))
+        .click(wait.forElementClickable(By.cssSelector(selector)))
+        .perform();
   }
 
   private WebElement findSpeakerIcon() {
