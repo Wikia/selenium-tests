@@ -77,6 +77,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public List<VideoTile> getVideoTiles(int numberOfTiles){
     wait.forElementPresent(By.cssSelector(NEWEST_VIDEO_CSS));
     List<VideoTile> videoTileList = new ArrayList<>();
+    //numberOfTilesToFetch set to max number of possible elements to fetch
     int numberOfTilesToFetch = numberOfTiles>videoTileElements.size()?videoTileElements.size():numberOfTiles;
     List<WebElement> subList = videoTileElements.subList(0,numberOfTilesToFetch);
     for (WebElement videoTileElement : subList){

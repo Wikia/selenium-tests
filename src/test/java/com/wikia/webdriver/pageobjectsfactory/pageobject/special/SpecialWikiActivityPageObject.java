@@ -193,6 +193,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   public List<Activity> getActivities(int numberOfActivities) {
 
     List<Activity> activityList = new ArrayList<>();
+    //numberOfActivitiesToFetch set to max number of possible elements to fetch
     int numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
             ? activityWebElementList.size() : numberOfActivities;
     List<WebElement> activityWebElementSubList = activityWebElementList.subList(0, numberOfActivitiesToFetch);
