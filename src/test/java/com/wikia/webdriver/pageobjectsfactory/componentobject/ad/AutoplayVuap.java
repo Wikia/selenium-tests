@@ -101,7 +101,7 @@ public class AutoplayVuap {
   }
 
   public void replay() {
-      clickOnReplayButton(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
+      clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
       muted = false;
       playing = true;
   }
@@ -180,10 +180,6 @@ public class AutoplayVuap {
   }
 
   private void clickElement(final String selector) {
-    wait.forElementClickable(By.cssSelector(selector)).click();
-  }
-
-  private void clickOnReplayButton(final String selector) {
     Actions builder = new Actions(driver);
     builder.contextClick(wait.forElementClickable(By.cssSelector(selector)))
         .moveToElement(driver.findElement(By.cssSelector(selector)))
