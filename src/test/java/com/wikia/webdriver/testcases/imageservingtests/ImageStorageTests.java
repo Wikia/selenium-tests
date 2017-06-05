@@ -38,6 +38,7 @@ public class ImageStorageTests extends NewTestTemplate {
     filesPage.setFileName(fileName);
     filesPage.checkIgnoreAnyWarnings();
     filesPage.clickUploadButton();
+    Assertion.assertTrue(filesPage.isImageOnPage(fileName));
     filesPage.verifyFileUploaded(fileName);
 
     FilePage file = new FilePage().open(fileName, true);
