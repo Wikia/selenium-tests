@@ -8,6 +8,8 @@ import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntity;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notification;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -24,8 +26,10 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void userOnDesktopReceivesPostReplyNotification() {
-    ReplyEntity.Data reply = createReplyToPostAs(createPostAs(User.USER), User.USER_2);
+    PostEntity.Data post = createPostAs(User.USER);
+    ReplyEntity.Data reply = createReplyToPostAs(post, User.USER_2);
     System.out.println("Reply to thread: " + reply.getThreadId());
+    Notification noti = new NotificationFactory().getPostReplyNotification(User.USER_2, post);
   }
 
   private PostEntity.Data createPostAs(User user) {

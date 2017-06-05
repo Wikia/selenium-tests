@@ -11,4 +11,8 @@ public enum NotificationType {
   NotificationType(String key) {
     format = key;
   }
+
+  public String getFormat() {
+    return format;
+  }
 }
