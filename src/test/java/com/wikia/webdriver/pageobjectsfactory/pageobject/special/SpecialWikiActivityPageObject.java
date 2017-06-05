@@ -95,20 +95,6 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   }
 
   /**
-   * verifies if given edition on WikiActivity is not present, searching through 5 recent editions.
-   */
-//  public void verifyNoRecentEditionIsPresent(String articleName, String userName) {
-//
-//      List<Activity> activityList = getActivityList();
-//      Integer count = activityList.filter(p->p.getTitle().equals("test")).count();
-//      Assertion.assertEquals(count.toString(), "0");
-//  }
-
-//  public List<Activity> getActivityList(){
-//    return new ArrayList<Activity>;
-//  }
-
-  /**
    * verifies if there is the wanted NewPage on WikiActivity, searching through 5 recent editions.
    */
   public void verifyRecentNewPage(String articleName, String userName) {

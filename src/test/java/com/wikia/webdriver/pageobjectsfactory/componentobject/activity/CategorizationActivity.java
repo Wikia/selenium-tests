@@ -21,6 +21,7 @@ public class CategorizationActivity extends Activity {
   }
 
   public void showChanges() {
+    wait.forElementClickable(diffLink);
     diffLink.click();
   }
 
