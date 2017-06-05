@@ -1,12 +1,6 @@
 package com.wikia.webdriver.common.logging;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-
-import com.wikia.webdriver.common.core.AlertHandler;
-import com.wikia.webdriver.common.core.CommonUtils;
-import com.wikia.webdriver.common.core.SelectorStack;
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.*;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
@@ -17,7 +11,6 @@ import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -25,12 +18,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -46,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
+
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -172,9 +162,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         log("onException",
             "driver has no ability to catch screenshot or html source - driver may died", false);
       }
-      String exceptionMessage = escapeHtml(exception.getMessage());
-      //TODO: Check imageCounter
+      String exceptionMessage = ExceptionUtils.getStackTrace(exception);
 
+      //TODO: Check imageCounter
       List<String> classList = new ArrayList<>();
       classList.add(ERROR_CLASS);
       classList.add(STACKTRACE_CLASS);
@@ -429,11 +419,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
       String exception = escapeHtml(result.getThrowable().toString() + "\n"
           + ExceptionUtils.getStackTrace(result.getThrowable()));
-      //TODO: Check imageCounter
 
       List<String> classList = new ArrayList<>();
       classList.add(ERROR_CLASS);
-//      classList.add(STACKTRACE_CLASS);
       String html = VelocityWrapper.appendErrorLogRow(classList, exception, String.valueOf(imageCounter));
       CommonUtils.appendTextToFile(logPath, html);
       logJSError(driver);

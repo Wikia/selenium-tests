@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -101,16 +100,14 @@ public class Assertion extends Assert {
       assertion = false;
       caughtException = err;
     }
-    //TODO: Check that!
-    if (assertion){
-      PageObjectLogging.log(
-          "assertEquals",
-          "assertion " + assertion + "! Pattern: \"" + patternEncoded
-          + "\" Current: \"" + currentEncoded + "\"",
-          assertion
-      );
-    } else{
-       new PageObjectLogging().logAssertionStacktrace(caughtException);
+    PageObjectLogging.log(
+            "assertEquals",
+            "assertion " + assertion + "! Pattern: \"" + patternEncoded
+                    + "\" Current: \"" + currentEncoded + "\"",
+            assertion
+    );
+    if (caughtException != null){
+      new PageObjectLogging().logAssertionStacktrace(caughtException);
     }
   }
 
