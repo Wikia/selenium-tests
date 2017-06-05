@@ -25,7 +25,7 @@ public class TwitterTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new TwitterWidgetPageObject(driver);
+    this.widget = new TwitterWidgetPageObject();
     this.navigate = new Navigate();
   }
 

@@ -37,16 +37,16 @@ public class AllTagsTests extends NewTestTemplate {
     driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 
     widgets = new ArrayList<>();
-    widgets.add(new PollsnackWidgetPageObject(driver));
-    widgets.add(new SoundCloudWidgetPageObject(driver));
-    widgets.add(new SpotifyWidgetPageObject(driver));
-    widgets.add(new TwitterWidgetPageObject(driver));
-    widgets.add(new VKWidgetPageObject(driver));
-    widgets.add(new WeiboWidgetPageObject(driver));
-    widgets.add(new GoogleFormWidgetPageObject(driver));
-    widgets.add(new PolldaddyWidgetPageObject(driver));
-    widgets.add(new PlaybuzzWidgetPageObject(driver));
-    widgets.add(new ApesterWidgetPageObject(driver));
+    widgets.add(new PollsnackWidgetPageObject());
+    widgets.add(new SoundCloudWidgetPageObject());
+    widgets.add(new SpotifyWidgetPageObject());
+    widgets.add(new TwitterWidgetPageObject());
+    widgets.add(new VKWidgetPageObject());
+    widgets.add(new WeiboWidgetPageObject());
+    widgets.add(new GoogleFormWidgetPageObject());
+    widgets.add(new PolldaddyWidgetPageObject());
+    widgets.add(new PlaybuzzWidgetPageObject());
+    widgets.add(new ApesterWidgetPageObject());
 
     String content = "";
     for (WidgetPageObject widget : widgets) {

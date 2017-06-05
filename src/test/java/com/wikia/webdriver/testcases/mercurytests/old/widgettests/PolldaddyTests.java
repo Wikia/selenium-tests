@@ -38,7 +38,7 @@ public class PolldaddyTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new PolldaddyWidgetPageObject(driver);
+    this.widget = new PolldaddyWidgetPageObject();
   }
 
   @Test(groups = "MercuryPolldaddyWidgetTest_001")

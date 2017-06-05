@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 import java.util.List;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,10 +21,6 @@ public class GoogleFormWidgetPageObject extends WidgetPageObject {
   private List<WebElement> widgetIFrameList;
   @FindBy(css = "div.freebirdFormviewerViewFormContentWrapper")
   private WebElement widgetBody;
-
-  public GoogleFormWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   protected String getTagName() {
     return TAG_NAME;

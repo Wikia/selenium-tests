@@ -38,7 +38,7 @@ public class TwitterTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new TwitterWidgetPageObject(driver);
+    this.widget = new TwitterWidgetPageObject();
   }
 
   @Test(groups = "MercuryTwitterWidgetTest_001")

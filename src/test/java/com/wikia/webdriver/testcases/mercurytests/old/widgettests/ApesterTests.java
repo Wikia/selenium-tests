@@ -38,7 +38,7 @@ public class ApesterTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigate = new Navigate();
-    this.widget = new ApesterWidgetPageObject(driver);
+    this.widget = new ApesterWidgetPageObject();
   }
 
   @Test(groups = "MercuryApesterWidgetTest_001")

@@ -39,7 +39,7 @@ public class PlaybuzzTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigate = new Navigate();
-    this.widget = new PlaybuzzWidgetPageObject(driver);
+    this.widget = new PlaybuzzWidgetPageObject();
   }
 
   @Test(groups = "MercuryPlaybuzzWidgetTest_001")

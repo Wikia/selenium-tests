@@ -38,7 +38,7 @@ public class WeiboTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new WeiboWidgetPageObject(driver);
+    this.widget = new WeiboWidgetPageObject();
   }
 
   @Test(groups = "MercuryWeiboWidgetTest_001")

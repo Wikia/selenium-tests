@@ -25,7 +25,7 @@ public class ApesterTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new ApesterWidgetPageObject(driver);
+    this.widget = new ApesterWidgetPageObject();
     this.navigate = new Navigate();
   }
 

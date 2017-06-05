@@ -38,7 +38,7 @@ public class PollsnackTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new PollsnackWidgetPageObject(driver);
+    this.widget = new PollsnackWidgetPageObject();
   }
 
   @Test(groups = "MercuryPollsnackWidgetTest_001")

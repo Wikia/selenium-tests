@@ -37,7 +37,7 @@ public class SoundCloudTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new SoundCloudWidgetPageObject(driver);
+    this.widget = new SoundCloudWidgetPageObject();
   }
 
   @Test(groups = "MercurySoundCloudWidgetTest_001")

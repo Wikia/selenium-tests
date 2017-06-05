@@ -39,7 +39,7 @@ public class VKTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new VKWidgetPageObject(driver);
+    this.widget = new VKWidgetPageObject();
   }
 
   @Test(groups = "MercuryVKWidgetTest_001")

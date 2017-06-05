@@ -37,7 +37,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private void init() {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
-    this.widget = new GoogleFormWidgetPageObject(driver);
+    this.widget = new GoogleFormWidgetPageObject();
     this.navigate = new Navigate();
   }
 

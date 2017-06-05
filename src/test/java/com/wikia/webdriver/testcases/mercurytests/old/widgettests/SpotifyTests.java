@@ -39,7 +39,7 @@ public class SpotifyTests extends NewTestTemplate {
     this.topBar = new TopBar(driver);
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new SpotifyWidgetPageObject(driver);
+    this.widget = new SpotifyWidgetPageObject();
   }
 
   @Test(groups = "MercurySpotifyWidgetTest_001")
