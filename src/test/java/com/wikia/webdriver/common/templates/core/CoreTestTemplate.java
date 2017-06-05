@@ -87,7 +87,6 @@ public abstract class CoreTestTemplate {
     if (declaringClass.isAnnotationPresent(InBrowser.class)) {
       setTestProperty("browser", declaringClass.getAnnotation(InBrowser.class).browser().getName());
       setTestProperty("browserSize", declaringClass.getAnnotation(InBrowser.class).browserSize());
-      setTestProperty("emulator", declaringClass.getAnnotation(InBrowser.class).emulator());
     }
   }
 
@@ -103,7 +102,6 @@ public abstract class CoreTestTemplate {
     if (method.isAnnotationPresent(InBrowser.class)) {
       setTestProperty("browser", method.getAnnotation(InBrowser.class).browser().getName());
       setTestProperty("browserSize", method.getAnnotation(InBrowser.class).browserSize());
-      setTestProperty("emulator", method.getAnnotation(InBrowser.class).emulator());
     }
 
     if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
