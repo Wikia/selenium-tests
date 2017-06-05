@@ -1,5 +1,10 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -15,10 +20,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFiles
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-import java.util.List;
-
 public class ImageStorageTests extends NewTestTemplate {
 
   String imageURL;
@@ -29,8 +30,7 @@ public class ImageStorageTests extends NewTestTemplate {
   @Execute(asUser = User.USER_2)
   @RelatedIssue(issueID = "QAART-1028")
   public void ImageStorage_001_deleteImage() {
-    SpecialNewFilesPage filesPage =
-        new SpecialNewFilesPage().openSpecialNewFiles(wikiURL);
+    SpecialNewFilesPage filesPage = new SpecialNewFilesPage().openSpecialNewFiles(wikiURL);
     filesPage.addPhoto();
     filesPage.selectFileToUpload(PageContent.FILE);
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
@@ -53,26 +53,25 @@ public class ImageStorageTests extends NewTestTemplate {
     delete.submitDeletion();
 
     List<Notification> confirmNotifications = filesPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        DeletePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     filesPage.verifyURLStatus(404, imageURL);
     filesPage.verifyURLStatus(404, imageThumbnailURL);
 
     confirmNotifications = delete.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
-    SpecialRestorePageObject restore =
-        confirmNotifications.stream().findFirst().get().undelete();
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    SpecialRestorePageObject restore = confirmNotifications.stream().findFirst().get().undelete();
     restore.giveReason(PageContent.CAPTION);
     restore.restorePage();
     confirmNotifications = restore.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     file.verifyURLStatus(200, imageURL);
     file.verifyURLStatus(200, imageThumbnailURL);
@@ -88,16 +87,11 @@ public class ImageStorageTests extends NewTestTemplate {
   public void ImageStorage_002_moveImage() {
     String fileName = DateTime.now().getMillis() + PageContent.FILE;
 
-    new SpecialNewFilesPage()
-        .openSpecialNewFiles(wikiURL)
-        .addPhoto()
-        .selectFileToUpload(PageContent.FILE)
-        .hideWarnings()
-        .clickOnMoreOptions()
-        .setFileName(fileName)
-        .checkIgnoreAnyWarnings()
-        .clickUploadButton()
-        .verifyFileUploaded(fileName);
+    new SpecialNewFilesPage().openSpecialNewFiles(wikiURL).addPhoto()
+        .selectFileToUpload(PageContent.FILE).hideWarnings().clickOnMoreOptions()
+        .setFileName(fileName).checkIgnoreAnyWarnings().clickUploadButton();
+
+    Assertion.assertTrue(new SpecialNewFilesPage().isImageOnPage(fileName));
 
     FilePage file = new FilePage().open(fileName, true);
     RenamePageObject renamePage = file.renameUsingDropdown();
@@ -106,10 +100,10 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage.rename(imageNewName, true);
 
     List<Notification> confirmNotifications = file.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
     file.verifyHeader(imageNewName);
     file = new FilePage().open(imageNewName, true);
@@ -117,10 +111,10 @@ public class ImageStorageTests extends NewTestTemplate {
     renamePage.rename(fileName, true);
 
     confirmNotifications = file.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertTrue(confirmNotifications.size()==1,
-            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertTrue(confirmNotifications.size() == 1,
+        RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-            RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
     file.verifyHeader(fileName);
 
     DeletePageObject delete = file.deletePage();
