@@ -126,7 +126,9 @@ public class VelocityWrapper {
         ve.getTemplate("./src/test/java/com/wikia/webdriver/common/velocitytemplates/firstLogRow.vm");
     VelocityContext context = new VelocityContext();
 
-    context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
+    context.put("className",  className);
+
+
     context.put("testName", testName);
     context.put("command", command);
     context.put("description", description);
