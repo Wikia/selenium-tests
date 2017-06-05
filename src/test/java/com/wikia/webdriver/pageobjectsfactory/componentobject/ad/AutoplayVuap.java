@@ -179,7 +179,7 @@ public class AutoplayVuap {
   }
 
   private void clickElement(final String selector) {
-    wait.forElementClickable(By.cssSelector(selector)).click();
+    wait.forElementVisible(By.cssSelector(selector)).click();
   }
 
   private WebElement findSpeakerIcon() {
