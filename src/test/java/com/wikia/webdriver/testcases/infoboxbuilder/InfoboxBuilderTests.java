@@ -1,32 +1,37 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
+import org.joda.time.DateTime;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.InfoboxBuilderPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
 import com.wikia.webdriver.elements.oasis.pages.TemplatePage;
-import com.wikia.webdriver.elements.oasis.pages.WikiFeatures;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner.SpecialThemeDesignerPageObject;
-import org.joda.time.DateTime;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 @InBrowser(browser = Browser.CHROME)
 public class InfoboxBuilderTests extends NewTestTemplate {
 
   private static final int EUROPA_INFOBOX_WIDTH = 300;
   private static final int DEFAULT_INFOBOX_WIDTH = 270;
+  private static final String WIKI_WITH_EUROPA_THEME_ENABLED = "infoboxeuropathemetest";
+  private static final String WIKI_WITH_EUROPA_THEME_DISABLED = "infoboxnoeuropathemetest";
+
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyDefaultStructure() {
     InfoboxBuilderPage builderPage =
         new InfoboxBuilderPage().openNew("InfoboxBuilderVerifyDefaultStructure");
@@ -42,7 +47,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void addingComponents() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
@@ -62,7 +67,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void savingTemplate() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
@@ -78,7 +83,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingDefaultComponents() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
@@ -102,7 +107,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingDefaultComponentsUsingPopUp() {
     InfoboxBuilderPage builderPage =
         new InfoboxBuilderPage().openNew("InfoboxBuilderDeletingDefaultComponents");
@@ -117,7 +122,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void deletingAddedComponents() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
@@ -149,7 +154,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void customizingComponents() {
     TemplatePage template = new TemplatePage();
     Sidebar builderSidebar = new Sidebar();
@@ -179,7 +184,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void setInfoboxTitleToUseArticleName() {
     TemplatePage template = new TemplatePage();
     Sidebar builderSidebar = new Sidebar();
@@ -200,19 +205,17 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void newInfoboxTemplateCreationRedirectsToInfoboxBuilder() {
     new TemplateEditPage()
         .open("NewInfoboxTemplateCreationRedirectsToInfoboxBuilder" + DateTime.now().getMillis())
-        .getTemplateClassification()
-        .changeTemplateType(TemplateTypes.INFOBOX)
-        .clickAddButton();
+        .getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX).clickAddButton();
 
     Assertion.assertTrue(new InfoboxBuilderPage().isInfoboxBuilderPresent());
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifySidebarBackArrow() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
@@ -236,19 +239,19 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = "infoboxeuropathemetest")
   public void verifyInfoboxPreviewTheme() {
+    new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
+        "Template:InfoboxBuilderVerifyInfoboxTheme");
+
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
     SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
     TemplatePage template = new TemplatePage();
 
-    new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
-
     themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
     themeDesigner.submitTheme();
 
-    String templateBgColor =
-        template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
+    String templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
     String previewBgColor =
         builderPage.openExisting("InfoboxBuilderVerifyInfoboxTheme").getPreviewBackgroundColor();
 
@@ -269,7 +272,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
    * area height.
    */
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyScrolling() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
 
@@ -280,10 +283,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyUserInteractions() {
-    new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
-
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
         .openNew("InfoboxBuilderVerifySelectedBorderStyling").hoverMouseOverComponent(0);
 
@@ -297,7 +298,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002", "test_verify"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyReordering() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage infoboxBuilder =
@@ -327,7 +328,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyRedirectingUnsupportedInfoboxes() {
     new TemplatePage().open("InfoboxBuilderMultipleInfoboxes").editArticleInSrcUsingDropdown();
     Assertion.assertTrue(new TemplateEditPage().isEditAreaDisplayed());
@@ -337,7 +338,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void immutableSources() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
     String labelText = "AutomatedTest";
@@ -356,7 +357,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorClickOnModalBackground() {
     InfoboxBuilderPage builderPage =
         new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source");
@@ -371,7 +372,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorSaveChanges() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
@@ -393,7 +394,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorDropChanges() {
     InfoboxBuilderPage builderPage =
         new InfoboxBuilderPage().openNew("Infobox_verify_go_to_source_drop_changes");
@@ -405,17 +406,14 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     builderPage.clickDropChangesButton();
 
     TemplateEditPage template = new TemplateEditPage();
-    template
-      .getTemplateClassification()
-      .changeTemplateType(TemplateTypes.INFOBOX)
-      .clickAddButton();
+    template.getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX).clickAddButton();
 
     Assertion.assertTrue(template.isEditAreaDisplayed());
     Assertion.assertTrue(template.isEditAreaEmpty());
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyGoToSourceEditorNonEditedInfobox() {
     new InfoboxBuilderPage().openExisting("InfoboxBuilderSavingTemplate");
     new Sidebar().clickGoToSourceButton();
@@ -425,7 +423,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_003"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyIfInputFieldIsFocusedOnSelectItem() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openNew("Infobox_verify_focus");
@@ -443,7 +441,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyChevronTooltip() {
     Sidebar builderSidebar = new Sidebar();
     InfoboxBuilderPage builderPage =
@@ -460,9 +458,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = WIKI_WITH_EUROPA_THEME_ENABLED)
   public void verifyLoadingEuropaTheme() {
-    new WikiFeatures().openWikiFeatures(wikiURL).enableEuropaInfoboxTheme();
+    new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
+        "Template:Infobox_theme_europa");
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_europa");
 
@@ -470,10 +469,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = WIKI_WITH_EUROPA_THEME_DISABLED)
   public void verifyLoadingDefaultTheme() {
-    new WikiFeatures().openWikiFeatures(wikiURL).disableEuropaInfoboxTheme();
-
+    new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
+        "Template:Infobox_theme_default");
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().openExisting("Infobox_theme_default");
 
     Assertion.assertEquals(builderPage.getInfoboxWidth(), DEFAULT_INFOBOX_WIDTH);
@@ -514,7 +513,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyNamingConflictTypingNameAfterClickingPublish() {
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().open();
 
@@ -529,7 +528,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_004"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void changeTemplateNameByClickingSubhead() {
     Subhead subhead = new Subhead();
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage().open();
