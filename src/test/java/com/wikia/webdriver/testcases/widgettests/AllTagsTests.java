@@ -50,7 +50,7 @@ public class AllTagsTests extends NewTestTemplate {
       content += widget.getSingleTag();
     }
 
-    new ArticleContent().clear(ARTICLE_NAME).push(content, ARTICLE_NAME);
+    new ArticleContent().push(content, ARTICLE_NAME);
   }
 
   @Test(groups = "AllTagsWidgetTest_001")
