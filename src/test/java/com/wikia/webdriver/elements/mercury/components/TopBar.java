@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -46,10 +45,6 @@ public class TopBar extends BasePageObject {
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
   private By parentBy = By.xpath("./..");
-
-  public TopBar(WebDriver driver) {
-    PageFactory.initElements(driver, this);
-  }
 
   public Navigation openNavigation() {
     PageObjectLogging.logInfo("Open navigation");

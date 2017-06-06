@@ -74,7 +74,7 @@ public class BasePageObject {
   }
 
   private static String getEmailChangeConfirmationLink(String email, String password) {
-    String mailSubject = "Confirm your email address change on Fandom";
+    String mailSubject = "Confirm your email address change on FANDOM";
     String url = EmailUtils.getActivationLinkFromEmailContent(
         EmailUtils.getFirstEmailContent(email, password, mailSubject));
     PageObjectLogging.log("getActivationLinkFromMail",

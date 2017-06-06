@@ -35,7 +35,7 @@ public class GoogleFormTests extends NewTestTemplate {
   private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
-    this.topBar = new TopBar(driver);
+    this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
     this.widget = new GoogleFormWidgetPageObject();
     this.navigate = new Navigate();

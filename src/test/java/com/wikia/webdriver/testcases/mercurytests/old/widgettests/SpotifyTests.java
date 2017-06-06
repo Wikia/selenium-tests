@@ -36,7 +36,7 @@ public class SpotifyTests extends NewTestTemplate {
   private static final String QUERY_2 = SPOTIFY_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
-    this.topBar = new TopBar(driver);
+    this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
     this.widget = new SpotifyWidgetPageObject();

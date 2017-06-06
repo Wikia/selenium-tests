@@ -34,7 +34,7 @@ public class SoundCloudTests extends NewTestTemplate {
   private static final String QUERY_2 = SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
-    this.topBar = new TopBar(driver);
+    this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
     this.widget = new SoundCloudWidgetPageObject();
