@@ -1002,19 +1002,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
-      return new Object[][]{
-          {
-              new Page("project43", "SourcePoint/Static_image/HopToTaboola" + SOURCE_POINT_INSTANT_GLOBAL),
-              ImmutableMap.<String, Object>builder()
-                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
-                  .put("slotName", AdsContent.TOP_LB)
-                  .build()
-          }
-      };
-  }
-
-  @DataProvider
   public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
@@ -1145,16 +1132,6 @@ public class AdsDataProvider {
                 }
         };
     }
-
-  @DataProvider
-  public static Object[][] adsMonocolorOasis() {
-    return new Object[][]{
-        {
-            WIKI_SPECIAL,
-            "SyntheticTests/Monocolor_Ad"
-        }
-    };
-  }
 
     @DataProvider
     public static Object[][] adsVuapDesktop() {

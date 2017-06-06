@@ -24,7 +24,7 @@ public class SoundCloudTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new SoundCloudWidgetPageObject(driver);
+    this.widget = new SoundCloudWidgetPageObject();
     this.navigate = new Navigate();
   }
 
