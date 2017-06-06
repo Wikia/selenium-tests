@@ -137,11 +137,17 @@ public class Configuration {
   }
 
   public static Emulator getEmulator() {
-    if (TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
-      return TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
-    } else {
-      return Emulator.DEFAULT;
+    Emulator emulatorToUse = Emulator.DEFAULT;
+    if (TestContext.getCurrentTestMethod().getDeclaringClass()
+        .isAnnotationPresent(InBrowser.class)) {
+      emulatorToUse = TestContext.getCurrentTestMethod().getDeclaringClass()
+          .getDeclaredAnnotation(InBrowser.class).emulator();
     }
+    if (TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
+      emulatorToUse =
+          TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
+    }
+    return emulatorToUse;
   }
 
   public static String useMITM() {

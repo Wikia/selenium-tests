@@ -148,7 +148,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
   }
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void verifyInfoboxLayoutChange() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);

@@ -25,7 +25,7 @@ public class PolldaddyTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new PolldaddyWidgetPageObject(driver);
+    this.widget = new PolldaddyWidgetPageObject();
     this.navigate = new Navigate();
   }
 

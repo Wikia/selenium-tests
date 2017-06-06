@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -23,10 +22,6 @@ public class VKWidgetPageObject extends WidgetPageObject {
   private static final String INCORRECT_TAG = "<vk />";
   private static final String ERROR_MESSAGE =
       "Failed to render the VK widget. Please check if all required parameters are in place.";
-
-  public VKWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   protected String getTagName() {
     return TAG_NAME;

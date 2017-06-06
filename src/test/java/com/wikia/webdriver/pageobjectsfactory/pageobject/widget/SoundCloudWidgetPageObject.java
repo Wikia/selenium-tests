@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -21,10 +20,6 @@ public class SoundCloudWidgetPageObject extends WidgetPageObject {
       "<soundcloud width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" " +
       "url=\"https://api.soundcloud.com/tracks/34019569\" color=\"0066cc\" />",
   };
-
-  public SoundCloudWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   protected String getTagName() {
     return TAG_NAME;
