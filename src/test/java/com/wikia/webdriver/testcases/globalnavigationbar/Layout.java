@@ -1,16 +1,17 @@
 package com.wikia.webdriver.testcases.globalnavigationbar;
 
+import junit.framework.Assert;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
-
-import junit.framework.Assert;
-import org.testng.annotations.Test;
 
 @Test(groups = {"globalnavigationbar", "globalnavigationbarLayout"})
 public class Layout extends NewTestTemplate {
@@ -63,7 +64,7 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeAnon1284x900"})
   @Execute(onWikia = "de.gta")
-  @InBrowser(browserSize = "1296x900", browser = Browser.FIREFOX)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void testLayoutForDeAnon1284x900() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
@@ -84,7 +85,7 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn1284x900"})
   @Execute(onWikia = "de.gta", asUser = User.USER_GERMAN)
-  @InBrowser(browserSize = "1296x900", browser = Browser.FIREFOX)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void testLayoutForDeLoggedIn1284x900() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 
@@ -105,9 +106,9 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeAnon"})
   @Execute(onWikia = "de.gta")
-  @InBrowser(browserSize = "1295x900", browser = Browser.FIREFOX)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_SMALL)
   public void testLayoutForDeAnon() {
-    GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
+    GlobalNavigation globalNavigation = new HomePage().open().getGlobalNavigation();
 
     Assert.assertTrue(globalNavigation.isFandomLogoVisible());
     Assert.assertTrue(globalNavigation.isCommunityCentralLinkVisible());
@@ -126,6 +127,7 @@ public class Layout extends NewTestTemplate {
 
   @Test(groups = {"globalNavigationBarLayoutForDeLoggedIn"})
   @Execute(onWikia = "de.gta", asUser = User.USER_GERMAN)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_SMALL)
   public void testLayoutForDeLoggedIn() {
     GlobalNavigation globalNavigation = new HomePage().getGlobalNavigation();
 

@@ -262,7 +262,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
     new JavascriptActions(driver).execute("window.stop()");
-
     List<String> classList = new ArrayList<>();
     classList.add(SUCCESS_CLASS);
     String command = "Navigate to";
@@ -336,7 +335,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
     }
 
-    logJSError(driver);
+    logJSError();
   }
 
   @Override
@@ -351,7 +350,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
 
-    logJSError(driver);
+    logJSError();
   }
 
   @Override
