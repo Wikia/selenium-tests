@@ -59,7 +59,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static boolean testStarted = false;
   private By lastFindBy;
   private WebDriver driver;
-  public static Throwable lastThrow = null;
 
   private static String getPageSource(WebDriver driver) {
     return driver.getPageSource().replaceAll("<script", "<textarea style=\"display: none\"><script")
@@ -153,8 +152,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
             "driver has no ability to catch screenshot or html source - driver may died", false);
       }
       String exceptionMessage = ExceptionUtils.getStackTrace(exception);
-
-      //TODO: Check imageCounter
       List<String> classList = new ArrayList<>();
       classList.add(ERROR_CLASS);
       classList.add(STACKTRACE_CLASS);
@@ -209,7 +206,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     }
     logImage(command, new String(bytes, StandardCharsets.UTF_8), success);
   }
-  //TODO: Check error class here
+
   public static void logImage(String command, String imageAsBase64, boolean success) {
     String imgHtml = VelocityWrapper.fillImage(imageAsBase64);
     String className = success ? SUCCESS_CLASS : ERROR_CLASS;
@@ -296,7 +293,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       try {
         new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
       } catch (WebDriverException e) {
-        //TODO: Handle exception
+        PageObjectLogging.log("Hack for disabling notifications", "Failed to execute js action", true);
       }
 
       /**
