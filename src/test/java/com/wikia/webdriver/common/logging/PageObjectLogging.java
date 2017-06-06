@@ -144,22 +144,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
     imageCounter += 1;
     if ("true".equals(Configuration.getLogEnabled())) {
-      try {
-        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
-      } catch (Exception e) {
-        log("onException",
-            "driver has no ability to catch screenshot or html source - driver may died", false);
-      }
       String exceptionMessage = ExceptionUtils.getStackTrace(exception);
       List<String> classList = new ArrayList<>();
       classList.add(ERROR_CLASS);
       classList.add(STACKTRACE_CLASS);
-      String
-          html =
-          VelocityWrapper
-              .fillErrorLogRow(classList, exceptionMessage, imageCounter);
-      CommonUtils.appendTextToFile(logPath, html);
+      String html = VelocityWrapper.fillErrorLogRow(classList, exceptionMessage, imageCounter);
+      try {
+        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
+        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
+        CommonUtils.appendTextToFile(logPath, html);
+      } catch (Exception e) {
+        html = VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(classList, exceptionMessage);
+        CommonUtils.appendTextToFile(logPath, html);
+        log("onException",
+            "driver has no ability to catch screenshot or html source - driver may died<br/>", false);
+      }
       logJSError();
     }
   }
@@ -294,6 +293,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
       } catch (WebDriverException e) {
         PageObjectLogging.log("Hack for disabling notifications", "Failed to execute js action", true);
+
       }
 
       /**
@@ -392,20 +392,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
     imageCounter += 1;
     if ("true".equals(Configuration.getLogEnabled())) {
-      try {
-        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
-        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
-      } catch (Exception e) {
-        log("onException",
-            "driver has no ability to catch screenshot or html source - driver may died", false);
-      }
       String exception = escapeHtml(result.getThrowable().toString() + "\n"
           + ExceptionUtils.getStackTrace(result.getThrowable()));
-
       List<String> classList = new ArrayList<>();
       classList.add(ERROR_CLASS);
       String html = VelocityWrapper.fillErrorLogRow(classList, exception, imageCounter);
-      CommonUtils.appendTextToFile(logPath, html);
+      try {
+        new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
+        CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
+        CommonUtils.appendTextToFile(logPath, html);
+      } catch (Exception e) {
+        html = VelocityWrapper.fillErrorLogRowWoScreenshotAndSource(classList, exception);
+        log("onException",
+            "driver has no ability to catch screenshot or html source - driver may died", false);
+        CommonUtils.appendTextToFile(logPath, html);
+      }
       logJSError();
       stopLogging();
     }

@@ -23,6 +23,7 @@ public class VelocityWrapper {
   private static final String FIRST_LOG_ROW_TEMPLATE_PATH = "./src/test/java/com/wikia/webdriver/common/velocitytemplates/firstLogRow.vm";
   private static final String BUTTON_TEMPLATE_PATH = "./src/test/java/com/wikia/webdriver/common/velocitytemplates/button.vm";
   private static final String HEADER_TEMPLATE_PATH = "./src/test/java/com/wikia/webdriver/common/velocitytemplates/header.vm";
+  private static final String ERROR_LOG_ROW_WO_SCREENSHOT_AND_SOURCE_TEMPLATE_PATH = "./src/test/java/com/wikia/webdriver/common/velocitytemplates/errorLogRowWoScreenshotAndSource.vm";
 
 
   private VelocityWrapper() {
@@ -99,6 +100,20 @@ public class VelocityWrapper {
     context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
     context.put("command", command);
     context.put("imageCounter", String.valueOf(imageCounter));
+    StringWriter writer = new StringWriter();
+    t.merge(context, writer);
+    builder.append(writer.toString());
+    return builder.toString();
+  }
+
+  static String fillErrorLogRowWoScreenshotAndSource(List<String> classList, String command) {
+    VelocityEngine ve = new VelocityEngine();
+    StringBuilder builder = new StringBuilder();
+
+    Template t = ve.getTemplate(ERROR_LOG_ROW_WO_SCREENSHOT_AND_SOURCE_TEMPLATE_PATH);
+    VelocityContext context = new VelocityContext();
+    context.put("className", "\"" + classList.stream().collect(Collectors.joining(" ")) + "\"");
+    context.put("command", command);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
     builder.append(writer.toString());
