@@ -180,10 +180,11 @@ public class AutoplayVuap {
   }
 
   private void clickElement(final String selector) {
+    WebElement element = wait.forElementClickable(By.cssSelector(selector));
     Actions builder = new Actions(driver);
-    builder.contextClick(wait.forElementClickable(By.cssSelector(selector)))
-        .moveToElement(driver.findElement(By.cssSelector(selector)))
-        .click(wait.forElementClickable(By.cssSelector(selector)))
+    builder.contextClick(element)
+        .moveToElement(element)
+        .click(element)
         .perform();
   }
 
