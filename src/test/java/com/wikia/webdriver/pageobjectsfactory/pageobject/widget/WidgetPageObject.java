@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,10 +14,6 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
 
   @FindBy(css = "strong.error")
   protected WebElement error;
-
-  protected WidgetPageObject(WebDriver driver) {
-    super();
-  }
 
   protected abstract String getTagName();
 

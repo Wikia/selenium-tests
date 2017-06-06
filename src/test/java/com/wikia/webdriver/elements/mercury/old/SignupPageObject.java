@@ -103,7 +103,7 @@ public class SignupPageObject {
   }
 
   public void verifyAvatarAfterSignup() {
-    new TopBar(driver).openNavigation();
+    new TopBar().openNavigation();
     wait.forElementVisible(avatar);
     Assertion.assertTrue(avatar.isDisplayed());
   }
@@ -134,7 +134,7 @@ public class SignupPageObject {
   }
 
   public SignupPageObject openMobileSignupPage() {
-    new TopBar(driver).openNavigation();
+    new TopBar().openNavigation();
     new Navigation(driver).clickOnSignInRegisterButton();
     wait.forElementVisible(signupButton);
     signupButton.click();

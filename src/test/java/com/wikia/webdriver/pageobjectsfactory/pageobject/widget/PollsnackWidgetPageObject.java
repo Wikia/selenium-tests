@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,10 +21,6 @@ public class PollsnackWidgetPageObject extends WidgetPageObject {
   private static final String INCORRECT_TAG = "<pollsnack />";
   private static final String ERROR_MESSAGE =
       "Failed to render the PollSnack widget. Please check if all required parameters are in place.";
-
-  public PollsnackWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   protected String getTagName() {
     return TAG_NAME;

@@ -25,7 +25,7 @@ public class PlaybuzzTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new PlaybuzzWidgetPageObject(driver);
+    this.widget = new PlaybuzzWidgetPageObject();
     this.navigate = new Navigate();
   }
 

@@ -26,7 +26,7 @@ public class DiscussionsPage extends WikiBasePageObject {
   private final Navigation navigation = new Navigation(driver);
 
   @Getter(lazy = true)
-  private final TopBar topbar = new TopBar(driver);
+  private final TopBar topbar = new TopBar();
 
   @FindBy(css = ".wikia-home-link")
   private WebElement wikiaHomeLink;

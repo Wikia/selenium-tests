@@ -8,35 +8,26 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
 
 @Test(groups = "GoogleFormWidget")
 @InBrowser(browser = Browser.CHROME)
 public class GoogleFormTests extends NewTestTemplate {
 
-  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME =
-      "/wiki/GoogleFormOasis/OneWidget";
+  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "GoogleFormOasis_OneWidget";
   private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME =
-      "/wiki/GoogleFormOasis/MultipleWidgets";
+      "GoogleFormOasis_MultipleWidgets";
   private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME =
-      "/wiki/GoogleFormOasis/IncorrectWidget";
-
-  private GoogleFormWidgetPageObject widget;
-  private Navigate navigate;
-
-  private void init() {
-    this.widget = new GoogleFormWidgetPageObject(driver);
-    this.navigate = new Navigate();
-  }
+      "GoogleFormOasis_IncorrectWidget";
 
   @Test(groups = "GoogleFormWidgetTest_001")
   @Execute(onWikia = "mercuryautomationtesting")
   public void GoogleFormWidgetTest_001_isLoaded() {
-    init();
-
-    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget =
+        new GoogleFormWidgetPageObject().create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    new ArticlePageObject().open(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -44,10 +35,9 @@ public class GoogleFormTests extends NewTestTemplate {
   @Test(groups = "GoogleFormWidgetTest_002")
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_002_areLoaded() {
-    init();
-
-    widget.createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    WidgetPageObject widget =
+        new GoogleFormWidgetPageObject().createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    new ArticlePageObject().open(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -55,10 +45,9 @@ public class GoogleFormTests extends NewTestTemplate {
   @Test(groups = "GoogleFormWidgetTest_003")
   @Execute(onWikia = "mercuryautomationtesting")
   public void GoogleFormWidgetTest_003_isErrorPresent() {
-    init();
-
-    widget.createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    WidgetPageObject widget =
+        new GoogleFormWidgetPageObject().createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    new ArticlePageObject().open(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
