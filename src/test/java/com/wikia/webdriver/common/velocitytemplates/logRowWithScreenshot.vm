@@ -1,6 +1,6 @@
 <tr class=$className>
-    <td>stacktrace</td>
-    <td><pre>$command</pre></td>
+    <td>$command</td>
+    <td>$description</td>
     <td> <br/>
         <a href='screenshots/screenshot${imageCounter}.png'>Screenshot</a><br/>
         <a href='screenshots/screenshot${imageCounter}.html'>HTML Source</a>

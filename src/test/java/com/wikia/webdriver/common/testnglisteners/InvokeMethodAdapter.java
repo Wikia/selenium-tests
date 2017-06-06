@@ -18,8 +18,8 @@ public class InvokeMethodAdapter implements IInvokedMethodListener {
       List verificationFailures = Assertion.getVerificationFailures(result);
       if (PageObjectLogging.getVerificationStack().contains(false)) {
         result.setStatus(ITestResult.FAILURE);
-        if (result.getThrowable() == null){
-          result.setThrowable(new TestFailedException(PageObjectLogging.lastThrow));
+        if (result.getThrowable() == null) {
+          result.setThrowable(new TestFailedException(null));
         }
       }
       if (verificationFailures.size() > 0) {

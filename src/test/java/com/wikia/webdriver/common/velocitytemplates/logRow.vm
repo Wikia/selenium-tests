@@ -1,5 +1,5 @@
 <tr class=$className>
     <td>$command</td>
-    <td>$escapedDescription</td>
+    <td>$description</td>
     <td> <br/> &nbsp;</td>
 </tr>

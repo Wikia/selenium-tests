@@ -46,8 +46,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   private static final String WARNING_CLASS = "warning";
   private static final String INFO_CLASS = "info";
   private static final String STEP_CLASS = "step";
-  public static final String POLISH_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss ZZ";
-  public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
+  private static final String POLISH_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss ZZ";
+  private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZZ";
   private static long imageCounter;
   private static String reportPath = "." + File.separator + "logs" + File.separator;
   private static String screenDirPath = reportPath + "screenshots" + File.separator;
@@ -72,7 +72,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
     CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
     String className = success ? SUCCESS_CLASS : ERROR_CLASS;
-    String html = VelocityWrapper.appendErrorLogRow(Arrays.asList(className), command, String.valueOf(imageCounter));
+    String html = VelocityWrapper.fillLogRowWithScreenshot(Arrays.asList(className), command, description, imageCounter);
     CommonUtils.appendTextToFile(logPath, html);
     logJSError(driver);
   }
@@ -83,7 +83,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
     CommonUtils.appendTextToFile(screenPath + imageCounter + ".html", getPageSource(driver));
     String className = success ? SUCCESS_CLASS : ERROR_CLASS;
-    String html = VelocityWrapper.appendErrorLogRow(Arrays.asList(className), command, String.valueOf(imageCounter));
+    String html = VelocityWrapper.fillErrorLogRow(Arrays.asList(className), command, imageCounter);
     CommonUtils.appendTextToFile(logPath, html);
     logJSError(driver);
   }
@@ -123,31 +123,21 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     log(command, description, success, true);
   }
 
-  //TODO: Check error class here
   private static void log(String command, String description, boolean isSuccess,
-                   boolean ifLowLevel) {
+                          boolean ifLowLevel) {
     logsResults.add(isSuccess);
     String escapedDescription = escapeHtml(description);
 
     String className = isSuccess ? SUCCESS_CLASS : ERROR_CLASS;
-//    if(!isSuccess){
-//      lastThrow = new Throwable();
-//      lastThrow.setStackTrace(Thread.currentThread().getStackTrace());
-//    }
     List<String> classList = new ArrayList<>();
     classList.add(className);
 
-    if (ifLowLevel)
+    if (ifLowLevel) {
       classList.add(LOW_LEVEL_ACTION_CLASS);
-      String html = VelocityWrapper.appendLogRow(classList, command, escapedDescription);
-      CommonUtils.appendTextToFile(logPath, html);
-      logJSError(DriverProvider.getActiveDriver());
-
-      if (!isSuccess) {
-        lastThrow = new Throwable();
-        lastThrow.setStackTrace(Thread.currentThread().getStackTrace());
-//      logStacktrace();
-      }
+    }
+    String html = VelocityWrapper.fillLogRow(classList, command, escapedDescription);
+    CommonUtils.appendTextToFile(logPath, html);
+    logJSError(DriverProvider.getActiveDriver());
   }
 
   public void logAssertionStacktrace(AssertionError exception) {
@@ -171,7 +161,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       String
           html =
           VelocityWrapper
-              .appendErrorLogRow(classList, exceptionMessage, String.valueOf(imageCounter));
+              .fillErrorLogRow(classList, exceptionMessage, imageCounter);
       CommonUtils.appendTextToFile(logPath, html);
       logJSError(driver);
     }
@@ -189,7 +179,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
    * This method will log warning to log file (line in yellow color)
    */
   public static void logWarning(String command, String description) {
-    String html = VelocityWrapper.appendLogRow(Arrays.asList(WARNING_CLASS), command, description);
+    String html = VelocityWrapper.fillLogRow(Arrays.asList(WARNING_CLASS), command, description);
     CommonUtils.appendTextToFile(logPath, html);
   }
 
@@ -197,7 +187,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
    * This method will log info to log file (line in blue color)
    */
   public static void logInfo(String description) {
-    String html = VelocityWrapper.appendLogRow(Arrays.asList(INFO_CLASS), "INFO", description);
+    String html = VelocityWrapper.fillLogRow(Arrays.asList(INFO_CLASS), "INFO", description);
     CommonUtils.appendTextToFile(logPath, html);
   }
 
@@ -206,7 +196,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
    */
   public static void logInfo(String description, Throwable e) {
     String finalDescription = description + " : " + e.getMessage();
-    String html = VelocityWrapper.appendLogRow(Arrays.asList(INFO_CLASS), "INFO", finalDescription);
+    String html = VelocityWrapper.fillLogRow(Arrays.asList(INFO_CLASS), "INFO", finalDescription);
     CommonUtils.appendTextToFile(logPath, html);
   }
 
@@ -221,9 +211,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
   //TODO: Check error class here
   public static void logImage(String command, String imageAsBase64, boolean success) {
-    String imgHtml = VelocityWrapper.appendImage(imageAsBase64);
+    String imgHtml = VelocityWrapper.fillImage(imageAsBase64);
     String className = success ? SUCCESS_CLASS : ERROR_CLASS;
-    String html = VelocityWrapper.appendLogRow(Arrays.asList(className), "INFO", imgHtml);
+    String html = VelocityWrapper.fillLogRow(Arrays.asList(className), command, imgHtml);
     CommonUtils.appendTextToFile(logPath, html);
   }
 
@@ -233,8 +223,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       List<String> error =
           (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
       if (!error.isEmpty()) {
-        //TODO:Check error to avoid toString method
-        String html = VelocityWrapper.appendLogRow(Arrays.asList(ERROR_CLASS), "click", error.toString());
+        String html = VelocityWrapper.fillLogRow(Arrays.asList(ERROR_CLASS), "click", error.toString());
         CommonUtils.appendTextToFile(logPath, html);
       }
     }
@@ -252,20 +241,20 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     if (testMethod.isAnnotationPresent(RelatedIssue.class)) {
       String issueID = testMethod.getAnnotation(RelatedIssue.class).issueID();
       String jiraUrl = jiraPath + issueID;
-      String jiraLink = VelocityWrapper.appendLink(jiraUrl, issueID);
+      String jiraLink = VelocityWrapper.fillLink(jiraUrl, issueID);
       command = "Known failure";
       description = testName + " - " + jiraLink + " " + testMethod.getAnnotation(RelatedIssue.class).comment();
     } else {
       command = "";
       description = testName;
     }
-    String html = VelocityWrapper.appendFirstLogRow(Arrays.asList(STEP_CLASS), className, testName, command, description);
+    String html = VelocityWrapper.fillFirstLogRow(className, testName, command, description);
     CommonUtils.appendTextToFile(logPath, html);
     testStarted = true;
   }
 
-  public void stopLogging() {
-    String html = VelocityWrapper.appendLastLogRow();
+  private void stopLogging() {
+    String html = VelocityWrapper.fillLastLogRow();
     CommonUtils.appendTextToFile(logPath, html);
     testStarted = false;
   }
@@ -277,8 +266,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     List<String> classList = new ArrayList<>();
     classList.add(SUCCESS_CLASS);
     String command = "Navigate to";
-    String description = VelocityWrapper.appendLink(url, url);
-    String html = VelocityWrapper.appendLogRow(classList, command, description);
+    String description = VelocityWrapper.fillLink(url, url);
+    String html = VelocityWrapper.fillLogRow(classList, command, description);
     CommonUtils.appendTextToFile(logPath, html);
     logJSError(driver);
   }
@@ -290,8 +279,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         List<String> classList = new ArrayList<>();
         classList.add(SUCCESS_CLASS);
         String command = "Url after navigation";
-        String description = VelocityWrapper.appendLink(driver.getCurrentUrl(), driver.getCurrentUrl());
-        String html = VelocityWrapper.appendLogRow(classList, command, description);
+        String description = VelocityWrapper.fillLink(driver.getCurrentUrl(), driver.getCurrentUrl());
+        String html = VelocityWrapper.fillLogRow(classList, command, description);
         CommonUtils.appendTextToFile(logPath, html);
       } else {
         if (driver.getCurrentUrl().contains("data:text/html,chromewebdata ")) {
@@ -371,14 +360,11 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     classList.add(SUCCESS_CLASS);
     classList.add(LOW_LEVEL_ACTION_CLASS);
     String command = "click";
-    //TODO:Check toString()
     String description = lastFindBy.toString();
 
-    String html = VelocityWrapper.appendLogRow(classList, command, description);
+    String html = VelocityWrapper.fillLogRow(classList, command, description);
     CommonUtils.appendTextToFile(logPath, html);
   }
-
-
 
   @Override
   public void afterChangeValueOf(WebElement element, WebDriver driver) {
@@ -387,15 +373,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     classList.add(LOW_LEVEL_ACTION_CLASS);
     String command = "ChangeValueOfField";
     String description = lastFindBy.toString();
-    String html = VelocityWrapper.appendLogRow(classList, command, description);
+    String html = VelocityWrapper.fillLogRow(classList, command, description);
     CommonUtils.appendTextToFile(logPath, html);
   }
 
   @Override
   public void onTestStart(ITestResult result) {
     logsResults.clear();
-    String testName = result.getName().toString();
-    String className = result.getTestClass().getName().toString();
+    String testName = result.getName();
+    String className = result.getTestClass().getName();
     System.out.println(className + " " + testName);
   }
 
@@ -422,7 +408,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
       List<String> classList = new ArrayList<>();
       classList.add(ERROR_CLASS);
-      String html = VelocityWrapper.appendErrorLogRow(classList, exception, String.valueOf(imageCounter));
+      String html = VelocityWrapper.fillErrorLogRow(classList, exception, imageCounter);
       CommonUtils.appendTextToFile(logPath, html);
       logJSError(driver);
       stopLogging();
@@ -471,7 +457,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
     String
         headerHtml = VelocityWrapper
-                     .appendHeader(date, polishDate, browser, os, testingEnvironmentUrl,
+                     .fillHeader(date, polishDate, browser, os, testingEnvironmentUrl,
                                    testingEnvironment, testedVersion);
     CommonUtils.appendTextToFile(logPath, headerHtml);
     appendShowHideButtons();
@@ -485,8 +471,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   }
 
   private void appendShowHideButtons() {
-    String hideButton = VelocityWrapper.appendButton("hideLowLevel", "hide low level actions");
-    String showButton = VelocityWrapper.appendButton("showLowLevel", "show low level actions");
+    String hideButton = VelocityWrapper.fillButton("hideLowLevel", "hide low level actions");
+    String showButton = VelocityWrapper.fillButton("showLowLevel", "show low level actions");
     StringBuilder builder = new StringBuilder();
     builder.append(hideButton);
     builder.append(showButton);
