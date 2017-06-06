@@ -38,16 +38,7 @@ public class GoogleFormTests extends NewTestTemplate {
     widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
-//    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
-
-    //Loaded set to false
-    Assertion.assertEquals("true", String.valueOf(widget.isLoaded()));
-
-//    Assertion.assertTrue(widget.isLoaded());
-
-
-//    Assertion.assertEquals("test1", Boolean.toString(widget.isLoaded()));
-//    Assertion.assertEquals("test2", Boolean.toString(widget.isLoaded()));
+    Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "GoogleFormWidgetTest_002")

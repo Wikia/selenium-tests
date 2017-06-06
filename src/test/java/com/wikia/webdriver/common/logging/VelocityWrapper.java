@@ -24,10 +24,11 @@ public class VelocityWrapper {
   private static final String BUTTON_TEMPLATE_PATH = "./src/test/java/com/wikia/webdriver/common/velocitytemplates/button.vm";
   private static final String HEADER_TEMPLATE_PATH = "./src/test/java/com/wikia/webdriver/common/velocitytemplates/header.vm";
 
-  public VelocityWrapper(){
-    VelocityEngine ve = new VelocityEngine();
-    ve.init();
+
+  private VelocityWrapper() {
+    throw new IllegalAccessError("Utility class");
   }
+
   static String fillLogRow(List<String> classList, String command, String description) {
     VelocityEngine ve = new VelocityEngine();
     StringBuilder builder = new StringBuilder();
@@ -66,8 +67,8 @@ public class VelocityWrapper {
     Template t =
         ve.getTemplate(LOG_ROW_WITH_LINK_TEMPLATE_PATH);
     VelocityContext context = new VelocityContext();
-    context.put("link", escapeHtml(link));
-    context.put("label", escapeHtml(label));
+    context.put("link", link);
+    context.put("label", label);
     StringWriter writer = new StringWriter();
     t.merge(context, writer);
     builder.append(writer.toString());

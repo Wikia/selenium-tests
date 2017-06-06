@@ -77,8 +77,7 @@ public abstract class WidgetPageObject extends WikiBasePageObject {
    * Make sure that there is a widget of its type loaded on the page.
    */
   public boolean isLoaded() {
-//    boolean result = isWidgetVisible(0);
-    boolean result = false;
+    boolean result = isWidgetVisible(0);
     logVisibility(result);
     return result;
   }
