@@ -1019,7 +1019,7 @@ public class AdsDataProvider {
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
-                    .put("slotSize", new Dimension(1920, 780))
+                    .put("slotSize", new Dimension(1889, 767))
                     .put("lineItemId", 365404452)
                     .put("src", "gpt")
                     .build(),
