@@ -23,7 +23,7 @@ public class VKTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new VKWidgetPageObject(driver);
+    this.widget = new VKWidgetPageObject();
     this.navigate = new Navigate();
   }
 
