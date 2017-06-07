@@ -89,9 +89,11 @@ public class MessageWall extends WikiBasePageObject {
       jsActions.focus(messageMainBody);
     }
     String classes = driver.findElement(By.cssSelector("#wall-new-message")).getAttribute("class");
+    PageObjectLogging.log("class before wait", classes, true, driver);
     //wait.forElementPresent(By.cssSelector("#wall-new-message.focused"));
     wait.forElementPresent(By.xpath("//div[@id='wall-new-message' and contains(@class,'focused')]"));
     String classes2 = driver.findElement(By.cssSelector("#wall-new-message")).getAttribute("class");
+    PageObjectLogging.log("class after wait", classes2, true, driver);
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
