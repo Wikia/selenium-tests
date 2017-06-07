@@ -37,9 +37,9 @@ public class PlaybuzzTests extends NewTestTemplate {
   private static final String QUERY_2 = PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
-    this.topBar = new TopBar(driver);
+    this.topBar = new TopBar();
     this.navigate = new Navigate();
-    this.widget = new PlaybuzzWidgetPageObject(driver);
+    this.widget = new PlaybuzzWidgetPageObject();
   }
 
   @Test(groups = "MercuryPlaybuzzWidgetTest_001")

@@ -87,7 +87,7 @@ public class WikiBasePageObject extends BasePageObject {
   @Getter(lazy = true)
   private final ActionExplorerModal actionExplorer = new ActionExplorerModal();
   @Getter(lazy = true)
-  private final TopBar topBar = new TopBar(driver);
+  private final TopBar topBar = new TopBar();
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = "#WikiaPageHeader h1")

@@ -2,7 +2,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,10 +21,6 @@ public class PolldaddyWidgetPageObject extends WidgetPageObject {
   private static final String INCORRECT_TAG = "<polldaddy />";
   private static final String ERROR_MESSAGE =
       "Failed to render the Polldaddy widget. Please check if all required parameters are in place.";
-
-  public PolldaddyWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   protected String getTagName() {
     return TAG_NAME;
