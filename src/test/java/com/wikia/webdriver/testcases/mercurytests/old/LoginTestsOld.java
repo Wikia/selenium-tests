@@ -91,7 +91,7 @@ public class LoginTestsOld extends NewTestTemplate {
 
     driver.get(wikiURL);
 
-    new TopBar(driver).openNavigation();
+    new TopBar().openNavigation();
     new Navigation(driver).clickOnSignInRegisterButton();
 
     Assertion.assertEquals(joinPageObject.getJoinTodayText(), expectedMessage);

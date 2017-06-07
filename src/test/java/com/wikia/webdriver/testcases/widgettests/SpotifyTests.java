@@ -25,7 +25,7 @@ public class SpotifyTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new SpotifyWidgetPageObject(driver);
+    this.widget = new SpotifyWidgetPageObject();
     this.navigate = new Navigate();
   }
 

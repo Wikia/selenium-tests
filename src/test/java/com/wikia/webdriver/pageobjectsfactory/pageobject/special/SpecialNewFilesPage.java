@@ -108,6 +108,24 @@ public class SpecialNewFilesPage extends SpecialPageObject {
         "Verify if " + fileName + " has been successfully uploaded", true);
   }
 
+  public Boolean isImageOnPage(String fileName) {
+    for (int i = 0; i < 2; i++) {
+      for (WebElement image : imagesNewFiles) {
+        if (image.getAttribute("src").contains(fileName)) {
+          return true;
+        }
+      }
+      try {
+        Thread.sleep(5000);
+      } catch (InterruptedException e) {
+        PageObjectLogging.logInfo("Sleep interrupted");
+      }
+      driver.navigate().refresh();
+    }
+
+    return false;
+  }
+
   /**
    * @return name of random image on Special:NewFiles page
    */
@@ -168,7 +186,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
     return this;
   }
 
-  public String getTitle(){
+  public String getTitle() {
     return NEW_FILES_SPECIAL_PAGE_TITLE;
   }
 }

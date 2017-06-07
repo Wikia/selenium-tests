@@ -1,6 +1,37 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.google.common.base.Predicate;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -15,34 +46,14 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
 
 public class BasePageObject {
 
   private static final int TIMEOUT_PAGE_REGISTRATION = 3000;
   public final Wait wait;
-  protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   public WebDriverWait waitFor;
   public Actions builder;
+  protected WikiaWebDriver driver = DriverProvider.getActiveDriver();
   protected int timeOut = 15;
   protected UrlBuilder urlBuilder = new UrlBuilder();
   protected JavascriptActions jsActions;
@@ -56,16 +67,25 @@ public class BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  //wait for comscore to load
-  public void waitForPageLoad() {
-    wait.forElementPresent(
-        By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
-  }
-
   public static String getTimeStamp() {
     Date time = new Date();
     long timeCurrent = time.getTime();
     return String.valueOf(timeCurrent);
+  }
+
+  private static String getEmailChangeConfirmationLink(String email, String password) {
+    String mailSubject = "Confirm your email address change on FANDOM";
+    String url = EmailUtils.getActivationLinkFromEmailContent(
+        EmailUtils.getFirstEmailContent(email, password, mailSubject));
+    PageObjectLogging.log("getActivationLinkFromMail",
+        "activation link is visible in email content: " + url, true);
+    return url;
+  }
+
+  // wait for comscore to load
+  public void waitForPageLoad() {
+    wait.forElementPresent(
+        By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
   }
 
   /**
@@ -110,6 +130,21 @@ public class BasePageObject {
       return element.isDisplayed();
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo(e.getMessage());
+      return false;
+    }
+  }
+
+  /**
+   * Method to check if WebElement is displayed on the page
+   *
+   * @return true if element is displayed, otherwise return false
+   */
+
+  protected boolean isElementDisplayed(WebElement element, int timeout) {
+    try {
+      wait.forElementVisible(element, timeout);
+      return true;
+    } catch (TimeoutException e) {
       return false;
     }
   }
@@ -193,8 +228,7 @@ public class BasePageObject {
       PageObjectLogging.log("isStringInURL", "Current url contains " + givenString, true);
       return true;
     } else {
-      PageObjectLogging
-          .log("isStringInURL", "current url doesn't contain " + givenString, false);
+      PageObjectLogging.log("isStringInURL", "current url doesn't contain " + givenString, false);
       return false;
     }
   }
@@ -202,9 +236,8 @@ public class BasePageObject {
   public void verifyUrlContains(final String givenString, int timeOut) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, timeOut).until(
-          (ExpectedCondition<Boolean>) d -> d.getCurrentUrl().toLowerCase()
-              .contains(givenString.toLowerCase()));
+      new WebDriverWait(driver, timeOut).until((ExpectedCondition<Boolean>) d -> d.getCurrentUrl()
+          .toLowerCase().contains(givenString.toLowerCase()));
     } finally {
       restoreDefaultImplicitWait();
     }
@@ -226,7 +259,7 @@ public class BasePageObject {
     driver.get(url);
     if (makeScreenshot) {
       PageObjectLogging.log("Take screenshot",
-                            String.format("Screenshot After Navigation to: %s", url), true, driver);
+          String.format("Screenshot After Navigation to: %s", url), true, driver);
     }
   }
 
@@ -243,8 +276,8 @@ public class BasePageObject {
       driver.navigate().refresh();
       PageObjectLogging.log("refreshPage", "page refreshed", true);
     } catch (TimeoutException e) {
-      PageObjectLogging
-          .log("refreshPage", "page loaded for more than 30 seconds after click", true);
+      PageObjectLogging.log("refreshPage", "page loaded for more than 30 seconds after click",
+          true);
     }
   }
 
@@ -270,9 +303,10 @@ public class BasePageObject {
   protected Boolean scrollToSelector(String selector) {
     if (isElementOnPage(By.cssSelector(selector))) {
       try {
-        driver.executeScript("var x = $(arguments[0]);"
-                         + "window.scroll(0,x.position()['top']+x.height()+100);"
-                         + "$(window).trigger('scroll');", selector);
+        driver.executeScript(
+            "var x = $(arguments[0]);" + "window.scroll(0,x.position()['top']+x.height()+100);"
+                + "$(window).trigger('scroll');",
+            selector);
       } catch (WebDriverException e) {
         if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
           PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -280,19 +314,19 @@ public class BasePageObject {
       }
       return true;
     } else {
-      PageObjectLogging
-          .log("SelectorNotFound", "Selector " + selector + " not found on page", true);
+      PageObjectLogging.log("SelectorNotFound", "Selector " + selector + " not found on page",
+          true);
       return false;
     }
   }
 
   // You can get access to hidden elements by changing class
   public void unhideElementByClassChange(String elementName, String classWithoutHidden,
-                                         int... optionalIndex) {
+      int... optionalIndex) {
     int numElem = optionalIndex.length == 0 ? 0 : optionalIndex[0];
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem
-                      + "].setAttribute('class', '" + classWithoutHidden + "');");
+        + "].setAttribute('class', '" + classWithoutHidden + "');");
   }
 
   public void waitForElementNotVisibleByElement(WebElement element) {
@@ -315,31 +349,31 @@ public class BasePageObject {
   }
 
   public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute,
-                                                              String value) {
+      String value) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(
-          By.cssSelector(selector), attribute, value));
+      waitFor.until(CommonExpectedConditions
+          .valueToBePresentInElementsAttribute(By.cssSelector(selector), attribute, value));
     } finally {
       restoreDefaultImplicitWait();
     }
   }
 
   public void waitForValueToBePresentInElementsCssByCss(String selector, String cssProperty,
-                                                        String expectedValue) {
+      String expectedValue) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       waitFor.until(CommonExpectedConditions.cssValuePresentForElement(By.cssSelector(selector),
-                                                                       cssProperty, expectedValue));
+          cssProperty, expectedValue));
     } finally {
       restoreDefaultImplicitWait();
     }
   }
 
   public void waitForValueToBePresentInElementsAttributeByElement(WebElement element,
-                                                                  String attribute, String value) {
-    waitFor.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute,
-                                                                               value));
+      String attribute, String value) {
+    waitFor.until(
+        CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute, value));
   }
 
   public void waitForStringInURL(String givenString) {
@@ -389,13 +423,13 @@ public class BasePageObject {
   }
 
   public void pressDownArrow(WebElement element) {
-    driver.executeScript("var e = jQuery.Event(\"keydown\"); "
-                     + "e.which=40; $(arguments[0]).trigger(e);", element);
+    driver.executeScript(
+        "var e = jQuery.Event(\"keydown\"); " + "e.which=40; $(arguments[0]).trigger(e);", element);
   }
 
   public void setDisplayStyle(String selector, String style) {
-    driver.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector,
-                     style);
+    driver.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]",
+        selector, style);
   }
 
   private void purge(String url) throws Exception {
@@ -424,8 +458,8 @@ public class BasePageObject {
       connection.disconnect();
       connection.setRequestMethod("GET");
       connection.setRequestProperty("User-Agent",
-                                    "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) "
-                                    + "Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
+          "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) "
+              + "Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
       int status = connection.getResponseCode();
       connection.disconnect();
       return status;
@@ -483,11 +517,10 @@ public class BasePageObject {
     Point target = element.getLocation();
     if (source.x == target.x && source.y == target.y) {
       Assertion.fail("Element did not move. Old coordinate (" + source.x + "," + source.y + ") "
-                     + "New coordinate (" + target.x + "," + target.y + ")");
+          + "New coordinate (" + target.x + "," + target.y + ")");
     }
     PageObjectLogging.log("verifyElementMoved", "Element did move. From (" + source.x + ","
-                                                + source.y + ") to (" + target.x + "," + target.y
-                                                + ")", true, driver);
+        + source.y + ") to (" + target.x + "," + target.y + ")", true, driver);
   }
 
   public void verifyElementResized(Dimension source, WebElement element) {
@@ -499,11 +532,10 @@ public class BasePageObject {
 
     if (sourceWidth == targetWidth && sourceHeight == targetHeight) {
       Assertion.fail("Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight
-                     + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
+          + ") " + "New dimension (" + targetWidth + "," + targetHeight + ")");
     }
     PageObjectLogging.log("verifyElementMoved", "Element did resize. From (" + sourceWidth + ","
-                                                + sourceHeight + ") to (" + targetWidth + ","
-                                                + targetHeight + ")", true, driver);
+        + sourceHeight + ") to (" + targetWidth + "," + targetHeight + ")", true, driver);
   }
 
   public String switchToNewBrowserTab() {
@@ -518,11 +550,8 @@ public class BasePageObject {
   }
 
   private String getNewTab(String parentTab) {
-    Optional<String> newTab = driver
-      .getWindowHandles()
-      .stream()
-      .filter(handleName -> !handleName.equals(parentTab))
-      .findFirst();
+    Optional<String> newTab = driver.getWindowHandles().stream()
+        .filter(handleName -> !handleName.equals(parentTab)).findFirst();
     return newTab.orElseThrow(() -> new NotFoundException("New tab not found!"));
   }
 
@@ -541,28 +570,23 @@ public class BasePageObject {
   }
 
   private String getTabWithCondition(
-    java.util.function.Predicate<? super Pair<String, String>> condition) {
-    Optional<String> newTab = driver
-      .getWindowHandles()
-      .stream()
-      .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
-      .filter(condition)
-      .map(Pair::getKey)
-      .findFirst();
-    return newTab.orElseThrow(() -> new NotFoundException(
-      String.format("Tab with title %s doesn't exist", title)));
+      java.util.function.Predicate<? super Pair<String, String>> condition) {
+    Optional<String> newTab = driver.getWindowHandles().stream()
+        .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
+        .filter(condition).map(Pair::getKey).findFirst();
+    return newTab.orElseThrow(
+        () -> new NotFoundException(String.format("Tab with title %s doesn't exist", title)));
   }
-
 
   public WebDriver switchToWindowWithTitle(String title) {
     PageObjectLogging.log("Switching windows",
-      String.format("Switching to window with title: %s", title), true);
+        String.format("Switching to window with title: %s", title), true);
     return driver.switchTo().window(getTabWithTitle(title));
   }
 
   public WebDriver switchAwayFromWindowWithTitle(String title) {
     PageObjectLogging.log("Switching windows",
-      String.format("Switching away from window with title: %s", title), true);
+        String.format("Switching away from window with title: %s", title), true);
     return driver.switchTo().window(getOtherTab(title));
   }
 
@@ -574,7 +598,7 @@ public class BasePageObject {
     int initialTabsNumber = driver.getWindowHandles().size();
     link.click();
     new WebDriverWait(driver, TIMEOUT_PAGE_REGISTRATION)
-      .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
+        .until((Predicate<WebDriver>) input -> getTabsCount() > initialTabsNumber);
   }
 
   protected void openLinkInNewTab(WebElement link) {
@@ -609,15 +633,6 @@ public class BasePageObject {
     WebElement element = driver.findElement(By.cssSelector(elementName));
 
     return element.getLocation().getY();
-  }
-
-  private static String getEmailChangeConfirmationLink(String email, String password) {
-    String mailSubject = "Confirm your email address change on Fandom";
-    String url = EmailUtils.getActivationLinkFromEmailContent(
-      EmailUtils.getFirstEmailContent(email, password, mailSubject));
-    PageObjectLogging.log("getActivationLinkFromMail",
-      "activation link is visible in email content: " + url, true);
-    return url;
   }
 
   public void enterEmailChangeLink(String email, String password) {
