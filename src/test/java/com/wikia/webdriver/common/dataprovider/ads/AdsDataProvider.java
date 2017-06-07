@@ -1137,20 +1137,14 @@ public class AdsDataProvider {
     public static Object[][] adsVuapDesktop() {
         return new Object[][]{
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                         AdsContent.TOP_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
-                                AdsContent.TOP_LB
-                        )
+                        "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
                 },
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                         AdsContent.BOTTOM_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
-                                AdsContent.BOTTOM_LB
-                        )
+                        "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
                 }
         };
     }
