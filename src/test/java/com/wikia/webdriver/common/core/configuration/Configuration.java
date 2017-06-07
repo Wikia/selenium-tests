@@ -16,7 +16,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
 import org.yaml.snakeyaml.Yaml;
 
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.properties.Credentials;
 
 /**
@@ -133,8 +136,18 @@ public class Configuration {
     return getProp("mockAds");
   }
 
-  public static String getEmulator() {
-    return getProp("emulator");
+  public static Emulator getEmulator() {
+    Emulator emulatorToUse = Emulator.DEFAULT;
+    if (TestContext.getCurrentTestMethod().getDeclaringClass()
+        .isAnnotationPresent(InBrowser.class)) {
+      emulatorToUse = TestContext.getCurrentTestMethod().getDeclaringClass()
+          .getDeclaredAnnotation(InBrowser.class).emulator();
+    }
+    if (TestContext.getCurrentTestMethod().isAnnotationPresent(InBrowser.class)) {
+      emulatorToUse =
+          TestContext.getCurrentTestMethod().getDeclaredAnnotation(InBrowser.class).emulator();
+    }
+    return emulatorToUse;
   }
 
   public static String useMITM() {

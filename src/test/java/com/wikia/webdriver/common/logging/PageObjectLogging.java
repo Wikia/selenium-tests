@@ -77,7 +77,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
         + ".html'>HTML Source</a></td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(driver);
+    logJSError();
   }
 
   public static void log(String command, Throwable e, boolean success, WebDriver driver) {
@@ -92,7 +92,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
         + ".html'>HTML Source</a></td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(driver);
+    logJSError();
   }
 
   public static void log(String command, String description, boolean success) {
@@ -144,7 +144,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           + escapedDescription + "</td><td> <br/> &nbsp;</td></tr>");
     }
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(DriverProvider.getActiveDriver());
+    logJSError();
   }
 
   public static void logError(String command, Exception exception) {
@@ -199,9 +199,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
         + "</td><td>" + imageAsBase64 + "</td><td> <br/> &nbsp;</td></tr>"));
   }
 
-  private static void logJSError(WebDriver driver) {
+  private static void logJSError() {
     if ("true".equals(Configuration.getJSErrorsEnabled())) {
-      JavascriptExecutor js = (JavascriptExecutor) driver;
+      JavascriptExecutor js = DriverProvider.getActiveDriver();
       List<String> error =
           (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
       if (!error.isEmpty()) {
@@ -254,7 +254,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
     builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + "<a href='" + url + "'>" + url
         + "</a></td><td> <br/> &nbsp;</td></tr>");
     CommonUtils.appendTextToFile(logPath, builder.toString());
-    logJSError(driver);
+    logJSError();
   }
 
   @Override
@@ -320,7 +320,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       }
     }
 
-    logJSError(driver);
+    logJSError();
   }
 
   @Override
@@ -335,7 +335,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   @Override
   public void beforeClickOn(WebElement element, WebDriver driver) {
 
-    logJSError(driver);
+    logJSError();
   }
 
   @Override
@@ -390,7 +390,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
           + ".png'>Screenshot</a><br/><a href='screenshots/screenshot" + imageCounter
           + ".html'>HTML Source</a></td></tr>");
       CommonUtils.appendTextToFile(logPath, builder.toString());
-      logJSError(driver);
+      logJSError();
       stopLogging();
     }
   }

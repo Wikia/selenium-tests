@@ -25,7 +25,7 @@ public class WeiboTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new WeiboWidgetPageObject(driver);
+    this.widget = new WeiboWidgetPageObject();
     this.navigate = new Navigate();
   }
 

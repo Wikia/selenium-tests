@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -24,10 +23,6 @@ public class PlaybuzzWidgetPageObject extends WidgetPageObject {
       "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />",
       "<playbuzz data-item=\"b534ce26-d47f-455f-9e80-7702ee4c5c2b\" />"
   };
-
-  public PlaybuzzWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   @Override
   protected String getTagName() {

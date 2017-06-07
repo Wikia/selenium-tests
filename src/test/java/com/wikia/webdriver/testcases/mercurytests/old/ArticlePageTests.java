@@ -30,7 +30,7 @@ public class ArticlePageTests extends NewTestTemplate {
   private Loading loading;
 
   private void init() {
-    this.topBar = new TopBar(driver);
+    this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
     this.loading = new Loading(driver);
