@@ -1118,7 +1118,7 @@ public class AdsDataProvider {
                     .put("slotSize", new Dimension(360, 540))
                     .put("lineItemId", 365416332)
                     .put("src", "mobile")
-                    .build():
+                    .build()
             )
         }
     };
