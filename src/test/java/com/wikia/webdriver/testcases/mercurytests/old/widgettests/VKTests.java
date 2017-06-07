@@ -36,10 +36,10 @@ public class VKTests extends NewTestTemplate {
   private static final String QUERY_2 = VK_ONE_WIDGET_ARTICLE_NAME.substring(6);
 
   private void init() {
-    this.topBar = new TopBar(driver);
+    this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
     this.navigate = new Navigate();
-    this.widget = new VKWidgetPageObject(driver);
+    this.widget = new VKWidgetPageObject();
   }
 
   @Test(groups = "MercuryVKWidgetTest_001")

@@ -38,7 +38,8 @@ public enum User {
   COMMENTS_REGULAR_USER("ci.user.comments.username", "ci.user.comments.password", "ci.user.comments.id", "ci.user.comments.access_token"),
   FORGOTTEN_PASSWORD("ci.user.forgottenPassword.username", "ci.user.forgottenPassword.password"),
   FORGOTTEN_PASSWORD_SPACES("ci.user.forgottenPasswordSpaces.username", "ci.user.forgottenPasswordSpaces.password"),
-  CURATED_CONTENT_USER("ci.user.curated_content.username", "ci.user.curated_content.password", "ci.user.curated_content.id", "ci.user.curated_content.access_token");
+  CURATED_CONTENT_USER("ci.user.curated_content.username", "ci.user.curated_content.password", "ci.user.curated_content.id", "ci.user.curated_content.access_token"),
+  INFOBOX_BUILDER_ADMIN("ci.user.infobox_builder.username", "ci.user.infobox_builder.password", "ci.user.infobox_builder.id", "ci.user.infobox_builder.access_token");
 
   private final String userName;
 

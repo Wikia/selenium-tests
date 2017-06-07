@@ -25,7 +25,7 @@ public class PollsnackTests extends NewTestTemplate {
   private Navigate navigate;
 
   private void init() {
-    this.widget = new PollsnackWidgetPageObject(driver);
+    this.widget = new PollsnackWidgetPageObject();
     this.navigate = new Navigate();
   }
 
