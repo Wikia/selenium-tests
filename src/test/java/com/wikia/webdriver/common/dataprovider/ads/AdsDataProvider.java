@@ -1076,7 +1076,7 @@ public class AdsDataProvider {
                     .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
-             ),
+            ),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
@@ -1100,7 +1100,7 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                     .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 365404452)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
             ),
