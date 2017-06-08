@@ -21,15 +21,6 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
 
   private static final String PROJECT43_TNG_ARTICLE_LINK = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
 
-  private AdsBaseObject openPageWithVideoInLocalStorage(Page page) {
-    final AdsBaseObject ads = new AdsBaseObject(driver);
-    ads.getUrl(urlBuilder.getUrlForWiki("project43"));
-    JavascriptActions runScript = new JavascriptActions(driver);
-    runScript.execute("localStorage.setItem('" + VuapVideos.PORVATA_VAST + VuapVideos.VAST_VIDEO + ");");
-    ads.getUrl(page);
-    return ads;
-  }
-
   @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateAutoplayOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")

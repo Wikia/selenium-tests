@@ -15,7 +15,7 @@ public class AutoplayVuap {
 
   private static final String SLOT_SELECTOR_PREFIX = "#%s .";
 
-  private static final String PAUSE_CLASS_NAME = "pause-overlay ";
+  private static final String PAUSE_CLASS_NAME = "pause-overlay";
 
   private static final String REPLAY_CLASS_NAME = "replay-overlay";
 
@@ -32,6 +32,8 @@ public class AutoplayVuap {
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
 
   private static final String AD_DEFAULT_STATE_IMAGE_SELECTOR = "#background_right";
+
+  private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
@@ -100,6 +102,13 @@ public class AutoplayVuap {
     }
   }
 
+  public void playVuapVideo() {
+    if (playing) {
+      clickOnClickArea2();
+      playing = true;
+    }
+  }
+
   public void replay() {
       clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
       muted = false;
@@ -111,26 +120,23 @@ public class AutoplayVuap {
   }
 
   public void clickOnDefaultStateAdImage() {
-    clickOnAdImage(AD_DEFAULT_STATE_IMAGE_SELECTOR);
+    clickOnAdClickArea(AD_DEFAULT_STATE_IMAGE_SELECTOR);
   }
 
   public void clickOnClickArea2() {
-    clickOnAdImage(AD_TNG_CLICK_AREA_2_SELECTOR);
+    clickOnAdClickArea(AD_TNG_CLICK_AREA_2_SELECTOR);
   }
 
   public void clickOnClickArea4() {
-    clickOnAdImage(AD_TNG_CLICK_AREA_4_SELECTOR);
+    clickOnAdClickArea(AD_TNG_CLICK_AREA_4_SELECTOR);
   }
 
   public void clickOnAdImageResolvedState() {
-    clickOnAdImage(AD_RESOLVED_STATE_IMAGE_SELECTOR);
+    clickOnAdClickArea(AD_RESOLVED_STATE_IMAGE_SELECTOR);
   }
 
-  private void clickOnAdImage(String clickAreaSelector) {
-    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
-    driver.switchTo().frame(iframe);
-    driver.findElement(By.cssSelector(clickAreaSelector)).click();
-    driver.switchTo().defaultContent();
+  private void clickOnAdClickArea(String clickAreaSelector) {
+    usingAdFrame(() -> wait.forElementClickable(By.cssSelector(clickAreaSelector)).click());
   }
 
   public double getCurrentTime() {
@@ -143,6 +149,11 @@ public class AutoplayVuap {
       return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
     }
     return 0;
+  }
+
+  public double getAdSlotHeight() {
+    waitForAdToLoad();
+    return driver.findElement(By.cssSelector("#" + slot)).getSize().getHeight();
   }
 
   public double getIndicatorCurrentTime() {
@@ -176,7 +187,18 @@ public class AutoplayVuap {
   }
 
   public void waitForVideoToEnd(final long timeout) {
-    waitFor(AutoplayVuap::isOverlayVisible, timeout);
+    waitFor(AutoplayVuap::isOverlayNoVisible, timeout);
+  }
+
+  public void waitForAdToLoad() {
+    usingAdFrame(() -> wait.forElementClickable(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR)));
+  }
+
+  private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
+    new FluentWait<>(this)
+        .withTimeout(timeout, TimeUnit.SECONDS)
+        .pollingEvery(1, TimeUnit.SECONDS)
+        .until(predicate);
   }
 
   private void clickElement(final String selector) {
@@ -196,19 +218,17 @@ public class AutoplayVuap {
     return wait.forElementClickable(By.cssSelector(String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
-  private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
-    new FluentWait<>(this)
-        .withTimeout(timeout, TimeUnit.SECONDS)
-        .pollingEvery(1, TimeUnit.SECONDS)
-        .until(predicate);
-  }
-
-  private boolean isOverlayVisible() {
-    return driver.findElement(By.cssSelector(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot))).isDisplayed();
+  private boolean isOverlayNoVisible() {
+    return wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
     return EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT == getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight);
+  }
+
+  public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
+    int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
+    return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
   }
 
   private int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
@@ -226,4 +246,12 @@ public class AutoplayVuap {
     driver.switchTo().defaultContent();
     return result;
   }
+
+  private void usingAdFrame(Runnable f) {
+    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
+    driver.switchTo().frame(iframe);
+    f.run();
+    driver.switchTo().defaultContent();
+  }
+
 }
