@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
