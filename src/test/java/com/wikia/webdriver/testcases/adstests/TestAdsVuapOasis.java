@@ -34,7 +34,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
     double videoAdHeight = vuap.getVideoHieghtWhilePaused();
 
-    Assertion.assertTrue(vuap.isVideoAdBiggerThanImageAd(videoAdHeight, adSlotHeight));
+    Assertion.assertTrue(vuap.isVideoAdBiggerThanImageAd(videoAdHeight, adSlotHeight), "Video ad has wrong size");
 
     vuap.play();
 

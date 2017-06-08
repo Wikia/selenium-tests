@@ -229,13 +229,7 @@ public class AutoplayVuap {
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
     int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
-    if (percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD) {
-      return true;
-    }
-    PageObjectLogging.log("isVideoAdBiggerThanImageAdOasis",
-        "Expected percentage difference between video height and image height is not equal with "
-            + PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD + " percent", false, driver);
-    return false;
+    return (percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD);
   }
 
   private int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
