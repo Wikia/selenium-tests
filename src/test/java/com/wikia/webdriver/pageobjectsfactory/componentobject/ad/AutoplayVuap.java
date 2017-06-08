@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
@@ -202,7 +203,12 @@ public class AutoplayVuap {
   }
 
   private void clickElement(final String selector) {
-    wait.forElementClickable(By.cssSelector(selector)).click();
+    WebElement element = wait.forElementClickable(By.cssSelector(selector));
+    Actions builder = new Actions(driver);
+    builder.contextClick(element)
+        .moveToElement(element)
+        .click(element)
+        .perform();
   }
 
   private WebElement findSpeakerIcon() {
