@@ -92,7 +92,7 @@ public class WikiBasePageObject extends BasePageObject {
   @FindBy(css = "body")
   protected WebElement body;
   @FindBy(css = ".page-header__title")
-  protected WebElement wikiFirstHeader;
+  protected WebElement articleTitle;
   @FindBy(css = "#ca-edit")
   protected WebElement editButton;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
@@ -446,7 +446,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyLoginRequiredMessage() {
-    wait.forTextInElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
+    wait.forTextInElement(articleTitle, PageContent.LOGIN_REQUIRED);
     PageObjectLogging.log("LoginRequiredMessage", "Login required message in first header present",
         true, driver);
   }
@@ -459,7 +459,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyNotLoggedInMessage() {
-    wait.forTextInElement(wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE);
+    wait.forTextInElement(articleTitle, PageContent.NOT_LOGGED_IN_MESSAGE);
     PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
@@ -570,13 +570,13 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String getHeaderText() {
-    wait.forElementVisible(wikiFirstHeader);
-    return wikiFirstHeader.getText();
+    wait.forElementVisible(articleTitle);
+    return articleTitle.getText();
   }
 
   public void verifyHeader(String fileName) {
-    wait.forElementVisible(wikiFirstHeader);
-    Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
+    wait.forElementVisible(articleTitle);
+    Assertion.assertStringContains(articleTitle.getText(), fileName);
   }
 
   public void disableCaptcha() {
@@ -688,7 +688,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public Boolean isWikiFirstHeaderVisible() {
     try {
-      wait.forElementVisible(wikiFirstHeader);
+      wait.forElementVisible(articleTitle);
       return true;
     } catch(TimeoutException e) {
       PageObjectLogging.logInfo("FirstPageHeader object not visible", e);

@@ -120,8 +120,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement categorySaveButtonEnabled;
   @FindBy(css = "button.save[disabled]")
   private WebElement categorySaveButtonDisabled;
-  @FindBy(css = ".page-header__title")
-  private WebElement articleTitle;
   @FindBy(css = "#WikiWelcomeModal .close")
   private WebElement welcomeLightBoxCloseButton;
   @FindBy(css = "#WikiWelcomeModal h3")

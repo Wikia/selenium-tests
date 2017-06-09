@@ -155,7 +155,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     PortableInfobox infobox = new PortableInfobox();
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
 
-    theme.openSpecialDesignerPage(wikiURL).selectTheme(4);
+    theme.openSpecialDesignerPage(wikiURL).selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
+    theme.selectTheme(4);
     theme.submitTheme();
 
     infobox.open(PageContent.INFOBOX_2);
@@ -331,7 +332,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     ArticlePageObject article = new ArticlePageObject();
     SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
-    theme.openSpecialDesignerPage(wikiURL).selectTheme(3);
+    theme.openSpecialDesignerPage(wikiURL).selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
+    theme.selectTheme(3);
     theme.submitTheme();
 
     article.open();
