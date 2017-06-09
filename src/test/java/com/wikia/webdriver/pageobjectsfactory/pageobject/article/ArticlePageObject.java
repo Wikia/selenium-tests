@@ -19,7 +19,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Creat
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.VECreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -49,14 +48,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement pageContentContainer;
   @FindBy(css = "#mw-content-text p")
   protected WebElement articleContent;
-  @FindBy(css = ".wikia-menu-button.contribute.secondary, .contribute-button")
-  protected WebElement contributeDropdown;
   @FindBy(css = "#ca-history")
   protected WebElement historyDropdown;
-  @FindBy(css = ".wikia-menu-button.contribute.secondary .createpage")
-  protected WebElement addArticleInDropdown;
-  @FindBy(css = "#ca-edit")
-  protected WebElement editUsingClassicEditor;
   @FindBy(css = "#article-comm")
   protected WebElement commentArea;
   @FindBy(css = "#article-comm-form .loading-indicator")
@@ -67,7 +60,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected List<WebElement> articleComments;
   @FindBys(@FindBy(css = ".sub-comments .speech-bubble-message"))
   protected List<WebElement> commentReplies;
-  @FindBys(@FindBy(css = "#WikiaPageHeader .WikiaMenuElement li"))
+  @FindBys(@FindBy(css = ".page-header__contribution-buttons .wds-dropdown__content .wds-list li"))
   protected List<WebElement> editDropdownElements;
   @FindBy(css = "#WikiaArticleComments")
   protected WebElement allCommentsArea;
