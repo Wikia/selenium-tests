@@ -34,16 +34,16 @@ public class VetAddingVideoTests extends NewTestTemplate {
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     wall.clickBoldButton();
-//    mini.switchAndWrite(message);
-//    wall.setTitle(title);
-//    VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-//    VetOptionsComponentObject vetOptions =
-//        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL3);
-//    vetOptions.setCaption(PageContent.CAPTION);
-//    vetOptions.submit();
-//    mini.verifyVideoMiniEditor();
-//    wall.submit();
-//    wall.verifyPostedMessageVideo(title);
+    mini.switchAndWrite(message);
+    wall.setTitle(title);
+    VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
+    VetOptionsComponentObject vetOptions =
+        vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL3);
+    vetOptions.setCaption(PageContent.CAPTION);
+    vetOptions.submit();
+    mini.verifyVideoMiniEditor();
+    wall.submit();
+    wall.verifyPostedMessageVideo(title);
   }
 
   @Test(groups = {"VetAddVideo_002"})

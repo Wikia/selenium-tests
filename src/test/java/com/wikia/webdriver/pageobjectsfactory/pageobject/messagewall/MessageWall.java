@@ -88,7 +88,6 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    //scrollTo(newWallMessageTextBox);
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
