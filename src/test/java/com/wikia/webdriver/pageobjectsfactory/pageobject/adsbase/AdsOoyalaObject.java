@@ -22,15 +22,15 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final String PATTERN_DFP_PREROLL =
       "^https://pubads.g.doubleclick\\.net\\/gampad\\/ads(.*)pos%3DFEATURED_VIDEO(.*)src%3Dpremium(.*)";
 
-  private static final String ARTICLE_VIDEO_ID = "ooyala-article-video";
-  private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = "#ooyala-article-video > .innerWrapper";
-  private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = "#ooyala-article-video .oo-state-screen-selectable";
+  private static final String ARTICLE_VIDEO_CLASS = "ooyala-article-video";
+  private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
+  private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video .oo-state-screen-selectable";
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
   @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
   private WebElement articleVideoWrapper;
-  @FindBy(id = ARTICLE_VIDEO_ID)
+  @FindBy(className = ARTICLE_VIDEO_CLASS)
   private WebElement articleVideo;
   @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
   private WebElement articleVideoClickArea;
@@ -50,7 +50,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyPlayerOnPage() {
-    wait.forElementPresent(By.id(ARTICLE_VIDEO_ID));
+    wait.forElementPresent(By.className(ARTICLE_VIDEO_CLASS));
   }
 
   public void verifyPremiumPrerollRequest(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {

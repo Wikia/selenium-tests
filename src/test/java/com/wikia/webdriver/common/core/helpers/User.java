@@ -39,7 +39,8 @@ public enum User {
   FORGOTTEN_PASSWORD("ci.user.forgottenPassword.username", "ci.user.forgottenPassword.password"),
   FORGOTTEN_PASSWORD_SPACES("ci.user.forgottenPasswordSpaces.username", "ci.user.forgottenPasswordSpaces.password"),
   MW119_ADMINISTRATOR("ci.user.mw_admin.username", "ci.user.mw_admin_password", "ci.user.mw_admin.user_id", "ci.user.mw_admin.access_token"),
-  CURATED_CONTENT_USER("ci.user.curated_content.username", "ci.user.curated_content.password", "ci.user.curated_content.id", "ci.user.curated_content.access_token");
+  CURATED_CONTENT_USER("ci.user.curated_content.username", "ci.user.curated_content.password", "ci.user.curated_content.id", "ci.user.curated_content.access_token"),
+  INFOBOX_BUILDER_ADMIN("ci.user.infobox_builder.username", "ci.user.infobox_builder.password", "ci.user.infobox_builder.id", "ci.user.infobox_builder.access_token");
 
   private final String userName;
 

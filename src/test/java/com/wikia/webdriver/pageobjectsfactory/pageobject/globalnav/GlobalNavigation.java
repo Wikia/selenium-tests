@@ -152,7 +152,7 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isFandomLogoVisible() {
-    return isElementDisplayed(fandomLogo);
+    return isElementDisplayed(fandomLogo, 3);
   }
 
   public boolean isUserLoggedOut() {
@@ -160,46 +160,46 @@ public class GlobalNavigation extends BasePageObject {
   }
 
   public boolean isGamesHubVisible() {
-    return isElementDisplayed(gamesHubLink);
+    return isElementDisplayed(gamesHubLink, 3);
   }
 
   public boolean isMoviesHubVisible() {
-    return isElementDisplayed(moviesHubLink);
+    return isElementDisplayed(moviesHubLink, 3);
   }
 
   public boolean isTVHubVisible() {
-    return isElementDisplayed(tvHubLink);
+    return isElementDisplayed(tvHubLink, 3);
   }
 
   public boolean isWikisMenuVisible() {
-    return isElementDisplayed(wikisMenu);
+    return isElementDisplayed(wikisMenu,3 );
   }
 
   public boolean isSearchInputVisible() {
-    return isElementDisplayed(searchInput);
+    return isElementDisplayed(searchInput, 3);
   }
 
   public boolean isUserAvatarVisible() {
-    return isElementDisplayed(userAvatar);
+    return isElementDisplayed(userAvatar, 3);
   }
 
   public boolean isNotificationsIconVisible() {
-    return isElementDisplayed(notificationsIcon);
+    return isElementDisplayed(notificationsIcon, 3);
   }
 
   public boolean isAccountMenuVisible() {
-    return isElementDisplayed(accountMenu);
+    return isElementDisplayed(accountMenu, 3);
   }
 
   public boolean isStartWikiButtonVisible() {
-    return isElementDisplayed(startWikiButton);
+    return isElementDisplayed(startWikiButton, 3);
   }
 
   public boolean isCommunityCentralLinkVisible() {
-    return isElementDisplayed(communityCentralLink);
+    return isElementDisplayed(communityCentralLink, 3);
   }
 
   public boolean isPartnerSlotLinkVisible() {
-    return isElementDisplayed(partnerSlotLink);
+    return isElementDisplayed(partnerSlotLink ,3);
   }
 }

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -24,10 +23,6 @@ public class ApesterWidgetPageObject extends WidgetPageObject {
       "<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />",
       "<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />"
   };
-
-  public ApesterWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   @Override
   protected String getTagName() {

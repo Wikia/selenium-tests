@@ -27,6 +27,6 @@ public class CuratedContentModal extends NewTestTemplate {
     CuratedContentToolModal modal = main.clickCuratedContentToolButton();
 
     Assertion.assertTrue(modal.isModalVisible());
-    Assertion.assertFalse(new TopBar(driver).isNavigationBarVisible());
+    Assertion.assertFalse(new TopBar().isNavigationBarVisible());
   }
 }
