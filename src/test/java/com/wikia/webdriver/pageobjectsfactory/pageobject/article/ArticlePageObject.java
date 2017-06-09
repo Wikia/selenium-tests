@@ -797,7 +797,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyCreateAPageEditor(Editor expectedEditor, String articleName) {
+  public void verifyCreateAPageEditor(Editor expectedEditor) {
     switch (expectedEditor) {
       case VE:
         VisualEditorPageObject ve = openVEModeWithMainEditButton();
@@ -810,7 +810,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         ck.clickPublishButton();
         break;
       case SRC:
-        SourceEditModePageObject src = createArticleInSrcUsingDropdown(articleName);
+        SourceEditModePageObject src = openSrcModeWithMainEditButtonDropdown();
         src.verifySourceOnlyMode();
         src.clickPublishButton();
         break;

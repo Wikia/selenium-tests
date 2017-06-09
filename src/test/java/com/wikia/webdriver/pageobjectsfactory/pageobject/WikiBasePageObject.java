@@ -281,6 +281,14 @@ public class WikiBasePageObject extends BasePageObject {
     return new SourceEditModePageObject(driver);
   }
 
+  public SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
+    this.openArticleEditDropdown();
+    editButton.click();
+    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
+                          driver);
+    return new SourceEditModePageObject(driver);
+  }
+
   public VisualEditModePageObject openCKModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();

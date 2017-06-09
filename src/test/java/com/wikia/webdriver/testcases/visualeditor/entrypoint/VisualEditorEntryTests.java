@@ -48,7 +48,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.open(articleName);
-    article.verifyCreateAPageEditor(expectedEditor, articleName);
+    article.verifyCreateAPageEditor(expectedEditor);
   }
 
   @Test(
