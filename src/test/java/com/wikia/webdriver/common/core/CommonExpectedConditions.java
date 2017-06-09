@@ -2,19 +2,14 @@ package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-
-import org.openqa.selenium.By;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -62,6 +57,7 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver from) {
         try {
           String elementsAttributeValue = element.getAttribute(attribute);
+          PageObjectLogging.log("class in wait", elementsAttributeValue, true);
           return elementsAttributeValue.contains(value);
         } catch (StaleElementReferenceException e) {
           return null;
