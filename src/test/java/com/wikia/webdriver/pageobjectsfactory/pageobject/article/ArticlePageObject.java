@@ -44,8 +44,6 @@ import java.util.List;
 
 public class ArticlePageObject extends WikiBasePageObject {
 
-  @FindBy(css = "#WikiaPageHeader h1")
-  protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
   protected WebElement articleContentContainer;
   @FindBy(css = "#WikiaMainContentContainer")
@@ -136,7 +134,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement categorySaveButtonEnabled;
   @FindBy(css = "button.save[disabled]")
   private WebElement categorySaveButtonDisabled;
-  @FindBy(css = ".WikiaPageHeader h1")
+  @FindBy(css = ".page-header__title")
   private WebElement articleTitle;
   @FindBy(css = "#WikiWelcomeModal .close")
   private WebElement welcomeLightBoxCloseButton;
@@ -204,8 +202,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyArticleTitle(String title) {
-    wait.forElementVisible(articleHeader);
-    Assertion.assertEquals(articleHeader.getText(), title);
+    wait.forElementVisible(articleTitle);
+    Assertion.assertEquals(articleTitle.getText(), title);
   }
 
   public void verifyContent(String content) {
@@ -399,13 +397,13 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public String getArticleName() {
-    String articleName = articleHeader.getText();
+    String articleName = articleTitle.getText();
     PageObjectLogging.log("getArticleName", "the name of the article is: " + articleName, true);
     return articleName;
   }
 
   public void verifyDropdownForAdmin() {
-    articleEditDropdown.click();
+    this.openArticleEditDropdown();
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(deleteDropdown);
     wait.forElementVisible(historyDropdown);
@@ -416,7 +414,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForUser() {
-    articleEditDropdown.click();
+    this.openArticleEditDropdown();
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(veEditButton);
@@ -425,7 +423,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForAnon() {
-    articleEditDropdown.click();
+    this.openArticleEditDropdown();
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 2);

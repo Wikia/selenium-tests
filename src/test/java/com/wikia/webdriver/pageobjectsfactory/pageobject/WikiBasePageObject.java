@@ -49,6 +49,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class WikiBasePageObject extends BasePageObject {
   private final TopBar topBar = new TopBar();
   @FindBy(css = "body")
   protected WebElement body;
-  @FindBy(css = "#WikiaPageHeader h1")
+  @FindBy(css = ".page-header__title")
   protected WebElement wikiFirstHeader;
   @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
@@ -100,7 +101,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement cssMinorEdit;
   @FindBy(css = "#ca-watch")
   protected WebElement followButton;
-  @FindBy(css = "#WikiaMainContent .drop img")
+  @FindBy(css = ".page-header__contribution-buttons .wds-button-group .wds-dropdown")
   protected WebElement articleEditDropdown;
   @FindBy(css = "#ca-delete")
   protected WebElement deleteDropdown;
@@ -535,17 +536,21 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public RenamePageObject renameUsingDropdown() {
-    articleEditDropdown.click();
+    this.openArticleEditDropdown();
     wait.forElementVisible(renameDropdown);
     renameDropdown.click();
     return new RenamePageObject(driver);
   }
 
   public DeletePageObject deleteUsingDropdown() {
-    articleEditDropdown.click();
+    this.openArticleEditDropdown();
     wait.forElementVisible(deleteDropdown);
     scrollAndClick(deleteDropdown);
     return new DeletePageObject(driver);
+  }
+
+  public void openArticleEditDropdown() {
+    new Actions(driver).moveToElement(articleEditDropdown).perform();
   }
 
   public String getHeaderText() {
