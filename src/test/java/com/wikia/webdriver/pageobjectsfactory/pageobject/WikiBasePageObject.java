@@ -93,7 +93,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement body;
   @FindBy(css = ".page-header__title")
   protected WebElement wikiFirstHeader;
-  @FindBy(css = "#WikiaMainContent a[data-id='edit']")
+  @FindBy(css = "#ca-edit")
   protected WebElement editButton;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
   protected WebElement cssEditSummary;
@@ -286,6 +286,14 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
+    return new VisualEditModePageObject();
+  }
+
+  public VisualEditModePageObject openCKModeWithMainEditButtonDropdown() {
+    this.openArticleEditDropdown();
+    editButton.click();
+    PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
+                          driver);
     return new VisualEditModePageObject();
   }
 

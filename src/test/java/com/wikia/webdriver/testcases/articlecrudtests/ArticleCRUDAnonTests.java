@@ -44,7 +44,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     ArticlePageObject article = new ArticlePageObject().open(articleTitle);
-    VisualEditorPageObject ve = article.createArticleInVEUsingEditButton();
+    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     article = ve.clickVEEditAndPublish(articleContent);
@@ -79,7 +79,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   public void articleCRUDAnon_editDropdown() {
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open("AnonEditDropdown" + "?AbTest.ADD_NEW_PAGE=CONTROL1");
-    VisualEditModePageObject visualEditMode = article.editArticleInCKUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButtonDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitExpectingNotification().submitArticle();
     article.verifyContent(articleContent);

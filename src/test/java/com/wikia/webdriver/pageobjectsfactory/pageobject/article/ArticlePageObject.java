@@ -272,13 +272,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new CreateArticleModalComponentObject(driver);
   }
 
-  public VisualEditorPageObject createArticleInVEUsingEditButton() {
-    wait.forElementClickable(veEditButton).click();
-    PageObjectLogging.logInfo("VE edit button clicked");
-
-    return new VisualEditorPageObject();
-  }
-
   public VisualEditModePageObject editArticleInRTEUsingDropdown() {
     scrollAndClick(openEditDropdown);
     wait.forElementVisible(editUsingClassicEditor);
@@ -829,7 +822,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyCreateAPageEditor(Editor expectedEditor, String articleName) {
     switch (expectedEditor) {
       case VE:
-        VisualEditorPageObject ve = createArticleInVEUsingEditButton();
+        VisualEditorPageObject ve = openVEModeWithMainEditButton();
         ve.verifyVEToolBarPresent();
         ve.verifyEditorSurfacePresent();
         break;
@@ -915,12 +908,5 @@ public class ArticlePageObject extends WikiBasePageObject {
         throw new NoSuchElementException(
             "Invalid expected editor chosen: " + expectedEditor.name());
     }
-  }
-
-  public VisualEditModePageObject editArticleInCKUsingDropdown() {
-    contributeDropdown.click();
-    wait.forElementVisible(editArticleInDropDown);
-    editArticleInDropDown.click();
-    return new VisualEditModePageObject();
   }
 }
