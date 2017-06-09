@@ -40,11 +40,11 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ArticleCRUDAnon_003"})
-  public void articleCRUDAnon_addDropdown() {
+  public void articleCRUDAnon_editButton() {
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open("AnonAddDropdown");
-    VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
+    ArticlePageObject article = new ArticlePageObject().open(articleTitle);
+    VisualEditorPageObject ve = article.createArticleInVEUsingEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
     article = ve.clickVEEditAndPublish(articleContent);

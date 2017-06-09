@@ -272,14 +272,10 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new CreateArticleModalComponentObject(driver);
   }
 
-  public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
-    wait.forElementVisible(contributeDropdown);
-    scrollAndClick(contributeDropdown);
-    wait.forElementVisible(addArticleInDropdown);
-    scrollAndClick(addArticleInDropdown);
-    wait.forElementVisible(articleTitleInputModal);
-    articleTitleInputModal.sendKeys(articleTitle);
-    scrollAndClick(submitModal);
+  public VisualEditorPageObject createArticleInVEUsingEditButton() {
+    wait.forElementClickable(veEditButton).click();
+    PageObjectLogging.logInfo("VE edit button clicked");
+
     return new VisualEditorPageObject();
   }
 
@@ -833,7 +829,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public void verifyCreateAPageEditor(Editor expectedEditor, String articleName) {
     switch (expectedEditor) {
       case VE:
-        VisualEditorPageObject ve = createArticleInVEUsingDropdown(articleName);
+        VisualEditorPageObject ve = createArticleInVEUsingEditButton();
         ve.verifyVEToolBarPresent();
         ve.verifyEditorSurfacePresent();
         break;
