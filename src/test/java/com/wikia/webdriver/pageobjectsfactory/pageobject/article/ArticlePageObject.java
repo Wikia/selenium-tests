@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
@@ -56,12 +55,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected WebElement historyDropdown;
   @FindBy(css = ".wikia-menu-button.contribute.secondary .createpage")
   protected WebElement addArticleInDropdown;
-  @FindBy(css = ".wikia-menu-button.contribute.secondary a[data-id='edit']")
-  protected WebElement editArticleInDropDown;
-  @FindBy(css = "#wpCreatePageDialogTitle")
-  protected WebElement articleTitleInputModal;
-  @FindBy(css = "#CreatePageModalDialog .primary")
-  protected WebElement submitModal;
   @FindBy(css = "#ca-edit")
   protected WebElement editUsingClassicEditor;
   @FindBy(css = "#article-comm")
@@ -150,12 +143,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement thumbnailImageArticle;
   @FindBy(css = ".wikia-menu-button")
   private WebElement articleEditButton;
-  @FindBy(css = "#WikiaPageHeader .chevron")
-  private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
-  @FindBy(css = ".portable-infobox")
-  private PortableInfobox portableInfobox;
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
@@ -234,27 +223,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     }
     wait.forElementVisible(articleEditButton);
     Assertion.assertTrue(isPresent, "text is not present in the article");
-  }
-
-  public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
-    contributeDropdown.click();
-    wait.forElementVisible(addArticleInDropdown);
-    CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
-    articleModal.createPageWithBlankLayout(articleTitle);
-    return new SourceEditModePageObject(driver);
-  }
-
-  private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {
-    wait.forElementClickable(addArticleInDropdown);
-    addArticleInDropdown.click();
-    return new CreateArticleModalComponentObject(driver);
-  }
-
-  public VisualEditModePageObject editArticleInRTEUsingDropdown() {
-    scrollAndClick(openEditDropdown);
-    wait.forElementVisible(editUsingClassicEditor);
-    scrollAndClick(editUsingClassicEditor);
-    return new VisualEditModePageObject();
   }
 
   public MiniEditorComponentObject triggerCommentArea() {

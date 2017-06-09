@@ -92,7 +92,7 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButtonDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
