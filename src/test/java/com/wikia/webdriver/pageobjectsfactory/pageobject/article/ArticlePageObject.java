@@ -236,28 +236,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     Assertion.assertTrue(isPresent, "text is not present in the article");
   }
 
-  public void verifyStyleFromVE(Style style, String content) {
-    waitForElementNotVisibleByElement(veMode);
-    List<WebElement> elements = articleContentContainer.findElements(style.getTag());
-    boolean isPresent = false;
-    for (WebElement elem : elements) {
-      if (elem.getText().equals(content)) {
-        isPresent = true;
-        break;
-      }
-    }
-    wait.forElementVisible(articleEditButton);
-    Assertion.assertTrue(isPresent, "text is not present in the article");
-  }
-
-  public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
-    scrollAndClick(contributeDropdown);
-    wait.forElementVisible(addArticleInDropdown);
-    CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
-    articleModal.createPageWithBlankLayout(articleTitle);
-    return new VisualEditModePageObject();
-  }
-
   public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
     contributeDropdown.click();
     wait.forElementVisible(addArticleInDropdown);
@@ -827,7 +805,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         ve.verifyEditorSurfacePresent();
         break;
       case CK:
-        VisualEditModePageObject ck = createArticleInCKUsingDropdown(articleName);
+        VisualEditModePageObject ck = openCKModeWithMainEditButtonDropdown();
         Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;

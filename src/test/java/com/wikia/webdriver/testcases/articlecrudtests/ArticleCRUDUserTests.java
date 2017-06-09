@@ -46,13 +46,13 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
   @Execute(asUser = User.USER)
-  public void ArticleCRUDUser_003_addDropdown() {
+  public void ArticleCRUDUser_003_addEditButton() {
     new ArticleContent().clear();
 
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open(TestContext.getCurrentMethodName() + "?AbTest.ADD_NEW_PAGE=CONTROL1");
-    VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
+    ArticlePageObject article = new ArticlePageObject().open(articleTitle + "?AbTest.ADD_NEW_PAGE=CONTROL1");
+    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButton();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
