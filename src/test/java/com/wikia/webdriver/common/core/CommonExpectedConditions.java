@@ -2,7 +2,6 @@ package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -57,7 +56,7 @@ public class CommonExpectedConditions {
       public Boolean apply(WebDriver from) {
         try {
           String elementsAttributeValue = element.getAttribute(attribute);
-          PageObjectLogging.log("class in wait", elementsAttributeValue, true);
+//          PageObjectLogging.log("class in wait", elementsAttributeValue, true);
           return elementsAttributeValue.contains(value);
         } catch (StaleElementReferenceException e) {
           return null;
