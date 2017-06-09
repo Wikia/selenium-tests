@@ -87,7 +87,7 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_006"})
   @Execute(asUser = User.USER)
-  public void ArticleCRUDUser_006_editDropdown() {
+  public void ArticleCRUDUser_006_editEditDropdown() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     String articleContent = PageContent.ARTICLE_TEXT;
