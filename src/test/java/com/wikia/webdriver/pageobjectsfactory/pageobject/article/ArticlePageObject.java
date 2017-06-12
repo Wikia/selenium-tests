@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.interactions.Typing;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
@@ -19,6 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Creat
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.VECreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.PortableInfobox;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
@@ -42,14 +44,28 @@ import java.util.List;
 
 public class ArticlePageObject extends WikiBasePageObject {
 
+  @FindBy(css = "#WikiaPageHeader h1")
+  protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
   protected WebElement articleContentContainer;
   @FindBy(css = "#WikiaMainContentContainer")
   protected WebElement pageContentContainer;
   @FindBy(css = "#mw-content-text p")
   protected WebElement articleContent;
+  @FindBy(css = ".wikia-menu-button.contribute.secondary, .contribute-button")
+  protected WebElement contributeDropdown;
   @FindBy(css = "#ca-history")
   protected WebElement historyDropdown;
+  @FindBy(css = ".wikia-menu-button.contribute.secondary .createpage")
+  protected WebElement addArticleInDropdown;
+  @FindBy(css = ".wikia-menu-button.contribute.secondary a[data-id='edit']")
+  protected WebElement editArticleInDropDown;
+  @FindBy(css = "#wpCreatePageDialogTitle")
+  protected WebElement articleTitleInputModal;
+  @FindBy(css = "#CreatePageModalDialog .primary")
+  protected WebElement submitModal;
+  @FindBy(css = "#ca-edit")
+  protected WebElement editUsingClassicEditor;
   @FindBy(css = "#article-comm")
   protected WebElement commentArea;
   @FindBy(css = "#article-comm-form .loading-indicator")
@@ -60,7 +76,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   protected List<WebElement> articleComments;
   @FindBys(@FindBy(css = ".sub-comments .speech-bubble-message"))
   protected List<WebElement> commentReplies;
-  @FindBys(@FindBy(css = ".page-header__contribution-buttons .wds-dropdown__content .wds-list li"))
+  @FindBys(@FindBy(css = "#WikiaPageHeader .WikiaMenuElement li"))
   protected List<WebElement> editDropdownElements;
   @FindBy(css = "#WikiaArticleComments")
   protected WebElement allCommentsArea;
@@ -120,6 +136,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement categorySaveButtonEnabled;
   @FindBy(css = "button.save[disabled]")
   private WebElement categorySaveButtonDisabled;
+  @FindBy(css = ".WikiaPageHeader h1")
+  private WebElement articleTitle;
   @FindBy(css = "#WikiWelcomeModal .close")
   private WebElement welcomeLightBoxCloseButton;
   @FindBy(css = "#WikiWelcomeModal h3")
@@ -128,14 +146,18 @@ public class ArticlePageObject extends WikiBasePageObject {
   private List<WebElement> categorySuggestionsListItems;
   @FindBy(css = ".article-table")
   private WebElement table;
-  @FindBy(css = ".wds-community-header__sitename a")
+  @FindBy(css = ".WikiHeader > h2 > a")
   private WebElement wikiNameHeader;
   @FindBy(css = "#mw-content-text img.thumbimage")
   private WebElement thumbnailImageArticle;
   @FindBy(css = ".wikia-menu-button")
   private WebElement articleEditButton;
+  @FindBy(css = "#WikiaPageHeader .chevron")
+  private WebElement openEditDropdown;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
+  @FindBy(css = ".portable-infobox")
+  private PortableInfobox portableInfobox;
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
@@ -182,8 +204,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyArticleTitle(String title) {
-    wait.forElementVisible(articleTitle);
-    Assertion.assertEquals(articleTitle.getText(), title);
+    wait.forElementVisible(articleHeader);
+    Assertion.assertEquals(articleHeader.getText(), title);
   }
 
   public void verifyContent(String content) {
@@ -214,6 +236,60 @@ public class ArticlePageObject extends WikiBasePageObject {
     }
     wait.forElementVisible(articleEditButton);
     Assertion.assertTrue(isPresent, "text is not present in the article");
+  }
+
+  public void verifyStyleFromVE(Style style, String content) {
+    waitForElementNotVisibleByElement(veMode);
+    List<WebElement> elements = articleContentContainer.findElements(style.getTag());
+    boolean isPresent = false;
+    for (WebElement elem : elements) {
+      if (elem.getText().equals(content)) {
+        isPresent = true;
+        break;
+      }
+    }
+    wait.forElementVisible(articleEditButton);
+    Assertion.assertTrue(isPresent, "text is not present in the article");
+  }
+
+  public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
+    scrollAndClick(contributeDropdown);
+    wait.forElementVisible(addArticleInDropdown);
+    CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+    articleModal.createPageWithBlankLayout(articleTitle);
+    return new VisualEditModePageObject();
+  }
+
+  public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
+    contributeDropdown.click();
+    wait.forElementVisible(addArticleInDropdown);
+    CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+    articleModal.createPageWithBlankLayout(articleTitle);
+    return new SourceEditModePageObject(driver);
+  }
+
+  private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {
+    wait.forElementClickable(addArticleInDropdown);
+    addArticleInDropdown.click();
+    return new CreateArticleModalComponentObject(driver);
+  }
+
+  public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
+    wait.forElementVisible(contributeDropdown);
+    scrollAndClick(contributeDropdown);
+    wait.forElementVisible(addArticleInDropdown);
+    scrollAndClick(addArticleInDropdown);
+    wait.forElementVisible(articleTitleInputModal);
+    articleTitleInputModal.sendKeys(articleTitle);
+    scrollAndClick(submitModal);
+    return new VisualEditorPageObject();
+  }
+
+  public VisualEditModePageObject editArticleInRTEUsingDropdown() {
+    scrollAndClick(openEditDropdown);
+    wait.forElementVisible(editUsingClassicEditor);
+    scrollAndClick(editUsingClassicEditor);
+    return new VisualEditModePageObject();
   }
 
   public MiniEditorComponentObject triggerCommentArea() {
@@ -323,13 +399,13 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public String getArticleName() {
-    String articleName = articleTitle.getText();
+    String articleName = articleHeader.getText();
     PageObjectLogging.log("getArticleName", "the name of the article is: " + articleName, true);
     return articleName;
   }
 
   public void verifyDropdownForAdmin() {
-    this.openArticleEditDropdown();
+    articleEditDropdown.click();
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(deleteDropdown);
     wait.forElementVisible(historyDropdown);
@@ -340,7 +416,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForUser() {
-    this.openArticleEditDropdown();
+    articleEditDropdown.click();
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(renameDropdown);
     wait.forElementVisible(veEditButton);
@@ -349,7 +425,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public void verifyDropdownForAnon() {
-    this.openArticleEditDropdown();
+    articleEditDropdown.click();
     wait.forElementVisible(historyDropdown);
     wait.forElementVisible(veEditButton);
     Assertion.assertEquals(editDropdownElements.size(), 2);
@@ -756,20 +832,20 @@ public class ArticlePageObject extends WikiBasePageObject {
     }
   }
 
-  public void verifyCreateAPageEditor(Editor expectedEditor) {
+  public void verifyCreateAPageEditor(Editor expectedEditor, String articleName) {
     switch (expectedEditor) {
       case VE:
-        VisualEditorPageObject ve = openVEModeWithMainEditButton();
+        VisualEditorPageObject ve = createArticleInVEUsingDropdown(articleName);
         ve.verifyVEToolBarPresent();
         ve.verifyEditorSurfacePresent();
         break;
       case CK:
-        VisualEditModePageObject ck = openCKModeWithMainEditButtonDropdown();
+        VisualEditModePageObject ck = createArticleInCKUsingDropdown(articleName);
         Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
         ck.clickPublishButton();
         break;
       case SRC:
-        SourceEditModePageObject src = openSrcModeWithMainEditButtonDropdown();
+        SourceEditModePageObject src = createArticleInSrcUsingDropdown(articleName);
         src.verifySourceOnlyMode();
         src.clickPublishButton();
         break;
@@ -845,5 +921,12 @@ public class ArticlePageObject extends WikiBasePageObject {
         throw new NoSuchElementException(
             "Invalid expected editor chosen: " + expectedEditor.name());
     }
+  }
+
+  public VisualEditModePageObject editArticleInCKUsingDropdown() {
+    contributeDropdown.click();
+    wait.forElementVisible(editArticleInDropDown);
+    editArticleInDropDown.click();
+    return new VisualEditModePageObject();
   }
 }

@@ -8,7 +8,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.EditorPref;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 import org.testng.annotations.Test;
@@ -44,11 +43,11 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   ) {
     wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
     ArticlePageObject article = new ArticlePageObject();
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + BasePageObject.getTimeStamp();
+    String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
     article.loginAs(credentials.getUserBaseOnEditorPref(editorPref),
         credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
     article.open(articleName);
-    article.verifyCreateAPageEditor(expectedEditor);
+    article.verifyCreateAPageEditor(expectedEditor, articleName);
   }
 
   @Test(

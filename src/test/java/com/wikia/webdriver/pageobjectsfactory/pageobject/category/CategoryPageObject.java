@@ -12,12 +12,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class CategoryPageObject extends WikiBasePageObject {
 
+  @FindBy(css = "#WikiaPageHeader h1")
+  private WebElement categoryHeader;
   @FindBy(css = ".category-gallery-item")
   private List<WebElement> categoryGalleryItems;
 
   public String getCategoryPageTitle() {
-    wait.forElementVisible(this.articleTitle);
-    String title = articleTitle.getText();
+    wait.forElementVisible(categoryHeader);
+    String title = categoryHeader.getText();
     PageObjectLogging.log("getCategoryname", "the name of the category is: " + title, true);
 
     return title;

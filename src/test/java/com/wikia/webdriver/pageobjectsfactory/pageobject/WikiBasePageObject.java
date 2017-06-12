@@ -49,7 +49,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import java.util.ArrayList;
@@ -91,9 +90,9 @@ public class WikiBasePageObject extends BasePageObject {
   private final TopBar topBar = new TopBar();
   @FindBy(css = "body")
   protected WebElement body;
-  @FindBy(css = ".page-header__title")
-  protected WebElement articleTitle;
-  @FindBy(css = "#ca-edit")
+  @FindBy(css = "#WikiaPageHeader h1")
+  protected WebElement wikiFirstHeader;
+  @FindBy(css = "#WikiaMainContent a[data-id='edit']")
   protected WebElement editButton;
   @FindBy(css = "ul#pagehistory > li:first-child .comment")
   protected WebElement cssEditSummary;
@@ -101,7 +100,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement cssMinorEdit;
   @FindBy(css = "#ca-watch")
   protected WebElement followButton;
-  @FindBy(css = ".page-header__contribution-buttons .wds-button-group .wds-dropdown")
+  @FindBy(css = "#WikiaMainContent .drop img")
   protected WebElement articleEditDropdown;
   @FindBy(css = "#ca-delete")
   protected WebElement deleteDropdown;
@@ -281,27 +280,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new SourceEditModePageObject(driver);
   }
 
-  public SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
-    this.openArticleEditDropdown();
-    editButton.click();
-    PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
-                          driver);
-    return new SourceEditModePageObject(driver);
-  }
-
   public VisualEditModePageObject openCKModeWithMainEditButton() {
     wait.forElementVisible(editButton);
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
-    return new VisualEditModePageObject();
-  }
-
-  public VisualEditModePageObject openCKModeWithMainEditButtonDropdown() {
-    this.openArticleEditDropdown();
-    editButton.click();
-    PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
-                          driver);
     return new VisualEditModePageObject();
   }
 
@@ -446,7 +429,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyLoginRequiredMessage() {
-    wait.forTextInElement(articleTitle, PageContent.LOGIN_REQUIRED);
+    wait.forTextInElement(wikiFirstHeader, PageContent.LOGIN_REQUIRED);
     PageObjectLogging.log("LoginRequiredMessage", "Login required message in first header present",
         true, driver);
   }
@@ -459,7 +442,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyNotLoggedInMessage() {
-    wait.forTextInElement(articleTitle, PageContent.NOT_LOGGED_IN_MESSAGE);
+    wait.forTextInElement(wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE);
     PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
   }
 
@@ -552,31 +535,27 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public RenamePageObject renameUsingDropdown() {
-    this.openArticleEditDropdown();
+    articleEditDropdown.click();
     wait.forElementVisible(renameDropdown);
     renameDropdown.click();
     return new RenamePageObject(driver);
   }
 
   public DeletePageObject deleteUsingDropdown() {
-    this.openArticleEditDropdown();
+    articleEditDropdown.click();
     wait.forElementVisible(deleteDropdown);
     scrollAndClick(deleteDropdown);
     return new DeletePageObject(driver);
   }
 
-  public void openArticleEditDropdown() {
-    new Actions(driver).moveToElement(articleEditDropdown).perform();
-  }
-
   public String getHeaderText() {
-    wait.forElementVisible(articleTitle);
-    return articleTitle.getText();
+    wait.forElementVisible(wikiFirstHeader);
+    return wikiFirstHeader.getText();
   }
 
   public void verifyHeader(String fileName) {
-    wait.forElementVisible(articleTitle);
-    Assertion.assertStringContains(articleTitle.getText(), fileName);
+    wait.forElementVisible(wikiFirstHeader);
+    Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
   }
 
   public void disableCaptcha() {
@@ -688,7 +667,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public Boolean isWikiFirstHeaderVisible() {
     try {
-      wait.forElementVisible(articleTitle);
+      wait.forElementVisible(wikiFirstHeader);
       return true;
     } catch(TimeoutException e) {
       PageObjectLogging.logInfo("FirstPageHeader object not visible", e);

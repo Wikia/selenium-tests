@@ -115,6 +115,16 @@ public class NonSpecificMapTests extends NewTestTemplate {
     selectedMap.verifyMapOpened();
   }
 
+  @Test(enabled = false,
+      groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
+  @Execute(asUser = User.USER)
+  public void NonSpecificMapTests_009_VerifyCreateMapButtonUnderContribution() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+    CreateAMapComponentObject createMap = specialMaps.clickCreateAMapUnderContributeButton();
+    createMap.verifyRealMapAndCustomMapButtons();
+  }
+
   @Test(groups = {"NonSpecificMapTests_010", "NonSpecificMapTests", "InteractiveMaps"})
   @DontRun(env = {"dev", "sandbox", "preview"})
   public void NonSpecificMapTests_010_VerifyFragmentContentTagVisibility() {

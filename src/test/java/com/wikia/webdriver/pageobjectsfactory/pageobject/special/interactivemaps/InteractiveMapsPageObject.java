@@ -40,6 +40,16 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
     return new CreateAMapComponentObject(driver);
   }
 
+  public CreateAMapComponentObject clickCreateAMapUnderContributeButton() {
+    wait.forElementVisible(contributeDropdown);
+    scrollAndClick(contributeDropdown);
+    wait.forElementVisible(createMapUnderContribute);
+    scrollAndClick(createMapUnderContribute);
+    PageObjectLogging.log("clickCreateAMapUnderContributeButton",
+        "create a map button under contribute button clicked", true, driver);
+    return new CreateAMapComponentObject(driver);
+  }
+
   public InteractiveMapPageObject clickMapWithIndex(int mapIndex) {
     WebElement selectedMap = mapList.get(mapIndex);
     wait.forElementVisible(selectedMap);

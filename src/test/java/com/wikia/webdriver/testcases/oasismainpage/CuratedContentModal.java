@@ -15,7 +15,7 @@ public class CuratedContentModal extends NewTestTemplate {
   @Test(groups = {"CuratedContentModal_001", "CuratedContent"})
   @Execute(asUser = User.STAFF)
   public void CuratedContentModal_001_modalVisible() {
-    MainPage main = new MainPage().open();
+    MainPage main = new MainPage(driver).open();
     CuratedContentToolModal modal = main.clickCuratedContentToolButton();
     Assertion.assertTrue(modal.isModalVisible());
   }
@@ -23,7 +23,7 @@ public class CuratedContentModal extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @Test(groups = {"CuratedContentModal_002", "CuratedContent"})
   public void CuratedContentModal_002_MercuryNavBarShouldNotBeVisible() {
-    MainPage main = new MainPage().open();
+    MainPage main = new MainPage(driver).open();
     CuratedContentToolModal modal = main.clickCuratedContentToolButton();
 
     Assertion.assertTrue(modal.isModalVisible());
