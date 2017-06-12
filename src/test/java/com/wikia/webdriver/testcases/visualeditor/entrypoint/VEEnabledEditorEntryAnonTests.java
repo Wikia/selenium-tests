@@ -30,7 +30,7 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEEnabledEditorEntryAnonTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
-    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+    VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }

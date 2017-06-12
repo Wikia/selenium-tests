@@ -46,13 +46,13 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
   @Execute(asUser = User.USER)
-  public void ArticleCRUDUser_003_addEditButton() {
+  public void ArticleCRUDUser_003_addDropdown() {
     new ArticleContent().clear();
 
     String articleContent = PageContent.ARTICLE_TEXT;
     String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open(articleTitle + "?AbTest.ADD_NEW_PAGE=CONTROL1");
-    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButton();
+    ArticlePageObject article = new ArticlePageObject().open(TestContext.getCurrentMethodName() + "?AbTest.ADD_NEW_PAGE=CONTROL1");
+    VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
@@ -87,12 +87,12 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_006"})
   @Execute(asUser = User.USER)
-  public void ArticleCRUDUser_006_editEditDropdown() {
+  public void ArticleCRUDUser_006_editDropdown() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open();
-    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButtonDropdown();
+    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
