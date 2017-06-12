@@ -38,15 +38,26 @@ public class AdsHopObject extends AdsBaseObject {
     });
   }
 
-  public void verifyPostMessage(String slotName, String src, String extraParam) {
-    WebElement testedDiv = getTestedDiv(slotName, src);
-    String iframeSelector = "iframe[id*='" + slotName + "_0']";
-    WebElement iframe = testedDiv.findElement(By.cssSelector(iframeSelector));
-    driver.switchTo().frame(iframe);
-    WebElement postMessageScript = driver.findElement(By.xpath(POST_MESSAGE_SCRIPT_XPATH));
-    Assertion.assertEquals(postMessageScript.getAttribute("innerHTML"),
-                           getPostMessagePattern(extraParam));
+  public void verifyPostMessage(String slotName, String providerName, String extraParam) {
+    Assertion.assertEquals(getPostMessageFromAdContent(slotName, providerName), getPostMessagePattern(extraParam));
+  }
+
+  private String getPostMessageFromAdContent(String slotName, String providerName) {
+    driver.switchTo().frame(getIframe(slotName, providerName));
+    final String innerHTML = getPostMessage();
     driver.switchTo().defaultContent();
+
+    return innerHTML;
+  }
+
+  private String getPostMessage() {
+    WebElement postMessageScript = driver.findElement(By.xpath(POST_MESSAGE_SCRIPT_XPATH));
+    return postMessageScript.getAttribute("innerHTML");
+  }
+
+  private WebElement getIframe(String slotName, String providerName) {
+    String iframeSelector = AdsContent.getSlotSelector(slotName) + " > div[id*='" + providerName + "'] iframe";
+    return driver.findElement(By.cssSelector(iframeSelector));
   }
 
   public void verifyLineItemIdsDiffer(String slotName) {
@@ -75,11 +86,6 @@ public class AdsHopObject extends AdsBaseObject {
   private WebElement getTestedContainer(final String slotName, final String id) {
     final String slotSelector = AdsContent.getSlotSelector(slotName);
     return getTestedElement(slotSelector + " > div[id*='" + id + "']");
-  }
-
-  private WebElement getTestedDiv(final String slotName, final String src) {
-    final String slotSelector = AdsContent.getSlotSelector(slotName);
-    return getTestedElement(slotSelector + " > div > div[id*='" + src + "']");
   }
 
   private WebElement getTestedElement(final String elementSelector) {
