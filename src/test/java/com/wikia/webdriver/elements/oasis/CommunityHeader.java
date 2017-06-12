@@ -2,7 +2,10 @@ package com.wikia.webdriver.elements.oasis;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -72,16 +75,20 @@ public class CommunityHeader extends BasePageObject {
     PageObjectLogging.logInfo("clicked Add New Page button");
   }
 
-  public void clickWikiActivity() {
+  public SpecialWikiActivityPageObject clickWikiActivity() {
     wait.forElementClickable(wikiActivityButton).click();
 
     PageObjectLogging.logInfo("clicked Wiki Activity Button");
+
+    return new SpecialWikiActivityPageObject(driver);
   }
 
-  public void clickAdminDashboard()  {
+  public SpecialAdminDashboardPageObject clickAdminDashboard()  {
     wait.forElementClickable(adminDashboardButton).click();
 
     PageObjectLogging.logInfo("clicked admin dashboard Button");
+
+    return new SpecialAdminDashboardPageObject();
   }
 
   public CommunityHeader openExploreMenu()  {
@@ -92,16 +99,20 @@ public class CommunityHeader extends BasePageObject {
    return this;
   }
 
-  public void clickExploreWikiActivityLink() {
+  public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
     wait.forElementClickable(exploreWikiActivityLink).click();
 
     PageObjectLogging.logInfo("explore -> wikiActivity link clicked");
+
+    return new SpecialWikiActivityPageObject(driver);
   }
 
-  public void clickExploreRandomLink() {
+  public ArticlePageObject clickExploreRandomLink() {
     wait.forElementClickable(exploreRandomLink).click();
 
     PageObjectLogging.logInfo("explore -> random page link clicked");
+
+    return new ArticlePageObject();
   }
 
   public void clickExploreCommunityLink() {
