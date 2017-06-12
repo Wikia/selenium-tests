@@ -21,7 +21,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
 
-  @FindBy(css = "a.upphotos[title*='Add a photo']")
+  @FindBy(css = "#page-header-add-new-photo")
   private WebElement addPhotoButton;
   @FindBy(css = "input[name='wpUploadFile']")
   private WebElement browseForFileInput;
