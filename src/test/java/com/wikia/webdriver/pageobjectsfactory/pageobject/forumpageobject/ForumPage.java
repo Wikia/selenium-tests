@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class ForumPage extends WikiBasePageObject {
 
-  @FindBy(css = ".button.policies-link")
+  @FindBy(css = ".policies-link")
   private WebElement faqButton;
   @FindBy(css = "#ForumPoliciesModal")
   private WebElement faqLightBox;
