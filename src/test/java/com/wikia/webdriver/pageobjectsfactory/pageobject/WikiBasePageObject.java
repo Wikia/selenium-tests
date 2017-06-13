@@ -274,7 +274,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
-    wait.forElementVisible(editButton);
+    wait.forElementClickable(editButton);
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
         driver);
@@ -290,7 +290,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
-    wait.forElementVisible(editButton);
+    wait.forElementClickable(editButton);
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
@@ -306,7 +306,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditorPageObject openVEModeWithMainEditButton() {
-    wait.forElementVisible(veEditButton);
+    wait.forElementClickable(veEditButton);
     veEditButton.click();
     PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true,
         driver);
