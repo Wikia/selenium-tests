@@ -28,7 +28,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEAndRTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
-    VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
+    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
