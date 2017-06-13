@@ -69,6 +69,7 @@ public class Helios {
     HttpDelete httpDelete =
         new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
     httpDelete.setHeader("THE-SCHWARTZ", Configuration.getCredentials().apiToken);
+    httpDelete.setHeader("X-Wikia-Internal-Request", "0");
 
     CloseableHttpResponse response = null;
     try {
