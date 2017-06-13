@@ -65,7 +65,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + videoName
         + "?action=unwatch");
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public VetAddVideoComponentObject clickAddAVideo() {

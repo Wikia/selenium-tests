@@ -168,7 +168,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + imageName,
         URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public LightboxComponentObject openLightbox(int itemNumber) {

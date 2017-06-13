@@ -644,7 +644,7 @@ public class ArticlePageObject extends WikiBasePageObject {
             .appendQueryStringToURL(urlBuilder.getUrlForWiki(), "title=" + articleTitle.getText());
     url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public void verifyTOCpresent() {

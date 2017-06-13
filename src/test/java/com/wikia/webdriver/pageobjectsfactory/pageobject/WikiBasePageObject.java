@@ -531,7 +531,7 @@ public class WikiBasePageObject extends BasePageObject {
   public WatchPageObject unfollowCurrentUrl() {
     driver.get(
         urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_UNFOLLOW));
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public RenamePageObject renameUsingDropdown() {
