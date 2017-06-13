@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class SpecialVideosPageObject extends SpecialPageObject {
 
   private static final String LONG_TITLE_SUFFIX = " ...";
-  @FindBy(css = ".WikiaPageHeader h1")
+  @FindBy(css = ".page-header__title")
   private WebElement h1Header;
-  @FindBy(css = "a.button.addVideo")
+  @FindBy(css = "a.addVideo")
   private WebElement addVideo;
   @FindBy(css = ".special-videos-grid li:nth-child(1)")
   private WebElement newestVideo;
