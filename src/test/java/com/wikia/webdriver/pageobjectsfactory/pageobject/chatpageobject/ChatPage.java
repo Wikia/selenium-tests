@@ -161,7 +161,7 @@ public class ChatPage extends WikiBasePageObject {
 
   public boolean isPermissionsErrorTitleDisplayed() {
     try {
-      wait.forElementVisible(permissionsErrorTitle);
+      wait.forTextInElement(By.cssSelector("#PageHeader"),"Permissions error.");
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       PageObjectLogging.log("Permission error title not displayed", ex, true);

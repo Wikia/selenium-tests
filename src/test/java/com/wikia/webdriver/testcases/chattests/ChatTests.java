@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -36,6 +37,8 @@ public class ChatTests extends NewTestTemplate {
   private String userSixPassword = credentials.password6;
   private String userToBeBanned = credentials.userName8;
   private String userToBeBannedPassword = credentials.password8;
+  private String userToBeBanned2Username = User.CHAT_USER_TO_BE_BANNED.getUserName();
+  private String userToBeBanned2Password = User.CHAT_USER_TO_BE_BANNED.getPassword();
   private String userStaff = credentials.userNameStaff;
   private String userStaffPassword = credentials.passwordStaff;
 
@@ -260,11 +263,11 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(1);
     SpecialVersionPage chatWindow = new SpecialVersionPage().open();
-    ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned, userToBeBannedPassword);
+    ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned2Username, userToBeBanned2Password);
 
     switchToWindow(0);
-    chatUserStaff.clickOnDifferentUser(userToBeBanned);
-    chatUserStaff.banUser(userToBeBanned);
+    chatUserStaff.clickOnDifferentUser(userToBeBanned2Username);
+    chatUserStaff.banUser(userToBeBanned2Username);
 
     switchToWindow(1);
     //there is a minimum time between user gets banned, and action to take effect
@@ -279,7 +282,7 @@ public class ChatTests extends NewTestTemplate {
     }
     finally {
       switchToWindow(0);
-      chatUserStaff.unBanUser(userToBeBanned);
+      chatUserStaff.unBanUser(userToBeBanned2Username);
     }
 
     try {
