@@ -52,7 +52,7 @@ public class ChatTests extends NewTestTemplate {
     return new ChatPage().open();
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_001"})
   public void dropDownMenuForRegularUser() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -65,7 +65,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isRegularUserDropdownDisplayed(), "REGULAR USER DROBDOWN IS NOT DISPLAYED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_002"})
   public void verifySwitchingBetweenMainAndPrivateSections() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -83,7 +83,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_003"})
   public void userCanSendMessageOnWallAndPrivate() {
     ChatPage chatUserThree = openChatForUser(userThree, userThreePassword);
 
@@ -107,7 +107,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_004"})
   public void usreCanSendMultipleNotifications() {
     ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
 
@@ -130,7 +130,7 @@ public class ChatTests extends NewTestTemplate {
             "PRIVATE MESSAGES COUNTER IS NOT CORRECT");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_005"})
   public void staffCanBanUser() {
     ChatPage userToBeBaned = openChatForUser(userToBeBanned, userToBeBannedPassword);
 
@@ -150,7 +150,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDisplayed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_006"})
   public void blockedUserMessagesAreNotDisplayed() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -179,7 +179,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_007"})
   public void blockedUserCanNotCreatePrivateMessage() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -204,7 +204,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_008"})
   public void regularUserCanOpenMessageWall() {
     openChatForUser(userOne, userOnePassword);
 
@@ -217,7 +217,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserFive.isMessageWallOpened(userOne), "MESSAGE WALL TAB IS NOT OPENED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_009"})
   public void regularUserCanOpenContributions() {
     openChatForUser(userOne, userOnePassword);
 
@@ -230,7 +230,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserFive.isContributionsPageOpened(userOne), "CONTRIBUTION TAB IS NOT OPENED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_010"})
   public void userCanNotBlockPrivateMessagesFromStaff() {
     openChatForUser(userStaff, userStaffPassword);
 
@@ -243,7 +243,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertFalse(chatUserOne.isBlockPrivateMessageButtonDisplayed(), "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_011"})
   public void userCanBeKickedOutFromChat() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -257,7 +257,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserKickedFromChat(), "USER IS NOT KICKED FROM CHAT");
   }
 
-  @Test(groups = {"ChatTestsForUser_012"}, invocationCount = 10)
+  @Test(groups = {"ChatTestsForUser_012"})
   public void bannedUserCanNotEnterTheChat() {
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
