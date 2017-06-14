@@ -279,8 +279,7 @@ public class ChatTests extends NewTestTemplate {
       Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
     } catch (InterruptedException e) {
       e.printStackTrace();
-    }
-    finally {
+    } finally {
       switchToWindow(0);
       chatUserStaff.unBanUser(userToBeBanned2Username);
     }
