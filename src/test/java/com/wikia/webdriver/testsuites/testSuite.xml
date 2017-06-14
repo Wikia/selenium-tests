@@ -81,6 +81,7 @@
             <class name="com.wikia.webdriver.testcases.chattests.ChatTestsStaff"/>
             <class name="com.wikia.webdriver.testcases.commentstests.ArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.commentstests.BlogCommentsTests"/>
+            <class name="com.wikia.webdriver.testcases.communityheadertests.CommunityHeaderTests"/>
             <class name="com.wikia.webdriver.testcases.contentreview.ContentReviewTests"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>

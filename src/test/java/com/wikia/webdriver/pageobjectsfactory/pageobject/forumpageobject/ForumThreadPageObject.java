@@ -7,6 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -54,8 +55,10 @@ public class ForumThreadPageObject extends BasePageObject {
   private List<WebElement> discussionBody;
   @FindBy(className = "speech-bubble-message")
   private WebElement message;
-  @FindBy(className = "BreadCrumbs")
+  @FindBy(css = ".page-header__page-subtitle nav")
   private WebElement breadCrumbs;
+  @FindBy(className = "speech-bubble-message")
+  private WebElement speechBubble;
 
   By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
 
@@ -132,7 +135,7 @@ public class ForumThreadPageObject extends BasePageObject {
   public void clickOnMoreButton() {
     scrollTo(message);
 
-    jsActions.execute("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+    new Actions(driver).moveToElement(speechBubble).perform();
     wait.forElementVisible(moreButton);
     wait.forElementClickable(moreButton);
     scrollAndClick(moreButton);
