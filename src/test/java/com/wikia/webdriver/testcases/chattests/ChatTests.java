@@ -299,4 +299,47 @@ public class ChatTests extends NewTestTemplate {
     chatUserOne.writeLongMessage(1000);
     Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
   }
+
+  @Test(groups = {"ChatTestsForUser_013"})
+  public void happyEmoticonAppearsWhenWrittenByHand (){
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat(":-)");
+    Assertion.assertTrue(chatPage.isEmoticonVisible("Emoticon_happy.png"), "Emoticon was not displayed");
+  }
+
+  @Test(groups = {"ChatTestsForUser_014"})
+  public void InternalLinkOnChatRedirectsToWiki (){
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat("[[w:c:starwars:Jedi|JediWiki]]");
+    chatPage.getMessage("JediWiki").click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    String url  = wikiPage.getWikiUrl();
+    Assertion.assertEquals(url, "http://starwars.wikia.com/");
+
+  }
+
+  @Test(groups = {"ChatTestsForUser_015"})
+  public void UserLinkOnChatRedirectsToUserPage (){
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat("[[User:QATestsUser|]]");
+    chatPage.getMessage("QATestsUser").click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    String url  = wikiPage.getWikiUrl();
+    Assertion.assertStringContains(url, "User:QATestsUser");
+  }
+
+  @Test(groups = {"ChatTestsForUser_016"})
+  public void ExternalWikiLinkOnChatRedirectsToWiki (){
+    String externalLink = "http://www.onet.pl/";
+
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat(externalLink.toString());
+    chatPage.getMessage(externalLink.toString()).click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    String currentUrl = wikiPage.getCurrentUrl();
+    Assertion.assertEquals(currentUrl, externalLink);
+  }
 }

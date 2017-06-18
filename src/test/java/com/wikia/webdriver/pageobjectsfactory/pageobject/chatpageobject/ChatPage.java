@@ -87,9 +87,11 @@ public class ChatPage extends WikiBasePageObject {
           "//div[@class='Chat']//li[contains(text(), 'has ended the Chat ban for %s')]";
   private static final String USER_SELECTOR = "#user-%s";
   private static final String PRIVATE_MESSAGE_USER_SELECTOR = "#priv-user-%s";
-  private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
+  private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message' and contains(text(), '%1$s')] | " +
+          "//span[@class='message']//*[contains(text(), '%1$s')]";
   private static final String NOTIFICATION_COUNTER =
           "//span[@class='splotch' and contains(text(), '%s')]";
+  private static final String PATH_EMOTICON_ON_CHAT = "//span[@class='message']/img[contains(@src,'%s')]";
 
   private static final int REGULAR_USER_DROPDOWN_ELEMENTS_COUNT = 3;
 
@@ -440,5 +442,24 @@ public class ChatPage extends WikiBasePageObject {
     clickOnUserInPrivateMessageSection(userName);
     PageObjectLogging.log("selectPrivateMessageToUser", "private message selected from dropdown",
             true);
+  }
+
+  public Boolean isEmoticonVisible(String emoticon) {
+    try {
+      wait.forElementVisible(By.xpath(String.format(PATH_EMOTICON_ON_CHAT, emoticon)));
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Emoticon " + emoticon + " on chat not displayed", ex, true);
+      return false;
+    }
+  }
+
+  public WebElement getMessage(String message) {
+    By by = By.xpath(String.format(PATH_MESSAGE_ON_CHAT, message));
+    return wait.forElementPresent(by);
+  }
+
+  private WebElement userPostedEmoticon(String emoticonName) {
+    return driver.findElement(By.xpath(String.format(PATH_MESSAGE_ON_CHAT, emoticonName)));
   }
 }
