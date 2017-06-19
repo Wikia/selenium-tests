@@ -331,7 +331,7 @@ public class ChatTests extends NewTestTemplate {
   }
 
   @Test(groups = {"ChatTestsForUser_016"})
-  public void ExternalWikiLinkOnChatRedirectsToWiki (){
+  public void ExternalLinkOnChatRedirectsToGivenPage (){
     String externalLink = "http://www.onet.pl/";
 
     ChatPage chatPage = openChatForUser(userOne, userOnePassword);
