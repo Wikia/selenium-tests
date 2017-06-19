@@ -315,7 +315,7 @@ public class ChatTests extends NewTestTemplate {
     chatPage.switchToSecondTab(currentBrowserTab());
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     String url  = wikiPage.getWikiUrl();
-    Assertion.assertEquals(url, "http://starwars.wikia.com/");
+    Assertion.assertStringContains(url, "starwars.wikia.com/");
 
   }
 
@@ -326,7 +326,7 @@ public class ChatTests extends NewTestTemplate {
     chatPage.getMessage("QATestsUser").click();
     chatPage.switchToSecondTab(currentBrowserTab());
     WikiBasePageObject wikiPage = new WikiBasePageObject();
-    String url  = wikiPage.getWikiUrl();
+    String url  = wikiPage.getUrl();
     Assertion.assertStringContains(url, "User:QATestsUser");
   }
 
