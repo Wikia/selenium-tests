@@ -41,7 +41,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVelesTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdXCollapse"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBtfBlocking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
