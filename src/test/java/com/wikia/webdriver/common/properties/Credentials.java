@@ -224,9 +224,6 @@ public class Credentials {
     userNameVEPreferred = XMLReader.getValue(file, "ci.user.vePreferredUser.username");
     passwordVEPreferred = XMLReader.getValue(file, "ci.user.vePreferredUser.password");
 
-    userNameCKPreferred = XMLReader.getValue(file, "ci.user.ckPreferredUser.username");
-    passwordCKPreferred = XMLReader.getValue(file, "ci.user.ckPreferredUser.password");
-
     userNameSourcePreferred = XMLReader.getValue(file, "ci.user.sourcePreferredUser.username");
     passwordSourcePreferred = XMLReader.getValue(file, "ci.user.sourcePreferredUser.password");
 
