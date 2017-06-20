@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -15,8 +16,8 @@ import java.util.List;
 public class ChatTests extends NewTestTemplate {
 
   private static final String USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR = "USER IS NOT DISPLAYED IN PRIVATE SECTION";
-  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
-  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat with ąół characters and even þjóð";
+  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat with ąół characters and even þjóð";
   private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
@@ -275,9 +276,8 @@ public class ChatTests extends NewTestTemplate {
 
       Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
     } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    finally {
+      PageObjectLogging.log(e.getMessage(), e, true);
+    } finally {
       switchToWindow(0);
       chatUserStaff.unBanUser(userToBeBanned);
     }
@@ -285,7 +285,7 @@ public class ChatTests extends NewTestTemplate {
     try {
       Thread.sleep(5000);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      PageObjectLogging.log(e.getMessage(), e, true);
     }
 
     switchToWindow(1);
