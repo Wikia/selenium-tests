@@ -150,6 +150,10 @@ public class WikiBasePageObject extends BasePageObject {
     return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
   }
 
+  public String getUrl() {
+    return driver.getCurrentUrl();
+  }
+
   public String resetForgotPasswordTime(String userName, String apiToken) {
     String[][] apiRequestParameters = {{"action", ApiActions.API_ACTION_FORGOT_PASSWORD},
         {"user", userName}, {"token", apiToken}, {"format", "json"},};

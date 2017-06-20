@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
@@ -284,5 +285,45 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.writeLongMessage(1000);
     Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
+  }
+
+  @Test(groups = {"ChatTestsForUser_013"})
+  public void happyEmoticonAppearsWhenWrittenByHand() {
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat(":-)");
+    Assertion.assertTrue(chatPage.isEmoticonVisible("Emoticon_happy.png"), "Emoticon was not displayed");
+  }
+
+  @Test(groups = {"ChatTestsForUser_014"})
+  public void InternalLinkOnChatRedirectsToWiki() {
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat("[[w:c:starwars:Jedi|JediWiki]]");
+    chatPage.getMessage("JediWiki").click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    Assertion.assertStringContains(wikiPage.getHeaderText(), "Jedi");
+  }
+
+  @Test(groups = {"ChatTestsForUser_015"})
+  public void UserLinkOnChatRedirectsToUserPage() {
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat("[[User:" + userTwo + "|]]");
+    chatPage.getMessage(userTwo).click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    UserProfilePageObject wikiPage = new UserProfilePageObject(driver);
+    Assertion.assertStringContains(wikiPage.getUserNameTextBox().getText(), userTwo);
+  }
+
+  @Test(groups = {"ChatTestsForUser_016"})
+  public void ExternalLinkOnChatRedirectsToGivenPage() {
+    String externalLink = "https://www.onet.pl/";
+
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat(externalLink);
+    chatPage.getMessage(externalLink).click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    String currentUrl = wikiPage.getCurrentUrl();
+    Assertion.assertEquals(currentUrl, externalLink);
   }
 }
