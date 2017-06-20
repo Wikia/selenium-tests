@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -275,7 +276,7 @@ public class ChatTests extends NewTestTemplate {
 
       Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      PageObjectLogging.log(e.getMessage(), e, true);
     } finally {
       switchToWindow(0);
       chatUserStaff.unBanUser(userToBeBanned);
@@ -284,7 +285,7 @@ public class ChatTests extends NewTestTemplate {
     try {
       Thread.sleep(5000);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      PageObjectLogging.log(e.getMessage(), e, true);
     }
 
     switchToWindow(1);
