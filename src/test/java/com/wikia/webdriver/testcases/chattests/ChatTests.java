@@ -51,11 +51,7 @@ public class ChatTests extends NewTestTemplate {
     base.loginAs(userName, password, wikiURL);
     return new ChatPage().open();
   }
-
-  private void unblockUser(String user){
-
-  }
-
+  
   @Test(groups = {"ChatTestsForUser_001"})
   public void dropDownMenuForRegularUser() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
