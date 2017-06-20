@@ -155,6 +155,7 @@ public class Helios {
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
             + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
+        getInfo.setHeader("X-Wikia-Internal-Request", "0");
 
         if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
           return tokenCache.get(userName);
