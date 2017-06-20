@@ -458,8 +458,4 @@ public class ChatPage extends WikiBasePageObject {
     By by = By.xpath(String.format(PATH_MESSAGE_ON_CHAT, message));
     return wait.forElementPresent(by);
   }
-
-  private WebElement userPostedEmoticon(String emoticonName) {
-    return driver.findElement(By.xpath(String.format(PATH_MESSAGE_ON_CHAT, emoticonName)));
-  }
 }
