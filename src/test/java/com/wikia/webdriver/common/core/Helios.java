@@ -113,6 +113,8 @@ public class Helios {
     CloseableHttpResponse response = null;
     String token = "";
     httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
+    httpPost.setHeader("X-Wikia-Internal-Request", "0");
+
     try {
       try {
         response = httpClient.execute(httpPost);
