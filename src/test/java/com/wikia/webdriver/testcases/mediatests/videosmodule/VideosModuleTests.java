@@ -36,7 +36,7 @@ public class VideosModuleTests extends NewTestTemplate {
   public void VideosModuleTest_002() {
     VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 
-    new MainPage(driver).open();
+    new MainPage().open();
     videosModule.verifyVideosModuleNotShowing();
 
     new SpecialWikiActivityPageObject(driver).open();

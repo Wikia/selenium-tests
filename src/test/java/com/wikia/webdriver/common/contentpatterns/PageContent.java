@@ -43,7 +43,7 @@ public class PageContent {
   // generic
   public static final String CAPTION = "TestDataCaption1";
   public static final String CAPTION2 = "TestDataCaption2";
-  public static final String WIKIA_CONTRIBUTOR = "A Fandom user";
+  public static final String WIKIA_CONTRIBUTOR = "A FANDOM user";
 
   // image serving
   public static final String FILE = "Image001.jpg";

@@ -28,7 +28,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEDisabledEditorEntryAnonTestsTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
-    VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
+    VisualEditModePageObject ck = article.openCKModeWithMainEditButtonDropdown();
     Assertion.assertTrue(ck.isContentLoaded(), "Content is not loaded");
     ck.clickPublishButton();
   }
