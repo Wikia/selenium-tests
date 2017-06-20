@@ -25,17 +25,20 @@ public class Wait {
    */
 
   private static final int DEFAULT_TIMEOUT = 15;
+  private static final int DEFAULT_SLEEP = 5000;
   private static final String INIT_MESSAGE = "INIT ELEMENT";
   private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
   private static final String ELEMENT_PRESENT_MESSAGE = "ELEMENT PRESENT";
   private static final String ELEMENT_PRESENT_ERROR_FORMAT = "PROBLEM WITH FINDING ELEMENT %s";
 
   private WebDriverWait wait;
+  private WebDriverWait sleepingWait;
   private WebDriver driver;
 
   public Wait(WebDriver webDriver) {
     this.driver = webDriver;
     this.wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
+    this.sleepingWait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT, DEFAULT_SLEEP);
   }
 
   /**
@@ -383,6 +386,24 @@ public class Wait {
       } else {
         return forTextInElement(SelectorStack.read(), index, text);
       }
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElementAfterRefresh(WebElement element, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.textToBePresentInElementAfterRefresh(element, text));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElementAfterRefresh(By by, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return sleepingWait.until(CommonExpectedConditions.textToBePresentInElementAfterRefresh(by, text));
     } finally {
       restoreDeaultImplicitWait();
     }
