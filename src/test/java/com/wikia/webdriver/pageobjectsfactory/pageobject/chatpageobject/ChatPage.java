@@ -4,11 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,7 +18,7 @@ public class ChatPage extends WikiBasePageObject {
   @FindBy(css = "div.Rail")
   private WebElement sideBar;
   @FindBy(css = "div.User span.username")
-  private WebElement userName;
+  private WebElement userNameTextBox;
   @FindBy(css = "[id*='Chat'] .inline-alert[id*='entry']")
   private WebElement chatInlineAlert;
   @FindBy(css = "div.User img")
@@ -90,6 +86,7 @@ public class ChatPage extends WikiBasePageObject {
   private static final String PATH_MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
   private static final String NOTIFICATION_COUNTER =
           "//span[@class='splotch' and contains(text(), '%s')]";
+  private final By newMessageTextBoxBy = By.cssSelector(".message");
 
   private static final int REGULAR_USER_DROPDOWN_ELEMENTS_COUNT = 3;
 
@@ -119,12 +116,16 @@ public class ChatPage extends WikiBasePageObject {
    return driver.findElement(By.xpath(String.format(USER_UNBAN_LINK, userName)));
   }
 
+  public String getUsername(){
+    return userNameTextBox.getText();
+  }
+
   public boolean isUserOnChat() {
     try {
-      wait.forElementVisible(chatInlineAlert);
+      wait.forTextInElementAfterRefresh(newMessageTextBoxBy, "");
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Inline alert on chat not displayed", ex, true);
+      PageObjectLogging.log("Message textbox on chat page not displayed", ex, true);
       return false;
     }
   }
@@ -161,7 +162,7 @@ public class ChatPage extends WikiBasePageObject {
 
   public boolean isPermissionsErrorTitleDisplayed() {
     try {
-      wait.forTextInElement(By.cssSelector("#PageHeader"),"Permissions error.");
+      wait.forTextInElementAfterRefresh(By.cssSelector("#PageHeader"),"Permissions error.");
       return true;
     } catch (TimeoutException | NoSuchElementException ex) {
       PageObjectLogging.log("Permission error title not displayed", ex, true);

@@ -52,6 +52,10 @@ public class ChatTests extends NewTestTemplate {
     return new ChatPage().open();
   }
 
+  private void unblockUser(String user){
+
+  }
+
   @Test(groups = {"ChatTestsForUser_001"})
   public void dropDownMenuForRegularUser() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
@@ -259,6 +263,7 @@ public class ChatTests extends NewTestTemplate {
 
   @Test(groups = {"ChatTestsForUser_012"})
   public void bannedUserCanNotEnterTheChat() {
+
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
     switchToWindow(1);
@@ -270,28 +275,12 @@ public class ChatTests extends NewTestTemplate {
     chatUserStaff.banUser(userToBeBanned2Username);
 
     switchToWindow(1);
-    //there is a minimum time between user gets banned, and action to take effect
-    try {
-      Thread.sleep(5000);
+    Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
 
-    chatWindow.refreshPage();
-
-      Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    } finally {
-      switchToWindow(0);
-      chatUserStaff.unBanUser(userToBeBanned2Username);
-    }
-
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    switchToWindow(0);
+    chatUserStaff.unBanUser(userToBeBanned2Username);
 
     switchToWindow(1);
-    chatWindow.refreshPage();
     Assertion.assertTrue(chatUserToBeBanned.isUserOnChat(), "USER IS NOT LOGGED IN TO CHAT");
   }
 
