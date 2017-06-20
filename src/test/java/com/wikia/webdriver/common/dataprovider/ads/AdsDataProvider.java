@@ -1212,6 +1212,18 @@ public class AdsDataProvider {
     }
 
   @DataProvider
+  public static Object[][] adsVideoFrequencyCapping() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2pv]")
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2min]")
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsVelesTracking() {
     return new Object[][]{
         {
