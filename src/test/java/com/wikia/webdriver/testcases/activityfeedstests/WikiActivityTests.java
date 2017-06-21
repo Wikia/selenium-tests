@@ -81,19 +81,21 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Test(groups = "WikiActivity_004")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.STAFF)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
-    ArticlePageObject article =
-        new ArticlePageObject().open("NewCategorizationIsRecordedOnActivityModule");
+    new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
+    ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
+
     article.addCategory(categoryName);
     article.submitCategory();
-    article.verifyCategoryPresent(categoryName);
+    Assertion.assertTrue(article.isCategoryPresent(categoryName));
 
-    new SpecialWikiActivityPageObject(driver)
-        .open()
-        .verifyRecentNewCategorization(articleName, credentials.userName);
+    Assertion.assertTrue(
+            new SpecialWikiActivityPageObject(driver)
+                    .open().doesLastNRecentEditionsContains(5, articleName, User.STAFF.getUserName())
+    );
   }
 
   @Test(groups = "WikiActivity_005")
