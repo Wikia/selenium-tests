@@ -2,9 +2,13 @@ package com.wikia.webdriver.testcases.mercurytests.old;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -29,6 +33,9 @@ public class ArticlePageTests extends NewTestTemplate {
   private Navigate navigate;
   private Loading loading;
 
+  private static final String MAIN_PAGE_CONTENT =
+          ContentLoader.loadWikiTextContent("Mercury_MainPage");
+
   private void init() {
     this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
@@ -38,57 +45,19 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
   public void mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
+    new ArticleContent().clear();
+    new ArticleContent().push(MAIN_PAGE_CONTENT, "/Main_Page");
+
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
+    navigate.toPage("/Main_Page");
 
-    boolean result = articlePage.isWikiaLogoVisible();
-    PageObjectLogging.log(
-        "Wikia logo",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isSearchButtonVisible();
-    PageObjectLogging.log(
-        "Search button",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isTopContributorsSectionVisible();
-    PageObjectLogging.log(
-        "Top contributors section",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isTopContributorsThumbVisible(0);
-    PageObjectLogging.log(
-        "Top contributors thumb",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isFooterVisible();
-    PageObjectLogging.log(
-        "Global footer",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isFooterLogoVisible();
-    PageObjectLogging.log(
-        "Global footer logo",
-        "is visible",
-        "is not visible",
-        result
-    );
+    Assertion.assertTrue(articlePage.isWikiaLogoVisible());
+    Assertion.assertTrue(articlePage.isSearchButtonVisible());
+    Assertion.assertTrue(articlePage.isTopContributorsSectionVisible());
+    Assertion.assertTrue(articlePage.isTopContributorsThumbVisible(0));
+    Assertion.assertTrue(articlePage.isFooterVisible());
+    Assertion.assertTrue(articlePage.isFooterLogoVisible());
   }
 
   @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
