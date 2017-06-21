@@ -42,6 +42,8 @@ import java.util.List;
 
 public class ArticlePageObject extends WikiBasePageObject {
 
+  @FindBy(css = ".page-header__title")
+  protected WebElement articleHeader;
   @FindBy(css = "#mw-content-text")
   protected WebElement articleContentContainer;
   @FindBy(css = "#WikiaMainContentContainer")
@@ -551,14 +553,16 @@ public class ArticlePageObject extends WikiBasePageObject {
     return desiredCategoryText;
   }
 
-  public void verifyCategoryPresent(String category) {
+  public boolean isCategoryPresent(String category) {
     boolean categoryVisible = false;
     for (WebElement elem : categoryList) {
       if (elem.getText().equals(category)) {
         categoryVisible = true;
+        break;
       }
     }
-    Assertion.assertTrue(categoryVisible, "category " + category + " not present");
+
+    return categoryVisible;
   }
 
   public WatchPageObject unfollowArticle() {

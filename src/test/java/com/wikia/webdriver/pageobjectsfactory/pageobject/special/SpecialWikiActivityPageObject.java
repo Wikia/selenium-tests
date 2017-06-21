@@ -3,18 +3,25 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
+  @FindBys(@FindBy(css = "li[class*=\"activity-type\"]"))
+  private List<WebElement> activityWebElementList;
+  @FindBys(@FindBy(css = ".activityfeed > li"))
+  private List<WebElement> activitiesList;
   @FindBys(@FindBy(css = "li.activity-type-edit"))
   private List<WebElement> editActivitiesList;
   @FindBys(@FindBy(css = "li.activity-type-new"))
@@ -36,6 +43,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
            + URLsContent.SPECIAL_WIKI_ACTIVITY);
 
+    this.refreshPageAddingCacheBuster();
     return this;
   }
 
@@ -65,117 +73,101 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     Assertion.assertNotNull(result);
   }
 
-  /**
-   * verifies if there is the wanted edition on WikiActivity, searching through 5 recent editions.
-   */
-  public void verifyRecentEdition(String articleName, String userName) {
+  public Boolean doesLastNRecentEditionsContain(int n, String articleName, String userName) {
     Boolean ifPassed = false;
-    for (int i = 0; i < 4; i++) {
-      ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName,
-                                  userName);
-      if (ifPassed) {
-        PageObjectLogging.log("verifyRecentEdition",
-                              "WikiActivity module found recent edition that affected '"
-                              + articleName
-                              + "' and was done by user: " + userName, true);
+
+    if(n < editActivitiesList.size()){
+      System.out.println(n);
+      System.out.println(editActivitiesList.size());
+      n = editActivitiesList.size();
+    }
+
+    for (int i = 0; i < n; i++) {
+      ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName, userName);
+      if (ifPassed == true) {
         break;
       }
     }
-    if (!ifPassed) {
-      PageObjectLogging.log("verifyRecentEdition",
-                            "edition on article  '" + articleName + "' by user: '"
-                            + userName + "', not found", false, driver);
+
+    return ifPassed;
+  }
+
+  public Boolean doesLastNRecentActivitiesContain(int n, String articleName, String userName) {
+
+    if(n < editActivitiesList.size()){
+      n = editActivitiesList.size();
     }
+
+    Boolean ifPassed = false;
+    for (int i = 0; i < n; i++) {
+      ifPassed = ifDetailsPresent(activitiesList.get(i), articleName, userName);
+      if (ifPassed == true) {
+        break;
+      }
+    }
+
+    return ifPassed;
+  }
+
+  public Boolean doesLastNRecentBlogActivitiesContain(int n, String blogPostContent, String blogPostName,
+                                                      String userName) {
+
+    if(n < editActivitiesList.size()){
+      n = editActivitiesList.size();
+    }
+
+    Boolean ifPassed = false;
+    for (int i = 0; i < n; i++) {
+      ifPassed = ifNewBlogDetailsPresent(activitiesList.get(i), blogPostContent, blogPostName, userName);
+      if (ifPassed == true) {
+        break;
+      }
+    }
+
+    return ifPassed;
   }
 
   /**
-   * verifies if there is the wanted NewPage on WikiActivity, searching through 5 recent editions.
+   * Gets activities from special page, limited by provided value
+   * @param numberOfActivities
+   * @return
    */
-  public void verifyRecentNewPage(String articleName, String userName) {
-    Boolean ifPassed = false;
-    for (int i = 0; i < 4; i++) {
-      ifPassed = ifDetailsPresent(newPageActivitiesList.get(i), articleName,
-                                  userName);
-      if (ifPassed) {
-        PageObjectLogging.log("verifyRecentNewPage",
-                              "WikiActivity module found recent new page: '" + articleName
-                              + "' that was created by user: " + userName, true);
-        break;
-      }
-    }
-    if (!ifPassed) {
-      PageObjectLogging.log("verifyRecentNewPage",
-                            "new page:  '" + articleName + "' by user: '"
-                            + userName + "', not found", false, driver);
+  public List<Activity> getActivities(int numberOfActivities) {
+
+    List<Activity> activityList = new ArrayList<>();
+    //numberOfActivitiesToFetch set to max number of possible elements to fetch
+    int numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
+            ? activityWebElementList.size() : numberOfActivities;
+    List<WebElement> activityWebElementSubList = activityWebElementList.subList(0, numberOfActivitiesToFetch);
+
+    for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
+      Activity activity;
+      List<ActivityPageCreator> creators = Arrays.asList(
+              new EditActivityPageCreator(),
+              new NewActivityPageCreator(),
+              new CategorizationActivityPageCreator(),
+              new WallPostActivityPageCreator()
+      );
+      activity = new ActivityPageFactory(driver, activityWebElementSubList.get(i), creators).createActivityPage();
+
+      activityList.add(activity);
     }
 
-  }
-
-  /**
-   * verifies if there is the wanted new Blog on WikiActivity, searching through 5 recent editions.
-   */
-  public void verifyRecentNewBlogPage(String blogContent, String blogTitle, String userName) {
-    Boolean ifPassed = false;
-    for (int i = 0; i < 4; i++) {
-      ifPassed = ifNewBlogDetailsPresent(newPageActivitiesList.get(i), blogContent, blogTitle,
-                                         userName);
-      if (ifPassed) {
-        PageObjectLogging.log("verifyRecentNewBlogPage",
-                              "WikiActivity module found recent new blog titled as: '" + blogTitle
-                              + "' that was created by user: " + userName
-                              + " and contains content: " + blogContent, true);
-        break;
-      }
-    }
-    if (!ifPassed) {
-      PageObjectLogging.log("verifyRecentNewBlogPage",
-                            "WikiActivity module didn't find recent new blog titled as: '"
-                            + blogTitle
-                            + "' that was created by user: " + userName
-                            + " and containted content: " + blogContent, false, driver);
-    }
-
-  }
-
-  /**
-   * verifies if there is the wanted new Categorization on WikiActivity, searching through 5 recent
-   * categorizations.
-   */
-  public void verifyRecentNewCategorization(String articleName,
-                                            String userName) {
-    Boolean ifPassed = false;
-    for (int i = 0; i < 4; i++) {
-      ifPassed = ifDetailsPresent(categorizationActivitiesList.get(i), articleName,
-                                  userName);
-      if (ifPassed) {
-        PageObjectLogging.log("verifyRecentNewCategorization",
-                              "WikiActivity module found recent new Categorization on artile: '"
-                              + articleName
-                              + "' that was done by user: " + userName, true);
-        break;
-      }
-    }
-    if (!ifPassed) {
-      PageObjectLogging.log("verifyRecentNewCategorization",
-                            "WikiActivity didn't find recent new Categorization on artile: '"
-                            + articleName
-                            + "' that was done by user: " + userName, false, driver);
-    }
-
+    return activityList;
   }
 
   private Boolean ifDetailsPresent(WebElement webElement, String articleName,
                                    String userName) {
     boolean condition1 = webElement.findElement(By.cssSelector("strong a"))
-        .getText().contains(articleName);
-    boolean condition2 = webElement.findElement(By.cssSelector("span a"))
+        .getText().replaceAll("_", " ").contains(articleName);
+    boolean condition2 = webElement.findElement(By.cssSelector("cite span a"))
         .getText().contains(userName);
     return (condition1 & condition2);
   }
 
   private Boolean ifNewBlogDetailsPresent(WebElement webElement,
                                           String blogContent, String blogTitle, String userName) {
-    boolean condition1 = ifDetailsPresent(webElement, "blog:" + userName
+    boolean condition1 = ifDetailsPresent(webElement, "User blog:" + userName
                                                       + "/" + blogTitle, userName);
     boolean condition2 = webElement.findElement(By.cssSelector("td em"))
         .getText().contains("New blog");

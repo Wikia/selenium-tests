@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.categoriestests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -22,7 +21,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
-    article.verifyCategoryPresent(categoryName);
+    article.isCategoryPresent(categoryName);
   }
 
   @Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
@@ -32,7 +31,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
     article.submitCategory();
-    article.verifyCategoryPresent(desiredCategory);
+    article.isCategoryPresent(desiredCategory);
   }
 
   @Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
@@ -44,7 +43,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
     article.addCategory(categoryName);
     article.submitCategory();
-    article.verifyCategoryPresent(categoryName);
+    article.isCategoryPresent(categoryName);
   }
 
   @Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
@@ -55,7 +54,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     ArticlePageObject article = new ArticlePageObject().open();
     String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
     article.submitCategory();
-    article.verifyCategoryPresent(desiredCategory);
+    article.isCategoryPresent(desiredCategory);
   }
 
   @Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"})
@@ -69,7 +68,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     categoryName = PageContent.CATEGORY_NAME_PREFIX + DateTime.now().getMillis();
     editCategory.editCategoryName(categoryName);
     article.submitCategory();
-    article.verifyCategoryPresent(categoryName);
+    article.isCategoryPresent(categoryName);
   }
 
   @Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"})

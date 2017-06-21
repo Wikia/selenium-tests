@@ -34,7 +34,6 @@ public class UserProfilePageObject extends WikiBasePageObject {
   @Getter
   private WebElement userNameTextBox;
 
-
   private String avatarChangedSelector = ".masthead-avatar img.avatar[src*='/%imageName%']";
 
   private By avatarImage = By.cssSelector("img.avatar");
@@ -126,5 +125,9 @@ public class UserProfilePageObject extends WikiBasePageObject {
   public void verifyProfilePage(String userName) {
     verifyUrlContains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
     PageObjectLogging.log("verifyProfilePage", userName + " user profile page verified", true);
+  }
+
+  public String getUserName(){
+    return userNameTextBox.getText();
   }
 }
