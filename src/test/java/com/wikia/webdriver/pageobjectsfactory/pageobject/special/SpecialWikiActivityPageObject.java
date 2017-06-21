@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
@@ -99,7 +98,9 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     Boolean ifPassed = false;
     for (int i = 0; i < n; i++) {
       ifPassed = ifNewBlogDetailsPresent(activitiesList.get(i), blogPostContent, blogPostName, userName);
-      if (ifPassed == true) break;
+      if (ifPassed == true) {
+        break;
+      }
     }
 
     return ifPassed;
