@@ -113,6 +113,8 @@ public class Helios {
     CloseableHttpResponse response = null;
     String token = "";
     httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
+    httpPost.setHeader("X-Wikia-Internal-Request", "0");
+
     try {
       try {
         response = httpClient.execute(httpPost);
@@ -155,6 +157,7 @@ public class Helios {
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
             + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
+        getInfo.setHeader("X-Wikia-Internal-Request", "0");
 
         if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
           return tokenCache.get(userName);

@@ -4,10 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,6 +30,10 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private WebElement avatarRemoveButton;
   @FindBy(css = ".masthead-avatar img.avatar")
   private WebElement avatar;
+  @FindBy(css = "div.masthead-info h1")
+  @Getter
+  private WebElement userNameTextBox;
+
 
   private String avatarChangedSelector = ".masthead-avatar img.avatar[src*='/%imageName%']";
 

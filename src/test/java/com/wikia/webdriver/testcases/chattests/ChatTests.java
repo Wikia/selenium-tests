@@ -2,8 +2,10 @@ package com.wikia.webdriver.testcases.chattests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
@@ -15,8 +17,8 @@ import java.util.List;
 public class ChatTests extends NewTestTemplate {
 
   private static final String USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR = "USER IS NOT DISPLAYED IN PRIVATE SECTION";
-  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
-  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat";
+  private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat with ąół characters and even þjóð";
+  private static final String MESSAGE_ON_PRIVATE_CHAT = "Test message on private chat with ąół characters and even þjóð";
   private static final String MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR = "MESSAGE ON CHAT IS NOT DISPLAYED";
 
   private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
@@ -36,6 +38,8 @@ public class ChatTests extends NewTestTemplate {
   private String userSixPassword = credentials.password6;
   private String userToBeBanned = credentials.userName8;
   private String userToBeBannedPassword = credentials.password8;
+  private String userToBeBanned2Username = User.CHAT_USER_TO_BE_BANNED.getUserName();
+  private String userToBeBanned2Password = User.CHAT_USER_TO_BE_BANNED.getPassword();
   private String userStaff = credentials.userNameStaff;
   private String userStaffPassword = credentials.passwordStaff;
 
@@ -48,8 +52,8 @@ public class ChatTests extends NewTestTemplate {
     base.loginAs(userName, password, wikiURL);
     return new ChatPage().open();
   }
-
-  @Test
+  
+  @Test(groups = {"ChatTestsForUser_001"})
   public void dropDownMenuForRegularUser() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -62,7 +66,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isRegularUserDropdownDisplayed(), "REGULAR USER DROBDOWN IS NOT DISPLAYED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_002"})
   public void verifySwitchingBetweenMainAndPrivateSections() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -80,7 +84,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isMessageOnChat(MESSAGE_ON_MAIN_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_003"})
   public void userCanSendMessageOnWallAndPrivate() {
     ChatPage chatUserThree = openChatForUser(userThree, userThreePassword);
 
@@ -104,7 +108,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserThree.isMessageOnChat(MESSAGE_ON_PRIVATE_CHAT), MESSAGE_ON_CHAT_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_004"})
   public void usreCanSendMultipleNotifications() {
     ChatPage chatUserFive = openChatForUser(userFive, userFivePassword);
 
@@ -127,7 +131,7 @@ public class ChatTests extends NewTestTemplate {
             "PRIVATE MESSAGES COUNTER IS NOT CORRECT");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_005"})
   public void staffCanBanUser() {
     ChatPage userToBeBaned = openChatForUser(userToBeBanned, userToBeBannedPassword);
 
@@ -147,7 +151,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDisplayed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_006"})
   public void blockedUserMessagesAreNotDisplayed() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -176,7 +180,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_007"})
   public void blockedUserCanNotCreatePrivateMessage() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -201,7 +205,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserInPrivateSectionDisplayed(userFive), USER_IN_PRIVATE_SECTION_NOT_DISPLAYED_ERROR);
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_008"})
   public void regularUserCanOpenMessageWall() {
     openChatForUser(userOne, userOnePassword);
 
@@ -214,7 +218,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserFive.isMessageWallOpened(userOne), "MESSAGE WALL TAB IS NOT OPENED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_009"})
   public void regularUserCanOpenContributions() {
     openChatForUser(userOne, userOnePassword);
 
@@ -227,7 +231,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserFive.isContributionsPageOpened(userOne), "CONTRIBUTION TAB IS NOT OPENED");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_010"})
   public void userCanNotBlockPrivateMessagesFromStaff() {
     openChatForUser(userStaff, userStaffPassword);
 
@@ -240,7 +244,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertFalse(chatUserOne.isBlockPrivateMessageButtonDisplayed(), "USER CAN BLOCK PRIVATE MESSAGES FROM STAFF");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_011"})
   public void userCanBeKickedOutFromChat() {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
 
@@ -254,42 +258,25 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertTrue(chatUserOne.isUserKickedFromChat(), "USER IS NOT KICKED FROM CHAT");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_012"})
   public void bannedUserCanNotEnterTheChat() {
+
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
 
     switchToWindow(1);
     SpecialVersionPage chatWindow = new SpecialVersionPage().open();
-    ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned, userToBeBannedPassword);
+    ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned2Username, userToBeBanned2Password);
 
     switchToWindow(0);
-    chatUserStaff.clickOnDifferentUser(userToBeBanned);
-    chatUserStaff.banUser(userToBeBanned);
+    chatUserStaff.clickOnDifferentUser(userToBeBanned2Username);
+    chatUserStaff.banUser(userToBeBanned2Username);
 
     switchToWindow(1);
-    //there is a minimum time between user gets banned, and action to take effect
-    try {
-      Thread.sleep(5000);
+    Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
 
-    chatWindow.refreshPage();
-
-      Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    finally {
-      switchToWindow(0);
-      chatUserStaff.unBanUser(userToBeBanned);
-    }
-
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
+    switchToWindow(0);
+    chatUserStaff.unBanUser(userToBeBanned2Username);
     switchToWindow(1);
-    chatWindow.refreshPage();
     Assertion.assertTrue(chatUserToBeBanned.isUserOnChat(), "USER IS NOT LOGGED IN TO CHAT");
   }
 
@@ -298,5 +285,45 @@ public class ChatTests extends NewTestTemplate {
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.writeLongMessage(1000);
     Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
+  }
+
+  @Test(groups = {"ChatTestsForUser_013"})
+  public void happyEmoticonAppearsWhenWrittenByHand() {
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat(":-)");
+    Assertion.assertTrue(chatPage.isEmoticonVisible("Emoticon_happy.png"), "Emoticon was not displayed");
+  }
+
+  @Test(groups = {"ChatTestsForUser_014"})
+  public void InternalLinkOnChatRedirectsToWiki() {
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat("[[w:c:starwars:Jedi|JediWiki]]");
+    chatPage.getMessage("JediWiki").click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    Assertion.assertStringContains(wikiPage.getHeaderText(), "Jedi");
+  }
+
+  @Test(groups = {"ChatTestsForUser_015"})
+  public void UserLinkOnChatRedirectsToUserPage() {
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat("[[User:" + userTwo + "|]]");
+    chatPage.getMessage(userTwo).click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    UserProfilePageObject wikiPage = new UserProfilePageObject(driver);
+    Assertion.assertStringContains(wikiPage.getUserNameTextBox().getText(), userTwo);
+  }
+
+  @Test(groups = {"ChatTestsForUser_016"})
+  public void ExternalLinkOnChatRedirectsToGivenPage() {
+    String externalLink = "https://www.onet.pl/";
+
+    ChatPage chatPage = openChatForUser(userOne, userOnePassword);
+    chatPage.writeOnChat(externalLink);
+    chatPage.getMessage(externalLink).click();
+    chatPage.switchToSecondTab(currentBrowserTab());
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    String currentUrl = wikiPage.getCurrentUrl();
+    Assertion.assertEquals(currentUrl, externalLink);
   }
 }

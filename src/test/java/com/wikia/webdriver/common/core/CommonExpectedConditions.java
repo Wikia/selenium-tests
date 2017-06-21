@@ -2,19 +2,13 @@ package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -261,6 +255,42 @@ public class CommonExpectedConditions {
       public String toString() {
         return String
             .format("text ('%s') to be present in element %s", text, selectorBy.toString());
+      }
+    };
+  }
+
+  public static ExpectedCondition<Boolean> textToBePresentInElementAfterRefresh(final WebElement element,
+                                                                                final String text) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        driver.navigate().refresh();
+        String elementText = element.getText();
+        return elementText.contains(text);
+      }
+
+      @Override
+      public String toString() {
+        return String
+                .format("text ('%s') to be present in element %s", text, element.toString());
+      }
+    };
+  }
+
+  public static ExpectedCondition<Boolean> textToBePresentInElementAfterRefresh(final By selectorBy,
+                                                                    final String text) {
+
+    return new ExpectedCondition<Boolean>() {
+      public Boolean apply(WebDriver driver) {
+        driver.navigate().refresh();
+        WebElement element = driver.findElement(selectorBy);
+        return element.getText().contains(text);
+      }
+
+      @Override
+      public String toString() {
+        return String
+                .format("text ('%s') to be present in element %s", text, selectorBy.toString());
       }
     };
   }
