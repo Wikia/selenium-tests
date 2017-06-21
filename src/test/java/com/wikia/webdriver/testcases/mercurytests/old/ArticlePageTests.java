@@ -46,11 +46,11 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
   public void mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
     new ArticleContent().clear();
-    new ArticleContent().push(MAIN_PAGE_CONTENT, "/Main_Page");
+    new ArticleContent().push(MAIN_PAGE_CONTENT, MercurySubpages.MAIN_PAGE);
 
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/Main_Page");
+    navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     Assertion.assertTrue(articlePage.isWikiaLogoVisible());
     Assertion.assertTrue(articlePage.isSearchButtonVisible());
@@ -62,19 +62,16 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
   public void mercury_article_linksInTopContributorsSectionRedirectsToUserPage() {
+    new ArticleContent().clear();
+    new ArticleContent().push(MAIN_PAGE_CONTENT, MercurySubpages.MAIN_PAGE);
+
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
 
     articlePage.clickTopContributor(0);
 
-    boolean result = articlePage.isUrlContainingUserPage();
-    PageObjectLogging.log(
-        "Url",
-        "match pattern /wiki/User:",
-        "does not match pattern /wiki/User:",
-        result
-    );
+    Assertion.assertTrue(articlePage.isUrlContainingUserPage());
   }
 
   @Test(groups = "mercury_article_linkedImagesRedirectToCorrespondingUrl")
