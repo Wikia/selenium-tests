@@ -67,7 +67,6 @@ public class BlogTests extends NewTestTemplate {
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
-    String blogTitle = blogPage.getBlogName();
     VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
     visualEditMode.addContent(blogContent);
     visualEditMode.submitArticle();
@@ -82,7 +81,6 @@ public class BlogTests extends NewTestTemplate {
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
-    String blogTitle = blogPage.getBlogName();
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
 
