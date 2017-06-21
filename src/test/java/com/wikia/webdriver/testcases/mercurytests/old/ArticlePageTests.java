@@ -48,7 +48,6 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
   public void mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
-    new ArticleContent().clear();
     new ArticleContent().push(MAIN_PAGE_CONTENT, "Main_Page");
 
     init();
@@ -65,7 +64,6 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
   public void mercury_article_linksInTopContributorsSectionRedirectsToUserPage() {
-    new ArticleContent().clear();
     new ArticleContent().push(MAIN_PAGE_CONTENT, "Main_Page");
 
     init();
@@ -79,7 +77,6 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "mercury_article_linkedImagesRedirectToCorrespondingUrl")
   public void mercury_article_linkedImagesRedirectToCorrespondingUrl() {
-    new ArticleContent().clear();
     new ArticleContent().push(LINKED_IMAGES_CONTENT, "LinkedImages");
 
     init();
