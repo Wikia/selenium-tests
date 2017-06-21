@@ -5,7 +5,6 @@ public class MercurySubpages {
   // Articles prepared for mercuryautomationtesting.wikia.com wiki
   public static final String MAIN_PAGE = "/wiki/Main_Page";
   public static final String GALLERY = "/wiki/Gallery";
-  public static final String LINKED_IMAGES = "/wiki/LinkedImages";
   public static final String TOC = "/wiki/TOC";
   public static final String TOC_WITHOUT_H2 = "/wiki/TOCWithoutH2";
   public static final String TOC_WITH_PORTABLE_INFOBOX = "/wiki/TOC_with_portable_infobox";
