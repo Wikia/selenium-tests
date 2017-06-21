@@ -83,6 +83,7 @@ public class VEImageTests extends NewTestTemplate {
     veCreatePage.waitForPageLoad();
 
     ArticlePageObject article = new ArticlePageObject();
+    article.verifyVEPublishComplete();
     article.openVEModeWithMainEditButton();
     VisualEditorPageObject ve = new VisualEditorPageObject();
     ve.alignMedia(2, Alignment.LEFT);

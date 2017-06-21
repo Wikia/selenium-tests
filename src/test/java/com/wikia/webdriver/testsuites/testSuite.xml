@@ -26,7 +26,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSkinPresence"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonocolor"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
@@ -41,9 +40,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVelesTracking"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsTaboolaOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdXCollapse"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBtfBlocking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
@@ -63,6 +60,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRefreshing"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapTheNewGeneration"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoFrequencyCapping"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
@@ -83,6 +81,7 @@
             <class name="com.wikia.webdriver.testcases.chattests.ChatTestsStaff"/>
             <class name="com.wikia.webdriver.testcases.commentstests.ArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.commentstests.BlogCommentsTests"/>
+            <class name="com.wikia.webdriver.testcases.communityheadertests.CommunityHeaderTests"/>
             <class name="com.wikia.webdriver.testcases.contentreview.ContentReviewTests"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>

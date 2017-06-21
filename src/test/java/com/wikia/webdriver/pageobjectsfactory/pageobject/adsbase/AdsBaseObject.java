@@ -333,13 +333,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     return getGptParams(slotName, "data-gpt-page-params");
   }
 
-  public void verifyMonocolorAd(String slotName) {
-    String slotSelector = AdsContent.getSlotSelector(slotName);
-    WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-    waitForSlotExpanded(slot);
-    Assertion.assertFalse(new AdsComparison().isAdVisible(slot, slotSelector, driver));
-  }
-
   public AdsBaseObject waitForPageLoaded() {
     jsActions.waitForJavaScriptTruthy("document.readyState === 'complete'");
     return this;

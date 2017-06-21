@@ -21,7 +21,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
 
-  @FindBy(css = "a.upphotos[title*='Add a photo']")
+  @FindBy(css = "#page-header-add-new-photo")
   private WebElement addPhotoButton;
   @FindBy(css = "input[name='wpUploadFile']")
   private WebElement browseForFileInput;
@@ -108,6 +108,24 @@ public class SpecialNewFilesPage extends SpecialPageObject {
         "Verify if " + fileName + " has been successfully uploaded", true);
   }
 
+  public Boolean isImageOnPage(String fileName) {
+    for (int i = 0; i < 2; i++) {
+      for (WebElement image : imagesNewFiles) {
+        if (image.getAttribute("src").contains(fileName)) {
+          return true;
+        }
+      }
+      try {
+        Thread.sleep(5000);
+      } catch (InterruptedException e) {
+        PageObjectLogging.logInfo("Sleep interrupted");
+      }
+      driver.navigate().refresh();
+    }
+
+    return false;
+  }
+
   /**
    * @return name of random image on Special:NewFiles page
    */
@@ -150,7 +168,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + imageName,
         URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public LightboxComponentObject openLightbox(int itemNumber) {
@@ -168,7 +186,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
     return this;
   }
 
-  public String getTitle(){
+  public String getTitle() {
     return NEW_FILES_SPECIAL_PAGE_TITLE;
   }
 }

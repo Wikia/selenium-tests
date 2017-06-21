@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,10 +16,10 @@ public class TopBar extends BasePageObject {
   @FindBy(css = ".site-head")
   private WebElement navBar;
 
-  @FindBy(css = ".fandom-logo")
+  @FindBy(css = ".site-logo")
   private WebElement logo;
 
-  @FindBy(css = ".logo-fandom")
+  @FindBy(css = ".global-navigation-mobile__logo")
   private WebElement logoFandom;
 
   @FindBy(css = ".site-head-icon-nav")
@@ -46,10 +45,6 @@ public class TopBar extends BasePageObject {
 
   private By navigationComponent = By.cssSelector(".side-nav-drawer");
   private By parentBy = By.xpath("./..");
-
-  public TopBar(WebDriver driver) {
-    PageFactory.initElements(driver, this);
-  }
 
   public Navigation openNavigation() {
     PageObjectLogging.logInfo("Open navigation");

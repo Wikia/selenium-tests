@@ -25,7 +25,7 @@ public class BlogPageObject extends ArticlePageObject {
   public WatchPageObject unfollowBlogPage() {
     String url = urlBuilder.appendQueryStringToURL(getCurrentUrl(), "action=unwatch");
     getUrl(url);
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public String getBlogTitle() {

@@ -1002,19 +1002,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoverySourcePointOasisHopToTaboola() {
-      return new Object[][]{
-          {
-              new Page("project43", "SourcePoint/Static_image/HopToTaboola" + SOURCE_POINT_INSTANT_GLOBAL),
-              ImmutableMap.<String, Object>builder()
-                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
-                  .put("slotName", AdsContent.TOP_LB)
-                  .build()
-          }
-      };
-  }
-
-  @DataProvider
   public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
@@ -1028,18 +1015,18 @@ public class AdsDataProvider {
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP/Legacy"),
+            new Page("project43", "SyntheticTests/UAP"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
                     .put("slotSize", new Dimension(1889, 767))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365404452)
                     .put("src", "gpt")
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MEDREC)
-                    .put("slotSize", new Dimension(300, 600))
-                    .put("lineItemId", 297978612)
+                    .put("slotSize", new Dimension(300, 250))
+                    .put("lineItemId", 365404452)
                     .put("src", "gpt")
                     .build()
             ),
@@ -1047,13 +1034,13 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.FLOATING_MEDREC)
                     .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "gpt")
                     .build(),
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.BOTTOM_LB)
                     .put("slotSize", new Dimension(1178, 479))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "gpt")
                     .build()
             )
@@ -1065,12 +1052,12 @@ public class AdsDataProvider {
   public static Object[][] adsUapMercury() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP/Legacy"),
+            new Page("project43", "SyntheticTests/UAP"),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365404452)
                     .put("src", "mobile")
                     .build()
             ),
@@ -1078,7 +1065,7 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                     .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
             ),
@@ -1086,15 +1073,15 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_PREFOOTER)
                     .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
-             ),
+            ),
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                     .put("slotSize", new Dimension(360, 540))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
             )
@@ -1105,7 +1092,7 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
                     .put("slotSize", new Dimension(360, 540))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365404452)
                     .put("src", "mobile")
                     .build()
             ),
@@ -1113,7 +1100,7 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_AD_IN_CONTENT)
                     .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
             ),
@@ -1121,7 +1108,7 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_PREFOOTER)
                     .put("slotSize", new Dimension(300, 250))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
             ),
@@ -1129,7 +1116,7 @@ public class AdsDataProvider {
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_BOTTOM_LB)
                     .put("slotSize", new Dimension(360, 540))
-                    .put("lineItemId", 297978612)
+                    .put("lineItemId", 365416332)
                     .put("src", "mobile")
                     .build()
             )
@@ -1146,34 +1133,18 @@ public class AdsDataProvider {
         };
     }
 
-  @DataProvider
-  public static Object[][] adsMonocolorOasis() {
-    return new Object[][]{
-        {
-            WIKI_SPECIAL,
-            "SyntheticTests/Monocolor_Ad"
-        }
-    };
-  }
-
     @DataProvider
     public static Object[][] adsVuapDesktop() {
         return new Object[][]{
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                         AdsContent.TOP_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
-                                AdsContent.TOP_LB
-                        )
+                        "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
                 },
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                         AdsContent.BOTTOM_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/gpt/%s_0",
-                                AdsContent.BOTTOM_LB
-                        )
+                        "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
                 }
         };
     }
@@ -1239,6 +1210,18 @@ public class AdsDataProvider {
                 }
         };
     }
+
+  @DataProvider
+  public static Object[][] adsVideoFrequencyCapping() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2pv]")
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2min]")
+        }
+    };
+  }
 
   @DataProvider
   public static Object[][] adsVelesTracking() {

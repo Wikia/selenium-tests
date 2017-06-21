@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.widget;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -29,10 +28,6 @@ public class TwitterWidgetPageObject extends WidgetPageObject {
   private static final String INCORRECT_TAG = "<twitter />";
   private static final String ERROR_MESSAGE =
       "Error: No Twitter Widget ID provided. Please see Help:Social media integration.";
-
-  public TwitterWidgetPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   protected String getTagName() {
     return TAG_NAME;
