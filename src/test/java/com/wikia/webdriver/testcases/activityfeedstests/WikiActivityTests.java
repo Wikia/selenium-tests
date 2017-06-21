@@ -71,12 +71,13 @@ public class WikiActivityTests extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
-    blogPage.verifyBlogTitle(blogTitle);
-    blogPage.verifyContent(blogContent);
 
-    new SpecialWikiActivityPageObject(driver)
-        .open()
-        .verifyRecentNewBlogPage(blogContent, blogTitle, credentials.userName);
+    Assertion.assertEquals(blogPage.getBlogTitle(), blogTitle);
+
+    Assertion.assertTrue(
+            new SpecialWikiActivityPageObject(driver)
+                    .open().doesLastNRecentBlogEditionsContains(5, blogContent, blogTitle, User.USER.getUserName())
+    );
   }
 
   @Test(groups = "WikiActivity_004")

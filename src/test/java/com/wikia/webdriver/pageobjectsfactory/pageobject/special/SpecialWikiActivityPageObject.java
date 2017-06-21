@@ -21,7 +21,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   @FindBys(@FindBy(css = "li[class*=\"activity-type\"]"))
   private List<WebElement> activityWebElementList;
-  @FindBys(@FindBy(css = "li.activity-ns-0"))
+  @FindBys(@FindBy(css = ".activityfeed > li"))
   private List<WebElement> activitiesList; //includes all of edit, new etc.
   @FindBys(@FindBy(css = "li.activity-type-edit"))
   private List<WebElement> editActivitiesList;
@@ -44,6 +44,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
            + URLsContent.SPECIAL_WIKI_ACTIVITY);
 
+    this.refreshPageAddingCacheBuster();
     return this;
   }
 
@@ -79,11 +80,21 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       ifPassed = ifDetailsPresent(activitiesList.get(i), articleName, userName);
       break;
     }
-//    PageObjectLogging.log("doesLastNRecentEditionsContains",
-//            "WikiActivity module found recent new page: '" + articleName
-//                    + "' that was created by user: " + userName, ifPassed);
+
     return ifPassed;
   }
+
+  public Boolean doesLastNRecentBlogEditionsContains(int n, String blogPostContent, String blogPostName,
+                                                     String userName) {
+    Boolean ifPassed = false;
+    for (int i = 0; i < n; i++) {
+      ifPassed = ifNewBlogDetailsPresent(activitiesList.get(i), blogPostContent, blogPostName, userName);
+      if (ifPassed == true) break;
+    }
+
+    return ifPassed;
+  }
+
 
   /**
    * verifies if there is the wanted NewPage on WikiActivity, searching through 5 recent editions.
@@ -216,7 +227,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   private Boolean ifNewBlogDetailsPresent(WebElement webElement,
                                           String blogContent, String blogTitle, String userName) {
-    boolean condition1 = ifDetailsPresent(webElement, "blog:" + userName
+    boolean condition1 = ifDetailsPresent(webElement, "User blog:" + userName
                                                       + "/" + blogTitle, userName);
     boolean condition2 = webElement.findElement(By.cssSelector("td em"))
         .getText().contains("New blog");
