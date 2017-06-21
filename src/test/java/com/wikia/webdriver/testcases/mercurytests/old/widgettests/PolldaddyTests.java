@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,11 +29,13 @@ public class PolldaddyTests extends NewTestTemplate {
   private Navigate navigate;
   private PolldaddyWidgetPageObject widget;
 
-  private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "/wiki/PollDaddyMercury/OneWidget";
-  private static final String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/PollDaddyMercury/MultipleWidgets";
-  private static final String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/PollDaddymercury/IncorrectWidget";
+  private static final String POLLDADDY_ONE_WIDGET_ARTICLE_NAME = "/PollDaddyMercury/OneWidget";
+  private static final String POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME = "/PollDaddyMercury/MultipleWidgets";
+  private static final String POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME = "/PollDaddymercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
-  private static final String QUERY_2 = POLLDADDY_ONE_WIDGET_ARTICLE_NAME.substring(6);
+  private static final String QUERY_2 = POLLDADDY_ONE_WIDGET_ARTICLE_NAME;
+  private static final String VALID_POLLDADDY_TAG = "<polldaddy id=\"8956579\"/>\n";
+  private static final String INVALID_POLLDADDY_TAG = "<polldaddy />";
 
   private void init() {
     this.topBar = new TopBar();
@@ -43,9 +46,9 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_001")
   public void MercuryPolldaddyWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
+    new ArticleContent().push(VALID_POLLDADDY_TAG, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -53,9 +56,9 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_002")
   public void MercuryPolldaddyWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    new ArticleContent().push(VALID_POLLDADDY_TAG, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -64,9 +67,10 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_003")
   public void MercuryPolldaddyWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    new ArticleContent().push(VALID_POLLDADDY_TAG, POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    new ArticleContent().push("Polldaddy Widget 003", "Map");
     init();
 
-    widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
@@ -76,9 +80,10 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    new ArticleContent().push(VALID_POLLDADDY_TAG + " " + VALID_POLLDADDY_TAG,
+            POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    widget.createMultiple(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
     navigate.toPage(POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -86,9 +91,9 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_005")
   public void MercuryPolldaddyWidgetTest_005_isErrorPresent() {
+    new ArticleContent().push(INVALID_POLLDADDY_TAG, POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.createIncorrect(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
     navigate.toPage(POLLDADDY_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
