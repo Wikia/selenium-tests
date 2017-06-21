@@ -34,9 +34,10 @@ public class ArticlePageTests extends NewTestTemplate {
 
   private static final String MAIN_PAGE_CONTENT =
           ContentLoader.loadWikiTextContent("Mercury_MainPage");
-
   private static final String LINKED_IMAGES_CONTENT =
           ContentLoader.loadWikiTextContent("Mercury_LinkedImages");
+  private static final String GALLERY_CONTENT =
+          ContentLoader.loadWikiTextContent("Mercury_Gallery");
 
   private void init() {
     this.topBar = new TopBar();
@@ -77,6 +78,7 @@ public class ArticlePageTests extends NewTestTemplate {
   @Test(groups = "mercury_article_linkedImagesRedirectToCorrespondingUrl")
   public void mercury_article_linkedImagesRedirectToCorrespondingUrl() {
     new ArticleContent().push(LINKED_IMAGES_CONTENT, "LinkedImages");
+    new ArticleContent().push(GALLERY_CONTENT, "Gallery");
 
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
