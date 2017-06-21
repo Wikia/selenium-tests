@@ -22,7 +22,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   @FindBys(@FindBy(css = "li[class*=\"activity-type\"]"))
   private List<WebElement> activityWebElementList;
   @FindBys(@FindBy(css = ".activityfeed > li"))
-  private List<WebElement> activitiesList; //includes all of edit, new etc.
+  private List<WebElement> activitiesList;
   @FindBys(@FindBy(css = "li.activity-type-edit"))
   private List<WebElement> editActivitiesList;
   @FindBys(@FindBy(css = "li.activity-type-new"))
@@ -74,7 +74,17 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     Assertion.assertNotNull(result);
   }
 
-  public Boolean doesLastNRecentEditionsContains(int n, String articleName, String userName) {
+  public Boolean doesLastNRecentEditionsContain(int n, String articleName, String userName) {
+    Boolean ifPassed = false;
+    for (int i = 0; i < n; i++) {
+      ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName, userName);
+      break;
+    }
+
+    return ifPassed;
+  }
+
+  public Boolean doesLastNRecentActivitiesContain(int n, String articleName, String userName) {
     Boolean ifPassed = false;
     for (int i = 0; i < n; i++) {
       ifPassed = ifDetailsPresent(activitiesList.get(i), articleName, userName);
@@ -84,8 +94,8 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     return ifPassed;
   }
 
-  public Boolean doesLastNRecentBlogEditionsContains(int n, String blogPostContent, String blogPostName,
-                                                     String userName) {
+  public Boolean doesLastNRecentBlogActivitiesContain(int n, String blogPostContent, String blogPostName,
+                                                      String userName) {
     Boolean ifPassed = false;
     for (int i = 0; i < n; i++) {
       ifPassed = ifNewBlogDetailsPresent(activitiesList.get(i), blogPostContent, blogPostName, userName);
@@ -170,13 +180,6 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
                             + "' that was done by user: " + userName, false, driver);
     }
 
-  }
-
-  public void verifyNoRecentEditionIsPresent(String articleName, String userName){
-    List<Activity> activityList = getActivities(10);
-    Boolean listContainsRecentEdition = activityList.stream().anyMatch(
-        p->p.getTitle().equals(articleName));
-    Assertion.assertFalse(listContainsRecentEdition);
   }
 
   /**

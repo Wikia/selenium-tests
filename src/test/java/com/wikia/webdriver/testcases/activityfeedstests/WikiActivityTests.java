@@ -42,7 +42,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(
             new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentEditionsContains(5, articleName, User.STAFF.getUserName())
+                    .open().doesLastNRecentActivitiesContain(5, articleName, User.STAFF.getUserName())
     );
   }
 
@@ -55,7 +55,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(
             new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentEditionsContains(5, articleName, User.STAFF.getUserName())
+                    .open().doesLastNRecentActivitiesContain(5, articleName, User.STAFF.getUserName())
     );
   }
 
@@ -76,7 +76,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(
             new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentBlogEditionsContains(5, blogContent, blogTitle, User.USER.getUserName())
+                    .open().doesLastNRecentBlogActivitiesContain(5, blogContent, blogTitle, User.USER.getUserName())
     );
   }
 
@@ -94,27 +94,26 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(
             new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentEditionsContains(5, articleName, User.STAFF.getUserName())
+                    .open().doesLastNRecentActivitiesContain(5, articleName, User.STAFF.getUserName())
     );
   }
 
   @Test(groups = "WikiActivity_005")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_005_newEditionWoVisualChangeNotRecordedOnActivityModule() {
-    String articleTitle = "newEditionWoVisualChangeNotRecordedOnActivityModule";
-    new ArticleContent().push("content", articleTitle);
-
-    ArticlePageObject article = new ArticlePageObject().open(articleTitle);
+    new ArticleContent().push("content");
+    ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
     String articleContent = article.getContent();
+
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
-    article.verifyContent(articleContent);
 
-    new SpecialWikiActivityPageObject(driver)
-        .open()
-        .verifyNoRecentEditionIsPresent(articleName, credentials.userName);
+    Assertion.assertFalse(
+            new SpecialWikiActivityPageObject(driver)
+                    .open().doesLastNRecentEditionsContain(5, articleName, User.USER.getUserName())
+    );
   }
 
   @Test(groups = "WikiActivity_006")
