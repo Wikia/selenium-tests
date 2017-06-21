@@ -128,6 +128,6 @@ public class UserProfilePageObject extends WikiBasePageObject {
   }
 
   public String getUserName(){
-    return userTextBox.getText();
+    return userNameTextBox.getText();
   }
 }
