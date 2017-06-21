@@ -21,6 +21,8 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   @FindBys(@FindBy(css = "li[class*=\"activity-type\"]"))
   private List<WebElement> activityWebElementList;
+  @FindBys(@FindBy(css = "li.activity-ns-0"))
+  private List<WebElement> activitiesList; //includes all of edit, new etc.
   @FindBys(@FindBy(css = "li.activity-type-edit"))
   private List<WebElement> editActivitiesList;
   @FindBys(@FindBy(css = "li.activity-type-new"))
@@ -71,27 +73,16 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     Assertion.assertNotNull(result);
   }
 
-  /**
-   * verifies if there is the wanted edition on WikiActivity, searching through 5 recent editions.
-   */
-  public void verifyRecentEdition(String articleName, String userName) {
+  public Boolean doesLastNRecentEditionsContains(int n, String articleName, String userName) {
     Boolean ifPassed = false;
-    for (int i = 0; i < 4; i++) {
-      ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName,
-                                  userName);
-      if (ifPassed) {
-        PageObjectLogging.log("verifyRecentEdition",
-                              "WikiActivity module found recent edition that affected '"
-                              + articleName
-                              + "' and was done by user: " + userName, true);
-        break;
-      }
+    for (int i = 0; i < n; i++) {
+      ifPassed = ifDetailsPresent(activitiesList.get(i), articleName, userName);
+      break;
     }
-    if (!ifPassed) {
-      PageObjectLogging.log("verifyRecentEdition",
-                            "edition on article  '" + articleName + "' by user: '"
-                            + userName + "', not found", false, driver);
-    }
+//    PageObjectLogging.log("doesLastNRecentEditionsContains",
+//            "WikiActivity module found recent new page: '" + articleName
+//                    + "' that was created by user: " + userName, ifPassed);
+    return ifPassed;
   }
 
   /**
@@ -217,8 +208,8 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   private Boolean ifDetailsPresent(WebElement webElement, String articleName,
                                    String userName) {
     boolean condition1 = webElement.findElement(By.cssSelector("strong a"))
-        .getText().contains(articleName);
-    boolean condition2 = webElement.findElement(By.cssSelector("span a"))
+        .getText().replaceAll("_", " ").contains(articleName);
+    boolean condition2 = webElement.findElement(By.cssSelector("cite span a"))
         .getText().contains(userName);
     return (condition1 & condition2);
   }

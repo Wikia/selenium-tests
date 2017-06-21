@@ -29,50 +29,36 @@ public class WikiActivityTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  /**
-   * https://wikia-inc.atlassian.net/browse/DAR-1617
-   */
   @Test(groups = "WikiActivity_001")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.STAFF)
   public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
-    String articleContent = PageContent.ARTICLE_TEXT + DateTime.now().getMillis();
-    ArticlePageObject article =
-        new ArticlePageObject().open("NewEditionIsRecordedOnActivityModule");
+    new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
+    ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
+
     VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
-    visualEditMode.addContent(articleContent);
+    visualEditMode.addContent(PageContent.ARTICLE_TEXT_EDIT);
     visualEditMode.submitArticle();
-    article.verifyContent(articleContent);
 
-    new SpecialWikiActivityPageObject(driver)
-        .open()
-        .verifyRecentEdition(articleName, credentials.userName);
+    Assertion.assertTrue(
+            new SpecialWikiActivityPageObject(driver)
+                    .open().doesLastNRecentEditionsContains(5, articleName, User.STAFF.getUserName())
+    );
   }
 
-  /**
-   * https://wikia-inc.atlassian.net/browse/DAR-1617
-   */
   @Test(groups = "WikiActivity_002")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.STAFF)
   public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
-    SpecialCreatePage specialCreatePage = new SpecialCreatePage().open();
-    String articleContent = PageContent.ARTICLE_TEXT;
-    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
-    visualEditMode.addContent(articleContent);
-    ArticlePageObject article = visualEditMode.submitArticle();
-    String articleName = article.getArticleName();
-    article.verifyContent(articleContent);
-    article.verifyArticleTitle(articleTitle);
+    new ArticleContent().clear();
+    new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
+    String articleName = new ArticlePageObject().open().getArticleName();
 
-    new SpecialWikiActivityPageObject(driver)
-        .open()
-        .verifyRecentNewPage(articleName, credentials.userName);
+    Assertion.assertTrue(
+            new SpecialWikiActivityPageObject(driver)
+                    .open().doesLastNRecentEditionsContains(5, articleName, User.STAFF.getUserName())
+    );
   }
 
-  /**
-   * https://wikia-inc.atlassian.net/browse/DAR-1617
-   */
   @Test(groups = "WikiActivity_003")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
@@ -93,9 +79,6 @@ public class WikiActivityTests extends NewTestTemplate {
         .verifyRecentNewBlogPage(blogContent, blogTitle, credentials.userName);
   }
 
-  /**
-   * https://wikia-inc.atlassian.net/browse/DAR-1617
-   */
   @Test(groups = "WikiActivity_004")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
