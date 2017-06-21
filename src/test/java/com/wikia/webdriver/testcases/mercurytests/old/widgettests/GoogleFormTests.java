@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,11 +29,14 @@ public class GoogleFormTests extends NewTestTemplate {
   private GoogleFormWidgetPageObject widget;
   private Navigate navigate;
 
-  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormMercury/OneWidget";
-  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/GoogleFormMercury_MultipleWidgets";
-  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/GoogleFormercury/IncorrectWidget";
+  private static final String GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME = "/GoogleFormMercury/OneWidget";
+  private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/GoogleFormMercury/MultipleWidgets";
+  private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/GoogleFormMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME.substring(6);
+  private static final String VALID_GOOGLE_FORM_TAG =
+          "<googleform url=\"https://docs.google.com/forms/d/e/1FAIpQLSdtT9ru9GeKbYk1uACHalivOIHR_mzEr4EfTqYXESXJhNznHw/viewform?embedded=true\" />";
+  private static final String INVALID_GOOGLE_FORM_TAG = "<googleform />";
 
   private void init() {
     this.topBar = new TopBar();
@@ -43,9 +47,9 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_001")
   public void MercuryGoogleFormWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
+    new ArticleContent().push(VALID_GOOGLE_FORM_TAG, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -53,9 +57,9 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_002")
   public void MercuryGoogleFormWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    new ArticleContent().push(VALID_GOOGLE_FORM_TAG, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -64,9 +68,11 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_003")
   public void MercuryGoogleFormWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    new ArticleContent().push(VALID_GOOGLE_FORM_TAG, GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
+    new ArticleContent().push("Mercury Google Form 003", "Map");
+
     init();
 
-    widget.create(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
@@ -76,9 +82,10 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_004")
   public void MercuryGoogleFormWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    new ArticleContent().push(VALID_GOOGLE_FORM_TAG + " " + VALID_GOOGLE_FORM_TAG,
+            GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    widget.createMultiple("GoogleFormMercury_OneWidget");
     navigate.toPage(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -86,9 +93,9 @@ public class GoogleFormTests extends NewTestTemplate {
 
   @Test(groups = "MercuryGoogleFormWidgetTest_005")
   public void MercuryGoogleFormWidgetTest_005_isErrorPresent() {
+    new ArticleContent().push(INVALID_GOOGLE_FORM_TAG, GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.createIncorrect(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
     navigate.toPage(GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
