@@ -112,7 +112,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertFalse(
             new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentEditionsContain(5, articleName, User.USER.getUserName())
+                    .open().doesLastNRecentEditionsContain(2, articleName, User.USER.getUserName())
     );
   }
 

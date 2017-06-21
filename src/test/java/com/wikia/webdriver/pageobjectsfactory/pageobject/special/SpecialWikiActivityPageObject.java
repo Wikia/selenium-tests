@@ -75,19 +75,35 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   public Boolean doesLastNRecentEditionsContain(int n, String articleName, String userName) {
     Boolean ifPassed = false;
+
+    if(n < editActivitiesList.size()){
+      System.out.println(n);
+      System.out.println(editActivitiesList.size());
+      n = editActivitiesList.size();
+    }
+
     for (int i = 0; i < n; i++) {
       ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName, userName);
-      break;
+      if (ifPassed == true) {
+        break;
+      }
     }
 
     return ifPassed;
   }
 
   public Boolean doesLastNRecentActivitiesContain(int n, String articleName, String userName) {
+
+    if(n < editActivitiesList.size()){
+      n = editActivitiesList.size();
+    }
+
     Boolean ifPassed = false;
     for (int i = 0; i < n; i++) {
       ifPassed = ifDetailsPresent(activitiesList.get(i), articleName, userName);
-      break;
+      if (ifPassed == true) {
+        break;
+      }
     }
 
     return ifPassed;
@@ -95,6 +111,11 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   public Boolean doesLastNRecentBlogActivitiesContain(int n, String blogPostContent, String blogPostName,
                                                       String userName) {
+
+    if(n < editActivitiesList.size()){
+      n = editActivitiesList.size();
+    }
+
     Boolean ifPassed = false;
     for (int i = 0; i < n; i++) {
       ifPassed = ifNewBlogDetailsPresent(activitiesList.get(i), blogPostContent, blogPostName, userName);
