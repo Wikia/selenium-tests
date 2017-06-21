@@ -33,9 +33,9 @@ public class GoogleFormTests extends NewTestTemplate {
   private static final String GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME = "/GoogleFormMercury/MultipleWidgets";
   private static final String GOOGLE_FORM_INCORRECT_WIDGET_ARTICLE_NAME = "/GoogleFormMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
-  private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME.substring(6);
+  private static final String QUERY_2 = GOOGLE_FORM_ONE_WIDGET_ARTICLE_NAME;
   private static final String VALID_GOOGLE_FORM_TAG =
-          "<googleform url=\"https://docs.google.com/forms/d/e/1FAIpQLSdtT9ru9GeKbYk1uACHalivOIHR_mzEr4EfTqYXESXJhNznHw/viewform?embedded=true\" />";
+          "<googleform url=\"https://docs.google.com/forms/d/e/1FAIpQLSf5EluNgyx1NDGDMcSrHhZUyMFctSjrY8yR1N3sg8INk3v7ew/viewform?embedded=true\" />";
   private static final String INVALID_GOOGLE_FORM_TAG = "<googleform />";
 
   private void init() {
