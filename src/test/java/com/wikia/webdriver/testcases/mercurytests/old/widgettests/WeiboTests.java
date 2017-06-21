@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -28,11 +29,13 @@ public class WeiboTests extends NewTestTemplate {
   private Navigate navigate;
   private WeiboWidgetPageObject widget;
 
-  private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "/wiki/WeiboMercury/OneWidget";
-  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "/wiki/WeiboMercury/MultipleWidgets";
-  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "/wiki/WeiboMercury/IncorrectWidget";
+  private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "/WeiboMercury/OneWidget";
+  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "/WeiboMercury/MultipleWidgets";
+  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "/WeiboMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
-  private static final String QUERY_2 = WEIBO_ONE_WIDGET_ARTICLE_NAME.substring(6);
+  private static final String QUERY_2 = WEIBO_ONE_WIDGET_ARTICLE_NAME;
+  private static final String VALID_WEIBO_TAG = "<weibo uids=\"1642909335,1782515283\" />\n";
+  private static final String INVALID_WEIBO_TAG = "<weibo />";
 
   private void init() {
     this.topBar = new TopBar();
@@ -43,9 +46,9 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_001")
   public void MercuryWeiboWidgetTest_001_isLoadedOnFirstVisitDirectlyFromUrl() {
+    new ArticleContent().push(VALID_WEIBO_TAG, WEIBO_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -53,9 +56,9 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_002")
   public void MercuryWeiboWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
+    new ArticleContent().push(VALID_WEIBO_TAG, WEIBO_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(MercurySubpages.MAIN_PAGE);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -64,9 +67,10 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_003")
   public void MercuryWeiboWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    new ArticleContent().push(VALID_WEIBO_TAG, WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    new ArticleContent().push("Weibo test 003", "Map");
     init();
 
-    widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
     navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
@@ -76,9 +80,10 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_004")
   public void MercuryWeiboWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
+    new ArticleContent().push(VALID_WEIBO_TAG + " " + VALID_WEIBO_TAG,
+            WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    widget.createMultiple(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
     navigate.toPage(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -86,9 +91,9 @@ public class WeiboTests extends NewTestTemplate {
 
   @Test(groups = "MercuryWeiboWidgetTest_005")
   public void MercuryWeiboWidgetTest_005_isErrorPresent() {
+    new ArticleContent().push(INVALID_WEIBO_TAG, WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    widget.createIncorrect(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
     navigate.toPage(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
