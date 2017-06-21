@@ -86,8 +86,6 @@ public class ArticlePageTests extends NewTestTemplate {
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
     loading.handleAsyncPageReload();
-    System.out.println(oldUrl);
-    System.out.println(driver.getCurrentUrl());
 
     Assertion.assertFalse(driver.getCurrentUrl().equals(oldUrl));
   }
@@ -116,7 +114,6 @@ public class ArticlePageTests extends NewTestTemplate {
     navigate.toPage(encodedQuestionMarkUrl);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
-    System.out.println(article.getArticleTitle().toLowerCase());
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     PageObjectLogging.logWarning(
