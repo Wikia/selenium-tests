@@ -134,7 +134,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement wikiNameHeader;
   @FindBy(css = "#mw-content-text img.thumbimage")
   private WebElement thumbnailImageArticle;
-  @FindBy(css = ".wikia-menu-button")
+  @FindBy(css = ".wds-button-group")
   private WebElement articleEditButton;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
