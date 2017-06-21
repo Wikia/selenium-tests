@@ -58,7 +58,7 @@ public class ArticlePageObject {
   }
 
   public void clickOnAnchorInContent(int index) {
-    wait.forElementVisible(anchorsInContent.get(index));
+    wait.forElementClickable(anchorsInContent.get(index));
     anchorsInContent.get(index).click();
   }
 

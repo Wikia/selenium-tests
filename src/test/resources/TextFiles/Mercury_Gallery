@@ -1,0 +1,106 @@
+===Gallery===
+Position tests
+left
+<gallery position="left">
+Image010.jpg|GalleryCaption001
+Image009.jpg|caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+center
+<gallery position="center">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+right
+<gallery position="right">
+File:Naruto_Manga_Sequel_Coming_In_2015_-_IGN_News
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+
+Caption tests
+<gallery>
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+Image007.jpg|[http://google.com Google]
+File:Naruto_Manga_Sequel_Coming_In_2015_-_IGN_News
+</gallery>
+
+===Gallery slider===
+Caption tests
+<gallery type="slider">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+Image007.jpg|[http://google.com Google]
+</gallery>
+
+Position tests
+left
+<gallery type="slider" position="left">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+center
+<gallery type="slider" position="center">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+right
+<gallery type="slider" position="right">
+Image010.jpg|GalleryCaption001
+Image009.jpg|caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+
+
+===Gallery slideshow===
+Caption tests
+<gallery type="slideshow">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+Image007.jpg|[http://google.com Google]
+</gallery>
+
+Position tests
+left
+<gallery type="slideshow" position="left">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+center
+<gallery type="slideshow" position="center">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+right
+<gallery type="slideshow" position="right">
+Image010.jpg|GalleryCaption001
+Image009.jpg|Caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+
+===Images as File===
+
+[[File:Midnight Tango (2011) - Theatrical Trailer for Midnight Tango|thumb|335 px|center|caption 1]]
+[[File:Burton-jane-ginger-domestic-kitten-felis-catus-rolling-on-back-playing.jpg|thumb|sweet kitty]]
+[[File:Image010.jpg|center|link=w:c:www:Wikia|caption 2]]
+
+[[File:Image010.jpg|center|link=http://iam8bit.com/|caption 3]]
+[[File:Image010.jpg|center|link=http://www.logitech.com/|caption 4]]
+[[File:Image010.jpg|center|link=http://www.porternovelli.com/|caption 5]]
+[[File:Image008.jpg|left|link=w:c:www:Wikia|caption 6]]
+[[File:Image008.jpg|left|link=w:c:www:Wikia|caption 7]]
+[[File:Image008.jpg|right|link=w:c:www:Wikia|caption 8]]
+[[File:Image008.jpg|right|link=MercuryGallery|caption 9]]
+[[File:Red.jpg|center|caption 10]]
+[[File:The_Hobbit-Official_Trailer|center|caption 11]]
+[[Category:Galleries]]
