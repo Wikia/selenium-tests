@@ -119,7 +119,6 @@ public class WikiActivityTests extends NewTestTemplate {
   @Test(groups = "WikiActivity_006")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_006_clickingTitleRedirectsToArticle() {
-
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
     List<Activity> activityList = activityPage.getActivities(10);
@@ -127,14 +126,14 @@ public class WikiActivityTests extends NewTestTemplate {
     String title = activityList.stream().findFirst().get().getTitle();
     ArticlePageObject article = activityList.stream().findFirst().get().clickOnTitle();
     String articleName = article.getArticleName();
+
     Assertion.assertEquals(articleName, title);
   }
 
-  @Test(groups = "WikiActivity_008")
+  @Test(groups = "WikiActivity_007")
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_008_clickingUserRedirectsToUserPage() {
-    String articleTitle = "clickingUserRedirectsToUserPage";
-    new ArticleContent().push("content", articleTitle);
+  public void WikiActivityTests_007_clickingUserRedirectsToUserPage() {
+    new ArticleContent().push("content");
 
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
@@ -148,10 +147,9 @@ public class WikiActivityTests extends NewTestTemplate {
     Assertion.assertEquals(currentUserName, expectedUserName);
   }
 
-  @Test(groups = "WikiActivity_010")
+  @Test(groups = "WikiActivity_008")
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_010_clickingIconNextToArticleRedirectsToDiff() {
-
+  public void WikiActivityTests_008_clickingIconNextToArticleRedirectsToDiff() {
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
     List<Activity> activityList = activityPage.getActivities(10);
@@ -161,6 +159,7 @@ public class WikiActivityTests extends NewTestTemplate {
         .findFirst().get();
 
     DiffPagePageObject diffPage = editActivity.showChanges();
-    Assertion.assertEquals(diffPage.isDiffTableVisible(), true);
+
+    Assertion.assertTrue(diffPage.isDiffTableVisible());
   }
 }
