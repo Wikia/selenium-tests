@@ -77,7 +77,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public List<VideoTile> getVideoTiles(int numberOfTiles){
     wait.forElementPresent(By.cssSelector(NEWEST_VIDEO_CSS));
     List<VideoTile> videoTileList = new ArrayList<>();
-    List<WebElement> subList = videoTileElements.subList(0,numberOfTiles);
+    //numberOfTilesToFetch set to max number of possible elements to fetch
+    int numberOfTilesToFetch = numberOfTiles>videoTileElements.size()?videoTileElements.size():numberOfTiles;
+    List<WebElement> subList = videoTileElements.subList(0,numberOfTilesToFetch);
     for (WebElement videoTileElement : subList){
       VideoTile notification = new VideoTile(videoTileElement);
       videoTileList.add(notification);
@@ -108,9 +110,11 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public void deleteNewestVideo() {
+    String videoTitle = getNewestVideoTitle();
     newestVideoDeleteIcon.click();
     wait.forElementVisible(deleteConfirmButton);
     deleteConfirmButton.click();
+    PageObjectLogging.log("Delete video", "Deleted video with title [" + videoTitle + "]", true);
   }
 
   public boolean isNewVideoAdded() {
