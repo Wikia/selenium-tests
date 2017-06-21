@@ -36,10 +36,8 @@ public class ChatTests extends NewTestTemplate {
   private String userFivePassword = credentials.password5;
   private String userSix = credentials.userName6;
   private String userSixPassword = credentials.password6;
-  private String userToBeBanned = credentials.userName8;
-  private String userToBeBannedPassword = credentials.password8;
-  private String userToBeBanned2Username = User.CHAT_USER_TO_BE_BANNED.getUserName();
-  private String userToBeBanned2Password = User.CHAT_USER_TO_BE_BANNED.getPassword();
+  private String userToBeBannedUsername = User.CHAT_USER_TO_BE_BANNED.getUserName();
+  private String userToBeBannedPassword = User.CHAT_USER_TO_BE_BANNED.getPassword();
   private String userStaff = credentials.userNameStaff;
   private String userStaffPassword = credentials.passwordStaff;
 
@@ -133,22 +131,22 @@ public class ChatTests extends NewTestTemplate {
 
   @Test(groups = {"ChatTestsForUser_005"})
   public void staffCanBanUser() {
-    ChatPage userToBeBaned = openChatForUser(userToBeBanned, userToBeBannedPassword);
+    ChatPage userToBeBaned = openChatForUser(userToBeBannedUsername, userToBeBannedPassword);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
     ChatPage chatUserStaff = openChatForUser(userStaff, userStaffPassword);
-    chatUserStaff.clickOnDifferentUser(userToBeBanned);
-    chatUserStaff.banUser(userToBeBanned);
+    chatUserStaff.clickOnDifferentUser(userToBeBannedUsername);
+    chatUserStaff.banUser(userToBeBannedUsername);
 
     switchToWindow(0);
     try {
       Assertion.assertTrue(userToBeBaned.isUserKickedFromChat(), "BANED USER IS ABLE TO WRITE MESSAGE");
     } finally {
       switchToWindow(1);
-      chatUserStaff.unBanUser(userToBeBanned);
+      chatUserStaff.unBanUser(userToBeBannedUsername);
     }
-    Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDisplayed(userToBeBanned), "UNBAN MESSAGE IS NOT DISPLAYED");
+    Assertion.assertTrue(chatUserStaff.isChatUnbanMessageDisplayed(userToBeBannedUsername), "UNBAN MESSAGE IS NOT DISPLAYED");
   }
 
   @Test(groups = {"ChatTestsForUser_006"})
@@ -265,36 +263,36 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(1);
     SpecialVersionPage chatWindow = new SpecialVersionPage().open();
-    ChatPage chatUserToBeBanned = openChatForUser(userToBeBanned2Username, userToBeBanned2Password);
+    ChatPage chatUserToBeBanned = openChatForUser(userToBeBannedUsername, userToBeBannedPassword);
 
     switchToWindow(0);
-    chatUserStaff.clickOnDifferentUser(userToBeBanned2Username);
-    chatUserStaff.banUser(userToBeBanned2Username);
+    chatUserStaff.clickOnDifferentUser(userToBeBannedUsername);
+    chatUserStaff.banUser(userToBeBannedUsername);
 
     switchToWindow(1);
     Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
 
     switchToWindow(0);
-    chatUserStaff.unBanUser(userToBeBanned2Username);
+    chatUserStaff.unBanUser(userToBeBannedUsername);
     switchToWindow(1);
     Assertion.assertTrue(chatUserToBeBanned.isUserOnChat(), "USER IS NOT LOGGED IN TO CHAT");
   }
 
-  @Test
+  @Test(groups = {"ChatTestsForUser_013"})
   public void messageAppearsWhenMaxLengthExceeded (){
     ChatPage chatUserOne = openChatForUser(userOne, userOnePassword);
     chatUserOne.writeLongMessage(1000);
     Assertion.assertTrue(chatUserOne.isMessageTooLongWarningDisplayed(), "WARNING ABOUT TOO LONG MESSAGE NOT DISPLAYED");
   }
 
-  @Test(groups = {"ChatTestsForUser_013"})
+  @Test(groups = {"ChatTestsForUser_014"})
   public void happyEmoticonAppearsWhenWrittenByHand() {
     ChatPage chatPage = openChatForUser(userOne, userOnePassword);
     chatPage.writeOnChat(":-)");
     Assertion.assertTrue(chatPage.isEmoticonVisible("Emoticon_happy.png"), "Emoticon was not displayed");
   }
 
-  @Test(groups = {"ChatTestsForUser_014"})
+  @Test(groups = {"ChatTestsForUser_015"})
   public void InternalLinkOnChatRedirectsToWiki() {
     ChatPage chatPage = openChatForUser(userOne, userOnePassword);
     chatPage.writeOnChat("[[w:c:starwars:Jedi|JediWiki]]");
@@ -304,7 +302,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertStringContains(wikiPage.getHeaderText(), "Jedi");
   }
 
-  @Test(groups = {"ChatTestsForUser_015"})
+  @Test(groups = {"ChatTestsForUser_016"})
   public void UserLinkOnChatRedirectsToUserPage() {
     ChatPage chatPage = openChatForUser(userOne, userOnePassword);
     chatPage.writeOnChat("[[User:" + userTwo + "|]]");
@@ -314,7 +312,7 @@ public class ChatTests extends NewTestTemplate {
     Assertion.assertStringContains(wikiPage.getUserNameTextBox().getText(), userTwo);
   }
 
-  @Test(groups = {"ChatTestsForUser_016"})
+  @Test(groups = {"ChatTestsForUser_017"})
   public void ExternalLinkOnChatRedirectsToGivenPage() {
     String externalLink = "https://www.onet.pl/";
 
