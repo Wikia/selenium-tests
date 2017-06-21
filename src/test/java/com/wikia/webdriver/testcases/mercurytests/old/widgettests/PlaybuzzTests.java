@@ -89,7 +89,7 @@ public class PlaybuzzTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPlaybuzzWidgetTest_005")
   public void MercuryPlaybuzzWidgetTest_005_isErrorPresent() {
-    new ArticleContent().push(INVALID_PLAYBUZZ_TAG, PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME)
+    new ArticleContent().push(INVALID_PLAYBUZZ_TAG, PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
     navigate.toPage(PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
