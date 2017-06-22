@@ -62,7 +62,7 @@ public class ArticlePage extends WikiBasePageObject {
   }
 
   public ArticlePage open(String pageName) {
-    getNavigate().toPage(pageName);
+    getNavigate().toPageByPath(pageName);
 
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 

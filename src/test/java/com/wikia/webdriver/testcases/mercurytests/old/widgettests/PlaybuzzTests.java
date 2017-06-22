@@ -47,7 +47,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     new ArticleContent().push(VALID_PLAYBUZZ_TAG, PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     new ArticleContent().push(VALID_PLAYBUZZ_TAG, PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.MAIN_PAGE);
     topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -69,7 +69,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     new ArticleContent().push("Playbuzz Mercury Widget 003", "Map");
     init();
 
-    navigate.toPage("/" + PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -82,7 +82,7 @@ public class PlaybuzzTests extends NewTestTemplate {
             PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME);
     init();
 
-    navigate.toPage("/" + PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME);
+    navigate.toPage(PLAYBUZZ_MULTIPLE_WIDGETS_ARTIVLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -92,7 +92,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_PLAYBUZZ_TAG, PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(PLAYBUZZ_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

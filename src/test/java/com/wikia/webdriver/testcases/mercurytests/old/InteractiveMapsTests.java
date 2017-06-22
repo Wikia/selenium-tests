@@ -29,7 +29,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
   private void init() {
     this.maps = new InteractiveMapsComponentObject();
 
-    new Navigate().toPage(MercurySubpages.MAP);
+    new Navigate().toPageByPath(MercurySubpages.MAP);
   }
 
   @RelatedIssue(issueID = "SUS-1775", comment = "Test won't pass until product is fixed, please don't bother reruning")

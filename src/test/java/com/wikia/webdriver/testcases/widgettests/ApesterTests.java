@@ -35,7 +35,7 @@ public class ApesterTests extends NewTestTemplate {
     init();
 
     widget.create(APESTER_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -46,7 +46,7 @@ public class ApesterTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(APESTER_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(APESTER_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(APESTER_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class ApesterTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(APESTER_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(APESTER_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(APESTER_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

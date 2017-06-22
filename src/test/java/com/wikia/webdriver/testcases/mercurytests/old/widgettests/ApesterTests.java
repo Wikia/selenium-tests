@@ -12,7 +12,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
 
 import org.testng.annotations.Test;
@@ -48,7 +47,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(VALID_APESTER_TAG, APESTER_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -58,7 +57,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(VALID_APESTER_TAG, APESTER_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.MAIN_PAGE);
     topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -70,7 +69,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(VALID_APESTER_TAG, APESTER_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -83,7 +82,7 @@ public class ApesterTests extends NewTestTemplate {
             APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -93,7 +92,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_APESTER_TAG, APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage(APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

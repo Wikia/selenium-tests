@@ -14,27 +14,35 @@ public class Navigate extends BasePageObject {
     return this;
   }
 
-  public Navigate toPage(String pageName, String reference) {
-    String query = getQueryParams(pageName);
+  public Navigate toPageByPath(String path) {
+    String query = getQueryParams(path);
+
+    driver.get(urlBuilder.getUrlForWiki() + path + query);
+
+    return this;
+  }
+
+  public Navigate toPageByPath(String path, String reference) {
+    String query = getQueryParams(path);
     reference = "#" + reference;
 
-    driver.get(urlBuilder.getUrlForPage(pageName) + query + reference);
+    driver.get(urlBuilder.getUrlForPage(path) + query + reference);
 
     return this;
   }
 
-  public Navigate toPage(String pageName, String[] queryParams) {
-    String query = getQueryParams(pageName, queryParams);
+  public Navigate toPageByPath(String path, String[] queryParams) {
+    String query = getQueryParams(path, queryParams);
 
-    driver.get(urlBuilder.getUrlForPage(pageName) + query);
+    driver.get(urlBuilder.getUrlForPage(path) + query);
 
     return this;
   }
 
-  public Navigate toPage(String host, String pageName, String[] queryParams) {
-    String query = getQueryParams(pageName, queryParams);
+  public Navigate toPageByPath(String host, String path, String[] queryParams) {
+    String query = getQueryParams(path, queryParams);
 
-    driver.get(urlBuilder.getUrlForPage(pageName) + query);
+    driver.get(urlBuilder.getUrlForPage(path) + query);
 
     return this;
   }

@@ -33,7 +33,7 @@ public class CategoryPage extends WikiBasePageObject {
   }
 
   public CategoryPage open(String categoryName) {
-    this.navigate.toPage(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
+    this.navigate.toPageByPath(String.format("%s%s", URLsContent.WIKI_DIR, categoryName));
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);
 
     PageObjectLogging.logInfo(String.format("%s category page opened", categoryName));

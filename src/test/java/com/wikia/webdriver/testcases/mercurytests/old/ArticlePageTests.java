@@ -52,7 +52,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/Main_Page");
+    navigate.toPageByPath("/wiki/Main_Page");
 
     Assertion.assertTrue(articlePage.isWikiaLogoVisible());
     Assertion.assertTrue(articlePage.isSearchButtonVisible());
@@ -68,7 +68,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/Main_Page");
+    navigate.toPageByPath("/wiki/Main_Page");
 
     articlePage.clickTopContributor(0);
 
@@ -82,7 +82,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage("/wiki/LinkedImages");
+    navigate.toPageByPath("/wiki/LinkedImages");
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
@@ -107,12 +107,12 @@ public class ArticlePageTests extends NewTestTemplate {
         "Accessing article directly through URL"
     );
 
-    navigate.toPage(encodedColonUrl);
+    navigate.toPageByPath(encodedColonUrl);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    navigate.toPage(encodedQuestionMarkUrl);
+    navigate.toPageByPath(encodedQuestionMarkUrl);
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));

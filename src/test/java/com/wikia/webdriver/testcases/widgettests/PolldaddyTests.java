@@ -35,7 +35,7 @@ public class PolldaddyTests extends NewTestTemplate {
     init();
 
     widget.create(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(POLLDADDY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -46,7 +46,7 @@ public class PolldaddyTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(POLLDADDY_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class PolldaddyTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(POLLDADDY_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

@@ -35,7 +35,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.create(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -46,7 +46,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class PollsnackTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

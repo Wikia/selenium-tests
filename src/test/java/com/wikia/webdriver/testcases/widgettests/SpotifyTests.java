@@ -35,7 +35,7 @@ public class SpotifyTests extends NewTestTemplate {
     init();
 
     widget.create(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(SPOTIFY_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -46,7 +46,7 @@ public class SpotifyTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(SPOTIFY_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class SpotifyTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(SPOTIFY_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

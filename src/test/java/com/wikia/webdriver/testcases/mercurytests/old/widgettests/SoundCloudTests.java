@@ -48,7 +48,7 @@ public class SoundCloudTests extends NewTestTemplate {
     new ArticleContent().push(VALID_SOUNDCLOUD_TAG, SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -58,7 +58,7 @@ public class SoundCloudTests extends NewTestTemplate {
     new ArticleContent().push(VALID_SOUNDCLOUD_TAG, SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_2);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
@@ -70,7 +70,7 @@ public class SoundCloudTests extends NewTestTemplate {
     new ArticleContent().push("SoundCloud test 003", "Map");
     init();
 
-    navigate.toPage("/" + SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -83,7 +83,7 @@ public class SoundCloudTests extends NewTestTemplate {
             SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/" + SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage(SOUND_CLOUD_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
