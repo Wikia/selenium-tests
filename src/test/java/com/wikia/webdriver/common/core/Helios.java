@@ -40,7 +40,7 @@ public class Helios {
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
   private static final String X_WIKIA_INTERNAL_REQUEST = "X-Wikia-Internal-Request";
-  protected static final String THE_SCHWARTZ = "THE-SCHWARTZ";
+  private static final String THE_SCHWARTZ = "THE-SCHWARTZ";
 
   /**
    * Standard cookie spec is used instead of default one in order to suppress warnings about
