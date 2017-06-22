@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class BlogPageObject extends ArticlePageObject {
 
-  @FindBy(css = ".WikiaBlogPostHeader h1")
+  @FindBy(css = ".page-header__title")
   private WebElement blogHeader;
 
   By image = By.cssSelector("img");
@@ -29,9 +28,10 @@ public class BlogPageObject extends ArticlePageObject {
     return new WatchPageObject();
   }
 
-  public void verifyBlogTitle(String title) {
+  public String getBlogTitle() {
     wait.forElementVisible(blogHeader);
-    Assertion.assertEquals(blogHeader.getText(), title);
+
+    return blogHeader.getText();
   }
 
   public String getBlogName() {

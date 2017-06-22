@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class DiffPagePageObject extends BasePageObject {
 
-  @FindBy(css = "#mw-imagepage-content table.diff")
+  @FindBy(css = "#mw-content-text table.diff")
   private WebElement diffTable;
 
   public DiffPagePageObject(WebDriver driver) {
@@ -20,6 +20,10 @@ public class DiffPagePageObject extends BasePageObject {
   public void verifyDiffTablePresent() {
     wait.forElementVisible(diffTable);
     PageObjectLogging.log("Verify diff table", "diff table is visible", true);
+  }
+
+  public boolean isDiffTableVisible(){
+    return diffTable.isDisplayed();
   }
 
 }
