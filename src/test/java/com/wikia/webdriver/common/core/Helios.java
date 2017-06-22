@@ -39,6 +39,8 @@ public class Helios {
   private static final Map<String, String> tokenCache = new HashMap<String, String>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
+  private static final String X_WIKIA_INTERNAL_REQUEST = "X-Wikia-Internal-Request";
+  protected static final String THE_SCHWARTZ = "THE-SCHWARTZ";
 
   /**
    * Standard cookie spec is used instead of default one in order to suppress warnings about
@@ -68,8 +70,8 @@ public class Helios {
 
     HttpDelete httpDelete =
         new HttpDelete(String.format("%s/%s/tokens", heliosGetTokenURL, user.getUserId()));
-    httpDelete.setHeader("THE-SCHWARTZ", Configuration.getCredentials().apiToken);
-    httpDelete.setHeader("X-Wikia-Internal-Request", "0");
+    httpDelete.setHeader(THE_SCHWARTZ, Configuration.getCredentials().apiToken);
+    httpDelete.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
     try (CloseableHttpResponse response = getDefaultClient().execute(httpDelete)) {
       PageObjectLogging.log("DELETE HEADERS: ", response.toString(), true);
@@ -99,7 +101,7 @@ public class Helios {
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
     List<NameValuePair> loginParams = prepareLoginParams(userName, password);
     httpPost.setEntity(new UrlEncodedFormEntity(loginParams, StandardCharsets.UTF_8));
-    httpPost.setHeader("X-Wikia-Internal-Request", "0");
+    httpPost.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
     try {
       String token = executeAndRetry(httpPost, extractAccessToken());
@@ -118,6 +120,7 @@ public class Helios {
 
   private static List<NameValuePair> prepareLoginParams(String userName, String password) {
     return Lists.newArrayList(
+
         new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()),
         new BasicNameValuePair("username", userName),
         new BasicNameValuePair("password", password)
@@ -160,7 +163,7 @@ public class Helios {
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
                                  + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
-        getInfo.setHeader("X-Wikia-Internal-Request", "0");
+        getInfo.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
         if (httpClient.execute(getInfo).getStatusLine().getStatusCode() == 200) {
           return tokenCache.get(userName);
