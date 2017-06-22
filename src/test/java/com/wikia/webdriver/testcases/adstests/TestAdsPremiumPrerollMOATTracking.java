@@ -1,6 +1,9 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
@@ -15,12 +18,24 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsPremiumPreroll",
-      groups = {
-        "AdsOoyalaPrerollOasis", "AdsOoyalaPrerollMercury",
-        "AdsPremiumPrerollMOATTrackingOasis", "AdsPremiumPrerollMOATTrackingMobile"
-      }
+      groups = {"AdsOoyalaPrerollOasis", "AdsPremiumPrerollMOATTrackingOasis"}
   )
-  public void adsPremiumPrerollMOATTracking(String wikiName, String article) {
+  public void adsPremiumPrerollMOATTrackingOasis(String wikiName, String article) {
+    adsPremiumPrerollMOATTracking(wikiName, article);
+  }
+
+  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5, browser = Browser.CHROME)
+  @NetworkTrafficDump(useMITM = true)
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsPremiumPreroll",
+      groups = {"AdsOoyalaPrerollMercury", "AdsPremiumPrerollMOATTrackingMobile"}
+  )
+  public void adsPremiumPrerollMOATTrackingMobile(String wikiName, String article) {
+    adsPremiumPrerollMOATTracking(wikiName, article);
+  }
+
+  private void adsPremiumPrerollMOATTracking(String wikiName, String article) {
     networkTrafficInterceptor.startIntercepting();
     String testedPage = urlBuilder.getUrlForPath(wikiName, article + "&" + TURN_ON_MOAT + "&" + IGNORE_SAMPLING);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
