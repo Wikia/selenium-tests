@@ -30,9 +30,9 @@ public class VKTests extends NewTestTemplate {
   private Navigate navigate;
   private VKWidgetPageObject widget;
 
-  private static final String VK_ONE_WIDGET_ARTICLE_NAME = "/VKMercury/OneWidget";
-  private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "/VKMercury/MultipleWidgets";
-  private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "/VKMercury/IncorrectWidget";
+  private static final String VK_ONE_WIDGET_ARTICLE_NAME = "VKMercury/OneWidget";
+  private static final String VK_MULTIPLE_WIDGETS_ARTICLE_NAME = "VKMercury/MultipleWidgets";
+  private static final String VK_INCORRECT_WIDGET_ARTICLE_NAME = "VKMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = VK_ONE_WIDGET_ARTICLE_NAME;
   private static final String VALID_VK_TAG = "<vk group-id=\"59925174\" />\n";
@@ -51,7 +51,7 @@ public class VKTests extends NewTestTemplate {
     new ArticleContent().push(VALID_VK_TAG, VK_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + VK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -75,7 +75,7 @@ public class VKTests extends NewTestTemplate {
     new ArticleContent().push("VK tests 003", "Map");
     init();
 
-    navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + VK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -89,7 +89,7 @@ public class VKTests extends NewTestTemplate {
             VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    navigate.toPage(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/" + VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(
         widget.areAllValidSwappedForIFrames(),
@@ -105,7 +105,7 @@ public class VKTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_VK_TAG, VK_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(VK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + VK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

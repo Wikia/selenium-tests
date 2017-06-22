@@ -29,9 +29,9 @@ public class ApesterTests extends NewTestTemplate {
   private Navigate navigate;
   private ApesterWidgetPageObject widget;
 
-  private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "/ApesterMercury/OneWidget";
-  private static final String APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/ApesterMercury/MultipleWidgets";
-  private static final String APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "/ApesterMercury/IncorrectWidget";
+  private static final String APESTER_ONE_WIDGET_ARTICLE_NAME = "ApesterMercury/OneWidget";
+  private static final String APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "ApesterMercury/MultipleWidgets";
+  private static final String APESTER_INCORRECT_WIDGET_ARTICLE_NAME = "ApesterMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = APESTER_ONE_WIDGET_ARTICLE_NAME;
   private static final String VALID_APESTER_TAG = "<apester data-media-id=\"58d3c0fa6d8f378c033d1d39\" />";
@@ -48,7 +48,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(VALID_APESTER_TAG, APESTER_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + APESTER_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -70,7 +70,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(VALID_APESTER_TAG, APESTER_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(APESTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + APESTER_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -83,7 +83,7 @@ public class ApesterTests extends NewTestTemplate {
             APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    navigate.toPage(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/" + APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -93,7 +93,7 @@ public class ApesterTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_APESTER_TAG, APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + APESTER_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

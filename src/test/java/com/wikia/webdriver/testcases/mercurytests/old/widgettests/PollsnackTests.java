@@ -29,9 +29,9 @@ public class PollsnackTests extends NewTestTemplate {
   private PollsnackWidgetPageObject widget;
   private Navigate navigate;
 
-  private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "/PollsnackMercury/OneWidget";
-  private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "/PollsnackMercury/MultipleWidgets";
-  private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "/PollsnackMercury/IncorrectWidget";
+  private static final String POLLSNACK_ONE_WIDGET_ARTICLE_NAME = "PollsnackMercury/OneWidget";
+  private static final String POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME = "PollsnackMercury/MultipleWidgets";
+  private static final String POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME = "PollsnackMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = POLLSNACK_ONE_WIDGET_ARTICLE_NAME;
   private static final String VALID_POLLSNACK_TAG = "<pollsnack hash=\"q7kiw9kz\"/>\n";
@@ -49,7 +49,7 @@ public class PollsnackTests extends NewTestTemplate {
     new ArticleContent().push(VALID_POLLSNACK_TAG, POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -71,7 +71,7 @@ public class PollsnackTests extends NewTestTemplate {
     new ArticleContent().push("Pollsnack test 003", "Map");
     init();
 
-    navigate.toPage(POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + POLLSNACK_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -84,7 +84,7 @@ public class PollsnackTests extends NewTestTemplate {
             POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    navigate.toPage(POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/" + POLLSNACK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -94,7 +94,7 @@ public class PollsnackTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_POLLSNACK_TAG, POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

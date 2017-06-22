@@ -29,9 +29,9 @@ public class WeiboTests extends NewTestTemplate {
   private Navigate navigate;
   private WeiboWidgetPageObject widget;
 
-  private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "/WeiboMercury/OneWidget";
-  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "/WeiboMercury/MultipleWidgets";
-  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "/WeiboMercury/IncorrectWidget";
+  private static final String WEIBO_ONE_WIDGET_ARTICLE_NAME = "WeiboMercury/OneWidget";
+  private static final String WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME = "WeiboMercury/MultipleWidgets";
+  private static final String WEIBO_INCORRECT_WIDGET_ARTICLE_NAME = "WeiboMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = WEIBO_ONE_WIDGET_ARTICLE_NAME;
   private static final String VALID_WEIBO_TAG = "<weibo uids=\"1642909335,1782515283\" />\n";
@@ -49,7 +49,7 @@ public class WeiboTests extends NewTestTemplate {
     new ArticleContent().push(VALID_WEIBO_TAG, WEIBO_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -71,7 +71,7 @@ public class WeiboTests extends NewTestTemplate {
     new ArticleContent().push("Weibo test 003", "Map");
     init();
 
-    navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + WEIBO_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -84,7 +84,7 @@ public class WeiboTests extends NewTestTemplate {
             WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
-    navigate.toPage(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/" + WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -94,7 +94,7 @@ public class WeiboTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_WEIBO_TAG, WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

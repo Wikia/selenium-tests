@@ -29,8 +29,8 @@ public class TwitterTests extends NewTestTemplate {
   private Navigate navigate;
   private TwitterWidgetPageObject widget;
 
-  private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "/TwitterMercury/OneWidget";
-  private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "/TwitterMercury/MultipleWidgets";
+  private static final String TWITTER_ONE_WIDGET_ARTICLE_NAME = "TwitterMercury/OneWidget";
+  private static final String TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME = "TwitterMercury/MultipleWidgets";
   private static final String TWITTER_INCORRECT_WIDGET_ARTICLE_NAME = "TwitterMercury/IncorrectWidget";
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = TWITTER_ONE_WIDGET_ARTICLE_NAME;
@@ -49,7 +49,7 @@ public class TwitterTests extends NewTestTemplate {
     new ArticleContent().push(VALID_TWITTER_TAG, TWITTER_ONE_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage(TWITTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + TWITTER_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -71,7 +71,7 @@ public class TwitterTests extends NewTestTemplate {
     new ArticleContent().push("Twitter test 003", "Map");
     init();
 
-    navigate.toPage(TWITTER_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + TWITTER_ONE_WIDGET_ARTICLE_NAME);
     topBar.openSearch().navigateToPage(QUERY_1);
     topBar.openSearch().navigateToPage(QUERY_2);
 
@@ -85,7 +85,7 @@ public class TwitterTests extends NewTestTemplate {
 
     init();
 
-    navigate.toPage(TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPage("/" + TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(
         widget.areAllValidSwappedForIFrames(),
@@ -100,7 +100,7 @@ public class TwitterTests extends NewTestTemplate {
     new ArticleContent().push(INVALID_TWITTER_TAG, TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
     init();
 
-    navigate.toPage("/wiki/" + TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPage("/" + TWITTER_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
