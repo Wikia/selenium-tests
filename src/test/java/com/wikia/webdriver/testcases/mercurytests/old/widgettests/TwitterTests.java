@@ -80,7 +80,7 @@ public class TwitterTests extends NewTestTemplate {
 
   @Test(groups = "MercuryTwitterWidgetTest_004")
   public void MercuryTwitterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    new ArticleContent().push(VALID_TWITTER_TAG + " " + VALID_TWITTER_TAG,
+    new ArticleContent().push(VALID_TWITTER_TAG + " " + VALID_TWITTER_TAG + " " + VALID_TWITTER_TAG,
             TWITTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     init();
