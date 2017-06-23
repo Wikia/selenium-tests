@@ -35,6 +35,7 @@ public class PolldaddyTests extends NewTestTemplate {
   private static final String QUERY_1 = MercurySubpages.MAP.substring(6);
   private static final String QUERY_2 = POLLDADDY_ONE_WIDGET_ARTICLE_NAME;
   private static final String VALID_POLLDADDY_TAG = "<polldaddy id=\"8956579\"/>\n";
+  private static final String VALID_POLLDADDY_TAG_2 = "<polldaddy id=\"9022741\"/>";
   private static final String INVALID_POLLDADDY_TAG = "<polldaddy />";
 
   private void init() {
@@ -80,7 +81,7 @@ public class PolldaddyTests extends NewTestTemplate {
 
   @Test(groups = "MercuryPolldaddyWidgetTest_004")
   public void MercuryPolldaddyWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
-    new ArticleContent().push(VALID_POLLDADDY_TAG + " " + VALID_POLLDADDY_TAG,
+    new ArticleContent().push(VALID_POLLDADDY_TAG + " " + VALID_POLLDADDY_TAG_2,
             POLLDADDY_MULTIPLE_WIDGETS_ARTICLE_NAME);
     init();
 
