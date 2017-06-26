@@ -247,10 +247,10 @@ public class InfoboxBuilderTests extends NewTestTemplate {
         "Template:InfoboxBuilderVerifyInfoboxTheme");
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
-    SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
+    SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject();
     TemplatePage template = new TemplatePage();
 
-    themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
+    themeDesigner.open().selectTheme(0);
     themeDesigner.submitTheme();
 
     String templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
@@ -259,7 +259,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertEquals(previewBgColor, templateBgColor);
 
-    themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(2);
+    themeDesigner.open().selectTheme(2);
     themeDesigner.submitTheme();
 
     templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
