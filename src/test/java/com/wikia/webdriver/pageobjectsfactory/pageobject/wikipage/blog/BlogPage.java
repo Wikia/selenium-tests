@@ -1,25 +1,21 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BlogPageObject extends ArticlePageObject {
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 
+public class BlogPage extends ArticlePageObject {
+
+  private static final String BLOG_PATH_FORMAT = "/wiki/User_blog:%s/%s";
   @FindBy(css = ".page-header__title")
   private WebElement blogHeader;
 
-  By image = By.cssSelector("img");
-  By firstSpan = By.cssSelector("span:nth-child(2) a");
-  By secondSpan = By.cssSelector("span:nth-child(3)");
-  By thirdSpan = By.cssSelector("span:nth-child(4) a");
+  public BlogPage open(String userName, String postName) {
+    getUrl(urlBuilder.getUrlForPage(String.format(BLOG_PATH_FORMAT, userName, postName)));
 
-  public BlogPageObject(WebDriver driver) {
-    super();
+    return this;
   }
 
   public WatchPageObject unfollowBlogPage() {
