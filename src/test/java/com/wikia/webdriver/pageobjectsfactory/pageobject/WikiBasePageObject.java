@@ -294,7 +294,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
-    wait.forElementClickable(editButton);
+    this.openArticleEditDropdown();
     editButton.click();
     PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true,
         driver);
