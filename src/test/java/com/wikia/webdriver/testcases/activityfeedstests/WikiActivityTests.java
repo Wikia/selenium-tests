@@ -11,13 +11,13 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.EditActivity;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
@@ -64,13 +64,13 @@ public class WikiActivityTests extends NewTestTemplate {
   public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
-    UserProfilePageObject userProfile =
+    UserProfilePage userProfile =
         new WikiBasePageObject().openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
     visualEditMode.addContent(blogContent);
-    BlogPageObject blogPage = visualEditMode.submitBlog();
+    BlogPage blogPage = visualEditMode.submitBlog();
 
     Assertion.assertEquals(blogPage.getBlogTitle(), blogTitle);
 
@@ -141,7 +141,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Activity chosenActivity = activityList.stream().findFirst().get();
     String expectedUserName = chosenActivity.getUser();
-    UserProfilePageObject userPage = chosenActivity.clickOnUserLink();
+    UserProfilePage userPage = chosenActivity.clickOnUserLink();
     String currentUserName = userPage.getUserName();
 
     Assertion.assertEquals(currentUserName, expectedUserName);

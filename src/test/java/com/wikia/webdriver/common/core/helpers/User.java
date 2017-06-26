@@ -41,7 +41,8 @@ public enum User {
   MW119_ADMINISTRATOR("ci.user.mw_admin.username", "ci.user.mw_admin_password", "ci.user.mw_admin.user_id", "ci.user.mw_admin.access_token"),
   CURATED_CONTENT_USER("ci.user.curated_content.username", "ci.user.curated_content.password", "ci.user.curated_content.id", "ci.user.curated_content.access_token"),
   INFOBOX_BUILDER_ADMIN("ci.user.infobox_builder.username", "ci.user.infobox_builder.password", "ci.user.infobox_builder.id", "ci.user.infobox_builder.access_token"),
-  CHAT_USER_TO_BE_BANNED("ci.user.chat.user_to_be_banned.username", "ci.user.chat.user_to_be_banned.password", "ci.user.chat.user_to_be_banned.user_id", "ci.user.chat.user_to_be_banned.access_token");
+  CHAT_USER_TO_BE_BANNED("ci.user.chat.user_to_be_banned.username", "ci.user.chat.user_to_be_banned.password", "ci.user.chat.user_to_be_banned.user_id", "ci.user.chat.user_to_be_banned.access_token"),
+  BLOGS("ci.user.blogs.username", "ci.user.blogs.password", "ci.user.blogs.user_id", "ci.chat.blogs.access_token");
 
   private final String userName;
 

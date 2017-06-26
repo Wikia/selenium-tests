@@ -1,7 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -35,8 +35,8 @@ public class Activity extends BasePageObject {
     return new ArticlePageObject();
   }
 
-  public UserProfilePageObject clickOnUserLink() {
+  public UserProfilePage clickOnUserLink() {
     scrollAndClick(userLink);
-    return new UserProfilePageObject(driver);
+    return new UserProfilePage();
   }
 }
