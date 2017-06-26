@@ -87,6 +87,7 @@ public class AllTagsTests extends NewTestTemplate {
 
   @Test(groups = "MercuryAllTagsWidgetTest_003")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    new ArticleContent().push("Mercury AllTags 003", "Map");
     new ArticlePageObject().open(ARTICLE_NAME);
 
     new TopBar().openSearch().navigateToPage(QUERY_1);

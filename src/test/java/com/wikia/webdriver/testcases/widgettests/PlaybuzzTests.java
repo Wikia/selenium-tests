@@ -35,7 +35,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     init();
 
     widget.create(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(PLAYBUZZ_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -46,7 +46,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(PLAYBUZZ_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(PLAYBUZZ_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(PLAYBUZZ_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class PlaybuzzTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(PLAYBUZZ_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(PLAYBUZZ_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(PLAYBUZZ_FORM_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

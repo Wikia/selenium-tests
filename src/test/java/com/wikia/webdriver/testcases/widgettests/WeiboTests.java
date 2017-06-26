@@ -35,7 +35,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.create(WEIBO_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(WEIBO_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(WEIBO_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -46,7 +46,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(WEIBO_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -57,7 +57,7 @@ public class WeiboTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(WEIBO_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }

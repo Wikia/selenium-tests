@@ -33,7 +33,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.create(VK_ONE_WIDGET_ARTICLE_NAME);
-    navigate.toPage(VK_ONE_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(VK_ONE_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
@@ -45,7 +45,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.createMultiple(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
-    navigate.toPage(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
+    navigate.toPageByPath(VK_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.areAllValidSwappedForIFrames(),
         MercuryMessages.SOME_VALID_WIDGETS_WERE_NOT_SWAPPED_MSG);
@@ -59,7 +59,7 @@ public class VKTests extends NewTestTemplate {
     init();
 
     widget.createIncorrect(VK_INCORRECT_WIDGET_ARTICLE_NAME);
-    navigate.toPage(VK_INCORRECT_WIDGET_ARTICLE_NAME);
+    navigate.toPageByPath(VK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
   }
