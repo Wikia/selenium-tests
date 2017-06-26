@@ -25,6 +25,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 @Test(groups = "BlogTests")
 public class BlogTests extends NewTestTemplate {
 
+  private static final String USER_BLOG_PATH_FORMAT = "User_blog:%s/%s";
+
   @Execute(asUser = User.BLOGS)
   public void UserCanAddBlogFromProfilePage() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
@@ -58,7 +60,7 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     new ArticleContent(User.BLOGS).push(blogContent,
-        String.format("User_blog:%s/%s", User.BLOGS.getUserName(), blogTitle));
+        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
@@ -73,7 +75,7 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     new ArticleContent(User.BLOGS).push(blogContent,
-        String.format("User_blog:%s/%s", User.BLOGS.getUserName(), blogTitle));
+        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
@@ -104,7 +106,7 @@ public class BlogTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     new ArticleContent(User.BLOGS).push(blogContent,
-        String.format("User_blog:%s/%s", User.BLOGS.getUserName(), blogTitle));
+        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
 
     BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     RenamePageObject renamePage = blogPage.renameUsingDropdown();

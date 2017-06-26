@@ -18,7 +18,7 @@ public class ArticleContent extends ApiCall {
   private static String secret;
   private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
       + "/wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
-  private ArrayList<BasicNameValuePair> PARAMS = new ArrayList<>();
+  private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
 
   public ArticleContent() {
@@ -26,8 +26,8 @@ public class ArticleContent extends ApiCall {
     if (StringUtils.isBlank(secret)) {
       secret = XMLReader.getValue(configFile, "edit_controller.secret");
     }
-    PARAMS.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
-    PARAMS.add(new BasicNameValuePair("secret", secret));
+    this.params.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
+    this.params.add(new BasicNameValuePair("secret", secret));
   }
 
   /**
@@ -39,8 +39,8 @@ public class ArticleContent extends ApiCall {
     if (StringUtils.isBlank(secret)) {
       secret = XMLReader.getValue(configFile, "edit_controller.secret");
     }
-    PARAMS.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
-    PARAMS.add(new BasicNameValuePair("secret", secret));
+    this.params.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
+    this.params.add(new BasicNameValuePair("secret", secret));
 
     this.user = user;
   }
@@ -57,12 +57,12 @@ public class ArticleContent extends ApiCall {
   @Override
   protected ArrayList<BasicNameValuePair> getParams() {
 
-    return PARAMS;
+    return params;
   }
 
   public void push(String text, String articleTitle) {
     URL_STRING = baseURL + articleTitle;
-    PARAMS.add(new BasicNameValuePair("text", text));
+    params.add(new BasicNameValuePair("text", text));
     call();
   }
 
