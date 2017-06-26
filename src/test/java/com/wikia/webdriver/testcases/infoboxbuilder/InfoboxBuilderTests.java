@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -240,6 +241,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = "infoboxeuropathemetest")
+  @RelatedIssue(issueID = "XW-3615")
   public void verifyInfoboxPreviewTheme() {
     new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
         "Template:InfoboxBuilderVerifyInfoboxTheme");

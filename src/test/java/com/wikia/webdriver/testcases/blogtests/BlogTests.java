@@ -38,7 +38,7 @@ public class BlogTests extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
-    blogPage.verifyBlogTitle(blogTitle);
+    blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
 
@@ -55,7 +55,7 @@ public class BlogTests extends NewTestTemplate {
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(randomBlogTitle);
     visualEditMode.addContent(blogContent);
     BlogPageObject blogPage = visualEditMode.submitBlog();
-    blogPage.verifyBlogTitle(randomBlogTitle);
+    blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
 
@@ -67,11 +67,10 @@ public class BlogTests extends NewTestTemplate {
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
-    String blogTitle = blogPage.getBlogName();
     VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
     visualEditMode.addContent(blogContent);
     visualEditMode.submitArticle();
-    blogPage.verifyBlogTitle(blogTitle);
+    blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
 
@@ -82,7 +81,6 @@ public class BlogTests extends NewTestTemplate {
     UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
     userProfile.clickOnBlogTab();
     BlogPageObject blogPage = userProfile.openFirstPost();
-    String blogTitle = blogPage.getBlogName();
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
 
@@ -101,7 +99,7 @@ public class BlogTests extends NewTestTemplate {
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
                          SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
-    blogPage.verifyBlogTitle(blogTitle);
+    blogPage.getBlogTitle();
   }
 
   @Test(groups = {"BlogTests_005", "BlogTests"})
@@ -114,7 +112,7 @@ public class BlogTests extends NewTestTemplate {
     BlogPageObject blogPage = userProfile.openFirstPost();
     RenamePageObject renamePage = blogPage.renameUsingDropdown();
     renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
-    blogPage.verifyBlogTitle(blogTitleMove);
+    blogPage.getBlogTitle();
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
     Assertion.assertEquals(confirmNotifications.size(),1,

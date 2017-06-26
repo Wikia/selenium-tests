@@ -140,6 +140,7 @@ public class VisualEditModePageObject extends EditMode {
    * clears article content and adds new content to the article
    */
   public void addContent(String content) {
+    wait.forElementVisible(iframe);
     driver.switchTo().frame(iframe);
     contentInput.clear();
     contentInput.sendKeys(content);
