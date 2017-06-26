@@ -38,7 +38,7 @@ public class Wait {
   public Wait(WebDriver webDriver) {
     this.driver = webDriver;
     this.wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
-    this.sleepingWait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT, DEFAULT_SLEEP);
+    this.sleepingWait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT*2, DEFAULT_SLEEP);
   }
 
   /**
