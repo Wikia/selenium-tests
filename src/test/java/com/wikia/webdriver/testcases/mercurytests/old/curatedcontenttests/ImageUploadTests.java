@@ -51,10 +51,10 @@ public class ImageUploadTests extends NewTestTemplate {
   public void MercuryImageUploadTest_001_saveNewPhoto() {
     init();
 
-    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
     curatedMainPage.isCuratedContentVisible();
 
-    navigate.toPage(MercuryPaths.ROOT_MAIN_EDIT);
+    navigate.toPageByPath(MercuryPaths.ROOT_MAIN_EDIT);
     generator.generateImageWithRandomText();
     String imagePath = generator.getImageAbsolutePath();
 

@@ -38,7 +38,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_001")
   public void MercuryTOCTest_001_TOCPresence_ListRedirection() {
     init();
-    navigate.toPage(MercurySubpages.TOC);
+    navigate.toPageByPath(MercurySubpages.TOC);
 
     Assertion.assertTrue(
         toc.isTOCDisplayed(),
@@ -105,7 +105,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_002")
   public void MercuryTOCTest_002_NoH2NoTOC() {
     init();
-    navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
+    navigate.toPageByPath(MercurySubpages.TOC_WITHOUT_H2);
 
     boolean result = !toc.isTOCDisplayed();
     PageObjectLogging.log(
@@ -119,7 +119,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_003")
   public void MercuryTOCTest_003_RedirectionToHeaderDirectlyFromLink() {
     init();
-    navigate.toPage(MercurySubpages.TOC, "Second_header");
+    navigate.toPageByPath(MercurySubpages.TOC, "Second_header");
 
     boolean result = toc.isUserMovedToSectionByIndex("2");
     PageObjectLogging.log(
@@ -133,7 +133,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_004")
   public void MercuryTOCTest_004_RedirectionToHeaderFromCurrentPage() {
     init();
-    navigate.toPage(MercurySubpages.TOC);
+    navigate.toPageByPath(MercurySubpages.TOC);
 
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
 
@@ -149,7 +149,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_005")
   public void MercuryTOCTest_005_RedirectionToHeaderFromOtherPage() {
     init();
-    navigate.toPage(MercurySubpages.TOC_WITHOUT_H2);
+    navigate.toPageByPath(MercurySubpages.TOC_WITHOUT_H2);
 
     new ArticlePageObject(driver).clickOnAnchorInContent(0);
     loading.handleAsyncPageReload();
@@ -166,7 +166,7 @@ public class TOCTests extends NewTestTemplate {
   @Test(groups = "MercuryTOCTest_006")
   public void MercuryTOCTest_006_TOCPresence_PlacedUnderInfobox() {
     init();
-    navigate.toPage(MercurySubpages.TOC_WITH_PORTABLE_INFOBOX);
+    navigate.toPageByPath(MercurySubpages.TOC_WITH_PORTABLE_INFOBOX);
 
     boolean result = toc.isTOCBelowFirstAdSlot();
     PageObjectLogging.log(

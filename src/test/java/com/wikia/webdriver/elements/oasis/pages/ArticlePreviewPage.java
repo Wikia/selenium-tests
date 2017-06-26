@@ -30,7 +30,7 @@ public class ArticlePreviewPage extends WikiBasePageObject {
   }
 
   public ArticlePreviewPage navigateToArticlePreviewPageInEditMode() {
-    navigate.toPage(ARTICLE_PREVIEW_PAGE, EDIT_QUERY_PARAM);
+    navigate.toPageByPath(ARTICLE_PREVIEW_PAGE, EDIT_QUERY_PARAM);
 
     return this;
   }
