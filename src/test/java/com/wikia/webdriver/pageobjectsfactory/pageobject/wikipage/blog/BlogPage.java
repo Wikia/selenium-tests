@@ -24,7 +24,7 @@ public class BlogPage extends ArticlePageObject {
     return new WatchPageObject();
   }
 
-  public String getBlogTitle() {F
+  public String getBlogTitle() {
     wait.forElementVisible(blogHeader);
 
     return blogHeader.getText();
