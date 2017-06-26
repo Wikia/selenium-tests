@@ -26,7 +26,7 @@ public class SearchPage extends WikiBasePageObject {
   }
 
   public SearchPage navigateToSearchPage() {
-    new Navigate().toPage(SPECIAL_SEARCH_PAGE);
+    new Navigate().toPageByPath(SPECIAL_SEARCH_PAGE);
 
     return this;
   }

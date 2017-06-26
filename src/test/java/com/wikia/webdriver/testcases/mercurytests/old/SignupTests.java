@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 public class SignupTests extends NewTestTemplate {
 
   private void init() {
-    new Navigate().toPage(MercurySubpages.MAIN_PAGE);
+    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
   }
 
   @Test(groups = "MercurySignupTest_001")
