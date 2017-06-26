@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
 import org.testng.annotations.Test;
@@ -49,16 +49,16 @@ public class UserAvatar extends NewTestTemplate {
     GlobalNavigation userAvatar = new GlobalNavigation();
     userAvatar.clickUserAvatar().clickViewProfile();
 
-    UserProfilePageObject profile = new UserProfilePageObject(driver);
+    UserProfilePage profile = new UserProfilePage();
     profile.verifyProfilePage(credentials.userNameStaff);
   }
 
   @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
   public void staffUserCanUploadAvatar() {
-    UserProfilePageObject
+    UserProfilePage
         profile =
-        new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
+        new UserProfilePage().openProfilePage(credentials.userNameStaff, wikiURL);
     AvatarComponentObject avatar = profile.clickEditAvatar();
     profile.verifyAvatar();
     String avatarUrl = profile.getAvatarImageSrc();
@@ -75,14 +75,14 @@ public class UserAvatar extends NewTestTemplate {
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
   @Execute(asUser = User.STAFF)
   public void staffUserCanRemoveAvatar() {
-    UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
+    UserProfilePage profile = new UserProfilePage().openProfilePage(
         credentials.userNameStaff, wikiURL);
     String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
     profile.openWikiPage(); //user needs to visit other page to get avatar refreshed
-    UserProfilePageObject changedProfile = new UserProfilePageObject(driver).openProfilePage(
+    UserProfilePage changedProfile = new UserProfilePage().openProfilePage(
         credentials.userNameStaff, wikiURL);
 
     changedProfile.verifyAvatarChanged(avatarUrl);

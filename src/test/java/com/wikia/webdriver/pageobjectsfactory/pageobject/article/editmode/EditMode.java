@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -91,11 +91,11 @@ public class EditMode extends WikiBasePageObject {
     return new PreviewEditModePageObject(driver);
   }
 
-  public BlogPageObject submitBlog() {
+  public BlogPage submitBlog() {
     submit();
     wait.forElementNotPresent(submitButtonBy);
 
-    return new BlogPageObject(driver);
+    return new BlogPage();
   }
 
   public PhotoAddComponentObject clickPhotoButton() {

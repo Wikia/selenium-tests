@@ -23,7 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
 import org.testng.annotations.Test;
 
@@ -49,7 +49,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
     galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
     galleryBuiler.clickFinish();
     blogEdit.verifyGallery();
-    BlogPageObject blogPage = blogEdit.submitBlog();
+    BlogPage blogPage = blogEdit.submitBlog();
     blogPage.verifyGallery();
   }
 
@@ -68,7 +68,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
     slideshowBuilder.adjustPosition(Positions.CENTER);
     slideshowBuilder.clickFinish();
     blogEdit.verifySlideshow();
-    BlogPageObject blogPage = blogEdit.submitBlog();
+    BlogPage blogPage = blogEdit.submitBlog();
     blogPage.verifySlideshow();
   }
 
@@ -87,7 +87,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
     sliderAddPhoto.clickSelect();
     sliderBuilder.clickFinish();
     blogEdit.verifySlider();
-    BlogPageObject blogPage = blogEdit.submitBlog();
+    BlogPage blogPage = blogEdit.submitBlog();
     blogPage.verifySlider();
   }
 
@@ -105,7 +105,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
     vetOptions.setCaption(PageContent.CAPTION);
     vetOptions.submit();
     blogEdit.verifyVideo();
-    BlogPageObject blogPage = blogEdit.submitBlog();
+    BlogPage blogPage = blogEdit.submitBlog();
     blogPage.verifyVideo();
   }
 
@@ -121,7 +121,7 @@ public class BlogFeaturesTests extends NewTestTemplate {
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     blogEdit.verifyPhoto();
-    BlogPageObject blogPage = blogEdit.submitBlog();
+    BlogPage blogPage = blogEdit.submitBlog();
     blogPage.verifyPhoto();
   }
 }
