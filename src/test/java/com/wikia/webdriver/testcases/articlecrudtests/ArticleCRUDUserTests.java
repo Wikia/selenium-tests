@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -10,7 +9,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -47,17 +45,17 @@ ArticleCRUDUserTests extends NewTestTemplate {
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
   @Execute(asUser = User.USER)
   public void ArticleCRUDUser_003_addEditButton() {
-    new ArticleContent().clear();
+    new ArticleContent().push();
+    ArticlePageObject article = new ArticlePageObject().open();
+    String articleTitle = article.getArticleTitle();
 
-    String articleContent = PageContent.ARTICLE_TEXT;
-    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open(articleTitle + "?AbTest.ADD_NEW_PAGE=CONTROL1");
     VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButton();
-    visualEditMode.addContent(articleContent);
+    visualEditMode.addContent(PageContent.ARTICLE_TEXT);
     visualEditMode.submitArticle();
-    article.verifyContent(articleContent);
+    article.verifyContent(PageContent.ARTICLE_TEXT);
     article.verifyArticleTitle(articleTitle);
   }
+
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
       groups = {"ArticleCRUDUser_004"})
