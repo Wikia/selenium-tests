@@ -5,7 +5,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
@@ -308,7 +308,7 @@ public class ChatTests extends NewTestTemplate {
     chatPage.writeOnChat("[[User:" + userTwo + "|]]");
     chatPage.getMessage(userTwo).click();
     chatPage.switchToSecondTab(currentBrowserTab());
-    UserProfilePageObject wikiPage = new UserProfilePageObject(driver);
+    UserProfilePage wikiPage = new UserProfilePage();
     Assertion.assertStringContains(wikiPage.getUserNameTextBox().getText(), userTwo);
   }
 
