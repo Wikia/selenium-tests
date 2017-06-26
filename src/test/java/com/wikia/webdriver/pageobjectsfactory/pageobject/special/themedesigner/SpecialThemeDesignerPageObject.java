@@ -1,21 +1,22 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.themedesigner;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
-import java.util.List;
-
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
 
+  String tabSelector = "a[rel='%tabName%Tab']";
+  String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
   @FindBy(css = ".save:not([disabled=true])")
   private WebElement saveButton;
   @FindBy(css = ".save[disabled]")
@@ -66,16 +67,9 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   @FindBy(css = "#BackgroundImageForm [type='submit']")
   private WebElement imageSubmit;
 
-  String tabSelector = "a[rel='%tabName%Tab']";
-  String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
+  public SpecialThemeDesignerPageObject open() {
+    getUrl(urlBuilder.getUrlForPage(URLsContent.SPECIAL_THEME_DESIGNER));
 
-  public SpecialThemeDesignerPageObject(WebDriver driver) {
-    super();
-  }
-
-  public SpecialThemeDesignerPageObject openSpecialDesignerPage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_THEME_DESIGNER);
-    PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
     return this;
   }
 
@@ -100,7 +94,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
       scrollAndClick(themes, number);
     }
     String themeName =
-        themes.get(number).findElement(By.cssSelector("label")).getText().toLowerCase();
+        themes.get(number).getAttribute("data-theme").toLowerCase();
     PageObjectLogging.log("selectTheme", "theme " + themeName + " selected", true);
     return themeName;
   }
@@ -108,8 +102,8 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   public void verifyThemeSelected(String themeName) {
     wait.forElementVisible(By.cssSelector("li.selected[data-theme='" + themeName + "']"));
     Assertion.assertEquals((String) jsActions.execute("ThemeDesigner.settings.theme"), themeName);
-    PageObjectLogging
-        .log("verifyThemeSelected", "theme " + themeName + " selection verified", true);
+    PageObjectLogging.log("verifyThemeSelected", "theme " + themeName + " selection verified",
+        true);
   }
 
   public void submitTheme() {
@@ -120,21 +114,17 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   }
 
   public void uploadLargeImage() {
-    fileUploadInput.sendKeys(CommonUtils.getAbsolutePathForFile(ClassLoader.getSystemResource(
-        "ImagesForUploadTests/2000x150.png").getPath()));
+    fileUploadInput.sendKeys(CommonUtils.getAbsolutePathForFile(
+        ClassLoader.getSystemResource("ImagesForUploadTests/2000x150.png").getPath()));
     imageSubmit.click();
   }
 
-  public enum Tab {
-    THEME, CUSTOMIZE, WORDMARK
-  }
-
   public void selectTab(Tab tabName) {
-    WebElement tab =
-        wait.forElementVisible(By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
+    WebElement tab = wait
+        .forElementVisible(By.cssSelector(tabSelector.replace("%tabName%", tabName.toString())));
     scrollAndClick(tab);
-    wait.forElementVisible(By.cssSelector(selectedTabSelector.replace("%tabName%",
-        tabName.toString())));
+    wait.forElementVisible(
+        By.cssSelector(selectedTabSelector.replace("%tabName%", tabName.toString())));
     PageObjectLogging.log("selectTab", tabName.toString() + " tab has been selected", true);
   }
 
@@ -177,6 +167,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject {
   public void verifyImagePickerDisappeared() {
     waitForElementNotVisibleByElement(bgImagePicker);
     PageObjectLogging.log("verifyImagePickerDisappeared", "Image Picker is invisible", true);
+  }
+
+  public enum Tab {
+    THEME, CUSTOMIZE, WORDMARK
   }
 
 }
