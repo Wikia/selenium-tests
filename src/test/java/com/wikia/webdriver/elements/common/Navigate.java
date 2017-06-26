@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.common;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import org.joda.time.DateTime;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
@@ -9,7 +10,7 @@ public class Navigate extends BasePageObject {
   public Navigate toPage(String pageName) {
     String query = getQueryParams(pageName);
 
-    driver.get(urlBuilder.getUrlForWiki() + "/wiki/" + pageName + query);
+    driver.get(urlBuilder.getUrlForWiki() + URLsContent.WIKI_DIR + pageName + query);
 
     return this;
   }
