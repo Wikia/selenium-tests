@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.chattests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
@@ -268,6 +269,13 @@ public class ChatTests extends NewTestTemplate {
     switchToWindow(0);
     chatUserStaff.clickOnDifferentUser(userToBeBannedUsername);
     chatUserStaff.banUser(userToBeBannedUsername);
+
+    //Ban is not instant, so we will give it 10s before page refresh
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logInfo("Sleep interrupted", e);
+    }
 
     switchToWindow(1);
     Assertion.assertTrue(chatUserToBeBanned.isPermissionsErrorTitleDisplayed(), "PERMISSION ERROR IS NOT DISPLAYED");
