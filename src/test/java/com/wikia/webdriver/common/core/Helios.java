@@ -33,7 +33,7 @@ import com.wikia.webdriver.common.properties.HeliosConfig;
 
 public class Helios {
 
-  private static final Map<String, String> tokenCache = new HashMap<String, String>();
+  private static final Map<String, String> tokenCache = new HashMap<>();
   private static final String IOEXCEPTION_ERROR_MESSAGE = "PLEASE CHECK IF YOUR VPN IS ENABLED";
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
   private static final String X_WIKIA_INTERNAL_REQUEST = "X-Wikia-Internal-Request";
@@ -44,7 +44,7 @@ public class Helios {
    * SetCookie header values containing un-escaped commas (e.g.
    * "expires=Sat, 09 Sep 2017 15:33:53 GMT")
    */
-  private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
+  private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setConnectTimeout(3000)
       .setSocketTimeout(3000).setCookieSpec(CookieSpecs.STANDARD).build();
 
   private Helios() {
@@ -176,7 +176,7 @@ public class Helios {
     return "";
   }
 
-  public static String getUserId(String userName) {
+  private static String getUserId(String userName) {
     String getUserIDURL = "";
     try {
       getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
@@ -189,8 +189,7 @@ public class Helios {
     HttpGet httpGet = new HttpGet(getUserIDURL);
 
     try {
-      String userId = getDefaultClient().execute(httpGet, extractUserId());
-      return userId;
+      return getDefaultClient().execute(httpGet, extractUserId());
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
@@ -203,6 +202,6 @@ public class Helios {
 
   private static CloseableHttpClient getDefaultClient() {
     return HttpClientBuilder.create().disableCookieManagement().disableConnectionState()
-        .disableAutomaticRetries().setDefaultRequestConfig(requestConfig).build();
+        .disableAutomaticRetries().setDefaultRequestConfig(REQUEST_CONFIG).build();
   }
 }
