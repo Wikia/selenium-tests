@@ -22,4 +22,6 @@ tmp.exe
 selenium-config/
 caches/
 src/test/resources/ImagesForUploadTests/random_image.png
+velocity.log
+
 
