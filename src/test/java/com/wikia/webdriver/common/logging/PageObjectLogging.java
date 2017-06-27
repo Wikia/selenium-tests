@@ -190,6 +190,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
   /**
    * This method will log info to log file (line in blue color)
    */
+  public static void logInfo(String command, String description) {
+    String html = VelocityWrapper.fillLogRow(Arrays.asList(INFO_CLASS), command, description);
+    CommonUtils.appendTextToFile(logPath, html);
+  }
+
+
+  /**
+   * This method will log info to log file (line in blue color)
+   */
   public static void logInfo(String description, Throwable e) {
     String finalDescription = description + " : " + e.getMessage();
     String html = VelocityWrapper.fillLogRow(Arrays.asList(INFO_CLASS), "INFO", finalDescription);
@@ -292,7 +301,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
       try {
         new JavascriptActions(driver).execute("$(\".sprite.close-notification\")[0].click()");
       } catch (WebDriverException e) {
-        PageObjectLogging.log("Hack for disabling notifications", "Failed to execute js action", true);
+        PageObjectLogging.logInfo("Hack for disabling notifications", "Failed to execute js action");
 
       }
 

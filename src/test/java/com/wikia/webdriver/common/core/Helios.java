@@ -1,19 +1,18 @@
 package com.wikia.webdriver.common.core;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -21,18 +20,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
-import org.testng.collections.Lists;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 
 public class Helios {
 
@@ -44,14 +41,11 @@ public class Helios {
 
   /**
    * Standard cookie spec is used instead of default one in order to suppress warnings about
-   * SetCookie header values containing un-escaped commas
-   * (e.g. "expires=Sat, 09 Sep 2017 15:33:53 GMT")
+   * SetCookie header values containing un-escaped commas (e.g.
+   * "expires=Sat, 09 Sep 2017 15:33:53 GMT")
    */
-  private static RequestConfig requestConfig = RequestConfig.custom()
-      .setConnectTimeout(3000)
-      .setSocketTimeout(3000)
-      .setCookieSpec(CookieSpecs.STANDARD)
-      .build();
+  private static RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000)
+      .setSocketTimeout(3000).setCookieSpec(CookieSpecs.STANDARD).build();
 
   private Helios() {
     for (User user : User.values()) {
@@ -62,7 +56,7 @@ public class Helios {
   }
 
   public static String getAccessToken(User user) {
-    return getAccessToken(user.getUserName(), user.getPassword());
+    return getAccessToken(user.getUserName());
   }
 
   public static void deleteAllTokens(User user) {
@@ -80,27 +74,26 @@ public class Helios {
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
-                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
   }
 
-  public static String getAccessToken(String userName, String password) {
+  public static String getAccessToken(String userName) {
     for (User user : User.values()) {
       if (userName.equals(user.getUserName()) && StringUtils.isNotBlank(user.getAccessToken())) {
         tokenCache.put(userName, user.getAccessToken());
       }
     }
 
-    String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.TOKEN);
-
     if (StringUtils.isNotBlank(getTokenFromCache(userName))) {
       return tokenCache.get(userName);
     }
 
+    String heliosGetTokenURL = String.format("%s/%s/tokens",
+        HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS), getUserId(userName));
+
     HttpPost httpPost = new HttpPost(heliosGetTokenURL);
-    List<NameValuePair> loginParams = prepareLoginParams(userName, password);
-    httpPost.setEntity(new UrlEncodedFormEntity(loginParams, StandardCharsets.UTF_8));
     httpPost.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
     try {
@@ -111,32 +104,38 @@ public class Helios {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
-      PageObjectLogging
-          .log(IOEXCEPTION_COMMAND, IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e),
-               false);
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
-  }
-
-  private static List<NameValuePair> prepareLoginParams(String userName, String password) {
-    return Lists.newArrayList(
-
-        new BasicNameValuePair("grant_type", HeliosConfig.GrantType.PASSWORD.getGrantType()),
-        new BasicNameValuePair("username", userName),
-        new BasicNameValuePair("password", password)
-    );
   }
 
   private static ResponseHandler<String> extractAccessToken() {
     return res -> {
       HttpEntity entity = res.getEntity();
-      PageObjectLogging.log("LOGIN HEADERS: ", res.toString(), true);
-      PageObjectLogging.log("LOGIN RESPONSE: ", entity.toString(), true);
+      PageObjectLogging.logInfo("LOGIN HEADERS: ", res.toString());
       String source = EntityUtils.toString(entity);
-      PageObjectLogging.log("LOGIN RESPONSE RAW: ", source, true);
+      PageObjectLogging.logInfo("LOGIN RESPONSE RAW: ", source);
       try {
         JSONObject responseValue = new JSONObject(source);
         return responseValue.getString("access_token");
+      } catch (JSONException e) {
+        PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+        throw new WebDriverException(e);
+      }
+    };
+  }
+
+  private static ResponseHandler<String> extractUserId() {
+    return res -> {
+      HttpEntity entity = res.getEntity();
+      PageObjectLogging.logInfo("USER_ID HEADERS: ", res.toString());
+      String source = EntityUtils.toString(entity);
+      PageObjectLogging.logInfo("USER_ID RESPONSE RAW: ", source);
+      try {
+        JSONObject responseValue = new JSONObject(source);
+        return responseValue.getJSONObject("query").getJSONArray("users").getJSONObject(0)
+            .getString("userid");
       } catch (JSONException e) {
         PageObjectLogging.log("JSON EXCEPTION", ExceptionUtils.getStackTrace(e), false);
         throw new WebDriverException(e);
@@ -161,7 +160,7 @@ public class Helios {
       if (tokenCache.containsKey(userName)) {
 
         String getTokenInfoURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.INFO)
-                                 + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
+            + String.format("?code=%s&noblockcheck", tokenCache.get(userName));
         HttpGet getInfo = new HttpGet(getTokenInfoURL);
         getInfo.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
@@ -171,10 +170,35 @@ public class Helios {
       }
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
-                            IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
     return "";
+  }
+
+  public static String getUserId(String userName) {
+    String getUserIDURL = "";
+    try {
+      getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
+          new UrlBuilder().getUrlForWiki(), URLEncoder.encode(userName, "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
+      throw new WebDriverException(e);
+    }
+
+    HttpGet httpGet = new HttpGet(getUserIDURL);
+
+    try {
+      String userId = getDefaultClient().execute(httpGet, extractUserId());
+      return userId;
+    } catch (ClientProtocolException e) {
+      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
+    } catch (IOException e) {
+      PageObjectLogging.log(IOEXCEPTION_COMMAND,
+          IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(e);
+    }
   }
 
   private static CloseableHttpClient getDefaultClient() {
