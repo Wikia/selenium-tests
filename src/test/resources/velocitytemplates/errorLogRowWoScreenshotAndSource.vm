@@ -1,0 +1,6 @@
+<tr class=$className>
+    <td>stacktrace</td>
+    <td><pre>$command</pre></td>
+    <td> <a>No screenshot available</a>
+    </td>
+</tr>
