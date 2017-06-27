@@ -1,0 +1,5 @@
+<tr class=$className lowLevelAction>
+    <td>$command</td>
+    <td>$escapedDescription</td>
+    <td> <br/> &nbsp;</td>
+</tr>
