@@ -43,7 +43,8 @@ public enum User {
   INFOBOX_BUILDER_ADMIN("ci.user.infobox_builder.username", "ci.user.infobox_builder.password", "ci.user.infobox_builder.id", "ci.user.infobox_builder.access_token"),
   CHAT_USER_TO_BE_BANNED("ci.user.chat.user_to_be_banned.username", "ci.user.chat.user_to_be_banned.password", "ci.user.chat.user_to_be_banned.user_id", "ci.user.chat.user_to_be_banned.access_token"),
   BLOGS("ci.user.blogs.username", "ci.user.blogs.password", "ci.user.blogs.user_id", "ci.chat.blogs.access_token"),
-  THEME_DESIGNER("ci.user.theme_designer.username", "ci.user.theme_designer.password", "ci.user.theme_designer.user_id", "ci.chat.theme_designer.access_token");
+  THEME_DESIGNER("ci.user.theme_designer.username", "ci.user.theme_designer.password", "ci.user.theme_designer.user_id", "ci.chat.theme_designer.access_token"),
+  FOLLOW_ARTICLE("ci.user.follow_article.username", "ci.user.follow_article.password", "ci.user.follow_article.user_id", "ci.chat.follow_article.access_token");
 
   private final String userName;
 
