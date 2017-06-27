@@ -39,7 +39,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.Pre
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
@@ -192,9 +192,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new AttachedSignInPage();
   }
 
-  public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
+  public UserProfilePage openProfilePage(String userName, String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_PROFILE.replace("%userName%", userName));
-    return new UserProfilePageObject(driver);
+    return new UserProfilePage();
   }
 
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
@@ -439,9 +439,9 @@ public class WikiBasePageObject extends BasePageObject {
             .collect(Collectors.toList());
   }
 
-  public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
+  public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {
     getUrl(wikiURL + URLsContent.BLOG_NAMESPACE.replace("%userName%", userName) + blogTitle);
-    return new BlogPageObject(driver);
+    return new BlogPage();
   }
 
   public ArticlePageObject openMainPage(String wikiURL) {

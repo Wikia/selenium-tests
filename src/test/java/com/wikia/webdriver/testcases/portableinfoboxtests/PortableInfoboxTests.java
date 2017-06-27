@@ -155,9 +155,9 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject();
 
-    theme.openSpecialDesignerPage(wikiURL).selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
+    theme.open().selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
     theme.selectTheme(4);
     theme.submitTheme();
 
@@ -166,7 +166,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String oldBackground = infobox.getBackgroundColor();
 
-    theme.openSpecialDesignerPage(wikiURL).selectTheme(1);
+    theme.open().selectTheme(1);
     theme.submitTheme();
 
     infobox.open(PageContent.INFOBOX_2);
@@ -334,8 +334,8 @@ public class PortableInfoboxTests extends NewTestTemplate {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject();
-    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
-    theme.openSpecialDesignerPage(wikiURL).selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject();
+    theme.open().selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
     theme.selectTheme(3);
     theme.submitTheme();
 

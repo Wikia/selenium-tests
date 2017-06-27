@@ -42,7 +42,7 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_001_navigateThroughCategory() {
     init();
 
-    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(1);
     loading.handleAsyncPageReload();
@@ -54,7 +54,7 @@ public class NavigationTests extends NewTestTemplate {
   public void MercuryCuratedNavigationTest_002_navigateThroughSection() {
     init();
 
-    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(0);
 
@@ -79,7 +79,7 @@ public class NavigationTests extends NewTestTemplate {
 
     new ArticleContent().push(redirect, MercurySubpages.CC_REDIRECT_SOURCE_1);
 
-    navigate.toPage(MercurySubpages.CC_REDIRECT_SOURCE_1);
+    navigate.toPageByPath(MercurySubpages.CC_REDIRECT_SOURCE_1);
 
     Assertion.assertTrue(MercurySubpages.CC_REDIRECT_DESTINATION.toLowerCase()
                              .contains(article.getArticleTitle().toLowerCase()));
