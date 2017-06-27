@@ -282,6 +282,13 @@ public class ChatTests extends NewTestTemplate {
 
     switchToWindow(0);
     chatUserStaff.unBanUser(userToBeBannedUsername);
+
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logInfo("Sleep interrupted", e);
+    }
+    
     switchToWindow(1);
     Assertion.assertTrue(chatUserToBeBanned.isUserOnChat(), "USER IS NOT LOGGED IN TO CHAT");
   }
