@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -92,19 +91,24 @@ public class Assertion extends Assert {
   public static void assertEquals(String current, String pattern) {
     String patternEncoded = encodeSpecialChars(pattern);
     String currentEncoded = encodeSpecialChars(current);
+    AssertionError caughtException = null;
     boolean assertion = true;
     try {
       Assert.assertEquals(current, pattern);
     } catch (AssertionError err) {
       addVerificationFailure(err);
       assertion = false;
+      caughtException = err;
     }
     PageObjectLogging.log(
-        "assertEquals",
-        "assertion " + assertion + "! Pattern: \"" + patternEncoded
-        + "\" Current: \"" + currentEncoded + "\"",
-        assertion
+            "assertEquals",
+            "assertion " + assertion + "! Pattern: \"" + patternEncoded
+                    + "\" Current: \"" + currentEncoded + "\"",
+            assertion
     );
+    if (caughtException != null){
+      new PageObjectLogging().logAssertionStacktrace(caughtException);
+    }
   }
 
   public static void assertNotEquals(String current, String pattern) {

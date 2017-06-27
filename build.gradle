@@ -382,6 +382,8 @@ test {
 dependencies {
     def webdriverVersion = '2.53.1'
 
+    testCompile "org.apache.velocity:velocity:1.7"
+    testCompile "org.apache.velocity:velocity-tools:2.0"
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-api:${webdriverVersion}"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${webdriverVersion}"
