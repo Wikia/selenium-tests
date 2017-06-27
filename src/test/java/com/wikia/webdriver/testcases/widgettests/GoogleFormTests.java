@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.widgettests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -11,6 +9,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+
+import org.testng.annotations.Test;
 
 @Test(groups = "GoogleFormWidget")
 @InBrowser(browser = Browser.CHROME)
@@ -39,7 +39,7 @@ public class GoogleFormTests extends NewTestTemplate {
         new GoogleFormWidgetPageObject().createMultiple(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
     new ArticlePageObject().open(GOOGLE_FORM_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
-    Assertion.assertTrue(widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
+    Assertion.assertEquals(true, widget.areLoaded(), MercuryMessages.INVISIBLE_MSG);
   }
 
   @Test(groups = "GoogleFormWidgetTest_003")
