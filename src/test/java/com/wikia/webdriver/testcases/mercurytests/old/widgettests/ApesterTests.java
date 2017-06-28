@@ -66,7 +66,7 @@ public class ApesterTests extends NewTestTemplate {
   @Test(groups = "MercuryApesterWidgetTest_004")
   public void MercuryApesterWidgetTest_004_areLoadedOnFirstVisitDirectlyFromUrl() {
     WidgetPageObject widget =
-            new ApesterWidgetPageObject().create(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
+            new ApesterWidgetPageObject().createMultiple(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
     new Navigate().toPage(APESTER_MULTIPLE_WIDGETS_ARTICLE_NAME);
 
