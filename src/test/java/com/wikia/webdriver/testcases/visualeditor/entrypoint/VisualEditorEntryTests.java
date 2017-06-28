@@ -18,7 +18,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_001", "categoryEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_001", "categoryEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "categoryEntryPoints"
   )
@@ -35,7 +35,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_002", "createAPageEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_002", "createAPageEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "createAPageEntryPoints"
   )
@@ -52,7 +52,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_003", "listEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_003", "listEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "listEntryPoints"
   )
@@ -68,7 +68,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_004", "articleEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_004", "articleEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "mainEditEntryPoints"
   )
@@ -84,7 +84,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_005", "redLinkEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_005", "redLinkEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "redLinkEntryPoints"
   )
@@ -100,7 +100,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_006", "sectionEditEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_006", "sectionEditEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "sectionEditEntryPoints"
   )
@@ -116,7 +116,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_007", "templateEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_007", "templateEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "templateEntryPoints"
   )
@@ -132,7 +132,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_008", "urlActionEditEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_008", "urlActionEditEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "urlActionEditEntryPoints"
   )
@@ -147,7 +147,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   }
 
   @Test(
-      groups = {"VisualEditorEntry", "VisualEditorEntryTest_009", "urlVEActionEditEntry"},
+      groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_009", "urlVEActionEditEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
       dataProvider = "urlVEActionEditEntryPoints"
   )
