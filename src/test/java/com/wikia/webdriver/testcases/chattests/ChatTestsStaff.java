@@ -89,7 +89,7 @@ public class ChatTestsStaff extends NewTestTemplate {
 
     switchToWindow(1);
     new SpecialVersionPage().open();
-    ChatPage chatUserStaff2 = openChatForUser(User.SUS_CHAT_STAFF);
+    ChatPage chatUserStaff2 = openChatForUser(User.SUS_CHAT_STAFF2);
     chatUserStaff2.selectPrivateMessageToUser(User.SUS_CHAT_STAFF.getUserName());
     Assertion.assertTrue(chatUserStaff2.isPrivateChatOpen(), "PRIVATE CHAT IS NOT OPENED");
     chatUserStaff2.clickOnUserInPrivateMessageSection(User.SUS_CHAT_STAFF.getUserName());
