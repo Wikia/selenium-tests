@@ -25,7 +25,7 @@ public class ErrorPage extends WikiBasePageObject {
   }
 
   public ErrorPage navigateToErrorPageFromUrl() {
-    navigate.toPage("/wiki/404_Error_Page");
+    navigate.toPageByPath("/wiki/404_Error_Page");
     wait.forElementVisible(linkToOpenNavigation);
     PageObjectLogging.logInfo("Navigated to error 404 page");
 

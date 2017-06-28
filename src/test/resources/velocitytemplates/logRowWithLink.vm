@@ -1,0 +1,5 @@
+<tr class=$className>
+    <td>$command</td>
+    <td><a href='$link'>$label</a></td>
+    <td> <br/> &nbsp;</td>
+</tr>

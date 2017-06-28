@@ -33,7 +33,7 @@ public class DiscussionsPage extends WikiBasePageObject {
 
   public DiscussionsPage() {
     super();
-    getNavigate().toPage(PageContent.DISCUSSIONS_LINK);
+    getNavigate().toPageByPath(PageContent.DISCUSSIONS_LINK);
   }
 
   public boolean isWikiaHomeLinkDisplayed() {
