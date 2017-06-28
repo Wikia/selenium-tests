@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
 @Test(groups = {"Chat", "ChatForStaff"})
-@Execute(onWikia = "sustainingtest")
+@Execute(onWikia = "sustainingtestchat")
 public class ChatTestsStaff extends NewTestTemplate {
 
   private static final String MESSAGE_ON_MAIN_CHAT = "Test message on main chat";
