@@ -6,10 +6,10 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
 import org.testng.annotations.Test;
 
@@ -22,9 +22,9 @@ public class FollowBlogTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void FollowBlog_001_setup() {
     WikiBasePageObject base = new WikiBasePageObject();
-    UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
+    UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
-    BlogPageObject blogPage = userProfile.openFirstPost();
+    BlogPage blogPage = userProfile.openFirstPost();
     blogTitle = blogPage.getBlogName();
     WatchPageObject watch = blogPage.unfollowBlogPage();
     watch.confirmWatchUnwatch();
@@ -35,7 +35,7 @@ public class FollowBlogTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void FollowBlog_002_follow() {
     WikiBasePageObject base = new WikiBasePageObject();
-    BlogPageObject blog = base.openBlogByName(wikiURL, blogTitle, credentials.userName);
+    BlogPage blog = base.openBlogByName(wikiURL, blogTitle, credentials.userName);
     blog.follow();
   }
 

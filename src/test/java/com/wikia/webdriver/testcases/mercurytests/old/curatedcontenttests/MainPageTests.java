@@ -70,7 +70,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_001_CheckElementsVisibilityElementsOrderAndRootPath() {
     init();
 
-    navigate.toPage(MercurySubpages.CC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
     new ArticlePageObject(driver).isFooterVisible();
 
@@ -180,7 +180,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_002_CheckElementsInvisibility() {
     init();
 
-    navigate.toPage(MercurySubpages.ECC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.ECC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = curatedMainPage.isRevisedArticleTitleVisible();
@@ -237,7 +237,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_003_CheckElementsForNoTrendingArticles() {
     init();
 
-    navigate.toPage(MercurySubpages.NTACC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.NTACC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = !curatedMainPage.isTrendingArticlesVisible();
@@ -318,7 +318,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_004_CheckElementsVisibilityExceptTrendingVideos() {
     init();
 
-    navigate.toPage(MercurySubpages.NTVCC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.NTVCC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = curatedMainPage.isMobileTopLeaderboardVisible();
@@ -383,7 +383,7 @@ public class MainPageTests extends NewTestTemplate {
   public void MercuryCuratedMainPageTest_005_CheckElementsVisibilityExceptTrendingVideosAndArticles() {
     init();
 
-    navigate.toPage(MercurySubpages.NTAVCC_MAIN_PAGE);
+    navigate.toPageByPath(MercurySubpages.NTAVCC_MAIN_PAGE);
     Assertion.assertTrue(new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI));
 
     boolean result = curatedMainPage.isMobileTopLeaderboardVisible();
