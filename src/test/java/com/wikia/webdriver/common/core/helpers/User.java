@@ -45,7 +45,16 @@ public enum User {
   BLOGS("ci.user.blogs.username", "ci.user.blogs.password", "ci.user.blogs.user_id", "ci.chat.blogs.access_token"),
   THEME_DESIGNER("ci.user.theme_designer.username", "ci.user.theme_designer.password", "ci.user.theme_designer.user_id", "ci.chat.theme_designer.access_token"),
   FOLLOW_ARTICLE("ci.user.follow_article.username", "ci.user.follow_article.password", "ci.user.follow_article.user_id", "ci.chat.follow_article.access_token"),
-  SUS_ADMIN("ci.user.sus_admin.username", "ci.user.sus_admin.password");
+  SUS_ADMIN("ci.user.sus_admin.username", "ci.user.sus_admin.password"),
+  SUS_CHAT_USER("ci.user.sus_chat_user.username", "ci.user.sus_chat_user.password"),
+  SUS_CHAT_USER2("ci.user.sus_chat_user2.username", "ci.user.sus_chat_user2.password"),
+  SUS_CHAT_USER3("ci.user.sus_chat_user3.username", "ci.user.sus_chat_user3.password"),
+  SUS_STAFF("ci.user.sus_staff.username", "ci.user.sus_staff.password"),
+  SUS_STAFF2("ci.user.sus_staff2.username", "ci.user.sus_staff2.password"),
+  SUS_CHAT_STAFF("ci.user.sus_staff_chat.username", "ci.user.sus_staff_chat.password"),
+  SUS_CHAT_STAFF2("ci.user.sus_staff_chat2.username", "ci.user.sus_staff_chat2.password"),
+  SUS_CHAT_BANNED_PERMANENTLY("ci.user.sus_chat_permanently_banned.username", "ci.user.sus_chat_permanently_banned.password"),
+  ;
 
   private final String userName;
 
