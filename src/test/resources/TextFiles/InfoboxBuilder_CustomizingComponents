@@ -1,0 +1,31 @@
+<infobox>
+  <title source="title1">
+    <default>{{PAGENAME}}</default>
+  </title>
+  <image source="image1">
+    <caption source="caption1"/>
+  </image>
+  <data source="row1">
+    <label>AutomatedTest</label>
+  </data>
+  <data source="row2">
+    <label>AutomatedTestVeryLongName</label>
+  </data>
+  <group>
+    <header>AutomatedTestHeader</header>
+    <data source="row3">
+      <label>Label 3</label>
+    </data>
+  </group>
+</infobox>
+<noinclude>
+Example usage:<pre>
+{{InfoboxBuilderCustomizingComponents
+|title1=Example
+|image1=Example
+|caption1=Example
+|row1=Example
+|row2=Example
+}}
+</pre>
+</noinclude>

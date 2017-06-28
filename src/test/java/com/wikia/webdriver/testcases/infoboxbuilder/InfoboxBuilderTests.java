@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.TemplateContent;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -29,7 +30,8 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   private static final int DEFAULT_INFOBOX_WIDTH = 270;
   private static final String WIKI_WITH_EUROPA_THEME_ENABLED = "infoboxeuropathemetest";
   private static final String WIKI_WITH_EUROPA_THEME_DISABLED = "infoboxnoeuropathemetest";
-
+  private static final String CUSTOMIZING_COMPONENTS_TEMPLATE =
+          ContentLoader.loadWikiTextContent("InfoboxBuilder_CustomizingComponents");
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
@@ -157,13 +159,18 @@ public class InfoboxBuilderTests extends NewTestTemplate {
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_001"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
   public void customizingComponents() {
-    TemplatePage template = new TemplatePage();
-    Sidebar builderSidebar = new Sidebar();
+    String template_name = "InfoboxBuilderCustomizingComponents";
     String labelText = "AutomatedTest";
     String labelLongText = "AutomatedTestVeryLongName";
+    TemplatePage template = new TemplatePage();
+    Sidebar builderSidebar = new Sidebar();
+
+    new TemplateContent().push(CUSTOMIZING_COMPONENTS_TEMPLATE, template_name);
+    new TemplateEditPage()
+            .open(template_name).getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX).clickAddButton();
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage()
-        .openExisting("InfoboxBuilderCustomizingComponents").selectHeaderWithIndex(0);
+        .openExisting(template_name).selectHeaderWithIndex(0);
 
     builderSidebar.changeHeaderCollapsibilityState();
 
@@ -181,7 +188,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
     Assertion.assertTrue(template.isTemplatePagePresent());
 
     String infoboxTitle = template.getPortableInfobox().getTitleTextWithIndex(0);
-    Assertion.assertEquals("InfoboxBuilderCustomizingComponents", infoboxTitle);
+    Assertion.assertEquals(template_name, infoboxTitle);
   }
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
