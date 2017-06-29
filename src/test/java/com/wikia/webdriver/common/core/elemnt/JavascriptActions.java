@@ -185,7 +185,6 @@ public class JavascriptActions {
 
 
   public Long getCurrentPosition() {
-    Long value = (Long) js.executeScript("return window.pageYOffset;");
-    return value;
+    return (Long) js.executeScript("return window.pageYOffset;");
   }
 }
