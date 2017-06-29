@@ -93,7 +93,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -112,7 +112,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -130,7 +130,7 @@ public class Wait {
     try {
       elements.get(index).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       SelectorStack.contextRead();
@@ -176,7 +176,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -300,7 +300,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -357,7 +357,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -376,7 +376,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
