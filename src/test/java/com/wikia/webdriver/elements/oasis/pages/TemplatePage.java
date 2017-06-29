@@ -53,7 +53,7 @@ public class TemplatePage extends WikiBasePageObject {
 
   public SourceEditModePageObject editArticleInSrcUsingDropdown() {
     editUsingClassicEditor.click();
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public TemplatePage openArticleByName(String wikiURL, String articleName) {

@@ -709,7 +709,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement redLinkToClick = redLinks.get(linkNumber);
     CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
     articleModal.createPageWithBlankLayout("");
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public EmbedMapComponentObject clickViewEmbedMap() {
