@@ -1,18 +1,14 @@
 package com.wikia.webdriver.common.core.elemnt;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Set of commonly used actions invoked by executing JavaScript on a web page
@@ -22,6 +18,8 @@ public class JavascriptActions {
   private final static int WEBDRIVER_WAIT_TIMEOUT_SEC = 15;
   private final JavascriptExecutor js;
   private final WebDriver driver;
+  private final By bannerNotificationContainerBy = By.cssSelector(".banner-notifications-placeholder");
+  private final By globalNavigationBy = By.cssSelector("#globalNavigation");
 
   public JavascriptActions(WebDriver driver) {
     this.js = (JavascriptExecutor) driver;
@@ -85,21 +83,22 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(By elementBy) {
-    try {
-      js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 60));",
-          driver.findElement(elementBy));
-    } catch (WebDriverException e) {
-      if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
-        PageObjectLogging.log("JSError", "JQuery is not defined", false);
-      }
-    }
+    scrollToElement(driver.findElement(elementBy));
   }
 
   public void scrollToElement(WebElement element) {
+
+    int offset = 60;
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    if (wikiPage.isBannerNotificationContainerPresent()){
+      int notificationsHeight = wikiPage.getBannerNotificationsHeight();
+      offset += notificationsHeight;
+    }
+
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - 60));", element);
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + String.valueOf(offset) + "));", element);
+      PageObjectLogging.log("Offset", "Offset is " + String.valueOf(offset), true);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -136,9 +135,9 @@ public class JavascriptActions {
   }
 
   public void scrollElementIntoViewPort(WebElement element) {
-    if (!isElementInViewPort(element)) {
+    //if (!isElementInViewPort(element)) {
       scrollToElement(element);
-    }
+    //}
   }
 
   public void scrollBy(int x, int y) {
