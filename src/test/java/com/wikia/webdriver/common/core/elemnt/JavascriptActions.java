@@ -97,8 +97,7 @@ public class JavascriptActions {
 
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + String.valueOf(offset) + "));", element);
-      PageObjectLogging.log("Offset", "Offset is " + String.valueOf(offset), true);
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + offset + "));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -135,9 +134,9 @@ public class JavascriptActions {
   }
 
   public void scrollElementIntoViewPort(WebElement element) {
-    //if (!isElementInViewPort(element)) {
+    if (!isElementInViewPort(element)) {
       scrollToElement(element);
-    //}
+    }
   }
 
   public void scrollBy(int x, int y) {
