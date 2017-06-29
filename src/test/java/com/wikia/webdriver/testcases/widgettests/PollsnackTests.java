@@ -45,7 +45,7 @@ public class PollsnackTests extends NewTestTemplate {
   @Execute(onWikia = "mercuryautomationtesting")
   public void PollsnackWidgetTest_003_isErrorPresent() {
     WidgetPageObject widget =
-            new PollsnackWidgetPageObject().create(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
+            new PollsnackWidgetPageObject().createIncorrect(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
     new ArticlePageObject().open(POLLSNACK_INCORRECT_WIDGET_ARTICLE_NAME);
 
     Assertion.assertTrue(widget.isErrorPresent(), MercuryMessages.INVISIBLE_MSG);
