@@ -31,18 +31,20 @@ public class TestAdMixFeaturedVideoOasis extends TemplateNoFirstLoad {
     // verify as soon as the div gets sticky, the recirc changes to FMR
     jsActions.scrollBy(0, 1000);
     wikiPage.verifyFloatingMedrec();
+    wikiPage.verifyPlayerOnPage();
 
     // verify floating medrec switched to a recirc module after ~10sec & slight scroll
     wait.forXMilliseconds(10000);
     jsActions.scrollBy(0, 100);
     wikiPage.verifyRecirculationRightRailModule();
     wait.forElementNotVisible(By.id(AdsContent.FLOATING_MEDREC));
+    wikiPage.verifyPlayerOnPage();
 
     // verify recirc module switched to a floating medrec after ~10sec & slight scroll
     wait.forXMilliseconds(10000);
     jsActions.scrollBy(0, 100);
     wikiPage.verifyFloatingMedrec();
     wait.forElementNotVisible(By.id("recirculation-rail"));
-
+    wikiPage.verifyPlayerOnPage();
   }
 }
