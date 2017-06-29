@@ -25,7 +25,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = "BlogComments_001")
-  public void BlogComments_001_Anon_commentReply() {
+  public void AnonCanCommentAReply() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -45,7 +45,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "BlogComments_002")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER)
   public void BlogComments_002_User_commentReply() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
@@ -56,7 +56,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     blogPage.submitComment();
     blogPage.verifyCommentText(comment);
-    blogPage.verifyCommentCreator(credentials.userName);
+    blogPage.verifyCommentCreator(User.SUS_REGULAR_USER.getUserName());
     blogPage.triggerCommentReply();
     String commentReply = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
     editor.switchAndReplyComment(commentReply);
@@ -67,7 +67,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
 
   @Test(groups = "BlogComments_003")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER)
   public void BlogComments_003_User_editComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
@@ -78,7 +78,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     blogPage.submitComment();
     blogPage.verifyCommentText(comment);
-    blogPage.verifyCommentCreator(credentials.userName);
+    blogPage.verifyCommentCreator(User.SUS_REGULAR_USER.getUserName());
     blogPage.triggerEditCommentArea();
     String commentEdited = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
     editor.switchAndEditComment(commentEdited);
