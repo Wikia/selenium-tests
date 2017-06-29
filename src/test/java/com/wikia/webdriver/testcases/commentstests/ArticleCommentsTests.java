@@ -92,6 +92,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyCommentText(comment);
     article.verifyCommentCreator(User.COMMENTS_REGULAR_USER.getUserName());
     article.loginAs(User.SUS_ADMIN);
+    article.clickCommentButton();
     String commentText = article.getFirstCommentText();
     DeletePageObject delete = article.deleteFirstComment();
     delete.submitDeletion();
