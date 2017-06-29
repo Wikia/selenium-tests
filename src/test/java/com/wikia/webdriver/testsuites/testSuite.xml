@@ -12,6 +12,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdDriverForcedStatusOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBrowserError"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsDetection"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDetectionPageFair"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDisableGpt"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveMercury"/>
@@ -34,6 +35,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMOATTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPageFairRecoveryOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsRecoverySourcePointOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
