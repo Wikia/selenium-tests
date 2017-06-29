@@ -18,6 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 @Test(groups = "comments-articleComments")
+@Execute(onWikia = "sustainingtest")
 public class ArticleCommentsTests extends NewTestTemplate {
 
   @Test(groups = "ArticleComments_001")
