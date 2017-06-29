@@ -790,17 +790,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsDetection() {
-    return new Object[][]{
-        {
-            new Page("project43", "Project43_Wikia"),
-            "InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
-            false
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
