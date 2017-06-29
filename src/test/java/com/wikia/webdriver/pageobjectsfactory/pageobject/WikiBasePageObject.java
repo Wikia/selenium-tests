@@ -138,12 +138,14 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-global-navigation__user-menu")
   private WebElement globalNavigationAvatar;
-  @FindBy(css = "#WikiaFooter")
+  @FindBy(id = "WikiaFooter")
   private WebElement footer;
-  @FindBy(css = ".wds-global-footer__header")
+  @FindBy(className = ".wds-global-footer__header")
   private WebElement mobileFooter;
-  @FindBy(css = "#globalNavigation")
+  @FindBy(id = "globalNavigation")
   private WebElement globalNavigationBar;
+  @FindBy(id = "recirculation-rail")
+  private WebElement recirculationRightRailModule;
 
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
@@ -672,6 +674,10 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
+  public void verifyRecirculationRightRailModule() {
+    wait.forElementVisible(recirculationRightRailModule);
+    PageObjectLogging.log("verifyRecirculationRightRailModule", "Verified recirculation module in right rail", true);
+  }
 
   public void verifyFBButtonVisible() {
     Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonBasic));

@@ -1016,7 +1016,7 @@ public class AdsDataProvider {
         return new Object[][]{
                 {
                     "project43",
-                        "SyntheticTests/Premium/FeaturedVideo"
+                    "SyntheticTests/Premium/FeaturedVideo"
                 }
         };
     }

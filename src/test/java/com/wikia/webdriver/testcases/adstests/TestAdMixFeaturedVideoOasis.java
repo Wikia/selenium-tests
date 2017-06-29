@@ -1,11 +1,14 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class TestAdMixFeaturedVideoOasis extends TemplateNoFirstLoad {
@@ -16,15 +19,30 @@ public class TestAdMixFeaturedVideoOasis extends TemplateNoFirstLoad {
       dataProvider = "adMixFeaturedVideoOasis"
   )
   public void adMixFeaturedVideoOasis(String wikiName, String article) {
+    Wait wait = new Wait(driver);
     JavascriptActions jsActions = new JavascriptActions(driver);
     String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?InstantGlobals.wgAdDriverAdMixCountries=[XX]");
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
     wikiPage.verifyTopLeaderboard();
     wikiPage.verifyMedrec();
-    // verify recirc remains fixed for ~700px,
-    jsActions.scrollBy(0, 600);
-    // verify recirc switched to a 3x2 after ~1400px && 10secs
-    // verify recirc switches back to recirc for the rest of the page
+    wikiPage.verifyRecirculationRightRailModule();
+
+    // verify as soon as the div gets sticky, the recirc changes to FMR
+    jsActions.scrollBy(0, 1000);
+    wikiPage.verifyFloatingMedrec();
+
+    // verify floating medrec switched to a recirc module after ~10sec & slight scroll
+    wait.forXMilliseconds(10000);
+    jsActions.scrollBy(0, 100);
+    wikiPage.verifyRecirculationRightRailModule();
+    wait.forElementNotVisible(By.id(AdsContent.FLOATING_MEDREC));
+
+    // verify recirc module switched to a floating medrec after ~10sec & slight scroll
+    wait.forXMilliseconds(10000);
+    jsActions.scrollBy(0, 100);
+    wikiPage.verifyFloatingMedrec();
+    wait.forElementNotVisible(By.id("recirculation-rail"));
+
   }
 }

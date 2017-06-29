@@ -57,6 +57,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   };
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
+  private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
+
 
   private long tStart;
 
@@ -66,6 +68,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
+  @FindBy(css = FLOATING_MEDREC_SELECTOR)
+  private WebElement presentFloatingMedrec;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
   @FindBy(css = "#WikiaFooter")
@@ -134,6 +138,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMedrec() {
     verifyAdVisibleInSlot("div[id*='TOP_RIGHT_BOXAD']", presentMedrec);
+  }
+
+  public void verifyFloatingMedrec() {
+    verifyAdVisibleInSlot(FLOATING_MEDREC_SELECTOR, presentMedrec);
   }
 
   public void verifyTopLeaderboard() {
