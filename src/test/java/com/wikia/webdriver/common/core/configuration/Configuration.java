@@ -1,5 +1,16 @@
 package com.wikia.webdriver.common.core.configuration;
 
+import com.wikia.webdriver.common.core.TestContext;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
+import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.properties.Credentials;
+import lombok.Getter;
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriverException;
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,19 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import lombok.Getter;
-
-import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriverException;
-import org.yaml.snakeyaml.Yaml;
-
-import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.exceptions.TestEnvInitFailedException;
-import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.properties.Credentials;
 
 /**
  * Configuration handler. This Class should handle run configuration and global properties.
@@ -39,6 +37,7 @@ public class Configuration {
   private static final String DEFAULT_CONFIG_FILE_NAME = "config_default.yml";
   private static final String LOCAL_CONFIG_FILE_NAME = "config.yml";
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
+  public static final String WIKI_NAME_PROPERTY = "wikiName";
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
   @Getter(lazy = true)
@@ -97,7 +96,11 @@ public class Configuration {
   }
 
   public static String getWikiName() {
-    return getProp("wikiName");
+    return getProp(WIKI_NAME_PROPERTY);
+  }
+
+  public static String getDefaultWikiName() {
+    return getPropertyFromFile(WIKI_NAME_PROPERTY);
   }
 
   public static String getPlatform() {
