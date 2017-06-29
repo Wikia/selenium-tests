@@ -2,23 +2,17 @@ package com.wikia.webdriver.testcases.mediatests.lightboxtests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
@@ -36,14 +30,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
  * Special:NewFiles, verify title url and verify file page (logged-in user)
  */
 @Test(groups = {"LightboxTest", "Media"})
+@Execute(onWikia = "sustainingtest")
 public class LightboxTests extends NewTestTemplate {
 
-  private static final String BROWSER_SIZE = "1400x720";
-  Credentials credentials = Configuration.getCredentials();
-
   @Test(groups = "LightboxTest_001")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_001_unusedFiles() {
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanOpenLightBoxOnUnusedFiles() {
     LightboxComponentObject lightbox =
         new SpecialUnusedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
 
@@ -51,8 +43,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_002")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_002_unusedVideos() {
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanOpenLightBoxOnUnusedVideos() {
     LightboxComponentObject lightbox =
         new SpecialUnusedVideosPage().open().getGalleryGrid().openLightboxForGridVideo(0);
 
@@ -60,8 +52,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_003")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_003_uncategorizedFiles() {
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanOpenLightBoxOnUncategorizedFiles() {
     LightboxComponentObject lightbox =
         new SpecialUncategorizedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
 
@@ -69,8 +61,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_004")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_004_mostLinkedFiles() {
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanOpenLightBoxOnMostLinkedFiles() {
     LightboxComponentObject lightbox =
         new SpecialMostLinkedFilesPage().open().getGalleryGrid().openLightboxForGridImage(0);
 
@@ -78,21 +70,12 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_005")
-  @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_005_verifyExistenceAndURLsOfSocialButtons() {
-    new ArticleContent().push(PageContent.ARTICLE_TEXT);
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanShareAFileFromArticlePageOnSocialMedia() {
+    new ArticleContent(User.SUS_STAFF).push("[[File:Image1.png|thumb|TestDataCaption1]]");
 
     ArticlePageObject article = new ArticlePageObject().open();
-    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
-    visualEditMode.clearContent();
-    PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
-    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-    photoOptions.setCaption(PageContent.CAPTION);
-    photoOptions.clickAddPhoto();
-    visualEditMode.verifyPhoto();
-    visualEditMode.submitArticle();
-    article.verifyPhoto();
     LightboxComponentObject lightbox = article.clickThumbnailImage();
     lightbox.clickPinButton();
     lightbox.makeHeaderVisible(); // Assure header buttons are visible if not hovered over
@@ -115,8 +98,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "Lightbox_006")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_006_verifyCarousel() {
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void AnonCanUseCarousel() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
@@ -127,8 +110,8 @@ public class LightboxTests extends NewTestTemplate {
   }
 
   @Test(groups = "LightboxTest_007")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_007_specialVideo() {
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void AnonCanSeeLightboxOnSpecialVideos() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
@@ -141,9 +124,9 @@ public class LightboxTests extends NewTestTemplate {
    * page (logged-in user)
    */
   @Test(groups = "LightboxTest_008")
-  @Execute(asUser = User.USER, disableFlash = "false")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_008_filepage_video() {
+  @Execute(asUser = User.SUS_REGULAR_USER, disableFlash = "false")
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanSeeLightboxOnSpecialVideos() {
     SpecialVideosPageObject specialVideos = new WikiBasePageObject().openSpecialVideoPage(wikiURL);
 
     LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
@@ -160,15 +143,13 @@ public class LightboxTests extends NewTestTemplate {
    */
   @Test(groups = "LightboxTest_009")
   @RelatedIssue(issueID = "MAIN-6170", comment = "Test manually")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
-  public void LightboxTest_009_filepage_image() {
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void UserCanSeeLightboxOnSpecialNewFiles() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     SpecialNewFilesPage specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
-    int itemNumber = 2;
-
-    LightboxComponentObject lightbox = specialNewFiles.openLightbox(itemNumber);
+    LightboxComponentObject lightbox = specialNewFiles.openLightbox(0);
     lightbox.verifyLightboxPopup();
     lightbox.verifyLightboxImage();
     // lightbox.verifyTitleUrl(fileUrl);
