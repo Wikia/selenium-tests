@@ -270,8 +270,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   public DeletePageObject deleteFirstComment() {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
-    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
+    driver.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
                      DELETE_BUTTON_SELECTOR);
     return new DeletePageObject(driver);
   }
