@@ -503,7 +503,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public String loginAs(String userName, String password, String wikiURL) {
-    String token = Helios.getAccessToken(userName, password);
+    String token = Helios.getAccessToken(userName);
 
     driver.manage().addCookie(new Cookie("access_token", token,
         String.format(".%s", Configuration.getEnvType().getWikiaDomain()), null, null));
@@ -515,8 +515,8 @@ public class WikiBasePageObject extends BasePageObject {
     }
 
     this.verifyUserLoggedIn(userName);
-    PageObjectLogging.log("loginCookie",
-        "user was logged in by by helios using access token: " + token, true);
+    PageObjectLogging.logInfo("loginCookie",
+        "user was logged in by by helios using access token: " + token);
     logMercuryUserId();
 
     return token;

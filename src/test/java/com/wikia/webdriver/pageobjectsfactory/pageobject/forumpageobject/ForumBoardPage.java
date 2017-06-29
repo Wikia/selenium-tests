@@ -1,19 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
+
+import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class ForumBoardPage extends BasePageObject {
 
@@ -36,6 +41,7 @@ public class ForumBoardPage extends BasePageObject {
 
   /**
    * Navigate to forum board width specified title
+   * 
    * @param forumBoardTitle
    * @return
    */
@@ -44,6 +50,16 @@ public class ForumBoardPage extends BasePageObject {
         URLsContent.WIKI_DIR, URLsContent.FORUM_BOARD_NAMESPACE, forumBoardTitle));
 
     return this;
+  }
+
+  public String createNew(User user) {
+    String content = String.format("%s%d", PageContent.ARTICLE_TEXT, DateTime.now().getMillis());
+    String boardName = String.format("%s%d", "ForumBoard", DateTime.now().getMillis());
+
+    new ArticleContent(user).push(content,
+        String.format("%s:%s", URLsContent.FORUM_BOARD_NAMESPACE, boardName));
+
+    return boardName;
   }
 
   private void checkHighlightCheckbox(boolean isHighLighted) {
@@ -117,7 +133,7 @@ public class ForumBoardPage extends BasePageObject {
     wait.forElementVisible(wikiaEditorTextArea);
     jsActions.focus(wikiaEditorTextArea);
     PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
-    PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
+    PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 0);
     photoOptions.clickAddPhoto();
     PageObjectLogging.log("startDiscussionWithImage", "discussion with image started" + title, true,
         driver);
@@ -168,7 +184,7 @@ public class ForumBoardPage extends BasePageObject {
 
   public void unfollowIfDiscussionIsFollowed(int threadNumber) {
 
-    //TODO: Get a list of threads not to put locator in this method
+    // TODO: Get a list of threads not to put locator in this method
     By followButtonBy = By.cssSelector(".thread:nth-child(" + threadNumber + ") li.follow");
     WebElement followButton = wait.forElementVisible(followButtonBy);
 

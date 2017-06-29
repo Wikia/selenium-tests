@@ -21,7 +21,7 @@ public class AlertHandler {
       driver.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
-      PageObjectLogging.log("NO ALERT PRESENT", "", true);
+      PageObjectLogging.logInfo("NO ALERT PRESENT");
       return false;
     }
   }

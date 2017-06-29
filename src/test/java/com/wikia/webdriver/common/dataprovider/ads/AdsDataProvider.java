@@ -492,7 +492,7 @@ public class AdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            "wka.ent/_overlordmaruyama//article",
+            "wka.ent/_not_a_top1k_wiki//article",
             "TOP_RIGHT_BOXAD",
             Arrays.asList(
                 "\"s0\":\"ent\"",
