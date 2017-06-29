@@ -1,13 +1,15 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
-import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
-
 import org.testng.annotations.Test;
 
-public class TestAmazonAds extends TemplateNoFirstLoad {
+public class TestAmazonAds extends NewTestTemplate {
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -50,32 +52,16 @@ public class TestAmazonAds extends TemplateNoFirstLoad {
       dataProvider = "amazonSites",
       groups = "AmazonAdsMercury"
   )
-  public void adsAmazonDebugModeMercury(String wikiName, String path) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, path);
-    testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
-    AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
-    amazonAds
-        .clickAmazonArticleLink("AmazonSecondPageView")
-        .verifyAdsFromAmazonPresent()
-        .verifyGPTParams();
-  }
-
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "amazonSites",
-      groups = "AmazonAdsMercury"
-  )
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void adsAmazonDebugModeOnConsecutivePagesMercury(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");
     AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage);
     amazonAds
-        .clickAmazonArticleLink("AmazonSecondPageView")
-        .verifyAdsFromAmazonPresent();
+        .verifyAdsFromAmazonPresent()
+        .verifyGPTParams();
 
-    amazonAds.verifyGPTParams();
-
-    amazonAds.clickAmazonArticleLink("AmazonThirdPageView")
+    amazonAds.clickAmazonArticleLink("AmazonSecondPageView")
         .verifyNoAdsFromAmazonPresent();
   }
 }
