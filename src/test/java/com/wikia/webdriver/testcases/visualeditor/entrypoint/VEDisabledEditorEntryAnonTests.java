@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -52,7 +53,10 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_004",
-                  "sectionEditEntry"})
+                  "sectionEditEntry"},
+          enabled = false
+  )
+  @RelatedIssue(issueID = "XW-3680")
   public void VEDisabledEditorEntryAnonTestsTests_004_SectionEditEntry() {
     ArticlePageObject article = new ArticlePageObject().open(URLsContent.TESTINGPAGE);
     VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
@@ -87,7 +91,10 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_008",
-                  "templateEntry"})
+                  "templateEntry"},
+          enabled = false
+  )
+  @RelatedIssue(issueID = "XW-3681")
   public void VEDisabledEditorEntryAnonTestsTests_008_TemplateNamespace() {
     ArticlePageObject article = new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);
     SourceEditModePageObject src = article.openSrcModeWithMainEditButton();

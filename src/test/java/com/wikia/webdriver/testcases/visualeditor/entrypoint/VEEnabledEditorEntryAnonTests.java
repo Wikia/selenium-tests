@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -61,8 +62,10 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplate {
 
   @Test(
       groups = {"VEEnabledEditorEntryAnonTests", "VEEnabledEditorEntryAnonTests_004",
-                "sectionEditEntry"}
+                "sectionEditEntry"},
+          enabled = false
   )
+  @RelatedIssue(issueID = "XW-3680")
   public void VEEnabledEditorEntryAnonTests_004_SectionEditEntry() {
     ArticlePageObject article =
         new ArticlePageObject().open(URLsContent.TESTINGPAGE);
@@ -106,8 +109,10 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplate {
 
   @Test(
       groups = {"VEEnabledEditorEntryAnonTests", "VEEnabledEditorEntryAnonTests_008",
-                "templateEntry"}
+                "templateEntry"},
+          enabled = false
   )
+  @RelatedIssue(issueID = "XW-3680")
   public void VEEnabledEditorEntryAnonTests_008_TemplateNamespace() {
     ArticlePageObject article =
         new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);

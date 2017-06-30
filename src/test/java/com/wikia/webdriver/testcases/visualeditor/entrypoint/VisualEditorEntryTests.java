@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Editor;
@@ -20,8 +21,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_001", "categoryEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "categoryEntryPoints"
+      dataProvider = "categoryEntryPoints",
+      enabled = false
   )
+  @RelatedIssue(issueID = "XW-3676")
   public void VisualEditorEntryTest_001_Category(
       boolean isRTEext, boolean isVEext, VisualEditorDataProvider.EditorPref editorPref,
       VisualEditorDataProvider.Editor expectedEditor
@@ -37,8 +40,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_002", "createAPageEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "createAPageEntryPoints"
+      dataProvider = "createAPageEntryPoints",
+      enabled = false
   )
+  @RelatedIssue(issueID = "XW-3677")
   public void VisualEditorEntryTest_002_CreateAPage(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
@@ -54,8 +59,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_003", "listEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "listEntryPoints"
+      dataProvider = "listEntryPoints",
+      enabled = false
   )
+  @RelatedIssue(issueID = "XW-3678")
   public void VisualEditorEntryTest_003_List(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
@@ -70,8 +77,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_004", "articleEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "mainEditEntryPoints"
+      dataProvider = "mainEditEntryPoints",
+      enabled = false
   )
+  @RelatedIssue(issueID = "XW=3675")
   public void VisualEditorEntryTest_004_Article(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
@@ -86,8 +95,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_005", "redLinkEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "redLinkEntryPoints"
+      dataProvider = "redLinkEntryPoints",
+      enabled = false
   )
+  @RelatedIssue(issueID = "XW-3679")
   public void VisualEditorEntryTest_005_redLink(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
@@ -102,8 +113,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_006", "sectionEditEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "sectionEditEntryPoints"
+      dataProvider = "sectionEditEntryPoints",
+          enabled = false
   )
+  @RelatedIssue(issueID = "XW-3680")
   public void VisualEditorEntryTest_006_sectionEdit(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
@@ -118,8 +131,10 @@ public class VisualEditorEntryTests extends NewTestTemplate {
   @Test(
       groups = {"VisualEditorEntryTests", "VisualEditorEntryTest_007", "templateEntry"},
       dataProviderClass = VisualEditorDataProvider.class,
-      dataProvider = "templateEntryPoints"
+      dataProvider = "templateEntryPoints",
+      enabled = false
   )
+  @RelatedIssue(issueID = "XW-3681")
   public void VisualEditorEntryTest_007_template(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {

@@ -7,6 +7,7 @@
         <classes>
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdMixFeaturedVideoOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDfpParamsPresentMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
@@ -35,7 +36,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMOATTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPageFairRecoveryOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsRecoverySourcePointOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
