@@ -80,7 +80,7 @@ public class VisualEditorEntryTests extends NewTestTemplate {
       dataProvider = "mainEditEntryPoints",
       enabled = false
   )
-  @RelatedIssue(issueID = "XW=3675")
+  @RelatedIssue(issueID = "XW-3675")
   public void VisualEditorEntryTest_004_Article(
       boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
   ) {
