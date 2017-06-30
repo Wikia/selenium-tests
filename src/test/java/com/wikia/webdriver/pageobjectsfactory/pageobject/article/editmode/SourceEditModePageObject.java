@@ -1,9 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
@@ -14,15 +22,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 public class SourceEditModePageObject extends EditMode {
-  
+
   @FindBy(css = "#wpSave")
   private WebElement submitButton;
   @FindBy(css = "#mw-editbutton-bold")
@@ -78,8 +79,13 @@ public class SourceEditModePageObject extends EditMode {
   @FindBy(css = ".cke_source")
   private WebElement sourceModeTextArea;
 
-  public SourceEditModePageObject(WebDriver driver) {
-    super();
+  public SourceEditModePageObject openArticle(String articleTitle) {
+    String URL = urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.WIKI_DIR + articleTitle;
+    URL = urlBuilder.appendQueryStringToURL(URL, URLsContent.ACTION_EDIT);
+    URL = urlBuilder.appendQueryStringToURL(URL, URLsContent.SOURCE_MODE);
+    getUrl(URL);
+
+    return this;
   }
 
   public SourceEditModePageObject focusTextArea() {
@@ -101,9 +107,11 @@ public class SourceEditModePageObject extends EditMode {
   public void checkSourceVideoContent(String desiredContent) {
     int fileNameLength = 38;
     int fileParametersBeginIndex = 48;
-    Assertion.assertEquals(getSourceContent().substring(1, fileNameLength) + getSourceContent().substring(fileParametersBeginIndex),
-                           desiredContent.substring(1, fileNameLength) + desiredContent.substring(fileParametersBeginIndex)
-    );
+    Assertion.assertEquals(
+        getSourceContent().substring(1, fileNameLength)
+            + getSourceContent().substring(fileParametersBeginIndex),
+        desiredContent.substring(1, fileNameLength)
+            + desiredContent.substring(fileParametersBeginIndex));
   }
 
   public void clickBold() {
@@ -169,8 +177,8 @@ public class SourceEditModePageObject extends EditMode {
   public void clickHorizontalLine() {
     focusTextArea();
     hline.click();
-    PageObjectLogging
-        .log("clickHorizontalLine", "horizontal line button was clicked", true, driver);
+    PageObjectLogging.log("clickHorizontalLine", "horizontal line button was clicked", true,
+        driver);
   }
 
   public PhotoAddComponentObject clickAddPhoto() {
@@ -218,7 +226,7 @@ public class SourceEditModePageObject extends EditMode {
   public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("addContent", "the following content was added: "+content, true);
+    PageObjectLogging.log("addContent", "the following content was added: " + content, true);
     return this;
   }
 
@@ -227,16 +235,14 @@ public class SourceEditModePageObject extends EditMode {
     return textArea.getText();
   }
 
-  public String buildTablePropertiesContent(
-      int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
-  ) {
-    String tablePropertiesContent = SourceModeContent.TABLE
-        .replace("%border%", Integer.toString(border))
-        .replace("%cellpadding%", Integer.toString(cellpadding))
-        .replace("%cellspacing%", Integer.toString(cellspacing))
-        .replace("%float%", alignment.toString())
-        .replace("%height%", Integer.toString(height))
-        .replace("%width%", Integer.toString(width));
+  public String buildTablePropertiesContent(int border, int width, int height, int cellspacing,
+      int cellpadding, Alignment alignment) {
+    String tablePropertiesContent =
+        SourceModeContent.TABLE.replace("%border%", Integer.toString(border))
+            .replace("%cellpadding%", Integer.toString(cellpadding))
+            .replace("%cellspacing%", Integer.toString(cellspacing))
+            .replace("%float%", alignment.toString()).replace("%height%", Integer.toString(height))
+            .replace("%width%", Integer.toString(width));
     return tablePropertiesContent;
   }
 
@@ -262,25 +268,25 @@ public class SourceEditModePageObject extends EditMode {
       PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
       return new SliderBuilderComponentObject(driver);
     } else {
-      PageObjectLogging
-          .log("addComponent", "not supported component name: " + componentName, false);
+      PageObjectLogging.log("addComponent", "not supported component name: " + componentName,
+          false);
       return null;
     }
   }
 
   public void checkMainTools() {
-    //edit tools 'Insert' section in MediaWiki:Edittools
+    // edit tools 'Insert' section in MediaWiki:Edittools
     int wikitextShortcutsInsertSection = 17;
     for (int i = 1; i < wikitextShortcutsInsertSection; i++) {
       clearSource();
       clickMore();
-      String
-          content =
-          driver.findElement(
+      String content = driver
+          .findElement(
               By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
-              .getText();
-      driver.findElement(
-          By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
+          .getText();
+      driver
+          .findElement(
+              By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]"))
           .click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
@@ -289,16 +295,16 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkWikiMarkupTools() {
-    //edit tools 'Wiki markup' section in MediaWiki:Edittools
+    // edit tools 'Wiki markup' section in MediaWiki:Edittools
     int wikitextShortcutsWikiMarkupSection = 21;
     for (int i = 1; i < wikitextShortcutsWikiMarkupSection; i++) {
       clearSource();
       clickMore();
-      String content =
-          (String) jsActions.execute(
-              "$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
-      driver.findElement(By.xpath(
-          "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
+      String content = (String) jsActions
+          .execute("$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
+      driver
+          .findElement(By.xpath(
+              "//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]"))
           .click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
@@ -307,18 +313,18 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSymbolsTools() {
-    //edit tools 'Symbols' section in MediaWiki:Edittools
+    // edit tools 'Symbols' section in MediaWiki:Edittools
     int wikitextShortcutsSymbolsSection = 65;
     for (int i = 1; i < wikitextShortcutsSymbolsSection; i++) {
       clearSource();
       clickMore();
-      String
-          content =
-          driver.findElement(By.xpath(
+      String content = driver
+          .findElement(By.xpath(
               "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
-              .getText();
-      driver.findElement(
-          By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
+          .getText();
+      driver
+          .findElement(By.xpath(
+              "//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]"))
           .click();
       waitForElementNotVisibleByElement(editorModal);
       waitForElementNotVisibleByElement(focusedMode);
@@ -333,14 +339,14 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void verifyVideoAlignment(PositionsVideo position) {
-    Assertion.assertStringContains(getContent(), position.toString().toLowerCase()
-    );
+    Assertion.assertStringContains(getContent(), position.toString().toLowerCase());
   }
 
   public int getVideoWidth() {
     String content = getContent();
-    
-    return Integer.parseInt(content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1));
+
+    return Integer
+        .parseInt(content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1));
   }
 
   /**
@@ -354,16 +360,16 @@ public class SourceEditModePageObject extends EditMode {
   private void appendContent(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging
-        .log("appendContent", "text: '" + content + "', added to the source mode", true);
+    PageObjectLogging.log("appendContent", "text: '" + content + "', added to the source mode",
+        true);
   }
 
   private void appendNewLine(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(Keys.ENTER);
     sourceModeTextArea.sendKeys(content);
-    PageObjectLogging
-            .log("appendNewLine", "text " + content + " added to the source mode in new line", true);
+    PageObjectLogging.log("appendNewLine",
+        "text " + content + " added to the source mode in new line", true);
   }
 
   public void clearContent() {

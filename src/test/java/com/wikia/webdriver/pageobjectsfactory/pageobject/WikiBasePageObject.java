@@ -276,7 +276,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openCurrectArticleSourceMode() {
     String queryStrings[] = {URLsContent.ACTION_EDIT, URLsContent.SOURCE_MODE};
     appendMultipleQueryStringsToUrl(queryStrings);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
@@ -284,7 +284,7 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
         driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
@@ -292,7 +292,7 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
                           driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
@@ -343,7 +343,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openSrcModeWithSectionEditButton",
         "Src edit button clicked at section: " + section, true, driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public VisualEditModePageObject navigateToArticleEditPage() {
@@ -360,7 +360,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL,

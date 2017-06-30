@@ -153,7 +153,7 @@ public class ForumThreadPageObject extends BasePageObject {
   public void clickOnReopenThreadButton() {
     wait.forElementVisible(reopenThreadButton);
     wait.forElementClickable(reopenThreadButton);
-    scrollAndClick(reopenThreadButton);
+    reopenThreadButton.click();
     PageObjectLogging
         .log("clickOnReopenThreadButton", "click on 'reopen thread' button on a message", true);
   }

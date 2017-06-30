@@ -21,15 +21,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
  */
 
 @Test(groups = {"VetTests", "VetAddVideo", "Media"})
+@Execute(onWikia = "sustainingtestchat")
 public class VetAddingVideoTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
   @Test(groups = {"VetAddVideo_001"})
-  @RelatedIssue(issueID = "QAART-889", comment = "test fails randomly")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER2)
   public void VetAddVideo_001_MessageWallProvider() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.SUS_REGULAR_USER2.getUserName());
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     MiniEditorComponentObject mini = wall.triggerMessageArea();
@@ -47,10 +45,9 @@ public class VetAddingVideoTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetAddVideo_002"})
-  @RelatedIssue(issueID = "QAART-889")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER2)
   public void VetAddVideo_002_MessageWallLibrary() {
-    MessageWall wall = new MessageWall(driver).open(credentials.userName);
+    MessageWall wall = new MessageWall(driver).open(User.SUS_REGULAR_USER2.getUserName());
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     MiniEditorComponentObject mini = wall.triggerMessageArea();
