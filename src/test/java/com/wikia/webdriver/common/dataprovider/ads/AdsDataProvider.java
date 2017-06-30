@@ -944,6 +944,16 @@ public class AdsDataProvider {
     };
   }
 
+    @DataProvider
+    public static Object[][] adMixFeaturedVideoOasis() {
+        return new Object[][]{
+                {
+                    "project43",
+                    "SyntheticTests/Premium/FeaturedVideo"
+                }
+        };
+    }
+
   @DataProvider
   public static Object[][] adsUapOasis() {
     return new Object[][]{
