@@ -1,13 +1,11 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapVideos;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +17,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
 
   private static final String FANDOM_ARTICLE_WESTWORLD_LINK = "http://adeng.fandom.wikia.com/articles/whats-coming-westworld-finale";
 
-  private static final String PROJECT43_TNG_ARTICLE_LINK = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
+  private static final String TNG_AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
 
   @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateAutoplayOasis"},
       dataProviderClass = AdsDataProvider.class,
@@ -54,7 +52,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     vuap.clickOnClickArea2();
 
     final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(actual.equals(PROJECT43_TNG_ARTICLE_LINK), "Image should point to page on project43.");
+    Assert.assertTrue(actual.equals(TNG_AD_REDIRECT_URL), "Image should point to page on project43.");
   }
 
   @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
@@ -74,7 +72,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateMuteOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
-  public void vuapDefaultStateAutoplayIsMutredAfrerReplayIsNotMuted(Page page, String slot, String videoIframeSelector) {
+  public void vuapDefaultStateAutoplayIsMutedAfterReplayIsNotMuted(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     scrollToSlot(slot, ads);
@@ -151,7 +149,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     vuap.clickOnClickArea2();
 
     final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(actual.equals(PROJECT43_TNG_ARTICLE_LINK), "Image should point to page on project43.");
+    Assert.assertTrue(actual.equals(TNG_AD_REDIRECT_URL), "Image should point to page on project43.");
   }
 
   @Test(groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateClickOasis"},
@@ -218,7 +216,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   private void scrollToSlot(String slotName, AdsBaseObject ads) {
-    if (slotName == AdsContent.BOTTOM_LB) {
+    if (slotName.equals(AdsContent.BOTTOM_LB)) {
       ads.triggerComments();
     }
   }
