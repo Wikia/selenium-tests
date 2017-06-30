@@ -15,10 +15,10 @@ import org.testng.annotations.Test;
 @Test(groups = {"VetProvidersArticle", "ProviderTests", "Media"})
 public class VetProvidersTests extends NewTestTemplate {
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER3)
   @Test(dataProviderClass = VideoUrlProvider.class, dataProvider = "videoUrl")
   public void VetProvidersTests_001_article(String videoUrl, String videoName) {
-    new ArticleContent().clear();
+    new ArticleContent(User.SUS_REGULAR_USER3).clear();
 
     PageObjectLogging.log("", videoUrl, true);
     VisualEditModePageObject visualEditMode = new VisualEditModePageObject().open();
