@@ -352,7 +352,7 @@ public class MobileAdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            "wka.ent/_overlordmaruyama//article",
+            "wka.ent/_not_a_top1k_wiki//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"ent\"",
