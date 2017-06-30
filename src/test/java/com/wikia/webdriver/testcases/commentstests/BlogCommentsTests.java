@@ -62,7 +62,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     editor.switchAndReplyComment(commentReply);
     blogPage.submitReplyComment();
     blogPage.verifyCommentReply(commentReply);
-    blogPage.verifyReplyCreator(credentials.userName);
+    blogPage.verifyReplyCreator(User.SUS_REGULAR_USER.getUserName());
   }
 
 
