@@ -5,7 +5,9 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
@@ -77,6 +79,7 @@ public class ForumThreadTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.SUS_STAFF2)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_SMALL)
   @Test(groups = {"ForumThreadTests_005"})
   public void staffUserCanCloseAndReopenThread() {
     String title = String.format(PageContent.FORUM_TITLE_PREFIX, DateTime.now().getMillis());

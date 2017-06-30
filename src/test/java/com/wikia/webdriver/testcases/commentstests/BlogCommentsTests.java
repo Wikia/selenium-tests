@@ -46,7 +46,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
   @Test(groups = "BlogComments_002")
   @Execute(asUser = User.SUS_REGULAR_USER)
-  public void BlogComments_002_User_commentReply() {
+  public void UserCanCommentAReply() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -68,7 +68,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 
   @Test(groups = "BlogComments_003")
   @Execute(asUser = User.SUS_REGULAR_USER)
-  public void BlogComments_003_User_editComment() {
+  public void UserCanEditComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -87,7 +87,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "BlogComments_004")
-  public void BlogComments_004_Admin_deleteComment() {
+  public void AdminCanDeleteAComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
