@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapVideos;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -36,7 +37,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     dataProvider = "adsVuapTngDesktop"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     scrollToSlot(slot, ads);
 
@@ -79,7 +80,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     dataProvider = "adsVuapTngDesktop"
   )
   public void vuapDefaultStateAutoplayIsMutedAfterReplayIsNotMuted(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     scrollToSlot(slot, ads);
 
