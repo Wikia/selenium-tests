@@ -18,6 +18,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   private static final String FANDOM_ARTICLE_WESTWORLD_LINK = "http://adeng.fandom.wikia.com/articles/whats-coming-westworld-finale";
 
   private static final String TNG_AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
+  public static final String TURN_ON_RESOLVED_STATE = "resolved_state=true";
 
   @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateAutoplayOasis"},
       dataProviderClass = AdsDataProvider.class,
@@ -189,13 +190,11 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapTngDesktop")
   public void vuapResolvedStateIsNotMute(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl() + "&" + TURN_ON_RESOLVED_STATE);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    ads.refreshPage();
+
     scrollToSlot(slot, ads);
-
     vuap.replay();
-
     vuap.mute();
 
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
