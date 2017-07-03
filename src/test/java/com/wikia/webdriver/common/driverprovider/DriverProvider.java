@@ -40,8 +40,11 @@ public class DriverProvider {
     for (WikiaWebDriver webDriver : drivers) {
       if (webDriver != null) {
         try {
+          String path = System.getenv("PATH");
+          System.out.println(path);
           webDriver.quit();
-        }catch (UnsatisfiedLinkError | NoClassDefFoundError e){
+        }catch (UnsatisfiedLinkError | NoClassDefFoundError | NullPointerException e){
+
           PageObjectLogging.log("Closing Browser", e, true);
         }
       }

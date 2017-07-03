@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
@@ -13,11 +14,9 @@ import org.testng.annotations.Test;
 
 public class PlayingVideoTests extends NewTestTemplate {
 
-  private static final String BROWSER_SIZE = "1400x720";
-
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void PlayingVideoTests_001_ooyala() {
     String articleName = "VideoOoyalaAgegateLightbox";
 
@@ -37,7 +36,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void PlayingVideoTests_002_ooyala() {
     String articleName = "VideoOoyalaAgegateInline";
 
@@ -54,7 +53,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
   @Test(groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004"})
   @Execute(onWikia = "sktest123", disableFlash = "false")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void PlayingVideoTests_004_ign() {
     int itemNumber = 0;
     String providerName = "ign";
@@ -74,10 +73,8 @@ public class PlayingVideoTests extends NewTestTemplate {
   }
 
   @Test(enabled = false, groups = {"Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005"})
-  @RelatedIssue(issueID = "QAART-750", comment = "Test disabled as Selenium doesn't allow to access"
-                                                + "elements with <object> tag. Check after Selenium update.")
   @Execute(onWikia = "sktest123", disableFlash = "false")
-  @InBrowser(browser = Browser.FIREFOX, browserSize = BROWSER_SIZE)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void PlayingVideoTests_005_anyclip() {
     int itemNumber = 0;
     String providerName = "anyclip";

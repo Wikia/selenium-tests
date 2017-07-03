@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.annotations.DontRun;
@@ -37,6 +38,7 @@ public abstract class CoreTestTemplate {
   @BeforeSuite(alwaysRun = true)
   public void beforeSuite() {
     prepareDirectories();
+    Helios.updateTokenCache();
   }
 
   @BeforeMethod(alwaysRun = true)

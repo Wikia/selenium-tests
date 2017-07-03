@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
@@ -71,6 +72,7 @@ public class BlogTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF_FORUM)
+  @RelatedIssue(issueID = "SUS-2259", comment = "Feature is broken until issue is resolved")
   public void StaffCanDeleteAndUndeleteUsersBlogPost() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();

@@ -296,7 +296,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
-        .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
@@ -312,7 +312,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
-        .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
@@ -321,7 +321,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     visualEditor.clickInfobox();
     visualEditor
         .clickInfoboxPopup()
-        .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(2, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
@@ -344,7 +344,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
-        .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
