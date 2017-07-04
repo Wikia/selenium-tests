@@ -104,11 +104,11 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     scrollToSlot(slot, ads);
 
     vuap.pause();
-    double defaultVideoHeight = vuap.getVideoHieghtWhilePaused();
+    double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
     ads.refreshPage();
     vuap.replay();
     vuap.pause();
-    double resolvedVideoHeight = vuap.getVideoHieghtWhilePaused();
+    double resolvedVideoHeight = vuap.getVideoHeightWhilePaused();
 
     Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, resolvedVideoHeight));
   }

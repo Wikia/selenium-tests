@@ -144,7 +144,7 @@ public class AutoplayVuap {
     return Double.parseDouble(currentTime);
   }
 
-  public double getVideoHieghtWhilePaused() {
+  public double getVideoHeightWhilePaused() {
     if (!playing) {
       return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
     }
