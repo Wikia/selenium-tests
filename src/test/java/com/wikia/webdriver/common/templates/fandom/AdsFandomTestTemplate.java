@@ -18,7 +18,7 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
   protected AdsFandomObject loadPage(String pageName, String pageType) {
     String pageUrl;
     String queryString = Configuration.getQS();
-    Boolean isF2 = queryString.matches("/.*f2(?=\\=|&|$|\\n).*/");
+    Boolean isF2 = queryString.matches(".*f2(?=\\=|&|$|\\n).*");
 
     PageObjectLogging.log("queryString", queryString, true);
     PageObjectLogging.log("isF2", isF2.toString(), true);
