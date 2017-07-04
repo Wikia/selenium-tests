@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.templates.fandom;
 
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
 public class AdsFandomTestTemplate extends FandomTestTemplate {
@@ -14,6 +16,9 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
 
   protected AdsFandomObject loadPage(String pageName, String pageType) {
     String pageUrl;
+    String queryString = Configuration.getQS();
+
+    PageObjectLogging.log("queryString", queryString, true);
 
     switch (pageType) {
       case PAGE_TYPE_HUB:
