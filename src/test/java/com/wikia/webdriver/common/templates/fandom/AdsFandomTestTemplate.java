@@ -8,6 +8,7 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
 
   public static final String PAGE_TYPE_ARTICLE = "article";
   public static final String PAGE_TYPE_HUB = "hub";
+  public static final String PAGE_TYPE_TOPIC = "topic";
 
   @Override
   protected void loadFirstPage() {
@@ -22,14 +23,18 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     PageObjectLogging.log("queryString", queryString, true);
     PageObjectLogging.log("isF2", isF2.toString(), true);
 
-    switch (pageType) {
-      case PAGE_TYPE_HUB:
-        pageUrl = urlBuilder.getUrlForFandomHub(pageName);
-        break;
-      case PAGE_TYPE_ARTICLE:
-      default:
-        pageUrl = urlBuilder.getUrlForFandomPage(pageName);
-        break;
+    if(isF2) {
+      pageUrl = urlBuilder.getF2Url(pageName, pageType);
+    } else {
+      switch (pageType) {
+        case PAGE_TYPE_HUB:
+          pageUrl = urlBuilder.getUrlForFandomHub(pageName);
+          break;
+        case PAGE_TYPE_ARTICLE:
+        default:
+          pageUrl = urlBuilder.getUrlForFandomPage(pageName);
+          break;
+      }
     }
 
     return new AdsFandomObject(driver, pageUrl);
