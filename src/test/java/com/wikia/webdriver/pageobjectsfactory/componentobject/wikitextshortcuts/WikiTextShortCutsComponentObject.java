@@ -14,12 +14,12 @@ public class WikiTextShortCutsComponentObject extends SourceEditModePageObject{
   private List<WebElement> categories;
 
   public WikiTextShortCutsComponentObject(WebDriver driver) {
-    super(driver);
+    super();
   }
 
   public SourceEditModePageObject clickCategory(int index) {
     wait.forElementVisible(categories.get(index));
     categories.get(index).click();
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 }

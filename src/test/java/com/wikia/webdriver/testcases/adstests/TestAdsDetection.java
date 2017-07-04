@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -14,38 +13,31 @@ public class TestAdsDetection extends NewTestTemplate {
       "http://www\\..*\\.com/bcn.*deo=1.*";
   public static final String PIXEL_PATTERN_WITHOUT_ADBLOCK =
       "http://www\\..*\\.com/bcn.*deo=0.*";
-
-  public static final String PIXEL_PATTERN_WITH_ADBLOCK_AND_RECOVERY =
-      ".*\\.wikia\\.com/__bre\\?.*deo=1.*";
-  public static final String PIXEL_PATTERN_WITHOUT_ADBLOCK_AND_RECOVERY =
-      ".*\\.wikia\\.com/__bre\\?.*deo=0.*";
+  public static final String TEST_WIKI = "project43";
+  public static final String TEST_PAGE = "Project43_Wikia";
 
   @NetworkTrafficDump
   @Test(
-      groups = "AdsDetectNoAdBlock",
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsDetection"
+      groups = "AdsDetectNoAdBlock"
   )
-  public void adsDetectNoAdBlock(Page wiki, String urlParam, boolean isRecoveryEnabled) {
-    String pattern = PIXEL_PATTERN_WITHOUT_ADBLOCK;
-    if (isRecoveryEnabled) {
-      pattern = PIXEL_PATTERN_WITHOUT_ADBLOCK_AND_RECOVERY;
-    }
-    assertPixelWithDetectionStatus(wiki, urlParam, pattern);
+  public void adsDetectNoAdBlock() {
+    assertPixelWithDetectionStatus(
+        new Page(TEST_WIKI, TEST_PAGE),
+        "InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
+        PIXEL_PATTERN_WITHOUT_ADBLOCK
+    );
   }
 
   @NetworkTrafficDump
   @Test(
-      groups = "AdsDetectAdBlock",
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsDetection"
+      groups = "AdsDetectAdBlock"
   )
-  public void adsDetectAdBlock(Page wiki, String urlParam, boolean isRecoveryEnabled) {
-    String pattern = PIXEL_PATTERN_WITH_ADBLOCK;
-    if (isRecoveryEnabled) {
-      pattern = PIXEL_PATTERN_WITH_ADBLOCK_AND_RECOVERY;
-    }
-    assertPixelWithDetectionStatus(wiki, urlParam, pattern);
+  public void adsDetectAdBlock() {
+    assertPixelWithDetectionStatus(
+        new Page(TEST_WIKI, TEST_PAGE),
+        "InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
+        PIXEL_PATTERN_WITH_ADBLOCK
+    );
   }
 
   private void assertPixelWithDetectionStatus(Page wiki, String urlParam, String pixelPattern) {
