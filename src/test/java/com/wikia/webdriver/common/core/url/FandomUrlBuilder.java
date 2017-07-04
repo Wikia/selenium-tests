@@ -54,7 +54,7 @@ public class FandomUrlBuilder {
     }
 
     if(AdsFandomTestTemplate.PAGE_TYPE_HUB.equals(pageType)) {
-      baseUrl = FANDOM_URL + "/" + F2_TOPIC_PATH + "/old" + pageName;
+      baseUrl = FANDOM_URL + "/" + F2_TOPIC_PATH + "/" + pageName + "-old";
     }
 
     if (!env.equals(ENV_PROD)) {
