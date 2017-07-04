@@ -1,11 +1,10 @@
 package com.wikia.webdriver.common.core;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.common.properties.HeliosConfig;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -25,11 +24,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
 
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.UrlBuilder;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.properties.HeliosConfig;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Helios {
 
@@ -182,7 +181,7 @@ public class Helios {
     String getUserIDURL = "";
     try {
       getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
-          new UrlBuilder().getUrlForWiki(), URLEncoder.encode(userName, "UTF-8"));
+          new UrlBuilder().getUrlForWiki(Configuration.getDefaultWikiName()), URLEncoder.encode(userName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);
