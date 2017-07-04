@@ -9,7 +9,9 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -64,6 +66,7 @@ public class MessageWallTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWall_003", "MessageWall", "MessageWallTests"})
   @Execute(asUser = User.SUS_STAFF)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanCreateAndCloseMessage() {
     MessageWall wall = new MessageWall(driver).open(User.SUS_STAFF.getUserName());
     MiniEditorComponentObject mini = wall.triggerMessageArea();
