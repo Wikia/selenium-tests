@@ -411,6 +411,11 @@ public class ChatPage extends WikiBasePageObject {
     List<String> messagesSent = new ArrayList<>();
     for (int i = 0; i < messagesCount; i++) {
       writeOnChat(message);
+      try {
+        Thread.sleep(1500);
+      } catch (InterruptedException e) {
+        PageObjectLogging.logInfo("Sleep Interrupted", e);
+      }
       messagesSent.add(message);
     }
     return messagesSent;

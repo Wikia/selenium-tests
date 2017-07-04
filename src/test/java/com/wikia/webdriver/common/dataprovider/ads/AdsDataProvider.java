@@ -32,9 +32,6 @@ public class AdsDataProvider {
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
 
-  private static final String SOURCE_POINT_INSTANT_GLOBAL = "?InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]" +
-      "&?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]";
-
   private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
@@ -793,22 +790,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsDetection() {
-    return new Object[][]{
-        {
-            new Page("project43", "Project43_Wikia"),
-            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
-            false
-        },
-        {
-            new Page("arecovery", "ARecovery_Wikia"),
-            "InstantGlobals.wgAdDriverSourcePointRecoveryCountries=[XX]&InstantGlobals.wgAdDriverPageFairRecoveryCountries=[]",
-            true
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
@@ -945,60 +926,12 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoverySourcePointOasis() {
-    return new Object[][]{
-        {
-            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
-            ImmutableMap.<String, Object>builder()
-                .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_LEADERBOARD")
-                .put("slotName", AdsContent.TOP_LB)
-                .put("lineItemId", 277592292)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("arecovery", "SyntheticTests/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
-            ImmutableMap.<String, Object>builder()
-                .put("adUnitId", "wikia_gpt/5441/wka.life/_arecovery//article/gpt/TOP_RIGHT_BOXAD")
-                .put("slotName", AdsContent.MEDREC)
-                .put("lineItemId", 277592292)
-                .put("src", "gpt")
-                .build()
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsRecoveryPageFairOasis() {
     return new Object[][]{
         {
             new Page("arecovery", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]"),
         }
     };
-  }
-
-  @DataProvider
-  public static Object[][] adsRecoverySourcePointOasisProject43() {
-      return new Object[][]{
-          {
-              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
-              ImmutableMap.<String, Object>builder()
-                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_LEADERBOARD")
-                  .put("slotName", AdsContent.TOP_LB)
-                  .put("lineItemId", 257545212)
-                  .put("src", "gpt")
-                  .build()
-          },
-          {
-              new Page("project43", "SourcePoint/Static_image" + SOURCE_POINT_INSTANT_GLOBAL),
-              ImmutableMap.<String, Object>builder()
-                  .put("adUnitId", "wikia_gpt/5441/wka.life/_project43//article/gpt/TOP_RIGHT_BOXAD")
-                  .put("slotName", AdsContent.MEDREC)
-                  .put("lineItemId", 257545212)
-                  .put("src", "gpt")
-                  .build()
-          }
-      };
   }
 
   @DataProvider
@@ -1010,6 +943,16 @@ public class AdsDataProvider {
         }
     };
   }
+
+    @DataProvider
+    public static Object[][] adMixFeaturedVideoOasis() {
+        return new Object[][]{
+                {
+                    "project43",
+                    "SyntheticTests/Premium/FeaturedVideo"
+                }
+        };
+    }
 
   @DataProvider
   public static Object[][] adsUapOasis() {

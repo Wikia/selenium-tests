@@ -104,11 +104,11 @@ public class ChatTests extends NewTestTemplate {
 
   @Test(groups = {"ChatTestsForUser_004"})
   public void userCanSendMultipleNotifications() {
-    ChatPage chatUserFive = openChatForUser(User.SUS_CHAT_USER);
+    ChatPage chatUserFive = openChatForUser(User.SUS_CHAT_USER2);
 
     switchToWindow(1);
     new SpecialVersionPage().open();
-    ChatPage chatUserSix = openChatForUser(User.SUS_CHAT_USER2);
+    ChatPage chatUserSix = openChatForUser(User.SUS_CHAT_USER);
     chatUserSix.writeOnChat(MESSAGE_ON_MAIN_CHAT);
 
     switchToWindow(0);
@@ -116,9 +116,9 @@ public class ChatTests extends NewTestTemplate {
         "MESAGE ON PRIVATE CHAT IS NOT DISPLAYED");
 
     switchToWindow(1);
-    chatUserSix.selectPrivateMessageToUser(User.SUS_CHAT_USER.getUserName());
+    chatUserSix.selectPrivateMessageToUser(User.SUS_CHAT_USER2.getUserName());
     Assertion
-        .assertTrue(chatUserSix.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER.getUserName()));
+        .assertTrue(chatUserSix.isUserInPrivateSectionDisplayed(User.SUS_CHAT_USER2.getUserName()));
     List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(MESSAGE_ON_PRIVATE_CHAT,
         NUMBER_OF_PRIVATE_MESSAGES);
 

@@ -82,7 +82,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
   @Test(groups = "ArticleComments_004")
   @Execute(asUser = User.COMMENTS_REGULAR_USER)
   public void AdminCanDeleteComments() {
-    new ArticleContent(User.COMMENTS_REGULAR_USER).push(PageContent.ARTICLE_TEXT);
+    new ArticleContent(User.COMMENTS_REGULAR_USER).push(PageContent.ARTICLE_TEXT,
+        "ArticleWithCommentToDelete" + DateTime.now().getMillis());
 
     ArticlePageObject article = new ArticlePageObject().open();
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
@@ -92,6 +93,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
     article.verifyCommentText(comment);
     article.verifyCommentCreator(User.COMMENTS_REGULAR_USER.getUserName());
     article.loginAs(User.SUS_ADMIN);
+    article.clickCommentButton();
     String commentText = article.getFirstCommentText();
     DeletePageObject delete = article.deleteFirstComment();
     delete.submitDeletion();

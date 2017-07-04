@@ -138,6 +138,8 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement articleEditButton;
   @FindBy(css = ".view")
   private WebElement viewEmbedMapButton;
+  @FindBy(css = "[href='#WikiaArticleComments']")
+  private WebElement commentButton;
 
   @Getter(lazy = true)
   private final ArticleComment articleComment = new ArticleComment();
@@ -707,7 +709,7 @@ public class ArticlePageObject extends WikiBasePageObject {
     WebElement redLinkToClick = redLinks.get(linkNumber);
     CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
     articleModal.createPageWithBlankLayout("");
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public EmbedMapComponentObject clickViewEmbedMap() {
@@ -716,6 +718,12 @@ public class ArticlePageObject extends WikiBasePageObject {
     viewEmbedMapButton.click();
     driver.switchTo().activeElement();
     return new EmbedMapComponentObject(driver);
+  }
+
+  public ArticlePageObject clickCommentButton(){
+    commentButton.click();
+
+    return this;
   }
 
   /**

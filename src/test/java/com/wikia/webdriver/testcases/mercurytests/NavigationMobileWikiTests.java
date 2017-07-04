@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -69,7 +70,9 @@ public class NavigationMobileWikiTests extends NavigationTests {
     );
   }
 
-  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
+  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage",
+        enabled = false)
+  @RelatedIssue(issueID = "XW-3682")
   public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
     new ArticlePage()
         .open(MercurySubpages.INFOBOX_1)

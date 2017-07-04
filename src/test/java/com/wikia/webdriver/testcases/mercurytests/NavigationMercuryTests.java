@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -72,7 +73,8 @@ public class NavigationMercuryTests extends NavigationTests {
     );
   }
 
-  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
+  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage", enabled = false)
+  @RelatedIssue(issueID = "XW-3682")
   public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
     new GuidelinesPage()
         .open()
@@ -83,7 +85,8 @@ public class NavigationMercuryTests extends NavigationTests {
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 
-  @Test
+  @Test (enabled = false)
+  @RelatedIssue(issueID = "XW-3682")
   public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack() {
     ArticlePage testPage = new ArticlePage().open("/ScrollPreserveTest");
     Long firstPosition = testPage.scrollToLink(0, 200);

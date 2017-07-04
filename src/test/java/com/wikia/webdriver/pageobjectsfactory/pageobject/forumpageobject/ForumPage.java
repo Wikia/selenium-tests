@@ -52,7 +52,7 @@ public class ForumPage extends WikiBasePageObject {
   public ForumManageBoardsPageObject clickManageBoardsButton() {
     scrollAndClick(manageBoardsButton);
     PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
-    return new ForumManageBoardsPageObject(driver);
+    return new ForumManageBoardsPageObject();
   }
 
   /*

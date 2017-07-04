@@ -12,6 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptions
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallAddLinkComponentObject;
 
+@Execute(onWikia = "sustainingtest")
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures", "MessageWallTests"})

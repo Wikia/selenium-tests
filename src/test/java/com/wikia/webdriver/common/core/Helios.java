@@ -78,13 +78,15 @@ public class Helios {
     }
   }
 
-  public static String getAccessToken(String userName) {
+  public static void updateTokenCache(){
     for (User user : User.values()) {
-      if (userName.equals(user.getUserName()) && StringUtils.isNotBlank(user.getAccessToken())) {
-        tokenCache.put(userName, user.getAccessToken());
+      if (StringUtils.isNotBlank(user.getAccessToken())) {
+        tokenCache.put(user.getUserName(), user.getAccessToken());
       }
     }
+  }
 
+  public static String getAccessToken(String userName) {
     if (StringUtils.isNotBlank(getTokenFromCache(userName))) {
       return tokenCache.get(userName);
     }

@@ -41,7 +41,7 @@ public class WikiArticleEditMode extends WikiEditMode {
     scrollAndClick(sourceModeButton);
     wait.forElementVisible(sourceModeTextArea);
     PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public void clickOnVisualButton() {
