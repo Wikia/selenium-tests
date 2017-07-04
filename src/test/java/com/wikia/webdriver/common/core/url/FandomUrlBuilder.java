@@ -6,6 +6,7 @@ public class FandomUrlBuilder {
 
   private static final String FANDOM_URL = "fandom.wikia.com";
   private static final String ARTICLE_PATH = "articles";
+  private static final String F2_ARTICLE_PATH = "f2/articles"
   public static final String ENV_PROD = "prod";
   public static final String ENV_ADENG = "adeng";
   public static final String ENV_QA = "qa";
@@ -41,5 +42,9 @@ public class FandomUrlBuilder {
       baseUrl = env + "." + baseUrl;
     }
     return "http://" + baseUrl;
+  }
+
+  public String getF2Url() {
+
   }
 }
