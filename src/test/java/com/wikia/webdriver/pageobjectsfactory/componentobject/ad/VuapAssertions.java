@@ -24,16 +24,12 @@ public class VuapAssertions {
 
   public static void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) {
     vuap.pause();
+    final double startMeasureTime = vuap.getCurrentTime();
+    final double startProgressBarWidth = vuap.getProgressBarWidth();
+    playVideoForFewSeconds(vuap);
 
-    final double currentTime = vuap.getCurrentTime();
-    final double indicatorCurrentTime = vuap.getIndicatorCurrentTime();
-
-    playVideoForOneSecond(vuap);
-
-    vuap.pause();
-
-    Assert.assertTrue(currentTime < vuap.getCurrentTime(), "Video should be played.");
-    Assert.assertTrue(indicatorCurrentTime > vuap.getIndicatorCurrentTime(), "Video time indicator should move.");
+    Assert.assertTrue(startMeasureTime < vuap.getCurrentTime(), "Video should be played.");
+    Assert.assertTrue(startProgressBarWidth < vuap.getProgressBarWidth(), "Video time indicator should move.");
   }
 
   public static void verifyVideoPlay(final AutoplayVuap vuap) {
@@ -52,12 +48,15 @@ public class VuapAssertions {
     vuap.waitForVideoToEnd(maxVideoDuration);
   }
 
-  private static void playVideoForOneSecond(final AutoplayVuap vuap) {
+  private static void playVideoForFewSeconds(final AutoplayVuap vuap) {
     vuap.play();
+
     try {
-      TimeUnit.MILLISECONDS.sleep(1000);
+      TimeUnit.SECONDS.sleep(2);
     } catch (InterruptedException x) {
       // ignore this exception
     }
+
+    vuap.pause();
   }
 }
