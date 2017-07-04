@@ -55,7 +55,7 @@ public class VuapAssertions {
   private static void playVideoForOneSecond(final AutoplayVuap vuap) {
     vuap.play();
     try {
-      TimeUnit.MILLISECONDS.sleep(200);
+      TimeUnit.MILLISECONDS.sleep(1000);
     } catch (InterruptedException x) {
       // ignore this exception
     }
