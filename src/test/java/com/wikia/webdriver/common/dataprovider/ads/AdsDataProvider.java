@@ -939,7 +939,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "project43",
-            "SyntheticTests/Premium/FeaturedVideo?AbTest.FEATURED_VIDEO_AUTOPLAY=CONTROL"
+            "SyntheticTests/Premium/FeaturedVideo"
         }
     };
   }
@@ -1208,7 +1208,8 @@ public class AdsDataProvider {
 
       },
       {
-          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM), // Veles Timeout (page without VAST)
+          // Veles Timeout (page without VAST)
+          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM),
           ImmutableMap.builder()
               .put(AdsContent.TOP_LB, "0.00")
               .build(),
