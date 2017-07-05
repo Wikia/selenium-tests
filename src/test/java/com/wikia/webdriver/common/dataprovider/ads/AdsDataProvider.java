@@ -1208,7 +1208,8 @@ public class AdsDataProvider {
 
       },
       {
-          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM), // Veles Timeout (page without VAST)
+          // Veles Timeout (page without VAST)
+          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM),
           ImmutableMap.builder()
               .put(AdsContent.TOP_LB, "0.00")
               .build(),

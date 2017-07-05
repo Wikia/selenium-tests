@@ -16,8 +16,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   private static final Color GREEN = new Color(20, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
-  private static final int AD_DURATION_SEC = 5;
-  private static final int VIDEO_DURATION_SEC = 5;
+  private static final int AD_DURATION_SEC = 30;
+  private static final int VIDEO_DURATION_SEC = 30;
 
   private static final String ARTICLE_VIDEO_CLASS = "ooyala-article-video";
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
@@ -53,35 +53,29 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleAd() {
-    verifyVideoElement(ARTICLE_VIDEO_PREROLL_SELECTOR, BLUE, AD_DURATION_SEC);
+    verifyFeaturedVideoElement(ARTICLE_VIDEO_PREROLL_SELECTOR, BLUE, AD_DURATION_SEC);
   }
 
   public void verifyArticleVideo() {
-    verifyVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, VIDEO_DURATION_SEC);
+    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, VIDEO_DURATION_SEC);
   }
 
   public void verifyLightboxAd() {
     verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
-    PageObjectLogging.log("LightboxAd",
-                          "Lightbox had " + BLUE + " during " + AD_DURATION_SEC
-                          + " seconds", true);
+    logMessage(BLUE, AD_DURATION_SEC);
   }
 
   public void verifyLightboxVideo() {
     verifyColorAd(lightboxVideo, GREEN, VIDEO_DURATION_SEC);
-    PageObjectLogging.log("LightboxVideo",
-                          "Lightbox had " + GREEN + " during " + VIDEO_DURATION_SEC
-                          + " seconds", true);
+    logMessage(GREEN, VIDEO_DURATION_SEC);
   }
 
-  private void verifyVideoElement(String selector, Color color, int duration) {
+  private void verifyFeaturedVideoElement(String selector, Color color, int duration) {
     wait.forElementVisible(By.cssSelector(selector), 30, 1000);
     scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
     fixScrollPositionByNavbar();
-    verifyColorAd(articleVideoWrapper, color, duration);
-    PageObjectLogging.log("ArticleAd",
-            "Article had " + color + " during " + duration
-                    + " seconds", true);
+    verifyColorAd(articleVideoWrapper, color, 5);
+    logMessage(color, duration);
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
@@ -100,5 +94,9 @@ public class AdsOoyalaObject extends AdsBaseObject {
     } finally {
       restoreDefaultImplicitWait();
     }
+  }
+
+  private void logMessage(Color color, int duration) {
+    PageObjectLogging.log("Video", "Video content had " + color + " during " + duration + " seconds", true);
   }
 }
