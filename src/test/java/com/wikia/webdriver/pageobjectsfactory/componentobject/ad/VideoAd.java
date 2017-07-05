@@ -35,9 +35,9 @@ public class VideoAd {
 
   private String parseDuration() {
     NumberFormat formatter = new DecimalFormat("00");
-    int hours = (int) Math.floor(duration / 3600);
-    int minutes = (int) Math.floor(duration / 60 % 60);
-    int seconds = (int) Math.floor(duration % 60);
+    int hours = (int) Math.floor(duration / 3600),
+        minutes = (int) Math.floor(duration / 60 % 60),
+        seconds = (int) Math.floor(duration % 60);
 
     return String.format("%s:%s:%s", formatter.format(hours), formatter.format(minutes), formatter.format(seconds));
   }
