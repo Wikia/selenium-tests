@@ -82,10 +82,10 @@ public class ArticleCommentsTests extends NewTestTemplate {
   @Test(groups = "ArticleComments_004")
   @Execute(asUser = User.COMMENTS_REGULAR_USER)
   public void AdminCanDeleteComments() {
-    new ArticleContent(User.COMMENTS_REGULAR_USER).push(PageContent.ARTICLE_TEXT,
-        "ArticleWithCommentToDelete" + DateTime.now().getMillis());
+    String articleTitle = "ArticleWithCommentToDelete" + DateTime.now().getMillis();
+    new ArticleContent(User.COMMENTS_REGULAR_USER).push(PageContent.ARTICLE_TEXT, articleTitle);
 
-    ArticlePageObject article = new ArticlePageObject().open();
+    ArticlePageObject article = new ArticlePageObject().open(articleTitle);
     String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
     MiniEditorComponentObject editor = article.triggerCommentArea();
     editor.switchAndWrite(comment);

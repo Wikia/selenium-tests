@@ -73,8 +73,7 @@ public class NavigationMercuryTests extends NavigationTests {
     );
   }
 
-  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage", enabled = false)
-  @RelatedIssue(issueID = "XW-3682")
+  @Test(groups = "mercury_navigation_exploreWikiNavigatesToWikiMainPage")
   public void mercury_navigation_exploreWikiNavigatesToWikiMainPage() {
     new GuidelinesPage()
         .open()
@@ -85,7 +84,7 @@ public class NavigationMercuryTests extends NavigationTests {
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 
-  @Test (enabled = false)
+  @Test
   @RelatedIssue(issueID = "XW-3682")
   public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack() {
     ArticlePage testPage = new ArticlePage().open("/ScrollPreserveTest");

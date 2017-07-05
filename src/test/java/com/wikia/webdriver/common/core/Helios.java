@@ -182,7 +182,7 @@ public class Helios {
     String getUserIDURL = "";
     try {
       getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
-          new UrlBuilder().getUrlForWiki(), URLEncoder.encode(userName, "UTF-8"));
+          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);
