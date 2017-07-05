@@ -24,6 +24,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2BtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2Uap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapF2"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
@@ -62,7 +64,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasisAutoplay"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRefreshing"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapTheNewGeneration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoFrequencyCapping"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
