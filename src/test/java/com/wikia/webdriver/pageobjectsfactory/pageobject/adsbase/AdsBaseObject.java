@@ -59,7 +59,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
   private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
 
-  private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation";
+  private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
 
   private long tStart;
 
