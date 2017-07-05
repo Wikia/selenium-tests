@@ -49,7 +49,7 @@ public class F2AdsDataProvider {
 
 
   @DataProvider
-  public static Object[][] fandomHubUapPage() {
+  public static Object[][] fandomTopicPage() {
     return new Object[][]{
         {
             AdsF2TestTemplate.PAGE_TYPE_TOPIC,

@@ -23,6 +23,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2BtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2Uap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
