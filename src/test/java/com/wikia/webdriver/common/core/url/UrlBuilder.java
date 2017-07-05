@@ -44,6 +44,10 @@ public class UrlBuilder {
     return getUrlForPath(page.getWikiName(), page.getWikiPath());
   }
 
+  public String getUrlForPage(Page page, String qs) {
+    return appendQueryStringToURL(page.getUrl(), qs);
+  }
+
   public String getUrlForPath(String wikiName, String wikiPath) {
     String url = "";
     if (!wikiPath.startsWith("/")) {
