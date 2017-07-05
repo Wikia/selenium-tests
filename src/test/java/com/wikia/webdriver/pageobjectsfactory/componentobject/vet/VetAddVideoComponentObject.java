@@ -40,6 +40,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   private WebElement addFromPreviewButton;
 
   private By addVideoLibraryLink = By.cssSelector("figure + a");
+  private By addVideoModalBy = By.cssSelector("#VideoEmbedBackWrapper");
 
   private String videoName;
 
@@ -91,7 +92,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   public VetOptionsComponentObject addVideoByUrl(String url) {
     typeInUrl(url);
     clickAddButtonProvider();
-    wait.forElementNotVisible(addUrlButton);
+    wait.forElementNotVisible(addVideoModalBy);
 
     return new VetOptionsComponentObject(driver);
   }
