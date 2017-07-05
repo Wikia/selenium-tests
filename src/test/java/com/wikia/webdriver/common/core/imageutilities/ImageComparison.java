@@ -50,9 +50,11 @@ public class ImageComparison {
           diffCount += 1;
         }
       }
+      if (diffCount > ((100 - accuracy) * count) / 100D) {
+        return false;
+      }
     }
-
-    return !(diffCount > ((100 - accuracy) * count) / 100);
+    return true;
   }
 
   /**
