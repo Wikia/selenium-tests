@@ -17,7 +17,7 @@ import java.util.List;
 
 public class VideoPageAdminTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest", "VideosPage"})
+  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest", "VideosPage"}, invocationCount = 10)
   @Execute(asUser = User.STAFF, onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoPageAdmin_001_AddFeaturedVideo() {
 
