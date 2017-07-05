@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
@@ -17,10 +16,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   private static final Color GREEN = new Color(20, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
-  private static final int AD_DURATION_SEC = 30;
-  private static final int VIDEO_DURATION_SEC = 28;
-  private static final String PATTERN_DFP_PREROLL =
-      "^https://pubads.g.doubleclick\\.net\\/gampad\\/ads(.*)pos%3DFEATURED_VIDEO(.*)src%3Dpremium(.*)";
+  private static final int AD_DURATION_SEC = 5;
+  private static final int VIDEO_DURATION_SEC = 5;
 
   private static final String ARTICLE_VIDEO_CLASS = "ooyala-article-video";
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
