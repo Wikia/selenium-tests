@@ -87,9 +87,16 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
 
   private void verifyHubSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
-    fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
+
+    if(isF2()) {
+      fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+      fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    } else {
+      fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
+      fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+      fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
+    }
+
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
