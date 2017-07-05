@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
@@ -9,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
 
-  @NetworkTrafficDump(useMITM = true)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"AdsPremiumPrerollOasis"},
@@ -19,7 +17,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
-    wikiPage.verifyPremiumPrerollRequest(networkTrafficInterceptor, wikiPage);
+    wikiPage.verifyPreroll();
     wikiPage.verifyArticleAd();
     wikiPage.verifyArticleVideo();
   }

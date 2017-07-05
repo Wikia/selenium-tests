@@ -23,6 +23,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
       "^https://pubads.g.doubleclick\\.net\\/gampad\\/ads(.*)pos%3DFEATURED_VIDEO(.*)src%3Dpremium(.*)";
 
   private static final String ARTICLE_VIDEO_CLASS = "ooyala-article-video";
+  private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video .oo-state-screen-selectable";
 
@@ -53,10 +54,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
     wait.forElementPresent(By.className(ARTICLE_VIDEO_CLASS));
   }
 
-  public void verifyPremiumPrerollRequest(NetworkTrafficInterceptor networkTrafficInterceptor, AdsOoyalaObject page) {
-    networkTrafficInterceptor.startIntercepting();
-    playArticleVideo();
-    page.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, PATTERN_DFP_PREROLL);
+  public void verifyPreroll() {
+    wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR));
   }
 
   public void verifyArticleAd() {
