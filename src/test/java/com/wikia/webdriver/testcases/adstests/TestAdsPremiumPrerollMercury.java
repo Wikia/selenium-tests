@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
 
-  @NetworkTrafficDump(useMITM = true)
   @Test(
       dataProviderClass = AdsDataProvider.class,
       groups = {"AdsPremiumPrerollMercury"},
