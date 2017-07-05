@@ -47,7 +47,7 @@ public class VideoPageAdminTests extends NewTestTemplate {
     featuredVideoAdminObject = latestVideoAdminPageObject.clickFeaturedTab(driver);
     FeaturedVideoContainer firstContainer = featuredVideoAdminObject.getVideoContainers().stream().findFirst().get();
     firstContainer.scrollToContainer();
-    firstContainer.verifyVideoAdded(VideoContent.PREMIUM_VIDEO_NAME);
+    firstContainer.verifyVideoAdded(VideoContent.PREMIUM_VIDEO_NAME2);
 
     // Add video 2 and make sure video title has changed
     VetAddVideoComponentObject vetAddingVideoModal = firstContainer.clickAddVideo();

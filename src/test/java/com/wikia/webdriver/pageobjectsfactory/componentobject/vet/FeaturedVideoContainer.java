@@ -49,18 +49,7 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
   }
 
   public void scrollToContainer(){
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     jsActions.scrollToElement(parentElement);
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
   }
 
   public String getTitle(){
@@ -81,22 +70,26 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
 
   public VetAddVideoComponentObject clickAddVideo() {
     addVideoButton.click();
+    wait.forElementVisible(addVideoModalBy);
     PageObjectLogging.log("VetAddVideoComponentObject", "Add video button clicked", true);
     return new VetAddVideoComponentObject(driver);
   }
 
   public void verifyVideoAdded(String name) {
+    wait.forElementClickable(addVideoButtonBy);
     verifyVideoTitleUpdated(name);
     verifyVideoDisplayTitleUpdated(name);
     PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
   }
 
   public void verifyVideoTitleUpdated(String name) {
+    wait.forElementClickable(addVideoButtonBy);
     Assertion.assertEquals(getTitle(), name);
     PageObjectLogging.log("verifyVideoTitleUpdated", "Video title was updated", true);
   }
 
   public void verifyVideoDisplayTitleUpdated(String name) {
+    wait.forElementClickable(addVideoButtonBy);
     Assertion.assertEquals(displayedTitleTextBox.getAttribute("value"), name);
     PageObjectLogging.log("verifyVideoDisplayTitleUpdated",
             "Video display title input was populated", true);
@@ -111,8 +104,9 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
   }
 
   public void verifyImageAdded(String imagePath) {
+    wait.forElementClickable(addImageButtonBy);
     File f = new File(imagePath);
     String expectedImageName = StringUtils.capitalize(f.getName().replace("_", " "));
-    Assertion.assertEquals(expectedImageName, imageTitleTextBox.getText());
+    Assertion.assertEquals(imageTitleTextBox.getText(), expectedImageName);
   }
 }
