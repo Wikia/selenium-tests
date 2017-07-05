@@ -75,7 +75,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   private void verifyVideoElement(String selector, Color color, int duration) {
-    wait.forElementVisible(By.cssSelector(selector));
+    wait.forElementVisible(By.cssSelector(selector), 30, 1000);
     scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
     fixScrollPositionByNavbar();
     verifyColorAd(articleVideoWrapper, color, duration);
