@@ -17,7 +17,6 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
-    wikiPage.verifyPreroll();
     wikiPage.verifyArticleAd();
     wikiPage.verifyArticleVideo();
   }

@@ -23,7 +23,6 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
     wikiPage.playArticleVideo();
-    wikiPage.verifyPreroll();
     wikiPage.verifyArticleAd();
     wikiPage.verifyArticleVideo();
   }

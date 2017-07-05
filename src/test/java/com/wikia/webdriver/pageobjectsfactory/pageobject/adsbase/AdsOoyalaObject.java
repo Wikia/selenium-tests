@@ -16,11 +16,12 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   private static final Color GREEN = new Color(20, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
-  private static final int AD_DURATION_SEC = 30;
+  private static final int AD_DURATION_SEC = 5;
   private static final int VIDEO_DURATION_SEC = 5;
 
   private static final String ARTICLE_VIDEO_CLASS = "ooyala-article-video";
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
+  private static final String ARTICLE_VIDEO_SELECTOR = ".ooyala-article-video > .innerWrapper > video:visible";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video .oo-state-screen-selectable";
 
@@ -51,26 +52,12 @@ public class AdsOoyalaObject extends AdsBaseObject {
     wait.forElementPresent(By.className(ARTICLE_VIDEO_CLASS));
   }
 
-  public void verifyPreroll() {
-    wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR));
-  }
-
   public void verifyArticleAd() {
-    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
-    fixScrollPositionByNavbar();
-    verifyColorAd(articleVideoWrapper, BLUE, AD_DURATION_SEC);
-    PageObjectLogging.log("ArticleAd",
-                          "Article had " + BLUE + " during " + AD_DURATION_SEC
-                          + " seconds", true);
+    verifyVideoElement(ARTICLE_VIDEO_PREROLL_SELECTOR, BLUE, AD_DURATION_SEC);
   }
 
   public void verifyArticleVideo() {
-    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
-    fixScrollPositionByNavbar();
-    verifyColorAd(articleVideoWrapper, GREEN, VIDEO_DURATION_SEC);
-    PageObjectLogging.log("ArticleAd",
-                          "Article had " + GREEN + " during " + VIDEO_DURATION_SEC
-                          + " seconds", true);
+    verifyVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, VIDEO_DURATION_SEC);
   }
 
   public void verifyLightboxAd() {
@@ -85,6 +72,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
     PageObjectLogging.log("LightboxVideo",
                           "Lightbox had " + GREEN + " during " + VIDEO_DURATION_SEC
                           + " seconds", true);
+  }
+
+  private void verifyVideoElement(String selector, Color color, int duration) {
+    wait.forElementVisible(By.cssSelector(selector));
+    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
+    fixScrollPositionByNavbar();
+    verifyColorAd(articleVideoWrapper, color, duration);
+    PageObjectLogging.log("ArticleAd",
+            "Article had " + color + " during " + duration
+                    + " seconds", true);
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
