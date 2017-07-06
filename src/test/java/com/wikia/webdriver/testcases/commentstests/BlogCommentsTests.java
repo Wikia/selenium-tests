@@ -25,7 +25,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Test(groups = "BlogComments_001")
-  public void BlogComments_001_Anon_commentReply() {
+  public void AnonCanCommentAReply() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -45,8 +45,8 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "BlogComments_002")
-  @Execute(asUser = User.USER)
-  public void BlogComments_002_User_commentReply() {
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  public void UserCanCommentAReply() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -56,19 +56,19 @@ public class BlogCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     blogPage.submitComment();
     blogPage.verifyCommentText(comment);
-    blogPage.verifyCommentCreator(credentials.userName);
+    blogPage.verifyCommentCreator(User.SUS_REGULAR_USER.getUserName());
     blogPage.triggerCommentReply();
     String commentReply = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
     editor.switchAndReplyComment(commentReply);
     blogPage.submitReplyComment();
     blogPage.verifyCommentReply(commentReply);
-    blogPage.verifyReplyCreator(credentials.userName);
+    blogPage.verifyReplyCreator(User.SUS_REGULAR_USER.getUserName());
   }
 
 
   @Test(groups = "BlogComments_003")
-  @Execute(asUser = User.USER)
-  public void BlogComments_003_User_editComment() {
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  public void UserCanEditComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);
     userProfile.clickOnBlogTab();
@@ -78,7 +78,7 @@ public class BlogCommentsTests extends NewTestTemplate {
     editor.switchAndWrite(comment);
     blogPage.submitComment();
     blogPage.verifyCommentText(comment);
-    blogPage.verifyCommentCreator(credentials.userName);
+    blogPage.verifyCommentCreator(User.SUS_REGULAR_USER.getUserName());
     blogPage.triggerEditCommentArea();
     String commentEdited = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
     editor.switchAndEditComment(commentEdited);
@@ -87,7 +87,7 @@ public class BlogCommentsTests extends NewTestTemplate {
   }
 
   @Test(groups = "BlogComments_004")
-  public void BlogComments_004_Admin_deleteComment() {
+  public void AdminCanDeleteAComment() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
     UserProfilePage userProfile = base.openProfilePage(credentials.userName, wikiURL);

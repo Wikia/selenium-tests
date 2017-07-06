@@ -15,14 +15,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 import org.testng.annotations.Test;
 
 @Test(groups = {"VetTests", "SpecialVideo", "Media"})
+@Execute(onWikia = "sustainingtest")
 public class VetSpecialVideosTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
   @Test(groups = {"VetTests001"})
-  @Execute(asUser = User.USER)
-  public void SpecialVideos_001_Provider() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("flower");
+  @Execute(asUser = User.SUS_REGULAR_USER2)
+  public void StaffCanDeleteFilePage() {
+    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("media");
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
@@ -31,8 +30,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
 
     FilePage filePage = new FilePage().open(video.getFileName());
 
-    // filePage.getGlobalNavigation().openAccountNavigation().clickLogOut();
-    filePage.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+    filePage.loginAs(User.SUS_CHAT_STAFF2);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 

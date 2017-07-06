@@ -4,13 +4,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 
-//User has to be an admin on wiki to delete and create forum
+// User has to be an admin on wiki to delete and create forum
 @Test(groups = {"Forum", "ForumEditMode"})
 public class ForumEditModeTests extends NewTestTemplate {
 
@@ -26,6 +28,9 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_001"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanOpenFrequentlyAskedQuestionsModalOnForum() {
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.createNew(User.USER_ADMIN_FORUM);
+
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     forumMainPage.verifyFaqLightBox();
@@ -34,6 +39,9 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(dataProvider = "getForumName", groups = {"ForumEditModeTests_002"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanCreateNewBoard(String name) {
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.createNew(User.USER_ADMIN_FORUM);
+
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
@@ -47,11 +55,13 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_003"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanDeleteBoard() {
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    first = forumBoard.createNew(User.USER_ADMIN_FORUM);
+    second = forumBoard.createNew(User.USER_ADMIN_FORUM);
+
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
-    first = manageForum.getFirstForumName();
-    second = manageForum.getSecondForumName();
     manageForum.verifyForumExists(first, wikiURL);
     manageForum.deleteForum(first, second);
     manageForum.verifyForumNotExists(first, wikiURL);
@@ -60,10 +70,13 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"ForumEditModeTests_004"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanEditForum() {
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    first = forumBoard.createNew(User.USER_ADMIN_FORUM);
+
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
+
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
-    first = manageForum.getFirstForumName();
     title = PageContent.FORUM_TITLE_EDIT_PREFIX + manageForum.getTimeStamp();
     description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX + manageForum.getTimeStamp();
     manageForum.editForum(first, title, description);
@@ -74,12 +87,17 @@ public class ForumEditModeTests extends NewTestTemplate {
   @Test(groups = {"Forum_005", "Forum"})
   @Execute(asUser = User.USER_ADMIN_FORUM)
   public void adminUserCanMoveBoard() {
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    first = forumBoard.createNew(User.USER_ADMIN_FORUM);
+    second = forumBoard.createNew(User.USER_ADMIN_FORUM);
+
     ForumPage forumMainPage = new ForumPage();
     forumMainPage.openForumMainPage(wikiURL);
     ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
-    first = manageForum.getFirstForumName();
+    int beforeMoveDown = manageForum.getBoardPosition(first);
     manageForum.clickMoveDown(first);
-    second = manageForum.getSecondForumName();
-    manageForum.clickMoveUp(second);
+    Assertion.assertTrue(beforeMoveDown < manageForum.getBoardPosition(first), "");
+    manageForum.clickMoveUp(first);
+    Assertion.assertTrue(beforeMoveDown == manageForum.getBoardPosition(first), "");
   }
 }

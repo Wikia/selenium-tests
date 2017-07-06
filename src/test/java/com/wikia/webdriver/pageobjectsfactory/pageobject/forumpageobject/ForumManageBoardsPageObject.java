@@ -5,10 +5,8 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.UnsupportedEncodingException;
@@ -34,11 +32,6 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   private WebElement firstForumLink;
   @FindBy(xpath = "//ul[@class='boards']//li[2]//a")
   private WebElement secondForumLink;
-
-  public ForumManageBoardsPageObject(WebDriver driver) {
-    super();
-    PageFactory.initElements(driver, this);
-  }
 
   private void openCreateNewBoardForm() {
     wait.forElementVisible(createBoardButton);
@@ -175,25 +168,33 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     submitNewBoard();
   }
 
+  public int getBoardPosition(String boardName){
+    return driver.findElement(By.xpath("//a[contains(text(), '" + boardName + "')]/..")).getLocation().getY();
+  }
+
   public void clickMoveDown(String forumName) {
-    String temp = getFirstForumName();
     WebElement
         down =
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='movedown']"));
     down.click();
-    Assertion.assertEquals(getSecondForumName(), temp);
-    PageObjectLogging.log("clickMoveDown", "move down button clicked", true);
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logInfo("Sleep interrupted while moving forum", e);
+    }
   }
 
   public void clickMoveUp(String forumName) {
-    String temp = getSecondForumName();
     WebElement
         up =
         wait.forElementVisible(By.xpath(
             "//a[contains(text(), '" + forumName + "')]/../..//span[@class='moveup']"));
     up.click();
-    Assertion.assertEquals(getFirstForumName(), temp);
-    PageObjectLogging.log("clickMoveDown", "move up button clicked", true);
+    try {
+      Thread.sleep(5000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logInfo("Sleep interrupted while moving forum", e);
+    }
   }
 }

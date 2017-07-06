@@ -79,13 +79,15 @@ public class Helios {
     }
   }
 
-  public static String getAccessToken(String userName) {
+  public static void updateTokenCache(){
     for (User user : User.values()) {
-      if (userName.equals(user.getUserName()) && StringUtils.isNotBlank(user.getAccessToken())) {
-        tokenCache.put(userName, user.getAccessToken());
+      if (StringUtils.isNotBlank(user.getAccessToken())) {
+        tokenCache.put(user.getUserName(), user.getAccessToken());
       }
     }
+  }
 
+  public static String getAccessToken(String userName) {
     if (StringUtils.isNotBlank(getTokenFromCache(userName))) {
       return tokenCache.get(userName);
     }
@@ -180,7 +182,7 @@ public class Helios {
     String getUserIDURL = "";
     try {
       getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
-          new UrlBuilder().getUrlForWiki(), URLEncoder.encode(userName, "UTF-8"));
+          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);

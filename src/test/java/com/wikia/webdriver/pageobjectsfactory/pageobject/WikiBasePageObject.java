@@ -1,37 +1,34 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
-import com.wikia.webdriver.common.core.*;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.EmailUtils;
+import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.elements.oasis.components.wikiabar.WikiaBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPromotePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.*;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
@@ -43,15 +40,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -61,7 +54,6 @@ import java.util.stream.Collectors;
 
 
 public class WikiBasePageObject extends BasePageObject {
-
 
   public static class AssertionMessages {
 
@@ -79,6 +71,9 @@ public class WikiBasePageObject extends BasePageObject {
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
       ".wikia-nav__avatar img[alt*=%userName%]";
+  private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder");
+  @FindBy(css = ".banner-notifications-placeholder")
+  private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
   private final GlobalNavigation globalNavigation = new GlobalNavigation();
   @Getter(lazy = true)
@@ -138,12 +133,14 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement specialUserLoginLink;
   @FindBy(css = ".wds-global-navigation__user-menu")
   private WebElement globalNavigationAvatar;
-  @FindBy(css = "#WikiaFooter")
+  @FindBy(id = "WikiaFooter")
   private WebElement footer;
-  @FindBy(css = ".wds-global-footer__header")
+  @FindBy(className = ".wds-global-footer__header")
   private WebElement mobileFooter;
-  @FindBy(css = "#globalNavigation")
+  @FindBy(id = "globalNavigation")
   private WebElement globalNavigationBar;
+  @FindBy(id = "recirculation-rail")
+  private WebElement recirculationRightRailModule;
 
   public String getWikiUrl() {
     String currentURL = driver.getCurrentUrl();
@@ -152,6 +149,18 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String getUrl() {
     return driver.getCurrentUrl();
+  }
+
+  /**
+   * Checks if container containing all banner notification is present, it may be present, but may have 0px height
+   * when no notification is displayed
+   */
+  public boolean isBannerNotificationContainerPresent(){
+    return driver.findElements(BANNER_NOTIFICATION_CONTAINER).size() != 0;
+  }
+
+  public int getBannerNotificationsHeight(){
+    return bannerNotificationContainer.getSize().getHeight();
   }
 
   public String resetForgotPasswordTime(String userName, String apiToken) {
@@ -274,7 +283,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject openCurrectArticleSourceMode() {
     String queryStrings[] = {URLsContent.ACTION_EDIT, URLsContent.SOURCE_MODE};
     appendMultipleQueryStringsToUrl(queryStrings);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public SourceEditModePageObject openSrcModeWithMainEditButton() {
@@ -282,7 +291,7 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
         driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
@@ -290,7 +299,7 @@ public class WikiBasePageObject extends BasePageObject {
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
                           driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public VisualEditModePageObject openCKModeWithMainEditButton() {
@@ -341,7 +350,7 @@ public class WikiBasePageObject extends BasePageObject {
     sectionEditButton.click();
     PageObjectLogging.log("openSrcModeWithSectionEditButton",
         "Src edit button clicked at section: " + section, true, driver);
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public VisualEditModePageObject navigateToArticleEditPage() {
@@ -358,7 +367,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
-    return new SourceEditModePageObject(driver);
+    return new SourceEditModePageObject();
   }
 
   public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL,
@@ -672,6 +681,10 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
+  public void verifyRecirculationRightRailModule() {
+    wait.forElementVisible(recirculationRightRailModule);
+    PageObjectLogging.log("verifyRecirculationRightRailModule", "Verified recirculation module in right rail", true);
+  }
 
   public void verifyFBButtonVisible() {
     Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonBasic));
