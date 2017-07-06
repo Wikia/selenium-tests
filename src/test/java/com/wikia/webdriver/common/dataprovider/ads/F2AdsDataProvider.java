@@ -72,7 +72,7 @@ public class F2AdsDataProvider {
         {
             AdsF2TestTemplate.PAGE_TYPE_ARTICLE,
             VUAP_PAGE_SLUG,
-            AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP,
+            AdsFandomContent.BOTTOM_LEADERBOARD,
             String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
         }
     };
@@ -91,7 +91,7 @@ public class F2AdsDataProvider {
         {
             AdsF2TestTemplate.PAGE_TYPE_ARTICLE,
             F2AdsDataProvider.VUAP_PAGE_SLUG,
-            AdsFandomContent.BOTTOM_LEADERBOARD_MOBILE,
+            AdsFandomContent.BOTTOM_LEADERBOARD,
             String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD),
             "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.fandom%2F_fandom%2F%2Farticle%2Fgpt%2FBOTTOM_LEADERBOARD"
         }
