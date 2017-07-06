@@ -1118,12 +1118,12 @@ public class AdsDataProvider {
   public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }

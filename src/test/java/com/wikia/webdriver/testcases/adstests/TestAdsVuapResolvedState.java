@@ -74,11 +74,11 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
   public void vuapResolvedStateAfterSecondPageView(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    double defaultVideoHeight = vuap.getVideoHieghtWhilePaused();
+    double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
 
     ads.refreshPage();
 
-    Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, vuap.getVideoHieghtWhilePaused()));
+    Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, vuap.getVideoHeightWhilePaused()));
   }
 
   @Test(groups = "AdsVuapResolvedStateAutoplayOasis",
