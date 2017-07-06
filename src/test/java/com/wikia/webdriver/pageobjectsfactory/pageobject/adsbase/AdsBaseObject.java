@@ -543,6 +543,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     try {
+      triggerComments();
       new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {

@@ -86,6 +86,7 @@ public class TestUap extends TemplateNoFirstLoad {
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
+      ads.scrollToPosition("#"+slotName);
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
       ads.verifyLineItemId(slotName, Integer.valueOf(slotData.get("lineItemId").toString()));
