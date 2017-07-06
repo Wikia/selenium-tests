@@ -144,7 +144,7 @@ public class AutoplayVuap {
     return Double.parseDouble(currentTime);
   }
 
-  public double getVideoHieghtWhilePaused() {
+  public double getVideoHeightWhilePaused() {
     if (!playing) {
       return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
     }
@@ -156,10 +156,9 @@ public class AutoplayVuap {
     return driver.findElement(By.cssSelector("#" + slot)).getSize().getHeight();
   }
 
-  public double getIndicatorCurrentTime() {
+  public int getProgressBarWidth() {
     final String selector = String.format(CURRENT_TIME_SELECTOR_FORMAT, slot);
-    final String value = driver.findElement(By.cssSelector(selector)).getCssValue("transition-duration");
-    return Double.parseDouble(value.substring(0, value.length() - 1));
+    return driver.findElement(By.cssSelector(selector)).getSize().getWidth();
   }
 
   public boolean hasStarted() {
