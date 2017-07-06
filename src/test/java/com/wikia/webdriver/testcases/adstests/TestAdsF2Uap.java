@@ -23,7 +23,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
   }
 
   @InBrowser(
@@ -42,7 +42,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
     
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
     fandomPage.triggerOnScrollSlots();
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
   }
 
   @Test(
@@ -54,7 +54,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.FEED_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.FEED_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
   }
 
   @InBrowser(
@@ -71,7 +71,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.FEED_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.FEED_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
   }
 
   private void verifyUapAtf(long atfId, String slotName, AdsFandomObject fandomPage) {
