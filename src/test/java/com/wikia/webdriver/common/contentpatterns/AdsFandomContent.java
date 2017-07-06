@@ -49,7 +49,7 @@ public class AdsFandomContent {
     GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_DESKTOP, "gpt-incontent-boxad-desktop");
     GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_MOBILE, "gpt-incontent-boxad-mobile");
     GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-bottom-boxad");
-    GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-feed-boxad");
+    GPT_SLOT_SELECTORS.put(FEED_BOXAD, "gpt-feed-boxad");
   }
 
   private AdsFandomContent() {
