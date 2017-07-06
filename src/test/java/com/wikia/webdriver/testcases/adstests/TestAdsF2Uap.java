@@ -84,7 +84,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
 
   private void verifyUapBtf(long btfId, String slotName, String bottomSlotName, AdsFandomObject fandomPage) {
     fandomPage.verifySlot(slotName);
-    Assertion.assertEquals(btfId, fandomPage.getLineItemId(AdsFandomContent.INCONTENT_BOXAD));
+    Assertion.assertEquals(btfId, fandomPage.getLineItemId(AdsFandomContent.FEED_BOXAD));
 
     fandomPage.verifySlot(bottomSlotName);
     Assertion.assertEquals(btfId, fandomPage.getLineItemId(AdsFandomContent.BOTTOM_LEADERBOARD));
