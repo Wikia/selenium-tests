@@ -17,7 +17,7 @@ public class AdsFandomContent {
   public static final String TOP_BOXAD_DESKTOP = "TOP_BOXAD_DESKTOP";
   public static final String TOP_BOXAD_MOBILE = "TOP_BOXAD_MOBILE";
   public static final String INCONTENT_BOXAD = "INCONTENT_BOXAD";
-  public static final String INCONTENT_BOXAD_F2 = "INCONTENT_BOXAD";
+  public static final String INCONTENT_BOXAD_DESKTOP = "INCONTENT_BOXAD_DESKTOP";
   public static final String INCONTENT_BOXAD_MOBILE = "INCONTENT_BOXAD_MOBILE";
   public static final String BOTTOM_BOXAD = "BOTTOM_BOXAD";
   public static final String FEED_BOXAD = "FEED_BOXAD";
@@ -33,7 +33,6 @@ public class AdsFandomContent {
     SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "div[id$='TOP_BOXAD_0__container__']");
     SLOT_SELECTORS.put(TOP_BOXAD_DESKTOP, "div[id$='TOP_BOXAD_0__container__']");
     SLOT_SELECTORS.put(INCONTENT_BOXAD, "div[id$='INCONTENT_BOXAD_0__container__']");
-    SLOT_SELECTORS.put(INCONTENT_BOXAD_F2, "div[id$='INCONTENT_BOXAD_0__container__']");
     SLOT_SELECTORS.put(INCONTENT_BOXAD_MOBILE, "div[id$='INCONTENT_BOXAD_0__container__']");
     SLOT_SELECTORS.put(BOTTOM_BOXAD, "div[id$='BOTTOM_BOXAD_0__container__']");
     SLOT_SELECTORS.put(FEED_BOXAD, "div[id$='FEED_BOXAD_0__container__']");
@@ -48,7 +47,8 @@ public class AdsFandomContent {
     GPT_SLOT_SELECTORS.put(TOP_BOXAD, "gpt-top-boxad");
     GPT_SLOT_SELECTORS.put(TOP_BOXAD_DESKTOP, "gpt-top-boxad-desktop");
     GPT_SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "gpt-top-boxad-mobile");
-    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD, "gpt-incontent-boxad-desktop");
+    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD, "gpt-incontent-boxad");
+    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_DESKTOP, "gpt-incontent-boxad-desktop");
     GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_MOBILE, "gpt-incontent-boxad-mobile");
     GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-bottom-boxad");
     GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-feed-boxad");

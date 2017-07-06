@@ -23,7 +23,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_F2, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
   }
 
   @InBrowser(
@@ -42,7 +42,7 @@ public class TestAdsF2Uap extends AdsF2TestTemplate {
     
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
     fandomPage.triggerOnScrollSlots();
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_F2, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_F2, fandomPage);
   }
 
   @Test(
