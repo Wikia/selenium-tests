@@ -59,6 +59,12 @@ public class ForumBoardPage extends BasePageObject {
     new ArticleContent(user).push(content,
         String.format("%s:%s", URLsContent.FORUM_BOARD_NAMESPACE, boardName));
 
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      PageObjectLogging.logInfo("Sleep interrupted after forum board creation", e);
+    }
+
     return boardName;
   }
 
