@@ -199,7 +199,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     dataProvider = "adsVuapTngDesktop"
   )
   public void vuapResolvedStateIsNotMute(Page page, String slot, String videoIframeSelector) {
-    AdsBaseObject ads = new AdsBaseObject(driver, this.urlBuilder.getUrlForPage(page.getUrl(), TURN_ON_RESOLVED_STATE));
+    AdsBaseObject ads = new AdsBaseObject(driver, this.urlBuilder.getUrlForPage(page, TURN_ON_RESOLVED_STATE));
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     scrollToSlot(slot, ads);
