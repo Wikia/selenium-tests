@@ -794,16 +794,16 @@ public class AdsDataProvider {
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
-        {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 269679732)
-                .put("src", "gpt")
-                .build()
-        },
+//        {
+//            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.FLOATING_MEDREC)
+//                .put("slotSize", new Dimension(300, 250))
+//                .put("lineItemId", 269679732)
+//                .put("src", "gpt")
+//                .build()
+//        },
         {
             new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
@@ -813,117 +813,117 @@ public class AdsDataProvider {
                 .put("lineItemId", 270230292)
                 .put("src", "gpt")
                 .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 600))
-                .put("lineItemId", 270230292)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 269679732)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 269679732)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 260204412)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", 260206692)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(160, 600))
-                .put("lineItemId", 270616092)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", 257673852)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", 257673852)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", 257673852)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.MEDREC)
-                .put("slotSize", new Dimension(300, 1050))
-                .put("lineItemId", 255534972)
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(300, 1050))
-                .put("lineItemId", 255534972)
-                .put("src", "gpt")
-                .build()
-        },
+        }
+//        {
+//            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.FLOATING_MEDREC)
+//                .put("slotSize", new Dimension(300, 600))
+//                .put("lineItemId", 270230292)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.FLOATING_MEDREC)
+//                .put("slotSize", new Dimension(300, 250))
+//                .put("lineItemId", 269679732)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.FLOATING_MEDREC)
+//                .put("slotSize", new Dimension(300, 250))
+//                .put("lineItemId", 269679732)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+//                .put("slotSize", new Dimension(300, 250))
+//                .put("lineItemId", 260204412)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
+//                .put("slotSize", new Dimension(300, 250))
+//                .put("lineItemId", 260206692)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.FLOATING_MEDREC)
+//                .put("slotSize", new Dimension(160, 600))
+//                .put("lineItemId", 270616092)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+//                .put("slotSize", new Dimension(120, 600))
+//                .put("lineItemId", 257673852)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.FLOATING_MEDREC)
+//                .put("slotSize", new Dimension(120, 600))
+//                .put("lineItemId", 257673852)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
+//                .put("slotSize", new Dimension(120, 600))
+//                .put("lineItemId", 257673852)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.MEDREC)
+//                .put("slotSize", new Dimension(300, 1050))
+//                .put("lineItemId", 255534972)
+//                .put("src", "gpt")
+//                .build()
+//        },
+//        {
+//            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
+//            "",
+//            ImmutableMap.<String, Object>builder()
+//                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
+//                .put("slotSize", new Dimension(300, 1050))
+//                .put("lineItemId", 255534972)
+//                .put("src", "gpt")
+//                .build()
+//        },
     };
   }
 
