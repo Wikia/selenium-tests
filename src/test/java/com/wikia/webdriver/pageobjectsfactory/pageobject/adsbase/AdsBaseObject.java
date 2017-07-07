@@ -543,9 +543,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     try {
-      triggerComments();
-      scrollToPosition("#Section_2.mw-headline");
-      wait.forElementPresent(By.cssSelector(adSlotSelector));
       new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {

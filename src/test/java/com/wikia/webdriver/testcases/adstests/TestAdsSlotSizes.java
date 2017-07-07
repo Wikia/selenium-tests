@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.WindowSize;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
@@ -8,6 +9,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -54,10 +56,13 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
 
     log(slotName, slotSize);
 
-    new AdsBaseObject(driver, url, pageSize)
-        .triggerAdSlot(slotName)
-        .verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()))
-        .verifyIframeSize(slotName, slotInfo.get("src").toString(),
+    AdsBaseObject ads = new AdsBaseObject(driver, url, pageSize);
+    ads.triggerComments();
+    ads.scrollToPosition("#ArticleMidSection.mw-headline");
+    ads.wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+    ads.triggerAdSlot(slotName);
+    ads.verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()));
+    ads.verifyIframeSize(slotName, slotInfo.get("src").toString(),
                           slotSize.getWidth(), slotSize.getHeight());
   }
 

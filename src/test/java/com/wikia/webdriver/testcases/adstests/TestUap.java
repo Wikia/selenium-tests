@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.apache.commons.collections.ListUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -86,6 +87,8 @@ public class TestUap extends TemplateNoFirstLoad {
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
+      ads.scrollToPosition("#ArticleMidSection.mw-headline");
+      ads.wait.forElementPresent(By.cssSelector("#"+slotName));
       ads.scrollToPosition("#"+slotName);
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
