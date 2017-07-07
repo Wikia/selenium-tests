@@ -36,6 +36,7 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
     ads.triggerComments();
+    ads.scrollToPosition("#ArticleMidSection.mw-headline");
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
   }
 
@@ -87,7 +88,6 @@ public class TestUap extends TemplateNoFirstLoad {
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
-      ads.scrollToPosition("#ArticleMidSection.mw-headline");
       ads.wait.forElementPresent(By.cssSelector("#"+slotName));
       ads.scrollToPosition("#"+slotName);
       Dimension slotSize = (Dimension) slotData.get("slotSize");
