@@ -17,8 +17,8 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
 
   private void scrollToSeeFMR(String slotName, AdsBaseObject page) {
     page.triggerComments();
-    page.scrollToPosition("#INCONTENT_BOXAD_1");
-    page.waitForSlotExpanded(driver.findElement(By.id(slotName)));
+    page.scrollToPosition("#Section_2.mw-headline");
+    page.waitForSlotExpanded(page.wait.forElementVisible(By.id(slotName)));
   }
 
   @Test(groups = {"AdsRefreshingFMR"})

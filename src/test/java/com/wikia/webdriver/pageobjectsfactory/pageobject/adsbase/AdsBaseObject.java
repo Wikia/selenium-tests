@@ -544,7 +544,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     try {
       triggerComments();
-      scrollToPosition(adSlotSelector);
+      wait.forElementPresent(By.cssSelector(adSlotSelector));
       new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
         @Override
         public Object apply(WebDriver webDriver) {
@@ -693,7 +693,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void triggerComments() {
     scrollToFooter();
     jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
-    wait.forElementVisible(By.cssSelector("#article-comments-counter-header"));
   }
 
   public void scrollToPosition(String selector) {
