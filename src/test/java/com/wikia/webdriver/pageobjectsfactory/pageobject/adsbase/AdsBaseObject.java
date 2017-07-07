@@ -693,7 +693,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void triggerComments() {
     scrollToFooter();
     jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
-    scrollToFooter();
+    wait.forElementVisible(By.cssSelector("#article-comments-counter-header"));
   }
 
   public void scrollToPosition(String selector) {

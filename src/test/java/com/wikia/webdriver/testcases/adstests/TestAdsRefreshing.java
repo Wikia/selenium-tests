@@ -16,8 +16,8 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
 
   private void scrollToSeeFMR(String slotName, AdsBaseObject page) {
-    page.scrollToFooter();
-    page.scrollToPosition("#LEFT_SKYSCRAPER_2");
+    page.triggerComments();
+    page.scrollToPosition("#INCONTENT_BOXAD_1");
     page.waitForSlotExpanded(driver.findElement(By.id(slotName)));
   }
 
