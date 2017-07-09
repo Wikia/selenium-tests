@@ -21,6 +21,7 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -181,8 +182,8 @@ public class Helios {
   private static String getUserId(String userName) {
     String getUserIDURL = "";
     try {
-      getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
-          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"));
+      getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
+          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"), DateTime.now().getMillis());
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);
