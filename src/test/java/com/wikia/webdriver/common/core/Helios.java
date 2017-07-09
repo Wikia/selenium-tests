@@ -190,6 +190,7 @@ public class Helios {
     }
 
     HttpGet httpGet = new HttpGet(getUserIDURL);
+    PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
 
     try {
       return getDefaultClient().execute(httpGet, extractUserId());
