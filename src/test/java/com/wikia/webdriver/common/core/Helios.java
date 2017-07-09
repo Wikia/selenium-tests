@@ -158,6 +158,18 @@ public class Helios {
     }
   }
 
+  private static String executeAndRetry(HttpGet httpGet, ResponseHandler<String> handler)
+          throws IOException {
+    try (CloseableHttpClient httpClient = getDefaultClient()) {
+      try {
+        return httpClient.execute(httpGet, handler);
+      } catch (ConnectTimeoutException e) {
+        PageObjectLogging.log("Timeout when connecting to helios", e, true);
+        return httpClient.execute(httpGet, handler);
+      }
+    }
+  }
+
   private static String getTokenFromCache(String userName) {
     try (CloseableHttpClient httpClient = getDefaultClient()) {
       if (tokenCache.containsKey(userName)) {
@@ -193,7 +205,7 @@ public class Helios {
     PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
 
     try {
-      return getDefaultClient().execute(httpGet, extractUserId());
+      return executeAndRetry(httpGet, extractUserId());
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
