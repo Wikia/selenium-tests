@@ -91,7 +91,7 @@ public class TestUap extends TemplateNoFirstLoad {
       String slotName = slotData.get("slotName").toString();
       String slotSelector = AdsContent.getSlotSelector(slotName);
 
-      ads.wait.forElementPresent(By.cssSelector(slotSelector);
+      ads.wait.forElementPresent(By.cssSelector(slotSelector));
       ads.scrollToPosition(slotSelector);
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
