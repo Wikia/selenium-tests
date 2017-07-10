@@ -24,7 +24,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall
 @Execute(onWikia = "sustainingtestchat")
 public class VetAddingVideoTests extends NewTestTemplate {
 
-  @Test(groups = {"VetAddVideo_001"})
+  @Test(groups = {"VetAddVideo_001"}, invocationCount = 10)
   @Execute(asUser = User.SUS_REGULAR_USER2)
   public void VetAddVideo_001_MessageWallProvider() {
     MessageWall wall = new MessageWall(driver).open(User.SUS_REGULAR_USER2.getUserName());
