@@ -14,10 +14,12 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
           "108480239532"};
   private static final String WIKI_NAME = "project43";
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
+  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
+
 
   private void scrollToSeeFMR(String slotName, AdsBaseObject page) {
     page.triggerComments();
-    page.scrollToPosition("#ArticleMidSection.mw-headline");
+    page.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     page.waitForSlotExpanded(page.wait.forElementVisible(By.id(slotName)));
   }
 

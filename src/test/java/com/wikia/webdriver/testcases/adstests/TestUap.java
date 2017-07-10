@@ -23,6 +23,7 @@ public class TestUap extends TemplateNoFirstLoad {
   private static final String MOBILE_IN_CONTENT = ".mobile-in-content";
   private static final String MOBILE_PREFOOTER = ".mobile-prefooter";
   private static final String MOBILE_BOTTOM_LEADERBOARD = ".mobile-bottom-leaderboard";
+  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -36,7 +37,7 @@ public class TestUap extends TemplateNoFirstLoad {
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
     ads.triggerComments();
-    ads.scrollToPosition("#ArticleMidSection.mw-headline");
+    ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
   }
 
@@ -88,8 +89,8 @@ public class TestUap extends TemplateNoFirstLoad {
   private void verifySlotsUnblocked(AdsBaseObject ads, List<Map<String, Object>> slotsData) {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
-      ads.wait.forElementPresent(By.cssSelector("#"+slotName));
-      ads.scrollToPosition("#"+slotName);
+      ads.wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+      ads.scrollToPosition((AdsContent.getSlotSelector(slotName)));
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
       ads.verifyLineItemId(slotName, Integer.valueOf(slotData.get("lineItemId").toString()));
