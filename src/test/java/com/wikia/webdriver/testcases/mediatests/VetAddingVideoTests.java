@@ -44,7 +44,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.verifyPostedMessageVideo(title);
   }
 
-  @Test(groups = {"VetAddVideo_002"})
+  @Test(groups = {"VetAddVideo_002"}, invocationCount = 10)
   @Execute(asUser = User.SUS_REGULAR_USER2)
   public void VetAddVideo_002_MessageWallLibrary() {
     MessageWall wall = new MessageWall(driver).open(User.SUS_REGULAR_USER2.getUserName());
