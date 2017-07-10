@@ -84,7 +84,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   private List<WebElement> sectionHeadersChevron;
 
   public InfoboxBuilderPage openNew(String templateName) {
-    new TemplateEditPage().open(templateName)
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s:%s", urlBuilder.getUrlForWiki(),
+            "Template", templateName),
+            URLsContent.ACTION_EDIT));
+    new TemplateEditPage()
         .getTemplateClassification()
         .changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
@@ -96,16 +99,18 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage openExisting(String templateName) {
-    new TemplateEditPage().open(templateName)
-        .openCurrectArticleSourceMode();
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s/%s", urlBuilder.getUrlForWiki(),
+            "Special:InfoboxBuilder", templateName),
+            URLsContent.ACTION_EDIT));
     driver.switchTo().frame(builderIFrame);
 
     return this;
   }
 
   public InfoboxBuilderPage open() {
-    new TemplateEditPage().open("temp_template");
-    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
+    getUrl(urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s/%s", urlBuilder.getUrlForWiki(),
+            "Special:InfoboxBuilder", "temp_template"),
+            URLsContent.ACTION_EDIT));
     driver.switchTo().frame(builderIFrame);
     wait.forElementVisible(previewArea);
 
@@ -132,6 +137,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage insertTemplateTitle(String title) {
     wait.forElementClickable(editTemplateTitleInput);
+    editTemplateTitleInput.clear();
     editTemplateTitleInput.sendKeys(title);
 
     return this;

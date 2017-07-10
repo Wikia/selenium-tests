@@ -32,6 +32,7 @@ public class AdsDataProvider {
   private static final String SKIN_LEFT = "src/test/resources/adsResources/wikia_skin_left.png";
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
 
+  private static final String INSTANT_GLOBAL_ADMIX_SWITCHED_OFF = "?InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[ZZ]";
   private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
@@ -793,7 +794,7 @@ public class AdsDataProvider {
   public static Object[][] adsSlotSizeOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -803,7 +804,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -813,7 +814,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/OneSkyscraper" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -823,7 +824,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapers" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -833,7 +834,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/NoSkyScrapersWithJumboMedrec" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -843,7 +844,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600"),
+            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
@@ -853,7 +854,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250"),
+            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
@@ -863,7 +864,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600"),
+            new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -873,7 +874,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
@@ -883,7 +884,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
@@ -893,7 +894,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600"),
+            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
@@ -903,7 +904,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.MEDREC)
@@ -913,7 +914,7 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050"),
+            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
@@ -939,7 +940,7 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             "project43",
-            "SyntheticTests/Premium/FeaturedVideo?AbTest.FEATURED_VIDEO_AUTOPLAY=CONTROL"
+            "SyntheticTests/Premium/FeaturedVideo"
         }
     };
   }
@@ -1118,12 +1119,12 @@ public class AdsDataProvider {
   public static Object[][] adsVuapTngDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL, "DevTemplates/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }
@@ -1208,7 +1209,8 @@ public class AdsDataProvider {
 
       },
       {
-          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM), // Veles Timeout (page without VAST)
+          // Veles Timeout (page without VAST)
+          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM),
           ImmutableMap.builder()
               .put(AdsContent.TOP_LB, "0.00")
               .build(),

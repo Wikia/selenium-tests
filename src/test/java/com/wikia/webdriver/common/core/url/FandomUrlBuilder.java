@@ -42,4 +42,20 @@ public class FandomUrlBuilder {
     }
     return "http://" + baseUrl;
   }
+
+  public String getUrlForF2ArticlePage(String pageTitle) {
+    String baseUrl = FANDOM_URL + "/f2/" + ARTICLE_PATH + "/" + pageTitle;
+    if (!env.equals(ENV_PROD)) {
+      baseUrl = env + "." + baseUrl;
+    }
+    return "http://" + baseUrl;
+  }
+
+  public String getUrlForFandomTopic(String topic) {
+    String baseUrl = FANDOM_URL + "/topics/" + topic;
+    if (!env.equals(ENV_PROD)) {
+      baseUrl = env + "." + baseUrl;
+    }
+    return "http://" + baseUrl;
+  }
 }

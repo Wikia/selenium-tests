@@ -37,9 +37,9 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
 
   private void adsPremiumPrerollMOATTracking(String wikiName, String article) {
     networkTrafficInterceptor.startIntercepting();
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "&" + TURN_ON_MOAT + "&" + IGNORE_SAMPLING);
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?" + TURN_ON_MOAT + "&" + IGNORE_SAMPLING);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.playArticleVideo();
+    wikiPage.verifyPlayerOnPage();
     wikiPage.wait.forSuccessfulResponse(networkTrafficInterceptor, MOAT_VIDEO_TRACKING_URL);
   }
 }
