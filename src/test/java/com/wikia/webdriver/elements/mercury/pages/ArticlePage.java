@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.pages;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
@@ -95,5 +96,16 @@ public class ArticlePage extends WikiBasePageObject {
     jsActions.scrollToElement(linksList.get(index), offset);
 
     return jsActions.getCurrentPosition();
+  }
+
+  public boolean isInScrollPosition(Long position) throws InterruptedException {
+    this.waitForPageLoad();
+    JavascriptActions jsActions = new JavascriptActions();
+
+    for (int i = 0; i < 10 && !jsActions.getCurrentPosition().equals(position); ++i) {
+      Thread.sleep(500);
+    }
+
+    return jsActions.getCurrentPosition().equals(position);
   }
 }

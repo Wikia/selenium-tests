@@ -4,9 +4,15 @@ import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -73,7 +79,7 @@ public class JavascriptActions {
   private boolean isElementInViewPort(WebElement element) {
     return (Boolean) js.executeScript(
         "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
-            + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
+        + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
         element);
   }
 
@@ -89,14 +95,15 @@ public class JavascriptActions {
 
     int offset = 60;
     WikiBasePageObject wikiPage = new WikiBasePageObject();
-    if (wikiPage.isBannerNotificationContainerPresent()){
+    if (wikiPage.isBannerNotificationContainerPresent()) {
       int notificationsHeight = wikiPage.getBannerNotificationsHeight();
       offset += notificationsHeight;
     }
 
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + offset + "));", element);
+          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + offset
+          + "));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -107,7 +114,7 @@ public class JavascriptActions {
   public void scrollToSpecificElement(WebElement element) {
     try {
       js.executeScript(
-          "arguments[0].scrollIntoView(true);",element);
+          "arguments[0].scrollIntoView(true);", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
@@ -118,7 +125,7 @@ public class JavascriptActions {
   public void scrollToElement(WebElement element, int offset) {
     int elementPosition = element.getLocation().getY() - offset;
     js.executeScript(
-        "window.scroll(0,arguments[0])",  elementPosition
+        "window.scroll(0,arguments[0])", elementPosition
     );
   }
 
@@ -167,8 +174,8 @@ public class JavascriptActions {
 
   public void changeElementOpacity(String selector, int value) {
     js.executeScript(
-            "document.querySelector(arguments[0]).style.opacity = arguments[1];",
-            selector, value);
+        "document.querySelector(arguments[0]).style.opacity = arguments[1];",
+        selector, value);
   }
 
   public String getWindowErrors() {
@@ -178,14 +185,12 @@ public class JavascriptActions {
   public void addErrorListenerScript() {
     js.executeScript(
         "var script = document.createElement('script'); " + "script.innerHTML = 'window.onerror = "
-            + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
-            + "document.querySelector('body').appendChild(script);");
+        + "function (e, u, l, c, errorObj) { window.errors = errorObj.stack }';"
+        + "document.querySelector('body').appendChild(script);");
   }
 
 
   public Long getCurrentPosition() {
-
-    Long value = new Double((Double)js.executeScript("return window.pageYOffset;")).longValue();
-    return value;
+    return (Long) js.executeScript("return window.pageYOffset;");
   }
 }
