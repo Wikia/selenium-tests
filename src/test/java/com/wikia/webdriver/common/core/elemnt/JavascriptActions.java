@@ -7,7 +7,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -185,6 +184,8 @@ public class JavascriptActions {
 
 
   public Long getCurrentPosition() {
-    return (Long) js.executeScript("return window.pageYOffset;");
+
+    Long value = new Double((Double)js.executeScript("return window.pageYOffset;")).longValue();
+    return value;
   }
 }
