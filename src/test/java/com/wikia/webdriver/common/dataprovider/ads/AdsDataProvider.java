@@ -1219,4 +1219,13 @@ public class AdsDataProvider {
 
     };
   }
+
+  @DataProvider
+  public static Object[][] premiumLayoutPages() {
+    return new Object[][]{
+      {
+        new Page(WIKI_SPECIAL, "SyntheticTests/LongPage")
+      }
+    };
+  }
 }

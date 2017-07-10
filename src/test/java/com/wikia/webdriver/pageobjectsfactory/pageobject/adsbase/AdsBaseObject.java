@@ -402,6 +402,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Check if AdEngine loaded the ad web elements inside slot.
    */
   public boolean checkSlotOnPageLoaded(String slotName) {
+    WebElement slot;
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
@@ -409,7 +410,11 @@ public class AdsBaseObject extends WikiBasePageObject {
       }
 
       String slotSelector = AdsContent.getSlotSelector(slotName);
-      WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+      try {
+        slot = driver.findElement(By.cssSelector(slotSelector));
+      } catch (NoSuchElementException elementNotFound) {
+        return false;
+      }
 
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 1;
@@ -694,9 +699,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToFooter();
   }
 
+  public void scrollToPosition(By element) {
+    jsActions.scrollToSpecificElement(driver.findElement(element));
+    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);
+  }
+
   public void scrollToPosition(String selector) {
-    jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
-    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
+    scrollToPosition(By.cssSelector(selector));
   }
 
   public void fixScrollPositionByNavbar() {
