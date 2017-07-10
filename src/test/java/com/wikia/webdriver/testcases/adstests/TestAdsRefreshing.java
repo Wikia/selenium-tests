@@ -16,7 +16,6 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
   private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
-
   private void scrollToSeeFMR(String slotName, AdsBaseObject page) {
     page.triggerComments();
     page.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
