@@ -7,7 +7,7 @@ import lombok.Getter;
 import com.google.common.collect.ImmutableMap;
 
 public enum Emulator {
-  GOOGLE_NEXUS_5("Nexus 5"),
+  GOOGLE_NEXUS_5("Google Nexus 5"),
   APPLE_IPHONE_6("Apple iPhone 6"),
   DESKTOP_BREAKPOINT_BIG(
       new ImmutableMap.Builder<String, Object>()
