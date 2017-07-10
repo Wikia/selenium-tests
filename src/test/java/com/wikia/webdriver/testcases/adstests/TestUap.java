@@ -90,7 +90,7 @@ public class TestUap extends TemplateNoFirstLoad {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
       ads.wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
-      ads.scrollToPosition((AdsContent.getSlotSelector(slotName)));
+      ads.scrollToPosition(AdsContent.getSlotSelector(slotName));
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
       ads.verifyLineItemId(slotName, Integer.valueOf(slotData.get("lineItemId").toString()));

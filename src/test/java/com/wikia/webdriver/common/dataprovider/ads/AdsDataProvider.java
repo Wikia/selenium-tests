@@ -33,7 +33,6 @@ public class AdsDataProvider {
   private static final String SKIN_RIGHT = "src/test/resources/adsResources/wikia_skin_right.png";
 
   private static final String INSTANT_GLOBAL_ADMIX_SWITCHED_OFF = "?InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[ZZ]";
-
   private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private static final String NO_SKIN_LEFT =
