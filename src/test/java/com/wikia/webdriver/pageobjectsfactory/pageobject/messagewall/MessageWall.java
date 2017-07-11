@@ -56,6 +56,8 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement linkButton;
   @FindBy(css = "#cke_contents_WallMessageBody > textarea")
   private WebElement sourceModeInputField;
+  @FindBy(css = "#wall-new-message")
+  private WebElement newWallMessageContainer;
   @FindBy(css = "#WallMessageBody")
   private WebElement messageMainBody;
   @FindBy(css = "#WallMessageTitle")
@@ -72,8 +74,6 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
-  @FindBy(css = ".SortingBar")
-  private WebElement sortingBar;
 
 
   public MessageWall(WebDriver driver) {
@@ -92,7 +92,7 @@ public class MessageWall extends WikiBasePageObject {
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
-    wait.forAttributeToContain(driver.findElement(By.cssSelector("#wall-new-message")), "class", "focused");
+    wait.forAttributeToContain(newWallMessageContainer, "class", "focused");
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
