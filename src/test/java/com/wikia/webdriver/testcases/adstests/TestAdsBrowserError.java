@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -13,7 +14,7 @@ public class TestAdsBrowserError extends TemplateNoFirstLoad {
   public void adsScrollHandlerBrowserError() {
     JavascriptActions jsActions = new JavascriptActions(driver);
 
-    String testPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/UAP");
+    String testPage = AdsDataProvider.UAP_PAGE.getUrl();
     testPage = urlBuilder.appendQueryStringToURL(testPage, "scrollhandler=1");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver);
     adsBaseObject.getUrl(testPage);
