@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = "sustainingtestchat")
 public class VetAddingVideoTests extends NewTestTemplate {
 
-  @Test(groups = {"VetAddVideo_001"}, invocationCount = 10)
+  @Test(groups = {"VetAddVideo_001"}, invocationCount = 20)
   @Execute(asUser = User.SUS_REGULAR_USER2)
   public void VetAddVideo_001_MessageWallProvider() {
     MessageWall wall = new MessageWall(driver).open(User.SUS_REGULAR_USER2.getUserName());
@@ -40,7 +40,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
     wall.verifyPostedMessageVideo(title);
   }
 
-  @Test(groups = {"VetAddVideo_002"}, invocationCount = 10)
+  @Test(groups = {"VetAddVideo_002"}, invocationCount = 20)
   @Execute(asUser = User.SUS_REGULAR_USER2)
   public void VetAddVideo_002_MessageWallLibrary() {
     MessageWall wall = new MessageWall(driver).open(User.SUS_REGULAR_USER2.getUserName());
