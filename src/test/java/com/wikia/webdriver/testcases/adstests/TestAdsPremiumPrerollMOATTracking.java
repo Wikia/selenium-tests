@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
   private static final String TURN_ON_MOAT = "InstantGlobals.wgAdDriverMoatTrackingForFeaturedVideoAdCountries=[XX]";
   private static final String IGNORE_SAMPLING = "ignored_samplers=moatTrackingForFeaturedVideo";
-  private static final String MOAT_VIDEO_TRACKING_URL = "z.moatads.com/wikiaimajsint377461931603/moatvideo.js";
+  private static final String MOAT_VIDEO_TRACKING_URL = "https://z.moatads.com/wikiaimajsint377461931603/moatvideo.js";
 
   @NetworkTrafficDump(useMITM = true)
   @Test(
