@@ -56,6 +56,19 @@ public class TestPremiumAdLayout extends TemplateNoFirstLoad {
     checkIfNextModuleWillBe(ads, FMR_SELECTOR);
   }
 
+  @Test(
+          groups = {"PremiumAdLayout", "PremiumAdLayoutRefreshFMRWithUAP"}
+  )
+  public void uapFloatingMedrecIsReloadingOnceWithRecirculationModule() {
+    AdsBaseObject ads = new AdsBaseObject(driver, turnOnPremiumLayoutOnPage(AdsDataProvider.UAP_PAGE));
+
+    ads.scrollToPosition(RECIRCULATION_SELECTOR);
+    ads.wait.forElementVisible(RECIRCULATION_SELECTOR);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
+    checkIfNextModuleWillBe(ads, FMR_SELECTOR);
+  }
+
   private void checkIfNextModuleWillBe(AdsBaseObject ads, By moduleSelector) {
     imitateUserActionUntilModuleVisible(ads, moduleSelector);
   }
