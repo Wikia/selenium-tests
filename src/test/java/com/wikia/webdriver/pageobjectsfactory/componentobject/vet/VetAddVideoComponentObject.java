@@ -81,6 +81,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     this.videoName = addVideoLink.getAttribute("title");
     wait.forElementClickable(addFromPreviewButtonBy);
     scrollAndClick(addFromPreviewButton);
+    wait.forElementNotVisible(addFromPreviewButton);
     PageObjectLogging.log("clickAddVideoLibrary",
                           "add video button clicked: " + this.videoName, true, driver);
   }
