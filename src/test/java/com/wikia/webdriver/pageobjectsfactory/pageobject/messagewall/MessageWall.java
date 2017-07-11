@@ -85,10 +85,10 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
+    scrollTo(messageTitleField);
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
-    scrollTo(messageTitleField);
     wait.forAttributeToContain(driver.findElement(By.cssSelector("#wall-new-message")), "class", "focused");
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
