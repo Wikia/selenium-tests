@@ -7,9 +7,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
