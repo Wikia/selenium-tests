@@ -110,8 +110,6 @@ public class TestPremiumAdLayout extends TemplateNoFirstLoad {
     try {
       PageObjectLogging.log("Sleep", String.format("Wait for %d ms", reloadDelay.toMillis()), true);
       Thread.sleep(reloadDelay.toMillis());
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    } catch (InterruptedException ignored) {}
   }
 }
