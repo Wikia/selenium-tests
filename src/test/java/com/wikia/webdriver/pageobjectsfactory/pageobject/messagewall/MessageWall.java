@@ -72,6 +72,9 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement removedThreadMessage;
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
+  @FindBy(css = ".SortingBar")
+  private WebElement sortingBar;
+
 
   public MessageWall(WebDriver driver) {
     super();
@@ -85,7 +88,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    scrollTo(messageTitleField);
+    jsActions.scrollToElement(messageTitleField);
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
