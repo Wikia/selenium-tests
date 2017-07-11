@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -186,18 +187,26 @@ public class Wait {
     }
   }
 
-  public WebElement forElementVisible(WebElement element, int timeout, int polling) {
+  public WebElement forElementVisible(WebElement element, int timeout_sec, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(driver, timeout, polling).until(ExpectedConditions
+      return new WebDriverWait(driver, timeout_sec, polling).until(ExpectedConditions
                                                                    .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
-  public WebElement forElementVisible(WebElement element, int timeout) {
-    return forElementVisible(element, timeout, 500);
+  public WebElement forElementVisible(WebElement element, int timeout_sec) {
+    return forElementVisible(element, timeout_sec, 500);
+  }
+
+  public WebElement forElementVisible(By selector, int timeout_sec) {
+    return forElementVisible(selector, timeout_sec, 500);
+  }
+
+  public WebElement forElementVisible(By selector, Duration duration) {
+    return forElementVisible(selector, 1000, 500);
   }
 
   /**
@@ -212,14 +221,22 @@ public class Wait {
     }
   }
 
-  public WebElement forElementVisible(By by, int timeout, int polling) {
+  /**
+   * @deprecated use method with Duration object except int
+   */
+  @Deprecated
+  public WebElement forElementVisible(By by, int timeout_sec, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(driver, timeout, polling).until(
+      return new WebDriverWait(driver, timeout_sec, polling).until(
           ExpectedConditions.visibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public WebElement forElementVisible(By by, Duration duration, int polling) {
+    return forElementVisible(by, (int) duration.getSeconds(), polling);
   }
 
   /**

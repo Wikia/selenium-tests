@@ -82,6 +82,10 @@ public class JavascriptActions {
     js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
   }
 
+  public void scrollDown(int pixels) {
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+  }
+
   public void scrollToElement(By elementBy) {
     scrollToElement(driver.findElement(elementBy));
   }
