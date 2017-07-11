@@ -187,26 +187,26 @@ public class Wait {
     }
   }
 
-  public WebElement forElementVisible(WebElement element, int timeout_sec, int polling) {
+  public WebElement forElementVisible(WebElement element, int timeoutSec, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(driver, timeout_sec, polling).until(ExpectedConditions
+      return new WebDriverWait(driver, timeoutSec, polling).until(ExpectedConditions
                                                                    .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
-  public WebElement forElementVisible(WebElement element, int timeout_sec) {
-    return forElementVisible(element, timeout_sec, 500);
+  public WebElement forElementVisible(WebElement element, int timeoutSec) {
+    return forElementVisible(element, timeoutSec, 500);
   }
 
-  public WebElement forElementVisible(By selector, int timeout_sec) {
-    return forElementVisible(selector, timeout_sec, 500);
+  public WebElement forElementVisible(By selector, int timeoutSec) {
+    return forElementVisible(selector, timeoutSec, 500);
   }
 
   public WebElement forElementVisible(By selector, Duration duration) {
-    return forElementVisible(selector, 1000, 500);
+    return forElementVisible(selector, (int) duration.getSeconds(), 500);
   }
 
   /**
@@ -225,10 +225,10 @@ public class Wait {
    * @deprecated use method with Duration object except int
    */
   @Deprecated
-  public WebElement forElementVisible(By by, int timeout_sec, int polling) {
+  public WebElement forElementVisible(By by, int timeoutSec, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(driver, timeout_sec, polling).until(
+      return new WebDriverWait(driver, timeoutSec, polling).until(
           ExpectedConditions.visibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
