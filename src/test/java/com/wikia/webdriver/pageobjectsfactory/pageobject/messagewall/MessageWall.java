@@ -1,12 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
@@ -20,6 +17,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class MessageWall extends WikiBasePageObject {
+
+  private static final By focusedNewMessageFormBy = By.cssSelector("#wall-new-message.focused");
 
   final By firstMessageWrapperBy =
       By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
@@ -46,6 +45,10 @@ public class MessageWall extends WikiBasePageObject {
   private final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
   private final String closeButtonString = ".close-thread";
   private final By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
+
+  @FindBy(id = "wall-new-message")
+  private WebElement newMessageForm;
+
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
@@ -62,7 +65,7 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement messageMainBody;
   @FindBy(css = "#WallMessageTitle")
   private WebElement messageTitleField;
-  @FindBy(css = "#WallMessageSubmit")
+  @FindBy(id = "WallMessageSubmit")
   private WebElement postButton;
   @FindBy(css = "#WallMessagePreview")
   private WebElement previewButton;
@@ -75,22 +78,22 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
 
-  public MessageWall(WebDriver driver) {
-    super();
-  }
-
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
         + userName);
     waitForPageLoad();
-    return new MessageWall(driver);
+
+    return new MessageWall();
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
+    builder.moveToElement(newMessageForm);
+
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
-    wait.forElementPresent(By.cssSelector("#wall-new-message.focused"));
+
+    wait.forElementPresent(focusedNewMessageFormBy);
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
@@ -114,7 +117,8 @@ public class MessageWall extends WikiBasePageObject {
   public void submit() {
     driver.switchTo().defaultContent();
     scrollAndClick(postButton);
-    new Actions(driver).moveByOffset(0, 0).perform();
+    builder.moveByOffset(0, 0).perform();
+
     wait.forElementNotVisible(postButton);
     PageObjectLogging.log("submit", "message submitted", true);
   }
@@ -168,7 +172,6 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MessageWallCloseRemoveThreadPageObject clickCloseThread() {
-    refreshPage();
     setDisplayStyle(newMessageMenu, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     WebElement closeButton = driver.findElement(closeButtonBy);
@@ -248,7 +251,7 @@ public class MessageWall extends WikiBasePageObject {
     PageObjectLogging.log("verifyThreadRemoved", "verifyed thread removed", true);
   }
 
-  public void verifyThreadClosed(String userName, String reason, String message) {
+  public void verifyThreadClosed(String userName, String reason) {
     refreshPageAddingCacheBuster();
     Assertion.assertStringContains(
         driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
@@ -348,12 +351,11 @@ public class MessageWall extends WikiBasePageObject {
 
   public MessageWallThreadPageObject openThread(String threadName) {
     try {
-      for (WebElement thread : threadList) {
-        if (thread.getText().contains(threadName)) {
-          scrollAndClick(thread);
-          break;
-        }
-      }
+      threadList.stream()
+          .filter(thread -> thread.getText().contains(threadName))
+          .findFirst()
+          .ifPresent(this::scrollAndClick);
+
       return new MessageWallThreadPageObject(driver);
     } finally {
       waitForPageLoad();
