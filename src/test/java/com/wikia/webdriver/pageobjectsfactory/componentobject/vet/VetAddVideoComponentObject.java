@@ -39,6 +39,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
   @FindBy(css = "#VET-add-from-preview")
   private WebElement addFromPreviewButton;
 
+  private By addFromPreviewButtonBy = By.cssSelector("#VET-add-from-preview");
   private By addVideoLibraryLink = By.cssSelector("figure + a");
 
   private String videoName;
@@ -78,7 +79,9 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     wait.forElementVisible(listElem);
     WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
     this.videoName = addVideoLink.getAttribute("title");
+    wait.forElementClickable(addFromPreviewButtonBy);
     scrollAndClick(addFromPreviewButton);
+    wait.forElementNotVisible(addFromPreviewButton);
     PageObjectLogging.log("clickAddVideoLibrary",
                           "add video button clicked: " + this.videoName, true, driver);
   }
