@@ -24,6 +24,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final String ARTICLE_VIDEO_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video .oo-state-screen-selectable";
+  private static final String MOBILE_ARTICLE_VIDEO_PLAY_ICON = ".article-featured-video__play-circle";
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
@@ -33,6 +34,8 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private WebElement articleVideo;
   @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
   private WebElement articleVideoClickArea;
+  @FindBy(css = MOBILE_ARTICLE_VIDEO_PLAY_ICON)
+  private WebElement mobileArticleVideoPlayButton;
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
@@ -46,6 +49,11 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void playArticleVideo() {
     wait.forElementVisible(articleVideoWrapper);
     articleVideoClickArea.click();
+  }
+
+  public void playArticleVideoOnMobile() {
+    wait.forElementVisible(mobileArticleVideoPlayButton);
+    mobileArticleVideoPlayButton.click();
   }
 
   public void verifyPlayerOnPage() {
