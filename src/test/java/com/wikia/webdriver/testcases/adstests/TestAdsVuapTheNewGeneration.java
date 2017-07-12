@@ -227,7 +227,7 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
 
   private void scrollToSlot(String slotName, AdsBaseObject ads) {
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
-      ads.triggerComments(false);
+      ads.triggerComments();
     }
   }
 }

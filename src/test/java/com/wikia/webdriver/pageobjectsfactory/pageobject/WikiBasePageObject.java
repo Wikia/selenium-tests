@@ -667,14 +667,9 @@ public class WikiBasePageObject extends BasePageObject {
     return driver.manage().window().getSize();
   }
 
-  public void scrollToFooter(Boolean isMobile) {
-    if (isMobile) {
-      wait.forElementPresent(By.className(MOBILE_FOOTER_CLASS));
-      jsActions.scrollToElement(mobileFooter);
-    } else {
+  public void scrollToFooter() {
       wait.forElementVisible(footer);
       jsActions.scrollToElement(footer);
-    }
 
     PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }

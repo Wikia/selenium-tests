@@ -17,7 +17,7 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
   private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
   private void scrollToSeeFMR(String slotName, AdsBaseObject page) {
-    page.triggerComments(false);
+    page.triggerComments();
     page.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     page.waitForSlotExpanded(page.wait.forElementVisible(By.id(slotName)));
   }

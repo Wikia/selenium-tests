@@ -20,7 +20,7 @@ public class Layout extends NewTestTemplate {
   public void globalNavigationBarIsFixedOnScrollForAnon() {
     SpecialWikiActivityPageObject wikiActivity = new SpecialWikiActivityPageObject(driver).open();
     wikiActivity.verifyGlobalNavigation();
-    wikiActivity.scrollToFooter(false);
+    wikiActivity.scrollToFooter();
     wikiActivity.verifyGlobalNavigation();
   }
 

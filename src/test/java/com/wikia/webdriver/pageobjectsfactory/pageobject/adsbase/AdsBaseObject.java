@@ -693,10 +693,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot(MIDDLE_PREFOOTER_CSS_SELECTOR, middlePrefooter);
   }
 
-  public void triggerComments(Boolean isMobile) {
-    scrollToFooter(isMobile);
+  public void triggerComments() {
+    scrollToFooter();
     jsActions.waitForJavaScriptTruthy("window.ArticleComments.initCompleted");
-    scrollToFooter(isMobile);
+    scrollToFooter();
   }
 
   public void scrollToPosition(By element) {
