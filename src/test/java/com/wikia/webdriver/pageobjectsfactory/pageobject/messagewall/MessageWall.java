@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import com.sun.tools.doclets.formats.html.markup.HtmlAttr;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -19,6 +20,10 @@ import java.util.List;
 
 public class MessageWall extends WikiBasePageObject {
 
+  private static final String newMessageMenu =
+          ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
+  private static final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
+  private static final String closeButtonString = ".close-thread";
   final By firstMessageWrapperBy =
       By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
   final By replyButtonBy = By.cssSelector(".replyButton");
@@ -39,10 +44,6 @@ public class MessageWall extends WikiBasePageObject {
   private final By saveChangesButtonBy = By.cssSelector(".save-edit");
   private final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
   private final By replyBodyBy = By.cssSelector(".replyBody");
-  private final String newMessageMenu =
-      ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
-  private final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
-  private final String closeButtonString = ".close-thread";
   private final By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
@@ -92,7 +93,7 @@ public class MessageWall extends WikiBasePageObject {
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
-    wait.forAttributeToContain(newWallMessageContainer, "class", "focused");
+    wait.forAttributeToContain(newWallMessageContainer, HtmlAttr.CLASS.toString(), "focused");
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
@@ -206,7 +207,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickBoldButton() {
-    boolean state = boldButton.getAttribute("class").contains("cke_on");
+    boolean state = boldButton.getAttribute(HtmlAttr.CLASS.toString()).contains("cke_on");
     wait.forElementClickable(boldButton);
     scrollAndClick(boldButton);
     if (state) {
@@ -219,7 +220,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickItalicButton() {
-    boolean state = italicButton.getAttribute("class").contains("cke_on");
+    boolean state = italicButton.getAttribute(HtmlAttr.CLASS.toString()).contains("cke_on");
     wait.forElementClickable(boldButton);
     scrollAndClick(italicButton);
     if (state) {
