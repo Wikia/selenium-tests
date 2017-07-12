@@ -36,7 +36,7 @@ public class TestUap extends TemplateNoFirstLoad {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     verifySlotsUnblocked(ads, atfSlots);
     verifySlotsBlocked(ads, btfSlots);
-    ads.triggerComments();
+    ads.triggerComments(false);
     ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     verifySlotsUnblocked(ads, ListUtils.union(atfSlots, btfSlots));
   }
