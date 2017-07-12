@@ -757,12 +757,6 @@ public class AdsDataProvider {
             new String[]{
                 TestAdsTrackingPixels.GA_PIXEL_URL
             }
-        },
-        {
-            "lego", "LEGO_Wiki",
-            new String[]{
-                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
-            }
         }
     };
   }
@@ -779,18 +773,6 @@ public class AdsDataProvider {
             }
         };
     }
-
-  @DataProvider
-  public static Object[][] adsTrackingPixelsNotSent() {
-    return new Object[][]{
-        {
-            "project43", "Project43_Wikia",
-            new String[]{
-                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
-            }
-        }
-    };
-  }
 
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
