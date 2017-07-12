@@ -20,9 +20,10 @@ public class MessageWall extends WikiBasePageObject {
 
   private static final By focusedNewMessageFormBy = By.cssSelector("#wall-new-message.focused");
 
-  private static final By firstMessageWrapperBy =
+  static final By firstMessageWrapperBy =
       By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  private static final By replyButtonBy = By.cssSelector(".replyButton");
+  static final By replyButtonBy = By.cssSelector(".replyButton");
+
   private static final By messageTitleBy = By.cssSelector(".msg-title");
   private static final By messageBodyBy = By.cssSelector(".msg-body");
   private static final By imageBy = By.cssSelector(".thumbimage");
@@ -358,7 +359,7 @@ public class MessageWall extends WikiBasePageObject {
           .findFirst()
           .ifPresent(this::scrollAndClick);
 
-      return new MessageWallThreadPageObject(driver);
+      return new MessageWallThreadPageObject();
     } finally {
       waitForPageLoad();
     }
