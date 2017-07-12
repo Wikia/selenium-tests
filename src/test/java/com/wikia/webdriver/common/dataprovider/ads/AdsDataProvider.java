@@ -42,6 +42,8 @@ public class AdsDataProvider {
 
   private static final String VIDEO_PLAYER_IFRAME = " .video-player iframe";
 
+  public static final Page UAP_PAGE = new Page(WIKI_SPECIAL, "SyntheticTests/UAP");
+
   private AdsDataProvider() {
   }
 
@@ -755,12 +757,6 @@ public class AdsDataProvider {
             new String[]{
                 TestAdsTrackingPixels.GA_PIXEL_URL
             }
-        },
-        {
-            "lego", "LEGO_Wiki",
-            new String[]{
-                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
-            }
         }
     };
   }
@@ -777,18 +773,6 @@ public class AdsDataProvider {
             }
         };
     }
-
-  @DataProvider
-  public static Object[][] adsTrackingPixelsNotSent() {
-    return new Object[][]{
-        {
-            "project43", "Project43_Wikia",
-            new String[]{
-                TestAdsTrackingPixels.NIELSEN_PIXEL_URL
-            }
-        }
-    };
-  }
 
   @DataProvider
   public static Object[][] adsSlotSizeOasis() {
@@ -959,7 +943,7 @@ public class AdsDataProvider {
   public static Object[][] adsUapOasis() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP"),
+            UAP_PAGE,
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.TOP_LB)
@@ -996,7 +980,7 @@ public class AdsDataProvider {
   public static Object[][] adsUapMercury() {
     return new Object[][]{
         {
-            new Page("project43", "SyntheticTests/UAP"),
+            UAP_PAGE,
             Arrays.asList(
                 ImmutableMap.<String, Object>builder()
                     .put("slotName", AdsContent.MOBILE_TOP_LB)
@@ -1218,6 +1202,15 @@ public class AdsDataProvider {
               .build()
       }
 
+    };
+  }
+
+  @DataProvider
+  public static Object[][] premiumLayoutPages() {
+    return new Object[][]{
+      {
+        new Page(WIKI_SPECIAL, "SyntheticTests/LongPage")
+      }
     };
   }
 }
