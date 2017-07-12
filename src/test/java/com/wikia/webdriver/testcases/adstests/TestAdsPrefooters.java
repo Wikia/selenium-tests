@@ -23,7 +23,7 @@ public class TestAdsPrefooters extends TemplateNoFirstLoad {
   ) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, windowResolution);
-    adsBaseObject.scrollToFooter();
+    adsBaseObject.scrollToFooter(true);
 
     boolean middlePrefooterOnPage = adsBaseObject.isMiddlePrefooterOnPage();
 
