@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.DontRun;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -20,7 +19,6 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   public static final String COMSCORE_PIXEL_URL = "http://b.scorecardresearch.com/b";
   public static final String GA_PIXEL_URL = "https://www.google-analytics.com/collect";
   public static final String KRUX_PIXEL_URL = "http://beacon.krxd.net/pixel.gif";
-  public static final String NIELSEN_PIXEL_URL = "http://secure-dcr.imrworldwide.com/cgi-bin/cfg?pli";
   public static final String QUANTQAST_PIXEL_URL = "http://pixel.quantserve.com/";
   public static final String QUANTQAST_PIXEL_URL_SECURE = "https://pixel.quantserve.com/";
 
@@ -67,22 +65,6 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
     assertTrackingPixelsSent(adsBaseObject, pixelUrls);
   }
 
-  @NetworkTrafficDump
-  @Execute(mockAds = "true")
-  @Test(
-      groups = "AdsTrackingPixels",
-      dataProviderClass =AdsDataProvider .class,
-      dataProvider = "adsTrackingPixelsNotSent"
-  )
-  public void adsTrackingPixelNotSent(String wiki, String urlParam, String[] pixelUrls) {
-    networkTrafficInterceptor.startIntercepting();
-
-    String testedPage = urlBuilder.getUrlForPath(wiki, urlParam);
-    new AdsBaseObject(driver, testedPage);
-
-    assertTrackingPixelsNotSent(pixelUrls);
-  }
-
   @NetworkTrafficDump(useMITM = true)
   @Test(
           groups = "AdsTrackingPixelsAuthPage",
@@ -104,12 +86,6 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   private void assertTrackingPixelsSent(AdsBaseObject adsBaseObject, String[] pixelUrls) {
     for (String pixelUrl : pixelUrls) {
       adsBaseObject.wait.forSuccessfulResponse(networkTrafficInterceptor, pixelUrl);
-    }
-  }
-
-  private void assertTrackingPixelsNotSent(String[] pixelUrls) {
-    for (String pixelUrl : pixelUrls) {
-      Assertion.assertNull(networkTrafficInterceptor.getEntryByUrlPart(pixelUrl));
     }
   }
 }
