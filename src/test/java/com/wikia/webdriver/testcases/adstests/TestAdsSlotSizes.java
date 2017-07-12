@@ -59,7 +59,8 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
     log(slotName, slotSize);
 
     AdsBaseObject ads = new AdsBaseObject(driver, url, pageSize);
-    ads.triggerComments();
+
+    ads.triggerComments(pageSize.equals(WindowSize.PHONE));
     ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     ads.wait.forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
     ads.triggerAdSlot(slotName);

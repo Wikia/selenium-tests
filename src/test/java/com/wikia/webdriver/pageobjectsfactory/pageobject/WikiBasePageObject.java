@@ -248,7 +248,7 @@ public class WikiBasePageObject extends BasePageObject {
   public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_MULTI_WIKI_FINDER);
     PageObjectLogging.log("openSpecialMultiWikiFinderPage",
-        "Special MultiWikiFinder page was opened", true);
+                          "Special MultiWikiFinder page was opened", true);
     return new SpecialMultiWikiFinderPageObject(driver);
   }
 
@@ -341,7 +341,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
     PageObjectLogging.log("openCKModeWithSectionEditButton",
-        "RTE edit button clicked at section: " + section, true, driver);
+                          "RTE edit button clicked at section: " + section, true, driver);
     return new VisualEditModePageObject();
   }
 
@@ -350,7 +350,7 @@ public class WikiBasePageObject extends BasePageObject {
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
     PageObjectLogging.log("openSrcModeWithSectionEditButton",
-        "Src edit button clicked at section: " + section, true, driver);
+                          "Src edit button clicked at section: " + section, true, driver);
     return new SourceEditModePageObject();
   }
 
@@ -374,8 +374,10 @@ public class WikiBasePageObject extends BasePageObject {
   public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL,
       String article) {
     getUrl(urlBuilder.appendQueryStringToURL(urlBuilder
-        .appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT),
-        URLsContent.USE_DEFAULT_FORMAT));
+                                                 .appendQueryStringToURL(
+                                                     wikiURL + URLsContent.WIKI_DIR + article,
+                                                     URLsContent.ACTION_EDIT),
+                                             URLsContent.USE_DEFAULT_FORMAT));
     return new VisualEditModePageObject();
   }
 
@@ -384,7 +386,7 @@ public class WikiBasePageObject extends BasePageObject {
    */
   public VisualEditorPageObject openVEOnArticle(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
-        URLsContent.VEACTION_EDIT));
+                                             URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject();
   }
 
@@ -612,7 +614,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + getNameForArticle(),
-        URLsContent.VEACTION_EDIT));
+                                             URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject();
   }
 
@@ -642,7 +644,7 @@ public class WikiBasePageObject extends BasePageObject {
   public void verifyArticleNameInWgPageName(String targetText) {
     Assertion.assertStringContains(targetText, getArticleName());
     PageObjectLogging.log("verifyArticleNameInWgPageName",
-        "The wgPageName variable contains article name" + targetText, true);
+                          "The wgPageName variable contains article name" + targetText, true);
   }
 
   public void verifyNumberOfTop1kWikisInRange(Range expectedRange) {
@@ -665,9 +667,15 @@ public class WikiBasePageObject extends BasePageObject {
     return driver.manage().window().getSize();
   }
 
-  public void scrollToFooter() {
-    wait.forElementVisible(footer);
-    jsActions.scrollToElement(footer);
+  public void scrollToFooter(Boolean isMobile) {
+    if (isMobile) {
+      wait.forElementPresent(By.className(MOBILE_FOOTER_CLASS));
+      jsActions.scrollToElement(mobileFooter);
+    } else {
+      wait.forElementVisible(footer);
+      jsActions.scrollToElement(footer);
+    }
+
     PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
