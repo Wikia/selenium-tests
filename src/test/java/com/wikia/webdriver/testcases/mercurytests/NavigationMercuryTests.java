@@ -5,9 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.skin.Skin;
@@ -85,18 +83,19 @@ public class NavigationMercuryTests extends NavigationTests {
   }
 
   @Test
-  @RelatedIssue(issueID = "XW-3682")
-  public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack() {
+  public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack()
+      throws InterruptedException {
     ArticlePage testPage = new ArticlePage().open("/ScrollPreserveTest");
     Long firstPosition = testPage.scrollToLink(0, 200);
     testPage.clickArticleLink(0);
 
     driver.navigate().back();
-    Long secondPosition = new JavascriptActions().getCurrentPosition();
 
-    Assertion.assertEquals(firstPosition, secondPosition, "Scroll position should be preserved "
-                                                          + "after navigating back");
-    Assertion.assertTrue(firstPosition > 0 && secondPosition > 0, "Page shoudln't be scrolled "
-                                                                  + "to top");
+    boolean isEqualPosition = testPage.isInScrollPosition(firstPosition);
+
+    Assertion.assertTrue(isEqualPosition, "Scroll position should be preserved "
+                                          + "after navigating back");
+    Assertion.assertTrue(firstPosition > 0 && isEqualPosition, "Page shouldn't be scrolled "
+                                                               + "to top");
   }
 }

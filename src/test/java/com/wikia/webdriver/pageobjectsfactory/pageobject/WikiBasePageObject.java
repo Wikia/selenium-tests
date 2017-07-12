@@ -67,6 +67,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
   private static final String LOGGED_IN_USER_SELECTOR_OASIS =
       ".wds-global-navigation__user-menu img";
+  private static final String MOBILE_FOOTER_CLASS = "wds-global-footer__header";
   private static final By MERCURY_SKIN = By.cssSelector("#ember-container");
   private static final By MERCURY_NAV_ICON = By.cssSelector(".site-head .site-head-icon-nav");
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
@@ -135,7 +136,7 @@ public class WikiBasePageObject extends BasePageObject {
   private WebElement globalNavigationAvatar;
   @FindBy(id = "WikiaFooter")
   private WebElement footer;
-  @FindBy(className = ".wds-global-footer__header")
+  @FindBy(className = MOBILE_FOOTER_CLASS)
   private WebElement mobileFooter;
   @FindBy(id = "globalNavigation")
   private WebElement globalNavigationBar;
@@ -671,7 +672,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void scrollToMobileFooter() {
-    wait.forElementVisible(mobileFooter);
+    wait.forElementPresent(By.className(MOBILE_FOOTER_CLASS));
     jsActions.scrollToElement(mobileFooter);
     PageObjectLogging.log("scrollToMobileFooter", "Scroll to the mobile footer of the page", true);
   }

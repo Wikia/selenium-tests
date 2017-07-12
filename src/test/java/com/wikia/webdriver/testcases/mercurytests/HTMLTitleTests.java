@@ -37,77 +37,77 @@ public class HTMLTitleTests extends NewTestTemplate {
       {
           "sktest123",
           "/wiki/Sktest123_Wiki",
-          "Sktest123 Wiki | Fandom powered by Wikia"
+          "Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
           "/wiki/Style-5H2",
-          "Style-5H2 | Sktest123 Wiki | Fandom powered by Wikia"
+          "Style-5H2 | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
           "/wiki/TestDisplayTitle",
-          "testing abc | Sktest123 Wiki | Fandom powered by Wikia"
+          "testing abc | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
           "/wiki/Category:Premium_Videos",
-          "Category:Premium Videos | Sktest123 Wiki | Fandom powered by Wikia"
+          "Category:Premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
           "/wiki/Category:Non-premium_Videos",
-          "Category:Non-premium Videos | Sktest123 Wiki | Fandom powered by Wikia"
+          "Category:Non-premium Videos | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "sktest123",
           "/wiki/Category:Premium",
-          "PremiumVideos | Sktest123 Wiki | Fandom powered by Wikia"
+          "PremiumVideos | Sktest123 Wiki | FANDOM powered by Wikia"
       },
       {
           "es.pokemon",
           "/wiki/WikiDex",
-          "WikiDex | Fandom powered by Wikia"
+          "WikiDex | FANDOM powered by Wikia"
       },
       {
           "es.pokemon",
           "/wiki/Lista_de_Pokémon",
-          "Lista de Pokémon | WikiDex | Fandom powered by Wikia"
+          "Lista de Pokémon | WikiDex | FANDOM powered by Wikia"
       },
       {
           "es.pokemon",
           "/wiki/Categoría:Regiones",
-          "Categoría:Regiones | WikiDex | Fandom powered by Wikia"
+          "Categoría:Regiones | WikiDex | FANDOM powered by Wikia"
       },
       {
           "starwars",
           "/wiki/Main_Page",
-          "Wookieepedia | Fandom powered by Wikia"
+          "Wookieepedia | FANDOM powered by Wikia"
       },
       {
           "starwars",
           "/wiki/Droid_starfighter",
-          "Droid starfighter | Wookieepedia | Fandom powered by Wikia"
+          "Droid starfighter | Wookieepedia | FANDOM powered by Wikia"
       },
       {
           "mediawiki119",
           "/d/f/203236/latest",
-          "Discussions | Mediawiki 1.19 test Wiki | Fandom powered by Wikia"
+          "Discussions | Mediawiki 1.19 test Wiki | FANDOM powered by Wikia"
       },
       {
           "mediawiki119",
           "/d/p/2706859396041803285",
-          "Discussions | Mediawiki 1.19 test Wiki | Fandom powered by Wikia"
+          "Discussions | Mediawiki 1.19 test Wiki | FANDOM powered by Wikia"
       },
       {
           "mediawiki119",
           "/d/u/27334045",
-          "Discussions | Mediawiki 1.19 test Wiki | Fandom powered by Wikia"
+          "Discussions | Mediawiki 1.19 test Wiki | FANDOM powered by Wikia"
       },
       {
           "dnd4",
           "/wiki/Dungeons_&_Dragons",
-          "Dungeons & Dragons | D&D4 Wiki | Fandom powered by Wikia"
+          "Dungeons & Dragons | D&D4 Wiki | FANDOM powered by Wikia"
       }
   };
 
