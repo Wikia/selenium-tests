@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import com.sun.tools.doclets.formats.html.markup.HtmlAttr;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -16,16 +15,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import javax.swing.text.html.HTML;
 import java.util.List;
+
 
 public class MessageWall extends WikiBasePageObject {
 
-  private static final String newMessageMenu =
+  private static final String NEW_MESSAGE_MENU =
           ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
-  private static final String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
-  private static final String closeButtonString = ".close-thread";
-  final By firstMessageWrapperBy =
-      By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  private static final String FIRST_MESSAGE_MENU = ".comments li:nth-child(1) .buttons ";
+  private static final String CLOSE_BUTTON_STRING = ".close-thread";
+  final By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
   final By replyButtonBy = By.cssSelector(".replyButton");
   private final By messageTitleBy = By.cssSelector(".msg-title");
   private final By messageBodyBy = By.cssSelector(".msg-body");
@@ -44,7 +44,7 @@ public class MessageWall extends WikiBasePageObject {
   private final By saveChangesButtonBy = By.cssSelector(".save-edit");
   private final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
   private final By replyBodyBy = By.cssSelector(".replyBody");
-  private final By closeButtonBy = By.cssSelector(firstMessageMenu + closeButtonString);
+  private final By closeButtonBy = By.cssSelector(FIRST_MESSAGE_MENU + CLOSE_BUTTON_STRING);
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
@@ -93,7 +93,7 @@ public class MessageWall extends WikiBasePageObject {
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
-    wait.forAttributeToContain(newWallMessageContainer, HtmlAttr.CLASS.toString(), "focused");
+    wait.forAttributeToContain(newWallMessageContainer, HTML.Attribute.CLASS.toString(), "focused");
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
@@ -107,10 +107,10 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void triggerEditMessageArea() {
-    setDisplayStyle(firstMessageMenu, "block");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(editButtonBy));
-    setDisplayStyle(firstMessageMenu, "none");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "none");
     PageObjectLogging.log("triggerEditMessageArea", "edit message area triggered", true);
   }
 
@@ -161,41 +161,41 @@ public class MessageWall extends WikiBasePageObject {
 
   public MessageWallCloseRemoveThreadPageObject clickRemoveThread() {
     refreshPage();
-    setDisplayStyle(newMessageMenu, "block");
+    setDisplayStyle(NEW_MESSAGE_MENU, "block");
     wait.forElementVisible(firstMessageWrapperBy);
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(removeButtonBy));
-    setDisplayStyle(newMessageMenu, "none");
+    setDisplayStyle(NEW_MESSAGE_MENU, "none");
     PageObjectLogging.log("clickRemoveThread", "remove thread button clicked", true);
     return new MessageWallCloseRemoveThreadPageObject(driver);
   }
 
   public MessageWallCloseRemoveThreadPageObject clickCloseThread() {
     refreshPage();
-    setDisplayStyle(newMessageMenu, "block");
+    setDisplayStyle(NEW_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     WebElement closeButton = driver.findElement(closeButtonBy);
     wait.forElementClickable(closeButton);
     jsActions.scrollElementIntoViewPort(closeButton);
     closeButton.click();
-    setDisplayStyle(newMessageMenu, "none");
+    setDisplayStyle(NEW_MESSAGE_MENU, "none");
     PageObjectLogging.log("clickCloseThread", "close thread button clicked", true);
     return new MessageWallCloseRemoveThreadPageObject(driver);
   }
 
   public MiniEditorComponentObject clickQuoteButton() {
-    setDisplayStyle(firstMessageMenu, "block");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(quoteButtonBy));
-    setDisplayStyle(firstMessageMenu, "none");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "none");
     PageObjectLogging.log("clickQuoteButton", "quote button clicked", true);
     return new MiniEditorComponentObject(driver);
   }
 
   public void clickReopenThread() {
-    setDisplayStyle(firstMessageMenu, "block");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(reopenButtonBy));
-    setDisplayStyle(firstMessageMenu, "none");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "none");
     PageObjectLogging.log("clickReopenThread", "reopen button clicked", true);
   }
 
@@ -207,7 +207,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickBoldButton() {
-    boolean state = boldButton.getAttribute(HtmlAttr.CLASS.toString()).contains("cke_on");
+    boolean state = boldButton.getAttribute(HTML.Attribute.CLASS.toString()).contains("cke_on");
     wait.forElementClickable(boldButton);
     scrollAndClick(boldButton);
     if (state) {
@@ -220,7 +220,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickItalicButton() {
-    boolean state = italicButton.getAttribute(HtmlAttr.CLASS.toString()).contains("cke_on");
+    boolean state = italicButton.getAttribute(HTML.Attribute.CLASS.toString()).contains("cke_on");
     wait.forElementClickable(boldButton);
     scrollAndClick(italicButton);
     if (state) {
@@ -261,10 +261,10 @@ public class MessageWall extends WikiBasePageObject {
 
   public void verifyThreadReopened() {
     wait.forElementPresent(closeButtonBy);
-    setDisplayStyle(firstMessageMenu, "block");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     wait.forElementPresent(closeButtonBy);
-    setDisplayStyle(firstMessageMenu, "none");
+    setDisplayStyle(FIRST_MESSAGE_MENU, "none");
     PageObjectLogging.log("verifyThreadReopened", "verifyed thread reopened", true);
   }
 
