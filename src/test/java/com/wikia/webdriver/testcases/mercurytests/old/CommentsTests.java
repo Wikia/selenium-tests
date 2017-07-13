@@ -216,7 +216,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage", invocationCount = 10)
+  @Test(groups = "mercury_comments_tapOnUsernameRedirectsToUserPage")
   public void mercury_comments_tapOnUsernameRedirectsToUserPage() {
     init();
 
@@ -235,7 +235,7 @@ public class CommentsTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly", invocationCount = 10)
+  @Test(groups = "mercury_comments_imagesAndVideosAreDisplayedCorrectly")
   public void mercury_comments_imagesAndVideosAreDisplayedCorrectly() {
     init();
 
