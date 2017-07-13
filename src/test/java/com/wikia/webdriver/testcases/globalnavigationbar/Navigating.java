@@ -25,7 +25,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickGamesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/games"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/topics/games"));
   }
 
   @Test(groups = {"moviesHubLinkClickOnEnCommunityOpensMoviesHub"})
@@ -34,7 +34,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickMoviesHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/movies"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/topics/movies"));
   }
 
   @Test(groups = {"tvHubLinkClickOnEnCommunityOpensTvHub"})
@@ -43,7 +43,7 @@ public class Navigating extends NewTestTemplate {
         .getGlobalNavigation()
         .clickTVHubLink();
 
-    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/tv"));
+    Assertion.assertEquals(driver.getCurrentUrl(), urlBuilder.getUrlForPage("fandom", "/topics/tv"));
   }
 
   @Test(groups = {"communityCentralLinkClickOnDeCommunityOpensDeCommunityCentral"})
