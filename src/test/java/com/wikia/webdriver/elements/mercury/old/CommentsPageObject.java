@@ -44,6 +44,8 @@ public class CommentsPageObject {
   @FindBy(css = "li.article-comment")
   private List<WebElement> allComments;
 
+  By firstCommentBy = By.cssSelector("ul.comments > li.article-comment:first-child");
+
   private Wait wait;
   private WebDriver driver;
   private JavascriptActions jsActions;
@@ -82,7 +84,7 @@ public class CommentsPageObject {
   }
 
   public void clickOnUsername(int index) {
-    wait.forElementVisible(commentsUsernames.get(index));
+    commentsUsernames.stream().forEach(e->wait.forElementClickable(e));
     commentsUsernames.get(index).click();
   }
 
@@ -175,6 +177,7 @@ public class CommentsPageObject {
 
   public boolean isMediaThumbnailInComment(String mediaType, int index) {
     WebElement mediaInComment;
+    allComments.stream().forEach(e -> wait.forElementClickable(e));
     if ("Video".equals(mediaType)) {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
     } else {
@@ -185,6 +188,7 @@ public class CommentsPageObject {
 
   public boolean isMediaLinkInComment(String mediaType, int index) throws WebDriverException {
     WebElement mediaInComment;
+    allComments.stream().forEach(e -> wait.forElementClickable(e));
     if ("Video".equals(mediaType)) {
       mediaInComment = allComments.get(index).findElement(By.cssSelector("figure.comment-video"));
     } else {
@@ -194,7 +198,7 @@ public class CommentsPageObject {
       throw new WebDriverException("Expected String but got null");
     }
     return mediaInComment.findElement(By.cssSelector("a")).getAttribute("href")
-        .contains("/wiki/File:");
+            .contains("/wiki/File:");
   }
 
   public void waitForCommentsToLoad() {
