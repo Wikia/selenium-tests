@@ -1,0 +1,54 @@
+{{SimpleInfobox
+|image1=File:Image010.jpg
+|caption1=Mysza
+|row1=Takie tam
+|row2=Ser
+}}
+
+==Paragraph==
+Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum.
+
+==Table==
+{| class="article-table"
+!
+!col 1
+!col 2
+!col 3
+|-
+|row 1
+|11
+|12
+|13
+|-
+|row 2
+|21
+|22
+|23
+|-
+|row 3
+|31
+|32
+|33
+|}
+
+==Gallery==
+<gallery position="left">
+Image010.jpg|GalleryCaption001
+Image009.jpg|caption + link http://google.com/
+Image008.jpg|http://google.com
+</gallery>
+
+==Linked Images==
+<gallery navigation="true">
+Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
+Image006.jpg|Long caption no link THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW|linktext=THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW
+Image005.jpg
+Image002.jpg
+Image001.jpg
+</gallery>
+
+==Single Image==
+[[File:Image010.jpg|thumb|left|link=https://www.facebook.com|Link to facebook.com]]
+
+==Single Video==
+[[File:Naruto_Manga_Sequel_Coming_In_2015_-_IGN_News|thumb|center]]
