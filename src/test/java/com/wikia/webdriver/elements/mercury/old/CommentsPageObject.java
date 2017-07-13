@@ -61,7 +61,7 @@ public class CommentsPageObject {
 
   public void clickCommentsHeader() {
     wait.forElementVisible(commentsHeader);
-    jsActions.scrollElementIntoViewPort(commentsHeader);
+    jsActions.scrollToElement(commentsHeader);
     commentsHeader.click();
   }
 
