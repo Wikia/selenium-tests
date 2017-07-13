@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -27,7 +27,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtf",
-      groups = "AdsBtfBlockingOasis"
+      groups = "_AdsBtfBlockingOasis"
   )
   @RelatedIssue(issueID = "ADEN-4344")
   public void adsAtfDelayBtfOasis(String wikiName, String article, boolean isWgVarOn)
@@ -57,7 +57,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "delayBtfPluto",
-      groups = "AdsBtfBlockingOasis"
+      groups = "_AdsBtfBlockingOasis"
   )
   public void adsAtfDelayBtfOasisPluto(String wikiName, String article, boolean isWgVarOn)
       throws InterruptedException {
@@ -67,7 +67,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
-      groups = "AdsBtfBlockingOasis"
+      groups = "_AdsBtfBlockingOasis"
   )
   public void adsAtfDisableBtfOasis(String wikiName, String article, boolean isWgVarOn) {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
@@ -98,7 +98,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtfPluto",
-      groups = "AdsBtfBlockingOasis"
+      groups = "_AdsBtfBlockingOasis"
   )
   public void adsAtfDisableBtfOasisPluto(String wikiName, String article, boolean isWgVarOn) {
     adsAtfDisableBtfOasis(wikiName, article, isWgVarOn);
@@ -111,7 +111,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtf",
-      groups = "AdsBtfBlockingOasis"
+      groups = "_AdsBtfBlockingOasis"
   )
   public void adsAtfOnTabletOasis(String wikiName, String article, boolean isWgVarOn) {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
@@ -130,7 +130,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtfExceptHighlyViewableSlots",
-      groups = "AdsBtfBlockingOasis"
+      groups = "AdsBtfBlockingOasis" // !!!!!!!!!!!!!!!!!!!!!
   )
   public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article,
                                                              boolean isWgVarOn) {
@@ -144,6 +144,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_SKIN));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_HIGH_IMPACT_2));
+    adsBaseObject.scrollToPosition(By.id(AdsContent.FLOATING_MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
 
     Assertion.assertNotEquals(
