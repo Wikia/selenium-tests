@@ -24,7 +24,7 @@ import java.util.List;
 
 @Test(groups = "Mercury_AllTagsWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 public class AllTagsTests extends NewTestTemplate {
 
   private static final String ARTICLE_NAME = "AllTagsWidgetMercury";

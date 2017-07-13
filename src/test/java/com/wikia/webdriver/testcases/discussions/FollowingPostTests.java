@@ -42,21 +42,21 @@ public class FollowingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonymousUserMobileFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotFollowPostOnPostsListPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostsListPage().open());
   }
 
   @Test(groups = "discussions-anonymousUserMobileFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotFollowPostOnPostDetailsPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
   @Test(groups = "discussions-anonymousUserMobileFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotFollowPostOnUserPostsPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new UserPostsPage().open(data.getAuthorId()));
   }
@@ -88,21 +88,21 @@ public class FollowingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanFollowPostOnPostsListPage() {
     assertThatPostCanBeFollowedOn(data -> new PostsListPage().open());
   }
 
   @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanFollowPostOnPostDetailsPage() {
     assertThatPostCanBeFollowedOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
   @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanFollowPostOnUserPostsPage() {
     assertThatPostCanBeFollowedOn(data -> new UserPostsPage().open(data.getAuthorId()));
   }
@@ -112,7 +112,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanUnfollowPostOnPostsListPage() {
     assertThatPostCanBeUnfollowedOn(data -> new PostsListPage().open());
   }
@@ -122,7 +122,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanUnfollowPostOnPostDetailsPage() {
     assertThatPostCanBeUnfollowedOn(data -> new PostDetailsPage().open(data.getId()));
   }
@@ -132,7 +132,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userMobileFollowingPost")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanUnfollowPostOnUserPostsPage() {
     assertThatPostCanBeUnfollowedOn(data -> new UserPostsPage().open(data.getAuthorId()));
   }
@@ -142,7 +142,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userMobileFollowingPost", enabled = false)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
@@ -213,7 +213,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userDesktopFollowingPost", enabled = false)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.NEXUS_5X)
   @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnDesktopCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
@@ -230,7 +230,7 @@ public class FollowingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorMobileFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanFollowPostOnReportedPostsPage() {
     createAndReportPostAsUserRemotely();
 
@@ -243,7 +243,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-discussionsAdministratorMobileFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
     final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.USER, driver).reportPost(data);

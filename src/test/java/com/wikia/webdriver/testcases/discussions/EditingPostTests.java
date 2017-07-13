@@ -48,7 +48,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_MOBILE_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
@@ -59,7 +59,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_MOBILE_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
@@ -69,7 +69,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_MOBILE_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotSeeThatPostWasEditedByAuthorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsStaffRemotely());
 
@@ -114,7 +114,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = DISCUSSIONS_ADMINISTRATOR_MOBILE_TEST_GROUP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 

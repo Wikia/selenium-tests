@@ -73,7 +73,7 @@ public class TestAdsTrackingPixels extends NewTestTemplate {
   )
   @InBrowser(
           browser = Browser.CHROME,
-          emulator = Emulator.GOOGLE_NEXUS_5
+          emulator = Emulator.NEXUS_5X
   )
   @DontRun(env = {"preview", "sandbox"})
   public void adsTrackingPixelSentAuthPage(String wiki, String page, String[] pixelUrls) {

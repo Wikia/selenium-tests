@@ -10,7 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsEvolveObject
 import org.testng.annotations.Test;
 
 @Test(groups = "AdsEvolveMercury")
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 public class TestAdsEvolveMercury extends TemplateNoFirstLoad {
 
   @Test(

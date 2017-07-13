@@ -149,14 +149,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
@@ -181,14 +181,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanChangeCategory() {
     changeCategoryMobile();
   }
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotEditCategory() {
     cannotEditCategoryMobile();
   }
@@ -213,7 +213,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanNotEditGeneralCategory() {
     CategoryPill.Data postCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -229,7 +229,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanAddCategory() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final String categoryName = createUniqueCategoryName();
@@ -250,7 +250,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanEditCategory() {
     CategoryPill.Data editableCategory = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -273,7 +273,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanNotAddMoreThanTenCategories() {
     deleteCategoriesMobile();
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MercuryWikis.DISCUSSIONS_MOBILE,
@@ -293,7 +293,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {MOBILE})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR, onWikia = MercuryWikis.DISCUSSIONS_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanRemoveCategory() {
     CategoryPill.Data data = setUp(MercuryWikis.DISCUSSIONS_MOBILE);
     final String temporaryCategoryName = createUniqueCategoryName();

@@ -40,7 +40,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-anonymousUserMobileLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -49,7 +49,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-anonymousUserMobileLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -58,7 +58,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-anonymousUserMobileLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonymousUserOnMobileCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -98,7 +98,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -107,7 +107,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -116,7 +116,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -156,7 +156,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
@@ -167,7 +167,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
@@ -214,7 +214,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsAdministratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
 
@@ -225,7 +225,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsAdministratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsAdministratorOnMobileCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
@@ -260,7 +260,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
 
@@ -271,7 +271,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileCanUnlockPostLockedByStaffOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByStaff();
 
@@ -282,7 +282,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
@@ -293,7 +293,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
     DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
@@ -361,7 +361,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsModeratorOnMobileCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
 
@@ -372,7 +372,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsModeratorOnMobileCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
 
@@ -382,7 +382,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsModeratorOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByStaff();
 
@@ -394,7 +394,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void discussionsModeratorOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     final PostDetailsPage page = openPageWithPostUnlockedByStaff();
     final String text = addReplyOnMobile(page);

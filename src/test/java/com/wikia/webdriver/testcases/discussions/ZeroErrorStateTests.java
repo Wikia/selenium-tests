@@ -86,7 +86,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
@@ -95,7 +95,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
@@ -104,7 +104,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void anonOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
@@ -113,7 +113,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void anonOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
@@ -122,7 +122,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
@@ -181,7 +181,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
@@ -190,7 +190,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
@@ -199,7 +199,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
@@ -208,7 +208,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
@@ -217,7 +217,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
@@ -226,7 +226,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+      emulator = Emulator.NEXUS_5X)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyFollowPage() {
     userSeesProperMessageWhenOpensEmptyFollowPage();
   }

@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 )
 @InBrowser(
     browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
+    emulator = Emulator.NEXUS_5X
 )
 public class ImageUploadTests extends NewTestTemplate {
 

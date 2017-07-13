@@ -50,7 +50,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotWriteNewPost() {
     userOnMobileMustBeLoggedInToUsePostCreator();
   }
@@ -84,7 +84,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorMobile();
@@ -93,21 +93,21 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostListPage() {
     assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void postWithWeirdCharactersIsDisplayedOnMobilePostDetailsPage() {
     assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
@@ -119,7 +119,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
     assertThatUserCanClickPostAndGoToPostDetailsPage();
   }

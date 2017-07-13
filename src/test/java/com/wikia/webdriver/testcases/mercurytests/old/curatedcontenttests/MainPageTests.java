@@ -22,7 +22,7 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePa
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_CuratedMainPage")
 @InBrowser(
-    emulator = Emulator.GOOGLE_NEXUS_5,
+    emulator = Emulator.NEXUS_5X,
     browser = Browser.CHROME
 )
 public class MainPageTests extends NewTestTemplate {

@@ -93,7 +93,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
+            emulator = Emulator.NEXUS_5X
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
@@ -115,7 +115,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
+            emulator = Emulator.NEXUS_5X
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
@@ -135,7 +135,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
+            emulator = Emulator.NEXUS_5X
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
@@ -155,7 +155,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
+            emulator = Emulator.NEXUS_5X
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
@@ -175,7 +175,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate{
     @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
+            emulator = Emulator.NEXUS_5X
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,

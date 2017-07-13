@@ -26,7 +26,7 @@ public class NavigatingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
