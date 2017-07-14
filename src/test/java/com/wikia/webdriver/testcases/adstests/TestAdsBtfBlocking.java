@@ -16,10 +16,10 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
-
   private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
+  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -135,6 +135,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
+    adsBaseObject.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), String.format("Ad is not loaded inside %s", AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
