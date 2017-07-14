@@ -1,11 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -15,43 +9,40 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import javax.swing.text.html.HTML;
+import java.util.List;
+
 
 public class MessageWall extends WikiBasePageObject {
 
-  private static final By focusedNewMessageFormBy = By.cssSelector("#wall-new-message.focused");
-
-  static final By firstMessageWrapperBy =
-      By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  static final By replyButtonBy = By.cssSelector(".replyButton");
-
-  private static final By messageTitleBy = By.cssSelector(".msg-title");
-  private static final By messageBodyBy = By.cssSelector(".msg-body");
-  private static final By imageBy = By.cssSelector(".thumbimage");
-  private static final By messageTextBoldBy = By.cssSelector("b");
-  private static final By messageTextItalicBy = By.cssSelector("i");
-  private static final By messageTextBy = By.cssSelector(".msg-body *");
-  private static final By messageLinkBy = By.cssSelector("a");
-  private static final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
-  private static final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
-  private static final By editButtonBy = By.cssSelector(".edit-message");
-  private static final By removeButtonBy = By.cssSelector(".remove-message");
-  private static final By reopenButtonBy = By.cssSelector(".reopen-thread");
-  private static final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
-  private static final By quoteMessageBy = By.cssSelector(".replies p");
-  private static final By saveChangesButtonBy = By.cssSelector(".save-edit");
-  private static final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  private static final By replyBodyBy = By.cssSelector(".replyBody");
-
   private static final String NEW_MESSAGE_MENU =
-      ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
+          ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private static final String FIRST_MESSAGE_MENU = ".comments li:nth-child(1) .buttons ";
   private static final String CLOSE_BUTTON_STRING = ".close-thread";
-
-  private static final By closeButtonBy = By.cssSelector(FIRST_MESSAGE_MENU + CLOSE_BUTTON_STRING);
-
-  @FindBy(id = "wall-new-message")
-  private WebElement newMessageForm;
-
+  final By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  final By replyButtonBy = By.cssSelector(".replyButton");
+  private final By messageTitleBy = By.cssSelector(".msg-title");
+  private final By messageBodyBy = By.cssSelector(".msg-body");
+  private final By imageBy = By.cssSelector(".thumbimage");
+  private final By messageTextBoldBy = By.cssSelector("b");
+  private final By messageTextItalicBy = By.cssSelector("i");
+  private final By messageTextBy = By.cssSelector(".msg-body *");
+  private final By messageLinkBy = By.cssSelector("a");
+  private final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
+  private final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
+  private final By editButtonBy = By.cssSelector(".edit-message");
+  private final By removeButtonBy = By.cssSelector(".remove-message");
+  private final By reopenButtonBy = By.cssSelector(".reopen-thread");
+  private final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
+  private final By quoteMessageBy = By.cssSelector(".replies p");
+  private final By saveChangesButtonBy = By.cssSelector(".save-edit");
+  private final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
+  private final By replyBodyBy = By.cssSelector(".replyBody");
+  private final By closeButtonBy = By.cssSelector(FIRST_MESSAGE_MENU + CLOSE_BUTTON_STRING);
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
@@ -64,6 +55,8 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement linkButton;
   @FindBy(css = "#cke_contents_WallMessageBody > textarea")
   private WebElement sourceModeInputField;
+  @FindBy(css = "#wall-new-message")
+  private WebElement newWallMessageContainer;
   @FindBy(css = "#WallMessageBody")
   private WebElement messageMainBody;
   @FindBy(css = "#WallMessageTitle")
@@ -90,13 +83,12 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    builder.moveToElement(newMessageForm);
+    builder.moveToElement(newWallMessageContainer);
 
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
-
-    wait.forElementPresent(focusedNewMessageFormBy);
+    wait.forAttributeToContain(newWallMessageContainer, HTML.Attribute.CLASS.toString(), "focused");
     PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
     return new MiniEditorComponentObject(driver);
   }
@@ -210,7 +202,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickBoldButton() {
-    boolean state = boldButton.getAttribute("class").contains("cke_on");
+    boolean state = boldButton.getAttribute(HTML.Attribute.CLASS.toString()).contains("cke_on");
     wait.forElementClickable(boldButton);
     scrollAndClick(boldButton);
     if (state) {
@@ -223,7 +215,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public void clickItalicButton() {
-    boolean state = italicButton.getAttribute("class").contains("cke_on");
+    boolean state = italicButton.getAttribute(HTML.Attribute.CLASS.toString()).contains("cke_on");
     wait.forElementClickable(boldButton);
     scrollAndClick(italicButton);
     if (state) {
