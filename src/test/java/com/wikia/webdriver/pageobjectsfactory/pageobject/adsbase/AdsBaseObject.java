@@ -698,14 +698,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);
   }
 
-  public void simulateScrollingToElement(By selector, int jumpSize, Duration duration) {
+  public void simulateScrollingToElement(By selector, int jumpSize, Duration duration, By elementToCheck) {
     JavascriptActions jsActions = new JavascriptActions(driver);
 
     final WebElement element = driver.findElement(selector);
     final boolean scrollingToBottom = element.getLocation().getY() > driver.manage().window().getPosition().getY();
     int jumpSizeWithDirection = scrollingToBottom ? jumpSize : -jumpSize;
 
-    while (!jsActions.isElementInViewPort(element)) {
+    while (!CommonExpectedConditions.elementInViewPort(driver.findElement(elementToCheck)).apply(driver)) {
       jsActions.scrollBy(0, jumpSizeWithDirection);
       wait.forX(duration);
     }
@@ -713,8 +713,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector.toString(), true);
   }
 
-  public void simulateScrollingToElement(By selector) {
-    simulateScrollingToElement(selector, 300, Duration.ofSeconds(1));
+  public void simulateScrollingToElement(By selector, By elementToCheck) {
+    simulateScrollingToElement(selector, 300, Duration.ofSeconds(1), elementToCheck);
   }
 
   public void scrollToPosition(String selector) {
