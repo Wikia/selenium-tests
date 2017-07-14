@@ -9,14 +9,13 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-public class TestAdsBtfBlocking extends NewTestTemplate {
-
+public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   private static final Dimension DESKTOP_PAGE_SIZE = new Dimension(1366, 768);
   private static final Dimension TABLET_PAGE_SIZE = new Dimension(850, 600);
   private static final Dimension MOBILE_SIZE = new Dimension(414, 736);
@@ -130,8 +129,7 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
       dataProvider = "disableBtfExceptHighlyViewableSlots",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article,
-                                                             boolean isWgVarOn) {
+  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article, boolean isWgVarOn) {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
 
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
@@ -143,17 +141,13 @@ public class TestAdsBtfBlocking extends NewTestTemplate {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_SKIN));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_HIGH_IMPACT_2));
+
+    adsBaseObject.simulateScrollingToElement(By.id("WikiaFooter"), By.id(AdsContent.FLOATING_MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
 
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn,
-        AdsContent.PREFOOTER_LEFT);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn,
-        AdsContent.PREFOOTER_RIGHT);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn,
-        AdsContent.LEFT_SKYSCRAPPER_2);
+    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn, AdsContent.PREFOOTER_LEFT);
+    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn, AdsContent.PREFOOTER_RIGHT);
+    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn, AdsContent.LEFT_SKYSCRAPPER_2);
   }
 
   @Execute(mockAds = "true")

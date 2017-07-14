@@ -76,7 +76,7 @@ public class JavascriptActions {
     js.executeScript("$(arguments[0]).mouseenter()", element);
   }
 
-  private boolean isElementInViewPort(WebElement element) {
+  public boolean isElementInViewPort(WebElement element) {
     return (Boolean) js.executeScript(
         "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
         + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
