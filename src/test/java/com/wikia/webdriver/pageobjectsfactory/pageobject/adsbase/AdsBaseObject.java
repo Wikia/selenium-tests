@@ -703,10 +703,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     final WebElement element = driver.findElement(selector);
     final boolean scrollingToBottom = element.getLocation().getY() > driver.manage().window().getPosition().getY();
-    jumpSize = scrollingToBottom ? jumpSize : -jumpSize;
+    int jumpSizeWithDirection = scrollingToBottom ? jumpSize : -jumpSize;
 
     while (!jsActions.isElementInViewPort(element)) {
-      jsActions.scrollBy(0, jumpSize);
+      jsActions.scrollBy(0, jumpSizeWithDirection);
       wait.forX(duration);
     }
 

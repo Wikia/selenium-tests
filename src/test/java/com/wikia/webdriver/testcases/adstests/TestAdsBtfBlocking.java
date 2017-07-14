@@ -127,7 +127,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "disableBtfExceptHighlyViewableSlots",
-      groups = "AdsBtfBlockingOasis" // !!!!!!!!!!!!!!!!!!!!!
+      groups = "AdsBtfBlockingOasis"
   )
   public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article, boolean isWgVarOn) {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
