@@ -519,9 +519,13 @@ public class Wait {
    * @param time - in milliseconds
    */
   public void forXMilliseconds(int time) {
-    PageObjectLogging.logInfo("Wait for " + time + " ms");
+    forX(Duration.ofMillis(time));
+  }
+
+  public void forX(Duration duration) {
+    PageObjectLogging.logInfo("Wait for " + duration.toMillis() + " ms");
     try {
-      Thread.sleep(time);
+      Thread.sleep(duration.toMillis());
     } catch (InterruptedException e) {
       PageObjectLogging.log("Wait.forXMilliseconds", e, false);
     }

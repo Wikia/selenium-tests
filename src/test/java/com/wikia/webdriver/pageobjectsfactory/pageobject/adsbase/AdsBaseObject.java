@@ -1,30 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkinHelper;
-
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
 import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -702,6 +696,25 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToPosition(By element) {
     jsActions.scrollToSpecificElement(driver.findElement(element));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);
+  }
+
+  public void simulateScrollingToElement(By selector, int jumpSize, Duration duration) {
+    JavascriptActions jsActions = new JavascriptActions(driver);
+
+    final WebElement element = driver.findElement(selector);
+    final boolean scrollingToBottom = element.getLocation().getY() > driver.manage().window().getPosition().getY();
+    jumpSize = scrollingToBottom ? jumpSize : -jumpSize;
+
+    while (!jsActions.isElementInViewPort(element)) {
+      jsActions.scrollBy(0, jumpSize);
+      wait.forX(duration);
+    }
+
+    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector.toString(), true);
+  }
+
+  public void simulateScrollingToElement(By selector) {
+    simulateScrollingToElement(selector, 300, Duration.ofSeconds(1));
   }
 
   public void scrollToPosition(String selector) {
