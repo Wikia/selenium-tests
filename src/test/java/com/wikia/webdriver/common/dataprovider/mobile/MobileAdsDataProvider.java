@@ -352,7 +352,7 @@ public class MobileAdsDataProvider {
         {
             "overlordmaruyama",
             "Blood_of_Jormungandr",
-            "wka.ent/_overlordmaruyama//article",
+            "wka.ent/_not_a_top1k_wiki//article",
             "MOBILE_TOP_LEADERBOARD",
             Arrays.asList(
                 "\"s0\":\"ent\"",
@@ -470,9 +470,9 @@ public class MobileAdsDataProvider {
   @DataProvider
   public static Object[][] testAdsHopPostMessage() {
     return new Object[][]{
-        {"project43", "SyntheticTests/AdType/1xHop", "DirectGptMobile", "mobile", "\"source\":\"mobile/LB\""},
-        {"project43", "SyntheticTests/AdType/2xHop", "RemnantGptMobile", "mobile_remnant", "\"source\":\"mobile_remnant/LB\""},
-        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "DirectGptMobile", "mobile", "\"test-marker\":\"42\""}
+        {"project43", "SyntheticTests/AdType/1xHop", "DirectGptMobile", "\"source\":\"mobile/LB\""},
+        {"project43", "SyntheticTests/AdType/2xHop", "RemnantGptMobile", "\"source\":\"mobile_remnant/LB\""},
+        {"project43", "SyntheticTests/AdType/Async/Hop/ExtraMarker", "DirectGptMobile", "\"test-marker\":\"42\""}
     };
   }
 

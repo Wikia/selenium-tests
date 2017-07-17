@@ -2,9 +2,12 @@ package com.wikia.webdriver.testcases.mercurytests.old;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -29,6 +32,13 @@ public class ArticlePageTests extends NewTestTemplate {
   private Navigate navigate;
   private Loading loading;
 
+  private static final String MAIN_PAGE_CONTENT =
+          ContentLoader.loadWikiTextContent("Mercury_MainPage");
+  private static final String LINKED_IMAGES_CONTENT =
+          ContentLoader.loadWikiTextContent("Mercury_LinkedImages");
+  private static final String GALLERY_CONTENT =
+          ContentLoader.loadWikiTextContent("Mercury_Gallery");
+
   private void init() {
     this.topBar = new TopBar();
     this.navigation = new Navigation(driver);
@@ -38,97 +48,54 @@ public class ArticlePageTests extends NewTestTemplate {
 
   @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
   public void mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible() {
+    new ArticleContent().push(MAIN_PAGE_CONTENT, "Main_Page");
+
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
+    navigate.toPageByPath("/wiki/Main_Page");
 
-    boolean result = articlePage.isWikiaLogoVisible();
-    PageObjectLogging.log(
-        "Wikia logo",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isSearchButtonVisible();
-    PageObjectLogging.log(
-        "Search button",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isTopContributorsSectionVisible();
-    PageObjectLogging.log(
-        "Top contributors section",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isTopContributorsThumbVisible(0);
-    PageObjectLogging.log(
-        "Top contributors thumb",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isFooterVisible();
-    PageObjectLogging.log(
-        "Global footer",
-        "is visible",
-        "is not visible",
-        result
-    );
-
-    result = articlePage.isFooterLogoVisible();
-    PageObjectLogging.log(
-        "Global footer logo",
-        "is visible",
-        "is not visible",
-        result
-    );
+    Assertion.assertTrue(articlePage.isWikiaLogoVisible());
+    Assertion.assertTrue(articlePage.isSearchButtonVisible());
+    Assertion.assertTrue(articlePage.isTopContributorsSectionVisible());
+    Assertion.assertTrue(articlePage.isTopContributorsThumbVisible(0));
+    Assertion.assertTrue(articlePage.isFooterVisible());
+    Assertion.assertTrue(articlePage.isFooterLogoVisible());
   }
 
   @Test(groups = "mercury_article_linksInTopContributorsSectionRedirectsToUserPage")
   public void mercury_article_linksInTopContributorsSectionRedirectsToUserPage() {
+    new ArticleContent().push(MAIN_PAGE_CONTENT, "Main_Page");
+
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage(MercurySubpages.MAIN_PAGE);
+    navigate.toPageByPath("/wiki/Main_Page");
 
     articlePage.clickTopContributor(0);
 
-    boolean result = articlePage.isUrlContainingUserPage();
-    PageObjectLogging.log(
-        "Url",
-        "match pattern /wiki/User:",
-        "does not match pattern /wiki/User:",
-        result
-    );
+    Assertion.assertTrue(articlePage.isUrlContainingUserPage());
   }
 
   @Test(groups = "mercury_article_linkedImagesRedirectToCorrespondingUrl")
   public void mercury_article_linkedImagesRedirectToCorrespondingUrl() {
+    new ArticleContent().push(LINKED_IMAGES_CONTENT, "LinkedImages");
+    new ArticleContent().push(GALLERY_CONTENT, "Gallery");
+
     init();
     ArticlePageObject articlePage = new ArticlePageObject(driver);
-    navigate.toPage(MercurySubpages.LINKED_IMAGES);
+    navigate.toPageByPath("/wiki/LinkedImages");
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
     loading.handleAsyncPageReload();
 
-    boolean result = !driver.getCurrentUrl().equals(oldUrl);
-    PageObjectLogging.log(
-        "Redirection",
-        "works",
-        "does not work",
-        result
-    );
+    Assertion.assertFalse(driver.getCurrentUrl().equals(oldUrl));
   }
 
   @Test(groups = "mercury_article_navigateToArticlesWithColonAndQuestionMark")
   public void mercury_article_navigateToArticlesWithColonAndQuestionMark() {
+    new ArticleContent().push("Article about colon [[Question?mark?question]]", "Colon:colon:colon");
+    new ArticleContent().push("Article about question mark [[Colon:colon:colon]]", "Question?mark?question");
+
     init();
     ArticlePageObject article = new ArticlePageObject(driver);
 
@@ -140,42 +107,15 @@ public class ArticlePageTests extends NewTestTemplate {
         "Accessing article directly through URL"
     );
 
-    navigate.toPage(encodedColonUrl);
+    navigate.toPageByPath(encodedColonUrl);
 
-    boolean result = driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
-        "URL for colon",
-        "is encoded",
-        "is not encoded",
-        result
-    );
+    Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
-    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for colon",
-        "is correct",
-        "is not correct",
-        result
-    );
+    navigate.toPageByPath(encodedQuestionMarkUrl);
 
-    navigate.toPage(encodedQuestionMarkUrl);
-
-    result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
-        "URL for question mark",
-        "is encoded",
-        "is not encoded",
-        result
-    );
-
-    result = MercurySubpages.QUESTION_MARK.toLowerCase()
-        .contains(article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for question mark",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     PageObjectLogging.logWarning(
         "Info",
@@ -185,41 +125,14 @@ public class ArticlePageTests extends NewTestTemplate {
     article.clickOnAnchorInContent(0);
     loading.handleAsyncPageReload();
 
-    result = !driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
-        "URL for colon",
-        "is not encoded",
-        "is encoded",
-        result
-    );
-
-    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for colon",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     article.clickOnAnchorInContent(0);
     loading.handleAsyncPageReload();
 
-    result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
-        "URL for question mark",
-        "is encoded",
-        "is not encoded",
-        result
-    );
-
-    result = MercurySubpages.QUESTION_MARK.toLowerCase().contains(
-        article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for question mark",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     PageObjectLogging.logWarning("Info", "Accessing article through link in navigation side");
 
@@ -227,80 +140,26 @@ public class ArticlePageTests extends NewTestTemplate {
     navigation.openSubMenu(3);
     navigation.openPageLink(5);
 
-    result = !driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
-        "URL for colon",
-        "is not encoded",
-        "is encoded",
-        result
-    );
-
-    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for colon",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     topBar.openNavigation();
     navigation.openSubMenu(3);
     navigation.openPageLink(4);
 
-    result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
-        "URL for question mark",
-        "is encoded",
-        "is not encoded",
-        result
-    );
-
-    result = MercurySubpages.QUESTION_MARK.toLowerCase().contains(
-        article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for question mark",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     PageObjectLogging.logWarning("Info", "Accessing article through link in search result");
 
     topBar.openSearch().navigateToPage(MercurySubpages.COLON.substring(6));
 
-    result = driver.getCurrentUrl().contains(encodedColonUrl);
-    PageObjectLogging.log(
-        "URL for colon",
-        "is encoded",
-        "is not encoded",
-        result
-    );
-
-    result = MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for colon",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertTrue(driver.getCurrentUrl().contains(encodedColonUrl));
+    Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     topBar.openSearch().navigateToPage(MercurySubpages.QUESTION_MARK.substring(6));
 
-    result = driver.getCurrentUrl().contains(encodedQuestionMarkUrl);
-    PageObjectLogging.log(
-        "URL for question mark",
-        "is encoded",
-        "is not encoded",
-        result
-    );
-
-    result = MercurySubpages.QUESTION_MARK.toLowerCase().contains(
-        article.getArticleTitle().toLowerCase());
-    PageObjectLogging.log(
-        "Article title for question mark",
-        "is correct",
-        "is not correct",
-        result
-    );
+    Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
+    Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
   }
 }

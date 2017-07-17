@@ -1,0 +1,46 @@
+[[File:Red.jpg|left|thumb|220x220px|link=Gallery]]
+
+Linked single images testing #1
+
+[[File:Image009.jpg|thumb|left|link=Gallery|Link to article]]
+
+Linked single images testing #2
+
+[[File:Image010.jpg|thumb|left|link=https://www.facebook.com|Link to external site]]
+
+Linked single images testing #3
+
+[[File:Image009.jpg|thumb|left|link=w:c:Glee:QAWebdriverCaption1|Link to article]]
+
+Linked slideshow images
+
+<gallery type="slideshow" navigation="true">
+Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
+Image006.jpg|Long caption no link THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW|linktext=THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW
+Image005.jpg
+Image002.jpg|bla bla
+Image001.jpg
+</gallery>
+
+<gallery type="slideshow" navigation="true">
+Image010.jpg|Linked image long caption|link=https://www.facebook.com/|linktext=This should be clickable and redirecting user to facebook
+Image006.jpg|Long caption no link THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW|linktext=THIS IS TESTING A LONG CAPTION WITHOUT ANY LINK IN A SLIDESHOW
+Image005.jpg
+Image002.jpg
+Image001.jpg
+</gallery>
+
+<gallery type="slider">
+Image006.jpg|LONG CAPTION LINKED LONG CAPTION LINKED LONG CAPTI|link=https://www.facebook.com/|linktext=WHERE IS THIS APPEARING?
+Image005.jpg|LONG CAPTION LINKED|link=Non existent article|linktext=WHERE DOES THIS APPEAR AGAIN?
+Image004.jpg
+</gallery>
+
+No  Linked Images
+
+<gallery>
+Image010.jpg
+Image009.jpg
+Image006.jpg
+Image005.jpg
+</gallery>

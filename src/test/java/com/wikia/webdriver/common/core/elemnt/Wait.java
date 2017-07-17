@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -25,17 +26,20 @@ public class Wait {
    */
 
   private static final int DEFAULT_TIMEOUT = 15;
+  private static final int DEFAULT_SLEEP = 5000;
   private static final String INIT_MESSAGE = "INIT ELEMENT";
   private static final String INIT_ERROR_MESSAGE = "PROBLEM WITH ELEMENT INIT";
   private static final String ELEMENT_PRESENT_MESSAGE = "ELEMENT PRESENT";
   private static final String ELEMENT_PRESENT_ERROR_FORMAT = "PROBLEM WITH FINDING ELEMENT %s";
 
   private WebDriverWait wait;
+  private WebDriverWait sleepingWait;
   private WebDriver driver;
 
   public Wait(WebDriver webDriver) {
     this.driver = webDriver;
     this.wait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT);
+    this.sleepingWait = new WebDriverWait(webDriver, DEFAULT_TIMEOUT, DEFAULT_SLEEP);
   }
 
   /**
@@ -90,7 +94,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -109,7 +113,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       if (SelectorStack.isContextSet()) {
@@ -127,7 +131,7 @@ public class Wait {
     try {
       elements.get(index).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     try {
       SelectorStack.contextRead();
@@ -173,7 +177,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     if (SelectorStack.isContextSet()) {
       SelectorStack.contextRead();
@@ -183,18 +187,26 @@ public class Wait {
     }
   }
 
-  public WebElement forElementVisible(WebElement element, int timeout, int polling) {
+  public WebElement forElementVisible(WebElement element, int timeoutSec, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(driver, timeout, polling).until(ExpectedConditions
+      return new WebDriverWait(driver, timeoutSec, polling).until(ExpectedConditions
                                                                    .visibilityOf(element));
     } finally {
       restoreDeaultImplicitWait();
     }
   }
 
-  public WebElement forElementVisible(WebElement element, int timeout) {
-    return forElementVisible(element, timeout, 500);
+  public WebElement forElementVisible(WebElement element, int timeoutSec) {
+    return forElementVisible(element, timeoutSec, 500);
+  }
+
+  public WebElement forElementVisible(By selector, int timeoutSec) {
+    return forElementVisible(selector, timeoutSec, 500);
+  }
+
+  public WebElement forElementVisible(By selector, Duration duration) {
+    return forElementVisible(selector, (int) duration.getSeconds(), 500);
   }
 
   /**
@@ -209,14 +221,22 @@ public class Wait {
     }
   }
 
-  public WebElement forElementVisible(By by, int timeout, int polling) {
+  /**
+   * @deprecated use method with Duration object except int
+   */
+  @Deprecated
+  public WebElement forElementVisible(By by, int timeoutSec, int polling) {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
-      return new WebDriverWait(driver, timeout, polling).until(
+      return new WebDriverWait(driver, timeoutSec, polling).until(
           ExpectedConditions.visibilityOfElementLocated(by));
     } finally {
       restoreDeaultImplicitWait();
     }
+  }
+
+  public WebElement forElementVisible(By by, Duration duration, int polling) {
+    return forElementVisible(by, (int) duration.getSeconds(), polling);
   }
 
   /**
@@ -297,7 +317,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -354,7 +374,7 @@ public class Wait {
     try {
       element.getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -373,7 +393,7 @@ public class Wait {
     try {
       elements.get(0).getTagName();
     } catch (WebDriverException e) {
-      PageObjectLogging.log(INIT_MESSAGE, INIT_ERROR_MESSAGE, true);
+      PageObjectLogging.logInfo(INIT_MESSAGE, INIT_ERROR_MESSAGE);
     }
     changeImplicitWait(0, TimeUnit.SECONDS);
     try {
@@ -383,6 +403,24 @@ public class Wait {
       } else {
         return forTextInElement(SelectorStack.read(), index, text);
       }
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElementAfterRefresh(WebElement element, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return wait.until(CommonExpectedConditions.textToBePresentInElementAfterRefresh(element, text));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  public boolean forTextInElementAfterRefresh(By by, String text) {
+    changeImplicitWait(0, TimeUnit.SECONDS);
+    try {
+      return sleepingWait.until(CommonExpectedConditions.textToBePresentInElementAfterRefresh(by, text));
     } finally {
       restoreDeaultImplicitWait();
     }
@@ -481,9 +519,13 @@ public class Wait {
    * @param time - in milliseconds
    */
   public void forXMilliseconds(int time) {
-    PageObjectLogging.logInfo("Wait for " + time + " ms");
+    forX(Duration.ofMillis(time));
+  }
+
+  public void forX(Duration duration) {
+    PageObjectLogging.logInfo("Wait for " + duration.toMillis() + " ms");
     try {
-      Thread.sleep(time);
+      Thread.sleep(duration.toMillis());
     } catch (InterruptedException e) {
       PageObjectLogging.log("Wait.forXMilliseconds", e, false);
     }

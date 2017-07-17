@@ -1,125 +1,124 @@
 package com.wikia.webdriver.testcases.blogtests;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
+import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.dataprovider.ArticleDataProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
-import org.testng.annotations.Test;
-import java.util.List;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
-
+@Test(groups = "BlogTests")
 public class BlogTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
+  private static final String USER_BLOG_PATH_FORMAT = "User_blog:%s/%s";
 
-  @Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"})
-  public void BlogTests_001_addFromProfile() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userName4, credentials.password4, wikiURL);
-    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + base.getTimeStamp();
-    String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
-    UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
+  @Execute(asUser = User.BLOGS)
+  public void UserCanAddBlogFromProfilePage() {
+    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
+
+    UserProfilePage userProfile = new UserProfilePage().open(User.BLOGS.getUserName());
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
     visualEditMode.addContent(blogContent);
-    BlogPageObject blogPage = visualEditMode.submitBlog();
-    blogPage.verifyBlogTitle(blogTitle);
+    BlogPage blogPage = visualEditMode.submitBlog();
+    blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
 
-  @Test(
-      dataProviderClass = ArticleDataProvider.class,
-      dataProvider = "articleTitles",
-      groups = {"BlogTests_002", "BlogTests"})
-  @Execute(asUser = User.USER)
-  public void BlogTests_002_addByUrl(String blogTitle) {
-    WikiBasePageObject base = new WikiBasePageObject();
-    String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
-    String randomBlogTitle = blogTitle + base.getTimeStamp();
-    SpecialCreatePage createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
+  @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles")
+  @Execute(asUser = User.BLOGS)
+  public void UserCanCreateBlogsWithSpecialCharacters (String blogTitle) {
+    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
+    String randomBlogTitle = blogTitle + DateTime.now().getMillis();
+    SpecialCreatePage createBlogPage = new SpecialCreatePage().open();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(randomBlogTitle);
     visualEditMode.addContent(blogContent);
-    BlogPageObject blogPage = visualEditMode.submitBlog();
-    blogPage.verifyBlogTitle(randomBlogTitle);
+    BlogPage blogPage = visualEditMode.submitBlog();
+    blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
 
-  @Test(groups = {"BlogTests_003", "BlogTests"})
-  @Execute(asUser = User.USER)
-  public void BlogTests_003_editFromProfile() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
-    UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
-    userProfile.clickOnBlogTab();
-    BlogPageObject blogPage = userProfile.openFirstPost();
-    String blogTitle = blogPage.getBlogName();
+  @Execute(asUser = User.BLOGS)
+  public void UserCanEditBlogPost() {
+    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
+    new ArticleContent(User.BLOGS).push(blogContent,
+        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
+
+    BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
     visualEditMode.addContent(blogContent);
     visualEditMode.submitArticle();
-    blogPage.verifyBlogTitle(blogTitle);
+    blogPage.getBlogTitle();
     blogPage.verifyContent(blogContent);
   }
 
-  @Test(groups = {"BlogTests_004", "BlogTests"})
-  public void BlogTests_004_deleteUndelete() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
-    userProfile.clickOnBlogTab();
-    BlogPageObject blogPage = userProfile.openFirstPost();
-    String blogTitle = blogPage.getBlogName();
+  @Execute(asUser = User.STAFF_FORUM)
+  @RelatedIssue(issueID = "SUS-2259", comment = "Feature is broken until issue is resolved")
+  public void StaffCanDeleteAndUndeleteUsersBlogPost() {
+    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
+    new ArticleContent(User.BLOGS).push(blogContent,
+        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
+
+    BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     DeletePageObject deletePage = blogPage.deleteUsingDropdown();
     deletePage.submitDeletion();
 
-    List<Notification> confirmNotifications = base.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
-    SpecialRestorePageObject restore = base.getNotifications(NotificationType.CONFIRM)
-            .stream().findFirst().get().undelete();
+    List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        DeletePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    SpecialRestorePageObject restore =
+        blogPage.getNotifications(NotificationType.CONFIRM).stream().findFirst().get().undelete();
 
     restore.giveReason(blogPage.getTimeStamp());
     restore.restorePage();
 
     confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        SpecialRestorePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        SpecialRestorePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
 
-    blogPage.verifyBlogTitle(blogTitle);
+    blogPage.getBlogTitle();
   }
 
-  @Test(groups = {"BlogTests_005", "BlogTests"})
-  public void BlogTests_005_move() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.loginAs(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-    String blogTitleMove = PageContent.BLOG_POST_NAME_PREFIX + base.getTimeStamp();
-    UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
-    userProfile.clickOnBlogTab();
-    BlogPageObject blogPage = userProfile.openFirstPost();
+  @Execute(asUser = User.STAFF_FORUM)
+  public void StaffCanMoveUserBlogPosts() {
+    String blogTitleMove =
+        "Renamed - " + PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
+    String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
+    new ArticleContent(User.BLOGS).push(blogContent,
+        String.format(USER_BLOG_PATH_FORMAT, User.BLOGS.getUserName(), blogTitle));
+
+    BlogPage blogPage = new BlogPage().open(User.BLOGS.getUserName(), blogTitle);
     RenamePageObject renamePage = blogPage.renameUsingDropdown();
-    renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove, true);
-    blogPage.verifyBlogTitle(blogTitleMove);
+    renamePage.rename(User.STAFF_FORUM.getUserName() + "/" + blogTitleMove, true);
+    blogPage.getBlogTitle();
 
     List<Notification> confirmNotifications = blogPage.getNotifications(NotificationType.CONFIRM);
-    Assertion.assertEquals(confirmNotifications.size(),1,
-            RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
+    Assertion.assertEquals(confirmNotifications.size(), 1,
+        RenamePageObject.AssertionMessages.INVALID_NUMBER_OF_CONFIRMING_NOTIFICATIONS);
     Assertion.assertTrue(confirmNotifications.stream().findFirst().get().isVisible(),
-                         RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
+        RenamePageObject.AssertionMessages.BANNER_NOTIFICATION_NOT_VISIBLE);
   }
 }

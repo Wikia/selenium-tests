@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class SpecialVideosPageObject extends SpecialPageObject {
 
   private static final String LONG_TITLE_SUFFIX = " ...";
-  @FindBy(css = ".WikiaPageHeader h1")
+  @FindBy(css = ".page-header__title")
   private WebElement h1Header;
-  @FindBy(css = "a.button.addVideo")
+  @FindBy(css = "a.addVideo")
   private WebElement addVideo;
   @FindBy(css = ".special-videos-grid li:nth-child(1)")
   private WebElement newestVideo;
@@ -65,7 +65,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
     getUrl(wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + videoName
         + "?action=unwatch");
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public VetAddVideoComponentObject clickAddAVideo() {
@@ -77,7 +77,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   public List<VideoTile> getVideoTiles(int numberOfTiles){
     wait.forElementPresent(By.cssSelector(NEWEST_VIDEO_CSS));
     List<VideoTile> videoTileList = new ArrayList<>();
-    List<WebElement> subList = videoTileElements.subList(0,numberOfTiles);
+    //numberOfTilesToFetch set to max number of possible elements to fetch
+    int numberOfTilesToFetch = numberOfTiles>videoTileElements.size()?videoTileElements.size():numberOfTiles;
+    List<WebElement> subList = videoTileElements.subList(0,numberOfTilesToFetch);
     for (WebElement videoTileElement : subList){
       VideoTile notification = new VideoTile(videoTileElement);
       videoTileList.add(notification);
@@ -108,9 +110,11 @@ public class SpecialVideosPageObject extends SpecialPageObject {
   }
 
   public void deleteNewestVideo() {
+    String videoTitle = getNewestVideoTitle();
     newestVideoDeleteIcon.click();
     wait.forElementVisible(deleteConfirmButton);
     deleteConfirmButton.click();
+    PageObjectLogging.log("Delete video", "Deleted video with title [" + videoTitle + "]", true);
   }
 
   public boolean isNewVideoAdded() {

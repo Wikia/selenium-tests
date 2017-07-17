@@ -1,90 +1,92 @@
 package com.wikia.webdriver.testcases.forumtests;
 
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
-import org.testng.annotations.Test;
 
 @Test(groups = {"ForumBoardTests", "Forum"})
+@Execute(onWikia = "sustainingtest")
 public class ForumBoardTests extends NewTestTemplate {
 
   @Test(groups = {"ForumBoardTests_001", "Smoke3"})
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.SUS_STAFF2)
   public void staffUserCanStartDiscussionOnForum() {
-    ForumPage forumMainPage = new ForumPage();
-    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
-    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, DateTime.now().getMillis());
+    String message = String.format(PageContent.FORUM_MESSAGE, DateTime.now().getMillis());
 
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.open(forumBoard.createNew(User.SUS_STAFF2));
+
     ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
     forumThread.verifyDiscussionTitleAndMessage(title, message);
   }
 
   @Test(groups = {"ForumBoardTests_002"})
-  @Execute(asUser = User.STAFF)
   public void anonymousUserCanStartDiscussionWithoutTitleOnForum() {
-    ForumPage forumMainPage = new ForumPage();
-    String message = String.format(PageContent.FORUM_MESSAGE, forumMainPage.getTimeStamp());
+    String message = String.format(PageContent.FORUM_MESSAGE, DateTime.now().getMillis());
 
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
     ForumThreadPageObject forumThread = forumBoard.startDiscussionWithoutTitle(message);
     // "Message from" default title appears after posting message without title
     forumThread.verifyDiscussionTitleAndMessage("Message from", message);
   }
 
   @Test(groups = {"ForumBoardTests_003"})
-  @Execute(asUser = User.STAFF)
-  public void anonymousUserCanStartDiscussionWithImageOnForum() {
-    ForumPage forumMainPage = new ForumPage();
-    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  public void UserCanStartDiscussionWithImageOnForum() {
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, DateTime.now().getMillis());
 
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
     forumBoard.startDiscussionWithImage(title);
     forumBoard.clickPostButton();
     forumBoard.verifyDiscussionWithImage();
   }
 
   @Test(groups = {"ForumBoardTests_004"})
-  @Execute(asUser = User.STAFF)
   public void anonymousUserCanStartDiscussionWithLinkOnForum() {
     String externalLink = PageContent.EXTERNAL_LINK;
     String internalLink = PageContent.REDIRECT_LINK;
-    ForumPage forumMainPage = new ForumPage();
-    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, DateTime.now().getMillis());
 
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
     forumBoard.startDiscussionWithLink(internalLink, externalLink, title);
     forumBoard.clickPostButton();
     forumBoard.verifyStartedDiscussionWithLinks(internalLink, externalLink);
   }
 
   @Test(groups = {"ForumBoardTests_005"})
-  @Execute(asUser = User.STAFF)
-  public void anonymousUserCanStartDiscussionWithVideoOnForum() {
-    ForumPage forumMainPage = new ForumPage();
-    String title = String.format(PageContent.FORUM_TITLE_PREFIX, forumMainPage.getTimeStamp());
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  public void UserCanStartDiscussionWithVideoOnForum() {
+    String title = String.format(PageContent.FORUM_TITLE_PREFIX, DateTime.now().getMillis());
 
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
     forumBoard.startDiscussionWithVideo(VideoContent.YOUTUBE_VIDEO_URL3, title);
     forumBoard.clickPostButton();
   }
 
   @Test(groups = {"ForumBoardTests_006"})
-  @Execute(asUser = User.STAFF)
-  public void anonymousUserCanFollowDiscussionOnForum() {
-    ForumPage forumMainPage = new ForumPage();
-    forumMainPage.openForumMainPage(wikiURL);
-    ForumBoardPage forumBoard = forumMainPage.openForumBoard();
+  @Execute(asUser = User.SUS_REGULAR_USER)
+  public void UserCanFollowDiscussionOnForum() {
+    ForumBoardPage forumBoard = new ForumBoardPage();
+    String boardTitle = forumBoard.createNew(User.SUS_ADMIN);
+
+    forumBoard.open(boardTitle);
+
+    forumBoard.startDiscussion("A nice discussion", "A nice Message", false);
+
+    forumBoard.open(boardTitle);
+
     forumBoard.unfollowIfDiscussionIsFollowed(1);
     forumBoard.verifyTextOnFollowButton(1, "Follow");
     forumBoard.clickOnFollowButton(1);

@@ -1,18 +1,12 @@
 package com.wikia.webdriver.testcases.mercurytests.old.widgettests;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
@@ -20,17 +14,13 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.ApesterWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PlaybuzzWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PollsnackWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SoundCloudWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.SpotifyWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.TwitterWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.VKWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WeiboWidgetPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.*;
+import org.joda.time.DateTime;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Test(groups = "Mercury_AllTagsWidget")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
@@ -74,7 +64,8 @@ public class AllTagsTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "MercuryAllTagsWidgetTest_002")
+  @Test(groups = "MercuryAllTagsWidgetTest_002", enabled = false)
+  @RelatedIssue(issueID = "XW-3652")
   public void MercuryAllTagsWidgetTest_002_isLoadedOnFirstVisitFromDifferentArticle() {
     new HomePage().open();
 
@@ -85,8 +76,10 @@ public class AllTagsTests extends NewTestTemplate {
     }
   }
 
-  @Test(groups = "MercuryAllTagsWidgetTest_003")
+  @Test(groups = "MercuryAllTagsWidgetTest_003", enabled = false)
+  @RelatedIssue(issueID = "XW-3652")
   public void MercuryAllTagsWidgetTest_003_isLoadedOnSecondVisitFromDifferentArticle() {
+    new ArticleContent().push("Mercury AllTags 003", "Map");
     new ArticlePageObject().open(ARTICLE_NAME);
 
     new TopBar().openSearch().navigateToPage(QUERY_1);

@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.api.TemplateContent;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -149,13 +150,15 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_002"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN)
+  @RelatedIssue(issueID = "XW-3615")
   public void verifyInfoboxLayoutChange() {
     new TemplateContent().push(INFOBOX2_TEMPLATE, PageContent.INFOBOX_2);
     new ArticleContent().push(INFOBOX2_INVOCATION, PageContent.INFOBOX_2);
     PortableInfobox infobox = new PortableInfobox();
-    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject();
 
-    theme.openSpecialDesignerPage(wikiURL).selectTheme(4);
+    theme.open().selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
+    theme.selectTheme(4);
     theme.submitTheme();
 
     infobox.open(PageContent.INFOBOX_2);
@@ -163,7 +166,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     String oldBackground = infobox.getBackgroundColor();
 
-    theme.openSpecialDesignerPage(wikiURL).selectTheme(1);
+    theme.open().selectTheme(1);
     theme.submitTheme();
 
     infobox.open(PageContent.INFOBOX_2);
@@ -293,7 +296,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
-        .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
@@ -309,7 +312,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
-        .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
@@ -318,7 +321,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
     visualEditor.clickInfobox();
     visualEditor
         .clickInfoboxPopup()
-        .typeInParameterField(2, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(2, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());
@@ -326,12 +329,14 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
   @Test(groups = {"PortableInfoboxTests", "PortableInfobox_003"})
   @Execute(asUser = User.STAFF)
+  @RelatedIssue(issueID = "XW-3615")
   public void insertInfoboxWithParamsInVEusingDarkTheme() {
     new ArticleContent().clear();
 
     ArticlePageObject article = new ArticlePageObject();
-    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject(driver);
-    theme.openSpecialDesignerPage(wikiURL).selectTheme(3);
+    SpecialThemeDesignerPageObject theme = new SpecialThemeDesignerPageObject();
+    theme.open().selectTab(SpecialThemeDesignerPageObject.Tab.THEME);
+    theme.selectTheme(3);
     theme.submitTheme();
 
     article.open();
@@ -339,7 +344,7 @@ public class PortableInfoboxTests extends NewTestTemplate {
 
     VisualEditorPageObject visualEditor = article.openVEModeWithMainEditButton()
         .clickInsertToolButton().clickInsertInfoboxFromInsertToolMenu().selectInfoboxTemplate(2)
-        .typeInParameterField(0, new SourceEditModePageObject(driver).getRandomDigits(5))
+        .typeInParameterField(0, new SourceEditModePageObject().getRandomDigits(5))
         .applyChanges();
 
     Assertion.assertTrue(visualEditor.isInfoboxInsertedInEditorArea());

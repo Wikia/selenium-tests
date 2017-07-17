@@ -15,13 +15,13 @@ public class MainPage extends WikiBasePageObject {
   }
 
   public MainPage open() {
-    navigate.toPage("/");
+    navigate.toPageByPath("/");
 
     return this;
   }
 
   public MainPage openRegularMainPage() {
-    navigate.toPage("/wiki/Mercury_automation_testing_Wikia");
+    navigate.toPageByPath("/wiki/Mercury_automation_testing_Wikia");
 
     return this;
   }

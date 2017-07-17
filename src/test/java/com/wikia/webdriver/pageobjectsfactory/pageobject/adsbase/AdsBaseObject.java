@@ -1,30 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkinHelper;
-
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
 import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +51,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   };
   private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
+  private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
+
+  private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
 
   private long tStart;
 
@@ -66,6 +63,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   protected WebElement presentLeaderboard;
   @FindBy(css = "div[id*='TOP_RIGHT_BOXAD']")
   private WebElement presentMedrec;
+  @FindBy(css = FLOATING_MEDREC_SELECTOR)
+  private WebElement presentFloatingMedrec;
   @FindBy(css = MIDDLE_PREFOOTER_CSS_SELECTOR)
   private WebElement middlePrefooter;
   @FindBy(css = "#WikiaFooter")
@@ -134,6 +133,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void verifyMedrec() {
     verifyAdVisibleInSlot("div[id*='TOP_RIGHT_BOXAD']", presentMedrec);
+  }
+
+  public void verifyFloatingMedrec() {
+    verifyAdVisibleInSlot(FLOATING_MEDREC_SELECTOR, presentMedrec);
   }
 
   public void verifyTopLeaderboard() {
@@ -393,6 +396,7 @@ public class AdsBaseObject extends WikiBasePageObject {
    * Check if AdEngine loaded the ad web elements inside slot.
    */
   public boolean checkSlotOnPageLoaded(String slotName) {
+    WebElement slot;
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
@@ -400,7 +404,11 @@ public class AdsBaseObject extends WikiBasePageObject {
       }
 
       String slotSelector = AdsContent.getSlotSelector(slotName);
-      WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+      try {
+        slot = driver.findElement(By.cssSelector(slotSelector));
+      } catch (NoSuchElementException elementNotFound) {
+        return false;
+      }
 
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
       return adWebElements.size() > 1;
@@ -685,9 +693,36 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToFooter();
   }
 
+  public void scrollToPosition(By element) {
+    jsActions.scrollToSpecificElement(driver.findElement(element));
+    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);
+  }
+
+  public void simulateScrollingToElement(By selector, int jumpSize, Duration duration, By elementToCheck) {
+    JavascriptActions jsActions = new JavascriptActions(driver);
+
+    final WebElement element = driver.findElement(selector);
+    final boolean scrollingToBottom = element.getLocation().getY() > driver.manage().window().getPosition().getY();
+    int jumpSizeWithDirection = scrollingToBottom ? jumpSize : -jumpSize;
+
+    while (!CommonExpectedConditions.elementInViewPort(driver.findElement(elementToCheck)).apply(driver)) {
+      jsActions.scrollBy(0, jumpSizeWithDirection);
+      wait.forX(duration);
+    }
+
+    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector.toString(), true);
+  }
+
+  public void simulateScrollingToElement(By selector, By elementToCheck) {
+    simulateScrollingToElement(selector, 300, Duration.ofSeconds(1), elementToCheck);
+  }
+
   public void scrollToPosition(String selector) {
-    jsActions.scrollToSpecificElement(driver.findElement(By.cssSelector(selector)));
-    PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + selector, true);
+    scrollToPosition(By.cssSelector(selector));
+  }
+
+  public void fixScrollPositionByNavbar() {
+    jsActions.scrollBy(0, -1 * driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight());
   }
 
   public boolean isMobileInContentAdDisplayed() {

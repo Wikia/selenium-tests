@@ -12,12 +12,13 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoOptions
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.MessageWallAddLinkComponentObject;
 
+@Execute(onWikia = "sustainingtest")
 public class MessageWallFeaturesTests extends NewTestTemplate {
 
   @Test(groups = {"MessageWallFeatures_001", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInSourceMode() {
-    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
+    MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
@@ -31,7 +32,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_002", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInBold() {
-    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
+    MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.setTitle(title);
@@ -45,7 +46,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_003", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageInItallic() {
-    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
+    MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.setTitle(title);
@@ -59,7 +60,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_004", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageWithImage() {
-    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
+    MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.setTitle(title);
     wall.triggerMessageArea();
@@ -74,7 +75,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_005", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageWithInternalLink() {
-    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
+    MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.setTitle(title);
     wall.triggerMessageArea();
@@ -87,7 +88,7 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
   @Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures", "MessageWallTests"})
   @Execute(asUser = User.USER_MESSAGE_WALL)
   public void userCanWriteMessageWithExternalLink() {
-    MessageWall wall = new MessageWall(driver).open(User.USER_MESSAGE_WALL.getUserName());
+    MessageWall wall = new MessageWall().open(User.USER_MESSAGE_WALL.getUserName());
     String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
     wall.setTitle(title);
     wall.triggerMessageArea();

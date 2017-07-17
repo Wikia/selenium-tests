@@ -7,6 +7,7 @@
         <classes>
             <!-- Base functionality tests -->
             <class name="com.wikia.webdriver.testcases.activityfeedstests.WikiActivityTests"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestPremiumAdLayoutFeaturedVideo"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdTypeMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsDfpParamsPresentMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsMercury"/>
@@ -18,8 +19,13 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsEvolveOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandom"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2BtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsF2Uap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapF2"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsHopMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsInterstitial"/>
@@ -32,16 +38,15 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMOATTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsProvidersChain"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPageFairRecoveryOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsRecoverySourcePointOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotSizes"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSlotsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsSpotlights"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVelesTracking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdType"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsAdXCollapse"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsBtfBlocking"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
@@ -59,8 +64,9 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasisAutoplay"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRefreshing"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapTheNewGeneration"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoFrequencyCapping"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestPremiumAdLayout"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleActionsAdminTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDAnonTests"/>
             <class name="com.wikia.webdriver.testcases.articlecrudtests.ArticleCRUDUserTests"/>
@@ -81,6 +87,7 @@
             <class name="com.wikia.webdriver.testcases.chattests.ChatTestsStaff"/>
             <class name="com.wikia.webdriver.testcases.commentstests.ArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.commentstests.BlogCommentsTests"/>
+            <class name="com.wikia.webdriver.testcases.communityheadertests.CommunityHeaderTests"/>
             <class name="com.wikia.webdriver.testcases.contentreview.ContentReviewTests"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang"/>
             <class name="com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_loggedInUser"/>

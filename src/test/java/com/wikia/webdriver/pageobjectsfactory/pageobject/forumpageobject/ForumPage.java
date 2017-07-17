@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class ForumPage extends WikiBasePageObject {
 
-  @FindBy(css = ".button.policies-link")
+  @FindBy(css = ".policies-link")
   private WebElement faqButton;
   @FindBy(css = "#ForumPoliciesModal")
   private WebElement faqLightBox;
@@ -52,7 +52,7 @@ public class ForumPage extends WikiBasePageObject {
   public ForumManageBoardsPageObject clickManageBoardsButton() {
     scrollAndClick(manageBoardsButton);
     PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
-    return new ForumManageBoardsPageObject(driver);
+    return new ForumManageBoardsPageObject();
   }
 
   /*

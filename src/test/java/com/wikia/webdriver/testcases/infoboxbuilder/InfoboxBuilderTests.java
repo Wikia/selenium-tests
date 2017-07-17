@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.infoboxbuilder;
 
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -240,15 +241,16 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
   @Test(groups = {"InfoboxBuilderTests", "InfoboxBuilder_002"})
   @Execute(asUser = User.INFOBOX_BUILDER_ADMIN, onWikia = "infoboxeuropathemetest")
+  @RelatedIssue(issueID = "XW-3615")
   public void verifyInfoboxPreviewTheme() {
     new ArticleContent().push(ContentLoader.loadWikiTextContent("Infobox_Europa_Theme_Tests"),
         "Template:InfoboxBuilderVerifyInfoboxTheme");
 
     InfoboxBuilderPage builderPage = new InfoboxBuilderPage();
-    SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject(driver);
+    SpecialThemeDesignerPageObject themeDesigner = new SpecialThemeDesignerPageObject();
     TemplatePage template = new TemplatePage();
 
-    themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(0);
+    themeDesigner.open().selectTheme(0);
     themeDesigner.submitTheme();
 
     String templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();
@@ -257,7 +259,7 @@ public class InfoboxBuilderTests extends NewTestTemplate {
 
     Assertion.assertEquals(previewBgColor, templateBgColor);
 
-    themeDesigner.openSpecialDesignerPage(wikiURL).selectTheme(2);
+    themeDesigner.open().selectTheme(2);
     themeDesigner.submitTheme();
 
     templateBgColor = template.open(PageContent.INFOBOX_2).getPageBackgroundColor();

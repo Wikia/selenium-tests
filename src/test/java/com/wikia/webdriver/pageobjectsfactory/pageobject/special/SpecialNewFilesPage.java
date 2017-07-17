@@ -21,7 +21,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
 
   private static final String NEW_FILES_SPECIAL_PAGE_TITLE = "Images";
 
-  @FindBy(css = "a.upphotos[title*='Add a photo']")
+  @FindBy(css = "#page-header-add-new-photo")
   private WebElement addPhotoButton;
   @FindBy(css = "input[name='wpUploadFile']")
   private WebElement browseForFileInput;
@@ -168,7 +168,7 @@ public class SpecialNewFilesPage extends SpecialPageObject {
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + imageName,
         URLsContent.ACTION_UNFOLLOW);
     getUrl(url);
-    return new WatchPageObject(driver);
+    return new WatchPageObject();
   }
 
   public LightboxComponentObject openLightbox(int itemNumber) {

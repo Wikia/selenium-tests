@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor.entrypoint;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -28,7 +29,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
   public void VEAndRTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
     String articleName = base.getNameForArticle();
     ArticlePageObject article = new ArticlePageObject().open(articleName);
-    VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
+    VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
     ve.verifyVEToolBarPresent();
     ve.verifyEditorSurfacePresent();
   }
@@ -59,8 +60,10 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
 
   @Test(
       groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_004",
-                "sectionEditEntry"}
+                "sectionEditEntry"},
+          enabled = false
   )
+  @RelatedIssue(issueID = "XW-3680")
   public void VEAndRTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
     ArticlePageObject article =
         new ArticlePageObject().open(URLsContent.TESTINGPAGE);
@@ -105,8 +108,10 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplate {
 
   @Test(
       groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_008",
-                "templateEntry"}
+                "templateEntry"},
+          enabled = false
   )
+  @RelatedIssue(issueID = "XW-3681")
   public void VEAndRTEDisabledEditorEntryAnonTests_008_TemplateNamespace() {
     ArticlePageObject article =
         new ArticlePageObject().open(URLsContent.TEMPLATE_PAGE);

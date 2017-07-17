@@ -18,13 +18,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
 
 @Test(groups = {"VetModalWidth", "VetTests", "Media"})
+@Execute(onWikia = "sustainingtestchat")
 public class VetModalWidthTests extends NewTestTemplate {
 
   final static int MODAL_WIDTH = 250;
   String articleTitle;
 
   @Test(groups = {"VetModalwidth_001"})
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER2)
   public void Vet_Modal_001_modalWidth() {
     WikiBasePageObject base = new WikiBasePageObject();
     articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -52,7 +53,7 @@ public class VetModalWidthTests extends NewTestTemplate {
   }
 
   @Test(groups = {"VetModalwidth_002"}, dependsOnMethods = "Vet_Modal_001_modalWidth")
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.SUS_REGULAR_USER2)
   public void Vet_Modal_002_modalWidthOnEditing() {
     WikiBasePageObject base = new WikiBasePageObject();
 

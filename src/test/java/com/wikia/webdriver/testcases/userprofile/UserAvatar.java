@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVersionPage;
 
 import org.testng.annotations.Test;
@@ -26,12 +26,11 @@ import org.testng.annotations.Test;
  * that avatar is not visible on global navigation
  */
 @Test(groups = "userProfile-userAvatar")
+@Execute(onWikia = "sustainingtestchat")
 public class UserAvatar extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
-
   @Test(groups = "UserAvatar_clickOnAvatarOpensUserMenu")
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.SUS_STAFF2)
   public void clickOnAvatarOpensUserMenu() {
     new SpecialVersionPage().open();
 
@@ -42,23 +41,23 @@ public class UserAvatar extends NewTestTemplate {
   }
 
   @Test(groups = "UserAvatar_userCanEnterHisProfileFromUserMenu")
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.SUS_STAFF2)
   public void userCanEnterHisProfileFromUserMenu(){
     new SpecialVersionPage().open();
 
     GlobalNavigation userAvatar = new GlobalNavigation();
     userAvatar.clickUserAvatar().clickViewProfile();
 
-    UserProfilePageObject profile = new UserProfilePageObject(driver);
-    profile.verifyProfilePage(credentials.userNameStaff);
+    UserProfilePage profile = new UserProfilePage();
+    profile.verifyProfilePage(User.SUS_STAFF2.getUserName());
   }
 
   @Test(groups = "UserAvatar_staffUserCanUploadAvatar")
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.SUS_STAFF2)
   public void staffUserCanUploadAvatar() {
-    UserProfilePageObject
+    UserProfilePage
         profile =
-        new UserProfilePageObject(driver).openProfilePage(credentials.userNameStaff, wikiURL);
+        new UserProfilePage().open(User.SUS_STAFF2.getUserName());
     AvatarComponentObject avatar = profile.clickEditAvatar();
     profile.verifyAvatar();
     String avatarUrl = profile.getAvatarImageSrc();
@@ -73,17 +72,17 @@ public class UserAvatar extends NewTestTemplate {
 
 
   @Test(groups = "UserAvatar_staffUserCanRemoveAvatar", dependsOnMethods = "staffUserCanUploadAvatar")
-  @Execute(asUser = User.STAFF)
+  @Execute(asUser = User.SUS_STAFF2)
   public void staffUserCanRemoveAvatar() {
-    UserProfilePageObject profile = new UserProfilePageObject(driver).openProfilePage(
-        credentials.userNameStaff, wikiURL);
+    UserProfilePage profile = new UserProfilePage().open(
+        User.SUS_STAFF2.getUserName());
     String avatarUrl = profile.getAvatarImageSrc();
     profile.clickRemoveAvatar();
     profile.verifyAvatar();
 
     profile.openWikiPage(); //user needs to visit other page to get avatar refreshed
-    UserProfilePageObject changedProfile = new UserProfilePageObject(driver).openProfilePage(
-        credentials.userNameStaff, wikiURL);
+    UserProfilePage changedProfile = new UserProfilePage().open(
+        User.SUS_STAFF2.getUserName());
 
     changedProfile.verifyAvatarChanged(avatarUrl);
     String changedAvatarUrl = changedProfile.getAvatarImageSrc();

@@ -1,21 +1,21 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.util.List;
+
+import lombok.Getter;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.AlertHandler;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile.AvatarComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
-public class UserProfilePageObject extends WikiBasePageObject {
+public class UserProfilePage extends WikiBasePageObject {
 
   @FindBy(css = "li[data-id='blog'] a")
   private WebElement blogTab;
@@ -31,13 +31,22 @@ public class UserProfilePageObject extends WikiBasePageObject {
   private WebElement avatarRemoveButton;
   @FindBy(css = ".masthead-avatar img.avatar")
   private WebElement avatar;
-
-  private String avatarChangedSelector = ".masthead-avatar img.avatar[src*='/%imageName%']";
+  @FindBy(css = "div.masthead-info h1")
+  @Getter
+  private WebElement userNameTextBox;
 
   private By avatarImage = By.cssSelector("img.avatar");
 
-  public UserProfilePageObject(WebDriver driver) {
-    super();
+  /**
+   * Open User Profile Page
+   * 
+   * @param userName
+   * @return
+   */
+  public UserProfilePage open(String userName) {
+    getUrl(urlBuilder.getUrlForPage(URLsContent.USER_PROFILE.replace("%userName%", userName)));
+
+    return this;
   }
 
   public void clickOnBlogTab() {
@@ -47,36 +56,34 @@ public class UserProfilePageObject extends WikiBasePageObject {
     PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
   }
 
-  public BlogPageObject openBlogPage(int blogNumber) {
+  public BlogPage openBlogPage(int blogNumber) {
     String blogURL = blogPostList.get(blogNumber).getAttribute("href");
     getUrl(blogURL);
-    PageObjectLogging.log("openBlogPage",
-                          "blog post " + blogURL + " opened",
-                          true);
-    return new BlogPageObject(driver);
+    PageObjectLogging.log("openBlogPage", "blog post " + blogURL + " opened", true);
+    return new BlogPage();
   }
 
-  public BlogPageObject openFirstPost() {
+  public BlogPage openFirstPost() {
     for (int i = 0; i < blogPostList.size(); i++) {
-      BlogPageObject blogPage = openBlogPage(i);
+      BlogPage blogPage = openBlogPage(i);
       String pageContent = blogPage.getAtricleTextRaw().toLowerCase();
       if (!(pageContent.contains("deleted") || pageContent.contains("redirected"))) {
         PageObjectLogging.log("openFirstPost", "valid post found on " + i + " position", true);
         break;
       }
-      PageObjectLogging.log("openFirstPost", "deleted post found on " + i
-                                             + " position, trying next one", true);
+      PageObjectLogging.log("openFirstPost",
+          "deleted post found on " + i + " position, trying next one", true);
       driver.navigate().back();
     }
-    return new BlogPageObject(driver);
+    return new BlogPage();
   }
 
   public SpecialCreatePage clickOnCreateBlogPost() {
     wait.forElementVisible(createBlogPostButton);
     wait.forElementClickable(createBlogPostButton);
     scrollAndClick(createBlogPostButton);
-    PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button",
-                          true, driver);
+    PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true,
+        driver);
     return new SpecialCreatePage();
   }
 
@@ -123,5 +130,9 @@ public class UserProfilePageObject extends WikiBasePageObject {
   public void verifyProfilePage(String userName) {
     verifyUrlContains(URLsContent.USER_PROFILE.replace("%userName%", userName), 30);
     PageObjectLogging.log("verifyProfilePage", userName + " user profile page verified", true);
+  }
+
+  public String getUserName() {
+    return userNameTextBox.getText();
   }
 }

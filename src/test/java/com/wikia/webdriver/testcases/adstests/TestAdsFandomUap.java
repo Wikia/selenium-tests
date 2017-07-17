@@ -23,7 +23,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD_DESKTOP, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_DESKTOP, AdsFandomContent.BOTTOM_LEADERBOARD_DESKTOP, fandomPage);
   }
 
   @InBrowser(
@@ -54,7 +54,7 @@ public class TestAdsFandomUap extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     fandomPage.triggerOnScrollSlots();
     verifyUapAtf(atfId, AdsFandomContent.TOP_BOXAD, fandomPage);
-    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
+    verifyUapBtf(btfId, AdsFandomContent.INCONTENT_BOXAD_DESKTOP, AdsFandomContent.BOTTOM_LEADERBOARD, fandomPage);
   }
 
   @InBrowser(

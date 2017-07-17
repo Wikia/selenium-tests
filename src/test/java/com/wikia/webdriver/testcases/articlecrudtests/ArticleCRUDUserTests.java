@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.core.TestContext;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -10,7 +9,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -46,18 +44,18 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_003", "Smoke1"})
   @Execute(asUser = User.USER)
-  public void ArticleCRUDUser_003_addDropdown() {
-    new ArticleContent().clear();
+  public void ArticleCRUDUser_003_addEditButton() {
+    new ArticleContent().push();
+    ArticlePageObject article = new ArticlePageObject().open();
+    String articleTitle = article.getArticleTitle();
 
-    String articleContent = PageContent.ARTICLE_TEXT;
-    String articleTitle = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
-    ArticlePageObject article = new ArticlePageObject().open(TestContext.getCurrentMethodName() + "?AbTest.ADD_NEW_PAGE=CONTROL1");
-    VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
-    visualEditMode.addContent(articleContent);
+    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButton();
+    visualEditMode.addContent(PageContent.ARTICLE_TEXT);
     visualEditMode.submitArticle();
-    article.verifyContent(articleContent);
+    article.verifyContent(PageContent.ARTICLE_TEXT);
     article.verifyArticleTitle(articleTitle);
   }
+
 
   @Test(dataProviderClass = ArticleDataProvider.class, dataProvider = "articleTitles",
       groups = {"ArticleCRUDUser_004"})
@@ -87,12 +85,12 @@ ArticleCRUDUserTests extends NewTestTemplate {
 
   @Test(groups = {"ArticleCRUDUser_006"})
   @Execute(asUser = User.USER)
-  public void ArticleCRUDUser_006_editDropdown() {
+  public void ArticleCRUDUser_006_editEditDropdown() {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     String articleContent = PageContent.ARTICLE_TEXT;
     ArticlePageObject article = new ArticlePageObject().open();
-    VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
+    VisualEditModePageObject visualEditMode = article.openCKModeWithMainEditButtonDropdown();
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
     article.verifyContent(articleContent);
