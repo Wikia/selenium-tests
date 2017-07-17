@@ -8,12 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class DiscussionsHeader extends BasePageObject {
 
-  @FindBy(css = "div.sort")
+  @FindBy(css = ".header-dropdown-button")
   private WebElement sortEntryPointMobile;
-
-  @FindBy(css = ".sort span")
-  private WebElement labelInSortEntryPointMobile;
-
 
   public DiscussionsHeader clickSortButtonOnMobile() {
     sortEntryPointMobile.click();
