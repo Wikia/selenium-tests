@@ -7,22 +7,20 @@ import org.openqa.selenium.support.FindBy;
 
 public class NotificationsDropdown extends BasePageObject implements Dropdown  {
 
-  @FindBy(id = "onSiteNotificationsDropdown")
+  @FindBy(className = "notifications-scroll-menu")
   private WebElement notificationsBell;
 
   @Getter
   private Notifications notifications = new Notifications();
 
   @Override public Dropdown expand() {
-    waitSafely(() -> wait.forElementNotVisible(notifications.getNotificationsList()));
-    waitAndClick(notificationsBell);
+    hover(notificationsBell);
     wait.forElementVisible(notifications.getNotificationsList());
     return this;
   }
 
   @Override public Dropdown collapse() {
-    waitSafely(() -> wait.forElementVisible(notifications.getNotificationsList()));
-    waitAndClick(notificationsBell);
+    moveAway(notificationsBell);
     wait.forElementNotVisible(notifications.getNotificationsList());
     return this;
   }
