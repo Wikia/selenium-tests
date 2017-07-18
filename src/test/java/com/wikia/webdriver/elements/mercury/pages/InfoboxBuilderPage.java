@@ -1,11 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages;
 
-import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -13,7 +8,13 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import java.util.List;
+
+import com.wikia.webdriver.common.contentpatterns.TemplateTypes;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.pages.TemplateEditPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 public class InfoboxBuilderPage extends SpecialPageObject {
 
@@ -44,10 +45,12 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-go-to-source-modal > div")
   private WebElement modalGoToSource;
 
-  @FindBy(css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  @FindBy(
+      css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
   private WebElement saveChangesButton;
 
-  @FindBy(css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(2)")
+  @FindBy(
+      css = ".infobox-builder-go-to-source-modal .modal-dialog div.modal-bottom-row > button:nth-child(2)")
   private WebElement dropChangesButton;
 
   @FindBy(css = ".text-field-error-message")
@@ -56,7 +59,8 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   @FindBy(css = ".infobox-builder-edit-title-modal > div")
   private WebElement modalEditTitle;
 
-  @FindBy(css = ".infobox-builder-edit-title-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
+  @FindBy(
+      css = ".infobox-builder-edit-title-modal .modal-dialog div.modal-bottom-row > button:nth-child(1)")
   private WebElement publishEditedTitleButton;
 
   @FindBy(css = "#editTemplateTitle")
@@ -84,9 +88,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   private List<WebElement> sectionHeadersChevron;
 
   public InfoboxBuilderPage openNew(String templateName) {
-    new TemplateEditPage().open(templateName)
-        .getTemplateClassification()
-        .changeTemplateType(TemplateTypes.INFOBOX)
+    getUrl(urlBuilder.appendQueryStringToURL(
+        String.format("%s/wiki/%s:%s", urlBuilder.getUrlForWiki(), "Template", templateName),
+        URLsContent.ACTION_EDIT));
+    new TemplateEditPage().getTemplateClassification().changeTemplateType(TemplateTypes.INFOBOX)
         .clickAddButton();
 
     driver.switchTo().frame(builderIFrame);
@@ -96,8 +101,9 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public InfoboxBuilderPage openExisting(String templateName) {
-    new TemplateEditPage().open(templateName)
-        .openCurrectArticleSourceMode();
+    getUrl(
+        urlBuilder.appendQueryStringToURL(String.format("%s/wiki/%s/%s", urlBuilder.getUrlForWiki(),
+            "Special:InfoboxBuilder", templateName), URLsContent.ACTION_EDIT));
     driver.switchTo().frame(builderIFrame);
 
     return this;
@@ -105,7 +111,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage open() {
     new TemplateEditPage().open("temp_template");
-    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(), URLsContent.SPECIAL_INFOBOX_BUILDER));
+    getUrl(String.format("%s/wiki/%s", urlBuilder.getUrlForWiki(), "Special:InfoboxBuilder"));
     driver.switchTo().frame(builderIFrame);
     wait.forElementVisible(previewArea);
 
@@ -132,6 +138,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
 
   public InfoboxBuilderPage insertTemplateTitle(String title) {
     wait.forElementClickable(editTemplateTitleInput);
+    editTemplateTitleInput.clear();
     editTemplateTitleInput.sendKeys(title);
 
     return this;
@@ -242,7 +249,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     selectedComponent.click();
 
     String script = "return window.getComputedStyle("
-                    + "document.querySelector('.active'),':before').getPropertyValue('Border')";
+        + "document.querySelector('.active'),':before').getPropertyValue('Border')";
 
     return driver.executeScript(script).toString();
   }
@@ -314,7 +321,7 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     return this;
   }
 
-  public InfoboxBuilderPage hoverMouseOverComponent(int index){
+  public InfoboxBuilderPage hoverMouseOverComponent(int index) {
     wait.forElementVisible(component.get(0));
     builder.moveToElement(component.get(0)).pause(500).perform();
 
@@ -322,10 +329,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   public boolean isTooltipVisible() {
-    try{
+    try {
       wait.forElementVisible(tooltip);
       return true;
-    }catch (TimeoutException e){
+    } catch (TimeoutException e) {
       PageObjectLogging.logInfo("Tooltip not visible");
       return false;
     }
@@ -340,23 +347,13 @@ public class InfoboxBuilderPage extends SpecialPageObject {
   }
 
   /**
-   _   _                     __     _
-   | | | |,^.        ,'.      | `.  | |
-   | | |  ,. `.    ,'   `.    | . `.| |
-   | | | .--`,'  ,'  ,^.  `.  | |`.   |
-   | | | |`. `. `. ,'___`. ,' | |  `| |
-   |_| |_|  `. `. `._____,'   |_|   | |
-   `/                    `.|
-   `
-   __               _   _   __         ____  __     _
-   | `. ,^.       ,' | | | |  `.      |  __| | `.  | |
-   | . ' , |  /`,' . | | | | |`.`.    | |__  | . `.| |
-   | |`.'| |  `. ,'| | | | | |  `.`.  |  __| | |`.   |
-   | |   | | ,' . `. | | | | |____` / | |__  | |  `| |
-   |_|   | | \,' `.__| |_| |_______/   `.__| |_|   | |
-   `.|                                       `.|
-
-   Dragging move is actually a 20 small moves, to make is a bit slower
+   * _ _ __ _ | | | |,^. ,'. | `. | | | | | ,. `. ,' `. | . `.| | | | | .--`,' ,' ,^. `. | |`. | | |
+   * | |`. `. `. ,'___`. ,' | | `| | |_| |_| `. `. `._____,' |_| | | `/ `.| ` __ _ _ __ ____ __ _ |
+   * `. ,^. ,' | | | | `. | __| | `. | | | . ' , | /`,' . | | | | |`.`. | |__ | . `.| | | |`.'| | `.
+   * ,'| | | | | | `.`. | __| | |`. | | | | | ,' . `. | | | | |____` / | |__ | | `| | |_| | | \,'
+   * `.__| |_| |_______/ `.__| |_| | | `.| `.|
+   * 
+   * Dragging move is actually a 20 small moves, to make is a bit slower
    */
   public WebElement dragAndDropToTheTop(WebElement draggedElement) {
     this.wait.forElementClickable(draggedElement);
@@ -367,12 +364,10 @@ public class InfoboxBuilderPage extends SpecialPageObject {
     Point location = infoboxBackground.getLocation();
     Integer targetY = draggedElement.getLocation().getY() - location.getY() + 50;
 
-    new Actions(driver)
-        .clickAndHold(draggedElement)
-        .perform();
+    new Actions(driver).clickAndHold(draggedElement).perform();
 
-    for(int i = 0; i<20; i++){
-      new Actions(driver).moveByOffset(0, -targetY/20).perform();
+    for (int i = 0; i < 20; i++) {
+      new Actions(driver).moveByOffset(0, -targetY / 20).perform();
     }
 
     new Actions(driver).release().perform();

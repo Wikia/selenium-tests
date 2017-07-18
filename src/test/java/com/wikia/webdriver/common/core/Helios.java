@@ -21,6 +21,7 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -157,6 +158,18 @@ public class Helios {
     }
   }
 
+  private static String executeAndRetry(HttpGet httpGet, ResponseHandler<String> handler)
+          throws IOException {
+    try (CloseableHttpClient httpClient = getDefaultClient()) {
+      try {
+        return httpClient.execute(httpGet, handler);
+      } catch (ConnectTimeoutException e) {
+        PageObjectLogging.log("Timeout when connecting to helios", e, true);
+        return httpClient.execute(httpGet, handler);
+      }
+    }
+  }
+
   private static String getTokenFromCache(String userName) {
     try (CloseableHttpClient httpClient = getDefaultClient()) {
       if (tokenCache.containsKey(userName)) {
@@ -181,17 +194,18 @@ public class Helios {
   private static String getUserId(String userName) {
     String getUserIDURL = "";
     try {
-      getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json",
-          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"));
+      getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
+          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"), DateTime.now().getMillis());
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);
     }
 
     HttpGet httpGet = new HttpGet(getUserIDURL);
+    PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
 
     try {
-      return getDefaultClient().execute(httpGet, extractUserId());
+      return executeAndRetry(httpGet, extractUserId());
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);

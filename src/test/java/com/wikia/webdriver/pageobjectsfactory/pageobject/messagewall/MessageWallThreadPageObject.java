@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,10 +18,6 @@ public class MessageWallThreadPageObject extends MessageWall {
   private List<WebElement> lastReplyText;
   @FindBy(className = "msg-body")
   private WebElement messageBody;
-
-  public MessageWallThreadPageObject(WebDriver driver) {
-    super(driver);
-  }
 
   public MiniEditorComponentObject triggerMessageArea() {
     while (!driver.findElement(firstMessageWrapperBy).findElement(replyButtonBy).isDisplayed()) {
