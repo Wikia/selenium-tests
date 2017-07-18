@@ -18,7 +18,7 @@ import java.util.List;
 
 public class VideoPageAdminTests extends NewTestTemplate {
 
-  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest", "VideosPage"}, invocationCount = 10)
+  @Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest", "VideosPage"})
   @RelatedIssue(issueID = "SUS-2391", comment = "Cannot add a video on staging environment")
   @Execute(asUser = User.STAFF, onWikia = URLsContent.VIDEO_TEST_WIKI)
   public void VideoPageAdmin_001_AddFeaturedVideo() {
