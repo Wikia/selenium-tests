@@ -10,9 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEdi
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import javax.swing.text.html.HTML;
@@ -25,26 +23,26 @@ public class MessageWall extends WikiBasePageObject {
           ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
   private static final String FIRST_MESSAGE_MENU = ".comments li:nth-child(1) .buttons ";
   private static final String CLOSE_BUTTON_STRING = ".close-thread";
-  final By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
-  final By replyButtonBy = By.cssSelector(".replyButton");
-  private final By messageTitleBy = By.cssSelector(".msg-title");
-  private final By messageBodyBy = By.cssSelector(".msg-body");
-  private final By imageBy = By.cssSelector(".thumbimage");
-  private final By messageTextBoldBy = By.cssSelector("b");
-  private final By messageTextItalicBy = By.cssSelector("i");
-  private final By messageTextBy = By.cssSelector(".msg-body *");
-  private final By messageLinkBy = By.cssSelector("a");
-  private final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
-  private final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
-  private final By editButtonBy = By.cssSelector(".edit-message");
-  private final By removeButtonBy = By.cssSelector(".remove-message");
-  private final By reopenButtonBy = By.cssSelector(".reopen-thread");
-  private final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
-  private final By quoteMessageBy = By.cssSelector(".replies p");
-  private final By saveChangesButtonBy = By.cssSelector(".save-edit");
-  private final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
-  private final By replyBodyBy = By.cssSelector(".replyBody");
-  private final By closeButtonBy = By.cssSelector(FIRST_MESSAGE_MENU + CLOSE_BUTTON_STRING);
+  static final By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
+  static final By replyButtonBy = By.cssSelector(".replyButton");
+  private static final By messageTitleBy = By.cssSelector(".msg-title");
+  private static final By messageBodyBy = By.cssSelector(".msg-body");
+  private static final By imageBy = By.cssSelector(".thumbimage");
+  private static final By messageTextBoldBy = By.cssSelector("b");
+  private static final By messageTextItalicBy = By.cssSelector("i");
+  private static final By messageTextBy = By.cssSelector(".msg-body *");
+  private static final By messageLinkBy = By.cssSelector("a");
+  private static final By messageUserNameBy = By.cssSelector(".edited-by > a:nth-child(1)");
+  private static final By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
+  private static final By editButtonBy = By.cssSelector(".edit-message");
+  private static final By removeButtonBy = By.cssSelector(".remove-message");
+  private static final By reopenButtonBy = By.cssSelector(".reopen-thread");
+  private static final By quoteButtonBy = By.cssSelector(".quote-button.secondary");
+  private static final By quoteMessageBy = By.cssSelector(".replies p");
+  private static final By saveChangesButtonBy = By.cssSelector(".save-edit");
+  private static final By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
+  private static final By replyBodyBy = By.cssSelector(".replyBody");
+  private static final By closeButtonBy = By.cssSelector(FIRST_MESSAGE_MENU + CLOSE_BUTTON_STRING);
   @FindBy(css = ".cke_button_ModeSource > .cke_icon")
   private WebElement sourceModeButton;
   @FindBy(css = "span.cke_toolbar_formatmini a.cke_button_bold")
@@ -63,7 +61,7 @@ public class MessageWall extends WikiBasePageObject {
   private WebElement messageMainBody;
   @FindBy(css = "#WallMessageTitle")
   private WebElement messageTitleField;
-  @FindBy(css = "#WallMessageSubmit")
+  @FindBy(id = "WallMessageSubmit")
   private WebElement postButton;
   @FindBy(css = "#WallMessagePreview")
   private WebElement previewButton;
@@ -76,20 +74,17 @@ public class MessageWall extends WikiBasePageObject {
   @FindBy(css = ".Board .msg-title > a")
   private List<WebElement> threadList;
 
-
-  public MessageWall(WebDriver driver) {
-    super();
-  }
-
   public MessageWall open(String userName) {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName()) + URLsContent.USER_MESSAGE_WALL
         + userName);
     waitForPageLoad();
-    return new MessageWall(driver);
+
+    return new MessageWall();
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    jsActions.scrollToElement(messageTitleField);
+    builder.moveToElement(newWallMessageContainer);
+
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);
     }
@@ -117,7 +112,8 @@ public class MessageWall extends WikiBasePageObject {
   public void submit() {
     driver.switchTo().defaultContent();
     scrollAndClick(postButton);
-    new Actions(driver).moveByOffset(0, 0).perform();
+    builder.moveByOffset(0, 0).perform();
+
     wait.forElementNotVisible(postButton);
     PageObjectLogging.log("submit", "message submitted", true);
   }
@@ -171,7 +167,6 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MessageWallCloseRemoveThreadPageObject clickCloseThread() {
-    refreshPage();
     setDisplayStyle(NEW_MESSAGE_MENU, "block");
     scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
     WebElement closeButton = driver.findElement(closeButtonBy);
@@ -251,7 +246,7 @@ public class MessageWall extends WikiBasePageObject {
     PageObjectLogging.log("verifyThreadRemoved", "verifyed thread removed", true);
   }
 
-  public void verifyThreadClosed(String userName, String reason, String message) {
+  public void verifyThreadClosed(String userName, String reason) {
     refreshPageAddingCacheBuster();
     Assertion.assertStringContains(
         driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
@@ -351,13 +346,12 @@ public class MessageWall extends WikiBasePageObject {
 
   public MessageWallThreadPageObject openThread(String threadName) {
     try {
-      for (WebElement thread : threadList) {
-        if (thread.getText().contains(threadName)) {
-          scrollAndClick(thread);
-          break;
-        }
-      }
-      return new MessageWallThreadPageObject(driver);
+      threadList.stream()
+          .filter(thread -> thread.getText().contains(threadName))
+          .findFirst()
+          .ifPresent(this::scrollAndClick);
+
+      return new MessageWallThreadPageObject();
     } finally {
       waitForPageLoad();
     }
