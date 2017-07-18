@@ -21,7 +21,7 @@ public class FandomAdsDataProvider {
         },
         {
             AdsFandomTestTemplate.PAGE_TYPE_TOPIC,
-            "tv"
+            "games"
         }
     };
   }
