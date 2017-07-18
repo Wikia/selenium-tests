@@ -18,7 +18,10 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
       dataProvider = "adsPremiumPreroll"
   )
   public void adsPremiumPrerollMercury(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath(
+        wikiName,
+        article + "?AbTest.MOBILE_FEATURED_VIDEO_AUTOPLAY=CONTROL"
+    );
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyPlayerOnPage();
     wikiPage.playArticleVideo();
