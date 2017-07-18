@@ -35,7 +35,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     // when
     PostsListPage discussionPage = new PostsListPage().open(siteId);
     // then
-    Assertion.assertNotNull(discussionPage.openNotificationsMenu().findNotification(noti));
+    Assertion.assertTrue(discussionPage.openNotificationsMenu().contains(noti));
   }
 
   private PostEntity.Data createPostAs(User user) {

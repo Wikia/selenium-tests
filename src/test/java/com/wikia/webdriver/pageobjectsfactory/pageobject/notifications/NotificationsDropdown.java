@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class NotificationsDropdown extends BasePageObject implements Dropdown  {
+public class NotificationsDropdown extends BasePageObject {
 
   @FindBy(className = "notifications-scroll-menu")
   private WebElement notificationsBell;
@@ -13,13 +13,13 @@ public class NotificationsDropdown extends BasePageObject implements Dropdown  {
   @Getter
   private Notifications notifications = new Notifications();
 
-  @Override public Dropdown expand() {
+  public NotificationsDropdown expand() {
     hover(notificationsBell);
     wait.forElementVisible(notifications.getNotificationsList());
     return this;
   }
 
-  @Override public Dropdown collapse() {
+  public NotificationsDropdown collapse() {
     moveAway(notificationsBell);
     wait.forElementNotVisible(notifications.getNotificationsList());
     return this;

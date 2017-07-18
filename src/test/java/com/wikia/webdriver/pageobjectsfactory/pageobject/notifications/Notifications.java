@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.notifications;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -20,17 +21,12 @@ public class Notifications extends BasePageObject {
   @FindBy(css = ".wds-notifications__zero-state")
   private WebElement emptyState;
 
-  public Notifications() {
-    wait.forElementVisible(getNotificationsList());
-  }
-
-  private List<Notification> nofitications;
-
   public boolean isEmptyStateMessageVisible() {
     return wait.forElementVisible(emptyState).isDisplayed();
   }
 
   public boolean contains(Notification notification) {
+    PageObjectLogging.log("Searching for notification", notification.getContent(), true);
     List<WebElement> notifications = notificationCards
       .stream()
       .filter(card -> card

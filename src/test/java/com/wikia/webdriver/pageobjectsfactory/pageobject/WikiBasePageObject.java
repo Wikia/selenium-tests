@@ -28,6 +28,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.*;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
@@ -79,6 +81,8 @@ public class WikiBasePageObject extends BasePageObject {
   private final GlobalNavigation globalNavigation = new GlobalNavigation();
   @Getter(lazy = true)
   private final WikiaBar wikiaBar = new WikiaBar();
+  @Getter(lazy = true)
+  private final NotificationsDropdown notificationsDropdown = new NotificationsDropdown();
   @Getter(lazy = true)
   private final KeyboardShortcutsModal keyboardShortcuts = new KeyboardShortcutsModal();
   @Getter(lazy = true)
@@ -449,6 +453,10 @@ public class WikiBasePageObject extends BasePageObject {
     List<Notification> notificationList = getNotifications();
     return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType.name()))
             .collect(Collectors.toList());
+  }
+
+  public Notifications openNotificationsMenu() {
+    return getNotificationsDropdown().expand().getNotifications();
   }
 
   public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {
