@@ -23,7 +23,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
   public void wallOwnerReceivesNotification_setup() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.loginAs(credentials.userName9, credentials.password9, wikiURL);
-    MessageWall wall = new MessageWall(driver).open(credentials.userName10);
+    MessageWall wall = new MessageWall().open(credentials.userName10);
     MiniEditorComponentObject mini = wall.triggerMessageArea();
     String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
     title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();

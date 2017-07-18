@@ -14,11 +14,12 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
           "108480239532"};
   private static final String WIKI_NAME = "project43";
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
+  private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
   private void scrollToSeeFMR(String slotName, AdsBaseObject page) {
-    page.scrollToFooter();
-    page.scrollToPosition("#LEFT_SKYSCRAPER_2");
-    page.waitForSlotExpanded(driver.findElement(By.id(slotName)));
+    page.triggerComments();
+    page.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
+    page.waitForSlotExpanded(page.wait.forElementVisible(By.id(slotName)));
   }
 
   @Test(groups = {"AdsRefreshingFMR"})
