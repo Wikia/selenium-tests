@@ -39,7 +39,6 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
   public FeaturedVideoContainer(WebDriver driver, WebElement parentElement) {
     super();
     this.parentElement = parentElement;
-//    PageFactory.initElements(driver, this);
     videoTitleTextBox = parentElement.findElement(videoTitleTextBoxBy);
     imageTitleTextBox = parentElement.findElement(imageTitleTextBoxBy);
     addVideoButton = parentElement.findElement(addVideoButtonBy);

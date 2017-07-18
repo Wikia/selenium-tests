@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VetAddImageComponentObject extends WikiBasePageObject {
 
+  public static final String PAGE_NAME = "AddImageModal";
   @FindBy(css = "#ImageUploadFile")
   private WebElement imageUploadTextBox;
   @FindBy(xpath = "//*[@value='Upload']")
@@ -30,19 +31,19 @@ public class VetAddImageComponentObject extends WikiBasePageObject {
   private void typeInPath(String path) {
     wait.forElementVisible(imageUploadTextBox);
     imageUploadTextBox.sendKeys(path);
-    PageObjectLogging.log("AddImageModal", path + " typed into path field", true);
+    PageObjectLogging.log(PAGE_NAME, path + " typed into path field", true);
   }
 
   private void clickUploadButton() {
     wait.forElementVisible(uploadButton);
     scrollAndClick(uploadButton);
-    PageObjectLogging.log("AddImageModal", "Upload button clicked", true, driver);
+    PageObjectLogging.log(PAGE_NAME, "Upload button clicked", true, driver);
   }
 
   private void typeInSearchQuery(String query) {
     wait.forElementVisible(findTextBox);
     findTextBox.sendKeys(query);
-    PageObjectLogging.log("AddImageModal",
+    PageObjectLogging.log(PAGE_NAME,
                           query + " query typed into search image field", true);
   }
 
@@ -56,6 +57,6 @@ public class VetAddImageComponentObject extends WikiBasePageObject {
   public void clickFind(String image){
     wait.forElementClickable(findButton);
     findButton.click();
-    PageObjectLogging.log("AddImageModal", "find button clicked", true, driver);
+    PageObjectLogging.log(PAGE_NAME, "find button clicked", true, driver);
   }
 }

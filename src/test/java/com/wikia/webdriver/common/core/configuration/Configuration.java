@@ -39,6 +39,7 @@ public class Configuration {
   private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
   private static Map<String, String> defaultConfig;
   private static Map<String, String> testConfig = new HashMap<>();
+
   @Getter(lazy = true)
   private static final String wikiaDomain = getEnvType().getWikiaDomain();
 
@@ -89,10 +90,8 @@ public class Configuration {
   public static String getBrowser() {
     return getProp("browser");
   }
-
-  public static final String WIKI_NAME_PROPERTY = "wikiName";
   public static String getDefaultWikiName() {
-    return getPropertyFromFile(WIKI_NAME_PROPERTY);
+    return getPropertyFromFile("wikiName");
   }
 
   public static String getEnv() {
