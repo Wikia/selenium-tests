@@ -29,7 +29,7 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
     adsPremiumPrerollMOATTracking(wikiPage);
   }
 
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5, browser = Browser.CHROME)
+  @InBrowser(emulator = Emulator.NEXUS_5X, browser = Browser.CHROME)
   @NetworkTrafficDump(useMITM = true)
   @Test(
       dataProviderClass = AdsDataProvider.class,

@@ -29,21 +29,21 @@ public class LayoutTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
   @Test(groups = "discussions-anonUserOnMobileCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
   @Test(enabled = false, groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   @RelatedIssue(issueID = "SOC-3182")
   public void anonUserOnMobileCanViewMorePosts() {
     userCanViewMorePosts();
@@ -80,14 +80,14 @@ public class LayoutTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void loggedInUserOnMobileCanSeePostsList() {
     postsListLoads();
   }

@@ -49,7 +49,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
@@ -57,7 +57,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
     final PostDetailsPage page = openDefaultPostDetailsWaitingUtilLoaded();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
@@ -69,7 +69,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
     final UserPostsPage page = openDefaultUserPostPageWaiting();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
@@ -77,7 +77,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
     createAndReportPostRemotelyAsFirstUser();
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
@@ -86,7 +86,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -95,7 +95,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
@@ -104,7 +104,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostsListPage postsListPage = openPostListPageAndWaitUntilLoaded();
@@ -114,7 +114,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -124,7 +124,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final UserPostsPage open = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
@@ -225,7 +225,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanReportPostOnPostsListPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final PostsListPage page = openPostListPageAndWaitUntilLoaded();
@@ -235,7 +235,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanReportPostOnPostDetailsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -245,7 +245,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanReportPostOnUserPostsPage() {
     final PostEntity.Data data = cretePostRemotelyAsFirstUser();
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
@@ -256,7 +256,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotSeeDeletedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostEntity
@@ -267,7 +267,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -277,7 +277,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final UserPostsPage page = openUserPostsAndWaitUntilLoaded(data.getAuthorId());
@@ -287,7 +287,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanReportApprovedPostOnPostsListPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
     reportPostRemotelyAsSecondUser(data);
@@ -301,7 +301,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
     userCanReportApprovedPostOnPostDetailsPage();
   }
@@ -319,7 +319,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanReportApprovedPostOnUserPostsPage() {
     userCanReportApprovedPostOnUserPostsPage();
   }
@@ -356,7 +356,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotReReportPostOnPostsListPage() {
     userCannotReReportPostOnPostListPage();
   }
@@ -386,7 +386,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
     userCannotReReportPostOnPostDetailPage();
   }
@@ -410,7 +410,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotReReportPostOnUserPostsPage() {
     userCannotReReportPostOnUserPostPage();
   }
@@ -464,7 +464,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost();
   }
@@ -486,7 +486,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost();
   }
@@ -508,7 +508,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost();
   }
@@ -571,7 +571,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void moderatorOnMobileCanSeeReportedPostOnPostListPage() {
     moderatorCanSeeReportedPostOnPostListPage();
   }
@@ -594,7 +594,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -621,7 +621,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void moderatorOnMobileCanSeeReportedPostOnUserPostsPage() {
     moderatorCanSeeReportedPostOnUserPostsPage();
   }
@@ -636,7 +636,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void moderatorOnMobileCanNotSeeApprovedPostOnReportedPostsPage() {
     moderatorCanNotSeeApprovedPostOnReportedPostsPage();
   }
@@ -661,7 +661,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void moderatorOnMobileCanSeeReReportedPostOnReportedPostsPage() {
     moderatorCanSeeReReportedPostOnReportedPostsPage();
   }
@@ -685,7 +685,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }

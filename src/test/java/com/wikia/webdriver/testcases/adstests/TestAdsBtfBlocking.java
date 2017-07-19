@@ -152,7 +152,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
   @Execute(mockAds = "true")
   @InBrowser(
-      emulator = Emulator.GOOGLE_NEXUS_5,
+      emulator = Emulator.NEXUS_5X,
       browser = Browser.CHROME
   )
   @Test(
@@ -168,7 +168,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
   @Execute(mockAds = "true")
   @InBrowser(
-      emulator = Emulator.GOOGLE_NEXUS_5,
+      emulator = Emulator.NEXUS_5X,
       browser = Browser.CHROME
   )
   @Test(
@@ -182,7 +182,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   }
 
   @InBrowser(
-      emulator = Emulator.GOOGLE_NEXUS_5,
+      emulator = Emulator.NEXUS_5X,
       browser = Browser.CHROME
   )
   @Test(
@@ -207,7 +207,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   }
 
   @InBrowser(
-      emulator = Emulator.GOOGLE_NEXUS_5,
+      emulator = Emulator.NEXUS_5X,
       browser = Browser.CHROME
   )
   @Test(

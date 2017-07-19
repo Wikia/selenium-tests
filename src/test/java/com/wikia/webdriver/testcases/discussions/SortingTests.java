@@ -28,7 +28,7 @@ public class SortingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSortPostsList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }
@@ -50,7 +50,7 @@ public class SortingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSortPostsList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void loggedInUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }

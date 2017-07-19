@@ -25,7 +25,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
     private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
 
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -44,7 +44,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -64,7 +64,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
         videoFanTakeover.verifyFandomTabOpened(tabUrl);
     }
 
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -85,7 +85,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.APPLE_IPHONE_6)
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.IPHONE_6)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -111,7 +111,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
         Assertion.assertTrue(videoFanTakeover.isImageAdInCorrectSize(imageHeight, slotSelector));
     }
 
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,
@@ -135,7 +135,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
         Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
-    @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+    @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
     @NetworkTrafficDump(useMITM = true)
     @Test(
             dataProviderClass = AdsDataProvider.class,

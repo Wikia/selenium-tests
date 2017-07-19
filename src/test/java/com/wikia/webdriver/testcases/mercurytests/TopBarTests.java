@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_TopBar")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 public class TopBarTests extends NewTestTemplate {
 
   @Test(groups = "mercury_topbar_topBarIsAlwaysVisible")

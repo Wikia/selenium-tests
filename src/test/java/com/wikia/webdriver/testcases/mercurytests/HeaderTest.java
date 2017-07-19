@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 @Test(groups = "Mercury_Header")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 public class HeaderTest extends NewTestTemplate {
 
   private static final String HEADER_MESSAGE = "Header";

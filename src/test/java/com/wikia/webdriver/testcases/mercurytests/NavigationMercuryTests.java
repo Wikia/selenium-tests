@@ -15,7 +15,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Navigation")
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class NavigationMercuryTests extends NavigationTests {
 

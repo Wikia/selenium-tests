@@ -37,7 +37,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   )
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   public void adsPrebidMercury(String wiki, String article) {
     String url = urlBuilder.getUrlForPath(wiki, article);

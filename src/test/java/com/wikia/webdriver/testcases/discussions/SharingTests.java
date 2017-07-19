@@ -35,7 +35,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
@@ -45,7 +45,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
@@ -83,7 +83,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
@@ -93,7 +93,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 

@@ -22,7 +22,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
@@ -49,7 +49,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
@@ -78,7 +78,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
@@ -100,7 +100,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,

@@ -1,14 +1,13 @@
 package com.wikia.webdriver.common.core.helpers;
 
-import java.util.Map;
-
+import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 public enum Emulator {
-  GOOGLE_NEXUS_5("Google Nexus 5"),
-  APPLE_IPHONE_6("Apple iPhone 6"),
+  NEXUS_5X("Nexus 5X"),
+  IPHONE_6("iPhone 6"),
   DESKTOP_BREAKPOINT_BIG(
       new ImmutableMap.Builder<String, Object>()
           .put("width", 1296)

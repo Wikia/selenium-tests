@@ -52,7 +52,7 @@ public class TestAmazonAds extends NewTestTemplate {
       dataProvider = "amazonSites",
       groups = "AmazonAdsMercury"
   )
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void adsAmazonDebugModeOnConsecutivePagesMercury(String wikiName, String path) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     testedPage = urlBuilder.appendQueryStringToURL(testedPage, "amzn_debug_mode=1");

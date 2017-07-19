@@ -36,7 +36,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanNotWriteNewReply() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     userOnMobileMustBeLoggedInToUseReplyCreator(page.getReplyCreatorMobile());
@@ -56,7 +56,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileCanCreateReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorMobile();
@@ -66,7 +66,7 @@ public class CreatingReplyTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void userOnMobileShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
     final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
     final ReplyCreator replyCreator = page.getReplyCreatorMobile();

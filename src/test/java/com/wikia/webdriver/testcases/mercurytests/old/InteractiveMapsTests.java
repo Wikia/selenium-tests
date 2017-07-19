@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
+    emulator = Emulator.NEXUS_5X
 )
 public class InteractiveMapsTests extends NewTestTemplate {
 

@@ -84,7 +84,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   @Test(
       groups = "AdsSlotsMercury",
@@ -116,7 +116,7 @@ public class TestAdsSlotsMercury extends MobileTestTemplate {
 
   @InBrowser(
       browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5
+      emulator = Emulator.NEXUS_5X
   )
   @Test(
       groups = "AdsSlotsMercury",

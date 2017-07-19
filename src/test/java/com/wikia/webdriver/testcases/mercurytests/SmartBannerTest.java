@@ -13,7 +13,7 @@ import com.wikia.webdriver.elements.mercury.components.SmartBanner;
 import org.testng.annotations.Test;
 @Test(groups = "Mercury_SmartBanner")
 @Execute(onWikia = MercuryWikis.MLP)
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
 public class SmartBannerTest extends NewTestTemplate {
 
   private SmartBanner smartBanner;

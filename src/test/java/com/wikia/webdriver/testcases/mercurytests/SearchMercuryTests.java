@@ -20,7 +20,7 @@ public class SearchMercuryTests extends SearchTests {
   private static final String SEARCH_PHRASE = "Infobox";
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(emulator = Emulator.NEXUS_5X)
   @Test(groups = {"mercury_search_navigateUsingSearchSuggestionsOnMobile",
                   "Mercury_Search_001"})
   public void mercury_search_navigateUsingSearchSuggestionsOnMobile() {
@@ -56,7 +56,7 @@ public class SearchMercuryTests extends SearchTests {
   }
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(emulator = Emulator.NEXUS_5X)
   @Test(groups = {"mercury_search_cancelSearchPhrase", "Mercury_Search_001"})
   public void mercury_search_clearSearchPhrase() {
     super.mercury_search_clearSearchPhrase(
@@ -65,7 +65,7 @@ public class SearchMercuryTests extends SearchTests {
   }
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(emulator = Emulator.NEXUS_5X)
   @Test(groups = {"mercury_search_verifySearchLayout", "Mercury_Search_001"})
   public void mercury_search_verifySearchLayout() {
     super.mercury_search_verifySearchLayout(
@@ -74,7 +74,7 @@ public class SearchMercuryTests extends SearchTests {
   }
 
   @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-  @InBrowser(emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(emulator = Emulator.NEXUS_5X)
   @Test(groups = {"mercury_search_userIsRedirectedToSearchResultsPage", "Mercury_Search_001"})
   public void mercury_search_userIsRedirectedToSearchResultsPage() {
     SearchResultsPage searchResults =

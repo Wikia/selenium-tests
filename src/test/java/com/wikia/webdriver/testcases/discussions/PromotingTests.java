@@ -55,14 +55,14 @@ public class PromotingTests extends NewTestTemplate {
    * ANON ON MOBILE SECTION
    */
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanSeeAppPromotion() {
     Promoting promoting = findPromoting();
     assertTrue(promoting.isMobileBannerDisplayed());
     assertStringContains(promoting.getPromotionAppMobileText(), MOBILE_PROMOTION_TEXT);
   }
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanClickGooglePlayLink() {
     findPromoting().clickInstallOnMobileBanner();
     assertAppPageOpened(ANDROID_APP_TITLE);

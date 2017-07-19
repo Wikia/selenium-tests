@@ -11,9 +11,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.GoogleFormWidgetPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.PolldaddyWidgetPageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.widget.WidgetPageObject;
@@ -22,7 +20,7 @@ import org.testng.annotations.Test;
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
     browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
+    emulator = Emulator.NEXUS_5X
 )
 public class PolldaddyTests extends NewTestTemplate {
 
