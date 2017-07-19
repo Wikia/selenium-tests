@@ -57,7 +57,7 @@ public class TestAdsF2 extends AdsF2TestTemplate {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.FEED_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
@@ -75,6 +75,7 @@ public class TestAdsF2 extends AdsF2TestTemplate {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.FEED_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }

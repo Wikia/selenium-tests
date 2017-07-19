@@ -21,7 +21,7 @@ public class F2AdsDataProvider {
         },
         {
             AdsF2TestTemplate.PAGE_TYPE_TOPIC,
-            "tv"
+            "movies"
         }
     };
   }
