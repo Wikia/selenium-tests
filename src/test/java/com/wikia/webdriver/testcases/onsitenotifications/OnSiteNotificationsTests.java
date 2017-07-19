@@ -3,6 +3,9 @@ package com.wikia.webdriver.testcases.onsitenotifications;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
@@ -12,6 +15,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyE
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationFactory;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -28,14 +32,17 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER)
   public void userOnDesktopReceivesPostReplyNotification() {
-    // fixture
-    PostEntity.Data post = createPostAs(User.USER);
-    ReplyEntity.Data reply = createReplyToPostAs(post, User.USER_2);
-    Notification noti = new NotificationFactory().getPostReplyNotification(User.USER_2, post);
-    // when
-    PostsListPage discussionPage = new PostsListPage().open(siteId);
-    // then
-    Assertion.assertTrue(discussionPage.openNotificationsMenu().contains(noti));
+    Notification notification = createPostReplyNotification(User.USER, User.USER_2);
+
+    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+  }
+
+  @Execute(asUser =  User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileReceivesPostReplyNotification() {
+    Notification notification = createPostReplyNotification(User.USER, User.USER_2);
+
+    Assertion.assertTrue(getNotificationsMobile().contains(notification));
   }
 
   private PostEntity.Data createPostAs(User user) {
@@ -44,6 +51,29 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private ReplyEntity.Data createReplyToPostAs(PostEntity.Data post, User user) {
     return DiscussionsOperations.using(user, driver).createReplyToPost(siteId, post);
+  }
+
+  private Notification createPostReplyNotification(User postAuthor, User replyAuthor) {
+    PostEntity.Data post = createPostAs(postAuthor);
+    createReplyToPostAs(post, replyAuthor);
+    return new NotificationFactory().getPostReplyNotification(replyAuthor, post);
+  }
+
+  private Notifications getNotificationsDesktop() {
+    return new PostsListPage()
+      .open(siteId)
+      .getNotificationsDropdown()
+      .expand()
+      .getNotifications();
+  }
+
+  private Notifications getNotificationsMobile() {
+    return new PostsListPage()
+      .open(siteId)
+      .getTopBar()
+      .openNavigation()
+      .openUserProfile()
+      .getNotifications();
   }
 
 }

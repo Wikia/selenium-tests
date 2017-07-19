@@ -455,10 +455,6 @@ public class WikiBasePageObject extends BasePageObject {
             .collect(Collectors.toList());
   }
 
-  public Notifications openNotificationsMenu() {
-    return getNotificationsDropdown().expand().getNotifications();
-  }
-
   public BlogPage openBlogByName(String wikiURL, String blogTitle, String userName) {
     getUrl(wikiURL + URLsContent.BLOG_NAMESPACE.replace("%userName%", userName) + blogTitle);
     return new BlogPage();

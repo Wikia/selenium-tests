@@ -11,12 +11,8 @@ public class UserProfile extends BasePageObject {
   @FindBy(css = ".wds-sign-out__button")
   private WebElement logoutButton;
 
-  @Getter
-  public Notifications notifications;
-
-  public UserProfile() {
-    notifications = new Notifications();
-  }
+  @Getter(lazy = true)
+  private final Notifications notifications = new Notifications();
 
   public boolean isLogoutButtonVisible() {
     return wait.forElementVisible(logoutButton).isDisplayed();
