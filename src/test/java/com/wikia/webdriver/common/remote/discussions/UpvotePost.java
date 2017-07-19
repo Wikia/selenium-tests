@@ -19,14 +19,13 @@ public class UpvotePost {
     remoteOperation = new PostRemoteOperation(user);
   }
 
-  public PostEntity.Data execute(final UpvoteContext context) {
+  public void execute(final UpvoteContext context) {
     JSONObject jsonObject = new JSONObject(ImmutableMap.builder()
       .put("siteId", context.getSiteId())
       .put("postId", context.getPostId())
       .build());
 
-    final String response = remoteOperation.execute(buildUrl(context), jsonObject);
-    return new JsonToPostEntityMapper(JsonPath.parse(response)).toData();
+    remoteOperation.execute(buildUrl(context), jsonObject);
   }
 
   private String buildUrl(final UpvoteContext context) {

@@ -135,7 +135,7 @@ public class DiscussionsOperations {
   }
 
   public void upvotePost(String siteId, PostEntity.Data post) {
-    upvote(siteId, post.getId());
+    upvote(siteId, post.getFirstPostId());
   }
 
   public void upvoteReply(String siteId, ReplyEntity.Data reply) {

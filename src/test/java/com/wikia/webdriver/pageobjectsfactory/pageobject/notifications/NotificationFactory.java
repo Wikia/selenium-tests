@@ -13,17 +13,17 @@ public class NotificationFactory {
       .build();
   }
 
-  public static Notification getPostUpvoteNotification(User user, PostEntity.Data post) {
+  public static Notification getPostUpvoteNotification(PostEntity.Data post) {
     return Notification.builder()
-      .actor(user.getUserName())
+      .actor("1 user")
       .contentObject(post.getTitle())
       .type(NotificationType.POST_UPVOTE)
       .build();
   }
 
-  public static Notification getReplyUpvoteNotification(User user) {
+  public static Notification getReplyUpvoteNotification() {
     return Notification.builder()
-      .actor(user.getUserName())
+      .actor("1 user")
       .type(NotificationType.REPLY_UPVOTE)
       .build();
   }

@@ -184,7 +184,7 @@ public class Navigation {
   }
 
   public UserProfile openUserProfile() {
-    wait.forElementVisible(userProfileLink).click();
+    wait.forElementClickable(userProfileLink).click();
     return new UserProfile();
   }
 

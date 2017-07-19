@@ -30,12 +30,34 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     siteId = Utils.excractSiteIdFromWikiName(wikiName);
   }
 
+  /**
+   * Test methods - DESKTOP
+   */
+
   @Execute(asUser = User.USER)
   public void userOnDesktopReceivesPostReplyNotification() {
     Notification notification = createPostReplyNotification(User.USER, User.USER_2);
 
     Assertion.assertTrue(getNotificationsDesktop().contains(notification));
   }
+
+  @Execute(asUser = User.USER)
+  public void userOnDesktopReceivesPostUpvoteNotification() {
+    Notification notification = createPostUpvoteNotification(User.USER, User.USER_2);
+
+    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+  }
+
+  @Execute(asUser = User.USER)
+  public void userOnDesktopReceivesReplyUpvoteNotification() {
+    Notification notification = createReplyUpvoteNotification(User.USER, User.USER, User.USER_2);
+
+    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+  }
+
+  /**
+   * Test methods - MOBILE
+   */
 
   @Execute(asUser =  User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -46,12 +68,25 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void userOnDesktopReceivesPostUpvoteNotification() {
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileReceivesPostUpvoteNotification() {
     Notification notification = createPostUpvoteNotification(User.USER, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+    Assertion.assertTrue(getNotificationsMobile().contains(notification));
   }
 
+  @Execute(asUser = User.USER)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileReceivesReplyUpvoteNotification() {
+    Notification notification = createReplyUpvoteNotification(User.USER, User.USER, User.USER_2);
+
+    Assertion.assertTrue(getNotificationsMobile().contains(notification));
+  }
+
+
+  /**
+   * Helper methods
+   */
 
   private PostEntity.Data createPostAs(User user) {
     return DiscussionsOperations.using(user, driver).createPostWithUniqueData(siteId);
@@ -78,14 +113,14 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private Notification createPostUpvoteNotification(User postAuthor, User upvoteAuthor) {
     PostEntity.Data post = createPostAs(postAuthor);
     upvotePostAs(post, upvoteAuthor);
-    return NotificationFactory.getPostReplyNotification(upvoteAuthor, post);
+    return NotificationFactory.getPostUpvoteNotification(post);
   }
 
   private Notification createReplyUpvoteNotification(User postAuthor, User replyAuthor, User upvoteAuthor) {
     PostEntity.Data post = createPostAs(postAuthor);
     ReplyEntity.Data reply = createReplyToPostAs(post, replyAuthor);
     upvoteReplyAs(reply, upvoteAuthor);
-    return NotificationFactory.getReplyUpvoteNotification(upvoteAuthor);
+    return NotificationFactory.getReplyUpvoteNotification();
   }
 
   private Notifications getNotificationsDesktop() {
