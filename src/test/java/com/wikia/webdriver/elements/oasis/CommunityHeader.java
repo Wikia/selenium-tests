@@ -52,6 +52,12 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-community-header a[data-tracking=\"discuss\"], .wds-community-header a[data-tracking=\"forum\"]")
   private WebElement discussLink;
 
+  @FindBy(css = ".wds-community-header")
+  private WebElement communityHeader;
+
+  public boolean isVisible() {
+    return this.isElementDisplayed(communityHeader);
+  }
 
   public MainPage clickWordmark() {
     wait.forElementClickable(wordmark).click();
@@ -83,7 +89,7 @@ public class CommunityHeader extends BasePageObject {
     return new SpecialWikiActivityPageObject(driver);
   }
 
-  public SpecialAdminDashboardPageObject clickAdminDashboard()  {
+  public SpecialAdminDashboardPageObject clickAdminDashboard() {
     wait.forElementClickable(adminDashboardButton).click();
 
     PageObjectLogging.logInfo("clicked admin dashboard Button");
@@ -91,12 +97,12 @@ public class CommunityHeader extends BasePageObject {
     return new SpecialAdminDashboardPageObject();
   }
 
-  public CommunityHeader openExploreMenu()  {
-   new Actions(driver).moveToElement(exploreTab).perform();
+  public CommunityHeader openExploreMenu() {
+    new Actions(driver).moveToElement(exploreTab).perform();
 
-   PageObjectLogging.logInfo("explore dropdown opened");
+    PageObjectLogging.logInfo("explore dropdown opened");
 
-   return this;
+    return this;
   }
 
   public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
