@@ -45,6 +45,14 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Assertion.assertTrue(getNotificationsMobile().contains(notification));
   }
 
+  @Execute(asUser = User.USER)
+  public void userOnDesktopReceivesPostUpvoteNotification() {
+    Notification notification = createPostUpvoteNotification(User.USER, User.USER_2);
+
+    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+  }
+
+
   private PostEntity.Data createPostAs(User user) {
     return DiscussionsOperations.using(user, driver).createPostWithUniqueData(siteId);
   }
@@ -53,10 +61,31 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     return DiscussionsOperations.using(user, driver).createReplyToPost(siteId, post);
   }
 
+  private void upvotePostAs(PostEntity.Data post, User user) {
+    DiscussionsOperations.using(user, driver).upvotePost(siteId, post);
+  }
+
+  private void upvoteReplyAs(ReplyEntity.Data reply, User user) {
+    DiscussionsOperations.using(user, driver).upvoteReply(siteId, reply);
+  }
+
   private Notification createPostReplyNotification(User postAuthor, User replyAuthor) {
     PostEntity.Data post = createPostAs(postAuthor);
     createReplyToPostAs(post, replyAuthor);
-    return new NotificationFactory().getPostReplyNotification(replyAuthor, post);
+    return NotificationFactory.getPostReplyNotification(replyAuthor, post);
+  }
+
+  private Notification createPostUpvoteNotification(User postAuthor, User upvoteAuthor) {
+    PostEntity.Data post = createPostAs(postAuthor);
+    upvotePostAs(post, upvoteAuthor);
+    return NotificationFactory.getPostReplyNotification(upvoteAuthor, post);
+  }
+
+  private Notification createReplyUpvoteNotification(User postAuthor, User replyAuthor, User upvoteAuthor) {
+    PostEntity.Data post = createPostAs(postAuthor);
+    ReplyEntity.Data reply = createReplyToPostAs(post, replyAuthor);
+    upvoteReplyAs(reply, upvoteAuthor);
+    return NotificationFactory.getReplyUpvoteNotification(upvoteAuthor);
   }
 
   private Notifications getNotificationsDesktop() {

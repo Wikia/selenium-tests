@@ -125,4 +125,20 @@ public class DiscussionsOperations {
   public void validatePost(ModeratePostContext context) {
     new ValidatePost(user).execute(context);
   }
+
+  private void upvote(UpvoteContext context) {
+    new UpvotePost(user).execute(context);
+  }
+
+  private void upvote(String siteId, String postId) {
+    upvote(UpvoteContext.defaultContext(siteId, postId));
+  }
+
+  public void upvotePost(String siteId, PostEntity.Data post) {
+    upvote(siteId, post.getId());
+  }
+
+  public void upvoteReply(String siteId, ReplyEntity.Data reply) {
+    upvote(siteId, reply.getId());
+  }
 }

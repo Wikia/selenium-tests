@@ -39,6 +39,8 @@ public class Notification extends BasePageObject {
   }
 
   public String getContent() {
-    return String.format(getFormat(), actor, contentObject);
+    return type == NotificationType.REPLY_UPVOTE ?
+      String.format(getFormat(), actor) :
+      String.format(getFormat(), actor, contentObject);
   }
 }
