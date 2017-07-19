@@ -21,8 +21,28 @@ public class Notifications extends BasePageObject {
   @FindBy(css = ".wds-notifications__zero-state")
   private WebElement emptyState;
 
+  @FindBy(css = ".wds-notifications__mark-all-as-read")
+  private WebElement markAllAsRead;
+
+  private final String UNREAD_CLASS = "wds-is-unread";
+
   public boolean isEmptyStateMessageVisible() {
     return wait.forElementVisible(emptyState).isDisplayed();
+  }
+
+  public void markAllAsRead() {
+    waitAndClick(markAllAsRead);
+    wait.forElementNotVisible(markAllAsRead);
+  }
+
+  public boolean isAnyNotificationUnread() {
+    List<WebElement> notifications = notificationCards
+      .stream()
+      .filter(card -> card
+        .getAttribute("class")
+        .contains(UNREAD_CLASS))
+      .collect(Collectors.toList());
+    return !notifications.isEmpty();
   }
 
   public boolean contains(Notification notification) {

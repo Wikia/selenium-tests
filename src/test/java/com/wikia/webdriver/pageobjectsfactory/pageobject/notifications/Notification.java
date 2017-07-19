@@ -14,25 +14,9 @@ import java.util.stream.Collectors;
 @Builder
 public class Notification extends BasePageObject {
 
-  @FindBy(css = ".wds-notification-card")
-  private List<WebElement> notificationCards;
-
-  @FindBy(css = ".wds-avatar-stack")
-  private WebElement avatars;
-
-  @FindBy(css = ".wds-notification-card__community")
-  private WebElement community;
-
-  @FindBy(css = "li.wds-notification-card__context-item:first-child")
-  private WebElement timestamp;
-
   private NotificationType type;
   private String actor;
   private String contentObject;
-
-  public boolean isAvatarStackDisplayed() {
-    return wait.forElementVisible(avatars).isDisplayed();
-  }
 
   private String getFormat() {
     return type.getFormat();

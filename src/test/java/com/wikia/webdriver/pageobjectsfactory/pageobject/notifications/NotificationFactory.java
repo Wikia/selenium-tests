@@ -6,9 +6,18 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEn
 public class NotificationFactory {
 
   public static Notification getPostReplyNotification(User user, PostEntity.Data post) {
+    return getPostReplyNotfication(user.getUserName(), post.getTitle());
+  }
+
+  public static Notification getPostReplyConsolidatedNotification(User lastActor, int remainingActors, PostEntity.Data post) {
+    String actor = String.format("%s and %d other users", lastActor.getUserName(), remainingActors);
+    return getPostReplyNotfication(actor, post.getTitle());
+  }
+
+  private static Notification getPostReplyNotfication(String user, String postContent) {
     return Notification.builder()
-      .actor(user.getUserName())
-      .contentObject(post.getTitle())
+      .actor(user)
+      .contentObject(postContent)
       .type(NotificationType.POST_REPLY)
       .build();
   }
@@ -27,4 +36,6 @@ public class NotificationFactory {
       .type(NotificationType.REPLY_UPVOTE)
       .build();
   }
+
+
 }

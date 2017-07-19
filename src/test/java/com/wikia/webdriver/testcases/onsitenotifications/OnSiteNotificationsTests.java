@@ -19,70 +19,121 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notificat
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Test(groups = "on-site-notifications")
 public class OnSiteNotificationsTests extends NewTestTemplate {
 
-  private String siteId;
-  private static final String wikiName = MercuryWikis.DISCUSSIONS_3;
+  private static final String DESKTOP = "on-site-notifications-desktop";
+  private static final String MOBILE = "on-site-notifications-mobile";
 
-  @BeforeClass
-  public void setUp() {
-    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+  private String siteId;
+  private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_3;
+  private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_4;
+  private List<User> replyUsers = Arrays.asList(
+    User.USER_2,
+    User.USER_3,
+    User.USER_4,
+    User.USER_5,
+    User.USER_6,
+    User.USER_9);
+
+  @BeforeClass(groups = DESKTOP)
+  public void setUpDesktop() {
+    siteId = Utils.excractSiteIdFromWikiName(WIKI_DESKTOP);
+  }
+
+  @BeforeClass(groups = MOBILE)
+  public void setUpMobile() {
+    siteId = Utils.excractSiteIdFromWikiName(WIKI_MOBILE);
   }
 
   /**
    * Test methods - DESKTOP
    */
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   public void userOnDesktopReceivesPostReplyNotification() {
-    Notification notification = createPostReplyNotification(User.USER, User.USER_2);
+    Notification notification = createPostReplyNotification(User.USER_11, User.USER_2);
 
     Assertion.assertTrue(getNotificationsDesktop().contains(notification));
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   public void userOnDesktopReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteNotification(User.USER, User.USER_2);
+    Notification notification = createPostUpvoteNotification(User.USER_11, User.USER_2);
 
     Assertion.assertTrue(getNotificationsDesktop().contains(notification));
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteNotification(User.USER, User.USER, User.USER_2);
+    Notification notification = createReplyUpvoteNotification(User.USER_11, User.USER_11, User.USER_2);
 
     Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+  }
+
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
+  public void userOnDesktopSeesConsolidatedReplyNotification() {
+    Notification notification = createConsolidatedPostReplyNotification(User.USER_11);
+    Notifications notificationsList = getNotificationsDesktop();
+
+    Assertion.assertTrue(notificationsList.contains(notification));
+  }
+
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
+  public void userOnDesktopMarksAllNotificationsAsRead() {
+    Notifications notificationsList = getNotificationsDesktop();
+    notificationsList.markAllAsRead();
+    Assertion.assertFalse(notificationsList.isAnyNotificationUnread());
   }
 
   /**
    * Test methods - MOBILE
    */
 
-  @Execute(asUser =  User.USER)
+  @Execute(asUser =  User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileReceivesPostReplyNotification() {
-    Notification notification = createPostReplyNotification(User.USER, User.USER_2);
+    Notification notification = createPostReplyNotification(User.USER_12, User.USER_2);
 
     Assertion.assertTrue(getNotificationsMobile().contains(notification));
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteNotification(User.USER, User.USER_2);
+    Notification notification = createPostUpvoteNotification(User.USER_12, User.USER_2);
 
     Assertion.assertTrue(getNotificationsMobile().contains(notification));
   }
 
-  @Execute(asUser = User.USER)
+  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteNotification(User.USER, User.USER, User.USER_2);
+    Notification notification = createReplyUpvoteNotification(User.USER_12, User.USER_12, User.USER_2);
 
     Assertion.assertTrue(getNotificationsMobile().contains(notification));
   }
 
+  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
+  public void userOnMobileSeesConsolidatedReplyNotification() {
+    Notification notification = createConsolidatedPostReplyNotification(User.USER_12);
+    Notifications notificationsList = getNotificationsMobile();
+
+    Assertion.assertTrue(notificationsList.contains(notification));
+  }
 
   /**
    * Helper methods
@@ -121,6 +172,14 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     ReplyEntity.Data reply = createReplyToPostAs(post, replyAuthor);
     upvoteReplyAs(reply, upvoteAuthor);
     return NotificationFactory.getReplyUpvoteNotification();
+  }
+
+  private Notification createConsolidatedPostReplyNotification(User postAuthor) {
+    PostEntity.Data post = createPostAs(postAuthor);
+    for(User replyAuthor : replyUsers) {
+      createReplyToPostAs(post, replyAuthor);
+    }
+    return NotificationFactory.getPostReplyConsolidatedNotification(replyUsers.get(5), 5, post);
   }
 
   private Notifications getNotificationsDesktop() {
