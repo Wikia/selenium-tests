@@ -36,13 +36,11 @@ public class Notifications extends BasePageObject {
   }
 
   public boolean isAnyNotificationUnread() {
-    List<WebElement> notifications = notificationCards
+    return notificationCards
       .stream()
-      .filter(card -> card
+      .anyMatch(card -> card
         .getAttribute("class")
-        .contains(UNREAD_CLASS))
-      .collect(Collectors.toList());
-    return !notifications.isEmpty();
+        .contains(UNREAD_CLASS));
   }
 
   public boolean contains(Notification notification) {

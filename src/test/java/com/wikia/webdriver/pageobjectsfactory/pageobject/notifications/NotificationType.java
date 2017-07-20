@@ -8,8 +8,8 @@ public enum NotificationType {
 
   private final String format;
 
-  NotificationType(String key) {
-    format = key;
+  NotificationType(String format) {
+    this.format = format;
   }
 
   public String getFormat() {
