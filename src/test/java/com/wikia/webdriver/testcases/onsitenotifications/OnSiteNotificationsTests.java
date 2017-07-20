@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationFactory;
@@ -147,7 +147,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     return DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
   }
 
-  private ReplyEntity.Data createReplyToPostAs(PostEntity.Data post, User user) {
+  private ReplyEntityData createReplyToPostAs(PostEntity.Data post, User user) {
     return DiscussionsClient.using(user, driver).createReplyToPost(siteId, post);
   }
 
@@ -155,7 +155,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     DiscussionsClient.using(user, driver).upvotePost(siteId, post);
   }
 
-  private void upvoteReplyAs(ReplyEntity.Data reply, User user) {
+  private void upvoteReplyAs(ReplyEntityData reply, User user) {
     DiscussionsClient.using(user, driver).upvoteReply(siteId, reply);
   }
 
@@ -173,7 +173,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notification createReplyUpvoteNotification(User postAuthor, User replyAuthor, User upvoteAuthor) {
     PostEntity.Data post = createPostAs(postAuthor);
-    ReplyEntity.Data reply = createReplyToPostAs(post, replyAuthor);
+    ReplyEntityData reply = createReplyToPostAs(post, replyAuthor);
     upvoteReplyAs(reply, upvoteAuthor);
     return NotificationFactory.getReplyUpvoteNotification();
   }

@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.context.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
@@ -37,7 +37,7 @@ public class DiscussionsClient {
   /**
    * Callable from anywhere
    */
-  public ReplyEntity.Data createReplyToPost(String siteId, PostEntity.Data post) {
+  public ReplyEntityData createReplyToPost(String siteId, PostEntity.Data post) {
     return new CreateReply(user).execute(CreateReplyContext.defaultContext(siteId, post.getId()));
   }
 
@@ -134,7 +134,7 @@ public class DiscussionsClient {
     upvote(UpvoteContext.defaultContext(siteId, post.getFirstPostId()));
   }
 
-  public void upvoteReply(String siteId, ReplyEntity.Data reply) {
+  public void upvoteReply(String siteId, ReplyEntityData reply) {
     upvote(UpvoteContext.defaultContext(siteId, reply.getId()));
   }
 }

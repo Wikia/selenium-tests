@@ -7,7 +7,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.context.CreateReplyContext;
 import com.wikia.webdriver.common.remote.operations.http.PostRemoteOperation;
 import com.wikia.webdriver.common.remote.operations.json.JsonToReplyPostEntityMapper;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
 import org.json.JSONObject;
 
 public class CreateReply {
@@ -20,7 +20,7 @@ public class CreateReply {
     remoteOperation = new PostRemoteOperation(user);
   }
 
-  public ReplyEntity.Data execute(final CreateReplyContext context) {
+  public ReplyEntityData execute(final CreateReplyContext context) {
     JSONObject jsonObject = new JSONObject(ImmutableMap.builder()
       .put("siteId", context.getSiteId())
       .put("body", context.getBody())

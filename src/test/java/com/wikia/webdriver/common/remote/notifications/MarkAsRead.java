@@ -17,10 +17,8 @@ class MarkAsRead {
     remoteOperation.execute(buildUrl(), new JSONObject());
   }
 
-
   private String buildUrl() {
     return NotificationsOperations.service(MARK_AS_READ_SUFFIX);
   }
-
 
 }
