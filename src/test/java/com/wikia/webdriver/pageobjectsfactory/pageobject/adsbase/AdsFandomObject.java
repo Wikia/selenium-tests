@@ -28,7 +28,7 @@ public class AdsFandomObject extends AdsBaseObject {
   }
 
   public void scrollToSlot(String slotSelector) {
-    jsActions.scrollToElement(driver.findElement(By.id(slotSelector)), GLOBAL_NAV_HEIGHT);
+    jsActions.scrollToElement(driver.findElement(By.id(slotSelector)));
   }
 
   public WebElement getSlot(String slotName) {

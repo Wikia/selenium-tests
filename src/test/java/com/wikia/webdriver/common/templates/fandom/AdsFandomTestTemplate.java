@@ -4,8 +4,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject
 
 public class AdsFandomTestTemplate extends FandomTestTemplate {
 
-  public static final String PAGE_TYPE_ARTICLE = "article";
-  public static final String PAGE_TYPE_HUB = "hub";
+  public static final String PAGE_TYPE_ARTICLE = "f2/article";
+  public static final String PAGE_TYPE_TOPIC = "topic";
 
   @Override
   protected void loadFirstPage() {
@@ -16,12 +16,12 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
     String pageUrl;
 
     switch (pageType) {
-      case PAGE_TYPE_HUB:
-        pageUrl = urlBuilder.getUrlForFandomHub(pageName);
+      case PAGE_TYPE_TOPIC:
+        pageUrl = urlBuilder.getUrlForFandomTopic(pageName);
         break;
       case PAGE_TYPE_ARTICLE:
       default:
-        pageUrl = urlBuilder.getUrlForFandomPage(pageName);
+        pageUrl = urlBuilder.getUrlForFandomArticlePage(pageName);
         break;
     }
 

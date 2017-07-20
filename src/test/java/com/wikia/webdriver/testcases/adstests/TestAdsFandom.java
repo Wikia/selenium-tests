@@ -40,42 +40,41 @@ public class TestAdsFandom extends AdsFandomTestTemplate {
   private void verifySlotsOnDesktop(AdsFandomObject fandomPage, String pageType) {
     if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_ARTICLE)) {
       verifyArticleSlotsOnDesktop(fandomPage);
-    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_HUB)) {
-      verifyHubSlots(fandomPage);
+    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_TOPIC)) {
+      verifyTopicSlots(fandomPage);
     }
   }
 
   private void verifySlotsOnMobile(AdsFandomObject fandomPage, String pageType) {
     if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_ARTICLE)) {
       verifyArticleSlotsOnMobile(fandomPage);
-    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_HUB)) {
-      verifyHubSlots(fandomPage);
+    } else if (pageType.equals(AdsFandomTestTemplate.PAGE_TYPE_TOPIC)) {
+      verifyTopicSlots(fandomPage);
     }
   }
 
   private void verifyArticleSlotsOnDesktop(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_DESKTOP);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD_DESKTOP));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 
   private void verifyArticleSlotsOnMobile(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_MOBILE);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_BOXAD));
-    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD_MOBILE));
+    Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
 
-  private void verifyHubSlots(AdsFandomObject fandomPage) {
+  private void verifyTopicSlots(AdsFandomObject fandomPage) {
     fandomPage.triggerOnScrollSlots();
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
     fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
-    fandomPage.verifySlot(AdsFandomContent.BOTTOM_BOXAD);
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.INCONTENT_BOXAD));
     Assertion.assertNull(fandomPage.getSlot(AdsFandomContent.BOTTOM_LEADERBOARD));
   }
