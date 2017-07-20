@@ -20,7 +20,7 @@ public class DeletePost {
   }
 
   private String buildUrl(final ThreadContext context) {
-    return DiscussionsOperations
+    return DiscussionsClient
       .service(String.format(DELETE_POST_URL_SUFFIX, context.getSiteId(), context.getThreadId()));
   }
 }

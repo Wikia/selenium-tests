@@ -9,7 +9,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.MoreOptionsPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -169,8 +169,8 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -198,8 +198,8 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -216,7 +216,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanLockPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
     PostEntity postEntity = lockPost(data);
 
@@ -239,7 +239,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanLockPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
     PostEntity postEntity = lockPost(data);
 
@@ -262,7 +262,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileCanLockPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
     PostEntity postEntity = lockPost(data);
 
@@ -295,8 +295,8 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -313,7 +313,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopCanLockPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
     PostEntity postEntity = lockPost(data);
 
@@ -345,8 +345,8 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void staffUserOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
         .unlockPost(data);
 
     PostDetailsPage page = new PostDetailsPage().open(data.getId());
@@ -363,7 +363,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsModeratorOnMobileCanLockPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
     PostEntity postEntity = lockPost(data);
 
@@ -410,7 +410,7 @@ public class LockingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsModeratorOnDesktopCanLockPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
     PostEntity postEntity = lockPost(data);
 
@@ -451,7 +451,7 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private MoreOptionsPopOver findMoreOptionsOnPostDetailsPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    final PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
     final PageWithPosts page = new PostDetailsPage().open(data.getId());
 
     return findMoreOptions(page);
@@ -462,7 +462,7 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private MoreOptionsPopOver findMoreOptionsOnPostsListPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
     final PageWithPosts page = new PostsListPage().open();
 
     return findMoreOptions(page, data);
@@ -473,15 +473,15 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private MoreOptionsPopOver findMoreOptionsOnUserPostsPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    final PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
     final PageWithPosts page = new UserPostsPage().open(data.getAuthorId());
 
     return findMoreOptions(page, data);
   }
 
   private PostDetailsPage lockPostAsDiscussionsModeratorAndOpenPostDetailsPage() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
 
     return new PostDetailsPage().open(data.getId());
   }
@@ -523,43 +523,43 @@ public class LockingPostTests extends NewTestTemplate {
   }
 
   private PostEntity unlockPostLockedByDiscussionsAdministrator() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
 
     return unlockPost(data);
   }
 
   private PostEntity unlockPostLockedByStaff() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.STAFF, driver).lockPost(data);
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.STAFF, driver).lockPost(data);
 
     return unlockPost(data);
   }
 
   private PostEntity unlockPostLockedByDiscussionsModerator() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
 
     return unlockPost(data);
   }
 
   private PostDetailsPage openPageWithPostLockedByDiscussionsModerator() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
 
     return new PostDetailsPage().open(data.getId());
   }
 
   private PostDetailsPage openPageWithPostLockedByStaff() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.STAFF, driver).lockPost(data);
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.STAFF, driver).lockPost(data);
 
     return new PostDetailsPage().open(data.getId());
   }
 
   private PostDetailsPage openPageWithPostUnlockedByStaff() {
-    PostEntity.Data data = DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.STAFF, driver).lockPost(data)
+    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.STAFF, driver).lockPost(data)
         .unlockPost(data);
 
     return new PostDetailsPage().open(data.getId());

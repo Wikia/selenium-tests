@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntity;
@@ -144,19 +144,19 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
    */
 
   private PostEntity.Data createPostAs(User user) {
-    return DiscussionsOperations.using(user, driver).createPostWithUniqueData(siteId);
+    return DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
   }
 
   private ReplyEntity.Data createReplyToPostAs(PostEntity.Data post, User user) {
-    return DiscussionsOperations.using(user, driver).createReplyToPost(siteId, post);
+    return DiscussionsClient.using(user, driver).createReplyToPost(siteId, post);
   }
 
   private void upvotePostAs(PostEntity.Data post, User user) {
-    DiscussionsOperations.using(user, driver).upvotePost(siteId, post);
+    DiscussionsClient.using(user, driver).upvotePost(siteId, post);
   }
 
   private void upvoteReplyAs(ReplyEntity.Data reply, User user) {
-    DiscussionsOperations.using(user, driver).upvoteReply(siteId, reply);
+    DiscussionsClient.using(user, driver).upvoteReply(siteId, reply);
   }
 
   private Notification createPostReplyNotification(User postAuthor, User replyAuthor) {

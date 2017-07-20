@@ -50,6 +50,6 @@ public class CreateCategory {
   }
 
   private String buildUrl(final CreateCategoryContext context) {
-    return DiscussionsOperations.service(String.format(CREATE_CATEGORY_URL_SUFFIX, context.getSiteId()));
+    return DiscussionsClient.service(String.format(CREATE_CATEGORY_URL_SUFFIX, context.getSiteId()));
   }
 }

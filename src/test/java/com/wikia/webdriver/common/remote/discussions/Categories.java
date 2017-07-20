@@ -50,6 +50,6 @@ public class Categories {
   }
 
   private String buildUrl(final CreateCategoryContext context) {
-    return DiscussionsOperations.service(String.format(GET_CATEGORIES_URL_SUFFIX, context.getSiteId()));
+    return DiscussionsClient.service(String.format(GET_CATEGORIES_URL_SUFFIX, context.getSiteId()));
   }
 }

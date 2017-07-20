@@ -11,7 +11,7 @@ public class ReportPost extends ModeratePost {
     super(user);
   }
   protected String buildUrl(final ModeratePostContext context) {
-    return DiscussionsOperations
+    return DiscussionsClient
       .service(String.format(REPORT_POST_URL_SUFFIX, context.getSiteId(), context.getPostId()));
   }
 }

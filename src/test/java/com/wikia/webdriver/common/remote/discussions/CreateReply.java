@@ -34,7 +34,7 @@ public class CreateReply {
   }
 
   private String buildUrl(final CreateReplyContext context) {
-    return DiscussionsOperations
+    return DiscussionsClient
       .service(String.format(CREATE_REPLY_URL_SUFFIX, context.getSiteId()));
   }
 }

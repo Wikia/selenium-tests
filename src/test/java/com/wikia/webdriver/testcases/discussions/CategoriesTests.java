@@ -14,7 +14,7 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
@@ -98,7 +98,7 @@ public class CategoriesTests extends NewTestTemplate {
   private CategoryPill.Data setUp(String wikiName) {
     siteId = Utils.excractSiteIdFromWikiName(wikiName);
     CategoryPill.Data category = addCategoryRemotely(siteId, createUniqueCategoryName());
-    DiscussionsOperations
+    DiscussionsClient
       .using(User.STAFF, driver)
       .createPostWithCategory(category.getId(), siteId);
     return category;

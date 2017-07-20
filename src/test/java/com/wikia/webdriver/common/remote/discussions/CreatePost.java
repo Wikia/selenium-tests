@@ -32,7 +32,7 @@ public class CreatePost {
   }
 
   private String buildUrl(final CreatePostContext context) {
-    return DiscussionsOperations
+    return DiscussionsClient
       .service(String.format(CREATE_POST_URL_SUFFIX, context.getSiteId(), context.getCategoryId()));
   }
 }

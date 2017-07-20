@@ -18,7 +18,7 @@ public class PostPadlock {
   }
 
   private String buildUrl(final ThreadContext context) {
-    return DiscussionsOperations
+    return DiscussionsClient
       .service(String.format(LOCK_POST_URL_SUFFIX, context.getSiteId(), context.getThreadId()));
   }
 }

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import org.openqa.selenium.WebDriver;
 
 @AllArgsConstructor(staticName = "using")
-public class DiscussionsOperations {
+public class DiscussionsClient {
 
   private static final String DISCUSSIONS_SERVICE = "discussion/";
   private final User user;
@@ -85,11 +85,11 @@ public class DiscussionsOperations {
     new DeletePost(user).execute(context);
   }
 
-  public DiscussionsOperations lockPost(PostEntity.Data data) {
+  public DiscussionsClient lockPost(PostEntity.Data data) {
     return lockPost(ThreadContext.defaultContextUsing(extractSiteId(), data));
   }
 
-  public DiscussionsOperations lockPost(ThreadContext context) {
+  public DiscussionsClient lockPost(ThreadContext context) {
     new LockPost(user).execute(context);
     return this;
   }

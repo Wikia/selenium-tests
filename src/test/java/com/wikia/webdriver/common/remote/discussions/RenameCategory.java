@@ -25,7 +25,7 @@ public class RenameCategory {
   }
 
   private String buildUrl(final CategoryContext context) {
-    return DiscussionsOperations
+    return DiscussionsClient
       .service(String.format(RENAME_CATEGORY_URL_SUFFIX, context.getSiteId(), context.getCategoryId()));
   }
 }

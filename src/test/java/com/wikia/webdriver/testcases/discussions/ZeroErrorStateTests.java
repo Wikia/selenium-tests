@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
@@ -276,7 +276,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   private void userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
-    final String postId = DiscussionsOperations.using(User.USER, driver)
+    final String postId = DiscussionsClient.using(User.USER, driver)
         .createPostWithUniqueData().getId();
 
     final Replies replies = new PostDetailsPage().open(postId).getReplies();

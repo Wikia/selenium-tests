@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.discussions.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostActionsRow;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -245,8 +245,8 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+    final PostEntity.Data data = DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
@@ -271,8 +271,8 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
   public void discussionsAdministratorOnDesktopCanUnfollowPostOnReportedListPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+    final PostEntity.Data data = DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
@@ -293,7 +293,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
-    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private PostActionsRow clickUnfollowOn(PageWithPosts page) {
@@ -321,6 +321,6 @@ public class FollowingPostTests extends NewTestTemplate {
 
   private void createAndReportPostAsUserRemotely() {
     final PostEntity.Data data = createPostAsUserRemotely();
-    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+    DiscussionsClient.using(User.USER, driver).reportPost(data);
   }
 }
