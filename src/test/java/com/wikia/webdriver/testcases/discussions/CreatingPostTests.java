@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
@@ -11,8 +9,8 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Discussions;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
@@ -41,7 +39,7 @@ public class CreatingPostTests extends NewTestTemplate {
   private String siteId;
 
   private void setUp(String wikiName) {
-    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
+    siteId = Utils.excractSiteIdFromWikiName(wikiName);
   }
 
   /*
@@ -61,14 +59,14 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotWriteNewPost() {
     userOnDesktopMustBeLoggedInToUsePostCreator();
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_1)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
@@ -130,7 +128,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanExpandPostEditor() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
@@ -142,7 +140,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
     PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
@@ -150,21 +148,21 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostListPage() {
     assertPostWithWeirdCharactersDisplayedOnPostsListPage(MercuryWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void postWithWeirdCharactersIsDisplayedOnDesktopPostDetailsPage() {
     assertPostWithWeirdCharactersDisplayedOnPostDetailsPage(MercuryWikis.DISCUSSIONS_2);
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
@@ -176,7 +174,7 @@ public class CreatingPostTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
     assertThatUserCanClickPostAndGoToPostDetailsPage();
   }
@@ -309,7 +307,7 @@ public class CreatingPostTests extends NewTestTemplate {
   private PostEntity.Data createNaughtyStringsPostRemotely(User user) {
     String description = FIRST_LINE + ContentLoader.loadWikiTextContent("blns.txt");
     String title = "Naughty strings";
-    return DiscussionsOperations.using(user, driver).createCustomPost(siteId, title, description);
+    return DiscussionsClient.using(user, driver).createCustomPost(siteId, title, description);
   }
 
   private PostEntity.Data createWeirdCharactersPostOnWiki(String wiki) {
@@ -318,7 +316,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private void cleanUp(PostEntity.Data post) {
-    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, siteId);
+    DiscussionsClient.using(User.STAFF, driver).deletePost(post, siteId);
   }
 
   private void assertPostWithWeirdCharactersDisplayedOnPostsListPage(String wiki) {

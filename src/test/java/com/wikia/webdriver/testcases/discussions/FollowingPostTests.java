@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -10,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostActionsRow;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -65,21 +63,21 @@ public class FollowingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonymousUserDesktopFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotFollowPostOnPostsListPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostsListPage().open());
   }
 
   @Test(groups = "discussions-anonymousUserDesktopFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotFollowPostOnPostDetailsPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
   @Test(groups = "discussions-anonymousUserDesktopFollowingPost")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotFollowPostOnUserPostsPage() {
     assertThatAnonymousUserCannotFollowPostOn(data -> new UserPostsPage().open(data.getAuthorId()));
   }
@@ -159,21 +157,21 @@ public class FollowingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanFollowPostOnPostsListPage() {
     assertThatPostCanBeFollowedOn(data -> new PostsListPage().open());
   }
 
   @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanFollowPostOnPostDetailsPage() {
     assertThatPostCanBeFollowedOn(data -> new PostDetailsPage().open(data.getId()));
   }
 
   @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanFollowPostOnUserPostsPage() {
     assertThatPostCanBeFollowedOn(data -> new UserPostsPage().open(data.getAuthorId()));
   }
@@ -183,7 +181,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanUnfollowPostOnPostsListPage() {
     assertThatPostCanBeUnfollowedOn(data -> new PostsListPage().open());
   }
@@ -193,7 +191,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanUnfollowPostOnPostDetailsPage() {
     assertThatPostCanBeUnfollowedOn(data -> new PostDetailsPage().open(data.getId()));
   }
@@ -203,7 +201,7 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-userDesktopFollowingPost")
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanUnfollowPostOnUserPostsPage() {
     assertThatPostCanBeUnfollowedOn(data -> new UserPostsPage().open(data.getAuthorId()));
   }
@@ -245,8 +243,8 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+    final PostEntity.Data data = DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
@@ -256,7 +254,7 @@ public class FollowingPostTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsAdministratorDesktopFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanFollowPostOnReportedPostsPage() {
     createAndReportPostAsUserRemotely();
 
@@ -269,10 +267,10 @@ public class FollowingPostTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-discussionsAdministratorDesktopFollowingPost")
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanUnfollowPostOnReportedListPage() {
-    final PostEntity.Data data = DiscussionsOperations.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
-    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+    final PostEntity.Data data = DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
+    DiscussionsClient.using(User.USER, driver).reportPost(data);
 
     final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
     Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
@@ -293,7 +291,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
-    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private PostActionsRow clickUnfollowOn(PageWithPosts page) {
@@ -321,6 +319,6 @@ public class FollowingPostTests extends NewTestTemplate {
 
   private void createAndReportPostAsUserRemotely() {
     final PostEntity.Data data = createPostAsUserRemotely();
-    DiscussionsOperations.using(User.USER, driver).reportPost(data);
+    DiscussionsClient.using(User.USER, driver).reportPost(data);
   }
 }

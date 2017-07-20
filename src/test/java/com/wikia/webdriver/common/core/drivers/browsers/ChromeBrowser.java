@@ -63,6 +63,9 @@ public class ChromeBrowser extends BrowserAbstract {
 
     if (!emulator.equals(Emulator.DEFAULT)) {
       Map<String, Object> mobileEmulation = new HashMap<>();
+      if(StringUtils.isNotBlank(emulator.getUserAgent())){
+        mobileEmulation.put("userAgent", emulator.getUserAgent());
+      }
       if (StringUtils.isNotBlank(emulator.getDeviceName())) {
         mobileEmulation.put("deviceName", emulator.getDeviceName());
       } else {
