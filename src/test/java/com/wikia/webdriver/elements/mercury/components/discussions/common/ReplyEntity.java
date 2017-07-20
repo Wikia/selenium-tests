@@ -2,7 +2,11 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import lombok.Builder;
 
-public class ReplyEntity {
+public final class ReplyEntity {
+
+  private ReplyEntity() {
+    // no-op
+  }
 
   @Builder
   @lombok.Data

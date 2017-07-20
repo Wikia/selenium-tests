@@ -24,7 +24,7 @@ public class Notifications extends BasePageObject {
   @FindBy(css = ".wds-notifications__mark-all-as-read")
   private WebElement markAllAsRead;
 
-  private final String UNREAD_CLASS = "wds-is-unread";
+  private static final String UNREAD_CLASS = "wds-is-unread";
 
   public boolean isEmptyStateMessageVisible() {
     return wait.forElementVisible(emptyState).isDisplayed();

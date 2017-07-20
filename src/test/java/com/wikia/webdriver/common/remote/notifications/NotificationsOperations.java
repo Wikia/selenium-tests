@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(staticName = "using")
 public class NotificationsOperations {
 
-  private final static String NOTIFICATIONS_SERVICE = "notifications/";
+  private static final String NOTIFICATIONS_SERVICE = "notifications/";
   private final User user;
 
   public static String service(String url) {

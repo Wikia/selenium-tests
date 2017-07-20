@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 class MarkAsRead {
 
-  private final static String MARK_AS_READ_SUFFIX = "mark-all-as-read";
+  private static final String MARK_AS_READ_SUFFIX = "mark-all-as-read";
   private final PostRemoteOperation remoteOperation;
 
   MarkAsRead(User user) {

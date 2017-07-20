@@ -130,15 +130,11 @@ public class DiscussionsOperations {
     new UpvotePost(user).execute(context);
   }
 
-  private void upvote(String siteId, String postId) {
-    upvote(UpvoteContext.defaultContext(siteId, postId));
-  }
-
   public void upvotePost(String siteId, PostEntity.Data post) {
-    upvote(siteId, post.getFirstPostId());
+    upvote(UpvoteContext.defaultContext(siteId, post.getFirstPostId()));
   }
 
   public void upvoteReply(String siteId, ReplyEntity.Data reply) {
-    upvote(siteId, reply.getId());
+    upvote(UpvoteContext.defaultContext(siteId, reply.getId()));
   }
 }
