@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.*;
-import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,17 +19,16 @@ public class AdsRecoveryObject extends AdsBaseObject {
   private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
   private static final String EXPECTED_SKY_PATH = "src/test/resources/adsResources/recovered_sky";
   private static final By RECOVERABLE_SLOT_SELECTOR = By.cssSelector("[adonis-marker]");
-  private static final By PF_RECOVERED_ADS_SELECTOR = By.cssSelector("body>span");
+  public static final By PF_RECOVERED_ADS_SELECTOR = By.cssSelector("body>span");
 
   public AdsRecoveryObject(WebDriver driver, String page, Dimension resolution) {
     super(driver, page, resolution);
   }
 
-  public void verifyPageFairRecoveryWithAdBlock(int numberOfExpectedSlot) {
+  public void assertIfAllRecoveredSlotHasCorrectSizeAndBackground(List<WebElement> recoveredAds) {
     String expectedRecoveredLB;
     String expectedRecoveredMR;
     String expectedRecoveredSKY;
-
     try {
       expectedRecoveredLB = readFileToString(new File(EXPECTED_TOP_LEADERBOARD_PATH));
       expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
@@ -39,16 +37,6 @@ public class AdsRecoveryObject extends AdsBaseObject {
       PageObjectLogging.log("Can't open expected PageFair recovery file.", e, false);
       throw new WebDriverException("Can't open expected PageFair recovery file.");
     }
-
-    // when PF recovered ad is on page, inserts span elements as a direct children of body
-    wait.forElementPresent(PF_RECOVERED_ADS_SELECTOR);
-
-    // verify that adblock is turned on on that page
-    verifyNoAdsOnPage();
-
-    List<WebElement> recoveredAds = getRecoveredAds(PF_RECOVERED_ADS_SELECTOR);
-
-    Assert.assertEquals(recoveredAds.size(), numberOfExpectedSlot);
 
     for (WebElement ad : recoveredAds) {
       Dimension adSize = ad.getSize();
@@ -65,7 +53,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
     }
   }
 
-  private List<WebElement> getRecoveredAds(By spansBodyChildrenSelector) {
+  public List<WebElement> getRecoveredAds(By spansBodyChildrenSelector) {
     String firstSpanClass = driver.findElement(spansBodyChildrenSelector).getAttribute("class");
     return driver
         .findElements(By.cssSelector("body>span." + firstSpanClass))
