@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.oasis;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialAdminDashboardPageObject;
@@ -10,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActi
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class CommunityHeader extends BasePageObject {
 
@@ -28,22 +31,22 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-community-header__wiki-buttons a[data-tracking=\"admin-dashboard\"]")
   private WebElement adminDashboardButton;
 
-  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-small")
+  @FindBy(css = ".wds-community-header .wds-tabs__tab #wds-icons-explore-tiny, .wds-community-header .wds-tabs__tab use[*|href=\"#wds-icons-explore-tiny\"]")
   private WebElement exploreTab;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-activity\"]")
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-activity\"], .wds-dropdown a[data-tracking-label=\"explore-activity\"]")
   private WebElement exploreWikiActivityLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-random\"]")
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-random\"], .wds-dropdown a[data-tracking-label=\"explore-random\"]")
   private WebElement exploreRandomLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-community\"]")
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-community\"], .wds-dropdown a[data-tracking-label=\"explore-community\"]")
   private WebElement exploreCommunityLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-videos\"]")
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-videos\"], .wds-dropdown a[data-tracking-label=\"explore-videos\"]")
   private WebElement exploreVideosLink;
 
-  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-images\"]")
+  @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-images\"], .wds-dropdown a[data-tracking-label=\"explore-images\"]")
   private WebElement exploreImagesLink;
 
   @FindBy(css = ".wds-dropdown a[data-tracking=\"explore-forum\"]")
@@ -51,6 +54,9 @@ public class CommunityHeader extends BasePageObject {
 
   @FindBy(css = ".wds-community-header a[data-tracking=\"discuss\"], .wds-community-header a[data-tracking=\"forum\"]")
   private WebElement discussLink;
+
+  @FindBy(css = ".wds-community-header .wds-avatar-stack__avatar a")
+  private List<WebElement> avatars;
 
 
   public MainPage clickWordmark() {
@@ -83,7 +89,7 @@ public class CommunityHeader extends BasePageObject {
     return new SpecialWikiActivityPageObject(driver);
   }
 
-  public SpecialAdminDashboardPageObject clickAdminDashboard()  {
+  public SpecialAdminDashboardPageObject clickAdminDashboard() {
     wait.forElementClickable(adminDashboardButton).click();
 
     PageObjectLogging.logInfo("clicked admin dashboard Button");
@@ -91,12 +97,24 @@ public class CommunityHeader extends BasePageObject {
     return new SpecialAdminDashboardPageObject();
   }
 
-  public CommunityHeader openExploreMenu()  {
-   new Actions(driver).moveToElement(exploreTab).perform();
+  public UserProfilePage clickUserAvatar(int index) {
+    wait.forElementClickable(avatars.get(index)).click();
 
-   PageObjectLogging.logInfo("explore dropdown opened");
+    PageObjectLogging.logInfo("clicked user avatar");
 
-   return this;
+    return new UserProfilePage();
+  }
+
+  public String getUserNameFromAvatar(int index) {
+    return avatars.get(index).getAttribute("title");
+  }
+
+  public CommunityHeader openExploreMenu() {
+    new Actions(driver).moveToElement(exploreTab).perform();
+
+    PageObjectLogging.logInfo("explore dropdown opened");
+
+    return this;
   }
 
   public SpecialWikiActivityPageObject clickExploreWikiActivityLink() {
