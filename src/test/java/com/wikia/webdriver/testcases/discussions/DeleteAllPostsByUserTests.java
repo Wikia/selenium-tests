@@ -17,7 +17,6 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.*;
 
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 
@@ -61,7 +60,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUserDesktop")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void clickDeleteAllDesktopDisplaysConfirmationDialog() {
     DeleteDialog confirmationDialog = getDeleteAllButtonDesktop(userWithPosts.getUserId()).click();
     assertTrue(confirmationDialog.isVisible());
@@ -77,7 +76,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUserDesktop")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void clickCancelDeleteAllDesktopHidesConfirmationDialog() {
     String postId = setUp().getId();
     getDeleteAllButtonDesktop(userWithPosts.getUserId()).click().cancelAndWait();
@@ -97,7 +96,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUserDesktop")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonDesktopDeleteAllOptionNotVisible() {
     PostEntity.Data post = setUp();
     assertTrue(deleteAllOptionNotVisibleDesktop(userWithPosts.getUserId()));
@@ -117,7 +116,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUserDesktop")
   @Execute(asUser = User.USER)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void regularUserDesktopDeleteAllOptionNotVisible() {
     PostEntity.Data post = setUp();
     assertTrue(deleteAllOptionNotVisibleDesktop(userWithPosts.getUserId()));
@@ -137,7 +136,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUser")
   @Execute(asUser = User.VSTF)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void vstfUserDesktopCanDeleteAllPosts() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
@@ -153,7 +152,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUser")
   @Execute(asUser = User.HELPER)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void helperUserDesktopCanDeleteAllPosts() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
@@ -169,7 +168,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUser")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserDesktopCanDeleteAllPosts() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
@@ -185,7 +184,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUserDesktop")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_MESSAGING)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopDeleteAllOptionNotVisibleOnDifferentWiki() {
     PostEntity.Data post = setUp(MercuryWikis.DISCUSSIONS_MESSAGING);
     assertTrue(deleteAllOptionNotVisibleDesktop(userWithPosts.getUserId()));
@@ -203,7 +202,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   @Test(groups = "discussions-deleteAllPostsByUser")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopCanDeleteAllPostsOnModdedWiki() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import org.testng.annotations.Test;
 
@@ -52,21 +50,21 @@ public class UpvotingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForPostDetails")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotUpvote() {
     postListUpvoteButtonClickDoesntAddAnUpvote();
   }
@@ -95,14 +93,14 @@ public class UpvotingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION, browser = Browser.FIREFOX)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void registeredUserOnDesktopCanUpvote() {
     postListUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import static com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator.createUniqueCategoryName;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertFalse;
@@ -165,14 +163,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
@@ -197,14 +195,14 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanChangeCategory() {
     canChangeCategoryDesktop();
   }
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotEditCategory() {
     cannotEditCategoryDesktop();
   }
@@ -309,7 +307,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanNotEditAllAndGeneralCategories() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final CategoriesFieldset categoriesFieldset = page.getCategories();
@@ -322,7 +320,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanAddCategory() {
     final PostsListPage page = new PostsListPage().open(siteId);
     final String categoryName = createUniqueCategoryName();
@@ -341,7 +339,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanEditCategory() {
     CategoryPill.Data editableCategory = setUp();
     final PostsListPage page = new PostsListPage().open(siteId);
@@ -364,7 +362,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanNotAddMoreThanTenCategories() {
     deleteCategoriesDesktop();
     ArrayList<CategoryPill.Data> categoriesAdded = setUp(MAX_NUMBER_OF_CATEGORIES - 1);
@@ -381,7 +379,7 @@ public class CategoriesTests extends NewTestTemplate {
 
   @Test(groups = {DESKTOP})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanRemoveCategory() {
     CategoryPill.Data data = setUp();
     final String temporaryCategoryName = createUniqueCategoryName();

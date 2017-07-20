@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -69,7 +67,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -78,7 +76,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -87,7 +85,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -127,7 +125,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostDetailsPage();
 
@@ -136,7 +134,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotLockAPostOnPostsListPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnPostsListPage();
 
@@ -145,7 +143,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER_2)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
     final MoreOptionsPopOver moreOptionsPopOver = findMoreOptionsOnUserPostsPage();
 
@@ -185,7 +183,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = lockPostAsDiscussionsModeratorAndOpenPostDetailsPage();
 
@@ -196,7 +194,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
     DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data)
@@ -237,7 +235,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
@@ -248,7 +246,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
@@ -311,7 +309,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
@@ -322,7 +320,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopCanUnlockPostLockedByStaffOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByStaff();
 
@@ -332,7 +330,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
 
@@ -343,7 +341,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
     DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
@@ -408,7 +406,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanLockPostOnPostDetailsPage() {
     PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
 
@@ -419,7 +417,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
 
@@ -429,7 +427,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
     PostDetailsPage page = openPageWithPostLockedByStaff();
 
@@ -440,7 +438,7 @@ public class LockingPostTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
     final PostDetailsPage page = openPageWithPostUnlockedByStaff();
     final String text = addReplyOnDesktop(page);

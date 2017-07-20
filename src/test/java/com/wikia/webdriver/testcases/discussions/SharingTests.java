@@ -19,9 +19,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
-
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
@@ -59,7 +56,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostListPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
@@ -69,7 +66,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostDetailsPage() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
@@ -107,7 +104,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostListPage();
 
@@ -117,7 +114,7 @@ public class SharingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
     List<String> socialNetworkNames = findSocialNetworksNamesForFirstPostOnPostDetailsPage();
 
