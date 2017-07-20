@@ -22,7 +22,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-@Test(groups = "on-site-notifications")
 public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private static final String DESKTOP = "on-site-notifications-desktop";
