@@ -14,10 +14,11 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 
 public class AdsRecoveryObject extends AdsBaseObject {
   private static final Dimension MEDREC_SIZE = new Dimension(300, 250);
+  private static final Dimension SKY_SIZE = new Dimension(300, 600);
   private static final Dimension TOP_LEADERBOARD_SIZE = new Dimension(728, 90);
-  private static final int RECOVERABLE_ADS_COUNT = 4;
   private static final String EXPECTED_TOP_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
   private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
+  private static final String EXPECTED_SKY_PATH = "src/test/resources/adsResources/recovered_sky";
   private static final By RECOVERABLE_SLOT_SELECTOR = By.cssSelector("[adonis-marker]");
   private static final By PF_RECOVERED_ADS_SELECTOR = By.cssSelector("body>span");
 
@@ -25,13 +26,15 @@ public class AdsRecoveryObject extends AdsBaseObject {
     super(driver, page, resolution);
   }
 
-  public void verifyPageFairRecoveryWithAdBlock() {
+  public void verifyPageFairRecoveryWithAdBlock(int numberOfExpectedSlot) {
     String expectedRecoveredLB;
     String expectedRecoveredMR;
+    String expectedRecoveredSKY;
 
     try {
       expectedRecoveredLB = readFileToString(new File(EXPECTED_TOP_LEADERBOARD_PATH));
       expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
+      expectedRecoveredSKY = readFileToString(new File(EXPECTED_SKY_PATH));
     } catch (IOException e) {
       PageObjectLogging.log("Can't open expected PageFair recovery file.", e, false);
       throw new WebDriverException("Can't open expected PageFair recovery file.");
@@ -45,7 +48,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
 
     List<WebElement> recoveredAds = getRecoveredAds(PF_RECOVERED_ADS_SELECTOR);
 
-    Assert.assertEquals(recoveredAds.size(), RECOVERABLE_ADS_COUNT);
+    Assert.assertEquals(recoveredAds.size(), numberOfExpectedSlot);
 
     for (WebElement ad : recoveredAds) {
       Dimension adSize = ad.getSize();
@@ -54,6 +57,8 @@ public class AdsRecoveryObject extends AdsBaseObject {
         Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredLB), "TOP_LEADERBOARD is not correctly recovered!");
       } else if (adSize.equals(MEDREC_SIZE)) {
         Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredMR), "MEDREC is not correctly recovered!");
+      } else if (adSize.equals(SKY_SIZE)) {
+        Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredSKY), "SKY is not correctly recovered!");
       } else {
         Assertion.fail("Not supported PageFair recovery ad size encountered: " + adSize);
       }
@@ -70,13 +75,8 @@ public class AdsRecoveryObject extends AdsBaseObject {
         .collect(Collectors.toList());
   }
 
-  public void verifyPageFairRecoveryWithNoAdBlock() {
+  public void verifyNumberOfPageFairRecoveredSlots(int expected) {
     List<WebElement> markedSlots = driver.findElements(RECOVERABLE_SLOT_SELECTOR);
-    Assertion.assertEquals(markedSlots.size(), RECOVERABLE_ADS_COUNT);
-  }
-
-  public void verifyPageFairRecoveryNoMarkersOnPage() {
-    List<WebElement> markedSlots = driver.findElements(RECOVERABLE_SLOT_SELECTOR);
-    Assertion.assertEquals(markedSlots.size(), 0);
+    Assertion.assertEquals(markedSlots.size(), expected);
   }
 }

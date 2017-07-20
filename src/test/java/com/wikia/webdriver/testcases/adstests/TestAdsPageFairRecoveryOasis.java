@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
-  private static Dimension DESKTOP_SIZE = new Dimension(1050, 600);
+  private static Dimension DESKTOP_SIZE = new Dimension(1920, 768);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -25,7 +25,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryWithAdBlock();
+    adsRecoveryObject.verifyPageFairRecoveryWithAdBlock(4);
   }
 
   @Test(
@@ -38,7 +38,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryWithNoAdBlock();
+    adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(4);
   }
 
   @Test(
@@ -52,7 +52,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryNoMarkersOnPage();
+    adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(0);
   }
 }
 
