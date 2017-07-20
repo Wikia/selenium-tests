@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.oasis;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -75,10 +76,12 @@ public class CommunityHeader extends BasePageObject {
     return new MainPage();
   }
 
-  public void clickAddNewPage() {
+  public CreateArticleModalComponentObject clickAddNewPage() {
     wait.forElementClickable(addNewPageButton).click();
 
     PageObjectLogging.logInfo("clicked Add New Page button");
+
+    return new CreateArticleModalComponentObject(this.driver);
   }
 
   public SpecialWikiActivityPageObject clickWikiActivity() {
