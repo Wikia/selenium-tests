@@ -1,4 +1,4 @@
-package com.wikia.webdriver.elements.oasis;
+package com.wikia.webdriver.elements.common;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;

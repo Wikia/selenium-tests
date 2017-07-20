@@ -2,7 +2,7 @@ package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.elements.oasis.CommunityHeader;
+import com.wikia.webdriver.elements.common.CommunityHeader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
