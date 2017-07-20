@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -26,7 +25,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       dataProvider = "delayBtf",
       groups = "AdsBtfBlockingOasis"
   )
-  @RelatedIssue(issueID = "ADEN-4344")
   public void adsAtfDelayBtfOasis(String wikiName, String article, boolean isWgVarOn)
       throws InterruptedException {
     PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
@@ -48,17 +46,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
                          AdsContent.LEFT_SKYSCRAPPER_2);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC),
                          AdsContent.FLOATING_MEDREC);
-  }
-
-  @Execute(mockAds = "true")
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "delayBtfPluto",
-      groups = "AdsBtfBlockingOasis"
-  )
-  public void adsAtfDelayBtfOasisPluto(String wikiName, String article, boolean isWgVarOn)
-      throws InterruptedException {
-    adsAtfDelayBtfOasis(wikiName, article, isWgVarOn);
   }
 
   @Test(
@@ -89,16 +76,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertNotEquals(
         adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn,
         AdsContent.FLOATING_MEDREC);
-  }
-
-  @Execute(mockAds = "true")
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "disableBtfPluto",
-      groups = "AdsBtfBlockingOasis"
-  )
-  public void adsAtfDisableBtfOasisPluto(String wikiName, String article, boolean isWgVarOn) {
-    adsAtfDisableBtfOasis(wikiName, article, isWgVarOn);
   }
 
   /**
@@ -150,37 +127,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn, AdsContent.LEFT_SKYSCRAPPER_2);
   }
 
-  @Execute(mockAds = "true")
-  @InBrowser(
-      emulator = Emulator.GOOGLE_NEXUS_5,
-      browser = Browser.CHROME
-  )
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "delayBtfPluto",
-      groups = "AdsBtfBlockingMercury"
-  )
-  public void adsAtfDelayBtfMercuryPluto(String wikiName, String article,
-                                         boolean isWgVarOn)
-      throws InterruptedException {
-    adsAtfDelayBtfMercury(wikiName, article, isWgVarOn);
-  }
-
-  @Execute(mockAds = "true")
-  @InBrowser(
-      emulator = Emulator.GOOGLE_NEXUS_5,
-      browser = Browser.CHROME
-  )
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "disableBtfPluto",
-      groups = "AdsBtfBlockingMercury"
-  )
-  public void adsAtfDisableBtfMercuryPluto(String wikiName, String article, boolean isWgVarOn)
-      throws InterruptedException {
-    adsAtfDisableBtfMercury(wikiName, article, isWgVarOn);
-  }
-
   @InBrowser(
       emulator = Emulator.GOOGLE_NEXUS_5,
       browser = Browser.CHROME
@@ -190,7 +136,6 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       dataProvider = "delayBtf",
       groups = "AdsBtfBlockingMercury"
   )
-  @RelatedIssue(issueID = "ADEN-4344")
   public void adsAtfDelayBtfMercury(String wikiName, String article,
                                     boolean isWgVarOn)
       throws InterruptedException {

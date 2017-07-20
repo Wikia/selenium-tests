@@ -37,14 +37,14 @@ public class NavigatingTests extends NewTestTemplate {
   @Test(enabled = false, groups = "discussions-anonUserOnDesktopCanClickAvatar")
   @RelatedIssue(issueID = "SOC-2301")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickAvatar() {
     clickAvatarLoadsUserPage();
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickUsername() {
     clickUsernameLoadsUserPage();
   }

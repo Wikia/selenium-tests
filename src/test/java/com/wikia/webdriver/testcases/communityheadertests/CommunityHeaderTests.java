@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.communityheadertests;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -20,6 +21,14 @@ public class CommunityHeaderTests extends NewTestTemplate {
 
   @Test(groups = {"CommunityHeaderTests"})
   public void wikiNameShouldLinkToMainPage() {
+    MainPage mainPage = new CommunityHeader().clickWikiName();
+
+    Assert.assertTrue(mainPage.isMainPage());
+  }
+
+  @Test(groups = {"CommunityHeaderTests"})
+  @Execute(onWikia = MercuryWikis.DE_WIKI)
+  public void wikiNameOnNonEnglishWikiShouldLinkToMainPage() {
     MainPage mainPage = new CommunityHeader().clickWikiName();
 
     Assert.assertTrue(mainPage.isMainPage());

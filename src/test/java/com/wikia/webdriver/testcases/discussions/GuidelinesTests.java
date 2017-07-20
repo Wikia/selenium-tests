@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.Browser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
@@ -23,7 +23,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanClickBackToDiscussions")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
@@ -32,7 +32,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotSeeEditGuidelines")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotClickEditGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -42,7 +42,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -56,7 +56,7 @@ public class GuidelinesTests extends NewTestTemplate {
    */
   @Test(groups = "discussions-staffUserOnDesktopCanSeeEditGuidelines")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffOnDesktopCanClickEditGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -66,7 +66,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanSeeEditGuidelines")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanClickEditGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -76,7 +76,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-regularUserOnDesktopCanClickBackToDiscussions")
   @Execute(asUser = User.USER_6)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void regularUserOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
@@ -85,7 +85,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanClickBackToDiscussions")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
@@ -94,7 +94,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-staffOnDesktopCanClickBackToDiscussions")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
@@ -103,7 +103,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-regularUserOnDesktopCanNotSeeEditGuidelines")
   @Execute(asUser = User.USER_6)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void regularUserOnDesktopCanNotClickEditGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -113,7 +113,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-regularUserOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.USER_6)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void regularUserOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -123,7 +123,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -133,7 +133,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-staffOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -142,7 +142,7 @@ public class GuidelinesTests extends NewTestTemplate {
   }
   @Test(groups = "discussions-staffOnDesktopCanAddTextToGuidelines")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffOnDesktopCanAddTextToGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
@@ -152,7 +152,7 @@ public class GuidelinesTests extends NewTestTemplate {
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanAddTextToGuidelines")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanAddTextToGuidelines() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();

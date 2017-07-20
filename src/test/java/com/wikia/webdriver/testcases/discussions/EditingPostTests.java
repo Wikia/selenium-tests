@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -81,7 +79,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
@@ -92,7 +90,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
@@ -102,7 +100,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = USER_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.USER)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotSeeThatPostWasEditedByAuthorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsStaffRemotely());
 
@@ -128,7 +126,7 @@ public class EditingPostTests extends NewTestTemplate {
 
   @Test(groups = DISCUSSIONS_ADMINISTRATOR_DESKTOP_TEST_GROUP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
