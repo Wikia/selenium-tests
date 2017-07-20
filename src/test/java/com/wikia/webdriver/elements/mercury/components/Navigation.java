@@ -182,4 +182,9 @@ public class Navigation {
     return navigationMainHeader.getText();
   }
 
+  public UserProfile openUserProfile() {
+    wait.forElementClickable(userProfileLink).click();
+    return new UserProfile();
+  }
+
 }

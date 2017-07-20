@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+
 import org.testng.annotations.Test;
 
 public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
@@ -26,7 +27,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     fandomPage.triggerOnScrollSlots();
 
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_DESKTOP);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
     Assertion.assertTrue(areBtfSlotsHidden(fandomPage), "BTF ads are displayed");
   }
@@ -46,7 +47,7 @@ public class TestAdsFandomBtfBlock extends AdsFandomTestTemplate {
     fandomPage.triggerOnScrollSlots();
 
     fandomPage.verifySlot(AdsFandomContent.TOP_LEADERBOARD);
-    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD_MOBILE);
+    fandomPage.verifySlot(AdsFandomContent.TOP_BOXAD);
 
     Assertion.assertTrue(areBtfSlotsHidden(fandomPage), "BTF ads are displayed");
   }
