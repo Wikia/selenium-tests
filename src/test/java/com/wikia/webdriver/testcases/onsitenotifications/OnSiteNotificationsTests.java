@@ -22,8 +22,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private static final String DESKTOP = "on-site-notifications-desktop";
@@ -56,7 +54,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostReplyNotification() {
     Notification notification = createPostReplyNotification(User.USER_11, User.USER_2);
 
@@ -65,7 +63,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
     Notification notification = createPostUpvoteNotification(User.USER_11, User.USER_2);
 
@@ -74,7 +72,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
     Notification notification = createReplyUpvoteNotification(User.USER_11, User.USER_11, User.USER_2);
 
@@ -83,7 +81,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopSeesConsolidatedReplyNotification() {
     Notification notification = createConsolidatedPostReplyNotification(User.USER_11);
     Notifications notificationsList = getNotificationsDesktop();
@@ -93,7 +91,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
-  @InBrowser(browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopMarksAllNotificationsAsRead() {
     Notifications notificationsList = getNotificationsDesktop();
     notificationsList.markAllAsRead();
