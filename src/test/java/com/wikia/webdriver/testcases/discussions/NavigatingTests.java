@@ -13,7 +13,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
