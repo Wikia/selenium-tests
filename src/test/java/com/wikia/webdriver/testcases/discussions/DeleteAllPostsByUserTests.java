@@ -6,8 +6,8 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.Discussions;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteDialog;
@@ -38,8 +38,8 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
    * @return post that was created
    */
   private PostEntity.Data setUp(String wikiName) {
-    siteId = Discussions.excractSiteIdFromWikiName(wikiName);
-    return DiscussionsOperations
+    siteId = Utils.excractSiteIdFromWikiName(wikiName);
+    return DiscussionsClient
       .using(userWithPosts, driver)
       .createPostWithUniqueData(siteId);
   }
@@ -53,7 +53,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
    * @param post to be deleted as staff user
    */
   private void cleanUp(PostEntity.Data post) {
-    DiscussionsOperations.using(User.STAFF, driver).deletePost(post, this.siteId);
+    DiscussionsClient.using(User.STAFF, driver).deletePost(post, this.siteId);
   }
 
   // GENERAL - no specific user permissions
