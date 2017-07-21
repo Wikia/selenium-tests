@@ -119,10 +119,6 @@ public class AutoplayVuap {
     findCloseButton().click();
   }
 
-  public void clickOnDefaultStateAdImage() {
-    clickOnAdClickArea(AD_DEFAULT_STATE_IMAGE_SELECTOR);
-  }
-
   public void clickOnClickArea2() {
     clickOnAdClickArea(AD_TNG_CLICK_AREA_2_SELECTOR);
   }

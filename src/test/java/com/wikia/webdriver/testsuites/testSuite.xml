@@ -61,7 +61,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasisAutoplay"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRefreshing"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapTheNewGeneration"/>
