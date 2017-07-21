@@ -47,7 +47,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   private void scrollToSlot(String slotName, AdsBaseObject ads) {
-    if (slotName == AdsContent.BOTTOM_LB) {
+    if (slotName.equals(AdsContent.BOTTOM_LB)) {
       ads.triggerComments();
     }
   }
