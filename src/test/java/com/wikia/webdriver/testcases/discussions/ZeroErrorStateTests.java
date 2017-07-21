@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -10,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
@@ -43,7 +41,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   @Test(enabled = false, groups = "discussions-anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @RelatedIssue(issueID = "SOC-3667")
   public void anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
@@ -51,28 +49,28 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
   @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
 
   @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
   @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
@@ -133,42 +131,42 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
   @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
 
   @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyFollowPage")
   @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyFollowPage() {
     userSeesProperMessageWhenOpensEmptyFollowPage();
   }
@@ -276,7 +274,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   private void userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
-    final String postId = DiscussionsOperations.using(User.USER, driver)
+    final String postId = DiscussionsClient.using(User.USER, driver)
         .createPostWithUniqueData().getId();
 
     final Replies replies = new PostDetailsPage().open(postId).getReplies();

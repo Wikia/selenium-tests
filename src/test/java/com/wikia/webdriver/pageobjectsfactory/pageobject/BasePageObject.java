@@ -300,6 +300,14 @@ public class BasePageObject {
     }
   }
 
+  protected void hover(WebElement element) {
+    new Actions(driver).moveToElement(element).perform();
+  }
+
+  protected void moveAway(WebElement element) {
+    new Actions(driver).moveToElement(element, -200, 0).perform();
+  }
+
   protected Boolean scrollToSelector(String selector) {
     if (isElementOnPage(By.cssSelector(selector))) {
       try {
