@@ -19,7 +19,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private static final String TURN_ON_RESOLVED_STATE = "resolved_state=true";
 
   @Test(
-    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateAutoplayOasis"},
+    groups = {"AdsVuapDefaultState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -45,7 +45,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateClickOasis"},
+    groups = {"AdsVuapDefaultState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -61,7 +61,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
                       "Image should point to page on project43.");
   }
 
-  @Test(groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateClickOasis"},
+  @Test(groups = {"AdsVuapDefaultState"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapDesktop")
   public void vuapDefaultStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot, String videoIframeSelector) {
@@ -76,7 +76,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateMuteOasis"},
+    groups = {"AdsVuapDefaultState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -95,7 +95,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateOnSecondPageView"},
+    groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -115,7 +115,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateAutoplayOasis"},
+    groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -146,7 +146,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateClickOasis"},
+    groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -164,7 +164,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateClickOasis"},
+    groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -180,7 +180,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
   }
 
-  @Test(groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateCloseOasis"},
+  @Test(groups = {"AdsVuapResolvedState"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapDesktop")
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot, String videoIframeSelector) {
@@ -196,7 +196,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateIsNotMuteOasis"},
+    groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -212,7 +212,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedEndOasis"},
+    groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
