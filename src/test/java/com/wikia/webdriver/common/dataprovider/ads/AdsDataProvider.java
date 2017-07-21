@@ -1048,15 +1048,15 @@ public class AdsDataProvider {
     }
 
     @DataProvider
-    public static Object[][] adsVuapDesktop() {
+    public static Object[][] adsVuapClickToPlayDesktop() {
         return new Object[][]{
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                         AdsContent.TOP_LB,
                         "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
                 },
                 {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                         AdsContent.BOTTOM_LB,
                         "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
                 }
@@ -1086,15 +1086,15 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsVuapTngDesktop() {
+  public static Object[][] adsVuapDesktop() {
     return new Object[][]{
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.TOP_LB,
             "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
         },
         {
-            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/TNG" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
             AdsContent.BOTTOM_LB,
             "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
         }

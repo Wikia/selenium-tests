@@ -11,17 +11,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = "AdsVuapTngOasis")
-public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
+@Test(groups = "AdsVuapOasis")
+public class TestAdsVuap extends TemplateNoFirstLoad {
   private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
   private static final String FANDOM_ARTICLE_WESTWORLD_LINK = "http://adeng.fandom.wikia.com/articles/whats-coming-westworld-finale";
   private static final String TNG_AD_REDIRECT_URL = "http://project43.wikia.com/wiki/DevTemplates/VUAP/TNG";
   private static final String TURN_ON_RESOLVED_STATE = "resolved_state=true";
 
   @Test(
-    groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateAutoplayOasis"},
+    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateAutoplayOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads  = openPageWithVideoInLocalStorage(page);
@@ -32,9 +32,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateTimeProgressOasis"},
+    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateTimeProgressOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
@@ -45,9 +45,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
+    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateClickOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldHaveLinkToProject43ArticleOnImage(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
@@ -60,9 +60,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(TNG_AD_REDIRECT_URL), "Image should point to page on project43.");
   }
 
-  @Test(groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateClickOasis"},
+  @Test(groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateClickOasis"},
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVuapTngDesktop")
+      dataProvider = "adsVuapDesktop")
   public void vuapDefaultStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
@@ -75,9 +75,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapDefaultStateTng", "AdsVuapDefaultStateMuteOasis"},
+    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateMuteOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateAutoplayIsMutedAfterReplayIsNotMuted(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
@@ -94,9 +94,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateOnSecondPageView"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateOnSecondPageView"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateAppearsOnSecondPageView(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
@@ -114,9 +114,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateAutoplayOasis"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateAutoplayOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateShouldStartPlayingAfterClickOnReplay(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
@@ -130,9 +130,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateTimeProgressOasis"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateTimeProgressOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
@@ -145,9 +145,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateClickOasis"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateClickOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateShouldHaveLinkToProject43ArticleOnImage(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
@@ -162,9 +162,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateClickOasis"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateClickOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
@@ -178,9 +178,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
   }
 
-  @Test(groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateCloseOasis"},
+  @Test(groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateCloseOasis"},
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVuapTngDesktop")
+      dataProvider = "adsVuapDesktop")
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
@@ -194,9 +194,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedStateIsNotMuteOasis"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateIsNotMuteOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateIsNotMute(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = new AdsBaseObject(driver, this.urlBuilder.getUrlForPage(page, TURN_ON_RESOLVED_STATE));
@@ -210,9 +210,9 @@ public class TestAdsVuapTheNewGeneration extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedStateTng", "AdsVuapResolvedEndOasis"},
+    groups = {"AdsVuapResolvedState", "AdsVuapResolvedEndOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapTngDesktop"
+    dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedShouldEnd(Page page, String slot, String videoIframeSelector) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);

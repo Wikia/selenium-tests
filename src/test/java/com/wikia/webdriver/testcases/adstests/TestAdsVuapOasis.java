@@ -18,7 +18,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
   @Test(
           dataProviderClass = AdsDataProvider.class,
-          dataProvider = "adsVuapDesktop",
+          dataProvider = "adsVuapClickToPlayDesktop",
           groups = "AdsVideoClosesWhenFinishPlaysOasis"
   )
   public void adsVuapCheckSlotSizesOasis(Page page, String slot, String videoIframeSelector) {
