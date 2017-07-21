@@ -32,7 +32,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapDefaultState", "AdsVuapDefaultStateTimeProgressOasis"},
+    groups = {"AdsVuapTimeProgressOasis"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
@@ -131,7 +131,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState", "AdsVuapResolvedStateTimeProgressOasis"},
+    groups = {"AdsVuapResolvedTimeProgressOasis"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
