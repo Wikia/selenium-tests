@@ -11,7 +11,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
@@ -728,30 +728,30 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
-    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private PostEntity.Data createAndReportPostRemotelyAsFirstUser() {
-    final DiscussionsOperations operations = DiscussionsOperations.using(User.USER, driver);
+    final DiscussionsClient operations = DiscussionsClient.using(User.USER, driver);
     final PostEntity.Data data = operations.createPostWithUniqueData();
     operations.reportPost(data);
     return data;
   }
 
   private void reportPostRemotelyAsSecondUser(PostEntity.Data data) {
-    DiscussionsOperations.using(User.USER_2, driver).reportPost(data);
+    DiscussionsClient.using(User.USER_2, driver).reportPost(data);
   }
 
   private void validatePostRemotelyAsDiscussionsModerator(PostEntity.Data data) {
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).validatePost(data);
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).validatePost(data);
   }
 
   private void reportPostRemotelyAsThirdUser(PostEntity.Data data) {
-    DiscussionsOperations.using(User.USER_3, driver).reportPost(data);
+    DiscussionsClient.using(User.USER_3, driver).reportPost(data);
   }
 
   private void deletePostRemotelyAsDiscussionsModerator(PostEntity.Data data) {
-    DiscussionsOperations.using(User.DISCUSSIONS_MODERATOR, driver).deletePost(data);
+    DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).deletePost(data);
   }
 
   private PostEntity.Data createAndReportAndDeletePostRemotely() {

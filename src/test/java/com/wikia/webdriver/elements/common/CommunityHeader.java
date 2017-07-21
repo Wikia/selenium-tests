@@ -59,6 +59,12 @@ public class CommunityHeader extends BasePageObject {
   @FindBy(css = ".wds-community-header .wds-avatar-stack__avatar a")
   private List<WebElement> avatars;
 
+  @FindBy(css = ".wds-community-header")
+  private WebElement communityHeader;
+
+  public boolean isVisible() {
+    return this.isElementDisplayed(communityHeader);
+  }
 
   public MainPage clickWordmark() {
     wait.forElementClickable(wordmark).click();

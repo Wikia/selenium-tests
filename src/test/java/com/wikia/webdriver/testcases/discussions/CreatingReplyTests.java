@@ -8,7 +8,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.remote.operations.DiscussionsOperations;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostActionsRow;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -131,7 +131,7 @@ public class CreatingReplyTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
-    return DiscussionsOperations.using(User.USER, driver).createPostWithUniqueData();
+    return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
   private void assertThatUserCanCreateReply(PostDetailsPage page, ReplyCreator replyCreator) {

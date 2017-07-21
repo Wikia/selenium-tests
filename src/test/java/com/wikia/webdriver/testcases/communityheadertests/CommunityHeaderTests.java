@@ -146,4 +146,14 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.openExploreMenu();
     Assert.assertFalse(communityHeader.isExploreForumLinkDisplayed());
   }
+
+  @Test(groups = {"CommunityHeaderTests"})
+  @Execute(onWikia = "testprivatewiki", asUser = User.ANONYMOUS)
+  public void testCommunityHeaderNotVisibleOnPrivateWiki() {
+    CommunityHeader communityHeader = new CommunityHeader();
+
+    Assert.assertFalse(communityHeader.isVisible());
+  }
+
+
 }

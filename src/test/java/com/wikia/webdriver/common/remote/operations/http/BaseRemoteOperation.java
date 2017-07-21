@@ -3,7 +3,7 @@ package com.wikia.webdriver.common.remote.operations.http;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.RemoteException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -89,7 +89,7 @@ class BaseRemoteOperation {
       throws IOException {
     String result = StringUtils.EMPTY;
     if(user != null) {
-      request.setHeader(Discussions.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
+      request.setHeader(Utils.ACCESS_TOKEN_HEADER, Helios.getAccessToken(user));
     }
     try (CloseableHttpResponse response = client.execute(request)) {
       result = handleResponse(request, response);
