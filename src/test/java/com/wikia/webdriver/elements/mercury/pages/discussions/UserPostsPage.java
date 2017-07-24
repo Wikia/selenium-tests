@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.DeleteAllButton;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
@@ -7,6 +8,9 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.SignIn
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.regex.Pattern;
 
@@ -19,6 +23,12 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
   @Getter(lazy = true) private final ErrorMessages errorMessages = new ErrorMessages();
 
   @Getter(lazy = true) private final DeleteAllButton deleteAll = new DeleteAllButton();
+
+  /**
+   * moderation section visible to mod+ users in mobile view
+   */
+  @FindBy(className = "header-dropdown-button")
+  private WebElement moderation;
 
   private static final Pattern PAGE_PATTERN = Pattern.compile("/d/u/\\d+$");
 
@@ -47,6 +57,15 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
 
   public static String extractUserIdFrom(String url) {
     return UserPostsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
+  }
+
+  public UserPostsPage expandModeration() {
+    try {
+      moderation.click();
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Moderation dropdown not found", e);
+    }
+    return this;
   }
 
 }

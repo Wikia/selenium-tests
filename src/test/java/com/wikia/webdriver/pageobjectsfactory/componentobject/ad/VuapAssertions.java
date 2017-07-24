@@ -59,4 +59,17 @@ public class VuapAssertions {
 
     vuap.pause();
   }
+
+  public static void verifyVideoAdSize(AutoplayVuap vuap, double videoAdHeight,
+                                       double adSlotHeight, long maxAutoplayDuration) {
+    Assert.assertTrue(vuap.isVideoAdBiggerThanImageAd(videoAdHeight, adSlotHeight));
+
+    vuap.play();
+
+    vuap.waitForVideoToEnd(maxAutoplayDuration);
+
+    double adSlotHeightAfterVideoClose = vuap.getAdSlotHeight();
+
+    Assert.assertEquals(adSlotHeight, adSlotHeightAfterVideoClose);
+  }
 }

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.discussions;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -39,7 +37,7 @@ public class SortingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSortPostList() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
@@ -61,7 +59,7 @@ public class SortingTests extends NewTestTemplate {
 
   @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab")
   @Execute(asUser = User.USER_3)
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }

@@ -5,13 +5,12 @@ import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.remote.Discussions;
+import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Promoting;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
-import static com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants.DESKTOP_RESOLUTION;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static com.wikia.webdriver.common.core.Assertion.assertStringContains;
@@ -31,7 +30,7 @@ public class PromotingTests extends NewTestTemplate {
    * ANON ON DESKTOP SECTION
    */
 
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeeAppPromotion() {
     Promoting promoting = findPromoting();
     assertTrue(promoting.isAppleLinkDisplayed());
@@ -39,13 +38,13 @@ public class PromotingTests extends NewTestTemplate {
     assertEquals(promoting.getPromotionAppText(), DESKTOP_PROMOTION_TEXT);
   }
 
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickAppleLink() {
     findPromoting().clickAppleLinkInAppPromotion();
     assertAppPageOpened(IOS_APP_TITLE);
   }
   
-  @InBrowser(browser = Browser.FIREFOX, browserSize = DESKTOP_RESOLUTION)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickGooglePlayLink() {
     findPromoting().clickGooglePlayLinkInAppPromotion();
     assertAppPageOpened(ANDROID_APP_TITLE);
@@ -73,7 +72,7 @@ public class PromotingTests extends NewTestTemplate {
    */
 
   private Promoting findPromoting() {
-    String siteId = Discussions.excractSiteIdFromWikiName(MercuryWikis.FALLOUT);
+    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.FALLOUT);
     PostsListPage page = new PostsListPage().open(siteId);
     return page.getPromoting();
   }
