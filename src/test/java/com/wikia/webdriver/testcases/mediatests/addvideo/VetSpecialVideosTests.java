@@ -1,18 +1,17 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
 import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
-import org.testng.annotations.Test;
 
 @Test(groups = {"VetTests", "SpecialVideo", "Media"})
 @Execute(onWikia = "sustainingtest")
@@ -25,7 +24,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(video.getUrl());
+    vetAddingVideo.addVideoWithoutDetailsByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
     FilePage filePage = new FilePage().open(video.getFileName());
