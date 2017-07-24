@@ -61,6 +61,7 @@ public class PromotingTests extends NewTestTemplate {
     assertStringContains(promoting.getPromotionAppMobileText(), MOBILE_PROMOTION_TEXT);
   }
 
+  // this test has to use a browser that is supported by Google Play website
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanClickGooglePlayLink() {
     findPromoting().clickInstallOnMobileBanner();
