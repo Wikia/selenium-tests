@@ -101,6 +101,15 @@ public class VetAddVideoComponentObject extends WikiBasePageObject {
     return new VetOptionsComponentObject(driver);
   }
 
+  public VetOptionsComponentObject addVideoWithoutDetailsByUrl(String url) {
+    typeInUrl(url);
+    clickAddButtonProvider();
+    wait.forElementNotVisible(addVideoModalBy);
+
+    return new VetOptionsComponentObject(driver);
+  }
+
+
   public VetOptionsComponentObject addVideoByQuery(String query, int i) {
     typeInSearchQuery(query);
     clickFindButton();
