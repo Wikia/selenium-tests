@@ -24,7 +24,7 @@ public class PromotingTests extends NewTestTemplate {
   private static final String DESKTOP_PROMOTION_TEXT =
     "Take your fandom with you, download the app today!";
   private static final String IOS_APP_TITLE = "Fandom Community for: Fallout";
-  private static final String ANDROID_APP_TITLE = "Fandom: Fallout 4";
+  private static final String ANDROID_APP_TITLE = "FANDOM: Fallout 4";
 
   /**
    * ANON ON DESKTOP SECTION
