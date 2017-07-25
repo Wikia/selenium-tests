@@ -1,7 +1,10 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
@@ -24,6 +27,39 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollDesktop"}
   )
   public void adsFandomOoyalaPrerollClickToPlayDesktop() {
+    testOoyalaClickToPlayPreroll();
+  }
+
+  @Test(
+      groups = {"AdsFandomOoyalaAutoplayPrerollDesktop"}
+  )
+  public void adsFandomOoyalaAutoplayPrerollDesktop() {
+    testOoyalaAutoplayPreroll();
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      groups = {"AdsFandomOoyalaClickToPlayPrerollMobile"}
+  )
+  public void adsFandomOoyalaPrerollClickToPlayMobile() {
+    testOoyalaClickToPlayPreroll();
+  }
+
+  @InBrowser(
+      browser = Browser.CHROME,
+      emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+      groups = {"AdsFandomOoyalaAutoplayPrerollMobile"}
+  )
+  public void adsFandomOoyalaAutoplayPrerollMobile() {
+    testOoyalaAutoplayPreroll();
+  }
+
+  public void testOoyalaClickToPlayPreroll() {
     loadPage("the-best-movies-of-2017-so-far");
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
@@ -34,10 +70,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     verifyColorAd(driver.findElement(By.cssSelector(PLAYER_SELECTOR)), BLUE, AD_DURATION_SEC);
   }
 
-  @Test(
-      groups = {"AdsFandomOoyalaAutoplayPrerollDesktop"}
-  )
-  public void adsFandomOoyalaAutoplayPrerollDesktop() {
+  public void testOoyalaAutoplayPreroll() {
     loadPage("orphan-black-clones-names");
     verifyColorAd(
         driver.findElement(By.cssSelector(AUTOPLAY_PLAYER_SELECTOR)),
