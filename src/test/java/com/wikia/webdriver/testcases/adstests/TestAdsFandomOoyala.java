@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final String PLAY_BUTTON_SELECTOR = ".ooyala-video .oo-action-icon";
   private static final String PLAYER_SELECTOR = ".ooyala-video .oo-player";
+  private static final String AUTOPLAY_PLAYER_SELECTOR = ".ooyala-video[data-autoplay]";
   private static final Color BLUE = new Color(0, 1, 253);
   private static final int AD_DURATION_SEC = 30;
 
@@ -31,6 +32,18 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     playButton.click();
 
     verifyColorAd(driver.findElement(By.cssSelector(PLAYER_SELECTOR)), BLUE, AD_DURATION_SEC);
+  }
+
+  @Test(
+      groups = {"AdsFandomOoyalaAutoplayPrerollDesktop"}
+  )
+  public void adsFandomOoyalaAutoplayPrerollDesktop() {
+    loadPage("orphan-black-clones-names");
+    verifyColorAd(
+        driver.findElement(By.cssSelector(AUTOPLAY_PLAYER_SELECTOR)),
+        BLUE,
+        AD_DURATION_SEC
+    );
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
