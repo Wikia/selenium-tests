@@ -24,7 +24,7 @@ public class PromotingTests extends NewTestTemplate {
   private static final String DESKTOP_PROMOTION_TEXT =
     "Take your fandom with you, download the app today!";
   private static final String IOS_APP_TITLE = "Fandom Community for: Fallout";
-  private static final String ANDROID_APP_TITLE = "Fandom: Fallout 4";
+  private static final String ANDROID_APP_TITLE = "FANDOM: Fallout 4";
 
   /**
    * ANON ON DESKTOP SECTION
@@ -61,7 +61,8 @@ public class PromotingTests extends NewTestTemplate {
     assertStringContains(promoting.getPromotionAppMobileText(), MOBILE_PROMOTION_TEXT);
   }
 
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  // this test has to use a browser that is supported by Google Play website
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.NEXUS_5X)
   public void anonUserOnMobileCanClickGooglePlayLink() {
     findPromoting().clickInstallOnMobileBanner();
     assertAppPageOpened(ANDROID_APP_TITLE);
