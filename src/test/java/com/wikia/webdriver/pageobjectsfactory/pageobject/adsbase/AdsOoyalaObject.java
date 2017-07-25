@@ -1,8 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
 
 public class AdsOoyalaObject extends AdsBaseObject {
 
@@ -86,22 +84,10 @@ public class AdsOoyalaObject extends AdsBaseObject {
     logMessage(color, duration);
   }
 
-  private void verifyColorAd(WebElement element, Color color, int durationSec) {
-    AdsComparison adsComparison = new AdsComparison();
-    waitForColorAds(element, color);
-    adsComparison.verifyColorAd(element, color, durationSec, driver);
-  }
+  private void verifyColorAd(WebElement element, Color color, int duration) {
+    OoyalaPrerollAd ooyala = new OoyalaPrerollAd(driver);
 
-
-  private void waitForColorAds(WebElement element, Color color) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions
-                        .elementToHaveColor(element, color,
-                                            AdsComparison.IMAGES_THRESHOLD_PERCENT));
-    } finally {
-      restoreDefaultImplicitWait();
-    }
+    ooyala.verifyColorAd(element, color, duration);
   }
 
   private void logMessage(Color color, int duration) {

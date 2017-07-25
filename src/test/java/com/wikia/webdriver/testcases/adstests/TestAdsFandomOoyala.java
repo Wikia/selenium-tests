@@ -1,26 +1,25 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
 
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final String PLAY_BUTTON_SELECTOR = ".ooyala-video .oo-action-icon";
   private static final String PLAYER_SELECTOR = ".ooyala-video .oo-player";
   private static final String AUTOPLAY_PLAYER_SELECTOR = ".ooyala-video[data-autoplay]";
+
   private static final Color BLUE = new Color(0, 1, 253);
+
   private static final int AD_DURATION_SEC = 30;
 
   @Test(
@@ -61,6 +60,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
 
   public void testOoyalaClickToPlayPreroll() {
     loadPage("the-best-movies-of-2017-so-far");
+
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
 
@@ -79,22 +79,9 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     );
   }
 
-  private void verifyColorAd(WebElement element, Color color, int durationSec) {
-    AdsComparison adsComparison = new AdsComparison();
-    waitForColorAds(element, color);
-    adsComparison.verifyColorAd(element, color, durationSec, driver);
-  }
+  private void verifyColorAd(WebElement element, Color color, int duration) {
+    OoyalaPrerollAd ooyala = new OoyalaPrerollAd(driver);
 
-  private void waitForColorAds(WebElement element, Color color) {
-    WebDriverWait waitFor = new WebDriverWait(driver, 15);
-    driver.manage().timeouts().implicitlyWait(500, TimeUnit.MICROSECONDS);
-
-    try {
-      waitFor.until(CommonExpectedConditions
-                        .elementToHaveColor(element, color,
-                                            AdsComparison.IMAGES_THRESHOLD_PERCENT));
-    } finally {
-      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-    }
+    ooyala.verifyColorAd(element, color, duration);
   }
 }
