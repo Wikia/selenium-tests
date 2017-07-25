@@ -8,12 +8,16 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 
 public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
-  private static Dimension DESKTOP_SIZE = new Dimension(1050, 600);
+  private static Dimension DESKTOP_SIZE = new Dimension(1920, 768);
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -25,7 +29,16 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryWithAdBlock();
+    // when PF recovered ad is on page, inserts span elements as a direct children of body
+    adsRecoveryObject.wait.forElementPresent(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
+
+    // verify that adblock is turned on on that page
+    adsRecoveryObject.verifyNoAdsOnPage();
+
+    List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
+
+    Assert.assertEquals(recoveredAds.size(), 4);
+    adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(recoveredAds);
   }
 
   @Test(
@@ -38,7 +51,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryWithNoAdBlock();
+    adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(4);
   }
 
   @Test(
@@ -52,7 +65,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
     adsRecoveryObject.refreshPageAddingCacheBuster();
 
-    adsRecoveryObject.verifyPageFairRecoveryNoMarkersOnPage();
+    adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(0);
   }
 }
 
