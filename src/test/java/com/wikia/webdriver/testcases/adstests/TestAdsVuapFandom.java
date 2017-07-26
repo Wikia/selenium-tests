@@ -106,7 +106,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
 
         videoFanTakeover.play();
 
@@ -128,7 +128,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
     }
@@ -148,7 +148,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
     }
@@ -168,7 +168,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyIsVideoTimeProgresingOnMobile(networkTrafficInterceptor, videoFanTakeover);
     }
@@ -188,7 +188,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         networkTrafficInterceptor.startIntercepting();
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
         VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
 
         videoFandomPage(slotName).verifyIsVideoPausedOnMobile(networkTrafficInterceptor, videoFanTakeover);
     }
