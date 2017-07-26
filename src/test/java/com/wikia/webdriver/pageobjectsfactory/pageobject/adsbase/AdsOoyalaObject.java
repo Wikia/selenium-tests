@@ -145,7 +145,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
     try {
       Thread.sleep(duration.toMillis());
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      PageObjectLogging.log("Error", e.getMessage(), false);
     }
   }
 
