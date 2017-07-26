@@ -86,14 +86,14 @@ public class FandomAdsDataProvider {
             FandomAdsDataProvider.VUAP_PAGE_SLUG,
             AdsFandomContent.TOP_LEADERBOARD,
             String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD),
-            "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.fandom%2F_fandom%2F%2Farticle%2Fgpt%2FTOP_LEADERBOARD"
+            "^https://pubads\\.g\\.doubleclick\\.net/gampad/ads\\?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka\\.fandom%2F_fandom%2F%2Farticle%2F[a-z]*%2FTOP_LEADERBOARD.*"
         },
         {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
             FandomAdsDataProvider.VUAP_PAGE_SLUG,
             AdsFandomContent.BOTTOM_LEADERBOARD,
             String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD),
-            "https://pubads.g.doubleclick.net/gampad/ads?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.fandom%2F_fandom%2F%2Farticle%2Fgpt%2FBOTTOM_LEADERBOARD"
+            "^https://pubads\\.g\\.doubleclick\\.net/gampad/ads\\?output=vast&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka\\.fandom%2F_fandom%2F%2Farticle%2F[a-z]*%2FBOTTOM_LEADERBOARD.*"
         }
     };
   }
