@@ -15,8 +15,9 @@ import java.awt.*;
 
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final String PLAY_BUTTON_SELECTOR = ".ooyala-video .oo-action-icon";
-  private static final String PLAYER_SELECTOR = ".ooyala-video .oo-player";
-  private static final String AUTOPLAY_PLAYER_SELECTOR = ".ooyala-video[data-autoplay]";
+  private static final String PLAYER_AD_SELECTOR = ".ooyala-video iframe[src*=imasdk]";
+  private static final String AUTOPLAY_PLAYERER_AD_SELECTOR =
+      ".ooyala-video[data-autoplay] iframe[src*=imasdk]";
 
   private static final Color BLUE = new Color(0, 1, 253);
 
@@ -67,13 +68,13 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     wait.forElementVisible(playButton);
     playButton.click();
 
-    verifyColorAd(driver.findElement(By.cssSelector(PLAYER_SELECTOR)), BLUE, AD_DURATION_SEC);
+    verifyColorAd(driver.findElement(By.cssSelector(PLAYER_AD_SELECTOR)), BLUE, AD_DURATION_SEC);
   }
 
   public void testOoyalaAutoplayPreroll() {
     loadPage("orphan-black-clones-names");
     verifyColorAd(
-        driver.findElement(By.cssSelector(AUTOPLAY_PLAYER_SELECTOR)),
+        driver.findElement(By.cssSelector(AUTOPLAY_PLAYERER_AD_SELECTOR)),
         BLUE,
         AD_DURATION_SEC
     );
