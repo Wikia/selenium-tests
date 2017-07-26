@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.common.CommunityHeader;
@@ -9,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 import junit.framework.Assert;
 import org.testng.annotations.Test;
 
+@InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class CommunityHeaderTests extends NewTestTemplate {
 
   @Test(groups = {"discussions-CommunityHeaderTests"})
