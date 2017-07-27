@@ -8,6 +8,10 @@ import lombok.Getter;
 
 public final class ForgottenPasswordUserFactory {
 
+  private ForgottenPasswordUserFactory() {
+    // no-op
+  }
+
   @Builder
   public static class ForgottenPasswordUser {
     private User user;
