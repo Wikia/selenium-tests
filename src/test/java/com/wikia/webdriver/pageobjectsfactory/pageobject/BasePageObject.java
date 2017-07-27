@@ -579,9 +579,13 @@ public class BasePageObject {
 
   private String getTabWithCondition(
       java.util.function.Predicate<? super Pair<String, String>> condition) {
-    Optional<String> newTab = driver.getWindowHandles().stream()
-        .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
-        .filter(condition).map(Pair::getKey).findFirst();
+    Optional<String> newTab = driver.getWindowHandles()
+      .stream()
+      .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
+      .peek(handleTitle -> PageObjectLogging.log("Found window", String.format("Window with title %s", handleTitle), true))
+      .filter(condition)
+      .map(Pair::getKey)
+      .findFirst();
     return newTab.orElseThrow(
         () -> new NotFoundException("Tab that satisfies the condition doesn't exist"));
   }
