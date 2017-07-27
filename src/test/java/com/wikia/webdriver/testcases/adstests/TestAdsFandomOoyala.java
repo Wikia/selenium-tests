@@ -21,6 +21,8 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final String AUTOPLAY_PLAYERER_AD_SELECTOR =
       ".ooyala-video[data-autoplay] iframe[src*=imasdk]";
 
+  private static final String CLICK_TO_PLAY_PAGE = "the-best-movies-of-2017-so-far";
+
   private static final Color BLUE = new Color(0, 1, 253);
 
   private static final int AD_DURATION_SEC = 30;
@@ -29,7 +31,12 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollDesktop"}
   )
   public void adsFandomOoyalaPrerollClickToPlayDesktop() {
-    testOoyalaClickToPlayPreroll(WindowSize.DESKTOP);
+    loadPage(
+        CLICK_TO_PLAY_PAGE,
+        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+        WindowSize.DESKTOP
+    );
+    testOoyalaClickToPlayPreroll();
   }
 
   @Test(
@@ -47,7 +54,12 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollMobile"}
   )
   public void adsFandomOoyalaPrerollClickToPlayMobile() {
-    testOoyalaClickToPlayPreroll(WindowSize.PHONE);
+    loadPage(
+        CLICK_TO_PLAY_PAGE,
+        AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
+        WindowSize.PHONE
+    );
+    testOoyalaClickToPlayPreroll();
   }
 
   @InBrowser(
@@ -61,9 +73,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     testOoyalaAutoplayPreroll(WindowSize.PHONE);
   }
 
-  public void testOoyalaClickToPlayPreroll(Dimension size) {
-    loadPage("the-best-movies-of-2017-so-far", AdsFandomTestTemplate.PAGE_TYPE_ARTICLE, size);
-
+  public void testOoyalaClickToPlayPreroll() {
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
     By adLayer = By.cssSelector(PLAYER_AD_SELECTOR);
