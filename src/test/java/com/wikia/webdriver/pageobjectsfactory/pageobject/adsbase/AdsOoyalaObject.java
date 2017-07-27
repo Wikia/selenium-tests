@@ -3,13 +3,14 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.awt.*;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class AdsOoyalaObject extends AdsBaseObject {
@@ -25,17 +26,27 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video .oo-state-screen-selectable";
   private static final String MOBILE_ARTICLE_VIDEO_PLAY_ICON = ".article-featured-video__play-circle";
+  private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
+  private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
 
   @FindBy(css = "div[id^='ooyalaplayer'] > .innerWrapper")
   private WebElement lightboxVideo;
+
   @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
   private WebElement articleVideoWrapper;
-  @FindBy(className = ARTICLE_VIDEO_CLASS)
+
+  @FindBy(id = ARTICLE_VIDEO_CLASS)
   private WebElement articleVideo;
+
   @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
   private WebElement articleVideoClickArea;
+
   @FindBy(css = MOBILE_ARTICLE_VIDEO_PLAY_ICON)
   private WebElement mobileArticleVideoPlayButton;
+
+  @FindBy(css = ".oo-volume.oo-control-bar-item")
+  private WebElement volumeControlButton;
+
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
@@ -56,8 +67,22 @@ public class AdsOoyalaObject extends AdsBaseObject {
     mobileArticleVideoPlayButton.click();
   }
 
+  public void clickVolumeButton() {
+    hoverPlayerToActivateUI();
+    wait.forElementVisible(volumeControlButton);
+    volumeControlButton.click();
+  }
+
+  private void hoverPlayerToActivateUI() {
+    builder.moveToElement(driver.findElement(PLAYER_SELECTOR)).pause(500).perform();
+  }
+
   public void verifyPlayerOnPage() {
-    wait.forElementPresent(By.className(ARTICLE_VIDEO_CLASS));
+    wait.forElementPresent(PLAYER_SELECTOR);
+  }
+
+  public Boolean wasSoundHeard() {
+    return SoundMonitor.wasSoundHeardOnPage(jsActions);
   }
 
   public void verifyArticleAd() {
@@ -78,12 +103,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
     logMessage(GREEN, VIDEO_DURATION_SEC);
   }
 
-  private void verifyFeaturedVideoElement(String selector, Color color, int duration) {
-    wait.forElementVisible(By.cssSelector(selector), 30, 1000);
+  private void verifyFeaturedVideoElement(By selector, Color color, int duration) {
+    wait.forElementVisible(selector, 30, 1000);
     scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
     fixScrollPositionByNavbar();
     verifyColorAd(articleVideoWrapper, color, 5);
     logMessage(color, duration);
+  }
+
+  private void verifyFeaturedVideoElement(String selector, Color color, int duration) {
+    verifyFeaturedVideoElement(By.cssSelector(selector), color, duration);
   }
 
   private void verifyColorAd(WebElement element, Color color, int durationSec) {
@@ -106,5 +135,22 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   private void logMessage(Color color, int duration) {
     PageObjectLogging.log("Video", "Video content had " + color + " during " + duration + " seconds", true);
+  }
+
+  public void waitForAdStartsPlaying() {
+    wait.forElementVisible(AD_LAYER_SELECTOR);
+  }
+
+  public void allowToPlayVideoForSomeTime(Duration duration) {
+    try {
+      Thread.sleep(duration.toMillis());
+    } catch (InterruptedException e) {
+      PageObjectLogging.log("Error", e.getMessage(), false);
+    }
+  }
+
+  public void waitForAdFinish(Duration videoDuration) {
+    wait.forElementNotVisible(AD_LAYER_SELECTOR, videoDuration);
+    wait.forElementVisible(By.cssSelector(".oo-state-screen"));
   }
 }
