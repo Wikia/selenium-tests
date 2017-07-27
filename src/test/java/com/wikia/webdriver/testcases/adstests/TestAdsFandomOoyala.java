@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -31,23 +32,23 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollDesktop"}
   )
   public void adsFandomOoyalaPrerollClickToPlayDesktop() {
-    loadPage(
+    AdsFandomObject adsFandom = loadPage(
         CLICK_TO_PLAY_PAGE,
         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
         WindowSize.DESKTOP
     );
-    testOoyalaClickToPlayPreroll();
+    testOoyalaClickToPlayPreroll(adsFandom);
   }
 
   @Test(
       groups = {"AdsFandomOoyalaAutoplayPrerollDesktop"}
   )
   public void adsFandomOoyalaAutoplayPrerollDesktop() {
-    loadPage(AUTOPLAY_PAGE,
+    AdsFandomObject adsFandom = loadPage(AUTOPLAY_PAGE,
              AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
              WindowSize.DESKTOP
     );
-    testOoyalaAutoplayPreroll();
+    testOoyalaAutoplayPreroll(adsFandom);
   }
 
   @InBrowser(
@@ -58,12 +59,12 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollMobile"}
   )
   public void adsFandomOoyalaPrerollClickToPlayMobile() {
-    loadPage(
+    AdsFandomObject adsFandom = loadPage(
         CLICK_TO_PLAY_PAGE,
         AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
         WindowSize.PHONE
     );
-    testOoyalaClickToPlayPreroll();
+    testOoyalaClickToPlayPreroll(adsFandom);
   }
 
   @InBrowser(
@@ -74,14 +75,14 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaAutoplayPrerollMobile"}
   )
   public void adsFandomOoyalaAutoplayPrerollMobile() {
-    loadPage(AUTOPLAY_PAGE,
+    AdsFandomObject adsFandom = loadPage(AUTOPLAY_PAGE,
              AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
              WindowSize.PHONE
     );
-    testOoyalaAutoplayPreroll();
+    testOoyalaAutoplayPreroll(adsFandom);
   }
 
-  public void testOoyalaClickToPlayPreroll() {
+  public void testOoyalaClickToPlayPreroll(AdsFandomObject adsFandom) {
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
     By adLayer = By.cssSelector(PLAYER_AD_SELECTOR);
@@ -90,23 +91,22 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     playButton.click();
 
     wait.forElementVisible(adLayer);
+    adsFandom.scrollToPosition(adLayer);
     verifyColorAd(driver.findElement(adLayer), BLUE, AD_DURATION_SEC);
     wait.forElementNotVisible(adLayer);
   }
 
-  public void testOoyalaAutoplayPreroll() {
+  public void testOoyalaAutoplayPreroll(AdsFandomObject adsFandom) {
     Wait wait = new Wait(driver);
     By autoplayAdLayer = By.cssSelector(AUTOPLAY_PLAYERER_AD_SELECTOR);
 
     wait.forElementVisible(autoplayAdLayer);
-    verifyColorAd(driver.findElement(autoplayAdLayer), BLUE, AD_DURATION_SEC);
-
+    adsFandom.scrollToPosition(autoplayAdLayer);
     verifyColorAd(
         driver.findElement(autoplayAdLayer),
         BLUE,
         AD_DURATION_SEC
     );
-
     wait.forElementNotVisible(autoplayAdLayer);
   }
 
