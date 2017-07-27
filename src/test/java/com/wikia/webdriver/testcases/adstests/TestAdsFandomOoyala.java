@@ -64,20 +64,32 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
 
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
+    By adLayer = By.cssSelector(PLAYER_AD_SELECTOR);
 
     wait.forElementVisible(playButton);
     playButton.click();
 
-    verifyColorAd(driver.findElement(By.cssSelector(PLAYER_AD_SELECTOR)), BLUE, AD_DURATION_SEC);
+    wait.forElementVisible(adLayer);
+    verifyColorAd(driver.findElement(adLayer), BLUE, AD_DURATION_SEC);
+    wait.forElementNotVisible(adLayer);
   }
 
   public void testOoyalaAutoplayPreroll() {
     loadPage("orphan-black-clones-names");
+
+    Wait wait = new Wait(driver);
+    By autoplayAdLayer = By.cssSelector(AUTOPLAY_PLAYERER_AD_SELECTOR);
+
+    wait.forElementVisible(autoplayAdLayer);
+    verifyColorAd(driver.findElement(autoplayAdLayer), BLUE, AD_DURATION_SEC);
+
     verifyColorAd(
-        driver.findElement(By.cssSelector(AUTOPLAY_PLAYERER_AD_SELECTOR)),
+        driver.findElement(autoplayAdLayer),
         BLUE,
         AD_DURATION_SEC
     );
+
+    wait.forElementNotVisible(autoplayAdLayer);
   }
 
   private void verifyColorAd(WebElement element, Color color, int duration) {
