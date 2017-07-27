@@ -23,7 +23,7 @@ browserSize: maximised
 
 # Add browser extensions.
 # Acceptable values:
-# for CHROME: adblock, adblock+, ublock
+# for CHROME: adblock, adblock+, ublock, soundmonitor
 # for FF: adblock+, JSErrorCollector
 extensions: null
 
