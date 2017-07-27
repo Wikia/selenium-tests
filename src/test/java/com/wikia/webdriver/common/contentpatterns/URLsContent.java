@@ -45,7 +45,6 @@ public class URLsContent {
   public static final String SPECIAL_BLOCK = "/wiki/Special:Block";
   public static final String SPECIAL_CHAT = "/wiki/Special:Chat";
   public static final String SPECIAL_EDIT_HUB = "/wiki/Special:EditHub";
-  public static final String SPECIAL_MAPS = "/wiki/Special:Maps";
   public static final String SPECIAL_VIDEO_PAGE_ADMIN = "/wiki/Special:VideoPageAdmin/edit";
   public static final String SPECIAL_WHAT_LINKS_HERE = "/Special:WhatLinksHere";
   public static final String SPECIAL_VERSION = "/wiki/Special:Version";
@@ -132,12 +131,6 @@ public class URLsContent {
   public static final String EXTERNAL_URL = "http://www.wikia.com";
 
   public static final String USER_SIGNOUT = EXTERNAL_URL + "/logout";
-
-  // Embed map URL for Interactive Maps
-  public static final String EMBEDED_MAP_ARTICLE = "EmbedMap";
-
-  // Escaped frament URL for Maps
-  public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
 
   // Recent wiki activity on mobile
   public static final String RECENT_WIKI_ACTIVITY = "/recent-wiki-activity";

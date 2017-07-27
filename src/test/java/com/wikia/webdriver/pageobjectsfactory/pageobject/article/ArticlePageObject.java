@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.comment.ArticleComment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.editcategory.EditCategoryComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.EmbedMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
@@ -136,8 +135,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   private WebElement thumbnailImageArticle;
   @FindBy(css = ".wds-button-group")
   private WebElement articleEditButton;
-  @FindBy(css = ".view")
-  private WebElement viewEmbedMapButton;
   @FindBy(css = "[href='#WikiaArticleComments']")
   private WebElement commentButton;
 
@@ -710,14 +707,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
     articleModal.createPageWithBlankLayout("");
     return new SourceEditModePageObject();
-  }
-
-  public EmbedMapComponentObject clickViewEmbedMap() {
-    wait.forElementVisible(viewEmbedMapButton);
-    jsActions.scrollToElement(viewEmbedMapButton);
-    viewEmbedMapButton.click();
-    driver.switchTo().activeElement();
-    return new EmbedMapComponentObject(driver);
   }
 
   public ArticlePageObject clickCommentButton(){

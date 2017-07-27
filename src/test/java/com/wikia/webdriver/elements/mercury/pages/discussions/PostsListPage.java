@@ -6,7 +6,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Moderation;
@@ -38,9 +37,6 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
   private final PostEditor postEditor = new PostEditor();
 
   @Getter(lazy = true)
-  private final BackButtons backButtons = new BackButtons();
-
-  @Getter(lazy = true)
   private final CommunityBadge communityBadge = new CommunityBadge();
 
   @Getter(lazy = true)
@@ -68,14 +64,15 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
   private final FiltersPopOver filtersPopOver = new FiltersPopOver();
 
   @Getter(lazy = true)
-  private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
+  private final SignInToFollowModalDialog
+      signInToFollowModalDialog =
+      new SignInToFollowModalDialog();
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
   @Getter(lazy = true)
   private final CategoriesFieldset categories = new CategoriesFieldset();
-
 
 
   public PostsListPage open(String wikiID) {

@@ -9,8 +9,8 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.pages.discussions.DiscussionsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.GuidelinesPage;
-
 import org.testng.annotations.Test;
+
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = {"discussions-guidelines"})
@@ -26,7 +26,7 @@ public class GuidelinesTests extends NewTestTemplate {
   public void anonUserOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
-    Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
+    Assertion.assertTrue(mainDiscussionPage.isDiscussionsFilterDisplayed());
   }
 
   @Test(groups = "discussions-anonUserOnDesktopCanNotSeeEditGuidelines")
@@ -42,11 +42,11 @@ public class GuidelinesTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void anonUserOnDesktopCanSeeGuidelinesHeroUnit() {
+  public void anonUserOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
 
-    Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
+    Assertion.assertTrue(guidelinesPage.isGuidelinesImageAreaDisplayed());
   }
 
   /**
@@ -79,7 +79,7 @@ public class GuidelinesTests extends NewTestTemplate {
   public void regularUserOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
-    Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
+    Assertion.assertTrue(mainDiscussionPage.isDiscussionsFilterDisplayed());
   }
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanClickBackToDiscussions")
@@ -88,7 +88,7 @@ public class GuidelinesTests extends NewTestTemplate {
   public void discussionsModeratorOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
-    Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
+    Assertion.assertTrue(mainDiscussionPage.isDiscussionsFilterDisplayed());
   }
 
   @Test(groups = "discussions-staffOnDesktopCanClickBackToDiscussions")
@@ -97,7 +97,7 @@ public class GuidelinesTests extends NewTestTemplate {
   public void staffOnDesktopCanClickBackToDiscussions() {
     DiscussionsPage mainDiscussionPage = new GuidelinesPage().open().clickBackToDiscussions();
 
-    Assertion.assertTrue(mainDiscussionPage.isWikiaHomeLinkDisplayed());
+    Assertion.assertTrue(mainDiscussionPage.isDiscussionsFilterDisplayed());
   }
 
   @Test(groups = "discussions-regularUserOnDesktopCanNotSeeEditGuidelines")
@@ -113,31 +113,31 @@ public class GuidelinesTests extends NewTestTemplate {
   @Test(groups = "discussions-regularUserOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.USER_6)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void regularUserOnDesktopCanSeeGuidelinesHeroUnit() {
+  public void regularUserOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
 
-    Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
+    Assertion.assertTrue(guidelinesPage.isGuidelinesImageAreaDisplayed());
   }
 
   @Test(groups = "discussions-discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void discussionsModeratorOnDesktopCanSeeGuidelinesHeroUnit() {
+  public void discussionsModeratorOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
 
-    Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
+    Assertion.assertTrue(guidelinesPage.isGuidelinesImageAreaDisplayed());
   }
 
   @Test(groups = "discussions-staffOnDesktopCanSeeGuidelinesHeroUnit")
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void staffOnDesktopCanSeeGuidelinesHeroUnit() {
+  public void staffOnDesktopCanSeeGuidelinesImageArea() {
     GuidelinesPage guidelinesPage = new GuidelinesPage();
     guidelinesPage.open();
 
-    Assertion.assertTrue(guidelinesPage.isGuidelinesHeroUnitDisplayed());
+    Assertion.assertTrue(guidelinesPage.isGuidelinesImageAreaDisplayed());
   }
   @Test(groups = "discussions-staffOnDesktopCanAddTextToGuidelines")
   @Execute(asUser = User.STAFF)
