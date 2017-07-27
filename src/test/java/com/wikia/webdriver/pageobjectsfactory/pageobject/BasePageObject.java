@@ -583,7 +583,7 @@ public class BasePageObject {
         .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
         .filter(condition).map(Pair::getKey).findFirst();
     return newTab.orElseThrow(
-        () -> new NotFoundException(String.format("Tab with title %s doesn't exist", title)));
+        () -> new NotFoundException("Tab that satisfies the condition doesn't exist"));
   }
 
   public WebDriver switchToWindowWithTitle(String title) {
