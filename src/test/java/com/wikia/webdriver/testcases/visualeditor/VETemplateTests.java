@@ -14,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import org.testng.annotations.BeforeMethod;
@@ -27,8 +26,7 @@ public class VETemplateTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
   WikiBasePageObject base;
-  String articleName, mapID;
-  InteractiveMapPageObject createdMap;
+  String articleName;
 
   @BeforeMethod(alwaysRun = true)
   public void setup_VEPreferred() {

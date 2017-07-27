@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorDialog;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorHyperLinkDialog;
@@ -68,8 +67,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
   private WebElement template;
   @FindBy(css = ".oo-ui-icon-number-list")
   private WebElement numberedList;
-  @FindBy(css = ".oo-ui-tool-name-wikiaMapInsert .oo-ui-tool-title")
-  private WebElement map;
   @FindBy(css = ".oo-ui-icon-reference")
   private WebElement reference;
   @FindBy(css = ".oo-ui-icon-references")
@@ -186,10 +183,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
   public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {
     switch (insert) {
-      case MAP:
-        clickInsertItemFromDropDown(map);
-        PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-        return new VisualEditorAddMapDialog(driver);
       case REFERENCE:
         clickInsertItemFromDropDown(reference);
         PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
