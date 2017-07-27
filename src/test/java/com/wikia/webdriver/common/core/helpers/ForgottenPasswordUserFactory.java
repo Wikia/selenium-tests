@@ -6,19 +6,28 @@ import com.wikia.webdriver.common.properties.Credentials;
 import lombok.Builder;
 import lombok.Getter;
 
-public class ForgottenPasswordUserFactory {
-
-  private static Credentials credentials = Configuration.getCredentials();
+public final class ForgottenPasswordUserFactory {
 
   @Builder
-  @Getter
-  public class ForgottenPasswordUser {
+  public static class ForgottenPasswordUser {
     private User user;
+
+    @Getter
     private String email;
+
+    @Getter
     private String emailPassword;
-    private String username = user.getUserName();
-    private String password = user.getPassword();
+
+    public String getUsername() {
+      return user.getUserName();
+    }
+
+    public String getPassword() {
+      return user.getPassword();
+    }
   }
+
+  private static Credentials credentials = Configuration.getCredentials();
 
   private static ForgottenPasswordUser user(User user, String email, String password) {
     return ForgottenPasswordUser.builder()
