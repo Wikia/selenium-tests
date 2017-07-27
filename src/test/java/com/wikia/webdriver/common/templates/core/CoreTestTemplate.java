@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 import org.openqa.selenium.Dimension;
 import org.testng.SkipException;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -153,6 +154,7 @@ public abstract class CoreTestTemplate {
   }
 
   @AfterMethod(alwaysRun = true)
+  @AfterClass(alwaysRun = true)
   public void stop() {
     DriverProvider.close();
   }
