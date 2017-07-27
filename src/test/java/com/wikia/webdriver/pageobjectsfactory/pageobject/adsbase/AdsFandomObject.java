@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -10,6 +11,10 @@ public class AdsFandomObject extends AdsBaseObject {
 
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
+  }
+
+  public AdsFandomObject(WebDriver driver, String testedPage, Dimension resolution) {
+    super(driver, testedPage, resolution);
   }
 
   private WebElement slots(String slotSelector) {

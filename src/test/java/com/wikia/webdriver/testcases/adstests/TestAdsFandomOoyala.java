@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -8,6 +9,7 @@ import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -27,14 +29,14 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollDesktop"}
   )
   public void adsFandomOoyalaPrerollClickToPlayDesktop() {
-    testOoyalaClickToPlayPreroll();
+    testOoyalaClickToPlayPreroll(WindowSize.DESKTOP);
   }
 
   @Test(
       groups = {"AdsFandomOoyalaAutoplayPrerollDesktop"}
   )
   public void adsFandomOoyalaAutoplayPrerollDesktop() {
-    testOoyalaAutoplayPreroll();
+    testOoyalaAutoplayPreroll(WindowSize.DESKTOP);
   }
 
   @InBrowser(
@@ -45,7 +47,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaClickToPlayPrerollMobile"}
   )
   public void adsFandomOoyalaPrerollClickToPlayMobile() {
-    testOoyalaClickToPlayPreroll();
+    testOoyalaClickToPlayPreroll(WindowSize.PHONE);
   }
 
   @InBrowser(
@@ -56,11 +58,11 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
       groups = {"AdsFandomOoyalaAutoplayPrerollMobile"}
   )
   public void adsFandomOoyalaAutoplayPrerollMobile() {
-    testOoyalaAutoplayPreroll();
+    testOoyalaAutoplayPreroll(WindowSize.PHONE);
   }
 
-  public void testOoyalaClickToPlayPreroll() {
-    loadPage("the-best-movies-of-2017-so-far");
+  public void testOoyalaClickToPlayPreroll(Dimension size) {
+    loadPage("the-best-movies-of-2017-so-far", AdsFandomTestTemplate.PAGE_TYPE_ARTICLE, size);
 
     Wait wait = new Wait(driver);
     WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
@@ -74,8 +76,8 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     wait.forElementNotVisible(adLayer);
   }
 
-  public void testOoyalaAutoplayPreroll() {
-    loadPage("orphan-black-clones-names");
+  public void testOoyalaAutoplayPreroll(Dimension size) {
+    loadPage("orphan-black-clones-names", AdsFandomTestTemplate.PAGE_TYPE_ARTICLE, size);
 
     Wait wait = new Wait(driver);
     By autoplayAdLayer = By.cssSelector(AUTOPLAY_PLAYERER_AD_SELECTOR);
