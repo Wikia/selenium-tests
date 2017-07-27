@@ -778,7 +778,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private void reportPost(final PostEntity postEntity) {
-    postEntity.clickMoreOptions().clickReportPostOption();
+    postEntity.clickMoreOptions().clickReportPostOption().confirmAndWait();
   }
 
   private boolean isReported(final PostEntity postEntity) {
