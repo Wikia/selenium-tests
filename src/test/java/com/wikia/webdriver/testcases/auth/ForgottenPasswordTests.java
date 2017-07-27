@@ -49,7 +49,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedSignInPage signIn = new AttachedSignInPage().open();
     signIn.clickForgotPasswordLink().requestLinkForUsername(lowercaseUsername);
-    String resetLink = base.getPasswordResetLink(user.getEmail(), user.getPassword());
+    String resetLink = base.getPasswordResetLink(user.getEmail(), user.getEmailPassword());
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(user.getPassword());
 
