@@ -127,15 +127,6 @@
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageServingTests"/>
             <class name="com.wikia.webdriver.testcases.imageservingtests.ImageStorageTests"/>
             <class name="com.wikia.webdriver.testcases.infoboxbuilder.InfoboxBuilderTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.BlockedUserMapTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.DeleteAndRestoreMapTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.EmbedMapTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.FilterBoxMapTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.MapFlowTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.NonSpecificMapTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.PalantirTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.PinMapTests"/>
-            <class name="com.wikia.webdriver.testcases.interactivemapstests.PinTypeMapTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ForcedLoginTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ForgottenPasswordTests"/>
             <class name="com.wikia.webdriver.testcases.auth.LoginTests"/>
@@ -160,7 +151,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.ImageUploadTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.NavigationTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.old.InteractiveMapsTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LoginTestsOld"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.PortableInfoboxTests"/>
@@ -229,7 +219,6 @@
             <class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.VisualEditorEntryTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VECopyAndPasteTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.text.VisualEditorEditingTests"/>
-            <class name="com.wikia.webdriver.testcases.visualeditor.VEAddMapTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEVideoTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VECategoryTests"/>
             <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>

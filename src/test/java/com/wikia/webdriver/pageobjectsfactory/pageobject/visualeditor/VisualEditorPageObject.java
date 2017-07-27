@@ -20,8 +20,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
   @FindBy(css = "figure.ve-ce-branchNode")
   private WebElement mediaNode;
-  @FindBy(css = "figure.wikia-interactive-map-thumbnail")
-  private WebElement mapNode;
   @FindBy(css = ".ve-ui-wikiaMediaPreviewWidget-overlay")
   private WebElement previewOverlay;
   @FindBy(css = ".ve-ui-wikiaMediaPreviewWidget-overlay img")
@@ -206,11 +204,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
     article.verifyVEPublishComplete();
 
     return article;
-  }
-
-  public void verifyMapPresent() {
-    wait.forElementVisible(mapNode);
-    PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
   }
 
   public void verifyNoVideo() {

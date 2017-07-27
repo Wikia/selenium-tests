@@ -27,8 +27,6 @@ public class WikiArticleEditMode extends WikiEditMode {
   private WebElement publishButton;
   @FindBy(css = "span[id=cke_22_label]")
   private WebElement sourceButton;
-  @FindBy(css = "a[data-map-title]")
-  private WebElement embededMap;
 
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
@@ -98,12 +96,5 @@ public class WikiArticleEditMode extends WikiEditMode {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("typeInContent", "content type into source mode textarea", true, driver);
-  }
-
-  public void verifyEmbededMap(String mapID) {
-    driver.switchTo().defaultContent();
-    wait.forElementVisible(embededMap);
-    String embededMapID = embededMap.getAttribute("data-map-id");
-    Assertion.assertEquals(embededMapID, mapID);
   }
 }
