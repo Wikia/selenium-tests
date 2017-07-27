@@ -4,7 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.oasis.CommunityHeader;
+import com.wikia.webdriver.elements.common.CommunityHeader;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.oasis.MainPage;
 
 import junit.framework.Assert;
@@ -37,9 +38,9 @@ public class CommunityHeaderTests extends NewTestTemplate {
   @Test(groups = {"CommunityHeaderTests"})
   @Execute(asUser = User.ANONYMOUS)
   public void testAnonWikiButtons() {
-    new CommunityHeader().clickAddNewPage();
+    CreateArticleModalComponentObject modal = new CommunityHeader().clickAddNewPage();
 
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
+    Assert.assertTrue(modal.isCreateNewArticleModalVisible());
   }
 
   @Test(groups = {"CommunityHeaderTests"})
@@ -50,8 +51,8 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.clickWikiActivity();
     Assert.assertTrue(driver.getCurrentUrl().contains("Special:WikiActivity"));
 
-    communityHeader.clickAddNewPage();
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
+    CreateArticleModalComponentObject modal = communityHeader.clickAddNewPage();
+    Assert.assertTrue(modal.isCreateNewArticleModalVisible());
   }
 
   @Test(groups = {"CommunityHeaderTests"})
@@ -65,8 +66,8 @@ public class CommunityHeaderTests extends NewTestTemplate {
     communityHeader.clickAdminDashboard();
     Assert.assertTrue(driver.getCurrentUrl().contains("Special:AdminDashboard"));
 
-    communityHeader.clickAddNewPage();
-    Assert.assertTrue(driver.getCurrentUrl().contains("Special:CreatePage"));
+    CreateArticleModalComponentObject modal = communityHeader.clickAddNewPage();
+    Assert.assertTrue(modal.isCreateNewArticleModalVisible());
   }
 
   @Test(groups = {"CommunityHeaderTests"})

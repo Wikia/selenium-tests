@@ -28,21 +28,21 @@ public class DiscussionsPage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final TopBar topbar = new TopBar();
 
-  @FindBy(css = ".wikia-home-link")
-  private WebElement wikiaHomeLink;
+  @FindBy(css = ".discussion-filter-header")
+  private WebElement discussionsFilter;
 
   public DiscussionsPage() {
     super();
     getNavigate().toPageByPath(PageContent.DISCUSSIONS_LINK);
   }
 
-  public boolean isWikiaHomeLinkDisplayed() {
+  public boolean isDiscussionsFilterDisplayed() {
     try {
-      wait.forElementVisible(wikiaHomeLink);
+      wait.forElementVisible(discussionsFilter);
 
-      return wikiaHomeLink.isDisplayed();
+      return discussionsFilter.isDisplayed();
     } catch (TimeoutException e) {
-      PageObjectLogging.logInfo("Wikia home link is not displayed", e);
+      PageObjectLogging.logInfo("Sort By filter is not displayed", e);
 
       return false;
     }
