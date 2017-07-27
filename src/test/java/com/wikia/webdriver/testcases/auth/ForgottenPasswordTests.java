@@ -10,9 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
@@ -22,8 +20,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   private ForgottenPasswordUserFactory.ForgottenPasswordUser user = ForgottenPasswordUserFactory.user1();
   private ForgottenPasswordUserFactory.ForgottenPasswordUser userWithSpaces = ForgottenPasswordUserFactory.user2();
 
-  @BeforeTest
-  @AfterTest
+  @BeforeMethod
+  @AfterMethod
   private void cleanUpEmails() {
     EmailUtils.deleteAllEmails(user.getEmail(), user.getEmailPassword());
     EmailUtils.deleteAllEmails(userWithSpaces.getEmail(), userWithSpaces.getEmailPassword());
