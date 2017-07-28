@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ConfirmationDialog extends BasePageObject {
 
-  private WebElement getActiveDialog() {
+  WebElement getActiveDialog() {
 
     List<WebElement> elements = driver.findElements(By.cssSelector(".discussion-dialog.is-visible"));
     if (elements.isEmpty()) {
@@ -31,7 +31,7 @@ public class ConfirmationDialog extends BasePageObject {
     getActiveDialog().findElement(By.className("cancel-button")).click();
   }
 
-  public void clickConfirm() {
+  void clickConfirm() {
     getActiveDialog().findElement(By.className("confirm-button")).click();
   }
 
