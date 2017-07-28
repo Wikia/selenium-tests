@@ -24,6 +24,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomBtfBlock"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomUap"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsFandomOoyala"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapFandom"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsGptPageParam"/>

@@ -1,9 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.wikia.webdriver.common.core.CommonExpectedConditions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.OoyalaPrerollAd;
+
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.SoundMonitor;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.awt.*;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class AdsOoyalaObject extends AdsBaseObject {
 
@@ -35,9 +35,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
   private WebElement articleVideoWrapper;
 
-  @FindBy(id = ARTICLE_VIDEO_CLASS)
-  private WebElement articleVideo;
-
   @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
   private WebElement articleVideoClickArea;
 
@@ -46,7 +43,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   @FindBy(css = ".oo-volume.oo-control-bar-item")
   private WebElement volumeControlButton;
-
 
   public AdsOoyalaObject(WebDriver driver, String page) {
     super(driver, page);
@@ -78,7 +74,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyPlayerOnPage() {
-    wait.forElementPresent(PLAYER_SELECTOR);
+    wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR));
   }
 
   public Boolean wasSoundHeard() {
@@ -111,26 +107,14 @@ public class AdsOoyalaObject extends AdsBaseObject {
     logMessage(color, duration);
   }
 
+  private void verifyColorAd(WebElement element, Color color, int duration) {
+    OoyalaPrerollAd ooyala = new OoyalaPrerollAd(driver);
+
+    ooyala.verifyColorAd(element, color, duration);
+  }
+  
   private void verifyFeaturedVideoElement(String selector, Color color, int duration) {
     verifyFeaturedVideoElement(By.cssSelector(selector), color, duration);
-  }
-
-  private void verifyColorAd(WebElement element, Color color, int durationSec) {
-    AdsComparison adsComparison = new AdsComparison();
-    waitForColorAds(element, color);
-    adsComparison.verifyColorAd(element, color, durationSec, driver);
-  }
-
-
-  private void waitForColorAds(WebElement element, Color color) {
-    changeImplicitWait(500, TimeUnit.MILLISECONDS);
-    try {
-      waitFor.until(CommonExpectedConditions
-                        .elementToHaveColor(element, color,
-                                            AdsComparison.IMAGES_THRESHOLD_PERCENT));
-    } finally {
-      restoreDefaultImplicitWait();
-    }
   }
 
   private void logMessage(Color color, int duration) {
