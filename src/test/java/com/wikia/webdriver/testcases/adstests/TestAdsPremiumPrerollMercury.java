@@ -23,7 +23,6 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
         article + "?AbTest.MOBILE_FEATURED_VIDEO_AUTOPLAY=CONTROL"
     );
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.verifyPlayerOnPage();
     wikiPage.playArticleVideo();
     wikiPage.verifyArticleAd();
     wikiPage.verifyArticleVideo();
@@ -40,7 +39,6 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
         article + "?noads=1&AbTest.MOBILE_FEATURED_VIDEO_AUTOPLAY=CONTROL"
     );
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.verifyPlayerOnPage();
     wikiPage.playArticleVideo();
     wikiPage.verifyArticleVideo();
   }
