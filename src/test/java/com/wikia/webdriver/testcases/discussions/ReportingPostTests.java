@@ -8,6 +8,7 @@ import static org.testng.Assert.assertTrue;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -586,6 +587,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -593,6 +595,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -684,6 +687,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
@@ -691,6 +695,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
@@ -778,7 +783,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private void reportPost(final PostEntity postEntity) {
-    postEntity.clickMoreOptions().clickReportPostOption();
+    postEntity.clickMoreOptions().clickReportPostOption().confirmAndWait();
   }
 
   private boolean isReported(final PostEntity postEntity) {

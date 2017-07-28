@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.facebooktests;
 
 import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.GraphApi;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -16,6 +17,7 @@ public class FacebookTests extends NewTestTemplate {
 
   String wikiaProductionAppId = XMLReader.getValue("ci.user.facebook.prod.appId");
 
+  @RelatedIssue(issueID = "IRIS-4714")
   @Test(groups = "Facebook_userCanSignUpViaFacebook")
   public void userCanSignUpViaFacebook() {
     GraphApi api = new GraphApi();
