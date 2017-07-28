@@ -80,7 +80,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyPlayerOnPage() {
-    wait.forElementPresent(PLAYER_SELECTOR);
+    wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR));
   }
 
   public Boolean wasSoundHeard() {
