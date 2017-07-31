@@ -39,6 +39,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
     wait.forElementInViewPort(reviewChangesButton);
     wait.forElementVisible(savePanel);
     publishButton.click();
+    wait.forElementNotVisible(publishButton);
     return new ArticlePageObject();
   }
 

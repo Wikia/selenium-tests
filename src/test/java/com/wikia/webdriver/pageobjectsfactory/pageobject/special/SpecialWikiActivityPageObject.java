@@ -6,9 +6,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
@@ -129,15 +127,20 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
   /**
    * Gets activities from special page, limited by provided value
-   * @param numberOfActivities
-   * @return
+   * @param numberOfActivities number of activities to fetch (counting from top)
+   * @return list of activities
    */
   public List<Activity> getActivities(int numberOfActivities) {
 
     List<Activity> activityList = new ArrayList<>();
     //numberOfActivitiesToFetch set to max number of possible elements to fetch
-    int numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
-            ? activityWebElementList.size() : numberOfActivities;
+    int numberOfActivitiesToFetch;
+    if (activityWebElementList.size()>0){
+      numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
+              ? activityWebElementList.size() : numberOfActivities;
+    } else{
+      throw new NoSuchElementException("No activities found, populate a list before fetching.");
+    }
     List<WebElement> activityWebElementSubList = activityWebElementList.subList(0, numberOfActivitiesToFetch);
 
     for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
