@@ -135,7 +135,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     List<Activity> activityList = new ArrayList<>();
     //numberOfActivitiesToFetch set to max number of possible elements to fetch
     int numberOfActivitiesToFetch;
-    if (activityWebElementList.size()>0){
+    if (!activityWebElementList.isEmpty()){
       numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
               ? activityWebElementList.size() : numberOfActivities;
     } else{
