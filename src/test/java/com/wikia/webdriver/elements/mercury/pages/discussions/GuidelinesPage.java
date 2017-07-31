@@ -28,13 +28,13 @@ public class GuidelinesPage extends WikiBasePageObject {
   @FindBy(css = ".standalone-content")
   private WebElement editModal;
 
-  @FindBy(css = ".discussion-hero-unit-fade")
-  private WebElement heroUnit;
+  @FindBy(css = ".discussion-left-rail__header")
+  private WebElement leftRailHeader;
 
   @FindBy(css = ".guidelines-text")
   private WebElement contentText;
 
-  @FindBy(css = ".guidelines-edit-link")
+  @FindBy(css = ".guidelines-edit-button")
   private WebElement editButton;
 
   @FindBy(css = ".editor-close")
@@ -83,8 +83,8 @@ public class GuidelinesPage extends WikiBasePageObject {
     return result;
   }
 
-  public boolean isGuidelinesHeroUnitDisplayed() {
-    return isElementVisible(heroUnit, "Hero unit");
+  public boolean isGuidelinesImageAreaDisplayed() {
+    return isElementVisible(leftRailHeader, "Guidelines image");
   }
 
   public boolean isEditButtonDisplayed() {

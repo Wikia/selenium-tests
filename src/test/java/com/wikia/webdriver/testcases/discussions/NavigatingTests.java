@@ -10,9 +10,9 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.BackButtons;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
+
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-navigation"})
@@ -33,13 +33,6 @@ public class NavigatingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickBackToWiki")
-  @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void anonUserOnDesktopCanClickBackToWiki() {
-    backToWiki();
-  }
-
   @Test(enabled = false, groups = "discussions-anonUserOnDesktopCanClickAvatar")
   @RelatedIssue(issueID = "SOC-2301")
   @Execute(asUser = User.ANONYMOUS)
@@ -58,15 +51,6 @@ public class NavigatingTests extends NewTestTemplate {
   /**
    * TESTING METHODS SECTION
    */
-
-  private void backToWiki() {
-    PostsListPage page = new PostsListPage().open();
-    BackButtons backButtons = page.open().getBackButtons();
-    backButtons.clickBackToWikiLink();
-
-    Assertion.assertTrue(page.isWikiFirstHeaderVisible());
-    Assertion.assertTrue(driver.getCurrentUrl().contains(wikiURL));
-  }
 
   private void clickAvatarLoadsUserPage() {
     PostsListPage page = new PostsListPage().open();

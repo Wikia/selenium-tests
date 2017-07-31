@@ -30,8 +30,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigat
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.*;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
@@ -260,19 +258,9 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialMultipleUploadPageObject(driver);
   }
 
-  public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_MAPS);
-    return new InteractiveMapsPageObject();
-  }
-
   public SpecialWhatLinksHerePageObject openSpecialWhatLinksHere(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_WHAT_LINKS_HERE);
     return new SpecialWhatLinksHerePageObject(driver);
-  }
-
-  public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
-    getUrl(wikiURL + URLsContent.SPECIAL_MAPS + "/" + id);
-    return new InteractiveMapPageObject();
   }
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
@@ -484,7 +472,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public String getPasswordResetLink(String email, String password) {
     String passwordResetEmail = EmailUtils
-      .getFirstEmailContent(email, password, "Reset your Fandom password");
+      .getFirstEmailContent(email, password, "Reset your FANDOM password");
     String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
     PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
         true);
