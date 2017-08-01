@@ -69,7 +69,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressingFandom"}
+            groups = {"AdsVuapTimeProgressDesktopFandom"}
     )
     public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -161,7 +161,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressingFandomMobile"}
+            groups = {"AdsVuapTimeProgressMobileFandom"}
     )
     public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName,
                                                    String iframeId, String videoUrl) throws InterruptedException {
