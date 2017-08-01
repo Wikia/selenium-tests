@@ -7,7 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSig
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage {
 
   private AttachedRegisterPage registerPage;
-  private static final String TITLE = "Join Fandom Today";
+  private static final String TITLE = "Join FANDOM Today";
 
   public DetachedRegisterPage() {
     registerPage = new AttachedRegisterPage();
