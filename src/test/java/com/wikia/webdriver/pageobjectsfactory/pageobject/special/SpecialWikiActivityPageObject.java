@@ -6,7 +6,10 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
@@ -155,7 +158,6 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
       activityList.add(activity);
     }
-
     return activityList;
   }
 
@@ -179,5 +181,4 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
         .contains(blogContent);
     return (condition1 & condition2 & condition3);
   }
-
 }
