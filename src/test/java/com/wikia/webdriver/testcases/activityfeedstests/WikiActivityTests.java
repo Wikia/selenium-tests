@@ -8,17 +8,16 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.EditActivity;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActivityPageObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.EditActivity;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
-
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -119,6 +118,7 @@ public class WikiActivityTests extends NewTestTemplate {
   @Test(groups = "WikiActivity_006")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_006_clickingTitleRedirectsToArticle() {
+    new ArticleContent().push("content");
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
     List<Activity> activityList = activityPage.getActivities(10);
@@ -134,6 +134,7 @@ public class WikiActivityTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   public void WikiActivityTests_007_clickingUserRedirectsToUserPage() {
     new ArticleContent().push("content");
+    new ArticleContent().push("content_after_edition");
 
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
@@ -150,6 +151,9 @@ public class WikiActivityTests extends NewTestTemplate {
   @Test(groups = "WikiActivity_008")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_008_clickingIconNextToArticleRedirectsToDiff() {
+    new ArticleContent().push("content");
+    new ArticleContent().push("content_after_edition");
+
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
     List<Activity> activityList = activityPage.getActivities(10);
