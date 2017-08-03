@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.imageservingtests;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -19,6 +14,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -80,7 +79,7 @@ public class ImageStorageTests extends NewTestTemplate {
     delete.submitDeletion();
   }
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_002"})
+  @Test(groups = {"ImageStorageTests", "ImageStorage_002"}, invocationCount = 10)
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   @RelatedIssue(issueID = "QAART-921")
