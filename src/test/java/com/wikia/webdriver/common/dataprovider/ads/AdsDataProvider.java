@@ -277,11 +277,10 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            ".*rpfl_7450\":\\[\"2_tier\\d{4}.*\",\"57_tier.*",
-            ".*rpfl_7450\":\\[\"2_tier.*\",\"57_tier\\d{4}\"\\].*"
+            ".*rpfl_7450.*"
         }
     };
   }
