@@ -18,7 +18,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVideoClosedAfterPlayingFandom"}
+            groups = {"AdsVuapFandomDesktop", "AdsVideoClosedAfterPlayingFandom", "X"}
     )
     public void adsVideoClosedAfterPlayingFandom(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -26,6 +26,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
         videoFanTakeover.play();
 
+        videoFanTakeover.waitForVideoStart();
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 

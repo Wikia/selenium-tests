@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 
 public class FandomAdsDataProvider {
 
-  private static final String VUAP_PAGE_SLUG = "silicon-valley-perfect-mike-judge";
+  private static final String VUAP_PAGE_SLUG = "everything-we-know-about-the-han-solo-movie";
   private static final String AD_UNIT_TEMPLATE = "google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0";
 
   private FandomAdsDataProvider() { }

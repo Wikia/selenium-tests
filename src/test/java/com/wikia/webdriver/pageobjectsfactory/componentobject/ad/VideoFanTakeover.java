@@ -11,7 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.concurrent.TimeUnit;
 
-public class VideoFanTakeover {
+public class VideoFanTakeover extends AutoplayVuap {
   private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-player iframe";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-player video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .pause-overlay";
@@ -26,6 +26,8 @@ public class VideoFanTakeover {
   private WebElement iframe;
 
   public VideoFanTakeover(WikiaWebDriver driver, String iframeId, String slotName) {
+    super(driver,slotName, iframeId);
+
     this.wait = new Wait(driver);
     this.driver = driver;
     this.slotName = slotName;
@@ -42,11 +44,6 @@ public class VideoFanTakeover {
 
   private WebElement getVideoCloseButton(String slotName) {
    return wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT, slotName)));
-  }
-
-  public void play() {
-    runInAdFrame(() -> wait.forElementClickable(playTriggerButtonSelector).click());
-    waitForVideoStart();
   }
 
   public void pause() {

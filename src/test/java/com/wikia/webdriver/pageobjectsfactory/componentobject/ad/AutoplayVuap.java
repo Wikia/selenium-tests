@@ -58,19 +58,19 @@ public class AutoplayVuap {
 
   private final String slot;
 
-  private final String videoIframeSelector;
-
-  private boolean playing;
+  @Deprecated
+  private final String adIframeId;
+  private final By adIframeSelector;
 
   private boolean muted;
 
-  public AutoplayVuap(WikiaWebDriver driver, String slot, String videoIframeSelector) {
+  public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
     this.slot = slot;
-    this.videoIframeSelector = videoIframeSelector;
-    this.playing = true;
+    this.adIframeId = adIframeId;
+    this.adIframeSelector = By.id(adIframeId);
     this.muted = true;
   }
 
@@ -89,30 +89,20 @@ public class AutoplayVuap {
   }
 
   public void pause() {
-    if (playing) {
-      clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
-      playing = false;
-    }
+    clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
   }
 
   public void play() {
-    if (!playing) {
-      clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
-      playing = true;
-    }
+    clickOnClickArea2();
   }
 
   public void playVuapVideo() {
-    if (playing) {
       clickOnClickArea2();
-      playing = true;
-    }
   }
 
   public void replay() {
       clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
       muted = false;
-      playing = true;
   }
 
   public void close() {
@@ -141,10 +131,7 @@ public class AutoplayVuap {
   }
 
   public double getVideoHeightWhilePaused() {
-    if (!playing) {
-      return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
-    }
-    return 0;
+    return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
   }
 
   public double getAdSlotHeight() {
@@ -235,7 +222,7 @@ public class AutoplayVuap {
   }
 
   private <T> T usingVideoIframeContext(final Function<WikiaWebDriver, T> fun) {
-    final WebElement iframe = driver.findElement(By.cssSelector(videoIframeSelector));
+    final WebElement iframe = driver.findElement(By.cssSelector(adIframeId));
     driver.switchTo().frame(iframe);
     final T result = fun.apply(driver);
     driver.switchTo().defaultContent();
@@ -243,8 +230,9 @@ public class AutoplayVuap {
   }
 
   private void usingAdFrame(Runnable f) {
-    final WebElement iframe = driver.findElement(By.cssSelector("#" + slot + " .provider-container iframe"));
-    driver.switchTo().frame(iframe);
+//    final By oasisAdIframeSelector = By.cssSelector("#" + slot + " .provider-container iframe");
+//    final WebElement iframe = driver.findElement(oasisAdIframeSelector);
+    driver.switchTo().frame(driver.findElement(adIframeSelector));
     f.run();
     driver.switchTo().defaultContent();
   }
