@@ -111,7 +111,7 @@ public class MobileAdsDataProvider {
             "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "MOBILE_TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":[\"43_tier(NONE|\\d{4})\",\"44_tier(NONE|\\d{4})\",\"67_tier(NONE|\\d{4})\"].*"
+            ".*\"rpfl_7450\":\\[\"43_tier(NONE|\\d{4})\",\"44_tier(NONE|\\d{4})\",\"67_tier(NONE|\\d{4})\"\\].*"
         }
     };
   }

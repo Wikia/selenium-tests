@@ -280,7 +280,7 @@ public class AdsDataProvider {
             "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":[\"2_tier(NONE|\\d{4})\",\"57_tier(NONE|\\d{4})\"].*"
+            ".*\"rpfl_7450\":\\[\"2_tier(NONE|\\d{4})\",\"57_tier(NONE|\\d{4})\"\\].*"
         }
     };
   }
