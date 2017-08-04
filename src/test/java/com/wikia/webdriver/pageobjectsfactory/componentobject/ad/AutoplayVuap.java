@@ -1,8 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -197,8 +198,7 @@ public class AutoplayVuap {
   private void clickElement(final String selector) {
     WebElement element = wait.forElementClickable(By.cssSelector(selector));
     Actions builder = new Actions(driver);
-    builder.contextClick(element)
-        .moveToElement(element)
+    builder.moveToElement(element)
         .click(element)
         .perform();
   }
