@@ -143,7 +143,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
                           "Video did not togglePause");
     }
 
-    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -153,15 +152,11 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
             dataProvider = "vuapPageMobile",
             groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
     )
-    public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName,
-                                                       String iframeId, String videoUrl) {
-        networkTrafficInterceptor.startIntercepting();
+    public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
-
+        AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
+        videoFanTakeover.waitForAdToLoad();
         videoFanTakeover.play();
-
         videoFanTakeover.waitForVideoPlayerHidden();
     }
 

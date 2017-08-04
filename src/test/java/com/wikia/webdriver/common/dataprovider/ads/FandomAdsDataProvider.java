@@ -83,13 +83,15 @@ public class FandomAdsDataProvider {
     return new Object[][]{
         {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-            "everything-we-know-about-the-han-solo-movie",
-            AdsFandomContent.TOP_LEADERBOARD
+            VUAP_PAGE_SLUG,
+            AdsFandomContent.TOP_LEADERBOARD,
+            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
         },
         {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-            "everything-we-know-about-the-han-solo-movie",
-            AdsFandomContent.BOTTOM_LEADERBOARD
+            VUAP_PAGE_SLUG,
+            AdsFandomContent.BOTTOM_LEADERBOARD,
+            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
         }
     };
   }
