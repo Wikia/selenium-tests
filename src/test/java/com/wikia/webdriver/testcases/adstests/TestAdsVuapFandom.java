@@ -221,7 +221,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     public void adsVuapTimeProgressingFandomMobile(
         String pageType, String pageName, String slotName
-    ) throws InterruptedException {
+    ) {
       AdsFandomObject fandomPage = loadPage(pageName, pageType);
       String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
       String adIframeSelector = String.format(AD_IFRAME_TEMPLATE, fandomSlotName, slotName);
