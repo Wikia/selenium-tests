@@ -51,7 +51,7 @@ public class VuapAssertions {
     vuap.play();
     Assert.assertTrue(vuap.isPauseLayerVisible(), "Pause layer visible after clicking play");
 
-    vuap.close();
+    vuap.closeWithJS();
     Assert.assertTrue(vuap.isPauseLayerNotVisible(), "Pause layer hidden after closing");
   }
 

@@ -108,8 +108,10 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
       double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
 
       Assert.assertTrue(
-              quartileTime < midTime,
-              String.format("Video time is not progressing, quartileTime %s is not smaller than midTime %s", quartileTime, midTime)
+          quartileTime < midTime,
+          String.format(
+              "Video time is not progressing, quartileTime %s is not smaller than midTime %s",
+              quartileTime, midTime)
       );
     }
 
@@ -137,7 +139,8 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
       }
 
       Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not start");
-      Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not togglePause");
+      Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(),
+                          "Video did not togglePause");
     }
 
     @NetworkTrafficDump(useMITM = true)
@@ -206,6 +209,8 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           true
       );
 
+      fandomPage.scrollToFeed();
+      vuap.waitForAdToLoad();
       fandomPage.scrollToSlot(fandomSlotName);
       VuapAssertions.verifyVideoClosesAfterTapOnCloseButton(vuap);
     }
@@ -233,6 +238,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
       );
 
       fandomPage.scrollToFeed();
+      vuap.waitForAdToLoad();
       fandomPage.scrollToSlot(fandomSlotName);
       vuap.play();
       VuapAssertions.verifyVideoTimeIsProgressing(vuap);

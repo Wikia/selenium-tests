@@ -136,6 +136,13 @@ public class AutoplayVuap {
     findCloseButton().click();
   }
 
+  public void closeWithJS() {
+    new JavascriptActions(driver).execute(
+        "arguments[0].click();",
+        driver.findElement(By.cssSelector(getCloseButtonSelector()))
+    );
+  }
+
   public void clickOnClickArea2() {
     clickElementInsideAd(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR));
   }
@@ -168,6 +175,10 @@ public class AutoplayVuap {
 
   private By getPauseOverlaySelector() {
     return By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+  }
+
+  private String getCloseButtonSelector() {
+    return String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot);
   }
 
   public double getAdSlotHeight() {
@@ -238,7 +249,7 @@ public class AutoplayVuap {
 
   private boolean isOverlayNoVisible() {
     return wait.forElementNotVisible(
-            getPauseOverlaySelector());
+        getPauseOverlaySelector());
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
