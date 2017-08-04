@@ -85,14 +85,12 @@ public class FandomAdsDataProvider {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
             "everything-we-know-about-the-han-solo-movie",
             AdsFandomContent.TOP_LEADERBOARD
-        }
-        /*,
+        },
         {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
             "everything-we-know-about-the-han-solo-movie",
-            AdsFandomContent.BOTTOM_LEADERBOARD,
-            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
-        }*/
+            AdsFandomContent.BOTTOM_LEADERBOARD
+        }
     };
   }
 }

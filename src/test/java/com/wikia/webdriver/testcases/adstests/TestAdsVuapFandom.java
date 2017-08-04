@@ -232,6 +232,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           true
       );
 
+      fandomPage.scrollToFeed();
       fandomPage.scrollToSlot(fandomSlotName);
       vuap.play();
       VuapAssertions.verifyVideoTimeIsProgressing(vuap);
