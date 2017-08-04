@@ -56,7 +56,6 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRoadblocksAfterMultiplePageViewsOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestTopWamWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUap"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestUrlBuilder"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsRefreshing"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsVuapOasis"/>
