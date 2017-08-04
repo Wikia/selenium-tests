@@ -277,8 +277,7 @@ public class AutoplayVuap {
   }
 
   private void usingAdFrame(Runnable f) {
-//    final By oasisAdIframeSelector = By.cssSelector("#" + slot + " .provider-container iframe");
-//    final WebElement iframe = driver.findElement(oasisAdIframeSelector);
+
     driver.switchTo().frame(driver.findElement(adIframeSelector));
     f.run();
     driver.switchTo().defaultContent();
