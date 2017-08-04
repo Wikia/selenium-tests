@@ -7,13 +7,19 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.FandomVideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
+
+  // #gpt-top-leaderboard iframe[id*='TOP_LEADERBOARD']
+  private static final String AD_IFRAME_TEMPLATE = "#%s iframe[id*='%s']";
 
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
@@ -154,7 +160,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
     }
 
-    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -162,36 +167,24 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapTimeProgressMobileFandom"}
+            groups = {"AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
     )
-    public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName,
-                                                   String iframeId, String videoUrl) throws InterruptedException {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
+    public void adsVuapTimeProgressingFandomMobile(
+        String pageType, String pageName, String slotName
+    ) throws InterruptedException {
+      AdsFandomObject fandomPage = loadPage(pageName, pageType);
+      String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
+      String adIframeSelector = String.format(AD_IFRAME_TEMPLATE, fandomSlotName, slotName);
+      AutoplayVuap vuap = new AutoplayVuap(
+          driver,
+          fandomSlotName,
+          By.cssSelector(adIframeSelector),
+          true
+      );
 
-        videoFandomPage(slotName).verifyIsVideoTimeProgresingOnMobile(networkTrafficInterceptor, videoFanTakeover);
-    }
-
-    @NetworkTrafficDump(useMITM = true)
-    @InBrowser(
-            browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
-    )
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVuapVideoPauseFandomMobile"}
-    )
-    public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName,
-                                              String iframeId, String videoUrl) throws InterruptedException {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
-
-        videoFandomPage(slotName).verifyIsVideoPausedOnMobile(networkTrafficInterceptor, videoFanTakeover);
+      fandomPage.scrollToSlot(fandomSlotName);
+      vuap.play();
+      VuapAssertions.verifyVideoTimeIsProgressing(vuap);
     }
 
     private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {

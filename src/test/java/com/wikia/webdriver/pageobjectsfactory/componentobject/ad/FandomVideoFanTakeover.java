@@ -89,13 +89,13 @@ public class FandomVideoFanTakeover {
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-        videoFanTakeover.pause();
+        videoFanTakeover.togglePause();
         double time = videoFanTakeover.getCurrentVideoTimeOnDesktop();
 
         TimeUnit.SECONDS.sleep(DELAY);
 
         Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not start");
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not pause");
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not togglePause");
     }
 
     public void verifyIsVideoPausedOnMobile(NetworkTrafficInterceptor networkTrafficInterceptor,
@@ -105,12 +105,12 @@ public class FandomVideoFanTakeover {
 
         wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-        videoFanTakeover.pause();
+        videoFanTakeover.togglePause();
         double time = videoFanTakeover.getCurrentVideoTimeOnMobile();
 
         TimeUnit.SECONDS.sleep(DELAY);
 
         Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not start");
-        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not pause");
+        Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnMobile(), "Video did not togglePause");
     }
 }

@@ -153,7 +153,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
 
         ads.wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
 
-        videoFanTakeover.pause();
+        videoFanTakeover.togglePause();
 
         double time = videoFanTakeover.getCurrentVideoTimeOnMobile().doubleValue();
 

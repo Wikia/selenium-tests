@@ -23,7 +23,7 @@ public class VuapAssertions {
   }
 
   public static void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) {
-    vuap.pause();
+    vuap.togglePause();
     final double startMeasureTime = vuap.getCurrentTime();
     final double startProgressBarWidth = vuap.getProgressBarWidth();
     playVideoForFewSeconds(vuap);
@@ -33,7 +33,7 @@ public class VuapAssertions {
   }
 
   public static void verifyVideoPlay(final AutoplayVuap vuap) {
-    vuap.pause();
+    vuap.togglePause();
 
     Assert.assertTrue(vuap.hasStarted(), "VUAP did not automatically played when page was opened.");
     Assert.assertEquals(vuap.findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
@@ -57,7 +57,7 @@ public class VuapAssertions {
       // ignore this exception
     }
 
-    vuap.pause();
+    vuap.togglePause();
   }
 
   public static void verifyVideoAdSize(AutoplayVuap vuap, double videoAdHeight,

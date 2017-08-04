@@ -46,7 +46,7 @@ public class VideoFanTakeover extends AutoplayVuap {
    return wait.forElementVisible(By.cssSelector(String.format(UI_ELEMENT_CLOSE_BUTTON_FORMAT, slotName)));
   }
 
-  public void pause() {
+  public void togglePause() {
     driver.findElement(By.cssSelector(String.format(UI_ELEMENT_SELECTOR_FORMAT, slotName))).click();
   }
 

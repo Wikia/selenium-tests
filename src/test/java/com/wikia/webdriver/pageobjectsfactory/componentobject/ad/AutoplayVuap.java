@@ -58,20 +58,32 @@ public class AutoplayVuap {
 
   private final String slot;
 
-  @Deprecated
-  private final String adIframeId;
+  private final String imaBridgeSelecotr;
   private final By adIframeSelector;
 
   private boolean muted;
+  private boolean mobile;
+  private boolean paused;
 
   public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId) {
+    this(driver, slot, By.id(adIframeId), false);
+  }
+
+  //TODO remove mobile parameter if possible - simple hack for areas to click
+  public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId, Boolean mobile) {
+    this(driver, slot, By.id(adIframeId), mobile);
+  }
+
+  public AutoplayVuap(WikiaWebDriver driver, String slot, By adIframeSelector, Boolean mobile) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
     this.slot = slot;
-    this.adIframeId = adIframeId;
-    this.adIframeSelector = By.id(adIframeId);
+    this.imaBridgeSelecotr = "#" + slot + " .video-player iframe[src*='imasdk']";
+    this.adIframeSelector = adIframeSelector;
     this.muted = true;
+    this.mobile = mobile;
+    this.paused = false;
   }
 
   public void mute() {
@@ -88,12 +100,19 @@ public class AutoplayVuap {
     }
   }
 
-  public void pause() {
+  public void togglePause() {
     clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+    paused = !paused;
   }
 
   public void play() {
-    clickOnClickArea2();
+    if (paused) {
+      togglePause();
+    } else if( !this.mobile ) {
+      clickOnClickArea2();
+    } else {
+      clickOnClickArea4();
+    }
   }
 
   public void playVuapVideo() {
@@ -149,7 +168,7 @@ public class AutoplayVuap {
   }
 
   public boolean isVisible() {
-    return usingVideoIframeContext(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
+    return usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
   }
 
   public boolean isMuted() {
@@ -201,7 +220,8 @@ public class AutoplayVuap {
   }
 
   private boolean isOverlayNoVisible() {
-    return wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+    return wait.forElementNotVisible(
+        By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
@@ -218,11 +238,11 @@ public class AutoplayVuap {
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
-    return usingVideoIframeContext(webDriver -> fun.apply(driver.findElement(By.tagName("video"))));
+    return usingImaBridge(webDriver -> fun.apply(driver.findElement(By.tagName("video"))));
   }
 
-  private <T> T usingVideoIframeContext(final Function<WikiaWebDriver, T> fun) {
-    final WebElement iframe = driver.findElement(By.cssSelector(adIframeId));
+  private <T> T usingImaBridge(final Function<WikiaWebDriver, T> fun) {
+    final WebElement iframe = driver.findElement(By.cssSelector(imaBridgeSelecotr));
     driver.switchTo().frame(iframe);
     final T result = fun.apply(driver);
     driver.switchTo().defaultContent();

@@ -104,11 +104,11 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     scrollToSlot(slot, ads);
 
-    vuap.pause();
+    vuap.togglePause();
     double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
     ads.refreshPage();
     vuap.replay();
-    vuap.pause();
+    vuap.togglePause();
     double resolvedVideoHeight = vuap.getVideoHeightWhilePaused();
 
     Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, resolvedVideoHeight));
@@ -189,7 +189,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     ads.refreshPage();
     scrollToSlot(slot, ads);
     vuap.replay();
-    vuap.pause();
+    vuap.togglePause();
     vuap.close();
 
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoClose(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
@@ -241,7 +241,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
     vuap.playVuapVideo();
 
-    vuap.pause();
+    vuap.togglePause();
 
     double videoAdHeight = vuap.getVideoHeightWhilePaused();
 
