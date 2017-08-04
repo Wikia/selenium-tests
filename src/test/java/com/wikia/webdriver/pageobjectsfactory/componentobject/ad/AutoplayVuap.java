@@ -1,8 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.google.common.base.Predicate;
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -35,6 +37,8 @@ public class AutoplayVuap {
 
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
+  private static final long MAX_PREFOOTERS_HIDE_DELAY = 5L;
+
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
 
@@ -49,8 +53,6 @@ public class AutoplayVuap {
 
   // #TOP_LEADERBOARD .close-ad
   private static final String CLSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
-
-  private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
 
   private final WikiaWebDriver driver;
 
@@ -177,6 +179,10 @@ public class AutoplayVuap {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
 
+  public void waitForPrefooterNotVisible() {
+    waitFor(AutoplayVuap::isPrefooterNotVisible, MAX_PREFOOTERS_HIDE_DELAY);
+  }
+
   public void waitForVideoToStart(final long timeout) {
     waitFor(AutoplayVuap::isVisible, timeout);
   }
@@ -199,8 +205,7 @@ public class AutoplayVuap {
   private void clickElement(final String selector) {
     WebElement element = wait.forElementClickable(By.cssSelector(selector));
     Actions builder = new Actions(driver);
-    builder.contextClick(element)
-        .moveToElement(element)
+    builder.moveToElement(element)
         .click(element)
         .perform();
   }
@@ -217,17 +222,13 @@ public class AutoplayVuap {
     return wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
-  public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
-    return EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT == getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight);
+  private boolean isPrefooterNotVisible() {
+    return wait.forElementNotVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTER_RIGHT)));
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
     int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
-  }
-
-  private int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
-    return (int) Math.round(100 - (100 / (defaultVideoHeight / resolvedVideoHeight)));
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
