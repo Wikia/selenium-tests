@@ -18,6 +18,8 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
   private static final String AD_IFRAME_TEMPLATE = "#%s iframe[id*='%s']";
@@ -90,7 +92,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPage",
-            groups = {"AdsVuapTimeProgressDesktopFandom"}
+            groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom"}
     )
     public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -117,11 +119,25 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
             dataProvider = "vuapPage",
             groups = {"AdsVuapFandomDesktop", "AdsVuapVideoPauseFandom"}
     )
-    public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+    public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName, String iframeId) {
+      AdsFandomObject fandomPage = loadPage(pageName, pageType);
+      AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
 
-        videoFandomPage(slotName).verifyIsVideoPausedOnDesktop(networkTrafficInterceptor, videoFanTakeover);
+      networkTrafficInterceptor.startIntercepting();
+
+      videoFanTakeover.play();
+      videoFanTakeover.waitForFirstQuartile(networkTrafficInterceptor);
+      videoFanTakeover.togglePause();
+      double time = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+
+      try {
+        TimeUnit.SECONDS.sleep(3);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+
+      Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not start");
+      Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not togglePause");
     }
 
     @NetworkTrafficDump(useMITM = true)
