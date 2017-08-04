@@ -20,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
-  private static final String AD_IFRAME_TEMPLATE = "#%s iframe[id*='%s']";
-
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPage",
@@ -147,7 +145,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
     )
     public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
@@ -164,7 +162,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"}
     )
     public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
@@ -184,23 +182,13 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
+            dataProvider = "vuapPage",
             groups = {"AdsVuapMobileFandom", "AdsVuapVideoClosesWhenTapCloseButtonMobileFandom"}
     )
-    public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(
-        String pageType,
-        String pageName,
-        String slotName
-    ) {
+    public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(String pageType, String pageName, String slotName, String adIframeSelector) {
       AdsFandomObject fandomPage = loadPage(pageName, pageType);
       String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
-      String adIframeSelector = String.format(AD_IFRAME_TEMPLATE, fandomSlotName, slotName);
-      AutoplayVuap vuap = new AutoplayVuap(
-          driver,
-          fandomSlotName,
-          By.cssSelector(adIframeSelector),
-          true
-      );
+      AutoplayVuap vuap = new AutoplayVuap(driver, fandomSlotName, By.cssSelector(adIframeSelector), true);
 
       fandomPage.scrollToFeed();
       vuap.waitForAdToLoad();
@@ -214,21 +202,13 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
+            dataProvider = "vuapPage",
+            groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
     )
-    public void adsVuapTimeProgressingFandomMobile(
-        String pageType, String pageName, String slotName
-    ) {
+    public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName, String adIframeSelector) {
       AdsFandomObject fandomPage = loadPage(pageName, pageType);
       String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
-      String adIframeSelector = String.format(AD_IFRAME_TEMPLATE, fandomSlotName, slotName);
-      AutoplayVuap vuap = new AutoplayVuap(
-          driver,
-          fandomSlotName,
-          By.cssSelector(adIframeSelector),
-          true
-      );
+      AutoplayVuap vuap = new AutoplayVuap(driver, fandomSlotName, By.cssSelector(adIframeSelector), true);
 
       fandomPage.scrollToFeed();
       vuap.waitForAdToLoad();
