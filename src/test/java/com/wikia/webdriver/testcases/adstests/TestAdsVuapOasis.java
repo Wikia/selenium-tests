@@ -186,6 +186,9 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot, String videoIframeSelector) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
+    // make sure slot is rendered so we get resolved state after the refresh
+    scrollToSlot(slot, ads);
+    vuap.replay();
     ads.refreshPage();
     scrollToSlot(slot, ads);
     vuap.replay();
