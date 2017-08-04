@@ -50,7 +50,8 @@ public class AutoplayVuap {
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
 
   // #TOP_LEADERBOARD .close-ad
-  private static final String CLSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
+  private static final String
+      CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
   private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
 
@@ -178,7 +179,7 @@ public class AutoplayVuap {
   }
 
   private String getCloseButtonSelector() {
-    return String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot);
+    return String.format(CLOSE_BUTTON_SELECTOR_FORMAT, slot);
   }
 
   public double getAdSlotHeight() {
@@ -244,7 +245,7 @@ public class AutoplayVuap {
   }
 
   private WebElement findCloseButton() {
-    return wait.forElementClickable(By.cssSelector(String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot)));
+    return wait.forElementClickable(By.cssSelector(String.format(CLOSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
   private boolean isOverlayNoVisible() {
