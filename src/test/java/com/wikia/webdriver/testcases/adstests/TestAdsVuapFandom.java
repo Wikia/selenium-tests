@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -66,13 +67,23 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
+            groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom", "X"}
     )
-    public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
+    public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeSelector) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeSelector), fandomPage);
 
-        videoFandomPage(slotName).verifySlotSizesVuap(videoFanTakeover);
+      videoFanTakeover.waitForAdToLoad();
+      double imageHeight = videoFanTakeover.getAdSlotHeight();
+
+      videoFanTakeover.play();
+      videoFanTakeover.waitForVideoStart();
+
+      double videoHeight = videoFanTakeover.getAdVideoHeight();
+      Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight));
+
+      videoFanTakeover.waitForVideoPlayerHidden();
+      Assertion.assertTrue(VuapAssertions.isImageAdInCorrectSize(videoFanTakeover));
     }
 
     @NetworkTrafficDump

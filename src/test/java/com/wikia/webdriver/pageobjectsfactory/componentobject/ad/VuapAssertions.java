@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class VuapAssertions {
 
   private static final long MAX_AUTOPLAY_MOVIE_START_DELAY = 5L;
+  private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
   private VuapAssertions() {
     throw new IllegalAccessError("Utility class");
@@ -77,5 +78,29 @@ public class VuapAssertions {
     double adSlotHeightAfterVideoClose = vuap.getAdSlotHeight();
 
     Assert.assertEquals(adSlotHeight, adSlotHeightAfterVideoClose);
+  }
+
+  public static boolean isVideoAdBiggerThanImageAdOasis(double videoHeight, double imageHeight) {
+    int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
+    return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
+  }
+
+  public static boolean isImageAdInCorrectSize(AutoplayVuap vuap) {
+    long time = System.currentTimeMillis();
+    long endTime = time+3000;
+    while(time < endTime) {
+      if (vuap.getAdSlotHeight() == vuap.getAdSlotHeight()){
+        return true;
+      }
+
+      try {
+        TimeUnit.MILLISECONDS.sleep(200);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+
+      time = System.currentTimeMillis();
+    }
+    return false;
   }
 }

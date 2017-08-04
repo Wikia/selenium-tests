@@ -156,7 +156,11 @@ public class AutoplayVuap {
   }
 
   public double getVideoHeightWhilePaused() {
-    return driver.findElement(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot))).getSize().getHeight();
+    return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
+  }
+
+  private By getPauseOverlaySelector() {
+    return By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
   }
 
   public double getAdSlotHeight() {
@@ -227,7 +231,7 @@ public class AutoplayVuap {
 
   private boolean isOverlayNoVisible() {
     return wait.forElementNotVisible(
-        By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+            getPauseOverlaySelector());
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
@@ -264,12 +268,12 @@ public class AutoplayVuap {
   }
 
   public boolean isPauseLayerVisible() {
-    wait.forElementVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+    wait.forElementVisible(getPauseOverlaySelector());
     return true;
   }
 
   public boolean isPauseLayerNotVisible() {
-    wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+    wait.forElementNotVisible(getPauseOverlaySelector());
     return true;
   }
 
@@ -283,5 +287,9 @@ public class AutoplayVuap {
 
   public void waitForVideoPlayerHidden() {
     isPauseLayerNotVisible();
+  }
+
+  public double getAdVideoHeight() {
+    return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
   }
 }
