@@ -104,6 +104,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
     scrollToSlot(slot, ads);
 
+    vuap.replay();
     vuap.pause();
     double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
     ads.refreshPage();
@@ -189,6 +190,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     // make sure slot is rendered so we get resolved state after the refresh
     scrollToSlot(slot, ads);
     vuap.replay();
+
     ads.refreshPage();
     // TODO remove wait in ADEN-5481
     // make sure page is rendered, prefooters are hidden so we don't get page moved after scroll

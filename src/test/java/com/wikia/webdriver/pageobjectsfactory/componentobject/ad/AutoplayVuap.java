@@ -180,7 +180,7 @@ public class AutoplayVuap {
   }
 
   public void waitForPrefooterNotVisible() {
-    waitFor(AutoplayVuap::isPrefooterNoVisible, MAX_PREFOOTERS_HIDE_DELAY);
+    waitFor(AutoplayVuap::isPrefooterNotVisible, MAX_PREFOOTERS_HIDE_DELAY);
   }
 
   public void waitForVideoToStart(final long timeout) {
@@ -222,7 +222,7 @@ public class AutoplayVuap {
     return wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
-  private boolean isPrefooterNoVisible() {
+  private boolean isPrefooterNotVisible() {
     return wait.forElementNotVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTER_RIGHT)));
   }
 
