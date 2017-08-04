@@ -163,11 +163,6 @@ public class AutoplayVuap {
     });
   }
 
-  public double getCurrentTime() {
-    final String currentTime = usingVideoContext(video -> video.getAttribute("currentTime"));
-    return Double.parseDouble(currentTime);
-  }
-
   public double getVideoHeightWhilePaused() {
     return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
   }
@@ -309,15 +304,17 @@ public class AutoplayVuap {
     return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
   }
 
-  public Double getCurrentVideoTimeOnDesktop() {
-    return getCurrentVideoTime();
-  }
-
-  private Double getCurrentVideoTime() {
+  public Double getCurrentTime() {
     String result;
-    driver.switchTo().frame(driver.findElement(imaBridgeSelector));
-    result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
-    driver.switchTo().defaultContent();
+    WebElement mobileVideo = getMobileVideo();
+
+    if (mobileVideo == null) {
+      driver.switchTo().frame(driver.findElement(imaBridgeSelector));
+      result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
+      driver.switchTo().defaultContent();
+    } else {
+      result = mobileVideo.getAttribute("currentTime");
+    }
     return Double.parseDouble(result);
   }
 
@@ -327,5 +324,9 @@ public class AutoplayVuap {
 
   public void waitForMidPoint(NetworkTrafficInterceptor networkTrafficInterceptor) {
     wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
+  }
+
+  private WebElement getMobileVideo() {
+    return driver.findElement(By.cssSelector("#" + slot + " video"));
   }
 }

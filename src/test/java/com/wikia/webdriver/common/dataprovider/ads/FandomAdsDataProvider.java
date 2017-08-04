@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
 public class FandomAdsDataProvider {
 
   private static final String VUAP_PAGE_SLUG = "everything-we-know-about-the-han-solo-movie";
-  private static final String AD_UNIT_TEMPLATE = "iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']";
+  public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
 
   private FandomAdsDataProvider() { }
 
@@ -65,33 +65,13 @@ public class FandomAdsDataProvider {
     return new Object[][]{
         {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-            FandomAdsDataProvider.VUAP_PAGE_SLUG,
+            VUAP_PAGE_SLUG,
             AdsFandomContent.TOP_LEADERBOARD,
-            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
         },
         {
             AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
             VUAP_PAGE_SLUG,
             AdsFandomContent.BOTTOM_LEADERBOARD,
-            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] vuapPageMobile() {
-    return new Object[][]{
-        {
-            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-            VUAP_PAGE_SLUG,
-            AdsFandomContent.TOP_LEADERBOARD,
-            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.TOP_LEADERBOARD)
-        },
-        {
-            AdsFandomTestTemplate.PAGE_TYPE_ARTICLE,
-            VUAP_PAGE_SLUG,
-            AdsFandomContent.BOTTOM_LEADERBOARD,
-            String.format(AD_UNIT_TEMPLATE, AdsFandomContent.BOTTOM_LEADERBOARD)
         }
     };
   }

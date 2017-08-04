@@ -9,10 +9,8 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,12 +23,11 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsVideoClosedAfterPlayingFandom"}
   )
-  public void adsVideoClosedAfterPlayingFandom(String pageType, String pageName, String slotName, String iframeSelector) {
+  public void adsVideoClosedAfterPlayingFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeSelector), fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.play();
-
     videoFanTakeover.waitForVideoStart();
     videoFanTakeover.waitForVideoPlayerHidden();
   }
@@ -40,12 +37,12 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsImageClickedOpensNewPageFandom"}
   )
-  public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName, String iframeSelector) {
+  public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject page = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeSelector), page);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, page);
 
     videoFanTakeover.clickOnArea(1);
-    Assert.assertTrue(page.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
+    Assert.assertTrue(page.tabContainsUrl(FandomAdsDataProvider.AD_REDIRECT_URL));
   }
 
   @Test(
@@ -53,9 +50,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsVuapVideoClosesWhenTapCloseButtonFandom"}
   )
-  public void adsVuapVideoClosesWhenTapCloseButtonFandom(String pageType, String pageName, String slotName, String iframeId) {
+  public void adsVuapVideoClosesWhenTapCloseButtonFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.play();
     videoFanTakeover.close();
@@ -67,9 +64,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
   )
-  public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeSelector) {
+  public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeSelector), fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.waitForAdToLoad();
     double imageHeight = videoFanTakeover.getAdSlotHeight();
@@ -90,18 +87,18 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom"}
   )
-  public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
+  public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     networkTrafficInterceptor.startIntercepting();
 
     videoFanTakeover.play();
     videoFanTakeover.waitForFirstQuartile(networkTrafficInterceptor);
-    double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+    double quartileTime = videoFanTakeover.getCurrentTime();
 
     videoFanTakeover.waitForMidPoint(networkTrafficInterceptor);
-    double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+    double midTime = videoFanTakeover.getCurrentTime();
 
     Assert.assertTrue(
             quartileTime < midTime,
@@ -117,16 +114,16 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsVuapVideoPauseFandom"}
   )
-  public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName, String iframeId) {
+  public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     networkTrafficInterceptor.startIntercepting();
 
     videoFanTakeover.play();
     videoFanTakeover.waitForFirstQuartile(networkTrafficInterceptor);
     videoFanTakeover.togglePause();
-    double time = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+    double time = videoFanTakeover.getCurrentTime();
 
     try {
       TimeUnit.SECONDS.sleep(3);
@@ -134,8 +131,8 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
       e.printStackTrace();
     }
 
-    Assert.assertNotEquals(0, videoFanTakeover.getCurrentVideoTimeOnDesktop(), "Video did not start");
-    Assert.assertEquals(time, videoFanTakeover.getCurrentVideoTimeOnDesktop(),
+    Assert.assertNotEquals(0, videoFanTakeover.getCurrentTime(), "Video did not start");
+    Assert.assertEquals(time, videoFanTakeover.getCurrentTime(),
             "Video did not togglePause");
   }
 
@@ -148,9 +145,9 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
   )
-  public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
+  public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
     videoFanTakeover.waitForAdToLoad();
     videoFanTakeover.play();
     videoFanTakeover.waitForVideoPlayerHidden();
@@ -165,15 +162,13 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"}
   )
-  public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName, String iframeId) {
+  public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    fandomPage.triggerOnScrollSlots();
-    AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), By.cssSelector(iframeId), false);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
     videoFanTakeover.waitForAdToLoad();
-    fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
 
     videoFanTakeover.clickOnArea(1);
-    Assert.assertTrue(fandomPage.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
+    Assert.assertTrue(fandomPage.tabContainsUrl(FandomAdsDataProvider.AD_REDIRECT_URL));
   }
 
   @InBrowser(
@@ -185,17 +180,13 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapMobileFandom", "AdsVuapVideoClosesWhenTapCloseButtonMobileFandom"}
   )
-  public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(String pageType, String pageName, String slotName, String adIframeSelector) {
+  public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
-    AutoplayVuap vuap = new AutoplayVuap(driver, fandomSlotName, By.cssSelector(adIframeSelector), true);
-
-    fandomPage.scrollToFeed();
-    vuap.waitForAdToLoad();
-    fandomPage.scrollToSlot(fandomSlotName);
+    AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
     VuapAssertions.verifyVideoClosesAfterTapOnCloseButton(vuap);
   }
 
+  @NetworkTrafficDump
   @InBrowser(
           browser = Browser.CHROME,
           emulator = Emulator.GOOGLE_NEXUS_5
@@ -205,21 +196,34 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
   )
-  public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName, String adIframeSelector) {
+  public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
-    AutoplayVuap vuap = new AutoplayVuap(driver, fandomSlotName, By.cssSelector(adIframeSelector), true);
+    AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
 
-    fandomPage.scrollToFeed();
-    vuap.waitForAdToLoad();
-    fandomPage.scrollToSlot(fandomSlotName);
+    networkTrafficInterceptor.startIntercepting();
+
     vuap.play();
-    VuapAssertions.verifyVideoTimeIsProgressing(vuap);
+    vuap.waitForFirstQuartile(networkTrafficInterceptor);
+    double quartileTime = vuap.getCurrentTime();
+
+    vuap.waitForMidPoint(networkTrafficInterceptor);
+    double midTime = vuap.getCurrentTime();
+
+    Assert.assertTrue(
+            quartileTime < midTime,
+            String.format(
+                    "Video time is not progressing, quartileTime %s is not smaller than midTime %s",
+                    quartileTime, midTime)
+    );
   }
 
-  private AutoplayVuap prepareSlot(String slotName, By iframeSelector, AdsFandomObject fandomPage) {
+  private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage) {
+    return prepareSlot(slotName, fandomPage, false);
+  }
+
+  private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
     fandomPage.triggerOnScrollSlots();
-    AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), iframeSelector, false);
+    AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
     fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
     return videoFanTakeover;
   }
