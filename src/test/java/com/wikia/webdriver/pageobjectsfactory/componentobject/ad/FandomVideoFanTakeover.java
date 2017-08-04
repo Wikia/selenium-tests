@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
@@ -13,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 public class FandomVideoFanTakeover {
 
     private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
-    private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
     private static final int DELAY = 2;
     private final Wait wait;
     private WikiaWebDriver driver;
@@ -27,20 +25,6 @@ public class FandomVideoFanTakeover {
         AdsBaseObject fandom = new AdsBaseObject(driver);
         videoFanTakeover.clickOnAdImage();
         Assert.assertTrue(fandom.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
-    }
-
-    public void verifyIsVideoTimeProgresingOnDesktop(NetworkTrafficInterceptor networkTrafficInterceptor,
-                                                     VideoFanTakeover videoFanTakeover) {
-        networkTrafficInterceptor.startIntercepting();
-
-        videoFanTakeover.play();
-
-        wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-        double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
-
-        wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
-        double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
-        Assertion.assertTrue(videoFanTakeover.isTimeProgressing(quartileTime, midTime));
     }
 
     public void verifyIsVideoPausedOnDesktop(NetworkTrafficInterceptor networkTrafficInterceptor,

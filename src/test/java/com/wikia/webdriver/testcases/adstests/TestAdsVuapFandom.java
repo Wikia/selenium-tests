@@ -67,7 +67,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom", "X"}
+            groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
     )
     public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeSelector) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -94,9 +94,21 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
 
-        videoFandomPage(slotName).verifyIsVideoTimeProgresingOnDesktop(networkTrafficInterceptor, videoFanTakeover);
+      networkTrafficInterceptor.startIntercepting();
+
+      videoFanTakeover.play();
+      videoFanTakeover.waitForFirstQuartile(networkTrafficInterceptor);
+      double quartileTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+
+      videoFanTakeover.waitForMidPoint(networkTrafficInterceptor);
+      double midTime = videoFanTakeover.getCurrentVideoTimeOnDesktop();
+
+      Assert.assertTrue(
+              quartileTime < midTime,
+              String.format("Video time is not progressing, quartileTime %s is not smaller than midTime %s", quartileTime, midTime)
+      );
     }
 
     @NetworkTrafficDump

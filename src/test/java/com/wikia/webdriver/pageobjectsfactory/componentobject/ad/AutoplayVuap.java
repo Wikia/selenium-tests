@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -53,13 +54,18 @@ public class AutoplayVuap {
 
   private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
 
+  private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
+  private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
+
   private final WikiaWebDriver driver;
 
   private final Wait wait;
 
   private final String slot;
 
+  @Deprecated
   private final String imaBridgeSelecotr;
+  private final By imaBridgeSelector;
   private final By adIframeSelector;
 
   private boolean muted;
@@ -81,6 +87,7 @@ public class AutoplayVuap {
 
     this.slot = slot;
     this.imaBridgeSelecotr = "#" + slot + " .video-player iframe[src*='imasdk']";
+    this.imaBridgeSelector = By.cssSelector(this.imaBridgeSelecotr);
     this.adIframeSelector = adIframeSelector;
     this.muted = true;
     this.mobile = mobile;
@@ -291,5 +298,25 @@ public class AutoplayVuap {
 
   public double getAdVideoHeight() {
     return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
+  }
+
+  public Double getCurrentVideoTimeOnDesktop() {
+    return getCurrentVideoTime();
+  }
+
+  private Double getCurrentVideoTime() {
+    String result;
+    driver.switchTo().frame(driver.findElement(imaBridgeSelector));
+    result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
+    driver.switchTo().defaultContent();
+    return Double.parseDouble(result);
+  }
+
+  public void waitForFirstQuartile(NetworkTrafficInterceptor networkTrafficInterceptor) {
+    wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
+  }
+
+  public void waitForMidPoint(NetworkTrafficInterceptor networkTrafficInterceptor) {
+    wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
   }
 }
