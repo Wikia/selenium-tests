@@ -48,8 +48,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
                                              String queryString,
                                              String adUnit,
                                              String slot,
-                                             String patternParam2tierPrice,
-                                             String patternParam57tierPrice) {
+                                             String patternParamTier) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     if (StringUtils.isNotEmpty(queryString)) {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
@@ -58,8 +57,8 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     String currentGptSlotParams = ads.getGptParams(slot, "data-gpt-slot-params");
 
     ads.verifyGptIframe(adUnit, slot, "gpt");
-    Assertion.assertTrue(ads.areRubiconDfpParamsPresent(currentGptSlotParams, patternParam2tierPrice, patternParam57tierPrice),
-        currentGptSlotParams + " does not contains " + patternParam2tierPrice + " or " + patternParam57tierPrice);
+    Assertion.assertTrue(ads.areRubiconDfpParamsPresent(currentGptSlotParams, patternParamTier),
+        currentGptSlotParams + " does not contains " + patternParamTier);
     ads.verifyGptAdInSlot(slot, LINE_ITEM_ID, CREATIVE_ID);
   }
 
