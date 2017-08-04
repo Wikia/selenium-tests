@@ -26,12 +26,16 @@ public class VideoFanTakeover extends AutoplayVuap {
   private WebElement iframe;
 
   public VideoFanTakeover(WikiaWebDriver driver, String iframeId, String slotName) {
-    super(driver,slotName, iframeId);
+    this(driver, By.id(iframeId), slotName);
+  }
+
+  public VideoFanTakeover(WikiaWebDriver driver, By iframeSelector, String slotName) {
+    super(driver,slotName, iframeSelector, false);
 
     this.wait = new Wait(driver);
     this.driver = driver;
     this.slotName = slotName;
-    setIframe(iframeId);
+//    setIframe(iframeId);
   }
 
   private void setIframe(String iframeId) {

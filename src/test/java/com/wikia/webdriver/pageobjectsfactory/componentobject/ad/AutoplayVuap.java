@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
+import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -109,14 +110,14 @@ public class AutoplayVuap {
     if (paused) {
       togglePause();
     } else if( !this.mobile ) {
-      clickOnClickArea2();
+      clickOnArea(2);
     } else {
-      clickOnClickArea4();
+      clickOnArea(4);
     }
   }
 
   public void playVuapVideo() {
-      clickOnClickArea2();
+    play();
   }
 
   public void replay() {
@@ -129,19 +130,24 @@ public class AutoplayVuap {
   }
 
   public void clickOnClickArea2() {
-    clickOnAdClickArea(AD_TNG_CLICK_AREA_2_SELECTOR);
+    clickElementInsideAd(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR));
   }
 
   public void clickOnClickArea4() {
-    clickOnAdClickArea(AD_TNG_CLICK_AREA_4_SELECTOR);
+    clickElementInsideAd(By.cssSelector(AD_TNG_CLICK_AREA_4_SELECTOR));
   }
 
   public void clickOnAdImageResolvedState() {
-    clickOnAdClickArea(AD_RESOLVED_STATE_IMAGE_SELECTOR);
+    clickElementInsideAd(By.cssSelector(AD_RESOLVED_STATE_IMAGE_SELECTOR));
   }
 
-  private void clickOnAdClickArea(String clickAreaSelector) {
-    usingAdFrame(() -> wait.forElementClickable(By.cssSelector(clickAreaSelector)).click());
+  private void clickElementInsideAd(By selector) {
+    usingAdFrame(() -> {
+      JavascriptActions jsActions = new JavascriptActions(driver);
+      // It need to be clicked by JS, because our templates elements covers each other
+      // and there is no way to click it by just .click()
+      jsActions.execute("arguments[0].click();", driver.findElement(selector));
+    });
   }
 
   public double getCurrentTime() {
@@ -265,5 +271,17 @@ public class AutoplayVuap {
   public boolean isPauseLayerNotVisible() {
     wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
     return true;
+  }
+
+  public void clickOnArea(int area) {
+    clickElementInsideAd(By.id("area" + area));
+  }
+
+  public void waitForVideoStart() {
+    isPauseLayerVisible();
+  }
+
+  public void waitForVideoPlayerHidden() {
+    isPauseLayerNotVisible();
   }
 }

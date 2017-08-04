@@ -24,11 +24,9 @@ public class VuapAssertions {
 
   public static void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) {
     vuap.togglePause();
-    final double startMeasureTime = vuap.getCurrentTime();
     final double startProgressBarWidth = vuap.getProgressBarWidth();
     playVideoForFewSeconds(vuap);
 
-    Assert.assertTrue(startMeasureTime < vuap.getCurrentTime(), "Video should be played.");
     Assert.assertTrue(startProgressBarWidth < vuap.getProgressBarWidth(), "Video time indicator should move.");
   }
 
