@@ -33,8 +33,6 @@ public class AutoplayVuap {
 
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
 
-  private static final String AD_DEFAULT_STATE_IMAGE_SELECTOR = "#background_right";
-
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
   // #TOP_LEADERBOARD .pause-overlay
