@@ -111,7 +111,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.pause();
     double resolvedVideoHeight = vuap.getVideoHeightWhilePaused();
 
-    Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, resolvedVideoHeight));
+    VuapAssertions.verifyIsResolvedStateDisplayed(defaultVideoHeight, resolvedVideoHeight);
   }
 
   @Test(

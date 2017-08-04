@@ -50,8 +50,6 @@ public class AutoplayVuap {
   // #TOP_LEADERBOARD .close-ad
   private static final String CLSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
-  private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
-
   private final WikiaWebDriver driver;
 
   private final Wait wait;
@@ -217,17 +215,9 @@ public class AutoplayVuap {
     return wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
-  public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
-    return EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT == getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight);
-  }
-
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
     int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
-  }
-
-  private int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
-    return (int) Math.round(100 - (100 / (defaultVideoHeight / resolvedVideoHeight)));
   }
 
   private <T> T usingVideoContext(final Function<WebElement, T> fun) {
