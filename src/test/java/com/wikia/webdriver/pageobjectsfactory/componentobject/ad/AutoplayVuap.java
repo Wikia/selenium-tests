@@ -257,4 +257,13 @@ public class AutoplayVuap {
     driver.switchTo().defaultContent();
   }
 
+  public boolean isPauseLayerVisible() {
+    wait.forElementVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+    return true;
+  }
+
+  public boolean isPauseLayerNotVisible() {
+    wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+    return true;
+  }
 }

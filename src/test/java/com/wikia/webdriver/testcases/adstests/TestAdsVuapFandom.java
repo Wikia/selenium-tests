@@ -140,7 +140,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
         videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
     }
 
-    @NetworkTrafficDump(useMITM = true)
     @InBrowser(
             browser = Browser.CHROME,
             emulator = Emulator.GOOGLE_NEXUS_5
@@ -148,16 +147,25 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     @Test(
             dataProviderClass = FandomAdsDataProvider.class,
             dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVuapVideoClosesWhenTapCloseButtonFandomMobile"}
+            groups = {"AdsVuapMobileFandom", "AdsVuapVideoClosesWhenTapCloseButtonMobileFandom"}
     )
-    public void adsVuapVideoClosesWhenTapCloseButtonFandomMobile(String pageType, String pageName, String slotName,
-                                                                 String iframeId, String videoUrl) {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, videoUrl);
+    public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(
+        String pageType,
+        String pageName,
+        String slotName
+    ) {
+      AdsFandomObject fandomPage = loadPage(pageName, pageType);
+      String fandomSlotName = AdsFandomContent.getGptSlotSelector(slotName);
+      String adIframeSelector = String.format(AD_IFRAME_TEMPLATE, fandomSlotName, slotName);
+      AutoplayVuap vuap = new AutoplayVuap(
+          driver,
+          fandomSlotName,
+          By.cssSelector(adIframeSelector),
+          true
+      );
 
-        videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
+      fandomPage.scrollToSlot(fandomSlotName);
+      VuapAssertions.verifyVideoClosesAfterTapOnCloseButton(vuap);
     }
 
     @InBrowser(

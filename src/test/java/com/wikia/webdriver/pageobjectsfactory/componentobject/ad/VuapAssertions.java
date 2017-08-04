@@ -48,6 +48,14 @@ public class VuapAssertions {
     vuap.waitForVideoToEnd(maxVideoDuration);
   }
 
+  public static void verifyVideoClosesAfterTapOnCloseButton(final AutoplayVuap vuap) {
+    vuap.play();
+    Assert.assertTrue(vuap.isPauseLayerVisible(), "Pause layer visible after clicking play");
+
+    vuap.close();
+    Assert.assertTrue(vuap.isPauseLayerNotVisible(), "Pause layer hidden after closing");
+  }
+
   private static void playVideoForFewSeconds(final AutoplayVuap vuap) {
     vuap.play();
 
