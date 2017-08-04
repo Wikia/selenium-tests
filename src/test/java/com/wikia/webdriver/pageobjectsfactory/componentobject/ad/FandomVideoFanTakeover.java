@@ -33,13 +33,6 @@ public class FandomVideoFanTakeover {
         Assert.assertTrue(fandom.tabContainsUrl(VideoFanTakeover.AD_REDIRECT_URL));
     }
 
-    public void verifyVideoClosesAfterTapOnCloseButton(VideoFanTakeover videoFanTakeover){
-        videoFanTakeover.play();
-
-        videoFanTakeover.clickOnVideoCloseButton();
-        videoFanTakeover.waitForVideoPlayerHidden();
-    }
-
     public void verifySlotSizesVuap(VideoFanTakeover videoFanTakeover) throws InterruptedException {
         String slotSelector = AdsFandomContent.getSlotSelector(slotName);
         videoFanTakeover.waitForAdToLoad();

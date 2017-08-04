@@ -56,9 +56,11 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     )
     public void adsVuapVideoClosesWhenTapCloseButtonFandom(String pageType, String pageName, String slotName, String iframeId) {
         AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+        AutoplayVuap videoFanTakeover = prepareSlot(slotName, By.cssSelector(iframeId), fandomPage);
 
-        videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
+      videoFanTakeover.play();
+      videoFanTakeover.close();
+      videoFanTakeover.waitForVideoPlayerHidden();
     }
 
     @Test(
