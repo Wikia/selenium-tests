@@ -190,6 +190,9 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slot, ads);
     vuap.replay();
     ads.refreshPage();
+    // TODO remove wait in ADEN-5481
+    // make sure page is rendered, prefooters are hidden so we don't get page moved after scroll
+    vuap.waitForPrefooterNotVisible();
     scrollToSlot(slot, ads);
     vuap.replay();
     vuap.pause();
