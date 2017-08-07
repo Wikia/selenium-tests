@@ -78,7 +78,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
     ads.refreshPage();
 
-    Assert.assertTrue(vuap.isResolvedStateDisplayed(defaultVideoHeight, vuap.getVideoHeightWhilePaused()));
+    VuapAssertions.verifyIsResolvedStateDisplayed(defaultVideoHeight, vuap.getVideoHeightWhilePaused());
   }
 
   @Test(groups = "AdsVuapResolvedStateAutoplayOasis",

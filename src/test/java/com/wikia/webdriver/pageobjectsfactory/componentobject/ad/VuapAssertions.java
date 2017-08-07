@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class VuapAssertions {
 
   private static final long MAX_AUTOPLAY_MOVIE_START_DELAY = 5L;
+  private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
 
   private VuapAssertions() {
     throw new IllegalAccessError("Utility class");
@@ -71,5 +72,23 @@ public class VuapAssertions {
     double adSlotHeightAfterVideoClose = vuap.getAdSlotHeight();
 
     Assert.assertEquals(adSlotHeight, adSlotHeightAfterVideoClose);
+  }
+
+  public static void verifyIsResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
+    Assert.assertEquals(
+        getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight),
+        EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT,
+        String.format(
+            "Resolved video size should be decreased by %s%%, actual difference rate: %s%% defaultVideoHeight: %s, resolvedVideoHeight: %s",
+            EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT,
+            getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight),
+            defaultVideoHeight,
+            resolvedVideoHeight
+        )
+    );
+  }
+
+  private static int getStatesPercentageDifference(double defaultVideoHeight, double resolvedVideoHeight) {
+    return (int) Math.round(100 - (100 / (defaultVideoHeight / resolvedVideoHeight)));
   }
 }

@@ -108,11 +108,10 @@ public class MobileAdsDataProvider {
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "MOBILE_TOP_LEADERBOARD",
-            ".*rpfl_7450\":\\[\"43_tier\\d{4}.*\",\"44_tier.*",
-            ".*rpfl_7450\":\\[\"43_tier.*\",\"44_tier\\d{4}\"\\].*"
+            ".*\"rpfl_7450\":\\[\"43_tier(NONE|\\d{4})\",\"44_tier(NONE|\\d{4})\",\"67_tier(NONE|\\d{4})\"\\].*"
         }
     };
   }

@@ -277,11 +277,10 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            ".*rpfl_7450\":\\[\"2_tier\\d{4}.*\",\"57_tier.*",
-            ".*rpfl_7450\":\\[\"2_tier.*\",\"57_tier\\d{4}\"\\].*"
+            ".*\"rpfl_7450\":\\[\"2_tier(NONE|\\d{4})\",\"57_tier(NONE|\\d{4})\"\\].*"
         }
     };
   }
@@ -1100,30 +1099,6 @@ public class AdsDataProvider {
         }
     };
   }
-
-    @DataProvider
-    public static Object[][] adsVuapMercury() {
-        return new Object[][]{
-                {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
-                        AdsContent.MOBILE_TOP_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
-                                AdsContent.MOBILE_TOP_LB
-                        ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
-                },
-                {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
-                        AdsContent.MOBILE_BOTTOM_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
-                                AdsContent.MOBILE_BOTTOM_LB
-                        ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_BOTTOM_LEADERBOARD"
-                }
-        };
-    }
 
   @DataProvider
   public static Object[][] adsVideoFrequencyCapping() {
