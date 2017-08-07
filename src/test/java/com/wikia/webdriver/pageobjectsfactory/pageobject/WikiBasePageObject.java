@@ -437,6 +437,11 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public List<Notification> getNotifications(NotificationType notificationType){
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     List<Notification> notificationList = getNotifications();
     return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType.name()))
             .collect(Collectors.toList());
