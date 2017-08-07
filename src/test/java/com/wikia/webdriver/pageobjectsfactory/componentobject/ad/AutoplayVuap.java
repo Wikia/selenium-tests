@@ -7,32 +7,23 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class AutoplayVuap {
 
   private static final String SLOT_SELECTOR_PREFIX = "#%s .";
-
   private static final String PAUSE_CLASS_NAME = "pause-overlay";
-
   private static final String REPLAY_CLASS_NAME = "replay-overlay";
-
   private static final String CURRENT_TIME_CLASS_NAME = "current-time";
-
   private static final String SPEAKER_CLASS_NAME = "speaker";
-
   private static final String CLOSE_BUTTON_CLASS_NAME = "close-ad";
-
   private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
-
   private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
-
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
-
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
   // #TOP_LEADERBOARD .pause-overlay
@@ -64,10 +55,13 @@ public class AutoplayVuap {
 
   private final By imaBridgeSelector;
   private final By adIframeSelector;
+  private final By speakerSelector;
+  private final By pauseOverlaySelector;
+  private final By closeButtonSelector;
+  private final By progressBarSelector;
+  private final By replayOverlaySelector;
 
-  private boolean muted;
   private boolean mobile;
-  private boolean paused;
 
   public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId) {
     this(driver, slot, By.id(adIframeId), false);
@@ -80,32 +74,33 @@ public class AutoplayVuap {
     this.slot = slot;
     this.imaBridgeSelector = By.cssSelector("#" + slot + " .video-player iframe[src*='imasdk']");
     this.adIframeSelector = adIframeSelector;
-    this.muted = true;
     this.mobile = mobile;
-    this.paused = false;
+
+    speakerSelector = By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot));
+    pauseOverlaySelector = By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+    closeButtonSelector = By.cssSelector(String.format(CLOSE_BUTTON_SELECTOR_FORMAT, slot));
+    progressBarSelector = By.cssSelector(String.format(CURRENT_TIME_SELECTOR_FORMAT, slot));
+    replayOverlaySelector = By.cssSelector(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
   }
 
   public void mute() {
-    if (!muted) {
-      clickElement(String.format(SPEAKER_SELECTOR_FORMAT, slot));
-      muted = true;
+    if (!isMuted()) {
+      wait.forElementClickable(speakerSelector).click();
     }
   }
 
   public void unmute() {
-    if (muted) {
-      clickElement(String.format(SPEAKER_SELECTOR_FORMAT, slot));
-      muted = false;
+    if (isMuted()) {
+      wait.forElementClickable(speakerSelector).click();
     }
   }
 
   public void togglePause() {
-    clickElement(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
-    paused = !paused;
+    wait.forElementClickable(pauseOverlaySelector).click();
   }
 
   public void play() {
-    if (paused) {
+    if (isPaused()) {
       togglePause();
     } else if( !this.mobile ) {
       clickOnArea(2);
@@ -114,19 +109,46 @@ public class AutoplayVuap {
     }
   }
 
+  public void playVideoForFewSeconds() {
+    playVideoFor(Duration.ofSeconds(2));
+  }
+
+  public void playVideoFor(Duration duration) {
+    play();
+
+    try {
+      Thread.sleep(duration.toMillis());
+    } catch (InterruptedException x) {
+      // ignore this exception
+    }
+
+    togglePause();
+  }
+
+  private boolean isPaused() {
+    return isVideoPaused() && driver.findElement(pauseOverlaySelector).isDisplayed();
+  }
+
+  private Boolean isVideoPaused() {
+    return Boolean.valueOf(usingImaBridge(webDriver -> {
+      final JavascriptActions js = new JavascriptActions();
+
+      return js.execute("document.querySelector('video') && document.querySelector('video').paused").toString();
+    }));
+  }
+
   public void replay() {
-      clickElement(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
-      muted = false;
+    wait.forElementVisible(replayOverlaySelector).click();
   }
 
   public void close() {
-    findCloseButton().click();
+    wait.forElementClickable(closeButtonSelector).click();
   }
 
   public void closeWithJS() {
     new JavascriptActions(driver).execute(
         "arguments[0].click();",
-        driver.findElement(By.cssSelector(getCloseButtonSelector()))
+        driver.findElement(closeButtonSelector)
     );
   }
 
@@ -152,15 +174,7 @@ public class AutoplayVuap {
   }
 
   public double getVideoHeightWhilePaused() {
-    return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
-  }
-
-  private By getPauseOverlaySelector() {
-    return By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
-  }
-
-  private String getCloseButtonSelector() {
-    return String.format(CLOSE_BUTTON_SELECTOR_FORMAT, slot);
+    return driver.findElement(pauseOverlaySelector).getSize().getHeight();
   }
 
   public double getAdSlotHeight() {
@@ -169,8 +183,7 @@ public class AutoplayVuap {
   }
 
   public int getProgressBarWidth() {
-    final String selector = String.format(CURRENT_TIME_SELECTOR_FORMAT, slot);
-    return driver.findElement(By.cssSelector(selector)).getSize().getWidth();
+    return driver.findElement(progressBarSelector).getSize().getWidth();
   }
 
   public boolean hasStarted() {
@@ -182,7 +195,7 @@ public class AutoplayVuap {
   }
 
   public boolean isMuted() {
-    return findSpeakerIcon().getAttribute("class").contains("mute");
+    return wait.forElementVisible(speakerSelector).getAttribute("class").contains("mute");
   }
 
   public boolean isUnmuted() {
@@ -212,26 +225,8 @@ public class AutoplayVuap {
         .until(predicate);
   }
 
-  private void clickElement(final String selector) {
-    WebElement element = wait.forElementClickable(By.cssSelector(selector));
-    Actions builder = new Actions(driver);
-    builder.contextClick(element)
-        .moveToElement(element)
-        .click(element)
-        .perform();
-  }
-
-  private WebElement findSpeakerIcon() {
-    return wait.forElementClickable(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
-  }
-
-  private WebElement findCloseButton() {
-    return wait.forElementClickable(By.cssSelector(String.format(CLOSE_BUTTON_SELECTOR_FORMAT, slot)));
-  }
-
   private boolean isOverlayNoVisible() {
-    return wait.forElementNotVisible(
-        getPauseOverlaySelector());
+    return wait.forElementNotVisible(pauseOverlaySelector);
   }
 
   public boolean isResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
@@ -266,12 +261,12 @@ public class AutoplayVuap {
   }
 
   public boolean isPauseLayerVisible() {
-    wait.forElementVisible(getPauseOverlaySelector());
+    wait.forElementVisible(pauseOverlaySelector);
     return true;
   }
 
   public boolean isPauseLayerNotVisible() {
-    wait.forElementNotVisible(getPauseOverlaySelector());
+    wait.forElementNotVisible(pauseOverlaySelector);
     return true;
   }
 
@@ -288,21 +283,22 @@ public class AutoplayVuap {
   }
 
   public double getAdVideoHeight() {
-    return driver.findElement(getPauseOverlaySelector()).getSize().getHeight();
+    return driver.findElement(pauseOverlaySelector).getSize().getHeight();
   }
 
   public Double getCurrentTime() {
     String result;
-    WebElement mobileVideo = getMobileVideo();
 
-    if (mobileVideo == null) {
-      driver.switchTo().frame(driver.findElement(imaBridgeSelector));
-      result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
-      driver.switchTo().defaultContent();
+    if (hasMobileVideoElement()) {
+      result = usingVideoContext(video -> video.getAttribute("currentTime"));
     } else {
-      result = mobileVideo.getAttribute("currentTime");
+      result = driver.findElement(getMobileVideoSelector()).getAttribute("currentTime");
     }
     return Double.parseDouble(result);
+  }
+
+  private boolean hasMobileVideoElement() {
+    return driver.findElements(getMobileVideoSelector()).size() == 0;
   }
 
   public void waitForFirstQuartile(NetworkTrafficInterceptor networkTrafficInterceptor) {
@@ -313,7 +309,7 @@ public class AutoplayVuap {
     wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
   }
 
-  private WebElement getMobileVideo() {
-    return driver.findElement(By.cssSelector("#" + slot + " video"));
+  private By getMobileVideoSelector() {
+    return By.cssSelector("#" + slot + " video");
   }
 }

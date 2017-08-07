@@ -25,9 +25,11 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProvider = "adsVuapDesktop"
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
-    AdsBaseObject ads  = openPageWithVideoInLocalStorage(page);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
+
     scrollToSlot(slot, ads);
+    vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoPlay(vuap);
   }
@@ -50,7 +52,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
-  public void vuapDefaultStateShouldHaveLinkToProject43ArticleOnImage(Page page, String slot) {
+  public void vuapDefaultStateArea2ShouldRedirectToCorrectURL(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
@@ -58,14 +60,14 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.clickOnClickArea2();
 
     final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(actual.equals(AD_REDIRECT_URL),
-                      "Image should point to page on project43.");
+    Assert.assertTrue(actual.equals(AD_REDIRECT_URL), "Image should point to page on project43.");
   }
 
   @Test(groups = {"AdsVuapDefaultState"},
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVuapDesktop")
-  public void vuapDefaultStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot) {
+      dataProvider = "adsVuapDesktop"
+  )
+  public void vuapDefaultStateArea4ShouldRedirectToCorrectURL(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
 
@@ -86,11 +88,15 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
 
-    VuapAssertions.verifyVideoUnmuteAndMute(vuap);
+    vuap.waitForVideoStart();
+    vuap.togglePause();
+    Assert.assertTrue(vuap.isMuted());
+    vuap.play();
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
 
     vuap.replay();
     vuap.mute();
+    vuap.togglePause();
 
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
   }
@@ -118,15 +124,15 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
     groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapDesktop"
+    dataProvider = "adsVuapResolvedState"
   )
   public void vuapResolvedStateShouldStartPlayingAfterClickOnReplay(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
-    ads.refreshPage();
-    scrollToSlot(slot, ads);
 
+    scrollToSlot(slot, ads);
     vuap.replay();
+    vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoPlay(vuap);
   }
@@ -134,30 +140,28 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
     groups = {"AdsVuapResolvedTimeProgressOasis"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapDesktop"
+    dataProvider = "adsVuapResolvedState"
   )
   public void vuapResolvedStateShouldProgressInTime(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
-    ads.refreshPage();
     scrollToSlot(slot, ads);
     vuap.replay();
+    vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState"},
+    groups = {"AdsVuapResolvedState", "Y"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapDesktop"
+    dataProvider = "adsVuapResolvedState"
   )
   public void vuapResolvedStateShouldRedirectToCorrectURL(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
-    ads.refreshPage();
     scrollToSlot(slot, ads);
-
-    vuap.play();
+    vuap.replay();
 
     Assert.assertTrue(ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),"Image should point to page on project43.");
   }
@@ -165,29 +169,32 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
     groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapDesktop"
+    dataProvider = "adsVuapResolvedState"
   )
   public void vuapResolvedStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
-    ads.refreshPage();
     scrollToSlot(slot, ads);
 
-    vuap.clickOnClickArea4();
+    vuap.clickOnArea(4);
 
-    final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
+    Assert.assertTrue(
+            ads.switchToNewBrowserTab().equals(FANDOM_ARTICLE_WESTWORLD_LINK),
+            "Image should point to page on fandom."
+    );
   }
 
   @Test(groups = {"AdsVuapResolvedState"},
       dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVuapDesktop")
+      dataProvider = "adsVuapResolvedState"
+  )
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot) {
-    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    final AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
-    ads.refreshPage();
     scrollToSlot(slot, ads);
+
     vuap.replay();
+    vuap.waitForVideoStart();
     vuap.togglePause();
     vuap.close();
 
@@ -197,30 +204,28 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
     groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapDesktop"
+    dataProvider = "adsVuapResolvedState"
   )
-  public void vuapResolvedStateIsNotMute(Page page, String slot) {
-    AdsBaseObject ads = new AdsBaseObject(driver, this.urlBuilder.getUrlForPage(page, TURN_ON_RESOLVED_STATE));
+  public void vuapResolvedStateIsNotMuted(Page page, String slot) {
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
 
     scrollToSlot(slot, ads);
     vuap.replay();
-    vuap.mute();
-
+    vuap.waitForVideoStart();
+    vuap.togglePause();
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
   }
 
   @Test(
     groups = {"AdsVuapResolvedState"},
     dataProviderClass = AdsDataProvider.class,
-    dataProvider = "adsVuapDesktop"
+    dataProvider = "adsVuapResolvedState"
   )
   public void vuapResolvedShouldEnd(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
-    ads.refreshPage();
     scrollToSlot(slot, ads);
-
     vuap.replay();
 
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
@@ -237,7 +242,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slot, ads);
 
     double adSlotHeight = vuap.getAdSlotHeight();
-    vuap.play();
+    vuap.replay();
     vuap.togglePause();
     double videoAdHeight = vuap.getVideoHeightWhilePaused();
 

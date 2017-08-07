@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class VuapAssertions {
@@ -14,26 +15,30 @@ public class VuapAssertions {
   }
 
   public static void verifyVideoUnmuteAndMute(final AutoplayVuap vuap) {
+    vuap.playVideoFor(Duration.ofSeconds(1));
+
+    vuap.mute();
+    vuap.playVideoFor(Duration.ofSeconds(1));
     Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
 
     vuap.unmute();
+    vuap.playVideoFor(Duration.ofSeconds(1));
     Assert.assertTrue(vuap.isUnmuted(), "Video should be unmuted.");
 
     vuap.mute();
+    vuap.playVideoFor(Duration.ofSeconds(1));
     Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
   }
 
   public static void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) {
     vuap.togglePause();
     final double startProgressBarWidth = vuap.getProgressBarWidth();
-    playVideoForFewSeconds(vuap);
+    vuap.playVideoForFewSeconds();
 
     Assert.assertTrue(startProgressBarWidth < vuap.getProgressBarWidth(), "Video time indicator should move.");
   }
 
   public static void verifyVideoPlay(final AutoplayVuap vuap) {
-    vuap.togglePause();
-
     Assert.assertTrue(vuap.hasStarted(), "VUAP did not automatically played when page was opened.");
     Assert.assertEquals(vuap.findTitle(), "Advertisement", "VUAP video title is not Advertisement.");
   }
@@ -53,18 +58,6 @@ public class VuapAssertions {
 
     vuap.closeWithJS();
     Assert.assertTrue(vuap.isPauseLayerNotVisible(), "Pause layer hidden after closing");
-  }
-
-  private static void playVideoForFewSeconds(final AutoplayVuap vuap) {
-    vuap.play();
-
-    try {
-      TimeUnit.SECONDS.sleep(2);
-    } catch (InterruptedException x) {
-      // ignore this exception
-    }
-
-    vuap.togglePause();
   }
 
   public static void verifyVideoAdSize(AutoplayVuap vuap, double videoAdHeight,

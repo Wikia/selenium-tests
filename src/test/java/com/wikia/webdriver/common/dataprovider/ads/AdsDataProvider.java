@@ -1097,6 +1097,20 @@ public class AdsDataProvider {
     };
   }
 
+  @DataProvider
+  public static Object[][] adsVuapResolvedState() {
+    return new Object[][]{
+            {
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    AdsContent.TOP_LB
+            },
+            {
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    AdsContent.BOTTOM_LB
+            }
+    };
+  }
+
     @DataProvider
     public static Object[][] adsVuapMercury() {
         return new Object[][]{
