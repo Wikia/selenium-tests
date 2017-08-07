@@ -62,8 +62,6 @@ public class AutoplayVuap {
 
   private final String slot;
 
-  @Deprecated
-  private final String imaBridgeSelecotr;
   private final By imaBridgeSelector;
   private final By adIframeSelector;
 
@@ -75,18 +73,12 @@ public class AutoplayVuap {
     this(driver, slot, By.id(adIframeId), false);
   }
 
-  //TODO remove mobile parameter if possible - simple hack for areas to click
-  public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId, Boolean mobile) {
-    this(driver, slot, By.id(adIframeId), mobile);
-  }
-
   public AutoplayVuap(WikiaWebDriver driver, String slot, By adIframeSelector, Boolean mobile) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
     this.slot = slot;
-    this.imaBridgeSelecotr = "#" + slot + " .video-player iframe[src*='imasdk']";
-    this.imaBridgeSelector = By.cssSelector(this.imaBridgeSelecotr);
+    this.imaBridgeSelector = By.cssSelector("#" + slot + " .video-player iframe[src*='imasdk']");
     this.adIframeSelector = adIframeSelector;
     this.muted = true;
     this.mobile = mobile;
@@ -120,10 +112,6 @@ public class AutoplayVuap {
     } else {
       clickOnArea(4);
     }
-  }
-
-  public void playVuapVideo() {
-    play();
   }
 
   public void replay() {
@@ -177,7 +165,7 @@ public class AutoplayVuap {
 
   public double getAdSlotHeight() {
     waitForAdToLoad();
-    return driver.findElement(By.cssSelector("#" + slot)).getSize().getHeight();
+    return driver.findElement(By.id(slot)).getSize().getHeight();
   }
 
   public int getProgressBarWidth() {
@@ -214,7 +202,7 @@ public class AutoplayVuap {
   }
 
   public void waitForAdToLoad() {
-    usingAdFrame(() -> wait.forElementClickable(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR)));
+    usingAdFrame(() -> wait.forElementPresent(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR)));
   }
 
   private void waitFor(final Predicate<AutoplayVuap> predicate, final long timeout) {
@@ -264,15 +252,14 @@ public class AutoplayVuap {
   }
 
   private <T> T usingImaBridge(final Function<WikiaWebDriver, T> fun) {
-    final WebElement iframe = driver.findElement(By.cssSelector(imaBridgeSelecotr));
-    driver.switchTo().frame(iframe);
+    driver.switchTo().frame(driver.findElement(imaBridgeSelector));
     final T result = fun.apply(driver);
     driver.switchTo().defaultContent();
     return result;
   }
 
   private void usingAdFrame(Runnable f) {
-
+    wait.forElementPresent(adIframeSelector);
     driver.switchTo().frame(driver.findElement(adIframeSelector));
     f.run();
     driver.switchTo().defaultContent();

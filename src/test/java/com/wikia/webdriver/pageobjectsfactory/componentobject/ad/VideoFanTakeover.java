@@ -12,13 +12,11 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.concurrent.TimeUnit;
 
 public class VideoFanTakeover extends AutoplayVuap {
-  private static final String VIDEO_IFRAME_SELECTOR_FORMAT = "#%s .video-player iframe";
   private static final String MOBILE_VIDEO_SELECTOR_FORMAT = "#%s .video-player video";
   private static final String UI_ELEMENT_SELECTOR_FORMAT = "#%s .pause-overlay";
   private static final String UI_ELEMENT_CLOSE_BUTTON_FORMAT = "#%s .close-ad";
   private static final int GLOBAL_NAV_HEIGHT = 60;
-  public static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
-  private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
+  private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
   private static By playTriggerButtonSelector = By.id("button");
   private final Wait wait;
   private final String slotName;
@@ -29,18 +27,14 @@ public class VideoFanTakeover extends AutoplayVuap {
     this(driver, By.id(iframeId), slotName);
   }
 
-  public VideoFanTakeover(WikiaWebDriver driver, By iframeSelector, String slotName) {
+  private VideoFanTakeover(WikiaWebDriver driver, By iframeSelector, String slotName) {
     super(driver,slotName, iframeSelector, false);
 
     this.wait = new Wait(driver);
     this.driver = driver;
     this.slotName = slotName;
-//    setIframe(iframeId);
   }
 
-  private void setIframe(String iframeId) {
-    iframe = wait.forElementPresent(By.id(iframeId));
-  }
 
   public WebElement getIframe() {
     return iframe;
@@ -91,20 +85,6 @@ public class VideoFanTakeover extends AutoplayVuap {
     PageObjectLogging.log("clickOnVideoCloseButton", "close video button clicked", true, driver);
   }
 
-  public Double getCurrentVideoTimeOnDesktop() {
-    return getCurrentVideoTime(VIDEO_IFRAME_SELECTOR_FORMAT);
-  }
-
-  private Double getCurrentVideoTime(String selectorFormat) {
-    String result;
-
-    driver.switchTo().frame(driver.findElement(By.cssSelector(String.format(selectorFormat, slotName))));
-    result = driver.findElement(By.cssSelector("video")).getAttribute("currentTime");
-    driver.switchTo().defaultContent();
-
-    return Double.parseDouble(result);
-  }
-
   public Double getCurrentVideoTimeOnMobile() {
     String result;
 
@@ -121,17 +101,6 @@ public class VideoFanTakeover extends AutoplayVuap {
   }
 
   public void verifyFandomTabOpened(String tabUrl) {Assertion.assertEquals(tabUrl, AD_REDIRECT_URL);
-  }
-
-  public boolean isVideoAdBiggerThanImageAdOasis(double videoHeight, double imageHeight) {
-    int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
-    if (percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD) {
-      return true;
-    }
-    PageObjectLogging.log("isVideoAdBiggerThanImageAdOasis",
-            "Expected percentage difference between video height and image height is not equal with "
-            + PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD + " percent", false, driver);
-    return false;
   }
 
 // Different way of checking slot sizes on mercury because of the very small difference between two slots sizes
