@@ -82,7 +82,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     Assertion.assertTrue(VuapAssertions.isImageAdInCorrectSize(videoFanTakeover));
   }
 
-  @NetworkTrafficDump(useMITM = true)
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
@@ -91,8 +90,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
-
-    networkTrafficInterceptor.startIntercepting();
 
     videoFanTakeover.playVideoFor(Duration.ofSeconds(1));
     double firstPause = videoFanTakeover.getCurrentTime();
