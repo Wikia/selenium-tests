@@ -100,7 +100,7 @@ public class AutoplayVuap {
   }
 
   public void play() {
-    if (isPaused()) {
+    if (isPausedWithOverlay()) {
       togglePause();
     } else if( !this.mobile ) {
       clickOnArea(2);
@@ -121,7 +121,7 @@ public class AutoplayVuap {
     togglePause();
   }
 
-  private boolean isPaused() {
+  private boolean isPausedWithOverlay() {
     return isVideoPaused() && driver.findElement(pauseOverlaySelector).isDisplayed();
   }
 
