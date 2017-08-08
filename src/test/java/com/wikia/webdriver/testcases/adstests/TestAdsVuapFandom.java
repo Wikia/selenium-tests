@@ -14,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
@@ -81,11 +82,11 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     Assertion.assertTrue(VuapAssertions.isImageAdInCorrectSize(videoFanTakeover));
   }
 
-  @NetworkTrafficDump
+  @NetworkTrafficDump(useMITM = true)
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom"}
+          groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom", "X"}
   )
   public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -93,18 +94,17 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
     networkTrafficInterceptor.startIntercepting();
 
-    videoFanTakeover.play();
-    videoFanTakeover.waitForFirstQuartile(networkTrafficInterceptor);
-    double quartileTime = videoFanTakeover.getCurrentTime();
+    videoFanTakeover.playVideoFor(Duration.ofSeconds(1));
+    double firstPause = videoFanTakeover.getCurrentTime();
 
-    videoFanTakeover.waitForMidPoint(networkTrafficInterceptor);
-    double midTime = videoFanTakeover.getCurrentTime();
+    videoFanTakeover.playVideoFor(Duration.ofSeconds(1));
+    double currentTime = videoFanTakeover.getCurrentTime();
 
     Assert.assertTrue(
-            quartileTime < midTime,
+            firstPause < currentTime,
             String.format(
-                    "Video time is not progressing, quartileTime %s is not smaller than midTime %s",
-                    quartileTime, midTime)
+                    "Video time is not progressing, first pause time %s is not smaller than current %s",
+                    firstPause, currentTime)
     );
   }
 
@@ -194,7 +194,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile", "X"}
+          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
   )
   public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
