@@ -42,8 +42,6 @@ public class TestAdsPremiumPrerollMOATTracking extends TemplateNoFirstLoad {
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver,
         urlBuilder.getUrlForPath(wikiName, String.format(FEATURED_VIDEO_WITH_MOAT_PATH_FORMAT, article)));
 
-    wikiPage.playArticleVideoOnMobile();
-
     adsPremiumPrerollMOATTracking(wikiPage);
   }
 
