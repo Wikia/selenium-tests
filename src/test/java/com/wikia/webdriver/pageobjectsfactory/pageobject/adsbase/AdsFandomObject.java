@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AdsFandomObject extends AdsBaseObject {
-  private final String FANDOM_FEED_SELECTOR = ".feed-container";
+  private static final String FANDOM_FEED_SELECTOR = ".feed-container";
 
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
