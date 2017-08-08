@@ -1,10 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -219,6 +220,22 @@ public class AutoplayVuap {
         .withTimeout(timeout, TimeUnit.SECONDS)
         .pollingEvery(1, TimeUnit.SECONDS)
         .until(predicate);
+  }
+
+  private void clickElement(final String selector) {
+    WebElement element = wait.forElementClickable(By.cssSelector(selector));
+    Actions builder = new Actions(driver);
+    builder.moveToElement(element)
+        .click(element)
+        .perform();
+  }
+
+  private WebElement findSpeakerIcon() {
+    return wait.forElementClickable(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
+  }
+
+  private WebElement findCloseButton() {
+    return wait.forElementClickable(By.cssSelector(String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot)));
   }
 
   private boolean isOverlayNoVisible() {
