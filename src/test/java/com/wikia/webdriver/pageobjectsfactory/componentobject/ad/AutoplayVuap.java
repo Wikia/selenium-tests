@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -9,7 +8,6 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
@@ -278,16 +276,17 @@ public class AutoplayVuap {
   public Double getCurrentTime() {
     String result;
 
-    if (hasMobileVideoElement()) {
+    if (hasVideoElement()) {
       result = usingVideoContext(video -> video.getAttribute("currentTime"));
     } else {
-      result = driver.findElement(getMobileVideoSelector()).getAttribute("currentTime");
+      result = driver.findElement(getVideoSelector()).getAttribute("currentTime");
     }
+
     return Double.parseDouble(result);
   }
 
-  private boolean hasMobileVideoElement() {
-    return driver.findElements(getMobileVideoSelector()).size() == 0;
+  private boolean hasVideoElement() {
+    return usingImaBridge(webDriver -> driver.findElements(By.cssSelector("video")).size() > 0);
   }
 
   public void waitForFirstQuartile(NetworkTrafficInterceptor networkTrafficInterceptor) {
@@ -298,7 +297,7 @@ public class AutoplayVuap {
     wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
   }
 
-  private By getMobileVideoSelector() {
+  private By getVideoSelector() {
     return By.cssSelector("#" + slot + " video");
   }
 }
