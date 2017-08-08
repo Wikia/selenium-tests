@@ -75,7 +75,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     videoFanTakeover.play();
     videoFanTakeover.waitForVideoStart();
 
-    double videoHeight = videoFanTakeover.getAdVideoHeight();
+    double videoHeight = videoFanTakeover.getVideoHeightWhilePaused();
     Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight));
 
     videoFanTakeover.waitForVideoPlayerHidden();

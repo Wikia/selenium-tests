@@ -104,7 +104,7 @@ public class TestAdsVuapMercury extends NewTestTemplate {
 
         videoFanTakeover.play();
 
-        double videoHeight = videoFanTakeover.getAdVideoHeight();
+        double videoHeight = videoFanTakeover.getVideoHeightWhilePaused();
         Assertion.assertTrue(videoFanTakeover.isVideoAdBiggerThanImageAdMobile(videoHeight, imageHeight));
 
         videoFanTakeover.waitForVideoPlayerHidden();

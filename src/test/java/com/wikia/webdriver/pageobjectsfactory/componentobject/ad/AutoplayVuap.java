@@ -278,10 +278,6 @@ public class AutoplayVuap {
     isPauseLayerNotVisible();
   }
 
-  public double getAdVideoHeight() {
-    return driver.findElement(pauseOverlaySelector).getSize().getHeight();
-  }
-
   public Double getCurrentTime() {
     String result;
 
