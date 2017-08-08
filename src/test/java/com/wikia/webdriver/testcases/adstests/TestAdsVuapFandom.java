@@ -86,7 +86,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom", "X"}
+          groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom"}
   )
   public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
