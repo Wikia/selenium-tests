@@ -18,6 +18,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
+  private static final long MAX_MOVIE_DURATION = 40L;
 
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
@@ -79,7 +80,12 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight));
 
     videoFanTakeover.waitForVideoPlayerHidden();
-    Assertion.assertTrue(VuapAssertions.isImageAdInCorrectSize(videoFanTakeover));
+    VuapAssertions.verifyVideoAdSize(
+        videoFanTakeover,
+        videoHeight,
+        imageHeight,
+        MAX_MOVIE_DURATION
+    );
   }
 
   @Test(

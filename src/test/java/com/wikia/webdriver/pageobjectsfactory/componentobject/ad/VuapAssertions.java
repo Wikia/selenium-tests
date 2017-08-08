@@ -79,25 +79,6 @@ public class VuapAssertions {
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
   }
 
-  public static boolean isImageAdInCorrectSize(AutoplayVuap vuap) {
-    long time = System.currentTimeMillis();
-    long endTime = time+3000;
-    while(time < endTime) {
-      if (vuap.getAdSlotHeight() == vuap.getAdSlotHeight()){
-        return true;
-      }
-
-      try {
-        TimeUnit.MILLISECONDS.sleep(200);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-
-      time = System.currentTimeMillis();
-    }
-    return false;
-  }
-
   public static void verifyIsResolvedStateDisplayed(double defaultVideoHeight, double resolvedVideoHeight) {
     Assert.assertEquals(
         getStatesPercentageDifference(defaultVideoHeight, resolvedVideoHeight),
