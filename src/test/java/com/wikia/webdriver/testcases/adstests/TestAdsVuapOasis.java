@@ -234,7 +234,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
-      groups = {"AdsVuapClickToPlaySizes"}
+      groups = {"AdsVuapClickToPlaySizes", "X"}
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
@@ -242,7 +242,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slot, ads);
 
     double adSlotHeight = vuap.getAdSlotHeight();
-    vuap.replay();
+    vuap.clickOnArea(2);
     vuap.togglePause();
     double videoAdHeight = vuap.getVideoHeightWhilePaused();
 
