@@ -276,16 +276,17 @@ public class AutoplayVuap {
   public Double getCurrentTime() {
     String result;
 
-    if (hasVideoElement()) {
+    if (hasDesktopVideoElement()) {
       result = usingVideoContext(video -> video.getAttribute("currentTime"));
     } else {
+      // it doesn't work on mobile anyway, does it?
       result = driver.findElement(getVideoSelector()).getAttribute("currentTime");
     }
 
     return Double.parseDouble(result);
   }
 
-  private boolean hasVideoElement() {
+  private boolean hasDesktopVideoElement() {
     return usingImaBridge(webDriver -> driver.findElements(By.cssSelector("video")).size() > 0);
   }
 
