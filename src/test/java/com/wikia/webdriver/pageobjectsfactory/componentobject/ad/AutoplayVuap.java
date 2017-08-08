@@ -109,10 +109,6 @@ public class AutoplayVuap {
     }
   }
 
-  public void playVideoForFewSeconds() {
-    playVideoFor(Duration.ofSeconds(2));
-  }
-
   public void playVideoFor(Duration duration) {
     play();
 
