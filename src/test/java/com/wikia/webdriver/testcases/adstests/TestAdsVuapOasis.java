@@ -162,8 +162,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     AutoplayVuap vuap = new AutoplayVuap(driver, slot, findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
     vuap.replay();
+    vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_DURATION);
+    vuap.clickOnClickArea2();
 
-    Assert.assertTrue(ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),"Image should point to page on project43.");
+    Assert.assertTrue(
+        ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),
+        "Image should point to page on project43."
+    );
   }
 
   @Test(
