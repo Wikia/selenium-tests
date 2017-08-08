@@ -234,7 +234,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayDesktop",
-      groups = {"AdsVuapClickToPlaySizes", "X"}
+      groups = {"AdsVuapClickToPlaySizes"}
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());

@@ -149,7 +149,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
     videoFanTakeover.waitForAdToLoad();
-    videoFanTakeover.play();
+    videoFanTakeover.clickOnArea(3);
     videoFanTakeover.waitForVideoPlayerHidden();
   }
 
@@ -194,7 +194,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
+          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile", "X"}
   )
   public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -202,7 +202,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
     networkTrafficInterceptor.startIntercepting();
 
-    vuap.play();
+    vuap.clickOnArea(3);
     vuap.waitForFirstQuartile(networkTrafficInterceptor);
     double quartileTime = vuap.getCurrentTime();
 
