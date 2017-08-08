@@ -9,6 +9,7 @@ import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficI
 import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
@@ -206,10 +207,6 @@ public class AutoplayVuap {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
 
-  public void waitForPrefooterNotVisible() {
-    waitFor(AutoplayVuap::isPrefooterNotVisible, MAX_PREFOOTERS_HIDE_DELAY);
-  }
-
   public void waitForVideoToStart(final long timeout) {
     waitFor(AutoplayVuap::isVisible, timeout);
   }
@@ -229,28 +226,8 @@ public class AutoplayVuap {
         .until(predicate);
   }
 
-  private void clickElement(final String selector) {
-    WebElement element = wait.forElementClickable(By.cssSelector(selector));
-    Actions builder = new Actions(driver);
-    builder.moveToElement(element)
-        .click(element)
-        .perform();
-  }
-
-  private WebElement findSpeakerIcon() {
-    return wait.forElementClickable(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
-  }
-
-  private WebElement findCloseButton() {
-    return wait.forElementClickable(By.cssSelector(String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot)));
-  }
-
   private boolean isOverlayNoVisible() {
     return wait.forElementNotVisible(pauseOverlaySelector);
-  }
-
-  private boolean isPrefooterNotVisible() {
-    return wait.forElementNotVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTER_RIGHT)));
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
