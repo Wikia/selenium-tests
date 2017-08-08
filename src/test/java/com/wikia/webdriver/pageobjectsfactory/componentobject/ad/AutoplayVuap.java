@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -26,6 +27,8 @@ public class AutoplayVuap {
   private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
+
+  private static final long MAX_PREFOOTERS_HIDE_DELAY = 5L;
 
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
@@ -203,6 +206,10 @@ public class AutoplayVuap {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
 
+  public void waitForPrefooterNotVisible() {
+    waitFor(AutoplayVuap::isPrefooterNoVisible, MAX_PREFOOTERS_HIDE_DELAY);
+  }
+
   public void waitForVideoToStart(final long timeout) {
     waitFor(AutoplayVuap::isVisible, timeout);
   }
@@ -240,6 +247,10 @@ public class AutoplayVuap {
 
   private boolean isOverlayNoVisible() {
     return wait.forElementNotVisible(pauseOverlaySelector);
+  }
+
+  private boolean isPrefooterNoVisible() {
+    return wait.forElementNotVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTER_RIGHT)));
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
