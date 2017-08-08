@@ -191,7 +191,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom", "AdsVuapTimeProgressingFandomMobile"}
+          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom"}
   )
   public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
@@ -201,16 +201,17 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
     vuap.clickOnArea(3);
     vuap.waitForFirstQuartile(networkTrafficInterceptor);
-    double quartileTime = vuap.getCurrentTime();
+    double quartileWidth = vuap.getProgressBarWidth();
 
     vuap.waitForMidPoint(networkTrafficInterceptor);
-    double midTime = vuap.getCurrentTime();
+    double midWidth = vuap.getProgressBarWidth();
 
     Assert.assertTrue(
-            quartileTime < midTime,
-            String.format(
-                    "Video time is not progressing, quartileTime %s is not smaller than midTime %s",
-                    quartileTime, midTime)
+        quartileWidth < midWidth,
+        String.format(
+            "Video time is not progressing, quartileTime %s is not smaller than midTime %s",
+            quartileWidth, midWidth
+        )
     );
   }
 
