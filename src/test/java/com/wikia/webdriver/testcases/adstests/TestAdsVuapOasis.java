@@ -105,10 +105,11 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateAppearsOnSecondPageView(Page page, String slot) {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
 
+    vuap.waitForVideoStart();
     vuap.togglePause();
     double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
     ads.refreshPage();
