@@ -20,6 +20,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private static final long MAX_MOVIE_DURATION = 40L;
   private static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
   private static final int MOBILE_VIDEO_TRIGGER_AREA = 3;
+  private static final int REDIRECT_AREA_TRIGGER = 1; // DESKTOP & MOBILE
 
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
@@ -30,7 +31,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    videoFanTakeover.play();
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
     videoFanTakeover.waitForVideoStart();
     videoFanTakeover.waitForVideoPlayerHidden();
   }
@@ -44,7 +45,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject page = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, page);
 
-    videoFanTakeover.clickOnArea(1);
+    videoFanTakeover.clickOnArea(REDIRECT_AREA_TRIGGER);
     Assert.assertTrue(page.tabContainsUrl(FandomAdsDataProvider.AD_REDIRECT_URL));
   }
 
@@ -57,7 +58,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    videoFanTakeover.play();
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
     videoFanTakeover.close();
     videoFanTakeover.waitForVideoPlayerHidden();
   }
@@ -74,7 +75,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     videoFanTakeover.waitForAdToLoad();
     double imageHeight = videoFanTakeover.getAdSlotHeight();
 
-    videoFanTakeover.play();
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
     videoFanTakeover.waitForVideoStart();
 
     double videoHeight = videoFanTakeover.getVideoHeightWhilePaused();
@@ -107,7 +108,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     vuap.togglePause();
     double firstPause = vuap.getCurrentTime();
 
-    vuap.play();
+    vuap.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
     TimeUnit.SECONDS.sleep(1);
     vuap.togglePause();
     double currentTime = vuap.getCurrentTime();
@@ -129,7 +130,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    videoFanTakeover.play();
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
     TimeUnit.SECONDS.sleep(2);
     videoFanTakeover.togglePause();
     double time = videoFanTakeover.getCurrentTime();
@@ -153,7 +154,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
     videoFanTakeover.waitForAdToLoad();
-    videoFanTakeover.clickOnArea(3);
+    videoFanTakeover.clickOnArea(MOBILE_VIDEO_TRIGGER_AREA);
     videoFanTakeover.waitForVideoPlayerHidden();
   }
 
@@ -171,7 +172,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
     videoFanTakeover.waitForAdToLoad();
 
-    videoFanTakeover.clickOnArea(1);
+    videoFanTakeover.clickOnArea(REDIRECT_AREA_TRIGGER);
     Assert.assertTrue(fandomPage.tabContainsUrl(FandomAdsDataProvider.AD_REDIRECT_URL));
   }
 
