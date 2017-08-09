@@ -64,7 +64,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
+          groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom", "X"}
   )
   public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
