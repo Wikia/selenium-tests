@@ -73,7 +73,7 @@ public class VuapAssertions {
     Assert.assertEquals(adSlotHeight, adSlotHeightAfterVideoClose);
   }
 
-  public static boolean isVideoAdBiggerThanImageAdOasis(double videoHeight, double imageHeight) {
+  public static boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
     int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
   }

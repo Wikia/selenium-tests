@@ -68,7 +68,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
   )
   public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
     videoFanTakeover.waitForAdToLoad();
@@ -78,7 +78,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     videoFanTakeover.waitForVideoStart();
 
     double videoHeight = videoFanTakeover.getVideoHeightWhilePaused();
-    Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAdOasis(videoHeight, imageHeight));
+    Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAd(videoHeight, imageHeight));
 
     videoFanTakeover.waitForVideoPlayerHidden();
     VuapAssertions.verifyVideoAdSize(
@@ -197,7 +197,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom"}
   )
   public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.PHONE);
     AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
 
     networkTrafficInterceptor.startIntercepting();
