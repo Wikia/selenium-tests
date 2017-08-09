@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -102,18 +101,6 @@ public class AutoplayVuap {
     }
   }
 
-  public void playVideoFor(Duration duration) {
-    play();
-
-    try {
-      Thread.sleep(duration.toMillis());
-    } catch (InterruptedException x) {
-      // ignore this exception
-    }
-
-    togglePause();
-  }
-
   private boolean isPausedWithOverlay() {
     return isVideoPaused() && driver.findElement(pauseOverlaySelector).isDisplayed();
   }
@@ -147,30 +134,18 @@ public class AutoplayVuap {
   }
 
   public void closeWithJS() {
-    new JavascriptActions(driver).execute(
-        "arguments[0].click();",
-        driver.findElement(closeButtonSelector)
-    );
+    clickByJS(closeButtonSelector);
   }
 
-  public void clickOnClickArea2() {
-    clickElementInsideAd(By.cssSelector(AD_TNG_CLICK_AREA_2_SELECTOR));
-  }
-
-  public void clickOnClickArea4() {
-    clickElementInsideAd(By.cssSelector(AD_TNG_CLICK_AREA_4_SELECTOR));
-  }
-
-  public void clickOnAdImageResolvedState() {
-    clickElementInsideAd(By.cssSelector(AD_RESOLVED_STATE_IMAGE_SELECTOR));
+  private void clickByJS(By selector) {
+    new JavascriptActions(driver).execute("arguments[0].click();", driver.findElement(selector));
   }
 
   private void clickElementInsideAd(By selector) {
     usingAdFrame(() -> {
-      JavascriptActions jsActions = new JavascriptActions(driver);
       // It need to be clicked by JS, because our templates elements covers each other
       // and there is no way to click it by just .click()
-      jsActions.execute("arguments[0].click();", driver.findElement(selector));
+      clickByJS(selector);
     });
   }
 

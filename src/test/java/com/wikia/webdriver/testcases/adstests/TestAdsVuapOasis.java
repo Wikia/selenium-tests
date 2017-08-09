@@ -37,7 +37,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
-  public void vuapDefaultStateShouldProgressInTime(Page page, String slot) {
+  public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
@@ -55,7 +55,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
 
-    vuap.clickOnClickArea2();
+    vuap.clickOnArea(2);
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(AD_REDIRECT_URL), "Image should point to page on project43.");
@@ -70,7 +70,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 
     scrollToSlot(slot, ads);
-    vuap.clickOnClickArea4();
+    vuap.clickOnArea(4);
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
@@ -81,7 +81,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
-  public void vuapDefaultStateAutoplayIsMutedAfterReplayIsNotMuted(Page page, String slot) {
+  public void vuapDefaultStateAutoplayIsMutedAfterReplayIsNotMuted(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
@@ -140,7 +140,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapResolvedState"
   )
-  public void vuapResolvedStateShouldProgressInTime(Page page, String slot) {
+  public void vuapResolvedStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
@@ -161,7 +161,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     scrollToSlot(slot, ads);
     vuap.replay();
     vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_DURATION);
-    vuap.clickOnClickArea2();
+    vuap.clickOnArea(2);
 
     Assert.assertTrue(
         ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),
@@ -210,7 +210,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapResolvedState"
   )
-  public void vuapResolvedStateIsNotMuted(Page page, String slot) {
+  public void vuapResolvedStateIsNotMuted(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
 

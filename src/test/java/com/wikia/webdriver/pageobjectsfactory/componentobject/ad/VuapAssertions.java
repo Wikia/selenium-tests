@@ -2,7 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import org.testng.Assert;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class VuapAssertions {
 
@@ -14,26 +14,36 @@ public class VuapAssertions {
     throw new IllegalAccessError("Utility class");
   }
 
-  public static void verifyVideoUnmuteAndMute(final AutoplayVuap vuap) {
-    vuap.playVideoFor(Duration.ofSeconds(1));
+  public static void verifyVideoUnmuteAndMute(final AutoplayVuap vuap) throws InterruptedException {
+    vuap.play();
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
 
     vuap.mute();
-    vuap.playVideoFor(Duration.ofSeconds(1));
+    vuap.play();
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
     Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
 
     vuap.unmute();
-    vuap.playVideoFor(Duration.ofSeconds(1));
+    vuap.play();
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
     Assert.assertTrue(vuap.isUnmuted(), "Video should be unmuted.");
 
     vuap.mute();
-    vuap.playVideoFor(Duration.ofSeconds(1));
+    vuap.play();
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
     Assert.assertTrue(vuap.isMuted(), "Video should be muted.");
   }
 
-  public static void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) {
+  public static void verifyVideoTimeIsProgressing(final AutoplayVuap vuap) throws InterruptedException {
     vuap.togglePause();
     final double startProgressBarWidth = vuap.getProgressBarWidth();
-    vuap.playVideoFor(Duration.ofSeconds(2));
+    vuap.play();
+    TimeUnit.SECONDS.sleep(3);
+    vuap.togglePause();
 
     Assert.assertTrue(startProgressBarWidth < vuap.getProgressBarWidth(), "Video time indicator should move.");
   }
