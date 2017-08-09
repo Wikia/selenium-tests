@@ -66,7 +66,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
-          groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
+          groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom", "X"}
   )
   public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
     AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
@@ -108,8 +108,8 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     vuap.togglePause();
     double firstPause = vuap.getCurrentTime();
 
-    vuap.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
-    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
+    TimeUnit.SECONDS.sleep(3);
     vuap.togglePause();
     double currentTime = vuap.getCurrentTime();
 
