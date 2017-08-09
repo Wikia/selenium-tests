@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -41,8 +40,6 @@ public class AutoplayVuap {
   // #TOP_LEADERBOARD .close-ad
   private static final String CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
-  private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
-  private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
   private final WikiaWebDriver driver;
 
   private final Wait wait;
@@ -292,10 +289,6 @@ public class AutoplayVuap {
 
   private boolean hasDesktopVideoElement() {
     return usingImaBridge(webDriver -> driver.findElements(By.cssSelector("video")).size() > 0);
-  }
-
-  public void waitForFirstQuartile(NetworkTrafficInterceptor networkTrafficInterceptor) {
-    wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
   }
 
   private By getVideoSelector() {

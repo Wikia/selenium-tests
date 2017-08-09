@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
@@ -19,7 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private static final long MAX_MOVIE_DURATION = 40L;
-  public static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
+  private static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
+  private static final int MOBILE_VIDEO_TRIGGER_AREA = 3;
 
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
@@ -120,7 +120,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     );
   }
 
-  @NetworkTrafficDump
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
           dataProvider = "vuapPage",
@@ -130,18 +129,15 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    networkTrafficInterceptor.startIntercepting();
-
     videoFanTakeover.play();
-    videoFanTakeover.waitForFirstQuartile(networkTrafficInterceptor);
+    TimeUnit.SECONDS.sleep(2);
     videoFanTakeover.togglePause();
     double time = videoFanTakeover.getCurrentTime();
 
     TimeUnit.SECONDS.sleep(3);
 
     Assert.assertNotEquals(0, videoFanTakeover.getCurrentTime(), "Video did not start");
-    Assert.assertEquals(time, videoFanTakeover.getCurrentTime(),
-            "Video did not togglePause");
+    Assert.assertEquals(time, videoFanTakeover.getCurrentTime(), "Video did not togglePause");
   }
 
   @InBrowser(
@@ -207,7 +203,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.PHONE);
     AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
 
-    playVideoAndCheckTimeProgressing(vuap, 3);
+    playVideoAndCheckTimeProgressing(vuap, MOBILE_VIDEO_TRIGGER_AREA);
   }
 
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage) {
