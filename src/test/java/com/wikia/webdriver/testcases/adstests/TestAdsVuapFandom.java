@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -196,7 +197,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom"}
   )
   public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
-    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
     AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
 
     networkTrafficInterceptor.startIntercepting();
