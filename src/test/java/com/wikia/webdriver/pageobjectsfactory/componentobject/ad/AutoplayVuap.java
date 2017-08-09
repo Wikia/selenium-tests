@@ -122,6 +122,18 @@ public class AutoplayVuap {
   }
 
   private Boolean isVideoPaused() {
+    return isDesktop() ? isDesktopVideoPaused() : isMobileVideoPaused();
+  }
+
+  private boolean isDesktop() {
+    return hasDesktopVideoElement();
+  }
+
+  private Boolean isMobileVideoPaused() {
+    return Boolean.valueOf(driver.findElement(getVideoSelector()).getAttribute("paused"));
+  }
+
+  private Boolean isDesktopVideoPaused() {
     return Boolean.valueOf(usingImaBridge(webDriver -> {
       final JavascriptActions js = new JavascriptActions();
 
@@ -267,16 +279,15 @@ public class AutoplayVuap {
   }
 
   public Double getCurrentTime() {
-    String result;
+    return isDesktop() ? getCurrentTimeDesktop() : getCurrentTimeMobile();
+  }
 
-    if (hasDesktopVideoElement()) {
-      result = usingVideoContext(video -> video.getAttribute("currentTime"));
-    } else {
-      // it doesn't work on mobile anyway, does it?
-      result = driver.findElement(getVideoSelector()).getAttribute("currentTime");
-    }
+  private Double getCurrentTimeMobile() {
+    return Double.parseDouble(driver.findElement(getVideoSelector()).getAttribute("currentTime"));
+  }
 
-    return Double.parseDouble(result);
+  private Double getCurrentTimeDesktop() {
+    return Double.parseDouble(usingVideoContext(video -> video.getAttribute("currentTime")));
   }
 
   private boolean hasDesktopVideoElement() {
@@ -285,10 +296,6 @@ public class AutoplayVuap {
 
   public void waitForFirstQuartile(NetworkTrafficInterceptor networkTrafficInterceptor) {
     wait.forSuccessfulResponse(networkTrafficInterceptor, URL_FIRSTQUARTILE);
-  }
-
-  public void waitForMidPoint(NetworkTrafficInterceptor networkTrafficInterceptor) {
-    wait.forSuccessfulResponse(networkTrafficInterceptor, URL_MIDPOINT);
   }
 
   private By getVideoSelector() {

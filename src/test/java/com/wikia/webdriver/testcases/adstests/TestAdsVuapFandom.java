@@ -15,11 +15,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private static final long MAX_MOVIE_DURATION = 40L;
+  public static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
 
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
@@ -96,13 +96,21 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   )
   public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
-    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
+    AutoplayVuap vuap = prepareSlot(slotName, fandomPage);
 
-    videoFanTakeover.playVideoFor(Duration.ofSeconds(1));
-    double firstPause = videoFanTakeover.getCurrentTime();
+    playVideoAndCheckTimeProgressing(vuap, DESKTOP_VIDEO_TRIGGER_AREA);
+  }
 
-    videoFanTakeover.playVideoFor(Duration.ofSeconds(1));
-    double currentTime = videoFanTakeover.getCurrentTime();
+  private void playVideoAndCheckTimeProgressing(AutoplayVuap vuap, int videoTriggerArea) throws InterruptedException {
+    vuap.clickOnArea(videoTriggerArea);
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
+    double firstPause = vuap.getCurrentTime();
+
+    vuap.play();
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
+    double currentTime = vuap.getCurrentTime();
 
     Assert.assertTrue(
             firstPause < currentTime,
@@ -186,7 +194,6 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     VuapAssertions.verifyVideoClosesAfterTapOnCloseButton(vuap);
   }
 
-  @NetworkTrafficDump
   @InBrowser(
           browser = Browser.CHROME,
           emulator = Emulator.GOOGLE_NEXUS_5
@@ -196,26 +203,11 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom"}
   )
-  public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) {
+  public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.PHONE);
     AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
 
-    networkTrafficInterceptor.startIntercepting();
-
-    vuap.clickOnArea(3);
-    vuap.waitForFirstQuartile(networkTrafficInterceptor);
-    double quartileWidth = vuap.getProgressBarWidth();
-
-    vuap.waitForMidPoint(networkTrafficInterceptor);
-    double midWidth = vuap.getProgressBarWidth();
-
-    Assert.assertTrue(
-        quartileWidth < midWidth,
-        String.format(
-            "Video time is not progressing, quartileTime %s is not smaller than midTime %s",
-            quartileWidth, midWidth
-        )
-    );
+    playVideoAndCheckTimeProgressing(vuap, 3);
   }
 
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage) {
