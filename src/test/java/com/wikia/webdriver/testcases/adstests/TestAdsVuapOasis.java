@@ -189,6 +189,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
   @Test(groups = {"AdsVuapResolvedState"},
       dataProviderClass = AdsDataProvider.class,
+
       dataProvider = "adsVuapResolvedState"
   )
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot) {

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
+
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -49,7 +51,6 @@ public class AutoplayVuap {
 
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
   private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
-
   private final WikiaWebDriver driver;
 
   private final Wait wait;
@@ -205,6 +206,10 @@ public class AutoplayVuap {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
 
+  public void waitForPrefooterNotVisible() {
+    waitFor(AutoplayVuap::isPrefooterNotVisible, MAX_PREFOOTERS_HIDE_DELAY);
+  }
+
   public void waitForVideoToStart(final long timeout) {
     waitFor(AutoplayVuap::isVisible, timeout);
   }
@@ -226,6 +231,30 @@ public class AutoplayVuap {
 
   private boolean isOverlayNoVisible() {
     return wait.forElementNotVisible(pauseOverlaySelector);
+  }
+
+  private void clickElement(final String selector) {
+    WebElement element = wait.forElementClickable(By.cssSelector(selector));
+    Actions builder = new Actions(driver);
+    builder.moveToElement(element)
+        .click(element)
+        .perform();
+  }
+
+  private WebElement findSpeakerIcon() {
+    return wait.forElementClickable(By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot)));
+  }
+
+  private WebElement findCloseButton() {
+    return wait.forElementClickable(By.cssSelector(String.format(CLSE_BUTTON_SELECTOR_FORMAT, slot)));
+  }
+
+  private boolean isOverlayNoVisible() {
+    return wait.forElementNotVisible(By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot)));
+  }
+
+  private boolean isPrefooterNotVisible() {
+    return wait.forElementNotVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTER_RIGHT)));
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
