@@ -117,7 +117,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
           dataProvider = "vuapPage",
           groups = {"AdsVuapFandomDesktop", "AdsVuapVideoPauseFandom"}
   )
-  public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName) {
+  public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName) throws InterruptedException {
     AdsFandomObject fandomPage = loadPage(pageName, pageType);
     AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
@@ -128,11 +128,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
     videoFanTakeover.togglePause();
     double time = videoFanTakeover.getCurrentTime();
 
-    try {
-      TimeUnit.SECONDS.sleep(3);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    TimeUnit.SECONDS.sleep(3);
 
     Assert.assertNotEquals(0, videoFanTakeover.getCurrentTime(), "Video did not start");
     Assert.assertEquals(time, videoFanTakeover.getCurrentTime(),

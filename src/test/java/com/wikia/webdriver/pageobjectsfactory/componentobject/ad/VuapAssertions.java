@@ -3,7 +3,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 import org.testng.Assert;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class VuapAssertions {
 
