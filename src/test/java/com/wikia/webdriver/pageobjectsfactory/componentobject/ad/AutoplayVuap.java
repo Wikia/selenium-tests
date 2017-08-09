@@ -1,7 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.ad;
 
 import com.google.common.base.Predicate;
-import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.WikiaWebDriver;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
@@ -27,8 +26,6 @@ public class AutoplayVuap {
   private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
 
-  private static final long MAX_PREFOOTERS_HIDE_DELAY = 5L;
-
   // #TOP_LEADERBOARD .pause-overlay
   private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
 
@@ -42,10 +39,7 @@ public class AutoplayVuap {
   private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
 
   // #TOP_LEADERBOARD .close-ad
-  private static final String
-      CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
-
-  private static final int EXPECTED_PERCENTAGE_DIFFERENCE_IN_VIDEO_AD_HEIGHT = 40;
+  private static final String CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
   private static final String URL_FIRSTQUARTILE = "ad_vast_point=firstquartile";
   private static final String URL_MIDPOINT = "ad_vast_point=midpoint";
@@ -204,10 +198,6 @@ public class AutoplayVuap {
     return usingVideoContext(video -> video.getAttribute("title"));
   }
 
-  public void waitForPrefooterNotVisible() {
-    waitFor(AutoplayVuap::isPrefooterNotVisible, MAX_PREFOOTERS_HIDE_DELAY);
-  }
-
   public void waitForVideoToStart(final long timeout) {
     waitFor(AutoplayVuap::isVisible, timeout);
   }
@@ -229,10 +219,6 @@ public class AutoplayVuap {
 
   private boolean isOverlayNoVisible() {
     return wait.forElementNotVisible(pauseOverlaySelector);
-  }
-
-  private boolean isPrefooterNotVisible() {
-    return wait.forElementNotVisible(By.cssSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTER_RIGHT)));
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
