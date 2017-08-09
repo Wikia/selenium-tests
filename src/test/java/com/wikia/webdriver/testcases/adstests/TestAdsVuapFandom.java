@@ -77,17 +77,10 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
 
     videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
     videoFanTakeover.waitForVideoStart();
-
+    videoFanTakeover.togglePause();
     double videoHeight = videoFanTakeover.getVideoHeightWhilePaused();
-    Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAd(videoHeight, imageHeight));
 
-    videoFanTakeover.waitForVideoPlayerHidden();
-    VuapAssertions.verifyVideoAdSize(
-        videoFanTakeover,
-        videoHeight,
-        imageHeight,
-        MAX_MOVIE_DURATION
-    );
+    Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAd(videoHeight, imageHeight));
   }
 
   @Test(
