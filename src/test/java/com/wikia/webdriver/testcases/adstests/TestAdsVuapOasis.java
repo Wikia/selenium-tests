@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
@@ -102,12 +103,12 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState"},
+    groups = {"AdsVuapResolvedState", "X"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
   public void vuapResolvedStateAppearsOnSecondPageView(Page page, String slot) throws InterruptedException {
-    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
 
