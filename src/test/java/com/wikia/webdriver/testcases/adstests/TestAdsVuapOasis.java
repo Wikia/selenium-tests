@@ -11,6 +11,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 @Test(groups = "AdsVuapOasis")
 public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
@@ -104,7 +106,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
-  public void vuapResolvedStateAppearsOnSecondPageView(Page page, String slot) {
+  public void vuapResolvedStateAppearsOnSecondPageView(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     scrollToSlot(slot, ads);
@@ -114,6 +116,8 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
     ads.refreshPage();
     vuap.replay();
+    vuap.waitForVideoStart();
+    TimeUnit.SECONDS.sleep(2);
     vuap.togglePause();
     double resolvedVideoHeight = vuap.getVideoHeightWhilePaused();
 
