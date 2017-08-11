@@ -142,7 +142,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     );
   }
 
-  @NetworkTrafficDump(useMITM = true)
+  @NetworkTrafficDump()
   @Test(groups = "AdsTrackingVelesPageWithEmptyVastTracked")
   public void adsTrackingVelesPageWithEmptyVastTracked() {
     Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
