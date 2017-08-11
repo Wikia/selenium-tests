@@ -52,7 +52,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForBothSlots"})
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTrackedForBothSlots"})
   public void adsTrackingVelesTrackedForBothSlots() {
     networkTrafficInterceptor.startIntercepting();
     testVeles(
@@ -62,7 +62,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForIncontent"})
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTrackedForIncontent"})
   public void adsTrackingVelesTrackedForIncontent() {
     networkTrafficInterceptor.startIntercepting();
 
@@ -73,7 +73,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForLeaderboard"})
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTrackedForLeaderboard"})
   public void adsTrackingVelesTrackedForLeaderboard() {
     networkTrafficInterceptor.startIntercepting();
 
@@ -84,7 +84,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTimeoutErrorTracked"})
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTimeoutErrorTracked"})
   public void adsTrackingVelesTimeoutErrorTracked() {
     Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
         .put(
@@ -103,7 +103,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesPageWithEmptyVastTracked"})
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesPageWithEmptyVastTracked"})
   public void adsTrackingVelesPageWithEmptyVastTracked() {
     Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
         .build();
