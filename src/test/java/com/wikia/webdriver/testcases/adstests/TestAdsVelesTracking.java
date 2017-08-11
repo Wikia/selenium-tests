@@ -34,16 +34,10 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   public static final String VELES_TRACKING_PRICE_PARAMETER = "bidder_8";
 
-  @NetworkTrafficDump()
-  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForBothSlots"})
-  public void adsTrackingVelesTrackedForBothSlots() {
-    networkTrafficInterceptor.startIntercepting();
-
+  private void testVeles(String urlFragment, Map<String, String> positionsAndPrices) {
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
-        new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM)
+        new Page("project43", urlFragment)
     ));
-
-    Map<String, String> positionsAndPrices = buildPositionsAndPrices("20.00", "20.00");
 
     Set<HarEntry> entries = findEntriesByUrlPart(
         pageObject,
@@ -54,6 +48,16 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     Assertion.assertTrue(
         wasVelesTrackedIn(entries, positionsAndPrices),
         "Veles should be tracked only in " + positionsAndPrices
+    );
+  }
+
+  @NetworkTrafficDump()
+  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForBothSlots"})
+  public void adsTrackingVelesTrackedForBothSlots() {
+    networkTrafficInterceptor.startIntercepting();
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("20.00", "20.00")
     );
   }
 
@@ -62,21 +66,9 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   public void adsTrackingVelesTrackedForIncontent() {
     networkTrafficInterceptor.startIntercepting();
 
-    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
-        new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM)
-    ));
-
-    Map<String, String> positionsAndPrices = buildPositionsAndPrices("NOT_INVOLVED", "20.00");
-
-    Set<HarEntry> entries = findEntriesByUrlPart(
-        pageObject,
-        VELES_TRACKING_REQUEST_PART,
-        positionsAndPrices
-    );
-
-    Assertion.assertTrue(
-        wasVelesTrackedIn(entries, positionsAndPrices),
-        "Veles should be tracked only in " + positionsAndPrices
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("NOT_INVOLVED", "20.00")
     );
   }
 
@@ -84,19 +76,10 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForLeaderboard"})
   public void adsTrackingVelesTrackedForLeaderboard() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
-        new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM)
-    ));
-    Map<String, String> positionsAndPrices = buildPositionsAndPrices("20.00", "NOT_INVOLVED");
-    Set<HarEntry> entries = findEntriesByUrlPart(
-        pageObject,
-        VELES_TRACKING_REQUEST_PART,
-        positionsAndPrices
-    );
 
-    Assertion.assertTrue(
-        wasVelesTrackedIn(entries, positionsAndPrices),
-        "Veles should be tracked only in " + positionsAndPrices
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("20.00", "NOT_INVOLVED")
     );
   }
 
@@ -112,23 +95,10 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     mockResponses(mockRules);
 
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
-        new Page(
-            "project43",
-            "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM
-        )
-    ));
-    Map<String, String> positionsAndPrices = buildPositionsAndPrices("", "");
 
-    Set<HarEntry> entries = findEntriesByUrlPart(
-        pageObject,
-        VELES_TRACKING_REQUEST_PART,
-        positionsAndPrices
-    );
-
-    Assertion.assertTrue(
-        wasVelesTrackedIn(entries, positionsAndPrices),
-        "Veles should be tracked only in " + positionsAndPrices
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("", "")
     );
   }
 
@@ -141,21 +111,9 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
     networkTrafficInterceptor.startIntercepting();
 
-    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
-        new Page("project43", "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM)
-    ));
-
-    Map<String, String> positionsAndPrices = buildPositionsAndPrices("0.00");
-
-    Set<HarEntry> entries = findEntriesByUrlPart(
-        pageObject,
-        VELES_TRACKING_REQUEST_PART,
-        positionsAndPrices
-    );
-
-    Assertion.assertTrue(
-        wasVelesTrackedIn(entries, positionsAndPrices),
-        "Veles should be tracked only in " + positionsAndPrices
+    testVeles(
+        "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("0.00")
     );
   }
 
