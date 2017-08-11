@@ -1,16 +1,21 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import static java.util.stream.Collectors.toSet;
+
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.DefaultHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -20,12 +25,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
-
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpVersion;
 
 public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
@@ -43,10 +42,8 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
         new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM)
     ));
-    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
-        .put(AdsContent.TOP_LB, "20.00")
-        .put(AdsContent.INCONTENT_PLAYER, "20.00")
-        .build();
+
+    Map<String, String> positionsAndPrices = buildPositionsAndPrices("20.00", "20.00");
 
     Set<HarEntry> entries = findEntriesByUrlPart(
         pageObject,
@@ -64,13 +61,12 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForIncontent"})
   public void adsTrackingVelesTrackedForIncontent() {
     networkTrafficInterceptor.startIntercepting();
+
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
         new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM)
     ));
-    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
-        .put(AdsContent.TOP_LB, "NOT_INVOLVED")
-        .put(AdsContent.INCONTENT_PLAYER, "20.00")
-        .build();
+
+    Map<String, String> positionsAndPrices = buildPositionsAndPrices("NOT_INVOLVED", "20.00");
 
     Set<HarEntry> entries = findEntriesByUrlPart(
         pageObject,
@@ -91,11 +87,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
         new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM)
     ));
-    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
-        .put(AdsContent.TOP_LB, "20.00")
-        .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
-        .build();
-
+    Map<String, String> positionsAndPrices = buildPositionsAndPrices("20.00", "NOT_INVOLVED");
     Set<HarEntry> entries = findEntriesByUrlPart(
         pageObject,
         VELES_TRACKING_REQUEST_PART,
@@ -126,10 +118,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
             "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM
         )
     ));
-    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
-        .put(AdsContent.TOP_LB, "")
-        .put(AdsContent.INCONTENT_PLAYER, "")
-        .build();
+    Map<String, String> positionsAndPrices = buildPositionsAndPrices("", "");
 
     Set<HarEntry> entries = findEntriesByUrlPart(
         pageObject,
@@ -156,9 +145,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
         new Page("project43", "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM)
     ));
 
-    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
-        .put(AdsContent.TOP_LB, "0.00")
-        .build();
+    Map<String, String> positionsAndPrices = buildPositionsAndPrices("0.00");
 
     Set<HarEntry> entries = findEntriesByUrlPart(
         pageObject,
@@ -170,6 +157,20 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
         wasVelesTrackedIn(entries, positionsAndPrices),
         "Veles should be tracked only in " + positionsAndPrices
     );
+  }
+
+  private ImmutableMap<String, String> buildPositionsAndPrices(String leaderboardPrice) {
+    return ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, leaderboardPrice)
+        .build();
+  }
+
+  private ImmutableMap<String, String> buildPositionsAndPrices(String leaderboardPrice,
+                                                               String incontentPrice) {
+      return ImmutableMap.<String, String>builder()
+          .put(AdsContent.TOP_LB, leaderboardPrice)
+          .put(AdsContent.INCONTENT_PLAYER, incontentPrice)
+          .build();
   }
 
   private void mockResponses(Map<String, DefaultHttpResponse> mockRules) {
