@@ -33,6 +33,9 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   public static final String VELES_TRACKING_PRICE_PARAMETER = "bidder_8";
 
+  private static final String DEFAULT_VELES_PRICE = "20.00";
+  private static final String NOT_INVOLVED_VELES_MARK = "NOT_INVOLVED";
+
   private void testVeles(String urlFragment, Map<String, String> positionsAndPrices) {
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
         new Page("project43", urlFragment)
@@ -56,7 +59,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     testVeles(
         "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM,
-        buildPositionsAndPrices("20.00", "20.00")
+        buildPositionsAndPrices(DEFAULT_VELES_PRICE, DEFAULT_VELES_PRICE)
     );
   }
 
@@ -67,7 +70,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
     testVeles(
         "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM,
-        buildPositionsAndPrices("NOT_INVOLVED", "20.00")
+        buildPositionsAndPrices(NOT_INVOLVED_VELES_MARK, DEFAULT_VELES_PRICE)
     );
   }
 
@@ -78,7 +81,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
     testVeles(
         "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM,
-        buildPositionsAndPrices("20.00", "NOT_INVOLVED")
+        buildPositionsAndPrices(DEFAULT_VELES_PRICE, NOT_INVOLVED_VELES_MARK)
     );
   }
 
