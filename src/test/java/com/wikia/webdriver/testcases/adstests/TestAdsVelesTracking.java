@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.DefaultHttpResponse;
