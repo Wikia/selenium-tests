@@ -1,11 +1,15 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
+
+import com.google.common.collect.ImmutableMap;
 import io.netty.handler.codec.http.DefaultHttpResponse;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.http.NameValuePair;
@@ -19,6 +23,10 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
+
 public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   public static final String VELES_TRACKING_REQUEST_PART = "adengadinfo";
@@ -28,33 +36,139 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   public static final String VELES_TRACKING_PRICE_PARAMETER = "bidder_8";
 
   @NetworkTrafficDump()
-  @Test(
-      groups = "AdsTrackingVeles",
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVelesTracking"
-  )
-  public void adsTrackingVelesTracked(final Page page, final Map<String, String> positionsAndPrices) {
+  @Test(groups = "AdsTrackingVelesTrackedForBothSlots")
+  public void adsTrackingVelesTrackedForBothSlots() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
+        new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM)
+    ));
+    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, "20.00")
+        .put(AdsContent.INCONTENT_PLAYER, "20.00")
+        .build();
 
-    Set<HarEntry> entries = findEntriesByUrlPart(pageObject, VELES_TRACKING_REQUEST_PART, positionsAndPrices);
+    Set<HarEntry> entries = findEntriesByUrlPart(
+        pageObject,
+        VELES_TRACKING_REQUEST_PART,
+        positionsAndPrices
+    );
 
-    Assertion.assertTrue(wasVelesTrackedIn(entries, positionsAndPrices), "Veles should be tracked only in " + positionsAndPrices);
+    Assertion.assertTrue(
+        wasVelesTrackedIn(entries, positionsAndPrices),
+        "Veles should be tracked only in " + positionsAndPrices
+    );
+  }
+
+  @NetworkTrafficDump()
+  @Test(groups = "AdsTrackingVelesTrackedForIncontent")
+  public void adsTrackingVelesTrackedForIncontent() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
+        new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM)
+    ));
+    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, "NOT_INVOLVED")
+        .put(AdsContent.INCONTENT_PLAYER, "20.00")
+        .build();
+
+    Set<HarEntry> entries = findEntriesByUrlPart(
+        pageObject,
+        VELES_TRACKING_REQUEST_PART,
+        positionsAndPrices
+    );
+
+    Assertion.assertTrue(
+        wasVelesTrackedIn(entries, positionsAndPrices),
+        "Veles should be tracked only in " + positionsAndPrices
+    );
+  }
+
+  @NetworkTrafficDump()
+  @Test(groups = "AdsTrackingVelesTrackedForLeaderboard")
+  public void adsTrackingVelesTrackedForLeaderboard() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
+        new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM)
+    ));
+    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, "20.00")
+        .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
+        .build();
+
+    Set<HarEntry> entries = findEntriesByUrlPart(
+        pageObject,
+        VELES_TRACKING_REQUEST_PART,
+        positionsAndPrices
+    );
+
+    Assertion.assertTrue(
+        wasVelesTrackedIn(entries, positionsAndPrices),
+        "Veles should be tracked only in " + positionsAndPrices
+    );
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsTrackingVeles", "AdsTrackingVelesErrors"},
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVelesErrorTracking"
-  )
-  public void adsTrackingVelesErrorTracked(
-    final Page page,
-    final Map<String, String> positionsAndPrices,
-    final Map<String, DefaultHttpResponse> mockRules
-  ) {
+  @Test(groups = "AdsTrackingVelesTimeoutErrorTracked")
+  public void adsTrackingVelesTimeoutErrorTracked() {
+    Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
+        .put(
+            ".*output=vast.*",
+            new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT)
+        )
+        .build();
     mockResponses(mockRules);
-    adsTrackingVelesTracked(page, positionsAndPrices);
+
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
+        new Page(
+            "project43",
+            "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM
+        )
+    ));
+    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, "")
+        .put(AdsContent.INCONTENT_PLAYER, "")
+        .build();
+
+    Set<HarEntry> entries = findEntriesByUrlPart(
+        pageObject,
+        VELES_TRACKING_REQUEST_PART,
+        positionsAndPrices
+    );
+
+    Assertion.assertTrue(
+        wasVelesTrackedIn(entries, positionsAndPrices),
+        "Veles should be tracked only in " + positionsAndPrices
+    );
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(groups = "AdsTrackingVelesPageWithEmptyVastTracked")
+  public void adsTrackingVelesPageWithEmptyVastTracked() {
+    Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
+        .build();
+    mockResponses(mockRules);
+
+    networkTrafficInterceptor.startIntercepting();
+
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
+        new Page("project43", "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM)
+    ));
+
+    Map<String, String> positionsAndPrices = ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, "0.00")
+        .build();
+
+    Set<HarEntry> entries = findEntriesByUrlPart(
+        pageObject,
+        VELES_TRACKING_REQUEST_PART,
+        positionsAndPrices
+    );
+
+    Assertion.assertTrue(
+        wasVelesTrackedIn(entries, positionsAndPrices),
+        "Veles should be tracked only in " + positionsAndPrices
+    );
   }
 
   private void mockResponses(Map<String, DefaultHttpResponse> mockRules) {
