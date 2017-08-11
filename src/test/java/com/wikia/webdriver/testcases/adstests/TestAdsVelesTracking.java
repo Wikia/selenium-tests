@@ -36,9 +36,10 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   public static final String VELES_TRACKING_PRICE_PARAMETER = "bidder_8";
 
   @NetworkTrafficDump()
-  @Test(groups = "AdsTrackingVelesTrackedForBothSlots")
+  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForBothSlots"})
   public void adsTrackingVelesTrackedForBothSlots() {
     networkTrafficInterceptor.startIntercepting();
+
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
         new Page("project43", "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM)
     ));
@@ -60,7 +61,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = "AdsTrackingVelesTrackedForIncontent")
+  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForIncontent"})
   public void adsTrackingVelesTrackedForIncontent() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
@@ -84,7 +85,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = "AdsTrackingVelesTrackedForLeaderboard")
+  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTrackedForLeaderboard"})
   public void adsTrackingVelesTrackedForLeaderboard() {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
@@ -108,7 +109,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = "AdsTrackingVelesTimeoutErrorTracked")
+  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesTimeoutErrorTracked"})
   public void adsTrackingVelesTimeoutErrorTracked() {
     Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
         .put(
@@ -143,7 +144,7 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
   }
 
   @NetworkTrafficDump()
-  @Test(groups = "AdsTrackingVelesPageWithEmptyVastTracked")
+  @Test(groups = {"AdsTrackingVelesOasis", "AdsTrackingVelesPageWithEmptyVastTracked"})
   public void adsTrackingVelesPageWithEmptyVastTracked() {
     Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
         .build();
