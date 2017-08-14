@@ -12,6 +12,9 @@ import org.testng.annotations.Test;
 
 public class TestCorrelatorDFP extends TemplateNoFirstLoad {
 
+  private static final String WIKIA = "project43";
+  private static final String HOME_PAGE = "Project43_Wikia";
+
   String correlatorDesktop = "_adtest,home,gpt";
   String correlatorMobile = "_adtest,home,mobile";
 
@@ -20,7 +23,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   @Execute(onWikia = "project43")
   public void correlatorIDInQueryStringShouldBeTheSameOasis() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
-    new HomePage().open();
+    urlBuilder.getUrlForPage(WIKIA, HOME_PAGE);
     networkTrafficInterceptor.logDFP(correlatorDesktop);
   }
 
@@ -33,7 +36,7 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   @Execute(onWikia = "project43")
   public void correlatorIDInQueryStringShouldBeTheSameMercury() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
-    new HomePage().open();
+    urlBuilder.getUrlForPage(WIKIA, HOME_PAGE);
     networkTrafficInterceptor.logDFP(correlatorMobile);
   }
 }
