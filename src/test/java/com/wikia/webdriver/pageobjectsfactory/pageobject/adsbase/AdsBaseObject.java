@@ -773,4 +773,12 @@ public class AdsBaseObject extends WikiBasePageObject {
       page.waitForAdInSlot(creativeId, slotName);
     }
   }
+
+  /**
+   * Iframe finder for oasis slots
+   * WARNING: it's able to find only first call result!
+   */
+  public By findFirstIframeWithAd(String slotName) {
+    return By.cssSelector("#" + slotName + " iframe[title='3rd party ad content']");
+  }
 }

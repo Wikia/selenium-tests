@@ -27,14 +27,14 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
   @Test(groups = "AdsVuapDefaultStateTimeProgressOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
-  public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
+  public void vuapDefaultStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) throws InterruptedException {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
   }
 
-  @Test(groups = "AdsVuapDefaultStateClickOasis",
+  @Test(groups = {"AdsVuapDefaultStateClickOasis"},
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
   public void vuapDefaultStateShouldHaveLinkToFandomOnImage(Page page, String slot, String videoIframeSelector) {
@@ -42,7 +42,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
     final AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
-    vuap.clickOnAdImageResolvedState();
+    vuap.clickOnArea(1);
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
@@ -51,7 +51,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
   @Test(groups = "AdsVuapDefaultStateMuteOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
-  public void vuapDefaultStateShouldMute(Page page, String slot, String videoIframeSelector) {
+  public void vuapDefaultStateShouldMute(Page page, String slot, String videoIframeSelector) throws InterruptedException {
     new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
@@ -95,7 +95,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
   @Test(groups = "AdsVuapResolvedStateTimeProgressOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
-  public void vuapResolvedStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) {
+  public void vuapResolvedStateShouldProgressInTime(Page page, String slot, String videoIframeSelector) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
@@ -115,7 +115,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
 
     ads.refreshPage();
 
-    vuap.clickOnAdImageResolvedState();
+    vuap.clickOnArea(1);
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(expected), "Image should point to page on fandom.");
@@ -124,7 +124,7 @@ public class TestAdsVuapResolvedState extends TemplateNoFirstLoad {
   @Test(groups = "AdsVuapResolvedStateMuteOasis",
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateDesktop")
-  public void vuapResolvedStateShouldMute(Page page, String slot, String videoIframeSelector) {
+  public void vuapResolvedStateShouldMute(Page page, String slot, String videoIframeSelector) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page), WindowSize.DESKTOP);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, videoIframeSelector);
 
