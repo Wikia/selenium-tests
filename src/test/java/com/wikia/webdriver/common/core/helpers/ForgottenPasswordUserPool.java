@@ -10,12 +10,12 @@ public class ForgottenPasswordUserPool {
   private static final Credentials CREDENTIALS = Configuration.getCredentials();
 
   @Getter
-  private UserWithEmail user1 = new UserWithEmail(User.FORGOTTEN_PASSWORD,
+  private UserWithEmail user = new UserWithEmail(User.FORGOTTEN_PASSWORD,
     CREDENTIALS.forgottenPasswordEmail1Address,
     CREDENTIALS.forgottenPasswordEmail1Password);
 
   @Getter
-  private UserWithEmail user2 = new UserWithEmail(User.FORGOTTEN_PASSWORD_SPACES,
+  private UserWithEmail userWithSpaces = new UserWithEmail(User.FORGOTTEN_PASSWORD_SPACES,
     CREDENTIALS.forgottenPasswordEmail2Address,
     CREDENTIALS.forgottenPasswordEmail2Password);
 
