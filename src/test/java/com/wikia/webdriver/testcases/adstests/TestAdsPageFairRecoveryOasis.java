@@ -2,8 +2,6 @@ package com.wikia.webdriver.testcases.adstests;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
 
@@ -19,15 +17,23 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 768);
 
+  private static final String WIKIA = "arecovery";
+  private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
+  private static final String INSTART_LOGIC_SWITCHED_OFF = "InstantGlobals.wgAdDriverInstartLogicRecoveryCountries=[ZZ]";
+  private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF = "InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[ZZ]";
+  private static final String INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON = "InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]";
+
+  private static final String RECOVERY_ARTICLE = WIKIA_ARTICLE + "?" + INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF +
+      "&" + INSTART_LOGIC_SWITCHED_OFF + "&" + INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON;
+
+
+
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsRecoveryPageFairOasis",
       groups = "AdsRecoveryPageFairOasis"
   )
-  public void adsRecoveryPageFairOasis(Page page) {
-    String url = urlBuilder.getUrlForPage(page);
+  public void adsRecoveryPageFairOasis() {
+    String url = urlBuilder.getUrlForPath(WIKIA, RECOVERY_ARTICLE);
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
-    adsRecoveryObject.refreshPageAddingCacheBuster();
 
     // when PF recovered ad is on page, inserts span elements as a direct children of body
     adsRecoveryObject.wait.forElementPresent(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
@@ -42,28 +48,23 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsRecoveryPageFairOasis",
       groups = "AdsRecoveryNoAdblockPageFairOasis"
   )
-  public void adsRecoveryNoAdblockPageFairOasis(Page page) {
-    String url = urlBuilder.getUrlForPage(page);
+  public void adsRecoveryNoAdblockPageFairOasis() {
+    System.out.println(RECOVERY_ARTICLE);
+    String url = urlBuilder.getUrlForPath(WIKIA, RECOVERY_ARTICLE);
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
-    adsRecoveryObject.refreshPageAddingCacheBuster();
 
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(4);
   }
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsRecoveryPageFairOasis",
       groups = "AdsRecoveryLoggedInPageFairOasis"
   )
   @Execute(asUser = User.USER_2)
-  public void adsRecoveryLoggedInPageFairOasis(Page page) {
-    String url = urlBuilder.getUrlForPage(page);
+  public void adsRecoveryLoggedInPageFairOasis() {
+    String url = urlBuilder.getUrlForPath(WIKIA, RECOVERY_ARTICLE);
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
-    adsRecoveryObject.refreshPageAddingCacheBuster();
 
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(0);
   }
