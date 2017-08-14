@@ -19,8 +19,8 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   private ForgottenPasswordUserPool userPool = new ForgottenPasswordUserPool();
-  private UserWithEmail user = userPool.user1;
-  private UserWithEmail userWithSpaces = userPool.user2;
+  private UserWithEmail user = userPool.getUser1();
+  private UserWithEmail userWithSpaces = userPool.getUser2();
 
   @BeforeMethod
   @AfterMethod
