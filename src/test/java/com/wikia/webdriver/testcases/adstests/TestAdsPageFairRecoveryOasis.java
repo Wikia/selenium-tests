@@ -51,7 +51,6 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryNoAdblockPageFairOasis"
   )
   public void adsRecoveryNoAdblockPageFairOasis() {
-    System.out.println(RECOVERY_ARTICLE);
     String url = urlBuilder.getUrlForPath(WIKIA, RECOVERY_ARTICLE);
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
