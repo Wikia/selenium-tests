@@ -4,7 +4,7 @@ package com.wikia.webdriver.common.core.helpers;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
 public final class ForgottenPasswordUserFactory {
 
@@ -13,13 +13,10 @@ public final class ForgottenPasswordUserFactory {
   }
 
   @Builder
+  @Value
   public static class ForgottenPasswordUser {
     private User user;
-
-    @Getter
     private String email;
-
-    @Getter
     private String emailPassword;
 
     public String getUsername() {
@@ -31,7 +28,7 @@ public final class ForgottenPasswordUserFactory {
     }
   }
 
-  private static Credentials credentials = Configuration.getCredentials();
+  private static final Credentials CREDENTIALS = Configuration.getCredentials();
 
   private static ForgottenPasswordUser user(User user, String email, String password) {
     return ForgottenPasswordUser.builder()
@@ -44,14 +41,14 @@ public final class ForgottenPasswordUserFactory {
   public static ForgottenPasswordUser user1() {
     return user(
       User.FORGOTTEN_PASSWORD,
-      credentials.forgottenPasswordEmail1Address,
-      credentials.forgottenPasswordEmail1Password);
+      CREDENTIALS.forgottenPasswordEmail1Address,
+      CREDENTIALS.forgottenPasswordEmail1Password);
   }
 
   public static ForgottenPasswordUser user2() {
     return user(
       User.FORGOTTEN_PASSWORD_SPACES,
-      credentials.forgottenPasswordEmail2Address,
-      credentials.forgottenPasswordEmail2Password);
+      CREDENTIALS.forgottenPasswordEmail2Address,
+      CREDENTIALS.forgottenPasswordEmail2Password);
   }
 }
