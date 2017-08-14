@@ -19,7 +19,6 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
 
   @Test(groups = "DFPCorrelatorOasis")
   @NetworkTrafficDump
-  @Execute(onWikia = "project43")
   public void correlatorIDInQueryStringShouldBeTheSameOasis() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
     urlBuilder.getUrlForPage(WIKIA, HOME_PAGE);
@@ -32,7 +31,6 @@ public class TestCorrelatorDFP extends TemplateNoFirstLoad {
   )
   @Test(groups = "DFPCorrelatorMercury")
   @NetworkTrafficDump
-  @Execute(onWikia = "project43")
   public void correlatorIDInQueryStringShouldBeTheSameMercury() {
     networkTrafficInterceptor.startIntercepting("DFPCorrelator");
     urlBuilder.getUrlForPage(WIKIA, HOME_PAGE);
