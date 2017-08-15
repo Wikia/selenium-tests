@@ -6,10 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -22,19 +19,19 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
   @FindBy(css = ".result")
   private List<WebElement> searchResultList;
-  @FindBy(css = ".Results > :nth-child(1)")
+  @FindBy(css = ".Results > :nth-child(1), .top-community-content")
   private WebElement firstResult;
-  @FindBy(css = ".Results > :nth-child(1) > .result-description > :nth-child(2)")
+  @FindBy(css = ".Results > :nth-child(1) > .result-description > :nth-child(2), .top-community-topic")
   private WebElement firstResultVertical;
-  @FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(1)")
+  @FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(1), .top-community-stats > :nth-child(1)")
   private WebElement firstResultStatisticsPageCount;
-  @FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(2)")
+  @FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(2), .top-community-stats > :nth-child(2)")
   private WebElement firstResultStatisticsPageImages;
-  @FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3)")
+  @FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3), .top-community-stats > :nth-child(3)")
   private WebElement firstResultStatisticsPageVideos;
-  @FindBy(css = ".Results > :nth-child(1) .result-description > .description")
+  @FindBy(css = ".Results > :nth-child(1) .result-description > .description, .top-community-text")
   private WebElement firstResultDescription;
-  @FindBy(css = ".results-wrapper i")
+  @FindBy(css = ".results-wrapper i, .no-results")
   private WebElement noResultsCaption;
   @FindBy(css = ".wikiPromoteThumbnail")
   private List<WebElement> thumbnails;
@@ -46,6 +43,10 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   private List<WebElement> statisticsImages;
   @FindBy(css = ".wiki-statistics>li:nth-child(3)")
   private List<WebElement> statisticsVideos;
+  @FindBy(css = ".other-communities-link a")
+  private WebElement otherCommunitiesLink;
+
+  private By otherCommunitiesLinkBy = By.cssSelector(".other-communities-link a");
 
   public CrossWikiSearchPageObject(WebDriver driver) {
     super(driver);
@@ -74,6 +75,12 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     searchInput.clear();
     searchInput.sendKeys(term + Keys.ENTER);
     PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
+    return this;
+  }
+
+  public CrossWikiSearchPageObject navigateToWikiResults() {
+    wait.forElementVisible(otherCommunitiesLink);
+    otherCommunitiesLink.click();
     return this;
   }
 
@@ -173,12 +180,19 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
   public void verifyNoPagination() {
     wait.forElementNotPresent(paginationContainerBy);
     PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
-                          true);
+        true);
+  }
+
+  public void verifyNoCommunitiesLink() {
+    wait.forElementNotPresent(otherCommunitiesLinkBy);
+    PageObjectLogging.log("verifyNoCommunitiesLink", "other communities link is not visible",
+        true);
   }
 
   public void verifyNoResultsCaption() {
     wait.forElementVisible(noResultsCaption);
-    Assertion.assertEquals(noResultsCaption.getText(), "No results found.");
+    String caption = noResultsCaption.getText();
+    Assertion.assertTrue(caption.contains("No results found.") || caption.contains("no matches"));
     PageObjectLogging.log("verifyNoResultsCaption", "verified no results caption",
                           true);
   }
