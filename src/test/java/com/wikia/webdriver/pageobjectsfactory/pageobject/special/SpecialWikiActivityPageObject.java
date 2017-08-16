@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SpecialWikiActivityPageObject extends SpecialPageObject {
@@ -145,7 +143,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
     for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
       Activity activity;
-      activity = new ActivityPageFactory(activityWebElementSubList.get(i), creators).createActivityPage();
+      activity = new ActivityPageFactory().createActivityPage();
 
       activityList.add(activity);
     }
