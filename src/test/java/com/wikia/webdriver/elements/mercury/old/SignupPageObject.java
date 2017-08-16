@@ -62,21 +62,21 @@ public class SignupPageObject {
   }
 
   private SignupPageObject typeEmailAddress(String email) {
-    safelySetValue(signupEmail, email);
+    setValue(signupEmail, email);
     return this;
   }
 
   private SignupPageObject typeUsername(String username) {
-    safelySetValue(signupUsername, username);
+    setValue(signupUsername, username);
     return this;
   }
 
   private SignupPageObject typePassword(String password) {
-    safelySetValue(signupPassword, password);
+    setValue(signupPassword, password);
     return this;
   }
 
-  private void safelySetValue(WebElement input, String value) {
+  private void setValue(WebElement input, String value) {
     wait.forElementVisible(input).click();
     input.clear();
     input.sendKeys(value);
@@ -89,9 +89,9 @@ public class SignupPageObject {
     wait.forElementVisible(signupBirthdate);
     signupBirthdate.click();
 
-    safelySetValue(signupBirthMonth, month);
-    safelySetValue(signupBirthDay, day);
-    safelySetValue(signupBirthYear, year);
+    setValue(signupBirthMonth, month);
+    setValue(signupBirthDay, day);
+    setValue(signupBirthYear, year);
 
     return this;
   }
