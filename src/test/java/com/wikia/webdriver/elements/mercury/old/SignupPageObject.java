@@ -3,7 +3,6 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
-import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
@@ -80,27 +79,22 @@ public class SignupPageObject {
     return this;
   }
 
+  private void safelySetValue(WebElement input, String value) {
+    wait.forElementVisible(input).click();
+    input.clear();
+    input.sendKeys(value);
+    PageObjectLogging.log("Set value",
+      String.format("value of input identified by: %s set to %s",
+        input.getCssValue("class"), value), true);
+  }
+
   private SignupPageObject typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
     signupBirthdate.click();
 
-    wait.forElementVisible(signupBirthMonth);
-    signupBirthMonth.click();
-    signupBirthMonth.clear();
-    signupBirthMonth.sendKeys(month);
-    PageObjectLogging.log("Set month value", String.format("value set to %s", month), true);
-
-    wait.forElementVisible(signupBirthDay);
-    signupBirthDay.click();
-    signupBirthDay.clear();
-    signupBirthDay.sendKeys(day);
-    PageObjectLogging.log("Set day value", String.format("value set to %s", day), true);
-
-    wait.forElementVisible(signupBirthYear);
-    signupBirthYear.click();
-    signupBirthYear.clear();
-    signupBirthYear.sendKeys(year);
-    PageObjectLogging.log("Set year value", String.format("value set to %s", year), true);
+    safelySetValue(signupBirthMonth, month);
+    safelySetValue(signupBirthDay, day);
+    safelySetValue(signupBirthYear, year);
 
     return this;
   }
