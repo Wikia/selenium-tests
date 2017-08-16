@@ -64,7 +64,9 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   }
 
   private String articlePageFairRecoveryUrl() {
-    return String.format("%s?%s&%s&%s", WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF,
-        INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
+    String instartLogicSwitchedOffUrl = urlBuilder.appendQueryStringToURL(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF);
+    String pageFairSwitchedOnUrl = urlBuilder.appendQueryStringToURL(instartLogicSwitchedOffUrl, INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON);
+
+    return urlBuilder.appendQueryStringToURL(pageFairSwitchedOnUrl, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
   }
 }
