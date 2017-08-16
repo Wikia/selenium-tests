@@ -28,7 +28,6 @@ public class WikiActivityTests extends NewTestTemplate {
 
   Credentials credentials = Configuration.getCredentials();
 
-  @Test(groups = "WikiActivity_001")
   @Execute(asUser = User.STAFF)
   public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
     new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
@@ -45,7 +44,6 @@ public class WikiActivityTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "WikiActivity_002")
   @Execute(asUser = User.STAFF)
   public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
     new ArticleContent().clear();
@@ -58,7 +56,6 @@ public class WikiActivityTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "WikiActivity_003")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
@@ -79,7 +76,6 @@ public class WikiActivityTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "WikiActivity_004")
   @Execute(asUser = User.STAFF)
   public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
     new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
@@ -97,7 +93,6 @@ public class WikiActivityTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "WikiActivity_005")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_005_newEditionWoVisualChangeNotRecordedOnActivityModule() {
     new ArticleContent().push("content");
@@ -115,7 +110,6 @@ public class WikiActivityTests extends NewTestTemplate {
     );
   }
 
-  @Test(groups = "WikiActivity_006")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_006_clickingTitleRedirectsToArticle() {
     new ArticleContent().push("content");
@@ -130,7 +124,6 @@ public class WikiActivityTests extends NewTestTemplate {
     Assertion.assertEquals(articleName, title);
   }
 
-  @Test(groups = "WikiActivity_007")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_007_clickingUserRedirectsToUserPage() {
     new ArticleContent().push("content");
@@ -148,7 +141,6 @@ public class WikiActivityTests extends NewTestTemplate {
     Assertion.assertEquals(currentUserName, expectedUserName);
   }
 
-  @Test(groups = "WikiActivity_008")
   @Execute(asUser = User.USER)
   public void WikiActivityTests_008_clickingIconNextToArticleRedirectsToDiff() {
     new ArticleContent().push("content");
