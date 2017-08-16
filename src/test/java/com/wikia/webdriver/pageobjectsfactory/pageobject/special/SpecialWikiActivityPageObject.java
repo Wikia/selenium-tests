@@ -150,7 +150,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       Activity activity;
       List<ActivityPageCreator> creators = Arrays.asList(
               new EditActivityPageCreator(),
-              new NewActivityPageCreator(),
+              new NewPageActivityPageCreator(),
               new CategorizationActivityPageCreator(),
               new WallPostActivityPageCreator()
       );
