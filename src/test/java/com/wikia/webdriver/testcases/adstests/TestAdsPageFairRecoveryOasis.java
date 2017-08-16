@@ -27,7 +27,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryPageFairOasis"
   )
   public void adsRecoveryPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, articlePageFairRecoveryUrl());
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     // when PF recovered ad is on page, inserts span elements as a direct children of body
@@ -46,7 +46,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryNoAdblockPageFairOasis"
   )
   public void adsRecoveryNoAdblockPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, articlePageFairRecoveryUrl());
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(4);
@@ -57,16 +57,16 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   )
   @Execute(asUser = User.USER_2)
   public void adsRecoveryLoggedInPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, articlePageFairRecoveryUrl());
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(0);
   }
 
-  private String articlePageFairRecoveryUrl() {
-    String instartLogicSwitchedOffUrl = urlBuilder.appendQueryStringToURL(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF);
-    String pageFairSwitchedOnUrl = urlBuilder.appendQueryStringToURL(instartLogicSwitchedOffUrl, INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON);
+  private String getUrlArticlePageFairRecovery() {
+    String url = urlBuilder.appendQueryStringToURL(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF);
+    url = urlBuilder.appendQueryStringToURL(url, INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON);
 
-    return urlBuilder.appendQueryStringToURL(pageFairSwitchedOnUrl, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
+    return urlBuilder.appendQueryStringToURL(url, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
   }
 }
