@@ -29,7 +29,7 @@ public class WikiActivityTests extends NewTestTemplate {
   Credentials credentials = Configuration.getCredentials();
 
   @Execute(asUser = User.STAFF)
-  public void WikiActivityTests_001_newEditionIsRecordedOnActivityModule() {
+  public void articleEditionIsRecordedInWikiActivity() {
     new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
     ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
@@ -45,7 +45,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  public void WikiActivityTests_002_newPageCreationIsRecordedOnActivityModule() {
+  public void newPageCreationIsRecordedInWikiActivity() {
     new ArticleContent().clear();
     new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
     String articleName = new ArticlePageObject().open().getArticleName();
@@ -57,7 +57,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_003_newBlogCreationIsRecordedOnActivityModule() {
+  public void newBlogCreationIsRecordedInWikiActivity() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     UserProfilePage userProfile =
@@ -77,7 +77,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF)
-  public void WikiActivityTests_004_newCategorizationIsRecordedOnActivityModule() {
+  public void newCategorizationIsRecordedInWikiActivity() {
     new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
     ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
@@ -94,7 +94,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_005_newEditionWoVisualChangeNotRecordedOnActivityModule() {
+  public void articleEditWithoutVisualChangeIsNotRecordedInWikiActivity() {
     new ArticleContent().push("content");
     ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
@@ -111,7 +111,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_006_clickingTitleRedirectsToArticle() {
+  public void clickingTitleRedirectsToArticle() {
     new ArticleContent().push("content");
     SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
     activityPage.open();
@@ -125,7 +125,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_007_clickingUserRedirectsToUserPage() {
+  public void clickingUsernameRedirectsToUserPage() {
     new ArticleContent().push("content");
     new ArticleContent().push("content_after_edition");
 
@@ -142,7 +142,7 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER)
-  public void WikiActivityTests_008_clickingIconNextToArticleRedirectsToDiff() {
+  public void clickingIconNextToArticleRedirectsToDiff() {
     new ArticleContent().push("content");
     new ArticleContent().push("content_after_edition");
 
