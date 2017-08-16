@@ -6,6 +6,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import javax.swing.text.html.HTML;
+import java.util.Arrays;
+
 
 public class Activity extends BasePageObject {
 
@@ -15,11 +18,20 @@ public class Activity extends BasePageObject {
   private By wallOwner = By.cssSelector(".wall-owner");
   private By description = By.cssSelector("table");
 
-
   private WebElement entry;
+  private ActivityType type;
 
   public Activity(WebElement activityWebElement) {
     this.entry = activityWebElement;
+    this.type = getTypeFromEntry();
+  }
+
+  private ActivityType getTypeFromEntry() {
+    String cssClass = entry.getAttribute(HTML.Attribute.CLASS.toString());
+    return Arrays.stream(ActivityType.values())
+      .filter(type -> cssClass.contains(type.getCssType()))
+      .findAny()
+      .orElseThrow(() -> new RuntimeException(String.format("Activity type cannot be matched for element: %s", cssClass)));
   }
 
   private WebElement getTitleLink() {
