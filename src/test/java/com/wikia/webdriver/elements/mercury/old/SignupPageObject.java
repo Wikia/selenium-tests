@@ -62,20 +62,17 @@ public class SignupPageObject {
   }
 
   private SignupPageObject typeEmailAddress(String email) {
-    wait.forElementVisible(signupEmail);
-    signupEmail.sendKeys(email);
+    safelySetValue(signupEmail, email);
     return this;
   }
 
   private SignupPageObject typeUsername(String username) {
-    wait.forElementVisible(signupUsername);
-    signupUsername.sendKeys(username);
+    safelySetValue(signupUsername, username);
     return this;
   }
 
   private SignupPageObject typePassword(String password) {
-    wait.forElementVisible(signupPassword);
-    signupPassword.sendKeys(password);
+    safelySetValue(signupPassword, password);
     return this;
   }
 
