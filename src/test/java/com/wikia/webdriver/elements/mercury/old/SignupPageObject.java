@@ -86,16 +86,19 @@ public class SignupPageObject {
 
     wait.forElementVisible(signupBirthMonth);
     signupBirthMonth.click();
+    signupBirthMonth.clear();
     signupBirthMonth.sendKeys(month);
     PageObjectLogging.log("Set month value", String.format("value set to %s", month), true);
 
     wait.forElementVisible(signupBirthDay);
     signupBirthDay.click();
+    signupBirthDay.clear();
     signupBirthDay.sendKeys(day);
     PageObjectLogging.log("Set day value", String.format("value set to %s", day), true);
 
     wait.forElementVisible(signupBirthYear);
     signupBirthYear.click();
+    signupBirthYear.clear();
     signupBirthYear.sendKeys(year);
     PageObjectLogging.log("Set year value", String.format("value set to %s", year), true);
 
