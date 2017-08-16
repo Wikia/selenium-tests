@@ -1,23 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 public class WallPostActivity extends Activity {
 
+  @FindBy(css = "a.activityfeed-diff")
   private WebElement diffLink;
-  private WebElement activityDescriptionTextBox;
 
-  public WallPostActivity(WebDriver driver, WebElement parentElement) {
-    super(driver, parentElement);
-
-    By diffButtonSelector = By.cssSelector("a.activityfeed-diff");
-    diffLink = parentElement.findElement(diffButtonSelector);
-    By articleDescriptionTextBoxSelector = By.cssSelector("tbody td:nth-child(2) p:nth-child(2)");
-    activityDescriptionTextBox = parentElement.findElement(articleDescriptionTextBoxSelector);
-  }
+  @FindBy(css = "tbody td:nth-child(2) p:nth-child(2)")
+  private WebElement activityDescription;
 
   public void showChanges() {
     wait.forElementClickable(diffLink);
@@ -25,6 +18,6 @@ public class WallPostActivity extends Activity {
   }
 
   public String getActivityDescription() {
-    return activityDescriptionTextBox.getText();
+    return activityDescription.getText();
   }
 }

@@ -4,9 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.api.ArticleContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.EditActivity;
@@ -23,10 +21,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+
 @Test(groups = "activityFeeds-wikiActivity")
 public class WikiActivityTests extends NewTestTemplate {
-
-  Credentials credentials = Configuration.getCredentials();
 
   @Execute(asUser = User.STAFF)
   public void articleEditionIsRecordedInWikiActivity() {
@@ -61,7 +58,7 @@ public class WikiActivityTests extends NewTestTemplate {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     UserProfilePage userProfile =
-        new WikiBasePageObject().openProfilePage(credentials.userName, wikiURL);
+        new WikiBasePageObject().openProfilePage(User.USER.getUserName(), wikiURL);
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);

@@ -1,24 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 public class CategorizationActivity extends Activity {
 
+  @FindBy(css = "a.activityfeed-diff")
   private WebElement diffLink;
-  private WebElement activityDescriptionTextBox;
 
-  public CategorizationActivity(WebDriver driver, WebElement parentElement) {
-    super(driver, parentElement);
-
-    By diffButtonSelector = By.cssSelector("a.activityfeed-diff");
-    diffLink = parentElement.findElement(diffButtonSelector);
-    By articleDescription = By.cssSelector("tr[data-type=inserted-category]");
-    activityDescriptionTextBox = parentElement.findElement(articleDescription);
-
-  }
+  @FindBy(css = "tr[data-type=inserted-category]")
+  private WebElement activityDescription;
 
   public void showChanges() {
     wait.forElementClickable(diffLink);
@@ -26,6 +18,6 @@ public class CategorizationActivity extends Activity {
   }
 
   public String getActivityDescription(){
-    return activityDescriptionTextBox.getText();
+    return activityDescription.getText();
   }
 }
