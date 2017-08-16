@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 
@@ -85,14 +86,17 @@ public class SignupPageObject {
     wait.forElementVisible(signupBirthMonth);
     signupBirthMonth.click();
     signupBirthMonth.sendKeys(month);
+    PageObjectLogging.logInfo(String.format("Set month value to %s", month));
 
     wait.forElementVisible(signupBirthDay);
     signupBirthDay.click();
     signupBirthDay.sendKeys(day);
+    PageObjectLogging.logInfo(String.format("Set day value to %s", month));
 
     wait.forElementVisible(signupBirthYear);
     signupBirthYear.click();
     signupBirthYear.sendKeys(year);
+    PageObjectLogging.logInfo(String.format("Set year value to %s", month));
 
     return this;
   }
