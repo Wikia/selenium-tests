@@ -9,6 +9,10 @@ public class NewPageActivity extends Activity {
   @FindBy(css = "tbody tr:first-child")
   private WebElement activityDescription;
 
+  public NewPageActivity(WebElement activityEntry) {
+    super(activityEntry);
+  }
+
   public String getActivityDescription() {
     return activityDescription.getText();
   }

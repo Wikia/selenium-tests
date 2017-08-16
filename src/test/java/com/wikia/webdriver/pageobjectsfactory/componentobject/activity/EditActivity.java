@@ -11,6 +11,10 @@ public class EditActivity extends Activity {
   @FindBy(css = "a.activityfeed-diff")
   private WebElement diffLink;
 
+  public EditActivity(WebElement activityEntry) {
+    super(activityEntry);
+  }
+
   public DiffPagePageObject showChanges() {
     scrollAndClick(diffLink);
     return new DiffPagePageObject(driver);

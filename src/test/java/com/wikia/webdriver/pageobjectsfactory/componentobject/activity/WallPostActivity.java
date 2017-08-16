@@ -12,4 +12,7 @@ public class WallPostActivity extends Activity {
   @FindBy(css = "tbody td:nth-child(2) p:nth-child(2)")
   private WebElement activityDescription;
 
+  public WallPostActivity(WebElement activityEntry) {
+    super(activityEntry);
+  }
 }

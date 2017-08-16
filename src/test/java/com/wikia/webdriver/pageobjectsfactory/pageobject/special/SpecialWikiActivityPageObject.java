@@ -18,16 +18,18 @@ import java.util.List;
 
 public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
-  @FindBys(@FindBy(css = "li[class*=\"activity-type\"]"))
-  private List<WebElement> activityWebElementList;
   @FindBys(@FindBy(css = ".activityfeed > li"))
   private List<WebElement> activitiesList;
+
   @FindBys(@FindBy(css = "li.activity-type-edit"))
   private List<WebElement> editActivitiesList;
+
   @FindBys(@FindBy(css = "li.activity-type-new"))
   private List<WebElement> newPageActivitiesList;
+
   @FindBys(@FindBy(css = "li.activity-type-categorization"))
   private List<WebElement> categorizationActivitiesList;
+
   @FindBys(@FindBy(css = "li.activity-type-talk.activity-ns-1201"))
   private List<WebElement> wallPostActivitiesList;
 
@@ -133,13 +135,13 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     List<Activity> activityList = new ArrayList<>();
     //numberOfActivitiesToFetch set to max number of possible elements to fetch
     int numberOfActivitiesToFetch;
-    if (!activityWebElementList.isEmpty()){
-      numberOfActivitiesToFetch = numberOfActivities > activityWebElementList.size()
-              ? activityWebElementList.size() : numberOfActivities;
+    if (!activitiesList.isEmpty()){
+      numberOfActivitiesToFetch = numberOfActivities > activitiesList.size()
+              ? activitiesList.size() : numberOfActivities;
     } else{
       throw new NoSuchElementException("No activities found, populate a list before fetching.");
     }
-    List<WebElement> activityWebElementSubList = activityWebElementList.subList(0, numberOfActivitiesToFetch);
+    List<WebElement> activityWebElementSubList = activitiesList.subList(0, numberOfActivitiesToFetch);
 
     for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
       Activity activity;
@@ -149,7 +151,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
               new CategorizationActivityPageCreator(),
               new WallPostActivityPageCreator()
       );
-      activity = new ActivityPageFactory(driver, activityWebElementSubList.get(i), creators).createActivityPage();
+      activity = new ActivityPageFactory(activityWebElementSubList.get(i), creators).createActivityPage();
 
       activityList.add(activity);
     }
