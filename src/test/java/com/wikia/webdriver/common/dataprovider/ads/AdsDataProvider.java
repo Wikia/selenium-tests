@@ -893,15 +893,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryPageFairOasis() {
-    return new Object[][]{
-        {
-            new Page("arecovery", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]"),
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
