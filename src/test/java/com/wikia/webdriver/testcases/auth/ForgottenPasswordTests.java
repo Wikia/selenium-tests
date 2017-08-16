@@ -1,7 +1,8 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.EmailUtils;
-import com.wikia.webdriver.common.core.helpers.ForgottenPasswordUserFactory;
+import com.wikia.webdriver.common.core.helpers.ForgottenPasswordUserPool;
+import com.wikia.webdriver.common.core.helpers.UserWithEmail;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ResetPasswordPage;
@@ -17,8 +18,9 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 @Test(groups = "auth-forgottenPassword")
 public class ForgottenPasswordTests extends NewTestTemplate {
 
-  private ForgottenPasswordUserFactory.ForgottenPasswordUser user = ForgottenPasswordUserFactory.user1();
-  private ForgottenPasswordUserFactory.ForgottenPasswordUser userWithSpaces = ForgottenPasswordUserFactory.user2();
+  private ForgottenPasswordUserPool userPool = new ForgottenPasswordUserPool();
+  private UserWithEmail user = userPool.getUser();
+  private UserWithEmail userWithSpaces = userPool.getUserWithSpaces();
 
   @BeforeMethod
   @AfterMethod
@@ -64,7 +66,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 
-  private void executeResetPasswordFlow(ForgottenPasswordUserFactory.ForgottenPasswordUser user) {
+  private void executeResetPasswordFlow(UserWithEmail user) {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     DetachedSignInPage loginModal = new DetachedSignInPage(new NavigationBar(driver).clickOnSignIn());
