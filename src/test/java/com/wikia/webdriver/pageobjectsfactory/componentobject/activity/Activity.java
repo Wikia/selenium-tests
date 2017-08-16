@@ -1,8 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -34,32 +33,24 @@ public class Activity extends BasePageObject {
       .orElseThrow(() -> new RuntimeException(String.format("Activity type cannot be matched for element: %s", cssClass)));
   }
 
-  private WebElement getTitleLink() {
+  public WebElement getTitleLink() {
     return entry.findElement(titleLink);
   }
 
-  public String getTitle() {
-    return getTitleLink().getText();
-  }
-
-  public ArticlePageObject clickOnTitle() {
-    scrollAndClick(getTitleLink());
-    return new ArticlePageObject();
-  }
-
-  private WebElement getUserLink() {
+  public WebElement getUserLink() {
     return entry.findElement(userLink);
   }
 
-  public String getUser(){
-    return getUserLink().getText();
+  public WebElement getDiffLink() {
+    return entry.findElement(diffLink);
   }
 
-  public UserProfilePage clickOnUserLink() {
-    scrollAndClick(getUserLink());
-    return new UserProfilePage();
+  public WebElement getWallOwner() {
+    return entry.findElement(wallOwner);
   }
 
-
+  public WebElement getDescription() {
+    return entry.findElement(description);
+  }
 
 }
