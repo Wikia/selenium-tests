@@ -124,8 +124,8 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement headerWhereIsMyExtensionPage;
   @FindBy(css = "#globalNavigation")
   protected WebElement newGlobalNavigation;
-  @FindBy(css = "#mw-content-text .wikia-button-facebook")
-  protected WebElement formConnectWithFbButtonBasic;
+  @FindBy(css = "#facebook-connect-button")
+  protected WebElement facebookConnectButton;
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
@@ -682,7 +682,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void verifyFBButtonVisible() {
-    Assertion.assertTrue(isElementOnPage(formConnectWithFbButtonBasic));
+    Assertion.assertTrue(isElementOnPage(facebookConnectButton));
   }
 
   public void verifyAvatarVisible() {
