@@ -24,6 +24,6 @@ public class ActivityPageFactory {
       throw new IllegalArgumentException("Type of activity was not recognized");
     }
     ActivityPageCreator creator = creators.stream().filter(c -> c.match(activityClass)).findAny().get();
-    return creator.createPage(driver, activity);
+    return creator.createPage(activity);
   }
 }

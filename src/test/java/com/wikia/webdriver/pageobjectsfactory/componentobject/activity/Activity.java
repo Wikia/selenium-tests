@@ -3,17 +3,16 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import lombok.Getter;
+import org.openqa.selenium.By;
 
 
 public class Activity extends BasePageObject {
 
-
-  @FindBy(css = "span.subtle > a")
-  private WebElement userLink;
-  @FindBy(css = "a.title")
-  private WebElement titleLink;
+  @Getter
+  private By userLink = By.cssSelector("span.subtle > a");
+  @Getter
+  private By titleLink = By.cssSelector("a.title");
 
   public String getTitle() {
     return titleLink.getText();

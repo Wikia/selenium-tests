@@ -8,7 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityP
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.creators.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -35,10 +34,6 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   By entryTitleBy = By.cssSelector("strong a");
   By wallThreadAuthorBy = By.cssSelector(".wallfeed tr:first-child .real-name");
   By wallThreadMainContentBy = By.cssSelector(".wallfeed tr:first-child p:nth-child(2)");
-
-  public SpecialWikiActivityPageObject(WebDriver driver) {
-    super();
-  }
 
   public SpecialWikiActivityPageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())

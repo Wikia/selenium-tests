@@ -12,12 +12,4 @@ public class CategorizationActivity extends Activity {
   @FindBy(css = "tr[data-type=inserted-category]")
   private WebElement activityDescription;
 
-  public void showChanges() {
-    wait.forElementClickable(diffLink);
-    diffLink.click();
-  }
-
-  public String getActivityDescription(){
-    return activityDescription.getText();
-  }
 }
