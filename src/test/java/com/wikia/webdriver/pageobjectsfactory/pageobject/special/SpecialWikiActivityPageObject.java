@@ -145,12 +145,6 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 
     for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
       Activity activity;
-      List<ActivityPageCreator> creators = Arrays.asList(
-              new EditActivityPageCreator(),
-              new NewPageActivityPageCreator(),
-              new CategorizationActivityPageCreator(),
-              new WallPostActivityPageCreator()
-      );
       activity = new ActivityPageFactory(activityWebElementSubList.get(i), creators).createActivityPage();
 
       activityList.add(activity);
