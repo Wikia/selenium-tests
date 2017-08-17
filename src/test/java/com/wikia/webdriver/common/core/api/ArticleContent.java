@@ -115,7 +115,7 @@ public class ArticleContent extends ApiCall {
 
   public void push(String text, String articleTitle) {
     getEditToken(articleTitle);
-    URL_STRING = baseURL + articleTitle + "&text=" + text + "&token=" + editToken;
+    URL_STRING = baseURL + articleTitle + "&text=" + text + "&summary=SUMMARY_QM" + "&token=" + editToken;
     call();
   }
 
