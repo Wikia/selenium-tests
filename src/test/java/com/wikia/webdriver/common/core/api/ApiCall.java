@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -49,7 +50,7 @@ public abstract class ApiCall {
     try {
       URL url = new URL(getURL());
       CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
-      HttpPost httpPost = getHtppPost(url);
+      HttpPost httpPost = getHttpPost(url);
       // set header
       if (getUser() != null) {
         httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser()));
@@ -74,8 +75,13 @@ public abstract class ApiCall {
     }
   }
 
-  public static HttpPost getHtppPost(URL url) throws URISyntaxException {
+  public static HttpPost getHttpPost(URL url) throws URISyntaxException {
     return new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
+        url.getPath(), url.getQuery(), url.getRef()));
+  }
+
+  public static HttpGet getHttpGet(URL url) throws URISyntaxException {
+    return new HttpGet(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
         url.getPath(), url.getQuery(), url.getRef()));
   }
 }
