@@ -28,6 +28,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import java.net.URL;
 import java.util.Iterator;
 
+@lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
 
   private static String setupURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
@@ -38,9 +39,6 @@ public class ArticleContent extends ApiCall {
   private User user = User.STAFF;
   private String editToken;
   private static String EDIT_TOKEN_ERROR_MESSAGE = "Problem with edit token API call";
-
-  public ArticleContent() {
-  }
 
   /**
    * Push content, overriding a default user
