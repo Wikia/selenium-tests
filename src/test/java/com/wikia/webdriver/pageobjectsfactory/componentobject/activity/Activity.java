@@ -18,6 +18,8 @@ public class Activity extends BasePageObject {
   private By titleLink = By.cssSelector("a.title");
   private By diffLink = By.cssSelector("cite > a.activityfeed-diff");
   private By wallOwner = By.cssSelector(".wall-owner");
+  private By wallThreadAuthor = By.cssSelector(".wallfeed tr:first-child .real-name");
+  private By wallThreadContent = By.cssSelector(".wallfeed tr:first-child p:nth-child(2)");
   private By description = By.cssSelector("table");
 
   private WebElement entry;
@@ -62,6 +64,14 @@ public class Activity extends BasePageObject {
 
   public WebElement getWallOwner() {
     return entry.findElement(wallOwner);
+  }
+
+  public String getWallThreadAuthor() {
+    return entry.findElement(wallThreadAuthor).getText();
+  }
+
+  public String getWallThreadContent() {
+    return entry.findElement(wallThreadContent).getText();
   }
 
   public WebElement getDescription() {

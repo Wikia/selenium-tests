@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.EditActivity;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -18,8 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWikiActi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 
 @Test(groups = "activityFeeds-wikiActivity")
@@ -67,7 +64,7 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isNewBlogPostActivityDisplayed(blogContent, blogTitle, User.USER.getUserName()));
+      .isNewBlogPostActivityDisplayed(blogTitle, User.USER.getUserName(), blogContent));
   }
 
   @Execute(asUser = User.STAFF)
