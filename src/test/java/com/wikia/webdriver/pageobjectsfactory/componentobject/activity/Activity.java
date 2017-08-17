@@ -2,6 +2,9 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -18,6 +21,8 @@ public class Activity extends BasePageObject {
   private By description = By.cssSelector("table");
 
   private WebElement entry;
+
+  @Getter
   private ActivityType type;
 
   public Activity(WebElement activityWebElement) {
@@ -41,8 +46,18 @@ public class Activity extends BasePageObject {
     return entry.findElement(userLink);
   }
 
+  public UserProfilePage clickOnUserLink() {
+    getUserLink().click();
+    return new UserProfilePage();
+  }
+
   public WebElement getDiffLink() {
     return entry.findElement(diffLink);
+  }
+
+  public DiffPagePageObject clickOnDiffLink() {
+    getDiffLink().click();
+    return new DiffPagePageObject();
   }
 
   public WebElement getWallOwner() {
@@ -51,6 +66,18 @@ public class Activity extends BasePageObject {
 
   public WebElement getDescription() {
     return entry.findElement(description);
+  }
+
+  public boolean containsAuthor(String author) {
+    return getUserLink().getText().contains(author);
+  }
+
+  public boolean containsArticleName(String articleName) {
+    return getTitleLink().getText().replaceAll("_", " ").contains(articleName);
+  }
+
+  public boolean containsDescription(String description) {
+    return getDescription().getText().contains(description);
   }
 
 }

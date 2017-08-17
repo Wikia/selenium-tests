@@ -35,10 +35,9 @@ public class WikiActivityTests extends NewTestTemplate {
     visualEditMode.addContent(PageContent.ARTICLE_TEXT_EDIT);
     visualEditMode.submitArticle();
 
-    Assertion.assertTrue(
-            new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentActivitiesContain(5, articleName, User.STAFF.getUserName())
-    );
+    Assertion.assertTrue(new SpecialWikiActivityPageObject()
+      .open()
+      .isArticleEditionActivityDisplayed(articleName, User.STAFF.getUserName()));
   }
 
   @Execute(asUser = User.STAFF)
@@ -47,10 +46,9 @@ public class WikiActivityTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
     String articleName = new ArticlePageObject().open().getArticleName();
 
-    Assertion.assertTrue(
-            new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentActivitiesContain(5, articleName, User.STAFF.getUserName())
-    );
+    Assertion.assertTrue(new SpecialWikiActivityPageObject()
+      .open()
+      .isNewArticleActivityDisplayed(articleName, User.STAFF.getUserName()));
   }
 
   @Execute(asUser = User.USER)
@@ -67,10 +65,9 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertEquals(blogPage.getBlogTitle(), blogTitle);
 
-    Assertion.assertTrue(
-            new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentBlogActivitiesContain(5, blogContent, blogTitle, User.USER.getUserName())
-    );
+    Assertion.assertTrue(new SpecialWikiActivityPageObject()
+      .open()
+      .isNewBlogPostActivityDisplayed(blogContent, blogTitle, User.USER.getUserName()));
   }
 
   @Execute(asUser = User.STAFF)
@@ -84,10 +81,9 @@ public class WikiActivityTests extends NewTestTemplate {
     article.submitCategory();
     Assertion.assertTrue(article.isCategoryPresent(categoryName));
 
-    Assertion.assertTrue(
-            new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentActivitiesContain(5, articleName, User.STAFF.getUserName())
-    );
+    Assertion.assertTrue(new SpecialWikiActivityPageObject()
+      .open()
+      .isCategorizationActivityDisplayed(articleName, User.STAFF.getUserName()));
   }
 
   @Execute(asUser = User.USER)
@@ -101,24 +97,20 @@ public class WikiActivityTests extends NewTestTemplate {
     visualEditMode.addContent(articleContent);
     visualEditMode.submitArticle();
 
-    Assertion.assertFalse(
-            new SpecialWikiActivityPageObject(driver)
-                    .open().doesLastNRecentEditionsContain(2, articleName, User.USER.getUserName())
-    );
+    Assertion.assertFalse(new SpecialWikiActivityPageObject()
+      .open()
+      .isArticleEditionActivityDisplayed(articleName, User.USER.getUserName()));
   }
 
   @Execute(asUser = User.USER)
   public void clickingTitleRedirectsToArticle() {
     new ArticleContent().push("content");
-    SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
-    activityPage.open();
-    List<Activity> activityList = activityPage.getActivities(10);
+    Activity articleActivity = new SpecialWikiActivityPageObject().open().getMostRecentArticleActivity();
+    String title = articleActivity.getTitleLink().getText();
+    articleActivity.getTitleLink().click();
+    ArticlePageObject article = new ArticlePageObject();
 
-    String title = activityList.stream().findFirst().get().getTitle();
-    ArticlePageObject article = activityList.stream().findFirst().get().clickOnTitle();
-    String articleName = article.getArticleName();
-
-    Assertion.assertEquals(articleName, title);
+    Assertion.assertEquals(article.getArticleTitle(), title);
   }
 
   @Execute(asUser = User.USER)
@@ -126,16 +118,11 @@ public class WikiActivityTests extends NewTestTemplate {
     new ArticleContent().push("content");
     new ArticleContent().push("content_after_edition");
 
-    SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
-    activityPage.open();
-    List<Activity> activityList = activityPage.getActivities(10);
+    Activity articleActivity = new SpecialWikiActivityPageObject().open().getMostRecentArticleActivity();
+    String expectedUserName = articleActivity.getUserLink().getText();
+    UserProfilePage userPage = articleActivity.clickOnUserLink();
 
-    Activity chosenActivity = activityList.stream().findFirst().get();
-    String expectedUserName = chosenActivity.getUser();
-    UserProfilePage userPage = chosenActivity.clickOnUserLink();
-    String currentUserName = userPage.getUserName();
-
-    Assertion.assertEquals(currentUserName, expectedUserName);
+    Assertion.assertEquals(userPage.getUserName(), expectedUserName);
   }
 
   @Execute(asUser = User.USER)
@@ -143,15 +130,10 @@ public class WikiActivityTests extends NewTestTemplate {
     new ArticleContent().push("content");
     new ArticleContent().push("content_after_edition");
 
-    SpecialWikiActivityPageObject activityPage = new SpecialWikiActivityPageObject(driver);
-    activityPage.open();
-    List<Activity> activityList = activityPage.getActivities(10);
-    EditActivity editActivity = (EditActivity) activityList
-        .stream()
-        .filter(activity -> activity instanceof EditActivity)
-        .findFirst().get();
-
-    DiffPagePageObject diffPage = editActivity.showChanges();
+    DiffPagePageObject diffPage = new SpecialWikiActivityPageObject()
+      .open()
+      .getMostRecentEditActivity()
+      .clickOnDiffLink();
 
     Assertion.assertTrue(diffPage.isDiffTableVisible());
   }

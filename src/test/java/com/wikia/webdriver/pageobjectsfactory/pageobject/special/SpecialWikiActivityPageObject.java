@@ -3,15 +3,15 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityPageFactory;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.ActivityType;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SpecialWikiActivityPageObject extends SpecialPageObject {
@@ -35,11 +35,15 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   By wallThreadAuthorBy = By.cssSelector(".wallfeed tr:first-child .real-name");
   By wallThreadMainContentBy = By.cssSelector(".wallfeed tr:first-child p:nth-child(2)");
 
+  List<Activity> activities;
+
   public SpecialWikiActivityPageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
            + URLsContent.SPECIAL_WIKI_ACTIVITY);
 
     this.refreshPageAddingCacheBuster();
+    this.activities = new ActivityPageFactory(activitiesList).getActivities();
+
     return this;
   }
 
@@ -69,105 +73,45 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     Assertion.assertNotNull(result);
   }
 
-  public Boolean doesLastNRecentEditionsContain(int n, String articleName, String userName) {
-    Boolean ifPassed = false;
-
-    if(n < editActivitiesList.size()){
-      System.out.println(n);
-      System.out.println(editActivitiesList.size());
-      n = editActivitiesList.size();
-    }
-
-    for (int i = 0; i < n; i++) {
-      ifPassed = ifDetailsPresent(editActivitiesList.get(i), articleName, userName);
-      if (ifPassed == true) {
-        break;
-      }
-    }
-
-    return ifPassed;
+  public boolean isNewBlogPostActivityDisplayed(String blogPostContent, String blogPostName, String userName) {
+    return activities.stream()
+      .filter(activity -> activity.getType() == ActivityType.NEW_PAGE)
+      .filter(activity -> activity.containsArticleName(blogPostName))
+      .filter(activity -> activity.containsAuthor(userName))
+      .anyMatch(activity -> activity.containsDescription(blogPostContent));
   }
 
-  public Boolean doesLastNRecentActivitiesContain(int n, String articleName, String userName) {
-
-    if(n < editActivitiesList.size()){
-      n = editActivitiesList.size();
-    }
-
-    Boolean ifPassed = false;
-    for (int i = 0; i < n; i++) {
-      ifPassed = ifDetailsPresent(activitiesList.get(i), articleName, userName);
-      if (ifPassed == true) {
-        break;
-      }
-    }
-
-    return ifPassed;
+  public boolean isNewArticleActivityDisplayed(String articleName, String userName) {
+    return isArticleActivityDisplayedWithType(ActivityType.NEW_PAGE, articleName, userName);
   }
 
-  public Boolean doesLastNRecentBlogActivitiesContain(int n, String blogPostContent, String blogPostName,
-                                                      String userName) {
-
-    if(n < editActivitiesList.size()){
-      n = editActivitiesList.size();
-    }
-
-    Boolean ifPassed = false;
-    for (int i = 0; i < n; i++) {
-      ifPassed = ifNewBlogDetailsPresent(activitiesList.get(i), blogPostContent, blogPostName, userName);
-      if (ifPassed == true) {
-        break;
-      }
-    }
-
-    return ifPassed;
+  public boolean isCategorizationActivityDisplayed(String articleName, String userName) {
+    return isArticleActivityDisplayedWithType(ActivityType.CATEGORIZATION, articleName, userName);
   }
 
-  /**
-   * Gets activities from special page, limited by provided value
-   * @param numberOfActivities number of activities to fetch (counting from top)
-   * @return list of activities
-   */
-  public List<Activity> getActivities(int numberOfActivities) {
-
-    List<Activity> activityList = new ArrayList<>();
-    //numberOfActivitiesToFetch set to max number of possible elements to fetch
-    int numberOfActivitiesToFetch;
-    if (!activitiesList.isEmpty()){
-      numberOfActivitiesToFetch = numberOfActivities > activitiesList.size()
-              ? activitiesList.size() : numberOfActivities;
-    } else{
-      throw new NoSuchElementException("No activities found, populate a list before fetching.");
-    }
-    List<WebElement> activityWebElementSubList = activitiesList.subList(0, numberOfActivitiesToFetch);
-
-    for (int i = 0; i < numberOfActivitiesToFetch - 1; i++) {
-      Activity activity;
-      activity = new ActivityPageFactory().createActivityPage();
-
-      activityList.add(activity);
-    }
-    return activityList;
+  public boolean isArticleEditionActivityDisplayed(String articleName, String userName) {
+    return isArticleActivityDisplayedWithType(ActivityType.EDIT, articleName, userName);
   }
 
-  private Boolean ifDetailsPresent(WebElement webElement, String articleName,
-                                   String userName) {
-    boolean condition1 = webElement.findElement(By.cssSelector("strong a"))
-        .getText().replaceAll("_", " ").contains(articleName);
-    boolean condition2 = webElement.findElement(By.cssSelector("cite span a"))
-        .getText().contains(userName);
-    return (condition1 & condition2);
+  private boolean isArticleActivityDisplayedWithType(ActivityType type, String title, String author) {
+    return activities.stream()
+      .filter(activity -> activity.getType() == type)
+      .filter(activity -> activity.containsArticleName(title))
+      .anyMatch(activity -> activity.containsAuthor(author));
   }
 
-  private Boolean ifNewBlogDetailsPresent(WebElement webElement,
-                                          String blogContent, String blogTitle, String userName) {
-    boolean condition1 = ifDetailsPresent(webElement, "User blog:" + userName
-                                                      + "/" + blogTitle, userName);
-    boolean condition2 = webElement.findElement(By.cssSelector("td em"))
-        .getText().contains("New blog");
-    boolean condition3 = webElement
-        .findElement(By.cssSelector("td:nth-of-type(2)")).getText()
-        .contains(blogContent);
-    return (condition1 & condition2 & condition3);
+  private Activity getMostRecentActivityOfType(ActivityType type) {
+    return activities.stream()
+      .filter(activity -> activity.getType() == type)
+      .findFirst()
+      .orElseThrow(() -> new RuntimeException(String.format("Could not find any activity of type: %s", type)));
+  }
+
+  public Activity getMostRecentArticleActivity() {
+    return getMostRecentActivityOfType(ActivityType.NEW_PAGE);
+  }
+
+  public Activity getMostRecentEditActivity() {
+    return getMostRecentActivityOfType(ActivityType.EDIT);
   }
 }

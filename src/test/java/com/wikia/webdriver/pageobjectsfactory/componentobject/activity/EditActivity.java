@@ -17,6 +17,6 @@ public class EditActivity extends Activity {
 
   public DiffPagePageObject showChanges() {
     scrollAndClick(diffLink);
-    return new DiffPagePageObject(driver);
+    return new DiffPagePageObject();
   }
 }
