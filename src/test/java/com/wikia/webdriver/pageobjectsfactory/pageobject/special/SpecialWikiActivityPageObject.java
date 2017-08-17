@@ -16,7 +16,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
   @FindBys(@FindBy(css = ".activityfeed > li"))
   private List<WebElement> activitiesList;
 
-  List<Activity> activities;
+  private List<Activity> activities;
 
   public SpecialWikiActivityPageObject open() {
     getUrl(urlBuilder.getUrlForWiki(Configuration.getWikiName())
@@ -60,6 +60,14 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     return isActivityDisplayedWithType(ActivityType.EDIT, articleName, userName);
   }
 
+  public Activity getMostRecentArticleActivity() {
+    return getMostRecentActivityOfType(ActivityType.NEW_PAGE);
+  }
+
+  public Activity getMostRecentEditActivity() {
+    return getMostRecentActivityOfType(ActivityType.EDIT);
+  }
+
   private boolean isActivityDisplayedWithType(ActivityType type, String title, String author) {
     return activities.stream()
       .filter(activity -> activity.getType() == type)
@@ -82,11 +90,4 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
       .orElseThrow(() -> new RuntimeException(String.format("Could not find any activity of type: %s", type)));
   }
 
-  public Activity getMostRecentArticleActivity() {
-    return getMostRecentActivityOfType(ActivityType.NEW_PAGE);
-  }
-
-  public Activity getMostRecentEditActivity() {
-    return getMostRecentActivityOfType(ActivityType.EDIT);
-  }
 }
