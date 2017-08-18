@@ -34,7 +34,8 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isArticleEditionActivityDisplayed(articleName, User.STAFF.getUserName()));
+      .isArticleEditionActivityDisplayed(articleName, User.STAFF.getUserName()),
+      String.format("Activity for edited article with title %s was not found", articleName));
   }
 
   @Execute(asUser = User.STAFF)
@@ -45,7 +46,8 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isNewArticleActivityDisplayed(articleName, User.STAFF.getUserName()));
+      .isNewArticleActivityDisplayed(articleName, User.STAFF.getUserName()),
+      String.format("Activity for new article with title %s was not found", articleName));
   }
 
   @Execute(asUser = User.USER)
@@ -64,7 +66,8 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isNewBlogPostActivityDisplayed(blogTitle, User.USER.getUserName(), blogContent));
+      .isNewBlogPostActivityDisplayed(blogTitle, User.USER.getUserName(), blogContent),
+      String.format("Activity for new blog post with title %s by user %s was not found", blogTitle, User.USER.getUserName()));
   }
 
   @Execute(asUser = User.STAFF)
@@ -80,7 +83,8 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isCategorizationActivityDisplayed(articleName, User.STAFF.getUserName()));
+      .isCategorizationActivityDisplayed(articleName, User.STAFF.getUserName()),
+      String.format("Activity for new category for article with title %s was not found", articleName));
   }
 
   @Execute(asUser = User.USER)
@@ -96,7 +100,8 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertFalse(new SpecialWikiActivityPageObject()
       .open()
-      .isArticleEditionActivityDisplayed(articleName, User.USER.getUserName()));
+      .isArticleEditionActivityDisplayed(articleName, User.USER.getUserName()),
+      String.format("Activity edit with no visual change for article with title %s was found", articleName));
   }
 
   @Execute(asUser = User.USER)
@@ -107,7 +112,9 @@ public class WikiActivityTests extends NewTestTemplate {
     articleActivity.getTitleLink().click();
     ArticlePageObject article = new ArticlePageObject();
 
-    Assertion.assertEquals(article.getArticleTitle(), title);
+    Assertion.assertEquals(article.getArticleTitle(), title,
+      String.format("Link in activities list for article with title %s "
+        + "redirected to article with title %s", title, article.getArticleTitle()));
   }
 
   @Execute(asUser = User.USER)
@@ -119,7 +126,9 @@ public class WikiActivityTests extends NewTestTemplate {
     String expectedUserName = articleActivity.getUserLink().getText();
     UserProfilePage userPage = articleActivity.clickOnUserLink();
 
-    Assertion.assertEquals(userPage.getUserName(), expectedUserName);
+    Assertion.assertEquals(userPage.getUserName(), expectedUserName,
+      String.format("Link in activities list for username %s "
+        + "redirected to user profile for %s", expectedUserName, userPage.getUserName()));
   }
 
   @Execute(asUser = User.USER)
@@ -132,6 +141,7 @@ public class WikiActivityTests extends NewTestTemplate {
       .getMostRecentEditActivity()
       .clickOnDiffLink();
 
-    Assertion.assertTrue(diffPage.isDiffTableVisible());
+    Assertion.assertTrue(diffPage.isDiffTableVisible(),
+      "Diff table was not found on page");
   }
 }
