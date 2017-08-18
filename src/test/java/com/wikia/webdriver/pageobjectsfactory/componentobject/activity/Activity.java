@@ -35,7 +35,7 @@ public class Activity extends BasePageObject {
   private ActivityType getTypeFromEntry() {
     String cssClass = entry.getAttribute(HTML.Attribute.CLASS.toString());
     return Arrays.stream(ActivityType.values())
-      .filter(type -> cssClass.contains(type.getCssType()))
+      .filter(existingType -> cssClass.contains(existingType.getCssType()))
       .findAny()
       .orElseThrow(() -> new RuntimeException(String.format("Activity type cannot be matched for element: %s", cssClass)));
   }
