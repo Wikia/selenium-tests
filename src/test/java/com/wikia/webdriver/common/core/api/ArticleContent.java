@@ -72,10 +72,10 @@ public class ArticleContent extends ApiCall {
   }
 
   public String createUniqueArticle() {
-    String title = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, new Date());
-    push(title, String.format("%s %s", PageContent.LOREM_IPSUM_SHORT, new Date()));
+    String uniqueText = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, new Date().getTime());
+    push(uniqueText, uniqueText);
 
-    return title;
+    return uniqueText;
   }
 
   public void push() {
