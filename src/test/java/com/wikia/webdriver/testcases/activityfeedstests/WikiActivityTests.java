@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -20,11 +21,14 @@ import org.testng.annotations.Test;
 
 
 @Test(groups = "activityFeeds-wikiActivity")
+@Execute(onWikia = "wikiActivities", asUser = User.WIKIACTIVITY_USER)
 public class WikiActivityTests extends NewTestTemplate {
 
-  @Execute(asUser = User.STAFF)
+  private User testUser = User.WIKIACTIVITY_USER;
+
   public void articleEditionIsRecordedInWikiActivity() {
-    new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
+    new ArticleContent(testUser).push(PageContent.LOREM_IPSUM_SHORT);
+
     ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
 
@@ -34,28 +38,24 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isArticleEditionActivityDisplayed(articleName, User.STAFF.getUserName()),
+      .isArticleEditionActivityDisplayed(articleName, testUser.getUserName()),
       String.format("Activity for edited article with title %s was not found", articleName));
   }
 
-  @Execute(asUser = User.STAFF)
   public void newPageCreationIsRecordedInWikiActivity() {
-    new ArticleContent().clear();
-    new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
-    String articleName = new ArticlePageObject().open().getArticleName();
+    String articleName = new ArticleContent(testUser).createUniqueArticle();
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isNewArticleActivityDisplayed(articleName, User.STAFF.getUserName()),
+      .isNewArticleActivityDisplayed(articleName, testUser.getUserName()),
       String.format("Activity for new article with title %s was not found", articleName));
   }
 
-  @Execute(asUser = User.USER)
   public void newBlogCreationIsRecordedInWikiActivity() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();
     UserProfilePage userProfile =
-        new WikiBasePageObject().openProfilePage(User.USER.getUserName(), wikiURL);
+        new WikiBasePageObject().openProfilePage(testUser.getUserName(), wikiURL);
     userProfile.clickOnBlogTab();
     SpecialCreatePage createBlogPage = userProfile.clickOnCreateBlogPost();
     VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
@@ -66,16 +66,16 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isNewBlogPostActivityDisplayed(blogTitle, User.USER.getUserName(), blogContent),
-      String.format("Activity for new blog post with title %s by user %s was not found", blogTitle, User.USER.getUserName()));
+      .isNewBlogPostActivityDisplayed(blogTitle, testUser.getUserName(), blogContent),
+      String.format("Activity for new blog post with title %s by user %s was not found", blogTitle, testUser.getUserName()));
   }
 
-  @Execute(asUser = User.STAFF)
   public void newCategorizationIsRecordedInWikiActivity() {
-    new ArticleContent().push(PageContent.LOREM_IPSUM_SHORT);
+    new ArticleContent(testUser).push(PageContent.LOREM_IPSUM_SHORT);
+
     ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
-    String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
+    String categoryName = String.format("%s %s", PageContent.CATEGORY_NAME_PREFIX, BasePageObject.getTimeStamp());
 
     article.addCategory(categoryName);
     article.submitCategory();
@@ -83,13 +83,12 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
-      .isCategorizationActivityDisplayed(articleName, User.STAFF.getUserName()),
+      .isCategorizationActivityDisplayed(articleName, testUser.getUserName()),
       String.format("Activity for new category for article with title %s was not found", articleName));
   }
 
-  @Execute(asUser = User.USER)
   public void articleEditWithoutVisualChangeIsNotRecordedInWikiActivity() {
-    new ArticleContent().push("content");
+    new ArticleContent(testUser).push("content");
     ArticlePageObject article = new ArticlePageObject().open();
     String articleName = article.getArticleName();
     String articleContent = article.getContent();
@@ -100,13 +99,12 @@ public class WikiActivityTests extends NewTestTemplate {
 
     Assertion.assertFalse(new SpecialWikiActivityPageObject()
       .open()
-      .isArticleEditionActivityDisplayed(articleName, User.USER.getUserName()),
+      .isArticleEditionActivityDisplayed(articleName, testUser.getUserName()),
       String.format("Activity edit with no visual change for article with title %s was found", articleName));
   }
 
-  @Execute(asUser = User.USER)
   public void clickingTitleRedirectsToArticle() {
-    new ArticleContent().push("content");
+    new ArticleContent(testUser).push("content");
     Activity articleActivity = new SpecialWikiActivityPageObject().open().getMostRecentArticleActivity();
     String title = articleActivity.getTitleLink().getText();
     articleActivity.getTitleLink().click();
@@ -117,10 +115,10 @@ public class WikiActivityTests extends NewTestTemplate {
         + "redirected to article with title %s", title, article.getArticleTitle()));
   }
 
-  @Execute(asUser = User.USER)
   public void clickingUsernameRedirectsToUserPage() {
-    new ArticleContent().push("content");
-    new ArticleContent().push("content_after_edition");
+    ArticleContent content = new ArticleContent(testUser);
+    content.push("content");
+    content.push("content_after_edition");
 
     Activity articleActivity = new SpecialWikiActivityPageObject().open().getMostRecentArticleActivity();
     String expectedUserName = articleActivity.getUserLink().getText();
@@ -131,10 +129,10 @@ public class WikiActivityTests extends NewTestTemplate {
         + "redirected to user profile for %s", expectedUserName, userPage.getUserName()));
   }
 
-  @Execute(asUser = User.USER)
   public void clickingIconNextToArticleRedirectsToDiff() {
-    new ArticleContent().push("content");
-    new ArticleContent().push("content_after_edition");
+    ArticleContent content = new ArticleContent(testUser);
+    content.push("content");
+    content.push("content_after_edition");
 
     DiffPagePageObject diffPage = new SpecialWikiActivityPageObject()
       .open()

@@ -225,7 +225,9 @@ public class MessageWallTests extends NewTestTemplate {
     wall.submit();
 
     wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
-    new SpecialWikiActivityPageObject().open().isNewWallThreadActivityDisplayed(title,
-      User.USER_MESSAGE_WALL.getUserName(), message);
+    Assertion.assertTrue(new SpecialWikiActivityPageObject()
+      .open()
+      .isNewWallThreadActivityDisplayed(title, User.USER_MESSAGE_WALL.getUserName(), message),
+      String.format("WikiActivity page does not contain entry for new wall post: %s.", title));
   }
 }

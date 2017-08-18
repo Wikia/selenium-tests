@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.api;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.message.BasicNameValuePair;
@@ -68,6 +69,13 @@ public class ArticleContent extends ApiCall {
 
   public void push(String content) {
     push(content, TestContext.getCurrentMethodName());
+  }
+
+  public String createUniqueArticle() {
+    String title = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, new Date());
+    push(title, String.format("%s %s", PageContent.LOREM_IPSUM_SHORT, new Date()));
+
+    return title;
   }
 
   public void push() {
