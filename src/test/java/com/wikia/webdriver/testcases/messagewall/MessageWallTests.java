@@ -225,7 +225,7 @@ public class MessageWallTests extends NewTestTemplate {
     wall.submit();
 
     wall.verifyMessageText(title, message, User.USER_MESSAGE_WALL.getUserName());
-    new SpecialWikiActivityPageObject(driver).open().isNewWallThreadActivityDisplayed(title,
+    new SpecialWikiActivityPageObject().open().isNewWallThreadActivityDisplayed(title,
       User.USER_MESSAGE_WALL.getUserName(), message);
   }
 }

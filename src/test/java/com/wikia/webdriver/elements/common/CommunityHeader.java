@@ -95,7 +95,7 @@ public class CommunityHeader extends BasePageObject {
 
     PageObjectLogging.logInfo("clicked Wiki Activity Button");
 
-    return new SpecialWikiActivityPageObject(driver);
+    return new SpecialWikiActivityPageObject();
   }
 
   public SpecialAdminDashboardPageObject clickAdminDashboard() {
@@ -131,7 +131,7 @@ public class CommunityHeader extends BasePageObject {
 
     PageObjectLogging.logInfo("explore -> wikiActivity link clicked");
 
-    return new SpecialWikiActivityPageObject(driver);
+    return new SpecialWikiActivityPageObject();
   }
 
   public ArticlePageObject clickExploreRandomLink() {
