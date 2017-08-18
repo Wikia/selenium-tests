@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.api.ArticleContent;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.activity.Activity;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
@@ -27,14 +26,7 @@ public class WikiActivityTests extends NewTestTemplate {
   private User testUser = User.WIKIACTIVITY_USER;
 
   public void articleEditionIsRecordedInWikiActivity() {
-    new ArticleContent(testUser).push(PageContent.LOREM_IPSUM_SHORT);
-
-    ArticlePageObject article = new ArticlePageObject().open();
-    String articleName = article.getArticleName();
-
-    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
-    visualEditMode.addContent(PageContent.ARTICLE_TEXT_EDIT);
-    visualEditMode.submitArticle();
+    String articleName = editArticleWithContentAndGetTitle(createArticle(), PageContent.ARTICLE_TEXT_EDIT);
 
     Assertion.assertTrue(new SpecialWikiActivityPageObject()
       .open()
@@ -71,12 +63,9 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   public void newCategorizationIsRecordedInWikiActivity() {
-    new ArticleContent(testUser).push(PageContent.LOREM_IPSUM_SHORT);
-
-    ArticlePageObject article = new ArticlePageObject().open();
+    ArticlePageObject article = createArticle();
     String articleName = article.getArticleName();
-    String categoryName = String.format("%s %s", PageContent.CATEGORY_NAME_PREFIX, BasePageObject.getTimeStamp());
-
+    String categoryName = String.format("%s %s", PageContent.CATEGORY_NAME_PREFIX, DateTime.now().getMillis());
     article.addCategory(categoryName);
     article.submitCategory();
     Assertion.assertTrue(article.isCategoryPresent(categoryName));
@@ -88,14 +77,8 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   public void articleEditWithoutVisualChangeIsNotRecordedInWikiActivity() {
-    new ArticleContent(testUser).push("content");
-    ArticlePageObject article = new ArticlePageObject().open();
-    String articleName = article.getArticleName();
-    String articleContent = article.getContent();
-
-    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
-    visualEditMode.addContent(articleContent);
-    visualEditMode.submitArticle();
+    ArticlePageObject article = createArticle();
+    String articleName = editArticleWithContentAndGetTitle(article, article.getContent());
 
     Assertion.assertFalse(new SpecialWikiActivityPageObject()
       .open()
@@ -104,8 +87,8 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   public void clickingTitleRedirectsToArticle() {
-    new ArticleContent(testUser).push("content");
-    Activity articleActivity = new SpecialWikiActivityPageObject().open().getMostRecentArticleActivity();
+    Activity articleActivity = createArticleEditAndGetRecentActivity();
+
     String title = articleActivity.getTitleLink().getText();
     articleActivity.getTitleLink().click();
     ArticlePageObject article = new ArticlePageObject();
@@ -116,11 +99,8 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   public void clickingUsernameRedirectsToUserPage() {
-    ArticleContent content = new ArticleContent(testUser);
-    content.push("content");
-    content.push("content_after_edition");
+    Activity articleActivity = createArticleEditAndGetRecentActivity();
 
-    Activity articleActivity = new SpecialWikiActivityPageObject().open().getMostRecentArticleActivity();
     String expectedUserName = articleActivity.getUserLink().getText();
     UserProfilePage userPage = articleActivity.clickOnUserLink();
 
@@ -130,16 +110,33 @@ public class WikiActivityTests extends NewTestTemplate {
   }
 
   public void clickingIconNextToArticleRedirectsToDiff() {
-    ArticleContent content = new ArticleContent(testUser);
-    content.push("content");
-    content.push("content_after_edition");
-
-    DiffPagePageObject diffPage = new SpecialWikiActivityPageObject()
-      .open()
-      .getMostRecentEditActivity()
-      .clickOnDiffLink();
+    DiffPagePageObject diffPage = createArticleEditAndGetRecentActivity().clickOnDiffLink();
 
     Assertion.assertTrue(diffPage.isDiffTableVisible(),
       "Diff table was not found on page");
   }
+
+  private Activity createArticleEditAndGetRecentActivity() {
+    ArticleContent content = new ArticleContent(testUser);
+    content.push("content");
+    content.push("content_after_edition");
+
+    return new SpecialWikiActivityPageObject()
+      .open()
+      .getMostRecentEditActivity();
+  }
+
+  private ArticlePageObject createArticle() {
+    new ArticleContent(testUser).push("content");
+    return new ArticlePageObject().open();
+  }
+
+  private String editArticleWithContentAndGetTitle(ArticlePageObject article, String content) {
+    String articleName = article.getArticleName();
+    VisualEditModePageObject visualEditMode = article.navigateToArticleEditPage();
+    visualEditMode.addContent(content);
+    visualEditMode.submitArticle();
+    return articleName;
+  }
+
 }
