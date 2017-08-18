@@ -86,16 +86,16 @@ public class ArticleContent extends ApiCall {
 
   private void getEditToken() {
     try {
-      URL apiURL = new URIBuilder(baseURL)
+      String apiURL = new URIBuilder(baseURL)
           .setParameter("action", "query")
           .setParameter("prop", "info")
           .setParameter("format", "json")
           .setParameter("intoken", "edit")
           .setParameter("titles", "Main Page")
-          .build().toURL();
+          .build().toASCIIString();
 
       CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
-      HttpGet httpGet = getHttpGet(apiURL);
+      HttpGet httpGet = new HttpGet(apiURL);
       // set header
       if (getUser() != null) {
         httpGet.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser()));
@@ -127,7 +127,7 @@ public class ArticleContent extends ApiCall {
           .setParameter("action", "edit")
           .setParameter("format", "json")
           .setParameter("token", editToken)
-          .build().toString();
+          .build().toASCIIString();
     } catch (URISyntaxException e) {
       PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(EDIT_TOKEN_ERROR_MESSAGE);

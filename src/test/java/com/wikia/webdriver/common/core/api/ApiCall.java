@@ -10,6 +10,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -50,9 +51,8 @@ public abstract class ApiCall {
 
   public void call() {
     try {
-      URL url = new URL(getURL());
       CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
-      HttpPost httpPost = getHttpPost(url);
+      HttpPost httpPost = new HttpPost(getURL());
       // set header
       if (getUser() != null) {
         httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser()));
@@ -64,7 +64,6 @@ public abstract class ApiCall {
 
       CloseableHttpResponse resp = httpClient.execute(httpPost);
 
-      PageObjectLogging.logInfo("CONTENT PUSH: ", "Header: " + httpPost.getHeaders("X-Wikia-AccessToken")[0]);
       PageObjectLogging.logInfo("CONTENT PUSH: ", "Content posted to: " + httpPost.toString());
       PageObjectLogging.logInfo("CONTENT PUSH: ", "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
     } catch (ClientProtocolException e) {
@@ -73,19 +72,6 @@ public abstract class ApiCall {
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
-    } catch (URISyntaxException e) {
-      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
-      throw new WebDriverException(ERROR_MESSAGE);
     }
-  }
-
-  public static HttpPost getHttpPost(URL url) throws URISyntaxException {
-    return new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-        url.getPath(), url.getQuery(), url.getRef()));
-  }
-
-  public static HttpGet getHttpGet(URL url) throws URISyntaxException {
-    return new HttpGet(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-        url.getPath(), url.getQuery(), url.getRef()));
   }
 }
