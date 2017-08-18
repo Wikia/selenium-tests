@@ -9,6 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
@@ -30,11 +31,8 @@ import java.util.Iterator;
 
 @lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
-
-  private static String setupURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-      + "/api.php?action=query&prop=info&format=json&intoken=edit&titles=";
   private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-      + "/api.php?action=edit&title=";
+      + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
   private String editToken;
@@ -86,9 +84,15 @@ public class ArticleContent extends ApiCall {
     };
   }
 
-  private void getEditToken(String articleTitle) {
+  private void getEditToken() {
     try {
-      URL apiURL = new URL(setupURL + articleTitle);
+      URL apiURL = new URIBuilder(baseURL)
+          .setParameter("action", "query")
+          .setParameter("prop", "info")
+          .setParameter("format", "json")
+          .setParameter("intoken", "edit")
+          .setParameter("titles", "Main Page")
+          .build().toURL();
 
       CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
       HttpGet httpGet = getHttpGet(apiURL);
@@ -114,8 +118,20 @@ public class ArticleContent extends ApiCall {
   }
 
   public void push(String text, String articleTitle) {
-    getEditToken(articleTitle);
-    URL_STRING = baseURL + articleTitle + "&text=" + text + "&summary=SUMMARY_QM" + "&token=" + editToken;
+    getEditToken();
+    try {
+      URL_STRING = new URIBuilder(baseURL)
+          .setParameter("text", text)
+          .setParameter("summary", "SUMMARY_QM")
+          .setParameter("title", articleTitle)
+          .setParameter("action", "edit")
+          .setParameter("format", "json")
+          .setParameter("token", editToken)
+          .build().toString();
+    } catch (URISyntaxException e) {
+      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(EDIT_TOKEN_ERROR_MESSAGE);
+    }
     call();
   }
 
