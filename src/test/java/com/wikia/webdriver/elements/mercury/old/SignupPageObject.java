@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 
@@ -61,38 +62,36 @@ public class SignupPageObject {
   }
 
   private SignupPageObject typeEmailAddress(String email) {
-    wait.forElementVisible(signupEmail);
-    signupEmail.sendKeys(email);
+    setValue(signupEmail, email);
     return this;
   }
 
   private SignupPageObject typeUsername(String username) {
-    wait.forElementVisible(signupUsername);
-    signupUsername.sendKeys(username);
+    setValue(signupUsername, username);
     return this;
   }
 
   private SignupPageObject typePassword(String password) {
-    wait.forElementVisible(signupPassword);
-    signupPassword.sendKeys(password);
+    setValue(signupPassword, password);
     return this;
+  }
+
+  private void setValue(WebElement input, String value) {
+    wait.forElementVisible(input).click();
+    input.clear();
+    input.sendKeys(value);
+    PageObjectLogging.log("Set value",
+      String.format("value of input identified by: %s set to %s",
+        input.getCssValue("class"), value), true);
   }
 
   private SignupPageObject typeBirthdate(String month, String day, String year) {
     wait.forElementVisible(signupBirthdate);
     signupBirthdate.click();
 
-    wait.forElementVisible(signupBirthMonth);
-    signupBirthMonth.click();
-    signupBirthMonth.sendKeys(month);
-
-    wait.forElementVisible(signupBirthDay);
-    signupBirthDay.click();
-    signupBirthDay.sendKeys(day);
-
-    wait.forElementVisible(signupBirthYear);
-    signupBirthYear.click();
-    signupBirthYear.sendKeys(year);
+    setValue(signupBirthMonth, month);
+    setValue(signupBirthDay, day);
+    setValue(signupBirthYear, year);
 
     return this;
   }

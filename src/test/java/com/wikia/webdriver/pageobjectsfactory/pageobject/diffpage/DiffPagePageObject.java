@@ -12,11 +12,6 @@ public class DiffPagePageObject extends BasePageObject {
   @FindBy(css = "#mw-content-text table.diff")
   private WebElement diffTable;
 
-  public DiffPagePageObject(WebDriver driver) {
-    super();
-    // TODO Auto-generated constructor stub
-  }
-
   public void verifyDiffTablePresent() {
     wait.forElementVisible(diffTable);
     PageObjectLogging.log("Verify diff table", "diff table is visible", true);
