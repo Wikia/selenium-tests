@@ -4,7 +4,6 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.activity;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
