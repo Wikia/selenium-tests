@@ -39,7 +39,7 @@ public class VideosModuleTests extends NewTestTemplate {
     new MainPage().open();
     videosModule.verifyVideosModuleNotShowing();
 
-    new SpecialWikiActivityPageObject(driver).open();
+    new SpecialWikiActivityPageObject().open();
     videosModule.verifyVideosModuleNotShowing();
   }
 
