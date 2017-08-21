@@ -40,7 +40,7 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     return activities.stream()
       .filter(activity -> activity.getType() == ActivityType.WALL_POST)
       .filter(activity -> activity.getTitleLink().getText().contains(title))
-      .filter(activity -> activity.getWallThreadAuthor().contains(threadAuthor))
+      .filter(activity -> activity.getWallThreadAuthor().equals(threadAuthor))
       .anyMatch(activity -> activity.getWallThreadContent().contains(threadContent));
   }
 

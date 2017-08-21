@@ -1,8 +1,8 @@
 package com.wikia.webdriver.common.core.api;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.message.BasicNameValuePair;
@@ -72,7 +72,7 @@ public class ArticleContent extends ApiCall {
   }
 
   public String createUniqueArticle() {
-    String uniqueText = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, new Date().getTime());
+    String uniqueText = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, LocalDateTime.now());
     push(uniqueText, uniqueText);
 
     return uniqueText;

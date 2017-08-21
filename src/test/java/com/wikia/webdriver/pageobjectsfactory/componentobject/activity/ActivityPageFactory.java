@@ -6,19 +6,19 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ActivityPageFactory {
 
   @Getter
-  private List<Activity> activities = new ArrayList<>();
+  private final List<Activity> activities;
 
   public ActivityPageFactory(List<WebElement> activities) {
     this.activities = buildActivities(activities);
   }
 
   private List<Activity> buildActivities(List<WebElement> activities) {
-    activities.forEach(element -> this.activities.add(new Activity(element)));
-    return this.activities;
+    return activities.stream().map(Activity::new).collect(Collectors.toList());
   }
 
 }
