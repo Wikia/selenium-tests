@@ -9,10 +9,6 @@ public class SpecialPageObject extends WikiBasePageObject {
 
   private static final String HEADER_TEXT_SELECTOR = "//h1[contains(text(), '%s')]";
 
-  public SpecialPageObject() {
-    super();
-  }
-
   public void verifyPageHeader(String expectedHeader) {
     wait.forElementVisible(By.xpath(String.format(HEADER_TEXT_SELECTOR, expectedHeader)));
     PageObjectLogging.log(
