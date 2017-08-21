@@ -26,7 +26,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
   private static final String LACK_OF_IMAGE = "Thumbnail does not contain image";
 
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getExactMatchQueries",
-      groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch_1"})
+      groups = {"CrossWikiSearch_001", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_001_exactMatch(String query, String wikiName, String vertical) {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
@@ -39,11 +39,12 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyFirstResultPageVideos();
   }
 
-  @Test(groups = {"CrossWikiSearchTests_002", "Search", "CrossWikiSearch_2"})
+  @Test(groups = {"CrossWikiSearch_002", "Search", "CrossWikiSearch_2"})
   public void crossWikiSearch_002_pagination() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE);
+    search.navigateToWikiResults();
     // verify results pos parameter for first page
     search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
     search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
@@ -69,11 +70,12 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
   }
 
-  @Test(groups = {"CrossWikiSearchTests_003", "Search", "CrossWikiSearch_1"})
+  @Test(groups = {"CrossWikiSearch_003", "Search", "CrossWikiSearch_1"})
   public void crossWikiSearch_003_resultClick() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE);
+    search.navigateToWikiResults();
     WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
     wikiArticleHomePage.verifyThisIsWikiHomePage();
     driver.navigate().back();
@@ -88,6 +90,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.searchFor(SearchContent.SEARCH_PHRASE_NO_RESULTS);
     search.verifyNoPagination();
     search.verifyNoResultsCaption();
+    search.verifyNoCommunitiesLink();
   }
 
   @Test(groups = {"CrossWikiSearch_005", "Search", "CrossWikiSearch_1"})
@@ -96,6 +99,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE_ONE_PAGE_RESULTS);
     search.verifyNoPagination();
+    search.verifyNoCommunitiesLink();
   }
 
   @Test(dataProviderClass = CrossWikiSearchProvider.class, dataProvider = "getPushToTopQueries",
@@ -112,11 +116,12 @@ public class CrossWikiSearchTests extends NewTestTemplate {
    * wikia was found type: GTA 5 verify that GTA V wikia was found
    */
   @Test(enabled = false, // MAIN-4498
-      groups = {"CrossWikiSearchTests_009", "Search", "CrossWikiSearch_2"})
-  public void crossWikiSearch_009_romanNumbersMatch() {
+      groups = {"CrossWikiSearch_007", "Search", "CrossWikiSearch_2"})
+  public void crossWikiSearch_007_romanNumbersMatch() {
     CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
     search.goToSearchPage(wikiCorporateURL);
     search.searchFor(SearchContent.SEARCH_PHRASE_ROMAN_NUMBER);
+    search.navigateToWikiResults();
     search.verifyQuery(SearchContent.WIKI_NAME);
     search.searchFor(SearchContent.SEARCH_PHRASE_DECIMAL_NUMBER);
     search.verifyQuery(SearchContent.WIKI_NAME);
