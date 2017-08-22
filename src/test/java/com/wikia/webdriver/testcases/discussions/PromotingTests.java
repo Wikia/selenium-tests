@@ -73,7 +73,6 @@ public class PromotingTests extends NewTestTemplate {
    */
 
   private Promoting findPromoting() {
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.FALLOUT);
     PostsListPage page = new PostsListPage().open();
     return page.getPromoting();
   }
