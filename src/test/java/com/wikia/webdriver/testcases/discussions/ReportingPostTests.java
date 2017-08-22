@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
@@ -21,6 +22,7 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
@@ -44,6 +46,15 @@ public class ReportingPostTests extends NewTestTemplate {
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE =
       "User should not see deleted post.";
 
+  private PostEntity.Data existingPost;
+
+  @BeforeSuite
+  private void setUp() {
+    User user = User.USER_5;
+    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_1);
+    existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
+  }
+
   // Anonymous user on mobile
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -63,7 +74,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostDetailsPage openDefaultPostDetailsWaitingUtilLoaded() {
-    return new PostDetailsPage().openDefaultPost();
+    return new PostDetailsPage().open(existingPost.getId());
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")

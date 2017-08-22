@@ -46,17 +46,11 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
 
   private static final String PATH = "/d/p/%s";
 
-  private static final String DEFAULT_POST_ID = "2741364719297234368";
-
   private static final String EMPTY_POST_ID = "4809883";
 
   public PostDetailsPage open(String postId) {
     getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, postId));
     return this;
-  }
-
-  public PostDetailsPage openDefaultPost() {
-    return open(DEFAULT_POST_ID);
   }
 
   public PostDetailsPage openEmptyPost() {
@@ -67,7 +61,4 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
     return PAGE_PATTERN.matcher(url).find();
   }
 
-  public static String extractPostIdFrom(String url) {
-    return PostDetailsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
-  }
 }
