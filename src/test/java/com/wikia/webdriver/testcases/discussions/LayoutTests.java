@@ -132,7 +132,7 @@ public class LayoutTests extends NewTestTemplate {
   private void userCanViewMorePosts() {
     Post post = new PostsListPage().open().getPost();
     int startingListLength = post.getPostsListLength();
-    if(startingListLength <= 20) {
+    if(startingListLength < 20) {
       throw new SkipException("Skipping test because the condition of minimum 20 posts not met");
     }
     post.clickLoadMore();
