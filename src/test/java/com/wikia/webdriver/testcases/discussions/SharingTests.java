@@ -23,7 +23,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-sharing"})
 public class SharingTests extends NewTestTemplate {
 
@@ -34,7 +34,7 @@ public class SharingTests extends NewTestTemplate {
 
   @BeforeSuite
   private void setUp() {
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_1);
+    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_5);
     existingPost = DiscussionsClient
       .using(User.USER_4, driver)
       .createPostWithUniqueData(siteId);
