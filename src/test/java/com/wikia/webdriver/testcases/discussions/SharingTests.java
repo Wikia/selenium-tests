@@ -7,11 +7,15 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ShareDialog;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -25,6 +29,16 @@ public class SharingTests extends NewTestTemplate {
 
   private static final List<String> EXPECTED_SOCIAL_NETWORKS_FOR_ENGLISH_LANGUAGE =
       Arrays.asList("facebook", "twitter", "reddit", "tumblr");
+
+  private PostEntity.Data existingPost;
+
+  @BeforeSuite
+  private void setUp() {
+    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_1);
+    existingPost = DiscussionsClient
+      .using(User.USER_4, driver)
+      .createPostWithUniqueData(siteId);
+  }
 
   /**
    * ANONS ON MOBILE SECTION
@@ -142,7 +156,7 @@ public class SharingTests extends NewTestTemplate {
   }
 
   private List<String> findSocialNetworksNamesForFirstPostOnPostDetailsPage() {
-    PostDetailsPage page = new PostDetailsPage().openDefaultPost();
+    PostDetailsPage page = new PostDetailsPage().open(existingPost.getId());
     return findSocialNetworksNamesForFirstPostOn(page);
   }
 }
