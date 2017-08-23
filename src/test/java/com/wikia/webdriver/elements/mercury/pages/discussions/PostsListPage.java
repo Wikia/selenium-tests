@@ -75,12 +75,7 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
   public PostsListPage open() {
     driver.get(urlBuilder.getUrlForWiki() + PATH);
-    return this;
-  }
-
-  public PostsListPage waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay")));
-    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")));
+    waitForPageReload();
     return this;
   }
 

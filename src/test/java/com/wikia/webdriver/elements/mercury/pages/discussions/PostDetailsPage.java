@@ -51,6 +51,7 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
 
   public PostDetailsPage open(String postId) {
     getUrl(urlBuilder.getUrlForWiki() + String.format(PATH, postId));
+    waitForPageReload();
     return this;
   }
 

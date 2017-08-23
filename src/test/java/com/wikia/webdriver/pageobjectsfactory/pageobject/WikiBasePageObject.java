@@ -12,6 +12,7 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
@@ -379,6 +380,13 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
                                              URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject();
+  }
+
+  public WikiBasePageObject waitForPageReload() {
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay")));
+    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
+      "Loading overlay still visible, page not loaded in expected time");
+    return this;
   }
 
   public void verifyUserLoggedIn(final String userName) {

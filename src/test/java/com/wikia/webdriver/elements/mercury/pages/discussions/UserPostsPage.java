@@ -40,6 +40,7 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
 
   public UserPostsPage open(String userId) {
     driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, userId));
+    waitForPageReload();
     return this;
   }
 
@@ -53,10 +54,6 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
 
   public static boolean is(String url) {
     return PAGE_PATTERN.matcher(url).find();
-  }
-
-  public static String extractUserIdFrom(String url) {
-    return UserPostsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
   }
 
   public UserPostsPage expandModeration() {

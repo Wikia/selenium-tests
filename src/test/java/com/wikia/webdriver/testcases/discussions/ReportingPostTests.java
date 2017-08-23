@@ -714,19 +714,16 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private UserPostsPage openUserPostsAndWaitUntilLoaded(String authorId) {
     final UserPostsPage post = new UserPostsPage().open(authorId);
-    post.waitForPageLoad();
     return post;
   }
 
   private PostDetailsPage openPostDetailsPageAndWaitUntilLoaded(String postId) {
     final PostDetailsPage post = new PostDetailsPage().open(postId);
-    post.waitForPageLoad();
     return post;
   }
 
   private PostsListPage openPostListPageAndWaitUntilLoaded() {
     final PostsListPage post = new PostsListPage().open();
-    post.waitForPageLoad();
     return post;
   }
 
