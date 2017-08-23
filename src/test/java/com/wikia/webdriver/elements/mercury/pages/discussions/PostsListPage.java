@@ -26,9 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
-  private static final String DEFAULT_FORUM_ID = "1362702";
-
-  private static final String PATH = "/d/f/%s";
+  private static final String PATH = "/d/f/";
 
   @Getter(lazy = true)
   private final Post post = new Post();
@@ -75,18 +73,9 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
   private final CategoriesFieldset categories = new CategoriesFieldset();
 
 
-  public PostsListPage open(String wikiID) {
-    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, wikiID));
-    return this;
-  }
-
   public PostsListPage open() {
-    return open(DEFAULT_FORUM_ID);
-  }
-
-  public PostsListPage waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay")));
-    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")));
+    driver.get(urlBuilder.getUrlForWiki() + PATH);
+    waitForPageReload();
     return this;
   }
 
