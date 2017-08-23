@@ -46,15 +46,6 @@ public class ReportingPostTests extends NewTestTemplate {
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE =
       "User should not see deleted post.";
 
-  private PostEntity.Data existingPost;
-
-  @BeforeSuite
-  private void setUp() {
-    User user = User.USER_5;
-    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_1);
-    existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
-  }
-
   // Anonymous user on mobile
 
   @Test(groups = "discussions-anonUserMobileReporting")
@@ -74,7 +65,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostDetailsPage openDefaultPostDetailsWaitingUtilLoaded() {
-    return new PostDetailsPage().open(existingPost.getId());
+    return new PostDetailsPage().open(cretePostRemotelyAsFirstUser().getId());
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
