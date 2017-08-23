@@ -29,11 +29,11 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     specialVideos.openSpecialVideoPage(wikiURL);
     VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
     vetAddingVideo.addVideoWithoutDetailsByUrl(video.getUrl());
+
+    specialVideos.loginAs(User.SUS_CHAT_STAFF2);
     specialVideos.verifyVideoAdded(video.getTitle());
 
     FilePage filePage = new FilePage().open(video.getFileName());
-
-    filePage.loginAs(User.SUS_CHAT_STAFF2);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
