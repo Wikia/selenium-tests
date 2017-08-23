@@ -1,18 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.ActionExplorerModal;
 import com.wikia.webdriver.elements.oasis.components.globalshortcuts.KeyboardShortcutsModal;
 import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
@@ -165,12 +162,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public int getBannerNotificationsHeight(){
     return bannerNotificationContainer.getSize().getHeight();
-  }
-
-  public String resetForgotPasswordTime(String userName, String apiToken) {
-    String[][] apiRequestParameters = {{"action", ApiActions.API_ACTION_FORGOT_PASSWORD},
-        {"user", userName}, {"token", apiToken}, {"format", "json"},};
-    return CommonUtils.sendPost(URLsContent.API_URL, apiRequestParameters);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
