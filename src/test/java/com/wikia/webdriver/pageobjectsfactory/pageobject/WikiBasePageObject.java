@@ -45,6 +45,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -383,7 +384,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public WikiBasePageObject waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay")));
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
     waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
       "Loading overlay still visible, page not loaded in expected time");
     return this;

@@ -179,7 +179,7 @@ public class BasePageObject {
     waitSafely(o, "");
   }
 
-  protected void waitSafely(Runnable o, String message) {
+  void waitSafely(Runnable o, String message) {
     try {
       o.run();
     } catch (TimeoutException e) {

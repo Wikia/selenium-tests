@@ -713,18 +713,15 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private UserPostsPage openUserPostsAndWaitUntilLoaded(String authorId) {
-    final UserPostsPage post = new UserPostsPage().open(authorId);
-    return post;
+    return new UserPostsPage().open(authorId);
   }
 
   private PostDetailsPage openPostDetailsPageAndWaitUntilLoaded(String postId) {
-    final PostDetailsPage post = new PostDetailsPage().open(postId);
-    return post;
+    return new PostDetailsPage().open(postId);
   }
 
   private PostsListPage openPostListPageAndWaitUntilLoaded() {
-    final PostsListPage post = new PostsListPage().open();
-    return post;
+    return new PostsListPage().open();
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
