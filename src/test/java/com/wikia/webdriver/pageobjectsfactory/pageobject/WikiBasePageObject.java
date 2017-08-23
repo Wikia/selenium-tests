@@ -176,7 +176,7 @@ public class WikiBasePageObject extends BasePageObject {
         wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + articlePage,
         URLsContent.ACTION_HISTORY));
     PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
-    return new HistoryPagePageObject(driver);
+    return new HistoryPagePageObject();
   }
 
   public AttachedRegisterPage openSpecialUserSignUpPage(String wikiURL) {
