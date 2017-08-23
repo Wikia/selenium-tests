@@ -70,7 +70,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
-    final UserPostsPage page = openDefaultUserPostPageWaiting();
+    final UserPostsPage page = openFirstUserPostPage();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
@@ -154,12 +154,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
-    final UserPostsPage page = openDefaultUserPostPageWaiting();
+    final UserPostsPage page = openFirstUserPostPage();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  private UserPostsPage openDefaultUserPostPageWaiting() {
-    return new UserPostsPage().openDefaultUserPage();
+  private UserPostsPage openFirstUserPostPage() {
+    return new UserPostsPage().open(User.USER.getUserId());
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting")
