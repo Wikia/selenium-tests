@@ -749,19 +749,12 @@ public class ReportingPostTests extends NewTestTemplate {
     DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).validatePost(data);
   }
 
-  private void reportPostRemotelyAsThirdUser(PostEntity.Data data) {
-    DiscussionsClient.using(User.USER_3, driver).reportPost(data);
-  }
-
   private void deletePostRemotelyAsDiscussionsModerator(PostEntity.Data data) {
     DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).deletePost(data);
   }
 
   private PostEntity.Data createAndReportAndDeletePostRemotely() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    validatePostRemotelyAsDiscussionsModerator(data);
-    reportPostRemotelyAsThirdUser(data);
     deletePostRemotelyAsDiscussionsModerator(data);
     return data;
   }
