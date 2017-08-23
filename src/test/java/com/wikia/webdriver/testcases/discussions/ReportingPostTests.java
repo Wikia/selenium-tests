@@ -704,10 +704,6 @@ public class ReportingPostTests extends NewTestTemplate {
 
   private void moderatorCanDeleteReportedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    validatePostRemotelyAsDiscussionsModerator(data);
-    reportPostRemotelyAsThirdUser(data);
-
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
