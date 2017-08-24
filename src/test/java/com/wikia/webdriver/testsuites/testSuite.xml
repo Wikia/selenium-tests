@@ -148,7 +148,7 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.LightboxTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.old.LoginTestsOld"/>
+            <class name="com.wikia.webdriver.testcases.auth.LoginTestsOld"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.auth.SignupTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.old.TOCTests"/>

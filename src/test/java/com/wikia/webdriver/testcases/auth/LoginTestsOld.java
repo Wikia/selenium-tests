@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.mercurytests.old;
+package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
