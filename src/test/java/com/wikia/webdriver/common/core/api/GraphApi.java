@@ -25,89 +25,80 @@ import java.util.HashMap;
 
 public class GraphApi {
 
-    private static final String ERROR_MESSAGE = "Problem with Graph API call used to create new facebook test user";
-    private static final String URI_SYNTAX_EXCEPTION = "URI_SYNTAX EXCEPTION";
-    private static ArrayList<BasicNameValuePair> PARAMS;
-    private static final String wikia_production_app_access_token = XMLReader
-        .getValue("ci.user.facebook.prod.accessToken");
+  private static final String ERROR_MESSAGE = "Problem with Graph API call used to create new facebook test user";
+  private static final String URI_SYNTAX_EXCEPTION = "URI_SYNTAX EXCEPTION";
+  private static final String wikiaProductionAppAccessToken = XMLReader
+    .getValue("ci.user.facebook.prod.accessToken");
+  private static final String wikiaProductionAppId = XMLReader
+    .getValue("ci.user.facebook.prod.appId");
 
-    public HashMap<String, String> createFacebookTestUser(String appId) {
-        try {
-            HttpResponse response = createTestUser(appId);
-            String entity = EntityUtils.toString(response.getEntity());
-            return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
-        } catch (IOException e) {
-            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
-            throw new WebDriverException(ERROR_MESSAGE);
-        } catch (URISyntaxException e) {
-            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
-            throw new WebDriverException(ERROR_MESSAGE);
-        }
-
+  public HashMap<String, String> createFacebookTestUser() {
+    try {
+      HttpResponse response = createTestUser(wikiaProductionAppId);
+      String entity = EntityUtils.toString(response.getEntity());
+      return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
+    } catch (IOException | URISyntaxException e) {
+      PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(ERROR_MESSAGE);
     }
 
-    public HashMap<String, String> deleteFacebookTestUser(String userId) {
-        try {
-            HttpResponse response = deleteTestUser(userId);
-            String entity = EntityUtils.toString(response.getEntity());
-            return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
-        } catch (IOException e) {
-            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
-            throw new WebDriverException(ERROR_MESSAGE);
-        } catch (URISyntaxException e) {
-            PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
-            throw new WebDriverException(ERROR_MESSAGE);
-        }
+  }
 
+  public HashMap<String, String> deleteFacebookTestUser(String userId) {
+    try {
+      HttpResponse response = deleteTestUser(userId);
+      String entity = EntityUtils.toString(response.getEntity());
+      return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
+    } catch (IOException | URISyntaxException e) {
+      PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException(ERROR_MESSAGE);
     }
 
-    private String getURLcreateUser(String appId) {
-        String host = "https://graph.facebook.com/v2.6/";
-        String path = appId+"/accounts/test-users";
-        return host + path;
-    }
+  }
 
-    private String getURLdeleteUser(String userId) {
-        String host = "https://graph.facebook.com/v2.7/";
-        String path = userId;
-        return host + path;
-    }
+  private String getURLCreateUser(String appId) {
+    return String.format("https://graph.facebook.com/v2.6/%s/accounts/test-users", appId);
+  }
 
-    private ArrayList<BasicNameValuePair> getParams() {
-        PARAMS = new ArrayList<>();
-        PARAMS.add(new BasicNameValuePair("access_token", wikia_production_app_access_token));
-        return PARAMS;
-    }
+  private String getURLDeleteUser(String userId) {
+    return String.format("https://graph.facebook.com/v2.7/%s", userId);
+  }
 
-    private HttpResponse createTestUser(String appId) throws IOException, URISyntaxException {
-            URL url = new URL(getURLcreateUser(appId));
-            CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
-            HttpPost httpPost = getHttpPost(url);
+  private ArrayList<BasicNameValuePair> getParams() {
+    ArrayList<BasicNameValuePair> PARAMS = new ArrayList<>();
+    PARAMS.add(new BasicNameValuePair("access_token", wikiaProductionAppAccessToken));
+    return PARAMS;
+  }
 
-            if (getParams() != null) {
-                httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
-            }
-            return httpClient.execute(httpPost);
-    }
+  private HttpResponse createTestUser(String appId) throws IOException, URISyntaxException {
+    URL url = new URL(getURLCreateUser(appId));
+    CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
+    HttpPost httpPost = getHttpPost(url);
 
-    private HttpResponse deleteTestUser(String userId) throws IOException, URISyntaxException {
-        URL url = new URL(getURLdeleteUser(userId));
-        CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
-        HttpDelete httpDelete = getHttpDelete(url);
-        return httpClient.execute(httpDelete);
+    if (getParams() != null) {
+      httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
     }
+    return httpClient.execute(httpPost);
+  }
 
-    public static HttpDelete getHttpDelete(URL url) throws URISyntaxException {
-        return new HttpDelete(
-            new URIBuilder((
-                new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-                        url.getPath(), url.getQuery(), url.getRef())
-            )).addParameter("access_token", wikia_production_app_access_token).build());
-    }
+  private HttpResponse deleteTestUser(String userId) throws IOException, URISyntaxException {
+    URL url = new URL(getURLDeleteUser(userId));
+    CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
+    HttpDelete httpDelete = getHttpDelete(url);
+    return httpClient.execute(httpDelete);
+  }
 
-    public static HttpPost getHttpPost(URL url) throws URISyntaxException {
-        return new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-            url.getPath(), url.getQuery(), url.getRef()));
-    }
+  private static HttpDelete getHttpDelete(URL url) throws URISyntaxException {
+    return new HttpDelete(
+      new URIBuilder((
+        new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
+          url.getPath(), url.getQuery(), url.getRef())
+      )).addParameter("access_token", wikiaProductionAppAccessToken).build());
+  }
+
+  private static HttpPost getHttpPost(URL url) throws URISyntaxException {
+    return new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
+      url.getPath(), url.getQuery(), url.getRef()));
+  }
 }
 

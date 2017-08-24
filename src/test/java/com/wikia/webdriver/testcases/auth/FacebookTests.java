@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.GraphApi;
@@ -23,7 +22,7 @@ import static org.testng.Assert.assertTrue;
 @Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
 
-  String wikiaProductionAppId = XMLReader.getValue("ci.user.facebook.prod.appId");
+
 
   public void facebookButtonIsVisibleOnSignUpPage() {
     WikiBasePageObject base = new WikiBasePageObject();
@@ -59,7 +58,7 @@ public class FacebookTests extends NewTestTemplate {
   @RelatedIssue(issueID = "IRIS-4714")
   public void userCanSignUpViaFacebook() {
     GraphApi api = new GraphApi();
-    HashMap<String, String> test_user = api.createFacebookTestUser(wikiaProductionAppId);
+    HashMap<String, String> test_user = api.createFacebookTestUser();
 
     new FacebookSettingsPageObject(driver).open();
     new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
