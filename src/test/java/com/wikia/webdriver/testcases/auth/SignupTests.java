@@ -1,79 +1,141 @@
 package com.wikia.webdriver.testcases.auth;
 
-import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
-import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.drivers.Browser;
-import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.common.users.CreateUser;
-import com.wikia.webdriver.common.users.TestUser;
-import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
-import org.joda.time.DateTime;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import org.testng.annotations.Test;
-@Test(groups = "Mercury_Signup")
-@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
-@InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
-)
+
+import java.util.Calendar;
+
+import static  com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static  com.wikia.webdriver.common.core.Assertion.assertStringContains;
+
+@Test(groups = "auth-signUp")
 public class SignupTests extends NewTestTemplate {
 
-  private void init() {
-    new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+  Credentials credentials = Configuration.getCredentials();
+
+  @Test(groups = "SignUp_anonCanNotSignUpIfSheIsYoungerThanTwelve")
+  public void anonCanNotSignUpIfYoungerThanTwelve() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage register = new AttachedRegisterPage();
+    register.typeUsername(register.getTimeStamp() + " some letters");
+    register.typeEmailAddress(credentials.emailQaart1);
+    register.typePassword(register.getTimeStamp());
+    Calendar currentDate = Calendar.getInstance();
+    register.typeBirthdate(
+        // +1 because months are numerated from 0
+        Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+        Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+        Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE));
+    register.submit();
+    assertEquals(register.getError(), "We cannot complete your registration at this time");
   }
 
-  @Test(groups = "MercurySignupTest_001")
-  public void MercurySignupTest_001_successfulSignup() {
-    init();
-    signUp(new CreateUser().create()).verifyAvatarAfterSignup();
+  @Test(groups = "SignUp_anonCanNotSignUpIfTheUsernameAlreadyExists")
+  public void anonCanNotSignUpIfTheUsernameAlreadyExists() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage register = new AttachedRegisterPage();
+    String password = "Pass" + register.getTimeStamp();
+    String email = credentials.emailQaart2;
+    register.typeEmailAddress(email);
+    register.typeUsername(credentials.userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+
+    register.submit();
+    assertStringContains(register.getError(), "Username is taken");
+
   }
 
-  @Test(groups = "MercurySignupTest_002")
-  public void anonCanSignUpWithEmailAlreadyInUse() {
-    init();
-    signUp(new CreateUser().withEmail("qaart001@gmail.com").create()).verifyAvatarAfterSignup();
+  @Test(groups = "SignUp_anonCanSignUpOnNewBaseAuthPageFromGlobalNav")
+  public void anonCanSignUpOnNewBaseAuthPageFromGlobalNav() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    NavigationBar registerLink = new NavigationBar(driver);
+    DetachedRegisterPage register = new DetachedRegisterPage(registerLink.clickOnRegister());
+    String userName = "User" + register.getTimeStamp();
+    String password = "Pass" + register.getTimeStamp();
+    String email = credentials.emailQaart2;
+    register.typeEmailAddress(email);
+    register.typeUsername(userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+
+    register.submit();
+
+    base.verifyUserLoggedIn(userName);
   }
 
-  @Test(groups = "MercurySignupTest_003")
-  public void MercurySignupTest_003_signupErrorUsernameTaken() {
-    init();
-    String userNameTaken = "bekcunning";
+  @Test(groups = "SignUp_anonCanSignUpWithoutConfirmingVerificationEmail")
+  public void anonCanSignUpWithoutConfirmingVerificationEmail() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
 
-    signUp(new CreateUser().withName(userNameTaken).create()).verifyUsernameTakenError();
+    String userName = "User" + signUp.getTimeStamp();
+    String password = "Pass" + signUp.getTimeStamp();
+    String email = credentials.emailQaart2;
+    AttachedRegisterPage register = new AttachedRegisterPage();
+    register.typeEmailAddress(email);
+    register.typeUsername(userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+    register.submit();
+    base.verifyUserLoggedIn(userName);
   }
 
-  @Test(groups = "MercurySignupTest_004")
-  public void MercurySignupTest_004_signupErrorBadPassword() {
-    init();
-    String random = "User" + DateTime.now().getMillis();
+  @Test(groups = "SignUp_userCanLoginWithoutConfirmingVerificationEmail")
+  public void userCanLoginWithoutConfirmingVerificationEmail() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
 
-    signUp(new CreateUser().withName(random).withPass(random).create()).verifyPasswordError();
+    String userName = "User" + signUp.getTimeStamp();
+    String password = "Pass" + signUp.getTimeStamp();
+    String email = credentials.emailQaart2;
+    AttachedRegisterPage register = new AttachedRegisterPage();
+    register.typeEmailAddress(email);
+    register.typeUsername(userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+                           PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+    register.submit();
+    base.verifyUserLoggedIn(userName);
+    base.logoutFromAnywhere();
+    NavigationBar signInLink = new NavigationBar(driver);
+    DetachedSignInPage page = new DetachedSignInPage(signInLink.clickOnSignIn());
+    page.login(userName, password);
+    base.verifyUserLoggedIn(userName);
   }
 
-  @Test(groups = "MercurySignupTest_005")
-  public void MercurySignupTest_005_signupErrorTooYoungUser() {
-    init();
-    DateTime wrongBirthDate = new DateTime(2009, 12, 12, 12, 0, 0);
-
-    signUp(new CreateUser().withBirthday(wrongBirthDate).create()).verifyBirthdateError();
-  }
-
-  @Test(groups = "MercurySignupTest_006")
+  @Test(groups = "SignUp_anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters")
   @Execute(onWikia = "ja.ja-test")
-  public void MercurySignupTest_006_japaneseUserSignup() {
-    init();
-    String japanName = "ユーザー" + DateTime.now().getMillis();
-    String japanPAssword = "ユーザザー" + DateTime.now().getMillis();
+  public void anonCanSignUpWithUsernameContainingJapaneseSpecialCharacters() {
+    WikiBasePageObject base = new WikiBasePageObject();
+    AttachedRegisterPage signUp = base.openSpecialUserSignUpPage(wikiURL);
+    base.disableCaptcha();
+    String userName = "ユーザー" + signUp.getTimeStamp();
+    String password = "パス" + signUp.getTimeStamp();
+    String email = credentials.emailQaart2;
 
-    signUp(new CreateUser().withName(japanName).withPass(japanPAssword).create())
-        .verifyAvatarAfterSignup();
-  }
-
-  private SignupPageObject signUp(TestUser user) {
-    return new SignupPageObject(driver).openMobileSignupPage().signUp(user.getUserName(),
-        user.getPassword(), user.getEmail(), user.getBirthdate());
+    AttachedRegisterPage register = new AttachedRegisterPage();
+    register.typeEmailAddress(email);
+    register.typeUsername(userName);
+    register.typePassword(password);
+    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+      PageContent.WIKI_SIGN_UP_BIRTHYEAR);
+    register.submit();
+    base.verifyUserLoggedIn(userName);
   }
 }
