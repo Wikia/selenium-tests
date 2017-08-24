@@ -12,15 +12,31 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import static org.testng.Assert.assertTrue;
 
 @Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
+
+  private GraphApi facebookApi = new GraphApi();
+  private HashMap<String, String> test_user;
+
+  @BeforeSuite
+  private void setUp(){
+    test_user = facebookApi.createFacebookTestUser();
+  }
+
+  @AfterSuite
+  private void cleanUp() {
+    facebookApi.deleteFacebookTestUser(test_user.get("id"));
+  }
 
   public void facebookButtonIsVisibleOnSignUpPage() {
     AttachedRegisterPage registerPage = new WikiBasePageObject().openSpecialUserSignUpPage(wikiURL);
@@ -47,20 +63,17 @@ public class FacebookTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "IRIS-4714")
   public void userCanSignUpViaFacebook() {
-    GraphApi api = new GraphApi();
-    HashMap<String, String> test_user = api.createFacebookTestUser();
 
     new FacebookSettingsPageObject(driver).open();
     new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
-    String userName = "QA" + signUp.getTimeStamp();
-    String password = "Pass" + signUp.getTimeStamp();
+    String userName = String.format("QA%s", LocalDateTime.now());
+    String password = String.format("Pass%s", LocalDateTime.now());
 
     fbModal.createAccountNoEmail(test_user.get("email"), userName, password);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
-    api.deleteFacebookTestUser(test_user.get("id"));
   }
 
 }
