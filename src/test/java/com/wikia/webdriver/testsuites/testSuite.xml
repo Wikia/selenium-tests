@@ -103,8 +103,8 @@
             <class name="com.wikia.webdriver.testcases.discussions.SortingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
-            <class name="com.wikia.webdriver.testcases.facebooktests.FacebookButtonTests"/>
-            <class name="com.wikia.webdriver.testcases.facebooktests.FacebookTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.FacebookButtonTests"/>
+            <class name="com.wikia.webdriver.testcases.auth.FacebookTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowArticleTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowBlogTests"/>
             <class name="com.wikia.webdriver.testcases.followingtests.FollowPhotosTests"/>

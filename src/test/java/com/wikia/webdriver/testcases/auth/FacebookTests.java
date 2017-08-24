@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.facebooktests;
+package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;

@@ -1,4 +1,4 @@
-package com.wikia.webdriver.testcases.facebooktests;
+package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.configuration.Configuration;
