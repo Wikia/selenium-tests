@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -17,11 +16,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
   @FindBy(css = "input#mw-input-wpemailaddress")
   private WebElement emailAddressInput;
 
-  public EditPreferencesPage(WebDriver driver) {
-    super(driver);
-  }
-
-  public EditPreferencesPage openEditingSection(String wikiURL) {
+  private EditPreferencesPage openEditingSection(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_EDITING_PREFERENCES);
     return this;
   }
@@ -30,7 +25,7 @@ public class EditPreferencesPage extends PreferencesPageObject {
     return openEditingSection(urlBuilder.getUrlForWiki(Configuration.getWikiName()));
   }
 
-  public EditPreferencesPage openEmailSection(String wikiURL) {
+  private EditPreferencesPage openEmailSection(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_EDITING_PREFERENCES_EMAIL);
     return this;
   }

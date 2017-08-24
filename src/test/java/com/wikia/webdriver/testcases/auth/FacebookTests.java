@@ -22,37 +22,27 @@ import static org.testng.Assert.assertTrue;
 @Test(groups = {"auth-facebook"})
 public class FacebookTests extends NewTestTemplate {
 
-
-
   public void facebookButtonIsVisibleOnSignUpPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    AttachedRegisterPage registerPage = base.openSpecialUserSignUpPage(wikiURL);
+    AttachedRegisterPage registerPage = new WikiBasePageObject().openSpecialUserSignUpPage(wikiURL);
     assertTrue(registerPage.isConnectWithFacebookButtonVisible());
   }
 
   public void facebookButtonIsVisibleOnLoginPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    AttachedSignInPage signInPage = base.openSpecialUserLogin(wikiURL);
+    AttachedSignInPage signInPage = new WikiBasePageObject().openSpecialUserLogin(wikiURL);
     assertTrue(signInPage.isConnectWithFacebookButtonVisible());
   }
 
   public void facebookButtonIsVisibleOnForcedLoginModal() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifyPageHeader(specialPage.getTitle());
-    specialPage.addPhoto();
-
-    DetachedRegisterPage registerPage = new DetachedRegisterPage();
-    assertTrue(registerPage.isConnectWithFacebookButtonVisible());
+    new WikiBasePageObject().openSpecialNewFiles(wikiURL).addPhoto();
+    assertTrue(new DetachedRegisterPage().isConnectWithFacebookButtonVisible());
   }
 
 
   @Execute(asUser = User.USER)
   public void facebookButtonIsVisibleOnUserPreferencesPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    PreferencesPageObject prefsPage = base.openSpecialPreferencesPage(wikiURL);
+    PreferencesPageObject prefsPage = new WikiBasePageObject().openSpecialPreferencesPage(wikiURL);
     prefsPage.selectTab(PreferencesPageObject.tabNames.FACEBOOK);
-    prefsPage.verifyFBButtonVisible();
+    assertTrue(prefsPage.isFacebookButtonVisible());
   }
 
   @RelatedIssue(issueID = "IRIS-4714")

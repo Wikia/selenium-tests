@@ -188,7 +188,7 @@ public class WikiBasePageObject extends BasePageObject {
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
-    return new PreferencesPageObject(driver);
+    return new PreferencesPageObject();
   }
 
   public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {
@@ -681,8 +681,8 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("verifyRecirculationRightRailModule", "Verified recirculation module in right rail", true);
   }
 
-  public void verifyFBButtonVisible() {
-    Assertion.assertTrue(isElementOnPage(facebookConnectButton));
+  public boolean isFacebookButtonVisible() {
+    return isElementOnPage(facebookConnectButton);
   }
 
   public void verifyAvatarVisible() {
