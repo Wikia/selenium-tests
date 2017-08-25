@@ -1049,6 +1049,20 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] adsVuapClickToPlayMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] adsVuapAutoplayDesktop() {
     return new Object[][]{
                 {
