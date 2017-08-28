@@ -1,13 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.facebook;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FacebookMainPageObject extends WikiBasePageObject {
+public class FacebookMainPageObject extends BasePageObject {
 
   @FindBy(css = "#email")
   private WebElement emailField;
@@ -28,18 +26,15 @@ public class FacebookMainPageObject extends WikiBasePageObject {
   }
 
   private void clickLoginButton() {
-    wait.forElementVisible(loginButton);
-    loginButton.click();
-    PageObjectLogging.log("clickLoginButton", "facebook login button clicked", true);
+    waitAndClick(loginButton);
   }
 
   private void typePassword(String password) {
-    wait.forElementVisible(passwordField);
-    passwordField.sendKeys(password);
+    fillInput(passwordField, password);
   }
 
   private void typeEmail(String email) {
-    wait.forElementVisible(emailField);
-    emailField.sendKeys(email);
+    fillInput(emailField, email);
   }
+
 }
