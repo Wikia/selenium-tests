@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedR
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -63,9 +62,7 @@ public class FacebookTests extends NewTestTemplate {
 
   @RelatedIssue(issueID = "IRIS-4714")
   public void userCanSignUpViaFacebook() {
-
-    new FacebookSettingsPageObject(driver).open();
-    new FacebookMainPageObject(driver).login(facebookUser.getEmail(), facebookUser.getPassword());
+    new FacebookMainPageObject().login(facebookUser.getEmail(), facebookUser.getPassword());
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
