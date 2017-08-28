@@ -43,7 +43,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
   private static final int VIDEO_THUMBNAIL_WIDTH = 350;
 
   public VetOptionsComponentObject(WebDriver driver) {
-    super(driver);
+    super();
     PageFactory.initElements(driver, this);
   }
 

@@ -23,7 +23,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
     YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("media");
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
-    VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
+    VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
     vetAddingVideo.addVideoWithoutDetailsByUrl(video.getUrl());
     specialVideos.verifyVideoAdded(video.getTitle());
 
@@ -42,7 +42,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   public void SpecialVideos_002_Library() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
-    VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
+    VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
     specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
   }

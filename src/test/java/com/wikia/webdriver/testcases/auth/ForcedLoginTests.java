@@ -1,10 +1,10 @@
 package com.wikia.webdriver.testcases.auth;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
@@ -21,74 +21,50 @@ import org.testng.annotations.Test;
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Test(groups = "auth-forcedLogin")
+@Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class ForcedLoginTests extends NewTestTemplate {
 
-  User user = User.FORCED_LOGIN_USER;
+  private User user = User.FORCED_LOGIN_USER;
 
   public void anonCanLogInViaAuthModalWhenAddingFile() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
-    specialPage.verifyPageHeader(specialPage.getTitle());
-    specialPage.addPhoto();
-    DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
-
-    authModal.login(user.getUserName(), user.getPassword());
-    AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
-    modal.closeAddPhotoModal();
-
+    SpecialNewFilesPage specialPage = new WikiBasePageObject().openSpecialNewFiles().addPhoto();
+    new DetachedRegisterPage().navigateToSignIn().login(user);
+    new AddMediaModalComponentObject().closeAddPhotoModal();
     specialPage.verifyUserLoggedIn(user.getUserName());
   }
 
   public void anonCanLogInViaAuthModalWhenAddingVideo() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
-    specialPage.clickAddAVideo();
-    DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
-
-    authModal.login(user.getUserName(), user.getPassword());
-
-    AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
-    modal.closeAddVideoModal();
-
+    SpecialVideosPageObject specialPage = new WikiBasePageObject()
+      .openSpecialVideoPage()
+      .clickAddButton();
+    new DetachedRegisterPage().navigateToSignIn().login(user);
+    new AddMediaModalComponentObject().closeAddVideoModal();
     specialPage.verifyUserLoggedIn(user.getUserName());
   }
 
   public void anonCanLogInViaUserLoginPage() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.openSpecialUpload(wikiURL);
-    base.verifyLoginRequiredMessage();
+    WikiBasePageObject base = new WikiBasePageObject().openSpecialUpload();
     base.clickLoginOnSpecialPage();
-    new AttachedSignInPage().login(user.getUserName(), user.getPassword());
-
+    new AttachedSignInPage().login(user);
     base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
-    base.openWikiPage();
     base.openSpecialWatchListPage(wikiURL);
-    base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
-
-    new AttachedSignInPage().login(user.getUserName(), user.getPassword());
-
+    new AttachedSignInPage().login(user);
     base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
   public void anonCanLogInViaAuthModalWhenAddingPhoto() {
     WikiBasePageObject base = new WikiBasePageObject();
-    String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-    VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, articleName);
+    VisualEditModePageObject edit = base.navigateToUniqueArticleEditPage();
     edit.clickPhotoButton();
-    DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
-
-    authModal.login(user.getUserName(), user.getPassword());
+    new DetachedRegisterPage().navigateToSignIn().login(user);
     edit.verifyUserLoggedIn(user.getUserName());
-    assertTrue(edit.isStringInURL(articleName));
     assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
-    PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
-    addPhoto.verifyAddPhotoModal();
   }
 }
