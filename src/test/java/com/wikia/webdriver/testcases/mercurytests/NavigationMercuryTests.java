@@ -83,7 +83,7 @@ public class NavigationMercuryTests extends NavigationTests {
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 
-  @Test
+  @Test (enabled = false)
   @RelatedIssue(issueID = "XW-3858")
   public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack()
       throws InterruptedException {
