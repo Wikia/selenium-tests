@@ -18,6 +18,7 @@ import java.util.List;
 @Test(groups = "AdsVuapMercury")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsVuapMercury extends TemplateNoFirstLoad {
+  private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -37,13 +38,15 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
     vuap.clickOnArea(2);
 
     List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-    Assert.assertTrue(
-        tabs.size() == 3,
+    Assert.assertEquals(
+        tabs.size(),
+        3,
         "There should be three tabs opened after two clicks."
     );
     final String actual = ads.switchToNewBrowserTab();
-    Assert.assertTrue(
-        actual.equals("http://fandom.wikia.com/"),
+    Assert.assertEquals(
+        actual,
+        AD_REDIRECT_URL,
         "Top part of creative should point to FANDOM page but it points to " + actual
     );
   }
