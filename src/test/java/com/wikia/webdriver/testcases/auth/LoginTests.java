@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.auth;
 
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.Helios;
@@ -17,11 +18,14 @@ import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.JoinPageObject;
 import com.wikia.webdriver.elements.mercury.old.LoginPageObject;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
+import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
@@ -197,5 +201,76 @@ public class LoginTests extends NewTestTemplate {
     loginPageObject.clickOnPasswordToggler();
 
     Assertion.assertTrue(loginPageObject.isPasswordTogglerEnabled(), "password should be enabled");
+  }
+
+  private static final String EXPECTED_ERROR_MESSAGE =
+    "We don't recognize these credentials. Try again or register a new account.";
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonCanLogInAsRegisteredUser() {
+    ArticlePage article = new ArticlePage();
+
+    article.open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn()
+      .login(Configuration.getCredentials().userName10,
+        Configuration.getCredentials().password10);
+
+    assertTrue(article.userLoggedInMobile(Configuration.getCredentials().userName10));
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonCanNotLogInWithInvalidPassword() {
+    ArticlePage article = new ArticlePage();
+
+    SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
+
+    signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
+    assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonCanNotLogInWithBlankPassword() {
+    ArticlePage article = new ArticlePage();
+
+    SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
+
+    signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
+    assertTrue(signIn.submitButtonNotClickable());
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonCanNotLogInWithInvalidUsername() {
+    SignInPage signIn = new ArticlePage()
+      .open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
+
+    signIn.login(String.valueOf(DateTime.now().getMillis()), Configuration.getCredentials().password10);
+    assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonCanNotLogInWithBlankUsername() {
+    SignInPage signIn = new ArticlePage()
+      .open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
+    signIn.typePassword(Configuration.getCredentials().password10);
+    assertTrue(signIn.submitButtonNotClickable());
   }
 }

@@ -167,7 +167,6 @@
             <class name="com.wikia.webdriver.testcases.mercurytests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.ImageReviewTests"/>
-            <class name="com.wikia.webdriver.testcases.auth.LoginTestsTmp"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMercuryTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.SearchMercuryTests"/>
