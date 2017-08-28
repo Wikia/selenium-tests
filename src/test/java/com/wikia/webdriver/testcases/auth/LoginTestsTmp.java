@@ -18,76 +18,76 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
-    browser = Browser.CHROME,
-    emulator = Emulator.GOOGLE_NEXUS_5
+  browser = Browser.CHROME,
+  emulator = Emulator.GOOGLE_NEXUS_5
 )
 @Test
 public class LoginTestsTmp extends NewTestTemplate {
 
-    private static final String EXPECTED_ERROR_MESSAGE =
-      "We don't recognize these credentials. Try again or register a new account.";
+  private static final String EXPECTED_ERROR_MESSAGE =
+    "We don't recognize these credentials. Try again or register a new account.";
 
-    public void anonCanLogInAsRegisteredUser() {
-        ArticlePage article = new ArticlePage();
+  public void anonCanLogInAsRegisteredUser() {
+    ArticlePage article = new ArticlePage();
 
-            article.open(MercurySubpages.MAIN_PAGE)
-            .getTopbar()
-            .openNavigation()
-            .clickOnSignInRegisterButton()
-            .navigateToSignIn()
-            .login(Configuration.getCredentials().userName10,
-              Configuration.getCredentials().password10);
+    article.open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn()
+      .login(Configuration.getCredentials().userName10,
+        Configuration.getCredentials().password10);
 
-        assertTrue(article.userLoggedInMobile(Configuration.getCredentials().userName10));
-    }
+    assertTrue(article.userLoggedInMobile(Configuration.getCredentials().userName10));
+  }
 
-    public void anonCanNotLogInWithInvalidPassword() {
-        ArticlePage article = new ArticlePage();
+  public void anonCanNotLogInWithInvalidPassword() {
+    ArticlePage article = new ArticlePage();
 
-        SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
-            .getTopbar()
-            .openNavigation()
-            .clickOnSignInRegisterButton()
-            .navigateToSignIn();
+    SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
 
     signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
     assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
-    }
+  }
 
-    public void anonCanNotLogInWithBlankPassword() {
-        ArticlePage article = new ArticlePage();
+  public void anonCanNotLogInWithBlankPassword() {
+    ArticlePage article = new ArticlePage();
 
-        SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
-            .getTopbar()
-            .openNavigation()
-            .clickOnSignInRegisterButton()
-            .navigateToSignIn();
+    SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
 
-        signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
-        assertTrue(signIn.submitButtonNotClickable());
-    }
+    signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
+    assertTrue(signIn.submitButtonNotClickable());
+  }
 
-    public void anonCanNotLogInWithInvalidUsername() {
-        SignInPage signIn = new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopbar()
-            .openNavigation()
-            .clickOnSignInRegisterButton()
-            .navigateToSignIn();
+  public void anonCanNotLogInWithInvalidUsername() {
+    SignInPage signIn = new ArticlePage()
+      .open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
 
-        signIn.login(String.valueOf(DateTime.now().getMillis()), Configuration.getCredentials().password10);
-        assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
-    }
+    signIn.login(String.valueOf(DateTime.now().getMillis()), Configuration.getCredentials().password10);
+    assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
+  }
 
-    public void anonCanNotLogInWithBlankUsername() {
-        SignInPage signIn = new ArticlePage()
-            .open(MercurySubpages.MAIN_PAGE)
-            .getTopbar()
-            .openNavigation()
-            .clickOnSignInRegisterButton()
-            .navigateToSignIn();
-            signIn.typePassword(Configuration.getCredentials().password10);
-            assertTrue(signIn.submitButtonNotClickable());
-    }
+  public void anonCanNotLogInWithBlankUsername() {
+    SignInPage signIn = new ArticlePage()
+      .open(MercurySubpages.MAIN_PAGE)
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
+    signIn.typePassword(Configuration.getCredentials().password10);
+    assertTrue(signIn.submitButtonNotClickable());
+  }
 
 }
