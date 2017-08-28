@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.auth;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.api.GraphApi;
+import com.wikia.webdriver.common.core.helpers.FacebookUser;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
@@ -18,7 +19,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 import static org.testng.Assert.assertTrue;
 
@@ -26,16 +26,16 @@ import static org.testng.Assert.assertTrue;
 public class FacebookTests extends NewTestTemplate {
 
   private GraphApi facebookApi = new GraphApi();
-  private HashMap<String, String> test_user;
+  private FacebookUser facebookUser;
 
   @BeforeSuite
   private void setUp(){
-    test_user = facebookApi.createFacebookTestUser();
+    facebookUser = facebookApi.createFacebookTestUser();
   }
 
   @AfterSuite
   private void cleanUp() {
-    facebookApi.deleteFacebookTestUser(test_user.get("id"));
+    facebookApi.deleteFacebookTestUser(facebookUser.getId());
   }
 
   public void facebookButtonIsVisibleOnSignUpPage() {
@@ -65,14 +65,14 @@ public class FacebookTests extends NewTestTemplate {
   public void userCanSignUpViaFacebook() {
 
     new FacebookSettingsPageObject(driver).open();
-    new FacebookMainPageObject(driver).login(test_user.get("email"), test_user.get("password"));
+    new FacebookMainPageObject(driver).login(facebookUser.getEmail(), facebookUser.getPassword());
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
     String userName = String.format("QA%s", LocalDateTime.now());
     String password = String.format("Pass%s", LocalDateTime.now());
 
-    fbModal.createAccountNoEmail(test_user.get("email"), userName, password);
+    fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
   }
 

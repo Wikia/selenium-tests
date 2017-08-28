@@ -1,6 +1,9 @@
 package com.wikia.webdriver.common.core.api;
 
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.XMLReader;
+import com.wikia.webdriver.common.core.helpers.FacebookUser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,11 +35,15 @@ public class GraphApi {
   private static final String wikiaProductionAppId = XMLReader
     .getValue("ci.user.facebook.prod.appId");
 
-  public HashMap<String, String> createFacebookTestUser() {
+  public FacebookUser createFacebookTestUser() {
     try {
       HttpResponse response = createTestUser(wikiaProductionAppId);
       String entity = EntityUtils.toString(response.getEntity());
-      return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
+      DocumentContext json = JsonPath.parse(entity);
+      return new FacebookUser(
+        json.read("$.email"),
+        json.read("$.password"),
+        json.read("$.id"));
     } catch (IOException | URISyntaxException e) {
       PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
