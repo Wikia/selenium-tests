@@ -8,41 +8,52 @@ import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
+import org.testng.SkipException;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
 @Test(groups = {"discussions-layout"})
 public class LayoutTests extends NewTestTemplate {
+
+  private PostEntity.Data existingPost;
+
+  @BeforeSuite
+  private void setUp() {
+    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_5);
+    existingPost = DiscussionsClient
+      .using(User.USER_4, driver)
+      .createPostWithUniqueData(siteId);
+  }
 
   /**
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(enabled = false, groups = "discussions-anonUserOnMobileCanViewMorePosts")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "SOC-3182")
   public void anonUserOnMobileCanViewMorePosts() {
     userCanViewMorePosts();
   }
@@ -51,14 +62,12 @@ public class LayoutTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeePostsList() {
@@ -76,14 +85,12 @@ public class LayoutTests extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeePostDetailsList() {
     postDetailsListLoads();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeePostsList() {
@@ -94,14 +101,12 @@ public class LayoutTests extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeePostsList() {
     postsListLoads();
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeePostDetailsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeePostDetailsList() {
@@ -113,7 +118,7 @@ public class LayoutTests extends NewTestTemplate {
    */
 
   private void postDetailsListLoads() {
-    Reply reply = new PostDetailsPage().openDefaultPost().getReply();
+    Reply reply = new PostDetailsPage().open(existingPost.getId()).getReply();
 
     Assertion.assertFalse(reply.isPostDetailsListEmpty());
   }
@@ -127,6 +132,9 @@ public class LayoutTests extends NewTestTemplate {
   private void userCanViewMorePosts() {
     Post post = new PostsListPage().open().getPost();
     int startingListLength = post.getPostsListLength();
+    if(startingListLength < 20) {
+      throw new SkipException("Skipping test because the condition of minimum 20 posts not met");
+    }
     post.clickLoadMore();
     new Loading(driver).handleAsyncPageReload();
 
