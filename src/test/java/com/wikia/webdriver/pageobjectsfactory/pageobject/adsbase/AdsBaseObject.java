@@ -724,9 +724,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToSlot(String slotName) {
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerComments();
-    }
-
-    if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
+    } else if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
       scrollToFooter();
     }
 
