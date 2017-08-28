@@ -1,11 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
@@ -45,6 +43,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -164,12 +163,6 @@ public class WikiBasePageObject extends BasePageObject {
 
   public int getBannerNotificationsHeight(){
     return bannerNotificationContainer.getSize().getHeight();
-  }
-
-  public String resetForgotPasswordTime(String userName, String apiToken) {
-    String[][] apiRequestParameters = {{"action", ApiActions.API_ACTION_FORGOT_PASSWORD},
-        {"user", userName}, {"token", apiToken}, {"format", "json"},};
-    return CommonUtils.sendPost(URLsContent.API_URL, apiRequestParameters);
   }
 
   public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
@@ -299,7 +292,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new SourceEditModePageObject();
   }
 
-  public SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
+  protected SourceEditModePageObject openSrcModeWithMainEditButtonDropdown() {
     this.openArticleEditDropdown();
     editButton.click();
     PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true,
@@ -340,7 +333,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditorPageObject();
   }
 
-  public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
+  protected VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
@@ -349,7 +342,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditModePageObject();
   }
 
-  public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
+  protected SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
     WebElement sectionEditButton = sectionEditButtons.get(section);
     wait.forElementVisible(sectionEditButton);
     sectionEditButton.click();
@@ -397,6 +390,13 @@ public class WikiBasePageObject extends BasePageObject {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
                                              URLsContent.VEACTION_EDIT));
     return new VisualEditorPageObject();
+  }
+
+  public WikiBasePageObject waitForPageReload() {
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
+    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
+      "Loading overlay still visible, page not loaded in expected time");
+    return this;
   }
 
   public void verifyUserLoggedIn(final String userName) {
@@ -578,7 +578,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new DeletePageObject(driver);
   }
 
-  public void openArticleEditDropdown() {
+  protected void openArticleEditDropdown() {
     new Actions(driver).moveToElement(articleEditDropdown).perform();
   }
 
@@ -602,7 +602,7 @@ public class WikiBasePageObject extends BasePageObject {
     return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
   }
 
-  public String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
+  protected String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
     return driver
         .executeScript("return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
             element, pseudoElement, cssValue)
@@ -616,9 +616,9 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public void addVideoViaAjax(String videoURL) {
-    String request = new String(
-        "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
-            + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );");
+    String request =
+      "$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {"
+        + "data: {url: '" + videoURL + "'}," + "type: 'POST' } );";
     jsActions.execute(request);
   }
 
@@ -660,7 +660,7 @@ public class WikiBasePageObject extends BasePageObject {
     return isElementOnPage(newGlobalNavigation);
   }
 
-  public Dimension getWindowSize() {
+  protected Dimension getWindowSize() {
     return driver.manage().window().getSize();
   }
 
@@ -671,20 +671,9 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
   }
 
-  public void scrollToMobileFooter() {
-    wait.forElementPresent(By.className(MOBILE_FOOTER_CLASS));
-    jsActions.scrollToElement(mobileFooter);
-    PageObjectLogging.log("scrollToMobileFooter", "Scroll to the mobile footer of the page", true);
-  }
-
   public void verifyGlobalNavigation() {
     wait.forElementVisible(globalNavigationBar);
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
-  }
-
-  public void verifyRecirculationRightRailModule() {
-    wait.forElementVisible(recirculationRightRailModule);
-    PageObjectLogging.log("verifyRecirculationRightRailModule", "Verified recirculation module in right rail", true);
   }
 
   public boolean isFacebookButtonVisible() {
@@ -704,21 +693,8 @@ public class WikiBasePageObject extends BasePageObject {
         "cb=" + DateTime.now().getMillis()));
   }
 
-  public Boolean isWikiFirstHeaderVisible() {
-    try {
-      wait.forElementVisible(articleTitle);
-      return true;
-    } catch(TimeoutException e) {
-      PageObjectLogging.logInfo("FirstPageHeader object not visible", e);
-      return false;
-    }
-  }
-
   public enum PositionsVideo {
     LEFT, CENTER, RIGHT
   }
 
-  public enum HubName {
-    VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
-  }
 }
