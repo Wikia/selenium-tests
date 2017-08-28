@@ -13,6 +13,7 @@ public enum User {
   USER_5("ci.user.regular5.username", "ci.user.regular5.password"),
   USER_6("ci.user.regular6.username", "ci.user.regular6.password", "ci.user.regular6.id"),
   USER_9("ci.user.regular9.username", "ci.user.regular9.password"),
+  FORCED_LOGIN_USER("ci.user.regular10.username", "ci.user.regular10.password"),
   USER_11("ci.user.regular11.username", "ci.user.regular11.password"),
   USER_12("ci.user.regular12.username", "ci.user.regular12.password", "ci.user.regular12.user_id"),
   USER_GERMAN("ci.user.language5.username", "ci.user.language5.password"),

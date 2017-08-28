@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.auth;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
@@ -22,9 +23,8 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 @Test(groups = "auth-forcedLogin")
 public class ForcedLoginTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
+  User user = User.FORCED_LOGIN_USER;
 
-  @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingFile")
   public void anonCanLogInViaAuthModalWhenAddingFile() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialNewFilesPage specialPage = base.openSpecialNewFiles(wikiURL);
@@ -32,41 +32,38 @@ public class ForcedLoginTests extends NewTestTemplate {
     specialPage.addPhoto();
     DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
 
-    authModal.login(credentials.userName10, credentials.password10);
+    authModal.login(user.getUserName(), user.getPassword());
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddPhotoModal();
 
-    specialPage.verifyUserLoggedIn(credentials.userName10);
+    specialPage.verifyUserLoggedIn(user.getUserName());
   }
 
-  @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingVideo")
   public void anonCanLogInViaAuthModalWhenAddingVideo() {
     WikiBasePageObject base = new WikiBasePageObject();
     SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
     specialPage.clickAddAVideo();
     DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
 
-    authModal.login(credentials.userName10, credentials.password10);
+    authModal.login(user.getUserName(), user.getPassword());
 
     AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
     modal.closeAddVideoModal();
 
-    specialPage.verifyUserLoggedIn(credentials.userName10);
+    specialPage.verifyUserLoggedIn(user.getUserName());
   }
 
-  @Test(groups = "ForcedLogin_anonCanLogInViaUserLoginPage")
   public void anonCanLogInViaUserLoginPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUpload(wikiURL);
     base.verifyLoginRequiredMessage();
     base.clickLoginOnSpecialPage();
-    new AttachedSignInPage().login(credentials.userName10, credentials.password10);
+    new AttachedSignInPage().login(user.getUserName(), user.getPassword());
 
-    base.verifyUserLoggedIn(credentials.userName10);
+    base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_UPLOAD));
   }
 
-  @Test(groups = "ForcedLogin_anonCanLogInOnSpecialWatchListPage")
   public void anonCanLogInOnSpecialWatchListPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage();
@@ -74,13 +71,12 @@ public class ForcedLoginTests extends NewTestTemplate {
     base.verifyNotLoggedInMessage();
     base.clickLoginOnSpecialPage();
 
-    new AttachedSignInPage().login(credentials.userName10, credentials.password10);
+    new AttachedSignInPage().login(user.getUserName(), user.getPassword());
 
-    base.verifyUserLoggedIn(credentials.userName10);
+    base.verifyUserLoggedIn(user.getUserName());
     assertTrue(base.isStringInURL(URLsContent.SPECIAL_WATCHLIST));
   }
 
-  @Test(groups = "ForcedLogin_anonCanLogInViaAuthModalWhenAddingPhoto")
   public void anonCanLogInViaAuthModalWhenAddingPhoto() {
     WikiBasePageObject base = new WikiBasePageObject();
     String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -88,8 +84,8 @@ public class ForcedLoginTests extends NewTestTemplate {
     edit.clickPhotoButton();
     DetachedSignInPage authModal = new DetachedRegisterPage().navigateToSignIn();
 
-    authModal.login(credentials.userName10, credentials.password10);
-    edit.verifyUserLoggedIn(credentials.userName10);
+    authModal.login(user.getUserName(), user.getPassword());
+    edit.verifyUserLoggedIn(user.getUserName());
     assertTrue(edit.isStringInURL(articleName));
     assertTrue(edit.isStringInURL(URLsContent.ACTION_EDIT));
     PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
