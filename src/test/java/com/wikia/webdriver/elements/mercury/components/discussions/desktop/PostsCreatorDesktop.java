@@ -46,10 +46,6 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   @FindBy (css = ".discussion-inline-editor textarea[required]")
   private WebElement descriptionTextarea;
 
-  public PostsCreatorDesktop() {
-    super();
-  }
-
   @Override
   protected String getBaseCssClassName() {
     return "discussion-inline-editor";

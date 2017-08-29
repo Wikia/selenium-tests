@@ -35,9 +35,6 @@ public class ArticlePage extends WikiBasePageObject {
   private final Navigation navigation = new Navigation(driver);
 
   @Getter(lazy = true)
-  private final TopBar topbar = new TopBar();
-
-  @Getter(lazy = true)
   private final CuratedMainPagePageObject curatedMainPage = new CuratedMainPagePageObject();
 
   @Getter(lazy = true)
