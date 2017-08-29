@@ -42,17 +42,137 @@ public class LoginTests extends NewTestTemplate {
     Assertion.assertEquals(article.getArticleTitle(), title);
   }
 
+  public void userCanLogInAsStaffOnDesktop() {
+    ArticlePageObject article = openArticleOnDesktop();
+    loginOnDesktopAs(staff);
+    article.verifyUserLoggedIn(staff);
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanLogInAsStaffOnMobile() {
+    ArticlePage article = openArticleOnMobile();
+    loginOnMobileAs(article, staff);
+    article.waitForPageReload().verifyUserLoggedIn(staff);
+  }
+
+  public void japaneseUserCanLogInOnDesktop() {
+    ArticlePageObject article = openArticleOnDesktop();
+    loginOnDesktopAs(japaneseUser);
+    article.verifyUserLoggedIn(japaneseUser);
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void japaneseUserCanLogInOnMobile() {
+    ArticlePage article = openArticleOnMobile();
+    loginOnMobileAs(article, japaneseUser);
+    article.waitForPageReload().verifyUserLoggedIn(japaneseUser);
+  }
+
+  public void passwordTogglerChangesPasswordVisibilityOnDesktop() {
+    SignInPage signInPage = openLoginModalOnDesktop();
+    signInPage.typePassword(user.getPassword());
+
+    Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
+    signInPage.togglePasswordVisibility();
+    assertFalse(signInPage.isPasswordMasked(), "password should be readable");
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void passwordTogglerChangesPasswordVisibilityOnMobile() {
+    SignInPage signInPage = navigateToSignInOnMobile();
+    signInPage.typePassword(user.getPassword());
+
+    Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
+    signInPage.togglePasswordVisibility();
+    assertFalse(signInPage.isPasswordMasked(), "password should be readable");
+  }
+
+  @Execute(asUser = User.INVALIDATED_TOKEN_USER_1)
+  public void userWithoutAValidTokenGetsLoggedOutOnDesktop() {
+    ArticlePageObject article = openArticleOnDesktop();
+    Helios.deleteAllTokens(User.INVALIDATED_TOKEN_USER_1);
+    article.refreshPageAddingCacheBuster();
+    assertTrue(article.waitForPageReload().getGlobalNavigation().isUserLoggedOut());
+  }
+
+  @Execute(asUser = User.INVALIDATED_TOKEN_USER_2)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userWithoutAValidTokenGetsLoggedOutOnMobile() {
+    ArticlePage article = openArticleOnMobile();
+    Helios.deleteAllTokens(User.INVALIDATED_TOKEN_USER_2);
+    article.refreshPageAddingCacheBuster();
+    assertTrue(article.isUserLoggedOutMobile());
+  }
+
+  private static final String ERROR_MESSAGE =
+    "We don't recognize these credentials. Try again or register a new account.";
+
+  public void nonexistentUserCannotLogInOnDesktop() {
+    SignInPage signIn = openLoginModalOnDesktop();
+    String nonexistingUsername = String.format("QA_%s", LocalDateTime.now());
+    signIn.login(nonexistingUsername, user.getPassword());
+    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void nonexistentUserCannotLogInOnMobile() {
+    SignInPage signIn = navigateToSignInOnMobile();
+    String nonexistingUsername = String.format("QA_%s", LocalDateTime.now());
+    signIn.login(nonexistingUsername, user.getPassword());
+    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
+  }
+
+  public void userCannotLogInWithInvalidPasswordOnDesktop() {
+    SignInPage signIn = openLoginModalOnDesktop();
+    String invalidPassword = String.format("P@55_%s", LocalDateTime.now());
+    signIn.login(user.getUserName(), invalidPassword);
+    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotLogInWithInvalidPasswordOnMobile() {
+    SignInPage signIn = navigateToSignInOnMobile();
+    String invalidPassword = String.format("P@55_%s", LocalDateTime.now());
+    signIn.login(user.getUserName(), invalidPassword);
+    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
+  }
+
+  public void userCannotLogInWithBlankUsernameOnDesktop() {
+    SignInPage signIn = openLoginModalOnDesktop();
+    signIn.typeUsername("").typePassword(user.getPassword());
+    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotLogInWithBlankUsernameOnMobile() {
+    SignInPage signIn = navigateToSignInOnMobile();
+    signIn.typeUsername("").typePassword(user.getPassword());
+    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+  }
+
+  public void userCannotLogInWithBlankPasswordOnDesktop() {
+    SignInPage signIn = openLoginModalOnDesktop();
+    signIn.typeUsername(user.getUserName()).typePassword("");
+    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotLogInWithBlankPasswordOnMobile() {
+    SignInPage signIn = navigateToSignInOnMobile();
+    signIn.typeUsername(user.getUserName()).typePassword("");
+    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+  }
+
+  /**
+   * HELPER METHODS
+   */
+
   private ArticlePage openArticleOnMobile() {
     return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
   }
 
   private ArticlePageObject openArticleOnDesktop() {
     return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
-  }
-  public void userCanLogInAsStaffOnDesktop() {
-    ArticlePageObject article = openArticleOnDesktop();
-    loginOnDesktopAs(staff);
-    article.verifyUserLoggedIn(staff);
   }
 
   private void loginOnDesktopAs(User user) {
@@ -77,120 +197,5 @@ public class LoginTests extends NewTestTemplate {
       .openNavigation()
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCanLogInAsStaffOnMobile() {
-    ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(article, staff);
-    article.verifyUserLoggedIn(staff);
-  }
-
-  public void japaneseUserCanLogInOnDesktop() {
-    ArticlePageObject article = openArticleOnDesktop();
-    loginOnDesktopAs(japaneseUser);
-    article.verifyUserLoggedIn(japaneseUser);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void japaneseUserCanLogInOnMobile() {
-    ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(article, japaneseUser);
-    article.verifyUserLoggedIn(japaneseUser);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void passwordTogglerChangesPasswordVisibilityOnMobile() {
-    SignInPage signInPage = navigateToSignInOnMobile();
-    signInPage.typePassword(user.getPassword());
-
-    Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
-    signInPage.togglePasswordVisibility();
-    assertFalse(signInPage.isPasswordMasked(), "password should be readable");
-  }
-
-  public void passwordTogglerChangesPasswordVisibilityOnDesktop() {
-    SignInPage signInPage = openLoginModalOnDesktop();
-    signInPage.typePassword(user.getPassword());
-
-    Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
-    signInPage.togglePasswordVisibility();
-    assertFalse(signInPage.isPasswordMasked(), "password should be readable");
-  }
-
-  @Execute(asUser = User.INVALIDATED_TOKEN_USER_1)
-  public void userWithoutAValidTokenGetsLoggedOutOnDesktop() {
-    ArticlePageObject article = openArticleOnDesktop();
-    Helios.deleteAllTokens(User.INVALIDATED_TOKEN_USER_1);
-    article.refreshPageAddingCacheBuster();
-    assertTrue(article.getGlobalNavigation().isUserLoggedOut());
-  }
-
-  @Execute(asUser = User.INVALIDATED_TOKEN_USER_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userWithoutAValidTokenGetsLoggedOutOnMobile() {
-    ArticlePage article = openArticleOnMobile();
-    Helios.deleteAllTokens(User.INVALIDATED_TOKEN_USER_2);
-    article.refreshPageAddingCacheBuster();
-    assertTrue(article.isUserLoggedOutMobile());
-  }
-
-  private static final String ERROR_MESSAGE =
-    "We don't recognize these credentials. Try again or register a new account.";
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void nonexistentUserCannotLogInOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    String nonexistingUsername = String.format("QA_%s", LocalDateTime.now());
-    signIn.login(nonexistingUsername, user.getPassword());
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  public void nonexistentUserCannotLogInOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
-    String nonexistingUsername = String.format("QA_%s", LocalDateTime.now());
-    signIn.login(nonexistingUsername, user.getPassword());
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCannotLogInWithInvalidPasswordOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    String invalidPassword = String.format("P@55_%s", LocalDateTime.now());
-    signIn.login(user.getUserName(), invalidPassword);
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  public void userCannotLogInWithInvalidPasswordOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
-    String invalidPassword = String.format("P@55_%s", LocalDateTime.now());
-    signIn.login(user.getUserName(), invalidPassword);
-    Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCannotLogInWithBlankUsernameOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    signIn.login("", user.getPassword());
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
-  }
-
-  public void userCannotLogInWithBlankUsernameOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
-    signIn.login("", user.getPassword());
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
-  }
-
-  public void userCannotLogInWithBlankPasswordOnDesktop() {
-    SignInPage signIn = openLoginModalOnDesktop();
-    signIn.login(user.getUserName(), "");
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCannotLogInWithBlankPasswordOnMobile() {
-    SignInPage signIn = navigateToSignInOnMobile();
-    signIn.login(user.getUserName(), "");
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
   }
 }

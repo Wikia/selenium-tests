@@ -61,6 +61,9 @@ public class Helios {
   }
 
   public static void deleteAllTokens(User user) {
+    if (user.getUserId().isEmpty()) {
+      throw new IllegalArgumentException(String.format("No userId found for user %s", user.getUserName()));
+    }
     String heliosGetTokenURL = HeliosConfig.getUrl(HeliosConfig.HeliosController.USERS);
 
     HttpDelete httpDelete =
@@ -69,7 +72,8 @@ public class Helios {
     httpDelete.setHeader(X_WIKIA_INTERNAL_REQUEST, "0");
 
     try (CloseableHttpResponse response = getDefaultClient().execute(httpDelete)) {
-      PageObjectLogging.log("DELETE HEADERS: ", response.toString(), true);
+      PageObjectLogging.log("DELETE TOKENS REQUEST: ", httpDelete.toString(), true);
+      PageObjectLogging.log("DELETE TOKENS RESPONSE: ", response.toString(), true);
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
