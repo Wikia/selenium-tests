@@ -11,7 +11,6 @@ import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
@@ -34,21 +33,23 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class LoginTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
+  User user = User.LOGIN_USER;
+  User japaneseUser = User.USER_JAPAN;
+  User staff = User.LOGIN_STAFF;
 
 
-  public void anonCanLoginOnAuthModalFromGlobalNavigation() {
+  public void userCanLoginOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
     NavigationBar signInLink = new NavigationBar(driver);
     DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
-    authModal.login(credentials.userName10, credentials.password10);
-    base.verifyUserLoggedIn(credentials.userName10);
+    authModal.login(user.getUserName(), user.getPassword());
+    base.verifyUserLoggedIn(user.getUserName());
   }
 
 
-  public void anonCanLoginAsStaffOnAuthModalFromGlobalNavigation() {
+  public void userCanLoginAsStaffOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
@@ -56,21 +57,21 @@ public class LoginTests extends NewTestTemplate {
     DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
     //we are using userNameStaff2 because of PLATFORM-2502 and PLATFORM-2508
-    authModal.login(credentials.userNameStaff2, credentials.passwordStaff2);
-    base.verifyUserLoggedIn(credentials.userNameStaff2);
+    authModal.login(staff.getUserName(), staff.getPassword());
+    base.verifyUserLoggedIn(staff.getUserName());
   }
 
   @Test(enabled = false)
   @Execute(onWikia = "ja.ja-test")
-  public void anonCanLoginAsJapaneseUserOnAuthModalFromGlobalNavigation() {
+  public void japaneseUserCanLogInOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
     base.openWikiPage(wikiURL);
 
     DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
-    authModal.login(credentials.userNameJapanese2, credentials.passwordJapanese2);
-    base.verifyUserLoggedIn(credentials.userNameJapanese2);
+    authModal.login(japaneseUser.getUserName(), japaneseUser.getPassword());
+    base.verifyUserLoggedIn(japaneseUser.getUserName());
   }
 
   @Execute(asUser = User.USER_12)
@@ -90,7 +91,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotLogInWithWrongPassword() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.logUserIn(Configuration.getCredentials().userName10, "thisIsWrongPassword");
+    loginPageObject.logUserIn(user.getUserName(), "thisIsWrongPassword");
 
     Assertion.assertEquals(loginPageObject.getErrorMessage(), ERROR_MESSAGE);
   }
@@ -98,7 +99,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void invalidUserCanNotLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.logUserIn("notExistingUserName", Configuration.getCredentials().password10);
+    loginPageObject.logUserIn("notExistingUserName", user.getPassword());
 
     Assertion.assertEquals(loginPageObject.getErrorMessage(), ERROR_MESSAGE);
   }
@@ -106,7 +107,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void notPossibleToLogInWhenUsernameFieldBlank() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.logUserIn("", Configuration.getCredentials().password10);
+    loginPageObject.logUserIn("", user.getPassword());
 
     Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
@@ -114,7 +115,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void notPossibleToLogInWhenPasswordFieldBlank() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.logUserIn(Configuration.getCredentials().userName10, "");
+    loginPageObject.logUserIn(user.getUserName(), "");
 
     Assertion.assertTrue(loginPageObject.isSubmitButtonDisabled());
   }
@@ -193,7 +194,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerWorks() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.typePassword(Configuration.getCredentials().password10);
+    loginPageObject.typePassword(user.getPassword());
 
     Assertion
       .assertTrue(loginPageObject.isPasswordTogglerDisabled(), "password should be disabled");
@@ -207,7 +208,7 @@ public class LoginTests extends NewTestTemplate {
     "We don't recognize these credentials. Try again or register a new account.";
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonCanLogInAsRegisteredUser() {
+  public void userCanLogInAsRegisteredUser() {
     ArticlePage article = new ArticlePage();
 
     article.open(MercurySubpages.MAIN_PAGE)
@@ -215,14 +216,14 @@ public class LoginTests extends NewTestTemplate {
       .openNavigation()
       .clickOnSignInRegisterButton()
       .navigateToSignIn()
-      .login(Configuration.getCredentials().userName10,
-        Configuration.getCredentials().password10);
+      .login(user.getUserName(),
+        user.getPassword());
 
-    assertTrue(article.userLoggedInMobile(Configuration.getCredentials().userName10));
+    assertTrue(article.userLoggedInMobile(user.getUserName()));
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonCanNotLogInWithInvalidPassword() {
+  public void userCanNotLogInWithInvalidPassword() {
     ArticlePage article = new ArticlePage();
 
     SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
@@ -231,12 +232,12 @@ public class LoginTests extends NewTestTemplate {
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
 
-    signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
+    signIn.login(user.getUserName(), "someinvalidpassw0rd");
     assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonCanNotLogInWithBlankPassword() {
+  public void userCanNotLogInWithBlankPassword() {
     ArticlePage article = new ArticlePage();
 
     SignInPage signIn = article.open(MercurySubpages.MAIN_PAGE)
@@ -245,12 +246,12 @@ public class LoginTests extends NewTestTemplate {
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
 
-    signIn.login(Configuration.getCredentials().userName10, "someinvalidpassw0rd");
+    signIn.login(user.getUserName(), "someinvalidpassw0rd");
     assertTrue(signIn.submitButtonNotClickable());
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonCanNotLogInWithInvalidUsername() {
+  public void userCanNotLogInWithInvalidUsername() {
     SignInPage signIn = new ArticlePage()
       .open(MercurySubpages.MAIN_PAGE)
       .getTopbar()
@@ -258,19 +259,19 @@ public class LoginTests extends NewTestTemplate {
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
 
-    signIn.login(String.valueOf(DateTime.now().getMillis()), Configuration.getCredentials().password10);
+    signIn.login(String.valueOf(DateTime.now().getMillis()), user.getPassword());
     assertTrue(signIn.getError().contains(EXPECTED_ERROR_MESSAGE));
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void anonCanNotLogInWithBlankUsername() {
+  public void userCanNotLogInWithBlankUsername() {
     SignInPage signIn = new ArticlePage()
       .open(MercurySubpages.MAIN_PAGE)
       .getTopbar()
       .openNavigation()
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
-    signIn.typePassword(Configuration.getCredentials().password10);
+    signIn.typePassword(user.getPassword());
     assertTrue(signIn.submitButtonNotClickable());
   }
 }
