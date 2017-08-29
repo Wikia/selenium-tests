@@ -5,13 +5,13 @@ import com.wikia.webdriver.common.core.helpers.ForgottenPasswordUserPool;
 import com.wikia.webdriver.common.core.helpers.UserWithEmail;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ResetPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
-
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
@@ -29,17 +29,14 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     EmailUtils.deleteAllEmails(userWithSpaces.getEmail(), userWithSpaces.getEmailPassword());
   }
 
-  @Test
   public void anonCanRemindPasswordFromAuthModal() {
     executeResetPasswordFlow(user);
   }
 
-  @Test
   public void anonCanResetPasswordForUsernameWithSpaces() {
     executeResetPasswordFlow(userWithSpaces);
   }
 
-  @Test
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
     WikiBasePageObject base = new WikiBasePageObject();
     AttachedSignInPage signIn = new AttachedSignInPage().open();
@@ -51,7 +48,6 @@ public class ForgottenPasswordTests extends NewTestTemplate {
     assertTrue(resetPass.newPasswordSetSuccessfully());
   }
 
-  @Test
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
     String lowercaseUsername = Character.toLowerCase(user.getUsername().charAt(0))
           + user.getUsername().substring(1);
