@@ -152,9 +152,6 @@ public class ArticlePageObject extends WikiBasePageObject {
   String removeCategorySelector = "li[data-name='%categoryName%'] .toolbar .removeCategory";
   String videoInCommentsSelector = ".speech-bubble-message img[data-video-name*='%videoName%']";
 
-  public ArticlePageObject() {
-    super();
-  }
 
   /**
    * Open article with name that is the following combination: TEST CLASS NAME + TEST METHOD NAME

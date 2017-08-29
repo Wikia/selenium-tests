@@ -34,6 +34,12 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
     return this;
   }
 
+  @Override public SignInPage typeUsername(String username) {
+    gainFocus();
+    signInPage.typeUsername(username);
+    return this;
+  }
+
   @Override public void login(String username, String password) {
     gainFocus();
     signInPage.login(username, password);
@@ -52,6 +58,16 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
   @Override public String getError() {
     gainFocus();
     return signInPage.getError();
+  }
+
+  @Override public boolean isPasswordMasked() {
+    gainFocus();
+    return signInPage.isPasswordMasked();
+  }
+
+  @Override public void togglePasswordVisibility() {
+    gainFocus();
+    signInPage.togglePasswordVisibility();
   }
 
   @Override public void submit() {

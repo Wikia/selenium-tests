@@ -16,6 +16,7 @@ import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.joda.time.DateTime;
@@ -33,94 +34,92 @@ public class LoginTests extends NewTestTemplate {
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanCloseJoinPage() {
-    com.wikia.webdriver.elements.mercury.old.ArticlePageObject
-      homePage = new com.wikia.webdriver.elements.mercury.old.ArticlePageObject(driver);
-    driver.get(wikiURL);
-    String expectedHomePageTitle = homePage.getArticleTitle();
-
-    LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.clickOnCloseButton();
-
-    homePage.isFooterLogoVisible();
-    Assertion.assertEquals(expectedHomePageTitle, homePage.getArticleTitle());
+    ArticlePage article = openArticleOnMobile();
+    String title = article.getArticleTitle();
+    article
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .close();
+    Assertion.assertEquals(article.getArticleTitle(), title);
   }
 
+  private ArticlePage openArticleOnMobile() {
+    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+  }
+
+  private ArticlePageObject openArticleOnDesktop() {
+    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
+  }
   public void userCanLogInAsStaffOnDesktop() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    NavigationBar signInLink = new NavigationBar(driver);
-    base.openWikiPage(wikiURL);
-
-    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
-
-    authModal.login(staff.getUserName(), staff.getPassword());
-    base.verifyUserLoggedIn(staff.getUserName());
+    ArticlePageObject article = openArticleOnDesktop();
+    loginOnDesktopAs(staff);
+    article.verifyUserLoggedIn(staff);
   }
 
+  private void loginOnDesktopAs(User user) {
+    openLoginModalOnDesktop().login(user);
+  }
+
+  private SignInPage openLoginModalOnDesktop() {
+    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
+  }
+
+  private void loginOnMobileAs(ArticlePage article, User user) {
+    navigateToSignInOnMobile(article).login(user);
+  }
+
+  private SignInPage navigateToSignInOnMobile(ArticlePage article) {
+    return article
+      .getTopbar()
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignIn();
+  }
+
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanLogInAsStaffOnMobile() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    NavigationBar signInLink = new NavigationBar(driver);
-    base.openWikiPage(wikiURL);
-
-    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
-
-    authModal.login(staff.getUserName(), staff.getPassword());
-    base.verifyUserLoggedIn(staff.getUserName());
+    ArticlePage article = openArticleOnMobile();
+    loginOnMobileAs(article, staff);
+    article.verifyUserLoggedIn(staff);
   }
 
   public void japaneseUserCanLogInOnDesktop() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    NavigationBar signInLink = new NavigationBar(driver);
-    base.openWikiPage(wikiURL);
-
-    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
-
-    authModal.login(japaneseUser.getUserName(), japaneseUser.getPassword());
-    base.verifyUserLoggedIn(japaneseUser.getUserName());
+    ArticlePageObject article = openArticleOnDesktop();
+    loginOnDesktopAs(japaneseUser);
+    article.verifyUserLoggedIn(japaneseUser);
   }
 
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void japaneseUserCanLogInOnMobile() {
-    WikiBasePageObject base = new WikiBasePageObject();
-    NavigationBar signInLink = new NavigationBar(driver);
-    base.openWikiPage(wikiURL);
-
-    DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
-
-    authModal.login(japaneseUser.getUserName(), japaneseUser.getPassword());
-    base.verifyUserLoggedIn(japaneseUser.getUserName());
+    ArticlePage article = openArticleOnMobile();
+    loginOnMobileAs(article, japaneseUser);
+    article.verifyUserLoggedIn(japaneseUser);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityOnMobile() {
-    LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.typePassword(user.getPassword());
+    SignInPage signInPage = navigateToSignInOnMobile(openArticleOnMobile());
+    signInPage.typePassword(user.getPassword());
 
-    Assertion
-      .assertTrue(loginPageObject.isPasswordTogglerDisabled(), "password should be disabled");
-
-    loginPageObject.clickOnPasswordToggler();
-
-    Assertion.assertTrue(loginPageObject.isPasswordTogglerEnabled(), "password should be enabled");
+    Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
+    signInPage.togglePasswordVisibility();
+    Assertion.assertFalse(signInPage.isPasswordMasked(), "password should be readable");
   }
 
   public void passwordTogglerChangesPasswordVisibilityOnDesktop() {
-    LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.typePassword(user.getPassword());
+    SignInPage signInPage = openLoginModalOnDesktop();
+    signInPage.typePassword(user.getPassword());
 
-    Assertion
-      .assertTrue(loginPageObject.isPasswordTogglerDisabled(), "password should be disabled");
-
-    loginPageObject.clickOnPasswordToggler();
-
-    Assertion.assertTrue(loginPageObject.isPasswordTogglerEnabled(), "password should be enabled");
+    Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
+    signInPage.togglePasswordVisibility();
+    Assertion.assertFalse(signInPage.isPasswordMasked(), "password should be readable");
   }
 
   @Execute(asUser = User.USER_12)
   public void userWithoutAValidTokenGetsLoggedOutOnDesktop() {
-    new ArticleContent().clear();
-
-    ArticlePageObject article = new ArticlePageObject().open();
+    ArticlePageObject article = openArticleOnDesktop();
     Helios.deleteAllTokens(User.USER_12);
-
     article.refreshPageAddingCacheBuster();
     assertTrue(article.getGlobalNavigation().isUserLoggedOut());
   }

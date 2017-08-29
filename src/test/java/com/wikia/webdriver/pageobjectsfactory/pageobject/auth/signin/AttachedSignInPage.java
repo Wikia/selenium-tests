@@ -21,6 +21,8 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   private WebElement passwordField;
   @FindBy(id = "loginSubmit")
   private WebElement signInButton;
+  @FindBy(css = ".password-toggler")
+  private WebElement passwordToggler;
 
   private AuthPageContext authContext;
 
@@ -38,7 +40,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     return this;
   }
 
-  public SignInPage typeUsername(String username) {
+  @Override public SignInPage typeUsername(String username) {
     fillInput(usernameField, username);
     return this;
   }
@@ -60,6 +62,14 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
 
   @Override public String getError() {
     return new FormError().getError();
+  }
+
+  @Override public boolean isPasswordMasked() {
+    return passwordField.getAttribute("type").equals("password");
+  }
+
+  @Override public void togglePasswordVisibility() {
+    waitAndClick(passwordToggler);
   }
 
   @Override public void submit() {

@@ -65,7 +65,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
   private void executeResetPasswordFlow(UserWithEmail user) {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(wikiURL);
-    DetachedSignInPage loginModal = new DetachedSignInPage(new NavigationBar(driver).clickOnSignIn());
+    DetachedSignInPage loginModal = new DetachedSignInPage(new NavigationBar().clickOnSignIn());
     loginModal
       .clickForgotPasswordLink()
       .requestLinkForUsername(user.getUsername());

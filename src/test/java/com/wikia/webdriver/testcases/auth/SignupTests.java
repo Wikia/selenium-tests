@@ -70,7 +70,7 @@ public class SignupTests extends NewTestTemplate {
 
   public void anonCanSignUpOnNewBaseAuthPageFromGlobalNav() {
     WikiBasePageObject base = new WikiBasePageObject();
-    NavigationBar registerLink = new NavigationBar(driver);
+    NavigationBar registerLink = new NavigationBar();
     DetachedRegisterPage register = new DetachedRegisterPage(registerLink.clickOnRegister());
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
@@ -119,7 +119,7 @@ public class SignupTests extends NewTestTemplate {
     register.submit();
     base.verifyUserLoggedIn(userName);
     base.logoutFromAnywhere();
-    NavigationBar signInLink = new NavigationBar(driver);
+    NavigationBar signInLink = new NavigationBar();
     DetachedSignInPage page = new DetachedSignInPage(signInLink.clickOnSignIn());
     page.login(userName, password);
     base.verifyUserLoggedIn(userName);

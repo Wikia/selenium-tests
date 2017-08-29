@@ -43,6 +43,9 @@ public class ArticlePage extends WikiBasePageObject {
   @Getter(lazy = true)
   private final LightboxComponentObject lightbox = new LightboxComponentObject();
 
+  @FindBy(css = ".wiki-page-header__title")
+  private WebElement articleTitle;
+
   @FindBy(css = "article a")
   private List<WebElement> linksList;
 
@@ -107,5 +110,11 @@ public class ArticlePage extends WikiBasePageObject {
     }
 
     return jsActions.getCurrentPosition().equals(position);
+  }
+
+  public String getArticleTitle() {
+    wait.forElementVisible(articleTitle);
+
+    return articleTitle.getText();
   }
 }
