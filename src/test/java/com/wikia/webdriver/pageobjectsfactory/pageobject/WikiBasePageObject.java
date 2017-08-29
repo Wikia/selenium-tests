@@ -437,6 +437,10 @@ public class WikiBasePageObject extends BasePageObject {
     return getTopBar().openNavigation().isUserAvatarVisible(username);
   }
 
+  public boolean isUserLoggedOutMobile() {
+    return !getTopBar().openNavigation().isUserAvatarVisible();
+  }
+
   public DeletePageObject deletePage() {
     String url =
         urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_DELETE);

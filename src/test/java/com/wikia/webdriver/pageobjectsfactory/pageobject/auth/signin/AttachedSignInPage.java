@@ -72,6 +72,10 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     waitAndClick(passwordToggler);
   }
 
+  @Override public boolean isSubmitButtonEnabled() {
+    return signInButton.isEnabled();
+  }
+
   @Override public void submit() {
     waitAndClick(signInButton);
   }
