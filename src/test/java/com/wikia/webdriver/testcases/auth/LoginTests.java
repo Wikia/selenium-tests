@@ -56,13 +56,10 @@ public class LoginTests extends NewTestTemplate {
 
     DetachedSignInPage authModal = new DetachedSignInPage(signInLink.clickOnSignIn());
 
-    //we are using userNameStaff2 because of PLATFORM-2502 and PLATFORM-2508
     authModal.login(staff.getUserName(), staff.getPassword());
     base.verifyUserLoggedIn(staff.getUserName());
   }
 
-  @Test(enabled = false)
-  @Execute(onWikia = "ja.ja-test")
   public void japaneseUserCanLogInOnAuthModalFromGlobalNavigation() {
     WikiBasePageObject base = new WikiBasePageObject();
     NavigationBar signInLink = new NavigationBar(driver);
@@ -135,54 +132,6 @@ public class LoginTests extends NewTestTemplate {
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void registerNowLinkWorks() {
-    SignupPageObject registrationPage = new SignupPageObject(driver);
-    registrationPage.openRegisterPage();
-    String expectedHeader = registrationPage.getRegisterHeaderText();
-
-    LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    loginPageObject.clickOnRegisterLink();
-    String currentHeader = registrationPage.getRegisterHeaderText();
-    Assertion.assertEquals(expectedHeader, currentHeader);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userIsTakenToJoinPage() {
-    JoinPageObject joinPageObject = new JoinPageObject(driver).get();
-    String expectedMessage = joinPageObject.getJoinTodayText();
-
-    driver.get(wikiURL);
-
-    new TopBar().openNavigation();
-    new Navigation(driver).clickOnSignInRegisterButton();
-
-    Assertion.assertEquals(joinPageObject.getJoinTodayText(), expectedMessage);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void registerButtonWorksOnJoinPage() {
-    SignupPageObject registrationPage = new SignupPageObject(driver);
-    registrationPage.openRegisterPage();
-    String expectedHeader = registrationPage.getRegisterHeaderText();
-
-    JoinPageObject joinPageObject = new JoinPageObject(driver).get();
-    joinPageObject.clickRegisterWithEmail();
-
-    Assertion.assertEquals(registrationPage.getRegisterHeaderText(), expectedHeader);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void signInLinkWorksOnJoinPage() {
-    LoginPageObject loginPageObject = new LoginPageObject(driver).get();
-    String expectedHeader = loginPageObject.getLoginHeaderText();
-
-    JoinPageObject joinPageObject = new JoinPageObject(driver).get();
-    joinPageObject.clickSignInLink();
-
-    Assertion.assertEquals(loginPageObject.getLoginHeaderText(), expectedHeader);
-  }
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void japaneseUserLogIn() {
     LoginPageObject loginPageObject = new LoginPageObject(driver).get();
     loginPageObject.logUserIn(Configuration.getCredentials().userNameJapanese2,
@@ -206,21 +155,6 @@ public class LoginTests extends NewTestTemplate {
 
   private static final String EXPECTED_ERROR_MESSAGE =
     "We don't recognize these credentials. Try again or register a new account.";
-
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCanLogInAsRegisteredUser() {
-    ArticlePage article = new ArticlePage();
-
-    article.open(MercurySubpages.MAIN_PAGE)
-      .getTopbar()
-      .openNavigation()
-      .clickOnSignInRegisterButton()
-      .navigateToSignIn()
-      .login(user.getUserName(),
-        user.getPassword());
-
-    assertTrue(article.userLoggedInMobile(user.getUserName()));
-  }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanNotLogInWithInvalidPassword() {
