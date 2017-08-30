@@ -114,6 +114,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -203,6 +204,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -267,6 +269,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void userOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -437,6 +440,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void userOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
