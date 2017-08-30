@@ -79,7 +79,7 @@ public class ImageStorageTests extends NewTestTemplate {
     delete.submitDeletion();
   }
 
-  @Test(groups = {"ImageStorageTests", "ImageStorage_002"}, invocationCount = 10)
+  @Test(groups = {"ImageStorageTests", "ImageStorage_002"}, invocationCount = 20)
   @UseUnstablePageLoadStrategy
   @Execute(asUser = User.STAFF)
   @RelatedIssue(issueID = "QAART-921")
