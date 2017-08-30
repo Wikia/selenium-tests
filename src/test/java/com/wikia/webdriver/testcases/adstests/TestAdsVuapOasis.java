@@ -3,11 +3,13 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapVideos;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -32,6 +34,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoPlay(vuap);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -45,6 +54,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     ads.scrollToSlot(slot);
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -61,6 +77,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(AD_REDIRECT_URL), "Image should point to page on project43.");
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(groups = {"AdsVuapDefaultState"},
@@ -76,6 +99,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
 
     final String actual = ads.switchToNewBrowserTab();
     Assert.assertTrue(actual.equals(FANDOM_ARTICLE_WESTWORLD_LINK), "Image should point to page on fandom.");
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -99,6 +129,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.togglePause();
 
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -122,6 +159,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     double resolvedVideoHeight = vuap.getVideoHeightWhilePaused();
 
     VuapAssertions.verifyIsResolvedStateDisplayed(defaultVideoHeight, resolvedVideoHeight);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -138,6 +182,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoPlay(vuap);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -153,6 +204,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.waitForVideoStart();
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -172,6 +230,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
         ads.switchToNewBrowserTab().equals(AD_REDIRECT_URL),
         "Image should point to page on project43."
     );
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -189,6 +254,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     Assert.assertTrue(
             ads.switchToNewBrowserTab().equals(FANDOM_ARTICLE_WESTWORLD_LINK),
             "Image should point to page on fandom."
+    );
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
     );
   }
 
@@ -208,6 +280,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.close();
 
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoClose(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -224,6 +303,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.waitForVideoStart();
     vuap.togglePause();
     VuapAssertions.verifyVideoUnmuteAndMute(vuap);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -238,6 +324,13 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.replay();
 
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 
   @Test(
@@ -256,5 +349,12 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     double videoAdHeight = vuap.getVideoHeightWhilePaused();
 
     VuapAssertions.verifyVideoAdSize(vuap, videoAdHeight, adSlotHeight, MAX_AUTOPLAY_MOVIE_DURATION);
+
+    PageObjectLogging.log(
+        "Take screenshot",
+        "Screenshot at the end of test",
+        true,
+        driver
+    );
   }
 }
