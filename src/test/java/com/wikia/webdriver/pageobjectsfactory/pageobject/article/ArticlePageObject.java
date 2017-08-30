@@ -169,6 +169,11 @@ public class ArticlePageObject extends WikiBasePageObject {
     return this;
   }
 
+  public ArticlePageObject openArticleByPath(String articlePath) {
+    getUrl(String.format("%s%s", urlBuilder.getUrlForWiki(Configuration.getWikiName()), articlePath));
+    return this;
+  }
+
   public String getAtricleTextRaw() {
     return pageContentContainer.getText();
 

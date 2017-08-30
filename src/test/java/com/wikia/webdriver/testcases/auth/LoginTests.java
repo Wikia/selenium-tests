@@ -19,7 +19,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSig
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 import org.testng.annotations.Test;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static org.testng.Assert.assertFalse;
@@ -142,7 +142,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   public void nonexistentUserCannotLogInOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
-    String nonexistingUsername = String.format("QA_%s", LocalDateTime.now());
+    String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
     signIn.login(nonexistingUsername, user.getPassword());
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -151,7 +151,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void nonexistentUserCannotLogInOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
-    String nonexistingUsername = String.format("QA_%s", LocalDateTime.now());
+    String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
     signIn.login(nonexistingUsername, user.getPassword());
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -159,7 +159,7 @@ public class LoginTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   public void userCannotLogInWithInvalidPasswordOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
-    String invalidPassword = String.format("P@55_%s", LocalDateTime.now());
+    String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
     signIn.login(user.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -168,7 +168,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotLogInWithInvalidPasswordOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
-    String invalidPassword = String.format("P@55_%s", LocalDateTime.now());
+    String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
     signIn.login(user.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
@@ -212,27 +212,7 @@ public class LoginTests extends NewTestTemplate {
   }
 
   private ArticlePageObject openArticleOnDesktop() {
-    return new ArticlePageObject().open(MercurySubpages.MAIN_PAGE);
-  }
-
-  private void loginOnDesktopAs(User user) {
-    openLoginModalOnDesktop().login(user);
-  }
-
-  private void loginOnDesktopFromDiscussionPageAs(User user) {
-    new NavigationBar().clickOnSignIn().login(user);
-  }
-
-  private SignInPage openLoginModalOnDesktop() {
-    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
-  }
-
-  private void loginOnMobileAs(ArticlePage article, User user) {
-    navigateToSignInOnMobile(article.getTopBar()).login(user);
-  }
-
-  private void loginOnDiscussionMobilePageAs(PostsListPage page, User user) {
-    navigateToSignInOnMobile(page.getTopBar()).login(user);
+    return new ArticlePageObject().openArticleByPath(MercurySubpages.MAIN_PAGE);
   }
 
   private SignInPage navigateToSignInOnMobile() {
@@ -245,5 +225,27 @@ public class LoginTests extends NewTestTemplate {
       .clickOnSignInRegisterButton()
       .navigateToSignIn();
   }
+
+  private SignInPage openLoginModalOnDesktop() {
+    return new DetachedSignInPage(new NavigationBar().clickOnSignIn());
+  }
+
+  private void loginOnDesktopAs(User user) {
+    openLoginModalOnDesktop().login(user);
+  }
+
+  private void loginOnDesktopFromDiscussionPageAs(User user) {
+    new NavigationBar().clickOnSignIn().login(user);
+  }
+
+  private void loginOnMobileAs(ArticlePage article, User user) {
+    navigateToSignInOnMobile(article.getTopBar()).login(user);
+  }
+
+  private void loginOnDiscussionMobilePageAs(PostsListPage page, User user) {
+    navigateToSignInOnMobile(page.getTopBar()).login(user);
+  }
+
+
 
 }
