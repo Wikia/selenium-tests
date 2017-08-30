@@ -58,6 +58,7 @@ public class NavigationMercuryTests extends NavigationTests {
 
   @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
   @Execute(asUser = User.USER_3)
+  @RelatedIssue(issueID = "QAART-1042")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(
         new GuidelinesPage().open()
