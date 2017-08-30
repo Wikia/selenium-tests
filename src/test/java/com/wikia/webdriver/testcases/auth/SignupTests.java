@@ -5,10 +5,11 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
-import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.core.helpers.User;
+import com.wikia.webdriver.common.core.helpers.UserWithEmail;
+import com.wikia.webdriver.common.core.helpers.UserWithEmailPool;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.users.CreateUser;
 import com.wikia.webdriver.common.users.TestUser;
@@ -32,14 +33,17 @@ import static  com.wikia.webdriver.common.core.Assertion.assertStringContains;
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
+  UserWithEmailPool userPool = new UserWithEmailPool();
+  UserWithEmail user1 = userPool.getEmailOnlyUser1();
+  UserWithEmail user2 = userPool.getEmailOnlyUser2();
+  User existingUser = User.LOGIN_USER;
 
   public void anonCanNotSignUpIfYoungerThanTwelve() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openSpecialUserSignUpPage(wikiURL);
     AttachedRegisterPage register = new AttachedRegisterPage();
     register.typeUsername(register.getTimeStamp() + " some letters");
-    register.typeEmailAddress(credentials.emailQaart1);
+    register.typeEmailAddress(user1.getEmail());
     register.typePassword(register.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
     register.typeBirthdate(
@@ -56,9 +60,8 @@ public class SignupTests extends NewTestTemplate {
     base.openSpecialUserSignUpPage(wikiURL);
     AttachedRegisterPage register = new AttachedRegisterPage();
     String password = "Pass" + register.getTimeStamp();
-    String email = credentials.emailQaart2;
-    register.typeEmailAddress(email);
-    register.typeUsername(credentials.userName);
+    register.typeEmailAddress(user2.getEmail());
+    register.typeUsername(existingUser.getUserName());
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
                            PageContent.WIKI_SIGN_UP_BIRTHYEAR);
@@ -74,8 +77,7 @@ public class SignupTests extends NewTestTemplate {
     DetachedRegisterPage register = new DetachedRegisterPage(registerLink.clickOnRegister());
     String userName = "User" + register.getTimeStamp();
     String password = "Pass" + register.getTimeStamp();
-    String email = credentials.emailQaart2;
-    register.typeEmailAddress(email);
+    register.typeEmailAddress(user2.getEmail());
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
@@ -92,9 +94,8 @@ public class SignupTests extends NewTestTemplate {
 
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
-    String email = credentials.emailQaart2;
     AttachedRegisterPage register = new AttachedRegisterPage();
-    register.typeEmailAddress(email);
+    register.typeEmailAddress(user2.getEmail());
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
@@ -109,9 +110,8 @@ public class SignupTests extends NewTestTemplate {
 
     String userName = "User" + signUp.getTimeStamp();
     String password = "Pass" + signUp.getTimeStamp();
-    String email = credentials.emailQaart2;
     AttachedRegisterPage register = new AttachedRegisterPage();
-    register.typeEmailAddress(email);
+    register.typeEmailAddress(user2.getEmail());
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
@@ -132,10 +132,9 @@ public class SignupTests extends NewTestTemplate {
     base.disableCaptcha();
     String userName = "ユーザー" + signUp.getTimeStamp();
     String password = "パス" + signUp.getTimeStamp();
-    String email = credentials.emailQaart2;
 
     AttachedRegisterPage register = new AttachedRegisterPage();
-    register.typeEmailAddress(email);
+    register.typeEmailAddress(user2.getEmail());
     register.typeUsername(userName);
     register.typePassword(password);
     register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
