@@ -1,7 +1,7 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.EmailUtils;
-import com.wikia.webdriver.common.core.helpers.ForgottenPasswordUserPool;
+import com.wikia.webdriver.common.core.helpers.UserWithEmailPool;
 import com.wikia.webdriver.common.core.helpers.UserWithEmail;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
@@ -18,7 +18,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 @Test(groups = "auth-forgottenPassword")
 public class ForgottenPasswordTests extends NewTestTemplate {
 
-  private ForgottenPasswordUserPool userPool = new ForgottenPasswordUserPool();
+  private UserWithEmailPool userPool = new UserWithEmailPool();
   private UserWithEmail user = userPool.getUser();
   private UserWithEmail userWithSpaces = userPool.getUserWithSpaces();
 

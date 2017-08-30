@@ -28,7 +28,7 @@ import java.util.Calendar;
 import static  com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static  com.wikia.webdriver.common.core.Assertion.assertStringContains;
 
-@Test(groups = "auth-signUp")
+@Test(groups = {"auth-signup-desktop", "auth-signup-mobile"})
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 
