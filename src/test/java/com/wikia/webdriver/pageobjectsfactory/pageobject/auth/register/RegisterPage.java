@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.SignInPage;
 
@@ -18,5 +19,7 @@ public interface RegisterPage extends FormPage {
   SignInPage navigateToSignIn();
 
   void signUp(String email, String username, String password, LocalDate birthday);
+
+  void signUp(SignUpUser user);
 
 }

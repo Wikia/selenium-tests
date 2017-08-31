@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
@@ -94,6 +95,10 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     typePassword(password);
     typeBirthday(date.getMonthValue(), date.getDayOfMonth(), date.getYear());
     submit();
+  }
+
+  @Override public void signUp(SignUpUser user) {
+    signUp(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
   }
 
   @Override public String getError() {

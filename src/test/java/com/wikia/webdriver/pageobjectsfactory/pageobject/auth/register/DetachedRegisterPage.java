@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
@@ -71,6 +72,11 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   @Override public void signUp(String email, String username, String password, LocalDate birthday) {
     gainFocus();
     registerPage.signUp(email, username, password, birthday);
+    loseFocus();
+  }
+
+  @Override public void signUp(SignUpUser user) {
+    signUp(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
