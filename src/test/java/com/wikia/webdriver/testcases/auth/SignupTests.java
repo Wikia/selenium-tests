@@ -14,9 +14,16 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.common.users.CreateUser;
 import com.wikia.webdriver.common.users.TestUser;
 import com.wikia.webdriver.elements.common.Navigate;
+import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.SignupPageObject;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.AttachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -35,8 +42,9 @@ public class SignupTests extends NewTestTemplate {
   private User existingUser = User.LOGIN_USER;
 
   public void newUserCanSignUpDesktop() {
-    init();
-    signUp(new CreateUser().create()).verifyAvatarAfterSignup();
+    ArticlePageObject article = openArticleOnDesktop();
+    signUpOnDesktopAs(staff);
+    article.verifyUserLoggedIn(staff);
   }
 
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -64,7 +72,7 @@ public class SignupTests extends NewTestTemplate {
     register.typeEmailAddress(user2.getEmail());
     register.typeUsername(existingUser.getUserName());
     register.typePassword(password);
-    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+    register.typeBirthday(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
       PageContent.WIKI_SIGN_UP_BIRTHYEAR);
 
     register.submit();
@@ -112,7 +120,7 @@ public class SignupTests extends NewTestTemplate {
     register.typeEmailAddress(user1.getEmail());
     register.typePassword(register.getTimeStamp());
     Calendar currentDate = Calendar.getInstance();
-    register.typeBirthdate(
+    register.typeBirthday(
       // +1 because months are numerated from 0
       Integer.toString(currentDate.get(Calendar.MONTH) + 1),
       Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
@@ -141,7 +149,7 @@ public class SignupTests extends NewTestTemplate {
     register.typeEmailAddress(user2.getEmail());
     register.typeUsername(userName);
     register.typePassword(password);
-    register.typeBirthdate(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
+    register.typeBirthday(PageContent.WIKI_SIGN_UP_BIRTHMONTH, PageContent.WIKI_SIGN_UP_BIRTHDAY,
       PageContent.WIKI_SIGN_UP_BIRTHYEAR);
     register.submit();
     base.verifyUserLoggedIn(userName);
@@ -187,6 +195,49 @@ public class SignupTests extends NewTestTemplate {
 
   private void init() {
     new Navigate().toPageByPath(MercurySubpages.MAIN_PAGE);
+  }
+
+  /**
+   * HELPER METHODS
+   */
+
+  private ArticlePage openArticleOnMobile() {
+    return new ArticlePage().open(MercurySubpages.MAIN_PAGE);
+  }
+
+  private ArticlePageObject openArticleOnDesktop() {
+    return new ArticlePageObject().openArticleByPath(MercurySubpages.MAIN_PAGE);
+  }
+
+  private RegisterPage navigateToSignUpOnMobile() {
+    return navigateToSignUpOnMobile(openArticleOnMobile().getTopBar());
+  }
+
+  private RegisterPage navigateToSignUpOnMobile(TopBar topBar) {
+    return topBar
+      .openNavigation()
+      .clickOnSignInRegisterButton()
+      .navigateToSignUp();
+  }
+
+  private RegisterPage openSignUpModalOnDesktop() {
+    return new DetachedRegisterPage(new NavigationBar().clickOnRegister());
+  }
+
+  private void signUpOnDesktopAs(User user) {
+    openSignUpModalOnDesktop().signUp(user);
+  }
+
+  private void signUpOnDesktopFromDiscussionPageAs(User user) {
+    new NavigationBar().clickOnSignIn().login(user);
+  }
+
+  private void signUpOnMobileAs(ArticlePage article, User user) {
+    navigateToSignUpOnMobile(article.getTopBar()).signUp(user);
+  }
+
+  private void signUpOnDiscussionMobilePageAs(PostsListPage page, User user) {
+    navigateToSignUpOnMobile(page.getTopBar()).signUp(user);
   }
 
 }

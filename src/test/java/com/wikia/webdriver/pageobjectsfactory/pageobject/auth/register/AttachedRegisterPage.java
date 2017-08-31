@@ -10,6 +10,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSig
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
+
 public class AttachedRegisterPage extends BasePageObject implements RegisterPage {
 
   @FindBy(id = "signupEmail")
@@ -63,17 +65,17 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
     return this;
   }
 
-  @Override public RegisterPage typeBirthdate(String month, String day, String year) {
+  @Override public RegisterPage typeBirthday(int month, int day, int year) {
     waitAndClick(birthdateField);
 
     waitAndClick(birthMonthField);
-    birthMonthField.sendKeys(month);
+    birthMonthField.sendKeys(Integer.toString(month));
 
     waitAndClick(birthDayField);
-    birthDayField.sendKeys(day);
+    birthDayField.sendKeys(Integer.toString(day));
 
     waitAndClick(birthYearField);
-    birthYearField.sendKeys(year);
+    birthYearField.sendKeys(Integer.toString(year));
 
     return this;
   }
@@ -84,6 +86,14 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override public AttachedSignInPage navigateToSignIn() {
     return authContext.navigateToSignIn();
+  }
+
+  @Override public void signUp(String email, String username, String password, LocalDate date) {
+    typeEmailAddress(email);
+    typeUsername(username);
+    typePassword(password);
+    typeBirthday(date.getMonthValue(), date.getDayOfMonth(), date.getYear());
+    submit();
   }
 
   @Override public String getError() {

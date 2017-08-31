@@ -4,6 +4,8 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Faceb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
+import java.time.LocalDate;
+
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage {
 
   private AttachedRegisterPage registerPage;
@@ -45,9 +47,9 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     return registerPage.typePassword(password);
   }
 
-  @Override public RegisterPage typeBirthdate(String month, String day, String year) {
+  @Override public RegisterPage typeBirthday(int month, int day, int year) {
     gainFocus();
-    return registerPage.typeBirthdate(month, day, year);
+    return registerPage.typeBirthday(month, day, year);
   }
 
   @Override public String getError() {
@@ -64,6 +66,11 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
   @Override public DetachedSignInPage navigateToSignIn() {
     gainFocus();
     return new DetachedSignInPage(registerPage.navigateToSignIn());
+  }
+
+  @Override public void signUp(String email, String username, String password, LocalDate birthday) {
+    gainFocus();
+    registerPage.signUp(email, username, password, birthday);
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
