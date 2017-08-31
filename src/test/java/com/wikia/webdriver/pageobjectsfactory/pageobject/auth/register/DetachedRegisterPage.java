@@ -79,6 +79,11 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     signUp(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
   }
 
+  @Override public RegisterPage fillForm(SignUpUser user) {
+    gainFocus();
+    return registerPage.fillForm(user);
+  }
+
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
     gainFocus();
     return registerPage.clickFacebookSignUp();

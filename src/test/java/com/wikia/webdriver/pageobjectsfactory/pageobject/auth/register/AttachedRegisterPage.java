@@ -90,15 +90,23 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   }
 
   @Override public void signUp(String email, String username, String password, LocalDate date) {
-    typeEmailAddress(email);
-    typeUsername(username);
-    typePassword(password);
-    typeBirthday(date.getMonthValue(), date.getDayOfMonth(), date.getYear());
-    submit();
+    fillForm(email, username, password, date).submit();
   }
 
   @Override public void signUp(SignUpUser user) {
     signUp(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
+  }
+
+  private RegisterPage fillForm(String email, String username, String password, LocalDate date) {
+    typeEmailAddress(email);
+    typeUsername(username);
+    typePassword(password);
+    typeBirthday(date.getMonthValue(), date.getDayOfMonth(), date.getYear());
+
+    return this;
+  }
+  @Override public RegisterPage fillForm(SignUpUser user) {
+    return fillForm(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
   }
 
   @Override public String getError() {

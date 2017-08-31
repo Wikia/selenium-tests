@@ -22,4 +22,6 @@ public interface RegisterPage extends FormPage {
 
   void signUp(SignUpUser user);
 
+  RegisterPage fillForm(SignUpUser user);
+
 }
