@@ -733,8 +733,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void fixScrollPositionByNavbar() {
     int navbarHeight = -1 *  driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight();
-    int cookieAlertHeight = -1 * driver.findElement(By.className("banner-notifications-placeholder")).getSize().getHeight();
-    jsActions.scrollBy(0, navbarHeight + cookieAlertHeight);
+    jsActions.scrollBy(0, navbarHeight);
   }
 
   public boolean isMobileInContentAdDisplayed() {

@@ -236,7 +236,6 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
     final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
-    ads.fixScrollPositionByNavbar();
     vuap.replay();
 
     VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
