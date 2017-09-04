@@ -1,6 +1,10 @@
 package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.remote.Utils;
+import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
@@ -15,29 +19,37 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
-@Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
+@Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
 @Test(groups = {"discussions-upvoting"})
 public class UpvotingTests extends NewTestTemplate {
+
+  private PostEntity.Data existingPost;
+
+  @BeforeSuite
+  private void setUp() {
+    User user = User.USER_5;
+    String siteId = Utils.excractSiteIdFromWikiName(MercuryWikis.DISCUSSIONS_4);
+
+    existingPost = DiscussionsClient.using(user, driver).createPostWithUniqueData(siteId);
+    DiscussionsClient.using(user, driver).createReplyToPost(siteId, existingPost);
+  }
   
   /**
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotVoteForPostDetails")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotUpvote() {
@@ -48,21 +60,18 @@ public class UpvotingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForPostDetails")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotVoteForPostDetails() {
     postDetailsUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotVoteForFirstReply")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotVoteForFirstReply() {
     firstReplyUpvoteButtonClickDoesntAddAnUpvote();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanNotUpvote")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotUpvote() {
@@ -73,14 +82,12 @@ public class UpvotingTests extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void registeredUserOnMobileCanUpvote() {
@@ -91,14 +98,12 @@ public class UpvotingTests extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanVoteForFirstReply")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanVoteForFirstReply() {
     firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote();
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanUpvote")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void registeredUserOnDesktopCanUpvote() {
@@ -144,7 +149,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private void firstReplyUpvoteButtonClickAddsAnUpvoteAndSecondClickRemovesTheUpvote() {
-    Reply reply = new PostDetailsPage().openDefaultPost().getReply();
+    Reply reply = new PostDetailsPage().open(existingPost.getId()).getReply();
     int replyIndex = 0;
     reply.isReplyUpvoteButtonVisible(replyIndex);
     String firstVoteCount = reply.getReplyVoteCount(replyIndex);
@@ -162,7 +167,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private void postDetailsUpvoteButtonClickDoesntAddAnUpvote() {
-    Post post = new PostDetailsPage().openDefaultPost().getPost();
+    Post post = new PostDetailsPage().open(existingPost.getId()).getPost();
     post.isUpvoteButtonVisible();
     String firstVoteCount = post.getPostDetailsVoteCount();
     post.clickPostDetailsUpvoteButton();
@@ -173,7 +178,7 @@ public class UpvotingTests extends NewTestTemplate {
   }
 
   private void firstReplyUpvoteButtonClickDoesntAddAnUpvote() {
-    Reply reply = new PostDetailsPage().openDefaultPost().getReply();
+    Reply reply = new PostDetailsPage().open(existingPost.getId()).getReply();
     int replyIndex = 0;
     reply.isReplyUpvoteButtonVisible(replyIndex);
     String firstVoteCount = reply.getReplyVoteCount(replyIndex);

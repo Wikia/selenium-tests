@@ -11,6 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import javax.swing.text.html.HTML;
@@ -83,7 +84,7 @@ public class MessageWall extends WikiBasePageObject {
   }
 
   public MiniEditorComponentObject triggerMessageArea() {
-    builder.moveToElement(newWallMessageContainer);
+    new Actions(driver).moveToElement(newWallMessageContainer).perform();
 
     while (!postButton.isDisplayed()) {
       jsActions.focus(messageMainBody);

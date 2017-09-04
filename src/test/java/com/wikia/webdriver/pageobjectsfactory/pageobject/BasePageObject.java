@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -177,11 +175,15 @@ public class BasePageObject {
     return numElementOnPage;
   }
 
-  public void waitSafely(Runnable o) {
+  protected void waitSafely(Runnable o) {
+    waitSafely(o, "");
+  }
+
+  void waitSafely(Runnable o, String message) {
     try {
       o.run();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Timed out waiting", e, true);
+      PageObjectLogging.log("Timed out waiting", String.format("%s\n%s", message, e), true);
     }
   }
 

@@ -1,15 +1,12 @@
 package com.wikia.webdriver.common.dataprovider.ads;
 
-import com.google.common.collect.ImmutableMap;
 import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
 import com.wikia.webdriver.testcases.adstests.TestAdsTrackingPixels;
-import io.netty.handler.codec.http.DefaultFullHttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import io.netty.handler.codec.http.HttpVersion;
+
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
@@ -277,11 +274,10 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/RubiconFastlane",
-            "rp_cpm_override=20&InstantGlobals.wgAdDriverDelayCountries=[XX]",
+            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            ".*rpfl_7450\":\\[\"2_tier\\d{4}.*\",\"57_tier.*",
-            ".*rpfl_7450\":\\[\"2_tier.*\",\"57_tier\\d{4}\"\\].*"
+            ".*\"rpfl_7450\":\\[\"2_tier(NONE|PREBID|\\d{4})\",\"57_tier(NONE|PREBID|\\d{4})\"\\].*"
         }
     };
   }
@@ -897,15 +893,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsRecoveryPageFairOasis() {
-    return new Object[][]{
-        {
-            new Page("arecovery", "SyntheticTests/Static_image?InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]"),
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsPremiumPreroll() {
     return new Object[][]{
         {
@@ -1047,21 +1034,33 @@ public class AdsDataProvider {
         };
     }
 
-    @DataProvider
-    public static Object[][] adsVuapClickToPlayDesktop() {
-        return new Object[][]{
-                {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
-                        AdsContent.TOP_LB,
-                        "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
-                },
-                {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
-                        AdsContent.BOTTOM_LB,
-                        "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
-                }
-        };
-    }
+  @DataProvider
+  public static Object[][] adsVuapClickToPlayDesktop() {
+    return new Object[][]{
+            {
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                    AdsContent.TOP_LB
+            },
+            {
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+                    AdsContent.BOTTOM_LB
+            }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVuapClickToPlayMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
+        }
+    };
+  }
 
   @DataProvider
   public static Object[][] adsVuapAutoplayDesktop() {
@@ -1090,40 +1089,28 @@ public class AdsDataProvider {
     return new Object[][]{
         {
             new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
-            AdsContent.TOP_LB,
-            "#" + AdsContent.TOP_LB + VIDEO_PLAYER_IFRAME
+            AdsContent.TOP_LB
         },
         {
             new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
-            AdsContent.BOTTOM_LB,
-            "#" + AdsContent.BOTTOM_LB + VIDEO_PLAYER_IFRAME
+            AdsContent.BOTTOM_LB
         }
     };
   }
 
-    @DataProvider
-    public static Object[][] adsVuapMercury() {
-        return new Object[][]{
-                {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
-                        AdsContent.MOBILE_TOP_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
-                                AdsContent.MOBILE_TOP_LB
-                        ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_TOP_LEADERBOARD"
-                },
-                {
-                        new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/Legacy"),
-                        AdsContent.MOBILE_BOTTOM_LB,
-                        String.format(
-                                "google_ads_iframe_/5441/wka.life/_project43//article/mobile/%s_0",
-                                AdsContent.MOBILE_BOTTOM_LB
-                        ),
-                        "https://pubads.g.doubleclick.net/gampad/ads?output=xml_vast3&env=vp&gdfp_req=1&unviewed_position_start=1&iu=%2F5441%2Fwka.life%2F_project43%2F%2Farticle%2Fmobile%2FMOBILE_BOTTOM_LEADERBOARD"
-                }
-        };
-    }
+  @DataProvider
+  public static Object[][] adsVuapResolvedState() {
+    return new Object[][]{
+            {
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    AdsContent.TOP_LB
+            },
+            {
+                    new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING + "&resolved_state=true"),
+                    AdsContent.BOTTOM_LB
+            }
+    };
+  }
 
   @DataProvider
   public static Object[][] adsVideoFrequencyCapping() {
@@ -1134,60 +1121,6 @@ public class AdsDataProvider {
         {
             new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent" + "?InstantGlobals.wgAdDriverOutstreamVideoFrequencyCapping=[1/2min]")
         }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsVelesTracking() {
-    return new Object[][]{
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM),
-            ImmutableMap.builder()
-                .put(AdsContent.TOP_LB, "20.00")
-                .put(AdsContent.INCONTENT_PLAYER, "20.00")
-                .build()
-        },
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM),
-            ImmutableMap.builder()
-                .put(AdsContent.TOP_LB, "NOT_INVOLVED")
-                .put(AdsContent.INCONTENT_PLAYER, "20.00")
-                .build()
-        },
-        {
-            new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
-            ImmutableMap.builder()
-                .put(AdsContent.TOP_LB, "20.00")
-                .put(AdsContent.INCONTENT_PLAYER, "NOT_INVOLVED")
-                .build()
-        }
-    };
-  }
-
-  @DataProvider
-  public static Object[][] adsVelesErrorTracking() {
-    return new Object[][]{
-      {
-          new Page(WIKI_SPECIAL, "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM),
-          ImmutableMap.builder()
-                .put(AdsContent.TOP_LB, "")
-                .put(AdsContent.INCONTENT_PLAYER, "")
-                .build(),
-          ImmutableMap.builder()
-                .put(".*output=vast.*", new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT))
-                .build()
-
-      },
-      {
-          // Veles Timeout (page without VAST)
-          new Page(WIKI_SPECIAL, "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM),
-          ImmutableMap.builder()
-              .put(AdsContent.TOP_LB, "0.00")
-              .build(),
-          ImmutableMap.builder()
-              .build()
-      }
-
     };
   }
 

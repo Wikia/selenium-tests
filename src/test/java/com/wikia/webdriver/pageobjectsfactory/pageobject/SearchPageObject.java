@@ -31,7 +31,7 @@ public class SearchPageObject extends WikiBasePageObject {
   protected List<WebElement> resultLinks;
   @FindBys(@FindBy(css = "li.result"))
   protected List<WebElement> results;
-  @FindBy(css = ".Results > :nth-child(1) h1 > a")
+  @FindBy(css = ".Results > :nth-child(1) h1 > a, .top-community-name")
   protected WebElement firstResultLink;
   @FindBy(css = "li.result:nth-child(1) a")
   protected WebElement firstResult;
@@ -40,7 +40,7 @@ public class SearchPageObject extends WikiBasePageObject {
   @FindBy(css = ".results-wrapper i")
   protected WebElement noResultsCaption;
 
-  protected By paginationContainerBy = By.cssSelector(".wikia-paginator");
+  protected By paginationContainerBy = By.cssSelector(".wikia-paginator, .pagination");
 
   @FindBy(css = ".everything")
   private WebElement filterEverything;
