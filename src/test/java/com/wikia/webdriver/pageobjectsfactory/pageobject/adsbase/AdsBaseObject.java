@@ -694,7 +694,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void scrollToPosition(By element) {
-    jsActions.scrollToElement(driver.findElement(element));
+    jsActions.scrollToSpecificElement(driver.findElement(element));
     PageObjectLogging.log("scrollToSelector", "Scroll to the web selector " + element.toString(), true);
   }
 
@@ -732,7 +732,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void fixScrollPositionByNavbar() {
-    jsActions.scrollBy(0, -1 * driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight());
+    int navbarHeight = -1 *  driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight();
+    int cookieAlertHeight = -1 * driver.findElement(By.className("banner-notifications-placeholder")).getSize().getHeight();
+    jsActions.scrollBy(0, navbarHeight + cookieAlertHeight);
   }
 
   public boolean isMobileInContentAdDisplayed() {
