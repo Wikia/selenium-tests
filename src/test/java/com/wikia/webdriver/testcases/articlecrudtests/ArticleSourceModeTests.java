@@ -1,10 +1,5 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import java.util.List;
-
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -30,6 +25,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComp
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.PreviewEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Execute(asUser = User.SUS_REGULAR_USER3, onWikia = "sustainingtest")
 @Test(groups = {"RTE_extended"})
@@ -140,7 +139,7 @@ public class ArticleSourceModeTests extends NewTestTemplate {
     String articleName = PageContent.ARTICLE_NAME_PREFIX + DateTime.now().getMillis();
     SourceEditModePageObject source = new SourceEditModePageObject().openArticle(articleName);
     PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
-    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("Image1.png");
+    PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("Image001.png");
     photoOptions.setCaption(PageContent.CAPTION);
     photoOptions.clickAddPhoto();
     String photoName = photoAddPhoto.getPhotoName();
