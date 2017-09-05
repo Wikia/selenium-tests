@@ -221,125 +221,126 @@ task getSuite {
     }
 }
 
-task getSuiteForGroup << {
-    def job = project.hasProperty("job") ? project.job : "wikia-test-matrix"
+task getSuiteForGroup {
+    doLast {
+        def job = project.hasProperty("job") ? project.job : "wikia-test-matrix"
 
-    def jobName = job.split(":")[0]
-    def apiSuffix = "api/json?pretty=true"
+        def jobName = job.split(":")[0]
+        def apiSuffix = "api/json?pretty=true"
 
-    def JenkinsURL = "http://jenkins.wikia-prod:8080/"
-    def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
+        def JenkinsURL = "http://jenkins.wikia-prod:8080/"
+        def reportPath = "/lastBuild/artifact/build/reports/tests/testng-failed.xml"
 
-    def jsonSlurper = new JsonSlurper()
-    def parser = new XmlSlurper()
-    parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
-    parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        def jsonSlurper = new JsonSlurper()
+        def parser = new XmlSlurper()
+        parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
+        parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
-    def groups = System.getProperty('groups', '')
+        def groups = System.getProperty('groups', '')
 
-    def xml
+        def xml
 
-    def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
+        def jobsList = jsonSlurper.parse(new URL(JenkinsURL + apiSuffix))
 
-    def selectedJob
+        def selectedJob
 
-    jobsList.jobs.each {
-        if (jobName.equals(it.name)) {
-            selectedJob = it
-        }
-    }
-
-    if (!selectedJob) {
-        throw new GradleException("Can't find job named '${jobName}'")
-    }
-
-    def activeConfigs = jsonSlurper.
-            parse(new URL(selectedJob.url + apiSuffix)).activeConfigurations
-
-    def failedCOnfigurations = []
-
-    activeConfigs.each {
-        if (it.color == 'yellow') {
-            failedCOnfigurations.add(it.url)
-        }
-    }
-    def failedSuites = []
-
-    failedCOnfigurations.each {
-        if (it.contains(groups + ",")) {
-            if (new URL("${it}${reportPath}").openConnection().responseCode != 200) {
-                println "Failed ocnfiguration: ${it} is missing failed suite"
-            } else {
-                failedSuites.add(parser.parse("${it}${reportPath}"))
+        jobsList.jobs.each {
+            if (jobName.equals(it.name)) {
+                selectedJob = it
             }
         }
-    }
-    println "Number of failed onfigurations: ${failedSuites.size()}"
 
-    if (failedSuites.size() > 0) {
-        def first = failedSuites[0]
-        def firstClasses = []
+        if (!selectedJob) {
+            throw new GradleException("Can't find job named '${jobName}'")
+        }
 
-        failedSuites.each {
-            def myAwesomeSuite = it
+        def activeConfigs = jsonSlurper.
+                parse(new URL(selectedJob.url + apiSuffix)).activeConfigurations
 
-            firstClasses = []
-            first.test.classes.class.each {
-                firstClasses.add(it.@name)
+        def failedCOnfigurations = []
+
+        activeConfigs.each {
+            if (it.color == 'yellow') {
+                failedCOnfigurations.add(it.url)
             }
+        }
+        def failedSuites = []
 
-            def nodesToAdd = it.'**'.findAll {
-                node -> node.name() == 'class' && !firstClasses.contains(node.@name)
+        failedCOnfigurations.each {
+            if (it.contains(groups + ",")) {
+                if (new URL("${it}${reportPath}").openConnection().responseCode != 200) {
+                    println "Failed ocnfiguration: ${it} is missing failed suite"
+                } else {
+                    failedSuites.add(parser.parse("${it}${reportPath}"))
+                }
             }
+        }
+        println "Number of failed onfigurations: ${failedSuites.size()}"
 
-            if (nodesToAdd.size() > 0) {
-                first.'test'.classes.appendNode(nodesToAdd)
-                first = parser.parseText(XmlUtil.serialize(first))
-            }
+        if (failedSuites.size() > 0) {
+            def first = failedSuites[0]
+            def firstClasses = []
 
-            def present = it.'**'.findAll {
-                node -> node.name() == 'class' && firstClasses.contains(node.@name)
-            }
+            failedSuites.each {
+                def myAwesomeSuite = it
 
-            present.each {
-                def methodsPresent = first.'**'.findAll {
-                    node ->
-                        node.name() == 'include' &&
-                        node.parent().parent().@name == it.@name
+                firstClasses = []
+                first.test.classes.class.each {
+                    firstClasses.add(it.@name)
                 }
 
-                def methodsPresentNames = []
-                methodsPresent.each {
-                    methodsPresentNames.add(it.@name)
+                def nodesToAdd = it.'**'.findAll {
+                    node -> node.name() == 'class' && !firstClasses.contains(node.@name)
                 }
 
-                def methodsToAdd = myAwesomeSuite.'**'.findAll {
-                    node ->
-                        node.name() == 'include' &&
-                        !methodsPresentNames.contains(node.@name) &&
-                        node.parent().parent().@name == it.@name
-                }
-
-                def magicName = it.@name
-
-                if (methodsToAdd.size() > 0) {
-                    first.'test'.classes.class.find { it.@name == magicName }.methods.
-                            appendNode(methodsToAdd)
+                if (nodesToAdd.size() > 0) {
+                    first.'test'.classes.appendNode(nodesToAdd)
                     first = parser.parseText(XmlUtil.serialize(first))
                 }
+
+                def present = it.'**'.findAll {
+                    node -> node.name() == 'class' && firstClasses.contains(node.@name)
+                }
+
+                present.each {
+                    def methodsPresent = first.'**'.findAll {
+                        node ->
+                            node.name() == 'include' &&
+                                    node.parent().parent().@name == it.@name
+                    }
+
+                    def methodsPresentNames = []
+                    methodsPresent.each {
+                        methodsPresentNames.add(it.@name)
+                    }
+
+                    def methodsToAdd = myAwesomeSuite.'**'.findAll {
+                        node ->
+                            node.name() == 'include' &&
+                                    !methodsPresentNames.contains(node.@name) &&
+                                    node.parent().parent().@name == it.@name
+                    }
+
+                    def magicName = it.@name
+
+                    if (methodsToAdd.size() > 0) {
+                        first.'test'.classes.class.find { it.@name == magicName }.methods.
+                                appendNode(methodsToAdd)
+                        first = parser.parseText(XmlUtil.serialize(first))
+                    }
+                }
             }
+            first.test.groups.replaceNode {}
+            xml = first
+            new File("test.xml").withWriter { it << XmlUtil.serialize(xml) }
+
+            def f = new File('test.xml')
+
+            project.testSuite = f.getAbsolutePath().replace('\\', '/')
+        } else {
+
         }
-        first.test.groups.replaceNode {}
-        xml = first
-        new File("test.xml").withWriter { it << XmlUtil.serialize(xml) }
-
-        def f = new File('test.xml')
-
-        project.testSuite = f.getAbsolutePath().replace('\\', '/')
-    } else {
-
     }
-
 }
 
 task runFailed {
