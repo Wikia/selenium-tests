@@ -12,8 +12,8 @@ public class Notification extends BasePageObject {
     private WebElement parentElement;
     private WebElement messageTextBox;
 
-    private By messageBy = By.className("msg");
-    private By undeleteLinkBy = By.cssSelector(".banner-notification div.msg a");
+    private By messageBy = By.className("wds-banner-notification__text");
+    private By undeleteLinkBy = By.cssSelector(".wds-banner-notification__text a");
 
     public Notification(WebDriver driver, WebElement parentElement) {
         super();
