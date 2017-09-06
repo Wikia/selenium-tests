@@ -5,7 +5,7 @@ public class VideoContent {
   public static final String YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v=QE32HghV8-I";
   public static final String
       YOUTUBE_VIDEO_WIKITEXT =
-      "File:WikiEvolution - Poznańska Wiki-1354533479|thumb|right|335 px|";
+      "File:WikiEvolution - Poznańska Wiki|thumb|right|335 px|";
 
   public static final String YOUTUBE_VIDEO_URL2_FILENAME = "How_to_make_the_Monstre_Verte_cocktail";
 

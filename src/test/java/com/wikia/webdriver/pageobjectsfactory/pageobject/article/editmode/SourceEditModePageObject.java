@@ -105,8 +105,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    Assertion.assertEquals(
-        getSourceContent().replaceAll("(-\\d+)\\|","|"), desiredContent.replaceAll("(-\\d+)\\|","|"));
+    Assertion.assertEquals(getSourceContent().replaceAll("(-\\d+)\\|","|"), desiredContent);
   }
 
   public void clickBold() {
