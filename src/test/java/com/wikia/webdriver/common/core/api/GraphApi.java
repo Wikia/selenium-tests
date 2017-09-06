@@ -30,14 +30,14 @@ public class GraphApi {
 
   private static final String ERROR_MESSAGE = "Problem with Graph API call used to create new facebook test user";
   private static final String URI_SYNTAX_EXCEPTION = "URI_SYNTAX EXCEPTION";
-  private static final String wikiaProductionAppAccessToken = XMLReader
+  private static final String WIKIA_PRODUCTION_APP_ACCESS_TOKEN = XMLReader
     .getValue("ci.user.facebook.prod.accessToken");
-  private static final String wikiaProductionAppId = XMLReader
+  private static final String WIKIA_PRODUCTION_APP_ID = XMLReader
     .getValue("ci.user.facebook.prod.appId");
 
   public FacebookUser createFacebookTestUser() {
     try {
-      HttpResponse response = createTestUser(wikiaProductionAppId);
+      HttpResponse response = createTestUser(WIKIA_PRODUCTION_APP_ID);
       String entity = EntityUtils.toString(response.getEntity());
       DocumentContext json = JsonPath.parse(entity);
       return new FacebookUser(
@@ -72,9 +72,9 @@ public class GraphApi {
   }
 
   private ArrayList<BasicNameValuePair> getParams() {
-    ArrayList<BasicNameValuePair> PARAMS = new ArrayList<>();
-    PARAMS.add(new BasicNameValuePair("access_token", wikiaProductionAppAccessToken));
-    return PARAMS;
+    ArrayList<BasicNameValuePair> params = new ArrayList<>();
+    params.add(new BasicNameValuePair("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN));
+    return params;
   }
 
   private HttpResponse createTestUser(String appId) throws IOException, URISyntaxException {
@@ -100,7 +100,7 @@ public class GraphApi {
       new URIBuilder((
         new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
           url.getPath(), url.getQuery(), url.getRef())
-      )).addParameter("access_token", wikiaProductionAppAccessToken).build());
+      )).addParameter("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN).build());
   }
 
   private static HttpPost getHttpPost(URL url) throws URISyntaxException {

@@ -3,7 +3,6 @@ package com.wikia.webdriver.common.core.helpers;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
-import lombok.Getter;
 import lombok.Value;
 
 @Value

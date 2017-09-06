@@ -34,6 +34,8 @@ public class SignupTests extends NewTestTemplate {
 
   private static final String DESKTOP = "auth-signup-desktop";
   private static final String MOBILE = "auth-signup-mobile";
+  private static final String PASS_PATTERN = "pass_%s";
+  private static final String USERNAME_PATTERN = "QA%s";
 
   private UserWithEmailPool userPool = new UserWithEmailPool();
   private UserWithEmail userWithEmail = userPool.getEmailOnlyUser1();
@@ -188,19 +190,20 @@ public class SignupTests extends NewTestTemplate {
    */
 
   private SignUpUser createNewUser() {
+    
     return new SignUpUser(
-      String.format("QA%s", Instant.now().getEpochSecond()),
+      String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
       getEmailAlias(userWithEmail.getEmail()),
-      String.format("pass_%s", Instant.now().getEpochSecond()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );
   }
 
   private SignUpUser createUserWithExistingEmail() {
     return new SignUpUser(
-      String.format("QA%s", Instant.now().getEpochSecond()),
+      String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
       userWithEmail.getEmail(),
-      String.format("pass_%s", Instant.now().getEpochSecond()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );
   }
@@ -209,13 +212,13 @@ public class SignupTests extends NewTestTemplate {
     return new SignUpUser(
       existingUser.getUserName(),
       getEmailAlias(userWithEmail.getEmail()),
-      String.format("pass_%s", Instant.now().getEpochSecond()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );
   }
 
   private SignUpUser createUserWithPasswordMatchingUsername() {
-    String username = String.format("QA%s", Instant.now().getEpochSecond());
+    String username = String.format(USERNAME_PATTERN, Instant.now().getEpochSecond());
     return new SignUpUser(
       username,
       getEmailAlias(userWithEmail.getEmail()),
@@ -226,9 +229,9 @@ public class SignupTests extends NewTestTemplate {
 
   private SignUpUser createTooYoungUser() {
     return new SignUpUser(
-      String.format("QA%s", Instant.now().getEpochSecond()),
+      String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
       getEmailAlias(userWithEmail.getEmail()),
-      String.format("pass_%s", Instant.now().getEpochSecond()),
+      String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
       LocalDate.now().minusYears(11)
     );
   }

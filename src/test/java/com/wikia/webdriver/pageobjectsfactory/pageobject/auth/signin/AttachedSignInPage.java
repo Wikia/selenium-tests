@@ -65,7 +65,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
   }
 
   @Override public boolean isPasswordMasked() {
-    return passwordField.getAttribute("type").equals("password");
+    return "password".equals(passwordField.getAttribute("type"));
   }
 
   @Override public void togglePasswordVisibility() {
@@ -85,7 +85,7 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     return authContext.isHeaderDisplayed();
   }
 
-  public FacebookSignupModalComponentObject clickFacebookSignUp() {
+  FacebookSignupModalComponentObject clickFacebookSignUp() {
     return authContext.clickFacebookSignUp();
   }
 

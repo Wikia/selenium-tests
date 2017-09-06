@@ -13,10 +13,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -39,6 +36,7 @@ public class Helios {
   private static final String IOEXCEPTION_COMMAND = "IO EXCEPTION";
   private static final String X_WIKIA_INTERNAL_REQUEST = "X-Wikia-Internal-Request";
   private static final String THE_SCHWARTZ = "THE-SCHWARTZ";
+  private static final String CLIENT_PROTOCOL_EXCEPTION = "CLIENT PROTOCOL EXCEPTION";
 
   /**
    * Standard cookie spec is used instead of default one in order to suppress warnings about
@@ -75,7 +73,7 @@ public class Helios {
       PageObjectLogging.log("DELETE TOKENS REQUEST: ", httpDelete.toString(), true);
       PageObjectLogging.log("DELETE TOKENS RESPONSE: ", response.toString(), true);
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
@@ -108,7 +106,7 @@ public class Helios {
       tokenCache.put(userName, token);
       return token;
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
@@ -150,26 +148,14 @@ public class Helios {
     };
   }
 
-  private static String executeAndRetry(HttpPost httpPost, ResponseHandler<String> handler)
+  private static String executeAndRetry(HttpRequestBase request, ResponseHandler<String> handler)
       throws IOException {
     try (CloseableHttpClient httpClient = getDefaultClient()) {
       try {
-        return httpClient.execute(httpPost, handler);
+        return httpClient.execute(request, handler);
       } catch (ConnectTimeoutException e) {
         PageObjectLogging.log("Timeout when connecting to helios", e, true);
-        return httpClient.execute(httpPost, handler);
-      }
-    }
-  }
-
-  private static String executeAndRetry(HttpGet httpGet, ResponseHandler<String> handler)
-          throws IOException {
-    try (CloseableHttpClient httpClient = getDefaultClient()) {
-      try {
-        return httpClient.execute(httpGet, handler);
-      } catch (ConnectTimeoutException e) {
-        PageObjectLogging.log("Timeout when connecting to helios", e, true);
-        return httpClient.execute(httpGet, handler);
+        return httpClient.execute(request, handler);
       }
     }
   }
@@ -196,7 +182,7 @@ public class Helios {
   }
 
   private static String getUserId(String userName) {
-    String getUserIDURL = "";
+    String getUserIDURL;
     try {
       getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
           new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"), DateTime.now().getMillis());
@@ -211,7 +197,7 @@ public class Helios {
     try {
       return executeAndRetry(httpGet, extractUserId());
     } catch (ClientProtocolException e) {
-      PageObjectLogging.log("CLIENT PROTOCOL EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     } catch (IOException e) {
       PageObjectLogging.log(IOEXCEPTION_COMMAND,
