@@ -72,6 +72,7 @@ public class WikiBasePageObject extends BasePageObject {
   private static final String LOGGED_IN_USER_SELECTOR_MERCURY =
       ".wikia-nav__avatar img[alt*=%userName%]";
   private static final By BANNER_NOTIFICATION_CONTAINER = By.cssSelector(".banner-notifications-placeholder");
+  private static final By BANNER_NOTIFICATION = By.cssSelector(".banner-notifications-placeholder div div");
   @FindBy(css = ".banner-notifications-placeholder")
   private WebElement bannerNotificationContainer;
   @Getter(lazy = true)
@@ -448,6 +449,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public List<Notification> getNotifications(){
+    wait.forElementPresent(BANNER_NOTIFICATION);
     List<Notification> notificationList = new ArrayList<>();
     for (WebElement notificationElement : notificationElements){
       Notification notification = new Notification(driver, notificationElement);
