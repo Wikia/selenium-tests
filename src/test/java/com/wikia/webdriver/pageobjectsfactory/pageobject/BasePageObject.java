@@ -69,6 +69,16 @@ public class BasePageObject {
     return url;
   }
 
+  public static String getPasswordResetLink(String email, String password) {
+    String passwordResetEmail = EmailUtils
+      .getFirstEmailContent(email, password, "Reset your FANDOM password");
+    String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
+    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
+        true);
+
+    return resetLink;
+  }
+
   // wait for comscore to load
   public void waitForPageLoad() {
     wait.forElementPresent(

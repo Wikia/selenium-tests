@@ -480,16 +480,6 @@ public class WikiBasePageObject extends BasePageObject {
     scrollAndClick(specialUserLoginLink);
   }
 
-  public String getPasswordResetLink(String email, String password) {
-    String passwordResetEmail = EmailUtils
-      .getFirstEmailContent(email, password, "Reset your FANDOM password");
-    String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
-    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
-        true);
-
-    return resetLink;
-  }
-
   public void verifyRevisionMarkedAsMinor() {
     if (isElementOnPage(cssMinorEdit)) {
       PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
