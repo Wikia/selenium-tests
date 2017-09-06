@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
-@Test(groups = "auth-forgottenPassword")
+@Test(groups = "auth-forgotten-password")
 public class ForgottenPasswordTests extends NewTestTemplate {
 
   private UserWithEmailPool userPool = new UserWithEmailPool();

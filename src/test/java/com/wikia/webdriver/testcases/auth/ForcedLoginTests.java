@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
-@Test(groups = "auth-forcedLogin")
+@Test(groups = "auth-forced-login")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class ForcedLoginTests extends NewTestTemplate {
 
