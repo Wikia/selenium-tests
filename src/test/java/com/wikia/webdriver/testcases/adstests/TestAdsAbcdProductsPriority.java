@@ -33,38 +33,25 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   private void verifyAppNexussAdIsDisplayed(AdsBaseObject ads){
     ads.scrollToSlot(AdsContent.INCONTENT_PLAYER);
 
-    Assertion.assertTrue(isExpectedSlotParamPresent(ads, AdsContent.INCONTENT_PLAYER, "appnexusAst"),
+    Assertion.assertTrue(ads.getGptParams(AdsContent.INCONTENT_PLAYER, "data-gpt-slot-params").contains("appnexusAst"),
         "AppNexus ad param: appnexusAst is not present");
-    Assertion.assertTrue(isExpectedLineItemIdPresent(ads, AdsContent.INCONTENT_PLAYER, "4406759476"),
+    Assertion.assertTrue(ads.getGptParams(AdsContent.INCONTENT_PLAYER, "data-gpt-line-item-id").equals("4406759476"),
         "AppNexus ad line item id: 4406759476 is not present");
-    Assertion.assertTrue(isExpectedSlotResultPresent(ads,AdsContent.INCONTENT_PLAYER, "success"),
+    Assertion.assertTrue(ads.getGptParams(AdsContent.INCONTENT_PLAYER, "data-slot-result").equals("success"),
         "AppNexus slot result: success is not present");
   }
 
   private void verifyAbcdAdIsDisplayed(AdsBaseObject ads) {
     ads.scrollToSlot(AdsContent.TOP_LB);
-    Assertion.assertTrue(isExpectedLineItemIdPresent(ads, AdsContent.TOP_LB, "4376117186"),
+    Assertion.assertTrue(ads.getGptParams(AdsContent.TOP_LB, "data-gpt-line-item-id").equals("4376117186"),
         "TOP_LEADERBOARD slot has ABCD ad line item id 4376117186, ABCD slot should not be displayed");
-    Assertion.assertTrue(isExpectedSlotResultPresent(ads,AdsContent.TOP_LB, "success"),
+    Assertion.assertTrue(ads.getGptParams(AdsContent.TOP_LB, "data-slot-result").equals("success"),
         "ABCD slot result: success is not present");
   }
 
   private void verifyAbcdAdIsNotDisplayed(AdsBaseObject ads) {
     ads.scrollToSlot(AdsContent.TOP_LB);
-    Assertion.assertFalse(isExpectedLineItemIdPresent(ads, AdsContent.TOP_LB, "4376117186"),
+    Assertion.assertFalse(ads.getGptParams(AdsContent.TOP_LB, "data-gpt-line-item-id").equals("4376117186"),
     "TOP_LEADERBOARD slot has ABCD ad line item id 4376117186, ABCD slot should not be displayed");
   }
-
-  private boolean isExpectedSlotParamPresent(AdsBaseObject ads, String slotName, String param) {
-    return ads.getGptParams(slotName, "data-gpt-slot-params").contains(param);
-  }
-
-  private boolean isExpectedLineItemIdPresent(AdsBaseObject ads, String slotName, String lineItemId) {
-    return ads.getGptParams(slotName, "data-gpt-line-item-id").equals(lineItemId);
-  }
-
-  private boolean isExpectedSlotResultPresent(AdsBaseObject ads, String slotName, String slotResult) {
-    return ads.getGptParams(slotName, "data-slot-result").equals(slotResult);
-  }
 }
-
