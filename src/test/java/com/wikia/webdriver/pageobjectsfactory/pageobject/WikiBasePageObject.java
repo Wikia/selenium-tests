@@ -438,7 +438,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public List<Notification> getNotifications(NotificationType notificationType){
     List<Notification> notificationList = getNotifications();
-    return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType.name()))
+    return notificationList.stream().filter(n -> n.getType().toLowerCase().contains(notificationType.getClassName()))
             .collect(Collectors.toList());
   }
 
