@@ -70,11 +70,6 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
     signInPage.togglePasswordVisibility();
   }
 
-  @Override public boolean isSubmitButtonEnabled() {
-    gainFocus();
-    return signInPage.isSubmitButtonEnabled();
-  }
-
   @Override public void submit() {
     gainFocus();
     signInPage.submit();

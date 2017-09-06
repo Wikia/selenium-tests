@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
@@ -20,6 +19,10 @@ import org.testng.annotations.Test;
 import java.time.Instant;
 import java.time.LocalDate;
 
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
@@ -33,8 +36,7 @@ public class SignupTests extends NewTestTemplate {
   private static final String MOBILE = "auth-signup-mobile";
 
   private UserWithEmailPool userPool = new UserWithEmailPool();
-  private UserWithEmail user1 = userPool.getEmailOnlyUser1();
-  private UserWithEmail user2 = userPool.getEmailOnlyUser2();
+  private UserWithEmail userWithEmail = userPool.getEmailOnlyUser1();
   private User existingUser = User.LOGIN_USER;
 
 
@@ -78,7 +80,7 @@ public class SignupTests extends NewTestTemplate {
     SignUpUser newUser = createUserWithExistingUsername();
     RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
     form.submit();
-    Assertion.assertEquals(form.getError(), USERNAME_TAKEN_MSG);
+    assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
   @Test(groups = MOBILE)
@@ -87,7 +89,7 @@ public class SignupTests extends NewTestTemplate {
     SignUpUser newUser = createUserWithExistingUsername();
     RegisterPage form = navigateToSignUpOnMobile();
     form.fillForm(newUser).submit();
-    Assertion.assertEquals(form.getError(), USERNAME_TAKEN_MSG);
+    assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
   @Test(groups = DESKTOP)
@@ -95,7 +97,7 @@ public class SignupTests extends NewTestTemplate {
     SignUpUser newUser = createUserWithPasswordMatchingUsername();
     RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
     form.submit();
-    Assertion.assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
+    assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = MOBILE)
@@ -104,7 +106,7 @@ public class SignupTests extends NewTestTemplate {
     SignUpUser newUser = createUserWithPasswordMatchingUsername();
     RegisterPage form = navigateToSignUpOnMobile();
     form.fillForm(newUser).submit();
-    Assertion.assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
+    assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = DESKTOP)
@@ -112,7 +114,7 @@ public class SignupTests extends NewTestTemplate {
     SignUpUser newUser = createTooYoungUser();
     RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
     form.submit();
-    Assertion.assertEquals(form.getError(), GENERIC_ERROR_MSG);
+    assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
   @Test(groups = MOBILE)
@@ -121,7 +123,7 @@ public class SignupTests extends NewTestTemplate {
     SignUpUser newUser = createTooYoungUser();
     RegisterPage form = navigateToSignUpOnMobile();
     form.fillForm(newUser).submit();
-    Assertion.assertEquals(form.getError(), GENERIC_ERROR_MSG);
+    assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
   @Test(groups = DESKTOP)
@@ -142,25 +144,43 @@ public class SignupTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
+  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
-
+    PostsListPage discussionPage = new PostsListPage().open();
+    signUpOnDesktopFromDiscussionPageAs(createNewUser());
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.FULL_PATH),
+      "User should be redirected to discussion post list view upon sign up");
   }
 
   @Test(groups = MOBILE)
+  @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
-
+    PostsListPage discussionPage = new PostsListPage().open();
+    signUpOnDiscussionMobilePageAs(discussionPage, createNewUser());
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.FULL_PATH),
+      "User should be redirected to discussion post list view upon sign up");
   }
 
   @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityDesktop() {
+    RegisterPage signUpPage = openSignUpModalOnDesktop();
+    signUpPage.typePassword(existingUser.getPassword());
 
+    assertTrue(signUpPage.isPasswordMasked(), "password should be masked");
+    signUpPage.togglePasswordVisibility();
+    assertFalse(signUpPage.isPasswordMasked(), "password should be readable");
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityMobile() {
+    RegisterPage signUpPage = navigateToSignUpOnMobile();
+    signUpPage.typePassword("");
 
+    assertTrue(signUpPage.isPasswordMasked(), "password should be masked");
+    signUpPage.togglePasswordVisibility();
+    assertFalse(signUpPage.isPasswordMasked(), "password should be readable");
   }
 
   /**
@@ -170,7 +190,7 @@ public class SignupTests extends NewTestTemplate {
   private SignUpUser createNewUser() {
     return new SignUpUser(
       String.format("QA%s", Instant.now().getEpochSecond()),
-      getEmailAlias(user1.getEmail()),
+      getEmailAlias(userWithEmail.getEmail()),
       String.format("pass_%s", Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );
@@ -179,7 +199,7 @@ public class SignupTests extends NewTestTemplate {
   private SignUpUser createUserWithExistingEmail() {
     return new SignUpUser(
       String.format("QA%s", Instant.now().getEpochSecond()),
-      user1.getEmail(),
+      userWithEmail.getEmail(),
       String.format("pass_%s", Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );
@@ -188,7 +208,7 @@ public class SignupTests extends NewTestTemplate {
   private SignUpUser createUserWithExistingUsername() {
     return new SignUpUser(
       existingUser.getUserName(),
-      getEmailAlias(user1.getEmail()),
+      getEmailAlias(userWithEmail.getEmail()),
       String.format("pass_%s", Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );
@@ -198,7 +218,7 @@ public class SignupTests extends NewTestTemplate {
     String username = String.format("QA%s", Instant.now().getEpochSecond());
     return new SignUpUser(
       username,
-      getEmailAlias(user1.getEmail()),
+      getEmailAlias(userWithEmail.getEmail()),
       username,
       LocalDate.of(1993, 3, 19)
     );
@@ -207,7 +227,7 @@ public class SignupTests extends NewTestTemplate {
   private SignUpUser createTooYoungUser() {
     return new SignUpUser(
       String.format("QA%s", Instant.now().getEpochSecond()),
-      getEmailAlias(user1.getEmail()),
+      getEmailAlias(userWithEmail.getEmail()),
       String.format("pass_%s", Instant.now().getEpochSecond()),
       LocalDate.now().minusYears(11)
     );
@@ -216,7 +236,7 @@ public class SignupTests extends NewTestTemplate {
   private SignUpUser createNewUserWithSpecialCharacters() {
     return new SignUpUser(
       String.format("ユーザー%s", Instant.now().getEpochSecond()),
-      getEmailAlias(user1.getEmail()),
+      getEmailAlias(userWithEmail.getEmail()),
       String.format("ユーザザー_%s", Instant.now().getEpochSecond()),
       LocalDate.of(1993, 3, 19)
     );

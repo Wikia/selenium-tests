@@ -31,6 +31,8 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   private WebElement birthYearField;
   @FindBy(id = "signupSubmit")
   private WebElement submitButton;
+  @FindBy(css = ".password-toggler")
+  private WebElement passwordToggler;
 
   private AuthPageContext authContext;
 
@@ -49,6 +51,14 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
 
   @Override public boolean submitButtonNotClickable() {
     return !wait.forElementVisible(submitButton).isEnabled();
+  }
+
+  @Override public boolean isPasswordMasked() {
+    return passwordField.getAttribute("type").equals("password");
+  }
+
+  @Override public void togglePasswordVisibility() {
+    waitAndClick(passwordToggler);
   }
 
   @Override public RegisterPage typeEmailAddress(String email) {

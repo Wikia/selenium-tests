@@ -25,5 +25,4 @@ public interface SignInPage extends FormPage {
 
   void togglePasswordVisibility();
 
-  boolean isSubmitButtonEnabled();
 }

@@ -24,4 +24,8 @@ public interface RegisterPage extends FormPage {
 
   RegisterPage fillForm(SignUpUser user);
 
+  boolean isPasswordMasked();
+
+  void togglePasswordVisibility();
+
 }

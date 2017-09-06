@@ -33,6 +33,16 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     return registerPage.submitButtonNotClickable();
   }
 
+  @Override public boolean isPasswordMasked() {
+    gainFocus();
+    return registerPage.isPasswordMasked();
+  }
+
+  @Override public void togglePasswordVisibility() {
+    gainFocus();
+    registerPage.togglePasswordVisibility();
+  }
+
   @Override public RegisterPage typeEmailAddress(String email) {
     gainFocus();
     return registerPage.typeEmailAddress(email);

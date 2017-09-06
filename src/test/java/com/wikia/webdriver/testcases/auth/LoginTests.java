@@ -177,7 +177,7 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithBlankUsernameOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
     signIn.typeUsername("").typePassword(user.getPassword());
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
   }
 
   @Test(groups = MOBILE)
@@ -185,14 +185,14 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithBlankUsernameOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     signIn.typeUsername("").typePassword(user.getPassword());
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
   }
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithBlankPasswordOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
     signIn.typeUsername(user.getUserName()).typePassword("");
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
   }
 
   @Test(groups = MOBILE)
@@ -200,7 +200,7 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithBlankPasswordOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     signIn.typeUsername(user.getUserName()).typePassword("");
-    assertFalse(signIn.isSubmitButtonEnabled(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
   }
 
   /**
