@@ -21,7 +21,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 
-@Test(groups = {"auth-signup-desktop", "auth-signup-mobile"})
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 
@@ -29,11 +28,18 @@ public class SignupTests extends NewTestTemplate {
   private static final String PASSWORD_MATCHING_USERNAME_MSG = "Password and username cannot match";
   private static final String GENERIC_ERROR_MSG =
     "We cannot complete your registration at this time";
+
+  private static final String DESKTOP = "auth-signup-desktop";
+  private static final String MOBILE = "auth-signup-mobile";
+
   private UserWithEmailPool userPool = new UserWithEmailPool();
   private UserWithEmail user1 = userPool.getEmailOnlyUser1();
   private UserWithEmail user2 = userPool.getEmailOnlyUser2();
   private User existingUser = User.LOGIN_USER;
 
+
+
+  @Test(groups = DESKTOP)
   public void newUserCanSignUpDesktop() {
     ArticlePageObject article = openArticleOnDesktop();
     SignUpUser newUser = createNewUser();
@@ -41,6 +47,7 @@ public class SignupTests extends NewTestTemplate {
     article.verifyUserLoggedIn(newUser.getUsername());
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void newUserCanSignUpMobile() {
     ArticlePage article = openArticleOnMobile();
@@ -49,6 +56,7 @@ public class SignupTests extends NewTestTemplate {
     article.waitForPageReload().verifyUserLoggedIn(newUser.getUsername());
   }
 
+  @Test(groups = DESKTOP)
   public void userCanSignUpWithExistingEmailDesktop() {
     ArticlePageObject article = openArticleOnDesktop();
     SignUpUser newUser = createUserWithExistingEmail();
@@ -56,6 +64,7 @@ public class SignupTests extends NewTestTemplate {
     article.verifyUserLoggedIn(newUser.getUsername());
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanSignUpWithExistingEmailMobile() {
     ArticlePage article = openArticleOnMobile();
@@ -64,6 +73,7 @@ public class SignupTests extends NewTestTemplate {
     article.waitForPageReload().verifyUserLoggedIn(newUser.getUsername());
   }
 
+  @Test(groups = DESKTOP)
   public void userCannotSignUpWithExistingUsernameDesktop() {
     SignUpUser newUser = createUserWithExistingUsername();
     RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
@@ -71,6 +81,7 @@ public class SignupTests extends NewTestTemplate {
     Assertion.assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithExistingUsernameMobile() {
     SignUpUser newUser = createUserWithExistingUsername();
@@ -79,6 +90,7 @@ public class SignupTests extends NewTestTemplate {
     Assertion.assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
+  @Test(groups = DESKTOP)
   public void userCannotSignUpWithPasswordMatchingUsernameDesktop() {
     SignUpUser newUser = createUserWithPasswordMatchingUsername();
     RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
@@ -86,6 +98,7 @@ public class SignupTests extends NewTestTemplate {
     Assertion.assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithPasswordMatchingUsernameMobile() {
     SignUpUser newUser = createUserWithPasswordMatchingUsername();
@@ -94,6 +107,7 @@ public class SignupTests extends NewTestTemplate {
     Assertion.assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
+  @Test(groups = DESKTOP)
   public void userCannotSignUpWhenTooYoungDesktop() {
     SignUpUser newUser = createTooYoungUser();
     RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
@@ -101,6 +115,7 @@ public class SignupTests extends NewTestTemplate {
     Assertion.assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWhenTooYoungMobile() {
     SignUpUser newUser = createTooYoungUser();
@@ -109,7 +124,7 @@ public class SignupTests extends NewTestTemplate {
     Assertion.assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
-  @Execute(onWikia = "ja.ja-test")
+  @Test(groups = DESKTOP)
   public void userWithSpecialCharactersInUsernameCanSignUpDesktop() {
     ArticlePageObject article = openArticleOnDesktop();
     SignUpUser newUser = createNewUserWithSpecialCharacters();
@@ -117,8 +132,8 @@ public class SignupTests extends NewTestTemplate {
     article.verifyUserLoggedIn(newUser.getUsername());
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Execute(onWikia = "ja.ja-test")
   public void userWithSpecialCharactersInUsernameCanSignUpMobile() {
     ArticlePage article = openArticleOnMobile();
     SignUpUser newUser = createNewUserWithSpecialCharacters();
@@ -126,19 +141,23 @@ public class SignupTests extends NewTestTemplate {
     article.waitForPageReload().verifyUserLoggedIn(newUser.getUsername());
   }
 
+  @Test(groups = DESKTOP)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
 
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
 
   }
 
+  @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityDesktop() {
 
   }
 
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityMobile() {
 
