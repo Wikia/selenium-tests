@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 
 public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
-  private final String WIKIA = "project43";
-  private final String URL_ARTICLE = "/SyntheticTests/UAP/ABCD/ProductsPriority";
-  private final String URL_ARTICLE_WITH_DEBUG_MODE = URL_ARTICLE + "?appnexusast_debug_mode";
+  private static final String WIKIA = "project43";
+  private static final String URL_ARTICLE = "/SyntheticTests/UAP/ABCD/ProductsPriority";
+  private static final String URL_ARTICLE_WITH_DEBUG_MODE = URL_ARTICLE + "?appnexusast_debug_mode";
 
 
   @Test(
@@ -37,7 +37,7 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
         "AppNexus ad param: appnexusAst is not present");
     Assertion.assertTrue(isExpectedLineItemIdPresent(ads, AdsContent.INCONTENT_PLAYER, "4406759476"),
         "AppNexus ad line item id: 4406759476 is not present");
-    Assertion.assertTrue(isExpectedSlotRessultPresent(ads,AdsContent.INCONTENT_PLAYER, "success"),
+    Assertion.assertTrue(isExpectedSlotResultPresent(ads,AdsContent.INCONTENT_PLAYER, "success"),
         "AppNexus slot result: success is not present");
   }
 
@@ -45,7 +45,7 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
     ads.scrollToSlot(AdsContent.TOP_LB);
     Assertion.assertTrue(isExpectedLineItemIdPresent(ads, AdsContent.TOP_LB, "4376117186"),
         "TOP_LEADERBOARD slot has ABCD ad line item id 4376117186, ABCD slot should not be displayed");
-    Assertion.assertTrue(isExpectedSlotRessultPresent(ads,AdsContent.TOP_LB, "success"),
+    Assertion.assertTrue(isExpectedSlotResultPresent(ads,AdsContent.TOP_LB, "success"),
         "ABCD slot result: success is not present");
   }
 
@@ -63,7 +63,7 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
     return ads.getGptParams(slotName, "data-gpt-line-item-id").equals(lineItemId);
   }
 
-  private boolean isExpectedSlotRessultPresent(AdsBaseObject ads, String slotName, String slotResult) {
+  private boolean isExpectedSlotResultPresent(AdsBaseObject ads, String slotName, String slotResult) {
     return ads.getGptParams(slotName, "data-slot-result").equals(slotResult);
   }
 }
