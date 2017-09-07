@@ -138,8 +138,8 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumNotExists", e, false);
     }
-//    wait.forElementVisible(By.xpath(
-//        "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
+    Assertion.assertListContains(getNotifications(NotificationType.WARN).stream().map(n->n.getMessage()).collect(Collectors.toList()),
+            "There is no Forum Board with that title. Please try again or check out this list of Forum Boards.");
     PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
   }
 
