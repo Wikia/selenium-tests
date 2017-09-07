@@ -243,11 +243,27 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public AdsBaseObject verifyLineItemId(String slotName, int lineItemId) {
+  public AdsBaseObject verifyLineItemId(String slotName, String lineItemId) {
     String lineItemParam = getGptParams(slotName, GPT_DATA_ATTRIBUTES[0]);
-    Assertion.assertStringContains(lineItemParam, String.valueOf(lineItemId));
+    Assertion.assertStringContains(lineItemParam, lineItemId);
     PageObjectLogging
         .log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
+    return this;
+  }
+
+  public AdsBaseObject verifyGptSlotParam(String slotName, String param) {
+    String slotParam = getGptParams(slotName, "data-gpt-page-params");
+    Assertion.assertStringContains(slotParam, param);
+    PageObjectLogging
+        .log("verifyGptPageParam", slotName + " has following gpt slot param: " + slotParam, true);
+    return this;
+  }
+
+  public AdsBaseObject verifySLotResult(String slotName, String result) {
+    String slotResult = getGptParams(slotName, GPT_DATA_ATTRIBUTES[0]);
+    Assertion.assertStringContains(slotResult, result);
+    PageObjectLogging
+        .log("verifySLotResult", slotName + " has following result: " + slotResult, true);
     return this;
   }
 

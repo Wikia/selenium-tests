@@ -95,7 +95,7 @@ public class TestUap extends TemplateNoFirstLoad {
       ads.scrollToPosition(slotSelector);
       Dimension slotSize = (Dimension) slotData.get("slotSize");
 
-      ads.verifyLineItemId(slotName, Integer.valueOf(slotData.get("lineItemId").toString()));
+      ads.verifyLineItemId(slotName, slotData.get("lineItemId").toString());
       ads.verifyIframeSize(slotName, slotData.get("src").toString(),
                            slotSize.getWidth(), slotSize.getHeight());
     }

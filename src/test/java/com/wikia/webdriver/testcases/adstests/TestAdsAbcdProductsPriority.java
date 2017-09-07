@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.sun.tools.javac.code.DeferredLintHandler;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -9,8 +10,11 @@ import org.testng.annotations.Test;
 public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "project43";
-  private static final String URL_ARTICLE = "/SyntheticTests/UAP/ABCD/ProductsPriority";
+  private static final String URL_ARTICLE = "/SyntheticTests/ProductsPriority/OutstreamOverABCD";
   private static final String URL_ARTICLE_WITH_DEBUG_MODE = URL_ARTICLE + "?appnexusast_debug_mode";
+
+  private static final String ABCD_LINE_ITEM_ID = "4376117186";
+  private static final String APPNEXUS_LINE_ITEM_ID = "4406759476";
 
 
   @Test(
@@ -18,7 +22,10 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   )
   public void adsAppNexusVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis() {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(WIKIA, URL_ARTICLE_WITH_DEBUG_MODE));
+    ads.scrollToSlot(AdsContent.INCONTENT_PLAYER);
     verifyAppNexussAdIsDisplayed(ads);
+
+    ads.scrollToSlot(AdsContent.TOP_LB);
     verifyAbcdAdIsNotDisplayed(ads);
   }
 
@@ -31,27 +38,18 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   }
 
   private void verifyAppNexussAdIsDisplayed(AdsBaseObject ads){
-    ads.scrollToSlot(AdsContent.INCONTENT_PLAYER);
-
-    Assertion.assertTrue(ads.getGptParams(AdsContent.INCONTENT_PLAYER, "data-gpt-slot-params").contains("appnexusAst"),
-        "AppNexus ad param: appnexusAst is not present");
-    Assertion.assertTrue(ads.getGptParams(AdsContent.INCONTENT_PLAYER, "data-gpt-line-item-id").equals("4406759476"),
-        "AppNexus ad line item id: 4406759476 is not present");
-    Assertion.assertTrue(ads.getGptParams(AdsContent.INCONTENT_PLAYER, "data-slot-result").equals("success"),
-        "AppNexus slot result: success is not present");
+    ads.verifyLineItemId(AdsContent.INCONTENT_PLAYER, APPNEXUS_LINE_ITEM_ID );
+    ads.verifyGptSlotParam(AdsContent.INCONTENT_PLAYER, "appnexusAst");
+    ads.verifySLotResult(AdsContent.INCONTENT_PLAYER, "success");
   }
 
   private void verifyAbcdAdIsDisplayed(AdsBaseObject ads) {
-    ads.scrollToSlot(AdsContent.TOP_LB);
-    Assertion.assertTrue(ads.getGptParams(AdsContent.TOP_LB, "data-gpt-line-item-id").equals("4376117186"),
-        "TOP_LEADERBOARD slot has ABCD ad line item id 4376117186, ABCD slot should not be displayed");
-    Assertion.assertTrue(ads.getGptParams(AdsContent.TOP_LB, "data-slot-result").equals("success"),
-        "ABCD slot result: success is not present");
+    ads.verifyLineItemId(AdsContent.TOP_LB, ABCD_LINE_ITEM_ID);
+    ads.verifySLotResult(AdsContent.INCONTENT_PLAYER, "success");
   }
 
   private void verifyAbcdAdIsNotDisplayed(AdsBaseObject ads) {
-    ads.scrollToSlot(AdsContent.TOP_LB);
-    Assertion.assertFalse(ads.getGptParams(AdsContent.TOP_LB, "data-gpt-line-item-id").equals("4376117186"),
-    "TOP_LEADERBOARD slot has ABCD ad line item id 4376117186, ABCD slot should not be displayed");
+    Assertion.assertEquals(ads.verifyLineItemId(AdsContent.TOP_LB, ABCD_LINE_ITEM_ID), false,
+        "ABCD" + ABCD_LINE_ITEM_ID + " line item id is displayed");
   }
 }
