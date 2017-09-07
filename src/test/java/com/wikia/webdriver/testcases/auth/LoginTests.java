@@ -36,6 +36,8 @@ public class LoginTests extends NewTestTemplate {
 
   private static final String ERROR_MESSAGE =
     "We don't recognize these credentials. Try again or register a new account.";
+  private static final String SUBMIT_BUTTON_DISABLED_MSG = "Submit button should be disabled";
+
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
@@ -177,7 +179,7 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithBlankUsernameOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
     signIn.typeUsername("").typePassword(user.getPassword());
-    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
   @Test(groups = MOBILE)
@@ -185,14 +187,14 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithBlankUsernameOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     signIn.typeUsername("").typePassword(user.getPassword());
-    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithBlankPasswordOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
     signIn.typeUsername(user.getUserName()).typePassword("");
-    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
   @Test(groups = MOBILE)
@@ -200,7 +202,7 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithBlankPasswordOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     signIn.typeUsername(user.getUserName()).typePassword("");
-    assertTrue(signIn.submitButtonNotClickable(), "Submit button should be disabled");
+    assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
   /**

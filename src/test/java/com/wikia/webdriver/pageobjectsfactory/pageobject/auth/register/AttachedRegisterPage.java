@@ -54,7 +54,7 @@ public class AttachedRegisterPage extends BasePageObject implements RegisterPage
   }
 
   @Override public boolean isPasswordMasked() {
-    return passwordField.getAttribute("type").equals("password");
+    return "password".equals(passwordField.getAttribute("type"));
   }
 
   @Override public void togglePasswordVisibility() {
