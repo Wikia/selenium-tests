@@ -37,6 +37,29 @@ public class Assertion extends Assert {
     return assertion;
   }
 
+  public static boolean assertListContains(List<String> currentList, String expectedElement) {
+    List<String> currentListEncoded = currentList.stream().map(e->encodeSpecialChars(e)).collect(Collectors.toList());
+    String expectedElementEncoded = encodeSpecialChars(expectedElement);
+    boolean assertion = true;
+    try {
+      if (!currentList.stream().anyMatch(e->expectedElement.equals(e))) {
+        throw new AssertionError("List [" + currentList.stream().collect(Collectors.joining(", ")) + "] doesn't contain string [" +
+                expectedElement + "]"
+        );
+      }
+    } catch (AssertionError ass) {
+      addVerificationFailure(ass);
+      assertion = false;
+    }
+    PageObjectLogging.log(
+            "assertStringContainsAnyPattern",
+            "assertion " + assertion + "! String: \"" + expectedElementEncoded +
+                    "\". List of patterns \"" + currentListEncoded.stream().collect(Collectors.joining(", ")) + ".",
+            assertion
+    );
+    return assertion;
+  }
+
   /**
    * Checks if element matches any of the patterns from the list,
    * useful to check if expected video title on the list of videos

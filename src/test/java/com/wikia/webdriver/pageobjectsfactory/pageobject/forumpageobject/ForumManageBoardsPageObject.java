@@ -2,8 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,8 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.stream.Collectors;
 
-public class ForumManageBoardsPageObject extends BasePageObject {
+public class ForumManageBoardsPageObject extends WikiBasePageObject {
 
   @FindBy(css = "#CreateNewBoardButton")
   private WebElement createBoardButton;
@@ -95,9 +96,8 @@ public class ForumManageBoardsPageObject extends BasePageObject {
   }
 
   private void verifyForumDeletedText(String deletedName) {
-    wait.forElementVisible(By.xpath("//div[@class='banner-notification confirm']" +
-                                    "/div[@class='msg' and contains(text(), '\"Board:" + deletedName
-                                    + "\" has been deleted.')]"));
+    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage()).collect(Collectors.toList()),
+            "\"Board:" + deletedName + "\" has been deleted.");
     PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);
   }
 
@@ -138,8 +138,8 @@ public class ForumManageBoardsPageObject extends BasePageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumNotExists", e, false);
     }
-    wait.forElementVisible(By.xpath(
-        "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
+//    wait.forElementVisible(By.xpath(
+//        "//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]"));
     PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
   }
 

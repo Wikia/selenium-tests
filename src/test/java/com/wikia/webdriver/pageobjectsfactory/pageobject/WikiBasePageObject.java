@@ -628,7 +628,7 @@ public class WikiBasePageObject extends BasePageObject {
     return new WikiHistoryPageObject();
   }
 
-  private String getArticleName() {
+  public String getArticleName() {
     return (String) jsActions.execute(WikiaGlobalVariables.WG_PAGE_NAME);
   }
 
