@@ -40,109 +40,80 @@ public class SignupTests extends NewTestTemplate {
   private UserWithEmailPool userPool = new UserWithEmailPool();
   private UserWithEmail userWithEmail = userPool.getEmailOnlyUser1();
   private User existingUser = User.LOGIN_USER;
+  private static final LocalDate BIRTH_DATE = LocalDate.of(1993, 3, 19);
 
 
 
   @Test(groups = DESKTOP)
   public void newUserCanSignUpDesktop() {
-    ArticlePageObject article = openArticleOnDesktop();
-    SignUpUser newUser = createNewUser();
-    signUpOnDesktopAs(newUser);
-    article.verifyUserLoggedIn(newUser.getUsername());
+    performSuccessfulSignUpOnDesktopAs(createNewUser());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void newUserCanSignUpMobile() {
-    ArticlePage article = openArticleOnMobile();
-    SignUpUser newUser = createNewUser();
-    signUpOnMobileAs(article, newUser);
-    article.waitForPageReload().verifyUserLoggedIn(newUser.getUsername());
+    performSuccessfulSignUpOnMobileAs(createNewUser());
   }
 
   @Test(groups = DESKTOP)
   public void userCanSignUpWithExistingEmailDesktop() {
-    ArticlePageObject article = openArticleOnDesktop();
-    SignUpUser newUser = createUserWithExistingEmail();
-    signUpOnDesktopAs(newUser);
-    article.verifyUserLoggedIn(newUser.getUsername());
+    performSuccessfulSignUpOnDesktopAs(createUserWithExistingEmail());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanSignUpWithExistingEmailMobile() {
-    ArticlePage article = openArticleOnMobile();
-    SignUpUser newUser = createUserWithExistingEmail();
-    signUpOnMobileAs(article, newUser);
-    article.waitForPageReload().verifyUserLoggedIn(newUser.getUsername());
+    performSuccessfulSignUpOnMobileAs(createUserWithExistingEmail());
   }
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithExistingUsernameDesktop() {
-    SignUpUser newUser = createUserWithExistingUsername();
-    RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
-    form.submit();
+    RegisterPage form = performUnsuccessfulSignUpOnDesktopAs(createUserWithExistingUsername());
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithExistingUsernameMobile() {
-    SignUpUser newUser = createUserWithExistingUsername();
-    RegisterPage form = navigateToSignUpOnMobile();
-    form.fillForm(newUser).submit();
+    RegisterPage form = performUnsuccessfulSignUpOnMobileAs(createUserWithExistingUsername());
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithPasswordMatchingUsernameDesktop() {
-    SignUpUser newUser = createUserWithPasswordMatchingUsername();
-    RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
-    form.submit();
+    RegisterPage form = performUnsuccessfulSignUpOnDesktopAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithPasswordMatchingUsernameMobile() {
-    SignUpUser newUser = createUserWithPasswordMatchingUsername();
-    RegisterPage form = navigateToSignUpOnMobile();
-    form.fillForm(newUser).submit();
+    RegisterPage form = performUnsuccessfulSignUpOnMobileAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWhenTooYoungDesktop() {
-    SignUpUser newUser = createTooYoungUser();
-    RegisterPage form = openSignUpModalOnDesktop().fillForm(newUser);
-    form.submit();
+    RegisterPage form = performUnsuccessfulSignUpOnDesktopAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWhenTooYoungMobile() {
-    SignUpUser newUser = createTooYoungUser();
-    RegisterPage form = navigateToSignUpOnMobile();
-    form.fillForm(newUser).submit();
+    RegisterPage form = performUnsuccessfulSignUpOnMobileAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userWithSpecialCharactersInUsernameCanSignUpDesktop() {
-    ArticlePageObject article = openArticleOnDesktop();
-    SignUpUser newUser = createNewUserWithSpecialCharacters();
-    signUpOnDesktopAs(newUser);
-    article.verifyUserLoggedIn(newUser.getUsername());
+    performSuccessfulSignUpOnDesktopAs(createNewUserWithSpecialCharacters());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userWithSpecialCharactersInUsernameCanSignUpMobile() {
-    ArticlePage article = openArticleOnMobile();
-    SignUpUser newUser = createNewUserWithSpecialCharacters();
-    signUpOnMobileAs(article, newUser);
-    article.waitForPageReload().verifyUserLoggedIn(newUser.getUsername());
+    performSuccessfulSignUpOnMobileAs(createNewUserWithSpecialCharacters());
   }
 
   @Test(groups = DESKTOP)
@@ -166,23 +137,13 @@ public class SignupTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityDesktop() {
-    RegisterPage signUpPage = openSignUpModalOnDesktop();
-    signUpPage.typePassword(existingUser.getPassword());
-
-    assertTrue(signUpPage.isPasswordMasked(), "password should be masked");
-    signUpPage.togglePasswordVisibility();
-    assertFalse(signUpPage.isPasswordMasked(), "password should be readable");
+    performPasswordToggleTest(openSignUpModalOnDesktop());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityMobile() {
-    RegisterPage signUpPage = navigateToSignUpOnMobile();
-    signUpPage.typePassword("");
-
-    assertTrue(signUpPage.isPasswordMasked(), "password should be masked");
-    signUpPage.togglePasswordVisibility();
-    assertFalse(signUpPage.isPasswordMasked(), "password should be readable");
+    performPasswordToggleTest(navigateToSignUpOnMobile());
   }
 
   /**
@@ -190,12 +151,12 @@ public class SignupTests extends NewTestTemplate {
    */
 
   private SignUpUser createNewUser() {
-    
+
     return new SignUpUser(
       String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
       getEmailAlias(userWithEmail.getEmail()),
       String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-      LocalDate.of(1993, 3, 19)
+      BIRTH_DATE
     );
   }
 
@@ -204,7 +165,7 @@ public class SignupTests extends NewTestTemplate {
       String.format(USERNAME_PATTERN, Instant.now().getEpochSecond()),
       userWithEmail.getEmail(),
       String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-      LocalDate.of(1993, 3, 19)
+      BIRTH_DATE
     );
   }
 
@@ -213,7 +174,7 @@ public class SignupTests extends NewTestTemplate {
       existingUser.getUserName(),
       getEmailAlias(userWithEmail.getEmail()),
       String.format(PASS_PATTERN, Instant.now().getEpochSecond()),
-      LocalDate.of(1993, 3, 19)
+      BIRTH_DATE
     );
   }
 
@@ -223,7 +184,7 @@ public class SignupTests extends NewTestTemplate {
       username,
       getEmailAlias(userWithEmail.getEmail()),
       username,
-      LocalDate.of(1993, 3, 19)
+      BIRTH_DATE
     );
   }
 
@@ -241,7 +202,7 @@ public class SignupTests extends NewTestTemplate {
       String.format("ユーザー%s", Instant.now().getEpochSecond()),
       getEmailAlias(userWithEmail.getEmail()),
       String.format("ユーザザー_%s", Instant.now().getEpochSecond()),
-      LocalDate.of(1993, 3, 19)
+      BIRTH_DATE
     );
   }
 
@@ -286,6 +247,38 @@ public class SignupTests extends NewTestTemplate {
 
   private void signUpOnDiscussionMobilePageAs(PostsListPage page, SignUpUser user) {
     navigateToSignUpOnMobile(page.getTopBar()).signUp(user);
+  }
+
+  private void performSuccessfulSignUpOnMobileAs(SignUpUser user) {
+    ArticlePage article = openArticleOnMobile();
+    signUpOnMobileAs(article, user);
+    article.waitForPageReload().verifyUserLoggedIn(user.getUsername());
+  }
+
+  private void performSuccessfulSignUpOnDesktopAs(SignUpUser user) {
+    ArticlePageObject article = openArticleOnDesktop();
+    signUpOnDesktopAs(user);
+    article.verifyUserLoggedIn(user.getUsername());
+  }
+
+  private RegisterPage performUnsuccessfulSignUpOnDesktopAs(SignUpUser user) {
+    RegisterPage form = openSignUpModalOnDesktop().fillForm(user);
+    form.submit();
+    return form;
+  }
+
+  private RegisterPage performUnsuccessfulSignUpOnMobileAs(SignUpUser user) {
+    RegisterPage form = navigateToSignUpOnMobile();
+    form.fillForm(user).submit();
+    return form;
+  }
+
+  private void performPasswordToggleTest(RegisterPage signUpPage) {
+    signUpPage.typePassword(existingUser.getPassword());
+
+    assertTrue(signUpPage.isPasswordMasked(), "password should be masked");
+    signUpPage.togglePasswordVisibility();
+    assertFalse(signUpPage.isPasswordMasked(), "password should be readable");
   }
 
 }
