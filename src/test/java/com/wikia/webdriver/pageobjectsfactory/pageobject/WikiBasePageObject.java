@@ -130,7 +130,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
   protected By parentBy = By.xpath("./..");
   protected String modalWrapper = "#WikiaConfirm";
-  @FindBys(@FindBy(css = ".banner-notification"))
+  @FindBys(@FindBy(css = ".wds-banner-notification"))
   private List<WebElement> notificationElements;
   @FindBy(css = "#WikiaArticle a[href*='Special:UserLogin']")
   private WebElement specialUserLoginLink;
@@ -460,7 +460,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public List<Notification> getNotifications(NotificationType notificationType){
     List<Notification> notificationList = getNotifications();
-    return notificationList.stream().filter(n -> n.getType().toUpperCase().contains(notificationType.name()))
+    return notificationList.stream().filter(n -> n.getType().toLowerCase().contains(notificationType.getClassName()))
             .collect(Collectors.toList());
   }
 
