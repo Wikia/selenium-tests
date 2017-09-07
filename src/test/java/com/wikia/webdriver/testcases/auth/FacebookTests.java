@@ -17,7 +17,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static org.testng.Assert.assertTrue;
 
@@ -66,8 +66,8 @@ public class FacebookTests extends NewTestTemplate {
     AttachedRegisterPage signUp = new AttachedRegisterPage().open();
     FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 
-    String userName = String.format("QA%s", LocalDateTime.now());
-    String password = String.format("Pass%s", LocalDateTime.now());
+    String userName = String.format("QA%s", Instant.now().getEpochSecond());
+    String password = String.format("Pass%s", Instant.now().getEpochSecond());
 
     fbModal.createAccountNoEmail(facebookUser.getEmail(), userName, password);
     new WikiBasePageObject().verifyUserLoggedIn(userName);
