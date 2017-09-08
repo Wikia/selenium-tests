@@ -27,12 +27,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 
 import lombok.Getter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -114,7 +109,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   @FindBy(css = "#articleCategories .category.normal .name a")
   private List<WebElement> categoryList;
   @FindBy(css = ".ui-autocomplete")
-  private WebElement categorySuggestionsList;
+  private WebElement categorySuggestionsDialog;
   @FindBy(css = ".category.new")
   private WebElement categoryNew;
   @FindBy(css = "button.save:not([disabled])")
@@ -540,15 +535,18 @@ public class ArticlePageObject extends WikiBasePageObject {
                           true);
   }
 
-  public String addCategorySuggestions(String category, int categoryNumber) {
+  public String addCategorySuggestions(String category, int categoryIndex) {
     clickAddCategoryButton();
     typeCategoryName(category);
-    wait.forElementVisible(categorySuggestionsList);
-    WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
+    wait.forElementVisible(categorySuggestionsDialog);
+    if (categoryIndex > categorySuggestionsListItems.size()-1){
+      throw new WebDriverException("List of category suggestions doesn't contain sufficient number of elements");
+    }
+    WebElement desiredCategory = categorySuggestionsListItems.get(categoryIndex);
     String desiredCategoryText = desiredCategory.getText();
-    scrollAndClick(categorySuggestionsListItems.get(categoryNumber));
-    waitForElementNotVisibleByElement(categorySuggestionsList);
-    PageObjectLogging.log("addCategorySuggestions", "category " + category
+    scrollAndClick(categorySuggestionsListItems.get(categoryIndex));
+    waitForElementNotVisibleByElement(categorySuggestionsDialog);
+    PageObjectLogging.log("addCategorySuggestions", "category " + desiredCategoryText
                                                     + " added from suggestions", true);
     return desiredCategoryText;
   }
