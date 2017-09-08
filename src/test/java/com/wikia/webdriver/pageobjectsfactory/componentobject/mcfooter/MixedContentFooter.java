@@ -42,7 +42,7 @@ public class MixedContentFooter extends WikiBasePageObject{
 
   public boolean isDiscussionsCardPresent() {
     wait.forElementVisible(discussionsCard);
-    return discussionsCard.isDisplayed();
+    return discussionsCard.isEnabled();
   }
 
   public boolean isExploreWikisCardPresent() {
