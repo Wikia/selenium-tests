@@ -61,7 +61,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostsListPage().open(data.getId()).getPost().findPostById(data.getId());
+    final PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
     Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
   }
 
@@ -94,7 +94,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostsListPage().open(data.getId()).getPost().findPostById(data.getId());
+    final PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
     Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
   }
 

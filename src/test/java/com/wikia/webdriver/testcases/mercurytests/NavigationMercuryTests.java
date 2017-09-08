@@ -5,6 +5,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -57,6 +58,7 @@ public class NavigationMercuryTests extends NavigationTests {
 
   @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
   @Execute(asUser = User.USER_3)
+  @RelatedIssue(issueID = "QAART-1042")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
     super.mercury_navigation_navigationElementsUserLoggedIn(
         new GuidelinesPage().open()
@@ -82,7 +84,8 @@ public class NavigationMercuryTests extends NavigationTests {
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.MAIN_PAGE));
   }
 
-  @Test
+  @Test (enabled = false)
+  @RelatedIssue(issueID = "XW-3858")
   public void mercury_navigation_scrollPositionPreservedAfterNavigatingBack()
       throws InterruptedException {
     ArticlePage testPage = new ArticlePage().open("/ScrollPreserveTest");

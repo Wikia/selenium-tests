@@ -20,12 +20,9 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final int AD_DURATION_SEC = 30;
   private static final int VIDEO_DURATION_SEC = 30;
 
-  private static final String ARTICLE_VIDEO_CLASS = "ooyala-article-video";
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
   private static final String ARTICLE_VIDEO_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
-  private static final String ARTICLE_VIDEO_CLICK_AREA_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video .oo-state-screen-selectable";
-  private static final String MOBILE_ARTICLE_VIDEO_PLAY_ICON = ".article-featured-video__play-circle";
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
 
@@ -34,12 +31,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   @FindBy(css = ARTICLE_VIDEO_WRAPPER_SELECTOR)
   private WebElement articleVideoWrapper;
-
-  @FindBy(css = ARTICLE_VIDEO_CLICK_AREA_SELECTOR)
-  private WebElement articleVideoClickArea;
-
-  @FindBy(css = MOBILE_ARTICLE_VIDEO_PLAY_ICON)
-  private WebElement mobileArticleVideoPlayButton;
 
   @FindBy(css = ".oo-volume.oo-control-bar-item")
   private WebElement volumeControlButton;
@@ -51,16 +42,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
   public void playLightboxVideo() {
     wait.forElementVisible(lightboxVideo);
     lightboxVideo.click();
-  }
-
-  public void playArticleVideo() {
-    wait.forElementVisible(articleVideoWrapper);
-    articleVideoClickArea.click();
-  }
-
-  public void playArticleVideoOnMobile() {
-    wait.forElementVisible(mobileArticleVideoPlayButton);
-    mobileArticleVideoPlayButton.click();
   }
 
   public void clickVolumeButton() {

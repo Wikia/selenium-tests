@@ -34,12 +34,11 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
 
   private static final String PATH = "/d/u/%s";
 
-  private static final String EXISTING_USER_ID = "1342502";
-
   private static final String NON_EXISTING_USER_ID = "4809883";
 
   public UserPostsPage open(String userId) {
     driver.get(urlBuilder.getUrlForWiki() + String.format(PATH, userId));
+    waitForPageReload();
     return this;
   }
 
@@ -47,16 +46,8 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
     return open(NON_EXISTING_USER_ID);
   }
 
-  public UserPostsPage openDefaultUserPage() {
-    return open(EXISTING_USER_ID);
-  }
-
   public static boolean is(String url) {
     return PAGE_PATTERN.matcher(url).find();
-  }
-
-  public static String extractUserIdFrom(String url) {
-    return UserPostsPage.is(url) ? StringUtils.substringAfterLast(url, "/") : StringUtils.EMPTY;
   }
 
   public UserPostsPage expandModeration() {

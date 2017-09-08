@@ -63,14 +63,14 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private PostDetailsPage openDefaultPostDetailsWaitingUtilLoaded() {
-    return new PostDetailsPage().openDefaultPost();
+    return new PostDetailsPage().open(cretePostRemotelyAsFirstUser().getId());
   }
 
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
-    final UserPostsPage page = openDefaultUserPostPageWaiting();
+    final UserPostsPage page = openFirstUserPostPage();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
@@ -114,6 +114,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserMobileReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -154,12 +155,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
-    final UserPostsPage page = openDefaultUserPostPageWaiting();
+    final UserPostsPage page = openFirstUserPostPage();
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  private UserPostsPage openDefaultUserPostPageWaiting() {
-    return new UserPostsPage().openDefaultUserPage();
+  private UserPostsPage openFirstUserPostPage() {
+    return new UserPostsPage().open(User.USER.getUserId());
   }
 
   @Test(groups = "discussions-anonUserDesktopReporting")
@@ -203,6 +204,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-anonUserDesktopReporting")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -267,6 +269,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersMobileReporting")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void userOnMobileCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -437,6 +440,7 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInUsersDesktopReporting")
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @RelatedIssue(issueID = "IRIS-4867")
   public void userOnDesktopCanNotSeeDeletedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportAndDeletePostRemotely();
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
@@ -587,7 +591,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -595,7 +598,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -687,7 +689,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
@@ -695,17 +696,12 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
 
   private void moderatorCanDeleteReportedPostOnPostDetailsPage() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    validatePostRemotelyAsDiscussionsModerator(data);
-    reportPostRemotelyAsThirdUser(data);
-
     final PostDetailsPage page = openPostDetailsPageAndWaitUntilLoaded(data.getId());
     final PostEntity postEntity = page.getPost().findPostById(data.getId());
     assertTrue(isReported(postEntity), REPORTED_INDICATOR_ON_POST_MESSAGE);
@@ -715,21 +711,15 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
   private UserPostsPage openUserPostsAndWaitUntilLoaded(String authorId) {
-    final UserPostsPage post = new UserPostsPage().open(authorId);
-    post.waitForPageLoad();
-    return post;
+    return new UserPostsPage().open(authorId);
   }
 
   private PostDetailsPage openPostDetailsPageAndWaitUntilLoaded(String postId) {
-    final PostDetailsPage post = new PostDetailsPage().open(postId);
-    post.waitForPageLoad();
-    return post;
+    return new PostDetailsPage().open(postId);
   }
 
   private PostsListPage openPostListPageAndWaitUntilLoaded() {
-    final PostsListPage post = new PostsListPage().open();
-    post.waitForPageLoad();
-    return post;
+    return new PostsListPage().open();
   }
 
   private PostEntity.Data cretePostRemotelyAsFirstUser() {
@@ -751,19 +741,12 @@ public class ReportingPostTests extends NewTestTemplate {
     DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).validatePost(data);
   }
 
-  private void reportPostRemotelyAsThirdUser(PostEntity.Data data) {
-    DiscussionsClient.using(User.USER_3, driver).reportPost(data);
-  }
-
   private void deletePostRemotelyAsDiscussionsModerator(PostEntity.Data data) {
     DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).deletePost(data);
   }
 
   private PostEntity.Data createAndReportAndDeletePostRemotely() {
     final PostEntity.Data data = createAndReportPostRemotelyAsFirstUser();
-    reportPostRemotelyAsSecondUser(data);
-    validatePostRemotelyAsDiscussionsModerator(data);
-    reportPostRemotelyAsThirdUser(data);
     deletePostRemotelyAsDiscussionsModerator(data);
     return data;
   }
