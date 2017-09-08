@@ -50,11 +50,37 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  public void moreOfCardIsPresentOnENwiki() {
+  public void moreOfWikiArticlesCardIsPresentOnENwiki() {
     MixedContentFooter MCFooter = new MixedContentFooter(driver);
     MCFooter.openWikiMainPage().scrollToFooter();
     Assertion.assertTrue(MCFooter.isMoreOfWikiArticlesCardPresent());
   }
+
+  @Test
+  public void countNoOfArticlesInMcFooterWithDiscussionsAndWithMoreOfWikiArticles(){
+    MixedContentFooter MCFooter = new MixedContentFooter(driver);
+    MCFooter.openWikiMainPage().scrollToFooter();
+    Assertion.assertEquals(MCFooter.countArticleCards(), 17);
+  }
+
+  @Test
+  @Execute(onWikia = "glee")
+  public void countNoOfArticlesInMcFooterWithoutDiscussionsAndWithMoreOfWikiArticles(){
+    MixedContentFooter MCFooter = new MixedContentFooter(driver);
+    MCFooter.openWikiMainPage().scrollToFooter();
+    Assertion.assertEquals(MCFooter.countArticleCards(), 19);
+  }
+
+  @Test
+  @Execute(onWikia = "agas")
+  public void countNoOfArticlesInMcFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
+    MixedContentFooter MCFooter = new MixedContentFooter(driver);
+    MCFooter.openWikiMainPage().scrollToFooter();
+    Assertion.assertEquals(MCFooter.countArticleCards(), 18);
+  }
+
+
+
 
 
 

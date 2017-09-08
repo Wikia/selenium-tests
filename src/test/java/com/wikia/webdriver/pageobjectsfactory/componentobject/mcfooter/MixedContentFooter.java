@@ -8,13 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class MixedContentFooter extends WikiBasePageObject{
 
   @FindBy(css = "#mixed-content-footer")
   private WebElement mcFooter;
-
-  @FindBy(css = ".mcf-row")
-  private WebElement rowWithCards;
 
   @FindBy(css = ".mcf-card-wiki-articles")
   private WebElement moreOfWikiArticlesCard;
@@ -24,6 +23,9 @@ public class MixedContentFooter extends WikiBasePageObject{
 
   @FindBy(css = ".mcf-card-related-wikis")
   private WebElement exploreWikisCard;
+
+  @FindBy(css = ".mcf-card-article__link")
+  private List<WebElement> articleLinks;
 
   public MixedContentFooter(WebDriver driver) {
     super();
@@ -58,6 +60,11 @@ public class MixedContentFooter extends WikiBasePageObject{
   public boolean isMoreOfWikiArticlesCardPresent() {
     wait.forElementVisible(moreOfWikiArticlesCard);
     return moreOfWikiArticlesCard.isDisplayed();
+  }
+
+  public int countArticleCards (){
+    wait.forElementVisible(mcFooter);
+    return articleLinks.size();
   }
 
 
