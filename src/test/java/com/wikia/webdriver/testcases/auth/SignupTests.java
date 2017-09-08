@@ -37,83 +37,80 @@ public class SignupTests extends NewTestTemplate {
   private static final String PASS_PATTERN = "pass_%s";
   private static final String USERNAME_PATTERN = "QA%s";
 
-  private UserWithEmailPool userPool = new UserWithEmailPool();
-  private UserWithEmail userWithEmail = userPool.getEmailOnlyUser1();
+  private UserWithEmail userWithEmail = UserWithEmailFactory.getEmailOnlyUser1();
   private User existingUser = User.LOGIN_USER;
   private static final LocalDate BIRTH_DATE = LocalDate.of(1993, 3, 19);
 
-
-
   @Test(groups = DESKTOP)
   public void newUserCanSignUpDesktop() {
-    performSuccessfulSignUpOnDesktopAs(createNewUser());
+    performSignUpOnDesktopAs(createNewUser());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void newUserCanSignUpMobile() {
-    performSuccessfulSignUpOnMobileAs(createNewUser());
+    performSignUpOnMobileAs(createNewUser());
   }
 
   @Test(groups = DESKTOP)
   public void userCanSignUpWithExistingEmailDesktop() {
-    performSuccessfulSignUpOnDesktopAs(createUserWithExistingEmail());
+    performSignUpOnDesktopAs(createUserWithExistingEmail());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanSignUpWithExistingEmailMobile() {
-    performSuccessfulSignUpOnMobileAs(createUserWithExistingEmail());
+    performSignUpOnMobileAs(createUserWithExistingEmail());
   }
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithExistingUsernameDesktop() {
-    RegisterPage form = performUnsuccessfulSignUpOnDesktopAs(createUserWithExistingUsername());
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithExistingUsername());
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithExistingUsernameMobile() {
-    RegisterPage form = performUnsuccessfulSignUpOnMobileAs(createUserWithExistingUsername());
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createUserWithExistingUsername());
     assertEquals(form.getError(), USERNAME_TAKEN_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWithPasswordMatchingUsernameDesktop() {
-    RegisterPage form = performUnsuccessfulSignUpOnDesktopAs(createUserWithPasswordMatchingUsername());
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWithPasswordMatchingUsernameMobile() {
-    RegisterPage form = performUnsuccessfulSignUpOnMobileAs(createUserWithPasswordMatchingUsername());
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createUserWithPasswordMatchingUsername());
     assertEquals(form.getError(), PASSWORD_MATCHING_USERNAME_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotSignUpWhenTooYoungDesktop() {
-    RegisterPage form = performUnsuccessfulSignUpOnDesktopAs(createTooYoungUser());
+    RegisterPage form = performSignUpExpectingFailureOnDesktopAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotSignUpWhenTooYoungMobile() {
-    RegisterPage form = performUnsuccessfulSignUpOnMobileAs(createTooYoungUser());
+    RegisterPage form = performSignUpExpectingFailureOnMobileAs(createTooYoungUser());
     assertEquals(form.getError(), GENERIC_ERROR_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userWithSpecialCharactersInUsernameCanSignUpDesktop() {
-    performSuccessfulSignUpOnDesktopAs(createNewUserWithSpecialCharacters());
+    performSignUpOnDesktopAs(createNewUserWithSpecialCharacters());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userWithSpecialCharactersInUsernameCanSignUpMobile() {
-    performSuccessfulSignUpOnMobileAs(createNewUserWithSpecialCharacters());
+    performSignUpOnMobileAs(createNewUserWithSpecialCharacters());
   }
 
   @Test(groups = DESKTOP)
@@ -121,7 +118,7 @@ public class SignupTests extends NewTestTemplate {
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
     signUpOnDesktopFromDiscussionPageAs(createNewUser());
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.FULL_PATH),
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon sign up");
   }
 
@@ -131,7 +128,7 @@ public class SignupTests extends NewTestTemplate {
   public void userIsRedirectedToDiscussionPageUponSignUpFromDiscussionPageMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
     signUpOnDiscussionMobilePageAs(discussionPage, createNewUser());
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.FULL_PATH),
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon sign up");
   }
 
@@ -249,25 +246,25 @@ public class SignupTests extends NewTestTemplate {
     navigateToSignUpOnMobile(page.getTopBar()).signUp(user);
   }
 
-  private void performSuccessfulSignUpOnMobileAs(SignUpUser user) {
+  private void performSignUpOnMobileAs(SignUpUser user) {
     ArticlePage article = openArticleOnMobile();
     signUpOnMobileAs(article, user);
     article.waitForPageReload().verifyUserLoggedIn(user.getUsername());
   }
 
-  private void performSuccessfulSignUpOnDesktopAs(SignUpUser user) {
+  private void performSignUpOnDesktopAs(SignUpUser user) {
     ArticlePageObject article = openArticleOnDesktop();
     signUpOnDesktopAs(user);
     article.verifyUserLoggedIn(user.getUsername());
   }
 
-  private RegisterPage performUnsuccessfulSignUpOnDesktopAs(SignUpUser user) {
+  private RegisterPage performSignUpExpectingFailureOnDesktopAs(SignUpUser user) {
     RegisterPage form = openSignUpModalOnDesktop().fillForm(user);
     form.submit();
     return form;
   }
 
-  private RegisterPage performUnsuccessfulSignUpOnMobileAs(SignUpUser user) {
+  private RegisterPage performSignUpExpectingFailureOnMobileAs(SignUpUser user) {
     RegisterPage form = navigateToSignUpOnMobile();
     form.fillForm(user).submit();
     return form;

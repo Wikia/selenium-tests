@@ -40,48 +40,58 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     return this;
   }
 
-  @Override public SignInPage typeUsername(String username) {
+  @Override
+  public SignInPage typeUsername(String username) {
     fillInput(usernameField, username);
     return this;
   }
 
-  @Override public void login(String username, String password) {
+  @Override
+  public void login(String username, String password) {
     typeUsername(username);
     typePassword(password);
     submit();
   }
 
-  @Override public void login(User user) {
+  @Override
+  public void login(User user) {
     login(user.getUserName(), user.getPassword());
 
   }
 
-  @Override public RegisterPage navigateToRegister() {
+  @Override
+  public RegisterPage navigateToRegister() {
     return authContext.navigateToSignUp();
   }
 
-  @Override public String getError() {
+  @Override
+  public String getError() {
     return new FormError().getError();
   }
 
-  @Override public boolean isPasswordMasked() {
+  @Override
+  public boolean isPasswordMasked() {
     return "password".equals(passwordField.getAttribute("type"));
   }
 
-  @Override public void togglePasswordVisibility() {
+  @Override
+  public void togglePasswordVisibility() {
     waitAndClick(passwordToggler);
   }
 
-  @Override public void submit() {
+  @Override
+  public void submit() {
     waitAndClick(signInButton);
   }
 
-  @Override public AttachedSignInPage open() {
-     getUrl(getWikiUrl() + URLsContent.USER_LOGIN);
-     return this;
+  @Override
+  public AttachedSignInPage open() {
+    getUrl(getWikiUrl() + URLsContent.USER_LOGIN);
+    return this;
   }
 
-  @Override public boolean isDisplayed() {
+  @Override
+  public boolean isDisplayed() {
     return authContext.isHeaderDisplayed();
   }
 
@@ -93,7 +103,8 @@ public class AttachedSignInPage extends BasePageObject implements SignInPage {
     return authContext.isConnectWithFacebookButtonVisible();
   }
 
-  @Override public boolean submitButtonNotClickable() {
+  @Override
+  public boolean submitButtonNotClickable() {
     return !wait.forElementVisible(signInButton).isEnabled();
   }
 }

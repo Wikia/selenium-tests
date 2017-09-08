@@ -26,8 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PostsListPage extends WikiBasePageObject implements AvailablePage {
 
-  private static final String PATH = "/d/f/";
-  public static final String FULL_PATH = "/d/f?sort=latest";
+  public static final String PATH = "/d/f";
 
   @Getter(lazy = true)
   private final Post post = new Post();

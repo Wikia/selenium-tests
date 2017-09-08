@@ -22,69 +22,82 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
     signInPage = page;
   }
 
-  @Override public ForgotPasswordPage clickForgotPasswordLink() {
+  @Override
+  public ForgotPasswordPage clickForgotPasswordLink() {
     gainFocus();
     AttachedForgotPasswordPage forgotPassword = signInPage.clickForgotPasswordLink();
     return new DetachedForgotPasswordPage(forgotPassword);
   }
 
-  @Override public SignInPage typePassword(String password) {
+  @Override
+  public SignInPage typePassword(String password) {
     gainFocus();
     signInPage.typePassword(password);
     return this;
   }
 
-  @Override public SignInPage typeUsername(String username) {
+  @Override
+  public SignInPage typeUsername(String username) {
     gainFocus();
     signInPage.typeUsername(username);
     return this;
   }
 
-  @Override public void login(String username, String password) {
+  @Override
+  public void login(String username, String password) {
     gainFocus();
     signInPage.login(username, password);
     loseFocus();
   }
 
-  @Override public void login(User user) {
+  @Override
+  public void login(User user) {
     login(user.getUserName(), user.getPassword());
   }
 
-  @Override public RegisterPage navigateToRegister() {
+  @Override
+  public RegisterPage navigateToRegister() {
     gainFocus();
     return signInPage.navigateToRegister();
   }
 
-  @Override public String getError() {
+  @Override
+  public String getError() {
     gainFocus();
     return signInPage.getError();
   }
 
-  @Override public boolean isPasswordMasked() {
+  @Override
+  public boolean isPasswordMasked() {
     gainFocus();
     return signInPage.isPasswordMasked();
   }
 
-  @Override public void togglePasswordVisibility() {
+  @Override
+  public void togglePasswordVisibility() {
     gainFocus();
     signInPage.togglePasswordVisibility();
   }
 
-  @Override public void submit() {
+  @Override
+  public void submit() {
     gainFocus();
     signInPage.submit();
   }
 
-  @Override public FormPage open() {
+  @Override
+  public FormPage open() {
     throw new UnsupportedOperationException("Error trying to open a detached window in old tab");
   }
 
-  @Override public boolean isDisplayed() {
+  @Override
+  public boolean isDisplayed() {
     gainFocus();
     return signInPage.isDisplayed();
   }
 
-  @Override public boolean submitButtonNotClickable() {
+  @Override
+  public boolean submitButtonNotClickable() {
     gainFocus();
     return signInPage.submitButtonNotClickable();
   }
@@ -99,7 +112,8 @@ public class DetachedSignInPage extends DetachedWindow implements SignInPage {
     return signInPage.isConnectWithFacebookButtonVisible();
   }
 
-  @Override protected String getTitle() {
+  @Override
+  protected String getTitle() {
     return TITLE;
   }
 }

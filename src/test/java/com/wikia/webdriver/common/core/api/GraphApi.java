@@ -24,7 +24,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class GraphApi {
 
@@ -51,11 +53,9 @@ public class GraphApi {
 
   }
 
-  public HashMap<String, String> deleteFacebookTestUser(String userId) {
+  public void deleteFacebookTestUser(String userId) {
     try {
-      HttpResponse response = deleteTestUser(userId);
-      String entity = EntityUtils.toString(response.getEntity());
-      return new Gson().fromJson(entity, new TypeToken<HashMap<String, String>>(){}.getType());
+      deleteTestUser(userId);
     } catch (IOException | URISyntaxException e) {
       PageObjectLogging.log(URI_SYNTAX_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
@@ -71,20 +71,16 @@ public class GraphApi {
     return String.format("https://graph.facebook.com/v2.7/%s", userId);
   }
 
-  private ArrayList<BasicNameValuePair> getParams() {
-    ArrayList<BasicNameValuePair> params = new ArrayList<>();
-    params.add(new BasicNameValuePair("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN));
-    return params;
+  private List<BasicNameValuePair> getParams() {
+    return Collections.singletonList(
+      new BasicNameValuePair("access_token", WIKIA_PRODUCTION_APP_ACCESS_TOKEN));
   }
 
   private HttpResponse createTestUser(String appId) throws IOException, URISyntaxException {
     URL url = new URL(getURLCreateUser(appId));
     CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
     HttpPost httpPost = getHttpPost(url);
-
-    if (getParams() != null) {
-      httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
-    }
+    httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
     return httpClient.execute(httpPost);
   }
 

@@ -182,20 +182,14 @@ public class Helios {
   }
 
   private static String getUserId(String userName) {
-    String getUserIDURL;
     try {
-      getUserIDURL = String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
-          new UrlBuilder().getUrlForWiki("community"), URLEncoder.encode(userName, "UTF-8"), DateTime.now().getMillis());
+      String encodedUsername = URLEncoder.encode(userName, "UTF-8");
+      HttpGet httpGet = new HttpGet(getUserIdUrl(encodedUsername));
+      PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
+      return executeAndRetry(httpGet, extractUserId());
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.logError("UNSUPPORTED ENCODING EXCEPTION", e);
       throw new WebDriverException(e);
-    }
-
-    HttpGet httpGet = new HttpGet(getUserIDURL);
-    PageObjectLogging.logInfo("USER_ID_REQUEST", httpGet.getURI().toString());
-
-    try {
-      return executeAndRetry(httpGet, extractUserId());
     } catch (ClientProtocolException e) {
       PageObjectLogging.log(CLIENT_PROTOCOL_EXCEPTION, ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
@@ -204,6 +198,11 @@ public class Helios {
           IOEXCEPTION_ERROR_MESSAGE + ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(e);
     }
+  }
+
+  private static String getUserIdUrl(String encodedUsername) {
+    return String.format("%s/api.php?action=query&list=users&ususers=%s&format=json&cb=%d",
+      new UrlBuilder().getUrlForWiki("community"), encodedUsername, DateTime.now().getMillis());
   }
 
   private static CloseableHttpClient getDefaultClient() {

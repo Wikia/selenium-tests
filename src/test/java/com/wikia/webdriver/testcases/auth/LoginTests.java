@@ -27,9 +27,9 @@ import static org.testng.Assert.assertFalse;
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class LoginTests extends NewTestTemplate {
 
-  private User user = User.LOGIN_USER;
-  private User japaneseUser = User.USER_JAPAN;
-  private User staff = User.LOGIN_STAFF;
+  private static final User USER = User.LOGIN_USER;
+  private static final User JAPANESE_USER = User.USER_JAPAN;
+  private static final User STAFF = User.LOGIN_STAFF;
 
   private static final String DESKTOP = "auth-login-desktop";
   private static final String MOBILE = "auth-login-mobile";
@@ -38,56 +38,55 @@ public class LoginTests extends NewTestTemplate {
     "We don't recognize these credentials. Try again or register a new account.";
   private static final String SUBMIT_BUTTON_DISABLED_MSG = "Submit button should be disabled";
 
-
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanCloseJoinPage() {
     ArticlePage article = openArticleOnMobile();
-    String title = article.getArticleTitle();
+    String previousTitle = article.getArticleTitle();
     article
       .getTopBar()
       .openNavigation()
       .clickOnSignInRegisterButton()
       .close();
-    Assertion.assertEquals(article.getArticleTitle(), title);
+    Assertion.assertEquals(article.getArticleTitle(), previousTitle);
   }
 
   @Test(groups = DESKTOP)
   public void userCanLogInAsStaffOnDesktop() {
     ArticlePageObject article = openArticleOnDesktop();
-    loginOnDesktopAs(staff);
-    article.verifyUserLoggedIn(staff);
+    loginOnDesktopAs(STAFF);
+    article.verifyUserLoggedIn(STAFF);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanLogInAsStaffOnMobile() {
     ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(article, staff);
-    article.waitForPageReload().verifyUserLoggedIn(staff);
+    loginOnMobileAs(article, STAFF);
+    article.waitForPageReload().verifyUserLoggedIn(STAFF);
   }
 
   @Test(groups = DESKTOP)
   public void japaneseUserCanLogInOnDesktop() {
     ArticlePageObject article = openArticleOnDesktop();
-    loginOnDesktopAs(japaneseUser);
-    article.verifyUserLoggedIn(japaneseUser);
+    loginOnDesktopAs(JAPANESE_USER);
+    article.verifyUserLoggedIn(JAPANESE_USER);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void japaneseUserCanLogInOnMobile() {
     ArticlePage article = openArticleOnMobile();
-    loginOnMobileAs(article, japaneseUser);
-    article.waitForPageReload().verifyUserLoggedIn(japaneseUser);
+    loginOnMobileAs(article, JAPANESE_USER);
+    article.waitForPageReload().verifyUserLoggedIn(JAPANESE_USER);
   }
 
   @Test(groups = DESKTOP)
   @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnDesktop() {
     PostsListPage discussionPage = new PostsListPage().open();
-    loginOnDesktopFromDiscussionPageAs(user);
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.FULL_PATH),
+    loginOnDesktopFromDiscussionPageAs(USER);
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon log in");
   }
 
@@ -96,15 +95,15 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userIsRedirectedToDiscussionPageUponLogInFromDiscussionPageOnMobile() {
     PostsListPage discussionPage = new PostsListPage().open();
-    loginOnDiscussionMobilePageAs(discussionPage, user);
-    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.FULL_PATH),
+    loginOnDiscussionMobilePageAs(discussionPage, USER);
+    assertTrue(discussionPage.waitForPageReload().isStringInURL(PostsListPage.PATH),
       "User should be redirected to discussion post list view upon log in");
   }
 
   @Test(groups = DESKTOP)
   public void passwordTogglerChangesPasswordVisibilityOnDesktop() {
     SignInPage signInPage = openLoginModalOnDesktop();
-    signInPage.typePassword(user.getPassword());
+    signInPage.typePassword(USER.getPassword());
 
     Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
     signInPage.togglePasswordVisibility();
@@ -115,7 +114,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void passwordTogglerChangesPasswordVisibilityOnMobile() {
     SignInPage signInPage = navigateToSignInOnMobile();
-    signInPage.typePassword(user.getPassword());
+    signInPage.typePassword(USER.getPassword());
 
     Assertion.assertTrue(signInPage.isPasswordMasked(), "password should be masked");
     signInPage.togglePasswordVisibility();
@@ -145,7 +144,7 @@ public class LoginTests extends NewTestTemplate {
   public void nonexistentUserCannotLogInOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
     String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
-    signIn.login(nonexistingUsername, user.getPassword());
+    signIn.login(nonexistingUsername, USER.getPassword());
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
@@ -154,7 +153,7 @@ public class LoginTests extends NewTestTemplate {
   public void nonexistentUserCannotLogInOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     String nonexistingUsername = String.format("QA_%s", Instant.now().getEpochSecond());
-    signIn.login(nonexistingUsername, user.getPassword());
+    signIn.login(nonexistingUsername, USER.getPassword());
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
@@ -162,7 +161,7 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithInvalidPasswordOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
     String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
-    signIn.login(user.getUserName(), invalidPassword);
+    signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
@@ -171,14 +170,14 @@ public class LoginTests extends NewTestTemplate {
   public void userCannotLogInWithInvalidPasswordOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
     String invalidPassword = String.format("P@55_%s", Instant.now().getEpochSecond());
-    signIn.login(user.getUserName(), invalidPassword);
+    signIn.login(USER.getUserName(), invalidPassword);
     Assertion.assertEquals(signIn.getError(), ERROR_MESSAGE);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithBlankUsernameOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
-    signIn.typeUsername("").typePassword(user.getPassword());
+    signIn.typeUsername("").typePassword(USER.getPassword());
     assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
@@ -186,14 +185,14 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotLogInWithBlankUsernameOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
-    signIn.typeUsername("").typePassword(user.getPassword());
+    signIn.typeUsername("").typePassword(USER.getPassword());
     assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
   @Test(groups = DESKTOP)
   public void userCannotLogInWithBlankPasswordOnDesktop() {
     SignInPage signIn = openLoginModalOnDesktop();
-    signIn.typeUsername(user.getUserName()).typePassword("");
+    signIn.typeUsername(USER.getUserName()).typePassword("");
     assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
@@ -201,7 +200,7 @@ public class LoginTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotLogInWithBlankPasswordOnMobile() {
     SignInPage signIn = navigateToSignInOnMobile();
-    signIn.typeUsername(user.getUserName()).typePassword("");
+    signIn.typeUsername(USER.getUserName()).typePassword("");
     assertTrue(signIn.submitButtonNotClickable(), SUBMIT_BUTTON_DISABLED_MSG);
   }
 
