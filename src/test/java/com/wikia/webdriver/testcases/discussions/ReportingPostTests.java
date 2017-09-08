@@ -591,7 +591,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -599,7 +598,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
@@ -691,7 +689,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
@@ -699,7 +696,6 @@ public class ReportingPostTests extends NewTestTemplate {
   @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @RelatedIssue(issueID = "IRIS-4771")
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
