@@ -105,13 +105,7 @@ public class SourceEditModePageObject extends EditMode {
   }
 
   public void checkSourceVideoContent(String desiredContent) {
-    int fileNameLength = 38;
-    int fileParametersBeginIndex = 48;
-    Assertion.assertEquals(
-        getSourceContent().substring(1, fileNameLength)
-            + getSourceContent().substring(fileParametersBeginIndex),
-        desiredContent.substring(1, fileNameLength)
-            + desiredContent.substring(fileParametersBeginIndex));
+    Assertion.assertEquals(getSourceContent().replaceAll("(-\\d+)\\|","|"), desiredContent);
   }
 
   public void clickBold() {
