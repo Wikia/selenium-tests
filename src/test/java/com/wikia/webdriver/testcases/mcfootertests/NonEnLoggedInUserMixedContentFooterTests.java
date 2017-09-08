@@ -10,75 +10,73 @@ import org.testng.annotations.Test;
 
 @Test(groups = {"NonEnLoggedInUserMixedContentFooter"})
 @Execute(onWikia = "de.gta", asUser = User.USER)
-
 public class NonEnLoggedInUserMixedContentFooterTests extends NewTestTemplate{
 
   @Test
   public void isMCFooterPresentOnNonENwiki() {
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertTrue(MCFooter.isMcfooterPresent());
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isMCFooterPresent());
   }
 
   @Test
   public void exploreWikisCardIsPresentOnNonENwiki(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertTrue(MCFooter.isExploreWikisCardPresent());
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isExploreWikisCardPresent());
   }
 
   @Test
   public void discussionsCardIsPresentOnNonENwiki(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertTrue(MCFooter.isDiscussionsCardPresent());
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isDiscussionsCardPresent());
   }
 
   @Test
-  @Execute(onWikia = "es.serowiec",asUser = User.USER)
+  @Execute(onWikia = "es.serowiec", asUser = User.USER)
   public void discussionsCardIsPresentOnNonENwikiWithEmptyDiscussions(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertTrue(MCFooter.isDiscussionsCardPresent());
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isDiscussionsCardPresent());
   }
 
   @Test
-  @Execute(onWikia = "es.gta",asUser = User.USER)
+  @Execute(onWikia = "es.gta", asUser = User.USER)
   public void discussionsCardIsNotPresentOnNonENwikiWithoutDiscussions(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertTrue(MCFooter.isDiscussionsCardNotPresent());
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isDiscussionsCardNotPresent());
   }
 
   @Test
   public void moreOfWikiArticlesCardIsPresentOnNonENwiki() {
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertTrue(MCFooter.isMoreOfWikiArticlesCardPresent());
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertTrue(mcFooter.isMoreOfWikiArticlesCardPresent());
   }
 
   @Test
-  public void countNoOfArticlesInMcFooterWithDiscussionsAndWithMoreOfWikiArticles(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertEquals(MCFooter.countArticleCards(), 11);
+  public void countNoOfArticlesInMCFooterWithDiscussionsAndWithMoreOfWikiArticles(){
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertEquals(mcFooter.countArticleCards(), 11);
   }
 
   @Test
-  @Execute(onWikia = "es.gta",asUser = User.USER)
-  public void countNoOfArticlesInMcFooterWithoutDiscussionsAndWithMoreOfWikiArticles(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertEquals(MCFooter.countArticleCards(), 13);
+  @Execute(onWikia = "es.gta", asUser = User.USER)
+  public void countNoOfArticlesInMCFooterWithoutDiscussionsAndWithMoreOfWikiArticles(){
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertEquals(mcFooter.countArticleCards(), 13);
   }
 
   @Test
-  @Execute(onWikia = "es.serowiec",asUser = User.USER)
-  public void countNoOfArticlesInMcFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
-    MixedContentFooter MCFooter = new MixedContentFooter(driver);
-    MCFooter.openWikiMainPage().scrollToFooter();
-    Assertion.assertEquals(MCFooter.countArticleCards(), 12);
+  @Execute(onWikia = "es.serowiec", asUser = User.USER)
+  public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
+    MixedContentFooter mcFooter = new MixedContentFooter();
+    mcFooter.openWikiMainPage().scrollToMCFooter();
+    Assertion.assertEquals(mcFooter.countArticleCards(), 12);
   }
-
 
 }

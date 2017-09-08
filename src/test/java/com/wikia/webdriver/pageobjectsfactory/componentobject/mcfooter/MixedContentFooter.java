@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,16 +26,20 @@ public class MixedContentFooter extends WikiBasePageObject{
   @FindBy(css = ".mcf-card-article__link")
   private List<WebElement> articleLinks;
 
-  public MixedContentFooter(WebDriver driver) {
-    super();
-  }
-
-  public MixedContentFooter openWikiMainPage() {
+    public MixedContentFooter openWikiMainPage() {
     getUrl(getWikiUrl() + URLsContent.WIKI_DIR);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
     return this;
   }
-  public boolean isMcfooterPresent() {
+
+  public void scrollToMCFooter() {
+    wait.forElementVisible(mcFooter);
+    jsActions.scrollToElement(mcFooter);
+
+    PageObjectLogging.log("scrollToFooter", "Scroll to the footer of the page", true);
+  }
+
+  public boolean isMCFooterPresent() {
     wait.forElementVisible(mcFooter);
     PageObjectLogging.log("verifyMcfooterPresent", "MCFooter appeared", true);
     return mcFooter.isDisplayed();
@@ -67,6 +70,5 @@ public class MixedContentFooter extends WikiBasePageObject{
     return articleLinks.size();
   }
 
-
-
 }
+
