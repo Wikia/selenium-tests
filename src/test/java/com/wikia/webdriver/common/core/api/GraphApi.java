@@ -5,8 +5,6 @@ import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.helpers.FacebookUser;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -18,14 +16,13 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.WebDriverException;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class GraphApi {

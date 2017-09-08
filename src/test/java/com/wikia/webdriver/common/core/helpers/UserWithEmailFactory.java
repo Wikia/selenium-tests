@@ -3,9 +3,12 @@ package com.wikia.webdriver.common.core.helpers;
 
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.properties.Credentials;
-import lombok.Value;
 
 public class UserWithEmailFactory {
+
+  private UserWithEmailFactory() {
+    // no-op
+  }
 
   private static final Credentials CREDENTIALS = Configuration.getCredentials();
 
