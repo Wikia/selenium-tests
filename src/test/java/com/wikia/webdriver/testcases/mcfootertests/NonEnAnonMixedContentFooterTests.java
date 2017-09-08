@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mcfooter.MixedCont
 
 import org.testng.annotations.Test;
 
-@Test(groups = {"NonEnMixedContentFooter"})
+@Test(groups = {"NonEnAnonMixedContentFooter"})
 @Execute(onWikia = "de.gta", asUser = User.ANONYMOUS)
 
 public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
@@ -32,6 +32,29 @@ public class NonEnAnonMixedContentFooterTests extends NewTestTemplate{
     MixedContentFooter MCFooter = new MixedContentFooter(driver);
     MCFooter.openWikiMainPage().scrollToFooter();
     Assertion.assertTrue(MCFooter.isDiscussionsCardPresent());
+  }
+
+  @Test
+  @Execute(onWikia = "es.serowiec")
+  public void discussionsCardIsPresentOnNonENwikiWithEmptyDiscussions(){
+    MixedContentFooter MCFooter = new MixedContentFooter(driver);
+    MCFooter.openWikiMainPage().scrollToFooter();
+    Assertion.assertTrue(MCFooter.isDiscussionsCardPresent());
+  }
+
+  @Test
+  @Execute(onWikia = "es.gta")
+  public void discussionsCardIsNotPresentOnNonENwikiWithoutDiscussions(){
+    MixedContentFooter MCFooter = new MixedContentFooter(driver);
+    MCFooter.openWikiMainPage().scrollToFooter();
+    Assertion.assertTrue(MCFooter.isDiscussionsCardNotPresent());
+  }
+
+  @Test
+  public void moreOfCardIsPresentOnNonENwiki() {
+    MixedContentFooter MCFooter = new MixedContentFooter(driver);
+    MCFooter.openWikiMainPage().scrollToFooter();
+    Assertion.assertTrue(MCFooter.isMoreOfWikiArticlesCardPresent());
   }
 
 

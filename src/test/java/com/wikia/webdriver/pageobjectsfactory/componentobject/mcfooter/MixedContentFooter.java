@@ -17,7 +17,7 @@ public class MixedContentFooter extends WikiBasePageObject{
   private WebElement rowWithCards;
 
   @FindBy(css = ".mcf-card-wiki-articles")
-  private WebElement wikiArticlesCard;
+  private WebElement moreOfWikiArticlesCard;
 
   @FindBy(css = ".mcf-card-discussions")
   private WebElement discussionsCard;
@@ -42,7 +42,12 @@ public class MixedContentFooter extends WikiBasePageObject{
 
   public boolean isDiscussionsCardPresent() {
     wait.forElementVisible(discussionsCard);
-    return discussionsCard.isEnabled();
+    return discussionsCard.isDisplayed();
+  }
+
+  public boolean isDiscussionsCardNotPresent() {
+    wait.forElementNotVisible(discussionsCard);
+    return true;
   }
 
   public boolean isExploreWikisCardPresent() {
@@ -50,9 +55,9 @@ public class MixedContentFooter extends WikiBasePageObject{
     return exploreWikisCard.isDisplayed();
   }
 
-  public boolean isWikiArticlesCardPresent() {
-    wait.forElementVisible(wikiArticlesCard);
-    return wikiArticlesCard.isDisplayed();
+  public boolean isMoreOfWikiArticlesCardPresent() {
+    wait.forElementVisible(moreOfWikiArticlesCard);
+    return moreOfWikiArticlesCard.isDisplayed();
   }
 
 
