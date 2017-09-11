@@ -37,6 +37,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
 import lombok.Getter;
 import org.apache.commons.lang3.Range;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -180,7 +181,7 @@ public class WikiBasePageObject extends BasePageObject {
   public PreferencesPageObject openSpecialPreferencesPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
     PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
-    return new PreferencesPageObject(driver);
+    return new PreferencesPageObject();
   }
 
   public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {
@@ -205,6 +206,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialVideosPageObject(driver);
   }
 
+  public SpecialVideosPageObject openSpecialVideoPage() {
+    return openSpecialVideoPage(getWikiUrl());
+  }
+
   public SpecialVideosPageObject openSpecialVideoPage(String wikiURL, String queryString) {
     String url =
         urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.SPECIAL_VIDEOS, queryString);
@@ -222,9 +227,17 @@ public class WikiBasePageObject extends BasePageObject {
     return new SpecialNewFilesPage();
   }
 
+  public SpecialNewFilesPage openSpecialNewFiles() {
+    return openSpecialNewFiles(getWikiUrl() + URLsContent.SPECIAL_NEW_FILES);
+  }
+
   public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_UPLOAD);
     return new SpecialUploadPageObject(driver);
+  }
+
+  public SpecialUploadPageObject openSpecialUpload() {
+    return openSpecialUpload(getWikiUrl());
   }
 
   public SpecialCreatePage openSpecialCreateBlogPage(String wikiURL) {
@@ -348,6 +361,11 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditModePageObject();
   }
 
+  public VisualEditModePageObject navigateToUniqueArticleEditPage() {
+    String title = String.format("%s%s", PageContent.ARTICLE_NAME_PREFIX, LocalDateTime.now());
+    return navigateToArticleEditPage(getWikiUrl(), title);
+  }
+
   public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
     getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR + article,
         URLsContent.ACTION_EDIT));
@@ -418,6 +436,10 @@ public class WikiBasePageObject extends BasePageObject {
     return getTopBar().openNavigation().isUserAvatarVisible(username);
   }
 
+  public boolean isUserLoggedOutMobile() {
+    return !getTopBar().openNavigation().isUserAvatarVisible();
+  }
+
   public DeletePageObject deletePage() {
     String url =
         urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.ACTION_DELETE);
@@ -452,32 +474,10 @@ public class WikiBasePageObject extends BasePageObject {
     return new ArticlePageObject();
   }
 
-  public void verifyLoginRequiredMessage() {
-    wait.forTextInElement(articleTitle, PageContent.LOGIN_REQUIRED);
-    PageObjectLogging.log("LoginRequiredMessage", "Login required message in first header present",
-        true, driver);
-  }
-
   public void clickLoginOnSpecialPage() {
     wait.forElementVisible(specialUserLoginLink);
-    PageObjectLogging.log("LoginLinkPresent", "Link to login special page present", true, driver);
+    PageObjectLogging.log("Element found", "Link to login special page present", true);
     scrollAndClick(specialUserLoginLink);
-    PageObjectLogging.log("LoginLinkClicked", "Link to login special page clicked", true, driver);
-  }
-
-  public void verifyNotLoggedInMessage() {
-    wait.forTextInElement(articleTitle, PageContent.NOT_LOGGED_IN_MESSAGE);
-    PageObjectLogging.log("NotLoggedInMessage", "Not logged in message present", true, driver);
-  }
-
-  public String getPasswordResetLink(String email, String password) {
-    String passwordResetEmail = EmailUtils
-      .getFirstEmailContent(email, password, "Reset your FANDOM password");
-    String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
-    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
-        true);
-
-    return resetLink;
   }
 
   public void verifyRevisionMarkedAsMinor() {
@@ -670,8 +670,8 @@ public class WikiBasePageObject extends BasePageObject {
     PageObjectLogging.log("verifyGlobalNavigation", "Verified global navigation", true);
   }
 
-  public void verifyFBButtonVisible() {
-    Assertion.assertTrue(isElementOnPage(facebookConnectButton));
+  public boolean isFacebookButtonVisible() {
+    return isElementOnPage(facebookConnectButton);
   }
 
   public void verifyAvatarVisible() {

@@ -35,7 +35,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   @RelatedIssue(issueID = "MAIN-9722", comment = "test failing randomly")
   public void EditPreferences_001_selectVE() {
-    EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
+    EditPreferencesPage editPrefPage = new EditPreferencesPage().openEditingSection();
     editPrefPage.selectPreferredEditor(VE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
@@ -56,7 +56,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   @RelatedIssue(issueID = "MAIN-9722", comment = "test failing randomly")
   public void EditPreferences_002_selectCK() {
-    EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
+    EditPreferencesPage editPrefPage = new EditPreferencesPage().openEditingSection();
     editPrefPage.selectPreferredEditor(CK);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
@@ -76,7 +76,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
   @Test(groups = {"EditPreferences_003"})
   @Execute(asUser = User.USER_5, onWikia = URLsContent.VE_ENABLED_WIKI)
   public void EditPreferences_003_selectSource() {
-    EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEditingSection();
+    EditPreferencesPage editPrefPage = new EditPreferencesPage().openEditingSection();
     editPrefPage.selectPreferredEditor(SOURCE);
     PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 
@@ -96,7 +96,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
   @Test(groups = {"EditPreferences_004"})
   @Execute(asUser = User.USER_5)
   public void changeEmailAddress() {
-    EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
+    EditPreferencesPage editPrefPage = new EditPreferencesPage().openEmailSection();
 
     String newEmailAddress = EmailUtils.getEmail(editPrefPage.getEmailAdress());
 
