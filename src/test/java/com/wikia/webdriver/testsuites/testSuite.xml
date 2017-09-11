@@ -127,6 +127,10 @@
             <class name="com.wikia.webdriver.testcases.auth.ForcedLoginTests"/>
             <class name="com.wikia.webdriver.testcases.auth.ForgottenPasswordTests"/>
             <class name="com.wikia.webdriver.testcases.auth.LoginTests"/>
+            <class name="com.wikia.webdriver.testcases.mcfootertests.EnAnonMixedContentFooterTests"/>
+            <class name="com.wikia.webdriver.testcases.mcfootertests.EnLoggedInUserMixedContentFooterTests"/>
+            <class name="com.wikia.webdriver.testcases.mcfootertests.NonEnAnonMixedContentFooterTests"/>
+            <class name="com.wikia.webdriver.testcases.mcfootertests.NonEnLoggedInUserMixedContentFooterTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.addvideo.VetArticleCommentsTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.addvideo.VetArticlePlaceholderTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.addvideo.VetSpecialVideosTests"/>
