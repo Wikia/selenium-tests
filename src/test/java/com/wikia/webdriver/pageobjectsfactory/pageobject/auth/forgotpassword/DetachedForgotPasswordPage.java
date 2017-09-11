@@ -16,32 +16,38 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
     forgotPasswordPage = new AttachedForgotPasswordPage();
   }
 
-  @Override public String getError() {
+  @Override
+  public String getError() {
     gainFocus();
     return forgotPasswordPage.getError();
 
   }
 
-  @Override public void submit() {
+  @Override
+  public void submit() {
     gainFocus();
     forgotPasswordPage.submit();
     loseFocus();
   }
 
-  @Override public FormPage open() {
+  @Override
+  public FormPage open() {
     throw new UnsupportedOperationException("Error trying to open a detached window in old tab");
   }
 
-  @Override public boolean isDisplayed() {
+  @Override
+  public boolean isDisplayed() {
     gainFocus();
     return forgotPasswordPage.isDisplayed();
   }
 
-  @Override public boolean submitButtonNotClickable() {
+  @Override
+  public boolean submitButtonNotClickable() {
     return forgotPasswordPage.submitButtonNotClickable();
   }
 
-  @Override public void requestLinkForUsername(String username) {
+  @Override
+  public void requestLinkForUsername(String username) {
     gainFocus();
     forgotPasswordPage.requestLinkForUsername(username);
     if(forgotPasswordPage.isConfirmationDisplayed()) {
@@ -49,7 +55,8 @@ public class DetachedForgotPasswordPage extends DetachedWindow implements Forgot
     }
   }
 
-  @Override protected String getTitle() {
+  @Override
+  protected String getTitle() {
     return TITLE;
   }
 }

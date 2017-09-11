@@ -68,9 +68,14 @@ public class SpecialVideosPageObject extends SpecialPageObject {
     return new WatchPageObject();
   }
 
-  public VetAddVideoComponentObject clickAddAVideo() {
+  public SpecialVideosPageObject clickAddButton() {
     wait.forElementClickable(addVideo);
     scrollAndClick(addVideo);
+    return this;
+  }
+
+  public VetAddVideoComponentObject addAVideo() {
+    clickAddButton();
     return new VetAddVideoComponentObject(driver);
   }
 

@@ -41,7 +41,7 @@ public class BasicActions extends IntraWiki {
   public void anonSearch() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar(driver);
+    NavigationBar navigation = new NavigationBar();
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
   }
@@ -51,7 +51,7 @@ public class BasicActions extends IntraWiki {
   public void userSearch() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar(driver);
+    NavigationBar navigation = new NavigationBar();
     IntraWikiSearchPageObject search = navigation.searchFor(SearchContent.SEARCH_PHRASE_RESULTS);
     search.verifyFirstArticleNameTheSame(SearchContent.SEARCH_PHRASE_RESULTS);
   }
