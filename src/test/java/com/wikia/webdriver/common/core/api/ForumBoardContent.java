@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
@@ -15,7 +16,7 @@ public class ForumBoardContent extends ApiCall {
 
   public ForumBoardContent(User user, String title, String content) {
     this.user = user;
-    this.title = title;
+    this.title = String.format("%s:%s", URLsContent.FORUM_BOARD_NAMESPACE, title);
     this.content = content;
   }
 

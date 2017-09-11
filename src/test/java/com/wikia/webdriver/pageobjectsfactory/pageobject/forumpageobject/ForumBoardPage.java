@@ -55,9 +55,8 @@ public class ForumBoardPage extends BasePageObject {
   public String createNew(User user) {
     String content = String.format("%s%d", PageContent.ARTICLE_TEXT, DateTime.now().getMillis());
     String boardName = String.format("%s%d", "ForumBoard", DateTime.now().getMillis());
-    String boardTitle = String.format("%s:%s", URLsContent.FORUM_BOARD_NAMESPACE, boardName);
 
-    new ForumBoardContent(user, boardTitle, content).call();
+    new ForumBoardContent(user, boardName, content).call();
 
     try {
       Thread.sleep(5000);
