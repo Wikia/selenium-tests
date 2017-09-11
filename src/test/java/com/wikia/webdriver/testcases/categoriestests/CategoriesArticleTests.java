@@ -29,7 +29,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject().open();
-    String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
+    String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 0);
     article.submitCategory();
     article.isCategoryPresent(desiredCategory);
   }
@@ -52,7 +52,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
     new ArticleContent().push(PageContent.ARTICLE_TEXT);
 
     ArticlePageObject article = new ArticlePageObject().open();
-    String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
+    String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 0);
     article.submitCategory();
     article.isCategoryPresent(desiredCategory);
   }

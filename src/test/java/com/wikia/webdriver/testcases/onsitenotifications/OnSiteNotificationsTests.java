@@ -186,7 +186,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notifications getNotificationsDesktop() {
     return new PostsListPage()
-      .open(siteId)
+      .open()
       .getNotificationsDropdown()
       .expand()
       .getNotifications();
@@ -194,7 +194,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
 
   private Notifications getNotificationsMobile() {
     return new PostsListPage()
-      .open(siteId)
+      .open()
       .getTopBar()
       .openNavigation()
       .openUserProfile()

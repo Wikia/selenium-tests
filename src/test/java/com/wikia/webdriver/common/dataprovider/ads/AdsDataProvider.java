@@ -277,7 +277,7 @@ public class AdsDataProvider {
             "InstantGlobals.wgAdDriverDelayCountries=[XX]",
             "wka.life/_project43//article",
             "TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":\\[\"2_tier(NONE|\\d{4})\",\"57_tier(NONE|\\d{4})\"\\].*"
+            ".*\"rpfl_7450\":\\[\"2_tier(NONE|PREBID|\\d{4})\",\"57_tier(NONE|PREBID|\\d{4})\"\\].*"
         }
     };
   }
@@ -1045,6 +1045,20 @@ public class AdsDataProvider {
                     new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
                     AdsContent.BOTTOM_LB
             }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVuapClickToPlayMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
+        }
     };
   }
 

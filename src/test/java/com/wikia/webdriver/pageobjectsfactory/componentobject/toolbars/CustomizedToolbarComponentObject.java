@@ -3,14 +3,15 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
@@ -128,7 +129,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   /**
    * Click on a toolbar tool.
    *
-   * @param data-name data-name of the toolbar tool.
+   * @param toolName data-name of the toolbar tool.
    *            You should check the data-name of the tool you want to click.
    */
   public void clickOnTool(String toolName) {
@@ -137,17 +138,16 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     );
     PageObjectLogging.log("clickOnTool", toolName + " clicked on customized toolbar", true);
   }
-
+//********************************************************************************************************
   /**
-   * Click on a toolbar tool.
+   * Verify if any of banner notifications has expected message stating user is following an article
    *
-   * @param data-name data-name of the toolbar tool.
-   *            You should check the data-name of the tool you want to click.
    */
   public void verifyFollowMessage() {
-    wait.forElementVisible(pageWatchlistStatusMessage);
+    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage())
+                    .collect(Collectors.toList()),
+            "The page \"" + getArticleName().replace("_"," ") + "\" has been added to your watchlist.");
     PageObjectLogging.log("verifyFollowMessage", "follow message verified", true);
-
   }
 
   /**
@@ -166,7 +166,10 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
    * method
    */
   public void verifyUnfollowed() {
-    wait.forElementClickable(pageWatchlistStatusMessage);
+    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage())
+                    .collect(Collectors.toList()),
+            "The page \"" + getArticleName().replace("_"," ") + "\" has been removed from your watchlist.");
+
     waitForValueToBePresentInElementsAttributeByCss(String.format(toolbarToolCss, PageContent.FOLLOW),
             "title", "Follow");
     PageObjectLogging.log("verifyUnfollowed", "unfollow button verified", true);
@@ -224,13 +227,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyToolOnToolbar", "tool " + toolName + " visible on toolbar", true);
   }
 
-  /**
-   * Verify that wanted Tool appears in Toolbar. The method finds all of Tools appearing in
-   * Toolbar (by their name), and checks if there is at least one name which fits the given param
-   * (ToolName)
-   *
-   * @param ToolName Tool to be verified (name that should appear on toolbar)
-   */
   public void unfollowIfFollowed() {
     List<WebElement> list = driver.findElements(toolsList);
     for (int i = 0; i < list.size(); i++) {

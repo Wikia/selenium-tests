@@ -721,8 +721,25 @@ public class AdsBaseObject extends WikiBasePageObject {
     scrollToPosition(By.cssSelector(selector));
   }
 
+  public void scrollToSlot(String slotName) {
+    if (slotName.equals(AdsContent.BOTTOM_LB)) {
+      triggerComments();
+    } else if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
+      scrollToFooter();
+    }
+
+    scrollToPosition("#" + slotName);
+  }
+
   public void fixScrollPositionByNavbar() {
-    jsActions.scrollBy(0, -1 * driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight());
+    int navbarHeight = -1 *  driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight();
+
+    if (isBannerNotificationContainerPresent()) {
+      int notificationsHeight = -1 * getBannerNotificationsHeight();
+      jsActions.scrollBy(0, navbarHeight + notificationsHeight);
+    }else {
+      jsActions.scrollBy(0, navbarHeight);
+    }
   }
 
   public boolean isMobileInContentAdDisplayed() {
