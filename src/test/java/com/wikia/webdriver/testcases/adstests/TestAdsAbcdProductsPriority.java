@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.sun.tools.javac.code.DeferredLintHandler;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -9,28 +8,30 @@ import org.testng.annotations.Test;
 
 public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
 
+  private static final String DEBUG_QUERY_STRING = "appnexusast_debug_mode=1&InstantGlobals.wgAdDriverAppNexusAstBidderCountries=[XX]";
   private static final String WIKIA = "project43";
   private static final String URL_ARTICLE = "/SyntheticTests/ProductsPriority/OutstreamOverABCD";
-  private static final String URL_ARTICLE_WITH_DEBUG_MODE = URL_ARTICLE + "?appnexusast_debug_mode";
 
-  private static final String ABCD_LINE_ITEM_ID = "4376117186";
-  private static final String APPNEXUS_LINE_ITEM_ID = "4406759476";
+  private static final String ABCD_LINE_ITEM_ID = "4417483196";
+  private static final String APPNEXUS_LINE_ITEM_ID = "4417473960";
 
 
   @Test(
-      groups = "AbcdProductPriorityOasis"
+      groups = {"AdsAppNexusVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis", "AbcdProductPriorityOasis"}
   )
   public void adsAppNexusVideoAdIsDisplayedIfAbcdAdIsTargetedOnThisSameArticleOasis() {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(WIKIA, URL_ARTICLE_WITH_DEBUG_MODE));
-    ads.scrollToSlot(AdsContent.INCONTENT_PLAYER);
-    verifyAppNexussAdIsDisplayed(ads);
+    String articleUrl = urlBuilder.getUrlForPage(WIKIA, URL_ARTICLE);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.appendQueryStringToURL(articleUrl, DEBUG_QUERY_STRING));
 
     ads.scrollToSlot(AdsContent.TOP_LB);
     verifyAbcdAdIsNotDisplayed(ads);
+
+    ads.scrollToSlot(AdsContent.INCONTENT_PLAYER);
+    verifyAppNexussAdIsDisplayed(ads);
   }
 
   @Test(
-      groups = "AbcdProductPriorityOasis"
+      groups = {"AdsAbcdAdIsDisplayedIfBidersAreDisabledOasis", "AbcdProductPriorityOasis"}
   )
   public void adsAbcdAdIsDisplayedIfBidersAreDisabledOasis() {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(WIKIA, URL_ARTICLE));
@@ -38,18 +39,18 @@ public class TestAdsAbcdProductsPriority extends TemplateNoFirstLoad {
   }
 
   private void verifyAppNexussAdIsDisplayed(AdsBaseObject ads){
-    ads.verifyLineItemId(AdsContent.INCONTENT_PLAYER, APPNEXUS_LINE_ITEM_ID );
-    ads.verifyGptSlotParam(AdsContent.INCONTENT_PLAYER, "appnexusAst");
-    ads.verifySLotResult(AdsContent.INCONTENT_PLAYER, "success");
+    ads.verifyLineItemId(AdsContent.INCONTENT_PLAYER, APPNEXUS_LINE_ITEM_ID);
+    ads.verifySlotAttribute(AdsContent.INCONTENT_PLAYER, "data-gpt-slot-params", "appnexusAst");
+    ads.verifySlotAttribute(AdsContent.INCONTENT_PLAYER, "data-slot-result", "success");
   }
 
   private void verifyAbcdAdIsDisplayed(AdsBaseObject ads) {
     ads.verifyLineItemId(AdsContent.TOP_LB, ABCD_LINE_ITEM_ID);
-    ads.verifySLotResult(AdsContent.INCONTENT_PLAYER, "success");
+    ads.verifySlotAttribute(AdsContent.TOP_LB, "data-slot-result", "success");
   }
 
   private void verifyAbcdAdIsNotDisplayed(AdsBaseObject ads) {
-    Assertion.assertEquals(ads.verifyLineItemId(AdsContent.TOP_LB, ABCD_LINE_ITEM_ID), false,
-        "ABCD" + ABCD_LINE_ITEM_ID + " line item id is displayed");
+    Assertion.assertNotEquals(String.valueOf(ads.getLineItemId(AdsContent.TOP_LB)), ABCD_LINE_ITEM_ID,
+        "ABCD " + ABCD_LINE_ITEM_ID + " line item id is displayed");
   }
 }
