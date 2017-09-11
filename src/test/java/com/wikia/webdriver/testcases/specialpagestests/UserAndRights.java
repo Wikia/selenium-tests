@@ -59,7 +59,7 @@ public class UserAndRights extends NewTestTemplate {
   public void blockedUserShouldBeAbleToChangeEmail() {
     String username = Configuration.getCredentials().emailQaart2;
     String password = Configuration.getCredentials().emailPasswordQaart2;
-    EditPreferencesPage editPrefPage = new EditPreferencesPage(driver).openEmailSection();
+    EditPreferencesPage editPrefPage = new EditPreferencesPage().openEmailSection();
     editPrefPage.verifyUserLoggedIn(User.BLOCKED_USER);
 
     editPrefPage.openEmailSection();

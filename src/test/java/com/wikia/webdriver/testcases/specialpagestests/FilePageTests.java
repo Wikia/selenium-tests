@@ -86,7 +86,7 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete
-    VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
+    VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
     vetAddingVideo.addVideoByUrl(video.getUrl());
 
     // Verify the video is actually there
@@ -117,7 +117,7 @@ public class FilePageTests extends NewTestTemplate {
     specialVideos.openSpecialVideoPage(wikiURL);
 
     // Add a Youtube video we'll delete
-    VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
+    VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
     vetAddingVideo.addVideoByUrl(video.getUrl());
 
     // Verify the video is actually there

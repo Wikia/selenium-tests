@@ -35,13 +35,13 @@ public class ArticlePage extends WikiBasePageObject {
   private final Navigation navigation = new Navigation(driver);
 
   @Getter(lazy = true)
-  private final TopBar topbar = new TopBar();
-
-  @Getter(lazy = true)
   private final CuratedMainPagePageObject curatedMainPage = new CuratedMainPagePageObject();
 
   @Getter(lazy = true)
   private final LightboxComponentObject lightbox = new LightboxComponentObject();
+
+  @FindBy(css = ".wiki-page-header__title")
+  private WebElement articleTitle;
 
   @FindBy(css = "article a")
   private List<WebElement> linksList;
@@ -107,5 +107,11 @@ public class ArticlePage extends WikiBasePageObject {
     }
 
     return jsActions.getCurrentPosition().equals(position);
+  }
+
+  public String getArticleTitle() {
+    wait.forElementVisible(articleTitle);
+
+    return articleTitle.getText();
   }
 }

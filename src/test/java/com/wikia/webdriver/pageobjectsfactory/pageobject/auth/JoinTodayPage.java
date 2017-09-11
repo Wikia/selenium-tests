@@ -18,6 +18,8 @@ public class JoinTodayPage extends BasePageObject {
   private WebElement registerButton;
   @FindBy(css = ".sign-in.footer-callout-link")
   private WebElement loginButton;
+  @FindBy(css = "a.close")
+  private WebElement closeButton;
 
   public SignInPage navigateToSignIn() {
     waitAndClick(loginButton);
@@ -27,6 +29,14 @@ public class JoinTodayPage extends BasePageObject {
   public RegisterPage navigateToSignUp() {
     waitAndClick(registerButton);
     return new AttachedRegisterPage();
+  }
+
+  public void close() {
+    waitAndClick(closeButton);
+  }
+
+  public boolean isDisplayed() {
+    return wait.forElementNotVisible(overlay);
   }
 
 }

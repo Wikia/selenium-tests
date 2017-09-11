@@ -11,6 +11,8 @@ public interface SignInPage extends FormPage {
 
   SignInPage typePassword(String password);
 
+  SignInPage typeUsername(String password);
+
   void login(String username, String password);
 
   void login(User user);
@@ -18,4 +20,9 @@ public interface SignInPage extends FormPage {
   RegisterPage navigateToRegister();
 
   String getError();
+
+  boolean isPasswordMasked();
+
+  void togglePasswordVisibility();
+
 }
