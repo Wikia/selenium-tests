@@ -21,8 +21,7 @@ public class TestAdsVideoFrequencyCapping extends NewTestTemplate {
       groups = "AdsVideoFrequencyCapping"
   )
   public void adsVideoFrequencyCapping(Page page) {
-    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page) +
-        "&" + INSTANT_GLOBAL_VELES_BIDDER_COUNTRIES);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page, INSTANT_GLOBAL_VELES_BIDDER_COUNTRIES));
     ads.scrollToPosition("#Section_2.mw-headline");
     Assertion.assertTrue(isIncontentPlayerDispalyed(ads), "Video Player is not displayed");
     ads.refreshPage();
