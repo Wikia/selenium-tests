@@ -34,7 +34,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "agas")
+  @Execute(onWikia = "mcfwithoutmoreofwikiarticles")
   public void discussionsCardIsPresentOnENwikiWithEmptyDiscussions(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
@@ -72,7 +72,7 @@ public class EnAnonMixedContentFooterTests extends NewTestTemplate{
   }
 
   @Test
-  @Execute(onWikia = "agas")
+  @Execute(onWikia = "mcfwithoutmoreofwikiarticles")
   public void countNoOfArticlesInMCFooterWithDiscussionsAndWithoutMoreOfWikiArticles(){
     MixedContentFooter mcFooter = new MixedContentFooter();
     mcFooter.openWikiMainPage().scrollToMCFooter();
