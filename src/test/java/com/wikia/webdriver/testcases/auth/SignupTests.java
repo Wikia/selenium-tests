@@ -23,7 +23,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-
+@InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 public class SignupTests extends NewTestTemplate {
 

@@ -437,7 +437,7 @@ public class WikiBasePageObject extends BasePageObject {
   }
 
   public boolean isUserLoggedOutMobile() {
-    return !getTopBar().openNavigation().isUserAvatarVisible();
+    return !getTopBar().openNavigation().isUserProfileLinkVisible();
   }
 
   public DeletePageObject deletePage() {

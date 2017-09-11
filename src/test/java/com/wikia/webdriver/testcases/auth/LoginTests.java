@@ -25,6 +25,7 @@ import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 import static org.testng.Assert.assertFalse;
 
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
+@InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
 public class LoginTests extends NewTestTemplate {
 
   private static final User USER = User.LOGIN_USER;
