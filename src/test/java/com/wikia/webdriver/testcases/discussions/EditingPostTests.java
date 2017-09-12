@@ -24,14 +24,11 @@ public class EditingPostTests extends NewTestTemplate {
   private static final String EDITED_BY_ADMINISTRATORS = String.format(EDITED_BY, "administrators");
   private static final String EDITED_BY_STAFF = String.format(EDITED_BY, User.STAFF.getUserName());
 
-
   private static final String SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE = "Post should have edited by section below post content.";
   private static final String SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE = "Post should not have information about who edited the post on posts list page.";
   private static final String EDITED_BY_ADMINISTRATORS_MESSAGE = "Post should have information that it was edited by administrators.";
   private static final String SAME_PERSON_MESSAGE = "If author and editor are the same person, edited by section should not be visible.";
   private static final String SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE = "Post should have detailed information by who it was edited.";
-
-  // User on mobile
 
   @Test(groups = MOBILE)
   @Execute(asUser = User.USER)
@@ -126,7 +123,7 @@ public class EditingPostTests extends NewTestTemplate {
   }
 
   private PostEntity.Data createPostAsStaffRemotely() {
-    return DiscussionsClient.using(, driver).createPostWithUniqueData();
+    return DiscussionsClient.using(User.STAFF, driver).createPostWithUniqueData();
   }
 
   private PostEntity.Data updatePostAsStaffRemotely(PostEntity.Data data) {
