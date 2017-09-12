@@ -181,8 +181,8 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public void verifyGptParams(String slotName, List<String> pageParams,
                               List<String> slotParams) {
-    String dataGptPageParams = getGptParams(slotName, "data-gpt-page-params");
-    String dataGptSlotParams = getGptParams(slotName, "data-gpt-slot-params");
+    String dataGptPageParams = getSlotAttribute(slotName, "data-gpt-page-params");
+    String dataGptSlotParams = getSlotAttribute(slotName, "data-gpt-slot-params");
 
     for (String param : pageParams) {
       Assertion.assertStringContains(dataGptPageParams, param);
@@ -210,10 +210,10 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public void verifyGptAdInSlot(String slotName, String lineItemId, String creativeId) {
 
-    Assertion.assertEquals(getGptParams(slotName, "data-gpt-line-item-id"), lineItemId);
+    Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-line-item-id"), lineItemId);
 
     if (creativeId.length() > 0) {
-      Assertion.assertEquals(getGptParams(slotName, "data-gpt-creative-id"), creativeId);
+      Assertion.assertEquals(getSlotAttribute(slotName, "data-gpt-creative-id"), creativeId);
     }
 
     PageObjectLogging.log(
@@ -243,11 +243,26 @@ public class AdsBaseObject extends WikiBasePageObject {
     return this;
   }
 
-  public AdsBaseObject verifyLineItemId(String slotName, int lineItemId) {
-    String lineItemParam = getGptParams(slotName, GPT_DATA_ATTRIBUTES[0]);
-    Assertion.assertStringContains(lineItemParam, String.valueOf(lineItemId));
+  public AdsBaseObject verifyLineItemId(String slotName, String lineItemId) {
+    String lineItemParam = getSlotAttribute(slotName, GPT_DATA_ATTRIBUTES[0]);
+    Assertion.assertStringContains(lineItemParam, lineItemId);
     PageObjectLogging
         .log("verifyLineItemId", slotName + " has following line item: " + lineItemParam, true);
+    return this;
+  }
+
+  /**
+   * Overloading for backwards compatibility
+   */
+  public AdsBaseObject verifyLineItemId(String slotName, int lineItemId) {
+    return verifyLineItemId(slotName, Integer.toString(lineItemId));
+  }
+
+  public AdsBaseObject verifySlotAttribute(String slotName, String attribute, String value) {
+    String slotParam = getSlotAttribute(slotName, attribute);
+    Assertion.assertStringContains(slotParam, value);
+    PageObjectLogging
+        .log("verifySlotAttribute", String.format("%s has following [%s] attribute: %s", slotName, attribute, slotParam), true);
     return this;
   }
 
@@ -324,16 +339,21 @@ public class AdsBaseObject extends WikiBasePageObject {
     });
   }
 
-  public String getGptParams(String slotName, String attr) {
-    WebElement
-        adsDiv =
-        driver.findElement(
-            By.cssSelector("#"+slotName+" [" + attr + "]"));
-    return adsDiv.getAttribute(attr);
+  public String getSlotAttribute(String slotName, String attr) {
+    try {
+      WebElement
+          adsDiv =
+          driver.findElement(
+              By.cssSelector("#"+slotName+" [" + attr + "]"));
+      return adsDiv.getAttribute(attr);
+    } catch (NoSuchElementException elementNotFound) {
+      PageObjectLogging.log("getSlotAttribute", String.format("Slot %s with attribute [%s] not found", slotName, attr), true);
+      return null;
+    }
   }
 
   public String getGptPageParams(String slotName) {
-    return getGptParams(slotName, "data-gpt-page-params");
+    return getSlotAttribute(slotName, "data-gpt-page-params");
   }
 
   public AdsBaseObject waitForPageLoaded() {
