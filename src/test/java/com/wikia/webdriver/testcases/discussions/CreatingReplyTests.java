@@ -78,18 +78,16 @@ public class CreatingReplyTests extends NewTestTemplate {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.REGISTER_PAGE);
   }
 
-  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final ReplyCreator replyCreator, final String urlFragment) {
-    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
-
-    replyCreator.clickOkButtonInSignInDialog();
-    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
-
-    replyCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(urlFragment));
-  }
-
   private void userOnMobileMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.JOIN_PAGE);
+  }
+
+  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final ReplyCreator replyCreator, final String urlFragment) {
+    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
+    replyCreator.clickOkButtonInSignInDialog();
+    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
+    replyCreator.clickSignInButtonInSignInDialog();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(urlFragment));
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
