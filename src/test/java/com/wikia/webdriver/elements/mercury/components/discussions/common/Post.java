@@ -60,6 +60,10 @@ public class Post extends BasePageObject {
     return this;
   }
 
+  public String getUsername() {
+    return avatarUsername.getText();
+  }
+
   public Post scrollToLoadMoreButton() {
     scrollTo(loadMoreButton);
     return this;

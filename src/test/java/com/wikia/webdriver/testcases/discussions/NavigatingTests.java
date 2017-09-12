@@ -9,8 +9,10 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.UserProfilePage;
 import org.testng.annotations.Test;
 
 
@@ -68,21 +70,17 @@ public class NavigatingTests extends NewTestTemplate {
    */
 
   private void clickingOnPostAuthorAvatarLoadsUserPage() {
-    PostsListPage page = new PostsListPage().open();
-    page.getPost().clickUserAvatar();
-
-    Assertion.assertTrue(
-            driver.getCurrentUrl().contains(
-                    URLsContent.USER_PROFILE.replace("%userName%", "")));
+    Post post = new PostsListPage().open().getPost();
+    String username = post.getUsername();
+    post.clickUserAvatar();
+    Assertion.assertEquals(new UserProfilePage().getUserName(), username);
   }
 
   private void clickingOnPostAuthorUsernameLoadsUserPage() {
-    PostsListPage page = new PostsListPage().open();
-    page.getPost().clickUsernameLink();
-
-    Assertion.assertTrue(
-            driver.getCurrentUrl().contains(
-                    URLsContent.USER_PROFILE.replace("%userName%", "")));
+    Post post = new PostsListPage().open().getPost();
+    String username = post.getUsername();
+    post.clickUsernameLink();
+    Assertion.assertEquals(new UserProfilePage().getUserName(), username);
   }
 
   private void clickingPostContentRedirectsToPostDetailsPage() {
