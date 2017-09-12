@@ -10,7 +10,11 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Transitions;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.testng.annotations.Test;
 
 
@@ -22,18 +26,24 @@ public class NavigatingTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
 
+
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void anonUserOnMobileCanNavigateToPostDetailsPageByClickingOnPost() {
+    clickingPostContentRedirectsToPostDetailsPage();
+  }
+
   /**
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(enabled = false, groups = "discussions-anonUserOnDesktopCanClickAvatar")
+  @Test(enabled = false)
   @RelatedIssue(issueID = "SOC-2301")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -41,13 +51,18 @@ public class NavigatingTests extends NewTestTemplate {
     clickAvatarLoadsUserPage();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanClickUsername")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanClickUsername() {
     clickUsernameLoadsUserPage();
   }
 
+
+  @Execute(asUser = User.ANONYMOUS)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void anonUserOnDesktopCanNavigateToPostDetailsPageByClickingOnPost() {
+    clickingPostContentRedirectsToPostDetailsPage();
+  }
   /**
    * TESTING METHODS SECTION
    */
@@ -69,4 +84,14 @@ public class NavigatingTests extends NewTestTemplate {
             driver.getCurrentUrl().contains(
                     URLsContent.USER_PROFILE.replace("%userName%", "")));
   }
+
+  private void clickingPostContentRedirectsToPostDetailsPage() {
+    new PostsListPage().open().getPost().findNewestPost().click();
+    PostDetailsPage postDetailsPage = new PostDetailsPage();
+    postDetailsPage.waitForPageReload();
+    final String url = driver.getCurrentUrl();
+    Assertion.assertTrue(PostDetailsPage.is(url));
+    Assertion.assertTrue(postDetailsPage.isDisplayed());
+  }
+
  }

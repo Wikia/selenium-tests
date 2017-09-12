@@ -146,12 +146,6 @@ public class Post extends BasePageObject {
     return upvoteArea.getText();
   }
 
-  public Post waitForPostDetailsVoteCountToChange(String voteCount) {
-    wait.forTextNotInElement(upvoteArea, voteCount);
-
-    return this;
-  }
-
   public Post clickPostDetailsUpvoteButton() {
     wait.forElementClickable(upvoteButton);
     upvoteButton.click();
@@ -166,5 +160,9 @@ public class Post extends BasePageObject {
 
   public String getPostDetailText() {
     return wait.forElementVisible(postDetails).getText();
+  }
+
+  public boolean isDisplayed() {
+    return postDetails.isDisplayed();
   }
 }

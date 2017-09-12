@@ -67,4 +67,8 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
     return PAGE_PATTERN.matcher(url).find();
   }
 
+  public boolean isDisplayed() {
+    return getPost().isDisplayed();
+  }
+
 }
