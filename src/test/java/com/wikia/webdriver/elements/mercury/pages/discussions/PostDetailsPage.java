@@ -42,8 +42,6 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
-  private static final Pattern PAGE_PATTERN = Pattern.compile("/d/p/\\d+$");
-
   private static final String PATH = "/d/p/%s";
 
   // post with this ID does not exist on wiki discussions-empty
@@ -63,9 +61,6 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
     return open(EMPTY_POST_ID);
   }
 
-  public static boolean is(String url) {
-    return PAGE_PATTERN.matcher(url).find();
-  }
 
   public boolean isDisplayed() {
     return getPost().isDisplayed();

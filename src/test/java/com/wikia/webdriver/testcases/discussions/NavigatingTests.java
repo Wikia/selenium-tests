@@ -87,8 +87,6 @@ public class NavigatingTests extends NewTestTemplate {
     new PostsListPage().open().getPost().findNewestPost().click();
     PostDetailsPage postDetailsPage = new PostDetailsPage();
     postDetailsPage.waitForPageReload();
-    final String url = driver.getCurrentUrl();
-    Assertion.assertTrue(PostDetailsPage.is(url));
     Assertion.assertTrue(postDetailsPage.isDisplayed());
   }
 
