@@ -88,6 +88,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     By adLayer = By.cssSelector(PLAYER_AD_SELECTOR);
 
     wait.forElementVisible(playButton);
+    adsFandom.scrollToPosition(By.cssSelector(PLAY_BUTTON_SELECTOR));
     playButton.click();
 
     wait.forElementVisible(adLayer);
