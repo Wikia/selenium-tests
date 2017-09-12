@@ -55,6 +55,10 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
     return this;
   }
 
+  public boolean isPostFollowed() {
+    return this.getPost().findNewestPost().findPostActions().isFollowed();
+  }
+
   public PostDetailsPage openEmptyPost() {
     return open(EMPTY_POST_ID);
   }
