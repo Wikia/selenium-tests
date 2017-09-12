@@ -1,7 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
