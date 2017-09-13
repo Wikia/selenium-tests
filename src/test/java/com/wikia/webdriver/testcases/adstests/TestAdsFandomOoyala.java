@@ -18,8 +18,8 @@ import java.awt.*;
 @Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final String PLAY_BUTTON_SELECTOR = ".ooyala-video .oo-action-icon";
-  private static final String PLAYER_CONTAINER_SELECTOR
-      = ".video[data-video-id='J1dGgwYTE6IWVacg3U0JEcVCDQUmKnX6']";
+  private static final By PLAYER_CONTAINER_SELECTOR
+      = By.cssSelector(".video[data-video-id='J1dGgwYTE6IWVacg3U0JEcVCDQUmKnX6']");
   private static final String PLAYER_AD_SELECTOR = ".ooyala-video iframe[src*=imasdk]";
   private static final String AUTOPLAY_PLAYERER_AD_SELECTOR =
       ".ooyala-video[data-autoplay] iframe[src*=imasdk]";
@@ -91,7 +91,7 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
     By adLayer = By.cssSelector(PLAYER_AD_SELECTOR);
 
     wait.forElementVisible(playButton);
-    adsFandom.scrollToPosition(By.cssSelector(PLAYER_CONTAINER_SELECTOR));
+    adsFandom.scrollToPosition(PLAYER_CONTAINER_SELECTOR);
     playButton.click();
 
     wait.forElementVisible(adLayer);
