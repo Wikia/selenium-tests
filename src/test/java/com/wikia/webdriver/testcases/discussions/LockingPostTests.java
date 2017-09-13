@@ -19,24 +19,23 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)
-@Test(groups = "discussions-locking-posts")
 public class LockingPostTests extends NewTestTemplate {
 
   private static final String SHOULD_BE_LOCKED_MESSAGE = "Post should be locked.";
-
   private static final String SHOULD_NOT_LOCK_MESSAGE = "%s should not be able to lock a post.";
-
   private static final String SHOULD_LOCK_MESSAGE = "%s should be able to lock the post.";
+  private static final String SHOULD_UNLOCK_MESSAGE =
+    "%s should be able to unlock post locked by %s.";
+  private static final String SHOULD_NOT_ADD_REPLY_MESSAGE =
+    "%s should not be able to create reply under post locked by %s.";
+  private static final String SHOULD_ADD_REPLY_MESSAGE =
+    "%s should be able to add reply to post unlocked by %s.";
 
-  private static final String SHOULD_UNLOCK_MESSAGE = "%s should be able to unlock post locked by %s.";
+  private static final String MOBILE = "discussions-locking-posts-mobile";
+  private static final String DESKTOP = "discussions-locking-posts-desktop";
 
-  private static final String SHOULD_NOT_ADD_REPLY_MESSAGE = "%s should not be able to create reply under post locked by %s.";
 
-  private static final String SHOULD_ADD_REPLY_MESSAGE = "%s should be able to add reply to post unlocked by %s.";
-
-  // Anonymous user on mobile
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-anonymousUserMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnPostDetailsPage() {
@@ -45,7 +44,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-anonymousUserMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnPostsListPage() {
@@ -54,7 +53,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-anonymousUserMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonymousUserOnMobileCanNotLockAPostOnUserPostsPage() {
@@ -63,9 +62,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  // Anonymous user on desktop
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotLockAPostOnPostDetailsPage() {
@@ -74,7 +71,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotLockAPostOnPostsListPage() {
@@ -83,7 +80,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-anonymousUserDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonymousUserOnDesktopCanNotLockAPostOnUserPostsPage() {
@@ -92,9 +89,8 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.ANONYMOUS.name()));
   }
 
-  // Second Regular User on mobile
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnPostDetailsPage() {
@@ -103,7 +99,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnPostsListPage() {
@@ -112,7 +108,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotLockAPostOnUserPostsPage() {
@@ -121,9 +117,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
 
-  // Second Regular User on desktop
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotLockAPostOnPostDetailsPage() {
@@ -132,7 +126,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotLockAPostOnPostsListPage() {
@@ -141,7 +135,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotLockAPostOnUserPostsPage() {
@@ -150,9 +144,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(moreOptionsPopOver.hasLockPostOption(), String.format(SHOULD_NOT_LOCK_MESSAGE, User.USER_2.name()));
   }
 
-  // User on mobile
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
@@ -163,7 +155,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-userMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
@@ -179,9 +171,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
-  // User on desktop
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
@@ -192,7 +182,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-userDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
@@ -208,9 +198,7 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertFalse(actual, message);
   }
 
-  // Discussions Administrator on mobile
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsAdministratorMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanLockPostOnPostDetailsPage() {
@@ -221,19 +209,17 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsAdministratorMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsAdministratorOnMobileCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
+  public void discussionsAdministratorOnMobileCanUnlockPostOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
     final String name = User.DISCUSSIONS_ADMINISTRATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
-  // Discussions Administrator on desktop
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanLockPostOnPostDetailsPage() {
@@ -244,19 +230,17 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsAdministratorDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void discussionsAdministratorOnDesktopCanUnlockPostLockedByDiscussionsAdministratorOnPostDetailsPage() {
+  public void discussionsAdministratorOnDesktopCanUnlockPostOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsAdministrator();
 
     final String name = User.DISCUSSIONS_ADMINISTRATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
-  // Staff user on mobile
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileCanLockPostOnPostDetailsPage() {
@@ -267,47 +251,17 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void staffUserOnMobileCanUnlockPostLockedByStaffOnPostDetailsPage() {
+  public void staffUserOnMobileCanUnlockPostOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByStaff();
 
     final String name = User.STAFF.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
-  @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void staffUserOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
-
-    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
-    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
-  }
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-staffUserMobileLocking"})
-  @Execute(asUser = User.STAFF)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void staffUserOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
-        .unlockPost(data);
-
-    PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    final String text = addReplyOnMobile(page);
-    boolean actual = isReplyNotPresent(page, text);
-
-    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
-    Assertion.assertFalse(actual, message);
-  }
-
-  // Staff user on desktop
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopCanLockPostOnPostDetailsPage() {
@@ -318,46 +272,17 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.STAFF.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void staffUserOnDesktopCanUnlockPostLockedByStaffOnPostDetailsPage() {
+  public void staffUserOnDesktopCanUnlockPostOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByStaff();
 
     final String name = User.STAFF.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
-  @Execute(asUser = User.STAFF)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void staffUserOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostDetailsPage page = openPageWithPostLockedByDiscussionsModerator();
-
-    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
-    Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
-  }
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-staffUserDesktopLocking"})
-  @Execute(asUser = User.STAFF)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void staffUserOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data)
-        .unlockPost(data);
-
-    PostDetailsPage page = new PostDetailsPage().open(data.getId());
-    final String text = addReplyOnDesktop(page);
-    boolean actual = isReplyNotPresent(page, text);
-
-    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.STAFF.name(), User.DISCUSSIONS_ADMINISTRATOR.name());
-    Assertion.assertFalse(actual, message);
-  }
-
-  // Discussions moderator on mobile
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsModeratorOnMobileCanLockPostOnPostDetailsPage() {
@@ -368,43 +293,17 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
+  @Test(groups = MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsModeratorOnMobileCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
+  public void discussionsModeratorOnMobileCanUnlockPostOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
 
     final String name = User.DISCUSSIONS_MODERATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
   }
 
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsModeratorOnMobileCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostDetailsPage page = openPageWithPostLockedByStaff();
-
-    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
-    Assertion.assertFalse(page.getReplyCreatorMobile().isPresent(), message);
-  }
-
-
-  @Test(groups = {"discussions-locking-posts-mobile", "discussions-discussionsModeratorMobileLocking"})
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void discussionsModeratorOnMobileCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    final PostDetailsPage page = openPageWithPostUnlockedByStaff();
-    final String text = addReplyOnMobile(page);
-    final boolean actual = isReplyNotPresent(page, text);
-
-    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
-    Assertion.assertFalse(actual, message);
-  }
-
-  // Discussions moderator on desktop
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsModeratorOnDesktopCanLockPostOnPostDetailsPage() {
@@ -415,37 +314,14 @@ public class LockingPostTests extends NewTestTemplate {
     Assertion.assertTrue(postEntity.isLocked(), String.format(SHOULD_LOCK_MESSAGE, User.DISCUSSIONS_ADMINISTRATOR.name()));
   }
 
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void discussionsModeratorOnDesktopCanUnlockPostLockedByDiscussionsModeratorOnPostDetailsPage() {
+  public void discussionsModeratorOnDesktopCanUnlockPostOnPostDetailsPage() {
     PostEntity postEntity = unlockPostLockedByDiscussionsModerator();
 
     final String name = User.DISCUSSIONS_MODERATOR.name();
     Assertion.assertFalse(postEntity.isLocked(), String.format(SHOULD_UNLOCK_MESSAGE, name, name));
-  }
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void discussionsModeratorOnDesktopCanNotAddReplyUnderLockedPostOnPostDetailsPage() {
-    PostDetailsPage page = openPageWithPostLockedByStaff();
-
-    Assertion.assertTrue(page.getPost().findNewestPost().isLocked(), SHOULD_BE_LOCKED_MESSAGE);
-    final String message = String.format(SHOULD_NOT_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
-    Assertion.assertFalse(page.getReplyCreatorDesktop().isPresent(), message);
-  }
-
-  @Test(groups = {"discussions-locking-posts-desktop", "discussions-discussionsModeratorDesktopLocking"})
-  @Execute(asUser = User.DISCUSSIONS_MODERATOR)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void discussionsModeratorOnDesktopCanAddReplyUnderUnlockedPostOnPostDetailsPage() {
-    final PostDetailsPage page = openPageWithPostUnlockedByStaff();
-    final String text = addReplyOnDesktop(page);
-    final boolean actual = isReplyNotPresent(page, text);
-
-    final String message = String.format(SHOULD_ADD_REPLY_MESSAGE, User.DISCUSSIONS_MODERATOR.name(), User.STAFF.name());
-    Assertion.assertFalse(actual, message);
   }
 
   private MoreOptionsPopOver findMoreOptionsOnPostDetailsPage() {
@@ -539,28 +415,6 @@ public class LockingPostTests extends NewTestTemplate {
     DiscussionsClient.using(User.DISCUSSIONS_MODERATOR, driver).lockPost(data);
 
     return unlockPost(data);
-  }
-
-  private PostDetailsPage openPageWithPostLockedByDiscussionsModerator() {
-    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).lockPost(data);
-
-    return new PostDetailsPage().open(data.getId());
-  }
-
-  private PostDetailsPage openPageWithPostLockedByStaff() {
-    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.STAFF, driver).lockPost(data);
-
-    return new PostDetailsPage().open(data.getId());
-  }
-
-  private PostDetailsPage openPageWithPostUnlockedByStaff() {
-    PostEntity.Data data = DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
-    DiscussionsClient.using(User.STAFF, driver).lockPost(data)
-        .unlockPost(data);
-
-    return new PostDetailsPage().open(data.getId());
   }
 
   private boolean isReplyNotPresent(PostDetailsPage page, String text) {
