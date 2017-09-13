@@ -1,12 +1,20 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import static java.util.stream.Collectors.toSet;
+
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsVeles;
+
+import com.google.common.collect.ImmutableMap;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.DefaultHttpResponse;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import io.netty.handler.codec.http.HttpVersion;
 import net.lightbody.bmp.core.har.HarEntry;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -17,8 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toSet;
-
 public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   public static final String VELES_TRACKING_REQUEST_PART = "adengadinfo";
@@ -27,34 +33,104 @@ public class TestAdsVelesTracking extends TemplateNoFirstLoad {
 
   public static final String VELES_TRACKING_PRICE_PARAMETER = "bidder_8";
 
+  private static final String DEFAULT_VELES_PRICE = "20.00";
+  private static final String NOT_INVOLVED_VELES_MARK = "NOT_INVOLVED";
+
+  private void testVeles(String urlFragment, Map<String, String> positionsAndPrices) {
+    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(
+        new Page("project43", urlFragment)
+    ));
+
+    Set<HarEntry> entries = findEntriesByUrlPart(
+        pageObject,
+        VELES_TRACKING_REQUEST_PART,
+        positionsAndPrices
+    );
+
+    Assertion.assertTrue(
+        wasVelesTrackedIn(entries, positionsAndPrices),
+        "Veles should be tracked only in " + positionsAndPrices
+    );
+  }
+
   @NetworkTrafficDump()
-  @Test(
-      groups = "AdsTrackingVeles",
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVelesTracking"
-  )
-  public void adsTrackingVelesTracked(final Page page, final Map<String, String> positionsAndPrices) {
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTrackedForBothSlots"})
+  public void adsTrackingVelesTrackedForBothSlots() {
     networkTrafficInterceptor.startIntercepting();
-    AdsBaseObject pageObject = new AdsBaseObject(driver, urlBuilder.getUrlForPage(page));
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices(DEFAULT_VELES_PRICE, DEFAULT_VELES_PRICE)
+    );
+  }
 
-    Set<HarEntry> entries = findEntriesByUrlPart(pageObject, VELES_TRACKING_REQUEST_PART, positionsAndPrices);
+  @NetworkTrafficDump()
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTrackedForIncontent"})
+  public void adsTrackingVelesTrackedForIncontent() {
+    networkTrafficInterceptor.startIntercepting();
 
-    Assertion.assertTrue(wasVelesTrackedIn(entries, positionsAndPrices), "Veles should be tracked only in " + positionsAndPrices);
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles/Incontent?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices(NOT_INVOLVED_VELES_MARK, DEFAULT_VELES_PRICE)
+    );
+  }
+
+  @NetworkTrafficDump()
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTrackedForLeaderboard"})
+  public void adsTrackingVelesTrackedForLeaderboard() {
+    networkTrafficInterceptor.startIntercepting();
+
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices(DEFAULT_VELES_PRICE, NOT_INVOLVED_VELES_MARK)
+    );
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(
-      groups = {"AdsTrackingVeles", "AdsTrackingVelesErrors"},
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "adsVelesErrorTracking"
-  )
-  public void adsTrackingVelesErrorTracked(
-    final Page page,
-    final Map<String, String> positionsAndPrices,
-    final Map<String, DefaultHttpResponse> mockRules
-  ) {
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesTimeoutErrorTracked"})
+  public void adsTrackingVelesTimeoutErrorTracked() {
+    Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
+        .put(
+            ".*output=vast.*",
+            new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.REQUEST_TIMEOUT)
+        )
+        .build();
     mockResponses(mockRules);
-    adsTrackingVelesTracked(page, positionsAndPrices);
+
+    networkTrafficInterceptor.startIntercepting();
+
+    testVeles(
+        "SyntheticTests/RTB/Prebid.js/Veles/Both/Leaderboard?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("", "")
+    );
+  }
+
+  @NetworkTrafficDump()
+  @Test(groups = {"AdsTrackingVeles", "AdsTrackingVelesPageWithEmptyVastTracked"})
+  public void adsTrackingVelesPageWithEmptyVastTracked() {
+    Map<String, DefaultHttpResponse> mockRules = ImmutableMap.<String, DefaultHttpResponse>builder()
+        .build();
+    mockResponses(mockRules);
+
+    networkTrafficInterceptor.startIntercepting();
+
+    testVeles(
+        "Project43_Wikia?" + AdsVeles.TURN_ON_QUERY_PARAM,
+        buildPositionsAndPrices("0.00")
+    );
+  }
+
+  private ImmutableMap<String, String> buildPositionsAndPrices(String leaderboardPrice) {
+    return ImmutableMap.<String, String>builder()
+        .put(AdsContent.TOP_LB, leaderboardPrice)
+        .build();
+  }
+
+  private ImmutableMap<String, String> buildPositionsAndPrices(String leaderboardPrice,
+                                                               String incontentPrice) {
+      return ImmutableMap.<String, String>builder()
+          .put(AdsContent.TOP_LB, leaderboardPrice)
+          .put(AdsContent.INCONTENT_PLAYER, incontentPrice)
+          .build();
   }
 
   private void mockResponses(Map<String, DefaultHttpResponse> mockRules) {

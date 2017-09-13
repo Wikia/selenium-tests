@@ -1,13 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register;
 
+import com.wikia.webdriver.common.core.helpers.SignUpUser;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.DetachedWindow;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
 
+import java.time.LocalDate;
+
 public class DetachedRegisterPage extends DetachedWindow implements RegisterPage {
 
   private AttachedRegisterPage registerPage;
-  private static final String TITLE = "Join Fandom Today";
+  private static final String TITLE = "Join FANDOM Today";
 
   public DetachedRegisterPage() {
     registerPage = new AttachedRegisterPage();
@@ -17,53 +20,93 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     registerPage = page;
   }
 
-  @Override public RegisterPage open() {
+  @Override
+  public RegisterPage open() {
     throw new UnsupportedOperationException("Error trying to open a detached window in old tab");
   }
 
-  @Override public boolean isDisplayed() {
+  @Override
+  public boolean isDisplayed() {
     gainFocus();
     return registerPage.isDisplayed();
   }
 
-  @Override public boolean submitButtonNotClickable() {
+  @Override
+  public boolean submitButtonNotClickable() {
     return registerPage.submitButtonNotClickable();
   }
 
-  @Override public RegisterPage typeEmailAddress(String email) {
+  @Override
+  public boolean isPasswordMasked() {
+    gainFocus();
+    return registerPage.isPasswordMasked();
+  }
+
+  @Override
+  public void togglePasswordVisibility() {
+    gainFocus();
+    registerPage.togglePasswordVisibility();
+  }
+
+  @Override
+  public RegisterPage typeEmailAddress(String email) {
     gainFocus();
     return registerPage.typeEmailAddress(email);
   }
 
-  @Override public RegisterPage typeUsername(String username) {
+  @Override
+  public RegisterPage typeUsername(String username) {
     gainFocus();
     return registerPage.typeUsername(username);
   }
 
-  @Override public RegisterPage typePassword(String password) {
+  @Override
+  public RegisterPage typePassword(String password) {
     gainFocus();
     return registerPage.typePassword(password);
   }
 
-  @Override public RegisterPage typeBirthdate(String month, String day, String year) {
+  @Override
+  public RegisterPage typeBirthday(int month, int day, int year) {
     gainFocus();
-    return registerPage.typeBirthdate(month, day, year);
+    return registerPage.typeBirthday(month, day, year);
   }
 
-  @Override public String getError() {
+  @Override
+  public String getError() {
     gainFocus();
     return registerPage.getError();
   }
 
-  @Override public void submit() {
+  @Override
+  public void submit() {
     gainFocus();
     registerPage.submit();
     loseFocus();
   }
 
-  @Override public DetachedSignInPage navigateToSignIn() {
+  @Override
+  public DetachedSignInPage navigateToSignIn() {
     gainFocus();
     return new DetachedSignInPage(registerPage.navigateToSignIn());
+  }
+
+  @Override
+  public void signUp(String email, String username, String password, LocalDate birthday) {
+    gainFocus();
+    registerPage.signUp(email, username, password, birthday);
+    loseFocus();
+  }
+
+  @Override
+  public void signUp(SignUpUser user) {
+    signUp(user.getEmail(), user.getUsername(), user.getPassword(), user.getBirthday());
+  }
+
+  @Override
+  public RegisterPage fillForm(SignUpUser user) {
+    gainFocus();
+    return registerPage.fillForm(user);
   }
 
   public FacebookSignupModalComponentObject clickFacebookSignUp() {
@@ -76,7 +119,8 @@ public class DetachedRegisterPage extends DetachedWindow implements RegisterPage
     return registerPage.isConnectWithFacebookButtonVisible();
   }
 
-  @Override protected String getTitle() {
+  @Override
+  protected String getTitle() {
     return TITLE;
   }
 }

@@ -30,7 +30,7 @@ public class VideoPageAdminTests extends NewTestTemplate {
       container.scrollToContainer();
       // Add video 1
       VetAddVideoComponentObject vetAddingVideoModal = container.clickAddVideo();
-      vetAddingVideoModal.addVideoByUrl(VideoContent.PREMIUM_VIDEO_URL2);
+      vetAddingVideoModal.addVideoWithoutDetailsByUrl(VideoContent.PREMIUM_VIDEO_URL2);
 
       // Add image 1
       ImageGenerator generator = new ImageGenerator(1024, 461);
@@ -53,7 +53,7 @@ public class VideoPageAdminTests extends NewTestTemplate {
 
     // Add video 2 and make sure video title has changed
     VetAddVideoComponentObject vetAddingVideoModal = firstContainer.clickAddVideo();
-    vetAddingVideoModal.addVideoByUrl(VideoContent.PREMIUM_VIDEO_URL);
+    vetAddingVideoModal.addVideoWithoutDetailsByUrl(VideoContent.PREMIUM_VIDEO_URL);
     firstContainer.verifyVideoAdded(VideoContent.PREMIUM_VIDEO_NAME);
     featuredVideoAdminObject.clickSaveFeaturedVideoForm(driver);
   }

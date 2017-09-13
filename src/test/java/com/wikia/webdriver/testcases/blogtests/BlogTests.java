@@ -72,7 +72,6 @@ public class BlogTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.STAFF_FORUM)
-  @RelatedIssue(issueID = "SUS-2259", comment = "Feature is broken until issue is resolved")
   public void StaffCanDeleteAndUndeleteUsersBlogPost() {
     String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + DateTime.now().getMillis();
     String blogContent = PageContent.BLOG_CONTENT + DateTime.now().getMillis();

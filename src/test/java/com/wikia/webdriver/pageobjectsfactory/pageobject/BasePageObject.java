@@ -1,37 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.google.common.base.Predicate;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
 import com.wikia.webdriver.common.core.Assertion;
@@ -46,6 +15,24 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class BasePageObject {
 
@@ -80,6 +67,16 @@ public class BasePageObject {
     PageObjectLogging.log("getActivationLinkFromMail",
         "activation link is visible in email content: " + url, true);
     return url;
+  }
+
+  public static String getPasswordResetLink(String email, String password) {
+    String passwordResetEmail = EmailUtils
+      .getFirstEmailContent(email, password, "Reset your FANDOM password");
+    String resetLink = EmailUtils.getPasswordResetLinkFromEmailContent(passwordResetEmail);
+    PageObjectLogging.log("Password reset link", "Password reset link received: " + resetLink,
+        true);
+
+    return resetLink;
   }
 
   // wait for comscore to load
@@ -177,11 +174,15 @@ public class BasePageObject {
     return numElementOnPage;
   }
 
-  public void waitSafely(Runnable o) {
+  protected void waitSafely(Runnable o) {
+    waitSafely(o, "");
+  }
+
+  void waitSafely(Runnable o, String message) {
     try {
       o.run();
     } catch (TimeoutException e) {
-      PageObjectLogging.log("Timed out waiting", e, true);
+      PageObjectLogging.log("Timed out waiting", String.format("%s\n%s", message, e), true);
     }
   }
 
@@ -225,10 +226,14 @@ public class BasePageObject {
   public boolean isStringInURL(String givenString) {
     String currentURL = driver.getCurrentUrl();
     if (currentURL.toLowerCase().contains(givenString.toLowerCase())) {
-      PageObjectLogging.log("isStringInURL", "Current url contains " + givenString, true);
+      PageObjectLogging.log("isStringInURL",
+        String.format("Current url: %s contains given string: %s", currentURL, givenString),
+        true);
       return true;
     } else {
-      PageObjectLogging.log("isStringInURL", "current url doesn't contain " + givenString, false);
+      PageObjectLogging.log("isStringInURL",
+        String.format("Current url: %s does not contain given string: %s", currentURL, givenString),
+        false);
       return false;
     }
   }
@@ -579,11 +584,15 @@ public class BasePageObject {
 
   private String getTabWithCondition(
       java.util.function.Predicate<? super Pair<String, String>> condition) {
-    Optional<String> newTab = driver.getWindowHandles().stream()
-        .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
-        .filter(condition).map(Pair::getKey).findFirst();
+    Optional<String> newTab = driver.getWindowHandles()
+      .stream()
+      .map(handleName -> Pair.of(handleName, driver.switchTo().window(handleName).getTitle()))
+      .peek(handleTitle -> PageObjectLogging.log("Found window", String.format("Window with title %s", handleTitle), true))
+      .filter(condition)
+      .map(Pair::getKey)
+      .findFirst();
     return newTab.orElseThrow(
-        () -> new NotFoundException(String.format("Tab with title %s doesn't exist", title)));
+        () -> new NotFoundException("Tab that satisfies the condition doesn't exist"));
   }
 
   public WebDriver switchToWindowWithTitle(String title) {

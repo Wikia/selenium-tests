@@ -18,13 +18,8 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
       dataProvider = "adsPremiumPreroll"
   )
   public void adsPremiumPrerollMercury(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(
-        wikiName,
-        article + "?AbTest.MOBILE_FEATURED_VIDEO_AUTOPLAY=CONTROL"
-    );
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.verifyPlayerOnPage();
-    wikiPage.playArticleVideo();
     wikiPage.verifyArticleAd();
     wikiPage.verifyArticleVideo();
   }
@@ -35,13 +30,8 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
       dataProvider = "adsPremiumPreroll"
   )
   public void adsPremiumPrerollMercuryNoAds(String wikiName, String article) {
-    String testedPage = urlBuilder.getUrlForPath(
-        wikiName,
-        article + "?noads=1&AbTest.MOBILE_FEATURED_VIDEO_AUTOPLAY=CONTROL"
-    );
+    String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?noads=1");
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.verifyPlayerOnPage();
-    wikiPage.playArticleVideo();
     wikiPage.verifyArticleVideo();
   }
 

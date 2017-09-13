@@ -1,206 +1,213 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.WindowSize;
 import com.wikia.webdriver.common.contentpatterns.AdsFandomContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.dataprovider.ads.FandomAdsDataProvider;
 import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.FandomVideoFanTakeover;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VideoFanTakeover;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
+  private static final long MAX_MOVIE_DURATION = 40L;
+  private static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
+  private static final int MOBILE_VIDEO_TRIGGER_AREA = 3;
+  private static final int REDIRECT_AREA_TRIGGER = 1; // DESKTOP & MOBILE
 
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVideoClosedAfterPlayingFandom"}
-    )
-    public void adsVideoClosedAfterPlayingFandom(String pageType, String pageName, String slotName, String iframeId) {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomDesktop", "AdsVideoClosedAfterPlayingFandom"}
+  )
+  public void adsVideoClosedAfterPlayingFandom(String pageType, String pageName, String slotName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-        videoFanTakeover.play();
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
+    videoFanTakeover.waitForVideoStart();
+    videoFanTakeover.waitForVideoPlayerHidden();
+  }
 
-        videoFanTakeover.waitForVideoPlayerHidden();
-    }
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomDesktop", "AdsImageClickedOpensNewPageFandom"}
+  )
+  public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName) {
+    AdsFandomObject page = loadPage(pageName, pageType);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, page);
 
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsImageClickedOpensNewPageFandom"}
-    )
-    public void adsImageClickedOpensNewPageFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+    videoFanTakeover.clickOnArea(REDIRECT_AREA_TRIGGER);
+    Assert.assertTrue(page.tabContainsUrl(FandomAdsDataProvider.AD_REDIRECT_URL));
+  }
 
-        videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
-    }
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomDesktop", "AdsVuapVideoClosesWhenTapCloseButtonFandom"}
+  )
+  public void adsVuapVideoClosesWhenTapCloseButtonFandom(String pageType, String pageName, String slotName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapVideoClosesWhenTapCloseButtonFandom"}
-    )
-    public void adsVuapVideoClosesWhenTapCloseButtonFandom(String pageType, String pageName, String slotName, String iframeId) {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
+    videoFanTakeover.close();
+    videoFanTakeover.waitForVideoPlayerHidden();
+  }
 
-        videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
-    }
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
+  )
+  public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.DESKTOP);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapCheckSlotSizesFandom"}
-    )
-    public void adsVuapCheckSlotSizesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+    videoFanTakeover.waitForAdToLoad();
+    double imageHeight = videoFanTakeover.getAdSlotHeight();
 
-        videoFandomPage(slotName).verifySlotSizesVuap(videoFanTakeover);
-    }
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
+    videoFanTakeover.waitForVideoStart();
+    videoFanTakeover.togglePause();
+    double videoHeight = videoFanTakeover.getVideoHeightWhilePaused();
 
-    @NetworkTrafficDump
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressingFandom"}
-    )
-    public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+    Assertion.assertTrue(VuapAssertions.isVideoAdBiggerThanImageAd(videoHeight, imageHeight));
+  }
 
-        videoFandomPage(slotName).verifyIsVideoTimeProgresingOnDesktop(networkTrafficInterceptor, videoFanTakeover);
-    }
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomDesktop", "AdsVuapTimeProgressDesktopFandom"}
+  )
+  public void adsVuapTimeProgressingFandom(String pageType, String pageName, String slotName) throws InterruptedException {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap vuap = prepareSlot(slotName, fandomPage);
 
-    @NetworkTrafficDump
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPage",
-            groups = {"AdsVuapFandomDesktop", "AdsVuapVideoPauseFandom"}
-    )
-    public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName, String iframeId) throws InterruptedException {
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
+    playVideoAndCheckTimeProgressing(vuap, DESKTOP_VIDEO_TRIGGER_AREA);
+  }
 
-        videoFandomPage(slotName).verifyIsVideoPausedOnDesktop(networkTrafficInterceptor, videoFanTakeover);
-    }
+  private void playVideoAndCheckTimeProgressing(AutoplayVuap vuap, int videoTriggerArea) throws InterruptedException {
+    vuap.clickOnArea(videoTriggerArea);
+    TimeUnit.SECONDS.sleep(1);
+    vuap.togglePause();
+    double firstPause = vuap.getCurrentTime();
 
-    @NetworkTrafficDump(useMITM = true)
-    @InBrowser(
-            browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
-    )
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
-    )
-    public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName,
-                                                       String iframeId, String videoUrl) {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+    vuap.togglePause();
+    TimeUnit.SECONDS.sleep(3);
+    vuap.togglePause();
+    double currentTime = vuap.getCurrentTime();
 
-        videoFanTakeover.play();
+    Assert.assertTrue(
+            firstPause < currentTime,
+            String.format(
+                    "Video time is not progressing, first pause time %s is not smaller than current %s",
+                    firstPause, currentTime)
+    );
+  }
 
-        videoFanTakeover.waitForVideoPlayerHidden();
-    }
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomDesktop", "AdsVuapVideoPauseFandom"}
+  )
+  public void adsVuapVideoPausesFandom(String pageType, String pageName, String slotName) throws InterruptedException {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
 
-    @NetworkTrafficDump(useMITM = true)
-    @InBrowser(
-            browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
-    )
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"}
-    )
-    public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName,
-                                                        String iframeId, String videoUrl) {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+    videoFanTakeover.clickOnArea(DESKTOP_VIDEO_TRIGGER_AREA);
+    TimeUnit.SECONDS.sleep(2);
+    videoFanTakeover.togglePause();
+    double time = videoFanTakeover.getCurrentTime();
 
-        videoFandomPage(slotName).verifyFandomPageOpened(videoFanTakeover);
-    }
+    TimeUnit.SECONDS.sleep(3);
 
-    @NetworkTrafficDump(useMITM = true)
-    @InBrowser(
-            browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
-    )
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVuapVideoClosesWhenTapCloseButtonFandomMobile"}
-    )
-    public void adsVuapVideoClosesWhenTapCloseButtonFandomMobile(String pageType, String pageName, String slotName,
-                                                                 String iframeId, String videoUrl) {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+    Assert.assertNotEquals(0, videoFanTakeover.getCurrentTime(), "Video did not start");
+    Assert.assertEquals(time, videoFanTakeover.getCurrentTime(), "Video did not togglePause");
+  }
 
-        videoFandomPage(slotName).verifyVideoClosesAfterTapOnCloseButton(videoFanTakeover);
-    }
+  @InBrowser(
+          browser = Browser.CHROME,
+          emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomMobile", "AdsVideoClosedAfterPlayingFandomMobile"}
+  )
+  public void adsVideoClosedAfterPlayingFandomMobile(String pageType, String pageName, String slotName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
+    videoFanTakeover.waitForAdToLoad();
+    videoFanTakeover.clickOnArea(MOBILE_VIDEO_TRIGGER_AREA);
+    videoFanTakeover.waitForVideoPlayerHidden();
+  }
 
-    @NetworkTrafficDump(useMITM = true)
-    @InBrowser(
-            browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
-    )
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressingFandomMobile"}
-    )
-    public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName,
-                                                   String iframeId, String videoUrl) throws InterruptedException {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+  @InBrowser(
+          browser = Browser.CHROME,
+          emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomMobile", "AdsImageClickedOpensNewPageFandomMobile"}
+  )
+  public void adsImageClickedOpensNewPageFandomMobile(String pageType, String pageName, String slotName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap videoFanTakeover = prepareSlot(slotName, fandomPage);
+    videoFanTakeover.waitForAdToLoad();
 
-        videoFandomPage(slotName).verifyIsVideoTimeProgresingOnMobile(networkTrafficInterceptor, videoFanTakeover);
-    }
+    videoFanTakeover.clickOnArea(REDIRECT_AREA_TRIGGER);
+    Assert.assertTrue(fandomPage.tabContainsUrl(FandomAdsDataProvider.AD_REDIRECT_URL));
+  }
 
-    @NetworkTrafficDump(useMITM = true)
-    @InBrowser(
-            browser = Browser.CHROME,
-            emulator = Emulator.GOOGLE_NEXUS_5
-    )
-    @Test(
-            dataProviderClass = FandomAdsDataProvider.class,
-            dataProvider = "vuapPageMobile",
-            groups = {"AdsVuapFandomMobile", "AdsVuapVideoPauseFandomMobile"}
-    )
-    public void adsVuapVideoPauseFandomMobile(String pageType, String pageName, String slotName,
-                                              String iframeId, String videoUrl) throws InterruptedException {
-        networkTrafficInterceptor.startIntercepting();
-        AdsFandomObject fandomPage = loadPage(pageName, pageType);
-        VideoFanTakeover videoFanTakeover = prepareSlot(slotName, iframeId, fandomPage);
-        fandomPage.wait.forSuccessfulResponse(networkTrafficInterceptor, videoUrl);
+  @InBrowser(
+          browser = Browser.CHROME,
+          emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapMobileFandom", "AdsVuapVideoClosesWhenTapCloseButtonMobileFandom"}
+  )
+  public void adsVuapVideoClosesWhenTapCloseButtonMobileFandom(String pageType, String pageName, String slotName) {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType);
+    AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
+    VuapAssertions.verifyVideoClosesAfterTapOnCloseButton(vuap);
+  }
 
-        videoFandomPage(slotName).verifyIsVideoPausedOnMobile(networkTrafficInterceptor, videoFanTakeover);
-    }
+  @InBrowser(
+          browser = Browser.CHROME,
+          emulator = Emulator.GOOGLE_NEXUS_5
+  )
+  @Test(
+          dataProviderClass = FandomAdsDataProvider.class,
+          dataProvider = "vuapPage",
+          groups = {"AdsVuapFandomMobile", "AdsVuapTimeProgressMobileFandom"}
+  )
+  public void adsVuapTimeProgressingFandomMobile(String pageType, String pageName, String slotName) throws InterruptedException {
+    AdsFandomObject fandomPage = loadPage(pageName, pageType, WindowSize.PHONE);
+    AutoplayVuap vuap = prepareSlot(slotName, fandomPage, true);
 
-    private VideoFanTakeover prepareSlot(String slotName, String iframeId, AdsFandomObject fandomPage) {
-        fandomPage.triggerOnScrollSlots();
-        VideoFanTakeover videoFanTakeover = new VideoFanTakeover(driver, iframeId, AdsFandomContent.getGptSlotSelector(slotName));
-        fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
-        return videoFanTakeover;
-    }
+    playVideoAndCheckTimeProgressing(vuap, MOBILE_VIDEO_TRIGGER_AREA);
+  }
 
-    private FandomVideoFanTakeover videoFandomPage(String slotName) {
-        return new FandomVideoFanTakeover(driver, slotName);
-    }
+  private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage) {
+    return prepareSlot(slotName, fandomPage, false);
+  }
+
+  private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
+    fandomPage.triggerOnScrollSlots();
+    AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
+    fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
+    return videoFanTakeover;
+  }
 }

@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 
 public class ZeroErrorStateTests extends NewTestTemplate {
 
-  private static final String MESSAGE_1 = "Uh oh, looks like this page doesn't exist!\n";
+  private static final String MESSAGE_1 = "The page you are looking for doesn't exist.\n";
   private static final String MESSAGE_2 = "Show Me All Discussions";
   private static final String MESSAGE_3 = "All Discussions";
   private static final String NO_REPLIES_MESSAGE = "No replies yet. Be the first!";

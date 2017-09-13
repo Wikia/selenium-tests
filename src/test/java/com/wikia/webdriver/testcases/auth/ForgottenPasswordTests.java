@@ -1,76 +1,77 @@
 package com.wikia.webdriver.testcases.auth;
 
 import com.wikia.webdriver.common.core.EmailUtils;
-import com.wikia.webdriver.common.core.configuration.Configuration;
-import com.wikia.webdriver.common.core.helpers.User;
-import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.core.helpers.UserWithEmailFactory;
+import com.wikia.webdriver.common.core.helpers.UserWithEmail;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.global_navitagtion.NavigationBar;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.ResetPasswordPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.AttachedSignInPage;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.signin.DetachedSignInPage;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.wikia.webdriver.common.core.Assertion.assertTrue;
 
-@Test(groups = "auth-forgottenPassword")
+@Test(groups = "auth-forgotten-password")
 public class ForgottenPasswordTests extends NewTestTemplate {
 
-  Credentials credentials = Configuration.getCredentials();
+  private UserWithEmail user = UserWithEmailFactory.getUser();
+  private UserWithEmail userWithSpaces = UserWithEmailFactory.getUserWithSpaces();
 
-  @Test
+  @BeforeMethod
+  @AfterMethod
+  private void cleanUpEmails() {
+    EmailUtils.deleteAllEmails(user.getEmail(), user.getEmailPassword());
+    EmailUtils.deleteAllEmails(userWithSpaces.getEmail(), userWithSpaces.getEmailPassword());
+  }
+
   public void anonCanRemindPasswordFromAuthModal() {
-    executeResetPasswordFlow(User.FORGOTTEN_PASSWORD);
+    executeResetPasswordFlow(user);
   }
 
-  @Test
   public void anonCanResetPasswordForUsernameWithSpaces() {
-    executeResetPasswordFlow(User.FORGOTTEN_PASSWORD_SPACES);
+    executeResetPasswordFlow(userWithSpaces);
   }
 
-  @Test
   public void anonCanRemindPasswordOnUserLoginSpecialPage() {
-    EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
-    WikiBasePageObject base = new WikiBasePageObject();
-    AttachedSignInPage signIn = new AttachedSignInPage().open();
-    signIn.clickForgotPasswordLink().requestLinkForUsername(User.FORGOTTEN_PASSWORD.getUserName());
-    String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
-    ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
-    resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
-
-    assertTrue(resetPass.newPasswordSetSuccessfully());
+    requestPasswordResetOnModal(user.getUsername());
+    assertTrue(setNewPasswordForUser(user).newPasswordSetSuccessfully());
   }
 
-  @Test
   public void anonCanRemindPasswordOnUserLoginSpecialPageUsingLowerCaseUserName() {
-    String username = User.FORGOTTEN_PASSWORD.getUserName();
-    String lowercaseUsername = Character.toLowerCase(username.charAt(0)) + username.substring(1);
-    EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
-    WikiBasePageObject base = new WikiBasePageObject();
-    AttachedSignInPage signIn = new AttachedSignInPage().open();
-    signIn.clickForgotPasswordLink().requestLinkForUsername(lowercaseUsername);
-    String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
-    ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
-    resetPass.setNewPassword(User.FORGOTTEN_PASSWORD.getPassword());
-
-    assertTrue(resetPass.newPasswordSetSuccessfully());
+    String lowercaseUsername = getLowercaseFirstLetterUsername(user);
+    requestPasswordResetOnModal(lowercaseUsername);
+    assertTrue(setNewPasswordForUser(user).newPasswordSetSuccessfully());
   }
 
-  private void executeResetPasswordFlow(User user) {
-    EmailUtils.deleteAllEmails(credentials.email, credentials.emailPassword);
-    WikiBasePageObject base = new WikiBasePageObject();
-    base.openWikiPage(wikiURL);
-    DetachedSignInPage loginModal = new DetachedSignInPage(new NavigationBar(driver).clickOnSignIn());
-    loginModal
-      .clickForgotPasswordLink()
-      .requestLinkForUsername(user.getUserName());
+  private String getLowercaseFirstLetterUsername(UserWithEmail user) {
+    return String.format("%s%s",
+      Character.toLowerCase(user.getUsername().charAt(0)),
+      user.getUsername().substring(1));
+  }
 
-    String resetLink = base.getPasswordResetLink(credentials.email, credentials.emailPassword);
+  private void requestPasswordResetOnModal(String username){
+    new AttachedSignInPage()
+      .open()
+      .clickForgotPasswordLink()
+      .requestLinkForUsername(username);
+  }
+
+  private ResetPasswordPage setNewPasswordForUser(UserWithEmail user) {
+    String resetLink = BasePageObject.getPasswordResetLink(user.getEmail(), user.getEmailPassword());
     ResetPasswordPage resetPass = new ResetPasswordPage(resetLink);
     resetPass.setNewPassword(user.getPassword());
+    return resetPass;
+  }
 
-    assertTrue(resetPass.newPasswordSetSuccessfully());
+  private void executeResetPasswordFlow(UserWithEmail user) {
+    new DetachedSignInPage(new NavigationBar().clickOnSignIn())
+      .clickForgotPasswordLink()
+      .requestLinkForUsername(user.getUsername());
+
+    assertTrue(setNewPasswordForUser(user).newPasswordSetSuccessfully());
   }
 }

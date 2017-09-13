@@ -6,7 +6,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.AuthPageContext;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormError;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.FormPage;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -29,16 +28,19 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
     wait.forElementVisible(requestLinkButton).click();
   }
 
-  @Override public FormPage open() {
+  @Override
+  public FormPage open() {
     driver.get(urlBuilder.getUrlForWiki() + URLsContent.USER_FORGOT_PASSWORD);
     return this;
   }
 
-  @Override public boolean isDisplayed() {
+  @Override
+  public boolean isDisplayed() {
     return authContext.isHeaderDisplayed();
   }
 
-  @Override public boolean submitButtonNotClickable() {
+  @Override
+  public boolean submitButtonNotClickable() {
     return wait.forElementVisible(requestLinkButton).isEnabled();
   }
 
@@ -47,7 +49,8 @@ public class AttachedForgotPasswordPage extends BasePageObject implements Forgot
     submit();
   }
 
-  @Override public String getError() {
+  @Override
+  public String getError() {
     return new FormError().getError();
   }
 

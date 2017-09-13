@@ -279,6 +279,19 @@ public class Wait {
   }
 
   /**
+   * Wait for element to be either invisible or not present on the DOM.
+   */
+  public boolean forElementNotVisible(By by, Duration timeout) {
+    changeImplicitWait(250, TimeUnit.MILLISECONDS);
+    try {
+      return new WebDriverWait(driver, timeout.getSeconds()).until(
+              ExpectedConditions.invisibilityOfElementLocated(by));
+    } finally {
+      restoreDeaultImplicitWait();
+    }
+  }
+
+  /**
    * Wait for element to be in viewport Either position top or left is bigger then -1
    */
   public boolean forElementInViewPort(WebElement element) {

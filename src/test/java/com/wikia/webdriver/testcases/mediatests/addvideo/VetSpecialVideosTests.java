@@ -1,18 +1,17 @@
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
-import com.wikia.webdriver.common.core.configuration.Configuration;
+import com.wikia.webdriver.common.core.api.DeleteMWVideo;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.video.YoutubeVideo;
-import com.wikia.webdriver.common.core.video.YoutubeVideoProvider;
-import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePage;
-import org.testng.annotations.Test;
 
 @Test(groups = {"VetTests", "SpecialVideo", "Media"})
 @Execute(onWikia = "sustainingtest")
@@ -21,16 +20,20 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   @Test(groups = {"VetTests001"})
   @Execute(asUser = User.SUS_REGULAR_USER2)
   public void StaffCanDeleteFilePage() {
-    YoutubeVideo video = YoutubeVideoProvider.getLatestVideoForQuery("media");
+    YoutubeVideo video = new YoutubeVideo("TEST VIDEO",
+        "https://www.youtube.com/watch?v=C0DPdy98e4c", "C0DPdy98e4c");
+
+    new DeleteMWVideo(video.getTitle()).call();
+
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
-    VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-    vetAddingVideo.addVideoByUrl(video.getUrl());
+    VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
+    vetAddingVideo.addVideoWithoutDetailsByUrl(video.getUrl());
+
+    specialVideos.loginAs(User.SUS_CHAT_STAFF2);
     specialVideos.verifyVideoAdded(video.getTitle());
 
     FilePage filePage = new FilePage().open(video.getFileName());
-
-    filePage.loginAs(User.SUS_CHAT_STAFF2);
     DeletePageObject deletePage = filePage.deletePage();
     deletePage.submitDeletion();
 
@@ -43,7 +46,7 @@ public class VetSpecialVideosTests extends NewTestTemplate {
   public void SpecialVideos_002_Library() {
     SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
     specialVideos.openSpecialVideoPage(wikiURL);
-    VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
+    VetAddVideoComponentObject vetAddingVideo = specialVideos.addAVideo();
     vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
     specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
   }

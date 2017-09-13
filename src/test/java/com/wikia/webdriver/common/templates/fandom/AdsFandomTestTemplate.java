@@ -2,6 +2,8 @@ package com.wikia.webdriver.common.templates.fandom;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
 
+import org.openqa.selenium.Dimension;
+
 public class AdsFandomTestTemplate extends FandomTestTemplate {
 
   public static final String PAGE_TYPE_ARTICLE = "f2/article";
@@ -13,6 +15,18 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
   }
 
   protected AdsFandomObject loadPage(String pageName, String pageType) {
+    String pageUrl = getFandomUrl(pageName, pageType);
+
+    return new AdsFandomObject(driver, pageUrl);
+  }
+
+  protected AdsFandomObject loadPage(String pageName, String pageType, Dimension resolution) {
+    String pageUrl = getFandomUrl(pageName, pageType);
+
+    return new AdsFandomObject(driver, pageUrl, resolution);
+  }
+
+  private String getFandomUrl(String pageName, String pageType) {
     String pageUrl;
 
     switch (pageType) {
@@ -25,7 +39,7 @@ public class AdsFandomTestTemplate extends FandomTestTemplate {
         break;
     }
 
-    return new AdsFandomObject(driver, pageUrl);
+    return pageUrl;
   }
 
   protected AdsFandomObject loadPage(String pageName) {

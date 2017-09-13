@@ -26,7 +26,7 @@ public class GoSearchFeature extends IntraWiki {
   public void AnonFromSuggestion() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar(driver);
+    NavigationBar navigation = new NavigationBar();
     navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
     navigation.verifySuggestions(SEARCH_ARTICLE);
     ArticlePageObject article = navigation.ArrowDownAndEnterSuggestion(SEARCH_ARTICLE);
@@ -38,7 +38,7 @@ public class GoSearchFeature extends IntraWiki {
   public void UserFromSuggestion() {
     WikiBasePageObject base = new WikiBasePageObject();
     base.openWikiPage(testedWiki);
-    NavigationBar navigation = new NavigationBar(driver);
+    NavigationBar navigation = new NavigationBar();
     navigation.openWikiPage(testedWiki);
     navigation.triggerSuggestions(SEARCH_SUGGESTION_PHRASE);
     navigation.verifySuggestions(SEARCH_ARTICLE);
@@ -50,7 +50,7 @@ public class GoSearchFeature extends IntraWiki {
   @Execute(asUser = User.USER_GO_SEARCH_PREFERRED, onWikia = "muppet")
   public void goSearchPreference() {
     new WikiBasePageObject().openWikiPage(wikiURL);
-    NavigationBar navigation = new NavigationBar(driver);
+    NavigationBar navigation = new NavigationBar();
     ArticlePageObject article = navigation.goSearchFor(SearchContent.SEARCH_ARTICLE);
     article.verifyArticleNameInWgPageName(SearchContent.SEARCH_ARTICLE);
   }

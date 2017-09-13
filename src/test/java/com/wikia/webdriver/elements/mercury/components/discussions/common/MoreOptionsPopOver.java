@@ -56,9 +56,9 @@ public class MoreOptionsPopOver {
         .until(predicate);
   }
 
-  public MoreOptionsPopOver clickReportPostOption() {
+  public ReportDialog clickReportPostOption() {
     post.findElement(By.className("report-link")).click();
-    return this;
+    return new ReportDialog();
   }
 
   public ShareDialog clickSharePostOption() {
