@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.awt.*;
 
+@Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
   private static final String PLAY_BUTTON_SELECTOR = ".ooyala-video .oo-action-icon";
   private static final String PLAYER_CONTAINER_SELECTOR
