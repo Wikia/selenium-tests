@@ -49,8 +49,6 @@ public class PageContent {
   public static final String FILE = "Image001.jpg";
   public static final String FILEPNG = "Image001.png";
   public static final String FILE2PNG = "Image002.png";
-  public static final String SMALLFILE = "Image011-Small-image.png";
-  public static final String BROKENEXTENSIONFILE = "broken-extension-image.fer";
 
   // image storage
   public static final String FILERENAME = "Image003.jpg";
@@ -88,31 +86,14 @@ public class PageContent {
   public static final String FORUM_DESCRIPTION_EDIT_PREFIX =
       "Duis quam ante, fringilla at cursus tristique edit ";
   public static final String FORUM_MESSAGE = "QAforumMessage%s";
-  public static final String FORUM_BOARD = "QABoardForMoveThreadTest";
   public static final String CLOSE_REASON = "QA reason";
 
   // Messages
-  public static final String LOGIN_REQUIRED = "Login required";
-  public static final String NOT_LOGGED_IN_MESSAGE = "Not logged in";
-  public static final String NEW_PASSWORD_SENT_MESSAGE =
-      "We've sent a new password to the email address for %userName%.";
   public static final String PHALANX_BLOCK_TITLE_MESSAGE =
       "Sorry, the page title was rejected by our spam filter. Please use a different title.";
-  public static final String SIGN_UP_TOO_YOUNG_MESSAGE =
-      "Sorry, we're not able to register your account at this time.";
-  public static final String SIGN_UP_INVALID_CAPTCHA_MESSAGE =
-      "The word you entered didn't match the word in the box, try again!";
-  public static final String SIGN_UP_USER_EXISTS_MESSAGE =
-      "Someone already has this username. Try a different one!";
 
   // wikiText
   public static final String WIKI_TEXT_PHOTO = "[[File:%photoName%|thumb|%s]]";
-
-  // SignUp correct
-  public static final String WIKI_SIGN_UP_BIRTHDAY = "11";
-  public static final String WIKI_SIGN_UP_BIRTHMONTH = "11";
-  public static final String WIKI_SIGN_UP_BIRTHYEAR = "1954";
-  public static final int MIN_AGE = 12;
 
   // Hero Module edit field default message
   public static final String WIKIA_HERO_PROMOTE_MESSAGE =

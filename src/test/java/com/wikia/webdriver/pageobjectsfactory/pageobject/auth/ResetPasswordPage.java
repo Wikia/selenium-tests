@@ -25,23 +25,28 @@ public class ResetPasswordPage extends BasePageObject implements FormPage {
     authContext = new AuthPageContext();
   }
 
-  @Override public String getError() {
+  @Override
+  public String getError() {
     return new FormError().getError();
   }
 
-  @Override public void submit() {
+  @Override
+  public void submit() {
     waitAndClick(resetPasswordButton);
   }
 
-  @Override public FormPage open() {
+  @Override
+  public FormPage open() {
     throw new UnsupportedOperationException("Error trying to open a detached window in old tab");
   }
 
-  @Override public boolean isDisplayed() {
+  @Override
+  public boolean isDisplayed() {
     return authContext.isHeaderDisplayed();
   }
 
-  @Override public boolean submitButtonNotClickable() {
+  @Override
+  public boolean submitButtonNotClickable() {
     return !wait.forElementVisible(resetPasswordButton).isEnabled();
   }
 

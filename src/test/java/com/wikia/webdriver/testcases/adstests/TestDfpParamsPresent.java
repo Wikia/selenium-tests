@@ -54,7 +54,7 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
       testedPage = urlBuilder.appendQueryStringToURL(testedPage, queryString);
     }
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-    String currentGptSlotParams = ads.getGptParams(slot, "data-gpt-slot-params");
+    String currentGptSlotParams = ads.getSlotAttribute(slot, "data-gpt-slot-params");
 
     ads.verifyGptIframe(adUnit, slot, "gpt");
     Assertion.assertTrue(ads.areRubiconDfpParamsPresent(currentGptSlotParams, patternParamTier),
