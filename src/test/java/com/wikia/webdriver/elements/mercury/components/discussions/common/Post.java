@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.annotation.CheckForNull;
@@ -161,6 +162,22 @@ public class Post extends BasePageObject {
     wait.forElementVisible(upvoteButton);
     return upvoteButton.isDisplayed();
   }
+
+  public PostEntity clickFollowFirstPost() {
+    PostEntity post = findNewestPost();
+    post.clickFollow();
+    sleepForTwoSeconds();
+    return post;
+  }
+
+  private void sleepForTwoSeconds() {
+    try {
+      TimeUnit.SECONDS.sleep(2);
+    } catch (InterruptedException x) {
+      // no-op
+    }
+  }
+
 
   public String getPostDetailText() {
     return wait.forElementVisible(postDetails).getText();

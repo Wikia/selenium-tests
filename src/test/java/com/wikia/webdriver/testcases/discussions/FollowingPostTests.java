@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostActionsRow;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.elements.mercury.pages.discussions.AvailablePage;
@@ -25,10 +24,10 @@ import org.testng.annotations.Test;
 import java.util.function.Function;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
+@Test(groups = "discussions-following-post")
 public class FollowingPostTests extends NewTestTemplate {
 
   private static final String SIGN_IN_MODAL_SHOULD_APPEAR = "Sign in/Following modal dialog should appear.";
-  private static final String MODAL_SHOULD_NOT_BE_VISIBLE = "Sign in/Following modal dialog should not be visible after clicking ok button.";
   private static final String SHOULD_FOLLOW_POST = "User should be able follow post.";
   private static final String SHOULD_UNFOLLOW_POST = "User should be able unfollow post.";
   private static final String DESKTOP = "discussions-following-post-desktop";
@@ -144,11 +143,6 @@ public class FollowingPostTests extends NewTestTemplate {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
 
-    final PostActionsRow postActions = clickUnfollowOn(page);
-    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
-
-    clickFollowOn(page);
-    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
   }
 
   // User on desktop
@@ -215,11 +209,7 @@ public class FollowingPostTests extends NewTestTemplate {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
 
-    final PostActionsRow postActions = clickUnfollowOn(page);
-    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
-
-    clickFollowOn(page);
-    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
   }
 
   // Discussions Administrator on mobile
@@ -229,9 +219,20 @@ public class FollowingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanFollowPostOnReportedPostsPage() {
     createAndReportPostAsUserRemotely();
+    ReportedPostsAndRepliesPage page = new ReportedPostsAndRepliesPage().open();
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
+  }
 
-    final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
-    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+  private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(PageWithPosts page) {
+    clickFollowOn(page);
+    String postId = page.getPost().findNewestPost().findId();
+    Assertion.assertTrue(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
+  }
+
+  private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(PageWithPosts page) {
+    clickFollowOn(page);
+    String postId = page.getPost().findNewestPost().findId();
+    Assertion.assertFalse(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
   /**
@@ -243,9 +244,8 @@ public class FollowingPostTests extends NewTestTemplate {
   public void discussionsAdministratorOnMobileCanUnfollowPostOnReportedListPage() {
     final PostEntity.Data data = DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
     DiscussionsClient.using(User.USER, driver).reportPost(data);
-
-    final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
-    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
+    ReportedPostsAndRepliesPage page = new ReportedPostsAndRepliesPage().open();
+    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page);
   }
 
   // Discussions Administrator on desktop
@@ -255,9 +255,10 @@ public class FollowingPostTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanFollowPostOnReportedPostsPage() {
     createAndReportPostAsUserRemotely();
-
-    final PostActionsRow postActions = clickFollowOn(new ReportedPostsAndRepliesPage().open());
-    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+    ReportedPostsAndRepliesPage page = new ReportedPostsAndRepliesPage().open();
+    clickFollowOn(page);
+    String postId = page.getPost().findNewestPost().findId();
+    Assertion.assertTrue(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
   /**
@@ -269,9 +270,8 @@ public class FollowingPostTests extends NewTestTemplate {
   public void discussionsAdministratorOnDesktopCanUnfollowPostOnReportedListPage() {
     final PostEntity.Data data = DiscussionsClient.using(User.DISCUSSIONS_ADMINISTRATOR, driver).createPostWithUniqueData();
     DiscussionsClient.using(User.USER, driver).reportPost(data);
-
-    final PostActionsRow postActions = clickUnfollowOn(new ReportedPostsAndRepliesPage().open());
-    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
+    ReportedPostsAndRepliesPage page = new ReportedPostsAndRepliesPage().open();
+    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page);
   }
 
   // Test methods
@@ -280,39 +280,33 @@ public class FollowingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createPostAsUserRemotely();
 
     final AvailablePage page = navigator.apply(data);
-    page.getPost().findNewestPost().findPostActions().clickFollow();
+    clickFollowOn(page);
 
-    final SignInToFollowModalDialog modalDialog = page.getSignInToFollowModalDialog();
-    Assertion.assertEquals(modalDialog.getText(), SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT, SIGN_IN_MODAL_SHOULD_APPEAR);
-    modalDialog.clickOkButton();
-    Assertion.assertFalse(modalDialog.isVisible(), MODAL_SHOULD_NOT_BE_VISIBLE);
+    Assertion.assertEquals(page.getSignInToFollowModalDialog().getText(),
+      SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT, SIGN_IN_MODAL_SHOULD_APPEAR);
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed());
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
     return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
-  private PostActionsRow clickUnfollowOn(PageWithPosts page) {
-    return clickFollowOn(page);
-  }
-
-  private PostActionsRow clickFollowOn(PageWithPosts page) {
-    return page.getPost().findNewestPost().findPostActions()
-        .clickFollow();
+  private void clickFollowOn(PageWithPosts page) {
+    page.getPost().clickFollowFirstPost();
   }
 
   private void assertThatPostCanBeFollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
     final PostEntity.Data data = createPostAsUserRemotely();
 
-    final PostActionsRow postActions = clickFollowOn(navigator.apply(data));
-    Assertion.assertTrue(postActions.isFollowed(), SHOULD_FOLLOW_POST);
+    clickFollowOn(navigator.apply(data));
+    Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_FOLLOW_POST);
   }
 
   private void assertThatPostCanBeUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
     final PostEntity.Data data = createPostAsUserRemotely();
 
-    final PostActionsRow postActions = clickUnfollowOn(navigator.apply(data));
-    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_POST);
+    clickFollowOn(navigator.apply(data));
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
   private void createAndReportPostAsUserRemotely() {
