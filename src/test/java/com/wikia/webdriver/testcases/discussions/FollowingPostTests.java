@@ -143,6 +143,7 @@ public class FollowingPostTests extends NewTestTemplate {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
 
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
   }
 
   // User on desktop
