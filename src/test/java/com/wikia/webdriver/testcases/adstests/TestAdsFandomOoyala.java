@@ -15,11 +15,14 @@ import org.testng.annotations.Test;
 
 import java.awt.*;
 
+@Test(groups = "AdsFandomOoyala")
 public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
-  private static final String PLAY_BUTTON_SELECTOR = ".ooyala-video .oo-action-icon";
-  private static final String PLAYER_AD_SELECTOR = ".ooyala-video iframe[src*=imasdk]";
-  private static final String AUTOPLAY_PLAYERER_AD_SELECTOR =
-      ".ooyala-video[data-autoplay] iframe[src*=imasdk]";
+  private static final By PLAY_BUTTON_SELECTOR = By.cssSelector(".ooyala-video .oo-action-icon");
+  private static final By PLAYER_CONTAINER_SELECTOR
+      = By.cssSelector(".video[data-video-id='J1dGgwYTE6IWVacg3U0JEcVCDQUmKnX6']");
+  private static final By PLAYER_AD_SELECTOR = By.cssSelector(".ooyala-video iframe[src*=imasdk]");
+  private static final By AUTOPLAY_PLAYERER_AD_SELECTOR =
+      By.cssSelector(".ooyala-video[data-autoplay] iframe[src*=imasdk]");
 
   private static final String CLICK_TO_PLAY_PAGE = "the-best-movies-of-2017-so-far";
   private static final String AUTOPLAY_PAGE = "orphan-black-clones-names";
@@ -84,30 +87,29 @@ public class TestAdsFandomOoyala extends AdsFandomTestTemplate {
 
   public void testOoyalaClickToPlayPreroll(AdsFandomObject adsFandom) {
     Wait wait = new Wait(driver);
-    WebElement playButton = driver.findElement(By.cssSelector(PLAY_BUTTON_SELECTOR));
-    By adLayer = By.cssSelector(PLAYER_AD_SELECTOR);
+    WebElement playButton = driver.findElement(PLAY_BUTTON_SELECTOR);
 
     wait.forElementVisible(playButton);
+    adsFandom.scrollToPosition(PLAYER_CONTAINER_SELECTOR);
     playButton.click();
 
-    wait.forElementVisible(adLayer);
-    adsFandom.scrollToPosition(adLayer);
-    verifyColorAd(driver.findElement(adLayer), BLUE, AD_DURATION_SEC);
-    wait.forElementNotVisible(adLayer);
+    wait.forElementVisible(PLAYER_AD_SELECTOR);
+    adsFandom.scrollToPosition(PLAYER_AD_SELECTOR);
+    verifyColorAd(driver.findElement(PLAYER_AD_SELECTOR), BLUE, AD_DURATION_SEC);
+    wait.forElementNotVisible(PLAYER_AD_SELECTOR);
   }
 
   public void testOoyalaAutoplayPreroll(AdsFandomObject adsFandom) {
     Wait wait = new Wait(driver);
-    By autoplayAdLayer = By.cssSelector(AUTOPLAY_PLAYERER_AD_SELECTOR);
 
-    wait.forElementVisible(autoplayAdLayer);
-    adsFandom.scrollToPosition(autoplayAdLayer);
+    wait.forElementVisible(AUTOPLAY_PLAYERER_AD_SELECTOR);
+    adsFandom.scrollToPosition(AUTOPLAY_PLAYERER_AD_SELECTOR);
     verifyColorAd(
-        driver.findElement(autoplayAdLayer),
+        driver.findElement(AUTOPLAY_PLAYERER_AD_SELECTOR),
         BLUE,
         AD_DURATION_SEC
     );
-    wait.forElementNotVisible(autoplayAdLayer);
+    wait.forElementNotVisible(AUTOPLAY_PLAYERER_AD_SELECTOR);
   }
 
   private void verifyColorAd(WebElement element, Color color, int duration) {

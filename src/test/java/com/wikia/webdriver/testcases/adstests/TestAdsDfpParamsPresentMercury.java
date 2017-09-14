@@ -68,7 +68,7 @@ public class TestAdsDfpParamsPresentMercury extends MobileTestTemplate {
     }
 
     AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-    String currentGptSlotParams = ads.getGptParams(slot, "data-gpt-slot-params");
+    String currentGptSlotParams = ads.getSlotAttribute(slot, "data-gpt-slot-params");
     ads.verifyGptIframe(adUnit, slot, SRC_MOBILE);
     Assertion.assertTrue(ads.areRubiconDfpParamsPresent(currentGptSlotParams, patternParamTier),
         currentGptSlotParams + " does not contains " + patternParamTier);
