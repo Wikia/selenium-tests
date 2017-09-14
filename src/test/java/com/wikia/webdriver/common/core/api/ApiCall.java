@@ -7,10 +7,12 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.WebDriverException;
 
 import java.io.IOException;
@@ -47,9 +49,8 @@ public abstract class ApiCall {
 
   public void call() {
     try {
-      URL url = new URL(getURL());
       CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
-      HttpPost httpPost = getHtppPost(url);
+      HttpPost httpPost = new HttpPost(getURL());
       // set header
       if (getUser() != null) {
         httpPost.addHeader("X-Wikia-AccessToken", Helios.getAccessToken(getUser()));
@@ -59,23 +60,16 @@ public abstract class ApiCall {
         httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
       }
 
-      httpClient.execute(httpPost);
+      CloseableHttpResponse resp = httpClient.execute(httpPost);
 
-      PageObjectLogging.logInfo("CONTENT PUSH: ", "Content posted to: " + getURL());
+      PageObjectLogging.logInfo("CONTENT PUSH: ", "Content posted to: " + httpPost.toString());
+      PageObjectLogging.logInfo("CONTENT PUSH: ", "Response: " + EntityUtils.toString(resp.getEntity(), "UTF-8"));
     } catch (ClientProtocolException e) {
       PageObjectLogging.log("EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
     } catch (IOException e) {
       PageObjectLogging.log("IO EXCEPTION", ExceptionUtils.getStackTrace(e), false);
       throw new WebDriverException(ERROR_MESSAGE);
-    } catch (URISyntaxException e) {
-      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
-      throw new WebDriverException(ERROR_MESSAGE);
     }
-  }
-
-  public static HttpPost getHtppPost(URL url) throws URISyntaxException {
-    return new HttpPost(new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-        url.getPath(), url.getQuery(), url.getRef()));
   }
 }
