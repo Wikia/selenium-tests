@@ -21,7 +21,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final int VIDEO_DURATION_SEC = 30;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
-  private static final String ARTICLE_VIDEO_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
+  private static final String ARTICLE_VIDEO_SELECTOR = ".video-container .ooyala-article-video .innerWrapper .oo-player-skin";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
