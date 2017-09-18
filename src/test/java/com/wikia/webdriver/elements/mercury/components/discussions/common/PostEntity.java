@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
@@ -26,6 +27,10 @@ public class PostEntity {
 
   public boolean hasTopNote() {
     return null != findTopNoteElement();
+  }
+
+  public boolean hasImage() {
+    return post.findElement(By.cssSelector(".post-image-inner-image")).isDisplayed();
   }
 
   private WebElement findTopNoteElement() {
