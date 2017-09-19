@@ -39,8 +39,4 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();
   }
 
-  public int getEditorHeight() {
-    throw new UnsupportedOperationException("Not yet implemented.");
-  }
-
 }

@@ -28,6 +28,9 @@ import static com.wikia.webdriver.common.core.Assertion.assertFalse;
 public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   private static final User userWithPosts = User.USER_12;
+  private static final String GENERAL = "discussions-deleteAllPostsByUser";
+  private static final String DESKTOP = "discussions-deleteAllPostsByUserDesktop";
+  private static final String MOBILE = "discussions-deleteAllPostsByUserMobile";
   private String siteId;
 
   // FIXTURES
@@ -58,7 +61,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // GENERAL - no specific user permissions
 
-  @Test(groups = "discussions-deleteAllPostsByUserDesktop")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void clickDeleteAllDesktopDisplaysConfirmationDialog() {
@@ -66,7 +69,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     assertTrue(confirmationDialog.isVisible());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUserMobile")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void clickDeleteAllMobileDisplaysConfirmationDialog() {
@@ -74,7 +77,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     assertTrue(confirmationDialog.isVisible());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUserDesktop")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void clickCancelDeleteAllDesktopHidesConfirmationDialog() {
@@ -83,7 +86,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     assertFalse(new Post().findPostById(postId).isDeleted());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUserMobile")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void clickCancelDeleteAllMobileHidesConfirmationDialog() {
@@ -94,7 +97,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // ANON
 
-  @Test(groups = "discussions-deleteAllPostsByUserDesktop")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonDesktopDeleteAllOptionNotVisible() {
@@ -103,7 +106,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     cleanUp(post);
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUserMobile")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonMobileDeleteAllOptionNotVisible() {
@@ -114,7 +117,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // REGULAR USER
 
-  @Test(groups = "discussions-deleteAllPostsByUserDesktop")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void regularUserDesktopDeleteAllOptionNotVisible() {
@@ -123,7 +126,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     cleanUp(post);
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUserMobile")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void regularUserMobileDeleteAllOptionNotVisible() {
@@ -134,14 +137,14 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // VSTF
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.VSTF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void vstfUserDesktopCanDeleteAllPosts() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.VSTF)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void vstfUserMobileCanDeleteAllPosts() {
@@ -150,14 +153,14 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // HELPER
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.HELPER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void helperUserDesktopCanDeleteAllPosts() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.HELPER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void helperUserMobileCanDeleteAllPosts() {
@@ -166,14 +169,14 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // STAFF
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserDesktopCanDeleteAllPosts() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.HELPER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserMobileCanDeleteAllPosts() {
@@ -182,7 +185,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
 
   // MODERATOR
 
-  @Test(groups = "discussions-deleteAllPostsByUserDesktop")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_MESSAGING)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopDeleteAllOptionNotVisibleOnDifferentWiki() {
@@ -191,7 +194,7 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     cleanUp(post);
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUserMobile")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR, onWikia = MercuryWikis.DISCUSSIONS_MESSAGING)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void modUserMobileDeleteAllOptionNotVisibleOnDifferentWiki() {
@@ -200,14 +203,14 @@ public class DeleteAllPostsByUserTests extends NewTestTemplate {
     cleanUp(post);
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void modUserDesktopCanDeleteAllPostsOnModdedWiki() {
     assertTrue(deleteAllAndReturnFirstDesktop().isDeleted());
   }
 
-  @Test(groups = "discussions-deleteAllPostsByUser")
+  @Test(groups = GENERAL)
   @Execute(asUser = User.HELPER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void modUserMobileCanDeleteAllPostsOnModdedWiki() {

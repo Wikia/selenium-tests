@@ -22,7 +22,6 @@ import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_EMPTY)
 @Test(groups = {"discussions-zero-error-state"})
-
 public class ZeroErrorStateTests extends NewTestTemplate {
 
   private static final String MESSAGE_1 = "The page you are looking for doesn't exist.\n";
@@ -32,43 +31,46 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   private static final String FOLLOW_MESSAGE_HEADER_TEXT = "Welcome to your Following tab.";
   private static final String FOLLOW_MESSAGE_CONTENT_TEXT = "Hit the “Follow” icon at the bottom of any post to fill your list with discussions that matter most to you. We’ll put them here and notify you of new activity.";
   private static final String FOLLOW_MESSAGE_BUTTON_TEXT = "FIND POSTS TO FOLLOW";
-  public static final String NO_REPLIES_ICON_MESSAGE = "No replies icon should be visible.";
-  public static final String NO_REPLIES_UNDER_POST_MESSAGE = "There should be no replies on new post (without replies).";
+  private static final String NO_REPLIES_ICON_MESSAGE = "No replies icon should be visible.";
+  private static final String NO_REPLIES_UNDER_POST_MESSAGE = "There should be no replies on new post (without replies).";
+
+  private static final String DESKTOP = "discussions-zero-error-state-desktop";
+  private static final String MOBILE = "discussions-zero-error-state-mobile";
 
   /**
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(enabled = false, groups = "discussions-anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage")
+  @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "SOC-3667")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @RelatedIssue(issueID = "SOC-3667")
   public void anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
-  @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
 
-  @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
-  @Test(groups = "discussions-anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
@@ -79,48 +81,39 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
+
+  @Test(groups = MOBILE, enabled = false)
   @RelatedIssue(issueID = "SOC-3667")
-  @Test(enabled = false, groups = "discussions-anonUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage")
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-anonUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
-  @Test(groups = "discussions-anonOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
 
-  @Test(groups = "discussions-anonOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
-  @Test(groups = "discussions-anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.ANONYMOUS, onWikia = MercuryWikis.DISCUSSIONS_5)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
@@ -129,42 +122,42 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    * STAFF USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnDesktopSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnDesktopSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyFollowPage")
+  @Test(groups = DESKTOP)
   @Execute(asUser = User.STAFF)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void staffUserOnDesktopSeesProperMessageWhenOpensEmptyFollowPage() {
@@ -175,56 +168,44 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    * STAFF USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-staffUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
 
-  @Test(groups = "discussions-staffUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyPostsListPage() {
     userSeesProperMessageWhenOpensEmptyPostsListPage();
   }
 
-  @Test(groups = "discussions-staffUserOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage() {
     userOnMobileSeesProperMessageWhenOpensNonExistingUserPostsPage();
   }
 
-  @Test(groups = "discussions-staffUserOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage() {
     userOnMobileSeesProperMessageWhenOpensEmptyPostDetailsPage();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensPostDetailsPageWithoutReplies")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF, onWikia = MercuryWikis.DISCUSSIONS_5)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensPostDetailsPageWithoutReplies() {
     userSeesProperMessageWhenOpensPostDetailsPageWithoutReplies();
   }
 
-  @Test(groups = "discussions-staffUserOnDesktopSeesProperMessageWhenOpensEmptyFollowPage")
+  @Test(groups = MOBILE)
   @Execute(asUser = User.STAFF)
-  @InBrowser(
-      browser = Browser.CHROME,
-      emulator = Emulator.GOOGLE_NEXUS_5)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void staffUserOnMobileSeesProperMessageWhenOpensEmptyFollowPage() {
     userSeesProperMessageWhenOpensEmptyFollowPage();
   }
