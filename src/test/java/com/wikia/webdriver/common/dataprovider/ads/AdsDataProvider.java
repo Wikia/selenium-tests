@@ -269,20 +269,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpRubiconParamsSynthetic() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/RubiconFastlane",
-            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_project43//article",
-            "TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":\\[\"2_tier(NONE|PREBID|\\d{4})\",\"57_tier(NONE|PREBID|\\d{4})\"\\].*"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
         {
