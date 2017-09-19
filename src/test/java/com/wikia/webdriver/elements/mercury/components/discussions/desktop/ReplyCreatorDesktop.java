@@ -49,8 +49,4 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
   }
 
-  @Override
-  public int getEditorHeight() {
-    return wait.forElementVisible(editor).getSize().getHeight();
-  }
 }

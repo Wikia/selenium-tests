@@ -44,7 +44,6 @@ public class SharingTests extends NewTestTemplate {
    * ANONS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
@@ -54,7 +53,6 @@ public class SharingTests extends NewTestTemplate {
         "Displayed social networks are different than expected.");
   }
 
-  @Test(groups = "discussions-anonUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
@@ -68,7 +66,6 @@ public class SharingTests extends NewTestTemplate {
    * ANONS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostListPage() {
@@ -78,7 +75,6 @@ public class SharingTests extends NewTestTemplate {
         "Displayed social networks are different than expected.");
   }
 
-  @Test(groups = "discussions-anonUserOnDesktopCanSeeSocialNetworkIcons")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSeeSocialNetworkIconsOnPostDetailsPage() {
@@ -92,7 +88,6 @@ public class SharingTests extends NewTestTemplate {
    * LOGGED IN USERS ON MOBILE SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostListPage() {
@@ -102,7 +97,6 @@ public class SharingTests extends NewTestTemplate {
         "Displayed social networks are different than expected.");
   }
 
-  @Test(groups = "discussions-loggedInUserOnMobileCanSeeSocialNetworkIcons")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSeeSocialNetworkIconsOnPostDetailsPage() {
@@ -116,7 +110,6 @@ public class SharingTests extends NewTestTemplate {
    * LOGGED IN USERS ON DESKTOP SECTION
    */
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostList() {
@@ -126,7 +119,6 @@ public class SharingTests extends NewTestTemplate {
         "Displayed social networks are different than expected.");
   }
 
-  @Test(groups = "discussions-loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedInUserOnDesktopCanSeeSocialNetworkIconsOnPostDetails() {
