@@ -67,7 +67,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleVideo() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, VIDEO_DURATION_SEC);
+    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, 5);
   }
 
   public void verifyLightboxAd() {
