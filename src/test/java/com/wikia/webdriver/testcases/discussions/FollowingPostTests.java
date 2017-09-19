@@ -136,9 +136,9 @@ public class FollowingPostTests extends NewTestTemplate {
    * By default all posts on "Followed" tab are followed.
    */
   @Test(groups = MOBILE, enabled = false)
+  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();
@@ -203,9 +203,9 @@ public class FollowingPostTests extends NewTestTemplate {
    * By default all posts on "Followed" tab are followed.
    */
   @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   public void userOnDesktopCanFollowAndUnfollowPostOnFollowedPostsPage() {
     createPostAsUserRemotely();
     final FollowPage page = FollowPage.open();

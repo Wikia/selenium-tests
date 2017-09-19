@@ -42,9 +42,9 @@ public class ZeroErrorStateTests extends NewTestTemplate {
    */
 
   @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "SOC-3667")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  @RelatedIssue(issueID = "SOC-3667")
   public void anonUserOnDesktopSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
@@ -83,9 +83,9 @@ public class ZeroErrorStateTests extends NewTestTemplate {
 
 
   @Test(groups = MOBILE, enabled = false)
+  @RelatedIssue(issueID = "SOC-3667")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @RelatedIssue(issueID = "SOC-3667")
   public void anonUserOnMobileSeesProperMessageWhenOpensEmptyReportedPostsPage() {
     userSeesProperMessageWhenOpensEmptyReportedPostsPage();
   }
