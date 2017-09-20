@@ -15,7 +15,7 @@ import java.time.Duration;
 
 public class AdsOoyalaObject extends AdsBaseObject {
 
-  private static final Color GREEN = new Color(20, 255, 13);
+  private static final Color GREEN = new Color(0, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
   private static final int AD_DURATION_SEC = 30;
   private static final int VIDEO_DURATION_SEC = 30;
@@ -67,7 +67,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyArticleVideo() {
-    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, 5);
+    verifyFeaturedVideoElement(ARTICLE_VIDEO_SELECTOR, GREEN, VIDEO_DURATION_SEC);
   }
 
   public void verifyLightboxAd() {
