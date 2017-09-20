@@ -56,7 +56,7 @@ public class NavigationMercuryTests extends NavigationTests {
     );
   }
 
-  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn")
+  @Test(groups = "mercury_navigation_navigationElementsUserLoggedIn", invocationCount = 5)
   @Execute(asUser = User.USER_3)
   @RelatedIssue(issueID = "QAART-1042")
   public void mercury_navigation_navigationElementsUserLoggedIn() {
