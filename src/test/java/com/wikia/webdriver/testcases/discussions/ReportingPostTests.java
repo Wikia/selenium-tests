@@ -24,7 +24,6 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_1)
-@Test(groups = "discussions-reporting-posts")
 public class ReportingPostTests extends NewTestTemplate {
 
   private static final String DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST =
@@ -43,10 +42,17 @@ public class ReportingPostTests extends NewTestTemplate {
       "Anonymous user should not see deleted post.";
   private static final String NOT_VISIBLE_DELETED_POST_MESSAGE =
       "User should not see deleted post.";
+  
+  private static final String ANON_MOBILE = "discussions-reporting-anon-mobile";
+  private static final String ANON_DESKTOP = "discussions-reporting-anon-desktop";
+  private static final String USER_MOBILE = "discussions-reporting-user-mobile";
+  private static final String USER_DESKTOP = "discussions-reporting-user-desktop";
+  private static final String MOD_MOBILE = "discussions-reporting-moderator-mobile";
+  private static final String MOD_DESKTOP = "discussions-reporting-moderator-desktop";
 
   // Anonymous user on mobile
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostsListPage() {
@@ -54,7 +60,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnPostDetailsPage() {
@@ -66,7 +72,7 @@ public class ReportingPostTests extends NewTestTemplate {
     return new PostDetailsPage().open(cretePostRemotelyAsFirstUser().getId());
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotReportPostOnUserPostsPage() {
@@ -74,7 +80,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostsListPage() {
@@ -83,7 +89,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnPostDetailsPage() {
@@ -92,7 +98,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeReportedPostOnUserPostsPage() {
@@ -101,7 +107,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnPostsListPage() {
@@ -111,7 +117,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "IRIS-4867")
@@ -122,7 +128,7 @@ public class ReportingPostTests extends NewTestTemplate {
                ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserMobileReporting")
+  @Test(groups = ANON_MOBILE)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
@@ -134,7 +140,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   // Anonymous user on desktop
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotReportPostOnPostsListPage() {
@@ -142,7 +148,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(isReportPostOptionAvailableOn(page), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotReportPostOnPostDetailsPage() {
@@ -151,7 +157,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotReportPostOnUserPostsPage() {
@@ -163,7 +169,7 @@ public class ReportingPostTests extends NewTestTemplate {
     return new UserPostsPage().open(User.USER.getUserId());
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostsListPage() {
@@ -172,7 +178,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotSeeReportedPostOnPostDetailsPage() {
@@ -181,7 +187,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotSeeReportedPostOnUserPostsPage() {
@@ -190,7 +196,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(postHasReportedIndicator(page), NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
@@ -201,7 +207,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNull(post, ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @RelatedIssue(issueID = "IRIS-4867")
@@ -212,7 +218,7 @@ public class ReportingPostTests extends NewTestTemplate {
                ANON_NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-anonUserDesktopReporting")
+  @Test(groups = ANON_DESKTOP)
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
@@ -224,7 +230,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   // User on mobile
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostsListPage() {
@@ -234,7 +240,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnPostDetailsPage() {
@@ -244,7 +250,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportPostOnUserPostsPage() {
@@ -255,7 +261,7 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeDeletedPostOnPostsListPage() {
@@ -266,7 +272,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @RelatedIssue(issueID = "IRIS-4867")
@@ -277,7 +283,7 @@ public class ReportingPostTests extends NewTestTemplate {
                NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanNotSeeDeletedPostOnUserPostsPage() {
@@ -287,7 +293,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostsListPage() {
@@ -301,7 +307,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnPostDetailsPage() {
@@ -319,14 +325,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCanReportApprovedPostOnUserPostsPage() {
     userCanReportApprovedPostOnUserPostsPage();
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanReportPostOnPostsListPage() {
@@ -336,7 +342,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanReportPostOnPostDetailsPage() {
@@ -346,7 +352,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanReportPostOnUserPostsPage() {
@@ -356,14 +362,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostsListPage() {
     userCannotReReportPostOnPostListPage();
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotReReportPostOnPostsListPage() {
@@ -379,14 +385,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotReReportPostOnPostDetailsPage() {
     userCannotReReportPostOnPostDetailPage();
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnPostDetailsPage() {
@@ -403,14 +409,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotReReportPostOnUserPostsPage() {
     userCannotReReportPostOnUserPostPage();
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotReReportPostOnUserPostsPage() {
@@ -427,7 +433,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertFalse(isReportPostOptionAvailableFor(postEntity), NO_REPORT_POST_OPTION_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotSeeDeletedPostOnPostsListPage() {
@@ -437,7 +443,7 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNull(postEntity, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   @RelatedIssue(issueID = "IRIS-4867")
@@ -448,7 +454,7 @@ public class ReportingPostTests extends NewTestTemplate {
                NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanNotSeeDeletedPostOnUserPostsPage() {
@@ -458,14 +464,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNull(post, NOT_VISIBLE_DELETED_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_2)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
     userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost();
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostsListPageAndCanReportThatPost() {
@@ -480,14 +486,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_2)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
     userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost();
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnPostDetailsPageAndCanReportThatPost() {
@@ -502,14 +508,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_2)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
     userCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost();
   }
 
-  @Test(groups = "discussions-loggedInUsersMobileReporting")
+  @Test(groups = USER_MOBILE)
   @Execute(asUser = User.USER_2)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSeeReportedIndicatorOnPostsReportedByAnotherUserOnUserPostsPageAndCanReportThatPost() {
@@ -526,7 +532,7 @@ public class ReportingPostTests extends NewTestTemplate {
 
   // Third user on desktop
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanReportApprovedPostOnPostsListPage() {
@@ -540,14 +546,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanReportApprovedPostOnPostDetailsPage() {
     userCanReportApprovedPostOnPostDetailsPage();
   }
 
-  @Test(groups = "discussions-loggedInUsersDesktopReporting")
+  @Test(groups = USER_DESKTOP)
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanReportApprovedPostOnUserPostsPage() {
@@ -565,14 +571,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postCanBeReported(postEntity), CAN_REPORT_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Test(groups = MOD_DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void moderatorOnDesktopCanSeeReportedPostOnPostListPage() {
     moderatorCanSeeReportedPostOnPostListPage();
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Test(groups = MOD_MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReportedPostOnPostListPage() {
@@ -588,14 +594,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Test(groups = MOD_DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void moderatorOnDesktopCanApproveReportedPostOnPostDetailsPage() {
     moderatorCanApproveReportedPostOnPostDetailsPage();
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Test(groups = MOD_MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanApproveReportedPostOnPostDetailsPage() {
@@ -615,14 +621,14 @@ public class ReportingPostTests extends NewTestTemplate {
             NO_REPORTED_INDICATOR_ON_POST_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Test(groups = MOD_DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void moderatorOnDesktopCanSeeReportedPostOnUserPostsPage() {
     moderatorCanSeeReportedPostOnUserPostsPage();
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Test(groups = MOD_MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReportedPostOnUserPostsPage() {
@@ -637,14 +643,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertTrue(postEntity.isReported(), REPORTED_INDICATOR_NOT_VISIBLE_FOR_USER_MESSAGE);
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Test(groups = MOD_MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanNotSeeApprovedPostOnReportedPostsPage() {
     moderatorCanNotSeeApprovedPostOnReportedPostsPage();
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Test(groups = MOD_DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void moderatorOnDesktopCanNotSeeApprovedPostOnReportedPostsPage() {
@@ -662,14 +668,14 @@ public class ReportingPostTests extends NewTestTemplate {
   }
 
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Test(groups = MOD_MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanSeeReReportedPostOnReportedPostsPage() {
     moderatorCanSeeReReportedPostOnReportedPostsPage();
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Test(groups = MOD_DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void moderatorOnDesktopCanSeeReReportedPostOnReportedPostsPage() {
@@ -686,14 +692,14 @@ public class ReportingPostTests extends NewTestTemplate {
     assertNotNull(post, DISCUSSIONS_MODERATOR_SHOULD_SEE_RE_REPORTED_POST);
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorMobileReporting")
+  @Test(groups = MOD_MOBILE)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void moderatorOnMobileCanDeleteReportedPostOnPostDetailsPage() {
     moderatorCanDeleteReportedPostOnPostDetailsPage();
   }
 
-  @Test(groups = "discussions-loggedInDiscussionsModeratorDesktopReporting")
+  @Test(groups = MOD_DESKTOP)
   @Execute(asUser = User.DISCUSSIONS_MODERATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void moderatorOnDesktopCanDeleteReportedPostOnPostDetailsPage() {

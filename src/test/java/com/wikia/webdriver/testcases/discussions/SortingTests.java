@@ -20,53 +20,29 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-sorting"})
 public class SortingTests extends NewTestTemplate {
 
-  /**
-   * ANONS ON MOBILE SECTION
-   */
-
-  @Test(groups = "discussions-anonUserOnMobileCanSortPostsList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }
 
-  /**
-   * ANONS ON DESKTOP SECTION
-   */
-
-  @Test(groups = "discussions-anonUserOnDesktopCanSortPostList")
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSortPostList() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
 
-  /**
-   * LOGGED IN USERS ON MOBILE SECTION
-   */
-
-  @Test(groups = "discussions-loggedInUserOnMobileCanSortPostsList")
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown();
   }
 
-  /**
-   * LOGGED IN USERS ON DESKTOP SECTION
-   */
-
-  @Test(groups = "discussions-loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab")
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
     userCanSwitchBetweenLatestAndTrendingTab();
   }
-
-  /**
-   * TESTING METHODS SECTION
-   */
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
     PostsListPage page = new PostsListPage().open();
