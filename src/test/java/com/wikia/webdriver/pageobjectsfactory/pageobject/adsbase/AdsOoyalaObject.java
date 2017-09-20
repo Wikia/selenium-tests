@@ -15,13 +15,13 @@ import java.time.Duration;
 
 public class AdsOoyalaObject extends AdsBaseObject {
 
-  private static final Color GREEN = new Color(20, 255, 13);
+  private static final Color GREEN = new Color(0, 255, 13);
   private static final Color BLUE = new Color(0, 1, 253);
   private static final int AD_DURATION_SEC = 30;
   private static final int VIDEO_DURATION_SEC = 30;
 
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
-  private static final String ARTICLE_VIDEO_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
+  private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
   private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
