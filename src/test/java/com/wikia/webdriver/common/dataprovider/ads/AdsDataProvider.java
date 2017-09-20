@@ -589,16 +589,16 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; RubiconFastlane"
+            "Evolve2; RemnantGpt"
         },
         {
             "project43",

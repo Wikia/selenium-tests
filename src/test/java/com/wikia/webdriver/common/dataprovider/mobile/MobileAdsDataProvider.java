@@ -406,16 +406,16 @@ public class MobileAdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.MOBILE_TOP_LB,
             "DirectGptMobile; RemnantGptMobile"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.MOBILE_TOP_LB,
-            "DirectGptMobile; RemnantGptMobile; RubiconFastlane"
+            "Evolve2; RemnantGptMobile"
         }
     };
   }
