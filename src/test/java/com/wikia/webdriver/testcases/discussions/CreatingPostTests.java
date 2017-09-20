@@ -115,13 +115,6 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
-    assertThatUserCanClickPostAndGoToPostDetailsPage();
-  }
-
   /*
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
@@ -172,12 +165,6 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = DESKTOP)
-  @Execute(asUser = User.USER)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
-    assertThatUserCanClickPostAndGoToPostDetailsPage();
-  }
 
   /**
    * TESTING METHODS SECTION
@@ -185,29 +172,19 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickOkButtonInSignInDialog();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickSignInButtonInSignInDialog();
-
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
   }
 
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickOkButtonInSignInDialog();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickSignInButtonInSignInDialog();
-
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
 
@@ -269,39 +246,6 @@ public class CreatingPostTests extends NewTestTemplate {
     postsCreator.addDescriptionWith(new URL(WIKIA_URL));
 
     return text;
-  }
-
-  private PostEntity submitAndWaitForPostToAppear(final PostsCreator postsCreator, final PostsListPage page, final String description) {
-    postsCreator.clickSubmitButton();
-
-    return page.getPost()
-        .waitForPostToAppearWith(description)
-        .findNewestPost();
-  }
-
-  private void assertThatPostWasAddedWith(final PostEntity postEntity, final String description,
-      final String categoryName) {
-    if (null != postEntity) {
-      Assertion.assertStringContains(postEntity.findTimestamp(), "now");
-      Assertion.assertEquals(postEntity.findDescription(), description);
-      Assertion.assertStringContains(postEntity.findCategory(), categoryName);
-    } else {
-      Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
-    }
-  }
-
-  private void assertThatUserCanClickPostAndGoToPostDetailsPage() {
-    final PostEntity post = new PostsListPage().open().getPost().findNewestPost();
-
-    final String postDetailsUrl = post.findLinkToPostDetails();
-
-    post.click();
-
-    new Transitions(driver).waitForPostDetailsPageTransition();
-
-    final String url = driver.getCurrentUrl();
-    Assertion.assertTrue(PostDetailsPage.is(url));
-    Assertion.assertTrue(url.endsWith(postDetailsUrl));
   }
 
   private PostEntity.Data createNaughtyStringsPostRemotely(User user) {

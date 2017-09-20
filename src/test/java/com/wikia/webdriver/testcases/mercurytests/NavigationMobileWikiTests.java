@@ -25,6 +25,14 @@ public class NavigationMobileWikiTests extends NavigationTests {
     );
   }
 
+  @Test(groups = "mercury_navigation_openWikiWithManyItemsInLocalNav")
+  @Execute(onWikia = "agas")
+  public void mercury_navigation_openWikiWithManyItemsInLocalNav() {
+    super.mercury_navigation_openAndCloseNavigationAndItsSubMenu(
+        new ArticlePage().open(MercurySubpages.MAIN_PAGE)
+    );
+  }
+
   @Test(groups = "mercury_navigation_resetNavigationState")
   public void mercury_navigation_resetNavigationState() {
     super.mercury_navigation_resetNavigationState(

@@ -1,48 +1,33 @@
 package com.wikia.webdriver.common.core.api;
 
-import java.io.File;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.openqa.selenium.WebDriverException;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.TestContext;
-import com.wikia.webdriver.common.core.XMLReader;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.core.url.UrlBuilder;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+@lombok.RequiredArgsConstructor
 public class ArticleContent extends ApiCall {
-
-  private static String secret;
   private String baseURL = new UrlBuilder().getUrlForWiki(Configuration.getWikiName())
-      + "/wikia.php?controller=Wikia\\Helios\\SampleController&method=edit&title=";
+      + "/api.php";
   private ArrayList<BasicNameValuePair> params = new ArrayList<>();
   private User user = User.STAFF;
-
-  public ArticleContent() {
-    File configFile = new File(Configuration.getCredentialsFilePath());
-    if (StringUtils.isBlank(secret)) {
-      secret = XMLReader.getValue(configFile, "edit_controller.secret");
-    }
-    this.params.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
-    this.params.add(new BasicNameValuePair("secret", secret));
-  }
 
   /**
    * Push content, overriding a default user
    * @param user
    */
   public ArticleContent(User user) {
-    File configFile = new File(Configuration.getCredentialsFilePath());
-    if (StringUtils.isBlank(secret)) {
-      secret = XMLReader.getValue(configFile, "edit_controller.secret");
-    }
-    this.params.add(new BasicNameValuePair("summary", "SUMMARY_QM"));
-    this.params.add(new BasicNameValuePair("secret", secret));
-
     this.user = user;
   }
 
@@ -62,8 +47,20 @@ public class ArticleContent extends ApiCall {
   }
 
   public void push(String text, String articleTitle) {
-    URL_STRING = baseURL + articleTitle;
-    params.add(new BasicNameValuePair("text", text));
+    String editToken = new EditToken(user).getEditToken();
+    try {
+      URL_STRING = new URIBuilder(baseURL)
+          .setParameter("text", text)
+          .setParameter("summary", "SUMMARY_QM")
+          .setParameter("title", articleTitle)
+          .setParameter("action", "edit")
+          .setParameter("format", "json")
+          .setParameter("token", editToken)
+          .build().toASCIIString();
+    } catch (URISyntaxException e) {
+      PageObjectLogging.log("URI_SYNTAX EXCEPTION", ExceptionUtils.getStackTrace(e), false);
+      throw new WebDriverException("Failed to build edit API URL");
+    }
     call();
   }
 

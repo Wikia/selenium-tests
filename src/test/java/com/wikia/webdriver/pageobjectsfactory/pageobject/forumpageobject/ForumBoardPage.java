@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.api.ArticleContent;
+import com.wikia.webdriver.common.core.api.ForumBoardContent;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -41,7 +41,7 @@ public class ForumBoardPage extends BasePageObject {
 
   /**
    * Navigate to forum board width specified title
-   * 
+   *
    * @param forumBoardTitle
    * @return
    */
@@ -56,8 +56,7 @@ public class ForumBoardPage extends BasePageObject {
     String content = String.format("%s%d", PageContent.ARTICLE_TEXT, DateTime.now().getMillis());
     String boardName = String.format("%s%d", "ForumBoard", DateTime.now().getMillis());
 
-    new ArticleContent(user).push(content,
-        String.format("%s:%s", URLsContent.FORUM_BOARD_NAMESPACE, boardName));
+    new ForumBoardContent(user, boardName, content).call();
 
     try {
       Thread.sleep(5000);
