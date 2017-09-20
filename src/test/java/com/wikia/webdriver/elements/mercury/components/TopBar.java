@@ -49,10 +49,10 @@ public class TopBar extends BasePageObject {
   public Navigation openNavigation() {
     PageObjectLogging.logInfo("Open navigation");
     wait.forElementClickable(hamburgerIcon);
-    int hamburgerHeight = hamburgerIcon.getSize().height;
+    int offsetToBottom = (int) Math.floor(hamburgerIcon.getSize().height / 2);
 
-    Actions act = new Actions(driver);
-    act.moveToElement(hamburgerIcon).moveByOffset(0,(hamburgerHeight/2)-2).click().perform();
+    Actions action = new Actions(driver);
+    action.moveToElement(hamburgerIcon).moveByOffset(0, offsetToBottom).click().perform();
 
     PageObjectLogging.logInfo("Navigation is opened");
     wait.forElementVisible(navMenu);
