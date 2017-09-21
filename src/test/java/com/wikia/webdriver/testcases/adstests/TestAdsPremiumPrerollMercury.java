@@ -21,7 +21,7 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyArticleAd();
-    wikiPage.verifyArticleVideo();
+    wikiPage.verifyMobileArticleVideo();
   }
 
   @Test(
@@ -32,7 +32,7 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
   public void adsPremiumPrerollMercuryNoAds(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?noads=1");
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.verifyArticleVideo();
+    wikiPage.verifyMobileArticleVideo();
   }
 
 }
