@@ -552,13 +552,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] amazonSites() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Amazon"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] prebidCustomAdapter() {
     return new Object[][]{
         {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
