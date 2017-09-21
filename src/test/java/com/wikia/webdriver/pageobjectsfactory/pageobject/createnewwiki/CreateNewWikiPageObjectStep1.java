@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   public void selectLanguage(String lang) {
     wait.forElementClickable(wikiLanguageDropdown);
-    wikiLanguageDropdown.click();
+    new Actions(driver).moveToElement(wikiLanguageDropdown).perform();
 
     List<WebElement> langList = wikiLanguageList.findElements(By.cssSelector("li:not(.spacer)"));
     String langSelector = lang + ":";
