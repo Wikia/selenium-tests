@@ -83,7 +83,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyLightboxVideo() {
     verifyColorAd(lightboxVideo, GREEN_OOYALA_3, VIDEO_DURATION_SEC);
-    logMessage(GREEN_OOYALA_4, VIDEO_DURATION_SEC);
+    logMessage(GREEN_OOYALA_3, VIDEO_DURATION_SEC);
   }
 
   private void verifyFeaturedVideoElement(By selector, Color color, int duration) {
