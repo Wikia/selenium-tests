@@ -42,10 +42,6 @@ public class AutoplayVuap {
   private boolean mobile;
 
   public AutoplayVuap(WikiaWebDriver driver, String slotSelector, By adIframeSelector, Boolean mobile) {
-    // Quick hack for now
-    if (!slotSelector.startsWith("#")) {
-      slotSelector = "#" + slotSelector;
-    }
     this.driver = driver;
     this.wait = new Wait(driver);
 
