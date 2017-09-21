@@ -29,16 +29,8 @@ public class AdsFandomObject extends AdsBaseObject {
   public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
 
-    scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
+    scrollToSelector(AdsFandomContent.getGptSlotSelector(slotName));
     verifyAdVisibleInSlot(selector, slots(slotName));
-  }
-
-  public void scrollTo(String cssSelector) {
-    jsActions.scrollToElement(driver.findElement(By.cssSelector(cssSelector)));
-  }
-
-  public void scrollToFeed() {
-    scrollTo(FANDOM_FEED_SELECTOR);
   }
 
   public void scrollToSlot(String slotId) {

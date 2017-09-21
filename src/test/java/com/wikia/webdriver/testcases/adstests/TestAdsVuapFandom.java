@@ -207,7 +207,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
     fandomPage.triggerOnScrollSlots();
     AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
-    fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
+    fandomPage.scrollToPosition(AdsFandomContent.getGptSlotSelector(slotName));
     return videoFanTakeover;
   }
 }

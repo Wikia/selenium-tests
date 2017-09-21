@@ -38,18 +38,18 @@ public class AdsFandomContent {
 
   static {
     GPT_SLOT_SELECTORS = new HashMap<>();
-    GPT_SLOT_SELECTORS.put(TOP_LEADERBOARD, "gpt-top-leaderboard");
-    GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD, "gpt-bottom-leaderboard");
-    GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_DESKTOP, "gpt-bottom-leaderboard-desktop");
-    GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_MOBILE, "gpt-bottom-leaderboard-mobile");
-    GPT_SLOT_SELECTORS.put(TOP_BOXAD, "gpt-top-boxad");
-    GPT_SLOT_SELECTORS.put(TOP_BOXAD_DESKTOP, "gpt-top-boxad-desktop");
-    GPT_SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "gpt-top-boxad-mobile");
-    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD, "gpt-incontent-boxad");
-    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_DESKTOP, "gpt-incontent-boxad-desktop");
-    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_MOBILE, "gpt-incontent-boxad-mobile");
-    GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "gpt-bottom-boxad");
-    GPT_SLOT_SELECTORS.put(FEED_BOXAD, "gpt-feed-boxad");
+    GPT_SLOT_SELECTORS.put(TOP_LEADERBOARD, "#gpt-top-leaderboard");
+    GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD, "#gpt-bottom-leaderboard");
+    GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_DESKTOP, "#gpt-bottom-leaderboard-desktop");
+    GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD_MOBILE, "#gpt-bottom-leaderboard-mobile");
+    GPT_SLOT_SELECTORS.put(TOP_BOXAD, "#gpt-top-boxad");
+    GPT_SLOT_SELECTORS.put(TOP_BOXAD_DESKTOP, "#gpt-top-boxad-desktop");
+    GPT_SLOT_SELECTORS.put(TOP_BOXAD_MOBILE, "#gpt-top-boxad-mobile");
+    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD, "#gpt-incontent-boxad");
+    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_DESKTOP, "#gpt-incontent-boxad-desktop");
+    GPT_SLOT_SELECTORS.put(INCONTENT_BOXAD_MOBILE, "#gpt-incontent-boxad-mobile");
+    GPT_SLOT_SELECTORS.put(BOTTOM_BOXAD, "#gpt-bottom-boxad");
+    GPT_SLOT_SELECTORS.put(FEED_BOXAD, "#gpt-feed-boxad");
   }
 
   private AdsFandomContent() {
