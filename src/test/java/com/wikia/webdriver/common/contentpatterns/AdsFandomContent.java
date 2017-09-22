@@ -27,6 +27,10 @@ public class AdsFandomContent {
 
   static {
     GPT_SLOT_SELECTORS = new HashMap<>();
+    // Select the slots by the ID prefix, so that all of the following match:
+    //   #gpt-top-leaderboard          <- the most common case
+    //   #gpt-top-leaderboard-desktop  <- when desktop and mobile slots are
+    //   #gpt-top-leaderboard-mobile      put to different places in DOM
     GPT_SLOT_SELECTORS.put(TOP_LEADERBOARD, "[id^=\"gpt-top-leaderboard\"]");
     GPT_SLOT_SELECTORS.put(BOTTOM_LEADERBOARD, "[id^=\"gpt-bottom-leaderboard\"]");
     GPT_SLOT_SELECTORS.put(TOP_BOXAD, "[id^=\"gpt-top-boxad\"]");
