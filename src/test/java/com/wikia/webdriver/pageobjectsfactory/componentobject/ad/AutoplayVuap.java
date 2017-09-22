@@ -78,7 +78,7 @@ public class AutoplayVuap {
   public void play() {
     if (isPausedWithOverlay()) {
       togglePause();
-    } else if( !this.mobile ) {
+    } else if (!this.mobile) {
       clickOnArea(2);
     } else {
       clickOnArea(4);
@@ -126,11 +126,9 @@ public class AutoplayVuap {
   }
 
   private void clickElementInsideAd(By selector) {
-    usingAdFrame(() -> {
-      // It need to be clicked by JS, because our templates elements covers each other
-      // and there is no way to click it by just .click()
-      clickByJS(selector);
-    });
+    // It needs to be clicked by JS, because our templates elements covers each other
+    // and there is no way to click it by just .click()
+    usingAdFrame(() -> clickByJS(selector));
   }
 
   public double getVideoHeightWhilePaused() {
@@ -190,7 +188,7 @@ public class AutoplayVuap {
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
-    int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
+    int percentResult = (int) Math.round(100 - (100 / (videoHeight / imageHeight)));
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
   }
 
