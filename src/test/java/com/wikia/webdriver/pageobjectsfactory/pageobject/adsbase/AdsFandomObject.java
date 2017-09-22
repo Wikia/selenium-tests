@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AdsFandomObject extends AdsBaseObject {
-  private static final String FANDOM_FEED_SELECTOR = ".feed-container";
-
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
   }
@@ -29,7 +27,7 @@ public class AdsFandomObject extends AdsBaseObject {
   public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
 
-    scrollToPosition(AdsFandomContent.getGptSlotSelector(slotName));
+    scrollToElement(By.cssSelector(AdsFandomContent.getGptSlotSelector(slotName)));
     verifyAdVisibleInSlot(selector, slots(slotName));
   }
 
