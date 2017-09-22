@@ -26,7 +26,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
     vuap.waitForVideoStart();
@@ -41,7 +41,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
@@ -54,7 +54,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapDefaultStateArea2ShouldRedirectToCorrectURL(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
     vuap.clickOnArea(2);
@@ -69,7 +69,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapDefaultStateArea4ShouldRedirectToCorrectURL(Page page, String slot) {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
     vuap.clickOnArea(4);
@@ -85,7 +85,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapDefaultStateAutoplayIsMutedAfterReplayIsNotMuted(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
     vuap.waitForVideoStart();
@@ -108,7 +108,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateAppearsOnSecondPageView(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl(), WindowSize.DESKTOP);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
     vuap.waitForVideoStart();
@@ -131,7 +131,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateShouldStartPlayingAfterClickOnReplay(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
     vuap.replay();
@@ -147,7 +147,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
     vuap.replay();
     vuap.waitForVideoStart();
@@ -162,7 +162,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateShouldRedirectToCorrectURL(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
     vuap.replay();
     vuap.waitForVideoToStart(MAX_AUTOPLAY_MOVIE_DURATION);
@@ -181,7 +181,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateShouldHaveLinkToFandomArticleOnImage(Page page, String slot) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
     vuap.clickOnArea(4);
@@ -199,7 +199,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateShouldCloseAfterTapingOnCloseButton(Page page, String slot) {
     final AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
     ads.fixScrollPositionByNavbar();
 
@@ -218,7 +218,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedStateIsNotMuted(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
 
     ads.scrollToSlot(slot);
     vuap.replay();
@@ -234,7 +234,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapResolvedShouldEnd(Page page, String slot) {
     final AdsBaseObject ads = openPageWithVideoInLocalStorage(page);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
     vuap.replay();
 
@@ -248,7 +248,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   )
   public void vuapCheckSlotSizesOasis(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, "#" + slot, ads.findFirstIframeWithAd(slot), false);
     ads.scrollToSlot(slot);
 
     double adSlotHeight = vuap.getAdSlotHeight();
