@@ -11,6 +11,7 @@ import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -207,7 +208,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
     fandomPage.triggerOnScrollSlots();
     AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
-    fandomPage.scrollToPosition(AdsFandomContent.getGptSlotSelector(slotName));
+    fandomPage.scrollToElement(By.cssSelector(AdsFandomContent.getGptSlotSelector(slotName)));
     return videoFanTakeover;
   }
 }

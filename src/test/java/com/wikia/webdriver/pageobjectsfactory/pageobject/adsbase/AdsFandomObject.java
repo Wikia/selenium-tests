@@ -51,4 +51,7 @@ public class AdsFandomObject extends AdsBaseObject {
     return By.cssSelector(String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']", slotName));
   }
 
+  public void scrollToElement(By by) {
+    jsActions.scrollToElement(by);
+  }
 }
