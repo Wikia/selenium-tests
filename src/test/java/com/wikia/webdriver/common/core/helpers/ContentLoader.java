@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.helpers;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -12,6 +11,7 @@ import java.util.Scanner;
 public class ContentLoader {
 
   private static final String TEXT_FILES_PATH_FORMAT = "TextFiles/%s";
+  private static final String IMG_FILES_PATH_FORMAT = "ImagesForUploadTests/%s";
 
   private ContentLoader() {}
 
@@ -38,6 +38,10 @@ public class ContentLoader {
       throw new ContentLoaderException("Error when loading file!", ex);
     }
     return textContent.toString();
+  }
+
+  public static String getImageResource(String filename) {
+    return ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
   }
 
 }
