@@ -46,16 +46,17 @@ public class AutoplayVuap {
     this.wait = new Wait(driver);
 
     this.slotSelector = slotSelector;
-    this.imaBridgeSelector = By.cssSelector(String.format("#%s %s", slotSelector, IMA_BRIGDE_SELECTOR));
     this.adIframeSelector = adIframeSelector;
     this.mobile = mobile;
 
-    speakerSelector = By.cssSelector(String.format("%s %s", slotSelector, SPEAKER_SELECTOR));
-    pauseOverlaySelector = By.cssSelector(String.format("%s %s", slotSelector, PAUSE_SELECTOR));
-    closeButtonSelector = By.cssSelector(String.format("%s %s", slotSelector, CLOSE_BUTTON_SELECTOR));
-    progressBarSelector = By.cssSelector(String.format("%s %s", slotSelector, CURRENT_TIME_SELECTOR));
-    replayOverlaySelector = By.cssSelector(String.format("%s %s", slotSelector, REPLAY_SELECTOR));
-    videoSelector = By.cssSelector(String.format("%s %s", slotSelector, VIDEO_SELECTOR));
+    String tpl = "%s %s";
+    imaBridgeSelector = By.cssSelector(String.format(tpl, slotSelector, IMA_BRIGDE_SELECTOR));
+    speakerSelector = By.cssSelector(String.format(tpl, slotSelector, SPEAKER_SELECTOR));
+    pauseOverlaySelector = By.cssSelector(String.format(tpl, slotSelector, PAUSE_SELECTOR));
+    closeButtonSelector = By.cssSelector(String.format(tpl, slotSelector, CLOSE_BUTTON_SELECTOR));
+    progressBarSelector = By.cssSelector(String.format(tpl, slotSelector, CURRENT_TIME_SELECTOR));
+    replayOverlaySelector = By.cssSelector(String.format(tpl, slotSelector, REPLAY_SELECTOR));
+    videoSelector = By.cssSelector(String.format(tpl, slotSelector, VIDEO_SELECTOR));
   }
 
   public void mute() {
