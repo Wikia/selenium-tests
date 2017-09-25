@@ -7,20 +7,14 @@ import org.openqa.selenium.WebElement;
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
 
   protected abstract WebElement getReplyCreator();
-
   protected abstract WebElement getDialogSignIn();
-
   protected abstract WebElement getOkButtonInSignInDialog();
-
   protected abstract WebElement getSignInButtonInSignInDialog();
-
   protected abstract WebElement getGuidelinesReadButton();
-
   protected abstract WebElement getTextarea();
-
   protected abstract WebElement getSubmitButton();
-
   protected abstract WebElement getLoadingSuccess();
+  protected abstract WebElement getAlertNotification();
 
   @Override
   public ReplyCreator click() {
@@ -81,10 +75,16 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return this;
   }
 
-  public ReplyCreator uploadFile() {
+  public ReplyCreator uploadValidImage() {
     getUploadButton().sendKeys(ContentLoader.getImage());
     wait.forElementVisible(getImagePreview());
     return this;
+  }
+
+  public String uploadUnsupportedFile() {
+    getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
+    wait.forElementVisible(getAlertNotification());
+    return getAlertNotification().getText();
   }
 
   protected abstract WebElement getImagePreview();

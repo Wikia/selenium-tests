@@ -13,9 +13,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePo
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
@@ -26,12 +23,20 @@ public class UploadingImageTests extends NewTestTemplate {
   private static final String DESKTOP = "uploading-image-desktop";
   private static final String MOBILE = "uploading-image-mobile";
 
+  /**
+   * fixture methods
+   */
+
   private PostEntity.Data setUp(String wikiName) {
     String siteId = Utils.excractSiteIdFromWikiName(wikiName);
     return DiscussionsClient
       .using(User.USER_2, driver)
       .createPostWithUniqueData(siteId);
   }
+
+  /**
+   * test methods
+   */
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
@@ -42,6 +47,32 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertTrue(page.getPost().findNewestPost().hasImage());
   }
 
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanUploadImageToTheirReplyOnDesktop() {
+    PostEntity.Data post = setUp("dman");
+    PostDetailsPage page = new PostDetailsPage().open(post.getId());
+    startReplyCreationDesktop(page).uploadValidImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertTrue(page.findNewestReply().hasImage());
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCannotUploadUnsupportedImageToTheirPostDesktop() {
+
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCannotUploadUnsupportedImageToTheirReplyDesktop() {
+
+  }
+
+  /**
+   * mobile test methods
+   */
+
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanUploadImageToTheirPostOnMobile() {
@@ -51,25 +82,31 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertTrue(page.getPost().findNewestPost().hasImage());
   }
 
-  @Test(groups = DESKTOP)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userCanUploadImageToTheirReplyOnDesktop() {
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanUploadImageTotheirReplyOnMobile() {
     PostEntity.Data post = setUp("dman");
     PostDetailsPage page = new PostDetailsPage().open(post.getId());
-    startReplyCreationDesktop(page).uploadFile().clickSubmitButton();
+    startReplyCreationMobile(page).uploadValidImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.findNewestReply().hasImage());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCanUploadImageTotheirReplyOnMobile() {
-    PostEntity.Data post = setUp("dman");
-    PostDetailsPage page = new PostDetailsPage().open(post.getId());
-    startReplyCreationMobile(page).uploadFile().clickSubmitButton();
-    page.waitForPageReload();
-    Assertion.assertTrue(page.findNewestReply().hasImage());
+  public void userCannotUploadUnsupportedImageToTheirPostOnMobile() {
+
   }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCannotUploadUnsupportedImageToTheirReplyOnMobile() {
+
+  }
+
+  /**
+   * helper methods
+   */
 
   private BasePostsCreator startPostCreation(BasePostsCreator postCreator) {
     postCreator
@@ -78,8 +115,7 @@ public class UploadingImageTests extends NewTestTemplate {
       .addTitleWith(TextGenerator.defaultText())
       .addDescriptionWith(TextGenerator.defaultText())
       .clickAddCategoryButton()
-      .findCategoryOn(0)
-      .click();
+      .selectFirstCategory();
     return postCreator;
   }
 

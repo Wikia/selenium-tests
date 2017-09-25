@@ -52,6 +52,10 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
   private WebElement imagePreview;
 
+  @Getter
+  @FindBy(css = ".alert-notification")
+  private WebElement alertNotification;
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();

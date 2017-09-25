@@ -54,6 +54,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
   private WebElement imagePreview;
 
+  @Getter
+  @FindBy(css = ".alert-notification")
+  private WebElement alertNotification;
+
   public PostsCreatorMobile() {
     super();
   }

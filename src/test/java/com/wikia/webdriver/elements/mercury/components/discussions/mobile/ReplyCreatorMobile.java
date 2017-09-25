@@ -42,6 +42,10 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
   private WebElement imagePreview;
 
+  @Getter
+  @FindBy(css = ".alert-notification")
+  private WebElement alertNotification;
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();

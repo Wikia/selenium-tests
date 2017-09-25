@@ -54,6 +54,10 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
   private WebElement imagePreview;
 
+  @Getter
+  @FindBy(css = ".alert-notification")
+  private WebElement alertNotification;
+
   @Override
   protected String getBaseCssClassName() {
     return "discussion-inline-editor";
