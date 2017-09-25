@@ -31,6 +31,7 @@ public class Reply extends BasePageObject {
   }
 
   public Reply() {
+    super();
     reply = null;
   }
 

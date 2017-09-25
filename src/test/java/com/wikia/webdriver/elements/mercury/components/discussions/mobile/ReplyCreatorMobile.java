@@ -39,7 +39,7 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   private WebElement uploadButton;
 
   @Getter
-  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
   private WebElement imagePreview;
 
   @Override
