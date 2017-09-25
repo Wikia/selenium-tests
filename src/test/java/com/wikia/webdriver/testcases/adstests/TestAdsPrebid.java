@@ -1,19 +1,32 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.thoughtworks.selenium.Wait;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.core.url.Page;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
 public class TestAdsPrebid extends TemplateNoFirstLoad {
 
   private static final String STARTED_EVENT = "event_name=started";
+  private static final String URL_PPATERN = ".*fastlane.json.*TOP_LEADERBOARD.*";
+  private static final String WIKIA = "project43";
+  private static final Page TEST_PAGE = new Page(WIKIA, "/SyntheticTests/Oasis/FloatingMedrecOnLongPage/300x600");
 
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -64,4 +77,30 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
     prebidAds.wait.forSuccessfulResponse(networkTrafficInterceptor, STARTED_EVENT);
     prebidAds.verifyLineItemId(AdsContent.TOP_LB, lineItemId);
   }
+
+  @NetworkTrafficDump
+  @Test(
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "prebidRubiconSlotsList",
+      groups = "AdsPrebidRubiconOasis"
+  )
+  public void adsPrebidRubiconInTopLeaderboard(List<String> urlPaterns) {
+    networkTrafficInterceptor.startIntercepting();
+    AdsBaseObject ads = new AdsBaseObject(driver, TEST_PAGE.getUrl());
+    Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, urlPaterns), "Lack of rubicon request in all slots");
+  }
+
+  private boolean isRubiconRequestSendInAllSlots(AdsBaseObject ads, List<String> urlPaterns) {
+    try {
+      for (String urlPatern : urlPaterns) {
+        ads.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, urlPatern);
+        return true;
+      }
+    } catch (Exception ex) {
+      PageObjectLogging.log("Lack of rubicon request in all slots", ex, true);
+      return false;
+    }
+    return false;
+  }
 }
+
