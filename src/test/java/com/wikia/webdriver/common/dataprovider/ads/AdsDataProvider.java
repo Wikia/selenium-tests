@@ -269,20 +269,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpRubiconParamsSynthetic() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/RubiconFastlane",
-            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_project43//article",
-            "TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":\\[\"2_tier(NONE|PREBID|\\d{4})\",\"57_tier(NONE|PREBID|\\d{4})\"\\].*"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
         {
@@ -566,13 +552,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] amazonSites() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Amazon"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] prebidCustomAdapter() {
     return new Object[][]{
         {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
@@ -603,16 +582,16 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; RubiconFastlane"
+            "Evolve2; RemnantGpt"
         },
         {
             "project43",
@@ -630,9 +609,9 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.TOP_LB,
-            "RubiconFastlane"
+            "Evolve2"
         },
     };
   }

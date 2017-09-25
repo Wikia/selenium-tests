@@ -201,6 +201,15 @@ public class AdsBaseObject extends WikiBasePageObject {
     );
   }
 
+  public boolean slotHasSize(String slotName, int width, int height) {
+    return getSlotAttribute(slotName, "data-gpt-slot-sizes").contains(String.format("%d,%d", width, height));
+  }
+
+  public boolean slotParamHasValue(String slotName, String paramName, String value) {
+    String dataGptSlotParams = getSlotAttribute(slotName, "data-gpt-slot-params");
+    return dataGptSlotParams.contains(String.format("\"%s\":\"%s\"", paramName, value));
+  }
+
   /**
    * Test whether the correct GPT ad parameters are passed
    *

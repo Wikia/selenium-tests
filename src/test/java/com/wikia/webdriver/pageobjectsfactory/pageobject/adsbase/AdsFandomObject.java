@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class AdsFandomObject extends AdsBaseObject {
-  private static final String FANDOM_FEED_SELECTOR = ".feed-container";
-
   public AdsFandomObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
   }
@@ -29,16 +27,8 @@ public class AdsFandomObject extends AdsBaseObject {
   public void verifySlot(String slotName) {
     String selector = AdsFandomContent.getSlotSelector(slotName);
 
-    scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
+    scrollToElement(By.cssSelector(AdsFandomContent.getGptSlotSelector(slotName)));
     verifyAdVisibleInSlot(selector, slots(slotName));
-  }
-
-  public void scrollTo(String cssSelector) {
-    jsActions.scrollToElement(driver.findElement(By.cssSelector(cssSelector)));
-  }
-
-  public void scrollToFeed() {
-    scrollTo(FANDOM_FEED_SELECTOR);
   }
 
   public void scrollToSlot(String slotId) {
@@ -59,4 +49,7 @@ public class AdsFandomObject extends AdsBaseObject {
     return By.cssSelector(String.format("iframe[id^='google_ads_iframe_/5441/wka.fandom/_article/ARTICLE_%s_0']", slotName));
   }
 
+  public void scrollToElement(By by) {
+    jsActions.scrollToElement(by);
+  }
 }
