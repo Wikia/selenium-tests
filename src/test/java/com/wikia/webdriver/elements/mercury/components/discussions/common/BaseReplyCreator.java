@@ -15,6 +15,9 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   protected abstract WebElement getSubmitButton();
   protected abstract WebElement getLoadingSuccess();
   protected abstract WebElement getAlertNotification();
+  protected abstract WebElement getImagePreview();
+  protected abstract WebElement getUploadButton();
+  protected abstract WebElement getImageDeleteButton();
 
   @Override
   public ReplyCreator click() {
@@ -75,7 +78,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return this;
   }
 
-  public ReplyCreator uploadValidImage() {
+  public BaseReplyCreator uploadValidImage() {
     getUploadButton().sendKeys(ContentLoader.getImage());
     wait.forElementVisible(getImagePreview());
     return this;
@@ -87,7 +90,10 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return getAlertNotification().getText();
   }
 
-  protected abstract WebElement getImagePreview();
+  public BaseReplyCreator removeImage() {
+    waitAndClick(getImageDeleteButton());
+    wait.forElementNotVisible(getImagePreview());
+    return this;
+  }
 
-  protected abstract WebElement getUploadButton();
 }

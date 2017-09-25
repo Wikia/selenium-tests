@@ -58,6 +58,10 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @FindBy(css = ".alert-notification")
   private WebElement alertNotification;
 
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
   public PostsCreatorMobile() {
     super();
   }

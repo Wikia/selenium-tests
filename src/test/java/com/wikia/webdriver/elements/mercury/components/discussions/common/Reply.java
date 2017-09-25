@@ -76,6 +76,9 @@ public class Reply extends BasePageObject {
   }
 
   public boolean hasImage() {
-    return !reply.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
+    changeImplicitWait(3, TimeUnit.SECONDS);
+    boolean hasImage = !reply.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
+    restoreDefaultImplicitWait();
+    return hasImage;
   }
 }

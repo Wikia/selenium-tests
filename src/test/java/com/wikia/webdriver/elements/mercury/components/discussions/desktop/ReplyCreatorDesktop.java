@@ -56,6 +56,10 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @FindBy(css = ".alert-notification")
   private WebElement alertNotification;
 
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();

@@ -58,6 +58,10 @@ public class PostsCreatorDesktop extends BasePostsCreator {
   @FindBy(css = ".alert-notification")
   private WebElement alertNotification;
 
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
   @Override
   protected String getBaseCssClassName() {
     return "discussion-inline-editor";

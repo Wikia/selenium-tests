@@ -28,6 +28,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getAlertNotification();
+  protected abstract WebElement getImageDeleteButton();
 
   @Override
   public PostsCreator click() {
@@ -121,6 +122,12 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
     wait.forElementVisible(getAlertNotification());
     return getAlertNotification().getText();
+  }
+
+  public BasePostsCreator removeImage() {
+    waitAndClick(getImageDeleteButton());
+    wait.forElementNotVisible(getImagePreview());
+    return this;
   }
 
 }

@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.discussions;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -45,7 +46,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertTrue(page.getPost().findNewestPost().hasImage());
+    Assertion.assertTrue(page.getPost().firstPostHasImage());
   }
 
   @Test(groups = DESKTOP)
@@ -67,7 +68,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     postCreator.clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().findNewestPost().hasImage());
+    Assertion.assertFalse(page.getPost().firstPostHasImage());
   }
 
   @Test(groups = DESKTOP)
@@ -86,34 +87,31 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanRemoveImagePreviewFromPostDraftOnDesktop() {
-
+    PostsListPage page = new PostsListPage().open();
+    startPostCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.getPost().firstPostHasImage());
   }
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {
-
+    PostEntity.Data post = setUp("dman");
+    PostDetailsPage page = new PostDetailsPage().open(post.getId());
+    startReplyCreationDesktop(page).uploadValidImage().removeImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.findNewestReply().hasImage());
   }
 
-  @Test(groups = DESKTOP)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userCanRemoveImageFromExistingPostOnDesktop() {
-
-  }
-
-  @Test(groups = DESKTOP)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userCanRemoveImageFromExistingReplyOnDesktop() {
-
-  }
-
-  @Test(groups = DESKTOP)
+  @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnDesktop() {
 
   }
 
-  @Test(groups = DESKTOP)
+  @Test(groups = DESKTOP, enabled = false)
+  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnDesktop() {
 
@@ -129,7 +127,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertTrue(page.getPost().findNewestPost().hasImage());
+    Assertion.assertTrue(page.getPost().firstPostHasImage());
   }
 
   @Test(groups = MOBILE)
@@ -151,7 +149,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     postCreator.clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().findNewestPost().hasImage());
+    Assertion.assertFalse(page.getPost().firstPostHasImage());
   }
 
   @Test(groups = MOBILE)
@@ -169,34 +167,31 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanRemoveImagePreviewFromPostDraftOnMobile() {
-
+    PostsListPage page = new PostsListPage().open();
+    startPostCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.getPost().firstPostHasImage());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanRemoveImagePreviewFromReplyDraftOnMobile() {
-
+    PostEntity.Data post = setUp("dman");
+    PostDetailsPage page = new PostDetailsPage().open(post.getId());
+    startReplyCreationMobile(page).uploadValidImage().removeImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.findNewestReply().hasImage());
   }
 
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCanRemoveImageFromExistingPostOnMobile() {
-
-  }
-
-  @Test(groups = MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userCanRemoveImageFromExistingReplyOnMobile() {
-
-  }
-
-  @Test(groups = MOBILE)
+  @Test(groups = MOBILE, enabled = false)
+  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile() {
 
   }
 
-  @Test(groups = MOBILE)
+  @Test(groups = MOBILE, enabled = false)
+  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile() {
 
