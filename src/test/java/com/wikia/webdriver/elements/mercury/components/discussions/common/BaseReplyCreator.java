@@ -81,7 +81,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return this;
   }
 
-  public String uploadUnsupportedFile() {
+  public String uploadUnsupportedImage() {
     getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
     wait.forElementVisible(getAlertNotification());
     return getAlertNotification().getText();

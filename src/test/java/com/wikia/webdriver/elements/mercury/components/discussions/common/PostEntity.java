@@ -36,7 +36,7 @@ public class PostEntity {
   }
 
   public boolean hasImage() {
-    return post.findElement(By.cssSelector(".post-image-inner-image")).isDisplayed();
+    return !post.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
   }
 
   private WebElement findTopNoteElement() {

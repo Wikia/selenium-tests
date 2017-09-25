@@ -22,6 +22,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private static final String DESKTOP = "uploading-image-desktop";
   private static final String MOBILE = "uploading-image-mobile";
+  private static final String UNSUPPORTED_IMAGE_MSG = "Invalid image type, please use jpeg, png or gif.";
 
   /**
    * fixture methods
@@ -42,7 +43,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanUploadImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
-    startPostCreationDesktop(page).uploadFile().clickSubmitButton();
+    startPostCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.getPost().findNewestPost().hasImage());
   }
@@ -60,13 +61,26 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCannotUploadUnsupportedImageToTheirPostDesktop() {
-
+    PostsListPage page = new PostsListPage().open();
+    BasePostsCreator postCreator = startPostCreationDesktop(page);
+    String errorMsg = postCreator.uploadUnsupportedImage();
+    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
+    postCreator.clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.getPost().findNewestPost().hasImage());
   }
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCannotUploadUnsupportedImageToTheirReplyDesktop() {
-
+    PostEntity.Data post = setUp("dman");
+    PostDetailsPage page = new PostDetailsPage().open(post.getId());
+    BaseReplyCreator replyCreator = startReplyCreationDesktop(page);
+    String errorMsg = replyCreator.uploadUnsupportedImage();
+    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
+    replyCreator.clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.findNewestReply().hasImage());
   }
 
   /**
@@ -77,7 +91,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCanUploadImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
-    startPostCreationMobile(page).uploadFile().clickSubmitButton();
+    startPostCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.getPost().findNewestPost().hasImage());
   }
@@ -95,13 +109,25 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotUploadUnsupportedImageToTheirPostOnMobile() {
-
+    PostsListPage page = new PostsListPage().open();
+    BasePostsCreator postCreator = startPostCreationMobile(page);
+    String errorMsg = postCreator.uploadUnsupportedImage();
+    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
+    postCreator.clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.getPost().findNewestPost().hasImage());
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userCannotUploadUnsupportedImageToTheirReplyOnMobile() {
-
+    PostDetailsPage page = new PostDetailsPage().open(setUp("dman").getId());
+    BaseReplyCreator replyCreator = startReplyCreationMobile(page);
+    String errorMsg = replyCreator.uploadUnsupportedImage();
+    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
+    replyCreator.clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.findNewestReply().hasImage());
   }
 
   /**

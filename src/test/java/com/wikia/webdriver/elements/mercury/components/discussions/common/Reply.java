@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class Reply extends BasePageObject {
@@ -75,6 +76,6 @@ public class Reply extends BasePageObject {
   }
 
   public boolean hasImage() {
-    return reply.findElement(By.cssSelector(".post-image-inner-image")).isDisplayed();
+    return !reply.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
   }
 }

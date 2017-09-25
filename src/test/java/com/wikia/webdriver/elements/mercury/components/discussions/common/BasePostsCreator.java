@@ -111,13 +111,13 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return this;
   }
 
-  public BasePostsCreator uploadFile() {
+  public BasePostsCreator uploadImage() {
     getUploadButton().sendKeys(ContentLoader.getImage());
     wait.forElementVisible(getImagePreview());
     return this;
   }
 
-  public String uploadUnsupportedFile() {
+  public String uploadUnsupportedImage() {
     getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
     wait.forElementVisible(getAlertNotification());
     return getAlertNotification().getText();
