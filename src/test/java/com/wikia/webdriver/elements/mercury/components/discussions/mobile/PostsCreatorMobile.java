@@ -46,6 +46,14 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @FindBy(css = ".discussion-standalone-editor .discussion-standalone-editor-textarea:not([disabled])")
   private WebElement descriptionTextarea;
 
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  private WebElement imagePreview;
+
   public PostsCreatorMobile() {
     super();
   }

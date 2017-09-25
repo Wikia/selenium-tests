@@ -34,6 +34,14 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @Getter
   private WebElement loadingSuccess;
 
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  private WebElement imagePreview;
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.className("discussion-editor-entry-point-container")).isEmpty();

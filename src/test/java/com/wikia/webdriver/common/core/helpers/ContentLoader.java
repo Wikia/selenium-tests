@@ -40,8 +40,16 @@ public class ContentLoader {
     return textContent.toString();
   }
 
-  public static String getImageResource(String filename) {
+  private static String getImageResource(String filename) {
     return ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
+  }
+
+  public static String getImage() {
+    return getImageResource("spiderman.jpg");
+  }
+
+  public static String getUnsupportedImage() {
+    return getImageResource("dragon.bmp");
   }
 
 }

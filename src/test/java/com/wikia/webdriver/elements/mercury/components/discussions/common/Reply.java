@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,6 +23,16 @@ public class Reply extends BasePageObject {
 
   @FindBy(css = "a.icon")
   private List<WebElement> socialNetworkIcon;
+
+  private WebElement reply;
+
+  public Reply(WebElement reply) {
+    this.reply = reply;
+  }
+
+  public Reply() {
+    reply = null;
+  }
 
   public boolean isPostDetailsListEmpty() {
     return repliesList.isEmpty();
@@ -60,5 +71,9 @@ public class Reply extends BasePageObject {
     } catch (InterruptedException e) {
       PageObjectLogging.logError("waitForVoteCountChangeTimeLagToPass", e);
     }
+  }
+
+  public boolean hasImage() {
+    return reply.findElement(By.cssSelector(".post-image-inner-image")).isDisplayed();
   }
 }

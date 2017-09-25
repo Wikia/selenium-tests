@@ -1,6 +1,5 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -78,9 +77,4 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     return this;
   }
 
-  public PostsCreatorDesktop uploadFile() {
-    uploadButton.sendKeys(ContentLoader.getImageResource("spiderman.jpg"));
-    wait.forElementVisible(imagePreview);
-    return this;
-  }
 }

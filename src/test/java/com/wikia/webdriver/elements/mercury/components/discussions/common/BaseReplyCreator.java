@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 
@@ -79,4 +80,14 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
   }
+
+  public ReplyCreator uploadFile() {
+    getUploadButton().sendKeys(ContentLoader.getImage());
+    wait.forElementVisible(getImagePreview());
+    return this;
+  }
+
+  protected abstract WebElement getImagePreview();
+
+  protected abstract WebElement getUploadButton();
 }
