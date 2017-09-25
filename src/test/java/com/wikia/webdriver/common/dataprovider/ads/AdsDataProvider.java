@@ -566,6 +566,23 @@ public class AdsDataProvider {
   }
 
   @DataProvider
+  public static Object[][] prebidRubiconSlotsList() {
+    return new Object[][]{
+        {
+            Arrays.asList(
+                ".*fastlane.json.*TOP_LEADERBOARD.*",
+                ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
+                ".*fastlane.json.*LEFT_SKYSCRAPER_2.*",
+                ".*fastlane.json.*LEFT_SKYSCRAPER_3.*",
+                ".*fastlane.json.*INCONTENT_BOXAD_1.*",
+                ".*fastlane.json.*PREFOOTER_LEFT_BOXAD.*",
+                ".*fastlane.json.*PREFOOTER_RIGHT_BOXAD.*"
+            )
+        }
+    };
+  }
+
+  @DataProvider
   public static Object[][] evolveTestPage() {
     return new Object[][]{{"project43", "SyntheticTests/Evolve"}};
   }
