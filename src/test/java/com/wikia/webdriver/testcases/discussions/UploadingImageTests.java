@@ -60,7 +60,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userCannotUploadUnsupportedImageToTheirPostDesktop() {
+  public void userCannotUploadUnsupportedImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     BasePostsCreator postCreator = startPostCreationDesktop(page);
     String errorMsg = postCreator.uploadUnsupportedImage();
@@ -72,7 +72,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userCannotUploadUnsupportedImageToTheirReplyDesktop() {
+  public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
     PostEntity.Data post = setUp("dman");
     PostDetailsPage page = new PostDetailsPage().open(post.getId());
     BaseReplyCreator replyCreator = startReplyCreationDesktop(page);
@@ -81,6 +81,42 @@ public class UploadingImageTests extends NewTestTemplate {
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasImage());
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanRemoveImagePreviewFromPostDraftOnDesktop() {
+
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {
+
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanRemoveImageFromExistingPostOnDesktop() {
+
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanRemoveImageFromExistingReplyOnDesktop() {
+
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnDesktop() {
+
+  }
+
+  @Test(groups = DESKTOP)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnDesktop() {
+
   }
 
   /**
@@ -128,6 +164,42 @@ public class UploadingImageTests extends NewTestTemplate {
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasImage());
+  }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanRemoveImagePreviewFromPostDraftOnMobile() {
+
+  }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanRemoveImagePreviewFromReplyDraftOnMobile() {
+
+  }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanRemoveImageFromExistingPostOnMobile() {
+
+  }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanRemoveImageFromExistingReplyOnMobile() {
+
+  }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile() {
+
+  }
+
+  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile() {
+
   }
 
   /**
