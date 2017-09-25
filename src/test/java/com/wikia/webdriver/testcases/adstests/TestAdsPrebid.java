@@ -77,7 +77,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = AdsDataProvider.class,
       dataProvider = "prebidRubiconSlotsList",
-      groups = {"AdsPrebidOasis, AdsPrebidRubiconOasis"}
+      groups = {"AdsPrebidOasis", "AdsPrebidRubiconOasis"}
   )
   public void adsPrebidRubiconRequestsInSlots(List<String> urlPaterns) {
     networkTrafficInterceptor.startIntercepting();
