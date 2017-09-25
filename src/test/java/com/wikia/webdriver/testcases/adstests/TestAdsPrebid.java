@@ -79,7 +79,7 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
       dataProvider = "prebidRubiconSlotsList",
       groups = "AdsPrebidRubiconOasis"
   )
-  public void adsPrebidRubiconInTopLeaderboard(List<String> urlPaterns) {
+  public void adsPrebidRubiconRequestsInSlots(List<String> urlPaterns) {
     networkTrafficInterceptor.startIntercepting();
     AdsBaseObject ads = new AdsBaseObject(driver, TEST_PAGE.getUrl());
     Assertion.assertTrue(isRubiconRequestSendInAllSlots(ads, urlPaterns), "Lack of rubicon request in all slots");
