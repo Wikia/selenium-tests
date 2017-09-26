@@ -44,6 +44,22 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @FindBy(css = ".discussion-inline-reply-editor")
   private WebElement editor;
 
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  private WebElement imagePreview;
+
+  @Getter
+  @FindBy(css = ".alert-notification")
+  private WebElement alertNotification;
+
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
