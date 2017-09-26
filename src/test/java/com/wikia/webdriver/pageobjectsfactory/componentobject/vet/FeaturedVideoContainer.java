@@ -3,14 +3,12 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.io.File;
 import lombok.Getter;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import java.io.File;
 
 public class FeaturedVideoContainer extends WikiBasePageObject {
 
