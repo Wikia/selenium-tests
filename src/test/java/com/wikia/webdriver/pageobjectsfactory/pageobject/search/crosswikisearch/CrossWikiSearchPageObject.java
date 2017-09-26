@@ -1,16 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Pattern;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Author: Artur Dwornik Date: 28.03.13 Time: 19:29
