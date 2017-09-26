@@ -37,8 +37,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private static final String DISCUSSION = "discussion";
 
   private String siteId;
-  private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_3;
-  private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_4;
+  private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_6;
+  private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_7;
   private List<User> replyUsers = Lists.newArrayList(
     User.USER_2,
     User.USER_3,
