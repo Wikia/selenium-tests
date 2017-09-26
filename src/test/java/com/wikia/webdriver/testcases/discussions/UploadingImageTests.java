@@ -18,11 +18,14 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
-@Execute(onWikia = "sandbox-s3.dman", asUser = User.USER_2)
 public class UploadingImageTests extends NewTestTemplate {
 
   private static final String DESKTOP = "uploading-image-desktop";
   private static final String MOBILE = "uploading-image-mobile";
+
+  private static final String MOBILE_COMMUNITY = "sandbox-s3.dman";
+  private static final String DESKTOP_COMMUNITY = "sandbox-s3.dman";
+
   private static final String UNSUPPORTED_IMAGE_MSG =
     "Invalid image type, please use jpeg, png or gif.";
   private static final String POST_IMAGE_VISIBLE = "Uploaded image should be visible in new post";
@@ -53,6 +56,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanUploadImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().clickSubmitButton();
@@ -62,16 +66,17 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanUploadImageToTheirReplyOnDesktop() {
-    PostEntity.Data post = setUp("dman");
-    PostDetailsPage page = new PostDetailsPage().open(post.getId());
-    startReplyCreationDesktop(page).uploadValidImage().clickSubmitButton();
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
+    startReplyCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     BasePostsCreator postCreator = startPostCreationDesktop(page);
@@ -84,9 +89,9 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
-    PostEntity.Data post = setUp("dman");
-    PostDetailsPage page = new PostDetailsPage().open(post.getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     BaseReplyCreator replyCreator = startReplyCreationDesktop(page);
     String errorMsg = replyCreator.uploadUnsupportedImage();
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
@@ -97,6 +102,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanRemoveImagePreviewFromPostDraftOnDesktop() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
@@ -106,16 +112,17 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCanRemoveImagePreviewFromReplyDraftOnDesktop() {
-    PostEntity.Data post = setUp("dman");
-    PostDetailsPage page = new PostDetailsPage().open(post.getId());
-    startReplyCreationDesktop(page).uploadValidImage().removeImage().clickSubmitButton();
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
+    startReplyCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP, enabled = false)
   @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnDesktop() {
 
@@ -123,6 +130,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = DESKTOP, enabled = false)
   @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
+  @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnDesktop() {
 
@@ -134,6 +142,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanUploadImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().clickSubmitButton();
@@ -143,16 +152,17 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanUploadImageTotheirReplyOnMobile() {
-    PostEntity.Data post = setUp("dman");
-    PostDetailsPage page = new PostDetailsPage().open(post.getId());
-    startReplyCreationMobile(page).uploadValidImage().clickSubmitButton();
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
+    startReplyCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCannotUploadUnsupportedImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
     BasePostsCreator postCreator = startPostCreationMobile(page);
@@ -165,8 +175,9 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCannotUploadUnsupportedImageToTheirReplyOnMobile() {
-    PostDetailsPage page = new PostDetailsPage().open(setUp("dman").getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     BaseReplyCreator replyCreator = startReplyCreationMobile(page);
     String errorMsg = replyCreator.uploadUnsupportedImage();
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
@@ -177,6 +188,7 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanRemoveImagePreviewFromPostDraftOnMobile() {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
@@ -186,10 +198,10 @@ public class UploadingImageTests extends NewTestTemplate {
 
   @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanRemoveImagePreviewFromReplyDraftOnMobile() {
-    PostEntity.Data post = setUp("dman");
-    PostDetailsPage page = new PostDetailsPage().open(post.getId());
-    startReplyCreationMobile(page).uploadValidImage().removeImage().clickSubmitButton();
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
+    startReplyCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
@@ -197,6 +209,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = MOBILE, enabled = false)
   @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile() {
 
   }
@@ -204,6 +217,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Test(groups = MOBILE, enabled = false)
   @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile() {
 
   }

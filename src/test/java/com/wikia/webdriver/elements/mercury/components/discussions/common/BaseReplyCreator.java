@@ -78,7 +78,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return this;
   }
 
-  public BaseReplyCreator uploadValidImage() {
+  public BaseReplyCreator uploadImage() {
     getUploadButton().sendKeys(ContentLoader.getImage());
     wait.forElementVisible(getImagePreview());
     return this;
