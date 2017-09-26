@@ -45,6 +45,8 @@ public class ContentLoader {
   private static String getImageResource(String filename) {
     String filePath =
       ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
+    // calling new File(...) as a workaround to be compliant with windows and unix paths
+    // File constructor calls FileSystem.normalize(...) on path
     return new File(filePath).getAbsolutePath();
   }
 
