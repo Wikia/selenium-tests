@@ -1,10 +1,6 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.DiscussionsConstants;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEditor;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.CommunityBadge;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.HeroUnit;
@@ -19,9 +15,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import com.google.common.base.Predicate;
 import lombok.Getter;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class PostsListPage extends WikiBasePageObject implements AvailablePage {
@@ -91,5 +88,13 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     } finally {
       restoreDefaultImplicitWait();
     }
+  }
+
+  @Override
+  public Optional<PostEntity> getPostById(String postId) {
+    return Optional.ofNullable(
+      getPost().getPosts().stream().peek(postEntity -> scrollTo(postEntity.getWebElement()))
+        .filter(postEntity -> postEntity.findId().equals(postId)).findFirst()
+        .orElseThrow(() -> new RuntimeException(String.format("Element with id %s not found on page", postId))));
   }
 }
