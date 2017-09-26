@@ -182,4 +182,11 @@ public class Post extends BasePageObject {
   public boolean isDisplayed() {
     return postDetails.isDisplayed();
   }
+
+  public boolean firstPostHasImage() {
+    changeImplicitWait(3, TimeUnit.SECONDS);
+    boolean hasImage = findNewestPost().hasImage();
+    restoreDefaultImplicitWait();
+    return hasImage;
+  }
 }
