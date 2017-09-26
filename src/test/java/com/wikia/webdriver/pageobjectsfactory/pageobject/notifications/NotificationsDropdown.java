@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class NotificationsDropdown extends BasePageObject {
 
-  @FindBy(className = "notifications-scroll-menu")
+  @FindBy(className = "wds-notifications")
   private WebElement notificationsBell;
 
   @Getter
