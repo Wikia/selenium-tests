@@ -42,6 +42,6 @@ public class Replies extends BasePageObject {
   }
 
   public Reply getNewestReply() {
-    return new Reply(webElement.findElements(By.className("post-reply")).get(0));
+    return new Reply(webElement.findElement(By.className("post-reply")));
   }
 }
