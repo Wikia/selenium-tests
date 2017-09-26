@@ -1,19 +1,10 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Replies;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TopNoteModalDialog;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.regex.Pattern;
 
 
 public class PostDetailsPage extends WikiBasePageObject implements AvailablePage {
@@ -31,10 +22,10 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
   private final Replies replies = new Replies();
 
   @Getter(lazy = true)
-  private final ReplyCreator replyCreatorDesktop = new ReplyCreatorDesktop();
+  private final ReplyCreatorDesktop replyCreatorDesktop = new ReplyCreatorDesktop();
 
   @Getter(lazy = true)
-  private final ReplyCreator replyCreatorMobile = new ReplyCreatorMobile();
+  private final ReplyCreatorMobile replyCreatorMobile = new ReplyCreatorMobile();
 
   @Getter(lazy = true)
   private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
@@ -67,4 +58,7 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
     return getPost().isDisplayed();
   }
 
+  public Reply findNewestReply() {
+    return getReplies().getNewestReply();
+  }
 }

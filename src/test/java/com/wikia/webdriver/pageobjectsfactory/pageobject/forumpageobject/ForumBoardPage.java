@@ -176,13 +176,13 @@ public class ForumBoardPage extends BasePageObject {
         "internal and external links: " + internalLink + " and" + externalLink + "verified", true);
   }
 
-  public void startDiscussionWithVideo(String url, String title) {
+  public void startDiscussionWithVideo(String title) {
     wait.forElementVisible(discussionTitleArea);
     jsActions.focus(discussionTitleArea);
     discussionTitleArea.sendKeys(title);
     wait.forElementVisible(wikiaEditorTextArea);
     jsActions.focus(wikiaEditorTextArea);
-    miniEditor.addVideoMiniEditor(url);
+    miniEditor.addVideoMiniEditor();
     PageObjectLogging.log("startDiscussionWithVideo", "discussion with video started" + title, true,
         driver);
   }

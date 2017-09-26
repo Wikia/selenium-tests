@@ -30,12 +30,10 @@ public class CategoryPageObject extends WikiBasePageObject {
    * @return
    */
   public String getImageURLFromGallery(String articleName) {
-    for (WebElement page : categoryGalleryItems) {
-      if (page.findElement(By.cssSelector("a")).getAttribute("title").equals(articleName)) {
-        return page.findElement(By.cssSelector("img")).getAttribute("src");
-      }
-    }
-    throw new NoSuchElementException(
-        String.format("Could not find article with name %s", articleName));
+    return categoryGalleryItems.stream()
+        .filter(page -> page.findElement(By.cssSelector("a")).getAttribute("title").equals(articleName))
+        .findFirst()
+        .map(page -> page.findElement(By.cssSelector("img")).getAttribute("src"))
+        .orElseThrow(() -> new NoSuchElementException(String.format("Could not find article with name %s", articleName)));
   }
 }

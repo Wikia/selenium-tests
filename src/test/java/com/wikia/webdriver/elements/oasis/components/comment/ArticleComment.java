@@ -28,24 +28,9 @@ public class ArticleComment extends BasePageObject {
     }
   }
 
-  public ArticleComment submitComment() {
-    driver.switchTo().defaultContent();
-    wait.forElementClickable(commentSubmitButton);
-    scrollAndClick(commentSubmitButton);
-
-    waitForElementNotVisibleByElement(commentSubmitButton, 30);
-    PageObjectLogging.log("submitComment", "comment has been submitted", true);
-
-    return this;
-  }
-
   public String getLatestCommentCaption() {
     wait.forElementVisible(latestCommentCaption);
 
     return latestCommentCaption.getText();
-  }
-
-  public boolean isVideoCaptionVisibleInTheLatestComment(String videoCaption) {
-    return wait.forTextInElement(latestCommentCaption, videoCaption);
   }
 }

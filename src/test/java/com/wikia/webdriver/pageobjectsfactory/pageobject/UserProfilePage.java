@@ -100,7 +100,7 @@ public class UserProfilePage extends WikiBasePageObject {
     avatarEditButton.click();
     hideAvatarControls();
     PageObjectLogging.log("clickEditAvatar", "avatar edit button clicked", true);
-    return new AvatarComponentObject(driver);
+    return new AvatarComponentObject();
   }
 
   public void clickRemoveAvatar() {

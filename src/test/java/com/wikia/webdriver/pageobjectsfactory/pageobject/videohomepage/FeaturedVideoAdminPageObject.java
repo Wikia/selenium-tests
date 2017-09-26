@@ -47,7 +47,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
     wait.forElementVisible(videoContainerElements.get(0));
     List<FeaturedVideoContainer> videoContainerList = new ArrayList<>();
     for (WebElement videoTileElement : videoContainerElements) {
-      FeaturedVideoContainer featuredVideoContainer = new FeaturedVideoContainer(driver, videoTileElement);
+      FeaturedVideoContainer featuredVideoContainer = new FeaturedVideoContainer(videoTileElement);
       videoContainerList.add(featuredVideoContainer);
     }
     return videoContainerList;
