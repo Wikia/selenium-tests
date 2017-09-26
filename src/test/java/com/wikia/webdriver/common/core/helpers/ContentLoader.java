@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.core.helpers;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 import java.io.File;
 import java.io.FileNotFoundException;
