@@ -80,10 +80,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirPostOnDesktop() {
     PostsListPage page = new PostsListPage().open();
-    BasePostsCreator postCreator = startPostCreationDesktop(page);
-    String errorMsg = postCreator.uploadUnsupportedImage();
-    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
-    postCreator.clickSubmitButton();
+    addPostWithUnsupportedImage(startPostCreationDesktop(page));
     page.waitForPageReload();
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
@@ -93,10 +90,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   public void userCannotUploadUnsupportedImageToTheirReplyOnDesktop() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
-    BaseReplyCreator replyCreator = startReplyCreationDesktop(page);
-    String errorMsg = replyCreator.uploadUnsupportedImage();
-    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
-    replyCreator.clickSubmitButton();
+    addReplyWithUnsupportedImage(startReplyCreationDesktop(page));
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
@@ -126,7 +120,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnDesktop() {
-
+    // To be implemented as a part of IRIS-4896
   }
 
   @Test(groups = DESKTOP, enabled = false)
@@ -134,7 +128,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnDesktop() {
-
+    // To be implemented as a part of IRIS-4896
   }
 
   /**
@@ -166,10 +160,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCannotUploadUnsupportedImageToTheirPostOnMobile() {
     PostsListPage page = new PostsListPage().open();
-    BasePostsCreator postCreator = startPostCreationMobile(page);
-    String errorMsg = postCreator.uploadUnsupportedImage();
-    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
-    postCreator.clickSubmitButton();
+    addPostWithUnsupportedImage(startPostCreationMobile(page));
     page.waitForPageReload();
     Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
@@ -179,10 +170,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCannotUploadUnsupportedImageToTheirReplyOnMobile() {
     PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
-    BaseReplyCreator replyCreator = startReplyCreationMobile(page);
-    String errorMsg = replyCreator.uploadUnsupportedImage();
-    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
-    replyCreator.clickSubmitButton();
+    addReplyWithUnsupportedImage(startReplyCreationMobile(page));
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
@@ -212,7 +200,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile() {
-
+    // To be implemented as a part of IRIS-4896
   }
 
   @Test(groups = MOBILE, enabled = false)
@@ -220,7 +208,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile() {
-
+    // To be implemented as a part of IRIS-4896
   }
 
   /**
@@ -259,6 +247,18 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private BaseReplyCreator startReplyCreationMobile(PostDetailsPage page) {
     return startReplyCreation(page.getReplyCreatorMobile());
+  }
+
+  private void addPostWithUnsupportedImage(BasePostsCreator postCreator) {
+    String errorMsg = postCreator.uploadUnsupportedImage();
+    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
+    postCreator.clickSubmitButton();
+  }
+
+  private void addReplyWithUnsupportedImage(BaseReplyCreator replyCreator) {
+    String errorMsg = replyCreator.uploadUnsupportedImage();
+    Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
+    replyCreator.clickSubmitButton();
   }
 
 }
