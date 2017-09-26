@@ -21,8 +21,8 @@ import org.testng.annotations.Test;
 
 public class UploadingImageTests extends NewTestTemplate {
 
-  private static final String DESKTOP = "uploading-image-desktop";
-  private static final String MOBILE = "uploading-image-mobile";
+  private static final String DESKTOP = "discussions-uploading-image-desktop";
+  private static final String MOBILE = "discussions-uploading-image-mobile";
 
   private static final String MOBILE_COMMUNITY = MercuryWikis.DISCUSSIONS_2;
   private static final String DESKTOP_COMMUNITY = MercuryWikis.DISCUSSIONS_3;
