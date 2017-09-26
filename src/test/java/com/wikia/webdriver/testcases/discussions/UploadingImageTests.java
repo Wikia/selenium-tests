@@ -23,7 +23,18 @@ public class UploadingImageTests extends NewTestTemplate {
 
   private static final String DESKTOP = "uploading-image-desktop";
   private static final String MOBILE = "uploading-image-mobile";
-  private static final String UNSUPPORTED_IMAGE_MSG = "Invalid image type, please use jpeg, png or gif.";
+  private static final String UNSUPPORTED_IMAGE_MSG =
+    "Invalid image type, please use jpeg, png or gif.";
+  private static final String POST_IMAGE_VISIBLE = "Uploaded image should be visible in new post";
+  private static final String POST_DELETED_IMAGE_NOT_VISIBLE =
+    "Deleted image should not be visible in new post";
+  private static final String POST_UNSUPPORTED_IMAGE_NOT_VISIBLE =
+    "Unsupported image should not be visible in new post";
+  private static final String REPLY_IMAGE_VISIBLE = "Uploaded image should be visible in new reply";
+  private static final String REPLY_DELETED_IMAGE_NOT_VISIBLE =
+    "Deleted image should not be visible in new reply";
+  private static final String REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE =
+    "Unsupported image should not be visible in new reply";
 
   /**
    * fixture methods
@@ -46,7 +57,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertTrue(page.getPost().firstPostHasImage());
+    Assertion.assertTrue(page.getPost().firstPostHasImage(), POST_IMAGE_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
@@ -56,7 +67,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(post.getId());
     startReplyCreationDesktop(page).uploadValidImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertTrue(page.findNewestReply().hasImage());
+    Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
@@ -68,7 +79,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     postCreator.clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasImage());
+    Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
@@ -81,7 +92,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.findNewestReply().hasImage());
+    Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
@@ -90,7 +101,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktop(page).uploadImage().removeImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasImage());
+    Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_DELETED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
@@ -100,7 +111,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(post.getId());
     startReplyCreationDesktop(page).uploadValidImage().removeImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.findNewestReply().hasImage());
+    Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP, enabled = false)
@@ -127,7 +138,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertTrue(page.getPost().firstPostHasImage());
+    Assertion.assertTrue(page.getPost().firstPostHasImage(), POST_IMAGE_VISIBLE);
   }
 
   @Test(groups = MOBILE)
@@ -137,7 +148,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(post.getId());
     startReplyCreationMobile(page).uploadValidImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertTrue(page.findNewestReply().hasImage());
+    Assertion.assertTrue(page.findNewestReply().hasImage(), REPLY_IMAGE_VISIBLE);
   }
 
   @Test(groups = MOBILE)
@@ -149,7 +160,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     postCreator.clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasImage());
+    Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = MOBILE)
@@ -161,7 +172,7 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     replyCreator.clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.findNewestReply().hasImage());
+    Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = MOBILE)
@@ -170,7 +181,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobile(page).uploadImage().removeImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasImage());
+    Assertion.assertFalse(page.getPost().firstPostHasImage(), POST_DELETED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = MOBILE)
@@ -180,7 +191,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(post.getId());
     startReplyCreationMobile(page).uploadValidImage().removeImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.findNewestReply().hasImage());
+    Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
   @Test(groups = MOBILE, enabled = false)
