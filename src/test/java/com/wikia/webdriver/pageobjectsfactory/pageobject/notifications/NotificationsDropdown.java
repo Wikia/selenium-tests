@@ -7,13 +7,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class NotificationsDropdown extends BasePageObject {
 
-  @FindBy(className = "notifications-scroll-menu")
+  @FindBy(className = "wds-notifications")
   private WebElement notificationsBell;
 
   @Getter
   private Notifications notifications = new Notifications();
 
   public NotificationsDropdown expand() {
+    wait.forElementVisible(notificationsBell);
     hover(notificationsBell);
     wait.forElementVisible(notifications.getNotificationsList());
     return this;
