@@ -35,10 +35,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
   private String wikiNameString;
 
-  public CreateNewWikiPageObjectStep1(WebDriver driver) {
-    super();
-  }
-
   /**
    * Open special Page to create new Wikia. This special page 'Special:CreateNewWiki'
    * is only available on www.wikia.com domain
@@ -63,15 +59,15 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     List<WebElement> langList = wikiLanguageList.findElements(By.cssSelector("li:not(.spacer)"));
     String langSelector = lang + ":";
 
-    for (int i = 0; i < langList.size(); i++) {
-      WebElement selectedLanguage = langList.get(i);
+    for (WebElement selectedLanguage : langList) {
       String selectedLanguageText = selectedLanguage.getText();
       if (selectedLanguageText.contains(langSelector)) {
         wait.forElementClickable(selectedLanguage);
         selectedLanguage.click();
 
         Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
-        PageObjectLogging.log("selectLanguage", "selected " + selectedLanguageText + " language", true, driver);
+        PageObjectLogging
+            .log("selectLanguage", "selected " + selectedLanguageText + " language", true, driver);
         break;
       }
     }
@@ -116,10 +112,4 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
     PageObjectLogging.log("submit", "button \"Next\" clicked", true, driver);
     return new DetachedRegisterPage();
   }
-
-  public void verifyWikiName(String expectedWikiName) {
-    Assertion.assertEquals(wikiName.getAttribute("value"), expectedWikiName);
-    PageObjectLogging.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, true);
-  }
-
 }

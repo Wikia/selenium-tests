@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox;
 
-import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.media.VideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -160,24 +159,12 @@ public class LightboxComponentObject extends WikiBasePageObject {
     PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
   }
 
-  public void verifyTitleUrl(String expectedUrl) {
-    String titleUrl = titleLink.getAttribute("href");
-    Assertion.assertEquals(titleUrl, expectedUrl);
-    PageObjectLogging.log("verifyTitleUrl", "Title URL is correct", true);
-  }
-
   public FilePage clickTitle() {
     new Actions(driver).moveToElement(titleLink).perform();
     wait.forElementVisible(titleLink);
     titleLink.click();
     PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
     return new FilePage();
-  }
-
-  public void verifyMoreInfoUrl(String expectedUrl) {
-    String moreInfoUrl = moreInfoLink.getAttribute("href");
-    Assertion.assertEquals(moreInfoUrl, expectedUrl);
-    PageObjectLogging.log("verifyMoreInfoUrl", "More Info URL is correct", true);
   }
 
   public void clickCarouselRight() {

@@ -5,13 +5,11 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
@@ -41,22 +39,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private String toolsListToolDeleteCss = " img.trash";
   private String toolsListToolEditCss = " img.edit-pencil";
   private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
-
-
-  public CustomizedToolbarComponentObject(WebDriver driver) {
-    super();
-  }
-
-
-  /**
-   * Verifies that user toolbar buttons are visible
-   */
-  public void verifyUserToolBar() {
-    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.overflow"));
-    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.mytools"));
-    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li a.tools-customize"));
-    PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
-  }
 
   /**
    * Clicks on "Customize" button. User must be logged in.
@@ -229,13 +211,13 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   public void unfollowIfFollowed() {
     List<WebElement> list = driver.findElements(toolsList);
-    for (int i = 0; i < list.size(); i++) {
-      if ("Following".equals(list.get(i).getText())) {
+    for (WebElement aList : list) {
+      if ("Following".equals(aList.getText())) {
         clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
         wait.forTextInElement(toolsList, "Follow");
         PageObjectLogging.log("unfollowIfFollowed",
-                              "page was followed, unfollow button clicked", true);
+            "page was followed, unfollow button clicked", true);
         break;
       }
     }
@@ -269,14 +251,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
       Assertion.assertEquals(elem.getAttribute("data-name").toLowerCase(), toolName.toLowerCase());
     }
     PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
-  }
-
-  /**
-   * Get text string from Theme Designer button in My Tools menu
-   *
-   */
-  public String getThemeDesignerText() {
-    return themeDesignerButton.getText();
   }
 
   public void waitForCustomizeToolbarModalToDisappear() {
