@@ -33,7 +33,7 @@ public class CustomizeToolbarTests extends NewTestTemplate {
 
   @BeforeMethod(alwaysRun = true)
   public void LoginAndCreateToolbar() {
-    toolbar = new CustomizedToolbarComponentObject(driver);
+    toolbar = new CustomizedToolbarComponentObject();
     toolbar.openMainPage(wikiURL);
   }
 

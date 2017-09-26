@@ -202,14 +202,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 
   public void verifyFormattingFromVE(Formatting format, String content) {
     waitForElementNotVisibleByElement(veMode);
+
     List<WebElement> elements = articleContentContainer.findElements(format.getTag());
-    boolean isPresent = false;
-    for (WebElement elem : elements) {
-      if (elem.getText().contains(content)) {
-        isPresent = true;
-        break;
-      }
-    }
+    boolean isPresent = elements.stream().anyMatch(elem -> elem.getText().contains(content));
+
     wait.forElementVisible(articleEditButton);
     Assertion.assertTrue(isPresent, "text is not present in the article");
   }
@@ -255,10 +251,10 @@ public class ArticlePageObject extends WikiBasePageObject {
     jsActions.scrollToElement(allCommentsArea);
     WebElement mostRecentComment = articleComments.get(0);
     PageObjectLogging.log("First check",mostRecentComment.getText(), true);
-    JavascriptExecutor js = (JavascriptExecutor) driver;
+
     WebElement editButton = mostRecentComment.findElement(By.cssSelector(EDIT_BUTTON_SELECTOR));
     new Actions(driver).moveToElement(editButton).perform();
-    js.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
+    driver.executeScript("arguments[0].querySelector(arguments[1]).click()", mostRecentComment,
                      EDIT_BUTTON_SELECTOR);
     return new MiniEditorComponentObject(driver);
   }
@@ -383,15 +379,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     PageObjectLogging.log("verifyVideoInline", "Video is visible", true);
   }
 
-  public void verifyVideoAutoplay(String providerName) {
-    VideoComponentObject video = new VideoComponentObject(driver, videoInline);
-    video.verifyVideoAutoplay(providerName, true);
-  }
-
-  public VideoComponentObject getVideoPlayer() {
-    return new VideoComponentObject(driver, videoInline);
-  }
-
   private void verifyTableProperty(String propertyName, int propertyValue) {
     wait.forElementVisible(table);
     Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
@@ -476,15 +463,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     return new PhotoAddComponentObject(driver);
   }
 
-  public FilePage clickVideoDetailsButton() {
-    wait.forElementVisible(videoTitle);
-    jsActions.execute("$('a.details.sprite').css('visibility', 'visible')");
-    wait.forElementVisible(videoDetailsButton);
-    videoDetailsButton.click();
-    PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-    return new FilePage();
-  }
-
   private void clickAddCategoryButton() {
     scrollAndClick(addCategory);
     wait.forElementVisible(addCategoryInput);
@@ -552,15 +530,7 @@ public class ArticlePageObject extends WikiBasePageObject {
   }
 
   public boolean isCategoryPresent(String category) {
-    boolean categoryVisible = false;
-    for (WebElement elem : categoryList) {
-      if (elem.getText().equals(category)) {
-        categoryVisible = true;
-        break;
-      }
-    }
-
-    return categoryVisible;
+    return categoryList.stream().anyMatch(elem -> elem.getText().equals(category));
   }
 
   public WatchPageObject unfollowArticle() {
@@ -713,27 +683,6 @@ public class ArticlePageObject extends WikiBasePageObject {
     commentButton.click();
 
     return this;
-  }
-
-  /**
-   * @param rgba String representing function rgba(int, int, int, int)
-   * @return int[], where 0='red', 1='green', 2='blue'
-   */
-  public static int[] convertRGBAFunctiontoIntTable(String rgba) {
-    int[] extract = new int[3];
-    int start = rgba.indexOf("(", 0) + 1;
-    int end = rgba.indexOf(",", 0);
-    int red = Integer.parseInt(rgba.substring(start, end));
-    start = rgba.indexOf(" ", end + 1) + 1;
-    end = rgba.indexOf(",", end + 1);
-    int green = Integer.parseInt(rgba.substring(start, end));
-    start = rgba.indexOf(" ", end + 1) + 1;
-    end = rgba.indexOf(",", end + 1);
-    int blue = Integer.parseInt(rgba.substring(start, end));
-    extract[0] = red;
-    extract[1] = green;
-    extract[2] = blue;
-    return extract;
   }
 
   public void verifyMainEditEditor(Editor expectedEditor) {

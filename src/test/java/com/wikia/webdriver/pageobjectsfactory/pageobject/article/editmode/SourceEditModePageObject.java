@@ -207,37 +207,11 @@ public class SourceEditModePageObject extends EditMode {
     PageObjectLogging.log("clearSource", "source area erased", true, driver);
   }
 
-  public void closeMore() {
-    moreClose.click();
-  }
-
-  public void addContent(String content) {
-    wait.forElementVisible(textArea);
-    textArea.sendKeys(content);
-    PageObjectLogging.log("addContent", "content was added", true);
-  }
-
   public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "the following content was added: " + content, true);
     return this;
-  }
-
-  public String copyContent() {
-    wait.forElementVisible(textArea);
-    return textArea.getText();
-  }
-
-  public String buildTablePropertiesContent(int border, int width, int height, int cellspacing,
-      int cellpadding, Alignment alignment) {
-    String tablePropertiesContent =
-        SourceModeContent.TABLE.replace("%border%", Integer.toString(border))
-            .replace("%cellpadding%", Integer.toString(cellpadding))
-            .replace("%cellspacing%", Integer.toString(cellspacing))
-            .replace("%float%", alignment.toString()).replace("%height%", Integer.toString(height))
-            .replace("%width%", Integer.toString(width));
-    return tablePropertiesContent;
   }
 
   public void verifyComponentSelector() {
@@ -356,14 +330,6 @@ public class SourceEditModePageObject extends EditMode {
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("appendContent", "text: '" + content + "', added to the source mode",
         true);
-  }
-
-  private void appendNewLine(String content) {
-    wait.forElementVisible(sourceModeTextArea);
-    sourceModeTextArea.sendKeys(Keys.ENTER);
-    sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("appendNewLine",
-        "text " + content + " added to the source mode in new line", true);
   }
 
   public void clearContent() {

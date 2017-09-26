@@ -60,8 +60,6 @@ public class ForumThreadPageObject extends BasePageObject {
   @FindBy(className = "speech-bubble-message")
   private WebElement speechBubble;
 
-  By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
-
   private String wikiaEditorTextarea = "textarea.replyBody";
 
   MiniEditorComponentObject miniEditor;

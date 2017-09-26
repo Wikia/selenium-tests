@@ -36,7 +36,7 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
   private WebElement descriptionTextBox;
 
 
-  public FeaturedVideoContainer(WebDriver driver, WebElement parentElement) {
+  public FeaturedVideoContainer(WebElement parentElement) {
     super();
     this.parentElement = parentElement;
     videoTitleTextBox = parentElement.findElement(videoTitleTextBoxBy);
@@ -57,14 +57,6 @@ public class FeaturedVideoContainer extends WikiBasePageObject {
 
   public String getDescription(){
     return descriptionTextBox.getText();
-  }
-
-  public String getImageName(){
-    return imageTitleTextBox.getText();
-  }
-
-  public String getVideoDisplayedName(){
-    return displayedTitleTextBox.getText();
   }
 
   public VetAddVideoComponentObject clickAddVideo() {

@@ -2,22 +2,19 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
 
-public class AvatarComponentObject extends EditProfileComponentObject {
+public class AvatarComponentObject extends WikiBasePageObject {
 
   @FindBy(css = "#UPPLightboxAvatar")
   private WebElement uploadInput;
   @FindBy(css = "#UPPLightboxWrapper [data-event=save]")
   private WebElement saveButton;
-
-  public AvatarComponentObject(WebDriver driver) {
-    super(driver);
-  }
 
   public void uploadAvatar(String file) {
     File fileCheck = new File("." + File.separator + "src" + File.separator

@@ -172,11 +172,6 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     return this;
   }
 
-  public void verifyResultsNumber(int number) {
-    wait.forElementVisible(searchResultList.get(0));
-    Assertion.assertNumber(searchResultList.size(), number, "checking number of search results");
-  }
-
   public void verifyNoPagination() {
     wait.forElementNotPresent(paginationContainerBy);
     PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
@@ -207,7 +202,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     String jpgOrPngImage = ".*(\\.png|\\.jpg|Wikia-hero-image).*";
     for (WebElement elem : thumbnails) {
       boolean isImage = Pattern.matches(jpgOrPngImage, elem.getAttribute("src"));
-      PageObjectLogging.log("isImage", elem.getAttribute("src").toString(), true);
+      PageObjectLogging.log("isImage", elem.getAttribute("src"), true);
       try {
         if (!isImage) {
           throw new AssertionError();
@@ -238,13 +233,5 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
       Assertion.assertStringContains(statisticsImages.get(i).getText(), "IMAGE");
       Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
     }
-  }
-
-  public String getFirstDescription() {
-    return firstResultDescription.getText();
-  }
-
-  public String getFirstImageText() {
-    return ImageHelper.getImageId(thumbnails.get(0));
   }
 }

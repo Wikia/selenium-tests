@@ -42,22 +42,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
   private String toolsListToolEditCss = " img.edit-pencil";
   private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
 
-
-  public CustomizedToolbarComponentObject(WebDriver driver) {
-    super();
-  }
-
-
-  /**
-   * Verifies that user toolbar buttons are visible
-   */
-  public void verifyUserToolBar() {
-    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.overflow"));
-    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li.mytools"));
-    wait.forElementVisible(By.cssSelector("div.toolbar ul.tools li a.tools-customize"));
-    PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
-  }
-
   /**
    * Clicks on "Customize" button. User must be logged in.
    */
@@ -229,13 +213,13 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
 
   public void unfollowIfFollowed() {
     List<WebElement> list = driver.findElements(toolsList);
-    for (int i = 0; i < list.size(); i++) {
-      if ("Following".equals(list.get(i).getText())) {
+    for (WebElement aList : list) {
+      if ("Following".equals(aList.getText())) {
         clickOnTool(PageContent.FOLLOW);
         verifyFollowMessage();
         wait.forTextInElement(toolsList, "Follow");
         PageObjectLogging.log("unfollowIfFollowed",
-                              "page was followed, unfollow button clicked", true);
+            "page was followed, unfollow button clicked", true);
         break;
       }
     }
@@ -269,14 +253,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject {
       Assertion.assertEquals(elem.getAttribute("data-name").toLowerCase(), toolName.toLowerCase());
     }
     PageObjectLogging.log("verifyToolInMoreTool", toolName + " appears in ToolbarMoreTool.", true);
-  }
-
-  /**
-   * Get text string from Theme Designer button in My Tools menu
-   *
-   */
-  public String getThemeDesignerText() {
-    return themeDesignerButton.getText();
   }
 
   public void waitForCustomizeToolbarModalToDisappear() {

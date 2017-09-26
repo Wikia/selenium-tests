@@ -71,7 +71,7 @@ public class ForumBoardTests extends NewTestTemplate {
 
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
-    forumBoard.startDiscussionWithVideo(VideoContent.YOUTUBE_VIDEO_URL3, title);
+    forumBoard.startDiscussionWithVideo(title);
     forumBoard.clickPostButton();
   }
 

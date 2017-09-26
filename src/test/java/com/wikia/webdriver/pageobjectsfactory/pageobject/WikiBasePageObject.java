@@ -184,12 +184,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new PreferencesPageObject();
   }
 
-  public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
-    return new SpecialPromotePageObject(driver);
-  }
-
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
@@ -270,7 +264,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
-    return new CreateNewWikiPageObjectStep1(driver);
+    return new CreateNewWikiPageObjectStep1();
   }
 
   public void openSpecialWatchListPage(String wikiURL) {
