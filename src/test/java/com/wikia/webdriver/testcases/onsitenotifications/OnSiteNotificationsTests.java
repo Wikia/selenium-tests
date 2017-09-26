@@ -63,6 +63,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createReplyReturningExpectedNotification(User.USER_11, User.USER_2);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
@@ -72,6 +73,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
@@ -81,6 +83,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
@@ -90,6 +93,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_11);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
@@ -99,6 +103,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
     notificationsList.markAllAsRead();
     Assertion.assertFalse(notificationsList.isAnyNotificationUnread());
+    Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread());
   }
 
   /**
@@ -112,6 +117,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createReplyReturningExpectedNotification(User.USER_12, User.USER_2);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
@@ -121,6 +127,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
@@ -130,6 +137,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
@@ -139,6 +147,7 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_12);
 
     Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
+    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
   }
 
   /**
