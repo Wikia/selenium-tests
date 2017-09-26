@@ -1,5 +1,7 @@
 package com.wikia.webdriver.common.core.helpers;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -41,7 +43,9 @@ public class ContentLoader {
   }
 
   private static String getImageResource(String filename) {
-    return ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
+    String filePath =
+      ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
+    return new File(filePath).getAbsolutePath();
   }
 
   public static String getImage() {
