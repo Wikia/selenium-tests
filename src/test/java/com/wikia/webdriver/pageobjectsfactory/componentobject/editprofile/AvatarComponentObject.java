@@ -1,13 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.editprofile;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import org.openqa.selenium.WebDriver;
+import java.io.File;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.io.File;
 
 public class AvatarComponentObject extends WikiBasePageObject {
 
