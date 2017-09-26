@@ -14,6 +14,7 @@ public class NotificationsDropdown extends BasePageObject {
   private Notifications notifications = new Notifications();
 
   public NotificationsDropdown expand() {
+    wait.forElementVisible(notificationsBell);
     hover(notificationsBell);
     wait.forElementVisible(notifications.getNotificationsList());
     return this;
