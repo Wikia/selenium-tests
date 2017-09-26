@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.discussions;
 
+import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
@@ -23,8 +24,8 @@ public class UploadingImageTests extends NewTestTemplate {
   private static final String DESKTOP = "uploading-image-desktop";
   private static final String MOBILE = "uploading-image-mobile";
 
-  private static final String MOBILE_COMMUNITY = "sandbox-s3.dman";
-  private static final String DESKTOP_COMMUNITY = "sandbox-s3.dman";
+  private static final String MOBILE_COMMUNITY = MercuryWikis.DISCUSSIONS_2;
+  private static final String DESKTOP_COMMUNITY = MercuryWikis.DISCUSSIONS_3;
 
   private static final String UNSUPPORTED_IMAGE_MSG =
     "Invalid image type, please use jpeg, png or gif.";
