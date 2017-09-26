@@ -61,7 +61,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
    * Test methods - DESKTOP
    */
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostReplyNotification() {
     Notification notification = createReplyReturningExpectedNotification(User.USER_11, User.USER_2);
@@ -69,7 +70,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
     Notification notification =
@@ -78,7 +80,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
     Notification notification =
@@ -87,7 +90,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopSeesConsolidatedReplyNotification() {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_11);
@@ -95,7 +99,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
+  @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopMarksAllNotificationsAsRead() {
     Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
@@ -111,7 +116,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
    */
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileReceivesPostReplyNotification() {
     Notification notification = createReplyReturningExpectedNotification(User.USER_12, User.USER_2);
 
@@ -119,7 +125,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
     Notification notification =
       createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
@@ -128,7 +135,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
     Notification notification =
       createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
@@ -137,7 +145,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  @Test(groups = MOBILE)
   public void userOnMobileSeesConsolidatedReplyNotification() {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_12);
 
