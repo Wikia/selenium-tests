@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 public class Replies extends BasePageObject {

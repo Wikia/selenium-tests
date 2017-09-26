@@ -5,9 +5,6 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Reply
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.regex.Pattern;
 
 
 public class PostDetailsPage extends WikiBasePageObject implements AvailablePage {
