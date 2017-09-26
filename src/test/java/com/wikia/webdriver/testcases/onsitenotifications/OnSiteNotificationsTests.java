@@ -31,6 +31,11 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private static final String DESKTOP = "on-site-notifications-desktop";
   private static final String MOBILE = "on-site-notifications-mobile";
 
+  private static final String ALL_READ = "All notifications should be marked as read on %s page";
+  private static final String NOTIFICATION_VISIBLE_MSG = "Notification [%s] should be displayed on %s page";
+  private static final String ARTICLE = "article";
+  private static final String DISCUSSION = "discussion";
+
   private String siteId;
   private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_3;
   private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_4;
@@ -56,98 +61,87 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
    * Test methods - DESKTOP
    */
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
-  @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostReplyNotification() {
     Notification notification = createReplyReturningExpectedNotification(User.USER_11, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
-  @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
+    Notification notification =
+      createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
-  @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
+    Notification notification =
+      createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
-  @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopSeesConsolidatedReplyNotification() {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_11);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
-  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
-  @Test(groups = DESKTOP)
+  @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP) @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopMarksAllNotificationsAsRead() {
     Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
     notificationsList.markAllAsRead();
-    Assertion.assertFalse(notificationsList.isAnyNotificationUnread());
-    Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread());
+    Assertion.assertFalse(notificationsList.isAnyNotificationUnread(),
+      String.format(ALL_READ, DISCUSSION));
+    Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread(),
+      String.format(ALL_READ, ARTICLE));
   }
 
   /**
    * Test methods - MOBILE
    */
 
-  @Execute(asUser =  User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = MOBILE)
+  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
   public void userOnMobileReceivesPostReplyNotification() {
     Notification notification = createReplyReturningExpectedNotification(User.USER_12, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
+    Notification notification =
+      createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
+    Notification notification =
+      createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  @Test(groups = MOBILE)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5) @Test(groups = MOBILE)
   public void userOnMobileSeesConsolidatedReplyNotification() {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_12);
 
-    Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification));
-    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   /**
@@ -228,4 +222,21 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
       .getNotifications();
   }
 
+  private String getMessageFor(Notification notification, String page) {
+    return String.format(NOTIFICATION_VISIBLE_MSG, notification.getContent(), page);
+  }
+
+  private void verifyNotificationDisplayedOnDesktop(Notification notification) {
+    Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification),
+      getMessageFor(notification, DISCUSSION));
+    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification),
+      getMessageFor(notification, ARTICLE));
+  }
+
+  private void verifyNotificationDisplayedOnMobile(Notification notification) {
+    Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification),
+      getMessageFor(notification, DISCUSSION));
+    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification),
+      getMessageFor(notification, ARTICLE));
+  }
 }
