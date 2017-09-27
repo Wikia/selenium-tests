@@ -31,10 +31,11 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void selectCategory(int categoryId) {
-    hover(wikiCategoryDropdown);
+    wait.forElementClickable(wikiCategoryDropdown);
+    jsActions.scrollToSpecificElement(wikiCategoryDropdown);
+    wikiCategoryDropdown.click();
 
     WebElement selectedCategory = wikiCategoryList.findElement(By.id(String.valueOf(categoryId)));
-    wait.forElementClickable(selectedCategory);
 
     String selectedCategoryText = selectedCategory.getText();
     selectedCategory.click();
