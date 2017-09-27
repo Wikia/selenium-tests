@@ -3,15 +3,12 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
+import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
@@ -70,6 +67,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void openLightboxImage(int index) {
-    imageList.get(index).click();
+    WebElement targetImage = imageList.get(index);
+    scrollAndClick(targetImage);
   }
 }
