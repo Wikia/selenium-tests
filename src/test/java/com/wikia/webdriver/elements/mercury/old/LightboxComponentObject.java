@@ -70,6 +70,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void openLightboxImage(int index) {
-    imageList.get(index).click();
+    WebElement targetImage = imageList.get(index);
+    scrollAndClick(targetImage);
   }
 }
