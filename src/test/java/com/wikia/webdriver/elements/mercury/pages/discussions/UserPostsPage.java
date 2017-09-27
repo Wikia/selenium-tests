@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.regex.Pattern;
 
-public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
+public class UserPostsPage extends MultiplePostsPage {
 
   @Getter(lazy = true) private final Post post = new Post();
 

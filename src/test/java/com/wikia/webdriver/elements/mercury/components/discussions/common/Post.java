@@ -169,10 +169,7 @@ public class Post extends BasePageObject {
     return post;
   }
 
-  @SneakyThrows(InterruptedException.class)
-  private void sleepForTwoSeconds() {
-    TimeUnit.SECONDS.sleep(2);
-  }
+
 
 
   public String getPostDetailText() {

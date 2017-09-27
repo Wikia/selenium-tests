@@ -12,7 +12,6 @@ import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.elements.mercury.pages.discussions.AvailablePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.FollowPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
@@ -197,10 +196,10 @@ public class FollowingPostTests extends NewTestTemplate {
     Assertion.assertFalse(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
-  private void assertThatAnonymousUserCannotFollowPostOn(Function<PostEntity.Data, AvailablePage> navigator) {
+  private void assertThatAnonymousUserCannotFollowPostOn(Function<PostEntity.Data, PageWithPosts> navigator) {
     final PostEntity.Data data = createPostAsUserRemotely();
 
-    final AvailablePage page = navigator.apply(data);
+    final PageWithPosts page = navigator.apply(data);
     clickFollowOn(page);
 
     Assertion.assertEquals(page.getSignInToFollowModalDialog().getText(),

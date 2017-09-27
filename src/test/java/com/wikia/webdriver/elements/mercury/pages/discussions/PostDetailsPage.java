@@ -7,7 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
 
-public class PostDetailsPage extends WikiBasePageObject implements AvailablePage {
+public class PostDetailsPage extends WikiBasePageObject implements PageWithPosts {
 
   @Getter(lazy = true)
   private final TopNoteModalDialog topNoteModalDialog = new TopNoteModalDialog();

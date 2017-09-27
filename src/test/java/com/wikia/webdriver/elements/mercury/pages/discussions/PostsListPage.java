@@ -15,13 +15,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import com.google.common.base.Predicate;
 import lombok.Getter;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-public class PostsListPage extends WikiBasePageObject implements AvailablePage {
+public class PostsListPage extends MultiplePostsPage {
 
   public static final String PATH = "/d/f";
 
@@ -90,11 +89,4 @@ public class PostsListPage extends WikiBasePageObject implements AvailablePage {
     }
   }
 
-  @Override
-  public Optional<PostEntity> getPostById(String postId) {
-    return Optional.ofNullable(
-      getPost().getPosts().stream().peek(postEntity -> scrollTo(postEntity.getWebElement()))
-        .filter(postEntity -> postEntity.findId().equals(postId)).findFirst()
-        .orElseThrow(() -> new RuntimeException(String.format("Element with id %s not found on page", postId))));
-  }
 }

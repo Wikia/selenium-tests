@@ -3,12 +3,14 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PostEntity {
 
@@ -139,8 +141,15 @@ public class PostEntity {
     return MoreOptionsPopOver.fromPostEntity(this);
   }
 
-  public void clickFollow() {
+  public PostEntity clickFollow() {
     findFollowArea().click();
+    sleepForTwoSeconds();
+    return this;
+  }
+
+  @SneakyThrows(InterruptedException.class)
+  private void sleepForTwoSeconds() {
+    TimeUnit.SECONDS.sleep(2);
   }
 
   private WebElement findFollowArea() {

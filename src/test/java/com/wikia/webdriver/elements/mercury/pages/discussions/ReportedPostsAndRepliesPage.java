@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
@@ -19,5 +20,9 @@ public class ReportedPostsAndRepliesPage extends WikiBasePageObject implements P
   public ReportedPostsAndRepliesPage open() {
     driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
     return this;
+  }
+
+  @Override public SignInToFollowModalDialog getSignInToFollowModalDialog() {
+    throw new UnsupportedOperationException("Reported posts page not reachable for unauthorized users");
   }
 }

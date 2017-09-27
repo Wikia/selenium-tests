@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.NoFollowedPostsMessage;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
@@ -19,5 +20,10 @@ public class FollowPage extends WikiBasePageObject implements PageWithPosts {
     final FollowPage page = new FollowPage();
     page.getUrl(page.urlBuilder.getUrlForWiki() + PATH);
     return page;
+  }
+
+  @Override
+  public SignInToFollowModalDialog getSignInToFollowModalDialog() {
+    throw new UnsupportedOperationException("FollowPage not reachable for unauthorized users");
   }
 }
