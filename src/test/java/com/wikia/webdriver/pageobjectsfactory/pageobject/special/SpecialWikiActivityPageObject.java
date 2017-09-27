@@ -60,10 +60,6 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
     return isActivityDisplayedWithType(ActivityType.EDIT, articleName, userName);
   }
 
-  public Activity getMostRecentArticleActivity() {
-    return getMostRecentActivityOfType(ActivityType.NEW_PAGE);
-  }
-
   public Activity getMostRecentEditActivity() {
     return getMostRecentActivityOfType(ActivityType.EDIT);
   }

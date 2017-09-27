@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class ContentLoader {
 
   private static final String TEXT_FILES_PATH_FORMAT = "TextFiles/%s";
+  private static final String IMG_FILES_PATH_FORMAT = "ImagesForUploadTests/%s";
 
   private ContentLoader() {}
 
@@ -38,6 +39,22 @@ public class ContentLoader {
       throw new ContentLoaderException("Error when loading file!", ex);
     }
     return textContent.toString();
+  }
+
+  private static String getImageResource(String filename) {
+    String filePath =
+      ClassLoader.getSystemResource(String.format(IMG_FILES_PATH_FORMAT, filename)).getPath();
+    // calling new File(...) as a workaround to be compliant with windows and unix paths
+    // File constructor calls FileSystem.normalize(...) on path
+    return new File(filePath).getAbsolutePath();
+  }
+
+  public static String getImage() {
+    return getImageResource("spiderman.jpg");
+  }
+
+  public static String getUnsupportedImage() {
+    return getImageResource("dragon.bmp");
   }
 
 }

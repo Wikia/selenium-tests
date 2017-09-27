@@ -20,10 +20,6 @@ public class RenamePageObject extends ArticlePageObject {
     super();
   }
 
-  public ArticlePageObject rename(String newName) {
-    return rename(newName, false);
-  }
-
   public ArticlePageObject rename(String newName, boolean leaveRedirect) {
     newNameInput.clear();
     newNameInput.sendKeys(newName);

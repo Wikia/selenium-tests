@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.elements.oasis.components.notifications.Notification;
 import com.wikia.webdriver.elements.oasis.components.notifications.NotificationType;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
@@ -96,7 +97,10 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
   }
 
   private void verifyForumDeletedText(String deletedName) {
-    Assertion.assertListContains(getNotifications(NotificationType.CONFIRM).stream().map(n->n.getMessage()).collect(Collectors.toList()),
+    Assertion.assertListContains(
+        getNotifications(NotificationType.CONFIRM).stream()
+            .map(Notification::getMessage)
+            .collect(Collectors.toList()),
             "\"Board:" + deletedName + "\" has been deleted.");
     PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);
   }
@@ -106,16 +110,6 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     confirmDeleteForum(sourceForumName, destinationForumName);
     clickDeleteAndMergeForum();
     verifyForumDeletedText(sourceForumName);
-  }
-
-  public String getFirstForumName() {
-    wait.forElementVisible(firstForumLink);
-    return firstForumLink.getText();
-  }
-
-  public String getSecondForumName() {
-    wait.forElementVisible(secondForumLink);
-    return secondForumLink.getText();
   }
 
   public void verifyForumExists(String forumName, String wikiURL) {
@@ -138,8 +132,11 @@ public class ForumManageBoardsPageObject extends WikiBasePageObject {
     } catch (UnsupportedEncodingException e) {
       PageObjectLogging.log("verifyForumNotExists", e, false);
     }
-    Assertion.assertListContains(getNotifications(NotificationType.WARN).stream().map(n->n.getMessage()).collect(Collectors.toList()),
-            "There is no Forum Board with that title. Please try again or check out this list of Forum Boards.");
+    Assertion.assertListContains(
+        getNotifications(NotificationType.WARN).stream()
+            .map(Notification::getMessage)
+            .collect(Collectors.toList()),
+        "There is no Forum Board with that title. Please try again or check out this list of Forum Boards.");
     PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
   }
 

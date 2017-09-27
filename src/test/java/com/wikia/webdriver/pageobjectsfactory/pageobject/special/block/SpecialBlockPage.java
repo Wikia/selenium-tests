@@ -77,14 +77,14 @@ public class SpecialBlockPage extends WikiBasePageObject {
   }
 
   public void deselectAllSelections() {
-    for (WebElement checkBox : checkBoxes) {
-      if (checkBox.isSelected()) {
-        checkBox.click();
-      }
-    }
-    for (WebElement checkBox : checkBoxes) {
-      Assertion.assertFalse(checkBox.isSelected());
-    }
+    checkBoxes.stream()
+        .filter(WebElement::isSelected)
+        .forEach(WebElement::click);
+
+    checkBoxes.stream()
+        .map(WebElement::isSelected)
+        .forEach(Assertion::assertFalse);
+
     PageObjectLogging.log("deselectAllSelections", "all selections deselected", true);
   }
 }

@@ -1,19 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.addtable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
@@ -21,6 +13,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.wikitextshortcuts.WikiTextShortCutsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class SourceEditModePageObject extends EditMode {
 
@@ -207,37 +203,11 @@ public class SourceEditModePageObject extends EditMode {
     PageObjectLogging.log("clearSource", "source area erased", true, driver);
   }
 
-  public void closeMore() {
-    moreClose.click();
-  }
-
-  public void addContent(String content) {
-    wait.forElementVisible(textArea);
-    textArea.sendKeys(content);
-    PageObjectLogging.log("addContent", "content was added", true);
-  }
-
   public SourceEditModePageObject addContentInSourceMode(String content) {
     wait.forElementVisible(sourceModeTextArea);
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("addContent", "the following content was added: " + content, true);
     return this;
-  }
-
-  public String copyContent() {
-    wait.forElementVisible(textArea);
-    return textArea.getText();
-  }
-
-  public String buildTablePropertiesContent(int border, int width, int height, int cellspacing,
-      int cellpadding, Alignment alignment) {
-    String tablePropertiesContent =
-        SourceModeContent.TABLE.replace("%border%", Integer.toString(border))
-            .replace("%cellpadding%", Integer.toString(cellpadding))
-            .replace("%cellspacing%", Integer.toString(cellspacing))
-            .replace("%float%", alignment.toString()).replace("%height%", Integer.toString(height))
-            .replace("%width%", Integer.toString(width));
-    return tablePropertiesContent;
   }
 
   public void verifyComponentSelector() {
@@ -356,14 +326,6 @@ public class SourceEditModePageObject extends EditMode {
     sourceModeTextArea.sendKeys(content);
     PageObjectLogging.log("appendContent", "text: '" + content + "', added to the source mode",
         true);
-  }
-
-  private void appendNewLine(String content) {
-    wait.forElementVisible(sourceModeTextArea);
-    sourceModeTextArea.sendKeys(Keys.ENTER);
-    sourceModeTextArea.sendKeys(content);
-    PageObjectLogging.log("appendNewLine",
-        "text " + content + " added to the source mode in new line", true);
   }
 
   public void clearContent() {
