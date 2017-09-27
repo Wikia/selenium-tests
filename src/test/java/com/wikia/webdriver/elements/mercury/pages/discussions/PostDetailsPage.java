@@ -61,4 +61,9 @@ public class PostDetailsPage extends PageWithPosts {
   public Reply findNewestReply() {
     return getReplies().getNewestReply();
   }
+
+  @Override
+  public PostDetailsPage open() {
+    return openEmptyPost();
+  }
 }

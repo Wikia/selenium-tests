@@ -16,12 +16,14 @@ public class FollowPage extends PageWithPosts {
   @Getter(lazy = true)
   private final Post post = new Post();
 
-  public static FollowPage open() {
+  @Override
+  public FollowPage open() {
     final FollowPage page = new FollowPage();
     page.getUrl(page.urlBuilder.getUrlForWiki() + PATH);
     return page;
   }
 
+  @Override
   public SignInToFollowModalDialog getSignInToFollowModalDialog() {
     throw new UnsupportedOperationException("FollowPage not reachable for unauthorized users");
   }

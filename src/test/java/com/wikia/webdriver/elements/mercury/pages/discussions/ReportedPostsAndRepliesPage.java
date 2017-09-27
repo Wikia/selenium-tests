@@ -17,12 +17,14 @@ public class ReportedPostsAndRepliesPage extends PageWithPosts {
 
   private static final String PATH = "/d/reported";
 
+  @Override
   public ReportedPostsAndRepliesPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
+    driver.get(urlBuilder.getUrlForWiki() + PATH);
     return this;
   }
 
-  @Override public SignInToFollowModalDialog getSignInToFollowModalDialog() {
+  @Override
+  public SignInToFollowModalDialog getSignInToFollowModalDialog() {
     throw new UnsupportedOperationException("Reported posts page not reachable for unauthorized users");
   }
 }

@@ -67,6 +67,7 @@ public class PostsListPage extends PageWithPosts {
   private final CategoriesFieldset categories = new CategoriesFieldset();
 
 
+  @Override
   public PostsListPage open() {
     driver.get(urlBuilder.getUrlForWiki() + PATH);
     waitForPageReload();

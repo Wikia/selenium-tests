@@ -25,4 +25,6 @@ public abstract class PageWithPosts extends WikiBasePageObject {
   public abstract Post getPost();
 
   public abstract SignInToFollowModalDialog getSignInToFollowModalDialog();
+
+  public abstract PageWithPosts open();
 }

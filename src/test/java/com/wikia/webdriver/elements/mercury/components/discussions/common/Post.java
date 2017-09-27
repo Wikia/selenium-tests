@@ -162,16 +162,6 @@ public class Post extends BasePageObject {
     return upvoteButton.isDisplayed();
   }
 
-  public PostEntity clickFollowFirstPost() {
-    PostEntity post = findNewestPost();
-    post.clickFollow();
-    sleepForTwoSeconds();
-    return post;
-  }
-
-
-
-
   public String getPostDetailText() {
     return wait.forElementVisible(postDetails).getText();
   }

@@ -106,11 +106,8 @@ public class FollowingPostTests extends NewTestTemplate {
   @RelatedIssue(issueID = "SOC-3674", comment = "Introducing pagination")
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanFollowAndUnfollowPostOnFollowedPostsPage() {
-    createPostAsUserRemotely();
-    final FollowPage page = FollowPage.open();
-
-    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
+  public void userOnMobileCanUnfollowAndFollowPostOnFollowedPostsPage() {
+    assertThatPostCanBeUnfollowedAndFollowedOn(new FollowPage());
   }
 
   /**
@@ -143,10 +140,7 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(browser = Browser.FIREFOX, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnDesktopCanFollowAndUnfollowPostOnFollowedPostsPage() {
-    createPostAsUserRemotely();
-    final FollowPage page = FollowPage.open();
-
-    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
+    assertThatPostCanBeUnfollowedAndFollowedOn(new FollowPage());
   }
 
   /**
@@ -157,10 +151,10 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void discussionsAdministratorOnMobileCanFollowAndUnfollowPostOnReportedPostsPage() {
-    createAndReportPostAsUserRemotely();
+    PostEntity.Data data = createAndReportPostAsUserRemotely();
     ReportedPostsAndRepliesPage page = new ReportedPostsAndRepliesPage().open();
-    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
-    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page);
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page, data);
+    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page, data);
   }
 
   /**
@@ -171,56 +165,59 @@ public class FollowingPostTests extends NewTestTemplate {
   @Execute(asUser = User.DISCUSSIONS_ADMINISTRATOR)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void discussionsAdministratorOnDesktopCanFollowAndUnfollowPostOnReportedPostsPage() {
-    createAndReportPostAsUserRemotely();
+    PostEntity.Data data = createAndReportPostAsUserRemotely();
     ReportedPostsAndRepliesPage page = new ReportedPostsAndRepliesPage().open();
-    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page);
-    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page);
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page, data);
+    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page, data);
   }
 
   /**
    * helper methods
    */
 
-  private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(PageWithPosts page) {
-    String postId = clickFollowOn(page, ).toData().getId();
-    Assertion.assertTrue(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
-  }
-
-  private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(PageWithPosts page) {
-    String postId = clickFollowOn(page, ).toData().getId();
-    Assertion.assertFalse(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
-  }
-
   private void assertThatAnonymousUserCannotFollowPostOn(Function<PostEntity.Data, PageWithPosts> navigator) {
     final PostEntity.Data data = createPostAsUserRemotely();
-
     final PageWithPosts page = navigator.apply(data);
-    clickFollowOn(page, );
+    clickFollowOn(page, data);
 
     Assertion.assertEquals(page.getSignInToFollowModalDialog().getText(),
       SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT, SIGN_IN_MODAL_SHOULD_APPEAR);
-    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed());
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
+  }
+
+  private void clickFollowOn(PageWithPosts page, PostEntity.Data data) {
+    page.getPostById(data.getId()).ifPresent(PostEntity::clickFollow);
+  }
+
+  private void assertThatPostCanBeFollowedAndUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
+    final PostEntity.Data data = createPostAsUserRemotely();
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(navigator.apply(data), data);
+    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(navigator.apply(data), data);
+  }
+
+  private void assertThatPostCanBeUnfollowedAndFollowedOn(PageWithPosts page) {
+    final PostEntity.Data data = createPostAsUserRemotely();
+    followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(page.open(), data);
+    followPostOnPageAndCheckIfFollowedAfterPageRefresh(page.open(), data);
+  }
+
+  private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(PageWithPosts page, PostEntity.Data data) {
+    clickFollowOn(page, data);
+    Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_FOLLOW_POST);
+  }
+
+  private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(PageWithPosts page, PostEntity.Data data) {
+    clickFollowOn(page, data);
+    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
     return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
-  private PostEntity clickFollowOn(PageWithPosts page, PostEntity.Data post) {
-    return page.
-  }
-
-  private void assertThatPostCanBeFollowedAndUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
-    final PostEntity.Data data = createPostAsUserRemotely();
-
-    clickFollowOn(navigator.apply(data), );
-    Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_FOLLOW_POST);
-    clickFollowOn(navigator.apply(data), );
-    Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
-  }
-
-  private void createAndReportPostAsUserRemotely() {
+  private PostEntity.Data createAndReportPostAsUserRemotely() {
     final PostEntity.Data data = createPostAsUserRemotely();
     DiscussionsClient.using(User.USER, driver).reportPost(data);
+    return data;
   }
 }

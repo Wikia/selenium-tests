@@ -40,6 +40,7 @@ public class UserPostsPage extends PageWithPosts {
     return this;
   }
 
+  @Override
   public UserPostsPage open() {
     return open(NON_EXISTING_USER_ID);
   }
