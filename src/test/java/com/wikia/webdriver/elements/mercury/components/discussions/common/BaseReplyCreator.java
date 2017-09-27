@@ -1,25 +1,23 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebElement;
 
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
 
   protected abstract WebElement getReplyCreator();
-
   protected abstract WebElement getDialogSignIn();
-
   protected abstract WebElement getOkButtonInSignInDialog();
-
   protected abstract WebElement getSignInButtonInSignInDialog();
-
   protected abstract WebElement getGuidelinesReadButton();
-
   protected abstract WebElement getTextarea();
-
   protected abstract WebElement getSubmitButton();
-
   protected abstract WebElement getLoadingSuccess();
+  protected abstract WebElement getAlertNotification();
+  protected abstract WebElement getImagePreview();
+  protected abstract WebElement getUploadButton();
+  protected abstract WebElement getImageDeleteButton();
 
   @Override
   public ReplyCreator click() {
@@ -79,4 +77,23 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     waitSafely(() -> wait.forElementNotVisible(getLoadingSuccess()));
     return this;
   }
+
+  public BaseReplyCreator uploadImage() {
+    getUploadButton().sendKeys(ContentLoader.getImage());
+    wait.forElementVisible(getImagePreview());
+    return this;
+  }
+
+  public String uploadUnsupportedImage() {
+    getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
+    wait.forElementVisible(getAlertNotification());
+    return getAlertNotification().getText();
+  }
+
+  public BaseReplyCreator removeImage() {
+    waitAndClick(getImageDeleteButton());
+    wait.forElementNotVisible(getImagePreview());
+    return this;
+  }
+
 }

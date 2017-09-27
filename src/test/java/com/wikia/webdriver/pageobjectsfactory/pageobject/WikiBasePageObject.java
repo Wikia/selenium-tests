@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.EmailUtils;
 import com.wikia.webdriver.common.core.Helios;
 import com.wikia.webdriver.common.core.configuration.Configuration;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -27,22 +26,18 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.GlobalNavigation;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationsDropdown;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.*;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialMultipleUploadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialUploadPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialWhatLinksHerePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPage;
-import lombok.Getter;
-import org.apache.commons.lang3.Range;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +45,19 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import org.apache.commons.lang3.Range;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -184,12 +192,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new PreferencesPageObject();
   }
 
-  public SpecialPromotePageObject openSpecialPromotePage(String wikiURL) {
-    getUrl(wikiURL + URLsContent.SPECIAL_PROMOTE);
-    PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
-    return new SpecialPromotePageObject(driver);
-  }
-
   public AttachedSignInPage openSpecialUserLogin(String wikiURL) {
     getUrl(wikiURL + URLsContent.USER_LOGIN);
     PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
@@ -270,7 +272,7 @@ public class WikiBasePageObject extends BasePageObject {
 
   public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
     getUrl(wikiURL + URLsContent.SPECIAL_CREATE_NEW_WIKI);
-    return new CreateNewWikiPageObjectStep1(driver);
+    return new CreateNewWikiPageObjectStep1();
   }
 
   public void openSpecialWatchListPage(String wikiURL) {

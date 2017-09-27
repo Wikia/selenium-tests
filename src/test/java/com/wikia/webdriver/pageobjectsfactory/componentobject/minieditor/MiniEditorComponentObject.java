@@ -79,21 +79,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject {
     messageBodyField.sendKeys(text);
   }
 
-  public void writeStylesMiniEditor(String message, String special) {
-    String specialKey = "Not Initialized";
-    if ("Bold".equals(special)) {
-      specialKey = "b";
-    }
-    if ("Italic".equals(special)) {
-      specialKey = "i";
-    }
-    wait.forElementVisible(messageBodyField);
-    messageBodyField.sendKeys(message);
-    messageBodyField.sendKeys(Keys.LEFT_CONTROL + "a");
-    messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey);
-  }
-
-  public void addVideoMiniEditor(String url) {
+  public void addVideoMiniEditor() {
     wait.forElementClickable(addVideoButton);
     scrollAndClick(addVideoButton);
     VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);

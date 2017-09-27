@@ -30,16 +30,8 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
     PageFactory.initElements(driver, this);
   }
 
-  public void describeYourTopic(String description) {
-    wait.forElementVisible(descriptionField);
-    descriptionField.sendKeys(description);
-    PageObjectLogging
-        .log("describeYourTopic", "describe your topic populated with: " + description, true);
-  }
-
   public void selectCategory(int categoryId) {
-    wait.forElementClickable(wikiCategoryDropdown);
-    wikiCategoryDropdown.click();
+    hover(wikiCategoryDropdown);
 
     WebElement selectedCategory = wikiCategoryList.findElement(By.id(String.valueOf(categoryId)));
     wait.forElementClickable(selectedCategory);

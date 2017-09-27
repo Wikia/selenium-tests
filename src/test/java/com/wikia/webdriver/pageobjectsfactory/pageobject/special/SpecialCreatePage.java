@@ -1,10 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiArticleEditMode;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,12 +33,5 @@ public class SpecialCreatePage extends SpecialPageObject {
     submitTitleInput.click();
     waitForElementNotVisibleByElement(submitTitleInput);
     return new VisualEditModePageObject();
-  }
-
-  public void addPageWithGivenTitleAndDefaultContent(String title) {
-    populateTitleField(title);
-    WikiArticleEditMode article = new WikiArticleEditMode();
-    article.typeInContent(PageContent.ARTICLE_TEXT);
-    article.clickOnPublish();
   }
 }

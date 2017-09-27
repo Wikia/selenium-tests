@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.onsitenotifications;
 
 import com.google.common.collect.Lists;
+import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
@@ -13,7 +14,10 @@ import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyEntityData;
+import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notification;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.NotificationFactory;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.notifications.Notifications;
@@ -27,9 +31,14 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   private static final String DESKTOP = "on-site-notifications-desktop";
   private static final String MOBILE = "on-site-notifications-mobile";
 
+  private static final String ALL_READ = "All notifications should be marked as read on %s page";
+  private static final String NOTIFICATION_VISIBLE_MSG = "Notification [%s] should be displayed on %s page";
+  private static final String ARTICLE = "article";
+  private static final String DISCUSSION = "discussion";
+
   private String siteId;
-  private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_3;
-  private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_4;
+  private static final String WIKI_DESKTOP = MercuryWikis.DISCUSSIONS_6;
+  private static final String WIKI_MOBILE = MercuryWikis.DISCUSSIONS_7;
   private List<User> replyUsers = Lists.newArrayList(
     User.USER_2,
     User.USER_3,
@@ -58,25 +67,27 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   public void userOnDesktopReceivesPostReplyNotification() {
     Notification notification = createReplyReturningExpectedNotification(User.USER_11, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
+    Notification notification =
+      createPostUpvoteReturningExpectedNotification(User.USER_11, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
+    Notification notification =
+      createReplyUpvoteReturningExpectedNotification(User.USER_11, User.USER_11, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsDesktop().contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
@@ -84,49 +95,53 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopSeesConsolidatedReplyNotification() {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_11);
-    Notifications notificationsList = getNotificationsDesktop();
 
-    Assertion.assertTrue(notificationsList.contains(notification));
+    verifyNotificationDisplayedOnDesktop(notification);
   }
 
   @Execute(asUser = User.USER_11, onWikia = WIKI_DESKTOP)
   @Test(groups = DESKTOP)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopMarksAllNotificationsAsRead() {
-    Notifications notificationsList = getNotificationsDesktop();
+    Notifications notificationsList = getNotificationsOnDiscussionsPageDesktop();
     notificationsList.markAllAsRead();
-    Assertion.assertFalse(notificationsList.isAnyNotificationUnread());
+    Assertion.assertFalse(notificationsList.isAnyNotificationUnread(),
+      String.format(ALL_READ, DISCUSSION));
+    Assertion.assertFalse(getNotificationsOnArticlePageDesktop().isAnyNotificationUnread(),
+      String.format(ALL_READ, ARTICLE));
   }
 
   /**
    * Test methods - MOBILE
    */
 
-  @Execute(asUser =  User.USER_12, onWikia = WIKI_MOBILE)
+  @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesPostReplyNotification() {
     Notification notification = createReplyReturningExpectedNotification(User.USER_12, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesPostUpvoteNotification() {
-    Notification notification = createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
+    Notification notification =
+      createPostUpvoteReturningExpectedNotification(User.USER_12, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Test(groups = MOBILE)
   public void userOnMobileReceivesReplyUpvoteNotification() {
-    Notification notification = createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
+    Notification notification =
+      createReplyUpvoteReturningExpectedNotification(User.USER_12, User.USER_12, User.USER_2);
 
-    Assertion.assertTrue(getNotificationsMobile().contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   @Execute(asUser = User.USER_12, onWikia = WIKI_MOBILE)
@@ -134,9 +149,8 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
   @Test(groups = MOBILE)
   public void userOnMobileSeesConsolidatedReplyNotification() {
     Notification notification = createRepliesReturningConsolidatedNotification(User.USER_12);
-    Notifications notificationsList = getNotificationsMobile();
 
-    Assertion.assertTrue(notificationsList.contains(notification));
+    verifyNotificationDisplayedOnMobile(notification);
   }
 
   /**
@@ -184,21 +198,54 @@ public class OnSiteNotificationsTests extends NewTestTemplate {
     return NotificationFactory.getPostReplyConsolidatedNotification(replyUsers.get(5), 5, post);
   }
 
-  private Notifications getNotificationsDesktop() {
-    return new PostsListPage()
-      .open()
+  private Notifications getNotificationsOnDiscussionsPageDesktop() {
+    return getNotificationsDesktop(new PostsListPage().open());
+
+  }
+
+  private Notifications getNotificationsOnArticlePageDesktop() {
+    return getNotificationsDesktop(
+      new ArticlePageObject().openArticleByPath(MercurySubpages.MAIN_PAGE));
+  }
+
+  private Notifications getNotificationsDesktop(WikiBasePageObject page) {
+    return page
       .getNotificationsDropdown()
       .expand()
       .getNotifications();
   }
 
-  private Notifications getNotificationsMobile() {
-    return new PostsListPage()
-      .open()
+  private Notifications getNotificationsOnDiscussionsPageMobile() {
+    return getNotificationsMobile(new PostsListPage().open());
+  }
+
+  private Notifications getNotificationsOnArticlePageMobile() {
+    return getNotificationsMobile(new ArticlePage().open(MercurySubpages.MAIN_PAGE));
+  }
+
+  private Notifications getNotificationsMobile(WikiBasePageObject page) {
+    return page
       .getTopBar()
       .openNavigation()
       .openUserProfile()
       .getNotifications();
   }
 
+  private String getMessageFor(Notification notification, String page) {
+    return String.format(NOTIFICATION_VISIBLE_MSG, notification.getContent(), page);
+  }
+
+  private void verifyNotificationDisplayedOnDesktop(Notification notification) {
+    Assertion.assertTrue(getNotificationsOnDiscussionsPageDesktop().contains(notification),
+      getMessageFor(notification, DISCUSSION));
+    Assertion.assertTrue(getNotificationsOnArticlePageDesktop().contains(notification),
+      getMessageFor(notification, ARTICLE));
+  }
+
+  private void verifyNotificationDisplayedOnMobile(Notification notification) {
+    Assertion.assertTrue(getNotificationsOnDiscussionsPageMobile().contains(notification),
+      getMessageFor(notification, DISCUSSION));
+    Assertion.assertTrue(getNotificationsOnArticlePageMobile().contains(notification),
+      getMessageFor(notification, ARTICLE));
+  }
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
@@ -16,22 +17,18 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   protected abstract String getBaseCssClassName();
-
   protected abstract WebElement getPostsCreator();
-
   protected abstract WebElement getEditor();
-
   protected abstract WebElement getSignInDialog();
-
   protected abstract WebElement getGuidelinesMessageCloseButton();
-
   protected abstract WebElement getTitleTextarea();
-
   protected abstract WebElement getDescriptionTextarea();
-
   protected abstract WebElement getAddCategoryButton();
-
   protected abstract WebElement getSubmitButton();
+  protected abstract WebElement getImagePreview();
+  protected abstract WebElement getUploadButton();
+  protected abstract WebElement getAlertNotification();
+  protected abstract WebElement getImageDeleteButton();
 
   @Override
   public PostsCreator click() {
@@ -114,4 +111,23 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     getSubmitButton().click();
     return this;
   }
+
+  public BasePostsCreator uploadImage() {
+    getUploadButton().sendKeys(ContentLoader.getImage());
+    wait.forElementVisible(getImagePreview());
+    return this;
+  }
+
+  public String uploadUnsupportedImage() {
+    getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
+    wait.forElementVisible(getAlertNotification());
+    return getAlertNotification().getText();
+  }
+
+  public BasePostsCreator removeImage() {
+    waitAndClick(getImageDeleteButton());
+    wait.forElementNotVisible(getImagePreview());
+    return this;
+  }
+
 }
