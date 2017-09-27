@@ -59,7 +59,7 @@ public class ForumPage extends WikiBasePageObject {
    */
   public ForumBoardPage openForumBoard() {
     WebElement forumBoardLink = getForumElementsList().stream()
-        .filter(webElement -> webElement.toString().contains("%"))
+        .filter(webElement -> !webElement.toString().contains("%"))
         .findFirst()
         .orElse(null);
 
