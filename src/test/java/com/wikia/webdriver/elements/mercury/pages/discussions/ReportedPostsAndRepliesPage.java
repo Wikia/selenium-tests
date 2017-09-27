@@ -7,7 +7,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
 
-public class ReportedPostsAndRepliesPage extends WikiBasePageObject implements PageWithPosts {
+public class ReportedPostsAndRepliesPage extends PageWithPosts {
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();

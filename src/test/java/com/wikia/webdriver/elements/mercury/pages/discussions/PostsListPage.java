@@ -11,16 +11,14 @@ import com.wikia.webdriver.elements.mercury.components.discussions.desktop.Sorti
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import com.google.common.base.Predicate;
 import lombok.Getter;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-public class PostsListPage extends MultiplePostsPage {
+public class PostsListPage extends PageWithPosts {
 
   public static final String PATH = "/d/f";
 

@@ -5,16 +5,14 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Delete
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.regex.Pattern;
 
-public class UserPostsPage extends MultiplePostsPage {
+public class UserPostsPage extends PageWithPosts {
 
   @Getter(lazy = true) private final Post post = new Post();
 

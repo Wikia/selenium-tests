@@ -6,7 +6,7 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.SignIn
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
-public class FollowPage extends WikiBasePageObject implements PageWithPosts {
+public class FollowPage extends PageWithPosts {
 
   private static final String PATH = "/d/follow";
 
@@ -22,7 +22,6 @@ public class FollowPage extends WikiBasePageObject implements PageWithPosts {
     return page;
   }
 
-  @Override
   public SignInToFollowModalDialog getSignInToFollowModalDialog() {
     throw new UnsupportedOperationException("FollowPage not reachable for unauthorized users");
   }

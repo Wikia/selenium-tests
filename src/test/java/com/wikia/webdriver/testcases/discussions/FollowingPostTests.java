@@ -12,12 +12,7 @@ import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.elements.mercury.pages.discussions.FollowPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.ReportedPostsAndRepliesPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.*;
 import org.testng.annotations.Test;
 
 import java.util.function.Function;
@@ -187,12 +182,12 @@ public class FollowingPostTests extends NewTestTemplate {
    */
 
   private void followPostOnPageAndCheckIfFollowedAfterPageRefresh(PageWithPosts page) {
-    String postId = clickFollowOn(page).toData().getId();
+    String postId = clickFollowOn(page, ).toData().getId();
     Assertion.assertTrue(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
   private void followPostOnPageAndCheckIfNotFollowedAfterPageRefresh(PageWithPosts page) {
-    String postId = clickFollowOn(page).toData().getId();
+    String postId = clickFollowOn(page, ).toData().getId();
     Assertion.assertFalse(new PostDetailsPage().open(postId).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
@@ -200,7 +195,7 @@ public class FollowingPostTests extends NewTestTemplate {
     final PostEntity.Data data = createPostAsUserRemotely();
 
     final PageWithPosts page = navigator.apply(data);
-    clickFollowOn(page);
+    clickFollowOn(page, );
 
     Assertion.assertEquals(page.getSignInToFollowModalDialog().getText(),
       SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT, SIGN_IN_MODAL_SHOULD_APPEAR);
@@ -211,16 +206,16 @@ public class FollowingPostTests extends NewTestTemplate {
     return DiscussionsClient.using(User.USER, driver).createPostWithUniqueData();
   }
 
-  private PostEntity clickFollowOn(PageWithPosts page) {
-    return page.getPost().clickFollowFirstPost();
+  private PostEntity clickFollowOn(PageWithPosts page, PostEntity.Data post) {
+    return page.
   }
 
   private void assertThatPostCanBeFollowedAndUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
     final PostEntity.Data data = createPostAsUserRemotely();
 
-    clickFollowOn(navigator.apply(data));
+    clickFollowOn(navigator.apply(data), );
     Assertion.assertTrue(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_FOLLOW_POST);
-    clickFollowOn(navigator.apply(data));
+    clickFollowOn(navigator.apply(data), );
     Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }
 
