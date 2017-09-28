@@ -30,7 +30,7 @@ public class EdgeBrowser extends BrowserAbstract {
 
   @Override
   public void addExtension(String extensionName) {
-
+    //noop for now
   }
 
 }
