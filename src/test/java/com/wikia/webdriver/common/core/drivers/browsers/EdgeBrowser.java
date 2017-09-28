@@ -11,7 +11,7 @@ public class EdgeBrowser extends BrowserAbstract {
 
   @Override
   public void setOptions() {
-    
+
   }
 
   @Override
