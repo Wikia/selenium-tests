@@ -266,7 +266,7 @@ public class ZeroErrorStateTests extends NewTestTemplate {
   }
 
   private void userSeesProperMessageWhenOpensEmptyFollowPage() {
-    NoFollowedPostsMessage noFollowedPostsMessage = FollowPage.open().getNoFollowedPostsMessage();
+    NoFollowedPostsMessage noFollowedPostsMessage = new FollowPage().open().getNoFollowedPostsMessage();
 
     Assertion.assertEquals(noFollowedPostsMessage.getHeaderText(), FOLLOW_MESSAGE_HEADER_TEXT);
     Assertion.assertEquals(noFollowedPostsMessage.getContentText(), FOLLOW_MESSAGE_CONTENT_TEXT);

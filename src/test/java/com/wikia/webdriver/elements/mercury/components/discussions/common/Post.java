@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -161,19 +160,6 @@ public class Post extends BasePageObject {
     wait.forElementVisible(upvoteButton);
     return upvoteButton.isDisplayed();
   }
-
-  public PostEntity clickFollowFirstPost() {
-    PostEntity post = findNewestPost();
-    post.clickFollow();
-    sleepForTwoSeconds();
-    return post;
-  }
-
-  @SneakyThrows(InterruptedException.class)
-  private void sleepForTwoSeconds() {
-    TimeUnit.SECONDS.sleep(2);
-  }
-
 
   public String getPostDetailText() {
     return wait.forElementVisible(postDetails).getText();
