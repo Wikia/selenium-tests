@@ -18,7 +18,6 @@ import org.testng.annotations.Test;
 import java.util.function.Function;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_4)
-@Test(groups = "discussions-following-post")
 public class FollowingPostTests extends NewTestTemplate {
 
   private static final String SIGN_IN_MODAL_SHOULD_APPEAR = "Sign in/Following modal dialog should appear.";
@@ -186,7 +185,7 @@ public class FollowingPostTests extends NewTestTemplate {
   }
 
   private void clickFollowOn(PageWithPosts page, PostEntity.Data data) {
-    page.getPostById(data.getId()).ifPresent(PostEntity::clickFollow);
+    page.getPostById(data.getId()).clickFollow();
   }
 
   private void assertThatPostCanBeFollowedAndUnfollowedOn(Function<PostEntity.Data, PageWithPosts> navigator) {
