@@ -497,7 +497,9 @@ public class AdsBaseObject extends WikiBasePageObject {
         new ExpectedCondition<Boolean>() {
           @Override
           public Boolean apply(WebDriver webDriver) {
-            return expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)));
+            String providers = Joiner.on("; ").join(getProvidersChain(slotName));
+            PageObjectLogging.log("waitForProvidersChain", String.format("Providers %s found", providers), true);
+            return expectedProviders.equals(providers);
           }
 
           @Override
