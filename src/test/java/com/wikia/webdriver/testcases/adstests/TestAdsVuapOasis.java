@@ -102,7 +102,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
   }
 
   @Test(
-    groups = {"AdsVuapResolvedState"},
+    groups = {"AdsVuapResolvedState", "X"},
     dataProviderClass = AdsDataProvider.class,
     dataProvider = "adsVuapDesktop"
   )
