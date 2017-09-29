@@ -115,6 +115,7 @@ public class TestAdsVuapOasis extends TemplateNoFirstLoad {
     vuap.togglePause();
     double defaultVideoHeight = vuap.getVideoHeightWhilePaused();
     ads.refreshPage();
+    ads.scrollToSlot(slot);
     vuap.replay();
     vuap.waitForVideoStart();
     TimeUnit.SECONDS.sleep(2);
