@@ -13,22 +13,37 @@ import java.util.function.Function;
 
 public class AutoplayVuap {
 
-  private static final String PAUSE_SELECTOR = ".pause-overlay";
-  private static final String REPLAY_SELECTOR = ".replay-overlay";
-  private static final String CURRENT_TIME_SELECTOR = ".current-time";
-  private static final String SPEAKER_SELECTOR = ".speaker";
-  private static final String CLOSE_BUTTON_SELECTOR = ".close-ad";
-  private static final String IMA_BRIGDE_SELECTOR = ".video-player iframe[src*='imasdk']";
-  private static final String VIDEO_SELECTOR = "video";
-
+  private static final String SLOT_SELECTOR_PREFIX = "#%s .";
+  private static final String PAUSE_CLASS_NAME = "pause-overlay";
+  private static final String REPLAY_CLASS_NAME = "replay-overlay";
+  private static final String CURRENT_TIME_CLASS_NAME = "current-time";
+  private static final String SPEAKER_CLASS_NAME = "speaker";
+  private static final String CLOSE_BUTTON_CLASS_NAME = "close-ad";
   private static final String AD_TNG_CLICK_AREA_2_SELECTOR = "#area2";
+  private static final String AD_TNG_CLICK_AREA_4_SELECTOR = "#area4";
+  private static final String AD_RESOLVED_STATE_IMAGE_SELECTOR = "#background2";
   private static final int PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD = 28;
+
+  // #TOP_LEADERBOARD .pause-overlay
+  private static final String PAUSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + PAUSE_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .replay-overlay
+  private static final String REPLAY_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + REPLAY_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .current-time
+  private static final String CURRENT_TIME_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CURRENT_TIME_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .speaker
+  private static final String SPEAKER_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + SPEAKER_CLASS_NAME;
+
+  // #TOP_LEADERBOARD .close-ad
+  private static final String CLOSE_BUTTON_SELECTOR_FORMAT = SLOT_SELECTOR_PREFIX + CLOSE_BUTTON_CLASS_NAME;
 
   private final WikiaWebDriver driver;
 
   private final Wait wait;
 
-  private final String slotSelector;
+  private final String slot;
 
   private final By imaBridgeSelector;
   private final By adIframeSelector;
@@ -37,26 +52,27 @@ public class AutoplayVuap {
   private final By closeButtonSelector;
   private final By progressBarSelector;
   private final By replayOverlaySelector;
-  private final By videoSelector;
 
   private boolean mobile;
 
-  public AutoplayVuap(WikiaWebDriver driver, String slotSelector, By adIframeSelector, Boolean mobile) {
+  public AutoplayVuap(WikiaWebDriver driver, String slot, String adIframeId) {
+    this(driver, slot, By.id(adIframeId), false);
+  }
+
+  public AutoplayVuap(WikiaWebDriver driver, String slot, By adIframeSelector, Boolean mobile) {
     this.driver = driver;
     this.wait = new Wait(driver);
 
-    this.slotSelector = slotSelector;
+    this.slot = slot;
+    this.imaBridgeSelector = By.cssSelector("#" + slot + " .video-player iframe[src*='imasdk']");
     this.adIframeSelector = adIframeSelector;
     this.mobile = mobile;
 
-    String tpl = "%s %s";
-    imaBridgeSelector = By.cssSelector(String.format(tpl, slotSelector, IMA_BRIGDE_SELECTOR));
-    speakerSelector = By.cssSelector(String.format(tpl, slotSelector, SPEAKER_SELECTOR));
-    pauseOverlaySelector = By.cssSelector(String.format(tpl, slotSelector, PAUSE_SELECTOR));
-    closeButtonSelector = By.cssSelector(String.format(tpl, slotSelector, CLOSE_BUTTON_SELECTOR));
-    progressBarSelector = By.cssSelector(String.format(tpl, slotSelector, CURRENT_TIME_SELECTOR));
-    replayOverlaySelector = By.cssSelector(String.format(tpl, slotSelector, REPLAY_SELECTOR));
-    videoSelector = By.cssSelector(String.format(tpl, slotSelector, VIDEO_SELECTOR));
+    speakerSelector = By.cssSelector(String.format(SPEAKER_SELECTOR_FORMAT, slot));
+    pauseOverlaySelector = By.cssSelector(String.format(PAUSE_BUTTON_SELECTOR_FORMAT, slot));
+    closeButtonSelector = By.cssSelector(String.format(CLOSE_BUTTON_SELECTOR_FORMAT, slot));
+    progressBarSelector = By.cssSelector(String.format(CURRENT_TIME_SELECTOR_FORMAT, slot));
+    replayOverlaySelector = By.cssSelector(String.format(REPLAY_BUTTON_SELECTOR_FORMAT, slot));
   }
 
   public void mute() {
@@ -78,7 +94,7 @@ public class AutoplayVuap {
   public void play() {
     if (isPausedWithOverlay()) {
       togglePause();
-    } else if (!this.mobile) {
+    } else if( !this.mobile ) {
       clickOnArea(2);
     } else {
       clickOnArea(4);
@@ -98,7 +114,7 @@ public class AutoplayVuap {
   }
 
   private Boolean isMobileVideoPaused() {
-    return Boolean.valueOf(driver.findElement(videoSelector).getAttribute("paused"));
+    return Boolean.valueOf(driver.findElement(getVideoSelector()).getAttribute("paused"));
   }
 
   private Boolean isDesktopVideoPaused() {
@@ -126,9 +142,11 @@ public class AutoplayVuap {
   }
 
   private void clickElementInsideAd(By selector) {
-    // It needs to be clicked by JS, because our templates elements covers each other
-    // and there is no way to click it by just .click()
-    usingAdFrame(() -> clickByJS(selector));
+    usingAdFrame(() -> {
+      // It need to be clicked by JS, because our templates elements covers each other
+      // and there is no way to click it by just .click()
+      clickByJS(selector);
+    });
   }
 
   public double getVideoHeightWhilePaused() {
@@ -137,7 +155,7 @@ public class AutoplayVuap {
 
   public double getAdSlotHeight() {
     waitForAdToLoad();
-    return driver.findElement(By.cssSelector(slotSelector)).getSize().getHeight();
+    return driver.findElement(By.id(slot)).getSize().getHeight();
   }
 
   public int getProgressBarWidth() {
@@ -188,7 +206,7 @@ public class AutoplayVuap {
   }
 
   public boolean isVideoAdBiggerThanImageAd(double videoHeight, double imageHeight) {
-    int percentResult = (int) Math.round(100 - (100 / (videoHeight / imageHeight)));
+    int percentResult = (int)Math.round(100-(100/(videoHeight/imageHeight)));
     return percentResult == PERCENTAGE_DIFFERENCE_BETWEEN_VIDEO_AND_IMAGE_AD;
   }
 
@@ -237,7 +255,7 @@ public class AutoplayVuap {
   }
 
   private Double getCurrentTimeMobile() {
-    return Double.parseDouble(driver.findElement(videoSelector).getAttribute("currentTime"));
+    return Double.parseDouble(driver.findElement(getVideoSelector()).getAttribute("currentTime"));
   }
 
   private Double getCurrentTimeDesktop() {
@@ -246,5 +264,9 @@ public class AutoplayVuap {
 
   private boolean hasDesktopVideoElement() {
     return usingImaBridge(webDriver -> driver.findElements(By.cssSelector("video")).size() > 0);
+  }
+
+  private By getVideoSelector() {
+    return By.cssSelector("#" + slot + " video");
   }
 }

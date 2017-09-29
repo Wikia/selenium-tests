@@ -29,8 +29,8 @@ public class PostEntity {
     this.post = post;
   }
 
-  public boolean hasOpenGraphAtContentEnd() {
-    return null != post.findElement(By.cssSelector(".discussion-content + .og-container"));
+  public boolean hasOpenGraph() {
+    return !post.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
   }
 
   public boolean hasTopNote() {

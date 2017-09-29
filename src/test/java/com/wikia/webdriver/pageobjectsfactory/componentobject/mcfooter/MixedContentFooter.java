@@ -26,7 +26,7 @@ public class MixedContentFooter extends WikiBasePageObject{
   @FindBy(css = ".mcf-card-article__link")
   private List<WebElement> articleLinks;
 
-    public MixedContentFooter openWikiMainPage() {
+  public MixedContentFooter openWikiMainPage() {
     getUrl(getWikiUrl() + URLsContent.WIKI_DIR);
     PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
     return this;

@@ -24,7 +24,7 @@ public interface PostsCreator {
 
   PostsCreator addDescriptionWith(final String text);
 
-  PostsCreator addDescriptionWith(final URL url);
+  PostsCreator addDescriptionWithLink(final URL url);
 
   PostsCreator clearDescription();
 

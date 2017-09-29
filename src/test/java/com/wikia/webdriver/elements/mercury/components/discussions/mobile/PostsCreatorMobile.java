@@ -2,6 +2,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -61,6 +62,12 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @Getter
   @FindBy(css = ".delete-image")
   private WebElement imageDeleteButton;
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
 
   public PostsCreatorMobile() {
     super();

@@ -21,16 +21,11 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
-  private static final String WIKIA_URL = "http://www.wikia.com/";
-  private static final String POST_SHOULD_BE_FOLLOWED_MESSAGE = "Created post should be followed.";
-  private static final String OPEN_GRAPH_SHOULD_LOAD_MESSAGE = "Open graph should start loading.";
-  private static final String OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE = "Open graph should appear at the end of post content.";
   private static final String FIRST_LINE = "# Big List of Naughty Strings\n";
 
   private static final String DESKTOP = "discussions-creating-posts-desktop";
@@ -239,13 +234,6 @@ public class CreatingPostTests extends NewTestTemplate {
     categoryPill.click();
 
     return categoryPill;
-  }
-
-  private String addLinkToDescription(final PostsCreator postsCreator, final String description) throws MalformedURLException {
-    String text = description + " " + WIKIA_URL;
-    postsCreator.addDescriptionWith(new URL(WIKIA_URL));
-
-    return text;
   }
 
   private PostEntity.Data createNaughtyStringsPostRemotely(User user) {
