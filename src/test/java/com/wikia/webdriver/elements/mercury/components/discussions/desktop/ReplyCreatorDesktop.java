@@ -64,6 +64,12 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @FindBy(css = ".delete-image")
   private WebElement imageDeleteButton;
 
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();

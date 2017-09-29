@@ -22,6 +22,8 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getImageDeleteButton();
+  protected abstract By getOpenGraphContainer();
+  protected abstract By getOpenGraphText();
 
   @Override
   public ReplyCreator click() {
@@ -103,9 +105,9 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   public boolean hasOpenGraph() {
     boolean result = false;
     final WebElement openGraphContainer = getReplyCreatorWrapper()
-      .findElement(By.className("og-container"));
+      .findElement(getOpenGraphContainer());
     if (null != openGraphContainer) {
-      result = null != openGraphContainer.findElement(By.className("og-texts"));
+      result = null != openGraphContainer.findElement(getOpenGraphText());
     }
     return result;
   }
