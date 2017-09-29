@@ -22,7 +22,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollOasis(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    urlBuilder.appendQueryStringToURL(
+    testedPage = urlBuilder.appendQueryStringToURL(
         testedPage,
         "InstantGlobals.wgAdDriverMegaAdUnitBuilderForFVCountries=[ZZ]"
     );
@@ -40,7 +40,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollOasisNoAds(String wikiName, String article) {
     String testedPage = urlBuilder.getUrlForPath(wikiName, article + "?noads=1");
-    urlBuilder.appendQueryStringToURL(
+    testedPage = urlBuilder.appendQueryStringToURL(
         testedPage,
         "InstantGlobals.wgAdDriverMegaAdUnitBuilderForFVCountries=[ZZ]"
     );
@@ -55,7 +55,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollOasisWithSound() {
     String testedPage = PAGE_WITH_FV_PREROLL.getUrl();
-    urlBuilder.appendQueryStringToURL(
+    testedPage = urlBuilder.appendQueryStringToURL(
         testedPage,
         "InstantGlobals.wgAdDriverMegaAdUnitBuilderForFVCountries=[ZZ]"
     );
@@ -71,7 +71,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
   )
   public void adsPremiumPrerollOasisWithoutSound() {
     String testedPage = PAGE_WITH_FV_PREROLL.getUrl();
-    urlBuilder.appendQueryStringToURL(
+    testedPage = urlBuilder.appendQueryStringToURL(
         testedPage,
         "InstantGlobals.wgAdDriverMegaAdUnitBuilderForFVCountries=[ZZ]"
     );
