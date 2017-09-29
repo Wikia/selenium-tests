@@ -60,6 +60,7 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
     );
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.waitForAdStartsPlaying();
+    wikiPage.scrollToPlayer();
     wikiPage.clickVolumeButton();
     wikiPage.allowToPlayVideoForSomeTime(Duration.ofSeconds(3));
     Assertion.assertTrue(wikiPage.wasSoundHeard());

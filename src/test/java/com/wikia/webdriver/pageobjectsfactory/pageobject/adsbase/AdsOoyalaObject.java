@@ -108,6 +108,10 @@ public class AdsOoyalaObject extends AdsBaseObject {
     PageObjectLogging.log("Video", "Video content had " + color + " during " + duration + " seconds", true);
   }
 
+  public void scrollToPlayer() {
+    scrollToPosition(PLAYER_SELECTOR);
+  }
+
   public void waitForAdStartsPlaying() {
     wait.forElementVisible(AD_LAYER_SELECTOR);
   }
