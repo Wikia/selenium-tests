@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
-import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -23,10 +22,9 @@ public class TestAdsProvidersChain extends TemplateNoFirstLoad {
   )
   public void adsProvidersChainOasis(String wikiName,
                                      String article,
-                                     String instantGlobals,
                                      String slotName,
                                      String providers) {
-    adsProvidersChain(wikiName, article, instantGlobals, slotName, providers, DESKTOP_SIZE);
+    adsProvidersChain(wikiName, article, slotName, providers, DESKTOP_SIZE);
   }
 
   @UseUnstablePageLoadStrategy
@@ -37,22 +35,17 @@ public class TestAdsProvidersChain extends TemplateNoFirstLoad {
   )
   public void adsProvidersChainMercury(String wikiName,
                                        String article,
-                                       String instantGlobals,
                                        String slotName,
                                        String providers) {
-    adsProvidersChain(wikiName, article, instantGlobals, slotName, providers, MOBILE_SIZE);
+    adsProvidersChain(wikiName, article, slotName, providers, MOBILE_SIZE);
   }
 
   private void adsProvidersChain(String wikiName,
                                  String article,
-                                 String instantGlobals,
                                  String slotName,
                                  String providers,
                                  Dimension browserDimension) {
     String url = urlBuilder.getUrlForPath(wikiName, article);
-    if (StringUtils.isNotEmpty(instantGlobals)) {
-      url = urlBuilder.appendQueryStringToURL(url, instantGlobals);
-    }
 
     new AdsBaseObject(driver, url, browserDimension)
         .verifyProvidersChain(slotName, providers);
