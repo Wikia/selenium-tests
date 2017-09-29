@@ -45,7 +45,6 @@ public class TestAdsPremiumPrerollOasis extends TemplateNoFirstLoad {
         "InstantGlobals.wgAdDriverMegaAdUnitBuilderForFVCountries=[ZZ]"
     );
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
-    wikiPage.waitForAdStartsPlaying();
     wikiPage.verifyPlayerOnPage();
     wikiPage.verifyArticleVideo();
   }
