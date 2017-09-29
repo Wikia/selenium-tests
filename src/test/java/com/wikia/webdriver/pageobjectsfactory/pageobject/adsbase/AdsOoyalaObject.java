@@ -24,7 +24,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   private static final String ARTICLE_VIDEO_PREROLL_SELECTOR = ".ooyala-article-video iframe[src*=imasdk]";
   private static final String ARTICLE_VIDEO_SELECTOR = ".bitdash-vc";
   private static final String ARTICLE_VIDEO_MOBILE_SELECTOR = ".ooyala-article-video > .innerWrapper > video";
-  private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, #ooyala-article-video > .innerWrapper";
+  private static final String ARTICLE_VIDEO_WRAPPER_SELECTOR = ".article-featured-video__placeholder, .ooyala-article-video > .innerWrapper";
   private static final By PLAYER_SELECTOR = By.id("ooyala-article-video");
   private static final By AD_LAYER_SELECTOR = By.cssSelector(ARTICLE_VIDEO_PREROLL_SELECTOR);
 
@@ -58,6 +58,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyPlayerOnPage() {
     wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR));
+    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
   }
 
   public Boolean wasSoundHeard() {
