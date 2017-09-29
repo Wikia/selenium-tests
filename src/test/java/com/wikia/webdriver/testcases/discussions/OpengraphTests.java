@@ -25,10 +25,13 @@ public class OpengraphTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     PostsCreator postsCreator = page.getPostsCreatorDesktop();
     postsCreator.click().closeGuidelinesMessage();
-    postsCreator.addTitleWith(TextGenerator.defaultText()).addDescriptionWith(new URL("http://fandom.wikia.com/"));
+    String url = "http://dman.wikia.com/d";
+    postsCreator.addTitleWith(TextGenerator.defaultText()).addDescriptionWith(new URL(url));
     Assertion.assertTrue(postsCreator.hasOpenGraph());
     postsCreator.clickAddCategoryButton().selectFirstCategory();
     postsCreator.clickSubmitButton();
+    page.waitForPageReload();
+    page.getPost().waitForPostToAppearWith(url);
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraphAtContentEnd());
   }
 }
