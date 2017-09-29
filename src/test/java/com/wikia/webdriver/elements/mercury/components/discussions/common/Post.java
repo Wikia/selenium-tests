@@ -175,4 +175,11 @@ public class Post extends BasePageObject {
     restoreDefaultImplicitWait();
     return hasImage;
   }
+
+  public boolean firstPostHasOpengraph() {
+    changeImplicitWait(3, TimeUnit.SECONDS);
+    boolean hasOpengraph = findNewestPost().hasOpenGraph();
+    restoreDefaultImplicitWait();
+    return hasOpengraph;
+  }
 }

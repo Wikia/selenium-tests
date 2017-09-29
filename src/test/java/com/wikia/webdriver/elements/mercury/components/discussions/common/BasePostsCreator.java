@@ -130,4 +130,22 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return this;
   }
 
+  public BasePostsCreator startPostCreation() {
+    return startPostCreationWith(TextGenerator.defaultText());
+  }
+
+  public BasePostsCreator startPostCreationWith(String description) {
+    click()
+      .closeGuidelinesMessage()
+      .addTitleWith(TextGenerator.defaultText())
+      .addDescriptionWithLink(description)
+      .clickAddCategoryButton()
+      .selectFirstCategory();
+    return this;
+  }
+
+  public BasePostsCreator startPostCreationWithLink(URL link) {
+    return startPostCreationWith(String.format(" %s ", link.toString()));
+  }
+
 }

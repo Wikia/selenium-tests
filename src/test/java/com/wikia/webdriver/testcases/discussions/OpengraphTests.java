@@ -82,13 +82,7 @@ public class OpengraphTests extends NewTestTemplate {
 
   private void verifyOpengraphInNewPost(PostsListPage page, BasePostsCreator postsCreator)
     throws MalformedURLException {
-    postsCreator
-      .click()
-      .closeGuidelinesMessage()
-      .addTitleWith(TextGenerator.defaultText())
-      .addDescriptionWithLink(new URL(URL))
-      .clickAddCategoryButton()
-      .selectFirstCategory();
+    postsCreator.startPostCreationWithLink(new URL(URL));
 
     Assertion.assertTrue(postsCreator.hasOpenGraph());
     postsCreator.clickSubmitButton();
@@ -100,10 +94,7 @@ public class OpengraphTests extends NewTestTemplate {
 
   private void verifyOpengraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
     throws MalformedURLException {
-    replyCreator
-      .click()
-      .clickGuidelinesReadButton()
-      .addWithLink(new URL(URL));
+    replyCreator.startReplyCreationWithLink(new URL(URL));
 
     Assertion.assertTrue(replyCreator.hasOpenGraph());
     replyCreator.clickSubmitButton();

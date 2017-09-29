@@ -110,10 +110,18 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     return result;
   }
 
+  public BaseReplyCreator startReplyCreation() {
+    return startReplyCreationWith(TextGenerator.defaultText());
+  }
+
   @Override
-  public BaseReplyCreator addWithLink(URL link) {
-    wait.forElementVisible(getTextarea()).sendKeys(String.format(" %s ", link.toString()));
+  public BaseReplyCreator startReplyCreationWith(String description) {
+    click().clickGuidelinesReadButton().add(description);
     return this;
+  }
+
+  public BaseReplyCreator startReplyCreationWithLink(URL link) {
+    return startReplyCreationWith(String.format(" %s ", link.toString()));
   }
 
 }

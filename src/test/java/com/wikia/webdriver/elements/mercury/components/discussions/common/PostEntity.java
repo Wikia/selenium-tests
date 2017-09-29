@@ -30,7 +30,7 @@ public class PostEntity {
   }
 
   public boolean hasOpenGraph() {
-    return null != post.findElement(By.cssSelector(".discussion-content + .og-container"));
+    return !post.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
   }
 
   public boolean hasTopNote() {

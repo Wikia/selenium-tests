@@ -18,9 +18,9 @@ public interface ReplyCreator {
 
   ReplyCreator clearText();
 
-  ReplyCreator add(final String text);
+  ReplyCreator startReplyCreationWith(String text);
 
-  ReplyCreator addWithLink(final URL url);
+  ReplyCreator add(final String text);
 
   boolean isSubmitButtonActive();
 
