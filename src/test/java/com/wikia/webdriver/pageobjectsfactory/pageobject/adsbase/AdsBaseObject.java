@@ -56,6 +56,8 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
 
   private static final String MIX_CONTENT_FOOTER_SELECTOR = "#mixed-content-footer";
+  @FindBy(css = MIX_CONTENT_FOOTER_SELECTOR)
+  private WebElement mixContentFooter;
 
   private long tStart;
 
@@ -758,6 +760,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerComments();
       scrollToPosition(MIX_CONTENT_FOOTER_SELECTOR);
+      wait.forElementVisible(mixContentFooter);
     } else if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
       scrollToFooter();
     }
