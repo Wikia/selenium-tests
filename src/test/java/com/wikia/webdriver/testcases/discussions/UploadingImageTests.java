@@ -220,7 +220,7 @@ public class UploadingImageTests extends NewTestTemplate {
       .click()
       .closeGuidelinesMessage()
       .addTitleWith(TextGenerator.defaultText())
-      .addDescriptionWith(TextGenerator.defaultText())
+      .addDescriptionWithLink(TextGenerator.defaultText())
       .clickAddCategoryButton()
       .selectFirstCategory();
     return postCreator;

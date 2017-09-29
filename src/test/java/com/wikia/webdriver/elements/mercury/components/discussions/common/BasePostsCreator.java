@@ -89,14 +89,14 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator addDescriptionWith(final String text) {
+  public PostsCreator addDescriptionWithLink(final String text) {
     getDescriptionTextarea().sendKeys(text);
     return this;
   }
 
   @Override
-  public PostsCreator addDescriptionWith(final URL url) {
-    getDescriptionTextarea().sendKeys(" " + url.toString() + " ");
+  public PostsCreator addDescriptionWithLink(final URL url) {
+    getDescriptionTextarea().sendKeys(String.format(" %s ", url.toString()));
     return this;
   }
 

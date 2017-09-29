@@ -2,11 +2,15 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.net.URL;
 
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
 
-  protected abstract WebElement getReplyCreator();
+  protected abstract WebElement getReplyCreatorTextArea();
+  protected abstract WebElement getReplyCreatorWrapper();
   protected abstract WebElement getDialogSignIn();
   protected abstract WebElement getOkButtonInSignInDialog();
   protected abstract WebElement getSignInButtonInSignInDialog();
@@ -21,7 +25,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   @Override
   public ReplyCreator click() {
-    wait.forElementVisible(getReplyCreator()).click();
+    wait.forElementVisible(getReplyCreatorTextArea()).click();
     return this;
   }
 
@@ -93,6 +97,22 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   public BaseReplyCreator removeImage() {
     waitAndClick(getImageDeleteButton());
     wait.forElementNotVisible(getImagePreview());
+    return this;
+  }
+
+  public boolean hasOpenGraph() {
+    boolean result = false;
+    final WebElement openGraphContainer = getReplyCreatorWrapper()
+      .findElement(By.className("og-container"));
+    if (null != openGraphContainer) {
+      result = null != openGraphContainer.findElement(By.className("og-texts"));
+    }
+    return result;
+  }
+
+  @Override
+  public BaseReplyCreator addWithLink(URL link) {
+    wait.forElementVisible(getTextarea()).sendKeys(String.format(" %s ", link.toString()));
     return this;
   }
 

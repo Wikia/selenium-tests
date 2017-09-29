@@ -1,5 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
+import java.net.URL;
+
 public interface ReplyCreator {
 
   boolean isPresent();
@@ -17,6 +19,8 @@ public interface ReplyCreator {
   ReplyCreator clearText();
 
   ReplyCreator add(final String text);
+
+  ReplyCreator addWithLink(final URL url);
 
   boolean isSubmitButtonActive();
 

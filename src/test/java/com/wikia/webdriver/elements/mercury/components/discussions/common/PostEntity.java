@@ -29,7 +29,7 @@ public class PostEntity {
     this.post = post;
   }
 
-  public boolean hasOpenGraphAtContentEnd() {
+  public boolean hasOpenGraph() {
     return null != post.findElement(By.cssSelector(".discussion-content + .og-container"));
   }
 

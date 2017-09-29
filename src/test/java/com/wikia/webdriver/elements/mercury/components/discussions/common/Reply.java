@@ -81,4 +81,9 @@ public class Reply extends BasePageObject {
     restoreDefaultImplicitWait();
     return hasImage;
   }
+
+  public boolean hasOpengraph() {
+    return null != reply.findElement(By.cssSelector(".discussion-content + .og-container"));
+  }
+
 }

@@ -22,9 +22,9 @@ public interface PostsCreator {
 
   PostsCreator clearTitle();
 
-  PostsCreator addDescriptionWith(final String text);
+  PostsCreator addDescriptionWithLink(final String text);
 
-  PostsCreator addDescriptionWith(final URL url);
+  PostsCreator addDescriptionWithLink(final URL url);
 
   PostsCreator clearDescription();
 
