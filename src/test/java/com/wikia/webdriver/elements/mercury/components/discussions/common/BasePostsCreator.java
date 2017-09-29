@@ -29,6 +29,8 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getAlertNotification();
   protected abstract WebElement getImageDeleteButton();
+  protected abstract By getOpenGraphContainer();
+  protected abstract By getOpenGraphText();
 
   @Override
   public PostsCreator click() {
@@ -51,12 +53,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   @Override
   public boolean hasOpenGraph() {
     boolean result = false;
-
-    final WebElement openGraphContainer = getEditor().findElement(By.className("og-container"));
+    final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
     if (null != openGraphContainer) {
-      result = null != openGraphContainer.findElement(By.className("og-texts"));
+      result = null != openGraphContainer.findElement(getOpenGraphText());
     }
-
     return result;
   }
 
@@ -95,8 +95,8 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator addDescriptionWith(final URL url) {
-    getDescriptionTextarea().sendKeys(" " + url.toString() + " ");
+  public PostsCreator addDescriptionWithLink(final URL url) {
+    getDescriptionTextarea().sendKeys(String.format(" %s ", url.toString()));
     return this;
   }
 
@@ -128,6 +128,24 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     waitAndClick(getImageDeleteButton());
     wait.forElementNotVisible(getImagePreview());
     return this;
+  }
+
+  public BasePostsCreator startPostCreation() {
+    return startPostCreationWith(TextGenerator.defaultText());
+  }
+
+  public BasePostsCreator startPostCreationWith(String description) {
+    click()
+      .closeGuidelinesMessage()
+      .addTitleWith(TextGenerator.defaultText())
+      .addDescriptionWith(description)
+      .clickAddCategoryButton()
+      .selectFirstCategory();
+    return this;
+  }
+
+  public BasePostsCreator startPostCreationWithLink(URL link) {
+    return startPostCreationWith(String.format(" %s ", link.toString()));
   }
 
 }

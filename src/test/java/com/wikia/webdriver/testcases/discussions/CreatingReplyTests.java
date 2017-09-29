@@ -94,9 +94,8 @@ public class CreatingReplyTests extends NewTestTemplate {
   }
 
   private void assertThatUserCanCreateReply(PostDetailsPage page, ReplyCreator replyCreator) {
-    replyCreator.click().clickGuidelinesReadButton();
-    final String text = TextGenerator.createUniqueText();
-    replyCreator.add(text).clickSubmitButton();
+    String text = TextGenerator.createUniqueText();
+    replyCreator.startReplyCreationWith(text).clickSubmitButton();
     page.getReplies().waitForReplyToAppearWith(text).refreshPage();
     Assertion.assertFalse(page.getReplies().isEmpty(), REPLY_ADDED_MESSAGE);
     Assertion.assertTrue(page.isPostFollowed(), POST_FOLLOWED_BY_DEFAULT);

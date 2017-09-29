@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -170,9 +169,16 @@ public class Post extends BasePageObject {
   }
 
   public boolean firstPostHasImage() {
-    changeImplicitWait(3, TimeUnit.SECONDS);
+    setShortImplicitWait();
     boolean hasImage = findNewestPost().hasImage();
     restoreDefaultImplicitWait();
     return hasImage;
+  }
+
+  public boolean firstPostHasOpenGraph() {
+    setShortImplicitWait();
+    boolean hasOpenGraph = findNewestPost().hasOpenGraph();
+    restoreDefaultImplicitWait();
+    return hasOpenGraph;
   }
 }
