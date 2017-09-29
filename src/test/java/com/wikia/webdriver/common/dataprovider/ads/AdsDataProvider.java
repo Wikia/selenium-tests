@@ -599,14 +599,12 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "",
             AdsContent.INVISIBLE_SKIN,
             "DirectGpt; RemnantGpt"
         }

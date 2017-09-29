@@ -406,7 +406,6 @@ public class MobileAdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.MOBILE_TOP_LB,
             "DirectGptMobile; RemnantGptMobile"
         }
