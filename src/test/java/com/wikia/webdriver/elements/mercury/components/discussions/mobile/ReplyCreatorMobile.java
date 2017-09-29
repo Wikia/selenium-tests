@@ -12,7 +12,7 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @FindBy(css = ".discussion-editor-entry-point-container .discussion-editor-entry-point-content")
   private WebElement replyCreatorTextArea;
 
-  @FindBy(css = ".discussion-inline-editor-content-wrapper")
+  @FindBy(css = ".discussion-standalone-content-wrapper")
   @Getter
   private WebElement replyCreatorWrapper;
 
