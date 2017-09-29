@@ -14,7 +14,6 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
@@ -26,6 +25,7 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Test(groups = "discussions-opengraph")
 @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
 public class OpengraphTests extends NewTestTemplate {
 
