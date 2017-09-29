@@ -11,17 +11,16 @@ import com.wikia.webdriver.common.templates.fandom.AdsFandomTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsFandomObject;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 public class TestAdsVuapFandom extends AdsFandomTestTemplate {
+  private static final long MAX_MOVIE_DURATION = 40L;
   private static final int DESKTOP_VIDEO_TRIGGER_AREA = 2;
   private static final int MOBILE_VIDEO_TRIGGER_AREA = 3;
-  // DESKTOP & MOBILE
-  private static final int REDIRECT_AREA_TRIGGER = 1;
+  private static final int REDIRECT_AREA_TRIGGER = 1; // DESKTOP & MOBILE
 
   @Test(
           dataProviderClass = FandomAdsDataProvider.class,
@@ -208,7 +207,7 @@ public class TestAdsVuapFandom extends AdsFandomTestTemplate {
   private AutoplayVuap prepareSlot(String slotName, AdsFandomObject fandomPage, Boolean isMobile) {
     fandomPage.triggerOnScrollSlots();
     AutoplayVuap videoFanTakeover = new AutoplayVuap(driver, AdsFandomContent.getGptSlotSelector(slotName), fandomPage.getIframeSelector(slotName), isMobile);
-    fandomPage.scrollToElement(By.cssSelector(AdsFandomContent.getGptSlotSelector(slotName)));
+    fandomPage.scrollToSlot(AdsFandomContent.getGptSlotSelector(slotName));
     return videoFanTakeover;
   }
 }
