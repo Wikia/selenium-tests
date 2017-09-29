@@ -58,6 +58,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
 
   public void verifyPlayerOnPage() {
     wait.forElementPresent(By.cssSelector(ARTICLE_VIDEO_WRAPPER_SELECTOR));
+    scrollToPosition(ARTICLE_VIDEO_WRAPPER_SELECTOR);
   }
 
   public Boolean wasSoundHeard() {
