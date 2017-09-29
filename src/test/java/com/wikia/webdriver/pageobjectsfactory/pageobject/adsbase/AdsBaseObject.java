@@ -55,6 +55,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
 
+  private static final String MIX_CONTENT_FOOTER_SELECTOR = "#mixed-content-footer";
+
   private long tStart;
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
@@ -755,6 +757,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToSlot(String slotName) {
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerComments();
+      scrollToPosition(MIX_CONTENT_FOOTER_SELECTOR);
     } else if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
       scrollToFooter();
     }
