@@ -512,6 +512,10 @@ public class BasePageObject {
     driver.manage().timeouts().implicitlyWait(value, timeUnit);
   }
 
+  protected void setShortImplicitWait() {
+    changeImplicitWait(3, TimeUnit.SECONDS);
+  }
+
   protected void restoreDefaultImplicitWait() {
     changeImplicitWait(timeOut, TimeUnit.SECONDS);
   }

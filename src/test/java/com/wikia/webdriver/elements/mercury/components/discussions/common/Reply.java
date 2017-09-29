@@ -76,14 +76,17 @@ public class Reply extends BasePageObject {
   }
 
   public boolean hasImage() {
-    changeImplicitWait(3, TimeUnit.SECONDS);
+    setShortImplicitWait();
     boolean hasImage = !reply.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
     restoreDefaultImplicitWait();
     return hasImage;
   }
 
   public boolean hasOpengraph() {
-    return null != reply.findElement(By.cssSelector(".discussion-content + .og-container"));
+    setShortImplicitWait();
+    boolean hasOpengraph = !reply.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
+    restoreDefaultImplicitWait();
+    return hasOpengraph;
   }
 
 }

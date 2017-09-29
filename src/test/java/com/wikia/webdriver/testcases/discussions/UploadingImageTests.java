@@ -24,6 +24,8 @@ import java.net.URL;
 
 public class UploadingImageTests extends NewTestTemplate {
 
+  private static final String URL = "http://fandom.wikia.com";
+
   private static final String DESKTOP = "discussions-uploading-image-desktop";
   private static final String MOBILE = "discussions-uploading-image-mobile";
 
@@ -37,11 +39,15 @@ public class UploadingImageTests extends NewTestTemplate {
     "Deleted image should not be visible in new post";
   private static final String POST_UNSUPPORTED_IMAGE_NOT_VISIBLE =
     "Unsupported image should not be visible in new post";
+  private static final String POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE =
+    "Opengraph image should not be visible in new post with uploaded image";
   private static final String REPLY_IMAGE_VISIBLE = "Uploaded image should be visible in new reply";
   private static final String REPLY_DELETED_IMAGE_NOT_VISIBLE =
     "Deleted image should not be visible in new reply";
   private static final String REPLY_UNSUPPORTED_IMAGE_NOT_VISIBLE =
     "Unsupported image should not be visible in new reply";
+  private static final String REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE =
+    "Opengraph image should not be visible in new reply with uploaded image";
 
   /**
    * fixture methods
@@ -119,7 +125,6 @@ public class UploadingImageTests extends NewTestTemplate {
   }
 
   @Test(groups = DESKTOP)
-  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanOverwriteOpenGraphImageInPostWithUploadedImageOnDesktop()
@@ -127,16 +132,21 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasOpengraph());
+    Assertion.assertFalse(page.getPost().firstPostHasOpengraph(), POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
-  @Test(groups = DESKTOP, enabled = false)
-  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
+  @Test(groups = DESKTOP)
   @Execute(onWikia = DESKTOP_COMMUNITY, asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userCanOverwriteOpenGraphImageInReplyWithUploadedImageOnDesktop() {
-    // To be implemented as a part of IRIS-4896
+  public void userCanOverwriteOpenGraphImageInReplyWithUploadedImageOnDesktop()
+    throws MalformedURLException {
+    PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
+    startReplyCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.findNewestReply().hasOpengraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
+
+
 
   /**
    * mobile test methods
@@ -202,20 +212,28 @@ public class UploadingImageTests extends NewTestTemplate {
     Assertion.assertFalse(page.findNewestReply().hasImage(), REPLY_DELETED_IMAGE_NOT_VISIBLE);
   }
 
-  @Test(groups = MOBILE, enabled = false)
-  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
-  public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile() {
-    // To be implemented as a part of IRIS-4896
+  public void userCanOverwriteOpenGraphImageInExistingPostWithUploadedImageOnMobile()
+    throws MalformedURLException {
+    PostsListPage page = new PostsListPage().open();
+    startPostCreationMobileWithLink(page).uploadImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.getPost().firstPostHasOpengraph());
   }
 
-  @Test(groups = MOBILE, enabled = false)
-  @RelatedIssue(issueID = "IRIS-4896", comment = "To be implemented")
+
+
+  @Test(groups = MOBILE)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
-  public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile() {
-    // To be implemented as a part of IRIS-4896
+  public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile()
+    throws MalformedURLException {
+    PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
+    startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
+    page.waitForPageReload();
+    Assertion.assertFalse(page.findNewestReply().hasOpengraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
   /**
@@ -226,10 +244,24 @@ public class UploadingImageTests extends NewTestTemplate {
     return page.getPostsCreatorDesktop().startPostCreation();
   }
 
+  private BasePostsCreator startPostCreationMobileWithLink(PostsListPage page)
+    throws MalformedURLException {
+    return page.getPostsCreatorMobile().startPostCreationWithLink(new URL(URL));
+  }
+
   private BasePostsCreator startPostCreationDesktopWithLink(PostsListPage page)
     throws MalformedURLException {
-    URL link = new URL("http://fandom.wikia.com");
-    return page.getPostsCreatorDesktop().startPostCreationWithLink(link);
+    return page.getPostsCreatorDesktop().startPostCreationWithLink(new URL(URL));
+  }
+
+  private BaseReplyCreator startReplyCreationDesktopWithLink(PostDetailsPage page)
+    throws MalformedURLException {
+    return page.getReplyCreatorDesktop().startReplyCreationWithLink(new URL(URL));
+  }
+
+  private BaseReplyCreator startReplyCreationMobileWithLink(PostDetailsPage page)
+    throws MalformedURLException {
+    return page.getReplyCreatorMobile().startReplyCreationWithLink(new URL(URL));
   }
 
   private BasePostsCreator startPostCreationMobile(PostsListPage page) {
