@@ -763,6 +763,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
     scrollToPosition("#" + slotName);
+    fixScrollPositionByNavbar();
   }
 
   public void fixScrollPositionByNavbar() {
