@@ -2,13 +2,11 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class Reply extends BasePageObject {
@@ -27,7 +25,7 @@ public class Reply extends BasePageObject {
 
   private WebElement reply;
 
-  public Reply(WebElement reply) {
+  Reply(WebElement reply) {
     this.reply = reply;
   }
 
