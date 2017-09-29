@@ -82,11 +82,11 @@ public class Reply extends BasePageObject {
     return hasImage;
   }
 
-  public boolean hasOpengraph() {
+  public boolean hasOpenGraph() {
     setShortImplicitWait();
-    boolean hasOpengraph = !reply.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
+    boolean hasOpenGraph = !reply.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
     restoreDefaultImplicitWait();
-    return hasOpengraph;
+    return hasOpenGraph;
   }
 
 }

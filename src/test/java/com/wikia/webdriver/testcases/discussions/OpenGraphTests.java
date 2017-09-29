@@ -27,7 +27,7 @@ import java.net.URL;
 
 @Test(groups = "discussions-opengraph")
 @Execute(asUser = User.USER_6, onWikia = MercuryWikis.DISCUSSIONS_2)
-public class OpengraphTests extends NewTestTemplate {
+public class OpenGraphTests extends NewTestTemplate {
 
   private static final String URL = "http://fandom.wikia.com";
 
@@ -46,41 +46,41 @@ public class OpengraphTests extends NewTestTemplate {
 
   @Test
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void validLinkGeneratesOpengraphItemInNewPostOnDesktop() throws MalformedURLException {
+  public void validLinkGeneratesOpenGraphItemInNewPostOnDesktop() throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
     PostsCreatorDesktop postsCreator = page.getPostsCreatorDesktop();
-    verifyOpengraphInNewPost(page, postsCreator);
+    verifyOpenGraphInNewPost(page, postsCreator);
   }
 
   @Test
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void validLinkGeneratesOpengraphItemInNewReplyOnDesktop() throws MalformedURLException {
+  public void validLinkGeneratesOpenGraphItemInNewReplyOnDesktop() throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
     ReplyCreatorDesktop replyCreator = page.getReplyCreatorDesktop();
-    verifyOpengraphInNewReply(page, replyCreator);
+    verifyOpenGraphInNewReply(page, replyCreator);
   }
 
   @Test
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void validLinkGeneratesOpengraphItemInNewPostOnMobile() throws MalformedURLException {
+  public void validLinkGeneratesOpenGraphItemInNewPostOnMobile() throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
     PostsCreatorMobile postsCreator = page.getPostsCreatorMobile();
-    verifyOpengraphInNewPost(page, postsCreator);
+    verifyOpenGraphInNewPost(page, postsCreator);
   }
 
   @Test
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void validLinkGeneratesOpengraphItemInNewReplyOnMobile() throws MalformedURLException {
+  public void validLinkGeneratesOpenGraphItemInNewReplyOnMobile() throws MalformedURLException {
     PostDetailsPage page = new PostDetailsPage().open(setUp().getId());
     ReplyCreatorMobile replyCreator = page.getReplyCreatorMobile();
-    verifyOpengraphInNewReply(page, replyCreator);
+    verifyOpenGraphInNewReply(page, replyCreator);
   }
 
   /**
    * helper methods
    */
 
-  private void verifyOpengraphInNewPost(PostsListPage page, BasePostsCreator postsCreator)
+  private void verifyOpenGraphInNewPost(PostsListPage page, BasePostsCreator postsCreator)
     throws MalformedURLException {
     postsCreator.startPostCreationWithLink(new URL(URL));
 
@@ -92,7 +92,7 @@ public class OpengraphTests extends NewTestTemplate {
     Assertion.assertTrue(page.getPost().findNewestPost().hasOpenGraph());
   }
 
-  private void verifyOpengraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
+  private void verifyOpenGraphInNewReply(PostDetailsPage page, BaseReplyCreator replyCreator)
     throws MalformedURLException {
     replyCreator.startReplyCreationWithLink(new URL(URL));
 
@@ -101,7 +101,7 @@ public class OpengraphTests extends NewTestTemplate {
     page.waitForPageReload();
     page.getReplies().waitForReplyToAppearWith(URL);
 
-    Assertion.assertTrue(page.getReplies().getNewestReply().hasOpengraph());
+    Assertion.assertTrue(page.getReplies().getNewestReply().hasOpenGraph());
   }
 
 }

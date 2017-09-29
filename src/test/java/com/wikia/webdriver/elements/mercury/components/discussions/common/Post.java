@@ -176,10 +176,10 @@ public class Post extends BasePageObject {
     return hasImage;
   }
 
-  public boolean firstPostHasOpengraph() {
+  public boolean firstPostHasOpenGraph() {
     setShortImplicitWait();
-    boolean hasOpengraph = findNewestPost().hasOpenGraph();
+    boolean hasOpenGraph = findNewestPost().hasOpenGraph();
     restoreDefaultImplicitWait();
-    return hasOpengraph;
+    return hasOpenGraph;
   }
 }

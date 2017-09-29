@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
@@ -132,7 +131,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasOpengraph(), POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
+    Assertion.assertFalse(page.getPost().firstPostHasOpenGraph(), POST_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
   @Test(groups = DESKTOP)
@@ -143,7 +142,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startReplyCreationDesktopWithLink(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.findNewestReply().hasOpengraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
+    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
 
@@ -220,7 +219,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostsListPage page = new PostsListPage().open();
     startPostCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.getPost().firstPostHasOpengraph());
+    Assertion.assertFalse(page.getPost().firstPostHasOpenGraph());
   }
 
 
@@ -233,7 +232,7 @@ public class UploadingImageTests extends NewTestTemplate {
     PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
     startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
-    Assertion.assertFalse(page.findNewestReply().hasOpengraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
+    Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
   }
 
   /**
