@@ -89,7 +89,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   }
 
   @Override
-  public PostsCreator addDescriptionWithLink(final String text) {
+  public PostsCreator addDescriptionWith(final String text) {
     getDescriptionTextarea().sendKeys(text);
     return this;
   }
@@ -138,7 +138,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     click()
       .closeGuidelinesMessage()
       .addTitleWith(TextGenerator.defaultText())
-      .addDescriptionWithLink(description)
+      .addDescriptionWith(description)
       .clickAddCategoryButton()
       .selectFirstCategory();
     return this;
