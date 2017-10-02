@@ -12,6 +12,7 @@ import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingFiltersOnDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
 import org.testng.annotations.Test;
@@ -23,29 +24,28 @@ public class SortingTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void anonUserOnMobileCanSortPostsList() {
-    userCanSwitchBetweenLatestAndTrendingInDropdown();
+    userCanSwitchBetweenLatestAndTrendingInDropdown(new PostsListPage().open());
   }
 
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSortPostList() {
-    userCanSwitchBetweenLatestAndTrendingTab();
+    userCanSwitchBetweenLatestAndTrendingTab(new PostsListPage().open());
   }
 
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void loggedInUserOnMobileCanSortPostsList() {
-    userCanSwitchBetweenLatestAndTrendingInDropdown();
+    userCanSwitchBetweenLatestAndTrendingInDropdown(new PostsListPage().open());
   }
 
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
-    userCanSwitchBetweenLatestAndTrendingTab();
+    userCanSwitchBetweenLatestAndTrendingTab(new PostsListPage().open());
   }
 
-  private void userCanSwitchBetweenLatestAndTrendingInDropdown() {
-    PostsListPage page = new PostsListPage().open();
+  private void userCanSwitchBetweenLatestAndTrendingInDropdown(PageWithPosts page) {
     FiltersPopOver filtersPopOver = page.getFiltersPopOver();
     DiscussionsHeader discussionsHeader = page.getDiscussionsHeader();
     discussionsHeader.clickSortButtonOnMobile();
@@ -61,8 +61,8 @@ public class SortingTests extends NewTestTemplate {
     new Loading(driver).handleAsyncPageReload();
   }
 
-  private void userCanSwitchBetweenLatestAndTrendingTab() {
-    SortingFiltersOnDesktop filters = new PostsListPage().open().getSortingFiltersOnDesktop();
+  private void userCanSwitchBetweenLatestAndTrendingTab(PageWithPosts page) {
+    SortingFiltersOnDesktop filters = page.getSortingFiltersOnDesktop();
     filters.clickLatestOption();
     new Loading(driver).handleAsyncPageReload();
 

@@ -22,8 +22,7 @@ public class FollowPage extends PageWithPosts {
     return page;
   }
 
-  @Override
-  public SignInToFollowModalDialog getSignInToFollowModalDialog() {
+  public SignInToFollowModalDialog getSignInDialog() {
     throw new UnsupportedOperationException("FollowPage not reachable for unauthorized users");
   }
 }

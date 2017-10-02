@@ -21,8 +21,7 @@ public class ReportedPostsAndRepliesPage extends PageWithPosts {
     return this;
   }
 
-  @Override
-  public SignInToFollowModalDialog getSignInToFollowModalDialog() {
+  public SignInToFollowModalDialog getSignInDialog() {
     throw new UnsupportedOperationException("Reported posts page not reachable for unauthorized users");
   }
 }
