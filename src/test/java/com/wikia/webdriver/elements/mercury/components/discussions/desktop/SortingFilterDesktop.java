@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class SortingFiltersOnDesktop extends BasePageObject {
+public class SortingFilterDesktop extends BasePageObject {
+
+  @FindBy(css = ".discussion-fieldset.sortby-fieldset")
+  private WebElement fieldset;
 
   @FindBy(css = ".sort-latest")
   private WebElement latestFilter;
@@ -15,7 +18,7 @@ public class SortingFiltersOnDesktop extends BasePageObject {
   @FindBy(css = ".sort-trending")
   private WebElement trendingFilter;
 
-  public SortingFiltersOnDesktop chooseSortingOption(SortOption option) {
+  public SortingFilterDesktop chooseSortingOption(SortOption option) {
     if (option == SortOption.LATEST) {
       waitAndClick(latestFilter);
     } else if (option == SortOption.TRENDING) {
@@ -24,6 +27,10 @@ public class SortingFiltersOnDesktop extends BasePageObject {
       throw new IllegalArgumentException(String.format("Option %s not supported in sorting", option));
     }
     return this;
+  }
+
+  public boolean isEnabled() {
+    return fieldset.isEnabled();
   }
 
 }

@@ -16,6 +16,10 @@ public class FiltersPopOver extends WikiBasePageObject {
   @FindBy(css = ".discussion-header .icon.filter-default")
   private WebElement filterButton;
 
+  @Getter
+  @FindBy(css = ".discussion-filters .discussion-sort")
+  private WebElement sortingFilter;
+
   @FindBy(css = "label[for='sort-button-main.sort-by-trending']")
   private WebElement trendingOptionInSortMenu;
 
@@ -45,13 +49,9 @@ public class FiltersPopOver extends WikiBasePageObject {
     return this;
   }
 
-  public FiltersPopOver clickTrendingOptionInSortMenu() {
-    waitAndClick(trendingOptionInSortMenu);
-    return this;
-  }
-
   public FiltersPopOver clickApplyButton() {
     waitAndClick(applyButtonInSortMenu);
     return this;
   }
+
 }

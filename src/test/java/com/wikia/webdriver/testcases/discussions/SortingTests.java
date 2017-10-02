@@ -4,11 +4,13 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
+import com.wikia.webdriver.elements.mercury.pages.discussions.FollowPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
@@ -27,19 +29,41 @@ public class SortingTests extends NewTestTemplate {
   @Execute(asUser = User.ANONYMOUS)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void anonUserOnDesktopCanSortPostList() {
-    userCanSwitchBetweenLatestAndTrendingTab(new PostsListPage().open());
+    userCanSwitchBetweenLatestAndTrendingOptions(new PostsListPage().open());
   }
 
   @Execute(asUser = User.USER_3)
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void loggedInUserOnMobileCanSortPostsList() {
+  public void userOnMobileCanSortPostsList() {
     userCanSwitchBetweenLatestAndTrendingInDropdown(new PostsListPage().open());
   }
 
   @Execute(asUser = User.USER_3)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void loggedUserOnDesktopCanSwitchBetweenLatestAndTrendingTab() {
-    userCanSwitchBetweenLatestAndTrendingTab(new PostsListPage().open());
+  public void userOnDesktopCanSwitchBetweenLatestAndTrendingSortOptions() {
+    userCanSwitchBetweenLatestAndTrendingOptions(new PostsListPage().open());
+  }
+
+  @Execute(asUser = User.USER_3)
+  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
+  public void userOnDesktopCannotChangeSortingOnFollowingTab() {
+    Assertion.assertFalse(new FollowPage()
+      .open()
+      .getSortingFilterDesktop()
+      .isEnabled());
+  }
+
+  @Test(enabled = false)
+  @RelatedIssue(issueID = "IRIS-4995")
+  @Execute(asUser = User.USER_3)
+  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+  public void userOnMobileCannotChangeSortingOnFollowingTab() {
+    Assertion.assertFalse(new FollowPage()
+      .open()
+      .getDiscussionsHeader()
+      .openFilterMenu()
+      .getSortingFilter()
+      .isEnabled());
   }
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown(PageWithPosts page) {
@@ -47,7 +71,7 @@ public class SortingTests extends NewTestTemplate {
     performSortingCheckOnMobile(page, SortOption.TRENDING);
   }
 
-  private void userCanSwitchBetweenLatestAndTrendingTab(PageWithPosts page) {
+  private void userCanSwitchBetweenLatestAndTrendingOptions(PageWithPosts page) {
     performSortingCheckOnDesktop(page, SortOption.LATEST);
     performSortingCheckOnDesktop(page, SortOption.TRENDING);
   }
@@ -64,7 +88,7 @@ public class SortingTests extends NewTestTemplate {
 
   private void performSortingCheckOnDesktop(PageWithPosts page, SortOption sortOption) {
     page
-      .getSortingFiltersOnDesktop()
+      .getSortingFilterDesktop()
       .chooseSortingOption(sortOption)
       .waitForPageReload();
     Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));

@@ -17,7 +17,7 @@ public abstract class PageWithPosts extends WikiBasePageObject {
   public abstract PageWithPosts open();
 
   @Getter(lazy = true)
-  private final SortingFiltersOnDesktop sortingFiltersOnDesktop = new SortingFiltersOnDesktop();
+  private final SortingFilterDesktop sortingFilterDesktop = new SortingFilterDesktop();
 
   @Getter(lazy = true)
   private final DiscussionsHeader discussionsHeader = new DiscussionsHeader();

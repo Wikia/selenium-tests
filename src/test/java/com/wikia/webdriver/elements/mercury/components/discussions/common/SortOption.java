@@ -9,6 +9,10 @@ public enum SortOption {
   @Getter
   private String query;
 
+  /**
+   *
+   * @param option is a keyword that will appear in URL query param for sorting option
+   */
   SortOption(String option) {
     query = option;
   }
