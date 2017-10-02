@@ -2,7 +2,6 @@ package com.wikia.webdriver.elements.mercury.pages;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Search;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -47,7 +46,6 @@ public class SearchResultsPage extends WikiBasePageObject {
   }
 
   public String clickSearchResult(int index) {
-    Loading loading = new Loading(driver);
     String clickedLink;
 
     PageObjectLogging.logInfo("Select search result no.: " + index);
@@ -57,7 +55,7 @@ public class SearchResultsPage extends WikiBasePageObject {
     clickedLink = searchResult.getAttribute("href");
 
     searchResult.click();
-    loading.handleAsyncPageReload();
+    waitForPageReload();
 
     return clickedLink;
   }

@@ -393,13 +393,6 @@ public class WikiBasePageObject extends BasePageObject {
     return new VisualEditorPageObject();
   }
 
-  public WikiBasePageObject waitForPageReload() {
-    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
-    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
-      "Loading overlay still visible, page not loaded in expected time");
-    return this;
-  }
-
   public void verifyUserLoggedIn(final String userName) {
     changeImplicitWait(0, TimeUnit.MILLISECONDS);
     try {

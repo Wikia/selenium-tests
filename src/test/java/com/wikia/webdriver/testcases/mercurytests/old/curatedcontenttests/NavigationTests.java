@@ -13,10 +13,8 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.UrlChecker;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedNavigation")
@@ -29,13 +27,11 @@ public class NavigationTests extends NewTestTemplate {
 
   private CuratedContentPageObject curatedContent;
   private Navigate navigate;
-  private Loading loading;
   private ArticlePageObject article;
 
   private void init() {
     this.curatedContent = new CuratedContentPageObject();
     this.navigate = new Navigate();
-    this.loading = new Loading(driver);
     this.article = new ArticlePageObject(driver);
   }
 
@@ -46,7 +42,7 @@ public class NavigationTests extends NewTestTemplate {
     navigate.toPageByPath(MercurySubpages.CC_MAIN_PAGE);
 
     curatedContent.clickOnCuratedContentElementByIndex(1);
-    loading.handleAsyncPageReload();
+    curatedContent.waitForPageReload();
 
     UrlChecker.isPathContainedInCurrentUrl(driver, "/wiki/Category:");
   }

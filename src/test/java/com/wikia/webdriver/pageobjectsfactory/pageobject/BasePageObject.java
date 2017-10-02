@@ -28,6 +28,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,6 +84,13 @@ public class BasePageObject {
   public void waitForPageLoad() {
     wait.forElementPresent(
         By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
+  }
+
+  public BasePageObject waitForPageReload() {
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
+    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
+      "Loading overlay still visible, page not loaded in expected time");
+    return this;
   }
 
   /**

@@ -4,20 +4,17 @@ import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
-import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Reply;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-
 import org.testng.SkipException;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -135,8 +132,7 @@ public class LayoutTests extends NewTestTemplate {
     if(startingListLength < 20) {
       throw new SkipException("Skipping test because the condition of minimum 20 posts not met");
     }
-    post.clickLoadMore();
-    new Loading(driver).handleAsyncPageReload();
+    post.clickLoadMore().waitForPageReload();
 
     Assertion.assertTrue(startingListLength < post.getPostsListLength());
   }

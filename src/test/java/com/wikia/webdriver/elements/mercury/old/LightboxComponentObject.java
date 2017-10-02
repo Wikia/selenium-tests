@@ -1,7 +1,6 @@
 package com.wikia.webdriver.elements.mercury.old;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.util.List;
 import org.openqa.selenium.NoSuchElementException;
@@ -26,8 +25,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
   private WebElement closeLightboxButton;
   @FindBy(css = "article img")
   private List<WebElement> imageList;
-
-  private final Loading loading = new Loading(driver);
 
   public boolean isLightboxOpened() {
     try {
@@ -61,7 +58,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
   }
 
   public void clickOnImage() {
-    loading.handleAsyncPageReload();
+    waitForPageReload();
     wait.forElementVisible(currentImage);
     currentImage.click();
   }
