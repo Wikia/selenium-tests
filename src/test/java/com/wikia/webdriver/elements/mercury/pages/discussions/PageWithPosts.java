@@ -12,17 +12,6 @@ import lombok.Getter;
 
 public abstract class PageWithPosts extends WikiBasePageObject {
 
-  public PostEntity getPostById(String postId) {
-    return getPost()
-      .getPosts()
-      .stream()
-      .peek(postEntity -> scrollTo(postEntity.getWebElement()))
-      .filter(postEntity -> postEntity.findId().equals(postId))
-      .findFirst()
-      .orElseThrow(
-        () -> new RuntimeException(String.format("Post with id [%s] not found on page", postId)));
-  }
-
   public abstract SignInToFollowModalDialog getSignInDialog();
 
   public abstract PageWithPosts open();
@@ -50,4 +39,16 @@ public abstract class PageWithPosts extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final Post post = new Post();
+
+  public PostEntity getPostById(String postId) {
+    return getPost()
+      .getPosts()
+      .stream()
+      .peek(postEntity -> scrollTo(postEntity.getWebElement()))
+      .filter(postEntity -> postEntity.findId().equals(postId))
+      .findFirst()
+      .orElseThrow(
+        () -> new RuntimeException(String.format("Post with id [%s] not found on page", postId)));
+  }
+
 }

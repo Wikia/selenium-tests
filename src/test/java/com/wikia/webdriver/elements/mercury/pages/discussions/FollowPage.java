@@ -12,9 +12,6 @@ public class FollowPage extends PageWithPosts {
   @Getter(lazy = true)
   private final NoFollowedPostsMessage noFollowedPostsMessage = new NoFollowedPostsMessage();
 
-  @Getter(lazy = true)
-  private final Post post = new Post();
-
   @Override
   public FollowPage open() {
     final FollowPage page = new FollowPage();
@@ -22,6 +19,7 @@ public class FollowPage extends PageWithPosts {
     return page;
   }
 
+  @Override
   public SignInToFollowModalDialog getSignInDialog() {
     throw new UnsupportedOperationException("FollowPage not reachable for unauthorized users");
   }

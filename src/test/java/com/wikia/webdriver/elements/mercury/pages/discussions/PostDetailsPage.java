@@ -12,9 +12,6 @@ public class PostDetailsPage extends PageWithPosts {
   private final TopNoteModalDialog topNoteModalDialog = new TopNoteModalDialog();
 
   @Getter(lazy = true)
-  private final Post post = new Post();
-
-  @Getter(lazy = true)
   private final Reply reply = new Reply();
 
   @Getter(lazy = true)
@@ -27,7 +24,7 @@ public class PostDetailsPage extends PageWithPosts {
   private final ReplyCreatorMobile replyCreatorMobile = new ReplyCreatorMobile();
 
   @Getter(lazy = true)
-  private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
+  private final SignInToFollowModalDialog signInDialog = new SignInToFollowModalDialog();
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
@@ -51,7 +48,6 @@ public class PostDetailsPage extends PageWithPosts {
   public PostDetailsPage openEmptyPost() {
     return open(EMPTY_POST_ID);
   }
-
 
   public boolean isDisplayed() {
     return getPost().isDisplayed();
