@@ -8,9 +8,7 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingFiltersOnDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 
@@ -45,31 +43,31 @@ public class SortingTests extends NewTestTemplate {
   }
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown(PageWithPosts page) {
-    FiltersPopOver filtersPopOver = page.getFiltersPopOver();
-    DiscussionsHeader discussionsHeader = page.getDiscussionsHeader();
-    discussionsHeader.clickSortButtonOnMobile();
-
-    Assertion.assertTrue(filtersPopOver.isSortListVisibleMobile());
-
-    filtersPopOver.clickLatestLinkOnMobile();
-    filtersPopOver.clickApplyButton();
-    page.waitForPageReload();
-    discussionsHeader.clickSortButtonOnMobile();
-    filtersPopOver.clickTrendingOptionInSortMenu();
-    filtersPopOver.clickApplyButton();
-    page.waitForPageReload();
+    performSortingCheckOnMobile(page, SortOption.LATEST);
+    performSortingCheckOnMobile(page, SortOption.TRENDING);
   }
 
   private void userCanSwitchBetweenLatestAndTrendingTab(PageWithPosts page) {
-    SortingFiltersOnDesktop filters = page.getSortingFiltersOnDesktop();
-    filters.clickLatestOption();
-    page.waitForPageReload();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
-
-    filters.clickTrendingOption();
-    page.waitForPageReload();
-
-    Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
+    performSortingCheckOnDesktop(page, SortOption.LATEST);
+    performSortingCheckOnDesktop(page, SortOption.TRENDING);
   }
+
+  private void performSortingCheckOnMobile(PageWithPosts page, SortOption sortOption) {
+    page
+      .getDiscussionsHeader()
+      .openFilterMenu()
+      .chooseSortingOption(sortOption)
+      .clickApplyButton()
+      .waitForPageReload();
+    Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));
+  }
+
+  private void performSortingCheckOnDesktop(PageWithPosts page, SortOption sortOption) {
+    page
+      .getSortingFiltersOnDesktop()
+      .chooseSortingOption(sortOption)
+      .waitForPageReload();
+    Assertion.assertTrue(page.getCurrentUrl().contains(sortOption.getQuery()));
+  }
+
 }

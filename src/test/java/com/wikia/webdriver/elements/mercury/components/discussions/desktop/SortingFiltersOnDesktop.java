@@ -1,5 +1,6 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
+import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
@@ -14,13 +15,15 @@ public class SortingFiltersOnDesktop extends BasePageObject {
   @FindBy(css = ".sort-trending")
   private WebElement trendingFilter;
 
-  public SortingFiltersOnDesktop clickLatestOption() {
-    latestFilter.click();
+  public SortingFiltersOnDesktop chooseSortingOption(SortOption option) {
+    if (option == SortOption.LATEST) {
+      waitAndClick(latestFilter);
+    } else if (option == SortOption.TRENDING) {
+      waitAndClick(trendingFilter);
+    } else {
+      throw new IllegalArgumentException(String.format("Option %s not supported in sorting", option));
+    }
     return this;
   }
 
-  public SortingFiltersOnDesktop clickTrendingOption() {
-    trendingFilter.click();
-    return this;
-  }
 }
