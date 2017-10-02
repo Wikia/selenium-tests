@@ -8,7 +8,6 @@ import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.SortingFiltersOnDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.DiscussionsHeader;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
@@ -54,22 +53,22 @@ public class SortingTests extends NewTestTemplate {
 
     filtersPopOver.clickLatestLinkOnMobile();
     filtersPopOver.clickApplyButton();
-    new Loading(driver).handleAsyncPageReload();
+    page.waitForPageReload();
     discussionsHeader.clickSortButtonOnMobile();
     filtersPopOver.clickTrendingOptionInSortMenu();
     filtersPopOver.clickApplyButton();
-    new Loading(driver).handleAsyncPageReload();
+    page.waitForPageReload();
   }
 
   private void userCanSwitchBetweenLatestAndTrendingTab(PageWithPosts page) {
     SortingFiltersOnDesktop filters = page.getSortingFiltersOnDesktop();
     filters.clickLatestOption();
-    new Loading(driver).handleAsyncPageReload();
+    page.waitForPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("latest"));
 
     filters.clickTrendingOption();
-    new Loading(driver).handleAsyncPageReload();
+    page.waitForPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains("trending"));
   }
