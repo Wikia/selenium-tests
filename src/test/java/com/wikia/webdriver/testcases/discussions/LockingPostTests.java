@@ -12,10 +12,7 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.MoreOptionsPopOver;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PageWithPosts;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.elements.mercury.pages.discussions.UserPostsPage;
+import com.wikia.webdriver.elements.mercury.pages.discussions.*;
 import org.testng.annotations.Test;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_5)

@@ -3,11 +3,10 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
 
 
-public class PostDetailsPage extends WikiBasePageObject implements AvailablePage {
+public class PostDetailsPage extends PageWithPosts {
 
   @Getter(lazy = true)
   private final TopNoteModalDialog topNoteModalDialog = new TopNoteModalDialog();
@@ -60,5 +59,10 @@ public class PostDetailsPage extends WikiBasePageObject implements AvailablePage
 
   public Reply findNewestReply() {
     return getReplies().getNewestReply();
+  }
+
+  @Override
+  public PostDetailsPage open() {
+    return openEmptyPost();
   }
 }

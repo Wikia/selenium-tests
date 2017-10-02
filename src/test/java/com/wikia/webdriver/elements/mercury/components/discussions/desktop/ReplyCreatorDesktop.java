@@ -11,7 +11,11 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
 
   @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
   @Getter
-  private WebElement replyCreator;
+  private WebElement replyCreatorTextArea;
+
+  @FindBy(css = ".discussion-inline-editor-content-wrapper")
+  @Getter
+  private WebElement replyCreatorWrapper;
 
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   @Getter
@@ -59,6 +63,12 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   @FindBy(css = ".delete-image")
   private WebElement imageDeleteButton;
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
 
   @Override
   public boolean isPresent() {

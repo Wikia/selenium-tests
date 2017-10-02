@@ -243,11 +243,11 @@ public class MobileAdsDataProvider {
                 "\"lang\":\"en\"",
                 "\"pv\":\"1\"",
                 "\"top\":\"1k\"",
-                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"35-44\",\"kids\",\"teen\"]",
+                "\"age\":[\"under18\",\"13-17\",\"18-24\",\"34-44\",\"kids\",\"teen\"]",
                 "\"media\":[\"movies\"]",
                 "\"sex\":[\"m\"]",
-                "\"pform\":[\"xboxone\",\"ps4\",\"ps3\",\"xbox360\",\"pc\"]",
-                "\"gnre\":[\"adventure\",\"3rdpersonshooter\",\"comedy\",\"casual\",\"platformer\"]",
+                "\"pform\":[\"xboxone\",\"ps4\",\"pc\",\"xbox360\",\"ps3\",\"switch\"]",
+                "\"gnre\":[\"3rdpersonshooter\",\"adventure\",\"casual\",\"comedy\",\"platformer\"]",
                 "\"theme\":[\"lego\"]",
                 "\"esrb\":\"everyone\""
             ),
@@ -406,16 +406,8 @@ public class MobileAdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverEvolve2Countries=[]",
             AdsContent.MOBILE_TOP_LB,
             "DirectGptMobile; RemnantGptMobile"
-        },
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
-            AdsContent.MOBILE_TOP_LB,
-            "Evolve2; RemnantGptMobile"
         }
     };
   }

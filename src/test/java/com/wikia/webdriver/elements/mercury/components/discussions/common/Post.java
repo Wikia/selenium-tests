@@ -4,14 +4,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -162,19 +160,6 @@ public class Post extends BasePageObject {
     return upvoteButton.isDisplayed();
   }
 
-  public PostEntity clickFollowFirstPost() {
-    PostEntity post = findNewestPost();
-    post.clickFollow();
-    sleepForTwoSeconds();
-    return post;
-  }
-
-  @SneakyThrows(InterruptedException.class)
-  private void sleepForTwoSeconds() {
-    TimeUnit.SECONDS.sleep(2);
-  }
-
-
   public String getPostDetailText() {
     return wait.forElementVisible(postDetails).getText();
   }
@@ -184,9 +169,16 @@ public class Post extends BasePageObject {
   }
 
   public boolean firstPostHasImage() {
-    changeImplicitWait(3, TimeUnit.SECONDS);
+    setShortImplicitWait();
     boolean hasImage = findNewestPost().hasImage();
     restoreDefaultImplicitWait();
     return hasImage;
+  }
+
+  public boolean firstPostHasOpenGraph() {
+    setShortImplicitWait();
+    boolean hasOpenGraph = findNewestPost().hasOpenGraph();
+    restoreDefaultImplicitWait();
+    return hasOpenGraph;
   }
 }

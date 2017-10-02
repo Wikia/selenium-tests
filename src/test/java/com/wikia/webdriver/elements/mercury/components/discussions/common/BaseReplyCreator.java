@@ -2,11 +2,15 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.net.URL;
 
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
 
-  protected abstract WebElement getReplyCreator();
+  protected abstract WebElement getReplyCreatorTextArea();
+  protected abstract WebElement getReplyCreatorWrapper();
   protected abstract WebElement getDialogSignIn();
   protected abstract WebElement getOkButtonInSignInDialog();
   protected abstract WebElement getSignInButtonInSignInDialog();
@@ -18,10 +22,12 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getImageDeleteButton();
+  protected abstract By getOpenGraphContainer();
+  protected abstract By getOpenGraphText();
 
   @Override
   public ReplyCreator click() {
-    wait.forElementVisible(getReplyCreator()).click();
+    wait.forElementVisible(getReplyCreatorTextArea()).click();
     return this;
   }
 
@@ -94,6 +100,30 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
     waitAndClick(getImageDeleteButton());
     wait.forElementNotVisible(getImagePreview());
     return this;
+  }
+
+  public boolean hasOpenGraph() {
+    boolean result = false;
+    final WebElement openGraphContainer = getReplyCreatorWrapper()
+      .findElement(getOpenGraphContainer());
+    if (null != openGraphContainer) {
+      result = null != openGraphContainer.findElement(getOpenGraphText());
+    }
+    return result;
+  }
+
+  public BaseReplyCreator startReplyCreation() {
+    return startReplyCreationWith(TextGenerator.defaultText());
+  }
+
+  @Override
+  public BaseReplyCreator startReplyCreationWith(String description) {
+    click().clickGuidelinesReadButton().add(description);
+    return this;
+  }
+
+  public BaseReplyCreator startReplyCreationWithLink(URL link) {
+    return startReplyCreationWith(String.format(" %s ", link.toString()));
   }
 
 }

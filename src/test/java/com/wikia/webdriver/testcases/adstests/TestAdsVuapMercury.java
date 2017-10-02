@@ -28,7 +28,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   public void vuapCheckTopAreasMercury(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
     final AutoplayVuap vuap = new AutoplayVuap(driver,
-                                               "#" + slot,
+                                               slot,
                                                ads.findFirstIframeWithAd(slot),
                                                true
     );
