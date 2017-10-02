@@ -97,7 +97,7 @@ public class JavascriptActions {
 
   public void scrollToElement(WebElement element) {
 
-    int offset = 60;
+    int offset = 120;
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     if (wikiPage.isBannerNotificationContainerPresent()) {
       int notificationsHeight = wikiPage.getBannerNotificationsHeight();
