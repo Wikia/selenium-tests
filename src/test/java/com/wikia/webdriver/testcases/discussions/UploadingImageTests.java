@@ -229,7 +229,7 @@ public class UploadingImageTests extends NewTestTemplate {
   @Execute(onWikia = MOBILE_COMMUNITY, asUser = User.USER_2)
   public void userCanOverwriteOpenGraphImageInExistingReplyWithUploadedImageOnMobile()
     throws MalformedURLException {
-    PostDetailsPage page = new PostDetailsPage().open(setUp(DESKTOP_COMMUNITY).getId());
+    PostDetailsPage page = new PostDetailsPage().open(setUp(MOBILE_COMMUNITY).getId());
     startReplyCreationMobileWithLink(page).uploadImage().clickSubmitButton();
     page.waitForPageReload();
     Assertion.assertFalse(page.findNewestReply().hasOpenGraph(), REPLY_OVERWRITTEN_OPENGRAPH_NOT_VISIBLE);
