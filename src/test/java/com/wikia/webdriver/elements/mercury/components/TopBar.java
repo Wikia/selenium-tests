@@ -57,7 +57,7 @@ public class TopBar extends BasePageObject {
     PageObjectLogging.logInfo("Navigation is opened");
     wait.forElementVisible(navMenu);
 
-    return new Navigation(driver);
+    return new Navigation();
   }
 
   public String typeInDesktopSearchAndSelectSuggestion(String query, int suggestionIndex) {
@@ -92,7 +92,7 @@ public class TopBar extends BasePageObject {
     wait.forElementClickable(closeButton);
     closeButton.click();
 
-    return new Navigation(driver);
+    return new Navigation();
   }
 
   public void clickWikiaLogo() {

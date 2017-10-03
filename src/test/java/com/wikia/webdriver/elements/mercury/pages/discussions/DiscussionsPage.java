@@ -23,7 +23,7 @@ public class DiscussionsPage extends WikiBasePageObject {
   private final Navigate navigate = new Navigate();
 
   @Getter(lazy = true)
-  private final Navigation navigation = new Navigation(driver);
+  private final Navigation navigation = new Navigation();
 
   @Getter(lazy = true)
   private final TopBar topbar = new TopBar();
