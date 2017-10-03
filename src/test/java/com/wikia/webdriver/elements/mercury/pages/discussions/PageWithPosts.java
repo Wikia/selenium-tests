@@ -12,10 +12,6 @@ import lombok.Getter;
 
 public abstract class PageWithPosts extends WikiBasePageObject {
 
-  public abstract SignInToFollowModalDialog getSignInDialog();
-
-  public abstract PageWithPosts open();
-
   @Getter(lazy = true)
   private final SortingFilterDesktop sortingFilterDesktop = new SortingFilterDesktop();
 
@@ -39,6 +35,10 @@ public abstract class PageWithPosts extends WikiBasePageObject {
 
   @Getter(lazy = true)
   private final Post post = new Post();
+
+  public abstract SignInToFollowModalDialog getSignInDialog();
+
+  public abstract PageWithPosts open();
 
   public PostEntity getPostById(String postId) {
     return getPost()
