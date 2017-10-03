@@ -4,11 +4,13 @@ import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class CreateNewWikiPageObjectStep2 extends BasePageObject {
 
@@ -16,8 +18,8 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   private WebElement descriptionField;
   @FindBy(css = "#DescWiki .wds-dropdown")
   private WebElement wikiCategoryDropdown;
-  @FindBy(css = "#DescWiki .wds-dropdown .wds-list")
-  private WebElement wikiCategoryList;
+  @FindBy(css = "#DescWiki .wds-dropdown .wds-list li")
+  private List<WebElement> wikiCategoryList;
   @FindBy(css = "form[name='desc-form'] input.next")
   private WebElement submitButton;
   @FindBy(css = "label[for='allAges']")
@@ -31,15 +33,20 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void selectCategory(int categoryId) {
+    if (wikiCategoryList.isEmpty()) {
+      throw new WebDriverException("No categories to choose from");
+    }
+    if (wikiCategoryList.size() < categoryId + 1) {
+      throw new WebDriverException("Cannot find a categpory with this index");
+    }
+    scrollTo(wikiCategoryDropdown);
+    wait.forElementClickable(wikiCategoryDropdown);
+    WebElement selectedCategory = wikiCategoryList.get(categoryId);
     hover(wikiCategoryDropdown);
-
-    WebElement selectedCategory = wikiCategoryList.findElement(By.id(String.valueOf(categoryId)));
     wait.forElementClickable(selectedCategory);
-
-    String selectedCategoryText = selectedCategory.getText();
     selectedCategory.click();
 
-    PageObjectLogging.log("selectCategory", "selected " + selectedCategoryText + " category", true, driver);
+    PageObjectLogging.log("selectCategory", "selected " + selectedCategory.getText() + " category", true, driver);
   }
 
   public CreateNewWikiPageObjectStep3 submit() {
