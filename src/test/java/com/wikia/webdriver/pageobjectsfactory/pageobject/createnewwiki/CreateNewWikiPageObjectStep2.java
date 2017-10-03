@@ -33,7 +33,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
   }
 
   public void selectCategory(int categoryId) {
-    if (wikiCategoryList.size() == 0) {
+    if (wikiCategoryList.isEmpty()) {
       throw new WebDriverException("No categories to choose from");
     }
     if (wikiCategoryList.size() < categoryId + 1) {
