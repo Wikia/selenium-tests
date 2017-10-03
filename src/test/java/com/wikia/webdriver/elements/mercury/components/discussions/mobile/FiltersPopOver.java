@@ -54,4 +54,8 @@ public class FiltersPopOver extends WikiBasePageObject {
     return this;
   }
 
+  public boolean isSortingFilterEnabled() {
+    return isElementEnabled(getSortingFilter());
+  }
+
 }

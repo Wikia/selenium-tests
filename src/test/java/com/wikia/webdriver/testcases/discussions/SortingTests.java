@@ -44,7 +44,7 @@ public class SortingTests extends NewTestTemplate {
     userCanSwitchBetweenLatestAndTrendingOptions(new PostsListPage().open());
   }
 
-  @Execute(asUser = User.USER_3)
+  @Execute(asUser = User.USER_4)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotChangeSortingOnFollowingTab() {
     Assertion.assertFalse(new FollowPage()
@@ -62,8 +62,7 @@ public class SortingTests extends NewTestTemplate {
       .open()
       .getDiscussionsHeader()
       .openFilterMenu()
-      .getSortingFilter()
-      .isEnabled());
+      .isSortingFilterEnabled());
   }
 
   private void userCanSwitchBetweenLatestAndTrendingInDropdown(PageWithPosts page) {

@@ -125,6 +125,17 @@ public class BasePageObject {
   }
 
   /**
+   * WebElement.isEnabled() method signature says that it returns true for anything except disabled
+   * input fields. In order to check if non-input elements are disabled, "disabled" attribute value
+   * must be checked and compared to "true" value
+   * @param element WebElement on the page
+   * @return true if value of "disabled" attribute is different than "true"
+   */
+  protected boolean isElementEnabled(WebElement element) {
+    return !"true".equals(element.getAttribute("disabled"));
+  }
+
+  /**
    * Method to check if WebElement is displayed on the page
    *
    * @return true if element is displayed, otherwise return false

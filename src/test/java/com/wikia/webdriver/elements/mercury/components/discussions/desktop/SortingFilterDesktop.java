@@ -1,10 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SortOption;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.Objects;
 
 
 public class SortingFilterDesktop extends BasePageObject {
@@ -30,7 +33,8 @@ public class SortingFilterDesktop extends BasePageObject {
   }
 
   public boolean isEnabled() {
-    return fieldset.isEnabled();
+    wait.forElementVisible(fieldset);
+    return isElementEnabled(fieldset);
   }
 
 }

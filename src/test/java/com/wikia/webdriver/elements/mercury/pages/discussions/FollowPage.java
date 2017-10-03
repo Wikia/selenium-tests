@@ -16,6 +16,7 @@ public class FollowPage extends PageWithPosts {
   public FollowPage open() {
     final FollowPage page = new FollowPage();
     page.getUrl(page.urlBuilder.getUrlForWiki() + PATH);
+    page.waitForPageReload();
     return page;
   }
 
