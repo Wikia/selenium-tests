@@ -64,8 +64,6 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
       if (selectedLanguageText.contains(langSelector)) {
         wait.forElementClickable(selectedLanguage);
         selectedLanguage.click();
-
-        Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
         PageObjectLogging
             .log("selectLanguage", "selected " + selectedLanguageText + " language", true, driver);
         break;
