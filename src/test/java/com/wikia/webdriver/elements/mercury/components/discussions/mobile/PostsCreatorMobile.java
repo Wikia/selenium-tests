@@ -69,24 +69,18 @@ public class PostsCreatorMobile extends BasePostsCreator {
   @Getter
   private By openGraphText = By.className("og-texts");
 
-  public PostsCreatorMobile() {
-    super();
-  }
-
   @Override
   protected String getBaseCssClassName() {
     return "discussion-standalone-editor";
   }
 
   public PostsCreatorMobile clickOkButtonInSignInDialog() {
-    wait.forElementClickable(okButtonInSignInDialog);
-    okButtonInSignInDialog.click();
+    waitAndClick(okButtonInSignInDialog);
     return this;
   }
 
   public PostsCreatorMobile clickSignInButtonInSignInDialog() {
-    wait.forElementClickable(signInButtonInSignInDialog);
-    signInButtonInSignInDialog.click();
+    waitAndClick(signInButtonInSignInDialog);
     return this;
   }
 }

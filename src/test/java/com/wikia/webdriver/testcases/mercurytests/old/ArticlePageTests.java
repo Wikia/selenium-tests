@@ -12,11 +12,9 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
 import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
-
 import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_Article")
@@ -30,7 +28,6 @@ public class ArticlePageTests extends NewTestTemplate {
   private TopBar topBar;
   private Navigation navigation;
   private Navigate navigate;
-  private Loading loading;
 
   private static final String MAIN_PAGE_CONTENT =
           ContentLoader.loadWikiTextContent("Mercury_MainPage");
@@ -41,9 +38,8 @@ public class ArticlePageTests extends NewTestTemplate {
 
   private void init() {
     this.topBar = new TopBar();
-    this.navigation = new Navigation(driver);
+    this.navigation = new Navigation();
     this.navigate = new Navigate();
-    this.loading = new Loading(driver);
   }
 
   @Test(groups = "mercury_article_wikiaLogoTopContributorsSectionAndFooterElementsAreVisible")
@@ -86,7 +82,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
     String oldUrl = driver.getCurrentUrl();
     articlePage.clickOnImage(0);
-    loading.handleAsyncPageReload();
+    articlePage.waitForPageReload();
 
     Assertion.assertFalse(driver.getCurrentUrl().equals(oldUrl));
   }
@@ -123,13 +119,13 @@ public class ArticlePageTests extends NewTestTemplate {
     );
 
     article.clickOnAnchorInContent(0);
-    loading.handleAsyncPageReload();
+    article.waitForPageReload();
 
     Assertion.assertFalse(driver.getCurrentUrl().contains(encodedColonUrl));
     Assertion.assertTrue(MercurySubpages.COLON.toLowerCase().contains(article.getArticleTitle().toLowerCase()));
 
     article.clickOnAnchorInContent(0);
-    loading.handleAsyncPageReload();
+    article.waitForPageReload();
 
     Assertion.assertTrue(driver.getCurrentUrl().contains(encodedQuestionMarkUrl));
     Assertion.assertTrue(MercurySubpages.QUESTION_MARK.toLowerCase().contains(article.getArticleTitle().toLowerCase()));

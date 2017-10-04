@@ -179,7 +179,7 @@ public class FollowingPostTests extends NewTestTemplate {
     final PageWithPosts page = navigator.apply(data);
     clickFollowOn(page, data);
 
-    Assertion.assertEquals(page.getSignInToFollowModalDialog().getText(),
+    Assertion.assertEquals(page.getSignInDialog().getText(),
       SignInToFollowModalDialog.FOLLOW_DISCUSSION_TEXT, SIGN_IN_MODAL_SHOULD_APPEAR);
     Assertion.assertFalse(new PostDetailsPage().open(data.getId()).isPostFollowed(), SHOULD_UNFOLLOW_POST);
   }

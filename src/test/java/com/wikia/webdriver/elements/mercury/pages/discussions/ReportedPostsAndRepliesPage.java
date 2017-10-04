@@ -10,9 +10,6 @@ public class ReportedPostsAndRepliesPage extends PageWithPosts {
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
 
-  @Getter(lazy = true)
-  private final Post post = new Post();
-
   private static final String PATH = "/d/reported";
 
   @Override
@@ -22,7 +19,7 @@ public class ReportedPostsAndRepliesPage extends PageWithPosts {
   }
 
   @Override
-  public SignInToFollowModalDialog getSignInToFollowModalDialog() {
+  public SignInToFollowModalDialog getSignInDialog() {
     throw new UnsupportedOperationException("Reported posts page not reachable for unauthorized users");
   }
 }

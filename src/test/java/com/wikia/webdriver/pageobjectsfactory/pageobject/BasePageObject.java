@@ -28,6 +28,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +86,13 @@ public class BasePageObject {
         By.cssSelector("script[src='http://b.scorecardresearch.com/beacon.js']"));
   }
 
+  public BasePageObject waitForPageReload() {
+    waitSafely(() -> wait.forElementVisible(By.className("loading-overlay"), Duration.ofSeconds(3)));
+    waitSafely(() -> wait.forElementNotVisible(By.className("loading-overlay")),
+      "Loading overlay still visible, page not loaded in expected time");
+    return this;
+  }
+
   /**
    * Simple method for checking if element is on page or not. Changing the implicitWait value allows
    * us no need for waiting 30 seconds
@@ -114,6 +122,17 @@ public class BasePageObject {
       restoreDefaultImplicitWait();
     }
     return isElementOnPage;
+  }
+
+  /**
+   * WebElement.isEnabled() method signature says that it returns true for anything except disabled
+   * input fields. In order to check if non-input elements are disabled, "disabled" attribute value
+   * must be checked and compared to "true" value
+   * @param element WebElement on the page
+   * @return true if value of "disabled" attribute is different than "true"
+   */
+  protected boolean isElementEnabled(WebElement element) {
+    return !"true".equals(element.getAttribute("disabled"));
   }
 
   /**

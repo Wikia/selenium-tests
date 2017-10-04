@@ -64,7 +64,8 @@ public class LoginTests extends NewTestTemplate {
   public void userCanLogInAsStaffOnMobile() {
     ArticlePage article = openArticleOnMobile();
     loginOnMobileAs(article, STAFF);
-    article.waitForPageReload().verifyUserLoggedIn(STAFF);
+    article.waitForPageReload();
+    article.verifyUserLoggedIn(STAFF);
   }
 
   @Test(groups = DESKTOP)
@@ -79,7 +80,8 @@ public class LoginTests extends NewTestTemplate {
   public void japaneseUserCanLogInOnMobile() {
     ArticlePage article = openArticleOnMobile();
     loginOnMobileAs(article, JAPANESE_USER);
-    article.waitForPageReload().verifyUserLoggedIn(JAPANESE_USER);
+    article.waitForPageReload();
+    article.verifyUserLoggedIn(JAPANESE_USER);
   }
 
   @Test(groups = DESKTOP)
@@ -128,7 +130,8 @@ public class LoginTests extends NewTestTemplate {
     ArticlePageObject article = openArticleOnDesktop();
     Helios.deleteAllTokens(User.INVALIDATED_TOKEN_USER_1);
     article.refreshPageAddingCacheBuster();
-    assertTrue(article.waitForPageReload().getGlobalNavigation().isUserLoggedOut());
+    article.waitForPageReload();
+    assertTrue(article.getGlobalNavigation().isUserLoggedOut());
   }
 
   @Test(groups = MOBILE)

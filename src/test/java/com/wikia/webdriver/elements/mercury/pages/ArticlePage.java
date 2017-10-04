@@ -8,9 +8,7 @@ import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.components.Navigation;
-import com.wikia.webdriver.elements.mercury.components.TopBar;
 import com.wikia.webdriver.elements.mercury.old.LightboxComponentObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -32,7 +30,7 @@ public class ArticlePage extends WikiBasePageObject {
   private final Navigate navigate = new Navigate();
 
   @Getter(lazy = true)
-  private final Navigation navigation = new Navigation(driver);
+  private final Navigation navigation = new Navigation();
 
   @Getter(lazy = true)
   private final CuratedMainPagePageObject curatedMainPage = new CuratedMainPagePageObject();
@@ -57,7 +55,7 @@ public class ArticlePage extends WikiBasePageObject {
     wait.forElementClickable(categoryLink);
     driver.findElement(categoryLink).click();
 
-    new Loading(driver).handleAsyncPageReload();
+    waitForPageReload();
 
     return new CategoryPage();
   }

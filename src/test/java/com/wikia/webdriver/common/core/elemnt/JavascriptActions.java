@@ -97,7 +97,7 @@ public class JavascriptActions {
 
   public void scrollToElement(WebElement element) {
 
-    int offset = 60;
+    int offset = 120;
     WikiBasePageObject wikiPage = new WikiBasePageObject();
     if (wikiPage.isBannerNotificationContainerPresent()) {
       int notificationsHeight = wikiPage.getBannerNotificationsHeight();
@@ -144,8 +144,12 @@ public class JavascriptActions {
   }
 
   public void scrollElementIntoViewPort(WebElement element) {
-    if (!isElementInViewPort(element)) {
-      scrollToElement(element);
+    try {
+      if (!isElementInViewPort(element)) {
+        scrollToElement(element);
+      }
+    }catch(WebDriverException e){
+      PageObjectLogging.logInfo("There might be a problem with scrolling to element", e);
     }
   }
 

@@ -10,11 +10,10 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.TableOfContentPageObject;
-
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_TOC")
 @Execute(onWikia = MercuryWikis.MERCURY_AUTOMATION_TESTING)
 @InBrowser(
@@ -27,12 +26,10 @@ public class TOCTests extends NewTestTemplate {
 
   private TableOfContentPageObject toc;
   private Navigate navigate;
-  private Loading loading;
 
   private void init() {
     this.toc = new TableOfContentPageObject(driver);
     this.navigate = new Navigate();
-    this.loading = new Loading(driver);
   }
 
   @Test(groups = "MercuryTOCTest_001")
@@ -151,8 +148,9 @@ public class TOCTests extends NewTestTemplate {
     init();
     navigate.toPageByPath(MercurySubpages.TOC_WITHOUT_H2);
 
-    new ArticlePageObject(driver).clickOnAnchorInContent(0);
-    loading.handleAsyncPageReload();
+    ArticlePageObject article = new ArticlePageObject(driver);
+    article.clickOnAnchorInContent(0);
+    article.waitForPageReload();
 
     boolean result = toc.isUserMovedToSectionByIndex("2");
     PageObjectLogging.log(
