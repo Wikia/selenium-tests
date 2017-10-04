@@ -13,22 +13,22 @@ import org.testng.annotations.Test;
 
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
-  @Test(
-      groups = {"TestAdsOnSpecialPages"},
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "specialPages"
-  )
-  public void TestAdsOnSpecialPages(String wikiName, String article, String lineItemId,
-                                                String adUnit, String leaderboardSlot,
-                                                String prefooterSlot,
-                                                Dimension resolution) throws Exception {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, resolution);
+  @Test(groups = "TestAdsOnSpecialPagesOasis")
+  public void testAdsOnSpecialVideoPageOasis() throws Exception {
+    String testedPage = urlBuilder.getUrlForPath("project43", "Special:Videos");
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
 
-    ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
-    ads.verifyGptAdInSlot(leaderboardSlot, lineItemId, "");
-    ads.verifyGptIframe(adUnit, prefooterSlot, "gpt");
-    ads.verifyGptAdInSlot(prefooterSlot, lineItemId, "");
+    ads.verifyGptIframe("wka.life/_project43//special", "TOP_LEADERBOARD", "gpt");
+    ads.verifyGptAdInSlot("TOP_LEADERBOARD", "271491732", "");
+  }
+
+  @Test(groups = "TestAdsOnSpecialPagesOasis")
+  public void testAdsOnSpecialImagesPageOasis() throws Exception {
+    String testedPage = urlBuilder.getUrlForPath("project43", "Special:Images");
+    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
+
+    ads.verifyGptIframe("wka.life/_project43//special", "TOP_LEADERBOARD", "gpt");
+    ads.verifyGptAdInSlot("TOP_LEADERBOARD", "271491732", "");
   }
 
   @Test(
