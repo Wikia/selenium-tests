@@ -73,17 +73,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] noAdsForUsers() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/LongPage"},
-        {"project43", "Category:Browse"},
-        {"project43", "Special:Videos"},
-        {"project43", "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)"},
-        {"project43", "Koperek:SyntheticTests/NoAds"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
