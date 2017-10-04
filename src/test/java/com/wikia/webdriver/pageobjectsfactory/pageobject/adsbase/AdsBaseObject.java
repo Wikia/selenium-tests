@@ -154,8 +154,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyNoAdsOnPage() {
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
+    scrollToSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB));
     verifyNoAds();
     PageObjectLogging.log(
         "verifyNoAdsOnPage",
