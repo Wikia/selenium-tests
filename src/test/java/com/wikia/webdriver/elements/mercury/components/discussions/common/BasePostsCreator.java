@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -11,6 +12,9 @@ import java.net.URL;
 public abstract class BasePostsCreator extends BasePageObject implements PostsCreator {
 
   private final CategoryPills categoryPills;
+
+  @Getter
+  private By errorNotification = By.className("error");
 
   public BasePostsCreator() {
     this.categoryPills = new CategoryPills();
@@ -27,7 +31,6 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract WebElement getSubmitButton();
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
-  protected abstract WebElement getAlertNotification();
   protected abstract WebElement getImageDeleteButton();
   protected abstract By getOpenGraphContainer();
   protected abstract By getOpenGraphText();
@@ -120,8 +123,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   public String uploadUnsupportedImage() {
     getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
-    wait.forElementVisible(getAlertNotification());
-    return getAlertNotification().getText();
+    return getEditor().findElement(getErrorNotification()).getText();
   }
 
   public BasePostsCreator removeImage() {

@@ -2,15 +2,20 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.net.URL;
 
 public abstract class BaseReplyCreator extends BasePageObject implements ReplyCreator {
 
+  @Getter
+  private By errorNotification = By.className("error");
+
   protected abstract WebElement getReplyCreatorTextArea();
-  protected abstract WebElement getReplyCreatorWrapper();
+  protected abstract WebElement getEditor();
   protected abstract WebElement getDialogSignIn();
   protected abstract WebElement getOkButtonInSignInDialog();
   protected abstract WebElement getSignInButtonInSignInDialog();
@@ -18,7 +23,6 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
   protected abstract WebElement getTextarea();
   protected abstract WebElement getSubmitButton();
   protected abstract WebElement getLoadingSuccess();
-  protected abstract WebElement getAlertNotification();
   protected abstract WebElement getImagePreview();
   protected abstract WebElement getUploadButton();
   protected abstract WebElement getImageDeleteButton();
@@ -92,8 +96,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   public String uploadUnsupportedImage() {
     getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
-    wait.forElementVisible(getAlertNotification());
-    return getAlertNotification().getText();
+    return getEditor().findElement(getErrorNotification()).getText();
   }
 
   public BaseReplyCreator removeImage() {
@@ -104,7 +107,7 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   public boolean hasOpenGraph() {
     boolean result = false;
-    final WebElement openGraphContainer = getReplyCreatorWrapper()
+    final WebElement openGraphContainer = getEditor()
       .findElement(getOpenGraphContainer());
     if (null != openGraphContainer) {
       result = null != openGraphContainer.findElement(getOpenGraphText());
