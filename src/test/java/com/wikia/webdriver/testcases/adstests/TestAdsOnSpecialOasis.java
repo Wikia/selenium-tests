@@ -15,20 +15,25 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialVideoPageOasis() throws Exception {
-    String testedPage = urlBuilder.getUrlForPath("project43", "Special:Videos");
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
-
-    ads.verifyGptIframe("wka.life/_project43//special", "TOP_LEADERBOARD", "gpt");
-    ads.verifyGptAdInSlot("TOP_LEADERBOARD", "271491732", "");
+    AdsBaseObject ads = buildAdsObjectForPage("Special:Videos");
+    verifyTopLeaderboardHasCorrectAd(ads);
   }
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialImagesPageOasis() throws Exception {
-    String testedPage = urlBuilder.getUrlForPath("project43", "Special:Images");
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
+    AdsBaseObject ads = buildAdsObjectForPage("Special:Images");
+    verifyTopLeaderboardHasCorrectAd(ads);
+  }
 
-    ads.verifyGptIframe("wka.life/_project43//special", "TOP_LEADERBOARD", "gpt");
-    ads.verifyGptAdInSlot("TOP_LEADERBOARD", "271491732", "");
+  private AdsBaseObject buildAdsObjectForPage(String pageName) {
+    String testedPage = urlBuilder.getUrlForPath("project43", pageName);
+    return new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
+  }
+
+  private void verifyTopLeaderboardHasCorrectAd(AdsBaseObject ads) {
+    String slotName = "TOP_LEADERBOARD";
+    ads.verifyGptIframe("wka.life/_project43//special", slotName, "gpt");
+    ads.verifyGptAdInSlot(slotName, "271491732", "");
   }
 
   @Test(
