@@ -23,4 +23,36 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
     AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
     wikiPage.verifyNoAdsOnPage();
   }
+
+  @Test(groups = "NoAdsForUsersOasis")
+  @Execute(asUser = User.USER)
+  public void noAdsForUsersOnCategoryPageOasis() {
+    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, CATEGORY_PAGE_PATH);
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    wikiPage.verifyNoAdsOnPage();
+  }
+
+  @Test(groups = "NoAdsForUsersOasis")
+  @Execute(asUser = User.USER)
+  public void noAdsForUsersOnSpecialPageOasis() {
+    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, SPECIAL_PAGE_PATH);
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    wikiPage.verifyNoAdsOnPage();
+  }
+
+  @Test(groups = "NoAdsForUsersOasis")
+  @Execute(asUser = User.USER)
+  public void noAdsForUsersOnFilePageOasis() {
+    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, FILE_PAGE_PATH);
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    wikiPage.verifyNoAdsOnPage();
+  }
+
+  @Test(groups = "NoAdsForUsersOasis")
+  @Execute(asUser = User.USER)
+  public void noAdsForUsersOnCustomPageOasis() {
+    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, CUSTOM_NAMESPACE_PAGE_PATH);
+    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+    wikiPage.verifyNoAdsOnPage();
+  }
 }
