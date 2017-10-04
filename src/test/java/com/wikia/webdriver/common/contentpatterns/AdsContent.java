@@ -8,6 +8,7 @@ public class AdsContent {
 
   //HashMap with slots selector
   private static final Map<String, String> SLOTS_SELECTORS;
+  private static final Map<String, String> PAL_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
 
   //SCRIPTS
@@ -47,7 +48,7 @@ public class AdsContent {
   }
 
   public static Collection<String> getAllSlotsSelectors() {
-    return SLOTS_SELECTORS.values();
+    return PAL_SLOTS_SELECTORS.values();
   }
 
   public static String getSlotSelector(String slotName) {
@@ -81,6 +82,16 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT, "#INVISIBLE_HIGH_IMPACT");
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
+
+    PAL_SLOTS_SELECTORS = new HashMap<>();
+    PAL_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
+    PAL_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+    PAL_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    PAL_SLOTS_SELECTORS.put(FLOATING_MEDREC, "#INCONTENT_BOXAD_1");
+    PAL_SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
+    PAL_SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
+    PAL_SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
+    PAL_SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
 
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })();");
