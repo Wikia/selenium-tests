@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -16,13 +15,22 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialVideoPageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Videos");
-    verifyTopLeaderboardHasCorrectAd(ads);
+    verifySlotHasCorrectAd(
+        ads,
+        "TOP_LEADERBOARD",
+        "wka.life/_project43//special",
+        "271491732"
+    );
   }
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialImagesPageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Images");
-    verifyTopLeaderboardHasCorrectAd(ads);
+    verifySlotHasCorrectAd(
+        ads,
+        "TOP_LEADERBOARD",
+        "wka.life/_project43//special",
+        "271491732");
   }
 
   private AdsBaseObject buildAdsObjectForPage(String pageName) {
@@ -30,27 +38,42 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     return new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
   }
 
-  private void verifyTopLeaderboardHasCorrectAd(AdsBaseObject ads) {
-    String slotName = "TOP_LEADERBOARD";
-    ads.verifyGptIframe("wka.life/_project43//special", slotName, "gpt");
-    ads.verifyGptAdInSlot(slotName, "271491732", "");
+  private void verifySlotHasCorrectAd(
+      AdsBaseObject ads,
+      String slotName,
+      String adUnit,
+      String lineItem
+  ) {
+    ads.verifyGptIframe(adUnit, slotName, "gpt");
+    ads.verifyGptAdInSlot(slotName, lineItem, "");
   }
 
-  @Test(
-      groups = {"TestAdsOnFilePages"},
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "filePages"
-  )
-  public void TestAdsOnFilePages(String wikiName, String article, String lineItemId,
-                                             String adUnit, String leaderboardSlot,
-                                             String medrecSlot,
-                                             Dimension resolution) throws Exception {
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    AdsBaseObject ads = new AdsBaseObject(driver, testedPage, resolution);
+  @Test(groups = "TestAdsOnFilePagesOasis")
+  public void testAdsOnFilePageOasis() throws Exception {
+    AdsBaseObject ads = buildAdsObjectForPage("File:Example.jpg");
+    String adUnit = "wka.life/_project43//file";
 
-    ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
-    ads.verifyGptAdInSlot(leaderboardSlot, lineItemId, "");
-    ads.verifyGptIframe(adUnit, medrecSlot, "gpt");
-    ads.verifyGptAdInSlot(medrecSlot, lineItemId, "");
+    verifySlotHasCorrectAd(
+        ads,
+        "TOP_LEADERBOARD",
+        adUnit,
+        "271491732"
+    );
+
+    verifySlotHasCorrectAd(
+        ads,
+        "TOP_RIGHT_BOXAD",
+        adUnit,
+        "271491732"
+    );
+
+    ads.scrollToPosition("#articleCategories");
+
+    verifySlotHasCorrectAd(
+        ads,
+        "BOTTOM_LEADERBOARD",
+        adUnit,
+        "271491732"
+    );
   }
 }
