@@ -546,9 +546,10 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  public void verifyNoAd(final String slotSelector) {
+  public Boolean verifyNoAd(final String slotSelector) {
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
+
       if (
           element.isDisplayed()
           && element.getSize().getHeight() > 1
@@ -563,6 +564,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             + " but is smaller then 1x1 or hidden",
             true
         );
+        return true;
       }
     } else {
       PageObjectLogging.log(
@@ -572,6 +574,7 @@ public class AdsBaseObject extends WikiBasePageObject {
           + " not found on page",
           true
       );
+      return true;
     }
   }
 
@@ -672,11 +675,26 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      String slotName = entry.getKey();
-      String selector = entry.getValue();
+      final String slotName = entry.getKey();
+      final String selector = entry.getValue();
+      final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
-      triggerAdSlot(slotName);
-      verifyNoAd(selector);
+      if (StringUtils.isEmpty(javaScriptTrigger)) {
+        verifyNoAd(selector);
+      } else {
+        try {
+          new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC)
+              .until(new ExpectedCondition<Object>() {
+                @Override
+                public Object apply(WebDriver webDriver) {
+                  jsActions.execute(javaScriptTrigger);
+                  return verifyNoAd(selector);
+                }
+              });
+        } catch (org.openqa.selenium.TimeoutException e) {
+          PageObjectLogging.logError(selector + " slot", e);
+        }
+      }
     }
   }
 
