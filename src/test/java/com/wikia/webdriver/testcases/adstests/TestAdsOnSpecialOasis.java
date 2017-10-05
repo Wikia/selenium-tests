@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  */
 
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
-  final static String PROJECT43_TEST_LINE_ITEM_ID = "271491732";
+  static final String PROJECT43_TEST_LINE_ITEM_ID = "271491732";
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialVideoPageOasis() throws Exception {
