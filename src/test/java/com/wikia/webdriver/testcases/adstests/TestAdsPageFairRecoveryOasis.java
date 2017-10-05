@@ -21,13 +21,33 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
   private static final String INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF = "InstantGlobals.wgAdDriverInstartLogicRecoveryCountries=[ZZ]";
   private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF = "InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[ZZ]";
+  private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_ON = "InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[XX]";
   private static final String INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON = "InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]";
 
   @Test(
       groups = "AdsRecoveryPageFairOasis"
   )
   public void adsRecoveryPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery(true));
+    AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+
+    // when PF recovered ad is on page, inserts span elements as a direct children of body
+    adsRecoveryObject.wait.forElementPresent(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
+
+    // verify that adblock is turned on on that page
+    adsRecoveryObject.verifyNoAdsOnPage();
+
+    List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
+
+    Assert.assertEquals(recoveredAds.size(), 3);
+    adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(recoveredAds);
+  }
+
+  @Test(
+      groups = "AdsRecoveryPageFairOasis"
+  )
+  public void adsRecoveryPageFairOasisNonPal() {
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery(false));
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     // when PF recovered ad is on page, inserts span elements as a direct children of body
@@ -46,7 +66,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
       groups = "AdsRecoveryNoAdblockPageFairOasis"
   )
   public void adsRecoveryNoAdblockPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery(true));
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(4);
@@ -57,16 +77,18 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   )
   @Execute(asUser = User.USER_2)
   public void adsRecoveryLoggedInPageFairOasis() {
-    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
+    String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery(true));
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
 
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(0);
   }
 
-  private String getUrlArticlePageFairRecovery() {
+  private String getUrlArticlePageFairRecovery(boolean isPAL) {
     String url = urlBuilder.appendQueryStringToURL(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF);
     url = urlBuilder.appendQueryStringToURL(url, INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON);
 
-    return urlBuilder.appendQueryStringToURL(url, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
+    return urlBuilder.appendQueryStringToURL(url, isPAL ?
+                                                  INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_ON :
+                                                  INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
   }
 }

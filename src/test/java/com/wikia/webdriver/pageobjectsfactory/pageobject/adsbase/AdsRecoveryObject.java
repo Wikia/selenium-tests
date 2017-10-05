@@ -14,8 +14,8 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 public class AdsRecoveryObject extends AdsBaseObject {
   private static final Dimension MEDREC_SIZE = new Dimension(300, 250);
   private static final Dimension SKY_SIZE = new Dimension(300, 600);
-  private static final Dimension TOP_LEADERBOARD_SIZE = new Dimension(728, 90);
-  private static final String EXPECTED_TOP_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
+  private static final Dimension LEADERBOARD_SIZE = new Dimension(728, 90);
+  private static final String EXPECTED_LEADERBOARD_PATH = "src/test/resources/adsResources/recovered_top_leaderboard";
   private static final String EXPECTED_MEDREC_PATH = "src/test/resources/adsResources/recovered_medrec";
   private static final String EXPECTED_SKY_PATH = "src/test/resources/adsResources/recovered_sky";
   private static final By RECOVERABLE_SLOT_SELECTOR = By.cssSelector("[adonis-marker]");
@@ -30,7 +30,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
     String expectedRecoveredMR;
     String expectedRecoveredSKY;
     try {
-      expectedRecoveredLB = readFileToString(new File(EXPECTED_TOP_LEADERBOARD_PATH));
+      expectedRecoveredLB = readFileToString(new File(EXPECTED_LEADERBOARD_PATH));
       expectedRecoveredMR = readFileToString(new File(EXPECTED_MEDREC_PATH));
       expectedRecoveredSKY = readFileToString(new File(EXPECTED_SKY_PATH));
     } catch (IOException e) {
@@ -41,7 +41,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
     for (WebElement ad : recoveredAds) {
       Dimension adSize = ad.getSize();
 
-      if (adSize.equals(TOP_LEADERBOARD_SIZE)) {
+      if (adSize.equals(LEADERBOARD_SIZE)) {
         Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredLB), "TOP_LEADERBOARD is not correctly recovered!");
       } else if (adSize.equals(MEDREC_SIZE)) {
         Assertion.assertTrue(ad.getCssValue("background").contains(expectedRecoveredMR), "MEDREC is not correctly recovered!");
