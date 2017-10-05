@@ -83,11 +83,11 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     adsRecoveryObject.verifyNumberOfPageFairRecoveredSlots(0);
   }
 
-  private String getUrlArticlePageFairRecovery(boolean isPAL) {
+  private String getUrlArticlePageFairRecovery(boolean isPremiumAdLayoutEnabled) {
     String url = urlBuilder.appendQueryStringToURL(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF);
     url = urlBuilder.appendQueryStringToURL(url, INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON);
 
-    return urlBuilder.appendQueryStringToURL(url, isPAL ?
+    return urlBuilder.appendQueryStringToURL(url, isPremiumAdLayoutEnabled ?
                                                   INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_ON :
                                                   INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
   }
