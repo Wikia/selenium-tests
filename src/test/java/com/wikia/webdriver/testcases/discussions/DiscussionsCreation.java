@@ -8,14 +8,16 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorM
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class DiscussionsCreation extends CreateWikiTests_lang {
 
   private String wikiUrl;
 
-  @BeforeSuite
+  @BeforeTest
   public void setUp() {
     CreateNewWiki_lang_TC001("en");
     wikiUrl = driver.getCurrentUrl();
