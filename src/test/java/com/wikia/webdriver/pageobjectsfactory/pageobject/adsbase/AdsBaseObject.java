@@ -442,11 +442,14 @@ public class AdsBaseObject extends WikiBasePageObject {
     WebElement slot;
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
+      String slotSelector = AdsContent.getSlotSelector(slotName);
+
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC, false);
+        triggerAdSlot(AdsContent.FLOATING_MEDREC).
+            wait.
+            forElementPresent(By.cssSelector(slotSelector));
       }
 
-      String slotSelector = AdsContent.getSlotSelector(slotName);
       try {
         slot = driver.findElement(By.cssSelector(slotSelector));
       } catch (NoSuchElementException elementNotFound) {
@@ -585,27 +588,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject triggerAdSlot(final String slotName, Boolean verifyNoAds) {
-    final String adSlotSelector = AdsContent.getSlotSelector(slotName);
-    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
-    final Boolean condition = verifyNoAds ?
-                              verifyNoAd(adSlotSelector) :
-                              driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
+  public AdsBaseObject triggerAdSlot(String slotName) {
+    String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
-    if (StringUtils.isEmpty(javaScriptTrigger)) {
-      return this;
-    }
-
-    try {
-      new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
-        @Override
-        public Object apply(WebDriver webDriver) {
-          jsActions.execute(javaScriptTrigger);
-          return condition;
-        }
-      });
-    } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError(adSlotSelector + " slot", e);
+    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+      jsActions.execute(javaScriptTrigger);
     }
 
     return this;
@@ -686,13 +673,16 @@ public class AdsBaseObject extends WikiBasePageObject {
     Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
       final String slotName = entry.getKey();
-      final String selector = entry.getValue();
+      final String slotSelector = entry.getValue();
       final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
       if (StringUtils.isEmpty(javaScriptTrigger)) {
-        verifyNoAd(selector);
+        verifyNoAd(slotSelector);
       } else {
-        triggerAdSlot(slotName, true);
+        triggerAdSlot(slotName)
+            .wait
+            .forElementNotVisible(driver.findElement(By.cssSelector(slotSelector)));
+        verifyNoAd(slotSelector);
       }
     }
   }
