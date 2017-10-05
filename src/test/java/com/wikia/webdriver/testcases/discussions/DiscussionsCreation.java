@@ -7,16 +7,16 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.elements.common.CommunityHeader;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
-import com.wikia.webdriver.testcases.createawikitests.CreateWikiTests_lang;
+import com.wikia.webdriver.testcases.createawikitests.CreateWikiTestsLang;
 import org.testng.annotations.Test;
 
 @Test(groups = "discussions-creation")
-public class DiscussionsCreation extends CreateWikiTests_lang {
+public class DiscussionsCreation extends CreateWikiTestsLang {
 
   @Execute(asUser = User.USER_CNW)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userCanSeeEmptyDiscussionsMessageAndAddPostOnNewCommunityDiscussionsPage() {
-    CreateNewWiki_lang_TC001("en");
+    createNewWikiLangTC001("en");
     PostsListPage page = navigateToDiscussions();
     Assertion.assertTrue(page.getErrorMessages().isEmptyPostsListMessageDisplayed());
     createNewPost(page);
