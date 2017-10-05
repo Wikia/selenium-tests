@@ -8,10 +8,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
 import org.joda.time.DateTime;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
@@ -26,8 +24,8 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   private WebElement submitButton;
   @FindBy(css = "#NameWiki .wds-dropdown")
   private WebElement wikiLanguageDropdown;
-  @FindBy(css = "#NameWiki .wds-dropdown .wds-list")
-  private WebElement wikiLanguageList;
+  @FindBy(css = "#NameWiki .wds-dropdown .wds-list li:not(.spacer)")
+  private List<WebElement> wikiLanguageList;
   @FindBy(css = ".domain-country")
   private WebElement languageSelectedIndicator;
   @FindBy(css = ".wiki-domain-error.error-msg")
@@ -53,24 +51,19 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
 
 
   public void selectLanguage(String lang) {
-    wait.forElementClickable(wikiLanguageDropdown);
-    new Actions(driver).moveToElement(wikiLanguageDropdown).perform();
-
-    List<WebElement> langList = wikiLanguageList.findElements(By.cssSelector("li:not(.spacer)"));
+    jsActions.scrollToElement(wait.forElementClickable(wikiLanguageDropdown));
     String langSelector = lang + ":";
 
-    for (WebElement selectedLanguage : langList) {
-      String selectedLanguageText = selectedLanguage.getText();
-      if (selectedLanguageText.contains(langSelector)) {
-        wait.forElementClickable(selectedLanguage);
-        selectedLanguage.click();
+    WebElement langElementInDropdown = wikiLanguageList.stream()
+            .filter(e -> e.getAttribute("innerHTML").trim().contains(langSelector)).findAny()
+            .orElseThrow(() -> new WebDriverException(String.format("Couldn't find language [%s]", lang)));
+    hover(wikiLanguageDropdown);
+    langElementInDropdown.click();
 
-        Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
-        PageObjectLogging
-            .log("selectLanguage", "selected " + selectedLanguageText + " language", true, driver);
-        break;
-      }
-    }
+    PageObjectLogging
+            .log("selectLanguage", "selected " + langElementInDropdown.getAttribute("innerHTML").trim() + " language", true, driver);
+
+    Assertion.assertEquals(languageSelectedIndicator.getText(), lang + ".");
   }
 
   public void typeInWikiName(String name) {
