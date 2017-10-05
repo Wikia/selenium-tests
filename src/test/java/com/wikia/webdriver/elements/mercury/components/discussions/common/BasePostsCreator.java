@@ -70,9 +70,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public CategoryPills clickAddCategoryButton() {
-    getAddCategoryButton().click();
-    wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
-
+    if (getAddCategoryButton().isDisplayed()) {
+      getAddCategoryButton().click();
+      wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
+    }
     return categoryPills;
   }
 
