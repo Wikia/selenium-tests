@@ -367,7 +367,10 @@ public class AdsBaseObject extends WikiBasePageObject {
               By.cssSelector("#"+slotName+" [" + attr + "]"));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
-      PageObjectLogging.log("getSlotAttribute", String.format("Slot %s with attribute [%s] not found", slotName, attr), true);
+      PageObjectLogging.logError(
+          String.format("Slot %s with attribute [%s] not found", slotName, attr),
+          elementNotFound
+      );
       return null;
     }
   }
@@ -447,6 +450,10 @@ public class AdsBaseObject extends WikiBasePageObject {
       try {
         slot = driver.findElement(By.cssSelector(slotSelector));
       } catch (NoSuchElementException elementNotFound) {
+        PageObjectLogging.logError(
+            String.format("Slot %s not found on the page", slotName),
+            elementNotFound
+        );
         return false;
       }
 
