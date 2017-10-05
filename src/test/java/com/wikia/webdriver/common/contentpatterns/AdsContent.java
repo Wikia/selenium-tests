@@ -1,6 +1,5 @@
 package com.wikia.webdriver.common.contentpatterns;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,8 +46,8 @@ public class AdsContent {
 
   }
 
-  public static Collection<String> getAllSlotsSelectors() {
-    return PAL_SLOTS_SELECTORS.values();
+  public static Map<String, String> getSlotsSelectorsMap() {
+    return PAL_SLOTS_SELECTORS;
   }
 
   public static String getSlotSelector(String slotName) {
@@ -97,6 +96,7 @@ public class AdsContent {
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 100); })();");
     SLOTS_TRIGGERS.put(INCONTENT_LEADERBOARD, "$('#mw-content-text h2')[1].scrollIntoView(true);");
     SLOTS_TRIGGERS.put(LEFT_SKYSCRAPPER_3, "window.scrollTo(0,document.body.scrollHeight);");
+    SLOTS_TRIGGERS.put(BOTTOM_LB, "window.scrollTo(0,document.body.scrollHeight);");
   }
 }
 
