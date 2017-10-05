@@ -16,6 +16,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   public BasePostsCreator() {
     this.categoryPills = new CategoryPills();
+    categoryPills.setEmpty(false);
   }
 
   protected abstract String getBaseCssClassName();
@@ -75,8 +76,10 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     try {
       getAddCategoryButton().click();
       wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
+      categoryPills.setEmpty(false);
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo("Category picker not found", e.toString());
+      categoryPills.setEmpty(true);
     }
     return categoryPills;
   }
