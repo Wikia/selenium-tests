@@ -19,10 +19,9 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "arecovery";
   private static final String WIKIA_ARTICLE = "SyntheticTests/Static_image";
-  private static final String INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF = "InstantGlobals.wgAdDriverInstartLogicRecoveryCountries=[ZZ]";
-  private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF = "InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[ZZ]";
-  private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_ON = "InstantGlobals.wgAdDriverPremiumAdLayoutCountries=[XX]";
-  private static final String INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON = "InstantGlobals.wgAdDriverPageFairRecoveryCountries=[XX]";
+  private static final String INSTANT_GLOBAL_INSTART_LOGIC = "wgAdDriverInstartLogicRecoveryCountrie";
+  private static final String INSTANT_GLOBAL_PAGE_FAIR = "wgAdDriverPageFairRecoveryCountries";
+  private static final String INSTANT_GLOBAL_PREMIUM_AD_LAYOUT = "wgAdDriverPremiumAdLayoutCountries";
 
   @Test(
       groups = "AdsRecoveryPageFairOasis"
@@ -84,11 +83,11 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   }
 
   private String getUrlArticlePageFairRecovery(boolean isPremiumAdLayoutEnabled) {
-    String url = urlBuilder.appendQueryStringToURL(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC_SWITCHED_OFF);
-    url = urlBuilder.appendQueryStringToURL(url, INSTANT_GLOBAL_PAGE_FAIR_SWITCHED_ON);
+    String url = urlBuilder.globallyDisableGeoInstantGlobalOnPage(WIKIA_ARTICLE, INSTANT_GLOBAL_INSTART_LOGIC);
+    url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, INSTANT_GLOBAL_PAGE_FAIR);
 
-    return urlBuilder.appendQueryStringToURL(url, isPremiumAdLayoutEnabled ?
-                                                  INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_ON :
-                                                  INSTANT_GLOBAL_PREMIUM_AD_LAYOUT_SWITCHED_OFF);
+    return isPremiumAdLayoutEnabled ?
+           urlBuilder.globallyEnableGeoInstantGlobalOnPage(url, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT) :
+           urlBuilder.globallyDisableGeoInstantGlobalOnPage(url, INSTANT_GLOBAL_PREMIUM_AD_LAYOUT);
   }
 }
