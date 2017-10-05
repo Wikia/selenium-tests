@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
-import java.util.Optional;
 
 public class CategoryPills extends BasePageObject {
 

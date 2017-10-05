@@ -78,7 +78,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
       wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
       categoryPills.setEmpty(false);
     } catch (NoSuchElementException e) {
-      PageObjectLogging.logInfo("Category picker not found", e.toString());
+      PageObjectLogging.logInfo("Category picker not found", e);
       categoryPills.setEmpty(true);
     }
     return categoryPills;
