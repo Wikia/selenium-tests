@@ -50,7 +50,7 @@ public class AdsEvolveObject extends AdsBaseObject {
   }
 
   public void enableEvolve(String testedPage) {
-    String url = urlBuilder.appendQueryStringToURL(testedPage, "Wikia.InstantGlobals.wgAdDriverEvolve2Countries=[XX]");
+    String url = urlBuilder.globallyEnableGeoInstantGlobalOnPage(testedPage, "wgAdDriverEvolve2Countries");
     driver.get(url);
   }
 
