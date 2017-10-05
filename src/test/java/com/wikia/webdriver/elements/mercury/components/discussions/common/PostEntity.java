@@ -1,31 +1,44 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class PostEntity {
 
   private static final String CLASS_ATTRIBUTE = "class";
 
   private static final String POST_EDITED_BY_CLASS_NAME = "post-edited-by-row";
 
+  @Getter
+  @FindBy(css = ".follow-area.is-active")
+  private WebElement followingActiveState;
+
   @Getter(AccessLevel.PACKAGE)
   private final WebElement post;
 
-  public boolean hasOpenGraphAtContentEnd() {
-    return null != post.findElement(By.cssSelector(".discussion-content + .og-container"));
+  public PostEntity(WebElement post) {
+    this.post = post;
+  }
+
+  public boolean hasOpenGraph() {
+    return !post.findElements(By.cssSelector(".discussion-content + .og-container")).isEmpty();
   }
 
   public boolean hasTopNote() {
     return null != findTopNoteElement();
+  }
+
+  public boolean hasImage() {
+    return !post.findElements(By.cssSelector(".post-image-inner-image")).isEmpty();
   }
 
   private WebElement findTopNoteElement() {
@@ -117,10 +130,6 @@ public class PostEntity {
     return post.findElement(By.className(POST_EDITED_BY_CLASS_NAME)).getText();
   }
 
-  public PostActionsRow findPostActions() {
-    return new PostActionsRow(post.findElement(By.className("post-actions")));
-  }
-
   public void click() {
     if (!isOnPostDetailsPage()) {
       findDescriptionElement().click();
@@ -130,6 +139,25 @@ public class PostEntity {
   public MoreOptionsPopOver clickMoreOptions() {
     post.findElement(By.className("discussion-more-options")).click();
     return MoreOptionsPopOver.fromPostEntity(this);
+  }
+
+  public PostEntity clickFollow() {
+    findFollowArea().click();
+    sleepForTwoSeconds();
+    return this;
+  }
+
+  @SneakyThrows(InterruptedException.class)
+  private void sleepForTwoSeconds() {
+    TimeUnit.SECONDS.sleep(2);
+  }
+
+  private WebElement findFollowArea() {
+    return post.findElement(By.className("follow-area"));
+  }
+
+  public boolean isFollowed() {
+    return findFollowArea().getAttribute("class").contains("is-active");
   }
 
   public WebElement getWebElement() {
@@ -149,17 +177,11 @@ public class PostEntity {
   @Builder
   @lombok.Data
   public static class Data {
-
     private final String id;
-
     private final String authorId;
-
     private final String category;
-
     private final String title;
-
     private final String description;
-
     private final String firstPostId;
   }
 }

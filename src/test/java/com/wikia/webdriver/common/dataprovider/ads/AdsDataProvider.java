@@ -269,20 +269,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpRubiconParamsSynthetic() {
-    return new Object[][]{
-        {
-            "project43",
-            "SyntheticTests/RubiconFastlane",
-            "InstantGlobals.wgAdDriverDelayCountries=[XX]",
-            "wka.life/_project43//article",
-            "TOP_LEADERBOARD",
-            ".*\"rpfl_7450\":\\[\"2_tier(NONE|PREBID|\\d{4})\",\"57_tier(NONE|PREBID|\\d{4})\"\\].*"
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] dfpParams() {
     return new Object[][]{
         {
@@ -566,13 +552,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] amazonSites() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Amazon"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] prebidCustomAdapter() {
     return new Object[][]{
         {"project43", "SyntheticTests/RTB/Prebid.js/Wikia"},
@@ -583,6 +562,23 @@ public class AdsDataProvider {
   public static Object[][] prebidVelesAdapter() {
     return new Object[][]{
         {"project43","SyntheticTests/Cap", 333201132},
+    };
+  }
+
+  @DataProvider
+  public static Object[][] prebidRubiconSlotsList() {
+    return new Object[][]{
+        {
+            Arrays.asList(
+                ".*fastlane.json.*TOP_LEADERBOARD.*",
+                ".*fastlane.json.*TOP_RIGHT_BOXAD.*",
+                ".*fastlane.json.*LEFT_SKYSCRAPER_2.*",
+                ".*fastlane.json.*LEFT_SKYSCRAPER_3.*",
+                ".*fastlane.json.*INCONTENT_BOXAD_1.*",
+                ".*fastlane.json.*PREFOOTER_LEFT_BOXAD.*",
+                ".*fastlane.json.*PREFOOTER_RIGHT_BOXAD.*"
+            )
+        }
     };
   }
 
@@ -603,21 +599,12 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[]",
             AdsContent.TOP_LB,
             "DirectGpt; RemnantGpt"
         },
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
-            AdsContent.TOP_LB,
-            "DirectGpt; RemnantGpt; RubiconFastlane"
-        },
-        {
-            "project43",
-            "SyntheticTests/ProvidersChain",
-            "",
             AdsContent.INVISIBLE_SKIN,
             "DirectGpt; RemnantGpt"
         }
@@ -630,9 +617,9 @@ public class AdsDataProvider {
         {
             "project43",
             "SyntheticTests/ProvidersChain",
-            "InstantGlobals.wgAdDriverRubiconFastlaneProviderCountries=[XX]",
+            "InstantGlobals.wgAdDriverEvolve2Countries=[XX]",
             AdsContent.TOP_LB,
-            "RubiconFastlane"
+            "Evolve2"
         },
     };
   }

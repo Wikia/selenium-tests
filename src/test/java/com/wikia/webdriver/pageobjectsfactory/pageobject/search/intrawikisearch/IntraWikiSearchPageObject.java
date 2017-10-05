@@ -4,7 +4,9 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
-
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,10 +16,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
@@ -251,23 +249,13 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   public void verifyNamespace(String namespace) {
     driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
     try {
-      new WebDriverWait(driver, 30).until(new ExpectedCondition<Boolean>() {
-        @Override
-        public Boolean apply(WebDriver webDriver) {
-          return !titles.isEmpty();
-        }
-      });
+      new WebDriverWait(driver, 30)
+          .until((ExpectedCondition<Boolean>) webDriver -> !titles.isEmpty());
     } finally {
       restoreDefaultImplicitWait();
     }
 
     Assertion.assertTrue(titles.get(0).getText().startsWith(namespace));
-  }
-
-  public void verifySearchPageOpened() {
-    Assertion.assertTrue(searchHeadline.isDisplayed());
-    Assertion.assertTrue(searchTabs.isDisplayed());
-    Assertion.assertTrue(searchInput.isDisplayed());
   }
 
   public void verifyTopModule() {
@@ -325,11 +313,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
   }
 
   public List<String> getTitles() {
-    List<String> titleList = new ArrayList<String>();
-    for (WebElement elem : titles) {
-      titleList.add(elem.getText());
-    }
-    return titleList;
+    return titles.stream()
+        .map(WebElement::getText)
+        .collect(Collectors.toList());
   }
 
   public void compareTitleListsNotEquals(List<String> titles1, List<String> titles2) {

@@ -249,7 +249,8 @@ public class SignupTests extends NewTestTemplate {
   private void performSignUpOnMobileAs(SignUpUser user) {
     ArticlePage article = openArticleOnMobile();
     signUpOnMobileAs(article, user);
-    article.waitForPageReload().verifyUserLoggedIn(user.getUsername());
+    article.waitForPageReload();
+    article.verifyUserLoggedIn(user.getUsername());
   }
 
   private void performSignUpOnDesktopAs(SignUpUser user) {

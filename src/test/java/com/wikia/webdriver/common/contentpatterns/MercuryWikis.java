@@ -22,6 +22,8 @@ public class MercuryWikis {
   public static final String DISCUSSIONS_3 = "dauto3";
   public static final String DISCUSSIONS_4 = "dauto4";
   public static final String DISCUSSIONS_5 = "dauto5";
+  public static final String DISCUSSIONS_6 = "dauto6";
+  public static final String DISCUSSIONS_7 = "dauto7";
   // for discussions mobile view tests
   public static final String DISCUSSIONS_MOBILE = "dauto-mobile";
   public static final String DISCUSSIONS_MESSAGING = "discussions-messages-testing";

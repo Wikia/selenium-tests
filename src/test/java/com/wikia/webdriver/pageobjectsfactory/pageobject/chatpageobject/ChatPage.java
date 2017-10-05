@@ -122,16 +122,6 @@ public class ChatPage extends WikiBasePageObject {
     return userNameTextBox.getText();
   }
 
-  public boolean isUserOnChat() {
-    try {
-      wait.forTextInElementAfterRefresh(newMessageTextBoxBy, "");
-      return true;
-    } catch (TimeoutException | NoSuchElementException ex) {
-      PageObjectLogging.log("Message textbox on chat page not displayed", ex, true);
-      return false;
-    }
-  }
-
   public boolean isMessageOnChat(String message) {
     try {
       WebElement userPostedMessage = userPostedMessage(message);

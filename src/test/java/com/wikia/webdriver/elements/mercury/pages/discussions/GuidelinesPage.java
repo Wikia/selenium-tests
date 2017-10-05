@@ -47,27 +47,18 @@ public class GuidelinesPage extends WikiBasePageObject {
   private WebElement guidelinesText;
 
   public GuidelinesPage open() {
-    driver.get(urlBuilder.getUrlForWiki() + String.format(PATH));
-
-    new SkinHelper(driver).isSkin(Skin.MERCURY);
-
+    driver.get(String.format("%s%s", urlBuilder.getUrlForWiki(), PATH));
     return this;
   }
 
   public DiscussionsPage clickBackToDiscussions() {
-    wait.forElementClickable(backToDiscussionsButton);
-    backToDiscussionsButton.click();
-
+    waitAndClick(backToDiscussionsButton);
     return new DiscussionsPage();
   }
 
   private void clickEditGuidelines() {
     wait.forElementNotVisible(By.className("discussion-standalone-editor"));
     editButton.click();
-  }
-
-  public boolean isModalGuidelinesDisplayed() {
-    return isElementVisible(editModal, "Edit modal");
   }
 
   private boolean isElementVisible(WebElement element, String elementName) {
@@ -100,6 +91,7 @@ public class GuidelinesPage extends WikiBasePageObject {
     this.guidelinesText.clear();
     this.guidelinesText.sendKeys(text);
     clickSaveButton();
+    waitForPageReload();
   }
 
   private String addNewTextToGuidelines() {
@@ -120,7 +112,7 @@ public class GuidelinesPage extends WikiBasePageObject {
     wait.forTextNotInElement(contentText, text);
   }
 
-  public boolean canAddNewTextToGuidelines() {
+  public boolean canUpdateGuidelinesContent() {
       final String text = addNewTextToGuidelines();
       hasTextInGuidelines(text);
       deleteTextFromGuidelines(text);

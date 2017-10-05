@@ -1,15 +1,13 @@
 package com.wikia.webdriver.testcases.forumtests;
 
-import org.joda.time.DateTime;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
-import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumBoardPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
+import org.joda.time.DateTime;
+import org.testng.annotations.Test;
 
 @Test(groups = {"ForumBoardTests", "Forum"})
 @Execute(onWikia = "sustainingtest")
@@ -71,7 +69,7 @@ public class ForumBoardTests extends NewTestTemplate {
 
     ForumBoardPage forumBoard = new ForumBoardPage();
     forumBoard.open(forumBoard.createNew(User.SUS_ADMIN));
-    forumBoard.startDiscussionWithVideo(VideoContent.YOUTUBE_VIDEO_URL3, title);
+    forumBoard.startDiscussionWithVideo(title);
     forumBoard.clickPostButton();
   }
 

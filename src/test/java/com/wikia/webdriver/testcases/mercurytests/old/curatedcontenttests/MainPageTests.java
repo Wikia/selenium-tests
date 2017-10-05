@@ -14,12 +14,11 @@ import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.common.Navigate;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.elements.mercury.old.ArticlePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
-
 import org.testng.annotations.Test;
+
 @Test(groups = "Mercury_CuratedMainPage")
 @InBrowser(
     emulator = Emulator.GOOGLE_NEXUS_5,
@@ -55,13 +54,11 @@ public class MainPageTests extends NewTestTemplate {
   private Navigate navigate;
   private CuratedMainPagePageObject curatedMainPage;
   private CuratedContentPageObject curatedContent;
-  private Loading loading;
 
   private void init() {
     this.navigate = new Navigate();
     this.curatedMainPage = new CuratedMainPagePageObject();
     this.curatedContent = new CuratedContentPageObject();
-    this.loading = new Loading(driver);
   }
 
   @Test(groups = "MercuryCuratedMainPageTest_001")

@@ -6,7 +6,6 @@ import com.wikia.webdriver.common.skin.Skin;
 import com.wikia.webdriver.common.skin.SkinHelper;
 import com.wikia.webdriver.elements.common.Navigate;
 import com.wikia.webdriver.elements.mercury.components.Header;
-import com.wikia.webdriver.elements.mercury.components.Loading;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import lombok.Getter;
@@ -51,7 +50,7 @@ public class CategoryPage extends WikiBasePageObject {
     wait.forElementClickable(member);
     member.click();
 
-    new Loading(driver).handleAsyncPageReload();
+    waitForPageReload();
     PageObjectLogging.logInfo(String.format("You were redirected to page: \"%s\".", memberName));
 
     new SkinHelper(driver).isSkin(Skin.MOBILE_WIKI);

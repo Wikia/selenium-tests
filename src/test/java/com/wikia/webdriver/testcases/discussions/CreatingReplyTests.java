@@ -10,7 +10,6 @@ import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostActionsRow;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
@@ -21,11 +20,8 @@ import org.testng.annotations.Test;
 @Test(groups = {"discussions-creating-replies"})
 public class CreatingReplyTests extends NewTestTemplate {
 
-  private static final String SUBMIT_BUTTON_INACTIVE_MESSAGE = "Submit button should be inactive when no text was typed.";
-  private static final String SUBMIT_BUTTON_ACTIVE_MESSAGE = "Submit button should active after typing text.";
   private static final String REPLY_ADDED_MESSAGE = "Reply should appear below post.";
   private static final String POST_FOLLOWED_BY_DEFAULT = "Post should be followed by default when reply was created for post.";
-  private static final String SHOULD_UNFOLLOW_MESSAGE = "User should be able to unfollow post followed by default.";
 
   private static final String MOBILE = "discussions-creating-replies-mobile";
   private static final String DESKTOP = "discussions-creating-replies-desktop";
@@ -62,32 +58,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     assertThatUserCanCreateReply(page, replyCreator);
   }
 
-  @Test(groups = MOBILE)
-  @Execute(asUser = User.USER_2, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
-    final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    final ReplyCreator replyCreator = page.getReplyCreatorMobile();
-
-    assertThatPostIsFollowedWhenReplyAdded(page, replyCreator);
-    assertThatPostCanBeUnfollowed(page);
-  }
-
   // User on desktop
-
-  @Test(groups = DESKTOP)
-  @Execute(asUser = User.USER_2)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void replyEditorExpandsForUserOnDesktopOnPostDetailsPage() {
-    final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
-
-    final int originalEditorHeight = replyCreator.getEditorHeight();
-    replyCreator.click().clickGuidelinesReadButton();
-    int expandedEditorHeight = replyCreator.getEditorHeight();
-    Assertion.assertTrue(expandedEditorHeight > originalEditorHeight, "Reply editor should expand.");
-    Assertion.assertFalse(replyCreator.isSubmitButtonActive(), SUBMIT_BUTTON_INACTIVE_MESSAGE);
-  }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER_2)
@@ -97,17 +68,7 @@ public class CreatingReplyTests extends NewTestTemplate {
     final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
 
     assertThatUserCanCreateReply(page, replyCreator);
-  }
 
-  @Test(groups = DESKTOP)
-  @Execute(asUser = User.USER_2)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userOnDesktopShouldFollowPostWhenAddedReplyOnPostDetailsPage() {
-    final PostDetailsPage page = new PostDetailsPage().open(createPostAsUserRemotely().getId());
-    final ReplyCreator replyCreator = page.getReplyCreatorDesktop();
-
-    assertThatPostIsFollowedWhenReplyAdded(page, replyCreator);
-    assertThatPostCanBeUnfollowed(page);
   }
 
   // Testing methods
@@ -116,18 +77,16 @@ public class CreatingReplyTests extends NewTestTemplate {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.REGISTER_PAGE);
   }
 
-  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final ReplyCreator replyCreator, final String urlFragment) {
-    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
-
-    replyCreator.clickOkButtonInSignInDialog();
-    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
-
-    replyCreator.clickSignInButtonInSignInDialog();
-    Assertion.assertTrue(driver.getCurrentUrl().contains(urlFragment));
-  }
-
   private void userOnMobileMustBeLoggedInToUseReplyCreator(final ReplyCreator replyCreator) {
     anonymousUserOnReplyEditorClickIsRedirectedTo(replyCreator, MercurySubpages.JOIN_PAGE);
+  }
+
+  private void anonymousUserOnReplyEditorClickIsRedirectedTo(final ReplyCreator replyCreator, final String urlFragment) {
+    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
+    replyCreator.clickOkButtonInSignInDialog();
+    Assertion.assertTrue(replyCreator.click().isModalDialogVisible());
+    replyCreator.clickSignInButtonInSignInDialog();
+    Assertion.assertTrue(driver.getCurrentUrl().contains(urlFragment));
   }
 
   private PostEntity.Data createPostAsUserRemotely() {
@@ -135,36 +94,11 @@ public class CreatingReplyTests extends NewTestTemplate {
   }
 
   private void assertThatUserCanCreateReply(PostDetailsPage page, ReplyCreator replyCreator) {
-    replyCreator.click().clickGuidelinesReadButton();
-    Assertion.assertFalse(replyCreator.isSubmitButtonActive(), SUBMIT_BUTTON_INACTIVE_MESSAGE);
-
-    replyCreator.add(TextGenerator.createUniqueText());
-    Assertion.assertTrue(replyCreator.isSubmitButtonActive(), SUBMIT_BUTTON_ACTIVE_MESSAGE);
-
-    replyCreator.clearText();
-    Assertion.assertFalse(replyCreator.isSubmitButtonActive(), SUBMIT_BUTTON_INACTIVE_MESSAGE);
-
-    final String text = TextGenerator.createUniqueText();
-    replyCreator.add(text).clickSubmitButton();
-    page.getReplies().waitForReplyToAppearWith(text);
+    String text = TextGenerator.createUniqueText();
+    replyCreator.startReplyCreationWith(text).clickSubmitButton();
+    page.getReplies().waitForReplyToAppearWith(text).refreshPage();
     Assertion.assertFalse(page.getReplies().isEmpty(), REPLY_ADDED_MESSAGE);
+    Assertion.assertTrue(page.isPostFollowed(), POST_FOLLOWED_BY_DEFAULT);
   }
 
-  private void assertThatPostIsFollowedWhenReplyAdded(PostDetailsPage page, ReplyCreator replyCreator) {
-    final String text = TextGenerator.createUniqueText();
-    replyCreator.click()
-        .clickGuidelinesReadButton()
-        .add(text)
-        .clickSubmitButton();
-    page.getReplies().waitForReplyToAppearWith(text);
-
-    final PostActionsRow postActions = page.getPost().findNewestPost().findPostActions();
-    Assertion.assertTrue(postActions.isFollowed(), POST_FOLLOWED_BY_DEFAULT);
-  }
-
-  private void assertThatPostCanBeUnfollowed(PostDetailsPage page) {
-    final PostActionsRow postActions = page.getPost().findNewestPost().findPostActions();
-    postActions.clickFollow();
-    Assertion.assertFalse(postActions.isFollowed(), SHOULD_UNFOLLOW_MESSAGE);
-  }
 }

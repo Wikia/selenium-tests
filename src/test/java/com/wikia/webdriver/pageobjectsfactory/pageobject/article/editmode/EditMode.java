@@ -144,10 +144,4 @@ public class EditMode extends WikiBasePageObject {
     PageObjectLogging.log("clickSourceButton", "source button clicked", true);
     return new SourceEditModePageObject();
   }
-
-  public VisualEditModePageObject clickVisualButton() {
-    visualButton.click();
-    PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
-    return new VisualEditModePageObject();
-  }
 }

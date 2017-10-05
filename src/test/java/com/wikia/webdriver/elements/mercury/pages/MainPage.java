@@ -27,6 +27,6 @@ public class MainPage extends WikiBasePageObject {
   }
 
   public Category useCategoryComponent() {
-    return new Category(driver);
+    return new Category();
   }
 }

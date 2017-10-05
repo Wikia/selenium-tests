@@ -11,7 +11,11 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
 
   @FindBy(css = ".discussion-inline-editor-floating-container .discussion-inline-editor-textarea")
   @Getter
-  private WebElement replyCreator;
+  private WebElement replyCreatorTextArea;
+
+  @FindBy(css = ".discussion-inline-editor-content-wrapper")
+  @Getter
+  private WebElement replyCreatorWrapper;
 
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   @Getter
@@ -44,13 +48,31 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @FindBy(css = ".discussion-inline-reply-editor")
   private WebElement editor;
 
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  @Getter
+  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
+  private WebElement imagePreview;
+
+  @Getter
+  @FindBy(css = ".alert-notification")
+  private WebElement alertNotification;
+
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
+  @Getter
+  private By openGraphContainer = By.className("og-container");
+
+  @Getter
+  private By openGraphText = By.className("og-texts");
+
   @Override
   public boolean isPresent() {
     return !driver.findElements(By.cssSelector(".replies-list label:first-of-type")).isEmpty();
   }
 
-  @Override
-  public int getEditorHeight() {
-    return wait.forElementVisible(editor).getSize().getHeight();
-  }
 }

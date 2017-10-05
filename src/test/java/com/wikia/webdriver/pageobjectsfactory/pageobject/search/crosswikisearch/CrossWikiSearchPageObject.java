@@ -1,16 +1,17 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.search.crosswikisearch;
 
 import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticleHomePage;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Pattern;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Author: Artur Dwornik Date: 28.03.13 Time: 19:29
@@ -172,11 +173,6 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     return this;
   }
 
-  public void verifyResultsNumber(int number) {
-    wait.forElementVisible(searchResultList.get(0));
-    Assertion.assertNumber(searchResultList.size(), number, "checking number of search results");
-  }
-
   public void verifyNoPagination() {
     wait.forElementNotPresent(paginationContainerBy);
     PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
@@ -207,7 +203,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
     String jpgOrPngImage = ".*(\\.png|\\.jpg|Wikia-hero-image).*";
     for (WebElement elem : thumbnails) {
       boolean isImage = Pattern.matches(jpgOrPngImage, elem.getAttribute("src"));
-      PageObjectLogging.log("isImage", elem.getAttribute("src").toString(), true);
+      PageObjectLogging.log("isImage", elem.getAttribute("src"), true);
       try {
         if (!isImage) {
           throw new AssertionError();
@@ -238,13 +234,5 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
       Assertion.assertStringContains(statisticsImages.get(i).getText(), "IMAGE");
       Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
     }
-  }
-
-  public String getFirstDescription() {
-    return firstResultDescription.getText();
-  }
-
-  public String getFirstImageText() {
-    return ImageHelper.getImageId(thumbnails.get(0));
   }
 }

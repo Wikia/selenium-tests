@@ -21,16 +21,11 @@ import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 @Execute(onWikia = MercuryWikis.DISCUSSIONS_2)
 @Test(groups = "discussions-creating-posts")
 public class CreatingPostTests extends NewTestTemplate {
 
-  private static final String WIKIA_URL = "http://www.wikia.com/";
-  private static final String POST_SHOULD_BE_FOLLOWED_MESSAGE = "Created post should be followed.";
-  private static final String OPEN_GRAPH_SHOULD_LOAD_MESSAGE = "Open graph should start loading.";
-  private static final String OPEN_GRAPH_SHOULD_BE_VISIBLE_MESSAGE = "Open graph should appear at the end of post content.";
   private static final String FIRST_LINE = "# Big List of Naughty Strings\n";
 
   private static final String DESKTOP = "discussions-creating-posts-desktop";
@@ -115,13 +110,6 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = MOBILE)
-  @Execute(asUser = User.USER, onWikia = MercuryWikis.DISCUSSIONS_2)
-  @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
-  public void userOnMobileCanClickPostAndGoToPostDetailsPage() {
-    assertThatUserCanClickPostAndGoToPostDetailsPage();
-  }
-
   /*
    * LOGGED-IN USERS ON DESKTOP SECTION
    */
@@ -172,12 +160,6 @@ public class CreatingPostTests extends NewTestTemplate {
     Assertion.assertFalse(postsCreator.isPostButtonActive());
   }
 
-  @Test(groups = DESKTOP)
-  @Execute(asUser = User.USER)
-  @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
-  public void userOnDesktopCanClickPostAndGoToPostDetailsPage() {
-    assertThatUserCanClickPostAndGoToPostDetailsPage();
-  }
 
   /**
    * TESTING METHODS SECTION
@@ -185,29 +167,19 @@ public class CreatingPostTests extends NewTestTemplate {
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
     PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickOkButtonInSignInDialog();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickSignInButtonInSignInDialog();
-
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.JOIN_PAGE));
   }
 
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
     PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickOkButtonInSignInDialog();
-
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
-
     postsCreator.clickSignInButtonInSignInDialog();
-
     Assertion.assertTrue(driver.getCurrentUrl().contains(MercurySubpages.REGISTER_PAGE));
   }
 
@@ -262,46 +234,6 @@ public class CreatingPostTests extends NewTestTemplate {
     categoryPill.click();
 
     return categoryPill;
-  }
-
-  private String addLinkToDescription(final PostsCreator postsCreator, final String description) throws MalformedURLException {
-    String text = description + " " + WIKIA_URL;
-    postsCreator.addDescriptionWith(new URL(WIKIA_URL));
-
-    return text;
-  }
-
-  private PostEntity submitAndWaitForPostToAppear(final PostsCreator postsCreator, final PostsListPage page, final String description) {
-    postsCreator.clickSubmitButton();
-
-    return page.getPost()
-        .waitForPostToAppearWith(description)
-        .findNewestPost();
-  }
-
-  private void assertThatPostWasAddedWith(final PostEntity postEntity, final String description,
-      final String categoryName) {
-    if (null != postEntity) {
-      Assertion.assertStringContains(postEntity.findTimestamp(), "now");
-      Assertion.assertEquals(postEntity.findDescription(), description);
-      Assertion.assertStringContains(postEntity.findCategory(), categoryName);
-    } else {
-      Assertion.fail("Post with description \"" + description + "\" was not added or not found.");
-    }
-  }
-
-  private void assertThatUserCanClickPostAndGoToPostDetailsPage() {
-    final PostEntity post = new PostsListPage().open().getPost().findNewestPost();
-
-    final String postDetailsUrl = post.findLinkToPostDetails();
-
-    post.click();
-
-    new Transitions(driver).waitForPostDetailsPageTransition();
-
-    final String url = driver.getCurrentUrl();
-    Assertion.assertTrue(PostDetailsPage.is(url));
-    Assertion.assertTrue(url.endsWith(postDetailsUrl));
   }
 
   private PostEntity.Data createNaughtyStringsPostRemotely(User user) {

@@ -28,6 +28,10 @@ public class CategoryPills extends BasePageObject {
     }
   }
 
+  public void selectFirstCategory() {
+    findCategoryOn(0).click();
+  }
+
   private List<WebElement> findCategoryPills() {
     return categoryPillsPopover.findElements(By.tagName("a"));
   }

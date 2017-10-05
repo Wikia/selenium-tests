@@ -55,6 +55,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
 
+  private static final String MIX_CONTENT_FOOTER_SELECTOR = "#mixed-content-footer";
+  private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
+  @FindBy(css = MIX_CONTENT_FOOTER_ROW_SELECTOR)
+  private WebElement mixContentFooterItem;
+
   private long tStart;
 
   protected String presentLeaderboardSelector = "div[id*='TOP_LEADERBOARD']";
@@ -199,6 +204,15 @@ public class AdsBaseObject extends WikiBasePageObject {
         true,
         driver
     );
+  }
+
+  public boolean slotHasSize(String slotName, int width, int height) {
+    return getSlotAttribute(slotName, "data-gpt-slot-sizes").contains(String.format("%d,%d", width, height));
+  }
+
+  public boolean slotParamHasValue(String slotName, String paramName, String value) {
+    String dataGptSlotParams = getSlotAttribute(slotName, "data-gpt-slot-params");
+    return dataGptSlotParams.contains(String.format("\"%s\":\"%s\"", paramName, value));
   }
 
   /**
@@ -488,7 +502,9 @@ public class AdsBaseObject extends WikiBasePageObject {
         new ExpectedCondition<Boolean>() {
           @Override
           public Boolean apply(WebDriver webDriver) {
-            return expectedProviders.equals(Joiner.on("; ").join(getProvidersChain(slotName)));
+            String providers = Joiner.on("; ").join(getProvidersChain(slotName));
+            PageObjectLogging.log("waitForProvidersChain", String.format("Providers %s found", providers), true);
+            return expectedProviders.equals(providers);
           }
 
           @Override
@@ -744,11 +760,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToSlot(String slotName) {
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerComments();
+      scrollToPosition(MIX_CONTENT_FOOTER_SELECTOR);
+      wait.forElementVisible(mixContentFooterItem);
     } else if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
       scrollToFooter();
     }
 
     scrollToPosition("#" + slotName);
+    fixScrollPositionByNavbar();
   }
 
   public void fixScrollPositionByNavbar() {

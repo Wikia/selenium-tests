@@ -5,24 +5,23 @@ import com.wikia.webdriver.elements.mercury.components.discussions.common.Delete
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.regex.Pattern;
 
-public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
+public class UserPostsPage extends PageWithPosts {
 
-  @Getter(lazy = true) private final Post post = new Post();
+  @Getter(lazy = true)
+  private final SignInToFollowModalDialog signInDialog = new SignInToFollowModalDialog();
 
-  @Getter(lazy = true) private final SignInToFollowModalDialog signInToFollowModalDialog = new SignInToFollowModalDialog();
+  @Getter(lazy = true)
+  private final ErrorMessages errorMessages = new ErrorMessages();
 
-  @Getter(lazy = true) private final ErrorMessages errorMessages = new ErrorMessages();
-
-  @Getter(lazy = true) private final DeleteAllButton deleteAll = new DeleteAllButton();
+  @Getter(lazy = true)
+  private final DeleteAllButton deleteAll = new DeleteAllButton();
 
   /**
    * moderation section visible to mod+ users in mobile view
@@ -42,6 +41,7 @@ public class UserPostsPage extends WikiBasePageObject implements AvailablePage {
     return this;
   }
 
+  @Override
   public UserPostsPage open() {
     return open(NON_EXISTING_USER_ID);
   }

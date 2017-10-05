@@ -99,10 +99,12 @@
             <class name="com.wikia.webdriver.testcases.discussions.LayoutTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.LockingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.NavigatingTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.OpenGraphTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.PromotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ReportingPostTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SharingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.SortingTests"/>
+            <class name="com.wikia.webdriver.testcases.discussions.UploadingImageTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.UpvotingTests"/>
             <class name="com.wikia.webdriver.testcases.discussions.ZeroErrorStateTests"/>
             <class name="com.wikia.webdriver.testcases.auth.FacebookTests"/>

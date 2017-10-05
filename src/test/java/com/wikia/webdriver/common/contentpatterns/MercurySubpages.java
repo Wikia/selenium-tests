@@ -31,9 +31,6 @@ public class MercurySubpages {
 
   // Articles prepared for mercurycc.wikia.com wiki (with FC, CC, TA and TV)
   public static final String CC_MAIN_PAGE = "/wiki/Mercury_CC_Wikia";
-  public static final String CC_REDIRECT_SOURCE_1 = "/wiki/RedirectSource1";
-  public static final String CC_REDIRECT_DESTINATION = "/wiki/RedirectDestination1";
-
 
   // Articles prepared for mercuryntacc.wikia.com wiki (with FC, CC and TV)
   public static final String NTACC_MAIN_PAGE = "/wiki/Mercuryntacc_Wikia";
