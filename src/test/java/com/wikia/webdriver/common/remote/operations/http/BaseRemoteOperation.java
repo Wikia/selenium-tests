@@ -110,6 +110,7 @@ class BaseRemoteOperation {
       result = EntityUtils.toString(entity);
 
       if (response.getStatusLine().getStatusCode() >= 400) {
+        PageObjectLogging.logInfo("Error response:", response.toString());
         throw new RemoteException("Error while invoking request. "
             + " Method: " + requestBase.getMethod()
             + " Url: " + requestBase.getURI().toString()
