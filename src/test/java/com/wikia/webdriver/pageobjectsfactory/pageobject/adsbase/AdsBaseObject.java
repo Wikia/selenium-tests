@@ -692,7 +692,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       if (StringUtils.isEmpty(javaScriptTrigger)) {
         verifyNoAd(selector);
       } else {
-
+        triggerAdSlot(slotName, true);
       }
     }
   }
