@@ -16,43 +16,43 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
       "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)";
   private static final String CUSTOM_NAMESPACE_PAGE_PATH = "Koperek:SyntheticTests/NoAds";
 
+  private AdsBaseObject buildAdsObject(String pagePath) {
+    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, pagePath);
+    return new AdsBaseObject(driver, testedPage);
+  }
+
   @Test(groups = "NoAdsForUsersOasis")
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnArticlePageOasis() {
-    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, LONG_ARTICLE_PAGE_PATH);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
+    AdsBaseObject ads = buildAdsObject(LONG_ARTICLE_PAGE_PATH);
+    ads.verifyNoAdsOnPage();
   }
 
   @Test(groups = "NoAdsForUsersOasis")
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnCategoryPageOasis() {
-    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, CATEGORY_PAGE_PATH);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
+    AdsBaseObject ads = buildAdsObject(CATEGORY_PAGE_PATH);
+    ads.verifyNoAdsOnPage();
   }
 
   @Test(groups = "NoAdsForUsersOasis")
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnSpecialPageOasis() {
-    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, SPECIAL_PAGE_PATH);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
+    AdsBaseObject ads = buildAdsObject(SPECIAL_PAGE_PATH);
+    ads.verifyNoAdsOnPage();
   }
 
   @Test(groups = "NoAdsForUsersOasis")
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnFilePageOasis() {
-    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, FILE_PAGE_PATH);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
+    AdsBaseObject ads = buildAdsObject(FILE_PAGE_PATH);
+    ads.verifyNoAdsOnPage();
   }
 
   @Test(groups = "NoAdsForUsersOasis")
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnCustomPageOasis() {
-    String testedPage = urlBuilder.getUrlForPath(WIKI_NAME, CUSTOM_NAMESPACE_PAGE_PATH);
-    AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-    wikiPage.verifyNoAdsOnPage();
+    AdsBaseObject ads = buildAdsObject(CUSTOM_NAMESPACE_PAGE_PATH);
+    ads.verifyNoAdsOnPage();
   }
 }
