@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
@@ -11,15 +12,16 @@ import org.testng.annotations.Test;
  */
 
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
+  final static String PROJECT43_TEST_LINE_ITEM_ID = "271491732";
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialVideoPageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Videos");
     verifySlotHasCorrectAd(
         ads,
-        "TOP_LEADERBOARD",
+        AdsContent.TOP_LB,
         "wka.life/_project43//special",
-        "271491732"
+        PROJECT43_TEST_LINE_ITEM_ID
     );
   }
 
@@ -28,9 +30,9 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Images");
     verifySlotHasCorrectAd(
         ads,
-        "TOP_LEADERBOARD",
+        AdsContent.TOP_LB,
         "wka.life/_project43//special",
-        "271491732");
+        PROJECT43_TEST_LINE_ITEM_ID);
   }
 
   private AdsBaseObject buildAdsObjectForPage(String pageName) {
@@ -55,25 +57,25 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
     verifySlotHasCorrectAd(
         ads,
-        "TOP_LEADERBOARD",
+        AdsContent.TOP_LB,
         adUnit,
-        "271491732"
+        PROJECT43_TEST_LINE_ITEM_ID
     );
 
     verifySlotHasCorrectAd(
         ads,
-        "TOP_RIGHT_BOXAD",
+        AdsContent.MEDREC,
         adUnit,
-        "271491732"
+        PROJECT43_TEST_LINE_ITEM_ID
     );
 
     ads.scrollToPosition("#articleCategories");
 
     verifySlotHasCorrectAd(
         ads,
-        "BOTTOM_LEADERBOARD",
+        AdsContent.BOTTOM_LB,
         adUnit,
-        "271491732"
+        PROJECT43_TEST_LINE_ITEM_ID
     );
   }
 }
