@@ -440,7 +440,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC);
+        triggerAdSlot(AdsContent.FLOATING_MEDREC, false);
       }
 
       String slotSelector = AdsContent.getSlotSelector(slotName);
@@ -578,9 +578,12 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
-  public AdsBaseObject triggerAdSlot(final String slotName) {
+  public AdsBaseObject triggerAdSlot(final String slotName, Boolean verifyNoAds) {
     final String adSlotSelector = AdsContent.getSlotSelector(slotName);
     final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+    final Boolean condition = verifyNoAds ?
+                              verifyNoAd(adSlotSelector) :
+                              driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
 
     if (StringUtils.isEmpty(javaScriptTrigger)) {
       return this;
@@ -591,7 +594,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         @Override
         public Object apply(WebDriver webDriver) {
           jsActions.execute(javaScriptTrigger);
-          return driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
+          return condition;
         }
       });
     } catch (org.openqa.selenium.TimeoutException e) {
@@ -682,18 +685,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       if (StringUtils.isEmpty(javaScriptTrigger)) {
         verifyNoAd(selector);
       } else {
-        try {
-          new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC)
-              .until(new ExpectedCondition<Object>() {
-                @Override
-                public Object apply(WebDriver webDriver) {
-                  jsActions.execute(javaScriptTrigger);
-                  return verifyNoAd(selector);
-                }
-              });
-        } catch (org.openqa.selenium.TimeoutException e) {
-          PageObjectLogging.logError(selector + " slot", e);
-        }
+
       }
     }
   }
