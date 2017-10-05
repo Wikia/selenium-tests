@@ -681,7 +681,7 @@ public class AdsBaseObject extends WikiBasePageObject {
       } else {
         triggerAdSlot(slotName)
             .wait
-            .forElementNotVisible(driver.findElement(By.cssSelector(slotSelector)));
+            .forElementNotPresent(By.cssSelector(slotSelector));
         verifyNoAd(slotSelector);
       }
     }
