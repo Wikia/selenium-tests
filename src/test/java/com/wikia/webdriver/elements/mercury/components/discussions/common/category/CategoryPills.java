@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import javax.annotation.CheckForNull;
 import java.util.List;
+import java.util.Optional;
 
 public class CategoryPills extends BasePageObject {
 
@@ -29,7 +30,7 @@ public class CategoryPills extends BasePageObject {
   }
 
   public void selectFirstCategory() {
-    findCategoryOn(0).click();
+    Optional.of(findCategoryOn(0)).ifPresent(CategoryPill::click);
   }
 
   private List<WebElement> findCategoryPills() {

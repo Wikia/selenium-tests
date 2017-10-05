@@ -1,9 +1,11 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.net.URL;
@@ -70,9 +72,11 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public CategoryPills clickAddCategoryButton() {
-    if (getAddCategoryButton().isDisplayed()) {
+    try {
       getAddCategoryButton().click();
       wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Category picker not found", e.toString());
     }
     return categoryPills;
   }
