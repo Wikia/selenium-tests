@@ -31,9 +31,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsKruxIntegration"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsMonitoringOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecialOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrefooters"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMOATTracking"/>
@@ -50,7 +49,7 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestCorrelatorDFP"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestFloorAdhesion"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsForUsers"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsForUsersOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestNoAdsOnAdFreeWikis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOoyalaOasis"/>
