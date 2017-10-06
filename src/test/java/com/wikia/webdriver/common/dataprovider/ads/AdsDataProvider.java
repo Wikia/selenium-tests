@@ -469,36 +469,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] dfpEvolveParamsOasis() {
-    return new Object[][]{
-        {
-            "adtest",
-            "SyntheticTests/DfpParams",
-            4403,
-            "ev/wikia_intl/ros",
-            "TOP_LEADERBOARD",
-            Arrays.asList(
-                "\"s0\":\"life\"",
-                "\"s1\":\"_adtest\"",
-                "\"s2\":\"article\"",
-                "\"dmn\":\"wikiacom\"",
-                "\"hostpre\":\"",
-                "\"wpage\":\"synthetictests/dfpparams\"",
-                "\"ref\":\"direct\"",
-                "\"lang\":\"en\"",
-                "\"esrb\":\"teen\""
-            ),
-            Arrays.asList(
-                "\"pos\":\"a\"",
-                "\"wloc\":\"top\"",
-                "\"wpos\":\"TOP_LEADERBOARD\"",
-                "\"wsrc\":\"evolve\""
-            )
-        }
-    };
-  }
-
-  @DataProvider
   public static Object[][] adsGptPageParam() {
     return new Object[][]{
         {"pl.assassinscreed", "Ercole_Massimo", "\"top\":\"1k\"", true},
@@ -547,17 +517,6 @@ public class AdsDataProvider {
             )
         }
     };
-  }
-
-  @DataProvider
-  public static Object[][] evolveTestPage() {
-    return new Object[][]{{"project43", "SyntheticTests/Evolve"}};
-  }
-
-  @DataProvider
-  public static Object[][] evolveHopTestPage() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Evolve/Hop", "TOP_LEADERBOARD", "RemnantGpt"}};
   }
 
   @DataProvider
