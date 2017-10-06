@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.DetachedRegisterPage;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.auth.register.RegisterPage;
+import lombok.Getter;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -26,7 +27,8 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject {
   @FindBy(css = "#NameWiki .wds-dropdown .wds-list li:not(.spacer)")
   private List<WebElement> wikiLanguageList;
   @FindBy(css = ".domain-country")
-  private WebElement languageSelectedIndicator;
+  @Getter
+  private WebElement domainPrefix;
   @FindBy(css = ".wiki-domain-error.error-msg")
   private WebElement wikiDomainErrorMessage;
 
