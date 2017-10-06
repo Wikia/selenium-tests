@@ -33,19 +33,12 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN),
-                         AdsContent.INVISIBLE_SKIN);
-
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT),
-                         AdsContent.PREFOOTER_LEFT);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT),
-                         AdsContent.PREFOOTER_RIGHT);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2),
-                         AdsContent.LEFT_SKYSCRAPPER_2);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC),
-                         AdsContent.FLOATING_MEDREC);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), AdsContent.FLOATING_MEDREC);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), AdsContent.INVISIBLE_SKIN);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), AdsContent.INVISIBLE_HIGH_IMPACT_2);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), AdsContent.BOTTOM_LB);
   }
 
   @Test(
@@ -65,22 +58,19 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
 
     Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn,
-        AdsContent.PREFOOTER_LEFT);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn,
-        AdsContent.PREFOOTER_RIGHT);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn,
-        AdsContent.LEFT_SKYSCRAPPER_2);
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), isWgVarOn,
+        AdsContent.BOTTOM_LB);
     Assertion.assertNotEquals(
         adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn,
         AdsContent.FLOATING_MEDREC);
+    Assertion.assertNotEquals(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), isWgVarOn,
+        AdsContent.INVISIBLE_HIGH_IMPACT_2);
   }
 
   /**
-   * https://wikia-inc.atlassian.net/browse/ADEN-2156 Test whether ads on small screens are
-   * displayed when wgAdDriverDelayBelowTheFold is enabled
+   * https://wikia-inc.atlassian.net/browse/ADEN-2156
+   * Test whether ads on small screens are displayed when wgAdDriverDelayBelowTheFold is enabled
    */
   @Test(
       dataProviderClass = AdsDataProvider.class,
@@ -95,10 +85,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT),
-                         AdsContent.PREFOOTER_LEFT);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT),
-                         AdsContent.PREFOOTER_RIGHT);
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), AdsContent.BOTTOM_LB);
   }
 
   @Test(
@@ -117,14 +104,11 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), String.format("Ad is not loaded inside %s", AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_SKIN));
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_HIGH_IMPACT_2));
 
     adsBaseObject.simulateScrollingToElement(By.id("WikiaFooter"), By.id(AdsContent.FLOATING_MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
-
-    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_LEFT), isWgVarOn, AdsContent.PREFOOTER_LEFT);
-    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.PREFOOTER_RIGHT), isWgVarOn, AdsContent.PREFOOTER_RIGHT);
-    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.LEFT_SKYSCRAPPER_2), isWgVarOn, AdsContent.LEFT_SKYSCRAPPER_2);
+    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), isWgVarOn, AdsContent.INVISIBLE_HIGH_IMPACT_2);
+    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), isWgVarOn, AdsContent.BOTTOM_LB);
   }
 
   @InBrowser(
