@@ -466,6 +466,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
 
+      PageObjectLogging.log(
+          "Slot found",
+          String.format("%s found on the page with selector: %s", slotName, slotSelector),
+          true
+      );
+
       return adWebElements.size() > 1;
     } finally {
       restoreDefaultImplicitWait();
