@@ -33,14 +33,11 @@ public class AdsEvolveObject extends AdsBaseObject {
     PageObjectLogging.log("Evolve", slotSelector + " slot doesn't have Evolve.", true, driver);
   }
 
-  public void verifyEvolveCallOasis() {
+  public void verifyEvolveInAdSlots() {
     verifyEvolveInSlot(AdsContent.TOP_LB);
     verifyEvolveInSlot(AdsContent.MEDREC);
-    verifyEvolveInSlot(AdsContent.LEFT_SKYSCRAPPER_2);
     verifyEvolveInSlot(AdsContent.INVISIBLE_SKIN);
     verifyNoEvolveInSlot(AdsContent.FLOATING_MEDREC);
-    verifyNoEvolveInSlot(AdsContent.PREFOOTER_LEFT);
-    verifyNoEvolveInSlot(AdsContent.PREFOOTER_RIGHT);
   }
 
   public void verifyEvolveCallMercury() {
