@@ -63,7 +63,7 @@ public class AdsRecoveryObject extends AdsBaseObject {
         .collect(Collectors.toList());
   }
 
-  public void verifyNumberOfPageFairRecoveredSlots(int expected) {
+  public void verifyNumberOfAdonisMarkedSlots(int expected) {
     waitForPageLoaded();
     List<WebElement> markedSlots = driver.findElements(RECOVERABLE_SLOT_SELECTOR);
     Assertion.assertEquals(markedSlots.size(), expected);
