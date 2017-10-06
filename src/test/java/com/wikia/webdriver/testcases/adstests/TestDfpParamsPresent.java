@@ -53,23 +53,4 @@ public class TestDfpParamsPresent extends TemplateNoFirstLoad {
     ads.verifyGptIframe(adUnit, slot, "gpt");
     ads.verifyGptParams(slot, pageParams, slotParams);
   }
-
-  @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "dfpEvolveParamsOasis",
-      groups = {"Ads", "AdsEvolveOasis"}
-  )
-  public void dfpEvolveParamsPresentOasis(String wikiName,
-                                    String article,
-                                    Integer dfpClientId,
-                                    String adUnit,
-                                    String slot,
-                                    List<String> pageParams,
-                                    List<String> slotParams) {
-    AdsEvolveObject ads = new AdsEvolveObject(driver);
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-    ads.enableEvolve(testedPage);
-    ads.verifyGptIframe(dfpClientId, adUnit, slot);
-    ads.verifyGptParams(slot, pageParams, slotParams);
-  }
 }

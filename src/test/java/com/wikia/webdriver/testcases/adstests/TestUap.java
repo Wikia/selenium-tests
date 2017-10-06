@@ -82,7 +82,7 @@ public class TestUap extends TemplateNoFirstLoad {
     for (Map<String, Object> slotData : slotsData) {
       String slotName = slotData.get("slotName").toString();
 
-      ads.verifyNoAd(AdsContent.getSlotSelector(slotName));
+      ads.verifyNoAd(slotName);
     }
   }
 
