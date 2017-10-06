@@ -1,8 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
 import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonExpectedConditions;
@@ -11,8 +8,19 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsSkinHelper;
+
+import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import org.apache.commons.lang.StringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,8 +28,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
@@ -154,8 +162,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void verifyNoAdsOnPage() {
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
     verifyNoAds();
     PageObjectLogging.log(
         "verifyNoAdsOnPage",
@@ -361,7 +367,10 @@ public class AdsBaseObject extends WikiBasePageObject {
               By.cssSelector("#"+slotName+" [" + attr + "]"));
       return adsDiv.getAttribute(attr);
     } catch (NoSuchElementException elementNotFound) {
-      PageObjectLogging.log("getSlotAttribute", String.format("Slot %s with attribute [%s] not found", slotName, attr), true);
+      PageObjectLogging.logError(
+          String.format("Slot %s with attribute [%s] not found", slotName, attr),
+          elementNotFound
+      );
       return null;
     }
   }
@@ -433,14 +442,21 @@ public class AdsBaseObject extends WikiBasePageObject {
     WebElement slot;
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
     try {
+      String slotSelector = AdsContent.getSlotSelector(slotName);
+
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC);
+        triggerAdSlot(AdsContent.FLOATING_MEDREC)
+            .wait
+            .forElementPresent(By.cssSelector(slotSelector));
       }
 
-      String slotSelector = AdsContent.getSlotSelector(slotName);
       try {
         slot = driver.findElement(By.cssSelector(slotSelector));
       } catch (NoSuchElementException elementNotFound) {
+        PageObjectLogging.logError(
+            String.format("Slot %s not found on the page", slotName),
+            elementNotFound
+        );
         return false;
       }
 
@@ -540,9 +556,19 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  public void verifyNoAd(final String slotSelector) {
+  public Boolean verifyNoAd(final String slotName) {
+    final String slotSelector = AdsContent.getSlotSelector(slotName);
+    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+
+    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+      triggerAdSlot(slotName)
+          .wait
+          .forElementNotPresent(By.cssSelector(slotSelector));
+    }
+
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
+
       if (
           element.isDisplayed()
           && element.getSize().getHeight() > 1
@@ -557,6 +583,7 @@ public class AdsBaseObject extends WikiBasePageObject {
             + " but is smaller then 1x1 or hidden",
             true
         );
+        return true;
       }
     } else {
       PageObjectLogging.log(
@@ -566,27 +593,15 @@ public class AdsBaseObject extends WikiBasePageObject {
           + " not found on page",
           true
       );
+      return true;
     }
   }
 
-  public AdsBaseObject triggerAdSlot(final String slotName) {
-    final String adSlotSelector = AdsContent.getSlotSelector(slotName);
-    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+  public AdsBaseObject triggerAdSlot(String slotName) {
+    String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
-    if (StringUtils.isEmpty(javaScriptTrigger)) {
-      return this;
-    }
-
-    try {
-      new WebDriverWait(driver, SLOT_TRIGGER_TIMEOUT_SEC).until(new ExpectedCondition<Object>() {
-        @Override
-        public Object apply(WebDriver webDriver) {
-          jsActions.execute(javaScriptTrigger);
-          return driver.findElements(By.cssSelector(adSlotSelector)).size() > 0;
-        }
-      });
-    } catch (org.openqa.selenium.TimeoutException e) {
-      PageObjectLogging.logError(adSlotSelector + " slot", e);
+    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+      jsActions.execute(javaScriptTrigger);
     }
 
     return this;
@@ -664,9 +679,9 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   private void verifyNoAds() {
-    Collection<String> slotsSelectors = AdsContent.getAllSlotsSelectors();
-    for (String selector : slotsSelectors) {
-      verifyNoAd(selector);
+    Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
+    for (Map.Entry<String, String> entry : slots.entrySet()) {
+      verifyNoAd(entry.getKey());
     }
   }
 

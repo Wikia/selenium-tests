@@ -73,17 +73,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] noAdsForUsers() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/LongPage"},
-        {"project43", "Category:Browse"},
-        {"project43", "Special:Videos"},
-        {"project43", "File:Cloudy_With_A_Chance_Of_Meatballs_(Dutch_Trailer_1_Subtitled)"},
-        {"project43", "Koperek:SyntheticTests/NoAds"},
-    };
-  }
-
-  @DataProvider
   public static Object[][] noAdsForSony() {
     return new Object[][]{
         // Articles
@@ -112,28 +101,6 @@ public class AdsDataProvider {
         {"es.filmhub", "Wiki_Pel%C3%ADculas_Hub"},
         {"ja.entertainmenthub",
          "%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%86%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88%E3%83%8F%E3%83%96_Wiki"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] specialPages() {
-    return new Object[][]{
-        {"project43", "Special:Videos", "271491732", "wka.life/_project43//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"project43", "Special:Images", "271491732", "wka.life/_project43//special",
-         "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-    };
-  }
-
-  @DataProvider
-  public static Object[][] filePages() {
-    return new Object[][]{
-        {"project43", "File:Example.jpg", "271491732", "wka.life/_project43//file",
-         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
-        {"project43", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "271491732",
-         "wka.life/_project43//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
-         new Dimension(1292, 1000)},
     };
   }
 
@@ -797,26 +764,6 @@ public class AdsDataProvider {
                 .build()
         },
         {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/1x300x250,1x300x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", "260204412")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Skyscrapers/2x300x250" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
-                .put("slotSize", new Dimension(300, 250))
-                .put("lineItemId", "260206692")
-                .put("src", "gpt")
-                .build()
-        },
-        {
             new Page("project43", "SyntheticTests/Oasis/FloatingMedrecOnLongPage/160x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
@@ -830,27 +777,7 @@ public class AdsDataProvider {
             new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
             "",
             ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", "257673852")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
                 .put("slotName", AdsContent.FLOATING_MEDREC)
-                .put("slotSize", new Dimension(120, 600))
-                .put("lineItemId", "257673852")
-                .put("src", "gpt")
-                .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/120x600" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_3)
                 .put("slotSize", new Dimension(120, 600))
                 .put("lineItemId", "257673852")
                 .put("src", "gpt")
@@ -865,17 +792,7 @@ public class AdsDataProvider {
                 .put("lineItemId", "255534972")
                 .put("src", "gpt")
                 .build()
-        },
-        {
-            new Page("project43", "SyntheticTests/Slots/Size/300x1050" + INSTANT_GLOBAL_ADMIX_SWITCHED_OFF),
-            "",
-            ImmutableMap.<String, Object>builder()
-                .put("slotName", AdsContent.LEFT_SKYSCRAPPER_2)
-                .put("slotSize", new Dimension(300, 1050))
-                .put("lineItemId", "255534972")
-                .put("src", "gpt")
-                .build()
-        },
+        }
     };
   }
 
