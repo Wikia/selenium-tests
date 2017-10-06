@@ -22,7 +22,6 @@ public class TestAdType extends TemplateNoFirstLoad {
       ads.verifyGptIframe(adUnit, slotName, "gpt");
       ads.verifyIframeSize(slotName, "gpt", 0, 0);
     }
-    final String topButtonWideSelector = AdsContent.getSlotSelector(AdsContent.TOP_BUTTON_WIDE);
-    ads.verifyNoAd(topButtonWideSelector);
+    ads.verifyNoAd(AdsContent.TOP_BUTTON_WIDE);
   }
 }
