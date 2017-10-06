@@ -68,9 +68,9 @@ public class TestAdsSlotSizes extends TemplateNoFirstLoad {
       ads.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
     }
 
-    ads.triggerAdSlot(slotName).
-        wait.
-        forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
+    ads.triggerAdSlot(slotName)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(slotName)));
 
     ads.verifyLineItemId(slotName, Integer.valueOf(slotInfo.get("lineItemId").toString()));
     ads.verifyIframeSize(slotName, slotInfo.get("src").toString(),

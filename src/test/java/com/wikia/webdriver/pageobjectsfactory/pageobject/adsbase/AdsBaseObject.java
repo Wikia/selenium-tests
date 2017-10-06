@@ -445,9 +445,9 @@ public class AdsBaseObject extends WikiBasePageObject {
       String slotSelector = AdsContent.getSlotSelector(slotName);
 
       if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC).
-            wait.
-            forElementPresent(By.cssSelector(slotSelector));
+        triggerAdSlot(AdsContent.FLOATING_MEDREC)
+            .wait
+            .forElementPresent(By.cssSelector(slotSelector));
       }
 
       try {
