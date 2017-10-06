@@ -1,10 +1,12 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsRecoveryObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -36,9 +38,13 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     // verify that adblock is turned on on that page
     adsRecoveryObject.verifyNoAdsOnPage();
 
-    List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
+    adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
 
+    List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
     Assert.assertEquals(recoveredAds.size(), 3);
+
     adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(recoveredAds);
   }
 
@@ -48,6 +54,11 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
   public void adsRecoveryNoAdblockPageFairOasis() {
     String url = urlBuilder.getUrlForPath(WIKIA, getUrlArticlePageFairRecovery());
     AdsRecoveryObject adsRecoveryObject = new AdsRecoveryObject(driver, url, DESKTOP_SIZE);
+
+    adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(2);
+    adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
 
     adsRecoveryObject.verifyNumberOfAdonisMarkedSlots(3);
   }
