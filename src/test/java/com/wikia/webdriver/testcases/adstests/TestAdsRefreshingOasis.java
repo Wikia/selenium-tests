@@ -7,8 +7,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.annotations.Test;
 
-@Test(groups = "AdsRefreshing")
-public class TestAdsRefreshing extends TemplateNoFirstLoad {
+@Test(groups = "AdsRefreshingOasis")
+public class TestAdsRefreshingOasis extends TemplateNoFirstLoad {
 
   private static final String[] CREATIVE_ID_CHAIN = {
       "108480236412",
@@ -22,8 +22,7 @@ public class TestAdsRefreshing extends TemplateNoFirstLoad {
 
   private static final String PATH = "SyntheticTests/Slots/RefreshOnView";
 
-  @Test(groups = {"AdsRefreshingFMR"})
-  public void floatingMR() {
+  public void testRefreshingMedrecOasis() {
     AdsBaseObject page = new AdsBaseObject(
         driver,
         urlBuilder.getUrlForPath(WIKI_NAME, PATH),
