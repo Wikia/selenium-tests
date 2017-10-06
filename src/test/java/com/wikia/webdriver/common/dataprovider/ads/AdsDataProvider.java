@@ -105,28 +105,6 @@ public class AdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] specialPages() {
-    return new Object[][]{
-        {"project43", "Special:Videos", "271491732", "wka.life/_project43//special", "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-        {"project43", "Special:Images", "271491732", "wka.life/_project43//special",
-         "TOP_LEADERBOARD",
-         "PREFOOTER_LEFT_BOXAD", new Dimension(1292, 1000)},
-    };
-  }
-
-  @DataProvider
-  public static Object[][] filePages() {
-    return new Object[][]{
-        {"project43", "File:Example.jpg", "271491732", "wka.life/_project43//file",
-         "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD", new Dimension(1292, 1000)},
-        {"project43", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "271491732",
-         "wka.life/_project43//file", "TOP_LEADERBOARD", "TOP_RIGHT_BOXAD",
-         new Dimension(1292, 1000)},
-    };
-  }
-
-  @DataProvider
   public static Object[][] skinWithTheme() {
     return new Object[][]{
         {
