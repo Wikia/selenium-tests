@@ -19,6 +19,6 @@ public class TestAdsEvolveOasis extends TemplateNoFirstLoad {
     AdsEvolveObject wikiPage = new AdsEvolveObject(driver);
     String testedPage = urlBuilder.getUrlForPath(wikiName, article);
     wikiPage.enableEvolve(testedPage);
-    wikiPage.verifyEvolveCallOasis();
+    wikiPage.verifyEvolveInAdSlots();
   }
 }
