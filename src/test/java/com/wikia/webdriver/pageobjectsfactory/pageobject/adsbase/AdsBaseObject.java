@@ -556,7 +556,16 @@ public class AdsBaseObject extends WikiBasePageObject {
     return driver.findElement(By.cssSelector("iframe[id*='" + src + "/" + slotName + "']"));
   }
 
-  public Boolean verifyNoAd(final String slotSelector) {
+  public Boolean verifyNoAd(final String slotName) {
+    final String slotSelector = AdsContent.getSlotSelector(slotName);
+    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
+
+    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+      triggerAdSlot(slotName)
+          .wait
+          .forElementNotPresent(By.cssSelector(slotSelector));
+    }
+
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
 
@@ -672,18 +681,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private void verifyNoAds() {
     Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
-      final String slotName = entry.getKey();
-      final String slotSelector = entry.getValue();
-      final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
-
-      if (StringUtils.isEmpty(javaScriptTrigger)) {
-        verifyNoAd(slotSelector);
-      } else {
-        triggerAdSlot(slotName)
-            .wait
-            .forElementNotPresent(By.cssSelector(slotSelector));
-        verifyNoAd(slotSelector);
-      }
+      verifyNoAd(entry.getKey());
     }
   }
 
