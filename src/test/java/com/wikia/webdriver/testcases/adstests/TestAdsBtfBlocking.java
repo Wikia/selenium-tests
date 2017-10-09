@@ -35,9 +35,17 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), AdsContent.MEDREC);
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), AdsContent.FLOATING_MEDREC);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), AdsContent.INVISIBLE_SKIN);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), AdsContent.INVISIBLE_HIGH_IMPACT_2);
+
+    adsBaseObject.triggerAdSlot(AdsContent.FLOATING_MEDREC)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)));
+    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), AdsContent.FLOATING_MEDREC);
+
+    adsBaseObject.triggerAdSlot(AdsContent.BOTTOM_LB)
+      .wait
+      .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), AdsContent.BOTTOM_LB);
   }
 
@@ -56,6 +64,14 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN));
+
+    adsBaseObject.triggerAdSlot(AdsContent.FLOATING_MEDREC)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)));
+
+    adsBaseObject.triggerAdSlot(AdsContent.BOTTOM_LB)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
 
     Assertion.assertNotEquals(
         adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), isWgVarOn,
@@ -84,6 +100,10 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
+    adsBaseObject.triggerAdSlot(AdsContent.BOTTOM_LB)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
+
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), AdsContent.TOP_LB);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), AdsContent.BOTTOM_LB);
   }
@@ -100,6 +120,7 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
     adsBaseObject.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
+
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), String.format("Ad is not loaded inside %s", AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
