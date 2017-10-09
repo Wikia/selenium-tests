@@ -111,14 +111,16 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(WebElement element) {
-    PageObjectLogging.log("sxcrollScript", "window.scroll(0,parseInt(arguments[0].offsetTop - " + getOffset() + "));", true);
     try {
       js.executeScript(
-              "window.scroll(0,parseInt(arguments[0].offsetTop - " + getOffset() + "));", element);
+              "window.scroll(0,parseInt($(arguments[0]).offset().top - " + getOffset() + "));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }
+      js.executeScript(
+              "window.scroll(0,parseInt(arguments[0].getBoundingClientRect().top + window.pageYOffset - " +
+                      "arguments[0].clientTop - " + getOffset() + "));", element);
     }
   }
 
