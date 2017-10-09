@@ -85,7 +85,7 @@ public class JavascriptActions {
               "return ($(window).scrollTop() + " + offset + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
                       + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + " + offset + ")",
               element);
-    } catch (Exception e) {
+    } catch (WebDriverException e) {
       String windowScrollTop = "((window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement " +
               "|| document.body.parentNode || document.body).scrollTop)";
       String elementOffsetTop = "(arguments[0]).offsetTop";
