@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.mercurytests;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
 import com.wikia.webdriver.common.core.annotations.Execute;
 import com.wikia.webdriver.common.core.annotations.InBrowser;
+import com.wikia.webdriver.common.core.annotations.RelatedIssue;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -15,6 +16,7 @@ import org.testng.annotations.Test;
 public class CategoryTest extends NewTestTemplate {
 
   @Test(groups = "mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage")
+  @RelatedIssue(issueID = "QAART-1044")
   public void mercury_category_navigateToCategoryPageFromCategoryComponentOnMainPage() {
     new MainPage()
         .openRegularMainPage()
