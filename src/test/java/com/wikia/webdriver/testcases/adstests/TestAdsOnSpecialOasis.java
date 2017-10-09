@@ -15,6 +15,15 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   static HashMap<String, String> SPECIAL_PAGE_EXPECTED_LINE_ITEMS = new HashMap<>();
   static HashMap<String, String> SPECIAL_PAGE_EXPECTED_AD_UNITS = new HashMap<>();
 
+  static HashMap<String, String> FILE_PAGE_EXPECTED_LINE_ITEMS = new HashMap<>();
+  static HashMap<String, String> FILE_PAGE_EXPECTED_AD_UNITS = new HashMap<>();
+  static final String FILE_PAGE_AD_UNIT = "wka.life/_project43//file";
+
+  private AdsBaseObject buildAdsObjectForPage(String pageName) {
+    String testedPage = urlBuilder.getUrlForPath("project43", pageName);
+    return new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
+  }
+
   private void specialPageExpectedDataProvider() {
     SPECIAL_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.TOP_LB, "271491732");
     SPECIAL_PAGE_EXPECTED_AD_UNITS.put(AdsContent.TOP_LB, "wka.life/_project43//special");
@@ -38,47 +47,20 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     testSpecialPage(ads);
   }
 
-  private AdsBaseObject buildAdsObjectForPage(String pageName) {
-    String testedPage = urlBuilder.getUrlForPath("project43", pageName);
-    return new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
-  }
-
-  private void verifySlotHasCorrectAd(
-      AdsBaseObject ads,
-      String slotName,
-      String adUnit,
-      String lineItem
-  ) {
-    ads.verifyGptIframe(adUnit, slotName, "gpt");
-    ads.verifyGptAdInSlot(slotName, lineItem, "");
-  }
-
   @Test(groups = "TestAdsOnFilePagesOasis")
   public void testAdsOnFilePageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("File:Example.jpg");
-    String adUnit = "wka.life/_project43//file";
+    ads.setPageType("file");
 
-    verifySlotHasCorrectAd(
-        ads,
-        AdsContent.TOP_LB,
-        adUnit,
-        PROJECT43_TEST_LINE_ITEM_ID
-    );
+    FILE_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.TOP_LB, PROJECT43_TEST_LINE_ITEM_ID);
+    FILE_PAGE_EXPECTED_AD_UNITS.put(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
 
-    verifySlotHasCorrectAd(
-        ads,
-        AdsContent.MEDREC,
-        adUnit,
-        PROJECT43_TEST_LINE_ITEM_ID
-    );
+    FILE_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.MEDREC, PROJECT43_TEST_LINE_ITEM_ID);
+    FILE_PAGE_EXPECTED_AD_UNITS.put(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
 
-    ads.scrollToPosition("#articleCategories");
+    FILE_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.BOTTOM_LB, PROJECT43_TEST_LINE_ITEM_ID);
+    FILE_PAGE_EXPECTED_AD_UNITS.put(AdsContent.BOTTOM_LB, FILE_PAGE_AD_UNIT);
 
-    verifySlotHasCorrectAd(
-        ads,
-        AdsContent.BOTTOM_LB,
-        adUnit,
-        PROJECT43_TEST_LINE_ITEM_ID
-    );
+    ads.verifyAds(FILE_PAGE_EXPECTED_LINE_ITEMS, FILE_PAGE_EXPECTED_AD_UNITS);
   }
 }

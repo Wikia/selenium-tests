@@ -55,6 +55,10 @@ public class AdsContent {
     return SPECIAL_PAGE_SLOTS_SELECTORS;
   }
 
+  public static Map<String, String> getFilePageSlotsSelectors() {
+    return FILE_PAGE_SLOTS_SELECTORS;
+  }
+
   public static String getSlotSelector(String slotName) {
     return SLOTS_SELECTORS.get(slotName);
   }
@@ -93,6 +97,7 @@ public class AdsContent {
     FILE_PAGE_SLOTS_SELECTORS = new HashMap<>();
     FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
     FILE_PAGE_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
 
     PAL_SLOTS_SELECTORS = new HashMap<>();
     PAL_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");

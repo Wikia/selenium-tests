@@ -698,6 +698,8 @@ public class AdsBaseObject extends WikiBasePageObject {
     switch(pageType) {
       case "special":
         return AdsContent.getSpecialPageSlotsSelectorsMap();
+      case "file":
+        return AdsContent.getFilePageSlotsSelectors();
       case "article":
       default:
         return AdsContent.getSlotsSelectorsMap();
