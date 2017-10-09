@@ -80,17 +80,21 @@ public class JavascriptActions {
 
     int offset = getOffset();
 
-    try{
+    try {
       return (Boolean) js.executeScript(
               "return ($(window).scrollTop() + " + offset + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
                       + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + " + offset + ")",
               element);
     } catch (Exception e) {
-      Long windowScrollTop = (Long) js.executeScript("return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;");
-      Long elementOffsetTop = (Long) js.executeScript("return (arguments[0]).offsetTop", element);
-      Long windowHeight = (Long) js.executeScript("return (window.innerHeight)");
-      Long elementOuterHeight = (Long) js.executeScript("return (arguments[0]).clientHeight", element);
-      return windowScrollTop + offset < elementOffsetTop && windowScrollTop + windowHeight > elementOffsetTop + elementOuterHeight + offset;
+      String windowScrollTop = "((window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement " +
+              "|| document.body.parentNode || document.body).scrollTop)";
+      String elementOffsetTop = "(arguments[0]).offsetTop";
+      String windowHeight = "(window.innerHeight)";
+      String elementOuterHeight = "(arguments[0]).clientHeight";
+
+      return (boolean) js.executeScript("return (" + windowScrollTop + " + " + offset + " < " + elementOffsetTop +
+              " && " + windowScrollTop + " + " + windowHeight + " > " + elementOffsetTop + " + " + elementOuterHeight +
+              " + " + offset + ")", element);
     }
   }
 
@@ -107,20 +111,13 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(WebElement element) {
-
-    int offset = getOffset();
-
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + offset
-          + "));", element);
-
+              "window.scroll(0,parseInt(arguments[0].offsetTop - " + getOffset() + "));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }
-            js.executeScript(
-                    "window.scroll(0,parseInt(arguments[0].offsetTop - " + offset + "));", element);
     }
   }
 
