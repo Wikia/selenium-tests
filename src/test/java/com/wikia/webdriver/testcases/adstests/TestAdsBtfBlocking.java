@@ -121,12 +121,14 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     adsBaseObject.waitForPageLoadedWithGpt();
     adsBaseObject.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
 
-
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MEDREC), String.format("Ad is not loaded inside %s", AdsContent.MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), String.format("Ad is not loaded inside %s", AdsContent.TOP_LB));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_SKIN));
 
-    adsBaseObject.simulateScrollingToElement(By.id("WikiaFooter"), By.id(AdsContent.FLOATING_MEDREC));
+    adsBaseObject.triggerAdSlot(AdsContent.FLOATING_MEDREC)
+        .wait
+        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)));
+
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
     Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), isWgVarOn, AdsContent.INVISIBLE_HIGH_IMPACT_2);
     Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), isWgVarOn, AdsContent.BOTTOM_LB);
