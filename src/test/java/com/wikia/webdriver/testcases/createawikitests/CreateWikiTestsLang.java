@@ -13,16 +13,21 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
+
+import static com.wikia.webdriver.common.core.Assertion.assertEquals;
+
 @Test(groups = {"CNW_lang"})
-public class CreateWikiTests_lang extends NewTestTemplate {
+public class CreateWikiTestsLang extends NewTestTemplate {
 
   @Test(dataProviderClass = CreateNewWikiDataProvider.class, dataProvider = "getLangs",
       groups = {"CreateNewWiki_lang_001", "CNW_lang_first"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_lang_TC001(String lang) {
+  public void createNewWikiLangTC001(String lang) {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     cnw1.selectLanguage(lang);
+    String expectedDomainPrefix = "en".equals(lang) ? "" : String.format("%s.", lang);
+    assertEquals(cnw1.getDomainPrefix().getText(), expectedDomainPrefix);
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifyNextButtonEnabled();
@@ -41,6 +46,6 @@ public class CreateWikiTests_lang extends NewTestTemplate {
       groups = {"CreateNewWiki_lang_001", "CNW_lang_second"})
   @Execute(asUser = User.USER_CNW)
   public void langSecondHalf(String lang) {
-    CreateNewWiki_lang_TC001(lang);
+    createNewWikiLangTC001(lang);
   }
 }
