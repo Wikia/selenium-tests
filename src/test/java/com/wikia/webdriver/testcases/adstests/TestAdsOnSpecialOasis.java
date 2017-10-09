@@ -7,32 +7,35 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
-/**
- * https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
- */
+import java.util.HashMap;
 
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   static final String PROJECT43_TEST_LINE_ITEM_ID = "271491732";
 
-  @Test(groups = "TestAdsOnSpecialPagesOasis")
+  static HashMap<String, String> SPECIAL_PAGE_EXPECTED_LINE_ITEMS = new HashMap<>();
+  static HashMap<String, String> SPECIAL_PAGE_EXPECTED_AD_UNITS = new HashMap<>();
+
+  private void specialPageExpectedDataProvider() {
+    SPECIAL_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.TOP_LB, "271491732");
+    SPECIAL_PAGE_EXPECTED_AD_UNITS.put(AdsContent.TOP_LB, "wka.life/_project43//special");
+  }
+
+  private void testSpecialPage(AdsBaseObject ads) {
+    ads.setPageType("special");
+    specialPageExpectedDataProvider();
+    ads.verifyAds(SPECIAL_PAGE_EXPECTED_LINE_ITEMS, SPECIAL_PAGE_EXPECTED_AD_UNITS);
+  }
+
+  @Test(groups = {"TestAdsOnSpecialPagesOasis", "X"})
   public void testAdsOnSpecialVideoPageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Videos");
-    verifySlotHasCorrectAd(
-        ads,
-        AdsContent.TOP_LB,
-        "wka.life/_project43//special",
-        PROJECT43_TEST_LINE_ITEM_ID
-    );
+    testSpecialPage(ads);
   }
 
   @Test(groups = "TestAdsOnSpecialPagesOasis")
   public void testAdsOnSpecialImagesPageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Images");
-    verifySlotHasCorrectAd(
-        ads,
-        AdsContent.TOP_LB,
-        "wka.life/_project43//special",
-        PROJECT43_TEST_LINE_ITEM_ID);
+    testSpecialPage(ads);
   }
 
   private AdsBaseObject buildAdsObjectForPage(String pageName) {
