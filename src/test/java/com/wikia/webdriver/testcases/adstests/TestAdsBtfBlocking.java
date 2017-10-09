@@ -21,15 +21,12 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   private static final String ARTICLE_MIDDLE_SECTION_SELECTOR = "#ArticleMidSection.mw-headline";
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "delayBtf",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDelayBtfOasis(String wikiName, String article, boolean isWgVarOn)
-      throws InterruptedException {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+  public void adsAtfDelayBtfOasis() {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Delay_BTF");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
@@ -50,14 +47,12 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   }
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "disableBtf",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDisableBtfOasis(String wikiName, String article, boolean isWgVarOn) {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+  public void adsAtfDisableBtfOasis() {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
@@ -73,15 +68,9 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
         .wait
         .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
 
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), isWgVarOn,
-        AdsContent.BOTTOM_LB);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), isWgVarOn,
-        AdsContent.FLOATING_MEDREC);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), isWgVarOn,
-        AdsContent.INVISIBLE_HIGH_IMPACT_2);
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2));
   }
 
   /**
@@ -109,14 +98,12 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   }
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "disableBtfExceptHighlyViewableSlots",
       groups = "AdsBtfBlockingOasis"
   )
-  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis(String wikiName, String article, boolean isWgVarOn) {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+  public void adsAtfDisableBtfExceptHighlyViewableSlotsOasis() {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF/Unblock_HIVI");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, DESKTOP_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
     adsBaseObject.scrollToPosition(ARTICLE_MIDDLE_SECTION_SELECTOR);
@@ -130,8 +117,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
         .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.FLOATING_MEDREC)));
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
-    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), isWgVarOn, AdsContent.INVISIBLE_HIGH_IMPACT_2);
-    Assertion.assertNotEquals(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), isWgVarOn, AdsContent.BOTTOM_LB);
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2));
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB));
   }
 
   @InBrowser(
