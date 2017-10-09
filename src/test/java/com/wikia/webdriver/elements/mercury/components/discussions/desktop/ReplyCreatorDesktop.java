@@ -46,6 +46,7 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   private WebElement loadingSuccess;
 
   @FindBy(css = ".discussion-inline-reply-editor")
+  @Getter
   private WebElement editor;
 
   @Getter
@@ -55,10 +56,6 @@ public class ReplyCreatorDesktop extends BaseReplyCreator {
   @Getter
   @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
   private WebElement imagePreview;
-
-  @Getter
-  @FindBy(css = ".alert-notification")
-  private WebElement alertNotification;
 
   @Getter
   @FindBy(css = ".delete-image")

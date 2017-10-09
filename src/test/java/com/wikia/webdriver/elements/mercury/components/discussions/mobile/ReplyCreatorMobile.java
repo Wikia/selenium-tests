@@ -14,7 +14,7 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
 
   @FindBy(css = ".discussion-standalone-content-wrapper")
   @Getter
-  private WebElement replyCreatorWrapper;
+  private WebElement editor;
 
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement dialogSignIn;
@@ -45,10 +45,6 @@ public class ReplyCreatorMobile extends BaseReplyCreator {
   @Getter
   @FindBy(css = ".discussion-standalone-editor .post-image-inner-image")
   private WebElement imagePreview;
-
-  @Getter
-  @FindBy(css = ".alert-notification")
-  private WebElement alertNotification;
 
   @Getter
   @FindBy(css = ".delete-image")
