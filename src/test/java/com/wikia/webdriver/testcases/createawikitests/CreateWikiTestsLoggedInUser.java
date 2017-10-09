@@ -16,13 +16,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
 @Test(groups = {"CNW_User"})
-public class CreateWikiTests_loggedInUser extends NewTestTemplate {
+public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
 
   private String wikiDomain;
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_001_createDeleteWiki() {
+  public void createNewWiki001CreateDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -43,7 +43,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_002_createWikiForChildren() {
+  public void createNewWiki002CreateWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -63,7 +63,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_003_createWikiChangedDomain() {
+  public void createNewWiki003CreateWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
@@ -83,7 +83,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_004_creatWikiNameExists() {
+  public void createNewWiki004CreatWikiNameExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = "muppets";
@@ -93,7 +93,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_005_createWikiPolicyViolation() {
+  public void createNewWiki005CreateWikiPolicyViolation() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = "1234";
@@ -103,7 +103,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
   @Execute(asUser = User.USER_CNW)
-  public void CreateNewWiki_006_createWikiNoCategory() {
+  public void createNewWiki006CreateWikiNoCategory() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
     String wikiName = cnw1.getWikiName();
