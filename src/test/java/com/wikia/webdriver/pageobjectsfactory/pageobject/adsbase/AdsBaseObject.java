@@ -440,12 +440,15 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public boolean checkSlotOnPageLoaded(String slotName) {
     WebElement slot;
+
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
+
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
+      String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
-      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC)
+      if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+        triggerAdSlot(slotName)
             .wait
             .forElementPresent(By.cssSelector(slotSelector));
       }
@@ -457,10 +460,18 @@ public class AdsBaseObject extends WikiBasePageObject {
             String.format("Slot %s not found on the page", slotName),
             elementNotFound
         );
+
         return false;
       }
 
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
+
+      PageObjectLogging.log(
+          "Slot found",
+          String.format("%s found on the page with selector: %s", slotName, slotSelector),
+          true
+      );
+
       return adWebElements.size() > 1;
     } finally {
       restoreDefaultImplicitWait();
@@ -682,6 +693,13 @@ public class AdsBaseObject extends WikiBasePageObject {
     Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
       verifyNoAd(entry.getKey());
+    }
+  }
+
+  public void verifyAds() {
+    Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
+    for (Map.Entry<String, String> entry : slots.entrySet()) {
+      checkSlotOnPageLoaded(entry.getKey());
     }
   }
 

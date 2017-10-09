@@ -13,7 +13,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import org.testng.annotations.Test;
 
 @Test(groups = {"CNW_Anon"})
-public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
+public class CreateWikiTestsLoggedOutUser extends NewTestTemplate {
 
     Credentials credentials = Configuration.getCredentials();
 
