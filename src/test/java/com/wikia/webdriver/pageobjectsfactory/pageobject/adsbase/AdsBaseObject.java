@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
+  private String pageType = "article";
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
@@ -107,6 +108,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
     super();
     driver.manage().window().setSize(resolution);
+  }
+
+  public void setPageType(String type) {
+    pageType = type;
   }
 
   public void timerStart() {
@@ -440,12 +445,15 @@ public class AdsBaseObject extends WikiBasePageObject {
    */
   public boolean checkSlotOnPageLoaded(String slotName) {
     WebElement slot;
+
     changeImplicitWait(250, TimeUnit.MILLISECONDS);
+
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
+      String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
 
-      if (slotName.equals(AdsContent.FLOATING_MEDREC)) {
-        triggerAdSlot(AdsContent.FLOATING_MEDREC)
+      if (StringUtils.isNotEmpty(javaScriptTrigger)) {
+        triggerAdSlot(slotName)
             .wait
             .forElementPresent(By.cssSelector(slotSelector));
       } else if (slotName.equals(AdsContent.BOTTOM_LB)) {
@@ -461,10 +469,18 @@ public class AdsBaseObject extends WikiBasePageObject {
             String.format("Slot %s not found on the page", slotName),
             elementNotFound
         );
+
         return false;
       }
 
       List<WebElement> adWebElements = slot.findElements(By.cssSelector("div"));
+
+      PageObjectLogging.log(
+          "Slot found",
+          String.format("%s found on the page with selector: %s", slotName, slotSelector),
+          true
+      );
+
       return adWebElements.size() > 1;
     } finally {
       restoreDefaultImplicitWait();
@@ -682,10 +698,52 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
+  private Map<String, String> getSlotsSelectorMap() {
+    switch(pageType) {
+      case "special":
+        return AdsContent.getSpecialPageSlotsSelectorsMap();
+      case "file":
+        return AdsContent.getFilePageSlotsSelectors();
+      case "article":
+      default:
+        return AdsContent.getSlotsSelectorsMap();
+    }
+  }
+
+  /**
+   * Verify if there are no ads on the page for ad slots in given pageType
+   */
   private void verifyNoAds() {
-    Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
+    Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
       verifyNoAd(entry.getKey());
+    }
+  }
+
+  /**
+   * Verify if slots for set pageType are on the page
+   */
+  public void verifyAds() {
+    Map<String, String> slots = getSlotsSelectorMap();
+    for (Map.Entry<String, String> entry : slots.entrySet()) {
+      checkSlotOnPageLoaded(entry.getKey());
+    }
+  }
+
+  /**
+   * Verify if slots for set pageType are on the page and have correct line-items and ad units
+   *
+   * @param lineItems slot and expected line item pairs
+   * @param adUnits slot and expected ad unit pairs
+   */
+  public void verifyAds(Map<String, String> lineItems, Map<String, String> adUnits) {
+    Map<String, String> slots = getSlotsSelectorMap();
+    for (Map.Entry<String, String> entry : slots.entrySet()) {
+      String slotName = entry.getKey();
+
+      checkSlotOnPageLoaded(slotName);
+      verifyGptIframe(adUnits.get(slotName), slotName, "gpt");
+      verifyGptAdInSlot(slotName, lineItems.get(slotName), "");
     }
   }
 

@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdsContent {
-
   //HashMap with slots selector
   private static final Map<String, String> SLOTS_SELECTORS;
   private static final Map<String, String> PAL_SLOTS_SELECTORS;
+  private static final Map<String, String> SPECIAL_PAGE_SLOTS_SELECTORS;
+  private static final Map<String, String> FILE_PAGE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
 
   //SCRIPTS
@@ -50,6 +51,14 @@ public class AdsContent {
     return PAL_SLOTS_SELECTORS;
   }
 
+  public static Map<String, String> getSpecialPageSlotsSelectorsMap() {
+    return SPECIAL_PAGE_SLOTS_SELECTORS;
+  }
+
+  public static Map<String, String> getFilePageSlotsSelectors() {
+    return FILE_PAGE_SLOTS_SELECTORS;
+  }
+
   public static String getSlotSelector(String slotName) {
     return SLOTS_SELECTORS.get(slotName);
   }
@@ -81,6 +90,14 @@ public class AdsContent {
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT, "#INVISIBLE_HIGH_IMPACT");
     SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
+
+    SPECIAL_PAGE_SLOTS_SELECTORS = new HashMap<>();
+    SPECIAL_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+
+    FILE_PAGE_SLOTS_SELECTORS = new HashMap<>();
+    FILE_PAGE_SLOTS_SELECTORS.put(TOP_LB, "#TOP_LEADERBOARD");
+    FILE_PAGE_SLOTS_SELECTORS.put(MEDREC, "#TOP_RIGHT_BOXAD");
+    FILE_PAGE_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");
 
     PAL_SLOTS_SELECTORS = new HashMap<>();
     PAL_SLOTS_SELECTORS.put(BOTTOM_LB, "#BOTTOM_LEADERBOARD");

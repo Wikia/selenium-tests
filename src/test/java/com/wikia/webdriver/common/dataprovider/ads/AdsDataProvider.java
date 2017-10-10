@@ -13,16 +13,6 @@ import org.testng.annotations.DataProvider;
 import java.util.Arrays;
 
 public class AdsDataProvider {
-
-  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
-      AdsContent.TOP_LB,
-      AdsContent.MEDREC,
-      AdsContent.LEFT_SKYSCRAPPER_2,
-      AdsContent.LEFT_SKYSCRAPPER_3,
-      AdsContent.PREFOOTER_LEFT,
-      AdsContent.PREFOOTER_RIGHT
-  };
-
   private static final String WIKI_REGULAR = "adtest-pluto";
   private static final String WIKI_SPECIAL = "project43";
 

@@ -146,4 +146,12 @@ public class UrlBuilder {
       return url + separator + qs;
     }
   }
+
+  public String globallyEnableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
+    return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[XX]", instantGlobal));
+  }
+
+  public String globallyDisableGeoInstantGlobalOnPage(String pageUrl, String instantGlobal) {
+    return this.appendQueryStringToURL(pageUrl, String.format("InstantGlobals.%s=[ZZ]", instantGlobal));
+  }
 }
