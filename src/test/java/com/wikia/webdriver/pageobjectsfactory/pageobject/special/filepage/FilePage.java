@@ -129,7 +129,10 @@ public class FilePage extends WikiBasePageObject {
 
   public void verifyTabsExistImage() {
     String[] expectedTabs = {"about", "history"};
-    Assertion.assertTrue(expectedTabs.length <= tabs.size());
+    int numberOfTabs = tabs.size();
+    int expectedNumberOfTabs = expectedTabs.length;
+    Assertion.assertTrue(numberOfTabs >= expectedNumberOfTabs,
+            String.format("Number of tabs (%s) is not greater or equal to %s,", numberOfTabs, expectedNumberOfTabs));
     verifyTabsExist(expectedTabs);
   }
 
