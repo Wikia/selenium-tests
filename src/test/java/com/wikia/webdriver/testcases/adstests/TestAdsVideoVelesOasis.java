@@ -40,7 +40,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
 
-    velesAds.triggerIncontentSlot();
+    velesAds.triggerIncontentPlayer();
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN);
   }
 }

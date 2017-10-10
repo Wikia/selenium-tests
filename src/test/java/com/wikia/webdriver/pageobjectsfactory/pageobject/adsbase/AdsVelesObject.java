@@ -17,11 +17,11 @@ public class AdsVelesObject extends AdsBaseObject {
   }
 
   public void verifyVelesPlayerInIncontentSlot() {
-    triggerIncontentSlot();
+    triggerIncontentPlayer();
     wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
   }
 
-  public void triggerIncontentSlot() {
+  public void triggerIncontentPlayer() {
     scrollToPosition(INCONTENT_WRAPPER);
     fixScrollPositionByNavbar();
   }
