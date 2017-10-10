@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -47,6 +48,7 @@ public class ChromeBrowser extends BrowserAbstract {
     chromedriver.setExecutable(true);
 
     System.setProperty("webdriver.chrome.driver", chromedriver.getPath());
+    PageObjectLogging.logInfo("Using chromedriver: ", chromedriver.getPath());
 
     chromeOptions.addArguments("start-maximized");
     chromeOptions.addArguments("disable-notifications");
