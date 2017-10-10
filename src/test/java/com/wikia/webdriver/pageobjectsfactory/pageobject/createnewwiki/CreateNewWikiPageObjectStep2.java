@@ -44,7 +44,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
     WebElement selectedCategory;
     try {
       selectedCategory = wikiCategoryList.get(categoryId);
-    } catch (IndexOutOfBoundsException e){
+    } catch (ArrayIndexOutOfBoundsException e){
       PageObjectLogging.log("selectCategory","There is no category with index " + categoryId, false);
       throw new WebDriverException("There is no category with index " + categoryId, e);
     }
