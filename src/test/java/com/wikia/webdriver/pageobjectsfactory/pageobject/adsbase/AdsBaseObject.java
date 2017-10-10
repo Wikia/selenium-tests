@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
+  private String pageType = "article";
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
@@ -62,6 +63,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
 
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
+  private static final String GLOBAL_NAVIGATION_ON_MOBILE_SELECTOR = ".site-head-container";
 
   private static final String MIX_CONTENT_FOOTER_SELECTOR = "#mixed-content-footer";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
@@ -107,6 +109,10 @@ public class AdsBaseObject extends WikiBasePageObject {
   public AdsBaseObject(WebDriver driver, Dimension resolution) {
     super();
     driver.manage().window().setSize(resolution);
+  }
+
+  public void setPageType(String type) {
+    pageType = type;
   }
 
   public void timerStart() {
@@ -451,6 +457,10 @@ public class AdsBaseObject extends WikiBasePageObject {
         triggerAdSlot(slotName)
             .wait
             .forElementPresent(By.cssSelector(slotSelector));
+      } else if (slotName.equals(AdsContent.BOTTOM_LB)) {
+        triggerAdSlot(AdsContent.BOTTOM_LB)
+            .wait
+            .forElementPresent(By.cssSelector(slotSelector));
       }
 
       try {
@@ -689,17 +699,52 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
   }
 
+  private Map<String, String> getSlotsSelectorMap() {
+    switch(pageType) {
+      case "special":
+        return AdsContent.getSpecialPageSlotsSelectorsMap();
+      case "file":
+        return AdsContent.getFilePageSlotsSelectors();
+      case "article":
+      default:
+        return AdsContent.getSlotsSelectorsMap();
+    }
+  }
+
+  /**
+   * Verify if there are no ads on the page for ad slots in given pageType
+   */
   private void verifyNoAds() {
-    Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
+    Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
       verifyNoAd(entry.getKey());
     }
   }
 
+  /**
+   * Verify if slots for set pageType are on the page
+   */
   public void verifyAds() {
-    Map<String, String> slots = AdsContent.getSlotsSelectorsMap();
+    Map<String, String> slots = getSlotsSelectorMap();
     for (Map.Entry<String, String> entry : slots.entrySet()) {
       checkSlotOnPageLoaded(entry.getKey());
+    }
+  }
+
+  /**
+   * Verify if slots for set pageType are on the page and have correct line-items and ad units
+   *
+   * @param lineItems slot and expected line item pairs
+   * @param adUnits slot and expected ad unit pairs
+   */
+  public void verifyAds(Map<String, String> lineItems, Map<String, String> adUnits) {
+    Map<String, String> slots = getSlotsSelectorMap();
+    for (Map.Entry<String, String> entry : slots.entrySet()) {
+      String slotName = entry.getKey();
+
+      checkSlotOnPageLoaded(slotName);
+      verifyGptIframe(adUnits.get(slotName), slotName, "gpt");
+      verifyGptAdInSlot(slotName, lineItems.get(slotName), "");
     }
   }
 
@@ -804,6 +849,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }else {
       jsActions.scrollBy(0, navbarHeight);
     }
+  }
+
+  public void fixScrollPositionByNavbarOnMobile() {
+    int navbarOnMobileHeight = -1 *  driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_ON_MOBILE_SELECTOR)).getSize().getHeight();
+    jsActions.scrollBy(0, navbarOnMobileHeight);
   }
 
   public boolean isMobileInContentAdDisplayed() {
