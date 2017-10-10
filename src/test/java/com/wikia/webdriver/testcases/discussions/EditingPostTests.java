@@ -47,7 +47,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void userOnMobileCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
+    final PostEntity post = new PostsListPage().open().getPostById(data.getId());
     Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
   }
 
@@ -67,7 +67,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void discussionsAdministratorOnMobileCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findPostById(data.getId());
+    final PostEntity post = new PostDetailsPage().open(data.getId()).getPostById(data.getId());
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
     Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_STAFF, SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE);
   }
@@ -89,7 +89,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void userOnDesktopCanNotSeeThatPostWasEditedByAdministratorOnPostsListPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostsListPage().open().getPost().findPostById(data.getId());
+    final PostEntity post = new PostsListPage().open().getPostById(data.getId());
     Assertion.assertFalse(post.hasEditedBySection(), SHOULD_NOT_HAVE_EDITED_BY_SECTION_MESSAGE);
   }
 
@@ -109,7 +109,7 @@ public class EditingPostTests extends NewTestTemplate {
   public void discussionsAdministratorOnDesktopCanSeeThatPostWasEditedByAdministratorOnPostDetailsPage() {
     final PostEntity.Data data = updatePostAsStaffRemotely(createPostAsUserRemotely());
 
-    final PostEntity post = new PostDetailsPage().open(data.getId()).getPost().findPostById(data.getId());
+    final PostEntity post = new PostDetailsPage().open(data.getId()).getPostById(data.getId());
     Assertion.assertTrue(post.hasEditedBySection(), SHOULD_HAVE_EDITED_BY_SECTION_MESSAGE);
     Assertion.assertEquals(post.getEditedBySectionText(), EDITED_BY_STAFF, SHOULD_HAVE_DETAILED_INFORMATION_MESSAGE);
   }
