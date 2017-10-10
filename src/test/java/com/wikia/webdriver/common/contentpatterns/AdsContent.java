@@ -96,7 +96,7 @@ public class AdsContent {
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10000); })();");
     SLOTS_TRIGGERS.put(INCONTENT_LEADERBOARD, "$('#mw-content-text h2')[1].scrollIntoView(true);");
     SLOTS_TRIGGERS.put(LEFT_SKYSCRAPPER_3, "window.scrollTo(0,document.body.scrollHeight);");
-    SLOTS_TRIGGERS.put(BOTTOM_LB, "window.scrollTo(0,document.body.scrollHeight);window.scrollTo(0,document.body.scrollHeight - 5);");
+    SLOTS_TRIGGERS.put(BOTTOM_LB,"(function(){ document.querySelectorAll('#mixed-content-footer')[0].scrollIntoView(); setTimeout(function () {document.querySelectorAll('#mixed-content-footer')[0].scrollIntoView()}, 10000); })();");
   }
 }
 

@@ -448,6 +448,10 @@ public class AdsBaseObject extends WikiBasePageObject {
         triggerAdSlot(AdsContent.FLOATING_MEDREC)
             .wait
             .forElementPresent(By.cssSelector(slotSelector));
+      } else if (slotName.equals(AdsContent.BOTTOM_LB)) {
+        triggerAdSlot(AdsContent.BOTTOM_LB)
+            .wait
+            .forElementPresent(By.cssSelector(slotSelector));
       }
 
       try {
