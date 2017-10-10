@@ -12,10 +12,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SmartBanner {
 
-  @FindBy(css = ".sb-close")
+  @FindBy(css = ".fandom-app-smart-banner__close")
   private WebElement closeButton;
 
-  private By smartBannerComponent = By.cssSelector(".smart-banner-android");
+  private By smartBannerComponent = By.cssSelector(".fandom-app-smart-banner");
 
   private Wait wait;
   private JavascriptActions jsActions;
