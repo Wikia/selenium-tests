@@ -11,12 +11,6 @@ import java.util.HashMap;
 
 public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
   static final String PROJECT43_TEST_LINE_ITEM_ID = "271491732";
-
-  static HashMap<String, String> SPECIAL_PAGE_EXPECTED_LINE_ITEMS = new HashMap<>();
-  static HashMap<String, String> SPECIAL_PAGE_EXPECTED_AD_UNITS = new HashMap<>();
-
-  static HashMap<String, String> FILE_PAGE_EXPECTED_LINE_ITEMS = new HashMap<>();
-  static HashMap<String, String> FILE_PAGE_EXPECTED_AD_UNITS = new HashMap<>();
   static final String FILE_PAGE_AD_UNIT = "wka.life/_project43//file";
 
   private AdsBaseObject buildAdsObjectForPage(String pageName) {
@@ -24,15 +18,21 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     return new AdsBaseObject(driver, testedPage, new Dimension(1292, 1000));
   }
 
-  private void specialPageExpectedDataProvider() {
-    SPECIAL_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.TOP_LB, "271491732");
-    SPECIAL_PAGE_EXPECTED_AD_UNITS.put(AdsContent.TOP_LB, "wka.life/_project43//special");
+  private HashMap getSpecialPageExpectedLineItems() {
+    HashMap<String, String> expectedLineItems = new HashMap<>();
+    expectedLineItems.put(AdsContent.TOP_LB, "271491732");
+    return expectedLineItems;
+  }
+
+  private HashMap getSpecialPageExpectedAdUnits() {
+    HashMap<String, String> expectedAdUnits = new HashMap<>();
+    expectedAdUnits.put(AdsContent.TOP_LB, "wka.life/_project43//special");
+    return expectedAdUnits;
   }
 
   private void testSpecialPage(AdsBaseObject ads) {
     ads.setPageType("special");
-    specialPageExpectedDataProvider();
-    ads.verifyAds(SPECIAL_PAGE_EXPECTED_LINE_ITEMS, SPECIAL_PAGE_EXPECTED_AD_UNITS);
+    ads.verifyAds(getSpecialPageExpectedLineItems(), getSpecialPageExpectedAdUnits());
   }
 
   @Test(groups = {"TestAdsOnSpecialPagesOasis", "X"})
@@ -49,18 +49,21 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "TestAdsOnFilePagesOasis")
   public void testAdsOnFilePageOasis() throws Exception {
+    HashMap<String, String> expectedLineItems = new HashMap<>();
+    HashMap<String, String> expectedAdUnits = new HashMap<>();
+
     AdsBaseObject ads = buildAdsObjectForPage("File:Example.jpg");
     ads.setPageType("file");
 
-    FILE_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.TOP_LB, PROJECT43_TEST_LINE_ITEM_ID);
-    FILE_PAGE_EXPECTED_AD_UNITS.put(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
+    expectedLineItems.put(AdsContent.TOP_LB, PROJECT43_TEST_LINE_ITEM_ID);
+    expectedAdUnits.put(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
 
-    FILE_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.MEDREC, PROJECT43_TEST_LINE_ITEM_ID);
-    FILE_PAGE_EXPECTED_AD_UNITS.put(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
+    expectedLineItems.put(AdsContent.MEDREC, PROJECT43_TEST_LINE_ITEM_ID);
+    expectedAdUnits.put(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
 
-    FILE_PAGE_EXPECTED_LINE_ITEMS.put(AdsContent.BOTTOM_LB, PROJECT43_TEST_LINE_ITEM_ID);
-    FILE_PAGE_EXPECTED_AD_UNITS.put(AdsContent.BOTTOM_LB, FILE_PAGE_AD_UNIT);
+    expectedLineItems.put(AdsContent.BOTTOM_LB, PROJECT43_TEST_LINE_ITEM_ID);
+    expectedAdUnits.put(AdsContent.BOTTOM_LB, FILE_PAGE_AD_UNIT);
 
-    ads.verifyAds(FILE_PAGE_EXPECTED_LINE_ITEMS, FILE_PAGE_EXPECTED_AD_UNITS);
+    ads.verifyAds(expectedLineItems, expectedAdUnits);
   }
 }
