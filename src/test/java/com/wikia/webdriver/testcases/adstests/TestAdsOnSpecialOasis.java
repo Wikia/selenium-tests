@@ -30,9 +30,32 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     return expectedAdUnits;
   }
 
+  private HashMap getFilePageExpectedLineItems() {
+    HashMap<String, String> expectedLineItems = new HashMap<>();
+    expectedLineItems.put(AdsContent.TOP_LB, PROJECT43_TEST_LINE_ITEM_ID);
+    expectedLineItems.put(AdsContent.MEDREC, PROJECT43_TEST_LINE_ITEM_ID);
+    expectedLineItems.put(AdsContent.BOTTOM_LB, PROJECT43_TEST_LINE_ITEM_ID);
+
+    return expectedLineItems;
+  }
+
+  private HashMap getFilePageExpectedAdUnits() {
+    HashMap<String, String> expectedAdUnits = new HashMap<>();
+    expectedAdUnits.put(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
+    expectedAdUnits.put(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
+    expectedAdUnits.put(AdsContent.BOTTOM_LB, FILE_PAGE_AD_UNIT);
+
+    return expectedAdUnits;
+  }
+
   private void testSpecialPage(AdsBaseObject ads) {
     ads.setPageType("special");
     ads.verifyAds(getSpecialPageExpectedLineItems(), getSpecialPageExpectedAdUnits());
+  }
+
+  private void testFilePage(AdsBaseObject ads) {
+    ads.setPageType("file");
+    ads.verifyAds(getFilePageExpectedLineItems(), getFilePageExpectedAdUnits());
   }
 
   @Test(groups = {"TestAdsOnSpecialPagesOasis"})
@@ -49,21 +72,7 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
 
   @Test(groups = "TestAdsOnFilePagesOasis")
   public void testAdsOnFilePageOasis() throws Exception {
-    HashMap<String, String> expectedLineItems = new HashMap<>();
-    HashMap<String, String> expectedAdUnits = new HashMap<>();
-
     AdsBaseObject ads = buildAdsObjectForPage("File:Example.jpg");
-    ads.setPageType("file");
-
-    expectedLineItems.put(AdsContent.TOP_LB, PROJECT43_TEST_LINE_ITEM_ID);
-    expectedAdUnits.put(AdsContent.TOP_LB, FILE_PAGE_AD_UNIT);
-
-    expectedLineItems.put(AdsContent.MEDREC, PROJECT43_TEST_LINE_ITEM_ID);
-    expectedAdUnits.put(AdsContent.MEDREC, FILE_PAGE_AD_UNIT);
-
-    expectedLineItems.put(AdsContent.BOTTOM_LB, PROJECT43_TEST_LINE_ITEM_ID);
-    expectedAdUnits.put(AdsContent.BOTTOM_LB, FILE_PAGE_AD_UNIT);
-
-    ads.verifyAds(expectedLineItems, expectedAdUnits);
+    testFilePage(ads);
   }
 }
