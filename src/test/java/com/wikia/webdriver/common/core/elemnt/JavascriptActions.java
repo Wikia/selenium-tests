@@ -77,10 +77,25 @@ public class JavascriptActions {
   }
 
   public boolean isElementInViewPort(WebElement element) {
-    return (Boolean) js.executeScript(
-        "return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
-        + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
-        element);
+
+    int offset = getOffset();
+
+    try {
+      return (Boolean) js.executeScript(
+              "return ($(window).scrollTop() + " + offset + " < $(arguments[0]).offset().top) && ($(window).scrollTop() "
+                      + "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + " + offset + ")",
+              element);
+    } catch (WebDriverException e) {
+      String windowScrollTop = "((window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement " +
+              "|| document.body.parentNode || document.body).scrollTop)";
+      String elementOffsetTop = "(arguments[0]).offsetTop";
+      String windowHeight = "(window.innerHeight)";
+      String elementOuterHeight = "(arguments[0]).clientHeight";
+
+      return (boolean) js.executeScript("return (" + windowScrollTop + " + " + offset + " < " + elementOffsetTop +
+              " && " + windowScrollTop + " + " + windowHeight + " > " + elementOffsetTop + " + " + elementOuterHeight +
+              " + " + offset + ")", element);
+    }
   }
 
   public void scrollToBottom() {
@@ -96,23 +111,31 @@ public class JavascriptActions {
   }
 
   public void scrollToElement(WebElement element) {
-
-    int offset = 120;
-    WikiBasePageObject wikiPage = new WikiBasePageObject();
-    if (wikiPage.isBannerNotificationContainerPresent()) {
-      int notificationsHeight = wikiPage.getBannerNotificationsHeight();
-      offset += notificationsHeight;
-    }
-
     try {
       js.executeScript(
-          "var x = $(arguments[0]);" + "window.scroll(0,parseInt(x.offset().top - " + offset
-          + "));", element);
+              "window.scroll(0,parseInt($(arguments[0]).offset().top - " + getOffset() + "));", element);
     } catch (WebDriverException e) {
       if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
         PageObjectLogging.log("JSError", "JQuery is not defined", false);
       }
+      js.executeScript(
+              "window.scroll(0,parseInt(arguments[0].getBoundingClientRect().top + window.pageYOffset - " +
+                      "arguments[0].clientTop - " + getOffset() + "));", element);
     }
+  }
+
+  /**
+   * Gets the distance from top to the bottom of the navigation bar, no matter if it's mobile or desktop.
+   * @return offset
+   */
+  private int getOffset() {
+    WikiBasePageObject wikiPage = new WikiBasePageObject();
+    int offset = wikiPage.getNavigationBarOffsetFromTop();
+    if (wikiPage.isBannerNotificationContainerPresent()) {
+      int notificationsHeight = wikiPage.getBannerNotificationsHeight();
+      offset += notificationsHeight;
+    }
+    return offset;
   }
 
   public void scrollToSpecificElement(WebElement element) {
