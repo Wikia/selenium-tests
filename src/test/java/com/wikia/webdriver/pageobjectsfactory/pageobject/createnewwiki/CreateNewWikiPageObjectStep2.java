@@ -41,7 +41,13 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject {
     }
     scrollTo(wikiCategoryDropdown);
     wait.forElementClickable(wikiCategoryDropdown);
-    WebElement selectedCategory = wikiCategoryList.get(categoryId);
+    WebElement selectedCategory;
+    try {
+      selectedCategory = wikiCategoryList.get(categoryId);
+    } catch (ArrayIndexOutOfBoundsException e){
+      PageObjectLogging.log("selectCategory","There is no category with index " + categoryId, false);
+      throw new WebDriverException("There is no category with index " + categoryId, e);
+    }
     hover(wikiCategoryDropdown);
     wait.forElementClickable(selectedCategory);
     selectedCategory.click();
