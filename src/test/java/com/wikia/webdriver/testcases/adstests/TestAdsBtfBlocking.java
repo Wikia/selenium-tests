@@ -52,9 +52,10 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.TOP_LB), "Slot" + AdsContent.TOP_LB);
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_SKIN), "Slot" + AdsContent.INVISIBLE_SKIN);
 
-    //Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), "Slot: " + AdsContent.BOTTOM_LB);
-    //Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), "Slot: " + AdsContent.FLOATING_MEDREC);
-    //Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), "Slot: " + AdsContent.INVISIBLE_HIGH_IMPACT_2);
+    // functionality tested below will be fixed in the scope of: https://wikia-inc.atlassian.net/browse/ADEN-6028
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), "Slot: " + AdsContent.BOTTOM_LB);
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), "Slot: " + AdsContent.FLOATING_MEDREC);
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), "Slot: " + AdsContent.INVISIBLE_HIGH_IMPACT_2);
   }
 
   /**
@@ -91,7 +92,8 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
 
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.FLOATING_MEDREC), String.format("Ad is not loaded inside %s", AdsContent.FLOATING_MEDREC));
     Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.INVISIBLE_HIGH_IMPACT_2), String.format("Ad is not loaded inside %s", AdsContent.INVISIBLE_HIGH_IMPACT_2));
-    //Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), "Slot: " + AdsContent.BOTTOM_LB);
+    // functionality tested below will be fixed in the scope of: https://wikia-inc.atlassian.net/browse/ADEN-6028
+    Assertion.assertFalse(adsBaseObject.checkSlotOnPageLoaded(AdsContent.BOTTOM_LB), "Slot: " + AdsContent.BOTTOM_LB);
   }
 
   @InBrowser(
