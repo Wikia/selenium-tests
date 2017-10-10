@@ -14,33 +14,33 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
   private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Direct");
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesIncontentPlayerBiderYesOfferEvent"})
-  public void adsVelesIncontentPlayerBiderYesOfferEventOasis() {
+  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithDirectOfferEventOasis"})
+  public void adsVelesWithDirectOfferEvent() {
+    networkTrafficInterceptor.startIntercepting();
+    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
+
+    velesAds.verifyVelesPlayerInIncontentSlot();
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithBidderOfferEventOasis"})
+  public void adsVelesWithBidderOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
     String url = TEST_PAGE_BIDDER.getUrl();
     AdsVelesObject velesAds = new AdsVelesObject(driver, urlBuilder.appendQueryStringToURL(url, APPNEXUS_DEEBUG_MODE));
 
-    velesAds.verifyVelesIncontentSlotDisplayedOasis();
-    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, velesAds.BIDDER_PLAYER_EVENT_PATTERN);
+    velesAds.verifyVelesPlayerInIncontentSlot();
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
   }
 
   @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesIncontentPlayerDirectEventOasis"})
-  public void adsVelesIncontentPlayerDirectEvent() {
-    networkTrafficInterceptor.startIntercepting();
-    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
-
-    velesAds.verifyVelesIncontentSlotDisplayedOasis();
-    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, velesAds.DIRECT_PLAYER_EVENT_PATTERN);
-  }
-
-  @NetworkTrafficDump(useMITM = true)
-  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesIncontentPlayerBidderNoOfferEventOasis"})
-  public void adsVelesIncontentPlayerBidderNoOfferEvent() {
+  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithoutOfferEventOasis"})
+  public void adsVelesWithoutOfferEvent() {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
 
-    velesAds.tiggerIncontentPlayerOnOasis();
-    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor,velesAds.NO_OFFER_PLAYER_EVENT_PATTERN);
+    velesAds.triggerIncontentPlayer();
+    velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN);
   }
 }
