@@ -25,7 +25,6 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
   public void createNewWiki001CreateDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-    cnw1.selectLanguage("en");
     String wikiName = cnw1.getWikiName();
     cnw1.typeInWikiName(wikiName);
     cnw1.verifyNextButtonEnabled();
