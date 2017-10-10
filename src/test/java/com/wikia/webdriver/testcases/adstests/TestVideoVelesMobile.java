@@ -17,7 +17,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Direct");
 
     @NetworkTrafficDump(useMITM = true)
-    @Test(groups = {"videoVelesMobile", "adsVelesIncontentPlayerBiderYesOfferEventMobile"})
+    @Test(groups = {"AdsVideoVelesMobile", "AdsVelesIncontentPlayerBiderYesOfferEventMobile"})
     public void adsVelesIncontentPlayerBiderYesOfferEventMobile() {
       networkTrafficInterceptor.startIntercepting();
       String url = TEST_PAGE_BIDDER.getUrl();
@@ -28,7 +28,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     }
 
     @NetworkTrafficDump(useMITM = true)
-    @Test(groups = {"videoVelesMobile", "adsVelesIncontentPlayerDirectEventMobile"})
+    @Test(groups = {"AdsVideoVelesMobile", "AdsVelesIncontentPlayerDirectEventMobile"})
     public void adsVelesIncontentPlayerDirectEventMobile() {
       networkTrafficInterceptor.startIntercepting();
       AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
@@ -38,7 +38,7 @@ public class TestVideoVelesMobile extends TemplateNoFirstLoad {
     }
 
     @NetworkTrafficDump(useMITM = true)
-    @Test(groups = {"videoVelesMobile", "adsVelesIncontentPlayerBidderNoOfferEventMobile"})
+    @Test(groups = {"AdsVideoVelesMobile", "AdsVelesIncontentPlayerBidderNoOfferEventMobile"})
     public void adsVelesIncontentPlayerBidderNoOfferEventMobile() {
       networkTrafficInterceptor.startIntercepting();
       AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());

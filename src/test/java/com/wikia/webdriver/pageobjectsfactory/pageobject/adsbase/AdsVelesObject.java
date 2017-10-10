@@ -29,12 +29,12 @@ public class AdsVelesObject extends AdsBaseObject {
   }
 
   public void tiggerIncontentPlayerOnMobile() {
-    scrollToPosition(FIRST_ARTICLE_HEADER_MOBILE);
+    scrollToPosition("#MOBILE_IN_CONTENT");
     fixScrollPositionByNavbarOnMobile();
   }
 
   public void tiggerIncontentPlayerOnOasis() {
-    scrollToPosition(SECOND_ARTICLE_HEADER_OASIS);
+    scrollToPosition("#kkkkkk");
     fixScrollPositionByNavbar();
   }
 }
