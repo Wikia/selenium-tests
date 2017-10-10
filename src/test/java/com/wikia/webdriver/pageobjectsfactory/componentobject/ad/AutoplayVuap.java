@@ -7,7 +7,6 @@ import com.wikia.webdriver.common.core.elemnt.Wait;
 import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.concurrent.TimeUnit;
@@ -90,11 +89,9 @@ public class AutoplayVuap {
   }
 
   public void togglePause() {
-    isPauseLayerVisible();
-    // hack on forElementClickable() as it isn't fast enough to catch pause overlay on short video
-    new Actions(driver).moveToElement(driver.findElement(pauseOverlaySelector)).click();
-    // check if element is really clickable after pausing to confirm that element isn't covered by other element
     wait.forElementClickable(pauseOverlaySelector);
+    // hack to click pause overlay on mobile
+    clickByJS(pauseOverlaySelector);
   }
 
   public void play() {
