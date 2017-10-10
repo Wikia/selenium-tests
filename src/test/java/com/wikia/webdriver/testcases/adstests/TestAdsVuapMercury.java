@@ -4,7 +4,7 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
@@ -22,7 +22,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
+      dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayMobile",
       groups = {"AdsVuapClickToPlayTopAreas"}
   )
@@ -54,7 +54,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(
       groups = {"AdsVuapTimeProgressOasis"},
-      dataProviderClass = AdsDataProvider.class,
+      dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateMobile"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
