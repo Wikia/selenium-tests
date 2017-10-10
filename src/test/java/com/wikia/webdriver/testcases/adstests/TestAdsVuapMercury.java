@@ -53,7 +53,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"AdsVuapTimeProgressOasis"},
+      groups = {"adsVuapResolvedStateMobile"},
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapResolvedStateMobile"
   )
