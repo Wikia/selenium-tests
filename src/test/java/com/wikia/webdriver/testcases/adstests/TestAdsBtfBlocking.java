@@ -58,18 +58,15 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
   }
 
   /**
-   * https://wikia-inc.atlassian.net/browse/ADEN-2156
    * Test whether ads on small screens are displayed when wgAdDriverDelayBelowTheFold is enabled
    */
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "disableBtf",
-      groups = "AdsBtfBlockingOasis"
+      dataProviderClass = AdsDataProvider.class
   )
-  public void adsAtfOnTabletOasis(String wikiName, String article, boolean isWgVarOn) {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+  public void adsAtfOnTabletOasis() {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, TABLET_PAGE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
