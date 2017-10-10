@@ -113,7 +113,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     cnw1.typeInWikiDomain(wikiDomain);
     cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(-1);
+    cnw2.selectCategory(0);
     cnw2.verifyCategoryError();
   }
 }
