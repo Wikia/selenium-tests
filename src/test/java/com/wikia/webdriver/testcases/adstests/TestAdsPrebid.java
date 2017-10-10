@@ -98,4 +98,3 @@ public class TestAdsPrebid extends TemplateNoFirstLoad {
     return false;
   }
 }
-

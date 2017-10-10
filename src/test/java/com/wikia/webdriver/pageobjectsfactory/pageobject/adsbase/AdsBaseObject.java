@@ -38,8 +38,6 @@ public class AdsBaseObject extends WikiBasePageObject {
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
   private static final int PROVIDER_CHAIN_TIMEOUT_SEC = 30;
-  private static final int SLOT_TRIGGER_TIMEOUT_SEC = 10;
-  protected static final int GLOBAL_NAV_HEIGHT = 60;
   protected static final int WIKIA_DFP_CLIENT_ID = 5441;
   private static final String HOP_AD_TYPE = "AdEngine_adType='collapse';";
   private static final String[] GPT_DATA_ATTRIBUTES = {
@@ -62,7 +60,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String MIDDLE_PREFOOTER_CSS_SELECTOR = "#PREFOOTER_MIDDLE_BOXAD";
   private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
 
-  private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
+  private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation,.site-head-container";
 
   private static final String MIX_CONTENT_FOOTER_SELECTOR = "#mixed-content-footer";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
@@ -840,12 +838,12 @@ public class AdsBaseObject extends WikiBasePageObject {
   }
 
   public void fixScrollPositionByNavbar() {
-    int navbarHeight = -1 *  driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight();
+    int navbarHeight = -1 * driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_SELECTOR)).getSize().getHeight();
 
     if (isBannerNotificationContainerPresent()) {
       int notificationsHeight = -1 * getBannerNotificationsHeight();
       jsActions.scrollBy(0, navbarHeight + notificationsHeight);
-    }else {
+    } else {
       jsActions.scrollBy(0, navbarHeight);
     }
   }
