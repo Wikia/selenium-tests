@@ -3,7 +3,6 @@ package com.wikia.webdriver.testcases.adstests;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsPrebidObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsVelesObject;
 import org.testng.annotations.Test;
 
