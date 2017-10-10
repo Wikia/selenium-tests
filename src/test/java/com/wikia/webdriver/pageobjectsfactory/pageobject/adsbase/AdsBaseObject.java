@@ -62,6 +62,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   private static final String FLOATING_MEDREC_SELECTOR = "div[id*='" + AdsContent.FLOATING_MEDREC + "']";
 
   private static final String GLOBAL_NAVIGATION_SELECTOR = "#globalNavigation, .site-head";
+  private static final String GLOBAL_NAVIGATION_ON_MOBILE_SELECTOR = ".site-head-container";
 
   private static final String MIX_CONTENT_FOOTER_SELECTOR = "#mixed-content-footer";
   private static final String MIX_CONTENT_FOOTER_ROW_SELECTOR = ".mcf-row";
@@ -804,6 +805,11 @@ public class AdsBaseObject extends WikiBasePageObject {
     }else {
       jsActions.scrollBy(0, navbarHeight);
     }
+  }
+
+  public void fixScrollPositionByNavbarOnMobile() {
+    int navbarOnMobileHeight = -1 *  driver.findElement(By.cssSelector(GLOBAL_NAVIGATION_ON_MOBILE_SELECTOR)).getSize().getHeight();
+    jsActions.scrollBy(0, navbarOnMobileHeight);
   }
 
   public boolean isMobileInContentAdDisplayed() {

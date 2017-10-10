@@ -13,12 +13,20 @@ import org.openqa.selenium.WebElement;
 public class AdsPrebidObject extends AdsBaseObject {
 
   private static final String CUSTOM_ADAPTER_CREATIVE = "Wikia Creative";
-
   private static final String GPT_NODE = "div[id^=wikia_gpt]:not(.hidden)";
   private static final String IFRAME_NODE = "div[id^=wikia_gpt]:not(.hidden) > div > iframe";
-
   private static final String NEXT_PV = "a[href='/wiki/SyntheticTests/RTB/Prebid.js/Wikia/2']";
   private static final String NEXT_TITLE = "SyntheticTests/RTB/Prebid.js/Wikia/2";
+  private static final String INCONTENT_VIDEO = ".video-display-wrapper";
+
+  public static final String SECOND_ARTICLE_HEADER_OASIS = "#Player_above";
+  public static final String FIRST_ARTICLE_HEADER_MOBILE = "#Header";
+
+  public static final String BIDDER_PLAYER_EVENT_PATTERN = ".adengplayerinfo.*event_name=in_viewport_with_fallback_bid.*";
+  public static final String DIRECT_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
+  public static final String NO_OFFER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
+
+
 
   public AdsPrebidObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
@@ -65,6 +73,27 @@ public class AdsPrebidObject extends AdsBaseObject {
     wait.forElementVisible(nextArticleLink);
     nextArticleLink.click();
     waitTitleChangesTo(NEXT_TITLE);
+  }
+
+
+  public void verifyVelesIncontentSlotDisplayedOasis(){
+    tiggerIncontentPlayerOnOasis();
+    wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+  }
+
+  public void verifyVelesIncontentSlotDisplayedMobile(){
+    tiggerIncontentPlayerOnMobile();
+    wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+  }
+
+  public void tiggerIncontentPlayerOnMobile() {
+    scrollToPosition(FIRST_ARTICLE_HEADER_MOBILE);
+    fixScrollPositionByNavbarOnMobile();
+  }
+
+  public void tiggerIncontentPlayerOnOasis() {
+    scrollToPosition(SECOND_ARTICLE_HEADER_OASIS);
+    fixScrollPositionByNavbar();
   }
 
   private void assertKeyValue(JSONObject keyValues, String key, String value, String comment)
