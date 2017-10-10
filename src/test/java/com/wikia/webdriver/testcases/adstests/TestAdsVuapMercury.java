@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.Assert;
@@ -49,5 +50,19 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
         AD_REDIRECT_URL,
         "Top part of creative should point to FANDOM page but it points to " + actual
     );
+  }
+
+  @Test(
+      groups = {"AdsVuapTimeProgressOasis"},
+      dataProviderClass = AdsDataProvider.class,
+      dataProvider = "adsVuapResolvedStateMobile"
+  )
+  public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));
+    ads.getUrl(page);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
+    ads.scrollToSlot(slot);
+
+    VuapAssertions.verifyVideoTimeIsProgressing(vuap);
   }
 }
