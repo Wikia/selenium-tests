@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.old;
 import com.wikia.webdriver.common.core.elemnt.JavascriptActions;
 import com.wikia.webdriver.common.core.elemnt.Wait;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -15,7 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CommentsPageObject {
+public class CommentsPageObject extends WikiBasePageObject {
 
   @FindBy(css = ".article-comments > div")
   private WebElement commentsHeader;
@@ -85,7 +86,7 @@ public class CommentsPageObject {
 
   public void clickOnUsername(int index) {
     commentsUsernames.stream().forEach(e->wait.forElementClickable(e));
-    commentsUsernames.get(index).click();
+    scrollAndClick(commentsUsernames.get(index));
   }
 
   public int getNumberOfRepliesFromHeader(int index) {
