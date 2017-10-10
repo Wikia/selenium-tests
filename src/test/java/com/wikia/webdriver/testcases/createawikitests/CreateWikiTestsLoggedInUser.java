@@ -21,7 +21,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
   private String wikiDomain;
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_001"})
-  @Execute(asUser = User.USER_12)
+  @Execute(asUser = User.USER_CNW)
   public void createNewWiki001CreateDeleteWiki() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -39,11 +39,11 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     article.verifyWikiTitleHeader(wikiName);
     DeletePageObject deletePage = article.deleteUsingDropdown();
     deletePage.submitDeletion();
-    article.verifyUserLoggedIn(User.USER_12.getUserName());
+    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_002"})
-  @Execute(asUser = User.USER_12)
+  @Execute(asUser = User.USER_CNW)
   public void createNewWiki002CreateWikiForChildren() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -57,13 +57,13 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
-    article.verifyUserLoggedIn(User.USER_12.getUserName());
+    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
 
     Assertion.assertTrue(WikiaProperties.isWikiForChildren(driver), "Wiki is not for children");
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_003"})
-  @Execute(asUser = User.USER_12)
+  @Execute(asUser = User.USER_CNW)
   public void createNewWiki003CreateWikiChangedDomain() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -78,12 +78,12 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
     ArticlePageObject article = cnw3.submit();
     article.closeNewWikiCongratulationsLightBox();
-    article.verifyUserLoggedIn(User.USER_12.getUserName());
+    article.verifyUserLoggedIn(User.USER_CNW.getUserName());
     article.isStringInURL(wikiDomain);
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_004"})
-  @Execute(asUser = User.USER_12)
+  @Execute(asUser = User.USER_CNW)
   public void createNewWiki004CreatWikiNameExists() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -93,7 +93,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_005"})
-  @Execute(asUser = User.USER_12)
+  @Execute(asUser = User.USER_CNW)
   public void createNewWiki005CreateWikiPolicyViolation() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -103,7 +103,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
   }
 
   @Test(groups = {"CNW", "CreateNewWikiLoggedIn_006"})
-  @Execute(asUser = User.USER_12)
+  @Execute(asUser = User.USER_CNW)
   public void createNewWiki006CreateWikiNoCategory() {
     WikiBasePageObject base = new WikiBasePageObject();
     CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
@@ -113,7 +113,7 @@ public class CreateWikiTestsLoggedInUser extends NewTestTemplate {
     cnw1.typeInWikiDomain(wikiDomain);
     cnw1.verifyNextButtonEnabled();
     CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-    cnw2.selectCategory(0);
+    cnw2.selectCategory(-1);
     cnw2.verifyCategoryError();
   }
 }
