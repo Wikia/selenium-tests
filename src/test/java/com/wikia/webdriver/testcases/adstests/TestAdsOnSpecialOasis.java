@@ -35,7 +35,7 @@ public class TestAdsOnSpecialOasis extends TemplateNoFirstLoad {
     ads.verifyAds(getSpecialPageExpectedLineItems(), getSpecialPageExpectedAdUnits());
   }
 
-  @Test(groups = {"TestAdsOnSpecialPagesOasis", "X"})
+  @Test(groups = {"TestAdsOnSpecialPagesOasis"})
   public void testAdsOnSpecialVideoPageOasis() throws Exception {
     AdsBaseObject ads = buildAdsObjectForPage("Special:Videos");
     testSpecialPage(ads);
