@@ -11,8 +11,8 @@ public class AdsVelesObject extends AdsBaseObject {
   public static final String FIRST_ARTICLE_HEADER_MOBILE = "#Header";
 
   public static final String BIDDER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_fallback_bid.*";
-  public static String DIRECT_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
-  public static String NO_OFFER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
+  public static final String DIRECT_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
+  public static final String NO_OFFER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
 
   public AdsVelesObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
