@@ -33,8 +33,8 @@
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsNoAdsForSony"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecialOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebid"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestAdsPrebidVelesOasis"/>
-            <class name="com.wikia.webdriver.testcases.adstests.TestPrebidVelesMobile"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestAdsVideoVelesOasis"/>
+            <class name="com.wikia.webdriver.testcases.adstests.TestVideoVelesMobile"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMercury"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollOasis"/>
             <class name="com.wikia.webdriver.testcases.adstests.TestAdsPremiumPrerollMOATTracking"/>
