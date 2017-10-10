@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common.category;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,9 @@ import javax.annotation.CheckForNull;
 import java.util.List;
 
 public class CategoryPills extends BasePageObject {
+
+  @Setter
+  private boolean isEmpty;
 
   @FindBy(css = ".pop-over-compass")
   private WebElement categoryPillsPopover;
@@ -29,7 +33,9 @@ public class CategoryPills extends BasePageObject {
   }
 
   public void selectFirstCategory() {
-    findCategoryOn(0).click();
+    if (!isEmpty) {
+      findCategoryOn(0).click();
+    }
   }
 
   private List<WebElement> findCategoryPills() {

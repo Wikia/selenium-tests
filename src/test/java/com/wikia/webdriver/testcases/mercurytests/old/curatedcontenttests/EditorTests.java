@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.mercurytests.old.curatedcontenttests;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.MercuryMessages;
 import com.wikia.webdriver.common.contentpatterns.MercurySubpages;
 import com.wikia.webdriver.common.contentpatterns.MercuryWikis;
@@ -19,6 +16,9 @@ import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedContentPag
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.CuratedMainPagePageObject;
 import com.wikia.webdriver.elements.mercury.old.curatedcontent.EditorHomePageObject;
 import com.wikia.webdriver.elements.mercury.pages.ArticlePage;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 @Test(groups = "Mercury_CuratedEditor")
 @Execute(onWikia = MercuryWikis.MERCURY_EMPTY_CC_EDITOR, asUser = User.CURATED_CONTENT_USER)
@@ -63,6 +63,7 @@ public class EditorTests extends NewTestTemplate {
   }
 
   @Test(groups = "MercuryCuratedEditorTest_002")
+  @InBrowser(browser = Browser.CHROME_MOBILE, browserSize = "414x736")
   public void MercuryCuratedEditorTest_002_addAndSaveSection() {
     Boolean result = new ArticlePage().open(MercurySubpages.ECC_MAIN_PAGE).getCuratedMainPage()
         .isFeaturedContentVisible();

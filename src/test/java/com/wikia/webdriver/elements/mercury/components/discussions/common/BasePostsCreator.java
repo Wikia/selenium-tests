@@ -1,10 +1,12 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 import com.wikia.webdriver.common.core.helpers.ContentLoader;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPills;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.net.URL;
@@ -18,6 +20,7 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   public BasePostsCreator() {
     this.categoryPills = new CategoryPills();
+    categoryPills.setEmpty(false);
   }
 
   protected abstract String getBaseCssClassName();
@@ -73,9 +76,14 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
 
   @Override
   public CategoryPills clickAddCategoryButton() {
-    getAddCategoryButton().click();
-    wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
-
+    try {
+      getAddCategoryButton().click();
+      wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
+      categoryPills.setEmpty(false);
+    } catch (NoSuchElementException e) {
+      PageObjectLogging.logInfo("Category picker not found", e);
+      categoryPills.setEmpty(true);
+    }
     return categoryPills;
   }
 

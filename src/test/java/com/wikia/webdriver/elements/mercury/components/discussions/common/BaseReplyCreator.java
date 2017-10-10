@@ -5,7 +5,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.net.URL;
 
@@ -96,7 +95,8 @@ public abstract class BaseReplyCreator extends BasePageObject implements ReplyCr
 
   public String uploadUnsupportedImage() {
     getUploadButton().sendKeys(ContentLoader.getUnsupportedImage());
-    return getEditor().findElement(getErrorNotification()).getText();
+    wait.forElementVisible(getErrorNotification()).getText();
+    return wait.forElementVisible(getErrorNotification()).getText();
   }
 
   public BaseReplyCreator removeImage() {
