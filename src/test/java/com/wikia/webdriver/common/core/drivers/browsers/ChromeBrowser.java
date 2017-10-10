@@ -81,7 +81,7 @@ public class ChromeBrowser extends BrowserAbstract {
   @Override
   public WikiaWebDriver create() {
     caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-    PageObjectLogging.logInfo("Chromedriver version: ", caps.getVersion());
+
     return new WikiaWebDriver(new ChromeDriver(caps), server, useMobile);
   }
 
