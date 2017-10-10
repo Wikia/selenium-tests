@@ -1,6 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Post;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.SignInToFollowModalDialog;
@@ -49,6 +50,16 @@ public abstract class PageWithPosts extends WikiBasePageObject {
       .findFirst()
       .orElseThrow(
         () -> new RuntimeException(String.format("Post with id [%s] not found on page", postId)));
+  }
+
+  public boolean isPostByIdDisplayed(String postId) {
+    try {
+      getPostById(postId);
+      return true;
+    } catch (RuntimeException e) {
+      PageObjectLogging.logInfo(e.getMessage(), e);
+      return false;
+    }
   }
 
 }

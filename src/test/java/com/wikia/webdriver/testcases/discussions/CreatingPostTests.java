@@ -255,8 +255,7 @@ public class CreatingPostTests extends NewTestTemplate {
     PostEntity.Data post = createWeirdCharactersPostOnWiki(wiki);
     String description = new PostsListPage()
       .open()
-      .getPost()
-      .findPostById(post.getId())
+      .getPostById(post.getId())
       .findDescription();
     try {
       Assertion.assertStringContains(description, FIRST_LINE);
