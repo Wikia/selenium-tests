@@ -78,7 +78,10 @@ public class GraphApi {
     CloseableHttpClient httpClient = HttpClientBuilder.create().disableAutomaticRetries().build();
     HttpPost httpPost = getHttpPost(url);
     httpPost.setEntity(new UrlEncodedFormEntity(getParams(), StandardCharsets.UTF_8));
-    return httpClient.execute(httpPost);
+    PageObjectLogging.logInfo("Creating user, request: ", httpPost.getEntity().toString());
+    HttpResponse response = httpClient.execute(httpPost);
+    PageObjectLogging.logInfo("Creating user, response: ", response.getEntity().toString());
+    return response;
   }
 
   private HttpResponse deleteTestUser(String userId) throws IOException, URISyntaxException {
