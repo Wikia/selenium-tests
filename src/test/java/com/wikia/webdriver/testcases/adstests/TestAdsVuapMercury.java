@@ -8,7 +8,6 @@ import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapVideos;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.Assert;
@@ -59,8 +58,9 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
       dataProvider = "adsVuapResolvedStateMobile"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
-    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
-    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));
+    ads.getUrl(page);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
     ads.scrollToSlot(slot);
 
     VuapAssertions.verifyVideoTimeIsProgressing(vuap);
