@@ -65,7 +65,7 @@ public class AdsVelesObject extends AdsBaseObject {
       public Boolean apply(WebDriver driver) {
         BufferedImage image = shooter.takeScreenshot(element, driver);
         // Big Buck Bunny movie has about 33% black pixels
-        return !imageComparison.isColorImage(image, blackColor, 40);
+        return !imageComparison.isColorImage(image, blackColor, 50);
       }
 
       @Override
