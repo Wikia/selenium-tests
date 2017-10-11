@@ -24,7 +24,7 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayMobile",
-      groups = {"AdsVuapClickToPlayTopAreas"}
+      groups = {"AdsVuapClickToPlayTopAreasMercury"}
   )
   public void vuapCheckTopAreasMercury(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
@@ -53,9 +53,9 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   }
 
   @Test(
-      groups = {"AdsVuapTimeProgressMercury"},
       dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "adsVuapResolvedStateMobile"
+      dataProvider = "adsVuapResolvedStateMobile",
+      groups = {"AdsVuapTimeProgressMercury"}
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));
