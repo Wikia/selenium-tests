@@ -13,16 +13,6 @@ import org.testng.annotations.DataProvider;
 import java.util.Arrays;
 
 public class AdsDataProvider {
-
-  public static final String[] OASIS_SLOTS_TO_SMOKE_TEST = {
-      AdsContent.TOP_LB,
-      AdsContent.MEDREC,
-      AdsContent.LEFT_SKYSCRAPPER_2,
-      AdsContent.LEFT_SKYSCRAPPER_3,
-      AdsContent.PREFOOTER_LEFT,
-      AdsContent.PREFOOTER_RIGHT
-  };
-
   private static final String WIKI_REGULAR = "adtest-pluto";
   private static final String WIKI_SPECIAL = "project43";
 
@@ -554,27 +544,6 @@ public class AdsDataProvider {
   public static Object[][] kruxIntegration() {
     return new Object[][]{
         {"project43", "SyntheticTests/Krux"}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] delayBtf() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Delay_BTF", true}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] disableBtf() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Disable_BTF", true}
-    };
-  }
-
-  @DataProvider
-  public static Object[][] disableBtfExceptHighlyViewableSlots() {
-    return new Object[][]{
-        {"project43", "SyntheticTests/Disable_BTF/Unblock_HIVI", true}
     };
   }
 
