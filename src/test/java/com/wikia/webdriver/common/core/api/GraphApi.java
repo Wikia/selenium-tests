@@ -36,6 +36,7 @@ public class GraphApi {
 
   public FacebookUser createFacebookTestUser() {
     try {
+      PageObjectLogging.logInfo("Creating facebook user");
       HttpResponse response = createTestUser(WIKIA_PRODUCTION_APP_ID);
       String entity = EntityUtils.toString(response.getEntity());
       DocumentContext json = JsonPath.parse(entity);
