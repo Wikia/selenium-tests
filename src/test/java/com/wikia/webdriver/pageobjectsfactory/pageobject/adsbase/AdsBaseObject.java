@@ -827,14 +827,14 @@ public class AdsBaseObject extends WikiBasePageObject {
   public void scrollToSlot(String slotName) {
     if (slotName.equals(AdsContent.BOTTOM_LB)) {
       triggerComments();
-      scrollToPosition(MIX_CONTENT_FOOTER_SELECTOR);
+      jsActions.scrollToElement(By.id(MIX_CONTENT_FOOTER_SELECTOR));
       wait.forElementVisible(mixContentFooterItem);
     } else if (slotName.equals(AdsContent.MOBILE_BOTTOM_LB)) {
       scrollToFooter();
     }
 
-    scrollToPosition("#" + slotName);
-    fixScrollPositionByNavbar();
+    checkSlotOnPageLoaded(slotName);
+    jsActions.scrollToElement(By.id(slotName));
   }
 
   public void fixScrollPositionByNavbar() {
