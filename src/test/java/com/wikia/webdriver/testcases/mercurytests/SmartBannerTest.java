@@ -24,14 +24,14 @@ public class SmartBannerTest extends NewTestTemplate {
     new Navigate().toPageByPath(MercurySubpages.GALLERY);
   }
 
-  @Test(groups = "mercury_smartBanner_isNotVisibleOnScrollDown", enabled = false)
+  @Test(groups = "mercury_smartBanner_isNotVisibleOnScrollDown")
   public void mercury_smartBanner_isNotVisibleOnScrollDown() {
     init();
 
     smartBanner.scrollDown();
   }
 
-  @Test(groups = "mercury_smartBanner_canBeClosed", enabled = false)
+  @Test(groups = "mercury_smartBanner_canBeClosed")
   public void mercury_smartBanner_canBeClosed() {
     init();
 

@@ -23,8 +23,8 @@ public class PromotingTests extends NewTestTemplate {
   private static final String MOBILE_PROMOTION_TEXT = "Wikia: Fallout 4 Fan App";
   private static final String DESKTOP_PROMOTION_TEXT =
     "Take your fandom with you, download the app today!";
-  private static final String IOS_APP_TITLE = "Fandom Community for: Fallout";
-  private static final String ANDROID_APP_TITLE = "FANDOM: Fallout 4";
+  private static final String IOS_APP_TITLE = "FANDOM for: Fallout";
+  private static final String ANDROID_APP_TITLE = "FANDOM for: Fallout 4";
 
   /**
    * ANON ON DESKTOP SECTION
