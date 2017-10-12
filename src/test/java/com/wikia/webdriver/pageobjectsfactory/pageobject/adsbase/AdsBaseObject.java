@@ -580,6 +580,10 @@ public class AdsBaseObject extends WikiBasePageObject {
           .forElementNotPresent(By.cssSelector(slotSelector));
     }
 
+    return verifyNoAdWithoutTrigger(slotSelector);
+  }
+
+  public Boolean verifyNoAdWithoutTrigger(final String slotSelector) {
     if (isElementOnPage(By.cssSelector(slotSelector))) {
       WebElement element = driver.findElement(By.cssSelector(slotSelector));
 
