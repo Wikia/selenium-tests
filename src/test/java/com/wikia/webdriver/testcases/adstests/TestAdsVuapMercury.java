@@ -20,7 +20,6 @@ import java.util.List;
 @Test(groups = "AdsVuapMercury")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsVuapMercury extends TemplateNoFirstLoad {
-  private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
   private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
 
   @Test(
