@@ -14,8 +14,8 @@ import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsCategoryOperations;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.PostsCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoriesFieldset;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.FiltersPopOver;
@@ -482,7 +482,7 @@ public class CategoriesTests extends NewTestTemplate {
         .clickApproveButton();
   }
 
-  private boolean isCategoryIn(PostsCreator postsCreator, String categoryName) {
+  private boolean isCategoryIn(BasePostsCreator postsCreator, String categoryName) {
     return postsCreator.click()
         .closeGuidelinesMessage()
         .clickAddCategoryButton()

@@ -80,7 +80,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
     PostsListPage page = new PostsListPage().open();
-    PostsCreator postsCreator = page.getPostsCreatorMobile();
+    BasePostsCreator postsCreator = page.getPostsCreatorMobile();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
@@ -104,7 +104,7 @@ public class CreatingPostTests extends NewTestTemplate {
   public void userOnMobileCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
-    PostsCreator postsCreator = page.getPostsCreatorMobile();
+    BasePostsCreator postsCreator = page.getPostsCreatorMobile();
     fillPostCategoryWith(postsCreator, description);
 
     Assertion.assertFalse(postsCreator.isPostButtonActive());
@@ -130,7 +130,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
-    PostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
@@ -154,7 +154,7 @@ public class CreatingPostTests extends NewTestTemplate {
   public void userOnDesktopCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
-    PostsCreator postsCreator = page.getPostsCreatorDesktop();
+    BasePostsCreator postsCreator = page.getPostsCreatorDesktop();
     fillPostCategoryWith(postsCreator, description);
 
     Assertion.assertFalse(postsCreator.isPostButtonActive());
@@ -195,7 +195,7 @@ public class CreatingPostTests extends NewTestTemplate {
    * <p>
    * * x - means category was selected or text was added
    */
-  private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(PostsCreator postsCreator) {
+  private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(BasePostsCreator postsCreator) {
     postsCreator.click()
         .closeGuidelinesMessage();
     Assertion.assertFalse(postsCreator.isPostButtonActive());
@@ -224,7 +224,7 @@ public class CreatingPostTests extends NewTestTemplate {
         "User should not be able to add post with category selected and title filled.");
   }
 
-  private CategoryPill fillPostCategoryWith(final PostsCreator postsCreator, final String description) {
+  private CategoryPill fillPostCategoryWith(final BasePostsCreator postsCreator, final String description) {
     CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()
         .addDescriptionWith(description)
