@@ -77,6 +77,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
   }
 
   public void verifyLightboxAd() {
+    wait.forElementVisible(lightboxVideo);
     verifyColorAd(lightboxVideo, BLUE, AD_DURATION_SEC);
     logMessage(BLUE, AD_DURATION_SEC);
   }
