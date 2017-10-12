@@ -170,7 +170,9 @@ public class AutoplayVuap {
   }
 
   public boolean isVisible() {
-    return usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed());
+    return isDesktop() ?
+           usingImaBridge(webDriver -> webDriver.findElement(By.tagName("video")).isDisplayed()) :
+           driver.findElement(getVideoSelector()).isDisplayed();
   }
 
   public boolean isMuted() {
