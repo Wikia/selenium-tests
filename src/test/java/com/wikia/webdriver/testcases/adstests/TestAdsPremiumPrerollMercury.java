@@ -9,7 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsOoyalaObject
 
 import org.testng.annotations.Test;
 
-@InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
+@InBrowser(browser = Browser.CHROME_MOBILE, browserSize = "414x736")
 public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
 
   @Test(
@@ -34,5 +34,4 @@ public class TestAdsPremiumPrerollMercury extends TemplateNoFirstLoad {
     AdsOoyalaObject wikiPage = new AdsOoyalaObject(driver, testedPage);
     wikiPage.verifyMobileArticleVideo();
   }
-
 }
