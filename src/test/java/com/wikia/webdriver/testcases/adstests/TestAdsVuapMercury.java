@@ -4,9 +4,10 @@ import com.wikia.webdriver.common.core.annotations.InBrowser;
 import com.wikia.webdriver.common.core.drivers.Browser;
 import com.wikia.webdriver.common.core.helpers.Emulator;
 import com.wikia.webdriver.common.core.url.Page;
-import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.Assert;
@@ -21,9 +22,9 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
   private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
 
   @Test(
-      dataProviderClass = AdsDataProvider.class,
+      dataProviderClass = MobileAdsDataProvider.class,
       dataProvider = "adsVuapClickToPlayMobile",
-      groups = {"AdsVuapClickToPlayTopAreas"}
+      groups = {"AdsVuapClickToPlayTopAreasMercury"}
   )
   public void vuapCheckTopAreasMercury(Page page, String slot) {
     AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
@@ -49,5 +50,19 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
         AD_REDIRECT_URL,
         "Top part of creative should point to FANDOM page but it points to " + actual
     );
+  }
+
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "adsVuapResolvedStateMobile",
+      groups = {"AdsVuapTimeProgressMercury"}
+  )
+  public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
+    AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));
+    ads.getUrl(page);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), true);
+    ads.scrollToSlot(slot);
+
+    VuapAssertions.verifyVideoTimeIsProgressing(vuap);
   }
 }
