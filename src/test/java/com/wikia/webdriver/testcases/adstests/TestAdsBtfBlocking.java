@@ -101,16 +101,12 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       browser = Browser.CHROME
   )
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "delayBtf",
       groups = "AdsBtfBlockingMercury"
   )
-  public void adsAtfDelayBtfMercury(String wikiName, String article,
-                                    boolean isWgVarOn)
-      throws InterruptedException {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+  public void adsAtfDelayBtfMercury() {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Delay_BTF");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
@@ -125,25 +121,23 @@ public class TestAdsBtfBlocking extends TemplateNoFirstLoad {
       browser = Browser.CHROME
   )
   @Test(
-      dataProviderClass = AdsDataProvider.class,
-      dataProvider = "disableBtf",
       groups = "AdsBtfBlockingMercury"
   )
-  public void adsAtfDisableBtfMercury(String wikiName, String article, boolean isWgVarOn) {
-    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(isWgVarOn), true);
+  public void adsAtfDisableBtfMercury() {
+    PageObjectLogging.log("$wgAdDriverDelayBelowTheFold", String.valueOf(true), true);
 
-    String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+    String testedPage = urlBuilder.getUrlForPath("project43", "SyntheticTests/Disable_BTF");
     AdsBaseObject adsBaseObject = new AdsBaseObject(driver, testedPage, MOBILE_SIZE);
     adsBaseObject.waitForPageLoadedWithGpt();
 
-    Assertion.assertTrue(adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
-                         AdsContent.MOBILE_TOP_LB);
-
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT), isWgVarOn,
+    Assertion.assertTrue(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_TOP_LB),
+        AdsContent.MOBILE_TOP_LB);
+    Assertion.assertTrue(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_AD_IN_CONTENT),
         AdsContent.MOBILE_AD_IN_CONTENT);
-    Assertion.assertNotEquals(
-        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER), isWgVarOn,
+    Assertion.assertTrue(
+        adsBaseObject.checkSlotOnPageLoaded(AdsContent.MOBILE_PREFOOTER),
         AdsContent.MOBILE_PREFOOTER);
   }
 }
