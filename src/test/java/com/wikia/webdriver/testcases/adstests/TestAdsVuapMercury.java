@@ -19,6 +19,7 @@ import java.util.List;
 @Test(groups = "AdsVuapMercury")
 @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
 public class TestAdsVuapMercury extends TemplateNoFirstLoad {
+  private static final long MAX_AUTOPLAY_MOVIE_DURATION = 40L;
   private static final String AD_REDIRECT_URL = "http://fandom.wikia.com/";
 
   @Test(
@@ -54,8 +55,23 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "adsVuapResolvedStateMobile",
-      groups = {"AdsVuapTimeProgressMercury"}
+      dataProvider = "adsVuapMobile",
+      groups = "AdsVuapDefaultStateMercury"
+  )
+  public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+
+    ads.scrollToSlot(slot);
+    vuap.waitForVideoStart();
+
+    VuapAssertions.verifyVideoPlay(vuap);
+  }
+
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "adsVuapMobile",
+      groups = "AdsVuapTimeProgressMercury"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));

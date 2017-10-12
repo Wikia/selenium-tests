@@ -181,8 +181,16 @@ public class AutoplayVuap {
     return !isMuted();
   }
 
-  public String findTitle() {
+  private String getTitleDesktop() {
     return usingVideoContext(video -> video.getAttribute("title"));
+  }
+
+  private String getTitleMobile() {
+    return driver.findElement(getVideoSelector()).getAttribute("title");
+  }
+
+  public String findTitle() {
+    return isDesktop() ? getTitleDesktop() : getTitleMobile();
   }
 
   public void waitForVideoToStart(final long timeout) {
