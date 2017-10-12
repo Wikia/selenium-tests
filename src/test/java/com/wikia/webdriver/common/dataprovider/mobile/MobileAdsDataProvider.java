@@ -10,6 +10,8 @@ import org.testng.annotations.DataProvider;
 import java.util.Arrays;
 
 public class MobileAdsDataProvider {
+  private static final String WIKI_SPECIAL = "project43";
+  private static final String PORVATA_OVERRIDE_VAST_QUERY_STRING = "?porvata_override_vast=1";
 
   private MobileAdsDataProvider() {
   }
@@ -525,6 +527,34 @@ public class MobileAdsDataProvider {
                 .put("lineItemId", 257597172)
                 .put("src", "mobile")
                 .build()
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVuapClickToPlayMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ClickToPlay" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
+        }
+    };
+  }
+
+  @DataProvider
+  public static Object[][] adsVuapMobile() {
+    return new Object[][]{
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_TOP_LB
+        },
+        {
+            new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
+            AdsContent.MOBILE_BOTTOM_LB
         }
     };
   }
