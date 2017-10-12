@@ -10,7 +10,7 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
@@ -239,16 +239,16 @@ public class UploadingImageTests extends NewTestTemplate {
    * helper methods
    */
 
-  private BasePostsCreator startPostCreationDesktop(PostsListPage page) {
+  private ContributionEditor startPostCreationDesktop(PostsListPage page) {
     return page.getPostsCreatorDesktop().startPostCreation();
   }
 
-  private BasePostsCreator startPostCreationMobileWithLink(PostsListPage page)
+  private ContributionEditor startPostCreationMobileWithLink(PostsListPage page)
     throws MalformedURLException {
     return page.getPostsCreatorMobile().startPostCreationWithLink(new URL(URL));
   }
 
-  private BasePostsCreator startPostCreationDesktopWithLink(PostsListPage page)
+  private ContributionEditor startPostCreationDesktopWithLink(PostsListPage page)
     throws MalformedURLException {
     return page.getPostsCreatorDesktop().startPostCreationWithLink(new URL(URL));
   }
@@ -263,7 +263,7 @@ public class UploadingImageTests extends NewTestTemplate {
     return page.getReplyCreatorMobile().startReplyCreationWithLink(new URL(URL));
   }
 
-  private BasePostsCreator startPostCreationMobile(PostsListPage page) {
+  private ContributionEditor startPostCreationMobile(PostsListPage page) {
     return page.getPostsCreatorMobile().startPostCreation();
   }
 
@@ -282,7 +282,7 @@ public class UploadingImageTests extends NewTestTemplate {
     return startReplyCreation(page.getReplyCreatorMobile());
   }
 
-  private void addPostWithUnsupportedImage(BasePostsCreator postCreator) {
+  private void addPostWithUnsupportedImage(ContributionEditor postCreator) {
     String errorMsg = postCreator.uploadUnsupportedImage();
     Assertion.assertStringContains(errorMsg, UNSUPPORTED_IMAGE_MSG);
     postCreator.clickSubmitButton();

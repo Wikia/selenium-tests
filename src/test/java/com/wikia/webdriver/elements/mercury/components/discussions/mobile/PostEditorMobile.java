@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.mobile;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ContributionEditor;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class PostsCreatorMobile extends BasePostsCreator {
+public class PostEditorMobile extends ContributionEditor {
 
   @Getter
   @FindBy(className = "new-post")
@@ -70,12 +70,12 @@ public class PostsCreatorMobile extends BasePostsCreator {
     return "discussion-standalone-editor";
   }
 
-  public PostsCreatorMobile clickOkButtonInSignInDialog() {
+  public PostEditorMobile clickOkButtonInSignInDialog() {
     waitAndClick(okButtonInSignInDialog);
     return this;
   }
 
-  public PostsCreatorMobile clickSignInButtonInSignInDialog() {
+  public PostEditorMobile clickSignInButtonInSignInDialog() {
     waitAndClick(signInButtonInSignInDialog);
     return this;
   }

@@ -11,14 +11,14 @@ import org.openqa.selenium.WebElement;
 
 import java.net.URL;
 
-public abstract class BasePostsCreator extends BasePageObject implements PostsCreator {
+public abstract class ContributionEditor extends BasePageObject implements Editor {
 
   private final CategoryPills categoryPills;
 
   @Getter
   private By errorNotification = By.className("error");
 
-  public BasePostsCreator() {
+  public ContributionEditor() {
     this.categoryPills = new CategoryPills();
     categoryPills.setEmpty(false);
   }
@@ -38,25 +38,27 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
   protected abstract By getOpenGraphContainer();
   protected abstract By getOpenGraphText();
 
-  @Override
-  public PostsCreator click() {
+  public ContributionEditor click() {
     wait.forElementClickable(getPostsCreator());
     getPostsCreator().click();
     return this;
   }
 
+  // TODO: implement me
   @Override
+  public ContributionEditor clickCancelButton() {
+    return this;
+  }
+
   public boolean isSignInDialogVisible() {
     return getSignInDialog().isDisplayed();
   }
 
-
   @Override
-  public boolean isPostButtonActive() {
+  public boolean isSubmitButtonActive() {
     return getSubmitButton().isEnabled();
   }
 
-  @Override
   public boolean hasOpenGraph() {
     boolean result = false;
     final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
@@ -66,15 +68,13 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return result;
   }
 
-  @Override
-  public PostsCreator closeGuidelinesMessage() {
+  public ContributionEditor closeGuidelinesMessage() {
     if (getGuidelinesMessageCloseButton().isDisplayed()) {
       getGuidelinesMessageCloseButton().click();
     }
     return this;
   }
 
-  @Override
   public CategoryPills clickAddCategoryButton() {
     try {
       getAddCategoryButton().click();
@@ -87,43 +87,40 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return categoryPills;
   }
 
-  @Override
-  public PostsCreator addTitleWith(final String text) {
+  public ContributionEditor addTitleWith(final String text) {
     getTitleTextarea().sendKeys(text);
     return this;
   }
 
-  @Override
-  public PostsCreator clearTitle() {
+  public ContributionEditor clearTitle() {
     getTitleTextarea().clear();
     return this;
   }
 
   @Override
-  public PostsCreator addDescriptionWith(final String text) {
+  public ContributionEditor addTextWith(final String text) {
     getDescriptionTextarea().sendKeys(text);
     return this;
   }
 
-  @Override
-  public PostsCreator addDescriptionWithLink(final URL url) {
+  public ContributionEditor addDescriptionWithLink(final URL url) {
     getDescriptionTextarea().sendKeys(String.format(" %s ", url.toString()));
     return this;
   }
 
   @Override
-  public PostsCreator clearDescription() {
+  public ContributionEditor clearText() {
     getDescriptionTextarea().clear();
     return this;
   }
 
   @Override
-  public PostsCreator clickSubmitButton() {
+  public ContributionEditor clickSubmitButton() {
     getSubmitButton().click();
     return this;
   }
 
-  public BasePostsCreator uploadImage() {
+  public ContributionEditor uploadImage() {
     getUploadButton().sendKeys(ContentLoader.getImage());
     wait.forElementVisible(getImagePreview());
     return this;
@@ -134,27 +131,27 @@ public abstract class BasePostsCreator extends BasePageObject implements PostsCr
     return getEditor().findElement(getErrorNotification()).getText();
   }
 
-  public BasePostsCreator removeImage() {
+  public ContributionEditor removeImage() {
     waitAndClick(getImageDeleteButton());
     wait.forElementNotVisible(getImagePreview());
     return this;
   }
 
-  public BasePostsCreator startPostCreation() {
+  public ContributionEditor startPostCreation() {
     return startPostCreationWith(TextGenerator.defaultText());
   }
 
-  public BasePostsCreator startPostCreationWith(String description) {
+  public ContributionEditor startPostCreationWith(String description) {
     click()
       .closeGuidelinesMessage()
       .addTitleWith(TextGenerator.defaultText())
-      .addDescriptionWith(description)
+      .addTextWith(description)
       .clickAddCategoryButton()
       .selectFirstCategory();
     return this;
   }
 
-  public BasePostsCreator startPostCreationWithLink(URL link) {
+  public ContributionEditor startPostCreationWithLink(URL link) {
     return startPostCreationWith(String.format(" %s ", link.toString()));
   }
 

@@ -11,12 +11,12 @@ import com.wikia.webdriver.common.core.helpers.User;
 import com.wikia.webdriver.common.remote.Utils;
 import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ContributionEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.BaseReplyCreator;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.PostEntity;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostEditorDesktop;
 import com.wikia.webdriver.elements.mercury.components.discussions.desktop.ReplyCreatorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostEditorMobile;
 import com.wikia.webdriver.elements.mercury.components.discussions.mobile.ReplyCreatorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
@@ -48,7 +48,7 @@ public class OpenGraphTests extends NewTestTemplate {
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void validLinkGeneratesOpenGraphItemInNewPostOnDesktop() throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
-    PostsCreatorDesktop postsCreator = page.getPostsCreatorDesktop();
+    PostEditorDesktop postsCreator = page.getPostsCreatorDesktop();
     verifyOpenGraphInNewPost(page, postsCreator);
   }
 
@@ -64,7 +64,7 @@ public class OpenGraphTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void validLinkGeneratesOpenGraphItemInNewPostOnMobile() throws MalformedURLException {
     PostsListPage page = new PostsListPage().open();
-    PostsCreatorMobile postsCreator = page.getPostsCreatorMobile();
+    PostEditorMobile postsCreator = page.getPostsCreatorMobile();
     verifyOpenGraphInNewPost(page, postsCreator);
   }
 
@@ -80,7 +80,7 @@ public class OpenGraphTests extends NewTestTemplate {
    * helper methods
    */
 
-  private void verifyOpenGraphInNewPost(PostsListPage page, BasePostsCreator postsCreator)
+  private void verifyOpenGraphInNewPost(PostsListPage page, ContributionEditor postsCreator)
     throws MalformedURLException {
     postsCreator.startPostCreationWithLink(new URL(URL));
 

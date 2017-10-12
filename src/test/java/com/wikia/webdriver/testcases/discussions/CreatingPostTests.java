@@ -14,8 +14,8 @@ import com.wikia.webdriver.common.remote.discussions.DiscussionsClient;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.*;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.category.CategoryPill;
-import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostsCreatorDesktop;
-import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostsCreatorMobile;
+import com.wikia.webdriver.elements.mercury.components.discussions.desktop.PostEditorDesktop;
+import com.wikia.webdriver.elements.mercury.components.discussions.mobile.PostEditorMobile;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostDetailsPage;
 import com.wikia.webdriver.elements.mercury.pages.discussions.PostsListPage;
 import org.testng.annotations.Test;
@@ -65,7 +65,7 @@ public class CreatingPostTests extends NewTestTemplate {
   public void anonUserOnDesktopWhenScrollsDownThenSeesStickyEditor() {
     PostsListPage postsListPage = new PostsListPage().open();
     postsListPage.getPost().scrollToLoadMoreButton();
-    PostsCreatorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
+    PostEditorDesktop postsCreator = postsListPage.getPostsCreatorDesktop();
 
     Assertion.assertFalse(postsCreator.isExpanded());
     Assertion.assertTrue(postsCreator.isSticky());
@@ -80,7 +80,7 @@ public class CreatingPostTests extends NewTestTemplate {
   @InBrowser(browser = Browser.CHROME, emulator = Emulator.GOOGLE_NEXUS_5)
   public void userOnMobileCannotSavePostWithoutCategoryAndDescription() {
     PostsListPage page = new PostsListPage().open();
-    BasePostsCreator postsCreator = page.getPostsCreatorMobile();
+    ContributionEditor postsCreator = page.getPostsCreatorMobile();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
@@ -104,10 +104,10 @@ public class CreatingPostTests extends NewTestTemplate {
   public void userOnMobileCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
-    BasePostsCreator postsCreator = page.getPostsCreatorMobile();
+    ContributionEditor postsCreator = page.getPostsCreatorMobile();
     fillPostCategoryWith(postsCreator, description);
 
-    Assertion.assertFalse(postsCreator.isPostButtonActive());
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive());
   }
 
   /*
@@ -118,19 +118,19 @@ public class CreatingPostTests extends NewTestTemplate {
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCanExpandPostEditor() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    PostEditorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
 
     postsCreator.click();
 
     Assertion.assertTrue(postsCreator.isExpanded());
-    Assertion.assertFalse(postsCreator.isPostButtonActive());
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive());
   }
 
   @Test(groups = DESKTOP)
   @Execute(asUser = User.USER)
   @InBrowser(emulator = Emulator.DESKTOP_BREAKPOINT_BIG)
   public void userOnDesktopCannotSavePostWithoutCategoryAndDescription() {
-    BasePostsCreator postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    ContributionEditor postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(postsCreator);
   }
 
@@ -154,10 +154,10 @@ public class CreatingPostTests extends NewTestTemplate {
   public void userOnDesktopCannotAddPostWithoutTitle() throws MalformedURLException {
     String description = TextGenerator.createUniqueText();
     PostsListPage page = new PostsListPage().open();
-    BasePostsCreator postsCreator = page.getPostsCreatorDesktop();
+    ContributionEditor postsCreator = page.getPostsCreatorDesktop();
     fillPostCategoryWith(postsCreator, description);
 
-    Assertion.assertFalse(postsCreator.isPostButtonActive());
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive());
   }
 
 
@@ -166,7 +166,7 @@ public class CreatingPostTests extends NewTestTemplate {
    */
 
   private void userOnMobileMustBeLoggedInToUsePostCreator() {
-    PostsCreatorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
+    PostEditorMobile postsCreator = new PostsListPage().open().getPostsCreatorMobile();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
@@ -175,7 +175,7 @@ public class CreatingPostTests extends NewTestTemplate {
   }
 
   private void userOnDesktopMustBeLoggedInToUsePostCreator() {
-    PostsCreatorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
+    PostEditorDesktop postsCreator = new PostsListPage().open().getPostsCreatorDesktop();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
     postsCreator.clickOkButtonInSignInDialog();
     Assertion.assertTrue(postsCreator.click().isSignInDialogVisible());
@@ -195,36 +195,36 @@ public class CreatingPostTests extends NewTestTemplate {
    * <p>
    * * x - means category was selected or text was added
    */
-  private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(BasePostsCreator postsCreator) {
+  private void assertThatPostWithoutSelectedCategoryAndDescriptionCannotBeAdded(ContributionEditor postsCreator) {
     postsCreator.click()
         .closeGuidelinesMessage();
-    Assertion.assertFalse(postsCreator.isPostButtonActive());
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive());
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
         "User should not be able to add post with only title filled.");
 
-    postsCreator.addDescriptionWith(TextGenerator.defaultText());
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+    postsCreator.addTextWith(TextGenerator.defaultText());
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
         "User should not be able to add post with title and description filled.");
 
     postsCreator.clearTitle();
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
         "User should not be able to add post with only description filled.");
-    postsCreator.clearDescription();
+    postsCreator.clearText();
 
     postsCreator.clickAddCategoryButton()
         .findCategoryOn(0)
         .click();
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
         "User should not be able to add post with only category selected.");
 
     postsCreator.addTitleWith(TextGenerator.defaultText());
-    Assertion.assertFalse(postsCreator.isPostButtonActive(),
+    Assertion.assertFalse(postsCreator.isSubmitButtonActive(),
         "User should not be able to add post with category selected and title filled.");
   }
 
-  private CategoryPill fillPostCategoryWith(final BasePostsCreator postsCreator, final String description) {
+  private CategoryPill fillPostCategoryWith(final ContributionEditor postsCreator, final String description) {
     CategoryPill categoryPill = postsCreator.click()
         .closeGuidelinesMessage()
         .addDescriptionWith(description)

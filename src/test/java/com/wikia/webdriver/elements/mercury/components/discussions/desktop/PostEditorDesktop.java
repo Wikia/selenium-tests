@@ -1,13 +1,13 @@
 package com.wikia.webdriver.elements.mercury.components.discussions.desktop;
 
-import com.wikia.webdriver.elements.mercury.components.discussions.common.BasePostsCreator;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.ContributionEditor;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
-public class PostsCreatorDesktop extends BasePostsCreator {
+public class PostEditorDesktop extends ContributionEditor {
 
   @Getter
   @FindBy(css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
@@ -78,12 +78,12 @@ public class PostsCreatorDesktop extends BasePostsCreator {
     return editor.getAttribute("class").contains("is-sticky");
   }
 
-  public PostsCreatorDesktop clickOkButtonInSignInDialog() {
+  public PostEditorDesktop clickOkButtonInSignInDialog() {
     okButtonInSignInDialog.click();
     return this;
   }
 
-  public PostsCreatorDesktop clickSignInButtonInSignInDialog() {
+  public PostEditorDesktop clickSignInButtonInSignInDialog() {
     signInButtonInSignInDialog.click();
     return this;
   }
