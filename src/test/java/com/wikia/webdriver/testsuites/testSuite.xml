@@ -148,6 +148,11 @@
             <class name="com.wikia.webdriver.testcases.mediatests.videohomepage.VideoHomePageTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.videohomepage.VideoPageAdminTests"/>
             <class name="com.wikia.webdriver.testcases.mediatests.videosmodule.VideosModuleTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.PortableInfoboxTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMercuryTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SearchMercuryTests"/>
+            <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
+            <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.ArticlePageTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.CommentsTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.CropImageTests"/>
@@ -156,7 +161,6 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.MainPageTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.curatedcontenttests.NavigationTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.LightboxTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.PortableInfoboxTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.TOCTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.AllTagsTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.widgettests.ApesterTests"/>
@@ -176,14 +180,10 @@
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HeaderTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.HTMLTitleTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.ImageReviewTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.NavigationMercuryTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.NavigationMobileWikiTests"/>
-            <class name="com.wikia.webdriver.testcases.mercurytests.SearchMercuryTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.SearchMobileWikiTests"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.SmartBannerTest"/>
             <class name="com.wikia.webdriver.testcases.mobilewikitests.TopBarTests"/>
-            <class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
-            <class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
             <class name="com.wikia.webdriver.testcases.multiwikifindertests.MultiWikiFinderTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.ForumNotificationsTests"/>
             <class name="com.wikia.webdriver.testcases.notificationstests.messagewallnotifications.MessageWallNotificationsFollowersMessageTests"/>

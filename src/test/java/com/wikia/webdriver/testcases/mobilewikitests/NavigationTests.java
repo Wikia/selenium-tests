@@ -8,7 +8,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public abstract class NavigationTests extends NewTestTemplate {
 
-  void mercury_navigation_openAndCloseNavigationAndItsSubMenu(WikiBasePageObject page) {
+  public void mercury_navigation_openAndCloseNavigationAndItsSubMenu(WikiBasePageObject page) {
     TopBar topBar = page.getTopBar();
 
     topBar
@@ -21,7 +21,7 @@ public abstract class NavigationTests extends NewTestTemplate {
     Assertion.assertTrue(topBar.isHamburgerIconVisible());
   }
 
-  void mercury_navigation_resetNavigationState(WikiBasePageObject page) {
+  public void mercury_navigation_resetNavigationState(WikiBasePageObject page) {
     TopBar topBar = page.getTopBar();
 
     Navigation navigation = topBar.openNavigation();
@@ -36,7 +36,7 @@ public abstract class NavigationTests extends NewTestTemplate {
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  void mercury_navigation_backButton(WikiBasePageObject page) {
+  public void mercury_navigation_backButton(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
     Assertion.assertTrue(navigation.isMainHeaderVisible());
@@ -48,19 +48,19 @@ public abstract class NavigationTests extends NewTestTemplate {
     Assertion.assertTrue(navigation.isMainHeaderVisible());
   }
 
-  void mercury_navigation_navigationOnEnglishWiki(WikiBasePageObject page) {
+  public void mercury_navigation_navigationOnEnglishWiki(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
     Assertion.assertTrue(navigation.areHubLinksVisible());
   }
 
-  void mercury_navigation_navigationOnNonEnglishWiki(WikiBasePageObject page) {
+  public void mercury_navigation_navigationOnNonEnglishWiki(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
     Assertion.assertFalse(navigation.areHubLinksVisible());
   }
 
-  void mercury_navigation_navigationElementsUserLoggedIn(WikiBasePageObject page) {
+  public void mercury_navigation_navigationElementsUserLoggedIn(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
     Assertion.assertTrue(navigation.isUserAvatarVisible());
@@ -68,7 +68,7 @@ public abstract class NavigationTests extends NewTestTemplate {
     Assertion.assertTrue(navigation.isNavigationToUserProfileVisible());
   }
 
-  void mercury_navigation_navigationElementsAnonymousUser(WikiBasePageObject page) {
+  public void mercury_navigation_navigationElementsAnonymousUser(WikiBasePageObject page) {
     Navigation navigation = page.getTopBar().openNavigation();
 
     Assertion.assertTrue(navigation.isUserAvatarVisible());
