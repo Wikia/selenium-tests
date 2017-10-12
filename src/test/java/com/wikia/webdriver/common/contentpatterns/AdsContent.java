@@ -9,6 +9,7 @@ public class AdsContent {
   private static final Map<String, String> PAL_SLOTS_SELECTORS;
   private static final Map<String, String> SPECIAL_PAGE_SLOTS_SELECTORS;
   private static final Map<String, String> FILE_PAGE_SLOTS_SELECTORS;
+  private static final Map<String, String> MOBILE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
 
   //SCRIPTS
@@ -47,7 +48,11 @@ public class AdsContent {
 
   }
 
-  public static Map<String, String> getSlotsSelectorsMap() {
+  public static Map<String, String> getSlotsSelectorsMap(String env) {
+    if(env.equals("mobile")) {
+      return MOBILE_SLOTS_SELECTORS;
+    }
+
     return PAL_SLOTS_SELECTORS;
   }
 
@@ -108,6 +113,12 @@ public class AdsContent {
     PAL_SLOTS_SELECTORS.put(INCONTENT_PLAYER, "#INCONTENT_PLAYER");
     PAL_SLOTS_SELECTORS.put(INVISIBLE_HIGH_IMPACT_2, "#INVISIBLE_HIGH_IMPACT_2");
     PAL_SLOTS_SELECTORS.put(TOP_BUTTON_WIDE, "#TOP_BUTTON_WIDE");
+
+    MOBILE_SLOTS_SELECTORS = new HashMap<>();
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_TOP_LB, "#MOBILE_TOP_LEADERBOARD");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#MOBILE_IN_CONTENT");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
+    MOBILE_SLOTS_SELECTORS.put(MOBILE_BOTTOM_LB, "#MOBILE_BOTTOM_LEADERBOARD");
 
     SLOTS_TRIGGERS = new HashMap<>();
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10000); })();");

@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
   private String pageType = "article";
+  private String environment = "desktop";
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;
@@ -110,6 +111,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public void setPageType(String type) {
     pageType = type;
+  }
+
+  public void setEnvironment(String env) {
+    environment = env;
   }
 
   public void timerStart() {
@@ -700,7 +705,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         return AdsContent.getFilePageSlotsSelectors();
       case "article":
       default:
-        return AdsContent.getSlotsSelectorsMap();
+        return AdsContent.getSlotsSelectorsMap(environment);
     }
   }
 

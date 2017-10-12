@@ -38,7 +38,8 @@ public class TestAdsNoAdsForSony extends TemplateNoFirstLoad {
     String testedPage = urlBuilder.getUrlForPath(wikiName, path);
     SonySideViewObject sonyPage = new SonySideViewObject(driver);
     AdsBaseObject wikiPage = sonyPage.goToDestinationPage(testedPage);
+    wikiPage.setEnvironment("mobile");
 
-    wikiPage.verifyNoAdsOnMobilePage();
+    wikiPage.verifyNoAdsOnPage();
   }
 }
