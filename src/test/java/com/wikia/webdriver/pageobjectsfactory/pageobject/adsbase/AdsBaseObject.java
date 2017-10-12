@@ -448,13 +448,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
     try {
       String slotSelector = AdsContent.getSlotSelector(slotName);
-      String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
-
-      if (StringUtils.isNotEmpty(javaScriptTrigger)) {
-        triggerAdSlot(slotName)
-            .wait
-            .forElementPresent(By.cssSelector(slotSelector));
-      }
+      triggerAdSlot(slotName);
 
       try {
         slot = driver.findElement(By.cssSelector(slotSelector));
@@ -572,14 +566,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public Boolean verifyNoAd(final String slotName) {
     final String slotSelector = AdsContent.getSlotSelector(slotName);
-    final String javaScriptTrigger = AdsContent.getSlotTrigger(slotName);
-
-    if (StringUtils.isNotEmpty(javaScriptTrigger)) {
-      triggerAdSlot(slotName)
-          .wait
-          .forElementNotPresent(By.cssSelector(slotSelector));
-    }
-
+    triggerAdSlot(slotName);
     return verifyNoAdWithoutTrigger(slotSelector);
   }
 
