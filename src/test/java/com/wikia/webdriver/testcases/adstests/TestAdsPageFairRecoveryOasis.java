@@ -35,9 +35,6 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     // when PF recovered ad is on page, inserts span elements as a direct children of body
     adsRecoveryObject.wait.forElementPresent(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
 
-    // verify that adblock is turned on on that page
-    adsRecoveryObject.verifyNoAdsOnPage();
-
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
         .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
