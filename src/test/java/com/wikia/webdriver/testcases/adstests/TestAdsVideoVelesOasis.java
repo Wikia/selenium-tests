@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.contentpatterns.AdsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
@@ -20,7 +21,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
 
-    velesAds.verifyVelesPlayerInIncontentSlot();
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed());
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN);
   }
 
@@ -31,7 +32,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     String url = TEST_PAGE_BIDDER.getUrl();
     AdsVelesObject velesAds = new AdsVelesObject(driver, urlBuilder.appendQueryStringToURL(url, APPNEXUS_DEEBUG_MODE));
 
-    velesAds.verifyVelesPlayerInIncontentSlot();
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed());
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
   }
 
@@ -58,5 +59,13 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
 
     velesAds.triggerIncontentPlayer();
     Assertion.assertTrue(velesAds.isVideoVisible());
+  }
+
+  @Test(groups = {"AdsVideoVelesOasis", "adsVelesWithoutOfferCollapsedOasis"})
+  public void adsVelesWithoutOfferCollapsed() {
+    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
+    
+    Assertion.assertFalse(velesAds.isVelesPlayerInIncontentSlotDisplayed());
+    velesAds.slotParamHasValue(AdsContent.INCONTENT_PLAYER, "outstream", "none");
   }
 }
