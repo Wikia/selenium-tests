@@ -8,6 +8,7 @@ import com.wikia.webdriver.common.dataprovider.mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.AutoplayVuap;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapAssertions;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.ad.VuapVideos;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
 
 import org.testng.Assert;
@@ -54,8 +55,49 @@ public class TestAdsVuapMercury extends TemplateNoFirstLoad {
 
   @Test(
       dataProviderClass = MobileAdsDataProvider.class,
-      dataProvider = "adsVuapResolvedStateMobile",
-      groups = {"AdsVuapTimeProgressMercury"}
+      dataProvider = "adsVuapMobile",
+      groups = "AdsVuapDefaultStateMercury"
+  )
+  public void vuapDefaultStateShouldStartPlayingAdvertisementAutomatically(Page page, String slot) {
+    AdsBaseObject ads = new AdsBaseObject(driver, page.getUrl());
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+
+    ads.scrollToSlot(slot);
+    vuap.waitForVideoStart();
+
+    VuapAssertions.verifyVideoPlay(vuap);
+  }
+
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "adsVuapMobile",
+      groups = {"AdsVuapDefaultStateMercury"}
+  )
+  public void vuapDefaultStateReplayIsNotMuted(Page page, String slot) throws InterruptedException {
+    AdsBaseObject ads = openPageWithVideoInLocalStorage(page, VuapVideos.VIDEO_10s);
+    final AutoplayVuap vuap = new AutoplayVuap(driver, slot, ads.findFirstIframeWithAd(slot), false);
+    ads.scrollToSlot(slot);
+
+    // 2017-10-12 scrollTo takes so much time that the video for sure has started and ended
+    /*
+    vuap.waitForVideoStart();
+    vuap.togglePause();
+    Assert.assertTrue(vuap.isMuted());
+    vuap.play();
+    VuapAssertions.verifyReplyButtonDisplayedAfterVideoEnds(vuap, MAX_AUTOPLAY_MOVIE_DURATION);
+    */
+
+    vuap.clickOnArea(3);
+    vuap.mute();
+    vuap.togglePause();
+
+    VuapAssertions.verifyVideoUnmuteAndMute(vuap);
+  }
+
+  @Test(
+      dataProviderClass = MobileAdsDataProvider.class,
+      dataProvider = "adsVuapMobile",
+      groups = "AdsVuapTimeProgressMercury"
   )
   public void vuapDefaultStateShouldProgressInTime(Page page, String slot) throws InterruptedException {
     AdsBaseObject ads = new AdsBaseObject(driver, urlBuilder.getUrlForWiki("project43"));

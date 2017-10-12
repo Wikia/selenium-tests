@@ -546,7 +546,7 @@ public class MobileAdsDataProvider {
   }
 
   @DataProvider
-  public static Object[][] adsVuapResolvedStateMobile() {
+  public static Object[][] adsVuapMobile() {
     return new Object[][]{
         {
             new Page(WIKI_SPECIAL, "SyntheticTests/VUAP/ResolvedState" + PORVATA_OVERRIDE_VAST_QUERY_STRING),
