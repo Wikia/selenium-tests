@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.adstests;
 
+import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.url.Page;
 import com.wikia.webdriver.common.templates.TemplateNoFirstLoad;
@@ -42,5 +43,20 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
 
     velesAds.triggerIncontentPlayer();
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.NO_OFFER_PLAYER_EVENT_PATTERN);
+  }
+
+  @NetworkTrafficDump(useMITM = true)
+  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesDirectVisibleAllTheTimeOasis"})
+  public void adsVelesDirectVisibleAllTheTime() {
+    AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
+
+    velesAds.triggerIncontentPlayer();
+    Assertion.assertTrue(velesAds.isVideoVisible());
+
+    velesAds.triggerPorvataAlien();
+    Assertion.assertTrue(velesAds.isVideoVisible());
+
+    velesAds.triggerIncontentPlayer();
+    Assertion.assertTrue(velesAds.isVideoVisible());
   }
 }
