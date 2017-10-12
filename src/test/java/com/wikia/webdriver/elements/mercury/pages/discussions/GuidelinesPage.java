@@ -1,8 +1,7 @@
 package com.wikia.webdriver.elements.mercury.pages.discussions;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.common.skin.Skin;
-import com.wikia.webdriver.common.skin.SkinHelper;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.Editor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -13,7 +12,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class GuidelinesPage extends WikiBasePageObject {
+public class GuidelinesPage extends WikiBasePageObject implements Editor {
 
   private static final String DEFAULT_GUIDELINES_TEXT = "Discussion Guidelines";
 
@@ -42,6 +41,9 @@ public class GuidelinesPage extends WikiBasePageObject {
 
   @FindBy(css = ".discussion-standalone-editor-save-button")
   private WebElement saveButton;
+
+  @FindBy(css = ".editor-close")
+  private WebElement cancelButton;
 
   @FindBy(css = ".discussion-standalone-editor-textarea")
   private WebElement guidelinesText;
@@ -82,22 +84,43 @@ public class GuidelinesPage extends WikiBasePageObject {
     return isElementVisible(editButton, "Edit button");
   }
 
-  private void clickSaveButton() {
-    wait.forElementClickable(saveButton);
-    saveButton.click();
+  @Override
+  public boolean isSubmitButtonActive() {
+    return isElementEnabled(saveButton);
   }
 
-  private void addText(String text) {
-    this.guidelinesText.clear();
-    this.guidelinesText.sendKeys(text);
-    clickSaveButton();
+  @Override
+  public Editor clickSubmitButton() {
+    wait.forElementClickable(saveButton);
+    saveButton.click();
+    return this;
+  }
+
+  @Override
+  public Editor clickCancelButton() {
+    waitAndClick(cancelButton);
+    return this;
+  }
+
+  @Override
+  public Editor addTextWith(String text) {
+    clearText();
+    guidelinesText.sendKeys(text);
+    clickSubmitButton();
     waitForPageReload();
+    return this;
+  }
+
+  @Override
+  public Editor clearText() {
+    guidelinesText.clear();
+    return this;
   }
 
   private String addNewTextToGuidelines() {
     final String text = TextGenerator.createUniqueText();
     clickEditGuidelines();
-    addText(text);
+    addTextWith(text);
     return text;
   }
 
@@ -108,7 +131,7 @@ public class GuidelinesPage extends WikiBasePageObject {
 
   private void deleteTextFromGuidelines(String text) {
     clickEditGuidelines();
-    addText(DEFAULT_GUIDELINES_TEXT);
+    addTextWith(DEFAULT_GUIDELINES_TEXT);
     wait.forTextNotInElement(contentText, text);
   }
 
