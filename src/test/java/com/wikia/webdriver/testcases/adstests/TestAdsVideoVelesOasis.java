@@ -12,6 +12,14 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
 
   private static final String WIKIA = "project43";
   private static final String APPNEXUS_DEEBUG_MODE = "appnexusast_debug_mode=1";
+
+  private static final String ERROR_VELES_PLAYER_DISPLAYED_INCONTENT =
+      "Error: Velesplayer in INCONTENT_PLAYER slot is displayed";
+  private static final String ERROR_VELES_PLAYER_NOT_DISPLAYED_INCONTENT =
+      "Error: Velesplayer in INCONTENT_PLAYER slot is not displayed";
+  private static final String ERROR_VELES_PLAYER_NOT_DISPLAYED_ALIEN =
+      "Error: Velesplayer in floating INCONTENT_PLAYER slot is not displayed";
+
   private static final Page TEST_PAGE_BIDDER = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Bidder");
   private static final Page TEST_PAGE_DIRECT = new Page(WIKIA, "/SyntheticTests/Video/Porvata/Direct");
 
@@ -21,7 +29,8 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed());
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+        "Error: Velesplayer in Incontent slot is not displayed");
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN);
   }
 
@@ -32,7 +41,8 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     String url = TEST_PAGE_BIDDER.getUrl();
     AdsVelesObject velesAds = new AdsVelesObject(driver, urlBuilder.appendQueryStringToURL(url, APPNEXUS_DEEBUG_MODE));
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed());
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
+        "Error: Velesplayer in Incontent slot is not displayed");
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
   }
 
@@ -52,20 +62,20 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
 
     velesAds.triggerIncontentPlayer();
-    Assertion.assertTrue(velesAds.isVideoVisible());
+    Assertion.assertTrue(velesAds.isVideoVisible(), ERROR_VELES_PLAYER_NOT_DISPLAYED_INCONTENT);
 
     velesAds.triggerPorvataAlien();
-    Assertion.assertTrue(velesAds.isVideoVisible());
+    Assertion.assertTrue(velesAds.isVideoVisible(), ERROR_VELES_PLAYER_NOT_DISPLAYED_ALIEN);
 
     velesAds.triggerIncontentPlayer();
-    Assertion.assertTrue(velesAds.isVideoVisible());
+    Assertion.assertTrue(velesAds.isVideoVisible(), ERROR_VELES_PLAYER_NOT_DISPLAYED_INCONTENT);
   }
 
-  @Test(groups = {"AdsVideoVelesOasis", "adsVelesWithoutOfferCollapsedOasis"})
-  public void adsVelesWithoutOfferCollapsed() {
+  @Test(groups = {"AdsVideoVelesOasis", "AdsVelesWithoutOfferHopToDisplayOasis"})
+  public void adsVelesWithoutOfferHopToDisplay() {
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_BIDDER.getUrl());
     
-    Assertion.assertFalse(velesAds.isVelesPlayerInIncontentSlotDisplayed());
-    velesAds.slotParamHasValue(AdsContent.INCONTENT_PLAYER, "outstream", "none");
+    Assertion.assertFalse(velesAds.isVelesPlayerInIncontentSlotDisplayed(), ERROR_VELES_PLAYER_DISPLAYED_INCONTENT);
+    velesAds.verifySlotAttribute(AdsContent.INCONTENT_PLAYER, "data-slot-result", "hop");
   }
 }
