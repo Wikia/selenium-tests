@@ -29,8 +29,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     networkTrafficInterceptor.startIntercepting();
     AdsVelesObject velesAds = new AdsVelesObject(driver, TEST_PAGE_DIRECT.getUrl());
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
-        "Error: Velesplayer in Incontent slot is not displayed");
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(), ERROR_VELES_PLAYER_NOT_DISPLAYED_INCONTENT);
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.DIRECT_PLAYER_EVENT_PATTERN);
   }
 
@@ -41,8 +40,7 @@ public class TestAdsVideoVelesOasis extends TemplateNoFirstLoad {
     String url = TEST_PAGE_BIDDER.getUrl();
     AdsVelesObject velesAds = new AdsVelesObject(driver, urlBuilder.appendQueryStringToURL(url, APPNEXUS_DEEBUG_MODE));
 
-    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(),
-        "Error: Velesplayer in Incontent slot is not displayed");
+    Assertion.assertTrue(velesAds.isVelesPlayerInIncontentSlotDisplayed(), ERROR_VELES_PLAYER_NOT_DISPLAYED_INCONTENT);
     velesAds.wait.forSuccessfulResponseByUrlPattern(networkTrafficInterceptor, AdsVelesObject.BIDDER_PLAYER_EVENT_PATTERN);
   }
 
