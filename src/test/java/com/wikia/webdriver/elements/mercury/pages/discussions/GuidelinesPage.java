@@ -91,8 +91,7 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
 
   @Override
   public Editor clickSubmitButton() {
-    wait.forElementClickable(saveButton);
-    saveButton.click();
+    waitAndClick(saveButton);
     return this;
   }
 

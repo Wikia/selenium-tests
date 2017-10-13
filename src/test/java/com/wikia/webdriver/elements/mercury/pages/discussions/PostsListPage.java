@@ -15,9 +15,6 @@ public class PostsListPage extends PageWithPosts {
   public static final String PATH = "/d/f";
 
   @Getter(lazy = true)
-  private final PostEditor postEditor = new PostEditor();
-
-  @Getter(lazy = true)
   private final PostEditorDesktop postsCreatorDesktop = new PostEditorDesktop();
 
   @Getter(lazy = true)
