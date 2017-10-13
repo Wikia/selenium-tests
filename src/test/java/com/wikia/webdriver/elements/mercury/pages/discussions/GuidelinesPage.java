@@ -3,6 +3,7 @@ package com.wikia.webdriver.elements.mercury.pages.discussions;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.Editor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.ErrorMessages;
+import com.wikia.webdriver.elements.mercury.components.discussions.common.GuidelinesEditor;
 import com.wikia.webdriver.elements.mercury.components.discussions.common.TextGenerator;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
@@ -15,6 +16,8 @@ import org.openqa.selenium.support.FindBy;
 public class GuidelinesPage extends WikiBasePageObject implements Editor {
 
   private static final String DEFAULT_GUIDELINES_TEXT = "Discussion Guidelines";
+
+  private GuidelinesEditor editor = new GuidelinesEditor();
 
   @Getter(lazy = true)
   private final ErrorMessages errorMessages = new ErrorMessages();
@@ -86,34 +89,27 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
 
   @Override
   public boolean isSubmitButtonActive() {
-    return isElementEnabled(saveButton);
+    return editor.isSubmitButtonActive();
   }
 
   @Override
   public Editor clickSubmitButton() {
-    waitAndClick(saveButton);
-    return this;
+    return editor.clickSubmitButton();
   }
 
   @Override
   public Editor clickCancelButton() {
-    waitAndClick(cancelButton);
-    return this;
+    return editor.clickCancelButton();
   }
 
   @Override
   public Editor addTextWith(String text) {
-    clearText();
-    guidelinesText.sendKeys(text);
-    clickSubmitButton();
-    waitForPageReload();
-    return this;
+    return editor.addTextWith(text);
   }
 
   @Override
   public Editor clearText() {
-    guidelinesText.clear();
-    return this;
+    return editor.clearText();
   }
 
   private String addNewTextToGuidelines() {
