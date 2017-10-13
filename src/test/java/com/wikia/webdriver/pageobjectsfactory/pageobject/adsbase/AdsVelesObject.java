@@ -2,9 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.awt.*;
@@ -19,14 +18,20 @@ public class AdsVelesObject extends AdsBaseObject {
   public static final String BIDDER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_fallback_bid.*";
   public static final String DIRECT_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_with_direct.*";
   public static final String NO_OFFER_PLAYER_EVENT_PATTERN = ".*adengplayerinfo.*event_name=in_viewport_without_offer.*";
-
+  
   public AdsVelesObject(WebDriver driver, String testedPage) {
     super(driver, testedPage);
   }
 
-  public void verifyVelesPlayerInIncontentSlot() {
-    triggerIncontentPlayer();
-    wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+  public boolean isVelesPlayerInIncontentSlotDisplayed() {
+    try {
+      triggerIncontentPlayer();
+      wait.forElementVisible(driver.findElement(By.cssSelector(INCONTENT_VIDEO)));
+      return true;
+    } catch (TimeoutException | NoSuchElementException ex) {
+      PageObjectLogging.log("Video Veles ad not displayed", ex, true);
+      return false;
+    }
   }
 
   public void triggerIncontentPlayer() {
