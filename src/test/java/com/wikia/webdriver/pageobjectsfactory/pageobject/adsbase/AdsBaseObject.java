@@ -555,6 +555,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   public Boolean verifyNoAd(final String slotName) {
     final String slotSelector = AdsContent.getSlotSelector(slotName);
+    PageObjectLogging.log(
+        "verifyNoAd",
+        "Triggering " + slotName,
+        true,
+        driver
+    );
     triggerAdSlot(slotName);
     return verifyNoAdWithoutTrigger(slotSelector);
   }
