@@ -156,10 +156,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyAdVisibleInSlot("div[id*='TOP_RIGHT_BOXAD']", presentMedrec);
   }
 
-  public void verifyFloatingMedrec() {
-    verifyAdVisibleInSlot(FLOATING_MEDREC_SELECTOR, presentMedrec);
-  }
-
   public void verifyTopLeaderboard() {
     if (!checkIfSlotExpanded(presentLeaderboard) && isElementOnPage(
         By.cssSelector("#jpsuperheader"))) {
@@ -173,18 +169,6 @@ public class AdsBaseObject extends WikiBasePageObject {
     verifyNoAds();
     PageObjectLogging.log(
         "verifyNoAdsOnPage",
-        "No ads detected",
-        true,
-        driver
-    );
-  }
-
-  public void verifyNoAdsOnMobilePage() {
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_AD_IN_CONTENT));
-    scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_PREFOOTER));
-    verifyNoAds();
-    PageObjectLogging.log(
-        "verifyNoAdsOnMobilePage",
         "No ads detected",
         true,
         driver
