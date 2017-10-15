@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-
 public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
   private static Dimension DESKTOP_SIZE = new Dimension(1920, 768);
