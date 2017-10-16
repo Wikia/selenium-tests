@@ -34,6 +34,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
     // when PF recovered ad is on page, inserts span elements as a direct children of body
     adsRecoveryObject.wait.forElementPresent(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
 
+    // BLB is always present but hidden by PageFair after triggering it we just have to wait a while (7s)
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
         .forXMilliseconds(7000);
