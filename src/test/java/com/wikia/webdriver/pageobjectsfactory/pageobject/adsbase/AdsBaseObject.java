@@ -39,7 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
   public static final String PAGE_TYPE_CATEGORY = "category";
 
   private String pageType = PAGE_TYPE_ARTICLE;
-  private String environment = "desktop";
+  private String environment = AdsContent.ENV_DESKTOP;
 
   // Constants
   private static final int MIN_MIDDLE_COLOR_PAGE_WIDTH = 1600;

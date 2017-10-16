@@ -12,6 +12,9 @@ public class AdsContent {
   private static final Map<String, String> MOBILE_SLOTS_SELECTORS;
   private static final Map<String, String> SLOTS_TRIGGERS;
 
+  public static final String ENV_DESKTOP = "desktop";
+  public static final String ENV_MOBILE = "mobile";
+
   //SCRIPTS
   public static final String ADS_PUSHSLOT_SCRIPT =
       "window.adslots2.push([\"%slot%\"]);";
@@ -49,7 +52,7 @@ public class AdsContent {
   }
 
   public static Map<String, String> getSlotsSelectorsMap(String env) {
-    if(env.equals("mobile")) {
+    if(env.equals(ENV_MOBILE)) {
       return MOBILE_SLOTS_SELECTORS;
     }
 
