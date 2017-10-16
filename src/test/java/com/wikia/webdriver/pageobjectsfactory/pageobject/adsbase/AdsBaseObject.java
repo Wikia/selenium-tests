@@ -33,7 +33,12 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class AdsBaseObject extends WikiBasePageObject {
-  private String pageType = "article";
+  public static final String PAGE_TYPE_ARTICLE = "article";
+  public static final String PAGE_TYPE_SPECIAL = "special";
+  public static final String PAGE_TYPE_FILE = "file";
+  public static final String PAGE_TYPE_CATEGORY = "category";
+
+  private String pageType = PAGE_TYPE_ARTICLE;
   private String environment = "desktop";
 
   // Constants
@@ -680,13 +685,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 
   private Map<String, String> getSlotsSelectorMap() {
     switch(pageType) {
-      case "special":
+      case PAGE_TYPE_SPECIAL:
         return AdsContent.getSpecialPageSlotsSelectorsMap();
-      case "file":
+      case PAGE_TYPE_FILE:
         return AdsContent.getFilePageSlotsSelectors();
-      case "category":
+      case PAGE_TYPE_CATEGORY:
         return AdsContent.getCategoryPageSlotsSelectors();
-      case "article":
+      case PAGE_TYPE_ARTICLE:
       default:
         return AdsContent.getSlotsSelectorsMap(environment);
     }
