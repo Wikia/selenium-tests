@@ -39,7 +39,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
         .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
 
     List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
-    Assert.assertEquals(recoveredAds.size(), 4);
+    Assert.assertEquals(recoveredAds.size(), 3);
 
     adsRecoveryObject.assertIfAllRecoveredSlotHasCorrectSizeAndBackground(recoveredAds);
   }
