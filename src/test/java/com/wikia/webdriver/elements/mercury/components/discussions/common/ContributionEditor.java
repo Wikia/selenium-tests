@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.net.URL;
 
@@ -18,35 +19,55 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
   @Getter
   private By errorNotification = By.className("error");
 
+  @Getter
+  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
+  private WebElement signInDialog;
+
+  @Getter
+  @FindBy(css = ".discussion-image-upload__button input[type=file]")
+  private WebElement uploadButton;
+
+  private By imagePreview = By.className("post-image-inner-image");
+
+  /**
+   * Mobile and desktop editor have different class names, we need to find an image preview
+   * inside of editor, and ignore images in existing posts
+   * @return WebElement corresponding to image preview inside editor
+   */
+  protected WebElement getImagePreview() {
+    return getEditor().findElement(imagePreview);
+  }
+
+  @Getter
+  @FindBy(css = ".delete-image")
+  private WebElement imageDeleteButton;
+
   public ContributionEditor() {
     this.categoryPills = new CategoryPills();
     categoryPills.setEmpty(false);
   }
 
-  protected abstract String getBaseCssClassName();
   protected abstract WebElement getPostsCreator();
   protected abstract WebElement getEditor();
-  protected abstract WebElement getSignInDialog();
   protected abstract WebElement getGuidelinesMessageCloseButton();
   protected abstract WebElement getTitleTextarea();
-  protected abstract WebElement getDescriptionTextarea();
-  protected abstract WebElement getAddCategoryButton();
-  protected abstract WebElement getSubmitButton();
-  protected abstract WebElement getImagePreview();
-  protected abstract WebElement getUploadButton();
-  protected abstract WebElement getImageDeleteButton();
   protected abstract By getOpenGraphContainer();
   protected abstract By getOpenGraphText();
 
   public ContributionEditor click() {
-    wait.forElementClickable(getPostsCreator());
-    getPostsCreator().click();
+    waitAndClick(getPostsCreator());
     return this;
   }
 
-  // TODO: implement me
   @Override
   public ContributionEditor clickCancelButton() {
+    waitAndClick(getCancelButton());
+    return this;
+  }
+
+  @Override
+  public ContributionEditor addTextWith(final String text) {
+    getTextArea().sendKeys(text);
     return this;
   }
 
@@ -75,10 +96,21 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return this;
   }
 
+  private By popover = By.className("pop-over-compass");
+
+  private WebElement getCategoriesPopover() {
+    return getEditor().findElement(popover);
+  }
+
+  private By addCategoryButton = By.className("discussion-category-picker-button");
+
+  private WebElement getAddCategoryButton() {
+    return getEditor().findElement(addCategoryButton);
+  }
   public CategoryPills clickAddCategoryButton() {
     try {
       getAddCategoryButton().click();
-      wait.forElementVisible(By.cssSelector("." + getBaseCssClassName() + " .pop-over-compass"));
+      wait.forElementVisible(getCategoriesPopover());
       categoryPills.setEmpty(false);
     } catch (NoSuchElementException e) {
       PageObjectLogging.logInfo("Category picker not found", e);
@@ -97,20 +129,16 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return this;
   }
 
-  @Override
-  public ContributionEditor addTextWith(final String text) {
-    getDescriptionTextarea().sendKeys(text);
-    return this;
-  }
+
 
   public ContributionEditor addDescriptionWithLink(final URL url) {
-    getDescriptionTextarea().sendKeys(String.format(" %s ", url.toString()));
+    getTextArea().sendKeys(String.format(" %s ", url.toString()));
     return this;
   }
 
   @Override
   public ContributionEditor clearText() {
-    getDescriptionTextarea().clear();
+    getTextArea().clear();
     return this;
   }
 

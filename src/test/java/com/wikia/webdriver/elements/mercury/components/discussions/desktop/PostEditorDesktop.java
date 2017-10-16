@@ -13,10 +13,6 @@ public class PostEditorDesktop extends ContributionEditor {
   @FindBy(css = ".discussion-inline-editor-textarea-wrapper .discussion-textarea-wrapper")
   private WebElement postsCreator;
 
-  @Getter
-  @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
-  private WebElement signInDialog;
-
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .confirm-button")
   private WebElement okButtonInSignInDialog;
 
@@ -48,27 +44,10 @@ public class PostEditorDesktop extends ContributionEditor {
   private WebElement descriptionTextarea;
 
   @Getter
-  @FindBy(css = ".discussion-image-upload__button input[type=file]")
-  private WebElement uploadButton;
-
-  @Getter
-  @FindBy(css = ".discussion-inline-editor .post-image-inner-image")
-  private WebElement imagePreview;
-
-  @Getter
-  @FindBy(css = ".delete-image")
-  private WebElement imageDeleteButton;
-
-  @Getter
   private By openGraphContainer = By.className("og-container");
 
   @Getter
   private By openGraphText = By.className("og-texts");
-
-  @Override
-  protected String getBaseCssClassName() {
-    return "discussion-inline-editor";
-  }
 
   public boolean isExpanded() {
     return editor.getAttribute("class").contains("is-active");

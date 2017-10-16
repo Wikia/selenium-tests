@@ -65,11 +65,6 @@ public class PostEditorMobile extends ContributionEditor {
   @Getter
   private By openGraphText = By.className("og-texts");
 
-  @Override
-  protected String getBaseCssClassName() {
-    return "discussion-standalone-editor";
-  }
-
   public PostEditorMobile clickOkButtonInSignInDialog() {
     waitAndClick(okButtonInSignInDialog);
     return this;
