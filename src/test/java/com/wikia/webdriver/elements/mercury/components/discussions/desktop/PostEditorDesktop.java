@@ -67,4 +67,8 @@ public class PostEditorDesktop extends ContributionEditor {
     return this;
   }
 
+  @Override
+  public WebElement getCancelButton() {
+    throw new UnsupportedOperationException("Desktop editors don't have cancel buttons");
+  }
 }

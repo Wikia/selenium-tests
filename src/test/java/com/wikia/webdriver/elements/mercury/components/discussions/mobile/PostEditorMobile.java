@@ -14,6 +14,10 @@ public class PostEditorMobile extends ContributionEditor {
   private WebElement postsCreator;
 
   @Getter
+  @FindBy(css = ".editor-close")
+  private WebElement cancelButton;
+
+  @Getter
   @FindBy(css = ".modal-dialog-posting-not-allowed.is-visible .modal-dialog")
   private WebElement signInDialog;
 

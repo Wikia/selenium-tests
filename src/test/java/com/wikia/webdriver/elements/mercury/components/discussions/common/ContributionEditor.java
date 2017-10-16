@@ -80,6 +80,11 @@ public abstract class ContributionEditor extends BasePageObject implements Edito
     return getSubmitButton().isEnabled();
   }
 
+  @Override
+  public WebElement getTextArea() {
+    return getEditor().findElement(By.className("//TODO: fixme"));
+  }
+
   public boolean hasOpenGraph() {
     boolean result = false;
     final WebElement openGraphContainer = getEditor().findElement(getOpenGraphContainer());
