@@ -121,7 +121,7 @@ public class WikiBasePageObject extends BasePageObject {
   protected WebElement veToolMenu;
   @FindBy(css = "h3[id='headerWikis']")
   protected WebElement headerWhereIsMyExtensionPage;
-  @FindBy(css = "#globalNavigation,.site-head.no-shadow")
+  @FindBy(css = "#globalNavigation,.site-head.no-shadow,.wds-global-navigation")
   protected WebElement navigationBar;
   @FindBy(css = "#globalNavigation")
   protected WebElement newGlobalNavigation;
