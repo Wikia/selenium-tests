@@ -2,8 +2,23 @@ package com.wikia.webdriver.elements.mercury.components.discussions.common;
 
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import lombok.Getter;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class GuidelinesEditor extends BasePageObject implements Editor {
+
+  @Getter
+  @FindBy(css = ".discussion-standalone-editor-save-button")
+  private WebElement submitButton;
+
+  @Getter
+  @FindBy(css = ".editor-close")
+  private WebElement cancelButton;
+
+  @Getter
+  @FindBy(css = ".discussion-standalone-editor-textarea")
+  private WebElement textArea;
 
   @Override
   public boolean isSubmitButtonActive() {
@@ -36,4 +51,5 @@ public class GuidelinesEditor extends BasePageObject implements Editor {
     getTextArea().clear();
     return this;
   }
+
 }

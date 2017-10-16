@@ -34,22 +34,10 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
   private WebElement leftRailHeader;
 
   @FindBy(css = ".guidelines-text")
-  private WebElement contentText;
+  private WebElement guidelinesText;
 
   @FindBy(css = ".guidelines-edit-button")
   private WebElement editButton;
-
-  @FindBy(css = ".editor-close")
-  private WebElement editorClose;
-
-  @FindBy(css = ".discussion-standalone-editor-save-button")
-  private WebElement saveButton;
-
-  @FindBy(css = ".editor-close")
-  private WebElement cancelButton;
-
-  @FindBy(css = ".discussion-standalone-editor-textarea")
-  private WebElement guidelinesText;
 
   public GuidelinesPage open() {
     driver.get(String.format("%s%s", urlBuilder.getUrlForWiki(), PATH));
@@ -112,6 +100,18 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
     return editor.clearText();
   }
 
+  @Override public WebElement getTextArea() {
+    return editor.getTextArea();
+  }
+
+  @Override public WebElement getCancelButton() {
+    return editor.getCancelButton();
+  }
+
+  @Override public WebElement getSubmitButton() {
+    return editor.getSubmitButton();
+  }
+
   private String addNewTextToGuidelines() {
     final String text = TextGenerator.createUniqueText();
     clickEditGuidelines();
@@ -119,22 +119,12 @@ public class GuidelinesPage extends WikiBasePageObject implements Editor {
     return text;
   }
 
-  private void hasTextInGuidelines(String text) {
-    wait.forTextInElement(contentText, text);
-    contentText.isDisplayed();
-  }
-
-  private void deleteTextFromGuidelines(String text) {
+  public boolean canUpdateGuidelinesContent() {
+    final String text = addNewTextToGuidelines();
     clickEditGuidelines();
     addTextWith(DEFAULT_GUIDELINES_TEXT);
-    wait.forTextNotInElement(contentText, text);
-  }
+    wait.forTextNotInElement(guidelinesText, text);
 
-  public boolean canUpdateGuidelinesContent() {
-      final String text = addNewTextToGuidelines();
-      hasTextInGuidelines(text);
-      deleteTextFromGuidelines(text);
-
-      return DEFAULT_GUIDELINES_TEXT.equals(contentText.getText());
+    return DEFAULT_GUIDELINES_TEXT.equals(guidelinesText.getText());
   }
 }
