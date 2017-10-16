@@ -684,6 +684,8 @@ public class AdsBaseObject extends WikiBasePageObject {
         return AdsContent.getSpecialPageSlotsSelectorsMap();
       case "file":
         return AdsContent.getFilePageSlotsSelectors();
+      case "category":
+        return AdsContent.getCategoryPageSlotsSelectors();
       case "article":
       default:
         return AdsContent.getSlotsSelectorsMap(environment);

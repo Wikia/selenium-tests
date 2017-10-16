@@ -32,6 +32,7 @@ public class TestNoAdsForUsersOasis extends TemplateNoFirstLoad {
   @Execute(asUser = User.USER)
   public void noAdsForUsersOnCategoryPageOasis() {
     AdsBaseObject ads = buildAdsObject(CATEGORY_PAGE_PATH);
+    ads.setPageType("category");
     ads.verifyNoAdsOnPage();
   }
 

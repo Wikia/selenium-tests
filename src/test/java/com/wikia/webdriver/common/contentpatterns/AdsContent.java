@@ -64,6 +64,10 @@ public class AdsContent {
     return FILE_PAGE_SLOTS_SELECTORS;
   }
 
+  public static Map<String, String> getCategoryPageSlotsSelectors() {
+    return FILE_PAGE_SLOTS_SELECTORS;
+  }
+
   public static String getSlotSelector(String slotName) {
     return SLOTS_SELECTORS.get(slotName);
   }
