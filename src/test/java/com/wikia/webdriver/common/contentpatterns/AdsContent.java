@@ -130,7 +130,7 @@ public class AdsContent {
     SLOTS_TRIGGERS.put(FLOATING_MEDREC, "(function(){ window.scroll(0, 5000); setTimeout(function () {window.scroll(0, 5001) }, 10000); })();");
     SLOTS_TRIGGERS.put(INCONTENT_LEADERBOARD, "$('#mw-content-text h2')[1].scrollIntoView(true);");
     SLOTS_TRIGGERS.put(LEFT_SKYSCRAPPER_3, "window.scrollTo(0,document.body.scrollHeight);");
-    SLOTS_TRIGGERS.put(BOTTOM_LB,"(function(){ document.querySelectorAll('.article-categories')[0].scrollIntoView(); setTimeout(function () {document.querySelectorAll('.article-categories')[0].scrollIntoView();}, 10000); })();");
+    SLOTS_TRIGGERS.put(BOTTOM_LB,"(function(){function getHookElement(){var mixContentFooterSelector=\"#mixed-content-footer\",articleCategoriesSelector=\".article-categories\",isMixContentFooterOnPage=!!document.querySelectorAll(mixContentFooterSelector)[0],areArticleCategoriesOnPage=!!document.querySelectorAll(articleCategoriesSelector)[0];if(isMixContentFooterOnPage){return mixContentFooterSelector;}return articleCategoriesSelector;}document.querySelectorAll(getHookElement())[0].scrollIntoView();setTimeout(function(){document.querySelectorAll(getHookElement())[0].scrollIntoView()},10000);})();");
     SLOTS_TRIGGERS.put(MOBILE_BOTTOM_LB, "(function(){ document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView(); setTimeout(function () {document.querySelectorAll('.recirculation-prefooter__item:last-child')[0].scrollIntoView()}, 10000); })();");
   }
 }
