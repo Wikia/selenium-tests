@@ -36,7 +36,7 @@ public class TestAdsPageFairRecoveryOasis extends TemplateNoFirstLoad {
 
     adsRecoveryObject.triggerAdSlot(AdsContent.BOTTOM_LB)
         .wait
-        .forElementPresent(By.cssSelector(AdsContent.getSlotSelector(AdsContent.BOTTOM_LB)));
+        .forXMilliseconds(7000);
 
     List<WebElement> recoveredAds = adsRecoveryObject.getRecoveredAds(AdsRecoveryObject.PF_RECOVERED_ADS_SELECTOR);
     Assert.assertEquals(recoveredAds.size(), 3);
