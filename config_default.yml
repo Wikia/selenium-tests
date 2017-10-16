@@ -15,6 +15,7 @@ takeScreenshots: true
 mockAds: false
 disableCommunityPageSalesPitchDialog: true
 useMITM: false
+useProxy: true
 useZapProxy: false
 
 # Specify browser window size in format <width>x<height>, example: 800x600

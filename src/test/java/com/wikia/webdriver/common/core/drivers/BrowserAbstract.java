@@ -94,6 +94,7 @@ public abstract class BrowserAbstract {
         server = new NetworkTrafficInterceptor();
         server.setTrustAllServers(true);
         server.setMitmDisabled(!Boolean.parseBoolean(Configuration.useMITM()));
+        server.addHeader("X-Backend", "k8s");
         server.setRequestTimeout(90, TimeUnit.SECONDS);
         server.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.REQUEST_COOKIES,
             CaptureType.RESPONSE_HEADERS, CaptureType.RESPONSE_COOKIES);
